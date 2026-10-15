@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {existsSync,readFileSync,statSync} from "node:fs";
 import vm from "node:vm";
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
 const context=vm.createContext({window:{}});
@@ -40,7 +41,7 @@ const motion=vm.createContext({
  responderBlocked:()=>blocked,npcSpriteAtlases:{alice:{}},
  advanceSpriteGait:(_n,moved)=>{distance+=moved}
 });
-vm.runInContext(`${moveGroundResponder}\n${updateAlice}; this.stepAlice=updateAlice`,motion);
+vm.runInContext(`${motionObserverSource(game)}${moveGroundResponder}\n${updateAlice}; this.stepAlice=updateAlice`,motion);
 const alice={x:8980,y:680,orbitAngle:0,spriteRow:0},rows=new Set();
 for(let i=0;i<500;i++){motion.stepAlice(alice,.02);rows.add(alice.spriteRow)}
 assert.ok(Math.abs(Math.hypot(alice.x-8860,alice.y-680)-120)<.01,"Alice stays on the orbit");

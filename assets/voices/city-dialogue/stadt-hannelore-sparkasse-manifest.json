@@ -1,0 +1,661 @@
+{
+  "voiceId": "stadt-hannelore-sparkasse",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-hannelore-sparkasse-01",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "actorId": "city-hannelore-sparkasse",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=0]",
+      "text": "Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.",
+      "english": "I earn no interest on the detour. Please step aside before even more time sits here earning nothing.",
+      "sourceSha256": "db8ef500d2827043387338b313c91278527ae1e9d5a7f5327b8fc61e1e6e9099",
+      "profileId": "112312dbaaab44bb90e639b531b69d27",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 165,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.66,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80",
+      "profileJsonSha256": "39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a",
+      "rawSha256": "d5aec64ee4d22d7de189837294378ee91caa1b556570d7b568327f7f8094d845",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.54,
+      "renderSeconds": 7.55,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "112312dbaaab44bb90e639b531b69d27",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.409999999999997:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.09,
+      "truePeakDbtp": -2.2,
+      "asr": "Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.",
+          "transcribeSeconds": 10.56,
+          "words": [
+            {
+              "word": " Für",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " den",
+              "start": 0.16,
+              "end": 0.32
+            },
+            {
+              "word": " Umweg",
+              "start": 0.32,
+              "end": 0.72
+            },
+            {
+              "word": " bekomme",
+              "start": 0.72,
+              "end": 1.08
+            },
+            {
+              "word": " ich",
+              "start": 1.08,
+              "end": 1.2
+            },
+            {
+              "word": " keine",
+              "start": 1.2,
+              "end": 1.44
+            },
+            {
+              "word": " Zinsen.",
+              "start": 1.44,
+              "end": 2
+            },
+            {
+              "word": " Gehen",
+              "start": 2.22,
+              "end": 2.64
+            },
+            {
+              "word": " Sie",
+              "start": 2.64,
+              "end": 2.74
+            },
+            {
+              "word": " bitte",
+              "start": 2.74,
+              "end": 2.96
+            },
+            {
+              "word": " zur",
+              "start": 2.96,
+              "end": 3.18
+            },
+            {
+              "word": " Seite,",
+              "start": 3.18,
+              "end": 3.5
+            },
+            {
+              "word": " bevor",
+              "start": 3.64,
+              "end": 3.82
+            },
+            {
+              "word": " hier",
+              "start": 3.82,
+              "end": 4.02
+            },
+            {
+              "word": " noch",
+              "start": 4.02,
+              "end": 4.16
+            },
+            {
+              "word": " mehr",
+              "start": 4.16,
+              "end": 4.32
+            },
+            {
+              "word": " Zeit",
+              "start": 4.32,
+              "end": 4.64
+            },
+            {
+              "word": " unverzinst",
+              "start": 4.64,
+              "end": 5.32
+            },
+            {
+              "word": " herumliegt.",
+              "start": 5.32,
+              "end": 5.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Für",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "den",
+          "end": 0.32
+        },
+        {
+          "at": 0.32,
+          "charIndex": 8,
+          "word": "Umweg",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 14,
+          "word": "bekomme",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 22,
+          "word": "ich",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 26,
+          "word": "keine",
+          "end": 1.44
+        },
+        {
+          "at": 1.44,
+          "charIndex": 32,
+          "word": "Zinsen",
+          "end": 2
+        },
+        {
+          "at": 2.22,
+          "charIndex": 40,
+          "word": "Gehen",
+          "end": 2.64
+        },
+        {
+          "at": 2.64,
+          "charIndex": 46,
+          "word": "Sie",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 50,
+          "word": "bitte",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 56,
+          "word": "zur",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 60,
+          "word": "Seite",
+          "end": 3.5
+        },
+        {
+          "at": 3.64,
+          "charIndex": 67,
+          "word": "bevor",
+          "end": 3.82
+        },
+        {
+          "at": 3.82,
+          "charIndex": 73,
+          "word": "hier",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 78,
+          "word": "noch",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 83,
+          "word": "mehr",
+          "end": 4.32
+        },
+        {
+          "at": 4.32,
+          "charIndex": 88,
+          "word": "Zeit",
+          "end": 4.64
+        },
+        {
+          "at": 4.64,
+          "charIndex": 93,
+          "word": "unverzinst",
+          "end": 5.32
+        },
+        {
+          "at": 5.32,
+          "charIndex": 104,
+          "word": "herumliegt",
+          "end": 5.88
+        }
+      ],
+      "sha256": "d260f294fb926d9c72796971a6b4496cbd08e6460d760117977383e69807747e",
+      "bytes": 105644,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-hannelore-sparkasse-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-hannelore-sparkasse-01",
+        "encodedSha256": "d260f294fb926d9c72796971a6b4496cbd08e6460d760117977383e69807747e"
+      }
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-02",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "actorId": "city-hannelore-sparkasse",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=1]",
+      "text": "Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.",
+      "english": "You are welcome to wait here. Just do not count your waiting area as part of my passageway.",
+      "sourceSha256": "f64badacca0c0bae42d8fb77c8f535397f37cb2b1e494e49e7d27dc762592c57",
+      "profileId": "112312dbaaab44bb90e639b531b69d27",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.",
+      "decode": {
+        "maxSpeechTokens": 340,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 132,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.34,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80",
+      "profileJsonSha256": "39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a",
+      "rawSha256": "7f45a9accfe115e9e7ed9e5c58f07c25e00bb38e710af4f7f820fca8e31c1fbc",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.22,
+      "renderSeconds": 7.19,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "112312dbaaab44bb90e639b531b69d27",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.39:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.23,
+      "asr": "Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.",
+          "transcribeSeconds": 10.31,
+          "words": [
+            {
+              "word": " Sie",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " können",
+              "start": 0.16,
+              "end": 0.4
+            },
+            {
+              "word": " gern",
+              "start": 0.4,
+              "end": 0.6
+            },
+            {
+              "word": " hier",
+              "start": 0.6,
+              "end": 0.76
+            },
+            {
+              "word": " warten.",
+              "start": 0.76,
+              "end": 1.14
+            },
+            {
+              "word": " Rechnen",
+              "start": 1.54,
+              "end": 1.92
+            },
+            {
+              "word": " Sie",
+              "start": 1.92,
+              "end": 2.04
+            },
+            {
+              "word": " nur",
+              "start": 2.04,
+              "end": 2.22
+            },
+            {
+              "word": " Ihre",
+              "start": 2.22,
+              "end": 2.46
+            },
+            {
+              "word": " Wartefläche",
+              "start": 2.46,
+              "end": 3.06
+            },
+            {
+              "word": " nicht",
+              "start": 3.06,
+              "end": 3.32
+            },
+            {
+              "word": " zu",
+              "start": 3.32,
+              "end": 3.52
+            },
+            {
+              "word": " meinem",
+              "start": 3.52,
+              "end": 3.68
+            },
+            {
+              "word": " Durchgang",
+              "start": 3.68,
+              "end": 4.16
+            },
+            {
+              "word": " dazu.",
+              "start": 4.16,
+              "end": 4.46
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "können",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 11,
+          "word": "gern",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 16,
+          "word": "hier",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 21,
+          "word": "warten",
+          "end": 1.14
+        },
+        {
+          "at": 1.54,
+          "charIndex": 29,
+          "word": "Rechnen",
+          "end": 1.92
+        },
+        {
+          "at": 1.92,
+          "charIndex": 37,
+          "word": "Sie",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 41,
+          "word": "nur",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 45,
+          "word": "Ihre",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 50,
+          "word": "Wartefläche",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 62,
+          "word": "nicht",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 68,
+          "word": "zu",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 71,
+          "word": "meinem",
+          "end": 3.68
+        },
+        {
+          "at": 3.68,
+          "charIndex": 78,
+          "word": "Durchgang",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 88,
+          "word": "dazu",
+          "end": 4.46
+        }
+      ],
+      "sha256": "becbd85dfe24b6b4b48d6264679314d15b3e9ce72d095256c0a1607bc60e70f3",
+      "bytes": 84524,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-hannelore-sparkasse-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-hannelore-sparkasse-02",
+        "encodedSha256": "becbd85dfe24b6b4b48d6264679314d15b3e9ce72d095256c0a1607bc60e70f3"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-hannelore-sparkasse-03",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "actorId": "city-hannelore-sparkasse",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=berlin,slot=0]",
+      "text": "Für den Umweg bekomme ich no interest. Please gehen Sie zur Seite, before hier noch mehr Zeit unverzinst herumliegt.",
+      "english": "I earn no interest on the detour. Please step aside before even more time sits here earning nothing.",
+      "sourceSha256": "729aeca9c8d2d1115035ab8e0ede60f9f0a8db0a4cd4b9982e1d495d10592370",
+      "profileId": "112312dbaaab44bb90e639b531b69d27",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-04",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "actorId": "city-hannelore-sparkasse",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=berlin,slot=1]",
+      "text": "Sie können gern hier wait. Just rechnen Sie Ihre Wartefläche nicht into meinen Durchgang.",
+      "english": "You are welcome to wait here. Just do not count your waiting area as part of my passageway.",
+      "sourceSha256": "47d3af7965c5fc0cc6587ee9f9211e1570444254c60a1e39b5fb6f7ed76d8bdb",
+      "profileId": "112312dbaaab44bb90e639b531b69d27",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-hannelore-sparkasse-01\",\r\n      \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n      \"actorId\": \"city-hannelore-sparkasse\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n      \"english\": \"I earn no interest on the detour. Please step aside before even more time sits here earning nothing.\",\r\n      \"sourceSha256\": \"db8ef500d2827043387338b313c91278527ae1e9d5a7f5327b8fc61e1e6e9099\",\r\n      \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-hannelore-sparkasse-02\",\r\n      \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n      \"actorId\": \"city-hannelore-sparkasse\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n      \"english\": \"You are welcome to wait here. Just do not count your waiting area as part of my passageway.\",\r\n      \"sourceSha256\": \"f64badacca0c0bae42d8fb77c8f535397f37cb2b1e494e49e7d27dc762592c57\",\r\n      \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-hannelore-sparkasse-03\",\r\n      \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n      \"actorId\": \"city-hannelore-sparkasse\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Für den Umweg bekomme ich no interest. Please gehen Sie zur Seite, before hier noch mehr Zeit unverzinst herumliegt.\",\r\n      \"english\": \"I earn no interest on the detour. Please step aside before even more time sits here earning nothing.\",\r\n      \"sourceSha256\": \"729aeca9c8d2d1115035ab8e0ede60f9f0a8db0a4cd4b9982e1d495d10592370\",\r\n      \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-hannelore-sparkasse-04\",\r\n      \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n      \"actorId\": \"city-hannelore-sparkasse\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Sie können gern hier wait. Just rechnen Sie Ihre Wartefläche nicht into meinen Durchgang.\",\r\n      \"english\": \"You are welcome to wait here. Just do not count your waiting area as part of my passageway.\",\r\n      \"sourceSha256\": \"47d3af7965c5fc0cc6587ee9f9211e1570444254c60a1e39b5fb6f7ed76d8bdb\",\r\n      \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80"
+    },
+    "takes": {
+      "stadt-hannelore-sparkasse-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-hannelore-sparkasse-01\",\r\n  \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n  \"actorId\": \"city-hannelore-sparkasse\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n  \"english\": \"I earn no interest on the detour. Please step aside before even more time sits here earning nothing.\",\r\n  \"sourceSha256\": \"db8ef500d2827043387338b313c91278527ae1e9d5a7f5327b8fc61e1e6e9099\",\r\n  \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.66,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80\",\r\n  \"profileJsonSha256\": \"39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a\",\r\n  \"rawSha256\": \"d5aec64ee4d22d7de189837294378ee91caa1b556570d7b568327f7f8094d845\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.54,\r\n  \"renderSeconds\": 7.55,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"112312dbaaab44bb90e639b531b69d27\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "3eb263f88efd731c18efda517015303acf6077c234d418db4b7c924c078d606b"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-hannelore-sparkasse-01\",\r\n  \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n  \"actorId\": \"city-hannelore-sparkasse\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n  \"english\": \"I earn no interest on the detour. Please step aside before even more time sits here earning nothing.\",\r\n  \"sourceSha256\": \"db8ef500d2827043387338b313c91278527ae1e9d5a7f5327b8fc61e1e6e9099\",\r\n  \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.66,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80\",\r\n  \"profileJsonSha256\": \"39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a\",\r\n  \"rawSha256\": \"d5aec64ee4d22d7de189837294378ee91caa1b556570d7b568327f7f8094d845\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.54,\r\n  \"renderSeconds\": 7.55,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"112312dbaaab44bb90e639b531b69d27\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-15.409999999999997:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.09,\r\n  \"truePeakDbtp\": -2.2,\r\n  \"asr\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.\",\r\n      \"transcribeSeconds\": 10.56,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Für\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.16\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 0.16,\r\n          \"end\": 0.32\r\n        },\r\n        {\r\n          \"word\": \" Umweg\",\r\n          \"start\": 0.32,\r\n          \"end\": 0.72\r\n        },\r\n        {\r\n          \"word\": \" bekomme\",\r\n          \"start\": 0.72,\r\n          \"end\": 1.08\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 1.08,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" keine\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.44\r\n        },\r\n        {\r\n          \"word\": \" Zinsen.\",\r\n          \"start\": 1.44,\r\n          \"end\": 2.0\r\n        },\r\n        {\r\n          \"word\": \" Gehen\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.64\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.64,\r\n          \"end\": 2.74\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 2.74,\r\n          \"end\": 2.96\r\n        },\r\n        {\r\n          \"word\": \" zur\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.18\r\n        },\r\n        {\r\n          \"word\": \" Seite,\",\r\n          \"start\": 3.18,\r\n          \"end\": 3.5\r\n        },\r\n        {\r\n          \"word\": \" bevor\",\r\n          \"start\": 3.64,\r\n          \"end\": 3.82\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 3.82,\r\n          \"end\": 4.02\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 4.02,\r\n          \"end\": 4.16\r\n        },\r\n        {\r\n          \"word\": \" mehr\",\r\n          \"start\": 4.16,\r\n          \"end\": 4.32\r\n        },\r\n        {\r\n          \"word\": \" Zeit\",\r\n          \"start\": 4.32,\r\n          \"end\": 4.64\r\n        },\r\n        {\r\n          \"word\": \" unverzinst\",\r\n          \"start\": 4.64,\r\n          \"end\": 5.32\r\n        },\r\n        {\r\n          \"word\": \" herumliegt.\",\r\n          \"start\": 5.32,\r\n          \"end\": 5.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Für\",\r\n      \"end\": 0.16\r\n    },\r\n    {\r\n      \"at\": 0.16,\r\n      \"charIndex\": 4,\r\n      \"word\": \"den\",\r\n      \"end\": 0.32\r\n    },\r\n    {\r\n      \"at\": 0.32,\r\n      \"charIndex\": 8,\r\n      \"word\": \"Umweg\",\r\n      \"end\": 0.72\r\n    },\r\n    {\r\n      \"at\": 0.72,\r\n      \"charIndex\": 14,\r\n      \"word\": \"bekomme\",\r\n      \"end\": 1.08\r\n    },\r\n    {\r\n      \"at\": 1.08,\r\n      \"charIndex\": 22,\r\n      \"word\": \"ich\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 26,\r\n      \"word\": \"keine\",\r\n      \"end\": 1.44\r\n    },\r\n    {\r\n      \"at\": 1.44,\r\n      \"charIndex\": 32,\r\n      \"word\": \"Zinsen\",\r\n      \"end\": 2.0\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 40,\r\n      \"word\": \"Gehen\",\r\n      \"end\": 2.64\r\n    },\r\n    {\r\n      \"at\": 2.64,\r\n      \"charIndex\": 46,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.74\r\n    },\r\n    {\r\n      \"at\": 2.74,\r\n      \"charIndex\": 50,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.96\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 56,\r\n      \"word\": \"zur\",\r\n      \"end\": 3.18\r\n    },\r\n    {\r\n      \"at\": 3.18,\r\n      \"charIndex\": 60,\r\n      \"word\": \"Seite\",\r\n      \"end\": 3.5\r\n    },\r\n    {\r\n      \"at\": 3.64,\r\n      \"charIndex\": 67,\r\n      \"word\": \"bevor\",\r\n      \"end\": 3.82\r\n    },\r\n    {\r\n      \"at\": 3.82,\r\n      \"charIndex\": 73,\r\n      \"word\": \"hier\",\r\n      \"end\": 4.02\r\n    },\r\n    {\r\n      \"at\": 4.02,\r\n      \"charIndex\": 78,\r\n      \"word\": \"noch\",\r\n      \"end\": 4.16\r\n    },\r\n    {\r\n      \"at\": 4.16,\r\n      \"charIndex\": 83,\r\n      \"word\": \"mehr\",\r\n      \"end\": 4.32\r\n    },\r\n    {\r\n      \"at\": 4.32,\r\n      \"charIndex\": 88,\r\n      \"word\": \"Zeit\",\r\n      \"end\": 4.64\r\n    },\r\n    {\r\n      \"at\": 4.64,\r\n      \"charIndex\": 93,\r\n      \"word\": \"unverzinst\",\r\n      \"end\": 5.32\r\n    },\r\n    {\r\n      \"at\": 5.32,\r\n      \"charIndex\": 104,\r\n      \"word\": \"herumliegt\",\r\n      \"end\": 5.88\r\n    }\r\n  ],\r\n  \"sha256\": \"d260f294fb926d9c72796971a6b4496cbd08e6460d760117977383e69807747e\",\r\n  \"bytes\": 105644,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-hannelore-sparkasse-01.mp3\"\r\n}\r\n",
+          "sha256": "f39ca8c3be18009e2163ede0d4353ac2f7590555dc52eac67d1ba7ec222f974c"
+        }
+      },
+      "stadt-hannelore-sparkasse-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-hannelore-sparkasse-02\",\r\n  \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n  \"actorId\": \"city-hannelore-sparkasse\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n  \"english\": \"You are welcome to wait here. Just do not count your waiting area as part of my passageway.\",\r\n  \"sourceSha256\": \"f64badacca0c0bae42d8fb77c8f535397f37cb2b1e494e49e7d27dc762592c57\",\r\n  \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 132,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.34,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80\",\r\n  \"profileJsonSha256\": \"39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a\",\r\n  \"rawSha256\": \"7f45a9accfe115e9e7ed9e5c58f07c25e00bb38e710af4f7f820fca8e31c1fbc\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.22,\r\n  \"renderSeconds\": 7.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"112312dbaaab44bb90e639b531b69d27\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "b5a8fa910077ff72128601af7659f5e0242e96f1882535c2bdb3bea6d2eb08fb"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-hannelore-sparkasse-02\",\r\n  \"voiceId\": \"stadt-hannelore-sparkasse\",\r\n  \"actorId\": \"city-hannelore-sparkasse\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-hannelore-sparkasse].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n  \"english\": \"You are welcome to wait here. Just do not count your waiting area as part of my passageway.\",\r\n  \"sourceSha256\": \"f64badacca0c0bae42d8fb77c8f535397f37cb2b1e494e49e7d27dc762592c57\",\r\n  \"profileId\": \"112312dbaaab44bb90e639b531b69d27\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 132,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.34,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3879773c3bd5cd3df5caa96ff70d0fcccc4e67851e1ab3209a42eb9557fdc80\",\r\n  \"profileJsonSha256\": \"39510ce0f3479e3986d00c6860cbc78d946ffb5efcd5dad00578c7333984e90a\",\r\n  \"rawSha256\": \"7f45a9accfe115e9e7ed9e5c58f07c25e00bb38e710af4f7f820fca8e31c1fbc\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.22,\r\n  \"renderSeconds\": 7.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"112312dbaaab44bb90e639b531b69d27\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.39:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.15,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu.\",\r\n      \"transcribeSeconds\": 10.31,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.16\r\n        },\r\n        {\r\n          \"word\": \" können\",\r\n          \"start\": 0.16,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" gern\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.6\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 0.6,\r\n          \"end\": 0.76\r\n        },\r\n        {\r\n          \"word\": \" warten.\",\r\n          \"start\": 0.76,\r\n          \"end\": 1.14\r\n        },\r\n        {\r\n          \"word\": \" Rechnen\",\r\n          \"start\": 1.54,\r\n          \"end\": 1.92\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.92,\r\n          \"end\": 2.04\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 2.04,\r\n          \"end\": 2.22\r\n        },\r\n        {\r\n          \"word\": \" Ihre\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.46\r\n        },\r\n        {\r\n          \"word\": \" Wartefläche\",\r\n          \"start\": 2.46,\r\n          \"end\": 3.06\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 3.06,\r\n          \"end\": 3.32\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 3.32,\r\n          \"end\": 3.52\r\n        },\r\n        {\r\n          \"word\": \" meinem\",\r\n          \"start\": 3.52,\r\n          \"end\": 3.68\r\n        },\r\n        {\r\n          \"word\": \" Durchgang\",\r\n          \"start\": 3.68,\r\n          \"end\": 4.16\r\n        },\r\n        {\r\n          \"word\": \" dazu.\",\r\n          \"start\": 4.16,\r\n          \"end\": 4.46\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.16\r\n    },\r\n    {\r\n      \"at\": 0.16,\r\n      \"charIndex\": 4,\r\n      \"word\": \"können\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 11,\r\n      \"word\": \"gern\",\r\n      \"end\": 0.6\r\n    },\r\n    {\r\n      \"at\": 0.6,\r\n      \"charIndex\": 16,\r\n      \"word\": \"hier\",\r\n      \"end\": 0.76\r\n    },\r\n    {\r\n      \"at\": 0.76,\r\n      \"charIndex\": 21,\r\n      \"word\": \"warten\",\r\n      \"end\": 1.14\r\n    },\r\n    {\r\n      \"at\": 1.54,\r\n      \"charIndex\": 29,\r\n      \"word\": \"Rechnen\",\r\n      \"end\": 1.92\r\n    },\r\n    {\r\n      \"at\": 1.92,\r\n      \"charIndex\": 37,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.04\r\n    },\r\n    {\r\n      \"at\": 2.04,\r\n      \"charIndex\": 41,\r\n      \"word\": \"nur\",\r\n      \"end\": 2.22\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Ihre\",\r\n      \"end\": 2.46\r\n    },\r\n    {\r\n      \"at\": 2.46,\r\n      \"charIndex\": 50,\r\n      \"word\": \"Wartefläche\",\r\n      \"end\": 3.06\r\n    },\r\n    {\r\n      \"at\": 3.06,\r\n      \"charIndex\": 62,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.32\r\n    },\r\n    {\r\n      \"at\": 3.32,\r\n      \"charIndex\": 68,\r\n      \"word\": \"zu\",\r\n      \"end\": 3.52\r\n    },\r\n    {\r\n      \"at\": 3.52,\r\n      \"charIndex\": 71,\r\n      \"word\": \"meinem\",\r\n      \"end\": 3.68\r\n    },\r\n    {\r\n      \"at\": 3.68,\r\n      \"charIndex\": 78,\r\n      \"word\": \"Durchgang\",\r\n      \"end\": 4.16\r\n    },\r\n    {\r\n      \"at\": 4.16,\r\n      \"charIndex\": 88,\r\n      \"word\": \"dazu\",\r\n      \"end\": 4.46\r\n    }\r\n  ],\r\n  \"sha256\": \"becbd85dfe24b6b4b48d6264679314d15b3e9ce72d095256c0a1607bc60e70f3\",\r\n  \"bytes\": 84524,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-hannelore-sparkasse-02.mp3\"\r\n}\r\n",
+          "sha256": "25b137a58f53c2bc7e555f35b54ea9f710e5a204b27a76d6b481e58e536020b4"
+        }
+      }
+    }
+  }
+}

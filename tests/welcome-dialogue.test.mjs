@@ -28,7 +28,7 @@ function briefing(region, voiceOn, lang) {
   };
   const speech = [], stops = [], objectives = [], fax = [];
   const state = {region, voiceOn, lang};
-  const context = vm.createContext({window: {GermanyHUD:{welcomeFax:()=>fax.push("start"),stopWelcomeFax:()=>fax.push("stop")}}, state,
+  const context = vm.createContext({window: {GermanyHUD:{welcomeFax:()=>fax.push("start"),stopWelcomeFax:()=>fax.push("stop")}}, state, textOnlyBark: null,
     document: {getElementById: element, querySelector: element},
     stopSpeech: (...args) => stops.push(args), speak: (text, options) => speech.push({text, options}),
     STIMULUS_PRIORITY: {CRITICAL: 3}, toast: text => objectives.push(text),

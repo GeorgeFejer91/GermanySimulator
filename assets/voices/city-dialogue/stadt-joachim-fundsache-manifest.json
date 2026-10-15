@@ -1,0 +1,969 @@
+{
+  "voiceId": "stadt-joachim-fundsache",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-joachim-fundsache-01",
+      "voiceId": "stadt-joachim-fundsache",
+      "actorId": "city-joachim-fundsache",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=0]",
+      "text": "Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.",
+      "english": "That is not my lost object. If you are looking for its owner, please do not lose my time as well.",
+      "sourceSha256": "21b5c1bc526903b533303b0600935d869a58935aecbd47ea9042ec2103f14c94",
+      "profileId": "d87b222e98574a8d8ec180f029e8a414",
+      "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
+      "referenceOriginalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 145,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.2,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1",
+      "profileJsonSha256": "e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684",
+      "rawSha256": "d63cfa8844222819b7cf0fffa0d227fe2238d8c3e0efc8115e4bc3861f1c143f",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.76,
+      "renderSeconds": 7.05,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "d87b222e98574a8d8ec180f029e8a414",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.2:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.03,
+      "truePeakDbtp": -2.23,
+      "asr": "Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.",
+          "transcribeSeconds": 10.74,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0,
+              "end": 0.24
+            },
+            {
+              "word": " ist",
+              "start": 0.24,
+              "end": 0.4
+            },
+            {
+              "word": " nicht",
+              "start": 0.4,
+              "end": 0.52
+            },
+            {
+              "word": " mein",
+              "start": 0.52,
+              "end": 0.74
+            },
+            {
+              "word": " verlorener",
+              "start": 0.74,
+              "end": 1.26
+            },
+            {
+              "word": " Gegenstand.",
+              "start": 1.26,
+              "end": 1.78
+            },
+            {
+              "word": " Wenn",
+              "start": 1.98,
+              "end": 2.22
+            },
+            {
+              "word": " Sie",
+              "start": 2.22,
+              "end": 2.32
+            },
+            {
+              "word": " den",
+              "start": 2.32,
+              "end": 2.5
+            },
+            {
+              "word": " Besitzer",
+              "start": 2.5,
+              "end": 2.86
+            },
+            {
+              "word": " suchen,",
+              "start": 2.86,
+              "end": 3.2
+            },
+            {
+              "word": " verlieren",
+              "start": 3.32,
+              "end": 3.66
+            },
+            {
+              "word": " Sie",
+              "start": 3.66,
+              "end": 3.74
+            },
+            {
+              "word": " bitte",
+              "start": 3.74,
+              "end": 3.92
+            },
+            {
+              "word": " nicht",
+              "start": 3.92,
+              "end": 4.12
+            },
+            {
+              "word": " auch",
+              "start": 4.12,
+              "end": 4.34
+            },
+            {
+              "word": " noch",
+              "start": 4.34,
+              "end": 4.46
+            },
+            {
+              "word": " meine",
+              "start": 4.46,
+              "end": 4.7
+            },
+            {
+              "word": " Zeit.",
+              "start": 4.7,
+              "end": 5.02
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 4,
+          "word": "ist",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 8,
+          "word": "nicht",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 14,
+          "word": "mein",
+          "end": 0.74
+        },
+        {
+          "at": 0.74,
+          "charIndex": 19,
+          "word": "verlorener",
+          "end": 1.26
+        },
+        {
+          "at": 1.26,
+          "charIndex": 30,
+          "word": "Gegenstand",
+          "end": 1.78
+        },
+        {
+          "at": 1.98,
+          "charIndex": 42,
+          "word": "Wenn",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 47,
+          "word": "Sie",
+          "end": 2.32
+        },
+        {
+          "at": 2.32,
+          "charIndex": 51,
+          "word": "den",
+          "end": 2.5
+        },
+        {
+          "at": 2.5,
+          "charIndex": 55,
+          "word": "Besitzer",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 64,
+          "word": "suchen",
+          "end": 3.2
+        },
+        {
+          "at": 3.32,
+          "charIndex": 72,
+          "word": "verlieren",
+          "end": 3.66
+        },
+        {
+          "at": 3.66,
+          "charIndex": 82,
+          "word": "Sie",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 86,
+          "word": "bitte",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 92,
+          "word": "nicht",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 98,
+          "word": "auch",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 103,
+          "word": "noch",
+          "end": 4.46
+        },
+        {
+          "at": 4.46,
+          "charIndex": 108,
+          "word": "meine",
+          "end": 4.7
+        },
+        {
+          "at": 4.7,
+          "charIndex": 114,
+          "word": "Zeit",
+          "end": 5.02
+        }
+      ],
+      "sha256": "3490e283adaec1e3b8bc1603c7e1778a3833dd12923180bfd4fc7e333d34e3d7",
+      "bytes": 92972,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-joachim-fundsache-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-joachim-fundsache-01",
+        "encodedSha256": "3490e283adaec1e3b8bc1603c7e1778a3833dd12923180bfd4fc7e333d34e3d7"
+      }
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-02",
+      "voiceId": "stadt-joachim-fundsache",
+      "actorId": "city-joachim-fundsache",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=1]",
+      "text": "Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.",
+      "english": "The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.",
+      "sourceSha256": "c5d0d507c3639d7999f00cbebc6e1784e9c7e303c1cd6899716becad0998ab10",
+      "profileId": "d87b222e98574a8d8ec180f029e8a414",
+      "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
+      "referenceOriginalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 142,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.62,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1",
+      "profileJsonSha256": "e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684",
+      "rawSha256": "cf7a64ca54cf8cb862274719ca586e95e4426dc19a8695429e3903f3e705d2db",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.64,
+      "renderSeconds": 6.5,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "d87b222e98574a8d8ec180f029e8a414",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.08:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.13,
+      "truePeakDbtp": -2.23,
+      "asr": "Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.",
+          "transcribeSeconds": 13.19,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " Zuständigkeit",
+              "start": 0.18,
+              "end": 0.96
+            },
+            {
+              "word": " liegt",
+              "start": 0.96,
+              "end": 1.22
+            },
+            {
+              "word": " hier",
+              "start": 1.22,
+              "end": 1.4
+            },
+            {
+              "word": " irgendwo.",
+              "start": 1.4,
+              "end": 1.92
+            },
+            {
+              "word": " Falls",
+              "start": 2.28,
+              "end": 2.66
+            },
+            {
+              "word": " Sie",
+              "start": 2.66,
+              "end": 2.8
+            },
+            {
+              "word": " sie",
+              "start": 2.8,
+              "end": 2.96
+            },
+            {
+              "word": " finden,",
+              "start": 2.96,
+              "end": 3.34
+            },
+            {
+              "word": " geben",
+              "start": 3.58,
+              "end": 3.76
+            },
+            {
+              "word": " Sie",
+              "start": 3.76,
+              "end": 3.92
+            },
+            {
+              "word": " sie",
+              "start": 3.92,
+              "end": 4.08
+            },
+            {
+              "word": " bitte",
+              "start": 4.08,
+              "end": 4.28
+            },
+            {
+              "word": " nicht",
+              "start": 4.28,
+              "end": 4.48
+            },
+            {
+              "word": " bei",
+              "start": 4.48,
+              "end": 4.66
+            },
+            {
+              "word": " mir",
+              "start": 4.66,
+              "end": 4.84
+            },
+            {
+              "word": " ab.",
+              "start": 4.84,
+              "end": 5.06
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "Zuständigkeit",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 18,
+          "word": "liegt",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 24,
+          "word": "hier",
+          "end": 1.4
+        },
+        {
+          "at": 1.4,
+          "charIndex": 29,
+          "word": "irgendwo",
+          "end": 1.92
+        },
+        {
+          "at": 2.28,
+          "charIndex": 39,
+          "word": "Falls",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 45,
+          "word": "Sie",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 49,
+          "word": "sie",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 53,
+          "word": "finden",
+          "end": 3.34
+        },
+        {
+          "at": 3.58,
+          "charIndex": 61,
+          "word": "geben",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 67,
+          "word": "Sie",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 71,
+          "word": "sie",
+          "end": 4.08
+        },
+        {
+          "at": 4.08,
+          "charIndex": 75,
+          "word": "bitte",
+          "end": 4.28
+        },
+        {
+          "at": 4.28,
+          "charIndex": 81,
+          "word": "nicht",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 87,
+          "word": "bei",
+          "end": 4.66
+        },
+        {
+          "at": 4.66,
+          "charIndex": 91,
+          "word": "mir",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 95,
+          "word": "ab",
+          "end": 5.06
+        }
+      ],
+      "sha256": "4e7a8279d8965f4a1097f71be9719f5b6168352e122366ccfd02f2939700f8a0",
+      "bytes": 91052,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-joachim-fundsache-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-joachim-fundsache-02",
+        "encodedSha256": "4e7a8279d8965f4a1097f71be9719f5b6168352e122366ccfd02f2939700f8a0"
+      }
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-04",
+      "voiceId": "stadt-joachim-fundsache",
+      "actorId": "city-joachim-fundsache",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=1]",
+      "text": "Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.",
+      "english": "The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.",
+      "sourceSha256": "ea1804c5ef8be753f79ba9f4f00bda3ccfd287dcb2e60fe2e6e9475b0d2b1df2",
+      "profileId": "d87b222e98574a8d8ec180f029e8a414",
+      "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
+      "referenceOriginalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71003,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 130,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.41,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1",
+      "profileJsonSha256": "e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684",
+      "rawSha256": "bb9636a1442d7335bca52e90421f546cf84a254514cb77d2cb3440ff68f39651",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.16,
+      "renderSeconds": 6.22,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "d87b222e98574a8d8ec180f029e8a414",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.93:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.16,
+      "truePeakDbtp": -2.23,
+      "asr": "Die Responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.",
+          "transcribeSeconds": 11.55,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " Responsibility",
+              "start": 0.18,
+              "end": 0.92
+            },
+            {
+              "word": " liegt",
+              "start": 0.92,
+              "end": 1.28
+            },
+            {
+              "word": " hier",
+              "start": 1.28,
+              "end": 1.46
+            },
+            {
+              "word": " irgendwo.",
+              "start": 1.46,
+              "end": 1.92
+            },
+            {
+              "word": " If",
+              "start": 2.2,
+              "end": 2.36
+            },
+            {
+              "word": " Sie",
+              "start": 2.36,
+              "end": 2.48
+            },
+            {
+              "word": " sie",
+              "start": 2.48,
+              "end": 2.62
+            },
+            {
+              "word": " finden,",
+              "start": 2.62,
+              "end": 3
+            },
+            {
+              "word": " geben",
+              "start": 3.16,
+              "end": 3.34
+            },
+            {
+              "word": " Sie",
+              "start": 3.34,
+              "end": 3.5
+            },
+            {
+              "word": " sie",
+              "start": 3.5,
+              "end": 3.64
+            },
+            {
+              "word": " bitte",
+              "start": 3.64,
+              "end": 3.86
+            },
+            {
+              "word": " not",
+              "start": 3.86,
+              "end": 4.08
+            },
+            {
+              "word": " bei",
+              "start": 4.08,
+              "end": 4.22
+            },
+            {
+              "word": " mir",
+              "start": 4.22,
+              "end": 4.38
+            },
+            {
+              "word": " ab.",
+              "start": 4.38,
+              "end": 4.58
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "responsibility",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 19,
+          "word": "liegt",
+          "end": 1.28
+        },
+        {
+          "at": 1.28,
+          "charIndex": 25,
+          "word": "hier",
+          "end": 1.46
+        },
+        {
+          "at": 1.46,
+          "charIndex": 30,
+          "word": "irgendwo",
+          "end": 1.92
+        },
+        {
+          "at": 2.2,
+          "charIndex": 40,
+          "word": "If",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 43,
+          "word": "Sie",
+          "end": 2.48
+        },
+        {
+          "at": 2.48,
+          "charIndex": 47,
+          "word": "sie",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 51,
+          "word": "finden",
+          "end": 3
+        },
+        {
+          "at": 3.16,
+          "charIndex": 59,
+          "word": "geben",
+          "end": 3.34
+        },
+        {
+          "at": 3.34,
+          "charIndex": 65,
+          "word": "Sie",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 69,
+          "word": "sie",
+          "end": 3.64
+        },
+        {
+          "at": 3.64,
+          "charIndex": 73,
+          "word": "bitte",
+          "end": 3.86
+        },
+        {
+          "at": 3.86,
+          "charIndex": 79,
+          "word": "not",
+          "end": 4.08
+        },
+        {
+          "at": 4.08,
+          "charIndex": 83,
+          "word": "bei",
+          "end": 4.22
+        },
+        {
+          "at": 4.22,
+          "charIndex": 87,
+          "word": "mir",
+          "end": 4.38
+        },
+        {
+          "at": 4.38,
+          "charIndex": 91,
+          "word": "ab",
+          "end": 4.58
+        }
+      ],
+      "sha256": "3586504d2620ca0dee1d73dc877599fba8baac2631fb2da33fcd98e01f1954b9",
+      "bytes": 83372,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-joachim-fundsache-04.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-joachim-fundsache-04",
+        "encodedSha256": "3586504d2620ca0dee1d73dc877599fba8baac2631fb2da33fcd98e01f1954b9"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-joachim-fundsache-03",
+      "voiceId": "stadt-joachim-fundsache",
+      "actorId": "city-joachim-fundsache",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=0]",
+      "text": "That is nicht mein lost Gegenstand. If Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch my time.",
+      "english": "That is not my lost object. If you are looking for its owner, please do not lose my time as well.",
+      "sourceSha256": "03d1d4f48cbfb7d82a28f13c34c3ea96067d4cd8b091db134510a21caadc0d83",
+      "profileId": "d87b222e98574a8d8ec180f029e8a414",
+      "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
+      "referenceOriginalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-joachim-fundsache-01\",\r\n      \"voiceId\": \"stadt-joachim-fundsache\",\r\n      \"actorId\": \"city-joachim-fundsache\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n      \"english\": \"That is not my lost object. If you are looking for its owner, please do not lose my time as well.\",\r\n      \"sourceSha256\": \"21b5c1bc526903b533303b0600935d869a58935aecbd47ea9042ec2103f14c94\",\r\n      \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n      \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n      \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-joachim-fundsache-02\",\r\n      \"voiceId\": \"stadt-joachim-fundsache\",\r\n      \"actorId\": \"city-joachim-fundsache\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n      \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n      \"sourceSha256\": \"c5d0d507c3639d7999f00cbebc6e1784e9c7e303c1cd6899716becad0998ab10\",\r\n      \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n      \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n      \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-joachim-fundsache-03\",\r\n      \"voiceId\": \"stadt-joachim-fundsache\",\r\n      \"actorId\": \"city-joachim-fundsache\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"That is nicht mein lost Gegenstand. If Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch my time.\",\r\n      \"english\": \"That is not my lost object. If you are looking for its owner, please do not lose my time as well.\",\r\n      \"sourceSha256\": \"03d1d4f48cbfb7d82a28f13c34c3ea96067d4cd8b091db134510a21caadc0d83\",\r\n      \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n      \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n      \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-joachim-fundsache-04\",\r\n      \"voiceId\": \"stadt-joachim-fundsache\",\r\n      \"actorId\": \"city-joachim-fundsache\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n      \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n      \"sourceSha256\": \"ea1804c5ef8be753f79ba9f4f00bda3ccfd287dcb2e60fe2e6e9475b0d2b1df2\",\r\n      \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n      \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n      \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1"
+    },
+    "takes": {
+      "stadt-joachim-fundsache-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-01\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n  \"english\": \"That is not my lost object. If you are looking for its owner, please do not lose my time as well.\",\r\n  \"sourceSha256\": \"21b5c1bc526903b533303b0600935d869a58935aecbd47ea9042ec2103f14c94\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 145,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.2,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"d63cfa8844222819b7cf0fffa0d227fe2238d8c3e0efc8115e4bc3861f1c143f\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.76,\r\n  \"renderSeconds\": 7.05,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "99b2e57464f98cc210736a1bd0facf9f2206aaf116d21ec548d71ee0098de90d"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-01\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n  \"english\": \"That is not my lost object. If you are looking for its owner, please do not lose my time as well.\",\r\n  \"sourceSha256\": \"21b5c1bc526903b533303b0600935d869a58935aecbd47ea9042ec2103f14c94\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 145,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.2,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"d63cfa8844222819b7cf0fffa0d227fe2238d8c3e0efc8115e4bc3861f1c143f\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.76,\r\n  \"renderSeconds\": 7.05,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.2:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.03,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.\",\r\n      \"transcribeSeconds\": 10.74,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Das\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.24\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 0.24,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.52\r\n        },\r\n        {\r\n          \"word\": \" mein\",\r\n          \"start\": 0.52,\r\n          \"end\": 0.74\r\n        },\r\n        {\r\n          \"word\": \" verlorener\",\r\n          \"start\": 0.74,\r\n          \"end\": 1.26\r\n        },\r\n        {\r\n          \"word\": \" Gegenstand.\",\r\n          \"start\": 1.26,\r\n          \"end\": 1.78\r\n        },\r\n        {\r\n          \"word\": \" Wenn\",\r\n          \"start\": 1.98,\r\n          \"end\": 2.22\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.32\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 2.32,\r\n          \"end\": 2.5\r\n        },\r\n        {\r\n          \"word\": \" Besitzer\",\r\n          \"start\": 2.5,\r\n          \"end\": 2.86\r\n        },\r\n        {\r\n          \"word\": \" suchen,\",\r\n          \"start\": 2.86,\r\n          \"end\": 3.2\r\n        },\r\n        {\r\n          \"word\": \" verlieren\",\r\n          \"start\": 3.32,\r\n          \"end\": 3.66\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.66,\r\n          \"end\": 3.74\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 3.74,\r\n          \"end\": 3.92\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 3.92,\r\n          \"end\": 4.12\r\n        },\r\n        {\r\n          \"word\": \" auch\",\r\n          \"start\": 4.12,\r\n          \"end\": 4.34\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 4.34,\r\n          \"end\": 4.46\r\n        },\r\n        {\r\n          \"word\": \" meine\",\r\n          \"start\": 4.46,\r\n          \"end\": 4.7\r\n        },\r\n        {\r\n          \"word\": \" Zeit.\",\r\n          \"start\": 4.7,\r\n          \"end\": 5.02\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Das\",\r\n      \"end\": 0.24\r\n    },\r\n    {\r\n      \"at\": 0.24,\r\n      \"charIndex\": 4,\r\n      \"word\": \"ist\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 8,\r\n      \"word\": \"nicht\",\r\n      \"end\": 0.52\r\n    },\r\n    {\r\n      \"at\": 0.52,\r\n      \"charIndex\": 14,\r\n      \"word\": \"mein\",\r\n      \"end\": 0.74\r\n    },\r\n    {\r\n      \"at\": 0.74,\r\n      \"charIndex\": 19,\r\n      \"word\": \"verlorener\",\r\n      \"end\": 1.26\r\n    },\r\n    {\r\n      \"at\": 1.26,\r\n      \"charIndex\": 30,\r\n      \"word\": \"Gegenstand\",\r\n      \"end\": 1.78\r\n    },\r\n    {\r\n      \"at\": 1.98,\r\n      \"charIndex\": 42,\r\n      \"word\": \"Wenn\",\r\n      \"end\": 2.22\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 47,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.32\r\n    },\r\n    {\r\n      \"at\": 2.32,\r\n      \"charIndex\": 51,\r\n      \"word\": \"den\",\r\n      \"end\": 2.5\r\n    },\r\n    {\r\n      \"at\": 2.5,\r\n      \"charIndex\": 55,\r\n      \"word\": \"Besitzer\",\r\n      \"end\": 2.86\r\n    },\r\n    {\r\n      \"at\": 2.86,\r\n      \"charIndex\": 64,\r\n      \"word\": \"suchen\",\r\n      \"end\": 3.2\r\n    },\r\n    {\r\n      \"at\": 3.32,\r\n      \"charIndex\": 72,\r\n      \"word\": \"verlieren\",\r\n      \"end\": 3.66\r\n    },\r\n    {\r\n      \"at\": 3.66,\r\n      \"charIndex\": 82,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.74\r\n    },\r\n    {\r\n      \"at\": 3.74,\r\n      \"charIndex\": 86,\r\n      \"word\": \"bitte\",\r\n      \"end\": 3.92\r\n    },\r\n    {\r\n      \"at\": 3.92,\r\n      \"charIndex\": 92,\r\n      \"word\": \"nicht\",\r\n      \"end\": 4.12\r\n    },\r\n    {\r\n      \"at\": 4.12,\r\n      \"charIndex\": 98,\r\n      \"word\": \"auch\",\r\n      \"end\": 4.34\r\n    },\r\n    {\r\n      \"at\": 4.34,\r\n      \"charIndex\": 103,\r\n      \"word\": \"noch\",\r\n      \"end\": 4.46\r\n    },\r\n    {\r\n      \"at\": 4.46,\r\n      \"charIndex\": 108,\r\n      \"word\": \"meine\",\r\n      \"end\": 4.7\r\n    },\r\n    {\r\n      \"at\": 4.7,\r\n      \"charIndex\": 114,\r\n      \"word\": \"Zeit\",\r\n      \"end\": 5.02\r\n    }\r\n  ],\r\n  \"sha256\": \"3490e283adaec1e3b8bc1603c7e1778a3833dd12923180bfd4fc7e333d34e3d7\",\r\n  \"bytes\": 92972,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-joachim-fundsache-01.mp3\"\r\n}\r\n",
+          "sha256": "d384d7f8fe3b0b7dbf64cf3e33e682b3c0081be1ca5c7cac85481cfcb169ab01"
+        }
+      },
+      "stadt-joachim-fundsache-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-02\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n  \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n  \"sourceSha256\": \"c5d0d507c3639d7999f00cbebc6e1784e9c7e303c1cd6899716becad0998ab10\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 142,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.62,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"cf7a64ca54cf8cb862274719ca586e95e4426dc19a8695429e3903f3e705d2db\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.64,\r\n  \"renderSeconds\": 6.5,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "84b6aa95b581e5719d0a59e8d960295e4d736985729a96031dccd16d37b13a6d"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-02\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n  \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n  \"sourceSha256\": \"c5d0d507c3639d7999f00cbebc6e1784e9c7e303c1cd6899716becad0998ab10\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 142,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.62,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"cf7a64ca54cf8cb862274719ca586e95e4426dc19a8695429e3903f3e705d2db\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.64,\r\n  \"renderSeconds\": 6.5,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.08:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.13,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab.\",\r\n      \"transcribeSeconds\": 13.19,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" Zuständigkeit\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.96\r\n        },\r\n        {\r\n          \"word\": \" liegt\",\r\n          \"start\": 0.96,\r\n          \"end\": 1.22\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 1.22,\r\n          \"end\": 1.4\r\n        },\r\n        {\r\n          \"word\": \" irgendwo.\",\r\n          \"start\": 1.4,\r\n          \"end\": 1.92\r\n        },\r\n        {\r\n          \"word\": \" Falls\",\r\n          \"start\": 2.28,\r\n          \"end\": 2.66\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.66,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 2.8,\r\n          \"end\": 2.96\r\n        },\r\n        {\r\n          \"word\": \" finden,\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.34\r\n        },\r\n        {\r\n          \"word\": \" geben\",\r\n          \"start\": 3.58,\r\n          \"end\": 3.76\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.76,\r\n          \"end\": 3.92\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 3.92,\r\n          \"end\": 4.08\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 4.08,\r\n          \"end\": 4.28\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 4.28,\r\n          \"end\": 4.48\r\n        },\r\n        {\r\n          \"word\": \" bei\",\r\n          \"start\": 4.48,\r\n          \"end\": 4.66\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 4.66,\r\n          \"end\": 4.84\r\n        },\r\n        {\r\n          \"word\": \" ab.\",\r\n          \"start\": 4.84,\r\n          \"end\": 5.06\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Zuständigkeit\",\r\n      \"end\": 0.96\r\n    },\r\n    {\r\n      \"at\": 0.96,\r\n      \"charIndex\": 18,\r\n      \"word\": \"liegt\",\r\n      \"end\": 1.22\r\n    },\r\n    {\r\n      \"at\": 1.22,\r\n      \"charIndex\": 24,\r\n      \"word\": \"hier\",\r\n      \"end\": 1.4\r\n    },\r\n    {\r\n      \"at\": 1.4,\r\n      \"charIndex\": 29,\r\n      \"word\": \"irgendwo\",\r\n      \"end\": 1.92\r\n    },\r\n    {\r\n      \"at\": 2.28,\r\n      \"charIndex\": 39,\r\n      \"word\": \"Falls\",\r\n      \"end\": 2.66\r\n    },\r\n    {\r\n      \"at\": 2.66,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.8,\r\n      \"charIndex\": 49,\r\n      \"word\": \"sie\",\r\n      \"end\": 2.96\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 53,\r\n      \"word\": \"finden\",\r\n      \"end\": 3.34\r\n    },\r\n    {\r\n      \"at\": 3.58,\r\n      \"charIndex\": 61,\r\n      \"word\": \"geben\",\r\n      \"end\": 3.76\r\n    },\r\n    {\r\n      \"at\": 3.76,\r\n      \"charIndex\": 67,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.92\r\n    },\r\n    {\r\n      \"at\": 3.92,\r\n      \"charIndex\": 71,\r\n      \"word\": \"sie\",\r\n      \"end\": 4.08\r\n    },\r\n    {\r\n      \"at\": 4.08,\r\n      \"charIndex\": 75,\r\n      \"word\": \"bitte\",\r\n      \"end\": 4.28\r\n    },\r\n    {\r\n      \"at\": 4.28,\r\n      \"charIndex\": 81,\r\n      \"word\": \"nicht\",\r\n      \"end\": 4.48\r\n    },\r\n    {\r\n      \"at\": 4.48,\r\n      \"charIndex\": 87,\r\n      \"word\": \"bei\",\r\n      \"end\": 4.66\r\n    },\r\n    {\r\n      \"at\": 4.66,\r\n      \"charIndex\": 91,\r\n      \"word\": \"mir\",\r\n      \"end\": 4.84\r\n    },\r\n    {\r\n      \"at\": 4.84,\r\n      \"charIndex\": 95,\r\n      \"word\": \"ab\",\r\n      \"end\": 5.06\r\n    }\r\n  ],\r\n  \"sha256\": \"4e7a8279d8965f4a1097f71be9719f5b6168352e122366ccfd02f2939700f8a0\",\r\n  \"bytes\": 91052,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-joachim-fundsache-02.mp3\"\r\n}\r\n",
+          "sha256": "3d02f033d260a966c24e347b03896f25fa7707434c9bf3c2016e85bc8ebd5c5a"
+        }
+      },
+      "stadt-joachim-fundsache-04": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-04\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n  \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n  \"sourceSha256\": \"ea1804c5ef8be753f79ba9f4f00bda3ccfd287dcb2e60fe2e6e9475b0d2b1df2\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71003,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 130,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.41,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"bb9636a1442d7335bca52e90421f546cf84a254514cb77d2cb3440ff68f39651\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.16,\r\n  \"renderSeconds\": 6.22,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "2cfbe7baebbbb4ba65094716e5a57fde6898922e1b36dca098aedbd7408c0053"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-joachim-fundsache-04\",\r\n  \"voiceId\": \"stadt-joachim-fundsache\",\r\n  \"actorId\": \"city-joachim-fundsache\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-joachim-fundsache].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n  \"english\": \"The responsibility is lying around here somewhere. If you find it, please do not hand it in to me.\",\r\n  \"sourceSha256\": \"ea1804c5ef8be753f79ba9f4f00bda3ccfd287dcb2e60fe2e6e9475b0d2b1df2\",\r\n  \"profileId\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n  \"referenceSha256\": \"5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b\",\r\n  \"referenceOriginalSha256\": \"36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71003,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 130,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.41,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"6f7ff5d2b0c85a5bf3dcaa0081d2973b6ea9f8c8fc62a7894124229a63da09d1\",\r\n  \"profileJsonSha256\": \"e7bc393f236ab9355cf52e9569e84ee7a287ff1e99cdc59ee2a14328ade36684\",\r\n  \"rawSha256\": \"bb9636a1442d7335bca52e90421f546cf84a254514cb77d2cb3440ff68f39651\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.16,\r\n  \"renderSeconds\": 6.22,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"d87b222e98574a8d8ec180f029e8a414\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.93:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.16,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Die Responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab.\",\r\n      \"transcribeSeconds\": 11.55,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" Responsibility\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.92\r\n        },\r\n        {\r\n          \"word\": \" liegt\",\r\n          \"start\": 0.92,\r\n          \"end\": 1.28\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 1.28,\r\n          \"end\": 1.46\r\n        },\r\n        {\r\n          \"word\": \" irgendwo.\",\r\n          \"start\": 1.46,\r\n          \"end\": 1.92\r\n        },\r\n        {\r\n          \"word\": \" If\",\r\n          \"start\": 2.2,\r\n          \"end\": 2.36\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.36,\r\n          \"end\": 2.48\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 2.48,\r\n          \"end\": 2.62\r\n        },\r\n        {\r\n          \"word\": \" finden,\",\r\n          \"start\": 2.62,\r\n          \"end\": 3.0\r\n        },\r\n        {\r\n          \"word\": \" geben\",\r\n          \"start\": 3.16,\r\n          \"end\": 3.34\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.34,\r\n          \"end\": 3.5\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 3.5,\r\n          \"end\": 3.64\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 3.64,\r\n          \"end\": 3.86\r\n        },\r\n        {\r\n          \"word\": \" not\",\r\n          \"start\": 3.86,\r\n          \"end\": 4.08\r\n        },\r\n        {\r\n          \"word\": \" bei\",\r\n          \"start\": 4.08,\r\n          \"end\": 4.22\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 4.22,\r\n          \"end\": 4.38\r\n        },\r\n        {\r\n          \"word\": \" ab.\",\r\n          \"start\": 4.38,\r\n          \"end\": 4.58\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"responsibility\",\r\n      \"end\": 0.92\r\n    },\r\n    {\r\n      \"at\": 0.92,\r\n      \"charIndex\": 19,\r\n      \"word\": \"liegt\",\r\n      \"end\": 1.28\r\n    },\r\n    {\r\n      \"at\": 1.28,\r\n      \"charIndex\": 25,\r\n      \"word\": \"hier\",\r\n      \"end\": 1.46\r\n    },\r\n    {\r\n      \"at\": 1.46,\r\n      \"charIndex\": 30,\r\n      \"word\": \"irgendwo\",\r\n      \"end\": 1.92\r\n    },\r\n    {\r\n      \"at\": 2.2,\r\n      \"charIndex\": 40,\r\n      \"word\": \"If\",\r\n      \"end\": 2.36\r\n    },\r\n    {\r\n      \"at\": 2.36,\r\n      \"charIndex\": 43,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.48\r\n    },\r\n    {\r\n      \"at\": 2.48,\r\n      \"charIndex\": 47,\r\n      \"word\": \"sie\",\r\n      \"end\": 2.62\r\n    },\r\n    {\r\n      \"at\": 2.62,\r\n      \"charIndex\": 51,\r\n      \"word\": \"finden\",\r\n      \"end\": 3.0\r\n    },\r\n    {\r\n      \"at\": 3.16,\r\n      \"charIndex\": 59,\r\n      \"word\": \"geben\",\r\n      \"end\": 3.34\r\n    },\r\n    {\r\n      \"at\": 3.34,\r\n      \"charIndex\": 65,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.5\r\n    },\r\n    {\r\n      \"at\": 3.5,\r\n      \"charIndex\": 69,\r\n      \"word\": \"sie\",\r\n      \"end\": 3.64\r\n    },\r\n    {\r\n      \"at\": 3.64,\r\n      \"charIndex\": 73,\r\n      \"word\": \"bitte\",\r\n      \"end\": 3.86\r\n    },\r\n    {\r\n      \"at\": 3.86,\r\n      \"charIndex\": 79,\r\n      \"word\": \"not\",\r\n      \"end\": 4.08\r\n    },\r\n    {\r\n      \"at\": 4.08,\r\n      \"charIndex\": 83,\r\n      \"word\": \"bei\",\r\n      \"end\": 4.22\r\n    },\r\n    {\r\n      \"at\": 4.22,\r\n      \"charIndex\": 87,\r\n      \"word\": \"mir\",\r\n      \"end\": 4.38\r\n    },\r\n    {\r\n      \"at\": 4.38,\r\n      \"charIndex\": 91,\r\n      \"word\": \"ab\",\r\n      \"end\": 4.58\r\n    }\r\n  ],\r\n  \"sha256\": \"3586504d2620ca0dee1d73dc877599fba8baac2631fb2da33fcd98e01f1954b9\",\r\n  \"bytes\": 83372,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-joachim-fundsache-04.mp3\"\r\n}\r\n",
+          "sha256": "af57f0e4dc22a03b5beaa71b8eb8133f0b2845dad2d60250cbb4ac0362aa6b4c"
+        }
+      }
+    }
+  }
+}

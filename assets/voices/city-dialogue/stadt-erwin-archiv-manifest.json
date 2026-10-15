@@ -1,0 +1,639 @@
+{
+  "voiceId": "stadt-erwin-archiv",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-erwin-archiv-01",
+      "voiceId": "stadt-erwin-archiv",
+      "actorId": "city-erwin-archiv",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=0]",
+      "text": "Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.",
+      "english": "The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.",
+      "sourceSha256": "532c5cb6bca322333a830e05f9529c6d2739fed7746d607b12a4e8a78533fcda",
+      "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.",
+      "decode": {
+        "maxSpeechTokens": 340,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 141,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.95,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20",
+      "profileJsonSha256": "d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5",
+      "rawSha256": "d5b3e89937b2720776d66cc8313aaed9cafac79f6d41de102a76b0484b4222f4",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.6,
+      "renderSeconds": 6.8,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "dd2102af797e486fb66d67ac2cde26bc",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.65:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.14,
+      "truePeakDbtp": -2.23,
+      "asr": "Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.",
+          "transcribeSeconds": 10.62,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " Baustelle",
+              "start": 0.18,
+              "end": 0.72
+            },
+            {
+              "word": " ist",
+              "start": 0.72,
+              "end": 0.9
+            },
+            {
+              "word": " im",
+              "start": 0.9,
+              "end": 1.06
+            },
+            {
+              "word": " Archiv",
+              "start": 1.06,
+              "end": 1.5
+            },
+            {
+              "word": " schon",
+              "start": 1.5,
+              "end": 1.7
+            },
+            {
+              "word": " abgeschlossen.",
+              "start": 1.7,
+              "end": 2.36
+            },
+            {
+              "word": " Draußen",
+              "start": 2.66,
+              "end": 3.18
+            },
+            {
+              "word": " braucht",
+              "start": 3.18,
+              "end": 3.44
+            },
+            {
+              "word": " sie",
+              "start": 3.44,
+              "end": 3.6
+            },
+            {
+              "word": " offenbar",
+              "start": 3.6,
+              "end": 3.98
+            },
+            {
+              "word": " noch",
+              "start": 3.98,
+              "end": 4.08
+            },
+            {
+              "word": " eine",
+              "start": 4.08,
+              "end": 4.28
+            },
+            {
+              "word": " Durchschrift",
+              "start": 4.28,
+              "end": 4.74
+            },
+            {
+              "word": " davon.",
+              "start": 4.74,
+              "end": 5.02
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "Baustelle",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 14,
+          "word": "ist",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 18,
+          "word": "im",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 21,
+          "word": "Archiv",
+          "end": 1.5
+        },
+        {
+          "at": 1.5,
+          "charIndex": 28,
+          "word": "schon",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 34,
+          "word": "abgeschlossen",
+          "end": 2.36
+        },
+        {
+          "at": 2.66,
+          "charIndex": 49,
+          "word": "Draußen",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 57,
+          "word": "braucht",
+          "end": 3.44
+        },
+        {
+          "at": 3.44,
+          "charIndex": 65,
+          "word": "sie",
+          "end": 3.6
+        },
+        {
+          "at": 3.6,
+          "charIndex": 69,
+          "word": "offenbar",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 78,
+          "word": "noch",
+          "end": 4.08
+        },
+        {
+          "at": 4.08,
+          "charIndex": 83,
+          "word": "eine",
+          "end": 4.28
+        },
+        {
+          "at": 4.28,
+          "charIndex": 88,
+          "word": "Durchschrift",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 101,
+          "word": "davon",
+          "end": 5.02
+        }
+      ],
+      "sha256": "74f341d00239533f26ca37becdfa757d7546534d691a75283d9e3278d165764f",
+      "bytes": 90668,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-erwin-archiv-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-erwin-archiv-01",
+        "encodedSha256": "74f341d00239533f26ca37becdfa757d7546534d691a75283d9e3278d165764f"
+      }
+    },
+    {
+      "clipId": "stadt-erwin-archiv-02",
+      "voiceId": "stadt-erwin-archiv",
+      "actorId": "city-erwin-archiv",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=1]",
+      "text": "Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.",
+      "english": "Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.",
+      "sourceSha256": "d842c3ee417c91a275811c0531eb23a10a9d36894aa7da667f6b66741887785a",
+      "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 165,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.11,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20",
+      "profileJsonSha256": "d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5",
+      "rawSha256": "7fc7de43a905e42987d52af0b9d038c3e86ad03e5ba0047954f4a2ef78d68dad",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.56,
+      "renderSeconds": 7.97,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "dd2102af797e486fb66d67ac2cde26bc",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.05:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.22,
+      "asr": "Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.",
+          "transcribeSeconds": 10.47,
+          "words": [
+            {
+              "word": " Stellen",
+              "start": 0,
+              "end": 0.44
+            },
+            {
+              "word": " Sie",
+              "start": 0.44,
+              "end": 0.66
+            },
+            {
+              "word": " Ihre",
+              "start": 0.66,
+              "end": 0.84
+            },
+            {
+              "word": " Frage",
+              "start": 0.84,
+              "end": 1.3
+            },
+            {
+              "word": " hinten",
+              "start": 1.3,
+              "end": 1.7
+            },
+            {
+              "word": " an",
+              "start": 1.7,
+              "end": 1.96
+            },
+            {
+              "word": " den",
+              "start": 1.96,
+              "end": 2.18
+            },
+            {
+              "word": " Stapel.",
+              "start": 2.18,
+              "end": 2.7
+            },
+            {
+              "word": " Die",
+              "start": 2.96,
+              "end": 3.34
+            },
+            {
+              "word": " unterste",
+              "start": 3.34,
+              "end": 3.8
+            },
+            {
+              "word": " wartet",
+              "start": 3.8,
+              "end": 4.16
+            },
+            {
+              "word": " seit",
+              "start": 4.16,
+              "end": 4.38
+            },
+            {
+              "word": " Jahren,",
+              "start": 4.38,
+              "end": 4.84
+            },
+            {
+              "word": " die",
+              "start": 5.2,
+              "end": 5.26
+            },
+            {
+              "word": " kennt",
+              "start": 5.26,
+              "end": 5.5
+            },
+            {
+              "word": " den",
+              "start": 5.5,
+              "end": 5.7
+            },
+            {
+              "word": " Ablauf.",
+              "start": 5.7,
+              "end": 6.18
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Stellen",
+          "end": 0.44
+        },
+        {
+          "at": 0.44,
+          "charIndex": 8,
+          "word": "Sie",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 12,
+          "word": "Ihre",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 17,
+          "word": "Frage",
+          "end": 1.3
+        },
+        {
+          "at": 1.3,
+          "charIndex": 23,
+          "word": "hinten",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 30,
+          "word": "an",
+          "end": 1.96
+        },
+        {
+          "at": 1.96,
+          "charIndex": 33,
+          "word": "den",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 37,
+          "word": "Stapel",
+          "end": 2.7
+        },
+        {
+          "at": 2.96,
+          "charIndex": 45,
+          "word": "Die",
+          "end": 3.34
+        },
+        {
+          "at": 3.34,
+          "charIndex": 49,
+          "word": "unterste",
+          "end": 3.8
+        },
+        {
+          "at": 3.8,
+          "charIndex": 58,
+          "word": "wartet",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 65,
+          "word": "seit",
+          "end": 4.38
+        },
+        {
+          "at": 4.38,
+          "charIndex": 70,
+          "word": "Jahren",
+          "end": 4.84
+        },
+        {
+          "at": 5.2,
+          "charIndex": 78,
+          "word": "die",
+          "end": 5.26
+        },
+        {
+          "at": 5.26,
+          "charIndex": 82,
+          "word": "kennt",
+          "end": 5.5
+        },
+        {
+          "at": 5.5,
+          "charIndex": 88,
+          "word": "den",
+          "end": 5.7
+        },
+        {
+          "at": 5.7,
+          "charIndex": 92,
+          "word": "Ablauf",
+          "end": 6.18
+        }
+      ],
+      "sha256": "329673c42e261fa617b2cd27076ae7d3978ae916a6768e84b46395cbd55f79cd",
+      "bytes": 106028,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-erwin-archiv-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-erwin-archiv-02",
+        "encodedSha256": "329673c42e261fa617b2cd27076ae7d3978ae916a6768e84b46395cbd55f79cd"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-erwin-archiv-03",
+      "voiceId": "stadt-erwin-archiv",
+      "actorId": "city-erwin-archiv",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=berlin,slot=0]",
+      "text": "Die Baustelle is already closed im Archiv. Outside braucht sie apparently noch eine Durchschrift davon.",
+      "english": "The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.",
+      "sourceSha256": "207cec4c0ec498d6e90f7f6cf62581aaab4aab4fb608557c7fd0dae8bf45c100",
+      "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-erwin-archiv-04",
+      "voiceId": "stadt-erwin-archiv",
+      "actorId": "city-erwin-archiv",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=berlin,slot=1]",
+      "text": "Put Ihre Frage hinten an den Stapel. The bottom one wartet seit Jahren, die knows the procedure.",
+      "english": "Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.",
+      "sourceSha256": "7c4f10a26b216a7731f4c236c7cbb1b2c8a5cfd1578c1ab626cf3286101b5884",
+      "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-erwin-archiv-01\",\r\n      \"voiceId\": \"stadt-erwin-archiv\",\r\n      \"actorId\": \"city-erwin-archiv\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n      \"english\": \"The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.\",\r\n      \"sourceSha256\": \"532c5cb6bca322333a830e05f9529c6d2739fed7746d607b12a4e8a78533fcda\",\r\n      \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n      \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n      \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-erwin-archiv-02\",\r\n      \"voiceId\": \"stadt-erwin-archiv\",\r\n      \"actorId\": \"city-erwin-archiv\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n      \"english\": \"Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.\",\r\n      \"sourceSha256\": \"d842c3ee417c91a275811c0531eb23a10a9d36894aa7da667f6b66741887785a\",\r\n      \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n      \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n      \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-erwin-archiv-03\",\r\n      \"voiceId\": \"stadt-erwin-archiv\",\r\n      \"actorId\": \"city-erwin-archiv\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Die Baustelle is already closed im Archiv. Outside braucht sie apparently noch eine Durchschrift davon.\",\r\n      \"english\": \"The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.\",\r\n      \"sourceSha256\": \"207cec4c0ec498d6e90f7f6cf62581aaab4aab4fb608557c7fd0dae8bf45c100\",\r\n      \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n      \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n      \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-erwin-archiv-04\",\r\n      \"voiceId\": \"stadt-erwin-archiv\",\r\n      \"actorId\": \"city-erwin-archiv\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Put Ihre Frage hinten an den Stapel. The bottom one wartet seit Jahren, die knows the procedure.\",\r\n      \"english\": \"Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.\",\r\n      \"sourceSha256\": \"7c4f10a26b216a7731f4c236c7cbb1b2c8a5cfd1578c1ab626cf3286101b5884\",\r\n      \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n      \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n      \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20"
+    },
+    "takes": {
+      "stadt-erwin-archiv-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-erwin-archiv-01\",\r\n  \"voiceId\": \"stadt-erwin-archiv\",\r\n  \"actorId\": \"city-erwin-archiv\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n  \"english\": \"The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.\",\r\n  \"sourceSha256\": \"532c5cb6bca322333a830e05f9529c6d2739fed7746d607b12a4e8a78533fcda\",\r\n  \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n  \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n  \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 141,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.95,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20\",\r\n  \"profileJsonSha256\": \"d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5\",\r\n  \"rawSha256\": \"d5b3e89937b2720776d66cc8313aaed9cafac79f6d41de102a76b0484b4222f4\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.6,\r\n  \"renderSeconds\": 6.8,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "c50688e677852b8b4da69934ace1fb7441b97c4f2a82df90369cd65a1d334b4b"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-erwin-archiv-01\",\r\n  \"voiceId\": \"stadt-erwin-archiv\",\r\n  \"actorId\": \"city-erwin-archiv\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n  \"english\": \"The construction is already closed in the archive. Apparently it still needs a duplicate of that outside.\",\r\n  \"sourceSha256\": \"532c5cb6bca322333a830e05f9529c6d2739fed7746d607b12a4e8a78533fcda\",\r\n  \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n  \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n  \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 141,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.95,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20\",\r\n  \"profileJsonSha256\": \"d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5\",\r\n  \"rawSha256\": \"d5b3e89937b2720776d66cc8313aaed9cafac79f6d41de102a76b0484b4222f4\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.6,\r\n  \"renderSeconds\": 6.8,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.65:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.14,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.\",\r\n      \"transcribeSeconds\": 10.62,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" Baustelle\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.72\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 0.72,\r\n          \"end\": 0.9\r\n        },\r\n        {\r\n          \"word\": \" im\",\r\n          \"start\": 0.9,\r\n          \"end\": 1.06\r\n        },\r\n        {\r\n          \"word\": \" Archiv\",\r\n          \"start\": 1.06,\r\n          \"end\": 1.5\r\n        },\r\n        {\r\n          \"word\": \" schon\",\r\n          \"start\": 1.5,\r\n          \"end\": 1.7\r\n        },\r\n        {\r\n          \"word\": \" abgeschlossen.\",\r\n          \"start\": 1.7,\r\n          \"end\": 2.36\r\n        },\r\n        {\r\n          \"word\": \" Draußen\",\r\n          \"start\": 2.66,\r\n          \"end\": 3.18\r\n        },\r\n        {\r\n          \"word\": \" braucht\",\r\n          \"start\": 3.18,\r\n          \"end\": 3.44\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 3.44,\r\n          \"end\": 3.6\r\n        },\r\n        {\r\n          \"word\": \" offenbar\",\r\n          \"start\": 3.6,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.08\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 4.08,\r\n          \"end\": 4.28\r\n        },\r\n        {\r\n          \"word\": \" Durchschrift\",\r\n          \"start\": 4.28,\r\n          \"end\": 4.74\r\n        },\r\n        {\r\n          \"word\": \" davon.\",\r\n          \"start\": 4.74,\r\n          \"end\": 5.02\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Baustelle\",\r\n      \"end\": 0.72\r\n    },\r\n    {\r\n      \"at\": 0.72,\r\n      \"charIndex\": 14,\r\n      \"word\": \"ist\",\r\n      \"end\": 0.9\r\n    },\r\n    {\r\n      \"at\": 0.9,\r\n      \"charIndex\": 18,\r\n      \"word\": \"im\",\r\n      \"end\": 1.06\r\n    },\r\n    {\r\n      \"at\": 1.06,\r\n      \"charIndex\": 21,\r\n      \"word\": \"Archiv\",\r\n      \"end\": 1.5\r\n    },\r\n    {\r\n      \"at\": 1.5,\r\n      \"charIndex\": 28,\r\n      \"word\": \"schon\",\r\n      \"end\": 1.7\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 34,\r\n      \"word\": \"abgeschlossen\",\r\n      \"end\": 2.36\r\n    },\r\n    {\r\n      \"at\": 2.66,\r\n      \"charIndex\": 49,\r\n      \"word\": \"Draußen\",\r\n      \"end\": 3.18\r\n    },\r\n    {\r\n      \"at\": 3.18,\r\n      \"charIndex\": 57,\r\n      \"word\": \"braucht\",\r\n      \"end\": 3.44\r\n    },\r\n    {\r\n      \"at\": 3.44,\r\n      \"charIndex\": 65,\r\n      \"word\": \"sie\",\r\n      \"end\": 3.6\r\n    },\r\n    {\r\n      \"at\": 3.6,\r\n      \"charIndex\": 69,\r\n      \"word\": \"offenbar\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 78,\r\n      \"word\": \"noch\",\r\n      \"end\": 4.08\r\n    },\r\n    {\r\n      \"at\": 4.08,\r\n      \"charIndex\": 83,\r\n      \"word\": \"eine\",\r\n      \"end\": 4.28\r\n    },\r\n    {\r\n      \"at\": 4.28,\r\n      \"charIndex\": 88,\r\n      \"word\": \"Durchschrift\",\r\n      \"end\": 4.74\r\n    },\r\n    {\r\n      \"at\": 4.74,\r\n      \"charIndex\": 101,\r\n      \"word\": \"davon\",\r\n      \"end\": 5.02\r\n    }\r\n  ],\r\n  \"sha256\": \"74f341d00239533f26ca37becdfa757d7546534d691a75283d9e3278d165764f\",\r\n  \"bytes\": 90668,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-erwin-archiv-01.mp3\"\r\n}\r\n",
+          "sha256": "c20bc4441551da8f724ce91a24fb8878d00e3e4cc611f4bf006b39cb6cb83b58"
+        }
+      },
+      "stadt-erwin-archiv-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-erwin-archiv-02\",\r\n  \"voiceId\": \"stadt-erwin-archiv\",\r\n  \"actorId\": \"city-erwin-archiv\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n  \"english\": \"Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.\",\r\n  \"sourceSha256\": \"d842c3ee417c91a275811c0531eb23a10a9d36894aa7da667f6b66741887785a\",\r\n  \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n  \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n  \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.11,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20\",\r\n  \"profileJsonSha256\": \"d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5\",\r\n  \"rawSha256\": \"7fc7de43a905e42987d52af0b9d038c3e86ad03e5ba0047954f4a2ef78d68dad\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.56,\r\n  \"renderSeconds\": 7.97,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "0824d29ad21e5c5d948c98708d9ca4f847771cb5653cd4cdb82ceb20394e1f82"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-erwin-archiv-02\",\r\n  \"voiceId\": \"stadt-erwin-archiv\",\r\n  \"actorId\": \"city-erwin-archiv\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-erwin-archiv].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n  \"english\": \"Put your question at the back of the stack. The bottom one has been waiting for years; it knows the procedure.\",\r\n  \"sourceSha256\": \"d842c3ee417c91a275811c0531eb23a10a9d36894aa7da667f6b66741887785a\",\r\n  \"profileId\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n  \"referenceSha256\": \"36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1\",\r\n  \"referenceOriginalSha256\": \"151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.11,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7c8eb1eb530a46a4cd75953c561423a678c61534b145a8224042656d19153d20\",\r\n  \"profileJsonSha256\": \"d52ad00cb45d14ffe5d38d2504b7e8cdb5eb6427625e4a3513a17e8bc916f9f5\",\r\n  \"rawSha256\": \"7fc7de43a905e42987d52af0b9d038c3e86ad03e5ba0047954f4a2ef78d68dad\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.56,\r\n  \"renderSeconds\": 7.97,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"dd2102af797e486fb66d67ac2cde26bc\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.05:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.19,\r\n  \"truePeakDbtp\": -2.22,\r\n  \"asr\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf.\",\r\n      \"transcribeSeconds\": 10.47,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Stellen\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.44\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.44,\r\n          \"end\": 0.66\r\n        },\r\n        {\r\n          \"word\": \" Ihre\",\r\n          \"start\": 0.66,\r\n          \"end\": 0.84\r\n        },\r\n        {\r\n          \"word\": \" Frage\",\r\n          \"start\": 0.84,\r\n          \"end\": 1.3\r\n        },\r\n        {\r\n          \"word\": \" hinten\",\r\n          \"start\": 1.3,\r\n          \"end\": 1.7\r\n        },\r\n        {\r\n          \"word\": \" an\",\r\n          \"start\": 1.7,\r\n          \"end\": 1.96\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 1.96,\r\n          \"end\": 2.18\r\n        },\r\n        {\r\n          \"word\": \" Stapel.\",\r\n          \"start\": 2.18,\r\n          \"end\": 2.7\r\n        },\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.34\r\n        },\r\n        {\r\n          \"word\": \" unterste\",\r\n          \"start\": 3.34,\r\n          \"end\": 3.8\r\n        },\r\n        {\r\n          \"word\": \" wartet\",\r\n          \"start\": 3.8,\r\n          \"end\": 4.16\r\n        },\r\n        {\r\n          \"word\": \" seit\",\r\n          \"start\": 4.16,\r\n          \"end\": 4.38\r\n        },\r\n        {\r\n          \"word\": \" Jahren,\",\r\n          \"start\": 4.38,\r\n          \"end\": 4.84\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 5.2,\r\n          \"end\": 5.26\r\n        },\r\n        {\r\n          \"word\": \" kennt\",\r\n          \"start\": 5.26,\r\n          \"end\": 5.5\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 5.5,\r\n          \"end\": 5.7\r\n        },\r\n        {\r\n          \"word\": \" Ablauf.\",\r\n          \"start\": 5.7,\r\n          \"end\": 6.18\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Stellen\",\r\n      \"end\": 0.44\r\n    },\r\n    {\r\n      \"at\": 0.44,\r\n      \"charIndex\": 8,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.66\r\n    },\r\n    {\r\n      \"at\": 0.66,\r\n      \"charIndex\": 12,\r\n      \"word\": \"Ihre\",\r\n      \"end\": 0.84\r\n    },\r\n    {\r\n      \"at\": 0.84,\r\n      \"charIndex\": 17,\r\n      \"word\": \"Frage\",\r\n      \"end\": 1.3\r\n    },\r\n    {\r\n      \"at\": 1.3,\r\n      \"charIndex\": 23,\r\n      \"word\": \"hinten\",\r\n      \"end\": 1.7\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 30,\r\n      \"word\": \"an\",\r\n      \"end\": 1.96\r\n    },\r\n    {\r\n      \"at\": 1.96,\r\n      \"charIndex\": 33,\r\n      \"word\": \"den\",\r\n      \"end\": 2.18\r\n    },\r\n    {\r\n      \"at\": 2.18,\r\n      \"charIndex\": 37,\r\n      \"word\": \"Stapel\",\r\n      \"end\": 2.7\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Die\",\r\n      \"end\": 3.34\r\n    },\r\n    {\r\n      \"at\": 3.34,\r\n      \"charIndex\": 49,\r\n      \"word\": \"unterste\",\r\n      \"end\": 3.8\r\n    },\r\n    {\r\n      \"at\": 3.8,\r\n      \"charIndex\": 58,\r\n      \"word\": \"wartet\",\r\n      \"end\": 4.16\r\n    },\r\n    {\r\n      \"at\": 4.16,\r\n      \"charIndex\": 65,\r\n      \"word\": \"seit\",\r\n      \"end\": 4.38\r\n    },\r\n    {\r\n      \"at\": 4.38,\r\n      \"charIndex\": 70,\r\n      \"word\": \"Jahren\",\r\n      \"end\": 4.84\r\n    },\r\n    {\r\n      \"at\": 5.2,\r\n      \"charIndex\": 78,\r\n      \"word\": \"die\",\r\n      \"end\": 5.26\r\n    },\r\n    {\r\n      \"at\": 5.26,\r\n      \"charIndex\": 82,\r\n      \"word\": \"kennt\",\r\n      \"end\": 5.5\r\n    },\r\n    {\r\n      \"at\": 5.5,\r\n      \"charIndex\": 88,\r\n      \"word\": \"den\",\r\n      \"end\": 5.7\r\n    },\r\n    {\r\n      \"at\": 5.7,\r\n      \"charIndex\": 92,\r\n      \"word\": \"Ablauf\",\r\n      \"end\": 6.18\r\n    }\r\n  ],\r\n  \"sha256\": \"329673c42e261fa617b2cd27076ae7d3978ae916a6768e84b46395cbd55f79cd\",\r\n  \"bytes\": 106028,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-erwin-archiv-02.mp3\"\r\n}\r\n",
+          "sha256": "af82b38a71d04298c3c4eadad4ce27e3ecce39840c249b36f70e4337fb8675ce"
+        }
+      }
+    }
+  }
+}

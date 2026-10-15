@@ -1,0 +1,716 @@
+{
+  "voiceId": "stadt-brigitte-mueller",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-brigitte-mueller-01",
+      "voiceId": "stadt-brigitte-mueller",
+      "actorId": "city-brigitte-mueller",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=0]",
+      "text": "Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.",
+      "english": "Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.",
+      "sourceSha256": "29b432a1c5e7c55498fcc84731883fda319b2c9e8374c61d34c6d57962f10254",
+      "profileId": "8ddc4332b0814aff81e841e116c3b765",
+      "referenceSha256": "5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398",
+      "referenceOriginalSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.",
+      "decode": {
+        "maxSpeechTokens": 424,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 179,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.83,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8",
+      "profileJsonSha256": "7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21",
+      "rawSha256": "f84fdd6eea09da204669f7bf38403622ac91a1f08ce567d7e352e6182591e3f6",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.1,
+      "renderSeconds": 9.05,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8ddc4332b0814aff81e841e116c3b765",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.8:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.14,
+      "truePeakDbtp": -2.23,
+      "asr": "Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt, sonst erklären Sie es am falschen Zaun.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt, sonst erklären Sie es am falschen Zaun.",
+          "transcribeSeconds": 10.3,
+          "words": [
+            {
+              "word": " Bevor",
+              "start": 0,
+              "end": 0.34
+            },
+            {
+              "word": " Sie",
+              "start": 0.34,
+              "end": 0.46
+            },
+            {
+              "word": " um",
+              "start": 0.46,
+              "end": 0.58
+            },
+            {
+              "word": " den",
+              "start": 0.58,
+              "end": 0.7
+            },
+            {
+              "word": " Bauzaun",
+              "start": 0.7,
+              "end": 1.2
+            },
+            {
+              "word": " gehen,",
+              "start": 1.2,
+              "end": 1.44
+            },
+            {
+              "word": " klären",
+              "start": 1.58,
+              "end": 1.84
+            },
+            {
+              "word": " Sie",
+              "start": 1.84,
+              "end": 1.98
+            },
+            {
+              "word": " bitte,",
+              "start": 1.98,
+              "end": 2.26
+            },
+            {
+              "word": " auf",
+              "start": 2.5,
+              "end": 2.78
+            },
+            {
+              "word": " welcher",
+              "start": 2.78,
+              "end": 3.08
+            },
+            {
+              "word": " Seite",
+              "start": 3.08,
+              "end": 3.38
+            },
+            {
+              "word": " Ihr",
+              "start": 3.38,
+              "end": 3.54
+            },
+            {
+              "word": " Anliegen",
+              "start": 3.54,
+              "end": 3.98
+            },
+            {
+              "word": " liegt,",
+              "start": 3.98,
+              "end": 4.3
+            },
+            {
+              "word": " sonst",
+              "start": 4.48,
+              "end": 4.74
+            },
+            {
+              "word": " erklären",
+              "start": 4.74,
+              "end": 5.16
+            },
+            {
+              "word": " Sie",
+              "start": 5.16,
+              "end": 5.34
+            },
+            {
+              "word": " es",
+              "start": 5.34,
+              "end": 5.46
+            },
+            {
+              "word": " am",
+              "start": 5.46,
+              "end": 5.58
+            },
+            {
+              "word": " falschen",
+              "start": 5.58,
+              "end": 5.96
+            },
+            {
+              "word": " Zaun.",
+              "start": 5.96,
+              "end": 6.34
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Bevor",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 6,
+          "word": "Sie",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 10,
+          "word": "um",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 13,
+          "word": "den",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 17,
+          "word": "Bauzaun",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 25,
+          "word": "gehen",
+          "end": 1.44
+        },
+        {
+          "at": 1.58,
+          "charIndex": 32,
+          "word": "klären",
+          "end": 1.84
+        },
+        {
+          "at": 1.84,
+          "charIndex": 39,
+          "word": "Sie",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 43,
+          "word": "bitte",
+          "end": 2.26
+        },
+        {
+          "at": 2.5,
+          "charIndex": 50,
+          "word": "auf",
+          "end": 2.78
+        },
+        {
+          "at": 2.78,
+          "charIndex": 54,
+          "word": "welcher",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 62,
+          "word": "Seite",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 68,
+          "word": "Ihr",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 72,
+          "word": "Anliegen",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 81,
+          "word": "liegt",
+          "end": 4.3
+        },
+        {
+          "at": 4.48,
+          "charIndex": 88,
+          "word": "Sonst",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 94,
+          "word": "erklären",
+          "end": 5.16
+        },
+        {
+          "at": 5.16,
+          "charIndex": 103,
+          "word": "Sie",
+          "end": 5.34
+        },
+        {
+          "at": 5.34,
+          "charIndex": 107,
+          "word": "es",
+          "end": 5.46
+        },
+        {
+          "at": 5.46,
+          "charIndex": 110,
+          "word": "am",
+          "end": 5.58
+        },
+        {
+          "at": 5.58,
+          "charIndex": 113,
+          "word": "falschen",
+          "end": 5.96
+        },
+        {
+          "at": 5.96,
+          "charIndex": 122,
+          "word": "Zaun",
+          "end": 6.34
+        }
+      ],
+      "sha256": "559df9a8f63e3d4c0a06ec9d228911c9e85bc1837bdc5b57ab9896e9808e252c",
+      "bytes": 114476,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-brigitte-mueller-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-brigitte-mueller-01",
+        "encodedSha256": "559df9a8f63e3d4c0a06ec9d228911c9e85bc1837bdc5b57ab9896e9808e252c"
+      }
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-02",
+      "voiceId": "stadt-brigitte-mueller",
+      "actorId": "city-brigitte-mueller",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=1]",
+      "text": "Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.",
+      "english": "The construction is not finished. But we can already file the list of reasons why it is not finished.",
+      "sourceSha256": "6aeea2014394edcd9a9d8f8c83984c13d0a6b060a8e3fe3ffd022dc8c03206ab",
+      "profileId": "8ddc4332b0814aff81e841e116c3b765",
+      "referenceSha256": "5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398",
+      "referenceOriginalSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 156,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.22,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8",
+      "profileJsonSha256": "7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21",
+      "rawSha256": "05099000e5fb756836cd94bc604e3c6b365dbb4f5a54f9a84645952b9c7480da",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.18,
+      "renderSeconds": 8.08,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8ddc4332b0814aff81e841e116c3b765",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.04:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.08,
+      "truePeakDbtp": -2.24,
+      "asr": "Die Baustelle ist nicht fertig, die Liste, warum sie nicht fertig ist, können wir aber schon abheften.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Baustelle ist nicht fertig, die Liste, warum sie nicht fertig ist, können wir aber schon abheften.",
+          "transcribeSeconds": 15.75,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.14
+            },
+            {
+              "word": " Baustelle",
+              "start": 0.14,
+              "end": 0.62
+            },
+            {
+              "word": " ist",
+              "start": 0.62,
+              "end": 0.78
+            },
+            {
+              "word": " nicht",
+              "start": 0.78,
+              "end": 0.96
+            },
+            {
+              "word": " fertig,",
+              "start": 0.96,
+              "end": 1.42
+            },
+            {
+              "word": " die",
+              "start": 1.74,
+              "end": 2.04
+            },
+            {
+              "word": " Liste,",
+              "start": 2.04,
+              "end": 2.4
+            },
+            {
+              "word": " warum",
+              "start": 2.48,
+              "end": 2.66
+            },
+            {
+              "word": " sie",
+              "start": 2.66,
+              "end": 2.86
+            },
+            {
+              "word": " nicht",
+              "start": 2.86,
+              "end": 3.06
+            },
+            {
+              "word": " fertig",
+              "start": 3.06,
+              "end": 3.4
+            },
+            {
+              "word": " ist,",
+              "start": 3.4,
+              "end": 3.76
+            },
+            {
+              "word": " können",
+              "start": 4.04,
+              "end": 4.24
+            },
+            {
+              "word": " wir",
+              "start": 4.24,
+              "end": 4.42
+            },
+            {
+              "word": " aber",
+              "start": 4.42,
+              "end": 4.58
+            },
+            {
+              "word": " schon",
+              "start": 4.58,
+              "end": 4.76
+            },
+            {
+              "word": " abheften.",
+              "start": 4.76,
+              "end": 5.3
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.14
+        },
+        {
+          "at": 0.14,
+          "charIndex": 4,
+          "word": "Baustelle",
+          "end": 0.62
+        },
+        {
+          "at": 0.62,
+          "charIndex": 14,
+          "word": "ist",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 18,
+          "word": "nicht",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 24,
+          "word": "fertig",
+          "end": 1.42
+        },
+        {
+          "at": 1.74,
+          "charIndex": 32,
+          "word": "Die",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 36,
+          "word": "Liste",
+          "end": 2.4
+        },
+        {
+          "at": 2.48,
+          "charIndex": 43,
+          "word": "warum",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 49,
+          "word": "sie",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 53,
+          "word": "nicht",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 59,
+          "word": "fertig",
+          "end": 3.4
+        },
+        {
+          "at": 3.4,
+          "charIndex": 66,
+          "word": "ist",
+          "end": 3.76
+        },
+        {
+          "at": 4.04,
+          "charIndex": 71,
+          "word": "können",
+          "end": 4.24
+        },
+        {
+          "at": 4.24,
+          "charIndex": 78,
+          "word": "wir",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 82,
+          "word": "aber",
+          "end": 4.58
+        },
+        {
+          "at": 4.58,
+          "charIndex": 87,
+          "word": "schon",
+          "end": 4.76
+        },
+        {
+          "at": 4.76,
+          "charIndex": 93,
+          "word": "abheften",
+          "end": 5.3
+        }
+      ],
+      "sha256": "b1dcc3766bfe1cabad83e5c10f889f148e50667153a41f42dc484bb02dda5a37",
+      "bytes": 99884,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-brigitte-mueller-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-brigitte-mueller-02",
+        "encodedSha256": "b1dcc3766bfe1cabad83e5c10f889f148e50667153a41f42dc484bb02dda5a37"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-brigitte-mueller-03",
+      "voiceId": "stadt-brigitte-mueller",
+      "actorId": "city-brigitte-mueller",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=berlin,slot=0]",
+      "text": "Before Sie um den Bauzaun gehen, klären Sie bitte, on which side Ihr Anliegen liegt. Otherwise erklären Sie es am falschen Zaun.",
+      "english": "Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.",
+      "sourceSha256": "e7350530698695e7b40e7cf34999b474b58e15bd0947dcabefd5e6ae096f2891",
+      "profileId": "8ddc4332b0814aff81e841e116c3b765",
+      "referenceSha256": "5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398",
+      "referenceOriginalSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-04",
+      "voiceId": "stadt-brigitte-mueller",
+      "actorId": "city-brigitte-mueller",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=berlin,slot=1]",
+      "text": "Die Baustelle is not finished. Die Liste, why sie nicht fertig ist, können wir aber schon file away.",
+      "english": "The construction is not finished. But we can already file the list of reasons why it is not finished.",
+      "sourceSha256": "e0648fd0e27a61e32ad9594e1b8e1e6acd3be217b1b2c2b7452fd3fc00d9709e",
+      "profileId": "8ddc4332b0814aff81e841e116c3b765",
+      "referenceSha256": "5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398",
+      "referenceOriginalSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-brigitte-mueller-01\",\r\n      \"voiceId\": \"stadt-brigitte-mueller\",\r\n      \"actorId\": \"city-brigitte-mueller\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.\",\r\n      \"english\": \"Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.\",\r\n      \"sourceSha256\": \"29b432a1c5e7c55498fcc84731883fda319b2c9e8374c61d34c6d57962f10254\",\r\n      \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n      \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n      \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-brigitte-mueller-02\",\r\n      \"voiceId\": \"stadt-brigitte-mueller\",\r\n      \"actorId\": \"city-brigitte-mueller\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n      \"english\": \"The construction is not finished. But we can already file the list of reasons why it is not finished.\",\r\n      \"sourceSha256\": \"6aeea2014394edcd9a9d8f8c83984c13d0a6b060a8e3fe3ffd022dc8c03206ab\",\r\n      \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n      \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n      \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-brigitte-mueller-03\",\r\n      \"voiceId\": \"stadt-brigitte-mueller\",\r\n      \"actorId\": \"city-brigitte-mueller\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Before Sie um den Bauzaun gehen, klären Sie bitte, on which side Ihr Anliegen liegt. Otherwise erklären Sie es am falschen Zaun.\",\r\n      \"english\": \"Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.\",\r\n      \"sourceSha256\": \"e7350530698695e7b40e7cf34999b474b58e15bd0947dcabefd5e6ae096f2891\",\r\n      \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n      \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n      \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-brigitte-mueller-04\",\r\n      \"voiceId\": \"stadt-brigitte-mueller\",\r\n      \"actorId\": \"city-brigitte-mueller\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Die Baustelle is not finished. Die Liste, why sie nicht fertig ist, können wir aber schon file away.\",\r\n      \"english\": \"The construction is not finished. But we can already file the list of reasons why it is not finished.\",\r\n      \"sourceSha256\": \"e0648fd0e27a61e32ad9594e1b8e1e6acd3be217b1b2c2b7452fd3fc00d9709e\",\r\n      \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n      \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n      \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8"
+    },
+    "takes": {
+      "stadt-brigitte-mueller-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-brigitte-mueller-01\",\r\n  \"voiceId\": \"stadt-brigitte-mueller\",\r\n  \"actorId\": \"city-brigitte-mueller\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.\",\r\n  \"english\": \"Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.\",\r\n  \"sourceSha256\": \"29b432a1c5e7c55498fcc84731883fda319b2c9e8374c61d34c6d57962f10254\",\r\n  \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n  \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n  \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 179,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.83,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8\",\r\n  \"profileJsonSha256\": \"7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21\",\r\n  \"rawSha256\": \"f84fdd6eea09da204669f7bf38403622ac91a1f08ce567d7e352e6182591e3f6\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.1,\r\n  \"renderSeconds\": 9.05,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "273d6b3f6998e8367d9ea11d879b3738394160188eeb13cbd8477775543063ff"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-brigitte-mueller-01\",\r\n  \"voiceId\": \"stadt-brigitte-mueller\",\r\n  \"actorId\": \"city-brigitte-mueller\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.\",\r\n  \"english\": \"Before going around the construction fence, please establish which side your concern belongs on. Otherwise you will explain it at the wrong fence.\",\r\n  \"sourceSha256\": \"29b432a1c5e7c55498fcc84731883fda319b2c9e8374c61d34c6d57962f10254\",\r\n  \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n  \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n  \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 179,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.83,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8\",\r\n  \"profileJsonSha256\": \"7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21\",\r\n  \"rawSha256\": \"f84fdd6eea09da204669f7bf38403622ac91a1f08ce567d7e352e6182591e3f6\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.1,\r\n  \"renderSeconds\": 9.05,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.8:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.14,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt, sonst erklären Sie es am falschen Zaun.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt, sonst erklären Sie es am falschen Zaun.\",\r\n      \"transcribeSeconds\": 10.3,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Bevor\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.34\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.34,\r\n          \"end\": 0.46\r\n        },\r\n        {\r\n          \"word\": \" um\",\r\n          \"start\": 0.46,\r\n          \"end\": 0.58\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 0.58,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" Bauzaun\",\r\n          \"start\": 0.7,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" gehen,\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.44\r\n        },\r\n        {\r\n          \"word\": \" klären\",\r\n          \"start\": 1.58,\r\n          \"end\": 1.84\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.84,\r\n          \"end\": 1.98\r\n        },\r\n        {\r\n          \"word\": \" bitte,\",\r\n          \"start\": 1.98,\r\n          \"end\": 2.26\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 2.5,\r\n          \"end\": 2.78\r\n        },\r\n        {\r\n          \"word\": \" welcher\",\r\n          \"start\": 2.78,\r\n          \"end\": 3.08\r\n        },\r\n        {\r\n          \"word\": \" Seite\",\r\n          \"start\": 3.08,\r\n          \"end\": 3.38\r\n        },\r\n        {\r\n          \"word\": \" Ihr\",\r\n          \"start\": 3.38,\r\n          \"end\": 3.54\r\n        },\r\n        {\r\n          \"word\": \" Anliegen\",\r\n          \"start\": 3.54,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" liegt,\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.3\r\n        },\r\n        {\r\n          \"word\": \" sonst\",\r\n          \"start\": 4.48,\r\n          \"end\": 4.74\r\n        },\r\n        {\r\n          \"word\": \" erklären\",\r\n          \"start\": 4.74,\r\n          \"end\": 5.16\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 5.16,\r\n          \"end\": 5.34\r\n        },\r\n        {\r\n          \"word\": \" es\",\r\n          \"start\": 5.34,\r\n          \"end\": 5.46\r\n        },\r\n        {\r\n          \"word\": \" am\",\r\n          \"start\": 5.46,\r\n          \"end\": 5.58\r\n        },\r\n        {\r\n          \"word\": \" falschen\",\r\n          \"start\": 5.58,\r\n          \"end\": 5.96\r\n        },\r\n        {\r\n          \"word\": \" Zaun.\",\r\n          \"start\": 5.96,\r\n          \"end\": 6.34\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Bevor\",\r\n      \"end\": 0.34\r\n    },\r\n    {\r\n      \"at\": 0.34,\r\n      \"charIndex\": 6,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.46\r\n    },\r\n    {\r\n      \"at\": 0.46,\r\n      \"charIndex\": 10,\r\n      \"word\": \"um\",\r\n      \"end\": 0.58\r\n    },\r\n    {\r\n      \"at\": 0.58,\r\n      \"charIndex\": 13,\r\n      \"word\": \"den\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 17,\r\n      \"word\": \"Bauzaun\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 25,\r\n      \"word\": \"gehen\",\r\n      \"end\": 1.44\r\n    },\r\n    {\r\n      \"at\": 1.58,\r\n      \"charIndex\": 32,\r\n      \"word\": \"klären\",\r\n      \"end\": 1.84\r\n    },\r\n    {\r\n      \"at\": 1.84,\r\n      \"charIndex\": 39,\r\n      \"word\": \"Sie\",\r\n      \"end\": 1.98\r\n    },\r\n    {\r\n      \"at\": 1.98,\r\n      \"charIndex\": 43,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.26\r\n    },\r\n    {\r\n      \"at\": 2.5,\r\n      \"charIndex\": 50,\r\n      \"word\": \"auf\",\r\n      \"end\": 2.78\r\n    },\r\n    {\r\n      \"at\": 2.78,\r\n      \"charIndex\": 54,\r\n      \"word\": \"welcher\",\r\n      \"end\": 3.08\r\n    },\r\n    {\r\n      \"at\": 3.08,\r\n      \"charIndex\": 62,\r\n      \"word\": \"Seite\",\r\n      \"end\": 3.38\r\n    },\r\n    {\r\n      \"at\": 3.38,\r\n      \"charIndex\": 68,\r\n      \"word\": \"Ihr\",\r\n      \"end\": 3.54\r\n    },\r\n    {\r\n      \"at\": 3.54,\r\n      \"charIndex\": 72,\r\n      \"word\": \"Anliegen\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 81,\r\n      \"word\": \"liegt\",\r\n      \"end\": 4.3\r\n    },\r\n    {\r\n      \"at\": 4.48,\r\n      \"charIndex\": 88,\r\n      \"word\": \"Sonst\",\r\n      \"end\": 4.74\r\n    },\r\n    {\r\n      \"at\": 4.74,\r\n      \"charIndex\": 94,\r\n      \"word\": \"erklären\",\r\n      \"end\": 5.16\r\n    },\r\n    {\r\n      \"at\": 5.16,\r\n      \"charIndex\": 103,\r\n      \"word\": \"Sie\",\r\n      \"end\": 5.34\r\n    },\r\n    {\r\n      \"at\": 5.34,\r\n      \"charIndex\": 107,\r\n      \"word\": \"es\",\r\n      \"end\": 5.46\r\n    },\r\n    {\r\n      \"at\": 5.46,\r\n      \"charIndex\": 110,\r\n      \"word\": \"am\",\r\n      \"end\": 5.58\r\n    },\r\n    {\r\n      \"at\": 5.58,\r\n      \"charIndex\": 113,\r\n      \"word\": \"falschen\",\r\n      \"end\": 5.96\r\n    },\r\n    {\r\n      \"at\": 5.96,\r\n      \"charIndex\": 122,\r\n      \"word\": \"Zaun\",\r\n      \"end\": 6.34\r\n    }\r\n  ],\r\n  \"sha256\": \"559df9a8f63e3d4c0a06ec9d228911c9e85bc1837bdc5b57ab9896e9808e252c\",\r\n  \"bytes\": 114476,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-brigitte-mueller-01.mp3\"\r\n}\r\n",
+          "sha256": "e6390becaeb0ad1c9513534716ada5538918a16b86891fc673b0e803250e40b3"
+        }
+      },
+      "stadt-brigitte-mueller-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-brigitte-mueller-02\",\r\n  \"voiceId\": \"stadt-brigitte-mueller\",\r\n  \"actorId\": \"city-brigitte-mueller\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n  \"english\": \"The construction is not finished. But we can already file the list of reasons why it is not finished.\",\r\n  \"sourceSha256\": \"6aeea2014394edcd9a9d8f8c83984c13d0a6b060a8e3fe3ffd022dc8c03206ab\",\r\n  \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n  \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n  \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 156,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.22,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8\",\r\n  \"profileJsonSha256\": \"7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21\",\r\n  \"rawSha256\": \"05099000e5fb756836cd94bc604e3c6b365dbb4f5a54f9a84645952b9c7480da\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.18,\r\n  \"renderSeconds\": 8.08,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "d40aca009c953534255074d91fc4b9f38a1501f3428a16a5ba6abb31890d12e1"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-brigitte-mueller-02\",\r\n  \"voiceId\": \"stadt-brigitte-mueller\",\r\n  \"actorId\": \"city-brigitte-mueller\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-brigitte-mueller].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n  \"english\": \"The construction is not finished. But we can already file the list of reasons why it is not finished.\",\r\n  \"sourceSha256\": \"6aeea2014394edcd9a9d8f8c83984c13d0a6b060a8e3fe3ffd022dc8c03206ab\",\r\n  \"profileId\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n  \"referenceSha256\": \"5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398\",\r\n  \"referenceOriginalSha256\": \"6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 156,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.22,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"be7c4c255f57871f6785d5cbc1adc87ca3a1abafec34225a1fdda598a34321c8\",\r\n  \"profileJsonSha256\": \"7152e68dddc216d4033e3a52c6ca874df72bc518f4f1956588415bc23852ac21\",\r\n  \"rawSha256\": \"05099000e5fb756836cd94bc604e3c6b365dbb4f5a54f9a84645952b9c7480da\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.18,\r\n  \"renderSeconds\": 8.08,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8ddc4332b0814aff81e841e116c3b765\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.04:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.08,\r\n  \"truePeakDbtp\": -2.24,\r\n  \"asr\": \"Die Baustelle ist nicht fertig, die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Baustelle ist nicht fertig, die Liste, warum sie nicht fertig ist, können wir aber schon abheften.\",\r\n      \"transcribeSeconds\": 15.75,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.14\r\n        },\r\n        {\r\n          \"word\": \" Baustelle\",\r\n          \"start\": 0.14,\r\n          \"end\": 0.62\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 0.62,\r\n          \"end\": 0.78\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 0.78,\r\n          \"end\": 0.96\r\n        },\r\n        {\r\n          \"word\": \" fertig,\",\r\n          \"start\": 0.96,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 1.74,\r\n          \"end\": 2.04\r\n        },\r\n        {\r\n          \"word\": \" Liste,\",\r\n          \"start\": 2.04,\r\n          \"end\": 2.4\r\n        },\r\n        {\r\n          \"word\": \" warum\",\r\n          \"start\": 2.48,\r\n          \"end\": 2.66\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 2.66,\r\n          \"end\": 2.86\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 2.86,\r\n          \"end\": 3.06\r\n        },\r\n        {\r\n          \"word\": \" fertig\",\r\n          \"start\": 3.06,\r\n          \"end\": 3.4\r\n        },\r\n        {\r\n          \"word\": \" ist,\",\r\n          \"start\": 3.4,\r\n          \"end\": 3.76\r\n        },\r\n        {\r\n          \"word\": \" können\",\r\n          \"start\": 4.04,\r\n          \"end\": 4.24\r\n        },\r\n        {\r\n          \"word\": \" wir\",\r\n          \"start\": 4.24,\r\n          \"end\": 4.42\r\n        },\r\n        {\r\n          \"word\": \" aber\",\r\n          \"start\": 4.42,\r\n          \"end\": 4.58\r\n        },\r\n        {\r\n          \"word\": \" schon\",\r\n          \"start\": 4.58,\r\n          \"end\": 4.76\r\n        },\r\n        {\r\n          \"word\": \" abheften.\",\r\n          \"start\": 4.76,\r\n          \"end\": 5.3\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.14\r\n    },\r\n    {\r\n      \"at\": 0.14,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Baustelle\",\r\n      \"end\": 0.62\r\n    },\r\n    {\r\n      \"at\": 0.62,\r\n      \"charIndex\": 14,\r\n      \"word\": \"ist\",\r\n      \"end\": 0.78\r\n    },\r\n    {\r\n      \"at\": 0.78,\r\n      \"charIndex\": 18,\r\n      \"word\": \"nicht\",\r\n      \"end\": 0.96\r\n    },\r\n    {\r\n      \"at\": 0.96,\r\n      \"charIndex\": 24,\r\n      \"word\": \"fertig\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.74,\r\n      \"charIndex\": 32,\r\n      \"word\": \"Die\",\r\n      \"end\": 2.04\r\n    },\r\n    {\r\n      \"at\": 2.04,\r\n      \"charIndex\": 36,\r\n      \"word\": \"Liste\",\r\n      \"end\": 2.4\r\n    },\r\n    {\r\n      \"at\": 2.48,\r\n      \"charIndex\": 43,\r\n      \"word\": \"warum\",\r\n      \"end\": 2.66\r\n    },\r\n    {\r\n      \"at\": 2.66,\r\n      \"charIndex\": 49,\r\n      \"word\": \"sie\",\r\n      \"end\": 2.86\r\n    },\r\n    {\r\n      \"at\": 2.86,\r\n      \"charIndex\": 53,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.06\r\n    },\r\n    {\r\n      \"at\": 3.06,\r\n      \"charIndex\": 59,\r\n      \"word\": \"fertig\",\r\n      \"end\": 3.4\r\n    },\r\n    {\r\n      \"at\": 3.4,\r\n      \"charIndex\": 66,\r\n      \"word\": \"ist\",\r\n      \"end\": 3.76\r\n    },\r\n    {\r\n      \"at\": 4.04,\r\n      \"charIndex\": 71,\r\n      \"word\": \"können\",\r\n      \"end\": 4.24\r\n    },\r\n    {\r\n      \"at\": 4.24,\r\n      \"charIndex\": 78,\r\n      \"word\": \"wir\",\r\n      \"end\": 4.42\r\n    },\r\n    {\r\n      \"at\": 4.42,\r\n      \"charIndex\": 82,\r\n      \"word\": \"aber\",\r\n      \"end\": 4.58\r\n    },\r\n    {\r\n      \"at\": 4.58,\r\n      \"charIndex\": 87,\r\n      \"word\": \"schon\",\r\n      \"end\": 4.76\r\n    },\r\n    {\r\n      \"at\": 4.76,\r\n      \"charIndex\": 93,\r\n      \"word\": \"abheften\",\r\n      \"end\": 5.3\r\n    }\r\n  ],\r\n  \"sha256\": \"b1dcc3766bfe1cabad83e5c10f889f148e50667153a41f42dc484bb02dda5a37\",\r\n  \"bytes\": 99884,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-brigitte-mueller-02.mp3\"\r\n}\r\n",
+          "sha256": "f9c67c026af1422e97cd8db7d8e41e5dacc374c3e249a72654cdf984c38ec92e"
+        }
+      }
+    }
+  }
+}

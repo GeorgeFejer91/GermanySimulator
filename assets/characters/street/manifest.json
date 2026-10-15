@@ -1,0 +1,1077 @@
+{
+  "schemaVersion": 1,
+  "characters": {
+    "stadt-klaus-dieter-klein": {
+      "id": "stadt-klaus-dieter-klein",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-klaus-dieter-klein",
+        "city-klaus-dieter-klein"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-klaus-dieter-klein-standing.webp",
+        "sha256": "3a700d7693101d2de6105677770acab9a7d3fb4268314b1893d84f4b8d927796",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-brigitte-mueller": {
+      "id": "stadt-brigitte-mueller",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-brigitte-mueller",
+        "city-brigitte-mueller"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-brigitte-mueller-standing.webp",
+        "sha256": "76a5a5c80757f0bb2884d3c521ee912a4fa89eca42f349bd1c5baec3eb43fa46",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-wolfgang-schulz": {
+      "id": "stadt-wolfgang-schulz",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-wolfgang-schulz",
+        "city-wolfgang-schulz"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-wolfgang-schulz-standing.webp",
+        "sha256": "6381a0bd8a8678ebe72684f7ea6597093b2577dacc462b67ab7dc13a98dcf8e0",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-ursula-neumann": {
+      "id": "stadt-ursula-neumann",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-ursula-neumann",
+        "city-ursula-neumann"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-ursula-neumann-standing.webp",
+        "sha256": "7aded52e8a8f4196531273181153fb22c557cacf7351e5d50dd614bf45e7a787",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-manfred-din": {
+      "id": "stadt-manfred-din",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-manfred-din",
+        "city-manfred-din"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-manfred-din-standing.webp",
+        "sha256": "b4aa9671a9c330ac89d21336bfe7463fe221666df0841ca7c73a767f13065841",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-irmgard-aktenstapel": {
+      "id": "stadt-irmgard-aktenstapel",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-irmgard-aktenstapel",
+        "city-irmgard-aktenstapel"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+        "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-guenther-tuev": {
+      "id": "stadt-guenther-tuev",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-guenther-tuev",
+        "city-guenther-tuev"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-guenther-tuev-standing.webp",
+        "sha256": "76b88f78e3841b335a4e8df49fbd442cbd5d38b4be0e1daad3efd6a4da46a1e6",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-hannelore-sparkasse": {
+      "id": "stadt-hannelore-sparkasse",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-hannelore-sparkasse",
+        "city-hannelore-sparkasse"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+        "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-brigitte-bueroklammer": {
+      "id": "crowd-brigitte-bueroklammer",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-brigitte-bueroklammer"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-brigitte-bueroklammer-standing.webp",
+        "sha256": "19812a78230f7358704f389be2f20b1cc7c5b9ad8ddebd381470213292d0073c",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-dietmar-din-norm": {
+      "id": "crowd-dietmar-din-norm",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-dietmar-din-norm",
+        "street-dietmar-din-norm"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-dietmar-din-norm-standing.webp",
+        "sha256": "fd483674a70709ea0d77f1979da8e2c9505d8325152df8522049fc6b1ff7208c",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-guenther-gartenzaun": {
+      "id": "crowd-guenther-gartenzaun",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-guenther-gartenzaun"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-guenther-gartenzaun-standing.webp",
+        "sha256": "b97baab24b096cb9872f2b637c39d7b32a4f8339d7e3d1d2730df76829fb2c14",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-hildegard-brotzeit": {
+      "id": "crowd-hildegard-brotzeit",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-hildegard-brotzeit"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-hildegard-brotzeit-standing.webp",
+        "sha256": "f9d7fcf65e6c3f33ac20adfaef4dfee01908683c756b91d62bd3d3e1e9a65747",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-horst-hausordnung": {
+      "id": "crowd-horst-hausordnung",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-horst-hausordnung",
+        "street-horst-hausordnung"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-horst-hausordnung-standing.webp",
+        "sha256": "6122902b7f985027b6c280b0e7a5ae148469d49a0f6667338891b207df25cdac",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-klaus-dieter-knoedel": {
+      "id": "crowd-klaus-dieter-knoedel",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-klaus-dieter-knoedel"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-klaus-dieter-knoedel-standing.webp",
+        "sha256": "e5c69b46f102fffa3da5435dfd38897e24fff0228c91960618141a5743e26af1",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-waltraud-wartemarke": {
+      "id": "crowd-waltraud-wartemarke",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-waltraud-wartemarke",
+        "street-waltraud-wartemarke"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-waltraud-wartemarke-standing.webp",
+        "sha256": "c0c4613dca04f2e5e3bd8a47d36efd3dc89c75e5d3410b2fd83cfc53ad0457ca",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-dietmar-schulz": {
+      "id": "quiz-dietmar-schulz",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-dietmar-schulz",
+        "dietmar-schulz"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-dietmar-schulz-standing.webp",
+        "sha256": "f6646f090158e478f1370812a458fc1d7bae9b9b12babaae3dcf717e06ac144c",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-gisela-becker": {
+      "id": "quiz-gisela-becker",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-gisela-becker",
+        "gisela-becker"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-gisela-becker-standing.webp",
+        "sha256": "44b36e0d7c337758c52e10007ffe27ec6bd6f470b6368e9c0c0f0c41e8808021",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-hartmut-keller": {
+      "id": "quiz-hartmut-keller",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-hartmut-keller",
+        "hartmut-keller"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-hartmut-keller-standing.webp",
+        "sha256": "aeb6e9d31040be76a9fb7f6e6dc9af4b8e58737a485374517ce6ba2502048e65",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-heike-hoffmann": {
+      "id": "quiz-heike-hoffmann",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-heike-hoffmann",
+        "heike-hoffmann"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-heike-hoffmann-standing.webp",
+        "sha256": "589063cdfc9f8bd5f8e45135d890bc8b2ee6501d43d81f91a98f15409c22b6f1",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-klaus-dieter-wagner": {
+      "id": "quiz-klaus-dieter-wagner",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-klaus-dieter-wagner",
+        "klaus-dieter-wagner"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-klaus-dieter-wagner-standing.webp",
+        "sha256": "97ed099868dd81a7dcf1a5e96503f0aba59d1b785041390a93dfb921e401d641",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-ruediger-schmidt": {
+      "id": "quiz-ruediger-schmidt",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-ruediger-schmidt",
+        "ruediger-schmidt"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-ruediger-schmidt-standing.webp",
+        "sha256": "ee73c757567da14981982a2feaeee2e0f892cd0183bbe115ce122b4d1655b378",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-sabine-krueger": {
+      "id": "quiz-sabine-krueger",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-sabine-krueger",
+        "sabine-krueger"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-sabine-krueger-standing.webp",
+        "sha256": "1718c7afba11cbc5eebd580c3ab8e881ca137133194c2e0d772a76b9a880a352",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-uwe-moeller": {
+      "id": "quiz-uwe-moeller",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-uwe-moeller",
+        "uwe-moeller"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-uwe-moeller-standing.webp",
+        "sha256": "74323bcd9b16b71946681352c5fa05ebdc8b32396f3d1b74cb9803fcfc631213",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "jwd-ede-einbruch": {
+      "id": "jwd-ede-einbruch",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "jwd-ede-einbruch",
+        "jwd-burglar"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/jwd-ede-einbruch-standing.webp",
+        "sha256": "bb2fb08ee74d468535d139bf34677a3aaabadfb9d8f65230c57bee5357ce8eb4",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "spieler-hans-peter-mustermann": {
+      "id": "spieler-hans-peter-mustermann",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.5,
+      "aliases": [
+        "spieler-hans-peter-mustermann",
+        "player-default"
+      ],
+      "occlusionSamples": [
+        [
+          64,
+          23
+        ],
+        [
+          48,
+          43
+        ],
+        [
+          80,
+          43
+        ],
+        [
+          64,
+          72
+        ],
+        [
+          50,
+          78
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          30,
+          94
+        ],
+        [
+          98,
+          94
+        ],
+        [
+          53,
+          110
+        ],
+        [
+          75,
+          110
+        ],
+        [
+          48,
+          142
+        ],
+        [
+          80,
+          142
+        ]
+      ],
+      "standing": {
+        "file": "./assets/characters/street/spieler-hans-peter-mustermann-standing.webp",
+        "sha256": "6bb08877d175bb4c5f41c59a654fdf6e40a21f0c991d25b91c80174f92811cde",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "polizei-heinrich-wachtmeister": {
+      "id": "polizei-heinrich-wachtmeister",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.56,
+      "aliases": [
+        "polizei-heinrich-wachtmeister"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/polizei-heinrich-wachtmeister-standing.webp",
+        "sha256": "37bbe143f5965c688555a5304f8a5d5b2b3e18ed05299e6df72ba3c929b0c00d",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-ute-ruhe": {
+      "id": "stadt-ute-ruhe",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-ute-ruhe",
+        "city-ute-ruhe"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-ute-ruhe-standing.webp",
+        "sha256": "bb2717c1b5e1b3cc0afc84d22c3831fc12da103112b8d196c7c073ce083fc203",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-baerbel-brezel": {
+      "id": "crowd-baerbel-brezel",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-baerbel-brezel"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-baerbel-brezel-standing.webp",
+        "sha256": "0c096be166423c463bdf9192928b08cc64145c756c0701500fe0ead9e77efee2",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-irmgard-aktenordner": {
+      "id": "crowd-irmgard-aktenordner",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-irmgard-aktenordner"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-irmgard-aktenordner-standing.webp",
+        "sha256": "8a6b7066a5c81e5365b8f601a80755276d9aae40b59809a0e6e83589eb81e0b1",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "quiz-brigitte-neumann": {
+      "id": "quiz-brigitte-neumann",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "quiz-brigitte-neumann",
+        "brigitte-neumann"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/quiz-brigitte-neumann-standing.webp",
+        "sha256": "df33b590718ab69d6c01bcf19c9f3001346be0d294759592d9ca61a52dfa05e2",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-karl-heinz-post": {
+      "id": "stadt-karl-heinz-post",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-karl-heinz-post",
+        "city-karl-heinz-post"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-karl-heinz-post-standing.webp",
+        "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-herbert-rasenaufsicht": {
+      "id": "stadt-herbert-rasenaufsicht",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-herbert-rasenaufsicht",
+        "city-herbert-rasenaufsicht"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-herbert-rasenaufsicht-standing.webp",
+        "sha256": "0132e764e393d9376a3a2bae101490e40af74cc9e53aa9385eb354d421795b65",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-waltraud-ordnung": {
+      "id": "stadt-waltraud-ordnung",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-waltraud-ordnung",
+        "city-waltraud-ordnung"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-waltraud-ordnung-standing.webp",
+        "sha256": "3160fd37025e0a88ece7221cb8b8692ae7a048a089cd2349ea6deb5d51c40512",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-erwin-archiv": {
+      "id": "stadt-erwin-archiv",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-erwin-archiv",
+        "city-erwin-archiv"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-erwin-archiv-standing.webp",
+        "sha256": "9354ae7f338d78b5f1dd0ba80229f52550694ab3cf06a58b43381bc34ec3745f",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-renate-termin": {
+      "id": "stadt-renate-termin",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-renate-termin",
+        "city-renate-termin"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-renate-termin-standing.webp",
+        "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-heinz-mietnachweis": {
+      "id": "stadt-heinz-mietnachweis",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-heinz-mietnachweis",
+        "city-heinz-mietnachweis"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-heinz-mietnachweis-standing.webp",
+        "sha256": "d5ee469f4ac830b9fd6e334cfa8b80027b3956cbe0790f1201f11ca8e7a5c2de",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-monika-zebra": {
+      "id": "stadt-monika-zebra",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-monika-zebra",
+        "city-monika-zebra"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-monika-zebra-standing.webp",
+        "sha256": "a36c61d1412fa77a7ecc7cf6431cbd12a137313b87015245b2008a3b2a60d92a",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-joachim-fundsache": {
+      "id": "stadt-joachim-fundsache",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-joachim-fundsache",
+        "city-joachim-fundsache"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-joachim-fundsache-standing.webp",
+        "sha256": "3c755601eb6d186a2a4d02393e1f00529e7b9668549d80e3d3e880306cca72eb",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-norbert-faxrolle": {
+      "id": "stadt-norbert-faxrolle",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-norbert-faxrolle",
+        "city-norbert-faxrolle"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-norbert-faxrolle-standing.webp",
+        "sha256": "22d7876037a35b1f47e1aef955df5e27d23befb9161940f251220b349188d05a",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-edeltraud-trennung": {
+      "id": "stadt-edeltraud-trennung",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-edeltraud-trennung",
+        "city-edeltraud-trennung"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-edeltraud-trennung-standing.webp",
+        "sha256": "2990aea2b4525149c1092497dbfe3184da3fa15d17a2a5a97b668d3428c7938f",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-elfriede-eingabe": {
+      "id": "crowd-elfriede-eingabe",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-elfriede-eingabe"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-elfriede-eingabe-standing.webp",
+        "sha256": "754a9633ddb3a3f5c1b720039d53ec5b7ce4dbb9f935f7ba1cd4b7e5321a9852",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-manfred-mittagsruhe": {
+      "id": "crowd-manfred-mittagsruhe",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-manfred-mittagsruhe"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-manfred-mittagsruhe-standing.webp",
+        "sha256": "f59265531430c17131fccc29321515a927f2d80c34e5887054688d9d41d9bd70",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-ruediger-rasenkante": {
+      "id": "crowd-ruediger-rasenkante",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-ruediger-rasenkante"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-ruediger-rasenkante-standing.webp",
+        "sha256": "6d02f04c68241bda3da1363154c2c7b1cd9b049269286e3a617f2958bd0a36e4",
+        "width": 128,
+        "height": 160
+      }
+    }
+  }
+}

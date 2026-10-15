@@ -1,0 +1,716 @@
+{
+  "voiceId": "stadt-edeltraud-trennung",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-edeltraud-trennung-01",
+      "voiceId": "stadt-edeltraud-trennung",
+      "actorId": "city-edeltraud-trennung",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=0]",
+      "text": "Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.",
+      "english": "Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.",
+      "sourceSha256": "8e2b263452a797ef3ec8cc7a1345c4f74b2e2f584b6ab16129c3bab37a9ee051",
+      "profileId": "5590c81828c04845822da28d02d84689",
+      "referenceSha256": "2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4",
+      "referenceOriginalSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.",
+      "decode": {
+        "maxSpeechTokens": 376,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 193,
+        "eosReached": true,
+        "t3InferenceSeconds": 10.78,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990",
+      "profileJsonSha256": "047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c",
+      "rawSha256": "8ba05b5779c81b16c65212612ccea73e2945fb822368be3bb6d449abf79e1747",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.68,
+      "renderSeconds": 12.25,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "5590c81828c04845822da28d02d84689",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.4:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.12,
+      "truePeakDbtp": -2.23,
+      "asr": "Die Terminfrage und die Baustellenfrage bitte getrennt, sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Terminfrage und die Baustellenfrage bitte getrennt, sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.",
+          "transcribeSeconds": 10.08,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.2
+            },
+            {
+              "word": " Terminfrage",
+              "start": 0.2,
+              "end": 0.96
+            },
+            {
+              "word": " und",
+              "start": 0.96,
+              "end": 1.22
+            },
+            {
+              "word": " die",
+              "start": 1.22,
+              "end": 1.34
+            },
+            {
+              "word": " Baustellenfrage",
+              "start": 1.34,
+              "end": 2.16
+            },
+            {
+              "word": " bitte",
+              "start": 2.16,
+              "end": 2.48
+            },
+            {
+              "word": " getrennt,",
+              "start": 2.48,
+              "end": 3.04
+            },
+            {
+              "word": " sonst",
+              "start": 3.32,
+              "end": 3.82
+            },
+            {
+              "word": " erzählen",
+              "start": 3.82,
+              "end": 4.4
+            },
+            {
+              "word": " Sie",
+              "start": 4.4,
+              "end": 4.52
+            },
+            {
+              "word": " dem",
+              "start": 4.52,
+              "end": 4.68
+            },
+            {
+              "word": " Kalender,",
+              "start": 4.68,
+              "end": 5.2
+            },
+            {
+              "word": " warum",
+              "start": 5.4,
+              "end": 5.6
+            },
+            {
+              "word": " der",
+              "start": 5.6,
+              "end": 5.82
+            },
+            {
+              "word": " Bauzaun",
+              "start": 5.82,
+              "end": 6.32
+            },
+            {
+              "word": " im",
+              "start": 6.32,
+              "end": 6.48
+            },
+            {
+              "word": " Weg",
+              "start": 6.48,
+              "end": 6.6
+            },
+            {
+              "word": " steht.",
+              "start": 6.6,
+              "end": 6.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "Terminfrage",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 16,
+          "word": "und",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 20,
+          "word": "die",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 24,
+          "word": "Baustellenfrage",
+          "end": 2.16
+        },
+        {
+          "at": 2.16,
+          "charIndex": 40,
+          "word": "bitte",
+          "end": 2.48
+        },
+        {
+          "at": 2.48,
+          "charIndex": 46,
+          "word": "getrennt",
+          "end": 3.04
+        },
+        {
+          "at": 3.32,
+          "charIndex": 56,
+          "word": "Sonst",
+          "end": 3.82
+        },
+        {
+          "at": 3.82,
+          "charIndex": 62,
+          "word": "erzählen",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 71,
+          "word": "Sie",
+          "end": 4.52
+        },
+        {
+          "at": 4.52,
+          "charIndex": 75,
+          "word": "dem",
+          "end": 4.68
+        },
+        {
+          "at": 4.68,
+          "charIndex": 79,
+          "word": "Kalender",
+          "end": 5.2
+        },
+        {
+          "at": 5.4,
+          "charIndex": 89,
+          "word": "warum",
+          "end": 5.6
+        },
+        {
+          "at": 5.6,
+          "charIndex": 95,
+          "word": "der",
+          "end": 5.82
+        },
+        {
+          "at": 5.82,
+          "charIndex": 99,
+          "word": "Bauzaun",
+          "end": 6.32
+        },
+        {
+          "at": 6.32,
+          "charIndex": 107,
+          "word": "im",
+          "end": 6.48
+        },
+        {
+          "at": 6.48,
+          "charIndex": 110,
+          "word": "Weg",
+          "end": 6.6
+        },
+        {
+          "at": 6.6,
+          "charIndex": 114,
+          "word": "steht",
+          "end": 6.88
+        }
+      ],
+      "sha256": "12821fe26437a1155a76d3d9f2ae275b689527ff891faf0a221fabf7dfc11c8a",
+      "bytes": 123692,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-edeltraud-trennung-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-edeltraud-trennung-01",
+        "encodedSha256": "12821fe26437a1155a76d3d9f2ae275b689527ff891faf0a221fabf7dfc11c8a"
+      }
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-02",
+      "voiceId": "stadt-edeltraud-trennung",
+      "actorId": "city-edeltraud-trennung",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=1]",
+      "text": "Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.",
+      "english": "First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.",
+      "sourceSha256": "dc67cc488bf382dfe5f52ff6954eac25ef71a9590e918b703ac1e96b62e83619",
+      "profileId": "5590c81828c04845822da28d02d84689",
+      "referenceSha256": "2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4",
+      "referenceOriginalSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 177,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.47,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990",
+      "profileJsonSha256": "047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c",
+      "rawSha256": "3313b056b640982a9eaa84d0cfe9df9903a945f29cab7001c5aa8453302d6581",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.04,
+      "renderSeconds": 8.44,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "5590c81828c04845822da28d02d84689",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.22,
+      "asr": "Sortieren Sie erst, was Sie wissen wollen und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Sortieren Sie erst, was Sie wissen wollen und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.",
+          "transcribeSeconds": 10.02,
+          "words": [
+            {
+              "word": " Sortieren",
+              "start": 0,
+              "end": 0.64
+            },
+            {
+              "word": " Sie",
+              "start": 0.64,
+              "end": 0.78
+            },
+            {
+              "word": " erst,",
+              "start": 0.78,
+              "end": 1.08
+            },
+            {
+              "word": " was",
+              "start": 1.18,
+              "end": 1.26
+            },
+            {
+              "word": " Sie",
+              "start": 1.26,
+              "end": 1.38
+            },
+            {
+              "word": " wissen",
+              "start": 1.38,
+              "end": 1.66
+            },
+            {
+              "word": " wollen",
+              "start": 1.66,
+              "end": 1.98
+            },
+            {
+              "word": " und",
+              "start": 1.98,
+              "end": 2.58
+            },
+            {
+              "word": " dann,",
+              "start": 2.58,
+              "end": 2.8
+            },
+            {
+              "word": " wer",
+              "start": 2.94,
+              "end": 3.08
+            },
+            {
+              "word": " es",
+              "start": 3.08,
+              "end": 3.24
+            },
+            {
+              "word": " wissen",
+              "start": 3.24,
+              "end": 3.48
+            },
+            {
+              "word": " soll.",
+              "start": 3.48,
+              "end": 3.8
+            },
+            {
+              "word": " Im",
+              "start": 4.04,
+              "end": 4.34
+            },
+            {
+              "word": " Moment",
+              "start": 4.34,
+              "end": 4.68
+            },
+            {
+              "word": " haben",
+              "start": 4.68,
+              "end": 4.96
+            },
+            {
+              "word": " Sie",
+              "start": 4.96,
+              "end": 5.08
+            },
+            {
+              "word": " beides",
+              "start": 5.08,
+              "end": 5.42
+            },
+            {
+              "word": " bei",
+              "start": 5.42,
+              "end": 5.6
+            },
+            {
+              "word": " mir",
+              "start": 5.6,
+              "end": 5.74
+            },
+            {
+              "word": " abgelegt.",
+              "start": 5.74,
+              "end": 6.36
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sortieren",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 10,
+          "word": "Sie",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 14,
+          "word": "erst",
+          "end": 1.08
+        },
+        {
+          "at": 1.18,
+          "charIndex": 20,
+          "word": "was",
+          "end": 1.26
+        },
+        {
+          "at": 1.26,
+          "charIndex": 24,
+          "word": "Sie",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 28,
+          "word": "wissen",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 35,
+          "word": "wollen",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 43,
+          "word": "und",
+          "end": 2.58
+        },
+        {
+          "at": 2.58,
+          "charIndex": 47,
+          "word": "dann",
+          "end": 2.8
+        },
+        {
+          "at": 2.94,
+          "charIndex": 53,
+          "word": "wer",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 57,
+          "word": "es",
+          "end": 3.24
+        },
+        {
+          "at": 3.24,
+          "charIndex": 60,
+          "word": "wissen",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 67,
+          "word": "soll",
+          "end": 3.8
+        },
+        {
+          "at": 4.04,
+          "charIndex": 73,
+          "word": "Im",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 76,
+          "word": "Moment",
+          "end": 4.68
+        },
+        {
+          "at": 4.68,
+          "charIndex": 83,
+          "word": "haben",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 89,
+          "word": "Sie",
+          "end": 5.08
+        },
+        {
+          "at": 5.08,
+          "charIndex": 93,
+          "word": "beides",
+          "end": 5.42
+        },
+        {
+          "at": 5.42,
+          "charIndex": 100,
+          "word": "bei",
+          "end": 5.6
+        },
+        {
+          "at": 5.6,
+          "charIndex": 104,
+          "word": "mir",
+          "end": 5.74
+        },
+        {
+          "at": 5.74,
+          "charIndex": 108,
+          "word": "abgelegt",
+          "end": 6.36
+        }
+      ],
+      "sha256": "4038a6b222280c07900d2698a66c09619cbf2ce7717db07551fb01086291fcc9",
+      "bytes": 113708,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-edeltraud-trennung-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-edeltraud-trennung-02",
+        "encodedSha256": "4038a6b222280c07900d2698a66c09619cbf2ce7717db07551fb01086291fcc9"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-edeltraud-trennung-03",
+      "voiceId": "stadt-edeltraud-trennung",
+      "actorId": "city-edeltraud-trennung",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=berlin,slot=0]",
+      "text": "Die appointment question und die Baustellenfrage bitte separate. Otherwise erzählen Sie dem Kalender, why der Bauzaun im Weg steht.",
+      "english": "Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.",
+      "sourceSha256": "364a725f73bc16434448e7d1c27b17dc8bb66afe6ac7ec5f9c9f5d8a1bb8b917",
+      "profileId": "5590c81828c04845822da28d02d84689",
+      "referenceSha256": "2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4",
+      "referenceOriginalSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-04",
+      "voiceId": "stadt-edeltraud-trennung",
+      "actorId": "city-edeltraud-trennung",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=berlin,slot=1]",
+      "text": "First sortieren Sie, what Sie wissen wollen, und dann, who es wissen soll. Right now haben Sie beides bei mir abgelegt.",
+      "english": "First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.",
+      "sourceSha256": "f301902914648385bf58dee24b7342b1f151df88dfc327d89a4051fab0fea55f",
+      "profileId": "5590c81828c04845822da28d02d84689",
+      "referenceSha256": "2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4",
+      "referenceOriginalSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-edeltraud-trennung-01\",\r\n      \"voiceId\": \"stadt-edeltraud-trennung\",\r\n      \"actorId\": \"city-edeltraud-trennung\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n      \"english\": \"Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.\",\r\n      \"sourceSha256\": \"8e2b263452a797ef3ec8cc7a1345c4f74b2e2f584b6ab16129c3bab37a9ee051\",\r\n      \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n      \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n      \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-edeltraud-trennung-02\",\r\n      \"voiceId\": \"stadt-edeltraud-trennung\",\r\n      \"actorId\": \"city-edeltraud-trennung\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n      \"english\": \"First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.\",\r\n      \"sourceSha256\": \"dc67cc488bf382dfe5f52ff6954eac25ef71a9590e918b703ac1e96b62e83619\",\r\n      \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n      \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n      \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-edeltraud-trennung-03\",\r\n      \"voiceId\": \"stadt-edeltraud-trennung\",\r\n      \"actorId\": \"city-edeltraud-trennung\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Die appointment question und die Baustellenfrage bitte separate. Otherwise erzählen Sie dem Kalender, why der Bauzaun im Weg steht.\",\r\n      \"english\": \"Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.\",\r\n      \"sourceSha256\": \"364a725f73bc16434448e7d1c27b17dc8bb66afe6ac7ec5f9c9f5d8a1bb8b917\",\r\n      \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n      \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n      \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-edeltraud-trennung-04\",\r\n      \"voiceId\": \"stadt-edeltraud-trennung\",\r\n      \"actorId\": \"city-edeltraud-trennung\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"First sortieren Sie, what Sie wissen wollen, und dann, who es wissen soll. Right now haben Sie beides bei mir abgelegt.\",\r\n      \"english\": \"First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.\",\r\n      \"sourceSha256\": \"f301902914648385bf58dee24b7342b1f151df88dfc327d89a4051fab0fea55f\",\r\n      \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n      \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n      \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990"
+    },
+    "takes": {
+      "stadt-edeltraud-trennung-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-edeltraud-trennung-01\",\r\n  \"voiceId\": \"stadt-edeltraud-trennung\",\r\n  \"actorId\": \"city-edeltraud-trennung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n  \"english\": \"Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.\",\r\n  \"sourceSha256\": \"8e2b263452a797ef3ec8cc7a1345c4f74b2e2f584b6ab16129c3bab37a9ee051\",\r\n  \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n  \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n  \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 193,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 10.78,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990\",\r\n  \"profileJsonSha256\": \"047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c\",\r\n  \"rawSha256\": \"8ba05b5779c81b16c65212612ccea73e2945fb822368be3bb6d449abf79e1747\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.68,\r\n  \"renderSeconds\": 12.25,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5590c81828c04845822da28d02d84689\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "d3fa6027c8f034709385bcf2423038c0c9a17e9ad1d4431982c89e2d2f1c113c"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-edeltraud-trennung-01\",\r\n  \"voiceId\": \"stadt-edeltraud-trennung\",\r\n  \"actorId\": \"city-edeltraud-trennung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n  \"english\": \"Please keep the appointment question separate from the construction question. Otherwise you will tell the calendar why the construction fence is in the way.\",\r\n  \"sourceSha256\": \"8e2b263452a797ef3ec8cc7a1345c4f74b2e2f584b6ab16129c3bab37a9ee051\",\r\n  \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n  \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n  \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 193,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 10.78,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990\",\r\n  \"profileJsonSha256\": \"047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c\",\r\n  \"rawSha256\": \"8ba05b5779c81b16c65212612ccea73e2945fb822368be3bb6d449abf79e1747\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.68,\r\n  \"renderSeconds\": 12.25,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5590c81828c04845822da28d02d84689\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.4:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.12,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Die Terminfrage und die Baustellenfrage bitte getrennt, sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Terminfrage und die Baustellenfrage bitte getrennt, sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.\",\r\n      \"transcribeSeconds\": 10.08,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.2\r\n        },\r\n        {\r\n          \"word\": \" Terminfrage\",\r\n          \"start\": 0.2,\r\n          \"end\": 0.96\r\n        },\r\n        {\r\n          \"word\": \" und\",\r\n          \"start\": 0.96,\r\n          \"end\": 1.22\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 1.22,\r\n          \"end\": 1.34\r\n        },\r\n        {\r\n          \"word\": \" Baustellenfrage\",\r\n          \"start\": 1.34,\r\n          \"end\": 2.16\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 2.16,\r\n          \"end\": 2.48\r\n        },\r\n        {\r\n          \"word\": \" getrennt,\",\r\n          \"start\": 2.48,\r\n          \"end\": 3.04\r\n        },\r\n        {\r\n          \"word\": \" sonst\",\r\n          \"start\": 3.32,\r\n          \"end\": 3.82\r\n        },\r\n        {\r\n          \"word\": \" erzählen\",\r\n          \"start\": 3.82,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 4.4,\r\n          \"end\": 4.52\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 4.52,\r\n          \"end\": 4.68\r\n        },\r\n        {\r\n          \"word\": \" Kalender,\",\r\n          \"start\": 4.68,\r\n          \"end\": 5.2\r\n        },\r\n        {\r\n          \"word\": \" warum\",\r\n          \"start\": 5.4,\r\n          \"end\": 5.6\r\n        },\r\n        {\r\n          \"word\": \" der\",\r\n          \"start\": 5.6,\r\n          \"end\": 5.82\r\n        },\r\n        {\r\n          \"word\": \" Bauzaun\",\r\n          \"start\": 5.82,\r\n          \"end\": 6.32\r\n        },\r\n        {\r\n          \"word\": \" im\",\r\n          \"start\": 6.32,\r\n          \"end\": 6.48\r\n        },\r\n        {\r\n          \"word\": \" Weg\",\r\n          \"start\": 6.48,\r\n          \"end\": 6.6\r\n        },\r\n        {\r\n          \"word\": \" steht.\",\r\n          \"start\": 6.6,\r\n          \"end\": 6.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.2\r\n    },\r\n    {\r\n      \"at\": 0.2,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Terminfrage\",\r\n      \"end\": 0.96\r\n    },\r\n    {\r\n      \"at\": 0.96,\r\n      \"charIndex\": 16,\r\n      \"word\": \"und\",\r\n      \"end\": 1.22\r\n    },\r\n    {\r\n      \"at\": 1.22,\r\n      \"charIndex\": 20,\r\n      \"word\": \"die\",\r\n      \"end\": 1.34\r\n    },\r\n    {\r\n      \"at\": 1.34,\r\n      \"charIndex\": 24,\r\n      \"word\": \"Baustellenfrage\",\r\n      \"end\": 2.16\r\n    },\r\n    {\r\n      \"at\": 2.16,\r\n      \"charIndex\": 40,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.48\r\n    },\r\n    {\r\n      \"at\": 2.48,\r\n      \"charIndex\": 46,\r\n      \"word\": \"getrennt\",\r\n      \"end\": 3.04\r\n    },\r\n    {\r\n      \"at\": 3.32,\r\n      \"charIndex\": 56,\r\n      \"word\": \"Sonst\",\r\n      \"end\": 3.82\r\n    },\r\n    {\r\n      \"at\": 3.82,\r\n      \"charIndex\": 62,\r\n      \"word\": \"erzählen\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.4,\r\n      \"charIndex\": 71,\r\n      \"word\": \"Sie\",\r\n      \"end\": 4.52\r\n    },\r\n    {\r\n      \"at\": 4.52,\r\n      \"charIndex\": 75,\r\n      \"word\": \"dem\",\r\n      \"end\": 4.68\r\n    },\r\n    {\r\n      \"at\": 4.68,\r\n      \"charIndex\": 79,\r\n      \"word\": \"Kalender\",\r\n      \"end\": 5.2\r\n    },\r\n    {\r\n      \"at\": 5.4,\r\n      \"charIndex\": 89,\r\n      \"word\": \"warum\",\r\n      \"end\": 5.6\r\n    },\r\n    {\r\n      \"at\": 5.6,\r\n      \"charIndex\": 95,\r\n      \"word\": \"der\",\r\n      \"end\": 5.82\r\n    },\r\n    {\r\n      \"at\": 5.82,\r\n      \"charIndex\": 99,\r\n      \"word\": \"Bauzaun\",\r\n      \"end\": 6.32\r\n    },\r\n    {\r\n      \"at\": 6.32,\r\n      \"charIndex\": 107,\r\n      \"word\": \"im\",\r\n      \"end\": 6.48\r\n    },\r\n    {\r\n      \"at\": 6.48,\r\n      \"charIndex\": 110,\r\n      \"word\": \"Weg\",\r\n      \"end\": 6.6\r\n    },\r\n    {\r\n      \"at\": 6.6,\r\n      \"charIndex\": 114,\r\n      \"word\": \"steht\",\r\n      \"end\": 6.88\r\n    }\r\n  ],\r\n  \"sha256\": \"12821fe26437a1155a76d3d9f2ae275b689527ff891faf0a221fabf7dfc11c8a\",\r\n  \"bytes\": 123692,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-edeltraud-trennung-01.mp3\"\r\n}\r\n",
+          "sha256": "f8e5663c9d3031e83fa3224824c8a8c599a21c58393a8292e34390539b2554e1"
+        }
+      },
+      "stadt-edeltraud-trennung-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-edeltraud-trennung-02\",\r\n  \"voiceId\": \"stadt-edeltraud-trennung\",\r\n  \"actorId\": \"city-edeltraud-trennung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n  \"english\": \"First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.\",\r\n  \"sourceSha256\": \"dc67cc488bf382dfe5f52ff6954eac25ef71a9590e918b703ac1e96b62e83619\",\r\n  \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n  \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n  \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 177,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.47,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990\",\r\n  \"profileJsonSha256\": \"047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c\",\r\n  \"rawSha256\": \"3313b056b640982a9eaa84d0cfe9df9903a945f29cab7001c5aa8453302d6581\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.04,\r\n  \"renderSeconds\": 8.44,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5590c81828c04845822da28d02d84689\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "d2e34adf9e16fd1c6af623f93f2da37a239ee74d1fbe85ff0462ab886e63fee0"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-edeltraud-trennung-02\",\r\n  \"voiceId\": \"stadt-edeltraud-trennung\",\r\n  \"actorId\": \"city-edeltraud-trennung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-edeltraud-trennung].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n  \"english\": \"First sort out what you want to know, and then who is supposed to know it. At the moment, you have filed both with me.\",\r\n  \"sourceSha256\": \"dc67cc488bf382dfe5f52ff6954eac25ef71a9590e918b703ac1e96b62e83619\",\r\n  \"profileId\": \"5590c81828c04845822da28d02d84689\",\r\n  \"referenceSha256\": \"2859e1c3df6389f9a13ad9f1bdee8cad551f338004ee0f6643e99ac8f3d080c4\",\r\n  \"referenceOriginalSha256\": \"03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 177,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.47,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"681973a48e98a381396b62a81d682c4f602c543c46c8a893428a7a38b0009990\",\r\n  \"profileJsonSha256\": \"047409a5d679797e19db37f02571d132cbc28e6aa635dd98d817606d6452c76c\",\r\n  \"rawSha256\": \"3313b056b640982a9eaa84d0cfe9df9903a945f29cab7001c5aa8453302d6581\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.04,\r\n  \"renderSeconds\": 8.44,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5590c81828c04845822da28d02d84689\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 1\r\n  },\r\n  \"integratedLufs\": -18.24,\r\n  \"truePeakDbtp\": -2.22,\r\n  \"asr\": \"Sortieren Sie erst, was Sie wissen wollen und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Sortieren Sie erst, was Sie wissen wollen und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt.\",\r\n      \"transcribeSeconds\": 10.02,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Sortieren\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.64\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.64,\r\n          \"end\": 0.78\r\n        },\r\n        {\r\n          \"word\": \" erst,\",\r\n          \"start\": 0.78,\r\n          \"end\": 1.08\r\n        },\r\n        {\r\n          \"word\": \" was\",\r\n          \"start\": 1.18,\r\n          \"end\": 1.26\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.26,\r\n          \"end\": 1.38\r\n        },\r\n        {\r\n          \"word\": \" wissen\",\r\n          \"start\": 1.38,\r\n          \"end\": 1.66\r\n        },\r\n        {\r\n          \"word\": \" wollen\",\r\n          \"start\": 1.66,\r\n          \"end\": 1.98\r\n        },\r\n        {\r\n          \"word\": \" und\",\r\n          \"start\": 1.98,\r\n          \"end\": 2.58\r\n        },\r\n        {\r\n          \"word\": \" dann,\",\r\n          \"start\": 2.58,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" wer\",\r\n          \"start\": 2.94,\r\n          \"end\": 3.08\r\n        },\r\n        {\r\n          \"word\": \" es\",\r\n          \"start\": 3.08,\r\n          \"end\": 3.24\r\n        },\r\n        {\r\n          \"word\": \" wissen\",\r\n          \"start\": 3.24,\r\n          \"end\": 3.48\r\n        },\r\n        {\r\n          \"word\": \" soll.\",\r\n          \"start\": 3.48,\r\n          \"end\": 3.8\r\n        },\r\n        {\r\n          \"word\": \" Im\",\r\n          \"start\": 4.04,\r\n          \"end\": 4.34\r\n        },\r\n        {\r\n          \"word\": \" Moment\",\r\n          \"start\": 4.34,\r\n          \"end\": 4.68\r\n        },\r\n        {\r\n          \"word\": \" haben\",\r\n          \"start\": 4.68,\r\n          \"end\": 4.96\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 4.96,\r\n          \"end\": 5.08\r\n        },\r\n        {\r\n          \"word\": \" beides\",\r\n          \"start\": 5.08,\r\n          \"end\": 5.42\r\n        },\r\n        {\r\n          \"word\": \" bei\",\r\n          \"start\": 5.42,\r\n          \"end\": 5.6\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 5.6,\r\n          \"end\": 5.74\r\n        },\r\n        {\r\n          \"word\": \" abgelegt.\",\r\n          \"start\": 5.74,\r\n          \"end\": 6.36\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Sortieren\",\r\n      \"end\": 0.64\r\n    },\r\n    {\r\n      \"at\": 0.64,\r\n      \"charIndex\": 10,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.78\r\n    },\r\n    {\r\n      \"at\": 0.78,\r\n      \"charIndex\": 14,\r\n      \"word\": \"erst\",\r\n      \"end\": 1.08\r\n    },\r\n    {\r\n      \"at\": 1.18,\r\n      \"charIndex\": 20,\r\n      \"word\": \"was\",\r\n      \"end\": 1.26\r\n    },\r\n    {\r\n      \"at\": 1.26,\r\n      \"charIndex\": 24,\r\n      \"word\": \"Sie\",\r\n      \"end\": 1.38\r\n    },\r\n    {\r\n      \"at\": 1.38,\r\n      \"charIndex\": 28,\r\n      \"word\": \"wissen\",\r\n      \"end\": 1.66\r\n    },\r\n    {\r\n      \"at\": 1.66,\r\n      \"charIndex\": 35,\r\n      \"word\": \"wollen\",\r\n      \"end\": 1.98\r\n    },\r\n    {\r\n      \"at\": 1.98,\r\n      \"charIndex\": 43,\r\n      \"word\": \"und\",\r\n      \"end\": 2.58\r\n    },\r\n    {\r\n      \"at\": 2.58,\r\n      \"charIndex\": 47,\r\n      \"word\": \"dann\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.94,\r\n      \"charIndex\": 53,\r\n      \"word\": \"wer\",\r\n      \"end\": 3.08\r\n    },\r\n    {\r\n      \"at\": 3.08,\r\n      \"charIndex\": 57,\r\n      \"word\": \"es\",\r\n      \"end\": 3.24\r\n    },\r\n    {\r\n      \"at\": 3.24,\r\n      \"charIndex\": 60,\r\n      \"word\": \"wissen\",\r\n      \"end\": 3.48\r\n    },\r\n    {\r\n      \"at\": 3.48,\r\n      \"charIndex\": 67,\r\n      \"word\": \"soll\",\r\n      \"end\": 3.8\r\n    },\r\n    {\r\n      \"at\": 4.04,\r\n      \"charIndex\": 73,\r\n      \"word\": \"Im\",\r\n      \"end\": 4.34\r\n    },\r\n    {\r\n      \"at\": 4.34,\r\n      \"charIndex\": 76,\r\n      \"word\": \"Moment\",\r\n      \"end\": 4.68\r\n    },\r\n    {\r\n      \"at\": 4.68,\r\n      \"charIndex\": 83,\r\n      \"word\": \"haben\",\r\n      \"end\": 4.96\r\n    },\r\n    {\r\n      \"at\": 4.96,\r\n      \"charIndex\": 89,\r\n      \"word\": \"Sie\",\r\n      \"end\": 5.08\r\n    },\r\n    {\r\n      \"at\": 5.08,\r\n      \"charIndex\": 93,\r\n      \"word\": \"beides\",\r\n      \"end\": 5.42\r\n    },\r\n    {\r\n      \"at\": 5.42,\r\n      \"charIndex\": 100,\r\n      \"word\": \"bei\",\r\n      \"end\": 5.6\r\n    },\r\n    {\r\n      \"at\": 5.6,\r\n      \"charIndex\": 104,\r\n      \"word\": \"mir\",\r\n      \"end\": 5.74\r\n    },\r\n    {\r\n      \"at\": 5.74,\r\n      \"charIndex\": 108,\r\n      \"word\": \"abgelegt\",\r\n      \"end\": 6.36\r\n    }\r\n  ],\r\n  \"sha256\": \"4038a6b222280c07900d2698a66c09619cbf2ce7717db07551fb01086291fcc9\",\r\n  \"bytes\": 113708,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-edeltraud-trennung-02.mp3\"\r\n}\r\n",
+          "sha256": "5d3719b696e65062857e45a4eafd97c7038ee1dcbb6d182ad1c43d7435512ecc"
+        }
+      }
+    }
+  }
+}

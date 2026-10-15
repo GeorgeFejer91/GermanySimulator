@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const startup=game.slice(game.indexOf('let pendingStart=null'),game.indexOf('function startGame(',game.indexOf('let pendingStart=null')));
@@ -13,7 +14,7 @@ function fixture(query='?geheim=nachbarn'){
   queueAssetLoad(){},prepareNearbyNpcAssets(){},startupNpcAssetsReady:()=>npcReady,localStorage:{setItem(){assert.fail('checkpoint must not write earned registration')}},
   document:{documentElement:{dataset:{}},hidden:false,body:{classList:{contains:value=>classes.has(value)}},getElementById:id=>id==='intro'?{classList:{add:value=>introClasses.add(value),contains:value=>introClasses.has(value)}}:{setAttribute:(key,value)=>attributes.set(key,value),getAttribute:key=>attributes.get(key)}},
   window:{Germany3D:{ready:true,startupReady:false,prepareNearbyAssets(){},get startupStatus(){return {total:3,pending:3-this.neighborAssetStatus.settled}},neighborAssetStatus:{total:3,settled:0,failed:0}},Germany3DBridge:{characterAssetStatus:{required:[],settled:[]}},GermanyPreload:{prepareMenu(){},update(status){progress.push(status);if(status.ready)classes.delete('preloading')}}}};
- vm.createContext(h);vm.runInContext(startup+';if(pendingNeighborEntry)prepareNeighborsDirect();this.pending=()=>pendingNeighborEntry;',h);
+ vm.createContext(h);vm.runInContext(motionObserverSource(game)+startup+';if(pendingNeighborEntry)prepareNeighborsDirect();this.pending=()=>pendingNeighborEntry;',h);
  return {h,classes,introClasses,progress,get badge(){return badge},get updates(){return hudUpdates},npcReady:()=>npcReady=true};
 }
 

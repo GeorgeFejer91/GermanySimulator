@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "polizei-heinrich-wachtmeister",
+  "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+  "fallback": "captions",
+  "status": "selected clips passed same-profile literal German ASR and native EOS; held slots remain caption fallback; perceptual listening not independently verified",
+  "requestedLineCount": 12,
+  "generatedLineCount": 12,
+  "lineCount": 4,
+  "clips": [
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-05",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 4,
+      "sourceLocator": "game.js policeBarks.berlin[4]",
+      "text": "Das ist so wirklich not vorgesehen!",
+      "english": "This is really not how this is supposed to work!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71004,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "7b6e10479e6d050549d093e531d4aed86694ea51febfa3486611bccc862c2687",
+      "rendererInputText": "Das ist so wirklich not vorgesehen!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 73,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 48,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 47,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 3.2,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "06457b6b8263f609e2729d97f39436394fc49cf42fe2e0824202be17cb208015"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+      "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+      "rawSha256": "6590bace61e411994a26d6d3be5f34acc72948daa55e86f1dc3742a61f5f11c3",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 2.88,
+      "renderSeconds": 4.03,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "24b741bbe55d4f3a843aa481c3459a96",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.1816803125447832,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.1,
+      "truePeakDbtp": -2.49,
+      "asr": "Das ist so wirklich Not vorgesehen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das ist so wirklich Not vorgesehen.",
+          "transcribeSeconds": 15.2,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0,
+              "end": 0.24
+            },
+            {
+              "word": " ist",
+              "start": 0.24,
+              "end": 0.46
+            },
+            {
+              "word": " so",
+              "start": 0.46,
+              "end": 0.64
+            },
+            {
+              "word": " wirklich",
+              "start": 0.64,
+              "end": 1.02
+            },
+            {
+              "word": " Not",
+              "start": 1.02,
+              "end": 1.44
+            },
+            {
+              "word": " vorgesehen.",
+              "start": 1.44,
+              "end": 2
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 4,
+          "word": "ist",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 8,
+          "word": "so",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 11,
+          "word": "wirklich",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 20,
+          "word": "not",
+          "end": 1.44
+        },
+        {
+          "at": 1.44,
+          "charIndex": 24,
+          "word": "vorgesehen",
+          "end": 2
+        }
+      ],
+      "sha256": "10ed5a5c15ba71d791b32aa9253e24e27c4c142647d2c5b53716966d94a802ea",
+      "bytes": 46892,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/police-dialogue/polizei-heinrich-wachtmeister-berlin-05.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "User authorized completing every character voice and cloning selected open-source profiles; ROOT selects only exact-text technically verified first takes under that existing instruction. No human listening is asserted.",
+        "clipId": "polizei-heinrich-wachtmeister-berlin-05",
+        "encodedSha256": "10ed5a5c15ba71d791b32aa9253e24e27c4c142647d2c5b53716966d94a802ea"
+      }
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-03",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 2,
+      "sourceLocator": "game.js policeBarks.germany[2]",
+      "text": "AUSWEIS BITTE!",
+      "english": "ID card, identification, anything official!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71008,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "7b6e10479e6d050549d093e531d4aed86694ea51febfa3486611bccc862c2687",
+      "rendererInputText": "AUSWEIS BITTE!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 56,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 18,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 18,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 2.44,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "735bbce6679058e4bf576e5a310e63082b1b04e4d526e6cfaf8a4d6c636a3a43"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+      "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+      "rawSha256": "69268b1d9c6fe63a400d3149a89d1c9ec281f884a2571dcbbd6b0a151681b61d",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 2.2,
+      "renderSeconds": 3.36,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "24b741bbe55d4f3a843aa481c3459a96",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.830206106311056,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 5
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.55,
+      "asr": "Ausweis bitte!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ausweis bitte!",
+          "transcribeSeconds": 14.69,
+          "words": [
+            {
+              "word": " Ausweis",
+              "start": 0,
+              "end": 0.5
+            },
+            {
+              "word": " bitte!",
+              "start": 0.5,
+              "end": 0.76
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "AUSWEIS",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 8,
+          "word": "BITTE",
+          "end": 0.76
+        }
+      ],
+      "sha256": "665b91c788fbc689e446a0cfd066786dff4f31fe90296eb9e8992a0f73002ae7",
+      "bytes": 36140,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/police-dialogue/polizei-heinrich-wachtmeister-germany-03.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "User authorized completing every character voice and cloning selected open-source profiles; ROOT selects only exact-text technically verified first takes under that existing instruction. No human listening is asserted.",
+        "clipId": "polizei-heinrich-wachtmeister-germany-03",
+        "encodedSha256": "665b91c788fbc689e446a0cfd066786dff4f31fe90296eb9e8992a0f73002ae7"
+      }
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-05",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 4,
+      "sourceLocator": "game.js policeBarks.germany[4]",
+      "text": "DAS IST SO NICHT VORGESEHEN!",
+      "english": "This is really not how this is supposed to work!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71010,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "7b6e10479e6d050549d093e531d4aed86694ea51febfa3486611bccc862c2687",
+      "rendererInputText": "DAS IST SO NICHT VORGESEHEN!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 42,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 27,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 28,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 1.88,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "b957d6ad288d8ea569b7fe058ec65a37e0a6d91d5eb8b71eb8c08fe223ddaf38"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+      "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+      "rawSha256": "0e75cd51173cd524a5d1ad1463b7dad8b3a7ccda2af660a5bd5a44d9bcf8fe0e",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 1.64,
+      "renderSeconds": 3.06,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "24b741bbe55d4f3a843aa481c3459a96",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.9792470212375795,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.12,
+      "truePeakDbtp": -2.55,
+      "asr": "Das ist so nicht vorgesehen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das ist so nicht vorgesehen.",
+          "transcribeSeconds": 14.86,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " ist",
+              "start": 0.16,
+              "end": 0.32
+            },
+            {
+              "word": " so",
+              "start": 0.32,
+              "end": 0.5
+            },
+            {
+              "word": " nicht",
+              "start": 0.5,
+              "end": 0.64
+            },
+            {
+              "word": " vorgesehen.",
+              "start": 0.64,
+              "end": 1.2
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "DAS",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "IST",
+          "end": 0.32
+        },
+        {
+          "at": 0.32,
+          "charIndex": 8,
+          "word": "SO",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 11,
+          "word": "NICHT",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 17,
+          "word": "VORGESEHEN",
+          "end": 1.2
+        }
+      ],
+      "sha256": "529b52ba0ff21eeffdf9ef9586e88a30e081900f1d07d685669a6448b6c40ac0",
+      "bytes": 27308,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/police-dialogue/polizei-heinrich-wachtmeister-germany-05.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "User authorized completing every character voice and cloning selected open-source profiles; ROOT selects only exact-text technically verified first takes under that existing instruction. No human listening is asserted.",
+        "clipId": "polizei-heinrich-wachtmeister-germany-05",
+        "encodedSha256": "529b52ba0ff21eeffdf9ef9586e88a30e081900f1d07d685669a6448b6c40ac0"
+      }
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-06",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 5,
+      "sourceLocator": "game.js policeBarks.germany[5]",
+      "text": "BLEIBEN SIE HINTER DER LINIE!",
+      "english": "Stay behind the line!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71011,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "7b6e10479e6d050549d093e531d4aed86694ea51febfa3486611bccc862c2687",
+      "rendererInputText": "BLEIBEN SIE HINTER DER LINIE!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 57,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 34,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 33,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 2.64,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "d47c596c19f2183dc8d5e7d86cb164791b2d0f0a1947d50579335fd0b890c7c4"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+      "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+      "rawSha256": "effdd8178a0d36c074b92cf29005e0a07e357e8f17efe3351d40e91a1a8fc987",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 2.24,
+      "renderSeconds": 3.66,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "24b741bbe55d4f3a843aa481c3459a96",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.5014124057541378,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.07,
+      "truePeakDbtp": -2.51,
+      "asr": "Bleiben Sie hinter der Linie.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Bleiben Sie hinter der Linie.",
+          "transcribeSeconds": 16.03,
+          "words": [
+            {
+              "word": " Bleiben",
+              "start": 0,
+              "end": 0.42
+            },
+            {
+              "word": " Sie",
+              "start": 0.42,
+              "end": 0.62
+            },
+            {
+              "word": " hinter",
+              "start": 0.62,
+              "end": 0.96
+            },
+            {
+              "word": " der",
+              "start": 0.96,
+              "end": 1.28
+            },
+            {
+              "word": " Linie.",
+              "start": 1.28,
+              "end": 1.66
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "BLEIBEN",
+          "end": 0.42
+        },
+        {
+          "at": 0.42,
+          "charIndex": 8,
+          "word": "SIE",
+          "end": 0.62
+        },
+        {
+          "at": 0.62,
+          "charIndex": 12,
+          "word": "HINTER",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 19,
+          "word": "DER",
+          "end": 1.28
+        },
+        {
+          "at": 1.28,
+          "charIndex": 23,
+          "word": "LINIE",
+          "end": 1.66
+        }
+      ],
+      "sha256": "d12def1c712550ecd767784699a3b0bb0bbeddabfcd8ac62ca86905ae002dcb6",
+      "bytes": 36908,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/police-dialogue/polizei-heinrich-wachtmeister-germany-06.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "User authorized completing every character voice and cloning selected open-source profiles; ROOT selects only exact-text technically verified first takes under that existing instruction. No human listening is asserted.",
+        "clipId": "polizei-heinrich-wachtmeister-germany-06",
+        "encodedSha256": "d12def1c712550ecd767784699a3b0bb0bbeddabfcd8ac62ca86905ae002dcb6"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-01",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js policeBarks.berlin[0]",
+      "text": "HALT! Stop mal immediately!",
+      "english": "Stop! Stop immediately!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "a09ef17725563d4fb2d454d918bf6434e1ecbabf5bdac50ed2b3f76067837472"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-02",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js policeBarks.berlin[1]",
+      "text": "Nicht auf ze grass, bitte!",
+      "english": "Stay off the grass, please!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "cb18f298c7563af3bd4fd25cdc04bba127818e385b6c371aeb2bffa3b7d0fc27"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-03",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 2,
+      "sourceLocator": "game.js policeBarks.berlin[2]",
+      "text": "Ausweis, ID, irgendwas Officiales!",
+      "english": "ID card, identification, anything official!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "25c1223f6a9997a3f4904f84d8642413c91d71d800f197f3a1a23167b1f44a89"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-04",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 3,
+      "sourceLocator": "game.js policeBarks.berlin[3]",
+      "text": "Please leave den Grünbereich sofort!",
+      "english": "Please leave the green area immediately!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "92c3bb2beffb2ce1d866750cfb5f6d4ca588f21250b9e8c4ce4211f1026fa21f"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-berlin-06",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "berlin",
+      "slot": 5,
+      "sourceLocator": "game.js policeBarks.berlin[5]",
+      "text": "Bleiben Sie hinter ze line!",
+      "english": "Stay behind the line!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "7b9ede75e9c5945fc364addc447f71487cb53d3785c4666531f5816fd42ed73a"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-01",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js policeBarks.germany[0]",
+      "text": "HALT! STEHENBLEIBEN!",
+      "english": "Stop! Stop immediately!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "aeddc84e134a169b8c1b130853171e5aafd7f00db081618e087d6878a8e4c0cf"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-02",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js policeBarks.germany[1]",
+      "text": "NICHT ÜBER DEN RASEN!",
+      "english": "Stay off the grass, please!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "1b9c882946c603f98e7bfb718692ceb9b7786556118a34c34fda65a8cdf3d903"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-04",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 3,
+      "sourceLocator": "game.js policeBarks.germany[3]",
+      "text": "SIE VERLASSEN SOFORT DEN GRÜNBEREICH!",
+      "english": "Please leave the green area immediately!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; no literal exact German ASR transcript established",
+      "candidateSha256": "1af2bd48427779ed62e4eecf3c0557722d403085c2b6e362f51f21365a27e11d"
+    }
+  ],
+  "approvedExistingReuse": [],
+  "policeAdmission": {
+    "status": "ROOT-verified-native-police12",
+    "authoritySha256": "d4fe360074e0fab995c6be78ed0fc1d1e55babe1ba0b34144d282289d1dccbd5",
+    "authoredPlanSha256": "50eb1d63291aafa0914ddbd0af09a45f063b42e22d285fd2382af11b32583500",
+    "frozenRequestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+    "requestSha256": "a019f4602027899797f2405a315930c2e0ecf59507f57ac0e008a37ecbd2d791",
+    "sourceHead": "6213f6429cc0ccdb64353f2729bfb732ec757a80",
+    "sourcePins": {
+      "game.js": "47b70c188a5e6978a1ad04f0f4106833fe19baf364891ba5315413bd1cc4d1ac",
+      "For-AI/VOICE-CAST.json": "8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f",
+      "For-AI/AUDIO-TEXT-LIBRARY.js": "cd6d3abecb6dc1abb344a9cae794ea9d160e90e2faf0798aafa69a35358f14d6"
+    },
+    "terminals": {
+      "plan": {
+        "sha256": "6e8c071a0a1053adae428fa6fd7bd69bf150d5f38ef34e6e67e63ebae67633ad",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false
+      },
+      "render": {
+        "sha256": "b0f441f2fe85a2f2342b695e33f9c49bfb4c1bddd9f009ea1bef2ca7cb69caf3",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false
+      },
+      "process": {
+        "sha256": "6483df6de4d4f6051feca3120282bb0048480289985e9f8f0b646bb0b4effeb7",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false
+      }
+    },
+    "nativeLedgerSha256": "693bab93a15c902a14ef303939b52cd22d6be0e2db966a4a9f7131f0a75c345f",
+    "asrLedgerSha256": "6bba21128e87bb2e01753487f9e64e4c8c0ab67290036ea16fa8f5d97032eac1",
+    "takes": {
+      "polizei-heinrich-wachtmeister-berlin-05": {
+        "rawReceiptSha256": "4f85f15e1568507c8b9e95f0bbc0d0c2e7c43024d73f3f5e313c5af886014005",
+        "encodedReceiptSha256": "f261bed2335b2cbb36b365f59e9082a4e7356921a0701c6cec61ba65e543a471",
+        "rawSha256": "6590bace61e411994a26d6d3be5f34acc72948daa55e86f1dc3742a61f5f11c3",
+        "encodedSha256": "10ed5a5c15ba71d791b32aa9253e24e27c4c142647d2c5b53716966d94a802ea",
+        "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf"
+      },
+      "polizei-heinrich-wachtmeister-germany-03": {
+        "rawReceiptSha256": "fd6e68ce8dc61fec2621427921cfb1c11817df868cb6e16bf2d1773a4c7526e8",
+        "encodedReceiptSha256": "90f247fc922d0511c8159f0972e69a3e53265ec8c679e7dc17cfb2120bd5336f",
+        "rawSha256": "69268b1d9c6fe63a400d3149a89d1c9ec281f884a2571dcbbd6b0a151681b61d",
+        "encodedSha256": "665b91c788fbc689e446a0cfd066786dff4f31fe90296eb9e8992a0f73002ae7",
+        "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf"
+      },
+      "polizei-heinrich-wachtmeister-germany-05": {
+        "rawReceiptSha256": "e82b9940b5fa5f85b2ee6d3d7fa2d3309c850e6336b9b90927ffd7e7fd2850ef",
+        "encodedReceiptSha256": "6f77197d6a8220fe6f54c518732108599559760889975880e2113aca791344cb",
+        "rawSha256": "0e75cd51173cd524a5d1ad1463b7dad8b3a7ccda2af660a5bd5a44d9bcf8fe0e",
+        "encodedSha256": "529b52ba0ff21eeffdf9ef9586e88a30e081900f1d07d685669a6448b6c40ac0",
+        "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf"
+      },
+      "polizei-heinrich-wachtmeister-germany-06": {
+        "rawReceiptSha256": "91efccba56db2902a5d5406dbcb23bd7970658b743d1e54fd76bd8a5c746284c",
+        "encodedReceiptSha256": "dbb3085d43b1bc25807191551e7e455b1aa33ccdd277aa429392c5842cc278c6",
+        "rawSha256": "effdd8178a0d36c074b92cf29005e0a07e357e8f17efe3351d40e91a1a8fc987",
+        "encodedSha256": "d12def1c712550ecd767784699a3b0bb0bbeddabfcd8ac62ca86905ae002dcb6",
+        "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf"
+      }
+    }
+  }
+}

@@ -1,0 +1,661 @@
+{
+  "voiceId": "stadt-herbert-rasenaufsicht",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-01",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "actorId": "city-herbert-rasenaufsicht",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=0]",
+      "text": "Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.",
+      "english": "Get off the grass! The grass is supposed to spread properly here, but not underneath people.",
+      "sourceSha256": "1564bdff0e7678e7ae99c60ea8823407c3787b7a5387f7beb001b3d86683921f",
+      "profileId": "8968878634994c25a5578fd9c2244110",
+      "referenceSha256": "58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66",
+      "referenceOriginalSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.",
+      "decode": {
+        "maxSpeechTokens": 340,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 149,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.45,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043",
+      "profileJsonSha256": "f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065",
+      "rawSha256": "96fa25402f60109119d93109c62b672d1db45b382b0889a04d6ab7dde238569e",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.9,
+      "renderSeconds": 7.3,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8968878634994c25a5578fd9c2244110",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.25:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "asr": "Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten!",
+          "transcribeSeconds": 10.8,
+          "words": [
+            {
+              "word": " Runter",
+              "start": 0,
+              "end": 0.48
+            },
+            {
+              "word": " vom",
+              "start": 0.48,
+              "end": 0.66
+            },
+            {
+              "word": " Grün!",
+              "start": 0.66,
+              "end": 1
+            },
+            {
+              "word": " Das",
+              "start": 1.18,
+              "end": 1.6
+            },
+            {
+              "word": " Gras",
+              "start": 1.6,
+              "end": 2.08
+            },
+            {
+              "word": " soll",
+              "start": 2.08,
+              "end": 2.28
+            },
+            {
+              "word": " sich",
+              "start": 2.28,
+              "end": 2.46
+            },
+            {
+              "word": " hier",
+              "start": 2.46,
+              "end": 2.66
+            },
+            {
+              "word": " ordentlich",
+              "start": 2.66,
+              "end": 3.12
+            },
+            {
+              "word": " ausbreiten,",
+              "start": 3.12,
+              "end": 3.82
+            },
+            {
+              "word": " aber",
+              "start": 4.02,
+              "end": 4.26
+            },
+            {
+              "word": " doch",
+              "start": 4.26,
+              "end": 4.42
+            },
+            {
+              "word": " nicht",
+              "start": 4.42,
+              "end": 4.72
+            },
+            {
+              "word": " unter",
+              "start": 4.72,
+              "end": 5
+            },
+            {
+              "word": " Leuten!",
+              "start": 5,
+              "end": 5.3
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Runter",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 7,
+          "word": "vom",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 11,
+          "word": "Grün",
+          "end": 1
+        },
+        {
+          "at": 1.18,
+          "charIndex": 17,
+          "word": "Das",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 21,
+          "word": "Gras",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 26,
+          "word": "soll",
+          "end": 2.28
+        },
+        {
+          "at": 2.28,
+          "charIndex": 31,
+          "word": "sich",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 36,
+          "word": "hier",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 41,
+          "word": "ordentlich",
+          "end": 3.12
+        },
+        {
+          "at": 3.12,
+          "charIndex": 52,
+          "word": "ausbreiten",
+          "end": 3.82
+        },
+        {
+          "at": 4.02,
+          "charIndex": 64,
+          "word": "aber",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 69,
+          "word": "doch",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 74,
+          "word": "nicht",
+          "end": 4.72
+        },
+        {
+          "at": 4.72,
+          "charIndex": 80,
+          "word": "unter",
+          "end": 5
+        },
+        {
+          "at": 5,
+          "charIndex": 86,
+          "word": "Leuten",
+          "end": 5.3
+        }
+      ],
+      "sha256": "d14d17dfcc5a5f95d1b6553f7bd0135a2c463695bf9dd0d18b31e336ab46a1c9",
+      "bytes": 95276,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-herbert-rasenaufsicht-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-herbert-rasenaufsicht-01",
+        "encodedSha256": "d14d17dfcc5a5f95d1b6553f7bd0135a2c463695bf9dd0d18b31e336ab46a1c9"
+      }
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-02",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "actorId": "city-herbert-rasenaufsicht",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=1]",
+      "text": "Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.",
+      "english": "Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.",
+      "sourceSha256": "2a63a118b55b8cce5953836bf6268d3861748d32a4de319461c7814772c3c7ac",
+      "profileId": "8968878634994c25a5578fd9c2244110",
+      "referenceSha256": "58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66",
+      "referenceOriginalSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171001,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 186,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.88,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043",
+      "profileJsonSha256": "f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065",
+      "rawSha256": "50b1229689bf3d7f34179ed2b059fde3b4d1686ef873000d86339cb92ed2cb40",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.38,
+      "renderSeconds": 9,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8968878634994c25a5578fd9c2244110",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.24:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.21,
+      "asr": "Gehen Sie auf den Weg und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Gehen Sie auf den Weg und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.",
+          "transcribeSeconds": 10.16,
+          "words": [
+            {
+              "word": " Gehen",
+              "start": 0,
+              "end": 0.34
+            },
+            {
+              "word": " Sie",
+              "start": 0.34,
+              "end": 0.46
+            },
+            {
+              "word": " auf",
+              "start": 0.46,
+              "end": 0.64
+            },
+            {
+              "word": " den",
+              "start": 0.64,
+              "end": 0.8
+            },
+            {
+              "word": " Weg",
+              "start": 0.8,
+              "end": 1.06
+            },
+            {
+              "word": " und",
+              "start": 1.06,
+              "end": 1.52
+            },
+            {
+              "word": " nehmen",
+              "start": 1.52,
+              "end": 1.82
+            },
+            {
+              "word": " Sie",
+              "start": 1.82,
+              "end": 2.04
+            },
+            {
+              "word": " den",
+              "start": 2.04,
+              "end": 2.24
+            },
+            {
+              "word": " Fuß",
+              "start": 2.24,
+              "end": 2.58
+            },
+            {
+              "word": " vom",
+              "start": 2.58,
+              "end": 2.8
+            },
+            {
+              "word": " Wegrand.",
+              "start": 2.8,
+              "end": 3.4
+            },
+            {
+              "word": " Ich",
+              "start": 3.64,
+              "end": 3.98
+            },
+            {
+              "word": " trenne",
+              "start": 3.98,
+              "end": 4.4
+            },
+            {
+              "word": " hier",
+              "start": 4.4,
+              "end": 4.6
+            },
+            {
+              "word": " gerade",
+              "start": 4.6,
+              "end": 5.06
+            },
+            {
+              "word": " Grünfläche",
+              "start": 5.06,
+              "end": 5.76
+            },
+            {
+              "word": " und",
+              "start": 5.76,
+              "end": 5.94
+            },
+            {
+              "word": " Gehabsicht.",
+              "start": 5.94,
+              "end": 6.64
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Gehen",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 6,
+          "word": "Sie",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 10,
+          "word": "auf",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 14,
+          "word": "den",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 18,
+          "word": "Weg",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 23,
+          "word": "Und",
+          "end": 1.52
+        },
+        {
+          "at": 1.52,
+          "charIndex": 27,
+          "word": "nehmen",
+          "end": 1.82
+        },
+        {
+          "at": 1.82,
+          "charIndex": 34,
+          "word": "Sie",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 38,
+          "word": "den",
+          "end": 2.24
+        },
+        {
+          "at": 2.24,
+          "charIndex": 42,
+          "word": "Fuß",
+          "end": 2.58
+        },
+        {
+          "at": 2.58,
+          "charIndex": 46,
+          "word": "vom",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 50,
+          "word": "Wegrand",
+          "end": 3.4
+        },
+        {
+          "at": 3.64,
+          "charIndex": 59,
+          "word": "Ich",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 63,
+          "word": "trenne",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 70,
+          "word": "hier",
+          "end": 4.6
+        },
+        {
+          "at": 4.6,
+          "charIndex": 75,
+          "word": "gerade",
+          "end": 5.06
+        },
+        {
+          "at": 5.06,
+          "charIndex": 82,
+          "word": "Grünfläche",
+          "end": 5.76
+        },
+        {
+          "at": 5.76,
+          "charIndex": 93,
+          "word": "und",
+          "end": 5.94
+        },
+        {
+          "at": 5.94,
+          "charIndex": 97,
+          "word": "Gehabsicht",
+          "end": 6.64
+        }
+      ],
+      "sha256": "451f9fb68d3b83e52a866cdbf648dd05cff0ad6198dc9a13aafee69cbcfa216c",
+      "bytes": 119084,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-herbert-rasenaufsicht-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-herbert-rasenaufsicht-02",
+        "encodedSha256": "451f9fb68d3b83e52a866cdbf648dd05cff0ad6198dc9a13aafee69cbcfa216c"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-03",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "actorId": "city-herbert-rasenaufsicht",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=berlin,slot=0]",
+      "text": "Get off dem Grün! Das Gras soll sich hier properly ausbreiten, aber doch nicht under people.",
+      "english": "Get off the grass! The grass is supposed to spread properly here, but not underneath people.",
+      "sourceSha256": "97edcaa2c9af4504783db3e6a54d9be56b54ad6a8bb5a1151a33ab302eb12f75",
+      "profileId": "8968878634994c25a5578fd9c2244110",
+      "referenceSha256": "58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66",
+      "referenceOriginalSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-04",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "actorId": "city-herbert-rasenaufsicht",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=berlin,slot=1]",
+      "text": "Go auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade green space und walking intention.",
+      "english": "Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.",
+      "sourceSha256": "5b9e9e294288d1eda1fbd475172e2f21598c38a3e237e3c1c5ab5940a7cbdaa5",
+      "profileId": "8968878634994c25a5578fd9c2244110",
+      "referenceSha256": "58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66",
+      "referenceOriginalSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-herbert-rasenaufsicht-01\",\r\n      \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n      \"actorId\": \"city-herbert-rasenaufsicht\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.\",\r\n      \"english\": \"Get off the grass! The grass is supposed to spread properly here, but not underneath people.\",\r\n      \"sourceSha256\": \"1564bdff0e7678e7ae99c60ea8823407c3787b7a5387f7beb001b3d86683921f\",\r\n      \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n      \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n      \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-herbert-rasenaufsicht-02\",\r\n      \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n      \"actorId\": \"city-herbert-rasenaufsicht\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n      \"english\": \"Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.\",\r\n      \"sourceSha256\": \"2a63a118b55b8cce5953836bf6268d3861748d32a4de319461c7814772c3c7ac\",\r\n      \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n      \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n      \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-herbert-rasenaufsicht-03\",\r\n      \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n      \"actorId\": \"city-herbert-rasenaufsicht\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Get off dem Grün! Das Gras soll sich hier properly ausbreiten, aber doch nicht under people.\",\r\n      \"english\": \"Get off the grass! The grass is supposed to spread properly here, but not underneath people.\",\r\n      \"sourceSha256\": \"97edcaa2c9af4504783db3e6a54d9be56b54ad6a8bb5a1151a33ab302eb12f75\",\r\n      \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n      \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n      \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-herbert-rasenaufsicht-04\",\r\n      \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n      \"actorId\": \"city-herbert-rasenaufsicht\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Go auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade green space und walking intention.\",\r\n      \"english\": \"Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.\",\r\n      \"sourceSha256\": \"5b9e9e294288d1eda1fbd475172e2f21598c38a3e237e3c1c5ab5940a7cbdaa5\",\r\n      \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n      \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n      \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043"
+    },
+    "takes": {
+      "stadt-herbert-rasenaufsicht-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-herbert-rasenaufsicht-01\",\r\n  \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n  \"actorId\": \"city-herbert-rasenaufsicht\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.\",\r\n  \"english\": \"Get off the grass! The grass is supposed to spread properly here, but not underneath people.\",\r\n  \"sourceSha256\": \"1564bdff0e7678e7ae99c60ea8823407c3787b7a5387f7beb001b3d86683921f\",\r\n  \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n  \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n  \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 149,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.45,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043\",\r\n  \"profileJsonSha256\": \"f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065\",\r\n  \"rawSha256\": \"96fa25402f60109119d93109c62b672d1db45b382b0889a04d6ab7dde238569e\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.9,\r\n  \"renderSeconds\": 7.3,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8968878634994c25a5578fd9c2244110\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "f55cd900f402a45184af444ad88e455bea5753155cff143be1c8e714b0ea66eb"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-herbert-rasenaufsicht-01\",\r\n  \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n  \"actorId\": \"city-herbert-rasenaufsicht\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.\",\r\n  \"english\": \"Get off the grass! The grass is supposed to spread properly here, but not underneath people.\",\r\n  \"sourceSha256\": \"1564bdff0e7678e7ae99c60ea8823407c3787b7a5387f7beb001b3d86683921f\",\r\n  \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n  \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n  \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 149,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.45,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043\",\r\n  \"profileJsonSha256\": \"f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065\",\r\n  \"rawSha256\": \"96fa25402f60109119d93109c62b672d1db45b382b0889a04d6ab7dde238569e\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.9,\r\n  \"renderSeconds\": 7.3,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8968878634994c25a5578fd9c2244110\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.25:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.28,\r\n  \"truePeakDbtp\": -2.23,\r\n  \"asr\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten!\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten!\",\r\n      \"transcribeSeconds\": 10.8,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Runter\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.48\r\n        },\r\n        {\r\n          \"word\": \" vom\",\r\n          \"start\": 0.48,\r\n          \"end\": 0.66\r\n        },\r\n        {\r\n          \"word\": \" Grün!\",\r\n          \"start\": 0.66,\r\n          \"end\": 1.0\r\n        },\r\n        {\r\n          \"word\": \" Das\",\r\n          \"start\": 1.18,\r\n          \"end\": 1.6\r\n        },\r\n        {\r\n          \"word\": \" Gras\",\r\n          \"start\": 1.6,\r\n          \"end\": 2.08\r\n        },\r\n        {\r\n          \"word\": \" soll\",\r\n          \"start\": 2.08,\r\n          \"end\": 2.28\r\n        },\r\n        {\r\n          \"word\": \" sich\",\r\n          \"start\": 2.28,\r\n          \"end\": 2.46\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 2.46,\r\n          \"end\": 2.66\r\n        },\r\n        {\r\n          \"word\": \" ordentlich\",\r\n          \"start\": 2.66,\r\n          \"end\": 3.12\r\n        },\r\n        {\r\n          \"word\": \" ausbreiten,\",\r\n          \"start\": 3.12,\r\n          \"end\": 3.82\r\n        },\r\n        {\r\n          \"word\": \" aber\",\r\n          \"start\": 4.02,\r\n          \"end\": 4.26\r\n        },\r\n        {\r\n          \"word\": \" doch\",\r\n          \"start\": 4.26,\r\n          \"end\": 4.42\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 4.42,\r\n          \"end\": 4.72\r\n        },\r\n        {\r\n          \"word\": \" unter\",\r\n          \"start\": 4.72,\r\n          \"end\": 5.0\r\n        },\r\n        {\r\n          \"word\": \" Leuten!\",\r\n          \"start\": 5.0,\r\n          \"end\": 5.3\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Runter\",\r\n      \"end\": 0.48\r\n    },\r\n    {\r\n      \"at\": 0.48,\r\n      \"charIndex\": 7,\r\n      \"word\": \"vom\",\r\n      \"end\": 0.66\r\n    },\r\n    {\r\n      \"at\": 0.66,\r\n      \"charIndex\": 11,\r\n      \"word\": \"Grün\",\r\n      \"end\": 1.0\r\n    },\r\n    {\r\n      \"at\": 1.18,\r\n      \"charIndex\": 17,\r\n      \"word\": \"Das\",\r\n      \"end\": 1.6\r\n    },\r\n    {\r\n      \"at\": 1.6,\r\n      \"charIndex\": 21,\r\n      \"word\": \"Gras\",\r\n      \"end\": 2.08\r\n    },\r\n    {\r\n      \"at\": 2.08,\r\n      \"charIndex\": 26,\r\n      \"word\": \"soll\",\r\n      \"end\": 2.28\r\n    },\r\n    {\r\n      \"at\": 2.28,\r\n      \"charIndex\": 31,\r\n      \"word\": \"sich\",\r\n      \"end\": 2.46\r\n    },\r\n    {\r\n      \"at\": 2.46,\r\n      \"charIndex\": 36,\r\n      \"word\": \"hier\",\r\n      \"end\": 2.66\r\n    },\r\n    {\r\n      \"at\": 2.66,\r\n      \"charIndex\": 41,\r\n      \"word\": \"ordentlich\",\r\n      \"end\": 3.12\r\n    },\r\n    {\r\n      \"at\": 3.12,\r\n      \"charIndex\": 52,\r\n      \"word\": \"ausbreiten\",\r\n      \"end\": 3.82\r\n    },\r\n    {\r\n      \"at\": 4.02,\r\n      \"charIndex\": 64,\r\n      \"word\": \"aber\",\r\n      \"end\": 4.26\r\n    },\r\n    {\r\n      \"at\": 4.26,\r\n      \"charIndex\": 69,\r\n      \"word\": \"doch\",\r\n      \"end\": 4.42\r\n    },\r\n    {\r\n      \"at\": 4.42,\r\n      \"charIndex\": 74,\r\n      \"word\": \"nicht\",\r\n      \"end\": 4.72\r\n    },\r\n    {\r\n      \"at\": 4.72,\r\n      \"charIndex\": 80,\r\n      \"word\": \"unter\",\r\n      \"end\": 5.0\r\n    },\r\n    {\r\n      \"at\": 5.0,\r\n      \"charIndex\": 86,\r\n      \"word\": \"Leuten\",\r\n      \"end\": 5.3\r\n    }\r\n  ],\r\n  \"sha256\": \"d14d17dfcc5a5f95d1b6553f7bd0135a2c463695bf9dd0d18b31e336ab46a1c9\",\r\n  \"bytes\": 95276,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-herbert-rasenaufsicht-01.mp3\"\r\n}\r\n",
+          "sha256": "9ce0546049056affc76b546459a2c7db340a9e2bc109b31bdde4ff60c5cbabb2"
+        }
+      },
+      "stadt-herbert-rasenaufsicht-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-herbert-rasenaufsicht-02\",\r\n  \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n  \"actorId\": \"city-herbert-rasenaufsicht\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n  \"english\": \"Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.\",\r\n  \"sourceSha256\": \"2a63a118b55b8cce5953836bf6268d3861748d32a4de319461c7814772c3c7ac\",\r\n  \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n  \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n  \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171001,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 186,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.88,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043\",\r\n  \"profileJsonSha256\": \"f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065\",\r\n  \"rawSha256\": \"50b1229689bf3d7f34179ed2b059fde3b4d1686ef873000d86339cb92ed2cb40\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.38,\r\n  \"renderSeconds\": 9.0,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8968878634994c25a5578fd9c2244110\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "c66b93857262e9475c44d30857414f87954f67733f1328cb16112ecd1899f918"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-herbert-rasenaufsicht-02\",\r\n  \"voiceId\": \"stadt-herbert-rasenaufsicht\",\r\n  \"actorId\": \"city-herbert-rasenaufsicht\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-herbert-rasenaufsicht].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n  \"english\": \"Go onto the path! And take your foot off its edge. I am separating green space from the intention to walk.\",\r\n  \"sourceSha256\": \"2a63a118b55b8cce5953836bf6268d3861748d32a4de319461c7814772c3c7ac\",\r\n  \"profileId\": \"8968878634994c25a5578fd9c2244110\",\r\n  \"referenceSha256\": \"58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66\",\r\n  \"referenceOriginalSha256\": \"b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171001,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 186,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.88,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"1e1c9ee935fec01532ddb6224730004956f40a917f9d75dd004c052d8749d043\",\r\n  \"profileJsonSha256\": \"f93a0ce38ece5fc2d2707a25e8187531d8f50794b378dde845bdf1222fadd065\",\r\n  \"rawSha256\": \"50b1229689bf3d7f34179ed2b059fde3b4d1686ef873000d86339cb92ed2cb40\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.38,\r\n  \"renderSeconds\": 9.0,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8968878634994c25a5578fd9c2244110\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.24:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.15,\r\n  \"truePeakDbtp\": -2.21,\r\n  \"asr\": \"Gehen Sie auf den Weg und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Gehen Sie auf den Weg und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht.\",\r\n      \"transcribeSeconds\": 10.16,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Gehen\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.34\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.34,\r\n          \"end\": 0.46\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 0.46,\r\n          \"end\": 0.64\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 0.64,\r\n          \"end\": 0.8\r\n        },\r\n        {\r\n          \"word\": \" Weg\",\r\n          \"start\": 0.8,\r\n          \"end\": 1.06\r\n        },\r\n        {\r\n          \"word\": \" und\",\r\n          \"start\": 1.06,\r\n          \"end\": 1.52\r\n        },\r\n        {\r\n          \"word\": \" nehmen\",\r\n          \"start\": 1.52,\r\n          \"end\": 1.82\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.82,\r\n          \"end\": 2.04\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 2.04,\r\n          \"end\": 2.24\r\n        },\r\n        {\r\n          \"word\": \" Fuß\",\r\n          \"start\": 2.24,\r\n          \"end\": 2.58\r\n        },\r\n        {\r\n          \"word\": \" vom\",\r\n          \"start\": 2.58,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" Wegrand.\",\r\n          \"start\": 2.8,\r\n          \"end\": 3.4\r\n        },\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 3.64,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" trenne\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 4.4,\r\n          \"end\": 4.6\r\n        },\r\n        {\r\n          \"word\": \" gerade\",\r\n          \"start\": 4.6,\r\n          \"end\": 5.06\r\n        },\r\n        {\r\n          \"word\": \" Grünfläche\",\r\n          \"start\": 5.06,\r\n          \"end\": 5.76\r\n        },\r\n        {\r\n          \"word\": \" und\",\r\n          \"start\": 5.76,\r\n          \"end\": 5.94\r\n        },\r\n        {\r\n          \"word\": \" Gehabsicht.\",\r\n          \"start\": 5.94,\r\n          \"end\": 6.64\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Gehen\",\r\n      \"end\": 0.34\r\n    },\r\n    {\r\n      \"at\": 0.34,\r\n      \"charIndex\": 6,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.46\r\n    },\r\n    {\r\n      \"at\": 0.46,\r\n      \"charIndex\": 10,\r\n      \"word\": \"auf\",\r\n      \"end\": 0.64\r\n    },\r\n    {\r\n      \"at\": 0.64,\r\n      \"charIndex\": 14,\r\n      \"word\": \"den\",\r\n      \"end\": 0.8\r\n    },\r\n    {\r\n      \"at\": 0.8,\r\n      \"charIndex\": 18,\r\n      \"word\": \"Weg\",\r\n      \"end\": 1.06\r\n    },\r\n    {\r\n      \"at\": 1.06,\r\n      \"charIndex\": 23,\r\n      \"word\": \"Und\",\r\n      \"end\": 1.52\r\n    },\r\n    {\r\n      \"at\": 1.52,\r\n      \"charIndex\": 27,\r\n      \"word\": \"nehmen\",\r\n      \"end\": 1.82\r\n    },\r\n    {\r\n      \"at\": 1.82,\r\n      \"charIndex\": 34,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.04\r\n    },\r\n    {\r\n      \"at\": 2.04,\r\n      \"charIndex\": 38,\r\n      \"word\": \"den\",\r\n      \"end\": 2.24\r\n    },\r\n    {\r\n      \"at\": 2.24,\r\n      \"charIndex\": 42,\r\n      \"word\": \"Fuß\",\r\n      \"end\": 2.58\r\n    },\r\n    {\r\n      \"at\": 2.58,\r\n      \"charIndex\": 46,\r\n      \"word\": \"vom\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.8,\r\n      \"charIndex\": 50,\r\n      \"word\": \"Wegrand\",\r\n      \"end\": 3.4\r\n    },\r\n    {\r\n      \"at\": 3.64,\r\n      \"charIndex\": 59,\r\n      \"word\": \"Ich\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 63,\r\n      \"word\": \"trenne\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.4,\r\n      \"charIndex\": 70,\r\n      \"word\": \"hier\",\r\n      \"end\": 4.6\r\n    },\r\n    {\r\n      \"at\": 4.6,\r\n      \"charIndex\": 75,\r\n      \"word\": \"gerade\",\r\n      \"end\": 5.06\r\n    },\r\n    {\r\n      \"at\": 5.06,\r\n      \"charIndex\": 82,\r\n      \"word\": \"Grünfläche\",\r\n      \"end\": 5.76\r\n    },\r\n    {\r\n      \"at\": 5.76,\r\n      \"charIndex\": 93,\r\n      \"word\": \"und\",\r\n      \"end\": 5.94\r\n    },\r\n    {\r\n      \"at\": 5.94,\r\n      \"charIndex\": 97,\r\n      \"word\": \"Gehabsicht\",\r\n      \"end\": 6.64\r\n    }\r\n  ],\r\n  \"sha256\": \"451f9fb68d3b83e52a866cdbf648dd05cff0ad6198dc9a13aafee69cbcfa216c\",\r\n  \"bytes\": 119084,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-herbert-rasenaufsicht-02.mp3\"\r\n}\r\n",
+          "sha256": "9e73fcec96b5a4405106895ee46410f6bea10f9ce763234b401728e59445844e"
+        }
+      }
+    }
+  }
+}

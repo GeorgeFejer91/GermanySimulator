@@ -14,7 +14,7 @@ function sourceOf(name){
  }
  throw Error(name);
 }
-const names=['neighborActivityActive','citySpeechAllowed','stimulusEligible','hasStimulusFamily','nextVariant','queueStimulus','stationAtPlayer','playerOnRailTrack','trainAudioContextAllowed','trainAnnouncementVolume','requestTrainAnnouncement','updateTrainAnnouncement','stopRecordedSpeech','stopSpeech','finishStimulus','playRecordedStimulus','openDialogue','interact','useLawPower','showWorldBark','speak','speakRecorded','startCitizenshipQuiz'];
+const names=['neighborActivityActive','citySpeechAllowed','stimulusEligible','hasStimulusFamily','nextVariant','queueStimulus','stationAtPlayer','playerOnRailTrack','trainAudioContextAllowed','trainAnnouncementVolume','requestTrainAnnouncement','updateTrainAnnouncement','stopRecordedSpeech','stopSpeech','finishStimulus','playRecordedStimulus','openDialogue','cityInteractionTarget','currentMission','interact','useLawPower','showWorldBark','speak','speakRecorded','startCitizenshipQuiz'];
 function harness(){
  let now=10000,resolveRecording,stops=0,starts=0,captionFallback=0;
  const timers=new Map(),sources=[],gains=[],buffer={duration:48};let timerId=0;
@@ -30,7 +30,7 @@ function harness(){
   audio:{currentTime:0,state:'running',createBufferSource(){const source={connect:target=>target,start(){starts++},stop(){stops++},onended:null};sources.push(source);return source},createGain(){const node={gain:{value:1,setValueAtTime(){},linearRampToValueAtTime(){},setTargetAtTime(v){node.target=v}},connect:target=>target,disconnect(){node.disconnected=true}};gains.push(node);return node}},
  });
  vm.runInContext(`
- const state={started:true,voiceOn:true,mission:1,modal:false,dialogue:false,gameOver:false};
+ const state={started:true,voiceOn:true,mission:1,modal:false,dialogue:false,gameOver:false},missions=[{},{}];
  const player={x:50,y:50,r:10},keys={},jwd={allocated:false,visited:true,met:new Set(),tour:null};
  const jwdLane={x:2000,y:2000,w:500,h:300},stations=[{x:0,y:0,w:100,h:100},{x:500,y:0,w:100,h:100}],railLoops=[{x:800}],npcs=[],buildings=[];
  const TRAIN_IDLE_SECONDS=5,TRAIN_FADE_DISTANCE=320,TRAIN_PLAYER_OBSTRUCTION_AUDIO='children.mp3',TRAIN_PLATFORM_AUDIO=['ordinary.mp3'];

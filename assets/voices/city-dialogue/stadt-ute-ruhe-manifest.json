@@ -1,0 +1,661 @@
+{
+  "voiceId": "stadt-ute-ruhe",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-ute-ruhe-01",
+      "voiceId": "stadt-ute-ruhe",
+      "actorId": "city-ute-ruhe",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=0]",
+      "text": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+      "english": "Could you take a quieter step? I can already hear from here that you still have plans.",
+      "sourceSha256": "3e98808041a0c40c5d1f1edc7f3c39c62ef5526e01cffcd893618211f1e8882f",
+      "profileId": "cfdd8b4cda6646daa197e0291e146988",
+      "referenceSha256": "a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2",
+      "referenceOriginalSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+      "decode": {
+        "maxSpeechTokens": 352,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 137,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.72,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4",
+      "profileJsonSha256": "c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266",
+      "rawSha256": "d24642c2a82926ec91c48f76856bbac7f8b3b98d1972b9694841f22c6cf86213",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.44,
+      "renderSeconds": 6.59,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "cfdd8b4cda6646daa197e0291e146988",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.91:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.14,
+      "asr": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+          "transcribeSeconds": 10.01,
+          "words": [
+            {
+              "word": " Könnten",
+              "start": 0,
+              "end": 0.36
+            },
+            {
+              "word": " Sie",
+              "start": 0.36,
+              "end": 0.5
+            },
+            {
+              "word": " einen",
+              "start": 0.5,
+              "end": 0.78
+            },
+            {
+              "word": " Schritt",
+              "start": 0.78,
+              "end": 1.02
+            },
+            {
+              "word": " leiser",
+              "start": 1.02,
+              "end": 1.38
+            },
+            {
+              "word": " treten?",
+              "start": 1.38,
+              "end": 1.82
+            },
+            {
+              "word": " Man",
+              "start": 2.08,
+              "end": 2.42
+            },
+            {
+              "word": " hört",
+              "start": 2.42,
+              "end": 2.6
+            },
+            {
+              "word": " schon",
+              "start": 2.6,
+              "end": 2.8
+            },
+            {
+              "word": " von",
+              "start": 2.8,
+              "end": 3
+            },
+            {
+              "word": " hier,",
+              "start": 3,
+              "end": 3.24
+            },
+            {
+              "word": " dass",
+              "start": 3.34,
+              "end": 3.44
+            },
+            {
+              "word": " Sie",
+              "start": 3.44,
+              "end": 3.54
+            },
+            {
+              "word": " noch",
+              "start": 3.54,
+              "end": 3.68
+            },
+            {
+              "word": " etwas",
+              "start": 3.68,
+              "end": 3.96
+            },
+            {
+              "word": " vorhaben.",
+              "start": 3.96,
+              "end": 4.56
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Könnten",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 8,
+          "word": "Sie",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 12,
+          "word": "einen",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 18,
+          "word": "Schritt",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 26,
+          "word": "leiser",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 33,
+          "word": "treten",
+          "end": 1.82
+        },
+        {
+          "at": 2.08,
+          "charIndex": 41,
+          "word": "Man",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 45,
+          "word": "hört",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 50,
+          "word": "schon",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 56,
+          "word": "von",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 60,
+          "word": "hier",
+          "end": 3.24
+        },
+        {
+          "at": 3.34,
+          "charIndex": 66,
+          "word": "dass",
+          "end": 3.44
+        },
+        {
+          "at": 3.44,
+          "charIndex": 71,
+          "word": "Sie",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 75,
+          "word": "noch",
+          "end": 3.68
+        },
+        {
+          "at": 3.68,
+          "charIndex": 80,
+          "word": "etwas",
+          "end": 3.96
+        },
+        {
+          "at": 3.96,
+          "charIndex": 86,
+          "word": "vorhaben",
+          "end": 4.56
+        }
+      ],
+      "sha256": "b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce",
+      "bytes": 87980,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-ute-ruhe-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-ute-ruhe-01",
+        "encodedSha256": "b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce"
+      }
+    },
+    {
+      "clipId": "stadt-ute-ruhe-02",
+      "voiceId": "stadt-ute-ruhe",
+      "actorId": "city-ute-ruhe",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=1]",
+      "text": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+      "english": "Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.",
+      "sourceSha256": "c04ae52507104923885ac572969f5e60e6b719542b38c7cd036581fd8ad29ab3",
+      "profileId": "cfdd8b4cda6646daa197e0291e146988",
+      "referenceSha256": "a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2",
+      "referenceOriginalSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+      "decode": {
+        "maxSpeechTokens": 376,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 165,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.05,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4",
+      "profileJsonSha256": "c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266",
+      "rawSha256": "8153b3847657db947f2d62cb9d45ebdc9eba98104a812732d4e71586e88507c0",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.56,
+      "renderSeconds": 7.91,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "cfdd8b4cda6646daa197e0291e146988",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.69:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.03,
+      "truePeakDbtp": -2.21,
+      "asr": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+          "transcribeSeconds": 10.02,
+          "words": [
+            {
+              "word": " Lassen",
+              "start": 0,
+              "end": 0.34
+            },
+            {
+              "word": " Sie",
+              "start": 0.34,
+              "end": 0.46
+            },
+            {
+              "word": " die",
+              "start": 0.46,
+              "end": 0.62
+            },
+            {
+              "word": " Lücke",
+              "start": 0.62,
+              "end": 0.84
+            },
+            {
+              "word": " bitte",
+              "start": 0.84,
+              "end": 1.06
+            },
+            {
+              "word": " frei.",
+              "start": 1.06,
+              "end": 1.42
+            },
+            {
+              "word": " Ich",
+              "start": 1.64,
+              "end": 2.06
+            },
+            {
+              "word": " brauche",
+              "start": 2.06,
+              "end": 2.4
+            },
+            {
+              "word": " nicht",
+              "start": 2.4,
+              "end": 2.56
+            },
+            {
+              "word": " viel",
+              "start": 2.56,
+              "end": 2.78
+            },
+            {
+              "word": " Platz,",
+              "start": 2.78,
+              "end": 3.2
+            },
+            {
+              "word": " nur",
+              "start": 3.46,
+              "end": 3.74
+            },
+            {
+              "word": " genau",
+              "start": 3.74,
+              "end": 4.02
+            },
+            {
+              "word": " den,",
+              "start": 4.02,
+              "end": 4.4
+            },
+            {
+              "word": " den",
+              "start": 4.58,
+              "end": 4.66
+            },
+            {
+              "word": " gerade",
+              "start": 4.66,
+              "end": 4.96
+            },
+            {
+              "word": " keiner",
+              "start": 4.96,
+              "end": 5.3
+            },
+            {
+              "word": " benutzt.",
+              "start": 5.3,
+              "end": 5.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Lassen",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 7,
+          "word": "Sie",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 11,
+          "word": "die",
+          "end": 0.62
+        },
+        {
+          "at": 0.62,
+          "charIndex": 15,
+          "word": "Lücke",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 21,
+          "word": "bitte",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 27,
+          "word": "frei",
+          "end": 1.42
+        },
+        {
+          "at": 1.64,
+          "charIndex": 33,
+          "word": "Ich",
+          "end": 2.06
+        },
+        {
+          "at": 2.06,
+          "charIndex": 37,
+          "word": "brauche",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 45,
+          "word": "nicht",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 51,
+          "word": "viel",
+          "end": 2.78
+        },
+        {
+          "at": 2.78,
+          "charIndex": 56,
+          "word": "Platz",
+          "end": 3.2
+        },
+        {
+          "at": 3.46,
+          "charIndex": 63,
+          "word": "nur",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 67,
+          "word": "genau",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 73,
+          "word": "den",
+          "end": 4.4
+        },
+        {
+          "at": 4.58,
+          "charIndex": 78,
+          "word": "den",
+          "end": 4.66
+        },
+        {
+          "at": 4.66,
+          "charIndex": 82,
+          "word": "gerade",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 89,
+          "word": "keiner",
+          "end": 5.3
+        },
+        {
+          "at": 5.3,
+          "charIndex": 96,
+          "word": "benutzt",
+          "end": 5.88
+        }
+      ],
+      "sha256": "7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446",
+      "bytes": 106028,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-ute-ruhe-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-ute-ruhe-02",
+        "encodedSha256": "7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-ute-ruhe-03",
+      "voiceId": "stadt-ute-ruhe",
+      "actorId": "city-ute-ruhe",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=berlin,slot=0]",
+      "text": "Could Sie einen Schritt more quietly treten? Man hört schon von hier, dass Sie still have plans.",
+      "english": "Could you take a quieter step? I can already hear from here that you still have plans.",
+      "sourceSha256": "44855fa05eaf150e62b8c3f2a337654413916dc954bf0da0a72e940ee2235ace",
+      "profileId": "cfdd8b4cda6646daa197e0291e146988",
+      "referenceSha256": "a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2",
+      "referenceOriginalSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-ute-ruhe-04",
+      "voiceId": "stadt-ute-ruhe",
+      "actorId": "city-ute-ruhe",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=berlin,slot=1]",
+      "text": "Please lassen Sie die Lücke clear. Ich brauche nicht much space, nur genau den, den gerade nobody uses.",
+      "english": "Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.",
+      "sourceSha256": "0c96ee0c24edbf0cbc4f50d0e806dc42c61c762423e789656370807753e4a24e",
+      "profileId": "cfdd8b4cda6646daa197e0291e146988",
+      "referenceSha256": "a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2",
+      "referenceOriginalSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-ute-ruhe-01\",\r\n      \"voiceId\": \"stadt-ute-ruhe\",\r\n      \"actorId\": \"city-ute-ruhe\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n      \"english\": \"Could you take a quieter step? I can already hear from here that you still have plans.\",\r\n      \"sourceSha256\": \"3e98808041a0c40c5d1f1edc7f3c39c62ef5526e01cffcd893618211f1e8882f\",\r\n      \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n      \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n      \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ute-ruhe-02\",\r\n      \"voiceId\": \"stadt-ute-ruhe\",\r\n      \"actorId\": \"city-ute-ruhe\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n      \"english\": \"Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.\",\r\n      \"sourceSha256\": \"c04ae52507104923885ac572969f5e60e6b719542b38c7cd036581fd8ad29ab3\",\r\n      \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n      \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n      \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ute-ruhe-03\",\r\n      \"voiceId\": \"stadt-ute-ruhe\",\r\n      \"actorId\": \"city-ute-ruhe\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Could Sie einen Schritt more quietly treten? Man hört schon von hier, dass Sie still have plans.\",\r\n      \"english\": \"Could you take a quieter step? I can already hear from here that you still have plans.\",\r\n      \"sourceSha256\": \"44855fa05eaf150e62b8c3f2a337654413916dc954bf0da0a72e940ee2235ace\",\r\n      \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n      \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n      \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ute-ruhe-04\",\r\n      \"voiceId\": \"stadt-ute-ruhe\",\r\n      \"actorId\": \"city-ute-ruhe\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Please lassen Sie die Lücke clear. Ich brauche nicht much space, nur genau den, den gerade nobody uses.\",\r\n      \"english\": \"Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.\",\r\n      \"sourceSha256\": \"0c96ee0c24edbf0cbc4f50d0e806dc42c61c762423e789656370807753e4a24e\",\r\n      \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n      \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n      \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4"
+    },
+    "takes": {
+      "stadt-ute-ruhe-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-ute-ruhe-01\",\r\n  \"voiceId\": \"stadt-ute-ruhe\",\r\n  \"actorId\": \"city-ute-ruhe\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n  \"english\": \"Could you take a quieter step? I can already hear from here that you still have plans.\",\r\n  \"sourceSha256\": \"3e98808041a0c40c5d1f1edc7f3c39c62ef5526e01cffcd893618211f1e8882f\",\r\n  \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n  \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n  \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 352,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 137,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.72,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4\",\r\n  \"profileJsonSha256\": \"c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266\",\r\n  \"rawSha256\": \"d24642c2a82926ec91c48f76856bbac7f8b3b98d1972b9694841f22c6cf86213\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.44,\r\n  \"renderSeconds\": 6.59,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "3068e4f2519f593af6c54de118a9095e067833515b17bff65ba2591c7f335bc7"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-ute-ruhe-01\",\r\n  \"voiceId\": \"stadt-ute-ruhe\",\r\n  \"actorId\": \"city-ute-ruhe\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n  \"english\": \"Could you take a quieter step? I can already hear from here that you still have plans.\",\r\n  \"sourceSha256\": \"3e98808041a0c40c5d1f1edc7f3c39c62ef5526e01cffcd893618211f1e8882f\",\r\n  \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n  \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n  \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 352,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 137,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.72,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4\",\r\n  \"profileJsonSha256\": \"c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266\",\r\n  \"rawSha256\": \"d24642c2a82926ec91c48f76856bbac7f8b3b98d1972b9694841f22c6cf86213\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.44,\r\n  \"renderSeconds\": 6.59,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.91:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.19,\r\n  \"truePeakDbtp\": -2.14,\r\n  \"asr\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.\",\r\n      \"transcribeSeconds\": 10.01,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Könnten\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.36\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.36,\r\n          \"end\": 0.5\r\n        },\r\n        {\r\n          \"word\": \" einen\",\r\n          \"start\": 0.5,\r\n          \"end\": 0.78\r\n        },\r\n        {\r\n          \"word\": \" Schritt\",\r\n          \"start\": 0.78,\r\n          \"end\": 1.02\r\n        },\r\n        {\r\n          \"word\": \" leiser\",\r\n          \"start\": 1.02,\r\n          \"end\": 1.38\r\n        },\r\n        {\r\n          \"word\": \" treten?\",\r\n          \"start\": 1.38,\r\n          \"end\": 1.82\r\n        },\r\n        {\r\n          \"word\": \" Man\",\r\n          \"start\": 2.08,\r\n          \"end\": 2.42\r\n        },\r\n        {\r\n          \"word\": \" hört\",\r\n          \"start\": 2.42,\r\n          \"end\": 2.6\r\n        },\r\n        {\r\n          \"word\": \" schon\",\r\n          \"start\": 2.6,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" von\",\r\n          \"start\": 2.8,\r\n          \"end\": 3.0\r\n        },\r\n        {\r\n          \"word\": \" hier,\",\r\n          \"start\": 3.0,\r\n          \"end\": 3.24\r\n        },\r\n        {\r\n          \"word\": \" dass\",\r\n          \"start\": 3.34,\r\n          \"end\": 3.44\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.44,\r\n          \"end\": 3.54\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 3.54,\r\n          \"end\": 3.68\r\n        },\r\n        {\r\n          \"word\": \" etwas\",\r\n          \"start\": 3.68,\r\n          \"end\": 3.96\r\n        },\r\n        {\r\n          \"word\": \" vorhaben.\",\r\n          \"start\": 3.96,\r\n          \"end\": 4.56\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Könnten\",\r\n      \"end\": 0.36\r\n    },\r\n    {\r\n      \"at\": 0.36,\r\n      \"charIndex\": 8,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.5\r\n    },\r\n    {\r\n      \"at\": 0.5,\r\n      \"charIndex\": 12,\r\n      \"word\": \"einen\",\r\n      \"end\": 0.78\r\n    },\r\n    {\r\n      \"at\": 0.78,\r\n      \"charIndex\": 18,\r\n      \"word\": \"Schritt\",\r\n      \"end\": 1.02\r\n    },\r\n    {\r\n      \"at\": 1.02,\r\n      \"charIndex\": 26,\r\n      \"word\": \"leiser\",\r\n      \"end\": 1.38\r\n    },\r\n    {\r\n      \"at\": 1.38,\r\n      \"charIndex\": 33,\r\n      \"word\": \"treten\",\r\n      \"end\": 1.82\r\n    },\r\n    {\r\n      \"at\": 2.08,\r\n      \"charIndex\": 41,\r\n      \"word\": \"Man\",\r\n      \"end\": 2.42\r\n    },\r\n    {\r\n      \"at\": 2.42,\r\n      \"charIndex\": 45,\r\n      \"word\": \"hört\",\r\n      \"end\": 2.6\r\n    },\r\n    {\r\n      \"at\": 2.6,\r\n      \"charIndex\": 50,\r\n      \"word\": \"schon\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.8,\r\n      \"charIndex\": 56,\r\n      \"word\": \"von\",\r\n      \"end\": 3.0\r\n    },\r\n    {\r\n      \"at\": 3.0,\r\n      \"charIndex\": 60,\r\n      \"word\": \"hier\",\r\n      \"end\": 3.24\r\n    },\r\n    {\r\n      \"at\": 3.34,\r\n      \"charIndex\": 66,\r\n      \"word\": \"dass\",\r\n      \"end\": 3.44\r\n    },\r\n    {\r\n      \"at\": 3.44,\r\n      \"charIndex\": 71,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.54\r\n    },\r\n    {\r\n      \"at\": 3.54,\r\n      \"charIndex\": 75,\r\n      \"word\": \"noch\",\r\n      \"end\": 3.68\r\n    },\r\n    {\r\n      \"at\": 3.68,\r\n      \"charIndex\": 80,\r\n      \"word\": \"etwas\",\r\n      \"end\": 3.96\r\n    },\r\n    {\r\n      \"at\": 3.96,\r\n      \"charIndex\": 86,\r\n      \"word\": \"vorhaben\",\r\n      \"end\": 4.56\r\n    }\r\n  ],\r\n  \"sha256\": \"b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce\",\r\n  \"bytes\": 87980,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-ute-ruhe-01.mp3\"\r\n}\r\n",
+          "sha256": "cd976dcbb4b7c43ef8fcd517ef782b5437d679292d0436f1a353d467d29d94ab"
+        }
+      },
+      "stadt-ute-ruhe-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-ute-ruhe-02\",\r\n  \"voiceId\": \"stadt-ute-ruhe\",\r\n  \"actorId\": \"city-ute-ruhe\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n  \"english\": \"Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.\",\r\n  \"sourceSha256\": \"c04ae52507104923885ac572969f5e60e6b719542b38c7cd036581fd8ad29ab3\",\r\n  \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n  \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n  \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.05,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4\",\r\n  \"profileJsonSha256\": \"c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266\",\r\n  \"rawSha256\": \"8153b3847657db947f2d62cb9d45ebdc9eba98104a812732d4e71586e88507c0\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.56,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "14817c0b3b75fb4b0eeb2fac69353c5a46fa96412db45810038edbb96d98ecb4"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-ute-ruhe-02\",\r\n  \"voiceId\": \"stadt-ute-ruhe\",\r\n  \"actorId\": \"city-ute-ruhe\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ute-ruhe].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n  \"english\": \"Please leave that gap clear. I do not need much space, just precisely the space that nobody is using right now.\",\r\n  \"sourceSha256\": \"c04ae52507104923885ac572969f5e60e6b719542b38c7cd036581fd8ad29ab3\",\r\n  \"profileId\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n  \"referenceSha256\": \"a95a1680ed2ebd995dd3d633973cb8d3775c3689aacacdce7cd1b08ac50567c2\",\r\n  \"referenceOriginalSha256\": \"6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.05,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"5f178c3b82c7d4f7ea85e47f56848104683723d86ce855bb714e97a1469bc3c4\",\r\n  \"profileJsonSha256\": \"c827c25e857eca64811a35091f9df242ad202be1fc468fb0138e2bd1d2333266\",\r\n  \"rawSha256\": \"8153b3847657db947f2d62cb9d45ebdc9eba98104a812732d4e71586e88507c0\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.56,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"cfdd8b4cda6646daa197e0291e146988\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.69:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.03,\r\n  \"truePeakDbtp\": -2.21,\r\n  \"asr\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.\",\r\n      \"transcribeSeconds\": 10.02,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Lassen\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.34\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.34,\r\n          \"end\": 0.46\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 0.46,\r\n          \"end\": 0.62\r\n        },\r\n        {\r\n          \"word\": \" Lücke\",\r\n          \"start\": 0.62,\r\n          \"end\": 0.84\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 0.84,\r\n          \"end\": 1.06\r\n        },\r\n        {\r\n          \"word\": \" frei.\",\r\n          \"start\": 1.06,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 1.64,\r\n          \"end\": 2.06\r\n        },\r\n        {\r\n          \"word\": \" brauche\",\r\n          \"start\": 2.06,\r\n          \"end\": 2.4\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 2.4,\r\n          \"end\": 2.56\r\n        },\r\n        {\r\n          \"word\": \" viel\",\r\n          \"start\": 2.56,\r\n          \"end\": 2.78\r\n        },\r\n        {\r\n          \"word\": \" Platz,\",\r\n          \"start\": 2.78,\r\n          \"end\": 3.2\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 3.46,\r\n          \"end\": 3.74\r\n        },\r\n        {\r\n          \"word\": \" genau\",\r\n          \"start\": 3.74,\r\n          \"end\": 4.02\r\n        },\r\n        {\r\n          \"word\": \" den,\",\r\n          \"start\": 4.02,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 4.58,\r\n          \"end\": 4.66\r\n        },\r\n        {\r\n          \"word\": \" gerade\",\r\n          \"start\": 4.66,\r\n          \"end\": 4.96\r\n        },\r\n        {\r\n          \"word\": \" keiner\",\r\n          \"start\": 4.96,\r\n          \"end\": 5.3\r\n        },\r\n        {\r\n          \"word\": \" benutzt.\",\r\n          \"start\": 5.3,\r\n          \"end\": 5.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Lassen\",\r\n      \"end\": 0.34\r\n    },\r\n    {\r\n      \"at\": 0.34,\r\n      \"charIndex\": 7,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.46\r\n    },\r\n    {\r\n      \"at\": 0.46,\r\n      \"charIndex\": 11,\r\n      \"word\": \"die\",\r\n      \"end\": 0.62\r\n    },\r\n    {\r\n      \"at\": 0.62,\r\n      \"charIndex\": 15,\r\n      \"word\": \"Lücke\",\r\n      \"end\": 0.84\r\n    },\r\n    {\r\n      \"at\": 0.84,\r\n      \"charIndex\": 21,\r\n      \"word\": \"bitte\",\r\n      \"end\": 1.06\r\n    },\r\n    {\r\n      \"at\": 1.06,\r\n      \"charIndex\": 27,\r\n      \"word\": \"frei\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.64,\r\n      \"charIndex\": 33,\r\n      \"word\": \"Ich\",\r\n      \"end\": 2.06\r\n    },\r\n    {\r\n      \"at\": 2.06,\r\n      \"charIndex\": 37,\r\n      \"word\": \"brauche\",\r\n      \"end\": 2.4\r\n    },\r\n    {\r\n      \"at\": 2.4,\r\n      \"charIndex\": 45,\r\n      \"word\": \"nicht\",\r\n      \"end\": 2.56\r\n    },\r\n    {\r\n      \"at\": 2.56,\r\n      \"charIndex\": 51,\r\n      \"word\": \"viel\",\r\n      \"end\": 2.78\r\n    },\r\n    {\r\n      \"at\": 2.78,\r\n      \"charIndex\": 56,\r\n      \"word\": \"Platz\",\r\n      \"end\": 3.2\r\n    },\r\n    {\r\n      \"at\": 3.46,\r\n      \"charIndex\": 63,\r\n      \"word\": \"nur\",\r\n      \"end\": 3.74\r\n    },\r\n    {\r\n      \"at\": 3.74,\r\n      \"charIndex\": 67,\r\n      \"word\": \"genau\",\r\n      \"end\": 4.02\r\n    },\r\n    {\r\n      \"at\": 4.02,\r\n      \"charIndex\": 73,\r\n      \"word\": \"den\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.58,\r\n      \"charIndex\": 78,\r\n      \"word\": \"den\",\r\n      \"end\": 4.66\r\n    },\r\n    {\r\n      \"at\": 4.66,\r\n      \"charIndex\": 82,\r\n      \"word\": \"gerade\",\r\n      \"end\": 4.96\r\n    },\r\n    {\r\n      \"at\": 4.96,\r\n      \"charIndex\": 89,\r\n      \"word\": \"keiner\",\r\n      \"end\": 5.3\r\n    },\r\n    {\r\n      \"at\": 5.3,\r\n      \"charIndex\": 96,\r\n      \"word\": \"benutzt\",\r\n      \"end\": 5.88\r\n    }\r\n  ],\r\n  \"sha256\": \"7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446\",\r\n  \"bytes\": 106028,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-ute-ruhe-02.mp3\"\r\n}\r\n",
+          "sha256": "69985bef811ed405bd0d7cc61debe726424e21ae759bb326afe0d8934389cb80"
+        }
+      }
+    }
+  }
+}

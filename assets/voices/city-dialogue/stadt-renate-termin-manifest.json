@@ -1,0 +1,969 @@
+{
+  "voiceId": "stadt-renate-termin",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-renate-termin-01",
+      "voiceId": "stadt-renate-termin",
+      "actorId": "city-renate-termin",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=0]",
+      "text": "Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.",
+      "english": "Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.",
+      "sourceSha256": "fc5ab55451d93d19ac897810ea57b8ccca796f8d4e0263d226a0716126a9c9cd",
+      "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171000,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 194,
+        "eosReached": true,
+        "t3InferenceSeconds": 8.23,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5",
+      "profileJsonSha256": "9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b",
+      "rawSha256": "e14e4535b3893b2bd1ded972a5937c86253f3736c1a9416ac8149589e3840e30",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.7,
+      "renderSeconds": 9.09,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "21f2fc63a2f34d3b81462ca72933e51e",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.73:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.19,
+      "asr": "Ohne Termin brauchen Sie hier nicht so lange zu überlegen. Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ohne Termin brauchen Sie hier nicht so lange zu überlegen. Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.",
+          "transcribeSeconds": 9.92,
+          "words": [
+            {
+              "word": " Ohne",
+              "start": 0,
+              "end": 0.48
+            },
+            {
+              "word": " Termin",
+              "start": 0.48,
+              "end": 0.98
+            },
+            {
+              "word": " brauchen",
+              "start": 0.98,
+              "end": 1.32
+            },
+            {
+              "word": " Sie",
+              "start": 1.32,
+              "end": 1.54
+            },
+            {
+              "word": " hier",
+              "start": 1.54,
+              "end": 1.74
+            },
+            {
+              "word": " nicht",
+              "start": 1.74,
+              "end": 1.98
+            },
+            {
+              "word": " so",
+              "start": 1.98,
+              "end": 2.18
+            },
+            {
+              "word": " lange",
+              "start": 2.18,
+              "end": 2.36
+            },
+            {
+              "word": " zu",
+              "start": 2.36,
+              "end": 2.54
+            },
+            {
+              "word": " überlegen.",
+              "start": 2.54,
+              "end": 3.12
+            },
+            {
+              "word": " Für",
+              "start": 3.34,
+              "end": 3.66
+            },
+            {
+              "word": " spontanes",
+              "start": 3.66,
+              "end": 4.36
+            },
+            {
+              "word": " Nachfragen",
+              "start": 4.36,
+              "end": 4.9
+            },
+            {
+              "word": " ist",
+              "start": 4.9,
+              "end": 5.04
+            },
+            {
+              "word": " der",
+              "start": 5.04,
+              "end": 5.18
+            },
+            {
+              "word": " spontane",
+              "start": 5.18,
+              "end": 5.7
+            },
+            {
+              "word": " Zeitraum",
+              "start": 5.7,
+              "end": 6.22
+            },
+            {
+              "word": " längst",
+              "start": 6.22,
+              "end": 6.6
+            },
+            {
+              "word": " vergeben.",
+              "start": 6.6,
+              "end": 7.04
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ohne",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 5,
+          "word": "Termin",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 12,
+          "word": "brauchen",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 21,
+          "word": "Sie",
+          "end": 1.54
+        },
+        {
+          "at": 1.54,
+          "charIndex": 25,
+          "word": "hier",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 30,
+          "word": "nicht",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 36,
+          "word": "so",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 39,
+          "word": "lange",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 45,
+          "word": "zu",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 48,
+          "word": "überlegen",
+          "end": 3.12
+        },
+        {
+          "at": 3.34,
+          "charIndex": 59,
+          "word": "Für",
+          "end": 3.66
+        },
+        {
+          "at": 3.66,
+          "charIndex": 63,
+          "word": "spontanes",
+          "end": 4.36
+        },
+        {
+          "at": 4.36,
+          "charIndex": 73,
+          "word": "Nachfragen",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 84,
+          "word": "ist",
+          "end": 5.04
+        },
+        {
+          "at": 5.04,
+          "charIndex": 88,
+          "word": "der",
+          "end": 5.18
+        },
+        {
+          "at": 5.18,
+          "charIndex": 92,
+          "word": "spontane",
+          "end": 5.7
+        },
+        {
+          "at": 5.7,
+          "charIndex": 101,
+          "word": "Zeitraum",
+          "end": 6.22
+        },
+        {
+          "at": 6.22,
+          "charIndex": 110,
+          "word": "längst",
+          "end": 6.6
+        },
+        {
+          "at": 6.6,
+          "charIndex": 117,
+          "word": "vergeben",
+          "end": 7.04
+        }
+      ],
+      "sha256": "2b562aacbfac4438af3c05b81cffc37cd3f4bb660eb7f6c4b06de8eab29d12f2",
+      "bytes": 124076,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-renate-termin-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-renate-termin-01",
+        "encodedSha256": "2b562aacbfac4438af3c05b81cffc37cd3f4bb660eb7f6c4b06de8eab29d12f2"
+      }
+    },
+    {
+      "clipId": "stadt-renate-termin-02",
+      "voiceId": "stadt-renate-termin",
+      "actorId": "city-renate-termin",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=1]",
+      "text": "Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!",
+      "english": "You only had a short question? Then you should only have been briefly late!",
+      "sourceSha256": "42d32e245ab62842693c9a3e6a1cb156c298c70e23982131a2a35881fd930813",
+      "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 135,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.53,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5",
+      "profileJsonSha256": "9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b",
+      "rawSha256": "b4fbe951e57d717b8dadef06664d77525e36ed9a9a346f8e660a45dfff8b1de9",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.34,
+      "renderSeconds": 6.42,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "21f2fc63a2f34d3b81462ca72933e51e",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.53:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.26,
+      "truePeakDbtp": -2.08,
+      "asr": "Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen?",
+          "transcribeSeconds": 10.62,
+          "words": [
+            {
+              "word": " Sie",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " hatten",
+              "start": 0.18,
+              "end": 0.4
+            },
+            {
+              "word": " nur",
+              "start": 0.4,
+              "end": 0.58
+            },
+            {
+              "word": " eine",
+              "start": 0.58,
+              "end": 0.78
+            },
+            {
+              "word": " kurze",
+              "start": 0.78,
+              "end": 1.22
+            },
+            {
+              "word": " Frage?",
+              "start": 1.22,
+              "end": 1.72
+            },
+            {
+              "word": " Dann",
+              "start": 1.98,
+              "end": 2.22
+            },
+            {
+              "word": " hätten",
+              "start": 2.22,
+              "end": 2.44
+            },
+            {
+              "word": " Sie",
+              "start": 2.44,
+              "end": 2.62
+            },
+            {
+              "word": " bitte",
+              "start": 2.62,
+              "end": 2.82
+            },
+            {
+              "word": " auch",
+              "start": 2.82,
+              "end": 3.02
+            },
+            {
+              "word": " nur",
+              "start": 3.02,
+              "end": 3.12
+            },
+            {
+              "word": " kurz",
+              "start": 3.12,
+              "end": 3.46
+            },
+            {
+              "word": " zu",
+              "start": 3.46,
+              "end": 3.62
+            },
+            {
+              "word": " spät",
+              "start": 3.62,
+              "end": 3.98
+            },
+            {
+              "word": " kommen",
+              "start": 3.98,
+              "end": 4.24
+            },
+            {
+              "word": " dürfen?",
+              "start": 4.24,
+              "end": 4.58
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "hatten",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 11,
+          "word": "nur",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 15,
+          "word": "eine",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 20,
+          "word": "kurze",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 26,
+          "word": "Frage",
+          "end": 1.72
+        },
+        {
+          "at": 1.98,
+          "charIndex": 33,
+          "word": "Dann",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 38,
+          "word": "hätten",
+          "end": 2.44
+        },
+        {
+          "at": 2.44,
+          "charIndex": 45,
+          "word": "Sie",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 49,
+          "word": "bitte",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 55,
+          "word": "auch",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 60,
+          "word": "nur",
+          "end": 3.12
+        },
+        {
+          "at": 3.12,
+          "charIndex": 64,
+          "word": "kurz",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 69,
+          "word": "zu",
+          "end": 3.62
+        },
+        {
+          "at": 3.62,
+          "charIndex": 72,
+          "word": "spät",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 77,
+          "word": "kommen",
+          "end": 4.24
+        },
+        {
+          "at": 4.24,
+          "charIndex": 84,
+          "word": "dürfen",
+          "end": 4.58
+        }
+      ],
+      "sha256": "b1111c667eded858cf18ddb38b3f3bd311c16756d859f85685dd2311ca2b7f9e",
+      "bytes": 86444,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-renate-termin-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-renate-termin-02",
+        "encodedSha256": "b1111c667eded858cf18ddb38b3f3bd311c16756d859f85685dd2311ca2b7f9e"
+      }
+    },
+    {
+      "clipId": "stadt-renate-termin-04",
+      "voiceId": "stadt-renate-termin",
+      "actorId": "city-renate-termin",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=1]",
+      "text": "You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!",
+      "english": "You only had a short question? Then you should only have been briefly late!",
+      "sourceSha256": "d7b7c1a238de19b828cb6336c1fb8e93924d5b088773fa759667bcb92a1eb8bf",
+      "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71003,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 125,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.17,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5",
+      "profileJsonSha256": "9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b",
+      "rawSha256": "6b7a1b4dd8e6f3e8012c6eea9886cfd876fb0ab8d75a56a79b3b27d11ef0d812",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.94,
+      "renderSeconds": 6.19,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "21f2fc63a2f34d3b81462ca72933e51e",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.54:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.19,
+      "asr": "You had nur eine Short Question? Dann hätten Sie bitte auch nur Briefly zu spät kommen dürfen!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "You had nur eine Short Question? Dann hätten Sie bitte auch nur Briefly zu spät kommen dürfen!",
+          "transcribeSeconds": 10.94,
+          "words": [
+            {
+              "word": " You",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " had",
+              "start": 0.18,
+              "end": 0.34
+            },
+            {
+              "word": " nur",
+              "start": 0.34,
+              "end": 0.48
+            },
+            {
+              "word": " eine",
+              "start": 0.48,
+              "end": 0.68
+            },
+            {
+              "word": " Short",
+              "start": 0.68,
+              "end": 0.94
+            },
+            {
+              "word": " Question?",
+              "start": 0.94,
+              "end": 1.34
+            },
+            {
+              "word": " Dann",
+              "start": 1.7,
+              "end": 1.94
+            },
+            {
+              "word": " hätten",
+              "start": 1.94,
+              "end": 2.14
+            },
+            {
+              "word": " Sie",
+              "start": 2.14,
+              "end": 2.3
+            },
+            {
+              "word": " bitte",
+              "start": 2.3,
+              "end": 2.5
+            },
+            {
+              "word": " auch",
+              "start": 2.5,
+              "end": 2.7
+            },
+            {
+              "word": " nur",
+              "start": 2.7,
+              "end": 2.82
+            },
+            {
+              "word": " Briefly",
+              "start": 2.82,
+              "end": 3.26
+            },
+            {
+              "word": " zu",
+              "start": 3.26,
+              "end": 3.42
+            },
+            {
+              "word": " spät",
+              "start": 3.42,
+              "end": 3.7
+            },
+            {
+              "word": " kommen",
+              "start": 3.7,
+              "end": 3.94
+            },
+            {
+              "word": " dürfen!",
+              "start": 3.94,
+              "end": 4.24
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "You",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "had",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 8,
+          "word": "nur",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 12,
+          "word": "eine",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 17,
+          "word": "short",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 23,
+          "word": "question",
+          "end": 1.34
+        },
+        {
+          "at": 1.7,
+          "charIndex": 33,
+          "word": "Dann",
+          "end": 1.94
+        },
+        {
+          "at": 1.94,
+          "charIndex": 38,
+          "word": "hätten",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 45,
+          "word": "Sie",
+          "end": 2.3
+        },
+        {
+          "at": 2.3,
+          "charIndex": 49,
+          "word": "bitte",
+          "end": 2.5
+        },
+        {
+          "at": 2.5,
+          "charIndex": 55,
+          "word": "auch",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 60,
+          "word": "nur",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 64,
+          "word": "briefly",
+          "end": 3.26
+        },
+        {
+          "at": 3.26,
+          "charIndex": 72,
+          "word": "zu",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 75,
+          "word": "spät",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 80,
+          "word": "kommen",
+          "end": 3.94
+        },
+        {
+          "at": 3.94,
+          "charIndex": 87,
+          "word": "dürfen",
+          "end": 4.24
+        }
+      ],
+      "sha256": "717bb514b431dde0c164e5bbbd07179666425537813b98f003e52e36f08dd834",
+      "bytes": 79916,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-renate-termin-04.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-renate-termin-04",
+        "encodedSha256": "717bb514b431dde0c164e5bbbd07179666425537813b98f003e52e36f08dd834"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-renate-termin-03",
+      "voiceId": "stadt-renate-termin",
+      "actorId": "city-renate-termin",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=0]",
+      "text": "Without Termin brauchen Sie hier nicht so lange zu überlegen! For spontaneous Nachfragen ist der spontaneous Zeitraum längst booked.",
+      "english": "Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.",
+      "sourceSha256": "53d6ffb6008aeefe09a688ae91268d1343b62b5d8ef59ec013962efc38d157f7",
+      "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-renate-termin-01\",\r\n      \"voiceId\": \"stadt-renate-termin\",\r\n      \"actorId\": \"city-renate-termin\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n      \"english\": \"Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.\",\r\n      \"sourceSha256\": \"fc5ab55451d93d19ac897810ea57b8ccca796f8d4e0263d226a0716126a9c9cd\",\r\n      \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n      \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n      \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-renate-termin-02\",\r\n      \"voiceId\": \"stadt-renate-termin\",\r\n      \"actorId\": \"city-renate-termin\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!\",\r\n      \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n      \"sourceSha256\": \"42d32e245ab62842693c9a3e6a1cb156c298c70e23982131a2a35881fd930813\",\r\n      \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n      \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n      \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-renate-termin-03\",\r\n      \"voiceId\": \"stadt-renate-termin\",\r\n      \"actorId\": \"city-renate-termin\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Without Termin brauchen Sie hier nicht so lange zu überlegen! For spontaneous Nachfragen ist der spontaneous Zeitraum längst booked.\",\r\n      \"english\": \"Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.\",\r\n      \"sourceSha256\": \"53d6ffb6008aeefe09a688ae91268d1343b62b5d8ef59ec013962efc38d157f7\",\r\n      \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n      \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n      \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-renate-termin-04\",\r\n      \"voiceId\": \"stadt-renate-termin\",\r\n      \"actorId\": \"city-renate-termin\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!\",\r\n      \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n      \"sourceSha256\": \"d7b7c1a238de19b828cb6336c1fb8e93924d5b088773fa759667bcb92a1eb8bf\",\r\n      \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n      \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n      \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5"
+    },
+    "takes": {
+      "stadt-renate-termin-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-01\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n  \"english\": \"Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.\",\r\n  \"sourceSha256\": \"fc5ab55451d93d19ac897810ea57b8ccca796f8d4e0263d226a0716126a9c9cd\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171000,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 194,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.23,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"e14e4535b3893b2bd1ded972a5937c86253f3736c1a9416ac8149589e3840e30\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.7,\r\n  \"renderSeconds\": 9.09,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "1f36df0b259c1d206ab681049e59c00328794dd2095aa3edb44fab7a49e614e2"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-01\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n  \"english\": \"Without an appointment, you need not take so long to think here! The spontaneous time slot for spontaneous questions has long since been booked.\",\r\n  \"sourceSha256\": \"fc5ab55451d93d19ac897810ea57b8ccca796f8d4e0263d226a0716126a9c9cd\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171000,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 194,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.23,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"e14e4535b3893b2bd1ded972a5937c86253f3736c1a9416ac8149589e3840e30\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.7,\r\n  \"renderSeconds\": 9.09,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.73:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.15,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen. Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ohne Termin brauchen Sie hier nicht so lange zu überlegen. Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.\",\r\n      \"transcribeSeconds\": 9.92,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ohne\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.48\r\n        },\r\n        {\r\n          \"word\": \" Termin\",\r\n          \"start\": 0.48,\r\n          \"end\": 0.98\r\n        },\r\n        {\r\n          \"word\": \" brauchen\",\r\n          \"start\": 0.98,\r\n          \"end\": 1.32\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.32,\r\n          \"end\": 1.54\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 1.54,\r\n          \"end\": 1.74\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 1.74,\r\n          \"end\": 1.98\r\n        },\r\n        {\r\n          \"word\": \" so\",\r\n          \"start\": 1.98,\r\n          \"end\": 2.18\r\n        },\r\n        {\r\n          \"word\": \" lange\",\r\n          \"start\": 2.18,\r\n          \"end\": 2.36\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 2.36,\r\n          \"end\": 2.54\r\n        },\r\n        {\r\n          \"word\": \" überlegen.\",\r\n          \"start\": 2.54,\r\n          \"end\": 3.12\r\n        },\r\n        {\r\n          \"word\": \" Für\",\r\n          \"start\": 3.34,\r\n          \"end\": 3.66\r\n        },\r\n        {\r\n          \"word\": \" spontanes\",\r\n          \"start\": 3.66,\r\n          \"end\": 4.36\r\n        },\r\n        {\r\n          \"word\": \" Nachfragen\",\r\n          \"start\": 4.36,\r\n          \"end\": 4.9\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 4.9,\r\n          \"end\": 5.04\r\n        },\r\n        {\r\n          \"word\": \" der\",\r\n          \"start\": 5.04,\r\n          \"end\": 5.18\r\n        },\r\n        {\r\n          \"word\": \" spontane\",\r\n          \"start\": 5.18,\r\n          \"end\": 5.7\r\n        },\r\n        {\r\n          \"word\": \" Zeitraum\",\r\n          \"start\": 5.7,\r\n          \"end\": 6.22\r\n        },\r\n        {\r\n          \"word\": \" längst\",\r\n          \"start\": 6.22,\r\n          \"end\": 6.6\r\n        },\r\n        {\r\n          \"word\": \" vergeben.\",\r\n          \"start\": 6.6,\r\n          \"end\": 7.04\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ohne\",\r\n      \"end\": 0.48\r\n    },\r\n    {\r\n      \"at\": 0.48,\r\n      \"charIndex\": 5,\r\n      \"word\": \"Termin\",\r\n      \"end\": 0.98\r\n    },\r\n    {\r\n      \"at\": 0.98,\r\n      \"charIndex\": 12,\r\n      \"word\": \"brauchen\",\r\n      \"end\": 1.32\r\n    },\r\n    {\r\n      \"at\": 1.32,\r\n      \"charIndex\": 21,\r\n      \"word\": \"Sie\",\r\n      \"end\": 1.54\r\n    },\r\n    {\r\n      \"at\": 1.54,\r\n      \"charIndex\": 25,\r\n      \"word\": \"hier\",\r\n      \"end\": 1.74\r\n    },\r\n    {\r\n      \"at\": 1.74,\r\n      \"charIndex\": 30,\r\n      \"word\": \"nicht\",\r\n      \"end\": 1.98\r\n    },\r\n    {\r\n      \"at\": 1.98,\r\n      \"charIndex\": 36,\r\n      \"word\": \"so\",\r\n      \"end\": 2.18\r\n    },\r\n    {\r\n      \"at\": 2.18,\r\n      \"charIndex\": 39,\r\n      \"word\": \"lange\",\r\n      \"end\": 2.36\r\n    },\r\n    {\r\n      \"at\": 2.36,\r\n      \"charIndex\": 45,\r\n      \"word\": \"zu\",\r\n      \"end\": 2.54\r\n    },\r\n    {\r\n      \"at\": 2.54,\r\n      \"charIndex\": 48,\r\n      \"word\": \"überlegen\",\r\n      \"end\": 3.12\r\n    },\r\n    {\r\n      \"at\": 3.34,\r\n      \"charIndex\": 59,\r\n      \"word\": \"Für\",\r\n      \"end\": 3.66\r\n    },\r\n    {\r\n      \"at\": 3.66,\r\n      \"charIndex\": 63,\r\n      \"word\": \"spontanes\",\r\n      \"end\": 4.36\r\n    },\r\n    {\r\n      \"at\": 4.36,\r\n      \"charIndex\": 73,\r\n      \"word\": \"Nachfragen\",\r\n      \"end\": 4.9\r\n    },\r\n    {\r\n      \"at\": 4.9,\r\n      \"charIndex\": 84,\r\n      \"word\": \"ist\",\r\n      \"end\": 5.04\r\n    },\r\n    {\r\n      \"at\": 5.04,\r\n      \"charIndex\": 88,\r\n      \"word\": \"der\",\r\n      \"end\": 5.18\r\n    },\r\n    {\r\n      \"at\": 5.18,\r\n      \"charIndex\": 92,\r\n      \"word\": \"spontane\",\r\n      \"end\": 5.7\r\n    },\r\n    {\r\n      \"at\": 5.7,\r\n      \"charIndex\": 101,\r\n      \"word\": \"Zeitraum\",\r\n      \"end\": 6.22\r\n    },\r\n    {\r\n      \"at\": 6.22,\r\n      \"charIndex\": 110,\r\n      \"word\": \"längst\",\r\n      \"end\": 6.6\r\n    },\r\n    {\r\n      \"at\": 6.6,\r\n      \"charIndex\": 117,\r\n      \"word\": \"vergeben\",\r\n      \"end\": 7.04\r\n    }\r\n  ],\r\n  \"sha256\": \"2b562aacbfac4438af3c05b81cffc37cd3f4bb660eb7f6c4b06de8eab29d12f2\",\r\n  \"bytes\": 124076,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-renate-termin-01.mp3\"\r\n}\r\n",
+          "sha256": "ab722006a1d7de21c518d40a46a3262cbd58e64f1b23847cf2a879ffd0401949"
+        }
+      },
+      "stadt-renate-termin-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-02\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!\",\r\n  \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n  \"sourceSha256\": \"42d32e245ab62842693c9a3e6a1cb156c298c70e23982131a2a35881fd930813\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 135,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.53,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"b4fbe951e57d717b8dadef06664d77525e36ed9a9a346f8e660a45dfff8b1de9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.34,\r\n  \"renderSeconds\": 6.42,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "17fcaa190f8b94a25561fd2c942873b8d2664304943f959a5e07760ca151a737"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-02\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!\",\r\n  \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n  \"sourceSha256\": \"42d32e245ab62842693c9a3e6a1cb156c298c70e23982131a2a35881fd930813\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 135,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.53,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"b4fbe951e57d717b8dadef06664d77525e36ed9a9a346f8e660a45dfff8b1de9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.34,\r\n  \"renderSeconds\": 6.42,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.53:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.26,\r\n  \"truePeakDbtp\": -2.08,\r\n  \"asr\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen?\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen?\",\r\n      \"transcribeSeconds\": 10.62,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" hatten\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.58\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 0.58,\r\n          \"end\": 0.78\r\n        },\r\n        {\r\n          \"word\": \" kurze\",\r\n          \"start\": 0.78,\r\n          \"end\": 1.22\r\n        },\r\n        {\r\n          \"word\": \" Frage?\",\r\n          \"start\": 1.22,\r\n          \"end\": 1.72\r\n        },\r\n        {\r\n          \"word\": \" Dann\",\r\n          \"start\": 1.98,\r\n          \"end\": 2.22\r\n        },\r\n        {\r\n          \"word\": \" hätten\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.44\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.44,\r\n          \"end\": 2.62\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 2.62,\r\n          \"end\": 2.82\r\n        },\r\n        {\r\n          \"word\": \" auch\",\r\n          \"start\": 2.82,\r\n          \"end\": 3.02\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 3.02,\r\n          \"end\": 3.12\r\n        },\r\n        {\r\n          \"word\": \" kurz\",\r\n          \"start\": 3.12,\r\n          \"end\": 3.46\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 3.46,\r\n          \"end\": 3.62\r\n        },\r\n        {\r\n          \"word\": \" spät\",\r\n          \"start\": 3.62,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" kommen\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.24\r\n        },\r\n        {\r\n          \"word\": \" dürfen?\",\r\n          \"start\": 4.24,\r\n          \"end\": 4.58\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"hatten\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 11,\r\n      \"word\": \"nur\",\r\n      \"end\": 0.58\r\n    },\r\n    {\r\n      \"at\": 0.58,\r\n      \"charIndex\": 15,\r\n      \"word\": \"eine\",\r\n      \"end\": 0.78\r\n    },\r\n    {\r\n      \"at\": 0.78,\r\n      \"charIndex\": 20,\r\n      \"word\": \"kurze\",\r\n      \"end\": 1.22\r\n    },\r\n    {\r\n      \"at\": 1.22,\r\n      \"charIndex\": 26,\r\n      \"word\": \"Frage\",\r\n      \"end\": 1.72\r\n    },\r\n    {\r\n      \"at\": 1.98,\r\n      \"charIndex\": 33,\r\n      \"word\": \"Dann\",\r\n      \"end\": 2.22\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 38,\r\n      \"word\": \"hätten\",\r\n      \"end\": 2.44\r\n    },\r\n    {\r\n      \"at\": 2.44,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.62\r\n    },\r\n    {\r\n      \"at\": 2.62,\r\n      \"charIndex\": 49,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.82\r\n    },\r\n    {\r\n      \"at\": 2.82,\r\n      \"charIndex\": 55,\r\n      \"word\": \"auch\",\r\n      \"end\": 3.02\r\n    },\r\n    {\r\n      \"at\": 3.02,\r\n      \"charIndex\": 60,\r\n      \"word\": \"nur\",\r\n      \"end\": 3.12\r\n    },\r\n    {\r\n      \"at\": 3.12,\r\n      \"charIndex\": 64,\r\n      \"word\": \"kurz\",\r\n      \"end\": 3.46\r\n    },\r\n    {\r\n      \"at\": 3.46,\r\n      \"charIndex\": 69,\r\n      \"word\": \"zu\",\r\n      \"end\": 3.62\r\n    },\r\n    {\r\n      \"at\": 3.62,\r\n      \"charIndex\": 72,\r\n      \"word\": \"spät\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 77,\r\n      \"word\": \"kommen\",\r\n      \"end\": 4.24\r\n    },\r\n    {\r\n      \"at\": 4.24,\r\n      \"charIndex\": 84,\r\n      \"word\": \"dürfen\",\r\n      \"end\": 4.58\r\n    }\r\n  ],\r\n  \"sha256\": \"b1111c667eded858cf18ddb38b3f3bd311c16756d859f85685dd2311ca2b7f9e\",\r\n  \"bytes\": 86444,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-renate-termin-02.mp3\"\r\n}\r\n",
+          "sha256": "9299b6c461fb11580b070c052c07529ee8efe7ff7442a47f118306dd25102fad"
+        }
+      },
+      "stadt-renate-termin-04": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-04\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!\",\r\n  \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n  \"sourceSha256\": \"d7b7c1a238de19b828cb6336c1fb8e93924d5b088773fa759667bcb92a1eb8bf\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71003,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 125,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.17,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"6b7a1b4dd8e6f3e8012c6eea9886cfd876fb0ab8d75a56a79b3b27d11ef0d812\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 4.94,\r\n  \"renderSeconds\": 6.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "4059c94ff0223b55111ba1c2786479ec1d3caae822dce4420488e1fc516cc3d1"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-renate-termin-04\",\r\n  \"voiceId\": \"stadt-renate-termin\",\r\n  \"actorId\": \"city-renate-termin\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-renate-termin].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!\",\r\n  \"english\": \"You only had a short question? Then you should only have been briefly late!\",\r\n  \"sourceSha256\": \"d7b7c1a238de19b828cb6336c1fb8e93924d5b088773fa759667bcb92a1eb8bf\",\r\n  \"profileId\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n  \"referenceSha256\": \"f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a\",\r\n  \"referenceOriginalSha256\": \"738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71003,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 125,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.17,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"e3f98bfa66bee7162e25b568a2194cf01e3adba5cc5273433ca77e6f1f6490d5\",\r\n  \"profileJsonSha256\": \"9c3e7581c624ba05d347aff0162cc540104adb9a83478f603674ebc3535ed41b\",\r\n  \"rawSha256\": \"6b7a1b4dd8e6f3e8012c6eea9886cfd876fb0ab8d75a56a79b3b27d11ef0d812\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 4.94,\r\n  \"renderSeconds\": 6.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"21f2fc63a2f34d3b81462ca72933e51e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.54:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.21,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"You had nur eine Short Question? Dann hätten Sie bitte auch nur Briefly zu spät kommen dürfen!\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"You had nur eine Short Question? Dann hätten Sie bitte auch nur Briefly zu spät kommen dürfen!\",\r\n      \"transcribeSeconds\": 10.94,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" You\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" had\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.34\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 0.34,\r\n          \"end\": 0.48\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 0.48,\r\n          \"end\": 0.68\r\n        },\r\n        {\r\n          \"word\": \" Short\",\r\n          \"start\": 0.68,\r\n          \"end\": 0.94\r\n        },\r\n        {\r\n          \"word\": \" Question?\",\r\n          \"start\": 0.94,\r\n          \"end\": 1.34\r\n        },\r\n        {\r\n          \"word\": \" Dann\",\r\n          \"start\": 1.7,\r\n          \"end\": 1.94\r\n        },\r\n        {\r\n          \"word\": \" hätten\",\r\n          \"start\": 1.94,\r\n          \"end\": 2.14\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.14,\r\n          \"end\": 2.3\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 2.3,\r\n          \"end\": 2.5\r\n        },\r\n        {\r\n          \"word\": \" auch\",\r\n          \"start\": 2.5,\r\n          \"end\": 2.7\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 2.7,\r\n          \"end\": 2.82\r\n        },\r\n        {\r\n          \"word\": \" Briefly\",\r\n          \"start\": 2.82,\r\n          \"end\": 3.26\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 3.26,\r\n          \"end\": 3.42\r\n        },\r\n        {\r\n          \"word\": \" spät\",\r\n          \"start\": 3.42,\r\n          \"end\": 3.7\r\n        },\r\n        {\r\n          \"word\": \" kommen\",\r\n          \"start\": 3.7,\r\n          \"end\": 3.94\r\n        },\r\n        {\r\n          \"word\": \" dürfen!\",\r\n          \"start\": 3.94,\r\n          \"end\": 4.24\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"You\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"had\",\r\n      \"end\": 0.34\r\n    },\r\n    {\r\n      \"at\": 0.34,\r\n      \"charIndex\": 8,\r\n      \"word\": \"nur\",\r\n      \"end\": 0.48\r\n    },\r\n    {\r\n      \"at\": 0.48,\r\n      \"charIndex\": 12,\r\n      \"word\": \"eine\",\r\n      \"end\": 0.68\r\n    },\r\n    {\r\n      \"at\": 0.68,\r\n      \"charIndex\": 17,\r\n      \"word\": \"short\",\r\n      \"end\": 0.94\r\n    },\r\n    {\r\n      \"at\": 0.94,\r\n      \"charIndex\": 23,\r\n      \"word\": \"question\",\r\n      \"end\": 1.34\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 33,\r\n      \"word\": \"Dann\",\r\n      \"end\": 1.94\r\n    },\r\n    {\r\n      \"at\": 1.94,\r\n      \"charIndex\": 38,\r\n      \"word\": \"hätten\",\r\n      \"end\": 2.14\r\n    },\r\n    {\r\n      \"at\": 2.14,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.3\r\n    },\r\n    {\r\n      \"at\": 2.3,\r\n      \"charIndex\": 49,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.5\r\n    },\r\n    {\r\n      \"at\": 2.5,\r\n      \"charIndex\": 55,\r\n      \"word\": \"auch\",\r\n      \"end\": 2.7\r\n    },\r\n    {\r\n      \"at\": 2.7,\r\n      \"charIndex\": 60,\r\n      \"word\": \"nur\",\r\n      \"end\": 2.82\r\n    },\r\n    {\r\n      \"at\": 2.82,\r\n      \"charIndex\": 64,\r\n      \"word\": \"briefly\",\r\n      \"end\": 3.26\r\n    },\r\n    {\r\n      \"at\": 3.26,\r\n      \"charIndex\": 72,\r\n      \"word\": \"zu\",\r\n      \"end\": 3.42\r\n    },\r\n    {\r\n      \"at\": 3.42,\r\n      \"charIndex\": 75,\r\n      \"word\": \"spät\",\r\n      \"end\": 3.7\r\n    },\r\n    {\r\n      \"at\": 3.7,\r\n      \"charIndex\": 80,\r\n      \"word\": \"kommen\",\r\n      \"end\": 3.94\r\n    },\r\n    {\r\n      \"at\": 3.94,\r\n      \"charIndex\": 87,\r\n      \"word\": \"dürfen\",\r\n      \"end\": 4.24\r\n    }\r\n  ],\r\n  \"sha256\": \"717bb514b431dde0c164e5bbbd07179666425537813b98f003e52e36f08dd834\",\r\n  \"bytes\": 79916,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-renate-termin-04.mp3\"\r\n}\r\n",
+          "sha256": "4b16754be1ac9ee43babe2ff0986d11442805b0c9fa9e00af0395745ca970ad9"
+        }
+      }
+    }
+  }
+}

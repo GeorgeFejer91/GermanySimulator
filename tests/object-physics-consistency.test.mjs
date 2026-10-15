@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(new URL("../game.js",import.meta.url),"utf8");
 function functionSource(name){
@@ -16,7 +17,23 @@ function functionSource(name){
 const names=["normObjectRadius","propRadius","groundCircleCandidates","staticBlocked","trainCarDistance","trainAt","groundContactBlocks","signedRectDistance","vehicleBodyDistance","orientedBodySeparation","vehicleMotionBlocked","vehicleOnRoad","dynamicBlocker","groundStaticMotionBlocked","pedestrianRouteContains","responderBlocked","moveGroundResponder","blocked","blockingPedestrian","movePlayerGround","pedestrianLane","pedestrianRouteStalled","initializePedestrianRoutes"];
 function harness(){
  const context={WORLD:{w:10960,h:5360},CITY:{w:9840,h:4240},RAIL_GUTTER:560,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAFFIC_CAR_RADIUS:42,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,player:{x:8000,y:5000,r:16},goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},buildings:[],props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],horizontalRoads:[],verticalRoads:[],sidewalkSegments:[],verticalSidewalkSegments:[],crossings:[],stations:[],stationElevation:()=>0,clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by)};
- vm.createContext(context);vm.runInContext(names.map(functionSource).join("\n"),context);return context;
+ vm.createContext(context);vm.runInContext(motionObserverSource(source)+names.map(functionSource).join("\n"),context);return context;
+}
+
+// Observe actual accepted axis mutations without replacing the physical helpers.
+{
+ const h=harness(),walker={x:100,y:100,crowd:true,avoid:1},events=[];h.npcs=[walker];
+ h.observerFixture={accepts:()=>true,accepted:(actor,fromX,fromY,toX,toY)=>events.push({actor,fromX,fromY,toX,toY}),discontinuity:(actor,reason)=>events.push({actor,reason})};
+ vm.runInContext("streetMotionObserver=observerFixture",h);
+ assert.equal(h.moveGroundResponder(walker,1,1,13),true);
+ assert.equal(events.length,4,"four accepted half-unit axes report exactly once each");
+ assert(events.every(event=>event.actor===walker));
+ assert.deepEqual(events.map(({fromX,fromY,toX,toY})=>[fromX,fromY,toX,toY]),[[100,100,100.5,100],[100.5,100,100.5,100.5],[100.5,100.5,101,100.5],[101,100.5,101,101]]);
+ events.length=0;Object.assign(h.player,{x:300,y:300});h.movePlayerGround(1,1);
+ assert.equal(events.length,4,"player reports each accepted axis without an independent movement clock");assert(events.every(event=>event.actor===h.player));
+ const trapped={x:100,y:100,avoid:1};h.npcs=[trapped];h.buildings=[{x:0,y:0,w:99,h:200},{x:101,y:0,w:200,h:200}];events.length=0;
+ assert.equal(h.moveGroundResponder(trapped,1,0,13),false);assert.equal(events.length,0,"fully blocked movement emits no accepted segment");
+ const before=[walker.x,walker.y];h.notifyStreetDiscontinuity(walker,"fixture-relocation");assert.deepEqual(events,[{actor:walker,reason:"fixture-relocation"}]);assert.deepEqual([walker.x,walker.y],before,"notification does not move its actor");
 }
 
 // The static broad phase must agree with an exhaustive exact scan, including cell edges and recovery.
@@ -208,8 +225,12 @@ for(const vertical of [false,true]){
 {
  const h=harness();Object.assign(h,{window:{},matchMedia:()=>({matches:true}),location:{search:""},URLSearchParams,offsetWorldPoint:item=>({...item,x:item.x+560,y:item.y+560}),npcSpriteAtlases:{},npcLines:[""],crowdArchetypeOrder:[{id:"towel-man",label:"TOWEL",sprite:"towelMan"}]});
  vm.runInContext(readFileSync(new URL("../goerlitzer-park.js",import.meta.url),"utf8"),h);h.goerlitzerPark=h.window.GoerlitzerPark;
+ vm.runInContext(readFileSync(new URL("../For-AI/QUIZ-CHARACTER-DICTIONARY.js",import.meta.url),"utf8"),h);
  const between=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end,source.indexOf(start)+start.length)),line=prefix=>source.split(/\r?\n/).find(text=>text.startsWith(prefix));
+ vm.runInContext(line("const quizCharacterLibrary="),h);
  vm.runInContext(`${between("const horizontalRoads=","const OFFENSE_TIMING=")}\n${line("const BORDER_Y=")}\n${line("const borderGates=")}\n${line("const wirtschaftswunderSite=")}\n${line("const kiesingerMemorial=")}\n${between("const STATION_RISE=","const TRAIN_CAR_OFFSETS=")}\n${between("const desktopBillboards=","const stableSpriteRoot=")}\n${between("const buildings=","const missions=")}\n${between("const WURST_TYPES=","const state=")}\n${between("const npcs=","window.Germany3DBridge=")}\ninitializePedestrianRoutes();globalThis.city={npcs,buildings,props,trees,aliceDumpster};`,h);
+ assert.equal(h.city.npcs.filter(n=>n.crowd).length,110,"physical fixture retains the complete shipped crowd");
+ assert.equal(h.city.npcs.filter(n=>n.crowd&&n.quizzer).length,22,"physical fixture retains all quiz actors");
  const citizens=h.city.npcs.filter(n=>!n.special);assert.ok(citizens.length>60,"check the whole shipped crowd rather than two synthetic actors");
  for(const n of citizens){assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.name} must start with full-body pavement clearance`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.name} spawn must clear every static footprint`);assert.equal(h.responderBlocked(n.x,n.y,13,n,n.x,n.y),false,`${n.name} spawn cannot overlap another solid body`)}
  for(let frame=0;frame<120;frame++)for(const n of citizens){

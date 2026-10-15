@@ -1,0 +1,760 @@
+{
+  "voiceId": "stadt-waltraud-ordnung",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-waltraud-ordnung-01",
+      "voiceId": "stadt-waltraud-ordnung",
+      "actorId": "city-waltraud-ordnung",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=0]",
+      "text": "Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!",
+      "english": "Do not stand right in the passageway! And please do not just walk away while I am telling you something either!",
+      "sourceSha256": "78a61ddc97343275245e7607ab75ae48c78fbea71f856f26272a070ea1fe179f",
+      "profileId": "fef10195763e41fdbdf7a82382610513",
+      "referenceSha256": "c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6",
+      "referenceOriginalSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 155,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.08,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e",
+      "profileJsonSha256": "9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b",
+      "rawSha256": "06b3e1144d3d8b772970371695c65f7112fa357c95661243a666baa5e303537c",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.14,
+      "renderSeconds": 7.89,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "fef10195763e41fdbdf7a82382610513",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.13:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -1.93,
+      "asr": "Jetzt bleiben Sie doch nicht mitten im Durchgang stehen. Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Jetzt bleiben Sie doch nicht mitten im Durchgang stehen. Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage.",
+          "transcribeSeconds": 12.94,
+          "words": [
+            {
+              "word": " Jetzt",
+              "start": 0,
+              "end": 0.28
+            },
+            {
+              "word": " bleiben",
+              "start": 0.28,
+              "end": 0.6
+            },
+            {
+              "word": " Sie",
+              "start": 0.6,
+              "end": 0.72
+            },
+            {
+              "word": " doch",
+              "start": 0.72,
+              "end": 0.86
+            },
+            {
+              "word": " nicht",
+              "start": 0.86,
+              "end": 1
+            },
+            {
+              "word": " mitten",
+              "start": 1,
+              "end": 1.3
+            },
+            {
+              "word": " im",
+              "start": 1.3,
+              "end": 1.42
+            },
+            {
+              "word": " Durchgang",
+              "start": 1.42,
+              "end": 1.86
+            },
+            {
+              "word": " stehen.",
+              "start": 1.86,
+              "end": 2.24
+            },
+            {
+              "word": " Und",
+              "start": 2.42,
+              "end": 2.74
+            },
+            {
+              "word": " bitte",
+              "start": 2.74,
+              "end": 2.94
+            },
+            {
+              "word": " auch",
+              "start": 2.94,
+              "end": 3.1
+            },
+            {
+              "word": " nicht",
+              "start": 3.1,
+              "end": 3.26
+            },
+            {
+              "word": " einfach",
+              "start": 3.26,
+              "end": 3.58
+            },
+            {
+              "word": " weitergehen,",
+              "start": 3.58,
+              "end": 4.18
+            },
+            {
+              "word": " während",
+              "start": 4.26,
+              "end": 4.42
+            },
+            {
+              "word": " ich",
+              "start": 4.42,
+              "end": 4.68
+            },
+            {
+              "word": " Ihnen",
+              "start": 4.68,
+              "end": 4.82
+            },
+            {
+              "word": " etwas",
+              "start": 4.82,
+              "end": 5.12
+            },
+            {
+              "word": " sage.",
+              "start": 5.12,
+              "end": 5.52
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Jetzt",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 6,
+          "word": "bleiben",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 14,
+          "word": "Sie",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 18,
+          "word": "doch",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 23,
+          "word": "nicht",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 29,
+          "word": "mitten",
+          "end": 1.3
+        },
+        {
+          "at": 1.3,
+          "charIndex": 36,
+          "word": "im",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 39,
+          "word": "Durchgang",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 49,
+          "word": "stehen",
+          "end": 2.24
+        },
+        {
+          "at": 2.42,
+          "charIndex": 57,
+          "word": "Und",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 61,
+          "word": "bitte",
+          "end": 2.94
+        },
+        {
+          "at": 2.94,
+          "charIndex": 67,
+          "word": "auch",
+          "end": 3.1
+        },
+        {
+          "at": 3.1,
+          "charIndex": 72,
+          "word": "nicht",
+          "end": 3.26
+        },
+        {
+          "at": 3.26,
+          "charIndex": 78,
+          "word": "einfach",
+          "end": 3.58
+        },
+        {
+          "at": 3.58,
+          "charIndex": 86,
+          "word": "weitergehen",
+          "end": 4.18
+        },
+        {
+          "at": 4.26,
+          "charIndex": 99,
+          "word": "während",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 107,
+          "word": "ich",
+          "end": 4.68
+        },
+        {
+          "at": 4.68,
+          "charIndex": 111,
+          "word": "Ihnen",
+          "end": 4.82
+        },
+        {
+          "at": 4.82,
+          "charIndex": 117,
+          "word": "etwas",
+          "end": 5.12
+        },
+        {
+          "at": 5.12,
+          "charIndex": 123,
+          "word": "sage",
+          "end": 5.52
+        }
+      ],
+      "sha256": "ebb374a75e95d2b4da2292df64f70f374dd1aa23b47751bc748433ff48c15fc5",
+      "bytes": 99116,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-waltraud-ordnung-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-waltraud-ordnung-01",
+        "encodedSha256": "ebb374a75e95d2b4da2292df64f70f374dd1aa23b47751bc748433ff48c15fc5"
+      }
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-02",
+      "voiceId": "stadt-waltraud-ordnung",
+      "actorId": "city-waltraud-ordnung",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=1]",
+      "text": "Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!",
+      "english": "If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!",
+      "sourceSha256": "bdc8368922ee47d23097391ccb93dfe540352feb2fd8e267cfecb22a2cefce4b",
+      "profileId": "fef10195763e41fdbdf7a82382610513",
+      "referenceSha256": "c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6",
+      "referenceOriginalSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!",
+      "decode": {
+        "maxSpeechTokens": 436,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 190,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.81,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e",
+      "profileJsonSha256": "9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b",
+      "rawSha256": "e774f3d32f6f776ed173237a48e424c4bc0cb78f8c0fdef46b5a404813c13fa5",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.54,
+      "renderSeconds": 8.69,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "fef10195763e41fdbdf7a82382610513",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.900000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.22,
+      "truePeakDbtp": -2.09,
+      "asr": "Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären.",
+          "transcribeSeconds": 10.34,
+          "words": [
+            {
+              "word": " Wenn",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " jeder",
+              "start": 0.18,
+              "end": 0.52
+            },
+            {
+              "word": " hier",
+              "start": 0.52,
+              "end": 0.7
+            },
+            {
+              "word": " so",
+              "start": 0.7,
+              "end": 0.86
+            },
+            {
+              "word": " einen",
+              "start": 0.86,
+              "end": 1.04
+            },
+            {
+              "word": " halben",
+              "start": 1.04,
+              "end": 1.38
+            },
+            {
+              "word": " Schritt",
+              "start": 1.38,
+              "end": 1.58
+            },
+            {
+              "word": " macht,",
+              "start": 1.58,
+              "end": 1.94
+            },
+            {
+              "word": " steht",
+              "start": 2.08,
+              "end": 2.22
+            },
+            {
+              "word": " nachher",
+              "start": 2.22,
+              "end": 2.6
+            },
+            {
+              "word": " die",
+              "start": 2.6,
+              "end": 2.72
+            },
+            {
+              "word": " ganze",
+              "start": 2.72,
+              "end": 2.96
+            },
+            {
+              "word": " Straße",
+              "start": 2.96,
+              "end": 3.38
+            },
+            {
+              "word": " versetzt.",
+              "start": 3.38,
+              "end": 3.96
+            },
+            {
+              "word": " Das",
+              "start": 4.24,
+              "end": 4.7
+            },
+            {
+              "word": " kann",
+              "start": 4.7,
+              "end": 4.86
+            },
+            {
+              "word": " ich",
+              "start": 4.86,
+              "end": 4.98
+            },
+            {
+              "word": " nicht",
+              "start": 4.98,
+              "end": 5.16
+            },
+            {
+              "word": " für",
+              "start": 5.16,
+              "end": 5.34
+            },
+            {
+              "word": " alle",
+              "start": 5.34,
+              "end": 5.58
+            },
+            {
+              "word": " wieder",
+              "start": 5.58,
+              "end": 5.8
+            },
+            {
+              "word": " gerade",
+              "start": 5.8,
+              "end": 6.1
+            },
+            {
+              "word": " erklären.",
+              "start": 6.1,
+              "end": 6.62
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wenn",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 5,
+          "word": "jeder",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 11,
+          "word": "hier",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 16,
+          "word": "so",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 19,
+          "word": "einen",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 25,
+          "word": "halben",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 32,
+          "word": "Schritt",
+          "end": 1.58
+        },
+        {
+          "at": 1.58,
+          "charIndex": 40,
+          "word": "macht",
+          "end": 1.94
+        },
+        {
+          "at": 2.08,
+          "charIndex": 47,
+          "word": "steht",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 53,
+          "word": "nachher",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 61,
+          "word": "die",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 65,
+          "word": "ganze",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 71,
+          "word": "Straße",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 78,
+          "word": "versetzt",
+          "end": 3.96
+        },
+        {
+          "at": 4.24,
+          "charIndex": 88,
+          "word": "Das",
+          "end": 4.7
+        },
+        {
+          "at": 4.7,
+          "charIndex": 92,
+          "word": "kann",
+          "end": 4.86
+        },
+        {
+          "at": 4.86,
+          "charIndex": 97,
+          "word": "ich",
+          "end": 4.98
+        },
+        {
+          "at": 4.98,
+          "charIndex": 101,
+          "word": "nicht",
+          "end": 5.16
+        },
+        {
+          "at": 5.16,
+          "charIndex": 107,
+          "word": "für",
+          "end": 5.34
+        },
+        {
+          "at": 5.34,
+          "charIndex": 111,
+          "word": "alle",
+          "end": 5.58
+        },
+        {
+          "at": 5.58,
+          "charIndex": 116,
+          "word": "wieder",
+          "end": 5.8
+        },
+        {
+          "at": 5.8,
+          "charIndex": 123,
+          "word": "gerade",
+          "end": 6.1
+        },
+        {
+          "at": 6.1,
+          "charIndex": 130,
+          "word": "erklären",
+          "end": 6.62
+        }
+      ],
+      "sha256": "3734ab45936d4f069c297f6948d121f9376414c636b3fbb51902e6ace477c11e",
+      "bytes": 121772,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-waltraud-ordnung-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-waltraud-ordnung-02",
+        "encodedSha256": "3734ab45936d4f069c297f6948d121f9376414c636b3fbb51902e6ace477c11e"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-waltraud-ordnung-03",
+      "voiceId": "stadt-waltraud-ordnung",
+      "actorId": "city-waltraud-ordnung",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=berlin,slot=0]",
+      "text": "Do not jetzt mitten im Durchgang stehen bleiben! And bitte auch nicht einfach walk away, während ich Ihnen etwas sage!",
+      "english": "Do not stand right in the passageway! And please do not just walk away while I am telling you something either!",
+      "sourceSha256": "dcf56e84455959b54b54dee69133fbe03b99e4c4bdeba5a0bc09fb02087c55c8",
+      "profileId": "fef10195763e41fdbdf7a82382610513",
+      "referenceSha256": "c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6",
+      "referenceOriginalSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-04",
+      "voiceId": "stadt-waltraud-ordnung",
+      "actorId": "city-waltraud-ordnung",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=berlin,slot=1]",
+      "text": "If jeder hier so einen half step macht, steht nachher die ganze Straße out of alignment. Ich kann das nicht für alle straight erklären!",
+      "english": "If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!",
+      "sourceSha256": "90149d71fb6fad67caabacff7d303137214899c1cb4f34750e8b9d60acbbfdc3",
+      "profileId": "fef10195763e41fdbdf7a82382610513",
+      "referenceSha256": "c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6",
+      "referenceOriginalSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-waltraud-ordnung-01\",\r\n      \"voiceId\": \"stadt-waltraud-ordnung\",\r\n      \"actorId\": \"city-waltraud-ordnung\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!\",\r\n      \"english\": \"Do not stand right in the passageway! And please do not just walk away while I am telling you something either!\",\r\n      \"sourceSha256\": \"78a61ddc97343275245e7607ab75ae48c78fbea71f856f26272a070ea1fe179f\",\r\n      \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n      \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n      \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-waltraud-ordnung-02\",\r\n      \"voiceId\": \"stadt-waltraud-ordnung\",\r\n      \"actorId\": \"city-waltraud-ordnung\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!\",\r\n      \"english\": \"If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!\",\r\n      \"sourceSha256\": \"bdc8368922ee47d23097391ccb93dfe540352feb2fd8e267cfecb22a2cefce4b\",\r\n      \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n      \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n      \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-waltraud-ordnung-03\",\r\n      \"voiceId\": \"stadt-waltraud-ordnung\",\r\n      \"actorId\": \"city-waltraud-ordnung\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Do not jetzt mitten im Durchgang stehen bleiben! And bitte auch nicht einfach walk away, während ich Ihnen etwas sage!\",\r\n      \"english\": \"Do not stand right in the passageway! And please do not just walk away while I am telling you something either!\",\r\n      \"sourceSha256\": \"dcf56e84455959b54b54dee69133fbe03b99e4c4bdeba5a0bc09fb02087c55c8\",\r\n      \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n      \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n      \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-waltraud-ordnung-04\",\r\n      \"voiceId\": \"stadt-waltraud-ordnung\",\r\n      \"actorId\": \"city-waltraud-ordnung\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"If jeder hier so einen half step macht, steht nachher die ganze Straße out of alignment. Ich kann das nicht für alle straight erklären!\",\r\n      \"english\": \"If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!\",\r\n      \"sourceSha256\": \"90149d71fb6fad67caabacff7d303137214899c1cb4f34750e8b9d60acbbfdc3\",\r\n      \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n      \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n      \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e"
+    },
+    "takes": {
+      "stadt-waltraud-ordnung-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-waltraud-ordnung-01\",\r\n  \"voiceId\": \"stadt-waltraud-ordnung\",\r\n  \"actorId\": \"city-waltraud-ordnung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!\",\r\n  \"english\": \"Do not stand right in the passageway! And please do not just walk away while I am telling you something either!\",\r\n  \"sourceSha256\": \"78a61ddc97343275245e7607ab75ae48c78fbea71f856f26272a070ea1fe179f\",\r\n  \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n  \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n  \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 155,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.08,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e\",\r\n  \"profileJsonSha256\": \"9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b\",\r\n  \"rawSha256\": \"06b3e1144d3d8b772970371695c65f7112fa357c95661243a666baa5e303537c\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.14,\r\n  \"renderSeconds\": 7.89,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"fef10195763e41fdbdf7a82382610513\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "afe0e46e3959883009bed816e61a44305286eccfc3692b3ad4d32a3ecdf4c444"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-waltraud-ordnung-01\",\r\n  \"voiceId\": \"stadt-waltraud-ordnung\",\r\n  \"actorId\": \"city-waltraud-ordnung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!\",\r\n  \"english\": \"Do not stand right in the passageway! And please do not just walk away while I am telling you something either!\",\r\n  \"sourceSha256\": \"78a61ddc97343275245e7607ab75ae48c78fbea71f856f26272a070ea1fe179f\",\r\n  \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n  \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n  \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 155,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.08,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e\",\r\n  \"profileJsonSha256\": \"9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b\",\r\n  \"rawSha256\": \"06b3e1144d3d8b772970371695c65f7112fa357c95661243a666baa5e303537c\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.14,\r\n  \"renderSeconds\": 7.89,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"fef10195763e41fdbdf7a82382610513\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.13:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.21,\r\n  \"truePeakDbtp\": -1.93,\r\n  \"asr\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen. Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Jetzt bleiben Sie doch nicht mitten im Durchgang stehen. Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage.\",\r\n      \"transcribeSeconds\": 12.94,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Jetzt\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.28\r\n        },\r\n        {\r\n          \"word\": \" bleiben\",\r\n          \"start\": 0.28,\r\n          \"end\": 0.6\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.6,\r\n          \"end\": 0.72\r\n        },\r\n        {\r\n          \"word\": \" doch\",\r\n          \"start\": 0.72,\r\n          \"end\": 0.86\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 0.86,\r\n          \"end\": 1.0\r\n        },\r\n        {\r\n          \"word\": \" mitten\",\r\n          \"start\": 1.0,\r\n          \"end\": 1.3\r\n        },\r\n        {\r\n          \"word\": \" im\",\r\n          \"start\": 1.3,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" Durchgang\",\r\n          \"start\": 1.42,\r\n          \"end\": 1.86\r\n        },\r\n        {\r\n          \"word\": \" stehen.\",\r\n          \"start\": 1.86,\r\n          \"end\": 2.24\r\n        },\r\n        {\r\n          \"word\": \" Und\",\r\n          \"start\": 2.42,\r\n          \"end\": 2.74\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 2.74,\r\n          \"end\": 2.94\r\n        },\r\n        {\r\n          \"word\": \" auch\",\r\n          \"start\": 2.94,\r\n          \"end\": 3.1\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 3.1,\r\n          \"end\": 3.26\r\n        },\r\n        {\r\n          \"word\": \" einfach\",\r\n          \"start\": 3.26,\r\n          \"end\": 3.58\r\n        },\r\n        {\r\n          \"word\": \" weitergehen,\",\r\n          \"start\": 3.58,\r\n          \"end\": 4.18\r\n        },\r\n        {\r\n          \"word\": \" während\",\r\n          \"start\": 4.26,\r\n          \"end\": 4.42\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.42,\r\n          \"end\": 4.68\r\n        },\r\n        {\r\n          \"word\": \" Ihnen\",\r\n          \"start\": 4.68,\r\n          \"end\": 4.82\r\n        },\r\n        {\r\n          \"word\": \" etwas\",\r\n          \"start\": 4.82,\r\n          \"end\": 5.12\r\n        },\r\n        {\r\n          \"word\": \" sage.\",\r\n          \"start\": 5.12,\r\n          \"end\": 5.52\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Jetzt\",\r\n      \"end\": 0.28\r\n    },\r\n    {\r\n      \"at\": 0.28,\r\n      \"charIndex\": 6,\r\n      \"word\": \"bleiben\",\r\n      \"end\": 0.6\r\n    },\r\n    {\r\n      \"at\": 0.6,\r\n      \"charIndex\": 14,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.72\r\n    },\r\n    {\r\n      \"at\": 0.72,\r\n      \"charIndex\": 18,\r\n      \"word\": \"doch\",\r\n      \"end\": 0.86\r\n    },\r\n    {\r\n      \"at\": 0.86,\r\n      \"charIndex\": 23,\r\n      \"word\": \"nicht\",\r\n      \"end\": 1.0\r\n    },\r\n    {\r\n      \"at\": 1.0,\r\n      \"charIndex\": 29,\r\n      \"word\": \"mitten\",\r\n      \"end\": 1.3\r\n    },\r\n    {\r\n      \"at\": 1.3,\r\n      \"charIndex\": 36,\r\n      \"word\": \"im\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.42,\r\n      \"charIndex\": 39,\r\n      \"word\": \"Durchgang\",\r\n      \"end\": 1.86\r\n    },\r\n    {\r\n      \"at\": 1.86,\r\n      \"charIndex\": 49,\r\n      \"word\": \"stehen\",\r\n      \"end\": 2.24\r\n    },\r\n    {\r\n      \"at\": 2.42,\r\n      \"charIndex\": 57,\r\n      \"word\": \"Und\",\r\n      \"end\": 2.74\r\n    },\r\n    {\r\n      \"at\": 2.74,\r\n      \"charIndex\": 61,\r\n      \"word\": \"bitte\",\r\n      \"end\": 2.94\r\n    },\r\n    {\r\n      \"at\": 2.94,\r\n      \"charIndex\": 67,\r\n      \"word\": \"auch\",\r\n      \"end\": 3.1\r\n    },\r\n    {\r\n      \"at\": 3.1,\r\n      \"charIndex\": 72,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.26\r\n    },\r\n    {\r\n      \"at\": 3.26,\r\n      \"charIndex\": 78,\r\n      \"word\": \"einfach\",\r\n      \"end\": 3.58\r\n    },\r\n    {\r\n      \"at\": 3.58,\r\n      \"charIndex\": 86,\r\n      \"word\": \"weitergehen\",\r\n      \"end\": 4.18\r\n    },\r\n    {\r\n      \"at\": 4.26,\r\n      \"charIndex\": 99,\r\n      \"word\": \"während\",\r\n      \"end\": 4.42\r\n    },\r\n    {\r\n      \"at\": 4.42,\r\n      \"charIndex\": 107,\r\n      \"word\": \"ich\",\r\n      \"end\": 4.68\r\n    },\r\n    {\r\n      \"at\": 4.68,\r\n      \"charIndex\": 111,\r\n      \"word\": \"Ihnen\",\r\n      \"end\": 4.82\r\n    },\r\n    {\r\n      \"at\": 4.82,\r\n      \"charIndex\": 117,\r\n      \"word\": \"etwas\",\r\n      \"end\": 5.12\r\n    },\r\n    {\r\n      \"at\": 5.12,\r\n      \"charIndex\": 123,\r\n      \"word\": \"sage\",\r\n      \"end\": 5.52\r\n    }\r\n  ],\r\n  \"sha256\": \"ebb374a75e95d2b4da2292df64f70f374dd1aa23b47751bc748433ff48c15fc5\",\r\n  \"bytes\": 99116,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-waltraud-ordnung-01.mp3\"\r\n}\r\n",
+          "sha256": "6988972e8e2246b1dc4e8aefeeded9d2b4ff22485f68825fb63d11a978321ab2"
+        }
+      },
+      "stadt-waltraud-ordnung-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-waltraud-ordnung-02\",\r\n  \"voiceId\": \"stadt-waltraud-ordnung\",\r\n  \"actorId\": \"city-waltraud-ordnung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!\",\r\n  \"english\": \"If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!\",\r\n  \"sourceSha256\": \"bdc8368922ee47d23097391ccb93dfe540352feb2fd8e267cfecb22a2cefce4b\",\r\n  \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n  \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n  \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 436,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 190,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.81,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e\",\r\n  \"profileJsonSha256\": \"9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b\",\r\n  \"rawSha256\": \"e774f3d32f6f776ed173237a48e424c4bc0cb78f8c0fdef46b5a404813c13fa5\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.54,\r\n  \"renderSeconds\": 8.69,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"fef10195763e41fdbdf7a82382610513\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "180ebc66d04d07b9a1da776dbfa872b2f6c24578bd71c857b1f5612b835712b7"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-waltraud-ordnung-02\",\r\n  \"voiceId\": \"stadt-waltraud-ordnung\",\r\n  \"actorId\": \"city-waltraud-ordnung\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-waltraud-ordnung].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!\",\r\n  \"english\": \"If everyone takes a half step like that, the entire street will end up out of alignment. I cannot explain it straight again for everyone!\",\r\n  \"sourceSha256\": \"bdc8368922ee47d23097391ccb93dfe540352feb2fd8e267cfecb22a2cefce4b\",\r\n  \"profileId\": \"fef10195763e41fdbdf7a82382610513\",\r\n  \"referenceSha256\": \"c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6\",\r\n  \"referenceOriginalSha256\": \"2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 436,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 190,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.81,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"535a835b5c8968d48b62422baee3edfd0f39ee5f8d494c3204e3df7df8ff3a0e\",\r\n  \"profileJsonSha256\": \"9fb5d9af5c8213e0dd98f7e8b3800b669c82f5a2a190ae88f630c6c877b7501b\",\r\n  \"rawSha256\": \"e774f3d32f6f776ed173237a48e424c4bc0cb78f8c0fdef46b5a404813c13fa5\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.54,\r\n  \"renderSeconds\": 8.69,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"fef10195763e41fdbdf7a82382610513\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.900000000000002:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.22,\r\n  \"truePeakDbtp\": -2.09,\r\n  \"asr\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären.\",\r\n      \"transcribeSeconds\": 10.34,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Wenn\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" jeder\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.52\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 0.52,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" so\",\r\n          \"start\": 0.7,\r\n          \"end\": 0.86\r\n        },\r\n        {\r\n          \"word\": \" einen\",\r\n          \"start\": 0.86,\r\n          \"end\": 1.04\r\n        },\r\n        {\r\n          \"word\": \" halben\",\r\n          \"start\": 1.04,\r\n          \"end\": 1.38\r\n        },\r\n        {\r\n          \"word\": \" Schritt\",\r\n          \"start\": 1.38,\r\n          \"end\": 1.58\r\n        },\r\n        {\r\n          \"word\": \" macht,\",\r\n          \"start\": 1.58,\r\n          \"end\": 1.94\r\n        },\r\n        {\r\n          \"word\": \" steht\",\r\n          \"start\": 2.08,\r\n          \"end\": 2.22\r\n        },\r\n        {\r\n          \"word\": \" nachher\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.6\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 2.6,\r\n          \"end\": 2.72\r\n        },\r\n        {\r\n          \"word\": \" ganze\",\r\n          \"start\": 2.72,\r\n          \"end\": 2.96\r\n        },\r\n        {\r\n          \"word\": \" Straße\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.38\r\n        },\r\n        {\r\n          \"word\": \" versetzt.\",\r\n          \"start\": 3.38,\r\n          \"end\": 3.96\r\n        },\r\n        {\r\n          \"word\": \" Das\",\r\n          \"start\": 4.24,\r\n          \"end\": 4.7\r\n        },\r\n        {\r\n          \"word\": \" kann\",\r\n          \"start\": 4.7,\r\n          \"end\": 4.86\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.86,\r\n          \"end\": 4.98\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 4.98,\r\n          \"end\": 5.16\r\n        },\r\n        {\r\n          \"word\": \" für\",\r\n          \"start\": 5.16,\r\n          \"end\": 5.34\r\n        },\r\n        {\r\n          \"word\": \" alle\",\r\n          \"start\": 5.34,\r\n          \"end\": 5.58\r\n        },\r\n        {\r\n          \"word\": \" wieder\",\r\n          \"start\": 5.58,\r\n          \"end\": 5.8\r\n        },\r\n        {\r\n          \"word\": \" gerade\",\r\n          \"start\": 5.8,\r\n          \"end\": 6.1\r\n        },\r\n        {\r\n          \"word\": \" erklären.\",\r\n          \"start\": 6.1,\r\n          \"end\": 6.62\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Wenn\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 5,\r\n      \"word\": \"jeder\",\r\n      \"end\": 0.52\r\n    },\r\n    {\r\n      \"at\": 0.52,\r\n      \"charIndex\": 11,\r\n      \"word\": \"hier\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 16,\r\n      \"word\": \"so\",\r\n      \"end\": 0.86\r\n    },\r\n    {\r\n      \"at\": 0.86,\r\n      \"charIndex\": 19,\r\n      \"word\": \"einen\",\r\n      \"end\": 1.04\r\n    },\r\n    {\r\n      \"at\": 1.04,\r\n      \"charIndex\": 25,\r\n      \"word\": \"halben\",\r\n      \"end\": 1.38\r\n    },\r\n    {\r\n      \"at\": 1.38,\r\n      \"charIndex\": 32,\r\n      \"word\": \"Schritt\",\r\n      \"end\": 1.58\r\n    },\r\n    {\r\n      \"at\": 1.58,\r\n      \"charIndex\": 40,\r\n      \"word\": \"macht\",\r\n      \"end\": 1.94\r\n    },\r\n    {\r\n      \"at\": 2.08,\r\n      \"charIndex\": 47,\r\n      \"word\": \"steht\",\r\n      \"end\": 2.22\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 53,\r\n      \"word\": \"nachher\",\r\n      \"end\": 2.6\r\n    },\r\n    {\r\n      \"at\": 2.6,\r\n      \"charIndex\": 61,\r\n      \"word\": \"die\",\r\n      \"end\": 2.72\r\n    },\r\n    {\r\n      \"at\": 2.72,\r\n      \"charIndex\": 65,\r\n      \"word\": \"ganze\",\r\n      \"end\": 2.96\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 71,\r\n      \"word\": \"Straße\",\r\n      \"end\": 3.38\r\n    },\r\n    {\r\n      \"at\": 3.38,\r\n      \"charIndex\": 78,\r\n      \"word\": \"versetzt\",\r\n      \"end\": 3.96\r\n    },\r\n    {\r\n      \"at\": 4.24,\r\n      \"charIndex\": 88,\r\n      \"word\": \"Das\",\r\n      \"end\": 4.7\r\n    },\r\n    {\r\n      \"at\": 4.7,\r\n      \"charIndex\": 92,\r\n      \"word\": \"kann\",\r\n      \"end\": 4.86\r\n    },\r\n    {\r\n      \"at\": 4.86,\r\n      \"charIndex\": 97,\r\n      \"word\": \"ich\",\r\n      \"end\": 4.98\r\n    },\r\n    {\r\n      \"at\": 4.98,\r\n      \"charIndex\": 101,\r\n      \"word\": \"nicht\",\r\n      \"end\": 5.16\r\n    },\r\n    {\r\n      \"at\": 5.16,\r\n      \"charIndex\": 107,\r\n      \"word\": \"für\",\r\n      \"end\": 5.34\r\n    },\r\n    {\r\n      \"at\": 5.34,\r\n      \"charIndex\": 111,\r\n      \"word\": \"alle\",\r\n      \"end\": 5.58\r\n    },\r\n    {\r\n      \"at\": 5.58,\r\n      \"charIndex\": 116,\r\n      \"word\": \"wieder\",\r\n      \"end\": 5.8\r\n    },\r\n    {\r\n      \"at\": 5.8,\r\n      \"charIndex\": 123,\r\n      \"word\": \"gerade\",\r\n      \"end\": 6.1\r\n    },\r\n    {\r\n      \"at\": 6.1,\r\n      \"charIndex\": 130,\r\n      \"word\": \"erklären\",\r\n      \"end\": 6.62\r\n    }\r\n  ],\r\n  \"sha256\": \"3734ab45936d4f069c297f6948d121f9376414c636b3fbb51902e6ace477c11e\",\r\n  \"bytes\": 121772,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-waltraud-ordnung-02.mp3\"\r\n}\r\n",
+          "sha256": "31df229e6e5a9a7269ae54a689c9a2f5115582475b5dab5982f439a84da78b85"
+        }
+      }
+    }
+  }
+}

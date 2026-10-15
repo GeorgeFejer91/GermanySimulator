@@ -203,19 +203,20 @@ test('work props face their subject in camera space while child lips and walk di
   actor.jwdRole='child';assert.equal(neighborWorkMirrored(actor,11,{x:0,z:1}),false,'registered front fidget keeps lip coordinates');
 });
 
-test('failed animation loading settles readiness without restoring a 3D resident',async()=>{
+test('failed animation loading settles readiness and keeps its 2D fallback visible',async()=>{
   const previousWidth=globalThis.innerWidth,previousDpr=globalThis.devicePixelRatio,previousWarn=console.warn;
   globalThis.innerWidth=1200;globalThis.devicePixelRatio=1;console.warn=()=>{};
   try{
     let begin,onError;
     const T={TextureLoader:class{load(_url,_loaded,_progress,error){onError=error}}};
-    const fallback={visible:true},host={children:[fallback],position:{x:0,z:0}};
+    const fallback={visible:true,userData:{personFallback:true}},host={children:[fallback],position:{x:0,z:0}};
     const paint=createNeighborSprite(T,{id:'jwd-parent',jwdRole:'parent',x:0,y:0},host,(_position,_priority,load)=>{begin=load},{});
     assert.equal(paint.inspect().settled,false);assert.equal(paint.inspect().failed,false);
     const pending=begin();assert.equal(paint.inspect().settled,false);
     onError(new Error('fixture texture unavailable'));assert.equal(await pending,false);
     assert.equal(paint.inspect().settled,true);assert.equal(paint.inspect().failed,true);
-    assert.equal(paint.inspect().loaded,false);assert.equal(fallback.visible,false);assert.equal(host.children.length,1);
+    assert.equal(paint.inspect().loaded,false);assert.equal(fallback.visible,true);assert.equal(host.children.length,1);
+    assert.equal(paint.inspect().fallback,true);assert.equal(paint.inspect().visible,true);
     paint.dispose();
   }finally{
     if(previousWidth===undefined)delete globalThis.innerWidth;else globalThis.innerWidth=previousWidth;

@@ -115,6 +115,7 @@ assert.equal(new Set(crowdClips.map(clip=>clip.voiceId)).size,12);
 assert.equal(on.candidatePreviewEnabled,true);
 assert.equal(off.candidatePreviewEnabled,false);
 const keys=new Set();
+const policeDefaults=JSON.parse(source('assets/voices/police-dialogue/polizei-heinrich-wachtmeister-manifest.json')).clips;
 for(const clip of originalCandidates){
  const key=clip.voiceId+"\0"+clip.text;
  assert.ok(!keys.has(key),`duplicate candidate ${clip.clipId}`);
@@ -128,7 +129,8 @@ for(const clip of originalCandidates){
  assert.equal(on.candidateClip(clip.voiceId,clip.text),official||(clip.retiredReason||oldProfile?null:clip.path));
  const fever=JSON.parse(source('./assets/voices/amt-fever/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
  const knick=JSON.parse(source('./assets/voices/knick/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
- assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':knick?'./'+knick.file:fever?'./'+fever.path:null);
+ const police=policeDefaults.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
+ assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':knick?'./'+knick.file:fever?'./'+fever.path:police?'./'+police.file:null);
  if(clip.archiveRelativePath)assert.equal(clip.archiveRelativePath,'assets/'+clip.path);
  else assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }

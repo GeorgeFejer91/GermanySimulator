@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "generationScope": "remaining27-first-takes",
+  "voiceId": "crowd-manfred-mittagsruhe",
+  "profileId": "cf03b787beac49efb23cb9206f012ecd",
+  "fallback": "captions",
+  "status": "private remaining27 generation proposal; prior slot preserved",
+  "requestedLineCount": 4,
+  "generatedLineCount": 3,
+  "lineCount": 0,
+  "clips": [],
+  "heldPrivate": [
+    {
+      "clipId": "crowd-manfred-mittagsruhe-germany-01",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "actorId": "crowd-manfred-mittagsruhe",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-manfred-mittagsruhe].germany[0]",
+      "text": "Die Mittagsruhe dauert bis drei; auch Ihr Flüstern braucht einen Termin.",
+      "english": "Quiet hours last until three; even your whisper needs an appointment.",
+      "profileId": "cf03b787beac49efb23cb9206f012ecd",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "outside remaining27 grant; first batch preserved"
+    },
+    {
+      "clipId": "crowd-manfred-mittagsruhe-germany-02",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "actorId": "crowd-manfred-mittagsruhe",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-manfred-mittagsruhe].germany[1]",
+      "text": "Bitte stellen Sie die Bohrmaschine auf lautlos; das Formular war lauter als Sie.",
+      "english": "Please set the drill to silent; the form was louder than you were.",
+      "profileId": "cf03b787beac49efb23cb9206f012ecd",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; interrupted ASR unknown; no retry",
+      "failedGates": [
+        "interrupted ASR result unknown; no retry"
+      ]
+    },
+    {
+      "clipId": "crowd-manfred-mittagsruhe-berlin-01",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "actorId": "crowd-manfred-mittagsruhe",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-manfred-mittagsruhe].berlin[0]",
+      "text": "Die Mittagsruhe läuft bis drei; even Ihr Flüstern needs einen Termin.",
+      "english": "Quiet hours run until three; even your whisper needs an appointment.",
+      "profileId": "cf03b787beac49efb23cb9206f012ecd",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence",
+        "literal exact ASR required by current remaining27 contract",
+        "incomplete exact final-caption cues"
+      ]
+    },
+    {
+      "clipId": "crowd-manfred-mittagsruhe-berlin-02",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "actorId": "crowd-manfred-mittagsruhe",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-manfred-mittagsruhe].berlin[1]",
+      "text": "Bitte stellen Sie die Bohrmaschine auf lautlos; the Formular war lauter als Sie.",
+      "english": "Please put the drill on silent; the form was louder than you were.",
+      "profileId": "cf03b787beac49efb23cb9206f012ecd",
+      "referenceSha256": "36d472f0806eab1db909009051e9cc05bc4ccba28fe29dfac5ac82a1a5bffab1",
+      "referenceOriginalSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence",
+        "literal exact ASR required by current remaining27 contract",
+        "incomplete exact final-caption cues"
+      ]
+    }
+  ],
+  "approvedExistingReuse": []
+}

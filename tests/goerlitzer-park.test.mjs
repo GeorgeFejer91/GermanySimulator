@@ -18,6 +18,7 @@ function line(source,prefix){
 
 const sandbox={window:{},matchMedia:()=>({matches:true}),crossings:[]};
 vm.runInNewContext(shared,sandbox);
+vm.runInNewContext(read("For-AI/QUIZ-CHARACTER-DICTIONARY.js"),sandbox);
 const park=sandbox.window.GoerlitzerPark;
 assert.deepEqual([park.x,park.y,park.w,park.h,park.plaqueX,park.plaqueY],[2010,2940,800,480,2586,3462],"the city offset must be applied exactly once");
 assert.ok(Object.isFrozen(park)&&Object.isFrozen(park.trees),"shared park geometry must be immutable");
@@ -27,6 +28,7 @@ vm.runInNewContext(`
 const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2};
 ${line(game,"const offsetWorldPoint=")}
 ${line(game,"const player=")}
+${line(game,"const quizCharacterLibrary=")}
 ${line(game,"const goerlitzerPark=")}
 ${line(game,"const kiesingerMemorial=")}
 ${line(game,"const wirtschaftswunderSite=")}
@@ -45,6 +47,8 @@ ${line(game,"function regionOf(")}
 globalThis.layout={goerlitzerPark,player,roads,buildings,props,normObjects,pickups,npcs,trees,walkways,TREE_RADIUS,staticBlocked,regionOf};
 `,sandbox);
 const layout=sandbox.layout;
+assert.equal(layout.npcs.filter(n=>n.crowd).length,110,"park fixture must retain the actual city crowd population");
+assert.equal(layout.npcs.filter(n=>n.crowd&&n.quizzer).length,22,"park fixture must retain the actual quiz-capable crowd");
 assert.equal(layout.goerlitzerPark,park,"canonical simulation must use the shared object directly");
 assert.equal(layout.trees.length,24+6+park.trees.length,"park trees must extend the established 24 trees and six JWD trees");
 for(const tree of park.trees){
@@ -70,9 +74,10 @@ for(const radius of [12,16,38]){
 }
 
 let opened;
-Object.assign(sandbox,{neighborActivityActive:()=>false,state:{dialogue:false,modal:false},openDialogue:(...args)=>{opened=args}});
+Object.assign(sandbox,{state:{dialogue:false,modal:false},openDialogue:(...args)=>{opened=args}});
 Object.assign(layout.player,{x:park.plaqueX,y:park.plaqueY});
-vm.runInNewContext(`${between(game,"function interact(){","function collect(){")}\ninteract();`,sandbox);
+vm.runInNewContext(`${between(game,"function neighborActivityActive(","function speechActorCurrent(")}
+${between(game,"function cityInteractionTarget(){","function collect(){")}\ninteract();`,sandbox);
 assert.equal(opened?.[1],park.lines,"E interaction must open every sourced line from the outside placard");
 
 for(const [html,next] of [[index,"game.js"],[diagnostic,"const goerlitzerPark="]]){

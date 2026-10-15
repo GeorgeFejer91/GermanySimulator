@@ -2295,7 +2295,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-baerbel-brezel] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2348,7 +2349,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-brigitte-bueroklammer] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2450,7 +2452,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-elfriede-eingabe] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2498,7 +2501,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-guenther-gartenzaun] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2551,7 +2555,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-hildegard-brotzeit] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2659,7 +2664,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-irmgard-aktenordner] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2712,7 +2718,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-klaus-dieter-knoedel] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2765,7 +2772,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-manfred-mittagsruhe] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2818,7 +2826,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-ruediger-rasenkante] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -4300,7 +4309,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.83,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-gisela-aktenberg": {
       "profileId": "44d0f901322e403fa5ad8140c68ae426",
@@ -4311,7 +4321,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.93,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-dieter-papiermann": {
       "profileId": "eb4aab1842eb450eacbdd5d4ccc38ab6",
@@ -4322,7 +4333,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.89,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-ruediger-nummermann": {
       "profileId": "e2b59f89c1a84259aaa8f7006741fae2",
@@ -4333,7 +4345,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.8,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-ingrid-feierabend": {
       "profileId": "b456ded2b16d4bc38f6751bfe52266e8",
@@ -4344,7 +4357,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.96,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-baerbel-pfennig": {
       "profileId": "fd76c3fc053c4932b910fa504f376edc",
@@ -4355,7 +4369,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.85,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-uwe-kopitz": {
       "profileId": "e7a5a74103884c308730d7effa496ce2",
@@ -4366,7 +4381,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.9,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-hilde-wartenscheidt": {
       "profileId": "f55b40ca02e84ae696c396f211f880d6",
@@ -4377,7 +4393,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.87,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "stadt-klaus-dieter-klein": {
       "profileId": "8182da73a54c429391924d62ee339037",
@@ -4571,7 +4588,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.92,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-mechthild-elternbogen": {
       "profileId": "2946f9d627084b68933cb72f64bc32b7",
@@ -4582,7 +4600,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.94,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "amt-wolfram-rentenbescheid": {
       "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
@@ -4593,7 +4612,8 @@
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.82,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
       "selectedOn": "2026-10-11",
-      "selection": "Existing user-approved fever voice; fixed across character dialogue"
+      "selection": "Existing user-approved fever voice; fixed across character dialogue",
+      "fallback": "captions"
     },
     "crowd-baerbel-brezel": {
       "profileId": "94f8291ad5664b5485cf38bea8d4a2ec",
@@ -4751,7 +4771,8 @@
       "originalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
       "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "fallback": "captions"
     },
     "quiz-brigitte-neumann": {
       "profileId": "a07f2eac0069402c911973d0dff9c122",
@@ -4858,7 +4879,8 @@
       "originalSha256": "9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc",
       "referenceSha256": "b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "fallback": "captions"
     },
     "sprecher-theodor-amtsstimme-thorsten": {
       "profileId": "f24e025a49484ea7a23a59e1693dc740",
@@ -4882,7 +4904,8 @@
       "originalSha256": "b5579f4d31d4f138353232cd0708fc9ad62b8a4683dc35f6830d5557d9b87d8e",
       "referenceSha256": "9c28278551a4a68180ca410306ebf322f94bb8034b7a1c2222d635ee014a178e",
       "renderer": "Secret Tunnel 6 bundled OmniVoice Rust",
-      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4"
+      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+      "fallback": "captions"
     },
     "merkel": {
       "profileId": "25916e5981064e09a2c42350d5fe5f04",
@@ -4890,7 +4913,8 @@
       "originalSha256": "683260d6d6eaef951a8bc5778efce547a45d6c55172e2c90a504280f8e82ba92",
       "referenceSha256": "9a43f754972aa8a5dfa491d4c97f0eac417b0725731aaa417617d82bc43b3f6c",
       "renderer": "Secret Tunnel 6 bundled OmniVoice Rust via installed --voice-cli",
-      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4"
+      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+      "fallback": "captions"
     },
     "jwd-inga-maaslos": {
       "profileId": "04e241f5e0734684ba3626aa669a70c1",

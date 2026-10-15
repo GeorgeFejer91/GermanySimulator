@@ -220,6 +220,8 @@ def processing_hash(value):
 
 
 def manifest_name(ambient=False):
+    if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "crowd-dialogue":
+        return VOICE + "-crowd-manifest.json"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-monologue":
         return VOICE + "-portrait-manifest.json"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-mirror":
@@ -249,10 +251,17 @@ def configure_request(args):
     if args.request_file:
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror", "city-dialogue")
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror", "city-dialogue", "crowd-dialogue")
         if plan["family"] in ("office-monologue", "office-mirror"):
             assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
-        if plan["family"] == "city-dialogue":
+        if plan["family"] == "crowd-dialogue":
+            assert VOICE in {"crowd-baerbel-brezel", "crowd-brigitte-bueroklammer", "crowd-elfriede-eingabe", "crowd-guenther-gartenzaun", "crowd-hildegard-brotzeit", "crowd-irmgard-aktenordner", "crowd-klaus-dieter-knoedel", "crowd-manfred-mittagsruhe", "crowd-ruediger-rasenkante"}
+            assert plan["publicAssetFamily"] == "assets/voices/candidate-dialogue"
+            assert plan["privateReviewFamily"] == "GermanySimulator crowd dialogue review 2026-10-15"
+            assert set(plan["sourceSha256"]) == {"game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js"}
+            assert not (args.sentence_rescue or args.eos_after_alignment or args.benchmark_hooks), "Crowd dialogue uses the unchanged whole-take recipe"
+            SOURCE_FILES = ("game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js")
+        elif plan["family"] == "city-dialogue":
             assert VOICE.startswith("stadt-"), "City family requires an owned city voice"
             assert plan["publicAssetFamily"] == "assets/voices/city-dialogue", "City public asset scope changed"
             assert plan["privateReviewFamily"] == "GermanySimulator city dialogue review 2026-10-15", "City private review scope changed"
@@ -457,10 +466,14 @@ def city_dialogue_sources():
     """Owned city slots cross-checked against the actual caller and public export."""
     source = (ROOT / "game.js").read_text(encoding="utf-8")
     selector = 'function cityNpcDialogue(n){const owned=speechCatalog.cityDialogue?.[n.id],rows=owned?.[state.region];if(owned?.voiceId!==n.voiceId||!Array.isArray(rows)||rows.length!==2||rows.some(row=>typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()))return null;return rows}'
-    caller = (' }else if(n.id?.startsWith("city-")){\n'
-              '   const rows=cityNpcDialogue(n);if(!rows)return;\n'
-              '   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));\n')
-    assert selector in source and caller in source, "Owned city selector/caller/caption contract changed"
+    caller_alternatives = (
+        (' }else if(n.id?.startsWith("city-")){\n'
+         '   const rows=cityNpcDialogue(n);if(!rows)return;\n'
+         '   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));\n'),
+        (' }else if(n.id?.startsWith("city-")){\n'
+         '   const rows=cityNpcDialogue(n);if(!rows)return;\n'
+         '   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english),false,false,n);\n'))
+    assert selector in source and sum(caller in source for caller in caller_alternatives) == 1, "Owned city selector/caller/caption contract changed"
     start = source.index("const npcs=[")
     stop = source.index("].map(n=>", start)
     actors = re.findall(r'\{[^\n{}]*id:"(city-[a-z-]+)"[^\n{}]*fullName:"([^\"]+)"[^\n{}]*voiceId:"([^\"]+)"[^\n{}]*line:\d+[^\n{}]*\}', source[start:stop])
@@ -503,6 +516,37 @@ def city_dialogue_sources():
     return authored
 
 
+def validate_crowd_request(requested, authored, voice):
+    expected = {row["clipId"]: row for row in authored}
+    assert len(authored) == 36 and len(expected) == 36
+    assert len(requested) == 36 and len({row["clipId"] for row in requested}) == 36
+    for row in requested:
+        assert row["clipId"] in expected and row == expected[row["clipId"]], "Crowd actor, text, subtitle or selected profile/reference mismatch"
+    selected = [dict(row) for row in requested if row["voiceId"] == voice]
+    assert len(selected) == 4, "Crowd request must contain the four owned region/slot lines"
+    return selected
+
+
+def validate_crowd_manifest(document, requested, voice):
+    identity_fields = ("clipId", "voiceId", "actorId", "region", "slot", "sourceLocator", "text", "english",
+                       "profileId", "referenceSha256", "referenceOriginalSha256", "renderer", "modelRevision", "processing")
+    expected = {row["clipId"]: row for row in requested}
+    clips, held = document.get("clips"), document.get("heldPrivate")
+    assert len(expected) == 4 and len(requested) == 4 and all(row["voiceId"] == voice for row in requested)
+    assert document.get("voiceId") == voice and document.get("profileId") == expected[next(iter(expected))]["profileId"]
+    assert document.get("requestedLineCount") == 4 and isinstance(clips, list) and isinstance(held, list)
+    assert document.get("lineCount") == len(clips)
+    generated = document.get("generatedLineCount")
+    assert type(generated) is int and len(clips) <= generated <= 4
+    records = clips + held
+    identities = [row.get("clipId") for row in records]
+    assert len(records) == 4 and len(set(identities)) == 4 and set(identities) == set(expected)
+    for row in records:
+        job = expected[row["clipId"]]
+        assert all(row.get(field) == job.get(field) for field in identity_fields), "Crowd accepted/held row ownership or source slot drift"
+    assert all(isinstance(row.get("reason"), str) and row["reason"] for row in held)
+
+
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
@@ -515,6 +559,33 @@ def jobs(ambient=False, music_root=None):
             selected = [dict(job) for job in requested if job["voiceId"] == VOICE]
             assert selected, "No authored city request for selected voice"
             return selected
+        if CUSTOM_PLAN["family"] == "crowd-dialogue":
+            js = r'''const fs=require("node:fs"),vm=require("node:vm");
+const source=fs.readFileSync("game.js","utf8"),match=source.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);
+if(!match)throw Error("Crowd actor-owned source map missing");
+const barks=vm.runInNewContext(match[1]);global.window={};require("./For-AI/AUDIO-TEXT-LIBRARY.js");
+console.log(JSON.stringify({barks,english:window.GermanySimulatorAudioText.pools.crowdPersonalized}));'''
+            authority = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+            cast = read(ROOT / "For-AI/VOICE-CAST.json")
+            actors = {row.get("gameRole"): row for row in cast["roleProfiles"] if row.get("gameRole") in authority["barks"]}
+            authored = []
+            for actor_id, regions in authority["barks"].items():
+                owner = actors.get(actor_id)
+                assert owner and owner["voiceId"] == actor_id and any("actor-owned crowdCharacterBarks[" + actor_id + "]" in item for item in owner["dialogueSources"]), "Crowd source has no actor-owned cast row"
+                binding = cast["productionVoices"][actor_id]
+                for region in ("berlin", "germany"):
+                    assert len(regions[region]) == 2 and len(authority["english"][actor_id][region]) == 2
+                    for slot, text in enumerate(regions[region]):
+                        locator = f"game.js crowdCharacterBarks[{actor_id}].{region}[{slot}]"
+                        clip_id = f"{actor_id}-{region}-{slot + 1:02}"
+                        authored.append({"clipId": clip_id, "voiceId": actor_id, "actorId": actor_id,
+                                         "region": region, "slot": slot, "sourceLocator": locator,
+                                         "text": text, "english": authority["english"][actor_id][region][slot],
+                                         "profileId": binding["profileId"], "referenceSha256": binding["referenceSha256"],
+                                         "referenceOriginalSha256": binding["originalSha256"], "renderer": binding["renderer"],
+                                         "modelRevision": binding["modelRevision"], "processing": binding.get("processing")})
+            assert len(authored) == 36 and len({row["clipId"] for row in authored}) == 36
+            return validate_crowd_request(CUSTOM_PLAN["jobs"], authored, VOICE)
         if CUSTOM_PLAN["family"] in ("office-monologue", "office-mirror"):
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
@@ -1370,8 +1441,14 @@ def check_manifest(queue, ambient=False):
     assert not same_spoken_words("Ihren Wohnsitz", "Ihrem Wohnsitz")
     document = read(ROOT / PUBLIC_ASSET_FAMILY / manifest_name(ambient))
     current = {job["clipId"]: job for job in queue}
+    if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "crowd-dialogue":
+        validate_crowd_manifest(document, queue, VOICE)
     for clip in document["clips"]:
         assert clip["text"] == current[clip["clipId"]]["text"]
+        if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "crowd-dialogue":
+            job = current[clip["clipId"]]
+            assert clip["english"] == job["english"] and clip["sourceLocator"] == job["sourceLocator"]
+            assert clip["region"] == job["region"] and clip["slot"] == job["slot"] and clip["actorId"] == VOICE
         assert_binding(clip)
         assert clip["modelRevision"] == REVISION and clip["processing"] == PROCESSING
         assert clip["processingSha256"] == processing_hash(PROCESSING)

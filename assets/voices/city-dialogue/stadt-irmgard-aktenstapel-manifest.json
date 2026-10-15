@@ -1,0 +1,1090 @@
+{
+  "voiceId": "stadt-irmgard-aktenstapel",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-irmgard-aktenstapel-01",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "actorId": "city-irmgard-aktenstapel",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=0]",
+      "text": "Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.",
+      "english": "I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.",
+      "sourceSha256": "d75cf07c706dd328fc9f5cc93d9584b54e27bd75bbcb38432c4603ae14aecf3a",
+      "profileId": "c166075128d247fabf12e786bfaa60a6",
+      "referenceSha256": "8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a",
+      "referenceOriginalSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 200,
+        "eosReached": true,
+        "t3InferenceSeconds": 9.25,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d",
+      "profileJsonSha256": "547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87",
+      "rawSha256": "d671425098254c0e5f8b0d0704c7e9dd2a43dbfb5f87d1a1b780d9a2250d55bf",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.96,
+      "renderSeconds": 10.17,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c166075128d247fabf12e786bfaa60a6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.11:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.21,
+      "asr": "Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.",
+          "transcribeSeconds": 10.56,
+          "words": [
+            {
+              "word": " Den",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " Bauzaun",
+              "start": 0.22,
+              "end": 0.7
+            },
+            {
+              "word": " kannte",
+              "start": 0.7,
+              "end": 1.1
+            },
+            {
+              "word": " ich",
+              "start": 1.1,
+              "end": 1.2
+            },
+            {
+              "word": " schon,",
+              "start": 1.2,
+              "end": 1.48
+            },
+            {
+              "word": " als",
+              "start": 1.66,
+              "end": 2.02
+            },
+            {
+              "word": " das",
+              "start": 2.02,
+              "end": 2.2
+            },
+            {
+              "word": " Formular",
+              "start": 2.2,
+              "end": 2.72
+            },
+            {
+              "word": " noch",
+              "start": 2.72,
+              "end": 2.96
+            },
+            {
+              "word": " grün",
+              "start": 2.96,
+              "end": 3.26
+            },
+            {
+              "word": " war.",
+              "start": 3.26,
+              "end": 3.54
+            },
+            {
+              "word": " Jetzt",
+              "start": 3.82,
+              "end": 4.22
+            },
+            {
+              "word": " ist",
+              "start": 4.22,
+              "end": 4.46
+            },
+            {
+              "word": " beides",
+              "start": 4.46,
+              "end": 4.84
+            },
+            {
+              "word": " grau.",
+              "start": 4.84,
+              "end": 5.26
+            },
+            {
+              "word": " So",
+              "start": 5.4,
+              "end": 5.66
+            },
+            {
+              "word": " hält",
+              "start": 5.66,
+              "end": 5.92
+            },
+            {
+              "word": " man",
+              "start": 5.92,
+              "end": 6.08
+            },
+            {
+              "word": " die",
+              "start": 6.08,
+              "end": 6.22
+            },
+            {
+              "word": " Unterlagen",
+              "start": 6.22,
+              "end": 6.78
+            },
+            {
+              "word": " aktuell.",
+              "start": 6.78,
+              "end": 7.22
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Den",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "Bauzaun",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 12,
+          "word": "kannte",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 19,
+          "word": "ich",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 23,
+          "word": "schon",
+          "end": 1.48
+        },
+        {
+          "at": 1.66,
+          "charIndex": 30,
+          "word": "als",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 34,
+          "word": "das",
+          "end": 2.2
+        },
+        {
+          "at": 2.2,
+          "charIndex": 38,
+          "word": "Formular",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 47,
+          "word": "noch",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 52,
+          "word": "grün",
+          "end": 3.26
+        },
+        {
+          "at": 3.26,
+          "charIndex": 57,
+          "word": "war",
+          "end": 3.54
+        },
+        {
+          "at": 3.82,
+          "charIndex": 62,
+          "word": "Jetzt",
+          "end": 4.22
+        },
+        {
+          "at": 4.22,
+          "charIndex": 68,
+          "word": "ist",
+          "end": 4.46
+        },
+        {
+          "at": 4.46,
+          "charIndex": 72,
+          "word": "beides",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 79,
+          "word": "grau",
+          "end": 5.26
+        },
+        {
+          "at": 5.4,
+          "charIndex": 85,
+          "word": "So",
+          "end": 5.66
+        },
+        {
+          "at": 5.66,
+          "charIndex": 88,
+          "word": "hält",
+          "end": 5.92
+        },
+        {
+          "at": 5.92,
+          "charIndex": 93,
+          "word": "man",
+          "end": 6.08
+        },
+        {
+          "at": 6.08,
+          "charIndex": 97,
+          "word": "die",
+          "end": 6.22
+        },
+        {
+          "at": 6.22,
+          "charIndex": 101,
+          "word": "Unterlagen",
+          "end": 6.78
+        },
+        {
+          "at": 6.78,
+          "charIndex": 112,
+          "word": "aktuell",
+          "end": 7.22
+        }
+      ],
+      "sha256": "7fb0e491a1ae65053ca844e58a03ced795aaa7c491410da4d0686c6304df8483",
+      "bytes": 128300,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-irmgard-aktenstapel-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized cloning for this game. This cumulative selection preserves Irmgard01 and02 and adds the independently word-checked ordinary second take of Irmgard04 by encoded hash. It records game use, not perceptual listening.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-irmgard-aktenstapel-01",
+        "encodedSha256": "7fb0e491a1ae65053ca844e58a03ced795aaa7c491410da4d0686c6304df8483"
+      }
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-02",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "actorId": "city-irmgard-aktenstapel",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=1]",
+      "text": "Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.",
+      "english": "Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.",
+      "sourceSha256": "46a8fc463cecf9d2796cd620f856df327e6f576cbd676bda2582f33bc6a642b2",
+      "profileId": "c166075128d247fabf12e786bfaa60a6",
+      "referenceSha256": "8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a",
+      "referenceOriginalSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.",
+      "decode": {
+        "maxSpeechTokens": 424,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 201,
+        "eosReached": true,
+        "t3InferenceSeconds": 8.75,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d",
+      "profileJsonSha256": "547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87",
+      "rawSha256": "94f9d02cff040fdde9d752942232f81b98a35d7cf49fd050f55109306551badd",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 8,
+      "renderSeconds": 9.61,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c166075128d247fabf12e786bfaa60a6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.42:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.12,
+      "truePeakDbtp": -2.2,
+      "asr": "Werfen Sie die alte Bescheinigung nicht weg, wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Werfen Sie die alte Bescheinigung nicht weg, wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.",
+          "transcribeSeconds": 10.49,
+          "words": [
+            {
+              "word": " Werfen",
+              "start": 0,
+              "end": 0.54
+            },
+            {
+              "word": " Sie",
+              "start": 0.54,
+              "end": 0.68
+            },
+            {
+              "word": " die",
+              "start": 0.68,
+              "end": 0.84
+            },
+            {
+              "word": " alte",
+              "start": 0.84,
+              "end": 1.16
+            },
+            {
+              "word": " Bescheinigung",
+              "start": 1.16,
+              "end": 1.78
+            },
+            {
+              "word": " nicht",
+              "start": 1.78,
+              "end": 2.02
+            },
+            {
+              "word": " weg,",
+              "start": 2.02,
+              "end": 2.34
+            },
+            {
+              "word": " wenn",
+              "start": 2.52,
+              "end": 2.84
+            },
+            {
+              "word": " die",
+              "start": 2.84,
+              "end": 3
+            },
+            {
+              "word": " neue",
+              "start": 3,
+              "end": 3.3
+            },
+            {
+              "word": " wieder",
+              "start": 3.3,
+              "end": 3.56
+            },
+            {
+              "word": " ausläuft,",
+              "start": 3.56,
+              "end": 4.34
+            },
+            {
+              "word": " braucht",
+              "start": 4.52,
+              "end": 4.8
+            },
+            {
+              "word": " man",
+              "start": 4.8,
+              "end": 5.02
+            },
+            {
+              "word": " etwas,",
+              "start": 5.02,
+              "end": 5.44
+            },
+            {
+              "word": " mit",
+              "start": 5.66,
+              "end": 5.76
+            },
+            {
+              "word": " dem",
+              "start": 5.76,
+              "end": 5.9
+            },
+            {
+              "word": " man",
+              "start": 5.9,
+              "end": 6.04
+            },
+            {
+              "word": " den",
+              "start": 6.04,
+              "end": 6.22
+            },
+            {
+              "word": " Stapel",
+              "start": 6.22,
+              "end": 6.66
+            },
+            {
+              "word": " gerade",
+              "start": 6.66,
+              "end": 6.9
+            },
+            {
+              "word": " hält.",
+              "start": 6.9,
+              "end": 7.38
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Werfen",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 7,
+          "word": "Sie",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 11,
+          "word": "die",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 15,
+          "word": "alte",
+          "end": 1.16
+        },
+        {
+          "at": 1.16,
+          "charIndex": 20,
+          "word": "Bescheinigung",
+          "end": 1.78
+        },
+        {
+          "at": 1.78,
+          "charIndex": 34,
+          "word": "nicht",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 40,
+          "word": "weg",
+          "end": 2.34
+        },
+        {
+          "at": 2.52,
+          "charIndex": 45,
+          "word": "Wenn",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 50,
+          "word": "die",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 54,
+          "word": "neue",
+          "end": 3.3
+        },
+        {
+          "at": 3.3,
+          "charIndex": 59,
+          "word": "wieder",
+          "end": 3.56
+        },
+        {
+          "at": 3.56,
+          "charIndex": 66,
+          "word": "ausläuft",
+          "end": 4.34
+        },
+        {
+          "at": 4.52,
+          "charIndex": 76,
+          "word": "braucht",
+          "end": 4.8
+        },
+        {
+          "at": 4.8,
+          "charIndex": 84,
+          "word": "man",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 88,
+          "word": "etwas",
+          "end": 5.44
+        },
+        {
+          "at": 5.66,
+          "charIndex": 95,
+          "word": "mit",
+          "end": 5.76
+        },
+        {
+          "at": 5.76,
+          "charIndex": 99,
+          "word": "dem",
+          "end": 5.9
+        },
+        {
+          "at": 5.9,
+          "charIndex": 103,
+          "word": "man",
+          "end": 6.04
+        },
+        {
+          "at": 6.04,
+          "charIndex": 107,
+          "word": "den",
+          "end": 6.22
+        },
+        {
+          "at": 6.22,
+          "charIndex": 111,
+          "word": "Stapel",
+          "end": 6.66
+        },
+        {
+          "at": 6.66,
+          "charIndex": 118,
+          "word": "gerade",
+          "end": 6.9
+        },
+        {
+          "at": 6.9,
+          "charIndex": 125,
+          "word": "hält",
+          "end": 7.38
+        }
+      ],
+      "sha256": "88a5009c7191dffb81e55e9afc35dc21c6e0f8215cfe6f35e2e181fb8bc143bc",
+      "bytes": 129068,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-irmgard-aktenstapel-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized cloning for this game. This cumulative selection preserves Irmgard01 and02 and adds the independently word-checked ordinary second take of Irmgard04 by encoded hash. It records game use, not perceptual listening.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-irmgard-aktenstapel-02",
+        "encodedSha256": "88a5009c7191dffb81e55e9afc35dc21c6e0f8215cfe6f35e2e181fb8bc143bc"
+      }
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-04",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "actorId": "city-irmgard-aktenstapel",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=1]",
+      "text": "Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.",
+      "english": "Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.",
+      "sourceSha256": "8f75806218a0c8d9b07f4b3755cef87579c5cd46879bc12ba17f7ffde4c5609d",
+      "profileId": "c166075128d247fabf12e786bfaa60a6",
+      "referenceSha256": "8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a",
+      "referenceOriginalSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171003,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 190,
+        "eosReached": true,
+        "t3InferenceSeconds": 8.69,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d",
+      "profileJsonSha256": "547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87",
+      "rawSha256": "a0e5276a6bd4fba636cae4d9f7e4c9e5a0b5d1f452a36961ff91b1a96486ec7e",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.56,
+      "renderSeconds": 9.59,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c166075128d247fabf12e786bfaa60a6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.17:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.22,
+      "asr": "Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas to keep den Stapel straight.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas to keep den Stapel straight.",
+          "transcribeSeconds": 10.97,
+          "words": [
+            {
+              "word": " Do",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " not",
+              "start": 0.18,
+              "end": 0.42
+            },
+            {
+              "word": " werfen",
+              "start": 0.42,
+              "end": 0.86
+            },
+            {
+              "word": " Sie",
+              "start": 0.86,
+              "end": 1
+            },
+            {
+              "word": " die",
+              "start": 1,
+              "end": 1.14
+            },
+            {
+              "word": " alte",
+              "start": 1.14,
+              "end": 1.38
+            },
+            {
+              "word": " Bescheinigung",
+              "start": 1.38,
+              "end": 1.96
+            },
+            {
+              "word": " weg.",
+              "start": 1.96,
+              "end": 2.24
+            },
+            {
+              "word": " Wenn",
+              "start": 2.5,
+              "end": 2.98
+            },
+            {
+              "word": " die",
+              "start": 2.98,
+              "end": 3.12
+            },
+            {
+              "word": " neue",
+              "start": 3.12,
+              "end": 3.42
+            },
+            {
+              "word": " wieder",
+              "start": 3.42,
+              "end": 3.7
+            },
+            {
+              "word": " expires,",
+              "start": 3.7,
+              "end": 4.4
+            },
+            {
+              "word": " braucht",
+              "start": 4.64,
+              "end": 4.9
+            },
+            {
+              "word": " man",
+              "start": 4.9,
+              "end": 5.08
+            },
+            {
+              "word": " etwas",
+              "start": 5.08,
+              "end": 5.5
+            },
+            {
+              "word": " to",
+              "start": 5.5,
+              "end": 5.82
+            },
+            {
+              "word": " keep",
+              "start": 5.82,
+              "end": 6.02
+            },
+            {
+              "word": " den",
+              "start": 6.02,
+              "end": 6.2
+            },
+            {
+              "word": " Stapel",
+              "start": 6.2,
+              "end": 6.64
+            },
+            {
+              "word": " straight.",
+              "start": 6.64,
+              "end": 6.84
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Do",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 3,
+          "word": "not",
+          "end": 0.42
+        },
+        {
+          "at": 0.42,
+          "charIndex": 7,
+          "word": "werfen",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 14,
+          "word": "Sie",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 18,
+          "word": "die",
+          "end": 1.14
+        },
+        {
+          "at": 1.14,
+          "charIndex": 22,
+          "word": "alte",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 27,
+          "word": "Bescheinigung",
+          "end": 1.96
+        },
+        {
+          "at": 1.96,
+          "charIndex": 41,
+          "word": "weg",
+          "end": 2.24
+        },
+        {
+          "at": 2.5,
+          "charIndex": 46,
+          "word": "Wenn",
+          "end": 2.98
+        },
+        {
+          "at": 2.98,
+          "charIndex": 51,
+          "word": "die",
+          "end": 3.12
+        },
+        {
+          "at": 3.12,
+          "charIndex": 55,
+          "word": "neue",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 60,
+          "word": "wieder",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 67,
+          "word": "expires",
+          "end": 4.4
+        },
+        {
+          "at": 4.64,
+          "charIndex": 76,
+          "word": "braucht",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 84,
+          "word": "man",
+          "end": 5.08
+        },
+        {
+          "at": 5.08,
+          "charIndex": 88,
+          "word": "etwas",
+          "end": 5.5
+        },
+        {
+          "at": 5.5,
+          "charIndex": 95,
+          "word": "to",
+          "end": 5.82
+        },
+        {
+          "at": 5.82,
+          "charIndex": 98,
+          "word": "keep",
+          "end": 6.02
+        },
+        {
+          "at": 6.02,
+          "charIndex": 103,
+          "word": "den",
+          "end": 6.2
+        },
+        {
+          "at": 6.2,
+          "charIndex": 107,
+          "word": "Stapel",
+          "end": 6.64
+        },
+        {
+          "at": 6.64,
+          "charIndex": 114,
+          "word": "straight",
+          "end": 6.84
+        }
+      ],
+      "sha256": "19595c1023fba25b1ebc314945bb20e80c5a33341796cde91b89dcbf61e73082",
+      "bytes": 121772,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-irmgard-aktenstapel-04.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized cloning for this game. This cumulative selection preserves Irmgard01 and02 and adds the independently word-checked ordinary second take of Irmgard04 by encoded hash. It records game use, not perceptual listening.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-irmgard-aktenstapel-04",
+        "encodedSha256": "19595c1023fba25b1ebc314945bb20e80c5a33341796cde91b89dcbf61e73082"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-irmgard-aktenstapel-03",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "actorId": "city-irmgard-aktenstapel",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=0]",
+      "text": "Den Bauzaun kannte ich schon, als das Formular noch green war. Now ist beides grey. So hält man die Unterlagen up to date.",
+      "english": "I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.",
+      "sourceSha256": "5eef25d5cc6397b198b66deb5e580ab4f015dc7868500a3c9b4bf1a58f822979",
+      "profileId": "c166075128d247fabf12e786bfaa60a6",
+      "referenceSha256": "8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a",
+      "referenceOriginalSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-irmgard-aktenstapel-01\",\r\n      \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n      \"actorId\": \"city-irmgard-aktenstapel\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n      \"english\": \"I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.\",\r\n      \"sourceSha256\": \"d75cf07c706dd328fc9f5cc93d9584b54e27bd75bbcb38432c4603ae14aecf3a\",\r\n      \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n      \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n      \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-irmgard-aktenstapel-02\",\r\n      \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n      \"actorId\": \"city-irmgard-aktenstapel\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n      \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n      \"sourceSha256\": \"46a8fc463cecf9d2796cd620f856df327e6f576cbd676bda2582f33bc6a642b2\",\r\n      \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n      \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n      \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-irmgard-aktenstapel-03\",\r\n      \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n      \"actorId\": \"city-irmgard-aktenstapel\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Den Bauzaun kannte ich schon, als das Formular noch green war. Now ist beides grey. So hält man die Unterlagen up to date.\",\r\n      \"english\": \"I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.\",\r\n      \"sourceSha256\": \"5eef25d5cc6397b198b66deb5e580ab4f015dc7868500a3c9b4bf1a58f822979\",\r\n      \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n      \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n      \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-irmgard-aktenstapel-04\",\r\n      \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n      \"actorId\": \"city-irmgard-aktenstapel\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.\",\r\n      \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n      \"sourceSha256\": \"8f75806218a0c8d9b07f4b3755cef87579c5cd46879bc12ba17f7ffde4c5609d\",\r\n      \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n      \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n      \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d"
+    },
+    "takes": {
+      "stadt-irmgard-aktenstapel-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-01\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n  \"english\": \"I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.\",\r\n  \"sourceSha256\": \"d75cf07c706dd328fc9f5cc93d9584b54e27bd75bbcb38432c4603ae14aecf3a\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 200,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 9.25,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"d671425098254c0e5f8b0d0704c7e9dd2a43dbfb5f87d1a1b780d9a2250d55bf\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.96,\r\n  \"renderSeconds\": 10.17,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "b4f5297791cbae12f69ca180c52b337a39af41e166dffa8e8e50b7e89c5d72a6"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-01\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n  \"english\": \"I knew that construction fence when the form was still green. Now both are grey. That is how you keep the paperwork up to date.\",\r\n  \"sourceSha256\": \"d75cf07c706dd328fc9f5cc93d9584b54e27bd75bbcb38432c4603ae14aecf3a\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 200,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 9.25,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"d671425098254c0e5f8b0d0704c7e9dd2a43dbfb5f87d1a1b780d9a2250d55bf\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.96,\r\n  \"renderSeconds\": 10.17,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.11:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.24,\r\n  \"truePeakDbtp\": -2.21,\r\n  \"asr\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.\",\r\n      \"transcribeSeconds\": 10.56,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Den\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.22\r\n        },\r\n        {\r\n          \"word\": \" Bauzaun\",\r\n          \"start\": 0.22,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" kannte\",\r\n          \"start\": 0.7,\r\n          \"end\": 1.1\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 1.1,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" schon,\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.48\r\n        },\r\n        {\r\n          \"word\": \" als\",\r\n          \"start\": 1.66,\r\n          \"end\": 2.02\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 2.02,\r\n          \"end\": 2.2\r\n        },\r\n        {\r\n          \"word\": \" Formular\",\r\n          \"start\": 2.2,\r\n          \"end\": 2.72\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 2.72,\r\n          \"end\": 2.96\r\n        },\r\n        {\r\n          \"word\": \" grün\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.26\r\n        },\r\n        {\r\n          \"word\": \" war.\",\r\n          \"start\": 3.26,\r\n          \"end\": 3.54\r\n        },\r\n        {\r\n          \"word\": \" Jetzt\",\r\n          \"start\": 3.82,\r\n          \"end\": 4.22\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 4.22,\r\n          \"end\": 4.46\r\n        },\r\n        {\r\n          \"word\": \" beides\",\r\n          \"start\": 4.46,\r\n          \"end\": 4.84\r\n        },\r\n        {\r\n          \"word\": \" grau.\",\r\n          \"start\": 4.84,\r\n          \"end\": 5.26\r\n        },\r\n        {\r\n          \"word\": \" So\",\r\n          \"start\": 5.4,\r\n          \"end\": 5.66\r\n        },\r\n        {\r\n          \"word\": \" hält\",\r\n          \"start\": 5.66,\r\n          \"end\": 5.92\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 5.92,\r\n          \"end\": 6.08\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 6.08,\r\n          \"end\": 6.22\r\n        },\r\n        {\r\n          \"word\": \" Unterlagen\",\r\n          \"start\": 6.22,\r\n          \"end\": 6.78\r\n        },\r\n        {\r\n          \"word\": \" aktuell.\",\r\n          \"start\": 6.78,\r\n          \"end\": 7.22\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Den\",\r\n      \"end\": 0.22\r\n    },\r\n    {\r\n      \"at\": 0.22,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Bauzaun\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 12,\r\n      \"word\": \"kannte\",\r\n      \"end\": 1.1\r\n    },\r\n    {\r\n      \"at\": 1.1,\r\n      \"charIndex\": 19,\r\n      \"word\": \"ich\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 23,\r\n      \"word\": \"schon\",\r\n      \"end\": 1.48\r\n    },\r\n    {\r\n      \"at\": 1.66,\r\n      \"charIndex\": 30,\r\n      \"word\": \"als\",\r\n      \"end\": 2.02\r\n    },\r\n    {\r\n      \"at\": 2.02,\r\n      \"charIndex\": 34,\r\n      \"word\": \"das\",\r\n      \"end\": 2.2\r\n    },\r\n    {\r\n      \"at\": 2.2,\r\n      \"charIndex\": 38,\r\n      \"word\": \"Formular\",\r\n      \"end\": 2.72\r\n    },\r\n    {\r\n      \"at\": 2.72,\r\n      \"charIndex\": 47,\r\n      \"word\": \"noch\",\r\n      \"end\": 2.96\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 52,\r\n      \"word\": \"grün\",\r\n      \"end\": 3.26\r\n    },\r\n    {\r\n      \"at\": 3.26,\r\n      \"charIndex\": 57,\r\n      \"word\": \"war\",\r\n      \"end\": 3.54\r\n    },\r\n    {\r\n      \"at\": 3.82,\r\n      \"charIndex\": 62,\r\n      \"word\": \"Jetzt\",\r\n      \"end\": 4.22\r\n    },\r\n    {\r\n      \"at\": 4.22,\r\n      \"charIndex\": 68,\r\n      \"word\": \"ist\",\r\n      \"end\": 4.46\r\n    },\r\n    {\r\n      \"at\": 4.46,\r\n      \"charIndex\": 72,\r\n      \"word\": \"beides\",\r\n      \"end\": 4.84\r\n    },\r\n    {\r\n      \"at\": 4.84,\r\n      \"charIndex\": 79,\r\n      \"word\": \"grau\",\r\n      \"end\": 5.26\r\n    },\r\n    {\r\n      \"at\": 5.4,\r\n      \"charIndex\": 85,\r\n      \"word\": \"So\",\r\n      \"end\": 5.66\r\n    },\r\n    {\r\n      \"at\": 5.66,\r\n      \"charIndex\": 88,\r\n      \"word\": \"hält\",\r\n      \"end\": 5.92\r\n    },\r\n    {\r\n      \"at\": 5.92,\r\n      \"charIndex\": 93,\r\n      \"word\": \"man\",\r\n      \"end\": 6.08\r\n    },\r\n    {\r\n      \"at\": 6.08,\r\n      \"charIndex\": 97,\r\n      \"word\": \"die\",\r\n      \"end\": 6.22\r\n    },\r\n    {\r\n      \"at\": 6.22,\r\n      \"charIndex\": 101,\r\n      \"word\": \"Unterlagen\",\r\n      \"end\": 6.78\r\n    },\r\n    {\r\n      \"at\": 6.78,\r\n      \"charIndex\": 112,\r\n      \"word\": \"aktuell\",\r\n      \"end\": 7.22\r\n    }\r\n  ],\r\n  \"sha256\": \"7fb0e491a1ae65053ca844e58a03ced795aaa7c491410da4d0686c6304df8483\",\r\n  \"bytes\": 128300,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-irmgard-aktenstapel-01.mp3\"\r\n}\r\n",
+          "sha256": "6922b6ea63a0a1c9276119daa40912df95b602085de4137ae2b5e324093554ab"
+        }
+      },
+      "stadt-irmgard-aktenstapel-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-02\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n  \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n  \"sourceSha256\": \"46a8fc463cecf9d2796cd620f856df327e6f576cbd676bda2582f33bc6a642b2\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 201,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.75,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"94f9d02cff040fdde9d752942232f81b98a35d7cf49fd050f55109306551badd\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 8.0,\r\n  \"renderSeconds\": 9.61,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "c03274a6358351e85f0da1887b4f1246a231e35ae3f6b906d56db77b3d9f0505"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-02\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n  \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n  \"sourceSha256\": \"46a8fc463cecf9d2796cd620f856df327e6f576cbd676bda2582f33bc6a642b2\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 201,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.75,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"94f9d02cff040fdde9d752942232f81b98a35d7cf49fd050f55109306551badd\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 8.0,\r\n  \"renderSeconds\": 9.61,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.42:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.12,\r\n  \"truePeakDbtp\": -2.2,\r\n  \"asr\": \"Werfen Sie die alte Bescheinigung nicht weg, wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Werfen Sie die alte Bescheinigung nicht weg, wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält.\",\r\n      \"transcribeSeconds\": 10.49,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Werfen\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.54\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.54,\r\n          \"end\": 0.68\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 0.68,\r\n          \"end\": 0.84\r\n        },\r\n        {\r\n          \"word\": \" alte\",\r\n          \"start\": 0.84,\r\n          \"end\": 1.16\r\n        },\r\n        {\r\n          \"word\": \" Bescheinigung\",\r\n          \"start\": 1.16,\r\n          \"end\": 1.78\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 1.78,\r\n          \"end\": 2.02\r\n        },\r\n        {\r\n          \"word\": \" weg,\",\r\n          \"start\": 2.02,\r\n          \"end\": 2.34\r\n        },\r\n        {\r\n          \"word\": \" wenn\",\r\n          \"start\": 2.52,\r\n          \"end\": 2.84\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 2.84,\r\n          \"end\": 3.0\r\n        },\r\n        {\r\n          \"word\": \" neue\",\r\n          \"start\": 3.0,\r\n          \"end\": 3.3\r\n        },\r\n        {\r\n          \"word\": \" wieder\",\r\n          \"start\": 3.3,\r\n          \"end\": 3.56\r\n        },\r\n        {\r\n          \"word\": \" ausläuft,\",\r\n          \"start\": 3.56,\r\n          \"end\": 4.34\r\n        },\r\n        {\r\n          \"word\": \" braucht\",\r\n          \"start\": 4.52,\r\n          \"end\": 4.8\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 4.8,\r\n          \"end\": 5.02\r\n        },\r\n        {\r\n          \"word\": \" etwas,\",\r\n          \"start\": 5.02,\r\n          \"end\": 5.44\r\n        },\r\n        {\r\n          \"word\": \" mit\",\r\n          \"start\": 5.66,\r\n          \"end\": 5.76\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 5.76,\r\n          \"end\": 5.9\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 5.9,\r\n          \"end\": 6.04\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 6.04,\r\n          \"end\": 6.22\r\n        },\r\n        {\r\n          \"word\": \" Stapel\",\r\n          \"start\": 6.22,\r\n          \"end\": 6.66\r\n        },\r\n        {\r\n          \"word\": \" gerade\",\r\n          \"start\": 6.66,\r\n          \"end\": 6.9\r\n        },\r\n        {\r\n          \"word\": \" hält.\",\r\n          \"start\": 6.9,\r\n          \"end\": 7.38\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Werfen\",\r\n      \"end\": 0.54\r\n    },\r\n    {\r\n      \"at\": 0.54,\r\n      \"charIndex\": 7,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.68\r\n    },\r\n    {\r\n      \"at\": 0.68,\r\n      \"charIndex\": 11,\r\n      \"word\": \"die\",\r\n      \"end\": 0.84\r\n    },\r\n    {\r\n      \"at\": 0.84,\r\n      \"charIndex\": 15,\r\n      \"word\": \"alte\",\r\n      \"end\": 1.16\r\n    },\r\n    {\r\n      \"at\": 1.16,\r\n      \"charIndex\": 20,\r\n      \"word\": \"Bescheinigung\",\r\n      \"end\": 1.78\r\n    },\r\n    {\r\n      \"at\": 1.78,\r\n      \"charIndex\": 34,\r\n      \"word\": \"nicht\",\r\n      \"end\": 2.02\r\n    },\r\n    {\r\n      \"at\": 2.02,\r\n      \"charIndex\": 40,\r\n      \"word\": \"weg\",\r\n      \"end\": 2.34\r\n    },\r\n    {\r\n      \"at\": 2.52,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Wenn\",\r\n      \"end\": 2.84\r\n    },\r\n    {\r\n      \"at\": 2.84,\r\n      \"charIndex\": 50,\r\n      \"word\": \"die\",\r\n      \"end\": 3.0\r\n    },\r\n    {\r\n      \"at\": 3.0,\r\n      \"charIndex\": 54,\r\n      \"word\": \"neue\",\r\n      \"end\": 3.3\r\n    },\r\n    {\r\n      \"at\": 3.3,\r\n      \"charIndex\": 59,\r\n      \"word\": \"wieder\",\r\n      \"end\": 3.56\r\n    },\r\n    {\r\n      \"at\": 3.56,\r\n      \"charIndex\": 66,\r\n      \"word\": \"ausläuft\",\r\n      \"end\": 4.34\r\n    },\r\n    {\r\n      \"at\": 4.52,\r\n      \"charIndex\": 76,\r\n      \"word\": \"braucht\",\r\n      \"end\": 4.8\r\n    },\r\n    {\r\n      \"at\": 4.8,\r\n      \"charIndex\": 84,\r\n      \"word\": \"man\",\r\n      \"end\": 5.02\r\n    },\r\n    {\r\n      \"at\": 5.02,\r\n      \"charIndex\": 88,\r\n      \"word\": \"etwas\",\r\n      \"end\": 5.44\r\n    },\r\n    {\r\n      \"at\": 5.66,\r\n      \"charIndex\": 95,\r\n      \"word\": \"mit\",\r\n      \"end\": 5.76\r\n    },\r\n    {\r\n      \"at\": 5.76,\r\n      \"charIndex\": 99,\r\n      \"word\": \"dem\",\r\n      \"end\": 5.9\r\n    },\r\n    {\r\n      \"at\": 5.9,\r\n      \"charIndex\": 103,\r\n      \"word\": \"man\",\r\n      \"end\": 6.04\r\n    },\r\n    {\r\n      \"at\": 6.04,\r\n      \"charIndex\": 107,\r\n      \"word\": \"den\",\r\n      \"end\": 6.22\r\n    },\r\n    {\r\n      \"at\": 6.22,\r\n      \"charIndex\": 111,\r\n      \"word\": \"Stapel\",\r\n      \"end\": 6.66\r\n    },\r\n    {\r\n      \"at\": 6.66,\r\n      \"charIndex\": 118,\r\n      \"word\": \"gerade\",\r\n      \"end\": 6.9\r\n    },\r\n    {\r\n      \"at\": 6.9,\r\n      \"charIndex\": 125,\r\n      \"word\": \"hält\",\r\n      \"end\": 7.38\r\n    }\r\n  ],\r\n  \"sha256\": \"88a5009c7191dffb81e55e9afc35dc21c6e0f8215cfe6f35e2e181fb8bc143bc\",\r\n  \"bytes\": 129068,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-irmgard-aktenstapel-02.mp3\"\r\n}\r\n",
+          "sha256": "2cfaf599acb2cd66f49927e90522b81c7b4ef5e118bf139ffcebb646d35de4d7"
+        }
+      },
+      "stadt-irmgard-aktenstapel-04": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-04\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.\",\r\n  \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n  \"sourceSha256\": \"8f75806218a0c8d9b07f4b3755cef87579c5cd46879bc12ba17f7ffde4c5609d\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171003,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 190,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.69,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"a0e5276a6bd4fba636cae4d9f7e4c9e5a0b5d1f452a36961ff91b1a96486ec7e\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.56,\r\n  \"renderSeconds\": 9.59,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "085eb67bc2244635423c5d590157234f01b18ec6e89353201df9f78b4e9bbda9"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-irmgard-aktenstapel-04\",\r\n  \"voiceId\": \"stadt-irmgard-aktenstapel\",\r\n  \"actorId\": \"city-irmgard-aktenstapel\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-irmgard-aktenstapel].dialogue[region=berlin,slot=1]\",\r\n  \"text\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.\",\r\n  \"english\": \"Do not throw away the old certificate. When the new one expires again, you need something to keep the stack level.\",\r\n  \"sourceSha256\": \"8f75806218a0c8d9b07f4b3755cef87579c5cd46879bc12ba17f7ffde4c5609d\",\r\n  \"profileId\": \"c166075128d247fabf12e786bfaa60a6\",\r\n  \"referenceSha256\": \"8844d2f44e52808aeefaaf444249455ccdd8fbbfcac152ec13806a63e2d1bb8a\",\r\n  \"referenceOriginalSha256\": \"153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171003,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 190,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.69,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"a1c390a8b3f41d770ade7f28e795dcc382070c6724998f4aadd572794bf74c6d\",\r\n  \"profileJsonSha256\": \"547243bcfd9a808d9fa3fb697e7fd228eb894e7b13023f86a56883e83b14bd87\",\r\n  \"rawSha256\": \"a0e5276a6bd4fba636cae4d9f7e4c9e5a0b5d1f452a36961ff91b1a96486ec7e\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.56,\r\n  \"renderSeconds\": 9.59,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c166075128d247fabf12e786bfaa60a6\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.17:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.29,\r\n  \"truePeakDbtp\": -2.22,\r\n  \"asr\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas to keep den Stapel straight.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas to keep den Stapel straight.\",\r\n      \"transcribeSeconds\": 10.97,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Do\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" not\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.42\r\n        },\r\n        {\r\n          \"word\": \" werfen\",\r\n          \"start\": 0.42,\r\n          \"end\": 0.86\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.86,\r\n          \"end\": 1.0\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 1.0,\r\n          \"end\": 1.14\r\n        },\r\n        {\r\n          \"word\": \" alte\",\r\n          \"start\": 1.14,\r\n          \"end\": 1.38\r\n        },\r\n        {\r\n          \"word\": \" Bescheinigung\",\r\n          \"start\": 1.38,\r\n          \"end\": 1.96\r\n        },\r\n        {\r\n          \"word\": \" weg.\",\r\n          \"start\": 1.96,\r\n          \"end\": 2.24\r\n        },\r\n        {\r\n          \"word\": \" Wenn\",\r\n          \"start\": 2.5,\r\n          \"end\": 2.98\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 2.98,\r\n          \"end\": 3.12\r\n        },\r\n        {\r\n          \"word\": \" neue\",\r\n          \"start\": 3.12,\r\n          \"end\": 3.42\r\n        },\r\n        {\r\n          \"word\": \" wieder\",\r\n          \"start\": 3.42,\r\n          \"end\": 3.7\r\n        },\r\n        {\r\n          \"word\": \" expires,\",\r\n          \"start\": 3.7,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" braucht\",\r\n          \"start\": 4.64,\r\n          \"end\": 4.9\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 4.9,\r\n          \"end\": 5.08\r\n        },\r\n        {\r\n          \"word\": \" etwas\",\r\n          \"start\": 5.08,\r\n          \"end\": 5.5\r\n        },\r\n        {\r\n          \"word\": \" to\",\r\n          \"start\": 5.5,\r\n          \"end\": 5.82\r\n        },\r\n        {\r\n          \"word\": \" keep\",\r\n          \"start\": 5.82,\r\n          \"end\": 6.02\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 6.02,\r\n          \"end\": 6.2\r\n        },\r\n        {\r\n          \"word\": \" Stapel\",\r\n          \"start\": 6.2,\r\n          \"end\": 6.64\r\n        },\r\n        {\r\n          \"word\": \" straight.\",\r\n          \"start\": 6.64,\r\n          \"end\": 6.84\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Do\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 3,\r\n      \"word\": \"not\",\r\n      \"end\": 0.42\r\n    },\r\n    {\r\n      \"at\": 0.42,\r\n      \"charIndex\": 7,\r\n      \"word\": \"werfen\",\r\n      \"end\": 0.86\r\n    },\r\n    {\r\n      \"at\": 0.86,\r\n      \"charIndex\": 14,\r\n      \"word\": \"Sie\",\r\n      \"end\": 1.0\r\n    },\r\n    {\r\n      \"at\": 1.0,\r\n      \"charIndex\": 18,\r\n      \"word\": \"die\",\r\n      \"end\": 1.14\r\n    },\r\n    {\r\n      \"at\": 1.14,\r\n      \"charIndex\": 22,\r\n      \"word\": \"alte\",\r\n      \"end\": 1.38\r\n    },\r\n    {\r\n      \"at\": 1.38,\r\n      \"charIndex\": 27,\r\n      \"word\": \"Bescheinigung\",\r\n      \"end\": 1.96\r\n    },\r\n    {\r\n      \"at\": 1.96,\r\n      \"charIndex\": 41,\r\n      \"word\": \"weg\",\r\n      \"end\": 2.24\r\n    },\r\n    {\r\n      \"at\": 2.5,\r\n      \"charIndex\": 46,\r\n      \"word\": \"Wenn\",\r\n      \"end\": 2.98\r\n    },\r\n    {\r\n      \"at\": 2.98,\r\n      \"charIndex\": 51,\r\n      \"word\": \"die\",\r\n      \"end\": 3.12\r\n    },\r\n    {\r\n      \"at\": 3.12,\r\n      \"charIndex\": 55,\r\n      \"word\": \"neue\",\r\n      \"end\": 3.42\r\n    },\r\n    {\r\n      \"at\": 3.42,\r\n      \"charIndex\": 60,\r\n      \"word\": \"wieder\",\r\n      \"end\": 3.7\r\n    },\r\n    {\r\n      \"at\": 3.7,\r\n      \"charIndex\": 67,\r\n      \"word\": \"expires\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.64,\r\n      \"charIndex\": 76,\r\n      \"word\": \"braucht\",\r\n      \"end\": 4.9\r\n    },\r\n    {\r\n      \"at\": 4.9,\r\n      \"charIndex\": 84,\r\n      \"word\": \"man\",\r\n      \"end\": 5.08\r\n    },\r\n    {\r\n      \"at\": 5.08,\r\n      \"charIndex\": 88,\r\n      \"word\": \"etwas\",\r\n      \"end\": 5.5\r\n    },\r\n    {\r\n      \"at\": 5.5,\r\n      \"charIndex\": 95,\r\n      \"word\": \"to\",\r\n      \"end\": 5.82\r\n    },\r\n    {\r\n      \"at\": 5.82,\r\n      \"charIndex\": 98,\r\n      \"word\": \"keep\",\r\n      \"end\": 6.02\r\n    },\r\n    {\r\n      \"at\": 6.02,\r\n      \"charIndex\": 103,\r\n      \"word\": \"den\",\r\n      \"end\": 6.2\r\n    },\r\n    {\r\n      \"at\": 6.2,\r\n      \"charIndex\": 107,\r\n      \"word\": \"Stapel\",\r\n      \"end\": 6.64\r\n    },\r\n    {\r\n      \"at\": 6.64,\r\n      \"charIndex\": 114,\r\n      \"word\": \"straight\",\r\n      \"end\": 6.84\r\n    }\r\n  ],\r\n  \"sha256\": \"19595c1023fba25b1ebc314945bb20e80c5a33341796cde91b89dcbf61e73082\",\r\n  \"bytes\": 121772,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-irmgard-aktenstapel-04.mp3\"\r\n}\r\n",
+          "sha256": "a23cd60484def590707c273e3b7b92f0caab40c14e67d5bbaf5d68996606f64c"
+        }
+      }
+    }
+  }
+}

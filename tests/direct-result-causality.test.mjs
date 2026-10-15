@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const between=(start,end)=>{
@@ -24,7 +25,7 @@ function fixture(route='page'){
     amtExitPosition:()=>({x:30,y:40}),uiTone(){},setTimeout(){},toast(){},updateHud(){},endGame(){},
     renderDialogue(){calls.continuations++},stimulusBusy(){},audioTextActive(){},setAmtMusicMuted(){},awardAnmeldung(){},
     wanted(){calls.wanted++},regionOf:()=> 'berlin',OFFENSE_TIMING:{policeContactCooldown:5.8}});
-  vm.runInContext(between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded='),scope);
+  vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded='),scope);
   vm.runInContext(between('function openDialogue(','function setDialogueVoiceBusy(')+between('function anmeldungNeighborhoodMonologue(','function amtExitPosition(')+between('function returnFromAmt(','let indoorVisit=null;')+between('let indoorVisit=null;','document.getElementById("bureaucracy-form").onsubmit=')+between('function bureaucrat(','function microInteract('),scope);
   const lines=source.split('\n');
   vm.runInContext(lines.find(line=>line.startsWith('const requestedDirectLevel=')),scope);

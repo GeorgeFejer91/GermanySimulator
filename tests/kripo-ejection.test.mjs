@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 function fn(name,code=source){
@@ -19,11 +20,11 @@ function fn(name,code=source){
 function harness(direct=false){
  const classes=new Set(direct?['amt-direct-mode']:[]),elements=new Map(),events=[],visits=[],keys={KeyW:true,KeyE:true};
  const element=id=>{if(!elements.has(id))elements.set(id,{hidden:false,textContent:''});return elements.get(id)};
- const h={console,Math,neighborActivityActive:()=>false,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
+ const h={console,Math,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
   horizontalRoads:[{x:560,y:1380,w:9840,h:260},{x:560,y:2560,w:9840,h:240},{x:560,y:3560,w:9840,h:220}],
   offsetWorldPoint:p=>({...p,x:p.x+560,y:p.y+560}),props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],grassAreas:[],walkways:[],
   goerlitzerPark:{x:10000,y:4000,w:100,h:100,plaqueX:10000,plaqueY:4000},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},
-  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},jwd:{tour:null},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
+  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},jwd:{tour:null,allocated:false,met:new Set()},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
   OFFENSE_TIMING:{policeContactCooldown:5.8},keys,pendingOfficeEntry:null,stationElevation:()=>0,regionOf:y=>y>1680?'berlin':'germany',clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),
   document:{body:{classList:{contains:k=>classes.has(k),remove:k=>classes.delete(k)}},getElementById:element},
   clearInput(){for(const code in keys)keys[code]=false},toast:text=>events.push(['toast',text]),updateHud:()=>events.push(['hud']),
@@ -32,10 +33,11 @@ function harness(direct=false){
   currentMission:()=>({target:'buergeramt',form:'a38'}),window:{Germany3D:{officeAssetsReady:true,leaveAmtDirectMode:()=>events.push(['city-ready']),enterBuergeramt:done=>done(),prepareOfficeAssets:()=>events.push(['prepare-office'])},BuergeramtLevel:{requestFullscreen(){},open:options=>visits.push(options)}}
  };
  vm.createContext(h);
+ const lane=source.split('\n').find(line=>line.startsWith('const jwdLane='));assert.ok(lane,'actual JWD lane declaration');
  const buildings=source.slice(source.indexOf('const buildings='),source.indexOf('const grassAreas='));
  const paths=source.slice(source.indexOf('for(const b of buildings){'),source.indexOf('walkways.push({x:goerlitzerPark'));
- const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','interact'];
- vm.runInContext(`${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
+ const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','neighborActivityActive','cityInteractionTarget','interact'];
+ vm.runInContext(motionObserverSource(source)+`${lane}\n${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
  if(direct){const start=source.indexOf(' const directConfig=');vm.runInContext(source.slice(start,source.indexOf('\n function restartAmt',start))+'\nglobalThis.directConfig=directConfig;',h)}
  return Object.assign(h,{events,visits,classes,elements});
 }

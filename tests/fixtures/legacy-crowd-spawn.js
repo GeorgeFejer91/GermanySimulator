@@ -1,0 +1,4 @@
+function addCrowdPedestrian(x,y,vx,vy,min,max){
+ const j=crowdIndex++,archetype=crowdArchetypeOrder[j%crowdArchetypeOrder.length],vertical=!!vy,dedicated=new Set((globalThis.StreetWisdom?.definitions||[]).map(person=>person.voiceId)),identities=crowdVoiceIds.map((voiceId,index)=>index).filter(index=>!dedicated.has(crowdVoiceIds[index])&&index%2===(archetype.sprite==="towelMan"?1:0)),identityIndex=identities[Math.floor(j/2)%identities.length],fullName=crowdNames[identityIndex],voiceId=crowdVoiceIds[identityIndex];
+ npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:j%3===0,pause:0,barkAt:0,archetype:archetype.id,spriteKind:archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96})
+}

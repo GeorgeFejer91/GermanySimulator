@@ -1,0 +1,705 @@
+{
+  "voiceId": "stadt-monika-zebra",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-monika-zebra-01",
+      "voiceId": "stadt-monika-zebra",
+      "actorId": "city-monika-zebra",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=0]",
+      "text": "Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.",
+      "english": "I would rather wait here until everyone is finished with their priority. Then I can cross in peace.",
+      "sourceSha256": "224cade89df70f2377d597343164bf16b878b6329a67d70ba2f58ea699043be6",
+      "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.",
+      "decode": {
+        "maxSpeechTokens": 364,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 140,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.89,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351",
+      "profileJsonSha256": "5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2",
+      "rawSha256": "ed9412ce3f70c958190d5e518a856ac812a07f306411f5bd1945965a3484a3ae",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.54,
+      "renderSeconds": 7.14,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "integratedLufs": -18.08,
+      "truePeakDbtp": -2.19,
+      "asr": "Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.",
+          "transcribeSeconds": 10.66,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " warte",
+              "start": 0.18,
+              "end": 0.5
+            },
+            {
+              "word": " hier",
+              "start": 0.5,
+              "end": 0.7
+            },
+            {
+              "word": " lieber,",
+              "start": 0.7,
+              "end": 1
+            },
+            {
+              "word": " bis",
+              "start": 1.1,
+              "end": 1.2
+            },
+            {
+              "word": " alle",
+              "start": 1.2,
+              "end": 1.42
+            },
+            {
+              "word": " fertig",
+              "start": 1.42,
+              "end": 1.76
+            },
+            {
+              "word": " sind",
+              "start": 1.76,
+              "end": 2.04
+            },
+            {
+              "word": " mit",
+              "start": 2.04,
+              "end": 2.22
+            },
+            {
+              "word": " ihrem",
+              "start": 2.22,
+              "end": 2.4
+            },
+            {
+              "word": " Vorrang.",
+              "start": 2.4,
+              "end": 2.92
+            },
+            {
+              "word": " Danach",
+              "start": 3.42,
+              "end": 3.84
+            },
+            {
+              "word": " kann",
+              "start": 3.84,
+              "end": 4.02
+            },
+            {
+              "word": " ich",
+              "start": 4.02,
+              "end": 4.14
+            },
+            {
+              "word": " in",
+              "start": 4.14,
+              "end": 4.26
+            },
+            {
+              "word": " Ruhe",
+              "start": 4.26,
+              "end": 4.56
+            },
+            {
+              "word": " rüber.",
+              "start": 4.56,
+              "end": 4.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "warte",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 10,
+          "word": "hier",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 15,
+          "word": "lieber",
+          "end": 1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 23,
+          "word": "bis",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 27,
+          "word": "alle",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 32,
+          "word": "fertig",
+          "end": 1.76
+        },
+        {
+          "at": 1.76,
+          "charIndex": 39,
+          "word": "sind",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 44,
+          "word": "mit",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 48,
+          "word": "ihrem",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 54,
+          "word": "Vorrang",
+          "end": 2.92
+        },
+        {
+          "at": 3.42,
+          "charIndex": 63,
+          "word": "Danach",
+          "end": 3.84
+        },
+        {
+          "at": 3.84,
+          "charIndex": 70,
+          "word": "kann",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 75,
+          "word": "ich",
+          "end": 4.14
+        },
+        {
+          "at": 4.14,
+          "charIndex": 79,
+          "word": "in",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 82,
+          "word": "Ruhe",
+          "end": 4.56
+        },
+        {
+          "at": 4.56,
+          "charIndex": 87,
+          "word": "rüber",
+          "end": 4.88
+        }
+      ],
+      "sha256": "6c00e7811b0d3d7b1d5cafaa37e7d3d69439a26bf1b30d2073ceaa45c346f4a8",
+      "bytes": 89516,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-monika-zebra-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-monika-zebra-01",
+        "encodedSha256": "6c00e7811b0d3d7b1d5cafaa37e7d3d69439a26bf1b30d2073ceaa45c346f4a8"
+      }
+    },
+    {
+      "clipId": "stadt-monika-zebra-02",
+      "voiceId": "stadt-monika-zebra",
+      "actorId": "city-monika-zebra",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=1]",
+      "text": "Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.",
+      "english": "There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.",
+      "sourceSha256": "d12c6527cf50b456e430337b325700768fc00579e001e8a8eca98285a3fa01a8",
+      "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171001,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 180,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.95,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351",
+      "profileJsonSha256": "5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2",
+      "rawSha256": "ca77cc69c6f3253746c50235d04f1ccb57951a0275984ed16d08fc2220e0d895",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.14,
+      "renderSeconds": 7.83,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.69:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.1,
+      "truePeakDbtp": -2.24,
+      "asr": "Auf dem Zebrastreifen haben wir alle Platz, bloß nicht gleichzeitig an derselben Stelle, das könnte man sich doch vorher kurz aufteilen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Auf dem Zebrastreifen haben wir alle Platz, bloß nicht gleichzeitig an derselben Stelle, das könnte man sich doch vorher kurz aufteilen.",
+          "transcribeSeconds": 11.19,
+          "words": [
+            {
+              "word": " Auf",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " dem",
+              "start": 0.22,
+              "end": 0.38
+            },
+            {
+              "word": " Zebrastreifen",
+              "start": 0.38,
+              "end": 1.2
+            },
+            {
+              "word": " haben",
+              "start": 1.2,
+              "end": 1.42
+            },
+            {
+              "word": " wir",
+              "start": 1.42,
+              "end": 1.56
+            },
+            {
+              "word": " alle",
+              "start": 1.56,
+              "end": 1.74
+            },
+            {
+              "word": " Platz,",
+              "start": 1.74,
+              "end": 2.08
+            },
+            {
+              "word": " bloß",
+              "start": 2.4,
+              "end": 2.7
+            },
+            {
+              "word": " nicht",
+              "start": 2.7,
+              "end": 2.86
+            },
+            {
+              "word": " gleichzeitig",
+              "start": 2.86,
+              "end": 3.36
+            },
+            {
+              "word": " an",
+              "start": 3.36,
+              "end": 3.6
+            },
+            {
+              "word": " derselben",
+              "start": 3.6,
+              "end": 3.98
+            },
+            {
+              "word": " Stelle,",
+              "start": 3.98,
+              "end": 4.28
+            },
+            {
+              "word": " das",
+              "start": 4.54,
+              "end": 4.74
+            },
+            {
+              "word": " könnte",
+              "start": 4.74,
+              "end": 4.96
+            },
+            {
+              "word": " man",
+              "start": 4.96,
+              "end": 5.12
+            },
+            {
+              "word": " sich",
+              "start": 5.12,
+              "end": 5.28
+            },
+            {
+              "word": " doch",
+              "start": 5.28,
+              "end": 5.42
+            },
+            {
+              "word": " vorher",
+              "start": 5.42,
+              "end": 5.7
+            },
+            {
+              "word": " kurz",
+              "start": 5.7,
+              "end": 5.96
+            },
+            {
+              "word": " aufteilen.",
+              "start": 5.96,
+              "end": 6.52
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Auf",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "dem",
+          "end": 0.38
+        },
+        {
+          "at": 0.38,
+          "charIndex": 8,
+          "word": "Zebrastreifen",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 22,
+          "word": "haben",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 28,
+          "word": "wir",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 32,
+          "word": "alle",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 37,
+          "word": "Platz",
+          "end": 2.08
+        },
+        {
+          "at": 2.4,
+          "charIndex": 44,
+          "word": "Bloß",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 49,
+          "word": "nicht",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 55,
+          "word": "gleichzeitig",
+          "end": 3.36
+        },
+        {
+          "at": 3.36,
+          "charIndex": 68,
+          "word": "an",
+          "end": 3.6
+        },
+        {
+          "at": 3.6,
+          "charIndex": 71,
+          "word": "derselben",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 81,
+          "word": "Stelle",
+          "end": 4.28
+        },
+        {
+          "at": 4.54,
+          "charIndex": 89,
+          "word": "Das",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 93,
+          "word": "könnte",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 100,
+          "word": "man",
+          "end": 5.12
+        },
+        {
+          "at": 5.12,
+          "charIndex": 104,
+          "word": "sich",
+          "end": 5.28
+        },
+        {
+          "at": 5.28,
+          "charIndex": 109,
+          "word": "doch",
+          "end": 5.42
+        },
+        {
+          "at": 5.42,
+          "charIndex": 114,
+          "word": "vorher",
+          "end": 5.7
+        },
+        {
+          "at": 5.7,
+          "charIndex": 121,
+          "word": "kurz",
+          "end": 5.96
+        },
+        {
+          "at": 5.96,
+          "charIndex": 126,
+          "word": "aufteilen",
+          "end": 6.52
+        }
+      ],
+      "sha256": "dab7ad355f6dac151f629f7add22de5540fe1d5491e6df6bc0473d586f367588",
+      "bytes": 115244,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-monika-zebra-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-monika-zebra-02",
+        "encodedSha256": "dab7ad355f6dac151f629f7add22de5540fe1d5491e6df6bc0473d586f367588"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-monika-zebra-03",
+      "voiceId": "stadt-monika-zebra",
+      "actorId": "city-monika-zebra",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=berlin,slot=0]",
+      "text": "Ich warte hier lieber, until alle fertig sind mit their priority. After that kann ich in Ruhe rüber.",
+      "english": "I would rather wait here until everyone is finished with their priority. Then I can cross in peace.",
+      "sourceSha256": "13fdca86babbdb75292962b22ef4dc634460b8b3d56ea487b68bb64d31777750",
+      "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-monika-zebra-04",
+      "voiceId": "stadt-monika-zebra",
+      "actorId": "city-monika-zebra",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=berlin,slot=1]",
+      "text": "On dem Zebrastreifen haben wir alle space. Just nicht gleichzeitig an derselben Stelle. We could doch vorher kurz allocate that.",
+      "english": "There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.",
+      "sourceSha256": "a58de6f3c98c3d830879c2fefa7760cc8cba2cef316d77bff735fa48b404a868",
+      "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+      "referenceSha256": "434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1",
+      "referenceOriginalSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-monika-zebra-01\",\r\n      \"voiceId\": \"stadt-monika-zebra\",\r\n      \"actorId\": \"city-monika-zebra\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n      \"english\": \"I would rather wait here until everyone is finished with their priority. Then I can cross in peace.\",\r\n      \"sourceSha256\": \"224cade89df70f2377d597343164bf16b878b6329a67d70ba2f58ea699043be6\",\r\n      \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-monika-zebra-02\",\r\n      \"voiceId\": \"stadt-monika-zebra\",\r\n      \"actorId\": \"city-monika-zebra\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.\",\r\n      \"english\": \"There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.\",\r\n      \"sourceSha256\": \"d12c6527cf50b456e430337b325700768fc00579e001e8a8eca98285a3fa01a8\",\r\n      \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-monika-zebra-03\",\r\n      \"voiceId\": \"stadt-monika-zebra\",\r\n      \"actorId\": \"city-monika-zebra\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Ich warte hier lieber, until alle fertig sind mit their priority. After that kann ich in Ruhe rüber.\",\r\n      \"english\": \"I would rather wait here until everyone is finished with their priority. Then I can cross in peace.\",\r\n      \"sourceSha256\": \"13fdca86babbdb75292962b22ef4dc634460b8b3d56ea487b68bb64d31777750\",\r\n      \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-monika-zebra-04\",\r\n      \"voiceId\": \"stadt-monika-zebra\",\r\n      \"actorId\": \"city-monika-zebra\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"On dem Zebrastreifen haben wir alle space. Just nicht gleichzeitig an derselben Stelle. We could doch vorher kurz allocate that.\",\r\n      \"english\": \"There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.\",\r\n      \"sourceSha256\": \"a58de6f3c98c3d830879c2fefa7760cc8cba2cef316d77bff735fa48b404a868\",\r\n      \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n      \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n      \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351"
+    },
+    "takes": {
+      "stadt-monika-zebra-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-monika-zebra-01\",\r\n  \"voiceId\": \"stadt-monika-zebra\",\r\n  \"actorId\": \"city-monika-zebra\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n  \"english\": \"I would rather wait here until everyone is finished with their priority. Then I can cross in peace.\",\r\n  \"sourceSha256\": \"224cade89df70f2377d597343164bf16b878b6329a67d70ba2f58ea699043be6\",\r\n  \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.89,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351\",\r\n  \"profileJsonSha256\": \"5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2\",\r\n  \"rawSha256\": \"ed9412ce3f70c958190d5e518a856ac812a07f306411f5bd1945965a3484a3ae\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.54,\r\n  \"renderSeconds\": 7.14,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "f015697cff36a687d63d8d2d405e8e4e40bccfa23d89832027374f2f257f2fa7"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-monika-zebra-01\",\r\n  \"voiceId\": \"stadt-monika-zebra\",\r\n  \"actorId\": \"city-monika-zebra\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n  \"english\": \"I would rather wait here until everyone is finished with their priority. Then I can cross in peace.\",\r\n  \"sourceSha256\": \"224cade89df70f2377d597343164bf16b878b6329a67d70ba2f58ea699043be6\",\r\n  \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 364,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.89,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351\",\r\n  \"profileJsonSha256\": \"5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2\",\r\n  \"rawSha256\": \"ed9412ce3f70c958190d5e518a856ac812a07f306411f5bd1945965a3484a3ae\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.54,\r\n  \"renderSeconds\": 7.14,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 1\r\n  },\r\n  \"integratedLufs\": -18.08,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.\",\r\n      \"transcribeSeconds\": 10.66,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" warte\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.5\r\n        },\r\n        {\r\n          \"word\": \" hier\",\r\n          \"start\": 0.5,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" lieber,\",\r\n          \"start\": 0.7,\r\n          \"end\": 1.0\r\n        },\r\n        {\r\n          \"word\": \" bis\",\r\n          \"start\": 1.1,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" alle\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" fertig\",\r\n          \"start\": 1.42,\r\n          \"end\": 1.76\r\n        },\r\n        {\r\n          \"word\": \" sind\",\r\n          \"start\": 1.76,\r\n          \"end\": 2.04\r\n        },\r\n        {\r\n          \"word\": \" mit\",\r\n          \"start\": 2.04,\r\n          \"end\": 2.22\r\n        },\r\n        {\r\n          \"word\": \" ihrem\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.4\r\n        },\r\n        {\r\n          \"word\": \" Vorrang.\",\r\n          \"start\": 2.4,\r\n          \"end\": 2.92\r\n        },\r\n        {\r\n          \"word\": \" Danach\",\r\n          \"start\": 3.42,\r\n          \"end\": 3.84\r\n        },\r\n        {\r\n          \"word\": \" kann\",\r\n          \"start\": 3.84,\r\n          \"end\": 4.02\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.02,\r\n          \"end\": 4.14\r\n        },\r\n        {\r\n          \"word\": \" in\",\r\n          \"start\": 4.14,\r\n          \"end\": 4.26\r\n        },\r\n        {\r\n          \"word\": \" Ruhe\",\r\n          \"start\": 4.26,\r\n          \"end\": 4.56\r\n        },\r\n        {\r\n          \"word\": \" rüber.\",\r\n          \"start\": 4.56,\r\n          \"end\": 4.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ich\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"warte\",\r\n      \"end\": 0.5\r\n    },\r\n    {\r\n      \"at\": 0.5,\r\n      \"charIndex\": 10,\r\n      \"word\": \"hier\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 15,\r\n      \"word\": \"lieber\",\r\n      \"end\": 1.0\r\n    },\r\n    {\r\n      \"at\": 1.1,\r\n      \"charIndex\": 23,\r\n      \"word\": \"bis\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 27,\r\n      \"word\": \"alle\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.42,\r\n      \"charIndex\": 32,\r\n      \"word\": \"fertig\",\r\n      \"end\": 1.76\r\n    },\r\n    {\r\n      \"at\": 1.76,\r\n      \"charIndex\": 39,\r\n      \"word\": \"sind\",\r\n      \"end\": 2.04\r\n    },\r\n    {\r\n      \"at\": 2.04,\r\n      \"charIndex\": 44,\r\n      \"word\": \"mit\",\r\n      \"end\": 2.22\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 48,\r\n      \"word\": \"ihrem\",\r\n      \"end\": 2.4\r\n    },\r\n    {\r\n      \"at\": 2.4,\r\n      \"charIndex\": 54,\r\n      \"word\": \"Vorrang\",\r\n      \"end\": 2.92\r\n    },\r\n    {\r\n      \"at\": 3.42,\r\n      \"charIndex\": 63,\r\n      \"word\": \"Danach\",\r\n      \"end\": 3.84\r\n    },\r\n    {\r\n      \"at\": 3.84,\r\n      \"charIndex\": 70,\r\n      \"word\": \"kann\",\r\n      \"end\": 4.02\r\n    },\r\n    {\r\n      \"at\": 4.02,\r\n      \"charIndex\": 75,\r\n      \"word\": \"ich\",\r\n      \"end\": 4.14\r\n    },\r\n    {\r\n      \"at\": 4.14,\r\n      \"charIndex\": 79,\r\n      \"word\": \"in\",\r\n      \"end\": 4.26\r\n    },\r\n    {\r\n      \"at\": 4.26,\r\n      \"charIndex\": 82,\r\n      \"word\": \"Ruhe\",\r\n      \"end\": 4.56\r\n    },\r\n    {\r\n      \"at\": 4.56,\r\n      \"charIndex\": 87,\r\n      \"word\": \"rüber\",\r\n      \"end\": 4.88\r\n    }\r\n  ],\r\n  \"sha256\": \"6c00e7811b0d3d7b1d5cafaa37e7d3d69439a26bf1b30d2073ceaa45c346f4a8\",\r\n  \"bytes\": 89516,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-monika-zebra-01.mp3\"\r\n}\r\n",
+          "sha256": "e73f73d3f863bdd241518b665e617b785da63613cae639b31703ecb9256445ab"
+        }
+      },
+      "stadt-monika-zebra-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-monika-zebra-02\",\r\n  \"voiceId\": \"stadt-monika-zebra\",\r\n  \"actorId\": \"city-monika-zebra\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.\",\r\n  \"english\": \"There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.\",\r\n  \"sourceSha256\": \"d12c6527cf50b456e430337b325700768fc00579e001e8a8eca98285a3fa01a8\",\r\n  \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171001,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 180,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.95,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351\",\r\n  \"profileJsonSha256\": \"5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2\",\r\n  \"rawSha256\": \"ca77cc69c6f3253746c50235d04f1ccb57951a0275984ed16d08fc2220e0d895\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.14,\r\n  \"renderSeconds\": 7.83,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "425090218166d3408c41da733097456a46261498ff9aa8fc9f69d789bb71c604"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-monika-zebra-02\",\r\n  \"voiceId\": \"stadt-monika-zebra\",\r\n  \"actorId\": \"city-monika-zebra\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-monika-zebra].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.\",\r\n  \"english\": \"There is room for all of us on the crossing. Just not in the same spot at the same time. Surely we could briefly allocate that beforehand.\",\r\n  \"sourceSha256\": \"d12c6527cf50b456e430337b325700768fc00579e001e8a8eca98285a3fa01a8\",\r\n  \"profileId\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n  \"referenceSha256\": \"434d2479cafa912848196c250a1154d8fa96512eecfa7fce528c21463178adc1\",\r\n  \"referenceOriginalSha256\": \"caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171001,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 180,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.95,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"138914989288695c02d6972d11c2d10c59a9f43db086b5881a5c135206d74351\",\r\n  \"profileJsonSha256\": \"5a67f1ff5e0eba521f41e1e66726bba0225ae4eb96e90cbf5f0d351aeb1e8ff2\",\r\n  \"rawSha256\": \"ca77cc69c6f3253746c50235d04f1ccb57951a0275984ed16d08fc2220e0d895\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.14,\r\n  \"renderSeconds\": 7.83,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"3cb9ea9f6c3e40428ce73acfe639a1ee\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.69:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.1,\r\n  \"truePeakDbtp\": -2.24,\r\n  \"asr\": \"Auf dem Zebrastreifen haben wir alle Platz, bloß nicht gleichzeitig an derselben Stelle, das könnte man sich doch vorher kurz aufteilen.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Auf dem Zebrastreifen haben wir alle Platz, bloß nicht gleichzeitig an derselben Stelle, das könnte man sich doch vorher kurz aufteilen.\",\r\n      \"transcribeSeconds\": 11.19,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Auf\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.22\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 0.22,\r\n          \"end\": 0.38\r\n        },\r\n        {\r\n          \"word\": \" Zebrastreifen\",\r\n          \"start\": 0.38,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" haben\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" wir\",\r\n          \"start\": 1.42,\r\n          \"end\": 1.56\r\n        },\r\n        {\r\n          \"word\": \" alle\",\r\n          \"start\": 1.56,\r\n          \"end\": 1.74\r\n        },\r\n        {\r\n          \"word\": \" Platz,\",\r\n          \"start\": 1.74,\r\n          \"end\": 2.08\r\n        },\r\n        {\r\n          \"word\": \" bloß\",\r\n          \"start\": 2.4,\r\n          \"end\": 2.7\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 2.7,\r\n          \"end\": 2.86\r\n        },\r\n        {\r\n          \"word\": \" gleichzeitig\",\r\n          \"start\": 2.86,\r\n          \"end\": 3.36\r\n        },\r\n        {\r\n          \"word\": \" an\",\r\n          \"start\": 3.36,\r\n          \"end\": 3.6\r\n        },\r\n        {\r\n          \"word\": \" derselben\",\r\n          \"start\": 3.6,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" Stelle,\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.28\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 4.54,\r\n          \"end\": 4.74\r\n        },\r\n        {\r\n          \"word\": \" könnte\",\r\n          \"start\": 4.74,\r\n          \"end\": 4.96\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 4.96,\r\n          \"end\": 5.12\r\n        },\r\n        {\r\n          \"word\": \" sich\",\r\n          \"start\": 5.12,\r\n          \"end\": 5.28\r\n        },\r\n        {\r\n          \"word\": \" doch\",\r\n          \"start\": 5.28,\r\n          \"end\": 5.42\r\n        },\r\n        {\r\n          \"word\": \" vorher\",\r\n          \"start\": 5.42,\r\n          \"end\": 5.7\r\n        },\r\n        {\r\n          \"word\": \" kurz\",\r\n          \"start\": 5.7,\r\n          \"end\": 5.96\r\n        },\r\n        {\r\n          \"word\": \" aufteilen.\",\r\n          \"start\": 5.96,\r\n          \"end\": 6.52\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Auf\",\r\n      \"end\": 0.22\r\n    },\r\n    {\r\n      \"at\": 0.22,\r\n      \"charIndex\": 4,\r\n      \"word\": \"dem\",\r\n      \"end\": 0.38\r\n    },\r\n    {\r\n      \"at\": 0.38,\r\n      \"charIndex\": 8,\r\n      \"word\": \"Zebrastreifen\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 22,\r\n      \"word\": \"haben\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.42,\r\n      \"charIndex\": 28,\r\n      \"word\": \"wir\",\r\n      \"end\": 1.56\r\n    },\r\n    {\r\n      \"at\": 1.56,\r\n      \"charIndex\": 32,\r\n      \"word\": \"alle\",\r\n      \"end\": 1.74\r\n    },\r\n    {\r\n      \"at\": 1.74,\r\n      \"charIndex\": 37,\r\n      \"word\": \"Platz\",\r\n      \"end\": 2.08\r\n    },\r\n    {\r\n      \"at\": 2.4,\r\n      \"charIndex\": 44,\r\n      \"word\": \"Bloß\",\r\n      \"end\": 2.7\r\n    },\r\n    {\r\n      \"at\": 2.7,\r\n      \"charIndex\": 49,\r\n      \"word\": \"nicht\",\r\n      \"end\": 2.86\r\n    },\r\n    {\r\n      \"at\": 2.86,\r\n      \"charIndex\": 55,\r\n      \"word\": \"gleichzeitig\",\r\n      \"end\": 3.36\r\n    },\r\n    {\r\n      \"at\": 3.36,\r\n      \"charIndex\": 68,\r\n      \"word\": \"an\",\r\n      \"end\": 3.6\r\n    },\r\n    {\r\n      \"at\": 3.6,\r\n      \"charIndex\": 71,\r\n      \"word\": \"derselben\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 81,\r\n      \"word\": \"Stelle\",\r\n      \"end\": 4.28\r\n    },\r\n    {\r\n      \"at\": 4.54,\r\n      \"charIndex\": 89,\r\n      \"word\": \"Das\",\r\n      \"end\": 4.74\r\n    },\r\n    {\r\n      \"at\": 4.74,\r\n      \"charIndex\": 93,\r\n      \"word\": \"könnte\",\r\n      \"end\": 4.96\r\n    },\r\n    {\r\n      \"at\": 4.96,\r\n      \"charIndex\": 100,\r\n      \"word\": \"man\",\r\n      \"end\": 5.12\r\n    },\r\n    {\r\n      \"at\": 5.12,\r\n      \"charIndex\": 104,\r\n      \"word\": \"sich\",\r\n      \"end\": 5.28\r\n    },\r\n    {\r\n      \"at\": 5.28,\r\n      \"charIndex\": 109,\r\n      \"word\": \"doch\",\r\n      \"end\": 5.42\r\n    },\r\n    {\r\n      \"at\": 5.42,\r\n      \"charIndex\": 114,\r\n      \"word\": \"vorher\",\r\n      \"end\": 5.7\r\n    },\r\n    {\r\n      \"at\": 5.7,\r\n      \"charIndex\": 121,\r\n      \"word\": \"kurz\",\r\n      \"end\": 5.96\r\n    },\r\n    {\r\n      \"at\": 5.96,\r\n      \"charIndex\": 126,\r\n      \"word\": \"aufteilen\",\r\n      \"end\": 6.52\r\n    }\r\n  ],\r\n  \"sha256\": \"dab7ad355f6dac151f629f7add22de5540fe1d5491e6df6bc0473d586f367588\",\r\n  \"bytes\": 115244,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-monika-zebra-02.mp3\"\r\n}\r\n",
+          "sha256": "6fc70f53fb110851f7ba37b3582472930d659adfde25afb2107186709a30e6f5"
+        }
+      }
+    }
+  }
+}
