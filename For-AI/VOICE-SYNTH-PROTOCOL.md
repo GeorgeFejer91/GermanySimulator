@@ -32,6 +32,12 @@ The cleanup command stages privately and validates the actual candidate receipts
 
 Hartmut retains stable voice/actor IDs `jwd-theodore-maaslos` / `jwd-theodore` and all seven authored lines. His selected `GS Hartmut Maaslos (CC0 child character)` profile uses the CC0 performed child-character source and verified reference hashes recorded in the cast. The source's biological speaker age is unverified. The former adult-actor profile remains archived. CC0 requires no attribution credit; source/license provenance stays in technical metadata. Perceptual listening remains a separate check.
 
+## Current personalized crowd recordings (2026-10-15)
+
+The nine ordinary crowd identities now own 18 checked exact-text recordings out of their 36 authored regional slots. Eleven additional recordings join the first seven through separate `remaining27-first-takes` manifests, preserving the earlier assets, approvals and measured mouth cues. The existing exact `(voiceId, text)` lookup owns playback; failed or unverified slots remain captions. Selected profiles and translations are unchanged. The new catalog contains 585 recordings, with all 574 earlier expanded recording objects preserved.
+
+Generation completed for all 27 remaining first takes. Processing was interrupted after 21 encodings when the Windows supervisor mistook a recycled historical child PID for an identity conflict. A separately bounded processing-only recovery checked the five untouched files, preserved the 21 completed files, and held the one interrupted file without another call. Public admission retains the original failed phase and explicit recovery proof. The interrupted ASR count remains unknown within its recorded bound; it must not be rewritten as a successful original phase or a precise historical count. Eleven new takes passed native completion, literal final-audio word checks, levels, captions and ownership; the other sixteen stay private. Perceptual listening remains unverified. Only the original seven currently have measured 40 Hz mouth envelopes.
+
 ## Fixed voices and the agent workflow (2026-10-11)
 
 ### JWD neighbor speech production (2026-10-13)

@@ -19,7 +19,9 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
  const entries={},seen=new Set(),seenVoices=new Set();
  for(const manifest of manifests){
   const voice=manifest.voiceId,owner=roles[voice],binding=cast.productionVoices[voice];
-  requireMatch(owner&&binding&&owner.voiceId===voice&&Object.hasOwn(barks,voice)&&!seenVoices.has(voice),'Crowd manifest voice has no unique actor-owned source/profile');seenVoices.add(voice);
+  const generationScope=manifest.generationScope??'first9',voiceScope=voice+'\0'+generationScope;
+  requireMatch(['first9','remaining27-first-takes'].includes(generationScope)&&owner&&binding&&owner.voiceId===voice&&Object.hasOwn(barks,voice)&&!seenVoices.has(voiceScope),'Crowd manifest has duplicate voice/grant scope or no actor-owned source/profile');seenVoices.add(voiceScope);
+  if(generationScope==='remaining27-first-takes')requireMatch(manifest.generatedLineCount===3&&manifest.clips.every(clip=>!(clip.region==='germany'&&clip.slot===0))&&manifest.heldPrivate.filter(row=>row.region==='germany'&&row.slot===0&&row.reason==='outside remaining27 grant; first batch preserved').length===1,'Remaining27 cannot claim old Germany0 or miscount its actual generation');
   requireMatch(manifest.profileId===binding.profileId&&manifest.requestedLineCount===4&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=4&&manifest.lineCount===manifest.clips.length,'Unaccounted crowd dialogue requests');
   const expected=new Map();
   for(const region of ['berlin','germany'])for(let slot=0;slot<2;slot++){
@@ -165,9 +167,311 @@ export function crowdRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=ro
   requireMatch(admission?.status==='ROOT-verified-current-generation'&&admission.helperSha256===crowdAuthoringHelperSha256&&/^[a-f0-9]{64}$/.test(admission.authoritySha256)&&/^[a-f0-9]{64}$/.test(admission.adapterSha256),'Missing current-generation crowd admission');
   const {authored}=crowdPublicPlan(cast,admission.fullPlan,sourceRoot);
   requireMatch(Object.keys(admission.takes).length===selected.length,'Crowd admitted take coverage changed');
-  for(const clip of selected){const job=authored.get(clip.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Default crowd source/English/owner drift');crowdDefaultClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);clips.push({...clip,...(mouthRows?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouthRows[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}
+  for(const clip of selected){const job=authored.get(clip.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Default crowd source/English/owner drift');if(manifest.generationScope==='remaining27-first-takes'){
+    requireMatch(admission.generationScope==='remaining27-first-takes'&&/^[a-f0-9]{64}$/.test(admission.nativePlanOriginSha256),'Remaining27 generation proof/origin missing');
+    crowdRemainingClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);
+   }else crowdDefaultClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);clips.push({...clip,...(mouthRows?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouthRows[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}
  }
  return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot);
+}
+
+// Scoped extension for remaining27; original first9 validators remain unchanged.
+export function crowdRemainingSeed(job){
+ if(job.region==='germany'&&job.slot===1)return 71000;
+ if(job.region==='berlin'&&job.slot===0)return 71001;
+ if(job.region==='berlin'&&job.slot===1)return 71002;
+ throw Error('Germany0 is outside remaining27 generation');
+}
+export function verifyCrowdRemainingSeed(job,seed){requireMatch(seed===crowdRemainingSeed(job),'Wrong owned remaining27 native seed');return seed;}
+export function verifyCrowdGenerationManifestLedger(manifest,relative,digest,ledger){
+ const scope=manifest.generationScope??'first9';requireMatch(scope==='first9'||scope==='remaining27-first-takes','Unknown crowd generation scope');
+ if(scope==='remaining27-first-takes')requireMatch(relative===`assets/voices/candidate-dialogue/${manifest.voiceId}-remaining27-crowd-manifest.json`,'Remaining27 manifest filename does not own its voice/scope');
+ if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(ledger[relative]===digest,'Crowd default manifest lacks verified ROOT private admission');
+}
+function crowdRemainingClipAuthority(cast,clip,proof,requestSha256){
+ verifyCrowdRemainingSeed(clip,clip.seed);
+ fixedTakeAuthority(cast,clip);crowdExactCues(clip);
+ requireMatch(clip.file===`assets/voices/candidate-dialogue/${clip.clipId}.mp3`,'Crowd public file must be its canonical relative asset path');
+ requireMatch(clip.authoringHelperSha256===crowdAuthoringHelperSha256&&clip.requestSha256===requestSha256&&clip.rendererInputText===clip.text&&clip.rendererInputBasis==='exact authored source'&&clip.synthesisAttempt===1&&clip.seed===crowdRemainingSeed(clip),'Crowd clip is not the named current-generation first take');
+ requireMatch(!['rescueParts','deliveryEditing','benchmarkOnly','recognitionVerification','actualInferenceText','nativeCompletion','exceptionAuthority','joinRetakeAuthority'].some(key=>key in clip),'Unsupported crowd edited/substituted take');
+ const synth=clip.synthesis,decode=clip.decode,approval=clip.approval;
+ requireMatch(synth?.languageId==='de'&&synth.device==='cuda'&&synth.precision==='fp16'&&synth.t3WeightPrecision==='float16'&&synth.conditioningPrecision==='float32'&&synth.referenceReconditionedForProfile===clip.profileId&&synth.referenceConditioningVerifiedFloat32===true&&synth.inferenceMode===true&&synth.cpuThreads===2&&synth.exaggeration===.5&&synth.temperature===.65&&synth.repetitionPenalty===3&&synth.cfgWeight===.6,'Crowd native conditioning/recipe drift');
+ requireMatch(decode?.eosReached===true&&decode.attentionHooksBefore===0&&decode.attentionHooksAfter===0&&Number.isInteger(decode.generatedSpeechTokens)&&decode.generatedSpeechTokens>0&&decode.generatedSpeechTokens<=decode.maxSpeechTokens&&decode.maxSpeechTokens===proof.maxSpeechTokens&&!decode.modelEosRestoredSteps,'Crowd native EOS/token/hook proof missing');
+ requireMatch(clip.asrLiteralWordExact===true&&clip.asrDevice==='cpu'&&clip.asrCpuThreads===1&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.asrModelSha256===proof.asrModelSha256&&clip.asrBeamSize===proof.asrBeamSize&&Number.isInteger(proof.asrReadings)&&proof.asrReadings>=1&&proof.asrReadings<=2&&clip.sampleRateHz===48000&&clip.channels===1&&clip.bitrateBitsPerSecond===128000&&Number.isInteger(clip.bytes)&&clip.bytes>0&&Number.isFinite(clip.durationSeconds)&&clip.durationSeconds>0&&clip.referenceLicense==='CC0-1.0'&&clip.modelLicense==='MIT','Crowd final native encoding/ASR/license missing');
+ requireMatch(clip.listening==='pending'&&!clip.listeningConfirmed&&!clip.listeningVerified&&!approval?.listeningConfirmed&&!approval?.listeningVerified,'Crowd human listening is not supplied');
+ requireMatch(sameJson(Object.keys(approval||{}).sort(),['clipId','date','encodedSha256','instruction','scope','status'])&&approval.status==='user-approved'&&approval.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(approval.date)&&approval.instruction?.trim()&&approval.clipId===clip.clipId&&approval.encodedSha256===clip.sha256,'Missing clip/hash-specific crowd use selection');
+ for(const key of ['rawReceiptSha256','encodedReceiptSha256','rawSha256','encodedSha256','profileJsonSha256'])requireMatch(/^[a-f0-9]{64}$/.test(proof?.[key]),'Missing ROOT-verified private crowd byte proof');
+ requireMatch(proof.rawSha256===clip.rawSha256&&proof.encodedSha256===clip.sha256&&proof.profileJsonSha256===clip.profileJsonSha256,'Crowd private/public byte lineage drift');
+}
+export function prepareCrowdRemaining27Manifest(cast,manifest,authorityProof,sourceRoot=root){
+ crowdCandidateBlock(cast,[],sourceRoot); // Existing caller/selection authority, without reading candidate assets.
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Crowd ROOT authority bytes changed');
+ const authority=json(authorityProof.path);
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CROWD27'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.grantId&&/^[a-f0-9]{40}$/.test(authority.sourceCommit)&&authority.helperSha256===crowdAuthoringHelperSha256&&authority.maximumNativeCalls===27&&authority.maximumCallsPerClip===1&&authority.maximumAsrReadings===54&&authority.automaticRetries===0,'Not the reviewed remaining27 generation authority');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Genuine crowd full36 request changed');
+ const fullPlan={text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},{plan,authored}=crowdFullPlan(cast,fullPlan,sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Crowd full36 plan differs from sealed generation source pins');
+ const voice=manifest.voiceId,owned=plan.jobs.filter(row=>row.voiceId===voice),family=resolve(authority.musicRoot,plan.privateReviewFamily);
+ requireMatch(owned.length===4&&manifest.profileId===cast.productionVoices[voice]?.profileId&&realpathSync(family)===family,'Crowd private family/voice alias or owner drift');
+ const privateFile=relative=>{const file=resolve(family,voice,relative);requireMatch(realpathSync(file)===file&&file.startsWith(family+sep)&&!lstatSync(file).isSymbolicLink(),'Crowd private receipt/media alias');return file;};
+ const requestPath=privateFile('requests.json'),requestSha256=hash(requestPath),request=json(requestPath);
+ requireMatch(request.requestedLineCount===4&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Crowd native four-slot plan differs from genuine full36 source');
+ const takes={};
+ for(const clip of manifest.clips){
+  const job=authored.get(clip.clipId);requireMatch(job&&Object.hasOwn(authority.tokenCaps,clip.clipId)&&crowdRemainingSeed(job)===authority.seeds[clip.clipId]&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Clip outside actual remaining27 owned source');
+  const rawPath=privateFile(`raw/${clip.clipId}.json`),encodedPath=privateFile(`encoded/${clip.clipId}.json`),raw=json(rawPath),encoded=json(encodedPath);
+  for(const [key,value] of Object.entries(job))requireMatch(sameJson(raw[key],value)&&sameJson(encoded[key],value),'Actual crowd receipt source/owner/profile drift');
+  for(const [key,value] of Object.entries(raw))if(!['durationSeconds','status'].includes(key))requireMatch(sameJson(encoded[key],value),'Crowd raw/encoded lineage drift: '+key);
+  for(const [key,value] of Object.entries(encoded))if(key!=='asrReadings'||clip[key]!==undefined)requireMatch(sameJson(clip[key],value),'Crowd public clip changed an actual encoded receipt field: '+key);
+  requireMatch(raw.requestSha256===requestSha256&&raw.profileJsonSha256===authority.profileBindings[voice]?.profileJsonSha256&&raw.decode?.maxSpeechTokens===authority.tokenCaps[clip.clipId]&&encoded.asrModelSha256===authority.asrModelSha256&&encoded.asrReadings?.length>=1&&encoded.asrReadings.length<=2&&sameJson(encoded.asrReadings.map(row=>row.beamSize),encoded.asrReadings.length===1?[1]:[1,5])&&encoded.asrReadings.at(-1).transcript===encoded.asr,'Crowd actual private decoder/ASR evidence changed');
+  requireMatch(hash(privateFile(`raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(privateFile(`encoded/${clip.clipId}.mp3`))===encoded.sha256&&readFileSync(privateFile(`encoded/${clip.clipId}.mp3`)).length===encoded.bytes,'Crowd actual private audio bytes changed');
+  const proof={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,maxSpeechTokens:raw.decode.maxSpeechTokens,asrModelSha256:encoded.asrModelSha256,asrBeamSize:encoded.asrBeamSize,asrReadings:encoded.asrReadings.length};
+  crowdRemainingClipAuthority(cast,clip,proof,requestSha256);takes[clip.clipId]=proof;
+ }
+ const records=[...manifest.clips,...manifest.heldPrivate],ids=records.map(row=>row.clipId);
+ requireMatch(manifest.requestedLineCount===4&&manifest.clips.length>=1&&manifest.clips.length<=3&&manifest.lineCount===manifest.clips.length&&records.length===4&&new Set(ids).size===4&&manifest.generatedLineCount===3,'Actual successful remaining27 manifest accounting changed');
+ for(const row of records){const job=owned.find(job=>job.clipId===row.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value)),'Crowd manifest slot changed from full36 source');}
+ requireMatch(manifest.heldPrivate.filter(row=>row.region==='germany'&&row.slot===0).length===1&&manifest.heldPrivate.every(row=>row.region==='germany'&&row.slot===0?row.reason==='outside remaining27 grant; first batch preserved':[['held private; selected production fallback','technically verified; awaiting clip/hash-specific use selection'].includes(row.reason),crowdRemainingSeed(row)>=71000].every(Boolean)),'Remaining27 must preserve the first-batch slot outside this grant');
+ const selectedIds=plan.jobs.filter(row=>!(row.region==='germany'&&row.slot===0)).map(row=>row.clipId);
+ requireMatch(authority.generationScope==='remaining27-first-takes'&&sameJson(authority.selectedClipIds,selectedIds)&&selectedIds.length===27,'Wrong remaining27 authority selection');
+ const allowedFailures=['missing or failed native EOS','independent spoken-word equivalence','literal exact ASR required by current remaining27 contract','encoded loudness/true peak','incomplete exact final-caption cues'];
+ requireMatch(manifest.heldPrivate.every(row=>!row.failedGates||Array.isArray(row.failedGates)&&row.failedGates.every(gate=>allowedFailures.includes(gate))),'Private failure payload cannot enter remaining27 public manifest');
+ // Explicit public contract: no structured clone of private manifests/receipts.
+ // Native request bytes keep their own digest; the public source projection is
+ // not represented as byte-identical to that original private request file.
+ const publicPlan={nativeSha256:fullPlan.sha256,sourceSha256:crowdPublicFields(plan.sourceSha256,['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js']),jobs:plan.jobs.map(job=>crowdPublicFields(job,crowdPublicJobFields))};
+ const result={schemaVersion:1,generationScope:'remaining27-first-takes',voiceId:voice,profileId:manifest.profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'same-profile technical and independent ASR audit; perceptual listening not independently verified',requestedLineCount:4,generatedLineCount:3,lineCount:manifest.clips.length,clips:manifest.clips.map(crowdPublicClip),heldPrivate:manifest.heldPrivate.map(row=>({...crowdPublicFields(row,crowdPublicJobFields),reason:row.reason,...(row.failedGates?{failedGates:[...row.failedGates]}:{})})),approvedExistingReuse:[]};
+ result.crowdAdmission={status:'ROOT-verified-current-generation',generationScope:'remaining27-first-takes',nativePlanOriginSha256:authority.reusedNativePlanSummarySha256,authoritySha256:authorityProof.sha256,adapterSha256:authority.adapterSha256,helperSha256:crowdAuthoringHelperSha256,fullPlan:publicPlan,requestSha256,takes};
+ return result;
+}
+
+// This wrapper exposes the unchanged seven-clip measurement subset for review fixtures.
+export function verifyCrowdMouthEnergySubset(supplement,manifests,assetRoot=root){return crowdMouthEnergyRows(supplement,manifests,assetRoot);}
+
+export function collectCrowd27PrivateManifestProposals(cast,authorityProof,terminalProofs,selectionProof=null,sourceRoot=root){
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Remaining27 authority changed');
+ const authority=json(authorityProof.path),phases=['plan','render','process'],terminalHashes={};
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CROWD27'&&authority.generationScope==='remaining27-first-takes'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.helperSha256===crowdAuthoringHelperSha256&&authority.maximumNativeCalls===27&&authority.maximumCallsPerClip===1&&authority.maximumAsrReadings===54&&authority.automaticRetries===0,'Not the exact remaining27 first-take grant');
+ for(const phase of phases){
+  const proof=terminalProofs?.[phase];requireMatch(proof?.sha256===hash(proof.path),'Missing/changed remaining27 terminal: '+phase);const terminal=json(proof.path);
+  requireMatch(terminal.phase===phase&&terminal.specificationSha256===authorityProof.sha256&&terminal.producerSha256===authority.adapterSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.timedOut===false&&!terminal.supervisorError&&terminal.logsComplete===true&&Array.isArray(terminal.survivingOwnedChildren)&&!terminal.survivingOwnedChildren.length&&Array.isArray(terminal.ownedCleanupKills)&&!terminal.ownedCleanupKills.length&&Array.isArray(terminal.postflightPinFailures)&&!terminal.postflightPinFailures.length&&terminal.postflightProtectedPinsChecked===Object.keys(authority.protectedPublicPins).length&&terminal.postflightProtectedPrivatePinsChecked===57&&Array.isArray(terminal.postflightPrivatePinFailures)&&!terminal.postflightPrivatePinFailures.length,'Remaining27 phase did not retire with conservation: '+phase);terminalHashes[phase]=proof.sha256;
+ }
+ requireMatch(authority.pendingPrivatePinPaths?.length===0&&authority.requiredProtectedPrivatePaths.length===57&&new Set(authority.requiredProtectedPrivatePaths).size===57&&Object.keys(authority.protectedPrivatePins).length===57&&authority.requiredProtectedPrivatePaths.every(path=>Object.hasOwn(authority.protectedPrivatePins,path)),'Original first-batch protection incomplete');
+ for(const [path,digest] of Object.entries(authority.protectedPrivatePins))requireMatch(hash(path)===digest,'Original first-batch private bytes changed');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Remaining27 full36 request changed');
+ const {plan,authored}=crowdFullPlan(cast,{text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Remaining27 source pins differ');
+ const selectedJobs=plan.jobs.filter(row=>!(row.region==='germany'&&row.slot===0)),voices=[...new Set(selectedJobs.map(row=>row.voiceId))];
+ requireMatch(selectedJobs.length===27&&voices.length===9&&sameJson(selectedJobs.map(row=>row.clipId),authority.selectedClipIds)&&selectedJobs.every(row=>authority.seeds[row.clipId]===crowdRemainingSeed(row)),'Remaining27 selection/seed ownership changed');
+ const family=resolve(authority.musicRoot,plan.privateReviewFamily);requireMatch(realpathSync(family)===family,'Remaining27 family alias');
+ const privateFile=relative=>{const path=resolve(family,relative);requireMatch(path.startsWith(family+sep)&&realpathSync(path)===path&&!lstatSync(path).isSymbolicLink(),'Remaining27 private path alias/escape');return path;};
+ const summaries={},summaryHashes={};
+ for(const phase of phases){
+  const path=privateFile(`_batch27-control/${phase}-summary.json`),summary=json(path);requireMatch(summary.phase===phase&&summary.authoritySha256===authorityProof.sha256&&summary.adapterSha256===authority.adapterSha256&&summary.helperSha256===crowdAuthoringHelperSha256&&summary.selectedClipCount===27&&summary.publicExports===0&&summary.humanListeningVerified===false&&summary.automaticRetries===0&&summary.rows?.length===(phase==='plan'?9:27),'Remaining27 adapter summary changed: '+phase);summaries[phase]=summary;summaryHashes[phase]=hash(path);
+ }
+ requireMatch(summaries.plan.nativePlanInvocationThisGrant===false&&summaries.plan.nativePlanOriginSha256===authority.reusedNativePlanSummarySha256&&summaries.plan.nativePlanOriginAuthoritySha256===authority.predecessorAuthoritySha256&&hash(authority.reusedNativePlanSummaryPath)===authority.reusedNativePlanSummarySha256,'Genuine existing native-plan reuse origin changed');
+ const ids=new Set(authority.selectedClipIds);
+ for(const phase of ['render','process'])requireMatch(new Set(summaries[phase].rows.map(row=>row.clipId)).size===27&&summaries[phase].rows.every(row=>ids.has(row.clipId)),'Remaining27 summary duplicate/out-of-scope clip');
+ const selection=selectionProof?(requireMatch(selectionProof.sha256===hash(selectionProof.path),'Remaining27 use selection changed'),json(selectionProof.path)):null,selections=new Map();
+ if(selection){requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&selection.instruction?.trim()&&Array.isArray(selection.clips),'Missing remaining27 use selection');for(const row of selection.clips){requireMatch(ids.has(row.clipId)&&!selections.has(row.clipId)&&/^[a-f0-9]{64}$/.test(row.encodedSha256),'Selection duplicate/outside remaining27');selections.set(row.clipId,row.encodedSha256);}}
+ const proposals=[],inventory=[];let eligibleCount=0,selectedCount=0;
+ for(const voice of voices){
+  const owned=plan.jobs.filter(row=>row.voiceId===voice),batch=owned.filter(row=>ids.has(row.clipId)),prior=owned.find(row=>row.region==='germany'&&row.slot===0);requireMatch(owned.length===4&&batch.length===3&&prior,'Wrong remaining27 four-slot ownership');
+  const requestPath=privateFile(`${voice}/requests.json`),requestHash=hash(requestPath),request=json(requestPath),planRow=summaries.plan.rows.find(row=>row.voiceId===voice);
+  requireMatch(planRow?.frozenRequestPath===requestPath&&planRow.sha256===requestHash&&summaries.plan.frozenRequestPins[requestPath]===requestHash&&sameJson(request.jobs,owned)&&request.requestedLineCount===4&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Existing actual four-slot request changed');
+  const clips=[],held=[{...prior,reason:'outside remaining27 grant; first batch preserved'}];
+  for(const job of batch){
+   const rawPath=privateFile(`${voice}/raw/${job.clipId}.json`),raw=json(rawPath),rawHash=hash(rawPath),render=summaries.render.rows.find(row=>row.clipId===job.clipId),processed=summaries.process.rows.find(row=>row.clipId===job.clipId);
+   requireMatch(Object.entries(job).every(([key,value])=>sameJson(raw[key],value))&&raw.authoringHelperSha256===crowdAuthoringHelperSha256&&raw.requestSha256===requestHash&&raw.seed===crowdRemainingSeed(job)&&raw.synthesisAttempt===1&&render.receiptSha256===rawHash&&render.rawSha256===raw.rawSha256&&render.profileId===job.profileId&&render.actualTakeWithinGrant===1&&render.globalHistoricalOrdinal===null&&render.nativeEosReached===(raw.decode?.eosReached===true)&&processed.receiptSha256===rawHash&&processed.rawSha256===raw.rawSha256,'Remaining27 actual raw/summary provenance changed');
+   requireMatch(hash(privateFile(`${voice}/raw/${job.clipId}.wav`))===raw.rawSha256,'Remaining27 raw bytes changed');
+   const gates=[];let encoded=null,encodedHash=null;
+   if(raw.decode?.eosReached!==true){gates.push('missing or failed native EOS');requireMatch(processed.asrReadings===0&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.json`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.mp3`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}-processed.wav`)),'Non-EOS remaining27 take has encoding/intermediate/audit');}
+   else{
+    const path=privateFile(`${voice}/encoded/${job.clipId}.json`);encoded=json(path);encodedHash=hash(path);
+    requireMatch(processed.encodedReceiptSha256===encodedHash&&processed.encodedSha256===encoded.sha256&&Object.entries(job).every(([key,value])=>sameJson(encoded[key],value))&&encoded.rawSha256===raw.rawSha256&&encoded.requestSha256===requestHash&&encoded.authoringHelperSha256===crowdAuthoringHelperSha256,'Remaining27 actual encoded receipt changed');
+    requireMatch(hash(privateFile(`${voice}/encoded/${job.clipId}.mp3`))===encoded.sha256,'Remaining27 encoded bytes changed');
+    requireMatch(processed.asrWordExact===encoded.asrWordExact&&processed.asrReadings===encoded.asrReadings?.length&&processed.wordCueCount===encoded.wordCues?.length&&processed.levelsPass===(Math.abs(encoded.integratedLufs+18)<=.3&&encoded.truePeakDbtp<=-1.5),'Remaining27 final gates differ from completed summary');
+    if(encoded.asrWordExact!==true)gates.push('independent spoken-word equivalence');
+    if(encoded.asrLiteralWordExact!==true)gates.push('literal exact ASR required by current remaining27 contract');
+    if(Math.abs(encoded.integratedLufs+18)>.3||!Number.isFinite(encoded.integratedLufs)||encoded.truePeakDbtp>-1.5||!Number.isFinite(encoded.truePeakDbtp))gates.push('encoded loudness/true peak');
+    try{crowdExactCues(encoded);}catch(error){requireMatch(error.message==='Incomplete crowd exact final-caption cues','Unexpected remaining27 caption integrity error');gates.push('incomplete exact final-caption cues');}
+   }
+   const eligible=gates.length===0;if(eligible){fixedTakeAuthority(cast,encoded);eligibleCount++;}
+   const selected=selections.has(job.clipId);requireMatch(!selected||eligible&&selections.get(job.clipId)===encoded.sha256,'Use selection includes a failed/wrong-hash remaining27 take');
+   if(selected){const {asrReadings,...actualEncodedFields}=encoded;clips.push({...actualEncodedFields,approval:{status:'user-approved',scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:job.clipId,encodedSha256:encoded.sha256}});selectedCount++;}
+   else held.push({...job,reason:eligible?'technically verified; awaiting clip/hash-specific use selection':'held private; selected production fallback',failedGates:gates});
+   inventory.push({clipId:job.clipId,voiceId:voice,nativeSeed:raw.seed,actualSynthesisAttempt:1,rawReceiptSha256:rawHash,rawSha256:raw.rawSha256,nativeEosReached:raw.decode?.eosReached===true,encodedReceiptSha256:encodedHash,encodedSha256:encoded?.sha256??null,technicalEligible:eligible,selectedForUse:selected,failedGates:gates,humanListeningVerified:false});
+  }
+  const manifest={schemaVersion:1,generationScope:'remaining27-first-takes',voiceId:voice,profileId:owned[0].profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'private remaining27 generation proposal; prior slot preserved',requestedLineCount:4,generatedLineCount:3,lineCount:clips.length,clips,heldPrivate:held,approvedExistingReuse:[]};
+  proposals.push(clips.length?prepareCrowdRemaining27Manifest(cast,manifest,authorityProof,sourceRoot):manifest);
+ }
+ requireMatch(proposals.length===9&&inventory.length===27&&proposals.every(row=>row.clips.length+row.heldPrivate.length===4),'Remaining27 proposals lost owned slots');
+ return{status:'private remaining27 proposal collection only; no public writes',authoritySha256:authorityProof.sha256,nativeFullPlanSha256:authority.requestSha256,terminalSha256:terminalHashes,adapterSummarySha256:summaryHashes,selectionSha256:selectionProof?.sha256??null,counts:{nativeRequestSlots:36,generatedThisGrant:27,priorProtectedSlots:9,unrendered:0,technicalEligible:eligibleCount,selectedNewClips:selectedCount,heldGenerated:27-selectedCount,humanListeningVerified:0},inventory,partialManifestProposals:proposals};
+}
+
+
+const crowdInterruptedGate='interrupted ASR result unknown; no retry';
+const crowdInterruptedReason='held private; interrupted ASR unknown; no retry';
+export function verifyCrowd27RecoveryAccounting(authority,summary){
+ const prior=authority.completedPriorClipIds,selected=authority.selectedClipIds,held=authority.heldInterruptedClipIds,ids=authority.allRenderedClipIds;
+ requireMatch(prior?.length===21&&selected?.length===5&&sameJson(held,['crowd-manfred-mittagsruhe-germany-02'])&&ids?.length===27&&new Set([...prior,...selected,...held]).size===27&&ids.every(id=>[...prior,...selected,...held].includes(id)),'Recovery must account for exact21saved+5new+1interrupted');
+ requireMatch(summary.originalProcessSuccessful===false&&summary.previousCompletedCount===21&&summary.newRecoveryCompletedCount===5&&summary.heldInterruptedCount===1&&summary.selectedClipCount===27&&summary.newNativeCalls===0&&Number.isInteger(summary.newAsrReadings)&&summary.newAsrReadings>=5&&summary.newAsrReadings<=10&&summary.overallExactAsrCountKnown===false&&sameJson(summary.unknownInterruptedAsrReadings,{minimum:0,maximum:2}),'Recovery cannot replace original failure with success or invent exact interrupted read count');
+ requireMatch(Array.isArray(summary.rows)&&sameJson(summary.rows.map(row=>row.clipId),ids),'Recovery aggregate rows missing/duplicated/reordered');
+ for(const row of summary.rows){
+  if(held.includes(row.clipId))requireMatch(row.processingOrigin==='original-process-interrupted-held-unknown'&&row.asrReadings===null&&row.technicalEligible===false&&sameJson(row.asrReadingsBounds,{minimum:0,maximum:2}),'Interrupted take cannot become completed or eligible');
+  else requireMatch(row.processingOrigin===(prior.includes(row.clipId)?'saved-before-original-process-interruption':'new-recovery5-process')&&Number.isInteger(row.asrReadings)&&row.asrReadings>=1&&row.asrReadings<=2&&sameJson(row.asrBeams,row.asrReadings===1?[1]:[1,5]),'Recovery completed row origin/read count changed');
+ }
+ const known=summary.rows.filter(row=>!held.includes(row.clipId)).reduce((sum,row)=>sum+row.asrReadings,0),newReadings=summary.rows.filter(row=>selected.includes(row.clipId)).reduce((sum,row)=>sum+row.asrReadings,0);
+ requireMatch(summary.knownCompletedAsrReadings===known&&summary.newAsrReadings===newReadings&&summary.overallAsrReadingsUpperBound===known+2&&known+2<=54,'Recovery exceeded original54ASR worst-case budget');
+ return true;
+}
+function verifyCrowd27RecoveryEvidence(recoveryAuthorityProof,recoveryTerminalProof,recoverySummaryProof){
+ requireMatch(recoveryAuthorityProof?.sha256===hash(recoveryAuthorityProof.path),'Recovery authority bytes changed');
+ const recovery=json(recoveryAuthorityProof.path);
+ requireMatch(recovery.status==='ROOT_SEALED_FINITE_CROWD27_PROCESS_RECOVERY5'&&recovery.generationScope==='remaining27-processing-recovery5'&&recovery.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&recovery.helperSha256===crowdAuthoringHelperSha256&&recovery.grantId&&recovery.maximumNativeCalls===0&&recovery.maximumCallsPerClip===0&&recovery.maximumAsrReadings===10&&recovery.automaticRetries===0&&recovery.processPhaseWallSeconds===900,'Not the explicit process-only recovery5 grant');
+ requireMatch(recovery.pendingPrivatePinPaths?.length===0&&Object.keys(recovery.protectedPrivatePins).length===178&&new Set(recovery.requiredProtectedPrivatePaths).size===178&&recovery.requiredProtectedPrivatePaths.every(path=>Object.hasOwn(recovery.protectedPrivatePins,path))&&Object.keys(recovery.protectedPublicPins).length===262,'Recovery conservation scope changed');
+ for(const [path,digest] of Object.entries(recovery.protectedPrivatePins))requireMatch(hash(path)===digest,'Recovery changed a protected prior/private artifact');
+ requireMatch(recoveryTerminalProof?.sha256===hash(recoveryTerminalProof.path),'Recovery terminal changed');
+ const terminal=json(recoveryTerminalProof.path);
+ requireMatch(terminal.phase==='process'&&terminal.specificationSha256===recoveryAuthorityProof.sha256&&terminal.producerSha256===recovery.adapterSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.timedOut===false&&!terminal.supervisorError&&terminal.logsComplete===true&&Array.isArray(terminal.survivingOwnedChildren)&&!terminal.survivingOwnedChildren.length&&Array.isArray(terminal.ownedCleanupKills)&&!terminal.ownedCleanupKills.length&&terminal.postflightProtectedPinsChecked===262&&Array.isArray(terminal.postflightPinFailures)&&!terminal.postflightPinFailures.length&&terminal.postflightProtectedPrivatePinsChecked===178&&Array.isArray(terminal.postflightPrivatePinFailures)&&!terminal.postflightPrivatePinFailures.length,'Recovery process did not retire successfully with conservation');
+ const originalAuthorityProof={path:recovery.originalAuthorityPath,sha256:recovery.originalAuthoritySha256};
+ requireMatch(hash(originalAuthorityProof.path)===originalAuthorityProof.sha256,'Original generation authority changed');
+ const original=json(originalAuthorityProof.path),terminals={},terminalHashes={};
+ requireMatch(original.status==='ROOT_SEALED_FINITE_CROWD27'&&original.maximumNativeCalls===27&&original.maximumAsrReadings===54&&sameJson(original.selectedClipIds,recovery.allRenderedClipIds)&&sameJson(original.sourceSha256,recovery.sourceSha256)&&original.helperSha256===recovery.helperSha256&&original.requestSha256===recovery.requestSha256,'Recovery original generation/source changed');
+ for(const phase of ['plan','render','process']){
+  const proof=recovery.originalTerminals[phase];requireMatch(proof?.sha256===hash(proof.path),'Original phase terminal changed: '+phase);const row=json(proof.path);
+  requireMatch(row.phase===phase&&row.specificationSha256===originalAuthorityProof.sha256&&row.producerSha256===original.adapterSha256&&row.rootRetired===true&&row.survivingOwnedChildren?.length===0&&row.ownedCleanupKills?.length===0&&row.postflightProtectedPinsChecked===262&&row.postflightProtectedPrivatePinsChecked===57&&row.postflightPinFailures?.length===0&&row.postflightPrivatePinFailures?.length===0,'Original retirement/conservation changed');
+  if(phase==='process')requireMatch(row.exitCode===-1&&row.timedOut===false&&row.supervisorError==='Root or owned child PID reused; child lineage is ambiguous','Original process failure must remain failed');
+  else requireMatch(row.exitCode===0&&row.timedOut===false&&!row.supervisorError&&row.logsComplete===true,'Original plan/render did not succeed');
+  terminals[phase]=row;terminalHashes[phase]=proof.sha256;
+ }
+ requireMatch(hash(recovery.failureInventoryPath)===recovery.failureInventorySha256,'Failure inventory bytes changed');
+ const failureInventory=json(recovery.failureInventoryPath);
+ requireMatch(failureInventory.authoritySha256===originalAuthorityProof.sha256&&failureInventory.failedTerminalSha256===terminalHashes.process&&failureInventory.conservationFailures?.length===0,'Failure inventory belongs to another phase');
+ const priorInventory=failureInventory.rows.filter(row=>row.artifacts['encoded.json']).map(row=>row.clipId),heldInventory=failureInventory.rows.filter(row=>!row.artifacts['encoded.json']&&(row.artifacts['encoded.mp3']||row.artifacts['encoded-processed.wav'])).map(row=>row.clipId),untouchedInventory=failureInventory.rows.filter(row=>!row.artifacts['encoded.json']&&!row.artifacts['encoded.mp3']&&!row.artifacts['encoded-processed.wav']).map(row=>row.clipId);
+ requireMatch(failureInventory.rows.length===27&&failureInventory.rows.every(row=>row.artifacts['raw.json']&&row.artifacts['raw.wav'])&&sameJson(priorInventory,recovery.completedPriorClipIds)&&sameJson(heldInventory,recovery.heldInterruptedClipIds)&&sameJson(untouchedInventory,recovery.selectedClipIds),'Recovery partition differs from actual failure byte inventory');
+ const family=resolve(recovery.musicRoot,recovery.privateReviewFamily),control=resolve(family,'_batch27-recovery5-control');
+ requireMatch(recoverySummaryProof?.path===resolve(control,'process-summary.json')&&hash(recoverySummaryProof.path)===recoverySummaryProof.sha256&&realpathSync(recoverySummaryProof.path)===recoverySummaryProof.path&&!lstatSync(recoverySummaryProof.path).isSymbolicLink(),'Recovery summary path/bytes changed');
+ const summary=json(recoverySummaryProof.path);
+ requireMatch(summary.phase==='process'&&summary.generationScope==='remaining27-processing-recovery5'&&summary.authoritySha256===recoveryAuthorityProof.sha256&&summary.adapterSha256===recovery.adapterSha256&&summary.helperSha256===crowdAuthoringHelperSha256&&summary.originalAuthoritySha256===originalAuthorityProof.sha256&&sameJson(summary.originalTerminalsSha256,terminalHashes)&&summary.failureInventorySha256===recovery.failureInventorySha256&&summary.publicExports===0&&summary.humanListeningVerified===false&&summary.automaticRetries===0,'Recovery aggregate provenance changed');
+ verifyCrowd27RecoveryAccounting(recovery,summary);
+ const expectedCharges=[];
+ for(const row of summary.rows.filter(row=>recovery.selectedClipIds.includes(row.clipId)))for(const beam of row.asrBeams){
+  const path=resolve(control,'asr-charges',`${row.clipId}-beam${beam}.json`),charge=json(path);requireMatch(realpathSync(path)===path&&!lstatSync(path).isSymbolicLink()&&charge.authoritySha256===recoveryAuthorityProof.sha256&&charge.clipId===row.clipId&&charge.beamSize===beam,'Recovery durable ASR charge changed');expectedCharges.push(`${row.clipId}-beam${beam}.json`);
+ }
+ requireMatch(sameJson(readdirSync(resolve(control,'asr-charges')).sort(),expectedCharges.sort()),'Recovery has duplicate/foreign/unreported ASR charges');
+ for(const row of failureInventory.rows)for(const artifact of Object.values(row.artifacts))if(artifact)requireMatch(recovery.protectedPrivatePins[artifact.path]===artifact.sha256,'Failure artifact not preserved by recovery');
+ const publicProof={schemaVersion:1,status:'ROOT-verified-processing-recovery5',recoveryAuthoritySha256:recoveryAuthorityProof.sha256,recoveryAdapterSha256:recovery.adapterSha256,recoveryTerminalSha256:recoveryTerminalProof.sha256,aggregateSummarySha256:recoverySummaryProof.sha256,failedOriginalProcessTerminalSha256:terminalHashes.process,failureInventorySha256:recovery.failureInventorySha256,originalProcessSuccessful:false,aggregatePreviouslyCompleted:21,aggregateRecoveryCompleted:5,aggregateHeldInterrupted:1,overallExactAsrCountKnown:false,unknownInterruptedAsrReadings:{minimum:0,maximum:2}};
+ return {recovery,originalAuthorityProof,original,terminalHashes,summary,summarySha256:recoverySummaryProof.sha256,failureInventory,publicProof};
+}
+
+function prepareCrowdRemaining27RecoveryManifest(cast,manifest,evidence,sourceRoot=root){
+ const authorityProof=evidence.originalAuthorityProof;
+ crowdCandidateBlock(cast,[],sourceRoot); // Existing caller/selection authority, without reading candidate assets.
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Crowd ROOT authority bytes changed');
+ const authority=json(authorityProof.path);
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CROWD27'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.grantId&&/^[a-f0-9]{40}$/.test(authority.sourceCommit)&&authority.helperSha256===crowdAuthoringHelperSha256&&authority.maximumNativeCalls===27&&authority.maximumCallsPerClip===1&&authority.maximumAsrReadings===54&&authority.automaticRetries===0,'Not the reviewed remaining27 generation authority');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Genuine crowd full36 request changed');
+ const fullPlan={text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},{plan,authored}=crowdFullPlan(cast,fullPlan,sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Crowd full36 plan differs from sealed generation source pins');
+ const voice=manifest.voiceId,owned=plan.jobs.filter(row=>row.voiceId===voice),family=resolve(authority.musicRoot,plan.privateReviewFamily);
+ requireMatch(owned.length===4&&manifest.profileId===cast.productionVoices[voice]?.profileId&&realpathSync(family)===family,'Crowd private family/voice alias or owner drift');
+ const privateFile=relative=>{const file=resolve(family,voice,relative);requireMatch(realpathSync(file)===file&&file.startsWith(family+sep)&&!lstatSync(file).isSymbolicLink(),'Crowd private receipt/media alias');return file;};
+ const requestPath=privateFile('requests.json'),requestSha256=hash(requestPath),request=json(requestPath);
+ requireMatch(request.requestedLineCount===4&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Crowd native four-slot plan differs from genuine full36 source');
+ const takes={};
+ for(const clip of manifest.clips){
+  const job=authored.get(clip.clipId);requireMatch(job&&Object.hasOwn(authority.tokenCaps,clip.clipId)&&crowdRemainingSeed(job)===authority.seeds[clip.clipId]&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Clip outside actual remaining27 owned source');
+  const rawPath=privateFile(`raw/${clip.clipId}.json`),encodedPath=privateFile(`encoded/${clip.clipId}.json`),raw=json(rawPath),encoded=json(encodedPath);
+  for(const [key,value] of Object.entries(job))requireMatch(sameJson(raw[key],value)&&sameJson(encoded[key],value),'Actual crowd receipt source/owner/profile drift');
+  for(const [key,value] of Object.entries(raw))if(!['durationSeconds','status'].includes(key))requireMatch(sameJson(encoded[key],value),'Crowd raw/encoded lineage drift: '+key);
+  for(const [key,value] of Object.entries(encoded))if(key!=='asrReadings'||clip[key]!==undefined)requireMatch(sameJson(clip[key],value),'Crowd public clip changed an actual encoded receipt field: '+key);
+  requireMatch(raw.requestSha256===requestSha256&&raw.profileJsonSha256===authority.profileBindings[voice]?.profileJsonSha256&&raw.decode?.maxSpeechTokens===authority.tokenCaps[clip.clipId]&&encoded.asrModelSha256===authority.asrModelSha256&&encoded.asrReadings?.length>=1&&encoded.asrReadings.length<=2&&sameJson(encoded.asrReadings.map(row=>row.beamSize),encoded.asrReadings.length===1?[1]:[1,5])&&encoded.asrReadings.at(-1).transcript===encoded.asr,'Crowd actual private decoder/ASR evidence changed');
+  requireMatch(hash(privateFile(`raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(privateFile(`encoded/${clip.clipId}.mp3`))===encoded.sha256&&readFileSync(privateFile(`encoded/${clip.clipId}.mp3`)).length===encoded.bytes,'Crowd actual private audio bytes changed');
+  const proof={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,maxSpeechTokens:raw.decode.maxSpeechTokens,asrModelSha256:encoded.asrModelSha256,asrBeamSize:encoded.asrBeamSize,asrReadings:encoded.asrReadings.length};
+  crowdRemainingClipAuthority(cast,clip,proof,requestSha256);takes[clip.clipId]=proof;
+ }
+ const records=[...manifest.clips,...manifest.heldPrivate],ids=records.map(row=>row.clipId);
+ requireMatch(manifest.requestedLineCount===4&&manifest.clips.length>=1&&manifest.clips.length<=3&&manifest.lineCount===manifest.clips.length&&records.length===4&&new Set(ids).size===4&&manifest.generatedLineCount===3,'Actual successful remaining27 manifest accounting changed');
+ for(const row of records){const job=owned.find(job=>job.clipId===row.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value)),'Crowd manifest slot changed from full36 source');}
+ requireMatch(manifest.heldPrivate.filter(row=>row.region==='germany'&&row.slot===0).length===1&&manifest.heldPrivate.every(row=>row.region==='germany'&&row.slot===0?row.reason==='outside remaining27 grant; first batch preserved':[['held private; selected production fallback','technically verified; awaiting clip/hash-specific use selection',crowdInterruptedReason].includes(row.reason),crowdRemainingSeed(row)>=71000].every(Boolean)),'Remaining27 must preserve the first-batch slot outside this grant');
+ const selectedIds=plan.jobs.filter(row=>!(row.region==='germany'&&row.slot===0)).map(row=>row.clipId);
+ requireMatch(authority.generationScope==='remaining27-first-takes'&&sameJson(authority.selectedClipIds,selectedIds)&&selectedIds.length===27,'Wrong remaining27 authority selection');
+ requireMatch(manifest.clips.every(row=>!evidence.recovery.heldInterruptedClipIds.includes(row.clipId))&&manifest.heldPrivate.every(row=>row.reason!==crowdInterruptedReason||evidence.recovery.heldInterruptedClipIds.includes(row.clipId)&&sameJson(row.failedGates,[crowdInterruptedGate])),'Interrupted take cannot be selected/relabelled');
+ const allowedFailures=[crowdInterruptedGate,'missing or failed native EOS','independent spoken-word equivalence','literal exact ASR required by current remaining27 contract','encoded loudness/true peak','incomplete exact final-caption cues'];
+ requireMatch(manifest.heldPrivate.every(row=>!row.failedGates||Array.isArray(row.failedGates)&&row.failedGates.every(gate=>allowedFailures.includes(gate))),'Private failure payload cannot enter remaining27 public manifest');
+ // Explicit public contract: no structured clone of private manifests/receipts.
+ // Native request bytes keep their own digest; the public source projection is
+ // not represented as byte-identical to that original private request file.
+ const publicPlan={nativeSha256:fullPlan.sha256,sourceSha256:crowdPublicFields(plan.sourceSha256,['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js']),jobs:plan.jobs.map(job=>crowdPublicFields(job,crowdPublicJobFields))};
+ const result={schemaVersion:1,generationScope:'remaining27-first-takes',voiceId:voice,profileId:manifest.profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'same-profile technical and independent ASR audit; perceptual listening not independently verified',requestedLineCount:4,generatedLineCount:3,lineCount:manifest.clips.length,clips:manifest.clips.map(crowdPublicClip),heldPrivate:manifest.heldPrivate.map(row=>({...crowdPublicFields(row,crowdPublicJobFields),reason:row.reason,...(row.failedGates?{failedGates:[...row.failedGates]}:{})})),approvedExistingReuse:[]};
+ result.crowdAdmission={status:'ROOT-verified-current-generation',generationScope:'remaining27-first-takes',nativePlanOriginSha256:authority.reusedNativePlanSummarySha256,authoritySha256:authorityProof.sha256,adapterSha256:authority.adapterSha256,helperSha256:crowdAuthoringHelperSha256,fullPlan:publicPlan,requestSha256,takes};
+ result.crowdAdmission.processingRecovery={...evidence.publicProof};
+ return result;
+}
+
+
+export function collectCrowd27Recovery5ManifestProposals(cast,recoveryAuthorityProof,recoveryTerminalProof,recoverySummaryProof,selectionProof=null,sourceRoot=root){
+ const evidence=verifyCrowd27RecoveryEvidence(recoveryAuthorityProof,recoveryTerminalProof,recoverySummaryProof);
+ const authorityProof=evidence.originalAuthorityProof,authority=evidence.original,terminalHashes=evidence.terminalHashes,phases=['plan','render','process'];
+ requireMatch(authority.pendingPrivatePinPaths?.length===0&&authority.requiredProtectedPrivatePaths.length===57&&new Set(authority.requiredProtectedPrivatePaths).size===57&&Object.keys(authority.protectedPrivatePins).length===57&&authority.requiredProtectedPrivatePaths.every(path=>Object.hasOwn(authority.protectedPrivatePins,path)),'Original first-batch protection incomplete');
+ for(const [path,digest] of Object.entries(authority.protectedPrivatePins))requireMatch(hash(path)===digest,'Original first-batch private bytes changed');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Remaining27 full36 request changed');
+ const {plan,authored}=crowdFullPlan(cast,{text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Remaining27 source pins differ');
+ const selectedJobs=plan.jobs.filter(row=>!(row.region==='germany'&&row.slot===0)),voices=[...new Set(selectedJobs.map(row=>row.voiceId))];
+ requireMatch(selectedJobs.length===27&&voices.length===9&&sameJson(selectedJobs.map(row=>row.clipId),authority.selectedClipIds)&&selectedJobs.every(row=>authority.seeds[row.clipId]===crowdRemainingSeed(row)),'Remaining27 selection/seed ownership changed');
+ const family=resolve(authority.musicRoot,plan.privateReviewFamily);requireMatch(realpathSync(family)===family,'Remaining27 family alias');
+ const privateFile=relative=>{const path=resolve(family,relative);requireMatch(path.startsWith(family+sep)&&realpathSync(path)===path&&!lstatSync(path).isSymbolicLink(),'Remaining27 private path alias/escape');return path;};
+ const summaries={process:evidence.summary},summaryHashes={process:evidence.summarySha256};
+ for(const phase of ['plan','render']){
+  const path=privateFile(`_batch27-control/${phase}-summary.json`),summary=json(path),name=phase[0].toUpperCase()+phase.slice(1);
+  requireMatch(hash(path)===evidence.recovery['original'+name+'SummarySha256']&&path===evidence.recovery['original'+name+'SummaryPath']&&summary.phase===phase&&summary.authoritySha256===authorityProof.sha256&&summary.adapterSha256===authority.adapterSha256&&summary.helperSha256===crowdAuthoringHelperSha256&&summary.selectedClipCount===27&&summary.publicExports===0&&summary.humanListeningVerified===false&&summary.automaticRetries===0&&summary.rows?.length===(phase==='plan'?9:27),'Original successful adapter summary changed');summaries[phase]=summary;summaryHashes[phase]=hash(path);
+ }
+ requireMatch(summaries.plan.nativePlanInvocationThisGrant===false&&summaries.plan.nativePlanOriginSha256===authority.reusedNativePlanSummarySha256&&summaries.plan.nativePlanOriginAuthoritySha256===authority.predecessorAuthoritySha256&&hash(authority.reusedNativePlanSummaryPath)===authority.reusedNativePlanSummarySha256,'Genuine existing native-plan reuse origin changed');
+ const ids=new Set(authority.selectedClipIds);
+ for(const phase of ['render','process'])requireMatch(new Set(summaries[phase].rows.map(row=>row.clipId)).size===27&&summaries[phase].rows.every(row=>ids.has(row.clipId)),'Remaining27 summary duplicate/out-of-scope clip');
+ const selection=selectionProof?(requireMatch(selectionProof.sha256===hash(selectionProof.path),'Remaining27 use selection changed'),json(selectionProof.path)):null,selections=new Map();
+ if(selection){requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&selection.instruction?.trim()&&Array.isArray(selection.clips),'Missing remaining27 use selection');for(const row of selection.clips){requireMatch(ids.has(row.clipId)&&!selections.has(row.clipId)&&/^[a-f0-9]{64}$/.test(row.encodedSha256),'Selection duplicate/outside remaining27');selections.set(row.clipId,row.encodedSha256);}}
+ const proposals=[],inventory=[];let eligibleCount=0,selectedCount=0;
+ for(const voice of voices){
+  const owned=plan.jobs.filter(row=>row.voiceId===voice),batch=owned.filter(row=>ids.has(row.clipId)),prior=owned.find(row=>row.region==='germany'&&row.slot===0);requireMatch(owned.length===4&&batch.length===3&&prior,'Wrong remaining27 four-slot ownership');
+  const requestPath=privateFile(`${voice}/requests.json`),requestHash=hash(requestPath),request=json(requestPath),planRow=summaries.plan.rows.find(row=>row.voiceId===voice);
+  requireMatch(planRow?.frozenRequestPath===requestPath&&planRow.sha256===requestHash&&summaries.plan.frozenRequestPins[requestPath]===requestHash&&sameJson(request.jobs,owned)&&request.requestedLineCount===4&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Existing actual four-slot request changed');
+  const clips=[],held=[{...prior,reason:'outside remaining27 grant; first batch preserved'}];
+  for(const job of batch){
+   const rawPath=privateFile(`${voice}/raw/${job.clipId}.json`),raw=json(rawPath),rawHash=hash(rawPath),render=summaries.render.rows.find(row=>row.clipId===job.clipId),processed=summaries.process.rows.find(row=>row.clipId===job.clipId);
+   requireMatch(Object.entries(job).every(([key,value])=>sameJson(raw[key],value))&&raw.authoringHelperSha256===crowdAuthoringHelperSha256&&raw.requestSha256===requestHash&&raw.seed===crowdRemainingSeed(job)&&raw.synthesisAttempt===1&&render.receiptSha256===rawHash&&render.rawSha256===raw.rawSha256&&render.profileId===job.profileId&&render.actualTakeWithinGrant===1&&render.globalHistoricalOrdinal===null&&render.nativeEosReached===(raw.decode?.eosReached===true)&&processed.receiptSha256===rawHash&&processed.rawSha256===raw.rawSha256,'Remaining27 actual raw/summary provenance changed');
+   requireMatch(hash(privateFile(`${voice}/raw/${job.clipId}.wav`))===raw.rawSha256,'Remaining27 raw bytes changed');
+   if(evidence.recovery.heldInterruptedClipIds.includes(job.clipId)){
+    requireMatch(!selections.has(job.clipId)&&processed.processingOrigin==='original-process-interrupted-held-unknown'&&processed.asrReadings===null&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.json`)),'Interrupted unknown take cannot be selected or completed');
+    held.push({...job,reason:crowdInterruptedReason,failedGates:[crowdInterruptedGate]});
+    inventory.push({clipId:job.clipId,voiceId:voice,nativeSeed:raw.seed,actualSynthesisAttempt:1,rawReceiptSha256:rawHash,rawSha256:raw.rawSha256,nativeEosReached:true,encodedReceiptSha256:null,encodedSha256:null,technicalEligible:false,selectedForUse:false,failedGates:[crowdInterruptedGate],asrReadingsKnown:false,asrReadingsBounds:{minimum:0,maximum:2},humanListeningVerified:false});
+    continue;
+   }
+   const gates=[];let encoded=null,encodedHash=null;
+   if(raw.decode?.eosReached!==true){gates.push('missing or failed native EOS');requireMatch(processed.asrReadings===0&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.json`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.mp3`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}-processed.wav`)),'Non-EOS remaining27 take has encoding/intermediate/audit');}
+   else{
+    const path=privateFile(`${voice}/encoded/${job.clipId}.json`);encoded=json(path);encodedHash=hash(path);
+    requireMatch(processed.encodedReceiptSha256===encodedHash&&processed.encodedSha256===encoded.sha256&&Object.entries(job).every(([key,value])=>sameJson(encoded[key],value))&&encoded.rawSha256===raw.rawSha256&&encoded.requestSha256===requestHash&&encoded.authoringHelperSha256===crowdAuthoringHelperSha256,'Remaining27 actual encoded receipt changed');
+    requireMatch(hash(privateFile(`${voice}/encoded/${job.clipId}.mp3`))===encoded.sha256,'Remaining27 encoded bytes changed');
+    requireMatch(processed.asrWordExact===encoded.asrWordExact&&processed.asrReadings===encoded.asrReadings?.length&&processed.wordCueCount===encoded.wordCues?.length&&processed.levelsPass===(Math.abs(encoded.integratedLufs+18)<=.3&&encoded.truePeakDbtp<=-1.5),'Remaining27 final gates differ from completed summary');
+    if(encoded.asrWordExact!==true)gates.push('independent spoken-word equivalence');
+    if(encoded.asrLiteralWordExact!==true)gates.push('literal exact ASR required by current remaining27 contract');
+    if(Math.abs(encoded.integratedLufs+18)>.3||!Number.isFinite(encoded.integratedLufs)||encoded.truePeakDbtp>-1.5||!Number.isFinite(encoded.truePeakDbtp))gates.push('encoded loudness/true peak');
+    try{crowdExactCues(encoded);}catch(error){requireMatch(error.message==='Incomplete crowd exact final-caption cues','Unexpected remaining27 caption integrity error');gates.push('incomplete exact final-caption cues');}
+   }
+   const eligible=gates.length===0;if(eligible){fixedTakeAuthority(cast,encoded);eligibleCount++;}
+   const selected=selections.has(job.clipId);requireMatch(!selected||eligible&&selections.get(job.clipId)===encoded.sha256,'Use selection includes a failed/wrong-hash remaining27 take');
+   if(selected){const {asrReadings,...actualEncodedFields}=encoded;clips.push({...actualEncodedFields,approval:{status:'user-approved',scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:job.clipId,encodedSha256:encoded.sha256}});selectedCount++;}
+   else held.push({...job,reason:eligible?'technically verified; awaiting clip/hash-specific use selection':'held private; selected production fallback',failedGates:gates});
+   inventory.push({clipId:job.clipId,voiceId:voice,nativeSeed:raw.seed,actualSynthesisAttempt:1,rawReceiptSha256:rawHash,rawSha256:raw.rawSha256,nativeEosReached:raw.decode?.eosReached===true,encodedReceiptSha256:encodedHash,encodedSha256:encoded?.sha256??null,technicalEligible:eligible,selectedForUse:selected,failedGates:gates,humanListeningVerified:false});
+  }
+  const manifest={schemaVersion:1,generationScope:'remaining27-first-takes',voiceId:voice,profileId:owned[0].profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'private remaining27 generation proposal; prior slot preserved',requestedLineCount:4,generatedLineCount:3,lineCount:clips.length,clips,heldPrivate:held,approvedExistingReuse:[]};
+  proposals.push(clips.length?prepareCrowdRemaining27RecoveryManifest(cast,manifest,evidence,sourceRoot):manifest);
+ }
+ requireMatch(proposals.length===9&&inventory.length===27&&proposals.every(row=>row.clips.length+row.heldPrivate.length===4),'Remaining27 proposals lost owned slots');
+ return{status:'private remaining27 recovery5 proposal collection; original process remains failed; no public writes',processingRecovery:evidence.publicProof,authoritySha256:authorityProof.sha256,nativeFullPlanSha256:authority.requestSha256,terminalSha256:terminalHashes,adapterSummarySha256:summaryHashes,selectionSha256:selectionProof?.sha256??null,counts:{nativeRequestSlots:36,generatedInOriginalGrant:27,newGeneratedInRecovery:0,previouslyCompletedEncodings:21,newRecoveryEncodings:5,heldInterruptedEncodings:1,priorProtectedSlots:9,unrendered:0,technicalEligible:eligibleCount,selectedNewClips:selectedCount,heldGenerated:27-selectedCount,humanListeningVerified:0},inventory,partialManifestProposals:proposals};
 }
 
 const originalFile=path=>{const names=readdirSync(path).filter(name=>/^original\.[a-z0-9]+$/i.test(name));requireMatch(names.length===1,'Missing/ambiguous original audio');return resolve(path,names[0])};
@@ -873,7 +1177,7 @@ export function main(args=process.argv.slice(2)){
  }
  const manifest=json(resolve(root,'assets/voices/candidate-dialogue/manifest.json'));
  const catalogPath=resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js');let source=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
- const crowdDir=resolve(root,'assets/voices/candidate-dialogue'),crowdAdmitted=crowdAdmissions(source),crowdManifests=readdirSync(crowdDir).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,file=resolve(root,relative),sha256=hash(file),manifest=json(file);if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(crowdAdmitted[relative]===sha256,'Crowd default manifest lacks verified ROOT private admission');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:sha256};});
+ const crowdDir=resolve(root,'assets/voices/candidate-dialogue'),crowdAdmitted=crowdAdmissions(source),crowdManifests=readdirSync(crowdDir).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,file=resolve(root,relative),sha256=hash(file),manifest=json(file);verifyCrowdGenerationManifestLedger(manifest,relative,sha256,crowdAdmitted);return {...manifest,provenanceManifest:relative,provenanceManifestSha256:sha256};});
  const crowdBlock=crowdCandidateBlock(cast,crowdManifests,root),crowdPattern=/const crowdCandidateDialogue=Object\.freeze\(\{[^\n]*\}\);\n/;
  if(args.includes('--sync'))source=source.replace(crowdPattern,()=>crowdBlock);
  else requireMatch(source.match(crowdPattern)?.[0]===crowdBlock,'Crowd candidate projection stale; run --sync');
