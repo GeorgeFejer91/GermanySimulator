@@ -268,7 +268,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
    id=`rule-${String(index+1).padStart(2,'0')}`;
   }
-  entries['./'+clip.file]={id,...(street||replies||ambient||city?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  entries['./'+clip.file]={id,...(street||replies||ambient||city?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...(city&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
  // Encode repeated receipts once, then expand the same complete fields into
  // every runtime entry. Receipts come from takes, never the current cast alias.
@@ -409,13 +409,92 @@ export function cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,s
  for(const clip of result.clips){const proof=result.cityProvenance.takes[clip.clipId];cityClipAuthority(cast,clip,proof,result.cityProvenance.request,authored);const raw=JSON.parse(proof.raw.text),encoded=JSON.parse(proof.encoded.text),mp3=privateFile(`${manifest.voiceId}/encoded/${clip.clipId}.mp3`);requireMatch(hash(privateFile(`${manifest.voiceId}/raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(mp3)===encoded.sha256&&readFileSync(mp3).length===encoded.bytes,'City private audio bytes drift');}
  return result;
 }
-export function cityRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root){
+export function cityRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root,mouthSupplement=null){
  const clips=[],seen=new Set();
- for(const manifest of manifests){const {authored}=cityManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate city clip across manifests');seen.add(clip.clipId);const wordCues=cityClipAuthority(cast,clip,manifest.cityProvenance.takes[clip.clipId],manifest.cityProvenance.request,authored);clips.push({...clip,wordCues,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256})}}
+ const mouth=cityMouthEnergyRows(mouthSupplement,manifests,assetRoot);
+ for(const manifest of manifests){const {authored}=cityManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate city clip across manifests');seen.add(clip.clipId);const wordCues=cityClipAuthority(cast,clip,manifest.cityProvenance.takes[clip.clipId],manifest.cityProvenance.request,authored);clips.push({...clip,wordCues,...(mouth?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouth[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256})}}
  return fixedRecordingsBlock(cast,{clips},'city-dialogue',assetRoot);
 }
 const cityAdmissionPattern=/const cityAdmissionReceipts=Object\.freeze\((\{[^\n]*\})\);\n/;
 function cityAdmissions(source){return JSON.parse(source.match(cityAdmissionPattern)?.[1]||'{}')}
+const cityMouthEnergyPath='assets/voices/city-dialogue/city-mouth-energy.json';
+const cityMouthEnergyPattern=/const cityMouthEnergyReceipt=Object\.freeze\((\{[^\n]*\})\);\n/;
+const cityEnergyBuilderSha256='08de0ab462c3b3a3aa37108ffabee3f73b4453a984f389c301e0a7b86b24edd8';
+const cityEnergyCanonicalBuilderSha256='b07e8bfd3577c34cc7677f083fd46f42d05c2fd37a861aa6e1ad273bc8053a3b';
+const cityEnergyLineSha256='903ba63ae5bbbb4f2608578be579c0507b5cb1883d2839e2ea426f9dc4499604';
+const cityEnergyFfmpegSha256='74db6c184a03dba2bdfe23e1a1f41cf5a8385bc1de6a7a1b26db1dc541abef93';
+const cityEnergyMeasurementSha256='38391e53ba5f1fc21478271165317daaefa1c8d77f9a0ab81d4338f8816003ac';
+function cityMouthEnergyRows(supplement,manifests,assetRoot){
+ if(!supplement)return null;
+ requireMatch(supplement.kind==='city-final-mp3-mouth-energy-supplement-v1'&&supplement.recipeBuilderSha256===cityEnergyBuilderSha256&&supplement.recipeCanonicalBuilderSha256===cityEnergyCanonicalBuilderSha256&&[cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(supplement.admissionRecipeBuilderSha256)&&supplement.recipeLineSha256===cityEnergyLineSha256&&supplement.ffmpegSha256===cityEnergyFfmpegSha256&&supplement.measurementSha256===cityEnergyMeasurementSha256,'Foreign city mouth recipe/measurement');
+ const clips=manifests.flatMap(manifest=>manifest.clips.map(clip=>({...clip,encodedReceiptSha256:manifest.cityProvenance.takes[clip.clipId].encoded.sha256}))),rows=supplement.clips;
+ requireMatch(clips.length>=43&&rows&&Object.keys(rows).length===43&&Object.keys(rows).every(id=>clips.some(clip=>clip.clipId===id)),'Incomplete/extra city mouth supplement');
+ for(const clip of clips.filter(clip=>Object.hasOwn(rows,clip.clipId))){const row=rows[clip.clipId];
+  for(const key of ['clipId','voiceId','actorId','profileId','file','sha256','encodedReceiptSha256'])requireMatch(row[key]===clip[key],`Foreign city mouth ${key}: ${clip.clipId}`);
+  requireMatch(hash(resolve(assetRoot,clip.file))===clip.sha256&&row.mouthHz===40&&Number.isInteger(row.sampleCount)&&row.sampleCount>0&&row.sampleCount<=240000&&Number.isFinite(row.durationSeconds)&&row.durationSeconds===row.sampleCount/24000&&/^[a-f0-9]{64}$/.test(row.pcmSha256)&&Array.isArray(row.mouthEnergy)&&row.mouthEnergy.length===Math.ceil(row.sampleCount/600)&&row.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255)&&row.energySha256===textHash(Buffer.from(row.mouthEnergy)),'Invalid city measured mouth bins');
+ }
+ return rows;
+}
+function cityMouthEnergyFromCatalog(source,manifests,assetRoot){
+ const anchor=source.match(cityMouthEnergyPattern);if(!anchor)return null;
+ const receipts=JSON.parse(anchor[1]);requireMatch(sameJson(Object.keys(receipts),[cityMouthEnergyPath]),'Foreign city mouth supplement anchor');
+ const path=resolve(assetRoot,cityMouthEnergyPath);
+ requireMatch(!lstatSync(path).isSymbolicLink()&&hash(path)===receipts[cityMouthEnergyPath],'City mouth supplement hash drift');
+ const supplement=json(path);cityMouthEnergyRows(supplement,manifests,assetRoot);return supplement;
+}
+export function admitCityMouthEnergy(cast,measurement,measurementSha256,ffmpegPath,sourceRoot=root){
+ const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
+ requireMatch(!catalogSource.match(cityMouthEnergyPattern),'City mouth supplement already admitted');
+ const supplementPath=resolve(sourceRoot,cityMouthEnergyPath),supplementTemporary=supplementPath+'.city-mouth.tmp',catalogTemporary=catalogPath+'.city-mouth.tmp';
+ requireMatch(!existsSync(supplementPath)&&!existsSync(supplementTemporary)&&!existsSync(catalogTemporary)&&!lstatSync(catalogPath).isSymbolicLink()&&lstatSync(catalogPath).nlink===1,'Occupied or linked city mouth destination');
+ const admissions=cityAdmissions(catalogSource),directory=resolve(sourceRoot,'assets/voices/city-dialogue');
+ const manifests=readdirSync(directory).filter(name=>name.endsWith('-manifest.json')).sort().map(name=>{const path=`assets/voices/city-dialogue/${name}`,sha256=hash(resolve(sourceRoot,path));requireMatch(admissions[path]===sha256,'Unadmitted city mouth source manifest');return {...json(resolve(sourceRoot,path)),provenanceManifest:path,provenanceManifestSha256:sha256}});
+ const clips=manifests.flatMap(manifest=>manifest.clips).sort((a,b)=>a.clipId.localeCompare(b.clipId));
+ requireMatch(clips.length===43&&measurementSha256===cityEnergyMeasurementSha256&&measurement.kind==='city-final-mp3-mouth-energy-43-measurement-candidate-v2'&&measurement.status==='MEASURED CANDIDATE ONLY'&&measurement.admission==='NOT PERFORMED'&&measurement.decodeCalls===42&&measurement.reusedPilotCount===1&&measurement.inputSha256==='f25db16689246c7aabdcdc3540d4588760eaf12ef4ab8c29043f3bcbf022f7fa'&&measurement.recipeFileSha256===cityEnergyBuilderSha256&&measurement.recipeFunctionLineSha256===cityEnergyLineSha256&&measurement.ffmpegSha256===cityEnergyFfmpegSha256&&measurement.results.length===43&&sameJson(measurement.sourceBefore,measurement.sourceAfter)&&measurement.sourceBefore.catalogSha256===textHash(catalogSource),'Foreign/incomplete city mouth measurement');
+ requireMatch(sameJson(measurement.results.map(row=>row.clipId).sort(),clips.map(row=>row.clipId).sort()),'Missing/extra measured city clip');
+ const measured=new Map(measurement.results.map(row=>[row.clipId,row]));
+ requireMatch(measured.size===43&&hash(ffmpegPath)===cityEnergyFfmpegSha256,'Foreign city mouth decoder');
+ const builderPath=resolve(sourceRoot,'tools/build-neighbor-voices.mjs'),builder=readFileSync(builderPath,'utf8');
+ const admissionRecipeBuilderSha256=hash(builderPath);
+ // The measured Windows source and committed LF source differ only by CRLF.
+ // Keep the original measurement pin and accept only these two exact files.
+ requireMatch([cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(admissionRecipeBuilderSha256)&&textHash(builder.replace(/\r\n/g,'\n'))===cityEnergyCanonicalBuilderSha256,'City mouth builder drift');
+ const lines=builder.split(/\r?\n/).filter(line=>line.startsWith('function energy(path){'));
+ requireMatch(lines.length===1&&textHash(lines[0])===cityEnergyLineSha256,'City mouth energy function drift');
+ requireMatch(new Uint8Array(new Uint32Array([0x01020304]).buffer)[0]===4,'City mouth PCM endian drift');
+ cityRecordingsBlock(cast,manifests,sourceRoot,sourceRoot);
+ const began=Date.now(),rows={};
+ for(const clip of clips){
+  requireMatch(Date.now()-began<600000,'City mouth admission decoder wall budget');
+  const found=measured.get(clip.clipId),manifest=manifests.find(row=>row.clips.some(item=>item.clipId===clip.clipId));
+  requireMatch(found&&found.sha256===clip.sha256&&found.voiceId===clip.voiceId&&found.actorId===clip.actorId&&found.profileId===clip.profileId&&found.manifestSha256===manifest.provenanceManifestSha256,'Foreign measured city identity/manifest');
+  const mp3=resolve(sourceRoot,clip.file);requireMatch(hash(mp3)===clip.sha256,'City mouth MP3 changed');
+  let decoded=null,calls=0;
+  const decode=(args,binary)=>{
+   requireMatch(binary&&calls++===0&&sameJson(Array.from(args),['-hide_banner','-loglevel','error','-i',mp3,'-f','f32le','-ac','1','-ar','24000','pipe:1']),'Changed city mouth decoder request');
+   const result=spawnSync(ffmpegPath,['-nostdin','-threads','1',...args],{encoding:null,windowsHide:true,timeout:10000,maxBuffer:1048576});
+   requireMatch(!result.error&&result.status===0&&!result.signal&&result.stdout?.length>0&&result.stdout.length<=1048576&&result.stdout.length%4===0,'City mouth decoder failed');
+   const bytes=result.stdout,sampleCount=bytes.length/4;requireMatch(sampleCount<=240000,'City mouth decoded duration exceeds bound');
+   for(let i=0;i<bytes.length;i+=4)requireMatch(Number.isFinite(bytes.readFloatLE(i)),'Nonfinite city mouth PCM');
+   decoded={pcmSha256:textHash(bytes),sampleCount,durationSeconds:sampleCount/24000};return bytes;
+  };
+  const energy=vm.runInNewContext('('+lines[0]+')',{ffmpeg:decode,Float32Array,Math},{timeout:1000})(mp3);
+  requireMatch(calls===1&&decoded&&found.decoded.pcmSha256===decoded.pcmSha256&&found.decoded.sampleCount===decoded.sampleCount&&found.decoded.durationSeconds===decoded.durationSeconds&&energy.mouthHz===40&&energy.durationSeconds===decoded.durationSeconds&&sameJson(Array.from(energy.mouthEnergy),found.measurement.mouthEnergy),'City mouth bins differ from actual final MP3');
+  rows[clip.clipId]={clipId:clip.clipId,voiceId:clip.voiceId,actorId:clip.actorId,profileId:clip.profileId,file:clip.file,sha256:clip.sha256,encodedReceiptSha256:manifest.cityProvenance.takes[clip.clipId].encoded.sha256,pcmSha256:decoded.pcmSha256,sampleCount:decoded.sampleCount,durationSeconds:decoded.durationSeconds,mouthHz:40,mouthEnergy:Array.from(energy.mouthEnergy),energySha256:textHash(Buffer.from(energy.mouthEnergy))};
+ }
+ requireMatch(hash(ffmpegPath)===cityEnergyFfmpegSha256&&hash(builderPath)===admissionRecipeBuilderSha256,'City mouth decoder/recipe changed during admission');
+ const supplement={kind:'city-final-mp3-mouth-energy-supplement-v1',recipeBuilderSha256:cityEnergyBuilderSha256,recipeCanonicalBuilderSha256:cityEnergyCanonicalBuilderSha256,admissionRecipeBuilderSha256,recipeLineSha256:cityEnergyLineSha256,ffmpegSha256:cityEnergyFfmpegSha256,measurementSha256,clips:rows};
+ cityMouthEnergyRows(supplement,manifests,sourceRoot);
+ cityRecordingsBlock(cast,manifests,sourceRoot,sourceRoot,supplement);
+ const bytes=JSON.stringify(supplement,null,2)+'\n',anchor='const cityMouthEnergyReceipt=Object.freeze('+JSON.stringify({[cityMouthEnergyPath]:textHash(bytes)})+');\n';
+ const nextCatalog=catalogSource.replace('const recordings=Object.freeze({',()=>anchor+'const recordings=Object.freeze({');
+ requireMatch(nextCatalog.includes(anchor)&&readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n')===catalogSource,'Catalog changed before city mouth admission');
+ let installed=false;
+ try{writeFileSync(supplementTemporary,bytes,{flag:'wx'});renameSync(supplementTemporary,supplementPath);installed=true;
+  writeFileSync(catalogTemporary,nextCatalog,{flag:'wx'});renameSync(catalogTemporary,catalogPath);
+ }catch(error){if(existsSync(catalogTemporary))unlinkSync(catalogTemporary);if(existsSync(supplementTemporary))unlinkSync(supplementTemporary);if(installed)unlinkSync(supplementPath);throw error}
+ return {clips:43,supplement:cityMouthEnergyPath,sha256:textHash(bytes),catalogSync:'REQUIRED',listening:'NOT RUN',browserClockAlignment:'NOT VERIFIED'};
+}
 export function prepareCityManifest(cast,voiceId,reviewRoot,authoringHelperPath,authorization,sourceRoot=root){
  requireMatch(/^stadt-[a-z-]+$/.test(voiceId),'Unsafe city proposal voice');
  const base=realpathSync(reviewRoot),requestPath=realpathSync(resolve(base,voiceId,'requests.json'));
@@ -471,7 +550,11 @@ export function main(args=process.argv.slice(2)){
  const value=name=>{const i=args.indexOf(name);return i<0?null:args[i+1]};
  const cast=json(resolve(root,'For-AI/VOICE-CAST.json'));
  requireMatch(new Set(Object.values(cast.productionVoices).map(p=>p.profileId)).size===Object.keys(cast.productionVoices).length,'Production characters share a profile UUID');
- const cityProposal=value('--prepare-city-manifest'),cityAdmission=value('--admit-city-manifest');
+ const cityProposal=value('--prepare-city-manifest'),cityAdmission=value('--admit-city-manifest'),cityMouthAdmission=value('--admit-city-mouth-energy');
+ if(cityMouthAdmission){
+  requireMatch(!cityProposal&&!cityAdmission&&!args.includes('--sync')&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')&&value('--city-mouth-ffmpeg'),'City mouth admission requires measured receipt and pinned decoder, then separate catalog sync');
+  const path=resolve(cityMouthAdmission);console.log(JSON.stringify(admitCityMouthEnergy(cast,json(path),hash(path),resolve(value('--city-mouth-ffmpeg')))));return;
+ }
  if(cityProposal){
   requireMatch(!cityAdmission&&!args.includes('--sync')&&value('--city-review-root')&&value('--city-authoring-helper')&&value('--city-use-authorization'),'City proposal requires explicit private proof and use authorization, without sync/admission');
   console.log(JSON.stringify(prepareCityManifest(cast,cityProposal,resolve(value('--city-review-root')),resolve(value('--city-authoring-helper')),json(resolve(value('--city-use-authorization')))),null,2));return;
@@ -568,7 +651,8 @@ export function main(args=process.argv.slice(2)){
  if(existsSync(cityDir)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){
   const admissions=cityAdmissions(source);
   const manifests=readdirSync(cityDir).filter(name=>name.endsWith('-manifest.json')).sort().map(name=>{const path=`assets/voices/city-dialogue/${name}`,sha256=hash(resolve(root,path));requireMatch(admissions[path]===sha256,'City manifest has no verified private admission; use --admit-city-manifest');return {...json(resolve(root,path)),provenanceManifest:path,provenanceManifestSha256:sha256}});
-  const block=cityRecordingsBlock(cast,manifests),pattern=/const cityRecordings=Object\.freeze\([^\n]*\);\n/;
+  const supplement=cityMouthEnergyFromCatalog(source,manifests,root);
+  const block=cityRecordingsBlock(cast,manifests,root,root,supplement),pattern=/const cityRecordings=Object\.freeze\([^\n]*\);\n/;
   fixedAssetInventory('city-dialogue',manifests.flatMap(manifest=>manifest.clips));
   if(args.includes('--sync')){
    source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');

@@ -34,7 +34,8 @@ function fixture(t){
  catalog=(catalog.slice(0,start)+'const recordings=Object.freeze({'+catalog.slice(end))
   .replace(/const neighborRecordings=Object\.freeze\([^\n]*\);\n/,curator.neighborRecordingsBlock(cast,[]))
   .replace(/const cityRecordings=Object\.freeze\([^\n]*\);\n/,curator.cityRecordingsBlock(cast,[],game,game))
-  .replace(/const cityAdmissionReceipts=Object\.freeze\(\{[^\n]*\}\);\n/,'const cityAdmissionReceipts=Object.freeze({});\n');
+  .replace(/const cityAdmissionReceipts=Object\.freeze\(\{[^\n]*\}\);\n/,'const cityAdmissionReceipts=Object.freeze({});\n')
+  .replace(/const cityMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'');
  save(catalogPath,catalog);save(resolve(game,'assets/voices/candidate-dialogue/manifest.json'),{clips:[]});mkdirSync(review,{recursive:true});
  const selected=jobs.filter(row=>row.voiceId===jobs[0].voiceId),voiceId=selected[0].voiceId;
  const sourceSha256=Object.fromEntries(['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js'].map(path=>[path,hash(readFileSync(resolve(game,path)))]));
