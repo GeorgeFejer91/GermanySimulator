@@ -1,0 +1,738 @@
+{
+  "voiceId": "stadt-norbert-faxrolle",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-norbert-faxrolle-01",
+      "voiceId": "stadt-norbert-faxrolle",
+      "actorId": "city-norbert-faxrolle",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=0]",
+      "text": "Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.",
+      "english": "I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.",
+      "sourceSha256": "300a2a42cfd9f90195e856bc9c4c20e841ba5a98efda2a185155370ded5d1e65",
+      "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+      "referenceSha256": "046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647",
+      "referenceOriginalSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171000,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 180,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.06,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e",
+      "profileJsonSha256": "823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52",
+      "rawSha256": "5e3ee17cd346fa077a5ef2621443b94b00f5928e22f66a91dcdde5affcbe05b6",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.16,
+      "renderSeconds": 7.91,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c00d72eba1514bcfa27d2b420db2d960",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.12:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.19,
+      "asr": "Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.",
+          "transcribeSeconds": 10.69,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " habe",
+              "start": 0.22,
+              "end": 0.4
+            },
+            {
+              "word": " es",
+              "start": 0.4,
+              "end": 0.56
+            },
+            {
+              "word": " gefaxt.",
+              "start": 0.56,
+              "end": 1.02
+            },
+            {
+              "word": " Dass",
+              "start": 1.3,
+              "end": 1.74
+            },
+            {
+              "word": " das",
+              "start": 1.74,
+              "end": 1.94
+            },
+            {
+              "word": " Gerät",
+              "start": 1.94,
+              "end": 2.3
+            },
+            {
+              "word": " seit",
+              "start": 2.3,
+              "end": 2.52
+            },
+            {
+              "word": " Dienstag",
+              "start": 2.52,
+              "end": 2.94
+            },
+            {
+              "word": " kein",
+              "start": 2.94,
+              "end": 3.14
+            },
+            {
+              "word": " Papier",
+              "start": 3.14,
+              "end": 3.52
+            },
+            {
+              "word": " hat,",
+              "start": 3.52,
+              "end": 3.76
+            },
+            {
+              "word": " ändert",
+              "start": 3.96,
+              "end": 4.3
+            },
+            {
+              "word": " nichts",
+              "start": 4.3,
+              "end": 4.5
+            },
+            {
+              "word": " daran,",
+              "start": 4.5,
+              "end": 4.82
+            },
+            {
+              "word": " dass",
+              "start": 5.02,
+              "end": 5.12
+            },
+            {
+              "word": " ich",
+              "start": 5.12,
+              "end": 5.26
+            },
+            {
+              "word": " meinen",
+              "start": 5.26,
+              "end": 5.48
+            },
+            {
+              "word": " Teil",
+              "start": 5.48,
+              "end": 5.7
+            },
+            {
+              "word": " versucht",
+              "start": 5.7,
+              "end": 6.08
+            },
+            {
+              "word": " habe.",
+              "start": 6.08,
+              "end": 6.42
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "habe",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 9,
+          "word": "es",
+          "end": 0.56
+        },
+        {
+          "at": 0.56,
+          "charIndex": 12,
+          "word": "gefaxt",
+          "end": 1.02
+        },
+        {
+          "at": 1.3,
+          "charIndex": 20,
+          "word": "Dass",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 25,
+          "word": "das",
+          "end": 1.94
+        },
+        {
+          "at": 1.94,
+          "charIndex": 29,
+          "word": "Gerät",
+          "end": 2.3
+        },
+        {
+          "at": 2.3,
+          "charIndex": 35,
+          "word": "seit",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 40,
+          "word": "Dienstag",
+          "end": 2.94
+        },
+        {
+          "at": 2.94,
+          "charIndex": 49,
+          "word": "kein",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 54,
+          "word": "Papier",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 61,
+          "word": "hat",
+          "end": 3.76
+        },
+        {
+          "at": 3.96,
+          "charIndex": 66,
+          "word": "ändert",
+          "end": 4.3
+        },
+        {
+          "at": 4.3,
+          "charIndex": 73,
+          "word": "nichts",
+          "end": 4.5
+        },
+        {
+          "at": 4.5,
+          "charIndex": 80,
+          "word": "daran",
+          "end": 4.82
+        },
+        {
+          "at": 5.02,
+          "charIndex": 87,
+          "word": "dass",
+          "end": 5.12
+        },
+        {
+          "at": 5.12,
+          "charIndex": 92,
+          "word": "ich",
+          "end": 5.26
+        },
+        {
+          "at": 5.26,
+          "charIndex": 96,
+          "word": "meinen",
+          "end": 5.48
+        },
+        {
+          "at": 5.48,
+          "charIndex": 103,
+          "word": "Teil",
+          "end": 5.7
+        },
+        {
+          "at": 5.7,
+          "charIndex": 108,
+          "word": "versucht",
+          "end": 6.08
+        },
+        {
+          "at": 6.08,
+          "charIndex": 117,
+          "word": "habe",
+          "end": 6.42
+        }
+      ],
+      "sha256": "05106830a43dab059bfdbafd60f8e58aace6784e4f001ef27ff2e35c3609b909",
+      "bytes": 115628,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-norbert-faxrolle-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-norbert-faxrolle-01",
+        "encodedSha256": "05106830a43dab059bfdbafd60f8e58aace6784e4f001ef27ff2e35c3609b909"
+      }
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-02",
+      "voiceId": "stadt-norbert-faxrolle",
+      "actorId": "city-norbert-faxrolle",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=1]",
+      "text": "Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.",
+      "english": "The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.",
+      "sourceSha256": "ae84936fad4325be7d7881a77e6a011a8f423ff136d50074fccd6f26115854ae",
+      "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+      "referenceSha256": "046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647",
+      "referenceOriginalSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 171,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.39,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e",
+      "profileJsonSha256": "823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52",
+      "rawSha256": "01f25a2d58a442068f64459e1c584c9ba525c5ef5b881869a09f8223ac07f25f",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.8,
+      "renderSeconds": 8.25,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c00d72eba1514bcfa27d2b420db2d960",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.04:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.19,
+      "asr": "Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.",
+          "transcribeSeconds": 10.14,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " Original",
+              "start": 0.22,
+              "end": 0.62
+            },
+            {
+              "word": " ist",
+              "start": 0.62,
+              "end": 0.92
+            },
+            {
+              "word": " auf",
+              "start": 0.92,
+              "end": 1.06
+            },
+            {
+              "word": " dem",
+              "start": 1.06,
+              "end": 1.2
+            },
+            {
+              "word": " Fax",
+              "start": 1.2,
+              "end": 1.48
+            },
+            {
+              "word": " verschwunden.",
+              "start": 1.48,
+              "end": 2.1
+            },
+            {
+              "word": " Nehmen",
+              "start": 2.4,
+              "end": 2.8
+            },
+            {
+              "word": " Sie",
+              "start": 2.8,
+              "end": 2.92
+            },
+            {
+              "word": " die",
+              "start": 2.92,
+              "end": 3.04
+            },
+            {
+              "word": " Kopie,",
+              "start": 3.04,
+              "end": 3.46
+            },
+            {
+              "word": " da",
+              "start": 3.62,
+              "end": 3.7
+            },
+            {
+              "word": " sieht",
+              "start": 3.7,
+              "end": 3.86
+            },
+            {
+              "word": " man",
+              "start": 3.86,
+              "end": 3.98
+            },
+            {
+              "word": " wenigstens",
+              "start": 3.98,
+              "end": 4.5
+            },
+            {
+              "word": " noch,",
+              "start": 4.5,
+              "end": 4.7
+            },
+            {
+              "word": " was",
+              "start": 4.8,
+              "end": 5.02
+            },
+            {
+              "word": " ursprünglich",
+              "start": 5.02,
+              "end": 5.56
+            },
+            {
+              "word": " gefehlt",
+              "start": 5.56,
+              "end": 5.92
+            },
+            {
+              "word": " hat.",
+              "start": 5.92,
+              "end": 6.08
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "Original",
+          "end": 0.62
+        },
+        {
+          "at": 0.62,
+          "charIndex": 13,
+          "word": "ist",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 17,
+          "word": "auf",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 21,
+          "word": "dem",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 25,
+          "word": "Fax",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 29,
+          "word": "verschwunden",
+          "end": 2.1
+        },
+        {
+          "at": 2.4,
+          "charIndex": 43,
+          "word": "Nehmen",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 50,
+          "word": "Sie",
+          "end": 2.92
+        },
+        {
+          "at": 2.92,
+          "charIndex": 54,
+          "word": "die",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 58,
+          "word": "Kopie",
+          "end": 3.46
+        },
+        {
+          "at": 3.62,
+          "charIndex": 65,
+          "word": "da",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 68,
+          "word": "sieht",
+          "end": 3.86
+        },
+        {
+          "at": 3.86,
+          "charIndex": 74,
+          "word": "man",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 78,
+          "word": "wenigstens",
+          "end": 4.5
+        },
+        {
+          "at": 4.5,
+          "charIndex": 89,
+          "word": "noch",
+          "end": 4.7
+        },
+        {
+          "at": 4.8,
+          "charIndex": 95,
+          "word": "was",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 99,
+          "word": "ursprünglich",
+          "end": 5.56
+        },
+        {
+          "at": 5.56,
+          "charIndex": 112,
+          "word": "gefehlt",
+          "end": 5.92
+        },
+        {
+          "at": 5.92,
+          "charIndex": 120,
+          "word": "hat",
+          "end": 6.08
+        }
+      ],
+      "sha256": "5ef343c1aec93176473adf0700ab478703f4d76fd4aecc5485c23251e7b23c12",
+      "bytes": 109868,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-norbert-faxrolle-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-norbert-faxrolle-02",
+        "encodedSha256": "5ef343c1aec93176473adf0700ab478703f4d76fd4aecc5485c23251e7b23c12"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-norbert-faxrolle-03",
+      "voiceId": "stadt-norbert-faxrolle",
+      "actorId": "city-norbert-faxrolle",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=berlin,slot=0]",
+      "text": "I have gefaxt it. Dass das Gerät seit Tuesday kein Papier hat, ändert nichts daran, dass ich my part versucht habe.",
+      "english": "I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.",
+      "sourceSha256": "457ae727db7daff0a843d17f04a1e265df1c08632693715004e43de558c45678",
+      "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+      "referenceSha256": "046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647",
+      "referenceOriginalSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-04",
+      "voiceId": "stadt-norbert-faxrolle",
+      "actorId": "city-norbert-faxrolle",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=berlin,slot=1]",
+      "text": "The Original ist auf dem Fax verschwunden. Take die Kopie, da sieht man wenigstens noch, what originally was missing.",
+      "english": "The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.",
+      "sourceSha256": "b9f349a81b50606370690927586b6655b2b72d9d14feb91e7c3e207fb9ba28f9",
+      "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+      "referenceSha256": "046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647",
+      "referenceOriginalSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-norbert-faxrolle-01\",\r\n      \"voiceId\": \"stadt-norbert-faxrolle\",\r\n      \"actorId\": \"city-norbert-faxrolle\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n      \"english\": \"I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.\",\r\n      \"sourceSha256\": \"300a2a42cfd9f90195e856bc9c4c20e841ba5a98efda2a185155370ded5d1e65\",\r\n      \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n      \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n      \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-norbert-faxrolle-02\",\r\n      \"voiceId\": \"stadt-norbert-faxrolle\",\r\n      \"actorId\": \"city-norbert-faxrolle\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n      \"english\": \"The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.\",\r\n      \"sourceSha256\": \"ae84936fad4325be7d7881a77e6a011a8f423ff136d50074fccd6f26115854ae\",\r\n      \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n      \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n      \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-norbert-faxrolle-03\",\r\n      \"voiceId\": \"stadt-norbert-faxrolle\",\r\n      \"actorId\": \"city-norbert-faxrolle\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"I have gefaxt it. Dass das Gerät seit Tuesday kein Papier hat, ändert nichts daran, dass ich my part versucht habe.\",\r\n      \"english\": \"I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.\",\r\n      \"sourceSha256\": \"457ae727db7daff0a843d17f04a1e265df1c08632693715004e43de558c45678\",\r\n      \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n      \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n      \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-norbert-faxrolle-04\",\r\n      \"voiceId\": \"stadt-norbert-faxrolle\",\r\n      \"actorId\": \"city-norbert-faxrolle\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"The Original ist auf dem Fax verschwunden. Take die Kopie, da sieht man wenigstens noch, what originally was missing.\",\r\n      \"english\": \"The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.\",\r\n      \"sourceSha256\": \"b9f349a81b50606370690927586b6655b2b72d9d14feb91e7c3e207fb9ba28f9\",\r\n      \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n      \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n      \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e"
+    },
+    "takes": {
+      "stadt-norbert-faxrolle-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-norbert-faxrolle-01\",\r\n  \"voiceId\": \"stadt-norbert-faxrolle\",\r\n  \"actorId\": \"city-norbert-faxrolle\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n  \"english\": \"I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.\",\r\n  \"sourceSha256\": \"300a2a42cfd9f90195e856bc9c4c20e841ba5a98efda2a185155370ded5d1e65\",\r\n  \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n  \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n  \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171000,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 180,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.06,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e\",\r\n  \"profileJsonSha256\": \"823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52\",\r\n  \"rawSha256\": \"5e3ee17cd346fa077a5ef2621443b94b00f5928e22f66a91dcdde5affcbe05b6\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.16,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "c6544ecef4bb0c7b9bb14fe140311443fd3cb1fd8290d0f821622f1b413bf541"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-norbert-faxrolle-01\",\r\n  \"voiceId\": \"stadt-norbert-faxrolle\",\r\n  \"actorId\": \"city-norbert-faxrolle\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n  \"english\": \"I faxed it. The machine having no paper since Tuesday does not change the fact that I attempted my part.\",\r\n  \"sourceSha256\": \"300a2a42cfd9f90195e856bc9c4c20e841ba5a98efda2a185155370ded5d1e65\",\r\n  \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n  \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n  \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171000,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 180,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.06,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e\",\r\n  \"profileJsonSha256\": \"823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52\",\r\n  \"rawSha256\": \"5e3ee17cd346fa077a5ef2621443b94b00f5928e22f66a91dcdde5affcbe05b6\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.16,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.12:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.24,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.\",\r\n      \"transcribeSeconds\": 10.69,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.22\r\n        },\r\n        {\r\n          \"word\": \" habe\",\r\n          \"start\": 0.22,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" es\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.56\r\n        },\r\n        {\r\n          \"word\": \" gefaxt.\",\r\n          \"start\": 0.56,\r\n          \"end\": 1.02\r\n        },\r\n        {\r\n          \"word\": \" Dass\",\r\n          \"start\": 1.3,\r\n          \"end\": 1.74\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 1.74,\r\n          \"end\": 1.94\r\n        },\r\n        {\r\n          \"word\": \" Gerät\",\r\n          \"start\": 1.94,\r\n          \"end\": 2.3\r\n        },\r\n        {\r\n          \"word\": \" seit\",\r\n          \"start\": 2.3,\r\n          \"end\": 2.52\r\n        },\r\n        {\r\n          \"word\": \" Dienstag\",\r\n          \"start\": 2.52,\r\n          \"end\": 2.94\r\n        },\r\n        {\r\n          \"word\": \" kein\",\r\n          \"start\": 2.94,\r\n          \"end\": 3.14\r\n        },\r\n        {\r\n          \"word\": \" Papier\",\r\n          \"start\": 3.14,\r\n          \"end\": 3.52\r\n        },\r\n        {\r\n          \"word\": \" hat,\",\r\n          \"start\": 3.52,\r\n          \"end\": 3.76\r\n        },\r\n        {\r\n          \"word\": \" ändert\",\r\n          \"start\": 3.96,\r\n          \"end\": 4.3\r\n        },\r\n        {\r\n          \"word\": \" nichts\",\r\n          \"start\": 4.3,\r\n          \"end\": 4.5\r\n        },\r\n        {\r\n          \"word\": \" daran,\",\r\n          \"start\": 4.5,\r\n          \"end\": 4.82\r\n        },\r\n        {\r\n          \"word\": \" dass\",\r\n          \"start\": 5.02,\r\n          \"end\": 5.12\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 5.12,\r\n          \"end\": 5.26\r\n        },\r\n        {\r\n          \"word\": \" meinen\",\r\n          \"start\": 5.26,\r\n          \"end\": 5.48\r\n        },\r\n        {\r\n          \"word\": \" Teil\",\r\n          \"start\": 5.48,\r\n          \"end\": 5.7\r\n        },\r\n        {\r\n          \"word\": \" versucht\",\r\n          \"start\": 5.7,\r\n          \"end\": 6.08\r\n        },\r\n        {\r\n          \"word\": \" habe.\",\r\n          \"start\": 6.08,\r\n          \"end\": 6.42\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ich\",\r\n      \"end\": 0.22\r\n    },\r\n    {\r\n      \"at\": 0.22,\r\n      \"charIndex\": 4,\r\n      \"word\": \"habe\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 9,\r\n      \"word\": \"es\",\r\n      \"end\": 0.56\r\n    },\r\n    {\r\n      \"at\": 0.56,\r\n      \"charIndex\": 12,\r\n      \"word\": \"gefaxt\",\r\n      \"end\": 1.02\r\n    },\r\n    {\r\n      \"at\": 1.3,\r\n      \"charIndex\": 20,\r\n      \"word\": \"Dass\",\r\n      \"end\": 1.74\r\n    },\r\n    {\r\n      \"at\": 1.74,\r\n      \"charIndex\": 25,\r\n      \"word\": \"das\",\r\n      \"end\": 1.94\r\n    },\r\n    {\r\n      \"at\": 1.94,\r\n      \"charIndex\": 29,\r\n      \"word\": \"Gerät\",\r\n      \"end\": 2.3\r\n    },\r\n    {\r\n      \"at\": 2.3,\r\n      \"charIndex\": 35,\r\n      \"word\": \"seit\",\r\n      \"end\": 2.52\r\n    },\r\n    {\r\n      \"at\": 2.52,\r\n      \"charIndex\": 40,\r\n      \"word\": \"Dienstag\",\r\n      \"end\": 2.94\r\n    },\r\n    {\r\n      \"at\": 2.94,\r\n      \"charIndex\": 49,\r\n      \"word\": \"kein\",\r\n      \"end\": 3.14\r\n    },\r\n    {\r\n      \"at\": 3.14,\r\n      \"charIndex\": 54,\r\n      \"word\": \"Papier\",\r\n      \"end\": 3.52\r\n    },\r\n    {\r\n      \"at\": 3.52,\r\n      \"charIndex\": 61,\r\n      \"word\": \"hat\",\r\n      \"end\": 3.76\r\n    },\r\n    {\r\n      \"at\": 3.96,\r\n      \"charIndex\": 66,\r\n      \"word\": \"ändert\",\r\n      \"end\": 4.3\r\n    },\r\n    {\r\n      \"at\": 4.3,\r\n      \"charIndex\": 73,\r\n      \"word\": \"nichts\",\r\n      \"end\": 4.5\r\n    },\r\n    {\r\n      \"at\": 4.5,\r\n      \"charIndex\": 80,\r\n      \"word\": \"daran\",\r\n      \"end\": 4.82\r\n    },\r\n    {\r\n      \"at\": 5.02,\r\n      \"charIndex\": 87,\r\n      \"word\": \"dass\",\r\n      \"end\": 5.12\r\n    },\r\n    {\r\n      \"at\": 5.12,\r\n      \"charIndex\": 92,\r\n      \"word\": \"ich\",\r\n      \"end\": 5.26\r\n    },\r\n    {\r\n      \"at\": 5.26,\r\n      \"charIndex\": 96,\r\n      \"word\": \"meinen\",\r\n      \"end\": 5.48\r\n    },\r\n    {\r\n      \"at\": 5.48,\r\n      \"charIndex\": 103,\r\n      \"word\": \"Teil\",\r\n      \"end\": 5.7\r\n    },\r\n    {\r\n      \"at\": 5.7,\r\n      \"charIndex\": 108,\r\n      \"word\": \"versucht\",\r\n      \"end\": 6.08\r\n    },\r\n    {\r\n      \"at\": 6.08,\r\n      \"charIndex\": 117,\r\n      \"word\": \"habe\",\r\n      \"end\": 6.42\r\n    }\r\n  ],\r\n  \"sha256\": \"05106830a43dab059bfdbafd60f8e58aace6784e4f001ef27ff2e35c3609b909\",\r\n  \"bytes\": 115628,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-norbert-faxrolle-01.mp3\"\r\n}\r\n",
+          "sha256": "b57c2d6761b3d893b4802e01d98b34d9485f4788f1e77eaf4500f81a156027f9"
+        }
+      },
+      "stadt-norbert-faxrolle-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-norbert-faxrolle-02\",\r\n  \"voiceId\": \"stadt-norbert-faxrolle\",\r\n  \"actorId\": \"city-norbert-faxrolle\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n  \"english\": \"The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.\",\r\n  \"sourceSha256\": \"ae84936fad4325be7d7881a77e6a011a8f423ff136d50074fccd6f26115854ae\",\r\n  \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n  \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n  \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 171,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.39,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e\",\r\n  \"profileJsonSha256\": \"823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52\",\r\n  \"rawSha256\": \"01f25a2d58a442068f64459e1c584c9ba525c5ef5b881869a09f8223ac07f25f\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.8,\r\n  \"renderSeconds\": 8.25,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "e2f825c9dcf39096e5ded02769f586e54a000854d33cf9b3701e49551560bcc5"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-norbert-faxrolle-02\",\r\n  \"voiceId\": \"stadt-norbert-faxrolle\",\r\n  \"actorId\": \"city-norbert-faxrolle\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-norbert-faxrolle].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n  \"english\": \"The original disappeared on the fax. Take the copy; at least it still shows what was missing in the first place.\",\r\n  \"sourceSha256\": \"ae84936fad4325be7d7881a77e6a011a8f423ff136d50074fccd6f26115854ae\",\r\n  \"profileId\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n  \"referenceSha256\": \"046080a08a2cb1100721b1c94891e5af598c492412c01848b5d826062a863647\",\r\n  \"referenceOriginalSha256\": \"74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 171,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.39,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f0b203280f7ee5df102ae0ccb1540a8f73a5b0e96f5af8f9cf60c79ea432f80e\",\r\n  \"profileJsonSha256\": \"823e3dab9fe750289af31b8eedc91a88d7921509144785a47c19d4ba62c7ca52\",\r\n  \"rawSha256\": \"01f25a2d58a442068f64459e1c584c9ba525c5ef5b881869a09f8223ac07f25f\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.8,\r\n  \"renderSeconds\": 8.25,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"c00d72eba1514bcfa27d2b420db2d960\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-15.04:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.21,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat.\",\r\n      \"transcribeSeconds\": 10.14,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Das\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.22\r\n        },\r\n        {\r\n          \"word\": \" Original\",\r\n          \"start\": 0.22,\r\n          \"end\": 0.62\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 0.62,\r\n          \"end\": 0.92\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 0.92,\r\n          \"end\": 1.06\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 1.06,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" Fax\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.48\r\n        },\r\n        {\r\n          \"word\": \" verschwunden.\",\r\n          \"start\": 1.48,\r\n          \"end\": 2.1\r\n        },\r\n        {\r\n          \"word\": \" Nehmen\",\r\n          \"start\": 2.4,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 2.8,\r\n          \"end\": 2.92\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 2.92,\r\n          \"end\": 3.04\r\n        },\r\n        {\r\n          \"word\": \" Kopie,\",\r\n          \"start\": 3.04,\r\n          \"end\": 3.46\r\n        },\r\n        {\r\n          \"word\": \" da\",\r\n          \"start\": 3.62,\r\n          \"end\": 3.7\r\n        },\r\n        {\r\n          \"word\": \" sieht\",\r\n          \"start\": 3.7,\r\n          \"end\": 3.86\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 3.86,\r\n          \"end\": 3.98\r\n        },\r\n        {\r\n          \"word\": \" wenigstens\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.5\r\n        },\r\n        {\r\n          \"word\": \" noch,\",\r\n          \"start\": 4.5,\r\n          \"end\": 4.7\r\n        },\r\n        {\r\n          \"word\": \" was\",\r\n          \"start\": 4.8,\r\n          \"end\": 5.02\r\n        },\r\n        {\r\n          \"word\": \" ursprünglich\",\r\n          \"start\": 5.02,\r\n          \"end\": 5.56\r\n        },\r\n        {\r\n          \"word\": \" gefehlt\",\r\n          \"start\": 5.56,\r\n          \"end\": 5.92\r\n        },\r\n        {\r\n          \"word\": \" hat.\",\r\n          \"start\": 5.92,\r\n          \"end\": 6.08\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Das\",\r\n      \"end\": 0.22\r\n    },\r\n    {\r\n      \"at\": 0.22,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Original\",\r\n      \"end\": 0.62\r\n    },\r\n    {\r\n      \"at\": 0.62,\r\n      \"charIndex\": 13,\r\n      \"word\": \"ist\",\r\n      \"end\": 0.92\r\n    },\r\n    {\r\n      \"at\": 0.92,\r\n      \"charIndex\": 17,\r\n      \"word\": \"auf\",\r\n      \"end\": 1.06\r\n    },\r\n    {\r\n      \"at\": 1.06,\r\n      \"charIndex\": 21,\r\n      \"word\": \"dem\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 25,\r\n      \"word\": \"Fax\",\r\n      \"end\": 1.48\r\n    },\r\n    {\r\n      \"at\": 1.48,\r\n      \"charIndex\": 29,\r\n      \"word\": \"verschwunden\",\r\n      \"end\": 2.1\r\n    },\r\n    {\r\n      \"at\": 2.4,\r\n      \"charIndex\": 43,\r\n      \"word\": \"Nehmen\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.8,\r\n      \"charIndex\": 50,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.92\r\n    },\r\n    {\r\n      \"at\": 2.92,\r\n      \"charIndex\": 54,\r\n      \"word\": \"die\",\r\n      \"end\": 3.04\r\n    },\r\n    {\r\n      \"at\": 3.04,\r\n      \"charIndex\": 58,\r\n      \"word\": \"Kopie\",\r\n      \"end\": 3.46\r\n    },\r\n    {\r\n      \"at\": 3.62,\r\n      \"charIndex\": 65,\r\n      \"word\": \"da\",\r\n      \"end\": 3.7\r\n    },\r\n    {\r\n      \"at\": 3.7,\r\n      \"charIndex\": 68,\r\n      \"word\": \"sieht\",\r\n      \"end\": 3.86\r\n    },\r\n    {\r\n      \"at\": 3.86,\r\n      \"charIndex\": 74,\r\n      \"word\": \"man\",\r\n      \"end\": 3.98\r\n    },\r\n    {\r\n      \"at\": 3.98,\r\n      \"charIndex\": 78,\r\n      \"word\": \"wenigstens\",\r\n      \"end\": 4.5\r\n    },\r\n    {\r\n      \"at\": 4.5,\r\n      \"charIndex\": 89,\r\n      \"word\": \"noch\",\r\n      \"end\": 4.7\r\n    },\r\n    {\r\n      \"at\": 4.8,\r\n      \"charIndex\": 95,\r\n      \"word\": \"was\",\r\n      \"end\": 5.02\r\n    },\r\n    {\r\n      \"at\": 5.02,\r\n      \"charIndex\": 99,\r\n      \"word\": \"ursprünglich\",\r\n      \"end\": 5.56\r\n    },\r\n    {\r\n      \"at\": 5.56,\r\n      \"charIndex\": 112,\r\n      \"word\": \"gefehlt\",\r\n      \"end\": 5.92\r\n    },\r\n    {\r\n      \"at\": 5.92,\r\n      \"charIndex\": 120,\r\n      \"word\": \"hat\",\r\n      \"end\": 6.08\r\n    }\r\n  ],\r\n  \"sha256\": \"5ef343c1aec93176473adf0700ab478703f4d76fd4aecc5485c23251e7b23c12\",\r\n  \"bytes\": 109868,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-norbert-faxrolle-02.mp3\"\r\n}\r\n",
+          "sha256": "f2f329913ea8fff674a800d430c87bc5bcdd76cfa1d656541b3a05e71365f1a5"
+        }
+      }
+    }
+  }
+}

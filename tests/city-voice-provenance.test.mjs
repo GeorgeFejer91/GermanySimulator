@@ -115,3 +115,32 @@ test('catalog-install failure restores accepted take, manifest and catalog and r
  try{fs.renameSync=(from,to)=>{if(to===f.catalogPath){injected=true;assert.equal(json(f.manifestPath).clips.length,4);throw Error('synthetic catalog-install failure')}return rename(from,to)};syncBuiltinESMExports();assert.throws(()=>f.admit(full),/synthetic catalog-install failure/)}finally{fs.renameSync=rename;syncBuiltinESMExports()}
  assert.equal(injected,true);assert.deepEqual(readFileSync(f.manifestPath),beforeManifest);assert.deepEqual(readFileSync(f.catalogPath),beforeCatalog);assert.deepEqual(readFileSync(resolve(f.game,f.clips[0].file)),beforeTake);for(const clip of f.clips.slice(1))assert.equal(existsSync(resolve(f.game,clip.file)),false);assert.equal(existsSync(f.catalogPath+'.city-admit.tmp'),false);
 });
+
+test('accepted compound cues preserve the original recognition receipt and observed time span',()=>{
+ const manifest=json(resolve(root,'assets/voices/city-dialogue/stadt-wolfgang-schulz-manifest.json'));
+ const clip=manifest.clips.find(row=>row.clipId==='stadt-wolfgang-schulz-01');
+ const proof=manifest.cityProvenance.takes[clip.clipId],encoded=JSON.parse(proof.encoded.text);
+ assert.equal(clip.asrLiteralWordExact,false);assert.deepEqual(clip.wordCues,[]);
+ assert.equal(encoded.asrLiteralWordExact,false);assert.deepEqual(encoded.wordCues,[]);
+ assert.deepEqual(curator.cityOrthographicCueProof(proof,manifest.cityProvenance.request),proof.orthographicCues);
+ const cues=JSON.parse(proof.orthographicCues.text).wordCues;
+ assert.equal(cues.length,18);assert.deepEqual(cues.find(row=>row.word==='Viertelstunde'),{at:.8,end:1.34,charIndex:21,word:'Viertelstunde'});
+ const window={};vm.runInNewContext(readFileSync(resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8'),{window});
+ const api=window.GermanySimulatorAudioText,path=api.recordedClip(clip.voiceId,clip.text);
+ assert.equal(path,'./'+clip.file);assert.equal(JSON.stringify(api.recordings[path].wordCues),JSON.stringify(cues));
+});
+
+test('compound timing cannot authorize a missing, altered or foreign supplement',()=>{
+ const manifest=json(resolve(root,'assets/voices/city-dialogue/stadt-wolfgang-schulz-manifest.json'));
+ const id='stadt-wolfgang-schulz-01';
+ for(const edit of [
+  proof=>delete proof.orthographicCues,
+  proof=>{const value=JSON.parse(proof.orthographicCues.text);value.wordCues[4].end+=.01;const text=JSON.stringify(value,null,2)+'\n';proof.orthographicCues={text,sha256:hash(text)}},
+  proof=>{const value=JSON.parse(proof.orthographicCues.text);value.clipId='stadt-wolfgang-schulz-02';const text=JSON.stringify(value,null,2)+'\n';proof.orthographicCues={text,sha256:hash(text)}}
+ ]){
+  const changed=structuredClone(manifest);edit(changed.cityProvenance.takes[id]);
+  assert.throws(()=>curator.cityRecordingsBlock(cast,[changed],root,root),/ASR|supplement drift/);
+ }
+ const text='Das ist besser.',reading={transcript:'Das is better.',words:[{word:'Das',start:0,end:.1},{word:'is',start:.1,end:.2},{word:'better',start:.2,end:.3}]};
+ assert.throws(()=>curator.alignCityCompoundCues(text,reading,1),/changed word/);
+});

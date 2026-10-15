@@ -326,6 +326,54 @@ function cityManifestAuthority(cast,manifest,sourceRoot=root){
  requireMatch(sameJson(Object.keys(manifest.cityProvenance.takes).sort(),manifest.clips.map(row=>row.clipId).sort()),'Missing/extra city take provenance');
  return {authored,request};
 }
+// One observed orthographic split, bound to its original genuine take. Never a
+// general joined-letter recognition exception; raw/encoded receipts stay intact.
+const cityCompoundCueAuthority={"clipId":"stadt-wolfgang-schulz-01","actorId":"city-wolfgang-schulz","voiceId":"stadt-wolfgang-schulz","profileId":"06c942339c3144298f6ce8ed7f09bf48","sourceSha256":"4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88","text":"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.","encodedSha256":"2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b","encodedReceiptSha256":"9bf1f952dada50cb2794843cc13770a7cbe4c18cdaf79297268403b5d4d89d57","rawSha256":"e1e7d12daec0d2a3e566371f65883df023355e8f3b612888bf5be171e0e48cfa","rawReceiptSha256":"3e6d822fa06cb7d33160f609f1b84553aa1925072f3b636527e69d9d883558be","requestSha256":"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6","selectedReadingIndex":0,"selectedReadingSha256":"cb4e13dc31227a1947d333962e4b59abbafe26a77da156eae8d1064b6fd5930a"};
+export function alignCityCompoundCues(text,reading,duration){
+ const source=[...text.matchAll(/[\p{L}\p{N}_]+/gu)],words=reading?.words;
+ requireMatch(source.length>0&&Array.isArray(words)&&words.length>0&&Number.isFinite(duration)&&duration>0,'Missing city compound source/timing');
+ const heard=[];let previousEnd=0;
+ for(const word of words){
+  const tokens=typeof word.word==='string'?[...word.word.matchAll(/[\p{L}\p{N}_]+/gu)]:[];
+  requireMatch(tokens.length===1&&Number.isFinite(word.start)&&Number.isFinite(word.end)&&word.start>=previousEnd&&word.end>word.start&&word.end<=duration,'Invalid observed city compound word/timing');
+  heard.push(tokens[0][0].toLowerCase());previousEnd=word.end;
+ }
+ const transcript=typeof reading.transcript==='string'?[...reading.transcript.matchAll(/[\p{L}\p{N}_]+/gu)].map(word=>word[0].toLowerCase()):[];
+ requireMatch(sameJson(transcript,heard),'City timed words differ from selected full transcript');
+ const mapping=[],wordCues=[];let cursor=0,merges=0;
+ for(const word of source){
+  const first=cursor,expected=word[0].toLowerCase();
+  if(heard[cursor]===expected)cursor++;
+  else{
+   requireMatch(expected==='viertelstunde'&&heard[cursor]==='viertel'&&heard[cursor+1]==='stunde'&&merges===0,'Unlisted city compound spelling or changed word');
+   cursor+=2;merges++;
+  }
+  mapping.push({sourceWordIndex:mapping.length,observedStart:first,observedEndExclusive:cursor});
+  wordCues.push({at:words[first].start,end:words[cursor-1].end,charIndex:word.index,word:word[0]});
+ }
+ requireMatch(cursor===words.length&&merges===1,'Incomplete/extra city compound words or missing authorized split');
+ return {mapping,wordCues};
+}
+export function cityOrthographicCueProof(proof,request){
+ const a=cityCompoundCueAuthority,encoded=citySnapshot(proof?.encoded,'compound encoded receipt'),raw=citySnapshot(proof?.raw,'compound raw receipt');
+ requireMatch(proof.encoded.sha256===a.encodedReceiptSha256&&proof.raw.sha256===a.rawReceiptSha256&&request?.sha256===a.requestSha256,'Foreign city compound receipt/request');
+ citySnapshot(request,'compound frozen request');
+ for(const key of ['clipId','actorId','voiceId','profileId','sourceSha256','text'])requireMatch(encoded[key]===a[key]&&raw[key]===a[key],`Foreign city compound identity: ${key}`);
+ requireMatch(encoded.sha256===a.encodedSha256&&encoded.rawSha256===a.rawSha256&&raw.rawSha256===a.rawSha256&&encoded.requestSha256===a.requestSha256&&raw.requestSha256===a.requestSha256,'Foreign city compound audio lineage');
+ requireMatch(encoded.authoringHelperSha256===cityAuthoringHelperSha256&&raw.authoringHelperSha256===cityAuthoringHelperSha256&&encoded.asrWordExact===true&&encoded.asrLiteralWordExact===false&&Array.isArray(encoded.wordCues)&&encoded.wordCues.length===0,'City compound original flags/cues drift');
+ const reading=encoded.asrReadings?.[a.selectedReadingIndex];
+ requireMatch(a.selectedReadingIndex===encoded.asrReadings?.length-1&&reading?.transcript===encoded.asr&&reading.beamSize===encoded.asrBeamSize&&textHash(JSON.stringify(reading))===a.selectedReadingSha256&&/^[a-f0-9]{64}$/.test(encoded.asrModelSha256),'Foreign city compound selected reading');
+ const aligned=alignCityCompoundCues(encoded.text,reading,encoded.durationSeconds);
+ const value={kind:'german-compound-spacing-cue-alignment-v1',clipId:a.clipId,encodedReceiptSha256:a.encodedReceiptSha256,rawReceiptSha256:a.rawReceiptSha256,requestSha256:a.requestSha256,encodedSha256:a.encodedSha256,sourceSha256:a.sourceSha256,selectedReadingIndex:a.selectedReadingIndex,selectedReadingSha256:a.selectedReadingSha256,asrModelSha256:encoded.asrModelSha256,rule:{source:'Viertelstunde',observed:['viertel','Stunde']},...aligned};
+ const text=JSON.stringify(value,null,2)+'\n';return {text,sha256:textHash(text)};
+}
+function verifiedCityOrthographicCues(proof,request){
+ if(!proof.orthographicCues)return null;
+ const supplied=citySnapshot(proof.orthographicCues,'compound cue supplement'),expected=cityOrthographicCueProof(proof,request);
+ requireMatch(sameJson(supplied,JSON.parse(expected.text)),'City compound cue supplement drift');
+ return supplied.wordCues;
+}
+
 function cityClipAuthority(cast,clip,proof,request,authored){
  const raw=citySnapshot(proof?.raw,'raw receipt'),encoded=citySnapshot(proof?.encoded,'encoded receipt'),job=authored.get(clip.clipId);
  requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)&&sameJson(raw[key],value)&&sameJson(encoded[key],value)),'Wrong city source/translation/owner');
@@ -336,14 +384,16 @@ function cityClipAuthority(cast,clip,proof,request,authored){
  requireMatch(!['rescueParts','deliveryEditing','benchmarkOnly','recognitionVerification','actualInferenceText','nativeCompletion'].some(key=>key in raw||key in encoded),'Unsupported city edited/substituted take');
  requireMatch(encoded.listening==='pending'&&clip.listening==='pending'&&!clip.listeningConfirmed&&!clip.listeningVerified&&!clip.approval?.listeningConfirmed&&!clip.approval?.listeningVerified,'City listening evidence is not supplied');
  requireMatch(encoded.sampleRateHz===48000&&encoded.channels===1&&encoded.bitrateBitsPerSecond===128000&&Number.isInteger(encoded.bytes)&&encoded.bytes>0&&Number.isFinite(encoded.durationSeconds)&&encoded.durationSeconds>0&&encoded.processing===null&&encoded.processingSha256===null,'Invalid city final encoding');
- requireMatch(encoded.asrDevice==='cpu'&&encoded.asrComputeType==='int8'&&['int8','int8_float32'].includes(encoded.asrEffectiveComputeType)&&encoded.asrLiteralWordExact===true&&Array.isArray(encoded.asrReadings)&&encoded.asrReadings.length>0&&encoded.asrReadings.every(row=>[1,5].includes(row.beamSize)&&typeof row.transcript==='string')&&encoded.asrReadings.at(-1).transcript===encoded.asr,'Missing final city ASR readings');
+ const orthographicCues=verifiedCityOrthographicCues(proof,request);
+ requireMatch(encoded.asrDevice==='cpu'&&encoded.asrComputeType==='int8'&&['int8','int8_float32'].includes(encoded.asrEffectiveComputeType)&&(encoded.asrLiteralWordExact===true||encoded.asrLiteralWordExact===false&&orthographicCues!==null)&&Array.isArray(encoded.asrReadings)&&encoded.asrReadings.length>0&&encoded.asrReadings.every(row=>[1,5].includes(row.beamSize)&&typeof row.transcript==='string')&&encoded.asrReadings.at(-1).transcript===encoded.asr,'Missing final city ASR readings');
  requireMatch(Object.entries(encoded).every(([key,value])=>sameJson(clip[key],value)),'City manifest differs from encoded receipt');
  const approval=clip.approval;
  requireMatch(sameJson(Object.keys(approval||{}).sort(),['clipId','date','encodedSha256','instruction','scope','status'])&&approval?.status==='user-approved'&&approval.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(approval.date)&&typeof approval.instruction==='string'&&approval.instruction.trim().length>0&&approval.clipId===clip.clipId&&approval.encodedSha256===clip.sha256,'Missing clip/hash-scoped city use authorization');
  requireMatch(clip.file===`assets/voices/city-dialogue/${clip.clipId}.mp3`&&Number.isFinite(clip.integratedLufs)&&Number.isFinite(clip.truePeakDbtp)&&clip.asrWordExact===true,'Invalid city public asset/levels');
- const expectedWords=[...clip.text.matchAll(/[\p{L}\p{N}_]+/gu)];let previousEnd=0,previousIndex=-1;
- requireMatch(Array.isArray(clip.wordCues)&&expectedWords.length>0&&clip.wordCues.length===expectedWords.length&&clip.wordCues.every((cue,index)=>{const valid=cue.word===expectedWords[index][0]&&cue.charIndex===expectedWords[index].index&&Object.keys(cue).length===4&&Number.isFinite(cue.at)&&Number.isFinite(cue.end)&&cue.at>=previousEnd&&cue.end>cue.at&&cue.end<=clip.durationSeconds+.05&&Number.isInteger(cue.charIndex)&&cue.charIndex>previousIndex&&typeof cue.word==='string'&&cue.word.length>0&&clip.text.slice(cue.charIndex,cue.charIndex+cue.word.length)===cue.word;previousEnd=cue.end;previousIndex=cue.charIndex;return valid}),'Invalid city final caption cues');
+ const wordCues=orthographicCues??clip.wordCues,expectedWords=[...clip.text.matchAll(/[\p{L}\p{N}_]+/gu)];let previousEnd=0,previousIndex=-1;
+ requireMatch(Array.isArray(wordCues)&&expectedWords.length>0&&wordCues.length===expectedWords.length&&wordCues.every((cue,index)=>{const valid=cue.word===expectedWords[index][0]&&cue.charIndex===expectedWords[index].index&&Object.keys(cue).length===4&&Number.isFinite(cue.at)&&Number.isFinite(cue.end)&&cue.at>=previousEnd&&cue.end>cue.at&&cue.end<=clip.durationSeconds+.05&&Number.isInteger(cue.charIndex)&&cue.charIndex>previousIndex&&typeof cue.word==='string'&&cue.word.length>0&&clip.text.slice(cue.charIndex,cue.charIndex+cue.word.length)===cue.word;previousEnd=cue.end;previousIndex=cue.charIndex;return valid}),'Invalid city final caption cues');
  fixedTakeAuthority(cast,clip);
+ return wordCues;
 }
 export function cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,sourceRoot=root){
  requireMatch(hash(authoringHelperPath)===cityAuthoringHelperSha256,'City authoring helper is not the reviewed producer');
@@ -353,7 +403,7 @@ export function cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,s
  const snapshot=relative=>{const text=readFileSync(privateFile(relative),'utf8');return{text,sha256:textHash(text)}};
  requireMatch(/^stadt-[a-z-]+$/.test(manifest.voiceId),'Unsafe city voice directory');
  const result=structuredClone(manifest);result.cityProvenance={request:snapshot(`${manifest.voiceId}/requests.json`),takes:{}};
- for(const clip of result.clips){requireMatch(new RegExp('^'+manifest.voiceId+'-0[1-4]$').test(clip.clipId),'Unsafe city clip ID');result.cityProvenance.takes[clip.clipId]={raw:snapshot(`${manifest.voiceId}/raw/${clip.clipId}.json`),encoded:snapshot(`${manifest.voiceId}/encoded/${clip.clipId}.json`)};}
+ for(const clip of result.clips){requireMatch(new RegExp('^'+manifest.voiceId+'-0[1-4]$').test(clip.clipId),'Unsafe city clip ID');result.cityProvenance.takes[clip.clipId]={raw:snapshot(`${manifest.voiceId}/raw/${clip.clipId}.json`),encoded:snapshot(`${manifest.voiceId}/encoded/${clip.clipId}.json`)};if(clip.asrLiteralWordExact===false){const proof=result.cityProvenance.takes[clip.clipId];proof.orthographicCues=cityOrthographicCueProof(proof,result.cityProvenance.request);}}
  const {authored}=cityManifestAuthority(cast,result,sourceRoot);
  for(const name of citySourceFiles.slice(0,2))requireMatch(JSON.parse(result.cityProvenance.request.text).sourceSha256[name]===hash(resolve(sourceRoot,name)),`City admission source changed: ${name}`);
  for(const clip of result.clips){const proof=result.cityProvenance.takes[clip.clipId];cityClipAuthority(cast,clip,proof,result.cityProvenance.request,authored);const raw=JSON.parse(proof.raw.text),encoded=JSON.parse(proof.encoded.text),mp3=privateFile(`${manifest.voiceId}/encoded/${clip.clipId}.mp3`);requireMatch(hash(privateFile(`${manifest.voiceId}/raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(mp3)===encoded.sha256&&readFileSync(mp3).length===encoded.bytes,'City private audio bytes drift');}
@@ -361,7 +411,7 @@ export function cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,s
 }
 export function cityRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root){
  const clips=[],seen=new Set();
- for(const manifest of manifests){const {authored}=cityManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate city clip across manifests');seen.add(clip.clipId);cityClipAuthority(cast,clip,manifest.cityProvenance.takes[clip.clipId],manifest.cityProvenance.request,authored);clips.push({...clip,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256})}}
+ for(const manifest of manifests){const {authored}=cityManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate city clip across manifests');seen.add(clip.clipId);const wordCues=cityClipAuthority(cast,clip,manifest.cityProvenance.takes[clip.clipId],manifest.cityProvenance.request,authored);clips.push({...clip,wordCues,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256})}}
  return fixedRecordingsBlock(cast,{clips},'city-dialogue',assetRoot);
 }
 const cityAdmissionPattern=/const cityAdmissionReceipts=Object\.freeze\((\{[^\n]*\})\);\n/;

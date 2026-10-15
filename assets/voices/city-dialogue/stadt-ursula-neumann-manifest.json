@@ -1,0 +1,672 @@
+{
+  "voiceId": "stadt-ursula-neumann",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-ursula-neumann-01",
+      "voiceId": "stadt-ursula-neumann",
+      "actorId": "city-ursula-neumann",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=0]",
+      "text": "Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.",
+      "english": "You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.",
+      "sourceSha256": "7a1499ef2823e0f1de6460b25edebcc660b4290022d38d9d6b566dfe8c725de1",
+      "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+      "referenceSha256": "1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659",
+      "referenceOriginalSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 200,
+        "eosReached": true,
+        "t3InferenceSeconds": 8.66,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87",
+      "profileJsonSha256": "4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d",
+      "rawSha256": "f0cd78ba146a8ed37a03337bd14aab3663b88cbcaa465b383bd26d9363baf54a",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.96,
+      "renderSeconds": 9.58,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "5bd2927872e147fc978f49fa8fd893d2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.14:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.04,
+      "truePeakDbtp": -2.84,
+      "asr": "Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.",
+          "transcribeSeconds": 10.34,
+          "words": [
+            {
+              "word": " Sie",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " stehen",
+              "start": 0.22,
+              "end": 0.54
+            },
+            {
+              "word": " genau",
+              "start": 0.54,
+              "end": 0.86
+            },
+            {
+              "word": " da,",
+              "start": 0.86,
+              "end": 1.1
+            },
+            {
+              "word": " wo",
+              "start": 1.26,
+              "end": 1.34
+            },
+            {
+              "word": " ich",
+              "start": 1.34,
+              "end": 1.5
+            },
+            {
+              "word": " vorbeigehen",
+              "start": 1.5,
+              "end": 2.14
+            },
+            {
+              "word": " wollte.",
+              "start": 2.14,
+              "end": 2.46
+            },
+            {
+              "word": " Nein,",
+              "start": 2.86,
+              "end": 3.34
+            },
+            {
+              "word": " noch",
+              "start": 3.58,
+              "end": 3.7
+            },
+            {
+              "word": " wollte",
+              "start": 3.7,
+              "end": 4
+            },
+            {
+              "word": " ich",
+              "start": 4,
+              "end": 4.18
+            },
+            {
+              "word": " nicht",
+              "start": 4.18,
+              "end": 4.4
+            },
+            {
+              "word": " vorbeigehen.",
+              "start": 4.4,
+              "end": 5.12
+            },
+            {
+              "word": " Ich",
+              "start": 5.3,
+              "end": 5.62
+            },
+            {
+              "word": " möchte",
+              "start": 5.62,
+              "end": 5.92
+            },
+            {
+              "word": " mir",
+              "start": 5.92,
+              "end": 6.1
+            },
+            {
+              "word": " das",
+              "start": 6.1,
+              "end": 6.34
+            },
+            {
+              "word": " aber",
+              "start": 6.34,
+              "end": 6.56
+            },
+            {
+              "word": " freihalten.",
+              "start": 6.56,
+              "end": 7.2
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "stehen",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 11,
+          "word": "genau",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 17,
+          "word": "da",
+          "end": 1.1
+        },
+        {
+          "at": 1.26,
+          "charIndex": 21,
+          "word": "wo",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 24,
+          "word": "ich",
+          "end": 1.5
+        },
+        {
+          "at": 1.5,
+          "charIndex": 28,
+          "word": "vorbeigehen",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 40,
+          "word": "wollte",
+          "end": 2.46
+        },
+        {
+          "at": 2.86,
+          "charIndex": 48,
+          "word": "Nein",
+          "end": 3.34
+        },
+        {
+          "at": 3.58,
+          "charIndex": 54,
+          "word": "noch",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 59,
+          "word": "wollte",
+          "end": 4
+        },
+        {
+          "at": 4,
+          "charIndex": 66,
+          "word": "ich",
+          "end": 4.18
+        },
+        {
+          "at": 4.18,
+          "charIndex": 70,
+          "word": "nicht",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 76,
+          "word": "vorbeigehen",
+          "end": 5.12
+        },
+        {
+          "at": 5.3,
+          "charIndex": 89,
+          "word": "Ich",
+          "end": 5.62
+        },
+        {
+          "at": 5.62,
+          "charIndex": 93,
+          "word": "möchte",
+          "end": 5.92
+        },
+        {
+          "at": 5.92,
+          "charIndex": 100,
+          "word": "mir",
+          "end": 6.1
+        },
+        {
+          "at": 6.1,
+          "charIndex": 104,
+          "word": "das",
+          "end": 6.34
+        },
+        {
+          "at": 6.34,
+          "charIndex": 108,
+          "word": "aber",
+          "end": 6.56
+        },
+        {
+          "at": 6.56,
+          "charIndex": 113,
+          "word": "freihalten",
+          "end": 7.2
+        }
+      ],
+      "sha256": "213b10e508925a519b9f9e913abac8a3f1283b221c3713b951b588310e835a1d",
+      "bytes": 128300,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-ursula-neumann-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-ursula-neumann-01",
+        "encodedSha256": "213b10e508925a519b9f9e913abac8a3f1283b221c3713b951b588310e835a1d"
+      }
+    },
+    {
+      "clipId": "stadt-ursula-neumann-02",
+      "voiceId": "stadt-ursula-neumann",
+      "actorId": "city-ursula-neumann",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=1]",
+      "text": "Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.",
+      "english": "It would be kind of you to step aside. Though I had left that space for the return journey.",
+      "sourceSha256": "1e10dfed374112c9c25efa875b17b5294326e949d8cab84e9016131d7805d59e",
+      "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+      "referenceSha256": "1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659",
+      "referenceOriginalSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.",
+      "decode": {
+        "maxSpeechTokens": 340,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 158,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.97,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87",
+      "profileJsonSha256": "4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d",
+      "rawSha256": "37f8c3dd90859d82b3aee2a3a6144f6cdd46bfbefe24eed474a15f1600464e58",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.28,
+      "renderSeconds": 7.91,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "5bd2927872e147fc978f49fa8fd893d2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.56:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.01,
+      "truePeakDbtp": -2.08,
+      "asr": "Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.",
+          "transcribeSeconds": 10.39,
+          "words": [
+            {
+              "word": " Ein",
+              "start": 0,
+              "end": 0.26
+            },
+            {
+              "word": " Schritt",
+              "start": 0.26,
+              "end": 0.52
+            },
+            {
+              "word": " zur",
+              "start": 0.52,
+              "end": 0.72
+            },
+            {
+              "word": " Seite",
+              "start": 0.72,
+              "end": 1.08
+            },
+            {
+              "word": " wäre",
+              "start": 1.08,
+              "end": 1.42
+            },
+            {
+              "word": " freundlich.",
+              "start": 1.42,
+              "end": 2.1
+            },
+            {
+              "word": " Dort",
+              "start": 2.46,
+              "end": 3.1
+            },
+            {
+              "word": " hatte",
+              "start": 3.1,
+              "end": 3.38
+            },
+            {
+              "word": " ich",
+              "start": 3.38,
+              "end": 3.54
+            },
+            {
+              "word": " allerdings",
+              "start": 3.54,
+              "end": 3.92
+            },
+            {
+              "word": " für",
+              "start": 3.92,
+              "end": 4.24
+            },
+            {
+              "word": " den",
+              "start": 4.24,
+              "end": 4.4
+            },
+            {
+              "word": " Rückweg",
+              "start": 4.4,
+              "end": 4.82
+            },
+            {
+              "word": " Platz",
+              "start": 4.82,
+              "end": 5.08
+            },
+            {
+              "word": " gelassen.",
+              "start": 5.08,
+              "end": 5.58
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ein",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "Schritt",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 12,
+          "word": "zur",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 16,
+          "word": "Seite",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 22,
+          "word": "wäre",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 27,
+          "word": "freundlich",
+          "end": 2.1
+        },
+        {
+          "at": 2.46,
+          "charIndex": 39,
+          "word": "Dort",
+          "end": 3.1
+        },
+        {
+          "at": 3.1,
+          "charIndex": 44,
+          "word": "hatte",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 50,
+          "word": "ich",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 54,
+          "word": "allerdings",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 65,
+          "word": "für",
+          "end": 4.24
+        },
+        {
+          "at": 4.24,
+          "charIndex": 69,
+          "word": "den",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 73,
+          "word": "Rückweg",
+          "end": 4.82
+        },
+        {
+          "at": 4.82,
+          "charIndex": 81,
+          "word": "Platz",
+          "end": 5.08
+        },
+        {
+          "at": 5.08,
+          "charIndex": 87,
+          "word": "gelassen",
+          "end": 5.58
+        }
+      ],
+      "sha256": "1d4d02e9abd65bdc33560f5e8599e2ab5621786a51e3c3a2d8816fb8da0b8bc7",
+      "bytes": 101420,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-ursula-neumann-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-ursula-neumann-02",
+        "encodedSha256": "1d4d02e9abd65bdc33560f5e8599e2ab5621786a51e3c3a2d8816fb8da0b8bc7"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-ursula-neumann-03",
+      "voiceId": "stadt-ursula-neumann",
+      "actorId": "city-ursula-neumann",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=berlin,slot=0]",
+      "text": "Sie stehen exactly da, wo ich vorbeigehen wollte. No, noch wollte ich nicht vorbei. Ich möchte keep that option clear.",
+      "english": "You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.",
+      "sourceSha256": "6a9503411ab322521df993bda5a3218dc42384f34e76acb36b1da67423b8621a",
+      "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+      "referenceSha256": "1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659",
+      "referenceOriginalSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-ursula-neumann-04",
+      "voiceId": "stadt-ursula-neumann",
+      "actorId": "city-ursula-neumann",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=berlin,slot=1]",
+      "text": "One step zur Seite wäre friendly. Dort hatte ich allerdings space für den Rückweg gelassen.",
+      "english": "It would be kind of you to step aside. Though I had left that space for the return journey.",
+      "sourceSha256": "1eba1d2cee70b46aeb32059801910299e3f1b5f040685538a061119d8e780386",
+      "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+      "referenceSha256": "1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659",
+      "referenceOriginalSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-ursula-neumann-01\",\r\n      \"voiceId\": \"stadt-ursula-neumann\",\r\n      \"actorId\": \"city-ursula-neumann\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n      \"english\": \"You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.\",\r\n      \"sourceSha256\": \"7a1499ef2823e0f1de6460b25edebcc660b4290022d38d9d6b566dfe8c725de1\",\r\n      \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n      \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n      \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ursula-neumann-02\",\r\n      \"voiceId\": \"stadt-ursula-neumann\",\r\n      \"actorId\": \"city-ursula-neumann\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n      \"english\": \"It would be kind of you to step aside. Though I had left that space for the return journey.\",\r\n      \"sourceSha256\": \"1e10dfed374112c9c25efa875b17b5294326e949d8cab84e9016131d7805d59e\",\r\n      \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n      \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n      \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ursula-neumann-03\",\r\n      \"voiceId\": \"stadt-ursula-neumann\",\r\n      \"actorId\": \"city-ursula-neumann\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Sie stehen exactly da, wo ich vorbeigehen wollte. No, noch wollte ich nicht vorbei. Ich möchte keep that option clear.\",\r\n      \"english\": \"You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.\",\r\n      \"sourceSha256\": \"6a9503411ab322521df993bda5a3218dc42384f34e76acb36b1da67423b8621a\",\r\n      \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n      \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n      \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-ursula-neumann-04\",\r\n      \"voiceId\": \"stadt-ursula-neumann\",\r\n      \"actorId\": \"city-ursula-neumann\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"One step zur Seite wäre friendly. Dort hatte ich allerdings space für den Rückweg gelassen.\",\r\n      \"english\": \"It would be kind of you to step aside. Though I had left that space for the return journey.\",\r\n      \"sourceSha256\": \"1eba1d2cee70b46aeb32059801910299e3f1b5f040685538a061119d8e780386\",\r\n      \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n      \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n      \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87"
+    },
+    "takes": {
+      "stadt-ursula-neumann-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-ursula-neumann-01\",\r\n  \"voiceId\": \"stadt-ursula-neumann\",\r\n  \"actorId\": \"city-ursula-neumann\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n  \"english\": \"You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.\",\r\n  \"sourceSha256\": \"7a1499ef2823e0f1de6460b25edebcc660b4290022d38d9d6b566dfe8c725de1\",\r\n  \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n  \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n  \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 200,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.66,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87\",\r\n  \"profileJsonSha256\": \"4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d\",\r\n  \"rawSha256\": \"f0cd78ba146a8ed37a03337bd14aab3663b88cbcaa465b383bd26d9363baf54a\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.96,\r\n  \"renderSeconds\": 9.58,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "ac8edc47ebab9942da195c4716dd52fa19e8106ff843ba3981e3c8ea72d2a5c8"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-ursula-neumann-01\",\r\n  \"voiceId\": \"stadt-ursula-neumann\",\r\n  \"actorId\": \"city-ursula-neumann\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n  \"english\": \"You are standing exactly where I wanted to pass. No, I did not want to pass yet. But I want to keep that option clear.\",\r\n  \"sourceSha256\": \"7a1499ef2823e0f1de6460b25edebcc660b4290022d38d9d6b566dfe8c725de1\",\r\n  \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n  \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n  \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 200,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.66,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87\",\r\n  \"profileJsonSha256\": \"4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d\",\r\n  \"rawSha256\": \"f0cd78ba146a8ed37a03337bd14aab3663b88cbcaa465b383bd26d9363baf54a\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.96,\r\n  \"renderSeconds\": 9.58,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.14:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.04,\r\n  \"truePeakDbtp\": -2.84,\r\n  \"asr\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.\",\r\n      \"transcribeSeconds\": 10.34,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.22\r\n        },\r\n        {\r\n          \"word\": \" stehen\",\r\n          \"start\": 0.22,\r\n          \"end\": 0.54\r\n        },\r\n        {\r\n          \"word\": \" genau\",\r\n          \"start\": 0.54,\r\n          \"end\": 0.86\r\n        },\r\n        {\r\n          \"word\": \" da,\",\r\n          \"start\": 0.86,\r\n          \"end\": 1.1\r\n        },\r\n        {\r\n          \"word\": \" wo\",\r\n          \"start\": 1.26,\r\n          \"end\": 1.34\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 1.34,\r\n          \"end\": 1.5\r\n        },\r\n        {\r\n          \"word\": \" vorbeigehen\",\r\n          \"start\": 1.5,\r\n          \"end\": 2.14\r\n        },\r\n        {\r\n          \"word\": \" wollte.\",\r\n          \"start\": 2.14,\r\n          \"end\": 2.46\r\n        },\r\n        {\r\n          \"word\": \" Nein,\",\r\n          \"start\": 2.86,\r\n          \"end\": 3.34\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 3.58,\r\n          \"end\": 3.7\r\n        },\r\n        {\r\n          \"word\": \" wollte\",\r\n          \"start\": 3.7,\r\n          \"end\": 4.0\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.0,\r\n          \"end\": 4.18\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 4.18,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" vorbeigehen.\",\r\n          \"start\": 4.4,\r\n          \"end\": 5.12\r\n        },\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 5.3,\r\n          \"end\": 5.62\r\n        },\r\n        {\r\n          \"word\": \" möchte\",\r\n          \"start\": 5.62,\r\n          \"end\": 5.92\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 5.92,\r\n          \"end\": 6.1\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 6.1,\r\n          \"end\": 6.34\r\n        },\r\n        {\r\n          \"word\": \" aber\",\r\n          \"start\": 6.34,\r\n          \"end\": 6.56\r\n        },\r\n        {\r\n          \"word\": \" freihalten.\",\r\n          \"start\": 6.56,\r\n          \"end\": 7.2\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.22\r\n    },\r\n    {\r\n      \"at\": 0.22,\r\n      \"charIndex\": 4,\r\n      \"word\": \"stehen\",\r\n      \"end\": 0.54\r\n    },\r\n    {\r\n      \"at\": 0.54,\r\n      \"charIndex\": 11,\r\n      \"word\": \"genau\",\r\n      \"end\": 0.86\r\n    },\r\n    {\r\n      \"at\": 0.86,\r\n      \"charIndex\": 17,\r\n      \"word\": \"da\",\r\n      \"end\": 1.1\r\n    },\r\n    {\r\n      \"at\": 1.26,\r\n      \"charIndex\": 21,\r\n      \"word\": \"wo\",\r\n      \"end\": 1.34\r\n    },\r\n    {\r\n      \"at\": 1.34,\r\n      \"charIndex\": 24,\r\n      \"word\": \"ich\",\r\n      \"end\": 1.5\r\n    },\r\n    {\r\n      \"at\": 1.5,\r\n      \"charIndex\": 28,\r\n      \"word\": \"vorbeigehen\",\r\n      \"end\": 2.14\r\n    },\r\n    {\r\n      \"at\": 2.14,\r\n      \"charIndex\": 40,\r\n      \"word\": \"wollte\",\r\n      \"end\": 2.46\r\n    },\r\n    {\r\n      \"at\": 2.86,\r\n      \"charIndex\": 48,\r\n      \"word\": \"Nein\",\r\n      \"end\": 3.34\r\n    },\r\n    {\r\n      \"at\": 3.58,\r\n      \"charIndex\": 54,\r\n      \"word\": \"noch\",\r\n      \"end\": 3.7\r\n    },\r\n    {\r\n      \"at\": 3.7,\r\n      \"charIndex\": 59,\r\n      \"word\": \"wollte\",\r\n      \"end\": 4.0\r\n    },\r\n    {\r\n      \"at\": 4.0,\r\n      \"charIndex\": 66,\r\n      \"word\": \"ich\",\r\n      \"end\": 4.18\r\n    },\r\n    {\r\n      \"at\": 4.18,\r\n      \"charIndex\": 70,\r\n      \"word\": \"nicht\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.4,\r\n      \"charIndex\": 76,\r\n      \"word\": \"vorbeigehen\",\r\n      \"end\": 5.12\r\n    },\r\n    {\r\n      \"at\": 5.3,\r\n      \"charIndex\": 89,\r\n      \"word\": \"Ich\",\r\n      \"end\": 5.62\r\n    },\r\n    {\r\n      \"at\": 5.62,\r\n      \"charIndex\": 93,\r\n      \"word\": \"möchte\",\r\n      \"end\": 5.92\r\n    },\r\n    {\r\n      \"at\": 5.92,\r\n      \"charIndex\": 100,\r\n      \"word\": \"mir\",\r\n      \"end\": 6.1\r\n    },\r\n    {\r\n      \"at\": 6.1,\r\n      \"charIndex\": 104,\r\n      \"word\": \"das\",\r\n      \"end\": 6.34\r\n    },\r\n    {\r\n      \"at\": 6.34,\r\n      \"charIndex\": 108,\r\n      \"word\": \"aber\",\r\n      \"end\": 6.56\r\n    },\r\n    {\r\n      \"at\": 6.56,\r\n      \"charIndex\": 113,\r\n      \"word\": \"freihalten\",\r\n      \"end\": 7.2\r\n    }\r\n  ],\r\n  \"sha256\": \"213b10e508925a519b9f9e913abac8a3f1283b221c3713b951b588310e835a1d\",\r\n  \"bytes\": 128300,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-ursula-neumann-01.mp3\"\r\n}\r\n",
+          "sha256": "f579a397d674949fde917340b2fba7533dcf341f085a9d4b84e53272dba05af0"
+        }
+      },
+      "stadt-ursula-neumann-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-ursula-neumann-02\",\r\n  \"voiceId\": \"stadt-ursula-neumann\",\r\n  \"actorId\": \"city-ursula-neumann\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n  \"english\": \"It would be kind of you to step aside. Though I had left that space for the return journey.\",\r\n  \"sourceSha256\": \"1e10dfed374112c9c25efa875b17b5294326e949d8cab84e9016131d7805d59e\",\r\n  \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n  \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n  \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 158,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.97,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87\",\r\n  \"profileJsonSha256\": \"4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d\",\r\n  \"rawSha256\": \"37f8c3dd90859d82b3aee2a3a6144f6cdd46bfbefe24eed474a15f1600464e58\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.28,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "4f3655bfcd9a51da99b2e3fb4569aa5c245b581dc3b20872d451de88601dafa6"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-ursula-neumann-02\",\r\n  \"voiceId\": \"stadt-ursula-neumann\",\r\n  \"actorId\": \"city-ursula-neumann\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-ursula-neumann].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n  \"english\": \"It would be kind of you to step aside. Though I had left that space for the return journey.\",\r\n  \"sourceSha256\": \"1e10dfed374112c9c25efa875b17b5294326e949d8cab84e9016131d7805d59e\",\r\n  \"profileId\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n  \"referenceSha256\": \"1583c3cd7bae8b59c3de97fcd97a583342572c74d2fac39ab77afdb8a5185659\",\r\n  \"referenceOriginalSha256\": \"23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 340,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 158,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.97,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"3216fa3db4dea0b5537164ec6b892da6f0b7ec8ed226ba150803dd7615279b87\",\r\n  \"profileJsonSha256\": \"4b5976bcd5f33e052c9b887a303cd04f2b909bdabd61d046c63d11436e5d5d1d\",\r\n  \"rawSha256\": \"37f8c3dd90859d82b3aee2a3a6144f6cdd46bfbefe24eed474a15f1600464e58\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.28,\r\n  \"renderSeconds\": 7.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"5bd2927872e147fc978f49fa8fd893d2\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-17.56:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 2\r\n  },\r\n  \"integratedLufs\": -18.01,\r\n  \"truePeakDbtp\": -2.08,\r\n  \"asr\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen.\",\r\n      \"transcribeSeconds\": 10.39,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ein\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.26\r\n        },\r\n        {\r\n          \"word\": \" Schritt\",\r\n          \"start\": 0.26,\r\n          \"end\": 0.52\r\n        },\r\n        {\r\n          \"word\": \" zur\",\r\n          \"start\": 0.52,\r\n          \"end\": 0.72\r\n        },\r\n        {\r\n          \"word\": \" Seite\",\r\n          \"start\": 0.72,\r\n          \"end\": 1.08\r\n        },\r\n        {\r\n          \"word\": \" wäre\",\r\n          \"start\": 1.08,\r\n          \"end\": 1.42\r\n        },\r\n        {\r\n          \"word\": \" freundlich.\",\r\n          \"start\": 1.42,\r\n          \"end\": 2.1\r\n        },\r\n        {\r\n          \"word\": \" Dort\",\r\n          \"start\": 2.46,\r\n          \"end\": 3.1\r\n        },\r\n        {\r\n          \"word\": \" hatte\",\r\n          \"start\": 3.1,\r\n          \"end\": 3.38\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 3.38,\r\n          \"end\": 3.54\r\n        },\r\n        {\r\n          \"word\": \" allerdings\",\r\n          \"start\": 3.54,\r\n          \"end\": 3.92\r\n        },\r\n        {\r\n          \"word\": \" für\",\r\n          \"start\": 3.92,\r\n          \"end\": 4.24\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 4.24,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" Rückweg\",\r\n          \"start\": 4.4,\r\n          \"end\": 4.82\r\n        },\r\n        {\r\n          \"word\": \" Platz\",\r\n          \"start\": 4.82,\r\n          \"end\": 5.08\r\n        },\r\n        {\r\n          \"word\": \" gelassen.\",\r\n          \"start\": 5.08,\r\n          \"end\": 5.58\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ein\",\r\n      \"end\": 0.26\r\n    },\r\n    {\r\n      \"at\": 0.26,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Schritt\",\r\n      \"end\": 0.52\r\n    },\r\n    {\r\n      \"at\": 0.52,\r\n      \"charIndex\": 12,\r\n      \"word\": \"zur\",\r\n      \"end\": 0.72\r\n    },\r\n    {\r\n      \"at\": 0.72,\r\n      \"charIndex\": 16,\r\n      \"word\": \"Seite\",\r\n      \"end\": 1.08\r\n    },\r\n    {\r\n      \"at\": 1.08,\r\n      \"charIndex\": 22,\r\n      \"word\": \"wäre\",\r\n      \"end\": 1.42\r\n    },\r\n    {\r\n      \"at\": 1.42,\r\n      \"charIndex\": 27,\r\n      \"word\": \"freundlich\",\r\n      \"end\": 2.1\r\n    },\r\n    {\r\n      \"at\": 2.46,\r\n      \"charIndex\": 39,\r\n      \"word\": \"Dort\",\r\n      \"end\": 3.1\r\n    },\r\n    {\r\n      \"at\": 3.1,\r\n      \"charIndex\": 44,\r\n      \"word\": \"hatte\",\r\n      \"end\": 3.38\r\n    },\r\n    {\r\n      \"at\": 3.38,\r\n      \"charIndex\": 50,\r\n      \"word\": \"ich\",\r\n      \"end\": 3.54\r\n    },\r\n    {\r\n      \"at\": 3.54,\r\n      \"charIndex\": 54,\r\n      \"word\": \"allerdings\",\r\n      \"end\": 3.92\r\n    },\r\n    {\r\n      \"at\": 3.92,\r\n      \"charIndex\": 65,\r\n      \"word\": \"für\",\r\n      \"end\": 4.24\r\n    },\r\n    {\r\n      \"at\": 4.24,\r\n      \"charIndex\": 69,\r\n      \"word\": \"den\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.4,\r\n      \"charIndex\": 73,\r\n      \"word\": \"Rückweg\",\r\n      \"end\": 4.82\r\n    },\r\n    {\r\n      \"at\": 4.82,\r\n      \"charIndex\": 81,\r\n      \"word\": \"Platz\",\r\n      \"end\": 5.08\r\n    },\r\n    {\r\n      \"at\": 5.08,\r\n      \"charIndex\": 87,\r\n      \"word\": \"gelassen\",\r\n      \"end\": 5.58\r\n    }\r\n  ],\r\n  \"sha256\": \"1d4d02e9abd65bdc33560f5e8599e2ab5621786a51e3c3a2d8816fb8da0b8bc7\",\r\n  \"bytes\": 101420,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-ursula-neumann-02.mp3\"\r\n}\r\n",
+          "sha256": "4be34607277db34225bf0fb285180f0f3260321305bfe3a5d9baa1e69dc38e7c"
+        }
+      }
+    }
+  }
+}

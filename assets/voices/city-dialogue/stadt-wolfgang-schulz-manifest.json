@@ -1,0 +1,924 @@
+{
+  "voiceId": "stadt-wolfgang-schulz",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-wolfgang-schulz-01",
+      "voiceId": "stadt-wolfgang-schulz",
+      "actorId": "city-wolfgang-schulz",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=0]",
+      "text": "Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.",
+      "english": "I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.",
+      "sourceSha256": "4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88",
+      "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+      "referenceSha256": "c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77",
+      "referenceOriginalSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.",
+      "decode": {
+        "maxSpeechTokens": 376,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 140,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.73,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6",
+      "profileJsonSha256": "0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590",
+      "rawSha256": "e1e7d12daec0d2a3e566371f65883df023355e8f3b612888bf5be171e0e48cfa",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.56,
+      "renderSeconds": 6.61,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "06c942339c3144298f6ce8ed7f09bf48",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.5205475297324957,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 4
+      },
+      "integratedLufs": -18.13,
+      "truePeakDbtp": -2.51,
+      "asr": "Ich komme immer eine viertel Stunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": false,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich komme immer eine viertel Stunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.",
+          "transcribeSeconds": 10.19,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " komme",
+              "start": 0.18,
+              "end": 0.38
+            },
+            {
+              "word": " immer",
+              "start": 0.38,
+              "end": 0.6
+            },
+            {
+              "word": " eine",
+              "start": 0.6,
+              "end": 0.8
+            },
+            {
+              "word": " viertel",
+              "start": 0.8,
+              "end": 1.14
+            },
+            {
+              "word": " Stunde",
+              "start": 1.14,
+              "end": 1.34
+            },
+            {
+              "word": " zu",
+              "start": 1.34,
+              "end": 1.6
+            },
+            {
+              "word": " früh.",
+              "start": 1.6,
+              "end": 1.86
+            },
+            {
+              "word": " Dann",
+              "start": 2.06,
+              "end": 2.34
+            },
+            {
+              "word": " bin",
+              "start": 2.34,
+              "end": 2.48
+            },
+            {
+              "word": " ich",
+              "start": 2.48,
+              "end": 2.62
+            },
+            {
+              "word": " pünktlich,",
+              "start": 2.62,
+              "end": 3.14
+            },
+            {
+              "word": " wenn",
+              "start": 3.24,
+              "end": 3.3
+            },
+            {
+              "word": " mir",
+              "start": 3.3,
+              "end": 3.44
+            },
+            {
+              "word": " einfällt,",
+              "start": 3.44,
+              "end": 3.9
+            },
+            {
+              "word": " was",
+              "start": 3.98,
+              "end": 4.06
+            },
+            {
+              "word": " ich",
+              "start": 4.06,
+              "end": 4.18
+            },
+            {
+              "word": " vergessen",
+              "start": 4.18,
+              "end": 4.56
+            },
+            {
+              "word": " habe.",
+              "start": 4.56,
+              "end": 4.92
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [],
+      "sha256": "2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b",
+      "bytes": 89900,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-wolfgang-schulz-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the named encoded bytes for existing genuine-proof admission, including Wolfgang01 only with its independently reviewed finite compound-spacing cue supplement. Original recognition flags and receipts remain unchanged; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-wolfgang-schulz-01",
+        "encodedSha256": "2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b"
+      }
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-02",
+      "voiceId": "stadt-wolfgang-schulz",
+      "actorId": "city-wolfgang-schulz",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=1]",
+      "text": "Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.",
+      "english": "I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.",
+      "sourceSha256": "a48da41d5e8b789ee5a7176d551ecc7930e6e3f544859cee750f3853d30cd5bf",
+      "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+      "referenceSha256": "c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77",
+      "referenceOriginalSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 149,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.36,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6",
+      "profileJsonSha256": "0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590",
+      "rawSha256": "658043bbcb36598fa5f5cfcbbcfa416e09b598da274a18cdc2270ce43ead5d03",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.92,
+      "renderSeconds": 7.19,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "06c942339c3144298f6ce8ed7f09bf48",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.169999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.18,
+      "truePeakDbtp": -2.22,
+      "asr": "Spontan geht bei mir nur mit Termin, sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Spontan geht bei mir nur mit Termin, sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.",
+          "transcribeSeconds": 9.86,
+          "words": [
+            {
+              "word": " Spontan",
+              "start": 0,
+              "end": 0.7
+            },
+            {
+              "word": " geht",
+              "start": 0.7,
+              "end": 0.86
+            },
+            {
+              "word": " bei",
+              "start": 0.86,
+              "end": 1.04
+            },
+            {
+              "word": " mir",
+              "start": 1.04,
+              "end": 1.2
+            },
+            {
+              "word": " nur",
+              "start": 1.2,
+              "end": 1.34
+            },
+            {
+              "word": " mit",
+              "start": 1.34,
+              "end": 1.52
+            },
+            {
+              "word": " Termin,",
+              "start": 1.52,
+              "end": 1.92
+            },
+            {
+              "word": " sonst",
+              "start": 2.18,
+              "end": 2.36
+            },
+            {
+              "word": " weiß",
+              "start": 2.36,
+              "end": 2.6
+            },
+            {
+              "word": " ich",
+              "start": 2.6,
+              "end": 2.72
+            },
+            {
+              "word": " vorher",
+              "start": 2.72,
+              "end": 2.94
+            },
+            {
+              "word": " gar",
+              "start": 2.94,
+              "end": 3.16
+            },
+            {
+              "word": " nicht,",
+              "start": 3.16,
+              "end": 3.4
+            },
+            {
+              "word": " wie",
+              "start": 3.5,
+              "end": 3.56
+            },
+            {
+              "word": " lange",
+              "start": 3.56,
+              "end": 3.74
+            },
+            {
+              "word": " ich",
+              "start": 3.74,
+              "end": 3.9
+            },
+            {
+              "word": " offen",
+              "start": 3.9,
+              "end": 4.1
+            },
+            {
+              "word": " für",
+              "start": 4.1,
+              "end": 4.26
+            },
+            {
+              "word": " Überraschungen",
+              "start": 4.26,
+              "end": 4.82
+            },
+            {
+              "word": " sein",
+              "start": 4.82,
+              "end": 5.1
+            },
+            {
+              "word": " soll.",
+              "start": 5.1,
+              "end": 5.34
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Spontan",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 8,
+          "word": "geht",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 13,
+          "word": "bei",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 17,
+          "word": "mir",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 21,
+          "word": "nur",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 25,
+          "word": "mit",
+          "end": 1.52
+        },
+        {
+          "at": 1.52,
+          "charIndex": 29,
+          "word": "Termin",
+          "end": 1.92
+        },
+        {
+          "at": 2.18,
+          "charIndex": 37,
+          "word": "Sonst",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 43,
+          "word": "weiß",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 48,
+          "word": "ich",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 52,
+          "word": "vorher",
+          "end": 2.94
+        },
+        {
+          "at": 2.94,
+          "charIndex": 59,
+          "word": "gar",
+          "end": 3.16
+        },
+        {
+          "at": 3.16,
+          "charIndex": 63,
+          "word": "nicht",
+          "end": 3.4
+        },
+        {
+          "at": 3.5,
+          "charIndex": 70,
+          "word": "wie",
+          "end": 3.56
+        },
+        {
+          "at": 3.56,
+          "charIndex": 74,
+          "word": "lange",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 80,
+          "word": "ich",
+          "end": 3.9
+        },
+        {
+          "at": 3.9,
+          "charIndex": 84,
+          "word": "offen",
+          "end": 4.1
+        },
+        {
+          "at": 4.1,
+          "charIndex": 90,
+          "word": "für",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 94,
+          "word": "Überraschungen",
+          "end": 4.82
+        },
+        {
+          "at": 4.82,
+          "charIndex": 109,
+          "word": "sein",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 114,
+          "word": "soll",
+          "end": 5.34
+        }
+      ],
+      "sha256": "5bf496d4083b6e5b83c94ff0f763aa4584e03334aa9e3c125ecedb8de4e0a584",
+      "bytes": 95660,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-wolfgang-schulz-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the named encoded bytes for existing genuine-proof admission, including Wolfgang01 only with its independently reviewed finite compound-spacing cue supplement. Original recognition flags and receipts remain unchanged; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-wolfgang-schulz-02",
+        "encodedSha256": "5bf496d4083b6e5b83c94ff0f763aa4584e03334aa9e3c125ecedb8de4e0a584"
+      }
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-03",
+      "voiceId": "stadt-wolfgang-schulz",
+      "actorId": "city-wolfgang-schulz",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=0]",
+      "text": "Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.",
+      "english": "I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.",
+      "sourceSha256": "bee797d2f6363beb56bfb1644323896452354782068c023bc2509b2492ac38b7",
+      "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+      "referenceSha256": "c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77",
+      "referenceOriginalSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 140,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.48,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6",
+      "profileJsonSha256": "0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590",
+      "rawSha256": "93a6af9547744056421f1a5e612b0c48711a4cd44c53309b97e94365fa2ff4f9",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.56,
+      "renderSeconds": 6.45,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "06c942339c3144298f6ce8ed7f09bf48",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.03:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.2,
+      "asr": "Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.",
+          "transcribeSeconds": 10.58,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " komme",
+              "start": 0.18,
+              "end": 0.4
+            },
+            {
+              "word": " always",
+              "start": 0.4,
+              "end": 0.68
+            },
+            {
+              "word": " eine",
+              "start": 0.68,
+              "end": 0.9
+            },
+            {
+              "word": " Viertelstunde",
+              "start": 0.9,
+              "end": 1.48
+            },
+            {
+              "word": " too",
+              "start": 1.48,
+              "end": 1.66
+            },
+            {
+              "word": " early.",
+              "start": 1.66,
+              "end": 2
+            },
+            {
+              "word": " Dann",
+              "start": 2.22,
+              "end": 2.56
+            },
+            {
+              "word": " bin",
+              "start": 2.56,
+              "end": 2.68
+            },
+            {
+              "word": " ich",
+              "start": 2.68,
+              "end": 2.82
+            },
+            {
+              "word": " on",
+              "start": 2.82,
+              "end": 2.96
+            },
+            {
+              "word": " time,",
+              "start": 2.96,
+              "end": 3.2
+            },
+            {
+              "word": " wenn",
+              "start": 3.3,
+              "end": 3.38
+            },
+            {
+              "word": " mir",
+              "start": 3.38,
+              "end": 3.52
+            },
+            {
+              "word": " einfällt,",
+              "start": 3.52,
+              "end": 3.96
+            },
+            {
+              "word": " was",
+              "start": 4,
+              "end": 4.12
+            },
+            {
+              "word": " ich",
+              "start": 4.12,
+              "end": 4.24
+            },
+            {
+              "word": " vergessen",
+              "start": 4.24,
+              "end": 4.6
+            },
+            {
+              "word": " habe.",
+              "start": 4.6,
+              "end": 4.94
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "komme",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 10,
+          "word": "always",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 17,
+          "word": "eine",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 22,
+          "word": "Viertelstunde",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 36,
+          "word": "too",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 40,
+          "word": "early",
+          "end": 2
+        },
+        {
+          "at": 2.22,
+          "charIndex": 47,
+          "word": "Dann",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 52,
+          "word": "bin",
+          "end": 2.68
+        },
+        {
+          "at": 2.68,
+          "charIndex": 56,
+          "word": "ich",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 60,
+          "word": "on",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 63,
+          "word": "time",
+          "end": 3.2
+        },
+        {
+          "at": 3.3,
+          "charIndex": 69,
+          "word": "wenn",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 74,
+          "word": "mir",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 78,
+          "word": "einfällt",
+          "end": 3.96
+        },
+        {
+          "at": 4,
+          "charIndex": 88,
+          "word": "was",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 92,
+          "word": "ich",
+          "end": 4.24
+        },
+        {
+          "at": 4.24,
+          "charIndex": 96,
+          "word": "vergessen",
+          "end": 4.6
+        },
+        {
+          "at": 4.6,
+          "charIndex": 106,
+          "word": "habe",
+          "end": 4.94
+        }
+      ],
+      "sha256": "1ac0e37cf1f48e9c0eb3837af18a7d6579337f4d08793e03aeaf9db5168f85ce",
+      "bytes": 89900,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-wolfgang-schulz-03.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the named encoded bytes for existing genuine-proof admission, including Wolfgang01 only with its independently reviewed finite compound-spacing cue supplement. Original recognition flags and receipts remain unchanged; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-wolfgang-schulz-03",
+        "encodedSha256": "1ac0e37cf1f48e9c0eb3837af18a7d6579337f4d08793e03aeaf9db5168f85ce"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-wolfgang-schulz-04",
+      "voiceId": "stadt-wolfgang-schulz",
+      "actorId": "city-wolfgang-schulz",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=1]",
+      "text": "Spontaneous geht bei mir nur mit Termin. Otherwise weiß ich vorher gar nicht, how long ich open für Überraschungen sein soll.",
+      "english": "I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.",
+      "sourceSha256": "d3a631a06932764e813f89438f0454077bfa0ba707c186bc675792479d2fd61f",
+      "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+      "referenceSha256": "c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77",
+      "referenceOriginalSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-wolfgang-schulz-01\",\r\n      \"voiceId\": \"stadt-wolfgang-schulz\",\r\n      \"actorId\": \"city-wolfgang-schulz\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n      \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n      \"sourceSha256\": \"4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88\",\r\n      \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n      \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n      \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-wolfgang-schulz-02\",\r\n      \"voiceId\": \"stadt-wolfgang-schulz\",\r\n      \"actorId\": \"city-wolfgang-schulz\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n      \"english\": \"I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.\",\r\n      \"sourceSha256\": \"a48da41d5e8b789ee5a7176d551ecc7930e6e3f544859cee750f3853d30cd5bf\",\r\n      \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n      \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n      \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-wolfgang-schulz-03\",\r\n      \"voiceId\": \"stadt-wolfgang-schulz\",\r\n      \"actorId\": \"city-wolfgang-schulz\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n      \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n      \"sourceSha256\": \"bee797d2f6363beb56bfb1644323896452354782068c023bc2509b2492ac38b7\",\r\n      \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n      \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n      \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-wolfgang-schulz-04\",\r\n      \"voiceId\": \"stadt-wolfgang-schulz\",\r\n      \"actorId\": \"city-wolfgang-schulz\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Spontaneous geht bei mir nur mit Termin. Otherwise weiß ich vorher gar nicht, how long ich open für Überraschungen sein soll.\",\r\n      \"english\": \"I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.\",\r\n      \"sourceSha256\": \"d3a631a06932764e813f89438f0454077bfa0ba707c186bc675792479d2fd61f\",\r\n      \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n      \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n      \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6"
+    },
+    "takes": {
+      "stadt-wolfgang-schulz-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-01\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n  \"sourceSha256\": \"4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.73,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"e1e7d12daec0d2a3e566371f65883df023355e8f3b612888bf5be171e0e48cfa\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.56,\r\n  \"renderSeconds\": 6.61,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "3e6d822fa06cb7d33160f609f1b84553aa1925072f3b636527e69d9d883558be"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-01\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n  \"sourceSha256\": \"4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 376,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.73,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"e1e7d12daec0d2a3e566371f65883df023355e8f3b612888bf5be171e0e48cfa\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.56,\r\n  \"renderSeconds\": 6.61,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"volume=1.5205475297324957,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.13,\r\n  \"truePeakDbtp\": -2.51,\r\n  \"asr\": \"Ich komme immer eine viertel Stunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": false,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich komme immer eine viertel Stunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.\",\r\n      \"transcribeSeconds\": 10.19,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" komme\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.38\r\n        },\r\n        {\r\n          \"word\": \" immer\",\r\n          \"start\": 0.38,\r\n          \"end\": 0.6\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 0.6,\r\n          \"end\": 0.8\r\n        },\r\n        {\r\n          \"word\": \" viertel\",\r\n          \"start\": 0.8,\r\n          \"end\": 1.14\r\n        },\r\n        {\r\n          \"word\": \" Stunde\",\r\n          \"start\": 1.14,\r\n          \"end\": 1.34\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 1.34,\r\n          \"end\": 1.6\r\n        },\r\n        {\r\n          \"word\": \" früh.\",\r\n          \"start\": 1.6,\r\n          \"end\": 1.86\r\n        },\r\n        {\r\n          \"word\": \" Dann\",\r\n          \"start\": 2.06,\r\n          \"end\": 2.34\r\n        },\r\n        {\r\n          \"word\": \" bin\",\r\n          \"start\": 2.34,\r\n          \"end\": 2.48\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 2.48,\r\n          \"end\": 2.62\r\n        },\r\n        {\r\n          \"word\": \" pünktlich,\",\r\n          \"start\": 2.62,\r\n          \"end\": 3.14\r\n        },\r\n        {\r\n          \"word\": \" wenn\",\r\n          \"start\": 3.24,\r\n          \"end\": 3.3\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 3.3,\r\n          \"end\": 3.44\r\n        },\r\n        {\r\n          \"word\": \" einfällt,\",\r\n          \"start\": 3.44,\r\n          \"end\": 3.9\r\n        },\r\n        {\r\n          \"word\": \" was\",\r\n          \"start\": 3.98,\r\n          \"end\": 4.06\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.06,\r\n          \"end\": 4.18\r\n        },\r\n        {\r\n          \"word\": \" vergessen\",\r\n          \"start\": 4.18,\r\n          \"end\": 4.56\r\n        },\r\n        {\r\n          \"word\": \" habe.\",\r\n          \"start\": 4.56,\r\n          \"end\": 4.92\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [],\r\n  \"sha256\": \"2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b\",\r\n  \"bytes\": 89900,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-wolfgang-schulz-01.mp3\"\r\n}\r\n",
+          "sha256": "9bf1f952dada50cb2794843cc13770a7cbe4c18cdaf79297268403b5d4d89d57"
+        },
+        "orthographicCues": {
+          "text": "{\n  \"kind\": \"german-compound-spacing-cue-alignment-v1\",\n  \"clipId\": \"stadt-wolfgang-schulz-01\",\n  \"encodedReceiptSha256\": \"9bf1f952dada50cb2794843cc13770a7cbe4c18cdaf79297268403b5d4d89d57\",\n  \"rawReceiptSha256\": \"3e6d822fa06cb7d33160f609f1b84553aa1925072f3b636527e69d9d883558be\",\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\n  \"encodedSha256\": \"2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b\",\n  \"sourceSha256\": \"4036b54751beec56ebde11bf86418875a5798ffc8b11ef27b0492a9572f31f88\",\n  \"selectedReadingIndex\": 0,\n  \"selectedReadingSha256\": \"cb4e13dc31227a1947d333962e4b59abbafe26a77da156eae8d1064b6fd5930a\",\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\n  \"rule\": {\n    \"source\": \"Viertelstunde\",\n    \"observed\": [\n      \"viertel\",\n      \"Stunde\"\n    ]\n  },\n  \"mapping\": [\n    {\n      \"sourceWordIndex\": 0,\n      \"observedStart\": 0,\n      \"observedEndExclusive\": 1\n    },\n    {\n      \"sourceWordIndex\": 1,\n      \"observedStart\": 1,\n      \"observedEndExclusive\": 2\n    },\n    {\n      \"sourceWordIndex\": 2,\n      \"observedStart\": 2,\n      \"observedEndExclusive\": 3\n    },\n    {\n      \"sourceWordIndex\": 3,\n      \"observedStart\": 3,\n      \"observedEndExclusive\": 4\n    },\n    {\n      \"sourceWordIndex\": 4,\n      \"observedStart\": 4,\n      \"observedEndExclusive\": 6\n    },\n    {\n      \"sourceWordIndex\": 5,\n      \"observedStart\": 6,\n      \"observedEndExclusive\": 7\n    },\n    {\n      \"sourceWordIndex\": 6,\n      \"observedStart\": 7,\n      \"observedEndExclusive\": 8\n    },\n    {\n      \"sourceWordIndex\": 7,\n      \"observedStart\": 8,\n      \"observedEndExclusive\": 9\n    },\n    {\n      \"sourceWordIndex\": 8,\n      \"observedStart\": 9,\n      \"observedEndExclusive\": 10\n    },\n    {\n      \"sourceWordIndex\": 9,\n      \"observedStart\": 10,\n      \"observedEndExclusive\": 11\n    },\n    {\n      \"sourceWordIndex\": 10,\n      \"observedStart\": 11,\n      \"observedEndExclusive\": 12\n    },\n    {\n      \"sourceWordIndex\": 11,\n      \"observedStart\": 12,\n      \"observedEndExclusive\": 13\n    },\n    {\n      \"sourceWordIndex\": 12,\n      \"observedStart\": 13,\n      \"observedEndExclusive\": 14\n    },\n    {\n      \"sourceWordIndex\": 13,\n      \"observedStart\": 14,\n      \"observedEndExclusive\": 15\n    },\n    {\n      \"sourceWordIndex\": 14,\n      \"observedStart\": 15,\n      \"observedEndExclusive\": 16\n    },\n    {\n      \"sourceWordIndex\": 15,\n      \"observedStart\": 16,\n      \"observedEndExclusive\": 17\n    },\n    {\n      \"sourceWordIndex\": 16,\n      \"observedStart\": 17,\n      \"observedEndExclusive\": 18\n    },\n    {\n      \"sourceWordIndex\": 17,\n      \"observedStart\": 18,\n      \"observedEndExclusive\": 19\n    }\n  ],\n  \"wordCues\": [\n    {\n      \"at\": 0,\n      \"end\": 0.18,\n      \"charIndex\": 0,\n      \"word\": \"Ich\"\n    },\n    {\n      \"at\": 0.18,\n      \"end\": 0.38,\n      \"charIndex\": 4,\n      \"word\": \"komme\"\n    },\n    {\n      \"at\": 0.38,\n      \"end\": 0.6,\n      \"charIndex\": 10,\n      \"word\": \"immer\"\n    },\n    {\n      \"at\": 0.6,\n      \"end\": 0.8,\n      \"charIndex\": 16,\n      \"word\": \"eine\"\n    },\n    {\n      \"at\": 0.8,\n      \"end\": 1.34,\n      \"charIndex\": 21,\n      \"word\": \"Viertelstunde\"\n    },\n    {\n      \"at\": 1.34,\n      \"end\": 1.6,\n      \"charIndex\": 35,\n      \"word\": \"zu\"\n    },\n    {\n      \"at\": 1.6,\n      \"end\": 1.86,\n      \"charIndex\": 38,\n      \"word\": \"früh\"\n    },\n    {\n      \"at\": 2.06,\n      \"end\": 2.34,\n      \"charIndex\": 44,\n      \"word\": \"Dann\"\n    },\n    {\n      \"at\": 2.34,\n      \"end\": 2.48,\n      \"charIndex\": 49,\n      \"word\": \"bin\"\n    },\n    {\n      \"at\": 2.48,\n      \"end\": 2.62,\n      \"charIndex\": 53,\n      \"word\": \"ich\"\n    },\n    {\n      \"at\": 2.62,\n      \"end\": 3.14,\n      \"charIndex\": 57,\n      \"word\": \"pünktlich\"\n    },\n    {\n      \"at\": 3.24,\n      \"end\": 3.3,\n      \"charIndex\": 68,\n      \"word\": \"wenn\"\n    },\n    {\n      \"at\": 3.3,\n      \"end\": 3.44,\n      \"charIndex\": 73,\n      \"word\": \"mir\"\n    },\n    {\n      \"at\": 3.44,\n      \"end\": 3.9,\n      \"charIndex\": 77,\n      \"word\": \"einfällt\"\n    },\n    {\n      \"at\": 3.98,\n      \"end\": 4.06,\n      \"charIndex\": 87,\n      \"word\": \"was\"\n    },\n    {\n      \"at\": 4.06,\n      \"end\": 4.18,\n      \"charIndex\": 91,\n      \"word\": \"ich\"\n    },\n    {\n      \"at\": 4.18,\n      \"end\": 4.56,\n      \"charIndex\": 95,\n      \"word\": \"vergessen\"\n    },\n    {\n      \"at\": 4.56,\n      \"end\": 4.92,\n      \"charIndex\": 105,\n      \"word\": \"habe\"\n    }\n  ]\n}\n",
+          "sha256": "7c9c6fe8c41986e9ebdb41bf2e9abd91ab4d29307e735a34153bccee8fad3d65"
+        }
+      },
+      "stadt-wolfgang-schulz-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-02\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n  \"english\": \"I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.\",\r\n  \"sourceSha256\": \"a48da41d5e8b789ee5a7176d551ecc7930e6e3f544859cee750f3853d30cd5bf\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 149,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.36,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"658043bbcb36598fa5f5cfcbbcfa416e09b598da274a18cdc2270ce43ead5d03\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.92,\r\n  \"renderSeconds\": 7.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "50eb6575a6e997957beb7d9fa1613acd5c351730074a2b9a11ada56c494ce030"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-02\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n  \"english\": \"I can only be spontaneous by appointment. Otherwise I have no way of knowing in advance how long to be open to surprises.\",\r\n  \"sourceSha256\": \"a48da41d5e8b789ee5a7176d551ecc7930e6e3f544859cee750f3853d30cd5bf\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 149,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.36,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"658043bbcb36598fa5f5cfcbbcfa416e09b598da274a18cdc2270ce43ead5d03\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.92,\r\n  \"renderSeconds\": 7.19,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-15.169999999999998:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.18,\r\n  \"truePeakDbtp\": -2.22,\r\n  \"asr\": \"Spontan geht bei mir nur mit Termin, sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Spontan geht bei mir nur mit Termin, sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll.\",\r\n      \"transcribeSeconds\": 9.86,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Spontan\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" geht\",\r\n          \"start\": 0.7,\r\n          \"end\": 0.86\r\n        },\r\n        {\r\n          \"word\": \" bei\",\r\n          \"start\": 0.86,\r\n          \"end\": 1.04\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 1.04,\r\n          \"end\": 1.2\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 1.2,\r\n          \"end\": 1.34\r\n        },\r\n        {\r\n          \"word\": \" mit\",\r\n          \"start\": 1.34,\r\n          \"end\": 1.52\r\n        },\r\n        {\r\n          \"word\": \" Termin,\",\r\n          \"start\": 1.52,\r\n          \"end\": 1.92\r\n        },\r\n        {\r\n          \"word\": \" sonst\",\r\n          \"start\": 2.18,\r\n          \"end\": 2.36\r\n        },\r\n        {\r\n          \"word\": \" weiß\",\r\n          \"start\": 2.36,\r\n          \"end\": 2.6\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 2.6,\r\n          \"end\": 2.72\r\n        },\r\n        {\r\n          \"word\": \" vorher\",\r\n          \"start\": 2.72,\r\n          \"end\": 2.94\r\n        },\r\n        {\r\n          \"word\": \" gar\",\r\n          \"start\": 2.94,\r\n          \"end\": 3.16\r\n        },\r\n        {\r\n          \"word\": \" nicht,\",\r\n          \"start\": 3.16,\r\n          \"end\": 3.4\r\n        },\r\n        {\r\n          \"word\": \" wie\",\r\n          \"start\": 3.5,\r\n          \"end\": 3.56\r\n        },\r\n        {\r\n          \"word\": \" lange\",\r\n          \"start\": 3.56,\r\n          \"end\": 3.74\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 3.74,\r\n          \"end\": 3.9\r\n        },\r\n        {\r\n          \"word\": \" offen\",\r\n          \"start\": 3.9,\r\n          \"end\": 4.1\r\n        },\r\n        {\r\n          \"word\": \" für\",\r\n          \"start\": 4.1,\r\n          \"end\": 4.26\r\n        },\r\n        {\r\n          \"word\": \" Überraschungen\",\r\n          \"start\": 4.26,\r\n          \"end\": 4.82\r\n        },\r\n        {\r\n          \"word\": \" sein\",\r\n          \"start\": 4.82,\r\n          \"end\": 5.1\r\n        },\r\n        {\r\n          \"word\": \" soll.\",\r\n          \"start\": 5.1,\r\n          \"end\": 5.34\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Spontan\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 8,\r\n      \"word\": \"geht\",\r\n      \"end\": 0.86\r\n    },\r\n    {\r\n      \"at\": 0.86,\r\n      \"charIndex\": 13,\r\n      \"word\": \"bei\",\r\n      \"end\": 1.04\r\n    },\r\n    {\r\n      \"at\": 1.04,\r\n      \"charIndex\": 17,\r\n      \"word\": \"mir\",\r\n      \"end\": 1.2\r\n    },\r\n    {\r\n      \"at\": 1.2,\r\n      \"charIndex\": 21,\r\n      \"word\": \"nur\",\r\n      \"end\": 1.34\r\n    },\r\n    {\r\n      \"at\": 1.34,\r\n      \"charIndex\": 25,\r\n      \"word\": \"mit\",\r\n      \"end\": 1.52\r\n    },\r\n    {\r\n      \"at\": 1.52,\r\n      \"charIndex\": 29,\r\n      \"word\": \"Termin\",\r\n      \"end\": 1.92\r\n    },\r\n    {\r\n      \"at\": 2.18,\r\n      \"charIndex\": 37,\r\n      \"word\": \"Sonst\",\r\n      \"end\": 2.36\r\n    },\r\n    {\r\n      \"at\": 2.36,\r\n      \"charIndex\": 43,\r\n      \"word\": \"weiß\",\r\n      \"end\": 2.6\r\n    },\r\n    {\r\n      \"at\": 2.6,\r\n      \"charIndex\": 48,\r\n      \"word\": \"ich\",\r\n      \"end\": 2.72\r\n    },\r\n    {\r\n      \"at\": 2.72,\r\n      \"charIndex\": 52,\r\n      \"word\": \"vorher\",\r\n      \"end\": 2.94\r\n    },\r\n    {\r\n      \"at\": 2.94,\r\n      \"charIndex\": 59,\r\n      \"word\": \"gar\",\r\n      \"end\": 3.16\r\n    },\r\n    {\r\n      \"at\": 3.16,\r\n      \"charIndex\": 63,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.4\r\n    },\r\n    {\r\n      \"at\": 3.5,\r\n      \"charIndex\": 70,\r\n      \"word\": \"wie\",\r\n      \"end\": 3.56\r\n    },\r\n    {\r\n      \"at\": 3.56,\r\n      \"charIndex\": 74,\r\n      \"word\": \"lange\",\r\n      \"end\": 3.74\r\n    },\r\n    {\r\n      \"at\": 3.74,\r\n      \"charIndex\": 80,\r\n      \"word\": \"ich\",\r\n      \"end\": 3.9\r\n    },\r\n    {\r\n      \"at\": 3.9,\r\n      \"charIndex\": 84,\r\n      \"word\": \"offen\",\r\n      \"end\": 4.1\r\n    },\r\n    {\r\n      \"at\": 4.1,\r\n      \"charIndex\": 90,\r\n      \"word\": \"für\",\r\n      \"end\": 4.26\r\n    },\r\n    {\r\n      \"at\": 4.26,\r\n      \"charIndex\": 94,\r\n      \"word\": \"Überraschungen\",\r\n      \"end\": 4.82\r\n    },\r\n    {\r\n      \"at\": 4.82,\r\n      \"charIndex\": 109,\r\n      \"word\": \"sein\",\r\n      \"end\": 5.1\r\n    },\r\n    {\r\n      \"at\": 5.1,\r\n      \"charIndex\": 114,\r\n      \"word\": \"soll\",\r\n      \"end\": 5.34\r\n    }\r\n  ],\r\n  \"sha256\": \"5bf496d4083b6e5b83c94ff0f763aa4584e03334aa9e3c125ecedb8de4e0a584\",\r\n  \"bytes\": 95660,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-wolfgang-schulz-02.mp3\"\r\n}\r\n",
+          "sha256": "37a0cbbef983ec7500b57cd9491cc058a90199441f4081ea0b5ad644d7db2111"
+        }
+      },
+      "stadt-wolfgang-schulz-03": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-03\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=0]\",\r\n  \"text\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n  \"sourceSha256\": \"bee797d2f6363beb56bfb1644323896452354782068c023bc2509b2492ac38b7\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71002,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.48,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"93a6af9547744056421f1a5e612b0c48711a4cd44c53309b97e94365fa2ff4f9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.56,\r\n  \"renderSeconds\": 6.45,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "cdce909123a992169f73fc52a230da1eced1607710c1a6b2ff125804e610b59d"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-wolfgang-schulz-03\",\r\n  \"voiceId\": \"stadt-wolfgang-schulz\",\r\n  \"actorId\": \"city-wolfgang-schulz\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-wolfgang-schulz].dialogue[region=berlin,slot=0]\",\r\n  \"text\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"english\": \"I always arrive fifteen minutes early. Then I am on time when I remember what I have forgotten.\",\r\n  \"sourceSha256\": \"bee797d2f6363beb56bfb1644323896452354782068c023bc2509b2492ac38b7\",\r\n  \"profileId\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n  \"referenceSha256\": \"c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77\",\r\n  \"referenceOriginalSha256\": \"fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71002,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 140,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.48,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"7aa5fe9c72f591aa9a779060144b1e866975ea2ea0a13ea2c222d0917b57b3c6\",\r\n  \"profileJsonSha256\": \"0119076ddf39d075ffb0fa7106946ca10970279f3f72f3893ea0455437214590\",\r\n  \"rawSha256\": \"93a6af9547744056421f1a5e612b0c48711a4cd44c53309b97e94365fa2ff4f9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.56,\r\n  \"renderSeconds\": 6.45,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"06c942339c3144298f6ce8ed7f09bf48\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.03:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.24,\r\n  \"truePeakDbtp\": -2.2,\r\n  \"asr\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.\",\r\n      \"transcribeSeconds\": 10.58,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" komme\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" always\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.68\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 0.68,\r\n          \"end\": 0.9\r\n        },\r\n        {\r\n          \"word\": \" Viertelstunde\",\r\n          \"start\": 0.9,\r\n          \"end\": 1.48\r\n        },\r\n        {\r\n          \"word\": \" too\",\r\n          \"start\": 1.48,\r\n          \"end\": 1.66\r\n        },\r\n        {\r\n          \"word\": \" early.\",\r\n          \"start\": 1.66,\r\n          \"end\": 2.0\r\n        },\r\n        {\r\n          \"word\": \" Dann\",\r\n          \"start\": 2.22,\r\n          \"end\": 2.56\r\n        },\r\n        {\r\n          \"word\": \" bin\",\r\n          \"start\": 2.56,\r\n          \"end\": 2.68\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 2.68,\r\n          \"end\": 2.82\r\n        },\r\n        {\r\n          \"word\": \" on\",\r\n          \"start\": 2.82,\r\n          \"end\": 2.96\r\n        },\r\n        {\r\n          \"word\": \" time,\",\r\n          \"start\": 2.96,\r\n          \"end\": 3.2\r\n        },\r\n        {\r\n          \"word\": \" wenn\",\r\n          \"start\": 3.3,\r\n          \"end\": 3.38\r\n        },\r\n        {\r\n          \"word\": \" mir\",\r\n          \"start\": 3.38,\r\n          \"end\": 3.52\r\n        },\r\n        {\r\n          \"word\": \" einfällt,\",\r\n          \"start\": 3.52,\r\n          \"end\": 3.96\r\n        },\r\n        {\r\n          \"word\": \" was\",\r\n          \"start\": 4.0,\r\n          \"end\": 4.12\r\n        },\r\n        {\r\n          \"word\": \" ich\",\r\n          \"start\": 4.12,\r\n          \"end\": 4.24\r\n        },\r\n        {\r\n          \"word\": \" vergessen\",\r\n          \"start\": 4.24,\r\n          \"end\": 4.6\r\n        },\r\n        {\r\n          \"word\": \" habe.\",\r\n          \"start\": 4.6,\r\n          \"end\": 4.94\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ich\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"komme\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 10,\r\n      \"word\": \"always\",\r\n      \"end\": 0.68\r\n    },\r\n    {\r\n      \"at\": 0.68,\r\n      \"charIndex\": 17,\r\n      \"word\": \"eine\",\r\n      \"end\": 0.9\r\n    },\r\n    {\r\n      \"at\": 0.9,\r\n      \"charIndex\": 22,\r\n      \"word\": \"Viertelstunde\",\r\n      \"end\": 1.48\r\n    },\r\n    {\r\n      \"at\": 1.48,\r\n      \"charIndex\": 36,\r\n      \"word\": \"too\",\r\n      \"end\": 1.66\r\n    },\r\n    {\r\n      \"at\": 1.66,\r\n      \"charIndex\": 40,\r\n      \"word\": \"early\",\r\n      \"end\": 2.0\r\n    },\r\n    {\r\n      \"at\": 2.22,\r\n      \"charIndex\": 47,\r\n      \"word\": \"Dann\",\r\n      \"end\": 2.56\r\n    },\r\n    {\r\n      \"at\": 2.56,\r\n      \"charIndex\": 52,\r\n      \"word\": \"bin\",\r\n      \"end\": 2.68\r\n    },\r\n    {\r\n      \"at\": 2.68,\r\n      \"charIndex\": 56,\r\n      \"word\": \"ich\",\r\n      \"end\": 2.82\r\n    },\r\n    {\r\n      \"at\": 2.82,\r\n      \"charIndex\": 60,\r\n      \"word\": \"on\",\r\n      \"end\": 2.96\r\n    },\r\n    {\r\n      \"at\": 2.96,\r\n      \"charIndex\": 63,\r\n      \"word\": \"time\",\r\n      \"end\": 3.2\r\n    },\r\n    {\r\n      \"at\": 3.3,\r\n      \"charIndex\": 69,\r\n      \"word\": \"wenn\",\r\n      \"end\": 3.38\r\n    },\r\n    {\r\n      \"at\": 3.38,\r\n      \"charIndex\": 74,\r\n      \"word\": \"mir\",\r\n      \"end\": 3.52\r\n    },\r\n    {\r\n      \"at\": 3.52,\r\n      \"charIndex\": 78,\r\n      \"word\": \"einfällt\",\r\n      \"end\": 3.96\r\n    },\r\n    {\r\n      \"at\": 4.0,\r\n      \"charIndex\": 88,\r\n      \"word\": \"was\",\r\n      \"end\": 4.12\r\n    },\r\n    {\r\n      \"at\": 4.12,\r\n      \"charIndex\": 92,\r\n      \"word\": \"ich\",\r\n      \"end\": 4.24\r\n    },\r\n    {\r\n      \"at\": 4.24,\r\n      \"charIndex\": 96,\r\n      \"word\": \"vergessen\",\r\n      \"end\": 4.6\r\n    },\r\n    {\r\n      \"at\": 4.6,\r\n      \"charIndex\": 106,\r\n      \"word\": \"habe\",\r\n      \"end\": 4.94\r\n    }\r\n  ],\r\n  \"sha256\": \"1ac0e37cf1f48e9c0eb3837af18a7d6579337f4d08793e03aeaf9db5168f85ce\",\r\n  \"bytes\": 89900,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-wolfgang-schulz-03.mp3\"\r\n}\r\n",
+          "sha256": "8b4d1aa2b7be2061ea320267607248011b90a110a54d9f97840096471e5ad200"
+        }
+      }
+    }
+  }
+}

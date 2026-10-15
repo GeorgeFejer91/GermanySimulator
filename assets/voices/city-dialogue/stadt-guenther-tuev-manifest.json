@@ -1,0 +1,672 @@
+{
+  "voiceId": "stadt-guenther-tuev",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-guenther-tuev-01",
+      "voiceId": "stadt-guenther-tuev",
+      "actorId": "city-guenther-tuev",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=0]",
+      "text": "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!",
+      "english": "Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!",
+      "sourceSha256": "3ac2681b481c0185ae6c28421822d92439a879d6c6d68609e60b0f8e17a8d330",
+      "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 159,
+        "eosReached": true,
+        "t3InferenceSeconds": 6.64,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09",
+      "profileJsonSha256": "fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232",
+      "rawSha256": "34ea06178b8445d7cc2c2df7b611a0fc156e50f1cbefe4e0cd27974ba2275e76",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.32,
+      "renderSeconds": 7.64,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "e3b5de97e2e34fdcbbe48962ba16667e",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.07:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.19,
+      "asr": "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden.",
+          "transcribeSeconds": 10.19,
+          "words": [
+            {
+              "word": " Halt!",
+              "start": 0,
+              "end": 0.4
+            },
+            {
+              "word": " Mit",
+              "start": 0.6,
+              "end": 0.88
+            },
+            {
+              "word": " dem",
+              "start": 0.88,
+              "end": 1.08
+            },
+            {
+              "word": " Schuh",
+              "start": 1.08,
+              "end": 1.32
+            },
+            {
+              "word": " schon",
+              "start": 1.32,
+              "end": 1.48
+            },
+            {
+              "word": " auf",
+              "start": 1.48,
+              "end": 1.62
+            },
+            {
+              "word": " der",
+              "start": 1.62,
+              "end": 1.76
+            },
+            {
+              "word": " Kante",
+              "start": 1.76,
+              "end": 2.1
+            },
+            {
+              "word": " und",
+              "start": 2.1,
+              "end": 2.26
+            },
+            {
+              "word": " dem",
+              "start": 2.26,
+              "end": 2.4
+            },
+            {
+              "word": " Plan",
+              "start": 2.4,
+              "end": 2.72
+            },
+            {
+              "word": " noch",
+              "start": 2.72,
+              "end": 2.88
+            },
+            {
+              "word": " auf",
+              "start": 2.88,
+              "end": 3.02
+            },
+            {
+              "word": " dem",
+              "start": 3.02,
+              "end": 3.18
+            },
+            {
+              "word": " Gehweg.",
+              "start": 3.18,
+              "end": 3.56
+            },
+            {
+              "word": " Erst",
+              "start": 3.74,
+              "end": 4.02
+            },
+            {
+              "word": " für",
+              "start": 4.02,
+              "end": 4.16
+            },
+            {
+              "word": " eine",
+              "start": 4.16,
+              "end": 4.34
+            },
+            {
+              "word": " ordentliche",
+              "start": 4.34,
+              "end": 4.88
+            },
+            {
+              "word": " Laufrichtung",
+              "start": 4.88,
+              "end": 5.4
+            },
+            {
+              "word": " entscheiden.",
+              "start": 5.4,
+              "end": 5.8
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Halt",
+          "end": 0.4
+        },
+        {
+          "at": 0.6,
+          "charIndex": 6,
+          "word": "Mit",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 10,
+          "word": "dem",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 14,
+          "word": "Schuh",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 20,
+          "word": "schon",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 26,
+          "word": "auf",
+          "end": 1.62
+        },
+        {
+          "at": 1.62,
+          "charIndex": 30,
+          "word": "der",
+          "end": 1.76
+        },
+        {
+          "at": 1.76,
+          "charIndex": 34,
+          "word": "Kante",
+          "end": 2.1
+        },
+        {
+          "at": 2.1,
+          "charIndex": 40,
+          "word": "und",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 44,
+          "word": "dem",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 48,
+          "word": "Plan",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 53,
+          "word": "noch",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 58,
+          "word": "auf",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 62,
+          "word": "dem",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 66,
+          "word": "Gehweg",
+          "end": 3.56
+        },
+        {
+          "at": 3.74,
+          "charIndex": 74,
+          "word": "Erst",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 79,
+          "word": "für",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 83,
+          "word": "eine",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 88,
+          "word": "ordentliche",
+          "end": 4.88
+        },
+        {
+          "at": 4.88,
+          "charIndex": 100,
+          "word": "Laufrichtung",
+          "end": 5.4
+        },
+        {
+          "at": 5.4,
+          "charIndex": 113,
+          "word": "entscheiden",
+          "end": 5.8
+        }
+      ],
+      "sha256": "5bf1d92fdba97c79b1f2d1b386bc94ca3cb690b66aba9c5aa0051f6f2dc6b864",
+      "bytes": 102188,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-guenther-tuev-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-guenther-tuev-01",
+        "encodedSha256": "5bf1d92fdba97c79b1f2d1b386bc94ca3cb690b66aba9c5aa0051f6f2dc6b864"
+      }
+    },
+    {
+      "clipId": "stadt-guenther-tuev-02",
+      "voiceId": "stadt-guenther-tuev",
+      "actorId": "city-guenther-tuev",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=1]",
+      "text": "Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.",
+      "english": "Do not just start walking! I have not even finished inspecting your first step.",
+      "sourceSha256": "6460ff24078e3bce742cfe3eb9825f25898c5a030d93aec4107a080fa8528c16",
+      "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.",
+      "decode": {
+        "maxSpeechTokens": 328,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 127,
+        "eosReached": true,
+        "t3InferenceSeconds": 5.11,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09",
+      "profileJsonSha256": "fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232",
+      "rawSha256": "0081b84f9c4c0c18b8ac50f663023e92e1945a8e8dfcea2361cf7e564b9b25e9",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.04,
+      "renderSeconds": 5.91,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "e3b5de97e2e34fdcbbe48962ba16667e",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.559999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.15,
+      "asr": "Nicht einfach loslaufen. Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Nicht einfach loslaufen. Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.",
+          "transcribeSeconds": 9.92,
+          "words": [
+            {
+              "word": " Nicht",
+              "start": 0,
+              "end": 0.28
+            },
+            {
+              "word": " einfach",
+              "start": 0.28,
+              "end": 0.66
+            },
+            {
+              "word": " loslaufen.",
+              "start": 0.66,
+              "end": 1.26
+            },
+            {
+              "word": " Ich",
+              "start": 1.4,
+              "end": 1.7
+            },
+            {
+              "word": " habe",
+              "start": 1.7,
+              "end": 1.92
+            },
+            {
+              "word": " Ihren",
+              "start": 1.92,
+              "end": 2.18
+            },
+            {
+              "word": " ersten",
+              "start": 2.18,
+              "end": 2.5
+            },
+            {
+              "word": " Schritt",
+              "start": 2.5,
+              "end": 2.82
+            },
+            {
+              "word": " noch",
+              "start": 2.82,
+              "end": 3
+            },
+            {
+              "word": " gar",
+              "start": 3,
+              "end": 3.22
+            },
+            {
+              "word": " nicht",
+              "start": 3.22,
+              "end": 3.4
+            },
+            {
+              "word": " zu",
+              "start": 3.4,
+              "end": 3.58
+            },
+            {
+              "word": " Ende",
+              "start": 3.58,
+              "end": 3.74
+            },
+            {
+              "word": " geprüft.",
+              "start": 3.74,
+              "end": 4.2
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Nicht",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 6,
+          "word": "einfach",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 14,
+          "word": "loslaufen",
+          "end": 1.26
+        },
+        {
+          "at": 1.4,
+          "charIndex": 25,
+          "word": "Ich",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 29,
+          "word": "habe",
+          "end": 1.92
+        },
+        {
+          "at": 1.92,
+          "charIndex": 34,
+          "word": "Ihren",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 40,
+          "word": "ersten",
+          "end": 2.5
+        },
+        {
+          "at": 2.5,
+          "charIndex": 47,
+          "word": "Schritt",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 55,
+          "word": "noch",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 60,
+          "word": "gar",
+          "end": 3.22
+        },
+        {
+          "at": 3.22,
+          "charIndex": 64,
+          "word": "nicht",
+          "end": 3.4
+        },
+        {
+          "at": 3.4,
+          "charIndex": 70,
+          "word": "zu",
+          "end": 3.58
+        },
+        {
+          "at": 3.58,
+          "charIndex": 73,
+          "word": "Ende",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 78,
+          "word": "geprüft",
+          "end": 4.2
+        }
+      ],
+      "sha256": "804029066f075f0d2858d6515282061a2b831a3357f2cb8237017dac471f4a12",
+      "bytes": 81452,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-guenther-tuev-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-guenther-tuev-02",
+        "encodedSha256": "804029066f075f0d2858d6515282061a2b831a3357f2cb8237017dac471f4a12"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-guenther-tuev-03",
+      "voiceId": "stadt-guenther-tuev",
+      "actorId": "city-guenther-tuev",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=berlin,slot=0]",
+      "text": "Stop! Mit dem Schuh schon auf der Kante und the plan noch auf dem Gehweg. First decide on eine proper Laufrichtung!",
+      "english": "Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!",
+      "sourceSha256": "86f5662d0deec9e822e394dca2369c7641949cc59906da1d73f089b1cdfa1650",
+      "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-guenther-tuev-04",
+      "voiceId": "stadt-guenther-tuev",
+      "actorId": "city-guenther-tuev",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=berlin,slot=1]",
+      "text": "Do not einfach loslaufen! Ich habe Ihren first step noch gar nicht fertig inspected.",
+      "english": "Do not just start walking! I have not even finished inspecting your first step.",
+      "sourceSha256": "e5fce131dc157e9af21eda86f9faca2a16f54872685e47e507e5f06545f3db25",
+      "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-guenther-tuev-01\",\r\n      \"voiceId\": \"stadt-guenther-tuev\",\r\n      \"actorId\": \"city-guenther-tuev\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!\",\r\n      \"english\": \"Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!\",\r\n      \"sourceSha256\": \"3ac2681b481c0185ae6c28421822d92439a879d6c6d68609e60b0f8e17a8d330\",\r\n      \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n      \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n      \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-guenther-tuev-02\",\r\n      \"voiceId\": \"stadt-guenther-tuev\",\r\n      \"actorId\": \"city-guenther-tuev\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n      \"english\": \"Do not just start walking! I have not even finished inspecting your first step.\",\r\n      \"sourceSha256\": \"6460ff24078e3bce742cfe3eb9825f25898c5a030d93aec4107a080fa8528c16\",\r\n      \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n      \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n      \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-guenther-tuev-03\",\r\n      \"voiceId\": \"stadt-guenther-tuev\",\r\n      \"actorId\": \"city-guenther-tuev\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Stop! Mit dem Schuh schon auf der Kante und the plan noch auf dem Gehweg. First decide on eine proper Laufrichtung!\",\r\n      \"english\": \"Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!\",\r\n      \"sourceSha256\": \"86f5662d0deec9e822e394dca2369c7641949cc59906da1d73f089b1cdfa1650\",\r\n      \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n      \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n      \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-guenther-tuev-04\",\r\n      \"voiceId\": \"stadt-guenther-tuev\",\r\n      \"actorId\": \"city-guenther-tuev\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Do not einfach loslaufen! Ich habe Ihren first step noch gar nicht fertig inspected.\",\r\n      \"english\": \"Do not just start walking! I have not even finished inspecting your first step.\",\r\n      \"sourceSha256\": \"e5fce131dc157e9af21eda86f9faca2a16f54872685e47e507e5f06545f3db25\",\r\n      \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n      \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n      \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09"
+    },
+    "takes": {
+      "stadt-guenther-tuev-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-guenther-tuev-01\",\r\n  \"voiceId\": \"stadt-guenther-tuev\",\r\n  \"actorId\": \"city-guenther-tuev\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!\",\r\n  \"english\": \"Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!\",\r\n  \"sourceSha256\": \"3ac2681b481c0185ae6c28421822d92439a879d6c6d68609e60b0f8e17a8d330\",\r\n  \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n  \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n  \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 159,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.64,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09\",\r\n  \"profileJsonSha256\": \"fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232\",\r\n  \"rawSha256\": \"34ea06178b8445d7cc2c2df7b611a0fc156e50f1cbefe4e0cd27974ba2275e76\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.32,\r\n  \"renderSeconds\": 7.64,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "cc71d56ad8e922d0b2e7385cd3fa6cd5c86754be49e9d5e8dce6771e0847fdba"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-guenther-tuev-01\",\r\n  \"voiceId\": \"stadt-guenther-tuev\",\r\n  \"actorId\": \"city-guenther-tuev\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!\",\r\n  \"english\": \"Stop! Your shoe is already on the curb while your plan is still on the sidewalk. Decide on a proper direction of travel first!\",\r\n  \"sourceSha256\": \"3ac2681b481c0185ae6c28421822d92439a879d6c6d68609e60b0f8e17a8d330\",\r\n  \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n  \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n  \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 412,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 159,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 6.64,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09\",\r\n  \"profileJsonSha256\": \"fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232\",\r\n  \"rawSha256\": \"34ea06178b8445d7cc2c2df7b611a0fc156e50f1cbefe4e0cd27974ba2275e76\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.32,\r\n  \"renderSeconds\": 7.64,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.07:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.2,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden.\",\r\n      \"transcribeSeconds\": 10.19,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Halt!\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" Mit\",\r\n          \"start\": 0.6,\r\n          \"end\": 0.88\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 0.88,\r\n          \"end\": 1.08\r\n        },\r\n        {\r\n          \"word\": \" Schuh\",\r\n          \"start\": 1.08,\r\n          \"end\": 1.32\r\n        },\r\n        {\r\n          \"word\": \" schon\",\r\n          \"start\": 1.32,\r\n          \"end\": 1.48\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 1.48,\r\n          \"end\": 1.62\r\n        },\r\n        {\r\n          \"word\": \" der\",\r\n          \"start\": 1.62,\r\n          \"end\": 1.76\r\n        },\r\n        {\r\n          \"word\": \" Kante\",\r\n          \"start\": 1.76,\r\n          \"end\": 2.1\r\n        },\r\n        {\r\n          \"word\": \" und\",\r\n          \"start\": 2.1,\r\n          \"end\": 2.26\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 2.26,\r\n          \"end\": 2.4\r\n        },\r\n        {\r\n          \"word\": \" Plan\",\r\n          \"start\": 2.4,\r\n          \"end\": 2.72\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 2.72,\r\n          \"end\": 2.88\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 2.88,\r\n          \"end\": 3.02\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 3.02,\r\n          \"end\": 3.18\r\n        },\r\n        {\r\n          \"word\": \" Gehweg.\",\r\n          \"start\": 3.18,\r\n          \"end\": 3.56\r\n        },\r\n        {\r\n          \"word\": \" Erst\",\r\n          \"start\": 3.74,\r\n          \"end\": 4.02\r\n        },\r\n        {\r\n          \"word\": \" für\",\r\n          \"start\": 4.02,\r\n          \"end\": 4.16\r\n        },\r\n        {\r\n          \"word\": \" eine\",\r\n          \"start\": 4.16,\r\n          \"end\": 4.34\r\n        },\r\n        {\r\n          \"word\": \" ordentliche\",\r\n          \"start\": 4.34,\r\n          \"end\": 4.88\r\n        },\r\n        {\r\n          \"word\": \" Laufrichtung\",\r\n          \"start\": 4.88,\r\n          \"end\": 5.4\r\n        },\r\n        {\r\n          \"word\": \" entscheiden.\",\r\n          \"start\": 5.4,\r\n          \"end\": 5.8\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Halt\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.6,\r\n      \"charIndex\": 6,\r\n      \"word\": \"Mit\",\r\n      \"end\": 0.88\r\n    },\r\n    {\r\n      \"at\": 0.88,\r\n      \"charIndex\": 10,\r\n      \"word\": \"dem\",\r\n      \"end\": 1.08\r\n    },\r\n    {\r\n      \"at\": 1.08,\r\n      \"charIndex\": 14,\r\n      \"word\": \"Schuh\",\r\n      \"end\": 1.32\r\n    },\r\n    {\r\n      \"at\": 1.32,\r\n      \"charIndex\": 20,\r\n      \"word\": \"schon\",\r\n      \"end\": 1.48\r\n    },\r\n    {\r\n      \"at\": 1.48,\r\n      \"charIndex\": 26,\r\n      \"word\": \"auf\",\r\n      \"end\": 1.62\r\n    },\r\n    {\r\n      \"at\": 1.62,\r\n      \"charIndex\": 30,\r\n      \"word\": \"der\",\r\n      \"end\": 1.76\r\n    },\r\n    {\r\n      \"at\": 1.76,\r\n      \"charIndex\": 34,\r\n      \"word\": \"Kante\",\r\n      \"end\": 2.1\r\n    },\r\n    {\r\n      \"at\": 2.1,\r\n      \"charIndex\": 40,\r\n      \"word\": \"und\",\r\n      \"end\": 2.26\r\n    },\r\n    {\r\n      \"at\": 2.26,\r\n      \"charIndex\": 44,\r\n      \"word\": \"dem\",\r\n      \"end\": 2.4\r\n    },\r\n    {\r\n      \"at\": 2.4,\r\n      \"charIndex\": 48,\r\n      \"word\": \"Plan\",\r\n      \"end\": 2.72\r\n    },\r\n    {\r\n      \"at\": 2.72,\r\n      \"charIndex\": 53,\r\n      \"word\": \"noch\",\r\n      \"end\": 2.88\r\n    },\r\n    {\r\n      \"at\": 2.88,\r\n      \"charIndex\": 58,\r\n      \"word\": \"auf\",\r\n      \"end\": 3.02\r\n    },\r\n    {\r\n      \"at\": 3.02,\r\n      \"charIndex\": 62,\r\n      \"word\": \"dem\",\r\n      \"end\": 3.18\r\n    },\r\n    {\r\n      \"at\": 3.18,\r\n      \"charIndex\": 66,\r\n      \"word\": \"Gehweg\",\r\n      \"end\": 3.56\r\n    },\r\n    {\r\n      \"at\": 3.74,\r\n      \"charIndex\": 74,\r\n      \"word\": \"Erst\",\r\n      \"end\": 4.02\r\n    },\r\n    {\r\n      \"at\": 4.02,\r\n      \"charIndex\": 79,\r\n      \"word\": \"für\",\r\n      \"end\": 4.16\r\n    },\r\n    {\r\n      \"at\": 4.16,\r\n      \"charIndex\": 83,\r\n      \"word\": \"eine\",\r\n      \"end\": 4.34\r\n    },\r\n    {\r\n      \"at\": 4.34,\r\n      \"charIndex\": 88,\r\n      \"word\": \"ordentliche\",\r\n      \"end\": 4.88\r\n    },\r\n    {\r\n      \"at\": 4.88,\r\n      \"charIndex\": 100,\r\n      \"word\": \"Laufrichtung\",\r\n      \"end\": 5.4\r\n    },\r\n    {\r\n      \"at\": 5.4,\r\n      \"charIndex\": 113,\r\n      \"word\": \"entscheiden\",\r\n      \"end\": 5.8\r\n    }\r\n  ],\r\n  \"sha256\": \"5bf1d92fdba97c79b1f2d1b386bc94ca3cb690b66aba9c5aa0051f6f2dc6b864\",\r\n  \"bytes\": 102188,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-guenther-tuev-01.mp3\"\r\n}\r\n",
+          "sha256": "84dd9257460f9caaa42eb730dc60a47664f3d3946d4c90ee895805be0d0118a6"
+        }
+      },
+      "stadt-guenther-tuev-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-guenther-tuev-02\",\r\n  \"voiceId\": \"stadt-guenther-tuev\",\r\n  \"actorId\": \"city-guenther-tuev\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n  \"english\": \"Do not just start walking! I have not even finished inspecting your first step.\",\r\n  \"sourceSha256\": \"6460ff24078e3bce742cfe3eb9825f25898c5a030d93aec4107a080fa8528c16\",\r\n  \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n  \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n  \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 328,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 127,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.11,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09\",\r\n  \"profileJsonSha256\": \"fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232\",\r\n  \"rawSha256\": \"0081b84f9c4c0c18b8ac50f663023e92e1945a8e8dfcea2361cf7e564b9b25e9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.04,\r\n  \"renderSeconds\": 5.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "3dac05b941027e0a8d3cf7c1bc20d0c1bae075621476aa7cf6f0d342ba21177d"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-guenther-tuev-02\",\r\n  \"voiceId\": \"stadt-guenther-tuev\",\r\n  \"actorId\": \"city-guenther-tuev\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-guenther-tuev].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n  \"english\": \"Do not just start walking! I have not even finished inspecting your first step.\",\r\n  \"sourceSha256\": \"6460ff24078e3bce742cfe3eb9825f25898c5a030d93aec4107a080fa8528c16\",\r\n  \"profileId\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n  \"referenceSha256\": \"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\r\n  \"referenceOriginalSha256\": \"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 328,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 127,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 5.11,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"76df63f55474e62296918d249779dbc18acf231f2b1c7a509c1860a20a3d0f09\",\r\n  \"profileJsonSha256\": \"fca6349471c37c41f9455cff4708110c08c45dd8ba0801436f6d3db9548cb232\",\r\n  \"rawSha256\": \"0081b84f9c4c0c18b8ac50f663023e92e1945a8e8dfcea2361cf7e564b9b25e9\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 5.04,\r\n  \"renderSeconds\": 5.91,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"e3b5de97e2e34fdcbbe48962ba16667e\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-14.559999999999999:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 4\r\n  },\r\n  \"integratedLufs\": -18.24,\r\n  \"truePeakDbtp\": -2.15,\r\n  \"asr\": \"Nicht einfach loslaufen. Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Nicht einfach loslaufen. Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.\",\r\n      \"transcribeSeconds\": 9.92,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Nicht\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.28\r\n        },\r\n        {\r\n          \"word\": \" einfach\",\r\n          \"start\": 0.28,\r\n          \"end\": 0.66\r\n        },\r\n        {\r\n          \"word\": \" loslaufen.\",\r\n          \"start\": 0.66,\r\n          \"end\": 1.26\r\n        },\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 1.4,\r\n          \"end\": 1.7\r\n        },\r\n        {\r\n          \"word\": \" habe\",\r\n          \"start\": 1.7,\r\n          \"end\": 1.92\r\n        },\r\n        {\r\n          \"word\": \" Ihren\",\r\n          \"start\": 1.92,\r\n          \"end\": 2.18\r\n        },\r\n        {\r\n          \"word\": \" ersten\",\r\n          \"start\": 2.18,\r\n          \"end\": 2.5\r\n        },\r\n        {\r\n          \"word\": \" Schritt\",\r\n          \"start\": 2.5,\r\n          \"end\": 2.82\r\n        },\r\n        {\r\n          \"word\": \" noch\",\r\n          \"start\": 2.82,\r\n          \"end\": 3.0\r\n        },\r\n        {\r\n          \"word\": \" gar\",\r\n          \"start\": 3.0,\r\n          \"end\": 3.22\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 3.22,\r\n          \"end\": 3.4\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 3.4,\r\n          \"end\": 3.58\r\n        },\r\n        {\r\n          \"word\": \" Ende\",\r\n          \"start\": 3.58,\r\n          \"end\": 3.74\r\n        },\r\n        {\r\n          \"word\": \" geprüft.\",\r\n          \"start\": 3.74,\r\n          \"end\": 4.2\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Nicht\",\r\n      \"end\": 0.28\r\n    },\r\n    {\r\n      \"at\": 0.28,\r\n      \"charIndex\": 6,\r\n      \"word\": \"einfach\",\r\n      \"end\": 0.66\r\n    },\r\n    {\r\n      \"at\": 0.66,\r\n      \"charIndex\": 14,\r\n      \"word\": \"loslaufen\",\r\n      \"end\": 1.26\r\n    },\r\n    {\r\n      \"at\": 1.4,\r\n      \"charIndex\": 25,\r\n      \"word\": \"Ich\",\r\n      \"end\": 1.7\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 29,\r\n      \"word\": \"habe\",\r\n      \"end\": 1.92\r\n    },\r\n    {\r\n      \"at\": 1.92,\r\n      \"charIndex\": 34,\r\n      \"word\": \"Ihren\",\r\n      \"end\": 2.18\r\n    },\r\n    {\r\n      \"at\": 2.18,\r\n      \"charIndex\": 40,\r\n      \"word\": \"ersten\",\r\n      \"end\": 2.5\r\n    },\r\n    {\r\n      \"at\": 2.5,\r\n      \"charIndex\": 47,\r\n      \"word\": \"Schritt\",\r\n      \"end\": 2.82\r\n    },\r\n    {\r\n      \"at\": 2.82,\r\n      \"charIndex\": 55,\r\n      \"word\": \"noch\",\r\n      \"end\": 3.0\r\n    },\r\n    {\r\n      \"at\": 3.0,\r\n      \"charIndex\": 60,\r\n      \"word\": \"gar\",\r\n      \"end\": 3.22\r\n    },\r\n    {\r\n      \"at\": 3.22,\r\n      \"charIndex\": 64,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.4\r\n    },\r\n    {\r\n      \"at\": 3.4,\r\n      \"charIndex\": 70,\r\n      \"word\": \"zu\",\r\n      \"end\": 3.58\r\n    },\r\n    {\r\n      \"at\": 3.58,\r\n      \"charIndex\": 73,\r\n      \"word\": \"Ende\",\r\n      \"end\": 3.74\r\n    },\r\n    {\r\n      \"at\": 3.74,\r\n      \"charIndex\": 78,\r\n      \"word\": \"geprüft\",\r\n      \"end\": 4.2\r\n    }\r\n  ],\r\n  \"sha256\": \"804029066f075f0d2858d6515282061a2b831a3357f2cb8237017dac471f4a12\",\r\n  \"bytes\": 81452,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-guenther-tuev-02.mp3\"\r\n}\r\n",
+          "sha256": "23ee3af947251d1bcb07166d300b0ce7e80117af31fc1911f8589d87c85d2979"
+        }
+      }
+    }
+  }
+}

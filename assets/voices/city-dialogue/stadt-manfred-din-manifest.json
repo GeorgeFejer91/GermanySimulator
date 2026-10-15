@@ -1,0 +1,716 @@
+{
+  "voiceId": "stadt-manfred-din",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-manfred-din-01",
+      "voiceId": "stadt-manfred-din",
+      "actorId": "city-manfred-din",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=0]",
+      "text": "Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.",
+      "english": "The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.",
+      "sourceSha256": "907952af984ca0882518887d85f78dbabb464c1c82b75acec36dd9f416bfc6f7",
+      "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+      "referenceSha256": "e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613",
+      "referenceOriginalSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 164,
+        "eosReached": true,
+        "t3InferenceSeconds": 8.31,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763",
+      "profileJsonSha256": "61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976",
+      "rawSha256": "505f472692faef1d778e34781124a271efdfd46e91ab51163f173e02c3fd6365",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.52,
+      "renderSeconds": 9.31,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "ce35631d413c42fe83a7637174c3e4a1",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.280000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.2,
+      "asr": "Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.",
+          "transcribeSeconds": 10.02,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " Pflasterfuge",
+              "start": 0.16,
+              "end": 0.84
+            },
+            {
+              "word": " ist",
+              "start": 0.84,
+              "end": 1
+            },
+            {
+              "word": " nicht",
+              "start": 1,
+              "end": 1.18
+            },
+            {
+              "word": " schief.",
+              "start": 1.18,
+              "end": 1.52
+            },
+            {
+              "word": " Sie",
+              "start": 1.78,
+              "end": 2.18
+            },
+            {
+              "word": " führt",
+              "start": 2.18,
+              "end": 2.38
+            },
+            {
+              "word": " nur",
+              "start": 2.38,
+              "end": 2.54
+            },
+            {
+              "word": " einen",
+              "start": 2.54,
+              "end": 2.74
+            },
+            {
+              "word": " anderen",
+              "start": 2.74,
+              "end": 3.02
+            },
+            {
+              "word": " Winkelstandard.",
+              "start": 3.02,
+              "end": 3.84
+            },
+            {
+              "word": " Wir",
+              "start": 3.94,
+              "end": 4.12
+            },
+            {
+              "word": " sollten",
+              "start": 4.12,
+              "end": 4.34
+            },
+            {
+              "word": " uns",
+              "start": 4.34,
+              "end": 4.54
+            },
+            {
+              "word": " trotzdem",
+              "start": 4.54,
+              "end": 4.82
+            },
+            {
+              "word": " erst",
+              "start": 4.82,
+              "end": 5.14
+            },
+            {
+              "word": " auf",
+              "start": 5.14,
+              "end": 5.32
+            },
+            {
+              "word": " einen",
+              "start": 5.32,
+              "end": 5.5
+            },
+            {
+              "word": " einigen.",
+              "start": 5.5,
+              "end": 5.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "Pflasterfuge",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 17,
+          "word": "ist",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 21,
+          "word": "nicht",
+          "end": 1.18
+        },
+        {
+          "at": 1.18,
+          "charIndex": 27,
+          "word": "schief",
+          "end": 1.52
+        },
+        {
+          "at": 1.78,
+          "charIndex": 35,
+          "word": "Sie",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 39,
+          "word": "führt",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 45,
+          "word": "nur",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 49,
+          "word": "einen",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 55,
+          "word": "anderen",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 63,
+          "word": "Winkelstandard",
+          "end": 3.84
+        },
+        {
+          "at": 3.94,
+          "charIndex": 79,
+          "word": "Wir",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 83,
+          "word": "sollten",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 91,
+          "word": "uns",
+          "end": 4.54
+        },
+        {
+          "at": 4.54,
+          "charIndex": 95,
+          "word": "trotzdem",
+          "end": 4.82
+        },
+        {
+          "at": 4.82,
+          "charIndex": 104,
+          "word": "erst",
+          "end": 5.14
+        },
+        {
+          "at": 5.14,
+          "charIndex": 109,
+          "word": "auf",
+          "end": 5.32
+        },
+        {
+          "at": 5.32,
+          "charIndex": 113,
+          "word": "einen",
+          "end": 5.5
+        },
+        {
+          "at": 5.5,
+          "charIndex": 119,
+          "word": "einigen",
+          "end": 5.88
+        }
+      ],
+      "sha256": "b90dfe8dd900c6f1b597ce85a8bbcd15d54b7b400501e7393f3e79e6690f7b87",
+      "bytes": 105260,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-manfred-din-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-manfred-din-01",
+        "encodedSha256": "b90dfe8dd900c6f1b597ce85a8bbcd15d54b7b400501e7393f3e79e6690f7b87"
+      }
+    },
+    {
+      "clipId": "stadt-manfred-din-02",
+      "voiceId": "stadt-manfred-din",
+      "actorId": "city-manfred-din",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=1]",
+      "text": "Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.",
+      "english": "Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.",
+      "sourceSha256": "f43c8e6b4c58fc895be8d986bfdf93e990a3e042aa353813045e236a50a68437",
+      "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+      "referenceSha256": "e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613",
+      "referenceOriginalSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 186,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.55,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763",
+      "profileJsonSha256": "61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976",
+      "rawSha256": "16cff240530fc6a00971b546720aaa5316d6a3304d452353d5bb01d5fd5bc144",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 7.4,
+      "renderSeconds": 8.44,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "ce35631d413c42fe83a7637174c3e4a1",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.5:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.19,
+      "asr": "Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.",
+          "transcribeSeconds": 9.98,
+          "words": [
+            {
+              "word": " Stellen",
+              "start": 0,
+              "end": 0.32
+            },
+            {
+              "word": " Sie",
+              "start": 0.32,
+              "end": 0.48
+            },
+            {
+              "word": " sich",
+              "start": 0.48,
+              "end": 0.64
+            },
+            {
+              "word": " bitte",
+              "start": 0.64,
+              "end": 0.82
+            },
+            {
+              "word": " parallel",
+              "start": 0.82,
+              "end": 1.32
+            },
+            {
+              "word": " zur",
+              "start": 1.32,
+              "end": 1.58
+            },
+            {
+              "word": " Bordsteinkante.",
+              "start": 1.58,
+              "end": 2.44
+            },
+            {
+              "word": " Dann",
+              "start": 2.7,
+              "end": 3.08
+            },
+            {
+              "word": " erkennt",
+              "start": 3.08,
+              "end": 3.42
+            },
+            {
+              "word": " man",
+              "start": 3.42,
+              "end": 3.58
+            },
+            {
+              "word": " wenigstens,",
+              "start": 3.58,
+              "end": 4.2
+            },
+            {
+              "word": " ob",
+              "start": 4.32,
+              "end": 4.4
+            },
+            {
+              "word": " Sie",
+              "start": 4.4,
+              "end": 4.52
+            },
+            {
+              "word": " ungeordnet",
+              "start": 4.52,
+              "end": 5.12
+            },
+            {
+              "word": " warten",
+              "start": 5.12,
+              "end": 5.46
+            },
+            {
+              "word": " oder",
+              "start": 5.46,
+              "end": 5.68
+            },
+            {
+              "word": " ordentlich",
+              "start": 5.68,
+              "end": 6.14
+            },
+            {
+              "word": " im",
+              "start": 6.14,
+              "end": 6.28
+            },
+            {
+              "word": " Weg",
+              "start": 6.28,
+              "end": 6.44
+            },
+            {
+              "word": " stehen.",
+              "start": 6.44,
+              "end": 6.72
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Stellen",
+          "end": 0.32
+        },
+        {
+          "at": 0.32,
+          "charIndex": 8,
+          "word": "Sie",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 12,
+          "word": "sich",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 17,
+          "word": "bitte",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 23,
+          "word": "parallel",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 32,
+          "word": "zur",
+          "end": 1.58
+        },
+        {
+          "at": 1.58,
+          "charIndex": 36,
+          "word": "Bordsteinkante",
+          "end": 2.44
+        },
+        {
+          "at": 2.7,
+          "charIndex": 52,
+          "word": "Dann",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 57,
+          "word": "erkennt",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 65,
+          "word": "man",
+          "end": 3.58
+        },
+        {
+          "at": 3.58,
+          "charIndex": 69,
+          "word": "wenigstens",
+          "end": 4.2
+        },
+        {
+          "at": 4.32,
+          "charIndex": 81,
+          "word": "ob",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 84,
+          "word": "Sie",
+          "end": 4.52
+        },
+        {
+          "at": 4.52,
+          "charIndex": 88,
+          "word": "ungeordnet",
+          "end": 5.12
+        },
+        {
+          "at": 5.12,
+          "charIndex": 99,
+          "word": "warten",
+          "end": 5.46
+        },
+        {
+          "at": 5.46,
+          "charIndex": 106,
+          "word": "oder",
+          "end": 5.68
+        },
+        {
+          "at": 5.68,
+          "charIndex": 111,
+          "word": "ordentlich",
+          "end": 6.14
+        },
+        {
+          "at": 6.14,
+          "charIndex": 122,
+          "word": "im",
+          "end": 6.28
+        },
+        {
+          "at": 6.28,
+          "charIndex": 125,
+          "word": "Weg",
+          "end": 6.44
+        },
+        {
+          "at": 6.44,
+          "charIndex": 129,
+          "word": "stehen",
+          "end": 6.72
+        }
+      ],
+      "sha256": "ee47899948497f6c721ac2b745a6894d41bf84b6b1886929e2f26fd483a91332",
+      "bytes": 119468,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-manfred-din-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "George explicitly instructed completion of all character fixed-voice synthesis and authorized voice cloning for this game. This selects the independently corroborated 34 exact first-pass recordings and four exact ordinary German second takes by encoded hash; no listening approval is claimed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-manfred-din-02",
+        "encodedSha256": "ee47899948497f6c721ac2b745a6894d41bf84b6b1886929e2f26fd483a91332"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-manfred-din-03",
+      "voiceId": "stadt-manfred-din",
+      "actorId": "city-manfred-din",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=berlin,slot=0]",
+      "text": "Die Pflasterfuge is not crooked. Sie führt nur einen different Winkelstandard. We should trotzdem erst agree on one.",
+      "english": "The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.",
+      "sourceSha256": "9c8719a2fa62fa8b4961a89c39ef0df4daba41c95c9a1b2fb7c53f2d1bd27765",
+      "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+      "referenceSha256": "e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613",
+      "referenceOriginalSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    },
+    {
+      "clipId": "stadt-manfred-din-04",
+      "voiceId": "stadt-manfred-din",
+      "actorId": "city-manfred-din",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=berlin,slot=1]",
+      "text": "Please stellen Sie sich parallel zur Bordsteinkante. Dann erkennt man wenigstens, whether Sie ungeordnet warten or properly im Weg stehen.",
+      "english": "Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.",
+      "sourceSha256": "af52ed67701f40585b3eaf969162440065d389e7f965999e79e22d7736e63e79",
+      "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+      "referenceSha256": "e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613",
+      "referenceOriginalSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-manfred-din-01\",\r\n      \"voiceId\": \"stadt-manfred-din\",\r\n      \"actorId\": \"city-manfred-din\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n      \"english\": \"The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.\",\r\n      \"sourceSha256\": \"907952af984ca0882518887d85f78dbabb464c1c82b75acec36dd9f416bfc6f7\",\r\n      \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n      \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n      \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-manfred-din-02\",\r\n      \"voiceId\": \"stadt-manfred-din\",\r\n      \"actorId\": \"city-manfred-din\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n      \"english\": \"Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.\",\r\n      \"sourceSha256\": \"f43c8e6b4c58fc895be8d986bfdf93e990a3e042aa353813045e236a50a68437\",\r\n      \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n      \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n      \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-manfred-din-03\",\r\n      \"voiceId\": \"stadt-manfred-din\",\r\n      \"actorId\": \"city-manfred-din\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Die Pflasterfuge is not crooked. Sie führt nur einen different Winkelstandard. We should trotzdem erst agree on one.\",\r\n      \"english\": \"The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.\",\r\n      \"sourceSha256\": \"9c8719a2fa62fa8b4961a89c39ef0df4daba41c95c9a1b2fb7c53f2d1bd27765\",\r\n      \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n      \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n      \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-manfred-din-04\",\r\n      \"voiceId\": \"stadt-manfred-din\",\r\n      \"actorId\": \"city-manfred-din\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"Please stellen Sie sich parallel zur Bordsteinkante. Dann erkennt man wenigstens, whether Sie ungeordnet warten or properly im Weg stehen.\",\r\n      \"english\": \"Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.\",\r\n      \"sourceSha256\": \"af52ed67701f40585b3eaf969162440065d389e7f965999e79e22d7736e63e79\",\r\n      \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n      \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n      \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"b5ed569b5e7b37013259c36866c0564984cd575b21adb532fa16984a7d00f987\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807\"\r\n  }\r\n}\r\n",
+      "sha256": "f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763"
+    },
+    "takes": {
+      "stadt-manfred-din-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-manfred-din-01\",\r\n  \"voiceId\": \"stadt-manfred-din\",\r\n  \"actorId\": \"city-manfred-din\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n  \"english\": \"The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.\",\r\n  \"sourceSha256\": \"907952af984ca0882518887d85f78dbabb464c1c82b75acec36dd9f416bfc6f7\",\r\n  \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n  \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n  \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 164,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.31,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763\",\r\n  \"profileJsonSha256\": \"61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976\",\r\n  \"rawSha256\": \"505f472692faef1d778e34781124a271efdfd46e91ab51163f173e02c3fd6365\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.52,\r\n  \"renderSeconds\": 9.31,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "ecacd2899a047a2d8c9807ecafb871c6d9a81ecc13ab4633a9c4e11b8a1d4abb"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-manfred-din-01\",\r\n  \"voiceId\": \"stadt-manfred-din\",\r\n  \"actorId\": \"city-manfred-din\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n  \"english\": \"The paving joint is not crooked. It merely follows a different angular standard. We should still agree on one first.\",\r\n  \"sourceSha256\": \"907952af984ca0882518887d85f78dbabb464c1c82b75acec36dd9f416bfc6f7\",\r\n  \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n  \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n  \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 164,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 8.31,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763\",\r\n  \"profileJsonSha256\": \"61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976\",\r\n  \"rawSha256\": \"505f472692faef1d778e34781124a271efdfd46e91ab51163f173e02c3fd6365\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.52,\r\n  \"renderSeconds\": 9.31,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-12.280000000000001:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 6\r\n  },\r\n  \"integratedLufs\": -18.21,\r\n  \"truePeakDbtp\": -2.2,\r\n  \"asr\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.\",\r\n      \"transcribeSeconds\": 10.02,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Die\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.16\r\n        },\r\n        {\r\n          \"word\": \" Pflasterfuge\",\r\n          \"start\": 0.16,\r\n          \"end\": 0.84\r\n        },\r\n        {\r\n          \"word\": \" ist\",\r\n          \"start\": 0.84,\r\n          \"end\": 1.0\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 1.0,\r\n          \"end\": 1.18\r\n        },\r\n        {\r\n          \"word\": \" schief.\",\r\n          \"start\": 1.18,\r\n          \"end\": 1.52\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 1.78,\r\n          \"end\": 2.18\r\n        },\r\n        {\r\n          \"word\": \" führt\",\r\n          \"start\": 2.18,\r\n          \"end\": 2.38\r\n        },\r\n        {\r\n          \"word\": \" nur\",\r\n          \"start\": 2.38,\r\n          \"end\": 2.54\r\n        },\r\n        {\r\n          \"word\": \" einen\",\r\n          \"start\": 2.54,\r\n          \"end\": 2.74\r\n        },\r\n        {\r\n          \"word\": \" anderen\",\r\n          \"start\": 2.74,\r\n          \"end\": 3.02\r\n        },\r\n        {\r\n          \"word\": \" Winkelstandard.\",\r\n          \"start\": 3.02,\r\n          \"end\": 3.84\r\n        },\r\n        {\r\n          \"word\": \" Wir\",\r\n          \"start\": 3.94,\r\n          \"end\": 4.12\r\n        },\r\n        {\r\n          \"word\": \" sollten\",\r\n          \"start\": 4.12,\r\n          \"end\": 4.34\r\n        },\r\n        {\r\n          \"word\": \" uns\",\r\n          \"start\": 4.34,\r\n          \"end\": 4.54\r\n        },\r\n        {\r\n          \"word\": \" trotzdem\",\r\n          \"start\": 4.54,\r\n          \"end\": 4.82\r\n        },\r\n        {\r\n          \"word\": \" erst\",\r\n          \"start\": 4.82,\r\n          \"end\": 5.14\r\n        },\r\n        {\r\n          \"word\": \" auf\",\r\n          \"start\": 5.14,\r\n          \"end\": 5.32\r\n        },\r\n        {\r\n          \"word\": \" einen\",\r\n          \"start\": 5.32,\r\n          \"end\": 5.5\r\n        },\r\n        {\r\n          \"word\": \" einigen.\",\r\n          \"start\": 5.5,\r\n          \"end\": 5.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Die\",\r\n      \"end\": 0.16\r\n    },\r\n    {\r\n      \"at\": 0.16,\r\n      \"charIndex\": 4,\r\n      \"word\": \"Pflasterfuge\",\r\n      \"end\": 0.84\r\n    },\r\n    {\r\n      \"at\": 0.84,\r\n      \"charIndex\": 17,\r\n      \"word\": \"ist\",\r\n      \"end\": 1.0\r\n    },\r\n    {\r\n      \"at\": 1.0,\r\n      \"charIndex\": 21,\r\n      \"word\": \"nicht\",\r\n      \"end\": 1.18\r\n    },\r\n    {\r\n      \"at\": 1.18,\r\n      \"charIndex\": 27,\r\n      \"word\": \"schief\",\r\n      \"end\": 1.52\r\n    },\r\n    {\r\n      \"at\": 1.78,\r\n      \"charIndex\": 35,\r\n      \"word\": \"Sie\",\r\n      \"end\": 2.18\r\n    },\r\n    {\r\n      \"at\": 2.18,\r\n      \"charIndex\": 39,\r\n      \"word\": \"führt\",\r\n      \"end\": 2.38\r\n    },\r\n    {\r\n      \"at\": 2.38,\r\n      \"charIndex\": 45,\r\n      \"word\": \"nur\",\r\n      \"end\": 2.54\r\n    },\r\n    {\r\n      \"at\": 2.54,\r\n      \"charIndex\": 49,\r\n      \"word\": \"einen\",\r\n      \"end\": 2.74\r\n    },\r\n    {\r\n      \"at\": 2.74,\r\n      \"charIndex\": 55,\r\n      \"word\": \"anderen\",\r\n      \"end\": 3.02\r\n    },\r\n    {\r\n      \"at\": 3.02,\r\n      \"charIndex\": 63,\r\n      \"word\": \"Winkelstandard\",\r\n      \"end\": 3.84\r\n    },\r\n    {\r\n      \"at\": 3.94,\r\n      \"charIndex\": 79,\r\n      \"word\": \"Wir\",\r\n      \"end\": 4.12\r\n    },\r\n    {\r\n      \"at\": 4.12,\r\n      \"charIndex\": 83,\r\n      \"word\": \"sollten\",\r\n      \"end\": 4.34\r\n    },\r\n    {\r\n      \"at\": 4.34,\r\n      \"charIndex\": 91,\r\n      \"word\": \"uns\",\r\n      \"end\": 4.54\r\n    },\r\n    {\r\n      \"at\": 4.54,\r\n      \"charIndex\": 95,\r\n      \"word\": \"trotzdem\",\r\n      \"end\": 4.82\r\n    },\r\n    {\r\n      \"at\": 4.82,\r\n      \"charIndex\": 104,\r\n      \"word\": \"erst\",\r\n      \"end\": 5.14\r\n    },\r\n    {\r\n      \"at\": 5.14,\r\n      \"charIndex\": 109,\r\n      \"word\": \"auf\",\r\n      \"end\": 5.32\r\n    },\r\n    {\r\n      \"at\": 5.32,\r\n      \"charIndex\": 113,\r\n      \"word\": \"einen\",\r\n      \"end\": 5.5\r\n    },\r\n    {\r\n      \"at\": 5.5,\r\n      \"charIndex\": 119,\r\n      \"word\": \"einigen\",\r\n      \"end\": 5.88\r\n    }\r\n  ],\r\n  \"sha256\": \"b90dfe8dd900c6f1b597ce85a8bbcd15d54b7b400501e7393f3e79e6690f7b87\",\r\n  \"bytes\": 105260,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-manfred-din-01.mp3\"\r\n}\r\n",
+          "sha256": "b052a4129b40c4974e33f37f6e6d6d8c8e8e0eeea2ae4f1c7cb5a18a3e7d0126"
+        }
+      },
+      "stadt-manfred-din-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-manfred-din-02\",\r\n  \"voiceId\": \"stadt-manfred-din\",\r\n  \"actorId\": \"city-manfred-din\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n  \"english\": \"Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.\",\r\n  \"sourceSha256\": \"f43c8e6b4c58fc895be8d986bfdf93e990a3e042aa353813045e236a50a68437\",\r\n  \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n  \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n  \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 186,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.55,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763\",\r\n  \"profileJsonSha256\": \"61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976\",\r\n  \"rawSha256\": \"16cff240530fc6a00971b546720aaa5316d6a3304d452353d5bb01d5fd5bc144\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.4,\r\n  \"renderSeconds\": 8.44,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "d77736ac8ece5744ac675268acce1b0fc4d976267de97801cb1b88622029f8f9"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-manfred-din-02\",\r\n  \"voiceId\": \"stadt-manfred-din\",\r\n  \"actorId\": \"city-manfred-din\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-manfred-din].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n  \"english\": \"Please stand parallel to the curb. Then at least we can tell whether you are waiting in disorder or obstructing the way in an orderly fashion.\",\r\n  \"sourceSha256\": \"f43c8e6b4c58fc895be8d986bfdf93e990a3e042aa353813045e236a50a68437\",\r\n  \"profileId\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n  \"referenceSha256\": \"e83d0f7518b9f2945008a25fc735e16c679250c0a956379a9f9f9c845a541613\",\r\n  \"referenceOriginalSha256\": \"d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 186,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.55,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"f3c1393c7779e16c15e154589f74553d3aa55c020055de8ad1eefc853baae763\",\r\n  \"profileJsonSha256\": \"61ced42774f74831f0cb216e27528f9c2a012843c101d4d2ba3aed632c300976\",\r\n  \"rawSha256\": \"16cff240530fc6a00971b546720aaa5316d6a3304d452353d5bb01d5fd5bc144\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 7.4,\r\n  \"renderSeconds\": 8.44,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"ce35631d413c42fe83a7637174c3e4a1\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": true,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-14.5:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 6\r\n  },\r\n  \"integratedLufs\": -18.23,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen.\",\r\n      \"transcribeSeconds\": 9.98,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Stellen\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.32\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 0.32,\r\n          \"end\": 0.48\r\n        },\r\n        {\r\n          \"word\": \" sich\",\r\n          \"start\": 0.48,\r\n          \"end\": 0.64\r\n        },\r\n        {\r\n          \"word\": \" bitte\",\r\n          \"start\": 0.64,\r\n          \"end\": 0.82\r\n        },\r\n        {\r\n          \"word\": \" parallel\",\r\n          \"start\": 0.82,\r\n          \"end\": 1.32\r\n        },\r\n        {\r\n          \"word\": \" zur\",\r\n          \"start\": 1.32,\r\n          \"end\": 1.58\r\n        },\r\n        {\r\n          \"word\": \" Bordsteinkante.\",\r\n          \"start\": 1.58,\r\n          \"end\": 2.44\r\n        },\r\n        {\r\n          \"word\": \" Dann\",\r\n          \"start\": 2.7,\r\n          \"end\": 3.08\r\n        },\r\n        {\r\n          \"word\": \" erkennt\",\r\n          \"start\": 3.08,\r\n          \"end\": 3.42\r\n        },\r\n        {\r\n          \"word\": \" man\",\r\n          \"start\": 3.42,\r\n          \"end\": 3.58\r\n        },\r\n        {\r\n          \"word\": \" wenigstens,\",\r\n          \"start\": 3.58,\r\n          \"end\": 4.2\r\n        },\r\n        {\r\n          \"word\": \" ob\",\r\n          \"start\": 4.32,\r\n          \"end\": 4.4\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 4.4,\r\n          \"end\": 4.52\r\n        },\r\n        {\r\n          \"word\": \" ungeordnet\",\r\n          \"start\": 4.52,\r\n          \"end\": 5.12\r\n        },\r\n        {\r\n          \"word\": \" warten\",\r\n          \"start\": 5.12,\r\n          \"end\": 5.46\r\n        },\r\n        {\r\n          \"word\": \" oder\",\r\n          \"start\": 5.46,\r\n          \"end\": 5.68\r\n        },\r\n        {\r\n          \"word\": \" ordentlich\",\r\n          \"start\": 5.68,\r\n          \"end\": 6.14\r\n        },\r\n        {\r\n          \"word\": \" im\",\r\n          \"start\": 6.14,\r\n          \"end\": 6.28\r\n        },\r\n        {\r\n          \"word\": \" Weg\",\r\n          \"start\": 6.28,\r\n          \"end\": 6.44\r\n        },\r\n        {\r\n          \"word\": \" stehen.\",\r\n          \"start\": 6.44,\r\n          \"end\": 6.72\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Stellen\",\r\n      \"end\": 0.32\r\n    },\r\n    {\r\n      \"at\": 0.32,\r\n      \"charIndex\": 8,\r\n      \"word\": \"Sie\",\r\n      \"end\": 0.48\r\n    },\r\n    {\r\n      \"at\": 0.48,\r\n      \"charIndex\": 12,\r\n      \"word\": \"sich\",\r\n      \"end\": 0.64\r\n    },\r\n    {\r\n      \"at\": 0.64,\r\n      \"charIndex\": 17,\r\n      \"word\": \"bitte\",\r\n      \"end\": 0.82\r\n    },\r\n    {\r\n      \"at\": 0.82,\r\n      \"charIndex\": 23,\r\n      \"word\": \"parallel\",\r\n      \"end\": 1.32\r\n    },\r\n    {\r\n      \"at\": 1.32,\r\n      \"charIndex\": 32,\r\n      \"word\": \"zur\",\r\n      \"end\": 1.58\r\n    },\r\n    {\r\n      \"at\": 1.58,\r\n      \"charIndex\": 36,\r\n      \"word\": \"Bordsteinkante\",\r\n      \"end\": 2.44\r\n    },\r\n    {\r\n      \"at\": 2.7,\r\n      \"charIndex\": 52,\r\n      \"word\": \"Dann\",\r\n      \"end\": 3.08\r\n    },\r\n    {\r\n      \"at\": 3.08,\r\n      \"charIndex\": 57,\r\n      \"word\": \"erkennt\",\r\n      \"end\": 3.42\r\n    },\r\n    {\r\n      \"at\": 3.42,\r\n      \"charIndex\": 65,\r\n      \"word\": \"man\",\r\n      \"end\": 3.58\r\n    },\r\n    {\r\n      \"at\": 3.58,\r\n      \"charIndex\": 69,\r\n      \"word\": \"wenigstens\",\r\n      \"end\": 4.2\r\n    },\r\n    {\r\n      \"at\": 4.32,\r\n      \"charIndex\": 81,\r\n      \"word\": \"ob\",\r\n      \"end\": 4.4\r\n    },\r\n    {\r\n      \"at\": 4.4,\r\n      \"charIndex\": 84,\r\n      \"word\": \"Sie\",\r\n      \"end\": 4.52\r\n    },\r\n    {\r\n      \"at\": 4.52,\r\n      \"charIndex\": 88,\r\n      \"word\": \"ungeordnet\",\r\n      \"end\": 5.12\r\n    },\r\n    {\r\n      \"at\": 5.12,\r\n      \"charIndex\": 99,\r\n      \"word\": \"warten\",\r\n      \"end\": 5.46\r\n    },\r\n    {\r\n      \"at\": 5.46,\r\n      \"charIndex\": 106,\r\n      \"word\": \"oder\",\r\n      \"end\": 5.68\r\n    },\r\n    {\r\n      \"at\": 5.68,\r\n      \"charIndex\": 111,\r\n      \"word\": \"ordentlich\",\r\n      \"end\": 6.14\r\n    },\r\n    {\r\n      \"at\": 6.14,\r\n      \"charIndex\": 122,\r\n      \"word\": \"im\",\r\n      \"end\": 6.28\r\n    },\r\n    {\r\n      \"at\": 6.28,\r\n      \"charIndex\": 125,\r\n      \"word\": \"Weg\",\r\n      \"end\": 6.44\r\n    },\r\n    {\r\n      \"at\": 6.44,\r\n      \"charIndex\": 129,\r\n      \"word\": \"stehen\",\r\n      \"end\": 6.72\r\n    }\r\n  ],\r\n  \"sha256\": \"ee47899948497f6c721ac2b745a6894d41bf84b6b1886929e2f26fd483a91332\",\r\n  \"bytes\": 119468,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-manfred-din-02.mp3\"\r\n}\r\n",
+          "sha256": "b08b97b515ca0d3b8537beab39fe5e344c58111af594418aafc7161f1b94e6c7"
+        }
+      }
+    }
+  }
+}
