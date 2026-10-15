@@ -573,7 +573,11 @@ const legacyVoices=Object.freeze({
  thorsten:Object.freeze({name:"Thorsten",source:"CC0 Thorsten-Voice; local XTTS derivatives"}),
  "quiz-sting":Object.freeze({name:"Existing quiz sting",source:"User-supplied recording; not a cloned generation profile"}),
  "player-inner":Object.freeze({name:"Player inner monologue",source:"German browser speech; generation uses named production cast bindings"}),
- narrator:Object.freeze({name:"Official computer voice",source:"German browser speech; no cloned profile"}),
+ narrator:Object.freeze({name:"Official computer voice",gender:"female",source:"German browser speech; no cloned profile",browserSpeech:Object.freeze({
+  de:Object.freeze(["Microsoft Katja","Microsoft Hedda","Google Deutsch","Anna","Marlene","Vicki"]),
+  en:Object.freeze(["Microsoft Zira","Microsoft Hazel","Google US English","Samantha","Karen"]),
+  rate:.93,pitch:.895
+ })}),
  "passerby-a":Object.freeze({name:"Passerby A",source:"German browser speech; generation uses named production cast bindings"}),
  "passerby-b":Object.freeze({name:"Passerby B",source:"German browser speech; generation uses named production cast bindings"}),
  "police-officer":Object.freeze({name:"Police officer",source:"German browser speech; generation uses named production cast bindings"}),
@@ -593,7 +597,7 @@ const legacyVoices=Object.freeze({
 const voices=Object.freeze(Object.fromEntries(Object.entries({...legacyVoices,...neighborVoices}).map(([id,voice])=>[id,Object.freeze({...voice,...productionVoices[id],...(productionVoices[id]?{engine:productionVoices[id].renderer,status:"fixed production profile; playback approval is per clip",generationAllowed:true}:{})})])));
 const speechFamilies=Object.freeze({
  "player-inner":Object.freeze({voiceId:"player-inner",profileVoiceId:"spieler-hans-peter-mustermann",trigger:"game.js innerMonologues on player events",delivery:"browser speech until approved clips are rendered"}),
- narrator:Object.freeze({voiceId:"narrator",trigger:"HUM-01 documents and opening mission guidance",delivery:"browser speech"}),
+ narrator:Object.freeze({voiceId:"narrator",trigger:"Official documents, mission guidance, written notices and automated process readouts",delivery:"female browser computer voice; shared voice and fixed rate/pitch per language"}),
  pedestrians:Object.freeze({voiceIds:Object.freeze(["passerby-a","passerby-b"]),trigger:"game.js pedestrianBarks, crowdArchetypes and npcLines by region",delivery:"browser speech until approved clips are rendered"}),
  police:Object.freeze({voiceId:"police-officer",profileVoiceId:"polizei-heinrich-wachtmeister",trigger:"game.js policeBarks and wanted-level enforcement",delivery:"browser speech until approved clips are rendered"}),
  towelMan:Object.freeze({voiceId:"tourist-guenther-liegestuhl",trigger:"game.js towel-man crowd archetype",delivery:"browser speech until approved clips are rendered"}),

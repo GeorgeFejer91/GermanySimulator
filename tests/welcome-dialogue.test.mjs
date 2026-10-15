@@ -56,6 +56,7 @@ for (const region of ['berlin', 'germany']) {
       assert.equal(b.element('.dialogue-copy').scrollTop, 0);
       assert.match(b.element('dialogue-text').textContent, /drei.*Behördentagen/);
       assert.equal(b.speech.length, 1, 'the first page must request automatic narration');
+      assert.equal(b.speech[0].options.candidateVoiceId, 'narrator', 'mission guidance must share the official computer voice');
       assert.equal(b.speech[0].text, b.element('dialogue-text').textContent);
       assert.match(b.speech[0].options.subtitle, /three.*days of administration/);
       assert.deepEqual(b.objectives, [], 'the objective must wait for the second advance');

@@ -174,7 +174,7 @@ assert.equal(officeAdmission.started,undefined,'approval cannot overwrite a sile
 officeAdmission.window.BuergeramtLevel.subtitleBusy=false;officeAdmission.resume();assert.equal(officeAdmission.started,true,'caption completion releases the queued announcement');
 assert.deepEqual(["Englische Untertitel sind äußerst wichtig, insbesondere wenn Sie Deutsch lernen möchten.","Aufgrund Ihres bemerkenswerten Lerneifers wird die Verwendung von Untertiteln hiermit genehmigt.","Wir gratulieren Ihnen zu dieser verwaltungstechnisch ausgezeichneten Entscheidung."].map(text=>library.lines[text]),["English subtitles are extremely important, especially when you want to learn German.","In recognition of your remarkable eagerness to learn, the use of subtitles is hereby approved.","We congratulate you on this administratively excellent decision."]);
 assert.match(game,/if\(state\.subtitlesOn&&!hasStimulusFamily\("subtitle-approval"\)\)for\(const text of SUBTITLE_APPROVAL_LINES\)showWorldBark\("UNTERTITELSTELLE",text/ ,"subtitle approval must show the exact spoken line");
-assert.match(game,/subtitleAuthority=\/\^SUBTITLE AUTHORITY\/[\s\S]*u\.rate=subtitleAuthority\?\.72[\s\S]*u\.pitch=subtitleAuthority\?\.55/,"subtitle approval needs a deterministic low, measured robotic delivery");
+assert.ok(preference.requests.every(request=>request.options.candidateVoiceId==="narrator"),"automated subtitle approval must share the official computer voice");
 assert.match(game,/subtitle=\(audioTextLibrary\.pools\.quizApproaches[\s\S]*audioTextLibrary\.questions/,"quiz prompts must use authored English subtitles");
 assert.match(game,/englishChunks[\s\S]*subtitle:\(englishChunks\[index\]/,"HUM-01 readings must use their authored English page copy");
 

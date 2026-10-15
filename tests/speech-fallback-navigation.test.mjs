@@ -3,6 +3,7 @@ import vm from "node:vm";
 import {readFileSync} from "node:fs";
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
+const catalog=readFileSync(new URL("../For-AI/AUDIO-TEXT-LIBRARY.js",import.meta.url),"utf8");
 
 function sourceOf(name){
  const start=game.indexOf(`function ${name}(`);
@@ -30,9 +31,12 @@ const context=vm.createContext({
  setTimeout:(callback,delay)=>{timers.push({callback,delay});return timers.length},
  clearTimeout:()=>{},setInterval:()=>1,clearInterval:()=>{}
 });
+vm.runInContext(catalog,context);
+context.speechCatalog=context.window.GermanySimulatorAudioText;
 vm.runInContext(`
  let stimulusTimer,stimulusGeneration=1,activeStimulus=item;
- const voiceHash=()=>0;
+ ${sourceOf("voiceHash")}
+ ${sourceOf("officialComputerVoice")}
  const startSubtitle=item=>{item.subtitleParts=["Welcome","to","Berlin"]};
  const finishStimulus=()=>finished();
  ${sourceOf("playCaptionStimulus")}
@@ -75,6 +79,43 @@ assert.equal(utterance.text,failedVoice.text,"the fallback must speak the exact 
 utterance.onstart();
 assert.equal(shown,3,"the fallback line must reveal only when it starts");
 utterance.onend();
+
+const hedda={lang:"de-DE",name:"Microsoft Hedda - German (Germany)",voiceURI:"hedda",localService:true};
+const katja={lang:"de-DE",name:"Microsoft Katja Online (Natural) - German",voiceURI:"katja",localService:false};
+const conrad={lang:"de-DE",name:"Microsoft Conrad",voiceURI:"conrad",localService:true,default:true};
+const zira={lang:"en-US",name:"Microsoft Zira - English (United States)",voiceURI:"zira",localService:true};
+function narrate(text,voiceKey,lang="de-DE"){
+ context.item={text,voiceKey,lang,candidateVoiceId:"narrator",family:"dialogue"};
+ vm.runInContext("activeStimulus=item;playSyntheticStimulus(item,1)",context);
+ return utterance;
+}
+for(const voices of [[conrad,katja,hedda],[hedda,conrad,katja]]){
+ browserVoices=voices;
+ for(const key of ["HUM-01/DE READING OFFICE","HUM-01/DE FINE PRINT OFFICE","WELCOME TO BERLIN","FINANZAMT","FAX 3000 PRO","SUBTITLE AUTHORITY"]){
+  const line=narrate("Vorgang wird bearbeitet.",key);
+  assert.equal(line.voice,hedda,"official readings share the local female voice across titles and voice-list order");
+  assert.equal(line.rate,.93,"official readings retain the old HUM-01 rate");
+  assert.equal(line.pitch,.895,"official readings retain the old HUM-01 pitch");
+  line.onstart();line.onend();
+ }
+}
+const localKatja={...katja,name:"Microsoft Katja - German (Germany)",voiceURI:"Microsoft Katja - German (Germany)",localService:true};
+for(const voices of [[hedda,localKatja,conrad],[conrad,localKatja,hedda]]){
+ browserVoices=voices;assert.equal(narrate("Formular.","HUM-01/DE READING OFFICE").voice,localKatja,"the installed legacy form voice Katja is the first choice regardless of list order");utterance.onend();
+}
+browserVoices=[conrad,katja];assert.equal(narrate("Formular.","FINANZAMT").voice,katja,"a recognized female voice precedes an unrelated local male voice");utterance.onend();
+browserVoices=[katja];assert.equal(narrate("Formular.","FINANZAMT").voice,katja,"a German network voice works when no local German voice is installed");utterance.onend();
+browserVoices=[hedda,zira];assert.equal(narrate("Form.","HUM-01/DE READING OFFICE","en-US").voice,zira,"English forms keep their existing reading language and female voice preference");utterance.onend();
+browserVoices=[hedda];narrate("Formular.","FINANZAMT");const beforeFailure=spoken.length;utterance.onerror({error:"voice-unavailable"});
+assert.equal(spoken.length,beforeFailure,"a failed narrator must retain captions instead of changing to another default voice");
+browserVoices=[zira];const beforeMissing=spoken.length;narrate("Formular.","FINANZAMT");
+assert.equal(spoken.length,beforeMissing,"missing German voices must not read German through an unrelated default language");
+const genericA={lang:"de-DE",name:"System German A",voiceURI:"de-a",localService:true};
+const genericB={lang:"de-DE",name:"System German B",voiceURI:"de-b",localService:true};
+browserVoices=[genericA,{...genericB,default:true}];assert.equal(narrate("Formular.","FINANZAMT").voice.voiceURI,"de-b","unknown system names retain the matching language default");utterance.onend();
+for(const voices of [[genericB,genericA],[genericA,genericB]]){
+ browserVoices=voices;assert.equal(narrate("Formular.","FINANZAMT").voice,genericA,"unnamed mobile-system voice lists use stable identity order");utterance.onend();
+}
 
 let idleCancel=0,activeCancel=0;
 const stopContext=vm.createContext({
