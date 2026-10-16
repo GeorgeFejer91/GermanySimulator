@@ -56,9 +56,9 @@ probes retain their narrower value.
 ### Communication, ownership and continued dispatch
 
 Use the [delegation brief](../SKILLS.md#delegation-and-review) for every dispatch.
-Keep task status and evidence under ignored task output; use the existing
-`docs/engineering/GAME-COMPLETION.md` for the current completion summary, not a
-second gameplay or cast authority. A task record contains its ID, owner/status,
+Keep task status, evidence and the current completion summary in the lead's
+existing ignored task record, linking the accepted owning documentation rather
+than creating another gameplay or cast authority. A task record contains its ID, owner/status,
 dependencies, exact write paths, candidate hashes, result/evidence and next
 bounded action. The lead is its single writer. Other chats own their separate
 handoffs. No new service, queue database or scheduler is required.
