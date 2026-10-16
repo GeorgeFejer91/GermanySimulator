@@ -354,6 +354,1431 @@ const crowdCharacterBarks=Object.freeze({
 });
 const crowdArchetypeById=Object.fromEntries(crowdArchetypes.map(archetype=>[archetype.id,archetype]));
 const crowdArchetypeOrder=Object.freeze(["towel-man","towel-woman"].map(id=>crowdArchetypeById[id]));
+const crowdReactiveBarks=Object.freeze({
+ "crowd-baerbel-brezel":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-grass-01",
+     "text":"Bitte runter vom Rasen; my crumb count erfasst keine ganzen Schuhabdrücke.",
+     "english":"Off the lawn, please; my crumb count does not include whole footprints."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-grass-02",
+     "text":"Die Grünfläche ist kein pretzel hole. Bitte außen herum auf den Gehweg.",
+     "english":"The lawn is not a pretzel hole. Please go around it onto the sidewalk."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-grass-03",
+     "text":"Zurück auf den Gehweg, bitte. Gras zwischen meinen Krümeln gilt bei mir als extra side dish.",
+     "english":"Back to the sidewalk, please. Grass among my crumbs counts as an extra side dish to me."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-grass-04",
+     "text":"Bitte verlassen Sie den Rasen. Die Kruste stays crispy; den Rasen bitte nicht kneten.",
+     "english":"Please leave the lawn. The crust stays crisp; please don't knead the lawn."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-road-01",
+     "text":"Runter von der Fahrbahn, bitte. I sort Salzkörner, keine Stoßstangen.",
+     "english":"Off the road, please. I sort grains of salt, not bumpers."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-road-02",
+     "text":"Bitte auf den Gehweg. Die Straße ist kein baking tray, auf dem man sich ausbreitet.",
+     "english":"Onto the sidewalk, please. The road is not a baking tray you can spread out on."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-road-03",
+     "text":"Auf den Gehweg, bitte; the hole gehört in die Brezel, nicht in den moving traffic.",
+     "english":"Onto the sidewalk, please; the hole belongs in the pretzel, not in moving traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-road-04",
+     "text":"Zurück auf den Gehweg. Ich möchte die crumbs im Blick behalten, nicht Ihre evasive moves zwischen Autos.",
+     "english":"Back to the sidewalk. I want to keep track of the crumbs, not your evasive moves between cars."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-01",
+     "text":"Bitte zum Übergang. Die holes in meiner Brezel sind keine gaps im Verkehr.",
+     "english":"To the crossing, please. The holes in my pretzel are not gaps in traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-02",
+     "text":"Am Übergang erst schauen, dann gehen. My pretzel can wait, auch wenn ich das ungern zugebe.",
+     "english":"Check at the crossing before you go. My pretzel can wait, though I don't like admitting it."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-03",
+     "text":"Bitte über den Übergang. Twisted routes sind bei mir nur fürs Gebäck vorgesehen.",
+     "english":"Please use the crossing. Twisted routes are reserved for pastries as far as I'm concerned."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-04",
+     "text":"Bitte am Übergang check both sides; ich zähle inzwischen die Salzkörner noch einmal.",
+     "english":"Please look both ways at the crossing; I'll count the grains of salt again meanwhile."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-05",
+     "text":"Zum Übergang, bitte. Ein shortcut macht die Brezel nicht fresher, nur meine Wegbeschreibung länger.",
+     "english":"To the crossing, please. A shortcut doesn't make the pretzel fresher, just my directions longer."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-berlin-jaywalker-06",
+     "text":"Bitte nehmen Sie den Übergang; the crumb route dorthin habe ich bereits gedanklich ausgelegt.",
+     "english":"Please use the crossing; I've already mentally laid a trail of crumbs leading there."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-grass-01",
+     "text":"Bitte runter vom Rasen; meine Krümelzählung erfasst keine ganzen Schuhabdrücke.",
+     "english":"Off the lawn, please; my crumb count does not include whole footprints."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-grass-02",
+     "text":"Die Grünfläche ist kein Brezelloch. Bitte außen herum auf den Gehweg.",
+     "english":"The lawn is not a pretzel hole. Please go around it onto the sidewalk."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-grass-03",
+     "text":"Zurück auf den Gehweg, bitte. Gras zwischen meinen Krümeln gilt bei mir als zusätzliche Beilage.",
+     "english":"Back to the sidewalk, please. Grass among my crumbs counts as an extra side dish to me."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-grass-04",
+     "text":"Bitte verlassen Sie den Rasen. Die Kruste bleibt knusprig; den Rasen bitte nicht kneten.",
+     "english":"Please leave the lawn. The crust stays crisp; please don't knead the lawn."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-road-01",
+     "text":"Runter von der Fahrbahn, bitte. Ich sortiere Salzkörner, keine Stoßstangen.",
+     "english":"Off the road, please. I sort grains of salt, not bumpers."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-road-02",
+     "text":"Bitte auf den Gehweg. Die Straße ist kein Backblech, auf dem man sich ausbreitet.",
+     "english":"Onto the sidewalk, please. The road is not a baking tray you can spread out on."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-road-03",
+     "text":"Auf den Gehweg, bitte; das Loch gehört in die Brezel, nicht in den fließenden Verkehr.",
+     "english":"Onto the sidewalk, please; the hole belongs in the pretzel, not in moving traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-road-04",
+     "text":"Zurück auf den Gehweg. Ich möchte die Krümel im Blick behalten, nicht Ihre Ausweichmanöver zwischen Autos.",
+     "english":"Back to the sidewalk. I want to keep track of the crumbs, not your evasive moves between cars."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-01",
+     "text":"Bitte zum Übergang. Die Löcher in meiner Brezel sind keine Lücken im Verkehr.",
+     "english":"To the crossing, please. The holes in my pretzel are not gaps in traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-02",
+     "text":"Am Übergang erst schauen, dann gehen. Meine Brezel kann warten, auch wenn ich das ungern zugebe.",
+     "english":"Check at the crossing before you go. My pretzel can wait, though I don't like admitting it."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-03",
+     "text":"Bitte über den Übergang. Verschlungene Wege sind bei mir nur fürs Gebäck vorgesehen.",
+     "english":"Please use the crossing. Twisted routes are reserved for pastries as far as I'm concerned."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-04",
+     "text":"Bitte am Übergang nach beiden Seiten schauen; ich zähle inzwischen die Salzkörner noch einmal.",
+     "english":"Please look both ways at the crossing; I'll count the grains of salt again meanwhile."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-05",
+     "text":"Zum Übergang, bitte. Eine Abkürzung macht die Brezel nicht frischer, nur meine Wegbeschreibung länger.",
+     "english":"To the crossing, please. A shortcut doesn't make the pretzel fresher, just my directions longer."
+    }),
+    Object.freeze({
+     "id":"crowd-baerbel-brezel-reactive-germany-jaywalker-06",
+     "text":"Bitte nehmen Sie den Übergang; ich habe die Krümelroute dorthin bereits gedanklich ausgelegt.",
+     "english":"Please use the crossing; I've already mentally laid a trail of crumbs leading there."
+    })
+   ])
+  })
+ }),
+ "crowd-brigitte-bueroklammer":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-grass-01",
+     "text":"Zurück auf den Gehweg. Ihre footprints im Rasen kann ich nicht einfach zusammenklammern.",
+     "english":"Back to the sidewalk. I can't just clip your footprints in the lawn together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-grass-02",
+     "text":"Bitte vom Rasen. Die Grünfläche ist keine paper edge, die ich unter Ihren Schuhen festklemme.",
+     "english":"Off the lawn, please. The lawn isn't a paper edge for me to clamp beneath your shoes."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-grass-03",
+     "text":"Zurück auf den Weg. Ich brauche eine straight lawn edge, keinen fold-out attachment.",
+     "english":"Back to the path. I need a straight lawn edge, not a fold-out attachment."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-grass-04",
+     "text":"Bitte vom Gras auf den Weg. Meine paperclip hält zwei Blätter zusammen, aber keinen flattened Halm aufrecht.",
+     "english":"Off the grass and onto the path, please. My paperclip holds two sheets together, but won't hold flattened grass upright."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-road-01",
+     "text":"Runter von der Fahrbahn, bitte. Eine paperclip verbindet Blätter; Sie müssen keine cars zusammenhalten.",
+     "english":"Off the road, please. A paperclip joins sheets; you don't need to hold cars together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-road-02",
+     "text":"Bitte zurück auf den Gehweg. Eine loose page gehört festgeklemmt, ein Fußgänger nicht zwischen bumpers.",
+     "english":"Back to the sidewalk, please. A loose page should be clamped in place, not a pedestrian between bumpers."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-road-03",
+     "text":"Bitte verlassen Sie die Fahrbahn. Ihr Standort ist ein loose attachment; befestigen Sie ihn gedanklich am Gehweg.",
+     "english":"Please leave the road. Your location is a loose attachment; mentally fasten it to the sidewalk."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-road-04",
+     "text":"Hier ist kein fastening margin. Bitte runter von der Fahrbahn; loose ends werden auf dem Gehweg besprochen.",
+     "english":"No fastening margin here. Off the road, please; loose ends are discussed on the sidewalk."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-01",
+     "text":"Nehmen Sie den Übergang. Er connects die Seiten; ausnahmsweise muss ich nichts zusammenklammern.",
+     "english":"Use the crossing. It connects the sides; for once I don't have to clip anything together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-02",
+     "text":"Bitte am Übergang erst schauen. Ich kann einen missing glance nicht hinten anheften.",
+     "english":"Please look first at the crossing. I can't attach a missing glance afterwards."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-03",
+     "text":"Zum Übergang, bitte. Ein gap zwischen Autos ist noch keine neatly fastened Verbindung.",
+     "english":"To the crossing, please. A gap between cars is not a neatly fastened connection."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-04",
+     "text":"Erst am Übergang den Verkehr prüfen. Eine paperclip hält Ihre impatience nicht am Bordstein fest.",
+     "english":"Check the traffic at the crossing first. A paperclip won't pin your impatience to the curb."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-05",
+     "text":"Bitte den Übergang benutzen. Zwei road sides lose übereinanderzulegen ergibt noch keinen orderly path.",
+     "english":"Please use the crossing. Loosely stacking two sides of a road doesn't make an orderly path."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-berlin-jaywalker-06",
+     "text":"Am Übergang bitte in beide Richtungen schauen. The second side gehört auch unter die Klammer.",
+     "english":"Please look both ways at the crossing. The second side belongs under the clip too."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-grass-01",
+     "text":"Zurück auf den Gehweg. Ich kann Ihre Schuhabdrücke im Rasen nicht einfach zusammenklammern.",
+     "english":"Back to the sidewalk. I can't just clip your footprints in the lawn together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-grass-02",
+     "text":"Bitte vom Rasen. Die Grünfläche ist keine Papierkante, die ich unter Ihren Schuhen festklemme.",
+     "english":"Off the lawn, please. The lawn isn't a paper edge for me to clamp beneath your shoes."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-grass-03",
+     "text":"Zurück auf den Weg. Ich brauche eine gerade Rasenkante, keinen aufklappbaren Anhang.",
+     "english":"Back to the path. I need a straight lawn edge, not a fold-out attachment."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-grass-04",
+     "text":"Bitte vom Gras auf den Weg. Meine Büroklammer hält zwei Blätter zusammen, aber keinen plattgetretenen Halm aufrecht.",
+     "english":"Off the grass and onto the path, please. My paperclip holds two sheets together, but won't hold flattened grass upright."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-road-01",
+     "text":"Runter von der Fahrbahn, bitte. Eine Büroklammer verbindet Blätter; Sie müssen keine Autos zusammenhalten.",
+     "english":"Off the road, please. A paperclip joins sheets; you don't need to hold cars together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-road-02",
+     "text":"Bitte zurück auf den Gehweg. Eine lose Seite gehört festgeklemmt, ein Fußgänger nicht zwischen Stoßstangen.",
+     "english":"Back to the sidewalk, please. A loose page should be clamped in place, not a pedestrian between bumpers."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-road-03",
+     "text":"Bitte verlassen Sie die Fahrbahn. Ihr Standort ist ein loser Anhang; befestigen Sie ihn gedanklich am Gehweg.",
+     "english":"Please leave the road. Your location is a loose attachment; mentally fasten it to the sidewalk."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-road-04",
+     "text":"Hier ist kein Heftrand. Bitte runter von der Fahrbahn; lose Enden werden auf dem Gehweg besprochen.",
+     "english":"No fastening margin here. Off the road, please; loose ends are discussed on the sidewalk."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-01",
+     "text":"Nehmen Sie den Übergang. Er verbindet die Seiten; ausnahmsweise muss ich nichts zusammenklammern.",
+     "english":"Use the crossing. It connects the sides; for once I don't have to clip anything together."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-02",
+     "text":"Bitte am Übergang erst schauen. Ich kann einen fehlenden Blick nicht hinten anheften.",
+     "english":"Please look first at the crossing. I can't attach a missing glance afterwards."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-03",
+     "text":"Zum Übergang, bitte. Eine Lücke zwischen Autos ist noch keine sauber geheftete Verbindung.",
+     "english":"To the crossing, please. A gap between cars is not a neatly fastened connection."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-04",
+     "text":"Erst am Übergang den Verkehr prüfen. Eine Büroklammer hält Ihre Ungeduld nicht am Bordstein fest.",
+     "english":"Check the traffic at the crossing first. A paperclip won't pin your impatience to the curb."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-05",
+     "text":"Bitte den Übergang benutzen. Zwei Straßenseiten lose übereinanderzulegen ergibt noch keinen geordneten Weg.",
+     "english":"Please use the crossing. Loosely stacking two sides of a road doesn't make an orderly path."
+    }),
+    Object.freeze({
+     "id":"crowd-brigitte-bueroklammer-reactive-germany-jaywalker-06",
+     "text":"Am Übergang bitte in beide Richtungen schauen. Die zweite Seite gehört auch unter die Klammer.",
+     "english":"Please look both ways at the crossing. The second side belongs under the clip too."
+    })
+   ])
+  })
+ }),
+ "crowd-elfriede-eingabe":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-grass-01",
+     "text":"Bitte vom Rasen herunter. Ihr Schritt ist saved, aber von mir noch lange nicht accepted.",
+     "english":"Off the lawn, please. Your step is saved, but it is far from accepted by me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-grass-02",
+     "text":"Zurück auf den Gehweg, bitte. Die Grünfläche ist kein button, auch nicht mit two feet.",
+     "english":"Back to the sidewalk, please. The lawn isn't a button, not even with two feet."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-grass-03",
+     "text":"Bitte verlassen Sie den Rasen. Für diesen detour fehlt mir immer noch die printed confirmation.",
+     "english":"Please leave the lawn. I'm still missing the printed confirmation for this detour."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-grass-04",
+     "text":"Auf den Weg zurück, bitte. Repeated steps aufs Gras sind noch kein valid double click.",
+     "english":"Back to the path, please. Repeated steps onto grass don't amount to a valid double click."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-road-01",
+     "text":"Bitte runter von der Fahrbahn. Ihre Ankunft ist not submitted yet; bleiben Sie deshalb nicht zwischen Autos stehen.",
+     "english":"Off the road, please. Your arrival hasn't been submitted yet; don't stand between cars because of that."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-road-02",
+     "text":"Zurück auf den Gehweg. Die Autos warten nicht darauf, dass ich Ihre position in writing bestätige.",
+     "english":"Back to the sidewalk. The cars won't wait for me to confirm your position in writing."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-road-03",
+     "text":"Bitte verlassen Sie die Fahrbahn. Ich finde hier keinen button, mit dem sich der traffic anhalten lässt.",
+     "english":"Please leave the road. I can't find a button here that stops the traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-road-04",
+     "text":"Auf den Gehweg, bitte. Ihre Bewegung wurde recorded; die Fahrbahn braucht deshalb keinen permanent entry.",
+     "english":"Onto the sidewalk, please. Your movement was recorded; that doesn't mean the road needs a permanent entry."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-01",
+     "text":"Bitte zum Übergang. Der shortest route ist nur preselected, noch nicht von mir bestätigt.",
+     "english":"To the crossing, please. The shortest route is merely preselected, not yet confirmed by me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-02",
+     "text":"Am Übergang erst schauen, dann gehen. Den missing glance kann ich nicht nachträglich uploaden.",
+     "english":"Look first at the crossing, then go. I can't upload the missing glance afterwards."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-03",
+     "text":"Bitte benutzen Sie den Übergang. Für Ihren first step fehlt mir die confirmation auf Papier.",
+     "english":"Please use the crossing. I'm missing the paper confirmation for your first step."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-04",
+     "text":"Zum Übergang, bitte. Ein imagined mouse click auf die andere Straßenseite reicht mir als input nicht.",
+     "english":"To the crossing, please. An imagined mouse click on the other side of the road isn't enough input for me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-05",
+     "text":"Bitte am Übergang den Verkehr prüfen. Saved ist Ihr Ziel; submitted werden sollen nicht Ihre Schuhe.",
+     "english":"Please check the traffic at the crossing. Your destination is saved; your shoes aren't supposed to be submitted."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-berlin-jaywalker-06",
+     "text":"Bleiben Sie zum Prüfen am Übergang. Auch ein double click ersetzt nicht den Blick nach both sides.",
+     "english":"Pause at the crossing to check. Even a double click doesn't replace looking both ways."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-grass-01",
+     "text":"Bitte vom Rasen herunter. Ihr Schritt ist gespeichert, aber von mir noch lange nicht angenommen.",
+     "english":"Off the lawn, please. Your step is saved, but it is far from accepted by me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-grass-02",
+     "text":"Zurück auf den Gehweg, bitte. Die Grünfläche ist keine Schaltfläche, auch nicht mit zwei Füßen.",
+     "english":"Back to the sidewalk, please. The lawn isn't a button, not even with two feet."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-grass-03",
+     "text":"Bitte verlassen Sie den Rasen. Für diesen Umweg fehlt mir immer noch die ausgedruckte Bestätigung.",
+     "english":"Please leave the lawn. I'm still missing the printed confirmation for this detour."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-grass-04",
+     "text":"Auf den Weg zurück, bitte. Wiederholte Schritte aufs Gras sind noch kein gültiger Doppelklick.",
+     "english":"Back to the path, please. Repeated steps onto grass don't amount to a valid double click."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-road-01",
+     "text":"Bitte runter von der Fahrbahn. Ihre Ankunft ist noch nicht abgeschickt; bleiben Sie deshalb nicht zwischen Autos stehen.",
+     "english":"Off the road, please. Your arrival hasn't been submitted yet; don't stand between cars because of that."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-road-02",
+     "text":"Zurück auf den Gehweg. Die Autos warten nicht darauf, dass ich Ihre Position schriftlich bestätige.",
+     "english":"Back to the sidewalk. The cars won't wait for me to confirm your position in writing."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-road-03",
+     "text":"Bitte verlassen Sie die Fahrbahn. Ich finde hier keine Schaltfläche, mit der sich der Verkehr anhalten lässt.",
+     "english":"Please leave the road. I can't find a button here that stops the traffic."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-road-04",
+     "text":"Auf den Gehweg, bitte. Ihre Bewegung wurde erfasst; die Fahrbahn braucht deshalb keinen dauerhaften Eintrag.",
+     "english":"Onto the sidewalk, please. Your movement was recorded; that doesn't mean the road needs a permanent entry."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-01",
+     "text":"Bitte zum Übergang. Der kürzeste Weg ist nur vorausgewählt, noch nicht von mir bestätigt.",
+     "english":"To the crossing, please. The shortest route is merely preselected, not yet confirmed by me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-02",
+     "text":"Am Übergang erst schauen, dann gehen. Den fehlenden Blick kann ich nicht nachträglich hochladen.",
+     "english":"Look first at the crossing, then go. I can't upload the missing glance afterwards."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-03",
+     "text":"Bitte benutzen Sie den Übergang. Für Ihren ersten Schritt fehlt mir die Bestätigung auf Papier.",
+     "english":"Please use the crossing. I'm missing the paper confirmation for your first step."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-04",
+     "text":"Zum Übergang, bitte. Ein gedachter Mausklick auf die andere Straßenseite reicht mir als Eingabe nicht.",
+     "english":"To the crossing, please. An imagined mouse click on the other side of the road isn't enough input for me."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-05",
+     "text":"Bitte am Übergang den Verkehr prüfen. Gespeichert ist Ihr Ziel; abgeschickt werden sollen nicht Ihre Schuhe.",
+     "english":"Please check the traffic at the crossing. Your destination is saved; your shoes aren't supposed to be submitted."
+    }),
+    Object.freeze({
+     "id":"crowd-elfriede-eingabe-reactive-germany-jaywalker-06",
+     "text":"Bleiben Sie zum Prüfen am Übergang. Auch ein Doppelklick ersetzt nicht den Blick nach beiden Seiten.",
+     "english":"Pause at the crossing to check. Even a double click doesn't replace looking both ways."
+    })
+   ])
+  })
+ }),
+ "crowd-guenther-gartenzaun":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-grass-01",
+     "text":"Back auf den Weg! Nur weil hier no fence steht, ist das noch lange keine Einladung.",
+     "english":"Back onto the path! Just because there is no fence here does not make it an invitation."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-grass-02",
+     "text":"Raus aus dem Grün! Your shadow ist schon drüben, jetzt müssen nicht auch noch die Schuhe follow.",
+     "english":"Out of the greenery! Your shadow is already over there; now your shoes do not need to follow as well."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-grass-03",
+     "text":"Back auf den Gehweg! Meine imaginary fence line braucht kein gate; der Rasen ist trotzdem no shortcut.",
+     "english":"Back onto the pavement! My imaginary fence line needs no gate; the lawn is still no shortcut."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-grass-04",
+     "text":"Die Wiese is not a second entrance. Nehmen Sie den Weg, bevor Ihr Besuch hier Wurzeln schlägt.",
+     "english":"The lawn is not a second entrance. Take the path before your visit puts down roots here."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-road-01",
+     "text":"Off the Fahrbahn! Die Bordsteinkante is a boundary, keine unverbindliche Empfehlung.",
+     "english":"Off the carriageway! The kerb is a boundary, not a nonbinding recommendation."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-road-02",
+     "text":"Back auf den Gehweg! Autos don't stop, bloß weil Sie da gerade Ihr Revier abstecken.",
+     "english":"Back onto the pavement! Cars do not stop just because you are marking out your territory there."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-road-03",
+     "text":"Off the Fahrbahn! In meinem imaginary Revier bleibt through traffic auf Rädern und Sie auf dem Gehweg.",
+     "english":"Off the carriageway! In my imaginary territory, through traffic stays on wheels and you stay on the pavement."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-road-04",
+     "text":"Out of the Straße! Selbst mein Gartentor stays on seiner Seite, und das hat Scharniere.",
+     "english":"Out of the road! Even my garden gate stays on its own side, and that has hinges."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-01",
+     "text":"Look before dem Überqueren! Ein Bordstein is not a garden gate, durch das man einfach ungefragt marschiert.",
+     "english":"Look before crossing! A kerb is not a garden gate that you simply march through without asking."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-02",
+     "text":"To the Übergang! Die andere Straßenseite isn't moving away, während Sie den ordentlichen Zugang suchen.",
+     "english":"To the crossing! The other side of the road is not moving away while you look for the proper entrance."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-03",
+     "text":"First links und rechts schauen, then hinüber. Mein Zaunpfosten hat mehr Überblick, und der steht fest.",
+     "english":"First look left and right, then cross. My fencepost has a better overview, and it is fixed in place."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-04",
+     "text":"Use den Übergang! Die Straße is not a hedge, durch die man mal eben eine Lücke sucht.",
+     "english":"Use the crossing! The road is not a hedge where you just look for a gap to squeeze through."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-05",
+     "text":"Wait und check den Verkehr! Ihre Abkürzung endet not automatically vor meiner Zuständigkeit.",
+     "english":"Wait and check the traffic! Your shortcut does not automatically end before my jurisdiction begins."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-berlin-jaywalker-06",
+     "text":"Drüben stays drüben auch später. Erst am Übergang schauen, then dürfen Ihre Schuhe das Gebiet wechseln.",
+     "english":"The other side will still be there later. Look at the crossing first; then your shoes may change territory."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-grass-01",
+     "text":"Zurück auf den Weg! Nur weil hier kein Zaun steht, ist das noch lange keine Einladung.",
+     "english":"Back onto the path! Just because there is no fence here does not make it an invitation."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-grass-02",
+     "text":"Raus aus dem Grün! Ihr Schatten ist schon drüben, jetzt müssen nicht auch noch die Schuhe nach.",
+     "english":"Out of the greenery! Your shadow is already over there; now your shoes do not need to follow as well."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-grass-03",
+     "text":"Auf den Gehweg! Meine gedachte Zaunlinie braucht kein Tor; der Rasen ist trotzdem keine Abkürzung.",
+     "english":"Back onto the pavement! My imaginary fence line needs no gate; the lawn is still no shortcut."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-grass-04",
+     "text":"Die Wiese ist kein zweiter Eingang. Nehmen Sie den Weg, bevor Ihr Besuch hier Wurzeln schlägt.",
+     "english":"The lawn is not a second entrance. Take the path before your visit puts down roots here."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-road-01",
+     "text":"Runter von der Fahrbahn! Die Bordsteinkante ist eine Grenze, keine unverbindliche Empfehlung.",
+     "english":"Off the carriageway! The kerb is a boundary, not a nonbinding recommendation."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-road-02",
+     "text":"Zurück auf den Gehweg! Autos halten nicht an, bloß weil Sie da gerade Ihr Revier abstecken.",
+     "english":"Back onto the pavement! Cars do not stop just because you are marking out your territory there."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-road-03",
+     "text":"Runter von der Fahrbahn! In meinem gedachten Revier bleibt der Durchgangsverkehr auf Rädern und Sie auf dem Gehweg.",
+     "english":"Off the carriageway! In my imaginary territory, through traffic stays on wheels and you stay on the pavement."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-road-04",
+     "text":"Aus der Straße raus! Selbst mein Gartentor bleibt auf seiner Seite, und das hat Scharniere.",
+     "english":"Out of the road! Even my garden gate stays on its own side, and that has hinges."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-01",
+     "text":"Vor dem Überqueren schauen! Ein Bordstein ist kein Gartentor, durch das man einfach ungefragt marschiert.",
+     "english":"Look before crossing! A kerb is not a garden gate that you simply march through without asking."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-02",
+     "text":"Zum Übergang! Die andere Straßenseite zieht nicht weg, während Sie den ordentlichen Zugang suchen.",
+     "english":"To the crossing! The other side of the road is not moving away while you look for the proper entrance."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-03",
+     "text":"Erst links und rechts schauen, dann hinüber. Mein Zaunpfosten hat mehr Überblick, und der steht fest.",
+     "english":"First look left and right, then cross. My fencepost has a better overview, and it is fixed in place."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-04",
+     "text":"Benutzen Sie den Übergang! Die Straße ist keine Hecke, durch die man mal eben eine Lücke sucht.",
+     "english":"Use the crossing! The road is not a hedge where you just look for a gap to squeeze through."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-05",
+     "text":"Warten Sie und prüfen Sie den Verkehr! Ihre Abkürzung endet nicht automatisch vor meiner Zuständigkeit.",
+     "english":"Wait and check the traffic! Your shortcut does not automatically end before my jurisdiction begins."
+    }),
+    Object.freeze({
+     "id":"crowd-guenther-gartenzaun-reactive-germany-jaywalker-06",
+     "text":"Drüben ist auch noch später drüben. Erst am Übergang schauen, dann dürfen Ihre Schuhe das Gebiet wechseln.",
+     "english":"The other side will still be there later. Look at the crossing first; then your shoes may change territory."
+    })
+   ])
+  })
+ }),
+ "crowd-hildegard-brotzeit":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-grass-01",
+     "text":"Please zurück auf den Weg. Eine snack break macht aus der Wiese noch keine ausgelegte Serviette.",
+     "english":"Please return to the path. A snack break does not turn the lawn into a napkin laid out for you."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-grass-02",
+     "text":"Off the Rasen, bitte. In meiner Pausenordnung steht Brotzeit, not Schuhputzen vor dem ersten Bissen.",
+     "english":"Off the lawn, please. My break schedule says snack time, not cleaning shoes before the first bite."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-grass-03",
+     "text":"Der Senf waits for die nächste Pause. Sie warten bitte on the path, nicht zwischen den Grashalmen.",
+     "english":"The mustard is waiting for the next break. Please wait on the path, not among the blades of grass."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-grass-04",
+     "text":"Die Serviette stays clean, die Wiese unbetreten. Kommen Sie on the path, dann besprechen wir die Pause.",
+     "english":"The napkin stays clean and the lawn untrodden. Come onto the path, then we can discuss the break."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-road-01",
+     "text":"Please von der Fahrbahn auf den Gehweg. Die Pause starts beim Brot, not zwischen vorbeifahrenden Autos.",
+     "english":"Please move from the carriageway onto the pavement. The break begins with bread, not between passing cars."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-road-02",
+     "text":"Auf dem Gehweg lässt sich warten. Die Fahrbahn is no place für eine extended Kaffeepause.",
+     "english":"You can wait on the pavement. The carriageway is no place for an extended coffee break."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-road-03",
+     "text":"First die Straße verlassen, then auspacken. Ihre Brotzeit braucht keine Begleitung aus Hupen.",
+     "english":"First leave the road, then unpack. Your snack break does not need an accompaniment of car horns."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-road-04",
+     "text":"Back auf den Gehweg, bitte. Der Senf can wait, der Verkehr fährt trotzdem weiter.",
+     "english":"Back onto the pavement, please. The mustard can wait; the traffic keeps moving regardless."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-01",
+     "text":"First am Übergang schauen, then gehen. Ich unterbreche meine Brotzeit ungern für Ihren shortcut.",
+     "english":"Look at the crossing first, then walk. I would rather not interrupt my snack break for your shortcut."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-02",
+     "text":"Please check den Verkehr. Auch vor dem second bite schaut man, was noch im Weg ist.",
+     "english":"Please check the traffic. Even before the second bite, you look to see what is still in the way."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-03",
+     "text":"Take den Übergang. A little waiting passt noch zwischen Brot und Senf.",
+     "english":"Take the crossing. A little waiting still fits between the bread and the mustard."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-04",
+     "text":"Look links, look rechts, Brotzeit later. Diese Reihenfolge schmeckt mir deutlich besser.",
+     "english":"Look left, look right, snack time later. That order tastes much better to me."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-05",
+     "text":"Wait am Übergang auf eine safe opportunity. Meine Pausenglocke hält keine Autos an.",
+     "english":"Wait at the crossing for a safe opportunity. My break bell does not stop cars."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-berlin-jaywalker-06",
+     "text":"First den Verkehr checken, then hinüber und weiteressen. Die Serviette is not ein Fähnchen zum Anhalten.",
+     "english":"First check the traffic, then cross and carry on eating. The napkin is not a little flag for stopping traffic."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-grass-01",
+     "text":"Bitte zurück auf den Weg. Eine Brotzeitpause macht aus der Wiese noch keine ausgelegte Serviette.",
+     "english":"Please return to the path. A snack break does not turn the lawn into a napkin laid out for you."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-grass-02",
+     "text":"Runter vom Rasen, bitte. In meiner Pausenordnung steht Brotzeit, nicht Schuhputzen vor dem ersten Bissen.",
+     "english":"Off the lawn, please. My break schedule says snack time, not cleaning shoes before the first bite."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-grass-03",
+     "text":"Der Senf wartet auf die nächste Pause. Sie warten bitte auf dem Weg, nicht zwischen den Grashalmen.",
+     "english":"The mustard is waiting for the next break. Please wait on the path, not among the blades of grass."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-grass-04",
+     "text":"Die Serviette bleibt sauber, die Wiese unbetreten. Kommen Sie auf den Weg, dann besprechen wir die Pause.",
+     "english":"The napkin stays clean and the lawn untrodden. Come onto the path, then we can discuss the break."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-road-01",
+     "text":"Bitte von der Fahrbahn auf den Gehweg. Die Pause beginnt beim Brot, nicht zwischen vorbeifahrenden Autos.",
+     "english":"Please move from the carriageway onto the pavement. The break begins with bread, not between passing cars."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-road-02",
+     "text":"Auf dem Gehweg lässt sich warten. Die Fahrbahn ist kein Platz für eine verlängerte Kaffeepause.",
+     "english":"You can wait on the pavement. The carriageway is no place for an extended coffee break."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-road-03",
+     "text":"Erst die Straße verlassen, dann auspacken. Ihre Brotzeit braucht keine Begleitung aus Hupen.",
+     "english":"First leave the road, then unpack. Your snack break does not need an accompaniment of car horns."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-road-04",
+     "text":"Zurück auf den Gehweg, bitte. Der Senf kann warten, der Verkehr fährt trotzdem weiter.",
+     "english":"Back onto the pavement, please. The mustard can wait; the traffic keeps moving regardless."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-01",
+     "text":"Erst am Übergang schauen, dann gehen. Ich unterbreche meine Brotzeit ungern für Ihre Abkürzung.",
+     "english":"Look at the crossing first, then walk. I would rather not interrupt my snack break for your shortcut."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-02",
+     "text":"Bitte prüfen Sie den Verkehr. Auch vor dem zweiten Bissen schaut man, was noch im Weg ist.",
+     "english":"Please check the traffic. Even before the second bite, you look to see what is still in the way."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-03",
+     "text":"Nehmen Sie den Übergang. Ein bisschen Warten passt noch zwischen Brot und Senf.",
+     "english":"Take the crossing. A little waiting still fits between the bread and the mustard."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-04",
+     "text":"Links schauen, rechts schauen, Brotzeit später. Diese Reihenfolge schmeckt mir deutlich besser.",
+     "english":"Look left, look right, snack time later. That order tastes much better to me."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-05",
+     "text":"Warten Sie am Übergang auf eine sichere Gelegenheit. Meine Pausenglocke hält keine Autos an.",
+     "english":"Wait at the crossing for a safe opportunity. My break bell does not stop cars."
+    }),
+    Object.freeze({
+     "id":"crowd-hildegard-brotzeit-reactive-germany-jaywalker-06",
+     "text":"Erst Verkehr prüfen, dann hinüber und weiteressen. Die Serviette ist kein Fähnchen zum Anhalten.",
+     "english":"First check the traffic, then cross and carry on eating. The napkin is not a little flag for stopping traffic."
+    })
+   ])
+  })
+ }),
+ "crowd-irmgard-aktenordner":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-grass-01",
+     "text":"Please vom Rasen auf den Weg. Ich file Ihre Schritte unter Gehweg, not unter Grünanlage.",
+     "english":"Please leave the lawn for the path. I file your footsteps under pavement, not green space."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-grass-02",
+     "text":"Die Wiese is not a filing surface. Nehmen Sie Ihre Schuhe bitte wieder mit auf den Gehweg.",
+     "english":"The lawn is not a filing surface. Please take your shoes back onto the pavement."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-grass-03",
+     "text":"Back auf die Pflastersteine. Gras im Vorgang müsste ich sonst unter Garten und Gangart twice eintragen.",
+     "english":"Back onto the paving stones. Otherwise I would have to enter grass in the case twice, under garden and gait."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-grass-04",
+     "text":"Please leave den Rasen. Meine three copies sehen übereinstimmend einen Aufenthalt auf dem Gehweg vor.",
+     "english":"Please leave the lawn. All three of my copies agree that you should be on the pavement."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-road-01",
+     "text":"Please switch auf den Gehweg. Fahrbahn und Fußweg stehen in meinem Ordner unter different tabs.",
+     "english":"Please move onto the pavement. The carriageway and footpath appear under different tabs in my binder."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-road-02",
+     "text":"Out of the Fahrbahn, bitte. Einen Menschen zwischen Autos kann ich unter no suitable keyword ablegen.",
+     "english":"Off the carriageway, please. I cannot file a person between cars under any suitable keyword."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-road-03",
+     "text":"Der Gehweg is your filing position. Auf der Fahrbahn fehlen mir für Sie die passenden Trennblätter.",
+     "english":"The pavement is your filing position. On the carriageway, I do not have the right dividers for you."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-road-04",
+     "text":"Please leave die Straße. Der Ordner ist still open, aber der Verkehr wartet deshalb nicht.",
+     "english":"Please leave the road. The binder is still open, but the traffic does not wait because of that."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-01",
+     "text":"First schauen, then überqueren. Im Register kommt checking vor completion, unabhängig vom Alphabet.",
+     "english":"First look, then cross. In the register, inspection comes before completion, regardless of the alphabet."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-02",
+     "text":"Please zum Übergang. Your shortcut passt weder ins Straßenregister noch in die vorhandenen three copies.",
+     "english":"Please go to the crossing. Your shortcut fits neither the street register nor the three existing copies."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-03",
+     "text":"Check beide Richtungen. Eine unread Straßenseite ist wie eine ausgelassene Seite im Ordner.",
+     "english":"Check both directions. An unread side of the road is like a page skipped in the binder."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-04",
+     "text":"Take den Übergang und look vorher. Ich möchte Ihre Ankunft unter Erledigt ablegen.",
+     "english":"Use the crossing and look first. I would like to file your arrival under Completed."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-05",
+     "text":"Check den Verkehr, bevor Sie hinübergehen. Ich sortiere nach Alphabet, die Autos leider nicht.",
+     "english":"Check the traffic before you cross. I sort alphabetically; unfortunately, the cars do not."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-berlin-jaywalker-06",
+     "text":"Use den Übergang. Das ist die right place im Vorgang, auch ohne farbiges Registerblatt.",
+     "english":"Use the crossing. That is the right place in the case, even without a colored index tab."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-grass-01",
+     "text":"Bitte vom Rasen auf den Weg. Ich führe Ihre Schritte unter Gehweg, nicht unter Grünanlage.",
+     "english":"Please leave the lawn for the path. I file your footsteps under pavement, not green space."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-grass-02",
+     "text":"Die Wiese ist keine Ablagefläche. Nehmen Sie Ihre Schuhe bitte wieder mit auf den Gehweg.",
+     "english":"The lawn is not a filing surface. Please take your shoes back onto the pavement."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-grass-03",
+     "text":"Zurück auf die Pflastersteine. Gras im Vorgang müsste ich sonst unter Garten und Gangart doppelt eintragen.",
+     "english":"Back onto the paving stones. Otherwise I would have to enter grass in the case twice, under garden and gait."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-grass-04",
+     "text":"Verlassen Sie bitte den Rasen. Meine drei Ausfertigungen sehen übereinstimmend einen Aufenthalt auf dem Gehweg vor.",
+     "english":"Please leave the lawn. All three of my copies agree that you should be on the pavement."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-road-01",
+     "text":"Bitte auf den Gehweg wechseln. Fahrbahn und Fußweg stehen in meinem Ordner unter verschiedenen Registern.",
+     "english":"Please move onto the pavement. The carriageway and footpath appear under different tabs in my binder."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-road-02",
+     "text":"Raus aus der Fahrbahn, bitte. Einen Menschen zwischen Autos kann ich unter keinem passenden Stichwort ablegen.",
+     "english":"Off the carriageway, please. I cannot file a person between cars under any suitable keyword."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-road-03",
+     "text":"Der Gehweg ist Ihre Ablageposition. Auf der Fahrbahn fehlen mir für Sie die passenden Trennblätter.",
+     "english":"The pavement is your filing position. On the carriageway, I do not have the right dividers for you."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-road-04",
+     "text":"Bitte verlassen Sie die Straße. Der Ordner liegt noch offen, aber der Verkehr wartet deshalb nicht.",
+     "english":"Please leave the road. The binder is still open, but the traffic does not wait because of that."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-01",
+     "text":"Erst schauen, dann überqueren. Im Register kommt die Prüfung vor der Erledigung, unabhängig vom Alphabet.",
+     "english":"First look, then cross. In the register, inspection comes before completion, regardless of the alphabet."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-02",
+     "text":"Bitte zum Übergang. Ihre Abkürzung passt weder ins Straßenregister noch in die vorhandenen drei Ausfertigungen.",
+     "english":"Please go to the crossing. Your shortcut fits neither the street register nor the three existing copies."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-03",
+     "text":"Prüfen Sie beide Richtungen. Eine ungelesene Straßenseite ist wie eine ausgelassene Seite im Ordner.",
+     "english":"Check both directions. An unread side of the road is like a page skipped in the binder."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-04",
+     "text":"Nehmen Sie den Übergang und schauen Sie vorher. Ich möchte Ihre Ankunft unter Erledigt ablegen.",
+     "english":"Use the crossing and look first. I would like to file your arrival under Completed."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-05",
+     "text":"Prüfen Sie den Verkehr, bevor Sie hinübergehen. Ich sortiere nach Alphabet, die Autos leider nicht.",
+     "english":"Check the traffic before you cross. I sort alphabetically; unfortunately, the cars do not."
+    }),
+    Object.freeze({
+     "id":"crowd-irmgard-aktenordner-reactive-germany-jaywalker-06",
+     "text":"Benutzen Sie den Übergang. Das ist die richtige Stelle im Vorgang, auch ohne farbiges Registerblatt.",
+     "english":"Use the crossing. That is the right place in the case, even without a colored index tab."
+    })
+   ])
+  })
+ }),
+ "crowd-klaus-dieter-knoedel":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-grass-01",
+     "text":"Der Rasen ist not a herb garnish! Zurück auf den Gehweg, bevor your shoes das Rezept ändern.",
+     "english":"The lawn is not a herb garnish! Back onto the pavement before your shoes change the recipe."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-grass-02",
+     "text":"Für your green garnish visit fehlt Formblatt K sieben. Den Gehweg benutzen, please!",
+     "english":"Your visit to the green garnish is missing form K seven. Use the pavement, please!"
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-grass-03",
+     "text":"Your Sohlen knead hier den falschen Teig! Vom Rasen runter; the Gehweg ist bereits portioniert.",
+     "english":"Your soles are kneading the wrong dough here! Off the lawn; the pavement is already portioned."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-grass-04",
+     "text":"Die Halme sind no sauce bed für Ihre Füße. Auf den Gehweg, the plating inspection läuft noch!",
+     "english":"The blades are no sauce bed for your feet. Onto the pavement; the plating inspection is still running!"
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-road-01",
+     "text":"Die Fahrbahn ist not a serving plate! Vom Asphalt runter, bevor someone Ihre Reihenfolge überholt.",
+     "english":"The carriageway is not a serving plate! Off the tarmac before someone overtakes your serving order."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-road-02",
+     "text":"Sie stehen in the gravy flow! Auf den Gehweg; die Autos warten not auf Formblatt K sieben.",
+     "english":"You are standing in the gravy flow! Onto the pavement; cars do not wait for form K seven."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-road-03",
+     "text":"My round Teller hat auch einen Rand! Auf den Gehweg; die Fahrbahn ist not für your feet angerichtet.",
+     "english":"My round plate has an edge too! Onto the pavement; the carriageway is not laid out for your feet."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-road-04",
+     "text":"Auf der Fahrbahn fehlt your standing position die Tellerfreigabe! Zurück auf den Gehweg, the dumpling file ist noch offen.",
+     "english":"Your position on the carriageway lacks plate approval! Back onto the pavement; the dumpling file is still open."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-01",
+     "text":"Vor dem crossing erst schauen! Der Zebrastreifen ist the designated plating area, nicht diese beliebige Stelle.",
+     "english":"Look before crossing! The pedestrian crossing is the designated plating area, not this arbitrary spot."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-02",
+     "text":"Erst check the traffic, dann am Zebrastreifen rüber! Einen Knödel wirft man auch not ungeprüft über den Teller.",
+     "english":"Check traffic, then use the pedestrian crossing! You would not throw an unchecked dumpling across the plate either."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-03",
+     "text":"Das crossing braucht eine saubere Reihenfolge! Check traffic, Zebrastreifen nehmen; die Soße kommt auch not vor dem Teller.",
+     "english":"Crossing needs a proper sequence! Check traffic, use the pedestrian crossing; the gravy does not come before the plate either."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-04",
+     "text":"Don't plate quer durch die Fahrbahn! Nehmen Sie after looking den Zebrastreifen; ich dulde no flying side dishes.",
+     "english":"Do not plate across the carriageway! Look, then use the pedestrian crossing; I will not tolerate flying side dishes."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-05",
+     "text":"Your shortcut application kleckert! Erst den Verkehr ansehen, dann am Zebrastreifen ordentlich hinüber, without gravy trail.",
+     "english":"Your shortcut application is dripping! Check the traffic, then cross neatly at the pedestrian crossing without a gravy trail."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-berlin-jaywalker-06",
+     "text":"Der Zebrastreifen sets the portions! Dort vorsichtig queren; den Verkehr schiebt no gravy spoon zurück.",
+     "english":"The pedestrian crossing sets the portions! Cross carefully there; no gravy spoon can push traffic back."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-grass-01",
+     "text":"Der Rasen ist keine Kräuterbeilage! Zurück auf den Gehweg, bevor Ihre Schuhe das Rezept ändern.",
+     "english":"The lawn is not a herb garnish! Back onto the pavement before your shoes change the recipe."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-grass-02",
+     "text":"Für Ihren Besuch in der grünen Beilage fehlt Formblatt K sieben. Den Gehweg benutzen, bitte!",
+     "english":"Your visit to the green garnish is missing form K seven. Use the pavement, please!"
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-grass-03",
+     "text":"Ihre Sohlen kneten hier den falschen Teig! Vom Rasen runter; der Gehweg ist bereits portioniert.",
+     "english":"Your soles are kneading the wrong dough here! Off the lawn; the pavement is already portioned."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-grass-04",
+     "text":"Die Halme sind kein Soßenbett für Ihre Füße. Auf den Gehweg, die Anrichteprüfung läuft noch!",
+     "english":"The blades are no sauce bed for your feet. Onto the pavement; the plating inspection is still running!"
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-road-01",
+     "text":"Die Fahrbahn ist kein Servierteller! Vom Asphalt runter, bevor hier jemand Ihre Reihenfolge überholt.",
+     "english":"The carriageway is not a serving plate! Off the tarmac before someone overtakes your serving order."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-road-02",
+     "text":"Sie stehen im Soßenlauf! Auf den Gehweg; die Autos warten nicht auf Formblatt K sieben.",
+     "english":"You are standing in the gravy flow! Onto the pavement; cars do not wait for form K seven."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-road-03",
+     "text":"Mein runder Teller hat auch einen Rand! Auf den Gehweg; die Fahrbahn ist nicht für Ihre Füße angerichtet.",
+     "english":"My round plate has an edge too! Onto the pavement; the carriageway is not laid out for your feet."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-road-04",
+     "text":"Auf der Fahrbahn fehlt Ihrer Standposition die Tellerfreigabe! Zurück auf den Gehweg, die Knödelakte ist noch offen.",
+     "english":"Your position on the carriageway lacks plate approval! Back onto the pavement; the dumpling file is still open."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-01",
+     "text":"Vor dem Rüberlaufen erst schauen! Der Zebrastreifen ist die vorgesehene Anrichtefläche, nicht diese beliebige Stelle.",
+     "english":"Look before crossing! The pedestrian crossing is the designated plating area, not this arbitrary spot."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-02",
+     "text":"Erst den Verkehr prüfen, dann am Zebrastreifen rüber! Einen Knödel wirft man auch nicht ungeprüft über den Teller.",
+     "english":"Check traffic, then use the pedestrian crossing! You would not throw an unchecked dumpling across the plate either."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-03",
+     "text":"Das Queren braucht eine saubere Reihenfolge! Verkehr prüfen, Zebrastreifen nehmen; die Soße kommt auch nicht vor dem Teller.",
+     "english":"Crossing needs a proper sequence! Check traffic, use the pedestrian crossing; the gravy does not come before the plate either."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-04",
+     "text":"Nicht quer durch die Fahrbahn anrichten! Nehmen Sie nach dem Schauen den Zebrastreifen; ich dulde keine fliegenden Beilagen.",
+     "english":"Do not plate across the carriageway! Look, then use the pedestrian crossing; I will not tolerate flying side dishes."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-05",
+     "text":"Ihr Abkürzungsantrag kleckert! Erst den Verkehr ansehen, dann am Zebrastreifen ordentlich hinüber, ohne Soßenspur.",
+     "english":"Your shortcut application is dripping! Check the traffic, then cross neatly at the pedestrian crossing without a gravy trail."
+    }),
+    Object.freeze({
+     "id":"crowd-klaus-dieter-knoedel-reactive-germany-jaywalker-06",
+     "text":"Der Zebrastreifen gibt die Portionen vor! Dort vorsichtig queren; den Verkehr schiebt kein Soßenlöffel zurück.",
+     "english":"The pedestrian crossing sets the portions! Cross carefully there; no gravy spoon can push traffic back."
+    })
+   ])
+  })
+ }),
+ "crowd-manfred-mittagsruhe":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-grass-01",
+     "text":"Die Halme rascheln already enough. Gehen Sie bitte wieder auf den Gehweg, preferably ohne Zugabe.",
+     "english":"The grass is rustling enough already. Please return to the pavement, preferably without an encore."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-grass-02",
+     "text":"Your Rasenschritt verlängert meine gefühlte Dienstzeit. Bitte auf den Gehweg; ich möchte diesen sigh not wiederholen.",
+     "english":"Your step on the grass extends my perceived shift. Onto the pavement, please; I would rather not repeat this sigh."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-grass-03",
+     "text":"Für rustling Halme ist gerade no speaking slot. Nehmen Sie den Gehweg, dort kann ich your steps wenigstens zählen.",
+     "english":"There is no speaking slot for rustling grass now. Use the pavement; at least I can count your steps there."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-grass-04",
+     "text":"Auf dem Rasen machen even quiet shoes Umstände. Zurück auf den Gehweg; my rest slip ist schon ausgefüllt.",
+     "english":"Even quiet shoes cause trouble on the lawn. Back onto the pavement; my rest slip is already filled in."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-road-01",
+     "text":"Auf der Fahrbahn folgt now another horn concert. Bitte auf den Gehweg, ich habe das schon einmal gehört.",
+     "english":"The carriageway is about to host another horn concert. Onto the pavement, please; I have heard it before."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-road-02",
+     "text":"Your standing break gehört not zwischen die Autos. Nehmen Sie den Gehweg; ich möchte without braking noises müde sein.",
+     "english":"Your standing break does not belong between cars. Use the pavement; I would like to be tired without braking noises."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-road-03",
+     "text":"Die Fahrbahn hat no whisper setting. Gehen Sie bitte auf den Gehweg, bevor ich den Verkehr personally um Ruhe bitte.",
+     "english":"The carriageway has no whisper setting. Please use the pavement before I personally ask the traffic to keep quiet."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-road-04",
+     "text":"Von der Fahrbahn please herunter. Your presence dort produziert gleich mehr noise, als meine Beschwerde noch tragen kann.",
+     "english":"Off the carriageway, please. Your presence there is about to produce more noise than my complaint can carry."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-01",
+     "text":"Beim crossing hätte ich gern less tyre squealing. Schauen Sie bitte erst und nehmen Sie den Zebrastreifen.",
+     "english":"I would prefer less tyre squealing during crossings. Please look first and use the pedestrian crossing."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-02",
+     "text":"Der shortcut macht wieder Arbeit für meine Ohren. Bitte vorsichtig am Zebrastreifen queren; ich bin already exhausted vom Zuhören.",
+     "english":"The shortcut gives my ears more work. Please cross carefully at the pedestrian crossing; listening alone has exhausted me."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-03",
+     "text":"Für sudden Loslaufen fehlt mir die Geduld. Erst schauen, dann zum Zebrastreifen; I can sigh später.",
+     "english":"I lack the patience for sudden dashes. Look first, then use the pedestrian crossing; I can sigh later."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-04",
+     "text":"Die Straße bitte not mit einem surprise entrance queren. Am Zebrastreifen vorsichtig schauen; das Hupen weckt sonst meinen second sigh.",
+     "english":"Do not cross with a surprise entrance. Look carefully at the pedestrian crossing; otherwise honking wakes my second sigh."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-05",
+     "text":"Your footsteps sind schon loud enough. Zum Zebrastreifen, bitte, und before crossing den Verkehr ansehen.",
+     "english":"Your footsteps are loud enough already. To the pedestrian crossing, please, and check the traffic before crossing."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-berlin-jaywalker-06",
+     "text":"My rest planning verträgt keine Vollbremsung. Nutzen Sie den Zebrastreifen with open eyes; ich möchte meine wenigstens kurz schließen.",
+     "english":"My rest plan cannot take an emergency stop. Use the pedestrian crossing with open eyes; I want mine briefly closed."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-grass-01",
+     "text":"Die Halme rascheln schon genug. Gehen Sie bitte wieder auf den Gehweg, möglichst ohne Zugabe.",
+     "english":"The grass is rustling enough already. Please return to the pavement, preferably without an encore."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-grass-02",
+     "text":"Ihr Rasenschritt verlängert meine gefühlte Dienstzeit. Bitte auf den Gehweg; ich möchte diesen Seufzer nicht wiederholen.",
+     "english":"Your step on the grass extends my perceived shift. Onto the pavement, please; I would rather not repeat this sigh."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-grass-03",
+     "text":"Für knisternde Halme ist gerade keine Sprechzeit. Nehmen Sie den Gehweg, dort kann ich Ihre Schritte wenigstens zählen.",
+     "english":"There is no speaking slot for rustling grass now. Use the pavement; at least I can count your steps there."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-grass-04",
+     "text":"Auf dem Rasen machen selbst leise Schuhe Umstände. Zurück auf den Gehweg; mein Ruhezettel ist schon ausgefüllt.",
+     "english":"Even quiet shoes cause trouble on the lawn. Back onto the pavement; my rest slip is already filled in."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-road-01",
+     "text":"Auf der Fahrbahn folgt jetzt wieder ein Hupkonzert. Bitte auf den Gehweg, ich habe das schon einmal gehört.",
+     "english":"The carriageway is about to host another horn concert. Onto the pavement, please; I have heard it before."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-road-02",
+     "text":"Ihre Standpause gehört nicht zwischen die Autos. Nehmen Sie den Gehweg; ich möchte ohne Bremsgeräusche müde sein.",
+     "english":"Your standing break does not belong between cars. Use the pavement; I would like to be tired without braking noises."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-road-03",
+     "text":"Die Fahrbahn hat keine Flüstereinstellung. Gehen Sie bitte auf den Gehweg, bevor ich den Verkehr persönlich um Ruhe bitte.",
+     "english":"The carriageway has no whisper setting. Please use the pavement before I personally ask the traffic to keep quiet."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-road-04",
+     "text":"Von der Fahrbahn bitte herunter. Ihre Anwesenheit dort produziert gleich mehr Lärm, als meine Beschwerde noch tragen kann.",
+     "english":"Off the carriageway, please. Your presence there is about to produce more noise than my complaint can carry."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-01",
+     "text":"Beim Queren hätte ich gern weniger Reifenquietschen. Schauen Sie bitte erst und nehmen Sie den Zebrastreifen.",
+     "english":"I would prefer less tyre squealing during crossings. Please look first and use the pedestrian crossing."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-02",
+     "text":"Die Abkürzung macht wieder Arbeit für meine Ohren. Bitte vorsichtig am Zebrastreifen queren; ich bin schon vom Zuhören erschöpft.",
+     "english":"The shortcut gives my ears more work. Please cross carefully at the pedestrian crossing; listening alone has exhausted me."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-03",
+     "text":"Für das plötzliche Loslaufen fehlt mir die Geduld. Erst schauen, dann zum Zebrastreifen; seufzen kann ich später.",
+     "english":"I lack the patience for sudden dashes. Look first, then use the pedestrian crossing; I can sigh later."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-04",
+     "text":"Die Straße bitte nicht mit einem Überraschungsauftritt queren. Am Zebrastreifen vorsichtig schauen; das Hupen weckt sonst meinen zweiten Seufzer.",
+     "english":"Do not cross with a surprise entrance. Look carefully at the pedestrian crossing; otherwise honking wakes my second sigh."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-05",
+     "text":"Ihre Schritte sind schon laut genug. Zum Zebrastreifen, bitte, und vor dem Queren den Verkehr ansehen.",
+     "english":"Your footsteps are loud enough already. To the pedestrian crossing, please, and check the traffic before crossing."
+    }),
+    Object.freeze({
+     "id":"crowd-manfred-mittagsruhe-reactive-germany-jaywalker-06",
+     "text":"Meine Ruheplanung verträgt keine Vollbremsung. Nutzen Sie den Zebrastreifen mit offenen Augen; ich möchte meine wenigstens kurz schließen.",
+     "english":"My rest plan cannot take an emergency stop. Use the pedestrian crossing with open eyes; I want mine briefly closed."
+    })
+   ])
+  })
+ }),
+ "crowd-ruediger-rasenkante":Object.freeze({
+  "berlin":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-grass-01",
+     "text":"Ein Halm liegt now crooked! Vom Rasen auf den Gehweg; ich muss your sole width noch im Lageplan nachtragen.",
+     "english":"One blade is crooked now! Off the lawn and onto the pavement; your sole width still needs adding to my survey plan."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-grass-02",
+     "text":"Your Schuhspitze verschiebt meine Messreihe! Zurück auf den Gehweg, the single blade ist noch nicht abschließend vermessen.",
+     "english":"Your shoe tip is shifting my measurements! Back onto the pavement; that individual blade has not been fully surveyed yet."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-grass-03",
+     "text":"Der Rasen hat hier a target height, keine entrance! Bitte auf den Gehweg; your heel verfälscht den Querschnitt.",
+     "english":"The grass has a target height here, not an entrance! Onto the pavement, please; your heel distorts the cross-section."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-grass-04",
+     "text":"Diesen Halm hatte ich gerade aligned! Den Rasen verlassen; auf dem Gehweg kann your foot wenigstens keine Blattanalyse knicken.",
+     "english":"I had just aligned that blade! Leave the lawn; on the pavement your foot at least cannot crumple a leaf analysis."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-road-01",
+     "text":"Your Standort liegt outside meiner Gehwegskizze! Runter von der Fahrbahn; moving cars lassen sich not mit dem Lineal anhalten.",
+     "english":"Your position is outside my pavement sketch! Off the carriageway; moving cars cannot be stopped with a ruler."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-road-02",
+     "text":"Die Fahrbahn ist no measuring plate für Ihre Sohlen! Auf den Gehweg; den Abstand zum next car messe ich ungern nachträglich.",
+     "english":"The carriageway is no measuring plate for your soles! Onto the pavement; I dislike measuring the next car's clearance afterward."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-road-03",
+     "text":"Der Lageplan sieht dort wheels vor, keine waiting shoes! Zurück auf den Gehweg; your position macht die Zeichnung unleserlich.",
+     "english":"The plan calls for wheels there, not waiting shoes! Back onto the pavement; your position makes the drawing illegible."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-road-04",
+     "text":"Der Bordstein ist my reference line! Bitte auf den Gehweg, sonst muss ich your street position mit einem Warnpfeil versehen.",
+     "english":"The kerb is my reference line! Onto the pavement, please, or I must add a warning arrow to your road position."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-01",
+     "text":"Sie cross outside der eingezeichneten Linie! Erst schauen, dann den Zebrastreifen nehmen; ich zeichne no spontaneous Schuhdiagonalen.",
+     "english":"You are crossing outside the marked line! Look first, then use the pedestrian crossing; I do not draw spontaneous shoe diagonals."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-02",
+     "text":"Der Zebrastreifen ist already surveyed! Dort vorsichtig queren; your shortcut bekommt keinen eigenen Maßstab.",
+     "english":"The pedestrian crossing is already surveyed! Cross carefully there; your shortcut does not get its own scale."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-03",
+     "text":"Erst check the traffic, dann am Zebrastreifen rüber! Im Lageplan fehlt mir das symbol for einen hastigen Sprung.",
+     "english":"Check traffic, then use the pedestrian crossing! My survey plan lacks a symbol for a hurried leap."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-04",
+     "text":"Your Diagonale spart no surveying! Nehmen Sie after looking den Zebrastreifen; ich dulde keine Schritte without Richtungspfeil.",
+     "english":"Your diagonal saves no surveying! Look, then use the pedestrian crossing; I will not tolerate steps without a direction arrow."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-05",
+     "text":"Das crossing beginnt mit Sichtprüfung, not momentum! Zum Zebrastreifen bitte; selbst ein Halm bekommt vor dem Umsetzen einen Lageplan.",
+     "english":"Crossing begins with visual inspection, not momentum! Use the pedestrian crossing; even a blade gets a survey plan before being moved."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-berlin-jaywalker-06",
+     "text":"Die Straßenbreite ist not a guessing question! Vorsichtig am Zebrastreifen queren; den Verkehr berechnet man not nach Augenmaß und Hoffnung.",
+     "english":"The road width is not a guessing game! Cross carefully at the pedestrian crossing; traffic is not calculated by eyeballing and hope."
+    })
+   ])
+  }),
+  "germany":Object.freeze({
+   "grass":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-grass-01",
+     "text":"Ein Halm liegt jetzt schief! Vom Rasen auf den Gehweg; ich muss Ihre Sohlenbreite noch im Lageplan nachtragen.",
+     "english":"One blade is crooked now! Off the lawn and onto the pavement; your sole width still needs adding to my survey plan."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-grass-02",
+     "text":"Ihre Schuhspitze verschiebt meine Messreihe! Zurück auf den Gehweg, der einzelne Halm ist noch nicht abschließend vermessen.",
+     "english":"Your shoe tip is shifting my measurements! Back onto the pavement; that individual blade has not been fully surveyed yet."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-grass-03",
+     "text":"Der Rasen hat hier eine Sollhöhe, keine Eintrittsstelle! Bitte auf den Gehweg; Ihre Ferse verfälscht den Querschnitt.",
+     "english":"The grass has a target height here, not an entrance! Onto the pavement, please; your heel distorts the cross-section."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-grass-04",
+     "text":"Diesen Halm hatte ich gerade ausgerichtet! Den Rasen verlassen; auf dem Gehweg kann Ihr Fuß wenigstens keine Blattanalyse knicken.",
+     "english":"I had just aligned that blade! Leave the lawn; on the pavement your foot at least cannot crumple a leaf analysis."
+    })
+   ]),
+   "road":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-road-01",
+     "text":"Ihr Standort liegt außerhalb meiner Gehwegskizze! Runter von der Fahrbahn; bewegte Autos lassen sich nicht mit dem Lineal anhalten.",
+     "english":"Your position is outside my pavement sketch! Off the carriageway; moving cars cannot be stopped with a ruler."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-road-02",
+     "text":"Die Fahrbahn ist keine Messplatte für Ihre Sohlen! Auf den Gehweg; den Abstand zum nächsten Auto messe ich ungern nachträglich.",
+     "english":"The carriageway is no measuring plate for your soles! Onto the pavement; I dislike measuring the next car's clearance afterward."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-road-03",
+     "text":"Der Lageplan sieht dort Räder vor, keine wartenden Schuhe! Zurück auf den Gehweg; Ihre Position macht die Zeichnung unleserlich.",
+     "english":"The plan calls for wheels there, not waiting shoes! Back onto the pavement; your position makes the drawing illegible."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-road-04",
+     "text":"Der Bordstein ist meine Bezugslinie! Bitte auf den Gehweg, sonst muss ich Ihre Straßenposition mit einem Warnpfeil versehen.",
+     "english":"The kerb is my reference line! Onto the pavement, please, or I must add a warning arrow to your road position."
+    })
+   ]),
+   "jaywalker":Object.freeze([
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-01",
+     "text":"Sie queren außerhalb der eingezeichneten Linie! Erst schauen, dann den Zebrastreifen nehmen; ich zeichne keine spontanen Schuhdiagonalen.",
+     "english":"You are crossing outside the marked line! Look first, then use the pedestrian crossing; I do not draw spontaneous shoe diagonals."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-02",
+     "text":"Der Zebrastreifen ist schon vermessen! Dort vorsichtig queren; Ihre Abkürzung bekommt keinen eigenen Maßstab.",
+     "english":"The pedestrian crossing is already surveyed! Cross carefully there; your shortcut does not get its own scale."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-03",
+     "text":"Erst den Verkehr prüfen, dann am Zebrastreifen rüber! Im Lageplan fehlt mir das Zeichen für einen hastigen Sprung.",
+     "english":"Check traffic, then use the pedestrian crossing! My survey plan lacks a symbol for a hurried leap."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-04",
+     "text":"Ihre Diagonale spart keine Vermessung! Nehmen Sie nach dem Schauen den Zebrastreifen; ich dulde keine Schritte ohne Richtungspfeil.",
+     "english":"Your diagonal saves no surveying! Look, then use the pedestrian crossing; I will not tolerate steps without a direction arrow."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-05",
+     "text":"Die Querung beginnt mit Sichtprüfung, nicht mit Schwung! Zum Zebrastreifen bitte; selbst ein Halm bekommt vor dem Umsetzen einen Lageplan.",
+     "english":"Crossing begins with visual inspection, not momentum! Use the pedestrian crossing; even a blade gets a survey plan before being moved."
+    }),
+    Object.freeze({
+     "id":"crowd-ruediger-rasenkante-reactive-germany-jaywalker-06",
+     "text":"Die Straßenbreite ist keine Schätzfrage! Vorsichtig am Zebrastreifen queren; den Verkehr berechnet man nicht nach Augenmaß und Hoffnung.",
+     "english":"The road width is not a guessing game! Cross carefully at the pedestrian crossing; traffic is not calculated by eyeballing and hope."
+    })
+   ])
+  })
+ })
+});
+
 const germannessVoice={
  gain:speechClip("thorsten-amused-nachschub"),
  loss:speechClip("thorsten-disgusted-nichts-geschafft")
@@ -1666,12 +3091,12 @@ function cancelActorStimulus(actor){
 function removePoliceActor(actor){cancelActorStimulus(actor);const index=police.indexOf(actor);if(index<0)return false;police.splice(index,1);return true}
 function clearPoliceActors(){for(const actor of police.slice())removePoliceActor(actor)}
 function policeBark(force=false,offence="",actor=null){if(actor&&(!police.includes(actor)||("id" in actor)||actor.pickupCar||actor.voiceId!=="polizei-heinrich-wachtmeister"))return false;const now=performance.now(),region=state.region,lines=policeBarks[region]||policeBarks.germany;if(!force&&(now-(policeBark.last||0)<2300||hasStimulusFamily("police")))return false;const line=offence.includes("RASEN")||offence.includes("GRÜN")||offence.includes("FUSSBODEN")?lines[1]:nextVariant("police:"+region,lines),isEligible=()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&state.wanted>0&&(actor?police.includes(actor)&&!("id" in actor)&&!actor.pickupCar&&actor.voiceId==="polizei-heinrich-wachtmeister"&&dist(player.x,player.y,actor.x,actor.y)<400:force||police.some(p=>dist(player.x,player.y,p.x,p.y)<400));return showWorldBark("POLIZEI",line,true,"","",{family:"police",candidateVoiceId:"polizei-heinrich-wachtmeister",actor,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible,start:()=>policeBark.last=performance.now()})}
-function jaywalkerBark(){if(hasStimulusFamily("jaywalker"))return;const person=nearestPedestrian();if(!person||person.arrested||person.wisdomId)return;const region=state.region,lines=jaywalkerBarks[region]||jaywalkerBarks.germany;showWorldBark(person.name,nextVariant("jaywalker:"+region,lines),true,"","",{family:"jaywalker",candidateVoiceId:person.voiceId,actor:person,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&playerSurface()==="road"&&!person.arrested&&!person.lawPending&&npcs.includes(person)&&dist(player.x,player.y,person.x,person.y)<360})}
+function jaywalkerBark(){if(hasStimulusFamily("jaywalker"))return;const person=nearestPedestrian();if(!person||person.arrested||person.wisdomId)return;const region=state.region,ownedLines=crowdReactiveBarks[person.voiceId]?.[region]?.jaywalker,lines=ownedLines||jaywalkerBarks[region]||jaywalkerBarks.germany,variantPool=ownedLines?`crowd-reactive:${person.voiceId}:${region}:jaywalker`:"jaywalker:"+region,line=nextVariant(variantPool,lines),item=typeof line==="string"?{text:line}:line;showWorldBark(person.name,item.text,true,"","",{family:"jaywalker",candidateVoiceId:person.voiceId,actor:person,subtitle:item.english,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&playerSurface()==="road"&&!person.arrested&&!person.lawPending&&npcs.includes(person)&&dist(player.x,player.y,person.x,person.y)<360})}
 function pedestrianBark(n,surface="sidewalk"){
  if(n?.jwdRole)return false;
  if(n?.wisdomId)return announceCurrentRule(n);
  const now=performance.now();if(!n||now<(n.barkAt||0)||(pedestrianBark.last&&now-pedestrianBark.last<3200))return false;
- const region=state.region,archetype=crowdArchetypeById[n.archetype],personalizedLines=surface==="sidewalk"&&archetype?crowdCharacterBarks[n.voiceId]?.[region]:null,lines=personalizedLines|| (surface==="sidewalk"&&archetype?archetype.barks[region]:pedestrianBarks[region][surface]),family=archetype?`pedestrian:${archetype.id}:${region}:${surface}`:`pedestrian:${region}:${surface}`,variantPool=personalizedLines?`pedestrian-personalized:${n.voiceId}:${region}:${surface}`:family,line=nextVariant(variantPool,lines),item=typeof line==="string"?{text:line}:line;n.barkAt=now+5600+Math.random()*2600;pedestrianBark.last=now;showWorldBark(n.name,item.text,item.urgent!==false,item.voiceId===n.voiceId?item.recording||"":"","",{family,candidateVoiceId:n.voiceId,actor:n,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&dist(player.x,player.y,n.x,n.y)<Math.max(140,(n.audioRadius||NPC_COMPLAINT_DISTANCE)+48)});return true
+ const region=state.region,archetype=crowdArchetypeById[n.archetype],personalizedLines=surface==="sidewalk"&&archetype?crowdCharacterBarks[n.voiceId]?.[region]:null,reactiveLines=(surface==="grass"||surface==="road")?crowdReactiveBarks[n.voiceId]?.[region]?.[surface]:null,lines=reactiveLines||personalizedLines|| (surface==="sidewalk"&&archetype?archetype.barks[region]:pedestrianBarks[region][surface]),family=archetype?`pedestrian:${archetype.id}:${region}:${surface}`:`pedestrian:${region}:${surface}`,variantPool=personalizedLines?`pedestrian-personalized:${n.voiceId}:${region}:${surface}`:family,line=nextVariant(reactiveLines?`crowd-reactive:${n.voiceId}:${region}:${surface}`:variantPool,lines),item=typeof line==="string"?{text:line}:line;n.barkAt=now+5600+Math.random()*2600;pedestrianBark.last=now;showWorldBark(n.name,item.text,item.urgent!==false,item.voiceId===n.voiceId?item.recording||"":"","",{family,candidateVoiceId:n.voiceId,actor:n,subtitle:item.english,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&dist(player.x,player.y,n.x,n.y)<Math.max(140,(n.audioRadius||NPC_COMPLAINT_DISTANCE)+48)});return true
 }
 function nearestPedestrian(maxDistance=360){let nearest=null,best=maxDistance;for(const n of npcs){if(n.special)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
 function surfaceComplaint(surface){const n=nearestPedestrian();if(!pedestrianBark(n,surface)&&surface==="road")jaywalkerBark()}

@@ -2296,7 +2296,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-baerbel-brezel] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-baerbel-brezel] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-baerbel-brezel][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2350,7 +2351,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-brigitte-bueroklammer] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-brigitte-bueroklammer] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-brigitte-bueroklammer][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2453,7 +2455,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-elfriede-eingabe] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-elfriede-eingabe] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-elfriede-eingabe][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2502,7 +2505,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-guenther-gartenzaun] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-guenther-gartenzaun] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-guenther-gartenzaun][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2556,7 +2560,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-hildegard-brotzeit] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-hildegard-brotzeit] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-hildegard-brotzeit][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2665,7 +2670,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-irmgard-aktenordner] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-irmgard-aktenordner] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-irmgard-aktenordner][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2719,7 +2725,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-klaus-dieter-knoedel] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-klaus-dieter-knoedel] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-klaus-dieter-knoedel][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2773,7 +2780,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-manfred-mittagsruhe] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-manfred-mittagsruhe] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-manfred-mittagsruhe][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2827,7 +2835,8 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer",
-        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-ruediger-rasenkante] regional lines"
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-ruediger-rasenkante] regional lines",
+        "game.js actor-owned crowdReactiveBarks[crowd-ruediger-rasenkante][region][cause]; grass4/road4/jaywalker6 per region"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."

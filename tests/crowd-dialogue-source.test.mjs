@@ -13,6 +13,9 @@ const request=JSON.parse(readFileSync(new URL('./fixtures/crowd-dialogue-source-
 const sourceMatch=game.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);
 assert.ok(sourceMatch,'actor-owned German source block must exist');
 const german=vm.runInNewContext(sourceMatch[1]);
+const reactiveMatch=game.match(/const crowdReactiveBarks=(Object\.freeze\([\s\S]*?\));\n/);
+assert.ok(reactiveMatch,'actor-owned reactive source block must exist');
+const reactive=vm.runInNewContext(reactiveMatch[1]);
 const window={};vm.runInNewContext(catalogSource,{window});
 const english=window.GermanySimulatorAudioText.pools.crowdPersonalized;
 const roleRows=cast.roleProfiles.filter(row=>Object.hasOwn(german,row.gameRole));
@@ -24,8 +27,8 @@ function runtimeSelection(voiceId,region,surface='sidewalk'){
  const declaration=caller.match(/const region=state\.region,archetype=.*?;n\.barkAt/)?.[0].replace(/;n\.barkAt$/,'');
  assert.ok(declaration?.includes('variantPool=')&&declaration.includes('family='),'variant and arbitration pools must remain in the actual caller');
  const archetype={barks:{[region]:['fallback 0','fallback 1']}};
- const context={n:{voiceId,archetype:'fallback'},state:{region},surface,crowdCharacterBarks:german,crowdArchetypeById:{fallback:archetype},pedestrianBarks:{[region]:{sidewalk:['surface 0','surface 1'],grass:['surface 0','surface 1']}},nextVariant:(_pool,values)=>values[0]};
- return vm.runInNewContext(`(()=>{const n=ctx.n,state=ctx.state,surface=ctx.surface,crowdCharacterBarks=ctx.crowdCharacterBarks,crowdArchetypeById=ctx.crowdArchetypeById,pedestrianBarks=ctx.pedestrianBarks,nextVariant=ctx.nextVariant;${declaration};return {lines,family,variantPool}})()`,{ctx:context});
+ const context={n:{voiceId,archetype:'fallback'},state:{region},surface,crowdCharacterBarks:german,crowdReactiveBarks:reactive,crowdArchetypeById:{fallback:archetype},pedestrianBarks:{[region]:{sidewalk:['surface 0','surface 1'],grass:['surface 0','surface 1']}},nextVariant:(_pool,values)=>values[0]};
+ return vm.runInNewContext(`(()=>{const n=ctx.n,state=ctx.state,surface=ctx.surface,crowdCharacterBarks=ctx.crowdCharacterBarks,crowdReactiveBarks=ctx.crowdReactiveBarks,crowdArchetypeById=ctx.crowdArchetypeById,pedestrianBarks=ctx.pedestrianBarks,nextVariant=ctx.nextVariant;${declaration};return {lines,family,variantPool}})()`,{ctx:context});
 }
 
 test('the 36 frozen jobs exactly match actor-owned German lines, English subtitles and selected profile bindings',()=>{
@@ -51,7 +54,9 @@ test('the actual sidewalk caller resolves both custom slots and preserves the ol
   assert.deepEqual(runtimeSelection(voiceId,region).lines,regions[region]);
  }
  assert.deepEqual(runtimeSelection('crowd-waltraud-wartemarke','berlin').lines,['fallback 0','fallback 1']);
- assert.deepEqual(runtimeSelection('crowd-baerbel-brezel','berlin','grass').lines,['surface 0','surface 1']);
+ assert.deepEqual(runtimeSelection('crowd-baerbel-brezel','berlin','grass').lines,reactive['crowd-baerbel-brezel'].berlin.grass);
+ assert.equal(runtimeSelection('crowd-baerbel-brezel','berlin','grass').lines.length,4,'named grass complaints use the four owned reactive rows');
+ assert.deepEqual(runtimeSelection('crowd-waltraud-wartemarke','berlin','grass').lines,['surface 0','surface 1'],'unowned grass complaints retain the generic surface fallback');
 });
 
 test('interleaved callers keep independent two-slot bags without changing arbitration family',()=>{

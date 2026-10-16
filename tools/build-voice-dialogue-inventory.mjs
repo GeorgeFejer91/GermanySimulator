@@ -58,6 +58,7 @@ const pools={
  pedestrianBarks:declaration("pedestrianBarks"),
  crowdArchetypes:declaration("crowdArchetypes").map(({id,barks})=>({id,barks})),
  crowdCharacterBarks:declaration("crowdCharacterBarks"),
+ crowdReactiveBarks:declaration("crowdReactiveBarks"),
  innerMonologues:declaration("innerMonologues"),
  quizApproaches:declaration("quizApproaches"),
  quizContexts:declaration("quizContexts"),
