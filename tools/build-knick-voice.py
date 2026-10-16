@@ -220,6 +220,7 @@ def processing_hash(value):
 
 
 def manifest_name(ambient=False):
+    assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1"), "Named reactive public export requires the separate reviewed curator admission"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "crowd-dialogue":
         return VOICE + "-crowd-manifest.json"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-monologue":
@@ -255,12 +256,19 @@ def configure_request(args):
         if plan["family"] in ("office-monologue", "office-mirror"):
             assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
         if plan["family"] == "crowd-dialogue":
-            assert plan.get("sourceScope") in (None, SANDALE_SOURCE_SCOPE), "Unknown crowd source scope"
+            assert plan.get("sourceScope") in (None, SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1"), "Unknown crowd source scope"
             if plan.get("sourceScope") == SANDALE_SOURCE_SCOPE:
                 assert plan.get("authoringHelperSha256") == AUTHORING_HELPER_SHA256, "Sandale request requires this exact producer"
                 assert VOICE in {owner[2] for owner in SANDALE_OWNERS}, "Sandale scope requires its own selected voice"
                 assert not (args.manifest or args.check), "Sandale public export requires the separate reviewed curator admission"
                 assert not (args.retake_failed or args.follow_source or args.reconcile_source), "Sandale requires an immutable new request and no automatic retakes"
+            elif plan.get("sourceScope") == "named-crowd-reactive-v1":
+                assert VOICE in NAMED_REACTIVE_OWNERS, "Named reactive scope requires its own selected voice"
+                assert plan.get("authoringHelperSha256") == AUTHORING_HELPER_SHA256, "Named reactive request requires this exact producer"
+                assert not (args.manifest or args.check), "Named reactive public export requires the separate reviewed curator admission"
+                assert not (args.retake_failed or args.follow_source or args.reconcile_source or getattr(args, "follow", False)), "Named reactive requests are immutable and cannot follow, reconcile or retake"
+                assert not args.benchmark_asr, "Named reactive scope uses the unchanged private processing path"
+                assert args.limit is None or type(args.limit) is int and 1 <= args.limit <= 28, "Named reactive limits select from the complete 28-row frozen queue"
             else:
                 assert VOICE in {"crowd-baerbel-brezel", "crowd-brigitte-bueroklammer", "crowd-elfriede-eingabe", "crowd-guenther-gartenzaun", "crowd-hildegard-brotzeit", "crowd-irmgard-aktenordner", "crowd-klaus-dieter-knoedel", "crowd-manfred-mittagsruhe", "crowd-ruediger-rasenkante"}
             assert plan["publicAssetFamily"] == "assets/voices/candidate-dialogue"
@@ -268,6 +276,8 @@ def configure_request(args):
             assert set(plan["sourceSha256"]) == {"game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js"}
             assert not (args.sentence_rescue or args.eos_after_alignment or args.benchmark_hooks), "Crowd dialogue uses the unchanged whole-take recipe"
             SOURCE_FILES = ("game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js")
+            if plan.get("sourceScope") == "named-crowd-reactive-v1":
+                assert plan["sourceSha256"] == source_hashes(), "Named reactive authored source pins changed"
         elif plan["family"] == "city-dialogue":
             assert VOICE.startswith("stadt-"), "City family requires an owned city voice"
             assert plan["publicAssetFamily"] == "assets/voices/city-dialogue", "City public asset scope changed"
@@ -532,6 +542,81 @@ def validate_sandale_request(requested, authored, voice):
     return selected
 
 
+NAMED_REACTIVE_OWNERS = (
+    "crowd-baerbel-brezel", "crowd-brigitte-bueroklammer", "crowd-elfriede-eingabe",
+    "crowd-guenther-gartenzaun", "crowd-hildegard-brotzeit", "crowd-irmgard-aktenordner",
+    "crowd-klaus-dieter-knoedel", "crowd-manfred-mittagsruhe", "crowd-ruediger-rasenkante",
+)
+
+
+def named_reactive_dialogue_sources():
+    """Read owned immutable runtime rows; the public inventory is only a projection."""
+    js = r'''const fs=require("node:fs"),vm=require("node:vm");
+const source=fs.readFileSync("game.js","utf8"),matches=[...source.matchAll(/const crowdReactiveBarks=(Object\.freeze\([\s\S]*?\));\s*\nconst germannessVoice=/g)];
+if(matches.length!==1)throw Error("Named reactive immutable source map missing or ambiguous");
+const barks=vm.runInNewContext(matches[0][1],Object.create(null),{timeout:1000});
+const frozen=value=>value===null||typeof value!=="object"||Object.isFrozen(value)&&Object.values(value).every(frozen);
+if(!frozen(barks))throw Error("Named reactive source must be recursively immutable");
+console.log(JSON.stringify(barks));'''
+    barks = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+    assert isinstance(barks, dict) and set(barks) == set(NAMED_REACTIVE_OWNERS), "Named reactive source must contain exactly nine owned actors"
+    inventory = read(ROOT / "For-AI/VOICE-DIALOGUE-INVENTORY.json")
+    assert inventory["pools"]["crowdReactiveBarks"] == barks, "Named reactive public inventory differs from the runtime source"
+    cast = read(ROOT / "For-AI/VOICE-CAST.json")
+    roles = [row for row in cast["roleProfiles"] if row.get("gameRole") in NAMED_REACTIVE_OWNERS]
+    assert len(roles) == 9 and {row["gameRole"] for row in roles} == set(NAMED_REACTIVE_OWNERS), "Named reactive cast ownership must be unique and complete"
+    assert len({cast["productionVoices"][actor]["profileId"] for actor in NAMED_REACTIVE_OWNERS}) == 9, "Named reactive owners must retain distinct selected profiles"
+    authored, identities = [], set()
+    for actor_id in NAMED_REACTIVE_OWNERS:
+        owner = next(row for row in roles if row["gameRole"] == actor_id)
+        binding = cast["productionVoices"][actor_id]
+        assert owner["voiceId"] == actor_id and owner["secretTunnelProfileId"] == binding["profileId"], "Named reactive actor must retain its own selected voice/profile"
+        index = f"game.js actor-owned crowdReactiveBarks[{actor_id}][region][cause]; grass4/road4/jaywalker6 per region"
+        assert isinstance(owner["dialogueSources"], list) and owner["dialogueSources"].count(index) == 1, "Named reactive cast source index changed"
+        assert owner["reference"]["workingReferenceSha256"] == binding["originalSha256"] and owner["reference"]["license"] == "CC0-1.0", "Named reactive selected reference/license changed"
+        assert isinstance(binding["profileId"], str) and re.fullmatch(r"[a-f0-9]{32}", binding["profileId"]), "Named reactive selected profile identifier is invalid"
+        assert all(isinstance(binding[key], str) and re.fullmatch(r"[a-f0-9]{64}", binding[key]) for key in ("referenceSha256", "originalSha256")), "Named reactive reference digests are invalid"
+        assert binding["renderer"] == "ResembleAI/Chatterbox Multilingual V2 0.1.7" and binding["modelRevision"] == "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+        assert binding.get("processing") is None and binding["fallback"] == "captions", "Named reactive delivery must retain dry processing and caption fallback"
+        regions = barks[actor_id]
+        assert isinstance(regions, dict) and set(regions) == {"berlin", "germany"}, "Named reactive region keys changed"
+        for region in ("berlin", "germany"):
+            causes = regions[region]
+            assert isinstance(causes, dict) and set(causes) == {"grass", "road", "jaywalker"}, "Named reactive cause keys changed"
+            for cause, count in (("grass", 4), ("road", 4), ("jaywalker", 6)):
+                rows = causes[cause]
+                assert isinstance(rows, list) and len(rows) == count, "Named reactive cause requires every authored variant"
+                for slot, row in enumerate(rows):
+                    assert isinstance(row, dict) and set(row) == {"id", "text", "english"}, "Named reactive runtime row keys changed"
+                    clip_id, text, english = (row[key] for key in ("id", "text", "english"))
+                    assert isinstance(clip_id, str) and re.fullmatch(r"[a-z0-9-]+", clip_id) and clip_id not in identities, "Named reactive runtime IDs must be safe, nonempty and globally unique"
+                    assert all(isinstance(value, str) and value.strip() for value in (text, english)), "Named reactive source and English must be nonblank strings"
+                    identities.add(clip_id)
+                    authored.append({"clipId": clip_id, "voiceId": actor_id, "actorId": actor_id,
+                                     "region": region, "slot": slot,
+                                     "sourceLocator": f"game.js crowdReactiveBarks[{actor_id}].{region}.{cause}[{slot}]",
+                                     "text": text, "english": english, "profileId": binding["profileId"],
+                                     "referenceSha256": binding["referenceSha256"], "referenceOriginalSha256": binding["originalSha256"],
+                                     "renderer": binding["renderer"], "modelRevision": binding["modelRevision"],
+                                     "processing": None, "cause": cause})
+    assert len(authored) == len(identities) == 252
+    return authored
+
+
+def validate_named_reactive_request(requested, authored, voice):
+    expected = {row["clipId"]: row for row in authored}
+    assert len(authored) == len(expected) == 252
+    assert voice in NAMED_REACTIVE_OWNERS, "Named reactive selection requires an owned voice"
+    assert isinstance(requested, list) and len(requested) == 252 and all(isinstance(row, dict) for row in requested), "Named reactive plan requires all 252 owned rows"
+    identities = [row.get("clipId") for row in requested]
+    assert all(isinstance(identity, str) for identity in identities) and len(set(identities)) == 252, "Named reactive plan has missing or duplicate IDs"
+    for row in requested:
+        assert type(row.get("slot")) is int and row["clipId"] in expected and row == expected[row["clipId"]], "Named reactive source, cause, English or owned binding changed"
+    selected = [dict(row) for row in requested if row["voiceId"] == voice]
+    assert len(selected) == 28 and all(row["actorId"] == voice for row in selected), "Named reactive voice requires its complete 28 owned rows"
+    return selected
+
+
 
 
 def city_dialogue_sources():
@@ -634,6 +719,8 @@ def jobs(ambient=False, music_root=None):
         if CUSTOM_PLAN["family"] == "crowd-dialogue":
             if CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE:
                 return validate_sandale_request(CUSTOM_PLAN["jobs"], sandale_dialogue_sources(), VOICE)
+            if CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1":
+                return validate_named_reactive_request(CUSTOM_PLAN["jobs"], named_reactive_dialogue_sources(), VOICE)
             js = r'''const fs=require("node:fs"),vm=require("node:vm");
 const source=fs.readFileSync("game.js","utf8"),match=source.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);
 if(!match)throw Error("Crowd actor-owned source map missing");
@@ -1097,6 +1184,7 @@ def render(args, queue, private):
 
 def process(args, queue, private, all_jobs=None, publish_manifest=True):
     global ASR_CACHE
+    assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1" and publish_manifest), "Named reactive processing must remain private for reviewed curator admission"
     import numpy as np
     from faster_whisper import WhisperModel
     cache_key = (str(args.asr_model.resolve()), args.asr_device, "int8", args.asr_threads)
@@ -1590,6 +1678,8 @@ def execute(args):
     queue = jobs(args.ambient, args.music_root)
     private = args.music_root / PRIVATE_REVIEW_FAMILY
     if CUSTOM_PLAN:
+        if CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1":
+            private = private / "named-crowd-reactive-v1"
         private = private / VOICE
     assert private.resolve().is_relative_to(args.music_root.resolve())
     if args.ambient:
@@ -1615,9 +1705,13 @@ def execute(args):
             frozen_plan["sourceScope"] = SANDALE_SOURCE_SCOPE
             if (private / "requests.json").exists():
                 assert read(private / "requests.json") == frozen_plan, "Sandale request already frozen; it cannot be replaced"
+        if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1":
+            frozen_plan.update({"sourceScope": "named-crowd-reactive-v1", "authoringHelperSha256": AUTHORING_HELPER_SHA256})
+            if (private / "requests.json").exists():
+                assert read(private / "requests.json") == frozen_plan, "Named reactive request already frozen; it cannot be replaced"
         if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue" and (private / "requests.json").exists():
             assert read(private / "requests.json") == frozen_plan, "City request already frozen; use the existing explicit source reconciliation"
-        if not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE and (private / "requests.json").exists()):
+        if not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1") and (private / "requests.json").exists()):
             write(private / "requests.json", frozen_plan)
         print(json.dumps({"requestedLineCount": len(queue), "registrationLineCount": sum("registration-" in job["clipId"] for job in queue), "privateRoot": str(private)}, ensure_ascii=False))
         return
@@ -1633,6 +1727,12 @@ def execute(args):
         assert frozen.get("sourceScope") == SANDALE_SOURCE_SCOPE, "Historical crowd requests cannot become Sandale scope"
         assert frozen.get("authoredPlanSha256") == sha(args.request_file), "Sandale authored request bytes changed"
         assert frozen.get("authoredPlanSourceSha256") == CUSTOM_PLAN["sourceSha256"] == hashes
+    if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1":
+        assert frozen.get("sourceScope") == "named-crowd-reactive-v1", "Historical crowd requests cannot become named reactive scope"
+        assert frozen.get("authoringHelperSha256") == AUTHORING_HELPER_SHA256, "Named reactive frozen producer changed"
+        assert frozen.get("authoredPlanSha256") == sha(args.request_file), "Named reactive authored request bytes changed"
+        assert frozen.get("authoredPlanSourceSha256") == CUSTOM_PLAN["sourceSha256"] == hashes
+        assert frozen.get("requestedLineCount") == 28, "Named reactive freeze must retain all 28 owned rows"
     if args.manifest:
         manifest(queue, private, args.ambient)
     elif args.render:
@@ -1642,7 +1742,7 @@ def execute(args):
     else:
         process(args, queue[:args.limit] if args.limit else queue, private, queue,
                 publish_manifest=not (CUSTOM_PLAN and (CUSTOM_PLAN["family"] == "city-dialogue"
-                                                     or CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE)))
+                                                     or CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1"))))
 
 
 if __name__ == "__main__":

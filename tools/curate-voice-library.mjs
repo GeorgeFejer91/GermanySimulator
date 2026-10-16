@@ -54,7 +54,7 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
 }
 // Sandale is a separate source scope; named-crowd grants never authorize it.
 const sandaleScope='sandale-roles-v1';
-const sandaleAuthoringHelperSha256='9910e3b8666723113667739f46d262b00bc685a2a72d7f217c5bce85024c08d9';
+const sandaleAuthoringHelperSha256='fd277526eac4c802ae1769d510b61536414470a9eda8432ec01c75a01d8128a4';
 const sandaleRoles=[['herr-sandale','towel-man','tourist-guenther-liegestuhl','towelMan'],['frau-sandale','towel-woman','touristin-walburga-handtuch','towelWoman']];
 export function sandaleSourceMap(cast,sourceRoot=root){
  const game=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),match=game.match(/const crowdArchetypes=(Object\.freeze\([\s\S]*?\));\r?\nconst crowdCharacterBarks=/),window={};
@@ -2063,6 +2063,149 @@ export function collectCrowd9PrivateManifestProposals(cast,authorityProof,termin
  return {status:'private proposal collection only; no public copy/write/admission',authoritySha256:authorityProof.sha256,nativeFullPlanSha256:authority.requestSha256,terminalSha256:terminalHashes,adapterSummarySha256:summaryHashes,selectionSha256:selectionProof?.sha256??null,counts:{requested:36,generated:9,unrendered:27,technicalEligible:eligibleCount,selectedClips:selectedCount,heldGenerated:9-selectedCount,humanListeningVerified:0},inventory,partialManifestProposals:proposals};
 }
 
+const reactiveScope='named-crowd-reactive-v1';
+const reactiveAuthoringHelperSha256=sandaleAuthoringHelperSha256;
+const reactivePublicJobFields=[...crowdPublicJobFields,'cause'];
+const reactiveActors=['crowd-baerbel-brezel','crowd-brigitte-bueroklammer','crowd-elfriede-eingabe','crowd-guenther-gartenzaun','crowd-hildegard-brotzeit','crowd-irmgard-aktenordner','crowd-klaus-dieter-knoedel','crowd-manfred-mittagsruhe','crowd-ruediger-rasenkante'];
+const reactiveSourceFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js'];
+export function reactiveSourceMap(cast,sourceRoot=root){
+ const game=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),matches=[...game.matchAll(/const crowdReactiveBarks=(Object\.freeze\([\s\S]*?\));\s*\nconst germannessVoice=/g)];
+ requireMatch(matches.length===1,'Missing or ambiguous named reactive source map');
+ const barks=vm.runInNewContext(matches[0][1],Object.create(null),{timeout:1000}),inventory=json(resolve(sourceRoot,'For-AI/VOICE-DIALOGUE-INVENTORY.json')).pools?.crowdReactiveBarks,rows=[];
+ const frozen=value=>value===null||typeof value!=='object'||Object.isFrozen(value)&&Object.values(value).every(frozen);
+ requireMatch(frozen(barks),'Reactive source must be recursively immutable');
+ requireMatch(sameJson(Object.keys(barks).sort(),reactiveActors)&&sameJson(inventory,barks),'Reactive source owner set or derived public inventory changed');
+ for(const actorId of reactiveActors){
+  const owners=cast.roleProfiles.filter(row=>row.gameRole===actorId),owner=owners[0],binding=cast.productionVoices[actorId],regions=barks[actorId];
+  requireMatch(owners.length===1&&owner.voiceId===actorId&&owner.runtimeArchetype!=='street-wisdom'&&owner.secretTunnelProfileId===binding?.profileId&&Array.isArray(owner.dialogueSources)&&owner.dialogueSources.filter(line=>line==='game.js actor-owned crowdReactiveBarks['+actorId+'][region][cause]; grass4/road4/jaywalker6 per region').length===1,'Reactive source owner/profile changed');
+  requireMatch(owner.reference?.workingReferenceSha256===binding.originalSha256&&owner.reference?.license==='CC0-1.0'&&binding.fallback==='captions'&&binding.renderer==='ResembleAI/Chatterbox Multilingual V2 0.1.7'&&binding.modelRevision==='5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18'&&(binding.processing??null)===null&&/^[a-f0-9]{32}$/.test(binding.profileId)&&[binding.originalSha256,binding.referenceSha256].every(value=>/^[a-f0-9]{64}$/.test(value)),'Reactive selected reference/license/dry recipe changed');
+  requireMatch(sameJson(Object.keys(regions).sort(),['berlin','germany']),'Reactive region set changed');
+  for(const region of ['berlin','germany']){
+   requireMatch(sameJson(Object.keys(regions[region]).sort(),['grass','jaywalker','road']),'Reactive cause set changed');
+   for(const [cause,count] of [['grass',4],['road',4],['jaywalker',6]]){
+    const lines=regions[region][cause];
+    requireMatch(Array.isArray(lines)&&lines.length===count,'Reactive cause-local source count changed');
+    for(let slot=0;slot<count;slot++){
+     const row=lines[slot];
+     requireMatch(row&&sameJson(Object.keys(row).sort(),['english','id','text'])&&typeof row.id==='string'&&/^[a-z0-9-]+$/.test(row.id)&&typeof row.text==='string'&&row.text.trim()&&typeof row.english==='string'&&row.english.trim(),'Reactive stable ID/text/English row malformed');
+     rows.push({clipId:row.id,voiceId:actorId,actorId,region,slot,sourceLocator:'game.js crowdReactiveBarks['+actorId+'].'+region+'.'+cause+'['+slot+']',text:row.text,english:row.english,profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing??null,cause});
+    }
+   }
+  }
+ }
+ requireMatch(rows.length===252&&new Set(rows.map(row=>row.clipId)).size===252&&new Set(rows.map(row=>row.profileId)).size===9,'Reactive exact nine-owner/252-slot set changed');
+ return new Map(rows.map(row=>[row.clipId,row]));
+}
+function reactiveJobsMatch(jobs,authored){
+ return Array.isArray(jobs)&&jobs.length===252&&new Set(jobs.map(row=>row.clipId)).size===252&&jobs.every(row=>authored.has(row.clipId)&&Object.keys(row).length===reactivePublicJobFields.length&&Object.entries(authored.get(row.clipId)).every(([key,value])=>sameJson(row[key],value)));
+}
+export function reactiveFullPlan(cast,snapshot,sourceRoot=root){
+ requireMatch(typeof snapshot?.text==='string'&&snapshot.sha256===textHash(snapshot.text),'Reactive request bytes changed');
+ const plan=JSON.parse(snapshot.text),authored=reactiveSourceMap(cast,sourceRoot);
+ requireMatch(plan.family==='crowd-dialogue'&&plan.sourceScope===reactiveScope&&plan.publicAssetFamily==='assets/voices/candidate-dialogue'&&plan.privateReviewFamily==='GermanySimulator crowd dialogue review 2026-10-15'&&plan.requestedLineCount===252&&reactiveJobsMatch(plan.jobs,authored),'Not the exact reactive 252-row source/English/owner/profile request');
+ requireMatch(sameJson(Object.keys(plan.sourceSha256||{}).sort(),reactiveSourceFiles.slice().sort())&&reactiveSourceFiles.every(path=>plan.sourceSha256[path]===hash(resolve(sourceRoot,path)))&&plan.authoringHelperSha256===reactiveAuthoringHelperSha256&&hash(resolve(sourceRoot,'tools/build-knick-voice.py'))===reactiveAuthoringHelperSha256,'Reactive current source/producer pins changed');
+ return {plan,authored:new Map(plan.jobs.map(row=>[row.clipId,row]))};
+}
+function reactiveManifestSlots(cast,manifest,authored){
+ const owned=[...authored.values()].filter(row=>row.voiceId===manifest.voiceId),records=[...(manifest.clips||[]),...(manifest.heldPrivate||[])];
+ requireMatch(manifest.sourceScope===reactiveScope&&owned.length===28&&manifest.profileId===cast.productionVoices[manifest.voiceId]?.profileId&&manifest.requestedLineCount===28&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&manifest.lineCount===manifest.clips.length&&Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=28&&records.length===28&&new Set(records.map(row=>row.clipId)).size===28,'Reactive per-voice accounting differs from 28 unique slots');
+ for(const row of records){const job=owned.find(job=>job.clipId===row.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value)),'Reactive accepted/held source identity drift');}
+ requireMatch(manifest.heldPrivate.every(row=>typeof row.reason==='string'&&row.reason.trim()),'Reactive held reason missing');
+ return owned;
+}
+function reactiveHoldReasons(manifest,selected){
+ for(const row of manifest.heldPrivate)requireMatch(selected.includes(row.clipId)?row.reason==='held private; selected production fallback':row.reason==='not rendered; selected production fallback','Reactive hold reason misstates allocation');
+}
+export function prepareReactiveManifest(cast,manifest,authorityProof,terminalProofs,selectionProof=null,sourceRoot=root){
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Reactive authority bytes changed');
+ const authority=json(authorityProof.path);
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_NAMED_REACTIVE'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.sourceScope===reactiveScope&&authority.helperSha256===reactiveAuthoringHelperSha256&&authority.grantId?.trim()&&/^[a-f0-9]{64}$/.test(authority.adapterSha256)&&authority.protectedPublicPins&&Object.keys(authority.protectedPublicPins).length>0&&authority.maximumCallsPerClip===1&&authority.automaticRetries===0,'No reactive-specific finite ROOT authority');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Reactive authored request changed');
+ const {plan,authored}=reactiveFullPlan(cast,{text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},sourceRoot),selected=authority.selectedClipIds;
+ requireMatch(Array.isArray(selected)&&selected.length>0&&selected.length<=252&&new Set(selected).size===selected.length&&selected.every(id=>authored.has(id))&&authority.maximumNativeCalls===selected.length&&authority.maximumAsrReadings===selected.length*2&&sameJson(authority.sourceSha256,plan.sourceSha256),'Reactive finite selected set/source limits changed');
+ const terminals={};
+ for(const phase of ['plan','render','process']){
+  const ref=terminalProofs?.[phase];requireMatch(ref&&hash(ref.path)===ref.sha256,'Missing reactive phase receipt');
+  const terminal=json(ref.path);
+  requireMatch(terminal.phase===phase&&terminal.specificationSha256===authorityProof.sha256&&terminal.logsComplete===true&&terminal.producerSha256===authority.adapterSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.timedOut===false&&Array.isArray(terminal.survivingOwnedChildren)&&terminal.survivingOwnedChildren.length===0&&Array.isArray(terminal.ownedCleanupKills)&&terminal.ownedCleanupKills.length===0&&Array.isArray(terminal.postflightPinFailures)&&terminal.postflightPinFailures.length===0&&terminal.postflightProtectedPinsChecked===Object.keys(authority.protectedPublicPins).length&&!terminal.supervisorError,'Reactive phase did not retire successfully');
+  terminals[phase]={sha256:ref.sha256,exitCode:0,rootRetired:true,timedOut:false};
+ }
+ const owned=reactiveManifestSlots(cast,manifest,authored),voice=manifest.voiceId,family=resolve(authority.musicRoot,plan.privateReviewFamily,reactiveScope);
+ requireMatch(realpathSync(family)===family,'Reactive private scope alias');
+ const privateFile=relative=>{const file=resolve(family,voice,relative);requireMatch(realpathSync(file)===file&&file.startsWith(resolve(family,voice)+sep)&&!lstatSync(file).isSymbolicLink(),'Reactive private receipt/media alias');return file;};
+ const requestPath=privateFile('requests.json'),requestSha256=hash(requestPath),request=json(requestPath);
+ requireMatch(request.sourceScope===reactiveScope&&request.authoringHelperSha256===reactiveAuthoringHelperSha256&&request.requestedLineCount===28&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Reactive native 28-slot plan changed');
+ const ownedSelected=selected.filter(id=>owned.some(row=>row.clipId===id)),rawDirectory=resolve(family,voice,'raw'),encodedDirectory=resolve(family,voice,'encoded');
+ const rawNames=existsSync(rawDirectory)?readdirSync(rawDirectory):[],encodedNames=existsSync(encodedDirectory)?readdirSync(encodedDirectory):[];
+ const rawIds=rawNames.filter(name=>name.endsWith('.json')&&!name.endsWith('-eos-trace.json')).map(name=>name.slice(0,-5)),wavIds=rawNames.filter(name=>name.endsWith('.wav')).map(name=>name.slice(0,-4));
+ const encodedIds=encodedNames.filter(name=>name.endsWith('.json')).map(name=>name.slice(0,-5)),mp3Ids=encodedNames.filter(name=>name.endsWith('.mp3')).map(name=>name.slice(0,-4));
+ requireMatch(sameJson(rawIds.sort(),ownedSelected.slice().sort())&&sameJson(wavIds.sort(),ownedSelected.slice().sort())&&rawNames.every(name=>ownedSelected.some(id=>[id+'.json',id+'.wav',id+'-eos-trace.json'].includes(name))),'Reactive raw receipt/media set differs from finite allocation');
+ requireMatch(sameJson(encodedIds.sort(),mp3Ids.sort())&&encodedIds.every(id=>ownedSelected.includes(id))&&encodedNames.every(name=>ownedSelected.some(id=>[id+'.json',id+'.mp3',id+'-processed.wav'].includes(name))),'Reactive encoded receipt/media set contains an orphan or unallocated take');
+ const allocatedTakes={};
+ for(const id of ownedSelected){
+  const rawPath=privateFile('raw/'+id+'.json'),raw=json(rawPath),job=authored.get(id),seed=71000+owned.findIndex(row=>row.clipId===id),profileJsonSha256=authority.profileBindings?.[voice]?.profileJsonSha256;
+  requireMatch(Object.entries(job).every(([key,value])=>sameJson(raw[key],value))&&raw.requestSha256===requestSha256&&raw.authoringHelperSha256===reactiveAuthoringHelperSha256&&raw.rendererInputText===job.text&&raw.rendererInputBasis==='exact authored source'&&raw.synthesisAttempt===1&&raw.seed===seed&&authority.seeds?.[id]===seed&&/^[a-f0-9]{64}$/.test(profileJsonSha256)&&raw.profileJsonSha256===profileJsonSha256&&hash(privateFile('raw/'+id+'.wav'))===raw.rawSha256,'Reactive allocated raw take missing or misbound');
+  const evidence={rawReceiptSha256:hash(rawPath),rawSha256:raw.rawSha256,profileJsonSha256,seed};
+  if(encodedIds.includes(id)){
+   const encodedPath=privateFile('encoded/'+id+'.json'),encoded=json(encodedPath),audioPath=privateFile('encoded/'+id+'.mp3');
+   requireMatch(Object.entries(job).every(([key,value])=>sameJson(encoded[key],value))&&Object.entries(raw).every(([key,value])=>['durationSeconds','status'].includes(key)||sameJson(encoded[key],value))&&hash(audioPath)===encoded.sha256&&readFileSync(audioPath).length===encoded.bytes,'Reactive allocated encoded source/lineage/media changed');
+   evidence.encodedReceiptSha256=hash(encodedPath);evidence.encodedSha256=encoded.sha256;
+  }
+  allocatedTakes[id]=evidence;
+ }
+ requireMatch(manifest.generatedLineCount===rawIds.length,'Reactive generated count differs from actual raw receipts');
+ let selection=null;const selections=new Map();
+ requireMatch(manifest.clips.length===0||selectionProof,'Reactive accepted clips require independent ROOT use selection');
+ if(selectionProof){
+  requireMatch(selectionProof.sha256===hash(selectionProof.path),'Reactive ROOT use selection bytes changed');selection=json(selectionProof.path);
+  requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&selection.instruction?.trim()&&Array.isArray(selection.clips),'Missing reactive ROOT use selection');
+  for(const row of selection.clips){requireMatch(selected.includes(row.clipId)&&!selections.has(row.clipId)&&/^[a-f0-9]{64}$/.test(row.encodedSha256),'Reactive use selection duplicate or outside allocated slots');selections.set(row.clipId,row.encodedSha256);}
+  requireMatch(sameJson([...selections.keys()].filter(id=>owned.some(row=>row.clipId===id)).sort(),manifest.clips.map(row=>row.clipId).sort()),'Reactive manifest omits or adds selected own-voice clips');
+ }
+ const takes={};
+ for(const clip of manifest.clips){
+  requireMatch(ownedSelected.includes(clip.clipId)&&encodedIds.includes(clip.clipId),'Reactive clip outside actual encoded finite selection');
+  requireMatch(selections.get(clip.clipId)===clip.sha256&&Object.entries({status:selection.status,scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:clip.clipId,encodedSha256:clip.sha256}).every(([key,value])=>clip.approval?.[key]===value),'Reactive approval differs from independent ROOT clip/hash selection');
+  const rawPath=privateFile('raw/'+clip.clipId+'.json'),encodedPath=privateFile('encoded/'+clip.clipId+'.json'),raw=json(rawPath),encoded=json(encodedPath),seed=allocatedTakes[clip.clipId].seed;
+  for(const [key,value] of Object.entries(encoded))requireMatch(sameJson(clip[key],value),'Reactive supplied clip differs from encoded receipt: '+key);
+  requireMatch(raw.decode?.maxSpeechTokens===authority.tokenCaps?.[clip.clipId]&&encoded.asrModelSha256===authority.asrModelSha256,'Reactive actual recipe bindings changed');
+  const readings=encoded.asrReadings;
+  requireMatch(Array.isArray(readings)&&(sameJson(readings.map(row=>row.beamSize),[1])||sameJson(readings.map(row=>row.beamSize),[1,5]))&&readings.at(-1).transcript===encoded.asr&&readings.at(-1).beamSize===encoded.asrBeamSize,'Reactive final encoded ASR reading mismatch');
+  const words=readings.at(-1).words?.flatMap(word=>[...word.word.matchAll(/[\p{L}\p{N}_]+/gu)].map(match=>({word:match[0].toLowerCase(),at:word.start,end:word.end})));
+  crowdExactCues(encoded);requireMatch(words?.length===encoded.wordCues.length&&encoded.wordCues.every((cue,i)=>words[i].word===cue.word.toLowerCase()&&words[i].at===cue.at&&words[i].end===cue.end),'Reactive cues differ from final encoded word timings');
+  const tracePath=privateFile('raw/'+clip.clipId+'-eos-trace.json'),trace=json(tracePath);
+  requireMatch(hash(tracePath)===raw.decode?.eosTraceSha256&&trace.clipId===clip.clipId&&trace.text===clip.text&&trace.profileId===clip.profileId&&trace.referenceSha256===clip.referenceSha256&&trace.modelRevision===clip.modelRevision&&policeEosTraceAuthority(raw.decode,trace),'Reactive native EOS trace missing or misbound');
+  const proof={...allocatedTakes[clip.clipId],eosTraceSha256:hash(tracePath),maxSpeechTokens:raw.decode.maxSpeechTokens,asrModelSha256:encoded.asrModelSha256,asrBeamSize:encoded.asrBeamSize,asrReadings:readings.length};
+  sandaleClipAuthority(cast,clip,proof,requestSha256,seed);takes[clip.clipId]=proof;
+ }
+ reactiveHoldReasons(manifest,ownedSelected);
+ return {schemaVersion:1,sourceScope:reactiveScope,voiceId:voice,profileId:manifest.profileId,fallback:'captions',requestedLineCount:28,generatedLineCount:rawIds.length,lineCount:manifest.clips.length,clips:manifest.clips.map(clip=>({...crowdPublicClip(clip),cause:clip.cause})),heldPrivate:manifest.heldPrivate.map(row=>({...crowdPublicFields(row,reactivePublicJobFields),reason:row.reason})),approvedExistingReuse:[],crowdReactiveAdmission:{status:'ROOT-verified-native-named-reactive',authoritySha256:authorityProof.sha256,grantId:authority.grantId,helperSha256:reactiveAuthoringHelperSha256,authoredPlanSha256:authority.requestSha256,selectionSha256:selectionProof?.sha256??null,requestSha256,sourceSha256:plan.sourceSha256,jobs:plan.jobs,selectedClipIds:selected,terminals,allocatedTakes,takes}};
+}
+export function reactiveRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root){
+ const authored=reactiveSourceMap(cast,sourceRoot),clips=[],seen=new Set();
+ for(const manifest of manifests){
+  const owned=reactiveManifestSlots(cast,manifest,authored),admission=manifest.crowdReactiveAdmission;
+  requireMatch(!seen.has(manifest.voiceId),'Duplicate reactive voice manifest');seen.add(manifest.voiceId);
+  requireMatch(admission?.status==='ROOT-verified-native-named-reactive'&&admission.helperSha256===reactiveAuthoringHelperSha256&&admission.grantId?.trim()&&[admission.authoritySha256,admission.authoredPlanSha256,admission.requestSha256].every(value=>/^[a-f0-9]{64}$/.test(value))&&sameJson(Object.keys(admission.sourceSha256||{}).sort(),reactiveSourceFiles.slice().sort())&&Object.values(admission.sourceSha256).every(value=>/^[a-f0-9]{64}$/.test(value))&&reactiveJobsMatch(admission.jobs,authored)&&sameJson(Object.keys(admission.takes||{}).sort(),manifest.clips.map(row=>row.clipId).sort()),'Reactive admission/source/take coverage missing');
+  const selected=admission.selectedClipIds;
+  requireMatch(Array.isArray(selected)&&selected.length>0&&selected.length<=252&&new Set(selected).size===selected.length&&selected.every(id=>authored.has(id)),'Reactive selected coverage drift');
+  const ownedSelected=selected.filter(id=>owned.some(row=>row.clipId===id)),ordered=admission.jobs.filter(row=>row.voiceId===manifest.voiceId);
+  requireMatch(manifest.generatedLineCount===ownedSelected.length&&sameJson(Object.keys(admission.allocatedTakes||{}).sort(),ownedSelected.slice().sort()),'Reactive generated/raw evidence coverage drift');
+  for(const id of ownedSelected){
+   const proof=admission.allocatedTakes[id];
+   requireMatch(['rawReceiptSha256','rawSha256','profileJsonSha256'].every(key=>/^[a-f0-9]{64}$/.test(proof?.[key]))&&proof.seed===71000+ordered.findIndex(row=>row.clipId===id)&&(!Object.hasOwn(proof,'encodedReceiptSha256')&&!Object.hasOwn(proof,'encodedSha256')||['encodedReceiptSha256','encodedSha256'].every(key=>/^[a-f0-9]{64}$/.test(proof[key]))),'Reactive allocated byte evidence missing');
+  }
+  requireMatch(sameJson(Object.keys(admission.terminals||{}).sort(),['plan','process','render'])&&['plan','render','process'].every(phase=>{const row=admission.terminals[phase];return row&&/^[a-f0-9]{64}$/.test(row.sha256)&&row.exitCode===0&&row.rootRetired===true&&row.timedOut===false}),'Reactive successful terminal evidence missing');
+  requireMatch(manifest.clips.length===0||/^[a-f0-9]{64}$/.test(admission.selectionSha256),'Reactive public selection evidence missing');
+  reactiveHoldReasons(manifest,ownedSelected);
+  for(const clip of manifest.clips){
+   requireMatch(ownedSelected.includes(clip.clipId)&&Object.entries(admission.allocatedTakes[clip.clipId]).every(([key,value])=>sameJson(admission.takes[clip.clipId]?.[key],value)),'Reactive accepted take differs from allocated evidence');
+   sandaleClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256,71000+ordered.findIndex(row=>row.clipId===clip.clipId));
+   clips.push({...clip,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});
+  }
+ }
+ return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot,sourceRoot).replace('const crowdRecordings=','const crowdReactiveRecordings=');
+}
 export function main(args=process.argv.slice(2)){
  requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');
  const value=name=>{const i=args.indexOf(name);return i<0?null:args[i+1]};
@@ -2237,6 +2380,17 @@ export function main(args=process.argv.slice(2)){
    source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
    if(!source.includes(' ...cityRecordings,'))source=source.replace('const recordings=Object.freeze({','const recordings=Object.freeze({\n ...cityRecordings,');
   }else requireMatch(source.match(pattern)?.[0]===block,'City recording lookup stale; run --sync');
+ }
+ const reactiveDirectory=resolve(root,'assets/voices/candidate-dialogue'),reactiveNames=existsSync(reactiveDirectory)?readdirSync(reactiveDirectory).filter(name=>name.endsWith('-reactive-manifest.json')).sort():[];
+ if(reactiveNames.length||source.includes('const crowdReactiveAdmissions=')||source.includes('const crowdReactiveRecordings=')||source.includes(' ...crowdReactiveRecordings,')){
+  const ledger=JSON.parse(source.match(/const crowdReactiveAdmissions=Object\.freeze\((\{[^\n]*\})\);\n/)?.[1]||'{}');
+  requireMatch(reactiveNames.length>0&&sameJson(Object.keys(ledger).sort(),reactiveNames.map(name=>'assets/voices/candidate-dialogue/'+name).sort()),'Reactive manifest/ledger set is missing or stale');
+  const reactiveManifests=reactiveNames.map(name=>{const relative='assets/voices/candidate-dialogue/'+name,file=resolve(root,relative),digest=hash(file),manifest=json(file);requireMatch(name===manifest.voiceId+'-reactive-manifest.json'&&ledger[relative]===digest,'Reactive manifest lacks its separate verified admission anchor');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:digest}});
+  const block=reactiveRecordingsBlock(cast,reactiveManifests,root,root),pattern=/const crowdReactiveRecordings=Object\.freeze\([^\n]*\);\n/;
+  if(args.includes('--sync')){
+   source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
+   if(!source.includes(' ...crowdReactiveRecordings,'))source=source.replace('const recordings=Object.freeze({','const recordings=Object.freeze({\n ...crowdReactiveRecordings,');
+  }else requireMatch(source.match(pattern)?.[0]===block&&source.includes(' ...crowdReactiveRecordings,'),'Reactive recording lookup stale; run --sync only after separate admission');
  }
  const sandaleDirectory=resolve(root,'assets/voices/candidate-dialogue'),sandaleNames=readdirSync(sandaleDirectory).filter(name=>name.endsWith('-sandale-manifest.json')).sort();
  if(sandaleNames.length||source.includes('const sandaleAdmissions=')||source.includes('const sandaleRecordings=')||source.includes(' ...sandaleRecordings,')){
