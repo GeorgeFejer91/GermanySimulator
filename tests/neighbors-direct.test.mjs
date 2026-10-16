@@ -41,10 +41,10 @@ test('ordinary, office and unmatched URLs never allocate a neighbor checkpoint',
 });
 
 test('direct checkpoint holds unselected city character art until play starts',()=>{
- const requested=[],scope={document:{hidden:false,body:{classList:{contains:()=>false}}},window:{},performance:{now:()=>0},player:{x:0,y:0},npcs:[{x:100,y:0,spriteKind:'near'},{x:4000,y:0,spriteKind:'far'}],npcSpriteAtlases:{near:{},far:{}},npcAssetLoads:new Map(),requestNpcSprite:kind=>requested.push(kind)};
+ const requested=[],scope={document:{hidden:false,body:{classList:{contains:()=>false}}},window:{Germany3D:{npcSpriteRequired:()=>true,isWorldPointVisible:()=>false}},performance:{now:()=>0},player:{x:0,y:0},npcs:[{x:100,y:0,spriteKind:'near'},{x:4000,y:0,spriteKind:'far'}],npcSpriteAtlases:{near:{},far:{}},npcAssetLoads:new Map(),requestNpcSprite:kind=>requested.push(kind)};
  const selection=game.slice(game.indexOf('function prepareNearbyNpcAssets()'),game.indexOf('\nconst npcSpriteAtlases='));
  vm.createContext(scope);vm.runInContext('const startupNpcKinds=new Set();let startupNpcsCaptured=false,lastNpcAdmission=-Infinity,pendingNeighborEntry=true;'+selection,scope);
  scope.prepareNearbyNpcAssets();assert.deepEqual(requested,['near']);
- scope.window.Germany3D={isWorldPointVisible:()=>true};scope.performance.now=()=>300;scope.prepareNearbyNpcAssets();assert.deepEqual(requested,['near','near']);
+ scope.window.Germany3D={npcSpriteRequired:()=>true,isWorldPointVisible:()=>true};scope.performance.now=()=>300;scope.prepareNearbyNpcAssets();assert.deepEqual(requested,['near','near']);
  vm.runInContext('pendingNeighborEntry=false',scope);scope.performance.now=()=>600;scope.prepareNearbyNpcAssets();assert.deepEqual(requested,['near','near','near','far']);
 });

@@ -106,7 +106,7 @@ assert.match(subtitleLayout,/const height=box\.getBoundingClientRect\(\)\.height
 assert.match(subtitleLayout,/prepareWithSegments[\s\S]*measureLineStats/,"subtitle layout must measure text with Pretext");
 assert.match(game,/u\.onstart=\(\)=>\{[^\n]*startSubtitle\(item\)/,"browser-speech subtitles must start on the utterance start event");
 assert.match(game,/item\.subtitleElapsed=\(\)=>a\.currentTime-t;sources\.at\(-1\)\.onended=\(\)=>finishStimulus/,"recorded subtitles must use the audio clock and complete after the final segment");
-assert.match(game,/buffers\.forEach\(\(buffer,index\)=>\{sources\[index\]\.start\(t\+offset\);offset\+=buffer\.duration\+gap\}\);item\.start\?\.\(item\);startSubtitle\(item\)/,"recorded dialogue and subtitles must reveal when the scheduled sources start");
+assert.match(game,/buffers\.forEach\(\(buffer,index\)=>\{sources\[index\]\.start\(t\+offset\);offset\+=buffer\.duration\+gap\}\);loading=false;item\.start\?\.\(item\);startSubtitle\(item\)/,"recorded dialogue and subtitles must reveal after all scheduled sources start and startup commits");
 assert.match(game,/const time=item\.subtitleElapsed\?\.\(\)\?\?elapsed[\s\S]*requestAnimationFrame\(update\)/,"long cues must continuously follow the audio clock instead of accumulating timer drift");
 assert.match(game,/function finishStimulus\([^)]*\)\{[^}]*clearSubtitle\(\)/,"broker completion must clear subtitles");
 assert.match(game,/function stopSpeech\([^)]*\)[\s\S]*clearSubtitle\(\)/,"broker cancellation must clear subtitles");

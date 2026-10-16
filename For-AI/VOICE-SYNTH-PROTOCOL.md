@@ -52,6 +52,8 @@ Heinrich Wachtmeister retains his selected profile for twelve authored regional 
 
 ## Additional traffic and police defaults (2026-10-15)
 
+This dated admission records the initial counts. See [Retained compound timing evidence](#retained-compound-timing-evidence-2026-10-16) for the subsequent four-traffic / three-police selection and 600-recording catalog.
+
 Three Dieter Hupfer traffic recordings and two Heinrich Wachtmeister police
 recordings now supplement the earlier defaults through the existing exact
 voice/text lookup. Their typed gap manifests account for all twelve native

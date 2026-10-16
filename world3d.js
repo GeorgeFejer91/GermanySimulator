@@ -1329,6 +1329,15 @@ function showRendererFailure(error){
     const id=resolveStreetCharacter(actor);
     return id&&Object.hasOwn(streetPaintManifest||{},id)&&streetPaintManifest[id].standing?id:null;
   }
+  function npcSpriteRequired(actor){
+    if(!cityModelsEnabled()||jobcenter.active||buildingLevels.office)return true;
+    if(!streetPaintManifest)return streetPaintManifestError?true:null;
+    if(!registeredStreetPaint(actor))return true;
+    const view=npcMeshes.get(actor)?.userData.streetPaintView;
+    if(!view)return false;
+    const status=view.paint.inspect();
+    return status.loaded?false:status.failed||status.retired?true:null;
+  }
   function readyStreetReactionView(actor){
     const root=actor===bridge.player?playerMesh:npcMeshes.get(actor)||policeMeshes.get(actor);
     if(!root)return null;
@@ -2213,7 +2222,7 @@ function showRendererFailure(error){
     // Direct office entry skipped city GLBs; its existing procedural buildings make the exit playable immediately.
     bridge.buildings.forEach(building);buildingSlots.forEach(mountBuildingDoor);
   }
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,requestStreetReaction,hasStreetReaction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,npcSpriteRequired,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,requestStreetReaction,hasStreetReaction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   leaveAmtDirectMode,enterJobcenter,leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},
   enterBuilding:(id,done)=>buildingLevels.enter(id,done,true),leaveBuilding:(id,config)=>buildingLevels.leave(id,config),
   cancelLevelTransition:id=>buildingLevels.cancel(id),
@@ -2248,7 +2257,7 @@ function showRendererFailure(error){
     const streetNow=performance.now()/1000;
     ns.forEach(n=>{
       let q=npcMeshes.get(n),kind=n.special||n.spriteKind;
-      if(kind&&!q?.userData[kind+"Sprite"]&&!q?.userData.streetPaintView?.paint.inspect().loaded){const sprite=npcSprite(n);if(sprite){if(q)retireNpcMesh(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}
+      if(kind&&!q?.userData[kind+"Sprite"]&&!q?.userData.streetPaintView?.paint.inspect().loaded){const sprite=npcSprite(n);if(sprite){if(q){if(q.userData.streetPaintView){sprite.userData.streetPaintView=q.userData.streetPaintView;delete q.userData.streetPaintView}retireNpcMesh(q)}q=sprite;scene.add(q);npcMeshes.set(n,q)}}
       if(!q){q=npcAppearance(n);scene.add(q);npcMeshes.set(n,q)}
       if(syncStreetPaint(q,n,levelDt))return;
       if(n.jwdRole){q.userData.neighborPaint?.restore();syncJwdCharacter(q,n);q.userData.neighborPaint?.sync(streetNow,bridge.getHUDState?.(),bridge.getNeighborDialogue?.(),amtReducedMotion.matches)}

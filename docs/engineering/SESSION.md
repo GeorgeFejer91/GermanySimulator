@@ -1,3 +1,134 @@
+# Individual street paint and redundant atlas admission — 2026-10-16
+
+The cold-start benchmark transfers 18,903,868 bytes, exceeding its unchanged
+18 MB gate. Its two shared towel atlases account for 5,275,078 response bytes.
+Ordinary street actors retain those fallback kinds even when the renderer owns
+their individual standing paint. The controller previously requested the legacy
+atlases before the renderer existed, so testing only loaded paint arrived too
+late to prevent those downloads.
+
+Consult the renderer's existing registration and actual actor paint state before
+legacy admission. Pending manifest/paint keeps initial capture unresolved;
+loaded individual standing suppresses the redundant request. Failed standing or
+manifest, excluded characters and unregistered actors keep their original atlas
+path. Preserve loaded standing when optional motion fails. Do not create a paint
+lease for an actor outside current residency. Keep the existing queue, distance,
+visibility and scan interval. Preserve the bounded direct-neighbor kind set:
+late new-kind failures defer until preparation ends, then normal admission
+resumes. Update the renderer cache URL with the controller change.
+
+Independent Physics and Camera source reviews pass for the initial four edits,
+with no geometry, actor/root, collision, gait, scale, material or depth changes. Seven
+source-function cases include the deferred post-capture failure transition;
+the old near/far fixtures now explicitly provide the renderer's legacy-required
+boundary without changing their assertions. All seven cases pass on the remote
+CPU lane. A local affected batch then passes all 50 checks across seven files,
+including admission, direct entry, streaming and character lifecycle. Its first
+shared-process invocation exposes registry collisions between fixtures; serial
+separate processes pass without changing an assertion. Preserve that failed
+invocation. The later exact candidate passes all six cold browser runs under
+the unchanged 18 MB budget: desktop transfers 13,546,412 bytes per run and
+Android emulation 12,826,979–13,159,994 bytes. All 54 input attempts succeed;
+input p95 spans 20.9–38 ms, with no page errors. Hardware Chromium 155 runs
+serially and retires cleanly within 83.932 seconds. These measured responses
+replace the earlier subtraction estimate.
+
+A real failed-standing-image test exposes a second startup dependency: legacy
+body replacement disposes the actor's failed paint view, then creates another
+standing job outside the frozen startup set. The controller waits forever for
+that pending paint even though its required atlas is settled. Move the same
+scene-owned view to the replacement before retiring the temporary body. Keep
+its failed or pending image state, host, lease and startup identity; final actor
+retirement still disposes it once. The regression fails against the old loop;
+the repaired candidate passes all 52 affected checks, including failed and
+pending handover, across seven fresh serial CPU processes. Both independent
+world specialists approve the narrow source change.
+
+Four silent full-game diagnostic cases then reach gameplay: ordinary neighbor
+entry, manifest failure, and persistent failure of one actual resident's standing
+URL on desktop and Android emulation. Both image-failure cases preserve the same
+actor/voice and a visible, settled legacy fallback. The process retires cleanly
+within 28.587 seconds with four images, no page errors and no changed pins.
+An earlier one-request transient-failure run also reaches gameplay and reacquires
+the character's own image through another instance; its expectation of a
+permanent failed state is incorrect. Preserve that failed diagnostic output and
+use the distinct persistent-URL case for fallback proof. Focused failed-actor
+body/feet images remain pending; the wide frames alone cannot establish those
+pixels. The unchanged production geometry component separately passes 132
+checks across desktop and both mobile orientations; its synthetic pixel fixture
+does not prove every character's painted body or the natural mission chain.
+
+Before this runtime repair, one remote Pillow lossless-effort experiment retained
+every RGBA byte but produced a 2,723,894-byte towel-man WebP versus the existing
+2,718,904 bytes. Keep the original asset and encoding pipeline; that one sample
+provides no saving and does not establish results for other images. No art or
+asset manifest changes are included. A local CPU preflight at 857.35 MiB free
+physical memory stops before starting the seven-case child; the small exact
+source patch/test packet passes seven cases there in 31.189 ms. A later local
+memory preflight admits the serial affected batch at 1,418.29 MiB. This
+section records the local candidate and its scoped evidence, not publication
+or a completed animation family.
+
+# Recorded voice startup recovery — 2026-10-16
+
+Keep the broker's recovery state active until all native sources start. A
+failure in source/gain construction, gain automation, connection or a partial
+multi-source start previously left the current owner stuck after its loading
+timer was cleared. Register allocations immediately, detach completion handlers
+and retire partial nodes before the existing guarded fallback. Also convert a
+synchronous recording-preparation throw into the same promise rejection path,
+preserving normal synchronous preparation order. Fixed characters keep their
+own captions; successful native scheduling and ownership clocks stay intact.
+
+The original broker fails nine new fault cases (15 pass / 9 fail). The six-edit
+repair passes 35 focused checks. An additional preparation-throw regression
+then fails against that repair (24 pass / 1 fail); the final seventh edit passes
+all 36 checks. Fixtures execute the production broker, completion and queue
+logic with controlled native/timer boundaries, including a real registered
+reading/gap callback before the queued owner progresses. Independent source
+review passes; these runs do not establish browser or perceived audio behavior.
+
+A broader 47-check integration batch passes 46 and exposes one stale test
+lookup for the retired traffic voice/trigger pair. Use the exact current
+traffic-germany-01 source for the existing caption policy checks. The affected
+six checks then pass; the other 41 passed in the batch. The existing release
+batch passes 61 of 62 checks; its remaining subtitle source assertion expected
+callbacks immediately after native start without the new startup commit. Keep
+the ordered assertion with that commit and the affected check passes. Preserve
+all failure outputs.
+
+The first silent Chromium attempt fails a fixture source-length precondition
+before creating audio or executing a broker case, then retires cleanly. Preserve
+that failure and select the exact short Dieter Germany01/02 pair without changing
+production timing. The corrected component passes all 34 cases on Chromium
+155 desktop and Android portrait emulation: four representative old-source
+retention checks, eighteen candidate fault checks and twelve controls. Native
+Web Audio, zero-gain silence buffers, currentTime, ended events and actual DOM
+captions run with production broker slices. Twenty-two caption timers complete
+in 3200.2–3224.8 ms; twenty-four queued native starts follow completion by
+251.1–262.1 ms. Timeout controls use the real eight-second loading timer.
+The process owner retires cleanly within 136.727 seconds, with no source drift
+or surviving owned child. This proves controlled component recovery, not native
+MP3 decoding, listening, physical Android or the natural mission chain. The
+existing six-run browser benchmark remains a separate release check. Its first
+desktop run passes input, console, title cadence and drawing-buffer checks but
+fails the unchanged 18 MB cold-start budget at 18,903,868 bytes. It stops there
+and retires cleanly, preserving its report, frame and CPU sample; the other five
+runs are not executed in that attempt. The later atlas-admission repair above
+passes all six fresh runs under the same ceiling. The native-audio broker bytes
+outside the separate admission function remain identical to the controlled
+browser-tested repair; no MP3 listening or physical-device result is inferred.
+
+Correct the owning audio/license summaries to the already published four
+traffic and three additional police selections, retaining dated admission
+history and raw receipt outcomes. Update the game cache tag for this repair.
+The audio repair alone changes no world geometry, movement, sprite scale or
+camera behavior; the separate atlas-admission change above has its own affected
+world reviews. Document the existing native-agent
+reactivation API so a completed worker receives a new task instead of only a
+message. The whole-game completion goal remains
+active, with street motion families and remaining Berlin recordings unfinished.
+
 # Two retained character recordings — 2026-10-16
 
 Recover the existing traffic “Vollpfosten” and police “STEHENBLEIBEN” takes

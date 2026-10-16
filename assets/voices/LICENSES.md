@@ -236,19 +236,24 @@ On 2026-10-15, three new exact-text Dieter Hupfer recordings were admitted under
 the whole-game fixed-voice cloning request. The current reference is CC0-1.0;
 Chatterbox Multilingual V2 0.1.7 uses MIT. The
 [traffic gap manifest](traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json)
-owns the exact reference, model revision, source components and three shipping
-hashes. It preserves the failed original render and unknown-license raw receipt
-beside the verified CC0 processing recovery; the fourth generated take stays
-private. CC0 requires no attribution credit. Listening remains unperformed.
+owns the exact reference, model revision, source components and four shipping
+hashes. On 2026-10-16, the fourth retained take was admitted with a finite
+compound-timing proof, without new synthesis or ASR. The original literal-false
+receipt and empty raw cues remain unchanged. The manifest also preserves the
+failed original render and unknown-license raw receipt beside the verified CC0
+processing recovery. CC0 requires no attribution credit. Listening remains unperformed.
 
 ## Additional Heinrich Wachtmeister police recordings
 
-Two additional recordings use Heinrich's existing selected CC0-1.0 reference
+Three additional recordings use Heinrich's existing selected CC0-1.0 reference
 and the same MIT Chatterbox renderer. The
 [police gap manifest](police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json)
 records exact source/model hashes, historical take-one lineage and the bounded
-take-two continuation. Two of eight generated takes are admitted, six held
-privately. These supplement the four earlier defaults without replacing their
+take-two continuation. Two takes were admitted on 2026-10-15; a third retained
+take followed on 2026-10-16 through a finite compound-timing proof, without new
+synthesis or ASR. Its original literal-false receipt and empty raw cues remain
+unchanged. Three of eight generated takes are admitted, five held privately.
+These supplement the four earlier defaults without replacing their
 receipts. CC0 requires no attribution credit. Listening remains unperformed.
 
 ## Horst Stempelmann · official omen audio, candidate 2

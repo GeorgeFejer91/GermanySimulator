@@ -28,13 +28,13 @@ priorityDoc.hidden=false;priority.api.pumpAssetLoads();await Promise.all(queued)
 // Run actual spatial admission and readiness against a near/far actor fixture.
 const selection=game.slice(game.indexOf('function prepareNearbyNpcAssets()'),game.indexOf('\nconst npcSpriteAtlases='));
 const requests=[],entries=new Map(),selectionDoc={hidden:false,body:{classList:{contains:()=>false}}};let clock=0;
-const scope=vm.createContext({document:selectionDoc,window:{},performance:{now:()=>clock},player:{x:0,y:0},npcs:[{x:100,y:0,spriteKind:'near'},{x:4000,y:0,special:'far'}],npcSpriteAtlases:{near:{},far:{}},requestNpcSprite:kind=>{requests.push(kind);if(!entries.has(kind))entries.set(kind,{settled:false})},npcAssetLoads:entries});
+const scope=vm.createContext({document:selectionDoc,window:{Germany3D:{npcSpriteRequired:()=>true,isWorldPointVisible:()=>false}},performance:{now:()=>clock},player:{x:0,y:0},npcs:[{x:100,y:0,spriteKind:'near'},{x:4000,y:0,special:'far'}],npcSpriteAtlases:{near:{},far:{}},requestNpcSprite:kind=>{requests.push(kind);if(!entries.has(kind))entries.set(kind,{settled:false})},npcAssetLoads:entries});
 vm.runInContext('const startupNpcKinds=new Set();let startupNpcsCaptured=false,lastNpcAdmission=-Infinity,pendingNeighborEntry=false;'+selection+';globalThis.api={prepareNearbyNpcAssets,startupNpcAssetsReady}',scope);
 scope.api.prepareNearbyNpcAssets();assert.deepEqual(requests,['near']);assert.equal(scope.api.startupNpcAssetsReady(),false);
 entries.get('near').settled=true;assert.equal(scope.api.startupNpcAssetsReady(),true);
 scope.player.x=3500;clock=100;scope.api.prepareNearbyNpcAssets();assert.deepEqual(requests,['near'],'spatial scans must be bounded to 4 Hz');
 clock=260;scope.api.prepareNearbyNpcAssets();assert.deepEqual(requests,['near','far'],'approaching an actor must request its accepted atlas');
-scope.window.Germany3D={isWorldPointVisible:()=>false};scope.window.BuergeramtLevel={active:true};clock=600;scope.api.prepareNearbyNpcAssets();assert.equal(requests.length,2,'office play must not admit city character work');
+scope.window.Germany3D={npcSpriteRequired:()=>true,isWorldPointVisible:()=>false};scope.window.BuergeramtLevel={active:true};clock=600;scope.api.prepareNearbyNpcAssets();assert.equal(requests.length,2,'office play must not admit city character work');
 
 // A Start shortcut during loading must not advance the game early.
 const startup=game.slice(game.indexOf('let pendingStart=null,'),game.indexOf('\nlet faxFeedCue='));

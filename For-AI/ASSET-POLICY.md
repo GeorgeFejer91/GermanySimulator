@@ -440,6 +440,22 @@ evidence. Physical Android and GPU/displayed-frame timing remain NOT RUN.
   copying an accepted full atlas into an additional canvas. Compressed file size
   does not prove low resident memory: report width × height × four bytes, mipmaps,
   decoded copies, draw-buffer size and cache ownership separately.
+- Request a legacy NPC atlas from the renderer's `npcSpriteRequired(actor)`
+  result, rather than from fallback `spriteKind` alone. Wait for the renderer
+  query and keep initial capture unresolved while nearby manifest/standing paint
+  is pending. Loaded individual standing paint, including an optional motion
+  failure, needs no legacy atlas; neither does an actor outside current paint
+  residency. Manifest/standing failure and excluded or unregistered actors retain
+  the existing atlas path. Preserve distance/visibility admission, the shared
+  queue and 250 ms scan. During direct-neighbor preparation, a captured legacy
+  kind set remains bounded: a new kind needed by a later residency failure waits
+  until preparation ends and a normal scan admits it. This does not hide the
+  existing body or admit another paint job.
+- When a ready legacy atlas replaces an NPC's temporary body, move that actor's
+  existing scene-owned paint view to the replacement before retiring the old
+  body. Preserve its image result, pending lease and startup ownership. Releasing
+  it during replacement can create a new job outside the selected startup set
+  and strand readiness. The replacement's final retirement releases that view.
 - Prepare required office art on approach, close detail on approach, music on trusted input and
   speech/effects when requested. Never preload both desktop/mobile alternatives,
   all songs/voices, or an opt-in candidate pack. Keep existing load-failure

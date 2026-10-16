@@ -28,7 +28,7 @@ const officeIds = new Set([
 ]);
 const cityText = new Map([
   ['polizei-heinrich-wachtmeister', Object.values(library.clips).find(row => row.voiceId === 'polizei-heinrich-wachtmeister')?.source],
-  ['verkehr-dieter-hupfer', Object.values(library.clips).find(row => row.voiceId === 'traffic-driver' && row.trigger === 'traffic.player-caused-braking')?.source],
+  ['verkehr-dieter-hupfer', library.clips['traffic-germany-01']?.source],
   ['merz', Object.values(library.recordings).find(row => row.voiceId === 'merz')?.source],
   ['merkel', Object.values(library.recordings).find(row => row.voiceId === 'merkel')?.source]
 ]);

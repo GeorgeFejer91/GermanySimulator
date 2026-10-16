@@ -17,27 +17,32 @@ function fn(text,name){
  }throw Error('Function boundary '+name);
 }
 const functions=['recordedMouthOpening','speechActorCurrent','getStreetSpeech','stimulusEligible','chooseStimulusIndex','queueStimulus','finishStimulus','playCaptionStimulus','playSyntheticStimulus','playRecordedStimulus','pumpStimuli','ensureAudio','speak','speakRecorded','stopRecordedSpeech','hideWorldBark','stopSpeech','showWorldBark','openDialogue','setDialogueVoiceBusy','speakDialogueLine','renderDialogue','nextDialogue'].map(n=>fn(source,n)).join('\n');
-function fixture(){
+function fixture(config={}){
  const scope={window:{},URLSearchParams,location:{search:''}};vm.createContext(scope);vm.runInContext(catalogSource,scope);const catalog=scope.window.GermanySimulatorAudioText;
- const deferred=[],sources=[],timers=new Set(),elements=new Map();
+  const deferred=[],sources=[],gains=[],timers=new Set(),timerRecords=[],elements=new Map(),nativeCalls=new Map(),failureHits=[];
+  const native=stage=>{const count=(nativeCalls.get(stage)||0)+1;nativeCalls.set(stage,count);if(config.fail?.stage===stage&&count===(config.fail.at||1)){failureHits.push({stage,count});throw Error('Fixture native failure: '+stage)}};
  const node=id=>{if(!elements.has(id))elements.set(id,{hidden:true,disabled:false,textContent:'',dataset:{},classList:{add(){},remove(){},toggle(){},contains(){return false}}});return elements.get(id)};
  const actor={id:'fixture-klein-A',voiceId:'stadt-klaus-dieter-klein'},other={id:'fixture-klein-B',voiceId:actor.voiceId};
  const path='./assets/voices/city-dialogue/stadt-klaus-dieter-klein-01.mp3',clip=catalog.recordings[path];
  Object.assign(scope,{state:{voiceOn:true,started:true,mission:1,dialogue:false,modal:false,lang:'en',region:'germany'},player:{x:0,y:0},npcs:[actor,other],activeStimulus:null,textOnlyBark:null,recordedSpeechSource:null,recordedSpeechGain:null,stimulusGeneration:0,stimulusSequence:0,stimulusQueue:[],stimulusLastServed:new Map(),nextAmbientAt:0,stimulusTimer:null,
   speechCatalog:catalog,STIMULUS_PRIORITY:{AMBIENT:1,REACTIVE:2,CRITICAL:3},AUDIO_MIX:{AMBIENT_TTL_MS:4000,MAX_TRANSIENT_QUEUE:4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,ATTACK_SECONDS:.01,FOREGROUND:1},AUDIO_CLASS:{TEXT:'text'},
   document:{hidden:false,getElementById:node,querySelector:node},jwd:{tour:null,allocated:true,met:new Set(['jwd-swabian','jwd-parent','jwd-watcher'])},performance,
-  setTimeout(callback,delay){let timer;timer=setTimeout(()=>{timers.delete(timer);callback()},delay);timers.add(timer);return timer},clearTimeout(timer){clearTimeout(timer);timers.delete(timer)},
-  prepareRecording(url){let accept,reject;const promise=new Promise((a,b)=>{accept=a;reject=b});deferred.push({url,accept,reject});return promise},
+   setTimeout(callback,delay){if(config.manualTimers){const timer={callback,delay,cancelled:false,fired:false};timers.add(timer);timerRecords.push(timer);return timer}let timer;timer=setTimeout(()=>{timers.delete(timer);callback()},delay);timers.add(timer);return timer},
+   clearTimeout(timer){if(config.manualTimers){if(timer)timer.cancelled=true;timers.delete(timer);return}clearTimeout(timer);timers.delete(timer)},
+  prepareRecording(url){native('prepareRecording');let accept,reject;const promise=new Promise((a,b)=>{accept=a;reject=b});deferred.push({url,accept,reject});return promise},
   foregroundOutput:()=>({}),setAudioText(){},clearSubtitle(){scope.caption=null},startSubtitle(item){scope.caption=item.text},uiTone(){},cancelHumorScold(){},cancelJwdTour(){throw Error('Unexpected tour')},requestCharacterReaction(){},
   speakMerkelLine(){throw Error('Not this fixture owner')},speakMerzLine(){throw Error('Not this fixture owner')}});
  scope.audio={state:'running',currentTime:10,resume(){this.state='running';return Promise.resolve()},
-  createGain(){return{gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect(target){return target}}},
-  createBufferSource(){const s={buffer:null,onended:null,stops:0,startAt:null,connect(target){return target},start(time){this.startAt=time},stop(){this.stops++}};sources.push(s);return s}};
+  createGain(){native('createGain');const gain={gain:{setValueAtTime(){native('gain.setValueAtTime')},linearRampToValueAtTime(){native('gain.linearRampToValueAtTime')}},disconnects:0,connect(target){native('gain.connect');return target},disconnect(){this.disconnects++}};gains.push(gain);return gain},
+  createBufferSource(){native('createBufferSource');const s={buffer:null,onended:null,stops:0,disconnects:0,stoppedWithEnded:[],startAt:null,connect(target){native('source.connect');return target},start(time){native('start');this.startAt=time},stop(){this.stoppedWithEnded.push(this.onended);this.stops++},disconnect(){this.disconnects++}};sources.push(s);return s}};
  vm.runInContext(neighborProtectionSource+functions,scope,{filename:'canonical-street-speech-production-slices'});
  const request=(owner=actor,extra={})=>{scope.speak(clip.source,{candidateVoiceId:owner?.voiceId||actor.voiceId,voiceKey:'Fixture owned speaker',actor:owner,subtitle:clip.english,...extra});return scope.activeStimulus};
  const flush=()=>new Promise(done=>setImmediate(done));
  const start=async(index=0,duration=2)=>{deferred[index].accept({duration,length:duration*48000,numberOfChannels:1});await flush();await flush()};
- return{h:scope,actor,other,path,clip,catalog,node,deferred,sources,request,start,flush,dispose(){for(const timer of timers)clearTimeout(timer)}};
+  return{h:scope,actor,other,path,clip,catalog,node,deferred,sources,gains,nativeCalls,failureHits,timerRecords,request,start,flush,
+   pendingTimers:()=>[...timers],
+   fireTimer(timer){assert.equal(config.manualTimers,true);assert.ok(timers.has(timer),'only a pending production timer can fire');assert.equal(timer.cancelled,false);timers.delete(timer);timer.fired=true;timer.callback()},
+   dispose(){for(const timer of [...timers])scope.clearTimeout(timer)}};
 }
 function actorTest(name,run){
  test(name,async t=>{const f=fixture();t.after(()=>f.dispose());await run(f)});
@@ -117,4 +122,106 @@ actorTest('Protection entered during native decode retires city request; leaving
  assert.equal(f.h.stimulusEligible(item),false);await f.start();assert.equal(f.sources.length,0);assert.equal(done,1);assert.equal(f.h.activeStimulus,null);assert.equal(f.h.getStreetSpeech(f.actor),null);
  f.h.player.x=f.h.jwdLane.x-121;assert.equal(f.h.stimulusEligible({family:'pedestrian'}),true);
  const retry=f.request(f.actor,{family:'pedestrian'});assert.equal(retry.actor,f.actor);await f.start(1);assert.equal(f.sources.length,1);assert.equal(f.h.getStreetSpeech(f.actor).speechStatus,'playing');
+});
+
+function recoveryFixture(t,fail){
+ const f=fixture({manualTimers:true,fail});t.after(()=>f.dispose());
+ assert.equal(f.catalog.productionVoices[f.actor.voiceId].fallback,'captions','use the real selected fixed-voice fallback policy');
+ return f;
+}
+function readingTimer(f){
+ const reading=f.pendingTimers().filter(timer=>timer.delay>=3200&&timer.delay<=16000);
+ assert.equal(reading.length,1,'the real caption policy must own one bounded reading');
+ return reading[0];
+}
+for(const failure of [
+ {stage:'createBufferSource'},{stage:'createGain'},{stage:'gain.setValueAtTime'},
+ {stage:'gain.linearRampToValueAtTime'},{stage:'source.connect'},{stage:'gain.connect'},
+ {stage:'start'},{stage:'start',at:2,segments:2}
+]){
+ test('Native setup recovery: '+failure.stage+' #'+(failure.at||1),async t=>{
+  const f=recoveryFixture(t,failure);let revealed=0,completed=0,nextCompleted=0;
+  let item;
+  if(failure.segments){
+   f.h.queueStimulus({family:'dialogue',text:f.clip.source,recordingSequence:[f.path,f.path],candidateVoiceId:f.actor.voiceId,actor:f.actor,start:()=>revealed++,done:()=>completed++});
+   item=f.h.activeStimulus;
+  }else item=f.request(f.actor,{start:()=>revealed++,done:()=>completed++});
+  const decodeCount=failure.segments||1,loadTimer=item.loadingTimer;
+  f.request(f.other,{done:()=>nextCompleted++});const queued=f.h.stimulusQueue.at(-1);
+  assert.equal(queued.actor,f.other);
+  for(let index=0;index<decodeCount;index++)await f.start(index);
+  assert.equal(f.failureHits.length,1,'the native fault must actually be reached');
+  assert.equal(f.failureHits[0].stage,failure.stage);assert.equal(f.failureHits[0].count,failure.at||1);
+  assert.equal(loadTimer.cancelled,true);assert.equal(item.subtitleMode,'silent');assert.equal(item.speechStarted,false);
+  assert.equal(f.h.caption,f.clip.source);assert.equal(f.h.activeStimulus,item);assert.equal(f.h.getStreetSpeech(f.actor),null);
+  assert.equal(revealed,1);assert.equal(completed,0);assert.equal(f.deferred.length,decodeCount,'next owner waits for real caption completion and gap');
+  assert.equal(f.h.recordedSpeechSource,null);assert.equal(f.h.recordedSpeechGain,null);
+  for(const source of f.sources){assert.equal(source.onended,null);assert.equal(source.stops,1);assert.equal(source.disconnects,1);assert.ok(source.stoppedWithEnded.every(callback=>callback===null),'onended must detach before native stop')}
+  for(const gain of f.gains)assert.equal(gain.disconnects,1);
+  if(failure.at===2)assert.equal(f.sources[0].startAt,10,'the partial sequence really scheduled its first source before failure');
+  f.fireTimer(readingTimer(f));
+  assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);assert.equal(f.h.caption,null);assert.equal(nextCompleted,0);
+  const gap=f.pendingTimers().filter(timer=>timer.delay===f.h.AUDIO_MIX.REQUIRED_GAP_MS);assert.equal(gap.length,1);
+  f.fireTimer(gap[0]);assert.equal(f.h.activeStimulus,queued);assert.equal(f.deferred.length,decodeCount+1);
+  await f.start(decodeCount);const current=f.sources.at(-1);
+  assert.equal(current.startAt,10);assert.equal(f.h.getStreetSpeech(f.other).speechStatus,'playing');
+  current.onended();assert.equal(nextCompleted,1);assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+ });
+}
+test('Synchronous recording preparation failure keeps the owned caption and releases the queued successor',async t=>{
+ const f=recoveryFixture(t,{stage:'prepareRecording'});let completed=0,nextCompleted=0;
+ const item=f.request(f.actor,{done:()=>completed++});
+ f.request(f.other,{done:()=>nextCompleted++});const queued=f.h.stimulusQueue.at(-1);
+ await f.flush();await f.flush();
+ assert.equal(f.failureHits.length,1);assert.equal(f.failureHits[0].stage,'prepareRecording');
+ assert.equal(f.deferred.length,0);assert.equal(f.sources.length,0);assert.equal(f.h.caption,f.clip.source);
+ assert.equal(item.subtitleMode,'silent');assert.equal(f.h.getStreetSpeech(f.actor),null);assert.equal(completed,0);
+ f.fireTimer(readingTimer(f));assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+ const gap=f.pendingTimers();assert.equal(gap.length,1);assert.equal(gap[0].delay,f.h.AUDIO_MIX.REQUIRED_GAP_MS);
+ f.fireTimer(gap[0]);assert.equal(f.h.activeStimulus,queued);assert.equal(f.deferred.length,1);
+ await f.start();assert.equal(f.h.getStreetSpeech(f.other).speechStatus,'playing');
+ f.sources.at(-1).onended();assert.equal(nextCompleted,1);assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+});
+
+test('Native setup failure without text releases the real broker once',async t=>{
+ const f=recoveryFixture(t,{stage:'createBufferSource'});let completed=0,nextCompleted=0;
+ f.h.speakRecorded('',f.path,{done:()=>completed++});const item=f.h.activeStimulus;
+ f.request(f.other,{done:()=>nextCompleted++});const queued=f.h.stimulusQueue.at(-1);
+ await f.start();assert.equal(f.failureHits.length,1);assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+ assert.equal(f.h.caption,null);assert.equal(item.loadingTimer.cancelled,true);assert.equal(f.pendingTimers().length,1);
+ assert.equal(f.pendingTimers()[0].delay,f.h.AUDIO_MIX.REQUIRED_GAP_MS);
+ assert.equal(nextCompleted,0);assert.equal(f.deferred.length,1);
+ f.fireTimer(f.pendingTimers()[0]);assert.equal(f.h.activeStimulus,queued);assert.equal(f.deferred.length,2);
+ await f.start(1);assert.equal(f.h.getStreetSpeech(f.other).speechStatus,'playing');
+ f.sources.at(-1).onended();assert.equal(nextCompleted,1);assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+});
+test('Cancelled late native rejection cannot clear or complete the replacement owner',async t=>{
+ const f=recoveryFixture(t);let oldCompleted=0,currentCompleted=0;
+ const old=f.request(f.actor,{done:()=>oldCompleted++});f.h.stopSpeech();
+ const replacement=f.request(f.other,{done:()=>currentCompleted++});await f.start(1);
+ const source=f.h.recordedSpeechSource,gain=f.h.recordedSpeechGain,caption=f.h.caption,pending=f.pendingTimers().length;
+ f.deferred[0].reject(Error('Cancelled late decode failure'));await f.flush();await f.flush();
+ assert.equal(old.loadingTimer.cancelled,true);assert.equal(old.actorSpeechStatus,'cancelled');
+ assert.equal(f.h.activeStimulus,replacement);assert.equal(f.h.recordedSpeechSource,source);assert.equal(f.h.recordedSpeechGain,gain);
+ assert.equal(source.stops,0);assert.equal(f.h.caption,caption);assert.equal(f.pendingTimers().length,pending);
+ assert.equal(oldCompleted,0);assert.equal(currentCompleted,0);source.onended();assert.equal(currentCompleted,1);assert.equal(oldCompleted,0);
+});
+for(const outcome of ['resolve','reject']){
+ test('Loading timeout owns caption after late native '+outcome,async t=>{
+  const f=recoveryFixture(t);let revealed=0,completed=0;
+  const item=f.request(f.actor,{start:()=>revealed++,done:()=>completed++});
+  assert.equal(item.loadingTimer.delay,8000);f.fireTimer(item.loadingTimer);const reading=readingTimer(f);
+  assert.equal(item.subtitleMode,'silent');assert.equal(f.h.caption,f.clip.source);assert.equal(revealed,1);
+  if(outcome==='resolve')await f.start();else{f.deferred[0].reject(Error('Late timeout decode failure'));await f.flush();await f.flush()}
+  assert.equal(f.sources.length,0);assert.equal(revealed,1);assert.equal(completed,0);assert.equal(f.h.activeStimulus,item);
+  assert.equal(readingTimer(f),reading);f.fireTimer(reading);assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
+ });
+}
+test('Successful native start commits before a consumer start callback throws',async t=>{
+ const f=recoveryFixture(t);let starts=0,completed=0;
+ const item=f.request(f.actor,{start(){starts++;throw Error('Fixture consumer start failure')},done:()=>completed++});
+ await f.start();assert.equal(starts,1);assert.equal(item.subtitleMode,'recorded');assert.equal(item.speechStarted,true);
+ assert.equal(f.h.activeStimulus,item);assert.equal(f.h.recordedSpeechSource,f.sources[0]);assert.equal(f.sources[0].stops,0);
+ assert.equal(f.pendingTimers().length,0,'consumer failure must not restart fallback or arm a caption reading');
+ f.sources[0].onended();assert.equal(completed,1);assert.equal(f.h.activeStimulus,null);
 });

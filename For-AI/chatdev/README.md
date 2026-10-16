@@ -85,6 +85,11 @@ handoffs. No new service, queue database or scheduler is required.
    broken mission/recovery dependency, then missing required evidence, then
    remaining content/detail. Keep unaffected lanes working when one is blocked;
    change the approach after a failed repair rather than retrying it blindly.
+   For native subagents, use `collaboration.followup_task` to restart an idle or
+   completed owner; `collaboration.send_message` delivers a message but does not
+   restart a completed agent. After dispatch, check `collaboration.list_agents`
+   for an active target or a returned handoff. This does not describe cross-chat
+   `send_message_to_thread` semantics.
 5. Freeze base commit plus SHA-256 of relevant changed source, tests and assets
    before acceptance. Detect mutation during checks. After a repair, invalidate
    evidence that depends on changed files; rebind both required world reviewers
