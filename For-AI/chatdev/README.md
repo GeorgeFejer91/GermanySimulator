@@ -26,13 +26,15 @@ For the object-consistency matrix, include the reviewer/role and verdict per sce
 ## Codex centralized completion process
 
 George's 2026-10-16 instruction replaces automatic parallel task expansion.
-Existing chats finish their current bounded checkpoint, preserve their work and
-hand off without starting new tasks or reassigning finished workers. Keep one
-runtime integrator and one selected implementation/integration task at a time.
-The integrator reconciles, validates and commits that task before selecting the
-next; publish completed changes under the existing publication policy. Required
-independent reviewers may review the same frozen candidate. The former anchor
-above remains for existing links.
+Existing chats finished their checkpoints and handed off. George's subsequent
+completion-goal instruction authorizes clearly delineated subagent work,
+including unfinished asset creation. The lead may prepare bounded independent
+candidates concurrently with exclusive write paths and explicit acceptance.
+Keep one runtime integrator and one selected integration candidate at a time;
+reconcile, validate and commit it before integrating the next. Serialize heavy
+generation, browser and voice jobs. Publish completed changes under the existing
+publication policy. Required independent reviewers may review the same frozen
+candidate. The former anchor above remains for existing links.
 
 For game-wide completion, use the native Codex agent tools and existing
 user-authorized game chats. The fourteen-stage YAML remains an optional serial
@@ -55,9 +57,10 @@ the latter two. The lead joins their evidence before accepting the outcome.
 | Prove experience | Natural-chain gameplay/flow; exact speech/text and listening; scene/character continuity and missing-detail review | Collect the applicable desktop/mobile, input, loading, fallback and interruption evidence. Scripted scenes, silent audio checks and physical devices have distinct verdicts. |
 | Release | Integrator reconciles findings, validates and publishes | Required failures and missing evidence remain open; follow the standing publication policy and verify the deployed result. |
 
-These are steps within one selected task, not concurrent feature lanes or
-mandatory whole-game barriers. Complete its bounded acceptance before selecting
-another task; do not expand it into a whole-cast or whole-game rewrite.
+These are acceptance steps for one selected integration candidate. Other bounded
+candidates may be prepared in their assigned paths; complete this candidate's
+acceptance before integrating another. Do not expand a task into a whole-cast or
+whole-game rewrite.
 Final Camera acceptance waits for integrated meshes, poses, depth, loading and
 runtime behavior. Decorative city detail follows mission readability, legal
 routes, recovery and performance; its mere presence does not establish polish.
@@ -76,8 +79,9 @@ bounded action. The lead is its single writer. Other chats own their separate
 handoffs. No new service, queue database or scheduler is required.
 
 1. Before dispatch, inspect active agents and relevant existing chats/handoffs.
-   Reuse the current runtime integrator and owners. Select one implementation/
-   integration task; three subagents remains a ceiling, not a target. Additional
+   Reuse the current runtime integrator and owners. Select one integration
+   candidate and explicitly bound any parallel preparation; three subagents
+   remains a ceiling, not a target. Additional
    chats do not grant extra shared-file ownership. Serialize GPU voice/image jobs and
    performance measurements when resource contention would invalidate evidence.
 2. Workers may exchange dependency questions and findings with sibling
@@ -89,7 +93,7 @@ handoffs. No new service, queue database or scheduler is required.
    Only the integrator changes file ownership or acceptance contracts.
 3. Prefer compact `wait_threads` snapshots with returned cursors for existing
    chats, and native agent completion notifications for subtasks. Send a new
-   implementation prompt only for the centrally selected task; do not repeatedly nudge
+   implementation prompt only for an explicitly assigned candidate; do not repeatedly nudge
    an unchanged running task. Do not create new chats without an explicit user
    request. A worker handoff reports hashes and blockers, not just completion.
 4. On every completion, reconcile the handoff and release its write ownership.
@@ -108,7 +112,7 @@ handoffs. No new service, queue database or scheduler is required.
    evidence that depends on changed files; rebind both required world reviewers
    to the repaired candidate. Attribute supplied evidence and fresh execution
    separately using the shared review format above.
-6. Keep unmet goals in the existing completion summary and work through them
+6. Keep unmet goals in the existing completion summary and integrate them
    sequentially. Before leaving a task, record its worktree/branch/commit or
    uncommitted paths, passed checks, remaining FAIL/NOT RUN gates and smallest
    next action. Isolated integrators may save local checkpoint commits; workers

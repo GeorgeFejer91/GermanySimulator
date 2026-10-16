@@ -1,3 +1,13 @@
+# Central reconciliation and bounded asset preparation — 2026-10-16
+
+Scope: reconcile the preserved city style authority onto current main and route
+future asset work through it; record George's latest bounded-delegation direction.
+Allowed changes: city style document, agent/subject/city routers, SKILLS and
+ChatDev workflow guidance. Preserve the articulated 3D player/police exception,
+all runtime/assets/catalogs and prior accepted work. Initial canonical checkout
+is clean at30207d2. Physics/Camera and browser reruns are outside this docs-only
+batch; asset, navigation and review candidates remain in separate ignored output.
+
 # Individual street paint and redundant atlas admission — 2026-10-16
 
 The cold-start benchmark transfers 18,903,868 bytes, exceeding its unchanged

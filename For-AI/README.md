@@ -16,6 +16,7 @@ Use the smallest coherent change. Update the owning document when a lasting rule
 - [`BUERGERAMT.md`](./BUERGERAMT.md): current episode beats, cast ownership, audio, and domain handoff.
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy, including [browser playability maintenance](./ASSET-POLICY.md#maintaining-browser-playability).
 - [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): accepted character-source and atlas workflow.
+- [`CITY-CHARACTER-STYLE.md`](./CITY-CHARACTER-STYLE.md): painted city-citizen proportions, reference ownership and source/export review, with the retained 3D player/police exception.
 - [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
 - [`game-event-logic`](../.agents/skills/game-event-logic/SKILL.md): causal proof of gameplay action/reaction chains and whether runtime mediators support intended story progression; acceptance routing lives in `SKILLS.md`.
 - [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md): required independent physics and camera/scale reviewers, pedestrian/solid separation, visibility/depth and executable regression matrix.
