@@ -1,3 +1,24 @@
+# Saved cameo voice profiles — 2026-10-16
+
+Two bounded local CPU operations saved separate Bayern and Alice profiles from
+their own supplied recordings. Actual profile metadata and an independent
+metadata review confirm distinct identities, names and reference hashes. No
+new speech, ASR, model run or listening occurred. The cast audit and existing
+legacy voice registry now record both saved references, bringing the registry
+to 69 voice identities alongside 67 fixed production bindings. All 598 recording
+objects, thirteen cameo lookups and existing production-profile guards remain
+unchanged. Source provenance stays user-supplied and externally unverified.
+
+The focused cast, consistency and cameo tests pass 28/28; another 24 city,
+provenance, preview, law, Merkel and entry checks and 11 music-index tests pass.
+The full voice curator check passes. The existing builder produces 31 direct
+routes with byte-identical root, compatibility, cast and catalog files. CI
+includes the new cameo checks, and the catalog URL has
+a new cache tag. This metadata-only change does not affect world geometry,
+movement, animation or camera ownership; it requires no new physics/camera
+acceptance. Saved profiles do not establish newly generated dialogue or
+perceived audio quality. The full game completion goal remains active.
+
 # Canonical game compatibility entry — 2026-10-16
 
 Start from clean `ba6d585` in the isolated canonical entry checkout. Integrate

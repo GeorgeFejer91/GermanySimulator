@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; one Brunhilde Knick identity shared across the four counter slots, player, police, twelve named crowd identities, and three named static Bürgeramt patrons have voice bindings and authored interactions. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; one Brunhilde Knick identity shared across the four counter slots, player, police, twelve named crowd identities, and three named static Bürgeramt patrons have voice bindings and authored interactions. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles. Bayern and Alice also have separate saved own-source references in existingAssetProfiles; their thirteen supplied recordings remain without fixed generated-take attribution.",
   "source": [
     "game.js",
     "buergeramt-story.js",
@@ -4239,6 +4239,66 @@
           "english": "Come on, let's break into the Maaslos place next door. At least there's something worth taking. Here we'd have to leave furniture behind."
         }
       ]
+    },
+    {
+      "fullName": "Bayern-Beauftragter",
+      "gameRole": "city-political-cameo",
+      "gameCharacterId": "bayern",
+      "voiceId": "bayern",
+      "secretTunnelProfileName": "GS Bayern-Beauftragter (bayern)",
+      "secretTunnelProfileId": "91077b192db74fae8229068051c3eef0",
+      "originalSha256": "d1801a3382b02506efd0474168b6920259dfabf60352dc445ce934ef81e31305",
+      "referenceSha256": "629d0361cbe86d36e67e1e21d6fca8512314dbffbb7b0980d895a2226e9c7870",
+      "source": [
+        {
+          "path": "assets/voices/bayern/baden-wuerttemberg-not-bayern.mp3",
+          "sha256": "d1801a3382b02506efd0474168b6920259dfabf60352dc445ce934ef81e31305",
+          "text": "Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern."
+        }
+      ],
+      "sourceLicense": "User-supplied recording; external source/speaker provenance and redistribution license unverified; reusable reference within this user’s project",
+      "status": "saved own-source reference; existing legacy recordings retained; future synthesis requires explicit own-profile/source/recipe authority",
+      "savedProfileVerification": {
+        "date": "2026-10-16",
+        "nativeSaveReceiptSha256": "3e798cea6b16ed2146a8250eaa6e123c2ab276a94e533c11d172f84a8ca1d54a",
+        "profileMetadataSha256": "c7f70ddaef3be67dd44aede61cf2d6a3cc60ba29d31000f2b73f0d0b721e1b2f",
+        "sampleRateHz": 24000,
+        "channels": 1,
+        "bitsPerSample": 16,
+        "durationSeconds": 5.46175,
+        "speechGenerated": false,
+        "listening": "not performed"
+      }
+    },
+    {
+      "fullName": "Alice Weidel · fiktionale Satire",
+      "gameRole": "city-political-cameo",
+      "gameCharacterId": "alice",
+      "voiceId": "alice",
+      "secretTunnelProfileName": "GS Alice Weidel (alice satire)",
+      "secretTunnelProfileId": "b85fe52d86414f93969f0aaae0c19129",
+      "originalSha256": "f9891eaba1cc5bad71dbca8acd79a10769bc721fd9c711ce00ee2196715f8f22",
+      "referenceSha256": "3e6960680737c537a9c09695088bf8e2c5e1c588a9e6561facb0237ef1988a28",
+      "source": [
+        {
+          "path": "assets/voices/alice-weidel/traditionelle-familie.mp3",
+          "sha256": "f9891eaba1cc5bad71dbca8acd79a10769bc721fd9c711ce00ee2196715f8f22",
+          "text": "Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens."
+        }
+      ],
+      "sourceLicense": "User-supplied recording; external source/speaker provenance and redistribution license unverified; reusable reference within this user’s project",
+      "status": "saved own-source reference; existing legacy recordings retained; future synthesis requires explicit own-profile/source/recipe authority",
+      "savedProfileVerification": {
+        "date": "2026-10-16",
+        "nativeSaveReceiptSha256": "3e798cea6b16ed2146a8250eaa6e123c2ab276a94e533c11d172f84a8ca1d54a",
+        "profileMetadataSha256": "714beec98a52c1e8cf2deaf14884b5990d0499bf814acd7a316905fcbf0880ae",
+        "sampleRateHz": 24000,
+        "channels": 1,
+        "bitsPerSample": 16,
+        "durationSeconds": 6.34775,
+        "speechGenerated": false,
+        "listening": "not performed"
+      }
     }
   ],
   "additionalVisualProfileVerification": {

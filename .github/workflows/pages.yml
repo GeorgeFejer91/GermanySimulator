@@ -60,7 +60,7 @@ jobs:
           node tools/curate-voice-library.mjs --check
           node --test tests/voice-gap-public.test.mjs
           node --test tests/buergeramt-ambient.test.mjs
-          node --test tests/city-dialogue.test.mjs tests/city-voice-provenance.test.mjs tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
+          node --test tests/city-dialogue.test.mjs tests/city-voice-provenance.test.mjs tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/cameo-saved-profiles.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
       - name: Check city audio trigger hygiene
         run: node --test tests/audio-trigger-hygiene.test.mjs tests/audio-broker.test.mjs tests/speech-fallback-navigation.test.mjs tests/official-narrator-routing.test.mjs
       - name: Check game and browser regressions

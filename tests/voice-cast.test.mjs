@@ -56,7 +56,7 @@ assert.equal(archetypeVoiceIds.size,2,"towel archetypes are review voices, not e
 const allVoiceIds=new Set([...cast.characters,...cast.roleProfiles].map(person=>person.voiceId));
 assert.deepEqual(new Set([...modeledVoiceIds,...portraitVoiceIds,...archetypeVoiceIds]),allVoiceIds,"every profile has one documented runtime role");
 assert.equal(modeledVoiceIds.size+portraitVoiceIds.size+archetypeVoiceIds.size,allVoiceIds.size,"runtime roles must not overlap");
-assert.deepEqual(new Set([...namedNpcs.matchAll(/special:"([^"]+)"/g)].map(([,kind])=>kind)),new Set(["borderPourer","merkel","bayern","alice"]),"the excluded special city sprites must remain explicit");
+assert.deepEqual(new Set([...namedNpcs.matchAll(/special:"([^"]+)"/g)].map(([,kind])=>kind)),new Set(["borderPourer","merkel","bayern","alice"]),"the special city sprites remain outside the historical nonpolitical roster");
 
 assert.equal(cast.characterCount,cast.characters.length);
 assert.equal(cast.dialogueCount,cast.characters.reduce((total,person)=>total+person.dialogue.length,0));
@@ -87,6 +87,14 @@ const neighborContext=vm.createContext({});
 vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.copy=jwdCopy;',neighborContext);
 const fixedNeighborBindings={'jwd-parent':'jwd-heiko-maaslos','jwd-watcher':'jwd-inga-maaslos','jwd-swabian':'jwd-frau-schwabingen','jwd-theodore':'jwd-theodore-maaslos','jwd-burglar':'jwd-ede-einbruch'};
 for(const asset of cast.existingAssetProfiles){
+ if(asset.gameRole==='city-political-cameo'){
+  assert.ok(['bayern','alice'].includes(asset.voiceId),'only the two saved own-source cameos use this registry');
+  assert.equal(asset.gameCharacterId,asset.voiceId);assert.equal(cast.productionVoices[asset.voiceId],undefined);
+  assert.equal(voices[asset.voiceId].profileId,asset.secretTunnelProfileId);assert.equal(voices[asset.voiceId].profileName,asset.secretTunnelProfileName);
+  assert.equal(voices[asset.voiceId].originalSha256,asset.originalSha256);assert.equal(voices[asset.voiceId].referenceSha256,asset.referenceSha256);
+  assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));assert.notEqual(voices[asset.voiceId].generationAllowed,true);
+  continue;
+ }
  if(asset.gameRole==='jwd-neighbor'){
   assert.ok(game.includes(`id:"${asset.gameCharacterId}"`)||game.includes(`id:'${asset.gameCharacterId}'`),"selected neighbor actor exists in the actual runtime");assert.ok(game.includes(`:"${asset.voiceId}"`)||game.includes(`:'${asset.voiceId}'`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
   for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);if(locator){assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}else if(line.locator.startsWith('neighbor-story.js ')){assert.ok(line.text&&line.english,'exact tour lines and owners are checked below')}else{assert.match(line.locator,/^game\.js guided tour (repeat invitation|follow invitation|free play)$/);assert.ok(game.includes(line.text)&&game.includes(line.english),line.locator+' matches runtime')}}
