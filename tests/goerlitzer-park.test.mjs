@@ -39,7 +39,8 @@ ${line(game,"const borderGates=")}
 ${between(game,"const desktopBillboards=","const stableSpriteRoot=")}
 ${between(game,"const buildings=","const missions=")}
 ${between(game,"const WURST_TYPES=","const state=")}
-const crowdArchetypeOrder=[{id:"towel-man",label:"TOWEL",sprite:"crowdTowelMan"}],npcLines=[""];
+${between(game,"const crowdArchetypes=","const germannessVoice=")}
+const npcLines=[""];
 ${between(game,"const npcs=","window.Germany3DBridge=")}
 const dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 ${between(game,"function normObjectRadius(","function trainCarDistance(")}

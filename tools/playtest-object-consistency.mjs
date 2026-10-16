@@ -56,7 +56,7 @@ try{
   rootEntry=await awaitCanonicalEntry(page,requestedRootUrl);
   if(pickupCamera)await page.evaluate(()=>window.__pickupCameraProbe=true);
   }
-  const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,personMaterial,personCharacter,playerTargets,visibility,url})=>{
+  const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,personMaterial,personCharacter,personBox,playerTargets,visibility,url})=>{
    const T=await import(url),X=x=>x,Z=y=>y,S=.02;
    const bridge={player:{x:0,y:0},stationElevation:()=>0};
    const camera=new T.PerspectiveCamera(48,1,.1,100);camera.position.set(0,10,10);
@@ -84,14 +84,23 @@ try{
    buildingSlots.push(tall);tall.mesh.material.opacity=1;tall.opacity=1;previousOcclusionTime=0;updateBuildingOcclusion(1000/60);check('smooth-first-frame',tall.opacity>.03&&tall.opacity<1);
    const rates=[];for(const fps of [30,60,120]){tall.opacity=1;previousOcclusionTime=0;for(let i=1;i<=fps/2;i++)updateBuildingOcclusion(i*1000/fps);rates.push(tall.opacity)}check('elapsed-time-fade-parity',Math.max(...rates)-Math.min(...rates)<1e-8);
    tall.group.visible=false;previousOcclusionTime=0;tall.opacity=.03;updateBuildingOcclusion(1000/60);check('smooth-restore',tall.opacity>.03&&tall.opacity<1);
-   // Actual fallback paint, facing and target functions; a narrow opaque blocker
-   // separates the pitched head ray from every obsolete vertical-body sample.
+   // The live player/officer are volumetric; retain the legacy paint-helper
+   // coverage separately for actors that still use procedural painted fallback.
    buildingSlots.length=0;
+   const M=Object.fromEntries(['player','police','skin','dark'].map(kind=>[kind,new T.MeshStandardMaterial()])),box=eval(`(${personBox})`);
    const personFallbackMaterials=new Map(),personFallbackMaterial=eval(`(${personMaterial.trim()})`),character=eval(`(${personCharacter.trim()})`);
-   const playerMesh=character('player'),personScene=new T.Scene();personScene.add(playerMesh);playerMesh.rotation.y=1.2;
+   const models=[character('player'),character('police')];let playerMesh=models[0];
+   const streetPlayerSightlineTargets=eval(`(${playerTargets.trim()})`);
+   check('3d-player-default-body-sightlines',streetPlayerSightlineTargets()===null);
+   for(const [i,model] of models.entries()){
+    let planes=0;model.traverse(node=>{if(node.isMesh&&node.geometry.type==='PlaneGeometry')planes++});
+    check('3d-body-articulated-'+i,planes===0&&!!model.userData.ll&&!!model.userData.ra);
+    const bounds=new T.Box3().setFromObject(model);check('3d-body-height-'+i,Math.abs(bounds.max.y-(i?1.56:1.5))<1e-6&&bounds.min.y>=0);
+   }
+   playerMesh=character('npc');const personScene=new T.Scene();personScene.add(playerMesh);playerMesh.rotation.y=1.2;
    const forEachStreetBody=visit=>visit(bridge.player,playerMesh),jwdScenery=[],trainSlots=[];
    const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
-   const updateGroupVisibility=eval(`(${visibility.trim()})`),streetPlayerSightlineTargets=eval(`(${playerTargets.trim()})`);
+   const updateGroupVisibility=eval(`(${visibility.trim()})`);
    camera.position.set(0,11.5,14);camera.lookAt(0,1,-2.7);updateGroupVisibility();
    const fallback=playerMesh.userData.personFallback,targets=streetPlayerSightlineTargets();
    check('fallback-targets-exist',targets?.length===6);
@@ -111,6 +120,7 @@ try{
    check('fallback-targets-use-fresh-parent-transform',moved[0].distanceTo(head.clone().add(new T.Vector3(3,2,4)))<1e-6);
    check('collision-root-pose-unchanged',playerMesh.position.equals(new T.Vector3(3,2,4))&&Math.abs(playerMesh.rotation.y-.7)<1e-12);
    for(const material of personFallbackMaterials.values()){material.map.dispose();material.dispose()}fallback.geometry.dispose();
+   for(const model of models){const geometries=new Set();model.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});for(const geometry of geometries)geometry.dispose()}for(const material of Object.values(M))material.dispose();
    // Pixel checks use the actual production sprite material and ordinary depth.
    const painted=document.createElement('canvas');painted.width=painted.height=16;painted.getContext('2d').fillStyle='#ff0000';painted.getContext('2d').fillRect(2,2,12,12);
    bridge.getNpcSpriteCanvas=()=>painted;bridge.npcSpriteGrids={probe:{cols:1,rows:1,frameWidth:16,frameHeight:16}};
@@ -132,7 +142,7 @@ try{
    syncVehicleScale(vehicleSlot);check('live-traffic-retains-scale',vehicleSlot.group.scale.toArray().every(v=>v===1.4));
    syncVehicleScale(vehicleSlot,.4,.6);check('vortex-multiplies-base-scale',Math.abs(vehicleSlot.group.scale.x-1.4*.4*(1+.6*.82))<1e-12);syncVehicleScale(vehicleSlot);check('vortex-restores-base-scale',vehicleSlot.group.scale.toArray().every(v=>v===1.4));
    renderer.dispose();return{checks,fadeAtHalfSecond:rates};
-  },{occlusion:production('buildingObstructsPlayer'),fade:production('updateBuildingOcclusion'),atlas:production('atlasSprite'),vehicleView:production('isVehicleVisible'),vehicleScale:production('syncVehicleScale'),personMaterial:production('personFallbackMaterial'),personCharacter:production('character'),playerTargets:production('streetPlayerSightlineTargets'),visibility:production('updateGroupVisibility'),url:source.match(/const THREE_URL="([^"]+)"/)[1]});
+  },{occlusion:production('buildingObstructsPlayer'),fade:production('updateBuildingOcclusion'),atlas:production('atlasSprite'),vehicleView:production('isVehicleVisible'),vehicleScale:production('syncVehicleScale'),personMaterial:production('personFallbackMaterial'),personCharacter:production('character'),personBox:source.match(/const box=([^\r\n]+);/)[1],playerTargets:production('streetPlayerSightlineTargets'),visibility:production('updateGroupVisibility'),url:source.match(/const THREE_URL="([^"]+)"/)[1]});
   if(geometryOnly){
    if(errors.length)throw Error(errors.join('\n'));
    report.cases.push({name,verdict:'PASS',fixture,errors,scope:'Production geometry only; full-world startup/readiness/city NOT RUN'});

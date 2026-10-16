@@ -2687,5 +2687,12 @@
     "bytes": 2555780,
     "rgba_sha256": "2c530e8429c05fabb3f6af8cb38ac143e1e92f96ae7f00160e20eaff2f27aa92",
     "source_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50"
+  },
+  "movement_delivery": {
+    "image": "movement-atlas.webp",
+    "sha256": "e65c68e2d06f277f03cb74eaa84783fe5e91d3e4e50f05163efcd086f4bd12f8",
+    "bytes": 1143162,
+    "rgba_sha256": "bb17e5ff652341668112bf310d470e4792aa41e333a8aa768f541cc3aa914356",
+    "source_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50"
   }
 }

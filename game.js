@@ -255,7 +255,7 @@ for(const station of stations){
 }
 const stableSpriteRoot="./assets/sprite-archive/pre-rig-20260921/assets/";
 const legacySpriteSources={merkel:{file:"merkel-sprite.png",cols:24,rows:5},bayern:{file:"bayern-walker-sprite.png",cols:32,rows:4},alice:{file:"alice-weidel-sprite.png",cols:32,rows:2},borderPourer:{file:"border-pourer-sprite.png",cols:32,rows:6},towelMan:{file:"crowd-towel-man.png",cols:32,rows:3},towelWoman:{file:"crowd-towel-woman.png",cols:32,rows:3}};
-const assetSources={merkelSprite:"./assets/characters/merkel/manifest.json?v=20261008-browser-light",bayernSprite:"./assets/characters/bayern/manifest.json?v=20261008-browser-light",aliceSprite:"./assets/characters/alice/manifest.json?v=20261008-browser-light",borderPourerSprite:"./assets/characters/borderPourer/manifest.json?v=20261008-browser-light",towelManSprite:"./assets/tourists/towelMan/manifest.json?v=20261008-browser-light",towelWomanSprite:"./assets/tourists/towelWoman/manifest.json?v=20261008-browser-light"};
+const assetSources={merkelSprite:"./assets/characters/merkel/manifest.json?v=20261008-browser-light",bayernSprite:"./assets/characters/bayern/manifest.json?v=20261008-browser-light",aliceSprite:"./assets/characters/alice/manifest.json?v=20261008-browser-light",borderPourerSprite:"./assets/characters/borderPourer/manifest.json?v=20261008-browser-light",towelManSprite:"./assets/tourists/towelMan/manifest.json?v=20261016-sandale-movement",towelWomanSprite:"./assets/tourists/towelWoman/manifest.json?v=20261016-sandale-movement"};
 // One admission queue owns downloads, decoding and model installation across the game.
 const assetQueue=[];let assetLoadActive=0;
 function pumpAssetLoads(){while(assetLoadActive<2&&assetQueue.length){const urgent=assetQueue.findIndex(job=>job.foreground),normal=assetQueue.findIndex(job=>!job.background),index=urgent>=0?urgent:(document.hidden?-1:normal>=0?normal:0);if(index<0)return;const [job]=assetQueue.splice(index,1);assetLoadActive++;Promise.resolve().then(job.task).then(job.resolve,job.reject).finally(()=>{assetLoadActive--;pumpAssetLoads()})}}
@@ -269,7 +269,7 @@ function requestNpcSprite(kind){
  npcAssetLoads.set(kind,entry);entry.promise=queueAssetLoad(async()=>{
   try{
    if(!globalThis.TouristAnimations)throw new Error("Character loader unavailable");
-   const {manifest,objectURL}=await TouristAnimations.load(assetSources[kind+"Sprite"]);
+   const {manifest,objectURL}=await TouristAnimations.load(assetSources[kind+"Sprite"],{movementOnly:true});
    Object.assign(atlas,{tourist:manifest,cols:manifest.cols??8,rows:manifest.rows??10,frameWidth:manifest.frame_size[0],frameHeight:manifest.frame_size[1],pivot:manifest.pivot});
    try{await loadSpriteImage(img,objectURL)}finally{URL.revokeObjectURL(objectURL)}
   }catch(error){
@@ -278,6 +278,7 @@ function requestNpcSprite(kind){
    try{await loadSpriteImage(img,stableSpriteRoot+legacy.file+"?v=20260922-stable1")}catch{entry.failed=true}
   }
   prepareTransparentSprite(kind);
+  if(atlas.tourist)for(const n of npcs)if(n.sandale&&n.spriteKind===kind)orientCrowdSprite(n);
  }).catch(error=>{entry.failed=true;console.warn("Character preparation failed",kind,error)}).finally(()=>{entry.settled=true});return entry.promise
 }
 function prepareNearbyNpcAssets(){
@@ -2276,10 +2277,19 @@ let crowdIndex=0;
 function addCrowdPedestrian(x,y,vx,vy,min,max,canQuiz=true){
  const j=crowdIndex++,archetype=crowdArchetypeOrder[j%crowdArchetypeOrder.length],vertical=!!vy,dedicated=new Set((globalThis.StreetWisdom?.definitions||[]).map(person=>person.voiceId)),identities=crowdVoiceIds.map((voiceId,index)=>index).filter(index=>!dedicated.has(crowdVoiceIds[index])&&index%2===(archetype.sprite==="towelMan"?1:0)),identityIndex=identities[Math.floor(j/2)%identities.length],fullName=crowdNames[identityIndex],voiceId=crowdVoiceIds[identityIndex];
  const character=canQuiz&&j%3===0&&quizCharacterLibrary.characters.length?quizCharacterLibrary.characters[Math.floor(j/3)%quizCharacterLibrary.characters.length]:null;
- npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:!!character,pause:0,barkAt:0,archetype:archetype.id,spriteKind:character?.fallbackSpriteKind??archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96,...(character?{quizCharacterId:character.id,name:character.name,fullName:character.name,voiceId:character.voiceId}:{})})
+ const sandale=!character&&j%6>=4;
+ npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:!!character,pause:0,barkAt:0,archetype:archetype.id,spriteKind:character?.fallbackSpriteKind??archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96,...(character?{quizCharacterId:character.id,name:character.name,fullName:character.name,voiceId:character.voiceId}:sandale?{sandale:true,name:`${archetype.sprite==="towelMan"?"HERR":"FRAU"} SANDALE · ${archetype.label}`,fullName:archetype.fullName.toUpperCase(),voiceId:archetype.voiceId}:{})})
 }
-function requestCharacterReaction(n,names,options={}){return globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false}
-function updateCharacterReaction(n,dt){return globalThis.CharacterInteractions?.advance(n,dt,npcSpriteAtlases[n?.spriteKind]?.tourist)||false}
+function requestNpcInteractions(kind){
+ const entry=npcAssetLoads.get(kind),atlas=npcSpriteAtlases[kind];if(!entry||!atlas?.tourist?.movementOnly||entry.interactionsPromise)return;
+ entry.interactionsPromise=queueAssetLoad(async()=>{
+  const {manifest,objectURL}=await TouristAnimations.load(assetSources[kind+"Sprite"]),img=new Image();
+  try{await loadSpriteImage(img,objectURL)}finally{URL.revokeObjectURL(objectURL)}
+  assets[kind+"Sprite"]=img;atlas.tourist=manifest;atlas.canvas=null;prepareTransparentSprite(kind);
+ }).catch(error=>{console.warn("Character reactions unavailable; keeping accepted walking frames",kind,error)});
+}
+function requestCharacterReaction(n,names,options={}){const accepted=globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false;if(accepted)requestNpcInteractions(n.spriteKind);return accepted}
+function updateCharacterReaction(n,dt){const manifest=npcSpriteAtlases[n?.spriteKind]?.tourist;return !manifest?.movementOnly&&(globalThis.CharacterInteractions?.advance(n,dt,manifest)||false)}
 function orientCrowdSprite(n,dx=n.vx||0,dy=n.vy||0){
  const atlas=npcSpriteAtlases[n.spriteKind];if(atlas?.tourist){TouristAnimations.request(n,dx,dy,atlas.tourist);return}
  const horizontal=Math.abs(dx)>=Math.abs(dy);n.spriteRow=horizontal?0:(dy>0?1:2);n.spriteFlip=horizontal&&dx<0

@@ -17,6 +17,7 @@ function fixture(actors){
     cityModelsEnabled:()=>scope.enabled,enabled:true,jobcenter:{active:false},buildingLevels:{office:null},
     resolveStreetCharacter:actor=>actor.voiceId,
   });
+  scope.bridge={player:scope.player,getPolice:()=>[]};
   vm.runInContext('let streetPaintManifest=null,streetPaintManifestError=null;const startupNpcKinds=new Set();let startupNpcsCaptured=false,lastNpcAdmission=-Infinity,pendingNeighborEntry=false;'+ownership+admission+';globalThis.api={prepareNearbyNpcAssets,startupNpcAssetsReady,npcSpriteRequired};',scope);
   function renderer(){scope.window.Germany3D={npcSpriteRequired:scope.api.npcSpriteRequired,isWorldPointVisible:()=>false}}
   function manifest(){vm.runInContext('streetPaintManifest={own:{standing:{file:"own.webp"}}}',scope)}

@@ -1260,6 +1260,17 @@ function showRendererFailure(error){
     personFallbackMaterials.set(kind,material);return material;
   }
   function character(kind,height=kind==="police"?1.56:1.5){
+    if(kind==="player"||kind==="police"){
+      const root=new T.Group(),material=kind==="player"?M.player:M.police;
+      box(.42,.72,.3,material,0,.72,0,root);
+      const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;root.add(head);
+      const leg=new T.CylinderGeometry(.06,.07,.5,8),arm=new T.CylinderGeometry(.05,.06,.48,8);
+      const ll=new T.Mesh(leg,material),rl=ll.clone(),la=new T.Mesh(arm,material),ra=la.clone();
+      ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);
+      root.add(ll,rl,la,ra);root.userData={ll,rl,la,ra};root.name=kind+" animated 3D model";
+      if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;root.add(cap)}
+      return root;
+    }
     const root=new T.Group(),planeHeight=height*192/176;
     const paint=new T.Mesh(new T.PlaneGeometry(planeHeight*.5,planeHeight),personFallbackMaterial(kind));
     paint.name=`${kind} procedural 2D fallback`;paint.userData.personFallback=true;
@@ -1268,6 +1279,11 @@ function showRendererFailure(error){
   function syncChar(q,o,l=0){
     const previousX=q.userData.worldX??o.x,previousY=q.userData.worldY??o.y,travel=Math.hypot(o.x-previousX,o.y-previousY);q.userData.worldX=o.x;q.userData.worldY=o.y;q.userData.walkPhase=(q.userData.walkPhase||0)+travel*.13;q.position.set(X(o.x),l+bridge.stationElevation(o.x,o.y),Z(o.y));
     if(o.wisdomId){if(travel>.01)q.rotation.y=Math.atan2(o.x-previousX,o.y-previousY);else if(o.pause>0)q.rotation.y=Math.atan2(bridge.player.x-o.x,bridge.player.y-o.y)}
+    if(q.userData.ll){
+      if(travel>.01)q.rotation.y=Math.atan2(o.x-previousX,o.y-previousY);
+      const target=travel>.01?Math.sin(q.userData.walkPhase)*.38:0,s=q.userData.walkSwing=(q.userData.walkSwing||0)+(target-(q.userData.walkSwing||0))*(travel>.01?1:.28);
+      q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7;
+    }
   }
   function jwdCharacter(n){
     const root=character(n.jwdRole==='burglar'?'burglar':'npc',n.jwdRole==='child'?1.088:1.6);
@@ -1290,6 +1306,7 @@ function showRendererFailure(error){
   function npcSprite(n){return specialSprite(n)||(n.spriteKind?atlasSprite(n.spriteKind,n.spriteScale||2.42):null)}
   function npcAppearance(n){return n.jwdRole?jwdCharacter(n):npcSprite(n)||character("npc")}
   function syncAtlasSprite(q,o,height){
+    const source=bridge.getNpcSpriteCanvas?.(o.spriteKind||o.special);if(source&&q.material.map.image!==source){q.material.map.image=source;q.material.map.needsUpdate=true}
     const grid=q.userData.grid,frame=o.spriteFrame||0,row=o.spriteRow||0,flip=!!o.spriteFlip;
     if(frame!==q.userData.spriteFrame||row!==q.userData.spriteRow||flip!==q.userData.spriteFlip){const uv=q.geometry.attributes.uv,base=q.userData.baseUv,u0=frame/grid.cols,v0=1-(row+1)/grid.rows;for(let i=0;i<uv.count;i++){const bx=base[i*2],by=base[i*2+1];uv.setXY(i,u0+(flip?1-bx:bx)/grid.cols,v0+by/grid.rows)}uv.needsUpdate=true;q.userData.spriteFrame=frame;q.userData.spriteRow=row;q.userData.spriteFlip=flip}
     const ground=bridge.stationElevation(o.x,o.y),p=q.userData.plantedHeight,r=camera.quaternion;q.quaternion.copy(r);
@@ -1306,7 +1323,7 @@ function showRendererFailure(error){
     if(!bridge.setStreetMotionObserver)return;
     const enabled=Object.values(manifest).some(person=>person.standingOnly!==true&&person.motionRig?.contactPlayback?.schemaVersion===1);
     bridge.setStreetMotionObserver(enabled?{
-      accepts:acceptsStreetSimulation,
+      accepts:actor=>registeredStreetPaint(actor)!==null&&acceptsStreetSimulation(actor),
       accepted(actor,fromX,fromY,toX,toY){
         acceptStreetSimulationSegment(actor,{fromRoot:[X(fromX),bridge.stationElevation(fromX,fromY),Z(fromY)],
           toRoot:[X(toX),bridge.stationElevation(toX,toY),Z(toY)],distance2d:Math.hypot(toX-fromX,toY-fromY),dx:toX-fromX,dy:toY-fromY});
@@ -1325,6 +1342,7 @@ function showRendererFailure(error){
   }
   const streetPaintOwner={retired:false};
   function registeredStreetPaint(actor){
+    if(actor===bridge.player||bridge.getPolice().includes(actor)||actor.sandale)return null;
     if(actor.special||actor.jwdRole&&actor.jwdRole!=='burglar'||['tourist-guenther-liegestuhl','touristin-walburga-handtuch'].includes(actor.voiceId))return null;
     const id=resolveStreetCharacter(actor);
     return id&&Object.hasOwn(streetPaintManifest||{},id)&&streetPaintManifest[id].standing?id:null;

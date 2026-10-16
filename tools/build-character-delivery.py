@@ -40,6 +40,29 @@ def run(check=False):
             assert manifest.get('delivery') == record, name + ' delivery record is stale'
         else:
             manifest['delivery'] = record
+        if family == 'tourists':
+            # Same grid and exact walking/turning pixels; reaction rows arrive on request.
+            movement = Image.new('RGBA', original.size)
+            movement.paste(original.crop((0, 0, original.width, 10 * manifest['frame_size'][1])), (0, 0))
+            movement_target = path.parent / 'movement-atlas.webp'
+            if not check:
+                movement.save(movement_target, 'WEBP', lossless=True, exact=True, method=6)
+            decoded_movement = Image.open(movement_target).convert('RGBA')
+            assert decoded_movement.size == movement.size
+            assert decoded_movement.tobytes() == movement.tobytes(), name + ' movement pixels changed'
+            movement_record = {
+                'image': movement_target.name,
+                'sha256': hashlib.sha256(movement_target.read_bytes()).hexdigest(),
+                'bytes': movement_target.stat().st_size,
+                'rgba_sha256': hashlib.sha256(decoded_movement.tobytes()).hexdigest(),
+                'source_sha256': manifest['sha256'],
+            }
+            assert movement_record['bytes'] < record['bytes']
+            if check:
+                assert manifest.get('movement_delivery') == movement_record, name + ' movement delivery record is stale'
+            else:
+                manifest['movement_delivery'] = movement_record
+        if not check:
             path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         before += source.stat().st_size
         after += target.stat().st_size

@@ -3,10 +3,13 @@ globalThis.TouristAnimations = (() => {
   const loading = new Map();
   const facing = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
   const cell = (n, p) => { n.spriteRow=p.row; n.spriteFrame=p.col; n.spriteFlip=false; };
-  async function load(url) {
-    if (!loading.has(url)) loading.set(url, (async () => {
+  async function load(url,{movementOnly=false}={}) {
+    const key=url+(movementOnly?'#movement':'');
+    if (!loading.has(key)) loading.set(key, (async () => {
       const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
       const manifest=await response.json();
+      const movement=movementOnly&&manifest.movement_delivery;
+      if(movement)manifest.movementOnly=true;
       async function artwork(spec) {
       const art=await fetch(new URL(spec.image,new URL(url,globalThis.document?.baseURI||location.href)));
       if(!art.ok) throw Error('Character artwork '+art.status);
@@ -25,13 +28,15 @@ globalThis.TouristAnimations = (() => {
         const bits=header.getUint32(21,true);width=(bits&0x3fff)+1;height=((bits>>>14)&0x3fff)+1;
       } else {width=header.getUint32(16);height=header.getUint32(20)}
       if(w!==cols*manifest.frame_size[0] || h!==rows*manifest.frame_size[1] || width!==w || height!==h) throw Error('Character atlas dimensions');
-      return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type:webp?'image/webp':'image/png'}))};
+      return {manifest,bytes,type:webp?'image/webp':'image/png'};
       }
       // PNG masters retain the accepted artwork when delivery fails.
+      if(movement)try{return await artwork(movement)}catch(error){delete manifest.movementOnly;console.warn('Character movement delivery fallback',error)}
       if(manifest.delivery)try{return await artwork(manifest.delivery)}catch(error){console.warn('Character delivery fallback',error)}
       return artwork(manifest);
     })());
-    return loading.get(url);
+    const {manifest,bytes,type}=await loading.get(key);
+    return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type}))};
   }
   function request(n,dx,dy,m) {
     n.touristRequested=facing(dx,dy);

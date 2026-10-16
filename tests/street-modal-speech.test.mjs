@@ -26,7 +26,7 @@ async function fixture(){
   const h={player:{id:'unregistered-player',x:0,y:0},npcs:[actor],police:[],activeStimulus:item,stimulusGeneration:3,
     state:{started:true,modal:true,gameOver:false,voiceOn:true},document:{hidden:false},window:{GermanyHUD:{paused:false},Germany3D:{levelTransition:{active:false}}},
     speechCatalog:{productionVoices:{[actor.voiceId]:binding},recordings:{'fixture.mp3':recording}},audio:{state:'running'},recordedSpeechSource:{},console,
-    ...api,X:x=>x,Z:y=>y,amtReducedMotion:{matches:false}};
+    ...api,charactersFixture:characters,X:x=>x,Z:y=>y,amtReducedMotion:{matches:false}};
   vm.createContext(h);
   const energySource=game.includes('function recordedMouthOpening(')?between(game,'function recordedMouthOpening(','function getNeighborDialogue('):'';
   vm.runInContext(between(game,'let streetMotionObserver=','const speechCatalog=')+energySource+
@@ -34,7 +34,8 @@ async function fixture(){
   // Use the actual bridge setter, native projection, and world observer installation.
   const setter=game.match(/setStreetMotionObserver:observer=>\{streetMotionObserver=observer\}/)?.[0];
   assert(setter,'Actual bridge observer setter');
-  vm.runInContext('const bridge={'+setter+',getStreetSpeech,stationElevation:()=>0};\n'+
+  vm.runInContext('let streetPaintManifest=charactersFixture;const bridge={'+setter+',player,getPolice:()=>police,getStreetSpeech,stationElevation:()=>0};\n'+
+    between(world,'function registeredStreetPaint(','function npcSpriteRequired(')+
     between(world,'function installStreetMotionObserver(','const streetPaintOwner=')+
     '\nglobalThis.installFixture=manifest=>installStreetMotionObserver(manifest);globalThis.finishFixture=dt=>finishStreetSimulationTick(dt);',h);
   h.installFixture(characters);

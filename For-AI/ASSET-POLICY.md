@@ -1109,6 +1109,28 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 - Missing-model paths retain procedural 3D car and helicopter stand-ins. Do not add a remote runtime asset host or a vehicle-physics dependency for this bounded chase system.
 - Chase audio stays under `assets/audio/police/`: one CC BY 4.0 Essen police Martinshorn recording supplies the distance-scaled loop and one CC0 German police-car pass-by supplies a cooldown-bound close approach accent. Preserve the adjacent `LICENSES.md` attribution, conversion notes, durations, sizes, and checksums. Both files load only when a chase or pass-by requires them, never use a remote runtime host, and fall back to the existing synthesized siren when unavailable.
 
+## Street character movement
+
+The user's 2026-10-16 street-animation direction retains the player and police
+officers as their articulated 3D models. Their limb phase follows accepted root
+displacement, and they do not acquire the street paint or contact-rig owner.
+Keep abundant, independently named Herr and Frau Sandale on the accepted towel
+sprite atlases alongside the other named citizens. New citizen animation remains
+subject to the source/export, actual-browser and independent world reviews.
+
+Sandale startup delivery retains the original 8×19 grid and exact first ten
+walking, turning and stop/start rows. Unused reaction rows are transparent in
+the initial lossless WebPs: 2,398,006 encoded bytes for both, versus 5,274,684
+for their complete atlases. A requested reaction admits the complete existing
+atlas through the shared two-job queue. Walking remains displayed until the
+replacement image is decoded, then the shared texture changes before reaction
+frames advance. Failure keeps walking and captions. No new loop or decoder is
+introduced. Each variant still decodes to 24,281,088 RGBA bytes; swapping can
+temporarily retain both images, and GPU copies are additional. Encoded loader
+entries are page-scoped, and each image consumer releases its own Blob URL.
+`tools/build-character-delivery.py --check` verifies the exact retained pixels
+and hashes. This delivery change does not approve any new citizen art.
+
 ## Opt-in prop-detail studies
 
 Paired character actions retain native painted keys. Their existing builder

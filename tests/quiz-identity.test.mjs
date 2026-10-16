@@ -18,7 +18,15 @@ test('spawn identity uses fixed9 personas and declared fallback families while p
   const actor=after.npcs[index];
   assert.equal(actor.quizzer,before.npcs[index].quizzer);
   if(actor.quizzer){const person=after.scope.people[Math.floor(index/3)%9];assert.ok(['towelMan','towelWoman'].includes(person.fallbackSpriteKind));assert.deepEqual(physical(actor),{...physical(before.npcs[index]),spriteKind:person.fallbackSpriteKind});assert.equal(actor.quizCharacterId,person.id);assert.equal(actor.voiceId,person.voiceId);assert.equal(actor.name,person.name);assert.equal(actor.fullName,person.name)}
-  else{assert.deepEqual(physical(actor),physical(before.npcs[index]));assert.deepEqual(identity(actor),identity(before.npcs[index]));}
+  else{
+   assert.deepEqual(physical(actor),physical(before.npcs[index]));
+   if(actor.sandale){
+    const male=actor.spriteKind==='towelMan';assert(index%6>=4);
+    assert.equal(actor.voiceId,male?'tourist-guenther-liegestuhl':'touristin-walburga-handtuch');
+    assert.equal(actor.fullName,male?'GÜNTHER LIEGESTUHL':'WALBURGA HANDTUCH');
+    assert(actor.name.startsWith((male?'HERR':'FRAU')+' SANDALE · '));assert.equal(actor.quizCharacterId,undefined);
+   }else assert.deepEqual(identity(actor),identity(before.npcs[index]));
+  }
  }
  const city=fixture();spawnCityCrowd(city);assert.equal(city.npcs.length,110);assert.equal(city.npcs.filter(n=>n.quizzer).length,22);assert.equal(new Set(city.npcs.filter(n=>n.quizzer).map(n=>n.quizCharacterId)).size,9);
 });

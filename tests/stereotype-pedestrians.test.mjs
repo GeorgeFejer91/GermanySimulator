@@ -34,10 +34,14 @@ for(let i=0;i<24;i++)vm.runInContext('addCrowdPedestrian(100,100,12,0,0,200)',co
 const ordinary=context.npcs.filter(n=>!n.quizzer),quiz=context.npcs.filter(n=>n.quizzer);
 assert.equal(context.npcs.length,24,'retain all requested physical crowd spawns');
 assert.equal(ordinary.length,16);assert.equal(quiz.length,8);
-assert.equal(new Set(ordinary.map(n=>n.voiceId)).size,9,'all remaining ordinary names rotate through the crowd');
+const sandales=ordinary.filter(n=>n.sandale);
+assert.equal(sandales.filter(n=>n.spriteKind==='towelMan').length,4,'Herr Sandale remains abundant');
+assert.equal(sandales.filter(n=>n.spriteKind==='towelWoman').length,4,'Frau Sandale remains equally abundant');
+assert(sandales.every(n=>n.name.includes('SANDALE')&&!n.quizzer),'Sandales retain their own displayed identities');
+for(let i=24;i<120;i++)vm.runInContext('addCrowdPedestrian(100,100,12,0,0,200)',context);
+assert.equal(new Set(context.npcs.filter(n=>!n.quizzer&&!n.sandale).map(n=>n.voiceId)).size,9,'all nine other ordinary names retain population coverage');
 assert.equal(new Set(quiz.map(n=>n.voiceId)).size,8,'every sampled quiz actor owns its fixed persona voice');
-assert.equal(new Set(context.npcs.map(n=>n.voiceId)).size,17,'quiz voices extend the nine ordinary identities');
-const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')),profiles=cast.roleProfiles;
+const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')),profiles=[...cast.roleProfiles,...cast.existingAssetProfiles];
 for(const person of ordinary){
  assert(!context.StreetWisdom.definitions.some(d=>d.voiceId===person.voiceId),'adviser identities are reserved');
  assert.equal(profiles.find(p=>p.voiceId===person.voiceId).gender,person.spriteKind==='towelMan'?'male':'female');
