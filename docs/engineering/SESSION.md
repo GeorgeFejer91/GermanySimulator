@@ -52,9 +52,16 @@ within 28.587 seconds with four images, no page errors and no changed pins.
 An earlier one-request transient-failure run also reaches gameplay and reacquires
 the character's own image through another instance; its expectation of a
 permanent failed state is incorrect. Preserve that failed diagnostic output and
-use the distinct persistent-URL case for fallback proof. Focused failed-actor
-body/feet images remain pending; the wide frames alone cannot establish those
-pixels. The unchanged production geometry component separately passes 132
+use the distinct persistent-URL case for fallback proof. A final four-case run
+adds focused failed-actor frames on desktop and portrait emulation: dismiss the
+fax with its real control, temporarily position the player to focus the existing
+follow camera, leave the selected NPC untouched, then restore the player's pose.
+The same failed-and-settled actor remains registered with its ready legacy atlas;
+its full body and feet are visible in both frames. The run retires cleanly within
+31.532 seconds with no page errors or changed pins. Its automatic terminal leaves
+visual acceptance to the integrator's and independent reviewers' frame inspection.
+These forced scenes prove this recovery path, not natural traversal or every
+character's animation. The unchanged production geometry component separately passes 132
 checks across desktop and both mobile orientations; its synthetic pixel fixture
 does not prove every character's painted body or the natural mission chain.
 
