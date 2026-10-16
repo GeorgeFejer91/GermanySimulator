@@ -21,7 +21,18 @@ For playtest evidence, also name the driver, browser/device, input mode, shortcu
 
 For the object-consistency matrix, include the reviewer/role and verdict per scenario and evidence type: production source/CPU checks, fresh Chromium rendered checks, Android emulation and physical Android. A source PASS cannot promote a rendered NOT RUN to PASS. Required FAIL/NOT RUN items keep acceptance outstanding; record out-of-scope rows and reasons rather than implying they passed.
 
-## Codex parallel completion loop
+<a id="codex-parallel-completion-loop"></a>
+
+## Codex centralized completion process
+
+George's 2026-10-16 instruction replaces automatic parallel task expansion.
+Existing chats finish their current bounded checkpoint, preserve their work and
+hand off without starting new tasks or reassigning finished workers. Keep one
+runtime integrator and one selected implementation/integration task at a time.
+The integrator reconciles, validates and commits that task before selecting the
+next; publish completed changes under the existing publication policy. Required
+independent reviewers may review the same frozen candidate. The former anchor
+above remains for existing links.
 
 For game-wide completion, use the native Codex agent tools and existing
 user-authorized game chats. The fourteen-stage YAML remains an optional serial
@@ -34,7 +45,7 @@ causality (which committed state permits it), and player experience (whether the
 player can see, hear, understand and act on it). A storyboard alone cannot prove
 the latter two. The lead joins their evidence before accepting the outcome.
 
-| Wave | Work that can proceed independently | Dependency before joining |
+| Step within the selected task | Scoped work | Dependency before joining |
 | --- | --- | --- |
 | Discover | Story/mission continuity; city scene/detail inventory; test and evidence gaps | Resolve level instructions, current writers and actual source ownership; distinguish a demonstrated defect from missing coverage. |
 | Contract | Storyboard/dialogue proposals; gameplay causal map; camera/asset/audio readiness plan | Agree beat IDs, prerequisites, actor identity, exact text, consequences, failure/retry and the shared beat card. Camera planning starts here. |
@@ -44,8 +55,9 @@ the latter two. The lead joins their evidence before accepting the outcome.
 | Prove experience | Natural-chain gameplay/flow; exact speech/text and listening; scene/character continuity and missing-detail review | Collect the applicable desktop/mobile, input, loading, fallback and interruption evidence. Scripted scenes, silent audio checks and physical devices have distinct verdicts. |
 | Release | Integrator reconciles findings, validates and publishes | Required failures and missing evidence remain open; follow the standing publication policy and verify the deployed result. |
 
-These are dependency waves, not mandatory whole-game barriers: a frozen dialogue
-batch can enter voice production while another disjoint scene is storyboarded.
+These are steps within one selected task, not concurrent feature lanes or
+mandatory whole-game barriers. Complete its bounded acceptance before selecting
+another task; do not expand it into a whole-cast or whole-game rewrite.
 Final Camera acceptance waits for integrated meshes, poses, depth, loading and
 runtime behavior. Decorative city detail follows mission readability, legal
 routes, recovery and performance; its mere presence does not establish polish.
@@ -53,7 +65,7 @@ For city flow, separately prove the natural start, eight-procedure progression,
 interior returns and optional detour recovery. Existing direct-entry or seeded
 probes retain their narrower value.
 
-### Communication, ownership and continued dispatch
+### Communication, ownership and handoff
 
 Use the [delegation brief](../SKILLS.md#delegation-and-review) for every dispatch.
 Keep task status, evidence and the current completion summary in the lead's
@@ -64,9 +76,9 @@ bounded action. The lead is its single writer. Other chats own their separate
 handoffs. No new service, queue database or scheduler is required.
 
 1. Before dispatch, inspect active agents and relevant existing chats/handoffs.
-   Reuse the current runtime integrator and owners. Three active subagents is the
-   ceiling for this lead, subject to the live host/tool limit; additional chats
-   do not grant extra shared-file ownership. Serialize GPU voice/image jobs and
+   Reuse the current runtime integrator and owners. Select one implementation/
+   integration task; three subagents remains a ceiling, not a target. Additional
+   chats do not grant extra shared-file ownership. Serialize GPU voice/image jobs and
    performance measurements when resource contention would invalidate evidence.
 2. Workers may exchange dependency questions and findings with sibling
    subagents, copying the lead. Cross-chat messaging requires direct human
@@ -77,13 +89,14 @@ handoffs. No new service, queue database or scheduler is required.
    Only the integrator changes file ownership or acceptance contracts.
 3. Prefer compact `wait_threads` snapshots with returned cursors for existing
    chats, and native agent completion notifications for subtasks. Send a new
-   prompt when an idle owner has a concrete ready task; do not repeatedly nudge
+   implementation prompt only for the centrally selected task; do not repeatedly nudge
    an unchanged running task. Do not create new chats without an explicit user
    request. A worker handoff reports hashes and blockers, not just completion.
-4. On every completion, reconcile the handoff, release its write ownership and
-   reactivate an available agent with the next ready bounded task. Prioritize a
+4. On every completion, reconcile the handoff and release its write ownership.
+   Do not automatically reactivate that worker. The integrator selects the next
+   bounded task after the current task's validation and commit. Prioritize a
    broken mission/recovery dependency, then missing required evidence, then
-   remaining content/detail. Keep unaffected lanes working when one is blocked;
+   remaining content/detail. Preserve a blocked task with its exact next action;
    change the approach after a failed repair rather than retrying it blindly.
    For native subagents, use `collaboration.followup_task` to restart an idle or
    completed owner; `collaboration.send_message` delivers a message but does not
@@ -95,7 +108,12 @@ handoffs. No new service, queue database or scheduler is required.
    evidence that depends on changed files; rebind both required world reviewers
    to the repaired candidate. Attribute supplied evidence and fresh execution
    separately using the shared review format above.
-6. Continue dispatch while the authorized goal has unmet acceptance criteria.
+6. Keep unmet goals in the existing completion summary and work through them
+   sequentially. Before leaving a task, record its worktree/branch/commit or
+   uncommitted paths, passed checks, remaining FAIL/NOT RUN gates and smallest
+   next action. Isolated integrators may save local checkpoint commits; workers
+   hand off and the sole runtime integrator owns shared commits and publication.
+   Keep private authoring inputs and generated evidence out of release commits.
    Completion means the agreed playable outcomes, required reviews and release
    checks are satisfied, not that all workers returned reports. Respect user
    stop/pause instructions and real external blockers; never invent PASS evidence
