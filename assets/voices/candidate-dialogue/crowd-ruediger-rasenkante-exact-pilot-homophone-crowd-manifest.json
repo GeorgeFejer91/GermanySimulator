@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "generationScope": "exact-ruediger-pilot-homophone",
+  "voiceId": "crowd-ruediger-rasenkante",
+  "profileId": "3cc9340471d3480ba090545b5a9024c9",
+  "fallback": "captions",
+  "status": "homophone-equivalent; original literal/strict/cue failure retained; human listening pending",
+  "requestedLineCount": 4,
+  "generatedLineCount": 0,
+  "joinedLineCount": 1,
+  "segmentGenerationCalls": 3,
+  "parentGenerationCalls": 0,
+  "parentGermanAsrCalls": 2,
+  "totalAsrCalls": 5,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "crowd-ruediger-rasenkante-berlin-01",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "actorId": "crowd-ruediger-rasenkante",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-ruediger-rasenkante].berlin[0]",
+      "text": "Die Rasenkante ist not an invitation; your Schuh steht im Zuständigkeitsbereich.",
+      "english": "The lawn edge is not an invitation; your shoe is within my jurisdiction.",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+      "referenceOriginalSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "textSha256": "aa38b8c45fb36b873a247cd9ad75f611be84ab3376f897ecf7013063a304da0b",
+      "codeSwitchParent": true,
+      "phaseScope": "new code-switch diagnostic phase",
+      "synthesisAttempt": 0,
+      "synthesisAttemptBasis": "joined diagnostic segments; no whole-parent TTS call or first-take claim",
+      "rawSha256": "03957154e18df59fc81e4d26532870a37626e8241071a91f9c5769d86bc73e58",
+      "requestSha256": "0c923bbaf40e409b31b3f15062143e7bff4429384d4df2ab53bcfc77e93ad5ce",
+      "authoredPlanSha256": "81b201157323b499e4b7aea3af2b7320532d754ecfbcc12db362555e9014f516",
+      "pilotPlanSha256": "a2435147eaac1b3f390ace42102ede200b7b847b52c5957b4a2488943eee05ab",
+      "authoringHelperSha256": "c946668c0bc7b4f2e6b689cb24cd7edcf3c935cdffdf13bd860e24d0aad53230",
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "bytes": 121004,
+      "durationSeconds": 7.5,
+      "integratedLufs": -18.18,
+      "truePeakDbtp": -2.19,
+      "asr": "Die Rasenkante ist, not an invitation, your shoe, steht im Zuständigkeitsbereich.",
+      "asrWordExact": false,
+      "asrLiteralWordExact": false,
+      "codeSwitchStrictParentGate": false,
+      "asrLanguageId": "de",
+      "asrDevice": "cpu",
+      "asrCpuThreads": 1,
+      "asrComputeType": "int8",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 5,
+      "sha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606",
+      "file": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-berlin-01.mp3",
+      "segments": [
+        {
+          "index": 0,
+          "text": "Die Rasenkante ist",
+          "sourceStart": 0,
+          "sourceEnd": 18,
+          "languageId": "de",
+          "joinBefore": ""
+        },
+        {
+          "index": 1,
+          "text": "not an invitation; your Schuh",
+          "sourceStart": 19,
+          "sourceEnd": 48,
+          "languageId": "en",
+          "joinBefore": " "
+        },
+        {
+          "index": 2,
+          "text": "steht im Zuständigkeitsbereich.",
+          "sourceStart": 49,
+          "sourceEnd": 80,
+          "languageId": "de",
+          "joinBefore": " "
+        }
+      ],
+      "decode": {
+        "eosReached": true,
+        "basis": "three separate segment native EOS observations; joined parent is not a native model call",
+        "allSegmentEosObserved": true
+      },
+      "codeSwitchJoin": {
+        "method": "existing FFmpeg concat of ordered dry 24 kHz mono segment PCM",
+        "sampleRateHz": 24000,
+        "channels": 1,
+        "insertedSilence": false,
+        "crossfade": false,
+        "edit": false,
+        "ffmpegSha256": "74db6c184a03dba2bdfe23e1a1f41cf5a8385bc1de6a7a1b26db1dc541abef93",
+        "ffprobeSha256": "55bb6c6289367ae2383efa86b26bf2596f8adb72ac747360eb13df162354161c",
+        "filterGraph": "[0:a][1:a][2:a]concat=n=3:v=0:a=1[out]",
+        "segmentPcmSha256": [
+          "93d793c7beb1dc17e82b2d6614b10fbe0a9a78b8229c66f47167b72cec3bbb10",
+          "a9792f4f4204f4731e503f827171de66df1f28b66caab3d3ebff2e0e3af0c74e",
+          "a3861363a4450a6e104f39cbff00f8b7399caa444fb7c8e77b462bc0caa0b596"
+        ],
+        "joinedPcmSha256": "03957154e18df59fc81e4d26532870a37626e8241071a91f9c5769d86bc73e58"
+      },
+      "codeSwitchParentContinuation": {
+        "selector": "--continue-code-switch-parent",
+        "segmentAuthoringHelperSha256": "07c729b4a15753de37ca526c03e80c6a19b3346235936857cb97ac0d0b3d8bfb",
+        "parentAuthoringHelperSha256": "c946668c0bc7b4f2e6b689cb24cd7edcf3c935cdffdf13bd860e24d0aad53230",
+        "ledgerSha256BeforeParentAsr": "7d65771be61b2a59b2e407b5c1d4933dc94a9ad3b4f69251a6cfb0ca86e492c8",
+        "segmentDiagnosticReceiptSha256": [
+          "4467bd709d48ab6cc09d973bf7c3ab0ec81c0e41e5fd78de5f12e08fb05db0c0",
+          "78fc0a98715fe395a973185f133362fd45c5c50de11fa6c225e73274e76df7ff",
+          "100e4610aec876a896adfb4489badce3d7aa83221e9f385d17992fd227113c5b"
+        ]
+      },
+      "codeSwitchParts": [
+        {
+          "clipId": "crowd-ruediger-rasenkante-berlin-01-codeswitch-pilot-part-01",
+          "text": "Die Rasenkante ist",
+          "sourceStart": 0,
+          "sourceEnd": 18,
+          "languageId": "de",
+          "voiceId": "crowd-ruediger-rasenkante",
+          "profileId": "3cc9340471d3480ba090545b5a9024c9",
+          "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+          "rawSha256": "93d793c7beb1dc17e82b2d6614b10fbe0a9a78b8229c66f47167b72cec3bbb10",
+          "encodedSha256": "0af93c4682c3305dc3f9389a2fea80e69e68c703fa913828096282cd329118a7",
+          "rendererInputText": "Die Rasenkante ist",
+          "authoringHelperSha256": "07c729b4a15753de37ca526c03e80c6a19b3346235936857cb97ac0d0b3d8bfb",
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "rawSampleRateHz": 24000,
+          "rawChannels": 1,
+          "encodedSampleRateHz": 48000,
+          "encodedChannels": 1,
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asr": "Die Rasenkante ist...",
+          "asrLanguageId": "de",
+          "asrScriptPrompt": null,
+          "asrDiagnosticOnly": true,
+          "eosReached": true,
+          "eosTraceSha256": "4f7473707b217b2e2ab30e7bb2b3b558d8eea7ccf9651ce1cbc607c12f5cacf4",
+          "seed": 71000,
+          "synthesisAttempt": 1,
+          "rawReceiptSha256": "6f0a1b1e4b2c3001a0b1c6b6f392954c3a874b99854e72befcc8542074e96bf0",
+          "diagnosticReceiptSha256": "4467bd709d48ab6cc09d973bf7c3ab0ec81c0e41e5fd78de5f12e08fb05db0c0",
+          "decode": {
+            "eosReached": true,
+            "eosTraceSha256": "4f7473707b217b2e2ab30e7bb2b3b558d8eea7ccf9651ce1cbc607c12f5cacf4",
+            "attentionHooksBefore": 0,
+            "attentionHooksAfter": 0,
+            "generatedSpeechTokens": 63,
+            "maxSpeechTokens": 250,
+            "modelEosRestoredSteps": 0
+          },
+          "synthesis": {
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "referenceReconditionedForProfile": "3cc9340471d3480ba090545b5a9024c9",
+            "referenceConditioningVerifiedFloat32": true,
+            "exaggeration": 0.5,
+            "temperature": 0.65,
+            "repetitionPenalty": 3,
+            "cfgWeight": 0.6,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          }
+        },
+        {
+          "clipId": "crowd-ruediger-rasenkante-berlin-01-codeswitch-pilot-part-02",
+          "text": "not an invitation; your Schuh",
+          "sourceStart": 19,
+          "sourceEnd": 48,
+          "languageId": "en",
+          "voiceId": "crowd-ruediger-rasenkante",
+          "profileId": "3cc9340471d3480ba090545b5a9024c9",
+          "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+          "rawSha256": "a9792f4f4204f4731e503f827171de66df1f28b66caab3d3ebff2e0e3af0c74e",
+          "encodedSha256": "5920792d3593a1ed975102a0d501177a40a17326e95b4c8bae3cb6fe40f1087e",
+          "rendererInputText": "not an invitation; your Schuh",
+          "authoringHelperSha256": "07c729b4a15753de37ca526c03e80c6a19b3346235936857cb97ac0d0b3d8bfb",
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "rawSampleRateHz": 24000,
+          "rawChannels": 1,
+          "encodedSampleRateHz": 48000,
+          "encodedChannels": 1,
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asr": "Not an invitation, your shoe!",
+          "asrLanguageId": "en",
+          "asrScriptPrompt": null,
+          "asrDiagnosticOnly": true,
+          "eosReached": true,
+          "eosTraceSha256": "5663319e01e27d58d6250b6b2aa5d2d2cbf4d0d7a6a37ed1081553b67ba3b793",
+          "seed": 71001,
+          "synthesisAttempt": 1,
+          "rawReceiptSha256": "9680482c8d31be9663fcb219275d8f4d6ac3283565fa047c34cddec17c15e96b",
+          "diagnosticReceiptSha256": "78fc0a98715fe395a973185f133362fd45c5c50de11fa6c225e73274e76df7ff",
+          "decode": {
+            "eosReached": true,
+            "eosTraceSha256": "5663319e01e27d58d6250b6b2aa5d2d2cbf4d0d7a6a37ed1081553b67ba3b793",
+            "attentionHooksBefore": 0,
+            "attentionHooksAfter": 0,
+            "generatedSpeechTokens": 73,
+            "maxSpeechTokens": 250,
+            "modelEosRestoredSteps": 0
+          },
+          "synthesis": {
+            "languageId": "en",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "referenceReconditionedForProfile": "3cc9340471d3480ba090545b5a9024c9",
+            "referenceConditioningVerifiedFloat32": true,
+            "exaggeration": 0.5,
+            "temperature": 0.65,
+            "repetitionPenalty": 3,
+            "cfgWeight": 0.6,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          }
+        },
+        {
+          "clipId": "crowd-ruediger-rasenkante-berlin-01-codeswitch-pilot-part-03",
+          "text": "steht im Zuständigkeitsbereich.",
+          "sourceStart": 49,
+          "sourceEnd": 80,
+          "languageId": "de",
+          "voiceId": "crowd-ruediger-rasenkante",
+          "profileId": "3cc9340471d3480ba090545b5a9024c9",
+          "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+          "rawSha256": "a3861363a4450a6e104f39cbff00f8b7399caa444fb7c8e77b462bc0caa0b596",
+          "encodedSha256": "e281d7e4b6204d6e7314e1a54cb5b9266da3dbd17dc7af6a4439b5a3c6294f9d",
+          "rendererInputText": "steht im Zuständigkeitsbereich.",
+          "authoringHelperSha256": "07c729b4a15753de37ca526c03e80c6a19b3346235936857cb97ac0d0b3d8bfb",
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "rawSampleRateHz": 24000,
+          "rawChannels": 1,
+          "encodedSampleRateHz": 48000,
+          "encodedChannels": 1,
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asr": "steht im Zuständigkeitsbereich.",
+          "asrLanguageId": "de",
+          "asrScriptPrompt": null,
+          "asrDiagnosticOnly": true,
+          "eosReached": true,
+          "eosTraceSha256": "4876d62c99036c97c91ce7605ae55f8d627f43bcfe8e7aa8f25ad50638aeeceb",
+          "seed": 71002,
+          "synthesisAttempt": 1,
+          "rawReceiptSha256": "7c8a373f69b3faf1047145945bef94369e28eea77c669e9b1691b535b508ef44",
+          "diagnosticReceiptSha256": "100e4610aec876a896adfb4489badce3d7aa83221e9f385d17992fd227113c5b",
+          "decode": {
+            "eosReached": true,
+            "eosTraceSha256": "4876d62c99036c97c91ce7605ae55f8d627f43bcfe8e7aa8f25ad50638aeeceb",
+            "attentionHooksBefore": 0,
+            "attentionHooksAfter": 0,
+            "generatedSpeechTokens": 56,
+            "maxSpeechTokens": 250,
+            "modelEosRestoredSteps": 0
+          },
+          "synthesis": {
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "referenceReconditionedForProfile": "3cc9340471d3480ba090545b5a9024c9",
+            "referenceConditioningVerifiedFloat32": true,
+            "exaggeration": 0.5,
+            "temperature": 0.65,
+            "repetitionPenalty": 3,
+            "cfgWeight": 0.6,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          }
+        }
+      ],
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die Rasenkante ist... Not an invitation, your shoe. Steht im Zuständigkeitsbereich.",
+          "transcribeSeconds": 17.03,
+          "inputScope": "full encoded parent",
+          "encodedSha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "languageId": "de",
+          "device": "cpu",
+          "cpuThreads": 1,
+          "computeType": "int8",
+          "effectiveComputeType": "int8_float32",
+          "scriptPrompt": null,
+          "wordTimestamps": true,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.14
+            },
+            {
+              "word": " Rasenkante",
+              "start": 0.14,
+              "end": 0.74
+            },
+            {
+              "word": " ist...",
+              "start": 0.74,
+              "end": 1.3
+            },
+            {
+              "word": " Not",
+              "start": 1.88,
+              "end": 2.64
+            },
+            {
+              "word": " an",
+              "start": 2.64,
+              "end": 2.8
+            },
+            {
+              "word": " invitation,",
+              "start": 2.8,
+              "end": 3.34
+            },
+            {
+              "word": " your",
+              "start": 3.78,
+              "end": 4
+            },
+            {
+              "word": " shoe.",
+              "start": 4,
+              "end": 4.3
+            },
+            {
+              "word": " Steht",
+              "start": 4.82,
+              "end": 5.64
+            },
+            {
+              "word": " im",
+              "start": 5.64,
+              "end": 5.76
+            },
+            {
+              "word": " Zuständigkeitsbereich.",
+              "start": 5.76,
+              "end": 6.8
+            }
+          ]
+        },
+        {
+          "beamSize": 5,
+          "transcript": "Die Rasenkante ist, not an invitation, your shoe, steht im Zuständigkeitsbereich.",
+          "transcribeSeconds": 16.05,
+          "inputScope": "full encoded parent",
+          "encodedSha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "languageId": "de",
+          "device": "cpu",
+          "cpuThreads": 1,
+          "computeType": "int8",
+          "effectiveComputeType": "int8_float32",
+          "scriptPrompt": null,
+          "wordTimestamps": true,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0,
+              "end": 0.14
+            },
+            {
+              "word": " Rasenkante",
+              "start": 0.14,
+              "end": 0.74
+            },
+            {
+              "word": " ist,",
+              "start": 0.74,
+              "end": 1.08
+            },
+            {
+              "word": " not",
+              "start": 1.18,
+              "end": 2.62
+            },
+            {
+              "word": " an",
+              "start": 2.62,
+              "end": 2.8
+            },
+            {
+              "word": " invitation,",
+              "start": 2.8,
+              "end": 3.32
+            },
+            {
+              "word": " your",
+              "start": 3.84,
+              "end": 4
+            },
+            {
+              "word": " shoe,",
+              "start": 4,
+              "end": 4.3
+            },
+            {
+              "word": " steht",
+              "start": 4.82,
+              "end": 5.58
+            },
+            {
+              "word": " im",
+              "start": 5.58,
+              "end": 5.78
+            },
+            {
+              "word": " Zuständigkeitsbereich.",
+              "start": 5.78,
+              "end": 6.8
+            }
+          ]
+        }
+      ],
+      "wordCues": [
+        {
+          "at": 0,
+          "end": 0.14,
+          "charIndex": 0,
+          "word": "Die"
+        },
+        {
+          "at": 0.14,
+          "end": 0.74,
+          "charIndex": 4,
+          "word": "Rasenkante"
+        },
+        {
+          "at": 0.74,
+          "end": 1.08,
+          "charIndex": 15,
+          "word": "ist"
+        },
+        {
+          "at": 1.18,
+          "end": 2.62,
+          "charIndex": 19,
+          "word": "not"
+        },
+        {
+          "at": 2.62,
+          "end": 2.8,
+          "charIndex": 23,
+          "word": "an"
+        },
+        {
+          "at": 2.8,
+          "end": 3.32,
+          "charIndex": 26,
+          "word": "invitation"
+        },
+        {
+          "at": 3.84,
+          "end": 4,
+          "charIndex": 38,
+          "word": "your"
+        },
+        {
+          "at": 4,
+          "end": 4.3,
+          "charIndex": 43,
+          "word": "Schuh"
+        },
+        {
+          "at": 4.82,
+          "end": 5.58,
+          "charIndex": 49,
+          "word": "steht"
+        },
+        {
+          "at": 5.58,
+          "end": 5.78,
+          "charIndex": 55,
+          "word": "im"
+        },
+        {
+          "at": 5.78,
+          "end": 6.8,
+          "charIndex": 58,
+          "word": "Zuständigkeitsbereich"
+        }
+      ],
+      "profileJsonSha256": "49082127b04f09fb892b1afb93e56ea791c2009cecb60099e404400f8f441b2e",
+      "referenceLicense": "CC0-1.0",
+      "modelLicense": "MIT",
+      "listening": "pending",
+      "originalWordCues": [],
+      "asrHomophoneWordEquivalent": true,
+      "verificationMode": "full-encoded-parent-single-token-homophone",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-16",
+        "instruction": "The user requested completion of every character voice and cloning from sources requiring no attribution. ROOT selects this exact verified CC0-reference pilot under that standing game-completion instruction; this records use authorization, not a human listening claim.",
+        "clipId": "crowd-ruediger-rasenkante-berlin-01",
+        "encodedSha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606"
+      },
+      "listeningVerified": false,
+      "listeningConfirmed": false,
+      "status": "homophone-equivalent; literal ASR mismatch retained; human listening pending"
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "crowd-ruediger-rasenkante-berlin-02",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "actorId": "crowd-ruediger-rasenkante",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-ruediger-rasenkante].berlin[1]",
+      "text": "Ein Halm liegt quer. Bitte melden Sie den Vorfall with Lageplan und Maßstab.",
+      "english": "A blade of grass is out of line. Please report the incident with a site plan and scale.",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+      "referenceOriginalSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "outside exact pilot disposition; existing production preserved"
+    },
+    {
+      "clipId": "crowd-ruediger-rasenkante-germany-01",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "actorId": "crowd-ruediger-rasenkante",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-ruediger-rasenkante].germany[0]",
+      "text": "Die Rasenkante ist keine Einladung; Ihr Schuh steht im Zuständigkeitsbereich.",
+      "english": "The lawn edge is not an invitation; your shoe is within my jurisdiction.",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+      "referenceOriginalSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "outside exact pilot disposition; existing production preserved"
+    },
+    {
+      "clipId": "crowd-ruediger-rasenkante-germany-02",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "actorId": "crowd-ruediger-rasenkante",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js crowdCharacterBarks[crowd-ruediger-rasenkante].germany[1]",
+      "text": "Ein Halm liegt quer. Bitte melden Sie den Vorfall mit Lageplan und Maßstab.",
+      "english": "A blade of grass is out of line. Please report the incident with a site plan and scale.",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "referenceSha256": "8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1",
+      "referenceOriginalSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "outside exact pilot disposition; existing production preserved"
+    }
+  ],
+  "approvedExistingReuse": [],
+  "crowdAdmission": {
+    "status": "ROOT-verified-exact-ruediger-pilot-homophone",
+    "generationScope": "exact-ruediger-pilot-homophone",
+    "authoritySha256": "39d1efea1fe2658d806a23b86bbbbd4996caf97cfbcdfd2222e24e4726779618",
+    "helperSha256": "c946668c0bc7b4f2e6b689cb24cd7edcf3c935cdffdf13bd860e24d0aad53230",
+    "requestSha256": "0c923bbaf40e409b31b3f15062143e7bff4429384d4df2ab53bcfc77e93ad5ce",
+    "authoredPlanSha256": "81b201157323b499e4b7aea3af2b7320532d754ecfbcc12db362555e9014f516",
+    "pilotPlanSha256": "a2435147eaac1b3f390ace42102ede200b7b847b52c5957b4a2488943eee05ab",
+    "selectionSha256": "73aef7ccde53325682f0c92cc84710a9fed1a2482df798fd9971a7bef44385a4",
+    "projectionSha256": "56c83369727ad500aa0d655d5d2dda20b96b3d57df7b80d7b51e7be7b77b3b14",
+    "projection": {
+      "schema": "exact-pilot-homophone-cue-projection-v1",
+      "qualified": true,
+      "verificationMode": "full-encoded-parent-single-token-homophone",
+      "asrWordExact": false,
+      "asrLiteralWordExact": false,
+      "originalStrictParentGate": false,
+      "asrHomophoneWordEquivalent": true,
+      "selectedBeamSize": 5,
+      "projection": {
+        "tokenIndex": 7,
+        "charIndex": 43,
+        "charEndExclusive": 48,
+        "heard": "shoe",
+        "authored": "Schuh"
+      },
+      "wordCues": [
+        {
+          "at": 0,
+          "end": 0.14,
+          "charIndex": 0,
+          "word": "Die"
+        },
+        {
+          "at": 0.14,
+          "end": 0.74,
+          "charIndex": 4,
+          "word": "Rasenkante"
+        },
+        {
+          "at": 0.74,
+          "end": 1.08,
+          "charIndex": 15,
+          "word": "ist"
+        },
+        {
+          "at": 1.18,
+          "end": 2.62,
+          "charIndex": 19,
+          "word": "not"
+        },
+        {
+          "at": 2.62,
+          "end": 2.8,
+          "charIndex": 23,
+          "word": "an"
+        },
+        {
+          "at": 2.8,
+          "end": 3.32,
+          "charIndex": 26,
+          "word": "invitation"
+        },
+        {
+          "at": 3.84,
+          "end": 4,
+          "charIndex": 38,
+          "word": "your"
+        },
+        {
+          "at": 4,
+          "end": 4.3,
+          "charIndex": 43,
+          "word": "Schuh"
+        },
+        {
+          "at": 4.82,
+          "end": 5.58,
+          "charIndex": 49,
+          "word": "steht"
+        },
+        {
+          "at": 5.58,
+          "end": 5.78,
+          "charIndex": 55,
+          "word": "im"
+        },
+        {
+          "at": 5.78,
+          "end": 6.8,
+          "charIndex": 58,
+          "word": "Zuständigkeitsbereich"
+        }
+      ],
+      "clipId": "crowd-ruediger-rasenkante-berlin-01",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "textSha256": "aa38b8c45fb36b873a247cd9ad75f611be84ab3376f897ecf7013063a304da0b",
+      "originalEncodedReceiptSha256": "2ed8acea7dce0cafeffb2501a8876235413e543caa631109db125295039c896f",
+      "encodedSha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606",
+      "rawReceiptSha256": "aa4f3fd989a937630c2cca689d9476ecefbee027771a5a5dbd0fe5017055be77",
+      "rawSha256": "03957154e18df59fc81e4d26532870a37626e8241071a91f9c5769d86bc73e58",
+      "authoritySha256": "39d1efea1fe2658d806a23b86bbbbd4996caf97cfbcdfd2222e24e4726779618",
+      "continuationTerminalSha256": "6048d6fdbca3d1e1f4d3f0a4ac429139e59b5a5663655243d95183ec430300e3",
+      "ledgerSha256": "a9d93f5d39670ee2353e127ed043661fc312c080b30c26575440dc62f7f9e28a",
+      "originalCueGate": "FAIL",
+      "originalPostflightQualified": false,
+      "referenceLicense": "CC0-1.0",
+      "modelLicense": "MIT",
+      "technicalEligible": true,
+      "listeningVerified": false,
+      "publicationAuthorized": false,
+      "status": "homophone-equivalent; literal ASR mismatch retained",
+      "generationCalls": 3,
+      "parentGenerationCalls": 0,
+      "segmentDiagnosticAsrCalls": 3,
+      "parentGermanAsrCalls": 2,
+      "totalAsrCalls": 5,
+      "retryBudget": 0,
+      "evidenceFiles": [
+        {
+          "sha256": "39d1efea1fe2658d806a23b86bbbbd4996caf97cfbcdfd2222e24e4726779618"
+        },
+        {
+          "sha256": "6048d6fdbca3d1e1f4d3f0a4ac429139e59b5a5663655243d95183ec430300e3"
+        },
+        {
+          "sha256": "2ed8acea7dce0cafeffb2501a8876235413e543caa631109db125295039c896f"
+        },
+        {
+          "sha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606"
+        },
+        {
+          "sha256": "aa4f3fd989a937630c2cca689d9476ecefbee027771a5a5dbd0fe5017055be77"
+        },
+        {
+          "sha256": "03957154e18df59fc81e4d26532870a37626e8241071a91f9c5769d86bc73e58"
+        },
+        {
+          "sha256": "a9d93f5d39670ee2353e127ed043661fc312c080b30c26575440dc62f7f9e28a"
+        },
+        {
+          "sha256": "0c923bbaf40e409b31b3f15062143e7bff4429384d4df2ab53bcfc77e93ad5ce"
+        },
+        {
+          "sha256": "a2435147eaac1b3f390ace42102ede200b7b847b52c5957b4a2488943eee05ab"
+        },
+        {
+          "sha256": "81b201157323b499e4b7aea3af2b7320532d754ecfbcc12db362555e9014f516"
+        },
+        {
+          "sha256": "6f0a1b1e4b2c3001a0b1c6b6f392954c3a874b99854e72befcc8542074e96bf0"
+        },
+        {
+          "sha256": "4467bd709d48ab6cc09d973bf7c3ab0ec81c0e41e5fd78de5f12e08fb05db0c0"
+        },
+        {
+          "sha256": "93d793c7beb1dc17e82b2d6614b10fbe0a9a78b8229c66f47167b72cec3bbb10"
+        },
+        {
+          "sha256": "0af93c4682c3305dc3f9389a2fea80e69e68c703fa913828096282cd329118a7"
+        },
+        {
+          "sha256": "4f7473707b217b2e2ab30e7bb2b3b558d8eea7ccf9651ce1cbc607c12f5cacf4"
+        },
+        {
+          "sha256": "9680482c8d31be9663fcb219275d8f4d6ac3283565fa047c34cddec17c15e96b"
+        },
+        {
+          "sha256": "78fc0a98715fe395a973185f133362fd45c5c50de11fa6c225e73274e76df7ff"
+        },
+        {
+          "sha256": "a9792f4f4204f4731e503f827171de66df1f28b66caab3d3ebff2e0e3af0c74e"
+        },
+        {
+          "sha256": "5920792d3593a1ed975102a0d501177a40a17326e95b4c8bae3cb6fe40f1087e"
+        },
+        {
+          "sha256": "5663319e01e27d58d6250b6b2aa5d2d2cbf4d0d7a6a37ed1081553b67ba3b793"
+        },
+        {
+          "sha256": "7c8a373f69b3faf1047145945bef94369e28eea77c669e9b1691b535b508ef44"
+        },
+        {
+          "sha256": "100e4610aec876a896adfb4489badce3d7aa83221e9f385d17992fd227113c5b"
+        },
+        {
+          "sha256": "a3861363a4450a6e104f39cbff00f8b7399caa444fb7c8e77b462bc0caa0b596"
+        },
+        {
+          "sha256": "e281d7e4b6204d6e7314e1a54cb5b9266da3dbd17dc7af6a4439b5a3c6294f9d"
+        },
+        {
+          "sha256": "4876d62c99036c97c91ce7605ae55f8d627f43bcfe8e7aa8f25ad50638aeeceb"
+        },
+        {
+          "sha256": "8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f"
+        }
+      ]
+    },
+    "takes": {
+      "crowd-ruediger-rasenkante-berlin-01": {
+        "rawReceiptSha256": "aa4f3fd989a937630c2cca689d9476ecefbee027771a5a5dbd0fe5017055be77",
+        "encodedReceiptSha256": "2ed8acea7dce0cafeffb2501a8876235413e543caa631109db125295039c896f",
+        "rawSha256": "03957154e18df59fc81e4d26532870a37626e8241071a91f9c5769d86bc73e58",
+        "encodedSha256": "77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606",
+        "profileJsonSha256": "49082127b04f09fb892b1afb93e56ea791c2009cecb60099e404400f8f441b2e",
+        "projectionSha256": "56c83369727ad500aa0d655d5d2dda20b96b3d57df7b80d7b51e7be7b77b3b14",
+        "ledgerSha256": "a9d93f5d39670ee2353e127ed043661fc312c080b30c26575440dc62f7f9e28a",
+        "segmentGenerationCalls": 3,
+        "parentGenerationCalls": 0,
+        "parentGermanAsrCalls": 2,
+        "totalAsrCalls": 5,
+        "synthesisAttempt": 0
+      }
+    }
+  }
+}

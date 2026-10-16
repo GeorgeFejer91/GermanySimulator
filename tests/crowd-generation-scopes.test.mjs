@@ -14,9 +14,9 @@ const readJson=file=>JSON.parse(readFileSync(resolve(sourceRoot,file),'utf8').re
 const digest=file=>createHash('sha256').update(readFileSync(resolve(sourceRoot,file))).digest('hex');
 const cast=readJson('For-AI/VOICE-CAST.json');
 const firstSeven=readdirSync(resolve(sourceRoot,'assets/voices/candidate-dialogue'))
- .filter(name=>name.endsWith('-crowd-manifest.json')&&!name.includes('-remaining27-'))
+ .filter(name=>name.endsWith('-crowd-manifest.json'))
  .map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`;return {...readJson(relative),provenanceManifest:relative,provenanceManifestSha256:digest(relative)};})
- .filter(row=>row.clips.some(clip=>clip.approval?.status==='user-approved'));
+ .filter(row=>(row.generationScope??'first9')==='first9'&&row.clips.some(clip=>clip.approval?.status==='user-approved'));
 assert.equal(firstSeven.length,7,'Fixture requires the seven real first-batch manifests');
 const before=JSON.stringify(firstSeven);
 const supplement=readJson('assets/voices/candidate-dialogue/crowd-mouth-energy.json');

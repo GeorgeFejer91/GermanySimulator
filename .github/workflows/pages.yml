@@ -60,6 +60,7 @@ jobs:
           python -B tests/test_sandale_source_adapter.py
           python -B tests/test_named_reactive_source_adapter.py
           node tools/curate-voice-library.mjs --check
+          node --test tests/ruediger-homophone.test.mjs
           node --test tests/sandale-voice-curator.test.mjs
           node --test tests/named-reactive-voice-curator.test.mjs
           node --test tests/voice-gap-public.test.mjs

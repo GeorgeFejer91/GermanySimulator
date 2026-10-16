@@ -24,9 +24,10 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
  for(const manifest of manifests){
   const voice=manifest.voiceId,owner=roles[voice],binding=cast.productionVoices[voice];
   const generationScope=manifest.generationScope??'first9',voiceScope=voice+'\0'+generationScope;
-  requireMatch(['first9','remaining27-first-takes'].includes(generationScope)&&owner&&binding&&owner.voiceId===voice&&Object.hasOwn(barks,voice)&&!seenVoices.has(voiceScope),'Crowd manifest has duplicate voice/grant scope or no actor-owned source/profile');seenVoices.add(voiceScope);
+  requireMatch(['first9','remaining27-first-takes','exact-ruediger-pilot-homophone'].includes(generationScope)&&owner&&binding&&owner.voiceId===voice&&Object.hasOwn(barks,voice)&&!seenVoices.has(voiceScope),'Crowd manifest has duplicate voice/grant scope or no actor-owned source/profile');seenVoices.add(voiceScope);
   if(generationScope==='remaining27-first-takes')requireMatch(manifest.generatedLineCount===3&&manifest.clips.every(clip=>!(clip.region==='germany'&&clip.slot===0))&&manifest.heldPrivate.filter(row=>row.region==='germany'&&row.slot===0&&row.reason==='outside remaining27 grant; first batch preserved').length===1,'Remaining27 cannot claim old Germany0 or miscount its actual generation');
-  requireMatch(manifest.profileId===binding.profileId&&manifest.requestedLineCount===4&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=4&&manifest.lineCount===manifest.clips.length,'Unaccounted crowd dialogue requests');
+  if(generationScope==='exact-ruediger-pilot-homophone')ruedigerPilotHomophoneManifestAuthority(cast,manifest,sourceRoot);
+  requireMatch(manifest.profileId===binding.profileId&&manifest.requestedLineCount===4&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&Number.isInteger(manifest.generatedLineCount)&&(generationScope==='exact-ruediger-pilot-homophone'?manifest.generatedLineCount===0:manifest.generatedLineCount>=manifest.clips.length)&&manifest.generatedLineCount<=4&&manifest.lineCount===manifest.clips.length,'Unaccounted crowd dialogue requests');
   const expected=new Map();
   for(const region of ['berlin','germany'])for(let slot=0;slot<2;slot++){
    const clipId=`${voice}-${region}-${String(slot+1).padStart(2,'0')}`;
@@ -45,7 +46,7 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
    const expectedId=`${voice}-${region}-${String(slot+1).padStart(2,'0')}`,locator=`game.js crowdCharacterBarks[${voice}].${region}[${slot}]`;
    requireMatch(clip.clipId===expectedId&&clip.actorId===voice&&clip.voiceId===voice&&clip.text===barks[voice][region][slot]&&clip.english===subtitles[voice][region][slot]&&clip.sourceLocator===locator,'Crowd clip text, subtitle, actor or stable slot differs from source');
    requireMatch(matchesProduction(cast,clip)&&clip.referenceOriginalSha256===binding.originalSha256,'Crowd clip selected profile/reference changed');
-   fixedTakeAuthority(cast,clip);
+   if(generationScope!=='exact-ruediger-pilot-homophone')fixedTakeAuthority(cast,clip);
    requireMatch(clip.file===`assets/voices/candidate-dialogue/${expectedId}.mp3`&&hash(resolve(sourceRoot,clip.file))===clip.sha256,'Crowd candidate asset path or bytes changed');
    const key=voice+'\u0000'+clip.text;requireMatch(!seen.has(key),'Duplicate crowd candidate line');seen.add(key);entries[key]=clip.file;
   }
@@ -204,6 +205,161 @@ function crowdExactCues(clip){
  const words=[...clip.text.matchAll(/[\p{L}\p{N}_]+/gu)];let end=0,index=-1;
  requireMatch(Array.isArray(clip.wordCues)&&words.length>0&&clip.wordCues.length===words.length&&clip.wordCues.every((cue,i)=>{const valid=Object.keys(cue).length===4&&cue.word===words[i][0]&&cue.charIndex===words[i].index&&Number.isFinite(cue.at)&&Number.isFinite(cue.end)&&cue.at>=end&&cue.end>cue.at&&cue.end<=clip.durationSeconds+.05&&cue.charIndex>index;end=cue.end;index=cue.charIndex;return valid;}),'Incomplete crowd exact final-caption cues');
 }
+// BEGIN exact Ruediger pilot homophone projection v1
+// One recorded bilingual token, not a change to any general normalizer.
+const ruedigerPilotHomophone = Object.freeze({
+ clipId:'crowd-ruediger-rasenkante-berlin-01',voiceId:'crowd-ruediger-rasenkante',profileId:'3cc9340471d3480ba090545b5a9024c9',
+ text:'Die Rasenkante ist not an invitation; your Schuh steht im Zuständigkeitsbereich.',
+ textSha256:'aa38b8c45fb36b873a247cd9ad75f611be84ab3376f897ecf7013063a304da0b',
+ referenceSha256:'8db1f5eae831948b72cdc608f3bf358592369b70a4bb27aab102ecb27c23a8f1',referenceOriginalSha256:'5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636',
+ profileJsonSha256:'49082127b04f09fb892b1afb93e56ea791c2009cecb60099e404400f8f441b2e',
+ // Encoded requestSha256 is the frozen private parent plan; authoredPlanSha256 is the authored request.
+ requestSha256:'0c923bbaf40e409b31b3f15062143e7bff4429384d4df2ab53bcfc77e93ad5ce',authoredPlanSha256:'81b201157323b499e4b7aea3af2b7320532d754ecfbcc12db362555e9014f516',pilotPlanSha256:'a2435147eaac1b3f390ace42102ede200b7b847b52c5957b4a2488943eee05ab',
+ authoringHelperSha256:'c946668c0bc7b4f2e6b689cb24cd7edcf3c935cdffdf13bd860e24d0aad53230',segmentHelperSha256:'07c729b4a15753de37ca526c03e80c6a19b3346235936857cb97ac0d0b3d8bfb',
+ sha256:'77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606',encodedReceiptSha256:'2ed8acea7dce0cafeffb2501a8876235413e543caa631109db125295039c896f',
+ authoritySha256:'39d1efea1fe2658d806a23b86bbbbd4996caf97cfbcdfd2222e24e4726779618',terminalSha256:'6048d6fdbca3d1e1f4d3f0a4ac429139e59b5a5663655243d95183ec430300e3',
+ asrModelSha256:'e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da',
+ renderer:'ResembleAI/Chatterbox Multilingual V2 0.1.7',modelRevision:'5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18'
+});
+const ruedigerPilotDigest=bytes=>createHash('sha256').update(bytes).digest('hex');
+const ruedigerPilotHash=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+const ruedigerPilotCollectedEvidence=new WeakMap();
+function requireRuedigerPilotCollectedEvidence(collection){
+ requireMatch(collection&&ruedigerPilotCollectedEvidence.get(collection)===ruedigerPilotDigest(JSON.stringify(collection)),'Pilot manifest requires unchanged evidence from the full private collector');
+}
+const ruedigerPilotWords=text=>typeof text==='string'?(text.match(/[\p{L}\p{N}_]+/gu)||[]).map(word=>word.toLowerCase()):[];
+const ruedigerPilotSegments=Object.freeze([
+ {text:'Die Rasenkante ist',sourceStart:0,sourceEnd:18,languageId:'de'},
+ {text:'not an invitation; your Schuh',sourceStart:19,sourceEnd:48,languageId:'en'},
+ {text:'steht im Zuständigkeitsbereich.',sourceStart:49,sourceEnd:80,languageId:'de'}
+]);
+
+export function projectRuedigerPilotHomophoneCues(clip){
+ const a=ruedigerPilotHomophone;
+ requireMatch(clip&&typeof clip==='object'&&!Array.isArray(clip),'Missing exact-pilot metadata');
+ for(const key of ['clipId','voiceId','profileId','text','textSha256','referenceSha256','referenceOriginalSha256','requestSha256','authoredPlanSha256','pilotPlanSha256','authoringHelperSha256','sha256','renderer','modelRevision'])requireMatch(clip[key]===a[key],'Exact-pilot identity changed: '+key);
+ requireMatch(ruedigerPilotDigest(clip.text)===a.textSha256&&clip.actorId===a.voiceId&&clip.region==='berlin'&&clip.slot===0&&clip.sourceLocator==='game.js crowdCharacterBarks[crowd-ruediger-rasenkante].berlin[0]','Exact-pilot authored owner changed');
+ requireMatch(clip.codeSwitchParent===true&&clip.phaseScope==='new code-switch diagnostic phase'&&clip.processing===null&&clip.synthesisAttempt===0&&clip.synthesisAttemptBasis==='joined diagnostic segments; no whole-parent TTS call or first-take claim','Exact-pilot parent kind changed');
+ requireMatch(clip.asrWordExact===false&&clip.asrLiteralWordExact===false&&clip.codeSwitchStrictParentGate===false&&Array.isArray(clip.wordCues)&&clip.wordCues.length===0,'Original literal failure was changed');
+ requireMatch(!clip.listeningVerified&&!clip.listeningConfirmed&&!['deliveryEditing','recognitionVerification','rescueParts','benchmarkOnly','actualInferenceText'].some(key=>Object.hasOwn(clip,key)),'Unsupported pilot editing or listening claim');
+ requireMatch(clip.sampleRateHz===48000&&clip.channels===1&&clip.bitrateBitsPerSecond===128000&&Number.isInteger(clip.bytes)&&clip.bytes>0&&Number.isFinite(clip.durationSeconds)&&clip.durationSeconds>0&&Number.isFinite(clip.integratedLufs)&&Math.abs(clip.integratedLufs+18)<=.3&&Number.isFinite(clip.truePeakDbtp)&&clip.truePeakDbtp<=-1.5,'Pilot final format or levels failed');
+ requireMatch(clip.decode?.eosReached===true&&clip.decode.allSegmentEosObserved===true&&clip.decode.basis==='three separate segment native EOS observations; joined parent is not a native model call'&&ruedigerPilotHash(clip.rawSha256),'Pilot parent EOS/raw proof missing');
+ const join=clip.codeSwitchJoin,parts=clip.codeSwitchParts,continuation=clip.codeSwitchParentContinuation;
+ requireMatch(join?.method==='existing FFmpeg concat of ordered dry 24 kHz mono segment PCM'&&join.sampleRateHz===24000&&join.channels===1&&join.insertedSilence===false&&join.crossfade===false&&join.edit===false&&join.filterGraph==='[0:a][1:a][2:a]concat=n=3:v=0:a=1[out]'&&join.joinedPcmSha256===clip.rawSha256&&ruedigerPilotHash(join.ffmpegSha256)&&ruedigerPilotHash(join.ffprobeSha256),'Pilot dry join changed');
+ requireMatch(Array.isArray(parts)&&parts.length===3&&Array.isArray(clip.segments)&&clip.segments.length===3,'Pilot segment set changed');
+ for(let i=0;i<3;i++){
+  const part=parts[i],segment=ruedigerPilotSegments[i],declared=clip.segments[i];
+  requireMatch(declared?.index===i&&declared.joinBefore===(i?' ':'')&&Object.entries(segment).every(([key,value])=>declared[key]===value&&part?.[key]===value),'Pilot segment source/spans changed');
+  requireMatch(part.clipId===a.clipId+'-codeswitch-pilot-part-'+String(i+1).padStart(2,'0')&&part.voiceId===a.voiceId&&part.profileId===a.profileId&&part.referenceSha256===a.referenceSha256&&part.authoringHelperSha256===a.segmentHelperSha256&&part.renderer===a.renderer&&part.modelRevision===a.modelRevision&&part.rendererInputText===segment.text&&part.seed===71000+i&&part.synthesisAttempt===1,'Pilot segment ownership/recipe changed');
+  requireMatch(part.rawSampleRateHz===24000&&part.rawChannels===1&&part.encodedSampleRateHz===48000&&part.encodedChannels===1&&part.asrDiagnosticOnly===true&&part.asrLanguageId===segment.languageId&&Object.hasOwn(part,'asrScriptPrompt')&&part.asrScriptPrompt===null&&part.asrModelSha256===a.asrModelSha256,'Pilot segment diagnostic recipe changed');
+  for(const key of ['rawSha256','encodedSha256','eosTraceSha256','rawReceiptSha256','diagnosticReceiptSha256'])requireMatch(ruedigerPilotHash(part[key]),'Pilot segment byte proof missing: '+key);
+  const decode=part.decode,synth=part.synthesis;
+  requireMatch(part.eosReached===true&&decode?.eosReached===true&&decode.eosTraceSha256===part.eosTraceSha256&&decode.attentionHooksBefore===0&&decode.attentionHooksAfter===0&&Number.isInteger(decode.generatedSpeechTokens)&&decode.generatedSpeechTokens>0&&Number.isInteger(decode.maxSpeechTokens)&&decode.generatedSpeechTokens<=decode.maxSpeechTokens&&!decode.modelEosRestoredSteps,'Pilot native segment EOS/hooks failed');
+  requireMatch(synth?.languageId===segment.languageId&&synth.device==='cuda'&&synth.precision==='fp16'&&synth.t3WeightPrecision==='float16'&&synth.conditioningPrecision==='float32'&&synth.referenceReconditionedForProfile===a.profileId&&synth.referenceConditioningVerifiedFloat32===true&&synth.exaggeration===.5&&synth.temperature===.65&&synth.repetitionPenalty===3&&synth.cfgWeight===.6&&synth.cpuThreads===2&&synth.inferenceMode===true,'Pilot native conditioning/recipe failed');
+ }
+ requireMatch(sameJson(join.segmentPcmSha256,parts.map(part=>part.rawSha256)),'Pilot join input hashes changed');
+ requireMatch(continuation?.selector==='--continue-code-switch-parent'&&continuation.segmentAuthoringHelperSha256===a.segmentHelperSha256&&continuation.parentAuthoringHelperSha256===a.authoringHelperSha256&&ruedigerPilotHash(continuation.ledgerSha256BeforeParentAsr)&&sameJson(continuation.segmentDiagnosticReceiptSha256,parts.map(part=>part.diagnosticReceiptSha256)),'Pilot continuation provenance changed');
+ requireMatch(clip.asrLanguageId==='de'&&clip.asrDevice==='cpu'&&clip.asrCpuThreads===1&&clip.asrComputeType==='int8'&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.asrModelSha256===a.asrModelSha256&&Object.hasOwn(clip,'asrScriptPrompt')&&clip.asrScriptPrompt===null&&!['prompt','initial_prompt','initialPrompt','prefix','hotwords'].some(key=>Object.hasOwn(clip,key)),'Pilot parent ASR recipe changed');
+ const readings=clip.asrReadings,expected=[...clip.text.matchAll(/[\p{L}\p{N}_]+/gu)],heardExpected=expected.map(word=>word[0].toLowerCase());heardExpected[7]='shoe';
+ requireMatch(expected.length===11&&expected[7][0]==='Schuh'&&expected[7].index===43&&expected[7].index+expected[7][0].length===48&&Array.isArray(readings)&&readings.length===2&&readings[0]?.beamSize===1&&readings[1]?.beamSize===5&&clip.asrBeamSize===5&&clip.asr===readings[1].transcript,'Pilot retained beam selection changed');
+ for(const reading of readings){
+  requireMatch(sameJson(Object.keys(reading).sort(),['beamSize','transcript','transcribeSeconds','words','inputScope','encodedSha256','asrModelSha256','languageId','device','cpuThreads','computeType','effectiveComputeType','scriptPrompt','wordTimestamps'].sort()),'Pilot retained reading fields changed');
+  requireMatch(reading.inputScope==='full encoded parent'&&reading.encodedSha256===a.sha256&&reading.asrModelSha256===a.asrModelSha256&&reading.languageId==='de'&&reading.device==='cpu'&&reading.cpuThreads===1&&reading.computeType==='int8'&&reading.effectiveComputeType===clip.asrEffectiveComputeType&&reading.scriptPrompt===null&&reading.wordTimestamps===true&&Number.isFinite(reading.transcribeSeconds)&&reading.transcribeSeconds>=0&&Array.isArray(reading.words)&&sameJson(ruedigerPilotWords(reading.transcript),heardExpected),'Pilot transcript has more than the named homophone discrepancy');
+ }
+ const selected=readings[1];
+ requireMatch(selected.words.length===11,'Pilot selected word timings are incomplete');
+ const wordCues=selected.words.map((row,i)=>{
+  requireMatch(row&&sameJson(Object.keys(row).sort(),['end','start','word'])&&sameJson(ruedigerPilotWords(row.word),[heardExpected[i]])&&Number.isFinite(row.start)&&Number.isFinite(row.end),'Pilot timing row differs from retained transcript');
+  return {at:row.start,end:row.end,charIndex:expected[i].index,word:expected[i][0]};
+ });
+ crowdExactCues({text:clip.text,durationSeconds:clip.durationSeconds,wordCues});
+ return {verificationMode:'full-encoded-parent-single-token-homophone',asrWordExact:false,asrLiteralWordExact:false,originalStrictParentGate:false,asrHomophoneWordEquivalent:true,selectedBeamSize:5,projection:{tokenIndex:7,charIndex:43,charEndExclusive:48,heard:'shoe',authored:'Schuh'},wordCues};
+}
+
+// Existing collector pattern: exact private bytes are read only by ROOT's later invocation.
+// No inference, media decode, mutation, catalogue update or publication operation.
+export function collectRuedigerPilotHomophoneProjection(authorityProof,terminalProof){
+ const a=ruedigerPilotHomophone,observed=[];
+ const readBound=(path,expected,maxBytes=16*1024*1024)=>{
+  const absolute=resolve(path),stat=lstatSync(absolute);
+  requireMatch(stat.isFile()&&!stat.isSymbolicLink()&&realpathSync(absolute)===absolute&&stat.size>0&&stat.size<=maxBytes,'Pilot evidence is linked, absent or oversized');
+  const bytes=readFileSync(absolute),sha256=ruedigerPilotDigest(bytes);
+  requireMatch(!expected||sha256===expected,'Pilot evidence bytes changed: '+absolute);
+  observed.push({path:absolute,sha256});return {bytes,sha256};
+ };
+ const parseBound=(path,expected)=>{const record=readBound(path,expected);return {...record,value:JSON.parse(record.bytes.toString('utf8').replace(/^\uFEFF/,''))};};
+ requireMatch(authorityProof?.sha256===a.authoritySha256&&terminalProof?.sha256===a.terminalSha256,'Not the fixed pilot authority/terminal proof');
+ const authority=parseBound(authorityProof.path,a.authoritySha256).value,terminal=parseBound(terminalProof.path,a.terminalSha256).value;
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CODESWITCH_PARENT_CONTINUATION'&&authority.executor==='ROOT_ONLY'&&authority.authorityTemplateOnly===false&&authority.publicationAuthorized===false&&authority.retryBudget===0&&authority.maxNewGenerations===0&&authority.maxSegmentDiagnosticAsr===0&&authority.maxParentGermanAsr===2&&authority.maxTotalAsr===5&&authority.voiceId===a.voiceId&&authority.profileId===a.profileId&&authority.profileMetadataSha256===a.profileJsonSha256&&authority.referenceNormalizedSha256===a.referenceSha256&&authority.referenceOriginalSha256===a.referenceOriginalSha256&&authority.adapterSha256===a.authoringHelperSha256&&authority.requestSha256===a.authoredPlanSha256&&authority.privateParentPlanSha256===a.requestSha256&&authority.privateSegmentPlanSha256===a.pilotPlanSha256,'Pilot finite authority or authored/private plan mapping changed');
+ requireMatch(terminal.phase==='process'&&terminal.executionScope==='code-switch-parent-only-continuation-v1'&&terminal.specificationSha256===a.authoritySha256&&terminal.producerSha256===a.authoringHelperSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.censusStatus==='COMPLETE'&&terminal.timedOut===false&&terminal.failedStart===false&&!terminal.supervisorError&&!terminal.fatalError&&terminal.logsComplete===true&&terminal.postflightProtectedPinsChecked===42&&terminal.postflightProtectedPrivatePinsChecked===18,'Pilot completed producer/retirement coverage failed');
+ for(const key of ['survivingOwnedChildren','ownedCleanupKills','postflightPinFailures','postflightPrivatePinFailures','postflightSourceMirrorPinFailures','pilotLedgerAuditFailures'])requireMatch(Array.isArray(terminal[key])&&terminal[key].length===0,'Pilot retirement/provenance failure: '+key);
+ requireMatch(terminal.parentStrictGermanGate===false&&terminal.cueGate==='FAIL'&&terminal.cueQualified===false&&terminal.postflightQualified===false&&terminal.publicationAuthorized===false&&terminal.admissionDecision==='HOLD','Original failed gates were rewritten');
+ const history=terminal.parentContinuation,summary=terminal.pilotLedgerSummary;
+ requireMatch(history?.priorProvenanceVerified===true&&history.priorRenderPostflightQualified===true&&history.priorRenderExitCode===0&&history.priorProcessPostflightQualified===false&&history.priorProcessExitCode===1&&history.priorExpectedPublicPinCount===35&&history.priorExpectedPrivatePinCount===18&&history.newGenerationCalls===0&&history.newSegmentDiagnosticAsrCalls===0&&history.newParentGermanAsrCalls===2&&history.retryBudget===0&&history.lifetimeMaxTotalAsr===5,'Pilot historical/remaining-call provenance changed');
+ requireMatch(summary?.generationCalls===3&&summary.segmentDiagnosticAsrCalls===3&&summary.parentGermanAsrCalls===2&&summary.totalAsrCalls===5&&summary.newGenerationCalls===0&&summary.newSegmentDiagnosticAsrCalls===0&&summary.newParentGermanAsrCalls===2&&summary.retryBudget===0&&ruedigerPilotHash(summary.ledgerSha256)&&summary.initialLedgerSha256===history.initialLedgerSha256&&summary.initialClaimsSha256===summary.preservedInitialClaimsSha256&&summary.initialClaimsSha256===history.initialClaimsSha256&&summary.initialClaimsSha256===history.preservedInitialClaimsSha256,'Pilot spent ledger conservation failed');
+ const privateRoot=resolve(authority.musicRoot,authority.privateReviewFamily,a.voiceId),rescueRoot=resolve(privateRoot,'sentence-rescue');
+ const parent=parseBound(resolve(privateRoot,'encoded',a.clipId+'.json'),a.encodedReceiptSha256),clip=parent.value;
+ const projection=projectRuedigerPilotHomophoneCues(clip);
+ requireMatch(clip.codeSwitchParentContinuation.ledgerSha256BeforeParentAsr===summary.initialLedgerSha256,'Parent does not bind the initial ledger');
+ const mp3=readBound(resolve(privateRoot,'encoded',a.clipId+'.mp3'),a.sha256);
+ requireMatch(mp3.bytes.length===clip.bytes,'Parent encoded byte count changed');
+ const raw=parseBound(resolve(privateRoot,'raw',a.clipId+'.json'));
+ for(const key of ['clipId','text','textSha256','voiceId','profileId','referenceSha256','referenceOriginalSha256','rawSha256','requestSha256','authoredPlanSha256','pilotPlanSha256','authoringHelperSha256','codeSwitchParts','codeSwitchJoin','decode','codeSwitchParentContinuation'])requireMatch(sameJson(raw.value[key],clip[key]),'Parent raw/encoded lineage changed: '+key);
+ readBound(resolve(privateRoot,'raw',a.clipId+'.wav'),clip.rawSha256);
+ const ledger=parseBound(resolve(privateRoot,'code-switch-pilot-ledger.json'),summary.ledgerSha256).value;
+ requireMatch(ledger.pilotId===a.clipId+'-codeswitch-pilot-v1'&&Array.isArray(ledger.claims)&&ledger.claims.length===8,'Pilot ledger identity/count changed');
+ const counts=new Set();
+ for(let i=0;i<8;i++){
+  const claim=ledger.claims[i];requireMatch(claim&&sameJson(Object.keys(claim).sort(),['action','chargedBeforeCall','key'])&&claim.chargedBeforeCall===true&&Number.isInteger(claim.key),'Pilot ledger claim is not a typed spent call');
+  const key=claim.action+':'+claim.key;requireMatch(!counts.has(key),'Duplicate pilot charge');counts.add(key);
+  requireMatch(i<6?(['generate','segmentDiagnosticAsr'].includes(claim.action)&&[0,1,2].includes(claim.key)):(claim.action==='parentGermanAsr'&&claim.key===(i===6?1:5)),'Pilot ledger has an extra or reordered charge');
+ }
+ // PowerShell hashes its compact six-claim JSON; these keys retain their original serialized order.
+ requireMatch(ruedigerPilotDigest(JSON.stringify(ledger.claims.slice(0,6)))===summary.initialClaimsSha256,'Original six spent claims changed');
+ const parentPlan=parseBound(resolve(privateRoot,'requests.json'),a.requestSha256).value;
+ const segmentPlan=parseBound(resolve(rescueRoot,'requests.json'),a.pilotPlanSha256).value;
+ readBound(authority.requestPath,a.authoredPlanSha256);
+ requireMatch(parentPlan.jobs?.length===1&&parentPlan.jobs[0].clipId===a.clipId&&parentPlan.jobs[0].text===a.text&&segmentPlan.jobs?.length===3,'Frozen pilot plans no longer own this source');
+ for(let i=0;i<3;i++){
+  const part=clip.codeSwitchParts[i],rawPart=parseBound(resolve(rescueRoot,'raw',part.clipId+'.json'),part.rawReceiptSha256).value,diagnostic=parseBound(resolve(rescueRoot,'encoded',part.clipId+'.json'),part.diagnosticReceiptSha256).value;
+  for(const [key,value] of Object.entries(segmentPlan.jobs[i]))requireMatch(sameJson(rawPart[key],value)&&sameJson(diagnostic[key],value),'Saved segment/frozen plan changed: '+key);
+  for(const key of ['authoringHelperSha256','requestSha256','rawSha256','decode','synthesis','seed','synthesisAttempt','rendererInputText','profileJsonSha256','referenceLicense','modelLicense','rawSampleRateHz','rawChannels'])requireMatch(Object.hasOwn(rawPart,key)&&sameJson(rawPart[key],diagnostic[key]),'Saved raw/diagnostic provenance changed: '+key);
+  requireMatch(rawPart.requestSha256===a.pilotPlanSha256&&rawPart.profileJsonSha256===a.profileJsonSha256&&rawPart.referenceLicense==='CC0-1.0'&&rawPart.modelLicense==='MIT'&&rawPart.rawSha256===part.rawSha256&&sameJson(rawPart.decode,part.decode)&&sameJson(rawPart.synthesis,part.synthesis)&&diagnostic.sha256===part.encodedSha256&&diagnostic.asr===part.asr&&diagnostic.asrModelSha256===a.asrModelSha256&&diagnostic.asrDiagnosticOnly===true&&diagnostic.asrBeamSize===1&&diagnostic.asrDevice==='cpu'&&diagnostic.asrCpuThreads===1&&diagnostic.asrComputeType==='int8'&&diagnostic.asrLanguageId===part.languageId&&diagnostic.asrScriptPrompt===null,'Saved segment license, bytes or ASR provenance failed');
+  readBound(resolve(rescueRoot,'raw',part.clipId+'.wav'),part.rawSha256);
+  const partMp3=readBound(resolve(rescueRoot,'encoded',part.clipId+'.mp3'),part.encodedSha256);requireMatch(partMp3.bytes.length===diagnostic.bytes,'Segment encoded byte count changed');
+  const trace=parseBound(resolve(rescueRoot,'raw',part.clipId+'-eos-trace.json'),part.eosTraceSha256).value;
+  for(const key of ['clipId','text','profileId','referenceSha256','modelRevision'])requireMatch(trace[key]===rawPart[key],'Segment trace belongs to another source');
+ }
+ // Preserve current source/profile ownership and recipe, using the existing cast binding authority.
+ const cast=parseBound(resolve(authority.sourceRoot,'For-AI/VOICE-CAST.json'),authority.sourcePins['For-AI/VOICE-CAST.json']).value;
+ requireMatch(matchesProduction(cast,clip)&&cast.productionVoices[a.voiceId]?.profileId===a.profileId,'Pilot selected production profile/recipe drift');
+ for(const record of observed)requireMatch(hash(record.path)===record.sha256,'Pilot evidence changed during projection collection');
+ const receipt={schema:'exact-pilot-homophone-cue-projection-v1',qualified:true,...projection,clipId:a.clipId,voiceId:a.voiceId,profileId:a.profileId,textSha256:a.textSha256,originalEncodedReceiptSha256:parent.sha256,encodedSha256:a.sha256,rawReceiptSha256:raw.sha256,rawSha256:clip.rawSha256,authoritySha256:a.authoritySha256,continuationTerminalSha256:a.terminalSha256,ledgerSha256:summary.ledgerSha256,originalCueGate:'FAIL',originalPostflightQualified:false,referenceLicense:'CC0-1.0',modelLicense:'MIT',technicalEligible:true,listeningVerified:false,publicationAuthorized:false,status:'homophone-equivalent; literal ASR mismatch retained',generationCalls:3,parentGenerationCalls:0,segmentDiagnosticAsrCalls:3,parentGermanAsrCalls:2,totalAsrCalls:5,retryBudget:0,evidenceFiles:observed.map(record=>({sha256:record.sha256}))};
+ const collection={projection:receipt,clip:ruedigerPilotPublicClip(clip)};
+ ruedigerPilotCollectedEvidence.set(collection,ruedigerPilotDigest(JSON.stringify(collection)));
+ return collection;
+}
+// Explicit public projection: never spread a private receipt or expose its paths.
+function ruedigerPilotPublicClip(clip){
+ const publicClip=crowdPublicFields(clip,[...crowdPublicJobFields,'textSha256','codeSwitchParent','phaseScope','synthesisAttempt','synthesisAttemptBasis','rawSha256','requestSha256','authoredPlanSha256','pilotPlanSha256','authoringHelperSha256','sampleRateHz','channels','bitrateBitsPerSecond','bytes','durationSeconds','integratedLufs','truePeakDbtp','asr','asrWordExact','asrLiteralWordExact','codeSwitchStrictParentGate','asrLanguageId','asrDevice','asrCpuThreads','asrComputeType','asrEffectiveComputeType','asrModelSha256','asrScriptPrompt','asrBeamSize','sha256','file']);
+ publicClip.segments=clip.segments.map(row=>crowdPublicFields(row,['index','text','sourceStart','sourceEnd','languageId','joinBefore']));
+ publicClip.decode=crowdPublicFields(clip.decode,['eosReached','basis','allSegmentEosObserved']);
+ publicClip.codeSwitchJoin=crowdPublicFields(clip.codeSwitchJoin,['method','sampleRateHz','channels','insertedSilence','crossfade','edit','ffmpegSha256','ffprobeSha256','filterGraph','segmentPcmSha256','joinedPcmSha256']);
+ publicClip.codeSwitchParentContinuation=crowdPublicFields(clip.codeSwitchParentContinuation,['selector','segmentAuthoringHelperSha256','parentAuthoringHelperSha256','ledgerSha256BeforeParentAsr','segmentDiagnosticReceiptSha256']);
+ publicClip.codeSwitchParts=ruedigerPilotPartsForPublic(clip.codeSwitchParts);
+ publicClip.asrReadings=clip.asrReadings.map(reading=>({...crowdPublicFields(reading,['beamSize','transcript','transcribeSeconds','inputScope','encodedSha256','asrModelSha256','languageId','device','cpuThreads','computeType','effectiveComputeType','scriptPrompt','wordTimestamps']),words:reading.words.map(word=>crowdPublicFields(word,['word','start','end']))}));
+ publicClip.wordCues=[];
+ // The joined parent has no native profile receipt of its own; the collector
+ // checked this exact profile hash in the authority and all three raw parts.
+ publicClip.profileJsonSha256=ruedigerPilotHomophone.profileJsonSha256;
+ publicClip.referenceLicense='CC0-1.0';publicClip.modelLicense='MIT';publicClip.listening='pending';
+ return publicClip;
+}
+function ruedigerPilotPartsForPublic(parts){
+ return parts.map(part=>({...crowdPublicFields(part,['clipId','text','sourceStart','sourceEnd','languageId','voiceId','profileId','referenceSha256','rawSha256','encodedSha256','rendererInputText','authoringHelperSha256','renderer','modelRevision','rawSampleRateHz','rawChannels','encodedSampleRateHz','encodedChannels','asrModelSha256','asr','asrLanguageId','asrScriptPrompt','asrDiagnosticOnly','eosReached','eosTraceSha256','seed','synthesisAttempt','rawReceiptSha256','diagnosticReceiptSha256']),decode:crowdPublicFields(part.decode,['eosReached','eosTraceSha256','attentionHooksBefore','attentionHooksAfter','generatedSpeechTokens','maxSpeechTokens','modelEosRestoredSteps']),synthesis:crowdPublicFields(part.synthesis,['languageId','device','precision','t3WeightPrecision','conditioningPrecision','referenceReconditionedForProfile','referenceConditioningVerifiedFloat32','exaggeration','temperature','repetitionPenalty','cfgWeight','cpuThreads','inferenceMode'])}));
+}
+// END exact Ruediger pilot homophone projection v1
+
 function crowdDefaultClipAuthority(cast,clip,proof,requestSha256){
  fixedTakeAuthority(cast,clip);crowdExactCues(clip);
  requireMatch(clip.file===`assets/voices/candidate-dialogue/${clip.clipId}.mp3`,'Crowd public file must be its canonical relative asset path');
@@ -278,10 +434,16 @@ export function prepareCrowdDefaultManifest(cast,manifest,authorityProof,sourceR
 export function crowdRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root,mouthRows=null){
  // Existing validator retains all four unique source slots and selected binding.
  crowdCandidateBlock(cast,manifests,sourceRoot);
- const clips=[];
+ const clips=[],ruedigerPilotHomophoneEvidence={};
  for(const manifest of manifests){
   const selected=manifest.clips.filter(clip=>clip.approval?.status==='user-approved');if(!selected.length)continue;
   const admission=manifest.crowdAdmission;
+  if(manifest.generationScope==='exact-ruediger-pilot-homophone'){
+   const clip=ruedigerPilotHomophoneManifestAuthority(cast,manifest,sourceRoot);
+   ruedigerPilotHomophoneEvidence[clip.clipId]=admission;
+   clips.push({...clip,...(mouthRows?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouthRows[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});
+   continue;
+  }
   requireMatch(admission?.status==='ROOT-verified-current-generation'&&admission.helperSha256===crowdAuthoringHelperSha256&&/^[a-f0-9]{64}$/.test(admission.authoritySha256)&&/^[a-f0-9]{64}$/.test(admission.adapterSha256),'Missing current-generation crowd admission');
   const {authored}=crowdPublicPlan(cast,admission.fullPlan,sourceRoot);
   requireMatch(Object.keys(admission.takes).length===selected.length,'Crowd admitted take coverage changed');
@@ -290,7 +452,7 @@ export function crowdRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=ro
     crowdRemainingClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);
    }else crowdDefaultClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);clips.push({...clip,...(mouthRows?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouthRows[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}
  }
- return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot);
+ return fixedRecordingsBlock(cast,{clips,ruedigerPilotHomophoneEvidence},'crowd-dialogue',assetRoot,sourceRoot);
 }
 
 // Scoped extension for remaining27; original first9 validators remain unchanged.
@@ -302,8 +464,9 @@ export function crowdRemainingSeed(job){
 }
 export function verifyCrowdRemainingSeed(job,seed){requireMatch(seed===crowdRemainingSeed(job),'Wrong owned remaining27 native seed');return seed;}
 export function verifyCrowdGenerationManifestLedger(manifest,relative,digest,ledger){
- const scope=manifest.generationScope??'first9';requireMatch(scope==='first9'||scope==='remaining27-first-takes','Unknown crowd generation scope');
+ const scope=manifest.generationScope??'first9';requireMatch(scope==='first9'||scope==='remaining27-first-takes'||scope==='exact-ruediger-pilot-homophone','Unknown crowd generation scope');
  if(scope==='remaining27-first-takes')requireMatch(relative===`assets/voices/candidate-dialogue/${manifest.voiceId}-remaining27-crowd-manifest.json`,'Remaining27 manifest filename does not own its voice/scope');
+ if(scope==='exact-ruediger-pilot-homophone')requireMatch(relative===ruedigerPilotHomophoneManifestPath&&manifest.voiceId===ruedigerPilotHomophone.voiceId&&manifest.clips?.length===1&&manifest.clips[0].clipId===ruedigerPilotHomophone.clipId&&manifest.clips[0].sha256===ruedigerPilotHomophone.sha256&&/^[a-f0-9]{64}$/.test(digest)&&ledger[relative]===digest,'Exact-pilot manifest lacks its own ROOT admission anchor or scope identity');
  if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(ledger[relative]===digest,'Crowd default manifest lacks verified ROOT private admission');
 }
 function crowdRemainingClipAuthority(cast,clip,proof,requestSha256){
@@ -1621,7 +1784,8 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
   let wordCues=clip.wordCues;
   requireMatch((family!=='knick'||clip.voiceId==='amt-brunhilde-knick')&&matchesProduction(cast,clip),'Fixed profile/reference/renderer drift');
   const binding=cast.productionVoices[clip.voiceId];
-  fixedTakeAuthority(cast,clip);
+  const ruedigerPilotProof=family==='crowd-dialogue'?manifest.ruedigerPilotHomophoneEvidence?.[clip.clipId]:null;
+  if(ruedigerPilotProof)ruedigerPilotHomophoneClipAuthority(cast,clip,ruedigerPilotProof,sourceRoot);else fixedTakeAuthority(cast,clip);
   requireMatch(clip.english?.trim()&&clip.approval?.status==='user-approved',`Missing fixed subtitle/use authority: ${clip.clipId}`);
   requireMatch(clip.file.startsWith(`assets/voices/${assetFamily}/`)&&resolve(root,clip.file).startsWith(resolve(root,`assets/voices/${assetFamily}`)+sep),`Invalid fixed asset path: ${clip.clipId}`);
   requireMatch(hash(resolve(assetRoot,clip.file))===clip.sha256,`Knick audio hash drift: ${clip.clipId}`);
@@ -1642,7 +1806,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
    id=`rule-${String(index+1).padStart(2,'0')}`;
   }
-  entries['./'+clip.file]={id,...(street||replies||ambient||city||crowd||police||traffic||quiz?{clipId:clip.clipId,actorId:clip.actorId}:{}),...(quiz?{questionId:clip.questionId,questionCategory:clip.questionCategory,segment:clip.segment,sourceLocator:clip.sourceLocator,englishSourceLocator:clip.englishSourceLocator}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city||crowd||police||traffic||quiz?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...((city||crowd)&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':crowd?'crowd-owned-exact-dialogue':police?'police-exact-dialogue':traffic?'traffic-owned-exact-dialogue':quiz?'quiz-exact-question':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  entries['./'+clip.file]={id,...(street||replies||ambient||city||crowd||police||traffic||quiz?{clipId:clip.clipId,actorId:clip.actorId}:{}),...(quiz?{questionId:clip.questionId,questionCategory:clip.questionCategory,segment:clip.segment,sourceLocator:clip.sourceLocator,englishSourceLocator:clip.englishSourceLocator}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(ruedigerPilotProof?{generationScope:ruedigerPilotProof.generationScope,verificationMode:clip.verificationMode,verificationStatus:'homophone-equivalent',asrWordExact:false,asrLiteralWordExact:false,asrHomophoneWordEquivalent:true,originalStrictParentGate:false,originalEncodedReceiptSha256:ruedigerPilotProof.projection.originalEncodedReceiptSha256,projectionSha256:ruedigerPilotProof.projectionSha256,synthesisAttempt:0,segmentGenerationCalls:3,parentGenerationCalls:0,parentGermanAsrCalls:2,totalAsrCalls:5,listening:'pending',listeningVerified:false}:{}),...(city||crowd||police||traffic||quiz?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...((city||crowd)&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':crowd?'crowd-owned-exact-dialogue':police?'police-exact-dialogue':traffic?'traffic-owned-exact-dialogue':quiz?'quiz-exact-question':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
  // Encode repeated receipts once, then expand the same complete fields into
  // every runtime entry. Receipts come from takes, never the current cast alias.
@@ -2206,6 +2370,73 @@ export function reactiveRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot
  }
  return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot,sourceRoot).replace('const crowdRecordings=','const crowdReactiveRecordings=');
 }
+// BEGIN exact Ruediger pilot homophone admission v1
+// The named joined parent has its own truthful proof; ordinary fixed-take gates do not change.
+const ruedigerPilotHomophoneScope='exact-ruediger-pilot-homophone';
+const ruedigerPilotHomophoneManifestPath='assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-exact-pilot-homophone-crowd-manifest.json';
+const ruedigerPilotHomophoneHold='outside exact pilot disposition; existing production preserved';
+const ruedigerPilotProjectionFields=['schema','qualified','verificationMode','asrWordExact','asrLiteralWordExact','originalStrictParentGate','asrHomophoneWordEquivalent','selectedBeamSize','projection','wordCues','clipId','voiceId','profileId','textSha256','originalEncodedReceiptSha256','encodedSha256','rawReceiptSha256','rawSha256','authoritySha256','continuationTerminalSha256','ledgerSha256','originalCueGate','originalPostflightQualified','referenceLicense','modelLicense','technicalEligible','listeningVerified','publicationAuthorized','status','generationCalls','parentGenerationCalls','segmentDiagnosticAsrCalls','parentGermanAsrCalls','totalAsrCalls','retryBudget','evidenceFiles'];
+function ruedigerPilotHomophoneProjectionAuthority(clip,projection){
+ const a=ruedigerPilotHomophone;
+ requireMatch(projection&&sameJson(Object.keys(projection).sort(),ruedigerPilotProjectionFields.slice().sort()),'Pilot homophone sidecar public fields changed');
+ const derived=projectRuedigerPilotHomophoneCues(clip);
+ requireMatch(Object.entries(derived).every(([key,value])=>sameJson(projection[key],value)),'Pilot homophone sidecar is not the exact retained-timing projection');
+ requireMatch(projection.schema==='exact-pilot-homophone-cue-projection-v1'&&projection.qualified===true&&projection.clipId===a.clipId&&projection.voiceId===a.voiceId&&projection.profileId===a.profileId&&projection.textSha256===a.textSha256&&projection.originalEncodedReceiptSha256===a.encodedReceiptSha256&&projection.encodedSha256===a.sha256&&projection.authoritySha256===a.authoritySha256&&projection.continuationTerminalSha256===a.terminalSha256&&projection.rawSha256===clip.rawSha256&&ruedigerPilotHash(projection.rawReceiptSha256)&&ruedigerPilotHash(projection.ledgerSha256),'Pilot homophone sidecar identity or byte lineage changed');
+ requireMatch(projection.originalCueGate==='FAIL'&&projection.originalPostflightQualified===false&&projection.referenceLicense==='CC0-1.0'&&projection.modelLicense==='MIT'&&projection.technicalEligible===true&&projection.listeningVerified===false&&projection.publicationAuthorized===false&&projection.status==='homophone-equivalent; literal ASR mismatch retained'&&projection.generationCalls===3&&projection.parentGenerationCalls===0&&projection.segmentDiagnosticAsrCalls===3&&projection.parentGermanAsrCalls===2&&projection.totalAsrCalls===5&&projection.retryBudget===0,'Pilot sidecar rewrote original failure, license or listening status');
+ const evidence=projection.evidenceFiles;
+ requireMatch(Array.isArray(evidence)&&evidence.length>=25&&evidence.every(row=>row&&sameJson(Object.keys(row),['sha256'])&&ruedigerPilotHash(row.sha256)),'Pilot public evidence must contain only exact byte digests');
+ const required=[a.encodedReceiptSha256,a.sha256,projection.rawReceiptSha256,clip.rawSha256,a.authoritySha256,a.terminalSha256,projection.ledgerSha256,a.requestSha256,a.pilotPlanSha256,a.authoredPlanSha256,...clip.codeSwitchParts.flatMap(part=>['rawReceiptSha256','diagnosticReceiptSha256','rawSha256','encodedSha256','eosTraceSha256'].map(key=>part[key]))];
+ requireMatch(required.every(digest=>evidence.some(row=>row.sha256===digest)),'Pilot sidecar lacks original parent/segment/ledger byte proof');
+ return derived;
+}
+function ruedigerPilotHomophoneClipAuthority(cast,clip,admission,sourceRoot=root){
+ const a=ruedigerPilotHomophone;
+ requireMatch(admission?.status==='ROOT-verified-exact-ruediger-pilot-homophone'&&admission.generationScope===ruedigerPilotHomophoneScope&&admission.authoritySha256===a.authoritySha256&&admission.helperSha256===a.authoringHelperSha256&&admission.requestSha256===a.requestSha256&&admission.authoredPlanSha256===a.authoredPlanSha256&&admission.pilotPlanSha256===a.pilotPlanSha256&&ruedigerPilotHash(admission.selectionSha256),'Missing exact-pilot admission/selection lineage');
+ requireMatch(clip.clipId===a.clipId&&clip.file==='assets/voices/candidate-dialogue/'+a.clipId+'.mp3'&&clip.sha256===a.sha256&&clip.profileJsonSha256===a.profileJsonSha256&&matchesProduction(cast,clip),'Pilot public clip selected profile, bytes or path changed');
+ const binding=cast.productionVoices[a.voiceId],owners=cast.roleProfiles.filter(row=>row.gameRole===a.voiceId);
+ requireMatch(owners.length===1&&owners[0].voiceId===a.voiceId&&owners[0].secretTunnelProfileId===a.profileId&&owners[0].reference?.license==='CC0-1.0'&&owners[0].reference?.workingReferenceSha256===a.referenceOriginalSha256&&binding?.profileId===a.profileId&&binding.originalSha256===a.referenceOriginalSha256&&binding.referenceSha256===a.referenceSha256&&binding.renderer===a.renderer&&binding.modelRevision===a.modelRevision&&(binding.processing??null)===null&&clip.referenceLicense==='CC0-1.0'&&clip.modelLicense==='MIT','Pilot current owner/reference/license/recipe changed');
+ const authored=crowdSourceMap(cast,sourceRoot).get(a.clipId);
+ requireMatch(authored&&Object.entries(authored).every(([key,value])=>sameJson(clip[key],value)),'Pilot current authored text, English, actor or selected source tuple changed');
+ requireMatch(Array.isArray(clip.originalWordCues)&&clip.originalWordCues.length===0&&clip.asrWordExact===false&&clip.asrLiteralWordExact===false&&clip.codeSwitchStrictParentGate===false&&clip.asrHomophoneWordEquivalent===true&&clip.verificationMode==='full-encoded-parent-single-token-homophone','Pilot original failed gates or named verification mode changed');
+ const original={...clip,wordCues:clip.originalWordCues},derived=ruedigerPilotHomophoneProjectionAuthority(original,admission.projection);
+ requireMatch(sameJson(clip.wordCues,derived.wordCues)&&admission.projectionSha256===textHash(JSON.stringify(admission.projection)),'Pilot projected cues or sidecar digest changed');
+ const approval=clip.approval;
+ requireMatch(sameJson(Object.keys(approval||{}).sort(),['clipId','date','encodedSha256','instruction','scope','status'])&&approval.status==='user-approved'&&approval.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(approval.date)&&typeof approval.instruction==='string'&&approval.instruction.trim()&&approval.clipId===a.clipId&&approval.encodedSha256===a.sha256,'Pilot lacks exact clip/hash use selection');
+ requireMatch(clip.listening==='pending'&&clip.listeningVerified===false&&clip.listeningConfirmed===false&&clip.status==='homophone-equivalent; literal ASR mismatch retained; human listening pending','Pilot does not have a human listening claim');
+ requireMatch(sameJson(Object.keys(admission.takes||{}),[a.clipId]),'Pilot admission must prove only the exact selected parent');
+ const take=admission.takes[a.clipId];
+ requireMatch(take.rawReceiptSha256===admission.projection.rawReceiptSha256&&take.encodedReceiptSha256===a.encodedReceiptSha256&&take.rawSha256===clip.rawSha256&&take.encodedSha256===a.sha256&&take.profileJsonSha256===a.profileJsonSha256&&take.projectionSha256===admission.projectionSha256&&take.ledgerSha256===admission.projection.ledgerSha256&&take.segmentGenerationCalls===3&&take.parentGenerationCalls===0&&take.parentGermanAsrCalls===2&&take.totalAsrCalls===5&&take.synthesisAttempt===0,'Pilot take proof lost joined-parent byte lineage or actual call accounting');
+ return derived;
+}
+function ruedigerPilotHomophoneManifestAuthority(cast,manifest,sourceRoot=root){
+ const a=ruedigerPilotHomophone;
+ requireMatch(manifest.generationScope===ruedigerPilotHomophoneScope&&manifest.schemaVersion===1&&manifest.voiceId===a.voiceId&&manifest.profileId===a.profileId&&manifest.fallback==='captions'&&manifest.requestedLineCount===4&&manifest.generatedLineCount===0&&manifest.joinedLineCount===1&&manifest.segmentGenerationCalls===3&&manifest.parentGenerationCalls===0&&manifest.parentGermanAsrCalls===2&&manifest.totalAsrCalls===5&&manifest.lineCount===1&&Array.isArray(manifest.clips)&&manifest.clips.length===1&&manifest.clips[0]?.clipId===a.clipId&&Array.isArray(manifest.heldPrivate)&&manifest.heldPrivate.length===3&&Array.isArray(manifest.approvedExistingReuse)&&manifest.approvedExistingReuse.length===0,'Pilot manifest is not one joined parent and three preserved slots');
+ const owned=[...crowdSourceMap(cast,sourceRoot).values()].filter(row=>row.voiceId===a.voiceId),records=[...manifest.clips,...manifest.heldPrivate];
+ requireMatch(owned.length===4&&new Set(records.map(row=>row.clipId)).size===4&&records.every(row=>{const job=owned.find(job=>job.clipId===row.clipId);return job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value))}),'Pilot manifest changed a current owned source/English slot');
+ requireMatch(manifest.heldPrivate.every(row=>row.clipId!==a.clipId&&row.reason===ruedigerPilotHomophoneHold&&sameJson(Object.keys(row).sort(),[...crowdPublicJobFields,'reason'].sort())),'Pilot must preserve other production slots without claiming generation or reuse');
+ ruedigerPilotHomophoneClipAuthority(cast,manifest.clips[0],manifest.crowdAdmission,sourceRoot);
+ return manifest.clips[0];
+}
+export function prepareRuedigerPilotHomophoneManifest(cast,collection,selectionProof,sourceRoot=root){
+ requireRuedigerPilotCollectedEvidence(collection);
+ const a=ruedigerPilotHomophone;
+ requireMatch(sameJson(cast,json(resolve(sourceRoot,'For-AI/VOICE-CAST.json'))),'Pilot admission cast differs from current public source');
+ requireMatch(collection&&collection.clip&&collection.projection,'Missing ROOT-collected exact-pilot source proof');
+ const original=ruedigerPilotPublicClip(collection.clip),projection=collection.projection;
+ ruedigerPilotHomophoneProjectionAuthority(original,projection);
+ requireMatch(selectionProof&&ruedigerPilotHash(selectionProof.sha256)&&selectionProof.sha256===hash(selectionProof.path),'Pilot clip/hash use selection bytes changed');
+ const selection=json(selectionProof.path);
+ requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&typeof selection.instruction==='string'&&selection.instruction.trim()&&!selection.listeningVerified&&!selection.listeningConfirmed&&Array.isArray(selection.clips)&&selection.clips.length===1&&sameJson(Object.keys(selection.clips[0]).sort(),['clipId','encodedSha256'])&&selection.clips[0].clipId===a.clipId&&selection.clips[0].encodedSha256===a.sha256,'Pilot selection must name only the exact retained parent bytes');
+ const approval={status:selection.status,scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:a.clipId,encodedSha256:a.sha256},projectionSha256=textHash(JSON.stringify(projection));
+ const clip={...original,file:'assets/voices/candidate-dialogue/'+a.clipId+'.mp3',originalWordCues:[],wordCues:projection.wordCues,asrHomophoneWordEquivalent:true,verificationMode:projection.verificationMode,approval,listening:'pending',listeningVerified:false,listeningConfirmed:false,status:'homophone-equivalent; literal ASR mismatch retained; human listening pending'};
+ const owned=[...crowdSourceMap(cast,sourceRoot).values()].filter(row=>row.voiceId===a.voiceId);
+ const take={rawReceiptSha256:projection.rawReceiptSha256,encodedReceiptSha256:a.encodedReceiptSha256,rawSha256:clip.rawSha256,encodedSha256:a.sha256,profileJsonSha256:a.profileJsonSha256,projectionSha256,ledgerSha256:projection.ledgerSha256,segmentGenerationCalls:3,parentGenerationCalls:0,parentGermanAsrCalls:2,totalAsrCalls:5,synthesisAttempt:0};
+ const result={schemaVersion:1,generationScope:ruedigerPilotHomophoneScope,voiceId:a.voiceId,profileId:a.profileId,fallback:'captions',status:'homophone-equivalent; original literal/strict/cue failure retained; human listening pending',requestedLineCount:4,generatedLineCount:0,joinedLineCount:1,segmentGenerationCalls:3,parentGenerationCalls:0,parentGermanAsrCalls:2,totalAsrCalls:5,lineCount:1,clips:[clip],heldPrivate:owned.filter(row=>row.clipId!==a.clipId).map(row=>({...crowdPublicFields(row,crowdPublicJobFields),reason:ruedigerPilotHomophoneHold})),approvedExistingReuse:[],crowdAdmission:{status:'ROOT-verified-exact-ruediger-pilot-homophone',generationScope:ruedigerPilotHomophoneScope,authoritySha256:a.authoritySha256,helperSha256:a.authoringHelperSha256,requestSha256:a.requestSha256,authoredPlanSha256:a.authoredPlanSha256,pilotPlanSha256:a.pilotPlanSha256,selectionSha256:selectionProof.sha256,projectionSha256,projection,takes:{[a.clipId]:take}}};
+ ruedigerPilotHomophoneManifestAuthority(cast,result,sourceRoot);
+ return result;
+}
+// END exact Ruediger pilot homophone admission v1
+
 export function main(args=process.argv.slice(2)){
  requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');
  const value=name=>{const i=args.indexOf(name);return i<0?null:args[i+1]};
