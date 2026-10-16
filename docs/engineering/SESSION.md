@@ -1,3 +1,13 @@
+# Paired asset attachment scope — 2026-10-16
+
+Scope: fix the reproduced authoring failure where a globally valid attachment
+is absent from a later key pair. Change only the shared paired builder and its
+existing Python tests. Preserve strict global/direct-match validation, source
+paint, correspondence guards and runtime records. Canonical basefb1ad3e is clean.
+The asset-specific native support failure remains separate and unresolved;
+this authoring-only fix changes no game asset/runtime behavior. Run old/new
+negative control, full builder tests and the existing skill validator.
+
 # Central reconciliation and bounded asset preparation — 2026-10-16
 
 Scope: reconcile the preserved city style authority onto current main and route

@@ -1,5 +1,6 @@
 """Adversarial correspondence tests for alpha-zero endpoint support."""
 import importlib.util
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -198,6 +199,67 @@ class SyntheticEndpointTests(unittest.TestCase):
                     path.write_text(json.dumps(spec))
                     with self.assertRaisesRegex(ValueError, "paint_warp_gains"):
                         BUILDER.build(path, Path(directory) / "out")
+
+
+class MultiIntervalAttachmentTests(unittest.TestCase):
+    def fixture(self, directory):
+        states = []
+        for index in range(3):
+            image = Image.new("RGBA", (16, 16))
+            image.putpixel((11, 11), (130, 140, 150, 255))
+            if index == 0:
+                image.putpixel((3, 3), (30, 60, 90, 255))
+            path = directory / f"key-{index}.png"
+            image.save(path)
+            states.append({"id": str(index), "file": str(path),
+                           "landmarks": {"contact": [4 + index * 2, 4]},
+                           "regions": [{"part": "prop", "polygon": [[2, 2], [5, 2], [5, 5], [2, 5]]}]
+                           if index == 0 else []})
+        return {"id": "attachment-scope", "canvas_xy": [16, 16], "variants": {"test": 2},
+                "states": states, "missing_part_attachments": {"prop": "contact"},
+                "arcs": [{"id": "turn", "keys": [{"state": str(i), "time": i} for i in range(3)]}]}
+
+    def test_attachment_absent_from_later_pair_preserves_displacement_and_paint(self):
+        with TemporaryDirectory() as directory:
+            directory = Path(directory)
+            path = directory / "spec.json"
+            path.write_text(json.dumps(self.fixture(directory)))
+            manifest = BUILDER.build(path, directory / "built")
+            self.assertEqual([(s["from"], s["to"]) for s in manifest["segments"]], [("0", "1"), ("1", "2")])
+            variant = manifest["variants"]["test"]
+            packed = gzip.decompress((directory / "built" / variant["file"]).read_bytes())
+            records = np.frombuffer(packed, dtype=BUILDER.RECORD).reshape(2, variant["sample_count"])
+            dying = records[0][(records[0]["start"][:, 3] > 0) & (records[0]["end"][:, 3] == 0)]
+            self.assertEqual(len(dying), 1)
+            np.testing.assert_array_equal(dying[0]["start"], [30, 60, 90, 255])
+            np.testing.assert_array_equal(dying[0]["xy"], [-5 / 16, 13 / 16, -3 / 16, 13 / 16])
+            later = records[1][records[1]["start"][:, 3] > 0]
+            self.assertEqual(len(later), 1)
+            np.testing.assert_array_equal(later[0]["start"], [130, 140, 150, 255])
+            np.testing.assert_array_equal(later[0]["end"], later[0]["start"])
+            np.testing.assert_array_equal(later[0]["xy"][:2], later[0]["xy"][2:])
+
+    def test_unknown_global_attachment_is_rejected_before_output(self):
+        with TemporaryDirectory() as directory:
+            directory = Path(directory)
+            spec = self.fixture(directory)
+            spec["missing_part_attachments"] = {"unknown": "contact"}
+            path = directory / "spec.json"
+            path.write_text(json.dumps(spec))
+            with self.assertRaisesRegex(ValueError, "Invalid missing_part_attachments part"):
+                BUILDER.build(path, directory / "invalid")
+            self.assertFalse((directory / "invalid").exists())
+
+    def test_absent_part_still_requires_its_global_attachment_landmark(self):
+        with TemporaryDirectory() as directory:
+            directory = Path(directory)
+            spec = self.fixture(directory)
+            spec["states"][2]["landmarks"].pop("contact")
+            path = directory / "spec.json"
+            path.write_text(json.dumps(spec))
+            with self.assertRaisesRegex(ValueError, "landmark 'contact' in 2"):
+                BUILDER.build(path, directory / "invalid")
+            self.assertFalse((directory / "invalid").exists())
 
 
 if __name__ == "__main__":

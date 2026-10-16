@@ -299,8 +299,12 @@ def build(spec_path, output):
         sampled = {state["id"]: samples(images[state["id"]], stride) for state in states}
         for state in states:
             check_curved_ownership(state, sampled[state["id"]][0])
-        blocks = [match(sampled[a], sampled[b], by_id[a], by_id[b], stride, w, h, attachments)
-                  for a, b in segments]
+        blocks = []
+        for a, b in segments:
+            pair_parts = {region["part"] for state in (by_id[a], by_id[b])
+                          for region in state.get("regions", [])}
+            pair_attachments = {part: landmark for part, landmark in attachments.items() if part in pair_parts}
+            blocks.append(match(sampled[a], sampled[b], by_id[a], by_id[b], stride, w, h, pair_attachments))
         count = ((max(len(block[0]) for block in blocks) + WIDTH - 1) // WIDTH) * WIDTH
         if not 1 <= count <= 20000:
             raise ValueError("Too many matched samples")
