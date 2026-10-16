@@ -14,6 +14,16 @@ Keep all eight Bayern and five Alice supplied recording objects, exact German/En
 
 The original speaker/source and external redistribution license remain unverified/user-supplied as recorded in `assets/voices/LICENSES.md`. This within-project selection neither claims authentic public-figure speech nor relabels anything CC0 or creates new attribution requirements. Private original/reference audio and authoring paths do not ship.
 
+## Sandale role source scope
+
+The existing crowd-dialogue producer accepts the explicit `sourceScope: "sandale-roles-v1"` for the eight authored Sandale barks: two roles, two regions and two lines per region. Günther Liegestuhl owns `tourist-guenther-liegestuhl`; Walburga Handtuch owns `touristin-walburga-handtuch`. Reuse their selected CC0 references and saved profiles. These roles are separate from Günther Gartenzaun and the nine ordinary named crowd voices.
+
+The scoped request must retain all eight exact source, English-caption, actor, profile and reference rows; each voice processes its own four. Freeze the actual helper/source hashes. The producer preserves private processing and rejects direct public export, retake, source-follow and rescue modes for this scope. This source capability creates no generation allocation, accepted recording or permission to reuse another actor's take.
+
+The existing curator's `prepareSandaleManifest` validates the separate finite authority, retired phase receipts, complete accepted/held accounting, raw receipts, source cues and clip/hash use selection. `sandaleRecordingsBlock` requires a separately anchored `-sandale-manifest.json` and projects only verified selected recordings. `--check` rejects orphaned Sandale manifests, admission ledgers and recording projections. Keep the older named-crowd grants and source rows unchanged. Missing recordings retain captions; these authoring functions do not establish live role restoration, animation or listening quality.
+
+Run `python -B tests/test_sandale_source_adapter.py`, `node --test tests/sandale-voice-curator.test.mjs` and `node tools/curate-voice-library.mjs --check` after changes. The focused tests use bounded public source fixtures and synthetic processing/admission receipts; they do not synthesize audio or verify actual new media.
+
 ## Personalized named city sources and admission
 
 The nineteen named city actors own76 exact regional source/English rows in `VOICE-CAST.json`. `cityDialogueTable()` and the public `cityDialogue` export bind actor, selected voice, Germany/Berlin slot and stable clip ID. The existing E branch reads those owned pairs; source/body speech remains German or Berlin Denglisch, with English on the subtitle rail. The inventory derives a strings-only `pools.cityDialogue` projection; IDs and English metadata are not spoken inputs. Historical city auditions keep their original manifest, media and source receipt, independently of current selected recording coverage.

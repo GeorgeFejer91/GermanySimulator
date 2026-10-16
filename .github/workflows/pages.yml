@@ -57,7 +57,9 @@ jobs:
       - name: Check fixed character voices
         run: |
           python tests/test_sync_music_cast_index.py
+          python -B tests/test_sandale_source_adapter.py
           node tools/curate-voice-library.mjs --check
+          node --test tests/sandale-voice-curator.test.mjs
           node --test tests/voice-gap-public.test.mjs
           node --test tests/buergeramt-ambient.test.mjs
           node --test tests/city-dialogue.test.mjs tests/city-voice-provenance.test.mjs tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/cameo-saved-profiles.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs

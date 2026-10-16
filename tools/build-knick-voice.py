@@ -255,7 +255,14 @@ def configure_request(args):
         if plan["family"] in ("office-monologue", "office-mirror"):
             assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
         if plan["family"] == "crowd-dialogue":
-            assert VOICE in {"crowd-baerbel-brezel", "crowd-brigitte-bueroklammer", "crowd-elfriede-eingabe", "crowd-guenther-gartenzaun", "crowd-hildegard-brotzeit", "crowd-irmgard-aktenordner", "crowd-klaus-dieter-knoedel", "crowd-manfred-mittagsruhe", "crowd-ruediger-rasenkante"}
+            assert plan.get("sourceScope") in (None, SANDALE_SOURCE_SCOPE), "Unknown crowd source scope"
+            if plan.get("sourceScope") == SANDALE_SOURCE_SCOPE:
+                assert plan.get("authoringHelperSha256") == AUTHORING_HELPER_SHA256, "Sandale request requires this exact producer"
+                assert VOICE in {owner[2] for owner in SANDALE_OWNERS}, "Sandale scope requires its own selected voice"
+                assert not (args.manifest or args.check), "Sandale public export requires the separate reviewed curator admission"
+                assert not (args.retake_failed or args.follow_source or args.reconcile_source), "Sandale requires an immutable new request and no automatic retakes"
+            else:
+                assert VOICE in {"crowd-baerbel-brezel", "crowd-brigitte-bueroklammer", "crowd-elfriede-eingabe", "crowd-guenther-gartenzaun", "crowd-hildegard-brotzeit", "crowd-irmgard-aktenordner", "crowd-klaus-dieter-knoedel", "crowd-manfred-mittagsruhe", "crowd-ruediger-rasenkante"}
             assert plan["publicAssetFamily"] == "assets/voices/candidate-dialogue"
             assert plan["privateReviewFamily"] == "GermanySimulator crowd dialogue review 2026-10-15"
             assert set(plan["sourceSha256"]) == {"game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js"}
@@ -462,6 +469,71 @@ def reference_license(profile_record):
                 else "unknown; selected profile does not record reference license"))
 
 
+SANDALE_SOURCE_SCOPE = "sandale-roles-v1"
+SANDALE_OWNERS = (
+    ("herr-sandale", "towel-man", "tourist-guenther-liegestuhl", "towelMan"),
+    ("frau-sandale", "towel-woman", "touristin-walburga-handtuch", "towelWoman"),
+)
+
+
+def sandale_dialogue_sources():
+    js = r'''const fs=require("node:fs"),vm=require("node:vm");
+const source=fs.readFileSync("game.js","utf8"),match=source.match(/const crowdArchetypes=(Object\.freeze\([\s\S]*?\));\r?\nconst crowdCharacterBarks=/);
+if(!match)throw Error("Sandale archetype source missing");
+const archetypes=vm.runInNewContext(match[1]);global.window={};require("./For-AI/AUDIO-TEXT-LIBRARY.js");
+const pools=window.GermanySimulatorAudioText.pools;
+console.log(JSON.stringify({archetypes,english:{towelMan:pools.towelMan,towelWoman:pools.towelWoman}}));'''
+    authority = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+    cast = read(ROOT / "For-AI/VOICE-CAST.json")
+    archetypes = authority["archetypes"]
+    expected_archetypes = {owner[1] for owner in SANDALE_OWNERS}
+    assert len(archetypes) == 2 and {row["id"] for row in archetypes} == expected_archetypes
+    roles = [row for row in cast["roleProfiles"] if row.get("gameRole") in {owner[0] for owner in SANDALE_OWNERS}]
+    assert len(roles) == 2 and len({row["gameRole"] for row in roles}) == 2, "Sandale role ownership must be unique"
+    authored = []
+    for actor_id, archetype_id, voice_id, pool in SANDALE_OWNERS:
+        owner = next(row for row in roles if row["gameRole"] == actor_id)
+        archetype = next(row for row in archetypes if row["id"] == archetype_id)
+        binding = cast["productionVoices"][voice_id]
+        assert owner["voiceId"] == voice_id and owner["secretTunnelProfileId"] == binding["profileId"]
+        assert archetype["voiceId"] == voice_id, "Sandale archetype must retain its owned voice"
+        assert any("crowdArchetypes[" + archetype_id + "].barks[region]" in line for line in owner["dialogueSources"])
+        assert owner["reference"]["workingReferenceSha256"] == binding["originalSha256"]
+        assert owner["reference"]["license"] == "CC0-1.0"
+        assert binding["renderer"] == "ResembleAI/Chatterbox Multilingual V2 0.1.7"
+        assert binding["modelRevision"] == "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+        assert binding.get("processing") is None and binding["fallback"] == "captions"
+        assert set(archetype["barks"]) == {"berlin", "germany"}
+        english = authority["english"][pool]
+        assert len(english) == 2 and all(isinstance(line, str) and line.strip() for line in english)
+        for region in ("berlin", "germany"):
+            texts = archetype["barks"][region]
+            assert len(texts) == 2 and all(isinstance(text, str) and text.strip() for text in texts)
+            for slot, text in enumerate(texts):
+                authored.append({"clipId": f"{voice_id}-{region}-{slot + 1:02}", "voiceId": voice_id,
+                                 "actorId": actor_id, "region": region, "slot": slot,
+                                 "sourceLocator": f"game.js crowdArchetypes[id={archetype_id}].barks.{region}[{slot}]",
+                                 "text": text, "english": english[slot], "profileId": binding["profileId"],
+                                 "referenceSha256": binding["referenceSha256"], "referenceOriginalSha256": binding["originalSha256"],
+                                 "renderer": binding["renderer"], "modelRevision": binding["modelRevision"],
+                                 "processing": binding.get("processing")})
+    assert len(authored) == 8 and len({row["clipId"] for row in authored}) == 8
+    return authored
+
+
+def validate_sandale_request(requested, authored, voice):
+    expected = {row["clipId"]: row for row in authored}
+    assert len(authored) == 8 and len(expected) == 8
+    assert len(requested) == 8 and len({row["clipId"] for row in requested}) == 8, "Sandale scope requires exactly eight owned slots"
+    for row in requested:
+        assert row["clipId"] in expected and row == expected[row["clipId"]], "Sandale role, text, subtitle or selected binding changed"
+    selected = [dict(row) for row in requested if row["voiceId"] == voice]
+    assert len(selected) == 4 and len({row["actorId"] for row in selected}) == 1
+    return selected
+
+
+
+
 def city_dialogue_sources():
     """Owned city slots cross-checked against the actual caller and public export."""
     source = (ROOT / "game.js").read_text(encoding="utf-8")
@@ -560,6 +632,8 @@ def jobs(ambient=False, music_root=None):
             assert selected, "No authored city request for selected voice"
             return selected
         if CUSTOM_PLAN["family"] == "crowd-dialogue":
+            if CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE:
+                return validate_sandale_request(CUSTOM_PLAN["jobs"], sandale_dialogue_sources(), VOICE)
             js = r'''const fs=require("node:fs"),vm=require("node:vm");
 const source=fs.readFileSync("game.js","utf8"),match=source.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);
 if(!match)throw Error("Crowd actor-owned source map missing");
@@ -1537,9 +1611,14 @@ def execute(args):
         frozen_plan = {"requestedLineCount": len(queue), "sourceSha256": hashes, "jobs": queue, "approvedExistingReuse": REUSE_EVIDENCE}
         if CUSTOM_PLAN:
             frozen_plan.update({"authoredPlanSha256": sha(args.request_file), "authoredPlanSourceSha256": CUSTOM_PLAN["sourceSha256"]})
+        if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE:
+            frozen_plan["sourceScope"] = SANDALE_SOURCE_SCOPE
+            if (private / "requests.json").exists():
+                assert read(private / "requests.json") == frozen_plan, "Sandale request already frozen; it cannot be replaced"
         if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue" and (private / "requests.json").exists():
             assert read(private / "requests.json") == frozen_plan, "City request already frozen; use the existing explicit source reconciliation"
-        write(private / "requests.json", frozen_plan)
+        if not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE and (private / "requests.json").exists()):
+            write(private / "requests.json", frozen_plan)
         print(json.dumps({"requestedLineCount": len(queue), "registrationLineCount": sum("registration-" in job["clipId"] for job in queue), "privateRoot": str(private)}, ensure_ascii=False))
         return
     frozen = read(private / "requests.json")
@@ -1550,6 +1629,10 @@ def execute(args):
             return
     assert frozen["sourceSha256"] == hashes, "Source changed; reconcile the frozen request before resuming"
     assert frozen["jobs"] == queue, "Exact dialogue/profile requests changed; reconcile before resuming"
+    if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE:
+        assert frozen.get("sourceScope") == SANDALE_SOURCE_SCOPE, "Historical crowd requests cannot become Sandale scope"
+        assert frozen.get("authoredPlanSha256") == sha(args.request_file), "Sandale authored request bytes changed"
+        assert frozen.get("authoredPlanSourceSha256") == CUSTOM_PLAN["sourceSha256"] == hashes
     if args.manifest:
         manifest(queue, private, args.ambient)
     elif args.render:
@@ -1558,7 +1641,8 @@ def execute(args):
         benchmark_asr(args, private)
     else:
         process(args, queue[:args.limit] if args.limit else queue, private, queue,
-                publish_manifest=not (CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue"))
+                publish_manifest=not (CUSTOM_PLAN and (CUSTOM_PLAN["family"] == "city-dialogue"
+                                                     or CUSTOM_PLAN.get("sourceScope") == SANDALE_SOURCE_SCOPE)))
 
 
 if __name__ == "__main__":

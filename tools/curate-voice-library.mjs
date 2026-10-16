@@ -52,6 +52,120 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
  }
  return 'const crowdCandidateDialogue=Object.freeze('+JSON.stringify(entries)+');\n';
 }
+// Sandale is a separate source scope; named-crowd grants never authorize it.
+const sandaleScope='sandale-roles-v1';
+const sandaleAuthoringHelperSha256='9910e3b8666723113667739f46d262b00bc685a2a72d7f217c5bce85024c08d9';
+const sandaleRoles=[['herr-sandale','towel-man','tourist-guenther-liegestuhl','towelMan'],['frau-sandale','towel-woman','touristin-walburga-handtuch','towelWoman']];
+export function sandaleSourceMap(cast,sourceRoot=root){
+ const game=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),match=game.match(/const crowdArchetypes=(Object\.freeze\([\s\S]*?\));\r?\nconst crowdCharacterBarks=/),window={};
+ requireMatch(match,'Missing Sandale archetype source');
+ const archetypes=vm.runInNewContext(match[1]);vm.runInNewContext(readFileSync(resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8'),{window});
+ requireMatch(Array.isArray(archetypes)&&archetypes.length===2&&new Set(archetypes.map(row=>row.id)).size===2,'Sandale archetype set changed');
+ const rows=[];
+ for(const [actorId,archetypeId,voiceId,pool] of sandaleRoles){
+  const sources=archetypes.filter(row=>row.id===archetypeId),owners=cast.roleProfiles.filter(row=>row.gameRole===actorId),binding=cast.productionVoices[voiceId],english=window.GermanySimulatorAudioText?.pools?.[pool];
+  requireMatch(sources.length===1&&sources[0].voiceId===voiceId&&owners.length===1&&owners[0].voiceId===voiceId&&owners[0].secretTunnelProfileId===binding?.profileId&&binding.fallback==='captions'&&Array.isArray(english)&&english.length===2,'Sandale role, voice, selected profile or subtitle pool drift');
+  requireMatch(sameJson(Object.keys(sources[0].barks||{}).sort(),['berlin','germany'])&&owners[0].dialogueSources?.some(line=>line.includes(`crowdArchetypes[${archetypeId}].barks[region]`))&&owners[0].reference?.workingReferenceSha256===binding.originalSha256&&owners[0].reference?.license==='CC0-1.0'&&binding.renderer==='ResembleAI/Chatterbox Multilingual V2 0.1.7'&&binding.modelRevision==='5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18'&&(binding.processing??null)===null,'Sandale source ownership, reference/license or dry recipe drift');
+  for(const region of ['berlin','germany']){
+   requireMatch(Array.isArray(sources[0].barks[region])&&sources[0].barks[region].length===2,'Sandale requires two exact lines per region');
+   for(let slot=0;slot<2;slot++){
+    const text=sources[0].barks[region][slot];requireMatch(typeof text==='string'&&text.trim()&&typeof english[slot]==='string'&&english[slot].trim(),'Missing Sandale text/subtitle');
+    rows.push({clipId:`${voiceId}-${region}-${String(slot+1).padStart(2,'0')}`,voiceId,actorId,region,slot,sourceLocator:`game.js crowdArchetypes[id=${archetypeId}].barks.${region}[${slot}]`,text,english:english[slot],profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing??null});
+   }
+  }
+ }
+ requireMatch(rows.length===8&&new Set(rows.map(row=>row.clipId)).size===8,'Sandale exact eight-slot set changed');return new Map(rows.map(row=>[row.clipId,row]));
+}
+export function sandaleFullPlan(cast,snapshot,sourceRoot=root){
+ requireMatch(typeof snapshot?.text==='string'&&snapshot.sha256===textHash(snapshot.text),'Sandale request bytes changed');
+ const plan=JSON.parse(snapshot.text),authored=sandaleSourceMap(cast,sourceRoot),sourceFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js'];
+ requireMatch(plan.family==='crowd-dialogue'&&plan.sourceScope===sandaleScope&&plan.publicAssetFamily==='assets/voices/candidate-dialogue'&&plan.privateReviewFamily==='GermanySimulator crowd dialogue review 2026-10-15'&&plan.requestedLineCount===8&&plan.jobs?.length===8&&new Set(plan.jobs.map(row=>row.clipId)).size===8,'Not the exact Sandale request');
+ requireMatch(sameJson(Object.keys(plan.sourceSha256||{}).sort(),sourceFiles.slice().sort())&&sourceFiles.every(path=>plan.sourceSha256[path]===hash(resolve(sourceRoot,path)))&&plan.authoringHelperSha256===sandaleAuthoringHelperSha256&&hash(resolve(sourceRoot,'tools/build-knick-voice.py'))===sandaleAuthoringHelperSha256,'Sandale current source/producer pins changed');
+ requireMatch(plan.jobs.every(row=>authored.has(row.clipId)&&Object.keys(row).length===crowdPublicJobFields.length&&Object.entries(authored.get(row.clipId)).every(([key,value])=>sameJson(row[key],value))),'Sandale ordered source/English/owner/profile drift');
+ return {plan,authored:new Map(plan.jobs.map(row=>[row.clipId,row]))};
+}
+function sandaleManifestSlots(cast,manifest,authored){
+ const owned=[...authored.values()].filter(row=>row.voiceId===manifest.voiceId),records=[...(manifest.clips||[]),...(manifest.heldPrivate||[])];
+ requireMatch(manifest.sourceScope===sandaleScope&&owned.length===4&&manifest.profileId===cast.productionVoices[manifest.voiceId]?.profileId&&manifest.requestedLineCount===4&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&manifest.lineCount===manifest.clips.length&&Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=4&&records.length===4&&new Set(records.map(row=>row.clipId)).size===4,'Sandale per-voice accounting differs from four unique slots');
+ for(const row of records){const job=owned.find(job=>job.clipId===row.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value)),'Sandale accepted/held source ownership drift');}
+ requireMatch(manifest.heldPrivate.every(row=>typeof row.reason==='string'&&row.reason.trim()),'Sandale held reason missing');return owned;
+}
+function sandaleClipAuthority(cast,clip,proof,requestSha256,seed){
+ fixedTakeAuthority(cast,clip);crowdExactCues(clip);
+ requireMatch(clip.file===`assets/voices/candidate-dialogue/${clip.clipId}.mp3`&&clip.authoringHelperSha256===sandaleAuthoringHelperSha256&&clip.requestSha256===requestSha256&&clip.rendererInputText===clip.text&&clip.rendererInputBasis==='exact authored source'&&clip.synthesisAttempt===1&&clip.seed===seed,'Sandale is not the exact current first take');
+ requireMatch(!['rescueParts','deliveryEditing','benchmarkOnly','recognitionVerification','actualInferenceText','nativeCompletion','exceptionAuthority','joinRetakeAuthority','codeSwitchParent','codeSwitchSegment'].some(key=>key in clip),'Unsupported Sandale edited/substituted take');
+ const synth=clip.synthesis,decode=clip.decode,approval=clip.approval;
+ requireMatch(synth?.languageId==='de'&&synth.device==='cuda'&&synth.precision==='fp16'&&synth.t3WeightPrecision==='float16'&&synth.conditioningPrecision==='float32'&&synth.referenceReconditionedForProfile===clip.profileId&&synth.referenceConditioningVerifiedFloat32===true&&synth.inferenceMode===true&&synth.cpuThreads===2&&synth.exaggeration===.5&&synth.temperature===.65&&synth.repetitionPenalty===3&&synth.cfgWeight===.6,'Sandale native recipe drift');
+ requireMatch(decode?.eosReached===true&&decode.attentionHooksBefore===0&&decode.attentionHooksAfter===0&&Number.isInteger(decode.generatedSpeechTokens)&&decode.generatedSpeechTokens>0&&decode.generatedSpeechTokens<=decode.maxSpeechTokens&&decode.maxSpeechTokens===proof.maxSpeechTokens&&!decode.modelEosRestoredSteps,'Sandale native EOS/token/hook evidence missing');
+ requireMatch(clip.asrLiteralWordExact===true&&clip.asrDevice==='cpu'&&clip.asrCpuThreads===1&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.asrModelSha256===proof.asrModelSha256&&clip.asrBeamSize===proof.asrBeamSize&&Number.isInteger(proof.asrReadings)&&proof.asrReadings>=1&&proof.asrReadings<=2&&clip.sampleRateHz===48000&&clip.channels===1&&clip.bitrateBitsPerSecond===128000&&Number.isInteger(clip.bytes)&&clip.bytes>0&&Number.isFinite(clip.durationSeconds)&&clip.durationSeconds>0&&clip.referenceLicense==='CC0-1.0'&&clip.modelLicense==='MIT','Sandale encoded ASR/delivery/license evidence missing');
+ requireMatch(clip.listening==='pending'&&!clip.listeningConfirmed&&!clip.listeningVerified&&!approval?.listeningConfirmed&&!approval?.listeningVerified,'Sandale perceptual listening not supplied');
+ requireMatch(sameJson(Object.keys(approval||{}).sort(),['clipId','date','encodedSha256','instruction','scope','status'])&&approval.status==='user-approved'&&approval.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(approval.date)&&approval.instruction?.trim()&&approval.clipId===clip.clipId&&approval.encodedSha256===clip.sha256,'Missing Sandale clip/hash-specific selection');
+ for(const key of ['rawReceiptSha256','encodedReceiptSha256','rawSha256','encodedSha256','profileJsonSha256','eosTraceSha256'])requireMatch(/^[a-f0-9]{64}$/.test(proof?.[key]),'Sandale byte evidence missing');
+ requireMatch(proof.rawSha256===clip.rawSha256&&proof.encodedSha256===clip.sha256&&proof.profileJsonSha256===clip.profileJsonSha256,'Sandale private/public lineage drift');
+}
+export function prepareSandaleManifest(cast,manifest,authorityProof,terminalProofs,selectionProof=null,sourceRoot=root){
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Sandale authority bytes changed');const authority=json(authorityProof.path);
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_SANDALE'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.sourceScope===sandaleScope&&authority.helperSha256===sandaleAuthoringHelperSha256&&authority.grantId?.trim()&&/^[a-f0-9]{64}$/.test(authority.adapterSha256)&&authority.protectedPublicPins&&Object.keys(authority.protectedPublicPins).length>0&&authority.maximumCallsPerClip===1&&authority.automaticRetries===0,'No Sandale-specific finite authority');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Sandale authored request changed');const snapshot={text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},{plan,authored}=sandaleFullPlan(cast,snapshot,sourceRoot);
+ const selected=authority.selectedClipIds;
+ requireMatch(Array.isArray(selected)&&selected.length>0&&selected.length<=8&&new Set(selected).size===selected.length&&selected.every(id=>authored.has(id))&&authority.maximumNativeCalls===selected.length&&authority.maximumAsrReadings===selected.length*2&&sameJson(authority.sourceSha256,plan.sourceSha256),'Sandale finite selected set/source limits changed');
+ const terminals={};for(const phase of ['plan','render','process']){const ref=terminalProofs?.[phase];requireMatch(ref&&hash(ref.path)===ref.sha256,'Missing Sandale phase receipt');const terminal=json(ref.path);requireMatch(terminal.phase===phase&&terminal.specificationSha256===authorityProof.sha256&&terminal.logsComplete===true&&terminal.producerSha256===authority.adapterSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.timedOut===false&&Array.isArray(terminal.survivingOwnedChildren)&&terminal.survivingOwnedChildren.length===0&&Array.isArray(terminal.ownedCleanupKills)&&terminal.ownedCleanupKills.length===0&&Array.isArray(terminal.postflightPinFailures)&&terminal.postflightPinFailures.length===0&&terminal.postflightProtectedPinsChecked===Object.keys(authority.protectedPublicPins||{}).length&&!terminal.supervisorError,'Sandale phase did not retire successfully');terminals[phase]={sha256:ref.sha256,exitCode:0,rootRetired:true,timedOut:false};}
+ const owned=sandaleManifestSlots(cast,manifest,authored),voice=manifest.voiceId,family=resolve(authority.musicRoot,plan.privateReviewFamily);
+ requireMatch(realpathSync(family)===family,'Sandale private family alias');
+ const privateFile=relative=>{const file=resolve(family,voice,relative);requireMatch(realpathSync(file)===file&&file.startsWith(family+sep)&&!lstatSync(file).isSymbolicLink(),'Sandale private receipt/media alias');return file;};
+ const requestPath=privateFile('requests.json'),requestSha256=hash(requestPath),request=json(requestPath);
+ requireMatch(request.sourceScope===sandaleScope&&request.requestedLineCount===4&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Sandale native four-slot plan changed');
+ const ownedSelected=selected.filter(id=>owned.some(row=>row.clipId===id)),rawDirectory=resolve(family,voice,'raw');
+ const rawNames=existsSync(rawDirectory)?readdirSync(rawDirectory):[],rawIds=rawNames.filter(name=>name.endsWith('.json')&&!name.endsWith('-eos-trace.json')).map(name=>name.slice(0,-5)),wavIds=rawNames.filter(name=>name.endsWith('.wav')).map(name=>name.slice(0,-4));
+ requireMatch(sameJson(rawIds.sort(),ownedSelected.slice().sort())&&sameJson(wavIds.sort(),ownedSelected.slice().sort()),'Sandale raw receipt/media set differs from finite allocation');
+ for(const id of ownedSelected){
+  const raw=json(privateFile(`raw/${id}.json`)),job=authored.get(id),seed=71000+owned.findIndex(row=>row.clipId===id);
+  requireMatch(Object.entries(job).every(([key,value])=>sameJson(raw[key],value))&&raw.requestSha256===requestSha256&&raw.authoringHelperSha256===sandaleAuthoringHelperSha256&&raw.rendererInputText===job.text&&raw.rendererInputBasis==='exact authored source'&&raw.synthesisAttempt===1&&raw.seed===seed&&authority.seeds?.[id]===seed&&raw.profileJsonSha256===authority.profileBindings?.[voice]?.profileJsonSha256&&hash(privateFile(`raw/${id}.wav`))===raw.rawSha256,'Sandale allocated raw take missing or misbound');
+ }
+ requireMatch(manifest.generatedLineCount===rawIds.length,'Sandale generated count differs from actual raw receipts');
+ let selection=null;const selections=new Map();
+ requireMatch(manifest.clips.length===0||selectionProof,'Sandale accepted clips require independent ROOT use selection');
+ if(selectionProof){
+  requireMatch(selectionProof.sha256===hash(selectionProof.path),'Sandale ROOT use selection bytes changed');selection=json(selectionProof.path);
+  requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&selection.instruction?.trim()&&Array.isArray(selection.clips),'Missing Sandale ROOT use selection');
+  for(const row of selection.clips){requireMatch(selected.includes(row.clipId)&&!selections.has(row.clipId)&&/^[a-f0-9]{64}$/.test(row.encodedSha256),'Sandale use selection duplicate or outside allocated slots');selections.set(row.clipId,row.encodedSha256);}
+  requireMatch(sameJson([...selections.keys()].filter(id=>owned.some(row=>row.clipId===id)).sort(),manifest.clips.map(row=>row.clipId).sort()),'Sandale manifest omits or adds selected own-voice clips');
+ }
+ const takes={};
+ for(const clip of manifest.clips){
+  requireMatch(ownedSelected.includes(clip.clipId),'Sandale clip outside finite generation selection');
+  requireMatch(selections.get(clip.clipId)===clip.sha256&&Object.entries({status:selection.status,scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:clip.clipId,encodedSha256:clip.sha256}).every(([key,value])=>clip.approval?.[key]===value),'Sandale approval differs from independent ROOT clip/hash selection');
+  const rawPath=privateFile(`raw/${clip.clipId}.json`),encodedPath=privateFile(`encoded/${clip.clipId}.json`),raw=json(rawPath),encoded=json(encodedPath),job=authored.get(clip.clipId),seed=71000+owned.findIndex(row=>row.clipId===clip.clipId);
+  for(const [key,value] of Object.entries(job))requireMatch(sameJson(raw[key],value)&&sameJson(encoded[key],value),'Sandale actual receipt source drift');
+  for(const [key,value] of Object.entries(raw))if(!['durationSeconds','status'].includes(key))requireMatch(sameJson(encoded[key],value),'Sandale raw/encoded lineage drift: '+key);
+  for(const [key,value] of Object.entries(encoded))requireMatch(sameJson(clip[key],value),'Sandale supplied clip differs from encoded receipt: '+key);
+  requireMatch(raw.requestSha256===requestSha256&&raw.profileJsonSha256===authority.profileBindings?.[voice]?.profileJsonSha256&&raw.seed===seed&&authority.seeds?.[clip.clipId]===seed&&raw.decode?.maxSpeechTokens===authority.tokenCaps?.[clip.clipId]&&encoded.asrModelSha256===authority.asrModelSha256,'Sandale actual recipe bindings changed');
+  const readings=encoded.asrReadings;requireMatch(Array.isArray(readings)&&(sameJson(readings.map(row=>row.beamSize),[1])||sameJson(readings.map(row=>row.beamSize),[1,5]))&&readings.at(-1).transcript===encoded.asr&&readings.at(-1).beamSize===encoded.asrBeamSize,'Sandale final encoded ASR reading mismatch');
+  const words=readings.at(-1).words?.flatMap(word=>[...word.word.matchAll(/[\p{L}\p{N}_]+/gu)].map(match=>({word:match[0].toLowerCase(),at:word.start,end:word.end})));
+  crowdExactCues(encoded);requireMatch(words?.length===encoded.wordCues.length&&encoded.wordCues.every((cue,i)=>words[i].word===cue.word.toLowerCase()&&words[i].at===cue.at&&words[i].end===cue.end),'Sandale cues differ from final encoded word timings');
+  const tracePath=privateFile(`raw/${clip.clipId}-eos-trace.json`),trace=json(tracePath);requireMatch(hash(tracePath)===raw.decode?.eosTraceSha256&&trace.clipId===clip.clipId&&trace.text===clip.text&&trace.profileId===clip.profileId&&trace.referenceSha256===clip.referenceSha256&&trace.modelRevision===clip.modelRevision&&policeEosTraceAuthority(raw.decode,trace),'Sandale native EOS trace missing or misbound');
+  requireMatch(hash(privateFile(`raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(privateFile(`encoded/${clip.clipId}.mp3`))===encoded.sha256&&readFileSync(privateFile(`encoded/${clip.clipId}.mp3`)).length===encoded.bytes,'Sandale actual audio bytes changed');
+  const proof={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,eosTraceSha256:hash(tracePath),maxSpeechTokens:raw.decode.maxSpeechTokens,asrModelSha256:encoded.asrModelSha256,asrBeamSize:encoded.asrBeamSize,asrReadings:readings.length};
+  sandaleClipAuthority(cast,clip,proof,requestSha256,seed);takes[clip.clipId]=proof;
+ }
+ for(const row of manifest.heldPrivate)requireMatch(ownedSelected.includes(row.clipId)?['held private; selected production fallback','technically verified; awaiting clip/hash-specific use selection'].includes(row.reason):row.reason==='not rendered; selected production fallback','Sandale hold reason misstates allocation');
+ return {schemaVersion:1,sourceScope:sandaleScope,voiceId:voice,profileId:manifest.profileId,fallback:'captions',requestedLineCount:4,generatedLineCount:ownedSelected.length,lineCount:manifest.clips.length,clips:manifest.clips.map(crowdPublicClip),heldPrivate:manifest.heldPrivate.map(row=>({...crowdPublicFields(row,crowdPublicJobFields),reason:row.reason})),approvedExistingReuse:[],sandaleAdmission:{status:'ROOT-verified-native-sandale',authoritySha256:authorityProof.sha256,grantId:authority.grantId,helperSha256:sandaleAuthoringHelperSha256,authoredPlanSha256:authority.requestSha256,selectionSha256:selectionProof?.sha256??null,requestSha256,sourceSha256:plan.sourceSha256,jobs:plan.jobs,selectedClipIds:selected,terminals,takes}};
+}
+export function sandaleRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root){
+ const authored=sandaleSourceMap(cast,sourceRoot),clips=[],seen=new Set();
+ for(const manifest of manifests){
+  const owned=sandaleManifestSlots(cast,manifest,authored),admission=manifest.sandaleAdmission;
+  requireMatch(!seen.has(manifest.voiceId),'Duplicate Sandale voice manifest');seen.add(manifest.voiceId);
+  requireMatch(admission?.status==='ROOT-verified-native-sandale'&&admission.helperSha256===sandaleAuthoringHelperSha256&&/^[a-f0-9]{64}$/.test(admission.authoritySha256)&&/^[a-f0-9]{64}$/.test(admission.authoredPlanSha256)&&/^[a-f0-9]{64}$/.test(admission.requestSha256)&&admission.jobs?.length===8&&new Set(admission.jobs.map(row=>row.clipId)).size===8&&admission.jobs.every(row=>authored.has(row.clipId)&&Object.keys(row).length===crowdPublicJobFields.length&&Object.entries(authored.get(row.clipId)).every(([key,value])=>sameJson(row[key],value)))&&sameJson(Object.keys(admission.takes||{}).sort(),manifest.clips.map(row=>row.clipId).sort()),'Sandale admission/source/take coverage missing');
+  requireMatch(Array.isArray(admission.selectedClipIds)&&new Set(admission.selectedClipIds).size===admission.selectedClipIds.length&&admission.selectedClipIds.every(id=>authored.has(id))&&manifest.generatedLineCount===admission.selectedClipIds.filter(id=>owned.some(row=>row.clipId===id)).length,'Sandale selected coverage drift');
+  requireMatch(['plan','render','process'].every(phase=>{const row=admission.terminals?.[phase];return row&&/^[a-f0-9]{64}$/.test(row.sha256)&&row.exitCode===0&&row.rootRetired===true&&row.timedOut===false}),'Sandale successful terminal evidence missing');
+  requireMatch(manifest.clips.length===0||/^[a-f0-9]{64}$/.test(admission.selectionSha256),'Sandale public selection evidence missing');
+  for(const clip of manifest.clips){requireMatch(admission.selectedClipIds.includes(clip.clipId),'Unselected Sandale take');sandaleClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256,71000+admission.jobs.filter(row=>row.voiceId===manifest.voiceId).findIndex(row=>row.clipId===clip.clipId));clips.push({...clip,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}
+ }
+ return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot,sourceRoot).replace('const crowdRecordings=','const sandaleRecordings=');
+}
+
+
 // SOURCE FRAGMENT for the existing curator; not a second executable pipeline.
 const crowdAuthoringHelperSha256='92fb925a7ebfa742d70c4a5b9ec3c9d8640a0d46b8f5c9c80bf1ed63f41546af';
 const crowdAdmissionPattern=/const crowdAdmissions=Object\.freeze\((\{[^\n]*\})\);\n/;
@@ -2124,6 +2238,18 @@ export function main(args=process.argv.slice(2)){
    if(!source.includes(' ...cityRecordings,'))source=source.replace('const recordings=Object.freeze({','const recordings=Object.freeze({\n ...cityRecordings,');
   }else requireMatch(source.match(pattern)?.[0]===block,'City recording lookup stale; run --sync');
  }
+ const sandaleDirectory=resolve(root,'assets/voices/candidate-dialogue'),sandaleNames=readdirSync(sandaleDirectory).filter(name=>name.endsWith('-sandale-manifest.json')).sort();
+ if(sandaleNames.length||source.includes('const sandaleAdmissions=')||source.includes('const sandaleRecordings=')||source.includes(' ...sandaleRecordings,')){
+  const ledger=JSON.parse(source.match(/const sandaleAdmissions=Object\.freeze\((\{[^\n]*\})\);\n/)?.[1]||'{}');
+  requireMatch(sandaleNames.length>0&&sameJson(Object.keys(ledger).sort(),sandaleNames.map(name=>`assets/voices/candidate-dialogue/${name}`).sort()),'Sandale manifest/ledger set is missing or stale');
+  const sandaleManifests=sandaleNames.map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,file=resolve(root,relative),digest=hash(file),manifest=json(file);requireMatch(name===`${manifest.voiceId}-sandale-manifest.json`&&ledger[relative]===digest,'Sandale manifest lacks its separate verified admission anchor');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:digest}});
+  const block=sandaleRecordingsBlock(cast,sandaleManifests,root,root),pattern=/const sandaleRecordings=Object\.freeze\([^\n]*\);\n/;
+  if(args.includes('--sync')){
+   source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
+   if(!source.includes(' ...sandaleRecordings,'))source=source.replace('const recordings=Object.freeze({','const recordings=Object.freeze({\n ...sandaleRecordings,');
+  }else requireMatch(source.match(pattern)?.[0]===block&&source.includes(' ...sandaleRecordings,'),'Sandale recording lookup stale; run --sync only after separate admission');
+ }
+
  const context={window:{},location:{search:'?voicePreview=1'},URLSearchParams};vm.runInNewContext(source,context);const catalog=context.window.GermanySimulatorAudioText;
  requireMatch(JSON.stringify(catalog.cityDialogue)===JSON.stringify(cityDialogueTable(cast)),'City dialogue public export missing/stale; run --sync');
  for(const [path,clip] of Object.entries(catalog.recordings)){
