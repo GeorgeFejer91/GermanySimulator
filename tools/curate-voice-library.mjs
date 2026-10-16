@@ -55,7 +55,7 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
 }
 // Sandale is a separate source scope; named-crowd grants never authorize it.
 const sandaleScope='sandale-roles-v1';
-const sandaleAuthoringHelperSha256='fd277526eac4c802ae1769d510b61536414470a9eda8432ec01c75a01d8128a4';
+const sandaleAuthoringHelperSha256='c40faafb6a62c5858b6a85c37d277b86d7d0efbdaf74ce61cc8b058a8524096c';
 const sandaleRoles=[['herr-sandale','towel-man','tourist-guenther-liegestuhl','towelMan'],['frau-sandale','towel-woman','touristin-walburga-handtuch','towelWoman']];
 export function sandaleSourceMap(cast,sourceRoot=root){
  const game=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),match=game.match(/const crowdArchetypes=(Object\.freeze\([\s\S]*?\));\r?\nconst crowdCharacterBarks=/),window={};
