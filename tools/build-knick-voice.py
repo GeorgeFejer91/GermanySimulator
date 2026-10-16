@@ -468,7 +468,38 @@ def generation_complete(take):
 
 
 def reference_license(profile_record):
-    for role in read(ROOT / "For-AI/VOICE-CAST.json")["roleProfiles"]:
+    cast = read(ROOT / "For-AI/VOICE-CAST.json")
+    if VOICE.startswith("stadt-"):
+        unknown = "unknown; selected profile does not record reference license"
+        owners = [character for character in cast.get("characters", []) if character.get("voiceId") == VOICE]
+        selected = cast.get("productionVoices", {}).get(VOICE, {})
+        if len(owners) != 1:
+            return unknown
+        owner = owners[0]
+        reference = owner.get("reference", {})
+        if (owner.get("gameCharacterId") != VOICE.replace("stadt-", "city-", 1)
+                or owner.get("secretTunnel", {}).get("profileId") != PROFILE
+                or selected.get("profileId") != PROFILE or BINDING.get("profileId") != PROFILE
+                or reference.get("releaseLicense") != "CC0-1.0"):
+            return unknown
+        original = BINDING.get("originalSha256", "")
+        normalized = BINDING.get("referenceSha256", "")
+        if (not isinstance(original, str) or not re.fullmatch(r"[0-9a-f]{64}", original)
+                or not isinstance(normalized, str) or not re.fullmatch(r"[0-9a-f]{64}", normalized)
+                or reference.get("workingReferenceSha256") != original
+                or selected.get("originalSha256") != original
+                or selected.get("referenceSha256") != normalized or REFERENCE_HASH != normalized):
+            return unknown
+        if profile_record and (profile_record.get("original_sha256") != original
+                or profile_record.get("reference_sha256") != normalized
+                or profile_record.get("id", PROFILE) != PROFILE):
+            return unknown
+        declarations = (BINDING.get("referenceLicense"), selected.get("referenceLicense"),
+                        profile_record.get("reference_license"), profile_record.get("license"))
+        if any(declaration and declaration != "CC0-1.0" for declaration in declarations):
+            return unknown
+        return "CC0-1.0"
+    for role in cast["roleProfiles"]:
         reference = role.get("reference", {})
         if (role.get("voiceId") == VOICE and role.get("secretTunnelProfileId") == PROFILE
                 and reference.get("workingReferenceSha256") == BINDING["originalSha256"]

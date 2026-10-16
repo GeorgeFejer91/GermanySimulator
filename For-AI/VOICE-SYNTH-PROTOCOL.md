@@ -1,5 +1,9 @@
 # Character voice production
 
+## City reference licence metadata (2026-10-16)
+
+The authoring producer resolves a city character's recorded `reference.releaseLicense` only when its unique owner, selected production profile and both reference hashes agree. Only the explicit `CC0-1.0` declaration qualifies for this path; missing, conflicting or mismatched evidence remains unknown. The existing noncity resolver is unchanged. This corrects future authoring metadata without rewriting historical receipts, granting a saved take admission or replacing private reference-byte verification.
+
 ## Rüdiger's bilingual pilot (2026-10-16)
 
 The exact `crowd-ruediger-rasenkante-berlin-01` recording uses his selected CC0-reference profile. Three dry native segments form one 7.5-second parent; there was no whole-parent TTS generation. Both complete-parent ASR readings spell the single authored `Schuh` as `shoe`. [Duden](https://www.duden.de/rechtschreibung/Schuh) and [Cambridge](https://dictionary.cambridge.org/pronunciation/english/shoe) give the same standard pronunciation, /ʃuː/. The original literal/strict failures and empty original cues remain intact.

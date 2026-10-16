@@ -57,6 +57,7 @@ jobs:
       - name: Check fixed character voices
         run: |
           python tests/test_sync_music_cast_index.py
+          python -B tests/test_city_reference_license.py
           python -B tests/test_sandale_source_adapter.py
           python -B tests/test_named_reactive_source_adapter.py
           node tools/curate-voice-library.mjs --check
