@@ -8,7 +8,7 @@
   "status": "exact selected next/first takes; listening NOT RUN",
   "requestedLineCount": 4,
   "generatedLineCount": 4,
-  "lineCount": 3,
+  "lineCount": 4,
   "clips": [
     {
       "originalRawReferenceLicense": "unknown; selected profile does not record reference license",
@@ -467,6 +467,174 @@
           }
         ],
         "originalRawReferenceLicense": "unknown; selected profile does not record reference license",
+        "rawReceiptSha256": "6b3e438e8c2c861e04736fd12acdd89650830ff551beece5b42a016ebaedeb2b",
+        "recoveryProofSha256": "72d72f7ca99e4c22b4f6a79100dd6f6963d858024215125b0a2a8dab0a9803db"
+      },
+      "processingHelperSha256": "19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9",
+      "processingAdapterSha256": "8c1cc6dbbc9c8d066f9fd1bd03f2eb4eece885b1335603c7de7d46732020b6a1",
+      "recoveryProofSha256": "72d72f7ca99e4c22b4f6a79100dd6f6963d858024215125b0a2a8dab0a9803db",
+      "clipId": "traffic-germany-01",
+      "voiceId": "verkehr-dieter-hupfer",
+      "actorId": "traffic-driver",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js clips[\"traffic-germany-01\"].text",
+      "text": "Augen auf, du Vollpfosten!",
+      "english": "Open your eyes, you complete moron!",
+      "profileId": "093079ce208a4f7e8f0d50bb5170ea1f",
+      "referenceSha256": "b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd",
+      "referenceOriginalSha256": "9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9",
+      "rendererInputText": "Augen auf, du Vollpfosten!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 77,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 43,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 44,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 3.56,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "0518d4daf58dc5a017247ad92129b913853e07254db4bbdd1f4d55c29dfddd50"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a86677d4574481c1e4ea3edd37832148d41ca9b215e5b269a13e34a97dfad324",
+      "profileJsonSha256": "bfbafb2660d5b94b2bb0ecd8ed618199257e599549d61a95dfe43997f10026e2",
+      "rawSha256": "04ae259102c86cef8eefafe363cfbba4eb91d7e993922f1ddadf183b52e13066",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 3.04,
+      "renderSeconds": 4.51,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "093079ce208a4f7e8f0d50bb5170ea1f",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.5:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -17.96,
+      "truePeakDbtp": -2.24,
+      "asr": "Augen auf, du voll Pfosten.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": false,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Augen auf, du voll Pfosten.",
+          "transcribeSeconds": 17.98,
+          "words": [
+            {
+              "word": " Augen",
+              "start": 0,
+              "end": 0.48
+            },
+            {
+              "word": " auf,",
+              "start": 0.48,
+              "end": 0.9
+            },
+            {
+              "word": " du",
+              "start": 1.14,
+              "end": 1.24
+            },
+            {
+              "word": " voll",
+              "start": 1.24,
+              "end": 1.54
+            },
+            {
+              "word": " Pfosten.",
+              "start": 1.54,
+              "end": 2.06
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [],
+      "sha256": "2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7",
+      "bytes": 49580,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/traffic-dialogue/traffic-germany-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "The user requested completion of the game with individually profiled character voices and explicitly authorized appropriately licensed voice cloning. ROOT selects these three exact technically verified traffic recordings for that existing scope. This is not a claim of perceptual listening or user audition of these files. The fourth nonliteral take stays held and unchanged.",
+        "clipId": "traffic-germany-01",
+        "encodedSha256": "2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7"
+      }
+    },
+    {
+      "originalRawReferenceLicense": "unknown; selected profile does not record reference license",
+      "referenceLicenseResolution": {
+        "status": "verified-existing-asset-license-resolution",
+        "metadataOwner": "For-AI/VOICE-CAST.json existingAssetProfiles",
+        "voiceId": "verkehr-dieter-hupfer",
+        "profileId": "093079ce208a4f7e8f0d50bb5170ea1f",
+        "referenceOriginalSha256": "9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc",
+        "referenceSha256": "b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd",
+        "license": "CC0-1.0",
+        "castSha256": "8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f",
+        "sourceComponents": [
+          {
+            "path": "assets/voices/thorsten-angry-nicht-weg.mp3",
+            "sha256": "61a7d884aef5d3029384f0bff3d0b78ae75464cdbdd9e848ac9020d48e94ebbf"
+          },
+          {
+            "path": "assets/voices/thorsten-angry-duemmer.mp3",
+            "sha256": "66d2613ee3f5e9f6de1c6b41e16dc27b9776b26520a772235977074db1e88141"
+          },
+          {
+            "path": "assets/voices/thorsten-angry-klappt-nicht.mp3",
+            "sha256": "853e5bd8f21336589461ab264eb3508be4a38c8dc75c7185aaa41c77bc3042f7"
+          }
+        ],
+        "originalRawReferenceLicense": "unknown; selected profile does not record reference license",
         "rawReceiptSha256": "2c41977ea141e8fc1c2e9c88a2d9c75004424e4642cae7e02980ef7343924f35",
         "recoveryProofSha256": "72d72f7ca99e4c22b4f6a79100dd6f6963d858024215125b0a2a8dab0a9803db"
       },
@@ -652,26 +820,7 @@
       }
     }
   ],
-  "heldPrivate": [
-    {
-      "clipId": "traffic-germany-01",
-      "voiceId": "verkehr-dieter-hupfer",
-      "actorId": "traffic-driver",
-      "region": "germany",
-      "slot": 0,
-      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js clips[\"traffic-germany-01\"].text",
-      "text": "Augen auf, du Vollpfosten!",
-      "english": "Open your eyes, you complete moron!",
-      "profileId": "093079ce208a4f7e8f0d50bb5170ea1f",
-      "referenceSha256": "b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd",
-      "referenceOriginalSha256": "9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc",
-      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
-      "processing": null,
-      "reason": "held private; literal words/levels not eligible",
-      "candidateSha256": "2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7"
-    }
-  ],
+  "heldPrivate": [],
   "approvedExistingReuse": [],
   "voiceGapAdmission": {
     "status": "ROOT-verified-finite-voice-gap12",
@@ -726,6 +875,17 @@
         "rawSha256": "40b9063ddf1d441072b76c412a0a3ac05cf426da4f9b4187a87ebdc3d47fae1b",
         "encodedSha256": "b97bf8bd69974320458877aa3830b2d56d1ac8cfddd89e26176fa5ad8a8ae179",
         "profileJsonSha256": "bfbafb2660d5b94b2bb0ecd8ed618199257e599549d61a95dfe43997f10026e2"
+      },
+      "traffic-germany-01": {
+        "rawReceiptSha256": "6b3e438e8c2c861e04736fd12acdd89650830ff551beece5b42a016ebaedeb2b",
+        "encodedReceiptSha256": "5cef48046c1440d5ffd6a018d5d16acd6e9b64c90d25791e98e268169dfa5c43",
+        "rawSha256": "04ae259102c86cef8eefafe363cfbba4eb91d7e993922f1ddadf183b52e13066",
+        "encodedSha256": "2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7",
+        "profileJsonSha256": "bfbafb2660d5b94b2bb0ecd8ed618199257e599549d61a95dfe43997f10026e2",
+        "retainedSourceWordAlignment": {
+          "text": "{\"kind\":\"voice-gap-retained-source-word-alignment-v1\",\"ruleRevision\":\"ordered-adjacent-measured-tokens-to-one-source-word-v1\",\"bindings\":{\"family\":\"traffic-dialogue\",\"clipId\":\"traffic-germany-01\",\"voiceId\":\"verkehr-dieter-hupfer\",\"actorId\":\"traffic-driver\",\"region\":\"germany\",\"slot\":0,\"sourceLocator\":\"For-AI/AUDIO-TEXT-LIBRARY.js clips[\\\"traffic-germany-01\\\"].text\",\"text\":\"Augen auf, du Vollpfosten!\",\"english\":\"Open your eyes, you complete moron!\",\"profileId\":\"093079ce208a4f7e8f0d50bb5170ea1f\",\"referenceSha256\":\"b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd\",\"referenceOriginalSha256\":\"9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc\",\"renderer\":\"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\"modelRevision\":\"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\"processing\":null,\"authoringHelperSha256\":\"19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9\",\"encodedSha256\":\"2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7\",\"encodedReceiptSha256\":\"5cef48046c1440d5ffd6a018d5d16acd6e9b64c90d25791e98e268169dfa5c43\",\"rawReceiptSha256\":\"6b3e438e8c2c861e04736fd12acdd89650830ff551beece5b42a016ebaedeb2b\",\"rawSha256\":\"04ae259102c86cef8eefafe363cfbba4eb91d7e993922f1ddadf183b52e13066\",\"requestSha256\":\"a86677d4574481c1e4ea3edd37832148d41ca9b215e5b269a13e34a97dfad324\",\"profileJsonSha256\":\"bfbafb2660d5b94b2bb0ecd8ed618199257e599549d61a95dfe43997f10026e2\",\"synthesisAttempt\":1,\"seed\":71002,\"durationSeconds\":3.04,\"selectedReadingIndex\":0,\"selectedBeamSize\":1,\"selectedReadingSha256\":\"98d941225ae19d0f0658a34c8d6b4db7debccc866af457c66311c6df5d9f89dc\",\"selectedWordArraySha256\":\"3c903ba01e22a643bd841f905cb8371163597affea3083d4fe236a22e1984ca9\",\"sourcePins\":{\"game.js\":\"2e0b82b73ab2c23d4922d28650edda6ebff730c88d0f1400348b1317e3339cf5\",\"For-AI/VOICE-CAST.json\":\"8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f\",\"For-AI/AUDIO-TEXT-LIBRARY.js\":\"267388a27742baa2ed1be1515d5fb5095e4618c32f357541912336e2c1bc9980\"}},\"mapping\":[{\"sourceWordIndex\":0,\"observedStart\":0,\"observedEndExclusive\":1},{\"sourceWordIndex\":1,\"observedStart\":1,\"observedEndExclusive\":2},{\"sourceWordIndex\":2,\"observedStart\":2,\"observedEndExclusive\":3},{\"sourceWordIndex\":3,\"observedStart\":3,\"observedEndExclusive\":5}],\"wordCues\":[{\"at\":0.0,\"end\":0.48,\"charIndex\":0,\"word\":\"Augen\"},{\"at\":0.48,\"end\":0.9,\"charIndex\":6,\"word\":\"auf\"},{\"at\":1.14,\"end\":1.24,\"charIndex\":11,\"word\":\"du\"},{\"at\":1.24,\"end\":2.06,\"charIndex\":14,\"word\":\"Vollpfosten\"}]}",
+          "sha256": "bc3ed05d8e7b39aa1ff1e1e452b2332e6db752db1c0fc3e98646665ab6475b15"
+        }
       },
       "traffic-germany-02": {
         "rawReceiptSha256": "2c41977ea141e8fc1c2e9c88a2d9c75004424e4642cae7e02980ef7343924f35",

@@ -77,6 +77,48 @@ The German9 manifest at `assets/voices/quiz-segments/quiz-german9-manifest.json`
 
 These are question segments. A full quiz prompt still requires its exact same-speaker approach, context and question before `candidateSequence` selects recorded playback. Missing parts retain that quiz speaker's caption fallback; four admitted questions do not establish four complete spoken encounters or coverage of all724 eligible question slots. The curator checks the public manifest anchor, current owned German/English source and profile fields, encoded hashes and generated lookup. Historical whole-file hashes remain provenance; unrelated later source edits must not invalidate these exact owned rows. Raw-WAV and final-MP3 durations each match their own receipt, without assuming that encoding preserves duration.
 
+### Retained compound timing evidence (2026-10-16)
+
+A separately reviewed finite two-take supplement covers retained traffic
+`Vollpfosten` and police `STEHENBLEIBEN`. It independently binds original
+receipt/request/source/profile/candidate and selected last-reading bytes, retain
+all original false literal flags and empty receipt cues, and recompute complete
+ordered source-word ranges from the published measured word payload. Only
+adjacent measured tokens with exact touching endpoints may form ONE authored
+word; silence between different source words remains unchanged. A single ASR
+token cannot be split across source words. Generic joined-character agreement,
+boolean self-attestation, a grouping-helper result or the existing Wolfgang
+exception does not authorize this path. Existing fixed-voice/profile/recipe,
+EOS, levels, ownership, selection, source and complete-cue gates remain strict.
+
+The finite authority table contains only the independently
+reviewed retained traffic Germany01 and police Germany01 bindings. It admits
+no other take or grouping. Original false literal flags and empty receipt cues
+remain unchanged. Any actual collection/publication still requires the existing
+byte-verified collector, exact use selection and all original source/profile,
+recipe, EOS, levels and retired-phase proofs; table population alone is not
+admission. Source tests use the exact full retained selected readings, with
+actual byte replay requiring an explicitly supplied owned asset fixture root.
+ROOT's actual collector admits exactly those two existing encoded takes after
+35 public byte/provenance checks and 12 real collector/rollback checks pass.
+Traffic now has four selected takes; the gap police family has three selected
+and five held. A further 35 checks pass against the admitted public files.
+No new synthesis or ASR was performed. Original literal-false flags and empty
+raw cues remain unchanged; only the recorded projection receives independently
+verified complete source-word cues. These checks do not establish perceived
+pronunciation, listening quality or native playback accuracy.
+When expanding an existing validated target-family manifest, its exact prior
+member recordings alone may roll `provenanceManifestSha256` from that actual
+old manifest's anchored digest to the new validated serialized manifest's
+digest. The provenance path, old selected audio hashes and every other old
+recording field stay exact. Unrelated families and historical police records
+receive no exception. Existing write/swap/rollback order and actual encoded-byte
+verification remain in force; source-only and controlled fixture checks do not
+establish a successful native collection, installation, pronunciation or replay.
+Only the exact independent binding supplement and reviewed collector/public
+replay checks authorize the selected projection's verified source-word cues
+with explicit provenance. Measured ASR grouping does not
+establish pronunciation, perceived voice quality or native playback accuracy.
 ## Fixed voices and the agent workflow (2026-10-11)
 
 ### JWD neighbor speech production (2026-10-13)

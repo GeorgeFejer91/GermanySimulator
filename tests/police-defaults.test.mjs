@@ -35,7 +35,7 @@ test('police defaults resolve only exact approved actor, source and final bytes'
   assert.equal(row.source,clip.text);
  }
  voiceGapManifestAuthority(cast,gap,root);
- assert.deepEqual(gap.clips.map(row=>row.clipId).sort(),['polizei-heinrich-wachtmeister-berlin-04','polizei-heinrich-wachtmeister-germany-04']);
+ assert.deepEqual(gap.clips.map(row=>row.clipId).sort(),['polizei-heinrich-wachtmeister-berlin-04','polizei-heinrich-wachtmeister-germany-01','polizei-heinrich-wachtmeister-germany-04']);
  for(const held of manifest.heldPrivate){
   const replacement=gap.clips.find(row=>row.clipId===held.clipId),path=replacement?'./'+replacement.file:null;
   if(replacement){assert.equal(replacement.voiceId,held.voiceId);assert.equal(replacement.text,held.text);assert.equal(replacement.english,held.english);assert.equal(catalog.recordings[path].sha256,replacement.sha256);}

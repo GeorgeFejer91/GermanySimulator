@@ -196,7 +196,7 @@ test('redundant bindings stay removed and selected traffic replacements resolve'
  assert.equal(voices['amt-brunhilde-knick'].generationAllowed,true);
  assert.equal(matchesProduction(cast,{voiceId:'frau-knick',profileId:'a137f87bde844d36b18e3a59c412cf2c'}),false);
  const admitted=JSON.parse(readFileSync('assets/voices/traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json')).clips;
- assert.equal(admitted.length,3);
+ assert.deepEqual(admitted.map(row=>row.clipId).sort(),['traffic-berlin-01','traffic-berlin-02','traffic-germany-01','traffic-germany-02']);
  for(const id of ['traffic-berlin-01','traffic-berlin-02','traffic-germany-01','traffic-germany-02']){
   const clip=catalog.clips[id],selected=admitted.find(row=>row.clipId===id),path=selected?'./'+selected.file:null;
   assert(clip.text&&clip.english);assert.equal(clip.recording,path);assert.equal(clip.path,path||undefined);

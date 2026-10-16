@@ -1214,17 +1214,61 @@ export function voiceGapSources(cast,family,sourceRoot=root){
  }));
 }
 
-function voiceGapClipAuthority(cast,clip,config){
- fixedTakeAuthority(cast,clip);crowdExactCues(clip);
+const retainedCompoundAuthorities=Object.freeze({"traffic-germany-01":{"family":"traffic-dialogue","clipId":"traffic-germany-01","voiceId":"verkehr-dieter-hupfer","actorId":"traffic-driver","region":"germany","slot":0,"sourceLocator":"For-AI/AUDIO-TEXT-LIBRARY.js clips[\"traffic-germany-01\"].text","text":"Augen auf, du Vollpfosten!","english":"Open your eyes, you complete moron!","profileId":"093079ce208a4f7e8f0d50bb5170ea1f","referenceSha256":"b21959ef323483ad5c5eadcaf1ecdabe74b312d9ec9997a422ae21a8dfdbdbdd","referenceOriginalSha256":"9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc","renderer":"ResembleAI/Chatterbox Multilingual V2 0.1.7","modelRevision":"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18","processing":null,"authoringHelperSha256":"19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9","encodedSha256":"2d642c90f6b425868dd0fa747a29ccc9011bbddd8a1a2e1e6fdba12bea0a7fa7","encodedReceiptSha256":"5cef48046c1440d5ffd6a018d5d16acd6e9b64c90d25791e98e268169dfa5c43","rawReceiptSha256":"6b3e438e8c2c861e04736fd12acdd89650830ff551beece5b42a016ebaedeb2b","rawSha256":"04ae259102c86cef8eefafe363cfbba4eb91d7e993922f1ddadf183b52e13066","requestSha256":"a86677d4574481c1e4ea3edd37832148d41ca9b215e5b269a13e34a97dfad324","profileJsonSha256":"bfbafb2660d5b94b2bb0ecd8ed618199257e599549d61a95dfe43997f10026e2","synthesisAttempt":1,"seed":71002,"durationSeconds":3.04,"selectedReadingIndex":0,"selectedBeamSize":1,"selectedReadingSha256":"98d941225ae19d0f0658a34c8d6b4db7debccc866af457c66311c6df5d9f89dc","selectedWordArraySha256":"3c903ba01e22a643bd841f905cb8371163597affea3083d4fe236a22e1984ca9","sourcePins":{"game.js":"2e0b82b73ab2c23d4922d28650edda6ebff730c88d0f1400348b1317e3339cf5","For-AI/VOICE-CAST.json":"8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f","For-AI/AUDIO-TEXT-LIBRARY.js":"267388a27742baa2ed1be1515d5fb5095e4618c32f357541912336e2c1bc9980"}},"polizei-heinrich-wachtmeister-germany-01":{"family":"police-dialogue","clipId":"polizei-heinrich-wachtmeister-germany-01","voiceId":"polizei-heinrich-wachtmeister","actorId":"police","region":"germany","slot":0,"sourceLocator":"game.js policeBarks.germany[0]","text":"HALT! STEHENBLEIBEN!","english":"Stop! Stop immediately!","profileId":"24b741bbe55d4f3a843aa481c3459a96","referenceSha256":"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7","referenceOriginalSha256":"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e","renderer":"ResembleAI/Chatterbox Multilingual V2 0.1.7","modelRevision":"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18","processing":null,"authoringHelperSha256":"19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9","encodedSha256":"c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d","encodedReceiptSha256":"e3799c96387e1abff03d896dd16b65504db55eb819d0e512f1d2beb72d312005","rawReceiptSha256":"2d72f629bd08003551b40aa6e69490a1c64a12cb7302cf2530a90211f17bfd03","rawSha256":"f7df70b5aa541eff9a8f9c3adf6a17134e25d1818a673dbd41dad87dbbc53545","requestSha256":"e27cbf36f6d1aeb0ef039ab62622832df955f88a723c1349ba945888be47e297","profileJsonSha256":"d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf","synthesisAttempt":2,"seed":171005,"durationSeconds":2.8,"selectedReadingIndex":0,"selectedBeamSize":1,"selectedReadingSha256":"250ee98bf68a99349cc18d75c8f264d27a9bd328a9efdfd37b4d96121ed8a675","selectedWordArraySha256":"9bd1cfa32d85ea5c2632e312217dffc106b0ec482e7b82024c57a04f38ee93c4","sourcePins":{"game.js":"2e0b82b73ab2c23d4922d28650edda6ebff730c88d0f1400348b1317e3339cf5","For-AI/VOICE-CAST.json":"8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f","For-AI/AUDIO-TEXT-LIBRARY.js":"267388a27742baa2ed1be1515d5fb5095e4618c32f357541912336e2c1bc9980"}}});
+const retainedCompoundIds=Object.freeze({'traffic-germany-01':'traffic-dialogue','polizei-heinrich-wachtmeister-germany-01':'police-dialogue'});
+export function alignRetainedSourceWords(text,reading,duration){
+ const source=typeof text==='string'?[...text.matchAll(/[\p{L}\p{N}_]+/gu)]:[],words=reading?.words;
+ requireMatch(source.length>0&&Array.isArray(words)&&words.length>0&&Number.isFinite(duration)&&duration>0,'Missing retained source/timing');
+ const heard=[];let previousEnd=0;
+ for(const word of words){
+  const tokens=typeof word?.word==='string'?[...word.word.matchAll(/[\p{L}\p{N}_]+/gu)]:[];
+  requireMatch(tokens.length===1&&Number.isFinite(word.start)&&Number.isFinite(word.end)&&word.start>=previousEnd&&word.end>word.start&&word.end<=duration,'Invalid retained observed word/timing');
+  heard.push(tokens[0][0].toLowerCase());previousEnd=word.end;
+ }
+ const transcript=typeof reading.transcript==='string'?[...reading.transcript.matchAll(/[\p{L}\p{N}_]+/gu)].map(word=>word[0].toLowerCase()):[];
+ requireMatch(sameJson(transcript,heard),'Retained timed words differ from selected transcript');
+ const mapping=[],wordCues=[];let cursor=0;
+ for(const word of source){
+  const first=cursor,expected=word[0].toLowerCase();let observed='';
+  while(cursor<heard.length&&observed!==expected){
+   if(cursor>first)requireMatch(words[cursor].start===words[cursor-1].end,'Gap inside retained compound');
+   observed+=heard[cursor];requireMatch(expected.startsWith(observed),'Changed retained word or one observed word spans source words');cursor++;
+  }
+  requireMatch(observed===expected&&cursor>first,'Incomplete retained source word');
+  mapping.push({sourceWordIndex:mapping.length,observedStart:first,observedEndExclusive:cursor});
+  wordCues.push({at:words[first].start,end:words[cursor-1].end,charIndex:word.index,word:word[0]});
+ }
+ requireMatch(cursor===words.length,'Extra retained observed words');return {mapping,wordCues};
+}
+export function verifiedRetainedCompoundCues(clip,take,requestSha256){
+ const supplement=take?.retainedSourceWordAlignment;if(supplement===undefined)return null;
+ const family=Object.hasOwn(retainedCompoundIds,clip.clipId)?retainedCompoundIds[clip.clipId]:null;
+ const authority=Object.hasOwn(retainedCompoundAuthorities,clip.clipId)?retainedCompoundAuthorities[clip.clipId]:null;
+ requireMatch(family&&authority,'Retained compound authority is not sealed');
+ requireMatch(clip.asrWordExact===true&&clip.asrLiteralWordExact===false&&Array.isArray(clip.wordCues)&&clip.wordCues.length===0,'Retained original flags/cues changed');
+ requireMatch(typeof supplement?.text==='string'&&supplement.sha256===textHash(supplement.text),'Changed retained alignment snapshot');
+ const readingIndex=clip.asrReadings?.length-1,reading=clip.asrReadings?.[readingIndex];
+ requireMatch(reading&&Array.isArray(reading.words)&&reading.words.length>0&&readingIndex>=0&&reading.beamSize===clip.asrBeamSize&&reading.transcript===clip.asr,'Retained selected reading changed');
+ const bindings={family,clipId:clip.clipId,voiceId:clip.voiceId,actorId:clip.actorId,region:clip.region,slot:clip.slot,sourceLocator:clip.sourceLocator,text:clip.text,english:clip.english,profileId:clip.profileId,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,renderer:clip.renderer,modelRevision:clip.modelRevision,processing:clip.processing??null,authoringHelperSha256:clip.authoringHelperSha256,encodedSha256:clip.sha256,encodedReceiptSha256:take.encodedReceiptSha256,rawReceiptSha256:take.rawReceiptSha256,rawSha256:clip.rawSha256,requestSha256,profileJsonSha256:clip.profileJsonSha256,synthesisAttempt:clip.synthesisAttempt,seed:clip.seed,durationSeconds:clip.durationSeconds,selectedReadingIndex:readingIndex,selectedBeamSize:reading.beamSize,selectedReadingSha256:textHash(JSON.stringify(reading)),selectedWordArraySha256:textHash(JSON.stringify(reading.words)),sourcePins:voiceGapFrozenSourcePins};
+ requireMatch(clip.requestSha256===requestSha256&&take.encodedSha256===clip.sha256&&take.rawSha256===clip.rawSha256&&take.profileJsonSha256===clip.profileJsonSha256,'Retained receipt/request lineage changed');
+ requireMatch(sameJson(Object.keys(authority).sort(),Object.keys(bindings).sort())&&Object.entries(bindings).every(([key,value])=>sameJson(authority[key],value)),'Foreign or stale retained alignment authority');
+ const aligned=alignRetainedSourceWords(clip.text,reading,clip.durationSeconds);
+ requireMatch(aligned.mapping.some(row=>row.observedEndExclusive-row.observedStart>1),'Retained proof has no compound grouping');
+ const expected={kind:'voice-gap-retained-source-word-alignment-v1',ruleRevision:'ordered-adjacent-measured-tokens-to-one-source-word-v1',bindings,...aligned};
+ requireMatch(sameJson(JSON.parse(supplement.text),expected),'Retained alignment payload differs from independent recomputation');return aligned.wordCues;
+}
+function voiceGapClipAuthority(cast,clip,config,take=null,requestSha256=null){
+ fixedTakeAuthority(cast,clip);const aligned=verifiedRetainedCompoundCues(clip,take,requestSha256),wordCues=aligned??clip.wordCues;crowdExactCues({...clip,wordCues});
  const beams=clip.asrReadings?.map(row=>row.beamSize);
  requireMatch(clip.voiceId===config.voiceId&&clip.synthesisAttempt===config.attempt&&clip.authoringHelperSha256===voiceGapProducerSha256
-  &&clip.rendererInputText===clip.text&&clip.decode?.eosReached===true&&clip.asrLiteralWordExact===true
+  &&clip.rendererInputText===clip.text&&clip.decode?.eosReached===true&&(clip.asrLiteralWordExact===true||aligned!==null)
   &&clip.asrDevice==='cpu'&&clip.asrComputeType==='int8'&&clip.asrCpuThreads===1&&clip.asrLanguageId==='de'&&clip.asrScriptPrompt===null
   &&clip.asrModelSha256==='e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da'
   &&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&(sameJson(beams,[1])||sameJson(beams,[1,5]))
   &&clip.asrBeamSize===beams.at(-1)&&clip.asr===clip.asrReadings.at(-1).transcript
   &&clip.approval?.status==='user-approved'&&clip.approval.scope==='whole-game-fixed-voice-cloning'
-  &&clip.approval.clipId===clip.clipId&&clip.approval.encodedSha256===clip.sha256,'Voice-gap take lacks exact owned literal EOS/ASR/use proof');
+  &&clip.approval.clipId===clip.clipId&&clip.approval.encodedSha256===clip.sha256,'Voice-gap take lacks exact owned literal/aligned EOS/ASR/use proof');
+ return wordCues;
 }
 
 export function voiceGapManifestAuthority(cast,manifest,sourceRoot=root){
@@ -1242,7 +1286,7 @@ export function voiceGapManifestAuthority(cast,manifest,sourceRoot=root){
   &&(proof.asrLedgerSha256===null||/^[a-f0-9]{64}$/.test(proof.asrLedgerSha256)),'Missing typed gap finite phase/source proof');
  requireMatch(sameJson(Object.keys(proof.takes||{}).sort(),manifest.clips.map(row=>row.clipId).sort()),'Gap public receipt proof coverage changed');
  for(const clip of manifest.clips){
-  const take=proof.takes[clip.clipId];voiceGapClipAuthority(cast,clip,config);
+  const take=proof.takes[clip.clipId];voiceGapClipAuthority(cast,clip,config,take,proof.frozenRequestSha256);
   if(trafficRecovered)verifyTrafficEncodedLicense(clip,take?.rawReceiptSha256,trafficLicenseRecoveryExpected);
   requireMatch(clip.file===`assets/voices/${config.assetFamily}/${clip.clipId}.mp3`&&clip.requestSha256===proof.frozenRequestSha256&&clip.seed===71000+[...jobs.keys()].indexOf(clip.clipId)+(config.attempt-1)*100000
    &&['rawReceiptSha256','encodedReceiptSha256','rawSha256','encodedSha256','profileJsonSha256'].every(key=>/^[a-f0-9]{64}$/.test(take?.[key]))
@@ -1320,6 +1364,8 @@ export function collectVoiceGapPrivateManifestProposals(cast,authorityProof,term
  const selection=selectionProof?json(selectionProof.path):null;
  if(selectionProof)requireMatch(selectionProof.sha256===hash(selectionProof.path)&&selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&selection.instruction?.trim()&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&Array.isArray(selection.clips),'Gap exact clip/hash use selection invalid');
  const selected=new Map((selection?.clips||[]).map(row=>[row.clipId,row.encodedSha256]));requireMatch(selected.size===(selection?.clips||[]).length&&[...selected].every(([id,value])=>ids.includes(id)&&/^[a-f0-9]{64}$/.test(value)),'Gap selection duplicate/foreign');
+ const alignments=selection?.retainedSourceWordAlignments??{};
+ requireMatch(alignments&&typeof alignments==='object'&&!Array.isArray(alignments)&&Object.keys(alignments).every(id=>Object.hasOwn(retainedCompoundIds,id)&&selected.has(id)),'Foreign/unselected retained alignment supplement');
  const clips=[],heldPrivate=[],takes={};
  for(let index=0;index<jobs.length;index++){
   const job=jobs[index],rawPath=privateFile('raw/'+job.clipId+'.json'),raw=json(rawPath),tracePath=privateFile('raw/'+job.clipId+'-eos-trace.json'),trace=json(tracePath),s=raw.synthesis;
@@ -1342,20 +1388,23 @@ export function collectVoiceGapPrivateManifestProposals(cast,authorityProof,term
    &&sameJson(beams,encoded.asrReadings.map(row=>row.beamSize))&&(sameJson(beams,[1])||sameJson(beams,[1,5]))&&encoded.asrDevice==='cpu'&&encoded.asrComputeType==='int8'&&encoded.asrCpuThreads===1&&encoded.asrLanguageId==='de'&&encoded.asrScriptPrompt===null&&encoded.asrModelSha256===authority.asrModelSha256&&['int8','int8_float32'].includes(encoded.asrEffectiveComputeType)
    &&encoded.asrReadings.every(row=>typeof row.transcript==='string'&&row.transcript.trim())&&encoded.asrBeamSize===beams.at(-1)&&encoded.asr===encoded.asrReadings.at(-1).transcript,'Gap encoded raw/ASR/audio lineage changed');
   requireMatch(Number.isFinite(encoded.durationSeconds)&&encoded.durationSeconds>0&&processed.durationSeconds===encoded.durationSeconds&&processed.encodedReceiptSha256===hash(encodedPath)&&processed.encodedSha256===encoded.sha256&&processed.asrWordExact===encoded.asrWordExact&&processed.asrReadings===encoded.asrReadings.length&&processed.wordCueCount===encoded.wordCues?.length&&processed.levelsPass===(Math.abs(encoded.integratedLufs+18)<=.3&&encoded.truePeakDbtp<=-1.5),'Gap process summary encoded facts/duration changed');
-  if(encoded.asrWordExact!==true||encoded.asrLiteralWordExact!==true||spokenWords(job.text)!==spokenWords(encoded.asr)||Math.abs(encoded.integratedLufs+18)>.3||encoded.truePeakDbtp>-1.5){heldPrivate.push({...job,reason:'held private; literal words/levels not eligible',candidateSha256:encoded.sha256});continue;}
+  const take={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,...(prior?{priorSynthesisAttempt:1,priorRawReceiptSha256:prior.rawReceiptSha256}:{} )};
+  if(Object.hasOwn(alignments,job.clipId))take.retainedSourceWordAlignment=alignments[job.clipId];
+  const aligned=verifiedRetainedCompoundCues(encoded,take,frozenHash);
+  if(encoded.asrWordExact!==true||(encoded.asrLiteralWordExact!==true&&aligned===null)||spokenWords(job.text)!==spokenWords(encoded.asr)||Math.abs(encoded.integratedLufs+18)>.3||encoded.truePeakDbtp>-1.5){heldPrivate.push({...job,reason:'held private; literal words/levels not eligible',candidateSha256:encoded.sha256});continue;}
   if(selected.get(job.clipId)!==encoded.sha256){heldPrivate.push({...job,reason:'technically eligible; not selected',candidateSha256:encoded.sha256});continue;}
   const clip=Object.fromEntries(voiceGapPublicTakeFields.filter(key=>Object.hasOwn(encoded,key)).map(key=>[key,encoded[key]]));
-  clip.file=`assets/voices/${config.assetFamily}/${job.clipId}.mp3`;clip.approval={status:'user-approved',scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:job.clipId,encodedSha256:encoded.sha256};voiceGapClipAuthority(cast,clip,config);clips.push(clip);
-  takes[job.clipId]={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,...(prior?{priorSynthesisAttempt:1,priorRawReceiptSha256:prior.rawReceiptSha256}:{} )};
+  clip.file=`assets/voices/${config.assetFamily}/${job.clipId}.mp3`;clip.approval={status:'user-approved',scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:job.clipId,encodedSha256:encoded.sha256};voiceGapClipAuthority(cast,clip,config,take,frozenHash);clips.push(clip);
+  takes[job.clipId]=take;
  }
  const manifest={schemaVersion:1,kind:'voice-gap12',family:authority.family,voiceId:config.voiceId,profileId:cast.productionVoices[config.voiceId].profileId,fallback:'captions',status:'exact selected next/first takes; listening NOT RUN',requestedLineCount:config.count,generatedLineCount:config.count,lineCount:clips.length,clips,heldPrivate,approvedExistingReuse:[],voiceGapAdmission:{status:'ROOT-verified-finite-voice-gap12',authoritySha256:authorityProof.sha256,authoredPlanSha256:authority.requestSha256,frozenRequestSha256:frozenHash,producerSha256:voiceGapProducerSha256,adapterSha256:voiceGapAdapterSha256,sourcePins:pins,terminals,nativeLedgerSha256:hash(ledgerPath),asrLedgerSha256:hasAsr?hash(asrPath):null,takes,...(trafficRecovery?{trafficLicenseRecovery:trafficLicenseRecoveryExpected}:{})}};
  voiceGapManifestAuthority(cast,manifest,sourceRoot);return {status:'private typed voice-gap proposal; no public copy',manifest,counts:{requested:config.count,generated:config.count,selected:clips.length,held:heldPrivate.length}};
 }
 
 export function voiceGapRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root){
- const groups={'police-dialogue':[],'traffic-dialogue':[]},seen=new Set();
- for(const manifest of manifests){voiceGapManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate gap selected clip');seen.add(clip.clipId);groups[manifest.family].push({...clip,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}}
- const expressions=Object.entries(groups).map(([family,clips])=>{const block=fixedRecordingsBlock(cast,{clips},family,assetRoot,sourceRoot);return block.slice(block.indexOf('=')+1).trim().slice(0,-1)});
+ const groups={'police-dialogue':{clips:[],voiceGapEvidence:{}},'traffic-dialogue':{clips:[],voiceGapEvidence:{}}},seen=new Set();
+ for(const manifest of manifests){voiceGapManifestAuthority(cast,manifest,sourceRoot);for(const clip of manifest.clips){requireMatch(!seen.has(clip.clipId),'Duplicate gap selected clip');seen.add(clip.clipId);const group=groups[manifest.family];group.clips.push({...clip,provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});group.voiceGapEvidence[clip.clipId]={take:manifest.voiceGapAdmission.takes[clip.clipId],requestSha256:manifest.voiceGapAdmission.frozenRequestSha256};}}
+ const expressions=Object.entries(groups).map(([family,manifest])=>{const block=fixedRecordingsBlock(cast,manifest,family,assetRoot,sourceRoot);return block.slice(block.indexOf('=')+1).trim().slice(0,-1)});
  return 'const voiceGapRecordings=Object.freeze({...'+expressions.join(',...')+'});\n';
 }
 
@@ -1379,6 +1428,24 @@ function installVoiceGapCatalog(source,block,anchors){
  return next;
 }
 
+export function verifyVoiceGapCatalogConservation(oldRecords,newRecords,{prior,manifest,relative,priorManifestText,nextManifestText}){
+ const config=voiceGapConfigs[manifest.family],nextDigest=textHash(nextManifestText),members=new Map();
+ requireMatch(config&&relative===`assets/voices/${config.assetFamily}/${config.manifest}`&&sameJson(JSON.parse(nextManifestText),manifest),'Gap rollover target/serialized manifest changed');
+ if(prior){
+  const {provenanceManifest,provenanceManifestSha256,...body}=prior;
+  requireMatch(typeof priorManifestText==='string'&&provenanceManifest===relative&&provenanceManifestSha256===textHash(priorManifestText)&&sameJson(JSON.parse(priorManifestText),body)&&prior.family===manifest.family&&prior.voiceId===manifest.voiceId,'Gap rollover prior manifest/anchor changed');
+  for(const clip of prior.clips){
+   const next=manifest.clips.find(row=>row.clipId===clip.clipId);
+   requireMatch(next&&next.file===clip.file&&next.sha256===clip.sha256&&!members.has('./'+clip.file),'Gap rollover cannot replace a prior selected take');
+   members.set('./'+clip.file,clip);
+  }
+ }else requireMatch(priorManifestText===null,'Gap rollover has an unvalidated prior manifest');
+ requireMatch(Object.entries(oldRecords).every(([key,row])=>{
+  const member=members.get(key),next=newRecords[key];
+  if(!member)return sameJson(next,row);
+  return row.clipId===member.clipId&&row.sha256===member.sha256&&row.provenanceManifest===relative&&row.provenanceManifestSha256===prior.provenanceManifestSha256&&next?.provenanceManifest===relative&&next.provenanceManifestSha256===nextDigest&&sameJson(next,{...row,provenanceManifestSha256:nextDigest});
+ })&&Object.keys(newRecords).length===Object.keys(oldRecords).length+manifest.clips.filter(clip=>!Object.hasOwn(oldRecords,'./'+clip.file)).length,'Gap catalog changed an existing recording object beyond its exact owned manifest digest rollover');
+}
 export function admitVoiceGapPrivateProposals(cast,authorityProof,terminalProofs,selectionProof,sourceRoot=root,destinationRoot=root,commitIo={}){
  const authority=json(authorityProof.path),config=voiceGapConfigs[authority.family],source=realpathSync(sourceRoot),destination=realpathSync(destinationRoot);
  requireMatch(config&&source!==destination&&!source.startsWith(destination+sep)&&!destination.startsWith(source+sep),'Gap source/destination must be separate');
@@ -1407,7 +1474,7 @@ export function admitVoiceGapPrivateProposals(cast,authorityProof,terminalProofs
   const block=voiceGapRecordingsBlock(cast,nextManifests,destination,source),next=installVoiceGapCatalog(priorCatalog,block,anchors),before={window:{}},after={window:{}};
   vm.runInNewContext(priorCatalog,before);vm.runInNewContext(next,after);
   const oldRecords=before.window.GermanySimulatorAudioText.recordings,newRecords=after.window.GermanySimulatorAudioText.recordings;
-  requireMatch(Object.entries(oldRecords).every(([key,row])=>sameJson(newRecords[key],row))&&Object.keys(newRecords).length===Object.keys(oldRecords).length+manifest.clips.filter(clip=>!Object.hasOwn(oldRecords,'./'+clip.file)).length,'Gap catalog changed an existing recording object');
+  verifyVoiceGapCatalogConservation(oldRecords,newRecords,{prior,manifest,relative,priorManifestText:priorManifest,nextManifestText:bytes});
   if(preservedPolice)requireMatch(hash(oldPolicePath)===preservedPolice.manifestSha256&&preservedPolice.clips.every(([file,digest])=>hash(resolve(destination,file))===digest),'Historical police defaults changed during staging');
   requireMatch(readFileSync(catalogPath,'utf8')===priorCatalog,'Catalog changed during gap transaction');
   created.push(manifestTemp);write(manifestTemp,bytes,{flag:'wx'});rename(manifestTemp,manifestPath);installed=true;
@@ -1437,6 +1504,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
   replies['player-phone-ignore']='Nicht rangehen. Telefon weglegen.';
  }
  for(const clip of manifest.clips){
+  let wordCues=clip.wordCues;
   requireMatch((family!=='knick'||clip.voiceId==='amt-brunhilde-knick')&&matchesProduction(cast,clip),'Fixed profile/reference/renderer drift');
   const binding=cast.productionVoices[clip.voiceId];
   fixedTakeAuthority(cast,clip);
@@ -1452,15 +1520,15 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
    requireMatch(clip.english===window.BuergeramtStory.potatoMirror.english&&!clip.rescueParts&&clip.rendererInputText===clip.text,'Mirror requires exact source/translation in one continuous selected-player take');
   }
   if(replies&&['player-phone-silent','player-phone-ignore'].includes(clip.clipId))continue;
-  if(police){const authored=policeRows.get(clip.clipId);requireMatch(authored&&Object.entries(authored).every(([key,value])=>sameJson(clip[key],value)),'Wrong police actor/region/slot/source, subtitle, or selected binding');requireMatch(clip.asrLiteralWordExact===true&&clip.asrDevice==='cpu'&&clip.asrComputeType==='int8'&&clip.asrCpuThreads===1&&clip.asrLanguageId==='de'&&clip.asrScriptPrompt===null&&clip.asrModelSha256==='e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da'&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.approval?.status==='user-approved'&&clip.approval.scope==='whole-game-fixed-voice-cloning'&&clip.approval.clipId===clip.clipId&&clip.approval.encodedSha256===clip.sha256,'Police take lacks literal German ASR or exact clip/hash use authorization');}
+  if(police){const authored=policeRows.get(clip.clipId);requireMatch(authored&&Object.entries(authored).every(([key,value])=>sameJson(clip[key],value)),'Wrong police actor/region/slot/source, subtitle, or selected binding');const gap=manifest.voiceGapEvidence?.[clip.clipId];if(gap)wordCues=voiceGapClipAuthority(cast,clip,voiceGapConfigs['police-dialogue'],gap.take,gap.requestSha256);else requireMatch(clip.asrLiteralWordExact===true&&clip.asrDevice==='cpu'&&clip.asrComputeType==='int8'&&clip.asrCpuThreads===1&&clip.asrLanguageId==='de'&&clip.asrScriptPrompt===null&&clip.asrModelSha256==='e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da'&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.approval?.status==='user-approved'&&clip.approval.scope==='whole-game-fixed-voice-cloning'&&clip.approval.clipId===clip.clipId&&clip.approval.encodedSha256===clip.sha256,'Police take lacks literal German ASR or exact clip/hash use authorization');}
   if(quiz){const authored=quizRows?.get(clip.clipId);requireMatch(authored&&['actorId','voiceId','questionId','questionCategory','segment','sourceLocator','englishSourceLocator','text','english','profileId','referenceSha256','referenceOriginalSha256'].every(key=>sameJson(clip[key],authored[key]))&&clip.segment==='question'&&clip.region==='germany'&&clip.approval?.status==='user-approved'&&clip.approval?.listeningConfirmed===false&&clip.approval?.scope==='ROOT-sealed-finite-German9'&&clip.approval.grantId===manifest.quizAdmission?.grantId&&clip.approval.clipId===clip.clipId&&clip.approval.encodedSha256===clip.sha256,'Wrong German9 actor/question/source/profile or finite grant binding');quizGerman9WordCues(clip);}
-   if(traffic){const authored=trafficRows.get(clip.clipId);requireMatch(authored&&Object.entries(authored).every(([key,value])=>sameJson(clip[key],value)),'Wrong traffic actor/region/text/subtitle/profile');voiceGapClipAuthority(cast,clip,voiceGapConfigs['traffic-dialogue']);}
+   if(traffic){const authored=trafficRows.get(clip.clipId);requireMatch(authored&&Object.entries(authored).every(([key,value])=>sameJson(clip[key],value)),'Wrong traffic actor/region/text/subtitle/profile');const gap=manifest.voiceGapEvidence?.[clip.clipId];wordCues=voiceGapClipAuthority(cast,clip,voiceGapConfigs['traffic-dialogue'],gap?.take,gap?.requestSha256);}
   if(street){
    const index=clip.ruleIndex,person=street.definitions.find(person=>person.ruleIndices.includes(index));
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
    id=`rule-${String(index+1).padStart(2,'0')}`;
   }
-  entries['./'+clip.file]={id,...(street||replies||ambient||city||crowd||police||traffic||quiz?{clipId:clip.clipId,actorId:clip.actorId}:{}),...(quiz?{questionId:clip.questionId,questionCategory:clip.questionCategory,segment:clip.segment,sourceLocator:clip.sourceLocator,englishSourceLocator:clip.englishSourceLocator}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city||crowd||police||traffic||quiz?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...((city||crowd)&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':crowd?'crowd-owned-exact-dialogue':police?'police-exact-dialogue':traffic?'traffic-owned-exact-dialogue':quiz?'quiz-exact-question':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  entries['./'+clip.file]={id,...(street||replies||ambient||city||crowd||police||traffic||quiz?{clipId:clip.clipId,actorId:clip.actorId}:{}),...(quiz?{questionId:clip.questionId,questionCategory:clip.questionCategory,segment:clip.segment,sourceLocator:clip.sourceLocator,englishSourceLocator:clip.englishSourceLocator}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city||crowd||police||traffic||quiz?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...((city||crowd)&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':crowd?'crowd-owned-exact-dialogue':police?'police-exact-dialogue':traffic?'traffic-owned-exact-dialogue':quiz?'quiz-exact-question':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
  // Encode repeated receipts once, then expand the same complete fields into
  // every runtime entry. Receipts come from takes, never the current cast alias.

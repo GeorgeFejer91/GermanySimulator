@@ -1,3 +1,38 @@
+# Two retained character recordings — 2026-10-16
+
+Recover the existing traffic “Vollpfosten” and police “STEHENBLEIBEN” takes
+through a finite independently bound compound-timing supplement. Both original
+readings split one authored compound into touching measured tokens. Recompute
+complete source-word cues from those intervals, preserving silence between
+different words. Pin the exact two takes, original requests/receipts, selected
+reading bytes, source, profile and renderer; other lexical failures remain held.
+Preserve original literal-false flags and empty raw cues. The generated public
+lookup alone receives the verified cues. No synthesis or ASR is repeated.
+
+Thirty-five public checks and twelve real collector/transaction checks pass,
+including both actual encoded-byte replay paths, wrong-byte controls, rehashed
+proof mutants and ten injected copy/write/swap failures with full restoration.
+The real collector then installs exactly two MP3s: traffic has four selected
+takes and police has three selected plus five held, alongside its four preserved
+historical defaults. The catalog grows from 598 to 600 recordings. All 593
+unrelated recording objects remain exact; the five prior target-family objects
+change only their validated manifest digest, with all prior audio unchanged.
+
+After admission, the public suite exposes one test-fixture assumption that
+traffic always has a held slot (34 pass, one TypeError). Keep held-slot mutants
+when such a slot exists and also reject an accepted slot duplicated as held.
+The resulting public suite passes 35/35 against the actual new public files.
+The voice regression batch passes 40/42 initially; only the prior traffic count
+and exact police replacement set are stale. Update those expectations to the
+four exact traffic IDs and three exact police IDs. Both affected suites then
+pass 25/25; the other seventeen checks already pass. The full curator check
+passes and the existing builder creates 31 routes with byte-identical root,
+compatibility, catalog, cast, both manifests and both new MP3s.
+Update the catalog cache tag. No world geometry, movement or camera changes;
+new world reviewers are outside this scope. Technical byte/provenance checks
+do not establish perceived pronunciation, listening or native playback timing.
+The full character animation and speech completion goal remains active.
+
 # Neighbor objective fax refresh — 2026-10-16
 
 The welcome-tour halo keeps one mission key while its objective changes from

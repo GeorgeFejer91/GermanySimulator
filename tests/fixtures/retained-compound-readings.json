@@ -1,0 +1,23 @@
+{
+  "schema": "retained-selected-reading-return-v1",
+  "files": [
+    {
+      "clipId": "traffic-germany-01",
+      "selectedReadingIndex": 0,
+      "selectedBeamSize": 1,
+      "selectedReadingJsonText": "{\"beamSize\":1,\"transcript\":\"Augen auf, du voll Pfosten.\",\"transcribeSeconds\":17.98,\"words\":[{\"word\":\" Augen\",\"start\":0,\"end\":0.48},{\"word\":\" auf,\",\"start\":0.48,\"end\":0.9},{\"word\":\" du\",\"start\":1.14,\"end\":1.24},{\"word\":\" voll\",\"start\":1.24,\"end\":1.54},{\"word\":\" Pfosten.\",\"start\":1.54,\"end\":2.06}]}",
+      "selectedReadingUtf8Bytes": 297,
+      "selectedReadingSha256": "98d941225ae19d0f0658a34c8d6b4db7debccc866af457c66311c6df5d9f89dc",
+      "selectedWordArraySha256": "3c903ba01e22a643bd841f905cb8371163597affea3083d4fe236a22e1984ca9"
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-01",
+      "selectedReadingIndex": 0,
+      "selectedBeamSize": 1,
+      "selectedReadingJsonText": "{\"beamSize\":1,\"transcript\":\"Halt! Stehen bleiben!\",\"transcribeSeconds\":17.47,\"words\":[{\"word\":\" Halt!\",\"start\":0,\"end\":0.34},{\"word\":\" Stehen\",\"start\":0.5,\"end\":0.96},{\"word\":\" bleiben!\",\"start\":0.96,\"end\":1.22}]}",
+      "selectedReadingUtf8Bytes": 213,
+      "selectedReadingSha256": "250ee98bf68a99349cc18d75c8f264d27a9bd328a9efdfd37b4d96121ed8a675",
+      "selectedWordArraySha256": "9bd1cfa32d85ea5c2632e312217dffc106b0ec482e7b82024c57a04f38ee93c4"
+    }
+  ]
+}

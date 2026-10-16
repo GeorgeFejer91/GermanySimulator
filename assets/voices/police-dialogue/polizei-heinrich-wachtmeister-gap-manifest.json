@@ -8,7 +8,7 @@
   "status": "exact selected next/first takes; listening NOT RUN",
   "requestedLineCount": 8,
   "generatedLineCount": 8,
-  "lineCount": 2,
+  "lineCount": 3,
   "clips": [
     {
       "clipId": "polizei-heinrich-wachtmeister-berlin-04",
@@ -176,6 +176,133 @@
         "instruction": "The user requested completion of the game with individually profiled character voices and explicitly authorized appropriately licensed cloning. ROOT selects only these two exact technically verified police recordings for the existing scope. This is not a perceptual listening or user-audition claim; all six failed literal/cue takes remain held and unchanged.",
         "clipId": "polizei-heinrich-wachtmeister-berlin-04",
         "encodedSha256": "00977e8f37ca542e5303d26dab7cad779abbb36a6ac3d23d47a80e63548103c7"
+      }
+    },
+    {
+      "clipId": "polizei-heinrich-wachtmeister-germany-01",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "actorId": "police",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js policeBarks.germany[0]",
+      "text": "HALT! STEHENBLEIBEN!",
+      "english": "Stop! Stop immediately!",
+      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171005,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9",
+      "rendererInputText": "HALT! STEHENBLEIBEN!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 71,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 29,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 30,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 3.64,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "8beb12ea2067b768da9d4704c52d274de1b83a0e13368eee052509f330d742a0"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "e27cbf36f6d1aeb0ef039ab62622832df955f88a723c1349ba945888be47e297",
+      "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+      "rawSha256": "f7df70b5aa541eff9a8f9c3adf6a17134e25d1818a673dbd41dad87dbbc53545",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 2.8,
+      "renderSeconds": 5.03,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "24b741bbe55d4f3a843aa481c3459a96",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.2092051829432087,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.53,
+      "asr": "Halt! Stehen bleiben!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": false,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Halt! Stehen bleiben!",
+          "transcribeSeconds": 17.47,
+          "words": [
+            {
+              "word": " Halt!",
+              "start": 0,
+              "end": 0.34
+            },
+            {
+              "word": " Stehen",
+              "start": 0.5,
+              "end": 0.96
+            },
+            {
+              "word": " bleiben!",
+              "start": 0.96,
+              "end": 1.22
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [],
+      "sha256": "c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d",
+      "bytes": 45740,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/police-dialogue/polizei-heinrich-wachtmeister-germany-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "whole-game-fixed-voice-cloning",
+        "date": "2026-10-15",
+        "instruction": "The user requested completion of the game with individually profiled character voices and explicitly authorized appropriately licensed cloning. ROOT selects only these two exact technically verified police recordings for the existing scope. This is not a perceptual listening or user-audition claim; all six failed literal/cue takes remain held and unchanged.",
+        "clipId": "polizei-heinrich-wachtmeister-germany-01",
+        "encodedSha256": "c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d"
       }
     },
     {
@@ -421,24 +548,6 @@
       "candidateSha256": "a95271bffe49d39cb59cceecc250968563282d0fc34606446d4a529d169d80a8"
     },
     {
-      "clipId": "polizei-heinrich-wachtmeister-germany-01",
-      "voiceId": "polizei-heinrich-wachtmeister",
-      "actorId": "police",
-      "region": "germany",
-      "slot": 0,
-      "sourceLocator": "game.js policeBarks.germany[0]",
-      "text": "HALT! STEHENBLEIBEN!",
-      "english": "Stop! Stop immediately!",
-      "profileId": "24b741bbe55d4f3a843aa481c3459a96",
-      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
-      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
-      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
-      "processing": null,
-      "reason": "held private; literal words/levels not eligible",
-      "candidateSha256": "c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d"
-    },
-    {
       "clipId": "polizei-heinrich-wachtmeister-germany-02",
       "voiceId": "polizei-heinrich-wachtmeister",
       "actorId": "police",
@@ -527,6 +636,19 @@
         "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
         "priorSynthesisAttempt": 1,
         "priorRawReceiptSha256": "27c4bc491097ea1d6a6ff372834725130bb413534338e572f623b8a3d42277be"
+      },
+      "polizei-heinrich-wachtmeister-germany-01": {
+        "rawReceiptSha256": "2d72f629bd08003551b40aa6e69490a1c64a12cb7302cf2530a90211f17bfd03",
+        "encodedReceiptSha256": "e3799c96387e1abff03d896dd16b65504db55eb819d0e512f1d2beb72d312005",
+        "rawSha256": "f7df70b5aa541eff9a8f9c3adf6a17134e25d1818a673dbd41dad87dbbc53545",
+        "encodedSha256": "c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d",
+        "profileJsonSha256": "d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf",
+        "priorSynthesisAttempt": 1,
+        "priorRawReceiptSha256": "fd5e8574baa9b42a8cef0a1e9c02f1535ff673ed7a2f0cdbbcbed49925b4dff5",
+        "retainedSourceWordAlignment": {
+          "text": "{\"kind\":\"voice-gap-retained-source-word-alignment-v1\",\"ruleRevision\":\"ordered-adjacent-measured-tokens-to-one-source-word-v1\",\"bindings\":{\"family\":\"police-dialogue\",\"clipId\":\"polizei-heinrich-wachtmeister-germany-01\",\"voiceId\":\"polizei-heinrich-wachtmeister\",\"actorId\":\"police\",\"region\":\"germany\",\"slot\":0,\"sourceLocator\":\"game.js policeBarks.germany[0]\",\"text\":\"HALT! STEHENBLEIBEN!\",\"english\":\"Stop! Stop immediately!\",\"profileId\":\"24b741bbe55d4f3a843aa481c3459a96\",\"referenceSha256\":\"abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7\",\"referenceOriginalSha256\":\"718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e\",\"renderer\":\"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\"modelRevision\":\"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\"processing\":null,\"authoringHelperSha256\":\"19e5bd4af9c9ea5390987c1331a7e33ded02f435d3638965e43055869cb7a7f9\",\"encodedSha256\":\"c8c325e24a12658ababd99246f5ebcb57d07be9e8c969c92b8f0dae514c8277d\",\"encodedReceiptSha256\":\"e3799c96387e1abff03d896dd16b65504db55eb819d0e512f1d2beb72d312005\",\"rawReceiptSha256\":\"2d72f629bd08003551b40aa6e69490a1c64a12cb7302cf2530a90211f17bfd03\",\"rawSha256\":\"f7df70b5aa541eff9a8f9c3adf6a17134e25d1818a673dbd41dad87dbbc53545\",\"requestSha256\":\"e27cbf36f6d1aeb0ef039ab62622832df955f88a723c1349ba945888be47e297\",\"profileJsonSha256\":\"d707598529a3bbd1774ee2364dde64d25dc3281555f03181b18d750bd4bef2cf\",\"synthesisAttempt\":2,\"seed\":171005,\"durationSeconds\":2.8,\"selectedReadingIndex\":0,\"selectedBeamSize\":1,\"selectedReadingSha256\":\"250ee98bf68a99349cc18d75c8f264d27a9bd328a9efdfd37b4d96121ed8a675\",\"selectedWordArraySha256\":\"9bd1cfa32d85ea5c2632e312217dffc106b0ec482e7b82024c57a04f38ee93c4\",\"sourcePins\":{\"game.js\":\"2e0b82b73ab2c23d4922d28650edda6ebff730c88d0f1400348b1317e3339cf5\",\"For-AI/VOICE-CAST.json\":\"8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f\",\"For-AI/AUDIO-TEXT-LIBRARY.js\":\"267388a27742baa2ed1be1515d5fb5095e4618c32f357541912336e2c1bc9980\"}},\"mapping\":[{\"sourceWordIndex\":0,\"observedStart\":0,\"observedEndExclusive\":1},{\"sourceWordIndex\":1,\"observedStart\":1,\"observedEndExclusive\":3}],\"wordCues\":[{\"at\":0.0,\"end\":0.34,\"charIndex\":0,\"word\":\"HALT\"},{\"at\":0.5,\"end\":1.22,\"charIndex\":6,\"word\":\"STEHENBLEIBEN\"}]}",
+          "sha256": "9da838f0ea99f759013c704efe931c8f51f239a43df8f83566508bff68b42310"
+        }
       },
       "polizei-heinrich-wachtmeister-germany-04": {
         "rawReceiptSha256": "45d441e4695c2eea212ec935f7d01f23b69dd9acb326c6f1add338eb0257737a",
