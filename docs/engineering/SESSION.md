@@ -1,3 +1,25 @@
+# Neighbor objective fax refresh — 2026-10-16
+
+The welcome-tour halo keeps one mission key while its objective changes from
+finding the house to meeting the neighbors. The HUD previously cached only
+that key, leaving the house instruction visible. Include the current title
+and body in this halo's cache key. Preserve numeric tour IDs, manual fax
+behavior, dialogue suppression and read expiry. Update the HUD script URL's
+cache tag so deployed clients receive the fix.
+
+The focused mission fax, pointer, JWD home, neighbor halo and level-page suites
+pass 53/53 without skips. A silent controlled production-HUD browser probe
+passes eight cases: old/candidate, desktop/Android portrait emulation and
+normal/reduced motion. All four old cases reproduce stale text; all four
+candidates refresh correctly. ROOT and an independent reviewer inspect all
+sixteen original captures: loaded fonts, Pretext measurements and geometry
+remain stable, with no text overflow or obstructed controls. The real twelve
+second read expiry is checked. This component uses a controlled bridge with
+game/world controllers removed; it does not establish natural mission
+progression, physical Android or perceived audio quality. No world, movement,
+collision, camera or sprite code changes, so new physics acceptance is outside
+this scope. The full game completion goal remains active.
+
 # Saved cameo voice profiles — 2026-10-16
 
 Two bounded local CPU operations saved separate Bayern and Alice profiles from

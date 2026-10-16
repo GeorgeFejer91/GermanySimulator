@@ -90,7 +90,8 @@ function sync(){
  const notice=noticeOrder.find(id=>visible(byId(id))&&!byId(id).classList.contains('caption-only'));
  for(const id of noticeOrder)byId(id).classList.toggle('notice-deferred',id!==notice);
  setHidden(byId('energy-warning'),state.energy>35);setText(byId('energy-warning'),(lang==='en'?'ENERGY ':'ENERGIE ')+state.energy);
- const next=state.missionKey||byId('mission-title').textContent+'\n'+byId('mission-text').textContent;
+ const objective=byId('mission-title').textContent+'\n'+byId('mission-text').textContent;
+ const next=state.missionKey==='jwd-tour-halo'?state.missionKey+'\n'+objective:state.missionKey||objective;
  if(next!==mission){mission=next;pending=true;hideFax()}
  if(!active()||!quiet()||manual){if(!fax.hidden||motion||motionTimer){hideFax();if(!pending)reminder(true)}if(!active()){clearTimeout(timer);timer=0}}
  else if(pending)showFax();
