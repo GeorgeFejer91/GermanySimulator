@@ -1,0 +1,2209 @@
+GERMANY SIMULATOR / GRAND THEFT AMT
+STANDALONE DETAILED HANDOFF TO A FUTURE AI AGENT
+Prepared: 17 October 2026
+Scope: remaining centralized completion work, scripts, evidence, and safe resumption
+
+==========================================================================
+00. READ THIS FIRST: STATUS, AUTHORITY, AND THE NEXT USEFUL ACTION
+==========================================================================
+
+The project execution goal is PAUSED at the user's request. This document was
+requested afterward as a documentation deliverable. Creating it does not resume
+runtime development, generation, browser captures, voice jobs, or other chats.
+The user, George, wanted existing agents to converge, preserve their work, and
+finish one selected task at a time instead of expanding parallel subprojects.
+
+The game is already published. The remaining work is completion and acceptance
+of preserved features/assets, not creation of a replacement game. A large
+amount of useful work already exists. Do not regenerate the cast, rewrite the
+runtime, repeat all historical experiments, or treat every old HOLD as current.
+
+Current critical path:
+  1. When explicitly resumed, diagnose the failed actual two-pedestrian passing
+     case in the private painted Irmgard pilot.
+  2. Repair its real mediator, add the smallest meaningful regression, obtain
+     the required independent reviews and affected native evidence.
+  3. Reconcile that one accepted candidate with then-current main and publish.
+  4. Select the next bounded task from the backlog below. Natural mission-chain
+     validation is important and already has a substantial prepared harness.
+
+Do not confuse these statuses:
+  - Published/runtime accepted: the canonical main runtime.
+  - Committed locally: a preservation checkpoint; acceptance may still fail.
+  - SOURCE PASS: source reasoning/checks only.
+  - CPU PASS: controlled extracted-production simulation, with fixture limits.
+  - PASS_EXECUTION_ONLY: an operator completed; its asset may still be rejected.
+  - Actual/rendered PASS: only the stated scenario and candidate were exercised.
+  - NOT RUN: missing evidence. Never convert it to PASS through wording.
+
+The final walking pilot has 1,920 passing Node tests but a FAILED actual passing
+gate. It is not published. The older broad goal is unfinished, not complete.
+3D model pose accuracy is explicitly DEFERRED by the user. Do not reopen it as
+a prerequisite for finishing painted 2D citizens or the game.
+
+This is a dated recovery manual, not a competing source of permanent policy.
+Current user instructions and the applicable current AGENTS.md take priority.
+Read the owning For-AI contracts before changing their subject. Paths and hashes
+below describe saved artifacts; verify them before execution or acceptance.
+
+==========================================================================
+01. THE PRODUCT WE ARE FINISHING
+==========================================================================
+
+Germany Simulator is the existing standalone browser-based 3D bureaucratic
+open-world parody, "Grand Theft Amt". It has a fictional three-day deadline,
+forms, missions, city travel, neighbors, offices, quizzes, wanted/police systems,
+keyboard and mobile touch controls, authored satire, recorded voices and
+browser audio. Berlin behind the Brandmauer speaks regional Denglisch; outside
+it, German remains the character language even when UI language is English.
+
+Keep the existing product identity, mission/reward ownership, regional voices,
+controls and desktop/mobile behavior. Registered painted sprites are intentional
+people in the Three.js world. Do not replace them with generic meshes. The
+player and police have their retained 3D exception; do not turn them into two
+new painted-character jobs. Device-tilt control was removed; do not restore it.
+
+Technical architecture:
+  - One static deployable runtime tree at repository root.
+  - index.html is the canonical root game entry.
+  - 3d.html is a compatibility entry redirecting to index.html and retaining
+    query parameters and URL hash. It is not a second game controller.
+  - game.js owns simulation, mission state, collision, ordinary NPC updates,
+    player input mediation, rewards, and the city/interior callbacks.
+  - world3d.js owns Three.js rendering, camera, visibility, asset presentation,
+    sprite-host ownership, and the simulation-to-render bridge.
+  - assets/ is the single shipped asset authority.
+  - Existing static JavaScript, vanilla Three.js r186 and asset admission queues
+    remain the architecture. No new engine, service, navigation framework,
+    duplicate asset database or runtime directory is justified by this backlog.
+  - The personal Rust/Tauri default concerns new desktop apps. It is not a
+    request to migrate this browser game.
+
+Completion means playable, correctly owned and verified behavior in the actual
+game, not just valid files, generated pictures, passing regexes or an ending
+state assigned by a test. Preserve provenance, licensing and exact text/audio
+ownership. Keep implementation/provenance explanations out of player dialogue.
+
+==========================================================================
+02. CHECKOUTS, COMMITS, AND WHAT MUST BE PRESERVED
+==========================================================================
+
+Primary authoring checkout (current default working directory):
+  C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+Historical branch/HEAD:
+  codex/neighborhood-walk-talk
+  415e95d9159837240c74870f3b0281be52434f68
+This is a heavily modified shared authoring checkout. It contains many preserved
+unrelated changes and ignored evidence. Do not reset, clean, blanket checkout,
+bulk-stage, delete or merge it wholesale.
+
+Canonical deployment checkout:
+  C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+  branch codex/canonical-game-entry
+Last published handoff commit before this TXT:
+  2d929f2cb3f4d9735350ce9a33fb599ded6f2ef3
+Its parent, 8d87a5e129e1bb0004c2a24be4d00a00bf9a80cc, is the runtime baseline
+for that documentation release. The 2d929f2 commit added only the short handoff,
+startup/index links and engineering record. Pages run 39027033408 succeeded;
+root and 3d.html both returned HTTP 200 afterward. No pilot runtime shipped.
+
+Private integrated painted walking pilot:
+  C:/Users/cogpsy-vrlab/.codex/worktrees/painted-walk-integration/GermanySimulator
+  branch codex/painted-walk-integration
+  48cfaa123ecc09c4885276cb58a789a61a36a823
+History:
+  5ffae54dba25b98fa4e504d2ac6d9a38d9525db7
+    Original Irmgard pilot reconciled onto then-main 8d87a5e.
+  d257ff22856d4416120200f2c6cd15b3835ec2f1
+    Painted pedestrian navigation/ownership repair.
+  48cfaa123ecc09c4885276cb58a789a61a36a823
+    Presented boxed-navigation regression expansion.
+This candidate is local and UNRELEASED. Keep it; do not replay its changes into
+the dirty primary checkout or merge it into main before its gate is repaired.
+
+Original earlier walking checkpoint:
+  C:/Users/cogpsy-vrlab/.codex/worktrees/street-walk-pilot/GermanySimulator
+  codex/consolidation-street-walk-checkpoint
+  f9ca1c6a3c4333764cb4abfd3433e23337eb084c
+Keep as lineage/source reference; it is not the latest repaired candidate.
+
+Preserved shared-authoring snapshot:
+  codex/consolidation-authoring-checkpoint
+  a1b86fd6b9091a94a136685510460fd9d8f899f2
+It saved 603 nonignored changed paths using a separate index, preserving the
+original user's index. Reconciliation found 223 duplicate paths, 294 local-only
+additions and 86 differing paths at its pinned historical base. The complete
+stale tree also lacked 255 then-main files. These numbers are historical audit
+results, not current status. They explain why wholesale adoption is unsafe.
+
+Private Wagner static authoring branch:
+  codex/wagner-notebook-source
+  Latest known hook acquisition checkpoint:
+    4862a1fbfef6d4da824ecf3b9b489834c2ea02e2
+  Its release-key parent:
+    d78835377d89b4cae707cf63f5edbd066f3b5e99
+These are private authoring snapshots, not approved runtime actions.
+
+Deferred retained-3D checkpoint:
+  C:/Users/cogpsy-vrlab/.codex/worktrees/retained-character-gait/GermanySimulator
+  codex/retained-character-gait
+  ec98fe001400232c00af82cd76fa77058a643fad
+Unpublished and explicitly deferred. Preserve; do not tune or merge by default.
+
+IMPORTANT FRESHNESS NOTE FOR THIS TXT:
+The pilot and canonical worktrees were clean when their cited capture/release
+receipts were written. At this TXT's preparation, BOTH had newer unstaged RTK
+documentation changes in AGENTS.md, For-AI/README.md, For-AI/SKILLS.md and the
+four level guides, plus untracked nested For-AI/skills/ directories. The HEADs
+above still matched. Do not call either checkout clean without checking again.
+Do not absorb those separate edits into this handoff or a gameplay commit.
+HANDOFF-TXT-BASELINE.json in the evidence root records their pre-document hashes.
+
+Git automatic maintenance encountered a known corrupt/unreferenced historical
+object 80714a6dcd8da7e7c9b29e8bf8d5c446c0e603a0. Use git -c gc.auto=0 for all
+operations. No implicit prune, repack, destructive repair or force-push. A Git
+maintenance repair is a separate task. Normal commits/pushes have succeeded.
+
+==========================================================================
+03. THE LOCAL EVIDENCE LIBRARY AND HOW TO READ IT
+==========================================================================
+
+Main evidence root, abbreviated E below:
+  C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator/output/
+  central-completion-2026-10-16/
+The line break above is for readability; the actual path is one directory.
+
+Other important roots, relative to the primary authoring checkout:
+  output/game-completion/
+  output/game-orchestration/
+  output/street-cast/
+
+These are ignored/local evidence, not automatically present in a fresh clone.
+Local preservation commits do not include all ignored proof, media, requests or
+private authoring data. If moving computers, explicitly preserve needed evidence
+and its hash manifests. Do not publish private model/profile/reference inputs.
+
+Start with:
+  For-AI/PROJECT-HANDOFF.md                    short closeout overview
+  E/CURRENT-NEXT.md                           final local closeout at TOP
+  E/HANDOFF-PUBLICATION.json                  published short-handoff receipt
+  E/HANDOFF-DOC-CHECKS.json                    short-document link validation
+  E/HANDOFF-TXT-BASELINE.json                  fresh RTK-edit preservation state
+  E/reconciliation/HANDOFF.md                 historical snapshot classifications
+  E/reconciliation/inventory.json             exact path/blob classifications
+  E/remaining-assets/HANDOFF.md               present art versus missing motion
+  E/remaining-assets/TABLE.md                 exact identities/source inventory
+  E/remaining-assets/inventory.json           standing/source hashes and limits
+
+CURRENT-NEXT.md intentionally retains historical paragraphs below the final
+closeout. Old ACTIVE, "next", old main hashes and worker assignments below the
+top final section are not current dispatch instructions. Read newest closure
+receipts before an older packet's optimistic HANDOFF. For example, some Keller
+HANDOFF files say SOURCE READY/NOT RUN, but later ROOT-FINAL-CHECKPOINT.json
+records a consumed failed/rejected experiment. The closure wins.
+
+Useful older owner handoffs:
+  output/game-completion/CENTRALIZED-HANDOFF-2026-10-16.md
+  output/game-completion/ROOT-CONSOLIDATION-HANDOFF-2026-10-16.md
+  output/game-orchestration/CONSOLIDATION-HANDOFF.md
+  output/game-completion/street-handoff.json
+  output/game-completion/hannelore-city-execution-source-v1/
+    CONSOLIDATION-HANDOFF.md
+Those contain preservation/background, not current-main authority or automatic
+permission to launch old workers. The earlier original walking worktree also
+has output/street-walk-pilot/HANDOFF.md and consolidation-handoff.json.
+
+Before using a packet, identify: base revision, input hashes, current selected
+runtime, exact writable outputs, whether a ROOT-GO/actual directory exists,
+terminal/retirement status, what was actually observed, and remaining limits.
+
+==========================================================================
+04. STARTUP READING AND NESTED SKILLS: READ ONLY THE SELECTED SCOPE
+==========================================================================
+
+Root startup order:
+  1. Current user request and current applicable AGENTS.md.
+  2. For-AI/AGENT-START.md.
+  3. This TXT or the short PROJECT-HANDOFF.md for dated state.
+  4. For-AI/LEVELS.md: resolve the named area explicitly.
+  5. Matching levels/<id>/AGENTS.md and levels/<id>/For-AI/README.md.
+  6. Only the relevant owning For-AI contract and selected skill references.
+
+Level scopes:
+  city: streets, Berlin/Bayern, landmarks, ordinary crowd, quizzes, city forms,
+        JWD runtime and garden routes. Source owners remain game.js/world3d.js.
+  neighbors: Heiko, Inga, Frau Schwabingen, Hartmut and recurring visitor Ede;
+        read both neighbors and shared city scope for their runtime.
+  buergeramt: first office interior, queue, Anmeldung, fever cast, QR/phone.
+  jobcenter: optional interior/flame encounter and entry/return boundary.
+For cross-level callbacks read both guides. Root-started agents do not receive
+named-level AGENTS instructions automatically. A directory name is not write
+permission over shared controller/renderer files.
+
+Owning contracts:
+  For-AI/GAMEPLAY.md: mission loop, rewards, satire, language, controls, HUD.
+  For-AI/BUERGERAMT.md: episode beats, voice/callback/lifetime ownership.
+  For-AI/OBJECT-CONSISTENCY.md: required Physics and Camera matrix.
+  For-AI/ASSET-POLICY.md: single authority, budgets, browser responsiveness,
+        starting/approach readiness, selected preparation and cleanup.
+  For-AI/CITY-CHARACTER-STYLE.md: compact painted city-person proportions.
+  For-AI/SPRITE-GENERATION-PROTOCOL.md: art source/export/animation contract.
+  For-AI/AUDIO-TEXT-LIBRARY.md and .js: exact text/audio IDs and runtime catalog.
+  For-AI/VOICE-CAST.json and VOICE-SYNTH-PROTOCOL.md: approved voice bindings.
+  For-AI/MUSIC-SOUND-DESIGN.md: sound timing, priorities, ducking and cue owners.
+  For-AI/LEVEL-TRANSITIONS.md: shared indoor entry/ejection/exit protocol.
+  For-AI/LEVEL-URLS.md: permanent level URLs and distinct share previews.
+  For-AI/SKILLS.md: skill routing, delegation, review and model guidance.
+  For-AI/chatdev/README.md: review format and optional legacy ChatDev limitations.
+  For-AI/DECISIONS.md: search only the relevant historical rationale.
+
+Project skills live under .agents/skills/. Read their SKILL.md before use and
+follow the references it routes, relative to that skill directory. Do not read
+the entire skill collection. Newer nested For-AI/skills/rtk/SKILL.md copies are
+tooling guidance; they do not replace the domain skills or gameplay contracts.
+Inspect their current routes; some copies were unstaged at this TXT snapshot.
+
+For painted walking/actions/changing-pose mouths:
+  .agents/skills/animate-2d-characters/SKILL.md
+  references/germany-simulator-lessons.md: observed symptom -> first bad stage.
+  references/resolution-and-upscaling.md: source/export/display sampling.
+  references/painted-walking.md: contacts, whole-body turns, speed calibration.
+  references/final-frame-analysis.md: exact encoded source/sequence acceptance.
+  references/paired-gaussian-actions.md: compatible anchors and texture transport.
+  references/narrative-action-rigging.md: sequence/event/attempt/cue ownership.
+  references/speech-ready-character-authoring.md: speaking-source pose plan.
+  references/gaussian-transitions.md: registered changing-pose mouth/depth work.
+  references/dense-sampling.md: preserve duration, exact keys and loop closure.
+Read only the methods appropriate to the actual failure; Gaussian rendering is
+not a substitute for missing anatomy or a universal fix for bad correspondence.
+
+Relevant skill helpers (inspect their actual CLI before running):
+  scripts/painted_walk.py
+  scripts/assess_walk_speed.py
+  scripts/assess_resolution.py
+  scripts/audit_final_frame_analysis.py
+  scripts/build_paired_gaussian.py
+  scripts/make_paired_gaussian_fixture.py
+  scripts/morph_sequence.py
+  scripts/audit_sequence.py
+  scripts/self_test_final_frame_analysis.py
+These are authoring/diagnostic helpers, not automatic asset acceptance. The
+private pilot's pinned skill copy may differ from newer canonical guidance;
+compare intentionally, never overwrite frozen evidence or silently upgrade it.
+
+Other task routes:
+  game-event-logic: mission/event mediators, retries, guards, consequences.
+  game-playtest and playwright: actual browser/input/render QA.
+  browser-input: focus/pointer/touch/pause interruption ownership.
+  gameplay-validation: prove a playable goal/decision/consequence loop.
+  property-based-testing: only where a nonvacuous independent property helps.
+  threejs-debugging/performance: a demonstrated render/resource defect.
+  game-ui-frontend plus personal uncodixfy-pretext: actual HTML UI work.
+  personal quality-implementation: smallest coherent application-code change.
+  personal test-engineering: risk-based tests when adding/changing tests.
+  personal ponytail: minimal infrastructure/asset-pipeline/runtime decisions.
+  personal imagegen: only genuinely missing raster views/keys; inspect inputs.
+No new frontend/UI redesign is part of the handoff. If later editing bounded
+HTML text, follow current Pretext dependency/measurement requirements then.
+
+Personal skill root on this PC:
+  C:/Users/cogpsy-vrlab/.codex/skills/
+RTK skill verified here:
+  C:/Users/cogpsy-vrlab/.codex/skills/rtk/SKILL.md
+Use the current installed skill catalog on another host rather than assuming
+these paths or available model names persist.
+
+==========================================================================
+05. WINDOWS TOOLCHAIN AND SAFE COMMAND PATTERNS
+==========================================================================
+
+Known installed executables/libraries used by this work:
+  Node:
+    C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/
+    dependencies/node/bin/node.exe
+  PowerShell 7:
+    C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/
+    dependencies/native/powershell/pwsh.exe
+  Python with Pillow:
+    C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+  Playwright module:
+    C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/
+    dependencies/node/node_modules/playwright
+  Chrome:
+    C:/Program Files/Google/Chrome/Application/chrome.exe
+  GitHub CLI:
+    C:/Program Files/GitHub CLI/gh.exe
+  RTK 1.0.1:
+    C:/Users/cogpsy-vrlab/AppData/Local/Programs/RTK/bin/rtk.exe
+  Pinned Playwright ffmpeg:
+    C:/Users/cogpsy-vrlab/AppData/Local/ms-playwright/ffmpeg-1011/ffmpeg-win64.exe
+    SHA256 5b8f3f59ba61685828939ff3c833109748adbdea2fff4b4ae570c9fc0fc1ff4d
+Each wrapped path above is one actual path; concatenate the displayed lines.
+Check existence/current configured runtime before using; do not install another
+browser stack or model environment just because an older path moved.
+
+Recommended PowerShell aliases for a FUTURE selected task, not launch commands:
+  $Repo = 'C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator'
+  $Candidate = 'C:/Users/cogpsy-vrlab/.codex/worktrees/painted-walk-integration/GermanySimulator'
+  $Canonical = 'C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator'
+  $Evidence = Join-Path $Repo 'output/central-completion-2026-10-16'
+  $Node = 'C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe'
+  $Python = 'C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe'
+  $Pwsh = 'C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe'
+  $Rtk = 'C:/Users/cogpsy-vrlab/AppData/Local/Programs/RTK/bin/rtk.exe'
+
+Read-only initial inspection:
+  git -C $Candidate -c gc.auto=0 status --porcelain=v1
+  git -C $Candidate -c gc.auto=0 rev-parse HEAD
+  git -C $Canonical -c gc.auto=0 status --porcelain=v1
+  git -C $Canonical -c gc.auto=0 log -5 --oneline
+  git -C $Canonical -c gc.auto=0 worktree list --porcelain
+  Get-FileHash -Algorithm SHA256 -LiteralPath <exact-file>
+
+Prefer supported RTK filters for human-read status/search/test output. Read its
+help for unfamiliar flags. Raw reads, Git porcelain, JSON, hashes, parser input,
+byte-equality proofs and full saved test logs must remain unfiltered. Compression
+is lossy and is not proof of a PASS. RTK was available and checked at this TXT's
+preparation; no hook/proxy/service install was needed. Do not configure those
+merely to save output tokens.
+
+Always set the command's working directory explicitly. An earlier run executed
+against the wrong checkout and failed before tests. Never infer the candidate
+from a relative output path. Do not repurpose HOME, home or CODEX_HOME variables.
+Quote literal Windows paths. Keep destructive operations in one shell and verify
+their resolved targets first; this backlog does not authorize recursive cleanup.
+
+For long tools, hold and poll the SAME returned execution/session handle to a
+terminal result. An observation timeout is not permission to start a replacement
+job. Preserve complete relevant failures; do not rerun a mutation to recover its
+output. Avoid blocking waits longer than 60 seconds between user updates.
+
+==========================================================================
+06. TASK A — FINISH THE PRIVATE IRMGARD WALKING/NAVIGATION PILOT
+==========================================================================
+
+Priority: first selected runtime repair when the user resumes execution.
+Level: city. Required owners: one runtime integrator; independent Physics and
+Camera reviewers on the same frozen candidate. No new art is indicated by the
+current passing failure. Keep existing pixels, source speed and authored turns.
+
+What is already implemented at 48cfaa1:
+  - One Irmgard atlasMotion record, desktop/mobile packed motion exports.
+  - Private movement-request/accepted-distance ownership for presented paint.
+  - Null return means a legitimate planted turn/hold: no root movement or
+    accepted-distance accumulation. Do not treat null as collision failure.
+  - Actual presented paint owns movement; hidden legacy TouristAnimations turn
+    state no longer preempts an admitted painted mover's ordinary route.
+  - Legacy fallback orientation/gait is still maintained. A nonpresented or
+    legacy-only ordinary citizen keeps the raw movement/recovery path.
+  - A factory inside the existing game IIFE creates a certified pedestrian
+    maneuver with private WeakMap state; there is no new module/service.
+  - Its two geometric legs use actual combined body radii: a perpendicular
+    tangent at native .72 side speed, then the forward far tangent at source
+    speed. Every proposed native step remains collision/route checked.
+  - The leg persists through planted holds/lane correction. Changes to root,
+    heading, route, blocker position/presence/radius invalidate the plan.
+  - Accepted progress along the actual leg feeds ordinary .7-second / .15-speed
+    stall recovery. No hold-clock bypass or increased deadline was introduced.
+  - Route initialization explicitly invalidates plans. Current ordinary NPC
+    discontinuities occur there; player-only notifications do not own navigation.
+  - Unblocked movement avoids allocating the full circle list.
+
+Important interpretation: atlasMotion.ready proves an admitted locomotion lease,
+not a universal health guarantee. Some held/discontinuity states retain that
+lease. Do not claim every observer error automatically falls back correctly.
+
+Core source functions to trace, at the selected revision:
+  game.js:
+    holdStreetMovement, notifyStreetAccepted, finishStreetSimulationTick,
+    moveGroundResponder, responderBlocked, pedestrianRouteContains,
+    pedestrianLane, createPedestrianMover, pedestrianRouteStalled,
+    initializePedestrianRoutes, ordinary NPC loop in updateCitySimulation.
+  world3d.js:
+    installStreetMotionObserver, registeredStreetPaint, releaseStreetPaint,
+    prepareStreetPaint, npcMeshes and actual visible streetPaintView.
+  street-character-sprites.js:
+    requestStreetSimulationMove, accepted segments, admission/release,
+    atlas-motion state, local gait/held timing, exact rendered slot selection.
+  tourist-animation.js:
+    legacy start/stop/turn/gait ownership and actual manifest cycle distances.
+
+The navigation repair preserved responderBlocked and moveGroundResponder
+byte-for-byte relative to its repaired pilot base 5ffae54. That is NOT a claim
+the original pilot's moveGroundResponder is byte-identical to published 8d87:
+the pilot itself added plan-before-commit planted-turn admission. Compare the
+correct base before quoting preservation claims.
+
+Affected permanent tests worth reading first:
+  tests/street-pedestrian-avoidance.test.mjs (17 cases at checkpoint)
+  tests/street-simulation-fixture-source.mjs
+  tests/street-route-hold.test.mjs
+  tests/street-atlas-motion.test.mjs
+  tests/street-packed-grid.test.mjs
+  tests/tourist-dense-turns.test.mjs
+  tests/object-physics-consistency.test.mjs
+  tests/collision-dynamics.test.mjs
+  tests/street-character-manifest.test.mjs
+  tests/street-character-sprites.test.mjs
+  tests/test_painted_grounding.py
+
+The avoidance test exercises the actual ordinary loop, legacy guard, native
+resolver and real private atlas lease with declared CPU/texture limitations.
+Cases include timing/preference variants, full bypass/lane recovery, boxed/no
+exit, changed blocker/root/heading/route/init, presentation release, and a raw
+caller mutation reproducing stalled progress. Keep its independent geometry and
+null-held assertions. Do not make it merely mirror the new implementation.
+
+An earlier fixture wrongly demanded observer acceptance for an UNPRESENTED actor
+after a discontinuity; it was corrected to require acceptance only for the
+presented owner, retaining every route/contact/held assertion. This is not a
+precedent to weaken the new actual P3 criterion.
+
+Candidate motion export details:
+  assets/characters/street/crowd-irmgard-aktenordner/movement-desktop.webp
+    2016 x 2040, 2,797,128 encoded bytes
+    SHA256 0fb196d9dba96ec5ad23b0c3c7a23068fbb20f5eec1aa1d1f18097f68b7804b6
+  assets/characters/street/crowd-irmgard-aktenordner/movement-mobile.webp
+    1848 x 1870, 2,590,542 encoded bytes
+    SHA256 5ffef1f1e4e09cf4538124940413bfa7d172f291f9af60d93dbedea0cdc75f45
+  21 x 17 packed grid, 348 used cells, logical 128 x 160, figure height 136,
+  pivot [64,150], declared world height 1.6, 16 walking phases per cardinal
+  direction and phase-specific settle/turn keys. Confirm exact manifest values.
+Encoded size is not decoded GPU memory. Include residency and upload/cleanup
+cost when evaluating the selected variant; do not eager-load the whole cast.
+
+==========================================================================
+07. TASK A: CURRENT EVIDENCE AND THE ACTUAL FAILED P3 CASE
+==========================================================================
+
+All following paths are relative to E/painted-walk-integration/.
+
+Full regression:
+  full-node-48cf.json and full-node-48cf.tap
+  188 files, 1,920 tests PASS, zero failures/skips.
+  Node duration 336846.6647 ms; shell elapsed 337.1162405 seconds.
+  TAP SHA256 7253377160aae5385bc9bcb72b174b91cc8b26b67988c9b4287315f234d8582e
+It establishes the frozen checkpoint's regression result, not release acceptance
+or a reason to repeat that full suite before reading the failed native trace.
+
+Current 24-pin authority:
+  navigation-capture-source/PINS.json
+  SHA256 c59c9bd953dee44aa65e79190aebc5d9a1a1948257d907e45b3ed670eb9d5bb7
+  Candidate 48cfaa123ecc09c4885276cb58a789a61a36a823.
+Do not confuse it with the earlier integration-root PINS.json for 5ffae54.
+
+Successful scoped native recovery / clear portrait:
+  navigation-capture-source/actual-once/report.json
+    98123ce0c4c9d183c7e499e28397882940fbca293b78ef51821907222f60084c
+  navigation-capture-source/ROOT-TERMINAL.json
+    337d8d705c6ef9a7f080642216182c8004d2e9079cfd2cf16ea2e812b054e5a2
+  navigation-capture-source/ROOT-EVIDENCE.json
+    40e6a3608fd757e3262c51ed52506f0f478d01346c27b479f59d7490ff875822
+  navigation-review-media/HANDOFF.md and MANIFEST.json
+  navigation-physics-source/ and navigation-camera-source/
+  navigation-physics-actual/ and navigation-camera-actual/
+
+Actual results:
+  - Desktop lateral recovery 26.130312 legal units in 3090.2 ms, unchanged
+    26-unit / 5000-ms requirement, followed by blocker release/resumption.
+  - Portrait two right and two left wraps, each 58 accepted units, a complete
+    interrupted left-to-down turn/settle and three units accepted resumption.
+  - 715 retained rows, 697 manual unpaused/loaded-host/no-fallback rows, pending
+    accepted distance zero, 94 all-held-current-RAF rows with zero displacement.
+  - 9 initial and 9 loading input responses in each profile. Loading maxima
+    desktop 589.1 ms, portrait 21.6 ms, under unchanged 650-ms fixture bound.
+  - Actual trusted file open/close controls hide the fax normally. No CSS/DOM
+    suppression was used to produce unobscured walking evidence.
+  - Isolated silent headless desktop and Android portrait EMULATION, DPR 1.
+  - All 17 owned identities retired, no cleanup signals/errors/unknowns.
+Physics actual report SHA begins 0d7f6bd0; Camera actual begins d99ed19c.
+Both independently close scoped recovery/portrait holds; P3 was still required.
+
+Do NOT relabel that P4 lateral progress as passing another moving pedestrian.
+The browser P4 drove the real navigation helper with a manual native-RAF seam;
+the full ordinary AI mediation was CPU-supplied. It was not natural mission play.
+
+Representative CPU passing packet:
+  p3-passing-source/witness.mjs, DERIVATION.json, RESULT.json, REPORT.md,
+  EXECUTION.json and CHECKS.json.
+  Four cases: 60 Hz and alternating 14/20 ms, each avoid +1 / -1, 20 simulated
+  seconds each. Representative +13 painted Irmgard-style versus -14 towelWoman-
+  style legacy actor; real source lane correction separates their lanes.
+  Full body-diameter past in 4.11667 / 4.148 seconds, minimum separation about
+  26.03, no reversals. Clear flat terrain and no other live crowd are limitations.
+  The representative partner's constructed sandale/voice exclusion fields are
+  fixture devices, not proof of an actual natural identity pair.
+  An initial missing blocker VM binding failed before meaningful motion; that
+  failure and one authorized binding-only replacement are preserved.
+
+FINAL ACTUAL P3 FAILURE — THIS IS THE CURRENT BLOCKER:
+  p3-native-source/probe.mjs
+    7894c7792524a16e4b2d87451add65f2f15b7856cd0c6dc774826d12dfd1da60
+  p3-native-source/run-browser.ps1
+    c0f3d8cc7e1b01037fbe8adf6770c5232826b7ad5784828ab91dacd96646c561
+  p3-native-source/source-checks.json
+    06e511e9deeec1306c458b22e3e68844877b1a5195e5e4e624a209e78258ecbe
+  p3-native-source/actual-once/report.json
+    9aa82746274ab489f4830fb702e113e020022d78e96373f80920af73d9695b8e
+  p3-native-source/ROOT-TERMINAL.json
+    9ba9fcfa7a574a159f4e469888532ad12fca0a2901b235f1090211cec08df25a
+  p3-native-source/ROOT-CLOSEOUT.json
+    59d2eced16a4278d3d18995262147a1f5cffa978193da2f500a92594e08ea196
+  p3-physics-source/REVIEW.md: independent caller review INCOMPLETE/HOLD,
+    no inspected concrete defect; root separately read/checked the full caller.
+  PREPARATION.md, PREPARATION-RECEIPT.json, SOURCE-CHANGES.json, source.patch
+    preserve source lineage. Their unexecuted-worker wording is historical;
+    the later actual report and terminal are decisive.
+
+Actual selected actors, preserved velocities and route:
+  Irmgard crowd-irmgard-aktenordner-25, towelWoman, vx +13.
+  Partner crowd-klaus-dieter-knoedel-24, resolving to quiz-hartmut-keller,
+    towelMan, vx -17, no private locomotion lease, actual legacy cycle 13.5.
+  Partner rendered standing painted art; animated partner artwork was NOT claimed.
+  Route bounds {x:8202,y:2488,w:1286,h:72}, native body radii 13 each.
+  Legally declared staged roots [9117.352533333335,2540] and
+    [9157.352533333335,2540], 40 units apart on Irmgard's lane.
+  Player placed clear across road at [9137.352533333335,2836].
+  Static corridor certificate covered three lane rows and extent 118; it was
+    not an assertion that all dynamic bodies were removed or the world empty.
+  Normal queued legacy loading and fresh paint release/re-admission succeeded.
+  Private right/legacy left orientation used actual zero-distance native-RAF
+    preparation, not assigned pose state or an accelerated animation clock.
+  An exact extracted ordinary NPC loop drove ALL ordinary NPCs, followed by
+    finishStreetSimulationTick; other full-city systems were not claimed.
+  Native dt clamp .12, microsteps <= .025, strict body/route checks every step.
+
+Five-second result:
+  Failure: "P3: full goalward body-diameter passing not observed by5s".
+  No center crossing; no full passing.
+  Minimum center separation 26.213655477400994 (combined radii 26).
+  235 accepted mover results, 172 null holds, zero false moves, 273 segments.
+  Reversals: Irmgard 0, partner 1. 152 retained samples.
+  Final roots approximately [9144.46013333335,2540] and
+    [9178.090833333292,2540]; partner was facing/moving right.
+  First failure aborted. Avoid-minus and the intended 20-second continuation
+    were NOT RUN, and no successful opposite-side result can be inferred.
+  Do not conclude the partner reversal's precise cause without tracing it.
+
+Allocation session 90922/root PID 65800: terminal EXIT 1, elapsed 32.8698451 s,
+all 13 owned identities retired, zero signals/errors/unknown identities,
+browser and server closed, all 24 pins unchanged at closure. The final image
+and native video are retained. Only the staged PNG was personally viewed at
+closeout; the failed P3 video was not decoded or given an actual peer review.
+
+==========================================================================
+08. TASK A: THE CHEAPEST CORRECT CONTINUATION
+==========================================================================
+
+A. Read the saved report before starting any process. Bind its source hash,
+   selected partner, manifests, declared staging and actual timing. The CPU
+   -14/woman setup is not the native -17/man setup. Do not "fix" this difference
+   by changing the actual partner to the easier representative.
+B. Inspect the first native partner reversal and preceding source state. Join
+   only clocks with demonstrated correspondence. The raw report sample arrays
+   and probe source define the schema. Inspect pause, blockedTimer,
+   progressWindow, actual lane correction, legacy touristTurn, requested/facing,
+   accepted movement and planted holds. If a decisive variable was not recorded,
+   say so; do not invent its historical value.
+C. Reproduce the relevant source mediator in a small derived CPU fixture using
+   the actual partner kind/speed/route and a bound timing schedule. Preserve
+   the old representative case as a control. Include other live-body influence
+   only when the recorded source requires it. Distinguish fixture differences
+   from a production defect before editing runtime code.
+D. Find the first invalid decision, not just a final poor pose. Candidate areas
+   to investigate are legacy turn preemption, lane progress accounting,
+   recovery reversal and changing-blocker plan invalidation. These are leads,
+   not established root causes. A correct narrow fix must preserve genuine
+   no-exit yielding, speed, route legality and planted-turn completion.
+E. Add a meaningful regression that fails before the actual fix. Assert native
+   body separation, legal whole-body route, held-root/distance invariants and
+   the original passing deadline. Preserve tests for unpresented legacy actors.
+F. Make the smallest coherent source change, record scope, review the combined
+   diff, run affected checks, then freeze source/test/asset hashes or a commit.
+G. Obtain both required independent reviewers on that same candidate. Give
+   source versus supplied/actual evidence separately and exact writable paths.
+H. Prepare a NEW sibling native packet with a new output directory and explicit
+   lineage. Review every changed seam and verify full source inversion, pins,
+   deadlines, queue, resource floors and owned cleanup. Never edit old actuals.
+I. Only after a deliberate fresh root allocation, run the new bounded scenario.
+   Require full passing within five seconds and twenty seconds stable history
+   with both initial avoidance sides; other necessary P3 matrix cases must be
+   scoped by the reviewer. Do not widen the limit to get a green result.
+J. If a fresh result fails, preserve it and diagnose that specific failure.
+   Repetition, more logging, a new generation or a longer timer is not a fix.
+
+No reason exists to re-run source art comparisons, all standing cast imports,
+every previous browser loop or the full Node suite before this diagnosis.
+Broaden tests after a material source change or a newly exposed regression.
+
+==========================================================================
+09. CAPTURE SCRIPTS, REPLAY SAFETY, AND MEDIA REVIEW
+==========================================================================
+
+Everything in this section is a catalog, NOT an instruction to launch it now.
+Paths are relative to E/painted-walk-integration/ unless stated otherwise.
+
+integrate-navigation.py:
+  Root's prior source integration helper. Its changes are already committed.
+  Read for provenance; do not apply it again over the repaired source.
+prepare-navigation-capture.py:
+  Builds a derivative of an older capture caller. Its original target packet
+  is consumed. Do not rerun a generator that overwrites that source/evidence.
+navigation-capture-source/probe.mjs and run-browser.ps1:
+  Successful current P4/portrait caller, CONSUMED. Read source and results.
+navigation-capture-source/review-result.mjs:
+  Root arithmetic/pin/media verification helper. It writes a derivative receipt;
+  inspect before reuse and redirect new analysis to a fresh sibling directory.
+p3-passing-source/witness.mjs:
+  Four-case CPU witness, already executed. Read DERIVATION/RESULT first. A new
+  diagnostic should derive a bounded successor, not erase its result history.
+p3-native-source/probe.mjs and run-browser.ps1:
+  Failed actual passing allocation, CONSUMED. Never run it again, including its
+  --check mode if that would overwrite source-checks.json in the frozen packet.
+navigation-review-media/prepare.py:
+  Already executed one saved-media batch. Use existing boards/clips first.
+  It is not a request to rerun native capture or repeatedly decode the videos.
+
+Historical consumed capture packets, retained only as lineage:
+  browser-source/                    startup/schedule deadline failure
+  browser-motion-repair-source/      old 5ff three-profile art execution
+  p4-continuation-source/            old five-second recovery failure
+  p4-diagnosis/                      coupled source diagnosis
+  p4-avoidance-repair-source/         bounded prototype, not shipping authority
+  p4-regression-draft/               test draft later integrated by root
+  navigation-capture-source/         successful scoped current capture
+  p3-native-source/                  final current passing failure
+The word "source" in a directory name does not mean it remains unexecuted.
+Check ROOT-GO, actual-once, report and terminal, not the directory name.
+
+Walking caller operational bounds retained at the final capture:
+  45 seconds per profile; 180 seconds overall.
+  Admission >=1024 MiB free physical and >=6000 MiB free virtual memory.
+  Original strict process queue, 45-second admission observation.
+  <=4500 records, 1,572,864 sample bytes, 2 MiB report, 32 MiB total media,
+  <=4 PNGs, <=256 events, <=128 raw request failures, <=64 console records.
+  One context at a time; silent headless browser; native 25-fps video.
+  The process supervisor retains separate original cleanup cutoffs at
+  210/240/270/300 seconds, with early terminal retirement bounds.
+These are the old caller's actual limits, not universal game requirements or
+permission to lower a different job's admission floors.
+
+Vetted operator/helper lineage elsewhere under E:
+  mission-v23-run/run-fullmission.ps1
+    aea458461b0b45c348a300f0d371fc167b50af8d273599b9d221d18cb1a8172f
+  owned-tree-stale-edge-source/owned-tree-source.ps1
+    40bb38dd4626c8a5659fc4c8b71c10ac7208d419ebde65024639c6ae61b02c98
+Walking supervisors extract selected reviewed functions and retain exact
+ownership/resource/deadline/retirement semantics. A new sibling must demonstrate
+what was changed; "based on" is not a substitute for a diff/inverse proof.
+
+Owned process safety:
+  - Bind PID, creation/birth identity and executable path, plus proved ancestry.
+  - PID reuse or a stale parent edge is not permission to signal a process.
+  - Stop only that proved owned tree; never kill unrelated Chrome/Node/Python.
+  - Await actual retirement and stream completion. A launch or close request is
+    not a terminal receipt. Unknown ownership remains an explicit limitation.
+  - On Windows, hidden helpers use CreateNoWindow/hidden process options.
+
+Saved media facts and limits:
+  navigation-review-media has six boards and two native-speed lossless WebP
+  windows generated from the same retained consecutive frames. Source videos
+  remain authoritative. Overviews sample every twelfth native 25-fps frame.
+  Dense desktop frames 403..655 (253 frames, 10.120 s); portrait 572..672
+  (101 frames, 4.040 s). Requested padding truncates at the available video end.
+  Exact frame indices are known, but f/25 is nominal time, not demux PTS.
+  Performance.now-to-video offset is UNBOUND. Do not make exact slot/image joins.
+  Full-speed clip playback was not personally established by the reviewers;
+  boards are ordered still-image evidence. Do not claim calibrated sole-contact
+  accuracy, universal fluency or allcast Sandale parity from them.
+
+The bundled ffmpeg build lacks some normal rawvideo/image2pipe/showinfo/select
+capabilities. A prior capability failure is preserved. The proven route was a
+single-thread PNG stream with format=rgb24,crop=... and image2/update1 pipe,
+decoded incrementally into bounded Pillow boards. Review the existing helper's
+exact argv. Do not install a new encoder or repeat capability probes by default.
+Any genuinely needed new saved-media analysis gets its own explicit scope,
+fixed count/size/watchdog, unchanged source hashes and cleanup receipts.
+
+==========================================================================
+10. TASK B — NATURAL FULL MISSION CHAIN AND REAL RESTART
+==========================================================================
+
+Status: V23 actual full-chain/restart run UNSTARTED at closeout. Earlier V6..V22
+attempts and diagnoses are preserved. Do not walk backward through each version
+or launch every historical operator. The newest relevant source is V23.
+
+Primary packet paths under E:
+  mission-v23-tour-yield-source/HANDOFF.md
+  mission-v23-tour-yield-source/after/natural-flow-recovery-driver.mjs
+  mission-v23-tour-yield-source/tests/
+  mission-v23-tour-yield-source/tour-yield.test.mjs
+  mission-v23-tour-yield-source/FREEZE.json
+  mission-v23-tour-yield-source/SOURCE-SUBSTITUTIONS.json
+  mission-v23-tour-yield-source/driver.diff
+  mission-v23-run/job.json
+  mission-v23-run/BINDING.json
+  mission-v23-run/validate-fullmission-report.ps1
+  mission-v23-run/run-fullmission-stale-edge.ps1
+  mission-v23-run/ROOT-STALE-EDGE-SOURCE-CLOSURE.json
+  mission-v23-run/STALE-EDGE-INDEPENDENT-REVIEW.md
+  mission-v23-run/ROOT-ADMISSION-HOLD.json
+  mission-v23-physics-review/ and mission-v23-camera-review/
+
+V23 driver SHA256:
+  380416ba70f98b8909608b505dea569cb8b79f5c70d1e23da3b1589ce2da16a5
+Original mission operator SHA256:
+  aea458461b0b45c348a300f0d371fc167b50af8d273599b9d221d18cb1a8172f
+Selected newer stale-edge sibling operator SHA256:
+  ff40d5cbe9594db260c4d51468fb21561c2aaded234fce3187785357be024e84
+Original unchanged job SHA256:
+  aaa5a17dbe706241eaf431ab692857171911c5628d47539a607dfb0b3d4a88bf
+
+The selected stale-edge operator, not the old frozen operator, is the intended
+lineage. Its source closure records five reversible substitutions, ten unchanged
+action/queue/deadline/identity functions, the same 56 job pins and an additional
+selected helper pin. Neither old hashes nor old clean-HEAD assertions are a
+fresh grant. Documentation/runtime have changed since preparation; compare and
+rebind only a reviewed successor without weakening any assertion or historical
+authority. Fresh RTK edits alone currently make a clean-tree check fail.
+
+Mission admission differs from the short walking capture:
+  >=2048 MiB free physical and >=12000 MiB free virtual memory.
+  Original process queue must also admit the job.
+  Peak resource usage remains UNKNOWN; passing a floor is not proof of margin.
+  Original active cutoff 14400 s (four hours), cleanup boundaries 14430/14460/
+  14490 s, with early terminal/error cleanup min(original, elapsed+30/60/90).
+  Never wait the unused active budget after an observed terminal/error.
+The latest saved admission information was below the virtual floor; no launch
+was made. Do not lower the floors, kill unrelated processes, or use the walking
+test's lower values as permission. Check source/absence first, then fresh
+admission, and preserve a zero-start HOLD if unavailable.
+
+V23's important harness correction:
+  A current tour leader really waiting/pathBlocked can be blocked by the player
+  occupying the LIVE retained route prefix. The driver checks current tour,
+  stop, leader, retained aim identity and an <=80-unit prefix sampled <=1 unit.
+  It distinguishes another obstruction from the player. It searches 64 cardinal
+  exits at 8-unit resolution within 128 units and the original 185 follow radius.
+  The chosen direct exit and its complete cardinal approach must be paved,
+  body/static/grade-safe and release the guide corridor. Original input pulses,
+  15-second stall guard, follow/arrival/deadline rules remain unchanged.
+  A changed hint/target/attempt cancels back to resnapshot. No position/mission
+  assignment, fake arrival or replacement garden route is allowed.
+  CORRIDOR_CLEAR_NOT_TOUR_COMPLETION is intentional: actual leader arrival,
+  settle, .25-second halo dwell and automatic dialogue completion still decide
+  the game's tour outcome.
+
+Recorded source evidence: 205 retained cases plus 8 focused cases PASS; syntax
+PASS. Earlier hanging/failed finite fixture executions and owned retirement
+receipts are preserved. Some CPU tests use logical input adapters; they are not
+actual browser travel. Do not erase the difference when reporting results.
+
+Future safe sequence:
+  1. Select the mission task after the current integration batch closes.
+  2. Read V23 source closure, driver diff, review files and latest runtime diff.
+  3. Validate source/support dependencies against the chosen current runtime.
+     If updating the packet, produce a named successor with exact changes and
+     inverse proof; do not merely rewrite all expected hashes until it passes.
+  4. Run only affected deterministic checks. Source examples below are for an
+     intentional new analysis/output, not permission to overwrite frozen logs:
+       & $Node --test <V23 tests selected explicitly>
+       & $Node --test --test-timeout=30000 <V23 tour-yield.test.mjs>
+  5. Read the operator's actual parameters before use; review the selected new
+     operator/job hashes, absent once-only outputs and complete protected set.
+  6. Perform fresh original queue/resources and deliberate integrator allocation.
+     The existing interface is -PrimaryGo, -ReviewedOperatorSha256,
+     -ReviewedJobSha256. These parameters are NOT values to fill from this TXT
+     and launch automatically. A root grant and current pin review come first.
+  7. Start one supervised job and poll that same handle to terminal, preserving
+     first failure and partial evidence; no automatic retry.
+  8. Run the report validator in its expected operator/time context. It depends
+     on Assert-TaskTime and job state; it is not a free-standing green stamp.
+  9. Inspect ordered screenshots and causal receipts as well as final numbers.
+
+Success requires all 33 ordered grouped checkpoint IDs (appendix below), each
+PASS with its expected screenshot, current/final source and support hash sets,
+no errors/requestFailures/cleanup/source drift, browser/server closure, and:
+  End: mission=8, forms=7, citizen=true, gameOver=true, visible progress=100%,
+       hidden form, and exact authored citizenship ending feedback.
+  Restart: actual reload, greater timeOrigin, same URL, fresh-start-screen-ready,
+       started=false, mission=0, forms=0, citizen=false, gameOver=false,
+       visible enabled unobstructed start control.
+No direct state assignment, seeding, debug completion, synthetic phone success
+or hidden chain skip can substitute. The harness is informed unseeded desktop
+automation; it does not certify a naive newcomer, a second full chain, Android,
+physical paired phone usability, audible listening or general performance.
+
+==========================================================================
+11. TASK C — REMAINING STREET MOTION, ACTIONS AND CHANGING-POSE SPEECH
+==========================================================================
+
+There is NO missing whole neutral street identity requiring regeneration.
+The source audit found 43 standing manifest records with matching files. Two
+are retained player/police exceptions, leaving 41 eligible painted street
+identities. All 41 already had their own source candidates. The private pilot
+adds locomotion for Irmgard alone: 42 standing-only plus one atlasMotion record.
+Thus 40 other eligible street personalities remain AFTER the pilot closes.
+Published main has not received that pilot. Do not claim 40 are already done.
+
+Existing source capability is not animation acceptance:
+  29 targets (19 city, 9 ordinary crowd and Ede) have four-view sources without
+  identified authored gesture keys in the selected historical source inventory.
+  12 (9 quiz and 3 street advisers) have existing twelve-key source families,
+  but usable connected hands/props, registration, transitions and speech remain
+  subject to exact source/export/runtime acceptance.
+  Historical metadata identified 25 four-direction registered families versus
+  16 front-only selected registrations, despite underlying direction sources.
+  Do not call those 16 nonexistent characters or generate replacement neutrals.
+
+Use E/remaining-assets/inventory.json and TABLE.md for IDs/source paths. A
+standalone per-identity list is appended below. Audit updates and later accepted
+keys before choosing work; this inventory predates some private Wagner keys.
+
+One-family completion sequence:
+  1. Resolve actual runtime identity/voice and all approved native references.
+  2. Inspect the exact first failing source/extraction/registration/transport/
+     export/runtime-selection stage. Keep already approved states unchanged.
+  3. Define required actions and speech ownership before generating more poses.
+  4. Generate or repair only missing whole connected keys. Lock anatomical
+     left/right, prop ownership, short body/large head, garment coverage, shoes,
+     baseline/pivot and closed-rest mouth. Do not stretch a hand across an
+     impossible span or hide a missing contact with an overlay patch.
+  5. Prove contacts, turn/stop/start and action entry/exit before expanding a
+     loop. Add true inbetweens for the largest transition and final-first seam.
+     A 60-fps renderer showing four held paintings is still a four-pose flipbook.
+  6. Calibrate gait distance on exact exported side frames at actual world
+     scale. Distance-driven gait alone does not prove planted soles.
+  7. Fit each speaking pose's actual lip/cavity/corner profile; keep prop/no-mouth
+     occlusion states, owned closed cues and media-derived timing coherent.
+  8. Encode desktop/mobile variants, inspect every affected cell and alpha edge
+     on light/dark backgrounds, verify transparent gutters and hidden RGB.
+  9. Verify the actual city selector admits this actor's requested variant,
+     suppresses/restores fallback correctly, releases textures/leases, and keeps
+     simulation movement, action, speech and interruption lifetimes independent.
+ 10. Inspect exact encoded ordered ordinary-speed motion, loop wrap and all
+     affected transitions in the actual renderer, with same-candidate reviews.
+ 11. Validate load/decode/upload/residency/cadence/teardown and responsiveness.
+     Integrate only accepted exports/consumer changes, never private sources or
+     an entire older residents/street-speakers runtime.
+
+Relevant existing production tools, not blanket run commands:
+  tools/build-street-character-sprites.py
+  tools/build-street-speaker-motion.py
+  tools/export-street-characters.mjs
+  tools/playtest-street-character-sprites.mjs
+  tools/playtest-street-motion.mjs
+  tools/playtest-street-wisdom.mjs
+Read their actual arguments/input/output policy and selected source manifest.
+Do not run a broad exporter over all families merely because the tool exists.
+
+Preserve the existing four neighbor atlases and two Sandales as separate
+accepted identity systems. Preserve original Herr AND Frau Sandale references
+when comparing painted walking; one reference alone does not establish parity.
+No claim of universal all-character contact parity has been accepted here.
+
+==========================================================================
+12. TASK C1 — WAGNER, BRIGITTE, DIETMAR AND KELLER: EXACT SAVED HOLDS
+==========================================================================
+
+WAGNER (quiz-klaus-dieter-wagner):
+  Existing work-v2 art has tape in attached hands and notebook in anatomical
+  left vest pocket. Do not regenerate the notebook simply because an older
+  gesture key lacked it. More recent private static keys exist:
+    E/wagner-notebook-insertion-source/
+      klaus-dieter-wagner-notebook-insert-v1.png
+      SHA256 de53007a7e2f0ee32732e093c392979967ab391d9431f7587e385c9f2b1231bd
+    E/wagner-notebook-release-source/
+      klaus-dieter-wagner-notebook-release-v1.png
+      SHA256 b15d1a70abe42f8889813a31b3d08ce55526a5a666017e2822cf02d2604f61b4
+    E/wagner-hook-acquisition-source/
+      Source PNG hash 132ba312e080cd917f4cf5d60406f55ea0c2ca73ec5f08ce712db647b3071ed9
+  Read CHECKPOINT.json, provenance, creator HANDOFF and ROOT-HANDOFF where
+  present, plus corresponding Physics/Camera static-source reviews. Do not
+  assume every packet has the same filename set.
+  Release/acquisition are accepted STATIC authoring keys only. Native images
+  were viewed and connected arms/prop ownership judged compatible. Their exact
+  pivot, notebook registration, hidden support, alpha residue, final padding and
+  encoding remain unapproved. One release scan found low-alpha edge residue and
+  hidden RGB; raw same-size canvas is not common figure registration.
+  Acquisition key already exists; do not follow the older release note's
+  "next acquisition" instruction as if it were still missing.
+  Next useful work: fit the latest keys together, verify reach/hook contact,
+  extension/retraction and outgoing notebook/hand handoffs; repair the first bad
+  anchor/transition. Complete action ordering, connected changing-pose mouth,
+  ordinary-speed movement/world/device acceptance before runtime promotion.
+  Private branch has extra old preserved material; import only selected reviewed
+  source/export units, never its whole tree.
+
+BRIGITTE (quiz-brigitte-neumann):
+  assets/sprite-sources/street-quiz/brigitte-neumann-keys-v2.png
+  Corrected viewing/work key has one binocular pair, but ruler-under-left-arm
+  handoff lacks connected staging. Speaking-emphasis key loses the ruler and
+  starts open-mouthed; that key was excluded. A useful bounded new-art job is
+  one whole connected speaking-emphasis key retaining anatomical-left ruler,
+  one binocular pair and closed-rest mouth at the same compact scale/floor,
+  with at most the one actually necessary underarm bridge. Do not commission
+  an entire new family. Compare actual native returned pixels before fitting.
+
+DIETMAR (crowd-dietmar-din-norm):
+  assets/sprite-sources/street-advisers/dietmar-din-norm-keys-candidate.png
+  Working hand/ruler/case support is still a source-integrity HOLD.
+  Anatomical LEFT owns case; RIGHT owns ruler. Repair the connected hand/prop
+  staging in whole source art. A detached hand patch or looser coverage metric
+  cannot waive this missing contact. Preserve identity and accepted other keys.
+
+KELLER (quiz-hartmut-keller):
+  Whole moving asset remains FAIL/HOLD, despite many successful numerical and
+  operator checks. Read closures before any older SOURCE READY note.
+  Useful roots under E:
+    keller-v6-registration/, keller-preview-v8/
+    keller-collar-rematch-source/, keller-collar-rematch-supported-source/
+    keller-collar-rematch-preview-source/ and their review folders
+    keller-midpoint-native-pass-source/ROOT-FINAL-CHECKPOINT.json
+    keller-collar-contributor-source/ROOT-FINAL-CHECKPOINT.json
+    ROOT-KELLER-REMATCH-FINAL.json
+  The rematch preview executed, but root and both reviewers rejected intermediate
+  joins, fragments and ghosted/blurred contours. Native key poses were intact;
+  normal negative space between legs is not itself a defect.
+  Later native observer work established two actual side programs, per-side
+  current GL identity, 20 API renders / 40 native side draws / 24 reads and
+  declared field identity under the pinned r186 cached-uniform handover.
+  Those are observer correctness facts, not repaired anatomy. The collar
+  contributor result found body positive paint accepted while head positive
+  paint queried neighboring vest/body ownership and was rejected. No erroneous
+  guard or legitimate new recipient/correspondence has been proved.
+  Next stated scope was one finite SOURCE/saved local collar boundary
+  correspondence/support/handoff design, not another native instrumentation
+  experiment. Inspect the first ownership/registration fault and valid source
+  relationship. Do not keep increasing opacity/support or disabling a guard to
+  hide it. A successful operator exit does not promote this asset.
+  Allocations are consumed. The collar contributor cleanup recorded one proved
+  OWNED child signal and zero survivors; do not repeat a blanket "no signals"
+  assertion about all Keller history. Never signal a foreign process.
+
+Other historical source blockers:
+  Erwin direction art now exists and hash-matched; do not regenerate it from a
+  stale absent-source note. Manfred DIN's coherent short-v2 family also exists.
+  Heike has saved bounded source corrections; read current owner records before
+  deciding whether it is cheaper reuse than a new key. No old queue auto-launch.
+
+==========================================================================
+13. TASK D — HANNELORE / REMAINING PERSONALIZED VOICE PRODUCTION
+==========================================================================
+
+Hannelore city dialogue packet remains unsealed SOURCE, unexecuted production.
+Existing 601 published recordings were already present; do not count them as
+new synthesis completion. The older ordinary parent is at attempt 2 of 2.
+Do not rename or reset that history by creating a fresh-looking packet.
+
+Main source packet, relative to primary authoring checkout:
+  output/game-completion/hannelore-city-execution-source-v1/
+Earlier producer/request/cue packet:
+  output/game-completion/hannelore-city-codeswitch-source-v1/
+Earlier independent source review:
+  output/game-completion/pilot-parent-continuation-source-v1/review/
+
+Read in this order:
+  CONSOLIDATION-HANDOFF.md, README.md, handoff.json, source-proof.json,
+  authority-template.json, phase-job-templates.json, request-plan.json,
+  expected-parent-plan.json, expected-segment-plan.json,
+  expected-plan-source-proof.json, admission-compatibility.md,
+  carrier-source-map.md and exact carrier deltas as needed.
+
+Important script roles:
+  launch-hannelore-phase.ps1:
+    Finite Windows carrier specialized from the earlier reviewed supervisor.
+    Source only, not a launch grant. Four manually selected phases:
+      plan-parent -> plan-children -> render -> process.
+    No automatic queue or retry; each phase retains a shared 900-second ceiling,
+    exact role/binary/public/private pin checks and owned cleanup.
+  build-knick-voice.py:
+    The copied existing producer used by this packet; name is historical.
+    Inspect exact chosen request/profile/child plan before use.
+  validate-parent-cues.mjs:
+    Existing deterministic parent/cue validation derivative, not synthesis.
+  test-hannelore-carrier.ps1:
+    Pure source AST/extracted-function tests; carrier top-level launch does not
+    execute. At consolidation the worker had NOT run these tests.
+  test_expected_plan_contract.py:
+    Pure extracted serializer/child-plan contract tests against expected Windows
+    CRLF bytes. Run intentionally on Windows before sealing a successor.
+
+Source checkpoint hashes:
+  handoff.json
+    1c1b3f1faac695e986b042313dc3432617fb9e80e47748a2defb2ddbeae95f5e
+  source-proof.json
+    f08a7bebcf1cf97ec2c9a47f2b689c991d2163309b4db56a583d2880b57a2af0
+  authority-template.json
+    ba08eaef24005f271174cf9d285d3a330050f8ab04f3d9d43ac7700ade6d11e0
+  launch-hannelore-phase.ps1
+    e376309558ec4d942cac2321da158c2c268322c901db2c18067b9f0b2eaa9b40
+
+Limits retained in this source proposal:
+  - Five child generations, zero whole-parent TTS, zero automatic retries.
+  - Five diagnostic ASR calls and at most two full-parent German ASR calls.
+  - Source-composed expected plans are NOT real private plan receipts.
+  - Both actual planning phases must create fresh files and match the expected
+    bytes/hash. Windows CRLF is intentional; a mismatch is HOLD, not permission
+    to promote expected data into an actual receipt.
+  - Existing physical/virtual floors 2048/12000 MiB; render additionally needs
+    5500 MiB GPU headroom with valid surrounding RAM samples. Stable headroom
+    requires a root decision; a near-threshold reading is not a grant.
+  - Protect exact approved profile, its original and normalized references,
+    historical ordinary JSONs, model/binary/private inputs and current public
+    sources. Do not follow private target metadata or disclose credentials
+    merely to write a handoff. Perform protected checks only in the selected
+    authorized production step.
+
+Smallest continuation:
+  1. Confirm frozen inventory and read the current fixed-voice protocol.
+  2. Execute only the two pure source tests above in a fresh logged analysis.
+  3. Review current public-source compatibility and exact profile/role bindings.
+  4. Decide whether this finite packet remains the appropriate selected task.
+  5. Seal an actual successor authority only after fresh protected-pin, resource
+     and absence checks. Preserve the null-grant source template unchanged.
+  6. Manually run one authorized phase at a time, validate its qualified terminal
+     and actual output before moving to the next. No silent retry after failure.
+  7. After valid media/cue proof, implement only the narrow prospective admission
+     sketch using current city format/source/license/atomic-write helpers.
+  8. Run tools/curate-voice-library.mjs --check and focused text/cue/owner tests.
+  9. Verify actual city speaker selection, exact caption/audio, cancellation,
+     close/reopen, recorded playhead and changing-pose mouth behavior.
+ 10. Perceptual listening remains separate. Silent state checks or diagnostic
+     ASR do not establish audible quality or exact human listening judgment.
+
+Production voice rules apply to ALL remaining speakers:
+  Read VOICE-CAST.json productionVoices; use saved approved profile UUIDs and
+  reference hashes. Keep exact source text, normalized text, voice ownership,
+  cue identity, renderer/revision/processing and held/accepted/listened counts.
+  Preserve all unrelated recording objects and defaults during admission.
+  Do not invent a rule requiring a different human performer for each fictional
+  character; different approved profiles may share a performer.
+  Do not create a new synthesis service, voice database, scheduler or full-cast
+  regeneration. Ruediger's separate exception is outside Hannelore's scope.
+
+==========================================================================
+14. TASK E — COMPLETE PLAYABILITY, DEVICE, AUDIO AND PERFORMANCE COVERAGE
+==========================================================================
+
+After coherent source/asset batches, verify their actual integration. Do not
+leave all playability review to an enormous final sweep. Asset owners must carry
+their own selected-download, decode, readiness, fallback, residency, cadence and
+cleanup contracts; final QA cannot compensate for unbounded background work.
+
+Needed distinctions:
+  Desktop Chromium actual browser evidence is not Android evidence.
+  Android portrait/landscape emulation is not physical Android.
+  A paired phone is a separate browser/device context with its own lifecycle.
+  Silent media scheduling checks are not listening.
+  Source/CPU geometry checks are not rendered visibility or real foot contact.
+  A forced scene is not natural mission travel.
+  A full informed automation chain is not a naive newcomer usability study.
+  Packaging/source sizes are not measured frame/resource performance.
+
+Physical Android was previously unavailable through ADB/SDK access. Recheck
+only when that task is selected. If still unavailable, mark coverage NOT RUN;
+do not install unrelated software or change security settings automatically.
+
+Silent isolated browser policy:
+  Keep game audio logic active for timing, but mute isolated media elements,
+  Web Audio destination and speech synthesis BEFORE navigation and throughout.
+  Never mute the user's PC or steal foreground focus. No audible playback or
+  foreground tests without the user's explicit request. Use headless/hidden
+  session controls and preserve cleanup even on failure.
+
+Affected browser scenarios normally include desktop, Android portrait and
+landscape, loading/loaded/fallback, resize, pause/modal interruption, input,
+console/request errors, release/restoration and actual script/entry selection.
+Do not rerun unrelated building/vehicle matrices for a spelling-only change.
+
+Performance acceptance should answer:
+  What transfers and decodes, when and why?
+  What happens before normal Start, when approaching, and when idle?
+  Which exact variant/host/cache owns bytes, textures and pending callbacks?
+  What work happens per frame, per actor, while offscreen and on cleanup?
+  What comparable input/loading/frame observations were actually collected?
+  Are queue, concurrency, cancellation and stale-owner guards preserved?
+No general speedup/device-quality claim follows from one 650-ms input fixture.
+
+Whole-game completion still needs the real mission/end/restart evidence and
+actual asset/action/speech integration selected above. Keep existing satire,
+phone/forms/office entry/exit, rewards and browser-generated dialogue behavior.
+
+==========================================================================
+15. THE PHYSICS / CAMERA ACCEPTANCE MATRIX IN PRACTICAL TERMS
+==========================================================================
+
+Read For-AI/OBJECT-CONSISTENCY.md for exact current requirements. Both independent
+read-only roles are mandatory for world-affecting candidates, even when the
+implementation was small. Source authors are not sole approvers. Review the
+same frozen revision plus relevant source/test/asset hashes; separate supplied
+evidence, fresh checks, actual image viewing and unrun scope.
+
+Physics rows:
+  P1: no body penetration/tunneling across affected solids/spawn/re-entry.
+  P2: complete citizen body stays on permitted pedestrian routes/crossings,
+      including correction, recovery, quiz and route edges.
+  P3: opposing/overtaking wide-pavement passing within 5 s; narrow paths yield,
+      no overlap/shoving/repeated side swaps, at least 20 s history both sides.
+  P4: legal-exit recovery achieves a body diameter of net legal progress within
+      5 s; no-exit actor holds/retries without walk-in-place/teleport/churn.
+  P5: gait follows actual displacement; planted turns/reactions complete on
+      authored clocks; pause/start/stop/collision/resume retain grounded feet.
+  P6/P7: vehicle dynamics and full-body off-map lifecycle only when affected.
+
+Camera rows:
+  C1-C3: actual opaque mesh sightline obstruction, smooth instance-specific
+      material fade/restoration, required clear/proximity/glass/gap negatives.
+  C4: actual person/wall/roof and person/person depth, alpha, floor pivot,
+      fallback/loaded attachment and no globally always-frontmost sprites.
+  C5: actual post-fit person/car/door/building/landmark proportions when changed.
+  X1: applicable root/compatibility and desktop/mobile execution/error cases.
+
+For numerical native grounded-circle checks use combined radii and the current
+justified contact tolerance; do not introduce visible overlap to pass. The P3
+caller used native 1e-6 tolerance, not a newly widened clearance.
+Node cases, source regexes and screenshots prove different things. A screenshot
+cannot prove smooth motion; a geometry check cannot prove correct visible alpha.
+
+Useful existing gates, after selecting the correct changed scope:
+  & $Node --check game.js
+  & $Node --check world3d.js
+  & $Node --test tests/object-physics-consistency.test.mjs tests/city-models.test.mjs
+  & $Node tools/playtest-object-consistency.mjs
+The browser tool is not an automatic complete P1..P7/C1..C5 certification. Read
+its fixture and report what it actually exercised. Source checks alone do not
+close a rendered/device HOLD.
+
+For event-dependency changes also use game-event-logic: map trigger -> mediator
+-> guard/ownership -> actual reaction -> progression; challenge missing, stale,
+duplicated and delayed events. A final state packet does not prove every link.
+
+==========================================================================
+16. HOW TO TEST EFFICIENTLY WITHOUT WEAKENING THE RESULT
+==========================================================================
+
+Before editing, record scope and initial status; read the actual callers and
+existing tests. Select the smallest invariant or real scenario that would
+distinguish the proposed repair from the failing behavior. A helper test that
+repeats the implementation or ignores the production mediator is insufficient.
+
+Use small source/CPU checks first, then one representative affected native
+scenario. Inspect the first failure before broadening. Save exact commands,
+working directory, exit status, elapsed time, input hashes and limitations.
+Do not run browser, asset generation, ASR and multiple decoders concurrently.
+
+Example FUTURE focused walking run from the selected candidate directory:
+  Set-Location -LiteralPath $Candidate
+  & $Node --test tests/street-pedestrian-avoidance.test.mjs tests/street-route-hold.test.mjs tests/street-atlas-motion.test.mjs
+Read exact paths at the current revision before copying. It is unnecessary to
+rerun this merely to verify that a TXT file was written.
+
+For a justified fresh full Node regression, enumerate files explicitly rather
+than trusting shell glob behavior on Windows:
+  $TestFiles = @(Get-ChildItem -LiteralPath (Join-Path $Candidate 'tests') -Filter '*.test.mjs' -File | Sort-Object Name | ForEach-Object FullName)
+  Set-Location -LiteralPath $Candidate
+  & $Node --test --test-concurrency=2 $TestFiles
+Use a fresh bounded/logged supervised execution appropriate to the selected
+task. Preserve complete TAP for evidence, including failures, rather than just
+RTK's compact terminal summary. Do not overwrite full-node-48cf.tap.
+
+Python grounding tests and selected asset/skill checks are separate from Node.
+Use the actual available Python dependencies and test entry points; do not
+invent that a historical Node full suite also ran all Python/browser tests.
+
+When a test fails:
+  - Distinguish product bug, stale fixture dependency, wrong cwd and harness bug.
+  - Preserve the first failing source/log/receipt.
+  - Fix a genuinely wrong test as its own justified change, maintaining its
+    original meaningful assertions. Do not silently loosen timeout, epsilon,
+    expected identity, coverage count or source protection.
+  - Re-run the affected checks after changes. Broader/repeated suites need a
+    new reason, not anxiety or a desire for a larger PASS count.
+
+==========================================================================
+17. DELEGATION, OWNERSHIP AND REVIEW BRIEF TEMPLATE
+==========================================================================
+
+The user authorized clearly delineated subagents earlier, especially unfinished
+asset preparation. Execution is now paused; this TXT is not dispatch. On resume,
+follow the then-current user scope and For-AI/SKILLS.md. Keep one runtime
+integrator and one selected integration candidate, with at most three workers
+plus root when that matches host limits. No new user-owned chats are necessary
+for ordinary subtasks; use bounded subagents when authorized.
+
+Good separable work:
+  - A source-only diagnostic written to one fresh ignored output directory.
+  - One whole missing action key and its provenance, no runtime catalog writes.
+  - Independent Physics/Camera reviews of the same frozen candidate.
+  - A bounded source inventory or saved-media preparation shared by reviewers.
+Poor delegation:
+  - Several workers editing game.js/world3d.js or the same manifest.
+  - "Finish all remaining characters" without exact ownership and acceptance.
+  - Workers committing/pushing, modifying unrelated dirty paths, starting their
+    own job queues, spawning new tasks or accepting their own implementation.
+
+Every brief should state:
+  Base commit and current worktree; one goal/result; affected level IDs and
+  exact instruction paths; exact read paths; exclusive writable paths; required
+  contracts; applicable skills; installed model/effort chosen without overriding
+  user preference; acceptance checks; source-versus-actual evidence; limits;
+  no commit/push/runtime modification unless explicitly integrator-owned; stop
+  after the bounded result and report all deviations/failures/process state.
+
+Example for the next walking diagnosis:
+  Read 48cfaa1 actual P3 packet + specific ordinary NPC/controller sources.
+  Write only E/<new-p3-diagnosis>/; no source/art/Git/native/browser changes.
+  Explain first observed mediator divergence, reuse fixture with exact lineage,
+  run only a fixed agreed set of CPU cases if authorized, preserve failures,
+  return a source-level recommendation and its unproved assumptions, then stop.
+
+Do not reanimate old named agents because an old paragraph says ACTIVE. The
+previous workers were all stopped at closeout. New reviewers get fresh briefs
+and explicit supplied-versus-fresh evidence attribution.
+
+==========================================================================
+18. INTEGRATION AND PUBLICATION: FINISH ONE COHERENT BATCH
+==========================================================================
+
+Standing project policy authorizes publication of completed validated features
+and fixes. That does not authorize shipping a failed candidate or resuming this
+paused backlog automatically. The integrator owns acceptance and publication;
+workers do not commit/push. Never force-push or bypass protection.
+
+Before integration:
+  - Inspect current main and all relevant working-tree changes. Preserve the
+    unrelated RTK documentation edits noted above and any newer user changes.
+  - Fetch main read-only, compare ancestry and actual changed interfaces.
+  - If a current shared checkout is unsuitable, use a managed isolated worktree
+    from the correct current base, inspecting attached worktrees first. Primary
+    GitHub checkouts belong under Documents/GitHub by default.
+  - Apply only the coherent accepted feature/export/test/owning-doc unit.
+    Neither a private preservation branch nor assets/residents candidate status
+    is permission for a wholesale merge or overwrite of root runtime files.
+  - Keep one runtime and one shipped asset authority. Update actual script/cache
+    references together; do not drop newer main voice/fax/mission changes.
+
+After integration:
+  - Check the full combined diff and exact source/assets, not just worker patches.
+  - Run affected checks and required same-candidate reviews/native evidence.
+  - Full regression if justified by the combined source changes; document every
+    unrun required gate rather than stamping acceptance from a checkpoint.
+  - Stage explicit owned paths, inspect staged diff/whitespace and excluded
+    private inputs, commit, then normal push of the accepted batch to origin/main.
+  - If remote moved, preserve work and reconcile normally; no force overwrite.
+  - Watch the GitHub Pages workflow to actual terminal. It runs its own source,
+    voice, office, gameplay, street and direct-level checks plus static packaging.
+  - After deployment, verify https://germanysimulator.de/ and
+    https://germanysimulator.de/3d.html. Verify intended root script versions and
+    compatibility query/hash preservation. HTTP/source checks are not a new
+    rendered/browser/gameplay/device test; label them accurately.
+  - Record commit, workflow URL/conclusion, public URL results, unchanged source
+    expectations, and remaining scope. Keep user-facing summary concise.
+
+The 2d929f2 documentation release was completed this way with workflow success
+and postdeployment HTTP checks; the failed walking pilot was deliberately left
+private. This TXT's own documentation commit may be newer than 2d929f2. It
+changes no gameplay and does not convert the private pilot into accepted main.
+
+==========================================================================
+19. GENERAL METHODS, SKILL SYNCHRONIZATION, AND WHAT NOT TO REBUILD
+==========================================================================
+
+At an accepted animation milestone, ask whether a reusable method was proved.
+If so, update its owning portable skill guidance/helpers and synchronize the
+project copy, preserving upstream provenance/license and executable checks.
+Keep specific cast images, task reports and acceptance history in this project.
+Do not publish an unaccepted experiment as the default method.
+
+Current relevant skill validation tool:
+  tools/validate-game-skills.mjs
+It checks installed inventory, hashes and references, not the truth of visual
+judgments or physical-device playability. Read .agents/skill-sources.json and
+current pinned upstream diffs before an intentional sync. Never execute an
+unreviewed hook or install @latest merely to refresh a method.
+
+The optional legacy ChatDev runner is not the main coordinator and cannot
+provide browser/device evidence through its source-only tools. It does not
+justify an additional orchestration service. The current Codex integrator and
+existing local tools are sufficient for bounded production/review work.
+
+No new scheduler, polling daemon, automation, alternate game entry/runtime,
+backend, database, engine, voice service or asset pipeline is requested. Reuse
+existing source ownership, queues, catalogs, media lifetimes and fixtures.
+
+==========================================================================
+20. RESUME CHECKLIST AND REAL COMPLETION CRITERIA
+==========================================================================
+
+FIRST TEN ACTIONS AFTER AN EXPLICIT EXECUTION RESUME:
+  1. Read current user steering, AGENTS/startup and this dated handoff.
+  2. Inspect current heads/status without modifying the primary authoring tree.
+  3. Confirm no old worker/job is being mistaken for a new authorized allocation.
+  4. Resolve city scope and load the exact walking/event/physics skill route.
+  5. Read final P3 report/closure and verify its pinned artifacts.
+  6. Compare actual -17/towelMan setup with representative -14/towelWoman CPU.
+  7. Select one source/CPU diagnosis and exclusive output; do not launch a browser
+     or generate artwork as the first step.
+  8. Record the first causal failure and a minimal proposed repair/regression.
+  9. Integrate/review/test the one frozen candidate and collect affected native
+     evidence only after source checks and fresh operational admission.
+ 10. Accept/publish or preserve the exact remaining gate; choose the next task
+     only after that checkpoint is concrete and the user's scope allows it.
+
+A CHARACTER FAMILY IS FINISHED ONLY WHEN:
+  Approved identity/source and anatomical/prop ownership are intact; required
+  walks/turns/stops/actions/speech transitions are fully covered; exact encoded
+  desktop/mobile frames and native ordered motion pass; actual city selection,
+  movement/speech/media/cue/fallback lifetimes are correct; affected Physics,
+  Camera and playability gates pass; costs/teardown are bounded; accepted files,
+  tests/docs are integrated and published. Static key approval is one milestone.
+
+THE CENTRALIZED BACKLOG IS FINISHED ONLY WHEN:
+  Required preserved features have been reconciled onto current main, selected
+  remaining motion/action/speech families meet their actual gates, natural
+  mission/end/restart is proven, required platform/audio/performance coverage is
+  honestly resolved, coherent accepted changes are published and verified, and
+  all workers/jobs have stopped with a clear record of any deliberate deferral.
+  Do not mark the broad goal complete simply because time/budget is exhausted.
+
+For a requested pause, save a current checkpoint/handoff and report PAUSED;
+do not silently schedule automatic resumption. This TXT is not an execution
+grant and does not revoke the user's 3D pose-accuracy deferral.
+
+==========================================================================
+APPENDICES FOLLOW
+==========================================================================
+
+The following appendices are assembled from existing local metadata, not new
+rendering or acceptance. They make this TXT useful without the original chat.
+Always compare their dated paths/statuses against current files before acting.
+
+==========================================================================
+APPENDIX A. EXACT STREET TARGETS AND EXISTING SOURCE CANDIDATES
+==========================================================================
+
+Source inventory is the historical remaining-assets audit. Current private
+pilot status is overlaid for Irmgard only; this is not fresh visual approval.
+Each listed source exists in the primary authoring checkout unless a fresh
+existence note below says otherwise. Do not infer it is shipped on main.
+The whole-family missing task is approved motion/actions/changing-pose speech,
+not creation of another neutral identity.
+
+A01. stadt-klaus-dieter-klein
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A02. stadt-brigitte-mueller
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A03. stadt-wolfgang-schulz
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-wolfgang-schulz-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A04. stadt-ursula-neumann
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-ursula-neumann-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A05. stadt-manfred-din
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-manfred-din-directions-short-v2-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A06. stadt-irmgard-aktenstapel
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A07. stadt-guenther-tuev
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-guenther-tuev-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A08. stadt-hannelore-sparkasse
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A09. crowd-brigitte-bueroklammer
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A10. crowd-dietmar-din-norm
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-advisers/dietmar-din-norm-keys-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A11. crowd-guenther-gartenzaun
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-guenther-gartenzaun-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A12. crowd-hildegard-brotzeit
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-hildegard-brotzeit-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A13. crowd-horst-hausordnung
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-advisers/horst-hausordnung-keys-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A14. crowd-klaus-dieter-knoedel
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-klaus-dieter-knoedel-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A15. crowd-waltraud-wartemarke
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-advisers/waltraud-wartemarke-keys-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A16. quiz-dietmar-schulz
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/dietmar-schulz-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A17. quiz-gisela-becker
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/gisela-becker-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A18. quiz-hartmut-keller
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/hartmut-keller-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+  Saved special-candidate metadata (historical, not a new acceptance):
+    "V6 numerical build PASS; root currently owns V8 preview; no animation admission"
+
+A19. quiz-heike-hoffmann
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/heike-hoffmann-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A20. quiz-klaus-dieter-wagner
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/klaus-dieter-wagner-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A21. quiz-ruediger-schmidt
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/ruediger-schmidt-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A22. quiz-sabine-krueger
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/sabine-krueger-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A23. quiz-uwe-moeller
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/uwe-moeller-keys.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A24. jwd-ede-einbruch
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/jwd-ede-einbruch-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A25. spieler-hans-peter-mustermann
+  Scope: EXEMPT_RETAIN_CURRENT_3D
+  State: RETAINED 3D EXCEPTION; not a new painted-family task
+  Existing source: output/game-completion/player-police/player-neutral-four-views.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_EXTRA_CANDIDATES_PRESENT_UNVERIFIED
+
+A26. polizei-heinrich-wachtmeister
+  Scope: EXEMPT_RETAIN_CURRENT_3D
+  State: RETAINED 3D EXCEPTION; not a new painted-family task
+  Existing source: output/game-completion/player-police/police-neutral-four-views.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_EXTRA_CANDIDATES_PRESENT_UNVERIFIED
+
+A27. stadt-ute-ruhe
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-ute-ruhe-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A28. crowd-baerbel-brezel
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-baerbel-brezel-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A29. crowd-irmgard-aktenordner
+  Scope: PAINTED_STREET
+  State: PRIVATE IRMGARD LOCOMOTION PILOT; actual P3 FAIL, unreleased
+  Existing source: assets/sprite-sources/street-residents/crowd-irmgard-aktenordner-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+  Saved special-candidate metadata (historical, not a new acceptance):
+    "Separate f9ca1c6 walking pilot present; full footlock/loop/mobile/gait/performance gates open"
+
+A30. quiz-brigitte-neumann
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-quiz/brigitte-neumann-keys-v2.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down, right, up, left
+  Historical gesture capability: OWN_KEYS_PRESENT_UNVERIFIED_TRANSPORT
+
+A31. stadt-karl-heinz-post
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A32. stadt-herbert-rasenaufsicht
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-herbert-rasenaufsicht-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A33. stadt-waltraud-ordnung
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-waltraud-ordnung-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A34. stadt-erwin-archiv
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-erwin-archiv-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A35. stadt-renate-termin
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A36. stadt-heinz-mietnachweis
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-heinz-mietnachweis-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A37. stadt-monika-zebra
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-monika-zebra-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A38. stadt-joachim-fundsache
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-joachim-fundsache-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A39. stadt-norbert-faxrolle
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-norbert-faxrolle-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A40. stadt-edeltraud-trennung
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/stadt-edeltraud-trennung-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A41. crowd-elfriede-eingabe
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-elfriede-eingabe-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A42. crowd-manfred-mittagsruhe
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+A43. crowd-ruediger-rasenkante
+  Scope: PAINTED_STREET
+  State: STANDING PRESENT; complete movement/action/speech acceptance remains
+  Existing source: assets/sprite-sources/street-residents/crowd-ruediger-rasenkante-directions-candidate.png
+  Source exists at TXT preparation: True
+  Registered directions (historical V30): down
+  Historical gesture capability: NO_GESTURE_KEYS_IDENTIFIED_IN_SELECTED_FOUR_VIEW_SOURCE
+
+Separate existing systems to preserve:
+  jwd-heiko-maaslos: PRESENT_PRESERVE; not a missing-source request; current full-objective acceptance not rerun
+  jwd-inga-maaslos: PRESENT_PRESERVE; not a missing-source request; current full-objective acceptance not rerun
+  jwd-frau-schwabingen: PRESENT_PRESERVE; not a missing-source request; current full-objective acceptance not rerun
+  jwd-theodore-maaslos: PRESENT_PRESERVE; not a missing-source request; current full-objective acceptance not rerun
+  herr-sandale: PRESENT_PRESERVE; prior restoration published; current checks not rerun
+  frau-sandale: PRESENT_PRESERVE; prior restoration published; current checks not rerun
+
+==========================================================================
+APPENDIX B. ALL 33 MISSION-V23 GROUPED CHECKPOINTS IN REQUIRED ORDER
+==========================================================================
+
+These are copied from the frozen job, not newly observed gameplay results.
+  01. B00-normal-start
+  02. B01-B02-actual-humor-forms
+  03. B03-welcome
+  04. B04-city-to-office
+  05. B05-natural-office-entry
+  06. B06-B07-native-phone-admission
+  07. B08-board-counter-admission
+  08. B09-B12-real-away-registration
+  09. B13-A38-home-reward
+  10. B14-home-visit
+  11. B15-B17-three-neighbor-tours
+  12. B18-natural-hausverwaltung-approach
+  13. B19-ordinary-wgb88-presentation
+  14. B20-wgb88-submit-and-return
+  15. B21-natural-buergeramt-third-approach
+  16. B22-ordinary-anm-e17-presentation
+  17. B23-anm-e17-submit-return-objective
+  18. B24-tax-approach
+  19. B25-tax-presentation
+  20. B26-tax-submit-return
+  21. B27-insurance-approach
+  22. B28-insurance-presentation
+  23. B29-insurance-submit-return
+  24. B30-three-unique-stadtbild-objects
+  25. B31-stadtbild-office-approach
+  26. B32-stadtbild-acknowledgement-return
+  27. B33-residence-approach
+  28. B34-residence-presentation
+  29. B35-residence-submit-return
+  30. B36-citizenship-fresh-same-door-approach
+  31. B37-citizenship-presentation
+  32. B38-citizenship-submit-win
+  33. B39-real-restart-fresh-start-screen
+
+Frozen expected verdict:
+PASS for observed informed desktop eight-procedure chain through actual DE-1A ending, followed by real restart into a fresh start screen; not a second chain or naive/player/media/device acceptance
+
+Frozen exact ending feedback:
+  kicker: VERWALTUNGSVORGANG ABGESCHLOSSEN
+  title: EINBÜRGERUNG: VORLÄUFIG ERFOLGREICH
+  copy: Sie haben genügend Formulare ausgefüllt, Regeln überlebt und verdächtig viel Geduld nachgewiesen. Die Bestätigung Ihrer Bestätigung erhalten Sie auf dem Postweg.
+  restart: NOCH EIN VORGANG
+
+==========================================================================
+APPENDIX C. PRACTICAL SCRIPT CATALOG AND REPLAY CLASSIFICATION
+==========================================================================
+
+Relative paths below resolve beneath E unless prefixed PRIMARY: or PILOT:.
+Presence was checked while assembling this TXT; existence is not authorization.
+READ/DERIVE means inspect the source and adapt in a new bounded packet.
+CONSUMED means never re-launch the old allocation or overwrite its receipts.
+SOURCE-ONLY means no actual grant; original pins/absence/resources still apply.
+
+reconciliation/inventory.py
+  Classification: READ/DERIVE
+  Purpose/limit: Read-only Git-tree inventory generator; writes inventory output, so preserve old output before a deliberate fresh audit.
+  Exists now: True
+  SHA256 at TXT preparation: 55710449f379de444fb5d1efa3f80e53aff7d63da9140aac74fc4eae35b23c4d
+
+prepare-mission-v23-run.mjs
+  Classification: READ/DERIVE
+  Purpose/limit: Historical source/job preparer; do not overwrite the frozen mission-v23-run packet.
+  Exists now: True
+  SHA256 at TXT preparation: 2ed83c85aea301c3859c1d842773ae3b36f0fe8aafa7defd5fdc635e5a2d2f6b
+
+mission-v23-tour-yield-source/change.mjs
+  Classification: READ/DERIVE
+  Purpose/limit: Historical V23 driver derivation; changes already prepared, not a runtime patch to replay.
+  Exists now: True
+  SHA256 at TXT preparation: 7ccb138cd52de54309316b4cc835288c13d69637f731676f4bf7d8f7e04383f8
+
+mission-v23-tour-yield-source/tour-yield.test.mjs
+  Classification: PURE SOURCE TEST
+  Purpose/limit: Focused current source mediator checks; future logged invocation after scope review.
+  Exists now: True
+  SHA256 at TXT preparation: 3e62666ff27cef7ee9fc3578f69a1b4349a11250ce33e267ff54be8573b753e7
+
+mission-v23-run/run-fullmission.ps1
+  Classification: OLD OPERATOR LINEAGE
+  Purpose/limit: Reviewed parent; final source closure selects stale-edge sibling instead.
+  Exists now: True
+  SHA256 at TXT preparation: aea458461b0b45c348a300f0d371fc167b50af8d273599b9d221d18cb1a8172f
+
+mission-v23-run/run-fullmission-stale-edge.ps1
+  Classification: SOURCE-ONLY / NO FRESH GO
+  Purpose/limit: Intended newer mission supervisor lineage; fresh current pins/queue/floors/root grant required.
+  Exists now: True
+  SHA256 at TXT preparation: ff40d5cbe9594db260c4d51468fb21561c2aaded234fce3187785357be024e84
+
+mission-v23-run/check-stale-edge-operator.ps1
+  Classification: SOURCE TEST
+  Purpose/limit: Checks stale-edge operator composition/semantics; inspect its exact output behavior first.
+  Exists now: True
+  SHA256 at TXT preparation: 14aba0519bd46c60d749d2d4f9765329b1bf204829d31b1a33b1aaa2888401a6
+
+mission-v23-run/validate-fullmission-report.ps1
+  Classification: REPORT VALIDATOR
+  Purpose/limit: Requires operator Assert-TaskTime/job context; validates mechanical report/end/restart binding, not visual quality.
+  Exists now: True
+  SHA256 at TXT preparation: 8521ce5cc0cecd071509695c5d07ba6418000bea7da6f92d3fc43a6db51be8da
+
+mission-v23-tour-yield-source/after/natural-flow-recovery-driver.mjs
+  Classification: SOURCE-ONLY DRIVER
+  Purpose/limit: Real native-input informed legacy-chain driver; --run starts a browser job and is not a casual check.
+  Exists now: True
+  SHA256 at TXT preparation: 380416ba70f98b8909608b505dea569cb8b79f5c70d1e23da3b1589ce2da16a5
+
+owned-tree-stale-edge-source/owned-tree-source.ps1
+  Classification: SUPERVISOR LIBRARY
+  Purpose/limit: Reviewed owned-tree stale-edge/identity collection helper; source for explicit integration, not a free-standing launch.
+  Exists now: True
+  SHA256 at TXT preparation: 40bb38dd4626c8a5659fc4c8b71c10ac7208d419ebde65024639c6ae61b02c98
+
+painted-walk-integration/integrate-navigation.py
+  Classification: ALREADY APPLIED
+  Purpose/limit: Do not reapply integration edits already in d257ff2/48cfaa1.
+  Exists now: True
+  SHA256 at TXT preparation: 1ab73820a9c5c11196464a881b54738f6b06b75cb28341f92455f053a419fb27
+
+painted-walk-integration/prepare-navigation-capture.py
+  Classification: READ/DERIVE
+  Purpose/limit: Original generator targets consumed capture packet; use fresh sibling if needed.
+  Exists now: True
+  SHA256 at TXT preparation: 929e012868ff1c5a819dffb7bbbebb415237f5688ff1d7861220a59c464a5a87
+
+painted-walk-integration/navigation-capture-source/probe.mjs
+  Classification: CONSUMED PASS-SCOPED
+  Purpose/limit: Real P4/portrait caller; --check also writes a receipt. Read saved output instead.
+  Exists now: True
+  SHA256 at TXT preparation: 8e45be72ae2f4724d7433adb36bc1f5906bb399208654803a0bb18e80d8e632e
+
+painted-walk-integration/navigation-capture-source/run-browser.ps1
+  Classification: CONSUMED
+  Purpose/limit: Original successful supervised P4/portrait allocation; never re-launch.
+  Exists now: True
+  SHA256 at TXT preparation: c324c81d93671d862e685fa330d4f10e70dfd53475127d67a40f49161b0b2913
+
+painted-walk-integration/navigation-capture-source/review-result.mjs
+  Classification: READ/DERIVE
+  Purpose/limit: Saved-record/media/pin arithmetic; writes evidence receipt, so isolate new analysis.
+  Exists now: True
+  SHA256 at TXT preparation: fec4c40887d2a6a4e461741c4ddc1eb7ba3bc91d7fd099bab700465c6dfb6a44
+
+painted-walk-integration/navigation-review-media/prepare.py
+  Classification: CONSUMED SAVED-MEDIA BATCH
+  Purpose/limit: Six existing boards and native-speed clips should be used before another decode.
+  Exists now: True
+  SHA256 at TXT preparation: 31dbadbd76ab85c0835de71d5bd1758eafebc552617e5f2ffc88b7e002b0eefb
+
+painted-walk-integration/p3-passing-source/witness.mjs
+  Classification: ALREADY EXECUTED CPU
+  Purpose/limit: Representative four-case witness; use exact derivation and saved results as control.
+  Exists now: True
+  SHA256 at TXT preparation: 88626347c3bfec1d170770f7dc4b9764b74568312fdd12d97ba11337f91968dd
+
+painted-walk-integration/p3-native-source/probe.mjs
+  Classification: CONSUMED FAIL
+  Purpose/limit: Actual +13/-17 ordinary-pair passing failure. No re-run or old --check overwrite.
+  Exists now: True
+  SHA256 at TXT preparation: 7894c7792524a16e4b2d87451add65f2f15b7856cd0c6dc774826d12dfd1da60
+
+painted-walk-integration/p3-native-source/run-browser.ps1
+  Classification: CONSUMED FAIL
+  Purpose/limit: One-shot P3 supervisor; failure/retirement preserved.
+  Exists now: True
+  SHA256 at TXT preparation: c0f3d8cc7e1b01037fbe8adf6770c5232826b7ad5784828ab91dacd96646c561
+
+keller-midpoint-native-pass-source/run-paired-preview.ps1
+  Classification: CONSUMED
+  Purpose/limit: Numeric observer allocation completed; whole Keller asset still FAIL/HOLD.
+  Exists now: True
+  SHA256 at TXT preparation: 17508d2069ca5dec7798de5fa1e2e138394e2d396b14746db53822f1e9da9e6d
+
+keller-collar-contributor-source/run-paired-preview.ps1
+  Classification: CONSUMED
+  Purpose/limit: Contributor observer execution closed; next is source/saved collar design, not instrumentation retry.
+  Exists now: True
+  SHA256 at TXT preparation: 17508d2069ca5dec7798de5fa1e2e138394e2d396b14746db53822f1e9da9e6d
+
+PRIMARY: output/game-completion/hannelore-city-execution-source-v1/launch-hannelore-phase.ps1
+  Classification: UNSEALED CARRIER; DO NOT LAUNCH
+  Exists now: True
+  SHA256 at TXT preparation: e376309558ec4d942cac2321da158c2c268322c901db2c18067b9f0b2eaa9b40
+
+PRIMARY: output/game-completion/hannelore-city-execution-source-v1/build-knick-voice.py
+  Classification: PRODUCER; native/planning roles require selected sealed authority
+  Exists now: True
+  SHA256 at TXT preparation: e7936ff5521a036c7861f5759cf49bd0fccae1f2756a3d3ef5339e3f4d043df6
+
+PRIMARY: output/game-completion/hannelore-city-execution-source-v1/test-hannelore-carrier.ps1
+  Classification: PURE AST/EXTRACTED-FUNCTION SOURCE TEST
+  Exists now: True
+  SHA256 at TXT preparation: 11470b0611336d3f9cc87d53ce1c243dc6eb1b2260aa1316b9b4f3ec784f819a
+
+PRIMARY: output/game-completion/hannelore-city-execution-source-v1/test_expected_plan_contract.py
+  Classification: PURE WINDOWS PLAN/SERIALIZER SOURCE TEST
+  Exists now: True
+  SHA256 at TXT preparation: 58fba975607378cf9d785bf2b4b612cad32aa25bce84a76d256cf1f6bb38084a
+
+PRIMARY: output/game-completion/hannelore-city-execution-source-v1/validate-parent-cues.mjs
+  Classification: CUE VALIDATOR; inspect arguments and exact inputs
+  Exists now: True
+  SHA256 at TXT preparation: 643d8a2fe530880d1ccc9577aa3681904748903c1a269f4b808e11590787f4c4
+
+
+==========================================================================
+APPENDIX D. FROZEN PILOT 24-PIN SOURCE/TEST/ASSET AUTHORITY
+==========================================================================
+
+This copies the authority names/hashes. A fresh hash comparison was performed
+while writing this TXT; it does not rerun runtime tests or approve the candidate.
+Unrelated RTK documentation dirt still means the worktree is not globally clean.
+
+.agents/skills/animate-2d-characters/references/painted-walking.md
+  Expected SHA256: d4f07c620fb4b37aade0225fca9ef3fde70ceaabc9b291508a2e1a2b05f82bff
+  Current bytes match this pin: True
+.agents/skills/animate-2d-characters/scripts/painted_walk.py
+  Expected SHA256: 688cf0c0c99217683d9762d72bf9e1f36e33164a6a7737abed3549aa86f14e02
+  Current bytes match this pin: True
+For-AI/OBJECT-CONSISTENCY.md
+  Expected SHA256: c1e28172b1e91db6bee7fe9acb04b3b9941ac273dddc2e45beedff0895a38168
+  Current bytes match this pin: True
+For-AI/SPRITE-GENERATION-PROTOCOL.md
+  Expected SHA256: f3de5b767362044a532e69141c7875dd1d5a0f53ffc5f518fbf8c05d67dff343
+  Current bytes match this pin: True
+assets/characters/street/crowd-irmgard-aktenordner/movement-desktop.webp
+  Expected SHA256: 0fb196d9dba96ec5ad23b0c3c7a23068fbb20f5eec1aa1d1f18097f68b7804b6
+  Current bytes match this pin: True
+assets/characters/street/crowd-irmgard-aktenordner/movement-mobile.webp
+  Expected SHA256: 5ffef1f1e4e09cf4538124940413bfa7d172f291f9af60d93dbedea0cdc75f45
+  Current bytes match this pin: True
+assets/characters/street/manifest.json
+  Expected SHA256: b9c6cbc5839d57fda32fbd3445c5df806c4f9a8c484ab7a0c81e7238d92439b9
+  Current bytes match this pin: True
+docs/engineering/SESSION.md
+  Expected SHA256: a9e48ee4ff8825aeb782d0af9d8bb43792fab57943f55229a47ee5dea7b73917
+  Current bytes match this pin: True
+game.js
+  Expected SHA256: 7d97d6976bf034647a6879f289b43f50d047e356beb6549caa029dfe3c4ad0ac
+  Current bytes match this pin: True
+index.html
+  Expected SHA256: 365208a6e97d0611d8a57fe8be53db8da9c920d4dc77cfaf3c74911f97f62f8c
+  Current bytes match this pin: True
+street-character-sprites.js
+  Expected SHA256: 7a22079881480a664cdd3fd802d69f570191c876ad0f78d883068686d2174f41
+  Current bytes match this pin: True
+tests/collision-dynamics.test.mjs
+  Expected SHA256: ac717840693aeb0a9c4b875796da23bedacb444311fa456e2553257eb8b574d3
+  Current bytes match this pin: True
+tests/object-physics-consistency.test.mjs
+  Expected SHA256: 0c70fc48b5ba8816871d8ece692ccf6e1ca102de2a131340c03e84c24c9b27ba
+  Current bytes match this pin: True
+tests/street-atlas-motion.test.mjs
+  Expected SHA256: 510576b7fface2423107dcf92d36d78e695497cd61fd59097bc11ea5d6322cd4
+  Current bytes match this pin: True
+tests/street-character-manifest.test.mjs
+  Expected SHA256: f36e5835eff8c41e51138abe1af56e90a7219a52dae82165cd625352cfbbce5c
+  Current bytes match this pin: True
+tests/street-character-sprites.test.mjs
+  Expected SHA256: 57372648cde06b060fd39263bec82c8bb5bfc1fa85f4da65c4450b694943317e
+  Current bytes match this pin: True
+tests/street-packed-grid.test.mjs
+  Expected SHA256: d181c99c913a444c99b1219740c071221d5b8f28ea192e8afa50afbb723622df
+  Current bytes match this pin: True
+tests/street-pedestrian-avoidance.test.mjs
+  Expected SHA256: 504b71cb6bdb61ba653a40bb2a577ceaa90d01ef1af781398d84128f0f439cb8
+  Current bytes match this pin: True
+tests/street-route-hold.test.mjs
+  Expected SHA256: d90e0cec01d38de7a50c5342c063139010aae545c612ca3dc6acb7fd60448c76
+  Current bytes match this pin: True
+tests/street-simulation-fixture-source.mjs
+  Expected SHA256: a83198ce80567b32947984cc01069a9ce382d025c9571767aa7b541424bbf452
+  Current bytes match this pin: True
+tests/test_painted_grounding.py
+  Expected SHA256: 708d31223cb6148ebbd38274852f30758996375ba49ebd47f104aa485c302a39
+  Current bytes match this pin: True
+tests/tourist-dense-turns.test.mjs
+  Expected SHA256: 808901cee7086d2b575b32f9e39347bffcf663a9d327b66d7ca5a77e3b49d61d
+  Current bytes match this pin: True
+tourist-animation.js
+  Expected SHA256: 0fb779a90833cdc9dfba861625d8c9d6168c7d47ee4e384163a887e2a45d6c55
+  Current bytes match this pin: True
+world3d.js
+  Expected SHA256: be6403de4cdbb9efadf18ec4210eb7bd2951b4f88beef6d8d9cc1ecced87568c
+  Current bytes match this pin: True
+
+TXT preparation comparison: 24 pins; 0 mismatches.
+
+==========================================================================
+APPENDIX E. IMPORTANT PACKETS: REUSE VERSUS HISTORICAL DIAGNOSIS
+==========================================================================
+
+Read-first current packets:
+  painted-walk-integration/p3-native-source/          current actual failure
+  painted-walk-integration/p3-passing-source/         representative CPU control
+  painted-walk-integration/navigation-physics-actual/ scoped current review
+  painted-walk-integration/navigation-camera-actual/  scoped current review
+  painted-walk-integration/navigation-review-media/  already decoded saved images
+  mission-v23-tour-yield-source/                     latest mission driver source
+  mission-v23-run/                                   selected operator/job closure
+  remaining-assets/                                 identity/source inventory
+  reconciliation/                                   stale-snapshot classification
+  wagner-hook-acquisition-source/                    latest static hook key
+  wagner-notebook-release-source/                    static release key
+  wagner-notebook-insertion-source/                  static insert key
+  keller-collar-contributor-source/                  closed observer result
+  PRIMARY output/game-completion/hannelore-city-execution-source-v1/
+
+Historical packets are searchable background. Do not resume them just because
+a generator, INVOCATION file, SOURCE READY flag or operator exists:
+  mission-v6 through mission-v22 and diagnosis/review siblings
+  keller-v4/v5/v6/v8, midpoint, collar-rematch and earlier support experiments
+  retained-3d-gait-* and retained-3d-turn-travel-* (explicitly deferred)
+  original painted browser-source/motion-repair/p4-continuation captures
+
+For an unknown historical dependency, search within its named packet/owning
+handoff first. Do not dump every ignored directory or read all legacy logs.
+Keep preserved data until the user selects cleanup as a separate task.
+
+==========================================================================
+APPENDIX F. REMAINING PRESERVATION / RECONCILIATION DECISIONS
+==========================================================================
+
+The 294 historical local-only additions are not 294 mandatory new features.
+Keep them safe and select only an actual necessary completion unit. In addition
+to the main tasks already described, the reconciliation handoff identified:
+
+  billboard-ground.js and tests/billboard-ground.test.mjs:
+    Small local-only ground-projection helper and math test. The old consumer
+    was in world3d.js atlasSprite/syncAtlasSprite, with a groundProjection flag
+    forwarded by game.js prepareTransparentSprite. A useful adoption would need
+    a selected manifest producer, current renderer compatibility and actual
+    selector/Physics/Camera proof. The helper's math test alone does not imply
+    an unpublished gameplay fix that must be copied into current main.
+
+  tests/station-access.test.mjs:
+    Local-only station layout/elevation fixture. Read the selected runtime and
+    satire-kit model geometry before deciding whether it adds useful regression
+    coverage. A local test file is not evidence of an unpublished station repair.
+
+  assets/characters/residents/ (historical 22 three-file candidate families):
+    Explicit candidate-unapproved material. Preserve sources, but do not switch
+    current main's accepted street manifest to this older candidate authority.
+
+  assets/characters/street-speakers/:
+    Historical opt-in held candidate manifest. It does not replace the shipped
+    assets/characters/street/ authority or count as accepted motion.
+
+  tests/street-character-rig.test.mjs, tests/street-motion-playback.test.mjs,
+  tests/test_street_character_sprites.py and related local tools:
+    Check current interfaces before importing; corresponding runtime modules
+    have newer versions. Promote a useful coherent regression with its owning
+    accepted change, not an old test expectation that restores stale behavior.
+
+  Authoring style/provenance docs and source pictures:
+    Much of the compact painted style rule has already been integrated since
+    the earliest audit. Compare current main before scheduling that as new work.
+    Voice assets in the historical 603-path snapshot were blob-identical to the
+    pinned then-main; that audit found no unpublished voice addition there.
+
+  Newer RTK instructions/nested skills:
+    At TXT preparation they were unrelated unstaged edits in both managed
+    checkouts. Keep their owners' edits intact. This task does not accept, stage,
+    publish or clean them up merely because it also changes For-AI documents.
+
+Do not copy docs/engineering/GAME-COMPLETION.md from an older preservation
+snapshot as a current authority: the old audit specifically found stale claims
+about generic player/police meshes. Use current owning contracts and dated
+receipts. Re-run a targeted read-only inventory only when an integration task
+needs an updated comparison; do not overwrite the old evidence inventory.
+
+==========================================================================
+APPENDIX G. EXPLICIT SAFE INSPECTION AND FUTURE TEST RECIPES
+==========================================================================
+
+READ-ONLY inspection of the current failed P3 report (PowerShell):
+  $P3Path = Join-Path $Evidence 'painted-walk-integration/p3-native-source/actual-once/report.json'
+  $P3 = Get-Content -LiteralPath $P3Path -Raw | ConvertFrom-Json -Depth 100
+  $P3.failure
+  $P3.profiles[0].observation.witness | ConvertTo-Json -Depth 12
+  $P3.profiles[0].staging | ConvertTo-Json -Depth 12
+  $P3.profiles[0].observation.samples.Count
+  Get-FileHash -LiteralPath $P3Path -Algorithm SHA256
+The probe/source-checks define the array schema. Retained sample rows are not
+all native substeps. Per-step hook counters and the actual source guards supply
+different evidence; do not compute exhaustive swept clearance from sparse rows.
+
+PURE SOURCE tests for a FUTURE selected Hannelore task, after verifying pins:
+  $VoicePacket = Join-Path $Repo 'output/game-completion/hannelore-city-execution-source-v1'
+  & $Pwsh -NoProfile -File (Join-Path $VoicePacket 'test-hannelore-carrier.ps1')
+  & $Python (Join-Path $VoicePacket 'test_expected_plan_contract.py')
+These are the source tests named in its handoff, not launch-hannelore-phase.ps1.
+Save a fresh log/exit receipt. This TXT does not claim the tests were executed.
+
+FUTURE mission retained-source test enumeration, after choosing that task:
+  $MissionPacket = Join-Path $Evidence 'mission-v23-tour-yield-source'
+  $MissionTests = @(Get-ChildItem -LiteralPath (Join-Path $MissionPacket 'tests') -Filter '*.test.mjs' -File | Sort-Object Name | ForEach-Object FullName)
+  & $Node --test $MissionTests
+  & $Node --test --test-timeout=30000 (Join-Path $MissionPacket 'tour-yield.test.mjs')
+Inspect the selected files and expected inputs at the current revision first.
+These are CPU/source tests, not the native --run mission invocation.
+
+BUILDING A NEW P3 SIBLING PACKET, ONLY AFTER A REAL REPAIR:
+  - Pick a new exclusive output directory; preserve the old directory intact.
+  - Copy/derive source inputs only, not ROOT-GO.json, actual-once/, old terminal,
+    source-checks.json or other success/failure receipts as if they were fresh.
+  - Rebind the new candidate constant, root path, selected source/test/assets,
+    parent probe/report identities and source inversion checks intentionally.
+  - Update the supervisor packet-path references and described scope together.
+    Changing only PLAYTEST_OUTPUT is insufficient if grants/receipts still point
+    to the old packet. Keep resource/queue/ownership/deadline semantics exact.
+  - Run the new probe's source-only --check --candidate <new-commit> path only
+    after reading that successor's code. It writes NEW source-checks.json.
+  - Independently inspect the actual callback seams and frozen runtime. A parser
+    PASS does not establish timing, staging, availability or correct assertions.
+  - Read the successor supervisor parameters. The old P3 interface used
+    -ReviewedProbeSha and -ReviewedChecksSha. Supply only exact freshly reviewed
+    hashes, never this manual's old values to a new source file.
+  - Check normal queued partner loading, legal staging, fresh private paint
+    release/re-admission and actual native orientation. Do not set hidden phase,
+    gait or completion state. Cumulative simulation distance is not reset just
+    because local presentation gait/contact-root generation is new.
+  - Preserve actual pair/route/speeds. Keep quiz identity distinct from active
+    quiz participation, and standing painted partner rendering distinct from
+    legacy NAV/turn ownership. No animated-partner-art claim follows from a
+    warmed hidden legacy clock.
+  - Record original deadline from original start, even during setup. If there is
+    not enough remaining wall time, preserve failure/INCOMPLETE; never extend it.
+  - Allocate one job only after all checks. Await terminal and owned cleanup.
+    Save raw partial observations before closure, with explicit missing coverage.
+
+DOCUMENTATION-ONLY VALIDATION:
+  This TXT can be checked for UTF-8 readability, complete sections, actual
+  cited file presence, hashes, correct current-versus-historical statuses and
+  preservation of unrelated edits. It does not need a browser, generation,
+  speech render or full game suite just to prove a handoff file was written.
+  The required world reviewers apply to later world-affecting candidates, not
+  to this documentation-only artifact.
+
+==========================================================================
+APPENDIX H. DOCUMENT FRESHNESS / END OF STANDALONE HANDOFF
+==========================================================================
+
+Prepared UTC: 2026-10-17T16:01:19.760060+00:00
+Latest pre-TXT published documentation commit: 2d929f2cb3f4d9735350ce9a33fb599ded6f2ef3
+Private walking checkpoint: 48cfaa123ecc09c4885276cb58a789a61a36a823
+Broader runtime execution: PAUSED; document creation is the only active request.
+User-deferred scope: 3D model pose accuracy.
+No new browser, generation, ASR, media decoding or gameplay test was run merely
+for this TXT. Existing evidence is attributed to its actual candidate and scope.
+This document and its companion link can be committed/published as documentation
+without shipping the blocked pilot or unrelated RTK edits. The commit containing
+it is the documentation successor to the pre-TXT hash above, not a new runtime
+acceptance claim. Find current public/main state through Git before resuming.
+
+END OF HANDOFF

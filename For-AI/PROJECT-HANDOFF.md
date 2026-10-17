@@ -1,5 +1,8 @@
 # Project handoff — 17 October 2026
 
+For the standalone continuation manual, script catalog, per-character inventory
+and full verification plan, read [PROJECT-HANDOFF-DETAILED.txt](./PROJECT-HANDOFF-DETAILED.txt).
+
 The user requested a closeout of the current task, a durable handoff, and a pause for future agents. **The Irmgard walking pilot is committed locally but is blocked from release by a failed two-pedestrian passing check.** Resume only when the user selects the next task. Do not automatically restart the broad completion goal, generation jobs or other chats.
 
 ## Published game and preserved candidate
