@@ -2,6 +2,11 @@
 
 Read this routing page before repository work. Use [`README.md`](./README.md) only when you need its subject index. Read only sections relevant to the request; do not read whole historical logs by default. The user's current request has priority.
 
+For resuming the paused centralized completion work, read the current
+[project handoff](./PROJECT-HANDOFF.md) first. It identifies the unpublished
+walking checkpoint, its failed passing gate, saved evidence and remaining work.
+The user deferred 3D pose accuracy; do not automatically resume the broader goal.
+
 ## Authority and product
 
 Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns shared context; [`LEVELS.md`](./LEVELS.md) routes scoped level context. Runtime authority remains the canonical root game: `index.html`, `game.js`, `styles.css`, `world3d.js`, and `assets/`. The public `3d.html` path is a compatibility entry to `index.html`, preserving query and hash; it has no separate game controller. Level directories belong to this same tree; their presence does not mean existing source has moved.
