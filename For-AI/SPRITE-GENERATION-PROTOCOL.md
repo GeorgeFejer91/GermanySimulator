@@ -524,6 +524,41 @@ For speed calibration, follow the skill's [planted-foot assessment](../.agents/s
 
 The accepted side-view cycle distances, in game units, are Merkel 24, Alice 27, Bayern 32, Merz 25, Herr Sandale 13.5, and Frau Sandale 14. `assets/characters/gait-calibration.json` records twelve SHA-256-bound right/left contact traces, prior settings, billboard scales, fitted distances and sole-edge measurement regions. The project skill's `scripts/assess_walk_speed.py` reproduces the fit and slip comparison. These are sole-edge contact proxies from the exact accepted pixels; inspect actual foot identity and normal-speed game playback when revising the atlas. The manifests own the runtime values and the character review sandbox reads them, so it shows the same cadence as the game. No approved art pixels or route speeds changed.
 
+## Walking quality for every character
+
+George's requirement, confirmed on 2026-10-17: every character's walking leg
+movement must meet the accuracy of Herr and Frau Sandale. Apply this to the
+city and office cast, crowd, quiz characters, neighbors and the retained
+articulated 3D player and police. Preserve each character's identity, proportions, props and
+existing representation.
+
+Use the currently shipped Sandale manifests and their exact atlas bytes under
+`assets/tourists/`, together with `assets/characters/gait-calibration.json`, as
+the comparison references. Recheck the loaded hashes when collecting evidence.
+Calibrate each actor's own distance per cycle at its actual world/render scale;
+copying the Sandales' cycle distances does not establish correct foot contact.
+
+The complete hips/trouser hems, knees, lower legs and shoes must remain connected
+through alternating contact, loading, passing and push-off. The stance shoe
+stays planted against actual ground travel; the swinging foot clears the ground
+and passes naturally. Preserve complete shoes, leg identity, family scale and
+the ground pivot through the loop and stop/turn/start transitions. Detached
+feet, sliding, reversed steps, walk-in-place, contour gaps and blurred or doubled
+limbs remain failures. Gait follows accepted displacement and stops with blocked
+or paused movement; retained 3D actors meet the same contact and movement rules
+through their existing meshes and controllers.
+
+For each actor, compare exact exported/loaded frames and ordinary-speed gameplay
+with both Sandales at comparable projected body size. Cover every walking
+direction, loop closure, stopping, turning, resuming and obstruction on desktop
+and mobile. Record sole-contact traces and residual ground slip in shoe lengths,
+alongside visible leg attachment and toe clearance. Keep the evidence with that
+actor's existing review records. Source annotations, frame counts and passing
+code tests alone do not pass this requirement; required FAIL or NOT RUN results
+remain unfinished.
+
+## Experimental articulated atlas authoring
+
 This is the authoring and preview contract for the experimental articulated
 atlases in Germany Simulator. All six characters use one deterministic gait,
 one fixed registration grid, and one signed verification gate. The browser
