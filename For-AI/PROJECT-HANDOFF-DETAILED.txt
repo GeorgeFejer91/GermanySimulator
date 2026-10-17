@@ -1004,11 +1004,25 @@ Earlier independent source review:
   output/game-completion/pilot-parent-continuation-source-v1/review/
 
 Read in this order:
-  CONSOLIDATION-HANDOFF.md, README.md, handoff.json, source-proof.json,
-  authority-template.json, phase-job-templates.json, request-plan.json,
+  ROOT-source-unit-result.json FIRST, then CONSOLIDATION-HANDOFF.md, README.md,
+  handoff.json, source-proof.json, authority-template.json,
+  phase-job-templates.json, request-plan.json,
   expected-parent-plan.json, expected-segment-plan.json,
   expected-plan-source-proof.json, admission-compatibility.md,
   carrier-source-map.md and exact carrier deltas as needed.
+
+Root source-unit receipt discovered during this TXT audit:
+  ROOT-source-unit-result.json reports SOURCE_UNITS_PASS_INDEPENDENT_REVIEW_PENDING
+  at 2026-10-16T13:33:56.9181910Z, binding the same handoff hash and 18 packet pins.
+  It reports a qualified four-phase PowerShell pure suite covering seven unchanged
+  supervisor functions (actual receipt prefix 0fee27) and one actual extracted
+  Windows serializer/child-projection Python test in 0.075 seconds (29f3bf).
+  Private targets were not read; native/ASR calls and allocations were zero;
+  authority remained unsealed. This is supplied recorded source-test evidence,
+  not a fresh execution or production/admission/listening approval in this task.
+  The older worker statement that IT did not run the tests is not evidence that
+  root never ran them. Verify the receipt/pins and independent review status
+  before rerunning; only changed or unproved coverage needs a new source test.
 
 Important script roles:
   launch-hannelore-phase.ps1:
@@ -1057,8 +1071,11 @@ Limits retained in this source proposal:
 
 Smallest continuation:
   1. Confirm frozen inventory and read the current fixed-voice protocol.
-  2. Execute only the two pure source tests above in a fresh logged analysis.
-  3. Review current public-source compatibility and exact profile/role bindings.
+  2. Verify ROOT-source-unit-result.json and its bound inputs. Retain its qualified
+     source PASS; rerun affected pure tests only if current inputs/test contracts
+     changed, proof cannot be verified, or remaining review identifies a gap.
+  3. Resolve outstanding independent source review and current public-source
+     compatibility, including exact profile/role bindings.
   4. Decide whether this finite packet remains the appropriate selected task.
   5. Seal an actual successor authority only after fresh protected-pin, resource
      and absence checks. Preserve the null-grant source template unchanged.
@@ -2142,8 +2159,10 @@ PURE SOURCE tests for a FUTURE selected Hannelore task, after verifying pins:
   $VoicePacket = Join-Path $Repo 'output/game-completion/hannelore-city-execution-source-v1'
   & $Pwsh -NoProfile -File (Join-Path $VoicePacket 'test-hannelore-carrier.ps1')
   & $Python (Join-Path $VoicePacket 'test_expected_plan_contract.py')
-These are the source tests named in its handoff, not launch-hannelore-phase.ps1.
-Save a fresh log/exit receipt. This TXT does not claim the tests were executed.
+These are source tests, not launch-hannelore-phase.ps1. First verify the saved
+ROOT-source-unit-result.json PASS; do not repeat verified unchanged tests merely
+to rediscover that result. If a new run is justified, save a fresh log/exit receipt.
+This documentation task did not execute them.
 
 FUTURE mission retained-source test enumeration, after choosing that task:
   $MissionPacket = Join-Path $Evidence 'mission-v23-tour-yield-source'
@@ -2192,6 +2211,9 @@ DOCUMENTATION-ONLY VALIDATION:
 
 ==========================================================================
 APPENDIX H. DOCUMENT FRESHNESS / END OF STANDALONE HANDOFF
+
+Hannelore supplied root source-test receipt SHA256:
+  ff3e42437558957aa721aac5b2fa9b9eac9b1f2fe069fa950d244aba800a48c5
 ==========================================================================
 
 Prepared UTC: 2026-10-17T16:01:19.760060+00:00
