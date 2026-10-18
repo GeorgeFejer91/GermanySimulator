@@ -1,5 +1,12 @@
 # Speech catalog and subtitle authority
 
+Recorded speech fetches append the catalog's encoded SHA-256 as a `voice` query
+parameter, so replacing a recording at its existing path changes its HTTP cache
+identity after the updated catalog loads. The canonical path still owns the
+promise cache, retry, playback and 16 MiB decoded-audio limit. Uncatalogued or
+unhashed files retain their existing request URL. This does not preload audio or
+claim that an absent recording exists.
+
 Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 36 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
 
 The guided neighborhood story in `neighbor-story.js` pairs every stop and travel

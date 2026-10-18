@@ -52,7 +52,7 @@ for(const [width,height,dpr] of [[390,844,3],[844,390,2],[1280,800,2],[3840,2160
 
 // Execute the production cache against a controlled decoder, not a copy of it.
 const prepare=game.match(/function prepareRecording\(url\)\{[^\n]+\}/)?.[0];assert.ok(prepare);
-const cache=new Map(),requests=[],api=new Function('recordingPromises','ensureAudio','fetch','queueAssetLoad',prepare+';return prepareRecording')(cache,()=>({decodeAudioData:async()=>({length:2*1024*1024,numberOfChannels:1})}),async url=>{requests.push(url);return{ok:url!=='fail',arrayBuffer:async()=>new ArrayBuffer(1)}},task=>Promise.resolve().then(task));
+const cache=new Map(),requests=[],api=new Function('recordingPromises','ensureAudio','fetch','queueAssetLoad','speechCatalog',prepare+';return prepareRecording')(cache,()=>({decodeAudioData:async()=>({length:2*1024*1024,numberOfChannels:1})}),async url=>{requests.push(url);return{ok:url!=='fail',arrayBuffer:async()=>new ArrayBuffer(1)}},task=>Promise.resolve().then(task),{recordings:{}});
 const first=await api('a');await api('b');assert.equal(await api('a'),first);await api('c');
 assert.deepEqual([...cache.keys()],['a','c'],'evict least recently used decoded audio at 16 MiB');
 await api('b');assert.equal(requests.filter(url=>url==='b').length,2,'evicted audio remains replayable');

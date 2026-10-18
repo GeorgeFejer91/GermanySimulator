@@ -53,7 +53,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install --no-install-recommends -y ffmpeg
           fi
-          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs
+          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs tests/recorded-voice-cache.test.mjs
       - name: Check fixed character voices
         run: |
           python tests/test_sync_music_cast_index.py
