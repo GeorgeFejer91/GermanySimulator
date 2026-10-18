@@ -185,3 +185,7 @@
 @media(orientation:landscape) and (max-height:500px){
  .dialogue.neighbor:not([hidden]){left:auto;right:8px;transform:none;max-width:calc(50vw - 16px)}
 }
+
+#app.neighbor-level :is(.wanted,#law-action,#law-power,#law-unlock-prompt,#violation-alert,.law-controls){display:none!important}
+
+#app.neighbor-level .control-dock{grid-template-columns:minmax(0,1fr) 84px}

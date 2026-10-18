@@ -12,12 +12,12 @@ assert.equal(createHash("sha256").update(readFileSync(asset)).digest("hex"),"340
 assert.match(game,/WURST_MUSIC=.*\.\/assets\/audio\/music\/wurst\.mp3/);
 assert.match(game,/state\.wurstBadges\.size===Math\.ceil\(WURST_IDS\.length\/2\)\)queueWurstSong\(\)/,"the fifth of nine unique sausages must trigger the song");
 assert.match(game,/function queueWurstSong\(\)\{if\(wurstSongPlayed\|\|wurstSongPending\)return/,"the milestone song must queue only once");
-assert.match(game,/if\(wurstSongPending\)\{playWurstSong\(\);return\}/,"a muted milestone song must wait for music to be enabled");
+assert.match(game,/if\(wurstSongPending&&!state\.neighborLevel\)\{playWurstSong\(\);return\}/,"a muted milestone song must wait for music to be enabled");
 const sungSource=game.match(/function playSungMusic\([^\n]+/)?.[0];
 assert.ok(sungSource,"sung playback must exist");
 let confirmPlayback;
 const playback=new Promise(resolve=>confirmPlayback=resolve);
-const context=vm.createContext({document:{getElementById:()=>({})},Promise,rampSungVolume:()=>{},audioTextActive:()=>false,nextVariant:()=>0});
+const context=vm.createContext({state:{neighborLevel:false},document:{getElementById:()=>({})},Promise,rampSungVolume:()=>{},audioTextActive:()=>false,nextVariant:()=>0});
 context.playback=playback;
 vm.runInContext(`
  let musicPlaybackSerial=0,sungMusicActive=false,eightBitTracksSinceSong=0,musicDucked=false,wurstSongPending=true,wurstSongPlayed=false,wurstTransitioning=true;

@@ -95,6 +95,11 @@ for(const asset of cast.existingAssetProfiles){
   assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));assert.notEqual(voices[asset.voiceId].generationAllowed,true);
   continue;
  }
+ if(asset.gameRole==='jwd-neighbor'&&asset.runtimeStatus==='archived'){
+  assert.equal(asset.voiceId,'jwd-ede-einbruch');assert.equal(asset.status,'archived');assert.ok(!game.includes('jwd-burglar'));const archive=source(asset.archive);
+  for(const line of asset.dialogue){assert.ok(archive.includes(line.text));assert.ok(archive.includes(line.english))}
+  assert.equal(voices[asset.voiceId].profileId,cast.productionVoices[asset.voiceId].profileId);continue;
+ }
  if(asset.gameRole==='jwd-neighbor'){
   assert.ok(game.includes(`id:"${asset.gameCharacterId}"`)||game.includes(`id:'${asset.gameCharacterId}'`),"selected neighbor actor exists in the actual runtime");assert.ok(game.includes(`:"${asset.voiceId}"`)||game.includes(`:'${asset.voiceId}'`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
   for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);if(locator){assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}else if(line.locator.startsWith('neighbor-story.js ')){assert.ok(line.text&&line.english,'exact tour lines and owners are checked below')}else{assert.match(line.locator,/^game\.js guided tour (repeat invitation|follow invitation|free play)$/);assert.ok(game.includes(line.text)&&game.includes(line.english),line.locator+' matches runtime')}}

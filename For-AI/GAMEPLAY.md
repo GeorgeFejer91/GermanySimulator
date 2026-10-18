@@ -151,7 +151,7 @@ ground displacement rather than a timer on a stationary body. The player follows
 the route instead of receiving a remote sequence of completed stops.
 If another body blocks a leg, the guide plants their feet and the hint asks the
 player to make room. Cross-lane recovery includes the full body-clear paved
-width and a short backtrack, so Hartmut can pass a waiting burglar without
+width and a short backtrack, so Hartmut can pass a waiting body without
 walking through Heiko. Every candidate segment still uses the ordinary collision
 checks; an occupied escape route waits until it is clear.
 Within the guide's 185-unit follow range, the sausage pointer yields to the
@@ -176,17 +176,43 @@ its cue. Travel captions and stop dialogue share one speaker-owned stream.
 The renderer and story data grant no mission credit. Only the current tour's final
 completed speech/caption adds its adult to the distinct introductions; duplicate or stale
 completion cannot skip a route, credit another resident or replay a child summon.
+Every resident-owned German line has one actor/voice/source ticket per playthrough.
+The dialogue controller claims it before queueing audio and moves it through
+queued, started, finished or cancelled states. Redraw, E/touch repeat and late
+start/done receipts cannot enqueue or restart a consumed ticket. A completed
+line is skipped on a later interaction; an interrupted line remains available
+as a readable caption, with no second recording. Each next line owns its own
+receipt and only the current dialogue/index may complete it. Other city dialogue
+keeps its existing repeat control. An introductory tour now starts with one
+follow invitation; the first stop owns the resident’s single self-introduction.
+
 The four painted walking directions retain accepted displacement and family scale;
 authored gestures map to the current stop and release before walking resumes.
 
-From the second home visit, one opportunistic burglar can walk along the lane to
-inspect the home. On finding only a mattress and empty crates, he complains and
-walks to the richer Maaslos house, disappearing at its doorway. The event waits for
-the player to be nearby, uses ordinary body collision, and cannot remove mission
-items. While a tour owns attention, an already approaching burglar waits before
-inspection instead of interrupting the guide; inspection can resume after the tour
-releases ownership. No extra currency, save system, asset download or background
-timer is added.
+The neighbor scene focuses on Frau Schwabingen, Heiko, Inga and Hartmut. Ede’s
+former repeat-visit encounter is [archived](../levels/neighbors/archive/ede.md);
+his retained voice/art/profile records are not active spawn sources.
+
+Direct neighbor entry and approaching the allocated home within 1,200 world
+units activate the neighbor scene policy. Protection latches for the whole unfinished chapter. Leaving the home radius,
+interrupting a tour or moving elsewhere cannot restore police. Only all three
+completed adult introductions, no active tour and departure beyond that radius
+restore city policy. Returning to the neighborhood activates it again. Entry clears wanted
+status, warnings and pending police contacts, cancels law pickups and lets
+existing police cars drive off through their ordinary physical exit. An escorted
+citizen retraces the recorded collision-checked escort path before regaining
+their original route and velocity; a blocked return waits without teleporting. No new
+police controls, arrests, stars, violation alerts or offense audits run in this
+scene. Keyboard/touch law dispatch is disabled, including after all adult
+introductions and on repeat visits. Police UI and the law control/status are
+hidden. Resident movement, garden collision and Hartmut’s authored entrance
+continue normally.
+
+Only the existing synthesized 8-bit German national anthem loops here, at music
+bus gain 0.14 (ordinary city music is 0.4), with existing foreground ducking and
+the music toggle. Direct entry skips intro/sung music; scene entry cancels an
+already playing city track and its scheduled sources. Hide/mute/office cleanup
+keeps its existing ownership. Leaving restores the ordinary playlist policy.
 
 A plump, pale Weißwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
@@ -319,7 +345,7 @@ vertical reading of the complete copy. Other dialogues retain their presentation
 - Berlin uses satirical Denglisch dialogue. This is a hard world rule: Berlin lies behind the Brandmauer; after crossing out into Deutschland, every character speaks German only. UI localization may remain English, but it must never translate Deutschland character dialogue or synthesized speech into English.
 - The Brandmauer firefighter is the clearly labeled satirical Friedrich Merz character. His Merz-attributed quote pool remains pure German on both sides, and synthesized delivery should prefer an available German masculine voice. Merkel and Merz quote ownership is strict: only Merz may trigger Merz lines, only Merkel may trigger Merkel lines, and their speaker labels, textboxes, voice assignments, and quote pools must never be crossed or merged.
 - The HUD exposes mission, progress, energy, forms, Pfand, Germanness, the Wurstsammlerpass count, law-power state, day, current rule, wanted status, and control mode through the persistent gauge, compact file tab, transient fax and opened file described above. Region changes remain gameplay events but have no persistent region card or minimap. Desktop and phones keep Germanness at the upper edge with its numeric score and law-power state; the sausage collection stays in the file. Touch controls also remain available on coarse-pointer devices wider than the phone breakpoint. Their labels use the existing pinned Pretext measurement and may wrap/grow for enlarged text; dialogue and interaction hints reserve the rendered dock clearance.
-- Optional music and speech are local browser features and must remain user-toggleable. While enabled, the soundtrack preloads and attempts to play the user-supplied intro recording immediately on page entry after its first 24 seconds have been removed. Browsers that block audible autoplay retry the preloaded intro from its beginning on the first click or key press. The intro always plays exactly once before the post-intro playlist. One scheduler then plays three shuffled no-repeat 8-bit arrangements followed by one shuffled no-repeat sung recording from the user-supplied Badnerlied, Erika, and Saargebiet pool; every track completes before the next starts. A forced national anthem occupies the next 8-bit slot without interrupting the current song. The synthesized lead and bass play one octave lower through softer triangle and sine oscillators, restrained percussion, a low-pass filter, and a lower master level for long-session comfort. Every Bundesland still has a public-domain or traditional regional melody, Baden and Württemberg are represented separately, Swabia has two additional songs, and Thüringen also has an original Kloß-themed game jingle. Do not add another third-party music recording or copy a protected modern melody without explicit user direction and recorded provenance. The local browser-generated dialogue voice is a valued part of the game; preserve it, distribute speakers across available installed German voices, and make it speak the exact authored regional line. A bounded, provenance-recorded CC0 subset of Thorsten-Voice angry and sleepy recordings is mixed through no-repeat bags into exact-matching German-side pedestrian remarks and complaints. The amused `Endlich wieder Nachschub!` and disgusted `Mist, wieder nichts geschafft.` clips are first-person player reactions to gaining or losing Germanness, respectively. Treat the categorical angry and disgusted styles as negative-valence material and sleepy as low-arousal material without claiming that the source provides numeric valence/arousal annotations.
+- Optional music and speech are local browser features and must remain user-toggleable. While enabled, the soundtrack preloads and attempts to play the user-supplied intro recording immediately on page entry after its first 24 seconds have been removed. Browsers that block audible autoplay retry the preloaded intro from its beginning on the first click or key press. Outside the neighbor scene, the intro always plays exactly once before the post-intro playlist. One scheduler then plays three shuffled no-repeat 8-bit arrangements followed by one shuffled no-repeat sung recording from the user-supplied Badnerlied, Erika, and Saargebiet pool; every track completes before the next starts. A forced national anthem occupies the next 8-bit slot without interrupting the current song. The synthesized lead and bass play one octave lower through softer triangle and sine oscillators, restrained percussion, a low-pass filter, and a lower master level for long-session comfort. Every Bundesland still has a public-domain or traditional regional melody, Baden and Württemberg are represented separately, Swabia has two additional songs, and Thüringen also has an original Kloß-themed game jingle. Do not add another third-party music recording or copy a protected modern melody without explicit user direction and recorded provenance. The local browser-generated dialogue voice is a valued part of the game; preserve it, distribute speakers across available installed German voices, and make it speak the exact authored regional line. A bounded, provenance-recorded CC0 subset of Thorsten-Voice angry and sleepy recordings is mixed through no-repeat bags into exact-matching German-side pedestrian remarks and complaints. The amused `Endlich wieder Nachschub!` and disgusted `Mist, wieder nichts geschafft.` clips are first-person player reactions to gaining or losing Germanness, respectively. Treat the categorical angry and disgusted styles as negative-valence material and sleepy as low-arousal material without claiming that the source provides numeric valence/arousal annotations.
 - Subtitles are always enabled, default to the exact German/Denglisch source, and use a locally persisted German/English language selection. Each switch from German to English queues one deliberately robotic German bureaucratic approval that congratulates the player for wanting to learn German; it follows the voice toggle and its English rendering appears through the subtitle system it has just approved. Every recorded or browser-synthesized audio-text event uses the shared `For-AI/AUDIO-TEXT-LIBRARY.js` authority; recorded cues start with the audio source, browser-speech cues start on the utterance `onstart` event, and cancellation/end clears them through the same broker lifecycle. The fixed two-line strip touches the bottom edge, uses legible `Grenze` Fraktur with gold text and a red shadow, and moves touch controls and dialogue above it. Pretext splits long translations into fitting parts; recorded parts follow the audio clock, and browser-speech parts follow spoken word boundaries when available. Background music and non-verbal effects never produce subtitles.
 - All recorded and synthesized audio-text events are serialized through the session-local stimulus broker: each active line completes or is cancelled before the next begins, followed by a 250 ms required-event gap. Critical modal/direct interactions rank first. Close-range Merkel, Merz, Bayern-Beauftragter, and Alice take priority over nearby trains, then reactive and ambient speech. A newly higher-priority request becomes next rather than interrupting. Each character may offer one owner-locked no-repeat line inside its 176-unit audible radius, with at least 3.5 seconds after completion before another even after briefly leaving and re-entering; train recordings have at least 6.5 seconds between clips. The 224-unit character release ring resets entry state without clearing the repeat gap. Noncritical requests expire after four seconds, coalesce to one pending request per family, and occupy at most four pending slots; ambient requests also observe a 2.5-second gap. Border speech is a replaceable reactive cue valid only near the Brandmauer on the matching side. Within a tier, the least-recently-served eligible family wins, then the oldest request. Repeat-prone pools use shuffled no-repeat bags and Merkel/Merz remain owner-locked. Modal or building takeover cancels active and pending city speech, including train recordings. Recording preparation has an eight-second deadline; a stalled exact-text line falls back to readable captions, while a stalled train request releases the broker. Late preparation or completion cannot replace a newer cue. The player may advance modal dialogue before its voice finishes; advancing cancels that active line before showing and speaking the next one.
 - Ordinary Deutsche Bahn recordings require five consecutive active simulation seconds standing still with the full player body inside the same station platform. Movement input, displacement, station changes, pause, hidden pages, dialogue and modal takeover reset the dwell; pending admission and decode recheck it. The sole track-triggered recording is the Buxtehude announcement about children on the tracks, requiring actual track contact even for a player-caused train stop. Admitted recordings retain their originating station (or track trigger point), fade smoothly with distance outside it, and stop completely 320 world units away. Playback never freezes movement. The 6.5-second repeat gap survives random train incidents.
@@ -391,3 +417,5 @@ All deadlines, rules, procedures, penalties, immigration mechanics, and enforcem
 
 
 The four named neighbors use their approved painted sprites throughout walking, speech and chores. Hedge work uses the painted inspection row instead of substituting an articulated 3D person. Small standing PNGs cropped from the accepted idle cells preserve identity while animation loads or fails; the existing admission queue and actor disposal own both textures. No new character art is generated.
+
+The [neighbor storyboard](../levels/neighbors/For-AI/STORYBOARD.md) owns scene ordering and interruption recovery. Completed tour scripts cannot restart; interrupted tours resume at their first unfinished stop.

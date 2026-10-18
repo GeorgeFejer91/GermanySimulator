@@ -1249,11 +1249,6 @@ function showRendererFailure(error){
     paint.fillStyle=body;paint.fillRect(28,77,40,63);paint.fillRect(24,174,22,10);paint.fillRect(52,174,22,10);
     paint.fillStyle="#cabca8";paint.beginPath();paint.arc(48,43,35,0,Math.PI*2);paint.fill();
     if(kind==="police"){paint.fillStyle="#222b34";paint.fillRect(13,8,70,13);paint.fillRect(7,18,82,8)}
-    if(kind==="burglar"){
-      paint.fillStyle="#d7ccaf";for(const y of [86,101,116,131])paint.fillRect(28,y,40,5);
-      paint.fillStyle="#35312f";paint.fillRect(14,35,68,13);paint.fillRect(17,8,62,13);
-      paint.fillStyle="#9a7752";paint.beginPath();paint.ellipse(77,111,15,24,0,0,Math.PI*2);paint.fill();
-    }
     const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
     texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
     const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
@@ -1286,7 +1281,7 @@ function showRendererFailure(error){
     }
   }
   function jwdCharacter(n){
-    const root=character(n.jwdRole==='burglar'?'burglar':'npc',n.jwdRole==='child'?1.088:1.6);
+    const root=character('npc',n.jwdRole==='child'?1.088:1.6);
     root.name=n.id;root.userData.jwdRole=n.jwdRole;
     root.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));
     root.userData.neighborPaint=createNeighborSprite(T,n,root,queueCityAsset,camera);return root;
@@ -1343,7 +1338,7 @@ function showRendererFailure(error){
   const streetPaintOwner={retired:false};
   function registeredStreetPaint(actor){
     if(actor===bridge.player||bridge.getPolice().includes(actor)||actor.sandale)return null;
-    if(actor.special||actor.jwdRole&&actor.jwdRole!=='burglar'||['tourist-guenther-liegestuhl','touristin-walburga-handtuch'].includes(actor.voiceId))return null;
+    if(actor.special||actor.jwdRole||['tourist-guenther-liegestuhl','touristin-walburga-handtuch'].includes(actor.voiceId))return null;
     const id=resolveStreetCharacter(actor);
     return id&&Object.hasOwn(streetPaintManifest||{},id)&&streetPaintManifest[id].standing?id:null;
   }

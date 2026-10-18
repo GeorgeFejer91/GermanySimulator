@@ -220,3 +220,5 @@ The40 new files total4,238,048 encoded bytes/262.50seconds; the largest is129,06
 ## Personal ordinary crowd interaction
 
 The nine ordinary crowd identities use the existing `game.js crowdCharacterBarks[voiceId][region]` pairs for both unsolicited personal barks and direct E conversations. `personalCrowdDialogue()` requires two current-region source strings and two English entries from the same voice’s `pools.crowdPersonalized` before the ordinary NPC branch opens them. It keeps the actor object and selected voice on the existing dialogue broker; accepted exact recordings and held-line captions follow current catalog policy. Generic fallback, ambient scheduling, quiz identities, advisers, neighbors and named city dialogue remain separate. This routes existing authored lines and creates no new recordings or profile bindings.
+
+Neighbor speech follows the [storyboard](../levels/neighbors/For-AI/STORYBOARD.md): actor/voice/source tickets prevent repeated playback, and only the owning current line can accept a completion receipt. Interrupted lines retain caption fallback.

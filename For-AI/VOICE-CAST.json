@@ -3805,7 +3805,7 @@
       "status": "fixed-profile-selected",
       "fallback": "captions",
       "profileStatus": "selected",
-      "secretTunnelProfileId": "36a68103506a4417987cfd9a1ab71905"
+      "secretTunnelProfileId": "fec92a799b3a48879cc2d90ce2ae2e10"
     },
     {
       "gameCharacterId": "jwd-watcher",
@@ -4234,7 +4234,7 @@
       "targetValence": "sardonic resignation",
       "targetArousal": "low",
       "fallback": "captions",
-      "status": "fixed-profile-selected",
+      "status": "archived",
       "secretTunnelProfileId": "f6d82d7b841f4e6597cb48b845d17129",
       "dialogue": [
         {
@@ -4247,7 +4247,9 @@
           "text": "Komm, wir brechen nebenan bei Maaslos ein. Da gibt's wenigstens was zu holen. Hier müssten wir noch Möbel dalassen.",
           "english": "Come on, let's break into the Maaslos place next door. At least there's something worth taking. Here we'd have to leave furniture behind."
         }
-      ]
+      ],
+      "runtimeStatus": "archived",
+      "archive": "levels/neighbors/archive/ede.md"
     },
     {
       "fullName": "Bayern-Beauftragter",
@@ -5011,16 +5013,16 @@
       "selection": "User explicitly selected the new GS Frau Schwabingen (2) profile and requested exaggerated written Swabian across all her dialogue. User authorized advisory Whisper feedback for dialect; use authorized, perceptual listening NOT RUN"
     },
     "jwd-heiko-maaslos": {
-      "profileId": "36a68103506a4417987cfd9a1ab71905",
-      "profileName": "GS Heiko Maaslos",
-      "originalSha256": "9cf8565ad9c465ccf996194fc1c0a87b77afb9861b969b36ecd09c1348f56ece",
-      "referenceSha256": "60d7e4038dc432cd53b2eb5209f3e8a0464bc2af1d82172cc514de27aea5043c",
+      "profileId": "fec92a799b3a48879cc2d90ce2ae2e10",
+      "profileName": "GS Heiko Maaslos (20s reference)",
+      "originalSha256": "1ccb91c8cc1fd03ee28fd46b0d727e7f69717ed70e15210c538a1283dca26c06",
+      "referenceSha256": "1ccb91c8cc1fd03ee28fd46b0d727e7f69717ed70e15210c538a1283dca26c06",
       "renderer": "omnivoice-rs",
       "modelRevision": "wide-rank-v2-prompt-preprocess",
       "processing": "dry mono 24 kHz / 64 kbps MP3; two-pass EBU R128 -18 LUFS, -2.5 dBTP target; metadata removed; speech cleanup v1: agate=threshold=0.006:ratio=1.5:range=0.1:attack=2:release=150:enable='gte(t,0.3)'",
       "fallback": "captions",
-      "selectedOn": "2026-10-14",
-      "selection": "User-selected dedicated GS profile. All authored speech uses insecure, hesitant, falsely friendly passive-aggressive neighbor delivery, demands framed as help and assumed agreement. Use authorized; perceptual listening NOT RUN."
+      "selectedOn": "2026-10-18",
+      "selection": "User requested restoration of earlier Heiko voice; saved 20-second profile selected. Exact source text preserved; perceptual listening NOT RUN."
     },
     "jwd-theodore-maaslos": {
       "profileId": "ecf6e12305634f578496e874b7c32bba",
@@ -5076,7 +5078,8 @@
     "88c9f2638a954f59b33a74dc6ec48f10",
     "1ec70124423e4b9c985866dc0b978a28",
     "5dfbf1a66def407fa5ec2a700c1fd311",
-    "dfe80115fcfc42908a04bb0004177096"
+    "dfe80115fcfc42908a04bb0004177096",
+    "36a68103506a4417987cfd9a1ab71905"
   ],
   "retiredProfiles": [
     {

@@ -7,6 +7,8 @@ precedence over generic rule-reciting dialogue defaults and older Heiko lines.
 
 ## Heiko Maaslos
 
+The selected voice is **GS Heiko Maaslos (20s reference)**, restored at George’s explicit request on 2026-10-18. The fixed binding and accepted/held recording coverage are owned by [VOICE-CAST.json](../../../For-AI/VOICE-CAST.json) and the [voice protocol](../../../For-AI/VOICE-SYNTH-PROTOCOL.md#heiko-professor-reference-restored--2026-10-18).
+
 Professor of systems engineering (Systemtechnik), Inga's husband and Hartmut's
 father. Intelligent, insecure, highly neurotic and arrogant, but not articulate.
 He needs control and reassurance while preserving the appearance that everyone
@@ -119,7 +121,9 @@ speech distinct from both parents' status anxiety.
 
 ## Ede · Einbruch mit Anspruch
 
-A recurring visitor to the neighbor level, with actor ID `jwd-burglar` and stable
+Archived on 2026-10-18 at George’s request. Retained as recovery/voice context only; see the [archived encounter](../archive/ede.md). He is not in the active neighbor cast.
+
+A former recurring visitor to the neighbor level, with actor ID `jwd-burglar` and stable
 voice ID `jwd-ede-einbruch`. The shared voice cast owns his selected profile and
 recording bindings.
 
