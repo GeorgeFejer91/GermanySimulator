@@ -8,10 +8,10 @@ const between=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end
 
 function fixture(){
   const elements=new Map(),create=()=>({hidden:true,style:{},dataset:{},textContent:'',children:[],append(...children){this.children.push(...children)}}),element=id=>{if(!elements.has(id))elements.set(id,create());return elements.get(id)};
-  const calls={entries:[],exits:[],dialogs:[],forms:[]},state={mission:3,forms:0,modal:false,region:'berlin',lang:'de'},player={x:1600,y:1610,r:16,vx:20,vy:10};
+  const calls={entries:[],exits:[],dialogs:[],forms:[],endings:[]},state={mission:3,forms:0,modal:false,region:'berlin',lang:'de'},player={x:1600,y:1610,r:16,vx:20,vy:10};
   const f={state,player,window:{Germany3D:{enterBuilding:(id,ready)=>(calls.entries.push({id,ready}),true),leaveBuilding:(id,config)=>{calls.exits.push({id,...config});config.onReturn();return true;}}},
     stopSpeech(){},clearInput(){},responderBlocked:()=>false,openDialogue:(...args)=>calls.dialogs.push(args),document:{getElementById:element,createElement:create,body:{classList:{contains:()=>false}}},
-    uiTone(){},setTimeout(){},toast(){},updateHud(){},jwd:{allocated:false},endGame(){},anmeldungNeighborhoodMonologue(){},showAmtDirectResult(){}};
+    uiTone(){},setTimeout(){},toast(){},updateHud(){},jwd:{allocated:false},directBuergeramt:false,endGame:win=>calls.endings.push(win),anmeldungNeighborhoodMonologue(){},showAmtDirectResult(){}};
   const context=vm.createContext(f);
   vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded=')+between('let indoorVisit=null;','function cancelAmtAppointment(')+between('function bureaucrat(','function microInteract(')+between('function interactBuilding(','function cityInteractionTarget('),context);
   const showForm=context.showForm;context.showForm=type=>{calls.forms.push(type);showForm(type)};
@@ -101,3 +101,87 @@ test('a retained office dialogue cannot change progress or leave after game over
   assert.equal(f.calls.exits.length,0);assert.equal(f.state.modal,true);
   assert.deepEqual({x:f.player.x,y:f.player.y},position);
 });
+
+const paperwork=[
+  {mission:0,type:'a38',office:'buergeramt'},
+  {mission:1,type:'wohnung',office:'hausverwaltung'},
+  {mission:2,type:'ergaenzung',office:'buergeramt'},
+  {mission:3,type:'steuer',office:'finanzamt'},
+  {mission:4,type:'versicherung',office:'krankenkasse'},
+  {mission:6,type:'aufenthalt',office:'auslaender'},
+  {mission:7,type:'citizenship',office:'auslaender'}
+];
+
+function submit(f,valid=true){
+  const form=f.element('bureaucracy-form');
+  form.reportValidity=()=>valid;
+  form.onsubmit({preventDefault(){},currentTarget:form});
+}
+
+test('all seven paperwork transactions advance in order with one Stadtbild stamp and one citizenship ending',()=>{
+  const f=fixture();f.state.mission=0;
+  for(const step of paperwork){
+    if(step.mission===6){
+      assert.equal(f.state.mission,5);assert.equal(f.state.forms,5);
+      f.state.stadtbild=3;
+      const office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+      const mission=vm.runInContext('missions[state.mission]',f.context);
+      assert.equal(mission.target,'stadtbild');assert.equal(mission.form,null);
+      f.context.interactBuilding(office,mission);
+      f.calls.entries.at(-1).ready();f.calls.dialogs.at(-1)[3]();
+      assert.equal(f.state.mission,6);assert.equal(f.state.forms,5,'the stamp is not another form');
+    }
+    assert.equal(f.state.mission,step.mission);
+    const mission=vm.runInContext('missions[state.mission]',f.context);
+    assert.equal(mission.target,step.office);assert.equal(mission.form,step.type);
+    if(step.mission===0){
+      f.context.showForm(step.type);
+    }else{
+      const office={id:step.office,name:step.office,doorX:1600,doorY:1555};
+      f.context.interactBuilding(office,mission);
+      f.calls.entries.at(-1).ready();f.calls.dialogs.at(-1)[3]();
+    }
+    const count=f.state.forms;
+    assert.equal(f.element('bureaucracy-form').dataset.type,step.type);
+    submit(f,false);
+    assert.equal(f.state.mission,step.mission);assert.equal(f.state.forms,count);
+    assert.equal(f.element('form-modal').hidden,false);
+    submit(f);
+    assert.equal(f.state.mission,step.mission+1);assert.equal(f.state.forms,count+1);
+    assert.equal(f.element('form-modal').hidden,true);
+    submit(f);
+    assert.equal(f.state.mission,step.mission+1,'repeated submission cannot skip a procedure');
+    assert.equal(f.state.forms,count+1);assert.equal(f.calls.endings.length,step.type==='citizenship'?1:0);
+  }
+  assert.equal(f.state.mission,8);assert.equal(f.state.forms,7);
+  assert.equal(f.state.citizen,true);assert.deepEqual(f.calls.endings,[true]);
+});
+
+for(const step of paperwork){
+  test(`${step.type}: a wrong-stage request or superseded submission cannot advance progress`,()=>{
+    const f=fixture();f.state.mission=step.mission;
+    const wrong=paperwork.find(other=>other.type!==step.type);
+    f.context.showForm(wrong.type);
+    assert.equal(f.element('form-modal').hidden,true);
+    assert.equal(f.state.activeForm,undefined);
+    f.context.showForm(step.type);f.state.mission=step.mission+1;
+    submit(f);
+    assert.equal(f.state.mission,step.mission+1);assert.equal(f.state.forms,0);
+    assert.deepEqual(f.calls.endings,[]);
+  });
+
+  test(`${step.type}: cancellation permits retry while terminal submissions remain inert`,()=>{
+    const f=fixture();f.state.mission=step.mission;
+    f.context.showForm(step.type);f.context.leaveIndoorBuilding();
+    submit(f);
+    assert.equal(f.state.mission,step.mission);assert.equal(f.state.forms,0);
+    f.context.showForm(step.type);submit(f);
+    assert.equal(f.state.mission,step.mission+1);assert.equal(f.state.forms,1);
+    assert.deepEqual(f.calls.endings,step.type==='citizenship'?[true]:[]);
+    const terminal=fixture();terminal.state.mission=step.mission;
+    terminal.context.showForm(step.type);terminal.state.gameOver=true;
+    submit(terminal);
+    assert.equal(terminal.state.mission,step.mission);assert.equal(terminal.state.forms,0);
+    assert.equal(terminal.element('form-modal').hidden,false);assert.deepEqual(terminal.calls.endings,[]);
+  });
+}

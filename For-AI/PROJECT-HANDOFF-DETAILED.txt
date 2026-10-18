@@ -1,3 +1,35 @@
+PAPERWORK CONTROLLER VALIDATION - 18 OCTOBER 2026
+======================================================================
+Test-only checkpoint after runtime fix a737772e0d6614720a8ed4f5d42c8fbbbdffc23c.
+Production game.js remains byte-identical SHA256
+9df3618091f635e5c46706f117fe4d0ab4b5461a486ef9d01e37773af56592cb.
+
+Fifteen new regressions cover seven ordered form transactions and the separate
+Stadtbild stamp, invalid/repeated/stale/cancelled/terminal submissions, fresh
+retry and one citizenship-ending request. The chain uses actual production
+mission records with independent expectations for office targets/form types.
+Final adjacent nine suites:103/103 PASS, zero failures/skips. Independent final
+review PASS;22/22 focused tests freshly reproduced. Five isolated deliberately
+broken source copies fail the new assertions, including a wrong office target.
+No faulty source copy was written to production or committed.
+
+Coverage is logic-regression: initial A38 authorization is supplied, JWD chapter
+bypassed, street corrections supplied, DOM/validity/dialogue/renderer and ending
+screen are mocked. This does NOT prove a natural eight-procedure playthrough,
+33 checkpoint/restart routes, actual field validation/input, physical Android
+or listening. Those full-goal gates remain open. Chrome untouched.
+
+Local evidence/recipes: E/mission-form-chain-v1/ (E defined in manual below).
+Final review/receipt supersede its preserved initial target-binding coverage
+finding. Runtime Physics/Camera gates omitted because this delta changes only
+tests and documentation, with no world behavior or assets. The earlier a737772
+runtime change STILL invalidates older frozen P3/mission game.js bindings; do
+not fix those packets with a HEAD-only metadata substitution. Preserve originals,
+prepare reviewed successors, and do not reset any admissions/attempt budgets.
+The broader game remains unfinished. Remaining inventories/routes follow below.
+
+----------------------------------------------------------------------
+
 LATEST MISSION OWNERSHIP FIX - 18 OCTOBER 2026
 ======================================================================
 Ordinary indoor dialogue completion now requires its ORIGINAL current visit
