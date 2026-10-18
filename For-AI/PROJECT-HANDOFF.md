@@ -1,47 +1,45 @@
 # Project handoff — 18 October 2026
 
 Read the opening **CURRENT AUTHORITATIVE CHECKPOINT** in the standalone
-[detailed TXT](./PROJECT-HANDOFF-DETAILED.txt). It supersedes historical status
-cards and retains full scripts, nested skill routes, 33 mission/restart cases,
-43 cast records, verification gates and recovery instructions.
-
-The preserved natural run completed the first-office approach, ordinary E entry
-and normal return. The current local combined paving/mouth candidate passes96
-focused checks and limited independent Physics/Camera reviews. Its scoped desktop
-shader-warning reproduction is resolved; **runtime publication remains on hold**
-for required movement, camera and device checks. QR/phone, interview, A38 and full
-mission remain unproved.
+[detailed TXT](./PROJECT-HANDOFF-DETAILED.txt). It supersedes all historical cards
+and retains scripts, nested skill routes,33 mission/restart cases,43 cast records,
+verification gates and recovery instructions. Handoff complete; game unfinished.
 
 Canonical integration checkout:
 `C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator`.
-Preserve its unpublished game8931183b, index release token and untracked regression
-test43c2561a together. Never overwrite its runtime from the dirty primary checkout.
-Published baseline before this documentation update is 3389c6d; published game
-remains9df36180. This documentation does not release the local runtime candidate.
+Never copy runtime from the heavily dirty primary checkout over this source.
 
-The shader workaround passed402exactGPUmouth comparisons, then was integrated
-locally with cache-token updates. All96focused checks pass;22current source/test
-pins and recovery files are preserved. Actualcanonical office/request verification
-passed79seconds0warnings/errors and currentimportURLs. The combinedcandidate
-remains unpublished for broader movement/device gates; see the TXT opening.
+The preserved e873 pedestrian/Irmgard package is now **installed locally**, merged
+with the newer paving, guarded office completion and LF mouth fixes. Current
+game883ae742;40 installed pins in primary ignored evidence
+`output/central-completion-2026-10-16/p3-source-successor-v1/INSTALLED.json`.
+Independent Physics/Camera source reviews pass for controlled validation;
+**runtime publication remains HOLD**. Both reviewers inspected the same frozen
+41-pin proposal (including its historical journal, separately updated on install).
 
-Remaining work: finish paving acceptance; phone/natural mission and33restart
-routes; street P3; Brigitte and40other eligible personalities; Hannelore; integrated
-desktop/mobile/performance/audio; and validated feature reconciliation/publication.
-3D pose accuracy stays deferred. Select one bounded task with one integrator.
+Focused110/110,office/shader96/96,street/tourist228/228,grounding3/3 pass.
+Actual-speed reset CPU pair cases pass full26-unit crossing in3.60–4.334 simulated
+seconds with20s history. This is not rendered or browser-wall-time evidence.
+Historical actual five-second P3 failure remains authoritative. Next task is one
+reviewed hidden silent IAB capture/observation successor for the installed source.
+Chrome remains untouched; validation uses the existing game renderer.
 
-Chrome stays untouched. Existing CPU/private WGL and reviewed hidden silent IAB
-tools are documented; no replacement renderer is needed. Latest owned tab/server
-are closed. Ignored `output/` evidence needs separate authorized recovery on
-another computer. The handoff is complete; the game remains unfinished.
+Recorded baseline5403188 is documentation only; Pages39121710589 succeeded
+and public game remains9df36180. This handoff update releases documentation only;
+the current runtime remains local/unpublished. Resolve latest doc HEAD with git log.
+Natural first-office entry/return was proved previously; QR/phone,interview,A38,
+full mission/all33 restarts,Brigitte/other cast,Hannelore and broader desktop/
+mobile/performance/audio validation remain open. 3D pose accuracy stays deferred.
+Ignored evidence/private sources need authorized recovery on another computer.
 
-Latest format successor: `buergeramt-mouth-lf-v1/CANDIDATE.json` (`c6988e99`),
-mouth module `fb1e3067`; exact exported GLSL/function equivalence and fresh96/96
-checks are recorded. GPU402/79-second evidence is historical CRLF execution,
-carried forward only for the proven line-ending change. Runtime remains held.
+Capture preflight update: V1 stays **NOT READY**. V2 now exists as a partial
+private draft; read `p3-iab-source-v2/RESUME.txt` (also reproduced in the standalone
+TXT). Its diagnostics/lifecycle/controller checks pass32/32, with a false-success
+mutation correctly failing. All40 installed source pins remain unchanged.
 
-The completed `p3-current-reconcile-v1` audit found an unmerged24-file movement/
-Irmgard dependency package. Next bounded implementation is an output-only source
-successor proposal against the current22 pins, preserving paving, indoor ownership
-and shader fixes. The old actual five-second passing failure remains authoritative.
-The TXT now gives the paths, merge base, dependency list and verification sequence.
+**Do not launch V2**: recording helper/codec/decoder, build/server wiring, new
+frozen tool pins and same-candidate specialist review are unfinished. The copied
+V1 PLAN/build/server are not a usable V2 runner. A detached recording mirror with
+a same-frame timestamp strip is only a reviewed design; no new native pixels,
+Chrome activity, server, tab or viewport override. Existing full FFmpeg capability
+was verified against historical media only. Broad game/release holds remain.

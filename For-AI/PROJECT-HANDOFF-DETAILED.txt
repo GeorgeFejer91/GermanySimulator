@@ -1,3 +1,247 @@
+CURRENT AUTHORITATIVE CHECKPOINT - P3 SOURCE INSTALLED, 18 OCTOBER 2026
+======================================================================
+THIS CARD supersedes ALL current/next/not-installed statements below. The old
+opening is retained as component history; do not follow its c698 resume step.
+Handoff remains complete; broad GAME completion goal is active and unfinished.
+
+Canonical C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+Primary P:C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+Evidence E:P/output/central-completion-2026-10-16
+Recorded baseline54031889973948a360a0d15fe750a3ad5134fea5 (handoff docs only),
+Pages39121710589SUCCESS; root and3d HTTP200, published game9df36180 unchanged.
+This handoff-only publication may advance doc HEAD; resolve it with git log.
+Current local runtime has advanced; NEVER restore dirty P runtime over C.
+
+CURRENT LOCAL UNPUBLISHED SOURCE
+E/p3-source-successor-v1/INSTALLED.json binds40 installed source/test/assets.
+Installation receipt SHA:
+dfbc8438cf53fa081fd5237afb71cd362a72b16abeb996c6e00f95135e75157d.
+Review proposal CANDIDATE.json SHA:
+0ef1f8e8ae397067c84a9416c37c1f17afd553a74e373af12756ea5647ca06db.
+That proposal has41 pins including historical SESSION; installed40 exclude the
+separately updated journal. Do not compare SESSION against the proposal pin.
+game.js SHA883ae742e658446d546933bd28b2702993e1dd360593459d4e98daee04b72e1f
+world3d SHA35f2c329306f7cbea39877e7f865580ac4c9f352f6a120abb3e4d5e4e0f51ed8
+index SHA6e5b90d5880e17070deacfa3ce8ee5fdb4889dda18f28616584b06015d483cf5
+game/world/tourist entry tokens now20261018-painted-navigation-successor.
+Mouth LFfb1e3067 and20261018-mouth-single-exit helper graph remain unchanged.
+Former c69822-pin LF checkpoint is now HISTORICAL baseline, not current game.
+
+WHAT CHANGED / EVIDENCE
+Integrated23 reviewed paths from e873 onto current paving/office/mouth source.
+Persistent pedestrian avoidance, atomic planted movement holds, same-object
+discontinuity recovery reset, atlas admission/ownership and tourist phase
+handling are installed. Irmgard's two old movement atlases/descriptor are installed;
+42 other manifest records/standing identities unchanged. Meaningful pilot tests
+and painted-walk helper/reference changes are included. Old SESSION excluded.
+Paving, guarded current-visit office completion, shared controls and mouth fixes
+are preserved. No runtime commit/push. Unrelated RTK/router/skill dirt preserved.
+Independent PHYSICS-REVIEW.md and CAMERA-REVIEW.md: source coherence PASS for
+controlled installation/validation; overall runtime/release HOLD. Asset review
+passes packaging/descriptor only. All40 installed pins freshly match proposal.
+FOCUSED110/110; COMBINED office/shader96/96; STREET-REGRESSIONS228/228;
+PythonGROUNDING3/3. Overlap exists between these suites; do not sum unique tests.
+Missing-test-copy fixture logs retained, resolved by unchanged fixture copies.
+Atlas baseline with canonical old module root is RED0/11 (capability absent),
+not11 rendered physical failures. Existing raw-resolver mutation also goes red.
+Actual-speed Irmgard+13/Klaus-Dieter-17 CPU matrix passes both avoidance sides/
+orders at60Hz/14-20ms plus delayed/reset cases:10 cases,20s simulated history,
+full26-unit x-order pass3.60-4.334s,min separation26.00296,zero reversals.
+CPU admits textures by dimensions only and clears other world actors/obstacles.
+Four counterfactual no-notifier controls run ONLY2s and reverse; no pass observed.
+Their legacy FAIL_BY5 label does not assess5s. Raw HAS_FAILURES receipt retained.
+No fresh native render/crowd/device/listening/performance proof is created.
+Historical actual48cf P3 five-second failure remains authoritative.
+
+INSTALLATION / RECOVERY
+Read INSTALL-PLAN.txt, SOURCE.patch, INVERSE.patch, PROPOSAL.json, installed-before/
+and INSTALLED.json. Text inverse excludes binary rollback: priorExistence records
+which paths were absent. Never delete unrelated assets to undo a pilot install.
+The installer is one-shot; do NOT rerun. Initial guard caught SESSION changing
+with its scope note, rolled back all23 files, then was corrected to track journal
+separately. installed-before-rolled-back-attempt1 preserves that checkpoint.
+Second installation succeeded; all40 source pins match. No browser/server live.
+prepare-test-copy.py only populates a PRIVATE output test copy, not another game.
+
+CURRENT CAPTURE PREFLIGHT / NEXT ONE BOUNDED TASK
+E/p3-iab-source-v1 remains frozen NOT READY after both independent reviews.
+V2 now EXISTS as a partial private draft, not a future unstarted derivative.
+E/p3-iab-source-v2/RESUME.txt and ADMISSION-HOLD.json are the exact next route;
+DRAFT-INVENTORY.json hashes its files but is NOT a launchable TOOL-PINS receipt.
+Background source checks32/32 PASS (controller8,lifecycle5,diagnostics19); false
+restoration-success mutation correctly fails. All40 installed game pins rehashed
+unchanged. No fresh browser/server/tab/viewport override/capture/native decode.
+V2 recording helper, barcode codec/decoder, build/server module integration,
+updated source plan/pins and same-candidate specialist source review are OPEN.
+The copied V1 build/server/PLAN must not run. Full standalone V2 instructions
+are reproduced below so this TXT remains usable without guessing private paths.
+No replacement game renderer: proposed detached recording mirror copies existing
+canonical scene and appends a private timestamp strip. Exact final-render hook,
+copy policy and actual pixels remain unimplemented/unapproved. Source tests do
+not establish native browser behavior, visual quality or game completion.
+
+Then affected P1/P2,P3 narrow/overtaking/crowd/player/prop,P4 corners and42-wide
+office bend,P5 grounded feet,C1-C5/X1/device/input/loading/performance remain open.
+Natural mission/phone/all33 restarts,Brigitte/40 cast,Hannelore/audio and broad
+reconciliation/publication remain as inventoried below. 3D pose accuracy deferred.
+One integrator; bounded exclusive workers; no unvalidated runtime publication.
+For another PC, recover ignored E/private assets through authorized backup first.
+
+P3 CAPTURE V2 - PRIVATE DRAFT HANDOFF, 18 OCTOBER 2026
+======================================================
+STATUS: NOT READY / MAY NOT LAUNCH. No current rendered acceptance.
+This document supersedes copied PLAN.txt and V1 NEXT-V2 instructions concerning
+what has already been implemented. It does not supersede production authorities,
+original caps, spent attempts, source identity, or the old failed native witness.
+
+PATHS AND AUTHORITY
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+V = E/p3-iab-source-v2
+C is the actual installed local game. Never copy dirty P runtime over C.
+E/p3-source-successor-v1/INSTALLED.json binds all40 installed source/test/assets;
+all40 were rehashed successfully at this closeout. Native acceptance is still HOLD.
+Do not rerun the one-shot installer or the frozen V1 capture server.
+V is ignored private authoring evidence, not shipped runtime or a second game.
+Recover E through authorized backup on another PC; a git clone omits these files.
+
+WHAT IS COMPLETE IN THIS DRAFT
+- diagnostics.js + diagnostics.test.mjs:19 source tests. Bounded startup/runtime
+  console/errors/request failures, sticky overflow, subscribe/unsubscribe/dispose.
+  Limits64 console,128 errors,128 request failures,4096 UTF8 bytes/string,
+  16384 bytes/row,262144 aggregate saved row bytes,64 args,128 active XHR.
+  Fetch wraps the promise (one extra settlement step); native result/reason kept.
+  Object values are type-only without getters; HTTP and network errors distinct.
+- lifecycle.js + lifecycle.test.mjs:5 source tests. Concurrent terminal requests
+  share one promise; snapshot, media finalization, restoration, cleanup, final
+  report occur in order. Errors cannot be reported as completed success.
+- controller.js + controller.test.mjs:8 source tests. Real lifecycle module is
+  loaded in VM tests. Restoration status remains STARTED when restore throws;
+  cleanup attempts every remaining listener, track, recorder and diagnostic
+  disposer; failures are retained. Unload uses terminal owner instead of a
+  competing recorder.stop. Hard blank/abort bound remains original45s.
+- BACKGROUND-CHECKS.tap/.json: actual32/32 PASS,0 failures/skips. A deliberately
+  false restoration-PASS mutation fails (RESTORATION-MUTATION.tap, exit1).
+  The mutation directory is PRIVATE NEGATIVE CONTROL; never serve/install it.
+- Clock reviews exist, but are design reviews only. Existing full ffmpeg/ffprobe
+  capability receipt is copied from V1, where historical VP8 media was decoded
+  without modifying it. This is NOT a new source-game recording.
+
+WHAT IS NOT IMPLEMENTED / NOT VALIDATED
+recording.js and barcode codec/decoder do NOT exist. Controller references
+P3Recording and deliberately fails if it is absent. The copied build.mjs and
+server.mjs still contain V1 assumptions; they do NOT inject the new modules.
+No V2 callbacks.js, instrumented game/world, mute bootstrap, SOURCE-CHECKS or
+TOOL-PINS has been built/frozen. No final V2 independent source approval exists.
+No server, tab, viewport override, recording, native media decode or current P3
+run was started during this closeout. Do not use unit PASS as permission to run.
+
+NEXT BOUNDED TASK - IMPLEMENT OBSERVATION, NOT GAMEPLAY
+1. Read C/For-AI/AGENT-START.md, PROJECT-HANDOFF.md, owning city instructions,
+   OBJECT-CONSISTENCY.md and relevant animate-2d-characters painted-walking route.
+   Read V/CLOCK-DESIGN-REVIEW.md and CLOCK-STRIP-DESIGN-REVIEW.md. Keep one
+   integrator. A codec/decoder worker may own only separate private files; the
+   integrator alone owns build/server/controller/runtime instrumentation.
+2. Finish only the private recording helper and fixed barcode codec/decoder.
+   Use the EXISTING canonical renderer and detached HTML2D recording canvas.
+   No new game renderer, engine, simulated art, scene or production render loop.
+   Canonical source remains1280x800; recording mirror1280x816, strip outside
+   original800px. Do not rescale/crop/repaint canonical scene pixels.
+3. Source-clock binding must be same-frame: synchronous source image copy and
+   floor(performance.now()) timestamp strip immediately after successful final
+   open-city framebuffer render. No await/RAF between render and copy; no
+   preserveDrawingBuffer, extra game simulation or speculative PTS0 alignment.
+   Existing world sync renders scene THEN an optional mission HUD pass. A naive
+   renderer.render wrapper might capture the intermediate frame. Candidate
+   refinement: a private exact-inverse hook immediately after BOTH world passes,
+   before sync returns; prove the intended renderer/default target/context.
+   This refinement is NOT source-approved yet. Review exact hook before launch.
+4. CLOCK-STRIP-DESIGN-REVIEW assumes25Hz copy throttle. Another UNIMPLEMENTED
+   proposal is copy on each actual final canonical render, captureStream(25),
+   avoiding independent25Hz throttles aliasing at native60Hz. It costs more copy
+   work. Choose and review ONE precise policy before freezing; do not silently
+   revise the review. Neither cadence nor performance is proved by design.
+5. Freeze binary barcode contract BEFORE execution:16-bit sync,32-bit floor-ms
+   timestamp,16-bit counter,16-bit CRC;80 bits at8px/bit ->640px width,16px high.
+   Define bit order, CRC polynomial/init/xor/covered bytes, fixed gray sample
+   row/cells and black/white ambiguity thresholds. No repair/search after decode.
+   Counter advances on successful copies only. Reject wrap, corrupt/ambiguous
+   rows, timestamp/counter regressions or same counter with different stamp.
+   Exact duplicate stamp+counter is allowed but adds NO fresh coverage.
+6. Native video PTS gives order/cadence; decoded source stamp shares the witness
+   performance clock. For q=floor(time), require first q+1<=witness start S and
+   final q>=end E. Distinct source gap upper bound is nextq+1-priorq<=80ms.
+   Bracket first5s and full20s; do not call late dataavailable proof of a frame.
+   First chunk can be headers only. Preserve all raw chunks and media unmodified.
+   Post-witness zero-distance renders may obtain a final stamp after E; native
+   RAF eligibility and original deadline still apply. No ordinaryTick after20s.
+7. Wire diagnostics BEFORE mute/bootstrap/product script. Remove duplicate old
+   unbounded error/rejection arrays; alias silence receipt to bounded errors.
+   Keep audio wrappers muted until tab close even if diagnostics are disposed.
+   Wire lifecycle + codec + recording + exact original callbacks BEFORE controller.
+   Preserve media pause/resume/early stop/context loss/resize/DPR/visibility guards.
+   Test startup failure, partial-stage failure, terminal races, video/report POST
+   rejection, cleanup exceptions, no duplicate upload, track retirement, missing
+   helpers, missing context and geometry changes. VM tests cannot prove native
+   capture/encoding/WebGL, so leave those explicitly NOT RUN.
+8. Adapt server to new diagnostics shape/caps and pinned full decoder paths.
+   Use existing Gyan FFmpeg8.0.1 full build, not Playwright ffmpeg1011 (which lacks
+   required framemd5/VP9 support). FULL-DECODER-CAPABILITY.json contains exact
+   executable paths/SHA256. Decode native presentation frames without resampling,
+   transcode, PTS reset, dropping/duplicating output frames or extra PNG gallery.
+   One640-byte fixed gray barcode row per decoded presentation frame; <=750 frames,
+   ledger/frame-count agreement, raw input SHA before/after identical. Pin both
+   executables and validate fixed codec against bounded synthetic unit patterns;
+   label synthetic tests so they cannot masquerade as P3 game evidence.
+9. Media accounting must retain original32MiB aggregate: per profile raw video
+   <=11.5MiB plus <=0.5MiB gray rows/compact decode ledger, plus4 native PNGs
+   <=2MiB each across both profiles.640*750=480000 bytes leaves44288 bytes for
+   ledger inside0.5MiB. Count partial files and all derived media; do not add new
+   frames to256 runtime-event allowance. Diagnostic/report caps still apply.
+10. Update PLAN/build/server, parse source, run meaningful unit/failure checks,
+    freeze exact tool/dependency pins plus all40 installed source pins and exact
+    old callback identities. Build must prove instrumentation's exact inverse.
+    Do NOT manufacture a TOOL-PINS receipt from this unfinished draft inventory.
+    Have independent read-only Physics and Camera reviewers inspect the SAME
+    frozen candidate. Source approval is required before fresh admission.
+11. Only then do one bounded silent hidden IAB attempt, if admitted. Keep Chrome
+    untouched; no process polling, close request, killing apps or foreground/audio.
+    Read-only memory floor is1024MiB physical/6000MiB virtual for P3; do not borrow
+    unrelated mission runner's2048/12000 floor. Confirm only owned jobs retired.
+    Original180s overall,45s/profile FROM FIRST PRODUCT HTML,20s readiness,
+    4500samples/1572864 sample bytes,2097152 report bytes,256events,64console,
+    128request failures and4PNGs remain. No deadline reset or extra spent grant.
+    Distinct loopback origins isolate storage, NOT full contexts/cache partitions.
+    Plus tab closed before minus; first failure aborts minus. Close owned tabs,
+    reset only owned viewport override, stop owned server, retain failed evidence.
+12. Success requires actual Irmgard+13 vs real Klaus-Dieter-17 source objects,
+    decoded real art, normal native route planner/movement ownership,40-unit
+    initial spacing,>=26 separation,<=.025 microsteps, full26-unit body pass
+    within5000ms ACTUAL wall time and20s history for BOTH avoidance preferences.
+    CPU simulated crossing success is not equivalent. Preserve original failed
+    native48cf report and spent allocations. Paint/anatomy/temporal review plus
+    P4/P5/crowd/mobile/performance remain separate and cannot be waived by barcode.
+
+EXACT BACKGROUND CHECK COMMAND (PowerShell, FROM P)
+& 'C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' --test --test-reporter=tap output/central-completion-2026-10-16/p3-iab-source-v2/controller.test.mjs output/central-completion-2026-10-16/p3-iab-source-v2/lifecycle.test.mjs output/central-completion-2026-10-16/p3-iab-source-v2/diagnostics.test.mjs
+Do not run copied build/server until steps above repair and freeze them.
+
+PROJECT SCOPE AFTER THIS TASK
+The comprehensive standalone C/For-AI/PROJECT-HANDOFF-DETAILED.txt retains all
+33 mission/restart cases,43 cast records, assets/audio tools, nested skills,
+verification and release checklist. Natural phone/interview/A38/full mission,
+Brigitte and other cast, Hannelore production/listening, affected P1-P5/C/X,
+mobile/input/loading/performance and reconciliation/publication remain open.
+3D pose accuracy is explicitly deferred. Finish one bounded integrated task
+before starting another. Do not batch-generate unapproved replacement cast assets.
+Game publication remains HOLD. Handoff documentation can be complete while game
+work remains unfinished. Private media/tool inventories are recovery aids, not
+permissions to publish private authoring inputs or call unfinished features done.
+
+
+PREVIOUS COMPONENT CHECKPOINT FOLLOWS - HISTORICAL BASELINE AND FULL MANUAL
+======================================================================
 CURRENT AUTHORITATIVE CHECKPOINT - 18 OCTOBER 2026
 ======================================================================
 READ THIS FIRST. This opening replaces ALL older current/resume/next cards below.
