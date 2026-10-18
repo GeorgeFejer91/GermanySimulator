@@ -71,8 +71,9 @@ function phoneAway(evidence){
  phoneVisibility="unknown";phoneSilent=false;phoneSilenceEvidence="";callPending=false;callCommitted=false;
  clearPhonePressure();if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
  setStatus("TELEFONSTATUS UNBEKANNT · DER STEMPEL WARTET");
+ if(officeSubtitle?.registrationWait)showRegistrationPhoneWait();
 }
-function phoneReturned(){if(!atCounter())return;const returned=phoneVisibility!=="visible";phoneVisibility="visible";if(!returned)return;phoneSilent=false;phoneSilenceEvidence="";callPending=true;callCommitted=false;armCall();setStatus("TELEFONSEITE SICHTBAR")}
+function phoneReturned(){if(!atCounter())return;const returned=phoneVisibility!=="visible";phoneVisibility="visible";if(!returned)return;phoneSilent=false;phoneSilenceEvidence="";callPending=true;callCommitted=false;armCall();setStatus("TELEFONSEITE SICHTBAR");if(officeSubtitle?.registrationWait)showRegistrationPhoneWait()}
 // Resuming the game tab grants the peer a fresh reply window; host suspension is not phone-away evidence.
 document.addEventListener("visibilitychange",()=>{if(active&&!document.hidden)phoneLastSeen=performance.now()});
 const lips=window.GermanyAmtLips.createTrack(()=>visualClock*1000);
@@ -998,8 +999,16 @@ function showRegistration(onStart){
  setStatus("AKTENPUNKTE "+registrationPoints+"/"+story.registration.totalSteps+" · RÜCKFRAGEN "+registrationDetours);
  content(story.registration.speaker,node.line,node.choices.map(choice=>({label:choice.label,run:()=>{registrationReply=choice;setStage("reply");readPlayerReply(choice.label,showRegistrationReply)}})),null,typeof onStart==="function"?onStart:null);
 }
+function showRegistrationPhoneWait(){
+ const visible=phoneVisibility==="visible";
+ setStage("phone-warning");setStatus((visible?"TELEFONSEITE NOCH SICHTBAR":"TELEFONSTATUS UNBEKANNT")+" · DER STEMPEL WARTET");
+ // The sheet/status is hidden in the first-person scene. Keep this unspoken
+ // instruction in the existing caption rail until real phone-away evidence.
+ const notice=startOfficeSubtitle(visible?"Telefonseite ausblenden oder Handy sperren. Der Stempel wartet.":"Telefonverbindung prüfen, dann Handy sperren. Der Stempel wartet.",visible?"Hide the phone page or lock your phone. The stamp is waiting.":"Check the phone connection, then lock your phone. The stamp is waiting.",Infinity);
+ notice.registrationWait=true;
+}
 function showRegistrationReply(){
- if(registrationReply?.next==="complete"&&!phoneSilent){setStage("phone-warning");setStatus((phoneVisibility==="visible"?"TELEFONSEITE NOCH SICHTBAR":"TELEFONSTATUS UNBEKANNT")+" · DER STEMPEL WARTET");return}
+ if(registrationReply?.next==="complete"&&!phoneSilent){showRegistrationPhoneWait();return}
  const choice=registrationReply;setStage("reply");content(story.registration.speaker,choice.reply,[],()=>{
   if(!registrationAnswered.has(registrationNode)){registrationAnswered.add(registrationNode);registrationPoints+=choice.points||0;if(choice.detour)registrationDetours++}
   if(choice.stamp)registrationStamps.add(choice.stamp);registrationReply=null;registrationNode=choice.next;if(choice.next==="complete")completeRegistration();else showRegistration();
@@ -1007,7 +1016,7 @@ function showRegistrationReply(){
 }
 function completeRegistration(){
  if(!active||!activated||registrationCompleted)return;
- if(!phoneSilent){registrationNode="complete";setStage("phone-warning");setStatus((phoneVisibility==="visible"?"TELEFONSEITE NOCH SICHTBAR":"TELEFONSTATUS UNBEKANNT")+" · DER STEMPEL WARTET");return}
+ if(!phoneSilent){registrationNode="complete";showRegistrationPhoneWait();return}
  registrationCompleted=true;clearPhonePressure();callPending=false;setStage("success");setStatus("ANGEMELDET · "+registrationPoints+"/"+story.registration.totalSteps+" AKTENPUNKTE · "+registrationDetours+" RÜCKFRAGEN");
  options.onRegistration?.({name:registeredName,number,points:registrationPoints,detours:registrationDetours});
  content(story.registration.speaker,"ANMELDUNG ABGESCHLOSSEN. Sie sind jetzt amtlich hier. Ihre Meldebestätigung ist gestempelt und das Abzeichen steht in Ihrer Spielakte. Formular A38 nehmen Sie ebenfalls mit. Verlieren Sie es, dann verlieren Sie bitte auch meine Zuständigkeit.",[{label:"Meldebestätigung und A38 mitnehmen.",run:()=>readPlayerReply("Meldebestätigung und A38 mitnehmen.",finish)}]);

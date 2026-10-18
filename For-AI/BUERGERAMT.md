@@ -1154,6 +1154,17 @@ TimeAPI UTC stamps now also anchor the escalating argument when a fresh peer off
 
 ## Anmeldung interrogation and completion
 
+The final approval still requires a confirmed hidden companion page. A visible
+phone or unknown/disconnected phone must keep the pending final answer and its
+last point uncommitted. While waiting, show a persistent German/English status
+in the existing shared subtitle rail: hide the phone page or lock the phone;
+for unknown state, check the connection first. The first-person scene hides the
+old sheet/status, so updating that status alone leaves an apparently frozen
+room. This notice is unspoken, follows the current phone state and clears when
+accepted hidden-page evidence resumes the existing clerk reply. It does not
+grant silence, registration, A38 or an extra continuation action. The focused
+regression is `tests/buergeramt-completion-recovery.test.mjs`.
+
 `buergeramt-story.js` owns a ten-question direct route through a 52-node interrogation. Correct answers cover presence, original identity document, actual move-in date, Wohnungsgeber, confirmation, address, the applicant’s signature, residence, checking the recorded details and collecting the receipt. Every question has two authored answers; foolish replies lead through finite corrective detours. Choosing every second answer takes 52 questions, while every first answer takes ten. All nodes remain reachable and can finish. Correct core answers earn one point each, once per question, for a maximum of ten; legitimate withheld-confirmation and multiple-residence answers also earn their point. The existing scene status displays points and avoidable follow-up questions. Points never replace a required answer or block completion. Stamps remain progress remarks rather than hidden inventory prerequisites. The longer branches cover the two-week period, landlord vs subletting main tenant, address/owner fields, civil-status evidence where applicable and the final receipt. A five-node withheld-confirmation branch reports the refusal and returns to a fictional resolved dossier; reporting alone is not an automatic real-world substitute for the confirmation. Knick’s extra counters, fax demands, copy disputes and procedural permissions are authored exaggeration.
 
 The host owns the registration node, pending reply, points, remarks, silence evidence, call round, warnings and single completion. A call warning preserves the current node/reply. No player button or phone-origin `silence` packet can set silence. After counter admission, the companion’s hidden `visibilitychange` or `pagehide` event provides accepted browser-away evidence. Offline/disconnection or eight seconds without inbound traffic leave visibility unknown unless the page was already confirmed hidden; host-background time does not count toward that watchdog. No event claims to detect the OS mute switch. The existing heartbeat retries hidden/visible metadata; a visible return revokes silence and arms another round. Before counter admission the same loss still forfeits the ticket. Retired links, exit, ticket replacement and replay cancel attempt-owned calls and callbacks. No new transport, service or polling loop is introduced.

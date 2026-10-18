@@ -38,7 +38,7 @@ jobs:
       - name: Check office touch navigation, turning and direction texture reuse
         run: node --test tests/buergeramt-touch-navigation.test.mjs tests/buergeramt-touch-target.test.mjs tests/buergeramt-turning.test.mjs
       - name: Check office causality and re-entry
-        run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs
+        run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs tests/buergeramt-completion-recovery.test.mjs
       - name: Check phone lifecycle and registration rewards
         run: node --test tests/buergeramt-phone-lifecycle.test.mjs tests/kriminalpolizei-phone.test.mjs
       - name: Check president portrait interaction
