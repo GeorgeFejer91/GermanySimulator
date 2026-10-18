@@ -1,3 +1,183 @@
+18 OCTOBER 2026 FINAL HANDOFF ADDENDUM - READ BEFORE OLDER CHECKPOINTS
+========================================================================
+
+Purpose: finish the standalone project handoff requested by George. The game
+completion backlog remains unfinished. This document is a continuation manual,
+not an assertion that all assets, missions or device reviews have passed.
+The newest addendum overrides contradictory historical status below; retain
+older failures and inventories as evidence. No new Brigitte action is released.
+
+AUTHORITY / WHAT HAS ACTUALLY SHIPPED
+Canonical checkout C:
+C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+Primary authoring checkout P:
+C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+Local evidence E: P/output/central-completion-2026-10-16
+Brigitte evidence B: E/brigitte-emphasis-source-2026-10-18
+New renderer preparation G: B/paired-gpu-trial-v1
+
+Before this documentation-only update, canonical and remote main both resolve
+to a0808336d6b6001fcb59cebad981c67aa38506e8, "fix: preserve rigid prop paths
+through painted occlusion". That completed offline authoring-tool fix and its
+synthetic regression fixtures shipped. Its Pages run39094083044 succeeded;
+root and /3d.html returned HTTP200 after deployment. These are deployment
+checks, not natural gameplay or full character-animation acceptance.
+See B/contact-release-trial-v1/TOOL-PUBLICATION.json for that receipt.
+Resolve current HEAD/main afresh: this handoff publication adds a later doc commit.
+Use git -c gc.auto=0 for every Git call; do not run gc/repack/clean/reset.
+C has unrelated RTK instructions and skill directories. P is heavily dirty and
+older. Preserve both. Stage explicit owned documentation paths only. Do not
+copy the older P builder/runtime over the newer canonical sources.
+
+USER CONSTRAINTS / PRIORITIES
+Leave Chrome processes and windows untouched. The user's answer explicitly
+preferred other work or background renderer validation. Waiting is not consent
+to close Chrome or relax the existing capture admission requirements. No
+foreground or audible testing. 3D model pose accuracy remains deferred.
+Finish one bounded batch before another character family. One integrator owns
+acceptance, commits and publication; workers have exclusive paths and no commits.
+The existing broad completion tracker remains unfinished. Finishing this TXT
+must not be recorded as finishing the whole game or its remaining validations.
+
+EXACT LATEST STOP: OFFSCREEN PAIRED RENDER PREPARATION FAILED BEFORE ANY DRAW
+G/gpu-paired-harness.py was prepared by a bounded worker; its source has NOT yet
+been fully reviewed or executed by root. Read it and GPU-NOTES.txt before use.
+It imports HiddenContext/api from B/mouth-source-v1/gpu-harness.py, uses an
+owned hidden WGL3.3 context and actual instanced vertex/fragment shaders,
+with explicit texture uploads and RGBA8 FBO readback. It never needs Chrome.
+No packages, new service or second game engine are required. It is a source
+fixture: it cannot establish full Three.js colour management, event/media
+ownership, natural gameplay, mobile/device behaviour or perceived audio.
+
+G/prepare-profiles.py completed once, writing REGISTERED-PROFILES.json and
+visual overlays. It transforms the reviewed double-support bridge profile to
+the registered512 grid, and measures an OWN early-release lip crease. That new
+early profile has NO active-mouth quality review. Do not call it approved or
+copy it to unrelated paintings. Initial planned body jobs use speaking=false.
+The late release and original held-look mouth profiles remain unfinished.
+Do not rerun this successful exclusive-output preparation merely for receipts.
+
+G/prepare-production-bundle.mjs ran once and exited1. Actual canonical
+createPaintedAnchor unconditionally loads the first anchor before returning.
+Node's fetch(file://...) is unsupported: TypeError fetch failed, cause
+"not implemented... schemeFetch". It failed in load() around canonical
+buergeramt-painted-anchor.js125 and constructor188; root script call44.
+G/production-bundle-v1 contains ONLY xy.rgba32f36864bytes, start.rgba8 and
+end.rgba8 each9216bytes. No shaders, JOBS.json or rendered frames were produced.
+Preserve this failed directory. Do not reuse/overwrite it or infer GPU failure.
+There is no owned live renderer/browser/server child from that failed attempt.
+
+BOUNDED NEXT TASK: FINISH THE EXISTING TWO-KEY SOURCE RENDER TRIAL
+1. Read root AGENTS, AGENT-START, SKILLS, LEVELS and city scoped instructions;
+   because this reuses office helpers also read the Buergeramt scoped route.
+   Use animate-2d-characters and relevant Gaussian/mouth/method references.
+   Read B/contact-release-trial-v1/HANDOFF and fixed build/comparison evidence.
+2. Read G's new harness fully. Check cleanup, texture units, orientation,
+   instancing/index bounds, blend convention and strict errors. No execution
+   was done by its author. Reuse existing hidden context; do not build another.
+3. Derive a NEW bundle preparation script/output production-bundle-v2. Fix only
+   the Node source-capture adapter needed for the real constructor. One small
+   option is a temporary file-fetch whitelist restricted to pinned actual
+   anchor WebPs, plus createImageBitmap metadata for verified decoded dimensions.
+   Actual GPU paint must still decode the real pinned PNG/WebP through Pillow.
+   Clearly label any metadata-only Node adapter; it is not browser decoding.
+   Restore temporary globals in finally; dispose owned paint/textures/context.
+   Do not alter the production interpolation to make the fixture pass.
+4. Capture the actual canonical createPaintedAnchor onBeforeCompile patches,
+   actual production patch geometry and unpackGaussianRecords output. The
+   existing script already does this except its initial file-load adapter.
+   GLSL330 keyword aliases/unit orthographic projection are declared wrappers,
+   not evidence of the complete Three.js renderer. Verify anchor and record
+   source SHA256 before any draw; preserve canonical per-pair attachment logic.
+5. Planned source jobs: two plane endpoint controls, nine paired phases
+   0,.125,.25,.375,.5,.625,.75,.875,1. These are normalized diagnostic phases,
+   NOT approved game timing. Use actual phaseMix/effect policy, speaking=false.
+   API: python G/gpu-paired-harness.py BUNDLE.json NEW-output.png
+   Impose a30second deadline per owned child. Never reset driver/hardware or
+   signal foreign processes. On error save logs and diagnose before a derivative.
+6. Review top-left RGBA and raw premultiplied sidecars; make light/dark ordered
+   composites from actual outputs. RGBA8 unpremultiplication is quantized;
+   compare endpoints to plane controls with that limitation stated. Check for
+   duplicate ruler paint, disappearance, broken hand/arm connectivity, wrong
+   support/disocclusion, foot bob, background matte/halos and unintended scale.
+7. Give the SAME pinned candidate and actual rendered evidence to independent
+   Physics and Camera/Scale reviewers. Their earlier static or matcher passes
+   do not approve this motion. Fix the first failing stage. Keep failed outputs.
+8. Only after hardest-interval approval extend early->late->emphasis and return,
+   original held entry, each painting's own mouth and same audio cue before
+   endpoint body mixing. Then pack/admit actual runtime clips/fallback, wire one
+   accepted quiz interaction and prove its media/event lifecycle on real runtime.
+   Preserve canonical128x160/pivot64,150/figure136/world1.6. Source previews with
+   pivot146 were never the shipped descriptor. No body refit/sole recenter trick.
+
+EXISTING VERIFIED SOURCES: REUSE, DO NOT REGENERATE
+B/margin-repair-v5: accepted static emphasis source and fixed grid.
+B/ruler-transfer-bridge-v1: accepted static two-support clamp bridge.
+B/early-release-source-v1: accepted qualified compact release source.
+B/action-release-source-v1: accepted late-release source, not a near release.
+B/mouth-source-v1: two reviewed fixed-source mouth profiles;20 actual GPU mouth
+samples, alpha unchanged. That fixture does not prove moving-body transport.
+B/contact-release-trial-v1/built-v2-rigid-reveal: actual two-key paired records
+built with canonical fixed helper98cb2f458ef5875668f328edf65e20b6353652798c8b8548a300548470cf027c.
+Only12 alpha-zero rigid coordinates changed; revealed ruler travel18->0;
+visible endpointXY/RGBA and encoded anchor WebPs stayed exact. Data PASS only.
+B/action-release-source-v1/EVENT-OWNER-AUDIT.md: actual owner/caller gaps. Quiz
+currently calls legacy reactions; Brigitte is standingOnly and rejects painted
+reactions. Modal waiting requeues, composed speech has projected mouth-energy
+zero on this path. Proposed once-per-accepted-quiz mediator is not implemented.
+Pause/hide/modal, cancellation/replacement, caption/missing-audio and safe
+recovery require actual implementation and lifecycle evidence.
+
+ALL OTHER REMAINING WORK / SUCCESS CRITERIA
+A. Pedestrian pilot e873d7960a4f3cc7fc0545148eaaf5e182c92ef1 in
+   P's sibling GermanySimulator-p3-reset: source/CPU repairs pass; actual P3
+   remains NOT RUN. Saved sampled capture packet expects an older canonical
+   HEAD3138fe7; derive/review fresh metadata for latest main, preserve all24
+   runtime pins, caps, silence and admission. Do not replay consumed operators.
+   Success requires actual bounded passing with original speeds/geometry,
+   same-candidate Physics/Camera reviews and all affected acceptance checks.
+B. Natural mission-v23/restart: unstarted full33-checkpoint natural chain.
+   Use saved mission-v23-run and mission-v23-tour-yield-source; original2048MiB
+   physical/12000MiB virtual floors still apply. Forced checkpoints and CPU
+   fixtures do not prove natural reachability or a real restart.
+C. Street cast:40 other eligible personalities after Irmgard; do not batch them
+   before pilot acceptance. Wagner is source-only; Dietmar retains prop holds;
+   Keller's failed source allocation is preserved. Per-family source, motion,
+   own mouths, atlas/fallback, ownership and device evidence are separate gates.
+D. Hannelore: P/output/game-completion/hannelore-city-execution-source-v2 has
+   reviewed source repair and pure PowerShell/serializer checks only. Actual
+   production/ASR/listening/runtime remain unexecuted; joined curator admission
+   is proposed, unimplemented. Parent attempt2/2 is spent. Read authority and
+   replay restrictions before any NEW generation. Preserve approved cast,
+   exact spoken/visible pairing and private target boundaries. Existing601
+   recordings do not count as new completion. Public63+9=72, private25 metadata
+   in this scope are inventories, not new accepted synthesis.
+E. Desktop/mobile combined readability/input/audio lifecycle and performance,
+   physical Android, perceptual listening and final integrated acceptance are
+   outstanding. Emulation/silent state checks cannot substitute those results.
+F. Reconcile only validated coherent candidates into latest canonical main,
+   preserve unrelated changes and one runtime/assets authority; run affected
+   checks/reviews, publish normal fast-forward main, await deployment and verify
+   root plus /3d.html. HTTP200/CI alone never proves the game fully finished.
+
+The numbered manual and appendices below contain the complete43-character
+inventory, all33 mission checkpoints, scripts/replay classes, nested skills,
+commands, dependencies, acceptance gates and historical diagnoses. Use them
+for the selected task; this addendum is the current operational starting point.
+Local ignored evidence is NOT in a fresh clone. If missing on another PC,
+report the exact missing packet and recover it from this PC before attempting
+its consumed/authority-sensitive scripts. Do not invent receipts or copy
+private source assets into a public handoff.
+
+CURRENT G SCRIPT PINS (SHA256)
+21a0f285c5d049041a88eba8cc333c1a1e9e95dc77031447430d6d84ed4ad4b0  gpu-paired-harness.py
+d88cdfaf9f5dad95ad8386d4a79395b18f5be5698cffc3a0e8fa2a67d6d5a451  GPU-NOTES.txt
+d8c6130b103cd7adf8fd413679a99e00bfef9f1a8f1a7ae82553483fd6999d21  prepare-profiles.py
+f75158a75fc244c25d3cc4ecaa97211ea64063e42680c867dd73f4f2f749084e  REGISTERED-PROFILES.json
+772baa8348a95552b684c150c7c35a59854e097f165e3ec01c8ce99acd42207a  prepare-production-bundle.mjs
+
+========================================================================
+
 18 OCTOBER 2026 ACTION-SOURCE / MATCHER UPDATE - NEWEST CHECKPOINT
 ========================================================================
 

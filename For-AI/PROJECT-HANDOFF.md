@@ -1,3 +1,18 @@
+# Final handoff checkpoint - 18 October 2026
+
+Start with [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt). Its
+newest addendum records the published rigid-prop tool fix, all remaining work,
+and the exact unexecuted background-renderer recovery task. The first paired
+bundle preparation failed on Node file-fetch before any GPU draw; preserve its
+partial output. Chrome stays untouched; 3D pose accuracy remains deferred.
+
+The TXT includes checkout authority, scripts and hashes, nested skill routes,
+all 43 street records, all 33 mission checkpoints, continuation steps and success
+criteria. Completing this handoff does not complete the broader game backlog.
+Older snapshots below are history where the newest addendum supersedes them.
+
+---
+
 # Newest action-source and matcher checkpoint - 18 October 2026
 
 The standalone [detailed handoff](./PROJECT-HANDOFF-DETAILED.txt) now starts with
