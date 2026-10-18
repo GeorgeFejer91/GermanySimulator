@@ -1,3 +1,22 @@
+# Current continuation checkpoint - 18 October 2026
+
+Read the opening checkpoint in [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt)
+first. It supersedes the historical renderer-preparation failure below.
+
+Background WGL rendering now runs without Chrome. The actual motion trials
+still fail visual quality; no new Brigitte action has shipped. The newest
+static downward key passes its scoped source reviews. A common mesh passes
+mapping checks only. Precise arm cutouts remain candidates with unresolved
+hand/ruler and thumb/jacket boundaries; no mesh bake has run.
+
+The TXT records scripts, paths, source hashes, failed trials, the next bounded
+extraction task and success criteria, plus the full mission, movement, cast,
+audio and device backlog. Local ignored evidence must be recovered separately
+on another PC. Chrome stays untouched; 3D pose accuracy remains deferred.
+Finishing this handoff does not finish the broader completion goal.
+
+---
+
 # Final handoff checkpoint - 18 October 2026
 
 Start with [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt). Its

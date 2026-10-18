@@ -1,3 +1,282 @@
+CURRENT CONTINUATION CHECKPOINT - 18 OCTOBER 2026
+========================================================================
+READ THIS CHECKPOINT FIRST. It supersedes all older execution/status notes
+below, especially the old claim that the paired renderer never ran. Historical
+failures and inventories are retained; they are not instructions to replay jobs.
+
+The standalone handoff is the deliverable being closed here. Germany Simulator
+itself remains unfinished. The broad completion goal remains active in its
+tracker; finishing documentation must not mark that whole goal complete.
+
+1. AUTHORITIES AND USER SCOPE
+------------------------------------------------------------------------
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+B = E/brigitte-emphasis-source-2026-10-18
+G = B/paired-gpu-trial-v1
+D = B/contact-downward-source-v1
+N = B/downward-release-source-v1
+K = B/contact-downward-arm-cutouts-v1
+Q = B/contact-downward-mesh-source-v1
+These aliases are explanatory file paths, not environment variables to assume.
+
+Canonical HEAD before this documentation publication:
+1963491b4313f15b92fa521d8cbdb1b7f0421d7f.
+Primary P HEAD: 415e95d9159837240c74870f3b0281be52434f68, heavily dirty.
+C branch: codex/canonical-game-entry. Resolve current main before integration.
+The last implementation shipped was a0808336d6b6001fcb59cebad981c67aa38506e8,
+the rigid-prop reveal path fix in the offline paired authoring tool. Later
+published checkpoints through 1963491 are documentation. No new Brigitte action,
+new source PNG, cutout, mesh or diagnostic renderer has shipped.
+1963491 Pages run39094944571 SUCCESS; root and /3d.html HTTP200 afterwards.
+Those checks establish deployment only. A later documentation commit will have
+its own deployment receipt; do not assume its SHA equals the pre-update SHA.
+
+User direction: centralize, finish one bounded task at a time, use clearly
+delineated workers, and leave a comprehensive standalone TXT for continuation.
+Leave the user's Chrome untouched. Do useful background work without Chrome.
+No foreground or audible tests. 3D model pose accuracy is explicitly deferred.
+Painted 2D movement quality is still relevant; static art acceptance is separate.
+
+Use git -c gc.auto=0 for EVERY Git invocation. Do not gc/repack/reset/clean.
+P has unrelated preserved changes and older helpers. C has unrelated RTK edits
+in AGENTS.md, For-AI/{README,SKILLS}.md and four level README/skill directories.
+Stage only explicit owned files. Never copy P's old builder/runtime over C.
+One integrator accepts, commits and publishes; workers do not commit or push.
+
+2. ROUTING / SKILLS / ACTUAL PRODUCT
+------------------------------------------------------------------------
+Read root AGENTS.md, For-AI/AGENT-START.md and For-AI/SKILLS.md. Route named
+areas through For-AI/LEVELS.md, then read levels/city/AGENTS.md and its For-AI
+README for this character. Reusing office paint helpers also requires the
+Buergeramt scope. Read task-relevant sections, not entire historical logs.
+For motion use .agents/skills/animate-2d-characters/SKILL.md, methods.md,
+morphing.md, paired-gaussian-actions.md and relevant mouth/narrative references.
+For world-affecting acceptance use For-AI/OBJECT-CONSISTENCY.md and independent
+Physics plus Camera/scale reviews of the SAME frozen candidate. Before coding,
+read quality-implementation; use ponytail for pipeline/infrastructure choices.
+For actual event integration use game-event-logic and its causal audit route.
+Read browser playability and asset budgets in For-AI/ASSET-POLICY.md.
+Only use imagegen if another missing real surface is demonstrated; do not
+generate variants to hide a broken mask/correspondence/shader. Use the existing
+sprite codec, registration and export guards without reducing thresholds.
+
+Preserve one standalone Grand Theft Amt root runtime and assets/ authority.
+The city consumer already supports baked atlases/clips; Brigitte currently
+standingOnly. A local mesh bake can use existing tools; a second runtime,
+renderer service, framework or package installation is not necessary.
+
+3. LATEST OBSERVED RESULTS - DO NOT CONFUSE EXECUTION WITH QUALITY
+------------------------------------------------------------------------
+A. Native hidden WGL background rendering now WORKS without Chrome. The first
+   Node file-fetch preparation failure is historical and preserved under
+   G/production-bundle-v1. Its v2 successor captured real canonical paint shader
+   patches, actual instanced geometry and actual unpacked Gaussian records.
+   Eleven actual source draws ran successfully. Both independent rendered
+   reviews rejected intermediate hand/ruler contamination and smeared cuffs.
+   See G/EXECUTED-HANDOFF.txt and PHYSICS-ACTUAL-REVIEW.md /
+   CAMERA-ACTUAL-REVIEW.md. No full Three/game/device acceptance follows.
+B. G/REPAIR-HANDOFF-2026-10-18.txt documents 31 later diagnostic draws, all
+   still quality FAIL: owner masks, mass correction, actual backing paint,
+   shared forearm/hand frames and layering did not repair the whole transition.
+   G/REPAIR-CHECKPOINT.json pins that checkpoint. Keep rejected trials intact.
+C. N is one newly approved STATIC downward release key. Native packed PNG:
+   136c9cc0fa63fa1bb12489d76bfd9fa901e995568671bf2b9035ddac9f7f05b1.
+   Registered512 PNG: 5c35631e4ebbcd9d97d02afe2c320d200f9aa67b3af3b6d63406d29e4101a6eb.
+   Both independent STATIC-role reviews PASS. ROOT-CLOSEOUT.json and
+   FINAL-PINS.json control final status. Kept original paint is byte exact;
+   one wholly zero bottom row was removed for the approved common source grid.
+   Fixed scale/origin/root are unchanged. Alpha128 bottom481 versus clamp480
+   remains a temporal planting qualification. Exact prompt coordinates, moving
+   clamp, ruler texel identity, new mouth and continuous motion are not proved.
+   Preserve older N/HANDOFF.txt as frozen history; don't edit its pinned bytes.
+D. D/spec.json annotates actual clamp -> new downward key only, stride6,
+   diagnostic normalized times0/1. SHA:
+   2741e3fa7c8ea845d445ce17816ae7486c0ed5996865839d2a163cca4614a400.
+   Clamp source is unchanged31995f12aa19e35b626ca0e6f64ec21e30bb4c2a511d7c6ddd6cc4b7c42eb376.
+   D/ANNOTATION.md lists observed hand/arm landmarks and ownership limits.
+   Sampling polygons are approximate owners, NOT accepted precision cutouts.
+E. D/built-v1 built successfully with the canonical rigid-reveal-fixed tool.
+   D/body-gpu-trial-v1/DRAW-EXECUTION.json records 11 actual EXIT0 draws:
+   two native plane controls and nine phases0,.125,.25,.375,.5,.625,.75,.875,1.
+   ROOT quality FAIL: old grip ghost appears at.125; ruler/old-hand overlap and
+   doubled cuff at.375-.625; trailing outline/hand at.75-.875. View
+   release-detail-light.png on both light/dark boards. New source alone did
+   not repair correspondence. No active mouth or gameplay timing was tested.
+F. D/weighted-layer-trial-v1/MIDPOINT-RESULT.json records 30 actual additive
+   RGBA32F draws for 15 parts at midpoint; finite fields, all draws EXIT0.
+   ROOT quality FAIL: cleaner ruler but hard edge fragments and hand smear.
+   This is a modified diagnostic weighted bake, NOT unchanged runtime output.
+   Normalizing weak tails can harden fragments; do not ship it as a solution.
+G. Q/mesh.json is a mapping proposal using the EXISTING morph_frames helper:
+   SHA300c6488760bf4aaa68e9d44c19f758d4f454bb0b95c1268065e1ed957ec8aca.
+   Sixteen points,26 common triangles, continuous determinant/no-flip PASS;
+   nine phase maps cover the canvas without overlap and are finite. Source
+   overlays and MESH-CHECKS.json record this only. No mesh morph was executed.
+   Broad anatomical-region correspondence does not certify matching skin
+   surfaces. Apply to a precise moving-arm layer only; never warp whole body.
+H. B/contact-downward-layer-assets-v1 was ROOT-rejected BEFORE baking: sampling
+   owners left stationary exterior arm-outline chips in background. Keep this
+   failed extraction. K is its bounded observed-contour cutout successor.
+   K/CUTOUTS.json reports exact retained source RGBA, complementary background,
+   exact endpoint recomposition and one connected arm component at each end.
+   Current counts4075/3781 nonzero-alpha pixels. Cutout visual acceptance is
+   still PENDING; black hand/ruler contact and thumb/jacket ownership are
+   explicitly AMBIGUOUS. Root inspected both annotated6x contours; this does
+   not waive ambiguity. No mesh bake, motion or independent cutout acceptance.
+
+4. EXACT NEXT BOUNDED TASK / STOP CONDITION
+------------------------------------------------------------------------
+Select ONE task: finish the precise clamp/downward moving-arm extraction.
+Read K's final HANDOFF/notes when present, CUTOUTS.json and prepare-cutouts.py.
+Inspect arm, complementary background and exact recomposition on light/dark
+at native size plus6x. Verify whole exterior outline stays with the moving
+arm, one attached cuff/hand, no ruler-yellow paint carried by the gripping
+hand and no body paint wrongly dragged. Resolve marked black contact ownership
+from actual paint. If ambiguous, report HOLD and obtain a compatible source
+layer; do not claim a connected mask or exact recomposition proves correctness.
+Do not rerun healthy consumed scripts just for fresh receipts.
+
+Only AFTER extraction acceptance: use the unchanged morph_frames.morph on
+the connected moving-arm RGBA with Q's common mesh. Start with one midpoint
+in a NEW derivative output folder. Keep fixed body, feet, face and ruler
+outside the warp. Assemble backing from compatible actual endpoint paint,
+with correct shoulder overlap and back-to-front ownership. Where both source
+surfaces are hidden, missing paint is a real source gap; do not fill it with
+an opaque rectangle, unrelated skin or blurred/generated interpolation.
+Check exact endpoint recomposition and behavior near endpoints; do not hide
+an instantaneous jump by special-casing endpoint frames. If midpoint fails,
+repair the first failing stage before rendering many frames or another family.
+
+Then test all affected phases and the outward/return/recovery loop, own-source
+mouth shapes, encoded native/small/mobile cells, timing and action end. Frozen
+actual output needs independent Physics and Camera reviews. Canonical city
+descriptor already uses128x160/pivot64,150; do not install the old prototype's
+pivot146 or100x160 cells. Existing fixed-source mouth PASS applies to its own
+two paintings only. New downward closed-crease observations are inert; their
+aliases differ semantically from the old narrow lip segment. No invented open
+mouth or copied generic rig is approved.
+
+5. SCRIPT CATALOG / SAFE REUSE
+------------------------------------------------------------------------
+Installed Python with Pillow/NumPy/SciPy:
+C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+Node:
+C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe
+PowerShell process-local environment before numerical imports:
+  $env:OPENBLAS_NUM_THREADS='1'
+  $env:OMP_NUM_THREADS='1'
+  $env:MKL_NUM_THREADS='1'
+For Node tests spawning Python, prepend that Scripts directory to process PATH.
+No packages/install are needed; do not change machine-wide environment.
+
+C/.agents/skills/animate-2d-characters/scripts/build_paired_gaussian.py
+  Current canonical builder, SHA98cb2f458ef5875668f328edf65e20b6353652798c8b8548a300548470cf027c.
+  Read its CLI/manifest before a NEW build; keep existing output and evidence.
+  P has an older copy. D/built-v1 is already built; no replay needed.
+P/.agents/skills/animate-2d-characters/scripts/morph_frames.py
+  Existing explicit mesh validator/linear-light premultipliedRGBA morph.
+  Current proposal-bound helper SHAc706db478d42bd228274dabe9ae4198d5d2f0fc62ed35eb5b1c30218bb82c37e.
+  CLI: python morph_frames.py MANIFEST --steps N --duration-ms MS
+       --output-dir NEW-DIRECTORY --report NEW-REPORT.json
+  Its full-character CLI must NOT be run on Q as if the whole actor may warp.
+  A bounded arm-layer adapter must retain its unchanged checks and provenance.
+Q/propose-mesh.py
+  Already successful; validates mappings and creates endpoint overlays only.
+K/prepare-cutouts.py
+  Already successful candidate extraction; source pixel preservation is not
+  visual acceptance. Preserve frozen outputs; create a derivative for repairs.
+G/capture-source-bundle-v1.mjs
+  Reusable actual canonical shader/geometry capture. Arguments:
+  node SCRIPT BUILT-MANIFEST ORIGINAL-SPEC PROFILES ANCHOR-METADATA NEW-OUTPUT
+  Node's local fetch whitelist and createImageBitmap adapter provide verified
+  decoded DIMENSIONS ONLY; GPU paint is actual Pillow-decoded PNG/WebP.
+  Temporary globals are restored; this does not claim browser bitmap decoding.
+G/gpu-paired-harness.py BUNDLE.json NEW-OUTPUT.png
+  Existing private native WGL3.3 source shader draw, reused context from
+  B/mouth-source-v1/gpu-harness.py. Texture units0..7, FBO on8, straightRGBA8
+  exports with raw premultiplied sidecars. Keep orientation/blend/error guards.
+  RawRGBA8 files need .raw suffix. Each owned child has a30second deadline.
+D/body-gpu-trial-v1/run-once.py
+  CONSUMED. Refuses replay when DRAW-EXECUTION.json exists. Do not remove it.
+G/gpu-paired-additive-v1.py + ADDITIVE-DERIVATION.json
+  Diagnostic derivative: additive ONE/ONE RGBA32F accumulation only. Original
+  context/resource lifecycle and bounds preserved. Not a production replacement.
+G/prepare-weighted-layer-v1.py and D/weighted-layer-trial-v1/render-midpoint.py
+  Already executed failed-quality experiment. Preserve float fields, layer
+  PNGs, comparisons, exact statistics and stdout/stderr; no rerun for receipts.
+
+6. GAME INTEGRATION IS STILL A SEPARATE REQUIRED TASK
+------------------------------------------------------------------------
+B/action-release-source-v1/EVENT-OWNER-AUDIT.md records actual canonical gaps.
+Brigitte standingOnly rejects painted reactions. Quiz commit currently queues
+legacy working/waiting, not the proposed action. No accepted five-beat mediator
+exists. Bind once-per-answer transaction identity, finite action end, cue/media
+generation/item identity, actual clip playhead, speech-body continuity, pause,
+HUD/modal/hide behavior, stale cancellation and recovery. recordingSequence
+currently lacks projected clip mouth energy in the audited path. New rendered
+art is insufficient without proving these actual runtime causes and guards.
+Then validate actual atlases/fallback, transfer/decoded bytes/load/cache/teardown,
+desktop Chromium, Android emulation and physical Android separately. Silent
+audio state checks do not prove listening quality. No full new action shipped.
+
+7. REMAINING CENTRALIZED BACKLOG / EFFICIENT ORDER
+------------------------------------------------------------------------
+All detailed inventories,43 street records,33 mission checkpoints, previous
+scripts and acceptance criteria remain in the manual below. Current priorities:
+- Finish ONE selected Brigitte interval as above; do not multiply families.
+- Pedestrian e873d7960a4f3cc7fc0545148eaaf5e182c92ef1 remains unpublished;
+  actual two-walker P3 passing is unproved. Preserved reset worktree is
+  P sibling GermanySimulator-p3-reset. Prepared p3-reset-sampled-2026-10-18-source
+  admission expects old3138fe7; a reviewed metadata-only derivative must bind
+  current main before future capture, retaining24runtime pins and all gates.
+  Do not close/poll Chrome or consume/replay old allocations. No grant ran.
+- Natural mission-v23 chain and33 restart checkpoints remain unstarted.
+  Forced/source scenes and HTTP200 cannot replace natural prerequisites.
+- Forty other eligible street personalities remain after the Irmgard pilot;
+  Wagner source-only, Dietmar props HOLD and Keller failed-source stay open.
+- Hannelore execution-source-v2 repair is source-tested only. Launcher
+  bee69c5b0f6629d610e89c734d3300c64d9ad084e57260e0ccd279355b6197bd.
+  P/output/game-completion/hannelore-city-execution-source-v2 has its handoff.
+  No production generation/ASR ran; parent attempt2/2 spent. Joined curator
+  admission remains proposed/unimplemented. Keep public72/private25 metadata
+  authority and13inventory; actual audio/listening/runtime acceptance open.
+- Physical Android, perceptual listening, combined runtime acceptance and
+  integration/publication of accepted coherent feature batches remain open.
+- 3D pose work stays deferred; do not silently add it to acceptance.
+
+Use one integrator and exclusive-path bounded workers. Reuse existing reviewer
+roles only when a frozen actual candidate needs them. Assign a concrete output,
+stop condition and verification scope; workers return evidence without commits.
+Do not automatically message other user chats or start another broad workstream.
+Preserve failed attempts; reuse successful preparations. Run focused checks for
+changed behavior, then applicable combined gates. Do not restart healthy suites
+solely to accumulate receipts. Publish completed validated batches per standing
+policy; never publish knowingly failed animation as completed work.
+
+8. LOCAL EVIDENCE / PORTABILITY / HANDOFF SUCCESS
+------------------------------------------------------------------------
+E and B are ignored LOCAL ONLY evidence, not part of a fresh clone. A future AI
+on this PC must verify these paths and hashes before execution. On another PC,
+recover the corresponding source/evidence tree from the user's retained copy;
+if absent, report missing inputs rather than inventing acceptance or rerunning
+private jobs. Raw source, failed outputs and current script adapters belong to
+that local tree. Git contains the standalone instructions and portable shipped
+tool regression fixtures, not all unaccepted art and large diagnostic fields.
+
+This checkpoint is complete when the standalone TXT and companion router carry
+current actual statuses, exact paths, efficient next task and verification
+limits; owned workers have stopped; documentation copies match; the owned diff
+is reviewed and committed/pushed; Pages and root/direct-entry checks are
+recorded. Broader goal stays unfinished. The local CURRENT-NEXT.md and a fresh
+HANDOFF-CONTINUATION-CLOSEOUT.json record the closing evidence without changing
+any frozen source-review packet. No Chrome or audible process is needed.
+
+END CURRENT CHECKPOINT. OLDER MANUAL FOLLOWS FOR INVENTORIES AND HISTORY.
+========================================================================
+
+
 18 OCTOBER 2026 FINAL HANDOFF ADDENDUM - READ BEFORE OLDER CHECKPOINTS
 ========================================================================
 
