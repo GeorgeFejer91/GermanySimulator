@@ -1,3 +1,217 @@
+CURRENT AUTHORITATIVE CHECKPOINT - 18 OCTOBER 2026
+======================================================================
+READ THIS FIRST. This opening replaces ALL older current/resume/next cards below.
+The retained manual is historical source recipes and inventories. In particular,
+old claims "no repair", "natural entry incomplete" and "console[]" do not describe
+the latest candidate/run. Do not treat chronological notes as concurrent truth.
+
+DELIVERABLE AND PROJECT SCOPE
+This is the standalone comprehensive TXT handoff requested by George. It retains
+the full scripts,33mission/restart inventory,43cast records, nested skills and
+asset/audio recovery procedures below. The HANDOFF is complete; the GAME is not.
+The existing broad game-completion goal remains active and must not be marked
+complete merely because this document is done. Select ONE bounded task on the
+next explicit continuation, use exclusive worker paths and one runtime integrator.
+3D model pose accuracy is deferred. Painted2D animation remains on the backlog.
+Do not start another renderer: CPU/source and private hidden WGL tooling already
+exist; reviewed hidden silent IAB can exercise the real game without Chrome.
+Chrome stays untouched: no closing, foregrounding, polling its process queue or
+bypassing existing capture constraints. No audible playback without user request.
+
+LOCATIONS / GIT / PUBLICATION
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+C is canonical runtime integration, branch codex/canonical-game-entry. P is a
+heavily dirty authoring checkout. NEVER copy its runtime over C. Mirrored handoff
+TXT/index in P are for discovery. assets/ remains the one shipped asset authority.
+Use git -c gc.auto=0; known corrupt unreferenced object: no reset/clean/gc/repack.
+Only integrator stages explicit owned paths. Preserve unrelated router/RTK/skill
+changes in AGENTS.md, For-AI/{README,SKILLS}.md, level README/skills directories.
+Published baseline before THIS docs update:
+c7622aa4c50254465a5cfd72556e54265282ca2c, Pages39113039668SUCCESS;
+root and /3d.html HTTP200; deployed game9df36180 byte-matched. Last runtime commit
+a737772e0d6614720a8ed4f5d42c8fbbbdffc23c. Resolve live refs on resume. This file
+cannot embed its own eventual commit SHA; use git log and closeout receipt.
+
+LOCAL UNPUBLISHED BUERGERAMT PAVING REPAIR
+Owned pending source: C/game.js, C/index.html and untracked
+C/tests/buergeramt-approach.test.mjs. Preserve together, not a released feature.
+game.js SHA2568931183b0e85cd3ffaf6dbd7f79f4041897c9f9ca71ce4f9624c68c4c73e0956
+test SHA25643c2561a0de4c9067e677d3071f2bda2730d43741315e39264c32ddc1ed6aa28
+index SHA25600e8827dcb352a2a86bfcf12b4af9d4035c4fe162ffbc73a5d3200d894bda6ae
+index token20261018-buergeramt-paved-approach. world3d unchanged SHA256
+9e187f541771069277ce2ef1bb224e860b9baddc207e33616d66f386eb267175.
+Exact11pins in E/buergeramt-approach-repair-v1/CANDIDATE.json.
+The12-line first-buergeramt-only generator branch creates matching visible paving
+and grass cutout. Old Spati blocks original straight path. World centerline:
+(1035,1344)->(1035,1158)->(885,1158)->(885,1060).42width permits radius16+5margin.
+Original entrance stem ends at1179; horizontal x885..1056/y1137..1179 and vertical
+x1014..1056/y1137..1344 join it. Right lawn is partitioned; left/other lawns,
+buildings, fixtures, collision, enforcement, reward/mission/audio/renderer unchanged.
+Actual return amtExitPosition stays885,1076. Do not disable grass enforcement.
+
+WHAT IS NOW VERIFIED
+Unchanged regression executed RED3PASS/1FAIL before repair, now GREEN4/4.
+Focused combined49/49PASS (FOCUSED.tap/TEST-RESULT.json). Independent Physics
+and Camera source reviews PASS limited, all11pins matching. Production static
+movement and reverse/return tested in three configurations; not dynamic crowds.
+Earlier direct diagnostic traversed corridor bothways and normal entry/return.
+LATEST E/iab-office-approach-observed-v1: actual DEFAULT index.html startup and
+NATURAL route reached the repaired corridor, real E office entry, QR sign and
+ordinary AMT VERLASSEN return885,1076. No direct/secret/satireKit flag, model/keys
+assignment, fake clock/completion or transport mock. Both signed startup forms
+used real required fields/checks/ordered stamps and enabled early submission.
+Authored fax/reprimand/welcome occurred. GAMEPLAY.md:317 says readings are NOT
+progression gates; this run did not await their full narration. Earlier packets
+separately prove full readouts. Two sausage+two green-crossing rewards:4/15,day1/3.
+Earlier route had an authored temporary offence and short curb-side road warning,
+no relocation; do not claim a fully violation-free body-paved spawn route.
+Local corridor samples wanted0/non-grass; sparse500ms observations are NOT a
+continuous full-body/crowd/performance proof.103dedup records; Physics15local
+samples give minimum sampled grass4.3047/building5.3047/prop8.6734 clearance.
+Strongest retained frames: natural-office-entry.png and natural-office-return.png,
+with matching AX; all latest local run receipts are sealed in RUN-RESULT.txt and
+ROOT-CLOSEOUT.json. Independent PHYSICS-NATURAL-REVIEW.md and
+CAMERA-NATURAL-REVIEW.md in the repair packet confirm limited natural PASS.
+
+RELEASE HOLD / NEXT BOUNDED TASK
+Do NOT publish this runtime yet. Both independent reviewers keep overall required
+acceptance HOLD. P3/P4 crowd/doorway/corner recovery, applicable delayed-frame/
+contact checks, temporal camera, matched loaded/fallback and affected portrait/
+Android/device/input/hidden-resume scope remain open. Use OBJECT-CONSISTENCY.md
+to decide exact affected cases; no waiver from unchanged NPC/renderer code.
+CONSOLE.json has SIX X4000 warnings (zero error-level entries):
+potentially uninitialized f_amtMouthPaint_float4_float4_float4_float4.
+Cause UNKNOWN, not attributed to paving or claimed a confirmed pixel defect.
+Next: select a bounded read-only shader diagnosis (threejs-debugging route), or
+one clearly scoped missing gate. Compare baseline/candidate at the same office
+view if needed. Do not add renderer edits to paving without deliberate replanning.
+Responsive/loaded-fallback diagnostics can use a fresh direct fixture and must
+be labelled diagnostic; the successful natural prefix need not be replayed for
+every unrelated view. Each actual run needs fresh reviewed scope, silence probe,
+source pins, original hard budget, saved outputs and explicit terminal cleanup.
+No required FAIL/NOT RUN becomes PASS because this handoff or CI succeeds.
+
+PRIVATE BACKGROUND TOOLING / REUSE INSTRUCTIONS
+E/approach-passive-observer-v1/{observer.js,observer.test.mjs,ROOT-TEST.tap}
+Observer SHA256abd338178f563f161f5cf22ff399a218f079191dbff3f44516e42206b834c854.
+Root NodeVM4/4PASS. Reads existing Germany3DBridge.player/HUD and nearest4
+anonymous NPC coords<=96; logs center road/crossing/public-grass rectangles via
+console.debug [approach-observer],500ms/change-only,max1800/900seconds/pagehide.
+No controller/input/model writes, new UI, phone/voice/private reads or new product
+dependency. Rectangles are NOT complete playerSurface/grass-law/fullbody logic.
+Native performance overhead was not measured. The author first wrote under
+E/iab-office-approach-v1/approach-passive-observer-v1; byte-identical corrected
+root copy and correction receipt are retained, not two different implementations.
+
+Latest server script: E/iab-office-approach-observed-v1/server.mjs; muted bootstrap
+silent-bootstrap.js executes BEFORE product code; observer.js injected afterbody.
+Server SHA256d9edc78d13c6336ff72fca81c31b35b63188ae83f675db61bdfd31ec647dd479
+mute SHA256b93a33dee2a8ceec7acc85d4d8913becdadafdee9d2d05645db4de332df96997.
+It binds an ephemeral LOOPBACK port, serves C, writes SERVER/REQUESTS JSON,
+deadline900000ms and stdin stop. It excludes remote frames/fullscreen; not full
+mission/phone transport certification. It overwrites packet outputs: DO NOT
+rerun in this sealed directory. Copy only reviewed scripts to a fresh successor,
+review changed scope/paths/injection, then launch Node script with retained stdin.
+Open exactly one visible:false IAB tab; visit /__probe and click native probe,
+require PASS before product navigation. Native media/WebAudio stay scheduled
+but muted. Speech synthesis is suppressed: silent scheduling is not listening.
+Use CUA documented APIs only, native gestures and AX/screenshots. Read observer
+through tab.dev.logs({levels:['debug'],filter:'[approach-observer]',limit:...});
+never arbitrary game-global eval or state assignment. Native m casefile pauses
+while thinking; observe fresh AX and a settled paused:true record after gestures.
+Close tab explicitly and stop server before original limit. Hidden-page timeout
+may throttle; a fallback navigation is not an independent hard resource budget.
+Do not close Chrome or weaken the saved supervisor to get this run working.
+
+Latest actual tab8 CLOSED; session91926/PID75100 stdin-stop EXIT0 at862863ms;
+known PID absent. Origin127.0.0.1:58098 is retired. All old v1/repairedv1/repairedv2
+tabs/servers are also terminal; allocations consumed. Repairedv2 exhausted its
+natural route before corridor, no acceptance. Never reset P3/mission/Hannelore caps.
+The QR decoder E/iab-office-approach-observed-v1/decode-qr.mjs is offline jsQR1.4.0
+(private folder has LICENSE/provenance), accepts rawRGBA,width,height,resultname
+and guards exact owned origin + /buergeramt-phone.html. One actual1280x720 entry
+image attempt returned decoded:false,exit1 (QR-DECODER-RESULT.json). No result
+nonce file; no phone pairing. Not proof QR is broken. For a fresh visit get a
+clearer native view, deliberately bind new origin in a reviewed successor, decode
+actual pixels only; expired invitations are never reusable. No new decoder install.
+
+COMMANDS (PowerShell; explicit canonical working directory)
+Set-Location 'C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator'
+$GameNode='C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe'
+& $GameNode --test tests/buergeramt-approach.test.mjs tests/object-physics-consistency.test.mjs tests/city-models.test.mjs tests/collision-dynamics.test.mjs tests/crossing-layout.test.mjs tests/office-level-flow.test.mjs tests/city-paperwork-causality.test.mjs tests/level-pages.test.mjs
+# Already49/49PASS; repeat only after relevant change or drift.
+& $GameNode --test 'C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator/output/central-completion-2026-10-16/approach-passive-observer-v1/observer.test.mjs'
+# Already4/4PASS; observer unit checks do not establish actual device behavior.
+# Python/Pillow: C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+# GH CLI: C:/Program Files/GitHub CLI/gh.exe
+# Do not launch sealed server/mission scripts just by copying these commands.
+
+ALL REMAINING PROJECT WORK / COMPLETION CONDITIONS
+1. Local paving: finish affected gates/warning disposition, same-candidate Physics
+   AND Camera review, complete coherent source/test/cache/docs diff; only then
+   commit/push and verify Pages/root/3d/deployedbytes. Documentation can publish
+   separately, explicitly describing unaccepted preserved local work.
+2. Natural office continuation: fresh real QR/phone pairing, ticket/interview/A38,
+   remainder of mission/JWD/real street producers, ending and all33 restart cases.
+   Office entry is now proved ONCE, not registration/fullchain. Manual section10
+   and checkpoint appendix retain full routes. Prepared mission-v23 operator/
+   validator need independently reviewed successor for current runtime, not just
+   altered expectedHEAD. Original2048MiBphysical/12000MiBvirtual floors, queue,
+   scope/deadlines remain; don't bypass Chrome gate. Other safe work is available.
+3. Street/P3 unpublished e873d7960a4f3cc7fc0545148eaaf5e182c92ef1 candidate:
+   actual goalward body-diameter passing within5seconds unproved. Preserve48cf
+   failures and24-pin packets, make reviewed successor against changed runtime.
+4. Brigitte: E/brigitte-emphasis-source-2026-10-18 and
+   E/HANDOFF-CURL-OCCLUSION-2026-10-18.txt. Source cutouts/curl56pixel partition/
+   six geometric stills limitedPASS; main-finger fringe, temporal motion/transfer/
+   recovery, own moving-pose mouth, media ownership, encoded atlas/fallback and
+   actual runtime/device acceptance HOLD. Reuse accepted paint, no blind remesh.
+5.40other eligible personalities after Irmgard;43inventory records below. Wagner
+   source-only; Dietmar props HOLD; Keller failed. Complete ONEcharacter end-to-end
+   before another. Own action/speech/source/atlas/loading/runtime evidence required,
+   no generic gesture across cast.3Dposeaccuracy stays deferred.
+6. Hannelore source cleanup repair PASS only; parent2/2budget spent. Production,
+   joined curator, ASR, listening/runtime open; fixed-voice profiles/private inputs
+   preserved. No retry budget reset or false listening claim.
+7. Integrated desktop/Android: loading, frame/memory/input, hidden/resume, actual
+   audio scheduling and perceptual listening. Label emulated portrait vs real
+   physicalAndroid; silent state checks cannot establish perceived sound quality.
+8. Reconcile preserved authoring/integration/feature checkpoints against live main
+   one batch at a time. No bulk P restore. Publish completed validated batches per
+   AGENT-START; preserve held ones with exact diffs/recovery scripts and reasons.
+
+NESTED SKILLS / OWNERS / HOW TO CONTINUE EFFICIENTLY
+Read C/AGENTS.md -> For-AI/AGENT-START.md -> PROJECT-HANDOFF.md -> matching subject
+via README/SKILLS. Named city/office task: resolve LEVELS.md and BOTH levels/city
+and levels/buergeramt AGENTS.md + For-AI/README.md before touching root modules.
+Use only relevant nested references. quality-implementation for code;
+test-engineering for tests; game-event-logic for causal chains; OBJECT-CONSISTENCY
+for frozen same-candidate independent Physics and Camera; threejs-debugging for
+shader diagnosis; animate-2d-characters + SPRITE-GENERATION-PROTOCOL for cast;
+voice protocols/VOICE-CAST and curate-voice-library --check for Hannelore.
+ponytail/YAGNI for infrastructure. No new service/engine/asset authority.
+Workers get basecommit, cwd, one goal, scope IDs/instructions, exact read/write
+paths, hashes, skills, acceptance, caps/stop rule and return evidence; never commit.
+Integrator alone writes shared runtime and accepts/publishes. Reviewers read only.
+Existing natural/static proof should be reused, not endlessly replayed. Source,
+diagnostic initial state, observed natural flow, device and listening are separate.
+
+PORTABILITY / HANDOFF VERIFICATION
+E is ignored LOCAL evidence; a git clone does NOT restore it or held candidates.
+Copy only authorized required packets to another machine, check frozen hashes,
+and preserve private voice inputs separately. If absent, report missing material;
+do not invent outputs or replay spent jobs. Canonical local pending patch and test
+are recoverable in E/buergeramt-approach-repair-v1/{OWNED-RUNTIME.patch,
+buergeramt-approach.test.mjs}; candidate/source manifest and RED/GREEN receipts
+remain beside them. This handoff does not publish those files as accepted runtime.
+Current source/runtime hashes must match before reusing results. A further source
+edit invalidates relevant11pins and requires reviewed successor. Do not change
+expected hashes merely to force acceptance. No owned test processes remain.
+END CURRENT AUTHORITATIVE CHECKPOINT. HISTORICAL MANUAL FOLLOWS.
+======================================================================
+
 CURRENT AUTHORITATIVE RESUME - PROJECT HANDOFF CLOSEOUT - 18 OCTOBER 2026
 ======================================================================
 READ THIS SECTION FIRST. Everything after END CURRENT RESUME is preserved

@@ -1,3 +1,27 @@
+# Current natural-office checkpoint and handoff — 2026-10-18
+
+Latest actual default-index natural run reached the repaired corridor, used real
+E office entry and AMT VERLASSEN return885,1076. Required fields/signatures/stamps
+and ordinary enabled early submission were real; native fax/reprimand/welcome
+occurred. Full narration was not awaited, as GAMEPLAY317 makes it nonblocking.
+No direct scene/model assignment. Earlier route had a road warning, no relocation.
+Passive500ms logs are sparse evidence, not continuous full-body proof.
+
+Candidate game8931183b/index token20261018-buergeramt-paved-approach/test43c2561a
+remain LOCAL UNPUBLISHED. Regression4/4 and focused49/49PASS; same11pin source
+reviews and supplied natural-evidence Physics/Camera reviews limitedPASS.
+Overall acceptance HOLD: remaining affected Physics/Camera/device gates and SIX
+X4000 amtMouthPaint shader warnings (zero error-level entries, cause UNKNOWN).
+Single offline QR screenshot decode failed; no phone/ticket/interview/A38 claim.
+
+Latest packet E/iab-office-approach-observed-v1 has RUN-RESULT.txt/ROOT-CLOSEOUT.json,
+actual PNGs/AX/console/observations. Tab8 closed; server91926/PID75100 stdin-stop
+EXIT0 at862863ms before900000ms deadline. Chrome/focus/useraudio untouched; no
+listening. Older run allocations retired. New observer/server recipes and exact
+continuation conditions are in the authoritative opening of PROJECT-HANDOFF-
+DETAILED.txt. Handoff complete; broad game goal unfinished. No runtime released
+by this docs-only closeout. Older entries below are historical, not current status.
+
 # Project handoff closeout — 2026-10-18
 
 Documentation-only closeout at user request. PROJECT-HANDOFF-DETAILED.txt now
