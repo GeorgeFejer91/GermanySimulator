@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-guenther-gartenzaun-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/profiles-clean-candidate.png",
+      "sha256": "77ab72b1343b74b4815143eb92d67337944a26c2a9757ceca3dec6f388dac178",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        241,
+        36,
+        1352,
+        968
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/turns-candidate.png",
+      "sha256": "eddb8443e1cddb7db4b19251ee82a95c7d28861081e18b0e254eb2b31b9acae1",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        78,
+        18,
+        2092,
+        709
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

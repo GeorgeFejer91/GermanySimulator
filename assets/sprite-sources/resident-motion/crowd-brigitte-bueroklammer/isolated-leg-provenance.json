@@ -1,0 +1,14 @@
+{
+  "status": "candidate-unapproved",
+  "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+  "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+  "route": "built-in imagegen edit",
+  "references": [
+    "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png"
+  ],
+  "promptSummary": "Four complete source-specific short charcoal brown trouser and muted plum shoe limb components, genuinely opposite facings, complete broad roots, original upper/props preserved by compositor.",
+  "size": [
+    1983,
+    793
+  ]
+}

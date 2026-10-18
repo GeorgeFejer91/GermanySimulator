@@ -1,0 +1,6523 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "cell": [
+    128,
+    160
+  ],
+  "figureHeight": 128,
+  "pivot": [
+    64,
+    148
+  ],
+  "characters": {
+    "crowd-klaus-dieter-knoedel": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-klaus-dieter-knoedel-directions-candidate.png",
+      "sourceSha256": "31a8d0c766f79916e5371eead5b60b3c8a43e353febe251c4cc5537954c0696c",
+      "scale": 0.6589785831960461,
+      "views": {
+        "down": {
+          "component_bounds": [
+            108,
+            72,
+            537,
+            673
+          ],
+          "source_pivot": [
+            314.0,
+            673
+          ],
+          "landmarks": {
+            "waist": 465.655,
+            "hip": 495.705,
+            "hem": [
+              522.75,
+              522.75
+            ],
+            "knee": [
+              561.815,
+              561.815
+            ],
+            "sock": [
+              600.885,
+              600.885
+            ],
+            "ankle": [
+              603.885,
+              603.885
+            ],
+            "mid": 314.0,
+            "centres": [
+              236.78,
+              391.22
+            ],
+            "split_path_xy": [
+              [
+                314.0,
+                495.705
+              ],
+              [
+                314.0,
+                673
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                108,
+                444
+              ],
+              [
+                186,
+                444
+              ],
+              [
+                187,
+                511
+              ],
+              [
+                144,
+                524
+              ],
+              [
+                111,
+                509
+              ]
+            ],
+            [
+              [
+                451,
+                444
+              ],
+              [
+                520,
+                443
+              ],
+              [
+                529,
+                494
+              ],
+              [
+                537,
+                580
+              ],
+              [
+                500,
+                611
+              ],
+              [
+                442,
+                582
+              ],
+              [
+                436,
+                538
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            174,
+            62,
+            682,
+            955
+          ],
+          "source_pivot": [
+            419,
+            955
+          ],
+          "landmarks": {
+            "waist": 639,
+            "hip": 660,
+            "hem": [
+              700,
+              700
+            ],
+            "knee": [
+              745,
+              745
+            ],
+            "ankle": [
+              820,
+              810
+            ],
+            "sock": [
+              816,
+              806
+            ],
+            "mid": 419,
+            "centres": [
+              320,
+              505
+            ],
+            "split_path_xy": [
+              [
+                472,
+                680
+              ],
+              [
+                472,
+                728
+              ],
+              [
+                450,
+                753
+              ],
+              [
+                424,
+                787
+              ],
+              [
+                420,
+                817
+              ],
+              [
+                430,
+                850
+              ],
+              [
+                446,
+                890
+              ],
+              [
+                446,
+                955
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-clean-candidate.png",
+          "sourceSha256": "617400c7f6687a45fdad9169a2691dfdc65f80b964437c9d75c35647b238c6b8",
+          "scale": 0.4509582863585118,
+          "originalUpper": {
+            "component_bounds": [
+              676,
+              70,
+              979,
+              676
+            ],
+            "source_pivot": [
+              836.5,
+              676
+            ],
+            "landmarks": {
+              "waist": 466.93,
+              "hip": 497.23,
+              "hem": [
+                524.5,
+                524.5
+              ],
+              "knee": [
+                563.89,
+                563.89
+              ],
+              "sock": [
+                603.31,
+                603.31
+              ],
+              "ankle": [
+                606.31,
+                606.31
+              ],
+              "mid": 836.5,
+              "centres": [
+                781.96,
+                891.04
+              ],
+              "split_path_xy": [
+                [
+                  891.13,
+                  497.23
+                ],
+                [
+                  891.13,
+                  606.31
+                ],
+                [
+                  951.73,
+                  645.6999999999999
+                ],
+                [
+                  966.88,
+                  676
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  765,
+                  441
+                ],
+                [
+                  853,
+                  444
+                ],
+                [
+                  857,
+                  504
+                ],
+                [
+                  836,
+                  513
+                ],
+                [
+                  783,
+                  504
+                ]
+              ],
+              [
+                [
+                  923,
+                  475
+                ],
+                [
+                  953,
+                  473
+                ],
+                [
+                  950,
+                  527
+                ],
+                [
+                  916,
+                  535
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 478,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              348.5,
+              352.0,
+              327.5
+            ],
+            [
+              515.0,
+              514.0,
+              502.0
+            ]
+          ],
+          "rest_separation": 30,
+          "sole_points_xy": [
+            [
+              320,
+              952
+            ],
+            [
+              535,
+              909
+            ]
+          ],
+          "shoe_length_source_px": 233.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "rest_targets_working": [
+            [
+              248.85231,
+              250.43067,
+              239.38219
+            ],
+            [
+              266.98083,
+              266.52988,
+              261.11838
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 470
+          },
+          "connected_garment_end_source": [
+            768,
+            768
+          ],
+          "rest_hip_centres": [
+            341.0,
+            531.0
+          ],
+          "rest_hip_targets_working": [
+            245.47012,
+            274.19617
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        },
+        "up": {
+          "component_bounds": [
+            1153,
+            67,
+            1565,
+            674
+          ],
+          "source_pivot": [
+            1358.0,
+            674
+          ],
+          "landmarks": {
+            "waist": 464.585,
+            "hip": 494.935,
+            "hem": [
+              522.25,
+              522.25
+            ],
+            "knee": [
+              561.7049999999999,
+              561.7049999999999
+            ],
+            "sock": [
+              601.195,
+              601.195
+            ],
+            "ankle": [
+              604.195,
+              604.195
+            ],
+            "mid": 1358.0,
+            "centres": [
+              1283.84,
+              1432.16
+            ],
+            "split_path_xy": [
+              [
+                1358.0,
+                494.935
+              ],
+              [
+                1358.0,
+                674
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1152,
+                447
+              ],
+              [
+                1222,
+                450
+              ],
+              [
+                1237,
+                497
+              ],
+              [
+                1244,
+                559
+              ],
+              [
+                1211,
+                594
+              ],
+              [
+                1150,
+                583
+              ],
+              [
+                1151,
+                524
+              ]
+            ],
+            [
+              [
+                1480,
+                445
+              ],
+              [
+                1555,
+                443
+              ],
+              [
+                1565,
+                514
+              ],
+              [
+                1532,
+                524
+              ],
+              [
+                1489,
+                510
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            875,
+            67,
+            1371,
+            954
+          ],
+          "source_pivot": [
+            1120,
+            954
+          ],
+          "landmarks": {
+            "waist": 639,
+            "hip": 660,
+            "hem": [
+              700,
+              700
+            ],
+            "knee": [
+              745,
+              745
+            ],
+            "ankle": [
+              810,
+              820
+            ],
+            "sock": [
+              806,
+              816
+            ],
+            "mid": 1120,
+            "centres": [
+              1015,
+              1236
+            ],
+            "split_path_xy": [
+              [
+                1070,
+                680
+              ],
+              [
+                1070,
+                725
+              ],
+              [
+                1105,
+                760
+              ],
+              [
+                1135,
+                790
+              ],
+              [
+                1135,
+                815
+              ],
+              [
+                1120,
+                890
+              ],
+              [
+                1120,
+                954
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-clean-candidate.png",
+          "sourceSha256": "617400c7f6687a45fdad9169a2691dfdc65f80b964437c9d75c35647b238c6b8",
+          "scale": 0.4509582863585118,
+          "originalUpper": {
+            "component_bounds": [
+              1741,
+              72,
+              2042,
+              676
+            ],
+            "source_pivot": [
+              1878.0,
+              676
+            ],
+            "landmarks": {
+              "waist": 467.62,
+              "hip": 497.82,
+              "hem": [
+                525.0,
+                525.0
+              ],
+              "knee": [
+                564.26,
+                564.26
+              ],
+              "sock": [
+                603.54,
+                603.54
+              ],
+              "ankle": [
+                606.54,
+                606.54
+              ],
+              "mid": 1878.0,
+              "centres": [
+                1823.82,
+                1932.18
+              ],
+              "split_path_xy": [
+                [
+                  1828.29,
+                  497.82
+                ],
+                [
+                  1828.29,
+                  606.54
+                ],
+                [
+                  1768.09,
+                  645.8
+                ],
+                [
+                  1753.04,
+                  676
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1878,
+                  448
+                ],
+                [
+                  1952,
+                  449
+                ],
+                [
+                  1954,
+                  475
+                ],
+                [
+                  1968,
+                  494
+                ],
+                [
+                  1983,
+                  554
+                ],
+                [
+                  1983,
+                  568
+                ],
+                [
+                  1933,
+                  590
+                ],
+                [
+                  1931,
+                  602
+                ],
+                [
+                  1890,
+                  590
+                ],
+                [
+                  1889,
+                  579
+                ],
+                [
+                  1868,
+                  572
+                ],
+                [
+                  1870,
+                  511
+                ],
+                [
+                  1877,
+                  482
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 478,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              1025.0,
+              1038.0,
+              1055.0
+            ],
+            [
+              1190.0,
+              1192.5,
+              1226.5
+            ]
+          ],
+          "rest_separation": 30,
+          "sole_points_xy": [
+            [
+              1000,
+              924
+            ],
+            [
+              1230,
+              951
+            ]
+          ],
+          "shoe_length_source_px": 224.0,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "rest_targets_working": [
+            [
+              247.27396,
+              253.13641,
+              260.80271
+            ],
+            [
+              257.96167,
+              259.08906,
+              274.42165
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 470
+          },
+          "connected_garment_end_source": [
+            768,
+            768
+          ],
+          "rest_hip_centres": [
+            1008.5,
+            1200.0
+          ],
+          "rest_hip_targets_working": [
+            239.83315,
+            262.47125
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        }
+      },
+      "sourceBrief": "Mature stout male with HUGE round jowled head, thick brown handlebar moustache, reddish cropped curls, no glasses. Compact belly with squat legs. Russet corduroy jacket over green plaid shirt, dark olive compact trousers, chunky tan hiking boots. One small folded blue towel carried anatomical LEFT hand, right empty. Indignant tight closed lips, distinct from all bald moustached men.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+          "sourceSha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156",
+          "component_bounds": [
+            1108,
+            14,
+            1440,
+            498
+          ],
+          "source_pivot": [
+            1247.0,
+            498
+          ],
+          "scale": 0.8247422680412371
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+          "sourceSha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156",
+          "component_bounds": [
+            97,
+            516,
+            387,
+            985
+          ],
+          "source_pivot": [
+            261.5,
+            985
+          ],
+          "scale": 0.8247422680412371
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+          "sourceSha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156",
+          "component_bounds": [
+            613,
+            514,
+            914,
+            987
+          ],
+          "source_pivot": [
+            755.0,
+            987
+          ],
+          "scale": 0.8247422680412371
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+          "sourceSha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156",
+          "component_bounds": [
+            1114,
+            510,
+            1439,
+            987
+          ],
+          "source_pivot": [
+            1247.0,
+            987
+          ],
+          "scale": 0.8247422680412371
+        }
+      ]
+    },
+    "crowd-hildegard-brotzeit": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-hildegard-brotzeit-directions-candidate.png",
+      "sourceSha256": "a37aa93007282be9de966ddc38e44487326278debd05eb6fa4652a7d61f8aae7",
+      "scale": 0.5722460658082976,
+      "views": {
+        "down": {
+          "component_bounds": [
+            25,
+            55,
+            491,
+            750
+          ],
+          "source_pivot": [
+            280.0,
+            750
+          ],
+          "landmarks": {
+            "waist": 534.55,
+            "hip": 565.825,
+            "hem": [
+              628,
+              628
+            ],
+            "knee": [
+              650,
+              650
+            ],
+            "sock": [
+              682,
+              682
+            ],
+            "ankle": [
+              686,
+              686
+            ],
+            "mid": 280.0,
+            "centres": [
+              196.12,
+              363.88
+            ],
+            "split_path_xy": [
+              [
+                280.0,
+                565.825
+              ],
+              [
+                280.0,
+                750
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                25,
+                474
+              ],
+              [
+                140,
+                475
+              ],
+              [
+                166,
+                545
+              ],
+              [
+                175,
+                579
+              ],
+              [
+                155,
+                649
+              ],
+              [
+                116,
+                660
+              ],
+              [
+                35,
+                650
+              ],
+              [
+                25,
+                590
+              ]
+            ],
+            [
+              [
+                422,
+                472
+              ],
+              [
+                485,
+                472
+              ],
+              [
+                491,
+                528
+              ],
+              [
+                455,
+                551
+              ],
+              [
+                420,
+                531
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.75
+        },
+        "right": {
+          "component_bounds": [
+            177,
+            28,
+            657,
+            987
+          ],
+          "source_pivot": [
+            413,
+            987
+          ],
+          "landmarks": {
+            "waist": 682,
+            "hip": 735,
+            "hem": [
+              788,
+              788
+            ],
+            "knee": [
+              836,
+              836
+            ],
+            "sock": [
+              887,
+              887
+            ],
+            "ankle": [
+              892,
+              892
+            ],
+            "mid": 413,
+            "centres": [
+              326,
+              478
+            ],
+            "split_path_xy": [
+              [
+                406,
+                735
+              ],
+              [
+                406,
+                795
+              ],
+              [
+                385,
+                828
+              ],
+              [
+                405,
+                880
+              ],
+              [
+                438,
+                940
+              ],
+              [
+                438,
+                987
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/profiles-clean-candidate.png",
+          "sourceSha256": "8c10bf6e4f744e1a835eff3ae782c0b7a704a099de7594926112f8ac1db190f5",
+          "scale": 0.4162330905306972,
+          "originalUpper": {
+            "component_bounds": [
+              598,
+              55,
+              919,
+              753
+            ],
+            "source_pivot": [
+              787.0,
+              753
+            ],
+            "landmarks": {
+              "waist": 536.62,
+              "hip": 568.03,
+              "hem": [
+                627.36,
+                627.36
+              ],
+              "knee": [
+                658.77,
+                658.77
+              ],
+              "sock": [
+                690.67,
+                690.67
+              ],
+              "ankle": [
+                693.67,
+                693.67
+              ],
+              "mid": 787.0,
+              "centres": [
+                729.22,
+                844.78
+              ],
+              "split_path_xy": [
+                [
+                  825.91,
+                  568.03
+                ],
+                [
+                  825.91,
+                  693.67
+                ],
+                [
+                  890.11,
+                  718.1
+                ],
+                [
+                  906.16,
+                  753
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  645,
+                  510
+                ],
+                [
+                  789,
+                  510
+                ],
+                [
+                  807,
+                  563
+                ],
+                [
+                  802,
+                  642
+                ],
+                [
+                  768,
+                  660
+                ],
+                [
+                  665,
+                  654
+                ],
+                [
+                  648,
+                  614
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 630
+          },
+          "rest_centres": [
+            [
+              326,
+              316,
+              316
+            ],
+            [
+              478,
+              496,
+              524
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 350,
+            "waistSourceY": 535
+          },
+          "sole_points_xy": [
+            [
+              316,
+              973
+            ],
+            [
+              524,
+              954
+            ]
+          ],
+          "shoe_length_source_px": 209.0,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        },
+        "up": {
+          "component_bounds": [
+            1052,
+            55,
+            1503,
+            752
+          ],
+          "source_pivot": [
+            1262.0,
+            752
+          ],
+          "landmarks": {
+            "waist": 535.9300000000001,
+            "hip": 567.295,
+            "hem": [
+              628,
+              628
+            ],
+            "knee": [
+              650,
+              650
+            ],
+            "sock": [
+              682,
+              682
+            ],
+            "ankle": [
+              686,
+              686
+            ],
+            "mid": 1262.0,
+            "centres": [
+              1180.82,
+              1343.18
+            ],
+            "split_path_xy": [
+              [
+                1262.0,
+                567.295
+              ],
+              [
+                1262.0,
+                752
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1405,
+                477
+              ],
+              [
+                1465,
+                474
+              ],
+              [
+                1469,
+                517
+              ],
+              [
+                1503,
+                553
+              ],
+              [
+                1495,
+                640
+              ],
+              [
+                1475,
+                652
+              ],
+              [
+                1406,
+                651
+              ],
+              [
+                1394,
+                600
+              ]
+            ],
+            [
+              [
+                1052,
+                480
+              ],
+              [
+                1120,
+                480
+              ],
+              [
+                1128,
+                528
+              ],
+              [
+                1093,
+                552
+              ],
+              [
+                1054,
+                534
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.75
+        },
+        "left": {
+          "component_bounds": [
+            879,
+            26,
+            1360,
+            987
+          ],
+          "source_pivot": [
+            1118,
+            987
+          ],
+          "landmarks": {
+            "waist": 682,
+            "hip": 735,
+            "hem": [
+              788,
+              788
+            ],
+            "knee": [
+              836,
+              836
+            ],
+            "sock": [
+              887,
+              887
+            ],
+            "ankle": [
+              892,
+              892
+            ],
+            "mid": 1118,
+            "centres": [
+              1050,
+              1190
+            ],
+            "split_path_xy": [
+              [
+                1122,
+                735
+              ],
+              [
+                1122,
+                795
+              ],
+              [
+                1145,
+                828
+              ],
+              [
+                1120,
+                880
+              ],
+              [
+                1100,
+                940
+              ],
+              [
+                1100,
+                987
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/profiles-clean-candidate.png",
+          "sourceSha256": "8c10bf6e4f744e1a835eff3ae782c0b7a704a099de7594926112f8ac1db190f5",
+          "scale": 0.4162330905306972,
+          "originalUpper": {
+            "component_bounds": [
+              1599,
+              55,
+              1917,
+              754
+            ],
+            "source_pivot": [
+              1728.0,
+              754
+            ],
+            "landmarks": {
+              "waist": 537.31,
+              "hip": 568.765,
+              "hem": [
+                628.18,
+                628.18
+              ],
+              "knee": [
+                659.635,
+                659.635
+              ],
+              "sock": [
+                691.585,
+                691.585
+              ],
+              "ankle": [
+                694.585,
+                694.585
+              ],
+              "mid": 1728.0,
+              "centres": [
+                1670.76,
+                1785.24
+              ],
+              "split_path_xy": [
+                [
+                  1691.22,
+                  568.765
+                ],
+                [
+                  1691.22,
+                  694.585
+                ],
+                [
+                  1627.62,
+                  719.05
+                ],
+                [
+                  1611.72,
+                  754
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 630
+          },
+          "rest_centres": [
+            [
+              1050,
+              1040,
+              1000
+            ],
+            [
+              1190,
+              1220,
+              1230
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 350,
+            "waistSourceY": 535
+          },
+          "sole_points_xy": [
+            [
+              1000,
+              958
+            ],
+            [
+              1230,
+              972
+            ]
+          ],
+          "shoe_length_source_px": 206.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        }
+      },
+      "sourceBrief": "Older female with HUGE broad freckled face, sandy-blonde hair in a single loose low braid, thick round turquoise glasses, wide straight nose. Short very stocky build. Cream wool cardigan over brick-red checked blouse, charcoal knee skirt and taupe stockings, broad black strapped shoes. One small wicker basket carried anatomical RIGHT hand, empty left. Neutral confident closed lips. No food in mouth.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/turns-candidate.png",
+          "sourceSha256": "13276ffba099b3fcafbe75575a634f1f6c75e7983733cbd1e7aacdd25f0480ee",
+          "component_bounds": [
+            43,
+            57,
+            469,
+            744
+          ],
+          "source_pivot": [
+            289.5,
+            744
+          ],
+          "scale": 0.5813953488372093
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/turns-candidate.png",
+          "sourceSha256": "13276ffba099b3fcafbe75575a634f1f6c75e7983733cbd1e7aacdd25f0480ee",
+          "component_bounds": [
+            577,
+            56,
+            955,
+            744
+          ],
+          "source_pivot": [
+            759.0,
+            744
+          ],
+          "scale": 0.5813953488372093
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/turns-candidate.png",
+          "sourceSha256": "13276ffba099b3fcafbe75575a634f1f6c75e7983733cbd1e7aacdd25f0480ee",
+          "component_bounds": [
+            1063,
+            56,
+            1449,
+            744
+          ],
+          "source_pivot": [
+            1232.0,
+            744
+          ],
+          "scale": 0.5813953488372093
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/turns-candidate.png",
+          "sourceSha256": "13276ffba099b3fcafbe75575a634f1f6c75e7983733cbd1e7aacdd25f0480ee",
+          "component_bounds": [
+            1528,
+            57,
+            1919,
+            744
+          ],
+          "source_pivot": [
+            1715.5,
+            744
+          ],
+          "scale": 0.5813953488372093
+        }
+      ]
+    },
+    "crowd-guenther-gartenzaun": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-guenther-gartenzaun-directions-candidate.png",
+      "sourceSha256": "c2bddcb0c0a5ac7001253724f2aedcde99b6c2ca7e8b888e5a2be62ccb39c9de",
+      "scale": 0.5805515239477503,
+      "views": {
+        "down": {
+          "component_bounds": [
+            115,
+            23,
+            566,
+            704
+          ],
+          "source_pivot": [
+            343.5,
+            704
+          ],
+          "landmarks": {
+            "waist": 465.65,
+            "hip": 499.7,
+            "hem": [
+              535,
+              535
+            ],
+            "knee": [
+              582,
+              582
+            ],
+            "sock": [
+              637,
+              637
+            ],
+            "ankle": [
+              641,
+              641
+            ],
+            "mid": 343.5,
+            "centres": [
+              262.32,
+              424.68
+            ],
+            "split_path_xy": [
+              [
+                343.5,
+                499.7
+              ],
+              [
+                343.5,
+                704
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                115,
+                399
+              ],
+              [
+                193,
+                398
+              ],
+              [
+                217,
+                470
+              ],
+              [
+                226,
+                556
+              ],
+              [
+                195,
+                578
+              ],
+              [
+                125,
+                576
+              ],
+              [
+                123,
+                500
+              ]
+            ],
+            [
+              [
+                480,
+                399
+              ],
+              [
+                558,
+                399
+              ],
+              [
+                566,
+                481
+              ],
+              [
+                533,
+                506
+              ],
+              [
+                482,
+                497
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            241,
+            36,
+            711,
+            968
+          ],
+          "source_pivot": [
+            468,
+            968
+          ],
+          "landmarks": {
+            "waist": 675,
+            "hip": 690,
+            "hem": [
+              710,
+              710
+            ],
+            "knee": [
+              735,
+              735
+            ],
+            "sock": [
+              766,
+              766
+            ],
+            "ankle": [
+              770,
+              770
+            ],
+            "mid": 468,
+            "centres": [
+              350,
+              550
+            ],
+            "split_path_xy": [
+              [
+                461,
+                700
+              ],
+              [
+                461,
+                751
+              ],
+              [
+                454,
+                787
+              ],
+              [
+                453,
+                831
+              ],
+              [
+                475,
+                885
+              ],
+              [
+                479,
+                968
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/profiles-clean-candidate.png",
+          "sourceSha256": "77ab72b1343b74b4815143eb92d67337944a26c2a9757ceca3dec6f388dac178",
+          "scale": 0.4291845493562232,
+          "originalUpper": {
+            "component_bounds": [
+              706,
+              20,
+              1011,
+              707
+            ],
+            "source_pivot": [
+              864.5,
+              707
+            ],
+            "landmarks": {
+              "waist": 466.55,
+              "hip": 500.9,
+              "hem": [
+                545.555,
+                545.555
+              ],
+              "knee": [
+                576.47,
+                576.47
+              ],
+              "sock": [
+                600.95,
+                600.95
+              ],
+              "ankle": [
+                603.95,
+                603.95
+              ],
+              "mid": 864.5,
+              "centres": [
+                809.6,
+                919.4
+              ],
+              "split_path_xy": [
+                [
+                  922.55,
+                  500.9
+                ],
+                [
+                  922.55,
+                  603.95
+                ],
+                [
+                  983.55,
+                  672.65
+                ],
+                [
+                  998.8,
+                  707
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  747,
+                  394
+                ],
+                [
+                  827,
+                  393
+                ],
+                [
+                  856,
+                  466
+                ],
+                [
+                  891,
+                  568
+                ],
+                [
+                  855,
+                  580
+                ],
+                [
+                  768,
+                  574
+                ],
+                [
+                  759,
+                  500
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 555
+          },
+          "rest_centres": [
+            [
+              366.5,
+              353.5,
+              341.0
+            ],
+            [
+              537.5,
+              543.5,
+              546.5
+            ]
+          ],
+          "rest_separation": 28,
+          "sole_points_xy": [
+            [
+              350,
+              964
+            ],
+            [
+              580,
+              931
+            ]
+          ],
+          "shoe_length_source_px": 231.0,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 260,
+            "waistSourceY": 510
+          },
+          "rest_targets_working": [
+            [
+              245.08155,
+              239.50215,
+              234.13734
+            ],
+            [
+              255.75966,
+              258.33476,
+              259.62232
+            ]
+          ],
+          "rest_hip_centres": [
+            375.5,
+            547.5
+          ],
+          "rest_hip_targets_working": [
+            248.94421,
+            260.0515
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb.",
+          "connected_garment_end_source": [
+            780,
+            780
+          ]
+        },
+        "up": {
+          "component_bounds": [
+            1194,
+            23,
+            1640,
+            704
+          ],
+          "source_pivot": [
+            1415.0,
+            704
+          ],
+          "landmarks": {
+            "waist": 465.65,
+            "hip": 499.7,
+            "hem": [
+              535,
+              535
+            ],
+            "knee": [
+              582,
+              582
+            ],
+            "sock": [
+              637,
+              637
+            ],
+            "ankle": [
+              641,
+              641
+            ],
+            "mid": 1415.0,
+            "centres": [
+              1334.72,
+              1495.28
+            ],
+            "split_path_xy": [
+              [
+                1415.0,
+                499.7
+              ],
+              [
+                1415.0,
+                704
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1552,
+                395
+              ],
+              [
+                1618,
+                395
+              ],
+              [
+                1640,
+                478
+              ],
+              [
+                1627,
+                515
+              ],
+              [
+                1630,
+                570
+              ],
+              [
+                1551,
+                581
+              ],
+              [
+                1552,
+                529
+              ],
+              [
+                1561,
+                477
+              ],
+              [
+                1548,
+                457
+              ]
+            ],
+            [
+              [
+                1194,
+                397
+              ],
+              [
+                1281,
+                398
+              ],
+              [
+                1280,
+                480
+              ],
+              [
+                1230,
+                504
+              ],
+              [
+                1200,
+                480
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            881,
+            39,
+            1352,
+            968
+          ],
+          "source_pivot": [
+            1115,
+            968
+          ],
+          "landmarks": {
+            "waist": 675,
+            "hip": 690,
+            "hem": [
+              710,
+              710
+            ],
+            "knee": [
+              735,
+              735
+            ],
+            "sock": [
+              766,
+              766
+            ],
+            "ankle": [
+              770,
+              770
+            ],
+            "mid": 1115,
+            "centres": [
+              1040,
+              1230
+            ],
+            "split_path_xy": [
+              [
+                1130,
+                700
+              ],
+              [
+                1130,
+                751
+              ],
+              [
+                1130,
+                787
+              ],
+              [
+                1145,
+                831
+              ],
+              [
+                1114,
+                885
+              ],
+              [
+                1118,
+                968
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/profiles-clean-candidate.png",
+          "sourceSha256": "77ab72b1343b74b4815143eb92d67337944a26c2a9757ceca3dec6f388dac178",
+          "scale": 0.4291845493562232,
+          "originalUpper": {
+            "component_bounds": [
+              1799,
+              18,
+              2109,
+              707
+            ],
+            "source_pivot": [
+              1946.5,
+              707
+            ],
+            "landmarks": {
+              "waist": 465.85,
+              "hip": 500.3,
+              "hem": [
+                545.085,
+                545.085
+              ],
+              "knee": [
+                576.09,
+                576.09
+              ],
+              "sock": [
+                600.65,
+                600.65
+              ],
+              "ankle": [
+                603.65,
+                603.65
+              ],
+              "mid": 1946.5,
+              "centres": [
+                1890.7,
+                2002.3
+              ],
+              "split_path_xy": [
+                [
+                  1888.9,
+                  500.3
+                ],
+                [
+                  1888.9,
+                  603.65
+                ],
+                [
+                  1826.9,
+                  672.55
+                ],
+                [
+                  1811.4,
+                  707
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 555
+          },
+          "rest_centres": [
+            [
+              1053.0,
+              1048.0,
+              1044.5
+            ],
+            [
+              1223.0,
+              1237.0,
+              1254.0
+            ]
+          ],
+          "rest_separation": 28,
+          "sole_points_xy": [
+            [
+              1000,
+              940
+            ],
+            [
+              1240,
+              965
+            ]
+          ],
+          "shoe_length_source_px": 226.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 260,
+            "waistSourceY": 510
+          },
+          "rest_targets_working": [
+            [
+              260.74678,
+              258.60086,
+              257.09871
+            ],
+            [
+              266.70386,
+              272.71245,
+              280.00858
+            ]
+          ],
+          "rest_hip_centres": [
+            1044.0,
+            1215.0
+          ],
+          "rest_hip_targets_working": [
+            256.88412,
+            263.27039
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb.",
+          "connected_garment_end_source": [
+            780,
+            780
+          ]
+        }
+      },
+      "sourceBrief": "Older male with enormous craggy rectangular head, stiff cropped white brush-cut, thick black eyebrows, clean-shaven strong jaw, no glasses. Short broad powerful torso. Sage-green apron over mustard checked short-sleeve shirt, dark blue compact trousers, wide green rubber boots. One short rolled pale canvas towel carried anatomical RIGHT hand, left empty. Angry controlled closed mouth. No long rake or extra tool.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/turns-candidate.png",
+          "sourceSha256": "eddb8443e1cddb7db4b19251ee82a95c7d28861081e18b0e254eb2b31b9acae1",
+          "component_bounds": [
+            78,
+            19,
+            485,
+            708
+          ],
+          "source_pivot": [
+            299.0,
+            708
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/turns-candidate.png",
+          "sourceSha256": "eddb8443e1cddb7db4b19251ee82a95c7d28861081e18b0e254eb2b31b9acae1",
+          "component_bounds": [
+            625,
+            18,
+            1022,
+            703
+          ],
+          "source_pivot": [
+            812.0,
+            703
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/turns-candidate.png",
+          "sourceSha256": "eddb8443e1cddb7db4b19251ee82a95c7d28861081e18b0e254eb2b31b9acae1",
+          "component_bounds": [
+            1190,
+            19,
+            1578,
+            701
+          ],
+          "source_pivot": [
+            1365.5,
+            701
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/turns-candidate.png",
+          "sourceSha256": "eddb8443e1cddb7db4b19251ee82a95c7d28861081e18b0e254eb2b31b9acae1",
+          "component_bounds": [
+            1691,
+            18,
+            2092,
+            709
+          ],
+          "source_pivot": [
+            1878.0,
+            709
+          ],
+          "scale": 0.5788712011577424
+        }
+      ]
+    },
+    "crowd-brigitte-bueroklammer": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+      "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+      "scale": 0.5780346820809249,
+      "views": {
+        "down": {
+          "component_bounds": [
+            34,
+            57,
+            471,
+            748
+          ],
+          "source_pivot": [
+            254.0,
+            748
+          ],
+          "landmarks": {
+            "waist": 509.605,
+            "hip": 544.155,
+            "hem": [
+              578.705,
+              578.705
+            ],
+            "knee": [
+              630.53,
+              630.53
+            ],
+            "sock": [
+              679.355,
+              679.355
+            ],
+            "ankle": [
+              682.355,
+              682.355
+            ],
+            "mid": 254.0,
+            "centres": [
+              175.34,
+              332.65999999999997
+            ],
+            "split_path_xy": [
+              [
+                254.0,
+                544.155
+              ],
+              [
+                254.0,
+                748
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                34,
+                500
+              ],
+              [
+                115,
+                500
+              ],
+              [
+                120,
+                564
+              ],
+              [
+                72,
+                590
+              ],
+              [
+                34,
+                571
+              ]
+            ],
+            [
+              [
+                343,
+                489
+              ],
+              [
+                400,
+                480
+              ],
+              [
+                437,
+                517
+              ],
+              [
+                469,
+                516
+              ],
+              [
+                471,
+                565
+              ],
+              [
+                438,
+                606
+              ],
+              [
+                368,
+                623
+              ],
+              [
+                347,
+                544
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            547,
+            60,
+            911,
+            750
+          ],
+          "source_pivot": [
+            755.5,
+            750
+          ],
+          "landmarks": {
+            "waist": 511.95,
+            "hip": 546.45,
+            "hem": [
+              580.95,
+              580.95
+            ],
+            "knee": [
+              632.7,
+              632.7
+            ],
+            "sock": [
+              681.45,
+              681.45
+            ],
+            "ankle": [
+              684.45,
+              684.45
+            ],
+            "mid": 755.5,
+            "centres": [
+              689.98,
+              821.02
+            ],
+            "split_path_xy": [
+              [
+                805.44,
+                546.45
+              ],
+              [
+                805.44,
+                684.45
+              ],
+              [
+                878.24,
+                715.5
+              ],
+              [
+                896.44,
+                750
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [
+            [
+              [
+                642,
+                515
+              ],
+              [
+                729,
+                514
+              ],
+              [
+                740,
+                553
+              ],
+              [
+                721,
+                583
+              ],
+              [
+                667,
+                589
+              ],
+              [
+                642,
+                560
+              ]
+            ]
+          ],
+          "fitStatus": "complete-source-limbs-native-probe-pending",
+          "cutSourceY": 552,
+          "featherWorkingPixels": 2,
+          "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+          "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+          "scale": 0.5780346820809249,
+          "originalUpper": {
+            "component_bounds": [
+              547,
+              60,
+              911,
+              750
+            ],
+            "source_pivot": [
+              755.5,
+              750
+            ],
+            "landmarks": {
+              "waist": 511.95,
+              "hip": 546.45,
+              "hem": [
+                580.95,
+                580.95
+              ],
+              "knee": [
+                632.7,
+                632.7
+              ],
+              "sock": [
+                681.45,
+                681.45
+              ],
+              "ankle": [
+                684.45,
+                684.45
+              ],
+              "mid": 755.5,
+              "centres": [
+                689.98,
+                821.02
+              ],
+              "split_path_xy": [
+                [
+                  805.44,
+                  546.45
+                ],
+                [
+                  805.44,
+                  684.45
+                ],
+                [
+                  878.24,
+                  715.5
+                ],
+                [
+                  896.44,
+                  750
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  642,
+                  515
+                ],
+                [
+                  729,
+                  514
+                ],
+                [
+                  740,
+                  553
+                ],
+                [
+                  721,
+                  583
+                ],
+                [
+                  667,
+                  589
+                ],
+                [
+                  642,
+                  560
+                ]
+              ],
+              [
+                [
+                  601,
+                  508
+                ],
+                [
+                  869,
+                  508
+                ],
+                [
+                  868,
+                  552
+                ],
+                [
+                  737,
+                  550
+                ],
+                [
+                  666,
+                  537
+                ],
+                [
+                  601,
+                  523
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 520,
+            "featherWorkingPixels": 0
+          },
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 370,
+            "waistSourceY": 540
+          },
+          "knee_follow": 0.65,
+          "hem_follow": 0.55,
+          "connected_garment": false,
+          "connected_garment_owns_upper_legs": false,
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+              "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+              "component_bounds": [
+                59,
+                158,
+                451,
+                691
+              ],
+              "source_pivot": [
+                215,
+                691
+              ],
+              "scale": 0.23,
+              "offset_x": -12,
+              "sole_point_xy": [
+                284,
+                686
+              ],
+              "shoe_length_source_px": 392
+            },
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+              "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+              "component_bounds": [
+                561,
+                153,
+                951,
+                695
+              ],
+              "source_pivot": [
+                710,
+                695
+              ],
+              "scale": 0.23,
+              "offset_x": 12,
+              "sole_point_xy": [
+                779,
+                690
+              ],
+              "shoe_length_source_px": 390
+            }
+          ]
+        },
+        "up": {
+          "component_bounds": [
+            1028,
+            58,
+            1460,
+            750
+          ],
+          "source_pivot": [
+            1243.0,
+            750
+          ],
+          "landmarks": {
+            "waist": 511.26,
+            "hip": 545.86,
+            "hem": [
+              580.46,
+              580.46
+            ],
+            "knee": [
+              632.36,
+              632.36
+            ],
+            "sock": [
+              681.26,
+              681.26
+            ],
+            "ankle": [
+              684.26,
+              684.26
+            ],
+            "mid": 1243.0,
+            "centres": [
+              1165.24,
+              1320.76
+            ],
+            "split_path_xy": [
+              [
+                1243.0,
+                545.86
+              ],
+              [
+                1243.0,
+                750
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1028,
+                498
+              ],
+              [
+                1108,
+                499
+              ],
+              [
+                1110,
+                622
+              ],
+              [
+                1067,
+                633
+              ],
+              [
+                1060,
+                577
+              ],
+              [
+                1031,
+                561
+              ]
+            ],
+            [
+              [
+                1385,
+                499
+              ],
+              [
+                1454,
+                499
+              ],
+              [
+                1460,
+                568
+              ],
+              [
+                1423,
+                590
+              ],
+              [
+                1387,
+                570
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            1571,
+            61,
+            1934,
+            750
+          ],
+          "source_pivot": [
+            1723.5,
+            750
+          ],
+          "landmarks": {
+            "waist": 512.2950000000001,
+            "hip": 546.745,
+            "hem": [
+              581.195,
+              581.195
+            ],
+            "knee": [
+              632.87,
+              632.87
+            ],
+            "sock": [
+              681.545,
+              681.545
+            ],
+            "ankle": [
+              684.545,
+              684.545
+            ],
+            "mid": 1723.5,
+            "centres": [
+              1658.16,
+              1788.84
+            ],
+            "split_path_xy": [
+              [
+                1676.27,
+                546.745
+              ],
+              [
+                1676.27,
+                684.545
+              ],
+              [
+                1603.67,
+                715.55
+              ],
+              [
+                1585.52,
+                750
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1708,
+                522
+              ],
+              [
+                1872,
+                522
+              ],
+              [
+                1885,
+                616
+              ],
+              [
+                1840,
+                640
+              ],
+              [
+                1720,
+                636
+              ]
+            ]
+          ],
+          "fitStatus": "complete-source-limbs-native-probe-pending",
+          "cutSourceY": 552,
+          "featherWorkingPixels": 2,
+          "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+          "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+          "scale": 0.5780346820809249,
+          "originalUpper": {
+            "component_bounds": [
+              1571,
+              61,
+              1934,
+              750
+            ],
+            "source_pivot": [
+              1723.5,
+              750
+            ],
+            "landmarks": {
+              "waist": 512.2950000000001,
+              "hip": 546.745,
+              "hem": [
+                581.195,
+                581.195
+              ],
+              "knee": [
+                632.87,
+                632.87
+              ],
+              "sock": [
+                681.545,
+                681.545
+              ],
+              "ankle": [
+                684.545,
+                684.545
+              ],
+              "mid": 1723.5,
+              "centres": [
+                1658.16,
+                1788.84
+              ],
+              "split_path_xy": [
+                [
+                  1676.27,
+                  546.745
+                ],
+                [
+                  1676.27,
+                  684.545
+                ],
+                [
+                  1603.67,
+                  715.55
+                ],
+                [
+                  1585.52,
+                  750
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1707,
+                  523
+                ],
+                [
+                  1868,
+                  522
+                ],
+                [
+                  1876,
+                  598
+                ],
+                [
+                  1840,
+                  620
+                ],
+                [
+                  1723,
+                  633
+                ],
+                [
+                  1708,
+                  597
+                ]
+              ],
+              [
+                [
+                  1614,
+                  508
+                ],
+                [
+                  1886,
+                  508
+                ],
+                [
+                  1879,
+                  525
+                ],
+                [
+                  1791,
+                  550
+                ],
+                [
+                  1617,
+                  552
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 520,
+            "featherWorkingPixels": 0
+          },
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 370,
+            "waistSourceY": 540
+          },
+          "knee_follow": 0.65,
+          "hem_follow": 0.55,
+          "connected_garment": false,
+          "connected_garment_owns_upper_legs": false,
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+              "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+              "component_bounds": [
+                1532,
+                154,
+                1927,
+                693
+              ],
+              "source_pivot": [
+                1780,
+                693
+              ],
+              "scale": 0.23,
+              "offset_x": -12,
+              "sole_point_xy": [
+                1694,
+                688
+              ],
+              "shoe_length_source_px": 395
+            },
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+              "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+              "component_bounds": [
+                1045,
+                152,
+                1437,
+                694
+              ],
+              "source_pivot": [
+                1290,
+                694
+              ],
+              "scale": 0.23,
+              "offset_x": 12,
+              "sole_point_xy": [
+                1206,
+                689
+              ],
+              "shoe_length_source_px": 392
+            }
+          ]
+        }
+      },
+      "sourceBrief": "Middle-aged female with enormous narrow angular head, smooth black chin bob with one silver streak, small rectangular burgundy glasses, sharp nose. Short squat adult. Dusty rose knitted waistcoat over grey blouse, deep brown compact trousers, broad plum shoes. One little flat green document pouch held anatomical LEFT hand, right empty. Bored heavy eyelids and closed straight mouth.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+          "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+          "component_bounds": [
+            57,
+            55,
+            486,
+            749
+          ],
+          "source_pivot": [
+            283.0,
+            749
+          ],
+          "scale": 0.5747126436781609
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+          "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+          "component_bounds": [
+            547,
+            57,
+            946,
+            750
+          ],
+          "source_pivot": [
+            770.5,
+            750
+          ],
+          "scale": 0.5747126436781609
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+          "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+          "component_bounds": [
+            1033,
+            58,
+            1433,
+            751
+          ],
+          "source_pivot": [
+            1216.5,
+            751
+          ],
+          "scale": 0.5747126436781609
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+          "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+          "component_bounds": [
+            1515,
+            56,
+            1931,
+            750
+          ],
+          "source_pivot": [
+            1701.0,
+            750
+          ],
+          "scale": 0.5747126436781609
+        }
+      ]
+    },
+    "crowd-irmgard-aktenordner": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-irmgard-aktenordner-directions-candidate.png",
+      "sourceSha256": "f0f077dec8f524ddf1ef03855fe2a6319962361c8fbb3e1f75be2d2ef5f4314c",
+      "scale": 0.5943536404160475,
+      "views": {
+        "down": {
+          "component_bounds": [
+            64,
+            18,
+            521,
+            691
+          ],
+          "source_pivot": [
+            294.5,
+            691
+          ],
+          "landmarks": {
+            "waist": 455.45,
+            "hip": 485.735,
+            "hem": [
+              516.02,
+              516.02
+            ],
+            "knee": [
+              569.86,
+              569.86
+            ],
+            "sock": [
+              617.335,
+              617.335
+            ],
+            "ankle": [
+              620.335,
+              620.335
+            ],
+            "mid": 294.5,
+            "centres": [
+              212.24,
+              376.76
+            ],
+            "split_path_xy": [
+              [
+                294.5,
+                485.735
+              ],
+              [
+                294.5,
+                691
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                64,
+                419
+              ],
+              [
+                151,
+                420
+              ],
+              [
+                157,
+                490
+              ],
+              [
+                114,
+                508
+              ],
+              [
+                75,
+                490
+              ]
+            ],
+            [
+              [
+                443,
+                449
+              ],
+              [
+                514,
+                449
+              ],
+              [
+                521,
+                508
+              ],
+              [
+                478,
+                533
+              ],
+              [
+                442,
+                515
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            100,
+            30,
+            707,
+            999
+          ],
+          "source_pivot": [
+            433,
+            999
+          ],
+          "landmarks": {
+            "waist": 700,
+            "hip": 725,
+            "hem": [
+              750,
+              750
+            ],
+            "knee": [
+              800,
+              800
+            ],
+            "sock": [
+              875,
+              875
+            ],
+            "ankle": [
+              880,
+              880
+            ],
+            "mid": 433,
+            "centres": [
+              335,
+              530
+            ],
+            "split_path_xy": [
+              [
+                490,
+                749
+              ],
+              [
+                465,
+                790
+              ],
+              [
+                435,
+                825
+              ],
+              [
+                425,
+                866
+              ],
+              [
+                456,
+                940
+              ],
+              [
+                460,
+                999
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/profiles-clean-candidate.png",
+          "sourceSha256": "a3022447007e58fe756048ff034eda649fb7a6f179247f4f8858abd60e9718ad",
+          "scale": 0.41279669762641896,
+          "originalUpper": {
+            "component_bounds": [
+              667,
+              27,
+              997,
+              692
+            ],
+            "source_pivot": [
+              856.5,
+              692
+            ],
+            "landmarks": {
+              "waist": 459.25,
+              "hip": 489.175,
+              "hem": [
+                519.1,
+                519.1
+              ],
+              "knee": [
+                572.3,
+                572.3
+              ],
+              "sock": [
+                619.175,
+                619.175
+              ],
+              "ankle": [
+                622.175,
+                622.175
+              ],
+              "mid": 856.5,
+              "centres": [
+                797.1,
+                915.9
+              ],
+              "split_path_xy": [
+                [
+                  901.3,
+                  489.175
+                ],
+                [
+                  901.3,
+                  622.175
+                ],
+                [
+                  967.3,
+                  658.75
+                ],
+                [
+                  983.8,
+                  692
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 518,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              373.5,
+              354.0,
+              321.0
+            ],
+            [
+              530.5,
+              516.5,
+              530.5
+            ]
+          ],
+          "rest_separation": 28,
+          "rest_targets_working": [
+            [
+              252.02064,
+              243.9711,
+              230.34881
+            ],
+            [
+              259.56656,
+              253.78741,
+              259.56656
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 310,
+            "waistSourceY": 490
+          },
+          "sole_points_xy": [
+            [
+              325,
+              993
+            ],
+            [
+              580,
+              979
+            ]
+          ],
+          "shoe_length_source_px": 244.0,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "connected_garment_end_source": [
+            825,
+            825
+          ],
+          "rest_hip_centres": [
+            365.5,
+            543.5
+          ],
+          "rest_hip_targets_working": [
+            248.71827,
+            264.93292
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        },
+        "up": {
+          "component_bounds": [
+            1162,
+            20,
+            1619,
+            692
+          ],
+          "source_pivot": [
+            1388.0,
+            692
+          ],
+          "landmarks": {
+            "waist": 456.8,
+            "hip": 487.04,
+            "hem": [
+              517.28,
+              517.28
+            ],
+            "knee": [
+              571.04,
+              571.04
+            ],
+            "sock": [
+              618.44,
+              618.44
+            ],
+            "ankle": [
+              621.44,
+              621.44
+            ],
+            "mid": 1388.0,
+            "centres": [
+              1305.74,
+              1470.26
+            ],
+            "split_path_xy": [
+              [
+                1388.0,
+                487.04
+              ],
+              [
+                1388.0,
+                692
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1162,
+                456
+              ],
+              [
+                1237,
+                455
+              ],
+              [
+                1245,
+                507
+              ],
+              [
+                1207,
+                532
+              ],
+              [
+                1171,
+                516
+              ]
+            ],
+            [
+              [
+                1530,
+                375
+              ],
+              [
+                1580,
+                375
+              ],
+              [
+                1619,
+                449
+              ],
+              [
+                1614,
+                484
+              ],
+              [
+                1550,
+                505
+              ],
+              [
+                1531,
+                488
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            830,
+            31,
+            1439,
+            999
+          ],
+          "source_pivot": [
+            1105,
+            999
+          ],
+          "landmarks": {
+            "waist": 700,
+            "hip": 725,
+            "hem": [
+              750,
+              750
+            ],
+            "knee": [
+              800,
+              800
+            ],
+            "sock": [
+              875,
+              875
+            ],
+            "ankle": [
+              880,
+              880
+            ],
+            "mid": 1105,
+            "centres": [
+              1000,
+              1215
+            ],
+            "split_path_xy": [
+              [
+                1045,
+                749
+              ],
+              [
+                1075,
+                790
+              ],
+              [
+                1105,
+                825
+              ],
+              [
+                1110,
+                866
+              ],
+              [
+                1090,
+                940
+              ],
+              [
+                1090,
+                999
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/profiles-clean-candidate.png",
+          "sourceSha256": "a3022447007e58fe756048ff034eda649fb7a6f179247f4f8858abd60e9718ad",
+          "scale": 0.41279669762641896,
+          "originalUpper": {
+            "component_bounds": [
+              1772,
+              28,
+              2095,
+              692
+            ],
+            "source_pivot": [
+              1907.0,
+              692
+            ],
+            "landmarks": {
+              "waist": 459.6,
+              "hip": 489.48,
+              "hem": [
+                519.36,
+                519.36
+              ],
+              "knee": [
+                572.48,
+                572.48
+              ],
+              "sock": [
+                619.28,
+                619.28
+              ],
+              "ankle": [
+                622.28,
+                622.28
+              ],
+              "mid": 1907.0,
+              "centres": [
+                1848.86,
+                1965.14
+              ],
+              "split_path_xy": [
+                [
+                  1865.67,
+                  489.48
+                ],
+                [
+                  1865.67,
+                  622.28
+                ],
+                [
+                  1801.07,
+                  658.8
+                ],
+                [
+                  1784.92,
+                  692
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1917,
+                  458
+                ],
+                [
+                  2005,
+                  470
+                ],
+                [
+                  2003,
+                  510
+                ],
+                [
+                  1988,
+                  529
+                ],
+                [
+                  1943,
+                  535
+                ],
+                [
+                  1920,
+                  526
+                ],
+                [
+                  1912,
+                  505
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 518,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              1003.5,
+              1021.0,
+              1006.5
+            ],
+            [
+              1161.0,
+              1184.0,
+              1217.5
+            ]
+          ],
+          "rest_separation": 28,
+          "rest_targets_working": [
+            [
+              245.82869,
+              253.05263,
+              247.06708
+            ],
+            [
+              255.64499,
+              265.13932,
+              278.96801
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 310,
+            "waistSourceY": 490
+          },
+          "sole_points_xy": [
+            [
+              970,
+              970
+            ],
+            [
+              1220,
+              992
+            ]
+          ],
+          "shoe_length_source_px": 249.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "connected_garment_end_source": [
+            825,
+            825
+          ],
+          "rest_hip_centres": [
+            990.0,
+            1168.0
+          ],
+          "rest_hip_targets_working": [
+            240.25593,
+            258.53457
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        }
+      },
+      "sourceBrief": "Older female with HUGE round head, short rust-orange tight curls, wide forehead and broad little nose, no glasses. Squat stocky figure. Mustard-yellow quilted vest over navy turtleneck, olive compact trousers, broad tan boots. One fat burgundy ring binder held under anatomical RIGHT forearm, left empty. Firm neutral closed lips. Distinct from grey-permed Irmgard Aktenstapel.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+          "sourceSha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031",
+          "component_bounds": [
+            50,
+            12,
+            471,
+            698
+          ],
+          "source_pivot": [
+            272.5,
+            698
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+          "sourceSha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031",
+          "component_bounds": [
+            578,
+            17,
+            972,
+            697
+          ],
+          "source_pivot": [
+            807.0,
+            697
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+          "sourceSha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031",
+          "component_bounds": [
+            1144,
+            13,
+            1544,
+            697
+          ],
+          "source_pivot": [
+            1326.5,
+            697
+          ],
+          "scale": 0.5788712011577424
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+          "sourceSha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031",
+          "component_bounds": [
+            1717,
+            11,
+            2113,
+            702
+          ],
+          "source_pivot": [
+            1893.5,
+            702
+          ],
+          "scale": 0.5788712011577424
+        }
+      ]
+    },
+    "crowd-manfred-mittagsruhe": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png",
+      "sourceSha256": "a7b364fdbe25c9b677144bd115fb12180eb51ca4c6b3fbd07af8193b7b30eacb",
+      "scale": 0.6557377049180327,
+      "views": {
+        "down": {
+          "component_bounds": [
+            65,
+            62,
+            507,
+            666
+          ],
+          "source_pivot": [
+            298.0,
+            666
+          ],
+          "landmarks": {
+            "waist": 460.64,
+            "hip": 484.8,
+            "hem": [
+              511.98,
+              511.98
+            ],
+            "knee": [
+              560.3,
+              560.3
+            ],
+            "sock": [
+              602.6,
+              602.6
+            ],
+            "ankle": [
+              605.6,
+              605.6
+            ],
+            "mid": 298.0,
+            "centres": [
+              218.44,
+              377.56
+            ],
+            "split_path_xy": [
+              [
+                298.0,
+                484.8
+              ],
+              [
+                298.0,
+                666
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                65,
+                445
+              ],
+              [
+                153,
+                445
+              ],
+              [
+                174,
+                501
+              ],
+              [
+                175,
+                585
+              ],
+              [
+                132,
+                615
+              ],
+              [
+                65,
+                594
+              ],
+              [
+                65,
+                555
+              ]
+            ],
+            [
+              [
+                428,
+                450
+              ],
+              [
+                498,
+                449
+              ],
+              [
+                508,
+                506
+              ],
+              [
+                468,
+                530
+              ],
+              [
+                428,
+                514
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            676,
+            58,
+            986,
+            668
+          ],
+          "source_pivot": [
+            833.5,
+            668
+          ],
+          "landmarks": {
+            "waist": 460,
+            "hip": 485,
+            "hem": [
+              515,
+              515
+            ],
+            "knee": [
+              555,
+              555
+            ],
+            "sock": [
+              594,
+              594
+            ],
+            "ankle": [
+              598,
+              598
+            ],
+            "mid": 833.5,
+            "centres": [
+              777.7,
+              889.3
+            ],
+            "split_path_xy": [
+              [
+                896.1,
+                485.0
+              ],
+              [
+                896.1,
+                607.0
+              ],
+              [
+                958.1,
+                637.5
+              ],
+              [
+                973.5999999999999,
+                668
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [
+            [
+              [
+                753,
+                450
+              ],
+              [
+                839,
+                450
+              ],
+              [
+                871,
+                570
+              ],
+              [
+                845,
+                614
+              ],
+              [
+                748,
+                600
+              ],
+              [
+                745,
+                557
+              ]
+            ]
+          ],
+          "fitStatus": "complete-source-limbs-native-probe-pending",
+          "source": "assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png",
+          "sourceSha256": "a7b364fdbe25c9b677144bd115fb12180eb51ca4c6b3fbd07af8193b7b30eacb",
+          "scale": 0.6557377049180327,
+          "originalUpper": {
+            "component_bounds": [
+              676,
+              58,
+              986,
+              668
+            ],
+            "source_pivot": [
+              833.5,
+              668
+            ],
+            "landmarks": {
+              "waist": 460.6,
+              "hip": 485.0,
+              "hem": [
+                512.45,
+                512.45
+              ],
+              "knee": [
+                561.25,
+                561.25
+              ],
+              "sock": [
+                604.0,
+                604.0
+              ],
+              "ankle": [
+                607.0,
+                607.0
+              ],
+              "mid": 833.5,
+              "centres": [
+                777.7,
+                889.3
+              ],
+              "split_path_xy": [
+                [
+                  896.1,
+                  485.0
+                ],
+                [
+                  896.1,
+                  607.0
+                ],
+                [
+                  958.1,
+                  637.5
+                ],
+                [
+                  973.5999999999999,
+                  668
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  753,
+                  450
+                ],
+                [
+                  839,
+                  450
+                ],
+                [
+                  871,
+                  570
+                ],
+                [
+                  845,
+                  614
+                ],
+                [
+                  748,
+                  600
+                ],
+                [
+                  745,
+                  557
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 490,
+            "featherWorkingPixels": 2
+          },
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 280,
+            "waistSourceY": 485
+          },
+          "knee_follow": 0.65,
+          "hem_follow": 0.55,
+          "connected_garment": false,
+          "connected_garment_owns_upper_legs": false,
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/isolated-legs-v2.png",
+              "sourceSha256": "4ec987be5b335abad545e2da0359176872a9f8d7025317f6f3d8dd80fa89e8c8",
+              "component_bounds": [
+                109,
+                125,
+                539,
+                619
+              ],
+              "source_pivot": [
+                290,
+                619
+              ],
+              "scale": 0.255,
+              "offset_x": -24,
+              "sole_point_xy": [
+                381,
+                614
+              ],
+              "shoe_length_source_px": 430
+            },
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/isolated-legs-v2.png",
+              "sourceSha256": "4ec987be5b335abad545e2da0359176872a9f8d7025317f6f3d8dd80fa89e8c8",
+              "component_bounds": [
+                597,
+                131,
+                1048,
+                619
+              ],
+              "source_pivot": [
+                790,
+                619
+              ],
+              "scale": 0.255,
+              "offset_x": 24,
+              "sole_point_xy": [
+                882,
+                615
+              ],
+              "shoe_length_source_px": 451
+            }
+          ]
+        },
+        "up": {
+          "component_bounds": [
+            1167,
+            56,
+            1612,
+            664
+          ],
+          "source_pivot": [
+            1390.5,
+            664
+          ],
+          "landmarks": {
+            "waist": 457.28,
+            "hip": 481.6,
+            "hem": [
+              508.96,
+              508.96
+            ],
+            "knee": [
+              557.6,
+              557.6
+            ],
+            "sock": [
+              600.2,
+              600.2
+            ],
+            "ankle": [
+              603.2,
+              603.2
+            ],
+            "mid": 1390.5,
+            "centres": [
+              1310.4,
+              1470.6
+            ],
+            "split_path_xy": [
+              [
+                1390.5,
+                481.6
+              ],
+              [
+                1390.5,
+                664
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1536,
+                448
+              ],
+              [
+                1605,
+                448
+              ],
+              [
+                1612,
+                507
+              ],
+              [
+                1606,
+                591
+              ],
+              [
+                1572,
+                605
+              ],
+              [
+                1515,
+                588
+              ],
+              [
+                1525,
+                518
+              ]
+            ],
+            [
+              [
+                1167,
+                450
+              ],
+              [
+                1253,
+                450
+              ],
+              [
+                1253,
+                510
+              ],
+              [
+                1215,
+                530
+              ],
+              [
+                1172,
+                514
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            1756,
+            58,
+            2065,
+            668
+          ],
+          "source_pivot": [
+            1906.0,
+            668
+          ],
+          "landmarks": {
+            "waist": 460,
+            "hip": 485,
+            "hem": [
+              515,
+              515
+            ],
+            "knee": [
+              555,
+              555
+            ],
+            "sock": [
+              594,
+              594
+            ],
+            "ankle": [
+              598,
+              598
+            ],
+            "mid": 1906.0,
+            "centres": [
+              1850.38,
+              1961.62
+            ],
+            "split_path_xy": [
+              [
+                1845.61,
+                485.0
+              ],
+              [
+                1845.61,
+                607.0
+              ],
+              [
+                1783.81,
+                637.5
+              ],
+              [
+                1768.36,
+                668
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1898,
+                445
+              ],
+              [
+                1990,
+                445
+              ],
+              [
+                1996,
+                499
+              ],
+              [
+                1977,
+                519
+              ],
+              [
+                1920,
+                514
+              ],
+              [
+                1897,
+                484
+              ]
+            ]
+          ],
+          "fitStatus": "complete-source-limbs-native-probe-pending",
+          "source": "assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png",
+          "sourceSha256": "a7b364fdbe25c9b677144bd115fb12180eb51ca4c6b3fbd07af8193b7b30eacb",
+          "scale": 0.6557377049180327,
+          "originalUpper": {
+            "component_bounds": [
+              1756,
+              58,
+              2065,
+              668
+            ],
+            "source_pivot": [
+              1906.0,
+              668
+            ],
+            "landmarks": {
+              "waist": 460.6,
+              "hip": 485.0,
+              "hem": [
+                512.45,
+                512.45
+              ],
+              "knee": [
+                561.25,
+                561.25
+              ],
+              "sock": [
+                604.0,
+                604.0
+              ],
+              "ankle": [
+                607.0,
+                607.0
+              ],
+              "mid": 1906.0,
+              "centres": [
+                1850.38,
+                1961.62
+              ],
+              "split_path_xy": [
+                [
+                  1845.61,
+                  485.0
+                ],
+                [
+                  1845.61,
+                  607.0
+                ],
+                [
+                  1783.81,
+                  637.5
+                ],
+                [
+                  1768.36,
+                  668
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1898,
+                  445
+                ],
+                [
+                  1990,
+                  445
+                ],
+                [
+                  1996,
+                  499
+                ],
+                [
+                  1977,
+                  519
+                ],
+                [
+                  1920,
+                  514
+                ],
+                [
+                  1897,
+                  484
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 490,
+            "featherWorkingPixels": 2
+          },
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 280,
+            "waistSourceY": 485
+          },
+          "knee_follow": 0.65,
+          "hem_follow": 0.55,
+          "connected_garment": false,
+          "connected_garment_owns_upper_legs": false,
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/isolated-legs-v2.png",
+              "sourceSha256": "4ec987be5b335abad545e2da0359176872a9f8d7025317f6f3d8dd80fa89e8c8",
+              "component_bounds": [
+                1619,
+                125,
+                2055,
+                619
+              ],
+              "source_pivot": [
+                1880,
+                619
+              ],
+              "scale": 0.255,
+              "offset_x": -24,
+              "sole_point_xy": [
+                1777,
+                615
+              ],
+              "shoe_length_source_px": 436
+            },
+            {
+              "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/isolated-legs-v2.png",
+              "sourceSha256": "4ec987be5b335abad545e2da0359176872a9f8d7025317f6f3d8dd80fa89e8c8",
+              "component_bounds": [
+                1097,
+                127,
+                1545,
+                619
+              ],
+              "source_pivot": [
+                1370,
+                619
+              ],
+              "scale": 0.255,
+              "offset_x": 24,
+              "sole_point_xy": [
+                1273,
+                615
+              ],
+              "shoe_length_source_px": 448
+            }
+          ]
+        }
+      },
+      "sourceBrief": "Late-middle-age male with enormous soft pear-shaped face, sandy hair at sides and bald top, short sandy chin beard, small drooping eyes no glasses. Very short stocky body. Slate-blue dressing cardigan over faded cream polo, brown compact trousers, broad burgundy slip-on shoes with backs. One folded pale green towel carried anatomical RIGHT hand, left empty. Low-energy irritated closed lips, adult.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/turns-candidate.png",
+          "sourceSha256": "dc73b0435c13cab2ad426b79f76063f99dbbf51a7e6b578cce9d8c0ffdedaede",
+          "component_bounds": [
+            84,
+            51,
+            485,
+            675
+          ],
+          "source_pivot": [
+            305.0,
+            675
+          ],
+          "scale": 0.6410256410256411
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/turns-candidate.png",
+          "sourceSha256": "dc73b0435c13cab2ad426b79f76063f99dbbf51a7e6b578cce9d8c0ffdedaede",
+          "component_bounds": [
+            616,
+            52,
+            958,
+            672
+          ],
+          "source_pivot": [
+            805.0,
+            672
+          ],
+          "scale": 0.6410256410256411
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/turns-candidate.png",
+          "sourceSha256": "dc73b0435c13cab2ad426b79f76063f99dbbf51a7e6b578cce9d8c0ffdedaede",
+          "component_bounds": [
+            1149,
+            51,
+            1571,
+            673
+          ],
+          "source_pivot": [
+            1346.0,
+            673
+          ],
+          "scale": 0.6410256410256411
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/turns-candidate.png",
+          "sourceSha256": "dc73b0435c13cab2ad426b79f76063f99dbbf51a7e6b578cce9d8c0ffdedaede",
+          "component_bounds": [
+            1703,
+            52,
+            2060,
+            675
+          ],
+          "source_pivot": [
+            1876.5,
+            675
+          ],
+          "scale": 0.6410256410256411
+        }
+      ]
+    },
+    "crowd-elfriede-eingabe": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-elfriede-eingabe-directions-candidate.png",
+      "sourceSha256": "b9f73dec3d05ced00214b147fe96a64a00441d3fbe883900e042081a280b0422",
+      "scale": 0.6033182503770739,
+      "views": {
+        "down": {
+          "component_bounds": [
+            88,
+            33,
+            489,
+            694
+          ],
+          "source_pivot": [
+            289.0,
+            694
+          ],
+          "landmarks": {
+            "waist": 489.09,
+            "hip": 525.4449999999999,
+            "hem": [
+              588,
+              588
+            ],
+            "knee": [
+              605,
+              605
+            ],
+            "sock": [
+              634,
+              634
+            ],
+            "ankle": [
+              638,
+              638
+            ],
+            "mid": 289.0,
+            "centres": [
+              216.82,
+              361.18
+            ],
+            "split_path_xy": [
+              [
+                289.0,
+                525.4449999999999
+              ],
+              [
+                289.0,
+                694
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                88,
+                447
+              ],
+              [
+                164,
+                447
+              ],
+              [
+                184,
+                481
+              ],
+              [
+                178,
+                565
+              ],
+              [
+                102,
+                550
+              ],
+              [
+                108,
+                514
+              ],
+              [
+                90,
+                498
+              ]
+            ],
+            [
+              [
+                421,
+                449
+              ],
+              [
+                483,
+                449
+              ],
+              [
+                489,
+                500
+              ],
+              [
+                451,
+                523
+              ],
+              [
+                420,
+                505
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.7
+        },
+        "right": {
+          "component_bounds": [
+            175,
+            32,
+            632,
+            985
+          ],
+          "source_pivot": [
+            400,
+            985
+          ],
+          "landmarks": {
+            "waist": 693,
+            "hip": 752,
+            "hem": [
+              810,
+              810
+            ],
+            "knee": [
+              853,
+              853
+            ],
+            "sock": [
+              897,
+              897
+            ],
+            "ankle": [
+              902,
+              902
+            ],
+            "mid": 400,
+            "centres": [
+              295,
+              465
+            ],
+            "split_path_xy": [
+              [
+                380,
+                752
+              ],
+              [
+                380,
+                810
+              ],
+              [
+                362,
+                844
+              ],
+              [
+                389,
+                900
+              ],
+              [
+                420,
+                950
+              ],
+              [
+                420,
+                985
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/profiles-clean-candidate.png",
+          "sourceSha256": "5a20ed6d8843ad6bc76c7b181530b630d1478c1b623e08fc986b08a1aa3124e6",
+          "scale": 0.418848167539267,
+          "originalUpper": {
+            "component_bounds": [
+              679,
+              31,
+              976,
+              694
+            ],
+            "source_pivot": [
+              836.5,
+              694
+            ],
+            "landmarks": {
+              "waist": 488.47,
+              "hip": 524.935,
+              "hem": [
+                581.29,
+                581.29
+              ],
+              "knee": [
+                611.125,
+                611.125
+              ],
+              "sock": [
+                637.96,
+                637.96
+              ],
+              "ankle": [
+                640.96,
+                640.96
+              ],
+              "mid": 836.5,
+              "centres": [
+                783.04,
+                889.96
+              ],
+              "split_path_xy": [
+                [
+                  889.87,
+                  524.935
+                ],
+                [
+                  889.87,
+                  640.96
+                ],
+                [
+                  949.27,
+                  660.85
+                ],
+                [
+                  964.12,
+                  694
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 587
+          },
+          "rest_centres": [
+            [
+              295,
+              286,
+              288
+            ],
+            [
+              465,
+              480,
+              520
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 320,
+            "waistSourceY": 489
+          },
+          "sole_points_xy": [
+            [
+              288,
+              978
+            ],
+            [
+              520,
+              964
+            ]
+          ],
+          "shoe_length_source_px": 203.0,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        },
+        "up": {
+          "component_bounds": [
+            1155,
+            35,
+            1548,
+            692
+          ],
+          "source_pivot": [
+            1346.5,
+            692
+          ],
+          "landmarks": {
+            "waist": 488.33,
+            "hip": 524.4649999999999,
+            "hem": [
+              588,
+              588
+            ],
+            "knee": [
+              605,
+              605
+            ],
+            "sock": [
+              634,
+              634
+            ],
+            "ankle": [
+              638,
+              638
+            ],
+            "mid": 1346.5,
+            "centres": [
+              1275.76,
+              1417.24
+            ],
+            "split_path_xy": [
+              [
+                1346.5,
+                524.4649999999999
+              ],
+              [
+                1346.5,
+                692
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1480,
+                449
+              ],
+              [
+                1548,
+                449
+              ],
+              [
+                1548,
+                550
+              ],
+              [
+                1480,
+                557
+              ]
+            ],
+            [
+              [
+                1155,
+                450
+              ],
+              [
+                1224,
+                450
+              ],
+              [
+                1225,
+                502
+              ],
+              [
+                1182,
+                522
+              ],
+              [
+                1156,
+                506
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.7
+        },
+        "left": {
+          "component_bounds": [
+            905,
+            30,
+            1362,
+            984
+          ],
+          "source_pivot": [
+            1133,
+            984
+          ],
+          "landmarks": {
+            "waist": 693,
+            "hip": 752,
+            "hem": [
+              810,
+              810
+            ],
+            "knee": [
+              853,
+              853
+            ],
+            "sock": [
+              897,
+              897
+            ],
+            "ankle": [
+              902,
+              902
+            ],
+            "mid": 1133,
+            "centres": [
+              1080,
+              1225
+            ],
+            "split_path_xy": [
+              [
+                1150,
+                752
+              ],
+              [
+                1150,
+                810
+              ],
+              [
+                1171,
+                844
+              ],
+              [
+                1140,
+                900
+              ],
+              [
+                1115,
+                950
+              ],
+              [
+                1115,
+                984
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/profiles-clean-candidate.png",
+          "sourceSha256": "5a20ed6d8843ad6bc76c7b181530b630d1478c1b623e08fc986b08a1aa3124e6",
+          "scale": 0.418848167539267,
+          "originalUpper": {
+            "component_bounds": [
+              1737,
+              31,
+              2037,
+              694
+            ],
+            "source_pivot": [
+              1876.5,
+              694
+            ],
+            "landmarks": {
+              "waist": 488.47,
+              "hip": 524.935,
+              "hem": [
+                581.29,
+                581.29
+              ],
+              "knee": [
+                611.125,
+                611.125
+              ],
+              "sock": [
+                637.96,
+                637.96
+              ],
+              "ankle": [
+                640.96,
+                640.96
+              ],
+              "mid": 1876.5,
+              "centres": [
+                1822.5,
+                1930.5
+              ],
+              "split_path_xy": [
+                [
+                  1824.0,
+                  524.935
+                ],
+                [
+                  1824.0,
+                  640.96
+                ],
+                [
+                  1764.0,
+                  660.85
+                ],
+                [
+                  1749.0,
+                  694
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 587
+          },
+          "rest_centres": [
+            [
+              1080,
+              1060,
+              1010
+            ],
+            [
+              1225,
+              1245,
+              1250
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 320,
+            "waistSourceY": 489
+          },
+          "sole_points_xy": [
+            [
+              1010,
+              965
+            ],
+            [
+              1250,
+              976
+            ]
+          ],
+          "shoe_length_source_px": 202.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        }
+      },
+      "sourceBrief": "Elderly female with huge long face, sharply pointed chin, dark grey hair swept into two neat low side coils, delicate gold wire spectacles. Compact short broad torso. Plum patterned modest blouse under beige sleeveless vest, charcoal compact skirt, dark stockings, broad dark blue walking shoes. One small thick blank cream petition envelope carried anatomical RIGHT hand, left empty. Neutral composed closed mouth.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/turns-candidate.png",
+          "sourceSha256": "479214b024ab65a9053a8b07684abc47d67d492ca8d43fabd65197e768cb730e",
+          "component_bounds": [
+            141,
+            29,
+            462,
+            702
+          ],
+          "source_pivot": [
+            322.0,
+            702
+          ],
+          "scale": 0.5943536404160475
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/turns-candidate.png",
+          "sourceSha256": "479214b024ab65a9053a8b07684abc47d67d492ca8d43fabd65197e768cb730e",
+          "component_bounds": [
+            652,
+            29,
+            980,
+            699
+          ],
+          "source_pivot": [
+            827.0,
+            699
+          ],
+          "scale": 0.5943536404160475
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/turns-candidate.png",
+          "sourceSha256": "479214b024ab65a9053a8b07684abc47d67d492ca8d43fabd65197e768cb730e",
+          "component_bounds": [
+            1175,
+            29,
+            1498,
+            702
+          ],
+          "source_pivot": [
+            1329.0,
+            702
+          ],
+          "scale": 0.5943536404160475
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/turns-candidate.png",
+          "sourceSha256": "479214b024ab65a9053a8b07684abc47d67d492ca8d43fabd65197e768cb730e",
+          "component_bounds": [
+            1702,
+            30,
+            2020,
+            702
+          ],
+          "source_pivot": [
+            1851.5,
+            702
+          ],
+          "scale": 0.5943536404160475
+        }
+      ]
+    },
+    "crowd-ruediger-rasenkante": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-ruediger-rasenkante-directions-candidate.png",
+      "sourceSha256": "3988ae2e13aa9bd714fdf1990798e5661ddace01c48931b6d083136f3c26882a",
+      "scale": 0.5813953488372093,
+      "views": {
+        "down": {
+          "component_bounds": [
+            54,
+            16,
+            522,
+            700
+          ],
+          "source_pivot": [
+            286.5,
+            700
+          ],
+          "landmarks": {
+            "waist": 474.28,
+            "hip": 498.22,
+            "hem": [
+              529.0,
+              529.0
+            ],
+            "knee": [
+              576.88,
+              576.88
+            ],
+            "sock": [
+              628.6,
+              628.6
+            ],
+            "ankle": [
+              631.6,
+              631.6
+            ],
+            "mid": 286.5,
+            "centres": [
+              202.26,
+              370.74
+            ],
+            "split_path_xy": [
+              [
+                286.5,
+                498.22
+              ],
+              [
+                286.5,
+                700
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                54,
+                453
+              ],
+              [
+                142,
+                453
+              ],
+              [
+                145,
+                521
+              ],
+              [
+                114,
+                542
+              ],
+              [
+                65,
+                526
+              ]
+            ],
+            [
+              [
+                424,
+                453
+              ],
+              [
+                513,
+                453
+              ],
+              [
+                522,
+                527
+              ],
+              [
+                508,
+                608
+              ],
+              [
+                472,
+                618
+              ],
+              [
+                423,
+                600
+              ],
+              [
+                429,
+                548
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "right": {
+          "component_bounds": [
+            153,
+            11,
+            675,
+            979
+          ],
+          "source_pivot": [
+            411,
+            979
+          ],
+          "landmarks": {
+            "waist": 660,
+            "hip": 690,
+            "hem": [
+              720,
+              720
+            ],
+            "knee": [
+              775,
+              775
+            ],
+            "sock": [
+              842,
+              831
+            ],
+            "ankle": [
+              846,
+              835
+            ],
+            "mid": 411,
+            "centres": [
+              318,
+              490
+            ],
+            "split_path_xy": [
+              [
+                475,
+                690
+              ],
+              [
+                456,
+                735
+              ],
+              [
+                411,
+                773
+              ],
+              [
+                380,
+                800
+              ],
+              [
+                380,
+                842
+              ],
+              [
+                411,
+                910
+              ],
+              [
+                411,
+                979
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/profiles-clean-candidate.png",
+          "sourceSha256": "78164e85c18aafc96522da135e9bdb50b2f1eb65c130f12063420a499d89bc5f",
+          "scale": 0.4132231404958678,
+          "originalUpper": {
+            "component_bounds": [
+              646,
+              15,
+              980,
+              702
+            ],
+            "source_pivot": [
+              824.0,
+              702
+            ],
+            "landmarks": {
+              "waist": 475.29,
+              "hip": 499.335,
+              "hem": [
+                530.25,
+                530.25
+              ],
+              "knee": [
+                578.34,
+                578.34
+              ],
+              "sock": [
+                630.3,
+                630.3
+              ],
+              "ankle": [
+                633.3,
+                633.3
+              ],
+              "mid": 824.0,
+              "centres": [
+                763.88,
+                884.12
+              ],
+              "split_path_xy": [
+                [
+                  883.14,
+                  499.335
+                ],
+                [
+                  883.14,
+                  633.3
+                ],
+                [
+                  949.94,
+                  667.65
+                ],
+                [
+                  966.64,
+                  702
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [
+              [
+                [
+                  703,
+                  472
+                ],
+                [
+                  803,
+                  473
+                ],
+                [
+                  812,
+                  507
+                ],
+                [
+                  792,
+                  537
+                ],
+                [
+                  737,
+                  540
+                ],
+                [
+                  706,
+                  511
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 508,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              347.5,
+              309.5,
+              269.5
+            ],
+            [
+              498.5,
+              475.5,
+              483.5
+            ]
+          ],
+          "rest_separation": 28,
+          "sole_points_xy": [
+            [
+              280,
+              975
+            ],
+            [
+              535,
+              954
+            ]
+          ],
+          "shoe_length_source_px": 262.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "rest_targets_working": [
+            [
+              263.89256,
+              248.19008,
+              231.66116
+            ],
+            [
+              260.91736,
+              251.41322,
+              254.71901
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 500
+          },
+          "connected_garment_end_source": [
+            770,
+            770
+          ],
+          "rest_hip_centres": [
+            348.5,
+            518.0
+          ],
+          "rest_hip_targets_working": [
+            264.30579,
+            268.97521
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        },
+        "up": {
+          "component_bounds": [
+            1149,
+            14,
+            1610,
+            700
+          ],
+          "source_pivot": [
+            1377.5,
+            700
+          ],
+          "landmarks": {
+            "waist": 473.62,
+            "hip": 497.63,
+            "hem": [
+              528.5,
+              528.5
+            ],
+            "knee": [
+              576.52,
+              576.52
+            ],
+            "sock": [
+              628.4,
+              628.4
+            ],
+            "ankle": [
+              631.4,
+              631.4
+            ],
+            "mid": 1377.5,
+            "centres": [
+              1294.52,
+              1460.48
+            ],
+            "split_path_xy": [
+              [
+                1377.5,
+                497.63
+              ],
+              [
+                1377.5,
+                700
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1150,
+                450
+              ],
+              [
+                1238,
+                450
+              ],
+              [
+                1252,
+                525
+              ],
+              [
+                1246,
+                601
+              ],
+              [
+                1200,
+                618
+              ],
+              [
+                1151,
+                601
+              ],
+              [
+                1170,
+                539
+              ]
+            ],
+            [
+              [
+                1515,
+                451
+              ],
+              [
+                1605,
+                451
+              ],
+              [
+                1610,
+                524
+              ],
+              [
+                1570,
+                540
+              ],
+              [
+                1520,
+                522
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+        },
+        "left": {
+          "component_bounds": [
+            862,
+            12,
+            1383,
+            979
+          ],
+          "source_pivot": [
+            1120,
+            979
+          ],
+          "landmarks": {
+            "waist": 660,
+            "hip": 690,
+            "hem": [
+              720,
+              720
+            ],
+            "knee": [
+              775,
+              775
+            ],
+            "sock": [
+              831,
+              842
+            ],
+            "ankle": [
+              835,
+              846
+            ],
+            "mid": 1120,
+            "centres": [
+              1025,
+              1250
+            ],
+            "split_path_xy": [
+              [
+                1065,
+                690
+              ],
+              [
+                1078,
+                735
+              ],
+              [
+                1120,
+                773
+              ],
+              [
+                1150,
+                800
+              ],
+              [
+                1150,
+                842
+              ],
+              [
+                1125,
+                910
+              ],
+              [
+                1125,
+                979
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/profiles-clean-candidate.png",
+          "sourceSha256": "78164e85c18aafc96522da135e9bdb50b2f1eb65c130f12063420a499d89bc5f",
+          "scale": 0.4132231404958678,
+          "originalUpper": {
+            "component_bounds": [
+              1751,
+              14,
+              2085,
+              702
+            ],
+            "source_pivot": [
+              1905.5,
+              702
+            ],
+            "landmarks": {
+              "waist": 474.96,
+              "hip": 499.04,
+              "hem": [
+                530.0,
+                530.0
+              ],
+              "knee": [
+                578.16,
+                578.16
+              ],
+              "sock": [
+                630.2,
+                630.2
+              ],
+              "ankle": [
+                633.2,
+                633.2
+              ],
+              "mid": 1905.5,
+              "centres": [
+                1845.38,
+                1965.62
+              ],
+              "split_path_xy": [
+                [
+                  1847.86,
+                  499.04
+                ],
+                [
+                  1847.86,
+                  633.2
+                ],
+                [
+                  1781.06,
+                  667.6
+                ],
+                [
+                  1764.36,
+                  702
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1910,
+                  463
+                ],
+                [
+                  2022,
+                  463
+                ],
+                [
+                  2044,
+                  561
+                ],
+                [
+                  2025,
+                  610
+                ],
+                [
+                  1940,
+                  618
+                ],
+                [
+                  1924,
+                  560
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 508,
+            "featherWorkingPixels": 2
+          },
+          "rest_centres": [
+            [
+              1037.5,
+              1058.0,
+              1052.0
+            ],
+            [
+              1188.5,
+              1223.5,
+              1266.5
+            ]
+          ],
+          "rest_separation": 28,
+          "sole_points_xy": [
+            [
+              1000,
+              954
+            ],
+            [
+              1255,
+              974
+            ]
+          ],
+          "shoe_length_source_px": 262.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending.",
+          "connected_garment": true,
+          "rest_root_translation": true,
+          "rest_targets_working": [
+            [
+              251.49587,
+              259.96694,
+              257.4876
+            ],
+            [
+              248.52066,
+              262.98347,
+              280.75207
+            ]
+          ],
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 500
+          },
+          "connected_garment_end_source": [
+            770,
+            770
+          ],
+          "rest_hip_centres": [
+            1019.5,
+            1189.0
+          ],
+          "rest_hip_targets_working": [
+            244.05785,
+            248.72727
+          ],
+          "centreMeasurement": "Opaque alpha>=128 span midpoint at each actual source joint row, constrained to component and traced seam; one constant source-rest translation per limb."
+        }
+      },
+      "sourceBrief": "Middle-aged male with enormous square freckled head, short spiky ginger hair, ginger goatee, very narrow dark eyes no glasses. Compact broad squat build. Bright muted rust windbreaker over pale olive shirt, navy compact trousers, heavy wide tan work boots. One small folded off-white towel held anatomical LEFT hand, right empty. Forceful compressed closed lip, not police uniform.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/turns-candidate.png",
+          "sourceSha256": "fd0efc9b5a6abbb229ec06959fc330b3e884c10a4a883d554d67db99137f19ef",
+          "component_bounds": [
+            68,
+            15,
+            487,
+            702
+          ],
+          "source_pivot": [
+            292.0,
+            702
+          ],
+          "scale": 0.5805515239477503
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/turns-candidate.png",
+          "sourceSha256": "fd0efc9b5a6abbb229ec06959fc330b3e884c10a4a883d554d67db99137f19ef",
+          "component_bounds": [
+            607,
+            15,
+            980,
+            701
+          ],
+          "source_pivot": [
+            810.0,
+            701
+          ],
+          "scale": 0.5805515239477503
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/turns-candidate.png",
+          "sourceSha256": "fd0efc9b5a6abbb229ec06959fc330b3e884c10a4a883d554d67db99137f19ef",
+          "component_bounds": [
+            1149,
+            13,
+            1557,
+            702
+          ],
+          "source_pivot": [
+            1341.0,
+            702
+          ],
+          "scale": 0.5805515239477503
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/turns-candidate.png",
+          "sourceSha256": "fd0efc9b5a6abbb229ec06959fc330b3e884c10a4a883d554d67db99137f19ef",
+          "component_bounds": [
+            1687,
+            15,
+            2083,
+            702
+          ],
+          "source_pivot": [
+            1861.5,
+            702
+          ],
+          "scale": 0.5805515239477503
+        }
+      ]
+    },
+    "crowd-baerbel-brezel": {
+      "actorId": null,
+      "source": "assets/sprite-sources/street-residents/crowd-baerbel-brezel-directions-candidate.png",
+      "sourceSha256": "9073fdb592c9512be17e221478a87618e218bf09bfe54613e659d97cf3934560",
+      "scale": 0.5882352941176471,
+      "views": {
+        "down": {
+          "component_bounds": [
+            117,
+            19,
+            542,
+            696
+          ],
+          "source_pivot": [
+            324.0,
+            696
+          ],
+          "landmarks": {
+            "waist": 472.59,
+            "hip": 509.825,
+            "hem": [
+              580,
+              580
+            ],
+            "knee": [
+              600,
+              600
+            ],
+            "sock": [
+              637,
+              637
+            ],
+            "ankle": [
+              641,
+              641
+            ],
+            "mid": 324.0,
+            "centres": [
+              247.5,
+              400.5
+            ],
+            "split_path_xy": [
+              [
+                324.0,
+                509.825
+              ],
+              [
+                324.0,
+                696
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                117,
+                422
+              ],
+              [
+                188,
+                422
+              ],
+              [
+                195,
+                476
+              ],
+              [
+                157,
+                500
+              ],
+              [
+                121,
+                478
+              ]
+            ],
+            [
+              [
+                449,
+                423
+              ],
+              [
+                513,
+                422
+              ],
+              [
+                526,
+                475
+              ],
+              [
+                548,
+                617
+              ],
+              [
+                486,
+                627
+              ],
+              [
+                432,
+                611
+              ],
+              [
+                436,
+                574
+              ],
+              [
+                455,
+                566
+              ],
+              [
+                448,
+                522
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.7
+        },
+        "right": {
+          "component_bounds": [
+            159,
+            28,
+            676,
+            977
+          ],
+          "source_pivot": [
+            420,
+            977
+          ],
+          "landmarks": {
+            "waist": 684,
+            "hip": 739,
+            "hem": [
+              791,
+              791
+            ],
+            "knee": [
+              840,
+              840
+            ],
+            "sock": [
+              891,
+              891
+            ],
+            "ankle": [
+              896,
+              896
+            ],
+            "mid": 420,
+            "centres": [
+              330,
+              492
+            ],
+            "split_path_xy": [
+              [
+                407,
+                739
+              ],
+              [
+                407,
+                791
+              ],
+              [
+                391,
+                827
+              ],
+              [
+                422,
+                900
+              ],
+              [
+                440,
+                947
+              ],
+              [
+                440,
+                977
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/profiles-clean-candidate.png",
+          "sourceSha256": "9ccebed24bba160ccbc0b2420ec34dc465911be201d3a228de9fdbf07898794f",
+          "scale": 0.4192872117400419,
+          "originalUpper": {
+            "component_bounds": [
+              672,
+              18,
+              992,
+              698
+            ],
+            "source_pivot": [
+              852.0,
+              698
+            ],
+            "landmarks": {
+              "waist": 473.6,
+              "hip": 511.0,
+              "hem": [
+                572.2,
+                572.2
+              ],
+              "knee": [
+                606.2,
+                606.2
+              ],
+              "sock": [
+                637.2,
+                637.2
+              ],
+              "ankle": [
+                640.2,
+                640.2
+              ],
+              "mid": 852.0,
+              "centres": [
+                794.4,
+                909.6
+              ],
+              "split_path_xy": [
+                [
+                  899.2,
+                  511.0
+                ],
+                [
+                  899.2,
+                  640.2
+                ],
+                [
+                  963.2,
+                  664.0
+                ],
+                [
+                  979.2,
+                  698
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 0,
+            "protected_polygons": [],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 575
+          },
+          "rest_centres": [
+            [
+              330,
+              320,
+              320
+            ],
+            [
+              492,
+              510,
+              540
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 473
+          },
+          "sole_points_xy": [
+            [
+              320,
+              948
+            ],
+            [
+              540,
+              970
+            ]
+          ],
+          "shoe_length_source_px": 226.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        },
+        "up": {
+          "component_bounds": [
+            1135,
+            19,
+            1560,
+            699
+          ],
+          "source_pivot": [
+            1359.5,
+            699
+          ],
+          "landmarks": {
+            "waist": 474.6,
+            "hip": 512.0,
+            "hem": [
+              580,
+              580
+            ],
+            "knee": [
+              600,
+              600
+            ],
+            "sock": [
+              637,
+              637
+            ],
+            "ankle": [
+              641,
+              641
+            ],
+            "mid": 1359.5,
+            "centres": [
+              1283.0,
+              1436.0
+            ],
+            "split_path_xy": [
+              [
+                1359.5,
+                512.0
+              ],
+              [
+                1359.5,
+                699
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1166,
+                424
+              ],
+              [
+                1236,
+                424
+              ],
+              [
+                1242,
+                481
+              ],
+              [
+                1245,
+                608
+              ],
+              [
+                1190,
+                622
+              ],
+              [
+                1135,
+                609
+              ],
+              [
+                1149,
+                523
+              ]
+            ],
+            [
+              [
+                1493,
+                424
+              ],
+              [
+                1555,
+                424
+              ],
+              [
+                1560,
+                479
+              ],
+              [
+                1528,
+                501
+              ],
+              [
+                1492,
+                479
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "landmarkNote": "Hem is the hidden garment deformation guide; knee guide lies beneath skirt, ankle maintains whole painted shoes.",
+          "gait_strength": 0.7
+        },
+        "left": {
+          "component_bounds": [
+            859,
+            23,
+            1373,
+            977
+          ],
+          "source_pivot": [
+            1117,
+            977
+          ],
+          "landmarks": {
+            "waist": 684,
+            "hip": 739,
+            "hem": [
+              791,
+              791
+            ],
+            "knee": [
+              840,
+              840
+            ],
+            "sock": [
+              891,
+              891
+            ],
+            "ankle": [
+              896,
+              896
+            ],
+            "mid": 1117,
+            "centres": [
+              1048,
+              1220
+            ],
+            "split_path_xy": [
+              [
+                1120,
+                739
+              ],
+              [
+                1120,
+                791
+              ],
+              [
+                1150,
+                827
+              ],
+              [
+                1110,
+                900
+              ],
+              [
+                1090,
+                947
+              ],
+              [
+                1090,
+                977
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 32,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "source-specific-native-probe-pending",
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/profiles-clean-candidate.png",
+          "sourceSha256": "9ccebed24bba160ccbc0b2420ec34dc465911be201d3a228de9fdbf07898794f",
+          "scale": 0.4192872117400419,
+          "originalUpper": {
+            "component_bounds": [
+              1728,
+              19,
+              2045,
+              698
+            ],
+            "source_pivot": [
+              1868.5,
+              698
+            ],
+            "landmarks": {
+              "waist": 473.93,
+              "hip": 511.275,
+              "hem": [
+                572.385,
+                572.385
+              ],
+              "knee": [
+                606.335,
+                606.335
+              ],
+              "sock": [
+                637.285,
+                637.285
+              ],
+              "ankle": [
+                640.285,
+                640.285
+              ],
+              "mid": 1868.5,
+              "centres": [
+                1811.44,
+                1925.56
+              ],
+              "split_path_xy": [
+                [
+                  1819.93,
+                  511.275
+                ],
+                [
+                  1819.93,
+                  640.285
+                ],
+                [
+                  1756.53,
+                  664.05
+                ],
+                [
+                  1740.68,
+                  698
+                ]
+              ],
+              "auto_hand_mask": false,
+              "step_width": 12,
+              "root_overlap": 2
+            },
+            "foreground": 1,
+            "protected_polygons": [
+              [
+                [
+                  1847,
+                  452
+                ],
+                [
+                  1952,
+                  451
+                ],
+                [
+                  1988,
+                  505
+                ],
+                [
+                  1985,
+                  609
+                ],
+                [
+                  1853,
+                  620
+                ],
+                [
+                  1843,
+                  552
+                ]
+              ]
+            ],
+            "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+            "cutSourceY": 575
+          },
+          "rest_centres": [
+            [
+              1048,
+              1025,
+              990
+            ],
+            [
+              1220,
+              1220,
+              1220
+            ]
+          ],
+          "rest_separation": 28,
+          "upper_motion": {
+            "bob": 3.8,
+            "sway": 4,
+            "head_counter": 0.2,
+            "headBaseSourceY": 300,
+            "waistSourceY": 473
+          },
+          "sole_points_xy": [
+            [
+              990,
+              968
+            ],
+            [
+              1220,
+              945
+            ]
+          ],
+          "shoe_length_source_px": 212.5,
+          "soleMarkMethod": "Measured bottommost opaque source sole at fitted shoe centre; exact-export visibility review remains pending."
+        }
+      },
+      "sourceBrief": "Mature female with enormous round dimpled face, thick dark-auburn short wavy hair, small warm grey eyes, no glasses. Short very broad sturdy build. Dusty turquoise pullover with cream collar, dark brown compact skirt and grey stockings, broad oxblood strapped shoes. One small tan paper shopping bag held anatomical LEFT hand at hip, right empty. Neutral patient closed lips; no bread in mouth.",
+      "status": "candidate-unapproved",
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+          "sourceSha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3",
+          "component_bounds": [
+            105,
+            18,
+            513,
+            702
+          ],
+          "source_pivot": [
+            312.0,
+            702
+          ],
+          "scale": 0.5847953216374269
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+          "sourceSha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3",
+          "component_bounds": [
+            630,
+            17,
+            981,
+            699
+          ],
+          "source_pivot": [
+            824.5,
+            699
+          ],
+          "scale": 0.5847953216374269
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+          "sourceSha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3",
+          "component_bounds": [
+            1140,
+            18,
+            1543,
+            701
+          ],
+          "source_pivot": [
+            1346.5,
+            701
+          ],
+          "scale": 0.5847953216374269
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+          "sourceSha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3",
+          "component_bounds": [
+            1722,
+            20,
+            2058,
+            702
+          ],
+          "source_pivot": [
+            1872.0,
+            702
+          ],
+          "scale": 0.5847953216374269
+        }
+      ]
+    }
+  }
+}

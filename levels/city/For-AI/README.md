@@ -32,3 +32,8 @@ node --test tests/quiz-variety.test.mjs tests/quiz-character-portraits.test.mjs
 ```
 
 For browser coverage, inspect the relevant existing fixture before running it: [`playtest-jwd-home`](../../../tools/playtest-jwd-home.mjs), [`playtest-neighbor-sprites`](../../../tools/playtest-neighbor-sprites.mjs), [`playtest-mission-pointer`](../../../tools/playtest-mission-pointer.mjs) or [`playtest-object-consistency`](../../../tools/playtest-object-consistency.mjs). Follow [silent background testing](../../../For-AI/AGENT-START.md#silent-background-browser-tests); report shortcuts and emulation separately from natural flow and physical-device evidence. World-affecting changes still need both independent specialist reviewers.
+
+<!-- rtk-workflow -->
+## Shell output
+
+Prefer supported RTK filters for human-read shell output; see the [RTK skill](skills/rtk/SKILL.md). Keep exact reads and parser input raw. Use bounded native commands when RTK is unavailable.

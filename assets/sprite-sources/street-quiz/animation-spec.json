@@ -1,0 +1,846 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unreviewed",
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 416,
+    "baseline": 480
+  },
+  "characters": {
+    "hartmut-keller": {
+      "voiceId": "quiz-hartmut-keller",
+      "name": "Hartmut Keller",
+      "source": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+      "sourceSha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+      "sourceFigureHeight": 392,
+      "views": {
+        "down": {
+          "component_bounds": [
+            30,
+            70,
+            277,
+            462
+          ],
+          "source_pivot": [
+            150,
+            463
+          ],
+          "landmarks": {
+            "waist": 360,
+            "hip": 377,
+            "mid": 150,
+            "hem": [
+              394,
+              394
+            ],
+            "knee": [
+              411,
+              411
+            ],
+            "sock": [
+              424,
+              424
+            ],
+            "ankle": [
+              431,
+              431
+            ],
+            "centres": [
+              106,
+              194
+            ],
+            "foot_centres": [
+              101,
+              201
+            ],
+            "split_path_xy": [
+              [
+                150,
+                377
+              ],
+              [
+                150,
+                394
+              ],
+              [
+                151.0,
+                431
+              ],
+              [
+                151.0,
+                463
+              ]
+            ],
+            "step_width": 28,
+            "root_overlap": 3,
+            "auto_hand_mask": false
+          },
+          "foreground": 1,
+          "strength": 0.25
+        },
+        "right": {
+          "component_bounds": [
+            345,
+            72,
+            540,
+            462
+          ],
+          "source_pivot": [
+            450,
+            463
+          ],
+          "landmarks": {
+            "waist": 360,
+            "hip": 377,
+            "mid": 462,
+            "hem": [
+              394,
+              394
+            ],
+            "knee": [
+              411,
+              411
+            ],
+            "sock": [
+              424,
+              424
+            ],
+            "ankle": [
+              431,
+              431
+            ],
+            "centres": [
+              417,
+              493
+            ],
+            "foot_centres": [
+              418,
+              506
+            ],
+            "split_path_xy": [
+              [
+                462,
+                377
+              ],
+              [
+                462,
+                394
+              ],
+              [
+                462.0,
+                431
+              ],
+              [
+                462.0,
+                463
+              ]
+            ],
+            "step_width": 28,
+            "root_overlap": 3,
+            "auto_hand_mask": false
+          },
+          "foreground": 0,
+          "strength": 0.25
+        },
+        "up": {
+          "component_bounds": [
+            613,
+            72,
+            855,
+            461
+          ],
+          "source_pivot": [
+            738,
+            463
+          ],
+          "landmarks": {
+            "waist": 360,
+            "hip": 377,
+            "mid": 738,
+            "hem": [
+              394,
+              394
+            ],
+            "knee": [
+              411,
+              411
+            ],
+            "sock": [
+              424,
+              424
+            ],
+            "ankle": [
+              431,
+              431
+            ],
+            "centres": [
+              688,
+              788
+            ],
+            "foot_centres": [
+              688,
+              788
+            ],
+            "split_path_xy": [
+              [
+                738,
+                377
+              ],
+              [
+                738,
+                394
+              ],
+              [
+                738.0,
+                431
+              ],
+              [
+                738.0,
+                463
+              ]
+            ],
+            "step_width": 28,
+            "root_overlap": 3,
+            "auto_hand_mask": false
+          },
+          "foreground": 1,
+          "strength": 0.25
+        },
+        "left": {
+          "component_bounds": [
+            925,
+            73,
+            1118,
+            463
+          ],
+          "source_pivot": [
+            1012,
+            463
+          ],
+          "landmarks": {
+            "waist": 360,
+            "hip": 377,
+            "mid": 1012,
+            "hem": [
+              394,
+              394
+            ],
+            "knee": [
+              411,
+              411
+            ],
+            "sock": [
+              424,
+              424
+            ],
+            "ankle": [
+              431,
+              431
+            ],
+            "centres": [
+              975,
+              1045
+            ],
+            "foot_centres": [
+              971,
+              1053
+            ],
+            "split_path_xy": [
+              [
+                1012,
+                377
+              ],
+              [
+                1012,
+                394
+              ],
+              [
+                1012.0,
+                431
+              ],
+              [
+                1012.0,
+                463
+              ]
+            ],
+            "step_width": 28,
+            "root_overlap": 3,
+            "auto_hand_mask": false
+          },
+          "foreground": 1,
+          "strength": 0.25
+        },
+        "greet": {
+          "component_bounds": [
+            26,
+            490,
+            280,
+            874
+          ],
+          "source_pivot": [
+            150,
+            874
+          ]
+        },
+        "wait": {
+          "component_bounds": [
+            324,
+            490,
+            568,
+            873
+          ],
+          "source_pivot": [
+            447,
+            874
+          ]
+        },
+        "work": {
+          "component_bounds": [
+            609,
+            495,
+            864,
+            873
+          ],
+          "source_pivot": [
+            738,
+            874
+          ]
+        },
+        "review": {
+          "component_bounds": [
+            910,
+            491,
+            1152,
+            874
+          ],
+          "source_pivot": [
+            1030,
+            874
+          ]
+        },
+        "success": {
+          "component_bounds": [
+            18,
+            908,
+            282,
+            1289
+          ],
+          "source_pivot": [
+            149,
+            1290
+          ]
+        },
+        "failure": {
+          "component_bounds": [
+            330,
+            913,
+            565,
+            1290
+          ],
+          "source_pivot": [
+            447,
+            1290
+          ]
+        },
+        "look": {
+          "component_bounds": [
+            621,
+            907,
+            865,
+            1290
+          ],
+          "source_pivot": [
+            742,
+            1290
+          ]
+        },
+        "speaking": {
+          "component_bounds": [
+            913,
+            909,
+            1154,
+            1290
+          ],
+          "source_pivot": [
+            1035,
+            1290
+          ]
+        }
+      },
+      "mouth": {
+        "status": "source-limits-approved-pilot-final-encode-pending",
+        "sourcePose": "speaking",
+        "registration": {
+          "coordinateSpace": "registered512",
+          "crease_xy": [
+            [
+              242,
+              236
+            ],
+            [
+              249,
+              231
+            ],
+            [
+              257,
+              229
+            ],
+            [
+              265,
+              226
+            ],
+            [
+              272,
+              227
+            ],
+            [
+              281,
+              226
+            ],
+            [
+              290,
+              228
+            ],
+            [
+              297,
+              230
+            ]
+          ],
+          "max_opening_pixels": 6.36734693877551,
+          "sourceOpeningPixels": 6,
+          "nativeCropOrigin": [
+            105,
+            55
+          ],
+          "status": "main-source-limit-approved-for-pilot-final-encode"
+        },
+        "candidateProfile": {
+          "coordinateSpace": "registered512",
+          "crease_xy": [
+            [
+              242,
+              236
+            ],
+            [
+              249,
+              231
+            ],
+            [
+              257,
+              229
+            ],
+            [
+              265,
+              226
+            ],
+            [
+              272,
+              227
+            ],
+            [
+              281,
+              226
+            ],
+            [
+              290,
+              228
+            ],
+            [
+              297,
+              230
+            ]
+          ],
+          "max_opening_pixels": 6.36734693877551,
+          "sourceOpeningPixels": 6,
+          "nativeCropOrigin": [
+            105,
+            55
+          ],
+          "status": "main-source-limit-approved-for-pilot-final-encode"
+        }
+      },
+      "review": {
+        "sourceStatus": "pending-main-review",
+        "transitionStatus": "all-planted-actions-share-exact-down-neutral-endpoints",
+        "strideStatus": "uncalibrated-exact-sole-review-required",
+        "methodStatus": "main-method-direction-approved-final-assets-unapproved",
+        "findings": [
+          "Exact sole calibration outstanding",
+          "All encoded frames and integrated motion need final review",
+          "Work/review whole head tilt source limits approved for final-encode pilot",
+          "Only neutral front talk has fitted mouth; side/rear remain closed; phoneme alignment NOT RUN"
+        ]
+      },
+      "actions": {
+        "idle": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.65,
+          "nod_pixels": 0.5,
+          "lift_pixels": 0,
+          "sourcePose": "down"
+        },
+        "greet": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.8,
+          "nod_pixels": -1.5,
+          "lift_pixels": 0,
+          "sourcePose": "down",
+          "arm": {
+            "sourcePivot": [
+              88,
+              278
+            ],
+            "sourcePolygon": [
+              [
+                48,
+                232
+              ],
+              [
+                68,
+                232
+              ],
+              [
+                80,
+                277
+              ],
+              [
+                98,
+                287
+              ],
+              [
+                106,
+                325
+              ],
+              [
+                96,
+                357
+              ],
+              [
+                57,
+                358
+              ],
+              [
+                29,
+                342
+              ],
+              [
+                29,
+                301
+              ],
+              [
+                49,
+                278
+              ]
+            ],
+            "pivot": [
+              190.20408163265307,
+              283.67346938775506
+            ],
+            "polygon": [
+              [
+                147.75510204081633,
+                234.85714285714283
+              ],
+              [
+                168.9795918367347,
+                234.85714285714283
+              ],
+              [
+                181.71428571428572,
+                282.61224489795916
+              ],
+              [
+                200.81632653061223,
+                293.2244897959184
+              ],
+              [
+                209.30612244897958,
+                333.55102040816325
+              ],
+              [
+                198.6938775510204,
+                367.51020408163265
+              ],
+              [
+                157.30612244897958,
+                368.57142857142856
+              ],
+              [
+                127.59183673469386,
+                351.59183673469386
+              ],
+              [
+                127.59183673469386,
+                308.0816326530612
+              ],
+              [
+                148.81632653061223,
+                283.67346938775506
+              ]
+            ],
+            "feather_pixels": 4,
+            "radians": 0.09
+          }
+        },
+        "wait": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.45,
+          "nod_pixels": -0.7,
+          "lift_pixels": 0,
+          "sourcePose": "down"
+        },
+        "work": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.3,
+          "nod_pixels": 2,
+          "lift_pixels": 0,
+          "sourcePose": "down",
+          "arm": {
+            "sourcePivot": [
+              224,
+              279
+            ],
+            "sourcePolygon": [
+              [
+                203,
+                283
+              ],
+              [
+                245,
+                281
+              ],
+              [
+                273,
+                307
+              ],
+              [
+                276,
+                340
+              ],
+              [
+                254,
+                369
+              ],
+              [
+                212,
+                374
+              ],
+              [
+                193,
+                352
+              ],
+              [
+                185,
+                316
+              ]
+            ],
+            "pivot": [
+              334.53061224489795,
+              284.734693877551
+            ],
+            "polygon": [
+              [
+                312.2448979591837,
+                288.9795918367347
+              ],
+              [
+                356.81632653061223,
+                286.85714285714283
+              ],
+              [
+                386.53061224489795,
+                314.44897959183675
+              ],
+              [
+                389.7142857142857,
+                349.46938775510205
+              ],
+              [
+                366.36734693877554,
+                380.2448979591837
+              ],
+              [
+                321.7959183673469,
+                385.55102040816325
+              ],
+              [
+                301.63265306122446,
+                362.2040816326531
+              ],
+              [
+                293.1428571428571,
+                324.0
+              ]
+            ],
+            "feather_pixels": 4,
+            "radians": 0.09,
+            "lift_pixels": 3,
+            "lift_blend_pixels": 35
+          },
+          "head_radians": 0.08726646259971647,
+          "head_pivot": [
+            256,
+            278
+          ],
+          "attack_fraction": 0.45,
+          "recovery_fraction": 0.4
+        },
+        "review": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.2,
+          "nod_pixels": 3,
+          "lift_pixels": 0,
+          "sourcePose": "down",
+          "arm": {
+            "sourcePivot": [
+              224,
+              279
+            ],
+            "sourcePolygon": [
+              [
+                203,
+                283
+              ],
+              [
+                245,
+                281
+              ],
+              [
+                273,
+                307
+              ],
+              [
+                276,
+                340
+              ],
+              [
+                254,
+                369
+              ],
+              [
+                212,
+                374
+              ],
+              [
+                193,
+                352
+              ],
+              [
+                185,
+                316
+              ]
+            ],
+            "pivot": [
+              334.53061224489795,
+              284.734693877551
+            ],
+            "polygon": [
+              [
+                312.2448979591837,
+                288.9795918367347
+              ],
+              [
+                356.81632653061223,
+                286.85714285714283
+              ],
+              [
+                386.53061224489795,
+                314.44897959183675
+              ],
+              [
+                389.7142857142857,
+                349.46938775510205
+              ],
+              [
+                366.36734693877554,
+                380.2448979591837
+              ],
+              [
+                321.7959183673469,
+                385.55102040816325
+              ],
+              [
+                301.63265306122446,
+                362.2040816326531
+              ],
+              [
+                293.1428571428571,
+                324.0
+              ]
+            ],
+            "feather_pixels": 4,
+            "radians": 0.1,
+            "lift_pixels": 4,
+            "lift_blend_pixels": 35
+          },
+          "head_radians": 0.12217304763960307,
+          "head_pivot": [
+            256,
+            278
+          ],
+          "attack_fraction": 0.25,
+          "recovery_fraction": 0.32
+        },
+        "success": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.6,
+          "nod_pixels": -0.6,
+          "lift_pixels": 22,
+          "sourcePose": "down"
+        },
+        "failure": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 0.4,
+          "nod_pixels": 5,
+          "lift_pixels": 0,
+          "sourcePose": "down"
+        },
+        "look": {
+          "neck_y": 278,
+          "hip_y": 390,
+          "sway_pixels": 1.8,
+          "nod_pixels": 0.2,
+          "lift_pixels": 0,
+          "sourcePose": "down"
+        }
+      },
+      "strideDistance": 6.890756302521006,
+      "gaitCalibration": {
+        "status": "measured-current-pilot-approach-speed-blocked",
+        "atlasSha256": "7ff3de17174fed5f2be3015a7276a82ebde3bd97decea3b3a7cf6e5e5e2287d2",
+        "gameUnitsPerPixel": 0.5882352941176471,
+        "rightDistance": 7.058823529411763,
+        "leftDistance": 6.7226890756302495,
+        "stanceSamples": 28,
+        "shoeLengthPixels": 30,
+        "approachUnitsPerSecond": 88,
+        "approachCyclesPerSecond": 12.770731707317077,
+        "findings": [
+          "Sinusoidal source field retains nonzero residual; exact marker and runtime visual review required",
+          "88 units per second requires unreadably fast tiny shuffle; broader authored contacts or coherent stronger gait required",
+          "Route speed preserved; measured stride is diagnostic and does not approve gait"
+        ]
+      }
+    }
+  }
+}

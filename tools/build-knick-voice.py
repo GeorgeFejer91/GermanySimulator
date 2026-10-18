@@ -4,8 +4,8 @@ Uses existing local authoring environments; never downloads a model, creates a
 profile, edits dialogue, or grants listening approval. Failed takes stay private.
 Run --plan first, --render in the Chatterbox environment, then --process in the
 faster-whisper environment. Knick is the default; --request-file supports the
-curated street-wisdom, office reply and bounded city dialogue families. City
-processing remains private pending the reviewed curator export. --check verifies
+curated street-wisdom, office reply, bounded city and complete quiz prompts. City
+and quiz processing remain private pending reviewed curator export. --check verifies
 the existing shipped families.
 """
 import argparse
@@ -54,6 +54,11 @@ def read(path):
 
 
 AUTHORING_HELPER_SHA256 = sha(Path(__file__))
+QUIZ_SOURCE_STATUS = "SOURCE_ONLY_NOT_GENERATION_OR_ADMISSION"
+QUIZ_SOURCE_SCOPE = "street-quiz-prompts-v1"
+QUIZ_SOURCE_FILES = ("game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js",
+                     "For-AI/QUIZ-CHARACTER-DICTIONARY.js", "tests/quiz-harness.mjs",
+                     "tools/build-quiz-voice-requests.mjs", "tools/build-knick-voice.py")
 BINDING = read(ROOT / "For-AI/VOICE-CAST.json")["productionVoices"][VOICE]
 PROFILE, REFERENCE_HASH, REVISION, PROCESSING = (BINDING[key] for key in ("profileId", "referenceSha256", "modelRevision", "processing"))
 assert BINDING["renderer"] == "ResembleAI/Chatterbox Multilingual V2 0.1.7"
@@ -221,6 +226,7 @@ def processing_hash(value):
 
 def manifest_name(ambient=False):
     assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1"), "Named reactive public export requires the separate reviewed curator admission"
+    assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == QUIZ_SOURCE_SCOPE), "Quiz prompt export must remain private pending separate reviewed curator admission"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "crowd-dialogue":
         return VOICE + "-crowd-manifest.json"
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-monologue":
@@ -232,6 +238,25 @@ def manifest_name(ambient=False):
 
 def source_hashes():
     return {name: sha(ROOT / name) for name in SOURCE_FILES}
+
+
+def quiz_prompt_plan(request):
+    selection = request.get("selection")
+    assert isinstance(selection, dict), "Quiz preparation requires one complete selected prompt"
+    assert selection.get("voiceId") == VOICE, "Quiz request must retain its one selected voice"
+    assert type(selection.get("approachIndex")) is int, "Quiz approach index must be an integer"
+    command = ["node", str(ROOT / "tools/build-quiz-voice-requests.mjs")]
+    for option, key in (("--voice-id", "voiceId"), ("--region", "region"),
+                        ("--question-id", "questionId"), ("--approach-index", "approachIndex")):
+        command.extend((option, str(selection[key])))
+    current = json.loads(subprocess.check_output(command, cwd=ROOT, encoding="utf-8", timeout=30))
+    assert json.dumps(request, sort_keys=True) == json.dumps(current, sort_keys=True), "Quiz source, subtitle, order, existing recording or selected binding changed"
+    assert 1 <= len(current["jobs"]) <= 3, "Quiz prompt must have one to three missing parts; reuse complete recordings"
+    return {**current, "family": "quiz-dialogue", "sourceScope": QUIZ_SOURCE_SCOPE,
+            "publicAssetFamily": "assets/voices/quiz-segments",
+            "privateReviewFamily": "GermanySimulator quiz prompt review 2026-10-18",
+            "authoringHelperSha256": AUTHORING_HELPER_SHA256,
+            "sourceSha256": {**current["sourceSha256"], "tools/build-knick-voice.py": AUTHORING_HELPER_SHA256}}
 
 
 def configure_request(args):
@@ -251,8 +276,11 @@ def configure_request(args):
     assert REVISION == "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
     if args.request_file:
         plan = read(args.request_file)
+        quiz_source = plan.get("status") == QUIZ_SOURCE_STATUS
+        if quiz_source:
+            plan = quiz_prompt_plan(plan)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror", "city-dialogue", "crowd-dialogue")
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror", "city-dialogue", "crowd-dialogue", "quiz-dialogue")
         if plan["family"] in ("office-monologue", "office-mirror"):
             assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
         if plan["family"] == "crowd-dialogue":
@@ -278,6 +306,13 @@ def configure_request(args):
             SOURCE_FILES = ("game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js")
             if plan.get("sourceScope") == "named-crowd-reactive-v1":
                 assert plan["sourceSha256"] == source_hashes(), "Named reactive authored source pins changed"
+        elif plan["family"] == "quiz-dialogue":
+            assert quiz_source and plan.get("sourceScope") == QUIZ_SOURCE_SCOPE, "Quiz family requires the exact source-only complete prompt"
+            assert not any(getattr(args, flag, False) for flag in ("manifest", "check", "retake_failed", "follow_source", "follow", "reconcile_source", "sentence_rescue", "eos_after_alignment", "benchmark_hooks", "benchmark_asr")), "Quiz source requests stay private and immutable; no export, source following, rescue or retake"
+            assert args.limit is None or type(args.limit) is int and 1 <= args.limit <= len(plan["jobs"]), "Quiz limit must select from the missing-parts queue"
+            assert not args.render or args.observe_eos, "Quiz synthesis requires native EOS observation"
+            SOURCE_FILES = QUIZ_SOURCE_FILES
+            assert plan["sourceSha256"] == source_hashes(), "Quiz source or authoring helper changed"
         elif plan["family"] == "city-dialogue":
             assert VOICE.startswith("stadt-"), "City family requires an owned city voice"
             assert plan["publicAssetFamily"] == "assets/voices/city-dialogue", "City public asset scope changed"
@@ -738,6 +773,10 @@ def validate_crowd_manifest(document, requested, voice):
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
+        if CUSTOM_PLAN["family"] == "quiz-dialogue":
+            assert CUSTOM_PLAN["sourceSha256"] == source_hashes(), "Quiz source changed after validation"
+            REUSE_EVIDENCE.extend(row for row in CUSTOM_PLAN["segments"] if row["existingDefault"])
+            return [dict(job) for job in CUSTOM_PLAN["jobs"]]
         if CUSTOM_PLAN["family"] == "city-dialogue":
             authored = {job["clipId"]: job for job in city_dialogue_sources()}
             requested = CUSTOM_PLAN["jobs"]
@@ -816,7 +855,7 @@ console.log(JSON.stringify({barks,english:window.GermanySimulatorAudioText.pools
             authored = [(f"player-registration-{key.lower()}-{index + 1}", choice["label"], f"buergeramt-story.js registration.nodes.{key}.choices[{index}].label")
                         for key, node in story["registration"]["nodes"].items() for index, choice in enumerate(node["choices"])]
             runtime = (ROOT / "buergeramt.js").read_text(encoding="utf-8")
-            for key, text in (("phone-silent", "Telefon auf lautlos schalten."), ("phone-ignore", "Nicht rangehen. Telefon weglegen."), ("complete", "Meldebestätigung und A38 mitnehmen.")):
+            for key, text in (("complete", "Meldebestätigung und A38 mitnehmen."),):
                 assert "label:" + json.dumps(text, ensure_ascii=False) in runtime, "Authored player runtime choice changed"
                 authored.append(("player-" + key, text, "buergeramt.js choice.label " + key))
             selected = [dict(job) for job in CUSTOM_PLAN["jobs"] if job["voiceId"] == VOICE]
@@ -1216,6 +1255,7 @@ def render(args, queue, private):
 def process(args, queue, private, all_jobs=None, publish_manifest=True):
     global ASR_CACHE
     assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1" and publish_manifest), "Named reactive processing must remain private for reviewed curator admission"
+    assert not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == QUIZ_SOURCE_SCOPE and publish_manifest), "Quiz processing must remain private for reviewed curator admission"
     import numpy as np
     from faster_whisper import WhisperModel
     cache_key = (str(args.asr_model.resolve()), args.asr_device, "int8", args.asr_threads)
@@ -1548,6 +1588,8 @@ def manifest(queue, private, ambient=False):
     filename = manifest_name(ambient)
     public_path = ROOT / PUBLIC_ASSET_FAMILY / filename
     existing = {row["clipId"]: row for row in read(public_path)["clips"]} if public_path.exists() else {}
+    if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-replies":
+        assert existing.keys() <= {job["clipId"] for job in queue}, "Historical office reply metadata needs separate retirement before replacing its published manifest"
     identity_keys = ("clipId", "voiceId", "profileId", "text", "referenceSha256", "referenceOriginalSha256", "renderer", "modelRevision", "processing")
     family_reference_license = reference_license({}) if CUSTOM_PLAN else None
     clips, held = [], []
@@ -1661,7 +1703,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--music-root", type=Path, required=True)
     parser.add_argument("--voice-id", default="amt-brunhilde-knick", help="Selected production voice, or all for one cached-model family batch; other characters require --request-file")
-    parser.add_argument("--request-file", type=Path, help="Frozen authored street, office or city plan; shared synthesis and audit pipeline")
+    parser.add_argument("--request-file", type=Path, help="Frozen authored street, office, city or source-only complete quiz prompt; shared synthesis and audit pipeline")
     parser.add_argument("--model-dir", type=Path)
     parser.add_argument("--asr-model", type=Path)
     parser.add_argument("--ffmpeg", type=Path)
@@ -1686,6 +1728,7 @@ def main():
     if args.voice_id == "all":
         assert args.request_file and not args.ambient, "All-voice batches require a frozen custom family plan"
         plan = read(args.request_file)
+        assert plan.get("status") != QUIZ_SOURCE_STATUS, "Quiz prompts require one selected voice, not an all-voice batch"
         if plan["family"] == "city-dialogue":
             assert plan["jobs"], "City requests must be a finite unique subset"
         for voice in dict.fromkeys(job["voiceId"] for job in plan["jobs"]):
@@ -1712,6 +1755,10 @@ def execute(args):
         if CUSTOM_PLAN.get("sourceScope") == "named-crowd-reactive-v1":
             private = private / "named-crowd-reactive-v1"
         private = private / VOICE
+        if CUSTOM_PLAN.get("sourceScope") == QUIZ_SOURCE_SCOPE:
+            selection = CUSTOM_PLAN["selection"]
+            assert re.fullmatch(r"[A-Za-z0-9-]+", selection["questionId"]), "Unsafe quiz question path"
+            private = private / (selection["region"] + "-" + selection["questionId"] + "-approach-" + str(selection["approachIndex"]))
     assert private.resolve().is_relative_to(args.music_root.resolve())
     if args.ambient:
         private = private / "ambient"
@@ -1740,9 +1787,15 @@ def execute(args):
             frozen_plan.update({"sourceScope": "named-crowd-reactive-v1", "authoringHelperSha256": AUTHORING_HELPER_SHA256})
             if (private / "requests.json").exists():
                 assert read(private / "requests.json") == frozen_plan, "Named reactive request already frozen; it cannot be replaced"
+        if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == QUIZ_SOURCE_SCOPE:
+            frozen_plan.update({"sourceScope": QUIZ_SOURCE_SCOPE, "authoringHelperSha256": AUTHORING_HELPER_SHA256,
+                                "authoredPlanSourceSha256": {name: value for name, value in CUSTOM_PLAN["sourceSha256"].items() if name != "tools/build-knick-voice.py"},
+                                "quizSelection": CUSTOM_PLAN["selection"]})
+            if (private / "requests.json").exists():
+                assert read(private / "requests.json") == frozen_plan, "Quiz request already frozen; it cannot be replaced"
         if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue" and (private / "requests.json").exists():
             assert read(private / "requests.json") == frozen_plan, "City request already frozen; use the existing explicit source reconciliation"
-        if not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1") and (private / "requests.json").exists()):
+        if not (CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1", QUIZ_SOURCE_SCOPE) and (private / "requests.json").exists()):
             write(private / "requests.json", frozen_plan)
         print(json.dumps({"requestedLineCount": len(queue), "registrationLineCount": sum("registration-" in job["clipId"] for job in queue), "privateRoot": str(private)}, ensure_ascii=False))
         return
@@ -1764,6 +1817,13 @@ def execute(args):
         assert frozen.get("authoredPlanSha256") == sha(args.request_file), "Named reactive authored request bytes changed"
         assert frozen.get("authoredPlanSourceSha256") == CUSTOM_PLAN["sourceSha256"] == hashes
         assert frozen.get("requestedLineCount") == 28, "Named reactive freeze must retain all 28 owned rows"
+    if CUSTOM_PLAN and CUSTOM_PLAN.get("sourceScope") == QUIZ_SOURCE_SCOPE:
+        assert frozen.get("sourceScope") == QUIZ_SOURCE_SCOPE, "Historical quiz requests cannot become this prompt scope"
+        assert frozen.get("authoringHelperSha256") == AUTHORING_HELPER_SHA256, "Quiz frozen producer changed"
+        assert frozen.get("authoredPlanSha256") == sha(args.request_file), "Quiz authored request bytes changed"
+        assert frozen.get("authoredPlanSourceSha256") == {name: value for name, value in hashes.items() if name != "tools/build-knick-voice.py"}
+        assert frozen.get("quizSelection") == CUSTOM_PLAN["selection"] and frozen.get("requestedLineCount") == len(queue)
+        assert frozen.get("approvedExistingReuse") == REUSE_EVIDENCE, "Quiz existing-recording evidence changed"
     if args.manifest:
         manifest(queue, private, args.ambient)
     elif args.render:
@@ -1773,7 +1833,7 @@ def execute(args):
     else:
         process(args, queue[:args.limit] if args.limit else queue, private, queue,
                 publish_manifest=not (CUSTOM_PLAN and (CUSTOM_PLAN["family"] == "city-dialogue"
-                                                     or CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1"))))
+                                                     or CUSTOM_PLAN.get("sourceScope") in (SANDALE_SOURCE_SCOPE, "named-crowd-reactive-v1", QUIZ_SOURCE_SCOPE))))
 
 
 if __name__ == "__main__":

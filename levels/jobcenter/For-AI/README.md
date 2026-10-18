@@ -21,3 +21,8 @@ node --test tests/jobcenter.test.mjs
 ```
 
 [`tools/playtest-jobcenter.mjs`](../../../tools/playtest-jobcenter.mjs) is the existing silent desktop/Android-emulation probe. It checks input, approach/media behavior, visibility and return through production handlers; its city placement is an explicit diagnostic shortcut. Inspect its requirements before execution, and distinguish that scope from a natural route or a physical-device run. Apply global input, event-causality, performance and independent world-review routes for the affected change; this focused test alone is not complete acceptance.
+
+<!-- rtk-workflow -->
+## Shell output
+
+Prefer supported RTK filters for human-read shell output; see the [RTK skill](skills/rtk/SKILL.md). Keep exact reads and parser input raw. Use bounded native commands when RTK is unavailable.

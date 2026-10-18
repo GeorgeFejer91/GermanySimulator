@@ -12,7 +12,8 @@ assert.ok(start>=0&&end>start);
 // Execute the maintained functions in a synthetic filesystem; no native,
 // private, profile, audio or model input is used by these tests.
 const fragment=copy.slice(start,end).replaceAll('export function ','function ');
-const helper=digest(readFileSync(new URL('../tools/build-knick-voice.py',import.meta.url)));
+// These synthetic receipts belong to the historical approved producer.
+const helper='c40faafb6a62c5858b6a85c37d277b86d7d0efbdaf74ce61cc8b058a8524096c';
 const columns=['clipId','voiceId','actorId','region','slot','sourceLocator','text','english','profileId','referenceSha256','referenceOriginalSha256','renderer','modelRevision','processing'];
 function fixture(){
  const root=resolve('synthetic-sandale-source'),files=new Map(),put=(path,value)=>files.set(resolve(path),typeof value==='string'?value:JSON.stringify(value));
@@ -38,6 +39,11 @@ test('extract eight exact slots, two roles and four slots per voice',()=>{
  f.plan.jobs.reverse();assert.equal(f.context.sandaleFullPlan(f.cast,f.snapshot(),f.root).authored.keys().next().value,f.plan.jobs[0].clipId);
 });
 for(const [name,change] of Object.entries({missingScope:f=>delete f.plan.sourceScope,oldCrowdScope:f=>f.plan.sourceScope='remaining27-first-takes',wrongHelper:f=>f.plan.authoringHelperSha256='0'.repeat(64),partial:f=>f.plan.jobs.pop(),duplicate:f=>f.plan.jobs[1]=f.plan.jobs[0],actorBorrow:f=>f.plan.jobs[0]={...f.plan.jobs[0],actorId:'crowd-baerbel-brezel'},voiceBorrow:f=>f.plan.jobs[0]={...f.plan.jobs[0],voiceId:'crowd-baerbel-brezel'},textDrift:f=>f.plan.jobs[0]={...f.plan.jobs[0],text:'Changed'},subtitleDrift:f=>f.plan.jobs[0]={...f.plan.jobs[0],english:'Changed'},extraField:f=>f.plan.jobs[0]={...f.plan.jobs[0],archetypeId:'towel-man'},sourcePin:f=>f.plan.sourceSha256['game.js']='0'.repeat(64)}))test('reject request '+name,()=>{const f=fixture();change(f);assert.throws(()=>f.context.sandaleFullPlan(f.cast,f.snapshot(),f.root));});
+
+test('historical Sandale authority rejects different producer file bytes',()=>{
+ const f=fixture();f.context.hash=path=>resolve(path)===resolve(f.root,'tools/build-knick-voice.py')?'f'.repeat(64):f.hash(path);
+ assert.throws(()=>f.context.sandaleFullPlan(f.cast,f.snapshot(),f.root),/source\/producer pins changed/);
+});
 test('role or archetype profile borrowing fails source extraction',()=>{const f=fixture();f.cast.roleProfiles[0].secretTunnelProfileId=f.cast.roleProfiles[1].secretTunnelProfileId;assert.throws(()=>f.context.sandaleSourceMap(f.cast,f.root));});
 for(const [name,change] of Object.entries({extraArchetype:f=>f.archetypes.push({...f.archetypes[0],id:'extra'}),extraRegion:f=>f.archetypes[0].barks.extra=['one','two'],archetypeBorrow:f=>f.archetypes[0].voiceId=f.archetypes[1].voiceId,missingOwnership:f=>f.cast.roleProfiles[0].dialogueSources=[],referenceDrift:f=>f.cast.roleProfiles[0].reference.workingReferenceSha256='0'.repeat(64),licenseDrift:f=>f.cast.roleProfiles[0].reference.license='unknown',processingDrift:f=>f.cast.productionVoices[f.archetypes[0].voiceId].processing='new filter'}))test('reject source '+name,()=>{const f=fixture();change(f);f.put(resolve(f.root,'game.js'),'const crowdArchetypes=Object.freeze('+JSON.stringify(f.archetypes)+');\nconst crowdCharacterBarks=Object.freeze({});');assert.throws(()=>f.context.sandaleSourceMap(f.cast,f.root));});
 function heldPreparation(){

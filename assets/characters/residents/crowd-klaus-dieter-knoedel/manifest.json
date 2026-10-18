@@ -1,0 +1,821 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "frame_size": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    148
+  ],
+  "cols": 16,
+  "rows": 13,
+  "walks": {
+    "down": {
+      "row": 0,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "right": {
+      "row": 1,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "up": {
+      "row": 2,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "left": {
+      "row": 3,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    }
+  },
+  "bridges": {
+    "down": {
+      "row": 4,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "right": {
+      "row": 5,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "up": {
+      "row": 6,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "left": {
+      "row": 7,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    }
+  },
+  "transitions": {
+    "down-to-right": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-up": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-left": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-down": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-up": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-left": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-down": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-right": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-left": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-down": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-right": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-up": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    }
+  },
+  "turns": {
+    "pose_count": 8,
+    "rows": [
+      8
+    ],
+    "anchors": {
+      "down": 0,
+      "right": 2,
+      "up": 4,
+      "left": 6
+    },
+    "frame_ms": 85
+  },
+  "variants": {
+    "desktop": {
+      "image": "character-desktop.webp",
+      "sha256": "89beacddafad9f20fbedb1fa4d171b383f31592da638fe7eb1678c0fa2b94b5a",
+      "bytes": 1315234,
+      "frame_size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        148
+      ],
+      "image_size": [
+        2048,
+        2080
+      ],
+      "decodedRGBABytes": 17039360,
+      "minimumGutter": 9
+    },
+    "mobile": {
+      "image": "character-mobile.webp",
+      "sha256": "a3b11b191269951118bebfb2c7ca8878692ba382d6539bf6b7537d1347197a08",
+      "bytes": 422778,
+      "frame_size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32.0,
+        74.0
+      ],
+      "image_size": [
+        1024,
+        1040
+      ],
+      "decodedRGBABytes": 4259840,
+      "minimumGutter": 4
+    }
+  },
+  "delivery": {
+    "image": "character-desktop.webp",
+    "sha256": "89beacddafad9f20fbedb1fa4d171b383f31592da638fe7eb1678c0fa2b94b5a",
+    "bytes": 1315234,
+    "frame_size": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      148
+    ],
+    "image_size": [
+      2048,
+      2080
+    ],
+    "decodedRGBABytes": 17039360,
+    "minimumGutter": 9
+  },
+  "image": "character-desktop.webp",
+  "sha256": "89beacddafad9f20fbedb1fa4d171b383f31592da638fe7eb1678c0fa2b94b5a",
+  "image_size": [
+    2048,
+    2080
+  ],
+  "cycle_distance": 9.5,
+  "cycleDistanceStatus": "provisional-unmeasured-native-shoe-tracking-required",
+  "figureWorldHeight": 2.0,
+  "billboardWorldHeight": 2.5,
+  "interactions": {
+    "neutral": {
+      "row": 4,
+      "col": 2
+    },
+    "states": {
+      "idle": {
+        "row": 9,
+        "durations_ms": [
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "look": {
+        "row": 10,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "success": {
+        "row": 11,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "failure": {
+        "row": 12,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      }
+    }
+  },
+  "source": "assets/sprite-sources/street-residents/crowd-klaus-dieter-knoedel-directions-candidate.png",
+  "sourceSha256": "31a8d0c766f79916e5371eead5b60b3c8a43e353febe251c4cc5537954c0696c",
+  "sourceBindings": {
+    "sources": [
+      {
+        "path": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-clean-candidate.png",
+        "sha256": "617400c7f6687a45fdad9169a2691dfdc65f80b964437c9d75c35647b238c6b8"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+        "sha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156"
+      },
+      {
+        "path": "assets/sprite-sources/street-residents/crowd-klaus-dieter-knoedel-directions-candidate.png",
+        "sha256": "31a8d0c766f79916e5371eead5b60b3c8a43e353febe251c4cc5537954c0696c"
+      }
+    ],
+    "fittingSha256": "8ae7111079d66a76929764c4f7b2a36ac7247a01bfbacf19eefd7e739c07f047",
+    "builderSha256": "885bc5401dd9394b9616f24ce34f71b3474931f0c5a262fba054ab27b6eedc9f",
+    "deformationSha256": "b62101945d9601a2e910982d3dfb5a1684206efe18389bb11bb04b08fd8718fd"
+  },
+  "limitations": [
+    "Eight planted painted views; ordered turn review pending.",
+    "Profile hidden-limb coverage and prop masks require native review.",
+    "No waving/working/answer-review gesture art or speech articulation supplied.",
+    "Browser/game-scale/physical-device review not run by asset builder."
+  ]
+}

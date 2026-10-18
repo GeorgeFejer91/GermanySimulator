@@ -1,0 +1,39 @@
+{
+  "status": "Separate source candidate only; no runtime atlas or manifest changes",
+  "tool": "built-in image_gen.imagegen",
+  "candidate": "right-far-leg-shoe-candidate-v3.png",
+  "originalToolOutput": "exec-eeb0fa3b-843c-491b-9c35-cd9e526505b9.png",
+  "prompt": "right-far-leg-shoe-candidate-v3-prompt.txt",
+  "reference": "output/street-speaker-motion/hartmut-keller/original-right-near-shoe-reference.png",
+  "fit": [
+    {
+      "file": "right-far-leg-v1.png",
+      "sha256": "3644832fa2287aa83ee917630bffee2bda55e35a29a4d367ef573e777a316b63",
+      "alpha20Bounds": [
+        431,
+        452,
+        902,
+        1018
+      ],
+      "fitWidth": 88,
+      "fitHeight": 105.74946921443735,
+      "fitGroundY": 471,
+      "fitX": 248
+    },
+    {
+      "file": "right-far-leg-shoe-candidate-v3.png",
+      "sha256": "4c947e2b5d89d7595d070d521d124adb5654d0ee51a88bf733e88803f1c25241",
+      "alpha20Bounds": [
+        381,
+        335,
+        958,
+        1049
+      ],
+      "fitWidth": 88,
+      "fitHeight": 108.89428076256499,
+      "fitGroundY": 471,
+      "fitX": 248
+    }
+  ],
+  "note": "Fit is diagnostic only, same uniform width88, soleY471 and X248 as frozen builder. No trajectory or source bitmap changed. Candidate leg root is about4workingpixels taller after uniform fit; retain existing original upper leg if later composited as shoe-only repair."
+}

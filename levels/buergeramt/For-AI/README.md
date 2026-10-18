@@ -33,3 +33,8 @@ node --test tests/buergeramt-entry.test.mjs tests/buergeramt-session.test.mjs te
 ```
 
 Existing browser probes include [`playtest-buergeramt-navigation`](../../../tools/playtest-buergeramt-navigation.mjs), [`playtest-anmeldung`](../../../tools/playtest-anmeldung.mjs) and [`playtest-amt-audio-handoff`](../../../tools/playtest-amt-audio-handoff.mjs). Inspect the selected probe's environment/output requirements first. Follow [silent background testing](../../../For-AI/AGENT-START.md#silent-background-browser-tests); report direct/forced entry, simulated signaling, emulation and silent audio-state checks accurately. Apply the global event-causality and independent world-review routes when affected.
+
+<!-- rtk-workflow -->
+## Shell output
+
+Prefer supported RTK filters for human-read shell output; see the [RTK skill](skills/rtk/SKILL.md). Keep exact reads and parser input raw. Use bounded native commands when RTK is unavailable.

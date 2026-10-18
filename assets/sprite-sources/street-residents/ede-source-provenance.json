@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "jwd-ede-einbruch",
+  "actorId": "jwd-burglar",
+  "name": "Ede",
+  "file": "assets/sprite-sources/street-residents/jwd-ede-einbruch-directions-candidate.png",
+  "sha256": "6e2efdebefa2caba239b32d63af2f6faeecca399b3a2b699232012973e9041b1",
+  "dimensions": [
+    2172,
+    724
+  ],
+  "generator": "OpenAI built-in imagegen",
+  "generatedFile": "exec-dc5b4454-ad94-4892-9d07-c8247b023417.png",
+  "status": "candidate-unapproved",
+  "poseOrder": [
+    "down",
+    "right",
+    "up",
+    "left"
+  ],
+  "styleAuthority": "For-AI/CITY-CHARACTER-STYLE.md",
+  "references": [
+    {
+      "file": "assets/sprite-sources/neighbors/directions.png",
+      "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+      "sha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+    }
+  ],
+  "costumeAuthority": "world3d.js jwdCharacter burglar costume: charcoal/cream striped jumper, eye mask, cap, empty brown sack",
+  "authoringBrief": "Distinct fictional weary middle-aged burglar with grey stubble and crooked nose; compact short body and oversized head, charcoal cap/mask/striped jumper/trousers and broad brown shoes; one empty brown sack on anatomical right shoulder/hip, right hand holding strap and left hand free; true front/right/rear/left whole-body views on transparent background, closed lips and shared figure scale/baseline.",
+  "sourceObservations": [
+    "Original face remains mature and resigned beneath the eye mask; no generic head reused.",
+    "Front and rear retain right-owned bag/strap and grey hair under cap; both full profiles turn whole costume/feet.",
+    "All four figures have complete broad shoes, visible connected wrists and short trousers/torso; no clipped head or tool added."
+  ],
+  "remaining": [
+    "Native/light/dark source gate and exact family registration",
+    "Connected gait/action/turn and fitted mouth export",
+    "Actual runtime depth/scale/interaction checks"
+  ],
+  "runtimeUse": false
+}

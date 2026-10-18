@@ -3,26 +3,26 @@ globalThis.CharacterInteractions=(()=>{
  const point=(row,col,ms,role)=>({row,col,ms,role});
  function request(n,names,m,options={}){
   names=Array.isArray(names)?names:[names];
-  if(!n||!m?.interactions||!names.length||names.some(s=>s==='look'?!m.interactions.look:!m.interactions.states[s]))return false;
+  if(!n||!m?.interactions||!names.length||names.some(s=>s==='look'?!m.interactions.look&&!m.interactions.states[s]:!m.interactions.states[s]))return false;
   n.interactionRequest={names:[...names],options};return true;
  }
  function plan(n,m,job){
-  const from=n.touristFacing||'down',frames=[],phase=Math.min(7,Math.max(0,n.spriteFrame||0));
+  const from=n.touristFacing||'down',frames=[],count=m.walks[from].frames??8,phase=Math.min(count-1,Math.max(0,n.spriteFrame||0));
   const put=(p,role)=>frames.push({...p,role}),b=m.bridges;
-  for(let col=phase+1;col<8;col++)put(point(m.walks[from].row,col,80),'settle');
+  for(let col=phase+1;col<count;col++)put(point(m.walks[from].row,col,Math.min(80,m.walks[from].frame_ms)),'settle');
   if(from==='down')for(const col of b.down.stop_cols)put(point(b.down.row,col,b.down.frame_ms),'settle');
   else for(const p of m.transitions[from+'-to-down'].frames.slice(0,-b.down.start_cols.length))put(p,'settle');
-  const idle=m.interactions.states.idle,neutral=()=>put(point(idle.row,0,120),'reaction');neutral();
+  const idle=m.interactions.neutral||m.interactions.states.idle,neutral=()=>put(point(idle.row,idle.col||0,120),'reaction');neutral();
   for(const name of job.names){
-   if(name==='look'){
+   if(name==='look'&&m.interactions.look){
     const cells=m.interactions.look.frames,target=((job.options.lookIndex??8)%16+16)%16,delta=((target-8+24)%16)-8,route=[8];
     for(let i=1;i<=Math.abs(delta);i++)route.push((8+Math.sign(delta)*i+16)%16);
     for(const i of route)put({...cells[i],ms:i===target?240:85},'reaction');
     for(const i of route.slice(0,-1).reverse())put({...cells[i],ms:85},'reaction');
    }else{
     const s=m.interactions.states[name];
-    for(let col=0;col<s.durations_ms.length;col++)put(point(s.row,col,s.durations_ms[col]),'reaction');
-    if(['waving','working','waiting','review'].includes(name))for(let col=s.durations_ms.length-2;col>=0;col--)put(point(s.row,col,80),'reaction');
+    for(let col=0;col<s.durations_ms.length;col++)put(point(s.row,(s.col||0)+col,s.durations_ms[col]),'reaction');
+    if(['waving','working','waiting','review'].includes(name))for(let col=s.durations_ms.length-2;col>=0;col--)put(point(s.row,(s.col||0)+col,80),'reaction');
    }
    neutral();
   }

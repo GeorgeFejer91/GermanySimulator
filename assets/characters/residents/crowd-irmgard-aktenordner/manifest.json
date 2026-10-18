@@ -1,0 +1,821 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "frame_size": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    148
+  ],
+  "cols": 16,
+  "rows": 13,
+  "walks": {
+    "down": {
+      "row": 0,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "right": {
+      "row": 1,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "up": {
+      "row": 2,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "left": {
+      "row": 3,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    }
+  },
+  "bridges": {
+    "down": {
+      "row": 4,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "right": {
+      "row": 5,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "up": {
+      "row": 6,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "left": {
+      "row": 7,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    }
+  },
+  "transitions": {
+    "down-to-right": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-up": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-left": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-down": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-up": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-left": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-down": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-right": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-left": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-down": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-right": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-up": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    }
+  },
+  "turns": {
+    "pose_count": 8,
+    "rows": [
+      8
+    ],
+    "anchors": {
+      "down": 0,
+      "right": 2,
+      "up": 4,
+      "left": 6
+    },
+    "frame_ms": 85
+  },
+  "variants": {
+    "desktop": {
+      "image": "character-desktop.webp",
+      "sha256": "b21c9476a2abde5a012f81e7e1e49f8440fb7615a3e5d792df7a8242db0a6f6a",
+      "bytes": 1370090,
+      "frame_size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        148
+      ],
+      "image_size": [
+        2048,
+        2080
+      ],
+      "decodedRGBABytes": 17039360,
+      "minimumGutter": 9
+    },
+    "mobile": {
+      "image": "character-mobile.webp",
+      "sha256": "43880cb7d5f9e9ad6be5ee02e6faf9f816491f8d84da50104d71b6696cc339e9",
+      "bytes": 441438,
+      "frame_size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32.0,
+        74.0
+      ],
+      "image_size": [
+        1024,
+        1040
+      ],
+      "decodedRGBABytes": 4259840,
+      "minimumGutter": 4
+    }
+  },
+  "delivery": {
+    "image": "character-desktop.webp",
+    "sha256": "b21c9476a2abde5a012f81e7e1e49f8440fb7615a3e5d792df7a8242db0a6f6a",
+    "bytes": 1370090,
+    "frame_size": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      148
+    ],
+    "image_size": [
+      2048,
+      2080
+    ],
+    "decodedRGBABytes": 17039360,
+    "minimumGutter": 9
+  },
+  "image": "character-desktop.webp",
+  "sha256": "b21c9476a2abde5a012f81e7e1e49f8440fb7615a3e5d792df7a8242db0a6f6a",
+  "image_size": [
+    2048,
+    2080
+  ],
+  "cycle_distance": 9.5,
+  "cycleDistanceStatus": "provisional-unmeasured-native-shoe-tracking-required",
+  "figureWorldHeight": 2.0,
+  "billboardWorldHeight": 2.5,
+  "interactions": {
+    "neutral": {
+      "row": 4,
+      "col": 2
+    },
+    "states": {
+      "idle": {
+        "row": 9,
+        "durations_ms": [
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "look": {
+        "row": 10,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "success": {
+        "row": 11,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "failure": {
+        "row": 12,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      }
+    }
+  },
+  "source": "assets/sprite-sources/street-residents/crowd-irmgard-aktenordner-directions-candidate.png",
+  "sourceSha256": "f0f077dec8f524ddf1ef03855fe2a6319962361c8fbb3e1f75be2d2ef5f4314c",
+  "sourceBindings": {
+    "sources": [
+      {
+        "path": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/profiles-clean-candidate.png",
+        "sha256": "a3022447007e58fe756048ff034eda649fb7a6f179247f4f8858abd60e9718ad"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+        "sha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031"
+      },
+      {
+        "path": "assets/sprite-sources/street-residents/crowd-irmgard-aktenordner-directions-candidate.png",
+        "sha256": "f0f077dec8f524ddf1ef03855fe2a6319962361c8fbb3e1f75be2d2ef5f4314c"
+      }
+    ],
+    "fittingSha256": "3a47f3b9363c6d582ba216a73e2b60cf0333f6e23a2529b84415099142f8e1fa",
+    "builderSha256": "885bc5401dd9394b9616f24ce34f71b3474931f0c5a262fba054ab27b6eedc9f",
+    "deformationSha256": "b62101945d9601a2e910982d3dfb5a1684206efe18389bb11bb04b08fd8718fd"
+  },
+  "limitations": [
+    "Eight planted painted views; ordered turn review pending.",
+    "Profile hidden-limb coverage and prop masks require native review.",
+    "No waving/working/answer-review gesture art or speech articulation supplied.",
+    "Browser/game-scale/physical-device review not run by asset builder."
+  ]
+}

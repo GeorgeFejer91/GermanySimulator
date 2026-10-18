@@ -1,0 +1,215 @@
+{
+  "source": "assets/sprite-sources/street-speaker-motion/hartmut-keller/vertical-leg-layers-v2.png",
+  "sourceSha256": "3f719c11c232f8c4a7066c975d92ffd86e6c1b6a2581f4952b20211ccf7d1538",
+  "records": [
+    {
+      "view": "down",
+      "contact": 0,
+      "side": 0,
+      "sourceRegion": [
+        191,
+        149,
+        355,
+        569
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        164.88,
+        275.32
+      ],
+      "soleTarget": [
+        204,
+        451
+      ],
+      "completeRegisteredBounds": [
+        169,
+        388,
+        244,
+        452
+      ]
+    },
+    {
+      "view": "down",
+      "contact": 0,
+      "side": 1,
+      "sourceRegion": [
+        355,
+        149,
+        567,
+        569
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        255.76,
+        303.88
+      ],
+      "soleTarget": [
+        310,
+        505
+      ],
+      "completeRegisteredBounds": [
+        256,
+        388,
+        358,
+        506
+      ]
+    },
+    {
+      "view": "down",
+      "contact": 1,
+      "side": 0,
+      "sourceRegion": [
+        689,
+        150,
+        896,
+        568
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        155.52,
+        304.84000000000003
+      ],
+      "soleTarget": [
+        204,
+        505
+      ],
+      "completeRegisteredBounds": [
+        156,
+        388,
+        255,
+        506
+      ]
+    },
+    {
+      "view": "down",
+      "contact": 1,
+      "side": 1,
+      "sourceRegion": [
+        896,
+        150,
+        1064,
+        568
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        269.44,
+        275.32
+      ],
+      "soleTarget": [
+        310,
+        451
+      ],
+      "completeRegisteredBounds": [
+        271,
+        388,
+        346,
+        452
+      ]
+    },
+    {
+      "view": "up",
+      "contact": 0,
+      "side": 0,
+      "sourceRegion": [
+        181,
+        701,
+        362,
+        1132
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        163.68,
+        252.28
+      ],
+      "soleTarget": [
+        204,
+        451
+      ],
+      "completeRegisteredBounds": [
+        164,
+        388,
+        251,
+        452
+      ]
+    },
+    {
+      "view": "up",
+      "contact": 0,
+      "side": 1,
+      "sourceRegion": [
+        362,
+        701,
+        564,
+        1132
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        256.96,
+        298.6
+      ],
+      "soleTarget": [
+        310,
+        505
+      ],
+      "completeRegisteredBounds": [
+        257,
+        388,
+        354,
+        506
+      ]
+    },
+    {
+      "view": "up",
+      "contact": 1,
+      "side": 0,
+      "sourceRegion": [
+        691,
+        701,
+        885,
+        1143
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        158.64,
+        293.32000000000005
+      ],
+      "soleTarget": [
+        204,
+        505
+      ],
+      "completeRegisteredBounds": [
+        159,
+        388,
+        252,
+        506
+      ]
+    },
+    {
+      "view": "up",
+      "contact": 1,
+      "side": 1,
+      "sourceRegion": [
+        885,
+        701,
+        1071,
+        1143
+      ],
+      "uniformScale": 0.48,
+      "offset": [
+        268.24,
+        263.8
+      ],
+      "soleTarget": [
+        310,
+        451
+      ],
+      "completeRegisteredBounds": [
+        273,
+        388,
+        355,
+        452
+      ]
+    }
+  ],
+  "status": "Contact fitting trial only. No continuous gait or anatomical acceptance yet."
+}

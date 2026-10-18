@@ -1,3 +1,101 @@
+# Final browser integration — 2026-10-19
+
+The final combined source passes 2161 Node checks in 206 files, including a new
+regression that fails on the old narrow default stairs. Default and optional
+loaded station steps now match full-frontage walking access; through roads retain
+their opening. Loaded northwest station entry was observed in the actual browser.
+
+Independent Physics and Camera review found no concrete blocker in their scoped
+source and inspected frames. One actual-speed Irmgard route passed a stationary
+player, held authored turns without displacement and returned to its lane.
+Minimum sampled center separation was 29.0402 against 29 required; sampling does
+not prove every simulation substep. No universal startup/deadline, two-moving-body,
+continuous-foot-contact or whole-city certification is claimed.
+
+The ground-projection helper is shipped but dormant without a manifest flag.
+Additional held/source artwork is preserved without promoting unapproved studies.
+Private model/reference inputs and generated local evidence are excluded.
+
+# Combined release candidate / CI and handoff — 2026-10-19
+
+George requested all completed pending feature work integrated and published,
+with actual browser verification. The integrator is using the managed
+neighbor-dialogue-release checkout; workers do not commit or push.
+
+The candidate now integrates pedestrian/paving/mouth work, station access and
+optional painted ground projection, office/quiz authoring support, neighbor focus and
+dialogue tickets. All 110 active-neighbor sources resolve to selected recordings
+(Heiko 36/Inga 34/Schwabingen 33/Hartmut 7); Ede remains archived. Final Heiko
+sources use the fuller Ich sage es / ich habe forms in speech and subtitles.
+Curator/default coverage, independent final voice byte review and 240 focused
+voice/gallery checks pass. All owned model processes are retired.
+
+Root's full Node run passes 2161/2161 in 206 files with zero skips. Actual isolated
+silent browser evidence fetches/decodes all 110 with matching hashes/profiles/
+durations, then starts all four speakers. Heiko redraw/language changes retain
+one ticket/media clock and natural completion clears captions; Inga/Schwabingen
+end once, Hartmut is intentionally cancelled. Current evidence is under primary
+`output/publication-all-2026-10-19/`, including all-node-tests.json and
+browser-110-decode.json. Independent byte evidence remains under
+`output/voice-completion-2026-10-18/integrity/`.
+
+Irmgard's rendered observation covers 17 seconds/67 samples/all 16 painted frames;
+camera acceptance is limited to inspected frames. Responsive caption frames pass at 390x844, 844x390 and 320x640. The forced
+final-counter diagnostic resumes after a simulated hidden-phone receipt, awards
+10/10, enables A38 collection and reaches the completed result after submission. No full natural mission/restart matrix, physical Android, perceptual
+listening or whole-game animation/performance acceptance is claimed. 3D pose work
+remains user-deferred. Preserve every prior failure and its original scope below.
+
+Maintained Pages CI now includes the quiz source/request regressions, model-free
+Python office/quiz authoring gates, office approach/browser fixture tooling,
+station access and billboard ground projection. The new quiz/station/billboard
+Node group passes 20/20; office/browser tooling passes 9/9; office Python passes
+12/12 and quiz Python 7/7. YAML parsing, maintained test paths and diff checks pass.
+This entry changes workflow/documentation only; runtime/assets/tests are owned by
+their existing integrators. Final deployment and public root/3d verification are
+the next publication steps after scoped checks and combined review.
+
+## Historical reviewed pedestrian package installation scope — 2026-10-18
+
+Integrator installs exactly23 changed paths bound by output/central-completion-
+2026-10-16/p3-source-successor-v1/CANDIDATE.json SHA0ef1f8e8. Base5403188;
+all41 baselines/proposed hashes checked before writes. SESSION is separately
+updated for this scope and is excluded from unchanged-runtime verification.
+Both required independent
+source reviews PASS for controlled installation; runtime/release HOLD remains.
+Preserve paving/current-visit guard/LF mouth and unrelated router/RTK work.
+Incoming e873 package includes Irmgard atlas+admission,move ownership/avoidance,
+discontinuity reset,tourist phases,meaningful regressions and painted-walk helper.
+Only game/world/tourist index tokens advance. Source23 paths are listed below.
+CPU evidence110/110 focused,96/96 office/shader,228/228 street/tourist,grounding3/3;
+actual-speed reset matrix positives pass3.60-4.334 simulated seconds. No rendered
+or device acceptance; historical actualP3FAIL and spent grants preserved.
+No browser/server/Chrome action. Do not commit or publish this runtime yet.
+
+- .agents/skills/animate-2d-characters/references/painted-walking.md
+- .agents/skills/animate-2d-characters/scripts/painted_walk.py
+- For-AI/OBJECT-CONSISTENCY.md
+- For-AI/SPRITE-GENERATION-PROTOCOL.md
+- assets/characters/street/crowd-irmgard-aktenordner/movement-desktop.webp
+- assets/characters/street/crowd-irmgard-aktenordner/movement-mobile.webp
+- assets/characters/street/manifest.json
+- game.js
+- index.html
+- street-character-sprites.js
+- tests/collision-dynamics.test.mjs
+- tests/object-physics-consistency.test.mjs
+- tests/street-atlas-motion.test.mjs
+- tests/street-character-manifest.test.mjs
+- tests/street-character-sprites.test.mjs
+- tests/street-packed-grid.test.mjs
+- tests/street-pedestrian-avoidance.test.mjs
+- tests/street-route-hold.test.mjs
+- tests/street-simulation-fixture-source.mjs
+- tests/test_painted_grounding.py
+- tests/tourist-dense-turns.test.mjs
+- tourist-animation.js
+- world3d.js
+
 # Handoff closeout / LF result — 2026-10-18
 
 Standalone TXT/index refreshed with current c6988e99 candidate and fb1e3067 mouth.
@@ -1794,3 +1892,21 @@ Canonical catalog received only neighbor recordings and current cast projections
 Neighbor release follow-up: GitHub exposed an outdated interaction fixture missing the real jwdVoice dependency and still expecting archived Ede priority. The fixture now loads the production whitelist; the generic NPC fallback rejects unregistered neighbor roles. All 268 affected city checks pass locally. The user also requested subtitle synchronization: native playback-clock, language-toggle, suspension and ended checks pass; a new production guard rejects stale startSubtitle ownership before it clears or writes the rail. The stale-refresh regression fails without this guard. Existing page timing divides text by recorded duration; no word-level alignment or listening claim.
 
 Final LF game SHA-256: `387de46f04dfbdd89fac718996dd059be5ea1699d096ef550bf0fec5e35e83f3`; renderer unchanged. Silent IAB played the restored Heiko hedge recording (`heiko-story-21.mp3`): German caption at native7.845s, English caption after toggle at native22.829s, same ticket1/recording throughout; natural ended cleared caption/dialogue and marked ticket finished with no browser errors. This validates native-clock ownership, not perceptual word alignment. Browser used seeded line preview, no accelerated audio. The extra tab/server are retired.
+
+
+## 2026-10-18 — Active character voice completion (integrator-owned)
+
+New user request: finish all active character voice synthesis and verify every audio asset and its trigger, prioritizing Heiko. Clean published base 31d03de; work in attached neighbor-dialogue-release checkout. Scope: current exact voice/source/English inventory, existing authoring and curator paths, missing recordings/manifests/catalog, diagnosed speech trigger repairs, focused coverage/ownership regressions and documentation. Archived Ede and intentional computer narrator are excluded. Preserve selected profiles, exact authored text, previous one-use neighbor tickets, storyboard, police/music policy, renderer/world geometry and unrelated canonical held work. Before native calls freeze finite source allocations, actual helper/source hashes and attempt accounting; reuse existing accepted takes and keep failed/private inputs outside shipped assets. One GPU/ASR owner only. Independent source coverage and CPU-only integrity audits run separately. World specialist reruns are omitted for this voice-only scope; any movement/geometry change requires a new scope and both reviews. Acceptance requires exact selected default resolution, native completion and encoded-word evidence, silent file decode, metadata/cues/level checks, regression and applicable silent browser checks. No listening or physical device claim without evidence. Private evidence: primary output/voice-completion-2026-10-18.
+
+## 2026-10-19 — Publish all current development and verify live browser
+
+User explicitly requested integration and publication of all uncommitted new development, with actual browser verification. Release integration uses current published 7697ff7 and reconciles the canonical movement/paving/office-mouth checkpoint, current neighbor voice completion and unsuperseded authoring/tooling changes. Preserve newest phone-wait/cache/ticket/subtitle fixes, exact current voice bindings, one root runtime, and unrelated saved source history. Integrator owns game/world/index/workflow and final acceptance/publication; scoped voice worker owns cast/story/audio. Required independent physics and camera reviews use the integrated candidate. Run deterministic checks, isolated silent desktop/mobile browser scenarios, then verify deployed root/3d/level URLs and actual changed media. No claim of physical-device or perceptual listening evidence without execution. Evidence: primary output/publication-all-2026-10-19. Historical holds remain records; this task explicitly authorizes completing their integration and acceptance.
+
+
+2026-10-18 neighbor focus: canonical checkout only. Integrator owns game.js, game-hud.css, levels/neighbors/archive/ede.md, affected neighbor guide/character and GAMEPLAY rules, focused neighbor/music tests, entry cache tokens and this journal. Preserve all initial pending work (primary output/neighbor-focus-2026-10-18/initial-status.txt and before snapshots). Scope: quieter existing chiptune anthem only, no neighbor enforcement/arrests/alerts/law dispatch, archive Ede's runtime encounter while preserving his assets/profile. Four resident identities and tours retain movement/voice ownership. Existing P3 runtime/release HOLD remains; no broad task resume or dirty-primary source copy. Required focused state/audio/entry checks and independent Physics/Camera source review; silent rendered evidence and physical/listening gaps reported separately.
+
+Neighbor-focus checkpoint: game f653775e74c9eed693fba5f657872d2b878c2c551995be70f2b8c3fcbd7eae0a on canonical before883ae742; only this task delta is saved in primary output/neighbor-focus-2026-10-18/NEIGHBOR-DELTA.patch and CHECKPOINT.json. Focused60/60 PASS, final source/entry15/15 PASS (overlap), anthem mutation correctly FAIL. Independent Physics P1-P7 and Camera C1-C5 scoped source reviews PASS, rendered specialist obligations remain unproved. Hidden silent IAB actual direct start/reload, native anthem0.14/duck0.0308, mute off/on, Q no dispatch, no police/alerts/law UI/help, responsive1280x720/390x844/320x568/844x390 checks recorded; no Android emulation/physical-device/perceptual listening/full tour/zoom claim. Ede runtime archived; four active roles retain original authored entrance/tours. Existing broader runtime HOLD remains, no commit/push, Chrome untouched, owned IAB tab/server closed and viewport restored. Do not apply this patch on top of itself; reconcile against its precise before hashes.
+
+2026-10-18 centralized P3 V3 fixture scope: root integrator owns only tests/street-pedestrian-avoidance.test.mjs and tests/street-route-hold.test.mjs plus this journal. Combined neighbor/street source f653775e has CRLF; actual eight-suite run52PASS/2fixture-loadFAIL (54 counted,42.316s) never reaches these movement assertions. Normalize CRLF only when these fixtures read game.js; keep all extraction boundaries and behavioral assertions. No runtime/asset/browser changes. Private V3 source pins must be refreshed for these two owned test readers after checks. Preserve peer neighbor delta and prior V2spentfailure; full browser/native acceptance remains outstanding.
+
+2026-10-18 neighbor dialogue correction: integrator owns game.js, world3d.js only for archived robber representation, neighbor speech manifests/catalog/builder if previous profile restoration requires it, focused tests, cache tokens and owning neighbor/audio/gameplay rules. Preserve prior neighbor-focus and all unrelated canonical work; before hashes/snapshots in primary output/neighbor-dialogue-2026-10-18. User requires actor-owned single-use speech tickets, earlier Heiko voice restored, robber omitted and whole-chapter police protection. Do not release unrelated held runtime. Validate native speech lifecycle, cancellation, content duplication and chapter boundaries; required Physics/Camera reviews use frozen candidate.

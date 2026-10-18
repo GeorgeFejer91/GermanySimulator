@@ -85,9 +85,13 @@ vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,
 }
 vec4 amtMouthPaint(sampler2D image,vec2 uv,vec4 rect,vec4 shape,float angle,
   mat4 curves,vec4 lower,vec4 ends,vec3 tail,vec3 style,float speaking){
-  if(speaking<.5)return texture2D(image,uv);
-  vec2 extent=rect.zw*vec2(textureSize(image,0)),tangent=vec2(cos(angle),sin(angle));
-  return amtMouthPaintFrame(image,uv,rect,shape,vec4(tangent*extent.x,vec2(-tangent.y,tangent.x)*extent.y),curves,lower,ends,tail,style,speaking);
+  vec4 paint=vec4(0.);
+  if(speaking<.5)paint=texture2D(image,uv);
+  else{
+    vec2 extent=rect.zw*vec2(textureSize(image,0)),tangent=vec2(cos(angle),sin(angle));
+    paint=amtMouthPaintFrame(image,uv,rect,shape,vec4(tangent*extent.x,vec2(-tangent.y,tangent.x)*extent.y),curves,lower,ends,tail,style,speaking);
+  }
+  return paint;
 }`;
 
 // Every key owns an oral registration measured on its encoded source painting.

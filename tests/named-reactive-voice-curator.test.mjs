@@ -8,7 +8,8 @@ import vm from 'node:vm';
 
 const digest=value=>createHash('sha256').update(value).digest('hex');
 const copy=readFileSync(new URL('../tools/curate-voice-library.mjs',import.meta.url),'utf8');
-const helper=digest(readFileSync(new URL('../tools/build-knick-voice.py',import.meta.url)));
+// These synthetic receipts belong to the historical approved producer.
+const helper='c40faafb6a62c5858b6a85c37d277b86d7d0efbdaf74ce61cc8b058a8524096c';
 const scope='named-crowd-reactive-v1';
 const actors=['crowd-baerbel-brezel','crowd-brigitte-bueroklammer','crowd-elfriede-eingabe','crowd-guenther-gartenzaun','crowd-hildegard-brotzeit','crowd-irmgard-aktenordner','crowd-klaus-dieter-knoedel','crowd-manfred-mittagsruhe','crowd-ruediger-rasenkante'];
 const columns=['clipId','voiceId','actorId','region','slot','sourceLocator','text','english','profileId','referenceSha256','referenceOriginalSha256','renderer','modelRevision','processing','cause'];
@@ -69,6 +70,11 @@ test('extract exact 252 stable IDs, nine owners and 28 source-owned rows each',(
  assert.equal(f.jobs[0].sourceLocator,'game.js crowdReactiveBarks[crowd-baerbel-brezel].berlin.grass[0]');
  assert.equal(f.context.reactiveFullPlan(f.cast,f.snapshot(),f.root).authored.size,252);
  f.plan.jobs.reverse();assert.equal(f.context.reactiveFullPlan(f.cast,f.snapshot(),f.root).authored.keys().next().value,f.plan.jobs[0].clipId);
+});
+
+test('historical reactive authority rejects different producer file bytes',()=>{
+ const f=fixture();f.context.hash=path=>resolve(path)===resolve(f.root,'tools/build-knick-voice.py')?'f'.repeat(64):f.hash(path);
+ assert.throws(()=>f.context.reactiveFullPlan(f.cast,f.snapshot(),f.root),/source\/producer pins changed/);
 });
 test('source reorder keeps explicit IDs and changes only current locators',()=>{
  const f=fixture(),rows=f.barks[actors[0]].berlin.grass,[first,second]=rows;

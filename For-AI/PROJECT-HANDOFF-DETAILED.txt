@@ -1,3 +1,41 @@
+GERMANY SIMULATOR - CURRENT COMBINED RELEASE CANDIDATE
+===================================================
+Updated 19 October 2026. This opening supersedes conflicting CURRENT/NEXT/HOLD
+labels in the historical manual below. George requested all completed pending
+development integrated and published, with actual browser verification.
+
+Current integration checkout:
+  C:/Users/cogpsy-vrlab/.codex/worktrees/neighbor-dialogue-release/GermanySimulator
+One integrator owns combined acceptance/commit/push/deployment. Preserve unrelated work and private authoring/evidence inputs.
+
+The combined source includes pedestrian/paving/mouth work, station access and
+optional painted ground projection, office/quiz authoring support and neighbor focus.
+All 110 active-neighbor sources now resolve: Heiko 36/Inga 34/Schwabingen 33/Hartmut 7.
+Ede remains archived. Heiko retains the approved professor profile; two final
+German speech/subtitle sources use Ich sage es and ich habe. Historical rejected
+takes and source/reference/model inputs stay private. Curator/default coverage
+and independent final 36 byte review PASS; all model sessions are retired.
+
+Current primary-checkout output evidence:
+  publication-all-2026-10-19/all-node-tests.json: 2161/2161 PASS, 206 files, 0 skips.
+  publication-all-2026-10-19/browser-110-decode.json: actual isolated silent browser
+    fetched/decoded all 110 with matching bytes/profile/duration, 0 recorded errors.
+  voice-completion-2026-10-18/integrity/fuller-form-final36-byte-review.json:
+    independent native/concat/final-encoding/reference/words/levels/40 Hz PASS.
+All 4 speakers started natively. Heiko redraw/language kept one ticket/media clock
+and natural completion cleared captions; Inga/Schwabingen ended once, Hartmut
+was intentionally cancelled. Irmgard rendered 17 s/67 observations/all 16 paint frames;
+camera verdict is limited to inspected frames. Responsive caption frames and the forced final-counter phone-wait/form/result diagnostic pass.
+
+Limits: no full natural 33-restart/mission matrix, physical Android, perceptual
+listening or whole-game motion/performance acceptance claimed. User-deferred 3D
+pose work stays deferred. Historical failures keep their original candidates.
+Next: finish scoped browser checks, review combined diff, integrator commit/push,
+then verify deployed root/3d/direct routes. Follow PROJECT-HANDOFF.md for concise
+current status. The manual/checkpoints below remain searchable history.
+
+HISTORICAL 18 OCTOBER HANDOFF BEGINS
+---------------------------------
 GERMANY SIMULATOR - FINAL PROJECT HANDOFF CHECKPOINT
 ==================================================
 Updated 18 October 2026. This opening is the CURRENT status and resume plan.

@@ -123,6 +123,7 @@ class NamedReactiveSourceAdapter(unittest.TestCase):
                  + json.dumps({"pools": {"crowdPersonalized": self.legacy_english, **self.towel_pools}}) + ";\n")
 
     def extract_functions(self, functions, constants):
+        constants = constants | {"QUIZ_SOURCE_STATUS", "QUIZ_SOURCE_SCOPE"}
         nodes = [node for node in self.tree.body
                  if isinstance(node, ast.FunctionDef) and node.name in functions
                  or isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id in constants for target in node.targets)]

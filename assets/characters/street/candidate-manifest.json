@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "characters": {
+    "quiz-hartmut-keller": {
+      "id": "hartmut-keller",
+      "name": "Hartmut Keller",
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "grid": [
+        16,
+        11
+      ],
+      "clips": {
+        "down": {
+          "offset": 0,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "right": {
+          "offset": 16,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "up": {
+          "offset": 32,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "left": {
+          "offset": 48,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "idle": {
+          "offset": 64,
+          "count": 8,
+          "seconds": 2
+        },
+        "greet": {
+          "offset": 72,
+          "count": 16,
+          "seconds": 1
+        },
+        "wait": {
+          "offset": 88,
+          "count": 8,
+          "seconds": 2
+        },
+        "work": {
+          "offset": 96,
+          "count": 16,
+          "seconds": 1.6
+        },
+        "review": {
+          "offset": 112,
+          "count": 16,
+          "seconds": 1.1
+        },
+        "success": {
+          "offset": 128,
+          "count": 16,
+          "seconds": 0.9
+        },
+        "failure": {
+          "offset": 144,
+          "count": 16,
+          "seconds": 1
+        },
+        "look": {
+          "offset": 160,
+          "count": 8,
+          "seconds": 0.8
+        },
+        "talk": {
+          "offset": 168,
+          "count": 7,
+          "seconds": 1
+        }
+      },
+      "variants": {
+        "desktop": {
+          "file": "./assets/characters/street/hartmut-keller-candidate.webp",
+          "sha256": "7ff3de17174fed5f2be3015a7276a82ebde3bd97decea3b3a7cf6e5e5e2287d2",
+          "width": 2048,
+          "height": 1760,
+          "bytes": 1312084,
+          "decodedBytes": 14417920
+        },
+        "mobile": {
+          "file": "./assets/characters/street/hartmut-keller-candidate-mobile.webp",
+          "sha256": "ecf8851a61bca09f9cbcd9ee6d73f6fdad720c0183e18f47fe506ec8002da4ba",
+          "width": 1024,
+          "height": 880,
+          "bytes": 387930,
+          "decodedBytes": 3604480
+        }
+      },
+      "sourceSha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+      "specSha256": "871229172abed40eba2feda8d4d20d40d74dc295a2670f045934181ab05a0541",
+      "review": {
+        "sourceStatus": "pending-main-review",
+        "transitionStatus": "all-planted-actions-share-exact-down-neutral-endpoints",
+        "strideStatus": "uncalibrated-exact-sole-review-required",
+        "methodStatus": "main-method-direction-approved-final-assets-unapproved",
+        "findings": [
+          "Exact sole calibration outstanding",
+          "All encoded frames and integrated motion need final review",
+          "Work/review whole head tilt source limits approved for final-encode pilot",
+          "Only neutral front talk has fitted mouth; side/rear remain closed; phoneme alignment NOT RUN"
+        ]
+      },
+      "mouthStatus": "source-limits-approved-pilot-final-encode-pending",
+      "speech": {
+        "clips": {
+          "talk": {
+            "offset": 168,
+            "count": 7
+          }
+        },
+        "method": "media-energy-amplitude",
+        "profile": {
+          "coordinateSpace": "registered512",
+          "crease_xy": [
+            [
+              242,
+              236
+            ],
+            [
+              249,
+              231
+            ],
+            [
+              257,
+              229
+            ],
+            [
+              265,
+              226
+            ],
+            [
+              272,
+              227
+            ],
+            [
+              281,
+              226
+            ],
+            [
+              290,
+              228
+            ],
+            [
+              297,
+              230
+            ]
+          ],
+          "max_opening_pixels": 6.36734693877551,
+          "sourceOpeningPixels": 6,
+          "nativeCropOrigin": [
+            105,
+            55
+          ],
+          "status": "main-source-limit-approved-for-pilot-final-encode"
+        },
+        "unregisteredViews": [
+          "right",
+          "up",
+          "left"
+        ],
+        "phonemeAlignment": "NOT RUN",
+        "inactiveAndOwnedClosed": "exact-down-neutral-source-paint"
+      },
+      "strideDistance": 6.890756302521006,
+      "standing": {
+        "file": "./assets/characters/street/hartmut-keller-standing.webp",
+        "sha256": "6f8aa4b5a92ce1b273c756d2d32edddfd43b924f48ab3f37d41ce265a3382f1e",
+        "width": 128,
+        "height": 160,
+        "bytes": 17022,
+        "sourceClip": "idle",
+        "sourceFrame": 0
+      }
+    }
+  }
+}

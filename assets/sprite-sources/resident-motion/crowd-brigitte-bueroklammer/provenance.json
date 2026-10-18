@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/profiles-clean-candidate.png",
+      "sha256": "8789c533288ab93cd345d3261160809f95011a9beb747c27aea465c66916daae",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "opaqueBounds": [
+        282,
+        19,
+        1494,
+        862
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+      "sha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "opaqueBounds": [
+        57,
+        55,
+        1931,
+        751
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

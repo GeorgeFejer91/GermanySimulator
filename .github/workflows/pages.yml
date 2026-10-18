@@ -35,8 +35,15 @@ jobs:
         run: node --test tests/level-transitions.test.mjs tests/building-levels.test.mjs tests/office-level-flow.test.mjs tests/city-paperwork-causality.test.mjs tests/direct-result-causality.test.mjs
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs tests/buergeramt-multiple-tickets.test.mjs tests/knick-name-announcement.test.mjs tests/knick-speech-cache.test.mjs tests/knick-browser-assets.test.mjs tests/kripo-local-name.test.mjs tests/kripo-browser-assets.test.mjs
+      - name: Check quiz dialogue and offline voice authoring
+        run: |
+          node --test tests/quiz-voice-requests.test.mjs tests/quiz-recorded-segments.test.mjs tests/quiz-german9-admission.test.mjs tests/quiz-variety.test.mjs tests/quiz-character-portraits.test.mjs
+          python -B tools/test_office_voice_builder.py
+          python -B tools/test_quiz_voice_builder.py
       - name: Check office touch navigation, turning and direction texture reuse
         run: node --test tests/buergeramt-touch-navigation.test.mjs tests/buergeramt-touch-target.test.mjs tests/buergeramt-turning.test.mjs
+      - name: Check office approach and browser test tooling
+        run: node --test tests/buergeramt-approach.test.mjs tests/browser-harness.test.mjs
       - name: Check office causality and re-entry
         run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs tests/buergeramt-completion-recovery.test.mjs
       - name: Check phone lifecycle and registration rewards
@@ -53,7 +60,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install --no-install-recommends -y ffmpeg
           fi
-          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs tests/recorded-voice-cache.test.mjs
+          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs tests/neighbor-native-parts.test.mjs tests/neighbor-reference-input.test.mjs tests/neighbor-render-input.test.mjs tests/neighbor-window-recognition.test.mjs tests/neighbor-input-provenance-presence.test.mjs tests/neighbor-voice-coverage.test.mjs tests/recorded-voice-cache.test.mjs
       - name: Check fixed character voices
         run: |
           python tests/test_sync_music_cast_index.py
@@ -61,6 +68,7 @@ jobs:
           python -B tests/test_sandale_source_adapter.py
           python -B tests/test_named_reactive_source_adapter.py
           node tools/curate-voice-library.mjs --check
+          node tools/audit-neighbor-voice-coverage.mjs --check
           node --test tests/ruediger-homophone.test.mjs
           node --test tests/sandale-voice-curator.test.mjs
           node --test tests/named-reactive-voice-curator.test.mjs
@@ -71,6 +79,8 @@ jobs:
         run: node --test tests/audio-trigger-hygiene.test.mjs tests/audio-broker.test.mjs tests/speech-fallback-navigation.test.mjs tests/official-narrator-routing.test.mjs
       - name: Check game and browser regressions
         run: node --test tests/preload.test.mjs tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/object-physics-consistency.test.mjs tests/police-driving.test.mjs tests/vehicle-lifecycle.test.mjs tests/train-consists.test.mjs tests/ambient-traffic.test.mjs tests/browser-responsiveness.test.mjs tests/npc-atlas-admission.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/merkel-voice.test.mjs tests/mission-fax.test.mjs tests/mission-pointer.test.mjs tests/buergeramt-door-radiance.test.mjs tests/buergeramt-entry.test.mjs
+      - name: Check station access and painted ground projection
+        run: node --test tests/station-access.test.mjs tests/billboard-ground.test.mjs
       - name: Check personalized city dialogue and street sprites
         run: |
           node --test tests/sandale-delivery.test.mjs

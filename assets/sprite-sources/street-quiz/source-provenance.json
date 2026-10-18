@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "styleAuthority": "For-AI/CITY-CHARACTER-STYLE.md",
+  "originalDossierPortraitsPreserved": true,
+  "sourceLayout": "Semantic key sheets with uneven placement; extract complete figure groups, not assumed equal runtime cells.",
+  "records": [
+    {
+      "id": "hartmut-keller",
+      "voiceId": "quiz-hartmut-keller",
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+      "sha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+      "dimensions": [
+        1170,
+        1345
+      ],
+      "bytes": 2103541,
+      "authoringBrief": "Wary private-surveillance neighbor; receding grey-black hair, glasses, beige shirt, green vest, radio right and notebook/flashlight left. Short large-head miniature family.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/hartmut-keller.webp",
+        "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "gisela-becker",
+      "voiceId": "quiz-gisela-becker",
+      "file": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+      "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 2169540,
+      "authoringBrief": "Worried civic intervener; short sandy hair and low glasses, trench coat/burgundy scarf, paper right and folder left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/gisela-becker.webp",
+        "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "ruediger-schmidt",
+      "voiceId": "quiz-ruediger-schmidt",
+      "file": "assets/sprite-sources/street-quiz/ruediger-schmidt-keys.png",
+      "sha256": "f0633d44c730cede13ec1c71f767de6395de647484fd0df2efbb607bf58c4216",
+      "dimensions": [
+        1216,
+        1294
+      ],
+      "bytes": 2444782,
+      "authoringBrief": "Severe grammar corrector; grey side part, dark moustache/black glasses, brown cardigan, red pen right and tabbed grammar book left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/ruediger-schmidt.webp",
+        "sha256": "e6671b63bfc314027181949ffde806186eeaae8594272ba09bb793733585089c"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "sabine-krueger",
+      "voiceId": "quiz-sabine-krueger",
+      "file": "assets/sprite-sources/street-quiz/sabine-krueger-keys.png",
+      "sha256": "17c22e4938ee4bde95e9a70c58bd736d61a3477d050ae11f20a798e9aba913c7",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 1786116,
+      "authoringBrief": "Sharp unsolicited teacher; dark bob and round glasses, mustard vest/white blouse, burgundy booklet left and right index gesture.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/sabine-krueger.webp",
+        "sha256": "4e80cfbe4a8133d2737e482a05ba26851b3318c40751a641246b44f25b3f2640"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "uwe-moeller",
+      "voiceId": "quiz-uwe-moeller",
+      "file": "assets/sprite-sources/street-quiz/uwe-moeller-keys.png",
+      "sha256": "448c4997e747d7b4eed82de939132f38b4d9266a9537698a12bb7095130eec36",
+      "dimensions": [
+        1393,
+        1129
+      ],
+      "bytes": 2080021,
+      "authoringBrief": "Indignant older complainer; balding grey hair, wire glasses, burgundy polo/khaki vest, blue pen right and clipboard left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/uwe-moeller.webp",
+        "sha256": "ee828b1224bf16f9e820d79f99fa1c2d3fc2a1bfae2cd117d71c834b5b5b2b3a"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "brigitte-neumann",
+      "voiceId": "quiz-brigitte-neumann",
+      "file": "assets/sprite-sources/street-quiz/brigitte-neumann-keys.png",
+      "sha256": "c4a551ad7c78c63942df78e94b0a784dcf5a6dfc27ce60b04d0c2abd823286be",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 1969594,
+      "authoringBrief": "Watchful city appearance monitor; spiky silver hair/glasses, olive parka and patterned burgundy scarf, binocular strap and left ruler.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/brigitte-neumann.webp",
+        "sha256": "3e4d4e56ce0625e0219fedd02a0ff26d83bbb2c71a01c742ad6661133bb2ceb6"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "klaus-dieter-wagner",
+      "voiceId": "quiz-klaus-dieter-wagner",
+      "file": "assets/sprite-sources/street-quiz/klaus-dieter-wagner-keys.png",
+      "sha256": "d2cb957e19137b7b64be9c51008cc24950ff81dcfff9e701a86dd30e4279daa6",
+      "dimensions": [
+        1170,
+        1345
+      ],
+      "bytes": 2274919,
+      "authoringBrief": "Assertive unofficial inspector; swept grey/brown hair/glasses, reflective yellow vest, measuring tape right and notebook left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/klaus-dieter-wagner.webp",
+        "sha256": "6ee3065930fa6322482769d9b3282d9c7e91cf18525f6fcc36b43d69e55dee68"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "heike-hoffmann",
+      "voiceId": "quiz-heike-hoffmann",
+      "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 2058173,
+      "authoringBrief": "Suspicious neighborhood mentor; grey bob/glasses/pearl earrings, burgundy cardigan/floral blouse, keyring right and three colored cards left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/heike-hoffmann.webp",
+        "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "id": "dietmar-schulz",
+      "voiceId": "quiz-dietmar-schulz",
+      "file": "assets/sprite-sources/street-quiz/dietmar-schulz-keys.png",
+      "sha256": "249318483e7c230e4f4b0ec0aa53c5b170c738ff107bc05b3d2e7fb142cd972e",
+      "dimensions": [
+        1216,
+        1293
+      ],
+      "bytes": 2394374,
+      "authoringBrief": "Dry certificate examiner; wavy grey hair/round glasses/moustache, bow tie and green pinstripe suit, stopwatch right and papers left.",
+      "briefKind": "summarized generation prompt, not verbatim",
+      "generator": "OpenAI built-in imagegen",
+      "sourceStatus": "candidate-unapproved",
+      "poseOrder": [
+        "down",
+        "right",
+        "up",
+        "left",
+        "greet",
+        "wait",
+        "work",
+        "review",
+        "success",
+        "failure",
+        "look",
+        "speaking-emphasis"
+      ],
+      "identityReference": {
+        "file": "assets/quiz-characters/dietmar-schulz.webp",
+        "sha256": "f96cda3f46c5af0f9e212c0acb2afecfa5c7cf4bfae1ab5a983314697ca641ea"
+      },
+      "styleReference": {
+        "file": "assets/sprite-sources/neighbors/directions.png",
+        "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2"
+      },
+      "runtimeUse": false
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/brigitte-neumann-keys-v2.png",
+      "sha256": "a8bfe57a80e21533c6cedf8e3cac40d33b54c3d2abd6c551b803782db548d7b3",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 1465312,
+      "sourceStatus": "candidate-unapproved",
+      "authoringBrief": "Repair duplicate binoculars and source spacing; speaking-emphasis still loses ruler, exclude it from animation until repaired. Raised viewing key transfers ruler to underarm; bridge/hand staging still needs review.",
+      "generator": "OpenAI built-in imagegen",
+      "runtimeUse": false
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/klaus-dieter-wagner-work-v2.png",
+      "sha256": "9ac664bbac373d277448ea91817dd98c0b9bbd7095e4ddbd2a2808c20f2c8740",
+      "dimensions": [
+        1170,
+        1345
+      ],
+      "bytes": 1173618,
+      "sourceStatus": "candidate-unapproved",
+      "authoringBrief": "Replacement work anchor: notebook remains visible in left vest pocket while both hands extend one measuring tape. Review scale registration and pocket/forearm occlusion before replacing original working key.",
+      "generator": "OpenAI built-in imagegen",
+      "runtimeUse": false
+    }
+  ]
+}

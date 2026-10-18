@@ -1,0 +1,38 @@
+{
+  "observations": [
+    "Full knee/calf/cuff paint returned, with more compressed trouser folds and broader knee than input; shape still requires same-shoe-scale source comparison.",
+    "Output registration shifted vertically relative to input. Never use raw canvas placement as the working fit.",
+    "Generated shoe is not approved as a replacement for existing repaired shoe. Treat this only as a potential trouser donor; preserve existing shoe and cuff registration in any later bounded authoring composite.",
+    "No frame bake, source-to-export comparison, temporal review, gait calibration, runtime admission or all-cast acceptance performed."
+  ],
+  "originalToolOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a141bd-2e93-7420-a5d7-95d8eb0d5227/exec-1658adf5-5fab-444e-b0ef-728c6d6cc961.png",
+  "status": "HOLD - source trouser donor only; no frame bake or runtime approval",
+  "tool": "built-in image_gen.imagegen",
+  "createdUTC": "2026-10-16T10:46:29.6353751Z",
+  "references": [
+    {
+      "sha256": "4c947e2b5d89d7595d070d521d124adb5654d0ee51a88bf733e88803f1c25241",
+      "file": "assets/sprite-sources/street-speaker-motion/hartmut-keller/right-far-leg-shoe-candidate-v3.png",
+      "role": "edit target"
+    },
+    {
+      "sha256": "3cb979114692eea535d3850b4f372da805068cc4311b2afbdc36eed1767e6cfe",
+      "file": "output/street-speaker-motion/hartmut-keller/right-source.png",
+      "role": "style/proportion reference only"
+    }
+  ],
+  "transparent_background": true,
+  "pending": [
+    "Inspect alpha/gutters and fit by shoe/sole landmarks at original working scale, not whole-layer enlargement.",
+    "Compare exposed profile frames11..14, especially12, against original near trouser contour.",
+    "Use only if own trouser donor fixes calf without shoe/root/trajectory changes; otherwise HOLD.",
+    "Passing-knee source repair remains separate; no claim this neutral leg solves vertical gait."
+  ],
+  "exactPromptFile": "right-far-trouser-volume-v4-prompt.txt",
+  "exportFilesChanged": [],
+  "file": "right-far-trouser-volume-v4.png",
+  "bytes": 543240,
+  "exactPrompt": "EDIT TARGET: first reference, isolated right-facing trouser leg and brown shoe on transparency. STYLE/PROPORTION REFERENCE: second reference, same short broad big-headed elderly German citizen; reference only its original trouser fabric, dark contours and short broad legs, no upper-body changes. Produce ONE isolated replacement leg on the same square transparent canvas, same position/orientation/height as edit target. Repair only brown TROUSERS ABOVE SHOE: exposed calf and knee currently too narrow. Paint a fuller VERY SHORT broad trouser leg with real knee volume, compressed cloth folds, substantial calf and believable cuff. Increase knee/calf silhouette width about25% while preserving shoe heel-to-toe width/length. Calf should be about80% of shoe's heel-to-toe width; natural shaped knee and tapered substantial cuff, no straight tube/thin ankle stalk. Broad hidden cropped thigh root at same upperedge tucks under vest. Match original charcoal-brown cloth, muted highlights, ink contour. Preserve current shoe's toe direction, complete heel/sole/seams, soft leather highlight, exact size/position/ground baseline and paint as closely as possible. Preserve cuff-shoe contact, connected anatomy, current slight knee bend. Do not lengthen leg, change shoe scale, add secondleg, shadow, torso, skin, props, text or background. Genuine alpha transparency. This is painted occlusion backing for existing game animation, not character redesign.",
+  "runtimeFilesChanged": [],
+  "sha256": "db1d6387636863dd0ff4731d4bc08a343758d6d7b4e75670340b266c3529700e"
+}

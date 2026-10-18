@@ -1,0 +1,6 @@
+{
+  "status": "candidate-unapproved",
+  "prompt": "Draw one full-body transparent character: exactly the squat blond woman from reference, rotated halfway between front view and RIGHT side profile. Her FACE NOSE POINTS DIAGONALLY RIGHT, showing her right cheek prominently and only a little of the far cheek. Her shoulders, torso, hips, and feet all face diagonally right at45degrees. This is a genuine front-right three-quarter whole-body view, not a frontal body with sideways eyes. Preserve enormous broad blond head about45% total height, tiny short broad torso, very short thick plum trousers and broad burgundy shoes. Teal diamond-quilt jacket, cream button blouse, mature face and stern expression identical. Anatomical RIGHT hand (on viewer LEFT side) holds the same rolled cream newspaper down beside hip; free LEFT hand down at far side. Both shoes flat on baseline, neutral planted stance. Match source soft painted texture, lighting, saturated colors and original stout caricature proportions. Do not lengthen body. No shadow or backdrop.",
+  "raw": "exec-c4a690ec-09cd-4fb2-b91f-d640d483886a.png",
+  "reason": "Existing six-pose sheet front-right was too frontal to supply true intermediate whole-body orientation."
+}

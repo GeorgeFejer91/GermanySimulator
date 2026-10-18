@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved; preliminary first-four proportion repair",
+  "reference": "assets/sprite-sources/neighbors/directions.png",
+  "referenceSha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2",
+  "changes": [
+    {
+      "voiceId": "stadt-klaus-dieter-klein",
+      "file": "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png",
+      "previousSha256": "190f079a369b48be554c7dd05b11743fd8f0ad61ee450bf55e2ac7c623f5df92",
+      "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4",
+      "manualBefore": {
+        "id": "stadt-klaus-dieter-klein",
+        "headTop": 0,
+        "chin": 270,
+        "sole": 682,
+        "verdict": "REPAIR: visually long jacket/legs and lower head fraction than canonical"
+      },
+      "manualAfter": {
+        "id": "stadt-klaus-dieter-klein",
+        "headTop": 0,
+        "chin": 285,
+        "sole": 644,
+        "observation": "Larger connected head and shorter jacket/trouser stack; stubble, brown side-part, mustard polo, navy jacket and anatomical-left form preserved across four views."
+      },
+      "verdict": "REPAIRED whole family; preliminary source candidate"
+    },
+    {
+      "voiceId": "stadt-brigitte-mueller",
+      "file": "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png",
+      "previousSha256": "defe00f497167d6e124149535c66596b443a91d47f74bcc10c641bb8679e431c",
+      "sha256": "d95780d9cf524234b47b34bc602259ea245ff5bb109bef8f580c77afdb99b622",
+      "manualBefore": {
+        "id": "stadt-brigitte-mueller",
+        "headTop": 0,
+        "chin": 270,
+        "sole": 682,
+        "verdict": "REPAIR: borderline fraction; shorten connected coat/skirt/leg stack and retain bob/envelope"
+      },
+      "manualAfter": {
+        "id": "stadt-brigitte-mueller",
+        "headTop": 0,
+        "chin": 290,
+        "sole": 647,
+        "observation": "Larger bob/face above shorter connected coat/skirt/legs; glasses, scarf, mature face, envelope anatomical left preserved."
+      },
+      "verdict": "REPAIRED whole family; preliminary source candidate"
+    },
+    {
+      "voiceId": "stadt-wolfgang-schulz",
+      "file": "assets/sprite-sources/street-residents/stadt-wolfgang-schulz-directions-candidate.png",
+      "previousSha256": "935aa1c35f43aa81bb0d4b838bcc76a14fa6978d135794cabdca44273565f705",
+      "sha256": "0497e4f9d928f42821726c57501404a52c4381cef3bfc871587c35a09f5ac3bf",
+      "manualBefore": {
+        "id": "stadt-wolfgang-schulz",
+        "headTop": 0,
+        "chin": 260,
+        "sole": 646,
+        "verdict": "REPAIR despite numerical borderline: shared-height family still too long below head compared with canonical; retain briefcase right"
+      },
+      "manualAfter": {
+        "id": "stadt-wolfgang-schulz",
+        "headTop": 0,
+        "chin": 276,
+        "sole": 616,
+        "observation": "Larger curly head and shorter cardigan/trouser block; moustache, elbow patches and anatomical-right briefcase preserved; far case occluded in left profile."
+      },
+      "verdict": "REPAIRED whole family; preliminary source candidate"
+    },
+    {
+      "voiceId": "stadt-ursula-neumann",
+      "file": "assets/sprite-sources/street-residents/stadt-ursula-neumann-directions-candidate.png",
+      "previousSha256": "ea2277cb226ac67740ca060a930b7d189a239419dac99204c33658929919823e",
+      "sha256": "f225d9be3a4081a1be935e1fdc0c47d6b0f02a849448118d55ace2fca0d6037c",
+      "manualBefore": {
+        "id": "stadt-ursula-neumann",
+        "headTop": 0,
+        "chin": 250,
+        "sole": 630,
+        "verdict": "REPAIR: lower head fraction and long jacket/trouser block compared with canonical; retain newspaper right"
+      },
+      "manualAfter": {
+        "id": "stadt-ursula-neumann",
+        "headTop": 0,
+        "chin": 286,
+        "sole": 642,
+        "observation": "Larger connected head and shorter jacket/trouser stack; pixie hair, irritated closed lips, quilting and anatomical-right newspaper preserved; far paper occluded left."
+      },
+      "verdict": "REPAIRED whole family; preliminary source candidate"
+    }
+  ],
+  "correctionEvents": [
+    {
+      "type": "whole-family-coherent-proportion-repaint",
+      "date": "2026-10-15",
+      "previousSourceSha256": "190f079a369b48be554c7dd05b11743fd8f0ad61ee450bf55e2ac7c623f5df92",
+      "previousSourceArchive": "output/street-cast/residents/proportion-before/stadt-klaus-dieter-klein-directions-candidate.png",
+      "previousPrompt": "NEW fictional Germany Simulator open-city miniature character direction SOURCE SHEET. Four columns ONE horizontal row only: FRONT neutral; TRUE RIGHT-facing PROFILE; TRUE REAR (no face); TRUE LEFT-facing PROFILE. Transparent RGBA everywhere outside character, no scene, floor, shadows, marks, labels, text, grid or checkerboard. Wide panoramic layout 4:1, ideally 2048x512. Each of four full bodies entirely inside its own equal-width cell with generous transparent margins, one shared standing sole baseline and identical head/body scale, closed rest lips on all visible faces, relaxed planted feet and attached hands. Match supplied canonical neighbors ONLY for style/proportions: SHORT stocky compact adult, oversized head, total about TWO to TWO-AND-A-HALF HEAD heights, short neck, squat torso, SHORT substantial legs, broad complete chunky shoes, readable attached hands, mature age-specific face. Never tall realistic adults, long shins, tiny heads/shoes. Painterly soft shaded volume, restrained warm light, dark clear contour, brushed cloth, matching canonical Heiko/Inga/Schwabingen city miniature family. Design a distinct fictional identity, NOT a recolor or clone of any reference person. Same face, build, clothes, prop anatomical hand and textures in all four views; no mirrored prop swapping. Props must remain connected to hands including rear and opposite profile with proper occlusion. All visible mouths one clean closed crease for future speech rig; rear no mouth. No gestures, walks or action variants yet. Character specification: Klaus-Dieter Klein. Middle-aged male with broad square jaw, receding chestnut side-part, thick eyebrows, small straight nose, dark stubble, no glasses. Compact solid torso. Navy canvas commuter jacket over mustard knit polo, dark denim short stout trousers, chunky tan work shoes. One folded blank cream form held low in anatomical LEFT hand; right relaxed empty. Reserved neutral helpfulness.",
+      "sourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-ca4a55dd-a4e7-4439-a147-91e28803040c.png",
+      "exactPrompt": "Coherently REPAINT ALL FOUR complete character views as one corrected Germany Simulator miniature family. Image1 is the existing unique resident identity/outfit/prop source: preserve THAT mature fictional face, exact hairstyle, facial hair/glasses, colors, clothing details and physical prop hand. Image2 is canonical Heiko/Inga/Schwabingen STYLE AND PROPORTION AUTHORITY. The old resident below-head body reads too long. Match canonical's distinctly SHORT 2.0–2.4 HEAD-height whole figure, target approximately2.2heads tall: head including hair about44–46% whole standing height, very short neck, SHORT squat torso/jacket, SHORT substantial legs, complete chunky hands and broad full shoes. Keep mature identity, not a child. Enlarge/repaint the coherent connected head-neck-shoulder anatomy together and shorten the connected torso/pelvis/limbs; DO NOT paste a detached larger head, squeeze vertical scale, independently warp views, change skin/face to another person, or recolor a different character. Every new front/profile/rear shares corrected family proportions and same planted sole baseline. Whole coherent brushed painted volume, restrained warm shading and clear dark contour matching canonical. Same FOUR columns ONE horizontal row: FRONT neutral, true RIGHT-facing PROFILE, true REAR with no face, true LEFT-facing PROFILE. Transparent background, no scene/ground/shadow/grid/labels/text. Generous transparent gutters, entire figures/props/feet in frame. Closed rest lips on all visible faces. Preserve anatomical prop hands: in right-facing profile near arm is actual RIGHT; in left-facing profile near arm is actual LEFT, so far-owned objects can be occluded rather than moved to near hand. Do not add props or actions. Specific identity to preserve: Klaus-Dieter Klein. Middle-aged male with broad square jaw, receding chestnut side-part, thick eyebrows, small straight nose, dark stubble, no glasses. Compact solid torso. Navy canvas commuter jacket over mustard knit polo, dark denim short stout trousers, chunky tan work shoes. One folded blank cream form held low in anatomical LEFT hand; right relaxed empty. Reserved neutral helpfulness.",
+      "outputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-ca4a55dd-a4e7-4439-a147-91e28803040c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "savedSourceSha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4",
+      "beforeManualBounds": {
+        "id": "stadt-klaus-dieter-klein",
+        "headTop": 0,
+        "chin": 270,
+        "sole": 682,
+        "verdict": "REPAIR: visually long jacket/legs and lower head fraction than canonical"
+      },
+      "afterManualBounds": {
+        "id": "stadt-klaus-dieter-klein",
+        "headTop": 0,
+        "chin": 285,
+        "sole": 644,
+        "observation": "Larger connected head and shorter jacket/trouser stack; stubble, brown side-part, mustard polo, navy jacket and anatomical-left form preserved across four views."
+      },
+      "scope": "all four views repainted together by built-in ImageGen; no head patch or per-view vertical scaling",
+      "verdict": "proportion repair observed; source remains candidate-unapproved"
+    },
+    {
+      "type": "whole-family-coherent-proportion-repaint",
+      "date": "2026-10-15",
+      "previousSourceSha256": "defe00f497167d6e124149535c66596b443a91d47f74bcc10c641bb8679e431c",
+      "previousSourceArchive": "output/street-cast/residents/proportion-before/stadt-brigitte-mueller-directions-candidate.png",
+      "previousPrompt": "NEW fictional Germany Simulator open-city miniature character direction SOURCE SHEET. Four columns ONE horizontal row only: FRONT neutral; TRUE RIGHT-facing PROFILE; TRUE REAR (no face); TRUE LEFT-facing PROFILE. Transparent RGBA everywhere outside character, no scene, floor, shadows, marks, labels, text, grid or checkerboard. Wide panoramic layout 4:1, ideally 2048x512. Each of four full bodies entirely inside its own equal-width cell with generous transparent margins, one shared standing sole baseline and identical head/body scale, closed rest lips on all visible faces, relaxed planted feet and attached hands. Match supplied canonical neighbors ONLY for style/proportions: SHORT stocky compact adult, oversized head, total about TWO to TWO-AND-A-HALF HEAD heights, short neck, squat torso, SHORT substantial legs, broad complete chunky shoes, readable attached hands, mature age-specific face. Never tall realistic adults, long shins, tiny heads/shoes. Painterly soft shaded volume, restrained warm light, dark clear contour, brushed cloth, matching canonical Heiko/Inga/Schwabingen city miniature family. Design a distinct fictional identity, NOT a recolor or clone of any reference person. Same face, build, clothes, prop anatomical hand and textures in all four views; no mirrored prop swapping. Props must remain connected to hands including rear and opposite profile with proper occlusion. All visible mouths one clean closed crease for future speech rig; rear no mouth. No gestures, walks or action variants yet. Character specification: Brigitte Müller. Older female with long angular face in oversized head, copper-grey straight chin-length bob, fine oval glasses, calm half-lidded eyes, closed composed lips. Muted brick-red knee coat, sage neck scarf, charcoal skirt over dark stockings and broad black walking shoes. One thick small cream document envelope held vertically against anatomical LEFT hip; right relaxed. Upright patient reserve, distinct from round-faced grey-bun adviser.",
+      "sourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-4fddc4c6-7994-4eb3-a756-7ae938db2c7b.png",
+      "exactPrompt": "Coherently REPAINT ALL FOUR complete character views as one corrected Germany Simulator miniature family. Image1 is the existing unique resident identity/outfit/prop source: preserve THAT mature fictional face, exact hairstyle, facial hair/glasses, colors, clothing details and physical prop hand. Image2 is canonical Heiko/Inga/Schwabingen STYLE AND PROPORTION AUTHORITY. The old resident below-head body reads too long. Match canonical's distinctly SHORT 2.0–2.4 HEAD-height whole figure, target approximately2.2heads tall: head including hair about44–46% whole standing height, very short neck, SHORT squat torso/jacket, SHORT substantial legs, complete chunky hands and broad full shoes. Keep mature identity, not a child. Enlarge/repaint the coherent connected head-neck-shoulder anatomy together and shorten the connected torso/pelvis/limbs; DO NOT paste a detached larger head, squeeze vertical scale, independently warp views, change skin/face to another person, or recolor a different character. Every new front/profile/rear shares corrected family proportions and same planted sole baseline. Whole coherent brushed painted volume, restrained warm shading and clear dark contour matching canonical. Same FOUR columns ONE horizontal row: FRONT neutral, true RIGHT-facing PROFILE, true REAR with no face, true LEFT-facing PROFILE. Transparent background, no scene/ground/shadow/grid/labels/text. Generous transparent gutters, entire figures/props/feet in frame. Closed rest lips on all visible faces. Preserve anatomical prop hands: in right-facing profile near arm is actual RIGHT; in left-facing profile near arm is actual LEFT, so far-owned objects can be occluded rather than moved to near hand. Do not add props or actions. Specific identity to preserve: Brigitte Müller. Older female with long angular face in oversized head, copper-grey straight chin-length bob, fine oval glasses, calm half-lidded eyes, closed composed lips. Muted brick-red knee coat, sage neck scarf, charcoal skirt over dark stockings and broad black walking shoes. One thick small cream document envelope held vertically against anatomical LEFT hip; right relaxed. Upright patient reserve, distinct from round-faced grey-bun adviser.",
+      "outputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-4fddc4c6-7994-4eb3-a756-7ae938db2c7b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "savedSourceSha256": "d95780d9cf524234b47b34bc602259ea245ff5bb109bef8f580c77afdb99b622",
+      "beforeManualBounds": {
+        "id": "stadt-brigitte-mueller",
+        "headTop": 0,
+        "chin": 270,
+        "sole": 682,
+        "verdict": "REPAIR: borderline fraction; shorten connected coat/skirt/leg stack and retain bob/envelope"
+      },
+      "afterManualBounds": {
+        "id": "stadt-brigitte-mueller",
+        "headTop": 0,
+        "chin": 290,
+        "sole": 647,
+        "observation": "Larger bob/face above shorter connected coat/skirt/legs; glasses, scarf, mature face, envelope anatomical left preserved."
+      },
+      "scope": "all four views repainted together by built-in ImageGen; no head patch or per-view vertical scaling",
+      "verdict": "proportion repair observed; source remains candidate-unapproved"
+    },
+    {
+      "type": "whole-family-coherent-proportion-repaint",
+      "date": "2026-10-15",
+      "previousSourceSha256": "935aa1c35f43aa81bb0d4b838bcc76a14fa6978d135794cabdca44273565f705",
+      "previousSourceArchive": "output/street-cast/residents/proportion-before/stadt-wolfgang-schulz-directions-candidate.png",
+      "previousPrompt": "NEW fictional Germany Simulator open-city miniature character direction SOURCE SHEET. Four columns ONE horizontal row only: FRONT neutral; TRUE RIGHT-facing PROFILE; TRUE REAR (no face); TRUE LEFT-facing PROFILE. Transparent RGBA everywhere outside character, no scene, floor, shadows, marks, labels, text, grid or checkerboard. Wide panoramic layout 4:1, ideally 2048x512. Each of four full bodies entirely inside its own equal-width cell with generous transparent margins, one shared standing sole baseline and identical head/body scale, closed rest lips on all visible faces, relaxed planted feet and attached hands. Match supplied canonical neighbors ONLY for style/proportions: SHORT stocky compact adult, oversized head, total about TWO to TWO-AND-A-HALF HEAD heights, short neck, squat torso, SHORT substantial legs, broad complete chunky shoes, readable attached hands, mature age-specific face. Never tall realistic adults, long shins, tiny heads/shoes. Painterly soft shaded volume, restrained warm light, dark clear contour, brushed cloth, matching canonical Heiko/Inga/Schwabingen city miniature family. Design a distinct fictional identity, NOT a recolor or clone of any reference person. Same face, build, clothes, prop anatomical hand and textures in all four views; no mirrored prop swapping. Props must remain connected to hands including rear and opposite profile with proper occlusion. All visible mouths one clean closed crease for future speech rig; rear no mouth. No gestures, walks or action variants yet. Character specification: Wolfgang Schulz. Late-middle-age male with round broad weathered face, dense salt-and-pepper cropped curly hair, dark horseshoe eyebrows, small black moustache, no glasses. Stocky adult belly. Olive wool cardigan with tan elbow patches over pale blue shirt, deep brown chunky trousers, broad black rubber-soled shoes. One battered burgundy leather briefcase carried low anatomical RIGHT hand by handle, left empty. Neutral distracted appointment-minded expression.",
+      "sourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-a63a062e-498f-4088-bfc0-f8b9979398ea.png",
+      "exactPrompt": "Coherently REPAINT ALL FOUR complete character views as one corrected Germany Simulator miniature family. Image1 is the existing unique resident identity/outfit/prop source: preserve THAT mature fictional face, exact hairstyle, facial hair/glasses, colors, clothing details and physical prop hand. Image2 is canonical Heiko/Inga/Schwabingen STYLE AND PROPORTION AUTHORITY. The old resident below-head body reads too long. Match canonical's distinctly SHORT 2.0–2.4 HEAD-height whole figure, target approximately2.2heads tall: head including hair about44–46% whole standing height, very short neck, SHORT squat torso/jacket, SHORT substantial legs, complete chunky hands and broad full shoes. Keep mature identity, not a child. Enlarge/repaint the coherent connected head-neck-shoulder anatomy together and shorten the connected torso/pelvis/limbs; DO NOT paste a detached larger head, squeeze vertical scale, independently warp views, change skin/face to another person, or recolor a different character. Every new front/profile/rear shares corrected family proportions and same planted sole baseline. Whole coherent brushed painted volume, restrained warm shading and clear dark contour matching canonical. Same FOUR columns ONE horizontal row: FRONT neutral, true RIGHT-facing PROFILE, true REAR with no face, true LEFT-facing PROFILE. Transparent background, no scene/ground/shadow/grid/labels/text. Generous transparent gutters, entire figures/props/feet in frame. Closed rest lips on all visible faces. Preserve anatomical prop hands: in right-facing profile near arm is actual RIGHT; in left-facing profile near arm is actual LEFT, so far-owned objects can be occluded rather than moved to near hand. Do not add props or actions. Specific identity to preserve: Wolfgang Schulz. Late-middle-age male with round broad weathered face, dense salt-and-pepper cropped curly hair, dark horseshoe eyebrows, small black moustache, no glasses. Stocky adult belly. Olive wool cardigan with tan elbow patches over pale blue shirt, deep brown chunky trousers, broad black rubber-soled shoes. One battered burgundy leather briefcase carried low anatomical RIGHT hand by handle, left empty. Neutral distracted appointment-minded expression.",
+      "outputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-a63a062e-498f-4088-bfc0-f8b9979398ea.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "savedSourceSha256": "0497e4f9d928f42821726c57501404a52c4381cef3bfc871587c35a09f5ac3bf",
+      "beforeManualBounds": {
+        "id": "stadt-wolfgang-schulz",
+        "headTop": 0,
+        "chin": 260,
+        "sole": 646,
+        "verdict": "REPAIR despite numerical borderline: shared-height family still too long below head compared with canonical; retain briefcase right"
+      },
+      "afterManualBounds": {
+        "id": "stadt-wolfgang-schulz",
+        "headTop": 0,
+        "chin": 276,
+        "sole": 616,
+        "observation": "Larger curly head and shorter cardigan/trouser block; moustache, elbow patches and anatomical-right briefcase preserved; far case occluded in left profile."
+      },
+      "scope": "all four views repainted together by built-in ImageGen; no head patch or per-view vertical scaling",
+      "verdict": "proportion repair observed; source remains candidate-unapproved"
+    },
+    {
+      "type": "whole-family-coherent-proportion-repaint",
+      "date": "2026-10-15",
+      "previousSourceSha256": "ea2277cb226ac67740ca060a930b7d189a239419dac99204c33658929919823e",
+      "previousSourceArchive": "output/street-cast/residents/proportion-before/stadt-ursula-neumann-directions-candidate.png",
+      "previousPrompt": "NEW fictional Germany Simulator open-city miniature character direction SOURCE SHEET. Four columns ONE horizontal row only: FRONT neutral; TRUE RIGHT-facing PROFILE; TRUE REAR (no face); TRUE LEFT-facing PROFILE. Transparent RGBA everywhere outside character, no scene, floor, shadows, marks, labels, text, grid or checkerboard. Wide panoramic layout 4:1, ideally 2048x512. Each of four full bodies entirely inside its own equal-width cell with generous transparent margins, one shared standing sole baseline and identical head/body scale, closed rest lips on all visible faces, relaxed planted feet and attached hands. Match supplied canonical neighbors ONLY for style/proportions: SHORT stocky compact adult, oversized head, total about TWO to TWO-AND-A-HALF HEAD heights, short neck, squat torso, SHORT substantial legs, broad complete chunky shoes, readable attached hands, mature age-specific face. Never tall realistic adults, long shins, tiny heads/shoes. Painterly soft shaded volume, restrained warm light, dark clear contour, brushed cloth, matching canonical Heiko/Inga/Schwabingen city miniature family. Design a distinct fictional identity, NOT a recolor or clone of any reference person. Same face, build, clothes, prop anatomical hand and textures in all four views; no mirrored prop swapping. Props must remain connected to hands including rear and opposite profile with proper occlusion. All visible mouths one clean closed crease for future speech rig; rear no mouth. No gestures, walks or action variants yet. Character specification: Ursula Neumann. Mature female with narrow pointed face, short swept-back ash-blonde pixie haircut, arched fine brows, prominent hooked nose, no glasses. Squat sturdy figure. Petrol-blue quilted jacket over cream blouse, deep plum straight short trousers, broad burgundy sensible shoes. One tightly rolled cream newspaper held low anatomical RIGHT hand, left empty. Eyebrows lowered with restrained irritation, closed pursed lip crease.",
+      "sourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-c978b643-28ff-44e3-bc87-6be1cccae1cc.png",
+      "exactPrompt": "Coherently REPAINT ALL FOUR complete character views as one corrected Germany Simulator miniature family. Image1 is the existing unique resident identity/outfit/prop source: preserve THAT mature fictional face, exact hairstyle, facial hair/glasses, colors, clothing details and physical prop hand. Image2 is canonical Heiko/Inga/Schwabingen STYLE AND PROPORTION AUTHORITY. The old resident below-head body reads too long. Match canonical's distinctly SHORT 2.0–2.4 HEAD-height whole figure, target approximately2.2heads tall: head including hair about44–46% whole standing height, very short neck, SHORT squat torso/jacket, SHORT substantial legs, complete chunky hands and broad full shoes. Keep mature identity, not a child. Enlarge/repaint the coherent connected head-neck-shoulder anatomy together and shorten the connected torso/pelvis/limbs; DO NOT paste a detached larger head, squeeze vertical scale, independently warp views, change skin/face to another person, or recolor a different character. Every new front/profile/rear shares corrected family proportions and same planted sole baseline. Whole coherent brushed painted volume, restrained warm shading and clear dark contour matching canonical. Same FOUR columns ONE horizontal row: FRONT neutral, true RIGHT-facing PROFILE, true REAR with no face, true LEFT-facing PROFILE. Transparent background, no scene/ground/shadow/grid/labels/text. Generous transparent gutters, entire figures/props/feet in frame. Closed rest lips on all visible faces. Preserve anatomical prop hands: in right-facing profile near arm is actual RIGHT; in left-facing profile near arm is actual LEFT, so far-owned objects can be occluded rather than moved to near hand. Do not add props or actions. Specific identity to preserve: Ursula Neumann. Mature female with narrow pointed face, short swept-back ash-blonde pixie haircut, arched fine brows, prominent hooked nose, no glasses. Squat sturdy figure. Petrol-blue quilted jacket over cream blouse, deep plum straight short trousers, broad burgundy sensible shoes. One tightly rolled cream newspaper held low anatomical RIGHT hand, left empty. Eyebrows lowered with restrained irritation, closed pursed lip crease.",
+      "outputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-c978b643-28ff-44e3-bc87-6be1cccae1cc.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "savedSourceSha256": "f225d9be3a4081a1be935e1fdc0c47d6b0f02a849448118d55ace2fca0d6037c",
+      "beforeManualBounds": {
+        "id": "stadt-ursula-neumann",
+        "headTop": 0,
+        "chin": 250,
+        "sole": 630,
+        "verdict": "REPAIR: lower head fraction and long jacket/trouser block compared with canonical; retain newspaper right"
+      },
+      "afterManualBounds": {
+        "id": "stadt-ursula-neumann",
+        "headTop": 0,
+        "chin": 286,
+        "sole": 642,
+        "observation": "Larger connected head and shorter jacket/trouser stack; pixie hair, irritated closed lips, quilting and anatomical-right newspaper preserved; far paper occluded left."
+      },
+      "scope": "all four views repainted together by built-in ImageGen; no head patch or per-view vertical scaling",
+      "verdict": "proportion repair observed; source remains candidate-unapproved"
+    }
+  ],
+  "preservedOtherResidentSources": 23,
+  "erwin": "unchanged externally blocked; no substitute",
+  "scope": "Only first-four PNGs and owned provenance/diagnostic handoff changed",
+  "rootFreshReview": {
+    "reviewer": "root integration owner",
+    "date": "2026-10-15",
+    "evidence": [
+      "output/street-cast/residents/first-four-before-after-proportions.jpg",
+      "all four actual saved 2172x724 repaired sheets;16 direction views"
+    ],
+    "sourceDirectionStyle": "PASS",
+    "observed": "Compact mature faces; coherent closed feet; front/rear/profile prop anatomical hands retained; genuine no-face rear. Matched canonical Heiko/Inga family in common-height front board.",
+    "scope": "fresh source direction/style finding only",
+    "alphaEdgeLightDark": "HOLD pending final-scale thin colored edge quantification",
+    "gaitActionsSpeechRuntime": "NOT RUN",
+    "worldCollisionContract": "unaffected"
+  }
+}

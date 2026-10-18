@@ -1,4 +1,4 @@
-const MANIFEST_URL='./assets/characters/street/manifest.json';
+const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261016-street-atlas-pilot';
 const playbackByActor=new WeakMap(),texturesByThree=new WeakMap(),imagesByConstructor=new WeakMap(),fallbackByHost=new WeakMap();
 const rigDefinitions=new Map(),rigForwards={down:[0,0,1],right:[1,0,0],up:[0,0,-1],left:[-1,0,0]};
 const rigCameraAxes=['right','up','forward'];
@@ -27,6 +27,43 @@ function validateMotionRig(rig){
   }
 }
 
+function validateAtlasMotion(person){
+  const m=person.atlasMotion;
+  if(!m||m.schemaVersion!==1||person.motionRig||!person.standing||!(person.strideDistance>0))throw new TypeError('Invalid street atlas motion capability');
+  const cell=p=>p&&Number.isInteger(p.row)&&p.row>=0&&p.row<person.grid[1]&&Number.isInteger(p.col)&&p.col>=0&&p.col<person.grid[0];
+  const duration=ms=>Number.isFinite(ms)&&ms>0&&ms<=1000;
+  for(const dir of Object.keys(rigForwards)){
+    const w=m.walks?.[dir],b=m.bridges?.[dir];
+    if(!w||!cell({row:w.row,col:0})||!Number.isInteger(w.frames)||w.frames<1||w.frames>person.grid[0]||!duration(w.frame_ms))throw new RangeError('Invalid atlas walk');
+    if(!b||!duration(b.frame_ms))throw new RangeError('Invalid atlas bridge');
+    for(const key of ['stop_cols','start_cols'])if(!Array.isArray(b[key])||!b[key].length||b[key].length>16||!Array.from(b[key],col=>cell({row:b.row,col})).every(Boolean))throw new RangeError('Invalid atlas bridge cells');
+    if(person.clips[dir].offset!==w.row*person.grid[0]||person.clips[dir].count!==w.frames)throw new RangeError('Atlas walk clip mismatch');
+    for(const to of Object.keys(rigForwards))if(to!==dir){
+      const frames=m.transitions?.[dir+'-to-'+to]?.frames,end=m.bridges?.[to];
+      if(!Array.isArray(frames)||frames.length<1||frames.length>64||!Array.from(frames,p=>cell(p)&&duration(p.ms)).every(Boolean))throw new RangeError('Invalid atlas transition');
+      if(!end||frames.length<=b.stop_cols.length+end.start_cols.length)throw new RangeError('Atlas transition lacks turn cells');
+      const matches=(p,row,col,ms)=>p?.row===row&&p?.col===col&&p?.ms===ms;
+      if(!b.stop_cols.every((col,i)=>matches(frames[i],b.row,col,b.frame_ms))||!end.start_cols.every((col,i)=>matches(frames[frames.length-end.start_cols.length+i],end.row,col,end.frame_ms)))throw new RangeError('Atlas transition bridge mismatch');
+    }
+  }
+  if(!cell(m.neutral)||m.neutral.row!==m.bridges.down.row||m.neutral.col!==m.bridges.down.stop_cols.at(-1)||person.clips.idle.offset!==m.neutral.row*person.grid[0]+m.neutral.col||person.clips.idle.count!==1)throw new RangeError('Atlas neutral mismatch');
+  if(m.settles!==undefined){
+    if(!m.settles||typeof m.settles!=='object'||Array.isArray(m.settles))throw new TypeError('Invalid atlas phase settles');
+    const walkCell=p=>Object.values(m.walks).some(w=>p.row===w.row&&p.col<w.frames);
+    for(const [dir,phases] of Object.entries(m.settles)){
+      if(!Object.hasOwn(rigForwards,dir)||!phases||typeof phases!=='object'||Array.isArray(phases))throw new TypeError('Invalid atlas settle direction');
+      for(const [phase,settle] of Object.entries(phases)){
+        if(!/^(0|[1-9]\d*)$/.test(phase)||!Number.isSafeInteger(Number(phase))||Number(phase)>=m.walks[dir].frames)throw new RangeError('Invalid atlas settle phase');
+        const frames=settle?.frames,bridge=m.bridges[dir];
+        if(!Array.isArray(frames)||frames.length<2||frames.length>16||!Array.from(frames,p=>cell(p)&&duration(p.ms)&&!walkCell(p)).every(Boolean))throw new RangeError('Invalid atlas settle cells');
+        const end=frames.at(-1);
+        if(end.row!==bridge.row||end.col!==bridge.stop_cols.at(-1))throw new RangeError('Atlas settle must end at facing neutral');
+      }
+    }
+  }
+  if(m.cycle_distance!==undefined)throw new TypeError('Atlas cycle is owned by strideDistance');
+}
+
 function validateOcclusionSamples(person){
   const samples=person.occlusionSamples;
   if(samples===undefined)return;
@@ -43,7 +80,7 @@ function validateStandingOnly(voiceId,person){
   if(!Number.isFinite(person.figureHeight)||person.figureHeight<=0||person.figureHeight>person.cell[1]||!Number.isFinite(person.figureWorldHeight)||person.figureWorldHeight<=0)throw new RangeError('Invalid standing-only street figure scale');
   validateImage(person.standing);
   if(person.standing.width!==person.cell[0]||person.standing.height!==person.cell[1])throw new RangeError('Standing-only street paint must match its cell');
-  for(const key of ['grid','clips','variants','motionRig','strideDistance','speech'])if(person[key]!==undefined)throw new TypeError('Standing-only street record cannot declare motion metadata: '+key);
+  for(const key of ['grid','clips','variants','motionRig','strideDistance','speech','atlasMotion'])if(person[key]!==undefined)throw new TypeError('Standing-only street record cannot declare motion metadata: '+key);
 }
 
 export function registerStreetCharacterManifest(manifest){
@@ -77,6 +114,7 @@ export function registerStreetCharacterManifest(manifest){
       if(person.standing.width!==person.cell[0]||person.standing.height!==person.cell[1])throw new RangeError('Street standing image must match the original cell');
     }
     }
+    if(person.atlasMotion!==undefined)validateAtlasMotion(person);
     validateOcclusionSamples(person);
     for(const alias of [voiceId,person.id,person.actorId,...(person.aliases||[])].filter(Boolean)){
       if(typeof alias!=='string'||nextAliases.has(alias)&&nextAliases.get(alias)!==voiceId)throw new TypeError('Ambiguous street identity alias');
@@ -100,6 +138,52 @@ export function resolveStreetCharacter(actor){
 function playback(actor){
   if(!playbackByActor.has(actor))playbackByActor.set(actor,{distance:0,age:0,direction:'down',current:null,pending:null,pose:null,cueToken:null,retiredCues:[]});
   return playbackByActor.get(actor);
+}
+
+function atlasNeutral(person){
+  const p=person.atlasMotion.neutral;
+  return {clip:'neutral',frame:p.col,slot:p.row*person.grid[0]+p.col,direction:'down',moving:false,holdPosition:false,visible:true,mouthOpen:0};
+}
+
+function admitAtlasMotion(actor,person,owner){
+  const animation=globalThis.TouristAnimations;
+  if(!animation?.start||!animation?.stop)throw new Error('Atlas movement controller unavailable');
+  const state=playback(actor),p=person.atlasMotion.neutral;
+  const motion={owner,person,manifest:{...person.atlasMotion,cycle_distance:person.strideDistance},
+    controller:{touristFacing:'down',touristRequested:'down',spriteRow:p.row,spriteFrame:p.col,gaitDistance:0},settled:true};
+  state.atlasMotion=motion;state.pose=atlasNeutral(person);state.acceptedStepDistance=0;state.acceptedSegmentCount=0;
+  state.contactRootWorld=null;state.simulationHeld=null;
+  return {release(){if(state.atlasMotion===motion){state.atlasMotion=null;state.acceptedStepDistance=0;state.pose=atlasNeutral(person)}}};
+}
+
+function atlasPose(state,speech={}){
+  const a=state.atlasMotion,n=a.controller;
+  return state.pose={...speech,clip:n.touristTurn?.kind||(n.touristTurn?'turn':a.settled?'neutral':'walk'),
+    frame:n.spriteFrame,slot:n.spriteRow*a.person.grid[0]+n.spriteFrame,direction:n.touristFacing,
+    moving:!a.settled&&!n.touristTurn,mouthOpen:0,holdPosition:!!n.touristTurn,visible:true};
+}
+
+export function requestStreetSimulationMove(actor,dx,dy){
+  const state=playbackByActor.get(actor),a=state?.atlasMotion;
+  if(!a||state.simulationHeld||!Number.isFinite(dx)||!Number.isFinite(dy)||Math.hypot(dx,dy)<=.0001)return false;
+  const n=a.controller,animation=globalThis.TouristAnimations;
+  if(n.touristTurn)animation.request(n,dx,dy,a.manifest,{planted:true});
+  else if(a.settled){animation.start(n,dx,dy,a.manifest);a.settled=false}
+  else animation.request(n,dx,dy,a.manifest,{planted:true});
+  atlasPose(state,state.pose);
+  return !!n.touristTurn;
+}
+
+function advanceAtlasMotion(state,person,distance,dt,options,speech){
+  const a=state.atlasMotion;
+  if(!a||state.simulationHeld)return state.pose={...atlasNeutral(person),...speech,mouthOpen:0};
+  if(options.paused)return atlasPose(state,speech);
+  const n=a.controller,animation=globalThis.TouristAnimations;
+  if(!n.touristTurn&&!(distance>.0001)&&!a.settled)animation.stop(n,a.manifest);
+  const active=n.touristTurn;
+  animation.advance(n,distance,dt,a.manifest,person.strideDistance);
+  if(active&&!n.touristTurn)a.settled=active.kind==='stop';
+  return atlasPose(state,speech);
 }
 
 function acceptedContactRoot(state,options){
@@ -188,7 +272,7 @@ function contactInspection(actor){
 
 export function acceptsStreetSimulation(actor){
   const person=characters[resolveStreetCharacter(actor)];
-  return person?.standingOnly!==true&&person?.motionRig?.contactPlayback?.schemaVersion===1;
+  return person?.standingOnly!==true&&(person?.atlasMotion?.schemaVersion===1||person?.motionRig?.contactPlayback?.schemaVersion===1);
 }
 
 export function inspectStreetSimulation(actor){
@@ -196,7 +280,10 @@ export function inspectStreetSimulation(actor){
   return {owned:state?.simulationOwned===true,generation:state?.simulationGeneration||0,
     held:state?.simulationHeld||null,distance:state?.distance||0,
     pendingAcceptedDistance:state?.acceptedStepDistance||0,acceptedSegments:state?.acceptedSegmentCount||0,
-    contact:contactInspection(actor)};
+    contact:contactInspection(actor),atlasMotion:state?.atlasMotion?{ready:true,slot:state.pose?.slot,phase:state.atlasMotion.controller.spriteFrame,
+      facing:state.atlasMotion.controller.touristFacing,requested:state.atlasMotion.controller.touristRequested,
+      gaitDistance:state.atlasMotion.controller.gaitDistance,plan:state.atlasMotion.controller.touristTurn?.kind||(state.atlasMotion.controller.touristTurn?'turn':null),
+      planIndex:state.atlasMotion.controller.touristTurn?.index??null,settled:state.atlasMotion.settled}:null};
 }
 
 export function invalidateStreetSimulation(actor,reason='EXPLICIT_DISCONTINUITY'){
@@ -218,6 +305,11 @@ export function readmitStreetSimulationGeneration(actor,{rootWorld,standingSha25
   if(!state.simulationHeld||standingSha256!==person.standing?.sha256)return false;
   state.contactRootWorld=rootWorld.slice();state.simulationHeld=null;
   state.contactResult=null;state.rigSettle=1;state.direction='down';state.rigForwardWorld=[0,0,1];
+  if(person.atlasMotion&&state.atlasMotion){
+    const p=person.atlasMotion.neutral;
+    state.atlasMotion.controller={touristFacing:'down',touristRequested:'down',spriteRow:p.row,spriteFrame:p.col,gaitDistance:0};
+    state.atlasMotion.settled=true;state.pose=atlasNeutral(person);
+  }
   return true;
 }
 
@@ -260,7 +352,7 @@ export function tickStreetSimulation(actor,dt,options){
 }
 
 export function hasStreetReaction(actor){
-  if(characters[resolveStreetCharacter(actor)]?.standingOnly===true)return false;
+  if(characters[resolveStreetCharacter(actor)]?.standingOnly===true||characters[resolveStreetCharacter(actor)]?.atlasMotion)return false;
   const state=playbackByActor.get(actor);return !!(state?.current||state?.pending);
 }
 
@@ -272,6 +364,7 @@ function validReactionSequence(person,sequence){
 }
 
 function supportsReaction(person,rig,actor,names,stage){
+  if(person?.atlasMotion)return false;
   const sequence=Array.isArray(names)?names:[names];
   if(!person||!validReactionSequence(person,sequence))return false;
   if(stage==='motion')return true;
@@ -283,6 +376,7 @@ function supportsReaction(person,rig,actor,names,stage){
 
 export function requestStreetReaction(actor,names,options={}){
   const person=characters[resolveStreetCharacter(actor)];
+  if(person?.atlasMotion)return false;
   if(!person)return false;
   const sequence=Array.isArray(names)?names:[names];
   if(!validReactionSequence(person,sequence))return false;
@@ -384,7 +478,7 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
   const person=characters[resolveStreetCharacter(actor)];
   if(!person)return {holdPosition:false,visible:false,clip:'idle',frame:0,slot:0};
   const state=playback(actor),paused=options.paused===true;
-  if(acceptsStreetSimulation(actor)&&!options.simulationOwned)return state.pose||{holdPosition:false,visible:true,clip:'standing',frame:0,slot:0,direction:'down',moving:false};
+  if(acceptsStreetSimulation(actor)&&!options.simulationOwned)return state.pose||(person.atlasMotion?atlasNeutral(person):{holdPosition:false,visible:true,clip:'standing',frame:0,slot:0,direction:'down',moving:false});
   if(person.motionRig)acceptedContactRoot(state,options);
   const seconds=Number.isFinite(dt)?Math.max(0,dt):0;
   const dx=options.dx??(actor.x-state.x),dy=options.dy??(actor.y-state.y);
@@ -392,6 +486,7 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
   const speechPaused=options.speechPaused===undefined?paused:options.speechPaused===true;
   const speech=speechState(state,options,speechPaused||!!state.simulationHeld);
   const advancingSpeech=speech.speechStatus==='playing'&&speech.speaking&&!state.simulationHeld;
+  if(person.atlasMotion)return advanceAtlasMotion(state,person,actualDistance,seconds,options,speech);
   if(person.standingOnly===true){
     const moving=!paused&&Number.isFinite(actualDistance)&&actualDistance>.0001;
     if(moving)state.distance+=actualDistance;
@@ -619,7 +714,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
   let sprite=null,lease=null,person=null,idlePose=null,settled=false,failed=false,error=null,stage=null;
   let motionJob=null,motionLease=null,motionRequested=false,motionSettled=false,motionFailed=false,motionError=null;
   let rig=null,rigLease=null;
-  let occlusionPoints=null;
+  let occlusionPoints=null,atlasMotionLease=null;
   const variant=(globalThis.innerWidth||1024)<=600?'mobile':'desktop';
   const position=()=>({x:host.position.x,z:host.position.z});
   const sample=()=>playbackByActor.get(actor)?.pose||idlePose;
@@ -635,9 +730,9 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
     }
     fallback=null;
   }
-  function sync(){
+  function sync(admit=true){
     if(owner.retired||!sprite)return;
-    const pose=sample();sprite.visible=pose.visible!==false;
+    const pose=person.atlasMotion&&stage==='motion'&&!atlasMotionLease?atlasNeutral(person):sample();sprite.visible=pose.visible!==false;
     if(stage==='rig'){
       try{applyThreeRig(sprite,rig,actor,host,camera)}
       catch(cause){
@@ -647,6 +742,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
         console.warn('Street character rig unavailable',id,cause);
       }
     }else applyPose(sprite,person,pose,host,camera,stage==='standing');
+    if(admit&&person.atlasMotion&&stage==='motion'&&!atlasMotionLease)atlasMotionLease=admitAtlasMotion(actor,person,owner);
     for(const other of fallback.sprites)if(other!==sprite)other.visible=false;
     for(const {mesh} of fallback.meshes)mesh.visible=false;
   }
@@ -672,7 +768,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
           sync();return stage==='rig';
         }
         const previous={map:sprite.material.map,stage,position:sprite.position.clone(),quaternion:sprite.quaternion.clone(),visible:sprite.visible,uv:sprite.geometry.attributes.uv.array.slice()};
-        try{sprite.material.map=texture;stage='motion';sync()}
+        try{sprite.material.map=texture;stage='motion';sync(false)}
         catch(cause){
           sprite.material.map=previous.map;stage=previous.stage;sprite.position.copy(previous.position);sprite.quaternion.copy(previous.quaternion);sprite.visible=previous.visible;
           sprite.geometry.attributes.uv.array.set(previous.uv);sprite.geometry.attributes.uv.needsUpdate=true;throw cause;
@@ -744,6 +840,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
       pose:playbackByActor.get(actor)?.pose||null,standingOnly:person?.standingOnly===true,height:person?.figureWorldHeight||null}},
     dispose(){
       if(owner.retired)return;owner.retired=true;
+      atlasMotionLease?.release();atlasMotionLease=null;
       lease?.release();lease=null;
       motionLease?.release();motionLease=null;
       rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;
@@ -816,7 +913,7 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
   const position=()=>({x:actor.x,z:actor.y});
   let person=null,idlePose=null,image=null,lease=null,settled=false,failed=false,error=null,stage=null;
   let motionJob=null,motionLease=null,motionRequested=false,motionSettled=false,motionFailed=false,motionError=null;
-  let rig=null,rigLease=null,rigImage=null;
+  let rig=null,rigLease=null,rigImage=null,atlasMotionLease=null;
   function prepareMotion(){
     if(owner.retired||person?.standingOnly===true||characters[id]?.standingOnly===true)return null;
     motionRequested=true;
@@ -884,13 +981,14 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
     },
     draw(ctx,groundX,groundY,figurePixelHeight){
       if(owner.retired||!image||!Number.isFinite(groundX)||!Number.isFinite(groundY)||!Number.isFinite(figurePixelHeight)||figurePixelHeight<=0)return false;
-      const pose=playbackByActor.get(actor)?.pose||idlePose;
+      const pose=person.atlasMotion&&stage==='motion'&&!atlasMotionLease?atlasNeutral(person):playbackByActor.get(actor)?.pose||idlePose;
       if(pose.visible===false)return false;
       const standing=stage==='standing'||!!person.motionRig,columns=standing?1:person.grid[0],rows=standing?1:person.grid[1];
       const slot=standing?0:pose.slot,width=image.naturalWidth/columns,height=image.naturalHeight/rows;
       const scale=figurePixelHeight/person.figureHeight;
       ctx.drawImage(image,(slot%columns)*width,Math.floor(slot/columns)*height,width,height,
         groundX-person.pivot[0]*scale,groundY-person.pivot[1]*scale,person.cell[0]*scale,person.cell[1]*scale);
+      if(person.atlasMotion&&stage==='motion'&&!atlasMotionLease)atlasMotionLease=admitAtlasMotion(actor,person,owner);
       return true;
     },
     inspect(){return {id,variant,loaded:!!image,settled,failed,error,retired:owner.retired,jobState:job?.state||null,
@@ -899,6 +997,7 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
       pose:playbackByActor.get(actor)?.pose||null,standingOnly:person?.standingOnly===true,height:person?.figureWorldHeight||null}},
     dispose(){
       if(owner.retired)return;owner.retired=true;
+      atlasMotionLease?.release();atlasMotionLease=null;
       lease?.release();lease=null;motionLease?.release();motionLease=null;image=null;stage=null;
       rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;rigImage=null;
     }

@@ -1,5 +1,5 @@
 // Native-image Gaussian patches transport the whole painting on the paired paths.
-import {mouthPaintGlsl,nativeMouthRect,nativeMouthAngle,nativeMouthProfile,mouthProfileValues} from './buergeramt-mouth-paint.js?v=20261013-character-lips';
+import {mouthPaintGlsl,nativeMouthRect,nativeMouthAngle,nativeMouthProfile,mouthProfileValues} from './buergeramt-mouth-paint.js?v=20261018-mouth-single-exit';
 const smooth=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 // A bounded spatial delay gives liquid motion, using only the existing phase.
 // Its slope stays positive and returns to one at both authored endpoints.

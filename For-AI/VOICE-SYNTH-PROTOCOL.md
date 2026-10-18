@@ -1,5 +1,34 @@
 # Character voice production
 
+## Heiko final-encoding recognition windows (2026-10-19)
+
+`heiko-story-24` and `heiko-story-27` have a finite
+`exhaustive-final-encoding-windows-v1` admission in the curator, bound to each
+final MP3 hash and independently qualified proof digest. The complete decoded
+16 kHz mono PCM is partitioned into contiguous, nonoverlapping windows at the
+complete native-part boundaries. Every sample is covered once; no padding,
+cropping of speech, script prompt, transcript rewrite or omitted tail is allowed.
+Each raw window transcript must match its owned source, and the unchanged joined
+transcript must match the complete source. The proof retains both conflicting
+whole-file readings as failures. Whole-file success must not be claimed for these
+two files. The sealed coverage receipt also binds the actual native join, all
+part hashes and complete source offsets to the final encoding.
+
+The only additional token-boundary normalization is the adjacent `dran bleibt`
+to `dranbleibt` in recognition output. It preserves the audible ordered letters;
+it does not authorize `dran bleiben`, different verbs, dropped words or negation.
+The original strict spacing comparison remains false in the receipt. In
+particular, `sage`/`sag` and `habe`/`hab` stay distinct. Authored dialogue and raw
+transcripts remain unchanged. Automated recognition and byte checks do not
+establish perceptual sound quality.
+
+Manifest and runtime receipts retain actual inference text, its policy and both
+source/input hashes, alongside the selected professor profile. A literal excerpt
+of that same approved reference is recorded as a separate `referenceConditioning`
+input; it never changes the selected profile or claims a new speaker. Complete
+native joins preserve these fields by part index. Finite encoded-hash regression
+fixtures guard against silently dropping an entire input-provenance block.
+
 ## City reference licence metadata (2026-10-16)
 
 The authoring producer resolves a city character's recorded `reference.releaseLicense` only when its unique owner, selected production profile and both reference hashes agree. Only the explicit `CC0-1.0` declaration qualifies for this path; missing, conflicting or mismatched evidence remains unknown. The existing noncity resolver is unchanged. This corrects future authoring metadata without rewriting historical receipts, granting a saved take admission or replacing private reference-byte verification.
@@ -916,3 +945,60 @@ The first valid name also warms the six selected fixed call recordings in native
 George explicitly selected the saved 20-second professor reference. Both original and normalized reference SHA-256 are `1ccb91c8cc1fd03ee28fd46b0d727e7f69717ed70e15210c538a1283dca26c06`. Condition this English reference with the saved profile.reference_text; do not use a forced German transcription of its English audio. The private conditioning receipt freezes profile/text hashes. Output text and independent encoded ASR remain German.
 
 The selected-profile manifest accounts for all 36 unchanged German/English sources: 20 accepted recordings (2,445,232 bytes / 303.93 seconds) and 16 held sources using exact captions. All accepted encodings passed native receipts, strict word checks, levels, format and 40 Hz energy rederivation. No words or validators were relaxed. One faulty reference-language diagnostic and its one corrected first-source attempt are preserved with the other raw takes. This restoration used 36 correctly conditioned attempts plus that diagnostic. Human listening remains NOT RUN. Former CC0 profile, all36 recordings, cast and manifest are privately archived; the profile UUID is preserved. Source provenance is in assets/voices/LICENSES.md.
+
+### Completing restored recordings
+
+The preceding counts describe the initial restoration. Later completion keeps
+accepted files unchanged and preserves every rejected take privately. A stronger
+independent, unprompted reading may establish that an existing encoded take has
+the exact words; retain its earlier failed recognition result and both model
+receipts. Recognition changes do not authorize transcript edits or missing words.
+
+A long line may also use complete native sentence parts, joined in exact source
+order. Each part needs its own completed native inference, selected voice and
+reference binding, exact literal source span, actual render input, seed, native
+WAV/sample hashes and independent encoded word check. The joined parent has zero
+parent synthesis calls. Concatenate every native sample without cuts, crossfades
+or inserted silence, then apply the shared processing recipe once to that joined
+native audio. Verify the final parent encoding independently for every word,
+format, levels and measured mouth energy. Record actual part calls rather than
+claiming that the parent was a single native take.
+
+The curator checks this receipt structure; private admission review must also
+verify the referenced bytes, command receipts, source spans and complete ordered
+PCM concatenation. Passing synthetic receipt tests alone does not qualify audio.
+Fixed recording requests include the catalogued audio hash in their HTTP cache
+identity, so replacing a filename does not retain the former voice after reload.
+
+The completion work also uses a literal reference-input excerpt from samples
+`[0, 97920)` of that same approved professor WAV: 4.080 seconds of mono PCM16 at
+24 kHz. Its WAV SHA-256 is
+`012b9c85f149767274b44fc9a977c7bf8e6d69d69cfaaa9fc5d1e7aa8aac975f`;
+conditioning text is “Hello everybody, my name is Heiko Schmidt.” The saved
+20-second profile and original/reference files remain unchanged. Top-level
+reference hashes identify that selected profile; the explicit
+`referenceConditioning` receipt identifies the actual inference input. Private
+review verifies the entire literal PCM slice, actual CLI arguments and native
+annotation. The measured quiet boundary and its approximate ASR timing disagree
+about a possible weak next-word onset; preserve that uncertainty. Neither the
+boundary measurement nor successful output establishes perceptual listening.
+
+Only a native leaf may declare a reference or render-input transform. A joined
+parent retains each leaf's actual input and has no whole-parent inference input.
+Compact runtime receipts preserve both whole-take and indexed part reference
+inputs. The curator checks the exact reviewed variant; finite published-take
+regressions require the corresponding reference and render fields. Optional
+metadata alone cannot reveal an omitted private inference input, so byte-backed
+admission remains required.
+
+Two bounded inference-only punctuation policies preserve the canonical words:
+`finite-spoken-tag-and-elision-punctuation-v1` changes `, ja?` to `. Ja?` and
+marks `hab` as `hab'`; `finite-spoken-short-form-pause-v1` changes `sag’s` to
+`sag … es`, `hab ihm` to `hab … ihm`, and `, ja?` to `; ja?`. Record exact actual
+input, canonical/input hashes and policy. The latter permits at most three
+accounted part calls, including its two preserved failures. These cues do not
+authorize an extra word, dropped particle, visible-text edit or ASR waiver.
+
+## Heiko completed selected-profile pack (2026-10-19)
+
+All 36 authored Heiko lines now have admitted selected-professor-profile recordings. Together with Inga 34, Schwabingen 33 and Hartmut 7, the active neighbor catalog resolves 110/110 exact owned bilingual sources. The final two sources and their German subtitles use the fuller forms Ich sage es and ich habe. Each changed complete phrase had one initial native take; unchanged qualified native parts were reused byte-for-byte at their new canonical source offsets. Both final joined MP3s passed unprompted whole-file faster-whisper CPU recognition with the unchanged word comparator, final levels/format and 40 Hz energy. Failed historical short forms and nonexact q4 whole readings remain private. The selected 20-second reference is unchanged; actual 4.080-second literal reference inputs remain declared per native leaf. No additional TTS fallback, word waiver, edits within native outputs or public source/reference audio were introduced. Human listening is NOT RUN.

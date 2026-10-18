@@ -61,7 +61,7 @@ class SandaleSourceAdapter(unittest.TestCase):
         functions = {"read", "sha", "write", "source_hashes", "configure_request", "sandale_dialogue_sources",
                      "validate_sandale_request", "validate_crowd_request", "jobs", "execute"}
         nodes = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in functions
-                 or isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id in {"SANDALE_SOURCE_SCOPE", "SANDALE_OWNERS"} for target in node.targets)]
+                 or isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id in {"SANDALE_SOURCE_SCOPE", "SANDALE_OWNERS", "QUIZ_SOURCE_STATUS", "QUIZ_SOURCE_SCOPE"} for target in node.targets)]
         self.namespace = {"ROOT": self.root, "Path": Path, "json": json, "re": re, "subprocess": subprocess,
                           "hashlib": hashlib, "os": SimpleNamespace(name="source-test"), "REUSE_EVIDENCE": [],
                           "AUTHORING_HELPER_SHA256": hashlib.sha256(PRODUCER.read_bytes()).hexdigest()}

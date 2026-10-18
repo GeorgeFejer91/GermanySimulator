@@ -1,0 +1,30 @@
+{
+  "voiceId": "stadt-erwin-archiv",
+  "fullName": "Erwin Archiv",
+  "status": "missing-source; external-output-moderation-blocker",
+  "attempts": 2,
+  "requestedDesign": "Elderly male with oversized long drooping face, thin silver centre-part hair, heavy rectangular black spectacles, long grey side-whiskers, clean chin. Compact short stooped body and broad complete shoes. Dusty charcoal tweed jacket over brown patterned sweater, warm grey stout trousers, broad tan brogues. One tied small bundle of blank cream files carried anatomical LEFT forearm, right empty. Bored resigned closed mouth.",
+  "exactPrompt": "NEW fictional Germany Simulator open-city miniature character direction SOURCE SHEET. Four columns ONE horizontal row only: FRONT neutral; TRUE RIGHT-facing PROFILE; TRUE REAR (no face); TRUE LEFT-facing PROFILE. Transparent RGBA everywhere outside character, no scene, floor, shadows, marks, labels, text, grid or checkerboard. Wide panoramic layout 4:1, ideally 2048x512. Each of four full bodies entirely inside its own equal-width cell with generous transparent margins, one shared standing sole baseline and identical head/body scale, closed rest lips on all visible faces, relaxed planted feet and attached hands. Match supplied canonical neighbors ONLY for style/proportions: SHORT stocky compact adult, oversized head, total about TWO to TWO-AND-A-HALF HEAD heights, short neck, squat torso, SHORT substantial legs, broad complete chunky shoes, readable attached hands, mature age-specific face. Never tall realistic adults, long shins, tiny heads/shoes. Painterly soft shaded volume, restrained warm light, dark clear contour, brushed cloth, matching canonical Heiko/Inga/Schwabingen city miniature family. Design a distinct fictional identity, NOT a recolor or clone of any reference person. Same face, build, clothes, prop anatomical hand and textures in all four views; no mirrored prop swapping. Props must remain connected to hands including rear and opposite profile with proper occlusion. All visible mouths one clean closed crease for future speech rig; rear no mouth. No gestures, walks or action variants yet. Character specification:  CRITICAL view handedness: RIGHT-facing profile has anatomical RIGHT near arm, LEFT-facing profile has anatomical LEFT near arm. A prop owned by the FAR hand should be naturally occluded or only peek at the front edge, never move into the near fist. Erwin Archiv. Elderly male with oversized long drooping face, thin silver centre-part hair, heavy rectangular black spectacles, long grey side-whiskers, clean chin. Compact short stooped body and broad complete shoes. Dusty charcoal tweed jacket over brown patterned sweater, warm grey stout trousers, broad tan brogues. One tied small bundle of blank cream files carried anatomical LEFT forearm, right empty. Bored resigned closed mouth.",
+  "tool": "built-in image_gen.imagegen",
+  "errors": [
+    {
+      "requestId": "ba5f2f1d-8c88-4eb9-8695-c6b6052e0f8c",
+      "http": 400,
+      "code": "moderation_blocked",
+      "stage": "output",
+      "categories": [
+        "other"
+      ]
+    },
+    {
+      "requestId": "6f642ca8-68eb-4b40-a12c-2f0044d2f38c",
+      "http": 400,
+      "code": "moderation_blocked",
+      "stage": "output",
+      "categories": [
+        "other"
+      ]
+    }
+  ],
+  "result": "No image generated. Original harmless fictional elderly archivist brief was retried unchanged once. No further attempts or model/tool substitution. Integration owner must retain missing status."
+}

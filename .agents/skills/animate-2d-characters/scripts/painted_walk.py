@@ -86,6 +86,14 @@ def animate(source, c, travel=(1, 0), count=8, foreground=1, strength=1, phases=
         raise ValueError('Foot centres must be an ordered measured source pair')
     if not 0 <= c.get('step_width',16) <= 64 or not 0 <= c.get('root_overlap',2) <= 32:
         raise ValueError('Stride/hidden-root overlap exceeds the supported range')
+    depth_amplitude=c.get('depth_amplitude',9)
+    if not isinstance(depth_amplitude,(int,float)) or isinstance(depth_amplitude,bool) or not np.isfinite(depth_amplitude) or not 0 <= depth_amplitude <= 64:
+        raise ValueError('depth_amplitude must be finite and between zero and64 working pixels')
+    if c.get('stride_curve','sin') not in ('sin','planted'):
+        raise ValueError('stride_curve must be sin or planted')
+    depth_knee_follow=c.get('depth_knee_follow',.55)
+    if not isinstance(depth_knee_follow,(int,float)) or isinstance(depth_knee_follow,bool) or not np.isfinite(depth_knee_follow) or not 0 <= depth_knee_follow <= 1:
+        raise ValueError('depth_knee_follow must be a finite fraction between zero and one')
     if any(c['hem'][i]+c.get('root_overlap',2) >= c['knee'][i] for i in range(2)):
         raise ValueError('Root overlap must stay above both measured knees')
     if 'auto_hand_mask' in c and type(c['auto_hand_mask']) is not bool:
@@ -156,15 +164,22 @@ def animate(source, c, travel=(1, 0), count=8, foreground=1, strength=1, phases=
         moves = []
         for side in range(2):
             t = phase + side*np.pi
+            stride=np.sin(t)
+            if c.get('stride_curve')=='planted':
+                p=(t/(2*np.pi))%1
+                if .25<=p<=.75:stride=2-4*p
+                else:
+                    swing=((p-.75)%1)*2
+                    stride=-1-2*swing+12*swing*swing-8*swing*swing*swing
             base = (mid-c['foot_centres'][side])*strength if not vertical and 'foot_centres' in c else 0
             amplitude = c.get('step_width', 16)
-            foot = base + travel[0]*amplitude*np.sin(t)*strength + (3*np.sin(t)*strength+hip_shift*.25 if vertical else 0)
-            knee = base*.6 + travel[0]*(amplitude*7/16)*np.sin(t)*strength + (1.5*np.sin(t)*strength+hip_shift*.5 if vertical else 0)
-            depth = travel[1]*9*np.sin(t)*strength
+            foot = base + travel[0]*amplitude*stride*strength + (3*np.sin(t)*strength+hip_shift*.25 if vertical else 0)
+            knee = base*.6 + travel[0]*(amplitude*7/16)*stride*strength + (1.5*np.sin(t)*strength+hip_shift*.5 if vertical else 0)
+            depth = travel[1]*depth_amplitude*stride*strength
             lift = (14 if vertical else 7)*max(0, np.cos(t))*strength
             nodes = [0, waist, hip, c['hem'][side], c['knee'][side], c['ankle'][side], 511]
             dxs = [0, hip_shift, hip_shift, hip_shift+knee*.35, knee, foot, foot]
-            dys = [bob, bob, bob, bob-lift*(.22 if vertical else .15)+depth*.22, bob-lift*(.55 if vertical else .4)+depth*.55, depth-lift, depth-lift]
+            dys = [bob, bob, bob, bob-lift*(.22 if vertical else .15)+depth*.22, bob-lift*(.55 if vertical else .4)+depth*depth_knee_follow, depth-lift, depth-lift]
             moves.append((nodes, dxs, dys, warp_layer(legs[side], nodes, dxs, dys)))
         for side in [1-foreground, foreground]:
             canvas.alpha_composite(moves[side][3])
@@ -258,8 +273,10 @@ def main():
         mapped = {key: ([v*k+origin[1] for v in c[key]] if isinstance(c[key],list) else c[key]*k+origin[1]) for key in ('waist','hip','hem','knee','sock','ankle')}
         mapped['mid'] = c['mid']*k+origin[0]
         mapped['centres'] = [v*k+origin[0] for v in c['centres']]
-        for key in ('step_width','root_overlap'):
+        for key in ('step_width','root_overlap','depth_amplitude'):
             if key in c:mapped[key]=c[key]*k
+        if 'stride_curve' in c:mapped['stride_curve']=c['stride_curve']
+        if 'depth_knee_follow' in c:mapped['depth_knee_follow']=c['depth_knee_follow']
         if 'auto_hand_mask' in c:mapped['auto_hand_mask']=c['auto_hand_mask']
         if 'foot_centres' in c:mapped['foot_centres']=[z*k+origin[0] for z in c['foot_centres']]
         if 'split_path_xy' in c:mapped['split_path_xy']=[[x*k+origin[0],y*k+origin[1]]for x,y in c['split_path_xy']]

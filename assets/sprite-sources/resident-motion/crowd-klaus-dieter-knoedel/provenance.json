@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-klaus-dieter-knoedel-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-clean-candidate.png",
+      "sha256": "617400c7f6687a45fdad9169a2691dfdc65f80b964437c9d75c35647b238c6b8",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        174,
+        62,
+        1371,
+        955
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-klaus-dieter-knoedel/profiles-turns-v2.png",
+      "sha256": "884fe475939ec737035d1a412a1388112a0246f7c0d8cd4e6ddc61f41c16b156",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        97,
+        13,
+        1440,
+        987
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

@@ -31,3 +31,8 @@ Use the smallest coherent change. Update the owning document when a lasting rule
 - [`chatdev/`](./chatdev/): shared production and review protocol, optional pinned Bürgeramt runner, and legacy Secret Tunnel handoff records.
 
 Keep this index short. Add a document only when it has a distinct current owner and consumer.
+
+<!-- rtk-workflow -->
+## Shell output
+
+Prefer supported RTK filters for human-read shell output; see the [RTK skill](skills/rtk/SKILL.md). Keep exact reads and parser input raw. Use bounded native commands when RTK is unavailable.

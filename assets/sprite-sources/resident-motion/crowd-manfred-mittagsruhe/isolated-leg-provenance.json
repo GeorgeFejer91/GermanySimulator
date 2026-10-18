@@ -1,0 +1,15 @@
+{
+  "status": "candidate-unapproved",
+  "source": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/isolated-legs-v2.png",
+  "sourceSha256": "4ec987be5b335abad545e2da0359176872a9f8d7025317f6f3d8dd80fa89e8c8",
+  "route": "built-in imagegen edit",
+  "references": [
+    "isolated-legs-candidate.png",
+    "assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png"
+  ],
+  "promptSummary": "Four source-specific complete short thick brown wool trouser and muted burgundy round shoe limbs, two genuinely opposite facings. Refine first source with shorter trousers and taller chunky shoes; preserve original upper and physical prop hands in compositor.",
+  "size": [
+    2172,
+    724
+  ]
+}

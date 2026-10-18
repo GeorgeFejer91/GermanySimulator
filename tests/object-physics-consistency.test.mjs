@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
-import {motionObserverSource} from './street-simulation-fixture-source.mjs';
+import {motionObserverSource,pedestrianAvoidanceSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(new URL("../game.js",import.meta.url),"utf8");
 function functionSource(name){
@@ -17,7 +17,7 @@ function functionSource(name){
 const names=["normObjectRadius","propRadius","groundCircleCandidates","staticBlocked","trainCarDistance","trainAt","groundContactBlocks","signedRectDistance","vehicleBodyDistance","orientedBodySeparation","vehicleMotionBlocked","vehicleOnRoad","dynamicBlocker","groundStaticMotionBlocked","pedestrianRouteContains","responderBlocked","moveGroundResponder","blocked","blockingPedestrian","movePlayerGround","pedestrianLane","pedestrianRouteStalled","initializePedestrianRoutes"];
 function harness(){
  const context={WORLD:{w:10960,h:5360},CITY:{w:9840,h:4240},RAIL_GUTTER:560,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAFFIC_CAR_RADIUS:42,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,player:{x:8000,y:5000,r:16},goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},buildings:[],props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],horizontalRoads:[],verticalRoads:[],sidewalkSegments:[],verticalSidewalkSegments:[],crossings:[],stations:[],stationElevation:()=>0,clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by)};
- vm.createContext(context);vm.runInContext(motionObserverSource(source)+names.map(functionSource).join("\n"),context);return context;
+ vm.createContext(context);vm.runInContext(motionObserverSource(source)+names.map(functionSource).join("\n")+'\n'+pedestrianAvoidanceSource(source),context);return context;
 }
 
 // Observe actual accepted axis mutations without replacing the physical helpers.

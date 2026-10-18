@@ -416,5 +416,11 @@ MP3 SHA-256: `77da21c122e47c5bf7ab834b2c2caace42f8d82df638fa28acb33a5cfb181606`.
 
 Current Heiko recordings use the user-selected saved profile **GS Heiko Maaslos (20s reference)**, UUID `fec92a799b3a48879cc2d90ce2ae2e10`. George explicitly confirmed restoration of this 20-second professor reference on 2026-10-18. Both the original and normalized reference SHA-256 are `1ccb91c8cc1fd03ee28fd46b0d727e7f69717ed70e15210c538a1283dca26c06`. The saved profile describes its source as a “User-approved 20-second excerpt of saved YouTube profile 3a25c962b0de4ac7986a4e453d76b01f”. The saved metadata does not identify an independently verified source-performer license or external redistribution permission. Record this user selection for the project without assigning CC0 to this source.
 
+Completion takes may condition on a literal first 4.080 seconds of that same
+private reference, with actual WAV SHA-256
+`012b9c85f149767274b44fc9a977c7bf8e6d69d69cfaaa9fc5d1e7aa8aac975f`.
+The manifest distinguishes this inference-input excerpt from the unchanged
+selected 20-second profile binding. It introduces no new speaker or license claim.
 
-These synthetic game recordings use the existing OmniVoice runtime/model notices above. Twenty selected-profile MP3s passed independent encoded-word, level and format checks; sixteen rejected sources retain exact captions. The 20-second source/reference audio and authoring models are not shipped. Human listening is NOT RUN. The prior CC0 Heiko profile and its36 former recordings are historical and preserved privately, including their distinct source/license statement.
+
+These synthetic game recordings use the existing OmniVoice runtime/model notices above. All 36 selected-profile MP3s passed independent encoded-word, level and format checks. The final two sources use the fuller written and spoken forms “Ich sage es” and “ich habe”; historical failed short-form takes remain private. Completed native phrase outputs are joined without cuts, silence insertion or crossfades where the manifest declares native parts. The 20-second source/reference audio and authoring models are not shipped. Human listening is NOT RUN. The prior CC0 Heiko profile and its 36 former recordings are historical and preserved privately, including their distinct source/license statement.

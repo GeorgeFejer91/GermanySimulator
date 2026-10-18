@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-irmgard-aktenordner-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/profiles-clean-candidate.png",
+      "sha256": "a3022447007e58fe756048ff034eda649fb7a6f179247f4f8858abd60e9718ad",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        100,
+        30,
+        1439,
+        999
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-irmgard-aktenordner/turns-clipped-candidate.png",
+      "sha256": "4edf484802fc33c3972d7c58e59b1343a6c62a041d9b83d62a0f4dc9b6b18031",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        50,
+        11,
+        2113,
+        702
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

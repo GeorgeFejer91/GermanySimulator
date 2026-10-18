@@ -8,6 +8,7 @@ import subprocess
 import tempfile
 from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('voice_builder', Path(__file__).with_name('build-knick-voice.py'))
 builder = importlib.util.module_from_spec(spec)
@@ -158,14 +159,23 @@ class OfficeVoiceGates(unittest.TestCase):
         voice = 'spieler-hans-peter-mustermann'
         profile = builder.read(builder.ROOT / 'For-AI/VOICE-CAST.json')['productionVoices'][voice]['profileId']
         jobs = [{'clipId': f'player-registration-{key.lower()}-{index + 1}', 'actorId': 'player', 'voiceId': voice, 'profileId': profile, 'text': choice['label'], 'english': 'Authored test subtitle', 'sourceLocator': f'buergeramt-story.js registration.nodes.{key}.choices[{index}].label'} for key, node in story['registration']['nodes'].items() for index, choice in enumerate(node['choices'])]
-        for key, text in [('phone-silent', 'Telefon auf lautlos schalten.'), ('phone-ignore', 'Nicht rangehen. Telefon weglegen.'), ('complete', 'Meldebestätigung und A38 mitnehmen.')]:
+        for key, text in [('complete', 'Meldebestätigung und A38 mitnehmen.')]:
             jobs.append({'clipId': 'player-' + key, 'actorId': 'player', 'voiceId': voice, 'profileId': profile, 'text': text, 'english': 'Authored test subtitle', 'sourceLocator': 'buergeramt.js choice.label ' + key})
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'request.json'
             plan = {'family': 'office-replies', 'publicAssetFamily': 'assets/voices/player-replies', 'privateReviewFamily': 'GermanySimulator office replies review 2026-10-12', 'sourceSha256': {name: builder.sha(builder.ROOT / name) for name in ('buergeramt-story.js', 'buergeramt.js')}, 'jobs': jobs}
             path.write_text(json.dumps(plan), encoding='utf-8')
             builder.configure_request(SimpleNamespace(voice_id=voice, request_file=path, ambient=False))
-            self.assertEqual(len(builder.jobs()), 107)
+            self.assertEqual(len(builder.jobs()), 105)
+            self.assertFalse({'player-phone-silent', 'player-phone-ignore'} & {job['clipId'] for job in builder.jobs()})
+            historical = copy.deepcopy(plan)
+            for key, text in [('phone-silent', 'Telefon auf lautlos schalten.'), ('phone-ignore', 'Nicht rangehen. Telefon weglegen.')]:
+                historical['jobs'].append({**jobs[-1], 'clipId': 'player-' + key, 'text': text,
+                                           'sourceLocator': 'buergeramt.js choice.label ' + key})
+            path.write_text(json.dumps(historical), encoding='utf-8')
+            builder.configure_request(SimpleNamespace(voice_id=voice, request_file=path, ambient=False))
+            with self.assertRaises(AssertionError):
+                builder.jobs()
             for key, value in [('text', 'Changed source words.'), ('actorId', 'clerk')]:
                 changed = copy.deepcopy(plan)
                 changed['jobs'][0][key] = value
@@ -174,6 +184,29 @@ class OfficeVoiceGates(unittest.TestCase):
                 with self.assertRaises(AssertionError):
                     builder.jobs()
         builder.configure_request(SimpleNamespace(voice_id='amt-brunhilde-knick', request_file=None, ambient=False))
+
+    def test_current_office_request_cannot_erase_historical_published_reply_metadata(self):
+        voice = 'spieler-hans-peter-mustermann'
+        public = builder.ROOT / 'assets/voices/player-replies' / (voice + '-manifest.json')
+        published = public.read_bytes()
+        document = json.loads(published)
+        self.assertEqual(len(document['clips']), 107)
+        self.assertTrue({'player-phone-silent', 'player-phone-ignore'} <= {row['clipId'] for row in document['clips']})
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = root / 'assets/voices/player-replies' / public.name
+            target.parent.mkdir(parents=True)
+            target.write_bytes(published)
+            queue = [row for row in document['clips'] if row['clipId'] not in {'player-phone-silent', 'player-phone-ignore'}]
+            self.assertEqual(len(queue), 105)
+            with patch.object(builder, 'ROOT', root), patch.object(builder, 'VOICE', voice), \
+                    patch.object(builder, 'PUBLIC_ASSET_FAMILY', 'assets/voices/player-replies'), \
+                    patch.object(builder, 'CUSTOM_PLAN', {'family': 'office-replies'}):
+                with self.assertRaisesRegex(AssertionError, 'Historical office reply metadata'):
+                    builder.manifest(queue, root / 'private')
+            self.assertEqual(target.read_bytes(), published)
+            self.assertEqual(list(target.parent.iterdir()), [target])
+        self.assertEqual(public.read_bytes(), published)
 
     def test_encoded_join_requires_every_word_and_the_same_voice(self):
         binding = {'voiceId': 'amt-brunhilde-knick', 'profileId': 'saved-id', 'referenceSha256': 'a' * 64, 'renderer': 'pinned-renderer', 'modelRevision': 'pinned-revision'}

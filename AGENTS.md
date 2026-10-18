@@ -9,3 +9,8 @@ The root game is the canonical standalone Germany Simulator. Preserve its “Gra
 Codex is the workflow lead. Use [`For-AI/SKILLS.md`](./For-AI/SKILLS.md) to choose applicable skills, domain owners, model tiers, and scoped delegation. A single integrator owns acceptance and any commit or publication; workers stay within assigned paths and do not commit, push, or absorb unrelated worktree changes.
 
 Keep durable rules in their owning global `For-AI/` document or level's `For-AI/` directory, following [`LEVELS.md`](./For-AI/LEVELS.md). Link shared authorities instead of copying them. Do not add a second game, framework, service, or asset pipeline without a demonstrated need. For infrastructure, backend efficiency, and asset-pipeline decisions, use `$ponytail` when available; otherwise follow the YAGNI rules in [`For-AI/ASSET-POLICY.md`](./For-AI/ASSET-POLICY.md).
+
+<!-- rtk-workflow -->
+## Shell output
+
+For shell work, prefer supported RTK filters; see [For-AI/README.md](For-AI/README.md) and its RTK skill. Keep exact reads and parser input raw.

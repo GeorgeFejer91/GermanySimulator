@@ -3,11 +3,14 @@ globalThis.TouristAnimations = (() => {
   const loading = new Map();
   const facing = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
   const cell = (n, p) => { n.spriteRow=p.row; n.spriteFrame=p.col; n.spriteFlip=false; };
-  async function load(url,{movementOnly=false}={}) {
-    const key=url+(movementOnly?'#movement':'');
+  const phases = (m, direction) => m.walks[direction].frames??8;
+  async function load(url,options={}) {
+    const {movementOnly=false,variant=(globalThis.innerWidth||1024)<=600?'mobile':'desktop'}=typeof options==='string'?{variant:options}:options;
+    const key=url+':'+variant+(movementOnly?'#movement':'');
     if (!loading.has(key)) loading.set(key, (async () => {
       const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
-      const manifest=await response.json();
+      const original=await response.json(),selected=original.variants?.[variant];
+      const manifest=selected?{...original,...selected,delivery:selected.delivery,image:selected.image||selected.file,pivot:selected.pivot,frame_size:selected.frame_size,image_size:selected.image_size||[selected.width,selected.height]}:original;
       const movement=movementOnly&&manifest.movement_delivery;
       if(movement)manifest.movementOnly=true;
       async function artwork(spec) {
@@ -21,7 +24,7 @@ globalThis.TouristAnimations = (() => {
       const header=new DataView(bytes.buffer);
       const cols=manifest.cols??8,rows=manifest.rows??10;
       const [w,h]=manifest.image_size||[cols*manifest.frame_size[0],rows*manifest.frame_size[1]];
-      const webp=spec!==manifest;
+      const webp=bytes.length>=12&&header.getUint32(0)===0x52494646&&header.getUint32(8)===0x57454250;
       let width,height;
       if(webp) {
         if(bytes.length<25||header.getUint32(0)!==0x52494646||header.getUint32(8)!==0x57454250||header.getUint32(12)!==0x5650384c||bytes[20]!==0x2f)throw Error('Lossless character WebP header');
@@ -38,13 +41,25 @@ globalThis.TouristAnimations = (() => {
     const {manifest,bytes,type}=await loading.get(key);
     return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type}))};
   }
-  function request(n,dx,dy,m) {
-    n.touristRequested=facing(dx,dy);
+  function phaseSettle(n,m) {
+    const from=n.touristFacing,settle=m.settles?.[from]?.[String(n.spriteFrame)];
+    if(!settle)return null;
+    return [{row:m.walks[from].row,col:n.spriteFrame,ms:m.walks[from].frame_ms,role:'settle-entry'},
+      ...settle.frames.map(p=>({...p,role:'settle'}))];
+  }
+  function request(n,dx,dy,m,{planted=false}={}) {
+    n.touristRequested=Math.abs(dx)+Math.abs(dy)>.0001?facing(dx,dy):n.touristRequested||n.touristFacing||'down';
     if(!n.touristFacing) {
       n.touristFacing=n.touristRequested;
-      n.gaitDistance=((n.spriteFrame||0)%8)*(m.cycle_distance??24)/8;
+      const count=phases(m,n.touristFacing);
+      n.gaitDistance=((n.spriteFrame||0)%count)*(m.cycle_distance??24)/count;
     }
-    if(!n.touristTurn) cell(n,{row:m.walks[n.touristFacing].row,col:(n.spriteFrame||0)%8});
+    if(!n.touristTurn) cell(n,{row:m.walks[n.touristFacing].row,col:(n.spriteFrame||0)%phases(m,n.touristFacing)});
+    if(planted&&!n.touristTurn&&n.touristRequested!==n.touristFacing){
+      const transition=m.transitions[n.touristFacing+'-to-'+n.touristRequested].frames,settle=phaseSettle(n,m);
+      const frames=settle?[...settle,...transition.slice(m.bridges[n.touristFacing].stop_cols.length)]:transition;
+      n.touristTurn={target:n.touristRequested,frames,index:0,elapsed:0};cell(n,frames[0]);
+    }
   }
   function advance(n,distance,dt,m,cycle=24) {
     cycle=m.cycle_distance??cycle;
@@ -56,7 +71,7 @@ globalThis.TouristAnimations = (() => {
         active.elapsed-=active.frames[active.index].ms;
         if(++active.index===active.frames.length) {
           n.touristFacing=active.target; n.gaitDistance=0; n.touristTurn=null;
-          cell(n,{row:m.walks[active.target].row,col:0}); return false;
+          cell(n,active.endCell||{row:m.walks[active.target].row,col:0}); return false;
         }
       }
       cell(n,active.frames[active.index]); return false;
@@ -69,7 +84,23 @@ globalThis.TouristAnimations = (() => {
       n.touristTurn={target,frames,index:0,elapsed:0}; cell(n,frames[0]); return true;
     }
     n.gaitDistance=next;
-    cell(n,{row:m.walks[n.touristFacing].row,col:Math.floor((next%cycle)/cycle*8)%8}); return true;
+    const count=phases(m,n.touristFacing);
+    cell(n,{row:m.walks[n.touristFacing].row,col:Math.floor((next%cycle)/cycle*count)%count}); return true;
+  }
+  function start(n,dx,dy,m) {
+    if(n.touristTurn)return;
+    const from=n.touristFacing||'down',target=Math.abs(dx)+Math.abs(dy)>.0001?facing(dx,dy):from,bridge=m.bridges[from];
+    n.touristFacing=from;n.touristRequested=target;
+    const frames=target===from?bridge.start_cols.map(col=>({row:bridge.row,col,ms:bridge.frame_ms})):
+      m.transitions[from+'-to-'+target].frames.slice(bridge.stop_cols.length);
+    n.touristTurn={target,frames,index:0,elapsed:0,kind:'start'};cell(n,frames[0]);
+  }
+  function stop(n,m) {
+    if(n.touristTurn)return;
+    const from=n.touristFacing||'down',bridge=m.bridges[from];
+    const frames=phaseSettle(n,m)||bridge.stop_cols.map(col=>({row:bridge.row,col,ms:bridge.frame_ms,role:'stop'}));
+    n.touristTurn={target:from,frames,index:0,elapsed:0,kind:'stop',endCell:{row:bridge.row,col:bridge.stop_cols.at(-1)}};
+    cell(n,frames[0]);
   }
   function action(n,name,elapsed,duration,m,cycle=24){
     cycle=m.cycle_distance??cycle;
@@ -80,5 +111,5 @@ globalThis.TouristAnimations = (() => {
     else{const p=a.keys[key];cell(n,{row:p.row,col:p.col_start+phase});n.spriteFlip=name==='sidePour'&&n.touristFacing==='left'}
     return true;
   }
-  return Object.freeze({load,request,advance,action,isTurning:n=>!!n.touristTurn});
+  return Object.freeze({load,request,advance,start,stop,action,isTurning:n=>!!n.touristTurn});
 })();

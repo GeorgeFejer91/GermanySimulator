@@ -1,0 +1,33 @@
+{
+  "bytes": 1120508,
+  "exportFilesChanged": [],
+  "exactPromptFile": "passing-leg-anchors-v2-prompt.txt",
+  "runtimeAdmission": false,
+  "nextAction": "Independent actual image comparison only; no more blind generation, no broad bake. Choose at most one viable donor for measured source fit; reject unresolved source anatomy.",
+  "frameBake": false,
+  "references": [
+    {
+      "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac",
+      "file": "output/street-speaker-motion/hartmut-keller/down-source.png"
+    },
+    {
+      "sha256": "64ad9362cc2b8a73757fca988d9381bf51401be7f02451b4cf172e92df99c3d7",
+      "file": "output/street-speaker-motion/hartmut-keller/up-source.png"
+    }
+  ],
+  "file": "passing-leg-anchors-v2.png",
+  "observations": [
+    "Four whole lower-body pairs show opposite passing knees/raised shoes instead of repeated same-foot contacts.",
+    "Posterior trouser construction differs from front, but rear shoe orientation/heel seam identity requires independent comparison against actual up-source; do not infer acceptance from panel labels.",
+    "Common-scale fit, alpha/gutters, cuff joins, source brush detail and near/far ownership remain unverified."
+  ],
+  "createdUTC": "2026-10-16T10:53:41.2057268Z",
+  "temporalReview": false,
+  "originalToolOutput": "exec-0e67e85c-bac7-4bb3-85d1-9ac2532733c5.png",
+  "status": "HOLD - generated source only; not fitted or accepted",
+  "sha256": "036d2cfba66e7391d9611d88e65a4fc8a02df20b04662cef8234b8ee3415ed1f",
+  "runtimeFilesChanged": [],
+  "exactPrompt": "Make a transparent 2x2 painted source sheet of FOUR LOWER-BODY WALK PASSING POSES for this exact character. Use ONLY reference1 for front anatomy/clothing and reference2 for rear anatomy/clothing. Preserve their exceptionally SHORT BROAD brown trousers and broad brown shoes: the entire waist-to-ground lower body should be roughly1.8times WIDER than tall, like the actual references, not long baggy legs. Each panel shows BOTH trouser legs and BOTH shoes, cropped just below the vest; no vest, torso, head, hands, props, labels, ground or shadow. Same common scale/waist height across panels. TOP LEFT: front, viewer-left leg in mid-swing passing with a flexed knee/calf tucked slightly back and shoe modestly lifted, viewer-right leg supporting flat. TOP RIGHT: front, viewer-right leg passing, viewer-left supporting. BOTTOM LEFT: rear, viewer-left leg passing, viewer-right supporting. BOTTOM RIGHT: rear, viewer-right passing, viewer-left supporting. This is mid-passing, NOT wide opposed contact poses. Show a small natural knee bend/creased cloth and calf sweep, not a straight shortened tube or a giant shoe moving under static trousers. Keep feet close to their own original gap, moderate everyday walk, only about a quarter shoe-height clearance. Both source legs have the original thick short build, original cloth and shoe proportions, muted texture and ink edges. CRITICAL REAR PANELS: copy the HEEL/BACK construction from reference2, with heel closest to viewer and toe directed AWAY; the rear source has no visible front toe cap or laces. Supporting rear shoe shows its rounded back heel and heel seams. Lifted rear shoe shows the heel and some DARK UNDERSOLE/tread, never the front vamp/toe upper. Do not substitute front-facing shoes in rear panels. Front shoes retain reference1's rounded toe construction. Whole continuous hip-knee-calf-cuff-shoe paint; no exposed ankle. Keep clear alpha gutters and no overlap between the four panels. Genuine transparent background. These are missing own-character anatomical source keys for later fitting, not finished animation.",
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": true
+}

@@ -526,6 +526,11 @@ The accepted side-view cycle distances, in game units, are Merkel 24, Alice 27, 
 
 ## Walking quality for every character
 
+Later on 2026-10-17, George deferred 3D model pose accuracy as a current
+priority. Keep the retained player/police pose work preserved separately;
+continue the painted-character work without requiring further 3D pose tuning
+or comparison. This deferral does not approve unpublished 3D gait changes.
+
 George's requirement, confirmed on 2026-10-17: every character's walking leg
 movement must meet the accuracy of Herr and Frau Sandale. Apply this to the
 city and office cast, crowd, quiz characters, neighbors and the retained

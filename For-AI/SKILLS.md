@@ -94,6 +94,31 @@ input and physical-device acceptance gates.
 
 Prefer existing deterministic scripts and focused checks. For browser-visible changes, expected coverage is Chromium desktop and Android mobile. Label Android emulation and real-device results distinctly; if a physical device is unavailable, report that coverage as outstanding. Follow the [silent background browser-test policy](./AGENT-START.md#silent-background-browser-tests). Silent test sessions can verify audio state and timing, but not perceived sound quality; record listening evidence separately and do not claim it without an actual listening review. If a browser, device, API, or external model is unavailable, state what was not exercised.
 
+## AI browser testing
+
+This is a reusable **developer-only** Playwright/Chromium tool. Its generic runner has no game globals; the game suite supplies readiness, controls, observations and resource assertions. No runtime imports, renderer replacement or new dependency is needed. Keep the existing release benchmark, visual review and physical-device gates authoritative.
+
+Apply the installed `$ponytail` skill before extending this tool: reuse a scenario, choose the smallest useful check, and use existing dependencies. If the skill is unavailable, use that same reuse-first fallback; do not build a framework, service, custom action language or duplicate test assertions. Keep the generic core portable and game knowledge in the suite.
+
+From the repository root (uses existing `PLAYWRIGHT_MODULE` / `CHROMIUM_PATH`, local Playwright or the bundled Node installation and installed Chrome):
+
+```powershell
+node --test tests/browser-harness.test.mjs
+node tools/test-browser.mjs quick
+node tools/test-browser.mjs stress --scenario input --profile android-portrait
+node tools/test-browser.mjs stress --scenario lifecycle --iterations 10
+node tools/test-browser.mjs quick --suite ./my-suite.mjs --base-url http://127.0.0.1:5173
+node tools/check-browser-harness.mjs
+```
+
+1. Run relevant deterministic checks, then one selected browser batch. `quick` runs desktop startup/input; `stress` includes startup failure/fallback fixtures, input and lifecycle on desktop and Android portrait/landscape emulation. Profiles/scenarios can be selected repeatedly. Default seed is `1`; stress input runs `iterations × 10` sequences (100 by default), lifecycle runs ten warmed visits. `--profile reduced` selects reduced motion explicitly.
+2. Read the JSON summary first: verdict, counts, elapsed time, sampled runner RSS, largest sampled end heap, failure reproduction commands and report path. Successful stdout is bounded to 4 KiB, failure stdout to 12 KiB. Detailed reports, bounded event logs and screenshots stay under ignored `output/browser-tests/`. CLI exit `0` means pass, `1` means a failed/incomplete run, and `2` means an invocation error. Use RTK for supported human-readable shell output; keep JSON reports raw.
+3. Inspect required visual checkpoints or the failed scenario's artifacts. Reproduce with the reported command; `--trace` records the rerun. Each default run gets a fresh directory; reusing an explicit `--output` with an existing report creates a new run subdirectory. Preserve original failures; a later pass does not erase them.
+4. Use real Playwright keyboard/pointer/touch actions for control coverage. Label debug placement, welcome dismissal, synthetic blur/visibility/BFCache events and Android emulation. Seeded randomness does not fix async completion or frame scheduling. Silent audio-state checks do not establish perceived quality.
+5. Keep browser work sequential to avoid GPU contention. Each independent case gets a fresh context; lifecycle repetitions share a context to expose growth. Heap, DOM/listener and renderer resource counters are partial memory evidence. Keep numeric game budgets in `ASSET-POLICY.md`; quick checks do not certify release acceptance.
+
+Reusable suite modules export a default `{name, scenarios}` object. Each scenario has `id`, `modes: ['quick', 'stress']`, and `async run({page, context, baseURL, profile, seed, iterations, mode, root, artifacts, signal})`; optional `profiles`, `timeoutMs`, `actionTimeoutMs`, and `contextOptions` scope real needs. Assert observable outcomes; use `artifacts.log(type, message)`, `.json(filename, value)`, `.screenshot(page, filename)` and `.path(filename)` instead of printing per-action output. Return compact details. An optional suite `profiles` array uses Playwright context options plus `id`; `sourceFiles(root)` can supply local source hashes. `--root` serves a local directory; `--base-url` uses an existing server. The runner never closes a caller-owned server. Generic runner checks use a separate HTML form fixture, not game behavior.
+
 ## 2D character animation skill
 
 For a moving bitmap character, sprite atlas, gait, reaction, or transition, use `$animate-2d-characters` with `SPRITE-GENERATION-PROTOCOL.md`; review exact encoded frames at desktop and mobile scale. At each completed animation milestone, check for a reusable general method. If one emerged, validate and publish that general guidance to the public skill, then synchronize the project copy; keep project-specific assets and acceptance details here.
@@ -113,3 +138,8 @@ The 2026-10-10 skill synchronization changes guidance only and retains the exist
 For new or changed bounded HTML/CSS text, use `$uncodixfy-pretext` and measure the touched UI with actual `@chenglou/pretext`. Verify 320 CSS px reflow, 200% text/zoom, and long German and English strings; define an explicit layout or reveal path when text cannot fit. This route does not imply the existing game UI has already been migrated.
 
 The pinned OpenBMB ChatDev workflow in `For-AI/chatdev/` is an optional legacy runner for its fourteen Bürgeramt stages, including read-only Physics and Camera specialists, not the default coordinator or a source of assumed Codex capabilities. Use it only when its external checkout/runtime is available and the task benefits from that runner. It requires its local API configuration, has limited stage-specific file tools, and its QA tool does not perform browser playtests. Static validation confirms graph/tool configuration only; it does not execute stages or establish browser acceptance. Follow [`chatdev/README.md`](./chatdev/README.md) for its exact limits. Do not create Codex chats unless the user explicitly requests them.
+
+<!-- rtk-workflow -->
+## RTK
+
+For shell inspection, builds and tests, use [rtk](skills/rtk/SKILL.md); keep exact evidence and parser input raw.

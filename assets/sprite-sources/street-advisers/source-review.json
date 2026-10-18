@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved; no runtime use",
+  "reviewer": "Codex street_cast_audit worker",
+  "sourceEvidence": "Each saved full source sheet and exact-pixel light/dark composites viewed; procedural street screenshots and canonical compact neighbor/towel art viewed.",
+  "references": [
+    {
+      "file": "assets/sprite-sources/neighbors/directions.png",
+      "sha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2",
+      "role": "compact big-head short-leg family proportions and painted rendering"
+    },
+    {
+      "file": "assets/tourists/towelMan/character-atlas.webp",
+      "sha256": "9723a8e7e322dca30af6f40f13b8d259a9df803dafca66615ad0b695958dcf16",
+      "role": "exact encoded first cell inspected for city-scale silhouette"
+    },
+    {
+      "file": "street-wisdom.js",
+      "sha256": "63697e599c58c27f0acb259e60ee092eda4472673c1bfc2907ac6e1d14a07ae2",
+      "role": "costume and identity authority"
+    }
+  ],
+  "orderedMotionReviewed": false,
+  "renderedGameplayReviewed": false,
+  "sourceGateVerdict": "HOLD",
+  "unresolvedFindings": [
+    "Generated 1254 square sheets are semantic source grids, not mechanically registered atlases. In particular Horst first-row soles extend below nominal y=418. Use complete connected figure bounds and one family registration transform; never equal-slice the nominal cells or normalize each pose separately.",
+    "No walk contacts/opposite contacts/passing, whole-body turn bridges, action return bridges, fitted mouth profiles, connected inbetweens, runtime sampling or game-size performance yet.",
+    "Dietmar working grip crosses ruler and case handle; close anatomy and occlusion review plus stable bridge keys required before expansion.",
+    "Waltraud working/review are deliberately close inspecting gestures; cadence or an additional key must make their narrative purpose clear.",
+    "All source keys have closed rest lips; rear has no mouth. No lip-sync claim and no generic mouth registration may be reused.",
+    "Raw tool output retained byte-exact; final exporter must inspect gutters and clear hidden RGB at alpha zero with premultiplied filtering. The visible light/dark composites do not show the red fringe suggested by opaque preview of hidden RGB."
+  ],
+  "records": [
+    {
+      "name": "Dietmar DIN-Norm",
+      "file": "assets/sprite-sources/street-advisers/dietmar-din-norm-keys-candidate.png",
+      "sha256": "2c55ffd485bd35807909173aaedcb32a4ebcc418f5a32b464deb25a7b2bf6af1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1838175,
+      "decodedRGBABytes": 6290064,
+      "status": "candidate-unapproved",
+      "layout": "4 columns by 3 semantic rows; source groups not runtime atlas cells",
+      "propOwnership": "briefcase anatomical left; yellow ruler anatomical right",
+      "poseFindings": [
+        {
+          "pose": "front",
+          "figureBoundsXYXY": [
+            53,
+            20,
+            275,
+            396
+          ],
+          "observation": "Sage flat cap and narrow mature face; yellow ruler right, handled briefcase left; full shoes."
+        },
+        {
+          "pose": "right",
+          "figureBoundsXYXY": [
+            378,
+            21,
+            575,
+            401
+          ],
+          "observation": "Right profile retains actual prop hands, cap brim and short legs."
+        },
+        {
+          "pose": "rear",
+          "figureBoundsXYXY": [
+            671,
+            21,
+            889,
+            398
+          ],
+          "observation": "Rear retains case left/ruler right, cap and grey rear hair; no mouth."
+        },
+        {
+          "pose": "left",
+          "figureBoundsXYXY": [
+            1000,
+            21,
+            1193,
+            401
+          ],
+          "observation": "Left profile retains actual prop hands, complete soles and cap."
+        },
+        {
+          "pose": "greeting",
+          "figureBoundsXYXY": [
+            25,
+            438,
+            284,
+            808
+          ],
+          "observation": "Ruler/right hand raised in acknowledgment, case hangs left."
+        },
+        {
+          "pose": "waiting",
+          "figureBoundsXYXY": [
+            372,
+            438,
+            584,
+            808
+          ],
+          "observation": "Ruler across waist; case remains left, face front."
+        },
+        {
+          "pose": "working",
+          "figureBoundsXYXY": [
+            678,
+            437,
+            902,
+            808
+          ],
+          "observation": "Case lifts by left handle while ruler crosses it; left finger/ruler/handle crossing needs authored bridge and close anatomy review."
+        },
+        {
+          "pose": "review",
+          "figureBoundsXYXY": [
+            1003,
+            437,
+            1213,
+            808
+          ],
+          "observation": "Head lowers toward raised ruler, case remains down left; distinct from working."
+        },
+        {
+          "pose": "success",
+          "figureBoundsXYXY": [
+            54,
+            840,
+            278,
+            1215
+          ],
+          "observation": "Closed-mouth slight smile, lowered ruler and case; no jump implied."
+        },
+        {
+          "pose": "failure",
+          "figureBoundsXYXY": [
+            363,
+            840,
+            585,
+            1215
+          ],
+          "observation": "Downcast face and relaxed arms retain both objects."
+        },
+        {
+          "pose": "look",
+          "figureBoundsXYXY": [
+            677,
+            842,
+            896,
+            1215
+          ],
+          "observation": "Front torso, head turns toward screen right; cap follows head."
+        },
+        {
+          "pose": "speaking",
+          "figureBoundsXYXY": [
+            979,
+            840,
+            1213,
+            1215
+          ],
+          "observation": "Ruler hand raised near chest, lips remain closed; case left."
+        }
+      ]
+    },
+    {
+      "name": "Horst Hausordnung",
+      "file": "assets/sprite-sources/street-advisers/horst-hausordnung-keys-candidate.png",
+      "sha256": "0d39b49ecf609735b344977ead6236377498e25b0e2210aaed06e2a757c29754",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1878438,
+      "decodedRGBABytes": 6290064,
+      "status": "candidate-unapproved",
+      "layout": "4 columns by 3 semantic rows; source groups not runtime atlas cells",
+      "propOwnership": "clipboard anatomical left; keys clipped anatomical right belt; right free",
+      "poseFindings": [
+        {
+          "pose": "front",
+          "figureBoundsXYXY": [
+            42,
+            37,
+            293,
+            425
+          ],
+          "observation": "Balding grey hair, moustache and glasses distinguish identity; clipboard anatomical left, corrected keys anatomical right waist."
+        },
+        {
+          "pose": "right",
+          "figureBoundsXYXY": [
+            381,
+            36,
+            586,
+            425
+          ],
+          "observation": "Right profile preserves clipboard and belt-mounted keys; full chunky shoes."
+        },
+        {
+          "pose": "rear",
+          "figureBoundsXYXY": [
+            663,
+            36,
+            912,
+            425
+          ],
+          "observation": "Rear preserves vest buckle, keys anatomical right, clipboard partly occluded left; no mouth."
+        },
+        {
+          "pose": "left",
+          "figureBoundsXYXY": [
+            997,
+            36,
+            1196,
+            425
+          ],
+          "observation": "Left profile preserves clipboard left and keys right; spectacles stay at eye line."
+        },
+        {
+          "pose": "greeting",
+          "figureBoundsXYXY": [
+            36,
+            447,
+            295,
+            819
+          ],
+          "observation": "Attached free right palm raised; keys remain at right belt."
+        },
+        {
+          "pose": "waiting",
+          "figureBoundsXYXY": [
+            353,
+            447,
+            615,
+            819
+          ],
+          "observation": "Free arm bends toward waist; clipboard ownership unchanged."
+        },
+        {
+          "pose": "working",
+          "figureBoundsXYXY": [
+            677,
+            445,
+            906,
+            820
+          ],
+          "observation": "Repair removed extra pen; right hand attends clipboard, exact finger-paper occlusion needs closer review."
+        },
+        {
+          "pose": "review",
+          "figureBoundsXYXY": [
+            998,
+            447,
+            1223,
+            819
+          ],
+          "observation": "Bare index follows page; elbow/wrist connected, clipboard left."
+        },
+        {
+          "pose": "success",
+          "figureBoundsXYXY": [
+            60,
+            843,
+            301,
+            1218
+          ],
+          "observation": "Eyes close slightly and fist lifts toward chest; both feet grounded."
+        },
+        {
+          "pose": "failure",
+          "figureBoundsXYXY": [
+            356,
+            842,
+            609,
+            1218
+          ],
+          "observation": "Head dips, mouth remains restrained beneath moustache; clipboard retained."
+        },
+        {
+          "pose": "look",
+          "figureBoundsXYXY": [
+            669,
+            842,
+            924,
+            1218
+          ],
+          "observation": "Head turns toward screen right; spectacles align with head; original keys visibility repaired."
+        },
+        {
+          "pose": "speaking",
+          "figureBoundsXYXY": [
+            972,
+            842,
+            1226,
+            1219
+          ],
+          "observation": "Single right index lifts, closed lips under moustache; no open mouth cavity."
+        }
+      ]
+    },
+    {
+      "name": "Waltraud Wartemarke",
+      "file": "assets/sprite-sources/street-advisers/waltraud-wartemarke-keys-candidate.png",
+      "sha256": "b1981d2752ef9a74b089764217107f3d7175cfb0a3cedc1d7c9565eb1eb5633c",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1759275,
+      "decodedRGBABytes": 6290064,
+      "status": "candidate-unapproved",
+      "layout": "4 columns by 3 semantic rows; source groups not runtime atlas cells",
+      "propOwnership": "folder anatomical left; right free",
+      "poseFindings": [
+        {
+          "pose": "front",
+          "figureBoundsXYXY": [
+            42,
+            33,
+            270,
+            417
+          ],
+          "observation": "Silver bun, round disapproving face, folder held anatomical left, complete paired brown shoes."
+        },
+        {
+          "pose": "right",
+          "figureBoundsXYXY": [
+            377,
+            38,
+            566,
+            416
+          ],
+          "observation": "Right profile retains bun, folder near forward forearm, round cheek and coat hem."
+        },
+        {
+          "pose": "rear",
+          "figureBoundsXYXY": [
+            690,
+            38,
+            908,
+            415
+          ],
+          "observation": "Rear shows one bun and coat belt; folder edge at anatomical left, mouth deliberately absent."
+        },
+        {
+          "pose": "left",
+          "figureBoundsXYXY": [
+            1026,
+            40,
+            1205,
+            416
+          ],
+          "observation": "Left profile retains folder anatomical left and free arm, short complete legs."
+        },
+        {
+          "pose": "greeting",
+          "figureBoundsXYXY": [
+            40,
+            438,
+            278,
+            816
+          ],
+          "observation": "Attached anatomical right palm raised, left forearm retains folder."
+        },
+        {
+          "pose": "waiting",
+          "figureBoundsXYXY": [
+            384,
+            439,
+            584,
+            815
+          ],
+          "observation": "Right hand rests against closed coat; shoulders and gaze expectant."
+        },
+        {
+          "pose": "working",
+          "figureBoundsXYXY": [
+            694,
+            442,
+            897,
+            816
+          ],
+          "observation": "Right hand attends raised folder; overlapping wrist/folder needs bridge planning."
+        },
+        {
+          "pose": "review",
+          "figureBoundsXYXY": [
+            1009,
+            442,
+            1216,
+            816
+          ],
+          "observation": "Folder angles closer to gaze; working/review visually close and require clear timing."
+        },
+        {
+          "pose": "success",
+          "figureBoundsXYXY": [
+            63,
+            835,
+            277,
+            1214
+          ],
+          "observation": "Small closed-mouth smile and right fist near chest; both shoes planted."
+        },
+        {
+          "pose": "failure",
+          "figureBoundsXYXY": [
+            369,
+            839,
+            589,
+            1214
+          ],
+          "observation": "Downward gaze and right hand lowered; no prop loss."
+        },
+        {
+          "pose": "look",
+          "figureBoundsXYXY": [
+            679,
+            836,
+            901,
+            1214
+          ],
+          "observation": "Body remains front, head turns toward screen right with attached neck."
+        },
+        {
+          "pose": "speaking",
+          "figureBoundsXYXY": [
+            983,
+            839,
+            1210,
+            1214
+          ],
+          "observation": "One attached right index raised; lips closed for future registered speech."
+        }
+      ]
+    }
+  ]
+}

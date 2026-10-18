@@ -23,7 +23,7 @@
   <meta name="twitter:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <script defer src="./fullscreen.js?v=20261012-browser-smoothness"></script>
+  <script defer src="./fullscreen.js?v=20261019-complete-development"></script>
   <link rel="preload" as="image" href="./assets/fire/kenney-flame-01.png" crossorigin="anonymous">
   <link rel="preload" as="image" href="./assets/fire/kenney-flame-05.png" crossorigin="anonymous">
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
@@ -69,7 +69,7 @@
     <div class="file-page" data-page="status" hidden><aside class="hud stats"><span>ENERGIE <b id="energy">100</b></span><span>FORMULARE <b id="forms">0</b></span><span>PFAND <b id="pfand">0</b></span></aside></div>
     <div class="file-page" data-page="collection" hidden><p id="anmeldung-badge" class="anmeldung-badge" role="status" hidden>✓ ANMELDUNG ABGESCHLOSSEN</p><div class="wurst-pass"><b>EXTRA WURST <output id="wurst-count">0/9</output></b><div id="wurst-badges" class="wurst-badges" role="list" aria-label="Collected sausage badges"></div></div></div>
     <div class="file-page" data-page="controls" hidden>
-      <dl class="file-controls"><dt>WASD / ↑↓←→</dt><dd data-de="Gehen" data-en="Move">Gehen</dd><dt>SHIFT</dt><dd data-de="Verdächtig schnell" data-en="Suspiciously fast">Verdächtig schnell</dd><dt>E</dt><dd data-de="Interagieren" data-en="Interact">Interagieren</dd><dt>§ / Q</dt><dd data-de="Gesetz zitieren · ab 9/15 Germanness" data-en="Quote a law · from 9/15 Germanness">Gesetz zitieren · ab 9/15 Germanness</dd><dt>M / ESC</dt><dd data-de="Akte / Zurück" data-en="File / Back">Akte / Zurück</dd></dl>
+      <dl class="file-controls"><dt>WASD / ↑↓←→</dt><dd data-de="Gehen" data-en="Move">Gehen</dd><dt>SHIFT</dt><dd data-de="Verdächtig schnell" data-en="Suspiciously fast">Verdächtig schnell</dd><dt>E</dt><dd data-de="Interagieren" data-en="Interact">Interagieren</dd><dt class="law-controls">§ / Q</dt><dd class="law-controls" data-de="Gesetz zitieren · ab 9/15 Germanness" data-en="Quote a law · from 9/15 Germanness">Gesetz zitieren · ab 9/15 Germanness</dd><dt>M / ESC</dt><dd data-de="Akte / Zurück" data-en="File / Back">Akte / Zurück</dd></dl>
       <div class="file-settings"><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button></div>
       <a href="https://ec-games.space/">EC GAMES</a>
     </div>
@@ -128,31 +128,31 @@
 </main>
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/0.186.0/build/three.module.min.js","three/addons/":"./assets/vendor/three/0.186.0/examples/jsm/"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261015-quiz-fallback"></script>
-<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261018-heiko-professor"></script>
-<script src="./street-wisdom.js?v=20261012-browser-smoothness"></script>
-<script src="./goerlitzer-park.js?v=20261012-browser-smoothness"></script>
+<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261019-complete-development"></script>
+<script src="./street-wisdom.js?v=20261019-complete-development"></script>
+<script src="./goerlitzer-park.js?v=20261019-complete-development"></script>
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
 <script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
-<script src="./buergeramt-time.js?v=20261012-browser-smoothness"></script>
+<script src="./buergeramt-time.js?v=20261019-complete-development"></script>
 <script src="./buergeramt-link.js?v=20261014-level-links"></script>
 <script src="./buergeramt-story.js?v=20261014-player-address"></script>
 <script src="./buergeramt-voice-profiles.js?v=20261012-one-knick"></script>
-<script src="./buergeramt-fever.js?v=20261012-browser-smoothness"></script>
-<script src="./buergeramt-animation-clock.js?v=20261012-browser-smoothness"></script>
+<script src="./buergeramt-fever.js?v=20261019-complete-development"></script>
+<script src="./buergeramt-animation-clock.js?v=20261019-complete-development"></script>
 <script src="./buergeramt-lips.js?v=20261015-office-mouth-233"></script>
 <script src="./buergeramt-goop.js?v=20261013-goop-grace"></script>
 <script src="./knick-speech.js?v=20261014-player-address"></script>
 <script src="./buergeramt.js?v=20261019-final-phone-wait"></script>
 <script type="module" src="./buergeramt-fit.js?v=20261014-level-links"></script>
-<script src="./character-interactions.js?v=20261012-browser-smoothness"></script>
-<script src="./tourist-animation.js?v=20261018-neighbor-dialogue-tickets"></script>
+<script src="./character-interactions.js?v=20261019-complete-development"></script>
+<script src="./tourist-animation.js?v=20261019-complete-development"></script>
 <script src="./jwd-gardens.js?v=20261014-neighbors-complete"></script>
-<script src="./neighbor-story.js?v=20261015-neighbors-complete"></script>
-<script src="./game.js?v=20261018-recorded-voice-cache"></script>
+<script src="./neighbor-story.js?v=20261019-complete-development"></script>
+<script src="./game.js?v=20261019-complete-development"></script>
 <script type="module" src="./game-hud.js?v=20261016-halo-fax-refresh"></script>
-<script type="module" src="./subtitle-layout.js?v=20261012-browser-smoothness"></script>
-<script type="module" src="./quiz-layout.js?v=20261012-browser-smoothness"></script>
-<script type="module" src="./world3d.js?v=20261018-neighbor-dialogue-tickets"></script>
+<script type="module" src="./subtitle-layout.js?v=20261019-complete-development"></script>
+<script type="module" src="./quiz-layout.js?v=20261019-complete-development"></script>
+<script type="module" src="./world3d.js?v=20261019-complete-development"></script>
 </body>
 </html>
 

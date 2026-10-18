@@ -254,7 +254,7 @@ test('manifest is lazy and deduplicated across admitted actors',async()=>{
   const priorFetch=globalThis.fetch,priorCast=globalThis.GermanySimulatorQuizCharacters;
   let calls=0;
   globalThis.GermanySimulatorQuizCharacters={characters:[{id:'test-person',voiceId:'quiz-test-person'}]};
-  globalThis.fetch=async url=>{calls++;assert.equal(url,'./assets/characters/street/manifest.json');return {ok:true,text:async()=>JSON.stringify(manifest())}};
+  globalThis.fetch=async url=>{calls++;assert.equal(url,'./assets/characters/street/manifest.json?v=20261016-street-atlas-pilot');return {ok:true,text:async()=>JSON.stringify(manifest())}};
   try{
     registerStreetCharacterManifest({schemaVersion:1,characters:{}});
     const f=rendererFixture(),first=createStreetCharacterSprite(f.T,actor(),f.host(),f.queueAsset,f.camera),second=createStreetCharacterSprite(f.T,actor(),f.host(),f.queueAsset,f.camera);
@@ -470,7 +470,7 @@ test('public cold startup loads actual city metadata once before either factory,
     const cold=await import('../street-character-sprites.js?public-cold-city');
     const body=await readFile(new URL('./fixtures/street-legacy-candidate-manifest.json',import.meta.url),'utf8');
     let requests=0,respond;
-    globalThis.fetch=(url,options)=>{requests++;assert.equal(url,'./assets/characters/street/manifest.json');assert(options.signal);return new Promise(resolve=>respond=resolve)};
+    globalThis.fetch=(url,options)=>{requests++;assert.equal(url,'./assets/characters/street/manifest.json?v=20261016-street-atlas-pilot');assert(options.signal);return new Promise(resolve=>respond=resolve)};
     const cityActor={id:'crowd-0',quizCharacterId:'hartmut-keller',voiceId:'quiz-hartmut-keller',x:885,y:1060};
     assert.equal(cold.resolveStreetCharacter(cityActor),null,'fresh ordinary city identity has no global alias bootstrap');
     const gate=cold.loadStreetCharacterManifest();assert.equal(cold.loadStreetCharacterManifest(),gate);assert.equal(requests,1);
@@ -523,7 +523,7 @@ test('ordinary city-key cold bootstrap needs only fetched test metadata, with no
     metadata.characters={'stadt-klaus-dieter-klein':{...person,id:'klaus-dieter-klein',actorId:'stadt-klaus-dieter-klein',aliases:[],name:'Test-only city identity metadata'}};
     metadata.fixturePurpose='Synthetic parser/registration fixture only; test.webp supplies no actual Klein artwork or live cast binding.';
     let requests=0;
-    globalThis.fetch=async url=>{requests++;assert.equal(url,'./assets/characters/street/manifest.json');return {ok:true,text:async()=>JSON.stringify(metadata)}};
+    globalThis.fetch=async url=>{requests++;assert.equal(url,'./assets/characters/street/manifest.json?v=20261016-street-atlas-pilot');return {ok:true,text:async()=>JSON.stringify(metadata)}};
     const cityActor={id:'stadt-klaus-dieter-klein',voiceId:'stadt-klaus-dieter-klein',x:100,y:200};
     assert.equal(cold.resolveStreetCharacter(cityActor),null);
     assert.equal(cold.createStreetCharacterCanvasSprite(cityActor,f.queueAsset),null);

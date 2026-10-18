@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-manfred-mittagsruhe-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/profiles-clean-candidate.png",
+      "sha256": "11b35cd03f8d9de94aaabd334e3d28c111686f3a48d37ef0f3f744a3c2ea8ab8",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        165,
+        59,
+        1367,
+        945
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-manfred-mittagsruhe/turns-candidate.png",
+      "sha256": "dc73b0435c13cab2ad426b79f76063f99dbbf51a7e6b578cce9d8c0ffdedaede",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        84,
+        51,
+        2060,
+        675
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

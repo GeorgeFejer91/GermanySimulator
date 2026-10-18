@@ -1,0 +1,39 @@
+{
+  "status": "Separate source candidate only; no runtime atlas or manifest changes",
+  "tool": "built-in image_gen.imagegen",
+  "candidate": "left-far-leg-shoe-candidate-v2.png",
+  "originalToolOutput": "exec-563e80e8-8a52-4cb0-aa5b-a41e23a5a462.png",
+  "prompt": "left-far-leg-shoe-candidate-v2-prompt.txt",
+  "reference": "output/street-speaker-motion/hartmut-keller/original-left-near-shoe-reference.png",
+  "fit": [
+    {
+      "file": "left-far-leg-v1.png",
+      "sha256": "7e6a2aafc24fd355c2053c1064f10845ab28274b288ffc0fc28cfd6ede0c0662",
+      "alpha20Bounds": [
+        335,
+        333,
+        948,
+        1021
+      ],
+      "fitWidth": 88,
+      "fitHeight": 98.76672104404567,
+      "fitGroundY": 471,
+      "fitX": 174
+    },
+    {
+      "file": "left-far-leg-shoe-candidate-v2.png",
+      "sha256": "a633e81b8b8f7f090babe8018e1aab8b374ba8a16858094e284fa9819d01018f",
+      "alpha20Bounds": [
+        336,
+        333,
+        949,
+        1020
+      ],
+      "fitWidth": 88,
+      "fitHeight": 98.62316476345839,
+      "fitGroundY": 471,
+      "fitX": 174
+    }
+  ],
+  "note": "Own left reference, no mirroring. Fit diagnostic uses existing width88, soleY471 and X174. Eventual shoe-only composite must retain original upper leg. No scale/timing change; canonical runtime figureWorldHeight1.6 requires new live calibration, not reuse of old2.0world/40cycle measurements."
+}

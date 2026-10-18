@@ -1,0 +1,829 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "frame_size": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    148
+  ],
+  "cols": 16,
+  "rows": 13,
+  "walks": {
+    "down": {
+      "row": 0,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "right": {
+      "row": 1,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "up": {
+      "row": 2,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "left": {
+      "row": 3,
+      "frames": 16,
+      "frame_ms": 60,
+      "loop": true
+    }
+  },
+  "bridges": {
+    "down": {
+      "row": 4,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "right": {
+      "row": 5,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "up": {
+      "row": 6,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "left": {
+      "row": 7,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    }
+  },
+  "transitions": {
+    "down-to-right": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-up": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "down-to-left": {
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-down": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-up": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "right-to-left": {
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-down": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-right": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "up-to-left": {
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-down": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-right": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    },
+    "left-to-up": {
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "visualStatus": "candidate-eight-painted-views-awaits-ordered-review"
+    }
+  },
+  "turns": {
+    "pose_count": 8,
+    "rows": [
+      8
+    ],
+    "anchors": {
+      "down": 0,
+      "right": 2,
+      "up": 4,
+      "left": 6
+    },
+    "frame_ms": 85
+  },
+  "variants": {
+    "desktop": {
+      "image": "character-desktop.webp",
+      "sha256": "b1ec935bb93b5a9c20be9a0c295cb18eb6a1e4f7cd4ca9ca415a16b93692bc82",
+      "bytes": 1343298,
+      "frame_size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        148
+      ],
+      "image_size": [
+        2048,
+        2080
+      ],
+      "decodedRGBABytes": 17039360,
+      "minimumGutter": 9
+    },
+    "mobile": {
+      "image": "character-mobile.webp",
+      "sha256": "cea19dc2e00bcc23ccf29d7fbcb992752631cab9e57b36763a9aebbaa6f75944",
+      "bytes": 413034,
+      "frame_size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32.0,
+        74.0
+      ],
+      "image_size": [
+        1024,
+        1040
+      ],
+      "decodedRGBABytes": 4259840,
+      "minimumGutter": 4
+    }
+  },
+  "delivery": {
+    "image": "character-desktop.webp",
+    "sha256": "b1ec935bb93b5a9c20be9a0c295cb18eb6a1e4f7cd4ca9ca415a16b93692bc82",
+    "bytes": 1343298,
+    "frame_size": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      148
+    ],
+    "image_size": [
+      2048,
+      2080
+    ],
+    "decodedRGBABytes": 17039360,
+    "minimumGutter": 9
+  },
+  "image": "character-desktop.webp",
+  "sha256": "b1ec935bb93b5a9c20be9a0c295cb18eb6a1e4f7cd4ca9ca415a16b93692bc82",
+  "image_size": [
+    2048,
+    2080
+  ],
+  "cycle_distance": 32,
+  "cycleDistanceStatus": "linear source stance32; independent runtime and down/up planting pending",
+  "figureWorldHeight": 2.0,
+  "billboardWorldHeight": 2.5,
+  "interactions": {
+    "neutral": {
+      "row": 4,
+      "col": 2
+    },
+    "states": {
+      "idle": {
+        "row": 9,
+        "durations_ms": [
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "look": {
+        "row": 10,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "success": {
+        "row": 11,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "failure": {
+        "row": 12,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      }
+    }
+  },
+  "source": "assets/sprite-sources/street-residents/stadt-manfred-din-directions-short-v2-candidate.png",
+  "sourceSha256": "fc024162f6f6ba137f265e95581d8c531256dbea3d030e665710405c50dc6be0",
+  "sourceBindings": {
+    "sources": [
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-manfred-din/front-turns-wrong-hand-candidate.png",
+        "sha256": "4984d2f4fe97883e2a8282da922ffdeb03260968b952a635ec7f1d613ac62a77"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-manfred-din/frontleft-candidate.png",
+        "sha256": "aabe646ac785fef14d32f083b5d2d85b017850c6e668e5e299d71f2d57b89e0f"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-manfred-din/leg-components-smooth-candidate.png",
+        "sha256": "d8cac3c6449750aee76645ad5d38f21207686b8fb2ece0eb70c60acda2b59223"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-manfred-din/motion-poses-candidate.png",
+        "sha256": "fc2e81a156ae0b10dfef3e9aaa0b3fa5419b42a5fb584b82e80ae97bfd06ac7a"
+      },
+      {
+        "path": "assets/sprite-sources/street-residents/stadt-manfred-din-directions-short-v2-candidate.png",
+        "sha256": "fc024162f6f6ba137f265e95581d8c531256dbea3d030e665710405c50dc6be0"
+      }
+    ],
+    "fittingSha256": "d5a3924f9b150af1e5e2cb0da305f763518f8907c9018058dc50cfcf674575dd",
+    "builderSha256": "f35fffa5af9c7ad32cf4edbc34b3acb8e6f41fd2938a163e8faee9d9e8dc2285",
+    "deformationSha256": "b62101945d9601a2e910982d3dfb5a1684206efe18389bb11bb04b08fd8718fd"
+  },
+  "limitations": [
+    "Eight planted painted views; ordered turn review pending.",
+    "Profile hidden-limb coverage and prop masks require native review.",
+    "No waving/working/answer-review gesture art or speech articulation supplied.",
+    "Browser/game-scale/physical-device review not run by asset builder."
+  ]
+}

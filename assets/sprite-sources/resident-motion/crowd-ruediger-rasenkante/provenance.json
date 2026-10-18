@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-ruediger-rasenkante-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/profiles-clean-candidate.png",
+      "sha256": "78164e85c18aafc96522da135e9bdb50b2f1eb65c130f12063420a499d89bc5f",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        153,
+        11,
+        1383,
+        979
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-ruediger-rasenkante/turns-candidate.png",
+      "sha256": "fd0efc9b5a6abbb229ec06959fc330b3e884c10a4a883d554d67db99137f19ef",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        68,
+        13,
+        2083,
+        702
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

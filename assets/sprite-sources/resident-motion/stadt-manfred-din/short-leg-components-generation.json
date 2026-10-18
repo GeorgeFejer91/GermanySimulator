@@ -1,0 +1,6 @@
+{
+  "status": "candidate-unapproved",
+  "prompt": "Edit these two isolated trouser-leg-and-shoe components into MUCH SHORTER SQUAT CARICATURE proportions matching second reference. Keep same two independent right-facing components, painterly gray wool and oxblood leather texture. Change EACH component: reduce the gray trouser length to HALF its current length while keeping its width substantial; the whole trouser from upper horizontal cut to shoe should be only1.2times shoe HEIGHT. Also reduce shoe horizontal toe length by25percent, making a very broad ROUND blunt-toed compact shoe like second reference, not a long pointed dress shoe. Keep full shoe thick sole and complete rounded knee/cuff. Both legs almost vertical, each broad full upper-thigh root ending horizontal, no triangular cut. Complete near and far legs separated with transparent gap. No upper body, no extra objects, transparent background.",
+  "raw": "exec-96fcd533-7424-474a-922d-778409931ee8.png",
+  "reason": "Source-author missing whole thigh roots using original Manfred wool/cuffs and broad oxblood shoes. No original upper-body or prop replacement. Register only needed lower component height; compare source proportions before export."
+}

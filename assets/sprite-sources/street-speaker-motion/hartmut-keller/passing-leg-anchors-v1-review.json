@@ -1,0 +1,37 @@
+{
+  "bytes": 782840,
+  "exportFilesChanged": [],
+  "exactPromptFile": "passing-leg-anchors-v1-prompt.txt",
+  "runtimeAdmission": false,
+  "nextAction": "Independent actual image comparison only; no more blind generation, no broad bake. Choose at most one viable donor for measured source fit; reject unresolved source anatomy.",
+  "frameBake": false,
+  "references": [
+    {
+      "sha256": "3f719c11c232f8c4a7066c975d92ffd86e6c1b6a2581f4952b20211ccf7d1538",
+      "file": "assets/sprite-sources/street-speaker-motion/hartmut-keller/vertical-leg-layers-v2.png"
+    },
+    {
+      "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac",
+      "file": "output/street-speaker-motion/hartmut-keller/down-source.png"
+    },
+    {
+      "sha256": "64ad9362cc2b8a73757fca988d9381bf51401be7f02451b4cf172e92df99c3d7",
+      "file": "output/street-speaker-motion/hartmut-keller/up-source.png"
+    }
+  ],
+  "file": "passing-leg-anchors-v1.png",
+  "observations": [
+    "Four separate complete single-leg drawings returned; front-left reads more knee-flexed than front-right.",
+    "Rear panels resemble front shoe uppers and do not yet establish heel identity from actual up-source.",
+    "Long folded trouser regions need own-foot-scale comparison; no original-body proportion approval."
+  ],
+  "createdUTC": "2026-10-16T10:53:41.1477034Z",
+  "temporalReview": false,
+  "originalToolOutput": "exec-eae36be8-8d28-460f-ad59-10b30b8003f2.png",
+  "status": "HOLD - generated source only; not fitted or accepted",
+  "sha256": "388f2ea0a77f0f6a5a39a2ea26f9342b609c4057149e03f1aebde37b5ddf331c",
+  "runtimeFilesChanged": [],
+  "exactPrompt": "Create one transparent 2x2 game-animation source sheet containing FOUR SEPARATE COMPLETE SINGLE TROUSER LEGS with shoes, all belonging to the exact short broad elderly character in references2(front) and3(back). Reference1 supplies the existing brown cloth/leather style and contact-leg proportions; it is not the pose to repeat. Missing pose to author: the SWING LEG AT MID-PASSING in a relaxed normal walk, not a contact, march, kick, run or jump. Top-left: front-view viewer-left leg; top-right: front-view viewer-right leg; bottom-left: rear-view viewer-left leg; bottom-right: rear-view viewer-right leg. ONE leg only in each panel, complete cropped hidden thigh root through knee, calf, cuff and full shoe. Keep all four at one common scale. Preserve the character's extremely short broad trouser proportions and large rounded brown shoe. Show a readable bent knee with compressed knee folds, calf tucked back and a slightly lifted heel/shoe passing the other leg. The shape must visibly articulate thigh, knee and calf rather than simply shorten a straight leg or enlarge/move its shoe. Knee flexion about30degrees, modest everyday foot clearance. Front shoes point toward viewer, rear shoes show heel/back and a little underside on the lifted sole, not a front toe. Retain full brown shoe leather/seams/sole and natural cuff overlap with no exposed ankle. Hidden thigh root is broad enough to overlap original pelvis clothing. Do not include opposite/stance leg, waistband connecting two legs, torso, head, hands, props, labels, floor or shadows. Do not elongate/thin limbs, make tubes, mirror one drawing for the rear, or add new clothing. Original muted charcoal-brown cloth and soft brown leather, fine painted texture, dark ink edges. Plenty of clear alpha around each leg, no overlap between panels, genuinely transparent background. These are own-character missing painted anatomical key poses for later registered animation, not finished walking frames.",
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": true
+}

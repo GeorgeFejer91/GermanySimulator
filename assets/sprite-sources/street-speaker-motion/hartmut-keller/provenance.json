@@ -1,0 +1,169 @@
+{
+  "generatorSession": "01a141be-ea3d-7a21-a836-b7b13a277462",
+  "records": [
+    {
+      "file": "right-far-leg-v1.png",
+      "sha256": "3644832fa2287aa83ee917630bffee2bda55e35a29a4d367ef573e777a316b63",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-41ba3299-92cd-4e62-bfad-133cb4b5eb3b.png",
+      "sourceReferences": [
+        {
+          "file": "output/street-speaker-motion/right-source.png",
+          "sha256": "3cb979114692eea535d3850b4f372da805068cc4311b2afbdc36eed1767e6cfe"
+        }
+      ],
+      "generationBrief": "Isolated complete far/left trouser leg and right-facing brown shoe; preserve extremely short thick original proportions, full heel, hidden thigh root; no torso, props, text or shadow.",
+      "promptRecord": "Reconstructed brief from generation turn; not a verbatim prompt archive.",
+      "approval": "candidate only; exact material and animation acceptance pending"
+    },
+    {
+      "file": "left-far-leg-v1.png",
+      "sha256": "7e6a2aafc24fd355c2053c1064f10845ab28274b288ffc0fc28cfd6ede0c0662",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-43b24d7b-d29f-41a9-93e0-9da6dca5ad4b.png",
+      "sourceReferences": [
+        {
+          "file": "output/street-speaker-motion/left-source.png",
+          "sha256": "ff46a026eaa2491b0d0c112acd524397a6822467ccd8e76d80ee880ff646d54c"
+        }
+      ],
+      "generationBrief": "Isolated complete far/right trouser leg and left-facing brown shoe; extremely short broad leg, complete heel, sole, knee and hidden root; preserve original brown cloth and shoe material.",
+      "promptRecord": "Reconstructed brief from generation turn; not a verbatim prompt archive.",
+      "approval": "candidate only; exact material and animation acceptance pending"
+    },
+    {
+      "file": "quarter-turns-v1.png",
+      "sha256": "520cdb1ee25419095b788a6ec9881d3977afe6e5fd58f1971a7d8e5396266942",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-49b2e826-9ef9-445f-b68c-fbbed9bb75d6.png",
+      "sourceReferences": [
+        {
+          "file": "output/street-speaker-motion/down-source.png",
+          "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac"
+        },
+        {
+          "file": "output/street-speaker-motion/right-source.png",
+          "sha256": "3cb979114692eea535d3850b4f372da805068cc4311b2afbdc36eed1767e6cfe"
+        },
+        {
+          "file": "output/street-speaker-motion/up-source.png",
+          "sha256": "64ad9362cc2b8a73757fca988d9381bf51401be7f02451b4cf172e92df99c3d7"
+        },
+        {
+          "file": "output/street-speaker-motion/left-source.png",
+          "sha256": "ff46a026eaa2491b0d0c112acd524397a6822467ccd8e76d80ee880ff646d54c"
+        }
+      ],
+      "generationBrief": "Four whole-body planted intermediate views in a2x2 layout: front-right, rear-right, rear-left, front-left. Preserve fixed identity, crown height, large head and short body. Radio in anatomical right hand; notebook and flashlight in anatomical left. Transparent, no text or shadow.",
+      "promptRecord": "Reconstructed brief from generation turn; not a verbatim prompt archive.",
+      "approval": "candidate only; exact material and animation acceptance pending"
+    },
+    {
+      "file": "right-arm-backing-v1.png",
+      "sha256": "86486e6d633327a7c9385c5780ba4fd1270218aa7723a38461b0be1fb21dd07e",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-5229f158-d542-4602-a2ec-30dfff14acf6.png",
+      "sourceReferences": [
+        {
+          "file": "output/street-speaker-motion/down-source.png",
+          "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac"
+        }
+      ],
+      "generationBrief": "Offline occlusion backing: remove anatomical right arm on screen left, including sleeve, hand and radio; reconstruct hidden olive vest edge and beige shoulder armhole. Preserve remaining neutral figure. Transparent.",
+      "promptRecord": "Reconstructed brief from generation turn; not a verbatim prompt archive.",
+      "approval": "candidate only; exact material and animation acceptance pending"
+    },
+    {
+      "file": "left-arm-backing-v1.png",
+      "sha256": "dd26a9131484bbfe3bdbe53c8faed1217c6479a63d22eceaa6fef8d272fb89d2",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-eb59f398-1c02-4bc5-881e-ae39bf0dc42a.png",
+      "sourceReferences": [
+        {
+          "file": "output\\street-speaker-motion\\hartmut-keller\\down-source.png",
+          "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac"
+        }
+      ],
+      "exactPromptFile": "left-arm-backing-prompt.txt",
+      "approval": "Hidden vest backing used by candidate work/review only; overallvisualacceptance pending"
+    },
+    {
+      "file": "vertical-contacts-v1.png",
+      "sha256": "624d472f75a350efbd65c1dfbed614541f445300a7c6d76e45f5e56cb400be56",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-43af664e-0235-42c9-b455-fff2a0a89087.png",
+      "exactPromptFile": "vertical-contact-prompt.txt",
+      "sourceReferences": [
+        {
+          "file": "output/street-speaker-motion/hartmut-keller/down-source.png",
+          "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac"
+        },
+        {
+          "file": "output/street-speaker-motion/hartmut-keller/up-source.png",
+          "sha256": "64ad9362cc2b8a73757fca988d9381bf51401be7f02451b4cf172e92df99c3d7"
+        }
+      ],
+      "approval": "REJECTED rear contacts duplicate; not used by exporter"
+    },
+    {
+      "file": "vertical-contacts-v2.png",
+      "sha256": "d75ded67ed97ce8483a18a3ca7322b703485fd972cf1fe6aea982f6a7debff36",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-786208a8-d4b0-4de6-beb5-cba50280e279.png",
+      "exactPromptFile": "vertical-contact-repair-prompt.txt",
+      "sourceReferences": [
+        {
+          "file": "assets/sprite-sources/street-speaker-motion/hartmut-keller/vertical-contacts-v1.png",
+          "sha256": "624d472f75a350efbd65c1dfbed614541f445300a7c6d76e45f5e56cb400be56"
+        }
+      ],
+      "approval": "Repaired opposite rear contacts; pending source-fit/anatomy trial; not used by exporter"
+    },
+    {
+      "file": "vertical-leg-layers-v1.png",
+      "sha256": "55ced6b26998f47b15b55e538038c2dbf8143b7b7e4118ca08d347680ee10ba3",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-7d15d03e-e56d-40c6-a9fd-f2429261673e.png",
+      "exactPromptFile": "vertical-leg-layers-prompt.txt",
+      "sourceReferences": [
+        {
+          "file": "assets/sprite-sources/street-speaker-motion/hartmut-keller/vertical-contacts-v2.png",
+          "sha256": "d75ded67ed97ce8483a18a3ca7322b703485fd972cf1fe6aea982f6a7debff36"
+        }
+      ],
+      "approval": "REJECTED proportions too long; not used by exporter"
+    },
+    {
+      "file": "vertical-leg-layers-v2.png",
+      "sha256": "3f719c11c232f8c4a7066c975d92ffd86e6c1b6a2581f4952b20211ccf7d1538",
+      "tool": "built-in image_gen.imagegen",
+      "transparent_background": true,
+      "originalToolOutput": "exec-7d1e8495-d300-4db4-add4-5adc5eb8a470.png",
+      "exactPromptFile": "vertical-leg-layers-repair-prompt.txt",
+      "sourceReferences": [
+        {
+          "file": "assets/sprite-sources/street-speaker-motion/hartmut-keller/vertical-leg-layers-v1.png",
+          "sha256": "55ced6b26998f47b15b55e538038c2dbf8143b7b7e4118ca08d347680ee10ba3"
+        },
+        {
+          "file": "output/street-speaker-motion/hartmut-keller/down-source.png",
+          "sha256": "2b2df3bcd57b838c4714de87e44f8c97de8b8b3201ae442f36e5e18b51c33bac"
+        },
+        {
+          "file": "output/street-speaker-motion/hartmut-keller/up-source.png",
+          "sha256": "64ad9362cc2b8a73757fca988d9381bf51401be7f02451b4cf172e92df99c3d7"
+        }
+      ],
+      "approval": "Fitted source contact layers only; continuous gait/grounding pending; not yet in exportedatlas"
+    }
+  ],
+  "originalPaintingsModified": false
+}

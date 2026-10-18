@@ -2,10 +2,12 @@
 
 Read this routing page before repository work. Use [`README.md`](./README.md) only when you need its subject index. Read only sections relevant to the request; do not read whole historical logs by default. The user's current request has priority.
 
-For resuming the paused centralized completion work, read the current
-[project handoff](./PROJECT-HANDOFF.md) first. It identifies the unpublished
-walking checkpoint, its failed passing gate, saved evidence and remaining work.
-The user deferred 3D pose accuracy; do not automatically resume the broader goal.
+For current combined release work, read the [project handoff](./PROJECT-HANDOFF.md)
+first. The 19 October candidate integrates the pending feature work, completes
+all 110 active-neighbor recordings and has actual silent browser decode evidence.
+Deployment is owned by the integrator and the Pages workflow on origin/main. Historical walking
+failures retain their original scope; the user-deferred 3D pose work and unproved
+device/rendered coverage are not reopened by reading this router.
 
 ## Authority and product
 
@@ -15,6 +17,7 @@ This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch co
 
 ## Task reading routes
 
+- AI-agent browser stress tests or development-tool efficiency: use [AI browser testing](./SKILLS.md#ai-browser-testing). Apply `$ponytail`, reuse the smallest relevant scenario, and inspect the compact result before opening diagnostic artifacts.
 - New levels, named-area direct links, entry URLs, share previews or hosting changes: read [`LEVEL-URLS.md`](./LEVEL-URLS.md). Every level requires a maintained permanent direct URL and unique comical share image; update and verify the catalogue before release.
 - Building intros/outros or indoor scene handoffs: read [`LEVEL-TRANSITIONS.md`](./LEVEL-TRANSITIONS.md), both affected level guides and the applicable performance/object gates. Every indoor level uses its three shared transition types; outdoor scenes keep their existing flow.
 - Named level, interior or area, including work in root modules: resolve [`LEVELS.md`](./LEVELS.md), read the selected level's `AGENTS.md` and `For-AI/README.md`, then only their matching subject sections. City-to-interior changes read both scopes. Global-only tooling/documentation work can skip level context.

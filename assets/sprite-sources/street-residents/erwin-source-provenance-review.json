@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "status": "admitted source candidate only",
+  "record": {
+    "voiceId": "stadt-erwin-archiv",
+    "actorId": "city-erwin-archiv",
+    "fullName": "Erwin Archiv",
+    "mood": "World-weary archivist familiar with forms and long delays.",
+    "designBrief": "Fictional elderly archivist, short grey hair/neat beard/round glasses, charcoal cardigan/ochre shirt, grey trousers/tan walking shoes, tied blank folders on anatomicalLEFT forearm",
+    "file": "assets/sprite-sources/street-residents/stadt-erwin-archiv-directions-candidate.png",
+    "sha256": "d351caff14bc1b235051b6105ac683c5f13d18158acf84844b93736ad81c1116",
+    "dimensions": [
+      2172,
+      724
+    ],
+    "bytes": 1765173,
+    "decodedRGBABytes": 6290112,
+    "status": "candidate-unapproved; source direction/style reviewed only",
+    "prompt": "Coherent WHOLE FOUR-VIEW repaint of the supplied NEW fictional ERWIN ARCHIV miniature character source. This is a benign style/proportion correction of Image1, not a change of identity. Preserve Image1's elderly round face, neat short GREY BEARD, round spectacles, sparse short grey hair, weary gentle eyes, charcoal textured cardigan with tan elbow patches, ochre collared shirt, grey trousers, broad tan walking shoes, and tied bundle of blank cream folders held by anatomical LEFT forearm/hand. Original source is too long below the head. Match Image2 canonical Heiko/Inga/Schwabingen miniatures: markedly larger expressive head, SHORT stout torso and SHORT substantial legs, TOTAL standing height approximately2.2–2.3head heights. Head including hair about44% of whole figure. Preserve age/mature identity. Repaint connected head-neck-shoulder, torso, pelvis, arms, knees and ankles coherently across ALL four views; no detached enlarged head, no vertical squashing or independently resized pieces. Same family proportions, consistent foot baseline, same bodily scale and same prop hand in front/right/rear/left. ONE horizontal row, FOUR columns: FRONT neutral, true RIGHT-facing PROFILE, true REAR (no face), true LEFT-facing PROFILE. In RIGHT profile the actual right near hand is EMPTY and left-owned folders sit on the FAR forearm, naturally partially occluded near the front edge. In LEFT profile folders are on the near actual left forearm. Rear folders remain actual left side. Complete readable connected hands and broad full shoes, no clipping, generous transparent gutters. All visible lips clean CLOSED rest crease under moustache/beard, no open oral cavity. Painterly soft warm shaded volumes and clear dark contour matching canonical city miniatures; no realistic long limbs. Fully TRANSPARENT RGBA background, no scenery/ground/shadows/grid/labels/text/watermark. Do not add or remove clothing, spectacles, beard or folders; do not invent extra props or actions.",
+    "promptRole": "Exact coherent proportion edit prompt. Original supplied generation prompt NOT SUPPLIED.",
+    "originalGenerationPrompt": null,
+    "originalGenerationPromptStatus": "NOT SUPPLIED by integration owner; not inferred",
+    "toolOutputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-8127dc8e-b205-4519-8aeb-707416d627aa.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "inputSource": {
+      "file": "output/game-completion/erwin-source/erwin-archiv-directions-candidate.png",
+      "sha256": "ae9322beba75eefd149a807b3ba207bc2791ffc00dd39f9687d163f08b8ee0ba",
+      "privateFrozenCopy": "output/street-cast/residents/proportion-before/erwin-supplied-original.png",
+      "suppliedReview": "output/game-completion/erwin-source/source-review.json",
+      "originalGenerationPrompt": null
+    },
+    "cellFindings": [
+      {
+        "pose": "front",
+        "connectedFigureBoundsXYXY": [
+          120,
+          23,
+          545,
+          700
+        ],
+        "mouth": "closed-rest-unregistered",
+        "finding": "Front elderly round face, grey beard/round spectacles retained; attached left hand and forearm own tied blank folders; empty right hand hangs; short cardigan/trousers, complete broad shoes and closed rest lips."
+      },
+      {
+        "pose": "right",
+        "connectedFigureBoundsXYXY": [
+          664,
+          18,
+          987,
+          702
+        ],
+        "mouth": "closed-rest-unregistered",
+        "finding": "True right profile, near anatomical-right hand empty; left-owned folders and grip partly visible at far/front edge; coherent beard/spectacle profile and complete shoes."
+      },
+      {
+        "pose": "rear",
+        "connectedFigureBoundsXYXY": [
+          1147,
+          18,
+          1572,
+          699
+        ],
+        "mouth": "absent",
+        "finding": "True rear without face or mouth; folders remain anatomical-left side, cardigan/elbow patches and short trouser/shoe joins retained."
+      },
+      {
+        "pose": "left",
+        "connectedFigureBoundsXYXY": [
+          1700,
+          21,
+          2033,
+          703
+        ],
+        "mouth": "closed-rest-unregistered",
+        "finding": "True left profile, near anatomical-left hand/forearm retains folders, opposite hand naturally occluded; beard/round glasses, short limbs and broad soles coherent."
+      }
+    ],
+    "substantialAlphaComponents": 4,
+    "wholeSheetOuterGutter": [
+      120,
+      18,
+      2033,
+      703
+    ],
+    "gateVerdict": "HOLD: source direction/style candidate admitted, final alpha/export/mouth/animation/runtime acceptance open",
+    "sourceReview": {
+      "reviewer": "street_cast_audit source worker",
+      "identityDirectionProportions": "PASS for this candidate source family after coherent repaint",
+      "nativeLightDarkComposite": "PASS preliminary visible source-edge review: no vivid colored matte fringe observed in full sheets and enlarged front crop",
+      "canonicalComparison": "output/street-cast/residents/erwin-repaint-family-comparison.jpg",
+      "manualFrontCropBounds": {
+        "headTop": 0,
+        "chin": 310,
+        "sole": 677,
+        "approximateHeadHeights": 2.1838709677419357,
+        "uncertaintyPixels": 5
+      },
+      "alphaObservation": "1650 red and50 green threshold pixels have faint nonzero alpha1–7; none alpha8–127. Higher-alpha red threshold pixels include skin paint and are not automatically fringe. The low-alpha colors are not merely hidden RGB at alpha0. Raw pixels preserved; final encoded/gamescale alpha gate remains HOLD.",
+      "coloredPixelStats": {
+        "red": {
+          "0-0": 0,
+          "1-7": 1650,
+          "8-24": 0,
+          "25-64": 0,
+          "65-127": 0,
+          "128-254": 1947,
+          "255-255": 0
+        },
+        "green": {
+          "0-0": 0,
+          "1-7": 50,
+          "8-24": 0,
+          "25-64": 0,
+          "65-127": 0,
+          "128-254": 0,
+          "255-255": 0
+        }
+      },
+      "finalExportAlphaMouthMotionRuntime": "HOLD / NOT RUN; no animation or shipping approval"
+    },
+    "historicalDifferentDesignAttempts": "assets/sprite-sources/street-residents/erwin-generation-blocker.json",
+    "corrections": [
+      {
+        "type": "coherent whole-four-view proportion repaint",
+        "tool": "built-in image_gen.imagegen",
+        "inputSha256": "ae9322beba75eefd149a807b3ba207bc2791ffc00dd39f9687d163f08b8ee0ba",
+        "inputFrozen": "output/street-cast/residents/proportion-before/erwin-supplied-original.png",
+        "exactPrompt": "Coherent WHOLE FOUR-VIEW repaint of the supplied NEW fictional ERWIN ARCHIV miniature character source. This is a benign style/proportion correction of Image1, not a change of identity. Preserve Image1's elderly round face, neat short GREY BEARD, round spectacles, sparse short grey hair, weary gentle eyes, charcoal textured cardigan with tan elbow patches, ochre collared shirt, grey trousers, broad tan walking shoes, and tied bundle of blank cream folders held by anatomical LEFT forearm/hand. Original source is too long below the head. Match Image2 canonical Heiko/Inga/Schwabingen miniatures: markedly larger expressive head, SHORT stout torso and SHORT substantial legs, TOTAL standing height approximately2.2–2.3head heights. Head including hair about44% of whole figure. Preserve age/mature identity. Repaint connected head-neck-shoulder, torso, pelvis, arms, knees and ankles coherently across ALL four views; no detached enlarged head, no vertical squashing or independently resized pieces. Same family proportions, consistent foot baseline, same bodily scale and same prop hand in front/right/rear/left. ONE horizontal row, FOUR columns: FRONT neutral, true RIGHT-facing PROFILE, true REAR (no face), true LEFT-facing PROFILE. In RIGHT profile the actual right near hand is EMPTY and left-owned folders sit on the FAR forearm, naturally partially occluded near the front edge. In LEFT profile folders are on the near actual left forearm. Rear folders remain actual left side. Complete readable connected hands and broad full shoes, no clipping, generous transparent gutters. All visible lips clean CLOSED rest crease under moustache/beard, no open oral cavity. Painterly soft warm shaded volumes and clear dark contour matching canonical city miniatures; no realistic long limbs. Fully TRANSPARENT RGBA background, no scenery/ground/shadows/grid/labels/text/watermark. Do not add or remove clothing, spectacles, beard or folders; do not invent extra props or actions.",
+        "outputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a13b7d-21e7-7a71-83ac-353627ec12c9\\exec-8127dc8e-b205-4519-8aeb-707416d627aa.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "savedSha256": "d351caff14bc1b235051b6105ac683c5f13d18158acf84844b93736ad81c1116",
+        "manualBefore": {
+          "headTop": 0,
+          "chin": 260,
+          "sole": 684
+        },
+        "manualAfter": {
+          "headTop": 0,
+          "chin": 310,
+          "sole": 677,
+          "approximateHeadHeights": 2.1838709677419357,
+          "uncertaintyPixels": 5
+        },
+        "reason": "Supplied neutral source had smaller head/long torso and legs against canonical; preserve supplied new identity and repaint connected complete family."
+      }
+    ]
+  },
+  "originalSuppliedReview": {
+    "voiceId": "stadt-erwin-archiv",
+    "fullName": "Erwin Archiv",
+    "status": "new original neutral4view source candidate; animation/export/runtime unapproved",
+    "path": "C:\\Users\\cogpsy-vrlab\\Documents\\GitHub\\GermanySimulator\\output\\game-completion\\erwin-source\\erwin-archiv-directions-candidate.png",
+    "sha256": "ae9322beba75eefd149a807b3ba207bc2791ffc00dd39f9687d163f08b8ee0ba",
+    "size": [
+      2172,
+      724
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "design": "Fictional elderly archivist, short grey hair/neat beard/round glasses, charcoal cardigan/ochre shirt, grey trousers/tan walking shoes, tied blank folders on anatomicalLEFT forearm",
+    "observations": [
+      "Front/right/rear/left whole-body facings coherent; rear noface.",
+      "Folder remainsleftforearm, fararm naturally occluded inrightprofile; hand/prop join visiblefront+left.",
+      "Mature roundface and compactsubstantialbody withinpaintedminiature family; equal-heightreference/exportreview stillrequired.",
+      "No walking/action/speech approval fromneutralkeys. Preserve previous outputmoderationrecords for olddifferentdesign."
+    ],
+    "runtimeIntegrated": false
+  },
+  "originalSuppliedReviewSha256": "57e58c0877c3bd0d26ac5a9f52105102c404dcf99d346d60fb2c92e205017dbe",
+  "exactOriginalGenerationPrompt": null,
+  "exactOriginalGenerationPromptStatus": "NOT SUPPLIED",
+  "historicalRejectedDifferentDesignRecordPreservedSha256": "4cf1c5828b4a0947c39e0f9c34ad3ae0d649090a9ae6b86f36c2fa2325122ddb"
+}

@@ -33,7 +33,7 @@ assert.match(game,/alternatives=links\.filter\(spot=>spot!==blockedSpot\).*block
 assert.match(game,/function updateMerkel\([\s\S]*n\.routeDirection=-\(n\.routeDirection\|\|1\);n\.target=\(n\.target\+n\.routeDirection\+n\.route\.length\)%n\.route\.length/,"Merkel must reverse her patrol route after sustained obstruction");
 assert.match(game,/function updateBorderPourer\([\s\S]*n\.blockedTimer=moved>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.55\)\{n\.blockedTimer=0;n\.dir\*=-1;n\.lane\*=-1;n\.state="sideWalk"/,"Merz must turn and switch lanes after sustained obstruction");
 assert.doesNotMatch(game,/!\(self\?\.crowd&&n\.crowd\)|playerHit=!n\.crowd/,"ordinary crowd sprites must use the same solid actor contacts");
-assert.match(game,/!moveGroundResponder\(n,dx,dy,13\)/,"all pedestrians must route around barriers");
+assert.match(game,/const moved=paintedMovement\?movePedestrian\(n,dx,dy,13\):moveGroundResponder\(n,dx,dy,13\);if\(moved===null\)continue;\s*if\(!moved\)/,"pedestrians distinguish an intentional animation hold from a blocked collision step");
 assert.match(game,/self\?\.routeBounds&&!pedestrianRouteContains\(self,x,y,r\)/,"ordinary citizen sidesteps and followers must keep full-body pavement clearance");
 assert.match(game,/dynamicBlocker\(nx,player\.y,player\.x,player\.y\)/,"the player must not walk deeper into response vehicles");
 assert.match(game,/groundObstacles=.*\.\.\.policeVehicles.*\.\.\.police.*\.\.\.npcs/,"trains must detect people and ground police responses");

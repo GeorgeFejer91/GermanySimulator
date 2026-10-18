@@ -1,0 +1,7 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "prompt": "Make ONE LOCAL CORRECTION to image1, preserving EVERYTHING else byte-like: the LEFT CELL right-facing man's cream paper is on the wrong arm. REMOVE the paper from his NEAR arm, which is his anatomical RIGHT arm. Keep that near right hand empty, bent naturally at jacket height. Put the single cream folded paper in his FAR anatomical LEFT hand at chest height on the FAR SIDE of the body: at screen-right edge of his chest just beyond mustard shirt, mostly occluded by torso, with only a small paper portion and far holding hand visible. There must be ONE form total, no paper on the near sleeve/hand. This is the same physical paper hand as the right-facing profile in image2. Keep paper/hands above trousers. Do NOT change the RIGHT CELL left-facing figure, who already holds paper in correct near anatomical LEFT hand. Keep same large mature head/face/hair/stubble, short navy jacket, mustard polo, complete separated short trouser legs and broad tan shoes, stance, scale, clean transparent RGBA and layout. No labels, background, shadows or other additions.",
+  "status": "candidate-native-extreme-review-pending",
+  "previous": "profiles-hands-v3-candidate.png",
+  "finding": "Far anatomical-left form in right-facing cell corrected; near anatomical-left form in left-facing cell retained. Hands and form clear of thighs."
+}

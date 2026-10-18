@@ -12,6 +12,10 @@ export function motionObserverSource(source){
  return block;
 }
 
+export function pedestrianAvoidanceSource(source){
+ return between(source,'function createPedestrianMover(','function pedestrianRouteStalled(');
+}
+
 export function policeRemovalSource(source){
  return between(source,'function cancelActorStimulus(','function policeBark(');
 }

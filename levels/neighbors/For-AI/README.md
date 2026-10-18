@@ -2,8 +2,11 @@
 
 This folder owns the JWD neighbor level's character context.
 
+- [Storyboard](./STORYBOARD.md): scene order, movement, dialogue receipts,
+  interruption and completion for the four active neighbors.
+
 - [Character profiles](./CHARACTERS.md): Heiko Maaslos, Inga Maaslos,
-  Frau Schwabingen, Hartmut Maaslos with Ede archived. Heiko's approved voice and sample
+  Frau Schwabingen and Hartmut Maaslos. Ede is [archived](../archive/ede.md). Heiko's approved voice and sample
   are the reference for future dialogue.
 - [City source map](../../city/For-AI/README.md): shared runtime ownership,
   JWD paths, focused checks and city boundaries.
@@ -19,4 +22,9 @@ The existing root `neighbor-story.js`, `game.js`, `jwd-gardens.js` and
 profiles guide authoring; saving a sample here does not install a runtime line
 or replace an existing recording.
 
-- [Storyboard](./STORYBOARD.md): movement, dialogue ownership, interruption and completion for the four active neighbors.
+<!-- rtk-workflow -->
+## Shell output
+
+Prefer supported RTK filters for human-read shell output; see the [RTK skill](skills/rtk/SKILL.md). Keep exact reads and parser input raw. Use bounded native commands when RTK is unavailable.
+
+The [JWD gameplay contract](../../../For-AI/GAMEPLAY.md#jwd-home-and-neighbors) owns the four-person active cast, quieter anthem-only score and disabled police policy. Archived Ede material must not be loaded or spawned.

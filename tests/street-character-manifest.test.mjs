@@ -6,6 +6,7 @@ import { registerStreetCharacterManifest, resolveStreetCharacter, advanceStreetA
 
 const manifest = JSON.parse(await readFile(new URL('../assets/characters/street/manifest.json', import.meta.url), 'utf8'));
 const entries = Object.entries(manifest.characters);
+const motionFamilies = new Set(['crowd-irmgard-aktenordner']);
 
 test('all forty-three installed standing sprites match shipped manifest hashes and literal identity aliases', async () => {
   assert.equal(manifest.schemaVersion, 1);
@@ -15,7 +16,7 @@ test('all forty-three installed standing sprites match shipped manifest hashes a
   let encodedBytes = 0;
   for (const [id, person] of entries) {
     assert.equal(person.id, id);
-    assert.equal(person.standingOnly, true);
+    assert.equal(person.standingOnly, !motionFamilies.has(id));
     assert.deepEqual(person.cell, [128, 160]);
     assert.deepEqual(person.pivot, [64, 150]);
     assert.equal(person.figureHeight, 136);
@@ -38,6 +39,47 @@ test('all forty-three installed standing sprites match shipped manifest hashes a
   assert.equal(resolveStreetCharacter({ id: 'player-default' }), 'spieler-hans-peter-mustermann');
   assert.equal(resolveStreetCharacter({ voiceId: 'polizei-heinrich-wachtmeister', id: 'police-27' }), 'polizei-heinrich-wachtmeister');
   assert.equal(resolveStreetCharacter({ id: 'crowd-baerbel-brezel-7' }), null);
+});
+
+test('the planted atlas pilot preserves standing registration and ships both exact movement variants',async()=>{
+  const person=manifest.characters['crowd-irmgard-aktenordner'];
+  assert.deepEqual(entries.filter(([,value])=>!value.standingOnly).map(([id])=>id),[...motionFamilies]);
+  assert.equal(person.atlasMotion.schemaVersion,1);assert.equal(person.motionRig,undefined);
+  assert.deepEqual(person.grid,[21,17]);assert.deepEqual(person.atlasMotion.neutral,{row:4,col:2});
+  assert.equal(person.strideDistance,25.6);
+  for(const [index,direction] of ['down','right','up','left'].entries()){
+    assert.equal(person.atlasMotion.walks[direction].frames,16);
+    assert.equal(person.clips[direction].offset,index*person.grid[0]);
+    assert.equal(person.clips[direction].count,16);
+  }
+  for(const from of ['down','right','up','left'])for(const to of ['down','right','up','left']){
+    if(from===to)continue;
+    assert(person.atlasMotion.transitions[from+'-to-'+to].frames.length>=7);
+  }
+  const dedicated=new Set();
+  for(const [index,direction] of ['down','right','up','left'].entries()){
+    assert.deepEqual(Object.keys(person.atlasMotion.settles[direction]).map(Number).sort((a,b)=>a-b),Array.from({length:16},(_,i)=>i));
+    for(const settle of Object.values(person.atlasMotion.settles[direction])){
+      assert.equal(settle.frames.length,5);
+      assert.deepEqual(settle.frames.at(-1),{row:index+4,col:2,ms:70});
+      for(const frame of settle.frames.slice(0,-1)){
+        assert(Number.isInteger(frame.row)&&frame.row>=0&&frame.row<person.grid[1]);
+        assert(Number.isInteger(frame.col)&&frame.col>=0&&frame.col<person.grid[0]);
+        assert(!Object.values(person.atlasMotion.walks).some(w=>frame.row===w.row&&frame.col<w.frames),'settle must not advance ordinary gait');
+        const slot=frame.row*person.grid[0]+frame.col;assert(!dedicated.has(slot),'settle cell aliases another phase');dedicated.add(slot);
+      }
+    }
+  }
+  assert.equal(dedicated.size,256);
+  for(const [variant,image] of Object.entries(person.variants)){
+    assert.deepEqual([image.width,image.height],variant==='desktop'?[2016,2040]:[1848,1870]);
+    assert(image.width<=2048&&image.height<=2048&&image.width*image.height*4<=16*1024*1024);
+    const bytes=await readFile(new URL('../'+image.file.slice(2),import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),image.sha256,variant);
+    assert.equal(bytes.subarray(12,16).toString(),'VP8L');
+    const bits=bytes.readUInt32LE(21);
+    assert.equal((bits&0x3fff)+1,image.width);assert.equal(((bits>>>14)&0x3fff)+1,image.height);
+  }
 });
 
 test('standing-only admission keeps motion and mouth claims absent', () => {

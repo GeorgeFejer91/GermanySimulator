@@ -34,6 +34,29 @@ opening; media time and broker start/end receipts own playback. Letter-derived
 round/spread shapes remain phonetic estimates. A queued, caption-only or stale
 cue cannot make a neighbor talk. No recordings preload at city startup.
 
+Run `node tools/audit-neighbor-voice-coverage.mjs --check` for current neighbor
+recording coverage. It derives all 110 active cast-owned bilingual sources and
+checks the actual default resolver, selected take binding and every authored
+story/travel speaker. Archived Ede is excluded. Missing or held lines fail this
+coverage check even though their caption fallback remains playable. The curator
+separately verifies manifest receipts and file hashes; successful decoding alone
+does not establish recording coverage or perceptual quality.
+
+The completed pack contains all 110 authored active-neighbor recordings:
+Heiko 36, Inga 34, Frau Schwabingen 33 and Hartmut 7. Heiko's final two
+German source/subtitle pairs use “Ich sage es” and “ich habe”. Their final
+encoded whole-file readings pass the unchanged strict word comparison; old
+failed short forms remain private evidence. Human listening is NOT RUN.
+For the two specifically qualified Heiko encodings, runtime metadata retains the
+final-encoding window verification mode and sealed proof digest; the manifest
+keeps the complete raw windows and failed whole readings. Actual reference and
+render-input variants survive compact export, including their native-part
+indices. See the [finite window protocol](./VOICE-SYNTH-PROTOCOL.md#heiko-final-encoding-recognition-windows-2026-10-19).
+The cast also retains authored fallback dialogue that the guided tours supersede.
+Completing these assets does not add another tour, replay an introduction or make
+every catalogued sentence a normal story beat. Current invitations, travel,
+stops and child handoffs remain owned by the existing storyboard and producers.
+
 `jobcenter-overlord` is the Jobcenter encounter's one recorded speaker and
 stable game voice ID. Its catalog `source` exactly matches the German text in
 `assets/audio/jobcenter/overlord.json`; the paired English subtitle stays with

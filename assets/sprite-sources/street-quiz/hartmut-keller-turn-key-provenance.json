@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "quiz-hartmut-keller",
+  "status": "candidate-unapproved; full-body direction and prop registration required",
+  "file": "assets/sprite-sources/street-quiz/hartmut-keller-turn-keys-candidate.png",
+  "generator": "OpenAI built-in imagegen",
+  "generatedFile": "exec-905df619-6d3f-433c-b360-e18ca1bb6f31.png",
+  "transparentBackground": true,
+  "reference": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+  "prompt": "Create a precise matching animation authoring sheet of THREE intermediate WHOLE-BODY TURNING KEYFRAMES for the SAME fictional elderly Hartmut Keller painted miniature from the reference. Not a redesign. ONE horizontal row with three distinct full-body figures evenly spaced, fully transparent RGBA background, no ground/shadow/text/panel/grid. Preserve the exact huge mature head, stern wrinkled thin face, receding tousled grey hair, rectangular black spectacles, beige rolled-sleeve shirt, olive utility vest, belt, very short substantial brown trouser legs and broad complete brown walking shoes. Figure must remain about2.2head heights as in the supplied TOP ROW directions. All three at identical figure height and sole baseline, whole head and shoes comfortably inside canvas. These are CONNECTED WHOLE-BODY rotation keys, not only head turns. Static balanced neutral standing; no walking, jumping or arm gesture. Preserve exact object ownership throughout: ONE black walkie-talkie held by anatomicalRIGHT hand at chest height; small cream spiral notebook AND the existing black round-ended flashlight together in anatomicalLEFT hand/forearm. Never exchange hands, invent another radio or duplicate the torch. Pose1 LEFT on sheet: turn whole body and both feet45degrees to viewerRIGHT, midway between reference front and right profile, clearly show front chest plus right flank, nose right, both eyes with far eye narrower. Pose2 MIDDLE: turn whole body135degrees clockwise away from front, midway between reference right profile and true rear; show the BACK of olive vest plus right flank, head follows body so mainly back hair and a small right-facing cheek/nose edge, no front chest. Radio remains on right side, LEFT-held notebook/torch naturally mostly occluded on far side. Pose3 RIGHT on sheet: turn whole body45degrees to viewerLEFT, midway between reference front and left profile, show front chest plus left flank, nose left, both eyes with far eye narrower; LEFT-held notebook/torch nearer camera, right-hand radio on far side only one. Match reference soft detailed brushwork, warm muted palette, dark readable contours, short torso and limbs, oversized expressive adult head, exact face age and personality. No realistic tall anatomy, no detached head enlargement, no new clothing or expressions. Correct natural foreshortening of same costume and held objects; full connected wrists, knees and footwear.",
+  "initialObservations": [
+    "Three complete figures retain mature face, short body, radio/right and notebook-plus-flashlight/left ownership.",
+    "Middle rear/right key shows back vest with right cheek and right-facing feet; useful candidate intermediate direction.",
+    "Outer two keys have turned heads but chest and splayed boots remain close to front; actual whole-body45degree rotation is held pending source comparison, not assumed from prompt.",
+    "Matching face/prop identity does not approve turn support, paired paint registration, final export or runtime transitions."
+  ],
+  "runtimeUse": false,
+  "sha256": "2c1e10433501d5e6d717fb8fc447d06efebb7dbcb19245e3db4096a17bed7bf0",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "referenceSha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+  "additionalAttempts": [
+    {
+      "file": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-5f6bee62-79cf-484e-b31d-1a84e284f3a6.png",
+      "prompt": "Repair ONLY the WHOLE-BODY orientation problem in the TWO FRONT THREE-QUARTER turning keys of the supplied Hartmut Keller sheet. Output exactly TWO fully separate complete figures side by side on a transparent background, no text/ground/grid. Left figure faces diagonally RIGHT45degrees, right figure faces diagonally LEFT45degrees. The heads in Image1 are already angled, but their torsos/hips/feet are too frontal: this request fixes the entire connected skeleton and costume. Keep the SAME established short stocky mature old man, oversized head about2.2head heights total, exact recedinggreyhair/blackrectangularglasses/sternface/beigeshirt/olivevest/browntrousers/broadbrownshoes, actual original paint palette and brushwork. True45degree wholebody rotation: show one flank and an oblique front chest, nearer shoulder and forearm visibly overlap the far shoulder, vest front opening and belt buckle shift to the far side of the belly rather than remaining centred in a flat symmetrical chest. Hips and knees face the same diagonal as chest. Both broad boots point toward the SAME diagonal as nose: for left figure BOTH toe caps project to pictureRIGHT and their heel ends are on pictureLEFT; for right figure BOTH toe caps project pictureLEFT and heels are pictureRIGHT. The farther foot is slightly higher and partially occluded by the near foot. NO frontal V-shaped/splayed boots, no symmetric front torso, no head-only turn, no straight fullprofile. Neutral relaxed standing with both soles down on implied sameground. Exactly preserve hand/prop ownership: anatomicalRIGHT hand owns ONE black walkietalkie; anatomicalLEFT hand/forearm owns smallcreamspiralnotebook and existingroundendedblackflashlight together. The RIGHT-facing figure shows right radiohand onnear flank and notebook/torch onfar flank; LEFT-facing figure shows left notebook/torch onnear flank and radio onfar flank. Natural occlusion, no exchangedhands/extraobjects/ghostlimbs. Same face and head/body size bothfigures, complete wrists and short substantial legs/shoes, clear alpha silhouette. Do not redesign as realistic tall man or enlarge detachedhead.",
+      "references": [
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-keys-candidate.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png"
+      ],
+      "finding": "Whole-body torso/boot direction improved, but heads smaller relative to longer body than original family. HOLD proportion registration. Background alpha probes are clean.",
+      "sha256": "ffbf4201c326beb3acf9dfe1916d7bff7b1300afa960d2d7729af5191f8e7686",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "referenceHashes": {
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-keys-candidate.png": "2c1e10433501d5e6d717fb8fc447d06efebb7dbcb19245e3db4096a17bed7bf0",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+      }
+    },
+    {
+      "file": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-b4fb978b-3015-4677-beca-5876228117c5.png",
+      "prompt": "Correct this existing TWO-FIGURE turn-pose sheet for production sprite use. Preserve Image1's correct whole-body diagonal RIGHT and LEFT facings, including BOTH boots pointing with the body; keep exact mature Hartmut Keller face, grey hair, black spectacles, olive vest/beige shirt/brown trousers/brown shoes and anatomicalRIGHT radio, anatomicalLEFT notebook-plus-flashlight. TWO specific corrections only, carried out as a coherent WHOLE-FIGURE repaint: (1) Remove ALL black/brown background, glows, halos, cast shadows, gradients and vignette. Surrounding pixels must be truly transparent alphaZERO immediately outside the character silhouette, including the space between figures and legs. Do not replace background with black/checkerboard/white. No illumination bloom or ambient haze. (2) The bodies in Image1 became too long relative to their heads. Match the much SHORTER original compact miniature proportions in Image2 top row: entire sole-to-hair height about2.1HEAD HEIGHTS. Very large expressive mature head; shortneck; muchshorterconnectedtorso, waist and substantialthigh/shin; broadcompleteboots. Keep adult age/sternpersonality. Do not merely cut/enlarge/paste a detached head or squash an axis: redraw the connected body, clothing folds, wrists, elbows, props, hips, knees and cuffs coherently so they belong to the same shortlargeheaded family. Face identity and actual directionalperspective stay unchanged. Hands remain physically connected holding exactly the sameobjects, no extra/missing radio/torch/book. The RIGHT-facing miniature has bothshoe toes to pictureRIGHT, LEFT-facing miniature bothshoe toes to pictureLEFT, farfoot partly behind nearfoot. Sameheight andsolebaseline. Completehair/shoes inside spacious transparentcanvas, no croppedparts. Crisp softlypainted detail and restrained darkcontour as in original citycharacter. No text, grid or scenery.",
+      "references": [
+        "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-5f6bee62-79cf-484e-b31d-1a84e284f3a6.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png"
+      ],
+      "finding": "Compact head/body correction, but boot/body orientation regressed toward front. HOLD. The glow-removal part of request was unnecessary: true composites show hidden RGB rather than visible backdrop.",
+      "sha256": "bad7eeed94d81dbad91cf39090d324133d027c34ab5d45a1a16f1ec6ed2aefa1",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "referenceHashes": {
+        "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-5f6bee62-79cf-484e-b31d-1a84e284f3a6.png": "ffbf4201c326beb3acf9dfe1916d7bff7b1300afa960d2d7729af5191f8e7686",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+      }
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-candidate.png",
+      "generatedFile": "exec-ec93c177-d6f7-4c57-ba22-6bcc7377ee69.png",
+      "prompt": "ONE SINGLE original-character animation turning key, complete wholebody, transparent background. Character is the SAME fictional Hartmut Keller in Image1. Image1 TOP ROW is the exact identity and SHORT BODY / HUGE HEAD proportion authority. Image2 LEFT FIGURE supplies only the desired true three-quarter body+foot ORIENTATION, NOT its too-tall proportions. Draw Hartmut neutrally standing with his ENTIRE body turned diagonally45degrees to pictureRIGHT, midway between front and rightprofile. All head, chest, belt/hips, knees and BOTH shoes face that same diagonal. HEAD occupies almost ONEHALF the whole figure height: from crown to chin nearly equals chin to shoes. Very shortneck, compact short vest/torso, shortthickthighs/shins, broadcompleteboots; mature elderly grim face, notchild. No realistic longbody. Thick grey dishevelled recedinghair, rectangularblackglasses, longthinwrinkledsternface; beige rolledsleeves, olivevest, brownbelt/trousers/broadbrownshoes exactlyImage1. Anatomy rotatedasONEcoherent paintedbody: broadnearRIGHTflank visible, farLEFTshoulder narrower/partlybehind, vestchest oblique with itsopening/beltbuckle shifted toward pictureRIGHT, notcentredflatfront. BOTH shoeTOES project to pictureRIGHT and BOTH heels behind to pictureLEFT; farshoe slightlyhigher andpartlybehindnearshoe. NotfrontVfeet, notstraightprofile, nothead-onlyturn. ExactlyONE blackwalkietalkie heldin anatomicalRIGHT hand onnearflank; exactlyONE smallcreamspiralnotebook togetherwith existingblackflashlight heldbyanatomicalLEFThand/forearm onfarflank. Samegrip/objectscale asreference, noextra/missingobjects. Closedmouth, relaxedconnectedwrists/elbows; noaction/walking. Paintedwarmmutedshading anddarkcontour matchingImage1. Completehairandshoessafelyinsideframe. No text, grid, scenery, ground, backdrop, glow orcastshadow; truealpha outside silhouette.",
+      "references": [
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+        "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-5f6bee62-79cf-484e-b31d-1a84e284f3a6.png"
+      ],
+      "finding": "Actual torso/belt/boots now face right diagonal with correct hand ownership. HOLD matched-head/body registration against original source: apparent head fraction remains smaller. No seamless turn or source-scale acceptance.",
+      "sha256": "cb321305112961ff59afa330beaf69262633105200d99e0af97719c91514afeb",
+      "dimensions": [
+        1170,
+        1345
+      ],
+      "referenceHashes": {
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+        "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-5f6bee62-79cf-484e-b31d-1a84e284f3a6.png": "ffbf4201c326beb3acf9dfe1916d7bff7b1300afa960d2d7729af5191f8e7686"
+      }
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-short-v2-candidate.png",
+      "generatedFile": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-33da1f8f-9446-4e1e-a599-7ddbf40f4b08.png",
+      "prompt": "EDIT TARGET Image1: the single Hartmut Keller three-quarter right standing sprite. Keep its exact face, hair, glasses, body direction, hands and props, paint style, and truly transparent background. ONE targeted correction: the BODY BELOW THE CHIN IS TOO TALL. Redraw the connected torso, arms, waist, trousers and shoes substantially SHORTER, reducing chin-to-sole height to about 70 percent of its current height while keeping the head itself the same size. The resulting crown-to-sole figure must be almost exactly TWO HEAD HEIGHTS; crown-to-chin roughly equals chin-to-sole. Image2 top row is the compact production proportion authority. Keep mature elderly character, not a child. Short broad vest, short thick limbs, broad complete shoes, same grey receding tousled hair, stern thin wrinkled face, black rectangular spectacles, beige rolled sleeves, olive vest, brown trousers and broad brown shoes. Repaint all connected costume folds, elbows, wrists, hips, knees and ankles coherently, not detached-head enlargement or vertical axis squishing. Preserve the TRUE DIAGONAL RIGHT whole-body orientation of Image1: chest/hips/knees and BOTH BOOT TOES point diagonally to pictureRIGHT, near right flank visible, far shoulder/foot partly occluded. Do not rotate back to a symmetrical front torso or splayed front feet. AnatomicalRIGHT near hand holds ONE black walkie-talkie. AnatomicalLEFT far hand holds ONE cream spiral notebook PLUS the black flashlight together. Keep identical object ownership and grip, no duplicates or missing items. Complete hair and shoes within spacious transparent canvas. Single figure only, no scenery, ground, shadow, text, panels or grid.",
+      "references": [
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-candidate.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png"
+      ],
+      "referenceHashes": {
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-candidate.png": "cb321305112961ff59afa330beaf69262633105200d99e0af97719c91514afeb",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+      },
+      "sha256": "582d69b6e35c8fe0dfc19571967c22b726a5ff565222cfb6ed43b2f85f8a2452",
+      "generator": "OpenAI built-in imagegen",
+      "transparentBackground": true,
+      "finding": "Connected whole-figure shortening retains radio/right and notebook+torch/left. Root initial preview: enlarged-head compact silhouette and right-facing boots improved. Shared-height source registration, real alpha composites and turn support still require review. No runtime use.",
+      "dimensions": [
+        1170,
+        1345
+      ]
+    },
+    {
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-turn-left-pair-candidate.png",
+      "generatedFile": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-c48e7d67-f37d-45bb-9fd0-bbc8619121fa.png",
+      "prompt": "Create TWO missing whole-body turning keys for the SAME fictional elderly Hartmut Keller painted miniature. Image1 is the exact compact head/body proportion and face authority: about TWO head-heights crown to sole, head from crown to chin as tall as entire chin-to-shoes body. Image2 top row supplies original costume and exact front/right/rear/left identity. One horizontal row of two separate full figures with generous transparent space. SAME enormous mature head, receding tousled grey hair, black rectangular glasses, stern wrinkled face, short broad olive utility vest, beige rolled sleeves, very short thick brown trouser legs, broad complete brown shoes. Keep adult age. LEFT FIGURE: entire body turned diagonally LEFT45degrees, halfway between front and true left profile. Show left flank and oblique front chest; near LEFT forearm owns ONE cream spiral notebook with ONE black flashlight together, near enough for book/torch to be visible. Far anatomicalRIGHT hand still owns ONE black walkie-talkie, naturally partly occluded; never swap props or duplicate them. Head, chest, hips, knees AND BOTH BOOT TOES all point to pictureLEFT at same diagonal, not a front body with turned head or V-shaped/splayed front feet. RIGHT FIGURE: entire body turned diagonally away to LEFT135degrees, halfway between true left profile and rear. Show mainly the BACK of olive vest, left flank, back of huge grey-haired head, only a small left-facing cheek/nose edge. Both feet point diagonally LEFT/AWAY. LEFT-held notebook and flashlight are on near left flank, partially visible; RIGHT-held radio is far and mostly occluded. Preserve all connected hands/arms, source garment shapes and natural overlap. Neutral relaxed standing with both complete soles down, same sole baseline and same figure height; no gestures or walking. Match Image1's extremely SHORT connected torso/limbs and huge mature head, not realistic long-legged anatomy, not detached head patch or vertical squashing. Exact warm muted softly painted shading and dark readable contour. Truly transparent alpha outside silhouettes, no backdrop, text, ground, shadows, panels or grid.",
+      "references": [
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-short-v2-candidate.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png"
+      ],
+      "referenceHashes": {
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-short-v2-candidate.png": "582d69b6e35c8fe0dfc19571967c22b726a5ff565222cfb6ed43b2f85f8a2452",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+      },
+      "sha256": "ab1d914ca5af6cf895f3a4307ace8b1be024d029ec4735f1cf077113c4b7d5cb",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "generator": "OpenAI built-in imagegen",
+      "transparentBackground": true,
+      "finding": "Left-front and rear-left connected bodies, boots and owned props visible. Compact family/source registration and actual alpha composites pending; no runtime use or seamless turn approval."
+    },
+    {
+      "prompt": "Production sprite authoring EDIT: consolidate and CORRECT the fictional elderly Hartmut Keller into FOUR coherent whole-body turning keys. Image1's TOP ROW is exact original face, costume and body proportion authority. Images2 and3 are earlier turn candidates whose below-chin bodies still read too long: coherently redraw their neck-to-sole region about20 percent shorter while retaining the SAME head dimensions and mature face. In the final figures crown-to-chin must be just over HALF of crown-to-sole, like Image1; very short connected torso and stout legs, broad complete shoes. Do not paste/enlarge a detached head, squish vertical scale or redesign him as a child. ONE horizontal row of FOUR evenly spaced complete neutral standing figures, same crown height and sole baseline, transparent background. Left-to-right:1) whole body RIGHT45degree front three-quarter: oblique front olive vest plus right flank, both boots point diagonally RIGHT, right radio hand nearer, left notebook+flashlight farther.2) RIGHT135degree rear three-quarter: mostly BACK of vest and back hair plus right flank, tiny right cheek edge, both boots diagonally RIGHT/AWAY, radio on near right flank, notebook+torch far naturally occluded.3) LEFT135degree rear three-quarter: mostly BACK of vest and back hair plus left flank, tiny left cheek edge, both boots LEFT/AWAY, notebook+torch near left flank, radio far.4) LEFT45degree front three-quarter: oblique front vest plus left flank, both boots LEFT, notebook+torch near left forearm, radio far. Heads, chest, hips, knees and both boots turn together; no head-only rotation, frontal V-feet, splayed boots, straight profile substituting diagonal or mirrored props. AnatomicalRIGHT always owns exactlyONE black walkie-talkie; anatomicalLEFT always owns exactlyONE smallcreamspiralnotebook AND exactlyONE black flashlight together. Keep physically connected wrists/fingers and natural object occlusion. Preserve receding tousled grey hair, thin stern wrinkled mature face, rectangular black glasses, beige rolled-sleeves, broad short olive vest, short substantial brown trousers and broad brown shoes from Image1. Neutral closed lips, relaxed balanced standing, no gesture/walking. FOUR keys must share exact huge-head/shortbody proportion and softly painted warm muted shading/dark contours. Same actor in one connected paint family, complete hair and shoes with generous alpha gutters. No labels, text, panels, scenery, ground, castshadow, background or glow. Transparent alpha outside silhouettes.",
+      "generated": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a13b79-b497-7432-ba3d-c4cd24cbeb8f/exec-94b5c025-4562-4321-8537-0c95813191d7.png",
+      "file": "assets/sprite-sources/street-quiz/hartmut-keller-four-turns-v3-candidate.png",
+      "references": [
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-short-v2-candidate.png",
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-left-pair-candidate.png"
+      ],
+      "sha256": "a28d0dc7e6618be3715148df444ad04113d932e4e9e9df15ddd8eaea606d5859",
+      "referenceHashes": {
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-right-front-short-v2-candidate.png": "582d69b6e35c8fe0dfc19571967c22b726a5ff565222cfb6ed43b2f85f8a2452",
+        "assets/sprite-sources/street-quiz/hartmut-keller-turn-left-pair-candidate.png": "ab1d914ca5af6cf895f3a4307ace8b1be024d029ec4735f1cf077113c4b7d5cb"
+      },
+      "dimensions": [
+        2110,
+        745
+      ],
+      "generator": "OpenAI built-in imagegen",
+      "transparentBackground": true,
+      "finding": "Four connected true front/rear three-quarter figures with correct anatomical radio/notebook/torch ownership. No runtime use. Root initial preview still requires matched crown/chin-to-sole comparison; previous turn-proportion HOLD not closed by generation."
+    }
+  ],
+  "alphaCorrection": "The apparent brown glow in the image previews is predominantly hidden RGB at alphaZERO. Pixel probes and true light/dark composites show a clean transparent background. Do not classify hidden RGB as a visible matte or require an unnecessary repaint for it."
+}

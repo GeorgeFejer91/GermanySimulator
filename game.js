@@ -6,7 +6,8 @@ const player={id:"player-default",fullName:"Hans-Peter Mustermann",voiceId:"spie
 let streetMotionObserver=null;
 function streetMotionFailure(actor,error){try{streetMotionObserver?.failed(actor,String(error?.message||error))}catch(failure){console.warn('Street simulation observer failed',failure)}}
 function notifyStreetAccepted(actor,x,y){if(!streetMotionObserver)return;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.accepted(actor,x,y,actor.x,actor.y)}catch(error){streetMotionFailure(actor,error)}}
-function notifyStreetDiscontinuity(actor,reason){if(!streetMotionObserver)return;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.discontinuity(actor,reason)}catch(error){streetMotionFailure(actor,error)}}
+function holdStreetMovement(actor,dx,dy){if(!streetMotionObserver?.requestMove)return false;try{return streetMotionObserver.accepts(actor)&&streetMotionObserver.requestMove(actor,dx,dy)===true}catch(error){streetMotionFailure(actor,error);return false}}
+function notifyStreetDiscontinuity(actor,reason){if(typeof npcs!=='undefined'&&npcs.includes(actor)){actor.blockedTimer=0;actor.progressWindow=null}if(!streetMotionObserver)return;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.discontinuity(actor,reason)}catch(error){streetMotionFailure(actor,error)}}
 function finishStreetSimulationTick(dt){
  if(!streetMotionObserver)return;
  const speechPaused=document.hidden||!state.started||state.gameOver||!!window.GermanyHUD?.paused||!!window.Germany3D?.levelTransition?.active;
@@ -96,11 +97,11 @@ const STATION_RISE=.3;
 const stations=Object.freeze([
  ...verticalRoads.flatMap((road,i)=>["nord","sued"].map(side=>{
   const center=road.x+road.w/2,w=i===0||i===verticalRoads.length-1?1200:700,north=side==="nord",name=i===0?"WEST":i===verticalRoads.length-1?"OST":String(i+1).padStart(2,"0");
-  return{id:side+name.toLowerCase(),name:!north&&i===0?"JWD":(north?"NORD":"SÜD")+(w===1200?"":" ")+name,side:north?"north":"south",x:center-w/2,y:north?310:4905,w,h:145,accessX:center-70,accessY:north?455:4800,accessW:140,accessH:105};
+  return{id:side+name.toLowerCase(),name:!north&&i===0?"JWD":(north?"NORD":"SÜD")+(w===1200?"":" ")+name,side:north?"north":"south",x:center-w/2,y:north?310:4905,w,h:145,accessX:center-w/2,accessY:north?455:4800,accessW:w,accessH:105};
  })),
  ...horizontalRoads.flatMap((road,i)=>["west","east"].map(side=>{
   const center=road.y+road.h/2,west=side==="west";
-  return{id:side+"-"+(i+1),name:(west?"WEST":"OST")+" "+String(i+1).padStart(2,"0"),side,x:west?310:10505,y:center-350,w:145,h:700,accessX:west?455:10400,accessY:center-70,accessW:105,accessH:140};
+  return{id:side+"-"+(i+1),name:(west?"WEST":"OST")+" "+String(i+1).padStart(2,"0"),side,x:west?310:10505,y:center-350,w:145,h:700,accessX:west?455:10400,accessY:center-350,accessW:105,accessH:700};
  }))
 ]);
 for(const station of stations){
@@ -243,7 +244,8 @@ if(typeof location==='object'&&/(?:^|[?&])satireKit=1(?:&|$)/.test(location.sear
    props.push({x:station.x+dx,y,satireId,w,h,decorative:smallDecoration.has(satireId)});
   const factor=Math.min(1,station.w*.02/24,station.h*.02/4),back=(station.id.startsWith('sued')?-1:1)*Math.min(.65,station.h*.02*.15);
   for(const [satireId,dx,scale,w,h] of [['platform-shelter',-3.2,1.15,160,100],['platform-shelter',3.2,1.15,160,100],['departure-board',-8,1,115,80],['platform-sign',8,1,85,75],['station-clock',-5.35,.95,50,70],['ticket-machine',5.35,.88,50,55]])
-   props.push({x:station.x+station.w/2+dx*factor/.02,y:y+back/.02,satireId,stationFixture:true,stationId:station.id,scale:scale*factor,w,h,active:false});
+   {const x=station.x+station.w/2+dx*factor/.02,cy=y+back/.02,ground={"platform-shelter":[3.65,2.3],"departure-board":[2.95,.608],"platform-sign":[2.1,.57],"station-clock":[1.1,.485],"ticket-machine":[1.02,.8295]}[satireId],width=ground[0]*scale*factor/.02,depth=ground[1]*scale*factor/.02;
+   props.push({x,y:cy,satireId,stationFixture:true,stationId:station.id,scale:scale*factor,w,h,collisionRect:{x:x-width/2,y:cy-depth/2,w:width,h:depth},active:false})}
  }
  const northwest=stations[0];
  for(const [satireId,dx,dy,w,h,decorative] of [['regional-station',1440,310,240,150,false],['pretzel-kiosk',1080,300,120,100,false],['platform-barrier',110,205,90,40,false],['platform-edge',700,northwest.h-7,170,12,true]])
@@ -303,7 +305,7 @@ function insetSpriteSheet(source,atlas){
  for(let row=0;row<atlas.rows;row++)for(let col=0;col<atlas.cols;col++){const sy=atlas.yBounds?.[row]??row*sh,sourceHeight=atlas.yBounds?atlas.yBounds[row+1]-sy:sh;g.drawImage(source,col*sw,sy,sw,sourceHeight,col*cell+pad,row*cell+pad,cell-pad*2,cell-pad*2)}
  atlas.canvas=c
 }
-function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;if(atlas.tourist){atlas.canvas=img}else insetSpriteSheet(img,atlas);const grid=window.Germany3DBridge?.npcSpriteGrids[key];if(grid)Object.assign(grid,{cols:atlas.cols,rows:atlas.rows,frameWidth:atlas.frameWidth,frameHeight:atlas.frameHeight,pivot:atlas.pivot})}
+function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;if(atlas.tourist){atlas.canvas=img}else insetSpriteSheet(img,atlas);const grid=window.Germany3DBridge?.npcSpriteGrids[key];if(grid)Object.assign(grid,{cols:atlas.cols,rows:atlas.rows,frameWidth:atlas.frameWidth,frameHeight:atlas.frameHeight,pivot:atlas.pivot,groundProjection:atlas.tourist?.groundProjection===true})}
 
 const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],
@@ -2173,6 +2175,18 @@ for(const b of buildings){
  if(!bottom||bottom-top<36)continue;
  const left=b.doorX-WALKWAY_WIDTH/2,right=b.doorX+WALKWAY_WIDTH/2,h=bottom-top;
  if(left>b.x+8)grassAreas.push({x:b.x,y:top,w:left-b.x,h});
+ if(b.id==='buergeramt'){
+  // Späti blocks the straight approach: join the sidewalk around its east side.
+  const bendY=b.doorY+98,sideX=b.doorX+150,halfWidth=21;
+  const upper=bendY-halfWidth,lower=bendY+halfWidth,outer=sideX+halfWidth;
+  grassAreas.push({x:right,y:top,w:b.x+b.w-right,h:upper-top},
+   {x:right,y:lower,w:sideX-halfWidth-right,h:bottom-lower},
+   {x:outer,y:upper,w:b.x+b.w-outer,h:bottom-upper});
+  walkways.push({x:left,y:top,w:WALKWAY_WIDTH,h:lower-top},
+   {x:b.doorX,y:upper,w:outer-b.doorX,h:halfWidth*2},
+   {x:sideX-halfWidth,y:upper,w:halfWidth*2,h:bottom+SIDEWALK_WIDTH/2-upper});
+  continue;
+ }
  if(right<b.x+b.w-8)grassAreas.push({x:right,y:top,w:b.x+b.w-right,h});
  walkways.push({x:left,y:top,w:WALKWAY_WIDTH,h});
 }
@@ -2767,18 +2781,22 @@ function responderBlocked(x,y,r,self,fromX=self?.x,fromY=self?.y){
 }
 function moveGroundResponder(entity,dx,dy,r){
  if(!dx&&!dy)return false;
- const beforeX=entity.x,beforeY=entity.y,steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),stepX=dx/steps,stepY=dy/steps;
- const attempt=(sx,sy)=>{if((!sx&&!sy)||responderBlocked(entity.x+sx,entity.y+sy,r,entity,entity.x,entity.y))return false;const fromX=entity.x,fromY=entity.y;entity.x+=sx;entity.y+=sy;notifyStreetAccepted(entity,fromX,fromY);return true};
- if(!entity.avoid)entity.avoid=entity.crowd?1:Math.random()<.5?-1:1;
+ const beforeX=entity.x,beforeY=entity.y,steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),stepX=dx/steps,stepY=dy/steps,segments=[];
+ let x=beforeX,y=beforeY,avoid=entity.avoid||(entity.crowd?1:Math.random()<.5?-1:1);
+ const attempt=(sx,sy)=>{if((!sx&&!sy)||responderBlocked(x+sx,y+sy,r,entity,x,y))return false;segments.push({fromX:x,fromY:y,x:x+sx,y:y+sy});x+=sx;y+=sy;return true};
  for(let i=0;i<steps;i++){
   const movedX=attempt(stepX,0),movedY=attempt(0,stepY),mainBlocked=Math.abs(stepX)>=Math.abs(stepY)?!!stepX&&!movedX:!!stepY&&!movedY;
   if((movedX||movedY)&&!mainBlocked)continue;
-  const sideX=-stepY*.72*entity.avoid,sideY=stepX*.72*entity.avoid;
+  const sideX=-stepY*.72*avoid,sideY=stepX*.72*avoid;
   if(attempt(sideX,sideY))continue;
-  if(attempt(-sideX,-sideY)){entity.avoid*=-1;continue}
+  if(attempt(-sideX,-sideY)){avoid*=-1;continue}
   if(!attempt(-stepX*.55,-stepY*.55))break;
  }
- return Math.hypot(entity.x-beforeX,entity.y-beforeY)>.001
+ const distance=Math.hypot(x-beforeX,y-beforeY),last=segments.at(-1);
+ if(last&&holdStreetMovement(entity,distance>.001?x-beforeX:last.x-last.fromX,distance>.001?y-beforeY:last.y-last.fromY))return null;
+ entity.avoid=avoid;
+ for(const segment of segments){entity.x=segment.x;entity.y=segment.y;notifyStreetAccepted(entity,segment.fromX,segment.fromY)}
+ return distance>.001
 }
 function blocked(x,y){return groundStaticMotionBlocked(x,y,player.r,player.x,player.y)||Math.abs(stationElevation(x,y)-stationElevation(player.x,player.y))>.11}
 function blockingPedestrian(x,y){let nearest=null,best=player.r+13;for(const n of npcs){const d=dist(x,y,n.x,n.y);if(d<best&&groundContactBlocks(d,dist(player.x,player.y,n.x,n.y),player.r+13)){nearest=n;best=d}}return nearest}
@@ -2788,10 +2806,85 @@ function pedestrianLane(n){
  if(n.wisdomId&&npcs.some(other=>{if(other===n||other.wisdomId||other.special||other.arrested||!!other.vx!==!!n.vx||Math.sign(other.vx||other.vy)!==-direction)return false;const ahead=(n.vx?other.x-n.x:other.y-n.y)*direction;return ahead>=-28&&ahead<96&&pedestrianRouteContains(n,other.x,other.y)}))side=1;
  return n.vx?b.y+b.h/2+side*direction*Math.min(16,b.h/2-13):b.x+b.w/2-side*direction*Math.min(16,b.w/2-13)
 }
-function pedestrianRouteStalled(n,beforeX,beforeY,dt){
- const direction=Math.sign(n.vx||n.vy),window=n.progressWindow;if(!window||window.direction!==direction)n.progressWindow={x:beforeX,y:beforeY,elapsed:0,direction};
- const sample=n.progressWindow;sample.elapsed+=dt;if(sample.elapsed<.7)return false;
- const progress=((n.vx?n.x-sample.x:n.y-sample.y)*direction),stalled=progress<Math.abs(n.vx||n.vy)*sample.elapsed*.15;n.progressWindow={x:n.x,y:n.y,elapsed:0,direction};return stalled
+function createPedestrianMover({move,blocked,contactBlocks,circles}){
+ const maneuvers=new WeakMap();
+ const routeKey=n=>n.routeBounds&&[n.routeBounds.x,n.routeBounds.y,n.routeBounds.w,n.routeBounds.h].join(':');
+ const direction=n=>n.vx&&!n.vy?[Math.sign(n.vx),0]:n.vy&&!n.vx?[0,Math.sign(n.vy)]:null;
+ const clear=(n,r,from,to)=>{
+  const count=Math.max(1,Math.ceil(Math.hypot(to[0]-from[0],to[1]-from[1])));let x=from[0],y=from[1];
+  for(let i=1;i<=count;i++){
+   const nx=from[0]+(to[0]-from[0])*i/count,ny=from[1]+(to[1]-from[1])*i/count;
+   if(blocked(nx,ny,r,n,x,y))return false;x=nx;y=ny;
+  }
+  return true;
+ };
+ function plan(n,dx,dy,r,forward,bodies){
+  if(!blocked(n.x+dx,n.y+dy,r,n,n.x,n.y))return null;
+  const body=bodies.find(b=>b.actor!==n&&Number.isFinite(b.radius)&&b.radius>0&&
+   (b.actor.x-n.x)*forward[0]+(b.actor.y-n.y)*forward[1]>0&&
+   contactBlocks(Math.hypot(n.x+dx-b.actor.x,n.y+dy-b.actor.y),Math.hypot(n.x-b.actor.x,n.y-b.actor.y),r+b.radius));
+  if(!body)return null;
+  const clearance=r+body.radius,root=[n.x,n.y],preferred=n.avoid||1;
+  for(const sign of [preferred,-preferred]){
+   const side=[-forward[1]*sign,forward[0]*sign];
+   const lateral=(body.actor.x-n.x)*side[0]+(body.actor.y-n.y)*side[1]+clearance;
+   if(!(lateral>0))continue;
+   const corner=[n.x+side[0]*lateral,n.y+side[1]*lateral];
+   const ahead=(body.actor.x-corner[0])*forward[0]+(body.actor.y-corner[1])*forward[1]+clearance;
+   if(!(ahead>0))continue;
+   const exit=[corner[0]+forward[0]*ahead,corner[1]+forward[1]*ahead];
+   if(!clear(n,r,root,corner)||!clear(n,r,corner,exit))continue;
+   return {forward,side,corner,exit,stage:'side',body:body.actor,radius:body.radius,
+    bodyX:body.actor.x,bodyY:body.actor.y,route:routeKey(n),vx:n.vx,vy:n.vy,lastX:n.x,lastY:n.y};
+  }
+  return null;
+ }
+ const movePedestrian=function(n,dx,dy,r){
+  const forward=direction(n);
+  if(!forward||!n.routeBounds||n.gardenPaths?.length){maneuvers.delete(n);return move(n,dx,dy,r)}
+  const old=maneuvers.get(n);
+  if(!old&&!blocked(n.x+dx,n.y+dy,r,n,n.x,n.y))return move(n,dx,dy,r);
+  const bodies=circles();
+  let active=old;
+  if(active&&(active.lastX!==n.x||active.lastY!==n.y||active.vx!==n.vx||active.vy!==n.vy||
+   active.route!==routeKey(n)||active.bodyX!==active.body.x||active.bodyY!==active.body.y||
+   !bodies.some(b=>b.actor===active.body&&b.radius===active.radius))){maneuvers.delete(n);active=null}
+  if(!active){active=plan(n,dx,dy,r,forward,bodies);if(active)maneuvers.set(n,active)}
+  if(!active)return move(n,dx,dy,r);
+  let target=active.stage==='side'?active.corner:active.exit,axis=active.stage==='side'?active.side:active.forward;
+  let remaining=(target[0]-n.x)*axis[0]+(target[1]-n.y)*axis[1];
+  if(remaining<=0){
+   if(active.stage==='pass'){maneuvers.delete(n);return move(n,dx,dy,r)}
+   active.stage='pass';target=active.exit;axis=active.forward;
+   remaining=(target[0]-n.x)*axis[0]+(target[1]-n.y)*axis[1];
+  }
+  const distance=Math.min(remaining,Math.abs(dx*forward[0]+dy*forward[1])*(active.stage==='side'?.72:1));
+  if(!(distance>0)){maneuvers.delete(n);return move(n,dx,dy,r)}
+  const sx=axis[0]*distance,sy=axis[1]*distance;
+  if(!clear(n,r,[n.x,n.y],[n.x+sx,n.y+sy])){maneuvers.delete(n);return move(n,dx,dy,r)}
+  active.progressAxis=axis;
+  const fromX=n.x,fromY=n.y,result=move(n,sx,sy,r);
+  if(result!==null&&((n.x-fromX)*axis[1]-(n.y-fromY)*axis[0]!==0||
+    (n.x-fromX)*axis[0]+(n.y-fromY)*axis[1]<0))maneuvers.delete(n);
+  active.lastX=n.x;active.lastY=n.y;
+  return result;
+ };
+ movePedestrian.progress=(n,fromX,fromY)=>{
+  const active=maneuvers.get(n),axis=active?.progressAxis;
+  return axis?Math.max(0,(n.x-fromX)*axis[0]+(n.y-fromY)*axis[1]):null;
+ };
+ movePedestrian.invalidate=n=>maneuvers.delete(n);
+ return movePedestrian;
+}
+
+const movePedestrian=createPedestrianMover({move:moveGroundResponder,blocked:responderBlocked,contactBlocks:groundContactBlocks,
+ circles:()=>[{actor:player,radius:player.r},...npcs.map(actor=>({actor,radius:13})),...police.map(actor=>({actor,radius:14}))]});
+function pedestrianRouteStalled(n,beforeX,beforeY,dt,maneuverProgress=null){
+ const geometric=Number.isFinite(maneuverProgress),direction=Math.sign(n.vx||n.vy),window=n.progressWindow;
+ if(!window||window.direction!==direction||!!window.maneuver!==geometric)n.progressWindow={x:beforeX,y:beforeY,elapsed:0,direction,...(geometric?{maneuver:true,travel:0}:{})};
+ const sample=n.progressWindow;sample.elapsed+=dt;if(geometric)sample.travel+=Math.max(0,maneuverProgress);if(sample.elapsed<.7)return false;
+ const progress=geometric?sample.travel:((n.vx?n.x-sample.x:n.y-sample.y)*direction),stalled=progress<Math.abs(n.vx||n.vy)*sample.elapsed*.15;
+ n.progressWindow={x:n.x,y:n.y,elapsed:0,direction,...(geometric?{maneuver:true,travel:0}:{})};return stalled
 }
 function streetWisdomCanMove(n){
  for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){
@@ -2804,6 +2897,7 @@ function streetWisdomCanMove(n){
 function initializePedestrianRoutes(){
  const horizontal=horizontalRoads.flatMap(road=>sidewalkSegments.flatMap(segment=>[{x:segment.min,y:road.y-SIDEWALK_WIDTH,w:segment.max-segment.min,h:SIDEWALK_WIDTH},{x:segment.min,y:road.y+road.h,w:segment.max-segment.min,h:SIDEWALK_WIDTH}])),vertical=verticalRoads.flatMap(road=>verticalSidewalkSegments.flatMap(segment=>[{x:road.x-SIDEWALK_WIDTH,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min},{x:road.x+road.w,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min}]));
  for(const n of npcs){
+  movePedestrian.invalidate(n);
   if(n.jwdRole){n.routeBounds=jwdLane;n.gardenPaths=jwdGardens.paths;const station=jwdGardens.stations[n.id];if(station)Object.assign(n,{x:station.x,y:station.y,jwdActivity:station.activity,jwdWorking:true,activityPhase:0});continue}
   if(n.special)continue;
   const choices=(n.vx?horizontal:vertical).concat(stations.filter(s=>(s.w>s.h)===!!n.vx));let best=null,bestDistance=Infinity;
@@ -3776,16 +3870,18 @@ function updateCitySimulation(dt){
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.special==="bayern"){updateBayern(n,dt);continue}
    if(n.special==="alice"){updateAlice(n,dt);continue}
-   if(n.spriteKind&&globalThis.TouristAnimations?.isTurning(n)){orientCrowdSprite(n,n===state.quizApproach?player.x-n.x:n.vx||0,n===state.quizApproach?player.y-n.y:n.vy||0);advanceSpriteGait(n,0,npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt);continue}
+   if(n.spriteKind&&!streetMotionObserver?.ownsMovement?.(n)&&globalThis.TouristAnimations?.isTurning(n)){orientCrowdSprite(n,n===state.quizApproach?player.x-n.x:n.vx||0,n===state.quizApproach?player.y-n.y:n.vy||0);advanceSpriteGait(n,0,npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt);continue}
    if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1,beforeX=n.x,beforeY=n.y;n.quizFollowTime=(n.quizFollowTime||0)+dt;if(n.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS||d>QUIZ_FOLLOW_BREAK_DISTANCE){state.quizApproach=null;state.quizApproachQuestion=null;n.quizAsked=true;n.quizFollowTime=0;state.quizTimer=14+Math.random()*10;continue}if(d<78&&!stimulusBusy()){if(startCitizenshipQuiz(n)){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0}}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,13);if(d>=78&&n.spriteKind){orientCrowdSprite(n,n.x-beforeX,n.y-beforeY);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt)}continue}
    if(!n.wisdomId&&dist(player.x,player.y,n.x,n.y)<(n.audioRadius||NPC_COMPLAINT_DISTANCE))pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
    if(n.wisdomId){n.wisdomExitCheck=(n.wisdomExitCheck||0)-dt;if(n.wisdomExitCheck<=0){n.wisdomExitCheck=.7;n.wisdomBlocked=!streetWisdomCanMove(n)}if(n.wisdomBlocked)continue}
    const lane=n.routeBounds?pedestrianLane(n):null,correction=lane==null?0:clamp(lane-(n.vx?n.y:n.x),-18*dt,18*dt),dx=(n.vx||0)*dt+(n.vx?0:correction),dy=(n.vy||0)*dt+(n.vx?correction:0),beforeX=n.x,beforeY=n.y;
-   if(!moveGroundResponder(n,dx,dy,13)){n.pause=.2;requestCharacterReaction(n,"failed");if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);continue}
+   const paintedMovement=streetMotionObserver?.ownsMovement?.(n)===true;if(!paintedMovement)movePedestrian.invalidate(n);
+   const moved=paintedMovement?movePedestrian(n,dx,dy,13):moveGroundResponder(n,dx,dy,13);if(moved===null)continue;
+   if(!moved){n.pause=.2;requestCharacterReaction(n,"failed");if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);continue}
    if(n.spriteKind){orientCrowdSprite(n,n.x-beforeX,n.y-beforeY);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt)}
-   const progress=n.vx?(n.x-beforeX)*Math.sign(n.vx):(n.y-beforeY)*Math.sign(n.vy);n.blockedTimer=progress>.001?0:(n.blockedTimer||0)+dt;
-   if(n.blockedTimer>.7||pedestrianRouteStalled(n,beforeX,beforeY,dt)||(n.vx?(n.x<=n.min+1||n.x>=n.max-1):(n.y<=n.min+1||n.y>=n.max-1))){n.blockedTimer=0;n.pause=.2;if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n)}
+   const maneuverProgress=paintedMovement?movePedestrian.progress(n,beforeX,beforeY):null,progress=maneuverProgress??(n.vx?(n.x-beforeX)*Math.sign(n.vx):(n.y-beforeY)*Math.sign(n.vy));n.blockedTimer=progress>.001?0:(n.blockedTimer||0)+dt;
+   if(n.blockedTimer>.7||pedestrianRouteStalled(n,beforeX,beforeY,dt,maneuverProgress)||(n.vx?(n.x<=n.min+1||n.x>=n.max-1):(n.y<=n.min+1||n.y>=n.max-1))){n.blockedTimer=0;n.pause=.2;if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n)}
  }
  state.ruleTimer+=dt;if(state.ruleTimer>RULE_ROTATION_SECONDS){state.ruleTimer=0;state.rule=(state.rule+1)%rules.length;updateHud()}announceCurrentRule();
  for(const p of particles){p.t-=dt;p.y-=12*dt}particles=particles.filter(p=>p.t>0);

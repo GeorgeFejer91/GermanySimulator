@@ -1039,6 +1039,7 @@ export const neighborSpokenWords=text=>text.normalize('NFKC')
  .replace(/\bso was\b/g,'sowas')
  .replace(/\bnoch mal\b/g,'nochmal')
  .replace(/\bkennen zu lernen\b/g,'kennenzulernen')
+ .replace(/\bdran bleibt\b/g,'dranbleibt')
  .replace(/nachbarschafts offside\b/g,'nachbarschafts offsite')
  .replace(/\b\d+\b/g,number=>Number(number)<100?spokenWords(number):number);
 
@@ -1066,6 +1067,131 @@ export function validNeighborAsrInputTransform(clip,person){
   typeof clip.asrUnframedTranscript==='string'&&clip.asrUnframedTranscript.trim().length>0&&
   neighborSpokenWords(clip.asrUnframedTranscript)!==neighborSpokenWords(clip.text);
 }
+const heikoProfessorRenderReference=Object.freeze({
+ policy:'literal-reference-pcm-excerpt-v1',profileId:'fec92a799b3a48879cc2d90ce2ae2e10',
+ profileReferenceSha256:'1ccb91c8cc1fd03ee28fd46b0d727e7f69717ed70e15210c538a1283dca26c06',
+ sourceStartSample:0,sourceEndSampleExclusive:97920,sourceSampleRateHz:24000,sourceChannels:1,sourceBitsPerSample:16,
+ referenceSha256:'012b9c85f149767274b44fc9a977c7bf8e6d69d69cfaaa9fc5d1e7aa8aac975f',
+ referencePcmSha256:'55accb637a508f3161f03889d4c2a4bc4d2e81ef5acd81a8662eb42e5976945a',
+ referenceText:'Hello everybody, my name is Heiko Schmidt.',
+ referenceTextSha256:'c918935c45756afc17c6b8a252f30d9862ec81da105cdfbb0ff5873b504ed6e9',
+ inputProofSha256:'b501efa381506adec6b0992cedbf0c3f33f63ca28758babdfdb5e9e6868b5465',
+ boundaryEvidenceSha256:'8351bc24487fcbb95d0560694dcd4775521c7fd1bba92ff7b8bc30c6e6498845'
+});
+export function validNeighborReferenceConditioning(clip){
+ const reference=clip.referenceConditioning,parameters=clip.nativeCompletion?.inferenceParameters;
+ if(reference===undefined)return true;
+ return clip.voiceId==='jwd-heiko-maaslos'&&clip.profileId===heikoProfessorRenderReference.profileId&&
+  clip.referenceSha256===heikoProfessorRenderReference.profileReferenceSha256&&
+  clip.referenceOriginalSha256===heikoProfessorRenderReference.profileReferenceSha256&&
+  clip.nativeParts===undefined&&clip.nativeCompletion?.kind===undefined&&
+  reference!==null&&typeof reference==='object'&&!Array.isArray(reference)&&
+  Object.keys(reference).length===Object.keys(heikoProfessorRenderReference).length&&
+  Object.entries(heikoProfessorRenderReference).every(([key,value])=>reference[key]===value)&&
+  parameters?.numStep===64&&parameters?.speed===.9&&parameters?.device==='cuda'&&
+  parameters?.dtype==='f16'&&parameters?.preprocessPrompt===true;
+}
+export function validNeighborRenderInput(clip){
+ const fields=['actualInferenceText','actualInferenceSha256','canonicalSourceSha256','renderNormalizationPolicy'];
+ if(fields.every(key=>clip[key]===undefined))return true;
+ if(clip.voiceId!=='jwd-heiko-maaslos'||typeof clip.text!=='string')return false;
+ if(clip.nativeParts!==undefined||clip.nativeCompletion?.kind!==undefined)return false;
+ let expected;
+ if(clip.renderNormalizationPolicy==='finite-authored-apostrophe-contractions-v1'){
+  expected=clip.text.replace(/(?<!\p{L})(sie|du|er|haben|ich|man|meinen|sag|sehen|wir|gibt)[’']s(?!\p{L})/giu,(_,base)=>base+' es');
+ }else if(clip.renderNormalizationPolicy==='finite-spoken-tag-and-elision-punctuation-v1'){
+  expected=clip.text.replace(/, ja\?/g,'. Ja?').replace(/\bhab\b/g,"hab'");
+ }else if(clip.renderNormalizationPolicy==='finite-spoken-short-form-pause-v1'){
+  expected=clip.text.replace(/sag[’']s/g,'sag … es').replace(/\bhab ihm\b/g,'hab … ihm').replace(/, ja\?/g,'; ja?');
+ }else return false;
+ return expected!==clip.text&&clip.actualInferenceText===expected&&
+  clip.canonicalSourceSha256===textHash(clip.text)&&clip.actualInferenceSha256===textHash(expected)&&
+  neighborSpokenWords(expected)===neighborSpokenWords(clip.text);
+}
+export function neighborNativeCompletion(clip){
+ const completion=clip.nativeCompletion;
+ if(!validNeighborReferenceConditioning(clip)||!validNeighborRenderInput(clip))return false;
+ if(completion?.completed!==true)return false;
+ if(completion.kind===undefined)return clip.nativeParts===undefined&&
+  !['join','parentSynthesisCalls','partSynthesisCalls','authorizationSha256'].some(key=>completion[key]!==undefined);
+ if(completion.kind!=='ordered-complete-native-parts'||clip.voiceId!=='jwd-heiko-maaslos')return false;
+ const parts=clip.nativeParts,join=completion.join,validHash=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+ if(!Array.isArray(parts)||parts.length<2||parts.length>20||completion.parentSynthesisCalls!==0||
+  completion.basis!=='ordered complete native parts; no parent model call'||!validHash(completion.authorizationSha256)||
+  completion.partSynthesisCalls!==parts.reduce((sum,part)=>sum+part.synthesisCalls,0)||
+  join?.method!=='ffmpeg-concat-pcm'||join.sampleRateHz!==24000||join.channels!==1||
+  join.insertedSilence!==false||join.crossfade!==false||join.trim!==false||!validHash(join.ffmpegSha256)||
+  !validHash(join.outputAudioSha256)||join.outputAudioSha256!==clip.nativeAudioSha256||
+  !Number.isInteger(join.outputSamples)||join.outputSamples<=0||
+  !Array.isArray(join.partAudioSha256)||join.partAudioSha256.length!==parts.length)return false;
+ let end=0,samples=0;
+ for(const [index,part] of parts.entries()){
+  const parameters=part.nativeCompletion?.inferenceParameters;
+  if(part.index!==index||!Number.isInteger(part.sourceStart)||!Number.isInteger(part.sourceEnd)||
+   part.sourceStart<end||part.sourceEnd<=part.sourceStart||part.sourceEnd>clip.text.length||
+   !/^\s*$/.test(clip.text.slice(end,part.sourceStart))||part.text!==clip.text.slice(part.sourceStart,part.sourceEnd)||
+   !part.text.trim()||!Number.isInteger(part.synthesisCalls)||part.synthesisCalls<1||part.synthesisCalls>(part.renderNormalizationPolicy==='finite-spoken-short-form-pause-v1'?3:2)||
+   !['voiceId','profileId','referenceSha256','referenceOriginalSha256','renderer','modelRevision','processing'].every(key=>part[key]===clip[key])||
+   !['nativeAudioSha256','nativeAnnotationSha256','encodedSha256','asrModelSha256'].every(key=>validHash(part[key]))||
+   part.nativeAudioSha256!==join.partAudioSha256[index]||!Number.isInteger(part.nativeSamples)||part.nativeSamples<=0||
+   part.nativeSampleRateHz!==24000||part.nativeChannels!==1||part.nativeCompletion?.completed!==true||
+   part.nativeCompletion.kind!==undefined||!neighborNativeCompletion(part)||!validHash(part.nativeCompletion.inferenceSha256)||!validHash(part.nativeCompletion.binarySha256)||
+   !Number.isInteger(part.seed)||![32,64].includes(parameters?.numStep)||![.9,1].includes(parameters?.speed)||
+   parameters?.device!=='cuda'||parameters?.dtype!=='f16'||parameters?.preprocessPrompt!==true||
+   part.asrScriptPrompt!==null||part.asrWordExact!==true||typeof part.asr!=='string'||
+   neighborSpokenWords(part.asr)!==neighborSpokenWords(part.text))return false;
+  end=part.sourceEnd;samples+=part.nativeSamples;
+ }
+ return /^\s*$/.test(clip.text.slice(end))&&samples===join.outputSamples;
+}
+// These final encodings were independently decoded and checked against every
+// contiguous ASR input window. Keep the failed whole-file readings in the proof.
+const neighborWindowAuthorities=Object.freeze({
+ 'heiko-story-24':{encodedSha256:'cf9d612014ff425760dfbc81bb57c5232af45aa5fe0c2d95a945ec14822c481f',proofSha256:'1ee63a1fef234af2e3782fb6fee74427ff727312cec8756e6a72cb78e7e74cb9'},
+ 'heiko-story-27':{encodedSha256:'e5249c6bf73e81e88a2ed92cfd895285027bc8179bf6862710df2f0f1cb9c0c8',proofSha256:'b621dffc14f04cae06c0c65b301f5f96c66580b49fa1c55be7366c671ab41855'}
+});
+export function neighborWindowRecognition(clip){
+ const mode=clip.asrVerificationMode,proof=clip.asrWindowProof;
+ const authority=neighborWindowAuthorities[clip.clipId];
+ if(mode!=='exhaustive-final-encoding-windows-v1')return proof===undefined&&!Object.values(neighborWindowAuthorities).some(row=>row.encodedSha256===clip.sha256);
+ if(!authority||clip.voiceId!=='jwd-heiko-maaslos'||clip.sha256!==authority.encodedSha256||
+  !proof||textHash(JSON.stringify(proof))!==authority.proofSha256||
+  clip.asrInputTransform!==undefined||clip.asrUnframedTranscript!==undefined||
+  !neighborNativeCompletion(clip)||clip.nativeCompletion?.kind!=='ordered-complete-native-parts'||
+  proof.kind!==mode||proof.encodedSha256!==clip.sha256||proof.sourceSha256!==textHash(clip.text)||
+  proof.sampleRateHz!==16000||proof.channels!==1||proof.bitsPerSample!==16||
+  proof.scriptPrompt!==null||proof.speechSamplesUnmodified!==true||proof.exhaustiveCoverageVerified!==true||
+  proof.modelSha256!==clip.asrModelSha256||clip.asrScriptPrompt!==null||clip.asrWordExact!==true||
+  !Array.isArray(proof.windows)||proof.windows.length!==clip.nativeParts.length||
+  !Array.isArray(proof.priorWholeReadings)||proof.priorWholeReadings.length===0||
+  !proof.priorWholeReadings.every(row=>row.exact===false&&typeof row.transcript==='string'&&neighborSpokenWords(row.transcript)!==neighborSpokenWords(clip.text)))return false;
+ const coverage=proof.nativeCoverage,join=clip.nativeCompletion.join;
+ if(coverage?.kind!==clip.nativeCompletion.kind||coverage.sampleRateHz!==join.sampleRateHz||coverage.channels!==join.channels||
+  coverage.totalSamples!==join.outputSamples||coverage.joinedNativeAudioSha256!==clip.nativeAudioSha256||
+  coverage.joinedNativePcmSha256!==join.outputPcmSha256||coverage.assemblyReceiptSha256!==clip.nativeAnnotationSha256||
+  coverage.authorizationSha256!==clip.nativeCompletion.authorizationSha256||
+  JSON.stringify(coverage.partAudioSha256)!==JSON.stringify(join.partAudioSha256)||
+  JSON.stringify(coverage.partPcmSha256)!==JSON.stringify(join.partPcmSha256)||
+  (proof.nativeSynthesisAccounting!==undefined&&JSON.stringify(proof.nativeSynthesisAccounting)!==JSON.stringify(clip.nativeSynthesisAccounting)))return false;
+ const accounting=proof.nativeSynthesisAccounting;
+ if(accounting&&(accounting.selectedLeafCalls!==clip.nativeCompletion.partSynthesisCalls||
+  accounting.selectedLeaves.length!==clip.nativeParts.length||
+  !accounting.selectedLeaves.every((leaf,index)=>{
+   const part=clip.nativeParts[index];
+   return ['index','sourceStart','sourceEnd','nativeAudioSha256','nativePcmSha256','synthesisCalls'].every(key=>leaf[key]===part[key])&&leaf.sourceSha256===textHash(part.text);
+  })))return false;
+ let end=0,samples=0;
+ for(const [index,window]of proof.windows.entries()){
+  const part=clip.nativeParts[index];samples+=part.nativeSamples;
+  const boundary=index===proof.windows.length-1?proof.totalSamples:Math.round(samples*2/3);
+  if(window.index!==index||window.sourceStart!==part.sourceStart||window.sourceEnd!==part.sourceEnd||
+   window.startSample!==end||window.endSampleExclusive!==boundary||boundary<=end||
+   typeof window.transcript!=='string'||neighborSpokenWords(window.transcript)!==neighborSpokenWords(part.text))return false;
+  end=boundary;
+ }
+ return end===proof.totalSamples&&end===Math.round(clip.nativeCompletion.join.outputSamples*2/3)&&
+  clip.asr===proof.windows.map(row=>row.transcript).join(' ')&&neighborSpokenWords(clip.asr)===neighborSpokenWords(clip.text);
+}
 export function neighborRecordingsBlock(cast,manifests,assetRoot=root){
  const entries={},bindings=[],bindingIndices=new Map(),seen=new Set();
  for(const manifest of manifests){
@@ -1075,22 +1201,23 @@ export function neighborRecordingsBlock(cast,manifests,assetRoot=root){
    requireMatch(matchesProduction(cast,clip)&&clip.renderer==='omnivoice-rs','Wrong fixed neighbor production receipt');
    requireMatch(person.gameCharacterId===clip.actorId&&person.dialogue.some(line=>line.text===clip.text&&line.english===clip.english),`Wrong neighbor source/speaker: ${clip.clipId}`);
    requireMatch(validNeighborAsrInputTransform(clip,person),'Unverified neighbor ASR input transform');
-   if(['actualInferenceText','actualInferenceSha256','canonicalSourceSha256','renderNormalizationPolicy'].some(key=>clip[key]!==undefined)){
-    const expanded=clip.text.replace(/(?<!\p{L})(sie|du|er|haben|ich|man|meinen|sag|sehen|wir|gibt)[’']s(?!\p{L})/giu,(_,base)=>base+' es');
-    const textHash=text=>createHash('sha256').update(text).digest('hex');
-    requireMatch(clip.voiceId==='jwd-heiko-maaslos'&&clip.renderNormalizationPolicy==='finite-authored-apostrophe-contractions-v1'&&expanded!==clip.text&&clip.actualInferenceText===expanded&&clip.canonicalSourceSha256===textHash(clip.text)&&clip.actualInferenceSha256===textHash(expanded)&&neighborSpokenWords(expanded)===neighborSpokenWords(clip.text),'Unverified neighbor render input');
-   }
+   requireMatch(validNeighborRenderInput(clip),'Unverified neighbor render input');
+   requireMatch(neighborWindowRecognition(clip),'Unverified neighbor final-encoding ASR windows');
    const exact=typeof clip.asr==='string'&&neighborSpokenWords(clip.asr)===neighborSpokenWords(clip.text);
    const dialectAdvisory=clip.voiceId==='jwd-frau-schwabingen'&&cast.productionVoices[clip.voiceId]?.asrPolicy==='dialect-advisory'&&clip.asrVerificationMode==='dialect-advisory';
-   requireMatch(clip.nativeCompletion?.completed===true&&clip.asrWordExact===exact&&clip.asrScriptPrompt===null&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&typeof clip.asr==='string'&&clip.asr.trim().length>0&&(exact||dialectAdvisory),'Missing independent final-encoding neighbor ASR or authorized dialect-advisory receipt');
+   requireMatch(neighborNativeCompletion(clip)&&clip.asrWordExact===exact&&clip.asrScriptPrompt===null&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&typeof clip.asr==='string'&&clip.asr.trim().length>0&&(exact||dialectAdvisory),'Missing independent final-encoding neighbor ASR or authorized dialect-advisory receipt');
    requireMatch(Math.abs(clip.integratedLufs+18)<=.3&&clip.truePeakDbtp<=-1.5&&clip.approval?.status==='user-approved','Unverified neighbor take');
    requireMatch(clip.file===`assets/voices/neighbors/${clip.clipId}.mp3`&&hash(resolve(assetRoot,clip.file))===clip.sha256,'Neighbor audio hash/path drift');
    requireMatch(clip.mouthHz===40&&clip.mouthEnergy.length===Math.ceil(clip.durationSeconds*40)&&clip.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255),'Invalid encoded-media mouth cue');
    const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),'Duplicate neighbor recording');seen.add(key);
    const {clipId,voiceId,actorId,profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,sha256,mouthHz,mouthEnergy}=clip;
-   const receipt={profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,trigger:'jwd-neighbor-exact-dialogue',approval:clip.approval,provenanceManifest:manifest.provenanceManifest},receiptKey=JSON.stringify(receipt);
+   const nativePartReferenceInputs=clip.nativeParts?.flatMap((part,index)=>part.referenceConditioning?[{index,referenceConditioning:part.referenceConditioning}]:[])||[];
+   const renderFields=['actualInferenceText','actualInferenceSha256','canonicalSourceSha256','renderNormalizationPolicy'];
+   const renderInput=take=>Object.fromEntries(renderFields.flatMap(key=>take[key]!==undefined?[[key,take[key]]]:[]));
+   const nativePartRenderInputs=clip.nativeParts?.flatMap((part,index)=>part.actualInferenceText!==undefined?[{index,...renderInput(part)}]:[])||[];
+   const receipt={profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,trigger:'jwd-neighbor-exact-dialogue',approval:clip.approval,provenanceManifest:manifest.provenanceManifest,...(clip.referenceConditioning?{referenceConditioning:clip.referenceConditioning}:{}),...(nativePartReferenceInputs.length?{nativePartReferenceInputs}:{}),...renderInput(clip),...(nativePartRenderInputs.length?{nativePartRenderInputs}:{})},receiptKey=JSON.stringify(receipt);
    if(!bindingIndices.has(receiptKey)){bindingIndices.set(receiptKey,bindings.length);bindings.push(receipt)}
-   entries['./'+clip.file]={binding:bindingIndices.get(receiptKey),id:clipId,voiceId,actorId,sha256,mouthHz,mouthEnergy,fixedProduction:true,source:clip.text,english:clip.english,durationMs:Math.round(clip.durationSeconds*1000)};
+   entries['./'+clip.file]={binding:bindingIndices.get(receiptKey),id:clipId,voiceId,actorId,sha256,mouthHz,mouthEnergy,fixedProduction:true,source:clip.text,english:clip.english,durationMs:Math.round(clip.durationSeconds*1000),...(clip.asrWindowProof?{asrVerificationMode:clip.asrVerificationMode,asrWindowProofSha256:textHash(JSON.stringify(clip.asrWindowProof))}:{})};
   }
  }
  // Snapshot the verified manifest receipts once; do not inherit the current

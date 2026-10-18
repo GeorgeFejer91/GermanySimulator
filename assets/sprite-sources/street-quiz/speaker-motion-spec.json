@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "hartmut-keller",
+  "voiceId": "quiz-hartmut-keller",
+  "status": "bounded candidate; no automatic runtime adoption",
+  "registeredSourceSpec": "assets/sprite-sources/street-quiz/animation-spec.json",
+  "stepWidth": 40,
+  "strength": 0.8,
+  "findings": [
+    "Narrow far-shoe material repair only. Original upper legs, trajectories and pivots retained; neutral and turns unchanged.",
+    "Profile shoe candidates use each own original reference; full heel, rounded toe and dark sole. Exact encoded native review pending.",
+    "Vertical knee articulation remains subtle at native size; unchanged by this repair.",
+    "Normal/slow temporal loop and current canonical runtime grounding/speed gates remain incomplete.",
+    "Figure world height is1.6. Profile cycle is remeasured from source soles; up/down and camera calibration require new canonical runtime.",
+    "Other eleven families remain source inventory only; no automatic adoption."
+  ],
+  "figureWorldHeight": 1.6
+}

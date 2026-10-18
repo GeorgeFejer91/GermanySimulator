@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-elfriede-eingabe-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/profiles-clean-candidate.png",
+      "sha256": "5a20ed6d8843ad6bc76c7b181530b630d1478c1b623e08fc986b08a1aa3124e6",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        175,
+        30,
+        1362,
+        985
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-elfriede-eingabe/turns-candidate.png",
+      "sha256": "479214b024ab65a9053a8b07684abc47d67d492ca8d43fabd65197e768cb730e",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        141,
+        29,
+        2020,
+        702
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}
