@@ -1,3 +1,294 @@
+GERMANY SIMULATOR - FINAL PROJECT HANDOFF CHECKPOINT
+==================================================
+Updated 18 October 2026. This opening is the CURRENT status and resume plan.
+All older CURRENT/NEXT/PAUSED cards, section00/20 resume steps and AppendixH
+timestamps below are HISTORY wherever they conflict with this opening.
+The handoff task is finished. The GAME is unfinished; no runtime release is
+approved by this document. Do not automatically launch game/capture/model work
+merely because this TXT was opened. User-deferred scope: 3D model pose accuracy.
+
+READING MAP / HOW TO USE THIS STANDALONE TXT
+Read this opening, then the numbered main manual00-20 and relevant appendices.
+Find the main manual by its literal heading:
+  00. READ THIS FIRST: STATUS, AUTHORITY, AND THE NEXT USEFUL ACTION
+It retains the product scope,33mission/restart cases,43cast records, exact saved
+asset/voice holds, script inventory, nested skill routes, verification matrix,
+Windows examples, delegation contract and publication checklist. Intermediate
+cards between this opening and00 preserve evidence lineage; do not read every
+oldcard before acting. Search only the selected task. Historical active-Ede
+instructions are superseded by the current neighbor owners below.
+
+CHECKOUTS / PRESERVATION
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+W = C:/Users/cogpsy-vrlab/.codex/worktrees/street-walk-conversations/GermanySimulator
+C is the integration authority, branch codex/canonical-game-entry. P is heavily
+dirty authoring/evidence storage; W is a separately preserved street checkpoint.
+Never replace C/game.js or world3d.js with P or W copies. Integrate exact scoped
+deltas and required tests/assets/docs, preserving neighbor/paving/mouth changes.
+One root runtime, static JavaScript and vanilla Three.js; assets/ is the only
+shipped asset authority. Preserve Grand Theft Amt identity and desktop/touch play.
+Use git -c gc.auto=0 for repository commands. A known unreferenced corrupt object
+was recorded; do not run gc/repack, reset, clean or broad deletion as housekeeping.
+Workers never commit/push. Preserve unrelated RTK/router/skill/user edits.
+
+PUBLISHED VERSUS LOCAL
+Pre-closeout Git HEAD/main:76047470149fea4094f163752376f470d8aa307b.
+Last recorded Pages run39125358946 SUCCESS; root and3d.html HTTP200. Last verified
+public game SHA9df3618091f635e5c46706f117fe4d0ab4b5461a486ef9d01e37773af56592cb.
+A documentation-only successor may advance HEAD. Resolve git log and deployment
+before assuming these are latest. Local C runtime/asset/test changes are held;
+publishing this handoff does not publish or validate those changes.
+
+CURRENT LOCAL SOURCE / FRESHNESS
+C/game.js f653775e74c9eed693fba5f657872d2b878c2c551995be70f2b8c3fcbd7eae0a
+C/world3d.js 35f2c329306f7cbea39877e7f865580ac4c9f352f6a120abb3e4d5e4e0f51ed8
+C/index.html 95bc39f57888518fb0ee517ceb967debdc10c472b1f9af7ad959d02cfe62a376
+C/game-hud.css cf81ae791489d9aeef0b43239af48f9d2efb76dcb22fe251c753fd51577bf50f
+V3 INPUT-PINS.json binds50 current source/test/asset paths; mutable SESSION is
+excluded intentionally. Old installed40-pin receipt remains installation history,
+not a current manifest for game/index/two repaired test readers. V3 freezes28tools:
+TOOL-PINS SHA3cc51ae87dd26bf6737d8b934cd0bfb7da4854d9c4bac2f18011f80673c6c01e.
+Do not regenerate or edit frozen tools/receipts. Rehash before later integration.
+Canonical ordinary loop retains native CRLF and neighbor lawRelease branch;
+raw SHA6ce02a0465c3bfdbb2bfa32d64cf2d8932a72c04e7dd276a5a58a537973429d7,
+LF-normalized8512765227b0ccc9ea1653732d84bad3780312ea4404bfac959ed8f7c86dd08b.
+Never paste old21df loop into this source. Original callback extraction remains
+1e6df263db88db797ef5950c1670ba4c6d35f6403bc8074b7c045bea5dd0ab55.
+
+COMPLETED BOUNDED WORK / WHAT IT DOES PROVE
+1. Reviewed pedestrian pilot installed locally: persistent avoidance, atomic
+   planted holds, same-object discontinuity reset, atlas ownership/admission,
+   Irmgard movement atlases and tourist phase handling. Older focused110,
+   combined96, street228 and Python3 checks passed; suites overlap. CPU actual-
+   speed matrix passes selected pair cases but clears other actors/obstacles
+   and admits textures by dimensions. It is not native rendered acceptance.
+2. V2/V3 private recorder, barcode, native decoder, diagnostics, lifecycle and
+   current-clock witness have source tests and independent source reviews.
+   V3 combined79/79 PASS. Physics and Camera source-ready for V3, runtime HOLD.
+   Physics review91f5d8253054f96261a1635be19d672efd304748ab66dd5b6691b8e9030f9957;
+   Camera review6a6a5b0aef90cc550bec6e5116145daa6d5ace496fe1209fe504c400ef182210.
+   The stale RAF falsepass was reproduced and fixed with a separate current
+   performance clock; original historical callbacks remain unchanged.
+3. Two canonical test readers normalize CRLF only when extracting fixtures:
+   tests/street-pedestrian-avoidance.test.mjs and street-route-hold.test.mjs.
+   Both affected files23/23 PASS. Initial combined run52PASS/2fixture-loadFAIL
+   is retained, not erased; failures preceded movement assertions. No movement
+   assertion was weakened and root did not edit game.js for this repair.
+4. Neighbor feature owner completed and stopped. P/output/neighbor-focus-2026-10-18/
+   CHECKPOINT.json pins13paths,60/60 focused plus overlapping15/15 final checks;
+   anthem bypass mutation red. Quiet existing8bit anthem only in neighbor level,
+   no level police/arrests/stars/alerts/section-sign controls, Ede archived,
+   focus Schwabingen/Heiko/Inga/Hartmut. Native silent direct-entry/reload,
+   gain.14/duck.0308/music toggle and viewport checks supplied. CSS sizes are
+   not Android emulation. Full4resident flow, rendered specialist acceptance,
+   physical Android, listening and200%zoom/text-spacing remain open.
+   Read C/levels/neighbors/AGENTS.md and For-AI/README.md; delta already applied.
+   Never replay NEIGHBOR-DELTA.patch on current C. Mutable SESSION pin may drift.
+5. Native AX replacement proposal frozen separately, root rechecked17/17 unit
+   cases. It is NOT installed and NOT native browser tested. See next section.
+
+LATEST ACTUAL P3 ATTEMPTS / NO WALKING ACCEPTANCE
+Historical actual48cf passing failure remains authoritative for its oldsource.
+V2 hidden silent native run reached normal controls and real pair staging, but
+45s deadline expired before recording. No samples/video/PNG; minus NOT RUN.
+V3 native probe PASS; product normal welcome control failed with:
+  No node found at given location while clicking #dialogue-next
+Selector reported one visible enabled WEITER. Which of the two welcome clicks
+failed is unknown. No per-action trace, no established provider root cause.
+V3 never reached stage/run. SERVER-STATE records0samples,0events,0reportbytes,
+no media files, plus only. Only PROBE.json, SERVER.json and SERVER-STATE.json are
+in actual-once. Atlas download is not recording or painted-motion proof.
+Minus NOT RUN; firstfailure abort. Native movement/5s gate NOT RUN for V3.
+Owned tab15 closed, viewport reset, serverPID94072/session89522 exit0 and PID
+absence verified. Chrome untouched; no foregrounding or audible playback.
+E/p3-iab-source-v3/NATIVE-CLOSEOUT.json, ATTEMPT-SPENT.json, ADMISSION-HOLD.json
+are terminal authority. SOURCE-CLOSEOUT.json is a PRE-attempt source receipt.
+Both V2/V3 admissions are CONSUMED: never replay, delete actual-once, extend
+deadlines or reset grants. Failed transport is not a gameplay pass or failure.
+
+EXACT NEXT BOUNDED TASK IF IMPLEMENTATION IS RESUMED
+Finish native UI adapter integration and source review, not another blind launch.
+V3/native-ui-driver-proposal.mjs
+ SHA a7fde3129f6b3f619227eca358b7db5d979bc66d456da966bdc4e89751c6fa05
+V3/native-ui-driver.test.mjs
+ SHA 595340554d9748457b3e55b5e179038588b81645a63514c5355531d4da96dd28
+V3/NATIVE-UI-DRIVER-CHECKS.tap
+ SHA 36a375164aaf1bf5d8b994df6ee59e0b50613faba5f7c6aec72aee1b063b7b2f
+V3/NATIVE-UI-DRIVER-REPORT.json
+ SHA 8b07637f50c9b4387dfd92161eab2c66937820d93c0f3a2e6e9e9c6c3f94fdda
+V3 prefix means E/p3-iab-source-v3. Proposal differs from frozen ui-driver.mjs;
+old freeze/reviews do NOT approve installing this proposal. Exports:
+  clickNativeControl(tab,id,optionalAbsoluteDeadlineEpochMS)
+  runP3Profile(tab,{profile,profileDeadline,readinessDeadline,outputDirectory})
+Fresh getAXState({emit:false}) before EACH click, exact unique enabled ID line,
+native tab.click(index). Includes pop up button file-toggle. No PWclick/retry,
+synthetic input or gameglobal evaluation. Native node volatility still possible;
+failure stays labelled and terminal.17 mocked cases include11 unchanged originals.
+Before game attempt: exercise this exact exported adapter on a tiny independent
+native UI fixture using documented CUA. Verify dynamic indices and real trusted
+control transitions. Fixture success proves adapter only, never game physics.
+No new framework; another human planning chat owns generic browser-harness work.
+Then derive NEW V4 private packet, replacing only intended driver/tests. Rehash
+current50inputs; recompute tools/inverse/combined tests; freeze; get separate
+Physics and Camera reviews on SAME candidate; fresh resource admission. Preserve
+V2/V3 failures, outputs and original callbacks. No V4 exists at this closeout.
+
+P3 TOOL MAP / HOW THE BACKGROUND PATH WORKS
+build.mjs: source-pin gate, extracts native ordinary loop with line endings,
+builds private exact-inverse observers; writes receipts. READ/DERIVE into a new
+packet, never rerun in consumed V3. controller.js stages real pair and restores;
+wall-witness.js enforces actual current clock. lifecycle.js owns terminal cleanup.
+diagnostics.js bounds native errors/requests/console; silent-bootstrap.js keeps
+media/WebAudio/speech scheduling enabled but muted for isolated tab lifetime.
+recording.js copies existing final Three.js canvas1:1 to detached2D recording
+mirror and appends16px private clock strip. It does not replace game renderer.
+barcode.js encodes/validates counter, time andCRC; decode.mjs uses native pinned
+FFmpeg/ffprobe to audit real VP8 presentation frames without resampling/retiming.
+report-contract.mjs and server.mjs enforce pins, native report, transfer/decode,
+absolute deadlines, once-only outputs, caps and plus-before-minus acceptance.
+ui-driver.mjs is frozen failed native transport; proposal is its uninstalled fix.
+Read matching *.test.mjs for source checks, not gameplay evidence. Native codec
+synthetic roundtrip passed; it does not prove live-game encode/decode throughput.
+
+Retained original limits:180s whole server,45s/profile from FIRST product HTML
+including readiness/UI/capture/upload/decode/awaited close,20s readiness from SAME
+start.24s reservation before/after readyPNG and after run AX lookup is internal,
+not extra time.4PNGs<=2MiB each;32MiB combined media;4500samples/1.5MiB sample
+payload,2MiB reports,256events,64console,128requestfailures. Each video<=11.5MiB,
+derived gray/ledger/decodeJSON<=0.5MiB. Decoder<=750frames, strict PTS and CRC,
+source gaps<=80ms; first5s and full20s brackets required. Do not relax guards.
+Actual pair: crowd-irmgard-aktenordner-25, voicecrowd-irmgard,+13; partner
+crowd-klaus-dieter-knoedel-24, voicequiz-hartmut-keller,towelMan,-17; same-lane40.
+Full26unit x-order pass by5000 CURRENT milliseconds, legal26clearance, ordinary
+microsteps<=.025, correct native art/ownership and full20s under BOTH preferences.
+Source/CPU/cleared-world results cannot replace native rendered pair/crowd proof.
+AfterPNG, if ever produced, is last displayed capture frame after data restoration,
+not rerendered restoredworld. Actual paint/foot/contact/depth/scale review needed.
+
+Fresh P3 admission floors1024MiB available physical/6000MiB available virtual,
+snapshot<30s old. Mission/voice2048/12000 floors are DIFFERENT; never borrow the
+lower P3 floor. Old snapshots are not current resource admission. One owned job,
+hidden isolated IAB, no Chrome queue dependency, no killing user browsers/apps.
+Read current CUA documentation. Browser actions via documented API only; source
+tests may run without browser. Existing offscreen/WGL tools prove only their
+stated shader/asset scope, not natural mission/input/device/auditory acceptance.
+
+SEPARATE STREET/VOICE CHECKPOINT - RECONCILE V6, NOT OLD V5
+Street owner is idle/completed; its goal was reported resource-blocked, notdone.
+W/output/street-walk-conversations/HANDOFF-V6.md is final owning checkpoint;
+snapshots/street-walk-conversations-source-v6/CANDIDATE.json pins35files.
+DELTA-FROM-BASE-V6.json records exact base/current hashes and addedfiles.
+Base09124c1f444a5eaded7c18794f720be235e7aff4. No commit/push. V6 producer source
+0727fc08d7b900a4b29a4bd0361ae00eae55f144a6d49c17a3d97a999004b4a4 validates
+exact speaker/text/English/order, queues missing parts of ONE prompt, reuses clips.
+187focused Node PASS,67cast bindings curatorPASS,7new PythonPASS; combinedPython
+17/18 with same pre-existing office authored-choice failure under untouched base.
+Keep failure visible. Historic curator approvals unchanged; mutation red.
+Gisela two missing approach/context recordings frozen, question is reuse only:
+C:/Users/cogpsy-vrlab/Music/German emotional voice databases/GermanySimulator quiz prompt review 2026-10-18/quiz-gisela-becker/germany-24-approach-0/requests.json
+SHA906e5225a48246db916c622183d3cfe0691ad5cb131838ed8071bb9920de5ed4.
+GISELA-NATIVE-FROZEN-01.json / GISELA-NATIVE-PLAN-RECEIPT-01.json retain proof.
+No raw/encoded takes, model/ASR or listening result. Old German9 grants consumed.
+Last worker709/7393MiB below2048/12000; that snapshot is history, remeasure later.
+W runtime is OLDER than C, not a replacement. Reconcile source-only quiz exporter,
+producer/protocol/tests separately against newest runtime. Four admitted questions
+do not mean four complete prompts. No live worker browser/model left running.
+
+REMAINING WORK / ACCEPTANCE IN ORDERED COHERENT BATCHES
+A. Pilot movement: fix/prove current native pair first; then P1/P2 movement,
+   narrow/overtaking/crowd/player/props P3, corners/42-wideoffice bend P4, grounded
+   feet P5 and CameraC1-C5/X1. Correct footsteps/contact, route legality, turns,
+   standing/movement handover, depth, scale, performance, both device classes.
+   Stop after a coherent accepted batch; integrate/publish before next scope.
+B. Natural mission: existing approach/Eentry/return evidence is partial. Prove
+   QR/phone/interview/A38/full natural chain and ALL33 restart routes, causality,
+   duplicate/stale event guards and recovery. Read manual10/script appendix;
+   old mission-v23 supervisor grant is not reusable, source-only checks first.
+C. Missing art: hardest Brigitte speaking interval source/bridge is preserved,
+   rendered acceptance/export stillheld. Continue exact saved source endpoints,
+   transfer bridge and renderer preparation from manual11-12 and latestcards;
+   do not regenerate accepted anchors. Wagner/Dietmar/Keller and40further eligible
+   painted motion families remain; each needs own actions/changing-pose mouths,
+   actual desktop/mobile frames, anatomy/contact/loop and specialist reviews.
+   3D pose accuracy deferred; do not reopen it as a prerequisite.
+D. Hannelore/voice: source cleanup qualification passed, production stillopen.
+   Resume manual13 and exact current source receipts. Missing default quiz1344
+   segments;33Berlin city,17ordinary sidewalk,252reactive,9quizfeedback slots
+   at V6 audit. Recompute gaps against current catalogue before generation.
+   Exact speaker/text/selectedUUID/reference hashes/render revision and accepted
+   versusheld/listening status required. Use fixed profiles/existing pipeline;
+   no new voice service, all-library generation or duplicate catalogue.
+E. Integrated silent desktop and Android coverage, physical device if available,
+   perceptual audio only with explicit listening authorization, input/focus/
+   touch/resize/reduced-motion/longGerman/200%zoom, loading/frame/memory/cleanup,
+   outstanding shader-warning disposition and natural four-neighbor flow.
+F. Reconcile all held checkpoints; run required combined checks/reviews; exact
+   coherent assets+runtime+tests+docs commit and publication. Standing policy
+   publishes completed validated features; never ship unvalidated mixedruntime.
+   Check Pages root and3d.html, deployed source/token/assets after push.
+
+SKILLS / EFFICIENT OWNERSHIP
+Start AGENTS.md -> For-AI/AGENT-START.md -> PROJECT-HANDOFF.md -> thisopening.
+Choose level via For-AI/LEVELS.md, then BOTH level AGENTS.md and For-AI/README.md
+before its sources. For-AI/SKILLS.md owns nested skill selection; load task-only.
+Movement/art: OBJECT-CONSISTENCY, CITY-CHARACTER-STYLE, SPRITE-GENERATION-PROTOCOL,
+animate-2d-characters plus paired-gaussian/painted-walking references. Missions:
+game-event-logic and gameplay-validation; voice: AUDIO-TEXT-LIBRARY, VOICE-CAST,
+VOICE-SYNTH-PROTOCOL, existing authoring tools. UI: combined uncodixfy-pretext
+with relevant references. Performance: ASSET-POLICY and relevant measuredroute.
+No skill availability grants publication/model/listening or fabricated evidence.
+One selected integration task. Delegate only separable assets/reviews with exact
+base/root/read/write paths, contracts/checks/return evidence. Onewriter perfile.
+Physics and Camera are two separate read-only reviewers of SAME frozen world
+candidate; source-ready is not rendered/device acceptance. Reuse completed
+workers if needed; no competing sharedruntime edits or autonomous new tasks.
+For docs only, these world reviewers are unnecessary: no world behavior changes.
+
+SAFE COMMANDS / REPRODUCING SOURCE CHECKS
+PowerShell variables: do not overwrite HOME/CODEX_HOME. Exact reads stay raw.
+Set task-specific $nodeExe to:
+C:/Users/cogpsy-vrlab/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe
+Python authoring runtime:
+C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+From P, no browser or game job is launched by:
+  & $nodeExe --check output/central-completion-2026-10-16/p3-iab-source-v3/native-ui-driver-proposal.mjs
+  & $nodeExe --test output/central-completion-2026-10-16/p3-iab-source-v3/native-ui-driver.test.mjs
+These17unitcases were rerun by root and PASS at finalization. Do not casually
+execute build.mjs/server.mjs or script --run flags. Read sideeffects first.
+From C, targeted affected tests (requires held runtime and fixtures together):
+  & $nodeExe --test tests/street-pedestrian-avoidance.test.mjs tests/street-route-hold.test.mjs
+Voice acceptance uses existing node tools/curate-voice-library.mjs --check from
+the selected coherent checkout. See manual/appendices for exact per-task scripts.
+Full FFmpeg8.0.1 existing pinned binary directory:
+C:/Users/cogpsy-vrlab/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/
+ffmpeg SHA74db6c184a03dba2bdfe23e1a1f41cf5a8385bc1de6a7a1b26db1dc541abef93;
+ffprobe SHA55bb6c6289367ae2383efa86b26bf2596f8adb72ac747360eb13df162354161c.
+Do not substitute limited Playwright ffmpeg1011; lacks required framemd5/VP9.
+
+HANDOFF VERIFICATION / PORTABILITY / DONE
+This TXT is UTF-8; numbered manual00-20, script/cast/mission appendices and END
+OF HANDOFF remain. Root verifies mirrored P/Cbytes, current50source/28tool pins,
+proposal hashes, checkpoint paths and docs-only Git diff. Independent handoff
+review found no missing mainmanual scope after these opening corrections.
+Private E/W/output and original media are ignored and NOT carried by Git.
+On another PC obtain authorized private backup first; a published TXT is not a
+backup of atlases/reference sources/receipts. If missing, report unavailable
+evidence, reconstruct deliberately from verified source, never invent a PASS.
+All latest owned sessions terminal; no resumed browser/model/capture in handoff
+finalization. No fresh native/UIfixture/device/listening proof was collected.
+Finish handoff by publishing only its exact two docs after checks; preserve all
+runtime dirt. Finish GAME only when all selected required gates and missing
+content pass, accepted coherent changes publish, deploy verifies and remaining
+deferrals/coverage are explicitly reported. The current broad goal is notdone.
+
+HISTORICAL CHECKPOINTS AND COMPLETE MAIN MANUAL FOLLOW
+===================================================
+
+PREVIOUS CARDS AND FULL MANUAL - HISTORICAL EXCEPT WHERE LINKED AS AUTHORITY
+==========================================================================
+
 CURRENT AUTHORITATIVE CHECKPOINT - P3 SOURCE INSTALLED, 18 OCTOBER 2026
 ======================================================================
 THIS CARD supersedes ALL current/next/not-installed statements below. The old
