@@ -1,3 +1,37 @@
+EXECUTED BACKGROUND GAME STARTUP - 18 OCTOBER 2026
+======================================================================
+New actual evidence after handoff publication b298297c15e0be3f48510feb08b10657fb14b0f2:
+one hidden in-app-browser tab loaded current canonical index.html through a
+loopback-only test server, rendered the ordinary menu and accepted its normal
+SPIEL STARTEN click. The real first humor form and city behind it rendered;
+its sentence caption advanced. Native media/oscillator probes passed before
+game load. Console error/warning capture was empty. No assigned mission/player
+state, replacement renderer, fake speech callbacks or Chrome access was used.
+
+Evidence/scripts: E/iab-background-v1/ preserves first probe and wrapper review
+history; E/iab-background-v2/ has the corrected bootstrap, unchanged server,
+PROBE-AX.txt, menu.png, humor-form.png, GAME-AX.txt and CONSOLE.json. Same game.js
+SHA2569df3618091f635e5c46706f117fe4d0ab4b5461a486ef9d01e37773af56592cb.
+Independent source review accepts bounded silence with explicit owned-tab close;
+v2 preserves AudioNode.connect destination return semantics. Probe does NOT
+speak an utterance, so browser-speech timing remains untested. Muted native
+media completed and zero-gain oscillator ended; listening quality is unproved.
+
+This is startup/first-input evidence, NOT natural mission/33restart acceptance.
+Both sheets/signatures, city movement, office/phone, mobile/physical Android,
+frame timing, hidden/resume transitions and full audio remain open. Test headers
+deny fullscreen/microphone/camera and embedded frames/objects; those features
+were not validated. Browser stayed hidden; both owned probe/game tabs closed.
+Server is one owned process with a240second HTTP lifetime; page90second retirement
+is only a fallback (hidden timers can throttle). Explicit tab closure is primary.
+
+NEXT same validation route: reuse reviewed bootstrap, a fresh output and bounded
+server lifetime; verify probes, then exercise the real humor form/entry using
+ordinary controls. Read canvas signature/input requirements before automating.
+Preserve native read-aloud timing and all mission prerequisites. Do not assign
+completed state or infer full startup acceptance from these first screens. Old
+P3/mission packets remain separate and still require reviewed runtime successors.
+
 AUTHORITATIVE RESUME CARD - HANDOFF CLOSEOUT - 18 OCTOBER 2026
 ======================================================================
 READ THIS CARD FIRST. All later statements such as "latest", "read first",
@@ -86,11 +120,12 @@ The a737772 game.js fix changes REAL runtime bytes. Older pre-fix P3/mission
 packets require reviewed SOURCE/RUNTIME successors, not HEAD-only substitution.
 Preserve frozen originals and budgets; do not bypass mismatches or replay grants.
 
-Hidden in-app-browser feasibility was checked only against about:blank. The
+At handoff closeout, hidden in-app-browser feasibility was checked against a blank
+page only; the executed startup checkpoint ABOVE supersedes that limitation. The
 browser exposes visibility and viewport capabilities, but no browser-level mute
 capability in the returned inventory. Tab capabilities are pageAssets/webmcp.
-No game, server, mute bootstrap, screenshot playtest or renderer validation ran
-in that probe. The agent-owned blank tab was closed. No probe process remains.
+No game, server, mute bootstrap or screenshot playtest ran in the ORIGINAL blank
+probe. Its tab was closed. Later startup evidence and limits are recorded above.
 This is a capability finding, not evidence that silent game testing works or
 cannot work. A future bounded task can adapt an existing test-only mute bootstrap
 before loading the game, verify media/WebAudio/speech silence while retaining

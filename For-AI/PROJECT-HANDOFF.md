@@ -25,9 +25,13 @@ ignored evidence. Old runtime capture packets require reviewed successors after
 the real game.js change; changing only their expected HEAD is insufficient.
 
 Leave Chrome untouched. Existing CPU/private hidden WGL tools support source
-validation. A hidden in-app-browser capability probe reached only a blank tab:
-no game or mute bootstrap ran, and the owned blank tab was closed. Silent game
-validation through that browser is a possible next task, not an achieved result.
+validation. A subsequent hidden in-app-browser run passed native silent media/
+oscillator probes, rendered the actual menu and reached the first humor form
+through ordinary Start input. Error/warning capture was empty. Its tabs closed;
+fullscreen/embedded frames were excluded. This is startup evidence only: both
+humor sheets, city play, natural missions, mobile/device and listening remain
+unproved. Read the TXT's opening executed checkpoint and local iab-background-v2
+packet before continuing this route.
 
 The TXT contains scripts, nested skill routes, task inventories, failed trials,
 verification criteria and evidence recovery instructions. Its opening card owns
