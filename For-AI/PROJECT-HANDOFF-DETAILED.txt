@@ -1,3 +1,108 @@
+18 OCTOBER 2026 RESUME ADDENDUM — READ BEFORE THE HISTORICAL MANUAL
+==========================================================================
+
+The user resumed the entire project completion goal and requested tasks that
+do not require Chrome. The goal tracker now reports ACTIVE. Preserve Chrome
+and all unrelated primary/worktree edits. Keep one integrator and one selected
+implementation at a time. The old pause below is historical; 3D pose accuracy
+remains explicitly deferred. Existing standing publication policy is unchanged.
+
+Current local evidence root E remains:
+C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator/output/central-completion-2026-10-16
+
+PEDESTRIAN TASK A — NEWER CANDIDATE RECOVERED
+e873d7960a4f3cc7fc0545148eaaf5e182c92ef1 supersedes 48cfaa as the selected
+unpublished candidate. It clears listed NPC blockedTimer/progressWindow through
+the existing production discontinuity notifier. Clean runtime checkout:
+C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator-p3-reset
+Supplied focused tests/CPU matrices and source reviews exist. Native P3 passing
+is still NOT RUN on e873. Do not reinterpret the old failed 48cf allocation as
+either a new failure or a passing result for e873.
+
+E/resume-audit-2026-10-18/ contains a reproduced recorder over-sampling defect
+and exact-callback regression. Full per-frame recovery clocks had bypassed the
+30Hz periodic sampling gate; discrete recovery status now drives event rows,
+while retained rows still carry full recovery values. Synthetic 120 Hz / 20 s test
+retains 533 rather than 2,400 rows per constant-pose profile. This is observer
+evidence, not renderer performance or P3 passage.
+E/painted-walk-integration/p3-reset-sampled-2026-10-18-source/ holds the reviewed
+source-only capture packet, HANDOFF and Physics/Camera source reviews. No grant
+or actual capture exists. Probe SHA:
+3a4e4712829d1cc9398d7c18c4bb9fa00961ff03c159d978234e0f5d4669040f
+The packet expects canonical HEAD 3138fe7. This documentation publication advances
+main; a future root must deliberately rebind that metadata in a reviewed fresh
+source derivative before execution, keeping actual runtime pins, geometry,
+speeds, 5 s pass / 20 s history, caps, silence and resource floors intact. User chose
+other work; do not poll or close their Chrome to force capture admission.
+
+HANNELORE TASK D — SOURCE REPAIR COMPLETE, PRODUCTION STILL OPEN
+Original frozen execution-source-v1 remains preserved and must not be sealed
+unchanged: independent review found final/auxiliary success gates could accept
+forced owned-child cleanup contrary to the packet's admission contract.
+The reviewed six-substitution repair leaves seven supervisor bodies unchanged.
+New packet under primary checkout:
+output/game-completion/hannelore-city-execution-source-v2/
+Launcher SHA:
+bee69c5b0f6629d610e89c734d3300c64d9ad084e57260e0ccd279355b6197bd
+Read README, DERIVATION, handoff, ROOT-SOURCE-RESULT, SOURCE-REVIEW and
+ROOT-SOURCE-CLOSEOUT. All 13 frozen inventory entries match. All 63 inherited
+public protection entries remain, nine successor copies are appended (72 total),
+and all 25 private pin metadata entries remain unchanged without private reads.
+Six local authority paths relocate to v2; sourceHead 3138fe7 is snapshot metadata.
+All 3 canonical runtime/source pins still match the original request. Preserve
+the same private family and spent ordinary parent attempt 2/2.
+
+Fresh successor checks actually executed: test-hannelore-carrier.ps1 EXIT0,
+seven unchanged helpers/four phase commands and pure ledger checks; Windows
+test_expected_plan_contract.py EXIT0, one extracted serializer/projector test
+in 0.295 s. Earlier exact-gate regression has 20 PASS with original forced-cleanup
+counterexample accepted 4/4 and repaired 0/4. No top-level carrier, producer,
+model, ASR or browser was executed. Independent source consistency PASS.
+
+E/hannelore-source-review-2026-10-18/ retains audit-public-pins.ps1,
+prepare-cleanup-repair.ps1, test-cleanup-gates.ps1, prepare-successor.py,
+original and repair reviews, exact receipts and HANDOFF.txt. Avoid rerunning
+unchanged tests just to produce another receipt. No authority-final or phase
+claim/start/terminal was created by this work. Next production gates are actual
+current private/binary/protected-pin and resource admission, ROOT sealing and
+manual plan-parent -> plan-children -> render -> process. Preserve all original
+floors and finite call ceilings. Joined admission is still a proposal in the
+copied admission-compatibility.md, not implemented code. Final encoded words,
+levels, cue proof, curator admission, listening and city/device acceptance remain.
+
+BRIGITTE TASK C1 — MISSING KEY NOW EXISTS, EXPORT HOLD
+E/brigitte-emphasis-source-2026-10-18/brigitte-neumann-speaking-emphasis-v1.png
+SHA-256 8996c965d249326acc4b4695380ab21b1a57fc92bd9474ceae11e82f4ed89de2
+Built-in imagegen produced one whole connected replacement for the old sheet's
+bottom-right speaking key. It retains a closed resting mouth, one binocular
+pair, anatomical-left ruler against torso/upper-arm support, miniature identity
+and complete planted shoes. PROMPT.txt records the full prompt. Original sheet
+is unchanged. Physics and Camera source-pose/identity PASS; no motion accepted.
+
+Source canvas 1322 x 1190; alpha>=128 body bounds [330,31,1102,1118]. All-nonzero
+alpha bounds [0,25,1229,1172] reveal low-alpha contamination reaching the left
+canvas edge; 441 alpha-zero pixels have hidden RGB. Camera marks export HOLD.
+No obvious broad halo/opaque rectangle appeared in native light/dark composites,
+but that does not waive clean alpha/gutters. Preserve the generated master,
+prepare a clean derived export with genuine cell gutters, fit this key against
+the original family using one scale/pivot, and inspect both backgrounds again.
+Then author only the necessary held-ruler -> underarm transfer bridge and its
+connected changing-pose mouth/inbetweens. Do not generate an entire new family
+or count this single still as action, gait, runtime, Android or Sandale parity.
+
+inspect-source.py produces passive measures and diagnostic native composites,
+details and equal-figure-height comparison; it leaves source pixels unchanged.
+SOURCE-INSPECTION.json binds those hashes. PHYSICS-STATIC-REVIEW.md and
+CAMERA-STATIC-REVIEW.md are sealed independent reports; both reviewers stopped.
+No atlas, runtime selector, collision, camera or shipped asset changed.
+
+The historical manual follows verbatim. Its old checkpoints/receipts remain
+useful evidence; the dated updates above supersede only their current-state
+claims. All other unfinished requirements stay open. No game completion or
+runtime release follows from documentation or source-only acceptance.
+
+==========================================================================
+
 GERMANY SIMULATOR / GRAND THEFT AMT
 STANDALONE DETAILED HANDOFF TO A FUTURE AI AGENT
 Prepared: 17 October 2026

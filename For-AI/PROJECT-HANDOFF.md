@@ -1,3 +1,48 @@
+# Resume update — 18 October 2026
+
+The user explicitly resumed the full completion goal and then selected work
+that does not require Chrome. Leave the user's Chrome processes untouched.
+The goal is active; the pause instructions in the 17 October snapshot below
+are historical. 3D model pose accuracy remains deferred.
+
+- The newer unpublished pedestrian candidate is
+  `e873d7960a4f3cc7fc0545148eaaf5e182c92ef1` (recovery reset after a production
+  discontinuity), with clean selected checkout
+  `C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator-p3-reset`.
+  Supplied focused CPU/source checks pass; actual passing remains unproved.
+  A reviewed recorder sampling repair is prepared in the local evidence tree's
+  `painted-walk-integration/p3-reset-sampled-2026-10-18-source/`.
+  No native allocation ran. Its canonical-HEAD expectation is the earlier
+  `3138fe7`; rebind that expectation against current main before any future
+  capture, preserving unchanged runtime pins, reviews and admission limits.
+- Hannelore's original execution-source-v1 review found that forced owned-child
+  cleanup could incorrectly qualify a successful phase. The reviewed repair
+  rejects missing/nonempty cleanup-kill evidence at four gates and missing
+  survivor evidence at two auxiliary gates. One unsealed successor exists at
+  `output/game-completion/hannelore-city-execution-source-v2/`: fresh pure
+  PowerShell and Windows serializer tests pass, and independent source
+  consistency review passes. No final authority, generation or ASR job ran.
+  Joined admission in the curator remains unimplemented; production, listening
+  and runtime acceptance remain outstanding.
+- Brigitte now has one corrected speaking-emphasis source key at local evidence
+  path `brigitte-emphasis-source-2026-10-18/`. Both static specialists accept its
+  pose/identity: closed resting mouth, one binocular pair, anatomical-left ruler
+  support and connected limbs. Export remains **HOLD**: stray low-alpha pixels
+  reach the left edge and 441 alpha-zero pixels retain RGB. Preserve the master;
+  clean a derived export, fit common scale/pivot, prove the prop-transfer bridge,
+  mouth rig and motion, then obtain encoded/runtime/device acceptance. Do not
+  regenerate this key from the older missing-source note.
+
+Local evidence root remains
+`C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator/output/central-completion-2026-10-16/`.
+Read its current `CURRENT-NEXT.md`, each packet's handoff, derivation and review
+before continuing. These ignored artifacts are not available in a fresh clone.
+This update changes documentation only; it does not release runtime candidates
+or generated assets. The remaining mission, character, audio/device and
+publication requirements below stay open.
+
+---
+
 # Project handoff — 17 October 2026
 
 For the standalone continuation manual, script catalog, per-character inventory
