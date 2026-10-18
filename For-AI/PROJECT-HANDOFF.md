@@ -1,3 +1,16 @@
+# Latest checkpoint: office completion ownership
+
+Ordinary indoor dialogue completions now reject duplicate, cancelled, superseded
+and terminal playthrough receipts. All 88 adjacent controller checks and both
+independent source reviews pass. Natural mission/browser/device checks remain
+open; no hand animation was released.
+
+Read the [standalone detailed handoff](./PROJECT-HANDOFF-DETAILED.txt) for the
+complete backlog, script/skill routes, evidence limits and continuation steps.
+Chrome stays untouched; 3D pose accuracy remains deferred.
+
+---
+
 # Current handoff: background finger trials
 
 Read [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt) first.

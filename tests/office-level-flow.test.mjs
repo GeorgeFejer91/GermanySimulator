@@ -13,7 +13,7 @@ function fixture(){
     stopSpeech(){},clearInput(){},responderBlocked:()=>false,openDialogue:(...args)=>calls.dialogs.push(args),document:{getElementById:element,createElement:create,body:{classList:{contains:()=>false}}},
     uiTone(){},setTimeout(){},toast(){},updateHud(){},jwd:{allocated:false},endGame(){},anmeldungNeighborhoodMonologue(){},showAmtDirectResult(){}};
   const context=vm.createContext(f);
-  vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded=')+between('let indoorVisit=null;','function cancelAmtAppointment(')+between('function bureaucrat(','function microInteract('),context);
+  vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded=')+between('let indoorVisit=null;','function cancelAmtAppointment(')+between('function bureaucrat(','function microInteract(')+between('function interactBuilding(','function cityInteractionTarget('),context);
   const showForm=context.showForm;context.showForm=type=>{calls.forms.push(type);showForm(type)};
   const submit=source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit='));vm.runInContext(submit,context);
   return {...f,calls,context,element};
@@ -36,4 +36,68 @@ test('ordinary dialogue completion is voluntary and an occupied return point pre
   const f=fixture(),building={id:'spaeti',name:'SPÄTI',doorX:1600,doorY:1555};let consequences=0;
   f.context.buildingDialogue(building,['Pfand.','Bitte.'],'§',()=>consequences++);f.calls.entries[0].ready();f.context.responderBlocked=()=>true;
   f.calls.dialogs[0][3]();assert.equal(f.calls.exits[0].mode,'voluntary');assert.equal(consequences,1);assert.equal(f.player.x,1600);assert.equal(f.player.y,1610);assert.equal(f.state.mission,3);assert.equal(f.state.forms,0);
+});
+
+test('repeated Stadtbild dialogue completion grants progress and leaves its office only once',()=>{
+  const f=fixture(),office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+  f.state.mission=5;f.state.stadtbild=3;
+  f.context.interactBuilding(office,{target:'stadtbild'});
+  f.calls.entries[0].ready();
+  const complete=f.calls.dialogs[0][3];
+  assert.equal(f.state.mission,5,'the stamp waits for the completed dialogue');
+  complete();
+  assert.equal(f.state.mission,6);assert.equal(f.calls.exits.length,1);
+  complete();
+  assert.equal(f.state.mission,6,'a repeated completion must not skip residence evidence');
+  assert.equal(f.calls.exits.length,1);
+});
+
+test('a completed office dialogue cannot close a later visit or advance its mission',()=>{
+  const f=fixture(),office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+  f.state.mission=5;f.state.stadtbild=3;
+  f.context.interactBuilding(office,{target:'stadtbild'});f.calls.entries[0].ready();
+  const obsolete=f.calls.dialogs[0][3];obsolete();
+  f.context.bureaucrat({id:'auslaender',name:'AUSLÄNDERBEHÖRDE',doorX:1750,doorY:1555},{title:'Aufenthalt',form:'aufenthalt'});
+  f.calls.entries[1].ready();
+  obsolete();
+  assert.equal(f.state.mission,6,'the old stamp cannot award another mission');
+  assert.equal(f.calls.exits.length,1,'the current residence office stays open');
+  assert.equal(f.state.modal,true);
+  f.calls.dialogs[1][3]();
+  assert.deepEqual(f.calls.forms,['aufenthalt'],'the current office can still proceed');
+});
+
+test('a cancelled Stadtbild visit cannot grant its old reward after a fresh visit opens',()=>{
+  const f=fixture(),office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+  f.state.mission=5;f.state.stadtbild=3;
+  f.context.interactBuilding(office,{target:'stadtbild'});f.calls.entries[0].ready();
+  const cancelled=f.calls.dialogs[0][3];
+  f.context.leaveIndoorBuilding();
+  f.context.interactBuilding(office,{target:'stadtbild'});f.calls.entries[1].ready();
+  cancelled();
+  assert.equal(f.state.mission,5,'a cancelled visit cannot award the stamp');
+  assert.equal(f.calls.exits.length,1,'the retried visit is still current');
+  f.calls.dialogs[1][3]();
+  assert.equal(f.state.mission,6,'the fresh visit remains completable');
+  assert.equal(f.calls.exits.length,2);
+});
+
+test('the Stadtbild dialogue cannot advance before all three street corrections',()=>{
+  const f=fixture(),office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+  f.state.mission=5;f.state.stadtbild=2;
+  f.context.interactBuilding(office,{target:'stadtbild'});f.calls.entries[0].ready();
+  f.calls.dialogs[0][3]();
+  assert.equal(f.state.mission,5);assert.equal(f.calls.exits.length,1);
+});
+
+test('a retained office dialogue cannot change progress or leave after game over',()=>{
+  const f=fixture(),office={id:'stadtbild',name:'STADTBILD',doorX:1600,doorY:1555};
+  f.state.mission=5;f.state.stadtbild=3;
+  f.context.interactBuilding(office,{target:'stadtbild'});f.calls.entries[0].ready();
+  f.state.gameOver=true;f.state.modal=true;
+  const position={x:f.player.x,y:f.player.y};
+  f.calls.dialogs[0][3]();
+  assert.equal(f.state.mission,5,'terminal playthrough cannot receive an old stamp');
+  assert.equal(f.calls.exits.length,0);assert.equal(f.state.modal,true);
+  assert.deepEqual({x:f.player.x,y:f.player.y},position);
 });

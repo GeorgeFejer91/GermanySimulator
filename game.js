@@ -3502,7 +3502,13 @@ function leaveIndoorBuilding(){
 }
 function buildingDialogue(b,lines,avatar,done){
  if(b.kind){openDialogue(b.name,lines,avatar,done,"narrator");return}
- enterIndoorBuilding(b,()=>openDialogue(b.name,lines,avatar,()=>{leaveIndoorBuilding();done?.()},"narrator"));
+ enterIndoorBuilding(b,()=>{
+  const visit=indoorVisit;
+  openDialogue(b.name,lines,avatar,()=>{
+   if(state.gameOver||indoorVisit!==visit)return;
+   leaveIndoorBuilding();done?.();
+  },"narrator");
+ });
 }
 function cancelAmtAppointment(outcome){
  if(outcome?.reason!=="kripo"&&outcome?.reason!=="ringing"){

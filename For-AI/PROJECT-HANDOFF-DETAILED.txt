@@ -1,3 +1,38 @@
+LATEST MISSION OWNERSHIP FIX - 18 OCTOBER 2026
+======================================================================
+Ordinary indoor dialogue completion now requires its ORIGINAL current visit
+and a nonterminal playthrough before returning the player or awarding progress.
+This closes repeated Stadtbild stamps, old callbacks closing a later office,
+cancel/retry progress and retained completion after game-over. Valid completion,
+body-clear return and authored mission order are unchanged. Legacy b.kind
+direct dialogue keeps its existing path; no rendering, geometry or asset change.
+
+Five new production-handler regressions in tests/office-level-flow.test.mjs
+were added; three stale cases failed before the visit guard, and a terminal
+case failed before the gameOver guard. Final nine adjacent suites: 88/88 PASS,
+zero failures/skips. Both independent final source/VM reviews PASS; Camera also
+executed actual production endGame followed by retained completion and checked
+that progress/player/modal/exit state stayed unchanged. Review scope is the
+completion consumer, not surrounding end-screen UI cleanup or natural gameplay.
+
+Canonical base BEFORE this implementation checkpoint is
+34738c91e94604b56d7bc611cb9a068173e75581. Resolve actual main; this document cannot name its own eventual
+commit. Publication/CI/HTTP receipt is local E/office-completion-ownership-v1/.
+Earlier paragraphs naming a0808336 as last implementation predate this repair.
+All pre-existing unrelated RTK/primary dirt remains preserved.
+
+The broad game is still unfinished. Natural mission-v23 / 33 restart chain, real
+browser/input, physical Android and listening remain unproved. No Chrome access
+or alternative game engine was used. Current hand source has a 56-pixel curled
+surface partition and a geometric reveal in six stills accepted only for local
+diagnosis; main-finger fringe/full temporal/action/mouth/game gates remain HOLD.
+Read local E/CURRENT-NEXT.md and HANDOFF-CURL-OCCLUSION-2026-10-18.txt before
+resuming that asset task. Ignored evidence still needs recovery on a fresh clone.
+Full inventories, scripts and nested skill routes remain below as history and
+remaining-work authorities. 3D pose accuracy stays deferred.
+
+----------------------------------------------------------------------
+
 PROJECT CONTINUATION: FINGER TRIALS AND HANDOFF CLOSEOUT - 18 OCTOBER 2026
 ========================================================================
 This is the newest checkpoint. It supersedes older current-status paragraphs;
