@@ -1,3 +1,24 @@
+# Latest source checkpoint - 18 October 2026
+
+Read the latest opening checkpoint in [the standalone TXT handoff](./PROJECT-HANDOFF-DETAILED.txt)
+before the dated snapshots below. It supersedes their Brigitte export HOLD.
+
+Brigitte's corrected `margin-repair-v5` emphasis endpoint and one
+`ruler-transfer-bridge-v1` two-support contact key now pass both independent
+static source reviews, including fixed-grid fitting and clean exports. Full
+transfer/recovery animation, changing-pose mouth registration, atlas/runtime
+selection and device acceptance remain **NOT RUN**. The mouth-method audit
+identifies newer canonical implementations and warns against older primary
+copies. Exact pins, scripts, local evidence paths and restart steps are in the TXT.
+
+The immediate handoff is consolidated; the broader completion goal remains
+unfinished. Chrome stays untouched. Pedestrian e873 actual P3, natural mission
+chain/restart, remaining personalities/assets, Hannelore production/curator,
+physical Android/listening and combined integration/publication remain open.
+3D pose accuracy stays deferred. Source-only art has not shipped.
+
+---
+
 # Resume update — 18 October 2026
 
 The user explicitly resumed the full completion goal and then selected work

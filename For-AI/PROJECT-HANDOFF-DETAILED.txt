@@ -1,3 +1,217 @@
+18 OCTOBER 2026 LATEST HANDOFF CHECKPOINT - READ THIS FIRST
+========================================================================
+
+This checkpoint supersedes the dated Brigitte export HOLD and missing-bridge
+instructions below. The historical manual and its inventories remain intact.
+The user's immediate request is a comprehensive project handoff. The broader
+project-completion tracker is still ACTIVE and unfinished; completing this
+document does not complete the game. No new runtime task is needed to finish
+the handoff. Leave Chrome untouched and prefer existing offline tooling.
+3D model pose accuracy is deferred. Painted 2D motion remains in scope.
+
+READING ORDER AND AUTHORITY
+Read root AGENTS.md, For-AI/AGENT-START.md and this latest checkpoint first.
+The numbered manual below covers the complete project, scripts, all 43 street
+manifest entries, all 33 mission checkpoints, nested skills and review gates.
+Use For-AI/LEVELS.md before a named area's AGENTS.md and For-AI/README.md.
+Choose skills through For-AI/SKILLS.md; do not load every skill or historical
+log. For city art select animate-2d-characters and only its applicable method,
+speech-ready, Gaussian-transition and resolution references. Shared rules
+remain in their owning For-AI documents, not copied into a second framework.
+
+Primary authoring checkout P:
+C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+Canonical integration/deployment checkout C:
+C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+Evidence root E:
+C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator/output/central-completion-2026-10-16
+Brigitte source directory B = E/brigitte-emphasis-source-2026-10-18
+Endpoint directory V = B/margin-repair-v5
+Transfer directory T = B/ruler-transfer-bridge-v1
+These output files are ignored local evidence, unavailable in a fresh clone.
+If missing, recover the original local packet; do not fabricate receipts or
+assume source/runtime acceptance from this narrative. Published game assets
+remain under assets/ only. The new Brigitte sources have not shipped.
+
+LATEST COMPLETED WORK - EXACT ACCEPTANCE LIMITS
+1. Prior documentation commit af4796787e7120243637b7fd06c4359231b59572
+   deployed successfully in Pages run 39087913555. Root and /3d.html returned
+   HTTP 200 after deployment. This proves HTTP/CI only, not a playthrough.
+2. Pedestrian e873 recovery repair has focused supplied CPU/source evidence.
+   Its actual P3 passage remains NOT RUN. Source recorder repair is prepared.
+3. Hannelore execution-source-v2 cleanup qualification repair is SOURCE PASS,
+   with fresh pure PowerShell and extracted Windows serializer checks. No
+   production generation, ASR, joined curator admission or listening passed.
+4. Brigitte's corrected emphasis endpoint passes static family fitting,
+   anatomy, prop ownership, alpha export and margin reviews. The original
+   v1/v2 proportion failures, v3 wrong-hand failure and v4 clipped fingertip
+   remain preserved. V is the accepted endpoint; do not use rejected v1.
+5. One new two-support ruler-transfer bridge passes both independent static
+   Physics and Camera reviews. It depicts the same left hand still gripping
+   the ruler while upper-arm/torso clamp contact is present. A single frame
+   cannot establish ordered release, continuous support or animated recovery.
+6. A read-only mouth-method audit identifies the existing reusable code and
+   its limitations. No Brigitte mouth rig or new renderer was implemented.
+
+CURRENT BRIGITTE SOURCE PINS AND PHYSICAL GRID
+Stable identity is quiz-brigitte-neumann. Do not confuse other Brigitte actors.
+Original twelve-key source: assets/sprite-sources/street-quiz/brigitte-neumann-keys-v2.png
+SHA a8bfe57a80e21533c6cedf8e3cac40d33b54c3d2abd6c551b803782db548d7b3
+B/REFERENCE-CROPS.json verifies own speaking/look reference crops byte-exact.
+
+Accepted endpoint V/packed-margin-v1/brigitte-neumann-speaking-emphasis.png
+SHA 7d82d1d36763e245fa2038661d869111691eca8af2a5ee133d6d24c8a3b20a34
+1122x1488; lossless WebP SHA
+288865f6b47bce82a89c9a85548c92eba68aa10f26822243208d495c1fe2bdd1
+Gutters L/T/R/B 57/39/80/80. Packing adds 65 zero columns only at right;
+it does not repaint or translate the accepted clean source. Native source
+scale 0.31400048697345995, pivot [477.5,1408], mapped root [256,480],
+origin [106.06476747017288,37.88731434136838]. Approved registered image:
+V/registration-v1/speaking-new.png
+SHA 814b1f13c86ad836fb785543b791d08f5e23794aaa183e47b84fb8a8721ff781
+
+Bridge raw T/brigitte-ruler-transfer-bridge.png
+SHA ac3ff8186880386caae0256a4e6c6e715577ad02f22106656155f27d9bdc3157
+Bridge clean T/export-alpha-v1/brigitte-ruler-transfer-bridge-alpha.png
+SHA f220201e4a3b657aed74325bbbd980932238b9052f3fa099b43d818917ab165f
+1089x1444; lossless WebP SHA
+8f695f3fd660fa64beffe04128fa8090aae129b3acc4ad06bca8e244db278f88
+Registered T/fixed-grid-v1/bridge.png SHA
+31995f12aa19e35b626ca0e6f64ec21e30bb4c2a511d7c6ddd6cc4b7c42eb376
+Bridge conversion uses canvas resolution ratio 1488/1444 only, not silhouette
+normalization: scale 0.3235683688479975, pivot
+[463.3803763440861,1366.3655913978496], same root and physical origin.
+Approved endpoint replay is RGBA-exact. No body-bounds refit or sole recentering.
+772,507 retained source alpha>=20 pixels are byte-exact after existing codec;
+hidden RGB zero, existing gutter guard PASS, PNG/WebP decoded RGBA exact.
+Gutters 56/38/245/78. Board fixed-grid-v1/held-bridge-emphasis.png is native
+1536x512; inspect individual 512 images to avoid display downsampling.
+
+Read V/HANDOFF.txt and V/ROOT-CLOSEOUT.json, then T/HANDOFF.txt,
+T/ROOT-CLOSEOUT.json, both independent bridge reviews and B/MOUTH-METHOD-AUDIT.md.
+FIXED-GRID.json's historical review-pending field describes when the grid was
+created; later ROOT-CLOSEOUT and actual specialist reports own static acceptance.
+There were five endpoint imagegen calls and one bridge call, each exact prompt
+and raw preserved. No additional generation is needed to recover these keys.
+
+SCRIPTS USED AND HOW TO CONTINUE EFFICIENTLY
+Installed Python with Pillow/NumPy/SciPy:
+C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+Before numerical scripts set PROCESS-LOCAL PowerShell environment only:
+  $env:OPENBLAS_NUM_THREADS='1'
+  $env:OMP_NUM_THREADS='1'
+  $env:MKL_NUM_THREADS='1'
+Use absolute quoted Python and selected script paths. No install is needed.
+An earlier unrestricted SciPy import failed before output; later same-version
+single-thread checks passed. The cause of the DLL error remains unproved.
+
+V/prepare-checks.py and T/prepare-export.py derive parameter-only source-bound
+helpers and retain inverse proofs. They do not authorize broad asset builders.
+V/export-alpha.py and T/export-alpha.py extract existing exact premul/unpack,
+linear/sRGB and prove_frame helpers via AST without importing builder top levels.
+V/fit-source.py established the endpoint's common scale/pivot. V/pack-margin.py
+only appends transparent columns; it is not a clipping repair.
+T/check-fixed-grid.py uses the accepted endpoint physical grid and checks an
+RGBA-exact endpoint replay before producing the bridge comparison. It is an
+offline source check, not a new renderer or a gameplay acceptance harness.
+T/PROMPT.txt and BEAT.txt preserve exact generation intent and prop sequence.
+Do not rerun unchanged exporters just for another receipt; read their results.
+For a changed source, use a new derivative/output path, preserve old outputs,
+rebind source hashes and repeat only affected checks and independent reviews.
+
+Existing library helpers reside in primary .agents/skills/animate-2d-characters/
+scripts/{painted_walk.py,harmonize_material.py} and tools/
+{build-street-character-sprites.py,build-street-speaker-motion.py}. Do not run
+their broad build entry points for a bounded source experiment. Full helper
+hashes/functions are retained in T/fixed-grid-v1/FIXED-GRID.json.
+
+THE NEXT BOUNDED IMPLEMENTATION, IF PROJECT EXECUTION IS RESUMED
+Keep one Brigitte source/action task. Read B/MOUTH-METHOD-AUDIT.md first.
+Canonical street-character-rig.js has validateStreetCharacterMouthRegistration
+and createStreetCharacterRigSampler, but mouth sampling is neutral-only when
+!pose.upper. Attaching neutral registration cannot prove emphasis/bridge lips.
+Canonical buergeramt-mouth-paint.js exports mouthPaintGlsl with amtMouthPaintFrame,
+nativeMouthProfile, validateMouthProfile and mouthProfileValues: actual oriented
+connected paint transport with per-painting fitted crease/source/opening curves.
+Canonical buergeramt-painted-anchor.js already evaluates each endpoint's own
+profile with the SAME media cue before mixing. Reuse this pattern within the
+existing street architecture when justified; do not add another asset pipeline.
+Primary same-named runtime modules are older; do not overwrite canonical code
+with primary copies or claim the old rectangle/cavity model is the newer method.
+Primary speech_candidate in tools/build-street-character-sprites.py is a limited
+512px horizontal crease warp, not a full oriented action-mouth solution.
+
+First fit one Brigitte profile against the exact accepted closed-lip endpoint.
+Check inactive exact-source, closed, modest open and rounded samples at native
+detail and intended projection. Corners, crease, cheeks/jaw, alpha and protected
+nose/eyes must remain connected; no generic black oval, detached patch, copied
+Keller coordinates or invented exposed teeth. Then fit the actual bridge paint
+independently and inspect outward AND return substeps through existing body
+transport with a fixed cue. Body phase stays simulation-owned; speech playhead
+owns articulation. Support held -> two-contact bridge -> controlled hand release
+-> free palm, plus recovery/interruption. Preserve one rigid ruler, one binocular
+pair, connected limbs, fixed root and paint identity through the complete arc.
+Static endpoint/bridge acceptance does not eliminate this animation work.
+For complete acceptance: inspect encoded atlas output, actual selector/fallback,
+same-cue mouth axes through changing poses, owner replacement/pause/end/cancel,
+native desktop and Android projection, silence/state checks and any applicable
+independent Physics/Camera rendered gates. Hearing quality remains separate.
+
+ALL REMAINING WORK, IN ORDERED COHERENT BATCHES
+A. e873 pedestrian pilot: actual P3 and other affected integrated gates before
+   release. Candidate checkout P's sibling GermanySimulator-p3-reset, commit
+   e873d7960a4f3cc7fc0545148eaaf5e182c92ef1. Reviewed recorder packet under
+   E/painted-walk-integration/p3-reset-sampled-2026-10-18-source has probe SHA
+   3a4e4712829d1cc9398d7c18c4bb9fa00961ff03c159d978234e0f5d4669040f.
+   It expects old canonical HEAD 3138fe7. Before future permitted capture make
+   a reviewed fresh metadata derivative bound to then-current main. Preserve
+   all 24 runtime pins, 5s passage/20s history, resource floors, caps, silence
+   and exclusive-owned cleanup. Do not replay consumed failed allocations.
+   Current user chose other work; don't poll/close Chrome or weaken admission.
+B. Natural mission-v23 and real restart: all 33 required checkpoints, actual
+   controls/consequences/persistence, not forced scenes. See manual/Appendix B.
+C. Finish Brigitte action/mouth/atlas/runtime as above. Wagner keys remain
+   source-only; Dietmar prop hold and Keller failed asset remain unaccepted.
+   After Irmgard, 40 other eligible personalities still require their scoped
+   movement work; use Appendix A, not a blanket claim of Sandale parity.
+D. Hannelore actual production and curator integration remain. Source-v2 at
+   P/output/game-completion/hannelore-city-execution-source-v2 has launcher SHA
+   bee69c5b0f6629d610e89c734d3300c64d9ad084e57260e0ccd279355b6197bd.
+   Inventory13, inherited public63+9=72, private metadata25 unchanged. Fresh
+   pure PS and one extracted serializer PASS; no private targets read here.
+   Next: actual protected/binary/resource admission, root sealing, manual
+   plan-parent -> plan-children -> render -> process under original finite
+   budget. Ordinary parent attempt2/2 remains spent. Joined admission is still
+   proposed, not implemented. Final encoded words/cues, curator, listening,
+   city runtime/device acceptance remain open. Read packet before any phase.
+E. Physical Android, full desktop/mobile readability, input/audio lifecycle,
+   perceptual listening and combined runtime/performance acceptance are open.
+F. Reconcile preserved checkpoints into current canonical runtime, review the
+   whole coherent diff, integrate required assets/tests/docs, run applicable
+   checks, commit/push normally and verify deployment plus root and /3d.html.
+   No runtime candidate should ship on source-only acceptance. Do not publish
+   private authoring inputs, secrets or ignored local evidence. 3D pose work
+   remains deferred and is not an automatic next task.
+
+COORDINATION / DONE CONDITIONS
+One integrator selects one batch and owns acceptance, commit and publication.
+Give workers exclusive paths and a precise deliverable; read-only Physics and
+Camera reviewers evaluate the same pinned candidate independently. Workers do
+not commit/push or absorb shared dirt. Stop them after the bounded result.
+Preserve dirty primary and unrelated RTK edits in canonical/nested guides.
+Use git -c gc.auto=0 for every git invocation; known unrelated corrupt loose
+object must not trigger cleanup/repack. Stage explicit intended paths only.
+Keep actual PASS, supplied PASS, FAIL and NOT RUN separate. HTTP success is not
+gameplay; silent state checks are not listening; emulation is not physical
+Android; static source fitting is not motion or causal runtime proof.
+The handoff is ready when the current pins, remaining tasks, script roles,
+restart restrictions and verification criteria are present and linked. The GAME
+is complete only when all selected integrated acceptance gates and publication
+requirements in section20 are actually satisfied. Do not mark the broader
+tracker complete just because this handoff or an isolated source key is done.
+
+========================================================================
+
 18 OCTOBER 2026 RESUME ADDENDUM — READ BEFORE THE HISTORICAL MANUAL
 ==========================================================================
 
