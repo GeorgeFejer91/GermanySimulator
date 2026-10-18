@@ -1,3 +1,147 @@
+AUTHORITATIVE RESUME CARD - HANDOFF CLOSEOUT - 18 OCTOBER 2026
+======================================================================
+READ THIS CARD FIRST. All later statements such as "latest", "read first",
+"next task", "never ran" or "last implementation" belong to their historical
+checkpoint. This card supersedes conflicting current-status instructions.
+Retain those sections for script recipes, inventories and failed experiments;
+do not replay their jobs just because an old paragraph calls them next.
+
+DELIVERABLE AND SCOPE
+The standalone project handoff is complete. The GAME is unfinished. The user
+requested a detailed future-agent manual and Chrome-independent continuation.
+Do not expand a handoff closeout into another asset generation or capture run.
+When execution resumes, select ONE bounded game task, read its owning guides,
+and finish or preserve its explicit held checkpoint before switching tasks.
+3D model pose accuracy is deferred. Painted 2D movement remains in scope.
+
+CHECKOUTS AND CURRENT VERIFIED BASELINE
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+B = E/brigitte-emphasis-source-2026-10-18
+P is the heavily dirty authoring checkout; C is the integration checkout on
+codex/canonical-game-entry. Do not copy P runtime over C. Preserve unrelated
+RTK/router/skill edits in C as well. All Git uses git -c gc.auto=0. Do not run
+reset, clean, gc or repack to simplify this task; corrupt-object maintenance
+is separate. Integrator stages explicit owned paths only; workers never commit.
+
+Verified main BEFORE this documentation closeout:
+b94dcc356a58d382312bb14c934be80e904e13ec (tests/docs only).
+Latest shipped runtime fix:
+a737772e0d6614720a8ed4f5d42c8fbbbdffc23c.
+game.js SHA256:
+9df3618091f635e5c46706f117fe4d0ab4b5461a486ef9d01e37773af56592cb.
+Resolve actual local/remote main on resumption; this file cannot name its own
+eventual commit. Baseline Pages39108246324 completed SUCCESS; root and /3d.html
+returned HTTP200 after deployment; deployed game.js matched Git bytes exactly.
+Receipt: E/mission-form-chain-v1/PUBLICATION.json. CI/HTTP is not gameplay proof.
+
+WHAT IS ACTUALLY FINISHED
+1. Ordinary indoor completion rejects old/cancelled/superseded visits and
+   completion after game-over. Both independent scoped source reviews PASS.
+2. Fifteen added paperwork cases bind actual mission records to independent
+   office/form expectations. Final focused22/22 and adjacent103/103 PASS;
+   independent review PASS. Five isolated faulty-source probes are rejected.
+   A38 authorization, JWD/street prerequisites and DOM/renderer are controlled
+   fixtures. Natural playthrough, field validity and real ending remain open.
+3. Source CPU/private hidden WGL rendering already works without Chrome.
+   Reuse existing tools in the script catalog; do not build another renderer
+   merely to repeat supported source checks. WGL output is not game acceptance.
+4. Brigitte has preserved approved static sources/cutouts and local diagnostic
+   evidence. A56-pixel curl partition and geometric reveal in SIX stills have
+   limited scoped PASS; the main-finger fringe and complete action remain HOLD.
+   No Brigitte action, new atlas or source trial has been released to the game.
+5. Comprehensive inventories, scripts, prior failures, scoped skills and success
+   gates are preserved below. Recover evidence before reproducing expensive work.
+
+REMAINING WORK / ACCEPTANCE
+A. Natural mission-v23 and all33 checkpoint/restart routes: prove ordinary
+   producers, prerequisites, actual player input/forms, return transitions and
+   readable final ending/restart. Controller fixtures are supporting evidence.
+B. Irmgard/pedestrian e873 candidate: actual full goalward body-diameter passing
+   within the existing five-second gate is unproved. Keep the original failed
+   witness and recovery evidence. Source checks or lateral recovery do not pass
+   this gate. Reconcile current runtime before any reviewed successor capture.
+C. Brigitte: resolve main-hand paint/coverage fringe, then actual temporal motion,
+   prop transfer/recovery, own changing-pose mouth registration, event/media
+   ownership, atlas/fallback and game/device validation. Do not blindly add mesh
+   density, threshold alpha, regenerate accepted paint or ship held samples.
+D.40 remaining eligible street personalities after Irmgard: use the full43-record
+   inventory below. Wagner source-only; Dietmar props HOLD; Keller failed.
+   Finish one character through encoded/runtime acceptance before the next.
+E. Hannelore: source cleanup repair PASS is not production. Parent budget2/2 is
+   spent. Joined curator, production, ASR, listening and runtime remain open.
+   Preserve private inputs and fixed-voice bindings; never reset spent attempts.
+F. Integrated desktop/mobile loading, memory/input/visibility/audio scheduling,
+   actual physical Android and perceptual listening remain required. Label
+   emulation, silent state checks and source rendering separately.
+G. Reconcile preserved checkpoints into current main in coherent validated
+   batches. Publish finished features/fixes per repository policy; inspect the
+   combined diff, required reviews, Pages conclusion and both public entry URLs.
+
+CHROME-INDEPENDENT CONTINUATION
+Leave the user's Chrome processes untouched: no close request or process-queue
+polling. Existing captures' admission/resource/attempt rules remain in force.
+The a737772 game.js fix changes REAL runtime bytes. Older pre-fix P3/mission
+packets require reviewed SOURCE/RUNTIME successors, not HEAD-only substitution.
+Preserve frozen originals and budgets; do not bypass mismatches or replay grants.
+
+Hidden in-app-browser feasibility was checked only against about:blank. The
+browser exposes visibility and viewport capabilities, but no browser-level mute
+capability in the returned inventory. Tab capabilities are pageAssets/webmcp.
+No game, server, mute bootstrap, screenshot playtest or renderer validation ran
+in that probe. The agent-owned blank tab was closed. No probe process remains.
+This is a capability finding, not evidence that silent game testing works or
+cannot work. A future bounded task can adapt an existing test-only mute bootstrap
+before loading the game, verify media/WebAudio/speech silence while retaining
+native scheduling, keep the browser hidden, cap owned resources and clean up.
+Use documented CUA APIs for browser actions; read-only DOM evaluation cannot
+inject muting or assign game state. Do not alter OS audio or bring tests forward.
+Review external frame/media risks before deeper interactions. Otherwise continue
+source/controller work whose acceptance does not require a browser. No new
+engine, dependency installation or foreground renderer is needed for this handoff.
+
+HOW TO RESUME EFFICIENTLY
+1. Read C/AGENTS.md, For-AI/AGENT-START.md and SKILLS.md; resolve LEVELS.md and
+   selected level AGENTS.md/For-AI/README.md before its sources. Read only the
+   applicable nested skill references. The later manual has detailed routes.
+2. Inspect status/log/remote; verify the packet's actual files and hashes. E is
+   ignored and absent on fresh clones: recover actual artifacts from this PC or
+   a verified backup. A manifest alone does not recover files. If missing, record
+   that exact gap; do not invent a success or rerun a consumed allocation.
+3. Read E/CURRENT-NEXT.md TOP plus the selected packet's HANDOFF, ROOT-CLOSEOUT,
+   frozen manifest and FINAL review. Older initial FAILs remain history.
+4. Name one deliverable, exclusive writable paths, resource limits and acceptance
+   before work. Root integrates; bounded workers return evidence only. For world
+   changes obtain independent Physics and Camera review of the SAME candidate.
+5. Use existing source tools and focused tests first. For paperwork:
+   cd C (use the full checkout path above)
+   node --test tests/office-level-flow.test.mjs
+   Bundled Node and Python paths and CLI recipes are in the script catalog below.
+   Normal tests need neither isolated mutation copies nor local art packets.
+6. Match claims to evidence: source PASS, mapping PASS, static art PASS and six
+   rendered stills do not prove motion/game/browser/device/audio quality. Retain
+   FAIL, HOLD and NOT RUN until the actual required check passes.
+7. Record results, unresolved gates and exact restart point; stop bounded workers.
+   Commit/publish only validated owned changes; preserve unrelated dirty files.
+
+LATEST PACKETS TO READ FIRST (LOCAL; RECOVER IF MISSING)
+E/mission-form-chain-v1/HANDOFF.txt and PUBLICATION.json
+E/office-completion-ownership-v1/HANDOFF.txt
+E/HANDOFF-CURL-OCCLUSION-2026-10-18.txt
+E/FORM-CHAIN-CHECKPOINT.json (44 pinned evidence files at that closeout)
+E/CURRENT-NEXT.md (mutable pointer; top supersedes its historical paragraphs)
+B/curled-surface-occlusion-trial-v2/ (six-still diagnostic; full action HOLD)
+P/output/game-completion/hannelore-city-execution-source-v2/ (source only)
+E/painted-walk-integration/p3-reset-sampled-2026-10-18-source/ (old binding)
+
+HANDOFF SUCCESS: future agents can locate authorities, recover exact evidence,
+identify unproved tasks, use existing scripts, and verify each bounded result.
+This condition does not mark the broader game-completion goal achieved.
+
+HISTORICAL CHECKPOINTS, DETAILED INVENTORIES AND SCRIPT RECIPES FOLLOW
+======================================================================
+
 PAPERWORK CONTROLLER VALIDATION - 18 OCTOBER 2026
 ======================================================================
 Test-only checkpoint after runtime fix a737772e0d6614720a8ed4f5d42c8fbbbdffc23c.

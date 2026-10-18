@@ -1,13 +1,37 @@
-# Latest checkpoint: office completion ownership
+# Start here: consolidated project handoff — 18 October 2026
 
-Ordinary indoor dialogue completions now reject duplicate, cancelled, superseded
-and terminal playthrough receipts. All 88 adjacent controller checks and both
-independent source reviews pass. Natural mission/browser/device checks remain
-open; no hand animation was released.
+The requested standalone [detailed TXT handoff](./PROJECT-HANDOFF-DETAILED.txt)
+is complete. Read its opening **AUTHORITATIVE RESUME CARD** before the historical
+snapshots below. Germany Simulator itself remains unfinished.
 
-Read the [standalone detailed handoff](./PROJECT-HANDOFF-DETAILED.txt) for the
-complete backlog, script/skill routes, evidence limits and continuation steps.
-Chrome stays untouched; 3D pose accuracy remains deferred.
+Latest verified published baseline before this documentation closeout:
+`b94dcc356a58d382312bb14c934be80e904e13ec`. The last runtime change is
+`a737772e0d6614720a8ed4f5d42c8fbbbdffc23c`, which guards ordinary indoor
+completion against stale visits and game-over. Subsequent paperwork controller
+coverage passes 103/103 adjacent checks and independent review. This proves
+controller behavior within mocked fixtures; natural mission playthrough and
+33 checkpoint/restart routes remain open.
+
+Other remaining work: actual pedestrian passing; Brigitte's held motion/action,
+mouth and runtime integration; 40 eligible street personalities after Irmgard;
+Hannelore production and joined curator; integrated desktop/mobile performance,
+physical Android and listening; reconciliation and publication of accepted
+feature batches. Three-dimensional pose accuracy remains deferred.
+
+Continue one bounded task at a time. The integrator alone accepts and publishes;
+delegate only exclusive paths with explicit success criteria. Use the canonical
+integration checkout named in the TXT. Preserve primary checkout edits and
+ignored evidence. Old runtime capture packets require reviewed successors after
+the real game.js change; changing only their expected HEAD is insufficient.
+
+Leave Chrome untouched. Existing CPU/private hidden WGL tools support source
+validation. A hidden in-app-browser capability probe reached only a blank tab:
+no game or mute bootstrap ran, and the owned blank tab was closed. Silent game
+validation through that browser is a possible next task, not an achieved result.
+
+The TXT contains scripts, nested skill routes, task inventories, failed trials,
+verification criteria and evidence recovery instructions. Its opening card owns
+current status. All snapshots below are retained historical context.
 
 ---
 
