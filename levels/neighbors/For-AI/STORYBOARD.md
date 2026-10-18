@@ -53,3 +53,5 @@ Focused regression coverage lives in `tests/jwd-home.test.mjs`,
 `tests/neighbor-dialogue-tickets.test.mjs` and `tests/neighbor-focus.test.mjs`.
 Harness movement and speech-boundary mocks establish only their stated scope;
 they do not establish natural player traversal, listening quality or device QA.
+
+Subtitles start with native recorded playback and use that recording’s media clock, including a language change during the line. Superseded speakers cannot refresh or clear the current caption. Native end/cancellation releases it. Pagination without authored phrase cues divides the line over its recorded duration; this is not word-level forced alignment.

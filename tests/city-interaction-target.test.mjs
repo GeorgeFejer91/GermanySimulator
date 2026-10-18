@@ -15,7 +15,9 @@ const interaction=extract('function interact(){','\nfunction collect(){');
 const hint=extract('function nearestInteract(){','\nfunction draw(){');
 const keydown=extract('function keydown(e){','function keyup(e){');
 const neighborActivity=extract('function neighborActivityActive(){','\nfunction citySpeechAllowed(');
-const functions=[neighborActivity,target,interaction,hint,keydown].join('\n');
+const neighborVoice=source.split('\n').find(line=>line.startsWith('function jwdVoice('));
+assert.ok(neighborVoice,'production neighbor voice whitelist is included');
+const functions=[neighborVoice,neighborActivity,target,interaction,hint,keydown].join('\n');
 const building=(id,d)=>({id,name:id.toUpperCase(),doorX:d,doorY:0});
 const person=(name,d,extra={})=>({id:name,name,x:d,y:0,line:0,voiceId:'fixture-voice',...extra});
 const prop=(id,d,extra={})=>({id,label:id.toUpperCase(),x:d,y:0,...extra});
@@ -63,7 +65,7 @@ const checks=[
  ['joint strict plaque/prop96 and norm92 boundary',()=>check('all candidates exactly at their excluded boundary',{park:96,memorial:96,props:[prop('fax',96)],normObjects:[{x:92,y:0,label:'BIN',fixed:false}],state:{mission:5}},result('',noTarget))],
  ['first building array order',()=>check('first80 before second20 and NPC10',{buildings:[building('first',80),building('second',20)],npcs:[person('PERSON',10)]},result('E · FIRST',['building:first']))],
  ['stable nearest-neighbor tie and category precedence',()=>check('two neighbors80 before park10 and office5',{npcs:[person('FIRST',80,{jwdRole:'parent'}),person('SECOND',80,{jwdRole:'watcher'})],park:10,buildings:[building('office',5)]},result('E · FIRST',['neighbor:FIRST']))],
- ['eligible burglar no-op retains priority',()=>check('excluded actors before selected burglar; prop must not steal',{npcs:[person('ARRESTED',10,{arrested:true}),person('PENDING',20,{lawPending:true}),person('EDE',80,{jwdRole:'burglar'})],props:[prop('disabled',1,{interactive:false}),prop('',2),prop('fax',3)],normObjects:[{x:1,y:0,fixed:true}]},result('',[]))],
+ ['archived neighbor roles cannot steal an interactive prop target',()=>check('arrested, pending and archived actors yield to the valid prop',{npcs:[person('ARRESTED',10,{arrested:true}),person('PENDING',20,{lawPending:true}),person('EDE',80,{jwdRole:'burglar'})],props:[prop('disabled',1,{interactive:false}),prop('',2),prop('fax',3)],normObjects:[{x:1,y:0,fixed:true}]},result('E · FAX',['prop:fax']))],
  ['manual modal advances without world hint',()=>check('manual dialogue before office',{buildings:[building('office',20)],state:{dialogue:true,modal:true,dialogueData:{automatic:false}}},result('',['next-dialogue']))],
  ['roaming automatic tour guidance survives modal',()=>check('automatic guide before office',{tour:{actor:person('HEIKO',50),phase:'ready'},buildings:[building('office',10)],state:{dialogue:true,modal:true,dialogueData:{automatic:true,roaming:true}}},result('IN DEN LEUCHTKREIS STELLEN · ZUHÖREN',[]))],
 ];

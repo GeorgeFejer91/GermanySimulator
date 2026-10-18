@@ -2850,6 +2850,7 @@ function englishSubtitle(item){const recording=item.recording&&audioTextLibrary.
 function clearSubtitle(){cancelAnimationFrame(subtitleFrame);subtitleFrame=0;const box=document.getElementById("english-subtitle");box.hidden=true;box.textContent="";document.getElementById("app").classList.remove("subtitles-visible")}
 function setSubtitle(text){const box=document.getElementById("english-subtitle");if(box.textContent!==text)box.textContent=text;if(box.hidden===!!text)box.hidden=!text;document.getElementById("app").classList.toggle("subtitles-visible",!!text)}
 function startSubtitle(item,elapsed=0){
+ if(!item||activeStimulus!==item&&textOnlyBark!==item)return;
  clearSubtitle();if(item.hideCaption)return;
  const recording=audioTextLibrary.recordings?.[item.recording],originalCues=state.subtitlesOn&&item.subtitleMode==="recorded"?(item.cues||recording?.cues):null,full=state.subtitlesOn?(originalCues?.[0]?.[2]||englishSubtitle(item)):(item.text||recording?.source||""),layout=window.GermanySubtitleLayout,speaker=item.captionSpeaker||"";
  document.getElementById("english-subtitle").lang=state.subtitlesOn?"en":"de";
@@ -3636,7 +3637,7 @@ function cityInteractionTarget(){
  if(dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195)<96)return{kind:"memorial",object:kiesingerMemorial};
  const building=buildings.find(b=>dist(player.x,player.y,b.doorX,b.doorY)<112);
  if(building)return{kind:"building",object:building};
- const npc=npcs.find(n=>!n.arrested&&!n.lawPending&&dist(player.x,player.y,n.x,n.y)<92);
+ const npc=npcs.find(n=>!n.jwdRole&&!n.arrested&&!n.lawPending&&dist(player.x,player.y,n.x,n.y)<92);
  if(npc)return{kind:"npc",object:npc};
  const prop=props.find(p=>p.id&&p.interactive!==false&&dist(player.x,player.y,p.x,p.y)<96);
  if(prop)return{kind:"prop",object:prop};

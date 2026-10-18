@@ -149,7 +149,7 @@ captions.state.subtitlesOn=false;captions.startSubtitle(normal);assert.equal(cap
 const recording=Object.keys(library.recordings).find(path=>library.recordings[path].cues?.length),recorded={recording,subtitleMode:'recorded',subtitleDuration:60,subtitleElapsed:()=>0};captions.activeStimulus=recorded;captions.startSubtitle(recorded);
 assert.equal(captionBox.textContent,library.recordings[recording].source,'German recording-only events use their exact catalogue transcript');
 captions.state.subtitlesOn=true;captions.startSubtitle(recorded);assert.equal(captionBox.textContent,library.recordings[recording].cues[0][2]);
-captions.startSubtitle({...normal,hideCaption:true});assert.equal(captionBox.hidden,true,'explicit audio-only law quotations retain their exemption');
+const audioOnly={...normal,hideCaption:true};captions.activeStimulus=audioOnly;captions.startSubtitle(audioOnly);assert.equal(captionBox.hidden,true,'explicit audio-only law quotations retain their exemption');
 let silentCompletion=null;
 Object.assign(captions,{speechCatalog:{productionVoices:{}},stimulusGeneration:1,performance:{now:()=>0},stimulusEligible:()=>true,setTimeout:callback=>{silentCompletion=callback;return 1},finishStimulus:()=>captions.clearSubtitle()});
 vm.runInNewContext(game.slice(game.indexOf('function playCaptionStimulus('),game.indexOf('function playRecordedStimulus(')),captions);
