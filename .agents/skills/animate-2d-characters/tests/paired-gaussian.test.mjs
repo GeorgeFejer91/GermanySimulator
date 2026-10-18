@@ -44,7 +44,14 @@ test('builder constrains unmatched alpha-zero endpoints to their own painted par
  const result=spawnSync('python',['-m','unittest','discover','-s','tests','-p','test_paired_gaussian_builder.py'],
   {cwd:new URL('..',import.meta.url),encoding:'utf8'});
  assert.equal(result.status,0,result.stderr);
- assert.match(result.stderr,/Ran 11 tests/);
+ assert.match(result.stderr,/Ran 14 tests/);
+});
+
+test('rigid paint reveal and occlusion preserve the authored object path',()=>{
+ const result=spawnSync('python',['tests/test_rigid_prop_reveal.py'],
+  {cwd:new URL('..',import.meta.url),encoding:'utf8'});
+ assert.equal(result.status,0,result.stderr);
+ assert.match(result.stderr,/Ran 3 tests/);
 });
 
 test('arc sampling keeps keys moving and the reverse/roundtrip seam continuous',()=>{

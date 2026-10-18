@@ -203,6 +203,9 @@ def match(source_sample, target_sample, source, target, stride, width, height,
         ):
             if not len(missing):
                 continue
+            if curve:
+                # Occluded rigid paint keeps its authored object-frame path.
+                continue
             if not len(support):
                 landmark = attachments.get(part)
                 if landmark:

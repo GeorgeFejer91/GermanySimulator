@@ -1,3 +1,21 @@
+# Newest action-source and matcher checkpoint - 18 October 2026
+
+The standalone [detailed handoff](./PROJECT-HANDOFF-DETAILED.txt) now starts with
+the current mouth/source-action and canonical-reconciliation checkpoint.
+
+Brigitte has two accepted fixed-painting mouth profiles and two additional
+statically reviewed release keys. A hardest-interval build exposed rigid ruler
+reveal samples drifting18pixels; the accompanying offline authoring-tool fix
+preserves their object path, with regression and exact-data-delta checks.
+These results do **not** accept or release Brigitte's action animation.
+
+Canonical Brigitte remains standing-only, with a128x160 cell and pivot64,150.
+Older prototype clipping/pivot146 previews are not the live-game descriptor.
+Full motion, new-key mouths, real action/media ownership, atlas/fallback and
+device validation remain open. Chrome stays untouched;3D poses remain deferred.
+
+---
+
 # Latest source checkpoint - 18 October 2026
 
 Read the latest opening checkpoint in [the standalone TXT handoff](./PROJECT-HANDOFF-DETAILED.txt)

@@ -97,7 +97,11 @@ and solves one-to-one correspondence **within each named part** using a
 bidirectional spatial and colour cost. Missing border samples fade in or out;
 visible endpoints are drawn from their exact painted keys. The builder projects
 synthetic birth/death positions more than one sampling stride beyond the same
-named part's visible support to the nearest support sample.
+named deforming part's visible support to the nearest support sample. An explicitly
+curved rigid part instead keeps its authored object-frame positions, including
+alpha-zero endpoints: revealing an occluded ruler must not pull its markings
+from the nearest visible edge. Whole-part rigid births/deaths use that same
+object path rather than an independent attachment translation.
 If that part is absent in the opposite key, the synthetic endpoint stays at
 its visible counterpart by default. To make an appearing or disappearing
 whole part travel with a known contact, the source spec may set
@@ -105,8 +109,8 @@ whole part travel with a known contact, the source spec may set
 by a region and the chosen landmark must be a finite point in every key.
 Only a wholly absent part uses this mapping: the intact visible shape is
 translated by the contact's source-to-target displacement; its RGBA and
-visible key positions stay exact. Border births/deaths still project onto
-same-part support. Choose the same physical contact across keys; a grip
+visible key positions stay exact. Deforming border births/deaths still project
+onto same-part support. Choose the same physical contact across keys; a grip
 handoff or changing occlusion still needs authored bridge art. This limits
 detached fade trails; it does not establish correct anatomy or approve an
 action's rendered appearance. The builder rejects

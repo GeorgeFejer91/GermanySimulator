@@ -1,3 +1,96 @@
+18 OCTOBER 2026 ACTION-SOURCE / MATCHER UPDATE - NEWEST CHECKPOINT
+========================================================================
+
+The full project goal remains active and unfinished. No new Brigitte action
+has shipped. This update supersedes older instructions to fit the first two
+mouth profiles or regenerate the missing release keys, but not their remaining
+motion/runtime/device gates. Chrome has remained untouched throughout.
+
+Within the existing primary evidence root E, directory
+brigitte-emphasis-source-2026-10-18/mouth-source-v1 now contains two own-painting
+mouth profiles (emphasis and double-support bridge). Both specialists accept
+the fixed-source samples only. Exact canonical mouthPaintGlsl ran on a private
+hidden Windows WGL Intel IrisXe context: identity1+ordinary12+maximum8 draws,
+allEXIT0. Inactive/ownedclosed RGBA source-exact; all20 mouth samples alpha-exact.
+This source fixture is not Three.js colour/material, body transport or gameplay.
+HANDOFF.txt/ROOT-CLOSEOUT.json there pin scripts, all229frozen inputs and addon.
+
+Two more source paintings now exist with independent STATIC role acceptance:
+- action-release-source-v1: late-release lower palm. Packed native PNG SHA
+  8627db75eb661923d83ccee8df23e6cb08229845412ec2fd9685837d41e47799;
+  registered512 SHA
+  5a717f4339a037d232a4d7b3393836528fc49e2415123d0a5ee068d1968599fa.
+- early-release-source-v1: compact curled empty palm. Packed PNG SHA
+  9d65e097937b8322507f850f16ce6d46c1624cd63ddfa38715595b86b5a480c1;
+  registered512 SHA
+  fc1baf22eaa289dd86c407b0af4c1d6380f46621acc54bcf556ecbdb8b7cb35e.
+Both preserve one left-side ruler clamp, one binocular pair and source family.
+The late key did not meet the requested nearer-release role; do not relabel it.
+Early fingers extend to913 beyond the prompt's900 target; role acceptance is
+qualified by that mismatch. Its alpha128 bottom481 versus other480 must still
+be checked for foot bob in actual motion. Neither qualification was hidden by
+rescaling/recentering. Existing codec retained approved paint byte-exact; exactly
+one wholly-zero bottom row was packed off each generated1445high canvas to the
+1444high grid. All raw images, prompts, failures, packing proofs and reviews stay.
+The ordered four-anchor light/dark boards are in early-release-source-v1.
+No mouth profile for these two NEW keys or original held-look is established.
+
+action-release-source-v1/EVENT-OWNER-AUDIT.md holds the exact event trace.
+contact-release-trial-v1 contains the two-key stride6 paired-Gaussian spec and
+hardest clamp-to-early-release data build. Normalized
+key times0/1 are diagnostic coordinates, NOT approved gameplay durations.
+Original matcher projected newly revealed rigid ruler samples to visible support,
+causing18px hidden-sample travel while the object's axis/pivot stayed fixed.
+The accompanying offline authoring-tool correction preserves the existing rigid
+object-frame path for alpha-zero endpoints; deforming support rules stay intact.
+Three new regression methods fail in8subcases on the original canonical helper,
+then pass with the correction. Existing14 Python cases and final21 Node checks
+pass; synthetic portable binary fixtures were rebuilt with source anchors exact.
+The same real Brigitte spec/source/density rebuilt successfully: only12alpha-zero
+ruler coordinates change, birth travel18->0px, all visible endpointXY/RGBA and
+anchorWebP hashes exact. No full action was rendered or accepted by these tests.
+Read RIGID-FIX-SCOPE.txt, RIGID-FIX-CANDIDATE.json, final reviews, build/comparison
+receipts and this packet's HANDOFF before continuing. Root owns integration.
+
+CURRENT CANONICAL RECONCILIATION - DO NOT COPY OLD PREVIEW DESCRIPTORS
+Canonical Brigitte is still standingOnly with128x160/pivot64,150/figure136/
+world1.6. The old100x160/pivot50,146 exporter was a PRIMARY SOURCE PROTOTYPE;
+its clipped emphasis previews were repaired to128x160/pivot64,146, not shipped.
+That repair was not a live-game hand-clipping fix. Preserve canonical pivot150
+when integrating a real family; inspect complete hand extents at its real scale.
+Current canonical paired builder also includes per-pair attachment filtering
+missing from the older primary helper. The source fix uses canonical as owner;
+do not overwrite it with primary copies or mutate frozen old evidence.
+
+EVENT OWNER AND NEXT IMPLEMENTATION
+action-release-source-v1/EVENT-OWNER-AUDIT.md traces canonical game/street modules.
+Brigitte currently rejects painted reactions as standingOnly. Existing quiz
+commit calls the legacy tourist reaction API, and a modal loop requeues waiting.
+There is no accepted five-beat Brigitte mediator. The accepted quiz transaction
+is the smallest proposed once-per-transaction trigger; existing finite painted
+reaction ownership is the integration route after real capability admission.
+Native speech generation/item/cue guards are separate. Composed recordingSequence
+currently provides zero projected mouth energy on that path; source mouths do
+not fix that delivery gap. Modal/HUD/hidden pause, caption/missing-audio behavior,
+answer/preemption and safe recovery remain actual implementation/proof tasks.
+
+Next finish the hardest clamp-to-early-release interval in the EXISTING paired
+renderer. Build success and rigid data invariants do not establish connected
+fingers/arm, disocclusion, optical coverage, planted feet or native paint quality.
+Do not replace actual renderer evidence with an unrelated CPU Gaussian preview.
+Reuse/extend the existing hidden WGL source fixture to execute the production
+vertex/fragment paths if Chrome remains unavailable; keep native game gates open.
+Then cover early->late->emphasis and return/recovery, original held entry, each
+painting's OWN fitted mouth, same media cue BEFORE endpoint body mixing, both
+transported lip axes and existing simulation phase. No speech-driven body clock.
+Only then pack/admit real clips/atlas/fallback, wire one accepted interaction,
+and prove natural owner cancellation/replacement/pause and desktop/Android view.
+Broader pedestrianP3, full natural mission/restart, remaining cast/actions,
+Hannelore production/curator, physical Android/listening and final combined
+integration/publication remain unfinished. 3D pose accuracy stays deferred.
+
+========================================================================
+
 18 OCTOBER 2026 LATEST HANDOFF CHECKPOINT - READ THIS FIRST
 ========================================================================
 

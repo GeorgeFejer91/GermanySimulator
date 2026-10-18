@@ -235,9 +235,9 @@
   "variants": {
     "desktop": {
       "file": "synthetic-action-desktop.bin.gz",
-      "sha256": "a01f72d8cc77552b402601dab460dd30467343679dadffd1f9aa1371276634c1",
-      "decoded_sha256": "a81740aca7ecccbf1681399254beb32bcd0ace4dd7fe7f50554c91c17ba25d90",
-      "bytes": 2148,
+      "sha256": "07a83ee56992fa798a06f824facd78501716122e082c60ec6a0a8c2e357aff52",
+      "decoded_sha256": "41137e9a732a8b59b884469a04d44f0eacbf4eb0ef740a0d8dcf1ad9e0bf8250",
+      "bytes": 2418,
       "decoded_bytes": 18432,
       "sample_count": 256,
       "stride_px": 2,
@@ -290,9 +290,9 @@
     },
     "mobile": {
       "file": "synthetic-action-mobile.bin.gz",
-      "sha256": "aade7d4c1a4dc15fa94f8a42116da3a612f03008438a54010a343bd181099a5b",
-      "decoded_sha256": "0c80ae2471db2d9c348a17a4d3ebfdc5bd2c9c1f445282a4ca50b00dd85742f6",
-      "bytes": 628,
+      "sha256": "e21f86532101a69bae6ec22f9db99131ff88938d1e01ef7596b759bc8a50f984",
+      "decoded_sha256": "8dd3090e7da5e32c603ed3360356acb502795e7f8a27777af254c12587a4485b",
+      "bytes": 687,
       "decoded_bytes": 18432,
       "sample_count": 256,
       "stride_px": 4,
