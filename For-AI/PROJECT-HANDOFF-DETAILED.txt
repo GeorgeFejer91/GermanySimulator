@@ -1,4 +1,43 @@
-EXECUTED BACKGROUND GAME STARTUP - 18 OCTOBER 2026
+NATURAL STARTUP TO CITY CONTROLS VERIFIED - 18 OCTOBER 2026
+======================================================================
+This checkpoint supersedes the earlier first-screen-only evidence below.
+Against canonical5923ef07776525b74add53d356344a23cf328702, a fresh hidden IAB
+run completed BOTH actual humor sheets: pointer-drawn signatures registered,
+required checkboxes/place/date and ordered stamps were accepted, and each
+sheet showed VORLESUNG VOLLSTÄNDIG BEENDET before ordinary submission. Normal
+fax transitions led to the two-part welcome, then city play with ANMELDUNG I
+and the first Bürgeramt objective. Optional name stayed empty; fictional form
+place/date were Berlin/2026-10-18. No state or completion callback was assigned.
+
+ArrowUp900ms moved the player/camera, ArrowDown900ms returned the view; the case
+file opened with the correct first objective and closed back to city controls.
+Screenshots, full completion AX receipts, actual input recipe and empty console
+warning/error capture are in E/iab-humor-flow-v1/. ROOT-CLOSEOUT.json owns final
+evidence pins/review/publication; INPUT-RECIPE.txt lists the actual controls.
+One selector observation timed out while reading continued; no reload occurred.
+A transient fax disappeared before its attempted click; dismissing that fax
+was NOT proven. The welcome was advanced by its normal buttons before its full
+audio finished, so this is not full welcome-speech timing acceptance.
+
+Same native silent audio wrappers as the reviewed startup route; first probe
+passed before game load. Frames/objects/fullscreen/microphone/camera remain
+excluded. One fresh600second server/540second page scope was reviewed before
+execution. Owned tab closed explicitly; server75278/PID73816 stopped through
+its stdin command, terminalEXIT0 after324546ms. Chrome untouched; no live local
+test remains. Game.js bytes remain SHA256
+9df3618091f635e5c46706f117fe4d0ab4b5461a486ef9d01e37773af56592cb.
+
+NEXT: natural first-office approach/interview and actual registration producers,
+then the remaining procedures/JWD/street corrections and all33 restart routes.
+Use ordinary controls; do not turn this startup pass into a full mission claim.
+Read both city and Bürgeramt guides before the handoff; review phone/frame and
+permission requirements before a new scoped run. Physical Android/mobile,
+perceptual listening, speech-specific timing, visibility/resume and performance
+remain unproved. P3 passing, remaining cast/Brigitte/Hannelore and reconciliation
+remain open. This validation changed no runtime/assets; no world-change reviews
+are implied by the screenshots.3D pose accuracy stays deferred.
+
+PRECEDING BACKGROUND GAME STARTUP CHECKPOINT - 18 OCTOBER 2026
 ======================================================================
 New actual evidence after handoff publication b298297c15e0be3f48510feb08b10657fb14b0f2:
 one hidden in-app-browser tab loaded current canonical index.html through a
