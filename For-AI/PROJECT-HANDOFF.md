@@ -1,3 +1,23 @@
+# Final resume handoff - 18 October 2026
+
+Read [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt) first. Its
+opening checkpoint supersedes older status snapshots below and preserves the
+full mission/cast inventory, scripts, source hashes, nested skill routes,
+failed trials, verification criteria and ordered continuation plan.
+
+Visible arm cutouts pass scoped review. Two corrected valid mesh trials still
+fail actual midpoint quality. A new diagonal released-hand source passes both
+independent qualified static reviews; its motion is untested. No new action
+has shipped. The next bounded task is its precise ownership and a shorter
+interval trial, not another whole-cast generation or renderer replacement.
+
+Chrome stays untouched; background source rendering works. Game, physical
+Android and listening gates remain separate. 3D pose accuracy stays deferred.
+Ignored local evidence needs recovery on a fresh clone. The handoff is complete;
+the broader game completion goal remains unfinished.
+
+---
+
 # Current continuation checkpoint - 18 October 2026
 
 Read the opening checkpoint in [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt)
