@@ -1,3 +1,54 @@
+# Project handoff closeout — 2026-10-18
+
+Documentation-only closeout at user request. PROJECT-HANDOFF-DETAILED.txt now
+opens with one authoritative current resume section; PROJECT-HANDOFF.md routes
+to it. The manual retains full scripts, cast/mission inventories and historical
+evidence with explicit precedence. Latest baseline ee403ad, unchanged runtime
+9df36180; natural startup passed but office admission remains incomplete.
+
+The approach repair scope below is PENDING: no runtime/cache-token change exists.
+The exclusive worker's new untracked tests/buergeramt-approach.test.mjs is
+baseline RED, 3 PASS / 1 FAIL, SHA43c2561a0de4c9067e677d3071f2bda2730d43741315e39264c32ddc1ed6aa28.
+It remains local until a coherent repair passes required gates; recovery copy
+and RED receipts are in the ignored route-test-v1 packet. No failing test is
+included in this docs publication. All workers on this bounded task stopped.
+
+Verification: mirrored primary/canonical TXT/index bytes, current source hash,
+referenced continuation paths, preserved detailed manual and unchanged failing
+test hash. Independent read-only handoff review informed the opening section.
+No world, asset, browser, device or listening acceptance is claimed; world
+specialist/runtime retests do not apply to this documentation-only diff.
+Local receipt: output/central-completion-2026-10-16/handoff-closeout-2026-10-18-current/.
+The broad game completion goal remains unfinished. Chrome remains untouched.
+
+# Bürgeramt paved approach repair — 2026-10-18
+
+Integrator scope: game.js first-office walkway/grass generation, a focused new
+tests/buergeramt-approach.test.mjs, index.html's game.js release cache token,
+this record and owning handoff after acceptance. Direct level pages are generated
+from that root template by the existing deployment build; no second entry tree.
+Canonical base ee403ad8b7e4275a0dd9fd3c11d5263757e15296; unrelated RTK/router/skill
+edits remain untouched. Actual natural IAB approach did not achieve admission:
+surface enforcement and police relocation occurred; no production bug is inferred
+from that operator failure alone. Independent static audit then reproduced the
+Späti solid cutting the complete generated Bürgeramt path and grass enclosing its
+door pocket. A quick grass crossing may still reach interaction range; the defect
+is a missing continuously paved, body-clear approach, not absolute unreachability.
+
+Root owns runtime implementation. A bounded separate author owns only the focused
+test and must demonstrate RED against baseline before root changes. Planned remedy
+uses centerline (1035,1344)->(1035,1158)->(885,1158)->(885,1060), world coordinates,
+with a 42-unit detour joining the existing 84-unit entrance path and north sidewalk.
+Match visible paving and grass classification geometrically. Preserve buildings,
+props, grass away from the cutout, enforcement, collision/body radius, mission and
+reward logic, native clocks/audio, and renderer authority. No asset, service,
+transport or dependency change. Source/CPU tests are not natural admission proof.
+
+Before acceptance freeze one candidate for independent Physics and Camera review,
+run relevant existing geometry/collision/mission checks, and verify actual rendered
+traversal in the silent hidden IAB route. Chrome remains untouched; physical Android,
+listening, full mission/phone/P3 and other held assets remain separate open gates.
+
 # Paired asset attachment scope — 2026-10-16
 
 Scope: fix the reproduced authoring failure where a globally valid attachment
