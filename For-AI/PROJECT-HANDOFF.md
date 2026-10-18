@@ -1,3 +1,21 @@
+# Current handoff: background finger trials
+
+Read [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt) first.
+It contains the complete remaining-task inventory, script paths, source pins,
+nested skill routes, verification gates and ordered continuation plan.
+
+Latest four-frame trials improve hand correspondence, but both independent
+reviewers still HOLD intermediate paint quality. No Brigitte action has shipped.
+Next: isolate source-resolution/sampling loss from paint/visibility mismatch
+before further contour edits. The ambiguous fingertip mask stays unchanged.
+
+Chrome stays untouched. Existing background CPU/WGL tools work; game, physical
+Android and listening acceptance remain separate. 3D pose accuracy is deferred.
+Recover ignored evidence separately on a fresh clone. The handoff is complete;
+the broader game backlog remains open.
+
+---
+
 # Final resume handoff - 18 October 2026
 
 Read [the standalone detailed TXT](./PROJECT-HANDOFF-DETAILED.txt) first. Its

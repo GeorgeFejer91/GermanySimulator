@@ -1,3 +1,213 @@
+PROJECT CONTINUATION: FINGER TRIALS AND HANDOFF CLOSEOUT - 18 OCTOBER 2026
+========================================================================
+This is the newest checkpoint. It supersedes older current-status paragraphs;
+the full standalone manual below remains the source of the broad inventory.
+The requested handoff is complete. The GAME is unfinished. No local trial below
+is an accepted or shipped Brigitte action. Chrome remains untouched.
+
+READ FIRST / AUTHORITIES
+------------------------------------------------------------------------
+P = C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator
+C = C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator
+E = P/output/central-completion-2026-10-16
+B = E/brigitte-emphasis-source-2026-10-18
+These aliases are descriptive; define your own shell variables when needed.
+Canonical base before THIS documentation publication is
+53add397081d6a9f5d723eb65d4b10aa0b2410d8. Resolve actual HEAD before changes.
+Last shipped implementation remains a0808336d6b6001fcb59cebad981c67aa38506e8;
+later commits through this checkpoint are documentation only.
+P is older/heavily dirty. C has unrelated RTK instructions and skills changes.
+Preserve both. All Git commands use git -c gc.auto=0. No gc/repack/reset/clean.
+Use C for integration; never copy P runtime/builders wholesale over it.
+
+Start with AGENTS.md, For-AI/AGENT-START.md, SKILLS.md, then LEVELS.md and the
+selected level's AGENTS.md/For-AI/README.md. For this source task, read the city
+route and animate-2d-characters with methods/morphing/dense-sampling/final-frame-
+analysis/resolution-and-upscaling references. Read quality-implementation before
+code; ponytail before infrastructure choices. Buergeramt-derived renderer work
+also requires its scope guide. Keep existing nested skill routing; do not load
+every skill or historical log. For-AI/README.md is the subject index.
+
+Local output/ is ignored and ABSENT on a fresh clone. Recover these actual
+packets and their dependencies from this PC or verified backup. A manifest
+alone does not transfer files. E/FINGER-HANDOFF-CHECKPOINT.json pins this batch;
+older HANDOFF-DIAGONAL-INTERVAL-2026-10-18.txt and its 181-file checkpoint pin
+the preceding cutouts/backing/phase evidence. E/CURRENT-NEXT.md is a mutable
+local pointer; its frozen snapshot is CURRENT-NEXT-FINGER-SNAPSHOT.md.
+
+WHAT WAS ALREADY COMPLETED
+------------------------------------------------------------------------
+1. A comprehensive standalone manual, complete broad mission/cast inventory,
+   script routes, previous failures, verification gates and publication policy
+   already existed below. Do not rebuild that context from scratch.
+2. Background CPU and private hidden WGL rendering work without Chrome.
+   Reuse paired-gpu-trial-v1/gpu-paired-harness.py and the existing mouth-source
+   hidden context for their actual supported source scope. No visible window,
+   new rendering service or install is necessary. Source WGL is not a Three.js
+   game/device acceptance substitute. Do not close or poll the user's Chrome.
+3. Matching diagonal/downward visible arm cutouts have independent scoped PASS
+   in diagonal-downward-arm-cutouts-v1/ROOT-CLOSEOUT.json. A known 16-coat-pixel
+   wedge was corrected there; older contact-downward-arm-cutouts-v3 still has
+   its original defect. Do not silently reuse that older N mask as repaired.
+4. diagonal-downward-mesh-trial-v1 actual midpoint exposed a white sleeve slit.
+   mesh-trial-v2 adds 170 real target coat/cuff pixels as backing. Both reviewers
+   accept sampled attachment; UNDERLAP-PROVENANCE.json and SOURCE-ADMISSION.json
+   govern backing, not the incomplete inherited RESULT.backingRule wording.
+5. diagonal-downward-phase-trial-v1 executed nine actual CPU images including
+   terminal. Endpoint/control replay and APNG decode pass. Both all-phase
+   reviewers HOLD intermediate finger contour/paint. Ordered still inspection
+   was performed; timed APNG playback was not witnessed. No production cadence.
+
+NEW CORRESPONDENCE WORK - THREE ACTUAL FOUR-FRAME TRIALS
+------------------------------------------------------------------------
+No new image generation, source paint, mask, alpha rule, helper or backing edit.
+Existing morph_frames.py stays SHA256
+c706db478d42bd228274dabe9ae4198d5d2f0fc62ed35eb5b1c30218bb82c37e.
+The same bilinear/premultiplied linear-light source morph and fixed compositor
+were used. All trials execute phases 0,.25,.5,1 only, with exact endpoint replay
+and unchanged paint outside ROI[290,250,415,400]. Numerical validity is not art
+acceptance. Opaque support counts are diagnostics, not pass thresholds.
+
+A. diagonal-downward-mesh-source-v4/propose-finger-creases.py:
+   One wrong inner-index target corrected; three actual crease controls added.
+   38 points/70 triangles. Mesh SHA256
+   177eae9ff91d0d2ba0ce3e72c6d6d797d6090a59b58fd8969724bc42c14d2e89.
+   finger-trial-v1/bake-quarter-midpoint.py executed EXIT0. Support disagreement
+   H-only/N-only: .25=17/27, .5=15/29. Root quality remains HOLD.
+B. mesh-source-v5/align-observed-outer-contour.py:
+   Observed outer palm/finger arc aligned using subpixel alpha contour guides.
+   These locate controls only: no alpha/paint/guard was altered. 41/76 valid.
+   Mesh 5de636dce54b2e5a7c78f0090996ba7de7148893ff6c55f461f43d7131c7d515.
+   finger-trial-v2 executed EXIT0; .25=17/18, .5=13/19. Root quality HOLD.
+C. mesh-source-v6/refit-cuff-turn-and-index-tip.py:
+   Adds actual outer cuff turn and distal index guide; 43/80 valid over the
+   full interval, plus nine sampled map checks. Mesh SHA256
+   5faae4fb66bdaab5196a77a3cb88eb6c4965b57bfb9481966a9a1890f53e944c.
+   finger-trial-v3 executed EXIT0; .25=8/18, .5=7/19. This is latest candidate.
+   Quarter PNG 2b8039084e7eecef73efc27f2898ce8bb89e2f81d0ef298cd9b7d52eff6ad2ec
+   Midpoint PNG d2192120618a2e34b55b4b70bd423a6e21cddbde61ef4be4ed59b4d669f1ad5f
+   Endpoints match original fixed-body trial-v2 controls exactly. Body, head,
+   feet and ruler stability apply to this derived fixed-body composition;
+   do not assert both original whole paintings are identical outside the arm.
+
+For each mesh use mesh.json and MESH-CHECKS.json, not nonexistent RESULT.json.
+finger-trial-v3/FROZEN-CANDIDATE.json pins 14 files, manifest SHA256
+d54322a0a45332ea3de99f184427382281694a403c61b2a600d1bb4f79cb9d28.
+Both PHYSICS-FINGER-REVIEW.md and CAMERA-FINGER-REVIEW.md freshly verify all 14.
+Both HOLD remaining quarter/midpoint softness/fringe, approximately registered
+x350..378/y354..381. Creases and silhouette improved; cuff remains attached,
+body/feet/ruler stable in four samples. ROOT-CLOSEOUT.json binds both reports
+and a fresh root manifest recheck. baked/RESULT.json retains execution-time
+PENDING honestly; the later reviews/root receipt own final quality status.
+No new nine-phase expansion or full-sequence review followed this HOLD.
+
+DIAGNOSTICS AND THE AMBIGUOUS TIP - DO NOT REPEAT WRONG FIX
+------------------------------------------------------------------------
+diagonal-downward-finger-observations-v1/PHYSICS-FINGER-OBSERVATIONS.md records
+source landmarks. Long index side is not newly exposed curled-finger paint;
+hidden digit identity is unproved. diagonal-downward-correspondence-audit-v2
+renders separately warped H/N at .25/.5 using v5, NOT latest v6. Read
+DIAGNOSTIC.json, COMPONENT-LOCATIONS.json and light/dark 5x comparison PNGs.
+Remaining v5 support includes outer cuff and a newly exposed curled surface.
+N-only paint can be legitimate reveal; do not label every such pixel defective.
+
+Original H registered (336,376) RGBA(7,3,1,254) is a dark rim/contact shadow
+under a red fingertip. Current moving arm stops at y375. Both reviewers inspected
+native paint and the 20x probe: unique physical owner cannot be recovered.
+They recommend NO compulsory mask reassignment. Leave cutouts unchanged.
+Alpha 254 and dark RGB do not establish finger ownership. Any chosen convention
+needs its own explicit trial; do not claim physical antialias-layer unmixing.
+
+EXACT NEXT TASK / EFFICIENT CONTINUATION
+------------------------------------------------------------------------
+First inspect source-resolution and sampling contribution BEFORE more contour
+edits. Original H packed painting is 1089x1444, but current trials warp already
+registered 512x512 cutouts. contact-downward-source-v1/spec.json also names 512
+registered inputs; do not assume its GPU trial used original native resolution.
+The resolution/upscaling skill reference was read; NO higher-native-resolution
+trial has yet been implemented or executed. This is a hypothesis, not a cure.
+
+1. Read latest v3 boards/reviews and original H/N native hand crops. Trace actual
+   existing paired builder texture source, registration, sampling and output
+   size. Record native paint resolution versus intermediate/export/display.
+2. Choose ONE bounded comparison that isolates sampling loss from mismatched
+   paint/visibility. Reuse current helper/hidden WGL path where suitable. Do not
+   invent a new renderer or scale a 512 mask and claim exact native boundaries.
+   No automatic source generation or blind mesh-density/triangulation search.
+3. If render evidence establishes visibility ownership as the first failing
+   stage instead, document actual newly exposed curl and occluder authority
+   before implementing a part reveal. This is an alternative investigation,
+   not an already approved implementation. No invented hidden starting paint.
+4. Render only endpoint/quarter/midpoint controls into a NEW directory. Preserve
+   failed variants. Existing scripts intentionally refuse existing outputs.
+   Verify exact source pins, endpoint replay, outside-action identity, original
+   alpha guards, determinant whole interval and finite/coverage/overlap maps.
+5. Inspect native controls plus light/dark enlarged views. Only a coherent
+   bounded trial advances to all phases and temporal/production-scale review.
+   Independent Physics and Camera review same frozen candidate before acceptance.
+
+Python used: C:/Users/cogpsy-vrlab/.codex/envs/germany-chatterbox-0.1.7/Scripts/python.exe
+Set process-local OPENBLAS_NUM_THREADS=1, OMP_NUM_THREADS=1, MKL_NUM_THREADS=1.
+Pillow/NumPy/SciPy are installed. No cv2/skimage/shapely/moderngl installation
+is needed. Node used: C:/Users/cogpsy-vrlab/.cache/codex-runtimes/
+codex-primary-runtime/dependencies/node/bin/node.exe.
+
+Trial source mechanics: finger-trial-v3/prepare-trial.py derives v1 sampler by
+two exact substitutions, with inverse-exact SOURCE-DERIVATION.json. Do not rerun
+preparation in place: it refuses an existing bake-quarter-midpoint.py. Sampler
+imports mesh-trial-v2/bake-midpoint.py, validates that trial's SOURCE-ADMISSION
+hashes, loads unchanged diagonal-downward-arm-cutouts-v1 paints and v2 fixed
+backing, then calls actual helper.morph/core.composite_linear. It refuses an
+existing baked/. To continue, make a narrow reviewed derivative in a NEW packet,
+bind the new mesh/experiment explicitly, and retain original scripts/receipts.
+correspondence-audit-v2/prepare-audit.py similarly derives its inspector from
+v1 with two substitutions; do not rerun over existing output. No rerun is
+necessary merely to recreate evidence already frozen and reviewed.
+
+AFTER SOURCE MOTION PASSES / REMAINING PROJECT WORK
+------------------------------------------------------------------------
+Brigitte still standingOnly. Canonical descriptor128x160/pivot64,150/world1.6/
+figure136; prototype pivot146 is not live. Need remaining outward/return/recovery
+motion, one consistent body/head/feet authority, OWN mouth profiles for changing
+keys, endpoint-before-mix mouth transport, production atlas/fallback/readability,
+accepted quiz transaction/media/clip clock/pause/HUD/hide/cancel/stale/retry
+ownership. Read action-release-source-v1/EVENT-OWNER-AUDIT.md: no five-beat
+mediator currently exists. Static mouth PASS on other heads is not transferable.
+Then actual Three.js/game/device validation; source CPU/WGL cannot close it.
+
+Other backlog (full per-item inventory and scripts remain below):
+- e873 pedestrian passing/P3 capture unrun; preserved reset packet needs deliberate
+  current-HEAD metadata rebind while retaining 24 runtime pins/admission/caps.
+  Old empty-Chrome supervisor is not bypassed or polled. Do other work meanwhile.
+- Natural mission-v23 and all 33 restart/checkpoint flows remain unproved.
+- 40 other eligible street personalities after Irmgard; Wagner source-only,
+  Dietmar props HOLD, Keller source failed. Do not regenerate accepted assets.
+- Hannelore city source successor PASS is preparation only. Parent ordinary
+  attempt budget 2/2 spent: no replay or invented fresh grant. Production/ASR,
+  joined curator, listening/runtime/device acceptance remain open.
+- Combined desktop/mobile regression, physical Android, perceptual listening,
+  integration and publication of accepted batches remain required.
+- 3D model pose accuracy explicitly deferred; painted 2D movement remains scope.
+
+WORK ORGANIZATION / DONE CRITERIA
+------------------------------------------------------------------------
+One selected implementation task, one integrator. Delegate only clearly separate
+work with exact read/write paths, base, scopes, dependencies, checks and evidence;
+workers finish checkpoint without starting another and never commit/push.
+For this handoff-only closeout no world candidate changed, so new world reviewers
+are unnecessary; existing candidate's two independent HOLD reviews are preserved.
+Do not publish held source art, ignored evidence, private authoring inputs or
+unvalidated runtime. Publish a completed coherent validated batch per standing
+policy using explicit files, preserving unrelated dirt, then verify main/Pages
+and both root and /3d.html. CI/HTTP is deployment evidence, not gameplay.
+No listening, physical Android, actual game or new runtime acceptance is claimed.
+This handoff is complete when its current instructions/pins are verified and
+saved; broader project completion requires the still-open gates above.
+
+========================================================================
+PRESERVED EARLIER STANDALONE MANUAL AND HISTORICAL CHECKPOINTS
+========================================================================
+
 FINAL RESUME CHECKPOINT - 18 OCTOBER 2026
 ========================================================================
 Read this opening checkpoint before older material. The full standalone manual
