@@ -303,7 +303,7 @@ class OfficeVoiceGates(unittest.TestCase):
                 samples.append((changed,False))
         # File-backed input avoids Windows command-length limits while exercising
         # the same JS gate against every independent Python rejection case.
-        with tempfile.TemporaryDirectory(dir=builder.ROOT/'output') as directory:
+        with tempfile.TemporaryDirectory() as directory:
             fixture=Path(directory)/'samples.json'
             builder.write(fixture,[take for take,_ in samples])
             js='import {readFileSync} from "node:fs";import {recognitionComplete} from "./tools/curate-voice-library.mjs";console.log(JSON.stringify(JSON.parse(readFileSync(process.argv[1],"utf8")).map(recognitionComplete)));'
