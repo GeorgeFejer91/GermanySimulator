@@ -29,20 +29,28 @@ Use git -c gc.auto=0; known corrupt unreferenced object: no reset/clean/gc/repac
 Only integrator stages explicit owned paths. Preserve unrelated router/RTK/skill
 changes in AGENTS.md, For-AI/{README,SKILLS}.md, level README/skills directories.
 Published baseline before THIS docs update:
-09124c1f444a5eaded7c18794f720be235e7aff4, Pages39117593941SUCCESS;
+3389c6d1a6a0490d9fc07d42e15af31a74f14261, Pages39119374385SUCCESS;
 root and /3d.html HTTP200; deployed game9df36180 byte-matched. Last runtime commit
 a737772e0d6614720a8ed4f5d42c8fbbbdffc23c. Resolve live refs on resume. This file
 cannot embed its own eventual commit SHA; use git log and closeout receipt.
 
-LOCAL UNPUBLISHED BUERGERAMT PAVING REPAIR
-Owned pending source: C/game.js, C/index.html and untracked
-C/tests/buergeramt-approach.test.mjs. Preserve together, not a released feature.
+LOCAL UNPUBLISHED COMBINED PAVING / MOUTH RETURN REPAIR
+Owned pending runtime: game.js/index.html/world3d.js plus buergeramt-mouth-paint,
+painted-anchor, gaussian-animation, gaussian-scene modules, amt-animation-preview.js
+and spark-preview.html (all in C). Also untracked C/tests/buergeramt-approach.test.mjs.
+Preserve the22pin candidate together, not a released feature.
 game.js SHA2568931183b0e85cd3ffaf6dbd7f79f4041897c9f9ca71ce4f9624c68c4c73e0956
 test SHA25643c2561a0de4c9067e677d3071f2bda2730d43741315e39264c32ddc1ed6aa28
-index SHA25600e8827dcb352a2a86bfcf12b4af9d4035c4fe162ffbc73a5d3200d894bda6ae
-index token20261018-buergeramt-paved-approach. world3d unchanged SHA256
-9e187f541771069277ce2ef1bb224e860b9baddc207e33616d66f386eb267175.
-Exact11pins in E/buergeramt-approach-repair-v1/CANDIDATE.json.
+index SHA2561444474f75d8da2007f35c71fe3f9b61ac6fd51cc6100d7b6977a68387d701f0
+index game token20261018-buergeramt-paved-approach retained; world token now
+20261018-mouth-single-exit. world3d SHA2566e4bd1fce305e53f92abacee1563aa33192d40691edf62d3ad904d216e523566
+(importtokens ONLY; rendererlogic unchanged). CURRENT mouthmodule is LF-normalized
+fb1e3067738e20df591c55833131640baf3b5f0a40b941c452741b13dac13cd0.
+CURRENT22pins: E/buergeramt-mouth-lf-v1/CANDIDATE.json
+SHA c6988e99101858b86c0913f22f00acef90c634266cd38843e8ca568726f83c97.
+Prior fd7b/87d CRLF candidate is preserved HISTORICAL evidence, not current bytes.
+Old11pin pavingmanifest preserved as HISTORICAL component, not currentworld/index.
+Combinedfocused96/96PASS; geometry/game893/test43c unchanged. No runtime published.
 The12-line first-buergeramt-only generator branch creates matching visible paving
 and grass cutout. Old Spati blocks original straight path. World centerline:
 (1035,1344)->(1035,1158)->(885,1158)->(885,1060).42width permits radius16+5margin.
@@ -84,9 +92,11 @@ to decide exact affected cases; no waiver from unchanged NPC/renderer code.
 CONSOLE.json has SIX X4000 warnings (zero error-level entries):
 potentially uninitialized f_amtMouthPaint_float4_float4_float4_float4.
 Cause UNKNOWN, not attributed to paving or claimed a confirmed pixel defect.
-Next: select a bounded read-only shader diagnosis (threejs-debugging route), or
-one clearly scoped missing gate. Compare baseline/candidate at the same office
-view if needed. Do not add renderer edits to paving without deliberate replanning.
+That diagnosis, privatecomparison and exact402caseGPUproof have now completed;
+root explicitlyscoped/integrated the exactwrapper andcacheconsumers locally.
+See shader successor below. Actualcanonical directoffice verification nowPASS limited79.405seconds0WARN/ERROR
+with5newtokenURLs andall22pinsmatching; terminalpacket below. Broader paving/
+runtime/device holds still apply.
 Responsive/loaded-fallback diagnostics can use a fresh direct fixture and must
 be labelled diagnostic; the successful natural prefix need not be replayed for
 every unrelated view. Each actual run needs fresh reviewed scope, silence probe,
@@ -115,7 +125,7 @@ returns. Backendreturn-temporary inference remains distinct fromprovedcause.
 Capturetab10closed; ttyserver44433/PID10936 stdin-stopEXIT0at58437ms/180000budget,
 knownPIDabsent. Use tty:true for retainedstdin. Copiedfallback840sec is not hardbudget.
 
-E/amt-mouth-single-exit-trial-v1: PRIVATE ONLY module variant87d4eb8df07cb51eca302fefa51743ecb97d9e12971802a59af96687fa37a3ef.
+E/amt-mouth-single-exit-trial-v1: originally PRIVATE trial module87d4eb8df07cb51eca302fefa51743ecb97d9e12971802a59af96687fa37a3ef.
 Outer amtMouthPaint now initializedvec4result + SAME speaking<.5 if/else + final
 return. Samebranch inclNaN; sameone texturepath; no mouthFrame/math/profile changes.
 ExactHTTPmouthmodule override only; productfiles remainUNCHANGED. Independent
@@ -128,20 +138,141 @@ Trialtab11closed; ttyserver97833/PID83584 stdin-stopEXIT0at97975ms/180000budget,
 freshPIDabsent. No ownedbrowser/server remains; no Chrome/focus/useraudio touched.
 All3packets have RUN-RESULT.txt and ROOT-CLOSEOUT.json with evidence/limits.
 
-NEXT SINGLE TASK: exactold/newGPUmouth pixel comparison before productedit.
-Reuse tools/playtest-connected-lips.mjs existing96x64ROI fixture,67encodednative
-keys/12actors and neutral/closed/open/wide/round/bite shapes. Its oldbaseline API
-is historical: adapt only comparison binding to current original vs privatevariant.
-Use reviewedprivateHTML/CUA native Run control; do NOT launch its Playwrightbrowser
-or createanotherengine. Onecontext, sequentialstates, releasebitmap/texture after
-samples, boundeddecodedmemory/readiness, fixedsource/imagehashes and no clock/
-modelassignment into the realgame. Label isolatedpixel evidence, not naturalflow.
-Retain pairedA/B/neutralguard checks and actualspeaking-state review; staticwhole-
-office screenshots have randomcastpositions and are NOT a pixelcomparison.
-Do not apply privatevariant to C until comparison/affectedreviews justify it.
-Then deliberate oneintegrator-owned shaderrepair/cache-token/test/docs scope,
-freeze/review that newcombinedcandidate. Paving11pins unchanged sofar; anyproduct
-shaderedit needs expandedpins. All other Physics/Camera/device/mission holds stand.
+PIXEL COMPARISON NOW COMPLETE, LOCAL INTEGRATION APPLIED (18 October)
+E/amt-mouth-pixel-compare-v1: actualnativeRun once, existing96x64ROI adapted to
+2distinctlinkedprograms/onecontext,12actors/67keys/6shapes =402cases,9,879,552RGBA
+channels byte-identical (maxdiff0/differentbytes0). All79manifest/framehashes and
+sourcepins independentlyverified; nonblank/GLerrors/visiblechange/alpha/protected-
+face guardsPASS. CompleteGPU-REPORT321273chars read in100000charDOMchunks because
+CUAwholeDOMstring caps~200k; initialtruncatedread was not a failedGPUtest or retry.
+IndependentGPUreview PASS LIMITED (0352480a17781420d90ec984b26a2d5bd65bf967bad498128f75ada52f77c4dc).
+CONSOLE[]. Tab12closed, ttyserver78556/PID79444 stdin-stopEXIT0at89192ms/240s,
+knownPIDabsent. Isolatedpixels do NOT prove continuouspairedtransport/anatomy,
+realmission, physicalAndroid, audio/performance. Allprogramsource/tool packets
+preserved; do not rerun their sealedserverdirs or mutateoldsourcepins.
+
+E/buergeramt-mouth-integration-v1: root integrated EXACT87dmouthmodule into C,
+plus versiontokens ONLY through world->scene->animation->anchor->mouth and
+worlddirectmouth/rootindex, authoringpreview->animation/spark-previewHTML.
+Explicitscope inSESSION beforeedits. New22pins/96testsPASS inCANDIDATE/FOCUSED.tap;
+BEFORE/AFTER/source-checkpoint/OWNED-RUNTIME.patch preserve bytes and recovery.
+Sourcecheckpoint includes all9ownedruntimepaths anduntrackedapproachtest43c.
+PRE-COMMIT-FORMAT.txt notes87dCRLF vs GitLF normalization. Fullsourcecheckpoint
+restores HISTORICAL CRLF bytes; its Gitpatch may yield normalizedbytes. The explicit
+LF successor below is NOW COMPLETE. Do not restore the old checkpoint over it or
+rerun its mutating normalization script; preserve both manifests independently.
+Game893/geometry unchanged; oldworld/index bytepins intentionally superseded, not
+rewritten in oldpackets. Both requiredPhysics/Camera assigned SAMEnewcandidate,
+Both Physics andCamera sourcePASS limited, all22pinsfreshlymatch; existingrequired
+P3/P4/delayedframe/C/device holds remain. Camera integratedaddendum limitedPASS.
+E/buergeramt-mouth-integration-iab-v1 SEALED: actualcanonicaldirectoffice,
+NOmoduleoverride,79.405seconds0WARN/0ERROR; populatedroom/movingcast visible.
+All5actualqueryURLs use20261018-mouth-single-exit, REQUESTS retain rawrelativeURLs;
+no manualmoduleHTTPfetches pollutedthislog. Freshno-store graph does NOT prove
+migration of existingcachedsessions. Tab13closed; ttysession95884/PID71296
+stdin-stopEXIT0at134375ms/180000budget, knownPIDabsent. ActualRUN-RESULT/ROOT-
+CLOSEOUT/ROOT-VERIFICATION saved. Alltestworkers stopped, noownedjobsremain.
+This closes the scopeddesktop delayedwarning reproduction only, not everyshader/
+pose/continuouspairedtransport/device/performance/mission or fullworldacceptance.
+NEXT ONE TASK: prepare the output-only P3 source-successor proposal described
+below. Current reconciliation proves the old caller needs substantive source
+integration, not expectedHEAD replacement. Do not launch it or replay startup
+before the coherent candidate and observation/cleanup scope are reviewed.
+Beforefinalrelease consider adding this knownwarning regression to the existing
+playtestconsole guard rather than inventing another harness. Allmission/cast/
+Hannelore/3Ddeferral holds stand. Combinedruntime remains LOCAL UNPUBLISHED.
+
+LATEST HANDOFF CLOSEOUT / BACKGROUND-ONLY RESUME CARD (18 October)
+This section supersedes older normalization and metadata-only P3 resume advice.
+No game implementation or new browser capture was performed during this handoff
+closeout. No user Chrome process was closed, inspected or brought forward.
+
+LF FORMAT SUCCESSOR - COMPLETE, LOCAL ONLY
+E/buergeramt-mouth-lf-v1 contains CANDIDATE.json, FORMAT-PROOF.json,
+original-crlf.js, normalized-mouth.js, normalize-and-verify.mjs, FOCUSED.tap,
+CAMERA-REVIEW.md and OWNED-RUNTIME.patch. The script is a sealed one-shot
+authoring operation with old-pin assertions, NOT a general resume launcher.
+Exactly139 CRLF pairs removed,8342 to8203 bytes. All other21 pins unchanged.
+Independent Node imports proved all7 export names, all6 normalized function
+sources and the ACTUAL exported mouthPaintGlsl string equal. Exported GLSL SHA:
+6f8a4bfaf733603b45f4e44d251c168019f7b7b4f07c48119c0a9ed7d7276ca6.
+Fresh focused96/96 PASS,0 fail/skip. Git raw and attributes hash-object agree:
+634ae9e9e9eb5ab65490791fa965d4a725c729f5. No staging-time format delta remains.
+Independent Camera review PASS for format only; Physics reconciliation freshly
+matches22 current pins and exact LF-only change. Existing GPU402 and integrated
+79.405s evidence executed OLD CRLF bytes. Identical exported shader/function
+semantics justify format carry-forward; do not call this a new LF GPU run.
+Broader world/device/release HOLD remains. Do not keep repeating these tests
+unless a new relevant edit, drift or failure requires it.
+
+P3 RECONCILIATION - COMPLETE AUDIT; IMPLEMENTATION STILL TODO
+Read E/p3-current-reconcile-v1/REPORT.md and RECONCILIATION.json. The old source
+checkout is C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator-p3-reset,
+commit e873d7960a4f3cc7fc0545148eaaf5e182c92ef1. All24 old pins match there;
+all22 current LF pins match C. None of the old24 bytes match C;8 paths absent.
+Merge base with current canonical:8d87a5e129e1bb0004c2a24be4d00a00bf9a80cc.
+Only four old branch commits are absent from current history:5ffae54,d257ff2,
+48cfaa1,e873d79. Do not cherry-pick blindly or overwrite entire root modules.
+
+Prepare ONE output-only candidate copy against current c698 manifest/game893.
+Integrator owns shared runtime edits. Resolve these cooperating dependencies:
+- game.js: ownership holdStreetMovement; atomic plan/check/commit responder;
+  strict null means planted ownership hold (no root/avoid mutation or reversal);
+  persistent side/pass createPedestrianMover and invalidation; geometric stall
+  progress; ordinary-loop ownership and legacy-turn rules; discontinuity resets.
+- street-character-sprites.js: atlas admission, movement request/ownership,
+  start/stop/settle/turn accounting. world3d.js: observer/resolver hooks only;
+  preserve current renderer and mouth-version import chain.
+- tourist-animation.js: directional phases, settle and transition handling.
+- assets/characters/street/manifest.json: ONLY Irmgard's affected descriptor;
+  movement-desktop.webp2016x2040 and movement-mobile.webp1848x1870 under
+  crowd-irmgard-aktenordner/. Reuse these preserved assets; no new family.
+- Historical avoidance/route-hold/atlas-motion/packed-grid/dense-turn tests,
+  grounding checks, fixture extraction and changed collision expectations.
+  Merge meaningful assertions into current tests; never copy old tests solely
+  to force green. Review old painted-walking reference/generator changes too.
+Never copy historical SESSION.md or replace current index release tokens.
+Preserve the newer indoor stale/current-visit completion guard, paving detour,
+all mouth modules/cache tokens, touch controls, mission rules and unrelated dirt.
+Retain before/after source hashes, exact diff, inverse and conflict decisions.
+
+Cheap first verification: run existing production-function avoidance/hold tests
+re-extracted from the successor, both sides/update orders/reset timing profiles;
+assert owned holds leave roots fixed and accepted displacement stays legal.
+Then ordinary regression checks and independent read-only Physics AND Camera
+reviews against the SAME complete frozen candidate. CPU pass is not P3 capture.
+Actual old48cf Irmgard+13/Klaus-Dieter-17 pair failed the5s full-body pass;
+the representative+13/-14 CPU pass does not supersede it. Preserve the failure.
+The reviewed source-successor proposal precedes installation or capture.
+
+Browser work can use existing private hidden silent IAB tooling, but requires
+a reviewed successor with exact source/instrumentation inverse and equivalent
+physical/paint observation, budgets, media and terminal cleanup. Do not simply
+retarget the old Chrome/Playwright/ffmpeg operator. Keep initial spacing40,
+separation>=26, microsteps<=.025, full x-order body-diameter pass>=26 by5000ms
+actual wall clock and20s history for BOTH avoidance preferences. A center cross,
+lateral progress or sparse screenshots cannot pass. The42-wide office bend,
+P4 corners, overtaking/player/crowd/prop, temporal camera and mobile stay separate.
+Existing spent grants, queue/floors and hard caps are not reset by this audit.
+Task-specific PRELAUNCH admission floors differ: P3 sampled run-browser.ps1
+lines39-43 requires1024MiB physical/6000MiB virtual; mission-v23-run/
+run-fullmission.ps1 lines21,148 requires2048MiB/12000MiB. These are different
+task grants, not a choice of lower values or separate runtime watermarks. See
+the reconciliation REPORT for exact operator paths. Preserve each original
+queue, allocation and deadlines; no successor launch is authorized by this note.
+
+EFFICIENT STOP / RECOVERY
+The requested handoff is complete. Do not turn its closeout into new art, renderer
+development or a full mission replay. On the next explicit project continuation,
+select the source-successor proposal above; assign bounded asset/test tasks only
+after the integrator has declared an exact base and exclusive paths. Reviewers
+do not write runtime or commit. Defer broad cast/audio work until its turn.
+Use the older complete inventories/recipes below as lookup, not current status.
+If E or old worktrees are absent on another PC, the tracked TXT remains a scope
+and procedure handoff, not a backup of ignored evidence/private sources. Recover
+the exact packets through an authorized backup; verify hashes before reuse.
+Do not fabricate prior PASS, regenerate expensive assets or reset attempts to
+compensate for missing evidence. Git history recovers tracked old source only.
 
 PRIVATE BACKGROUND TOOLING / REUSE INSTRUCTIONS
 E/approach-passive-observer-v1/{observer.js,observer.test.mjs,ROOT-TEST.tap}

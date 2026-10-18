@@ -1,3 +1,61 @@
+# Handoff closeout / LF result — 2026-10-18
+
+Standalone TXT/index refreshed with current c6988e99 candidate and fb1e3067 mouth.
+Exactly139 CRLF replacements,7 exports/6 functions/exported GLSL equal; other21
+pins unchanged; fresh96/96 checks PASS. Camera format-only review and Physics
+source reconciliation retain broader release HOLD. PriorGPU402/79.405s executed
+CRLF bytes; no new LF native run claimed. Sealed proof under primary output/
+central-completion-2026-10-16/buergeramt-mouth-lf-v1. No runtime changed by this
+documentation closeout. P3 audit identifies24-file unmerged package,8 absent paths;
+next step is an output-only source successor, not old expectedHEAD substitution.
+Preserve actual48cf failure, budgets, Chrome and all unrelated pending work.
+Handoff complete; broader game completion remains unfinished.
+
+# Byte-format successor scope — 2026-10-18
+
+Integrator scope: normalize ONLY buergeramt-mouth-paint.js CRLF to LF for existing
+Git policy; no JS/GLSL/token/geometry/asset changes. Preserve22pin fd7 candidate and
+source-checkpoint verbatim. Before replacingbytes, import archivedCRLF/derivedLF
+as independent Node data modules and prove exportedGLSL string + functionsource
+(afterEOLnormalization) +exportnames equal. Re-run same96focusedchecks, create
+explicitnewbyte-formatmanifest/evidence under E/buergeramt-mouth-lf-v1; do not
+rewrite oldmanifest/reviews. Requiredreviewers assess the successor separately.
+This changes commitformat readiness only; remainingworld/device gates stayHOLD.
+
+# Integrated mouth workaround checkpoint — 2026-10-18
+
+Exact87dhelper applied locally plus cache-token propagation through game and
+existingauthoringpreview imports; pavinggame893/test43c unchanged.22pincandidate
+fd7b35b8 frozen in E/buergeramt-mouth-integration-v1; focused96/96PASS.402GPU ROI
+cases/67keys/6shapes byte-identical with inheritednonvacuity guards; independently
+reviewed. Samecandidate Physics andCamera source reviews limitedPASS, no waiver.
+Actualcanonical directoffice (nooverride)79.405s0WARN/ERROR and5currentversionURLs;
+Camera suppliedevidenceaddendumPASS limited. Not stale-cachemigration/fullmission/
+continuouspairedtransport/device/performance proof. RequiredP3/P4/C/Xholds remain.
+
+Alltesttabs/servers retired. Lasttab13 closed; tty95884/PID71296 stdin-stopEXIT0
+at134375ms within180s; knownPIDabsent. Originalwarnrecords/nativeprograms retained.
+No Chrome/focus/systemaudio/listening. Latestpublished3389c6d isDOCSONLY with Pages
+39119374385SUCCESS/publicroot3d200/game9dfexact; thisnewcombinedruntimeUNPUBLISHED.
+Ownedlocalbackup source-checkpoint and OWNED-RUNTIME.patch/test recovery retained.
+Do not overwriteC fromdirtyprimaryP or rewriteold11pinhistory toforceacceptance.
+NextselectONEremaining affectedobject/devicegate; no freshbudgetreset or newengine.
+
+# Local exact-wrapper integration scope — 2026-10-18
+
+Integrator-owned source scope: buergeramt-mouth-paint.js exactprivate87d wrapper;
+cache tokens ONLY in buergeramt-painted-anchor.js, buergeramt-gaussian-animation.js,
+buergeramt-gaussian-scene.js, world3d.js, index.html, amt-animation-preview.js and
+spark-preview.html. Preserve current unpublished paving game893/indexgame token,
+all geometry/mouthFrame/math/samplers/profiles/media/scheduler/mission/input.
+No new dependency or renderer; authoringpreview changes only propagate imported
+module versions. Prior pixel evidence402/402 exactzeroDiff and independentreview
+PASS limited; nativeprivateoffice60.258s0WARN vs original8WARN. New combinedsource
+candidate must be frozen, focusedtests and independentPhysics/Camera evaluated;
+required paving/runtime/mobile/preview-device gates still outstanding. Localonly,
+not release acceptance; unrelatedRTK/router/skills dirt untouched. Evidence E/
+buergeramt-mouth-integration-v1. Product source edits begin AFTER this scope record.
+
 # Shader capture and private workaround trial — 2026-10-18
 
 Scope completed: private evidence tooling and documentation only; no product
