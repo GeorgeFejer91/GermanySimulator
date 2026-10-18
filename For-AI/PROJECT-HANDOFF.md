@@ -15,8 +15,12 @@ Canonical integration checkout:
 `C:/Users/cogpsy-vrlab/.codex/worktrees/canonical-game-entry/GermanySimulator`.
 Preserve its unpublished game8931183b, index release token and untracked regression
 test43c2561a together. Never overwrite its runtime from the dirty primary checkout.
-Published baseline before this documentation update is c7622aa; published game
+Published baseline before this documentation update is 09124c1; published game
 remains9df36180. This documentation does not release the local runtime candidate.
+
+A private shader trial removed the reproduced warnings during one 60-second
+observation. It is preserved outside product sources pending exact mouth-pixel
+comparison and reviews; it has not been merged or released. See the TXT opening.
 
 Remaining work: finish paving acceptance; phone/natural mission and33restart
 routes; street P3; Brigitte and40other eligible personalities; Hannelore; integrated

@@ -29,7 +29,7 @@ Use git -c gc.auto=0; known corrupt unreferenced object: no reset/clean/gc/repac
 Only integrator stages explicit owned paths. Preserve unrelated router/RTK/skill
 changes in AGENTS.md, For-AI/{README,SKILLS}.md, level README/skills directories.
 Published baseline before THIS docs update:
-c7622aa4c50254465a5cfd72556e54265282ca2c, Pages39113039668SUCCESS;
+09124c1f444a5eaded7c18794f720be235e7aff4, Pages39117593941SUCCESS;
 root and /3d.html HTTP200; deployed game9df36180 byte-matched. Last runtime commit
 a737772e0d6614720a8ed4f5d42c8fbbbdffc23c. Resolve live refs on resume. This file
 cannot embed its own eventual commit SHA; use git log and closeout receipt.
@@ -92,6 +92,56 @@ be labelled diagnostic; the successful natural prefix need not be replayed for
 every unrelated view. Each actual run needs fresh reviewed scope, silence probe,
 source pins, original hard budget, saved outputs and explicit terminal cleanup.
 No required FAIL/NOT RUN becomes PASS because this handoff or CI succeeds.
+
+SHADER DIAGNOSIS / PRIVATE TRIAL CHECKPOINT (18 October)
+E/amt-mouth-shader-triage-v1: no authored missing return/uninitializedlocal found;
+installed warningpath follows successfulprogramlink. Shortbaseline empty is not
+a matchedcausal comparison; candidate directfixture reproduced6X4000 at28-37sec.
+Triage tab9/server32189/PID83428 retired; stdinclosed, verifiedownedPID stopped,
+exit1/noREQUESTShistory; servedold9df/new893bytes independentlyverified.
+
+E/amt-shader-observer-v1: source-onlyprivatehook8/8VMchecksPASS (root independently
+8/8 too); observerSHA4a146256808c8931a2ea0eaaf28dd9e80fbc70f3780a514b6c5fb2c51c6b94db.
+Wraps getProgramInfoLog, exactnativecall/return/exception; captures only matching
+X4000/f_amtMouthPaint, max6distinctprograms,64KiB/text, no compile/render/statewrites.
+Inject after native muting BEFORE product. Actual overhead is UNMEASURED.
+E/amt-mouth-shader-capture-v1 actualdirectvisit captured6completeprogramrecords,
+24untruncatedvertex/fragmentGLSL/backendtranslationtexts. Nativeconsole8WARN/0ERROR;
+capturecap6 means unrecorded2logs not attributed to identicalprograms. All6CAPTURED
+translatedfragments identical36387bytes/hash0912326ebc5a89437570f753956d1602cf4b4fd5b4fe5cb1a56684ca6321e107
+(nativedecodedstrings; extractedWindowsfiles may haveCRLF). Independentcapture
+review confirms pairedanchorA/B callsites; outerwrapper andFrame have complete
+returns. Backendreturn-temporary inference remains distinct fromprovedcause.
+Capturetab10closed; ttyserver44433/PID10936 stdin-stopEXIT0at58437ms/180000budget,
+knownPIDabsent. Use tty:true for retainedstdin. Copiedfallback840sec is not hardbudget.
+
+E/amt-mouth-single-exit-trial-v1: PRIVATE ONLY module variant87d4eb8df07cb51eca302fefa51743ecb97d9e12971802a59af96687fa37a3ef.
+Outer amtMouthPaint now initializedvec4result + SAME speaking<.5 if/else + final
+return. Samebranch inclNaN; sameone texturepath; no mouthFrame/math/profile changes.
+ExactHTTPmouthmodule override only; productfiles remainUNCHANGED. Independent
+source/preflightPASS. One actualdirectofficevisit observed60258ms fromnavigation,
+visible movingcast/ambientcaption, nativeconsole0WARN/0ERROR; servedmodulehash and
+REQUESTS retained. This supports a scopedcompilerworkaround, NOT pixel-equivalence,
+allshadercoverage/mouthanimation/audio/device/release acceptance. Diagnostic0events
+meansnomatchingwarning, not proofeveryshadercompiled. Preserve original8warnings.
+Trialtab11closed; ttyserver97833/PID83584 stdin-stopEXIT0at97975ms/180000budget,
+freshPIDabsent. No ownedbrowser/server remains; no Chrome/focus/useraudio touched.
+All3packets have RUN-RESULT.txt and ROOT-CLOSEOUT.json with evidence/limits.
+
+NEXT SINGLE TASK: exactold/newGPUmouth pixel comparison before productedit.
+Reuse tools/playtest-connected-lips.mjs existing96x64ROI fixture,67encodednative
+keys/12actors and neutral/closed/open/wide/round/bite shapes. Its oldbaseline API
+is historical: adapt only comparison binding to current original vs privatevariant.
+Use reviewedprivateHTML/CUA native Run control; do NOT launch its Playwrightbrowser
+or createanotherengine. Onecontext, sequentialstates, releasebitmap/texture after
+samples, boundeddecodedmemory/readiness, fixedsource/imagehashes and no clock/
+modelassignment into the realgame. Label isolatedpixel evidence, not naturalflow.
+Retain pairedA/B/neutralguard checks and actualspeaking-state review; staticwhole-
+office screenshots have randomcastpositions and are NOT a pixelcomparison.
+Do not apply privatevariant to C until comparison/affectedreviews justify it.
+Then deliberate oneintegrator-owned shaderrepair/cache-token/test/docs scope,
+freeze/review that newcombinedcandidate. Paving11pins unchanged sofar; anyproduct
+shaderedit needs expandedpins. All other Physics/Camera/device/mission holds stand.
 
 PRIVATE BACKGROUND TOOLING / REUSE INSTRUCTIONS
 E/approach-passive-observer-v1/{observer.js,observer.test.mjs,ROOT-TEST.tap}

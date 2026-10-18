@@ -1,3 +1,27 @@
+# Shader capture and private workaround trial — 2026-10-18
+
+Scope completed: private evidence tooling and documentation only; no product
+source edit. Candidate game8931183b and original mouth moduleb7c14094 preserved.
+Direct office reproduced X4000 without natural prefix. Actual passive capture
+retained6complete programs/24untruncatedsource texts;8nativewarnings/0errors.
+All6captured translatedfragments identical; independentreview found allreturn
+paths complete and pairedanchorA/B callsites. No backendfalsepositive assertion.
+
+Private E/amt-mouth-single-exit-trial-v1 changes only outerwrapper to initialized
+result+sameif/else+finalreturn, SHA87d4eb8d. Native60.258second directoffice visit
+rendered movingcast/ambientcaption with0warnings/errors. Servedhash verified;
+this is limitedcompilercomparison, not pixel/animation/device/release acceptance.
+Next single task: reuse connected-lips96x64GPU fixture for exactold/new67key/6shape
+pixelcomparison with onecontext/releasedtextures, via privateHTML/CUA, before
+any productionedit. No newbrowserstack/engine, no naturalgame stateassignment.
+
+Diagnostic8/8VMchecks and independentpreflightPASS. Allownedtabs9/10/11closed;
+triage32189/PID83428 needed exactverifiedStop-Process (stdinclosed,exit1/noREQUESTS),
+capture44433/PID10936 tty-stopEXIT0at58437ms, trial97833/PID83584 tty-stopEXIT0at97975ms.
+Allwithinoriginalbounds,knownPIDsabsent,Chrome/focus/useraudio untouched. Native
+silenceprobePASS; no listening. Packets have RUN-RESULT/ROOT-CLOSEOUT and detailed
+handoff opening carries exact scripts/hashes/limits. Paving/world/device HOLD.
+
 # Current natural-office checkpoint and handoff — 2026-10-18
 
 Latest actual default-index natural run reached the repaired corridor, used real
