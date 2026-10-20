@@ -4,7 +4,18 @@ const path = require('node:path');
 const lib = require(path.resolve('tools/browser-ci/node_modules/playwright'));
 const launch = lib.chromium.launch.bind(lib.chromium);
 module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executablePath(), async launch(options) {
-  const browser = await launch(options);
+  const browser = await launch({...options, args: [...options.args, '--use-angle=gl']});
+  const probeContext = await browser.newContext();
+  const probePage = await probeContext.newPage();
+  const graphics = await probePage.evaluate(() => {
+    const gl = document.createElement('canvas').getContext('webgl2');
+    const debug = gl?.getExtension('WEBGL_debug_renderer_info');
+    return debug ? {renderer: gl.getParameter(debug.UNMASKED_RENDERER_WEBGL), version: gl.getParameter(gl.VERSION)} : null;
+  });
+  fs.mkdirSync('output/browser-ci', {recursive: true});
+  fs.writeFileSync('output/browser-ci/graphics.json', JSON.stringify(graphics));
+  await probeContext.close();
+  if (!graphics) { await browser.close(); throw Error('ANGLE OpenGL WebGL2 unavailable'); }
   const newContext = browser.newContext.bind(browser);
   let pageId = 0;
   browser.newContext = async options => {
