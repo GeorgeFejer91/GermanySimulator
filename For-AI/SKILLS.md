@@ -100,6 +100,8 @@ This is a reusable **developer-only** Playwright/Chromium tool. Its generic runn
 
 Apply the installed `$ponytail` skill before extending this tool: reuse a scenario, choose the smallest useful check, and use existing dependencies. If the skill is unavailable, use that same reuse-first fallback; do not build a framework, service, custom action language or duplicate test assertions. Keep the generic core portable and game knowledge in the suite.
 
+The Pages Linux runner opts into `CHROMIUM_MESA=1` with `LIBGL_ALWAYS_SOFTWARE=1` under `xvfb-run -a`. This selects software OpenGL through Mesa/X11 and records the launch arguments in the report; local runs keep Chromium's default renderer unless explicitly opted in. This is functional CI evidence, not hardware-GPU or physical-device performance evidence. Keep the same scene, drawing buffer, screenshot resolution, input deadlines and assertions. The renderer comparison and focus-restoration regression are recorded in [the Schwabingen props evidence](../docs/engineering/SCHWABINGEN-PROPS.md#publication-state).
+
 From the repository root (uses existing `PLAYWRIGHT_MODULE` / `CHROMIUM_PATH`, local Playwright or the bundled Node installation and installed Chrome):
 
 ```powershell

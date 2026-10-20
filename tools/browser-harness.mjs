@@ -181,8 +181,12 @@ export async function runSuite(suite, supplied = {}) {
   try {
     server = options.baseURL ? null : await serveDirectory(options.root);
     const {chromium} = installedPlaywright();
+    const args=['--mute-audio'];
+    // Opt-in software OpenGL for the Linux CI runner, with Xvfb and Mesa.
+    if(process.env.CHROMIUM_MESA==='1')args.push('--enable-gpu','--use-cmd-decoder=passthrough','--use-gl=angle','--use-angle=gl','--ozone-platform=x11','--ignore-gpu-blocklist');
+    report.browserArguments=args;
     browser = await chromium.launch({headless: true, handleSIGINT: false, handleSIGTERM: false,
-      executablePath: chromiumExecutable(chromium), args: ['--mute-audio']});
+      executablePath: chromiumExecutable(chromium), args});
     report.browser = browser.version();
     report.baseURL = options.baseURL || server.url;
     if (suite.sourceFiles) report.sourceHashes = await suite.sourceFiles(options.root);
