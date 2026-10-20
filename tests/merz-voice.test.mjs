@@ -9,6 +9,25 @@ vm.runInContext(readFileSync(new URL("For-AI/AUDIO-TEXT-LIBRARY.js",root),"utf8"
 const catalog=context.window.GermanySimulatorAudioText,manifest=JSON.parse(readFileSync(new URL("assets/voices/merz/manifest.json",root),"utf8"));
 const lines=JSON.parse(game.match(/const merzLines=Object.freeze\((\[.*?\])\);/)[1]);
 assert.deepEqual(manifest.clips.map(clip=>clip.text),lines,"all authored Merz lines need their own generated recording");
+const supplied=manifest.clips.filter(clip=>clip.importBatch==='2026-10-20-user-clips');
+assert.equal(supplied.length,6,'all six supplied recordings must be used, including the replacement take');
+assert.equal(manifest.clips.length,16,'five new speeches extend the eleven-line pool');
+for(const clip of supplied){
+ assert.match(clip.sourceSha256,/^[a-f0-9]{64}$/);
+ assert.ok(clip.english?.trim());
+ assert.equal(clip.referenceSha256,manifest.referenceSha256);
+ assert.equal(clip.language,'de');
+}
+const monologue=supplied.find(clip=>clip.clipId==='merz-nie-gesagt');
+assert.equal(monologue.sourceCues.map(cue=>cue[2]).join(' '),monologue.text);
+assert.equal(monologue.cues.map(cue=>cue[2]).join(' '),monologue.english);
+for(const cues of [monologue.cues,monologue.sourceCues]){
+ let end=0;
+ for(const [start,next,text] of cues){assert.equal(start,end);assert.ok(next>start&&text.trim());end=next}
+ assert.ok(Math.abs(end-monologue.durationSeconds)<.1,'captions cover the complete recording');
+}
+assert.deepEqual(JSON.parse(JSON.stringify(catalog.clips[monologue.clipId].sourceCues)),monologue.sourceCues);
+assert.deepEqual(JSON.parse(JSON.stringify(catalog.clips[monologue.clipId].cues)),monologue.cues);
 const quotations=manifest.clips.filter(clip=>clip.quotation);
 assert.equal(quotations.length,9,"all added original quotations need source receipts");
 for(const clip of quotations){

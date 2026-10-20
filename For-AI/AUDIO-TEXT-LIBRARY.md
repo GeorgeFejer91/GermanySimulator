@@ -1,5 +1,22 @@
 # Speech catalog and subtitle authority
 
+On 20 October 2026 the user supplied six `GS Merz` MP3s: five additional
+speeches and a replacement `merz-gruene-linke-spinner` take. Merz now owns
+16 exact German/English pairs. `assets/voices/merz/manifest.json` records their
+source filenames/hashes, selected-profile receipts, encoded German ASR and levels.
+The 40.2-second `merz-nie-gesagt` monologue has eight pause-aligned caption
+intervals, each independently transcribed from the normalized file. Recorded
+German captions now consume authored `sourceCues` when available, alongside the
+existing English `cues`, using the same admitted audio clock. Other recordings
+retain automatic pagination. These are user-supplied synthetic game performances,
+without a new historical-quote claim. The existing proximity/direct-interaction
+broker and fallback remain unchanged. The six files total 697,224 encoded bytes;
+the largest is 402,764 bytes and its 24 kHz stereo audio decodes to 15,436,800
+float bytes at the tested browser's 48 kHz context rate. It stays within the
+existing 16 MiB LRU cache budget. Files load individually at playback,
+with no startup preload, new polling, or desktop/mobile variant. Perceptual
+listening and physical Android validation are NOT RUN.
+
 Recorded speech fetches append the catalog's encoded SHA-256 as a `voice` query
 parameter, so replacing a recording at its existing path changes its HTTP cache
 identity after the updated catalog loads. The canonical path still owns the

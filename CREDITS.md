@@ -1,5 +1,10 @@
 # Germany Simulator credits
 
+Six additional user-supplied `GS Merz` synthetic takes were integrated on
+20 October 2026 (five new speeches and one replacement). The existing selected
+profile and model-license restrictions remain; source and encoded receipts are
+in `assets/voices/merz/manifest.json` and `assets/voices/LICENSES.md`.
+
 The historical, unselected fictional Frau Fink (now Frau Schwabingen), Prof. Heiko Maaslos and Inga Maaslos four-view
 authoring candidates were generated with OpenAI ImageGen on 13 October 2026.
 Their source hashes, generation receipts and pending visual/motion acceptance
