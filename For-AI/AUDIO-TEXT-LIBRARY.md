@@ -32,7 +32,7 @@ promise cache, retry, playback and 16 MiB decoded-audio limit. Uncatalogued or
 unhashed files retain their existing request URL. This does not preload audio or
 claim that an absent recording exists.
 
-Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 36 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
+Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 40 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
 
 The guided neighborhood story in `neighbor-story.js` pairs every stop and travel
 line with its exact English caption and stable speaker. `VOICE-CAST.json` also
@@ -60,16 +60,16 @@ round/spread shapes remain phonetic estimates. A queued, caption-only or stale
 cue cannot make a neighbor talk. No recordings preload at city startup.
 
 Run `node tools/audit-neighbor-voice-coverage.mjs --check` for current neighbor
-recording coverage. It derives all 110 active cast-owned bilingual sources and
+recording coverage. It derives all 114 active cast-owned bilingual sources and
 checks the actual default resolver, selected take binding and every authored
 story/travel speaker. Archived Ede is excluded. Missing or held lines fail this
 coverage check even though their caption fallback remains playable. The curator
 separately verifies manifest receipts and file hashes; successful decoding alone
 does not establish recording coverage or perceptual quality.
 
-The completed pack contains all 110 authored active-neighbor recordings:
-Heiko 36, Inga 34, Frau Schwabingen 33 and Hartmut 7. Heiko's final two
-German source/subtitle pairs use “Ich sage es” and “ich habe”. Their final
+The completed pack contains all 114 authored active-neighbor recordings:
+Heiko 40, Inga 34, Frau Schwabingen 33 and Hartmut 7. The German source/subtitle
+pairs of existing Heiko clips 35/36 use “Ich sage es” and “ich habe”. Their final
 encoded whole-file readings pass the unchanged strict word comparison; old
 failed short forms remain private evidence. Human listening is NOT RUN.
 For the two specifically qualified Heiko encodings, runtime metadata retains the
