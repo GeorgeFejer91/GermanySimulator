@@ -1,5 +1,5 @@
 import {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale} from './assets/vendor/pretext/dist/layout.js';
-import {createModalFocus} from './modal-focus.js?v=20261020-modal-focus-restore';
+import {createModalFocus} from './modal-focus.js?v=20261020-modal-input-release';
 
 const byId=id=>document.getElementById(id),file=byId('case-file'),fax=byId('mission-fax'),rail=byId('city-status'),toggle=byId('file-toggle'),notices=byId('city-notices');
 const subtitles=byId('subtitle-toggle'),subtitleAnchor=document.createComment('subtitle control position');subtitles.before(subtitleAnchor);
@@ -10,7 +10,7 @@ for(const id of ['law-unlock-prompt','wurst-alert','border-alert'])notices.appen
 const meter=byId('germanness-hud'),meterAnchor=document.createComment('Germanness HUD position');meter.before(meterAnchor);
 const alerts=['toast','police-bark','violation-alert','wurst-alert','law-unlock-prompt','border-alert','dialogue','quiz-modal','form-modal','humor-modal','end-modal'];
 const cache=new Map();
-const modalFocus=createModalFocus(byId('app'),{onChange:()=>window.Germany3DBridge?.clearInput(),restoreTarget:()=>toggle});
+const modalFocus=createModalFocus(byId('app'),{onChange:modal=>{if(modal)window.Germany3DBridge?.clearInput()},restoreTarget:()=>toggle});
 let pending=true,mission='',timer=0,reminderAt=0,queued=false,manual=false,language='';
 let motion=0,motionTimer=0,sound=null,departing=false,mask=null,kernel=null;
 let welcomeSound=null;

@@ -20,7 +20,7 @@ export function createModalFocus(root,{onChange=()=>{},restoreTarget=()=>null}={
     if(next===active){if(active&&!active.contains(document.activeElement))focusFirst();return}
     const wasActive=!!active;
     if(!wasActive&&next){previous=document.activeElement;if(previous===document.body||previous===document.documentElement)previous=null}
-    release();active=next;onChange();
+    release();active=next;onChange(active);
     if(!active){
       const target=visible(previous)&&!previous.closest('[inert]')?previous:restoreTarget();
       previous=null;target?.focus({preventScroll:true});return;

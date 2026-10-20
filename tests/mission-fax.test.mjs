@@ -18,12 +18,20 @@ function hud({reduced=true,audioRate=1,missionKey,missionTitle='ANMELDUNG I',mis
  node('germanness-hud').parentElement=node('city-status');node('mission-title').textContent=missionTitle;node('mission-text').textContent=missionText;
  node('file-close').parentElement=node('case-file.file-header');node('subtitle-toggle').parentElement=node('app');node('english-subtitle').parentElement=node('app');
  const context=vm.createContext({document,window:{Germany3DBridge:{getHUDState:()=>state,clearInput(){},playFaxTransition(){feeds++;const start=now;return{duration:1.08,elapsed:()=>(now-start)/1000*audioRate,cancel(){cancellations++}}}}},performance:{now:()=>now},setTimeout:later,clearTimeout:id=>tasks.delete(id),requestAnimationFrame:fn=>later(()=>fn(now),16),cancelAnimationFrame:id=>tasks.delete(id),matchMedia:()=>({matches:reduced}),CSS:{supports:()=>true},MutationObserver:class{observe(){}},ResizeObserver:class{observe(){}},getComputedStyle:()=>({zoom:'1',getPropertyValue:()=>0}),innerWidth:1280,innerHeight:800,addEventListener:(name,fn)=>events.set(name,fn)});
- context.createModalFocus=()=>({sync(){}});vm.runInContext(source,context);
+ let modalOptions;context.createModalFocus=(root,options)=>{modalOptions=options;return{sync(){}}};vm.runInContext(source,context);
  function advance(ms){const end=now+ms;for(let count=0;count<10000;count++){const next=[...tasks].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!next){now=end;return}tasks.delete(next[0]);now=next[1].at;next[1].fn()}throw Error('unbounded timer work')}
  const refresh=()=>{context.window.GermanyHUD.refresh();advance(20)};
  advance(20);
- return{controller:context.window.GermanyHUD,node,state,document,advance,refresh,events,get feeds(){return feeds},get cancellations(){return cancellations},get maskFrames(){return maskFrames}};
+ return{controller:context.window.GermanyHUD,node,state,document,advance,refresh,events,bridge:context.window.Germany3DBridge,modalChanged:next=>modalOptions.onChange(next),get feeds(){return feeds},get cancellations(){return cancellations},get maskFrames(){return maskFrames}};
 }
+
+test('modal entry and switches release old input; delayed closure preserves fresh gameplay input',()=>{
+ const h=hud(),held={ArrowUp:true};h.bridge.clearInput=()=>{held.ArrowUp=false};
+ h.modalChanged(h.node('dialogue'));assert.equal(held.ArrowUp,false);
+ held.ArrowUp=true;h.modalChanged(h.node('quiz-modal'));assert.equal(held.ArrowUp,false);
+ h.state.busy=false;held.ArrowUp=true;h.modalChanged(null);
+ assert.equal(held.ArrowUp,true,'a key admitted after logical close must survive deferred focus release');
+});
 
 test('Gaussian frames follow audio elapsed time and leave no idle mask work',()=>{
  const h=hud({reduced:false,audioRate:.5});h.advance(1100);assert.equal(h.node('mission-fax').dataset.transition,'arriving','wall time must not complete a still-active audio feed');assert.equal(h.cancellations,0);assert(h.maskFrames>1&&h.maskFrames<35);
