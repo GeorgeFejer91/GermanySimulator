@@ -4,18 +4,25 @@ const path = require('node:path');
 const lib = require(path.resolve('tools/browser-ci/node_modules/playwright'));
 const launch = lib.chromium.launch.bind(lib.chromium);
 module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executablePath(), async launch(options) {
-  const browser = await launch({...options, args: [...options.args, '--use-angle=gl']});
+  const browser = await launch({...options, args: [...options.args, '--enable-gpu', '--use-gl=angle', '--use-angle=gl']});
   const probeContext = await browser.newContext();
   const probePage = await probeContext.newPage();
   const graphics = await probePage.evaluate(() => {
     const gl = document.createElement('canvas').getContext('webgl2');
     const debug = gl?.getExtension('WEBGL_debug_renderer_info');
-    return debug ? {renderer: gl.getParameter(debug.UNMASKED_RENDERER_WEBGL), version: gl.getParameter(gl.VERSION)} : null;
+    if (!debug) return null;
+    gl.clearColor(.25, .5, .75, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+    const pixel = new Uint8Array(4); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+    return {renderer: gl.getParameter(debug.UNMASKED_RENDERER_WEBGL), version: gl.getParameter(gl.VERSION),
+      attributes: gl.getContextAttributes(), buffer: [gl.drawingBufferWidth, gl.drawingBufferHeight], pixel: [...pixel], error: gl.getError()};
   });
   fs.mkdirSync('output/browser-ci', {recursive: true});
   fs.writeFileSync('output/browser-ci/graphics.json', JSON.stringify(graphics));
   await probeContext.close();
-  if (!graphics) { await browser.close(); throw Error('ANGLE OpenGL WebGL2 unavailable'); }
+  console.log(JSON.stringify({graphics}));
+  if (!graphics || /SwiftShader/i.test(graphics.renderer) || graphics.error || graphics.pixel.some((value, i) => Math.abs(value - [64,128,191,255][i]) > 1)) {
+    await browser.close(); throw Error('ANGLE OpenGL WebGL2 unavailable, fallback or failed readback');
+  }
   const newContext = browser.newContext.bind(browser);
   let pageId = 0;
   browser.newContext = async options => {
