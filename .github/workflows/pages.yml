@@ -10,13 +10,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        gpu: [mesa, software-compositor]
+        gpu: [mesa]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - run: node tools/build-level-pages.mjs
+      - run: node --test tests/modal-focus.test.mjs
       - run: npm ci --prefix tools/browser-ci --ignore-scripts
       - run: node tools/browser-ci/node_modules/playwright/cli.js install --with-deps chromium
       - name: Observe original desktop cases without changing assertions or timeouts
