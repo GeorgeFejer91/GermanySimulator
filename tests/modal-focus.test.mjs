@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createModalFocus} from '../modal-focus.js';
 
-function fixture(previousKind) {
+function fixture(previousKind,onChange=()=>{}) {
   const document={defaultView:{getComputedStyle:()=>({visibility:'visible'})},addEventListener(){}};
   function element(focusable=true){
     const attributes=new Map();
@@ -16,7 +16,7 @@ function fixture(previousKind) {
   document.activeElement={body,html,control:priorControl}[previousKind];
   const modal=element(),root={ownerDocument:document,children:[modal,restore]};
   modal.parentElement=root;modal.querySelectorAll=()=>[modalControl];
-  const focus=createModalFocus(root,{restoreTarget:()=>restore});
+  const focus=createModalFocus(root,{onChange,restoreTarget:()=>restore});
   return {document,priorControl,restore,modalControl,modal,focus};
 }
 
@@ -32,4 +32,12 @@ for(const previous of ['body','html'])test(`modal release restores a game contro
 test('modal release retains a visible previous control',()=>{
   const f=fixture('control');f.focus.sync(f.modal);f.focus.sync(null);
   assert.equal(f.document.activeElement,f.priorControl);
+});
+
+test('ownership notifications distinguish modal entry, switch and release',()=>{
+  const calls=[],f=fixture('control',next=>calls.push(next));
+  const second={...f.modal};f.modal.parentElement.children.push(second);
+  f.focus.sync(f.modal);f.focus.sync(f.modal);f.focus.sync(second);f.focus.sync(null);
+  assert.equal(calls.length,3);
+  assert.equal(calls[0],f.modal);assert.equal(calls[1],second);assert.equal(calls[2],null);
 });
