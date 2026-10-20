@@ -19,7 +19,7 @@ export function createModalFocus(root,{onChange=()=>{},restoreTarget=()=>null}={
   function sync(next){
     if(next===active){if(active&&!active.contains(document.activeElement))focusFirst();return}
     const wasActive=!!active;
-    if(!wasActive&&next)previous=document.activeElement;
+    if(!wasActive&&next){previous=document.activeElement;if(previous===document.body||previous===document.documentElement)previous=null}
     release();active=next;onChange();
     if(!active){
       const target=visible(previous)&&!previous.closest('[inert]')?previous:restoreTarget();
