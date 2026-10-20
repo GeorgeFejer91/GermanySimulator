@@ -9,9 +9,16 @@ globalThis.CharacterInteractions=(()=>{
  function plan(n,m,job){
   const from=n.touristFacing||'down',frames=[],count=m.walks[from].frames??8,phase=Math.min(count-1,Math.max(0,n.spriteFrame||0));
   const put=(p,role)=>frames.push({...p,role}),b=m.bridges;
-  for(let col=phase+1;col<count;col++)put(point(m.walks[from].row,col,Math.min(80,m.walks[from].frame_ms)),'settle');
-  if(from==='down')for(const col of b.down.stop_cols)put(point(b.down.row,col,b.down.frame_ms),'settle');
-  else for(const p of m.transitions[from+'-to-down'].frames.slice(0,-b.down.start_cols.length))put(p,'settle');
+  const settle=m.settles?.[from]?.[String(phase)];
+  if(settle){
+   put(point(m.walks[from].row,phase,m.walks[from].frame_ms),'settle-entry');
+   for(const p of settle.frames)put(p,'settle');
+   if(from!=='down')for(const p of m.transitions[from+'-to-down'].frames.slice(b[from].stop_cols.length,-b.down.start_cols.length))put(p,'settle');
+  }else{
+   for(let col=phase+1;col<count;col++)put(point(m.walks[from].row,col,Math.min(80,m.walks[from].frame_ms)),'settle');
+   if(from==='down')for(const col of b.down.stop_cols)put(point(b.down.row,col,b.down.frame_ms),'settle');
+   else for(const p of m.transitions[from+'-to-down'].frames.slice(0,-b.down.start_cols.length))put(p,'settle');
+  }
   const idle=m.interactions.neutral||m.interactions.states.idle,neutral=()=>put(point(idle.row,idle.col||0,120),'reaction');neutral();
   for(const name of job.names){
    if(name==='look'&&m.interactions.look){

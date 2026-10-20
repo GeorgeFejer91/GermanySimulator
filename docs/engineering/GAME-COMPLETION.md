@@ -16,6 +16,20 @@ The player, police, mission specials, interiors, archived Ede and the separately
 owned neighborhood story are outside this ambient cast. Merz audio has a separate
 active owner.
 
+Current Gisela increment: integrated MAIN V4 (192pinsf3e2dcde…) passes bounded
+Physics/Camera/general review, full2274/2274 Node checks and source/packed checks.
+She now has four-direction walking, phase-owned stops, paper presentation,
+moving mouths, an actual current-pose quiz portrait and her available exact own
+question recording. Quiz selection uses a nearby walking-time budget; sRGB
+portrait edges are recovered in linear light. Camera's three native functional
+sets and separate3/3 cleanup cases are accepted; the three earlier wrapped cases
+retain their late async-unload fixture FAILs in evidence. Full-world, physical
+Android, listening, natural random encounter and publication gates remain open.
+Current branch has two street-manifest motion families plus the two existing
+Sandales;38 other scoped identities remain standing-only. Mouth metadata alone
+does not establish available native audio or full speaking acceptance. The active
+42-character goal and milestones3–6 remain open.
+
 Ordered milestones and acceptance:
 
 1. [x] Inventory the actual cast, source art, runtime capabilities and owned
@@ -89,9 +103,17 @@ All10 staged payload paths retain exact reviewed bytes. Existing required wholew
 rows, physical Android/listening and the rest of the42-cast goal remain open.
 This is already-animated crowd-Irmgard; held stadt-Irmgard art is not promoted.
 
-Next selected work after the Irmgard checkpoint: finish the Gisela full walking/
-talking/gesture pilot, beginning with exact body/foot calibration and accepted
-full16 greeting adoption. Other resident, Hartmut and Horst candidates stay held.
+Local Irmgard checkpoint34c435b is preserved. Selected Gisela implementation plan:
+`docs/superpowers/plans/2026-10-20-gisela-ambient-animation.md`. Root source-reviewed
+184 exact encoded walking/bridge/turn cells across both variants. Four desktop sole
+contacts fit9.4units/cycle with.5pixel marking uncertainty; provisional9.5 remains
+pending native foot/cadence checks. Evidence is in gisela-body-calibration; marked
+measurements live with Gisela's source. No Gisela runtime adoption or new full-world
+acceptance has occurred. Assemble a16x14 source-only candidate next: preserve
+published standing/pivot150, integer-align candidate body by2desktop/1mobile pixels,
+append accepted full16paper gesture, discard unapproved diagnostic action rows and
+carry the matching own lip transforms. Other resident/Hartmut/Horst candidates stay
+held. All remaining cast work and release gates remain open.
 
 Initial baseline: 73/73 focused Node checks pass (street sprites, playback,
 pedestrians and recorded quiz segments). No new animation has been accepted.

@@ -4,6 +4,33 @@ Active owner and six milestones: GAME-COMPLETION.md, chat
 01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
 primary dirty checkout and separately owned Merz work remain preserved.
 
+Current integrated increment: Gisela V4, freeze192pinsf3e2dcde… at
+output/ambient-city-animation/gisela-integration-v3/frozen-candidate-v4.json.
+MAIN in this isolated branch includes her four-direction walk,64 owned phase
+stops, paper presentation and276 moving mouth fits. Quiz approaches use actual
+brisk walking and select nearby people within a shared walking-time budget,
+reserving two seconds for stops/turns. Far people retain their question. The live
+portrait samples the actual sprite/material/media state through the existing
+renderer; sRGB target pixels are unassociated in linear light before ImageData.
+
+FullV4 passes2274/2274 Node checks,0skips,186.44s; source assembly3PASS and packed
+compiler--checkPASS; skill bundles12/68files/48referencesPASS. Independent General
+and Physics V4 pass192before/afterpins. Physics rebinds264 exact-bound cases,
+maxarrival7.1s, plus navigation/pause/cleanup proofs to unchanged V3 bytes. Camera
+V4 accepts actual3profile current-pose portraits, quantization-limited GPU edges,
+own nativeQ24 playback, completion/return, staged VOICE cancel/newcue replay,
+fault/staticfallback and actual pagehide resource retirement. Its wrapped native
+suite retains3 late fixture FAILs from an async receipt lost during navigation;
+all preceding functional assertions passed. Separate synchronous same-origin
+pagehide cases pass3/3, closing that fixture gap; no blanket green claim is made
+for the retained failed wrapper. All failure histories stay in ignored reviews.
+
+The desktop30MiB single-family exception is recorded in For-AI/ASSET-POLICY.md;
+it does not admit the whole cast/cohort/device budget. Physical Android/listening,
+natural random encounters, inherited full-world C1–C5/X1 and publication remain
+open.38 other scoped identities remain standing-only. Historical preparation
+notes below describe predecessors, not the current accepted bounded increment.
+
 Local checkpoint4403afb contains the reviewed shared speech/mouth/movement core:
 eight source-bound standing mouth definitions, actual recorded segment energy,
 lazy optional delivery, native planted reactions, upright flat street paint and
@@ -70,9 +97,41 @@ fixture/readiness/range failures are retained. Final independent Camera visual r
 Evidence: output/ambient-city-animation/irmgard-mouths and
 reviews/irmgard-mouth-v1-{core,physics,camera}. No publication/fullworld acceptance.
 
-Next after this checkpoint: finish the Gisela walking/talking/gesture pilot from
-accepted sources, beginning with exact body/foot calibration and the accepted
-full16 greeting. Other body candidates stay held. Keep the42-character goal ACTIVE.
+Irmgard is preserved in local checkpoint34c435b. The goal remains ACTIVE.
+Selected next: Gisela walking/talking/paper-gesture integration. The scoped plan
+is docs/superpowers/plans/2026-10-20-gisela-ambient-animation.md; root implements,
+independent specialist/general reviewers remain read-only. No Gisela runtime
+activation has occurred. Other body candidates stay held.
+
+Source preparation now inspects184 exact Gisela movement cells (64walk+20bridge+
+8turn per desktop/mobile) beside published standing. All gait rows have16unique
+samples. Four marked stance contacts on exact desktopcf62820e… fit9.4gameunits/
+cycle with.5pixel marker uncertainty, supporting provisional9.5 for native testing.
+Measurements: assets/sprite-sources/street-speaker-motion/gisela-becker/
+walk-contact-measurements-v1.json. Evidence source-inspection-v1.json and
+assessment-v1.json live in output/ambient-city-animation/gisela-body-calibration.
+These are source/static checks, not native foot planting or ordered-motion proof.
+
+The source-only16x14 draft is assembled under gisela-integration-v2: all108
+selected body cells retain their exact paint after integer shift2desktop/1mobile;
+84 visible mouth fits and140 nulls preserve published standing and own profiles.
+Root inspected all84 source/zero/open cells at each size and dark open mouths.
+No main Gisela activation occurred. This draft lacks phase-specific stopping art.
+
+21October ruling: CharacterInteractions.plan ignored owned phase settles and
+advanced ordinary gait cells while the simulation held its root. A production
+regression failed on the first entry cell. The minimal preference for existing
+phase settles now passes33 affected motion/reaction checks, preserving legacy
+fallbacks. Source helpers gain an optional complete-limb displacement callback;
+their default pixels remain subject to exact existing-gait/neutral and serialized
+greeting replay checks. Gisela's dedicated stop candidate plants the swinging
+foot before lifting/recentering the previously loaded foot. An initial terminal
+shin compression failure is retained; the successor distributes the vertical
+movement through measured leg nodes. Bakes and source inspection remain pending
+under gisela-phase-stops-v1 and gisela-body-calibration. These are authoring-only
+changes, with no runtime body activation or new body/media clock. Next: finish
+and inspect all stop poses, assemble the revised bounded grid and own mouth fits,
+then packed delivery, real approach/quiz/media verification and independent reviews.
 
 # Final browser integration — 2026-10-19
 

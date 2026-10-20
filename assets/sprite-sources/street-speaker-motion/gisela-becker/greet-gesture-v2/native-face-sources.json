@@ -1,0 +1,290 @@
+{
+  "down": {
+    "input": {
+      "file": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+      "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74",
+      "dimensions": [
+        1448,
+        1086
+      ]
+    },
+    "centerPx": [
+      223.5,
+      156.0
+    ],
+    "axesPx": [
+      37.0,
+      6.0,
+      -1.6800000000000004,
+      10.360000000000001
+    ],
+    "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+    "contoursPx": {
+      "crease": [
+        [
+          205.0,
+          153.0
+        ],
+        [
+          214.493243,
+          153.0
+        ],
+        [
+          223.986486,
+          153.0
+        ],
+        [
+          233.144958,
+          155.064426
+        ],
+        [
+          242.0,
+          159.0
+        ]
+      ],
+      "open_upper": [
+        [
+          205.0,
+          153.0
+        ],
+        [
+          214.66612,
+          151.933926
+        ],
+        [
+          224.226593,
+          151.519342
+        ],
+        [
+          233.322637,
+          153.968739
+        ],
+        [
+          242.0,
+          159.0
+        ]
+      ],
+      "open_lower": [
+        [
+          205.0,
+          153.0
+        ],
+        [
+          213.963088,
+          156.269293
+        ],
+        [
+          223.250159,
+          157.540685
+        ],
+        [
+          232.600076,
+          158.424533
+        ],
+        [
+          242.0,
+          159.0
+        ]
+      ],
+      "source_upper": [
+        [
+          205.0,
+          153.0
+        ],
+        [
+          214.493243,
+          153.0
+        ],
+        [
+          223.986486,
+          153.0
+        ],
+        [
+          233.144958,
+          155.064426
+        ],
+        [
+          242.0,
+          159.0
+        ]
+      ],
+      "source_lower": [
+        [
+          205.0,
+          153.0
+        ],
+        [
+          214.493243,
+          153.0
+        ],
+        [
+          223.986486,
+          153.0
+        ],
+        [
+          233.144958,
+          155.064426
+        ],
+        [
+          242.0,
+          159.0
+        ]
+      ]
+    },
+    "width": [
+      0,
+      0
+    ],
+    "teeth": 0,
+    "fitEvidence": {
+      "status": "own-source pixel fit candidate; native and actual GPU review required",
+      "method": "Own painted crease/corners traced on enlarged coordinate pixels; source cavity boundaries traced separately where open. No other identity or pose supplies the crease.",
+      "observation": "Visible own closed lip line and attached corners.",
+      "horizontalStyle": "No lateral width deformation; preserves own measured corners and width. CPU previews use exactly widthFactor1."
+    }
+  },
+  "greet": {
+    "input": {
+      "file": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+      "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74",
+      "dimensions": [
+        1448,
+        1086
+      ]
+    },
+    "centerPx": [
+      211.5,
+      522.5
+    ],
+    "axesPx": [
+      37.0,
+      7.0,
+      -1.9600000000000002,
+      10.360000000000001
+    ],
+    "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+    "contoursPx": {
+      "crease": [
+        [
+          193.0,
+          519.0
+        ],
+        [
+          202.581081,
+          519.0
+        ],
+        [
+          212.152542,
+          519.050847
+        ],
+        [
+          221.16205,
+          522.072022
+        ],
+        [
+          230.0,
+          526.0
+        ]
+      ],
+      "open_upper": [
+        [
+          193.0,
+          519.0
+        ],
+        [
+          202.782771,
+          517.933926
+        ],
+        [
+          212.432667,
+          517.570189
+        ],
+        [
+          221.369342,
+          520.976335
+        ],
+        [
+          230.0,
+          526.0
+        ]
+      ],
+      "open_lower": [
+        [
+          193.0,
+          519.0
+        ],
+        [
+          201.962566,
+          522.269293
+        ],
+        [
+          211.293494,
+          523.591533
+        ],
+        [
+          220.526354,
+          525.432129
+        ],
+        [
+          230.0,
+          526.0
+        ]
+      ],
+      "source_upper": [
+        [
+          193.0,
+          519.0
+        ],
+        [
+          202.581081,
+          519.0
+        ],
+        [
+          212.152542,
+          519.050847
+        ],
+        [
+          221.16205,
+          522.072022
+        ],
+        [
+          230.0,
+          526.0
+        ]
+      ],
+      "source_lower": [
+        [
+          193.0,
+          519.0
+        ],
+        [
+          202.581081,
+          519.0
+        ],
+        [
+          212.152542,
+          519.050847
+        ],
+        [
+          221.16205,
+          522.072022
+        ],
+        [
+          230.0,
+          526.0
+        ]
+      ]
+    },
+    "width": [
+      0,
+      0
+    ],
+    "teeth": 0,
+    "fitEvidence": {
+      "status": "own-source pixel fit candidate; native and actual GPU review required",
+      "method": "Own painted crease/corners traced on enlarged coordinate pixels; source cavity boundaries traced separately where open. No other identity or pose supplies the crease.",
+      "observation": "Visible own closed lip line and attached corners.",
+      "horizontalStyle": "No lateral width deformation; preserves own measured corners and width. CPU previews use exactly widthFactor1."
+    }
+  }
+}

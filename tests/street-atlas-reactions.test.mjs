@@ -53,8 +53,14 @@ test('an admitted atlas can play real planner reactions from neutral without rep
 test('walking settles, reacts and resumes its heading while the accepted-step observer holds root and gait distance',async()=>{
  const f=await ready();try{
   f.step(1,0);finishTurn(f);assert(f.step(4,0));f.tick();const distance=info(f.actor).distance,gait=info(f.actor).atlasMotion.gaitDistance,root=[f.actor.x,f.actor.y];
+  const entry=f.view.inspect().pose.slot;
   assert(S.requestStreetReaction(f.actor,'greet',{token:{}}));const slots=[];
-  for(let i=0;S.hasStreetReaction(f.actor);i++){assert(i<1500);assert.equal(f.step(-1,0),false);slots.push(f.tick().slot);assert.equal(info(f.actor).distance,distance);assert.deepEqual([f.actor.x,f.actor.y],root);if(S.hasStreetReaction(f.actor))assert.equal(info(f.actor).atlasMotion.gaitDistance,gait)}
+  for(let i=0;S.hasStreetReaction(f.actor);i++){
+   assert(i<1500);assert.equal(f.step(-1,0),false);const pose=f.tick();slots.push(pose.slot);
+   if(i===0)assert.equal(pose.slot,entry,'held reaction retains the exact gait entry');
+   if(pose.clip==='settle')assert(!Object.values(f.p.atlasMotion.walks).some(w=>Math.floor(pose.slot/f.p.grid[0])===w.row&&pose.slot%f.p.grid[0]<(w.frames??8)),'settling uses dedicated planted cells');
+   assert.equal(info(f.actor).distance,distance);assert.deepEqual([f.actor.x,f.actor.y],root);if(S.hasStreetReaction(f.actor))assert.equal(info(f.actor).atlasMotion.gaitDistance,gait)
+  }
   assert.equal(info(f.actor).atlasMotion.facing,'right');assert.equal(f.view.inspect().pose.holdPosition,false);assert(f.step(1,0));f.tick();assert.equal(info(f.actor).distance,distance+1);
  }finally{f.view.dispose()}
 });

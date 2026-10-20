@@ -1,0 +1,51 @@
+{
+  "source": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+  "sourceSha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74",
+  "sharedScale": 1.084010840108401,
+  "workingBaseline": 472,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    148
+  ],
+  "figureHeight": 136,
+  "registrations": {
+    "down": {
+      "componentBounds": [
+        86,
+        8,
+        335,
+        374
+      ],
+      "sourcePivot": [
+        207.0,
+        374
+      ],
+      "scale": 1.084010840108401,
+      "origin": [
+        31.60975609756099,
+        66.57994579945802
+      ]
+    },
+    "greet": {
+      "componentBounds": [
+        49,
+        382,
+        333,
+        729
+      ],
+      "sourcePivot": [
+        205.0,
+        729
+      ],
+      "scale": 1.084010840108401,
+      "origin": [
+        33.7777777777778,
+        -318.2439024390243
+      ]
+    }
+  }
+}

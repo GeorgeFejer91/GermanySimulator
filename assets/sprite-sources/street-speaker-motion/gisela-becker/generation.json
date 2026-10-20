@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved; source inspection and fitting required",
+  "character": "quiz-gisela-becker",
+  "tool": "image_gen.imagegen built-in",
+  "toolOutput": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a159fb-e568-79f3-967b-f4749d5266ef\\exec-29db3370-5bc3-4248-ad97-de871940a52a.png",
+  "reference": {
+    "file": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+    "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74",
+    "role": "identity/style/costume/props; source remains unchanged"
+  },
+  "output": {
+    "file": "assets/sprite-sources/street-speaker-motion/gisela-becker/turns-and-leg-components-candidate.png",
+    "sha256": "91cbd522fb373bbc425a76a8c88d0a75f20d44c09ef7712f62c97dbb77552749",
+    "size": [
+      1448,
+      1086
+    ]
+  },
+  "layout": [
+    "front-right quarter",
+    "rear-right quarter",
+    "rear-left quarter",
+    "front-left quarter",
+    "right near leg",
+    "right far leg",
+    "left near leg",
+    "left far leg",
+    "front viewer-left leg",
+    "front viewer-right leg",
+    "rear viewer-left leg",
+    "rear viewer-right leg"
+  ],
+  "observations": [
+    "Whole figures and eight complete lower-limb layers returned. Exact source component bounds must be measured; no equal slicing.",
+    "Top second view exposes more profile face than intended rear-right quarter. Quarter-turn identity and ordering remain HOLD until fitted side-by-side against original cardinals.",
+    "No source movement, lip fit, exact encoded motion or runtime acceptance is claimed."
+  ],
+  "prompt": {
+    "file": "assets/sprite-sources/street-speaker-motion/gisela-becker/supplement-prompt.txt",
+    "sha256": "172cdcea54eb494bd55407476951afabe4fb6cf2d5ee664dedef312454f659e4"
+  },
+  "turnRepair": {
+    "file": "assets/sprite-sources/street-speaker-motion/gisela-becker/quarter-turns-repair-candidate.png",
+    "sha256": "8935b06a9b504f26703710c50b711607f8f1fb1341faa2ebf5bde243d3b8be8f",
+    "prompt": "assets/sprite-sources/street-speaker-motion/gisela-becker/turn-repair-prompt.txt",
+    "promptSha256": "43e622e0609ebcc9370506b7dd9cd4ea23eabcd182accc44cf8f4a19e8255478",
+    "toolOutput": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a159fb-e568-79f3-967b-f4749d5266ef\\exec-84204c4d-2800-48f2-af11-914126f7a81e.png",
+    "status": "partial candidate; never automaticadoption",
+    "observations": [
+      "Second pose gives improved rear-right body/head angle and correct paper-right/book-left hand ownership. Final fitted comparison still required.",
+      "Third pose reverses paper/book hand ownership relative to original rear and is REJECTED; use original supplement rear-left candidate only if original angle passes ordered review, or generate a targeted replacement.",
+      "Transparent area contains dark brown hidden RGB at alpha0. Preserve raw source; final premultiplied export must clear RGB at alpha0 using existing builder."
+    ]
+  }
+}

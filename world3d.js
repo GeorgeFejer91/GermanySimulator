@@ -1,3 +1,4 @@
+import {createStreetPortraitDisplay} from './street-character-portrait.js';
 import {modelLoaderWithSignal,loadTextureImage} from './asset-loaders.js?v=20261020-bounded-assets';
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
 import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261020-bounded-assets';
@@ -1450,6 +1451,13 @@ function showRendererFailure(error){
     });
     return ready;
   }
+  const quizPortrait=createStreetPortraitDisplay({THREE:T,renderer,frame:document.querySelector(".quiz-portrait-frame"),image:document.getElementById("quiz-portrait")});
+  function syncQuizPortrait(now){
+    const actor=bridge.getQuizActor?.(),hud=bridge.getHUDState?.(),view=actor&&npcMeshes.get(actor)?.userData.streetPaintView;
+    const mesh=view?.actor===actor&&view.paint.inspect().loaded?view.host.children.find(node=>node.isMesh&&node.material?.map?.image):null;
+    if(document.hidden||hud?.paused||!mesh){quizPortrait.clear();return}
+    quizPortrait.update(mesh,actor,now/1000);
+  }
   function displayedStreetRoot(root){const view=root.userData.streetPaintView;return view?.host.visible?view.host:root}
   function streetPlayerSightlineTargets(){
     const view=playerMesh.userData.streetPaintView;
@@ -1497,6 +1505,7 @@ function showRendererFailure(error){
     for(const material of q.userData.ownedMaterials||[])material.dispose();
   }
   addEventListener("pagehide",event=>{
+    quizPortrait.clear();
     releaseStreetPaintViews();
     for(const [actor,mesh] of npcMeshes)mesh.userData.atlasMouth?.sync(mesh.userData.grid,actor,null,true);
     if(event.persisted)return;
@@ -2260,7 +2269,7 @@ function showRendererFailure(error){
     // Direct office entry skipped city GLBs; its existing procedural buildings make the exit playable immediately.
     bridge.buildings.forEach(building);buildingSlots.forEach(mountBuildingDoor);
   }
-  window.Germany3D={ready:true,npcSpriteRequired,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,requestStreetReaction,hasStreetReaction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,npcSpriteRequired,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,get quizPortrait(){return quizPortrait.inspect()},requestStreetReaction,hasStreetReaction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   leaveAmtDirectMode,enterJobcenter,leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},
   enterBuilding:(id,done)=>buildingLevels.enter(id,done,true),leaveBuilding:(id,config)=>buildingLevels.leave(id,config),
   cancelLevelTransition:id=>buildingLevels.cancel(id),
@@ -2281,6 +2290,7 @@ function showRendererFailure(error){
   },sync(){
     const presentationNow=performance.now(),presentationDt=(presentationNow-previousPresentationTime)/1000;previousPresentationTime=presentationNow;
     if(!cityModelsEnabled()||jobcenter.active||buildingLevels.office)releaseStreetPaintViews();
+    if(!bridge.getQuizActor?.()||document.hidden||window.GermanyHUD?.paused||buildingLevels.active||buildingLevels.office||jobcenter.active||window.BuergeramtLevel?.active||amtDirectRoute)quizPortrait.clear();
     if(buildingLevels.render()){showMissionPointer(false);previousOcclusionTime=presentationNow;return}
     if(jobcenter.render()){showMissionPointer(false);previousOcclusionTime=performance.now();return}
     if(buildingLevels.active)return;
@@ -2352,6 +2362,7 @@ function showRendererFailure(error){
     }
     updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion(undefined,streetPlayerSightlineTargets());updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
     if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
+    syncQuizPortrait(now);
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

@@ -179,7 +179,7 @@ def registered(person, direction):
     return image, lm, rigid
 
 
-def motion(person,direction,count=COUNT,strength=1,phases=None,step_width=None):
+def motion(person,direction,count=COUNT,strength=1,phases=None,step_width=None,limb_pose=None):
     """Move complete source legs; retain exact original head, hands and prop.
 
     A supplemental contact painting can expose cloth hidden in the cardinal
@@ -275,6 +275,7 @@ def motion(person,direction,count=COUNT,strength=1,phases=None,step_width=None):
                 offsets.append(offsets[-1])
                 dx=[a+b for a,b in zip(offsets,[0,sway,sway,knee*view.get('hem_follow',.35)+sway*.7,knee+sway*.25,foot,foot])]
                 dy=[bob,bob,bob,bob-lift*.15,bob-lift*.4,-lift,-lift]
+                if limb_pose is not None:dx,dy=limb_pose(side,ys,dx,dy)
                 moves.append((ys,dx,dy,paint.warp_layer(layers[side],ys,dx,dy)))
             canvas=Image.new('RGBA',(512,512));foreground=view['foreground']
             for side in [1-foreground,foreground]:canvas.alpha_composite(moves[side][3])
@@ -306,7 +307,7 @@ def motion(person,direction,count=COUNT,strength=1,phases=None,step_width=None):
     else:
         result,records=paint.animate(source,lm,TRAVEL[index],count=count,
             foreground=view['foreground'],strength=strength,
-            phases=phases,rigid_mask=rigid)
+            phases=phases,rigid_mask=rigid,limb_pose=limb_pose)
     overlay=person['views'][direction].get('originalUpper')
     if not overlay:return result,records
     raw=Image.open(ROOT/person['source']).convert('RGBA')
