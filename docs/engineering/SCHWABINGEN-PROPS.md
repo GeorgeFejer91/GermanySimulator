@@ -1,0 +1,37 @@
+# Frau Schwabingen’s dialogue props
+
+Goal: referenced products and props become visible game objects during her existing interactions, including a blackbird flying into the hedge scene.
+
+Design: keep the accepted painted character and her authored presenting arm. A bottle, scraper, laminated rota and calendar follow that hand through its existing 24-frame action; hold the raised hand while showing the object. A leaf and a blackbird/nest accompany their own lines. These are held/airborne decorations, never new ground obstacles. No dialogue, recordings, mission gates, movement or camera behavior changes.
+
+Source: isolated `schwabingen-scene-props` worktree created from `origin/main` at `1c6be7e`, then rebased onto `6efbdcc`. The dirty primary is untouched. This document owns this task’s plan and evidence; the older completion hold is outside its scope. The rebase preserves the newer neighbor poses, Heiko’s listener notebook and encounter behavior, retaining both upstream pause/gesture guards and the new prop cue guards.
+
+Writable scope: `game.js` (stable authored cue ID and caption time), `neighbor-sprites.js` (presentation pose and ownership), new `schwabingen-props.js`, focused tests/browser scenario, the existing voice-coverage fixture, Pages regression selection, this document and the neighbor guide. No new dependencies or downloaded assets. Preserve the existing renderer, sprite source/export, speech broker, mission state and exact DE/EN text.
+
+## Plan and acceptance
+
+- [x] Add a failing production-facing check for cue matching, real speech/caption clocks, pause, cancellation/replay and actor ownership.
+- [x] Add stable authored cue IDs to the existing dialogue bridge and implement bounded props in the existing sprite lifetime. Attach held objects to the registered hand; retain ordinary depth and fallback behavior. Lazily allocate and dispose owned geometry/materials.
+- [x] Verify actual production dialogue triggers and rendered objects on desktop, Android portrait/landscape emulation, reduced motion and missing character textures. Check skip, cancellation, replay, pause and resource cleanup. Record timing/transfer/resource costs separately from visual quality.
+- [x] Freeze the candidate and obtain independent Physics and Camera/Scale reviews. Applicable rows: P1/P2 (held/airborne decoration exemption, unchanged routes), C1–C5 (depth, hand/hedge placement and relative scale), X1 (affected browser profiles); P3–P7 are unchanged.
+- [ ] Run relevant regression/build gates, review exact diff, publish the validated change to main, verify root and compatibility URL and update this evidence.
+
+## Causal contract
+
+At an arrived tour stop, the existing speech handler accepts the authored line and publishes its stable cue ID, attempt token and owned clock. The sprite consumer selects that line’s object, uses the same clock to present it, and clears it when the speaker/cue is replaced or interaction ends. An unrelated speaker, walking line, unstarted speech or stale cue cannot create an object. Caption fallback has the same sequence using the existing readable-line clock. Pause/hidden time freezes it; cancellation removes it immediately.
+
+## Evidence
+
+Pre-integration candidate: focused tests 8/8 and relevant regression selection 54/54 PASS. Earlier JWD route regression selection passed; the independent reviewer’s original-candidate selection passed 55/55. `output/schwabingen-props/browser-7/report.json` binds the frozen source hashes to five completed silent profiles with zero page errors. Each includes the production recorded bottle and caption-only perched bird through the real speech handler; arrived stop, mission and listening position are disclosed seeds. The fixture also checks all six object kinds, pause, captions, replay, cancellation, ordinary opaque-wall occlusion, ten warmed repeats and exact resource restoration. It does not prove the prior mission/walking chain.
+
+Physics independently passed 36 CPU cases across six kinds, three frame steps and painted/procedural modes. Actor state stayed unchanged; moving suppresses presentation. Camera independently accepted the held proportions, hand registration, ordinary depth and supplied final desktop/mobile/reduced/fallback images. Its initial floating-nest finding was fixed using the actual hedge height: final nest spans y=0.7256–0.8144 across hedge top 0.75886, with bird feet at 0.78. Existing collision routes, camera, building fades and landmark proportions are unchanged; broad unchanged matrix rows are outside this change.
+
+New objects allocate lazily, add no textures/downloaded assets, retain resources across cues and dispose once with the actor. Fixture peak after all kinds: 49 geometries/2 textures including floor, wall and existing character atlas; teardown exactly restores 2/1. The most complex visible prop adds 13 draw calls. Three’s renderer/floor owns one baseline texture; an initial incorrect zero-texture fixture expectation was replaced with an executed exact baseline comparison, retaining both failures. A later world setup failure correctly enforced mission 1, and one startup observation timed out; neither was accepted as a passing run. Successor diagnostics retain failure screenshots/state/network details.
+
+Integrated candidate: relevant regression selection 59/59 PASS. A test’s former raw-energy equality was replaced with a comparison of the prop/no-prop production speech response after upstream introduced mouth-energy normalization; speech behavior is preserved. `integrated-browser/report.json` binds the combined runtime hashes to five complete profiles, ten production scenes, zero page errors, and exact disposal baselines. Both independent reviewers revalidated the combined source, ran 26/26 focused checks and accepted the refreshed images. Build produced all 31 direct-level entries and aliases; six city delivery variants retain exact RGBA and budget validation.
+
+The full 2,204-test run completed with 2,203 passing and one voice-coverage fixture failure: its extracted speech handler lacked the newly read `props` global. Supplying canonical `jwd-gardens.js` data and adding assertions for every cue ID/target and all three bird hedge heights repaired that harness without changing runtime or weakening assertions. The resulting coverage+prop selection passed 12/12, independently repeated by both reviewers. The full selection was not repeated after this test-only repair; unchanged passing tests retain their original receipt.
+
+Six hardware Chromium cold runs PASS the 18 MB transfer, deferred-resource, title-cadence, buffer, console and input gates. Desktop transfer was 16,056,744 bytes in each run; Android portrait emulation 15,670,326 bytes each. All six accepted nine inputs and had zero page errors. Input p95 median/range: desktop 39.7 ms (35.7–42.8), emulation 28.4 ms (21.8–28.9). Active sync-interval p95 median/range: desktop 34.9 ms (34.8–77.2), emulation 28.9 ms (27.8–29.0). These root-start measurements do not establish a speedup, continuous rendered-frame/GPU timing or physical-device performance. The 7,771-byte prop module adds no texture/media downloads; new geometry remains cue-lazy.
+
+Physical Android (no local ADB tool available), natural full mission traversal and perceptual listening are NOT RUN. Browser emulation and silent recorded-media state checks do not establish those claims. Publication and live verification remain pending.

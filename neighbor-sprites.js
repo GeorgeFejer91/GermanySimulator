@@ -1,4 +1,5 @@
 import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
+import {schwabingenPropFrame,createSchwabingenProps} from './schwabingen-props.js?v=20261020-dialogue-props';
 const NEIGHBOR_PAINT={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'};
 const FRAMES=32,CELL_WIDTH=128,CELL_HEIGHT=192,COLUMNS=16,ROWS=16,PIVOT=180;
 const CLIP_OFFSETS=[0,32,64,96,128,136,152,160,176,184,208,232];
@@ -73,6 +74,7 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   const advancing=running&&!(actionOwned&&dialogue.paused);
   if(!advancing&&playback.pose&&active===playback.active&&talking===playback.pose.talking&&
      playback.gesture===actor.jwdGesture&&playback.actionOwned===actionOwned&&
+     playback.propCueId===dialogue?.cueId&&playback.propCueToken===dialogue?.cueToken&&
      (!talking||playback.cueToken===dialogue.cueToken))return playback.pose;
   if(advancing){playback.distance=(playback.distance||0)+distance;playback.time=(playback.time||0)+dt;playback.age=(playback.age||0)+dt}
   if(distance>.001){
@@ -81,6 +83,8 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   // jwdMoving is simulation-owned accepted displacement, never desired speed.
   // Speech owns its lips, not the root or distance-driven walk phase.
   const moving=advancing&&(actor.jwdMoving>.001||distance>.001);
+  const prop=schwabingenPropFrame(actor,playback.props||(playback.props={}),moving?null:dialogue,reducedMotion,running);
+  playback.propCueId=dialogue?.cueId;playback.propCueToken=dialogue?.cueToken;
   const gesture=Object.hasOwn(GESTURES,actor.jwdGesture)?actor.jwdGesture:null;
   const gestureAge=Math.max(0,Number(actor.jwdGestureAge)||0),gestureDuration=Math.max(.1,Number(actor.jwdGestureDuration)||1.4);
   const writing=actor.jwdRole==='parent'&&actor.jwdGesture==='notebook-write'&&(active||listenerWriting);
@@ -97,6 +101,7 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
     playback.mouthFrame=0;playback.mouthOpen=0;playback.cueToken=null;
   }
   if(moving)enterState(playback,'walk');
+  else if(prop?.held)enterState(playback,'present-prop');
   else if(notebook)enterState(playback,'notebook');
   else if(gesturing)enterState(playback,gesture);
   else if(talking)enterState(playback,'talk');
@@ -113,6 +118,7 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   const state=playback.state;
   let row=4,frame=reducedMotion?0:Math.floor((playback.time||0)*4)%8;
   if(state==='walk'){row=playback.row||0;frame=Math.floor((playback.distance||0)/(DISTANCE_PER_CYCLE[actor.jwdRole]||16.941176470588236)*FRAMES)%FRAMES}
+  else if(prop?.held){row=9;frame=prop.frame}
   else if(notebook){
     if(writing){const age=dialogue.mediaDuration>0?dialogue.mediaTime:gestureAge;row=14;frame=reducedMotion?8:4+Math.floor(age*8)%12}
     else{
@@ -138,13 +144,14 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   else if(state==='settle'){row=4;frame=0}
   if(ENTRY[state]&&state!=='settle'&&playback.age>=ENTRY[state])playback.terminalShown=true;
   const pose={row,frame,state,moving,talking,cueToken:playback.cueToken,mouthOpen:talking?playback.mouthOpen||0:0,
-    visible:true};
+    visible:true,prop};
   playback.pose=pose;return pose;
 }
 
 export function createNeighborSprite(T,actor,host,queueAsset,camera){
   const name=NEIGHBOR_PAINT[actor.jwdRole];if(!name)return null;
   const owner={retired:false,controller:new AbortController()},playback={},fallback=host.children.slice();
+  const props=actor.jwdRole==='swabian'?createSchwabingenProps(T,actor,host,camera):null;
   let sprite=null,texture=null,standing=null,lastTime=null,lastPose=null,mouthUniforms=null,lastMirrored=false,settled=false,failed=false;
   for(const mesh of fallback)mesh.visible=true;
   const cameraRight=T.Vector3?new T.Vector3(1,0,0):null;
@@ -200,6 +207,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const dt=lastTime==null?0:Math.min(.1,Math.max(0,now-lastTime));lastTime=now;
       const running=!!hud?.started&&!hud.paused&&!document.hidden&&(!hud.busy||dialogue?.id===actor.id);
       const pose=neighborFrame(actor,playback,dialogue,dt,running,reducedMotion);lastPose=pose;
+      props?.sync(pose.prop,!!sprite);
       for(const mesh of fallback)mesh.visible=!sprite&&!standing&&pose.visible;
       if(standing){standing.visible=!sprite;standing.quaternion.copy(host.quaternion).invert().multiply(camera.quaternion);const pivot=standing.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);standing.position.set(0,pivot,0).applyQuaternion(standing.quaternion)}
       if(!sprite)return;
@@ -225,8 +233,8 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
     },
     restore(){for(const mesh of fallback)mesh.visible=!sprite&&!standing},
     inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,fallback:fallback.some(mesh=>mesh.visible),visible:!!sprite?.visible||!!standing?.visible||fallback.some(mesh=>mesh.visible),row:lastPose?.row??0,frame:lastPose?.frame??0,
-      state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,
+      state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,props:props?.inspect()||null,
       frames:lastPose?.row>=12?16:CLIP_COUNTS[lastPose?.row??4],mouthProfile:lastPose?neighborMouthProfile(actor,lastPose):null,height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
-    dispose(){owner.retired=true;owner.controller.abort();texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
+    dispose(){props?.dispose();owner.retired=true;owner.controller.abort();texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
   };
 }
