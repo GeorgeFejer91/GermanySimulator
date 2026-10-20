@@ -1,5 +1,5 @@
 import {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale} from './assets/vendor/pretext/dist/layout.js';
-import {createModalFocus} from './modal-focus.js?v=20261020-keyboard-access';
+import {createModalFocus} from './modal-focus.js?v=20261020-modal-focus-restore';
 
 const byId=id=>document.getElementById(id),file=byId('case-file'),fax=byId('mission-fax'),rail=byId('city-status'),toggle=byId('file-toggle'),notices=byId('city-notices');
 const subtitles=byId('subtitle-toggle'),subtitleAnchor=document.createComment('subtitle control position');subtitles.before(subtitleAnchor);
