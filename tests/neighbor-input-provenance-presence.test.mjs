@@ -63,6 +63,12 @@ const expectedVariants=[
  {"clipId":"heiko-story-36","sha256":"6793a4e0724db90702497c5da9412104292632ec8876045cb934e28000694455","whole":{},"parts":[{"index":0,"sourceStart":0,"sourceEnd":77,"text":"Ach, Sie möchten schon … die Sache mit Ihrem Einzug klären Sie dann erst, ja?","sourceSha256":"a077c79a501ef255a5e0430e137d81987ffeacc48ed9d3b3f24e412e4c6997cc","encodedSha256":"8b760e71704650e8097283d2ec7e600851d6603955bfb38aea5d5cf2a1a3f2ca","fields":{}},{"index":1,"sourceStart":78,"sourceEnd":185,"text":"Ich sage Ihnen das nur, damit wir nachher nicht alles zweimal … Wir haben ja noch Zeit, uns kennenzulernen.","sourceSha256":"c3cad61a2ebc6f08763f2488a3addb571baa79fa3351d56460c685c12359bcb5","encodedSha256":"ce8c833fe906633243027c4886e4dd2e89e776c34e23f711aa10ebce30061078","fields":{"referenceConditioning":literalReference}},{"index":2,"sourceStart":186,"sourceEnd":213,"text":"Sie wissen ja, wie das ist.","sourceSha256":"efd7d0b9ec7063266387a2ebd57b856566b88f28f66f6585050d8ef9c5dc4238","encodedSha256":"c3bdc1e492a6278a9b5bc2ab6d67dab690cc50c85b06036d3713b25d378462b8","fields":{}}]}
 ];
 
+expectedVariants.push(
+ {clipId:'heiko-story-37',sha256:'c5f3cfe39cc04b368399f5ae5ec030e397c3aa15297f0d144bfce5e245178e06',whole:{},parts:[]},
+ {clipId:'heiko-story-38',sha256:'5706ddf36242f170d0a8e597e86438c00aa0844095230bbe781f000978db115b',whole:{},parts:[]},
+ {clipId:'heiko-story-39',sha256:'9d180c392df1dcc00feb823bbbce1886aed710121df31539aafb2b81d91f2a36',whole:{},parts:[]},
+ {clipId:'heiko-story-40',sha256:'848805174b5f1d9c6831d7ff25e0ea8bde56cc3b5b582a28553487163ff26464',whole:{},parts:[]}
+);
 const provenanceFields=['referenceConditioning','actualInferenceText','actualInferenceSha256','canonicalSourceSha256','renderNormalizationPolicy'];
 const inferenceFields=provenanceFields.slice(1);
 const sha=text=>createHash('sha256').update(text).digest('hex');
