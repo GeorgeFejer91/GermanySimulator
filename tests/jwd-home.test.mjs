@@ -435,3 +435,28 @@ test('unfinished neighbor chapter keeps police disabled after leaving home; only
  h.jwdState.met.add('jwd-parent');h.jwdState.met.add('jwd-watcher');h.updateJwd(.025);assert.equal(h.state.neighborLevel,true,'two introductions are insufficient');
  h.jwdState.met.add('jwd-swabian');h.updateJwd(.025);assert.equal(h.state.neighborLevel,false);assert.deepEqual(transitions,[false]);
 });
+
+
+test('authored Heiko checklist owns notebook gestures and cannot credit an unfinished welcome',()=>{
+ const h=harness(true);h.awardAnmeldung();h.jwdState.visited=true;h.state.mission=1;
+ const actor=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(actor);h.finish();
+ const seen=[];
+ for(let i=0;i<6000&&h.jwdState.tour;i++){
+  const t=h.jwdState.tour;
+  if(h.state.dialogue){
+   const line=t.script.stops[t.stop]?.lines[t.line];
+   if(line?.gesture==='notebook'&&h.dialogue.lines[0]===line.de){
+    assert.equal(h.state.characterSpeaker,actor);assert.equal(actor.jwdGesture,'notebook');
+    assert.ok(actor.jwdGestureDuration>=3);seen.push(line.id);
+    assert.equal(h.jwdState.met.has(actor.id),false);
+   }
+   h.finish();continue;
+  }
+  followGuide(h,t);h.updateJwd(1/30);
+ }
+ assert.ok(seen.includes('heiko-notebook-welcome'));
+ assert.ok(seen.includes('heiko-notebook-winter'));
+ assert.ok(seen.includes('heiko-notebook-hedge'));
+ assert.ok(seen.includes('heiko-notebook-close'));
+ assert.equal(h.jwdState.met.has(actor.id),true);
+});

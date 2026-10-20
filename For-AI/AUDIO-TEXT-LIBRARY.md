@@ -1,5 +1,13 @@
 # Speech catalog and subtitle authority
 
+Heiko’s notepad welcome adds four owned German/English pairs, appended as
+`heiko-story-37`–`40` without renumbering earlier clips. All four selected-profile
+recordings pass the existing final-MP3 word/identity/energy gates. The four active
+neighbors now have 114 exact owned bilingual sources and 114 recording defaults.
+Initial winter takes omitted a word and stayed private; a newly authored clearer
+sentence received its own fresh, exact take. No ASR rule was relaxed or old
+recording attached to changed words. Listening is NOT RUN.
+
 On 20 October 2026 the user supplied six `GS Merz` MP3s: five additional
 speeches and a replacement `merz-gruene-linke-spinner` take. Merz now owns
 16 exact German/English pairs. `assets/voices/merz/manifest.json` records their

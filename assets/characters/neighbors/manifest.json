@@ -1,6 +1,6 @@
 {
   "heiko": {
-    "sha256": "a9f1ac7e1efecfd0e827094710e47fc39e0749ac02b246dbc271d40e8c254229",
+    "sha256": "24c452f3eb96bf148310fb51a7fccfbafe1da1a73002fb4d7c22b3be57ca89d5",
     "rows": [
       "down",
       "right",
@@ -13,12 +13,16 @@
       "look",
       "point",
       "call",
-      "work"
+      "work",
+      "notebook-take",
+      "notebook-read",
+      "notebook-write",
+      "notebook-put"
     ],
     "frames": 32,
     "grid": [
       16,
-      16
+      20
     ],
     "clips": {
       "down": {
@@ -68,6 +72,22 @@
       "work": {
         "offset": 232,
         "count": 24
+      },
+      "notebook-take": {
+        "offset": 256,
+        "count": 16
+      },
+      "notebook-read": {
+        "offset": 272,
+        "count": 16
+      },
+      "notebook-write": {
+        "offset": 288,
+        "count": 16
+      },
+      "notebook-put": {
+        "offset": 304,
+        "count": 16
       }
     },
     "mouthProfile": {
@@ -103,10 +123,10 @@
     "figureWorldHeight": 1.6,
     "distancePerCycle": 16.941176470588236,
     "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
-    "bytes": 1297390,
-    "mobileBytes": 449506,
-    "decodedRgbaBytes": 25165824,
-    "mobileDecodedRgbaBytes": 6291456,
+    "bytes": 1611252,
+    "mobileBytes": 548346,
+    "decodedRgbaBytes": 31457280,
+    "mobileDecodedRgbaBytes": 7864320,
     "encodedFrameChecks": [
       {
         "variant": "desktop",
@@ -275,8 +295,74 @@
         "distinctDecodedFrames": 24,
         "maxChange": 0.0025947389658540487,
         "seamChange": 0.002120725577697158
+      },
+      {
+        "variant": "desktop",
+        "row": 12,
+        "distinctDecodedFrames": 7,
+        "maxChange": 0.05226806178689003,
+        "seamChange": 0.05226806178689003
+      },
+      {
+        "variant": "desktop",
+        "row": 13,
+        "distinctDecodedFrames": 9,
+        "maxChange": 0.0032150493934750557,
+        "seamChange": 0.0032150493934750557
+      },
+      {
+        "variant": "desktop",
+        "row": 14,
+        "distinctDecodedFrames": 5,
+        "maxChange": 0.05329011008143425,
+        "seamChange": 0.030707107856869698
+      },
+      {
+        "variant": "desktop",
+        "row": 15,
+        "distinctDecodedFrames": 6,
+        "maxChange": 0.05895574018359184,
+        "seamChange": 0.05895574018359184
+      },
+      {
+        "variant": "-mobile",
+        "row": 12,
+        "distinctDecodedFrames": 7,
+        "maxChange": 0.051363974809646606,
+        "seamChange": 0.051363974809646606
+      },
+      {
+        "variant": "-mobile",
+        "row": 13,
+        "distinctDecodedFrames": 9,
+        "maxChange": 0.0025994256138801575,
+        "seamChange": 0.0025994256138801575
+      },
+      {
+        "variant": "-mobile",
+        "row": 14,
+        "distinctDecodedFrames": 5,
+        "maxChange": 0.05207402631640434,
+        "seamChange": 0.029457494616508484
+      },
+      {
+        "variant": "-mobile",
+        "row": 15,
+        "distinctDecodedFrames": 7,
+        "maxChange": 0.05797355994582176,
+        "seamChange": 0.05797355994582176
       }
-    ]
+    ],
+    "notebook": {
+      "source": "assets/sprite-sources/neighbors/heiko-notebook-keys.png",
+      "sourceSha256": "556103fee93ea763d50968a627a806b1426d677669b6f8457511761322510259",
+      "encodedSamplesPerClip": 16,
+      "drawnTakePoses": 6,
+      "drawnWritePoses": 4,
+      "notebookHand": "left",
+      "pencilHand": "right",
+      "method": "explicit painted action keys and holds; continuous reading head field; fixed original head and legs"
+    }
   },
   "inga": {
     "sha256": "6c6e3f8b2923b08062ca53852c713d6263f58a1d0f2af7318d0b0192a4f86b27",

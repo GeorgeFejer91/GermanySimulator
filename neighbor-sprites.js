@@ -3,10 +3,37 @@ const NEIGHBOR_PAINT={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:
 const FRAMES=32,CELL_WIDTH=128,CELL_HEIGHT=192,COLUMNS=16,ROWS=16,PIVOT=180;
 const CLIP_OFFSETS=[0,32,64,96,128,136,152,160,176,184,208,232];
 const CLIP_COUNTS=[32,32,32,32,8,16,8,16,8,24,24,24];
+const NOTEBOOK_OFFSETS=[256,272,288,304];
 const DISTANCE_PER_CYCLE={parent:16.941176470588236,watcher:16.941176470588236,swabian:7.529411764705882,child:11.52};
 const GESTURES={point:9,present:9,call:10,wave:10,wash:11,sweep:11,inspect:8,listen:6};
 const MOUTHS={parent:[57,79,72.8,1.9],watcher:[60,81,70.5,1.8],swabian:[60,83,54.9,1.6],child:[55,70,62,1.4]};
 const ENTRY={settle:.14,look:.2,greet:.35,release:.22};
+
+// Pixel registrations belong to the actual painting, including its profile and
+// chore source. Rear views have no visible mouth. Original talk cells are baked.
+const PROFILE_MOUTHS={parent:[83,94,68,1.5],watcher:[84,95,66.5,1.5],swabian:[82,94,54,1.4],child:[77,86,59,1.2]};
+const WORK_MOUTHS={parent:[78,91,62,1.5],watcher:[67,85,59,1.8],swabian:[68,86,55,1.6],child:MOUTHS.child};
+export function neighborMouthProfile(actor,pose){
+ const {row,frame}=pose,role=actor.jwdRole;
+ if(!MOUTHS[role]||row===2||row===5)return null;
+ if(row>=12){
+  if(role!=='parent')return null;
+  const p=MOUTHS.parent.slice();
+  if(row===13){const wave=Math.sin(frame/16*Math.PI*2);p[0]+=.34*wave;p[1]+=.34*wave;p[2]+=.27*wave}
+  return p;
+ }
+ let p=(row===1||row===3?PROFILE_MOUTHS[role]:row===11?WORK_MOUTHS[role]:MOUTHS[role]).slice();
+ if(row===3)p=[128-p[1],128-p[0],p[2],p[3]];
+ // These are the same small head fields evaluated by the existing bake.
+ const neck={parent:88,watcher:86,swabian:70,child:80}[role];
+ if(row===4){const phase=frame*Math.PI/4,upper=Math.max(0,(120-p[2])/100);p[0]+=.65*Math.sin(phase)*upper;p[1]+=.65*Math.sin(phase)*upper;p[2]+=.4*(1-Math.cos(phase))*upper}
+ if([6,7,8].includes(row)){
+  const phase=frame/(row===7?15:8),wave=Math.sin((row===7?Math.PI:Math.PI*2)*phase),head=Math.max(0,Math.min(1,(neck-p[2])/20));
+  const dx=head*wave*(row===8?.75:.25)+Math.max(0,Math.min(1,(140-p[2])/60))*.15*Math.sin(Math.PI*2*phase);
+  p[0]+=dx;p[1]+=dx;p[2]+=head*wave*(row===7?1:.35);
+ }
+ return p;
+}
 
 export function neighborWorkMirrored(actor,row,cameraRight){
   if(row!==11||actor.jwdRole==='child'||!Number.isFinite(actor.facing))return false;
@@ -50,6 +77,7 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   const moving=advancing&&(actor.jwdMoving>.001||distance>.001);
   const gesture=Object.hasOwn(GESTURES,actor.jwdGesture)?actor.jwdGesture:null;
   const gestureAge=Math.max(0,Number(actor.jwdGestureAge)||0),gestureDuration=Math.max(.1,Number(actor.jwdGestureDuration)||1.4);
+  const notebook=active&&actor.jwdRole==='parent'&&actor.jwdGesture==='notebook'&&!moving;
   const gesturing=gesture&&gestureAge<=gestureDuration&&!moving;
   if(active&&!playback.active)enterState(playback,'settle');
   if(!active&&playback.active){enterState(playback,'release');playback.mouthFrame=0;playback.cueToken=null}
@@ -60,10 +88,11 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
     playback.mouthFrame=0;playback.mouthOpen=0;playback.cueToken=null;
   }
   if(moving)enterState(playback,'walk');
+  else if(notebook)enterState(playback,'notebook');
   else if(gesturing)enterState(playback,gesture);
   else if(talking)enterState(playback,'talk');
   else if(active){
-    if(playback.state==='walk'||Object.hasOwn(GESTURES,playback.state))enterState(playback,'listen');
+    if(playback.state==='walk'||playback.state==='notebook'||Object.hasOwn(GESTURES,playback.state))enterState(playback,'listen');
     if(playback.state==='talk')enterState(playback,'listen');
     if(advancing&&playback.state==='settle'&&playback.age>=ENTRY.settle)enterState(playback,'look');
     else if(advancing&&playback.state==='look'&&playback.age>=ENTRY.look&&playback.terminalShown)enterState(playback,'greet');
@@ -74,6 +103,15 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   const state=playback.state;
   let row=4,frame=reducedMotion?0:Math.floor((playback.time||0)*4)%8;
   if(state==='walk'){row=playback.row||0;frame=Math.floor((playback.distance||0)/(DISTANCE_PER_CYCLE[actor.jwdRole]||16.941176470588236)*FRAMES)%FRAMES}
+  else if(notebook){
+    const duration=dialogue.mediaDuration>0?dialogue.mediaDuration:gestureDuration;
+    const age=dialogue.lineComplete?duration:dialogue.awaitingSpeech?Math.min(.6,gestureAge):Math.max(Math.min(.6,gestureAge),dialogue.mediaDuration>0?dialogue.mediaTime:gestureAge);
+    if(age<.6){row=12;frame=Math.min(15,Math.floor(age/.6*15))}
+    else if(age>=duration-.5){row=15;frame=Math.min(15,Math.max(0,Math.floor((age-duration+.5)/.5*15)))}
+    else if(age>=Math.max(.6,duration*.78)){row=14;frame=Math.min(15,Math.floor((age-Math.max(.6,duration*.78))/Math.max(.1,duration*.22-.5)*15))}
+    else{row=13;frame=reducedMotion?0:Math.floor((age-.6)*8)%16}
+    if(reducedMotion)frame=row===12?15:row===15?15:row===14?8:0;
+  }
   else if(state==='talk'){row=5;frame=playback.mouthFrame||0}
   else if(gesturing){
     row=GESTURES[gesture];
@@ -107,7 +145,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
     },error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
   }),owner);
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,({signal}={})=>new Promise(resolve=>{
-    const version='20261014-neighbor-tours-32-torso';
+    const version='20261020-neighbor-notebook-mouths';
     loadThreeTexture(T,`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
       if(owner.retired||signal?.aborted){settled=true;loaded.dispose();resolve(false);return}
       texture=loaded;texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
@@ -117,28 +155,28 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.08,
         depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
       const profile=MOUTHS[actor.jwdRole];
-      mouthUniforms={neighborMouth:{value:0},neighborCell:{value:new T.Vector2()},neighborLip:{value:new T.Vector4(...profile)}};
+      mouthUniforms={neighborMouth:{value:0},neighborCell:{value:new T.Vector2()},neighborLip:{value:new T.Vector4(...profile)},neighborRows:{value:actor.jwdRole==='parent'?20:ROWS}};
       // Only a registered front painting receives this bounded connected-lip
       // displacement. Profile/rear and unregistered chore faces retain paint.
       material.onBeforeCompile=shader=>{
         Object.assign(shader.uniforms,mouthUniforms);
-        shader.fragmentShader=`uniform float neighborMouth;\nuniform vec2 neighborCell;\nuniform vec4 neighborLip;\n${shader.fragmentShader}`;
+        shader.fragmentShader=`uniform float neighborMouth;\nuniform float neighborRows;\nuniform vec2 neighborCell;\nuniform vec4 neighborLip;\n${shader.fragmentShader}`;
         const map=T.ShaderChunk.map_fragment.replace('texture2D( map, vMapUv )','texture2D( map, neighborUv )');
         shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`
           vec2 neighborUv=vMapUv;
           if(neighborMouth>0.0){
-            vec2 p=vec2((vMapUv.x*16.0-neighborCell.x)*128.0,(1.0-(vMapUv.y*16.0-neighborCell.y))*192.0);
+            vec2 p=vec2((vMapUv.x*16.0-neighborCell.x)*128.0,(1.0-(vMapUv.y*neighborRows-neighborCell.y))*192.0);
             float f=clamp((p.x-neighborLip.x)/(neighborLip.y-neighborLip.x),0.0,1.0);
             float joined=pow(sin(f*3.14159265),2.0);
             float guard=exp(-pow((p.y-neighborLip.z)/4.0,4.0));
             float aperture=neighborLip.w*neighborMouth*joined;
             float upper=neighborLip.z-aperture*.25,lower=neighborLip.z+aperture*.75;
             float sy=p.y<upper?p.y+(neighborLip.z-upper)*guard:p.y>lower?p.y-(lower-neighborLip.z)*guard:neighborLip.z;
-            if(p.x>=neighborLip.x&&p.x<=neighborLip.y&&abs(p.y-neighborLip.z)<8.0)neighborUv.y+=(p.y-sy)/(192.0*16.0);
+            if(p.x>=neighborLip.x&&p.x<=neighborLip.y&&abs(p.y-neighborLip.z)<8.0)neighborUv.y+=(p.y-sy)/(192.0*neighborRows);
           }
           ${map}`);
       };
-      material.customProgramCacheKey=()=> 'neighbor-connected-front-lips-v1';
+      material.customProgramCacheKey=()=> 'neighbor-pose-lips-v2';
       sprite=new T.Mesh(geometry,material);sprite.name=`${name} painted neighbor`;
       sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);settled=true;resolve(true);
     },error=>{settled=true;failed=true;console.warn('Neighbor animation unavailable; keeping standing paint',error);resolve(false)});
@@ -154,17 +192,20 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       sprite.visible=pose.visible;
       if(!pose.visible)return;
       for(const mesh of fallback)mesh.visible=false;
-      const slot=CLIP_OFFSETS[pose.row]+pose.frame,column=slot%COLUMNS,atlasRow=Math.floor(slot/COLUMNS);
-      const uv=sprite.geometry.attributes.uv,u0=column/COLUMNS,v0=1-(atlasRow+1)/ROWS;
+      const rows=actor.jwdRole==='parent'?20:ROWS;
+      const slot=(pose.row>=12?NOTEBOOK_OFFSETS[pose.row-12]:CLIP_OFFSETS[pose.row])+pose.frame,column=slot%COLUMNS,atlasRow=Math.floor(slot/COLUMNS);
+      const uv=sprite.geometry.attributes.uv,u0=column/COLUMNS,v0=1-(atlasRow+1)/rows;
       cameraRight.set(1,0,0).applyQuaternion(camera.quaternion);
       lastMirrored=neighborWorkMirrored(actor,pose.row,cameraRight);
       const left=lastMirrored?u0+1/COLUMNS:u0,right=lastMirrored?u0:u0+1/COLUMNS;
-      uv.setXY(0,left,v0+1/ROWS);uv.setXY(1,right,v0+1/ROWS);
+      uv.setXY(0,left,v0+1/rows);uv.setXY(1,right,v0+1/rows);
       uv.setXY(2,left,v0);uv.setXY(3,right,v0);uv.needsUpdate=true;
-      mouthUniforms.neighborCell.value.set(column,ROWS-atlasRow-1);
+      mouthUniforms.neighborCell.value.set(column,rows-atlasRow-1);
       // The calling hand can cover the lower face: keep its source paint rather
       // than articulating lips through the hand/sleeve occluder.
-      mouthUniforms.neighborMouth.value=[0,9].includes(pose.row)||(pose.row===11&&actor.jwdRole==='child')?pose.mouthOpen:0;
+      const lip=neighborMouthProfile(actor,pose);
+      if(lip)mouthUniforms.neighborLip.value.set(...lip);
+      mouthUniforms.neighborMouth.value=lip?pose.mouthOpen:0;
       sprite.quaternion.copy(host.quaternion).invert().multiply(camera.quaternion);
       const pivot=sprite.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);
       sprite.position.set(0,pivot,0).applyQuaternion(sprite.quaternion);
@@ -172,7 +213,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
     restore(){for(const mesh of fallback)mesh.visible=!sprite&&!standing},
     inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,fallback:fallback.some(mesh=>mesh.visible),visible:!!sprite?.visible||!!standing?.visible||fallback.some(mesh=>mesh.visible),row:lastPose?.row??0,frame:lastPose?.frame??0,
       state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,
-      frames:CLIP_COUNTS[lastPose?.row??4],height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
+      frames:lastPose?.row>=12?16:CLIP_COUNTS[lastPose?.row??4],mouthProfile:lastPose?neighborMouthProfile(actor,lastPose):null,height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
     dispose(){owner.retired=true;owner.controller.abort();texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
   };
 }

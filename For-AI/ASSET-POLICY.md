@@ -1411,9 +1411,14 @@ retains the selected model gate and holds unselected city NPC art until play
 starts. Ordinary startup still defers the distant neighbor atlases.
 They add no animation loop or decoding dependency. Each packed 16×16 desktop
 atlas has 128×192 cells (2048×3072, 24 MiB decoded RGBA); its half-resolution
-variant is 6 MiB. All four desktop WebPs total **4,747,776 bytes**; all four
-mobile WebPs total **1,665,762 bytes**. Adult residency is 72/18 MiB, rising to
-96/24 MiB while Theodore is present, before GPU copies. These replace the
+variant is 6 MiB. Heiko adds four notebook clips in a 16×20 atlas
+(2048×3840 desktop: 30 MiB; 1024×1920 mobile: 7.5 MiB). All four desktop WebPs
+total **5,061,638 bytes**; all four mobile WebPs total **1,764,602 bytes**.
+Adult residency is 78/19.5 MiB, rising to 102/25.5 MiB while Hartmut is present,
+before GPU copies. The notebook adds 313,862/98,840 transferred bytes and
+6/1.5 MiB decoded residency only when Heiko is admitted. Distant city startup
+does not request it. The same foreground/approach admission, single selected
+variant, renderer update cadence and per-actor disposal remain authoritative. These replace the
 former three 16×9 atlases (40.5/10.125 MiB decoded). One variant is selected per
 actor; narrow screens with DPR below 2 use the smaller files, while higher-DPR
 screens retain the desktop variant. Child retirement disposes his texture,

@@ -504,6 +504,12 @@ The Kripo opening greeting uses a separate compact Piper/VITS name derivative, d
 
 ### Fictional neighborhood sprites
 
+Heiko’s twelve notebook action keys were generated with the built-in OpenAI
+image tool from his existing miniature painting, with original head/feet and
+all prior atlas cells preserved during baking. The take/read/check/stow source,
+hashes and authoring brief are recorded in
+`assets/sprite-sources/neighbors/source-provenance.json`.
+
 Theodore Maaslos and the painted chore props are original generated game artwork.
 The guided neighborhood script is original fiction grounded in the official
 Berlin and federal sources listed in [the neighborhood source notes](docs/neighborhood-rules.md),

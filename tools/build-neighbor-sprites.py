@@ -478,6 +478,10 @@ def build(names=NAMES):
                          'mobileDecodedRgbaBytes': atlas.width*atlas.height,
                          'encodedFrameChecks': frame_checks}
     (DEST / 'manifest.json').write_text(json.dumps(records, indent=2)+'\n')
+    if 'heiko' in names and (ROOT / 'assets/sprite-sources/neighbors/heiko-notebook-keys.png').exists():
+        import runpy
+        runpy.run_path(str(ROOT / 'tools/build-neighbor-notebook.py'))['build']()
+        records = json.loads(manifest_path.read_text())
     print(json.dumps({name: {k: value for k, value in record.items() if k in
                      ('bytes', 'mobileBytes', 'decodedRgbaBytes', 'distancePerCycle')}
                      for name, record in records.items()}, indent=2))

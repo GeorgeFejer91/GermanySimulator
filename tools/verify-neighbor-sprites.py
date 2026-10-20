@@ -12,6 +12,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / 'assets/characters/neighbors'
 QA = ROOT / 'output/neighbors'
+QA.mkdir(parents=True, exist_ok=True)
 spec = importlib.util.spec_from_file_location('walk_speed', ROOT / '.agents/skills/animate-2d-characters/scripts/assess_walk_speed.py')
 speed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(speed)
@@ -23,7 +24,7 @@ for name, entry in manifest.items():
         image = Image.open(path).convert('RGBA')
         pixels = np.array(image)
         width, height = (v//divisor for v in entry['cell'])
-        assert image.size == (16*width, 16*height)
+        assert image.size == (entry['grid'][0]*width, entry['grid'][1]*height)
         assert max(image.size) <= 4096
         if not suffix:
             assert hashlib.sha256(path.read_bytes()).hexdigest() == entry['sha256']

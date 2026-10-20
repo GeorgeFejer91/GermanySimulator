@@ -28,6 +28,22 @@ Ede is [archived](../archive/ede.md) and has no active scene.
 | Inga Maaslos | Electric car → shutters → garden volunteering → family doorway | Sustainable visibility; open windows and volunteering; free-time permission |
 | Hartmut Maaslos | Appears through Heiko's doorway handoff, replies, then leads the play route | Reappears through the later authored call; no independent adult tour |
 
+Heiko's welcome is a private checklist disguised as help. After introducing
+himself at the car, he takes a pocket notepad from his left side, reads the
+welcome/path/hedge/Hartmut list and ticks the greeting. At the winter path and
+hedge he reads and writes while explaining what the player will supposedly do.
+He ticks those topics, then marks Hartmut's introduction and puts the notebook
+away at the play path. His pencil stays in his right hand. These are performed
+line gestures, not extra objectives or an agreement by the player. Only the
+existing final-stop receipt grants introduction credit.
+
+Each `notebook` line uses the current recording's duration/playhead after native
+start; queued speech can take out/read but cannot tick early. Caption fallback
+uses the existing readable simulation duration with closed lips. Pause holds
+the pose; native completion stows it. Cancellation releases the prop and lips,
+and the next speaker owns their own cue. Visible front/profile/chore mouths
+are registered to their own painting; a rear-facing actor has no visible mouth.
+
 ## Interruption and repetition
 
 Tickets belong to the actor, voice and exact spoken source for the current game

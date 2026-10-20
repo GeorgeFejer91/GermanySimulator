@@ -16,11 +16,11 @@ function productionFunction(name){
 }
 test('all four active neighbor scripts bind exact owned bilingual sources and actual selected defaults',()=>{
  const {cast,catalog,story}=fixture(),report=neighborVoiceCoverage(cast,catalog,story);
- assert.equal(report.expected,110);assert.equal(report.invalid.length,0);
+ assert.equal(report.expected,114);assert.equal(report.invalid.length,0);
  assert.equal(new Set(report.rows.map(row=>row.voiceId)).size,4);
  assert.ok(report.storyLines.some(line=>line.voiceId==='jwd-theodore-maaslos'));
  assert.ok(report.rows.every(row=>row.voiceId!=='jwd-ede-einbruch'));
- assert.equal(report.resolved,110,'all authored active neighbor lines resolve to owned recordings');
+ assert.equal(report.resolved,114,'all authored active neighbor lines resolve to owned recordings');
  assert.equal(report.missing.length,0,'completed pack has no held caption-only lines');
  for(const row of report.missing){
   const name={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'}[row.role];
