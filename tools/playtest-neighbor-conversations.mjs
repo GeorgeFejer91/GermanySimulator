@@ -6,7 +6,7 @@ import {resolve,sep,extname} from 'node:path';
 import assert from 'node:assert/strict';
 import {installedPlaywright,chromiumExecutable} from './browser-harness.mjs';
 import {silenceBrowserAudio} from './browser-diagnostics.mjs';
-const {chromium}=installedPlaywright(),root=resolve('.'),out=resolve('output/neighbors-checklist/rendered');mkdirSync(out,{recursive:true});
+const {chromium}=installedPlaywright(),root=resolve('.'),out=resolve(process.env.NEIGHBOR_RENDER_OUTPUT||'output/neighbors-checklist/rendered');mkdirSync(out,{recursive:true});
 const fixture=`<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><body style="margin:0"><script type="module">
 import * as T from '/assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createNeighborSprite} from '/neighbor-sprites.js';
@@ -26,7 +26,7 @@ now+=.05;for(const [i,{actor,paint}] of actors.entries()){
  }
  paint.sync(now,{started:true,paused,busy:false},d,reduced);
 }renderer.render(scene,camera);return actors.map(({paint})=>paint.inspect());};
-window.faces=()=>{const copy=document.createElement('canvas');copy.width=renderer.domElement.width;copy.height=renderer.domElement.height;const ctx=copy.getContext('2d');ctx.drawImage(renderer.domElement,0,0);return actors.map(({actor,host,paint})=>{const p=paint.inspect().mouthProfile||({parent:[57,79,72.8],watcher:[60,81,70.5],swabian:[60,83,54.9],child:[55,70,62]}[actor.jwdRole]);if(!p)return null;const mesh=host.children.find(n=>n.material?.map?.image?.width>=1024);mesh.updateWorldMatrix(true,false);const local=new T.Vector3(((p[0]+p[1])/2/128-.5)*mesh.geometry.parameters.width,(.5-p[2]/192)*mesh.geometry.parameters.height,0).applyMatrix4(mesh.matrixWorld).project(camera);const x=Math.round((local.x*.5+.5)*copy.width),y=Math.round((.5-local.y*.5)*copy.height);return Array.from(ctx.getImageData(x-12,y-6,24,12).data)});};
+window.faces=(upper=false)=>{const copy=document.createElement('canvas');copy.width=renderer.domElement.width;copy.height=renderer.domElement.height;const ctx=copy.getContext('2d');ctx.drawImage(renderer.domElement,0,0);return actors.map(({actor,host,paint})=>{const p=paint.inspect().mouthProfile||({parent:[57,79,72.8],watcher:[60,81,70.5],swabian:[60,83,54.9],child:[55,70,62]}[actor.jwdRole]);if(!p)return null;const mesh=host.children.find(n=>n.material?.map?.image?.width>=1024);mesh.updateWorldMatrix(true,false);const local=new T.Vector3(((p[0]+p[1])/2/128-.5)*mesh.geometry.parameters.width,(.5-p[2]/192)*mesh.geometry.parameters.height,0).applyMatrix4(mesh.matrixWorld).project(camera);const x=Math.round((local.x*.5+.5)*copy.width),y=Math.round((.5-local.y*.5)*copy.height);if(upper){const scale=mesh.geometry.parameters.height*copy.height/(192*2*h);return Array.from(ctx.getImageData(Math.round(x-8*scale),Math.round(y-22*scale),Math.max(1,Math.round(16*scale)),Math.max(1,Math.round(6*scale))).data)}return Array.from(ctx.getImageData(x-12,y-6,24,12).data)});};
 window.finish=()=>{for(const {paint} of actors)paint.dispose();renderer.render(scene,camera);return renderer.info.memory};
 await Promise.all(pending);step();window.ready=true;
 </script>`;
@@ -41,13 +41,14 @@ try{
   const page=await context.newPage(),errors=[],checks=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
   await page.goto('http://127.0.0.1:'+server.address().port+'/fixture');await page.waitForFunction(()=>window.ready);assert.ok((await page.evaluate(()=>step())).every(p=>p.loaded));
   for(const kind of ['talk','down','right','left','point','call','wash','sweep','inspect','notebook']){
-   const state=await page.evaluate(a=>step(a),{kind,phase:.5,mouth:0,reduced});const closed=await page.evaluate(()=>faces());
+   const state=await page.evaluate(a=>step(a),{kind,phase:.5,mouth:0,reduced});const closed=await page.evaluate(()=>faces()),upper=await page.evaluate(()=>faces(true));
    // Hold displacement-derived cell and body phase for the pixel comparison.
-   const open=await page.evaluate(a=>{const r=step(a);return{state:r,faces:faces()}},{kind,phase:.5,mouth:1,reduced});
+   const open=await page.evaluate(a=>{const r=step(a);return{state:r,faces:faces(),upper:faces(true)}},{kind,phase:.5,mouth:1,reduced});
    const changed=closed.map((pixels,i)=>pixels?.reduce((n,v,j)=>n+(v!==open.faces[i][j]),0)||0);
    // Side walks keep the identical head; their changing legs are outside crops.
    assert.ok(changed.every(n=>n>0),name+' '+kind+' all four visible mouths change '+changed);
-   checks.push({kind,changed,state:open.state});
+   assert.deepEqual(open.upper,upper,name+' '+kind+' opening leaves upper face fixed');
+   checks.push({kind,changed,upperFaceUnchanged:true,state:open.state});
    await page.screenshot({path:resolve(out,name+'-'+kind+'-open.png')});
   }
   for(let i=0;i<101;i++){await page.evaluate(a=>step(a),{kind:'notebook',phase:i/100,mouth:.7,reduced});if([0,5,10,50,80,90,99,100].includes(i))await page.screenshot({path:resolve(out,name+'-notebook-'+i+'.png')});await page.waitForTimeout(20)}

@@ -82,7 +82,7 @@ test('Schwabingen owns her dialect early greeting and both tour invitations with
   assert.equal(tour.jwdState.met.size,Number(repeat),'invitation cannot grant another introduction');
  }
  const parent=harness(true);parent.awardAnmeldung();parent.jwdState.visited=true;parent.startJwdTour(parent.actors.find(n=>n.id==='jwd-parent'),false);
- assert.equal(parent.dialogue.lines[0],'Kommen Sie kurz mit, ich zeige Ihnen das lieber direkt. Dann müssen Sie nicht hinterher noch mal fragen. Ist ja netter, wenn wir das eben zusammen … also, hier lang.','another neighbor retains their own approved speech');
+ assert.equal(parent.dialogue.lines[0],parent.window.JwdStory.tours.parent[0].stops[0].lines[0].de,'Heiko greets before asking the player to follow');
 });
 
 test('registration, certificate handoff and valid A38 submission lead straight to home and neighbors',()=>{
@@ -115,7 +115,7 @@ test('registration, certificate handoff and valid A38 submission lead straight t
 test('home visit and all three completed introductions gate the detour without shifting eight procedures',()=>{
  const h=harness();h.awardAnmeldung();h.state.mission=1;h.visitJwdHome();h.finish();assert.equal(h.currentMission().target,'jwd-neighbors');
  const expected=['jwd-swabian','jwd-parent','jwd-watcher'];
- for(const id of expected){assert.equal(h.getMissionWaypoint().id,id);const n=h.actors.find(n=>n.id===id);h.talkJwdNeighbor(n);assert.equal(h.jwdState.met.has(id),false,'speaking alone is not an introduction receipt');h.finish();h.talkJwdNeighbor(n);h.finish()}
+ for(const id of expected){const n=h.actors.find(n=>n.id===id);Object.assign(h.player,{x:n.x,y:n.y+65});assert.equal(h.getMissionWaypoint().id,id);h.talkJwdNeighbor(n);assert.equal(h.jwdState.met.has(id),false,'speaking alone is not an introduction receipt');h.finish();h.talkJwdNeighbor(n);h.finish()}
  assert.equal(h.jwdState.met.size,3);assert.equal(h.currentMission().target,'hausverwaltung');assert.equal(h.state.mission,1);
 });
 
@@ -445,6 +445,7 @@ test('authored Heiko checklist owns notebook gestures and cannot credit an unfin
   const t=h.jwdState.tour;
   if(h.state.dialogue){
    const line=t.script.stops[t.stop]?.lines[t.line];
+   if((line?.id==='heiko-theodore-supervision'||line?.id==='theodore-play-rules')&&h.dialogue.lines[0]===line.de)assert.equal(actor.jwdGesture,'notebook-write');
    if(line?.gesture==='notebook'&&h.dialogue.lines[0]===line.de){
     assert.equal(h.state.characterSpeaker,actor);assert.equal(actor.jwdGesture,'notebook');
     assert.ok(actor.jwdGestureDuration>=3);seen.push(line.id);
@@ -459,4 +460,29 @@ test('authored Heiko checklist owns notebook gestures and cannot credit an unfin
  assert.ok(seen.includes('heiko-notebook-hedge'));
  assert.ok(seen.includes('heiko-notebook-close'));
  assert.equal(h.jwdState.met.has(actor.id),true);
+});
+
+test('fresh neighbor entry follows whichever adult the player approaches first',()=>{
+ for(const id of ['jwd-parent','jwd-watcher','jwd-swabian'])for(const dt of [1/60,1/30,.1]){
+  const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.jwdState.atHome=false;h.jwdState.gardenCooldown=1000;
+  const n=h.actors.find(n=>n.id===id);Object.assign(h.player,{x:n.x,y:n.y+65});
+  const spot=h.getNeighborStandingSpot();assert.equal(spot.actorId,id);assert.equal(h.getMissionWaypoint().id,id);
+  Object.assign(h.player,spot);for(let i=0;i<Math.ceil(.3/dt);i++)h.updateJwd(dt);
+  assert.equal(h.jwdState.tour?.actor.id,id);assert.equal(h.dialogue.voiceId,h.jwdVoice(n));assert.equal(h.jwdState.met.size,0);
+ }
+});
+
+test('Heiko greets the player before walking and does not repeat that greeting at the car',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;
+ const n=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(n);const t=h.jwdState.tour;
+ assert.equal(h.dialogue.lines[0],t.script.stops[0].lines[0].de);
+ assert.equal(t.phase,'invite');assert.equal(n.jwdRoute.length,0);h.finish();assert.equal(t.line,1);
+});
+
+test('changing the approached neighbor cannot transfer another adults arrival dwell',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.jwdState.atHome=false;h.jwdState.gardenCooldown=1000;
+ const approach=id=>{const n=h.actors.find(n=>n.id===id);Object.assign(h.player,{x:n.x,y:n.y+65});Object.assign(h.player,h.getNeighborStandingSpot())};
+ approach('jwd-parent');h.updateJwd(.2);assert.equal(h.jwdState.tour,null);
+ approach('jwd-watcher');h.updateJwd(.1);assert.equal(h.jwdState.tour,null);
+ h.updateJwd(.15);assert.equal(h.jwdState.tour.actor.id,'jwd-watcher');
 });

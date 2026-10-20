@@ -97,6 +97,7 @@
 #city-notices .violation-alert>b{margin:4px 0;font:700 1rem/1.3 "Courier New",monospace;letter-spacing:0}
 #city-notices .violation-alert p{margin:5px 0;font:.875rem/1.4 "Courier New",monospace;text-transform:none}
 #city-notices #violation-stars{font-size:1rem;letter-spacing:2px}
+.dialogue.automatic:not(.welcome){display:none}
 .dialogue{border-color:#746d5e;background:#eee8d8;box-shadow:3px 4px 0 #24211c45}
 .amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
 .amt-walk-top{top:calc(var(--subtitle-toggle-bottom,44px) + 12px)}

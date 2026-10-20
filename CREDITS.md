@@ -505,8 +505,9 @@ The Kripo opening greeting uses a separate compact Piper/VITS name derivative, d
 ### Fictional neighborhood sprites
 
 Heiko’s twelve notebook action keys were generated with the built-in OpenAI
-image tool from his existing miniature painting, with original head/feet and
-all prior atlas cells preserved during baking. The take/read/check/stow source,
+image tool from his existing miniature painting. Whole connected figures are
+registered after matte cleanup; the original rest pose and all prior atlas cells
+are preserved during baking. The take/read/check/stow source,
 hashes and authoring brief are recorded in
 `assets/sprite-sources/neighbors/source-provenance.json`.
 

@@ -1,6 +1,6 @@
 {
   "heiko": {
-    "sha256": "24c452f3eb96bf148310fb51a7fccfbafe1da1a73002fb4d7c22b3be57ca89d5",
+    "sha256": "f9f3dadb6ca3ffa88ff130ee8c70229d4f15361d0a9bc795b1e83784879cacbd",
     "rows": [
       "down",
       "right",
@@ -123,8 +123,8 @@
     "figureWorldHeight": 1.6,
     "distancePerCycle": 16.941176470588236,
     "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
-    "bytes": 1611252,
-    "mobileBytes": 548346,
+    "bytes": 1825954,
+    "mobileBytes": 600834,
     "decodedRgbaBytes": 31457280,
     "mobileDecodedRgbaBytes": 7864320,
     "encodedFrameChecks": [
@@ -299,58 +299,58 @@
       {
         "variant": "desktop",
         "row": 12,
-        "distinctDecodedFrames": 7,
-        "maxChange": 0.05226806178689003,
-        "seamChange": 0.05226806178689003
+        "distinctDecodedFrames": 6,
+        "maxChange": 0.0793016254901886,
+        "seamChange": 0.0793016254901886
       },
       {
         "variant": "desktop",
         "row": 13,
         "distinctDecodedFrames": 9,
-        "maxChange": 0.0032150493934750557,
-        "seamChange": 0.0032150493934750557
+        "maxChange": 0.003241186263039708,
+        "seamChange": 0.003241186263039708
       },
       {
         "variant": "desktop",
         "row": 14,
         "distinctDecodedFrames": 5,
-        "maxChange": 0.05329011008143425,
-        "seamChange": 0.030707107856869698
+        "maxChange": 0.027341684326529503,
+        "seamChange": 0.027341684326529503
       },
       {
         "variant": "desktop",
         "row": 15,
-        "distinctDecodedFrames": 6,
-        "maxChange": 0.05895574018359184,
-        "seamChange": 0.05895574018359184
+        "distinctDecodedFrames": 5,
+        "maxChange": 0.0791383758187294,
+        "seamChange": 0.0791383758187294
       },
       {
         "variant": "-mobile",
         "row": 12,
-        "distinctDecodedFrames": 7,
-        "maxChange": 0.051363974809646606,
-        "seamChange": 0.051363974809646606
+        "distinctDecodedFrames": 6,
+        "maxChange": 0.07593203336000443,
+        "seamChange": 0.07593203336000443
       },
       {
         "variant": "-mobile",
         "row": 13,
         "distinctDecodedFrames": 9,
-        "maxChange": 0.0025994256138801575,
-        "seamChange": 0.0025994256138801575
+        "maxChange": 0.0025818869471549988,
+        "seamChange": 0.0025818869471549988
       },
       {
         "variant": "-mobile",
         "row": 14,
         "distinctDecodedFrames": 5,
-        "maxChange": 0.05207402631640434,
-        "seamChange": 0.029457494616508484
+        "maxChange": 0.023123040795326233,
+        "seamChange": 0.023123040795326233
       },
       {
         "variant": "-mobile",
         "row": 15,
-        "distinctDecodedFrames": 7,
-        "maxChange": 0.05797355994582176,
-        "seamChange": 0.05797355994582176
+        "distinctDecodedFrames": 5,
+        "maxChange": 0.07555720210075378,
+        "seamChange": 0.07555720210075378
       }
     ],
     "notebook": {
@@ -361,7 +361,7 @@
       "drawnWritePoses": 4,
       "notebookHand": "left",
       "pencilHand": "right",
-      "method": "explicit painted action keys and holds; continuous reading head field; fixed original head and legs"
+      "method": "intact connected painted figures; clean bounds before standing-height/head-centroid registration; continuous reading head field"
     }
   },
   "inga": {

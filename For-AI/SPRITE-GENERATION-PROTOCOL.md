@@ -987,12 +987,16 @@ Point/call/work use anticipation, an action arc and recovery; gait phase comes
 from accepted ground displacement. A blocked actor plants their feet. Walking
 retains priority during a roaming line instead of freezing the speaker.
 
-Talk is a source-fitted palette of closed plus five opening levels in three
-mouth shapes, selected from the owning speech cue. Each face has its own lip
-crease and attached corners. Registered front walk/gesture paint also supports
-a bounded connected-lip shader. Front, visible side, gesture and each character’s
+Talk samples the original closed resting face and opens its connected lips with
+the owning recording's media-clock energy. A square-root response makes quiet
+syllables visible while silence stays closed. Each face has its own lip
+crease and attached corners. Front, visible side, gesture and each character’s
 chore painting have their own source-pixel mouth registration; a rear view has
-no visible mouth. Notebook clips keep the original registered head and feet.
+no visible mouth. The shader's bounded opening protects the upper face and alpha.
+Notebook clips keep each source figure's connected head, collar, body and feet:
+matte cleanup precedes bounds, whole figures share standing height and head
+centroid registration, and the rest key uses the original idle painting.
+Do not splice an original head/legs onto independently centered torsos.
 This is directional painted animation, not phoneme-aligned facial capture. Preserve coherent faces
 and original alpha. Caption-only fallback does not pretend to be audible speech.
 Theodore has his own front/right/rear source with a mirrored left view, a shorter
@@ -1025,9 +1029,12 @@ For expression repairs, retain the internal registration of the whole facial pai
 Heiko’s notebook source is `assets/sprite-sources/neighbors/heiko-notebook-keys.png`,
 with fixed left-hand notebook and right-hand pencil ownership. Six drawn take-out
 poses, four pencil/contact poses and explicit holds are packed into 16-cell clips;
-reading uses the existing continuous head field. These are deliberately drawn
+reading uses the existing continuous head field. Each selected notebook key has
+its own fitted lip crease carried through that field. These are deliberately drawn
 key poses, not a claim of 16 independently painted inbetweens.
 `tools/build-neighbor-notebook.py` appends them without changing the original
 256 cells; the ordinary neighbor builder invokes that extension for Heiko.
 The runtime uses actual recording time after native start, holds queued speech
-at reading, and releases lips/props through the existing dialogue owner.
+at reading, and releases lips/props through the existing dialogue owner. Explicit
+listener writing follows the current speaker's media clock without borrowing
+that speaker's lip ownership; pause holds both clocks.

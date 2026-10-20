@@ -11,7 +11,7 @@ Ede is [archived](../archive/ede.md) and has no active scene.
 | Beat | Movement and staging | Dialogue and consequence |
 | --- | --- | --- |
 | Arrival | The allocated home and paved neighborhood become the active chapter. | Police actors, offenses, arrests, stars, alerts and law controls are disabled. Only the quieter 8-bit anthem plays. |
-| Invitation | The selected adult faces the player and gestures; no guide movement starts yet. | One follow invitation starts an introduction. The self-introduction belongs to the first stop. The current invitation must finish or complete its caption fallback before departure. |
+| Invitation | Any of the three adults can start the chapter. Halo, waypoint, automatic dwell and interaction select the nearest unmet adult; changing that actor resets dwell. The selected adult faces the player before moving. | Heiko gives his recorded self-introduction immediately, then skips that same line at the car. The other adults retain their follow invitation. Speech or its readable caption fallback finishes before departure. |
 | Walk | The guide follows the authored paved route. A distant follower makes the guide wait. Actual displacement drives gait; a blocked guide plants their feet. | An authored travel line can start once on its walking leg. The next stop cannot speak over unfinished travel speech. |
 | Arrival at a stop | Guide and any following adult reach their targets, settle, and show the body-clear standing position. | Stop speech requires the player nearby and in that position. The speaker owns the gesture, exact text, subtitle and voice. |
 | Conversation | The speaking actor holds their position and looks toward the authored subject. | Only completion of the current line, or its bounded readable caption fallback, permits the next line. Stale callbacks cannot advance another line or tour. |
@@ -29,11 +29,12 @@ Ede is [archived](../archive/ede.md) and has no active scene.
 | Hartmut Maaslos | Appears through Heiko's doorway handoff, replies, then leads the play route | Reappears through the later authored call; no independent adult tour |
 
 Heiko's welcome is a private checklist disguised as help. After introducing
-himself at the car, he takes a pocket notepad from his left side, reads the
+himself before departure, he takes a pocket notepad from his left side at the car, reads the
 welcome/path/hedge/Hartmut list and ticks the greeting. At the winter path and
 hedge he reads and writes while explaining what the player will supposedly do.
-He ticks those topics, then marks Hartmut's introduction and puts the notebook
-away at the play path. His pencil stays in his right hand. These are performed
+He ticks those topics and writes throughout his play-path supervision and
+Hartmut's entire reply, including “Papa, nicht mitschreiben”. He then marks
+Hartmut's introduction and puts the notebook away. His pencil stays in his right hand. These are performed
 line gestures, not extra objectives or an agreement by the player. Only the
 existing final-stop receipt grants introduction credit.
 
@@ -41,8 +42,12 @@ Each `notebook` line uses the current recording's duration/playhead after native
 start; queued speech can take out/read but cannot tick early. Caption fallback
 uses the existing readable simulation duration with closed lips. Pause holds
 the pose; native completion stows it. Cancellation releases the prop and lips,
-and the next speaker owns their own cue. Visible front/profile/chore mouths
+and the next speaker owns their own lip cue. An explicit listener-writing intent
+keeps Heiko's hand moving on Hartmut's media clock with Heiko's lips closed;
+the following closing line retains the held notebook. Visible front/profile/chore mouths
 are registered to their own painting; a rear-facing actor has no visible mouth.
+Automatic speech keeps its subtitles and hides the actionless dialogue frame,
+preventing an empty cream HUD box. Manual and welcome controls remain available.
 
 ## Interruption and repetition
 

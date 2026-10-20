@@ -2,7 +2,7 @@
 
 The existing neighbor bake owns registration and sampling. This extension uses
 reference-derived explicit connected action keys and readable holds;
-head and planted legs stay identical to Heiko's original front painting.
+Intact source figures keep their own connected head, collar, hands and feet.
 """
 import hashlib
 import importlib.util
@@ -26,20 +26,21 @@ def registered_keys():
     sheet = Image.open(KEYS).convert('RGBA')
     poses = []
     panels = [sheet.crop((c*sheet.width//4, r*sheet.height//3, (c+1)*sheet.width//4, (r+1)*sheet.height//3)) for r in range(3) for c in range(4)]
-    boxes = [p.getbbox() for p in panels]
-    scale = 170/max(box[3]-box[1] for box in boxes)
-    for panel, box in zip(panels, boxes):
+    panels = [b.body_matte(p) for p in panels]
+    def head_centre(image):
+        alpha = np.array(image)[20:76, :, 3].astype(float)
+        return float((alpha*np.arange(W)[None, :]).sum()/alpha.sum())
+    for panel in panels:
+        box = panel.getbbox()
         cut = panel.crop(box)
-        cut = cut.resize((round(cut.width*scale), round(cut.height*scale)), Image.Resampling.LANCZOS)
+        scale = 170/cut.height
+        cut = cut.resize((round(cut.width*scale), 170), Image.Resampling.LANCZOS)
         pose = Image.new('RGBA', (W,H))
         pose.alpha_composite(cut, ((W-cut.width)//2, b.BASELINE-cut.height))
-        # One original head and planted lower body across the full performance.
-        # The cardigan joins at the neck and below its hem, not across hands.
-        original, pixels = np.array(front), np.array(pose)
-        pixels[:88] = original[:88]
-        pixels[145:] = original[145:]
-        poses.append(b.body_matte(Image.fromarray(pixels)))
-    return [front, *poses]
+        shift = round(head_centre(front)-head_centre(pose))
+        pose = pose.transform(pose.size, Image.Transform.AFFINE, (1,0,-shift,0,1,0), Image.Resampling.BICUBIC)
+        poses.append(b.body_matte(pose))
+    return [front, front, *poses[1:]]
 
 
 def build():
@@ -71,7 +72,7 @@ def build():
     names=['notebook-take','notebook-read','notebook-write','notebook-put']
     record['rows']=record['rows'][:12]+names
     for i,name in enumerate(names):record['clips'][name]={'offset':256+i*16,'count':16}
-    record['notebook']={'source':'assets/sprite-sources/neighbors/heiko-notebook-keys.png','sourceSha256':hashlib.sha256(KEYS.read_bytes()).hexdigest(),'encodedSamplesPerClip':16,'drawnTakePoses':6,'drawnWritePoses':4,'notebookHand':'left','pencilHand':'right','method':'explicit painted action keys and holds; continuous reading head field; fixed original head and legs'}
+    record['notebook']={'source':'assets/sprite-sources/neighbors/heiko-notebook-keys.png','sourceSha256':hashlib.sha256(KEYS.read_bytes()).hexdigest(),'encodedSamplesPerClip':16,'drawnTakePoses':6,'drawnWritePoses':4,'notebookHand':'left','pencilHand':'right','method':'intact connected painted figures; clean bounds before standing-height/head-centroid registration; continuous reading head field'}
     record['encodedFrameChecks']=[c for c in record['encodedFrameChecks'] if c['row']<12]
     for suffix,factor in [('',1),('-mobile',2)]:
         encoded=Image.open(DEST/f'heiko{suffix}.webp').convert('RGBA');cw,ch=W//factor,H//factor

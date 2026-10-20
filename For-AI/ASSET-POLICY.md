@@ -1413,9 +1413,9 @@ They add no animation loop or decoding dependency. Each packed 16×16 desktop
 atlas has 128×192 cells (2048×3072, 24 MiB decoded RGBA); its half-resolution
 variant is 6 MiB. Heiko adds four notebook clips in a 16×20 atlas
 (2048×3840 desktop: 30 MiB; 1024×1920 mobile: 7.5 MiB). All four desktop WebPs
-total **5,061,638 bytes**; all four mobile WebPs total **1,764,602 bytes**.
+total **5,276,340 bytes**; all four mobile WebPs total **1,817,090 bytes**.
 Adult residency is 78/19.5 MiB, rising to 102/25.5 MiB while Hartmut is present,
-before GPU copies. The notebook adds 313,862/98,840 transferred bytes and
+before GPU copies. The notebook adds 528,564/151,328 transferred bytes and
 6/1.5 MiB decoded residency only when Heiko is admitted. Distant city startup
 does not request it. The same foreground/approach admission, single selected
 variant, renderer update cadence and per-actor disposal remain authoritative. These replace the

@@ -4,6 +4,8 @@
  const guide=(id,de,en)=>({id,speaker:'guide',de,en});
  const note=(id,de,en)=>({...guide(id,de,en),gesture:'notebook'});
  const child=(id,de,en)=>({id,speaker:'child',de,en});
+ const writing=(id,de,en)=>({...guide(id,de,en),gesture:'notebook-write'});
+ const notedChild=(id,de,en)=>({...child(id,de,en),listenerGesture:'notebook-write'});
  window.JwdStory={tours:{
   swabian:[
    {id:'schwabingen-introduction',title:{de:'D’KEHRWOCHEN-BEGEHONG',en:'THE SWEEPING-ROTA INSPECTION'},stops:[
@@ -71,8 +73,8 @@
      child('theodore-first-hello','Hallo! Papa sagt, ich habe elf Minuten Freizeit. Davon waren gerade sieben seine Erklärung. Komm, ich zeige dir mein Spiel auf den Platten. Da braucht man keine siebte Sprache. Nur Beine.','Hello! Dad says I have eleven minutes of free time. Seven of those were just his explanation. Come on, I will show you my game on the paving stones. You do not need a seventh language there. Just legs.')
     ]},
     {id:'theodore-play-path',point:{x:1090,y:4710},lookAt:{x:1157,y:4747},gesture:'present',leader:'child',walkLines:[child('theodore-play-walk','Hier lang! Nur auf den Platten. Papa ist heute Nachläufer.','This way! Only on the paving stones. Today Dad is the follower.')],lines:[
-     guide('heiko-theodore-supervision',"Ach, hier also. Ja, ich habe ihm gesagt, er soll ruhig mal selber … Das tut ihm ja gut. Hartmut, nur nicht so laut, dann haben die anderen auch was von der Pause. Sie können Inga nachher sagen, dass er schön draußen war.","Oh, so here. Yes, I told him he should go ahead and do things himself … It is good for him. Hartmut, just not so loudly, then everyone else can enjoy the break too. You can tell Inga later that he had a nice time outside."),
-     child('theodore-play-rules','Hier! Die Fugen sind Lava, die Platten sind Inseln, und dein umgekippter Zwerg ist der Schiedsrichter. Er liegt nur rum. Bester Schiedsrichter der Welt. Jetzt du! Papa, nicht mitschreiben. Das Spiel ist fertig, wenn wir keine Lust mehr haben.','Here! The joints are lava, the paving stones are islands, and your fallen gnome is the referee. He just lies around. Best referee in the world. Your turn! Dad, stop taking notes. The game ends when we do not feel like playing anymore.'),
+     writing('heiko-theodore-supervision',"Ach, hier also. Ja, ich habe ihm gesagt, er soll ruhig mal selber … Das tut ihm ja gut. Hartmut, nur nicht so laut, dann haben die anderen auch was von der Pause. Sie können Inga nachher sagen, dass er schön draußen war.","Oh, so here. Yes, I told him he should go ahead and do things himself … It is good for him. Hartmut, just not so loudly, then everyone else can enjoy the break too. You can tell Inga later that he had a nice time outside."),
+     notedChild('theodore-play-rules','Hier! Die Fugen sind Lava, die Platten sind Inseln, und dein umgekippter Zwerg ist der Schiedsrichter. Er liegt nur rum. Bester Schiedsrichter der Welt. Jetzt du! Papa, nicht mitschreiben. Das Spiel ist fertig, wenn wir keine Lust mehr haben.','Here! The joints are lava, the paving stones are islands, and your fallen gnome is the referee. He just lies around. Best referee in the world. Your turn! Dad, stop taking notes. The game ends when we do not feel like playing anymore.'),
      note('heiko-notebook-close','So, Hartmut vorgestellt. Noch ein Haken. Ich muss nur … ja, jetzt ist die Liste durch. Willkommen in der Nachbarschaft. Den Block stecke ich weg. Sie wissen ja jetzt Bescheid.','There, Hartmut introduced. Another tick. I just need to … yes, that is the list finished now. Welcome to the neighborhood. I will put the notepad away. You know what is what now.')
     ]}
    ]},
