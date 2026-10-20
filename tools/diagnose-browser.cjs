@@ -43,6 +43,18 @@ module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executab
       for (const type of ['keydown', 'keyup', 'focus', 'blur', 'visibilitychange', 'fullscreenchange'])
         window.addEventListener(type, log);
       let last = performance.now();
+      const watch = setInterval(() => {
+        const input = window.Germany3DBridge?.getInput();
+        if (!input) return;
+        clearInterval(watch);
+        let held = input.ArrowUp || false;
+        Object.defineProperty(input, 'ArrowUp', {configurable: true, enumerable: true,
+          get: () => held, set: value => {
+            held = value;
+            events.push({type: 'held-write', value, ...state(), stack: new Error().stack});
+            if (events.length > 80) events.shift();
+          }});
+      }, 50);
       function frame(now) { frames.push(now - last); last = now; if (frames.length > 64) frames.shift(); requestAnimationFrame(frame); }
       requestAnimationFrame(frame);
       window.__ciDiagnostic = () => {
@@ -66,6 +78,11 @@ module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executab
       }
       const up = page.keyboard.up.bind(page.keyboard);
       page.keyboard.up = async key => { await up(key); if (key.startsWith('Arrow')) await snapshot('keyup:' + key); };
+      const wait = page.waitForFunction.bind(page);
+      page.waitForFunction = async (...args) => {
+        try { return await wait(...args); }
+        catch (error) { await snapshot('predicate:fail:' + String(args[0]).slice(0, 200), error); throw error; }
+      };
       const screenshot = page.screenshot.bind(page);
       page.screenshot = async options => {
         const start = performance.now();
