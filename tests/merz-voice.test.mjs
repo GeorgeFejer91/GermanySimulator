@@ -19,6 +19,10 @@ for(const clip of supplied){
  assert.equal(clip.language,'de');
 }
 const monologue=supplied.find(clip=>clip.clipId==='merz-nie-gesagt');
+const replaced=supplied.find(clip=>clip.clipId==='merz-gruene-linke-spinner');
+assert.equal(replaced.seed,undefined,'a replacement cannot inherit the previous take seed');
+assert.equal(replaced.generationNote,undefined,'old generation history belongs only to the previous take');
+assert.equal(replaced.previousTake.seed,42);
 assert.equal(monologue.sourceCues.map(cue=>cue[2]).join(' '),monologue.text);
 assert.equal(monologue.cues.map(cue=>cue[2]).join(' '),monologue.english);
 for(const cues of [monologue.cues,monologue.sourceCues]){

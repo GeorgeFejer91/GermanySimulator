@@ -210,9 +210,7 @@
       "asrWordExact": true,
       "asrModel": "Secret Tunnel bundled whisper-large-v3-turbo q4_0; final normalized MP3 decoded and transcribed with German language hint",
       "listeningReview": "NOT RUN; user-directed supplied recording",
-      "generationNote": "Bundled direct renderer after native CLI transcription stalled; same verified saved profile reference.",
       "sourceClipId": "20261010T203612Z__c3609de5e520fc49",
-      "seed": 42,
       "quotation": {
         "date": "2025-02-22",
         "event": "CDU/CSU campaign closing rally, Munich",
@@ -231,7 +229,9 @@
       "processing": "Existing normalize-audio.ps1: two-pass -18 LUFS / -1.5 dBTP; original sample rate, channels and approximate bitrate retained; no trimming.",
       "previousTake": {
         "sha256": "f1f7808a60a5169dc26f87f07b5b564e389f5ef9b8c9c9a86baea6d64e087503",
-        "sourceClipId": "merz-gruene-linke-spinner-direct-seed-42"
+        "sourceClipId": "merz-gruene-linke-spinner-direct-seed-42",
+        "seed": 42,
+        "generationNote": "Bundled direct renderer after native CLI transcription stalled; same verified saved profile reference."
       }
     },
     {
