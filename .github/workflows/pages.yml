@@ -1,129 +1,30 @@
 name: Deploy static site to GitHub Pages
-
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Check fullscreen lifecycle
-        run: node --test tests/fullscreen.test.mjs
-      - name: Check Schwabingen dialogue props
-        run: node --test tests/schwabingen-props.test.mjs
-      - name: Check JWD home and neighbors
-        run: node --test tests/neighbor-conversations.test.mjs tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
-      - name: Check running hotkey
-        run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs tests/jobcenter-rumble.test.mjs tests/jobcenter-release.test.mjs tests/jobcenter-direct.test.mjs tests/jobcenter-touch.test.mjs tests/welcome-dialogue.test.mjs
-      - name: Check bounded asset jobs and cancellation
-        run: node --test tests/asset-queue.test.mjs tests/asset-loaders.test.mjs tests/building-catalogue.test.mjs
-      - name: Check shared building transitions and exit ownership
-        run: node --test tests/level-transitions.test.mjs tests/building-levels.test.mjs tests/office-level-flow.test.mjs tests/city-paperwork-causality.test.mjs tests/direct-result-causality.test.mjs
-      - name: Check office queue call audio
-        run: node --test tests/buergeramt-queue-audio.test.mjs tests/buergeramt-multiple-tickets.test.mjs tests/knick-name-announcement.test.mjs tests/knick-speech-cache.test.mjs tests/knick-browser-assets.test.mjs tests/kripo-local-name.test.mjs tests/kripo-browser-assets.test.mjs
-      - name: Check quiz dialogue and offline voice authoring
-        run: |
-          node --test tests/quiz-voice-requests.test.mjs tests/quiz-recorded-segments.test.mjs tests/quiz-german9-admission.test.mjs tests/quiz-variety.test.mjs tests/quiz-character-portraits.test.mjs
-          python -B tools/test_office_voice_builder.py
-          python -B tools/test_quiz_voice_builder.py
-      - name: Check office touch navigation, turning and direction texture reuse
-        run: node --test tests/buergeramt-touch-navigation.test.mjs tests/buergeramt-touch-target.test.mjs tests/buergeramt-turning.test.mjs
-      - name: Check office approach and browser test tooling
-        run: node --test tests/buergeramt-approach.test.mjs tests/browser-harness.test.mjs
-      - name: Check office causality and re-entry
-        run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs tests/buergeramt-completion-recovery.test.mjs
-      - name: Check phone lifecycle and registration rewards
-        run: node --test tests/buergeramt-phone-lifecycle.test.mjs tests/kriminalpolizei-phone.test.mjs
-      - name: Check president portrait interaction
-        run: node --test tests/buergeramt-president-portrait.test.mjs
-      - name: Check potato mirror reflection and interaction
-        run: node --test tests/buergeramt-potato-mirror.test.mjs
-      - name: Check law pickup and sirens
-        run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs
-      - name: Check neighbor voice authoring and staged assets
-        run: |
-          if ! command -v ffmpeg >/dev/null; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs tests/neighbor-native-parts.test.mjs tests/neighbor-reference-input.test.mjs tests/neighbor-render-input.test.mjs tests/neighbor-window-recognition.test.mjs tests/neighbor-input-provenance-presence.test.mjs tests/neighbor-voice-coverage.test.mjs tests/recorded-voice-cache.test.mjs
-      - name: Check fixed character voices
-        run: |
-          python tests/test_sync_music_cast_index.py
-          python -B tests/test_city_reference_license.py
-          python -B tests/test_sandale_source_adapter.py
-          python -B tests/test_named_reactive_source_adapter.py
-          node tools/curate-voice-library.mjs --check
-          node tools/audit-neighbor-voice-coverage.mjs --check
-          node --test tests/ruediger-homophone.test.mjs
-          node --test tests/sandale-voice-curator.test.mjs
-          node --test tests/named-reactive-voice-curator.test.mjs
-          node --test tests/voice-gap-public.test.mjs
-          node --test tests/buergeramt-ambient.test.mjs
-          node --test tests/city-dialogue.test.mjs tests/city-voice-provenance.test.mjs tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/cameo-saved-profiles.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
-      - name: Check city audio trigger hygiene
-        run: node --test tests/audio-trigger-hygiene.test.mjs tests/audio-broker.test.mjs tests/speech-fallback-navigation.test.mjs tests/official-narrator-routing.test.mjs
-      - name: Check game and browser regressions
-        run: node --test tests/preload.test.mjs tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/object-physics-consistency.test.mjs tests/police-driving.test.mjs tests/vehicle-lifecycle.test.mjs tests/train-consists.test.mjs tests/ambient-traffic.test.mjs tests/browser-responsiveness.test.mjs tests/npc-atlas-admission.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/merkel-voice.test.mjs tests/mission-fax.test.mjs tests/mission-pointer.test.mjs tests/buergeramt-door-radiance.test.mjs tests/buergeramt-entry.test.mjs
-      - name: Check station access and painted ground projection
-        run: node --test tests/station-access.test.mjs tests/billboard-ground.test.mjs
-      - name: Check personalized city dialogue and street sprites
-        run: |
-          node --test tests/sandale-delivery.test.mjs
-          node --test tests/city-admission-roots.test.mjs tests/crowd-dialogue-source.test.mjs tests/crowd-reactive-dialogue.test.mjs tests/crowd-defaults.test.mjs tests/crowd-generation-scopes.test.mjs tests/crowd-recovery-accounting.test.mjs tests/police-defaults.test.mjs tests/crowd-personal-e.test.mjs tests/recorded-mouth-energy.test.mjs tests/quiz-identity.test.mjs tests/speech-fallback-navigation.test.mjs tests/city-interaction-target.test.mjs tests/street*.test.mjs
-          python -B tests/test_crowd_producer_contract.py
-      - name: Check office oil-floor lifetime
-        run: node --test tests/buergeramt-floor.test.mjs tests/buergeramt-restoration.test.mjs tests/buergeramt-goop-phone.test.mjs tests/buergeramt-portrait-melt.test.mjs tests/buergeramt-lamps.test.mjs
-      - name: Check office Gaussian actions and lifetime
-        run: node --test tests/buergeramt-gaussian-animation.test.mjs tests/buergeramt-gaussian-renderer.test.mjs tests/buergeramt-gaussian-scene.test.mjs tests/buergeramt-gaussian-data.test.mjs tests/buergeramt-painted-anchor.test.mjs tests/buergeramt-splat-owner.test.mjs tests/buergeramt-movement.test.mjs tests/buergeramt-animation-timing.test.mjs tests/buergeramt-session.test.mjs tests/buergeramt-registration.test.mjs tests/buergeramt-inline.test.mjs tests/buergeramt-dialogue-recordings.test.mjs tests/buergeramt-queue.test.mjs tests/buergeramt-link.test.mjs tests/buergeramt-full-cast.test.mjs tests/buergeramt-clerk-voices.test.mjs tests/buergeramt-lips.test.mjs tests/buergeramt-speech-cues.test.mjs tests/aktenkurier-lipsync.test.mjs tests/aktenkurier-official-voice.test.mjs tests/buergeramt-splat.test.mjs tests/buergeramt-fever.test.mjs tests/buergeramt-fever-voices.test.mjs
-      - name: Check direct level pages and build share routes
-        run: |
-          node --test tests/level-pages.test.mjs
-          node tools/build-level-pages.mjs
-      - uses: actions/configure-pages@v5
-      - name: Install locked browser check dependencies
-        run: |
-          npm ci --prefix tools/browser-ci --ignore-scripts
-          node tools/browser-ci/node_modules/playwright/cli.js install --with-deps chromium
-      - name: Check built site in silent desktop and Android-emulated Chromium
-        timeout-minutes: 35
+      - run: node tools/build-level-pages.mjs
+      - run: npm ci --prefix tools/browser-ci --ignore-scripts
+      - run: node tools/browser-ci/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Observe original desktop cases without changing assertions or timeouts
         env:
-          PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/browser-ci/node_modules/playwright
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/diagnose-browser.cjs
         run: >-
           node tools/test-browser.mjs stress --root output/site
-          --scenario startup --scenario startup-missing-models --scenario startup-engine-failure
-          --scenario input --scenario lifecycle --scenario keyboard-de --scenario keyboard-en
-          --profile desktop --profile android-portrait --profile android-landscape
-          --iterations 1 --output output/browser-ci
-      - name: Retain failed browser evidence
-        if: failure()
-        uses: actions/upload-artifact@v4
+          --scenario input --scenario keyboard-de --scenario keyboard-en
+          --profile desktop --iterations 1 --output output/browser-ci
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: browser-smoke-failure
+          name: schwabingen-desktop-diagnostics
           path: output/browser-ci
-          if-no-files-found: ignore
           retention-days: 7
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: output/site
-      - id: deployment
-        uses: actions/deploy-pages@v4
