@@ -46,12 +46,18 @@ async function presentation(actor,kind){
  return view;
 }
 
-async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=false,npcBlocker=false}={}){
+async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=false,npcBlocker=false,staticBuilding=false,staticCorner=false,sealedBody=false}={}){
  const actor={id:'irmgard-navigation-test',voiceId:'crowd-irmgard-aktenordner',spriteKind:'towelWoman',
   x:ROOT[0],y:ROOT[1],vx:13,vy:0,crowd:true,pause:0,avoid,min:BOUNDS.x+13,max:BOUNDS.x+BOUNDS.w-13,
   routeBounds:noExit?{x:BOUNDS.x,y:ROOT[1]-13,w:BOUNDS.w,h:26}:{...BOUNDS},spriteRow:0,spriteFrame:0};
+ if(staticCorner){actor.vx=-14;actor.routeBounds.y=ROOT[1]-19.790336}
  const blocker=npcBlocker?{id:'stationary-body',jwdRole:'fixture-only',x:ROOT[0]+26.01,y:ROOT[1],vx:0,vy:0}:null;
- const player={x:npcBlocker?ROOT[0]+1000:ROOT[0]+29.01,y:ROOT[1],r:16};
+ const player={x:npcBlocker||staticBuilding||staticCorner?ROOT[0]+1000:ROOT[0]+29.01,y:ROOT[1],r:16};
+ if(sealedBody){
+  actor.vx=14;actor.routeBounds={x:ROOT[0]-419.3672602666692,y:ROOT[1]-52,w:965,h:72};
+  actor.min=actor.routeBounds.x+13;actor.max=actor.routeBounds.x+actor.routeBounds.w-13;
+  player.x=ROOT[0]+31.6327397333308;player.y=ROOT[1]-21;
+ }
  const npcs=blocker?[actor,blocker]:[actor],police=[];
  const view=await presentation(actor,kind),start=[actor.x,actor.y];
  const counts={held:0,accepted:0,blocked:0,acceptedSegments:0,ownedFailures:0},vectors=[];
@@ -68,7 +74,9 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
   streetPaintManifest:{'crowd-irmgard-aktenordner':person},TouristAnimations:globalThis.TouristAnimations,
   npcSpriteAtlases:{towelWoman:{tourist:legacy}},FEATURED_GAIT_CYCLE_DISTANCE:41.6,CROWD_GAIT_CYCLE_DISTANCE:24,NPC_COMPLAINT_DISTANCE:82,
   trafficCars:[],policeVehicles:[],trains:[],
-  groundStaticMotionBlocked:(x,y)=>boxed&&(x!==actor.x||y!==actor.y),staticBlocked:()=>false,stationElevation:()=>0,
+  groundStaticMotionBlocked:(x,y,r,fromX,fromY)=>boxed&&(x!==actor.x||y!==actor.y)||staticBuilding&&x>=ROOT[0]-100-r&&x<=ROOT[0]+300+r&&y<ROOT[1]-.8||staticCorner&&scope.groundContactBlocks(scope.signedRectDistance(x,y,scope.cornerBuilding),scope.signedRectDistance(fromX,fromY,scope.cornerBuilding),r),
+  cornerBuilding:{x:ROOT[0]-263.0360896,y:ROOT[1]-147.790336,w:250,h:145},
+  staticBlocked:()=>false,stationElevation:()=>0,
   dist:(x,y,a,b)=>Math.hypot(x-a,y-b),clamp:(x,a,b)=>Math.max(a,Math.min(b,x)),
   pedestrianBark:()=>{},playerSurface:()=> 'clear-fixture',requestNpcInteractions:()=>{throw Error('Unexpected interaction load')},
   before(n){return {x:n.x,y:n.y,distance:S.inspectStreetSimulation(n).distance}},
@@ -80,7 +88,7 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
  });
  const route=raw?ordinary.replace('const moved=paintedMovement?movePedestrian(n,dx,dy,13):moveGroundResponder(n,dx,dy,13);','const moved=moveGroundResponder(n,dx,dy,13);'):ordinary;
  if(raw)assert.notEqual(route,ordinary,'Baseline mutation reaches the real route caller');
- vm.runInContext(motionObserverSource(game)+'\n'+oneLine('groundContactBlocks')+'\n'+oneLine('pedestrianRouteContains')+'\n'+movement+'\n'+lane+'\n'+stall+'\n'+
+ vm.runInContext(motionObserverSource(game)+'\n'+oneLine('groundContactBlocks')+'\n'+oneLine('signedRectDistance')+'\n'+oneLine('pedestrianRouteContains')+'\n'+movement+'\n'+lane+'\n'+stall+'\n'+
   block('function orientCrowdSprite(','for(const road of horizontalRoads)')+'\n'+block('function advanceSpriteGait(','function holdFeaturedTurn(')+'\n'+
   oneLine('requestCharacterReaction')+'\n'+oneLine('updateCharacterReaction')+'\n'+registered+`
   const nativeMove=moveGroundResponder;
@@ -138,6 +146,46 @@ for(const timing of [[1/60],[.014,.020]])test(`the ordinary route completes the 
 
 test('mutating the ordinary route back to the raw resolver makes the progress regression red',async()=>{
  const f=await fixture({raw:true});try{f.run(5);assert.throws(()=>assert(f.net()>=26),assert.AssertionError)}finally{f.dispose()}
+});
+
+test('an unreachable lane inside a static building keeps a clear parallel walk',async()=>{
+ const f=await fixture({staticBuilding:true});try{
+  // Reduced production failure: body legal along a building edge, preferred
+  // lane inside its inflated wall. Lateral corrections must not alternate
+  // planted turns with each collision fallback.
+  f.run(5);
+  assert(f.net()>=26,'Legal route advances a body diameter instead of cycling turns');
+  assert.equal(f.actor.y,f.start[1],'Static-blocked lane does not pull the body into the wall');
+  const phases=new Set();
+  for(let i=0;i<600;i++){f.run(1/60);const pose=f.view.inspect().pose;if(pose?.clip==='walk')phases.add(pose.frame)}
+  assert.equal(phases.size,16,'Clear parallel walking displays a complete distance-driven cycle');
+ }finally{f.dispose()}
+});
+
+for(const timing of [[1/60],[.014,.020]])test(`a locally clear lane at a projecting static corner has a persistent legal exit (${timing.join('/')})`,async()=>{
+ const f=await fixture({staticCorner:true});try{
+  // Exact translated Spaeti failure geometry: preferred lateral point is
+  // locally clear east of the building, but continuing left on it is blocked.
+  f.run(5.5,timing);
+  assert(f.net()>=26,'Corner movement clears a body diameter without repeated fallback turns');
+  f.run(10,timing);
+  assert(f.actor.x<f.start[0]-100,'Pedestrian passes the corner along its legal route');
+  assert.equal(f.actor.vx,-14,'Static bypass preserves the route heading');
+ }finally{f.dispose()}
+});
+
+for(const timing of [[1/60],[1/30],[.1]])for(const avoid of [1,-1])test(`a player sealing both route sides causes one legal retreat (${timing}, avoid ${avoid})`,async()=>{
+ const f=await fixture({sealedBody:true,avoid});try{
+  for(let elapsed=0;elapsed<5&&f.actor.vx>0;elapsed+=timing[0])f.run(timing[0],timing);
+  assert.equal(f.actor.vx,-14);
+  const reversalX=f.actor.x;f.run(5,timing);
+  assert(f.actor.x<reversalX-26,'No-fit recovery clears a body diameter after reversing');
+  assert.equal(f.actor.vx,-14);
+  const phases=new Set();
+  for(let i=0;i<300;i++){f.run(1/60);const pose=f.view.inspect().pose;if(pose?.clip==='walk'&&pose.direction==='left')phases.add(pose.frame)}
+  assert.equal(phases.size,16,'Retreat resumes the full distance-driven walking cycle');
+  assert(f.actor.x<reversalX-70);assert.equal(f.counts.ownedFailures,0);
+ }finally{f.dispose()}
 });
 
 test('native boxed and no-exit cases retain blocked/reverse recovery',async()=>{

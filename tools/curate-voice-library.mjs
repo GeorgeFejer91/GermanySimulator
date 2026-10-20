@@ -2106,6 +2106,31 @@ const cityEnergyCanonicalBuilderSha256='b07e8bfd3577c34cc7677f083fd46f42d05c2fd3
 const cityEnergyLineSha256='903ba63ae5bbbb4f2608578be579c0507b5cb1883d2839e2ea426f9dc4499604';
 const cityEnergyFfmpegSha256='74db6c184a03dba2bdfe23e1a1f41cf5a8385bc1de6a7a1b26db1dc541abef93';
 const cityEnergyMeasurementSha256='38391e53ba5f1fc21478271165317daaefa1c8d77f9a0ab81d4338f8816003ac';
+const ambientMouthPath='assets/voices/ambient-mouth-energy.json';
+const ambientMouthIds=['street-dietmar-din-norm-rule-03','street-dietmar-din-norm-rule-06','street-horst-hausordnung-rule-02','street-horst-hausordnung-rule-05','street-horst-hausordnung-rule-08','street-waltraud-wartemarke-rule-04','street-waltraud-wartemarke-rule-10','crowd-ruediger-rasenkante-berlin-01','quiz-gisela-becker-question-24-germany','quiz-ruediger-schmidt-question-g-b2-01-germany','quiz-sabine-krueger-question-g-b1-01-germany','quiz-heike-hoffmann-question-24-germany'];
+export function validateAmbientMouthEnergy(supplement,catalog,assetRoot=root){
+ requireMatch(supplement.kind==='ambient-final-mp3-mouth-energy-supplement-v1'&&supplement.generationCalls===0&&supplement.recipeModule==='tools/neighbor-voice-processing.mjs'&&supplement.recipeModuleSha256==='fd26a84815d1ce7cb5a94726d7ca2bf386431da80ecbabfbcd280a19cb63fd98'&&supplement.recipeFunctionSha256==='327151f9fa13b35f22b938161ed745f861750516b717f319ce33e2bd32d970b3'&&supplement.decoderSha256===cityEnergyFfmpegSha256,'Ambient mouth measurement recipe changed');
+ requireMatch(sameJson(supplement.decodeRecipe,['-nostdin','-threads','1','-hide_banner','-loglevel','error','-i','<final-mp3>','-f','f32le','-ac','1','-ar','24000','pipe:1']),'Ambient mouth decoder recipe changed');
+ requireMatch(sameJson(Object.keys(supplement.clips).sort(),[...ambientMouthIds].sort()),'Ambient mouth clip scope changed');
+ const rows={};
+ for(const [id,row] of Object.entries(supplement.clips)){
+  const path='./'+row.file,clip=catalog.recordings[path];
+  requireMatch(clip&&row.clipId===id&&clip.clipId===id&&catalog.candidateClip(row.voiceId,row.source)===path,'Ambient mouth recording is not the existing default');
+  for(const key of ['voiceId','actorId','profileId','referenceSha256','referenceOriginalSha256','renderer','modelRevision','source','english','sha256','provenanceManifest'])requireMatch(row[key]===clip[key],'Ambient mouth recording identity changed: '+key);
+  requireMatch(sameJson(row.processing,clip.processing??null)&&hash(resolve(assetRoot,row.file))===row.sha256&&readFileSync(resolve(assetRoot,row.file)).length===row.encodedBytes&&hash(resolve(assetRoot,row.provenanceManifest))===row.provenanceManifestSha256,'Ambient mouth encoded audio/admission bytes changed');
+  requireMatch(row.mouthHz===40&&Number.isSafeInteger(row.sampleCount)&&row.sampleCount>0&&row.sampleCount<=720000&&row.durationSeconds===row.sampleCount/24000&&/^[a-f0-9]{64}$/.test(row.pcmSha256)&&Array.isArray(row.mouthEnergy)&&row.mouthEnergy.length===Math.ceil(row.sampleCount/600)&&row.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255)&&row.energySha256===textHash(Buffer.from(row.mouthEnergy)),'Invalid ambient final-MP3 mouth bins');
+  rows[path]={mouthHz:40,mouthEnergy:row.mouthEnergy};
+ }
+ return rows;
+}
+export function ambientMouthRecordingsBlock(source,assetRoot=root){
+ const receipt=source.match(/const ambientMouthEnergyReceipt=Object\.freeze\((\{[^\n]*\})\);/),file=resolve(assetRoot,ambientMouthPath);
+ if(!receipt){requireMatch(!existsSync(file),'Ambient mouth supplement lacks its catalog anchor');return '';}
+ const receipts=JSON.parse(receipt[1]);requireMatch(sameJson(Object.keys(receipts),[ambientMouthPath])&&hash(file)===receipts[ambientMouthPath],'Ambient mouth supplement hash drift');
+ const context={window:{},location:{search:''},URLSearchParams};vm.runInNewContext(source,context);
+ const rows=validateAmbientMouthEnergy(json(file),context.window.GermanySimulatorAudioText,assetRoot);
+ return 'const ambientMouthRecordings=clips=>Object.freeze(Object.fromEntries(Object.entries('+JSON.stringify(rows)+').filter(([path])=>Object.hasOwn(clips,path)).map(([path,cue])=>[path,{...clips[path],...cue}])));\n';
+}
 function cityMouthEnergyRows(supplement,manifests,assetRoot){
  if(!supplement)return null;
  requireMatch(supplement.kind==='city-final-mp3-mouth-energy-supplement-v1'&&supplement.recipeBuilderSha256===cityEnergyBuilderSha256&&supplement.recipeCanonicalBuilderSha256===cityEnergyCanonicalBuilderSha256&&[cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(supplement.admissionRecipeBuilderSha256)&&supplement.recipeLineSha256===cityEnergyLineSha256&&supplement.ffmpegSha256===cityEnergyFfmpegSha256&&supplement.measurementSha256===cityEnergyMeasurementSha256,'Foreign city mouth recipe/measurement');
@@ -2762,6 +2787,13 @@ export function main(args=process.argv.slice(2)){
   }else requireMatch(source.match(pattern)?.[0]===block&&source.includes(' ...sandaleRecordings,'),'Sandale recording lookup stale; run --sync only after separate admission');
  }
 
+ const ambientMouthBlock=ambientMouthRecordingsBlock(source),ambientMouthPattern=/const ambientMouthRecordings=[^\n]*\n/;
+ if(ambientMouthBlock){
+  if(args.includes('--sync')){
+   source=source.replace(ambientMouthPattern,'').replace('const recordings=Object.freeze({',()=>ambientMouthBlock+'const recordings=Object.freeze({');
+   if(!source.includes(' ...ambientMouthRecordings('))source=source.replace(' ...streetWisdomRecordings,',' ...streetWisdomRecordings,\n ...ambientMouthRecordings({...streetWisdomRecordings,...crowdRecordings,...quizGerman9Recordings}),');
+  }else requireMatch(source.match(ambientMouthPattern)?.[0]===ambientMouthBlock&&source.includes(' ...ambientMouthRecordings({...streetWisdomRecordings,...crowdRecordings,...quizGerman9Recordings}),'),'Ambient mouth projection stale; run --sync');
+ }
  const context={window:{},location:{search:'?voicePreview=1'},URLSearchParams};vm.runInNewContext(source,context);const catalog=context.window.GermanySimulatorAudioText;
  requireMatch(JSON.stringify(catalog.cityDialogue)===JSON.stringify(cityDialogueTable(cast)),'City dialogue public export missing/stale; run --sync');
  for(const [path,clip] of Object.entries(catalog.recordings)){

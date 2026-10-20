@@ -21,14 +21,14 @@ test('a boxed adviser waits until a swept body-clear exit opens',()=>{
 });
 
 test('slow advisers leave a body-clear lane for ordinary same-direction walkers',()=>{
- const h=vm.createContext({npcs:[]});vm.runInContext(sourceOf('pedestrianLane'),h);
+ const h=vm.createContext({npcs:[],groundStaticMotionBlocked:()=>false});vm.runInContext(sourceOf('pedestrianLane'),h);
  for(const vertical of [false,true])for(const direction of [-1,1]){
   const actor={routeBounds:{x:0,y:0,w:72,h:72},vx:vertical?0:12*direction,vy:vertical?12*direction:0},ordinary=h.pedestrianLane(actor),wisdom=h.pedestrianLane({...actor,wisdomId:'street-waltraud-wartemarke'});
   assert(Math.abs(ordinary-wisdom)>26,'two radius-13 bodies can pass without overlap');assert(wisdom>=13&&wisdom<=59);
  }
 });
 test('advisers step into the other legal lane for nearby ordinary oncoming traffic',()=>{
- const h=vm.createContext({npcs:[],pedestrianRouteContains:()=>true});vm.runInContext(sourceOf('pedestrianLane'),h);
+ const h=vm.createContext({npcs:[],pedestrianRouteContains:()=>true,groundStaticMotionBlocked:()=>false});vm.runInContext(sourceOf('pedestrianLane'),h);
  for(const vertical of [false,true])for(const direction of [-1,1]){
   const actor={x:200,y:200,routeBounds:{x:100,y:100,w:400,h:400},wisdomId:'street-waltraud-wartemarke',vx:vertical?0:12*direction,vy:vertical?12*direction:0},other={x:actor.x+(vertical?0:60*direction),y:actor.y+(vertical?60*direction:0),vx:-actor.vx,vy:-actor.vy};
   h.npcs=[actor,other];const lane=h.pedestrianLane(actor),oncoming=h.pedestrianLane(other.routeBounds?other:{...other,routeBounds:actor.routeBounds});assert(Math.abs(lane-oncoming)>26);

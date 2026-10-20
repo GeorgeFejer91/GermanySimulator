@@ -11,8 +11,7 @@ function notifyStreetDiscontinuity(actor,reason){if(typeof npcs!=='undefined'&&n
 function finishStreetSimulationTick(dt){
  if(!streetMotionObserver)return;
  const speechPaused=document.hidden||!state.started||state.gameOver||!!window.GermanyHUD?.paused||!!window.Germany3D?.levelTransition?.active;
- const paused=speechPaused||state.modal;
- const tick=actor=>{try{if(streetMotionObserver.accepts(actor))streetMotionObserver.tick(actor,dt,paused,speechPaused)}catch(error){streetMotionFailure(actor,error)}};
+ const tick=actor=>{const performing=state.modal&&(actor===state.quizNpc||actor===state.characterSpeaker),paused=speechPaused||state.modal&&!performing;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.tick(actor,dt,paused,speechPaused)}catch(error){streetMotionFailure(actor,error)}};
  tick(player);for(const actor of npcs)tick(actor);for(const actor of police)tick(actor);
 }
 const speechCatalog=window.GermanySimulatorAudioText;
@@ -2265,8 +2264,8 @@ function requestNpcInteractions(kind){
   assets[kind+"Sprite"]=img;atlas.tourist=manifest;atlas.canvas=null;prepareTransparentSprite(kind);
  }).catch(error=>{console.warn("Character reactions unavailable; keeping accepted walking frames",kind,error)});
 }
-function requestCharacterReaction(n,names,options={}){const accepted=globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false;if(accepted)requestNpcInteractions(n.spriteKind);return accepted}
-function updateCharacterReaction(n,dt){const manifest=npcSpriteAtlases[n?.spriteKind]?.tourist;return !manifest?.movementOnly&&(globalThis.CharacterInteractions?.advance(n,dt,manifest)||false)}
+function requestCharacterReaction(n,names,options={}){const sequence=Array.isArray(names)?names:[names],painted=sequence.map(name=>({waving:'greet',working:'work',waiting:'wait',jumping:'success',failed:'failure',idle:'wait'}[name]||name)),incidental=sequence.every(name=>['look','waving','waiting','idle'].includes(name));if(globalThis.window?.Germany3D?.requestStreetReaction?.(n,painted,{incidental,...options})){n.characterInteraction=null;n.interactionRequest=null;return true}if(globalThis.window?.Germany3D?.hasStreetReaction?.(n))return false;const accepted=globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false;if(accepted)requestNpcInteractions(n.spriteKind);return accepted}
+function updateCharacterReaction(n,dt){if(globalThis.window?.Germany3D?.hasStreetReaction?.(n))return true;const manifest=npcSpriteAtlases[n?.spriteKind]?.tourist;return !manifest?.movementOnly&&(globalThis.CharacterInteractions?.advance(n,dt,manifest)||false)}
 function orientCrowdSprite(n,dx=n.vx||0,dy=n.vy||0){
  const atlas=npcSpriteAtlases[n.spriteKind];if(atlas?.tourist){TouristAnimations.request(n,dx,dy,atlas.tourist);return}
  const horizontal=Math.abs(dx)>=Math.abs(dy);n.spriteRow=horizontal?0:(dy>0?1:2);n.spriteFlip=horizontal&&dx<0
@@ -2767,7 +2766,12 @@ function movePlayerGround(dx,dy){const steps=Math.max(1,Math.ceil(Math.hypot(dx,
 function pedestrianLane(n){
  const b=n.routeBounds,direction=Math.sign(n.vx||n.vy);let side=n.wisdomId?-1:1;
  if(n.wisdomId&&npcs.some(other=>{if(other===n||other.wisdomId||other.special||other.arrested||!!other.vx!==!!n.vx||Math.sign(other.vx||other.vy)!==-direction)return false;const ahead=(n.vx?other.x-n.x:other.y-n.y)*direction;return ahead>=-28&&ahead<96&&pedestrianRouteContains(n,other.x,other.y)}))side=1;
- return n.vx?b.y+b.h/2+side*direction*Math.min(16,b.h/2-13):b.x+b.w/2-side*direction*Math.min(16,b.w/2-13)
+ const lane=n.vx?b.y+b.h/2+side*direction*Math.min(16,b.h/2-13):b.x+b.w/2-side*direction*Math.min(16,b.w/2-13);
+ // A nominal sidewalk lane can lie inside a projecting facade or prop.
+ // Keep the current clear parallel line instead of continually steering into
+ // that wall and alternating collision-fallback turns. Forward collision and
+ // route recovery still belong to the normal movement resolver.
+ return groundStaticMotionBlocked(n.vx?n.x:lane,n.vx?lane:n.y,13,n.x,n.y)?(n.vx?n.y:n.x):lane
 }
 function createPedestrianMover({move,blocked,contactBlocks,circles}){
  const maneuvers=new WeakMap();
@@ -2786,7 +2790,24 @@ function createPedestrianMover({move,blocked,contactBlocks,circles}){
   const body=bodies.find(b=>b.actor!==n&&Number.isFinite(b.radius)&&b.radius>0&&
    (b.actor.x-n.x)*forward[0]+(b.actor.y-n.y)*forward[1]>0&&
    contactBlocks(Math.hypot(n.x+dx-b.actor.x,n.y+dy-b.actor.y),Math.hypot(n.x-b.actor.x,n.y-b.actor.y),r+b.radius));
-  if(!body)return null;
+  if(!body){
+   // A static corner has no circular actor owner. Find a short, fully checked
+   // perpendicular exit and keep its direction through planted turns, just as
+   // for a body bypass. The native checks include route, ground and clearance.
+   const root=[n.x,n.y],ahead=2*r+Math.abs(dx*forward[0]+dy*forward[1]);
+   const b=n.routeBounds,span=forward[0]?b.h:b.w;
+   for(const sign of [n.avoid||1,-(n.avoid||1)]){
+    const side=[-forward[1]*sign,forward[0]*sign];
+    for(let lateral=r/2;lateral<=span-2*r;lateral+=r/2){
+     const corner=[n.x+side[0]*lateral,n.y+side[1]*lateral];
+     const exit=[corner[0]+forward[0]*ahead,corner[1]+forward[1]*ahead];
+     if(!clear(n,r,root,corner)||!clear(n,r,corner,exit))continue;
+     return {forward,side,corner,exit,stage:'side',body:null,
+      route:routeKey(n),vx:n.vx,vy:n.vy,lastX:n.x,lastY:n.y};
+    }
+   }
+   return null;
+  }
   const clearance=r+body.radius,root=[n.x,n.y],preferred=n.avoid||1;
   for(const sign of [preferred,-preferred]){
    const side=[-forward[1]*sign,forward[0]*sign];
@@ -2800,7 +2821,7 @@ function createPedestrianMover({move,blocked,contactBlocks,circles}){
    return {forward,side,corner,exit,stage:'side',body:body.actor,radius:body.radius,
     bodyX:body.actor.x,bodyY:body.actor.y,route:routeKey(n),vx:n.vx,vy:n.vy,lastX:n.x,lastY:n.y};
   }
-  return null;
+  return false;
  }
  const movePedestrian=function(n,dx,dy,r){
   const forward=direction(n);
@@ -2810,9 +2831,9 @@ function createPedestrianMover({move,blocked,contactBlocks,circles}){
   const bodies=circles();
   let active=old;
   if(active&&(active.lastX!==n.x||active.lastY!==n.y||active.vx!==n.vx||active.vy!==n.vy||
-   active.route!==routeKey(n)||active.bodyX!==active.body.x||active.bodyY!==active.body.y||
-   !bodies.some(b=>b.actor===active.body&&b.radius===active.radius))){maneuvers.delete(n);active=null}
-  if(!active){active=plan(n,dx,dy,r,forward,bodies);if(active)maneuvers.set(n,active)}
+   active.route!==routeKey(n)||active.body&&(active.bodyX!==active.body.x||active.bodyY!==active.body.y||
+   !bodies.some(b=>b.actor===active.body&&b.radius===active.radius)))){maneuvers.delete(n);active=null}
+  if(!active){active=plan(n,dx,dy,r,forward,bodies);if(active===false)return move(n,0,0,r);if(active)maneuvers.set(n,active)}
   if(!active)return move(n,dx,dy,r);
   let target=active.stage==='side'?active.corner:active.exit,axis=active.stage==='side'?active.side:active.forward;
   let remaining=(target[0]-n.x)*axis[0]+(target[1]-n.y)*axis[1];
@@ -2994,8 +3015,8 @@ function getStreetSpeech(actor){
  if(!item.speechStarted||item.subtitleMode!=="recorded"||!recordedSpeechSource)return {...projection,speechStatus:"queued"};
  const duration=Number(item.subtitleDuration),elapsed=Number(item.subtitleElapsed?.());
  if(!Number.isFinite(duration)||duration<=0||!Number.isFinite(elapsed))return null;
- const paused=document.hidden||!!window.GermanyHUD?.paused||audio?.state!=="running",mediaTime=Math.max(0,Math.min(duration,elapsed)),clip=item.recordingSequence?null:speechCatalog.recordings[item.recording];
- const mouthOpen=!paused&&mediaTime>.025&&mediaTime<duration-.015?recordedMouthOpening(clip,mediaTime):0;
+ const paused=document.hidden||!!window.GermanyHUD?.paused||audio?.state!=="running",mediaTime=Math.max(0,Math.min(duration,elapsed)),segment=item.recordingSequence?item.recordingSegments?.find(segment=>segment.start<=mediaTime&&mediaTime<segment.end):null,clip=speechCatalog.recordings[item.recordingSequence?segment?.path:item.recording],clipTime=segment?mediaTime-segment.start:mediaTime;
+ const mouthOpen=!paused&&mediaTime>.025&&mediaTime<duration-.015?recordedMouthOpening(clip,clipTime):0;
  return {...projection,speechStatus:paused?"paused":"playing",mediaTime,mediaDuration:duration,mouthOpen,paused:!!paused};
 }
 function stimulusEligible(item,now=performance.now()){return citySpeechAllowed(item.family)&&(!item.expiresAt||now<=item.expiresAt)&&(!item.isEligible||item.isEligible())}
@@ -3038,7 +3059,7 @@ function playSyntheticStimulus(item,generation){
  u.onend=finish;u.onerror=event=>{if(finished||!current()){finish();return}if(!officialSpeech&&!started&&u.voice&&["voice-unavailable","language-unavailable","network","synthesis-failed"].includes(event.error)){const fallback=new SpeechSynthesisUtterance(text);Object.assign(fallback,{lang:u.lang,rate:u.rate,pitch:u.pitch,volume:u.volume,onstart:u.onstart,onboundary:u.onboundary,onend:finish,onerror:finish});try{speechSynthesis.speak(fallback);arm(4000);return}catch{}}finish()};arm(4000);
  try{if(speechSynthesis.paused)speechSynthesis.resume();speechSynthesis.speak(u)}catch{finish()}
 }
-function playRecordedStimulus(item,generation){let loading=true;const sources=[],gains=[];item.loadingTimer=setTimeout(()=>{loading=false;if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.text&&stimulusEligible(item))playCaptionStimulus(item,generation);else finishStimulus(item,generation)},8000);const paths=item.recordingSequence||[item.recording];Promise.all(paths.map(path=>{try{return prepareRecording(path)}catch(error){return Promise.reject(error)}})).then(async buffers=>{if(generation!==stimulusGeneration||activeStimulus!==item)return;if(!stimulusEligible(item)){finishStimulus(item,generation);return}const a=ensureAudio();if(a.state==="suspended")await a.resume();if(generation!==stimulusGeneration||activeStimulus!==item)return;if(!stimulusEligible(item)){finishStimulus(item,generation);return}if(!loading)return;clearTimeout(item.loadingTimer);const t=a.currentTime,gap=buffers.length>1?.08:0;if(item.family==="train"){item.distanceGain=a.createGain();item.distanceGain.gain.value=trainAnnouncementVolume(item);item.distanceGain.connect(foregroundOutput())}let offset=0;for(const buffer of buffers){const source=a.createBufferSource();sources.push(source);const gain=a.createGain();gains.push(gain);const when=t+offset,ramp=Math.min(AUDIO_MIX.ATTACK_SECONDS,buffer.duration/3);source.audioClass=AUDIO_CLASS.TEXT;source.buffer=buffer;gain.gain.setValueAtTime(.0001,when);gain.gain.linearRampToValueAtTime(AUDIO_MIX.FOREGROUND,when+ramp);if(buffer.duration>ramp*2){gain.gain.setValueAtTime(AUDIO_MIX.FOREGROUND,when+buffer.duration-ramp);gain.gain.linearRampToValueAtTime(.0001,when+buffer.duration)}source.connect(gain).connect(item.distanceGain||foregroundOutput());offset+=buffer.duration+gap}recordedSpeechSource=sources.length===1?sources[0]:sources;recordedSpeechGain=gains.length===1?gains[0]:gains;item.speechStarted=true;item.subtitleMode="recorded";if(item.actor)item.actorSpeechStatus="playing";item.subtitleDuration=offset-gap;item.subtitleElapsed=()=>a.currentTime-t;sources.at(-1).onended=()=>finishStimulus(item,generation);offset=0;buffers.forEach((buffer,index)=>{sources[index].start(t+offset);offset+=buffer.duration+gap});loading=false;item.start?.(item);startSubtitle(item)}).catch(()=>{if(!loading)return;loading=false;clearTimeout(item.loadingTimer);for(const source of sources){source.onended=null;try{source.stop()}catch{}try{source.disconnect()}catch{}}for(const gain of gains)try{gain.disconnect()}catch{}if(generation!==stimulusGeneration||activeStimulus!==item)return;recordedSpeechSource=null;recordedSpeechGain=null;try{item.distanceGain?.disconnect()}catch{}item.speechStarted=false;if(item.actor)item.actorSpeechStatus="queued";if(!stimulusEligible(item)){finishStimulus(item,generation);return}if(item.text)playSyntheticStimulus(item,generation);else finishStimulus(item,generation)})}
+function playRecordedStimulus(item,generation){let loading=true;const sources=[],gains=[];item.loadingTimer=setTimeout(()=>{loading=false;if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.text&&stimulusEligible(item))playCaptionStimulus(item,generation);else finishStimulus(item,generation)},8000);const paths=item.recordingSequence||[item.recording];Promise.all(paths.map(path=>{try{return prepareRecording(path)}catch(error){return Promise.reject(error)}})).then(async buffers=>{if(generation!==stimulusGeneration||activeStimulus!==item)return;if(!stimulusEligible(item)){finishStimulus(item,generation);return}const a=ensureAudio();if(a.state==="suspended")await a.resume();if(generation!==stimulusGeneration||activeStimulus!==item)return;if(!stimulusEligible(item)){finishStimulus(item,generation);return}if(!loading)return;clearTimeout(item.loadingTimer);const t=a.currentTime,gap=buffers.length>1?.08:0;if(item.family==="train"){item.distanceGain=a.createGain();item.distanceGain.gain.value=trainAnnouncementVolume(item);item.distanceGain.connect(foregroundOutput())}let offset=0;item.recordingSegments=[];for(const [index,buffer] of buffers.entries()){item.recordingSegments.push({path:paths[index],start:offset,end:offset+buffer.duration});const source=a.createBufferSource();sources.push(source);const gain=a.createGain();gains.push(gain);const when=t+offset,ramp=Math.min(AUDIO_MIX.ATTACK_SECONDS,buffer.duration/3);source.audioClass=AUDIO_CLASS.TEXT;source.buffer=buffer;gain.gain.setValueAtTime(.0001,when);gain.gain.linearRampToValueAtTime(AUDIO_MIX.FOREGROUND,when+ramp);if(buffer.duration>ramp*2){gain.gain.setValueAtTime(AUDIO_MIX.FOREGROUND,when+buffer.duration-ramp);gain.gain.linearRampToValueAtTime(.0001,when+buffer.duration)}source.connect(gain).connect(item.distanceGain||foregroundOutput());offset+=buffer.duration+gap}recordedSpeechSource=sources.length===1?sources[0]:sources;recordedSpeechGain=gains.length===1?gains[0]:gains;item.speechStarted=true;item.subtitleMode="recorded";if(item.actor)item.actorSpeechStatus="playing";item.subtitleDuration=offset-gap;item.subtitleElapsed=()=>a.currentTime-t;sources.at(-1).onended=()=>finishStimulus(item,generation);offset=0;buffers.forEach((buffer,index)=>{sources[index].start(t+offset);offset+=buffer.duration+gap});loading=false;item.start?.(item);startSubtitle(item)}).catch(()=>{if(!loading)return;loading=false;clearTimeout(item.loadingTimer);for(const source of sources){source.onended=null;try{source.stop()}catch{}try{source.disconnect()}catch{}}for(const gain of gains)try{gain.disconnect()}catch{}if(generation!==stimulusGeneration||activeStimulus!==item)return;recordedSpeechSource=null;recordedSpeechGain=null;try{item.distanceGain?.disconnect()}catch{}item.speechStarted=false;if(item.actor)item.actorSpeechStatus="queued";if(!stimulusEligible(item)){finishStimulus(item,generation);return}if(item.text)playSyntheticStimulus(item,generation);else finishStimulus(item,generation)})}
 function pumpStimuli(){if(activeStimulus||!state.voiceOn)return;clearTimeout(stimulusTimer);if(stimulusQueue.length&&window.BuergeramtLevel?.active&&(window.BuergeramtLevel.audioTextBusy||window.BuergeramtLevel.subtitleBusy)){stimulusTimer=setTimeout(pumpStimuli,40);return}for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);const index=chooseStimulusIndex(stimulusQueue,stimulusLastServed);if(index<0){if(stimulusQueue.length){const wait=Math.max(1,nextAmbientAt-performance.now());stimulusTimer=setTimeout(pumpStimuli,wait)}else setAudioText();return}const item=stimulusQueue.splice(index,1)[0],generation=stimulusGeneration;activeStimulus=item;stimulusLastServed.set(item.family,++stimulusSequence);setAudioText(item.family,item.priority);if(item.recording||item.recordingSequence)playRecordedStimulus(item,generation);else playSyntheticStimulus(item,generation)}
 function speak(text,{urgent=false,masculine=false,voiceKey="",candidateVoiceId="",candidateSegments=null,start,done,lang="de-DE",family="dialogue",priority=STIMULUS_PRIORITY.CRITICAL,ambient=false,isEligible,subtitle,captionOnly=false,captionSpeaker="",cueToken,actor=null}={}){if(!state.voiceOn){showWorldBark(captionSpeaker||voiceKey,text,urgent,"","",{family,start,done,subtitle,cueToken,actor});return}const id=candidateVoiceId||voiceKey,recording=speechCatalog.candidateClip?.(id,text),recordingSequence=recording?null:speechCatalog.candidateSequence?.(id,candidateSegments);queueStimulus({family,priority,ambient,isEligible,text,recording,recordingSequence,clip:speechCatalog.recordings?.[recording],urgent,masculine,voiceKey,candidateVoiceId:id,start,done,lang,subtitle,captionOnly,captionSpeaker,cueToken,actor})}
 function speakRecorded(text,recording,{urgent=false,masculine=false,voiceKey="",candidateVoiceId="",start,done,family="dialogue",priority=STIMULUS_PRIORITY.CRITICAL,ambient=false,isEligible,subtitle,captionOnly=false,captionSpeaker="",hideCaption=false,cueToken,actor=null}={}){if(!state.voiceOn){if(hideCaption){start?.();done?.()}else showWorldBark(captionSpeaker||voiceKey,text,urgent,"","",{family,start,done,subtitle,cueToken,actor});return}queueStimulus({family,priority,ambient,isEligible,text,recording,urgent,masculine,voiceKey,candidateVoiceId,start,done,subtitle,captionOnly,captionSpeaker,hideCaption,cueToken,actor,clip:speechCatalog.recordings?.[recording]})}
@@ -3737,7 +3758,7 @@ function update(dt){try{updateCitySimulation(dt)}finally{finishStreetSimulationT
 function updateCitySimulation(dt){
  if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active){updateTrainAnnouncement(0);return}
  if(state.started&&!state.gameOver)updateJwdPerformance(dt);
- if(state.started&&state.modal&&!state.gameOver)for(const n of npcs){const m=npcSpriteAtlases[n.spriteKind]?.tourist;if(!m?.interactions)continue;if(n===state.quizNpc||n===state.characterSpeaker){if(!n.characterInteraction&&!n.interactionRequest)requestCharacterReaction(n,"waiting")}if(n.touristTurn&&n.interactionRequest)TouristAnimations.advance(n,0,dt,m);else updateCharacterReaction(n,dt)}
+ if(state.started&&state.modal&&!state.gameOver)for(const n of npcs){if(window.Germany3D?.hasStreetReaction?.(n))continue;const m=npcSpriteAtlases[n.spriteKind]?.tourist;if(!m?.interactions)continue;if(n===state.quizNpc||n===state.characterSpeaker){if(!n.characterInteraction&&!n.interactionRequest)requestCharacterReaction(n,"waiting")}if(n.touristTurn&&n.interactionRequest)TouristAnimations.advance(n,0,dt,m);else updateCharacterReaction(n,dt)}
  if(!state.started||state.modal){updateTrainAnnouncement(0);return}
  state.minutes+=dt*2;
  if(state.minutes>=1440){state.minutes-=1440;state.day++;if(state.day>3&&!state.citizen){endGame(false);return}innerMonologue("deadline")}

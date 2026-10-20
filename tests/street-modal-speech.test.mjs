@@ -10,7 +10,11 @@ function between(source,start,end){const a=source.indexOf(start),b=source.indexO
 let instance=0;
 async function fixture(){
   // Import the actual pure adapter without invoking its image, fetch or Three.js APIs.
-  const api=await import('data:text/javascript;base64,'+Buffer.from(adapter.replace("'./asset-loaders.js?v=20261020-bounded-assets'",JSON.stringify(new URL('asset-loaders.js?v=20261020-bounded-assets',root).href))+'\n// fixture '+instance++).toString('base64'));
+  const fixtureSource=adapter
+    .replace("'./asset-loaders.js?v=20261020-bounded-assets'",JSON.stringify(new URL('asset-loaders.js?v=20261020-bounded-assets',root).href))
+    .replace("'./street-character-mouth.js'",JSON.stringify(new URL('street-character-mouth.js',root).href))
+    .replace("'./street-motion-delivery.js'",JSON.stringify(new URL('street-motion-delivery.js',root).href));
+  const api=await import('data:text/javascript;base64,'+Buffer.from(fixtureSource+'\n// fixture '+instance++).toString('base64'));
   const image={file:'./assets/characters/street/fixture.webp',sha256:'a'.repeat(64),width:16,height:16};
   const clip={offset:0,count:4,seconds:1};
   const person={id:'fixture-person',grid:[4,1],cell:[16,16],pivot:[8,16],figureHeight:16,figureWorldHeight:1.7,strideDistance:17,

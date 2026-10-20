@@ -91,6 +91,36 @@ actorTest('Failed recording caption terminal cannot masquerade as native; voice-
  f.h.state.voiceOn=false;f.request();assert.equal(f.h.getStreetSpeech(f.actor),null);f.h.hideWorldBark();f.h.state.voiceOn=true;f.request(null);assert.equal(f.h.getStreetSpeech(f.actor),null);
  return{silentDoneHasNoNativeProjection:true,voiceOffUnboundClosed:true};
 });
+
+actorTest('Composite quiz mouths follow decoded segment clocks and close between owned recordings',async f=>{
+ const paths=Object.entries(f.catalog.recordings).filter(([,clip])=>clip.voiceId===f.actor.voiceId&&clip.mouthEnergy?.length).slice(0,3).map(([path])=>path);
+ assert.equal(paths.length,3);
+ const clips=paths.map(path=>f.catalog.recordings[path]),durations=[1.137,2.273,1.719],text=clips.map(clip=>clip.source).join(' ');
+ let completed=0,terminal;
+ f.h.queueStimulus({family:'quiz',text,recordingSequence:paths,candidateVoiceId:f.actor.voiceId,actor:f.actor,done(){completed++;terminal=f.h.getStreetSpeech(f.actor)}});
+ const item=f.h.activeStimulus,token=f.h.getStreetSpeech(f.actor).cueToken;
+ assert.equal(f.h.getStreetSpeech(f.actor).mouthOpen,0);
+ for(let index=0;index<paths.length;index++)await f.start(index,durations[index]);
+ assert.deepEqual(f.sources.map(source=>source.startAt),[10,11.217,13.57]);
+ for(const [index,start] of [[0,0],[1,1.217],[2,3.57]]){
+  f.h.audio.currentTime=10+start+.3;
+  const speech=f.h.getStreetSpeech(f.actor),localTime=f.h.audio.currentTime-f.sources[index].startAt;
+  assert.equal(speech.speechStatus,'playing');assert.equal(speech.cueToken,token);
+  assert.equal(speech.mouthOpen,clips[index].mouthEnergy[Math.floor(localTime*clips[index].mouthHz)]/255,'segment '+index+' uses its own measured energy and decoded start');
+ }
+ for(const elapsed of [1.16,3.51]){f.h.audio.currentTime=10+elapsed;assert.equal(f.h.getStreetSpeech(f.actor).mouthOpen,0,'the native inter-segment gap is silent')}
+ f.h.audio.currentTime=11.517;
+ for(const pause of [()=>f.h.window.GermanyHUD={paused:true},()=>{f.h.window.GermanyHUD.paused=false;f.h.document.hidden=true},()=>{f.h.document.hidden=false;f.h.audio.state='suspended'}]){
+  pause();assert.equal(f.h.getStreetSpeech(f.actor).speechStatus,'paused');assert.equal(f.h.getStreetSpeech(f.actor).mouthOpen,0);
+ }
+ f.h.audio.state='running';assert.equal(f.h.getStreetSpeech(f.other),null);
+ const profile=clips[1].profileId;clips[1].profileId='foreign-profile';assert.equal(f.h.getStreetSpeech(f.actor),null);clips[1].profileId=profile;
+ f.sources.at(-1).onended();assert.equal(completed,1);assert.equal(terminal.mouthOpen,0);assert.equal(terminal.speechStatus,'finished');assert.equal(f.h.getStreetSpeech(f.actor),null);
+ f.h.queueStimulus({family:'quiz',text,recordingSequence:paths,candidateVoiceId:f.actor.voiceId,actor:f.actor});
+ const pending=f.h.activeStimulus;f.h.stopSpeech();assert.equal(pending.actorSpeechStatus,'cancelled');assert.equal(f.h.getStreetSpeech(f.actor),null);
+ for(let index=3;index<6;index++)await f.start(index,durations[index-3]);
+ assert.equal(f.sources.length,3,'late decoded composite cannot revive a cancelled actor');assert.equal(item.actorSpeechStatus,'finished');
+});
 actorTest('Dialogue actor default cannot inherit stale pointer; explicit noncity metadata retained',async f=>{
  f.h.state.characterSpeaker=f.other;f.h.openDialogue('CITY OWNER',[f.clip.source],'!',null,f.actor.voiceId,[f.clip.english]);assert.equal(f.h.state.dialogueData.actor,null);assert.equal(f.h.activeStimulus.actor,null);assert.equal(f.h.getStreetSpeech(f.other),null);
  f.h.openDialogue('EXPLICIT OWNER',[f.clip.source],'!',null,f.actor.voiceId,[f.clip.english],false,false,f.actor);assert.equal(f.h.state.dialogueData.actor,f.actor);assert.equal(f.h.activeStimulus.actor,f.actor);assert.equal(f.h.getStreetSpeech(f.actor).speechStatus,'queued');

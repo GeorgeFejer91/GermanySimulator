@@ -1,3 +1,39 @@
+# Ambient walking and talking goal — 2026-10-20
+
+Active owner and six milestones: GAME-COMPLETION.md, chat
+01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
+primary dirty checkout and separately owned Merz work remain preserved.
+
+Core v3 freezes70 files (descriptor71d94ada6f82389a834cb54f8e4102c6d3e99d7cd3aa05b5bf5b0b21b3ddc527).
+Packaging v4 freezes71 files (descriptor145fde5dbbdf83eeb08f247b59fefc7f4c05459cb41861e8519a5038b3a16943),
+retaining every runtime/art byte and updating only one regression plus.gitattributes.
+It adds eight source-bound standing mouth fits, actual recorded segment energy,
+lazy optional mouth/motion delivery, native planted reaction routing, world-up
+flat street paint, static-corner exits and sealed-body pause/reverse recovery.
+All existing body artwork, heights, pivots and collision radii remain fixed.
+Full Node2248/2248 passes; independent general review204 fresh checks, curator
+and six syntax checks pass with no introduced defect. Physics and Camera reviews
+retain bounded verdicts and explicit missing scenarios. Seven actual native
+speech/depth/retreat browser cases pass; the broader object-consistency check now
+passes all three profiles (49 geometry checks each, loaded/fallback landmarks,
+root and compatibility routes). Earlier loading timeouts remain preserved.
+Camera inspected all36 new frames; its supplement lists missing timed camera/roof/depth-crossing
+coverage and one landscape fallback image hidden by the loader. Full world acceptance remains open.
+
+Precommit inspection caught Git line-ending conversion breaking all eight mouth
+payload hashes. A scoped -text rule now preserves immutable delivery bytes;
+the clean-filter regression fails before and passes after, and all eight actual
+index payload hashes match their manifest. The failed receipt is retained.
+
+The core can be preserved as a local checkpoint, without claiming release or
+full42-character completion. Required world FAIL/NOT RUN rows and publication
+verification remain open. Do not promote held body candidates merely because
+core tests pass. Gisela full16 greeting/body-mouth and Horst four right gait poses
+have source-only acceptance. Sandale remaining mouth candidates have passed full-sheet
+root source review; shader/media integration remains open. Current accepted source fragments have no atlas/runtime adoption.
+Next: reconcile the Camera supplement, close the required rendered gaps, then
+integrate accepted source families in bounded increments. Keep the goal ACTIVE.
+
 # Final browser integration — 2026-10-19
 
 The final combined source passes 2161 Node checks in 206 files, including a new

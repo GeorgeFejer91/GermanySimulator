@@ -1,5 +1,17 @@
 # Speech catalog and subtitle authority
 
+The ambient mouth supplement `assets/voices/ambient-mouth-energy.json` binds
+measured 40 Hz final-MP3 envelopes to seven existing adviser rules, the Rüdiger
+Rasenkante bilingual crowd pilot and four admitted quiz question segments. The
+curator validates exact recording/profile/source/manifest/PCM hashes and emits
+only mouth fields into the existing catalog. It preserves every default resolver
+and admission: all 69 current default city/crowd/adviser recordings now have
+measured envelopes, while complete default recorded quiz prompts remain absent.
+Quiz composite speech samples the current decoded segment at its own local
+playhead; the existing 80 ms inter-segment gaps stay closed. Queued, paused,
+cancelled and stale owners cannot acquire articulation. Source/clock checks do
+not establish perceived synchronization or supply missing animation profiles.
+
 Recorded speech fetches append the catalog's encoded SHA-256 as a `voice` query
 parameter, so replacing a recording at its existing path changes its HTTP cache
 identity after the updated catalog loads. The canonical path still owns the

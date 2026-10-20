@@ -238,6 +238,10 @@
         "sha256": "fd483674a70709ea0d77f1979da8e2c9505d8325152df8522049fc6b1ff7208c",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/crowd-dietmar-din-norm/mouths-standing-v1.json",
+        "sha256": "0f83eb9f30ed7448fa01ef568a3a0515f3bae584543883f1af4ddfbd84c0a94c"
       }
     },
     "crowd-guenther-gartenzaun": {
@@ -355,6 +359,10 @@
         "sha256": "c0c4613dca04f2e5e3bd8a47d36efd3dc89c75e5d3410b2fd83cfc53ad0457ca",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/crowd-waltraud-wartemarke/mouths-standing-v1.json",
+        "sha256": "6869104c0c05569a6dfc471ccf363a43ef3dcae49e5f73050960c708003a5635"
       }
     },
     "quiz-dietmar-schulz": {
@@ -403,6 +411,10 @@
         "sha256": "44b36e0d7c337758c52e10007ffe27ec6bd6f470b6368e9c0c0f0c41e8808021",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-gisela-becker/mouths-standing-v1.json",
+        "sha256": "0fa80e41eb1b7292653835caf1b8e33fbd02b36fec97942b3977669fdca9dc89"
       }
     },
     "quiz-hartmut-keller": {
@@ -451,6 +463,10 @@
         "sha256": "589063cdfc9f8bd5f8e45135d890bc8b2ee6501d43d81f91a98f15409c22b6f1",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-heike-hoffmann/mouths-standing-v1.json",
+        "sha256": "e0379b76be663bf2080eb1be51a78f84eae93563ddce256b3753ec5b94688673"
       }
     },
     "quiz-klaus-dieter-wagner": {
@@ -475,6 +491,10 @@
         "sha256": "97ed099868dd81a7dcf1a5e96503f0aba59d1b785041390a93dfb921e401d641",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-klaus-dieter-wagner/mouths-standing-v1.json",
+        "sha256": "b488b121c0931448ec8c22af605ab1784b860eec99f93dd0510a93604994ab58"
       }
     },
     "quiz-ruediger-schmidt": {
@@ -523,6 +543,10 @@
         "sha256": "1718c7afba11cbc5eebd580c3ab8e881ca137133194c2e0d772a76b9a880a352",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-sabine-krueger/mouths-standing-v1.json",
+        "sha256": "771e31351011fadd89d2a78c5a8f7aa6ee141cbc47156ebf3a39b032e87b483c"
       }
     },
     "quiz-uwe-moeller": {
@@ -547,6 +571,10 @@
         "sha256": "74323bcd9b16b71946681352c5fa05ebdc8b32396f3d1b74cb9803fcfc631213",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-uwe-moeller/mouths-standing-v1.json",
+        "sha256": "b74ec387ce1c5b3a7d81637ee297a5bd9ea97b85cddec5974e8e37a4991327f8"
       }
     },
     "jwd-ede-einbruch": {
@@ -3271,6 +3299,10 @@
         "sha256": "df33b590718ab69d6c01bcf19c9f3001346be0d294759592d9ca61a52dfa05e2",
         "width": 128,
         "height": 160
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/quiz-brigitte-neumann/mouths-standing-v1.json",
+        "sha256": "3722f21694064d6cba25acb0673d7a36288f6fdd2313d63bbf3481ccfb9ea340"
       }
     },
     "stadt-karl-heinz-post": {

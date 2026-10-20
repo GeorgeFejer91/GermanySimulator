@@ -36,10 +36,10 @@ async function fixture(){
  return {camera,actor,host,paint,context,blocker,dispose(){paint.dispose();for(const slot of slots)slot.mesh.geometry.dispose();for(const material of materials)material.dispose()}};
 }
 
-test('actual painted head sightline drives the production fade while old vertical rays miss it',async()=>{
+test('actual painted head-edge sightline drives the production fade while procedural rays miss it',async()=>{
  const f=await fixture();
  try{
-  const targets=f.context.streetPlayerSightlineTargets(),head=targets[0].clone(),slot=f.blocker(head);
+  const targets=f.context.streetPlayerSightlineTargets(),head=targets[1].clone(),slot=f.blocker(head);
   assert.equal(targets.length,12);
   assert.equal(f.context.buildingObstructsPlayer(slot),false,'Retained counterexample to procedural-only sampling');
   assert.equal(f.context.buildingObstructsPlayer(slot,targets),true);
