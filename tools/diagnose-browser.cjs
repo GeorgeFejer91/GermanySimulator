@@ -4,7 +4,10 @@ const path = require('node:path');
 const lib = require(path.resolve('tools/browser-ci/node_modules/playwright'));
 const launch = lib.chromium.launch.bind(lib.chromium);
 module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executablePath(), async launch(options) {
-  const browser = await launch({...options, args: [...options.args, '--enable-gpu', '--use-gl=angle', '--use-angle=gl']});
+  const graphicsArgs = process.env.PROPS_GPU === 'mesa' ?
+    ['--enable-gpu', '--use-cmd-decoder=passthrough', '--use-gl=angle', '--use-angle=gl', '--ozone-platform=x11', '--ignore-gpu-blocklist'] :
+    ['--disable-gpu-compositing'];
+  const browser = await launch({...options, args: [...options.args, ...graphicsArgs]});
   const probeContext = await browser.newContext();
   const probePage = await probeContext.newPage();
   const graphics = await probePage.evaluate(() => {
@@ -20,7 +23,7 @@ module.exports = {...lib, chromium: {executablePath: () => lib.chromium.executab
   fs.writeFileSync('output/browser-ci/graphics.json', JSON.stringify(graphics));
   await probeContext.close();
   console.log(JSON.stringify({graphics}));
-  if (!graphics || /SwiftShader/i.test(graphics.renderer) || graphics.error || graphics.pixel.some((value, i) => Math.abs(value - [64,128,191,255][i]) > 1)) {
+  if (!graphics || process.env.PROPS_GPU === 'mesa' && /SwiftShader/i.test(graphics.renderer) || graphics.error || graphics.pixel.some((value, i) => Math.abs(value - [64,128,191,255][i]) > 1)) {
     await browser.close(); throw Error('ANGLE OpenGL WebGL2 unavailable, fallback or failed readback');
   }
   const newContext = browser.newContext.bind(browser);

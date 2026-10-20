@@ -7,6 +7,10 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        gpu: [mesa, software-compositor]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,6 +23,8 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/diagnose-browser.cjs
           LIBGL_ALWAYS_SOFTWARE: '1'
+          PROPS_GPU: ${{ matrix.gpu }}
+          DEBUG: pw:browser
         run: >-
           xvfb-run -a node tools/test-browser.mjs stress --root output/site
           --scenario input --scenario keyboard-de --scenario keyboard-en
@@ -26,6 +32,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: schwabingen-desktop-diagnostics
+          name: schwabingen-desktop-diagnostics-${{ matrix.gpu }}
           path: output/browser-ci
           retention-days: 7
