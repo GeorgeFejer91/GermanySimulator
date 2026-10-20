@@ -66,9 +66,32 @@ perceptual listening remain unavailable; production captions keep dynamic mouths
 closed. Full required C1–C5/X1 gaps remain open. Evidence and exact bounds are in
 output/ambient-city-animation/reviews/sandale-mouth-v1-{core,physics,camera}.
 
-Next selected integration: source-fit mouths on already-animated
-crowd-irmgard-aktenordner, keeping her accepted body art and25.6 stride. This is
-not held stadt-irmgard-aktenstapel. No unrelated candidate body is promoted.
+Current Irmgard increment supplies260 visible own-mouth fits and97 explicit nulls
+across her357-slot accepted atlas, plus separate standing paint. Main manifest
+adds only its125KB source-bound definition; body files, controller/runtime, world
+scale/pivot and stride25.6 remain unchanged from checkpointdd316d0. Source/zero/max
+fits and light/dark edges received complete root source review;7 optimizer-limit
+cases retain direct pixel observations. V1 froze100inputs (ca43590ce0ac632bfc9a8db0b743c02c7f0e02f52afc35f48effc131a38ebdbf).
+Its full suite had2219PASS/38FAIL from3old Three-core-only fixtures lacking ShaderChunk.
+V2 corrects only those imports to the existing full production module:102pins
+(d796f3a74d0444e7f0a8750462c70dac7f09c63a6eefd256de41adf6c07e7476).
+All49 affected and full2257/2257 checks now pass,0skips. Curator passes.
+
+Fresh general review90checks and exact260-profile/standing affine compilation pass;
+Physics2142 mapping+6standing comparisons and public loader/walk/pause/cancel probes
+pass. V2 rebinds both through unchanged runtime/data and fresh49checks. Actual GPU
+checks pass all357slots at both decoded delivery sizes (714cases). Native default
+recorded speech passes desktop/portrait/landscape emulation: exact owned clip/text/
+profile, actual media clock and shader, peers closed, completion/replay, FILE
+closure/resume, VOICE/actor cancellation. Debug player placement and fixture modal
+cleanup are separately labelled. Final independent Camera visual review passes this bounded increment.
+All10 staged payload paths retain exact reviewed bytes. Existing required wholeworld
+rows, physical Android/listening and the rest of the42-cast goal remain open.
+This is already-animated crowd-Irmgard; held stadt-Irmgard art is not promoted.
+
+Next selected work after the Irmgard checkpoint: finish the Gisela full walking/
+talking/gesture pilot, beginning with exact body/foot calibration and accepted
+full16 greeting adoption. Other resident, Hartmut and Horst candidates stay held.
 
 Initial baseline: 73/73 focused Node checks pass (street sprites, playback,
 pedestrians and recorded quiz segments). No new animation has been accepted.

@@ -13,7 +13,7 @@ speech/depth/retreat cases and the three-profile object harness passed. The Came
 supplement retains missing timed/roof/depth-crossing coverage and one landscape
 fallback image obscured by the loader. Full world acceptance remains open.
 
-Current Sandale increment adds source-bound connected mouths to all211 visible
+Local checkpointdd316d0 adds source-bound connected mouths to all211 visible
 poses across304 existing atlas cells;93 rear/occluded/unused cells remain null.
 Body artwork, scales, pivot, geometry, locomotion and cycle distances are unchanged.
 The native-atlas adapter owns one material per actual actor and shares its texture,
@@ -40,10 +40,39 @@ Evidence: output/ambient-city-animation/sandale-mouth-integration and
 reviews/sandale-mouth-v1-{core,physics,camera}. Physical Android/listening and the
 inherited required C1–C5/X1 gaps remain outstanding. No publication yet.
 
-Next selected increment: mouth coverage for already-animated
-crowd-irmgard-aktenordner. Preserve her accepted body/stride; do not confuse her
-with the held stadt-irmgard-aktenstapel candidate. Other resident, Gisela, Horst
-and Hartmut body candidates remain unadopted. Keep the42-character goal ACTIVE.
+Current selected increment: mouths for already-animated crowd-irmgard-aktenordner
+(the orange-haired binder carrier, distinct from held stadt-irmgard-aktenstapel).
+Main manifest adds one125KB immutable mouth definition:260 visible fits,97 rear/
+occluded/unused nulls, all357 atlas slots plus her own standing source. Body and
+source images, geometry, scale, pivot, stride25.6 and runtime JavaScript are exact
+checkpointdd316d0 bytes. Existing shader/media owners handle the capability.
+Root reviewed all260 source/closed/open CPU fits, both backgrounds, allnull coverage
+and standing. Seven optimizer-limit cases retain direct final-pixel review.
+
+V1 froze100inputs (ca43590ce0ac632bfc9a8db0b743c02c7f0e02f52afc35f48effc131a38ebdbf).
+Full V1 ran2219PASS/38FAIL: three old fixtures imported Three core without shader
+support. V2 changes only those three imports to the existing production module;
+102pins (d796f3a74d0444e7f0a8750462c70dac7f09c63a6eefd256de41adf6c07e7476).
+All49 affected checks and full2257/2257 checks pass,0skips; curator passes.
+Fresh general review90checks plus affine/profile/source oracle passes; Physics
+2142 allslot/variant/camera mappings plus6standing cases pass, with public loader/
+walk/pause/cancel probes. Both independently verify the fixture-only V2 delta.
+Git staged10payload files are all raw-byte equal to their reviewed working files.
+
+Actual source GPU checks pass all357slots at both desktop96x120 and mobile88x110
+cell sizes on the current StreetCharacter renderer. Three native browser cases
+pass on desktop and both Android-emulated aspects: exact admitted own recording,
+profile/text, media clock/shader alignment, same-voice peers/clone closed, natural
+completion, replay, FILE advancing media with lips closed, same-cue resume, VOICE
+and actor cancellation. Native actor motion/text/catalog are unchanged; player
+placement/timers and hidden-dialogue cleanup are explicitly diagnostic. Earlier
+fixture/readiness/range failures are retained. Final independent Camera visual review passes this bounded increment.
+Evidence: output/ambient-city-animation/irmgard-mouths and
+reviews/irmgard-mouth-v1-{core,physics,camera}. No publication/fullworld acceptance.
+
+Next after this checkpoint: finish the Gisela walking/talking/gesture pilot from
+accepted sources, beginning with exact body/foot calibration and the accepted
+full16 greeting. Other body candidates stay held. Keep the42-character goal ACTIVE.
 
 # Final browser integration — 2026-10-19
 

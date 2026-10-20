@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as S from '../street-character-sprites.js';
-import * as THREE from '../assets/vendor/three/0.186.0/build/three.core.js';
+import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {motionObserverSource,pedestrianAvoidanceSource} from './street-simulation-fixture-source.mjs';
 
 const game=readFileSync('game.js','utf8').replaceAll('\r\n','\n'),world=readFileSync('world3d.js','utf8');

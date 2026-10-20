@@ -3275,6 +3275,10 @@
             }
           }
         }
+      },
+      "mouthPaint": {
+        "file": "./assets/characters/street/crowd-irmgard-aktenordner/mouths-v1.json",
+        "sha256": "c60ac72fb933143c4cb93f65cec6ba916ca379daf2a36b3f0389e2c9ada84d23"
       }
     },
     "quiz-brigitte-neumann": {

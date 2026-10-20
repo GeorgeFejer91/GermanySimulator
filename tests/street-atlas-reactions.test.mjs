@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import * as THREE from '../assets/vendor/three/0.186.0/build/three.core.js';
+import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import * as S from '../street-character-sprites.js';
 import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
