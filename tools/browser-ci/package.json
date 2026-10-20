@@ -1,0 +1,7 @@
+{
+  "name": "germany-simulator-browser-checks",
+  "private": true,
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

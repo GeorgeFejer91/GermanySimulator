@@ -119,14 +119,14 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   };
   const mesh=new THREE.Mesh(geometry,material);mesh.frustumCulled=false;mesh.visible=false;mesh.userData.anchorActive=false;owner.attachPaint(mesh);
   const free=entry=>{entry.texture.dispose();entry.bitmap.close()};
-  async function load(id){
-    if(disposed||controller.signal.aborted)return;
+  async function load(id,requestSignal=controller.signal){
+    if(disposed||controller.signal.aborted||requestSignal.aborted)return;
     for(const [key,entry] of cache)if(!wanted.includes(key)&&cache.size>=3){cache.delete(key);free(entry)}
-    const frame=frames[id],response=await fetch(new URL(frame.file,manifestUrl),{signal:controller.signal});
+    const frame=frames[id],response=await fetch(new URL(frame.file,manifestUrl),{signal:requestSignal});
     if(!response.ok)throw new Error('Painted anchor unavailable: '+id);
     const bytes=await response.arrayBuffer();if(bytes.byteLength!==frame.bytes)throw new Error('Invalid painted anchor length');
     const bitmap=await createImageBitmap(new Blob([bytes],{type:'image/webp'}),{imageOrientation:'flipY',premultiplyAlpha:'none',colorSpaceConversion:'none'});
-    if(disposed||controller.signal.aborted){bitmap.close();return}
+    if(disposed||controller.signal.aborted||requestSignal.aborted){bitmap.close();return}
     if(bitmap.width!==frame.width||bitmap.height!==frame.height){bitmap.close();throw new Error('Invalid painted anchor dimensions')}
     if(!wanted.includes(id)){bitmap.close();return}
     if(cache.size>=3){bitmap.close();return}
@@ -136,8 +136,8 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   function pump(){
     if(disposed||pending||globalThis.document?.hidden)return;
     const id=wanted.find(id=>!cache.has(id)&&!failures.has(id));if(!id)return;
-    const task=async()=>{if(disposed||globalThis.document?.hidden)return;try{await load(id)}catch(error){if(!disposed&&!controller.signal.aborted)failures.set(id,error.message)}};
-    pending=Promise.resolve().then(()=>queueLoad?queueLoad(task):task()).catch(error=>{if(!disposed&&!controller.signal.aborted)failures.set(id,error.message)}).finally(()=>{pending=null});
+    const task=async({signal:requestSignal}={})=>{if(disposed||globalThis.document?.hidden)return;try{await load(id,requestSignal||controller.signal)}catch(error){if(!disposed&&!controller.signal.aborted)failures.set(id,error.message)}};
+    pending=Promise.resolve().then(()=>queueLoad?queueLoad(task,{signal:controller.signal}):task()).catch(error=>{if(!disposed&&!controller.signal.aborted)failures.set(id,error.message)}).finally(()=>{pending=null});
   }
   const onAbort=()=>api.dispose();
   const api={

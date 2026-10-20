@@ -3,7 +3,7 @@ import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-const source=readFileSync(new URL('../game-hud.js',import.meta.url),'utf8').replace(/^import .*\r?\n/,'');
+const source=readFileSync(new URL('../game-hud.js',import.meta.url),'utf8').replace(/^import .*\r?\n/gm,'');
 function hud({reduced=true,audioRate=1,missionKey,missionTitle='ANMELDUNG I',missionText='Zum Bürgeramt gehen.'}={}){
  let now=0,serial=0,feeds=0,cancellations=0,maskFrames=0;
  const tasks=new Map(),events=new Map(),nodes=new Map();
@@ -18,7 +18,7 @@ function hud({reduced=true,audioRate=1,missionKey,missionTitle='ANMELDUNG I',mis
  node('germanness-hud').parentElement=node('city-status');node('mission-title').textContent=missionTitle;node('mission-text').textContent=missionText;
  node('file-close').parentElement=node('case-file.file-header');node('subtitle-toggle').parentElement=node('app');node('english-subtitle').parentElement=node('app');
  const context=vm.createContext({document,window:{Germany3DBridge:{getHUDState:()=>state,clearInput(){},playFaxTransition(){feeds++;const start=now;return{duration:1.08,elapsed:()=>(now-start)/1000*audioRate,cancel(){cancellations++}}}}},performance:{now:()=>now},setTimeout:later,clearTimeout:id=>tasks.delete(id),requestAnimationFrame:fn=>later(()=>fn(now),16),cancelAnimationFrame:id=>tasks.delete(id),matchMedia:()=>({matches:reduced}),CSS:{supports:()=>true},MutationObserver:class{observe(){}},ResizeObserver:class{observe(){}},getComputedStyle:()=>({zoom:'1',getPropertyValue:()=>0}),innerWidth:1280,innerHeight:800,addEventListener:(name,fn)=>events.set(name,fn)});
- vm.runInContext(source,context);
+ context.createModalFocus=()=>({sync(){}});vm.runInContext(source,context);
  function advance(ms){const end=now+ms;for(let count=0;count<10000;count++){const next=[...tasks].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!next){now=end;return}tasks.delete(next[0]);now=next[1].at;next[1].fn()}throw Error('unbounded timer work')}
  const refresh=()=>{context.window.GermanyHUD.refresh();advance(20)};
  advance(20);

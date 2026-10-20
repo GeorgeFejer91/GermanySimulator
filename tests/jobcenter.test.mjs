@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import buildingData from '../building-catalogue.js';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
@@ -61,8 +62,8 @@ test('city entry/exit preserves missions and rejects an occupied ejection point'
  const start=game.indexOf('function enterJobcenter('),end=game.indexOf('\nfunction interact()',start),entry=game.slice(start,end);
  for(const occupied of [false,true]){
   let config;const player={x:100,y:230,r:16,vx:10,vy:20},state={modal:false,mission:4,forms:2,voiceOn:true,subtitlesOn:false};
-  const h={player,state,window:{Germany3D:{enterJobcenter:c=>(config=c,true)}},speechClip:()=>({text:data.text,recording:'voice'}),speechCatalog:{recordings:{}},stopSpeech(){},stopPoliceChaseLoop(){},clearInput(){},setAmtMusicMuted(){},clearSubtitle(){},updateHud(){},responderBlocked:()=>occupied};
-  vm.createContext(h);vm.runInContext(motionObserverSource(game)+entry,h);h.enterJobcenter({doorX:100,doorY:200});
+  const h={GermanyBuildings:buildingData,player,state,window:{Germany3D:{enterJobcenter:c=>(config=c,true)}},speechClip:()=>({text:data.text,recording:'voice'}),speechCatalog:{recordings:{}},stopSpeech(){},stopPoliceChaseLoop(){},clearInput(){},setAmtMusicMuted(){},clearSubtitle(){},updateHud(){},responderBlocked:()=>occupied};
+  h.GermanyBuildings=buildingData;vm.createContext(h);vm.runInContext(motionObserverSource(game)+entry,h);h.enterJobcenter({doorX:100,doorY:200});
   assert.equal(state.modal,true);assert.equal(player.vx,0);config.onClose('ended');
   assert.equal(state.modal,false);assert.equal(state.mission,4);assert.equal(state.forms,2);assert.equal(player.y,occupied?230:265);
  }
@@ -71,7 +72,7 @@ test('canonical game reserves the clear Jobcenter parcel and compatibility entry
  const diagnostic=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
  const line=s=>s.split(/\r?\n/).find(l=>l.startsWith('{id:"jobcenter"'));
  assert.doesNotMatch(diagnostic,/{id:"jobcenter"|Germany3DBridge/,"compatibility entry cannot reserve an alternate Jobcenter parcel");
- const b=vm.runInNewContext('('+line(game).trim().replace(/,$/,'')+')');
+ const b=buildingData.catalogue.find(building=>building.id==='jobcenter');
  assert.ok(b.x>=9180+72,'east sidewalk has full body clearance');assert.ok(b.x+b.w<9840);
  assert.ok(b.doorY>b.y+b.h+16);assert.ok(b.doorY<2000-72);
  assert.match(game,/if\(b.id==="jobcenter"\)\{enterJobcenter\(b\);return\}/);
@@ -82,8 +83,7 @@ test('facade details stay below the roof while the door retains human clearance'
  const context=new Proxy({}, {get:()=>()=>{},set:()=>true});
  Object.defineProperty(globalThis,'document',{value:{createElement:()=>({getContext:()=>context})},configurable:true});
  try{
-  const line=game.split('\n').find(l=>l.startsWith('{id:"jobcenter"'));
-  const b=vm.runInNewContext('('+line.trim().replace(/,$/,'')+')');
+  const b=buildingData.catalogue.find(building=>building.id==='jobcenter');
   const {group}=createJobcenterBuilding(T,b.w*.02,b.h*.02,b.hgt*.038);
   const bounds=new T.Box3().setFromObject(group);
   assert.ok(Math.abs(bounds.max.y-b.hgt*.038)<1e-6,'upper windows and glass bay must fit the reduced facade');
@@ -106,10 +106,40 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
  try{
   const encounter=createJobcenterEncounter(T,{render(){}},{getInput:()=>keys,clearInput:()=>{for(const k in keys)delete keys[k]}});
   const flush=async()=>{for(let i=0;i<5;i++)await Promise.resolve()};
-  const tick=()=>{now+=100;encounter.render()};
+  const tick=()=>{now+=100;encounter.update(.1);encounter.render()};
+  // Drive the actual root handlers into the encounter, rather than supplying
+  // held keys directly. Immersive movement shares the map even while modal.
+  values.window.Germany3D={get jobcenter(){return encounter.inspect()},levelTransition:{active:false}};
+  const rootKeys=game.slice(game.indexOf('function keydown(e){'),game.indexOf('function clearInput(){',game.indexOf('function keydown(e){')));
+  const rootState={modal:true,started:true};
+  const rootInput=new Function('window','document','state','keys','indoorVisit','interact',rootKeys+';return {keydown,keyup}')(values.window,doc,rootState,keys,null,()=>assert.fail('immersive movement cannot invoke city interaction'));
+  const key=code=>({code,target:{closest:()=>null},preventDefault(){}});
+  encounter.open({onClose:r=>closed.push(r)});await flush();
+  for(const code of ['KeyW','ArrowUp']){
+   const before=encounter.inspect().z;rootInput.keydown(key(code));tick();
+   assert.ok(encounter.inspect().z<before,'root keyboard input must move the modal Jobcenter player');
+   rootInput.keyup(key(code));const released=encounter.inspect().z;tick();assert.equal(encounter.inspect().z,released);
+  }
+  const editing=key('KeyW');editing.target.closest=()=>({});rootInput.keydown(editing);assert.notEqual(keys.KeyW,true,'editing excludes movement');
+  encounter.close('input-fixture-reset');closed.length=0;
+  rootInput.keydown(key('KeyW'));assert.notEqual(keys.KeyW,true,'ordinary modals exclude movement');
+  rootState.modal=false;
+  const focusedButton=key('KeyW');focusedButton.target.closest=selector=>selector.includes('button')?{}:null;
+  rootInput.keydown(focusedButton);assert.equal(keys.KeyW,true,'restored focus on a city HUD button must not strand gameplay movement');
+  rootInput.keyup(focusedButton);rootState.modal=true;
   const enter=async()=>{encounter.open({onClose:r=>closed.push(r)});await flush();keys.KeyW=true;for(let i=0;i<60;i++)tick();delete keys.KeyW;await flush();assert.equal(encounter.inspect().phase,'speaking')};
+  encounter.open({onClose:r=>closed.push(r)});await flush();keys.KeyW=true;
+  const beforeDraw=encounter.inspect().z;
+  for(let i=0;i<100;i++){now+=100;encounter.render()}
+  assert.equal(encounter.inspect().z,beforeDraw,'draw calls cannot move a player or advance fallback time');
+  delete keys.KeyW;encounter.close('fixture-reset');closed.length=0;
   await enter();const first=media.at(-1),oldEnd=first.onended;
   first.currentTime=3;tick();assert.ok(encounter.inspect().energy>0);
+  const rendererSource=readFileSync(new URL('../world3d.js',import.meta.url),'utf8'),updateStart=rendererSource.indexOf('  update(dt){'),updateEnd=rendererSource.indexOf('},sync(){',updateStart)+1;
+  const rootUpdate=new Function('document','window','buildingLevels','jobcenter','let neighborHaloTime=0;return ({'+rendererSource.slice(updateStart,updateEnd)+'}).update')(doc,window,{active:false,update(){}},encounter);
+  const heldBeforePause=encounter.inspect().z;window.GermanyHUD={paused:true};rootUpdate(.1);
+  assert.equal(first.paused,true,'root HUD pause must reach the encounter media owner');assert.equal(encounter.inspect().z,heldBeforePause);
+  window.GermanyHUD.paused=false;rootUpdate(.1);await flush();assert.equal(first.paused,false,'root HUD resume keeps the current recording');
   const mouth=encounter.inspect().mouth;assert(mouth.every(Number.isFinite));
   for(let i=0;i<20;i++)tick();assert.equal(encounter.active,true,'elapsed scene time cannot finish the voice');
   doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));const before=encounter.inspect().z;keys.KeyW=true;tick();assert.equal(encounter.inspect().z,before);assert.equal(first.paused,true);
@@ -135,7 +165,7 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   let outro,returned=0,disconnected=0;
   const param=()=>({value:0,cancelScheduledValues(){},setValueAtTime(value){this.value=value},linearRampToValueAtTime(value){this.value=value}});
   const node=()=>({connect(){},disconnect(){disconnected++}});
-  const context={currentTime:0,createBuffer:(_channels,length)=>({getChannelData:()=>new Float32Array(length)}),
+  const context={GermanyBuildings:buildingData,currentTime:0,createBuffer:(_channels,length)=>({getChannelData:()=>new Float32Array(length)}),
    createBufferSource:()=>({...node(),start(){},stop(){}}),createBiquadFilter:()=>({...node(),frequency:param(),Q:param()}),createGain:()=>({...node(),gain:param()})};
   encounter.open({effects:()=>({context,output:{}}),transitionOut:request=>(outro=request,true),onClose:()=>returned++});
   await flush();keys.KeyW=true;for(let i=0;i<60;i++)tick();delete keys.KeyW;await flush();

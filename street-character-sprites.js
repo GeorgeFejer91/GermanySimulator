@@ -1,3 +1,4 @@
+import {loadThreeTexture,leaseWithSignal} from './asset-loaders.js?v=20261020-bounded-assets';
 const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261016-street-atlas-pilot';
 const playbackByActor=new WeakMap(),texturesByThree=new WeakMap(),imagesByConstructor=new WeakMap(),fallbackByHost=new WeakMap();
 const rigDefinitions=new Map(),rigForwards={down:[0,0,1],right:[1,0,0],up:[0,0,-1],left:[-1,0,0]};
@@ -675,25 +676,27 @@ export function loadStreetCharacterManifest(){
   return manifestPromise;
 }
 
-function acquireTexture(T,id,variant,atlas){
+function acquireTexture(T,id,variant,atlas,signal){
   if(!texturesByThree.has(T))texturesByThree.set(T,new Map());
   const cache=texturesByThree.get(T),key=`${id}:${variant}:${atlas.file}:${atlas.sha256||''}`;
   let entry=cache.get(key);
   if(!entry){
-    entry={references:1,texture:null,promise:null};cache.set(key,entry);
-    entry.promise=new Promise((resolve,reject)=>new T.TextureLoader().load(`${atlas.file}?v=${atlas.sha256}`,texture=>{
-      if(texture.image?.width!==atlas.width||texture.image?.height!==atlas.height){texture.dispose();cache.delete(key);reject(new RangeError('Street atlas dimensions do not match manifest'));return}
+    entry={references:1,texture:null,promise:null,controller:signal?new AbortController():null};cache.set(key,entry);
+    const url=`${atlas.file}?v=${atlas.sha256}`;
+    const load=(ok,fail)=>entry.controller?loadThreeTexture(T,url,entry.controller.signal).then(ok,fail):new T.TextureLoader().load(url,ok,undefined,fail);
+    entry.promise=new Promise((resolve,reject)=>load(texture=>{
+      if(texture.image?.width!==atlas.width||texture.image?.height!==atlas.height){texture.dispose();if(cache.get(key)===entry)cache.delete(key);reject(new RangeError('Street atlas dimensions do not match manifest'));return}
       texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
       entry.texture=texture;
-      if(!entry.references){texture.dispose();cache.delete(key)}
+      if(!entry.references){texture.dispose();if(cache.get(key)===entry)cache.delete(key)}
       resolve(texture);
-    },undefined,error=>{cache.delete(key);reject(error)}));
+    },error=>{if(cache.get(key)===entry)cache.delete(key);reject(error)}));
   }else entry.references++;
   let released=false;
-  return {promise:entry.promise,release(){
+  return leaseWithSignal({promise:entry.promise,release(){
     if(released)return;released=true;entry.references--;
-    if(!entry.references&&entry.texture){entry.texture.dispose();if(cache.get(key)===entry)cache.delete(key)}
-  }};
+    if(!entry.references){entry.controller?.abort();entry.texture?.dispose();if(cache.get(key)===entry)cache.delete(key)}
+  }},signal);
 }
 
 function applyPose(sprite,person,pose,host,camera,standing=false){
@@ -750,17 +753,17 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
     if(owner.retired||person?.standingOnly===true||characters[id]?.standingOnly===true)return null;
     motionRequested=true;
     if(!settled||!sprite||!person.standing||motionJob)return motionJob||job;
-    motionJob=queueAsset(position,2,async()=>{
-      if(owner.retired)return false;
+    motionJob=queueAsset(position,2,async({signal}={})=>{
+      if(owner.retired||signal?.aborted)return false;
       try{
         let resources=null;
         if(person.motionRig){
-          rigLease=acquireRigDefinition(id,person);resources=await rigLease.promise;if(owner.retired)return false;
+          rigLease=leaseWithSignal(acquireRigDefinition(id,person),signal);resources=await rigLease.promise;if(owner.retired||signal?.aborted)return false;
           validateThreeRigBuffers(sprite.geometry,resources.module.STREET_RIG_LIMITS.vertices,resources.module.STREET_RIG_LIMITS.triangles);
         }
-        motionLease=acquireTexture(T,id,variant,person.motionRig?person.motionRig.variants[variant]:person.variants[variant]);
+        motionLease=acquireTexture(T,id,variant,person.motionRig?person.motionRig.variants[variant]:person.variants[variant],signal);
         const texture=await motionLease.promise;
-        if(owner.retired)return false;
+        if(owner.retired||signal?.aborted)return false;
         if(resources){
           const candidate=rigSampler(resources,person);candidate.frame={rootWorld:[0,0,0],forwardWorld:rigForwards.down,camera:{position:[0,0,0],right:[1,0,0],up:[0,1,0],forward:[0,0,-1]}};candidate.hostInverse=new T.Matrix4();
           candidate.contactLease=stageContacts(resources,person,id,actor);
@@ -791,19 +794,19 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
     },owner);
     return motionJob;
   }
-  const job=queueAsset(position,2,async()=>{
-    if(owner.retired)return false;
+  const job=queueAsset(position,2,async({signal}={})=>{
+    if(owner.retired||signal?.aborted)return false;
     let initialGeometry=null,initialMaterial=null;
     try{
       await loadStreetCharacterManifest();
-      if(owner.retired)return false;
+      if(owner.retired||signal?.aborted)return false;
       person=characters[id];if(!person)throw new Error(`Street identity missing from manifest: ${id}`);
       if(person.standingOnly===true){motionRequested=false;motionSettled=true}
       idlePose={slot:person.standingOnly===true?0:person.clips.idle.offset,visible:true};
       stage=person.standing?'standing':'motion';
-      lease=acquireTexture(T,id,person.standing?'standing':variant,person.standing||person.variants[variant]);
+      lease=acquireTexture(T,id,person.standing?'standing':variant,person.standing||person.variants[variant],signal);
       const texture=await lease.promise;
-      if(owner.retired)return false;
+      if(owner.retired||signal?.aborted)return false;
       const scale=person.figureWorldHeight/person.figureHeight;
       initialGeometry=person.motionRig?rigGeometry(T,person):new T.PlaneGeometry(person.cell[0]*scale,person.cell[1]*scale);
       initialMaterial=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
@@ -849,7 +852,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
   };
 }
 
-function acquireCanvasImage(ImageType,id,variant,atlas){
+function acquireCanvasImage(ImageType,id,variant,atlas,signal){
   if(typeof ImageType!=='function')throw new TypeError('Street Canvas image decoder unavailable');
   if(!imagesByConstructor.has(ImageType))imagesByConstructor.set(ImageType,new Map());
   const cache=imagesByConstructor.get(ImageType),key=`${id}:${variant}:${atlas.file}:${atlas.sha256}`;
@@ -875,7 +878,7 @@ function acquireCanvasImage(ImageType,id,variant,atlas){
     });
   }else entry.references++;
   let released=false;
-  return {promise:entry.promise,release(){
+  return leaseWithSignal({promise:entry.promise,release(){
     if(released)return;released=true;entry.references--;
     if(!entry.references){
       entry.retired=true;
@@ -884,7 +887,7 @@ function acquireCanvasImage(ImageType,id,variant,atlas){
       entry.reject(new Error('Street Canvas image released'));
       if(cache.get(key)===entry)cache.delete(key);
     }
-  }};
+  }},signal);
 }
 
 function drawRigTriangles(ctx,image,projected){
@@ -918,14 +921,14 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
     if(owner.retired||person?.standingOnly===true||characters[id]?.standingOnly===true)return null;
     motionRequested=true;
     if(!settled||!image||!person.standing||motionJob)return motionJob||job;
-    motionJob=queueAsset(position,2,async()=>{
-      if(owner.retired)return false;
+    motionJob=queueAsset(position,2,async({signal}={})=>{
+      if(owner.retired||signal?.aborted)return false;
       try{
         let resources=null;
-        if(person.motionRig){rigLease=acquireRigDefinition(id,person);resources=await rigLease.promise;if(owner.retired)return false}
-        motionLease=acquireCanvasImage(ImageType,id,variant,person.motionRig?person.motionRig.variants[variant]:person.variants[variant]);
+        if(person.motionRig){rigLease=leaseWithSignal(acquireRigDefinition(id,person),signal);resources=await rigLease.promise;if(owner.retired||signal?.aborted)return false}
+        motionLease=acquireCanvasImage(ImageType,id,variant,person.motionRig?person.motionRig.variants[variant]:person.variants[variant],signal);
         const decoded=await motionLease.promise;
-        if(owner.retired)return false;
+        if(owner.retired||signal?.aborted)return false;
         if(resources){
           const candidate=rigSampler(resources,person);candidate.contactLease=stageContacts(resources,person,id,actor);
           if(candidate.contactLease){const result=candidate.contactLease.read();sampleRig(candidate,actor,{rootWorld:result.contacts.rootWorld,forwardWorld:[0,0,1],camera:resources.definition.reference.camera},candidate.contactLease.isInitialAdmission)}
@@ -944,18 +947,18 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
     },owner);
     return motionJob;
   }
-  const job=queueAsset(position,2,async()=>{
-    if(owner.retired)return false;
+  const job=queueAsset(position,2,async({signal}={})=>{
+    if(owner.retired||signal?.aborted)return false;
     try{
       await loadStreetCharacterManifest();
-      if(owner.retired)return false;
+      if(owner.retired||signal?.aborted)return false;
       person=characters[id];if(!person)throw new Error(`Street identity missing from manifest: ${id}`);
       if(person.standingOnly===true){motionRequested=false;motionSettled=true}
       idlePose={slot:person.standingOnly===true?0:person.clips.idle.offset,visible:true};
       const standing=!!person.standing;
-      lease=acquireCanvasImage(ImageType,id,standing?'standing':variant,person.standing||person.variants[variant]);
+      lease=acquireCanvasImage(ImageType,id,standing?'standing':variant,person.standing||person.variants[variant],signal);
       const decoded=await lease.promise;
-      if(owner.retired)return false;
+      if(owner.retired||signal?.aborted)return false;
       image=decoded;stage=standing?'standing':'motion';
       return true;
     }catch(cause){

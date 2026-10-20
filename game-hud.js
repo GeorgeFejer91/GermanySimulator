@@ -1,4 +1,5 @@
 import {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale} from './assets/vendor/pretext/dist/layout.js';
+import {createModalFocus} from './modal-focus.js?v=20261020-keyboard-access';
 
 const byId=id=>document.getElementById(id),file=byId('case-file'),fax=byId('mission-fax'),rail=byId('city-status'),toggle=byId('file-toggle'),notices=byId('city-notices');
 const subtitles=byId('subtitle-toggle'),subtitleAnchor=document.createComment('subtitle control position');subtitles.before(subtitleAnchor);
@@ -9,6 +10,7 @@ for(const id of ['law-unlock-prompt','wurst-alert','border-alert'])notices.appen
 const meter=byId('germanness-hud'),meterAnchor=document.createComment('Germanness HUD position');meter.before(meterAnchor);
 const alerts=['toast','police-bark','violation-alert','wurst-alert','law-unlock-prompt','border-alert','dialogue','quiz-modal','form-modal','humor-modal','end-modal'];
 const cache=new Map();
+const modalFocus=createModalFocus(byId('app'),{onChange:()=>window.Germany3DBridge?.clearInput(),restoreTarget:()=>toggle});
 let pending=true,mission='',timer=0,reminderAt=0,queued=false,manual=false,language='';
 let motion=0,motionTimer=0,sound=null,departing=false,mask=null,kernel=null;
 let welcomeSound=null;
@@ -98,13 +100,16 @@ function sync(){
  else if(!timer&&!motion&&!motionTimer&&!departing)reminder();
  // Speech remains visible inside the file; an actual game modal takes ownership.
  if(manual&&!active())closeFile();
+ const modal=['end-modal','humor-modal','form-modal','quiz-modal'].map(byId).find(visible)||
+   (state.busy&&visible(byId('dialogue'))?byId('dialogue'):null);
+ modalFocus.sync(modal?.querySelector('[role="dialog"]')||modal);
  measure();
 }
 function schedule(){if(queued||document.hidden)return;queued=true;requestAnimationFrame(sync)}
 
 // Actual, bounded text measurements with the shipped Pretext version. DOM owns
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
-const fitSelectors=['#end-kicker','#end-title','#end-copy','#restart','#form-modal .paper-head span','#form-title','#form-subtitle','#form-fields .field>span','#form-fields .check>span','#form-error','#bureaucracy-form button','#interact-hint','.dialogue.welcome #speaker','.dialogue.welcome #dialogue-text','#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','.anmeldung-medal-label','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
+const fitSelectors=['#end-kicker','#end-title','#end-copy','#restart','#form-modal .paper-head span','#form-title','#form-subtitle','#form-fields .field>span','#form-fields .check>span','#form-error','#bureaucracy-form button','#interact-hint','.dialogue.welcome #speaker','.dialogue.welcome #dialogue-text','#humor-requirements .humor-signature>span:not(.humor-signature-pad)','.humor-signature-controls button','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','.anmeldung-medal-label','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
 function measure(){
  if(typeof setLocale==='function')setLocale(language||'de');
  const pageZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
@@ -134,7 +139,7 @@ function measure(){
   if(width<=0)continue;
   try{
    if(!document.fonts.check(font)||typeof Intl.Segmenter!=='function')throw Error('font unavailable');
-   const key=JSON.stringify([text,font,spacing,language]);let prepared=cache.get(key);
+   const locale=el.closest('[lang]')?.lang||language||'de';if(typeof setLocale==='function')setLocale(locale);const key=JSON.stringify([text,font,spacing,locale]);let prepared=cache.get(key);
    if(!prepared){prepared=prepareWithSegments(text,font,{letterSpacing:spacing});if(cache.size>=96)cache.delete(cache.keys().next().value);cache.set(key,prepared)}
    const usable=Math.max(1,width-(parseFloat(css.wordSpacing)||0)*(text.match(/ /g)||[]).length);
    const stats=measureLineStats(prepared,usable+.1),natural=measureNaturalWidth(prepared);

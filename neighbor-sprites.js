@@ -1,3 +1,4 @@
+import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
 const NEIGHBOR_PAINT={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'};
 const FRAMES=32,CELL_WIDTH=128,CELL_HEIGHT=192,COLUMNS=16,ROWS=16,PIVOT=180;
 const CLIP_OFFSETS=[0,32,64,96,128,136,152,160,176,184,208,232];
@@ -92,23 +93,23 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
 
 export function createNeighborSprite(T,actor,host,queueAsset,camera){
   const name=NEIGHBOR_PAINT[actor.jwdRole];if(!name)return null;
-  const owner={retired:false},playback={},fallback=host.children.slice();
+  const owner={retired:false,controller:new AbortController()},playback={},fallback=host.children.slice();
   let sprite=null,texture=null,standing=null,lastTime=null,lastPose=null,mouthUniforms=null,lastMirrored=false,settled=false,failed=false;
   for(const mesh of fallback)mesh.visible=true;
   const cameraRight=T.Vector3?new T.Vector3(1,0,0):null;
-  queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
-    new T.TextureLoader().load(`./assets/characters/neighbors/${name}-standing.png`,loaded=>{
-      if(owner.retired||sprite){loaded.dispose();resolve(false);return}
+  queueAsset(()=>({x:host.position.x,z:host.position.z}),2,({signal}={})=>new Promise(resolve=>{
+    loadThreeTexture(T,`./assets/characters/neighbors/${name}-standing.png`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
+      if(owner.retired||signal?.aborted||sprite){loaded.dispose();resolve(false);return}
       loaded.colorSpace=T.SRGBColorSpace;loaded.generateMipmaps=false;loaded.minFilter=loaded.magFilter=T.LinearFilter;loaded.premultiplyAlpha=true;
       const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
       standing=new T.Mesh(new T.PlaneGeometry(height*CELL_WIDTH/CELL_HEIGHT,height),new T.MeshBasicMaterial({map:loaded,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide}));
       standing.name=`${name} standing paint`;standing.userData.neighborPaint=true;host.add(standing);resolve(true);
-    },undefined,error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
+    },error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
   }),owner);
-  queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
+  queueAsset(()=>({x:host.position.x,z:host.position.z}),2,({signal}={})=>new Promise(resolve=>{
     const version='20261014-neighbor-tours-32-torso';
-    new T.TextureLoader().load(`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,loaded=>{
-      if(owner.retired){settled=true;loaded.dispose();resolve(false);return}
+    loadThreeTexture(T,`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
+      if(owner.retired||signal?.aborted){settled=true;loaded.dispose();resolve(false);return}
       texture=loaded;texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
       texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
       const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
@@ -140,7 +141,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       material.customProgramCacheKey=()=> 'neighbor-connected-front-lips-v1';
       sprite=new T.Mesh(geometry,material);sprite.name=`${name} painted neighbor`;
       sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);settled=true;resolve(true);
-    },undefined,error=>{settled=true;failed=true;console.warn('Neighbor animation unavailable; keeping standing paint',error);resolve(false)});
+    },error=>{settled=true;failed=true;console.warn('Neighbor animation unavailable; keeping standing paint',error);resolve(false)});
   }),owner);
   return {
     sync(now,hud,dialogue,reducedMotion){
@@ -172,6 +173,6 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
     inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,fallback:fallback.some(mesh=>mesh.visible),visible:!!sprite?.visible||!!standing?.visible||fallback.some(mesh=>mesh.visible),row:lastPose?.row??0,frame:lastPose?.frame??0,
       state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,
       frames:CLIP_COUNTS[lastPose?.row??4],height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
-    dispose(){owner.retired=true;texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
+    dispose(){owner.retired=true;owner.controller.abort();texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
   };
 }

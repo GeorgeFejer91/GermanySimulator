@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {createRequire} from 'node:module';
+
+const {createAssetQueue}=createRequire(import.meta.url)('../asset-queue.js');
 
 const game=readFileSync('game.js','utf8');
-const queueSource=game.slice(game.indexOf('const assetQueue='),game.indexOf('const assets=Object.fromEntries'));
-const doc={hidden:false},queue=vm.createContext({document:doc});
-vm.runInContext(queueSource+';globalThis.api={queueAssetLoad,pumpAssetLoads,status:()=>({active:assetLoadActive,pending:assetQueue.length})}',queue);
+const doc={hidden:false},loader=createAssetQueue({isHidden:()=>doc.hidden});
+const queue={api:{queueAssetLoad:loader.enqueue,pumpAssetLoads:loader.pump,status:loader.inspect}};
 let running=0,peak=0;const releases=[];
 const jobs=Array.from({length:6},(_,i)=>queue.api.queueAssetLoad(()=>{running++;peak=Math.max(peak,running);return new Promise((resolve,reject)=>releases.push(()=>{running--;i===1?reject(Error('missing asset')):resolve(i)}))}));
 const results=Promise.allSettled(jobs);
@@ -18,8 +20,8 @@ assert.equal((await results).filter(r=>r.status==='rejected').length,1);assert.e
 
 // Background office preparation cannot jump ahead of ordinary city requests or
 // explicit foreground speech once a slot becomes free.
-const order=[],priorityDoc={hidden:true},priority=vm.createContext({document:priorityDoc});
-vm.runInContext(queueSource+';globalThis.api={queueAssetLoad,pumpAssetLoads}',priority);
+const order=[],priorityDoc={hidden:true},priorityLoader=createAssetQueue({isHidden:()=>priorityDoc.hidden});
+const priority={api:{queueAssetLoad:priorityLoader.enqueue,pumpAssetLoads:priorityLoader.pump}};
 const enqueue=(name,options)=>priority.api.queueAssetLoad(()=>{order.push(name)},options);
 const queued=[enqueue('office',{background:true}),enqueue('city'),enqueue('speech',{foreground:true})];
 await new Promise(setImmediate);assert.deepEqual(order,['speech']);

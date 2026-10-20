@@ -42,13 +42,14 @@ export function stationLayout(s){
  ].map(p=>({...p,x:p.x*factor,scale:p.scale*factor})).filter(p=>Math.abs(p.x)+2.2*p.scale<=w/2&&Math.abs(p.z)+1.16*p.scale<=d/2);
 }
 export async function installStationKit(T,world,slots,loader,coordinates){
- const {S,X,Z}=coordinates;
+ const {S,X,Z,signal}=coordinates;
  await Promise.all(slots.map(async slot=>{
   const s=slot.state,fixtures=slot.fixtures||[],placements=fixtures.map(p=>({id:p.satireId,x:(p.x-s.x-s.w/2)*S,z:(p.y-s.y-s.h/2)*S,scale:p.scale}));if(!placements.length)return;
   const replacement=new T.Group(),ownedGeometry=[],ownedMaterials=[];
   const block=(w,h,d,color,x,y,z)=>{const geometry=new T.BoxGeometry(w,h,d),material=new T.MeshStandardMaterial({color,roughness:.95}),q=new T.Mesh(geometry,material);ownedGeometry.push(geometry);ownedMaterials.push(material);q.position.set(x,y,z);replacement.add(q);};
   try{
    const sources=await Promise.all(placements.map(p=>loadSatireModel(p.id,loader)));
+   if(signal?.aborted)return;
    const south=s.id.startsWith('sued'),width=s.w*S,depth=s.h*S,edge=(south?1:-1)*depth/2;
    block(width,.3,depth,0xb9b7ae,0,.15,0);
    block(width,.08,.12,0xd2cdc0,0,.34,edge);

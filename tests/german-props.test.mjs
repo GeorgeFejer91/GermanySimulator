@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {readFileSync} from "node:fs";
 import {zstdDecompressSync} from "node:zlib";
+import buildingData from '../building-catalogue.js';
 
 const root = new URL("../", import.meta.url);
 const read = path => readFileSync(new URL(path, root));
@@ -42,9 +43,7 @@ const placed = [...game.matchAll(/\{x:(\d+),y:(\d+),asset:"([^"]+)",w:(\d+),h:(\
   .filter(p => Object.hasOwn(aliases, p.asset));
 for (const [alias, count] of Object.entries(aliases))
   assert.equal(placed.filter(p => p.asset === alias).length, count, `${alias} placement count`);
-const buildingSection = game.split("const buildings=[")[1].split("].map(building=>")[0];
-const buildings = [...buildingSection.matchAll(/\{id:"([^"]+)"[^\n]*?x:(\d+),y:(\d+),w:(\d+),h:(\d+)/g)]
-  .map(([,id,x,y,w,h]) => ({id,x:+x,y:+y,w:+w,h:+h}));
+const buildings=buildingData.catalogue;
 assert.ok(buildings.some(b => b.id === "sandalenladen") && buildings.some(b => b.id === "sockenladen"));
 const roads = [{x:0,y:820,w:9840,h:260},{x:0,y:2000,w:9840,h:240},{x:0,y:3000,w:9840,h:220},
   ...[[1050,260],[2400,220],[4400,180],[5850,220],[7350,220],[9000,180]]

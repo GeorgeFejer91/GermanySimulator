@@ -6,7 +6,7 @@ export const amtActorOwnsSpeech=(speech,id,actor)=>!!(speech?.active&&(speech.ac
 export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;
   let generation=null,controller=new AbortController(),owner=null,ownerPromise=null,failure='';
-  const enqueue=task=>queueLoad?queueLoad(task):Promise.resolve().then(task);
+  const enqueue=(task,options)=>queueLoad?queueLoad(task,options):Promise.resolve().then(task);
   async function getOwner(){
     if(owner)return owner;
     if(failure)throw new Error(failure);
@@ -79,17 +79,19 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
         if(!item.inView||!item.state||item.distance>=6||slots.has(item.id)||failedActors.has(item.id)||slots.size>=limit)continue;
         const request=new AbortController(),entry={...item,controller:request,effect:null,admitted:false,failure:''};
         slots.set(item.id,entry);
-        const prepare=async()=>{
+        const prepare=async({signal}={})=>{
+          signal?.addEventListener('abort',()=>request.abort(signal.reason),{once:true});
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261018-mouth-single-exit'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261020-bounded-assets'),getOwner()]);
           request.signal.throwIfAborted();
-          return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261013-character-lips`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
+          const effect=await module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261013-character-lips`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
+          if(request.signal.aborted){effect?.dispose();return null}return effect;
         };
-        enqueue(prepare).then(effect=>{
+        enqueue(prepare,{signal:request.signal}).then(effect=>{
           if(request.signal.aborted||slots.get(item.id)!==entry){effect?.dispose();return}
           if(!effect){retire(entry);return}
           entry.effect=effect;
-        }).catch(error=>{if(!request.signal.aborted){failedActors.set(item.id,error.message);retire(entry)}});
+        }).catch(error=>{if(!request.signal.aborted||request.signal.reason?.name==='TimeoutError'){failedActors.set(item.id,error.message);retire(entry)}});
       }
     }
     for(const item of candidates){

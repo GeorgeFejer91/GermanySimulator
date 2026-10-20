@@ -3,6 +3,7 @@ import {createHash} from "node:crypto";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
 import {zstdDecompressSync} from "node:zlib";
+import {modelLoaderWithSignal} from '../asset-loaders.js';
 
 const directory=new URL("../assets/models/city-kit/",import.meta.url);
 const manifest=JSON.parse(readFileSync(new URL("manifest.json",directory),"utf8"));
@@ -93,7 +94,7 @@ function material(opacity=1,transparent=false,depthWrite=true){return {opacity,t
 const stone=material(),glass=material(.42,true,false),sources=[{material:[stone,glass]},{material:stone}];let clones=0,requests=0;
 const vector=()=>({set(x,y,z){Object.assign(this,{x,y,z})}});
 const source={traverse(fn){sources.forEach(fn)},clone(deep){assert.equal(deep,true);clones++;const nodes=sources.map(node=>({material:Array.isArray(node.material)?[...node.material]:node.material}));return {nodes,scale:vector(),position:vector(),traverse(fn){nodes.forEach(fn)}}}};
-const warnings=[],buildingSlots=[],context={
+const warnings=[],buildingSlots=[],context={modelLoaderWithSignal,
   previousOcclusionTime:0,performance:{now:()=>0},buildingObstructsPlayer:slot=>slot.testObstructed||false,
   S:.02,X:x=>x*.02,Z:y=>y*.02,camera:{position:{x:9999*.02,z:9999*.02+14}},bridge:{player:{x:9999,y:9999}},buildingSlots,localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},
   queueCityModel:(_position,_radius,task)=>task(),

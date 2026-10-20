@@ -1,5 +1,6 @@
+import {modelLoaderWithSignal,loadTextureImage} from './asset-loaders.js?v=20261020-bounded-assets';
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261018-mouth-single-exit';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261020-bounded-assets';
 import {mouthPaintGlsl,mouthProfileValues,validateMouthProfile} from './buergeramt-mouth-paint.js?v=20261018-mouth-single-exit';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261014-rivulets1';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261014-rivulets1';
@@ -7,12 +8,12 @@ import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recove
 import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261014-building-levels';
+import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261020-explicit-update';
 import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
-import {createBuildingLevels} from './building-levels.js?v=20261014-building-levels';
-import {createNeighborSprite} from './neighbor-sprites.js?v=20261015-neighbor-2d-fallback';
+import {createBuildingLevels} from './building-levels.js?v=20261020-explicit-update';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261020-bounded-assets';
 import {createBillboardGroundProjector} from './billboard-ground.js?v=20261019-complete-development';
-import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261016-street-atlas-pilot';
+import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261020-bounded-assets';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -35,7 +36,7 @@ function showRendererFailure(error){
   const bridge=await new Promise(resolve=>{let n=0;const f=()=>window.Germany3DBridge?resolve(window.Germany3DBridge):(++n>120?resolve(null):setTimeout(f,50));f()});if(!bridge){showRendererFailure(new Error("3D simulation bridge unavailable"));return}
   const S=.02,H=.038,ox=bridge.WORLD.w*S/2,oz=bridge.WORLD.h*S/2,X=x=>x*S-ox,Z=y=>y*S-oz;
   const renderer=new T.WebGLRenderer({canvas,antialias:false,powerPreference:"default"});renderer.outputColorSpace=T.SRGBColorSpace;
-  const jobcenter=createJobcenterEncounter(T,renderer,bridge);
+  const jobcenter=createJobcenterEncounter(T,renderer,Object.freeze({getInput:bridge.getInput,clearInput:bridge.clearInput}));
   const scene=new T.Scene();scene.background=new T.Color(0x77756f);scene.fog=new T.Fog(0x77756f,24,72);
   const camera=new T.PerspectiveCamera(48,innerWidth/innerHeight,.1,150),initialPlayerX=X(bridge.player.x),initialPlayerZ=Z(bridge.player.y);camera.position.set(initialPlayerX,11.5,initialPlayerZ+14);camera.lookAt(initialPlayerX,1,initialPlayerZ-2.7);scene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));const sun=new T.DirectionalLight(0xf4f1e8,1.4);sun.position.set(-20,30,18);scene.add(sun);
   const mat=(c,r=1)=>new T.MeshStandardMaterial({color:c,roughness:r});
@@ -103,9 +104,9 @@ function showRendererFailure(error){
     for(const job of nearby){
       if(cityModelActive>=2)break;
       cityModelActive++;job.state="active";
-      const run=()=>{
+      const run=({signal}={})=>{
         if(!cityModelsEnabled()||job.owner?.retired){job.state=job.owner?.retired?"settled":"pending";return false}
-        return job.task();
+        return job.task({signal});
       };
       const loaded=bridge.queueAssetLoad?bridge.queueAssetLoad(run):Promise.resolve().then(run);
       loaded.then(ok=>{if(job.state==="active"){job.state="settled";job.failed=!ok;job.task=null}},error=>{job.state="settled";job.failed=true;job.task=null;console.warn("Keeping procedural city asset",error)}).finally(()=>{
@@ -116,7 +117,7 @@ function showRendererFailure(error){
     }
     if(startupModelsReady()){
       const office=bridge.buildings.find(b=>b.id==="buergeramt");
-      if(bridge.getHUDState?.().started)loadAmtImages({background:true});
+      if(bridge.getHUDState?.().started&&office&&Math.hypot(bridge.player.x-office.doorX,bridge.player.y-office.doorY)<1500)loadAmtImages({background:true});
       else if(!bridge.getHUDState&&office&&Math.hypot(bridge.player.x-office.doorX,bridge.player.y-office.doorY)<1500)loadAmtImages();
     }
   }
@@ -223,7 +224,9 @@ function showRendererFailure(error){
   const billboardLoader=new T.TextureLoader(),fireMaskStatus={loaded:0,failed:0},fireReadyListeners=[];
   function cityTexture(url,position,radius,onLoad,onError){
     const texture=new T.Texture();
-    queueCityAsset(position,radius,()=>new Promise(resolve=>billboardLoader.load(url,loaded=>{
+    queueCityAsset(position,radius,({signal}={})=>signal?loadTextureImage(url,signal).then(image=>{
+      if(signal.aborted)return false;texture.image=image;texture.needsUpdate=true;onLoad?.(texture);return true;
+    }).catch(error=>{onError?.(error);return false}):new Promise(resolve=>billboardLoader.load(url,loaded=>{
       texture.image=loaded.image;texture.needsUpdate=true;onLoad?.(texture);resolve(true);
     },undefined,error=>{onError?.(error);resolve(false)})));
     return texture;
@@ -262,10 +265,12 @@ function showRendererFailure(error){
   }
   const pp=bridge.policePath,ax=X(pp.x1),az=Z(pp.y1),bx=X(pp.x2),bz=Z(pp.y2),len=Math.hypot(bx-ax,bz-az),path=box(pp.width*S,.03,len,M.path,(ax+bx)/2,.04,(az+bz)/2);path.rotation.y=Math.atan2(bx-ax,bz-az);
   function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
-  const placardFontLoad=async()=>{
+  const placardFontLoad=async({signal}={})=>{
     const faces=await document.fonts.load('900 70px "Grenze"').catch(()=>[]);
+    if(signal?.aborted)return false;
     if(faces.length)return true;
     const font=await new FontFace("Grenze","url(./assets/fonts/grenze/Grenze.ttf)",{weight:"100 900"}).load();
+    if(signal?.aborted)return false;
     document.fonts.add(font);return true;
   };
   const placardLayouts=[],placardFontReady=typeof FontFace==="undefined"?Promise.resolve(false):(bridge.queueAssetLoad?bridge.queueAssetLoad(placardFontLoad):placardFontLoad()).catch(()=>false);
@@ -276,7 +281,7 @@ function showRendererFailure(error){
     const width=Math.min(2.65,w*.52,Math.max(1.8,1.65+b.name.length*.045));
     const sign=new T.Mesh(new T.PlaneGeometry(1,1),new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
     sign.scale.set(width,width/4,1);sign.position.set(x,y,z);
-    const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,titleMaxWidth:530,titleLines:0,worldWidth:width,worldHeight:width/4,x,y,z,facadeWidth:w};placardLayouts.push(layout);let artReady=false,fontReady=false;
+    let image=new Image();const layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,titleMaxWidth:530,titleLines:0,worldWidth:width,worldHeight:width/4,x,y,z,facadeWidth:w};placardLayouts.push(layout);let artReady=false,fontReady=false;
     const titleParts={auslaender:["AUSLÄNDER","BEHÖRDE"],formulararchiv:["BUNDES","FORMULARARCHIV"],terminamt:["TERMIN","VERGABESTELLE"],querungsamt:["STRASSEN","QUERUNGSAMT"],sockenladen:["SOCKENFACH","GESCHÄFT"],laermamt:["AMT FÜR ZIMMER","LAUTSTÄRKE"]};
     function linesFor(text,weight,oneSize,twoSize,smallest,forced){
       const family=fontReady?'"Grenze"':'"Grenze",Georgia,serif',words=text.split(/\s+/);
@@ -308,9 +313,9 @@ function showRendererFailure(error){
       title.parts.forEach((part,i)=>ctx.fillText(part,465,titleYs[i],530));
       texture.needsUpdate=true;
     }
-    draw();queueCityAsset(()=>({x:X(b.x+b.w/2),z:Z(b.y+b.h/2)}),Math.hypot(b.w*S,b.h*S)/2,()=>new Promise(resolve=>{
-      image.onload=()=>{artReady=layout.artReady=true;draw();resolve(true)};image.onerror=()=>resolve(false);image.src=`./assets/building-placards/${b.id}.webp`;
-    }));
+    draw();queueCityAsset(()=>({x:X(b.x+b.w/2),z:Z(b.y+b.h/2)}),Math.hypot(b.w*S,b.h*S)/2,async({signal}={})=>{
+      try{const loaded=await loadTextureImage(`./assets/building-placards/${b.id}.webp`,signal);if(signal?.aborted)return false;image=loaded;artReady=layout.artReady=true;draw();return true}catch{return false}
+    });
     placardFontReady.then(ready=>{fontReady=layout.fontReady=ready;draw()});
     return sign;
   }
@@ -409,26 +414,27 @@ function showRendererFailure(error){
   let kiesingerMonument;
   const satireKitEnabled=new URLSearchParams(location.search).get("satireKit")==="1";
   const detailPropLoader=satireKitEnabled
-    ?import("./assets/models/satire-kit/loader.js?v=20261019-complete-development").catch(error=>{console.warn("Satire kit unavailable; using originals",error);return null})
+    ?import("./assets/models/satire-kit/loader.js?v=20261020-bounded-assets").catch(error=>{console.warn("Satire kit unavailable; using originals",error);return null})
     :new URLSearchParams(location.search).get("propDetails")==="1"
       ?import("./assets/models/prop-details/loader.js?v=20260930-prop-details1").catch(error=>{console.warn("Prop detail study unavailable; using originals",error);return null})
       :null;
-  if(satireKitEnabled)for(const slot of stationSlots.filter(slot=>slot.state.name!=="JWD"))queueCityModel(()=>({x:X(slot.state.x+slot.state.w/2),z:Z(slot.state.y+slot.state.h/2)}),Math.hypot(slot.state.w*S,slot.state.h*S)/2,async()=>{try{
-    const module=await detailPropLoader;if(!module)return false;await module.installStationKit(T,world,[slot],modelLoader,{S,X,Z});return true;
+  if(satireKitEnabled)for(const slot of stationSlots.filter(slot=>slot.state.name!=="JWD"))queueCityModel(()=>({x:X(slot.state.x+slot.state.w/2),z:Z(slot.state.y+slot.state.h/2)}),Math.hypot(slot.state.w*S,slot.state.h*S)/2,async({signal}={})=>{try{
+    const module=await detailPropLoader;if(signal?.aborted||!module)return false;await module.installStationKit(T,world,[slot],modelLoaderWithSignal(modelLoader,signal),{S,X,Z,signal});return true;
   }catch(error){console.warn("Original stations retained",error);return false}},slot);
-  function loadLocalModel(url){
+  function loadLocalModel(url,signal){
     if(!localModels.has(url)){
+      const loader=modelLoaderWithSignal(modelLoader,signal);
       const load=typeof detailPropLoader!=='undefined'&&detailPropLoader
-        ?detailPropLoader.then(module=>module?module.loadWithDetailFallback(url,modelLoader):modelLoader.loadAsync(url))
-        :modelLoader.loadAsync(url);
+        ?detailPropLoader.then(module=>module?module.loadWithDetailFallback(url,loader):loader.loadAsync(url))
+        :loader.loadAsync(url);
       localModels.set(url,load.catch(error=>{console.warn("Keeping procedural stand-ins for "+url,error);return null}));
     }
     return localModels.get(url);
   }
   function installCityModel(group,fallback,file,fit,location=null,prepare=null){
     const slot={file,group,fallback,model:null};cityAssetSlots.push(slot);if(!modelLoader)return;
-    return queueCityModel(()=>location?{x:X(location.x),z:Z(location.y)}:{x:group.position.x,z:group.position.z},Math.hypot(fit.x,fit.z)/2,async()=>{
-      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file));if(!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);prepare?.(model);model.name=file;group.add(model);slot.model=model;fallback.visible=false;return true}
+    return queueCityModel(()=>location?{x:X(location.x),z:Z(location.y)}:{x:group.position.x,z:group.position.z},Math.hypot(fit.x,fit.z)/2,async({signal}={})=>{
+      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file),signal);if(signal?.aborted||!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);prepare?.(model);model.name=file;group.add(model);slot.model=model;fallback.visible=false;return true}
       catch(error){console.warn("Keeping procedural city asset "+file,error);return false}
     },slot);
   }
@@ -542,8 +548,8 @@ function showRendererFailure(error){
     const model=new T.Group();model.add(source);source.updateMatrixWorld(true);let bounds=new T.Box3().setFromObject(source),size=bounds.getSize(new T.Vector3());if(size.x>size.z){source.rotation.y+=Math.PI/2;source.updateMatrixWorld(true);bounds=new T.Box3().setFromObject(source);size=bounds.getSize(new T.Vector3())}if(!size.x||!size.y||!size.z)throw new Error("empty train asset bounds");const center=bounds.getCenter(new T.Vector3());source.position.x-=center.x;source.position.y-=bounds.min.y;source.position.z-=center.z;model.scale.set(fit.x/size.x,fit.y/size.y,fit.z/size.z);return model
   }
   function installTrainModel(slot){
-    return queueCityModel((x,z)=>slot.train.cars.reduce((nearest,car)=>{const position={x:X(car.x),z:Z(car.y)};return !nearest||Math.hypot(position.x-x,position.z-z)<Math.hypot(nearest.x-x,nearest.z-z)?position:nearest},null),2.6,async()=>{
-      try{const sources=[];for(const url of trainModelUrls){const source=await loadLocalModel(url);if(!source)return false;sources.push(source)}for(let i=0;i<slot.cars.length;i++){const sourceIndex=i===0?0:i===slot.cars.length-1?2:1,source=sources[sourceIndex].scene.clone(true),fit=sourceIndex===1?{x:1.12,y:1.28,z:4.82}:{x:1.24,y:1.62,z:4.7},model=fitTrainPart(source,fit);slot.cars[i].group.add(model);slot.cars[i].fallback.visible=false;slot.cars[i].model=model}return true}
+    return queueCityModel((x,z)=>slot.train.cars.reduce((nearest,car)=>{const position={x:X(car.x),z:Z(car.y)};return !nearest||Math.hypot(position.x-x,position.z-z)<Math.hypot(nearest.x-x,nearest.z-z)?position:nearest},null),2.6,async({signal}={})=>{
+      try{const sources=[];for(const url of trainModelUrls){const source=await loadLocalModel(url,signal);if(signal?.aborted||!source)return false;sources.push(source)}for(let i=0;i<slot.cars.length;i++){const sourceIndex=i===0?0:i===slot.cars.length-1?2:1,source=sources[sourceIndex].scene.clone(true),fit=sourceIndex===1?{x:1.12,y:1.28,z:4.82}:{x:1.24,y:1.62,z:4.7},model=fitTrainPart(source,fit);slot.cars[i].group.add(model);slot.cars[i].fallback.visible=false;slot.cars[i].model=model}return true}
       catch(e){console.warn("Keeping procedural AMT-Bahn train",e);return false}
     },slot);
   }
@@ -552,8 +558,8 @@ function showRendererFailure(error){
   function fitResponseModel(model,fit){model.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());if(!size.x||!size.y||!size.z)throw new Error("empty response asset bounds");const s=Math.min(fit.x/size.x,fit.y/size.y,fit.z/size.z);model.scale.setScalar(s);model.position.set(-center.x*s,-bounds.min.y*s,-center.z*s)}
   function responseMaterial(source,kind){const copy=source.clone(),name=(source.name||"").toLowerCase(),c=source.color,lum=c?c.r*.2126+c.g*.7152+c.b*.0722:.5;if(kind==="helicopter")copy.color.setHex(lum>.65?0x282b29:lum>.3?0x171918:0x090a09);else if(/white/.test(name))copy.color.setHex(0xc3c7c5);else if(/bluelight/.test(name)){copy.color.setHex(0x246cff);copy.emissive=new T.Color(0x123b92);copy.emissiveIntensity=1.5}copy.roughness=.72;return copy}
   function installResponseModel(slot,url,kind,fit){
-    return queueCityModel(()=>({x:X(slot.state.x),z:Z(slot.state.y)}),Math.hypot(fit.x,fit.z)/2,async()=>{
-      try{const gltf=await loadLocalModel(url);if(!gltf||slot.retired)return false;const model=gltf.scene.clone(true),materials=new Map();model.traverse(o=>{if(!o.isMesh)return;o.material=Array.isArray(o.material)?o.material.map(m=>{if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)}):(()=>{const m=o.material;if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)})()});fitResponseModel(model,fit);slot.group.add(model);slot.model=model;slot.fallback.visible=false;return true}
+    return queueCityModel(()=>({x:X(slot.state.x),z:Z(slot.state.y)}),Math.hypot(fit.x,fit.z)/2,async({signal}={})=>{
+      try{const gltf=await loadLocalModel(url,signal);if(signal?.aborted||!gltf||slot.retired)return false;const model=gltf.scene.clone(true),materials=new Map();model.traverse(o=>{if(!o.isMesh)return;o.material=Array.isArray(o.material)?o.material.map(m=>{if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)}):(()=>{const m=o.material;if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)})()});fitResponseModel(model,fit);slot.group.add(model);slot.model=model;slot.fallback.visible=false;return true}
       catch(e){console.warn("Keeping procedural police "+kind,e);return false}
     },slot);
   }
@@ -580,8 +586,8 @@ function showRendererFailure(error){
   }
   function installVehicleModel(slot){
     const spec=vehicleModels[slot.kind];
-    return queueCityModel(()=>({x:X(slot.state.x),z:Z(slot.state.y)}),Math.hypot(1.3,spec.length)*slot.renderScale/2,async()=>{try{
-      const gltf=await loadLocalModel("./assets/models/vehicles/"+spec.file+".glb?v=20260927-cars2");if(!gltf||slot.retired)return false;
+    return queueCityModel(()=>({x:X(slot.state.x),z:Z(slot.state.y)}),Math.hypot(1.3,spec.length)*slot.renderScale/2,async({signal}={})=>{try{
+      const gltf=await loadLocalModel("./assets/models/vehicles/"+spec.file+".glb?v=20260927-cars2",signal);if(signal?.aborted||!gltf||slot.retired)return false;
       const model=gltf.scene.clone(true);fitResponseModel(model,{x:1.3,y:1.15,z:spec.length});
       // Every visible detail belongs to the GLB. Hide the complete fallback, including its lights and wheels.
       bindVehicleParts(slot,model);slot.group.add(model);slot.model=model;slot.fallback.visible=false;return true;
@@ -649,8 +655,8 @@ function showRendererFailure(error){
     return Math.max(height/sourceHeight,family?1.7/doors[family]:0);
   }
   function installBuildingModel(slot,url,w,h,d){
-    return queueCityModel(()=>({x:slot.group.position.x,z:slot.group.position.z}),Math.hypot(w,d)/2,async()=>{try{
-      const gltf=await loadLocalModel(url);if(!gltf)return false;const model=gltf.scene.clone(true);
+    return queueCityModel(()=>({x:slot.group.position.x,z:slot.group.position.z}),Math.hypot(w,d)/2,async({signal}={})=>{try{
+      const gltf=await loadLocalModel(url,signal);if(signal?.aborted||!gltf)return false;const model=gltf.scene.clone(true);
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());
       if(!size.x||!size.y||!size.z)throw new Error("empty building bounds");
       const landmark=slot.building.id==="bundestag",s=Math.min(w/size.x,h/size.y,d/size.z),sx=landmark?s:w/size.x,sy=landmark?s:cityBuildingYScale(url,h,size.y),sz=landmark?s:d/size.z;
@@ -686,8 +692,8 @@ function showRendererFailure(error){
   }
   const coalSmoke=[],coalBelt=[];
   function installPlantModel(slot,url,fit,placements,keepColors=false,fallback=null){
-    return queueCityModel(()=>({x:slot.group.position.x,z:slot.group.position.z}),Math.hypot(slot.building.w*S,slot.building.h*S)/2,async()=>{try{
-      const gltf=await loadLocalModel(url);if(!gltf)return false;
+    return queueCityModel(()=>({x:slot.group.position.x,z:slot.group.position.z}),Math.hypot(slot.building.w*S,slot.building.h*S)/2,async({signal}={})=>{try{
+      const gltf=await loadLocalModel(url,signal);if(signal?.aborted||!gltf)return false;
       for(const p of placements){
         const model=gltf.scene.clone(true),materials=new Map();
         if(!keepColors)model.traverse(o=>{if(!o.isMesh)return;o.material=Array.isArray(o.material)?o.material.map(m=>{if(!materials.has(m))materials.set(m,grayMaterial(m,o.name));return materials.get(m)}):(()=>{const m=o.material;if(!materials.has(m))materials.set(m,grayMaterial(m,o.name));return materials.get(m)})()});
@@ -916,9 +922,9 @@ function showRendererFailure(error){
         ctx.save();ctx.translate(1318,160);ctx.rotate(-.07);ctx.fillStyle="#fff";ctx.fillRect(-176,-92,352,184);ctx.strokeStyle="#211c17";ctx.lineWidth=5;ctx.strokeRect(-176,-92,352,184);ctx.fillStyle="#151518";ctx.font="italic 900 102px Arial, sans-serif";ctx.fillText("CDU",0,0,290);ctx.restore();
       }
       const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
-      if(wide){const logo=new Image();queueCityAsset(()=>({x:X(bridge.goerlitzerPark.x+bridge.goerlitzerPark.w/2),z:Z(bridge.goerlitzerPark.y+bridge.goerlitzerPark.h/2)}),Math.hypot(bridge.goerlitzerPark.w*S,bridge.goerlitzerPark.h*S)/2,()=>new Promise(resolve=>{
-        logo.onload=()=>{ctx.save();ctx.translate(1318,160);ctx.rotate(-.07);ctx.fillStyle="#fff";ctx.fillRect(-170,-86,340,172);ctx.drawImage(logo,-166,-48,332,96);ctx.restore();texture.needsUpdate=true;resolve(true)};logo.onerror=()=>resolve(false);logo.src=bridge.goerlitzerPark.priceFlag.logo;
-      }))}
+      if(wide){let logo;queueCityAsset(()=>({x:X(bridge.goerlitzerPark.x+bridge.goerlitzerPark.w/2),z:Z(bridge.goerlitzerPark.y+bridge.goerlitzerPark.h/2)}),Math.hypot(bridge.goerlitzerPark.w*S,bridge.goerlitzerPark.h*S)/2,async({signal}={})=>{
+        try{logo=await loadTextureImage(bridge.goerlitzerPark.priceFlag.logo,signal);if(signal?.aborted)return false;ctx.save();ctx.translate(1318,160);ctx.rotate(-.07);ctx.fillStyle="#fff";ctx.fillRect(-170,-86,340,172);ctx.drawImage(logo,-166,-48,332,96);ctx.restore();texture.needsUpdate=true;return true}catch{return false}
+      })}
       bannerMaterials.set(kind,new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
     }
     const geometry=new T.PlaneGeometry(w,h,12,6),positions=geometry.attributes.position,uv=geometry.attributes.uv;
@@ -987,8 +993,8 @@ function showRendererFailure(error){
     box(.22,.025,.025,hair,0,4.78,.49,figure);
     const hairCap=new T.Mesh(new T.SphereGeometry(.595,14,9,0,Math.PI*2,0,Math.PI*.49),hair);hairCap.position.set(-.025,5.4,-.025);figure.add(hairCap);
     for(let i=0;i<3;i++){const sweep=box(.32,.09,.16,hair,-.32+i*.25,5.52+i*.045,.36,figure);sweep.rotation.z=-.2}
-    queueCityModel(()=>({x:g.position.x,z:g.position.z}),3.8,async()=>{try{
-      const gltf=await loadLocalModel("./assets/models/kiesinger/kiesinger-statue.glb?v=20261011-published-features");if(!gltf)return false;const model=gltf.scene.clone(true);
+    queueCityModel(()=>({x:g.position.x,z:g.position.z}),3.8,async({signal}={})=>{try{
+      const gltf=await loadLocalModel("./assets/models/kiesinger/kiesinger-statue.glb?v=20261011-published-features",signal);if(signal?.aborted||!gltf)return false;const model=gltf.scene.clone(true);
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());
       if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>0)||Math.abs(size.y-6)>.05||Math.abs(bounds.min.y)>.05)throw new Error("Kiesinger figure must be 6 units tall with shoes at y=0");
       model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;matchKiesingerHeight();return true;
@@ -1174,9 +1180,9 @@ function showRendererFailure(error){
     else if(p.satireId){
       const fallback=new T.Group();g.add(fallback);
       box(Math.max(.25,p.w*S),Math.max(.25,p.h*S),Math.max(.25,p.w*S*.6),M.metal,0,Math.max(.25,p.h*S)/2,0,fallback);
-      if(detailPropLoader)queueCityModel(()=>({x:g.position.x,z:g.position.z}),Math.hypot(p.w*S,Math.max(.35,p.w*S))/2,async()=>{try{
-        const module=await detailPropLoader,asset=await module?.loadSatireModel(p.satireId,modelLoader);
-        if(!asset)return false;const model=asset.scene.clone(true);fitResponseModel(model,{x:p.w*S,y:p.h*S,z:Math.max(.35,p.w*S)});g.add(model);fallback.visible=false;return true;
+      if(detailPropLoader)queueCityModel(()=>({x:g.position.x,z:g.position.z}),Math.hypot(p.w*S,Math.max(.35,p.w*S))/2,async({signal}={})=>{try{
+        const module=await detailPropLoader,asset=await module?.loadSatireModel(p.satireId,modelLoaderWithSignal(modelLoader,signal));
+        if(signal?.aborted||!asset)return false;const model=asset.scene.clone(true);fitResponseModel(model,{x:p.w*S,y:p.h*S,z:Math.max(.35,p.w*S)});g.add(model);fallback.visible=false;return true;
       }catch(error){if(!warnedScenery.has(p.satireId)){warnedScenery.add(p.satireId);console.warn('Keeping procedural scenery for '+p.satireId,error)}return false}});
     }else if(p.asset==="jwd-street-sign"){
       const neighborhood=bridge.jwdNeighborhood||{},canvas=document.createElement("canvas");canvas.width=512;canvas.height=320;
@@ -1464,9 +1470,9 @@ function showRendererFailure(error){
     });
     return {manifestLoaded:!!streetPaintManifest,manifestError:streetPaintManifestError,actors};
   }
-  const streetManifestJob=queueCityAsset(()=>({x:X(bridge.player.x),z:Z(bridge.player.y)}),0,async()=>{
+  const streetManifestJob=queueCityAsset(()=>({x:X(bridge.player.x),z:Z(bridge.player.y)}),0,async({signal}={})=>{
     try{
-      const manifest=await loadStreetCharacterManifest();if(streetPaintOwner.retired)return false;
+      const manifest=await loadStreetCharacterManifest();if(streetPaintOwner.retired||signal?.aborted)return false;
       streetPaintManifest=manifest;installStreetMotionObserver(manifest);prepareStreetPaint();
       if(!startupModelsReady()||bridge.preparingStart)captureStartupAssets();
       return true;
@@ -1669,13 +1675,16 @@ function showRendererFailure(error){
   }
   function amtTexture(url,onLoad,onError,required=false){
     let retired=false;
-    const texture=new T.Texture(),load=()=>retired?Promise.resolve(null):new Promise(resolve=>amtTextureLoader.load(url,loaded=>{
+    const request=new AbortController();
+    const texture=new T.Texture(),load=({signal}={})=>retired?Promise.resolve(null):signal?loadTextureImage(url,signal).then(image=>{
+      if(retired||signal.aborted)return null;texture.image=image;texture.needsUpdate=true;onLoad?.(texture);return texture;
+    }):new Promise(resolve=>amtTextureLoader.load(url,loaded=>{
       if(!retired){texture.image=loaded.image;texture.needsUpdate=true;onLoad?.(texture)}resolve(texture);
     },undefined,error=>{onError?.(error);resolve(null)}));
-    texture.addEventListener("dispose",()=>{retired=true});
+    texture.addEventListener("dispose",()=>{retired=true;request.abort()});
     texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
     texture.minFilter=texture.magFilter=T.LinearFilter;
-    const loading=(bridge.queueAssetLoad?bridge.queueAssetLoad(load,{background:required&&officePreparationBackground}):load()).catch(error=>{onError?.(error);return null});
+    const loading=(bridge.queueAssetLoad?bridge.queueAssetLoad(load,{background:required&&officePreparationBackground,signal:request.signal}):load()).catch(error=>{onError?.(error);return null});
     if(required){officeAssetTotal++;officeAssetPending++;loading.then(result=>{if(!result)officeAssetFailures++}).finally(()=>officeAssetPending--)}
     return texture;
   }
@@ -1730,16 +1739,17 @@ function showRendererFailure(error){
   function loadAmtImages({background=false}={}){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
     officeAssetTotal++;officeAssetPending++;
-    const loadLipProfiles=async()=>{
-      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-mouth-audit');
+    const loadLipProfiles=async({signal}={})=>{
+      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-mouth-audit',{signal});
       if(!response.ok)throw new Error('Lip profiles unavailable: '+response.status);
-      window.GermanyAmtLips.setProfiles(await response.json(),validateMouthProfile);
+      const profiles=await response.json();if(!signal?.aborted)window.GermanyAmtLips.setProfiles(profiles,validateMouthProfile);
     };
     (bridge.queueAssetLoad?bridge.queueAssetLoad(loadLipProfiles,{background:officePreparationBackground}):loadLipProfiles()).catch(error=>{officeAssetFailures++;console.warn('Bürgeramt painted lip profiles unavailable',error)}).finally(()=>officeAssetPending--);
     amtTexture('./assets/buergeramt/mirror/potato-skin.webp?v=20261013-live-mirror',texture=>amtPotatoMirror.setSkinTexture(texture),undefined,true);
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetTotal++;officeAssetPending++;
-    const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
+    const loadDetail=({signal}={})=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
+      if(signal?.aborted)return;
       const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
       detail.attach(amtEnvironment);isolateAmtMaterials(amtEnvironment);
       officeDetail=detail;
@@ -2026,17 +2036,19 @@ function showRendererFailure(error){
     if(omen.life.opacity>0&&!amtOmenSplat){amtOmenSkipped=true;amtOmenRequest?.abort()}
     if(!amtOmenRequest&&!amtOmenSplat&&!amtOmenSkipped&&!document.hidden){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
-      const prepare=async()=>{
+      const prepare=async({signal}={})=>{
+        signal?.addEventListener('abort',()=>request.abort(signal.reason),{once:true});
         if(request.signal.aborted||document.hidden||!level.active)return null;
         const module=await loadAmtSplatModule();
         request.signal.throwIfAborted();
-        return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
+        const effect=await module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
+        if(request.signal.aborted){effect?.dispose();return null}return effect;
       };
-      (bridge.queueAssetLoad?bridge.queueAssetLoad(prepare,{foreground:true}):prepare()).then(effect=>{
+      (bridge.queueAssetLoad?bridge.queueAssetLoad(prepare,{foreground:true,signal:request.signal}):prepare()).then(effect=>{
         if(request.signal.aborted||visit!==amtOmenVisit||amtOmenSkipped||!level.active){effect?.dispose();return}
         if(effect)amtOmenSplat=effect;
       }).catch(error=>{
-        if(request.signal.aborted)return;
+        if(request.signal.aborted&&request.signal.reason?.name!=='TimeoutError')return;
         amtOmenSkipped=true;amtOmenFailure=error.message;console.warn("Bürgeramt omen keeps painted fallback",error);
       }).finally(()=>{if(amtOmenRequest===request)amtOmenRequest=null});
     }
@@ -2208,7 +2220,7 @@ function showRendererFailure(error){
     camera.position.set(px,11.5+elevation,pz+14);camera.lookAt(px,1+elevation,pz-2.7);
     updateGroupVisibility();updateBuildingOcclusion(undefined,streetPlayerSightlineTargets());
   }
-  const buildingLevels=createBuildingLevels({THREE:T,renderer,scene,camera,bridge,mobile:amtMobile,reducedMotion:amtReducedMotion,
+  const buildingLevels=createBuildingLevels({THREE:T,renderer,scene,camera,clearInput:()=>bridge.clearInput?.(),mobile:amtMobile,reducedMotion:amtReducedMotion,
     getDoor:id=>buildingSlots.find(slot=>slot.building.id===id)?.door,
     getBounds:id=>{const root=buildingSlots.find(slot=>slot.building.id===id)?.group;return root?new T.Box3().setFromObject(root):null},
     prepareExterior:prepareLevelExterior,
@@ -2225,10 +2237,10 @@ function showRendererFailure(error){
     if(opened)buildingLevels.enter('jobcenter',()=>bridge.clearInput?.());
     return opened;
   }
-  let previousLevelTime=performance.now();
-  document.addEventListener('visibilitychange',()=>{previousLevelTime=performance.now()});
+  let previousPresentationTime=performance.now();
+  document.addEventListener('visibilitychange',()=>{previousPresentationTime=performance.now()});
   addEventListener('pagehide',()=>buildingLevels.suspend());
-  addEventListener('pageshow',()=>{previousLevelTime=performance.now();buildingLevels.resume()});
+  addEventListener('pageshow',()=>{previousPresentationTime=performance.now();buildingLevels.resume()});
   canvas.addEventListener('webglcontextlost',()=>buildingLevels.suspend());
   canvas.addEventListener('webglcontextrestored',()=>buildingLevels.resume());
   captureStartupAssets();
@@ -2251,10 +2263,16 @@ function showRendererFailure(error){
   get neighborAssetStatus(){const paint=[...npcMeshes.values()].map(q=>q.userData.neighborPaint).filter(Boolean).map(p=>p.inspect());return {total:paint.length,settled:paint.filter(p=>p.settled).length,failed:paint.filter(p=>p.failed).length}},
   get startupReady(){return startupModelsReady()&&streetStartupPresented()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   prepareDirectArrival:prepareLevelExterior,
-  get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
-    const levelNow=performance.now(),levelDt=(levelNow-previousLevelTime)/1000;previousLevelTime=levelNow;
+  get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},
+  update(dt){
+    if(document.hidden||window.GermanyHUD?.paused){jobcenter.update(0);return}
+    buildingLevels.update(dt);
+    if(!buildingLevels.active)jobcenter.update(dt);
+    if(!buildingLevels.active&&!buildingLevels.office&&!jobcenter.active&&!window.BuergeramtLevel?.active)neighborHaloTime+=Math.min(.1,Math.max(0,dt));
+  },sync(){
+    const presentationNow=performance.now(),presentationDt=(presentationNow-previousPresentationTime)/1000;previousPresentationTime=presentationNow;
     if(!cityModelsEnabled()||jobcenter.active||buildingLevels.office)releaseStreetPaintViews();
-    if(buildingLevels.render(levelDt)){showMissionPointer(false);previousOcclusionTime=levelNow;return}
+    if(buildingLevels.render()){showMissionPointer(false);previousOcclusionTime=presentationNow;return}
     if(jobcenter.render()){showMissionPointer(false);previousOcclusionTime=performance.now();return}
     if(buildingLevels.active)return;
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();loadAmtImages();return}
@@ -2266,17 +2284,17 @@ function showRendererFailure(error){
     for(const actor of ns)if(!npcMeshes.has(actor)){const root=npcAppearance(actor);scene.add(root);npcMeshes.set(actor,root);freshStreetBodies=true}
     for(const actor of ps)if(!policeMeshes.has(actor)){const root=character("police");scene.add(root);policeMeshes.set(actor,root);freshStreetBodies=true}
     prepareNearbyAssets(freshStreetBodies);
-    if(!document.hidden&&!bridge.getHUDState?.().paused)neighborHaloTime+=Math.min(.1,Math.max(0,levelDt));
+
     syncNeighborHalo();
     updateMissionPointer();
-    if(!syncStreetPaint(playerMesh,bridge.player,levelDt)){syncChar(playerMesh,bridge.player,0);playerMesh.rotation.y=bridge.player.facing;}
+    if(!syncStreetPaint(playerMesh,bridge.player,presentationDt)){syncChar(playerMesh,bridge.player,0);playerMesh.rotation.y=bridge.player.facing;}
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
     const streetNow=performance.now()/1000;
     ns.forEach(n=>{
       let q=npcMeshes.get(n),kind=n.special||n.spriteKind;
       if(kind&&!q?.userData[kind+"Sprite"]&&!q?.userData.streetPaintView?.paint.inspect().loaded){const sprite=npcSprite(n);if(sprite){if(q){if(q.userData.streetPaintView){sprite.userData.streetPaintView=q.userData.streetPaintView;delete q.userData.streetPaintView}retireNpcMesh(q)}q=sprite;scene.add(q);npcMeshes.set(n,q)}}
       if(!q){q=npcAppearance(n);scene.add(q);npcMeshes.set(n,q)}
-      if(syncStreetPaint(q,n,levelDt))return;
+      if(syncStreetPaint(q,n,presentationDt))return;
       if(q.userData.grid?.groundProjection)return;
       if(n.jwdRole){q.userData.neighborPaint?.restore();syncJwdCharacter(q,n);q.userData.neighborPaint?.sync(streetNow,bridge.getHUDState?.(),bridge.getNeighborDialogue?.(),amtReducedMotion.matches)}
       else if(q.userData.borderPourerSprite)syncBorderPourer(q,n);
@@ -2288,7 +2306,7 @@ function showRendererFailure(error){
       else syncChar(q,n);
     });
     for(const [n,q] of npcMeshes)if(!ns.includes(n)){retireNpcMesh(q);npcMeshes.delete(n)}
-    ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}if(!syncStreetPaint(q,p,levelDt))syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){retireNpcMesh(q);policeMeshes.delete(p)}
+    ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}if(!syncStreetPaint(q,p,presentationDt))syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){retireNpcMesh(q);policeMeshes.delete(p)}
     const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}const sink=car.vortexSink||0,crush=car.vortexCrush||0,scale=Math.max(.055,1-sink*.93),impact=car.vortexImpact||0;if(impact&&impact!==slot.vortexImpact){slot.vortexImpact=impact;strikeWirtschaftswunder(impact)}slot.group.visible=car.vortexPhase!=="swallowed";slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07-sink*.72,Z(car.y));syncVehicleScale(slot,scale,crush);slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car)-sink*1.18,Math.PI/2-car.angle,Math.sin((car.vortexSpin||0)*1.7)*sink*.62);syncVehicleWheels(slot)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){removeVehicleSlot(slot);trafficCarMeshes.delete(car)}
     const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07,Z(car.y));slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car),Math.PI/2-car.angle,0);syncVehicleWheels(slot)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){removeVehicleSlot(slot);policeVehicleMeshes.delete(car)}
     const helicopters=bridge.getPoliceHelicopters?.()||[];helicopters.forEach(helicopter=>{let slot=policeHelicopterMeshes.get(helicopter);if(!slot){slot=makePoliceHelicopterSlot(helicopter);policeHelicopterMeshes.set(helicopter,slot)}slot.group.position.set(X(helicopter.x),6.8+Math.sin(performance.now()*.003+helicopter.phase)*.18,Z(helicopter.y));slot.group.rotation.y=Math.PI/2-helicopter.angle;slot.rotor.rotation.y=helicopter.rotor;slot.beam.visible=helicopter.spotlight});for(const [helicopter,slot] of policeHelicopterMeshes)if(!helicopters.includes(helicopter)){slot.retired=true;world.remove(slot.group);policeHelicopterMeshes.delete(helicopter)}

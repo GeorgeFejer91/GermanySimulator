@@ -17,6 +17,7 @@ This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch co
 
 ## Task reading routes
 
+- Architecture loading, cancellation, transition ownership or keyboard-access follow-up: read the [architecture implementation record](../docs/engineering/ARCHITECTURE-IMPROVEMENTS.md) for the accepted scope, evidence and remaining device limits. Lasting contracts live in the subject documents below.
 - AI-agent browser stress tests or development-tool efficiency: use [AI browser testing](./SKILLS.md#ai-browser-testing). Apply `$ponytail`, reuse the smallest relevant scenario, and inspect the compact result before opening diagnostic artifacts.
 - New levels, named-area direct links, entry URLs, share previews or hosting changes: read [`LEVEL-URLS.md`](./LEVEL-URLS.md). Every level requires a maintained permanent direct URL and unique comical share image; update and verify the catalogue before release.
 - Building intros/outros or indoor scene handoffs: read [`LEVEL-TRANSITIONS.md`](./LEVEL-TRANSITIONS.md), both affected level guides and the applicable performance/object gates. Every indoor level uses its three shared transition types; outdoor scenes keep their existing flow.

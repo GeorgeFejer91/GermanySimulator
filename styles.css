@@ -234,7 +234,7 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 }
 #quiz-prompt,.quiz-choices button,.quiz-person b,.quiz-person strong{overflow-wrap:break-word}
 @media(max-width:760px),(pointer:coarse){
-  .dialogue,.dialogue.memorial{bottom:calc(var(--city-control-clearance,153px) + 7px);max-height:calc(100dvh - var(--city-control-clearance,153px) - 14px)}
+  .dialogue,.dialogue.memorial{bottom:calc(max(var(--city-control-clearance,153px),var(--subtitle-height,0px)) + 7px);max-height:calc(100dvh - max(var(--city-control-clearance,153px),var(--subtitle-height,0px)) - 14px)}
   .interact-hint{bottom:calc(var(--city-control-clearance,153px) + 7px)}
 }
 /* Spoken names and dialogue belong to subtitles; retain only the actions. */
@@ -284,3 +284,8 @@ body.office-inside :is(.interact-hint,.control-dock){display:none!important}
 #bureaucracy-form{padding-inline:clamp(8px,3vw,22px)}
 #end-modal .end-card{padding-inline:clamp(10px,4vw,30px)}
 #bureaucracy-form .paper-actions button,#end-modal button{padding-inline:clamp(2px,1vw,13px)}
+
+.humor-signature-controls{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem;min-width:0}
+.humor-signature-controls button{position:static;flex:1 1 9em;min-width:0;max-width:100%;min-height:44px!important;padding:.5em!important;border:1px solid #696153;background:#ddd4bf;color:#292722;font:700 1rem/1.25 "UnifrakturCook",serif!important;letter-spacing:normal;white-space:normal;overflow-wrap:break-word}
+.humor-signature-controls button[aria-disabled="true"]{border-style:inset;background:#cbc2ac}
+.humor-signature-controls button:focus-visible{outline:3px solid #171f35;outline-offset:2px}

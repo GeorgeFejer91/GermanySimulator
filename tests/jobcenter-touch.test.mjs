@@ -16,7 +16,7 @@ async function fixture(run){
  const encounter=createJobcenterEncounter(T,{render(){}},{getInput:()=>keys,clearInput:()=>{for(const k in keys)delete keys[k]}});
  const flush=async()=>{for(let i=0;i<6;i++)await Promise.resolve()};
  const open=async()=>{encounter.open();await flush();return elements.findLast(e=>e.id==='jobcenter-input')};
- const tick=(dt=.1)=>{now+=dt*1000;encounter.render()};
+ const tick=(dt=.1)=>{now+=dt*1000;encounter.update(dt);encounter.render()};
  const pointer=(surface,type,id,x,y)=>{const e=new Event(type,{cancelable:true});Object.assign(e,{pointerId:id,pointerType:'touch',clientX:x,clientY:y});surface.dispatchEvent(e)};
  const spread=surface=>{pointer(surface,'pointerdown',1,140,490);pointer(surface,'pointerdown',2,250,490);pointer(surface,'pointermove',1,80,490);pointer(surface,'pointermove',2,310,490)};
  try{await run({encounter,surface:await open(),pointer,spread,tick,flush,media,doc,win:window,open})}
@@ -76,4 +76,11 @@ test('only a completed tap on the real entrance can leave; cancellation and lost
  }
  pointer(surface,'pointerdown',11,195,422);pointer(surface,'pointerup',11,195,422);
  assert.equal(encounter.active,false,'a completed raycast hit still returns voluntarily');
+}));
+
+
+test('exit capture projects the latest accepted update without requiring a draw',async()=>fixture(({encounter,surface,spread})=>{
+ spread(surface);encounter.update(.1);const accepted=encounter.inspect();assert.ok(accepted.z<34);
+ const exit=encounter.exitView();assert.ok(Math.abs(exit.door.group.position.z-(36-accepted.z))<1e-9);
+ for(let i=0;i<10;i++)encounter.render();assert.equal(encounter.inspect().z,accepted.z);
 }));

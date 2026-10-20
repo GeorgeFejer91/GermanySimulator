@@ -11,9 +11,7 @@ assert.equal(createHash("sha256").update(core).digest("hex"),"8252c743eec07c0f9d
 const smoke=readFileSync(new URL("../assets/fire/kenney-smoke-05.png",import.meta.url));
 assert.equal(createHash("sha256").update(smoke).digest("hex"),"4c6607566fba4cb3e949f56ed0c38d49fddba844b29e8ec94d5fda20be1a8b01");
 assert.ok(renderer.includes('asset==="dumpster-fire"'));
-assert.ok(page.includes('rel="preload" as="image" href="./assets/fire/kenney-flame-01.png"'));
-assert.ok(page.includes('rel="preload" as="image" href="./assets/fire/kenney-flame-05.png"'));
-assert.ok(page.includes('rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png"'));
+assert.doesNotMatch(page,/<link[^>]+rel="preload"[^>]+href="\.\/assets\/fire\//,'queued texture fetches must not duplicate independent image preloads');
 assert.ok(renderer.includes('fireReady(()=>{fallback.visible=false;fire.visible=true})'));
 assert.ok(renderer.includes('fireReady(()=>{lineFire.visible=true;firePlaneA.visible=firePlaneB.visible=false})'));
 assert.ok(renderer.includes('lineParticleLayers.push(particleLayer(fireCount*pointsPerSource[0],flameMask'));

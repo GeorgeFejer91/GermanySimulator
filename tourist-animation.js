@@ -4,19 +4,20 @@ globalThis.TouristAnimations = (() => {
   const facing = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
   const cell = (n, p) => { n.spriteRow=p.row; n.spriteFrame=p.col; n.spriteFlip=false; };
   const phases = (m, direction) => m.walks[direction].frames??8;
-  async function load(url,options={}) {
+  async function load(url,options={}, {signal}={}) {
+    const check=()=>{if(signal?.aborted)throw signal.reason??new DOMException("Asset aborted","AbortError")};check();
     const {movementOnly=false,variant=(globalThis.innerWidth||1024)<=600?'mobile':'desktop'}=typeof options==='string'?{variant:options}:options;
     const key=url+':'+variant+(movementOnly?'#movement':'');
     if (!loading.has(key)) loading.set(key, (async () => {
-      const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
+      const response=await fetch(url,{signal}); if(!response.ok) throw Error('Tourist manifest '+response.status);
       const original=await response.json(),selected=original.variants?.[variant];
       const manifest=selected?{...original,...selected,delivery:selected.delivery,image:selected.image||selected.file,pivot:selected.pivot,frame_size:selected.frame_size,image_size:selected.image_size||[selected.width,selected.height]}:original;
       const movement=movementOnly&&manifest.movement_delivery;
       if(movement)manifest.movementOnly=true;
       async function artwork(spec) {
-      const art=await fetch(new URL(spec.image,new URL(url,globalThis.document?.baseURI||location.href)));
+      const art=await fetch(new URL(spec.image,new URL(url,globalThis.document?.baseURI||location.href)),{signal});
       if(!art.ok) throw Error('Character artwork '+art.status);
-      const bytes=new Uint8Array(await art.arrayBuffer());
+      const bytes=new Uint8Array(await art.arrayBuffer());check();
       if(globalThis.crypto?.subtle) {
         const actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
         if(actual!==spec.sha256) throw Error('Tourist artwork hash mismatch');
@@ -34,11 +35,12 @@ globalThis.TouristAnimations = (() => {
       return {manifest,bytes,type:webp?'image/webp':'image/png'};
       }
       // PNG masters retain the accepted artwork when delivery fails.
-      if(movement)try{return await artwork(movement)}catch(error){delete manifest.movementOnly;console.warn('Character movement delivery fallback',error)}
-      if(manifest.delivery)try{return await artwork(manifest.delivery)}catch(error){console.warn('Character delivery fallback',error)}
+      if(movement)try{return await artwork(movement)}catch(error){check();delete manifest.movementOnly;console.warn('Character movement delivery fallback',error)}
+      if(manifest.delivery)try{return await artwork(manifest.delivery)}catch(error){check();console.warn('Character delivery fallback',error)}
       return artwork(manifest);
     })());
-    const {manifest,bytes,type}=await loading.get(key);
+    let data;try{data=await loading.get(key)}catch(error){loading.delete(key);throw error}check();
+    const {manifest,bytes,type}=data;
     return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type}))};
   }
   function phaseSettle(n,m) {

@@ -604,11 +604,24 @@ worker pool or installation. A skill's availability is not performance evidence.
   a reload action. The pinned Three.js r186 engine/GLTF dependencies are shipped
   locally under `assets/vendor/three/0.186.0/`; external decorative fonts must
   not block startup. Distant/optional assets remain approach-only.
-- Once the player starts the first city level, prepare the required Bürgeramt
-  room/atlas/prop assets quietly through that same queue, behind ordinary city
-  loads and foreground speech. Preserve the two-job limit, hidden-tab pause,
-  cached one-time preparation and office entry readiness/fallback gate. Close
-  character details, speech and cinematics retain their existing demand triggers.
+- Prepare Bürgeramt room/atlas/prop assets only after Start and within 1500
+  simulation units of the actual office door, or on explicit office entry.
+  Use the same two-slot queue behind ordinary city loads and foreground speech;
+  starting the city alone must not fetch the distant office or its phone SDK.
+  Preserve hidden-tab admission pause, cached one-time preparation and the
+  office entry readiness/fallback gate. Close character details, speech and
+  cinematics retain their existing demand triggers.
+- `asset-queue.js` owns the shared two-slot admission boundary: foreground before
+  ordinary before background, a 120-second admission deadline and 30-second
+  execution deadline, per-job abort signals and once-only settlement. Timeout
+  releases its slot even when an underlying browser operation cannot cancel.
+  Consumers must stop cancellable transport and reject/dispose late results.
+  Shared street texture/rig leases release one consumer at a time; only the last
+  pending consumer may abort shared transport. Required load failures settle to
+  playable fallbacks. `asset-loaders.js` owns common transport/decode cleanup.
+  Public asset visibility is acceptable; do not add packaging or access controls
+  to hide assets. Delivery and decoded resource cost govern loading decisions.
+
 - Preload the starting neighborhood before enabling Start, including decoded
   character images and installed models. Keyboard shortcuts obey the same
   readiness gate. Show bounded, readable loading feedback; missing individual

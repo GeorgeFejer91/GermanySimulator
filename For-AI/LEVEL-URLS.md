@@ -4,6 +4,12 @@ This is the maintained catalogue of public level and named-area links. George re
 
 The existing `/3d.html` link is a compatibility entry to the maintained `index.html` city game. It preserves query and hash and replaces the compatibility history entry, including for relative `file://` entry. Its raw HTML retains the city share metadata and existing root preview; it is not a new level or an independent renderer/controller. Historical HTTP and browser checks below retain their original revisions and do not prove this routing change.
 
+The frozen raw records in `building-catalogue.js` are the shared building data
+owner. The root requests mutable offset copies; route generation imports the raw
+records through `tools/build-level-pages.mjs`. Do not reconstruct geometry or
+route copy by parsing JavaScript source text. The compatibility entry remains a
+redirect and consumes no second building catalogue.
+
 ## Current public checks
 
 Production HTTP, static social metadata, aliases and PNG dimensions checked 2026-10-14T17:32:34.753Z. Browser evidence and its device limits are recorded below. Platform caches may retain an earlier preview.

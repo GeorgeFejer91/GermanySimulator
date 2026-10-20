@@ -1085,3 +1085,30 @@ test('lazy rig admission rejects a module limit larger than any allocated Three 
     }
   }finally{console.warn=previousWarn}
 });
+
+
+test('queued street paint cancellation keeps another live texture consumer and cannot install late paint',async()=>{
+ registerStreetCharacterManifest(manifest());const f=rendererFixture(),controllers=[new AbortController(),new AbortController()];
+ const saved={fetch:globalThis.fetch,Image:globalThis.Image};let network,fetches=0;const images=[];
+ try{
+  globalThis.fetch=(_url,{signal})=>{fetches++;return new Promise((resolve,reject)=>{network={resolve,signal};signal.addEventListener('abort',()=>reject(signal.reason),{once:true})})};
+  globalThis.Image=class{constructor(){images.push(this);this.width=1024;this.height=1280}};
+  const hosts=[f.host(),f.host()],adapters=hosts.map(host=>createStreetCharacterSprite(f.T,actor(),host,f.queueAsset,f.camera));
+  const tasks=f.queue.map((job,i)=>job.task({signal:controllers[i].signal}));await until(()=>fetches===1);
+  controllers[0].abort();assert.equal(await tasks[0],false);assert.equal(network.signal.aborted,false);
+  assert.equal(adapters[0].inspect().failed,true);assert.equal(hosts[0].children.length,1);
+  network.resolve({ok:true,blob:async()=>new Blob(['paint'])});await until(()=>images.length===1);images[0].onload();
+  assert.equal(await tasks[1],true);assert.equal(adapters[1].inspect().loaded,true);assert.equal(fetches,1);
+  adapters.forEach(adapter=>adapter.dispose());
+ }finally{Object.assign(globalThis,saved)}
+});
+
+test('last street paint waiter cancellation aborts its outstanding texture fetch',async()=>{
+ registerStreetCharacterManifest(manifest());const f=rendererFixture(),controller=new AbortController(),saved=globalThis.fetch;let request;
+ try{
+  globalThis.fetch=(_url,{signal})=>new Promise((_resolve,reject)=>{request=signal;signal.addEventListener('abort',()=>reject(signal.reason),{once:true})});
+  const host=f.host(),adapter=createStreetCharacterSprite(f.T,actor(),host,f.queueAsset,f.camera);
+  const pending=f.queue[0].task({signal:controller.signal});await until(()=>!!request);controller.abort();
+  assert.equal(await pending,false);assert.equal(request.aborted,true);assert.equal(host.children.length,1);assert.equal(adapter.inspect().textureReferences,0);adapter.dispose();
+ }finally{globalThis.fetch=saved}
+});

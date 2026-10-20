@@ -9,7 +9,7 @@ const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const template=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 
 test('every enterable nonresidential building and neighbors have a unique direct route',()=>{
-  const levels=levelLinks(source);
+  const levels=levelLinks();
   const paths=levels.flatMap(level=>[level.path,...level.aliases]);
   assert.equal(new Set(paths).size,paths.length);
   for(const id of ['city','neighbors','buergeramt','jobcenter','hausverwaltung','finanzamt','krankenkasse','stadtbild','auslaender','bundestag']) assert.ok(levels.some(level=>level.id===id),id);
@@ -24,12 +24,12 @@ test('every registered level scope has a maintained direct route',()=>{
   const scopes=readFileSync(new URL('../For-AI/LEVELS.md',import.meta.url),'utf8');
   const ids=[...scopes.matchAll(/^\|\s*`([^`]+)`\s*\|/gm)].map(match=>match[1]);
   assert.ok(ids.length>0,'level scope catalogue must remain discoverable');
-  const routes=new Set(levelLinks(source).map(level=>level.id));
+  const routes=new Set(levelLinks().map(level=>level.id));
   for(const id of ids)assert.ok(routes.has(id),'new level requires a direct route: '+id);
 });
 
 test('share metadata is in raw HTML and routes retain canonical scripts with a parent base',()=>{
-  for(const level of levelLinks(source)) {
+  for(const level of levelLinks()) {
     const html=levelPage(template,level);
     assert.match(html,new RegExp(`data-direct-level="${level.id}"`));
     assert.match(html,/<base href="\.\.\/">/);
@@ -43,7 +43,7 @@ test('share metadata is in raw HTML and routes retain canonical scripts with a p
 
 test('every advertised share image is a real 1200 by 630 PNG',()=>{
   const hashes=new Set();
-  for(const level of levelLinks(source)) {
+  for(const level of levelLinks()) {
     const bytes=readFileSync(new URL('../'+level.image,import.meta.url));
     assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10],level.image);
     assert.equal(bytes.readUInt32BE(16),1200,level.image);

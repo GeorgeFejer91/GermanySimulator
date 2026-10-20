@@ -1,3 +1,4 @@
+import buildingData from '../building-catalogue.js';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -11,7 +12,7 @@ function between(start,end){
 }
 // The production radius function has a stable next declaration; do not copy its formula.
 const radiusSource=between('function propRadius(', '// Authored prop dimensions');
-const context={};vm.createContext(context);
+const context={GermanyBuildings:buildingData,};context.GermanyBuildings=buildingData;vm.createContext(context);
 vm.runInContext(`
  const CITY={w:9840,h:4240},RAIL_GUTTER=560;
  const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});

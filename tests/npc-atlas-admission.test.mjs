@@ -96,7 +96,7 @@ for(const initiallyFailed of [true,false])test(`legacy body replacement retains 
   Object.assign(f.scope,{scene:{add(){},remove(){}},npcSprite:()=>replacement,cancelPaintedStreetReaction(){},policeMeshes:new Map()});
   const release=world.slice(world.indexOf('  function releaseStreetPaint(root){'),world.indexOf('  function forEachStreetBody(visit){'));
   const retire=world.slice(world.indexOf('  function retireNpcMesh(q){'),world.indexOf('  addEventListener("pagehide"'));
-  const body=world.slice(world.indexOf('      let q=npcMeshes.get(n),kind=n.special||n.spriteKind;'),world.indexOf('      if(syncStreetPaint(q,n,levelDt))return;'));
+  const body=world.slice(world.indexOf('      let q=npcMeshes.get(n),kind=n.special||n.spriteKind;'),world.indexOf('      if(syncStreetPaint(q,n,presentationDt))return;'));
   vm.runInContext(release+retire+';globalThis.replaceBody=n=>{'+body+'};globalThis.retireBody=retireNpcMesh;',f.scope);
   f.scope.replaceBody(actor);
   assert.equal(f.meshes.get(actor),replacement);

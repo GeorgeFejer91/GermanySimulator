@@ -3,6 +3,26 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {source} from './amt-harness.mjs';
 
+test('phone SDK preparation is admitted on first use and a retired link cannot connect after it settles',async()=>{
+ let release,admissions=0,constructed=0,connected=0;
+ const window={Germany3DBridge:{queueAssetLoad(task,options){admissions++;assert.equal(typeof task,'function');assert.equal(options.foreground,true);return new Promise(resolve=>release=resolve)}}};
+ const context=vm.createContext({window,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,console});
+ vm.runInContext(source('buergeramt-link.js'),context);
+ const link=new window.BuergeramtLink('host',{room:'amt-test',secret:'a'.repeat(32),stream:'amt-ticket-test'});
+ const starting=link.start();starting.catch(()=>{});
+ assert.equal(admissions,1);assert.equal(constructed,0,'connection waits for its module receipt');
+ link.close();
+ context.VDONinjaSDK=class{constructor(){constructed++}connect(){connected++;return Promise.resolve()}};
+ release();await starting;assert.equal(constructed,0);assert.equal(connected,0,'late preparation cannot reopen a closed link');
+ delete context.VDONinjaSDK;
+ const active=new window.BuergeramtLink('host',{room:'amt-test',secret:'a'.repeat(32),stream:'amt-ticket-test'});
+ const activating=active.start();assert.equal(admissions,2);assert.equal(constructed,0);
+ context.VDONinjaSDK=class extends EventTarget{
+  constructor(){super();constructed++}async connect(){connected++}async joinRoom(){}async announce(){}disconnect(){}
+ };
+ release();await activating;assert.equal(constructed,1);assert.equal(connected,1,'an active link starts only after preparation');active.close();
+});
+
 test('one- and two-letter tickets, calls and receipts pass transport validation, malformed codes do not',()=>{
  for(const number of ['A-004','ZA-731','XB-018']){
   const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number};

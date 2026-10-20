@@ -12,6 +12,11 @@ export const browserProfiles = [
   {id: 'reduced', viewport: {width: 1280, height: 800}, deviceScaleFactor: 1, reducedMotion: 'reduce'}
 ];
 
+export async function resizeViewport(page,viewport){
+  await page.evaluate(async()=>{if(document.fullscreenElement)await document.exitFullscreen()});
+  await page.setViewportSize(viewport);
+}
+
 export function installedPlaywright() {
   const require = createRequire(import.meta.url);
   if (process.env.PLAYWRIGHT_MODULE) return require(process.env.PLAYWRIGHT_MODULE);

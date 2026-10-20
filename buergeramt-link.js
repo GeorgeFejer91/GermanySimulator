@@ -54,7 +54,15 @@ class AmtLink extends EventTarget{
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
  static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",globalThis.document?.baseURI||location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261013-local-name");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
  static fromHash(){const p=new URLSearchParams(location.hash.slice(1)),room=p.get("room"),secret=p.get("secret"),stream=p.get("stream");if(!room?.startsWith("amt-")||!stream?.startsWith("amt-ticket-")||!/^[a-z0-9]{32}$/.test(secret||""))return null;return{room,secret,stream}}
- async start(){if(typeof VDONinjaSDK!=="function")throw new Error("VDO.Ninja Verbindung fehlt");
+ async start(){
+  if(this.closed)return;
+  if(typeof VDONinjaSDK!=="function"){
+   const load=()=>import('./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js');
+   const queue=window.Germany3DBridge?.queueAssetLoad;
+   if(queue)await queue(load,{foreground:true});else await load();
+  }
+  if(this.closed)return;
+  if(typeof VDONinjaSDK!=="function")throw new Error("VDO.Ninja Verbindung fehlt");
   const sdk=new VDONinjaSDK({password:this.invitation.secret,salt:"germany-simulator-amt-v1"});this.sdk=sdk;
   sdk.addEventListener("error",e=>event(this,"status",e.detail?.message||"Verbindungsfehler"));
   sdk.addEventListener("connectionFailed",()=>event(this,"status","Verbindung unterbrochen"));

@@ -15,8 +15,8 @@ async function fixture(run,loadEffects=()=>effects){
   const source=new T.PerspectiveCamera(69,1.6,.06,35);source.position.set(3,1.68,-8);source.rotation.y=1.2;insideDoor.group.position.z=5.55;
   let target=null,disposed=0,preparations=0,failCapture=false,failRender=false;const pulls=[],pullAspects=[];
   const renderer={getDrawingBufferSize:v=>v.set(1280,800),getRenderTarget:()=>target,setRenderTarget(value){target=value;if(value)value.addEventListener('dispose',()=>disposed++);},render(){if(failRender)throw Error('pending import render failure');if(target&&failCapture)throw Error('injected capture failure')}};
-  const levels=createBuildingLevels({THREE:T,renderer,scene,camera,bridge:{clearInput(){}},mobile:false,reducedMotion,loadEffects,getDoor:()=>door,getBounds:()=>new T.Box3(new T.Vector3(-2,0,-2),new T.Vector3(2,5,2)),prepareExterior:()=>preparations++,getInterior:()=>({camera:source,door:insideDoor,render:view=>{pulls.push(view.position.toArray());pullAspects.push(view.aspect)}})});
-  const advance=seconds=>{for(let i=0;i<Math.ceil(seconds*60);i++)levels.render(1/60)};
+  const levels=createBuildingLevels({THREE:T,renderer,scene,camera,clearInput(){},mobile:false,reducedMotion,loadEffects,getDoor:()=>door,getBounds:()=>new T.Box3(new T.Vector3(-2,0,-2),new T.Vector3(2,5,2)),prepareExterior:()=>preparations++,getInterior:()=>({camera:source,door:insideDoor,render:view=>{pulls.push(view.position.toArray());pullAspects.push(view.aspect)}})});
+  const advance=seconds=>{for(let i=0;i<Math.ceil(seconds*60);i++){levels.update(1/60);levels.render()}};
   try{await run({levels,camera,door,insideDoor,reducedMotion,classes,document,window,advance,pulls,pullAspects,get disposed(){return disposed},get preparations(){return preparations},failCapture(){failCapture=true},failRender(){failRender=true}})}
   finally{levels.dispose();door.dispose();insideDoor.dispose();for(const key of names){if(saved[key])Object.defineProperty(globalThis,key,saved[key]);else delete globalThis[key]}}
 }
@@ -30,6 +30,23 @@ test('one entry owns the input gate and commits once after the complete building
   f.advance(1.2);assert.equal(entered,1);assert.equal(f.levels.active,false);assert.equal(f.door.inspect().open,0);assert.equal(f.disposed,1);assert.equal(f.classes.has('level-transitioning'),false);
   f.advance(3);assert.equal(entered,1);
 }));
+
+test('rendering cannot advance or complete a transition; the explicit update owns progress',()=>fixture(f=>{
+  let entered=0;f.levels.enter('finanzamt',()=>entered++,true);
+  for(let i=0;i<300;i++)f.levels.render(1/60);
+  assert.equal(entered,0);assert.equal(f.levels.inspect().elapsed,0);
+  for(let i=0;i<300;i++)f.levels.update(1/60);
+  assert.equal(entered,1);assert.equal(f.levels.office,'finanzamt');
+  for(let i=0;i<300;i++){f.levels.update(1/60);f.levels.render()}
+  assert.equal(entered,1);
+}));
+
+test('a rendering failure records recovery without committing a gameplay consequence from draw',()=>fixture(f=>{
+  let entered=0;f.levels.enter('finanzamt',()=>entered++,true);f.failRender();
+  f.levels.render();assert.equal(entered,0);assert.equal(f.levels.active,true);
+  f.levels.update(.1);assert.equal(entered,1);assert.equal(f.levels.active,false);
+  f.levels.update(.1);assert.equal(entered,1);
+},()=>new Promise(()=>{})));
 
 test('a forced exit crosses the actual indoor doorway before committing and rebuilding the exterior',()=>fixture(f=>{
   let returned=0;f.levels.leave('jobcenter',{mode:'eject',fire:true,onReturn:()=>returned++});

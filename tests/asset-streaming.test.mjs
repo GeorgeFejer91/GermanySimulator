@@ -2,8 +2,15 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
 import test from "node:test";
+import {createRequire} from 'node:module';
+
+const {createAssetQueue}=createRequire(import.meta.url)('../asset-queue.js');
 
 const renderer=readFileSync(new URL("../world3d.js",import.meta.url),"utf8");
+test('root title does not eagerly fetch the office-only phone SDK',()=>{
+ const page=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ assert.doesNotMatch(page,/<script[^>]+src=["'][^"']*vdoninja-sdk/);
+});
 function productionFunction(name){
   const start=renderer.search(new RegExp("(?:async )?function "+name+"\\("));
   assert.ok(start>=0,name+" exists");
@@ -25,7 +32,7 @@ function fixture({shared=true,loader=true}={}){
     // of silently omitting a production dependency from the GLB fixture.
     prepareStreetPaint(){streetPrepareCalls++},forEachStreetBody(visit){for(const item of streetBodies)visit(item.actor,item.root)},
     updateAssetView:()=>{},isCityAssetVisible:()=>false,initialPlayerX:0,initialPlayerZ:0,cityAssetSlots:[],localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},loadAmtImages:()=>{},
-    modelLoader:loader?{loadAsync(url){requests.push(url);active++;maxActive=Math.max(active,maxActive);return new Promise((resolve,reject)=>pending.push({url,resolve:value=>{active--;resolve(value)},reject:error=>{active--;reject(error)}}))}}:null,
+    modelLoaderWithSignal:loader=>loader,modelLoader:loader?{loadAsync(url){requests.push(url);active++;maxActive=Math.max(active,maxActive);return new Promise((resolve,reject)=>pending.push({url,resolve:value=>{active--;resolve(value)},reject:error=>{active--;reject(error)}}))}}:null,
     cityModelUrl:file=>"./assets/models/city-kit/"+file+".glb",fitResponseModel:()=>{}
   });
   vm.runInContext(["cityModelsEnabled","cityModelDistance","queueCityAsset","queueCityModel","startupModelsReady","streetStartupPresented","captureStartupAssets","prepareNearbyAssets","loadLocalModel","installCityModel","installTrainModel","installVehicleModel","installResponseModel","amtTexture"].map(productionFunction).join("\n"),context);
@@ -64,6 +71,18 @@ test("one source URL serves separately fitted instances; failed sources remain f
   city(f,"broken",4);f.setTime(1000);f.context.prepareNearbyAssets();await flush();
   assert.equal(f.requests.filter(url=>url.includes("broken")).length,1);assert.equal(f.warnings.length,1);
   assert.ok(f.context.cityAssetSlots.filter(slot=>slot.file==="broken").every(slot=>slot.fallback.visible&&!slot.model));
+});
+
+test('timed-out city preparation cannot install a late model over its accepted fallback', {timeout:2000}, async()=>{
+  const f=fixture(),queue=createAssetQueue({timeoutMs:20});
+  let queued;f.context.bridge.queueAssetLoad=(task,options)=>queued=queue.enqueue(task,options);
+  const entry=city(f,'delayed',1);f.context.startupModelsCaptured=true;
+  f.context.prepareNearbyAssets();await flush();
+  await assert.rejects(queued,{name:'TimeoutError'});await flush();
+  assert.equal(entry.job.state,'settled');assert.equal(entry.job.failed,true);
+  f.pending[0].resolve(source());await flush();
+  assert.equal(entry.target.children.length,0,'late load must not install after the queue revoked its task');
+  assert.equal(entry.fallback.visible,true);assert.equal(f.context.cityModelActive,0);
 });
 
 test("a settled title neighborhood stays bounded until Start then admits newly visible assets",async()=>{
@@ -141,12 +160,13 @@ test("direct office and unavailable model loader admit no city GLB work",async()
   f.context.queueCityAsset(()=>({x:0,z:0}),1,()=>{throw new Error("direct office must not fetch city art")});f.context.amtDirectRoute=true;f.context.prepareNearbyAssets();await flush();assert.equal(f.context.cityModelActive,0);
 });
 
-test("first city level prepares the distant office in the background, after startup and only while visible",()=>{
+test("office preparation requires an actual approach after startup and only while visible",()=>{
   const f=fixture(),calls=[];let started=false;
   f.context.bridge.getHUDState=()=>({started});f.context.bridge.buildings=[{id:"buergeramt",doorX:9000,doorY:9000}];
   f.context.loadAmtImages=options=>calls.push(options);
   f.context.startupModelsCaptured=true;f.context.prepareNearbyAssets();assert.equal(calls.length,0,"title must not preload the distant office");
-  started=true;f.setTime(500);f.context.prepareNearbyAssets();assert.equal(calls.length,1);assert.equal(calls[0].background,true);
+  started=true;f.setTime(500);f.context.prepareNearbyAssets();assert.equal(calls.length,0,"starting the city does not download distant office assets");
+  f.player.x=8500;f.player.y=8500;f.setTime(800);f.context.prepareNearbyAssets();assert.equal(calls.length,1);assert.equal(calls[0].background,true);
   f.context.document.hidden=true;f.setTime(1000);f.context.prepareNearbyAssets();assert.equal(calls.length,1);
   f.context.document.hidden=false;f.level.active=true;f.context.prepareNearbyAssets();assert.equal(calls.length,1);
 });
@@ -154,7 +174,7 @@ test("first city level prepares the distant office in the background, after star
 test("office texture placeholders count settled required loads and share the asset admission queue",async()=>{
   const f=fixture(),tasks=[],images=[],callbacks=[];
   class Texture {image=null;userData={};listeners={};addEventListener(type,handler){this.listeners[type]=handler}dispose(){this.listeners.dispose?.()}}
-  Object.assign(f.context,{T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,officeAssetTotal:0,officePreparationBackground:false,
+  Object.assign(f.context,{AbortController,T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,officeAssetTotal:0,officePreparationBackground:false,
     amtTextureLoader:{load(url,onLoad,_progress,onError){images.push({url,onLoad,onError})}}});
   f.context.bridge.queueAssetLoad=task=>{const promise=Promise.resolve().then(task);tasks.push(promise);return promise};
   const texture=f.context.amtTexture("selected-mobile.webp",loaded=>callbacks.push(loaded),undefined,true);

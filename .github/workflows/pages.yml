@@ -20,6 +20,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,6 +32,8 @@ jobs:
         run: node --test tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs tests/jobcenter-rumble.test.mjs tests/jobcenter-release.test.mjs tests/jobcenter-direct.test.mjs tests/jobcenter-touch.test.mjs tests/welcome-dialogue.test.mjs
+      - name: Check bounded asset jobs and cancellation
+        run: node --test tests/asset-queue.test.mjs tests/asset-loaders.test.mjs tests/building-catalogue.test.mjs
       - name: Check shared building transitions and exit ownership
         run: node --test tests/level-transitions.test.mjs tests/building-levels.test.mjs tests/office-level-flow.test.mjs tests/city-paperwork-causality.test.mjs tests/direct-result-causality.test.mjs
       - name: Check office queue call audio
@@ -95,6 +98,28 @@ jobs:
           node --test tests/level-pages.test.mjs
           node tools/build-level-pages.mjs
       - uses: actions/configure-pages@v5
+      - name: Install locked browser check dependencies
+        run: |
+          npm ci --prefix tools/browser-ci --ignore-scripts
+          node tools/browser-ci/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Check built site in silent desktop and Android-emulated Chromium
+        timeout-minutes: 35
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/browser-ci/node_modules/playwright
+        run: >-
+          node tools/test-browser.mjs stress --root output/site
+          --scenario startup --scenario startup-missing-models --scenario startup-engine-failure
+          --scenario input --scenario lifecycle --scenario keyboard-de --scenario keyboard-en
+          --profile desktop --profile android-portrait --profile android-landscape
+          --iterations 1 --output output/browser-ci
+      - name: Retain failed browser evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-smoke-failure
+          path: output/browser-ci
+          if-no-files-found: ignore
+          retention-days: 7
       - uses: actions/upload-pages-artifact@v3
         with:
           path: output/site

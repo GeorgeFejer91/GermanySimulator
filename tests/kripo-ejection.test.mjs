@@ -1,3 +1,4 @@
+import buildingData from '../building-catalogue.js';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
@@ -20,7 +21,7 @@ function fn(name,code=source){
 function harness(direct=false){
  const classes=new Set(direct?['amt-direct-mode']:[]),elements=new Map(),events=[],visits=[],keys={KeyW:true,KeyE:true};
  const element=id=>{if(!elements.has(id))elements.set(id,{hidden:false,textContent:''});return elements.get(id)};
- const h={console,Math,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
+ const h={GermanyBuildings:buildingData,console,Math,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
   horizontalRoads:[{x:560,y:1380,w:9840,h:260},{x:560,y:2560,w:9840,h:240},{x:560,y:3560,w:9840,h:220}],
   offsetWorldPoint:p=>({...p,x:p.x+560,y:p.y+560}),props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],grassAreas:[],walkways:[],
   goerlitzerPark:{x:10000,y:4000,w:100,h:100,plaqueX:10000,plaqueY:4000},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},
@@ -32,7 +33,7 @@ function harness(direct=false){
   stopSpeech(){},stimulusBusy:()=>false,audioTextActive:()=>false,setAmtMusicMuted(){},awardAnmeldung(){events.push(['award'])},showForm(){events.push(['form'])},
   currentMission:()=>({target:'buergeramt',form:'a38'}),window:{Germany3D:{officeAssetsReady:true,leaveAmtDirectMode:()=>events.push(['city-ready']),enterBuergeramt:done=>done(),prepareOfficeAssets:()=>events.push(['prepare-office'])},BuergeramtLevel:{requestFullscreen(){},open:options=>visits.push(options)}}
  };
- vm.createContext(h);
+ h.GermanyBuildings=buildingData;vm.createContext(h);
  const lane=source.split('\n').find(line=>line.startsWith('const jwdLane='));assert.ok(lane,'actual JWD lane declaration');
  const buildings=source.slice(source.indexOf('const buildings='),source.indexOf('const grassAreas='));
  const paths=source.slice(source.indexOf('for(const b of buildings){'),source.indexOf('walkways.push({x:goerlitzerPark'));
@@ -115,7 +116,7 @@ test('re-entry keeps the existing office readiness gate',()=>{
 
 test('direct renderer exit creates the skipped city buildings exactly once and enables the normal sync path',()=>{
  const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8'),built=[],mounted=[],buildingSlots=[],buildings=[{id:'buergeramt'},{id:'spaeti'}];
- const h=vm.createContext({amtDirectRoute:true,bridge:{buildings},buildingSlots,building:b=>{built.push(b.id);buildingSlots.push({building:b})},mountBuildingDoor:slot=>mounted.push(slot.building.id)});
+ const h=vm.createContext({GermanyBuildings:buildingData,amtDirectRoute:true,bridge:{buildings},buildingSlots,building:b=>{built.push(b.id);buildingSlots.push({building:b})},mountBuildingDoor:slot=>mounted.push(slot.building.id)});
  vm.runInContext(fn('leaveAmtDirectMode',renderer),h);h.leaveAmtDirectMode();
  assert.equal(h.amtDirectRoute,false);assert.deepEqual(built,['buergeramt','spaeti']);
  assert.deepEqual(mounted,built,'direct-route fallback buildings receive their common doors');

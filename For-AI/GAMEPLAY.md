@@ -280,6 +280,13 @@ Use the selective design/evaluation routes in `SKILLS.md` when a task introduces
 
 For mission/layout changes, check the natural prerequisite path, failure/retry, cancellation and resource reachability before using debug shortcuts. Newcomer wayfinding and satire comprehension need player evidence; simulation success alone cannot prove them.
 
+Questionnaire signatures retain pointer drawing and also expose native Sign and
+Clear buttons. Both routes update the same signed validity; clearing invalidates
+the signature. `modal-focus.js` owns labelled modal entry, focus containment,
+inert city controls and focus restoration. Text editing must not issue world
+movement or interaction commands. The modal Jobcenter still accepts immersive
+movement, and restored focus on a HUD button must not strand city input.
+
 Review relevant access barriers using the [Xbox Accessibility Guidelines](https://learn.microsoft.com/en-us/xbox/accessibility/guidelines): critical cue alternatives, captions/speaker identity, keyboard focus, touch alternatives, transient text and reduced motion. Distinguish UI time limits from deliberate game pressure; retain the authored three-day deadline unless the user changes it. Automated DOM checks provide partial evidence.
 
 ## Controls

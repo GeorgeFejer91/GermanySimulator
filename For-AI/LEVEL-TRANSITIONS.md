@@ -23,6 +23,18 @@ or its bounded readable failure completion starts the same fiery ejection.
 Normal completion, a cancelled form or the player's Leave action must never be
 classified as a punitive ejection merely because the scene is closing.
 
+## Update and presentation ownership
+
+The root simulation loop calls `Germany3D.update(dt)` once per accepted frame.
+`building-levels.update(dt)` advances owned transitions and commits consequences
+once; `render()` projects that state. Draw failures record recovery for the next
+update. Hidden/paused frames do not advance these clocks. Jobcenter likewise
+owns movement, media fallback and completion in `update(dt)`; its `exitView()`
+projects the latest accepted pose before an exit capture, even without a draw.
+The renderer's separate presentation delta remains available for current street
+paint. Pass only held-input/clear-input commands into encounters and the existing
+clear-input command into the transition owner.
+
 ## Doors and level registration
 
 Every building/structure owns a visible door, including loaded models, procedural

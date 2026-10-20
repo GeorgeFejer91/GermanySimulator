@@ -1,21 +1,38 @@
-// Silent browser checks. Placement/signaling shortcuts are reported separately.
-import {createRequire} from 'node:module';
-import {createServer} from 'node:http';
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-import {resolve,extname,sep} from 'node:path';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
-const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
-const root=resolve('.'),out=resolve(process.env.LEVEL_OUTPUT||'output/level-transitions/browser');mkdirSync(out,{recursive:true});
-const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.glb':'model/gltf-binary','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf'};
-const server=createServer((req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));if(!file.startsWith(root+sep))throw Error('path');res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(readFileSync(file))}catch{res.writeHead(404);res.end()}});
-await new Promise(done=>server.listen(0,'127.0.0.1',done));
-const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
-const report={complete:false,browser:browser.version(),limits:['Silent media-state checks, no perceptual listening','Android emulation, no physical-device evidence','City placement and welcome dismissal are fixtures; approach and E/touch controls use production handlers','Bürgeramt forced-outro renderer is staged; phone/dismissal causality is exercised by the Node production-controller tests'],cases:[]};
-let lastPage=null;
-try{
- for(const name of (process.env.LEVEL_CASE?[process.env.LEVEL_CASE]:['desktop','android','reduced'])){
-  const mobile=name==='android',reduced=name==='reduced',context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:800},isMobile:mobile,hasTouch:mobile,reducedMotion:reduced?'reduce':'no-preference'});
+import {runSuite,isMain,resizeViewport} from './browser-harness.mjs';
+
+export async function verifyDialogueControls(page){
+ const geometry=await page.evaluate(()=>{
+  const caption=document.getElementById('english-subtitle'),c=caption.getBoundingClientRect(),captionVisible=!caption.hidden&&c.width>0&&c.height>0;
+  const controls=[...document.querySelectorAll('#dialogue .dialogue-actions button')].map(button=>{
+   const r=button.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+   return {id:button.id,label:button.textContent,top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height,
+    measurement:button.dataset.measurement,fit:button.dataset.pretextFit,
+    onScreen:r.left>=0&&r.top>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,
+    exposed:!!hit&&button.contains(hit),overlap:captionVisible&&r.right>c.left&&r.left<c.right&&r.bottom>c.top&&r.top<c.bottom};
+  });
+  return {viewport:[innerWidth,innerHeight],captionVisible,caption:{top:c.top,bottom:c.bottom,height:c.height},controls};
+ });
+ assert.equal(geometry.captionVisible,true,'office readability check requires a visible spoken caption');
+ assert.ok(geometry.controls.length===2&&geometry.controls.every(button=>button.width>0&&button.height>0&&button.onScreen&&button.exposed&&!button.overlap),'office actions must remain exposed above captions: '+JSON.stringify(geometry));
+ return geometry;
+}
+
+export async function runBuildingTransitions({page,context,baseURL,profile,iterations,artifacts,root}){
+  const mobile=!!profile.isMobile,reduced=profile.reducedMotion==='reduce',name=profile.id==='android-portrait'?'android':profile.id;
   context.setDefaultTimeout(90000);
+  await context.route('**/jobcenter.js?*',async route=>{
+   const code=readFileSync(resolve(root,'jobcenter.js'),'utf8'),anchor='  v.door.dispose();';
+   assert.equal(code.split(anchor).length,2,'room disposal instrumentation requires the current production release owner');
+   const probe=`  const resources=new Set();
+  v.scene.traverse(object=>{if(object.geometry)resources.add(object.geometry);for(const material of [object.material].flat().filter(Boolean)){resources.add(material);for(const value of Object.values(material))if(value?.isTexture)resources.add(value)}});
+  const receipt={owned:resources.size,disposed:0};(window.__roomDisposals??=[]).push(receipt);
+  for(const resource of resources)resource.addEventListener('dispose',function disposed(){receipt.disposed++;resource.removeEventListener('dispose',disposed)});
+`;
+   await route.fulfill({status:200,contentType:'text/javascript',body:code.replace(anchor,probe+anchor)});
+  });
   await context.route('**/level-transition-effects.js?*',async route=>{
    const code=readFileSync(resolve(root,'level-transition-effects.js'),'utf8');
    const instrumented=code.replace('  const drawing=renderer.getDrawingBufferSize','  if(globalThis.__failLevelCapture)throw Error("injected level capture failure");\n  const drawing=renderer.getDrawingBufferSize');
@@ -26,30 +43,30 @@ try{
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{u.volume=0;speak(u)};
   });
-  const page=await context.newPage(),errors=[],warnings=[],captures=[];
-  lastPage=page;
-  page.on('pageerror',error=>{errors.push(error.message);console.log('PAGE ERROR '+error.message)});
-  page.on('console',message=>{if(['error','warning'].includes(message.type())){warnings.push(message.text());if(/shader|WebGL|Building transition|renderer unavailable/i.test(message.text()))console.log(message.text())}});
-  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
+  const errors=[],warnings=[],captures=[];let renderError=false;
+  page.on('pageerror',error=>{if(errors.length<128)errors.push(error.message);artifacts.log('check','PAGE ERROR '+error.message)});
+  page.on('console',message=>{if(['error','warning'].includes(message.type())){const text=message.text();if(warnings.length<128)warnings.push(text);if(/shader error|VALIDATE_STATUS|GL_INVALID|3D renderer unavailable|Building transition keeps direct travel/i.test(text)&&!text.includes('injected level capture failure'))renderError=true;}});
+  await page.goto(new URL('index.html',baseURL+'/').href,{waitUntil:'domcontentloaded'});
   const cdp=await context.newCDPSession(page);await cdp.send('Emulation.setFocusEmulationEnabled',{enabled:true});
   await page.waitForFunction(()=>window.Germany3D?.startupReady&&window.Germany3DBridge?.startupAssetsReady&&!document.body.classList.contains('preloading')&&!document.getElementById('start').disabled);
   await page.keyboard.press('KeyS');await page.waitForFunction(()=>document.getElementById('intro').classList.contains('hidden'));
   await page.evaluate(()=>{for(let i=0;i<12;i++)document.getElementById('dialogue-next').click();
-   window.__transitionFrames=[];window.__transitionHold=null;window.__transitionHeld=false;
+   window.__transitionFrames=[];window.__transitionFrameCount=0;window.__transitionHold=null;window.__transitionHeld=false;
+   const update=Germany3D.update;Germany3D.update=function(dt){if(!__transitionHeld)update.call(this,dt)};
    const sync=Germany3D.sync;Germany3D.sync=function(){if(__transitionHeld)return;const start=performance.now();sync();const s=Germany3D.levelTransition;
-    if(s.active){__transitionFrames.push({id:s.id,kind:s.kind,stage:s.stage,progress:s.stageProgress,cost:performance.now()-start,vortex:s.vortex});
+    if(s.active){__transitionFrameCount++;if(__transitionFrames.length<4096)__transitionFrames.push({id:s.id,kind:s.kind,stage:s.stage,progress:s.stageProgress,cost:performance.now()-start,vortex:s.vortex});
      const hold=__transitionHold;if(hold&&s.stage===hold.stage&&s.stageProgress>=hold.at){__transitionHeld=true;__transitionHold=null;}}
    };
   });
-  console.log(name+' ready');
+  artifacts.log('check',name+' ready');
   async function arm(stage,at){await page.evaluate(hold=>{__transitionHeld=false;__transitionHold=hold},{stage,at})}
   async function shot(label,stage,at){
    if(stage){await arm(stage,at);await page.waitForFunction(()=>__transitionHeld)}
-   const path=resolve(out,name+'-'+label+'.png');await page.screenshot({path});const state=await page.evaluate(()=>Germany3D.levelTransition);captures.push({label,path,state});
+   const path=artifacts.path(name+'-'+label+'.png');await page.screenshot({path});const state=await page.evaluate(()=>Germany3D.levelTransition);captures.push({label,path,state});
    await page.evaluate(()=>{__transitionHeld=false;__transitionHold=null});return state;
   }
   async function enter(id,offset=124,approach=70){
-   console.log(name+' enter '+id);
+   artifacts.log('check',name+' enter '+id);
    const clear=await page.evaluate(({id,offset})=>{const b=Germany3DBridge.buildings.find(b=>b.id===id);Object.assign(Germany3DBridge.player,{x:b.doorX,y:b.doorY+offset,vx:0,vy:0});Germany3DBridge.clearInput();const p=Germany3DBridge.player;return !Germany3DBridge.buildings.some(other=>p.x>other.x-p.r&&p.x<other.x+other.w+p.r&&p.y>other.y-p.r&&p.y<other.y+other.h+p.r)},{id,offset});
    assert.equal(clear,true,'fixture must start outside every building body: '+id);
    await page.waitForFunction(id=>{const b=Germany3DBridge.buildings.find(b=>b.id===id),v=Germany3D.levelDoors.find(d=>d.id===id);return v&&Math.abs(Germany3DBridge.player.x-b.doorX)<1},id);
@@ -57,9 +74,10 @@ try{
    await page.keyboard.press('KeyE');
   }
   async function touchExitDoor(){
+   const {height}=page.viewportSize(),touchY=Math.min(400,height-40);
    for(const delta of [-240,-240,-240,-(Math.PI/.004-720)]){
-    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:310,y:400,id:1}]});
-    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:310+delta,y:400,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:310,y:touchY,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:310+delta,y:touchY,id:1}]});
     await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
    }
    const target=await page.evaluate(async()=>{
@@ -80,15 +98,15 @@ try{
    await page.keyboard.down('KeyW');await page.waitForFunction(()=>Germany3D.jobcenter.phase==='speaking');await page.keyboard.up('KeyW');
    await page.keyboard.down('KeyA');await page.waitForFunction(()=>Germany3D.jobcenter.x<-.65);await page.keyboard.up('KeyA');
    if(!mobile){await page.mouse.move(800,350);await page.mouse.move(880,400,{steps:5})}
-   else{await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:300,y:400,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:340,y:430,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]})}
+   else{const viewport=page.viewportSize(),x=Math.round(viewport.width*.7),y=Math.min(400,viewport.height-40);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+40,y:y+30,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]})}
    const view=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(view.x<-.65);
    if(process.env.LEVEL_FAST)await page.evaluate(()=>{const audio=__levelMedia.at(-1);audio.currentTime=Math.max(0,audio.duration-.6)});
    const pull=await shot('eject-pull','pull',.35);assert.equal(pull.id,'jobcenter');assert.ok(Math.abs(pull.sourceCamera.position[0])<.001,'camera-relative Jobcenter view is the source');
    if(mobile){
-    await page.evaluate(()=>{__transitionHeld=true});await page.setViewportSize({width:844,height:390});
+    await page.evaluate(()=>{__transitionHeld=true});await resizeViewport(page,{width:844,height:390});
     await arm('pull',.5);await page.waitForFunction(()=>__transitionHeld);
     const landscape=await shot('eject-landscape');assert.equal(landscape.cameraAspect,844/390);
-    await page.evaluate(()=>{__transitionHeld=true});await page.setViewportSize({width:390,height:844});
+    await page.evaluate(()=>{__transitionHeld=true});await resizeViewport(page,{width:390,height:844});
     await arm('pull',.65);await page.waitForFunction(()=>__transitionHeld);
     const portrait=await shot('eject-portrait');assert.equal(portrait.cameraAspect,390/844);
    }
@@ -97,19 +115,27 @@ try{
    assert.ok(await page.evaluate(()=>__levelMedia.every(media=>media.paused&&!media.getAttribute('src'))));
   }
   // Re-entry follows the real E handler; ordinary leaving must not create an outro.
-  const warmMemory=[];
-  for(let i=0;i<2;i++){
+  // Global renderer counts include independently streaming city models/actors.
+  // Observe actual dispose events for the room's unique owned resources instead.
+  const warmMemory=[],roomDisposals=[];
+  for(let i=0;i<Math.max(2,iterations);i++){
+   const releasedBefore=await page.evaluate(()=>window.__roomDisposals?.length||0);
    await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active&&!Germany3D.levelTransition.active);
    if(mobile&&!i)await touchExitDoor();else await page.keyboard.press(i?'Escape':'KeyE');
    assert.equal(await page.evaluate(()=>Germany3D.jobcenter.active||Germany3D.levelTransition.active),false);
+   const released=await page.evaluate(()=>window.__roomDisposals||[]);
+   assert.equal(released.length,releasedBefore+1,'each warm exit must release one actual room');
+   const disposal=released.at(-1);roomDisposals.push(disposal);
+   assert.ok(disposal.owned>0&&disposal.disposed===disposal.owned,'every owned room resource must emit disposal: '+JSON.stringify(disposal));
    warmMemory.push(await page.evaluate(()=>Germany3D.inspectAssets().memory));
+   artifacts.log('check','warmed visit '+JSON.stringify({iteration:i,memory:warmMemory.at(-1),city:await page.evaluate(()=>Germany3D.startupStatus)}));
   }
-  assert.ok(warmMemory[1].geometries<=warmMemory[0].geometries&&warmMemory[1].textures<=warmMemory[0].textures,'warmed visits must release transition/room resources');
-  await enter('finanzamt');await page.waitForFunction(()=>Germany3D.indoorLevel==='finanzamt'&&!Germany3D.levelTransition.active);await page.locator('#dialogue').waitFor({state:'visible'});await shot('ordinary-office');
+  await enter('finanzamt');await page.waitForFunction(()=>Germany3D.indoorLevel==='finanzamt'&&!Germany3D.levelTransition.active);await page.locator('#dialogue').waitFor({state:'visible'});await resizeViewport(page,profile.viewport);await shot('ordinary-office');const officeControls=await verifyDialogueControls(page);artifacts.log('check','ordinary office controls exposed '+JSON.stringify(officeControls));
   assert.equal(await page.locator('#dialogue').isVisible(),true);await page.keyboard.press('KeyE');await page.keyboard.press('KeyE');
   await page.waitForFunction(()=>!Germany3D.indoorLevel);assert.equal(await page.evaluate(()=>Germany3D.levelTransition.active),false);
-  await page.waitForFunction(()=>Germany3D.officeAssetsReady);
-  await enter('buergeramt',80,50);await page.waitForFunction(()=>BuergeramtLevel.active&&!Germany3D.levelTransition.active);
+  await enter('buergeramt',80,50);await page.waitForFunction(()=>Germany3D.officeAssetsReady);
+  await page.waitForFunction(()=>BuergeramtLevel.active&&!Germany3D.levelTransition.active);
+  await page.waitForFunction(()=>typeof window.VDONinjaSDK==='function');
   await page.keyboard.press('KeyE');assert.equal(await page.evaluate(()=>BuergeramtLevel.active||Germany3D.levelTransition.active),false);
   await page.keyboard.press('KeyE');await page.waitForFunction(()=>BuergeramtLevel.active&&!Germany3D.levelTransition.active);
   await page.keyboard.down('KeyA');await page.waitForFunction(()=>BuergeramtLevel.view.x<-.5);await page.keyboard.up('KeyA');
@@ -123,10 +149,10 @@ try{
    const stopped=await page.evaluate(()=>Germany3D.levelTransition.elapsed);await page.waitForTimeout(200);
    assert.equal(await page.evaluate(()=>Germany3D.levelTransition.elapsed),stopped,'hidden time must not advance the arc');
    await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'))});
-   await page.setViewportSize({width:1024,height:720});await page.waitForFunction(()=>Germany3D.levelTransition.stage==='collapse');
+   await resizeViewport(page,{width:1024,height:720});await page.waitForFunction(()=>Germany3D.levelTransition.stage==='collapse');
    await page.evaluate(()=>{dispatchEvent(new PageTransitionEvent('pagehide',{persisted:true}));dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}));dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))});
    await page.waitForFunction(()=>Germany3D.indoorLevel==='hausverwaltung'&&!Germany3D.levelTransition.active);await page.keyboard.press('Escape');
-   assert.equal(await page.evaluate(()=>!!Germany3D.indoorLevel||Germany3D.levelTransition.active),false);await page.setViewportSize({width:1280,height:800});
+   assert.equal(await page.evaluate(()=>!!Germany3D.indoorLevel||Germany3D.levelTransition.active),false);await resizeViewport(page,{width:1280,height:800});
    await page.evaluate(()=>{window.__failLevelCapture=true});await enter('finanzamt');await page.waitForFunction(()=>Germany3D.indoorLevel==='finanzamt'&&!Germany3D.levelTransition.active);
    assert.match(await page.evaluate(()=>Germany3D.levelTransition.failure),/injected level capture failure/);
    await page.evaluate(()=>{window.__failLevelCapture=false});await page.keyboard.press('Escape');
@@ -135,17 +161,17 @@ try{
   await page.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='jwd-home');Object.assign(Germany3DBridge.player,{x:b.doorX,y:b.doorY+35});});await page.keyboard.press('KeyE');
   assert.equal(await page.evaluate(()=>Germany3D.levelTransition.active||!!Germany3D.indoorLevel),false);
   const doors=await page.evaluate(()=>Germany3D.levelDoors);assert.equal(doors.length,await page.evaluate(()=>Germany3DBridge.buildings.length));assert.ok(doors.every(door=>door.height>=1.97&&door.leafAngles.length===2));
-  if(mobile){await page.setViewportSize({width:844,height:390});await shot('landscape');}
+  if(mobile){await resizeViewport(page,{width:844,height:390});await shot('landscape');}
   const frames=await page.evaluate(()=>__transitionFrames),costs=frames.map(frame=>frame.cost).sort((a,b)=>a-b);
   assert.deepEqual(errors,[]);assert.deepEqual(warnings.filter(warning=>/shader error|VALIDATE_STATUS|GL_INVALID|3D renderer unavailable|Building transition keeps direct travel/i.test(warning)&&!warning.includes('injected level capture failure')),[]);
-  report.cases.push({name,verdict:'PASS',captures,doors,warmMemory,frames:frames.length,renderCostP95:costs[Math.floor(costs.length*.95)],errors,warnings});console.log(name+' PASS');await context.close();
- }
- report.complete=true;
-}catch(error){
- report.error=error.message;
- if(lastPage&&!lastPage.isClosed()){
-  report.failureState=await lastPage.evaluate(()=>({player:{...Germany3DBridge.player},input:Germany3DBridge.getInput(),hud:Germany3DBridge.getHUDState(),paused:GermanyHUD?.paused,transition:Germany3D.levelTransition,office:Germany3D.indoorLevel,amt:{active:BuergeramtLevel.active,leaving:BuergeramtLevel.leaving},body:document.body.className,dialogue:document.getElementById('dialogue').hidden})).catch(()=>null);
-  await lastPage.screenshot({path:resolve(out,'failure.png')}).catch(()=>{});
- }
- throw error;
-}finally{writeFileSync(resolve(out,'report.json'),JSON.stringify(report,null,2));await browser.close();await new Promise(done=>server.close(done));}
+  assert.equal(renderError,false,'render errors must fail even after the warning buffer fills');
+  return {name,captures,doors,warmMemory,roomDisposals,officeControls,frames:await page.evaluate(()=>__transitionFrameCount),sampledFrames:frames.length,renderCostP95:costs[Math.floor(costs.length*.95)],errors,warnings,limits:['Seeded city placement and welcome dismissal; staged forced exit; synthetic visibility and BFCache events; room disposal events observed through instrumentation; global renderer counts include city streaming']};
+}
+
+export const buildingScenario={id:'lifecycle',modes:['stress'],timeoutMs:300000,actionTimeoutMs:90000,contextOptions:{deviceScaleFactor:1},run:runBuildingTransitions};
+if(isMain(import.meta.url)){
+  const profile=process.env.LEVEL_CASE;
+  const profiles=profile?[profile==='android'?'android-portrait':profile]:['desktop','android-portrait','reduced'];
+  const report=await runSuite({name:'building-transitions',scenarios:[buildingScenario]}, {mode:'stress',profiles,iterations:2,suitePath:'./tools/browser-game-suite.mjs',output:process.env.LEVEL_OUTPUT||'output/level-transitions/browser'});
+  process.exitCode=report.verdict==='PASS'?0:1;
+}

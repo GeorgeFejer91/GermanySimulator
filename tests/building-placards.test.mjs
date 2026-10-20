@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync,statSync} from "node:fs";
+import buildingData from '../building-catalogue.js';
 
-const root=new URL("../",import.meta.url),game=readFileSync(new URL("game.js",root),"utf8");
-const buildingSection=game.split("const buildings=[")[1].split("].map(building=>")[0];
-const ids=buildingSection.split(/\r?\n/).filter(line=>!line.includes("residential:true")).flatMap(line=>[...line.matchAll(/^\{id:"([^"]+)"/g)].map(match=>match[1]));
+const root=new URL("../",import.meta.url);
+const ids=buildingData.catalogue.filter(building=>!building.residential).map(building=>building.id);
 assert.match(readFileSync(new URL("world3d.js",root),"utf8"),/if\(b\.residential\)\{residentialBuilding\(b\);return\}/,"residential houses own procedural signs rather than municipal image requests");
 const directory=new URL("assets/building-placards/",root);
 const files=readdirSync(directory).filter(name=>name.endsWith(".webp"));

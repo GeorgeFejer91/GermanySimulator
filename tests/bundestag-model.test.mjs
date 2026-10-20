@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {readFileSync,statSync} from "node:fs";
+import buildingData from '../building-catalogue.js';
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
 const diagnostic=readFileSync(new URL("../3d.html",import.meta.url),"utf8");
@@ -9,7 +10,7 @@ const license=readFileSync(new URL("../assets/models/bundestag/LICENSES.md",impo
 const modelUrl=new URL("../assets/models/bundestag/bundestag.glb",import.meta.url);
 const model=readFileSync(modelUrl);
 
-assert.match(game,/id:"bundestag".*x:7680,y:3320,w:1200,h:876.*doorX:8280,doorY:4226/,"the Bundestag must occupy the enlarged, clear southeast Berlin parcel");
+assert.deepEqual(Object.fromEntries(['x','y','w','h','doorX','doorY'].map(key=>[key,buildingData.catalogue.find(b=>b.id==='bundestag')[key]])),{x:7680,y:3320,w:1200,h:876,doorX:8280,doorY:4226});
 assert.doesNotMatch(diagnostic,/id:"bundestag"|Germany3DBridge/,"compatibility entry has no alternate landmark catalogue; canonical model/placement remain checked");
 assert.match(renderer,/bundestag:"\.\/assets\/models\/bundestag\/bundestag\.glb"/,"the WebGL renderer must use the local landmark GLB");
 const size=statSync(modelUrl).size;

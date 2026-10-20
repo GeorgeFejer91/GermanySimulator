@@ -1,19 +1,16 @@
 import {readFileSync, writeFileSync, mkdirSync, cpSync, readdirSync, existsSync} from 'node:fs';
 import {resolve, join} from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {createRequire} from 'node:module';
+import buildingData from '../building-catalogue.js';
 
-export function levelLinks(source) {
-  const buildings = source.match(/const buildings=\[([\s\S]*?)\]\.map\(building/);
-  if (!buildings) throw Error('Canonical building catalogue not found');
+export function levelLinks(buildings=buildingData.catalogue) {
+  if(!Array.isArray(buildings))throw new TypeError('Structured building catalogue required');
   const links = [{id:'city', path:'city', aliases:[], title:'Grand Theft Amt', description:'Die Straßen sind grau. Die Formulare beige. Der Rasen ist verboten.', image:'assets/social-preview.png'},
     {id:'neighbors', path:'neighbors', aliases:['nachbarn'], title:'JWD · Die Nachbarn', description:'Kehrwoche ist immer. Auch wenn Sie gerade erst eingezogen sind.', image:'assets/social/neighbors.png'}];
-  for (const row of buildings[1].split('\n')) {
-    if (/residential:true|kind:/.test(row)) continue;
-    const id = row.match(/id:"([^"]+)"/)?.[1];
-    if (!id) continue;
-    const title = row.match(/name:"([^"]+)"/)?.[1];
-    const description = row.match(/sign:"([^"]+)"/)?.[1];
-    if (!title || !description) throw Error('Missing level copy: '+id);
+  for (const {id,name:title,sign:description,residential,kind} of buildings) {
+    if(residential||kind)continue;
+    if (![id,title,description].every(value=>typeof value==='string'&&value.trim())) throw Error('Missing level copy: '+id);
     links.push({id, path:id==='buergeramt'?'bürgeramt':id, aliases:id==='buergeramt'?['buergeramt']:[], title, description, image:`assets/social/${id}.png`});
   }
   return links;
@@ -47,7 +44,7 @@ export function buildLevelPages(root, output) {
     if (entry.name.startsWith('.') || ['output','node_modules','tests','tools'].includes(entry.name)) continue;
     cpSync(join(root,entry.name),join(output,entry.name),{recursive:true});
   }
-  const levels = levelLinks(readFileSync(join(root,'game.js'),'utf8'));
+  const levels = levelLinks(createRequire(import.meta.url)(resolve(root,'building-catalogue.js')).catalogue);
   const template = readFileSync(join(root,'index.html'),'utf8');
   for (const level of levels) {
     if (!existsSync(join(root,level.image))) throw Error('Missing share preview: '+level.image);

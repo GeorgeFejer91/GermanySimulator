@@ -24,11 +24,8 @@
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
   <script defer src="./fullscreen.js?v=20261019-complete-development"></script>
-  <link rel="preload" as="image" href="./assets/fire/kenney-flame-01.png" crossorigin="anonymous">
-  <link rel="preload" as="image" href="./assets/fire/kenney-flame-05.png" crossorigin="anonymous">
-  <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&amp;display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="./styles.css?v=20261015-city-dialogue-fit">
+  <link rel="stylesheet" href="./styles.css?v=20261020-keyboard-access">
   <link rel="stylesheet" href="./buergeramt.css?v=20261014-level-links">
   <link rel="stylesheet" href="./game-hud.css?v=20261018-neighbor-focus">
 </head>
@@ -89,9 +86,9 @@
   </div></section>
   <section id="border-alert" class="border-alert" hidden aria-live="polite"><small>BRANDMAUER</small><b id="border-title">DEUTSCHLAND</b><p id="border-copy">BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.</p></section>
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
-  <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
+  <section id="dialogue" class="dialogue" aria-labelledby="speaker" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
   <div class="welcome-fax-machine" aria-hidden="true"></div>
-  <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
+  <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" role="dialog" aria-modal="true" aria-labelledby="form-title" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
   <section id="amt-level" class="amt-level" hidden role="region" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span id="amt-room-counter">AUFRUF</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-floor"></div></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div></div></section>
   <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">BÜRGERAMT · EINGANG</b><button id="amt-leave" type="button">AMT VERLASSEN</button><a id="amt-compact-reset" href="?geheim=buergeramt">NEU STARTEN</a></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>↑↓ / WASD · GEHEN &nbsp; ←→ · DREHEN &nbsp; MAUS · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">ZUR EINGANGSTÜR</strong></div><div id="amt-ambient" class="amt-ambient" aria-live="polite" tabindex="0"></div>
     <div id="amt-look-zone" class="amt-look-zone" role="group" tabindex="0" aria-label="Blick: Pfeil links/rechts drehen, Maus oder Touchpad bewegen, mit Maus oder Finger ziehen. Aktionen: doppelt tippen." aria-keyshortcuts="ArrowLeft ArrowRight"></div>
@@ -102,7 +99,7 @@
   <details id="amt-mix" hidden><summary>TON</summary><div class="amt-mix-panel"><label>RAUM <input type="range" data-amt-volume="ambience" min="0" max="100" value="35"></label><label>STIMMEN <input type="range" data-amt-volume="voice" min="0" max="100" value="80"></label><label>EFFEKTE <input type="range" data-amt-volume="fx" min="0" max="100" value="60"></label></div></details>
   <a id="amt-direct-reset" href="?geheim=buergeramt">BÜRGERAMT NEU STARTEN</a>
   <section id="amt-direct-result" class="amt-direct-result" hidden role="status"><small>VORGANGSENDE · BÜRGERAMT</small><h2 id="amt-direct-result-title"></h2><p id="amt-direct-result-copy"></p><a href="?geheim=buergeramt">NEUE NUMMER ZIEHEN</a></section>
-  <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
+  <section id="end-modal" class="modal" hidden><div class="end-card" role="dialog" aria-modal="true" aria-labelledby="end-title"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
   <section id="intro" class="intro"><div class="intro-noise"></div><div class="intro-card">
       <p class="eyebrow">EC GAMES PRESENTS</p><h1><span>GERMANY</span><b><span id="simulator-s">S</span>IMULATOR</b></h1><p class="strap">GRAND THEFT AMT</p>
       <p class="lede">A 3D open-world administration simulator. The streets are gray. The forms are beige. The lawn is forbidden.</p>
@@ -110,7 +107,7 @@
       <figure class="intro-satire"><img class="fax-wurst-art" src="./assets/fax-wurst.svg" alt="A bratwurst jammed into a fax machine"><figcaption>„Hast du schon Kehrwoche gemacht?“</figcaption></figure>
       <div class="intro-actions"><button id="start" class="german-start" type="button" disabled aria-busy="true">LÄDT …</button><img class="developer-mark" src="./assets/german-unity.svg" alt="Made with German Unity" width="320" height="64"></div>
   </div></section>
-  <section id="humor-modal" class="modal humor-modal" hidden><form id="humor-form" class="paper humor-paper">
+  <section id="humor-modal" class="modal humor-modal" hidden><form id="humor-form" role="dialog" aria-modal="true" aria-labelledby="humor-title" class="paper humor-paper">
     <div class="humor-authority"><div class="humor-seal" aria-hidden="true">§</div><div class="humor-authority-copy"><b id="humor-authority-name">ZENTRALE PRÜFSTELLE FÜR HUMORANGELEGENHEITEN</b><span id="humor-authority-office">Referat H · Formblattwesen und Nichtlachen</span></div><div class="humor-file-box"><span id="humor-file-label">AKTENZEICHEN</span><b>HUM-01/DE</b><span id="humor-status-label">BEARBEITUNGSSTAND</span><b id="humor-file-status">VORLÄUFIG</b></div></div>
     <div class="paper-head"><span>FORMULAR HUM-01/DE · ALLGEMEINE HUMORKOMPETENZ</span><span id="humor-page-label">BLATT 1 VON 2</span></div>
     <h2 id="humor-title">Begriffsprüfung: Humor</h2>
@@ -132,9 +129,8 @@
 <script src="./street-wisdom.js?v=20261019-complete-development"></script>
 <script src="./goerlitzer-park.js?v=20261019-complete-development"></script>
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
-<script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
 <script src="./buergeramt-time.js?v=20261019-complete-development"></script>
-<script src="./buergeramt-link.js?v=20261014-level-links"></script>
+<script src="./buergeramt-link.js?v=20261020-scene-sdk"></script>
 <script src="./buergeramt-story.js?v=20261014-player-address"></script>
 <script src="./buergeramt-voice-profiles.js?v=20261012-one-knick"></script>
 <script src="./buergeramt-fever.js?v=20261019-complete-development"></script>
@@ -145,14 +141,16 @@
 <script src="./buergeramt.js?v=20261019-final-phone-wait"></script>
 <script type="module" src="./buergeramt-fit.js?v=20261014-level-links"></script>
 <script src="./character-interactions.js?v=20261019-complete-development"></script>
-<script src="./tourist-animation.js?v=20261019-complete-development"></script>
+<script src="./tourist-animation.js?v=20261020-bounded-assets"></script>
 <script src="./jwd-gardens.js?v=20261014-neighbors-complete"></script>
 <script src="./neighbor-story.js?v=20261019-complete-development"></script>
-<script src="./game.js?v=20261019-complete-development"></script>
-<script type="module" src="./game-hud.js?v=20261016-halo-fax-refresh"></script>
+<script src="./building-catalogue.js?v=20261020-shared-catalogue"></script>
+<script src="./asset-queue.js?v=20261020-bounded-assets"></script>
+<script src="./game.js?v=20261020-architecture"></script>
+<script type="module" src="./game-hud.js?v=20261020-keyboard-access"></script>
 <script type="module" src="./subtitle-layout.js?v=20261019-complete-development"></script>
 <script type="module" src="./quiz-layout.js?v=20261019-complete-development"></script>
-<script type="module" src="./world3d.js?v=20261019-complete-development"></script>
+<script type="module" src="./world3d.js?v=20261020-architecture"></script>
 </body>
 </html>
 

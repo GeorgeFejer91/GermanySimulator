@@ -1,6 +1,10 @@
+import buildingData from '../building-catalogue.js';
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
+import {createRequire} from 'node:module';
+
+const {createAssetQueue}=createRequire(import.meta.url)('../asset-queue.js');
 
 const read=path=>readFileSync(new URL(`../${path}`,import.meta.url),"utf8");
 const game=read("game.js"),diagnostic=read("3d.html"),index=read("index.html");
@@ -16,7 +20,7 @@ function line(source,prefix){
  return found;
 }
 
-const sandbox={window:{},matchMedia:()=>({matches:true}),crossings:[]};
+const sandbox={GermanyBuildings:buildingData,window:{},matchMedia:()=>({matches:true}),crossings:[]};
 vm.runInNewContext(shared,sandbox);
 vm.runInNewContext(read("For-AI/QUIZ-CHARACTER-DICTIONARY.js"),sandbox);
 const park=sandbox.window.GoerlitzerPark;
