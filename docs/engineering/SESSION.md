@@ -4,35 +4,46 @@ Active owner and six milestones: GAME-COMPLETION.md, chat
 01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
 primary dirty checkout and separately owned Merz work remain preserved.
 
-Core v3 freezes70 files (descriptor71d94ada6f82389a834cb54f8e4102c6d3e99d7cd3aa05b5bf5b0b21b3ddc527).
-Packaging v4 freezes71 files (descriptor145fde5dbbdf83eeb08f247b59fefc7f4c05459cb41861e8519a5038b3a16943),
-retaining every runtime/art byte and updating only one regression plus.gitattributes.
-It adds eight source-bound standing mouth fits, actual recorded segment energy,
-lazy optional mouth/motion delivery, native planted reaction routing, world-up
-flat street paint, static-corner exits and sealed-body pause/reverse recovery.
-All existing body artwork, heights, pivots and collision radii remain fixed.
-Full Node2248/2248 passes; independent general review204 fresh checks, curator
-and six syntax checks pass with no introduced defect. Physics and Camera reviews
-retain bounded verdicts and explicit missing scenarios. Seven actual native
-speech/depth/retreat browser cases pass; the broader object-consistency check now
-passes all three profiles (49 geometry checks each, loaded/fallback landmarks,
-root and compatibility routes). Earlier loading timeouts remain preserved.
-Camera inspected all36 new frames; its supplement lists missing timed camera/roof/depth-crossing
-coverage and one landscape fallback image hidden by the loader. Full world acceptance remains open.
+Local checkpoint4403afb contains the reviewed shared speech/mouth/movement core:
+eight source-bound standing mouth definitions, actual recorded segment energy,
+lazy optional delivery, native planted reactions, upright flat street paint and
+sealed-body pause/reverse recovery. Full2248/2248 Node checks passed. Independent
+general/Physics/Camera reviews retain their bounded verdicts. Seven native browser
+speech/depth/retreat cases and the three-profile object harness passed. The Camera
+supplement retains missing timed/roof/depth-crossing coverage and one landscape
+fallback image obscured by the loader. Full world acceptance remains open.
 
-Precommit inspection caught Git line-ending conversion breaking all eight mouth
-payload hashes. A scoped -text rule now preserves immutable delivery bytes;
-the clean-filter regression fails before and passes after, and all eight actual
-index payload hashes match their manifest. The failed receipt is retained.
+Current Sandale increment adds source-bound connected mouths to all211 visible
+poses across304 existing atlas cells;93 rear/occluded/unused cells remain null.
+Body artwork, scales, pivot, geometry, locomotion and cycle distances are unchanged.
+The native-atlas adapter owns one material per actual actor and shares its texture,
+uses the existing speech projection, fails closed and disposes only owned resources.
+V2 froze94 inputs (descriptor9b28c2b0b11688f27294f6db9d824be3d6778214077e73f932497948c7783173).
+V3 changes only scoped Git byte preservation for8 source registrations and1 fitter
+(descriptore925e9b84cbb29dd1c8bbe25a6dcbb8c7ec1a0de8e8b8a65815abc09d55017f0).
+Runtime/art/data bytes remain identical. Ordinary test/docs LF normalization is
+explicit in index-packaging-v3.json; hash-bound inputs retain exact bytes.
 
-The core can be preserved as a local checkpoint, without claiming release or
-full42-character completion. Required world FAIL/NOT RUN rows and publication
-verification remain open. Do not promote held body candidates merely because
-core tests pass. Gisela full16 greeting/body-mouth and Horst four right gait poses
-have source-only acceptance. Sandale remaining mouth candidates have passed full-sheet
-root source review; shader/media integration remains open. Current accepted source fragments have no atlas/runtime adoption.
-Next: reconcile the Camera supplement, close the required rendered gaps, then
-integrate accepted source families in bounded increments. Keep the goal ACTIVE.
+Full2256/2256 Node tests pass,0skips. Independent general review passes25 checks,
+Physics59 existing+4 production fixtures and3648 exact baseline geometry/UV/matrix
+comparisons. Camera reviewed all211 visible and93 null source GPU cells,28 boards,
+six native face/city pairs, and native E/automatic-caption closure on desktop and
+both Android-emulated aspects. Source alpha, null inactivity, material ownership,
+shared-map identity, staged retirement/pagehide cleanup and synthetic-wall depth
+controls pass. Diagnostic source cues are distinct from native recorded speech.
+
+Neither Sandale has an admitted default recording: their two historical MP3s are
+guarded audition assets without runtime metadata. Native actual playback/timing/
+completion is unavailable; captions keep dynamic mouths closed. No auditions were
+promoted or substituted. This remains a goal gap, not full talking acceptance.
+Evidence: output/ambient-city-animation/sandale-mouth-integration and
+reviews/sandale-mouth-v1-{core,physics,camera}. Physical Android/listening and the
+inherited required C1–C5/X1 gaps remain outstanding. No publication yet.
+
+Next selected increment: mouth coverage for already-animated
+crowd-irmgard-aktenordner. Preserve her accepted body/stride; do not confuse her
+with the held stadt-irmgard-aktenstapel candidate. Other resident, Gisela, Horst
+and Hartmut body candidates remain unadopted. Keep the42-character goal ACTIVE.
 
 # Final browser integration — 2026-10-19
 

@@ -12,3 +12,7 @@ assets/sprite-sources/reference/cmu-walk-69-01/69_01.bvh -text
 
 # Street mouth payloads are immutable SHA-bound delivery bytes.
 assets/characters/street/**/mouths-*.json -text
+
+# Preserve reviewed source-registration and fitter identity hashes.
+assets/sprite-sources/sandale-mouths/*.registration.json -text
+tools/fit-sandale-remaining-mouths.py -text

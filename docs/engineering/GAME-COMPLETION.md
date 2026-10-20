@@ -40,6 +40,36 @@ Ordered milestones and acceptance:
    reviews, close findings, run affected checks and the release gate, publish
    the validated scoped result and verify public root/compatibility URLs.
 
+Local core checkpoint4403afb is preserved; publication and whole-cast acceptance
+remain open. The Sandale increment now supplies211 source-fitted visible mouths
+and93 explicit nulls across304 existing atlas slots. Only mouth metadata and its
+native-atlas adapter are added; all body pixels, geometry, pivots and controllers
+remain unchanged. Candidatev2 freezes94 inputs (descriptor9b28c2b0b11688f27294f6db9d824be3d6778214077e73f932497948c7783173).
+Packagingv3 changes only scoped Git byte-preservation rules for8 source registrations
+and1 fitter; the other93 inputs are exact (descriptore925e9b84cbb29dd1c8bbe25a6dcbb8c7ec1a0de8e8b8a65815abc09d55017f0).
+All runtime files and cross-file hash-bound sources equal their staged bytes.
+Two ordinary test/docs paths have only the repository's LF encoding normalization.
+
+Full2256/2256 Node tests pass,0skips. Independent general review25 checks and211/304
+profile/slot oracle pass. Physics passes59 existing+4 production fixtures and3648
+exact old/new geometry/UV/matrix comparisons. Camera passes all304 actual source
+GPU cells (alpha unchanged,93 nulls inactive),28 reviewed boards, six native face/
+city pairs, three-profile E/automatic-caption closure, material/shared-map ownership
+and staged retirement/pagehide cleanup. Synthetic source cues/wall depth fixtures
+are separate from native on-city speech or traversal. V1 CRLF curator failure is
+retained; v2 restores baseline LF and passes curator without semantic logic change.
+
+Default audio has zero Sandale recordings. Two historical MP3s exist only behind
+the guarded preview map and lack runtime recording metadata. No audition is
+promoted or substituted. Actual native recorded speech, clock/completion and
+perceptual listening remain unavailable; production captions keep dynamic mouths
+closed. Full required C1–C5/X1 gaps remain open. Evidence and exact bounds are in
+output/ambient-city-animation/reviews/sandale-mouth-v1-{core,physics,camera}.
+
+Next selected integration: source-fit mouths on already-animated
+crowd-irmgard-aktenordner, keeping her accepted body art and25.6 stride. This is
+not held stadt-irmgard-aktenstapel. No unrelated candidate body is promoted.
+
 Initial baseline: 73/73 focused Node checks pass (street sprites, playback,
 pedestrians and recorded quiz segments). No new animation has been accepted.
 The earlier walking/publication holds remain evidence for their own candidates;

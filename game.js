@@ -305,7 +305,7 @@ function insetSpriteSheet(source,atlas){
  for(let row=0;row<atlas.rows;row++)for(let col=0;col<atlas.cols;col++){const sy=atlas.yBounds?.[row]??row*sh,sourceHeight=atlas.yBounds?atlas.yBounds[row+1]-sy:sh;g.drawImage(source,col*sw,sy,sw,sourceHeight,col*cell+pad,row*cell+pad,cell-pad*2,cell-pad*2)}
  atlas.canvas=c
 }
-function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;if(atlas.tourist){atlas.canvas=img}else insetSpriteSheet(img,atlas);const grid=window.Germany3DBridge?.npcSpriteGrids[key];if(grid)Object.assign(grid,{cols:atlas.cols,rows:atlas.rows,frameWidth:atlas.frameWidth,frameHeight:atlas.frameHeight,pivot:atlas.pivot,groundProjection:atlas.tourist?.groundProjection===true})}
+function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;if(atlas.tourist){atlas.canvas=img}else insetSpriteSheet(img,atlas);const grid=window.Germany3DBridge?.npcSpriteGrids[key];if(grid)Object.assign(grid,{cols:atlas.cols,rows:atlas.rows,frameWidth:atlas.frameWidth,frameHeight:atlas.frameHeight,pivot:atlas.pivot,groundProjection:atlas.tourist?.groundProjection===true,sourceSha256:atlas.tourist?.sha256??null,mouthPaint:atlas.tourist?.mouthPaint??null})}
 
 const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],

@@ -13,6 +13,7 @@ import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels
 import {createBuildingLevels} from './building-levels.js?v=20261020-explicit-update';
 import {createNeighborSprite} from './neighbor-sprites.js?v=20261020-bounded-assets';
 import {createBillboardGroundProjector} from './billboard-ground.js?v=20261019-complete-development';
+import {createAtlasCharacterMouth} from './atlas-character-mouth.js';
 import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261020-bounded-assets';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -1305,7 +1306,11 @@ function showRendererFailure(error){
     const geometry=new T.PlaneGeometry(scale*(grid.frameWidth&&grid.frameHeight?grid.frameWidth/grid.frameHeight:1),scale,1,grid.groundProjection?32:1),uv=geometry.attributes.uv,q=new T.Mesh(geometry,material);q.userData={[kind+"Sprite"]:true,grid,plantedHeight:grid.pivot?scale*(grid.pivot[1]/grid.frameHeight-.5):null,baseUv:Float32Array.from(uv.array),spriteFrame:-1,spriteRow:-1,spriteFlip:null};return q
   }
   function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",Germany3DBridge.npcSpriteGrids.borderPourer.pivot?2.62*224/208:2.62):n.special==="merkel"?atlasSprite("merkel",2.42):n.special==="bayern"?atlasSprite("bayern",2.91):n.special==="alice"?atlasSprite("alice",2.42):null}
-  function npcSprite(n){return specialSprite(n)||(n.spriteKind?atlasSprite(n.spriteKind,n.spriteScale||2.42):null)}
+  function npcSprite(n){
+    const sprite=specialSprite(n)||(n.spriteKind?atlasSprite(n.spriteKind,n.spriteScale||2.42):null);
+    if(sprite&&n.sandale)sprite.userData.atlasMouth=createAtlasCharacterMouth(T,sprite,n);
+    return sprite;
+  }
   function npcAppearance(n){return n.jwdRole?jwdCharacter(n):npcSprite(n)||character("npc")}
   function syncAtlasSprite(q,o,height){
     const source=bridge.getNpcSpriteCanvas?.(o.spriteKind||o.special);if(source&&q.material.map.image!==source){q.material.map.image=source;q.material.map.needsUpdate=true}
@@ -1314,6 +1319,7 @@ function showRendererFailure(error){
     const ground=bridge.stationElevation(o.x,o.y),p=q.userData.plantedHeight,r=camera.quaternion;q.quaternion.copy(r);
     if(p!=null)q.position.set(X(o.x)+2*(r.x*r.y-r.z*r.w)*p,ground+(1-2*(r.x*r.x+r.z*r.z))*p,Z(o.y)+2*(r.y*r.z+r.x*r.w)*p);else q.position.set(X(o.x),height+ground,Z(o.y))
     if(grid.groundProjection)projectBillboardFeet(q,camera,ground+.012);
+    q.userData.atlasMouth?.sync(grid,o,bridge.getStreetSpeech?.(o),bridge.getHUDState?.()?.paused===true);
   }
   function syncMerkel(q,o){syncAtlasSprite(q,o,1.21)}
   function syncBayern(q,o){syncAtlasSprite(q,o,1.455)}
@@ -1482,6 +1488,7 @@ function showRendererFailure(error){
   function retireNpcMesh(q){
     if(!q)return;
     releaseStreetPaint(q);
+    q.userData.atlasMouth?.dispose();
     q.userData.neighborPaint?.dispose();
     scene.remove(q);
     // Atlas materials/textures are shared. Only retire per-actor geometry.
@@ -1491,7 +1498,9 @@ function showRendererFailure(error){
   }
   addEventListener("pagehide",event=>{
     releaseStreetPaintViews();
+    for(const [actor,mesh] of npcMeshes)mesh.userData.atlasMouth?.sync(mesh.userData.grid,actor,null,true);
     if(event.persisted)return;
+    for(const mesh of npcMeshes.values())mesh.userData.atlasMouth?.dispose();
     streetPaintOwner.retired=true;
     for(const material of personFallbackMaterials.values()){material.map.dispose();material.dispose()}
     personFallbackMaterials.clear();
