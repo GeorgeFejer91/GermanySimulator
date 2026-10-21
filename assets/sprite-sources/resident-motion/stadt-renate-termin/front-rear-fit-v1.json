@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "status": "source-only-unapproved",
+  "id": "stadt-renate-termin",
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "logical": {
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136,
+    "figureWorldHeight": 1.6
+  },
+  "paintFigureHeight": 132,
+  "phaseCount": 16,
+  "phaseIndices": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "standing": {
+    "file": "assets/characters/street/stadt-renate-termin-standing.webp",
+    "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da"
+  },
+  "views": {
+    "down": {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/down-registered.png",
+      "sha256": "d536bf5b124d8154e0a1db25b34a644ec4f11f8c9adbc63f8d67a490271d8926",
+      "travel": [
+        0,
+        1
+      ],
+      "foreground": 1,
+      "landmarks": {
+        "waist": 350,
+        "hip": 390,
+        "hem": [
+          408,
+          408
+        ],
+        "knee": [
+          422,
+          422
+        ],
+        "ankle": [
+          444,
+          444
+        ],
+        "mid": 256,
+        "centres": [
+          213,
+          300
+        ],
+        "foot_centres": [
+          201,
+          310
+        ],
+        "split_path_xy": [
+          [
+            256,
+            390
+          ],
+          [
+            257,
+            408
+          ],
+          [
+            256,
+            430
+          ],
+          [
+            256,
+            471
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 10,
+        "depth_amplitude": 8,
+        "depth_knee_follow": 0.55,
+        "root_overlap": 2
+      },
+      "protectedPolygons": []
+    },
+    "up": {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/up-registered.png",
+      "sha256": "0bdae106c7f4b09cfc8d60838acdb9c2ad2cad012e4d8e874916476c47bb13cf",
+      "travel": [
+        0,
+        -1
+      ],
+      "foreground": 0,
+      "landmarks": {
+        "waist": 350,
+        "hip": 390,
+        "hem": [
+          408,
+          408
+        ],
+        "knee": [
+          422,
+          422
+        ],
+        "ankle": [
+          443,
+          443
+        ],
+        "mid": 256,
+        "centres": [
+          211,
+          303
+        ],
+        "foot_centres": [
+          200,
+          311
+        ],
+        "split_path_xy": [
+          [
+            256,
+            390
+          ],
+          [
+            256,
+            408
+          ],
+          [
+            255,
+            431
+          ],
+          [
+            256,
+            471
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 10,
+        "depth_amplitude": 8,
+        "depth_knee_follow": 0.55,
+        "root_overlap": 2
+      },
+      "protectedPolygons": []
+    }
+  },
+  "splitBoundaryRationale": "Visible opaque pelvis and props remain above split y390; complete lower thighs, cuffs and boots separate below their own crotch seam. Upper cloth overlaps at connected roots, no missing hidden prop backing is synthesized."
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-original-contour-hidden-shin-only",
+  "familyId": "stadt-renate-termin",
+  "baseFitV2": {"path": "assets/sprite-sources/resident-motion/stadt-renate-termin/source-fit-v2.json", "sha256": "24d6019257b5ca7fab8391ecb806721260cf5b888e926932040130fa799d54a3"},
+  "baseDriverV2": {"path": "assets/sprite-sources/resident-motion/stadt-renate-termin/probe-source-v2.py", "sha256": "bded81245fd102740530bd577bae329bc43218403baecde9bcf36b54fc73268b"},
+  "previousReceiptSha256": "3413b3146c3521c8ae7db6a8270bc88c7db03a5227fa52755563eb8977618a15",
+  "hiddenDonorBelowWorkingY": 430,
+  "travelSign": {"right": 1, "left": -1},
+  "reason": "Avoid exposing a half-donor boot toe at the original far-heel seam; keep original far boot RGBA and only concealed donor shin, with leftward gait sign. Four side anchors only."
+}

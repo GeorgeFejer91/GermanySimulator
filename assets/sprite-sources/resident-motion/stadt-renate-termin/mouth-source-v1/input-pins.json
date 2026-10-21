@@ -1,0 +1,77 @@
+{
+  "scope": "SOURCE-only neutral/standing mouth candidate; immutable input identity",
+  "rows": [
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/down-registered.png",
+      "sha256": "d536bf5b124d8154e0a1db25b34a644ec4f11f8c9adbc63f8d67a490271d8926",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-right-registered.png",
+      "sha256": "9b587b77fe6e48f61fc6401d621a3fb7cb2bcc0437fb86ceda9324f2e012eef3",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/right-registered.png",
+      "sha256": "5eb038ed83d26763102c91f40c413e04ed6499835241d9a0a94d3c33aa653503",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/rear-right-registered.png",
+      "sha256": "5803e505dab062290eaea83fbe67aac20506510c0223ebc214eaf8132fac9030",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/up-registered.png",
+      "sha256": "0bdae106c7f4b09cfc8d60838acdb9c2ad2cad012e4d8e874916476c47bb13cf",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/rear-left-registered.png",
+      "sha256": "7054e8df62fc08d564275e6923b3e652d7e84985ad741b21cfb6b0738b8e33ca",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/left-registered.png",
+      "sha256": "328c686a81f341ef69c7620c672298af24fc6d79ca0110cbb56b956ad65925d7",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-left-registered.png",
+      "sha256": "3f9cef2b91b59a810bd1e6edc52e3090258aea23e96913d37062750fe2df30b2",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "assets/characters/street/stadt-renate-termin-standing.webp",
+      "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+      "dimensions": [
+        128,
+        160
+      ]
+    }
+  ]
+}

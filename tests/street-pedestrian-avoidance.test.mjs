@@ -46,7 +46,7 @@ async function presentation(actor,kind){
  return view;
 }
 
-async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=false,npcBlocker=false,staticBuilding=false,staticCorner=false,sealedBody=false}={}){
+async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=false,npcBlocker=false,staticBuilding=false,staticCorner=false,sealedBody=false,sealedProp=false}={}){
  const actor={id:'irmgard-navigation-test',voiceId:'crowd-irmgard-aktenordner',spriteKind:'towelWoman',
   x:ROOT[0],y:ROOT[1],vx:13,vy:0,crowd:true,pause:0,avoid,min:BOUNDS.x+13,max:BOUNDS.x+BOUNDS.w-13,
   routeBounds:noExit?{x:BOUNDS.x,y:ROOT[1]-13,w:BOUNDS.w,h:26}:{...BOUNDS},spriteRow:0,spriteFrame:0};
@@ -58,9 +58,17 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
   actor.min=actor.routeBounds.x+13;actor.max=actor.routeBounds.x+actor.routeBounds.w-13;
   player.x=ROOT[0]+31.6327397333308;player.y=ROOT[1]-21;
  }
+ // Reduced from the native Renate bollard trace: the player blocks the only
+ // lateral-first bypass, although the far exit point alone is clear.
+ const prop=sealedProp?{x:ROOT[0]+30.1698,y:ROOT[1],radius:17}:null;
+ if(sealedProp){
+  actor.vx=14;actor.routeBounds={x:ROOT[0]-579.8302,y:ROOT[1]-52,w:1286,h:72};
+  actor.min=actor.routeBounds.x+13;actor.max=actor.routeBounds.x+actor.routeBounds.w-13;
+  player.x=ROOT[0]-21.8302;player.y=ROOT[1]-35;
+ }
  const npcs=blocker?[actor,blocker]:[actor],police=[];
  const view=await presentation(actor,kind),start=[actor.x,actor.y];
- const counts={held:0,accepted:0,blocked:0,acceptedSegments:0,ownedFailures:0},vectors=[];
+ const counts={held:0,accepted:0,blocked:0,acceptedSegments:0,ownedFailures:0},vectors=[],reactions=[];
  let scope;
  const bridge={player,getPolice:()=>police},api={...S};
  const accepted=(n,x,y,toX,toY)=>{
@@ -74,7 +82,7 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
   streetPaintManifest:{'crowd-irmgard-aktenordner':person},TouristAnimations:globalThis.TouristAnimations,
   npcSpriteAtlases:{towelWoman:{tourist:legacy}},FEATURED_GAIT_CYCLE_DISTANCE:41.6,CROWD_GAIT_CYCLE_DISTANCE:24,NPC_COMPLAINT_DISTANCE:82,
   trafficCars:[],policeVehicles:[],trains:[],
-  groundStaticMotionBlocked:(x,y,r,fromX,fromY)=>boxed&&(x!==actor.x||y!==actor.y)||staticBuilding&&x>=ROOT[0]-100-r&&x<=ROOT[0]+300+r&&y<ROOT[1]-.8||staticCorner&&scope.groundContactBlocks(scope.signedRectDistance(x,y,scope.cornerBuilding),scope.signedRectDistance(fromX,fromY,scope.cornerBuilding),r),
+  groundStaticMotionBlocked:(x,y,r,fromX,fromY)=>boxed&&(x!==actor.x||y!==actor.y)||staticBuilding&&x>=ROOT[0]-100-r&&x<=ROOT[0]+300+r&&y<ROOT[1]-.8||staticCorner&&scope.groundContactBlocks(scope.signedRectDistance(x,y,scope.cornerBuilding),scope.signedRectDistance(fromX,fromY,scope.cornerBuilding),r)||sealedProp&&scope.groundContactBlocks(Math.hypot(x-prop.x,y-prop.y),Math.hypot(fromX-prop.x,fromY-prop.y),r+prop.radius),
   cornerBuilding:{x:ROOT[0]-263.0360896,y:ROOT[1]-147.790336,w:250,h:145},
   staticBlocked:()=>false,stationElevation:()=>0,
   dist:(x,y,a,b)=>Math.hypot(x-a,y-b),clamp:(x,a,b)=>Math.max(a,Math.min(b,x)),
@@ -84,7 +92,7 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
    counts[value===null?'held':value?'accepted':'blocked']++;
    if(value===null){assert.equal(n.x,before.x);assert.equal(n.y,before.y);assert.equal(S.inspectStreetSimulation(n).distance,before.distance)}
    assert.equal(scope.responderBlocked(n.x,n.y,13,n,n.x,n.y),false,'Committed root remains body/route legal');
-  },record(dx,dy){vectors.push([dx,dy])},failure(reason){counts.ownedFailures++;throw Error(reason)}
+  },record(dx,dy){vectors.push([dx,dy])},reactionRequested(names){reactions.push(names)},failure(reason){counts.ownedFailures++;throw Error(reason)}
  });
  const route=raw?ordinary.replace('const moved=paintedMovement?movePedestrian(n,dx,dy,13):moveGroundResponder(n,dx,dy,13);','const moved=moveGroundResponder(n,dx,dy,13);'):ordinary;
  if(raw)assert.notEqual(route,ordinary,'Baseline mutation reaches the real route caller');
@@ -93,6 +101,8 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
   oneLine('requestCharacterReaction')+'\n'+oneLine('updateCharacterReaction')+'\n'+registered+`
   const nativeMove=moveGroundResponder;
   moveGroundResponder=(n,dx,dy,r)=>{record(dx,dy);const old=before(n),value=nativeMove(n,dx,dy,r);after(n,old,value);return value};
+  const nativeReaction=requestCharacterReaction;
+  requestCharacterReaction=(n,names,options)=>{reactionRequested(names);return nativeReaction(n,names,options)};
   ${pedestrianAvoidanceSource(game)}
   streetMotionObserver={
    accepts:actor=>registeredStreetPaint(actor)!==null&&api.acceptsStreetSimulation(actor),
@@ -116,9 +126,55 @@ async function fixture({avoid=1,kind='admitted',raw=false,boxed=false,noExit=fal
    assert.equal(counts.ownedFailures,0);assert.equal(S.inspectStreetSimulation(actor).held,null);
   }
  };
- return {actor,player,blocker,npcs,view,scope,start,counts,vectors,run,
+ return {actor,player,blocker,npcs,view,scope,start,counts,vectors,reactions,run,
   net:()=>Math.hypot(actor.x-start[0],actor.y-start[1]),dispose:()=>view?.dispose()};
 }
+
+for(const distance of [.000624,.0001,.000001])test(`a certified bypass finishes its tiny side leg before passing (${distance})`,async()=>{
+ const f=await fixture({kind:'none'});try{
+  assert.equal(f.scope.direct(.2,0),true);
+  const cornerY=f.player.y-13-f.player.r,remaining=f.actor.y-cornerY;
+  assert(remaining>distance);
+  assert.equal(f.scope.direct((remaining-distance)/.72,0),true);
+  const before=f.actor.y;
+  assert.equal(f.scope.direct(.2,0),true,'A committed terminal leg does not report blocked');
+  assert(f.actor.y<before);assert(Math.abs(f.actor.y-cornerY)<1e-8);
+  const beforeX=f.actor.x;
+  assert.equal(f.scope.direct(.2,0),true);assert(f.actor.x>beforeX,'The certified forward pass follows the completed side leg');
+ }finally{f.dispose()}
+});
+
+test('a genuinely blocked zero-displacement responder still reports blocked',async()=>{
+ const f=await fixture({kind:'none',boxed:true});try{
+  const before=[f.actor.x,f.actor.y];
+  assert.equal(f.scope.moveGroundResponder(f.actor,.000624,0,13),false);
+  assert.deepEqual([f.actor.x,f.actor.y],before);
+ }finally{f.dispose()}
+});
+
+for(const distance of [.000624,.0001,.000001])test(`a committed tiny responder step is successful movement (${distance})`,async()=>{
+ const f=await fixture({kind:'none'});try{
+  const before=f.actor.x,moved=f.scope.moveGroundResponder(f.actor,distance,0,13);
+  assert(f.actor.x>before,'The native resolver committed a legal positive step');
+  assert.equal(moved,true,'A committed corner remainder must not trigger blocked reversal');
+ }finally{f.dispose()}
+});
+
+for(const kind of ['admitted','none'])test(`autonomous blocked recovery keeps audience reactions with the legacy owner (${kind})`,async()=>{
+ const f=await fixture({kind,boxed:true});try{
+  f.run(2);
+  assert.equal(f.reactions.includes('failed'),kind==='none','A painted autonomous route uses its own planted recovery; legacy failure cues remain');
+ }finally{f.dispose()}
+});
+
+for(const timing of [[1/60],[.014,.020]])test(`a static prop with its bypass blocked reverses without repeated planted turns (${timing.join('/')})`,async()=>{
+ const f=await fixture({sealedProp:true});try{
+  f.run(5,timing);
+  assert(f.net()>=26,'No reachable bypass must yield or reverse, rather than repeatedly turn beside the prop');
+  assert(f.actor.vx<0,'The native blocked route reverses toward its clear rear corridor');
+  assert(f.counts.blocked>0,'An unavailable checked bypass reaches ordinary blocked recovery');
+ }finally{f.dispose()}
+});
 
 for(const [label,timing] of [['30Hz',[1/30]],['60Hz',[1/60]],['120Hz',[1/120]],['14/20ms',[.014,.020]]])for(const avoid of [1,-1]){
  test(`ordinary pedestrian clears a body diameter in five seconds (${label}, avoid ${avoid})`,async()=>{

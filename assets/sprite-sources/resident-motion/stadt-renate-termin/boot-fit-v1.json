@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-static-boot-registration-only",
+  "familyId": "stadt-renate-termin",
+  "identity": {"id": "stadt-renate-termin", "alias": "city-renate-termin", "standingCell": [128,160], "pivot": [64,150], "logicalFigureHeight": 136, "figureWorldHeight": 1.6},
+  "baseFit": {"path": "assets/sprite-sources/resident-motion/stadt-renate-termin/source-fit-v1.json", "sha256": "27c5c29e339b95e663fc1ec87ac71ff6cbce71b2a434504eb36179e44bfcd3e2"},
+  "sources": {
+    "cardinals": {"path": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png", "sha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"},
+    "ownCompleteLegs": {"path": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png", "sha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995"},
+    "standing": {"path": "assets/characters/street/stadt-renate-termin-standing.webp", "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da"}
+  },
+  "working": {"cell": [512,512], "figureHeight": 400, "baseline": 472},
+  "neutralRgbaSha256": {"down": "4eca91e542c283c0888b0867ded97082cd14057a4f5f931ae0248b6cd853460e", "right": "946b68b199312c06952bc5c78d521ee7c738c13f4dc0b9cbba9270e36c4a0046", "up": "e48af107d45295ca2b4af39d36a1c3ed431a84a32d035e03443e04e1a260193f", "left": "dc3de8c289483bba6769ab6665225bf73b8b2e3de524695a538690dac840b3e6", "front-right": "78213c12480117d077b5bcba7598af53847ad82717dc4d0ef5a7132dc6ac1147", "rear-right": "149f8660469aaac09c2aace2bd392e27691cee6c8d0840df119c93e62fcc5aeb", "rear-left": "e173ad85852e1058021775457a0900391ff2ed9be8ef9aa6c2140cf0c24f9df6", "front-left": "3c8238196abc6b5a33bc6e5924823561081008be31d9a67b9cf6a653f50028b8"},
+  "paintExport": {"128x160": 132, "96x120": 99, "64x80": 66},
+  "sides": {
+    "right": {
+      "originalNearRedSupportWorkingXYXY": [220,424,333,470],
+      "originalFarVisibleRedSupportWorkingXYXY": [176,421,220,464],
+      "originalNearHeelToeWorkingXY": [[220,448],[333,449]],
+      "originalNearCuffWorkingXY": [[220,426],[297,424]],
+      "originalNearSoleWorkingXY": [270,471],
+      "originalFarVisibleHeelWorkingXY": [176,448],
+      "originalFarVisibleCuffWorkingXY": [180,421],
+      "originalFarVisibleSoleWorkingXY": [195,465],
+      "originalFarToeWorking": null,
+      "rawOwnFarComponentBoundsXYXY": [465,701,709,962],
+      "rawOwnFarBootRedSupportXYXY": [478,863,705,957],
+      "bodyScaleRedSupportWorkingXYXY": [174,413,308,469],
+      "bodyScaleFarHeelSoleAnchorWorkingXY": [195,469],
+      "targetFarHeelSoleAnchorWorkingXY": [195,465],
+      "uniformScaleRelativeToCardinal": 0.82,
+      "reason": "A 139-pixel body-scale complete boot is wider than the ~114-pixel original visible near shoe; scale the raw own boot once, using the far-heel sole as the immobile anchor."
+    },
+    "left": {
+      "originalNearRedSupportWorkingXYXY": [177,425,283,470],
+      "originalFarVisibleRedSupportWorkingXYXY": [283,422,333,466],
+      "originalNearHeelToeWorkingXY": [[283,450],[177,449]],
+      "originalNearCuffWorkingXY": [[282,426],[211,425]],
+      "originalNearSoleWorkingXY": [220,471],
+      "originalFarVisibleHeelWorkingXY": [333,448],
+      "originalFarVisibleCuffWorkingXY": [330,422],
+      "originalFarVisibleSoleWorkingXY": [315,465],
+      "originalFarToeWorking": null,
+      "rawOwnFarComponentBoundsXYXY": [827,701,1085,962],
+      "rawOwnFarBootRedSupportXYXY": [831,862,1060,957],
+      "bodyScaleRedSupportWorkingXYXY": [200,413,336,469],
+      "bodyScaleFarHeelSoleAnchorWorkingXY": [315,469],
+      "targetFarHeelSoleAnchorWorkingXY": [315,465],
+      "uniformScaleRelativeToCardinal": 0.80,
+      "reason": "A 140-pixel body-scale complete boot is wider than the ~109-pixel original visible near shoe; scale the raw own boot once, using the far-heel sole as the immobile anchor."
+    }
+  }
+}

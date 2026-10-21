@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-source-pilot-only",
+  "familyId": "stadt-renate-termin",
+  "actorId": "city-renate-termin",
+  "standing": {
+    "id": "stadt-renate-termin", "standingOnly": true,
+    "aliases": ["stadt-renate-termin", "city-renate-termin"],
+    "path": "assets/characters/street/stadt-renate-termin-standing.webp",
+    "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+    "cell": [128, 160], "pivot": [64, 150], "figureHeight": 136, "figureWorldHeight": 1.6
+  },
+  "working": {"cell": [512, 512], "figureHeight": 400, "baseline": 472},
+  "cardinals": {
+    "source": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+    "sha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef",
+    "views": {
+      "down": {"bounds": [85, 18, 516, 698], "pivot": [300.5, 698]},
+      "right": {"bounds": [686, 23, 984, 698], "pivot": [835, 698]},
+      "up": {"bounds": [1158, 19, 1590, 698], "pivot": [1374, 698]},
+      "left": {"bounds": [1769, 23, 2064, 698], "pivot": [1916.5, 698]}
+    }
+  },
+  "companion": {
+    "source": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png",
+    "sha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995",
+    "turns": [
+      {"heading": "front-right", "bounds": [28, 32, 363, 650], "pivot": [195.5, 650]},
+      {"heading": "rear-right", "bounds": [414, 32, 735, 646], "pivot": [574.5, 646]},
+      {"heading": "rear-left", "bounds": [794, 32, 1121, 647], "pivot": [957.5, 647]},
+      {"heading": "front-left", "bounds": [1172, 32, 1504, 650], "pivot": [1338, 650]}
+    ],
+    "legs": [
+      {"facing": "right", "role": "near", "bounds": [99, 701, 344, 962], "targetCenterX": 269},
+      {"facing": "right", "role": "far", "bounds": [465, 701, 709, 962], "targetCenterX": 238},
+      {"facing": "left", "role": "far", "bounds": [827, 701, 1085, 962], "targetCenterX": 274},
+      {"facing": "left", "role": "near", "bounds": [1192, 701, 1438, 962], "targetCenterX": 243}
+    ]
+  },
+  "pilot": {"phases": [0, 4, 8, 12], "phaseCount": 16, "sideStepWorkingPx": 15, "sideLiftWorkingPx": 8, "sideUpperCutSourceY": 560, "sideUpperFeatherWorkingPx": 10, "sideLowerEnvelopeEndWorkingY": 430, "sideProtectedHandEndSourceY": 544, "directExports": [{"cell": [96, 120], "pivot": [48, 112.5], "figureHeight": 102}, {"cell": [64, 80], "pivot": [32, 75], "figureHeight": 68}], "strideDistanceStatus": "unmeasured; source pose pilot only"}
+}

@@ -1,0 +1,525 @@
+{
+  "status": "SOURCE-only static candidate, not runtime or motion metadata",
+  "profilesSha256": "05310853e71aa8b5ebda87598c67af370824184a107acb9c19f8acd2f5122370",
+  "registrations": {
+    "down": {
+      "rect": [
+        0.5078125,
+        0.599609375,
+        0.080078125,
+        0.009765625
+      ],
+      "axes": [
+        41.0,
+        0.0,
+        -0.0,
+        5.0
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.44,
+          -0.32,
+          -0.4,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.52,
+          -0.48,
+          -0.5,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          -0.02,
+          0.3,
+          0.04,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.44,
+          -0.32,
+          -0.4,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.44,
+          -0.32,
+          -0.4,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/down-registered.png",
+        "sha256": "d536bf5b124d8154e0a1db25b34a644ec4f11f8c9adbc63f8d67a490271d8926",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        260.0,
+        205.0
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "front-right": {
+      "rect": [
+        0.540625,
+        0.60322265625,
+        0.06566015845770867,
+        0.0087890625
+      ],
+      "axes": [
+        33.60000000000002,
+        -1.0999999999999943,
+        0.14724254368388456,
+        4.497590425253227
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.47196937,
+          -0.58857356,
+          -0.5497055,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.54974723,
+          -0.74412908,
+          -0.64970549,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          -0.0719694,
+          0.03364873,
+          -0.12748319,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.47196937,
+          -0.58857356,
+          -0.5497055,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.47196937,
+          -0.58857356,
+          -0.5497055,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-right-registered.png",
+        "sha256": "9b587b77fe6e48f61fc6401d621a3fb7cb2bcc0437fb86ceda9324f2e012eef3",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        276.8,
+        203.14999999999998
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png",
+        "upstreamSha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "right": {
+      "rect": [
+        0.629296875,
+        0.59853515625,
+        0.0363811147472683,
+        0.00859375
+      ],
+      "axes": [
+        18.399999999999977,
+        -2.9000000000000057,
+        0.6850223027284045,
+        4.346348403518139
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.08418805,
+          -0.21327639,
+          -0.11786327,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.17509724,
+          -0.36100361,
+          -0.20877246,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.2567211,
+          0.35490539,
+          0.22304588,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.08418805,
+          -0.21327639,
+          -0.11786327,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.08418805,
+          -0.21327639,
+          -0.11786327,
+          -0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/right-registered.png",
+        "sha256": "5eb038ed83d26763102c91f40c413e04ed6499835241d9a0a94d3c33aa653503",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        322.2,
+        205.55
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "rect": [
+        0.36796874999999996,
+        0.598046875,
+        0.03501054877305731,
+        0.00859375
+      ],
+      "axes": [
+        17.599999999999994,
+        3.4000000000000057,
+        -0.8345698946166079,
+        4.320126513309492
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.21198968,
+          -0.13388822,
+          -0.12273087,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.28017146,
+          -0.27025182,
+          -0.21364001,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.10619221,
+          0.41156641,
+          0.24090548,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.21198968,
+          -0.13388822,
+          -0.12273087,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.21198968,
+          -0.13388822,
+          -0.12273087,
+          -0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/left-registered.png",
+        "sha256": "328c686a81f341ef69c7620c672298af24fc6d79ca0110cbb56b956ad65925d7",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        188.39999999999998,
+        205.8
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "front-left": {
+      "rect": [
+        0.4125,
+        0.601171875,
+        0.04559616222628422,
+        0.0087890625
+      ],
+      "axes": [
+        23.200000000000017,
+        2.5999999999999943,
+        -0.5011729361473982,
+        4.472004661007566
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.40855351,
+          -0.3312596,
+          -0.14354583,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.48633138,
+          -0.48681512,
+          -0.24354572,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          -0.05299797,
+          0.20207369,
+          0.23423195,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.40855351,
+          -0.3312596,
+          -0.14354583,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.40855351,
+          -0.3312596,
+          -0.14354583,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-left-registered.png",
+        "sha256": "3f9cef2b91b59a810bd1e6edc52e3090258aea23e96913d37062750fe2df30b2",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        211.2,
+        204.2
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png",
+        "upstreamSha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "standing": {
+      "rect": [
+        0.50390625,
+        0.61625,
+        0.0859375,
+        0.01125
+      ],
+      "axes": [
+        11.0,
+        0.0,
+        -0.0,
+        1.8
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.05555556,
+          0.16666667,
+          -0.05555556,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.12222222,
+          0.05555556,
+          -0.12222222,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          0.22222222,
+          0.58333333,
+          0.22222222,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.05555556,
+          0.16666667,
+          -0.05555556,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.05555556,
+          0.16666667,
+          -0.05555556,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "file": "assets/characters/street/stadt-renate-termin-standing.webp",
+        "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+        "dimensions": [
+          128,
+          160
+        ]
+      },
+      "cell": [
+        128,
+        160
+      ],
+      "centerPx": [
+        64.5,
+        61.4
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "direct original encoded standing",
+        "upstreamFile": "assets/characters/street/stadt-renate-termin-standing.webp",
+        "upstreamSha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    }
+  }
+}

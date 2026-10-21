@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-four-extreme-side-source-only",
+  "familyId": "stadt-renate-termin",
+  "ownershipReceipt": {"path": "output/ambient-city-animation/renate-termin-leg-ownership-v1/ownership-source.json", "sha256": "5308febf998397b58ed2e47f34a857b34c9e07d4c1f6220dd684a69391dd6d50"},
+  "independentOwnershipReview": {"path": "output/ambient-city-animation/renate-termin-source-review-v1/leg-ownership-review/REPORT.md", "sha256": "7846dda96c94949a20b2b73f7f4a04069a2ae07f1524c0f36bbd658af468cf6f"},
+  "baseFit": {"path": "assets/sprite-sources/resident-motion/stadt-renate-termin/source-fit-v1.json", "sha256": "27c5c29e339b95e663fc1ec87ac71ff6cbce71b2a434504eb36179e44bfcd3e2"},
+  "geometry": {"workingCell": [512,512], "sourceFigureHeight": 400, "baselineWorkingY": 472, "heldOriginalThroughWorkingY": 370, "roleSourceBeginsWorkingY": 370, "fieldNodesWorkingY": [0,350,370,395,418,466,511], "horizontalFieldFractions": [0,0,0,0.42,1,1,1], "verticalFieldFractions": [0,0,0,0.35,1,1,1], "rigidCompleteBootFromWorkingY": 418, "bodyFootCentreWorkingX": 256, "oppositeTravelWorkingPx": 15, "pilotFarTravelByPhaseWorkingPx": {"0":12,"4":15,"8":-12,"12":-15}, "swingLiftWorkingPx": 8, "phaseCount": 16, "pilotPhases": [0,4,8,12], "paintFigureByCell": {"128x160":132,"96x120":99,"64x80":66}, "logicalFigureHeight":136, "figureWorldHeight":1.6, "standingPivot":[64,150]},
+  "sides": {
+    "right": {
+      "farRole": "viewer-left complete own masked limb plus original far-visible paint",
+      "nearRole": "viewer-right original complete near shoe/trouser paint",
+      "originalRoleSeamWorkingXY": [[221,370],[219,390],[218,420],[219,440],[219,460],[219,480]],
+      "measuredFarRedShoeBBoxWorkingXYXY": [176,419,288,465],
+      "measuredNearRedShoeBBoxWorkingXYXY": [219,424,333,470],
+      "farRedShoeCentreWorkingX": 232,
+      "nearRedShoeCentreWorkingX": 276,
+      "ownCompleteNearBoot": {"rawComponentBoundsXYXY": [99,701,344,962], "rawRedShoeBBoxXYXY": [116,863,340,958], "rawRedShoeCentreX": 228, "sourceBootCapY": 856, "uniformSourceScale": 0.5089285714285714, "sourcePivotXY": [188.7017543859649,960.9298245614035], "registeredRedShoeBBoxWorkingXYXY": [219,422,333,471]},
+      "farOpaqueSoleLastRowWorkingY": 466,
+      "nearOpaqueSoleLastRowWorkingY": 472,
+      "farOnlySoleRegistrationWorkingY": 6,
+      "directionalTravelSign": 1
+    },
+    "left": {
+      "farRole": "viewer-right complete own masked limb plus original far-visible paint",
+      "nearRole": "viewer-left original complete near shoe/trouser paint",
+      "originalRoleSeamWorkingXY": [[284,370],[285,390],[286,420],[286,440],[286,460],[286,480]],
+      "measuredFarRedShoeBBoxWorkingXYXY": [223,420,333,465],
+      "measuredNearRedShoeBBoxWorkingXYXY": [177,425,286,470],
+      "farRedShoeCentreWorkingX": 278,
+      "nearRedShoeCentreWorkingX": 231.5,
+      "ownCompleteNearBoot": {"rawComponentBoundsXYXY": [1192,701,1438,962], "rawRedShoeBBoxXYXY": [1196,862,1420,958], "rawRedShoeCentreX": 1308, "sourceBootCapY": 856, "uniformSourceScale": 0.48660714285714285, "sourcePivotXY": [1358.348623853211,961.1100917431193], "registeredRedShoeBBoxWorkingXYXY": [177,424,286,471]},
+      "farOpaqueSoleLastRowWorkingY": 467,
+      "nearOpaqueSoleLastRowWorkingY": 472,
+      "farOnlySoleRegistrationWorkingY": 5,
+      "directionalTravelSign": -1
+    }
+  },
+  "limits": "The four pilot travel anchors deliberately expose alternate swing shoes; no intermediate/full16 curve is proposed. No standing-to-walk relocation bridge, world floor/stride, atlas or runtime approval. Moving upper-thigh concavity requires actual native visual inspection."
+}

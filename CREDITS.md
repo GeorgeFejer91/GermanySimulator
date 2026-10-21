@@ -406,6 +406,14 @@ recipes are under `assets/sprite-sources/resident-motion/stadt-irmgard-aktenstap
 Speech uses her existing exact selected recordings and40Hz mouth-energy tracks;
 missing regional recordings retain captions.
 
+Renate Termin's open-city walking, phase-owned stops, free-left-hand gesture
+and source-bound mouths use her original project paint and own ImageGen
+direction/complete-leg sources. Her yellow ticket stays in her right hand.
+Source bindings and recipes are under
+`assets/sprite-sources/resident-motion/stadt-renate-termin/`. Speech reuses her
+three exact selected recordings and40Hz mouth-energy tracks; missing regional
+recordings retain captions.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

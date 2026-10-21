@@ -2878,7 +2878,7 @@ function moveGroundResponder(entity,dx,dy,r){
  if(last&&holdStreetMovement(entity,distance>.001?x-beforeX:last.x-last.fromX,distance>.001?y-beforeY:last.y-last.fromY))return null;
  entity.avoid=avoid;
  for(const segment of segments){entity.x=segment.x;entity.y=segment.y;notifyStreetAccepted(entity,segment.fromX,segment.fromY)}
- return distance>.001
+ return distance>0
 }
 function blocked(x,y){return groundStaticMotionBlocked(x,y,player.r,player.x,player.y)||Math.abs(stationElevation(x,y)-stationElevation(player.x,player.y))>.11}
 function blockingPedestrian(x,y){let nearest=null,best=player.r+13;for(const n of npcs){const d=dist(x,y,n.x,n.y);if(d<best&&groundContactBlocks(d,dist(player.x,player.y,n.x,n.y),player.r+13)){nearest=n;best=d}}return nearest}
@@ -2926,7 +2926,10 @@ function createPedestrianMover({move,blocked,contactBlocks,circles}){
       route:routeKey(n),vx:n.vx,vy:n.vy,lastX:n.x,lastY:n.y};
     }
    }
-   return null;
+   // An obstructed route without a checked bypass uses ordinary blocked
+   // recovery, like a sealed body encounter. Reactive sidesteps here can
+   // request opposing planted turns forever without clearing the obstacle.
+   return false;
   }
   const clearance=r+body.radius,root=[n.x,n.y],preferred=n.avoid||1;
   for(const sign of [preferred,-preferred]){
@@ -3996,9 +3999,11 @@ function updateCitySimulation(dt){
    if((n.pause||0)>0){n.pause-=dt;continue}
    if(n.wisdomId){n.wisdomExitCheck=(n.wisdomExitCheck||0)-dt;if(n.wisdomExitCheck<=0){n.wisdomExitCheck=.7;n.wisdomBlocked=!streetWisdomCanMove(n)}if(n.wisdomBlocked)continue}
    const lane=n.routeBounds?pedestrianLane(n):null,correction=lane==null?0:clamp(lane-(n.vx?n.y:n.x),-18*dt,18*dt),dx=(n.vx||0)*dt+(n.vx?0:correction),dy=(n.vy||0)*dt+(n.vx?correction:0),beforeX=n.x,beforeY=n.y;
+   // Painted navigation already owns planted recovery; audience-facing failure
+   // reactions remain with explicit quiz/dialogue events and legacy movement.
    const paintedMovement=streetMotionObserver?.ownsMovement?.(n)===true;if(!paintedMovement)movePedestrian.invalidate(n);
    const moved=paintedMovement?movePedestrian(n,dx,dy,13):moveGroundResponder(n,dx,dy,13);if(moved===null)continue;
-   if(!moved){n.pause=.2;requestCharacterReaction(n,"failed");if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);continue}
+   if(!moved){n.pause=.2;if(!paintedMovement)requestCharacterReaction(n,"failed");if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);continue}
    if(n.spriteKind){orientCrowdSprite(n,n.x-beforeX,n.y-beforeY);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt)}
    const maneuverProgress=paintedMovement?movePedestrian.progress(n,beforeX,beforeY):null,progress=maneuverProgress??(n.vx?(n.x-beforeX)*Math.sign(n.vx):(n.y-beforeY)*Math.sign(n.vy));n.blockedTimer=progress>.001?0:(n.blockedTimer||0)+dt;
    if(n.blockedTimer>.7||pedestrianRouteStalled(n,beforeX,beforeY,dt,maneuverProgress)||(n.vx?(n.x<=n.min+1||n.x>=n.max-1):(n.y<=n.min+1||n.y>=n.max-1))){n.blockedTimer=0;n.pause=.2;if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n)}

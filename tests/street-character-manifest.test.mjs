@@ -6,7 +6,7 @@ import { registerStreetCharacterManifest, resolveStreetCharacter, advanceStreetA
 
 const manifest = JSON.parse(await readFile(new URL('../assets/characters/street/manifest.json', import.meta.url), 'utf8'));
 const entries = Object.entries(manifest.characters);
-const motionFamilies = new Set(['stadt-irmgard-aktenstapel','quiz-gisela-becker','quiz-heike-hoffmann','crowd-irmgard-aktenordner','stadt-karl-heinz-post']);
+const motionFamilies = new Set(['stadt-irmgard-aktenstapel','quiz-gisela-becker','quiz-heike-hoffmann','crowd-irmgard-aktenordner','stadt-karl-heinz-post','stadt-renate-termin']);
 
 test('all forty-three installed standing sprites match shipped manifest hashes and literal identity aliases', async () => {
   assert.equal(manifest.schemaVersion, 1);

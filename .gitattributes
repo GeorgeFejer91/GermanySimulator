@@ -34,3 +34,7 @@ assets/characters/residents/stadt-karl-heinz-post/** -text
 # Irmgard Aktenstapel source recipes and deliveries retain reviewed SHA-bound bytes.
 assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/** -text
 assets/characters/residents/stadt-irmgard-aktenstapel/** -text
+
+# Renate source recipes and deliveries retain reviewed SHA-bound bytes.
+assets/sprite-sources/resident-motion/stadt-renate-termin/** -text
+assets/characters/residents/stadt-renate-termin/** -text

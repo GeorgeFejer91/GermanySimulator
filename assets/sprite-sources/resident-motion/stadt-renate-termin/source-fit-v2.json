@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-original-contour-side-pilot-only",
+  "familyId": "stadt-renate-termin",
+  "baseFit": {
+    "path": "assets/sprite-sources/resident-motion/stadt-renate-termin/source-fit-v1.json",
+    "sha256": "27c5c29e339b95e663fc1ec87ac71ff6cbce71b2a434504eb36179e44bfcd3e2"
+  },
+  "neutralRgbaSha256": {
+    "down": "4eca91e542c283c0888b0867ded97082cd14057a4f5f931ae0248b6cd853460e",
+    "right": "946b68b199312c06952bc5c78d521ee7c738c13f4dc0b9cbba9270e36c4a0046",
+    "up": "e48af107d45295ca2b4af39d36a1c3ed431a84a32d035e03443e04e1a260193f",
+    "left": "dc3de8c289483bba6769ab6665225bf73b8b2e3de524695a538690dac840b3e6",
+    "front-right": "78213c12480117d077b5bcba7598af53847ad82717dc4d0ef5a7132dc6ac1147",
+    "rear-right": "149f8660469aaac09c2aace2bd392e27691cee6c8d0840df119c93e62fcc5aeb",
+    "rear-left": "e173ad85852e1058021775457a0900391ff2ed9be8ef9aa6c2140cf0c24f9df6",
+    "front-left": "3c8238196abc6b5a33bc6e5924823561081008be31d9a67b9cf6a653f50028b8"
+  },
+  "sideFit": {
+    "right": {
+      "farRole": "viewer-left",
+      "nearRole": "viewer-right",
+      "seamWorkingXY": [[221,370],[219,390],[217,420],[217,440],[220,460],[220,480]],
+      "farHiddenLegComponentIndex": 1
+    },
+    "left": {
+      "farRole": "viewer-right",
+      "nearRole": "viewer-left",
+      "seamWorkingXY": [[284,370],[285,390],[280,420],[274,440],[270,460],[270,480]],
+      "farHiddenLegComponentIndex": 2
+    },
+    "sourceLowerBeginWorkingY": 370,
+    "heldUpperFullThroughWorkingY": 400,
+    "connectedOriginalGapFillEndsWorkingY": 420,
+    "nodesWorkingY": [0,350,400,420,440,465,511],
+    "stepWorkingPx": 15,
+    "liftWorkingPx": 8,
+    "phaseIndices": [0,4,8,12],
+    "phaseCount": 16,
+    "artPolicy": "original visible side RGBA assigned to near/far masks; own companion far leg only behind original visible side seam; no borrowed paint"
+  },
+  "output": {"logicalFigure": 136, "worldFigure": 1.6, "standingCell": [128,160], "standingPivot": [64,150], "standingPaintFigure": 132, "desktopCell": [96,120], "desktopPivot": [48,112.5], "desktopPaintFigure": 99, "mobileCell": [64,80], "mobilePivot": [32,75], "mobilePaintFigure": 66}
+}

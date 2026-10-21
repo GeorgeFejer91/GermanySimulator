@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "identity": "stadt-renate-termin",
+  "status": "SOURCE-only candidate; independent lip/body registration review pending",
+  "inputPinsSha256": "6ebd4700fbb35010a373d9d11fa6ce10790be181c7ec7235b90d2fb43e3fb9aa",
+  "helper": {
+    "file": "tools/build-street-mouths.py",
+    "sha256": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8"
+  },
+  "bodyRecipeContext": {
+    "file": "assets/sprite-sources/resident-motion/stadt-renate-termin/source-fit-v1.json",
+    "sha256": "27c5c29e339b95e663fc1ec87ac71ff6cbce71b2a434504eb36179e44bfcd3e2",
+    "neutralAuthority": "exact input-pins.json; lower moving-body edits are not mouth transport"
+  },
+  "directPreviewCalibration": {
+    "file": "output/ambient-city-animation/renate-termin-source-gate-v1/standing-calibration-root.json",
+    "sha256": "0ed4287581442b3fe40c97206bb4174d7bdb3c480a65b61b37729f7785ae533f",
+    "paintFigureHeightCanonical": 132,
+    "logicalFigureHeightCanonical": 136,
+    "paintFigureHeightsDirect": {
+      "96x120": 99,
+      "64x80": 66
+    },
+    "status": "root source-size diagnostic; body/source registration acceptance remains separate"
+  },
+  "mouthVisible": [
+    "down",
+    "front-right",
+    "right",
+    "left",
+    "front-left"
+  ],
+  "explicitNull": [
+    "rear-right",
+    "up",
+    "rear-left"
+  ],
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/down-registered.png",
+        "sha256": "d536bf5b124d8154e0a1db25b34a644ec4f11f8c9adbc63f8d67a490271d8926",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "down",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        260.0,
+        205.0
+      ],
+      "axesPx": [
+        41.0,
+        0.0,
+        -0.0,
+        5.0
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            239.5,
+            205.0
+          ],
+          [
+            249.75,
+            202.8
+          ],
+          [
+            260.0,
+            203.4
+          ],
+          [
+            270.25,
+            203.0
+          ],
+          [
+            280.5,
+            205.0
+          ]
+        ],
+        "source_upper": [
+          [
+            239.5,
+            205.0
+          ],
+          [
+            249.75,
+            202.8
+          ],
+          [
+            260.0,
+            203.4
+          ],
+          [
+            270.25,
+            203.0
+          ],
+          [
+            280.5,
+            205.0
+          ]
+        ],
+        "source_lower": [
+          [
+            239.5,
+            205.0
+          ],
+          [
+            249.75,
+            202.8
+          ],
+          [
+            260.0,
+            203.4
+          ],
+          [
+            270.25,
+            203.0
+          ],
+          [
+            280.5,
+            205.0
+          ]
+        ],
+        "open_upper": [
+          [
+            239.5,
+            205.0
+          ],
+          [
+            249.75,
+            202.4
+          ],
+          [
+            260.0,
+            202.6
+          ],
+          [
+            270.25,
+            202.5
+          ],
+          [
+            280.5,
+            205.0
+          ]
+        ],
+        "open_lower": [
+          [
+            239.5,
+            205.0
+          ],
+          [
+            249.75,
+            204.9
+          ],
+          [
+            260.0,
+            206.5
+          ],
+          [
+            270.25,
+            205.2
+          ],
+          [
+            280.5,
+            205.0
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 196,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "front-right": {
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-right-registered.png",
+        "sha256": "9b587b77fe6e48f61fc6401d621a3fb7cb2bcc0437fb86ceda9324f2e012eef3",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "front-right",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        276.8,
+        203.14999999999998
+      ],
+      "axesPx": [
+        33.60000000000002,
+        -1.0999999999999943,
+        0.14724254368388456,
+        4.497590425253227
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            260.0,
+            203.7
+          ],
+          [
+            268.4,
+            201.3
+          ],
+          [
+            276.8,
+            200.5
+          ],
+          [
+            285.2,
+            200.4
+          ],
+          [
+            293.6,
+            202.6
+          ]
+        ],
+        "source_upper": [
+          [
+            260.0,
+            203.7
+          ],
+          [
+            268.4,
+            201.3
+          ],
+          [
+            276.8,
+            200.5
+          ],
+          [
+            285.2,
+            200.4
+          ],
+          [
+            293.6,
+            202.6
+          ]
+        ],
+        "source_lower": [
+          [
+            260.0,
+            203.7
+          ],
+          [
+            268.4,
+            201.3
+          ],
+          [
+            276.8,
+            200.5
+          ],
+          [
+            285.2,
+            200.4
+          ],
+          [
+            293.6,
+            202.6
+          ]
+        ],
+        "open_upper": [
+          [
+            260.0,
+            203.7
+          ],
+          [
+            268.388548,
+            200.950187
+          ],
+          [
+            276.777096,
+            199.800375
+          ],
+          [
+            285.185276,
+            199.950241
+          ],
+          [
+            293.6,
+            202.6
+          ]
+        ],
+        "open_lower": [
+          [
+            260.0,
+            203.7
+          ],
+          [
+            268.458897,
+            203.099036
+          ],
+          [
+            276.891618,
+            203.298501
+          ],
+          [
+            285.262169,
+            202.298983
+          ],
+          [
+            293.6,
+            202.6
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png",
+        "upstreamSha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 193,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "right": {
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/right-registered.png",
+        "sha256": "5eb038ed83d26763102c91f40c413e04ed6499835241d9a0a94d3c33aa653503",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "right",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        322.2,
+        205.55
+      ],
+      "axesPx": [
+        18.399999999999977,
+        -2.9000000000000057,
+        0.6850223027284045,
+        4.346348403518139
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            313.0,
+            207.0
+          ],
+          [
+            317.6,
+            205.9
+          ],
+          [
+            322.2,
+            204.6
+          ],
+          [
+            326.8,
+            204.3
+          ],
+          [
+            331.4,
+            204.1
+          ]
+        ],
+        "source_upper": [
+          [
+            313.0,
+            207.0
+          ],
+          [
+            317.6,
+            205.9
+          ],
+          [
+            322.2,
+            204.6
+          ],
+          [
+            326.8,
+            204.3
+          ],
+          [
+            331.4,
+            204.1
+          ]
+        ],
+        "source_lower": [
+          [
+            313.0,
+            207.0
+          ],
+          [
+            317.6,
+            205.9
+          ],
+          [
+            322.2,
+            204.6
+          ],
+          [
+            326.8,
+            204.3
+          ],
+          [
+            331.4,
+            204.1
+          ]
+        ],
+        "open_upper": [
+          [
+            313.0,
+            207.0
+          ],
+          [
+            317.537725,
+            205.504877
+          ],
+          [
+            322.098804,
+            203.957926
+          ],
+          [
+            326.737725,
+            203.904877
+          ],
+          [
+            331.4,
+            204.1
+          ]
+        ],
+        "open_lower": [
+          [
+            313.0,
+            207.0
+          ],
+          [
+            317.83353,
+            207.38171
+          ],
+          [
+            322.589217,
+            207.069516
+          ],
+          [
+            327.03353,
+            205.78171
+          ],
+          [
+            331.4,
+            204.1
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 197,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/left-registered.png",
+        "sha256": "328c686a81f341ef69c7620c672298af24fc6d79ca0110cbb56b956ad65925d7",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "left",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        188.39999999999998,
+        205.8
+      ],
+      "axesPx": [
+        17.599999999999994,
+        3.4000000000000057,
+        -0.8345698946166079,
+        4.320126513309492
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            179.6,
+            204.1
+          ],
+          [
+            184.0,
+            204.0
+          ],
+          [
+            188.4,
+            205.2
+          ],
+          [
+            192.8,
+            206.1
+          ],
+          [
+            197.2,
+            207.5
+          ]
+        ],
+        "source_upper": [
+          [
+            179.6,
+            204.1
+          ],
+          [
+            184.0,
+            204.0
+          ],
+          [
+            188.4,
+            205.2
+          ],
+          [
+            192.8,
+            206.1
+          ],
+          [
+            197.2,
+            207.5
+          ]
+        ],
+        "source_lower": [
+          [
+            179.6,
+            204.1
+          ],
+          [
+            184.0,
+            204.0
+          ],
+          [
+            188.4,
+            205.2
+          ],
+          [
+            192.8,
+            206.1
+          ],
+          [
+            197.2,
+            207.5
+          ]
+        ],
+        "open_upper": [
+          [
+            179.6,
+            204.1
+          ],
+          [
+            184.056902,
+            203.705446
+          ],
+          [
+            188.513805,
+            204.610892
+          ],
+          [
+            192.87587,
+            205.707261
+          ],
+          [
+            197.2,
+            207.5
+          ]
+        ],
+        "open_lower": [
+          [
+            179.6,
+            204.1
+          ],
+          [
+            183.734455,
+            205.374586
+          ],
+          [
+            187.94478,
+            207.556433
+          ],
+          [
+            192.49652,
+            207.670955
+          ],
+          [
+            197.2,
+            207.5
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+        "upstreamSha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 196,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "front-left": {
+      "input": {
+        "file": "output/ambient-city-animation/renate-termin-source-gate-v1/front-left-registered.png",
+        "sha256": "3f9cef2b91b59a810bd1e6edc52e3090258aea23e96913d37062750fe2df30b2",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "front-left",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        211.2,
+        204.2
+      ],
+      "axesPx": [
+        23.200000000000017,
+        2.5999999999999943,
+        -0.5011729361473982,
+        4.472004661007566
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            199.6,
+            202.9
+          ],
+          [
+            205.4,
+            201.7
+          ],
+          [
+            211.2,
+            202.7
+          ],
+          [
+            217.0,
+            204.2
+          ],
+          [
+            222.8,
+            205.5
+          ]
+        ],
+        "source_upper": [
+          [
+            199.6,
+            202.9
+          ],
+          [
+            205.4,
+            201.7
+          ],
+          [
+            211.2,
+            202.7
+          ],
+          [
+            217.0,
+            204.2
+          ],
+          [
+            222.8,
+            205.5
+          ]
+        ],
+        "source_lower": [
+          [
+            199.6,
+            202.9
+          ],
+          [
+            205.4,
+            201.7
+          ],
+          [
+            211.2,
+            202.7
+          ],
+          [
+            217.0,
+            204.2
+          ],
+          [
+            222.8,
+            205.5
+          ]
+        ],
+        "open_upper": [
+          [
+            199.6,
+            202.9
+          ],
+          [
+            205.43898,
+            201.352177
+          ],
+          [
+            211.27796,
+            202.004355
+          ],
+          [
+            217.050117,
+            203.7528
+          ],
+          [
+            222.8,
+            205.5
+          ]
+        ],
+        "open_lower": [
+          [
+            199.6,
+            202.9
+          ],
+          [
+            205.221805,
+            203.290046
+          ],
+          [
+            210.932708,
+            205.085069
+          ],
+          [
+            216.810668,
+            205.889424
+          ],
+          [
+            222.8,
+            205.5
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-renate-termin/turns-and-leg-components-candidate.png",
+        "upstreamSha256": "c0b75338b03a0a57a8eed46aeef4e07eb7160a89eb74fb463bf551c502831995"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 194,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "standing": {
+      "input": {
+        "file": "assets/characters/street/stadt-renate-termin-standing.webp",
+        "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+        "dimensions": [
+          128,
+          160
+        ]
+      },
+      "cell": [
+        128,
+        160
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "standing",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        64.5,
+        61.4
+      ],
+      "axesPx": [
+        11.0,
+        0.0,
+        -0.0,
+        1.8
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            59.0,
+            61.4
+          ],
+          [
+            61.75,
+            61.3
+          ],
+          [
+            64.5,
+            61.7
+          ],
+          [
+            67.25,
+            61.3
+          ],
+          [
+            70.0,
+            61.4
+          ]
+        ],
+        "source_upper": [
+          [
+            59.0,
+            61.4
+          ],
+          [
+            61.75,
+            61.3
+          ],
+          [
+            64.5,
+            61.7
+          ],
+          [
+            67.25,
+            61.3
+          ],
+          [
+            70.0,
+            61.4
+          ]
+        ],
+        "source_lower": [
+          [
+            59.0,
+            61.4
+          ],
+          [
+            61.75,
+            61.3
+          ],
+          [
+            64.5,
+            61.7
+          ],
+          [
+            67.25,
+            61.3
+          ],
+          [
+            70.0,
+            61.4
+          ]
+        ],
+        "open_upper": [
+          [
+            59.0,
+            61.4
+          ],
+          [
+            61.75,
+            61.18
+          ],
+          [
+            64.5,
+            61.5
+          ],
+          [
+            67.25,
+            61.18
+          ],
+          [
+            70.0,
+            61.4
+          ]
+        ],
+        "open_lower": [
+          [
+            59.0,
+            61.4
+          ],
+          [
+            61.75,
+            61.8
+          ],
+          [
+            64.5,
+            62.45
+          ],
+          [
+            67.25,
+            61.8
+          ],
+          [
+            70.0,
+            61.4
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "direct original encoded standing",
+        "upstreamFile": "assets/characters/street/stadt-renate-termin-standing.webp",
+        "upstreamSha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent review and body registration acceptance",
+        "observation": "Closed dark/red lip crease, compressed downturn; no exposed teeth or confirmed pre-open cavity.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 58,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    }
+  }
+}

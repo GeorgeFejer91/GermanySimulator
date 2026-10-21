@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-static-source-space-upper-trouser-ownership",
+  "familyId": "stadt-renate-termin",
+  "measuredBootReceipt": {
+    "path": "output/ambient-city-animation/renate-termin-boot-fit-v1/boot-fit.json",
+    "sha256": "a9ffa38e1f8ad20ecfe8c7516e17fbbe603d979800e3ca66361fbc94a528252e"
+  },
+  "measuredBootFit": {
+    "path": "assets/sprite-sources/resident-motion/stadt-renate-termin/boot-fit-v1.json",
+    "sha256": "d09c9ba25bc9f5c1ac1429abe4c790e4fb4890e38d9af46deba86cc3594cba87"
+  },
+  "independentBootReview": {
+    "path": "output/ambient-city-animation/renate-termin-source-review-v1/boot-fit-review/REPORT.md",
+    "sha256": "3d4de78b4529c3dd2f845270648a914ee0e6fcd1d73948768e6b9c87e2e66a4e"
+  },
+  "method": {
+    "space": "own raw companion component; the original registered outer contour is inverse-transformed through the measured uniform boot registration",
+    "proximalCap": "donor upper cap lies within the original opaque pelvis; matte follows the original far outer hip-to-thigh-to-knee-to-cuff contour",
+    "insideMarginWorkingPixels": 1.5,
+    "featherWorkingPixels": 1.25,
+    "completeBootMaskOneFromWorkingY": 427,
+    "originalVisibleCompositeOrder": "original alpha-positive RGBA assigned last",
+    "note": "The distal full-mask point follows the contour's natural re-entry by y426; it does not cut the boot or divide a screen half. The mask is applied to source RGBA before limb registration."
+  },
+  "sides": {
+    "right": {
+      "outerSide": "left",
+      "originalOuterContourWorkingY_X": [[340,170],[345,178],[350,180],[355,181],[360,184],[365,187],[370,191],[375,196],[380,200],[385,200],[390,199],[395,197],[400,195],[405,192],[410,190],[415,187],[420,186],[425,182],[427,181]]
+    },
+    "left": {
+      "outerSide": "right",
+      "originalOuterContourWorkingY_X": [[340,339],[345,330],[350,329],[355,327],[360,325],[365,322],[370,318],[375,313],[380,308],[385,309],[390,310],[395,312],[400,315],[405,317],[410,320],[415,322],[420,323],[425,328],[427,329]]
+    }
+  }
+}
