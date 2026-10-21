@@ -1,5 +1,20 @@
 # Ambient walking and talking goal — 2026-10-20
 
+Heike follow-up: independent Karl lip-transport review exposed a published moving
+axis transpose in all276 visible moving Heike fits. Compiler/proof now serialize
+tangentXY then normalXY, matching the actual GLSL mat2 columns. Own source
+fragment and runtime mouth data regenerated; body/standing/profile/rectangles,
+gait/pack geometry/recordings exact. Geometry regression6 red subcases then2 tests
+PASS; focused Node25/25 and actual-loader/shader378-slot desktop/mobile checks
+PASS. Default native caption/quiz/return flows3/3 desktop and both Android
+emulations and independent frozen26-pin Camera/Physics reviews PASS. Exact delivery
+rebuild check PASS; body packs unchanged. Clean integration with published Inga99cd9ef
+passes57 focused Node checks,2 geometry tests, both378-slot GPU profiles, all3
+native caption profiles,31-page build and4 built root/3d desktop/mobile startups.
+Heike asset bytes match the reviewed repair; Inga is preserved. No private audio
+admission/listening/device claim. Evidence
+`output/ambient-city-animation/heike-lip-frame-fix-v1/`.
+
 Release integration closeout: the five ambient checkpoints, through Heike96378cb,
 are merged with published2c48edd in clean ambient-city-release. Combined Node
 2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and

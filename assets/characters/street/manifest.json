@@ -5720,11 +5720,11 @@
       },
       "mouthPaint": {
         "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/mouths-v1.json",
-        "sha256": "42ed5605ad9e91bf05b85099795dc44f46438a25b705a33a7d700332760f73e2"
+        "sha256": "b3028846929223dba01a474441772fec86f2d0e15ed8b88ca90b85592dc25474"
       },
       "motionDelivery": {
         "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/delivery/motion-delivery.json",
-        "sha256": "6535fe877a6b786309cb973c34a2676c54a4a4f4a8cc136bce107e9e17a48000"
+        "sha256": "0467d27590df3671d2c3128c888928707906b2b028e7105f1052a6c99d4e7442"
       }
     },
     "quiz-klaus-dieter-wagner": {
