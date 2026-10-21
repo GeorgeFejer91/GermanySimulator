@@ -1,5 +1,18 @@
 # Ambient walking and talking goal — 2026-10-20
 
+Release integration closeout: the five ambient checkpoints, through Heike96378cb,
+are merged with published2c48edd in clean ambient-city-release. Combined Node
+2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and
+31-page build pass. Native Heike caption encounters pass desktop and both Android
+emulations; Gisela's owned recorded Q24/mouth/portrait path passes desktop. Built
+startup passes desktop and Android portrait. Independent Physics and Camera scoped
+release reviews pass on260 frozen files; their broad-world, natural, listening and
+physical-device exclusions remain open. No private Heike audio is admitted. Source
+runtime/assets remain unchanged after those checks; only this progress closeout
+changes. Publication proceeds under the standing policy. The42-character goal
+remains active with37 scoped standing-only identities.
+
+
 Active owner and six milestones: GAME-COMPLETION.md, chat
 01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
 primary dirty checkout and separately owned Merz work remain preserved.
@@ -333,6 +346,61 @@ under gisela-phase-stops-v1 and gisela-body-calibration. These are authoring-onl
 changes, with no runtime body activation or new body/media clock. Next: finish
 and inspect all stop poses, assemble the revised bounded grid and own mouth fits,
 then packed delivery, real approach/quiz/media verification and independent reviews.
+
+# Station announcement entry — 2026-10-21
+
+Integrator-owned, based on published `21ebceb8`; clean managed worktree
+`station-announcements/GermanySimulator`. The primary authoring checkout and its
+held completion work remain preserved. Scope: `game.js` station audio admission,
+`tests/audio-trigger-hygiene.test.mjs`, the matching browser probe and gameplay
+contract. No renderer, collision, placement, UI, recording or dependency changes.
+
+Plan: reproduce the five-second stationary-body restriction; verify all 18
+platforms and full entrances; admit ordinary recordings after one second in the
+same station area even while walking; retain broker priority, 6.5-second repeat
+gap, track-only children cue, distance fade and cancellation. Run focused and
+full Node checks, silent desktop/Android-emulated native audio checks, then
+publish and verify Pages. Physics/Camera review omitted: audio admission only,
+with no change to physical world geometry, movement, scale or rendering.
+
+Beat `station-platform-entry`: the existing simulation update owns station
+identity and one-second residence; existing train broker owns one queued/active
+recording and Web Audio start/end. Pending decode remains valid while inside
+that source area; exit, dialogue, hidden/pause/interior takeover cancel it.
+Existing eight-second preparation deadline and no-repeat recordings remain.
+No startup preload, new asset/cache, scheduler or background work is added.
+
+Causal verdict PASS: full station/entrance entry -> same-station residence ->
+one-second admission -> existing broker/decode -> actual recording and captions.
+All 18 production stations are sampled at platform/entrance corners and centers,
+including both side ramps. Withheld area, station switch, movement, late decode,
+voice-off, pause, modal/dialogue and repeat-gap branches have regression coverage.
+Native silent browser checks use staged positions; the 18-entrance map advances
+time explicitly. Keyboard/touch movement and representative station/track native
+recordings use real clocks, decode and playback, with exact captions.
+
+Validation: 32/32 focused Node checks; curator `--check` and JavaScript syntax
+PASS. Thirty silent browser checks PASS across desktop and Android portrait /
+landscape emulation, zero page errors. Native wall timings are retained per profile in the final report; all three
+recordings start from the original one-second admission without a retry. Desktop and
+portrait frames inspected. No physical Android or perceptual listening claim.
+Software-rendered attempts and setup failures are retained under ignored
+`output/station-announcements/`; successful hardware Chromium evidence is
+`browser-final/report.json`. No universal device-performance claim.
+
+The attempted full local suite did not finish: unchanged office restoration /
+session and city-voice provenance / crowd-default tests occupied workers without
+completion on Windows. Unbounded and bounded attempts are preserved; stopped
+owned test processes. This is NOT a full-suite pass. Automatic Pages CI remains
+responsible for its required Linux source/asset/build/browser checks.
+
+Built-site startup/input also pass 6/6 on the initial candidate across all three
+profiles. A final red/green regression closes stale pending admission after a
+hidden-page residence reset; focused and native checks were rerun on that source.
+
+Release is scoped to this fix against published main. Current source and selected
+browser paths are validated; push, deployment status and public verification are
+the next action. Preserve unrelated primary authoring work and its older hold.
 
 # Final browser integration — 2026-10-19
 

@@ -3800,6 +3800,26 @@
           "locator": "game.js jwdCopy.parentPremature.de[0]",
           "text": "Ach, Sie möchten schon … die Sache mit Ihrem Einzug klären Sie dann erst, ja? Ich sage Ihnen das nur, damit wir nachher nicht alles zweimal … Wir haben ja noch Zeit, uns kennenzulernen. Sie wissen ja, wie das ist.",
           "english": "Oh, you would like to already … you will sort out your move-in first, yes? I am only telling you so we do not have to go through everything twice afterwards … We still have time to get to know each other. You know how it is."
+        },
+        {
+          "text": "Moment, ich habe mir nur einen kleinen Zettel … also einen Block. Begrüßung, Weg, Hecke, Hartmut. Damit ich Ihnen nichts … Das ist ja für Sie. Den Namen haben wir schon, da mache ich einen Haken.",
+          "english": "One moment, I just made myself a little note … well, a notepad. Welcome, path, hedge, Hartmut. So I do not forget to tell you anything … This is for you, of course. We have done the name already; I will tick that off.",
+          "locator": "neighbor-story.js heiko-introduction/heiko-paint/heiko-notebook-welcome"
+        },
+        {
+          "text": "Den Weg habe ich Ihnen gezeigt. Den hake ich hier ab. Also, dass wir darüber gesprochen haben. Dann haben Sie das auch aus dem Kopf. Ist ja für Sie.",
+          "english": "I have shown you the path. I will tick it off here. Well, that we have talked about it. Then you have it off your mind too. It is for you, after all.",
+          "locator": "neighbor-story.js heiko-introduction/heiko-winter/heiko-notebook-winter"
+        },
+        {
+          "text": "Die Hecke auch. Ich schreibe nur kurz dazu: am Wochenende. Sie hatten ja nicht widersprochen. Dann vergessen wir beide nichts, das ist doch für Sie auch … also, gut.",
+          "english": "The hedge too. I will just add: at the weekend. You did not object, after all. Then neither of us forgets anything; that makes it easier for you too … well, good.",
+          "locator": "neighbor-story.js heiko-introduction/heiko-overhang/heiko-notebook-hedge"
+        },
+        {
+          "text": "So, Hartmut vorgestellt. Noch ein Haken. Ich muss nur … ja, jetzt ist die Liste durch. Willkommen in der Nachbarschaft. Den Block stecke ich weg. Sie wissen ja jetzt Bescheid.",
+          "english": "There, Hartmut introduced. Another tick. I just need to … yes, that is the list finished now. Welcome to the neighborhood. I will put the notepad away. You know what is what now.",
+          "locator": "neighbor-story.js heiko-introduction/theodore-play-path/heiko-notebook-close"
         }
       ],
       "status": "fixed-profile-selected",

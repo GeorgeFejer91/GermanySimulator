@@ -1,5 +1,24 @@
 # Thorsten-Voice clips
 
+## GS Merz supplied recordings — 20 October 2026
+
+The user explicitly supplied six MP3s from the saved `GS Merz` profile
+`cb7f3cee85f648c186355329316c6b3b`. Five extend his owner-locked speech pool;
+the sixth replaces `merz-gruene-linke-spinner.mp3` while retaining its stable ID.
+These synthetic game performances retain the existing user-selected reference
+and OmniVoice noncommercial, Boson and Meta tokenizer restrictions. No new
+reference, historical recording, or redistribution license is asserted.
+`merz/manifest.json` pins the original/reference hashes, source take IDs,
+source and encoded hashes, renderer `omnivoice-rs`, inference revision
+`wide-rank-v2-prompt-preprocess`, durations and final-encoded German transcripts.
+The source metadata's English hint on two takes is preserved in the private
+annotations; their actual German words were independently checked with German ASR.
+The unchanged normalization tool preserves complete duration, sample rate and
+channels, targeting −18 LUFS ±0.3 LU and at most −1.5 dBTP. Six encoded assets
+total 697,224 bytes; measured levels span −18.28 to −18.15 LUFS and peak at
+−2.76 dBTP. The old Spinner hash in the historical table below is superseded;
+the manifest retains its previous-take receipt. Perceptual listening is NOT RUN.
+
 The six `thorsten-*.mp3` files are compact shipping copies of German angry,
 amused, disgusted, and sleepy recordings from **Thorsten-Voice Dataset 2021.06
 emotional** version 2.0, recorded by Thorsten Müller and optimized by Dominik

@@ -7,8 +7,8 @@ import {neighborVoiceCoverage} from '../tools/audit-neighbor-voice-coverage.mjs'
 function fixture(){
  const cast=JSON.parse(readFileSync(new URL('../For-AI/VOICE-CAST.json',import.meta.url),'utf8')),context={window:{}};
  vm.createContext(context);
- for(const file of ['For-AI/AUDIO-TEXT-LIBRARY.js','neighbor-story.js'])vm.runInContext(readFileSync(new URL('../'+file,import.meta.url),'utf8'),context);
- return {cast,catalog:context.window.GermanySimulatorAudioText,story:context.window.JwdStory};
+ for(const file of ['For-AI/AUDIO-TEXT-LIBRARY.js','neighbor-story.js','jwd-gardens.js'])vm.runInContext(readFileSync(new URL('../'+file,import.meta.url),'utf8'),context);
+ return {cast,catalog:context.window.GermanySimulatorAudioText,story:context.window.JwdStory,gardens:context.window.JwdGardens};
 }
 function productionFunction(name){
  const source=readFileSync(new URL('../game.js',import.meta.url),'utf8'),start=source.indexOf(`function ${name}(`),end=source.indexOf('\nfunction ',start+1);
@@ -16,11 +16,11 @@ function productionFunction(name){
 }
 test('all four active neighbor scripts bind exact owned bilingual sources and actual selected defaults',()=>{
  const {cast,catalog,story}=fixture(),report=neighborVoiceCoverage(cast,catalog,story);
- assert.equal(report.expected,110);assert.equal(report.invalid.length,0);
+ assert.equal(report.expected,114);assert.equal(report.invalid.length,0);
  assert.equal(new Set(report.rows.map(row=>row.voiceId)).size,4);
  assert.ok(report.storyLines.some(line=>line.voiceId==='jwd-theodore-maaslos'));
  assert.ok(report.rows.every(row=>row.voiceId!=='jwd-ede-einbruch'));
- assert.equal(report.resolved,110,'all authored active neighbor lines resolve to owned recordings');
+ assert.equal(report.resolved,114,'all authored active neighbor lines resolve to owned recordings');
  assert.equal(report.missing.length,0,'completed pack has no held caption-only lines');
  for(const row of report.missing){
   const name={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'}[row.role];
@@ -54,9 +54,10 @@ test('Heiko fuller spoken forms use the same exact German subtitles and owned re
 });
 
 test('every story-stop speech producer forwards its exact actor, German text, English subtitle and selected recording',()=>{
- const {cast,catalog,story}=fixture(),actors=Object.fromEntries([['parent','jwd-parent'],['watcher','jwd-watcher'],['swabian','jwd-swabian'],['child','jwd-theodore']].map(([jwdRole,id])=>[jwdRole,{jwdRole,id,name:cast.existingAssetProfiles.find(person=>person.gameCharacterId===id).fullName,x:0,y:0}]));
+ const {cast,catalog,story,gardens}=fixture(),actors=Object.fromEntries([['parent','jwd-parent'],['watcher','jwd-watcher'],['swabian','jwd-swabian'],['child','jwd-theodore']].map(([jwdRole,id])=>[jwdRole,{jwdRole,id,name:cast.existingAssetProfiles.find(person=>person.gameCharacterId===id).fullName,x:0,y:0}]));
  const calls=[],queued=[],h={state:{dialogue:false,voiceOn:true},jwd:{child:actors.child},player:{x:0,y:0},dist:()=>0,atNeighborStandingSpot:()=>true,jwdGesture(){},clearInput(){},updateHud(){},advanceJwdTour(){assert.fail('a queued line must not advance its stop')},speechCatalog:catalog,STIMULUS_PRIORITY:{CRITICAL:5},queueStimulus:item=>queued.push(item),showWorldBark(){assert.fail('voice is enabled')},openDialogue(speaker,lines,icon,done,voiceId,english){calls.push({speaker,lines,voiceId,english,actor:h.state.characterSpeaker});h.state.dialogueData={};h.speak(lines[0],{candidateVoiceId:voiceId,subtitle:english[0]})}};
- vm.createContext(h);vm.runInContext(['jwdVoice','speakJwdTourLine','speak'].map(productionFunction).join('\n'),h);
+ h.props=gardens.props;
+ vm.createContext(h);vm.runInContext(['jwdVoice','beginSchwabingenBird','speakJwdTourLine','speak'].map(productionFunction).join('\n'),h);
  let count=0;
  for(const [role,scripts]of Object.entries(story.tours))for(const script of scripts)for(const [stop,record]of script.stops.entries())for(const [lineIndex,line]of record.lines.entries()){
   const actor=line.speaker==='child'?actors.child:actors[role],tour={id:++count,phase:'ready',actor:actors[role],script,stop,line:lineIndex};h.jwd.tour=tour;h.state.dialogue=false;
@@ -66,6 +67,9 @@ test('every story-stop speech producer forwards its exact actor, German text, En
   assert.deepEqual(Array.from(call.lines),[line.de]);assert.deepEqual(Array.from(call.english),[line.en]);
   assert.equal(item.actor,null,'neighbor ownership stays on the dedicated character-speaker bridge');assert.equal(item.candidateVoiceId,voiceId);assert.equal(item.text,line.de);assert.equal(item.subtitle,line.en);
   assert.equal(item.recording,catalog.candidateClip(voiceId,line.de));assert.equal(tour.phase,'dialogue');
+  assert.equal(h.state.dialogueData.jwdCueId,line.id);
+  if(record.lookAt){assert.equal(h.state.dialogueData.jwdCueTarget.x,record.lookAt.x);assert.equal(h.state.dialogueData.jwdCueTarget.y,record.lookAt.y)}
+  if(['schwabingen-hedge-season','schwabingen-hedge-release','schwabingen-bird-listen'].includes(line.id))assert.equal(h.state.dialogueData.jwdCueTarget.height,.76);
  }
  assert.ok(count>40,'all authored adult and child stop lines use the real producer');
 });

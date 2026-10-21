@@ -2,6 +2,19 @@
 
 ## Active ambient-character animation goal — 2026-10-20
 
+Release integration closeout: the five ambient checkpoints, through Heike96378cb,
+are merged with published2c48edd in clean ambient-city-release. Combined Node
+2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and
+31-page build pass. Native Heike caption encounters pass desktop and both Android
+emulations; Gisela's owned recorded Q24/mouth/portrait path passes desktop. Built
+startup passes desktop and Android portrait. Independent Physics and Camera scoped
+release reviews pass on260 frozen files; their broad-world, natural, listening and
+physical-device exclusions remain open. No private Heike audio is admitted. Source
+runtime/assets remain unchanged after those checks; only this progress closeout
+changes. Publication proceeds under the standing policy. The42-character goal
+remains active with37 scoped standing-only identities.
+
+
 Owner: Codex chat `01a159fb-e568-79f3-967b-f4749d5266ef`, isolated worktree
 `C:/Users/cogpsy-vrlab/.codex/worktrees/ambient-city-animation/GermanySimulator`,
 starting from published `4362d88`. George explicitly requested complete walking,

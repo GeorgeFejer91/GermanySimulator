@@ -16,9 +16,11 @@ This folder owns the JWD neighbor level's character context.
   for neighborhood topics, separate from each character's speaking style.
 - [Speech authority](../../../For-AI/AUDIO-TEXT-LIBRARY.md): exact text,
   subtitles and speaker ownership when implementing or recording dialogue.
+- [Schwabingen dialogue props](../../../docs/engineering/SCHWABINGEN-PROPS.md):
+  authored cue IDs, held products, leaf and blackbird/nest ownership and acceptance.
 
-The existing root `neighbor-story.js`, `game.js`, `jwd-gardens.js` and
-`neighbor-sprites.js` implement this level within the city runtime. Character
+The existing root `neighbor-story.js`, `game.js`, `jwd-gardens.js`,
+`neighbor-sprites.js` and `schwabingen-props.js` implement this level within the city runtime. Character
 profiles guide authoring; saving a sample here does not install a runtime line
 or replace an existing recording.
 

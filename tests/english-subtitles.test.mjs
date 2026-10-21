@@ -26,10 +26,10 @@ const crowdDirectory=join(root,'assets/voices/candidate-dialogue'),crowdCount=re
 const policeDirectory=join(root,'assets/voices/police-dialogue'),policeCount=existsSync(policeDirectory)?readdirSync(policeDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(policeDirectory,file),'utf8')).clips.length,0):0;
 const quizManifestPath=join(root,'assets/voices/quiz-segments/quiz-german9-manifest.json'),quizCount=existsSync(quizManifestPath)?JSON.parse(readFileSync(quizManifestPath,'utf8')).clips.length:0;
 // Two retired phone-button replies remain archived; Rüdiger's second fever line is now recorded.
-assert.equal(Object.keys(library.clips).length,115+knickCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
+assert.equal(Object.keys(library.clips).length,120+knickCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,100+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded coverage follows approved manifests while retired takes stay excluded");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,100+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded coverage follows approved manifests while retired takes stay excluded");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -147,8 +147,13 @@ assert.equal(captionBox.hidden,false);assert.equal(captionBox.lang,'de');assert.
 captions.state.subtitlesOn=true;captions.startSubtitle(normal);assert.equal(captionBox.lang,'en');assert.equal(captionBox.textContent,normal.subtitle);
 captions.state.subtitlesOn=false;captions.startSubtitle(normal);assert.equal(captionBox.hidden,false);assert.equal(captionBox.textContent,normal.text);
 const recording=Object.keys(library.recordings).find(path=>library.recordings[path].cues?.length),recorded={recording,subtitleMode:'recorded',subtitleDuration:60,subtitleElapsed:()=>0};captions.activeStimulus=recorded;captions.startSubtitle(recorded);
-assert.equal(captionBox.textContent,library.recordings[recording].source,'German recording-only events use their exact catalogue transcript');
+assert.equal(captionBox.textContent,library.recordings[recording].sourceCues?.[0]?.[2]||library.recordings[recording].source,'German recording-only events use their exact catalogue transcript or timed source cues');
 captions.state.subtitlesOn=true;captions.startSubtitle(recorded);assert.equal(captionBox.textContent,library.recordings[recording].cues[0][2]);
+const merzMonologue=library.clips['merz-nie-gesagt'],merzRecorded={recording:merzMonologue.recording,text:merzMonologue.text,subtitleMode:'recorded',subtitleDuration:40.2,subtitleElapsed:()=>30.5};
+captions.activeStimulus=merzRecorded;captions.state.subtitlesOn=false;captions.startSubtitle(merzRecorded);
+assert.equal(captionBox.textContent,merzMonologue.sourceCues[6][2],'German monologue captions follow the admitted audio clock');
+captions.state.subtitlesOn=true;captions.startSubtitle(merzRecorded);
+assert.equal(captionBox.textContent,merzMonologue.cues[6][2],'language changes keep the same monologue clock');
 const audioOnly={...normal,hideCaption:true};captions.activeStimulus=audioOnly;captions.startSubtitle(audioOnly);assert.equal(captionBox.hidden,true,'explicit audio-only law quotations retain their exemption');
 let silentCompletion=null;
 Object.assign(captions,{speechCatalog:{productionVoices:{}},stimulusGeneration:1,performance:{now:()=>0},stimulusEligible:()=>true,setTimeout:callback=>{silentCompletion=callback;return 1},finishStimulus:()=>captions.clearSubtitle()});

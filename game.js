@@ -2172,8 +2172,8 @@ const missions=[
 const rules=speechCatalog.rules;
 const RULE_ROTATION_SECONDS=14;
 const npcLines=["Also das ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber wirklich nicht.","Ich möchte mich nicht beschweren, aber ich beschwere mich.","Dafür gibt es bestimmt ein Formular.","Früher war hier weniger Vorgang.","Sie stehen minimal im Weg.","Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.","Dafür bin ich nicht zuständig.","Ordnung muss schon sein.","Haben Sie dafür einen Termin?"];
-const merzLines=Object.freeze(["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.","Links ist vorbei.","Es gibt keine linke Mehrheit und keine linke Politik mehr in Deutschland.","… aber nicht für irgendwelche Grünen und linken Spinner auf dieser Welt.","Die sitzen beim Arzt und lassen sich die Zähne neu machen, und die deutschen Bürger nebendran kriegen keine Termine.","Fragen Sie mal Ihre Töchter, was ich damit gemeint haben könnte.","Ich habe gar nichts zurückzunehmen.","Ich unterstreiche es noch einmal: Wir müssen daran etwas ändern.","… aber wir haben natürlich immer im Stadtbild noch dieses Problem …","Die perfideste Form der Ausländerfeindlichkeit ist Antisemitismus."]);
-const MERZ_RECORDINGS=Object.freeze(Object.fromEntries(["merz-rotes-rathaus","merz-grossvater","merz-links-vorbei","merz-keine-linke-politik","merz-gruene-linke-spinner","merz-zahnarzt","merz-fragen-toechter","merz-nichts-zurueckzunehmen","merz-unterstreiche","merz-stadtbild","merz-antisemitismus"].map(id=>{const clip=speechClip(id);return[clip.text,clip.recording]})));
+const merzLines=Object.freeze(["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.","Links ist vorbei.","Es gibt keine linke Mehrheit und keine linke Politik mehr in Deutschland.","… aber nicht für irgendwelche Grünen und linken Spinner auf dieser Welt.","Die sitzen beim Arzt und lassen sich die Zähne neu machen, und die deutschen Bürger nebendran kriegen keine Termine.","Fragen Sie mal Ihre Töchter, was ich damit gemeint haben könnte.","Ich habe gar nichts zurückzunehmen.","Ich unterstreiche es noch einmal: Wir müssen daran etwas ändern.","… aber wir haben natürlich immer im Stadtbild noch dieses Problem …","Die perfideste Form der Ausländerfeindlichkeit ist Antisemitismus.","Ich habe nicht die Absicht, der Liebling der Nation zu werden. Ich habe nie gesagt, dass wir alle mehr arbeiten müssen, sondern dass wir insgesamt im Land mehr Leistung erbringen müssen. Das Wort faul, das Wort Lifestyle kommt nicht von mir. Das Wort Brandmauer hat nie zu unserem Sprachgebrauch gehört. Das ist uns immer von außen aufgenötigt worden. Ich brauche mich nicht von einem Begriff zu distanzieren, den ich selber nicht eingebracht habe. Ich habe dieses Wort Brandmauer nie benutzt, jedenfalls in den letzten Jahren nicht, weil ich es auch für ein falsches Bild halte. Um es noch einmal klarzustellen, und ich habe es nie anders gesagt: Die Beschlusslage der CDU gilt. Herr Kollege, das Wort ‚bändigen‘ habe ich zu keinem Zeitpunkt verwendet. Man soll nie ‚nie‘ sagen.","Mit mir wird es eine Brandmauer zur AfD geben. Das Wort Brandmauer hat nie zu unserem Sprachgebrauch gehört. Das ist uns immer von außen aufgenötigt worden.","Lifestyle und Vier-Tage-Woche. Alles schön, kann man alles machen. Aber wenn wir unseren Wohlstand erhalten wollen, dann müssen wir jetzt alle mal zusammen ins Rad packen.","Wir! sind die Brandmauer!","Wir nähern uns auch nicht der AfD an, an keiner Stelle. Und deswegen hält die ‚Brandmauer‘ gerade an dieser Stelle."]);
+const MERZ_RECORDINGS=Object.freeze(Object.fromEntries(["merz-rotes-rathaus","merz-grossvater","merz-links-vorbei","merz-keine-linke-politik","merz-gruene-linke-spinner","merz-zahnarzt","merz-fragen-toechter","merz-nichts-zurueckzunehmen","merz-unterstreiche","merz-stadtbild","merz-antisemitismus","merz-nie-gesagt","merz-brandmauer-sprachgebrauch","merz-lifestyle-vier-tage","merz-wir-brandmauer","merz-brandmauer-haelt"].map(id=>{const clip=speechClip(id);return[clip.text,clip.recording]})));
 const MERKEL_AUDIO_LINE=speechClip("merkel-wir-schaffen-das").text;
 const MERKEL_NEULAND_LINE=speechClip("merkel-neuland").text;
 const MERKEL_BEHIND_LINE="Sie stehen hinter mir.";
@@ -2374,11 +2374,14 @@ function neighborDialogueTicket(dialogue,line){
  if(!ticket){ticket={id:++jwd.dialogueTicketSequence,actorId:actor.id,voiceId:dialogue.voiceId,owner:dialogue,lineIndex:dialogue.i,status:'issued'};jwd.dialogueTickets.set(key,ticket)}
  return ticket;
 }
+function nextJwdNeighbor(candidates=npcs){
+ return candidates.filter(n=>jwdGardens.stations[n.id]&&!jwd.met.has(n.id)).sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y))[0]||null;
+}
 function getNeighborStandingSpot(){
  if(!state.started||state.gameOver||state.modal||window.GermanyHUD?.paused||!jwd.allocated||state.mission<1)return null;
  const t=jwd.tour,stop=t?.script.stops[t.stop];
  const listening=t&&['ready','dialogue','child-arrive','settle'].includes(t.phase);
- const actor=t?(listening?(stop?.lines[t.line]?.speaker==='child'?jwd.child:t.actor):t.leader||t.actor):jwd.visited?npcs.find(n=>jwdGardens.stations[n.id]&&!jwd.met.has(n.id)):null;
+ const actor=t?(listening?(stop?.lines[t.line]?.speaker==='child'?jwd.child:t.actor):t.leader||t.actor):jwd.visited?nextJwdNeighbor():null;
  const home=buildings.find(b=>b.id==='jwd-home');
  if(!actor&&jwd.visited)return null;
  const anchor=actor||{x:home.doorX,y:home.doorY+32},radius=player.r;
@@ -2426,7 +2429,7 @@ function jwdPath(n,target){
  if(n.y>cross+35&&Math.abs(n.x-spine(n))>24){x=spine(n);route.push({x,y:n.y})}
  route.push({x,y:cross},{x:target.x,y:cross},{...target});return route;
 }
-function jwdGesture(n,gesture='listen',lookAt){n.jwdGesture=gesture;n.jwdGestureAge=0;n.jwdGestureDuration=1.6;n.jwdWorking=false;n.jwdMoving=0;if(lookAt)n.facing=Math.atan2(lookAt.x-n.x,lookAt.y-n.y)}
+function jwdGesture(n,gesture='listen',lookAt){n.jwdGesture=gesture;n.jwdGestureAge=0;n.jwdGestureDuration=1.6;n.jwdNotebookSpeaker=null;n.jwdWorking=false;n.jwdMoving=0;if(lookAt)n.facing=Math.atan2(lookAt.x-n.x,lookAt.y-n.y)}
 function startJwdTour(n,departure){
  const scripts=window.JwdStory.tours[n.jwdRole],introducing=!jwd.met.has(n.id);
  const script=introducing?scripts[0]:scripts.slice(1).find(script=>!jwd.completedTours.has(script.id));
@@ -2437,14 +2440,15 @@ function startJwdTour(n,departure){
  let resume=jwd.tourProgress.get(script.id)||0;
  // Recreate the doorway handoff before a child-led leg if Hartmut went home.
  if(script.stops[resume]?.leader==='child'&&!jwd.child)while(resume>0&&!script.stops[resume].summonChild)resume--;
- const t=jwd.tour={id:++jwd.tourSequence,actor:n,script,introducing,stop:resume-1,line:0,phase:'invite',age:0,departure};
- n.jwdTouring=true;n.jwdRoute=[];jwdGesture(n,'wave',player);
+ const opening=introducing&&resume===0&&n.jwdRole==='parent'?script.stops[0].lines[0]:null;
+ const t=jwd.tour={openingLineId:opening?.id,id:++jwd.tourSequence,actor:n,script,introducing,stop:resume-1,line:0,phase:'invite',age:0,departure};
+ n.jwdTouring=true;n.jwdRoute=[];jwdGesture(n,opening?'listen':'wave',player);
  state.quizApproach=null;state.quizApproachQuestion=null;state.quizTimer=Math.max(12,state.quizTimer||0);
  if(jwd.visitor&&jwd.visitor!==n)returnJwdNeighbor(jwd.visitor);
  jwd.visitor=null;jwd.exitPending=false;jwd.gardenCooldown=38;
  const swabian=n.jwdRole==='swabian',first=introducing?jwdCopy[n.jwdRole].de[0]:swabian?jwdCopy.swabianTour.de[0]:(n.jwdRole==='parent'?"Ach, Sie wieder. Schön. Ich wollte sowieso noch kurz … Wir haben das ja letztes Mal nicht ganz. Kommen Sie ruhig mit, dann haben Sie auch das gleich aus dem Kopf.":'Ach, Sie wieder! Sehr gut. Wir haben noch nicht alles besichtigt.'),en=introducing?jwdCopy[n.jwdRole].en[0]:swabian?jwdCopy.swabianTour.en[0]:(n.jwdRole==='parent'?"Oh, you again. Lovely. I was going to mention one more thing anyway … We did not quite finish it last time. Come along; then you will have that off your mind too.":'Ah, you again! Excellent. We have not inspected everything yet.');
  const follow=swabian?jwdCopy.swabianTour.de[1]:(n.jwdRole==='parent'?"Kommen Sie kurz mit, ich zeige Ihnen das lieber direkt. Dann müssen Sie nicht hinterher noch mal fragen. Ist ja netter, wenn wir das eben zusammen … also, hier lang.":'Kommen Sie mit. Ich zeige Ihnen das vor Ort. Bleiben Sie ruhig in meiner Nähe.'),followEn=swabian?jwdCopy.swabianTour.en[1]:(n.jwdRole==='parent'?"Come along briefly; better I show you directly. Then you will not have to ask again afterwards. It is friendlier if we just do this together … well, this way.":'Come along. I will show you on site. Stay close to me.');
- let conversation;clearInput();state.characterSpeaker=n;openDialogue(n.name,introducing?[follow]:[first,follow],'!',()=>{if(jwd.tour!==t||state.dialogueData!==conversation||t.phase!=='invite')return;advanceJwdTour(t)},jwdVoice(n),introducing?[followEn]:[en,followEn],false,true);conversation=state.dialogueData;conversation.jwdTourId=t.id;updateHud();
+ let conversation;clearInput();state.characterSpeaker=n;openDialogue(n.name,opening?[opening.de]:introducing?[follow]:[first,follow],'!',()=>{if(jwd.tour!==t||state.dialogueData!==conversation||t.phase!=='invite')return;advanceJwdTour(t)},jwdVoice(n),opening?[opening.en]:introducing?[followEn]:[en,followEn],false,true);conversation=state.dialogueData;conversation.jwdTourId=t.id;updateHud();
 }
 function advanceJwdTour(t){
  if(jwd.tour!==t)return;
@@ -2457,6 +2461,7 @@ function advanceJwdTour(t){
   toast(state.lang==='en'?`NEIGHBORHOOD TOUR COMPLETE · ${jwd.met.size}/3`:`NACHBARSCHAFTSRUNDGANG ERLEDIGT · ${jwd.met.size}/3`);updateHud();return;
  }
  const stop=t.script.stops[t.stop],leader=stop.leader==='child'?jwd.child:t.actor;
+ if(stop.lines[0]?.id===t.openingLineId)t.line=1;
  if(!leader){cancelJwdTour();return}
  if(leader===jwd.child){leader.jwdTouring=true;leader.jwdReturning=false;leader.jwdHomeDelay=null}
  t.phase='walk';t.leader=leader;leader.jwdGesture=null;leader.jwdRoute=jwdPath(leader,stop.point);leader.jwdProgress=null;
@@ -2471,23 +2476,55 @@ function summonJwdChild(t){
  t.actor.jwdRoute=[{x:home.doorX-23,y:t.actor.y}];t.actor.jwdProgress=null;
  n.jwdRoute=jwdPath(n,{x:home.doorX+21,y:home.doorY+68});n.jwdProgress=null;t.summoned=true;return true;
 }
+function beginSchwabingenBird(t,cue,target){
+ if(t.actor.jwdRole!=='swabian'||!['schwabingen-hedge-season','schwabingen-hedge-release','schwabingen-bird-listen'].includes(cue))return;
+ const n=t.actor;
+ if(n.jwdBirdScene?.attempt!==t.id)n.jwdBirdScene={attempt:t.id,age:0,target:{...target},patch:{x:870,y:4718,height:.014},approach:{x:850,y:4708},releaseAt:null,stain:0,cleanTime:0,phase:'visit'};
+ const scene=n.jwdBirdScene;
+ if(cue!=='schwabingen-hedge-season'&&scene.releaseAt===null)scene.releaseAt=Math.max(2.1,scene.age);
+}
+function finishJwdTourStop(t){
+ const scene=t.actor.jwdBirdScene;
+ if(scene?.attempt===t.id&&scene.releaseAt!==null&&scene.phase!=='done'){
+  t.phase='cleanup';t.actor.jwdGesture=null;t.actor.jwdMoving=0;t.actor.jwdRoute=jwdPath(t.actor,scene.approach);t.actor.jwdProgress=null;
+ }else advanceJwdTour(t);
+}
+function updateSchwabingenBird(t,dt){
+ const n=t.actor,scene=n.jwdBirdScene;
+ if(jwd.tour!==t||!scene||scene.attempt!==t.id||scene.phase==='done')return;
+ scene.age+=dt;
+ const leave=scene.releaseAt===null?-1:scene.age-scene.releaseAt;
+ if(leave>=1.9&&scene.phase==='visit')scene.stain=1;
+ if(t.phase!=='cleanup'||leave<4.4)return;
+ if(scene.phase==='visit'){
+  if(!walkJwdRoute(n,dt))return;
+  if(dist(n.x,n.y,scene.approach.x,scene.approach.y)>2)return;
+  jwdGesture(n,'present',scene.patch);n.jwdCleaning=true;scene.phase='clean';scene.cleanTime=0;
+  return;
+ }
+ scene.cleanTime+=dt;scene.stain=Math.max(0,1-scene.cleanTime/3.5);
+ if(scene.cleanTime>=3.5){scene.phase='done';n.jwdCleaning=false;n.jwdGesture=null;advanceJwdTour(t)}
+}
 function speakJwdTourLine(t){
  if(jwd.tour!==t||t.phase!=='ready'||state.dialogue)return;
  const stop=t.script.stops[t.stop],line=stop.lines[t.line],n=line?.speaker==='child'?jwd.child:t.actor;
  if(!line){advanceJwdTour(t);return}
  if(!n||dist(player.x,player.y,n.x,n.y)>108||!atNeighborStandingSpot())return;
- t.phase='dialogue';jwdGesture(n,line.speaker==='child'?'present':stop.gesture,stop.lookAt||player);if(n!==t.actor)jwdGesture(t.actor,'listen',n);
+ t.phase='dialogue';jwdGesture(n,line.gesture||(line.speaker==='child'?'present':stop.gesture),stop.lookAt||player);if(line.gesture==='notebook')n.jwdGestureDuration=Math.min(16,Math.max(3,line.de.length*.065));if(line.gesture==='notebook-write')n.jwdNotebookSpeaker=n.id;if(n!==t.actor){jwdGesture(t.actor,line.listenerGesture||'listen',n);if(line.listenerGesture==='notebook-write')t.actor.jwdNotebookSpeaker=n.id}
  let conversation;const lineIndex=t.line;clearInput();state.characterSpeaker=n;
  openDialogue(n.name,[line.de],'!',()=>{
   if(jwd.tour!==t||state.dialogueData!==conversation||t.phase!=='dialogue'||t.line!==lineIndex)return;
   t.line++;t.age=0;
   if(stop.summonChild&&!t.summoned){t.phase='child-arrive';summonJwdChild(t)}
-  else if(t.line<stop.lines.length){t.phase='ready';speakJwdTourLine(t)}else advanceJwdTour(t);
- },jwdVoice(n),[line.en],false,true);conversation=state.dialogueData;conversation.jwdTourId=t.id;updateHud();
+  else if(t.line<stop.lines.length){t.phase='ready';speakJwdTourLine(t)}else finishJwdTourStop(t);
+ },jwdVoice(n),[line.en],false,true);conversation=state.dialogueData;conversation.jwdTourId=t.id;conversation.jwdCueId=line.id;
+ const hedge=stop.lookAt&&props.find(p=>p.asset==='jwd-hedge'&&Math.abs(p.x-stop.lookAt.x)<=p.w/2&&Math.abs(p.y-stop.lookAt.y)<=p.d/2);
+ conversation.jwdCueTarget=stop.lookAt?{...stop.lookAt,height:hedge?hedge.h*.02:0}:null;
+ beginSchwabingenBird(t,line.id,conversation.jwdCueTarget);updateHud();
 }
 function cancelJwdTour(){
  const t=jwd.tour;if(!t)return;
- jwd.tour=null;jwd.tourSequence++;t.actor.jwdTouring=false;t.actor.jwdGesture=null;t.actor.jwdMoving=0;returnJwdNeighbor(t.actor);jwd.exitPending=false;jwd.gardenCooldown=38;
+ jwd.tour=null;jwd.tourSequence++;t.actor.jwdBirdScene=null;t.actor.jwdCleaning=false;t.actor.jwdTouring=false;t.actor.jwdGesture=null;t.actor.jwdMoving=0;returnJwdNeighbor(t.actor);jwd.exitPending=false;jwd.gardenCooldown=38;
  if(jwd.child){jwd.child.jwdTouring=false;jwd.child.jwdHomeDelay=0;jwd.child.jwdRoute=[]}
  if(state.dialogue&&state.dialogueData?.jwdTourId===t.id){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;stopSpeech();state.dialogue=false;state.modal=false;state.characterSpeaker=null;document.getElementById('dialogue').hidden=true}
  updateHud();
@@ -2495,6 +2532,7 @@ function cancelJwdTour(){
 function updateJwdTour(dt){
  const t=jwd.tour;if(!t)return;
  if(dist(player.x,player.y,t.actor.x,t.actor.y)>850){cancelJwdTour();return}
+ updateSchwabingenBird(t,dt);if(jwd.tour!==t||t.phase==='cleanup')return;
  const stop=t.script.stops[t.stop];if(!stop)return;
  t.age+=dt;
  if(t.phase==='child-arrive'){
@@ -2560,7 +2598,7 @@ function updateJwdNeighbors(dt,distance){
  jwd.gardenCooldown=Math.max(0,jwd.gardenCooldown-dt);
  if(!jwd.tour&&jwd.visited&&jwd.atHome&&!jwd.visitor&&distance<420&&(jwd.exitPending||jwd.gardenCooldown===0)){
   const available=residents.filter(n=>!window.JwdStory||window.JwdStory.tours[n.jwdRole].some(script=>!jwd.completedTours.has(script.id)));
-  const n=available.find(n=>!jwd.met.has(n.id))||available[jwd.complaint%available.length];
+  const n=nextJwdNeighbor(available)||available[jwd.complaint%available.length];
   if(n){jwd.visitor=n;n.jwdWorking=false;n.jwdRoute=[...jwdCrossRoute(n),{x:jwdGardens.gate.x,y:jwdGardens.crossY},jwdGardens.gate]}
  }
  for(const n of residents){
@@ -2612,7 +2650,7 @@ function updateJwd(dt){
  if(jwd.allocated&&distance<1200)setNeighborLevelActive(true);
  else if(jwd.met.size>=3&&!jwd.tour)setNeighborLevelActive(false);
  if(jwd.allocated&&state.mission>0&&!jwd.tour&&!state.dialogue&&(!jwd.visited||jwd.met.size<3)){
-  const spot=getNeighborStandingSpot();jwd.arrivalAge=atNeighborStandingSpot()?(jwd.arrivalAge||0)+dt:0;
+  const spot=getNeighborStandingSpot();if(jwd.arrivalActorId!==spot?.actorId){jwd.arrivalAge=0;jwd.arrivalActorId=spot?.actorId}jwd.arrivalAge=atNeighborStandingSpot()?(jwd.arrivalAge||0)+dt:0;
   if(jwd.arrivalAge>=.25){jwd.arrivalAge=0;if(spot.actorId==='jwd-home')visitJwdHome();else talkJwdNeighbor(npcs.find(n=>n.id===spot.actorId));return true}
  }
  updateJwdTour(dt);updateJwdChild(dt);
@@ -2629,7 +2667,7 @@ function getMissionWaypoint(){
  if(!state.started||state.modal||state.dialogue&&!state.dialogueData?.roaming||state.gameOver||window.GermanyHUD?.paused||window.BuergeramtLevel?.active||state.mission>=missions.length)return null;
  const mission=currentMission();
  if(mission.target==='jwd-tour'){const t=jwd.tour,n=t.leader||t.actor;return{id:n.id,x:n.x,y:n.y,guide:true}}
- if(mission.target==="jwd-neighbors"){const n=npcs.find(n=>jwdGardens.stations[n.id]&&!jwd.met.has(n.id));return n?{id:n.id,x:n.x,y:n.y}:null}
+ if(mission.target==="jwd-neighbors"){const n=nextJwdNeighbor();return n?{id:n.id,x:n.x,y:n.y}:null}
  if(mission.target==="stadtbild"){
   const remaining=normObjects.filter(o=>!o.fixed);
   if(remaining.length){const next=remaining.reduce((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)<=Math.hypot(b.x-player.x,b.y-player.y)?a:b);return{id:"stadtbild-"+next.type,x:next.x,y:next.y}}
@@ -2650,7 +2688,7 @@ function getNeighborDialogue(){
  const item=activeStimulus,owned=!!item&&item.cueToken===state.dialogueVoiceToken&&item.family==="dialogue",paused=document.hidden||!!window.GermanyHUD?.paused||(owned&&item.subtitleMode==="recorded"?audio?.state!=="running":owned&&item.subtitleMode==="synthetic"?!!speechSynthesis.paused:false),speaking=!!(state.voiceOn&&owned&&item.speechStarted&&item.subtitleMode!=="silent");
  const clock=owned?Math.max(0,item.subtitleElapsed?.()||0):0;if(!paused)state.neighborSpeechTime=clock;
  const mediaTime=paused?state.neighborSpeechTime||0:clock,mouthOpen=item?.clip?.mouthEnergy==null?undefined:recordedMouthOpening(item.clip,mediaTime);
- return{id:state.characterSpeaker.id,active:true,speaking,line:state.dialogueData.lines[state.dialogueData.i]||"",lineIndex:state.dialogueData.i,mediaTime,mediaDuration:owned?item.subtitleDuration||0:0,cueToken:state.dialogueVoiceToken,paused:!!paused,mouthOpen:speaking?mouthOpen:0};
+ return{id:state.characterSpeaker.id,active:true,speaking,line:state.dialogueData.lines[state.dialogueData.i]||"",lineIndex:state.dialogueData.i,cueId:state.dialogueData.jwdCueId||null,cueTarget:state.dialogueData.jwdCueTarget||null,captionTime:state.dialogueData.lineAge||0,mediaTime,mediaDuration:owned?item.subtitleDuration||0:0,cueToken:state.dialogueVoiceToken,paused:!!paused,lineComplete:!!state.dialogueData.lineComplete,awaitingSpeech:!!(state.voiceOn&&!state.dialogueData.captionFallback&&!state.dialogueData.lineComplete&&!speaking),mouthOpen:speaking?mouthOpen:0};
 }
 window.Germany3DBridge={setStreetMotionObserver:observer=>{streetMotionObserver=observer},getNeighborStandingSpot,getNeighborDialogue,getStreetSpeech,getQuizActor:()=>state.modal&&state.quizQuestion&&!document.getElementById("quiz-modal").hidden?state.quizNpc:null,getInput:()=>keys,jwdGardens,jwdNeighborhood,getMissionWaypoint,playFaxTransition:()=>playSynthFaxFeed(),getHUDState:()=>({started:state.started,busy:state.modal||state.gameOver,paused:!!window.GermanyHUD?.paused,missionKey:jwd.tour?"jwd-tour-"+jwd.tour.id:state.dialogue&&state.characterSpeaker?.jwdRole&&npcs.includes(state.characterSpeaker)&&state.dialogueData?.speaker===state.characterSpeaker.name&&state.dialogueData.voiceId&&state.dialogueData.voiceId===jwdVoice(state.characterSpeaker)?"jwd-tour-dialogue":getNeighborStandingSpot()?"jwd-tour-halo":null,lang:state.lang,energy:Math.round(player.energy),wanted:state.wanted}),clearInput,get preparingStart(){return !state.started&&(pendingNeighborEntry||!document.getElementById("intro").classList.contains("hidden"))},queueAssetLoad,prepareNearbyAssets:prepareNearbyNpcAssets,get assetLoadStatus(){return assetLoader.inspect()},refreshStartup,get startupAssetsReady(){return startupNpcAssetsReady()},get characterAssetStatus(){return {required:[...startupNpcKinds],settled:[...npcAssetLoads].filter(([,e])=>e.settled).map(([k])=>k),failed:[...npcAssetLoads].filter(([,e])=>e.failed).map(([k])=>k)}},WORLD,player,roads,vehicleApproaches,vehicleElevation,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,stations,stationElevation,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,kiesingerMemorial,goerlitzerPark,wirtschaftswunderSite,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,VEHICLE_RENDER_SCALE,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows,frameWidth,frameHeight,pivot}])=>[key,{cols,rows,frameWidth,frameHeight,pivot}]))};
 const forms={
@@ -2930,7 +2968,7 @@ function setSubtitle(text){const box=document.getElementById("english-subtitle")
 function startSubtitle(item,elapsed=0){
  if(!item||activeStimulus!==item&&textOnlyBark!==item)return;
  clearSubtitle();if(item.hideCaption)return;
- const recording=audioTextLibrary.recordings?.[item.recording],originalCues=state.subtitlesOn&&item.subtitleMode==="recorded"?(item.cues||recording?.cues):null,full=state.subtitlesOn?(originalCues?.[0]?.[2]||englishSubtitle(item)):(item.text||recording?.source||""),layout=window.GermanySubtitleLayout,speaker=item.captionSpeaker||"";
+ const recording=audioTextLibrary.recordings?.[item.recording],originalCues=item.subtitleMode==="recorded"?(state.subtitlesOn?(item.cues||recording?.cues):(item.sourceCues||recording?.sourceCues)):null,full=state.subtitlesOn?(originalCues?.[0]?.[2]||englishSubtitle(item)):(item.text||recording?.source||""),layout=window.GermanySubtitleLayout,speaker=item.captionSpeaker||"";
  document.getElementById("english-subtitle").lang=state.subtitlesOn?"en":"de";
  setSubtitle(full); // The visible box supplies Pretext with its real width and two-line height.
  if(originalCues?.length||item.subtitleDuration){
@@ -3028,8 +3066,8 @@ function voiceHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.char
 function prepareRecording(url){const cached=recordingPromises.get(url);if(cached){recordingPromises.delete(url);recordingPromises.set(url,cached);return cached}const clipHash=speechCatalog.recordings?.[url]?.sha256,[path,fragment]=url.split("#"),requestUrl=/^[a-f0-9]{64}$/.test(clipHash||"")?path+(path.includes("?")?"&":"?")+"voice="+clipHash+(fragment?"#"+fragment:""):url,a=ensureAudio(),promise=queueAssetLoad(({signal}={})=>fetch(requestUrl,{signal}).then(r=>{if(!r.ok)throw new Error("Recorded voice unavailable: "+url);return r.arrayBuffer()}).then(data=>a.decodeAudioData(data)),{foreground:true}).then(buffer=>{promise.decodedBytes=buffer.length*buffer.numberOfChannels*4;let bytes=0;for(const p of recordingPromises.values())bytes+=p.decodedBytes||0;for(const [key,p] of recordingPromises){if(bytes<=16*1024*1024)break;if(p.decodedBytes){bytes-=p.decodedBytes;recordingPromises.delete(key)}}return buffer}).catch(error=>{recordingPromises.delete(url);throw error});recordingPromises.set(url,promise);return promise}
 const TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO[0];
 const TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO.slice(1);
-const TRAIN_IDLE_SECONDS=5,TRAIN_FADE_DISTANCE=320;
-let trainAnnouncementNextAt=0,trainIdleSeconds=0,trainIdleStation=null,trainIdleX=player.x,trainIdleY=player.y;
+const TRAIN_IDLE_SECONDS=5,TRAIN_ENTRY_SECONDS=1,TRAIN_FADE_DISTANCE=320;
+let trainAnnouncementNextAt=0,trainStationSeconds=0,trainAudioStation=null,trainIdleSeconds=0,trainIdleStation=null,trainIdleX=player.x,trainIdleY=player.y;
 function finishStimulus(item,generation){if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.actor)item.actorSpeechStatus=item.subtitleMode==="recorded"&&item.speechStarted?"finished":"cancelled";recordedSpeechSource=null;recordedSpeechGain=null;clearTimeout(item.loadingTimer);item.distanceGain?.disconnect();clearSubtitle();if(item.done)item.done();if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.ambient)nextAmbientAt=performance.now()+AUDIO_MIX.AMBIENT_GAP_MS;activeStimulus=null;clearTimeout(stimulusTimer);stimulusTimer=setTimeout(()=>{for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);if(stimulusQueue.length)pumpStimuli();else setAudioText()},AUDIO_MIX.REQUIRED_GAP_MS)}
 function playCaptionStimulus(item,generation){const duration=Math.max(3200,Math.min(16000,item.text.length*42)),started=performance.now();item.subtitleMode="silent";item.subtitleDuration=duration/1000;item.subtitleElapsed=()=>(performance.now()-started)/1000;item.start?.(item);startSubtitle(item);stimulusTimer=setTimeout(()=>finishStimulus(item,generation),duration)}
 function officialComputerVoice(voices,preferredNames){
@@ -3082,19 +3120,21 @@ let railLawIndex=0,railHoldTimer=0,railLawNextAt=0,playerHoldingLast=false;
 function platformDistance(){let nearest=Infinity;for(const s of stations){const dx=Math.max(s.x-player.x,0,player.x-s.x-s.w),dy=Math.max(s.y-player.y,0,player.y-s.y-s.h);nearest=Math.min(nearest,Math.hypot(dx,dy))}return nearest}
 function playerOnRailTrack(){return railLoops.some(loop=>nearestRailLocation(loop,player.x,player.y).distance<58)}
 function stationAtPlayer(){return stations.find(s=>player.x-player.r>=s.x&&player.x+player.r<=s.x+s.w&&player.y-player.r>=s.y&&player.y+player.r<=s.y+s.h)||null}
+function stationAudioAtPlayer(){return stations.find(s=>{const side=s.side==="west"||s.side==="east",area=side?{x:s.x-105,y:s.y,w:s.w+210,h:s.h}:{x:s.x,y:Math.min(s.y,s.accessY),w:s.w,h:s.h+s.accessH};return signedRectDistance(player.x,player.y,area)<=48})||null}
 function trainAudioContextAllowed(){return state.started&&!state.modal&&!state.dialogue&&!state.gameOver&&state.voiceOn&&!document.hidden&&!window.GermanyHUD?.paused&&!window.Germany3D?.levelTransition?.active&&!window.BuergeramtLevel?.active&&!neighborActivityActive()}
 function trainAnnouncementVolume(item){const s=item.origin;if(!s)return 1;const dx=Math.max(s.x-player.x,0,player.x-s.x-s.w),dy=Math.max(s.y-player.y,0,player.y-s.y-s.h),distance=clamp(Math.hypot(dx,dy)/TRAIN_FADE_DISTANCE,0,1);return 1-distance*distance*(3-2*distance)}
 function requestTrainAnnouncement(distance,recording="",priority=STIMULUS_PRIORITY.AMBIENT,zone="platform"){
  if(!trainAudioContextAllowed()||performance.now()<trainAnnouncementNextAt)return false;
- const station=stationAtPlayer(),track=zone==="track",eligible=()=>trainAudioContextAllowed()&&(track?playerOnRailTrack():stationAtPlayer()===station&&trainIdleStation===station&&trainIdleSeconds>=TRAIN_IDLE_SECONDS);
- if(track?!playerOnRailTrack():!station||!eligible())return false;
+ const station=stationAudioAtPlayer(),track=zone==="track",eligible=()=>trainAudioContextAllowed()&&(track?playerOnRailTrack():stationAudioAtPlayer()===station&&trainAudioStation===station&&trainStationSeconds>=TRAIN_ENTRY_SECONDS);
+ if(track?!playerOnRailTrack():!station||trainAudioStation!==station||trainStationSeconds<TRAIN_ENTRY_SECONDS)return false;
  if(hasStimulusFamily("train"))return false;
  const pool=track?[TRAIN_PLAYER_OBSTRUCTION_AUDIO]:TRAIN_PLATFORM_AUDIO,selected=track?TRAIN_PLAYER_OBSTRUCTION_AUDIO:recording&&pool.includes(recording)?recording:nextVariant("train:platform",pool),origin=track?{x:player.x,y:player.y,w:0,h:0}:station;
  return queueStimulus({family:"train",zone,priority,ambient:priority===STIMULUS_PRIORITY.AMBIENT,isEligible:eligible,origin,recording:selected,start:()=>{trainIdleSeconds=0},done:()=>{trainIdleSeconds=0;trainAnnouncementNextAt=performance.now()+(AUDIO_MIX.TRAIN_GAP_MS??6500)}})
 }
 function updateTrainAnnouncement(dt=0){
- const allowed=trainAudioContextAllowed(),station=allowed?stationAtPlayer():null,moved=Math.hypot(player.x-trainIdleX,player.y-trainIdleY)>.01,input=keys.ArrowRight||keys.KeyD||keys.ArrowLeft||keys.KeyA||keys.ArrowUp||keys.KeyW||keys.ArrowDown||keys.KeyS;
+ const allowed=trainAudioContextAllowed(),station=allowed?stationAtPlayer():null,audioStation=allowed?stationAudioAtPlayer():null,moved=Math.hypot(player.x-trainIdleX,player.y-trainIdleY)>.01,input=keys.ArrowRight||keys.KeyD||keys.ArrowLeft||keys.KeyA||keys.ArrowUp||keys.KeyW||keys.ArrowDown||keys.KeyS;
  trainIdleSeconds=station&&station===trainIdleStation&&!moved&&!input?trainIdleSeconds+dt:0;trainIdleStation=station;trainIdleX=player.x;trainIdleY=player.y;
+ trainStationSeconds=audioStation?Math.min(TRAIN_ENTRY_SECONDS,(audioStation===trainAudioStation?trainStationSeconds:0)+dt):0;trainAudioStation=audioStation;
  if(neighborActivityActive()){state.quizApproach=null;state.quizApproachQuestion=null;state.quizApproachQuestion=null;state.quizTimer=Math.max(12,state.quizTimer||0);if(activeStimulus&&activeStimulus.family!=="dialogue")stopSpeech();if(textOnlyBark&&textOnlyBark.family!=="dialogue")hideWorldBark()}
  if(activeStimulus?.family==="train"){
   const item=activeStimulus,volume=trainAnnouncementVolume(item);
@@ -3104,7 +3144,7 @@ function updateTrainAnnouncement(dt=0){
  for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);
  if(!allowed||performance.now()<trainAnnouncementNextAt)return;
  if(playerOnRailTrack()){requestTrainAnnouncement(0,"",STIMULUS_PRIORITY.NEARBY,"track");return}
- if(station&&trainIdleSeconds>=TRAIN_IDLE_SECONDS)requestTrainAnnouncement(0,"",STIMULUS_PRIORITY.NEARBY,"platform");
+ if(audioStation&&trainStationSeconds>=TRAIN_ENTRY_SECONDS)requestTrainAnnouncement(0,"",STIMULUS_PRIORITY.NEARBY,"platform");
 }
 function trafficForwardGap(car,targetX){const delta=car.dir>0?targetX-car.x:car.x-targetX;return delta>=0?delta:delta+TRAFFIC_LANE_LENGTH}
 const TRAFFIC_DRIVER_CLIPS=Object.freeze({berlin:["traffic-berlin-01","traffic-berlin-02"],germany:["traffic-germany-01","traffic-germany-02"]});
@@ -3598,7 +3638,7 @@ function speakDialogueLine(line,start){
  setDialogueVoiceBusy(state.voiceOn);
  if(speaker.startsWith('ANGELA MERKEL'))speakMerkelLine(line,options);else if(speaker.startsWith('FRIEDRICH MERZ'))speakMerzLine(line,options);else speak(line,{...options,masculine,voiceKey:speaker,candidateVoiceId:voiceId});
 }
-function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ"),memorial=d.portrait==="KG"||d.portrait==="GP",welcome=d.portrait==="DE",dialogue=document.getElementById("dialogue"),newLine=d.renderedLineIndex!==d.i;if(newLine){d.renderedLineIndex=d.i;d.lineAge=0;d.lineComplete=false;d.captionFallback=false}document.getElementById("dialogue-next").hidden=d.automatic;document.getElementById("dialogue-speak").hidden=d.automatic;dialogue.classList.toggle("memorial",memorial);dialogue.classList.toggle("welcome",welcome);if(newLine||!d.neighborTicket)dialogue.hidden=d.roaming||state.voiceOn&&!welcome&&!d.captionFallback;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=welcome?(state.lang==="en"?"NEXT":"WEITER"):d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER");document.getElementById("voice-state").textContent=state.voiceOn?(memorial?(d.portrait==="GP"?"KOSTENTAFEL · BAU + WACHSCHUTZ":"HISTORISCHER TEXT · DEUTSCH"):borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");if(memorial)dialogue.scrollTop=0;if(welcome)document.querySelector(".dialogue-copy").scrollTop=0;speakDialogueLine(line,()=>{if(!d.roaming)dialogue.hidden=false})}
+function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ"),memorial=d.portrait==="KG"||d.portrait==="GP",welcome=d.portrait==="DE",dialogue=document.getElementById("dialogue"),newLine=d.renderedLineIndex!==d.i;if(newLine){d.renderedLineIndex=d.i;d.lineAge=0;d.lineComplete=false;d.captionFallback=false}document.getElementById("dialogue-next").hidden=d.automatic;document.getElementById("dialogue-speak").hidden=d.automatic;dialogue.classList.toggle("automatic",!!d.automatic);dialogue.classList.toggle("memorial",memorial);dialogue.classList.toggle("welcome",welcome);if(newLine||!d.neighborTicket)dialogue.hidden=d.roaming||state.voiceOn&&!welcome&&!d.captionFallback;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=welcome?(state.lang==="en"?"NEXT":"WEITER"):d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER");document.getElementById("voice-state").textContent=state.voiceOn?(memorial?(d.portrait==="GP"?"KOSTENTAFEL · BAU + WACHSCHUTZ":"HISTORISCHER TEXT · DEUTSCH"):borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");if(memorial)dialogue.scrollTop=0;if(welcome)document.querySelector(".dialogue-copy").scrollTop=0;speakDialogueLine(line,()=>{if(!d.roaming)dialogue.hidden=false})}
 function nextDialogue(){if(!state.dialogue)return;if(state.dialogueData?.portrait==="DE")window.GermanyHUD?.stopWelcomeFax?.();if(state.dialogueVoiceBusy){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;stopSpeech();setDialogueVoiceBusy(false)}else if(textOnlyBark&&textOnlyBark.cueToken===state.dialogueVoiceToken){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;hideWorldBark()}const d=state.dialogueData;d.i++;if(d.i<d.lines.length){renderDialogue();return}document.getElementById("dialogue").hidden=true;state.dialogue=false;state.modal=false;if(state.characterSpeaker){requestCharacterReaction(state.characterSpeaker,"review");state.characterSpeaker=null}if(d.done)d.done()}document.getElementById("dialogue-next").onclick=nextDialogue;
 document.getElementById("dialogue-speak").onclick=()=>{if(state.dialogue&&!state.dialogueVoiceBusy)speakDialogueLine(state.dialogueData.lines[state.dialogueData.i])};
 function showForm(type){if(state.gameOver||missions[state.mission]?.form!==type)return;state.activeForm={type,mission:state.mission};const def=forms[type],en=formEnglish[type];state.modal=true;document.getElementById("form-modal").hidden=false;document.getElementById("form-code").textContent=def.code;document.getElementById("form-title").textContent=state.lang==="en"&&en?en[0]:def.title;document.getElementById("form-subtitle").textContent=state.lang==="en"&&en?en[1]+" Official field labels remain in German, naturally.":def.subtitle;document.getElementById("form-error").textContent="";const wrap=document.getElementById("form-fields");wrap.innerHTML="";for(const f of def.fields){if(f[0]==="check"){const lab=document.createElement("label");lab.className="check";const inp=document.createElement("input");inp.type="checkbox";inp.required=true;const span=document.createElement("span");span.textContent=f[1];lab.append(inp,span);wrap.append(lab);continue}const lab=document.createElement("label");lab.className="field";const title=document.createElement("span");title.textContent=f[1];lab.append(title);if(f[0]==="select"){const sel=document.createElement("select");sel.required=true;const empty=document.createElement("option");empty.value="";empty.textContent=state.lang==="en"?"PLEASE SELECT / BITTE AUSWÄHLEN":"BITTE AUSWÄHLEN";sel.append(empty);for(const o of f[2]){const op=document.createElement("option");op.value=o;op.textContent=o;sel.append(op)}lab.append(sel)}else{const inp=document.createElement("input");inp.required=true;inp.autocomplete="off";lab.append(inp)}wrap.append(lab)}document.getElementById("bureaucracy-form").dataset.type=type}
@@ -4651,7 +4691,7 @@ function refreshActiveSubtitle(){const caption=activeStimulus||textOnlyBark;if(c
 window.addEventListener("resize",refreshActiveSubtitle);
 window.addEventListener("caption-layout-change",refreshActiveSubtitle);
 document.getElementById("voice-toggle").onclick=()=>{state.voiceOn=!state.voiceOn;document.getElementById("voice-toggle").textContent=state.voiceOn?"VOICE ON":"VOICE OFF";if(!state.voiceOn){window.GermanyKnickSpeech?.cancelPreparation();window.BuergeramtLevel?.cancelNameAnnouncement?.();stopSpeech(true);state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;setDialogueVoiceBusy(false)}else if(window.GermanyKnickSpeech?.initialName)window.GermanyKnickSpeech.rememberName(window.GermanyKnickSpeech.initialName)};
- function keydown(e){if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active)return;if(e.code==="Escape"&&indoorVisit){stopSpeech();document.getElementById("dialogue").hidden=true;document.getElementById("form-modal").hidden=true;state.dialogue=false;leaveIndoorBuilding();return;}if(e.defaultPrevented||e.target?.closest?.("input,textarea,select,[contenteditable=\"true\"]"))return;if(state.gameOver)return;if(state.modal){if(window.Germany3D?.jobcenter?.active){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;}else if(state.dialogue&&e.code==="KeyE"&&!e.repeat)interact();return;}if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyS"&&!state.started&&!document.getElementById("intro").classList.contains("hidden")){startGame(true);return}if(e.code==="KeyE")interact();if(e.code==="KeyQ"||e.key==="§")useLawPower()}function keyup(e){keys[e.code]=false}function clearInput(){for(const code in keys)keys[code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);addEventListener("blur",clearInput);document.addEventListener("visibilitychange",()=>{last=performance.now();nextFrameAt=last;if(document.hidden){clearInput();trainIdleSeconds=0;trainIdleStation=null;if(activeStimulus?.family==="train")stopSpeech();stopPoliceChaseLoop()}else pumpAssetLoads()});
+ function keydown(e){if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active)return;if(e.code==="Escape"&&indoorVisit){stopSpeech();document.getElementById("dialogue").hidden=true;document.getElementById("form-modal").hidden=true;state.dialogue=false;leaveIndoorBuilding();return;}if(e.defaultPrevented||e.target?.closest?.("input,textarea,select,[contenteditable=\"true\"]"))return;if(state.gameOver)return;if(state.modal){if(window.Germany3D?.jobcenter?.active){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;}else if(state.dialogue&&e.code==="KeyE"&&!e.repeat)interact();return;}if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyS"&&!state.started&&!document.getElementById("intro").classList.contains("hidden")){startGame(true);return}if(e.code==="KeyE")interact();if(e.code==="KeyQ"||e.key==="§")useLawPower()}function keyup(e){keys[e.code]=false}function clearInput(){for(const code in keys)keys[code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);addEventListener("blur",clearInput);document.addEventListener("visibilitychange",()=>{last=performance.now();nextFrameAt=last;if(document.hidden){clearInput();trainStationSeconds=0;trainAudioStation=null;trainIdleSeconds=0;trainIdleStation=null;if(activeStimulus?.family==="train")stopSpeech();stopPoliceChaseLoop()}else pumpAssetLoads()});
 document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();keys[code]=true;if(code==="KeyE")interact();if(code==="KeyQ")useLawPower()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
 
 const appSurface=document.getElementById("app");

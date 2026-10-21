@@ -977,7 +977,9 @@ fixed-appearance binding be built and evaluated through a whole walking cycle.
 
 ## Miniature neighborhood residents
 
-Heiko, Inga, Frau Schwabingen and Theodore each use one packed 16×16 atlas.
+Inga, Frau Schwabingen and Hartmut each use one packed 16×16 atlas. Heiko uses
+a 16×20 atlas: its original 256 cells are preserved, followed by four 16-cell
+notebook clips (take out, read, write/check and put away).
 The first 128 cells contain four 32-sample directional walks; the remainder
 contains idle (8), talk (16), listen (8), greet (16), look (8), point (24),
 call (24), and role-specific work (24). The manifest owns the packed offsets.
@@ -985,12 +987,17 @@ Point/call/work use anticipation, an action arc and recovery; gait phase comes
 from accepted ground displacement. A blocked actor plants their feet. Walking
 retains priority during a roaming line instead of freezing the speaker.
 
-Talk is a source-fitted palette of closed plus five opening levels in three
-mouth shapes, selected from the owning speech cue. Each face has its own lip
-crease and attached corners. Registered front walk/gesture paint also supports
-a bounded connected-lip shader; side/back views and unregistered chore faces
-keep their painted mouth closed. This is directional animation, not a claimed
-smooth whole-body turn or complete profile lip-sync. Preserve coherent faces
+Talk samples the original closed resting face and opens its connected lips with
+the owning recording's media-clock energy. A square-root response makes quiet
+syllables visible while silence stays closed. Each face has its own lip
+crease and attached corners. Front, visible side, gesture and each character’s
+chore painting have their own source-pixel mouth registration; a rear view has
+no visible mouth. The shader's bounded opening protects the upper face and alpha.
+Notebook clips keep each source figure's connected head, collar, body and feet:
+matte cleanup precedes bounds, whole figures share standing height and head
+centroid registration, and the rest key uses the original idle painting.
+Do not splice an original head/legs onto independently centered torsos.
+This is directional painted animation, not phoneme-aligned facial capture. Preserve coherent faces
 and original alpha. Caption-only fallback does not pretend to be audible speech.
 Theodore has his own front/right/rear source with a mirrored left view, a shorter
 calibrated stride, and a
@@ -1018,3 +1025,16 @@ loop seam at desktop and mobile scale, plus actual shader/UV output and silent
 speech clocks before accepting a new bake.
 
 For expression repairs, retain the internal registration of the whole facial painting. The Inga repair replaces complete front/profile facial skin regions from coherent generated paint and preserves the original alpha, hair, body and back view. Do not translate individual eyes or lips into separate patches: this introduced visibly distorted eye/cheek/lip relationships in the rejected revision. Compare the complete face with its authoring source at native detail and the exact desktop/mobile cell before acceptance. tools/build-neighbor-sprites.py accepts a character selection through build(names=...) so a single resident repair preserves other atlas bytes and manifest entries.
+
+Heiko’s notebook source is `assets/sprite-sources/neighbors/heiko-notebook-keys.png`,
+with fixed left-hand notebook and right-hand pencil ownership. Six drawn take-out
+poses, four pencil/contact poses and explicit holds are packed into 16-cell clips;
+reading uses the existing continuous head field. Each selected notebook key has
+its own fitted lip crease carried through that field. These are deliberately drawn
+key poses, not a claim of 16 independently painted inbetweens.
+`tools/build-neighbor-notebook.py` appends them without changing the original
+256 cells; the ordinary neighbor builder invokes that extension for Heiko.
+The runtime uses actual recording time after native start, holds queued speech
+at reading, and releases lips/props through the existing dialogue owner. Explicit
+listener writing follows the current speaker's media clock without borrowing
+that speaker's lip ownership; pause holds both clocks.

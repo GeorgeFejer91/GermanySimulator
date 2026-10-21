@@ -12,6 +12,31 @@ playhead; the existing 80 ms inter-segment gaps stay closed. Queued, paused,
 cancelled and stale owners cannot acquire articulation. Source/clock checks do
 not establish perceived synchronization or supply missing animation profiles.
 
+Heiko’s notepad welcome adds four owned German/English pairs, appended as
+`heiko-story-37`–`40` without renumbering earlier clips. All four selected-profile
+recordings pass the existing final-MP3 word/identity/energy gates. The four active
+neighbors now have 114 exact owned bilingual sources and 114 recording defaults.
+Initial winter takes omitted a word and stayed private; a newly authored clearer
+sentence received its own fresh, exact take. No ASR rule was relaxed or old
+recording attached to changed words. Listening is NOT RUN.
+
+On 20 October 2026 the user supplied six `GS Merz` MP3s: five additional
+speeches and a replacement `merz-gruene-linke-spinner` take. Merz now owns
+16 exact German/English pairs. `assets/voices/merz/manifest.json` records their
+source filenames/hashes, selected-profile receipts, encoded German ASR and levels.
+The 40.2-second `merz-nie-gesagt` monologue has eight pause-aligned caption
+intervals, each independently transcribed from the normalized file. Recorded
+German captions now consume authored `sourceCues` when available, alongside the
+existing English `cues`, using the same admitted audio clock. Other recordings
+retain automatic pagination. These are user-supplied synthetic game performances,
+without a new historical-quote claim. The existing proximity/direct-interaction
+broker and fallback remain unchanged. The six files total 697,224 encoded bytes;
+the largest is 402,764 bytes and its 24 kHz stereo audio decodes to 15,436,800
+float bytes at the tested browser's 48 kHz context rate. It stays within the
+existing 16 MiB LRU cache budget. Files load individually at playback,
+with no startup preload, new polling, or desktop/mobile variant. Perceptual
+listening and physical Android validation are NOT RUN.
+
 Recorded speech fetches append the catalog's encoded SHA-256 as a `voice` query
 parameter, so replacing a recording at its existing path changes its HTTP cache
 identity after the updated catalog loads. The canonical path still owns the
@@ -19,7 +44,7 @@ promise cache, retry, playback and 16 MiB decoded-audio limit. Uncatalogued or
 unhashed files retain their existing request URL. This does not preload audio or
 claim that an absent recording exists.
 
-Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 36 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
+Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 40 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
 
 The guided neighborhood story in `neighbor-story.js` pairs every stop and travel
 line with its exact English caption and stable speaker. `VOICE-CAST.json` also
@@ -47,16 +72,16 @@ round/spread shapes remain phonetic estimates. A queued, caption-only or stale
 cue cannot make a neighbor talk. No recordings preload at city startup.
 
 Run `node tools/audit-neighbor-voice-coverage.mjs --check` for current neighbor
-recording coverage. It derives all 110 active cast-owned bilingual sources and
+recording coverage. It derives all 114 active cast-owned bilingual sources and
 checks the actual default resolver, selected take binding and every authored
 story/travel speaker. Archived Ede is excluded. Missing or held lines fail this
 coverage check even though their caption fallback remains playable. The curator
 separately verifies manifest receipts and file hashes; successful decoding alone
 does not establish recording coverage or perceptual quality.
 
-The completed pack contains all 110 authored active-neighbor recordings:
-Heiko 36, Inga 34, Frau Schwabingen 33 and Hartmut 7. Heiko's final two
-German source/subtitle pairs use “Ich sage es” and “ich habe”. Their final
+The completed pack contains all 114 authored active-neighbor recordings:
+Heiko 40, Inga 34, Frau Schwabingen 33 and Hartmut 7. The German source/subtitle
+pairs of existing Heiko clips 35/36 use “Ich sage es” and “ich habe”. Their final
 encoded whole-file readings pass the unchanged strict word comparison; old
 failed short forms remain private evidence. Human listening is NOT RUN.
 For the two specifically qualified Heiko encodings, runtime metadata retains the
@@ -184,7 +209,7 @@ For the first ring, the desktop sends `call-arm` when Frau Knick's existing sent
 
 Each phone start schedules a host-owned `police-cutoff(index, stopAtPhoneMs, stopAtUtcMs)` ahead of the shared cut-in deadline. Phone playback stops locally at the exact index/deadline, clears static and emits one duration-bearing done receipt; late callbacks cannot advance the scene twice. The host starts the next desk cue from mapped onset plus its authored budget, compensating learned desk startup delay. A failed cutoff send retries twice after 100 ms; after that the host waits for natural completion or a 60 s bound and does not claim interruption. Her first three turns request a police reply before completion; its actual start stops her current voice. The last retort and dismissal finish fully, returning to the street without A38. Missing start receipts release after 18 s and disconnect releases the pending turn immediately. Replay/exit cancel all timers, media and stale callbacks. These clocks describe browser events and do not guarantee sample-accurate acoustic onset.
 
-The train recordings use the station-idle, track-exception, distance-fade and neighbor-isolation contract in [GAMEPLAY: Systems](./GAMEPLAY.md#systems). Ordinary clips require five stationary seconds wholly inside one station. Only Buxtehude may start on actual track contact. Source-station distance gain feeds the shared foreground bus; leaving audible range or opening a conversation cancels playback. Exact recordings, text/cues and voice ownership remain unchanged.
+The train recordings use the station-entry, track-exception, distance-fade and neighbor-isolation contract in [GAMEPLAY: Systems](./GAMEPLAY.md#systems). Ordinary clips become eligible after one active simulation second anywhere in the full station/entrance area, including while walking. Only Buxtehude may start on actual track contact. Source-station distance gain feeds the shared foreground bus; leaving audible range or opening a conversation cancels playback. Exact recordings, text/cues and voice ownership remain unchanged.
 
 The four traffic-driver lines are original short reactions informed by [German road-rage vocabulary](https://www.reddit.com/r/German/comments/129uvu5/road_rage_vocab/) and [reported street confrontations](https://www.reddit.com/r/AskAGerman/comments/1f1lfs3/a_man_got_angry_at_us_for_crossing_the_street_at/). They are not quotations attributed to Reddit users. The car that first brakes for the player selects a Berlin-Denglisch or Deutschland-German clip; the immediate horn is a separate nonverbal effect. All four exact owned recordings now resolve through Dieter Hupfer's selected fixed profile. Germany01 uses the finite compound-timing proof in its gap manifest, preserving the original literal-false receipt and raw empty cues. A failed recording retains the selected voice's caption fallback. The traffic gap manifest accounts for all four generated takes; no unrelated browser voice substitutes for a selected fixed voice.
 

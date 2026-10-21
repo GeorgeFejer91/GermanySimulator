@@ -1,5 +1,10 @@
 # Germany Simulator credits
 
+Six additional user-supplied `GS Merz` synthetic takes were integrated on
+20 October 2026 (five new speeches and one replacement). The existing selected
+profile and model-license restrictions remain; source and encoded receipts are
+in `assets/voices/merz/manifest.json` and `assets/voices/LICENSES.md`.
+
 The historical, unselected fictional Frau Fink (now Frau Schwabingen), Prof. Heiko Maaslos and Inga Maaslos four-view
 authoring candidates were generated with OpenAI ImageGen on 13 October 2026.
 Their source hashes, generation receipts and pending visual/motion acceptance
@@ -505,6 +510,13 @@ The Kripo opening greeting uses a separate compact Piper/VITS name derivative, d
 
 ### Fictional neighborhood sprites
 
+Heiko’s twelve notebook action keys were generated with the built-in OpenAI
+image tool from his existing miniature painting. Whole connected figures are
+registered after matte cleanup; the original rest pose and all prior atlas cells
+are preserved during baking. The take/read/check/stow source,
+hashes and authoring brief are recorded in
+`assets/sprite-sources/neighbors/source-provenance.json`.
+
 Theodore Maaslos and the painted chore props are original generated game artwork.
 The guided neighborhood script is original fiction grounded in the official
 Berlin and federal sources listed in [the neighborhood source notes](docs/neighborhood-rules.md),
@@ -513,7 +525,7 @@ neighbor rights and nature protection from the residents' invented expectations.
 
 Original generated game artwork for Heiko Maaslos, Inga Maaslos and Frau Schwabingen, with source-pixel animation baked by tools/build-neighbor-sprites.py. These original fictional characters use the existing game sprite style. Only final generated direction paint and derived runtime atlases ship.
 
-Heiko Maaslos, Inga Maaslos and their child Hartmut Maaslos use separate selected saved voice profiles and the installed OmniVoice Rust renderer. The completed neighborhood sets contain 36 Heiko, 34 Inga and seven Hartmut recordings, with exact authored German and paired English subtitles. Their selected profile, processing and source ownership remain in [the voice cast](For-AI/VOICE-CAST.json); final encoded-take receipts remain in the [Heiko](assets/voices/neighbors/heiko-manifest.json), [Inga](assets/voices/neighbors/inga-manifest.json) and [Hartmut](assets/voices/neighbors/theodore-manifest.json) manifests. Hartmut's dedicated reference is a CC0 child-character performance requiring no attribution; its provenance remains in [the voice ledger](assets/voices/LICENSES.md). Profile/reference audio and rejected takes stay private. Missing or failed recordings retain exact captions. Automated checks do not establish perceptual listening approval.
+Heiko Maaslos, Inga Maaslos and their child Hartmut Maaslos use separate selected saved voice profiles and the installed OmniVoice Rust renderer. The completed neighborhood sets contain 40 Heiko, 34 Inga and seven Hartmut recordings, with exact authored German and paired English subtitles. Their selected profile, processing and source ownership remain in [the voice cast](For-AI/VOICE-CAST.json); final encoded-take receipts remain in the [Heiko](assets/voices/neighbors/heiko-manifest.json), [Inga](assets/voices/neighbors/inga-manifest.json) and [Hartmut](assets/voices/neighbors/theodore-manifest.json) manifests. Hartmut's dedicated reference is a CC0 child-character performance requiring no attribution; its provenance remains in [the voice ledger](assets/voices/LICENSES.md). Profile/reference audio and rejected takes stay private. Missing or failed recordings retain exact captions. Automated checks do not establish perceptual listening approval.
 
 Frau Schwabingen uses the user-selected new GS Frau Schwabingen profile from the
 native `GS Frau Schwabingen (2)` folder. Her original fictional dialogue uses

@@ -8,7 +8,7 @@ const cast=JSON.parse(readFileSync(new URL('../For-AI/VOICE-CAST.json',import.me
 const copy=vm.runInNewContext(source.slice(source.indexOf('const jwdCopy=')).split('\n};')[0].replace('const jwdCopy=','(')+'\n})');
 const start=source.indexOf('function talkJwdNeighbor('),end=source.indexOf('\nfunction ',start+1);
 const handler=source.slice(start,end),voiceHandler=source.split('\n').find(line=>line.startsWith('function jwdVoice('));
-const identities=[['parent','jwd-heiko-maaslos','parentPremature',36],['watcher','jwd-inga-maaslos','watcherPremature',34],['swabian','jwd-frau-schwabingen','swabianPremature',33]];
+const identities=[['parent','jwd-heiko-maaslos','parentPremature',40],['watcher','jwd-inga-maaslos','watcherPremature',34],['swabian','jwd-frau-schwabingen','swabianPremature',33]];
 
 for(const [role,voiceId,key,count] of identities)test(role+' owns early speech without bypassing move-in prerequisites',()=>{
  const person=cast.existingAssetProfiles.find(row=>row.voiceId===voiceId);

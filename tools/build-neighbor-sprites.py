@@ -356,6 +356,15 @@ def source_views(name, row):
             raise ValueError('Empty source view')
         poses.append(panel.crop(box))
     scale = 170/max(p.height for p in poses)
+    if name == 'schwabingen':
+        # Her crown begins above the nominal third-row boundary. Preserve the
+        # existing sole/body scale, but extract the complete connected source.
+        poses = []
+        for column in range(3):
+            panel = body_matte(sheet.crop((column*sheet.width//3,
+                               source_row*sheet.height//source_rows-18,
+                               (column+1)*sheet.width//3, sheet.height)))
+            poses.append(panel.crop(panel.getbbox()))
     registered = []
     for pose in poses:
         resized = pose.resize((round(pose.width*scale), round(pose.height*scale)), Image.Resampling.LANCZOS)
@@ -478,6 +487,10 @@ def build(names=NAMES):
                          'mobileDecodedRgbaBytes': atlas.width*atlas.height,
                          'encodedFrameChecks': frame_checks}
     (DEST / 'manifest.json').write_text(json.dumps(records, indent=2)+'\n')
+    if 'heiko' in names and (ROOT / 'assets/sprite-sources/neighbors/heiko-notebook-keys.png').exists():
+        import runpy
+        runpy.run_path(str(ROOT / 'tools/build-neighbor-notebook.py'))['build']()
+        records = json.loads(manifest_path.read_text())
     print(json.dumps({name: {k: value for k, value in record.items() if k in
                      ('bytes', 'mobileBytes', 'decodedRgbaBytes', 'distancePerCycle')}
                      for name, record in records.items()}, indent=2))

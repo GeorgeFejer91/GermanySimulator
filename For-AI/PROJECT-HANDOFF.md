@@ -1,5 +1,34 @@
 # Current combined release candidate — 19 October 2026
 
+## Merz audio update — 20 October 2026
+
+Integrator-owned scoped successor from published `4362d88`: six supplied MP3s
+integrated in `codex/merz-audio-clips`, five new lines plus the stable Spinner
+replacement, 16 Merz lines total. Exact German/English catalogue ownership,
+normalized encoded hashes/ASR and eight monologue cue intervals are pinned in
+`assets/voices/merz/manifest.json`. German source cues now follow the same audio
+clock as English cues. Script query versions invalidate the changed catalogue
+and runtime; the existing hash query also invalidates the replaced MP3.
+
+Full Node suite, curator and post-version focused checks PASS. Isolated silent
+desktop/Android-emulated Chromium played all six files to native completion;
+desktop's 40.2-second monologue ran at normal speed, with mid-line caption and
+live language checks. Short cases used accelerated native playback. Both profiles
+passed direct dialogue, voice-off, missing-file exact-caption fallback and zero
+startup Merz requests; inspected desktop/mobile DE/EN captions remain readable.
+Evidence is under the attached `merz-audio-clips` worktree's ignored
+`output/merz-audio/` (`browser-report.json`, `fallback-report.json`, normalized
+source/ASR receipts and screenshots). Early fixture failures retain their scope:
+the route initially missed the game's query string, then expected an actor field
+absent from featured barks; production code was unaffected by those fixture fixes.
+Physics/Camera reviews are omitted because this change affects speech assets,
+catalogue data and caption timing only, without world/geometry/animation changes.
+Perceptual listening and physical-device checks remain NOT RUN. The wider game's
+deferred scope remains unchanged. Publication: validated scoped successor ready
+for normal push to `origin/main`, followed by Pages and root/compatibility checks.
+
+## Prior combined release context
+
 George requested integration and publication of all completed pending development,
 with actual browser verification. The integration checkout is
 `C:/Users/cogpsy-vrlab/.codex/worktrees/neighbor-dialogue-release/GermanySimulator`.

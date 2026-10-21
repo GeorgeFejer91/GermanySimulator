@@ -10,7 +10,7 @@ function fn(name){
 }
 function fixture(){
  const nodes=new Map(),calls=[];
- const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:true,textContent:'',classList:{toggle(){},remove(){}},dataset:{}});return nodes.get(id)};
+ const node=id=>{if(!nodes.has(id)){const classes=new Set();nodes.set(id,{hidden:true,textContent:'',classList:{toggle(k,on){on?classes.add(k):classes.delete(k)},remove(k){classes.delete(k)},contains:k=>classes.has(k)},dataset:{}})}return nodes.get(id)};
  const actors=[['swabian','FRAU SCHWABINGEN'],['parent','HEIKO MAASLOS'],['watcher','INGA MAASLOS'],['child','HARTMUT MAASLOS']].map(([jwdRole,name])=>({id:jwdRole,name,jwdRole}));
  const h={state:{dialogue:false,modal:false,voiceOn:true,region:'berlin',lang:'de'},jwd:{dialogueTickets:new Map(),dialogueTicketSequence:0,tour:null},npcs:actors,document:{getElementById:node,querySelector:()=>node('copy')},window:{},speechCatalog:{voices:{}},STIMULUS_PRIORITY:{CRITICAL:5},stimulusQueue:[],stimulusGeneration:0,activeStimulus:null,stimulusTimer:0,textOnlyBark:null,
   clearTimeout(){},stopRecordedSpeech(){},setAudioText(){},clearSubtitle(){},hideWorldBark(){},cancelHumorScold(){},requestCharacterReaction(){},cancelJwdTour(){assert.fail('no tour replacement in fixture')},
@@ -32,6 +32,13 @@ test('each of the four neighbors queues and starts a line only once despite redr
   h.nextDialogue();assert.equal(calls.length,2);assert.equal(first.isEligible(),false);
   first.done();assert.equal(h.state.dialogueVoiceBusy,true,'late receipt cannot finish next line');
  }
+});
+
+test('automatic neighbor speech marks its actionless container so it cannot paint an empty panel',()=>{
+ const {h,actors,calls,open,nodes}=fixture();open(actors[0]);calls[0].start();
+ assert.equal(nodes.get('dialogue-next').hidden,true);assert.equal(nodes.get('dialogue-speak').hidden,true);
+ assert.equal(nodes.get('dialogue').classList.contains('automatic'),true);
+ assert.equal(h.state.dialogue,true,'speech lifetime remains owned by the broker');
 });
 
 test('heard text cannot be spoken again by the same actor in another interaction',()=>{

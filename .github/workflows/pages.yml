@@ -26,10 +26,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Check fullscreen lifecycle
-        run: node --test tests/fullscreen.test.mjs
+      - name: Check fullscreen and modal focus lifecycle
+        run: node --test tests/fullscreen.test.mjs tests/modal-focus.test.mjs
+      - name: Check Schwabingen dialogue props
+        run: node --test tests/schwabingen-props.test.mjs tests/schwabingen-scene.test.mjs
       - name: Check JWD home and neighbors
-        run: node --test tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
+        run: node --test tests/neighbor-conversations.test.mjs tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs tests/jobcenter-rumble.test.mjs tests/jobcenter-release.test.mjs tests/jobcenter-direct.test.mjs tests/jobcenter-touch.test.mjs tests/welcome-dialogue.test.mjs
       - name: Check bounded asset jobs and cancellation
@@ -106,8 +108,10 @@ jobs:
         timeout-minutes: 35
         env:
           PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/browser-ci/node_modules/playwright
+          CHROMIUM_MESA: '1'
+          LIBGL_ALWAYS_SOFTWARE: '1'
         run: >-
-          node tools/test-browser.mjs stress --root output/site
+          xvfb-run -a node tools/test-browser.mjs stress --root output/site
           --scenario startup --scenario startup-missing-models --scenario startup-engine-failure
           --scenario input --scenario lifecycle --scenario keyboard-de --scenario keyboard-en
           --profile desktop --profile android-portrait --profile android-landscape

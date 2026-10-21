@@ -81,3 +81,26 @@ test('setup failure preserves an incomplete report and unexecuted cases', async 
     else process.env.CHROMIUM_PATH = previous;
   }
 });
+
+test('Mesa is an explicit launch opt-in and the selected arguments are recorded', async () => {
+  const names=['PLAYWRIGHT_MODULE','CHROMIUM_PATH','CHROMIUM_MESA'];
+  const previous=Object.fromEntries(names.map(name=>[name,process.env[name]]));
+  const stub=resolve(directory,'launch-observer.cjs'),record=resolve(directory,'launch.json');
+  writeFileSync(stub,`module.exports={chromium:{executablePath:()=>process.execPath,async launch(options){require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify(options));throw Error('Observed launch')}}};`);
+  try {
+    process.env.PLAYWRIGHT_MODULE=stub;process.env.CHROMIUM_PATH=process.execPath;
+    for(const mesa of [true,false]){
+      if(mesa)process.env.CHROMIUM_MESA='1';else delete process.env.CHROMIUM_MESA;
+      const report=await runSuite({name:'launch observer',scenarios:[{id:'unused',modes:['quick'],run(){throw Error('Must not run')}}]},
+        {root:directory,output:resolve(directory,'launch-'+mesa),stdout:false});
+      const launch=JSON.parse(readFileSync(record));
+      assert.equal(launch.headless,true);
+      const expected=['--mute-audio',...(mesa?['--enable-gpu','--use-cmd-decoder=passthrough','--use-gl=angle','--use-angle=gl','--ozone-platform=x11','--ignore-gpu-blocklist']:[])];
+      assert.deepEqual(launch.args,expected);
+      assert.deepEqual(report.browserArguments,expected);
+      assert.match(report.error,/Observed launch/);
+    }
+  } finally {
+    for(const name of names)if(previous[name]===undefined)delete process.env[name];else process.env[name]=previous[name];
+  }
+});
