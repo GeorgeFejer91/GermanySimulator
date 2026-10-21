@@ -48,17 +48,17 @@ No primary working files or valid refs were changed by that metadata repair.
 - [x] Add regression cases for 0/1/2/3/5 contacts, exactly-once payment, cooldown,
   body-clear home return, unregistered return, lecture gating and cancellation.
   Implement smallest controller change; rerun affected police/neighbor tests.
-- [ ] Author 24 original paired monologues, cast ownership and fixed-voice
+- [x] Author 24 original paired monologues, cast ownership and fixed-voice
   generation with encoded word/hash/level/mouth checks. Run curator --check.
 - [x] Generate equipment-tier source art, inspect sources and exact animated
   exports, integrate demand-loaded sprite consumer and failure fallback.
-- [ ] Silent actual game browser checks: desktop and Android portrait/landscape,
+- [x] Silent actual game browser checks: desktop and Android portrait/landscape,
   warning/payment/arrest, attempted early skip, voice fallback, pause/resume,
   repeated arrest, selected artwork, memory/loading and rendered label fit.
-- [ ] Freeze candidate hashes; independent Physics and Camera/Scale reviews
+- [x] Freeze candidate hashes; independent Physics and Camera/Scale reviews
   on the same candidate; repair findings and rerun affected rows.
-- [ ] Run complete required release checks, review combined diff, commit/push
-  according to standing publication policy, verify Pages root/3d.html.
+- [x] Run complete required release checks, review the combined diff and commit
+  the coherent candidate. Publication and deployed-URL checks follow below.
 
 Physical Android and perceptual listening must be reported separately from
 emulation and silent media state checks. Never mark missing evidence PASS.
@@ -76,9 +76,10 @@ Artwork owner: [art record](POLICE-ART.md).
 
 ## Acceptance evidence
 
-Runtime and art were checkpointed at 11d2ab6, then integrated with published
-2c48edd at c87e21e. The final release must also integrate newer published main
-99cd9ef, including ordinary Inga coaching and ambient character animation.
+Runtime and art were checkpointed at 11d2ab6, integrated with published
+2c48edd at c87e21e, then with published 99cd9ef at 1ca2453. This preserves
+ordinary Inga coaching and ambient character animation. Isolated regression
+fixture repairs are committed at 6f5ca46.
 The dirty primary checkout remains untouched.
 
 The implemented causal chain passes focused contact, exactly-once payment,
@@ -98,9 +99,9 @@ the art record owns encoded bytes, source paint and animation details.
 
 Independent Physics and Camera reviews pass the affected P7 scope. Unchanged
 geometry, scale, alpha/depth and route proofs are explicitly transferred;
-physical Android and unrelated camera rows remain NOT RUN. Incoming main changes
-require narrow fresh checks of shared speech clocks, modal animation, pedestrian
-recovery, portrait renderer restoration and integrated police/home behavior.
+physical Android and unrelated camera rows remain NOT RUN. The final P8 integration checks pass shared speech clocks, modal animation,
+pedestrian recovery, portrait renderer restoration and integrated police/home
+behavior. All 75 frozen source/asset/catalog hashes match both specialist reports.
 
 Actual admitted Heiko playback and failed-file reading fallback pass all three
 layouts in speech-focus-final. Fresh recorded-pause checks pass in
@@ -132,11 +133,38 @@ NEIGHBOR-DIALECT-COVERAGE.md for the finite proof contracts.
 The earlier six-run startup budget check passed with zero browser errors and
 no police atlas loaded at boot. Software-rendered timing was slow under host
 contention; it establishes asset/input budgets rather than physical-device
-smoothness. Final catalog and main integration need fresh bounded budget checks.
+smoothness. Fresh final measurements pass at 16,513,941 desktop and 16,127,523 mobile
+startup bytes, nine accepted inputs per run and zero browser errors. Police
+atlases remain deferred at boot. These two software-rendered runs make no
+physical-device smoothness claim.
 
 ## Release validation
 
-Pending: freeze the complete 26-file voice catalog, integrate current main,
-repin the combined candidate, finish narrow independent integration review,
-run complete deterministic checks and built-site browser checks, then publish
-and verify both public entry URLs. The goal remains active until those pass.
+The clean full Node run passes 2,379/2,379 checks; Python discovery passes
+102/102, with the separate office/quiz authoring suites passing 12/12 and 7/7.
+The initial failures exposed missing copied curator imports and a test's assumed
+ignored output folder. The fixtures are self-contained now; full clean reruns
+pass. Curator consistency, ordinary neighbor coverage (114/114) and the new
+supplement audit (26/26) all pass. The site builds 31 direct level pages.
+
+Exact P8 silent browser receipts pass core2, art2, recorded/fallback4, all72
+reading-layout rows, and built-site startup/input/lifecycle9 across desktop,
+Android portrait and landscape emulation. The Camera specialist's separate
+live portrait/renderer restoration/shared-police-load proof passes2/2.
+Physics verifies 100 legal/crowded waiting cases, 8,915 legal route substeps
+and six late-blocker probes. Both final scoped specialist reports are PASS.
+Earlier layout/device proofs transfer only where the reported sources remain
+unchanged. Physical Android and perceptual listening remain NOT RUN.
+
+Reports and source pins are retained in the task's private
+output/police-escalation evidence; selected-reference authoring proofs and held
+experiments are archived separately in the private Music production library.
+No reference audio, model weights, private native inputs or local test output
+are part of the published package.
+
+The integrator publishes this coherent candidate to origin/main under the
+standing policy, watches the Pages deployment, then verifies the unmodified
+public root and 3d.html compatibility entry against the built runtime and new
+assets before closing the active goal. The observed deployed commit, workflow
+and public-entry result are recorded in that goal's completion response; local
+checks alone do not establish publication.
