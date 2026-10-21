@@ -45,7 +45,7 @@ candidate. Do not admit old pivot148, world2 or unmeasured32-unit stride.
   red→green, deterministic delivery check, curator and appropriate clean-release
   regression/build/startup gates. Independent Physics and Camera bind the same
   final frozen source/runtime candidate before publication.
-- [ ] Publish the validated coherent feature, verify public root and3d on desktop
+- [x] Publish the validated coherent feature, verify public root and3d on desktop
   and Android, record evidence in existing engineering owners and keep the full
   goal active. Workers do not commit/push; root owns integration and acceptance.
 
@@ -302,3 +302,16 @@ preservation pins pass; report47845a50/final receiptee10475d/fit420324ad. Owning
 occlusion-components-v1/ retains measured recipe and exact generation prompt.
 Next art work needs a targeted original-matching deeper vamp/cuff/stocking
 completion, not stretching this donor or altering approved neutral paint.
+
+
+Published Renate increment: ac9743ac on deede6d5; Pages39614731293 SUCCESS.
+Public root/3d×desktop/portrait4/4 and14served hashes/case PASS. Source checkpoint
+edcfb45a/merge6ae4f97b share the published c10ed9c1 tree; unrelated131dirty-file
+hashes remain exact. Final Physics/general PASS and Camera45f4a491/receipt7d26
+bind126freezef369a107. The full goal remains active:8integrated,34remaining.
+
+The recorded inherited landscape face-mask gap now has a separate locally
+validated CSS follow-up in SOURCE. It retains all art/media/world bytes and
+native handlers. See SESSION.md and ignored landscape-speaker-visibility-v1/
+for actual-mouth RED/GREEN, strict small-layout failure/fix and final UI review;
+its publication/live check remains independent from this completed Renate gate.

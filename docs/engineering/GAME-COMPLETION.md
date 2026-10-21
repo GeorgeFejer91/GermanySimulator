@@ -1,42 +1,34 @@
 # Germany Simulator completion goal
 
-Irmgard Aktenstapel is published and live verified asdeede6d5 on57b1446.
-Pages run39581654416 succeeded; public root/3d desktop/Android-portrait startup
-and14-file identity checks pass4/4. Clean release2386/2386 Node,29focused,
-12deliveryPython, deterministic own delivery, curator,31-pagebuild, builtstartup
-4/4 and nativeMAIN3/3 pass. Independent Physics/Camera bind the same102-pin
-freeze91aaa72b. Source checkpoint59ab8d20 and mergefab20e6 retain the identical
-published tree; unrelated source/object-QA bytes and hook content are preserved.
+Renate Termin is published and live verified as ac9743ac on deede6d5. Pages
+39614731293 succeeded; public root/3d desktop/Android-portrait startup and14file
+hashes pass4/4. Source edcfb45a/merge6ae4f97b retain the identical published tree.
+The full42-character goal remains active:8 integrated identities,34 remaining.
 
-Her364 unique moving cells,276 visible mouth fits and original128x160 standing
-at pivot64,150/world1.6 remain exact. Source/packing review40dadeb0, actual378-slot
-GPU desktop/portrait checks,12 targeted native stops and clear side stances pass.
-The25.57 stride retains its documented16-pose/encoded-pixel residual. Existing
-Germany01/02 and Berlin04 use exact text/actor/profile bindings; missing Berlin03
-remains captions. E-dialogue holds root. Native/staged, silent-state, emulated
-Android, lesson-panel occlusion and untested physical/listening limits remain.
+Own source review2,388pins, production shader378slots×2, selected existing speech
+6/6,20native walk/stop state cases and strict obstacle4/4 pass with inspected
+frames and documented foot/texel residuals. Same126-pin freeze f369a107 has
+independent Physics/Camera/general PASS. Full discovered Node2,429/2,429,
+root60/60, reviewer94/94, deliveryPython12/12, exact pack rebuild, curator67,
+31-page build, hooks and built startup4/4 pass. Three small movement coordination
+repairs close preserved real failures; collision guards and pose times remain.
+Natural traversal, physical devices, listening, full world matrices and active
+utterance FILE pause are not newly proved; V6 browser contention is disclosed.
 
-There are35 scoped standing-only identities; the full42-character goal stays
-active. Renate's full source/CPU packing review passes2,388pins; shader378-slot
-checks and native selected-speech6/6 pass. Actual walking/cardinal stop cases
-have clear desktop/portrait evidence, with nonzero quantified foot residuals.
-RELEASE candidate7bb0f381 preserves original standing and42other entries.
-Three native obstacle findings produced minimal checked-bypass, recovery-owner
-and tiny-committed-step success repairs; prior failed traces and RED tests stay
-preserved. Final126-pin freeze f369a107 binds final-pins-v5.json. Root60/60,
-independent94/94 and full discovered Node2,429/2,429 pass. Strict native obstacle
-V6 passes4/4; root inspected the actual desktop/portrait movement boards.
-Rebuilt31-page site, curator67 and root/3d built startup4/4 pass with14hashes/case.
-The default full suite also ran29additional tool checks, including an automatic
-silent browser during V6; no exclusive-GPU performance claim is made.
-Final same-freeze Physics, Camera and general reviews PASS. Source/release
-commits/publication remain open. Inherited landscape dialogue controls cover the speaker's face;
-visible landscape articulation remains unaccepted and on the full goal.
-Hannelore neutral/static lips pass source review; current shoe completion is
-HOLD for depth mismatch and has not entered a gait. Existing active plan:
+A separate ordinary-landscape dialogue UI follow-up resolves the inherited
+face-covering action panel locally. Native actual-mouth projection RED→GREEN,
+final844landscape and568x320 six-state enlarged-text/spacing/resize/focus/native
+cancel tests pass. It uses existing edge layout/Pretext,44px targets and hides
+only the already-inert dock during manual modal ownership. Independent bounded
+UI review PASS; clean build/publication/live verification remain next. World,
+renderer, person scale and all body/audio bytes stay unchanged.
+
+Hannelore own neutral/static lips pass source review, but both backing sheets
+remain HOLD with no gait. V2 review is correcting inherited near/far toe and
+stocking-opening witness mistakes against actual original pixels; historical
+depth ratios are not final anatomy evidence. Current limits/evidence and the
+UI follow-up live in SESSION.md and existing task packets. The Renate plan is
 docs/superpowers/plans/2026-10-21-renate-termin-ambient-animation.md.
-Current detailed evidence and limits are in SESSION.md and that plan; all
-release evidence stays under RELEASE/output/renate-termin-release-v1/.
 
 Shared Git metadata was externally renamed into name-clash paths during this
 increment: missing config/refs and invalid unrelated snapshot refs prevented a
