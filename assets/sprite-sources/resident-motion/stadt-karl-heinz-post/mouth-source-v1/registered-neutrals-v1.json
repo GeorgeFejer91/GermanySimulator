@@ -1,0 +1,75 @@
+{
+  "purpose": "Exact assembly of own full-body source neutrals for source lip fitting; not runtime adoption",
+  "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+  "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+  "inputs": {
+    "down": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-0.png",
+      "sha256": "366797a6a139b1202602e30408a9d0e4458a796593119049ec3d3ea37e290d2f",
+      "cellOriginPx": [
+        0,
+        0
+      ]
+    },
+    "front-right": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-1.png",
+      "sha256": "cf5323b49ca19ca3919593e72b6e0d77aeb0a05fe55e58380a0579273e69d8b1",
+      "cellOriginPx": [
+        512,
+        0
+      ]
+    },
+    "right": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-2.png",
+      "sha256": "e6a9b9d493e837cf0176d2393827c4fb5b229d1a29790e52833cfa6251a9f48a",
+      "cellOriginPx": [
+        1024,
+        0
+      ]
+    },
+    "rear-right": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-3.png",
+      "sha256": "1392c8c12a56ff3d2dc54013179bc5fd11127c2d3c904b0dcea827c3207e41eb",
+      "cellOriginPx": [
+        1536,
+        0
+      ]
+    },
+    "up": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-4.png",
+      "sha256": "a26582ee6e802992dc528ee6720dbd059cab06c6e3cfd6aec908057e3ca89abb",
+      "cellOriginPx": [
+        0,
+        512
+      ]
+    },
+    "rear-left": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-5.png",
+      "sha256": "e19b1216e2e2ad3733a1934d8a5cd521bc2a83f73b92093331e40704d21e3605",
+      "cellOriginPx": [
+        512,
+        512
+      ]
+    },
+    "left": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-6.png",
+      "sha256": "30481a1fb43a1d26405c80106b5b9cbc7c7ace4163a1cabf75a7b75f819e4dab",
+      "cellOriginPx": [
+        1024,
+        512
+      ]
+    },
+    "front-left": {
+      "file": "output/ambient-city-animation/karl-post-walk-source-v1/working/turn-7.png",
+      "sha256": "7aab7aaa6ec3edecb122cd6026dfa3d52690d1c54cfac3266774ecaf1d23970b",
+      "cellOriginPx": [
+        1536,
+        512
+      ]
+    }
+  },
+  "sourceReceipt": {
+    "file": "output/ambient-city-animation/karl-post-walk-source-v1/walk-source.json",
+    "sha256": "4eebaefae5f8b81d1854298bfcaf4559dd041ba740c4034b70baebd96a643eac"
+  }
+}

@@ -26,3 +26,7 @@ tools/build-street-speaker-family.py -text
 # Heike source recipes and immutable deliveries retain reviewed SHA-bound bytes.
 assets/sprite-sources/street-speaker-motion/heike-hoffmann/** -text
 assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/** -text
+
+# Karl source recipes and deliveries retain reviewed SHA-bound bytes.
+assets/sprite-sources/resident-motion/stadt-karl-heinz-post/** -text
+assets/characters/residents/stadt-karl-heinz-post/** -text

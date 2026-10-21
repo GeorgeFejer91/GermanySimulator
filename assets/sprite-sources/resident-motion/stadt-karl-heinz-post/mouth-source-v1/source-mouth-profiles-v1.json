@@ -1,0 +1,1425 @@
+{
+  "schemaVersion": 1,
+  "status": "Own source lip pilot, CPU only; no runtime or GPU acceptance",
+  "inputHashes": {
+    "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+    "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.json": "e6297c577a30bc6f4254ec50117800db1f9990af75235827380adf175bbf4a26",
+    "assets/characters/street/stadt-karl-heinz-post-standing.webp": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877",
+    "tools/build-street-mouths.py": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8",
+    "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/fit-source-mouths.py": "0254dd3166a73f02894b414cfed81bd4c5fc0bf9652cf71a4837f8e6dcee7888"
+  },
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        270.0,
+        208.0
+      ],
+      "axesPx": [
+        24,
+        0,
+        0,
+        8
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "coordinateSystem": "Own source pixels, +X right and +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            258.0,
+            208.0
+          ],
+          [
+            264.0,
+            207.5
+          ],
+          [
+            270.0,
+            208.0
+          ],
+          [
+            276.0,
+            208.0
+          ],
+          [
+            282.0,
+            208.5
+          ]
+        ],
+        "source_upper": [
+          [
+            258.0,
+            208.0
+          ],
+          [
+            264.0,
+            207.5
+          ],
+          [
+            270.0,
+            208.0
+          ],
+          [
+            276.0,
+            208.0
+          ],
+          [
+            282.0,
+            208.5
+          ]
+        ],
+        "source_lower": [
+          [
+            258.0,
+            208.0
+          ],
+          [
+            264.0,
+            207.5
+          ],
+          [
+            270.0,
+            208.0
+          ],
+          [
+            276.0,
+            208.0
+          ],
+          [
+            282.0,
+            208.5
+          ]
+        ],
+        "open_upper": [
+          [
+            258.0,
+            208.0
+          ],
+          [
+            264.0,
+            207.5
+          ],
+          [
+            270.0,
+            208.0
+          ],
+          [
+            276.0,
+            208.0
+          ],
+          [
+            282.0,
+            208.5
+          ]
+        ],
+        "open_lower": [
+          [
+            258.0,
+            208.0
+          ],
+          [
+            264.0,
+            211.0
+          ],
+          [
+            270.0,
+            213.5
+          ],
+          [
+            276.0,
+            211.5
+          ],
+          [
+            282.0,
+            208.5
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.14
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+        "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+      }
+    },
+    "front-right": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        807.0,
+        204.2
+      ],
+      "axesPx": [
+        23,
+        0,
+        0,
+        7
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        512,
+        0
+      ],
+      "coordinateSystem": "Own source pixels, +X right and +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            796.0,
+            204.0
+          ],
+          [
+            802.0,
+            203.5
+          ],
+          [
+            808.0,
+            203.5
+          ],
+          [
+            814.0,
+            204.5
+          ],
+          [
+            819.0,
+            205.5
+          ]
+        ],
+        "source_upper": [
+          [
+            796.0,
+            204.0
+          ],
+          [
+            802.0,
+            203.5
+          ],
+          [
+            808.0,
+            203.5
+          ],
+          [
+            814.0,
+            204.5
+          ],
+          [
+            819.0,
+            205.5
+          ]
+        ],
+        "source_lower": [
+          [
+            796.0,
+            204.0
+          ],
+          [
+            802.0,
+            203.5
+          ],
+          [
+            808.0,
+            203.5
+          ],
+          [
+            814.0,
+            204.5
+          ],
+          [
+            819.0,
+            205.5
+          ]
+        ],
+        "open_upper": [
+          [
+            796.0,
+            204.0
+          ],
+          [
+            802.0,
+            203.5
+          ],
+          [
+            808.0,
+            203.5
+          ],
+          [
+            814.0,
+            204.5
+          ],
+          [
+            819.0,
+            205.5
+          ]
+        ],
+        "open_lower": [
+          [
+            796.0,
+            204.0
+          ],
+          [
+            802.0,
+            206.5
+          ],
+          [
+            808.0,
+            208.5
+          ],
+          [
+            814.0,
+            207.5
+          ],
+          [
+            819.0,
+            205.5
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.14
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+        "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+      }
+    },
+    "right": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1357.0,
+        206.0
+      ],
+      "axesPx": [
+        14,
+        -3,
+        0,
+        6
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1024,
+        0
+      ],
+      "coordinateSystem": "Own source pixels, +X right and +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1352.5,
+            207.0
+          ],
+          [
+            1355.0,
+            206.5
+          ],
+          [
+            1357.5,
+            206.0
+          ],
+          [
+            1359.5,
+            205.0
+          ],
+          [
+            1361.0,
+            204.5
+          ]
+        ],
+        "source_upper": [
+          [
+            1352.5,
+            207.0
+          ],
+          [
+            1355.0,
+            206.5
+          ],
+          [
+            1357.5,
+            206.0
+          ],
+          [
+            1359.5,
+            205.0
+          ],
+          [
+            1361.0,
+            204.5
+          ]
+        ],
+        "source_lower": [
+          [
+            1352.5,
+            207.0
+          ],
+          [
+            1355.0,
+            206.5
+          ],
+          [
+            1357.5,
+            206.0
+          ],
+          [
+            1359.5,
+            205.0
+          ],
+          [
+            1361.0,
+            204.5
+          ]
+        ],
+        "open_upper": [
+          [
+            1352.5,
+            207.0
+          ],
+          [
+            1355.0,
+            206.5
+          ],
+          [
+            1357.5,
+            206.0
+          ],
+          [
+            1359.5,
+            205.0
+          ],
+          [
+            1361.0,
+            204.5
+          ]
+        ],
+        "open_lower": [
+          [
+            1352.5,
+            207.0
+          ],
+          [
+            1355.0,
+            208.3
+          ],
+          [
+            1357.5,
+            209.2
+          ],
+          [
+            1359.5,
+            207.2
+          ],
+          [
+            1361.0,
+            204.5
+          ]
+        ]
+      },
+      "width": [
+        0.015,
+        0.09
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+        "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1202.5,
+        718.0
+      ],
+      "axesPx": [
+        14,
+        3.5,
+        0,
+        6
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1024,
+        512
+      ],
+      "coordinateSystem": "Own source pixels, +X right and +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1197.5,
+            717.0
+          ],
+          [
+            1200.0,
+            717.5
+          ],
+          [
+            1202.5,
+            718.0
+          ],
+          [
+            1205.0,
+            719.0
+          ],
+          [
+            1207.5,
+            719.5
+          ]
+        ],
+        "source_upper": [
+          [
+            1197.5,
+            717.0
+          ],
+          [
+            1200.0,
+            717.5
+          ],
+          [
+            1202.5,
+            718.0
+          ],
+          [
+            1205.0,
+            719.0
+          ],
+          [
+            1207.5,
+            719.5
+          ]
+        ],
+        "source_lower": [
+          [
+            1197.5,
+            717.0
+          ],
+          [
+            1200.0,
+            717.5
+          ],
+          [
+            1202.5,
+            718.0
+          ],
+          [
+            1205.0,
+            719.0
+          ],
+          [
+            1207.5,
+            719.5
+          ]
+        ],
+        "open_upper": [
+          [
+            1197.5,
+            717.0
+          ],
+          [
+            1200.0,
+            717.5
+          ],
+          [
+            1202.5,
+            718.0
+          ],
+          [
+            1205.0,
+            719.0
+          ],
+          [
+            1207.5,
+            719.5
+          ]
+        ],
+        "open_lower": [
+          [
+            1197.5,
+            717.0
+          ],
+          [
+            1200.0,
+            719.5
+          ],
+          [
+            1202.5,
+            721.2
+          ],
+          [
+            1205.0,
+            720.8
+          ],
+          [
+            1207.5,
+            719.5
+          ]
+        ]
+      },
+      "width": [
+        0.015,
+        0.09
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+        "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+      }
+    },
+    "front-left": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "dab825e967d9b424db4b208a2c3bf87f5f1619b8553a67c99e58795e0ba99894",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1746.0,
+        716.0
+      ],
+      "axesPx": [
+        24,
+        1.5,
+        0,
+        8
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1536,
+        512
+      ],
+      "coordinateSystem": "Own source pixels, +X right and +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1735.0,
+            716.5
+          ],
+          [
+            1740.5,
+            715.5
+          ],
+          [
+            1746.5,
+            715.5
+          ],
+          [
+            1752.5,
+            716.5
+          ],
+          [
+            1757.0,
+            717.5
+          ]
+        ],
+        "source_upper": [
+          [
+            1735.0,
+            716.5
+          ],
+          [
+            1740.5,
+            715.5
+          ],
+          [
+            1746.5,
+            715.5
+          ],
+          [
+            1752.5,
+            716.5
+          ],
+          [
+            1757.0,
+            717.5
+          ]
+        ],
+        "source_lower": [
+          [
+            1735.0,
+            716.5
+          ],
+          [
+            1740.5,
+            715.5
+          ],
+          [
+            1746.5,
+            715.5
+          ],
+          [
+            1752.5,
+            716.5
+          ],
+          [
+            1757.0,
+            717.5
+          ]
+        ],
+        "open_upper": [
+          [
+            1735.0,
+            716.5
+          ],
+          [
+            1740.5,
+            715.5
+          ],
+          [
+            1746.5,
+            715.5
+          ],
+          [
+            1752.5,
+            716.5
+          ],
+          [
+            1757.0,
+            717.5
+          ]
+        ],
+        "open_lower": [
+          [
+            1735.0,
+            716.5
+          ],
+          [
+            1740.5,
+            718.5
+          ],
+          [
+            1746.5,
+            720.5
+          ],
+          [
+            1752.5,
+            719.5
+          ],
+          [
+            1757.0,
+            717.5
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.14
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+        "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+      }
+    }
+  },
+  "standingRegistration": {
+    "input": {
+      "file": "assets/characters/street/stadt-karl-heinz-post-standing.webp",
+      "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877",
+      "dimensions": [
+        128,
+        160
+      ]
+    },
+    "centerPx": [
+      69.6,
+      61.2
+    ],
+    "axesPx": [
+      7.6,
+      0.5,
+      0,
+      2.5
+    ],
+    "cell": [
+      128,
+      160
+    ],
+    "cellOriginPx": [
+      0,
+      0
+    ],
+    "coordinateSystem": "Own source pixels, +X right and +Y down",
+    "contoursPx": {
+      "crease": [
+        [
+          65.8,
+          61.3
+        ],
+        [
+          67.8,
+          60.9
+        ],
+        [
+          69.7,
+          61.1
+        ],
+        [
+          71.7,
+          61.3
+        ],
+        [
+          73.4,
+          61.8
+        ]
+      ],
+      "source_upper": [
+        [
+          65.8,
+          61.3
+        ],
+        [
+          67.8,
+          60.9
+        ],
+        [
+          69.7,
+          61.1
+        ],
+        [
+          71.7,
+          61.3
+        ],
+        [
+          73.4,
+          61.8
+        ]
+      ],
+      "source_lower": [
+        [
+          65.8,
+          61.3
+        ],
+        [
+          67.8,
+          60.9
+        ],
+        [
+          69.7,
+          61.1
+        ],
+        [
+          71.7,
+          61.3
+        ],
+        [
+          73.4,
+          61.8
+        ]
+      ],
+      "open_upper": [
+        [
+          65.8,
+          61.3
+        ],
+        [
+          67.8,
+          60.9
+        ],
+        [
+          69.7,
+          61.1
+        ],
+        [
+          71.7,
+          61.3
+        ],
+        [
+          73.4,
+          61.8
+        ]
+      ],
+      "open_lower": [
+        [
+          65.8,
+          61.3
+        ],
+        [
+          67.8,
+          62.0
+        ],
+        [
+          69.7,
+          62.75
+        ],
+        [
+          71.7,
+          62.4
+        ],
+        [
+          73.4,
+          61.8
+        ]
+      ]
+    },
+    "width": [
+      0.025,
+      0.14
+    ],
+    "teeth": 0,
+    "fitEvidence": {
+      "status": "Manually inspected own painted lip beneath moustache; CPU candidate",
+      "observation": "Fixed upper lip protects moustache; closed source and attached corners preserved. No pre-open cavity or teeth."
+    }
+  },
+  "compiledSourceCells": {
+    "down": {
+      "rect": [
+        0.52734375,
+        0.59375,
+        0.046875,
+        0.015625
+      ],
+      "axes": [
+        24,
+        0,
+        0,
+        8
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.0625,
+          0.0,
+          0.0,
+          0.0625
+        ],
+        "open_upper": [
+          0.0,
+          -0.0625,
+          0.0,
+          0.0,
+          0.0625
+        ],
+        "open_lower": [
+          0.0,
+          0.375,
+          0.6875,
+          0.4375,
+          0.0625
+        ],
+        "source_upper": [
+          0.0,
+          -0.0625,
+          0.0,
+          0.0,
+          0.0625
+        ],
+        "source_lower": [
+          0.0,
+          -0.0625,
+          0.0,
+          0.0,
+          0.0625
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.025,
+          0.14
+        ],
+        "teeth": 0
+      }
+    },
+    "front-right": {
+      "rect": [
+        0.576171875,
+        0.601171875,
+        0.044921875,
+        0.013671875
+      ],
+      "axes": [
+        23,
+        0,
+        0,
+        7
+      ],
+      "profile": {
+        "crease": [
+          -0.02857143,
+          -0.1,
+          -0.1,
+          0.04285714,
+          0.18571429
+        ],
+        "open_upper": [
+          -0.02857143,
+          -0.1,
+          -0.1,
+          0.04285714,
+          0.18571429
+        ],
+        "open_lower": [
+          -0.02857143,
+          0.32857143,
+          0.61428571,
+          0.47142857,
+          0.18571429
+        ],
+        "source_upper": [
+          -0.02857143,
+          -0.1,
+          -0.1,
+          0.04285714,
+          0.18571429
+        ],
+        "source_lower": [
+          -0.02857143,
+          -0.1,
+          -0.1,
+          0.04285714,
+          0.18571429
+        ],
+        "corners": [
+          -0.47826087,
+          0.52173913
+        ],
+        "width": [
+          0.025,
+          0.14
+        ],
+        "teeth": 0
+      }
+    },
+    "right": {
+      "rect": [
+        0.650390625,
+        0.59765625,
+        0.027964494264211628,
+        0.01171875
+      ],
+      "axes": [
+        14,
+        -3,
+        0,
+        6
+      ],
+      "profile": {
+        "crease": [
+          0.00595238,
+          0.01190476,
+          0.01785714,
+          -0.07738095,
+          -0.10714286
+        ],
+        "open_upper": [
+          0.00595238,
+          0.01190476,
+          0.01785714,
+          -0.07738095,
+          -0.10714286
+        ],
+        "open_lower": [
+          0.00595238,
+          0.31190476,
+          0.55119048,
+          0.28928571,
+          -0.10714286
+        ],
+        "source_upper": [
+          0.00595238,
+          0.01190476,
+          0.01785714,
+          -0.07738095,
+          -0.10714286
+        ],
+        "source_lower": [
+          0.00595238,
+          0.01190476,
+          0.01785714,
+          -0.07738095,
+          -0.10714286
+        ],
+        "corners": [
+          -0.32142857,
+          0.28571429
+        ],
+        "width": [
+          0.015,
+          0.09
+        ],
+        "teeth": 0
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "rect": [
+        0.3486328125,
+        0.59765625,
+        0.028185292362620726,
+        0.01171875
+      ],
+      "axes": [
+        14,
+        3.5,
+        0,
+        6
+      ],
+      "profile": {
+        "crease": [
+          0.04166667,
+          0.02083333,
+          0.0,
+          0.0625,
+          0.04166667
+        ],
+        "open_upper": [
+          0.04166667,
+          0.02083333,
+          0.0,
+          0.0625,
+          0.04166667
+        ],
+        "open_lower": [
+          0.04166667,
+          0.35416667,
+          0.53333333,
+          0.3625,
+          0.04166667
+        ],
+        "source_upper": [
+          0.04166667,
+          0.02083333,
+          0.0,
+          0.0625,
+          0.04166667
+        ],
+        "source_lower": [
+          0.04166667,
+          0.02083333,
+          0.0,
+          0.0625,
+          0.04166667
+        ],
+        "corners": [
+          -0.35714286,
+          0.35714286
+        ],
+        "width": [
+          0.015,
+          0.09
+        ],
+        "teeth": 0
+      }
+    },
+    "front-left": {
+      "rect": [
+        0.41015625,
+        0.6015625,
+        0.04696646350160566,
+        0.015625
+      ],
+      "axes": [
+        24,
+        1.5,
+        0,
+        8
+      ],
+      "profile": {
+        "crease": [
+          0.1484375,
+          -0.01953125,
+          -0.06640625,
+          0.01171875,
+          0.1015625
+        ],
+        "open_upper": [
+          0.1484375,
+          -0.01953125,
+          -0.06640625,
+          0.01171875,
+          0.1015625
+        ],
+        "open_lower": [
+          0.1484375,
+          0.35546875,
+          0.55859375,
+          0.38671875,
+          0.1015625
+        ],
+        "source_upper": [
+          0.1484375,
+          -0.01953125,
+          -0.06640625,
+          0.01171875,
+          0.1015625
+        ],
+        "source_lower": [
+          0.1484375,
+          -0.01953125,
+          -0.06640625,
+          0.01171875,
+          0.1015625
+        ],
+        "corners": [
+          -0.45833333,
+          0.45833333
+        ],
+        "width": [
+          0.025,
+          0.14
+        ],
+        "teeth": 0
+      }
+    }
+  },
+  "compiledStanding": {
+    "rect": [
+      0.54375,
+      0.6174999999999999,
+      0.059503356326030044,
+      0.015625
+    ],
+    "axes": [
+      7.6,
+      0.5,
+      0,
+      2.5
+    ],
+    "profile": {
+      "crease": [
+        0.14,
+        -0.07263158,
+        -0.04263158,
+        -0.01526316,
+        0.14
+      ],
+      "open_upper": [
+        0.14,
+        -0.07263158,
+        -0.04263158,
+        -0.01526316,
+        0.14
+      ],
+      "open_lower": [
+        0.14,
+        0.36736842,
+        0.61736842,
+        0.42473684,
+        0.14
+      ],
+      "source_upper": [
+        0.14,
+        -0.07263158,
+        -0.04263158,
+        -0.01526316,
+        0.14
+      ],
+      "source_lower": [
+        0.14,
+        -0.07263158,
+        -0.04263158,
+        -0.01526316,
+        0.14
+      ],
+      "corners": [
+        -0.5,
+        0.5
+      ],
+      "width": [
+        0.025,
+        0.14
+      ],
+      "teeth": 0
+    }
+  },
+  "cpuChecks": {
+    "down": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 455
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 402
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 273
+      }
+    },
+    "front-right": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 403
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 339
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 230
+      }
+    },
+    "right": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 118
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 101
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 68
+      }
+    },
+    "left": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 117
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 109
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 75
+      }
+    },
+    "front-left": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 455
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 418
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 265
+      }
+    },
+    "standing": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "alphaExact": true,
+        "changedRgbPixels": 47
+      },
+      "round-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 41
+      },
+      "bite-lower-only": {
+        "alphaExact": true,
+        "changedRgbPixels": 23
+      }
+    }
+  },
+  "nullReasons": {
+    "rear-right": "Rear or rear-quarter source has no visible mouth",
+    "up": "Rear or rear-quarter source has no visible mouth",
+    "rear-left": "Rear or rear-quarter source has no visible mouth"
+  },
+  "limits": [
+    "Direct own-source painted creases; CPU opening approximations only.",
+    "Lower-only round/bite previews do not certify actual runtime multi-axis shader.",
+    "Moving transport, encoded variants, full gestures, media clocks and physical/listening checks remain unrun."
+  ]
+}

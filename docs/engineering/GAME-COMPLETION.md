@@ -19,6 +19,84 @@ The corrected fit does not admit private audio or establish listening/device evi
 Evidence:
 `output/ambient-city-animation/heike-lip-frame-fix-v1/`.
 
+Current selected source increment: Karl-Heinz Post, planned in
+`docs/superpowers/plans/2026-10-21-karl-post-ambient-animation.md`. His V1 side
+pilot failed a stationary trouser/hip tab; V2 own-source alpha ownership repair
+passes independent eight-pose512 review (25b72edf...). V3/full92 source and
+encoded-size review now pass (body receipt4eebaef, independentad183af). Own six
+neutral/standing mouth fits pass CPU/source review8fb69949; actual walk-head
+field capture replays all92 cells byte-exact in both atlases. Own walk-lip transport
+passes independent source review (68 visible/24 null, max residual.010012 source px).
+Contact calibration
+proposes27.53 game units/cycle with one observed foreground foot per profile;
+actual-loader desktop/Android floor diagnostics show no causal floor defect;
+one Android left visual remains partly obscured. Stop32 and envelope4 source
+pilots now have independently reviewed full256-stop and16-gesture successors
+(042a75db). Full moving mouth source transport also passes independent review
+(bafbe6e7), with276 visible and88 rear-null selected cells. The opt-in compact
+candidate has364 selected cells and14 transparent padding cells. Desktop GPU
+checks pass all378 slots; Android has two quiet bite cues quantized to unchanged
+pixels (left phases2/10), while open/round cues change paint and all alpha stays
+exact. The original strict every-viseme mobile diagnostic FAIL is retained.
+Camera review54de40e0 and its follow-up find no anatomy/paint defect requiring
+a refit: these near-closed bites naturally quantize to closed at64px, while
+open/round speech works. The integrator accepts that bounded sampling limitation
+under the walking/talking contract; no every-cue perceptual distinction is claimed.
+Forced-Germany native dialogue passes desktop and both Android orientations with
+both exact existing clips, held root, cancellation, closed end and return to walking.
+Original-route Berlin captions also pass all three profiles with null speech and
+closed mouths (six-case receiptd5396e97). The first mobile harness attempt used
+the walking dock during caption dialogue; switching to the visible native Weiter
+action resolves those test failures. This regional setup does not establish audio
+on Karl's original Berlin route. Four side stop cases (phases4/12) pass actual
+desktop and Android-portrait controller/contact checks8/8, independent Physics
+5e745215 and Camera636bcfb9. The formerly loaded shoe lifts9 source px before
+moving32px; the other shoe and root remain planted. Direct landing checks pass
+two Android and two desktop cases, with earlier fixture failures retained.
+Karl is locally runtime-admitted at manifest3f2a4d6d,224594 bytes: his reviewed
+eight delivery files and unchanged standing geometry, other42 entries preserved.
+MAIN no-overlay Berlin and staged Germany dialogue checks pass6/6. Frozen57-file
+final rebind isb8b3e0aa, Physics3877ad5c and Camerae4ed9f5a PASS. Full local Node
+2382/2382, delivery Python12/12, Karl source guards5/5, delivery rebuild and curator
+pass. Initial full-run two failures were the existing three-family inventory;
+adding Karl fixes both while preserving all source/hash assertions. Publication
+is integrated with origin/main149a212 in the clean release worktree. All57
+reviewed source pins are exact there; source9d1ffed already contained the shared
+police/neighbor runtime, despite the earlier summary describing it as theb34 tree.
+Combined release Node2383/2383, Python delivery12/12, exact delivery rebuild,
+curator, existing neighbor/police coverage26/26, native dialogue6/6 and built
+root/3d desktop/Android-portrait startup4/4 pass. Final63-pin Physics42821b2b and
+Camera release rebinds preserve the same reviewed Karl art and controller.
+Publication proceeds under the standing policy. There are36
+local standing-only scoped identities (37 on the published pre-Karl release).
+His two existing Germany recordings already resolve
+to the published fixed voice and40Hz mouth data. Wolfgang V1–V6 remain held: the
+one V6 hidden-paint composite still exposes shin/boot gaps (report28c0df4f), and
+V7 generation still fails original compact boot shape before any fitting; no
+new audio admission or further generation is implied.
+The completed ambient increment is published as7d969f9; Pages run39541746260
+succeeded. Live root and3d startup/byte-identity checks pass4/4 on desktop and
+Android portrait emulation (public report SHA1d14eda0abb78d09aa7240980b41a0d2c5c791929755a15dc1e28d4e6f60c449).37 scoped identities remain
+standing-only; the42-character goal stays active. Preserve primary Merz ownership.
+
+Heike axis repair is now published asb34b4ce, preserving Inga99cd9ef. Pages run
+39548175269 succeeded; live root/3d desktop/Android-portrait checks pass4/4 with
+14 exact runtime/delivery hashes per visit (report91cba5fb). Source HEAD9d1ffed
+includes that repair with the police/neighbor candidate; its shared runtime
+already matches149a212. Unrelated source work remains preserved.
+Parallel next-family source preparation is Irmgard Aktenstapel, distinct from
+the published ordinary-crowd Irmgard. Her full92 walk/bridge/turn cells pass
+independent source and direct desktop/mobile export review7554711b. Own neutral
+mouth fits pass independent CPU/source reviewdb0d4545; mobile side openings are
+small. Her own24-cell moving-lip pilot replays source and both direct exports
+exactly (17 visible/7 rear null, maximum affine error.003766 source px), pending
+independent review. Her stride/stops/gesture/full moving lips/runtime/audio
+acceptance remain open. The32-cell own stop pilot has current receipt08a97b03
+and awaits independent review. Its first receipt was accidentally overwritten
+during the unrelated-manifest dependency rebind and could not be recovered;
+the successor is pinned, and no source pixel or V1 walk recipe changed.
+
+
 Release integration closeout: the five ambient checkpoints, through Heike96378cb,
 are merged with published2c48edd in clean ambient-city-release. Combined Node
 2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and

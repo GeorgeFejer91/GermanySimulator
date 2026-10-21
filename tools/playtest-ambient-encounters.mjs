@@ -122,6 +122,67 @@ function gameProbe(actorVoiceId=voiceId){return `
 })();
 `}
 
+function personalGameProbe(id,regionalCase){return `
+(()=>{
+ let actor=null;
+ const selectedVoice=${JSON.stringify(id)};
+ const regionalCase=${JSON.stringify(regionalCase)};
+ let regionalFixture=null;
+ if(regionalCase==='natural-berlin'||regionalCase==='forced-germany'){
+  actor=npcs.find(n=>n.id==='city-karl-heinz-post'&&n.voiceId===selectedVoice&&!n.arrested&&!n.lawPending);
+  if(!actor)throw Error('Original Karl actor missing');
+  const original={x:actor.x,y:actor.y,vx:actor.vx,vy:actor.vy,min:actor.min,max:actor.max,routeBounds:actor.routeBounds?{...actor.routeBounds}:null,region:regionOf(actor.y)};
+  if(original.region!=='berlin')throw Error('Karl original route must be Berlin');
+  regionalFixture={kind:regionalCase,original,staged:null,legal:null,beforeWorldAdmission:!window.Germany3D?.ready};
+  if(regionalCase==='forced-germany'){
+   const building=buildings.find(b=>b.id==='spaeti');
+   if(!building||building.x!==690||building.y!==1180||building.w!==250||building.h!==145)throw Error('Frozen Spaeti geometry changed');
+   const routeBounds={x:573,y:1308,w:965,h:72},candidate={...actor,x:954,y:1339,vx:-14,vy:0,routeBounds},exit={x:984,y:1339};
+   const legalPoint=(x,y)=>pedestrianRouteContains(candidate,x,y)&&!responderBlocked(x,y,13,candidate,null,null);
+   if(!legalPoint(candidate.x,candidate.y))throw Error('Karl Germany route start blocked');
+   const steps=Math.ceil(Math.hypot(exit.x-candidate.x,exit.y-candidate.y));
+   for(let i=1;i<=steps;i++)if(!legalPoint(candidate.x+(exit.x-candidate.x)*i/steps,candidate.y+(exit.y-candidate.y)*i/steps))throw Error('Karl Germany route exit blocked at step '+i);
+   Object.assign(actor,{x:candidate.x,y:candidate.y,vx:candidate.vx,vy:0,routeBounds:{...routeBounds},pause:0,blockedTimer:0,progressWindow:null,avoid:1});
+   actor.min=routeBounds.x+13;actor.max=routeBounds.x+routeBounds.w-13;
+   regionalFixture.staged={x:actor.x,y:actor.y,vx:actor.vx,vy:actor.vy,min:actor.min,max:actor.max,routeBounds:{...actor.routeBounds},region:regionOf(actor.y)};
+   regionalFixture.legal={building:{id:building.id,x:building.x,y:building.y,w:building.w,h:building.h},start:true,exit,steps,routeContains:pedestrianRouteContains(actor,actor.x,actor.y)};
+   if(regionalFixture.staged.region!=='germany'||!regionalFixture.legal.routeContains)throw Error('Karl regional fixture not on legal Germany route');
+  }
+ }
+ function sample(){
+  const speech=actor&&getStreetSpeech(actor),item=activeStimulus,clip=item?.recording&&speechCatalog.recordings[item.recording];
+  return{at:performance.now(),modal:state.modal,voiceOn:state.voiceOn,paused:!!window.GermanyHUD?.paused,
+   player:{x:player.x,y:player.y},region:state.region,fixture:regionalFixture,actor:actor?{id:actor.id,voiceId:actor.voiceId,x:actor.x,y:actor.y}:null,
+   dialogue:state.dialogue?{line:state.dialogueData.i,text:state.dialogueData.lines[state.dialogueData.i],busy:state.dialogueVoiceBusy,complete:state.dialogueData.lineComplete}:null,
+   speech:speech?{actorId:speech.actorId,voiceId:speech.voiceId,status:speech.speechStatus,time:speech.mediaTime,opening:speech.mouthOpen}:null,
+   cloneSpeech:actor?getStreetSpeech({...actor}):null,
+   stimulus:item?{actorId:item.actorId,voiceId:item.actorVoiceId,recording:item.recording,text:item.text,mode:item.subtitleMode,clip:clip?{voiceId:clip.voiceId,profileId:clip.profileId,referenceSha256:clip.referenceSha256,source:clip.source,sha256:clip.sha256,mouthHz:clip.mouthHz}:null}:null,
+   city:window.__ambientCityInspect?.(actor?.id)};
+ }
+ window.__ambientPersonal={sample,
+  start(){stopSpeech();if(!state.started)finishHumorCertification(false);state.voiceOn=true;state.subtitlesOn=true;
+   state.quizTimer=100000;state.pettyAuditTimer=100000;nextAmbientAt=performance.now()+100000;trainAnnouncementNextAt=performance.now()+100000;
+   for(const n of npcs)n.barkAt=performance.now()+100000;return sample()},
+  stage(){
+   actor??=npcs.find(n=>n.voiceId===selectedVoice&&n.id.startsWith('city-')&&!n.arrested&&!n.lawPending&&regionOf(n.y)==='germany');
+   if(!actor)throw Error('No existing named city actor for '+selectedVoice+' in required region');
+   const prior={x:player.x,y:player.y};let chosen=null;
+   for(const radius of [48,60,76]){
+    for(let i=0;i<16;i++){
+     const angle=i*Math.PI/8,point={x:actor.x+Math.cos(angle)*radius,y:actor.y+Math.sin(angle)*radius};
+     if(staticBlocked(point.x,point.y,player.r)||onGardenGrass(point.x,point.y)||onRoad(point.x,point.y)&&!onCrossing(point.x,point.y)||responderBlocked(point.x,point.y,player.r,player,null,null))continue;
+     Object.assign(player,point);if(cityInteractionTarget()?.object===actor){chosen=point;break}Object.assign(player,prior);
+    }
+    if(chosen)break;
+   }
+   if(!chosen)throw Error('No legal native E target point for '+selectedVoice);
+   actor.reactionNear=true;actor.reactionCooldown=100000;updateHud();Germany3DBridge.prepareNearbyAssets();Germany3D.prepareNearbyAssets();
+   return{staging:regionalCase==='forced-germany'?'Player placed beside Karl after one legal Germany pre-world fixture; actor root and phase untouched after setup':'Player placed beside existing named actor; actor root, route, phase and clock unchanged',...sample()};
+  }
+ };
+})();
+`}
+
 const renderProbe=`const ambientContactRows=__CONTACT_ROWS__,ambientDeliveries=__DELIVERY_DEFINITIONS__;let ambientSoleCanvas=null;
 window.__ambientMotionInspect=n=>inspectStreetSimulation(n);
 window.__ambientCityInspect=actorId=>{
@@ -279,7 +340,101 @@ export default {
    artifacts.json('encounter.json',evidence);
   }
   return{modes:evidence.paths.map(path=>({mode:path.mode,titleVisible:path.title.state.city.ambient.visible.length,stagedVisible:path.ready.state.city.ambient.visible.length,stagedNearby:path.ready.state.city.ambient.nearby.length,textureBytes:path.ready.state.city.textureBytes,resources:path.ready.resourceTotals,modalSamples:path.modalSamples.length,recoverySamples:path.recovery.length})),limits:this.limits};
- }},{id:'ambient-route-diagnostic',modes:['stress'],timeoutMs:360000,
+ }},{id:'ambient-personal-city',modes:['quick','stress'],timeoutMs:240000,
+ async run({page,context,baseURL,artifacts,root,profile}){
+   const regionalCase=process.env.AMBIENT_PERSONAL_REGION_CASE||'existing-germany';
+   assert(['existing-germany','natural-berlin','forced-germany'].includes(regionalCase),'Unknown personal-city regional case');
+   if(regionalCase!=='existing-germany')assert.equal(voiceId,'stadt-karl-heinz-post','Karl regional cases require the original Karl actor');
+   const main=process.env.AMBIENT_MAIN!=='0',manifestBytes=readFileSync(resolve(root,main?'assets/characters/street/manifest.json':process.env.AMBIENT_CANDIDATE_MANIFEST||'output/ambient-city-animation/karl-post-integration-v1/pack-root/manifest-opt-in.json')),manifest=JSON.parse(manifestBytes),person=manifest.characters[voiceId];
+  assert(person&&!person.standingOnly&&person.atlasMotion&&person.mouthPaint&&person.motionDelivery,'Admitted named motion and source-bound mouths required');
+  registerStreetCharacterManifest(manifest);
+  const game=readFileSync(resolve(root,'game.js'),'utf8'),world=readFileSync(resolve(root,'world3d.js'),'utf8');
+  assert(game.includes('function loop(now){'));assert(world.includes('window.Germany3D={ready:true'));
+   const evidence={voiceId,regionalCase,profile:profile.id,manifestSource:main?'Exact MAIN bytes served without manifest or asset interception':'Raw opt-in Karl candidate manifest and selected Karl asset overlay',hashes:{game:digest(game),world:digest(world),manifest:digest(manifestBytes)},limits:[
+    regionalCase==='forced-germany'?'Karl is staged once on a validated legal Germany route before world admission; this is a regional fixture, not his natural Berlin placement.':'Existing actor and native E/dialogue/media handlers; player-only staging is not natural traversal.',
+   'Speech is state-checked silently; physical Android and perceptual listening are not exercised.',
+   'FILE pause is checked after dialogue; this does not certify pausing active dialogue speech.'
+  ]};
+  const save=()=>artifacts.json('personal-city.json',evidence),sample=()=>page.evaluate(()=>__ambientPersonal.sample());
+   if(!main){
+    assert.equal(voiceId,'stadt-karl-heinz-post','Personal-city candidate overlay is scoped to Karl');
+    assert(process.env.AMBIENT_CANDIDATE_ASSETS,'Karl candidate asset root required');
+    await page.route('**/assets/characters/street/manifest.json?*',route=>route.fulfill({contentType:'application/json',body:manifestBytes}));
+    const assets=candidateAssetRoot(root),prefix='/assets/characters/residents/stadt-karl-heinz-post/';
+    await page.route('**/assets/characters/residents/stadt-karl-heinz-post/**',route=>{
+     const pathname=new URL(route.request().url()).pathname;if(!pathname.startsWith(prefix))return route.continue();
+     const path=resolve(assets,'.'+pathname);assert(path.startsWith(assets+'/')||path.startsWith(assets+'\\'),'Karl candidate asset escaped staging root');
+     return route.fulfill({body:readFileSync(path),contentType:pathname.endsWith('.json')?'application/json':'image/webp'});
+    });
+   }
+   await page.route('**/game.js?*',route=>route.fulfill({contentType:'text/javascript',body:game.replace('function loop(now){',personalGameProbe(voiceId,regionalCase)+'function loop(now){')}));
+  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:world.replace('window.Germany3D={ready:true',cityProbe(root,[],manifest)+'window.Germany3D={ready:true')}));
+  await page.goto(baseURL+'/index.html',{waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>window.__ambientPersonal&&window.Germany3D?.startupReady&&window.Germany3DBridge?.startupAssetsReady&&document.getElementById('preload').hidden);
+  await page.locator('#start').click();
+  evidence.started=await page.evaluate(()=>__ambientPersonal.start());
+  if(await page.locator('#fax-dismiss').isVisible()){await page.locator('#fax-dismiss').click();await page.waitForFunction(()=>document.getElementById('mission-fax').hidden,null,{timeout:4000})}
+  evidence.staged=await page.evaluate(()=>__ambientPersonal.stage());save();
+   if(regionalCase!=='existing-germany'){
+    assert.equal(evidence.staged.fixture.beforeWorldAdmission,true);
+    assert.equal(evidence.staged.fixture.original.region,'berlin');
+    // The production initializer places the offset declaration on this legal
+    // sidewalk before world admission; 2440 is only its pre-recovery map Y.
+    assert.equal(evidence.staged.fixture.original.x,4610);assert.equal(evidence.staged.fixture.original.y,2508);
+    if(regionalCase==='forced-germany'){
+     assert.equal(evidence.staged.fixture.staged.region,'germany');
+     assert.equal(evidence.staged.fixture.legal.routeContains,true);
+     assert.equal(evidence.staged.fixture.legal.start,true);
+    }else assert.equal(evidence.staged.fixture.staged,null,'Natural Berlin actor route remains original');
+   }
+   await page.waitForFunction(expected=>__ambientPersonal.sample().region===expected,regionalCase==='natural-berlin'?'berlin':'germany');
+  await page.waitForFunction(()=>{const p=__ambientPersonal.sample().city?.selected?.paint;return p?.failed||p?.motionLoaded&&p?.mouthPaint?.loaded},null,{timeout:45000});
+  evidence.ready=await sample();save();assert.equal(evidence.ready.city.selected.paint.failed,false);
+  const before=evidence.ready.actor;
+  await page.waitForFunction(before=>{const s=__ambientPersonal.sample();return Math.hypot(s.actor.x-before.x,s.actor.y-before.y)>.1&&s.city.selected.paint.pose.clip==='walk'},before,{timeout:10000});
+  evidence.walking=await sample();await artifacts.screenshot(page,'personal-walking.png');
+  evidence.target=await page.evaluate(()=>__ambientPersonal.stage());save();
+   assert.equal(evidence.target.region,regionalCase==='natural-berlin'?'berlin':'germany');
+  const interact=async()=>{
+   if(!profile.isMobile)return page.keyboard.press('KeyE');
+   // Caption dialogue exposes its own native action above the touch dock.
+   // Use that visible action while it owns input; the dock opens the encounter.
+   if(await page.locator('#dialogue-next').isVisible())return page.locator('#dialogue-next').tap();
+   return page.locator('.control-dock [data-key="KeyE"]').tap();
+  };
+   const berlinLines=['Der Briefkasten is responsible, solange der Brief nicht drin ist. After that müssen Sie warten, until jemand anders responsible ist.','Eine delivery bedeutet, dass ich etwas abgegeben habe. Whether Sie es auch bekommen haben, müssten Sie bitte mit der delivery klären.'];
+   const germanLines=['Der Briefkasten ist zuständig, solange der Brief nicht drin ist. Danach müssen Sie warten, bis jemand anders zuständig ist.','Eine Zustellung bedeutet, dass ich etwas abgegeben habe. Dass Sie es auch bekommen haben, müssten Sie bitte mit der Zustellung klären.'];
+   const germanClipHashes=['fcce03799a19a4875691bf5d0639626669756b8fe4ee1021b7210a9077f39e93','ac7fc2e94308c9c40e4579c9ecab62d5d92e631c3f113e0b79959fbd94085772'];
+   const assertCaption=s=>{assert.equal(s.region,'berlin');assert.equal(s.cloneSpeech,null);assert.equal(s.speech,null);assert.equal(s.dialogue.text,berlinLines[s.dialogue.line]);assert.equal(s.stimulus?.actorId,s.actor.id);assert.equal(s.stimulus?.voiceId,voiceId);assert.equal(s.stimulus?.text,s.dialogue.text);assert.equal(s.stimulus?.mode,'silent');assert.equal(s.stimulus?.recording,null);assert.equal(s.stimulus?.clip,null);assert.equal(s.city.selected.paint.mouth.active,false)};
+   const assertRecording=s=>{assert.equal(s.region,'germany');assert.equal(s.cloneSpeech,null);assert.equal(s.speech?.actorId,s.actor.id);assert.equal(s.speech?.voiceId,voiceId);assert.equal(s.stimulus.actorId,s.actor.id);assert.equal(s.stimulus.voiceId,voiceId);assert.equal(s.stimulus.text,s.dialogue.text);assert(s.stimulus.recording,'Native default recording required');assert.equal(s.stimulus.clip.voiceId,voiceId);assert.equal(s.stimulus.clip.source,s.stimulus.text);assert.equal(s.stimulus.clip.mouthHz,40);assert.equal(digest(readFileSync(resolve(root,s.stimulus.recording))),s.stimulus.clip.sha256);if(regionalCase==='forced-germany'){assert.equal(s.dialogue.text,germanLines[s.dialogue.line]);assert.equal(s.stimulus.recording,`./assets/voices/city-dialogue/stadt-karl-heinz-post-0${s.dialogue.line+1}.mp3`);assert.equal(s.stimulus.clip.sha256,germanClipHashes[s.dialogue.line]);assert.equal(s.stimulus.clip.profileId,'45fd0a83c5c9448e85af11b4e7407c6e');assert.equal(s.stimulus.clip.referenceSha256,'182439eb4549899d4a8d8f23575932d045c6dbad95b3a29f53314444dc485327')}};
+   await interact();
+   if(regionalCase==='natural-berlin')await page.waitForFunction(()=>__ambientPersonal.sample().stimulus?.mode==='silent',null,{timeout:20000});
+   else await page.waitForFunction(()=>__ambientPersonal.sample().speech?.status==='playing',null,{timeout:20000});
+   evidence.speaking=[];for(let i=0;i<12;i++){evidence.speaking.push(await sample());await page.waitForTimeout(80)}save();
+   if(regionalCase==='natural-berlin')for(const s of evidence.speaking)assertCaption(s);
+   else{
+    assert(evidence.speaking.some(s=>s.speech.time>0&&s.speech.opening>0&&s.city.selected.paint.mouth.active),'Own native media must articulate visible source paint');
+    for(const s of evidence.speaking)assertRecording(s);
+   }
+   assert.equal(new Set(evidence.speaking.map(s=>s.actor.x+','+s.actor.y)).size,1,'Dialogue holds physical root');
+   await artifacts.screenshot(page,regionalCase==='natural-berlin'?'personal-caption.png':'personal-speaking.png');
+  await page.waitForFunction(()=>{const s=__ambientPersonal.sample();return s.dialogue&&!s.dialogue.busy&&!s.speech},null,{timeout:45000});
+  evidence.firstEndTransition=await sample();await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(done))));
+  evidence.firstEnded=await sample();assert.equal(evidence.firstEnded.city.selected.paint.mouth.active,false);save();
+   await interact();await page.waitForFunction(caption=>{const s=__ambientPersonal.sample();return s.dialogue?.line===1&&(caption?s.stimulus?.mode==='silent':s.speech?.status==='playing')},regionalCase==='natural-berlin',{timeout:15000});
+   evidence.secondPlaying=await sample();
+   if(regionalCase==='natural-berlin')assertCaption(evidence.secondPlaying);
+   else{assert.notEqual(evidence.secondPlaying.stimulus.recording,evidence.speaking[0].stimulus.recording);assertRecording(evidence.secondPlaying)}
+  await interact();await page.waitForFunction(()=>!__ambientPersonal.sample().modal&&!__ambientPersonal.sample().speech);evidence.cancelled=await sample();save();
+  await page.waitForFunction(()=>!__ambientPersonal.sample().city.selected.hasReaction,null,{timeout:15000});
+  const returned=await sample();await page.waitForFunction(before=>{const s=__ambientPersonal.sample();return Math.hypot(s.actor.x-before.x,s.actor.y-before.y)>.1},returned.actor,{timeout:10000});
+  evidence.returned=await sample();await artifacts.screenshot(page,'personal-returned.png');
+  await page.locator('#file-toggle').click();await page.waitForFunction(()=>GermanyHUD.paused);const paused=await sample();await page.waitForTimeout(350);evidence.paused=await sample();
+  assert.deepEqual(evidence.paused.actor,paused.actor);assert.deepEqual(evidence.paused.city.selected.paint.pose,paused.city.selected.paint.pose);assert.equal(evidence.paused.city.selected.paint.mouth.active,false);
+  await page.locator('#file-close').click();save();
+   return{voiceId,regionalCase,profile:profile.id,playingSamples:evidence.speaking.length,manifest:evidence.hashes.manifest,limits:evidence.limits};
+ }
+ },{id:'ambient-route-diagnostic',modes:['stress'],timeoutMs:360000,
  async run({page,context,baseURL,artifacts,root,profile}){
   const main=process.env.AMBIENT_ROUTE_SOURCE==='main-irmgard',manifestBytes=main?readFileSync(resolve(root,'assets/characters/street/manifest.json')):null,manifest=main?JSON.parse(manifestBytes):packedCandidate(root),actorVoiceId=main?'crowd-irmgard-aktenordner':voiceId,game=readFileSync(resolve(root,'game.js'),'utf8'),world=readFileSync(resolve(root,'world3d.js'),'utf8'),contacts=main?[]:['contact-measurements.json','vertical-contact-measurements.json'].flatMap(file=>JSON.parse(readFileSync(resolve(root,'output/ambient-city-animation/hartmut-final-pixels/hartmut-keller',file))).assessments);
   if(main){assert.equal(process.env.AMBIENT_ROUTE_CASES,'corner');assert.equal(digest(game),process.env.AMBIENT_ROUTE_GAME_SHA,'Frozen game source pin required');assert.equal(digest(manifestBytes),process.env.AMBIENT_ROUTE_MANIFEST_SHA,'Exact raw MAIN manifest pin required');registerStreetCharacterManifest(manifest);assert(manifest.characters[actorVoiceId].atlasMotion);assert.equal(manifest.characters[actorVoiceId].mouthPaint,undefined);assert.equal(manifest.characters[actorVoiceId].motionDelivery,undefined)}

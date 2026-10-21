@@ -393,6 +393,12 @@ paintings. Walking, planted stops, gestures and mouth bindings use each figure's
 own paint. Exact prompts, source hashes and local authoring recipes are under
 `assets/sprite-sources/street-speaker-motion/`.
 
+Karl-Heinz Post's open-city walking, stops, envelope gesture and talking mouths
+use his original project paint and own OpenAI ImageGen directional sources.
+His source bindings and authoring recipes are under
+`assets/sprite-sources/resident-motion/stadt-karl-heinz-post/`. Speech uses his
+existing selected voice recordings and their measured mouth tracks.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

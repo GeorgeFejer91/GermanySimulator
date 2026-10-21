@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "purpose": "Karl candidate side16 loop and down/up four-contact source diagnostic only; no atlas or stride admission",
+  "sourceFittingFrom": {
+    "path": "assets/sprite-sources/street-residents/motion-spec.json",
+    "sha256AtSnapshot": "6282d4002d4b9e6a8a70d0f656c5a8bb7d36d165023cc4e2152e4ff8ef1ac564"
+  },
+  "worldContract": {
+    "standingFigureWorldHeight": 1.6,
+    "standingPivot": [
+      64,
+      150
+    ],
+    "standingFigureHeight": 136,
+    "distancePerCycle": "unmeasured"
+  },
+  "working": {
+    "canvas": [
+      512,
+      512
+    ],
+    "baselineY": 472,
+    "figureHeight": 400
+  },
+  "person": {
+    "actorId": "city-karl-heinz-post",
+    "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/original-upper-ownership-v2.png",
+    "sourceSha256": "93e284361cc214dd531febd4b1b901ee7818faffc37cfa4de4350276a64508d2",
+    "scale": 0.6369426751592356,
+    "status": "candidate-unapproved",
+    "views": {
+      "right": {
+        "component_bounds": [
+          743,
+          50,
+          1063,
+          675
+        ],
+        "source_pivot": [
+          887.0,
+          675
+        ],
+        "landmarks": {
+          "waist": 470,
+          "hip": 490,
+          "hem": [
+            515,
+            515
+          ],
+          "knee": [
+            550,
+            550
+          ],
+          "sock": [
+            582,
+            582
+          ],
+          "ankle": [
+            585,
+            585
+          ],
+          "mid": 887.0,
+          "centres": [
+            829.4,
+            944.6
+          ],
+          "split_path_xy": [
+            [
+              970.2,
+              487.5
+            ],
+            [
+              970.2,
+              612.5
+            ],
+            [
+              1034.2,
+              643.75
+            ],
+            [
+              1050.2,
+              675
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 32,
+          "root_overlap": 2,
+          "lateral_lift": 6
+        },
+        "foreground": 0,
+        "protected_polygons": [],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "leg_sources": [
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+            "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+            "component_bounds": [
+              86,
+              700,
+              355,
+              969
+            ],
+            "source_pivot": [
+              186,
+              969
+            ],
+            "scale": 0.48,
+            "offset_x": -8,
+            "sole_point_xy": [
+              140,
+              963
+            ],
+            "shoe_length_source_px": 269
+          },
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+            "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+            "component_bounds": [
+              450,
+              699,
+              711,
+              968
+            ],
+            "source_pivot": [
+              551,
+              968
+            ],
+            "scale": 0.48,
+            "offset_x": 8,
+            "sole_point_xy": [
+              502,
+              959
+            ],
+            "shoe_length_source_px": 261
+          }
+        ],
+        "originalUpper": {
+          "component_bounds": [
+            743,
+            50,
+            1063,
+            675
+          ],
+          "source_pivot": [
+            887.0,
+            675
+          ],
+          "landmarks": {
+            "waist": 456.25,
+            "hip": 487.5,
+            "hem": [
+              518.75,
+              518.75
+            ],
+            "knee": [
+              565.625,
+              565.625
+            ],
+            "sock": [
+              609.5,
+              609.5
+            ],
+            "ankle": [
+              612.5,
+              612.5
+            ],
+            "mid": 887.0,
+            "centres": [
+              829.4,
+              944.6
+            ],
+            "split_path_xy": [
+              [
+                970.2,
+                487.5
+              ],
+              [
+                970.2,
+                612.5
+              ],
+              [
+                1034.2,
+                643.75
+              ],
+              [
+                1050.2,
+                675
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [
+            [
+              [
+                795,
+                461
+              ],
+              [
+                869,
+                459
+              ],
+              [
+                886,
+                480
+              ],
+              [
+                884,
+                512
+              ],
+              [
+                866,
+                528
+              ],
+              [
+                822,
+                527
+              ],
+              [
+                797,
+                512
+              ]
+            ],
+            [
+              [
+                1001,
+                425
+              ],
+              [
+                1031,
+                425
+              ],
+              [
+                1031,
+                500
+              ],
+              [
+                989,
+                503
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "cutSourceY": 505,
+          "featherWorkingPixels": 5
+        },
+        "knee_follow": 0.8,
+        "hem_follow": 0.65,
+        "upper_motion": {
+          "bob": 3.8,
+          "sway": 4,
+          "head_counter": 0.2,
+          "headBaseSourceY": 312.5,
+          "waistSourceY": 456.25
+        },
+        "source": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+        "sourceSha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+      },
+      "left": {
+        "component_bounds": [
+          1685,
+          48,
+          1997,
+          676
+        ],
+        "source_pivot": [
+          1855.5,
+          676
+        ],
+        "landmarks": {
+          "waist": 470,
+          "hip": 490,
+          "hem": [
+            515,
+            515
+          ],
+          "knee": [
+            550,
+            550
+          ],
+          "sock": [
+            582,
+            582
+          ],
+          "ankle": [
+            585,
+            585
+          ],
+          "mid": 1855.5,
+          "centres": [
+            1799.34,
+            1911.66
+          ],
+          "split_path_xy": [
+            [
+              1775.48,
+              487.6
+            ],
+            [
+              1775.48,
+              613.2
+            ],
+            [
+              1713.08,
+              644.6
+            ],
+            [
+              1697.48,
+              676
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 32,
+          "root_overlap": 2,
+          "lateral_lift": 6
+        },
+        "foreground": 0,
+        "protected_polygons": [],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "leg_sources": [
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+            "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+            "component_bounds": [
+              818,
+              699,
+              1080,
+              967
+            ],
+            "source_pivot": [
+              977,
+              967
+            ],
+            "scale": 0.48,
+            "offset_x": -8,
+            "sole_point_xy": [
+              1028,
+              960
+            ],
+            "shoe_length_source_px": 262
+          },
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+            "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+            "component_bounds": [
+              1180,
+              700,
+              1446,
+              968
+            ],
+            "source_pivot": [
+              1344,
+              968
+            ],
+            "scale": 0.48,
+            "offset_x": 8,
+            "sole_point_xy": [
+              1393,
+              961
+            ],
+            "shoe_length_source_px": 266
+          }
+        ],
+        "originalUpper": {
+          "component_bounds": [
+            1685,
+            48,
+            1997,
+            676
+          ],
+          "source_pivot": [
+            1855.5,
+            676
+          ],
+          "landmarks": {
+            "waist": 456.2,
+            "hip": 487.6,
+            "hem": [
+              519.0,
+              519.0
+            ],
+            "knee": [
+              566.1,
+              566.1
+            ],
+            "sock": [
+              610.2,
+              610.2
+            ],
+            "ankle": [
+              613.2,
+              613.2
+            ],
+            "mid": 1855.5,
+            "centres": [
+              1799.34,
+              1911.66
+            ],
+            "split_path_xy": [
+              [
+                1775.48,
+                487.6
+              ],
+              [
+                1775.48,
+                613.2
+              ],
+              [
+                1713.08,
+                644.6
+              ],
+              [
+                1697.48,
+                676
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1801,
+                447
+              ],
+              [
+                1919,
+                445
+              ],
+              [
+                1926,
+                514
+              ],
+              [
+                1887,
+                534
+              ],
+              [
+                1843,
+                529
+              ],
+              [
+                1801,
+                510
+              ]
+            ]
+          ],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "cutSourceY": 505,
+          "featherWorkingPixels": 5
+        },
+        "knee_follow": 0.8,
+        "hem_follow": 0.65,
+        "upper_motion": {
+          "bob": 3.8,
+          "sway": 4,
+          "head_counter": 0.2,
+          "headBaseSourceY": 311.76,
+          "waistSourceY": 456.2
+        },
+        "source": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+        "sourceSha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+      },
+      "down": {
+        "component_bounds": [
+          199,
+          50,
+          618,
+          673
+        ],
+        "source_pivot": [
+          406.5,
+          673
+        ],
+        "landmarks": {
+          "waist": 460,
+          "hip": 480,
+          "hem": [
+            510,
+            510
+          ],
+          "knee": [
+            540,
+            540
+          ],
+          "sock": [
+            582,
+            582
+          ],
+          "ankle": [
+            585,
+            585
+          ],
+          "mid": 406.5,
+          "centres": [
+            331.08,
+            481.92
+          ],
+          "split_path_xy": [
+            [
+              406.5,
+              486.1
+            ],
+            [
+              406.5,
+              673
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 24,
+          "root_overlap": 2
+        },
+        "foreground": 1,
+        "protected_polygons": [
+          [
+            [
+              196,
+              447
+            ],
+            [
+              286,
+              447
+            ],
+            [
+              287,
+              514
+            ],
+            [
+              234,
+              546
+            ],
+            [
+              197,
+              528
+            ]
+          ],
+          [
+            [
+              505,
+              403
+            ],
+            [
+              575,
+              404
+            ],
+            [
+              575,
+              454
+            ],
+            [
+              613,
+              452
+            ],
+            [
+              616,
+              514
+            ],
+            [
+              586,
+              531
+            ],
+            [
+              535,
+              524
+            ],
+            [
+              503,
+              499
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "source": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+        "sourceSha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+      },
+      "up": {
+        "component_bounds": [
+          1169,
+          50,
+          1581,
+          673
+        ],
+        "source_pivot": [
+          1372.5,
+          673
+        ],
+        "landmarks": {
+          "waist": 460,
+          "hip": 480,
+          "hem": [
+            510,
+            510
+          ],
+          "knee": [
+            540,
+            540
+          ],
+          "sock": [
+            582,
+            582
+          ],
+          "ankle": [
+            585,
+            585
+          ],
+          "mid": 1372.5,
+          "centres": [
+            1298.34,
+            1446.66
+          ],
+          "split_path_xy": [
+            [
+              1372.5,
+              486.1
+            ],
+            [
+              1372.5,
+              673
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 24,
+          "root_overlap": 2
+        },
+        "foreground": 1,
+        "protected_polygons": [
+          [
+            [
+              1167,
+              426
+            ],
+            [
+              1254,
+              421
+            ],
+            [
+              1256,
+              511
+            ],
+            [
+              1219,
+              530
+            ],
+            [
+              1172,
+              510
+            ]
+          ],
+          [
+            [
+              1498,
+              457
+            ],
+            [
+              1583,
+              458
+            ],
+            [
+              1587,
+              514
+            ],
+            [
+              1559,
+              531
+            ],
+            [
+              1500,
+              519
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "source": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+        "sourceSha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+      }
+    }
+  },
+  "version": 3,
+  "originalCardinal": {
+    "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+    "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+  },
+  "maskBuilder": {
+    "path": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/build-upper-ownership-v2.py",
+    "sha256": "554221cbc61e37d85c8737956ff7485b2281ac94a674a465afae034bb55aefe6"
+  },
+  "frontRearFittingFrom": {
+    "path": "assets/sprite-sources/street-residents/motion-spec.json",
+    "sha256AtSnapshot": "6282d4002d4b9e6a8a70d0f656c5a8bb7d36d165023cc4e2152e4ff8ef1ac564",
+    "status": "unapproved-family-fit"
+  }
+}

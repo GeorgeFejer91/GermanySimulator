@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "purpose": "Karl own full walk, bridge and turn source delivery; no stride/runtime approval",
+  "sourceFit": {
+    "path": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/source-fit-v3.json",
+    "sha256": "2c82120d2d84faf4717598f6cb898bd334b18aa1d25d1705889ecb5f3a2b163f"
+  },
+  "turnSourcesFrom": {
+    "path": "assets/sprite-sources/street-residents/motion-spec.json",
+    "sha256AtSnapshot": "6282d4002d4b9e6a8a70d0f656c5a8bb7d36d165023cc4e2152e4ff8ef1ac564",
+    "status": "historical-input-only"
+  },
+  "turn_sources": [
+    {
+      "neutral": "down"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+      "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+      "component_bounds": [
+        21,
+        60,
+        364,
+        649
+      ],
+      "source_pivot": [
+        202.0,
+        649
+      ],
+      "scale": 0.6779661016949152
+    },
+    {
+      "neutral": "right"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+      "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+      "component_bounds": [
+        404,
+        57,
+        735,
+        646
+      ],
+      "source_pivot": [
+        589.5,
+        646
+      ],
+      "scale": 0.6779661016949152
+    },
+    {
+      "neutral": "up"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+      "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+      "component_bounds": [
+        796,
+        57,
+        1130,
+        647
+      ],
+      "source_pivot": [
+        944.5,
+        647
+      ],
+      "scale": 0.6779661016949152
+    },
+    {
+      "neutral": "left"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/turns-and-leg-components-candidate.png",
+      "sourceSha256": "4c14755554c51e073e2a1cc0a9e0262ff9cd87afc97b0fa2599af4d7e0603ae9",
+      "component_bounds": [
+        1174,
+        60,
+        1512,
+        649
+      ],
+      "source_pivot": [
+        1333.0,
+        649
+      ],
+      "scale": 0.6779661016949152
+    }
+  ],
+  "layout": {
+    "grid": [
+      16,
+      9
+    ],
+    "walkRows": [
+      "down",
+      "right",
+      "up",
+      "left"
+    ],
+    "bridgeRows": [
+      "down",
+      "right",
+      "up",
+      "left"
+    ],
+    "turnRow": 8
+  },
+  "variants": {
+    "desktop": {
+      "cell": [
+        96,
+        120
+      ],
+      "figureHeight": 102,
+      "pivot": [
+        48,
+        112.5
+      ]
+    },
+    "mobile": {
+      "cell": [
+        64,
+        80
+      ],
+      "figureHeight": 68,
+      "pivot": [
+        32,
+        75
+      ]
+    }
+  }
+}
