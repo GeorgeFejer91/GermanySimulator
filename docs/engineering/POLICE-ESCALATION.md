@@ -142,6 +142,10 @@ physical-device smoothness claim.
 
 The clean full Node run passes 2,379/2,379 checks; Python discovery passes
 102/102, with the separate office/quiz authoring suites passing 12/12 and 7/7.
+The subsequently published Heike mouth-axis fix b34b4ce is also preserved; its
+two focused regressions pass. Camera independently verifies that it changes
+only mouth-axis metadata/hash bindings, while all 75 P8 pins, geometry, footprint
+and shared renderer logic remain unchanged.
 The initial failures exposed missing copied curator imports and a test's assumed
 ignored output folder. The fixtures are self-contained now; full clean reruns
 pass. Curator consistency, ordinary neighbor coverage (114/114) and the new
