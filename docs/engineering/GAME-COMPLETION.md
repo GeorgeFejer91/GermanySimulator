@@ -25,10 +25,46 @@ portrait edges are recovered in linear light. Camera's three native functional
 sets and separate3/3 cleanup cases are accepted; the three earlier wrapped cases
 retain their late async-unload fixture FAILs in evidence. Full-world, physical
 Android, listening, natural random encounter and publication gates remain open.
-Current branch has two street-manifest motion families plus the two existing
-Sandales;38 other scoped identities remain standing-only. Mouth metadata alone
+Current branch has three street-manifest motion families plus the two existing
+Sandales;37 other scoped identities remain standing-only. Mouth metadata alone
 does not establish available native audio or full speaking acceptance. The active
 42-character goal and milestones3–6 remain open.
+
+Heike Hoffmann is locally integrated. Final MAIN native browser passes3/3 desktop
+and Android-emulated portrait/landscape profiles; full Node2281/2281, Python12/12,
+curator, syntax and whitespace checks pass. Independent Physics/Camera/general
+scoped reviews pass on193 frozen inputs. Exact checkpoint has64 selected paths;
+only a test file receives Git's normal CRLF-to-LF conversion. Private Berlin audio
+remains unapproved and excluded. Publication integration is next. Physical-device,
+listening, natural exact right8/12 stops and full-world/cohort gates remain open.
+Her V5 generated-leg92-cell walk
+and256-stop bakes failed source-match review and must not be integrated. The
+original-paint V7 pilot restores visible shoes but retains source seam/alpha
+findings. Repaired V9 side-layer ownership and hem registration pass independent
+four-phase source review. Fresh full92-cell walk/bridge/turn and256-stop exports
+now pass independent source art/metadata review; temporal and integrated gates
+remain open. The
+16-frame own key-emphasis gesture (14 distinct poses) has bounded source review;
+direct96x120/64x80 exports preserve existing128x160 standing geometry. Five own
+neutral lip profiles are packaged independently; exact own question24 recording
+exists, but both default Heike actors are Berlin-only and that Germany wording
+does not match their Berlin question. No Berlin take is admitted; the recording
+gap is explicit. Source-bound moving mouths and compact packs are locally adopted;
+actual shader checks pass all378 logical slots at both packed sizes, including
+276 visible mouths,102 nulls and unchanged alpha. Three native Berlin caption
+flows pass on desktop and Android portrait/landscape emulation; the missing
+matching default Berlin recording stays explicit. One private fixed-voice
+question passes exact encoded words/levels and silent native playback on all
+three profiles; its listening and game-use approval remain pending. Two longer
+private takes fail word checks and stay held. Scoped Camera review accepts
+depth/resize/pivot; Physics accepts tested approach/stop ownership, and its
+P5 closeout accepts bounded actual/forced source-contact evidence with its
+natural-phase limits explicit. Her eight reviewed payloads and complete motion
+entry are now in the local canonical manifest; final MAIN browser/regression,
+successor review and publication remain pending. The audio is still private.
+Uwe/Brigitte source-only preparations retain their failed
+side-shoe probes and have no runtime admission. Current details/evidence are in
+SESSION.md; these candidates do not change the completed-family count.
 
 Ordered milestones and acceptance:
 

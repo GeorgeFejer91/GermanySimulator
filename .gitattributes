@@ -22,3 +22,7 @@ assets/sprite-sources/street-speaker-motion/gisela-becker/** -text
 assets/characters/street-speakers/quiz-gisela-becker/manifest.json -text
 assets/characters/street-speakers/quiz-gisela-becker/delivery-v2/** -text
 tools/build-street-speaker-family.py -text
+
+# Heike source recipes and immutable deliveries retain reviewed SHA-bound bytes.
+assets/sprite-sources/street-speaker-motion/heike-hoffmann/** -text
+assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/** -text

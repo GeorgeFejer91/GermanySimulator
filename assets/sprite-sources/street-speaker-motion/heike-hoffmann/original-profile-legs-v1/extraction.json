@@ -1,0 +1,161 @@
+{
+  "status": "held extraction/method pilot; original source pixels only, no new shoe art",
+  "driverSha256": "c6cf8404b029c212321b5fbd814803dc5fae1f1736af92c552cba19b73e33c2d",
+  "views": {
+    "right": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+      "sourceSha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+      "sourceCell": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "maskPolygon": [
+        [
+          175,
+          380
+        ],
+        [
+          264,
+          380
+        ],
+        [
+          263,
+          403
+        ],
+        [
+          252,
+          424
+        ],
+        [
+          255,
+          432
+        ],
+        [
+          265,
+          437
+        ],
+        [
+          271,
+          444
+        ],
+        [
+          273,
+          452
+        ],
+        [
+          273,
+          460
+        ],
+        [
+          269,
+          467
+        ],
+        [
+          257,
+          473
+        ],
+        [
+          160,
+          473
+        ],
+        [
+          160,
+          427
+        ],
+        [
+          176,
+          411
+        ]
+      ],
+      "layer": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/right-foreground-original.png",
+        "sha256": "e6a536211fd501c477379e797149c63d572207243c6d248054493a21dcc52c2d"
+      },
+      "alphaBounds": [
+        175,
+        380,
+        274,
+        472
+      ],
+      "retainedPaintExact": true
+    },
+    "left": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+      "sourceSha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+      "sourceCell": [
+        1536,
+        0,
+        2048,
+        512
+      ],
+      "maskPolygon": [
+        [
+          248,
+          380
+        ],
+        [
+          346,
+          380
+        ],
+        [
+          346,
+          479
+        ],
+        [
+          250,
+          479
+        ],
+        [
+          241,
+          467
+        ],
+        [
+          238,
+          459
+        ],
+        [
+          238,
+          451
+        ],
+        [
+          241,
+          440
+        ],
+        [
+          250,
+          433
+        ],
+        [
+          258,
+          430
+        ],
+        [
+          255,
+          419
+        ],
+        [
+          249,
+          408
+        ]
+      ],
+      "layer": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/left-foreground-original.png",
+        "sha256": "34c68462a869169ea172f83951cbc06e64734f8b98d6a5eb1f8b3ba6eb922194"
+      },
+      "alphaBounds": [
+        238,
+        380,
+        340,
+        472
+      ],
+      "retainedPaintExact": true
+    }
+  },
+  "method": "One complete original near leg per profile can supply matching own near/far shoe paint; fixed near draw order and connected original crotch backing remain required.",
+  "limitations": [
+    "The far leg is a reused same-character profile component, not a claim of recovered original hidden far pixels.",
+    "Mask edge, duplicated shoe details, rest geometry, contact/pass and neutral/turn continuity need visual proof."
+  ]
+}

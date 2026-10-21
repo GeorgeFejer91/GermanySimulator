@@ -1,7 +1,7 @@
 """Pack referenced native street cells losslessly; full source atlases remain authority.
 
 python tools/build-street-motion-delivery.py --manifest <canonical street manifest> \
-    --character <key or id> --outdir assets/characters/<family>/<character>/delivery [--check]
+    --character <key or id> --outdir assets/characters/<family>/<character>/delivery [--columns 16] [--check]
 """
 import argparse
 import hashlib
@@ -159,7 +159,8 @@ def source_path(root, value):
     return path
 
 
-def run(manifest, character, outdir, check=False, root=ROOT):
+def run(manifest, character, outdir, check=False, root=ROOT, columns=16):
+    columns = integer(columns, 1, 64, 'pack columns')
     root = Path(root).resolve()
     raw = Path(manifest).read_bytes()
     if len(raw) > 262144:
@@ -185,8 +186,8 @@ def run(manifest, character, outdir, check=False, root=ROOT):
               'definitionHashFormat': 'typed-json-f64-v1', 'definitionSha256': definition_fingerprint(person),
               'sources': {}, 'packs': {}}
     for kind, used in slots.items():
-        packed_rows = math.ceil(len(used) / 16)
-        record['packs'][kind] = {'grid': [16, packed_rows], 'slots': used + [None] * (packed_rows * 16 - len(used)), 'variants': {}}
+        packed_rows = math.ceil(len(used) / columns)
+        record['packs'][kind] = {'grid': [columns, packed_rows], 'slots': used + [None] * (packed_rows * columns - len(used)), 'variants': {}}
     exports = {}
     for name, path in paths.items():
         source_bytes = path.read_bytes()
@@ -206,13 +207,16 @@ def run(manifest, character, outdir, check=False, root=ROOT):
         record['sources'][name] = {'file': atlas['file'], 'sha256': digest(source_bytes), 'width': width, 'height': height,
                                    'cell': cell, 'rgba_sha256': digest(source.tobytes()), 'decodedBytes': width * height * 4}
         for kind, pack in record['packs'].items():
-            packed = Image.new('RGBA', (16 * cell[0], pack['grid'][1] * cell[1]))
+            packed_size = (columns * cell[0], pack['grid'][1] * cell[1])
+            if max(packed_size) > 4096:
+                raise ValueError('Packed delivery exceeds 4096 texture extent')
+            packed = Image.new('RGBA', packed_size)
             for physical, logical in enumerate(pack['slots']):
                 if logical is None:
                     continue
                 x, y = logical % grid[0] * cell[0], logical // grid[0] * cell[1]
                 packed.paste(source.crop((x, y, x + cell[0], y + cell[1])),
-                             (physical % 16 * cell[0], physical // 16 * cell[1]))
+                             (physical % columns * cell[0], physical // columns * cell[1]))
             buffer = io.BytesIO()
             packed.save(buffer, 'WEBP', lossless=True, exact=True, method=6)
             encoded = buffer.getvalue()
@@ -248,8 +252,9 @@ if __name__ == '__main__':
     parser.add_argument('--character', required=True)
     parser.add_argument('--outdir', required=True, type=Path)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--columns', type=int, default=16)
     args = parser.parse_args()
-    result = run(args.manifest, args.character, args.outdir, args.check)
+    result = run(args.manifest, args.character, args.outdir, args.check, columns=args.columns)
     print(json.dumps({'id': result['id'], 'packs': {k: {'grid': p['grid'], 'used': sum(s is not None for s in p['slots']),
           'decodedBytes': {v: a['decodedBytes'] for v, a in p['variants'].items()}} for k, p in result['packs'].items()},
           'check': args.check}))

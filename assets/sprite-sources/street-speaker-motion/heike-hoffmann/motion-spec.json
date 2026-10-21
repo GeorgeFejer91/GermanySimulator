@@ -1,0 +1,676 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate; V9 sampled source pilot PASS, all-cardinal alpha-overlap repaired; full encoded source gate pending",
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "cell": [
+    128,
+    160
+  ],
+  "figureHeight": 136,
+  "pivot": [
+    64,
+    150
+  ],
+  "characters": {
+    "quiz-heike-hoffmann": {
+      "actorId": "heike-hoffmann",
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+      "sourceSha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+      "scale": 1,
+      "figureWorldHeight": 1.6,
+      "views": {
+        "down": {
+          "component_bounds": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "source_pivot": [
+            256,
+            472
+          ],
+          "landmarks": {
+            "waist": 365,
+            "hip": 385,
+            "hem": [
+              400,
+              400
+            ],
+            "knee": [
+              417,
+              417
+            ],
+            "sock": [
+              430,
+              430
+            ],
+            "ankle": [
+              434,
+              434
+            ],
+            "mid": 256,
+            "centres": [
+              224,
+              294
+            ],
+            "split_path_xy": [
+              [
+                256,
+                380
+              ],
+              [
+                256,
+                472
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 2,
+            "lateral_lift": 9,
+            "depth_amplitude": 5,
+            "depth_knee_follow": 0.75,
+            "stride_curve": "planted"
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "originalUpper": {
+            "component_bounds": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "source_pivot": [
+              256,
+              472
+            ],
+            "cutSourceY": 405,
+            "protected_polygons": [],
+            "lowerClipSourceY": 408
+          },
+          "gait_strength": 0.75,
+          "stride_curve": "planted",
+          "plantedTransition": "fade-to-source",
+          "upper_motion": {
+            "bob": 1.4,
+            "sway": 0.8,
+            "headBaseSourceY": 280,
+            "waistSourceY": 380,
+            "head_counter": 0.25
+          },
+          "fitStatus": "candidate provisional own garment/leg landmarks; contact/pass extremes pending"
+        },
+        "right": {
+          "component_bounds": [
+            512,
+            0,
+            1024,
+            512
+          ],
+          "source_pivot": [
+            768,
+            472
+          ],
+          "landmarks": {
+            "waist": 365,
+            "hip": 385,
+            "hem": [
+              398,
+              392
+            ],
+            "knee": [
+              414,
+              408
+            ],
+            "sock": [
+              424,
+              418
+            ],
+            "ankle": [
+              426,
+              420
+            ],
+            "mid": 768,
+            "centres": [
+              736,
+              806
+            ],
+            "split_path_xy": [
+              [
+                768,
+                380
+              ],
+              [
+                768,
+                472
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 2,
+            "lateral_lift": 9,
+            "depth_amplitude": 5,
+            "depth_knee_follow": 0.75,
+            "stride_curve": "planted"
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "originalUpper": {
+            "component_bounds": [
+              512,
+              0,
+              1024,
+              512
+            ],
+            "source_pivot": [
+              768,
+              472
+            ],
+            "cutSourceY": 404,
+            "protected_polygons": [],
+            "lowerClipSourceY": 407
+          },
+          "gait_strength": 0.75,
+          "stride_curve": "planted",
+          "plantedTransition": "fade-to-source",
+          "upper_motion": {
+            "bob": 1.4,
+            "sway": 0.8,
+            "headBaseSourceY": 280,
+            "waistSourceY": 380,
+            "head_counter": 0.25
+          },
+          "fitStatus": "V9 sampled own-paint side seam pilot PASS; whole16/stop/encoded source gate pending",
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/right-foreground-original.png",
+              "sourceSha256": "e6a536211fd501c477379e797149c63d572207243c6d248054493a21dcc52c2d",
+              "component_bounds": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "source_pivot": [
+                256,
+                472
+              ],
+              "scale": 1,
+              "offset_x": 0,
+              "role": "Original visible near paint; far only has own hidden-paint underlay"
+            },
+            {
+              "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-layers-v4/right-far-original-with-hidden-underpaint.png",
+              "sourceSha256": "5aa387037bcf5b8029b87d39fc3e6dd038134d82c98c41662196b6169e32e641",
+              "component_bounds": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "source_pivot": [
+                256,
+                472
+              ],
+              "scale": 1,
+              "offset_x": 0,
+              "role": "Original visible far paint; far only has own hidden-paint underlay"
+            }
+          ],
+          "connected_garment": false,
+          "connected_garment_end_source": [
+            421,
+            421
+          ],
+          "rest_centres": [
+            [
+              736,
+              736,
+              736
+            ],
+            [
+              806,
+              806,
+              806
+            ]
+          ],
+          "sourceGuideNotes": "Original visible near/far paint retained. Own hidden far cloth keeps original hem height; shoe alone compresses to far sole. Original outer contour; fixed near order; no connected-garment overdraw. Left key tips belong to original upper field; explicit lower clip prevents duplicate upper edge coverage."
+        },
+        "up": {
+          "component_bounds": [
+            1024,
+            0,
+            1536,
+            512
+          ],
+          "source_pivot": [
+            1280,
+            472
+          ],
+          "landmarks": {
+            "waist": 350,
+            "hip": 370,
+            "hem": [
+              390,
+              390
+            ],
+            "knee": [
+              417,
+              417
+            ],
+            "sock": [
+              430,
+              430
+            ],
+            "ankle": [
+              434,
+              434
+            ],
+            "mid": 1280,
+            "centres": [
+              1248,
+              1318
+            ],
+            "split_path_xy": [
+              [
+                1280,
+                380
+              ],
+              [
+                1280,
+                472
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 2,
+            "lateral_lift": 9,
+            "depth_amplitude": 5,
+            "depth_knee_follow": 0.75,
+            "stride_curve": "planted"
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "originalUpper": {
+            "component_bounds": [
+              1024,
+              0,
+              1536,
+              512
+            ],
+            "source_pivot": [
+              1280,
+              472
+            ],
+            "cutSourceY": 391,
+            "protected_polygons": [
+              [
+                [
+                  1364,
+                  310
+                ],
+                [
+                  1430,
+                  310
+                ],
+                [
+                  1430,
+                  420
+                ],
+                [
+                  1364,
+                  420
+                ]
+              ]
+            ],
+            "lowerExcludeWorkingPolygons": [
+              [
+                [
+                  340,
+                  310
+                ],
+                [
+                  406,
+                  310
+                ],
+                [
+                  406,
+                  420
+                ],
+                [
+                  340,
+                  420
+                ]
+              ]
+            ],
+            "lowerClipSourceY": 394
+          },
+          "gait_strength": 0.75,
+          "stride_curve": "planted",
+          "plantedTransition": "fade-to-source",
+          "upper_motion": {
+            "bob": 1.4,
+            "sway": 0.8,
+            "headBaseSourceY": 280,
+            "waistSourceY": 380,
+            "head_counter": 0.25
+          },
+          "fitStatus": "candidate revised hidden pelvis span; prior5px hip-to-hem compressed; guard unchanged",
+          "sourceGuideNotes": "Own rear keys extend below the short cardigan; entire keyring follows original upper/hand field. Remove displaced lower-body copies only in that measured outside-leg prop window."
+        },
+        "left": {
+          "component_bounds": [
+            1536,
+            0,
+            2048,
+            512
+          ],
+          "source_pivot": [
+            1792,
+            472
+          ],
+          "landmarks": {
+            "waist": 365,
+            "hip": 385,
+            "hem": [
+              392,
+              398
+            ],
+            "knee": [
+              408,
+              414
+            ],
+            "sock": [
+              418,
+              424
+            ],
+            "ankle": [
+              420,
+              426
+            ],
+            "mid": 1792,
+            "centres": [
+              1760,
+              1830
+            ],
+            "split_path_xy": [
+              [
+                1792,
+                380
+              ],
+              [
+                1792,
+                472
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 2,
+            "lateral_lift": 9,
+            "depth_amplitude": 5,
+            "depth_knee_follow": 0.75,
+            "stride_curve": "planted"
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "originalUpper": {
+            "component_bounds": [
+              1536,
+              0,
+              2048,
+              512
+            ],
+            "source_pivot": [
+              1792,
+              472
+            ],
+            "cutSourceY": 398,
+            "protected_polygons": [
+              [
+                [
+                  1766,
+                  396
+                ],
+                [
+                  1781,
+                  396
+                ],
+                [
+                  1780,
+                  412
+                ],
+                [
+                  1766,
+                  412
+                ]
+              ],
+              [
+                [
+                  1786,
+                  396
+                ],
+                [
+                  1804,
+                  396
+                ],
+                [
+                  1804,
+                  411
+                ],
+                [
+                  1786,
+                  411
+                ]
+              ]
+            ],
+            "lowerExcludeWorkingPolygons": [
+              [
+                [
+                  230,
+                  396
+                ],
+                [
+                  245,
+                  396
+                ],
+                [
+                  244,
+                  412
+                ],
+                [
+                  230,
+                  412
+                ]
+              ],
+              [
+                [
+                  250,
+                  396
+                ],
+                [
+                  268,
+                  396
+                ],
+                [
+                  268,
+                  411
+                ],
+                [
+                  250,
+                  411
+                ]
+              ]
+            ],
+            "lowerClipSourceY": 401
+          },
+          "gait_strength": 0.75,
+          "stride_curve": "planted",
+          "plantedTransition": "fade-to-source",
+          "upper_motion": {
+            "bob": 1.4,
+            "sway": 0.8,
+            "headBaseSourceY": 280,
+            "waistSourceY": 380,
+            "head_counter": 0.25
+          },
+          "fitStatus": "V9 sampled own-paint side seam pilot PASS; whole16/stop/encoded source gate pending",
+          "leg_sources": [
+            {
+              "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-layers-v4/left-far-original-with-hidden-underpaint.png",
+              "sourceSha256": "b639805c819810a8073e9ef5fc8033c430f9c2dcb3e9a97666ec21516c1f0166",
+              "component_bounds": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "source_pivot": [
+                256,
+                472
+              ],
+              "scale": 1,
+              "offset_x": 0,
+              "role": "Original visible far paint; far only has own hidden-paint underlay"
+            },
+            {
+              "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/left-foreground-original.png",
+              "sourceSha256": "34c68462a869169ea172f83951cbc06e64734f8b98d6a5eb1f8b3ba6eb922194",
+              "component_bounds": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "source_pivot": [
+                256,
+                472
+              ],
+              "scale": 1,
+              "offset_x": 0,
+              "role": "Original visible near paint; far only has own hidden-paint underlay"
+            }
+          ],
+          "connected_garment": false,
+          "connected_garment_end_source": [
+            421,
+            421
+          ],
+          "rest_centres": [
+            [
+              1760,
+              1760,
+              1760
+            ],
+            [
+              1830,
+              1830,
+              1830
+            ]
+          ],
+          "sourceGuideNotes": "Original visible near/far paint retained. Own hidden far cloth keeps original hem height; shoe alone compresses to far sole. Original outer contour; fixed near order; no connected-garment overdraw. Left key tips belong to original upper field; explicit lower clip prevents duplicate upper edge coverage."
+        }
+      },
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "name": "front-right",
+          "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+          "sourceSha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+          "component_bounds": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "source_pivot": [
+            256,
+            472
+          ],
+          "scale": 1,
+          "status": "bounded static neutral source accepted for pilot; ordered turn pending"
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "name": "rear-right",
+          "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+          "sourceSha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+          "component_bounds": [
+            512,
+            0,
+            1024,
+            512
+          ],
+          "source_pivot": [
+            768,
+            472
+          ],
+          "scale": 1,
+          "status": "bounded static neutral source accepted for pilot; ordered turn pending"
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "name": "rear-left",
+          "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+          "sourceSha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+          "component_bounds": [
+            1024,
+            0,
+            1536,
+            512
+          ],
+          "source_pivot": [
+            1280,
+            472
+          ],
+          "scale": 1,
+          "status": "bounded static neutral source accepted for pilot; ordered turn pending"
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "name": "front-left",
+          "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+          "sourceSha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+          "component_bounds": [
+            1536,
+            0,
+            2048,
+            512
+          ],
+          "source_pivot": [
+            1792,
+            472
+          ],
+          "scale": 1,
+          "status": "bounded static neutral source accepted for pilot; ordered turn pending"
+        }
+      ],
+      "status": "source-gate pilot only; no runtime adoption",
+      "sourceInputs": [
+        {
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        },
+        {
+          "path": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+          "sha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606"
+        },
+        {
+          "path": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/source-registration-v3.json",
+          "sha256": "2077f71af5ae6ce6ac11c0e895c1a202dc31bd761d8a9039448df76f4e605d79"
+        }
+      ]
+    }
+  }
+}

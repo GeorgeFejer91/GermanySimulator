@@ -50,12 +50,14 @@ export function validateStreetMotionDelivery(person,definition=person.motionDeli
     if(!source||source.file!==original.file||source.sha256!==original.sha256||source.width!==original.width||source.height!==original.height||!equal(source.cell,cell))throw new TypeError('Street delivery source identity mismatch');
   }
   for(const kind of ['movement','reactions']){
-    const pack=definition.packs?.[kind],used=required[kind],rows=Math.ceil(used.length/16);
-    if(!used.length||!equal(pack?.grid,[16,rows])||!Array.isArray(pack.slots)||pack.slots.length!==rows*16||!Array.from({length:pack.slots.length},(_,i)=>Object.hasOwn(pack.slots,i)&&pack.slots[i]===(used[i]??null)).every(Boolean))throw new RangeError('Invalid street delivery '+kind+' mapping');
+    const pack=definition.packs?.[kind],used=required[kind],columns=pack?.grid?.[0];
+    if(!Number.isInteger(columns)||columns<1||columns>64)throw new RangeError('Invalid street delivery '+kind+' mapping');
+    const rows=Math.ceil(used.length/columns);
+    if(!used.length||!equal(pack.grid,[columns,rows])||!Array.isArray(pack.slots)||pack.slots.length!==rows*columns||!Array.from({length:pack.slots.length},(_,i)=>Object.hasOwn(pack.slots,i)&&pack.slots[i]===(used[i]??null)).every(Boolean))throw new RangeError('Invalid street delivery '+kind+' mapping');
     const lookup=new Int32Array(slots);lookup.fill(-1);for(let i=0;i<used.length;i++)lookup[used[i]]=i;
     for(const variant of ['desktop','mobile']){
       const image=pack.variants?.[variant],cell=definition.sources[variant].cell;
-      if(!image||!/^\.\/assets\/characters\/(?:street|street-speakers|residents)\/[a-z0-9_/-]+\.webp$/i.test(image.file)||image.file.includes('..')||!hashPattern.test(image.sha256)||image.width!==16*cell[0]||image.height!==rows*cell[1]||image.width>4096||image.height>4096)throw new RangeError('Invalid street delivery '+variant+' image dimensions/source');
+      if(!image||!/^\.\/assets\/characters\/(?:street|street-speakers|residents)\/[a-z0-9_/-]+\.webp$/i.test(image.file)||image.file.includes('..')||!hashPattern.test(image.sha256)||image.width!==columns*cell[0]||image.height!==rows*cell[1]||image.width>4096||image.height>4096)throw new RangeError('Invalid street delivery '+variant+' image dimensions/source');
       if(image.decodedBytes!==undefined&&image.decodedBytes!==image.width*image.height*4)throw new RangeError('Invalid street delivery decoded cost');
     }
     packs[kind]={...pack,lookup};

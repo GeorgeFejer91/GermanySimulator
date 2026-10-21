@@ -137,6 +137,51 @@ class MotionDeliveryTests(unittest.TestCase):
         self.assertEqual(packed.crop((0, 6, 16, 12)).tobytes(), source.crop((0, 24, 16, 30)).tobytes())
         self.assertEqual(packed.crop((16, 6, 64, 12)).tobytes(), bytes(48 * 6 * 4))
 
+    def test_explicit_21_column_pack_keeps_every_cell_across_the_new_row_boundary(self):
+        for direction in ('down', 'right', 'up', 'left'):
+            self.person['atlasMotion']['walks'][direction]['frames'] = 4
+            self.person['clips'][direction]['count'] = 4
+        self.person['atlasMotion']['turns'] = {'rows': [5], 'pose_count': 4}
+        self.write_manifest()
+        record = delivery.run(self.manifest, 'voice-example', self.out, root=self.root, columns=21)
+        pack = record['packs']['movement']
+        self.assertEqual(pack['grid'], [21, 2])
+        self.assertEqual(pack['slots'], list(range(24)) + [None] * 18)
+        for variant, atlas in pack['variants'].items():
+            w, h = record['sources'][variant]['cell']
+            source = Image.open(self.root / self.person['variants'][variant]['file'][2:]).convert('RGBA')
+            packed = Image.open(self.root / atlas['file'][2:]).convert('RGBA')
+            self.assertEqual(packed.size, (21 * w, 2 * h))
+            for physical, logical in enumerate(pack['slots']):
+                x, y = (physical % 21) * w, (physical // 21) * h
+                actual = packed.crop((x, y, x+w, y+h)).tobytes()
+                if logical is None:
+                    self.assertEqual(actual, bytes(w*h*4))
+                else:
+                    sx, sy = (logical % 4) * w, (logical // 4) * h
+                    self.assertEqual(actual, source.crop((sx, sy, sx+w, sy+h)).tobytes())
+        self.assertEqual(delivery.run(self.manifest, 'voice-example', self.out, check=True,
+                                     root=self.root, columns=21), record)
+        with self.assertRaisesRegex(ValueError, 'delivery bytes|receipt'):
+            self.run_build(check=True)
+
+    def test_invalid_pack_columns_do_not_create_delivery(self):
+        for columns in [True, 0, -1, 65, 2.5, '21']:
+            with self.subTest(columns=columns), self.assertRaisesRegex(ValueError, 'pack columns'):
+                delivery.run(self.manifest, 'voice-example', self.out, root=self.root, columns=columns)
+            self.assertFalse(self.out.exists())
+
+    def test_requested_layout_cannot_exceed_texture_extent(self):
+        path = self.family / 'desktop.webp'
+        image = Image.new('RGBA', (1024, 2304), (40, 60, 80, 255))
+        image.save(path, 'WEBP', lossless=True, exact=True, method=4)
+        self.person['variants']['desktop'].update(width=1024, height=2304,
+            sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+        self.write_manifest()
+        with self.assertRaisesRegex(ValueError, '4096 texture extent'):
+            delivery.run(self.manifest, 'voice-example', self.out, root=self.root, columns=21)
+        self.assertFalse(self.out.exists())
+
     def test_rejects_stale_source_hash_and_wrong_dimensions_without_outputs(self):
         for key, value, message in [('sha256', '0' * 64, 'source hash'), ('width', 15, 'dimensions')]:
             with self.subTest(key=key):

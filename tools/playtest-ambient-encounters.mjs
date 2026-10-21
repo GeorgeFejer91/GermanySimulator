@@ -162,6 +162,20 @@ function previewCatalog(source,audition){
  return source+`\n(()=>{if(new URLSearchParams(location.search).get('ambientAuthoring')!=='1')return;const prior=window.GermanySimulatorAudioText,clip=${JSON.stringify(clip)},binding={...prior.productionVoices[clip.voiceId],referenceSha256:clip.referenceSha256};window.__ambientPreviewClip=clip;window.GermanySimulatorAudioText=Object.freeze({...prior,productionVoices:Object.freeze({...prior.productionVoices,[clip.voiceId]:binding}),recordings:Object.freeze({...prior.recordings,[clip.path]:clip}),candidateClip(id,text){return id===clip.voiceId&&text===clip.source?clip.path:prior.candidateClip(id,text)}});})();`;
 }
 
+export function assertLivePortraitSamples(samples){
+ assert(samples.length>=2,'Portrait observation needs multiple samples');
+ assert(samples.every(sample=>!sample.portrait?.failed),'Portrait render failed');
+ const active=samples.filter(sample=>sample.portrait?.active);
+ assert(active.length>=2,'Portrait must remain active while observing the quiz');
+ for(const sample of active){
+  assert.equal(sample.portrait.actorId,sample.actor.id,'Portrait render owner');
+  assert.equal(sample.portraitPixels?.actorId,sample.actor.id,'Portrait canvas owner');
+  assert(sample.portraitPixels.alpha>100,'Portrait must contain visible paint');
+ }
+ // A completed gesture deliberately holds still; pixels need not change.
+ assert(active.at(-1).portrait.frames>active[0].portrait.frames,'Live portrait must keep rendering the current performer');
+}
+
 async function snapshot(page,context){
  const data=await page.evaluate(()=>({state:__ambientEncounter.snapshot(),viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio,clientWidth:document.documentElement.clientWidth,visualWidth:visualViewport?.width},resources:performance.getEntriesByType('resource').filter(entry=>/\/assets\/characters\/(?:street|street-speakers|residents)\//.test(entry.name)).map(entry=>({url:new URL(entry.name).pathname,transfer:entry.transferSize,encoded:entry.encodedBodySize,decoded:entry.decodedBodySize})),heap:performance.memory?{used:performance.memory.usedJSHeapSize,total:performance.memory.totalJSHeapSize}:null}));
  data.resourceTotals=data.resources.reduce((sum,row)=>({requests:sum.requests+1,transfer:sum.transfer+row.transfer,encoded:sum.encoded+row.encoded,decoded:sum.decoded+row.decoded}),{requests:0,transfer:0,encoded:0,decoded:0});
@@ -235,7 +249,7 @@ export default {
    assert(path.quiz.state.events.some(event=>event.kind==='quiz-start'&&event.accepted));assert(path.quiz.state.events.some(event=>event.kind==='reaction'&&event.accepted));
    await artifacts.screenshot(page,(authoring?'preview':'default')+'-quiz.png');
    path.modalSamples=await page.evaluate(async()=>{const result=[],start=performance.now();while(performance.now()-start<900){result.push(__ambientEncounter.sample());await new Promise(done=>setTimeout(done,90))}return result});artifacts.json('encounter.json',evidence);
-   if(nativeOnly){assert(path.modalSamples.some(sample=>sample.portrait?.active&&sample.portrait.actorId===sample.actor.id&&sample.portraitPixels?.alpha>100));assert(new Set(path.modalSamples.map(sample=>sample.portraitPixels?.hash).filter(Boolean)).size>1,'Live portrait must visibly change with the actual performer')}
+   if(nativeOnly)assertLivePortraitSamples(path.modalSamples);
    assert.equal(new Set(path.modalSamples.map(sample=>sample.actor.x+','+sample.actor.y)).size,1,'modal holds focused actor translation while its authored performance may continue');
    if(authoring||nativeOnly){assert(path.modalSamples.some(sample=>sample.speech?.status==='playing'&&sample.speech.time>0));assert(path.modalSamples.some(sample=>sample.city.selected.paint.mouth.active&&sample.city.selected.paint.mouth.opening[0]>0))}
    else {assert.equal(path.quiz.state.speech,null,'held audition cannot silently acquire the default mouth');assert.equal(path.quiz.state.stimulus.mode,'silent')}

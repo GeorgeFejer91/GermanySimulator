@@ -4,6 +4,207 @@ Active owner and six milestones: GAME-COMPLETION.md, chat
 01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
 primary dirty checkout and separately owned Merz work remain preserved.
 
+Heike Hoffmann is locally integrated with eight byte-identical reviewed delivery
+files. Final MAIN native browser checks pass on desktop and Android-emulated
+portrait/landscape; full Node regression passes2281/2281 (zero failures/skips),
+Python delivery checks12/12, curator and syntax/whitespace checks pass. Independent
+Physics/Camera/general scoped reviews pass against193 frozen inputs; final exact
+checkpoint contains64 paths, including selected generation ancestry. Private audio
+is excluded. Publication integration with current origin/main remains pending. Her standing image,
+geometry and the other42 manifest entries are preserved;37 scoped identities
+remain standing-only. New Berlin audio remains private and unapproved. Gisela stays at
+local checkpoint9ef7f6a6bdc95b2cc672b1feb16c8835a02664b6. Plan:
+docs/superpowers/plans/2026-10-21-heike-ambient-animation.md. Own V3 eight neutral
+views retain original cardinal bytes. Rear hidden-root compression and dangling
+keys following legs were repaired in source configuration; the first side split
+cut overlapping shoes. Generated complete side-leg V1/V2 are rejected for changed
+shoe painting. V5 full source/stop bakes below are retained failed experiments,
+not accepted Heike assets. V6 wholesale original-near-leg cloning is held. V7
+preserves original visible near/far paint and fills only hidden far areas from
+own paint; independent109-pin review finds hard hem cuts and final neutral edge
+alpha overdraw, so its source gate remains HOLD.
+
+Current source configuration V9 uses original-profile-layers-v4, hash437f11fe….
+Independent alpha tracing identifies redundant connected_garment source-over as
+the127-to191 edge defect; the upper/lower two-row overlap is a separate cause.
+Side-only configuration disables that garment, sets lowerClipSourceY=cut+3 and
+gives left key tips protected ownership. Initial V8 cloth fill still exposed a
+short hem tab: translating the complete underpaint8px up moved its trouser hem
+above the visible original far hem. V9 keeps that hem at its own source height
+and compresses only the hidden shoe toward the original far sole using the
+existing painted_walk field. Visible original far paint remains exact.
+
+Independent sampled side method PASS:4 phases each direction, light/dark512 and
+native diagnostic previews; record heike-original-leg-method-review/
+v9-registered-hem-independent-review.json, SHA daedb22d…. Whole neutral alpha
+support is unchanged; maxRGB right2/left3, maxalpha5/17 from translucent lower
+overlap. This is not bitwise-neutral identity. Full16 gait/stop/encoded/runtime
+checks remain open, and Heike's runtime record is unchanged. Current mouth-field
+capture records actual originalUpper exporter controls beside own frames,
+without reconstructing a second motion rig. Capture smoke preserves all rendered
+RGBA bytes and restores wrappers on failure; walk/stop driver hashesfd399a93…/
+da65c963…. Front/rear also had the three-row upper overlap; their own clip+3
+correction restores bitwise original neutral RGBA and passes four-phase root
+inspection. Fresh full source in heike-walk-source-v2 completed92 cells,
+desktop52d6c6b9…/mobile1bcdb570…, gutters6/4. Root inspected all64 walk cells in
+both variants on light/dark. Independent full92-cell source PASS:
+heike-full-walk-independent-review/heike-v9-full-walk-independent-source-review.json
+SHA c2a001ae…. Fresh256 stops in heike-phase-stop-source-v2 completed,
+desktop27008b97…/mobileefba1c8b…. Independent all256 encoded-art/field PASS,
+review SHAb09dc199…. Stage3 retains one lifted foot before neutral, max12.75
+working pixels; temporal landing and actual world foot contact remain unproved.
+Root inspected both side ordered lower-stop sequences desktop/light; independent
+review covers every stop full-body at96/64 on both backgrounds.
+
+Moving-mouth fragment9210e125… has276 visible/88 selected null registrations,
+all38 input pins, actual captured upper fields, exact own production standing
+fit and all16 fixed gesture heads verified. CPU proof88be30b8…. Ignored
+heike-integration-v1 assembles364 selected/378 logical cells and14 padding nulls;
+source desktopda182640…/mobile5e65cddd…, mouth42ed5605…. Packed preview receipt
+6535fe87… uses21 columns: movement2016x2040/15.69MiB desktop and1344x1360/6.97MiB
+mobile; reaction2016x120/0.92MiB desktop and1344x80/0.41MiB mobile. Main assets and
+street manifest remain unchanged. Actual packed-source GPU checks pass all378
+logical slots on desktop and Android portrait emulation:276 visible mouths
+articulate open/round/bite,102 null slots remain inactive, closed matches source,
+all cues preserve alpha, and disposal returns textures/geometries to zero.
+Report heike-gpu-source-v1/run-v2/report.json SHA199a6405… binds22 unchanged pins.
+Root also reviewed all five visible face profiles on light/dark at both sizes.
+Frozen staged V1 descriptor0fa5ee6b… binds168 inputs for separate fresh Physics,
+Camera and general reviews; none constitutes main-manifest adoption.
+Independent general review964ce165… passes168/168 before/after pins, every
+decoded desktop/mobile selected and padding cell,18 Node and12 Python checks.
+Fresh full Node regression run passes2276/2276, no failures/skips,299162ms;
+voice-library curator check passes67 production characters/one scene exception.
+Camera source/numeric review4278171f… passes89 focused tests and supplied native
+framing, with rendered Heike depth/resize/ground contact still required. Fresh
+Physics CPU proofs pass264 approach cases (max7.1s),27 navigation cases,
+192 stop entries,192 turns and64 reaction entries; rendered sole contact remains
+pending. These scoped results leave the combined candidate on HOLD.
+Camera follow-up5f345afb… accepts bounded actual wall/roof occlusion, faded
+visibility, two-sprite order, pivot/size, resize and pause. Landscape844x390 uses
+38px of card scrolling for lower choices. The late3d.html DCL timeout is retained;
+navigation-only correction passes. A third portrait run's unchanged pixels are
+an invalid arbitrary-window animation expectation: at3.03–3.84s after quiz-start
+the performer holds frame2/slot86 while portrait render count advances36→52.
+Timeline9fb0bbed… establishes no renderer-freeze claim. The shared test fixture
+now checks active owned visible rendering and advancing render count, preserving
+intentional holds; expected red then3/3 green checks, independent fixture review
+e4322120… with8/8 focused tests. This test-only change follows the168-pin V1
+review and needs an explicit successor rebind; no game/art changed.
+Physics report e83f904b… accepts four corrected actual quiz/stop sequences,
+including mobile left phase4 with zero root movement and a small connected
+late landing. Other risky late-stop phases left0/right8/right12 still require
+projected on-screen sole tracking, so P5 and main adoption remain HOLD. The
+initial no-quiz nominal PASS was a fixture error; its captures are invalid for
+landing. The corrected portrait10s capture timed out just before visible quiz;
+45s capture and pre-assert artifact saving correct that observation gap.
+Later sole diagnostic captures exact natural left0 and real right9/11/13;
+requested right8/12 phase misses retain enclosing FAILs. Forced presentation
+V1 also FAILs movement-pack size validation; separate corrected V2 passes with
+actual world renderer/temporary UV selection of right8/12 stop cells, explicitly
+not natural phase coverage. A suspected5.62px right13 toe snap is retracted:
+that number was an overlapping-shoe alpha centroid, not a toe edge. Actual late
+stage/neutral dark-shoe extent stays x96..130; preceding stage extends to132.
+No source/art was edited for that false alarm. Final corrected P5 review is
+being sealed from the exact rendered marks/images; adoption remains pending.
+Final Physics d9a424f8…/P5 closeout5d7623d1… accepts bounded staged P1–P5 after
+correcting that centroid interpretation. Exact natural right8/12 remains NOT RUN;
+forced presentation plus192 actual CPU stop entries and causal natural
+left0/4/right9/11/13 are distinct evidence. No concrete contact defect remained.
+Canonical Heike delivery adoption preserves all8 file hashes; actual manifest
+SHA fb8dcf29…,206490bytes. Expected pre-adoption red and5/5 focused green checks
+cover her actual manifest plus portrait observation. Cache tags now invalidate
+the changed delivery validator through street view, world import and root entry.
+Heike source/delivery paths have scoped-text-filter exclusions for immutable
+hashes. These are local changes pending fresh final MAIN verification.
+
+Audio-region gap: Heike's two default actors are Berlin-only, while her sole
+admitted exact Q24 MP3 (80b2a942…, profile299c6b7e…) uses Germany wording.
+Berlin Q24 is "What number of Bundesländer hat die Bundesrepublik Deutschland?";
+there is no matching own default or preview recording. Native V1 reaches the
+animated Berlin quiz with a live portrait but fails the expected-playing-media
+assertion because correct fallback is silent captions. V2 deliberately selecting
+an existing Germany-region Heike fails because none exists; neither result is
+native speaking acceptance. Read-only audit ef1d6c77… records the missing text,
+owned voice, sealed German grant and held audition; no borrowed/rewritten voice
+or synthesis has been admitted. Native V3 retains the actual Berlin region and
+asserts the correct silent-caption fallback: desktop, Android portrait and
+landscape emulation pass3/3 approach, planted quiz/live portrait, answer,
+pause/resume and return-to-roaming cases. This is body/caption flow evidence,
+not recorded speech or physical-device/listening acceptance. The private reuse
+audit24b6a81d… finds no exact Berlin Q24 Chatterbox take in accessible Heike
+receipts; two unavailable cloud CSV indexes were not negative evidence. The
+existing helper planned and rendered three private approach/context/question
+jobs under the fixed profile/reference/revision, outside shipped assets. All
+three retain explicit unchanged native-analyzer EOS receipts; independent final
+encoded-word/level processing completed. Approach/context fail unchanged word
+checks and remain private. Question24 passes literal and normalized exact words,
+native completion and encoding/levels:4.54s,-18.25LUFS,-2.21dBTP, MP3 SHA
+1c1eed071a20c4700fbbb7f88fe86f262dfb4a472e7a629d7b71bba8c2277c67;
+receipt a2ecef3a…. Existing final-MP3 RMS recipe derives182 mouth bins at40Hz,
+PCM SHA31e0d4e5…. Private review recordddccd5ba… retains all three results.
+User listening/use approval was requested with the normalized question linked;
+it remains pending. No default catalog, main asset or review approval field was
+changed. Isolated opt-in private native fixture91ea7d07… is prepared, not run;
+its exact voice/text lookup and private file route cannot admit default speech.
+V5's three private playback assertions fail because its overlay changed
+recordedClip while the actual quiz uses candidateClip; correct silent fallback
+is retained as failed fixture evidence. V6 ff4d45e6… corrects only that private
+lookup and adds own/foreign/different-source controls. Silent actual native
+question playback passes desktop1/1 and both Android orientations2/2. Summary
+1a3f6d15… verifies26 playing-media projections against final40Hz bins and26
+displayed pose-cue/material pairs with zero mismatches. These two observations
+have different ticks and are not incorrectly compared against each other.
+The public catalog remains unchanged and user approval remains pending.
+Generation does not grant default use or normalized listening approval.
+
+Heike full source bake in output/ambient-city-animation/heike-walk-source-v1
+completed92 selected walk/bridge/turn cells, with16 samples per direction.
+Physical96x120 desktop and64x80 mobile sample working512 paint directly; logical
+128x160/pivot64,150/figure136/world1.6 preserve published standing geometry.
+Desktop source SHAd7448a65…; mobile7593d167…; minimum gutters6/4. These V5 exports
+failed independent source-match review despite complete structural sampling;
+do not integrate them. No Heike runtime record is changed. Own exact
+approved question24 recording is available, not yet proved with this candidate.
+
+Key-gesture-v3 fixes unintended head transport with a fixed boundary and holds
+coat buttons stationary. Its full16 source sampling has14 distinct poses;
+root inspected both encoded variants light/dark, connected elbow/hand/keyring,
+exact source head/mouth, cards and planted feet. This is modest key emphasis,
+not an overhead wave. Desktop strip60330037…; mobile3d0639cc… in ignored
+heike-key-gesture-full16-v1. Five own neutral mouth fits/three rear nulls are held
+under Heike mouth-source-v1; the fitter now uses its owned original three-view
+subset69cb36d3… instead of the held global registration. Packaged profilee9c6494a…
+preserves all five numerical fits and three nulls exactly. CPU round/bite
+approximations are not actual shader evidence. Changing-pose/GPU/media integration
+and independent reviews are open. Dedicated256 V5 phase stops finished in ignored
+heike-phase-stop-source-v1, but inherit the rejected source painting. Fresh walk
+and stop exports must follow an accepted repaired source pilot.
+
+Compact21-column compiler/runtime support is modified but uncommitted. Initial
+read-only review caught the runtime's old16-column admission; repaired focused
+tests pass12 Python/16 Node, including actual native controller row crossing,
+mouth axes and reaction pack. Re-review PASS pins four paths in ignored
+heike-delivery-compiler-review/review-v2.md. Default and explicit16 fixture bytes
+equal9ef7f6a. Actual Heike delivery/native/whole-family acceptance remains open.
+
+Authorized source-only parallel candidates for Uwe and Brigitte live in their
+exclusive street-speaker-motion folders. Root inspected their V2 own neutral
+quarter candidates light/dark against unchanged cardinals; held source mouth
+pilots are not runtime admission. Their bounded gait probes expose incomplete
+hidden side shoes; side gait FAILs remain explicit. Brigitte's rear hidden hip
+repair resolves its compression guard without changing visible source/strength.
+Uwe's generated complete-leg candidate failed source material review. Independent
+original-paint probe217c78f3… also fails visible hidden-boot seams. Bounded V2
+hem/shoe registration, V3 hidden-sole removal and V4 own far-shoe underpaint
+repairs retain a diagonal bridge or amputated heel at512px on light/dark;
+audit02fb74ad… keeps all failed probes and unchanged motion-spec05582eff….
+Native96/64 size does not waive the source defect. Replan the far heel shape or
+gait before another source probe; no Uwe bake/runtime admission. Heavy
+generation/bake/browser/voice jobs remain serialized. Heike is the sole selected
+runtime integration;38 scoped standing-only identities and all goal gates stay
+open.
+
 Current integrated increment: Gisela V4, freeze192pinsf3e2dcde… at
 output/ambient-city-animation/gisela-integration-v3/frozen-candidate-v4.json.
 MAIN in this isolated branch includes her four-direction walk,64 owned phase

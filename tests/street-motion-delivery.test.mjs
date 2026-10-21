@@ -20,7 +20,7 @@ const canonical=value=>JSON.stringify(typed(value));
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();await new Promise(setImmediate)};
 const registration=()=>({rect:[.5,.7,.1,.1],axes:[.8,0,0,1],profile:{corners:[-1,1],crease:[0,0,0,0,0],open_upper:[0,-.1,-.2,-.1,0],open_lower:[0,.2,.4,.2,0],source_upper:[0,0,0,0,0],source_lower:[0,0,0,0,0],width:[.1,.2],teeth:0}});
 
-function sources(){
+function sources(columns=16){
  const dirs=['down','right','up','left'],image=(file,w,h,letter)=>({file:'./assets/characters/street-speakers/delivery-test/'+file+'.webp',width:w,height:h,sha256:letter.repeat(64)});
  const p={id:'delivery-test',cell:[8,10],grid:[4,9],pivot:[4,9],figureHeight:8,figureWorldHeight:1.6,strideDistance:20,
   standing:image('standing',8,10,'a'),variants:{desktop:image('desktop',32,90,'b'),mobile:image('mobile',16,45,'c')},
@@ -35,15 +35,15 @@ function sources(){
  const definition={schemaVersion:1,id:p.id,logical:{cell:p.cell,grid:p.grid},definitionHashFormat:'typed-json-f64-v1',definitionSha256:hash(canonical(p)),sources:{},packs:{}};
  for(const [name,atlas] of Object.entries(p.variants))definition.sources[name]={...atlas,cell:name==='desktop'?[8,10]:[4,5]};
  for(const [kind,slots] of Object.entries({movement,reactions})){
-  const rows=Math.ceil(slots.length/16),variants={};
-  for(const [name,cell] of [['desktop',[8,10]],['mobile',[4,5]]])variants[name]=image(kind+'-'+name,cell[0]*16,cell[1]*rows,kind==='movement'?'d':'e');
-  definition.packs[kind]={grid:[16,rows],slots:[...slots,...Array(rows*16-slots.length).fill(null)],variants};
+  const rows=Math.ceil(slots.length/columns),variants={};
+  for(const [name,cell] of [['desktop',[8,10]],['mobile',[4,5]]])variants[name]=image(kind+'-'+name,cell[0]*columns,cell[1]*rows,kind==='movement'?'d':'e');
+  definition.packs[kind]={grid:[columns,rows],slots:[...slots,...Array(rows*columns-slots.length).fill(null)],variants};
  }
  p.motionDelivery=definition;return{p,definition};
 }
 
-async function fixture({mobile=false,external=false,change,fetchResponse}={}){
- const {p,definition}=sources();change?.(p,definition);
+async function fixture({mobile=false,external=false,change,fetchResponse,columns=16}={}){
+ const {p,definition}=sources(columns);change?.(p,definition);
  const prior={width:globalThis.innerWidth,height:globalThis.innerHeight,dpr:globalThis.devicePixelRatio,fetch:globalThis.fetch,Image:globalThis.Image};
  globalThis.innerWidth=mobile?960:1200;globalThis.innerHeight=mobile?540:900;globalThis.devicePixelRatio=3;
  const fetches=[];
@@ -75,6 +75,43 @@ function complete(f){for(let i=0;S.hasStreetReaction(f.actor);i++){assert(i<500)
 test('opt-in metadata rejects source/mapping/grid errors before replacing the cast',()=>{
  for(const change of [(p,d)=>d.sources.desktop.sha256='f'.repeat(64),(p,d)=>d.logical.grid=[9,4],(p,d)=>d.packs.movement.slots[0]=null,(p,d)=>delete d.packs.movement.slots[0],(p,d)=>d.packs.reactions.slots[1]=34,(p,d)=>d.packs.movement.variants.mobile.width++,(p,d)=>p.motionDelivery={file:'./assets/characters/street/../delivery.json',sha256:'a'.repeat(64)}]){
   const {p,definition}=sources();change(p,definition);assert.throws(()=>S.registerStreetCharacterManifest({schemaVersion:1,characters:{delivery:p}}),/delivery/i);
+ }
+});
+
+test('21-column delivery loads native controller cells and mouth coordinates across its own row boundary',async()=>{
+ for(const mobile of [false,true]){
+  const f=await fixture({mobile,external:true,columns:21});try{
+   await f.motion();
+   f.scope.speech={speechStatus:'playing',cueToken:{},mediaTime:.3,mediaDuration:4,mouthOpen:.6};
+   f.tick(.01);
+   const mesh=f.host.children[0],uv=mesh.geometry.attributes.uv;
+   assert.equal(f.view.inspect().pose.slot,16);
+   assert(Math.abs(uv.getX(0)-16/21)<1e-7);assert.equal(uv.getY(0),1);
+   assert.deepEqual(f.view.inspect().mouth.rect,[(16+.5)/21,.85,.1/21,.05]);
+   f.step(0,-1);
+   for(let i=0;f.view.inspect().pose.slot!==25;i++){assert(i<100);f.tick(.01)}
+   assert.equal(uv.getX(0),0);assert.equal(uv.getY(0),.5);
+   const mouth=f.view.inspect().mouth;
+   assert.equal(mouth.active,true);assert.deepEqual(mouth.rect,[.5/21,.35,.1/21,.05]);
+   assert.deepEqual(mouth.axes,mobile?[.4,0,0,.5]:[.8,0,0,1]);
+   assert.equal(mesh.material.map.image.width,mobile?84:168);
+   assert.equal(f.fetches.length,1);
+   assert(S.requestStreetReaction(f.actor,'greet'));await f.finish(f.jobs.at(-1),'reactions');
+   for(let i=0;f.view.inspect().pose.slot!==34;i++){assert(i<100);f.tick(.01)}
+   assert.equal(uv.getX(0),0);assert.equal(uv.getY(0),1);
+   assert.deepEqual(f.view.inspect().mouth.rect,[.5/21,.7,.1/21,.1]);
+   assert.equal(mesh.material.map.image.height,mobile?5:10);
+  }finally{f.dispose()}
+ }
+});
+
+test('packed grid columns are finite bounded integers with exact canonical padding',()=>{
+ for(const columns of [0,-1,65,2.5,true,NaN,Infinity]){
+  const {p,definition}=sources(21);definition.packs.movement.grid[0]=columns;
+  assert.throws(()=>S.registerStreetCharacterManifest({schemaVersion:1,characters:{delivery:p}}),/delivery/i);
+ }
+ for(const columns of [1,21,64]){
+  const {p}=sources(columns);assert.doesNotThrow(()=>S.registerStreetCharacterManifest({schemaVersion:1,characters:{delivery:p}}));
  }
 });
 
