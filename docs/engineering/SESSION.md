@@ -1,3 +1,54 @@
+# Station announcement entry — 2026-10-21
+
+Integrator-owned, based on published `21ebceb8`; clean managed worktree
+`station-announcements/GermanySimulator`. The primary authoring checkout and its
+held completion work remain preserved. Scope: `game.js` station audio admission,
+`tests/audio-trigger-hygiene.test.mjs`, the matching browser probe and gameplay
+contract. No renderer, collision, placement, UI, recording or dependency changes.
+
+Plan: reproduce the five-second stationary-body restriction; verify all 18
+platforms and full entrances; admit ordinary recordings after one second in the
+same station area even while walking; retain broker priority, 6.5-second repeat
+gap, track-only children cue, distance fade and cancellation. Run focused and
+full Node checks, silent desktop/Android-emulated native audio checks, then
+publish and verify Pages. Physics/Camera review omitted: audio admission only,
+with no change to physical world geometry, movement, scale or rendering.
+
+Beat `station-platform-entry`: the existing simulation update owns station
+identity and one-second residence; existing train broker owns one queued/active
+recording and Web Audio start/end. Pending decode remains valid while inside
+that source area; exit, dialogue, hidden/pause/interior takeover cancel it.
+Existing eight-second preparation deadline and no-repeat recordings remain.
+No startup preload, new asset/cache, scheduler or background work is added.
+
+Causal verdict PASS: full station/entrance entry -> same-station residence ->
+one-second admission -> existing broker/decode -> actual recording and captions.
+All 18 production stations are sampled at platform/entrance corners and centers,
+including both side ramps. Withheld area, station switch, movement, late decode,
+voice-off, pause, modal/dialogue and repeat-gap branches have regression coverage.
+Native silent browser checks use staged positions; the 18-entrance map advances
+time explicitly. Keyboard/touch movement and representative station/track native
+recordings use real clocks, decode and playback, with exact captions.
+
+Validation: 31/31 focused Node checks; curator `--check` and JavaScript syntax
+PASS. Thirty silent browser checks PASS across desktop and Android portrait /
+landscape emulation, zero page errors. Measured admission 1342 / 957 / 1198 ms;
+actual recording starts 1678 / 1274 / 1396 ms after staged entry. Desktop and
+portrait frames inspected. No physical Android or perceptual listening claim.
+Software-rendered attempts and setup failures are retained under ignored
+`output/station-announcements/`; successful hardware Chromium evidence is
+`browser-6/report.json`. No universal device-performance claim.
+
+The attempted full local suite did not finish: unchanged office restoration /
+session and city-voice provenance / crowd-default tests occupied workers without
+completion on Windows. Unbounded and bounded attempts are preserved; stopped
+owned test processes. This is NOT a full-suite pass. Automatic Pages CI remains
+responsible for its required Linux source/asset/build/browser checks.
+
+Release is scoped to this fix against published main. Current source and selected
+browser paths are validated; push, deployment status and public verification are
+the next action. Preserve unrelated primary authoring work and its older hold.
+
 # Final browser integration — 2026-10-19
 
 The final combined source passes 2161 Node checks in 206 files, including a new

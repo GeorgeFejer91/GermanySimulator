@@ -56,7 +56,7 @@ for(const s of stations){
 }
 assert.match(game,/Math\.abs\(stationElevation\(x,y\)-stationElevation\(player\.x,player\.y\)\)>\.11/,"platform sides must route walking through the stairs");
 assert.match(game,/TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\.slice\(1\)/,"general station clips must exclude the track-only children recording");
-assert.match(game,/function updateTrainAnnouncement\(dt=0\)[\s\S]*playerOnRailTrack\(\)[\s\S]*"track"[\s\S]*trainIdleSeconds>=TRAIN_IDLE_SECONDS[\s\S]*"platform"/,"track and station-idle announcements must use their own zones");
+assert.match(game,/function updateTrainAnnouncement\(dt=0\)[\s\S]*playerOnRailTrack\(\)[\s\S]*"track"[\s\S]*trainStationSeconds>=TRAIN_ENTRY_SECONDS[\s\S]*"platform"/,"track and station-entry announcements must use their own zones");
 assert.match(renderer,/\(bridge\.stations\|\|\[\]\)\.map\(state=>\{[\s\S]*?stationPlatform\(state\)/,"the WebGL scene must render every station from simulation data");
 assert.match(game,/AUDIO_CLASS=Object\.freeze\(\{TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"\}\)/,"runtime audio must declare text, background-music, and sound-effect classes");
 assert.match(game,/function queueStimulus\(item\)/,"dialogue and train audio must share the stimulus broker");
