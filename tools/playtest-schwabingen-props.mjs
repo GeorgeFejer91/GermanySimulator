@@ -25,7 +25,7 @@ window.step=({cue='schwabingen-weeds-law',time=2,token=1,paused=false,reduced=fa
 window.finish=()=>{paint.dispose();wall.visible=false;renderer.render(scene,camera);return{...renderer.info.memory}};
 wall.visible=true;renderer.render(scene,camera);wall.visible=false;window.baselineMemory={...renderer.info.memory};await Promise.all(pending);step({cue:null});window.ready=true;
 </script></body></html>`;
-const seam='window.__propsTest={state,jwd,npcs,player,speakJwdTourLine,getNeighborStandingSpot,cancelJwdTour,stopSpeech};function loop(now){';
+const seam='window.__propsTest={state,jwd,npcs,player,speakJwdTourLine,getNeighborStandingSpot,cancelJwdTour,stopSpeech,updateJwdTour,nextDialogue};function loop(now){';
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.png':'image/png','.webp':'image/webp','.glb':'model/gltf-binary','.mp3':'audio/mpeg','.woff2':'font/woff2','.svg':'image/svg+xml'};
 const server=createServer((req,res)=>{try{
  const url=new URL(req.url,'http://localhost');if(url.pathname==='/props-fixture'){res.writeHead(200,{'Content-Type':'text/html'});res.end(fixture);return}
@@ -55,7 +55,7 @@ try{
   const shot=async label=>{const f=name+'-'+label+'.png';await page.screenshot({path:resolve(out,f)});result.shots.push(f)};
   const step=args=>page.evaluate(args=>step(args),{reduced,...args});
   result.fixtureBaseline=await page.evaluate(()=>baselineMemory);const initial=await step({cue:null});assert.equal(initial.paint.props.visible,false);assert.equal(initial.paint.props.meshes,0);
-  for(const [cue,kind] of [['schwabingen-weeds-law','bottle'],['schwabingen-weeds-method','scraper'],['schwabingen-broom-rota','rota'],['schwabingen-bird-calendar-note','calendar'],['schwabingen-hedge-release','blackbird'],['schwabingen-attendance-leaf','leaf']]){
+  for(const [cue,kind] of [['schwabingen-broom-welcome','cleaner'],['schwabingen-weeds-law','bottle'],['schwabingen-weeds-method','scraper'],['schwabingen-broom-rota','rota'],['schwabingen-bird-calendar-note','calendar'],['schwabingen-hedge-release','blackbird'],['schwabingen-attendance-leaf','leaf']]){
    const s=await step({cue});assert.equal(s.paint.props.kind,kind);assert.equal(s.paint.props.visible,true);result.checks.push({cue,paint:s.paint,memory:s.memory,calls:s.calls});await shot(kind);
   }
   const bird=[];for(const time of [0,.35,.7,1.05,1.4,1.75,2.1,4]){bird.push(await step({cue:'schwabingen-hedge-release',time}));if([0,.7,1.4,2.1].includes(time))await shot('flight-'+time)}result.flight=bird;
@@ -82,6 +82,28 @@ try{
     result.checks.push({worldCue:cue,observed:await page.evaluate(()=>({dialogue:Germany3DBridge.getNeighborDialogue(),actor:Germany3D.inspectAssets().jwd.actors.find(a=>a.role==='swabian')}))});await shot('world-'+cue);
     await page.evaluate(()=>{__propsTest.cancelJwdTour();Germany3D.sync()});assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().jwd.actors.find(a=>a.role==='swabian').paint.props.visible),false);
    }
+  }
+  {
+   await page.evaluate(()=>{
+    const h=__propsTest;h.cancelJwdTour();h.stopSpeech();h.state.dialogue=false;h.state.modal=false;h.state.voiceOn=false;
+    const actor=h.npcs.find(n=>n.jwdRole==='swabian'),script=JwdStory.tours.swabian[0],stop=script.stops.findIndex(s=>s.id==='schwabingen-hedge');
+    Object.assign(actor,script.stops[stop].point,{jwdWorking:false,jwdMoving:0,jwdTouring:true,jwdRoute:[]});
+    h.jwd.tour={id:++h.jwd.tourSequence,actor,script,stop,line:0,phase:'ready',age:0};Object.assign(h.player,{x:780,y:4770});Object.assign(h.player,h.getNeighborStandingSpot());h.speakJwdTourLine(h.jwd.tour);
+   });
+   result.sequence=[];
+   const observe=async label=>{const state=await page.evaluate(()=>{const h=__propsTest,n=h.npcs.find(n=>n.jwdRole==='swabian');return{actor:[n.x,n.y],moving:n.jwdMoving,phase:h.jwd.tour?.phase,scene:n.jwdBirdScene?{...n.jwdBirdScene}:null,paint:Germany3D.inspectAssets().jwd.actors.find(a=>a.role==='swabian')?.paint}});result.sequence.push({label,...state});await shot('sequence-'+label);save();return state};
+   await observe('arrival');
+   await page.waitForFunction(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene?.age>=2.2);await observe('perched');
+   await page.waitForFunction(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene?.stain===1,null,{timeout:45000});await observe('droppings');
+   await page.keyboard.press('KeyM');await page.waitForFunction(()=>GermanyHUD.paused);
+   const frozen=await page.evaluate(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene.age);
+   await page.waitForTimeout(300);assert.equal(await page.evaluate(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene.age),frozen,'case-file pause freezes the bird visit');
+   await page.keyboard.press('KeyM');await page.waitForFunction(()=>!GermanyHUD.paused);
+   await page.waitForFunction(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene?.phase==='clean',null,{timeout:45000});
+   const cleaning=await observe('mopping');assert.ok(cleaning.actor[0]>848,'real actor walks across the paved strip to the patch');assert.equal(cleaning.paint.props.kind,'mop');assert.notEqual(cleaning.paint.row,11);
+   await page.waitForFunction(()=>{const s=__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene;return s?.stain>0&&s.stain<.6});await observe('partly-clean');
+   await page.waitForFunction(()=>__propsTest.npcs.find(n=>n.jwdRole==='swabian').jwdBirdScene?.phase==='done');const done=await observe('clean');assert.equal(done.scene.stain,0);
+   assert.equal(result.sequence[0].scene.attempt,done.scene.attempt,'one visit across both dialogue lines');
   }
   assert.deepEqual(result.errors,[]);result.complete=true;save();await context.close();console.log(name+': PASS');
  }

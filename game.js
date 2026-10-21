@@ -2477,6 +2477,35 @@ function summonJwdChild(t){
  t.actor.jwdRoute=[{x:home.doorX-23,y:t.actor.y}];t.actor.jwdProgress=null;
  n.jwdRoute=jwdPath(n,{x:home.doorX+21,y:home.doorY+68});n.jwdProgress=null;t.summoned=true;return true;
 }
+function beginSchwabingenBird(t,cue,target){
+ if(t.actor.jwdRole!=='swabian'||!['schwabingen-hedge-season','schwabingen-hedge-release','schwabingen-bird-listen'].includes(cue))return;
+ const n=t.actor;
+ if(n.jwdBirdScene?.attempt!==t.id)n.jwdBirdScene={attempt:t.id,age:0,target:{...target},patch:{x:870,y:4718,height:.014},approach:{x:850,y:4708},releaseAt:null,stain:0,cleanTime:0,phase:'visit'};
+ const scene=n.jwdBirdScene;
+ if(cue!=='schwabingen-hedge-season'&&scene.releaseAt===null)scene.releaseAt=Math.max(2.1,scene.age);
+}
+function finishJwdTourStop(t){
+ const scene=t.actor.jwdBirdScene;
+ if(scene?.attempt===t.id&&scene.releaseAt!==null&&scene.phase!=='done'){
+  t.phase='cleanup';t.actor.jwdGesture=null;t.actor.jwdMoving=0;t.actor.jwdRoute=jwdPath(t.actor,scene.approach);t.actor.jwdProgress=null;
+ }else advanceJwdTour(t);
+}
+function updateSchwabingenBird(t,dt){
+ const n=t.actor,scene=n.jwdBirdScene;
+ if(jwd.tour!==t||!scene||scene.attempt!==t.id||scene.phase==='done')return;
+ scene.age+=dt;
+ const leave=scene.releaseAt===null?-1:scene.age-scene.releaseAt;
+ if(leave>=1.9&&scene.phase==='visit')scene.stain=1;
+ if(t.phase!=='cleanup'||leave<4.4)return;
+ if(scene.phase==='visit'){
+  if(!walkJwdRoute(n,dt))return;
+  if(dist(n.x,n.y,scene.approach.x,scene.approach.y)>2)return;
+  jwdGesture(n,'present',scene.patch);n.jwdCleaning=true;scene.phase='clean';scene.cleanTime=0;
+  return;
+ }
+ scene.cleanTime+=dt;scene.stain=Math.max(0,1-scene.cleanTime/3.5);
+ if(scene.cleanTime>=3.5){scene.phase='done';n.jwdCleaning=false;n.jwdGesture=null;advanceJwdTour(t)}
+}
 function speakJwdTourLine(t){
  if(jwd.tour!==t||t.phase!=='ready'||state.dialogue)return;
  const stop=t.script.stops[t.stop],line=stop.lines[t.line],n=line?.speaker==='child'?jwd.child:t.actor;
@@ -2488,14 +2517,15 @@ function speakJwdTourLine(t){
   if(jwd.tour!==t||state.dialogueData!==conversation||t.phase!=='dialogue'||t.line!==lineIndex)return;
   t.line++;t.age=0;
   if(stop.summonChild&&!t.summoned){t.phase='child-arrive';summonJwdChild(t)}
-  else if(t.line<stop.lines.length){t.phase='ready';speakJwdTourLine(t)}else advanceJwdTour(t);
+  else if(t.line<stop.lines.length){t.phase='ready';speakJwdTourLine(t)}else finishJwdTourStop(t);
  },jwdVoice(n),[line.en],false,true);conversation=state.dialogueData;conversation.jwdTourId=t.id;conversation.jwdCueId=line.id;
  const hedge=stop.lookAt&&props.find(p=>p.asset==='jwd-hedge'&&Math.abs(p.x-stop.lookAt.x)<=p.w/2&&Math.abs(p.y-stop.lookAt.y)<=p.d/2);
- conversation.jwdCueTarget=stop.lookAt?{...stop.lookAt,height:hedge?hedge.h*.02:0}:null;updateHud();
+ conversation.jwdCueTarget=stop.lookAt?{...stop.lookAt,height:hedge?hedge.h*.02:0}:null;
+ beginSchwabingenBird(t,line.id,conversation.jwdCueTarget);updateHud();
 }
 function cancelJwdTour(){
  const t=jwd.tour;if(!t)return;
- jwd.tour=null;jwd.tourSequence++;t.actor.jwdTouring=false;t.actor.jwdGesture=null;t.actor.jwdMoving=0;returnJwdNeighbor(t.actor);jwd.exitPending=false;jwd.gardenCooldown=38;
+ jwd.tour=null;jwd.tourSequence++;t.actor.jwdBirdScene=null;t.actor.jwdCleaning=false;t.actor.jwdTouring=false;t.actor.jwdGesture=null;t.actor.jwdMoving=0;returnJwdNeighbor(t.actor);jwd.exitPending=false;jwd.gardenCooldown=38;
  if(jwd.child){jwd.child.jwdTouring=false;jwd.child.jwdHomeDelay=0;jwd.child.jwdRoute=[]}
  if(state.dialogue&&state.dialogueData?.jwdTourId===t.id){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;stopSpeech();state.dialogue=false;state.modal=false;state.characterSpeaker=null;document.getElementById('dialogue').hidden=true}
  updateHud();
@@ -2503,6 +2533,7 @@ function cancelJwdTour(){
 function updateJwdTour(dt){
  const t=jwd.tour;if(!t)return;
  if(dist(player.x,player.y,t.actor.x,t.actor.y)>850){cancelJwdTour();return}
+ updateSchwabingenBird(t,dt);if(jwd.tour!==t||t.phase==='cleanup')return;
  const stop=t.script.stops[t.stop];if(!stop)return;
  t.age+=dt;
  if(t.phase==='child-arrive'){

@@ -29,7 +29,7 @@ jobs:
       - name: Check fullscreen and modal focus lifecycle
         run: node --test tests/fullscreen.test.mjs tests/modal-focus.test.mjs
       - name: Check Schwabingen dialogue props
-        run: node --test tests/schwabingen-props.test.mjs
+        run: node --test tests/schwabingen-props.test.mjs tests/schwabingen-scene.test.mjs
       - name: Check JWD home and neighbors
         run: node --test tests/neighbor-conversations.test.mjs tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey

@@ -57,7 +57,7 @@ test('every story-stop speech producer forwards its exact actor, German text, En
  const {cast,catalog,story,gardens}=fixture(),actors=Object.fromEntries([['parent','jwd-parent'],['watcher','jwd-watcher'],['swabian','jwd-swabian'],['child','jwd-theodore']].map(([jwdRole,id])=>[jwdRole,{jwdRole,id,name:cast.existingAssetProfiles.find(person=>person.gameCharacterId===id).fullName,x:0,y:0}]));
  const calls=[],queued=[],h={state:{dialogue:false,voiceOn:true},jwd:{child:actors.child},player:{x:0,y:0},dist:()=>0,atNeighborStandingSpot:()=>true,jwdGesture(){},clearInput(){},updateHud(){},advanceJwdTour(){assert.fail('a queued line must not advance its stop')},speechCatalog:catalog,STIMULUS_PRIORITY:{CRITICAL:5},queueStimulus:item=>queued.push(item),showWorldBark(){assert.fail('voice is enabled')},openDialogue(speaker,lines,icon,done,voiceId,english){calls.push({speaker,lines,voiceId,english,actor:h.state.characterSpeaker});h.state.dialogueData={};h.speak(lines[0],{candidateVoiceId:voiceId,subtitle:english[0]})}};
  h.props=gardens.props;
- vm.createContext(h);vm.runInContext(['jwdVoice','speakJwdTourLine','speak'].map(productionFunction).join('\n'),h);
+ vm.createContext(h);vm.runInContext(['jwdVoice','beginSchwabingenBird','speakJwdTourLine','speak'].map(productionFunction).join('\n'),h);
  let count=0;
  for(const [role,scripts]of Object.entries(story.tours))for(const script of scripts)for(const [stop,record]of script.stops.entries())for(const [lineIndex,line]of record.lines.entries()){
   const actor=line.speaker==='child'?actors.child:actors[role],tour={id:++count,phase:'ready',actor:actors[role],script,stop,line:lineIndex};h.jwd.tour=tour;h.state.dialogue=false;

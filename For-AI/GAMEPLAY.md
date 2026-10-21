@@ -101,6 +101,14 @@ cars with a cloth; Schwabingen also walks to her hedge and tends it. Their anima
 only in the nearby running simulation. Work pauses for conversations, and gait
 comes from accepted physical movement.
 
+Schwabingen keeps Waschmittel and Putzmittel beside her sweeping spot, shows
+the cleaner during her introduction, and uses a cloth for ordinary car care.
+Her broom belongs to sweeping, rather than walking or washing. The hedge
+conversation owns one continuous blackbird visit per tour attempt: descent,
+visible droppings on the paved spur, departure, then her collision-aware walk
+and mopping. The next tour stop waits for actual arrival and cleanup; pause,
+cancellation and replay retain the existing tour ownership.
+
 The satire targets the fictional residents' status anxiety, unsolicited lectures,
 selective rule enforcement and backhanded compliments. Heiko frames intrusions
 as assistance: formal concern, a selective account of earlier conversations,
