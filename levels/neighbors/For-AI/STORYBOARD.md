@@ -25,7 +25,7 @@ Ede is [archived](../archive/ede.md) and has no active scene.
 | --- | --- | --- |
 | Frau Schwabingen | Broom → street → weeds in paving joints → hedge | Broom attendance; wild garden; blackbird appointment |
 | Heiko Maaslos | Car paint → winter path → overhanging hedge → call Hartmut at the door → child-led play path | Snow inspection; boundary review; Hartmut's unplanned break |
-| Inga Maaslos | Electric car → shutters → garden volunteering → family doorway | Sustainable visibility; open windows and volunteering; free-time permission |
+| Inga Maaslos | Electric car and appearances → shutters and availability → garden volunteering → family doorway and exemplary commitment | Sustainable visibility; responsiveness and volunteering; family workload as a model for the player's contribution |
 | Hartmut Maaslos | Appears through Heiko's doorway handoff, replies, then leads the play route | Reappears through the later authored call; no independent adult tour |
 
 Heiko's welcome is a private checklist disguised as help. After introducing

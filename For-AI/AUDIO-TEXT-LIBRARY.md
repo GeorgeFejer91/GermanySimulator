@@ -12,6 +12,15 @@ playhead; the existing 80 ms inter-segment gaps stay closed. Queued, paused,
 cancelled and stale owners cannot acquire articulation. Source/clock checks do
 not establish perceived synchronization or supply missing animation profiles.
 
+Inga's 2026-10-21 rewrite changes 31 of her 34 German/English pairs toward
+unsolicited People & Culture coaching about good neighborliness. A few family
+anecdotes show off her organizing and support work. All 34 pairs have matching
+recordings in her selected voice, including three unchanged exact takes. The
+cast and Inga manifest retain the exact sources, English subtitles, original
+transcripts, production identity and final encoded-file hashes. The full active
+neighbor set remains 114 owned lines with 114 recording defaults. Rejected takes
+remain private; perceptual listening is unperformed.
+
 Heiko’s notepad welcome adds four owned German/English pairs, appended as
 `heiko-story-37`–`40` without renumbering earlier clips. All four selected-profile
 recordings pass the existing final-MP3 word/identity/energy gates. The four active

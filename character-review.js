@@ -72,7 +72,7 @@
       const authored=Object.entries(window.JwdStory.tours).flatMap(([owner,tours])=>tours.flatMap(tour=>tour.stops.flatMap(stop=>[...(stop.walkLines||[]),...stop.lines].filter(item=>role==='child'?item.speaker==='child':owner===role&&item.speaker==='guide').map(item=>line(tour.id+' · '+stop.id,item.de,catalog.recordedClip(profile.voiceId,item.de)||'')))));
       const tourText=new Set(authored.map(row=>row.text));
       const rows=[...existing().filter(row=>!tourText.has(row.text)),...authored];
-      const prerequisiteText="Wie schön, dass Sie sich schon einbringen möchten! Erst schließen Sie bitte Ihren Einzug ab, dann starten wir Ihr neighborhood onboarding. Ich notiere Ihr Interesse schon einmal. Das notiere ich als Ihr commitment.";
+      const prerequisiteText="Wie schön, dass Sie schon Kontakt suchen! Schließen Sie bitte erst Ihren Einzug ab. Danach bekommen Sie von mir ein persönliches Onboarding mit unseren kleinen Erwartungen ans Miteinander. So starten Sie gleich mit dem richtigen Mindset. Ich halte Ihren Platz frei!";
       const extras=role==='child'?[line("JWD free play","Ich habe jetzt Freizeit. Papa nennt das noch Pilotphase.",catalog.recordedClip(profile.voiceId,"Ich habe jetzt Freizeit. Papa nennt das noch Pilotphase.")||"")]:role==='watcher'?[line("Before move-in",prerequisiteText,catalog.recordedClip(profile.voiceId,prerequisiteText)||"")]:[];
       const listed=new Set(rows.map(row=>row.text));
       return [...rows,...extras.filter(row=>!listed.has(row.text))];

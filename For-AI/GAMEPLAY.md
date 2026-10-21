@@ -115,8 +115,10 @@ as assistance: formal concern, a selective account of earlier conversations,
 claimed agreement through silence, then responsibility shifted to the listener.
 His original fictional dialogue never reproduces private correspondence or its
 identifying details. Heiko values Hartmut's
-six languages but orders his zipper away from the paintwork; Inga
-defends the car's moral standing while relocating play behind the garage.
+six languages but orders his zipper away from the paintwork. Inga gives
+unsolicited People & Culture advice about the player's availability, appearance
+and participation. Her praise of her own family organization and community work
+sets an example she cheerfully expects the player to follow.
 The parked cars offer a readable laminated notice; decorative hedges and gnomes
 do not advertise an interaction with no response.
 Garden complaints draw on anecdotal Reddit accounts of

@@ -59,6 +59,34 @@ test('optional Feedback compound hyphen preserves words without accepting a diff
  assert.notEqual(neighborSpokenWords('Garten-Werk'),neighborSpokenWords('Gartenzwerg'));
 });
 
+test('Inga compound spelling preserves the same word across an optional hyphen',()=>{
+ for(const [joined,left,right] of [['vertrauensbooster','Vertrauens','Booster'],['starterpaket','Starter','Paket'],['vulkankuchen','Vulkan','Kuchen']]){
+  assert.equal(neighborSpokenWords(joined),joined);
+  for(const hyphen of ['-','‐','‑','–','—'])assert.equal(neighborSpokenWords(`${left}${hyphen}${right}`),joined);
+  assert.notEqual(neighborSpokenWords(`${left} ${right}`),joined,'independent word boundaries remain distinct');
+  assert.notEqual(neighborSpokenWords(`${left}-${right}e`),joined,'inflection must not disappear');
+  assert.notEqual(neighborSpokenWords(`kein ${left}-${right}`),joined,'negation must not disappear');
+ }
+});
+
+test('compound spelling equivalence cannot rescue actual Inga word errors',()=>{
+ const source='Unser Sommerfest ist freiwillig. Sie übernehmen die Verantwortung. Ein Starter-Paket.';
+ for(const changed of [source.replace('Sie','Wir'),source.replace('die Verantwortung','Verantwortung'),'Das ist '+source,source.replace('freiwillig','nicht freiwillig'),source.replace('Starter-Paket','Start-Paket')]){
+  assert.notEqual(neighborSpokenWords(changed),neighborSpokenWords(source));
+ }
+ assert.notEqual(neighborSpokenWords('Ihr Vorgang ist ein Touchpoint.'),neighborSpokenWords('Ihr Vorgarten ist ein Touchpoint.'));
+ assert.notEqual(neighborSpokenWords('ist, noch ein Impuls. Vertrauensbooster.'),neighborSpokenWords('Noch ein Impuls. Vertrauens-Booster.'));
+});
+
+test('Inga nominalization word boundary is equivalent only in its complete authored phrase',()=>{
+ const source='Dann kann ich Ihr Nichtreagieren richtig einordnen.';
+ const transcript='Dann kann ich ihr nicht reagieren. Richtig einordnen.';
+ assert.equal(neighborSpokenWords(transcript),neighborSpokenWords(source));
+ for(const changed of [transcript.replace('ihr','wir'),transcript.replace('nicht reagieren','reagieren'),transcript.replace('nicht reagieren','nicht mehr reagieren'),transcript.replace('reagieren','regieren'),transcript.replace(/richtig/i,'falsch')])assert.notEqual(neighborSpokenWords(changed),neighborSpokenWords(source));
+ assert.notEqual(neighborSpokenWords('nicht reagieren'),neighborSpokenWords('Nichtreagieren'));
+ assert.notEqual(neighborSpokenWords('Ihr nicht reagieren'),neighborSpokenWords('Ihr Nichtreagieren'));
+});
+
 test('fixed runtime takes reject engine, model, reference and processing drift even with the same profile',()=>{
  const context={};vm.runInNewContext(runtimeBlock(cast)+';this.accepts=productionClip;',context);
  const voiceId='spieler-hans-peter-mustermann',binding=cast.productionVoices[voiceId];
