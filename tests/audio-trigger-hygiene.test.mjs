@@ -44,7 +44,7 @@ function harness(realStations=false){
  const ensureAudio=()=>audio;
  ${names.map(sourceOf).join('\n')}
  globalThis.api={state,player,keys,jwd,stations,pending:stimulusQueue,updateTrainAnnouncement,requestTrainAnnouncement,trainAnnouncementVolume,citySpeechAllowed,stimulusEligible,queueStimulus,openDialogue,interact,useLawPower,showWorldBark,speak,speakRecorded,startCitizenshipQuiz,
-  idle:()=>trainIdleSeconds,active:()=>activeStimulus,generation:()=>stimulusGeneration,
+  resetResidence(){trainStationSeconds=0;trainAudioStation=null},idle:()=>trainIdleSeconds,active:()=>activeStimulus,generation:()=>stimulusGeneration,
   begin(){activeStimulus=stimulusQueue.shift();playRecordedStimulus(activeStimulus,stimulusGeneration);return activeStimulus},
   seedActive(item){activeStimulus=item},playRecordedStimulus,
   stopSpeech,finishStimulus};
@@ -100,6 +100,13 @@ test('queued or decoding station announcements survive walking and cancel outsid
  a.keys.KeyD=true;a.player.x=90;h.advance(.025);await h.load();assert.equal(h.stats().starts,1);
  const retry=harness();retry.advance(1.05);const stale=retry.api.begin();retry.api.player.x=149;retry.advance(.025);await retry.load();
  assert.equal(retry.stats().starts,0);assert.equal(retry.api.active(),null);assert.ok(stale.done);
+});
+
+test('resetting station entry invalidates a pending request before the next simulation step',()=>{
+ const h=harness(),a=h.api;h.advance(1.05);const previous=a.pending[0];
+ a.resetResidence();assert.equal(a.stimulusEligible(previous),false,'hidden-page entry reset must invalidate the old request');
+ h.advance(.5);assert.equal(a.pending.length,0);
+ h.advance(.55);assert.equal(a.pending.length,1,'resuming waits for a fresh entry');
 });
 
 test('distance fade stays attached to its source and fully releases inaudible playback',async()=>{

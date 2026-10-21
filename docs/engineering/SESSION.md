@@ -30,20 +30,24 @@ Native silent browser checks use staged positions; the 18-entrance map advances
 time explicitly. Keyboard/touch movement and representative station/track native
 recordings use real clocks, decode and playback, with exact captions.
 
-Validation: 31/31 focused Node checks; curator `--check` and JavaScript syntax
+Validation: 32/32 focused Node checks; curator `--check` and JavaScript syntax
 PASS. Thirty silent browser checks PASS across desktop and Android portrait /
-landscape emulation, zero page errors. Measured admission 1342 / 957 / 1198 ms;
-actual recording starts 1678 / 1274 / 1396 ms after staged entry. Desktop and
+landscape emulation, zero page errors. Native wall timings are retained per profile in the final report; all three
+recordings start from the original one-second admission without a retry. Desktop and
 portrait frames inspected. No physical Android or perceptual listening claim.
 Software-rendered attempts and setup failures are retained under ignored
 `output/station-announcements/`; successful hardware Chromium evidence is
-`browser-6/report.json`. No universal device-performance claim.
+`browser-final/report.json`. No universal device-performance claim.
 
 The attempted full local suite did not finish: unchanged office restoration /
 session and city-voice provenance / crowd-default tests occupied workers without
 completion on Windows. Unbounded and bounded attempts are preserved; stopped
 owned test processes. This is NOT a full-suite pass. Automatic Pages CI remains
 responsible for its required Linux source/asset/build/browser checks.
+
+Built-site startup/input also pass 6/6 on the initial candidate across all three
+profiles. A final red/green regression closes stale pending admission after a
+hidden-page residence reset; focused and native checks were rerun on that source.
 
 Release is scoped to this fix against published main. Current source and selected
 browser paths are validated; push, deployment status and public verification are

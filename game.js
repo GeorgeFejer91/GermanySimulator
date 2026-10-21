@@ -3073,7 +3073,7 @@ function trainAudioContextAllowed(){return state.started&&!state.modal&&!state.d
 function trainAnnouncementVolume(item){const s=item.origin;if(!s)return 1;const dx=Math.max(s.x-player.x,0,player.x-s.x-s.w),dy=Math.max(s.y-player.y,0,player.y-s.y-s.h),distance=clamp(Math.hypot(dx,dy)/TRAIN_FADE_DISTANCE,0,1);return 1-distance*distance*(3-2*distance)}
 function requestTrainAnnouncement(distance,recording="",priority=STIMULUS_PRIORITY.AMBIENT,zone="platform"){
  if(!trainAudioContextAllowed()||performance.now()<trainAnnouncementNextAt)return false;
- const station=stationAudioAtPlayer(),track=zone==="track",eligible=()=>trainAudioContextAllowed()&&(track?playerOnRailTrack():stationAudioAtPlayer()===station);
+ const station=stationAudioAtPlayer(),track=zone==="track",eligible=()=>trainAudioContextAllowed()&&(track?playerOnRailTrack():stationAudioAtPlayer()===station&&trainAudioStation===station&&trainStationSeconds>=TRAIN_ENTRY_SECONDS);
  if(track?!playerOnRailTrack():!station||trainAudioStation!==station||trainStationSeconds<TRAIN_ENTRY_SECONDS)return false;
  if(hasStimulusFamily("train"))return false;
  const pool=track?[TRAIN_PLAYER_OBSTRUCTION_AUDIO]:TRAIN_PLATFORM_AUDIO,selected=track?TRAIN_PLAYER_OBSTRUCTION_AUDIO:recording&&pool.includes(recording)?recording:nextVariant("train:platform",pool),origin=track?{x:player.x,y:player.y,w:0,h:0}:station;
