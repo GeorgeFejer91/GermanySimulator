@@ -70,7 +70,10 @@ test('all77 retained cards follow earliest eligible unasked pair without deletio
 test('actual home/office layouts defer distantC1 without losing it or relabelling local people',()=>{
  for(const point of [{x:885,y:1060},{x:1090,y:4460}]){
   const f=fixture();spawnCityCrowd(f);Object.assign(f.scope.player,point);const civic=f.scope.questions.findIndex(q=>category(q)==='civic'),c1=f.scope.questions.findIndex(q=>category(q)==='grammar-c1');
-  f.state.quizBag=[civic,c1];f.scope.updateQuizEncounters(.1);const actor=f.state.quizApproach;assert(actor);assert.equal(f.state.quizApproachQuestion.source,f.scope.questions[civic].source);assert(Math.hypot(actor.x-point.x,actor.y-point.y)<=650);assert.deepEqual([...f.state.quizBag],[civic,c1]);
+  f.state.quizBag=[civic,c1];const before=f.npcs.map(identity);f.scope.updateQuizEncounters(.1);
+  assert.equal(f.state.quizApproach,null,'distant people defer instead of beginning an unreachable walking pursuit');assert.deepEqual([...f.state.quizBag],[civic,c1]);assert.deepEqual(f.npcs.map(identity),before);assert(f.npcs.every(n=>!n.quizAsked));
+  const eligible=f.npcs.filter(n=>n.quizzer&&f.scope.quizCharacterForActor(n)?.categories.includes('civic')).sort((a,b)=>Math.hypot(a.x-point.x,a.y-point.y)-Math.hypot(b.x-point.x,b.y-point.y))[0];assert(eligible);
+  Object.assign(f.scope.player,{x:eligible.x+40,y:eligible.y});f.state.quizTimer=0;f.scope.updateQuizEncounters(.1);const actor=f.state.quizApproach;assert(actor);assert.equal(f.state.quizApproachQuestion.source,f.scope.questions[civic].source);assert.deepEqual([...f.state.quizBag],[civic,c1]);assert.deepEqual(f.npcs.map(identity),before);
  }
 });
 

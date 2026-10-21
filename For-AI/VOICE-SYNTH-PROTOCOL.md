@@ -1,5 +1,28 @@
 # Character voice production
 
+## Inga compound spelling in word verification (2026-10-21)
+
+The finite neighbor comparator treats `Vertrauens-Booster` / `Vertrauensbooster`,
+`Starter-Paket` / `Starterpaket` and `Vulkan-Kuchen` / `Vulkankuchen` as the same
+authored compounds, following the existing `Feedback-Gespräch` rule. The
+[official optional-hyphen guidance](https://www.rechtschreibrat.com/service/fragen-und-antworten/)
+permits highlighting a compound's components with a hyphen; these three entries
+are the project's explicit application to Inga's authored nouns, not a general
+word-joining rule. Separate words, changed inflections, extra prefixes, missing
+articles, pronoun changes and different garden nouns remain failures. Source
+captions and raw transcripts are unchanged. New receipts retain the comparator's
+actual source hash and describe the finite rules; historical receipts retain
+their original verification provenance. This does not admit the rejected takes
+that also contain actual word errors or authorize editing their audio.
+
+The one authored phrase `Ihr Nichtreagieren richtig einordnen` also permits
+Whisper's word-boundary reading `ihr nicht reagieren richtig einordnen`.
+This preserves the same spoken words and negation; it does not claim that the
+transcript's separated nominalization is correct written German. The comparator
+requires the entire five-word context, leaves both original strings intact, and
+still rejects changed pronouns, added or missing negation, a different verb or
+`falsch einordnen`. Standalone `nicht reagieren` is not generally joined.
+
 ## Heiko final-encoding recognition windows (2026-10-19)
 
 `heiko-story-24` and `heiko-story-27` have a finite

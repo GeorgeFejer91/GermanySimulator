@@ -38,8 +38,14 @@ test('exported sequences match actual controller speech for every speaker, regio
   h.scope.nextVariant=(_key,lines)=>lines[3];
   assert.equal(h.scope.startCitizenshipQuiz(actor),true);
   const cue=h.effects.speech[0],request=buildQuizVoiceRequest({voiceId:person.voiceId,region,questionId:String(question.source),approachIndex:3});
-  assert.equal(request.text,cue.text);assert.equal(request.english,cue.subtitle);
-  assert.deepEqual(request.segments.map(row=>row.text),[...cue.candidateSegments]);
+  assert.equal(request.text,h.node('quiz-prompt').textContent);
+  if(cue.candidateSegments===null){
+   const question=request.segments[2];assert(question.existingDefault,'question-only speech requires an already admitted own recording');
+   assert.equal(question.existingDefault.profileId,question.profileId);assert.equal(cue.text,question.text);assert.equal(cue.subtitle,question.english);
+  }else{
+   assert.equal(request.text,cue.text);assert.equal(request.english,cue.subtitle);
+   assert.deepEqual(request.segments.map(row=>row.text),[...cue.candidateSegments]);
+  }
   assert(request.segments.every(row=>row.voiceId===cue.candidateVoiceId&&row.quizCharacterId===actor.quizCharacterId));
  }
 });

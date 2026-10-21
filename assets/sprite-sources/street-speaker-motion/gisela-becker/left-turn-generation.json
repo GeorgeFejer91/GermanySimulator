@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved; source/extreme gate only",
+  "character": "quiz-gisela-becker",
+  "tool": "image_gen.imagegen built-in",
+  "original": {
+    "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+    "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+  },
+  "generations": [
+    {
+      "target": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-profile-rear-quarter-candidate.png",
+        "sha256": "174e330e34d2f59394d99049b802d8a058c89aa003bc1768e256f17c2e67d313",
+        "bytes": 1292996
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-turn-prompt.txt",
+        "sha256": "60886ca9de29af9f021640ec5139b2a99ccf443410f3893a8d4d367a7b0e45dc",
+        "bytes": 2203
+      },
+      "toolOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a15a00-2c54-7882-b1dd-cbb3127b20fb/exec-9e9791cc-7664-45a2-b445-8ea3bfc07816.png",
+      "finding": "Correct book-left/paper-right and true left/profile/rear-left directions, but visible calves too long; retained unapproved."
+    },
+    {
+      "target": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-profile-rear-quarter-short-legs-candidate.png",
+        "sha256": "131417f5817d1dab365d95e2b2af80bf70088b9ca82ca53daf86a620a9517471",
+        "bytes": 1228067
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-turn-leg-repair-prompt.txt",
+        "sha256": "3f8aa84fa32be13ad12aad5ff7158e5a843a2c769dc265b674830a32f71ebeb6",
+        "bytes": 1365
+      },
+      "toolOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a15a00-2c54-7882-b1dd-cbb3127b20fb/exec-168a8c49-7b39-400f-9aa0-4009230c62b0.png",
+      "finding": "Shortened visible calves while preserving correct props and full broad shoes; candidate source review, not runtime acceptance."
+    },
+    {
+      "target": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-complete-legs-candidate.png",
+        "sha256": "fa56a4a1b61e660667a062dca0356e5ade5f1c62a2a4dd3d7939ade0b033596d",
+        "bytes": 688452
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/left-complete-legs-prompt.txt",
+        "sha256": "f9dfa1a207e3d62d4441f07ad2f6b7f7cd3b1e6560618103a7eb18310614cbe8",
+        "bytes": 1952
+      },
+      "toolOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a15a00-2c54-7882-b1dd-cbb3127b20fb/exec-784cd88c-6fc5-42b8-ba7b-ef12fc6ede84.png",
+      "finding": "Two complete own left-facing shoes, calf/root layers matched to corrected profile; source fitting scale .17, far/near offsets -52/+14. Earlier flatter isolated shoes retained as rejected fit attempt."
+    }
+  ],
+  "fittedCardinals": {
+    "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/registered-cardinals-candidate.png",
+    "sha256": "c2fdb8abc31916f14ccf3298ffb95298d2dda3fa6f845e5e532ac90effd64456",
+    "bytes": 714256
+  },
+  "fitting": {
+    "path": "assets/sprite-sources/street-speaker-motion/gisela-becker/motion-spec.json",
+    "sha256": "353986f69204f51e9b18d1e50002e9d130099d5d4cc41ab1c8401004bbd112c2",
+    "bytes": 17635
+  },
+  "recipe": "Ignored fit-gisela.py imports unchanged resident builder. Source-only registered cardinals preserve original down/right/up and new true-left upper. Front/rear reuse intact original complete lower-body paint in existing depth-capable painted_walk branch with protected original upper; right uses own existing supplemental legs; left uses new matched complete-leg paint. No reflected body/limb. Full bake requires depth-aware front/rear neutral/bridge configuration; no locomotion atlas/runtime manifest produced."
+}

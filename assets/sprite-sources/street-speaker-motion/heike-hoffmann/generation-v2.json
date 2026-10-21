@@ -1,0 +1,20 @@
+{
+  "status": "UNREVIEWED source replacement for rear-right neutral-turn; no runtime adoption",
+  "method": "built-in image_gen, original identity + V1 study references",
+  "prompt": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/rear-right-v2-prompt.txt",
+  "output": {
+    "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/rear-right-v2-candidate.png",
+    "sha256": "e9b0001c4bbfcb1ee16036349593e5724b97ec360df938515524c02c59aaa23d"
+  },
+  "references": [
+    {
+      "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+    },
+    {
+      "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-turns-v1-candidate.png",
+      "sha256": "fc33143701ef4cbb0c5d7d74ec1ee815c65e1a2aa348c1616ace92060c93d86a"
+    }
+  ],
+  "initialObservation": "Rear head now coherently follows body and lips are hidden; normalize against source before approving body/prop proportions."
+}

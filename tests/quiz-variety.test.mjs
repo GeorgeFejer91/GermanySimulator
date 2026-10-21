@@ -25,5 +25,5 @@ assert.ok(questions.some(question=>question.source==="G-B2-10"&&question.choices
 assert.match(game,/document\.getElementById\("quiz-prompt"\)\.textContent=prompt/,"the full spoken remark, context, and question must appear together");
 assert.match(game,/document\.getElementById\("quiz-speaker"\)\.textContent="EINE FRAGE AN SIE"/);
 assert.match(game,/§ 10 Absatz 4 StAG grundsätzlich B1/);
-assert.match(game,/if\(n===state\.quizApproach\).*?n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE.*?if\(d<78&&!stimulusBusy\(\)\).*?else if\(d>=78\)moveGroundResponder/s,"a quiz NPC must briefly follow, lose interest by time or distance, and wait for queued dialogue before opening its modal");
+assert.match(game,/if\(n===state\.quizApproach\).*?n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE.*?if\(d<78&&!stimulusBusy\(\)\).*?else if\(d>=78\)\{const pace=.*?moveGroundResponder/s,"a quiz NPC must briefly follow, lose interest by time or distance, and wait for queued dialogue before opening its modal");
 console.log("Mixed civic/driving quiz and intrusive remark pools OK");

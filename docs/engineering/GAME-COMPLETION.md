@@ -1,5 +1,401 @@
 # Germany Simulator completion goal
 
+## Active ambient-character animation goal — 2026-10-20
+
+Release integration closeout: the five ambient checkpoints, through Heike96378cb,
+are merged with published2c48edd in clean ambient-city-release. Combined Node
+2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and
+31-page build pass. Native Heike caption encounters pass desktop and both Android
+emulations; Gisela's owned recorded Q24/mouth/portrait path passes desktop. Built
+startup passes desktop and Android portrait. Independent Physics and Camera scoped
+release reviews pass on260 frozen files; their broad-world, natural, listening and
+physical-device exclusions remain open. No private Heike audio is admitted. Source
+runtime/assets remain unchanged after those checks; only this progress closeout
+changes. Publication proceeds under the standing policy. The42-character goal
+remains active with37 scoped standing-only identities.
+
+
+Owner: Codex chat `01a159fb-e568-79f3-967b-f4749d5266ef`, isolated worktree
+`C:/Users/cogpsy-vrlab/.codex/worktrees/ambient-city-animation/GermanySimulator`,
+starting from published `4362d88`. George explicitly requested complete walking,
+talking mouths, gestures and integration of available recordings for every
+non-mission open-city sprite, including approaching quiz speakers. This is the
+active goal; it does not reopen deferred 3D pose work or approve historical held
+art. The dirty primary checkout and archived checkpoints are preserved.
+
+Scope: nine quiz speakers, nineteen named city residents, nine ordinary crowd
+identities, three street-rule advisers, and the two Sandales (42 identities).
+The player, police, mission specials, interiors, archived Ede and the separately
+owned neighborhood story are outside this ambient cast. Merz audio has a separate
+active owner.
+
+Current Gisela increment: integrated MAIN V4 (192pinsf3e2dcde…) passes bounded
+Physics/Camera/general review, full2274/2274 Node checks and source/packed checks.
+She now has four-direction walking, phase-owned stops, paper presentation,
+moving mouths, an actual current-pose quiz portrait and her available exact own
+question recording. Quiz selection uses a nearby walking-time budget; sRGB
+portrait edges are recovered in linear light. Camera's three native functional
+sets and separate3/3 cleanup cases are accepted; the three earlier wrapped cases
+retain their late async-unload fixture FAILs in evidence. Full-world, physical
+Android, listening, natural random encounter and publication gates remain open.
+Current branch has three street-manifest motion families plus the two existing
+Sandales;37 other scoped identities remain standing-only. Mouth metadata alone
+does not establish available native audio or full speaking acceptance. The active
+42-character goal and milestones3–6 remain open.
+
+Heike Hoffmann is locally integrated. Final MAIN native browser passes3/3 desktop
+and Android-emulated portrait/landscape profiles; full Node2281/2281, Python12/12,
+curator, syntax and whitespace checks pass. Independent Physics/Camera/general
+scoped reviews pass on193 frozen inputs. Exact checkpoint has64 selected paths;
+only a test file receives Git's normal CRLF-to-LF conversion. Private Berlin audio
+remains unapproved and excluded. Publication integration is next. Physical-device,
+listening, natural exact right8/12 stops and full-world/cohort gates remain open.
+Her V5 generated-leg92-cell walk
+and256-stop bakes failed source-match review and must not be integrated. The
+original-paint V7 pilot restores visible shoes but retains source seam/alpha
+findings. Repaired V9 side-layer ownership and hem registration pass independent
+four-phase source review. Fresh full92-cell walk/bridge/turn and256-stop exports
+now pass independent source art/metadata review; temporal and integrated gates
+remain open. The
+16-frame own key-emphasis gesture (14 distinct poses) has bounded source review;
+direct96x120/64x80 exports preserve existing128x160 standing geometry. Five own
+neutral lip profiles are packaged independently; exact own question24 recording
+exists, but both default Heike actors are Berlin-only and that Germany wording
+does not match their Berlin question. No Berlin take is admitted; the recording
+gap is explicit. Source-bound moving mouths and compact packs are locally adopted;
+actual shader checks pass all378 logical slots at both packed sizes, including
+276 visible mouths,102 nulls and unchanged alpha. Three native Berlin caption
+flows pass on desktop and Android portrait/landscape emulation; the missing
+matching default Berlin recording stays explicit. One private fixed-voice
+question passes exact encoded words/levels and silent native playback on all
+three profiles; its listening and game-use approval remain pending. Two longer
+private takes fail word checks and stay held. Scoped Camera review accepts
+depth/resize/pivot; Physics accepts tested approach/stop ownership, and its
+P5 closeout accepts bounded actual/forced source-contact evidence with its
+natural-phase limits explicit. Her eight reviewed payloads and complete motion
+entry are now in the local canonical manifest; final MAIN browser/regression,
+successor review and publication remain pending. The audio is still private.
+Uwe/Brigitte source-only preparations retain their failed
+side-shoe probes and have no runtime admission. Current details/evidence are in
+SESSION.md; these candidates do not change the completed-family count.
+
+Ordered milestones and acceptance:
+
+1. [x] Inventory the actual cast, source art, runtime capabilities and owned
+   recordings. Current release has 39 standing-only ambient records and one
+   animated Irmgard record; Sandales have their separate existing animation.
+2. [x] Repair quiz composite-media mouth projection with behavioral regressions:
+   the decoded segment's actual clock/envelope drives lips; segment gaps,
+   paused, cancelled, missing and stale cues stay closed.
+3. [ ] Prove source and final pixels per family before enabling motion. Reuse
+   existing directional/action sources and builders, supply missing contacts,
+   bridges and gesture art, keep compact proportions, props, alpha and one
+   ground pivot. Existing candidate labels are not visual acceptance.
+4. [ ] Integrate distance-driven walking, planted approach/wait/review/answer
+   reactions and return to roaming. Register visible front/profile mouths on
+   the actual moving/gesturing source cells; rear/occluded mouths stay absent.
+   Reuse the simulation, media clock, bounded queue and selected-variant leases.
+5. [ ] Verify exact encoded loops/transitions and source identity, then actual
+   silent desktop and Android portrait/landscape-emulated encounters, audio
+   ownership/closure, pause/recovery, loading/failure and asset budgets. Record
+   physical Android and perceptual listening separately if unavailable.
+6. [ ] Freeze one integrated candidate for independent Physics and Camera/Scale
+   reviews, close findings, run affected checks and the release gate, publish
+   the validated scoped result and verify public root/compatibility URLs.
+
+Local core checkpoint4403afb is preserved; publication and whole-cast acceptance
+remain open. The Sandale increment now supplies211 source-fitted visible mouths
+and93 explicit nulls across304 existing atlas slots. Only mouth metadata and its
+native-atlas adapter are added; all body pixels, geometry, pivots and controllers
+remain unchanged. Candidatev2 freezes94 inputs (descriptor9b28c2b0b11688f27294f6db9d824be3d6778214077e73f932497948c7783173).
+Packagingv3 changes only scoped Git byte-preservation rules for8 source registrations
+and1 fitter; the other93 inputs are exact (descriptore925e9b84cbb29dd1c8bbe25a6dcbb8c7ec1a0de8e8b8a65815abc09d55017f0).
+All runtime files and cross-file hash-bound sources equal their staged bytes.
+Two ordinary test/docs paths have only the repository's LF encoding normalization.
+
+Full2256/2256 Node tests pass,0skips. Independent general review25 checks and211/304
+profile/slot oracle pass. Physics passes59 existing+4 production fixtures and3648
+exact old/new geometry/UV/matrix comparisons. Camera passes all304 actual source
+GPU cells (alpha unchanged,93 nulls inactive),28 reviewed boards, six native face/
+city pairs, three-profile E/automatic-caption closure, material/shared-map ownership
+and staged retirement/pagehide cleanup. Synthetic source cues/wall depth fixtures
+are separate from native on-city speech or traversal. V1 CRLF curator failure is
+retained; v2 restores baseline LF and passes curator without semantic logic change.
+
+Default audio has zero Sandale recordings. Two historical MP3s exist only behind
+the guarded preview map and lack runtime recording metadata. No audition is
+promoted or substituted. Actual native recorded speech, clock/completion and
+perceptual listening remain unavailable; production captions keep dynamic mouths
+closed. Full required C1–C5/X1 gaps remain open. Evidence and exact bounds are in
+output/ambient-city-animation/reviews/sandale-mouth-v1-{core,physics,camera}.
+
+Current Irmgard increment supplies260 visible own-mouth fits and97 explicit nulls
+across her357-slot accepted atlas, plus separate standing paint. Main manifest
+adds only its125KB source-bound definition; body files, controller/runtime, world
+scale/pivot and stride25.6 remain unchanged from checkpointdd316d0. Source/zero/max
+fits and light/dark edges received complete root source review;7 optimizer-limit
+cases retain direct pixel observations. V1 froze100inputs (ca43590ce0ac632bfc9a8db0b743c02c7f0e02f52afc35f48effc131a38ebdbf).
+Its full suite had2219PASS/38FAIL from3old Three-core-only fixtures lacking ShaderChunk.
+V2 corrects only those imports to the existing full production module:102pins
+(d796f3a74d0444e7f0a8750462c70dac7f09c63a6eefd256de41adf6c07e7476).
+All49 affected and full2257/2257 checks now pass,0skips. Curator passes.
+
+Fresh general review90checks and exact260-profile/standing affine compilation pass;
+Physics2142 mapping+6standing comparisons and public loader/walk/pause/cancel probes
+pass. V2 rebinds both through unchanged runtime/data and fresh49checks. Actual GPU
+checks pass all357slots at both decoded delivery sizes (714cases). Native default
+recorded speech passes desktop/portrait/landscape emulation: exact owned clip/text/
+profile, actual media clock and shader, peers closed, completion/replay, FILE
+closure/resume, VOICE/actor cancellation. Debug player placement and fixture modal
+cleanup are separately labelled. Final independent Camera visual review passes this bounded increment.
+All10 staged payload paths retain exact reviewed bytes. Existing required wholeworld
+rows, physical Android/listening and the rest of the42-cast goal remain open.
+This is already-animated crowd-Irmgard; held stadt-Irmgard art is not promoted.
+
+Local Irmgard checkpoint34c435b is preserved. Selected Gisela implementation plan:
+`docs/superpowers/plans/2026-10-20-gisela-ambient-animation.md`. Root source-reviewed
+184 exact encoded walking/bridge/turn cells across both variants. Four desktop sole
+contacts fit9.4units/cycle with.5pixel marking uncertainty; provisional9.5 remains
+pending native foot/cadence checks. Evidence is in gisela-body-calibration; marked
+measurements live with Gisela's source. No Gisela runtime adoption or new full-world
+acceptance has occurred. Assemble a16x14 source-only candidate next: preserve
+published standing/pivot150, integer-align candidate body by2desktop/1mobile pixels,
+append accepted full16paper gesture, discard unapproved diagnostic action rows and
+carry the matching own lip transforms. Other resident/Hartmut/Horst candidates stay
+held. All remaining cast work and release gates remain open.
+
+Initial baseline: 73/73 focused Node checks pass (street sprites, playback,
+pedestrians and recorded quiz segments). No new animation has been accepted.
+The earlier walking/publication holds remain evidence for their own candidates;
+this goal must earn fresh scoped acceptance against the current published tree.
+
+The general core review passes with no introduced defect:204 fresh checks,
+six syntax checks, voice curation and70/70 pins. Precommit inspection then found
+Git line-ending conversion would invalidate all eight SHA-bound mouth payloads.
+A scoped.gitattributes -text rule preserves their exact bytes, the new clean-filter
+regression fails before and passes after, and all eight staged delivery SHA256s
+match their manifest and working bytes. Packaging-only v4 freezes71 files with
+no runtime/art change (descriptor145fde5dbbdf83eeb08f247b59fefc7f4c05459cb41861e8519a5038b3a16943).
+This is a local checkpoint, not release or full-cast acceptance.
+
+Current C4 correction: the same-root desktop prototype confirmed that spherical
+camera tilt placed 51.7% of sampled Irmgard paint inside the Spaeti footprint.
+The integrator now uses camera yaw only for registered flat street paint, retaining
+source proportions, world height, UVs, ground pivot, depth material and the separate
+rig path. A new regression failed before the correction and passes across standing
+and motion paint, pitched/rolled/yawed cameras and rotated hosts. The complete first
+rerun passed 2241/2242; its sole failure was an old center-head spherical-ray fixture.
+That fixture now retains its procedural-ray counterexample at an actual painted
+head-edge sample; all75 affected renderer/occlusion checks pass. The failed full log
+is preserved. Projected paint is about18% shorter. Current independent Camera review
+accepts the bounded native wall-depth/loaded-scale subset on all three profiles;
+broader remaining matrix and the compact source-center criterion stay outstanding.
+
+Sandale mouth source preparation now covers every125 referenced cell of each
+accepted152-slot atlas, with27unused cells explicitly null. Root reviewed six
+native front/profile pilots, all48 gait fits, all30 bridge fits, then every133
+remaining turn/action/look source/zero/open crop. Visible profiles total106for
+the man and105for the woman;46/47 rear/occluded/unused slots remain null.
+Woman turn5:3 has no visible lip and stays null; steep look-mouth openings retain
+their naturally weak source appearance. All133 newly fitted zero closures are
+exact, source alpha is preserved and67 protected-moustache checks pass. Direct
+final-pixel fits do not claim original-field replay;6 bridge fits per figure
+hit their diagnostic optimizer limit, retained honestly rather than relabeled.
+The two remaining registrations and fitting helpers are source-only accepted.
+No atlas bytes, legacy controller, movement delivery,13.5/14 cycle distance,
+manifest, shader or audio binding has been promoted by this source gate.
+
+Gisela's paper-raising greeting has reached a full16-frame source checkpoint.
+Both neutral endpoints match v1; the left book, feet and captured head/arm fields
+stay fixed. Root reviewed every desktop and compact body frame, then every
+source/closed/open mouth cell in both variants. All32 zero cells are exact,
+source alpha and protected upper face/book/paper/feet checks pass, and the public
+mouth registration adapter passes3/3. Actual native endpoint maps and both axes
+are retained, with one fitted physical mouth per cell. Compact opening is naturally
+weaker than articulating the paired endpoints before export (affected-union RGB
+MAE up to8.73, max channel delta102); pixel equivalence is not claimed. The fragment
+SHA is e0b0c4f7b0a025a9a509ce2df0b6f6e17b5713658f0db596c7bfec7bf8c83b59.
+GPU checks, atlas merge and city adoption remain outstanding; this source gate
+still does not approve generic head nods as work/review gestures.
+
+Horst's four right-profile gait extremes also passed root source review using
+his own compact complete legs and unchanged speaking profile, keys and clipboard.
+Each exact encoded export is connected with a10-pixel gutter. A nonempty44,215-pixel
+head guard is unchanged; near-opaque waist compositing changes386–499pixels by
+up to3–5RGBA levels and is documented. The waist seam and asymmetric shoe spread
+remain continuous-loop review details. No16-frame expansion or body adoption
+has occurred. Evidence stays under output/ambient-city-animation/source-review/.
+
+The retained portrait route failure is now repaired on the v3 frozen candidate:
+when an identified body seals both legal bypasses, the planner returns a native
+zero move so the ordinary caller uses its existing pause/reverse recovery. Collision
+radii, route bounds and passable/static bypasses are unchanged. Six final causal
+regressions fail the old fallback and pass the repair;27 affected checks and48
+independent route/motion/reaction checks pass. Independent exact-root replays reverse
+at about1s, show all16 left phases and retain legal clearance over20s. Prior renderer
+candidate passed2242/2242 full Node; final v3 passes2248/2248, zero skips,156.49s.
+Root rehashed all70 frozen pins after the run with no mismatches; the voice curator
+also passes. Independent Physics and Camera reports retain their bounded verdicts.
+
+V3 actual silent browser evidence now passes seven bounded cases: three native
+adviser/media/FILE/VOICE cases, three native shop front/alongside/behind depth/scale
+cases, and one actual10s portrait blocked-route recovery. All70 frozen pins match
+before/after. The behind actor is GPU-occluded while still submitted; front/side
+paint remains visible, with unchanged depth material and exact foot pivots. Two
+inherited compact toe centers remain the strict source-ground diagnostic FAIL
+(ten at runtime alphaTest); actual pixel-perfect floor masking and full planting
+remain unproved. Complete roof/faded-player/two-sprite-cross/landmark-fallback
+matrices, physical Android and perceptual listening remain outstanding.
+
+Current local implementation: actual decoded composite segment spans now own
+quiz mouth-envelope sampling (closed during 80 ms gaps). Twelve unchanged MP3s
+gain hash-bound 40 Hz envelopes: seven adviser rules, one bilingual crowd pilot
+and four admitted quiz questions. All 69 current default city/crowd/adviser clips
+are measured; recording coverage is unchanged and complete default recorded quiz
+prompts remain zero. No auditions or held recordings were promoted.
+
+The existing Three sprite material can now apply source-bound connected mouth
+paint to its current atlas cell without a new mesh, texture or clock. Optional
+atlas reactions use the existing planted interaction controller and movement
+observer. The root manifest still selects the published artwork; Hartmut's body
+candidate remains isolated in ignored evidence. Renderer plumbing passed three
+silent GPU cases (desktop plus two Android-emulated orientations); the first
+cleanup fixture failure is retained. A staged Hartmut body run sampled all 16
+walk phases in four directions and displayed seven actual reaction rows on all
+three profiles. These are functional/diagnostic passes, not artistic acceptance,
+grounding calibration, a natural encounter or a physical-device result.
+
+Evidence: `output/ambient-city-animation/` in this worktree. Source-review boards
+and source hashes cover all 42 identities. Hartmut's 12 front/profile/action lip
+fits and all sixteen encoded desktop rows received source-pixel review. His
+external definition binds 181 visible motion cells and 75 deliberate no-mouth
+slots. Actual GPU articulation/closure checks cover all 256 bindings; corrected
+quarter lips pass desktop and Android portrait/landscape emulation. A diagnostic
+viewport omission caused the first portrait crop failure and is retained beside
+the repaired three-case pass. Recorded speech in the city, ordered playback and
+independent world acceptance remain outstanding.
+
+Exact source-sole measurements reproduce the current 32.05-unit cycle: profile
+maximum slip is 0.013 shoe lengths desktop / 0.023 mobile. The analytical
+reference-camera vertical measurement is 0.049 / 0.071; it is not live city
+grounding proof. The 28 resident candidates total 477,102,080 decoded RGBA bytes,
+so resource demand must be measured before activating the whole cast. Six
+previously missing resident packs are now candidate exports, still awaiting
+complete review; Gisela has new, unapproved supplemental turn/limb sources with
+one wrong-hand repair pose explicitly rejected.
+
+The complete regression run after fixing a supplementary-envelope projection
+that recreated an absent fixture recording passes 2,225/2,225 checks, zero skips
+(`all-node-after-projection-fix.tap`). The production overlay now supplements
+only recordings already present. No commit, push or deployment has been
+performed for this goal; the production manifest still selects published art.
+
+Latest local checkpoint: optional hash-bound motion delivery preserves every
+logical source cell while loading movement and requested reactions separately.
+Hartmut's exact-copy packed pilot passes desktop and Android portrait/landscape
+emulation, including automatic reaction texture release and complete disposal
+(`output/playwright/hartmut-packed-release-check/report.json`). The offline
+delivery builder passes nine tests and the focused runtime set passes 145.
+Compact selection now follows the viewport's shorter edge at the production
+renderer density; the independent review caught the earlier incorrect DPR
+assumption. Its 89 affected checks pass. Actual-city packed resource and route
+proof is in progress; these pilot passes do not establish whole-cast budgets.
+
+The first frozen Physics and Camera/Scale reviews retain outstanding rendered
+world checks and are superseded for acceptance by subsequent delivery/variant
+changes. A new common freeze and both reviews are still required. Gisela's own
+source gate is reviewed for a candidate bake; Horst needs new visible lip art.
+Irmgard Aktenstapel's rebuilt profile legs remove disconnected cloth fragments;
+all sixteen encoded side phases, front/rear, eight turns and compact profile
+received integrator pixel review. This is source review, not city acceptance.
+Her current desktop/mobile pins are `dd98ea6ccb09dea72cec4bd9fa1973b206321e378690226626b9ad9f8e9ba3a4`
+and `5e51582e74eb150a959a555905e3df2c6776b84eeef86e1a6d766180aa6879d8`.
+
+Eight native mouth families were exercised through the actual GPU shader on
+three profiles, 96 fits and both backgrounds per profile
+(`output/playwright/native-mouth-gpu/report.json`). This diagnostic passed
+articulation/bypass/cleanup but **does not approve those fits**: integrator image
+review found Waltraud Wartemarke's failure registration on her eye. That source
+fit and the earlier claim of a pre-open failure mouth are rejected, correction
+is underway, and the original failed visual evidence is retained. Static source
+fits also do not prove future walking/gesture mouth transport.
+
+Waltraud's rejected eye fit is now corrected to her actual closed frowning
+mouth; the previous pre-open/cavity description was wrong. The fresh three
+profile GPU run passes after that correction. Integrator reviewed all eight
+family native/standing overview boards and actual GPU zero/max panels. Eight
+**current standing fits only** are selected by the main manifest through
+immutable `mouths-standing-v1.json` references; body art is unchanged. Finer
+six pre-open emphasis closure review and all future moving-mouth transport
+remain separate. Native adviser/quiz city checks for those main-manifest
+references are in progress. Source/byte integration passes 106 focused checks,
+11 external-loader checks and the shipped-definition binding check.
+
+Actual packed city testing reproduced two movement defects. First, Post's
+nominal lane lay inside its inflated wall; `pedestrianLane` now retains the
+clear parallel line when the native static check rejects the preferred lane.
+Fresh city traces show all16 down phases and about97px progress in7s across all
+three profiles, with clear-route all16 right phases. Second, Spaeti's corner
+has a locally clear lateral point but blocked forward continuation; earlier
+mobile runs failed the26px/5.5s movement threshold and remain retained. A new
+bounded static bypass uses the existing persistent movement owner and native
+route/ground/clearance checks. Both translated corner regressions were red
+before repair and now pass; the complete focused route set passes47 checks.
+Its fresh three-profile city verification and independent reviews remain open.
+
+Gisela now has a source-bound208-slot full walk/turn/limited-reaction candidate
+(156 populated cells), with exact builder-field capture replay matching both
+encoded atlases. Her new left profile and visible front quarters have reviewed
+own lip fits; exact moving-mouth transport is in progress. Actual greet/work/
+review gesture art remains missing. Horst's newly authored frontal/action
+closed lips pass a source-only identity review; two profile lip reveals remain
+under development. No full-cast animation or publication acceptance is claimed.
+
+The corrected canonical-path main manifest now passes the full Node run:
+**2,241/2,241, zero skips** (`all-node-canonical-mouth-paths.tap`). The first
+whole-manifest browser rejection exposed eight missing `./` prefixes; the
+shipped-definition test now calls the actual public manifest validator and
+reproduced that failure before repair. Saved failures are retained. All three
+current-main standing-mouth city profiles pass: two actual admitted adviser
+recordings, six guarded caption-only quiz prompts, and eight separately labelled
+source-adapter diagnostics. FILE intentionally keeps native speech/captions
+playing while the world pauses (`game-hud.js`); tests verify covered lip closure,
+same cue/current playhead recovery, completion and real VOICE cancellation.
+The earlier assumption that FILE must freeze media was a fixture error.
+
+The current runtime/main-art increment is frozen separately from unapproved
+body candidates in `standing-route-frozen-candidate.json`,68 pins,
+SHA256 `de22070409f6ca1ce07ee391881758c50cc7f0dc5378d6cc90086f5cb439f217`.
+Physics and Camera/Scale are independently reviewing this same freeze. Supplied
+Hartmut corner proofs used a diagnostic manifest; exact current-main Irmgard
+corner proofs now pass three profiles and are being extended with observation
+before Start/readiness so the whole initial bypass remains inspectable. This
+does not certify continuous planting or physical Android.
+
+Gisela's first strict source admission caught her short family ID where the
+canonical persona ID was required. The export route now resolves the actual
+street persona; a real public source-view loader regression rejects the old
+alias and admits the corrected definition. All208 slot bindings and visible
+GPU articulation for132 cells pass on desktop and both mobile-emulated views
+(`output/playwright/gisela-all-moving-mouth-cells/report.json`); all-frame pixel
+review, gestures, planting, city/media and adoption remain open. Horst's nine
+own frontal/action source fits have integrator source-only approval; two own
+profile-speaking source fits now exist, with GPU/motion/adoption still pending.
+
+Independent Physics review of the68-pin increment found no confirmed new source
+or executable physical defect, with118 fresh checks and exact-main corner
+receipts audited; continuous contacts, combined crowded corners and naturally
+obstructed quiz routes remain open. Camera review confirmed a retained C4
+representation defect exposed by legal near-wall routes: the full pitched
+camera quaternion tilts the billboard's head into Späti while its pivot remains
+ground-correct. Desktop/landscape head sightlines intersect the facade; an
+upright axial calculation clears them. All43 current body geometry/image/variant
+fields still equal base4362, so this is not a newly repainted-body regression.
+Production remains frozen while a separately served upright experiment is
+measured. Camera also retained a portrait route threshold failure for source
+inspection; no blanket route/world acceptance is inferred from the earlier
+three-profile successes. No commit or publication has been performed.
+
 ## Current combined release candidate — 2026-10-19
 
 George requested all completed pending development integrated and published with

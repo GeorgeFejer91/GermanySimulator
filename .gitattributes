@@ -9,3 +9,20 @@ assets/sprite-sources/rigs/pose-audit.json -text
 assets/sprite-sources/candidates/merkel-21/pose-audit.json -text
 assets/sprite-sources/candidates/merkel-cmu-left/pose-audit.json -text
 assets/sprite-sources/reference/cmu-walk-69-01/69_01.bvh -text
+
+# Street mouth payloads are immutable SHA-bound delivery bytes.
+assets/characters/street/**/mouths-*.json -text
+
+# Preserve reviewed source-registration and fitter identity hashes.
+assets/sprite-sources/sandale-mouths/*.registration.json -text
+tools/fit-sandale-remaining-mouths.py -text
+
+# Gisela source recipes and immutable deliveries retain reviewed SHA-bound bytes.
+assets/sprite-sources/street-speaker-motion/gisela-becker/** -text
+assets/characters/street-speakers/quiz-gisela-becker/manifest.json -text
+assets/characters/street-speakers/quiz-gisela-becker/delivery-v2/** -text
+tools/build-street-speaker-family.py -text
+
+# Heike source recipes and immutable deliveries retain reviewed SHA-bound bytes.
+assets/sprite-sources/street-speaker-motion/heike-hoffmann/** -text
+assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/** -text

@@ -1,0 +1,14 @@
+{
+  "status": "UNREVIEWED missing neutral-turn source candidate; no runtime adoption",
+  "method": "built-in image_gen, reference-conditioned transparent source generation",
+  "reference": {
+    "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+    "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+  },
+  "prompt": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-turns-v1-prompt.txt",
+  "output": {
+    "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-turns-v1-candidate.png",
+    "sha256": "fc33143701ef4cbb0c5d7d74ec1ee815c65e1a2aa348c1616ace92060c93d86a"
+  },
+  "initialObservation": "Second rear-right quarter head appears profile rather than coherent rear quarter; inspect normalized full bodies and real alpha composites before acceptance."
+}

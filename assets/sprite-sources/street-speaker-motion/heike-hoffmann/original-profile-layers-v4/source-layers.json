@@ -1,0 +1,94 @@
+{
+  "status": "sampled side seam method passed; complete encoded gait and runtime acceptance pending",
+  "original": {
+    "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+    "sha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc"
+  },
+  "extractionReceiptSha256": "e791148cdd2b0f7a0e1c79e2f337a82b08f46989dc4e5adf0ed7ea7c5a865824",
+  "driverSha256": "35f2684960f0c873253e415548ecc02ee86e6fa4c632625ab2a3c45c13b6cb9e",
+  "method": {
+    "file": ".agents/skills/animate-2d-characters/scripts/painted_walk.py",
+    "sha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8"
+  },
+  "views": {
+    "right": {
+      "near": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/right-foreground-original.png",
+        "sha256": "e6a536211fd501c477379e797149c63d572207243c6d248054493a21dcc52c2d"
+      },
+      "far": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-layers-v4/right-far-original-with-hidden-underpaint.png",
+        "sha256": "5aa387037bcf5b8029b87d39fc3e6dd038134d82c98c41662196b6169e32e641"
+      },
+      "hiddenUnderpaintField": {
+        "nodes_y": [
+          0,
+          380,
+          434,
+          472,
+          511
+        ],
+        "dx": [
+          65,
+          65,
+          65,
+          65,
+          65
+        ],
+        "dy": [
+          0,
+          0,
+          0,
+          -8,
+          -8
+        ]
+      },
+      "visibleFarOriginalPaintExact": true,
+      "neutralBelowRow414AlphaSupportExact": true,
+      "neutralBelowRow414MaxRGBDifference": 2,
+      "neutralBelowRow414MaxAlphaDifference": 5
+    },
+    "left": {
+      "near": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-legs-v1/left-foreground-original.png",
+        "sha256": "34c68462a869169ea172f83951cbc06e64734f8b98d6a5eb1f8b3ba6eb922194"
+      },
+      "far": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/original-profile-layers-v4/left-far-original-with-hidden-underpaint.png",
+        "sha256": "b639805c819810a8073e9ef5fc8033c430f9c2dcb3e9a97666ec21516c1f0166"
+      },
+      "hiddenUnderpaintField": {
+        "nodes_y": [
+          0,
+          380,
+          434,
+          472,
+          511
+        ],
+        "dx": [
+          -65,
+          -65,
+          -65,
+          -65,
+          -65
+        ],
+        "dy": [
+          0,
+          0,
+          0,
+          -8,
+          -8
+        ]
+      },
+      "visibleFarOriginalPaintExact": true,
+      "neutralBelowRow414AlphaSupportExact": true,
+      "neutralBelowRow414MaxRGBDifference": 3,
+      "neutralBelowRow414MaxAlphaDifference": 17
+    }
+  },
+  "limitations": [
+    "Only original visible paint is exact; occluded anatomy uses the own registered near-leg paint.",
+    "Translucent layer overlap retains small measured neutral differences.",
+    "All gait phases, stops, mouths, encoded and runtime checks remain required."
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "status": "source calibration only; candidate not admitted; native foot sliding/starts/stops/turns pending",
+  "atlas": "assets/characters/street-speakers/quiz-gisela-becker/character-desktop.webp",
+  "atlasSha256": "cf62820e6a5cc5b38bc594b86c36f7db545d22560ca12f339f5ea4e950a75b2a",
+  "cell": [
+    128,
+    160
+  ],
+  "grid": [
+    16,
+    13
+  ],
+  "pivot": [
+    64,
+    148
+  ],
+  "figureWorldHeight": 1.6,
+  "billboardWorldHeight": 1.8823529411764708,
+  "worldUnitsPerGameUnit": 0.02,
+  "method": "Manually inspected same outer sole point at y145 on each named foot while planted. Alpha128 edge queried only within inspected sole crop to record native integer x. Left along_pixels=-x; frames14,16,18 unwrap14,0,2. Half-pixel marking uncertainty; not continuous or projected-camera evidence.",
+  "markerUncertaintyPixels": 0.5,
+  "views": {
+    "right": {
+      "character": "quiz-gisela-becker",
+      "view": "right",
+      "atlas_sha256": "cf62820e6a5cc5b38bc594b86c36f7db545d22560ca12f339f5ea4e950a75b2a",
+      "frames_per_cycle": 16,
+      "game_units_per_pixel": 0.5882352941176471,
+      "current_cycle_distance": 9.5,
+      "shoe_length_pixels": 24,
+      "contacts": [
+        {
+          "foot": "side0",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 83,
+              "sourceCellFrame": 4,
+              "pointPx": [
+                83,
+                145
+              ]
+            },
+            {
+              "frame": 6,
+              "along_pixels": 81,
+              "sourceCellFrame": 6,
+              "pointPx": [
+                81,
+                145
+              ]
+            },
+            {
+              "frame": 8,
+              "along_pixels": 79,
+              "sourceCellFrame": 8,
+              "pointPx": [
+                79,
+                145
+              ]
+            }
+          ]
+        },
+        {
+          "foot": "side1",
+          "samples": [
+            {
+              "frame": 14,
+              "along_pixels": 52,
+              "sourceCellFrame": 14,
+              "pointPx": [
+                52,
+                145
+              ]
+            },
+            {
+              "frame": 16,
+              "along_pixels": 50,
+              "sourceCellFrame": 0,
+              "pointPx": [
+                50,
+                145
+              ]
+            },
+            {
+              "frame": 18,
+              "along_pixels": 48,
+              "sourceCellFrame": 2,
+              "pointPx": [
+                48,
+                145
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "left": {
+      "character": "quiz-gisela-becker",
+      "view": "left",
+      "atlas_sha256": "cf62820e6a5cc5b38bc594b86c36f7db545d22560ca12f339f5ea4e950a75b2a",
+      "frames_per_cycle": 16,
+      "game_units_per_pixel": 0.5882352941176471,
+      "current_cycle_distance": 9.5,
+      "shoe_length_pixels": 31,
+      "contacts": [
+        {
+          "foot": "side0",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -26,
+              "sourceCellFrame": 4,
+              "pointPx": [
+                26,
+                145
+              ]
+            },
+            {
+              "frame": 6,
+              "along_pixels": -28,
+              "sourceCellFrame": 6,
+              "pointPx": [
+                28,
+                145
+              ]
+            },
+            {
+              "frame": 8,
+              "along_pixels": -30,
+              "sourceCellFrame": 8,
+              "pointPx": [
+                30,
+                145
+              ]
+            }
+          ]
+        },
+        {
+          "foot": "side1",
+          "samples": [
+            {
+              "frame": 14,
+              "along_pixels": -83,
+              "sourceCellFrame": 14,
+              "pointPx": [
+                83,
+                145
+              ]
+            },
+            {
+              "frame": 16,
+              "along_pixels": -85,
+              "sourceCellFrame": 0,
+              "pointPx": [
+                85,
+                145
+              ]
+            },
+            {
+              "frame": 18,
+              "along_pixels": -87,
+              "sourceCellFrame": 2,
+              "pointPx": [
+                87,
+                145
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

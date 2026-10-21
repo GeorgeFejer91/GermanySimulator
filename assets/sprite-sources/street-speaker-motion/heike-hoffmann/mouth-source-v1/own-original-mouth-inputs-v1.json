@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "status": "Heike own original cardinal mouth inputs only; historical provenance, not global registration authority",
+  "historicalGlobalRegistration": {
+    "file": "assets/sprite-sources/street-mouths/registration.json",
+    "sha256": "482488f8160f5092050a78ffaf5663282cf5f43f1a5d50742235baabb5d3b84d"
+  },
+  "originalSource": {
+    "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+    "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+    "dimensions": [
+      1448,
+      1086
+    ]
+  },
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+        "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+        "dimensions": [
+          1448,
+          1086
+        ]
+      },
+      "centerPx": [
+        218.0,
+        141.5
+      ],
+      "axesPx": [
+        44.0,
+        2.9999999999999996,
+        -0.8400000000000001,
+        12.32
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            196.0,
+            140.0
+          ],
+          [
+            206.982955,
+            141.0
+          ],
+          [
+            218.028249,
+            141.085687
+          ],
+          [
+            229.01694,
+            142.00154
+          ],
+          [
+            240.0,
+            143.0
+          ]
+        ],
+        "open_upper": [
+          [
+            196.0,
+            140.0
+          ],
+          [
+            207.061318,
+            139.850668
+          ],
+          [
+            218.137087,
+            139.489393
+          ],
+          [
+            229.097481,
+            140.820283
+          ],
+          [
+            240.0,
+            143.0
+          ]
+        ],
+        "open_lower": [
+          [
+            196.0,
+            140.0
+          ],
+          [
+            206.733171,
+            144.663495
+          ],
+          [
+            217.681327,
+            146.173874
+          ],
+          [
+            228.760218,
+            145.766798
+          ],
+          [
+            240.0,
+            143.0
+          ]
+        ],
+        "source_upper": [
+          [
+            196.0,
+            140.0
+          ],
+          [
+            206.982955,
+            141.0
+          ],
+          [
+            218.028249,
+            141.085687
+          ],
+          [
+            229.01694,
+            142.00154
+          ],
+          [
+            240.0,
+            143.0
+          ]
+        ],
+        "source_lower": [
+          [
+            196.0,
+            140.0
+          ],
+          [
+            206.982955,
+            141.0
+          ],
+          [
+            218.028249,
+            141.085687
+          ],
+          [
+            229.01694,
+            142.00154
+          ],
+          [
+            240.0,
+            143.0
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own-source pixel fit candidate; native and actual GPU review required",
+        "method": "Own painted crease/corners traced on enlarged coordinate pixels; source cavity boundaries traced separately where open. No other identity or pose supplies the crease.",
+        "observation": "Visible own closed lip line and attached corners.",
+        "horizontalStyle": "No lateral width deformation; preserves own measured corners and width. CPU previews use exactly widthFactor1."
+      }
+    },
+    "right": {
+      "input": {
+        "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+        "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+        "dimensions": [
+          1448,
+          1086
+        ]
+      },
+      "centerPx": [
+        623.5,
+        143.5
+      ],
+      "axesPx": [
+        19.0,
+        -1.0,
+        0.28,
+        5.32
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            614.0,
+            144.0
+          ],
+          [
+            618.664948,
+            142.134021
+          ],
+          [
+            623.421053,
+            142.0
+          ],
+          [
+            628.228723,
+            142.845745
+          ],
+          [
+            633.0,
+            143.0
+          ]
+        ],
+        "open_upper": [
+          [
+            614.0,
+            144.0
+          ],
+          [
+            618.638827,
+            141.637718
+          ],
+          [
+            623.384773,
+            141.310691
+          ],
+          [
+            628.201877,
+            142.335656
+          ],
+          [
+            633.0,
+            143.0
+          ]
+        ],
+        "open_lower": [
+          [
+            614.0,
+            144.0
+          ],
+          [
+            618.74821,
+            143.715984
+          ],
+          [
+            623.536693,
+            144.197172
+          ],
+          [
+            628.314297,
+            144.471652
+          ],
+          [
+            633.0,
+            143.0
+          ]
+        ],
+        "source_upper": [
+          [
+            614.0,
+            144.0
+          ],
+          [
+            618.664948,
+            142.134021
+          ],
+          [
+            623.421053,
+            142.0
+          ],
+          [
+            628.228723,
+            142.845745
+          ],
+          [
+            633.0,
+            143.0
+          ]
+        ],
+        "source_lower": [
+          [
+            614.0,
+            144.0
+          ],
+          [
+            618.664948,
+            142.134021
+          ],
+          [
+            623.421053,
+            142.0
+          ],
+          [
+            628.228723,
+            142.845745
+          ],
+          [
+            633.0,
+            143.0
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own-source pixel fit candidate; native and actual GPU review required",
+        "method": "Own painted crease/corners traced on enlarged coordinate pixels; source cavity boundaries traced separately where open. No other identity or pose supplies the crease.",
+        "observation": "Visible own closed lip line and attached corners.",
+        "horizontalStyle": "No lateral width deformation; preserves own measured corners and width. CPU previews use exactly widthFactor1."
+      }
+    },
+    "left": {
+      "input": {
+        "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+        "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+        "dimensions": [
+          1448,
+          1086
+        ]
+      },
+      "centerPx": [
+        1179.5,
+        143.5
+      ],
+      "axesPx": [
+        21.0,
+        3.0,
+        -0.8400000000000001,
+        5.88
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            1169.0,
+            142.0
+          ],
+          [
+            1174.347222,
+            142.069444
+          ],
+          [
+            1179.555556,
+            143.111111
+          ],
+          [
+            1184.767442,
+            144.127907
+          ],
+          [
+            1190.0,
+            145.0
+          ]
+        ],
+        "open_upper": [
+          [
+            1169.0,
+            142.0
+          ],
+          [
+            1174.425586,
+            141.5209
+          ],
+          [
+            1179.664394,
+            142.349244
+          ],
+          [
+            1184.847982,
+            143.564125
+          ],
+          [
+            1190.0,
+            145.0
+          ]
+        ],
+        "open_lower": [
+          [
+            1169.0,
+            142.0
+          ],
+          [
+            1174.097439,
+            143.81793
+          ],
+          [
+            1179.208634,
+            145.539564
+          ],
+          [
+            1184.51072,
+            145.924962
+          ],
+          [
+            1190.0,
+            145.0
+          ]
+        ],
+        "source_upper": [
+          [
+            1169.0,
+            142.0
+          ],
+          [
+            1174.347222,
+            142.069444
+          ],
+          [
+            1179.555556,
+            143.111111
+          ],
+          [
+            1184.767442,
+            144.127907
+          ],
+          [
+            1190.0,
+            145.0
+          ]
+        ],
+        "source_lower": [
+          [
+            1169.0,
+            142.0
+          ],
+          [
+            1174.347222,
+            142.069444
+          ],
+          [
+            1179.555556,
+            143.111111
+          ],
+          [
+            1184.767442,
+            144.127907
+          ],
+          [
+            1190.0,
+            145.0
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own-source pixel fit candidate; native and actual GPU review required",
+        "method": "Own painted crease/corners traced on enlarged coordinate pixels; source cavity boundaries traced separately where open. No other identity or pose supplies the crease.",
+        "observation": "Visible own closed lip line and attached corners.",
+        "horizontalStyle": "No lateral width deformation; preserves own measured corners and width. CPU previews use exactly widthFactor1."
+      }
+    }
+  }
+}

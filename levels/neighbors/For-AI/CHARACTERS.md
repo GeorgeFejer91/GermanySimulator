@@ -78,12 +78,22 @@ performatively welcoming and status-conscious. She recasts imposed chores as
 positive opportunities the newcomer supposedly chose. Privacy becomes a lack
 of community openness; unsolicited allocations become inclusion and engagement.
 
-Her voice uses upbeat HR language, Denglisch and presumed enthusiasm. She records
-silence as an "open agreement" and makes refusal feel like disappointing the
-community. Unlike Heiko's halting reassurance, her pressure comes through fluent
-positive framing. Her electric car and family achievements serve her public
-self-image. Hartmut can briefly pull her toward unplanned play and away from
-her need to turn everything into a process.
+Her dialogue centers on unsolicited coaching about how the player should behave
+as a good neighbor: greet promptly, remain available, keep up appearances and
+volunteer before being asked. Use fluent, upbeat HR language, superficial
+Denglisch and presumed enthusiasm: Cultural Fit, Ownership, Touchpoints,
+Commitment and Action Points. Each pleasant suggestion quietly becomes an
+expectation. She believes she is supporting the newcomer; do not have her
+explain her manipulation or abandon the friendly tone for an overt threat.
+
+Unlike Heiko's halting reassurance, her pressure comes through polished positive
+framing. Her electric car and selective family anecdotes serve her public
+self-image. She boasts about organizing Hartmut's activities, supporting the
+family and still finding time for the community. Her supposed selflessness sets
+the standard for the player's contribution; family stories support this voice
+rather than taking over the conversation. Keep a few concrete family examples,
+including the dinosaur day, and let her turn her workload into another cheerful
+request for help. This direction was requested by George on 2026-10-21.
 
 ## Frau Schwabingen
 

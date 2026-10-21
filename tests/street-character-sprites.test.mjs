@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.core.js';
+import {ShaderChunk} from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {sampleStreetCharacterRig,orderStreetCharacterRigPacket,projectStreetCharacterRigPacket,STREET_RIG_LIMITS} from '../street-character-rig.js';
 import {registerStreetCharacterManifest,resolveStreetCharacter,requestStreetReaction,cancelStreetReaction,advanceStreetAnimation,createStreetCharacterSprite,createStreetCharacterCanvasSprite} from '../street-character-sprites.js';
 
@@ -12,6 +13,10 @@ function manifest(){
     variants:{desktop:{file:'./assets/characters/street/test.webp',width:1024,height:1280,sha256:'d'.repeat(64)},mobile:{file:'./assets/characters/street/test-mobile.webp',width:512,height:640,sha256:'a'.repeat(64)}}}}};
 }
 function actor(){return {id:'test-actor',voiceId:'quiz-test-person',x:0,y:0,vx:12,vy:0}}
+function mouthRegistration(){
+  return {rect:[.5,.6,.1,.05],axes:[12.8,0,0,8],profile:{corners:[-1,1],crease:[0,0,0,0,0],
+    open_upper:[0,-.1,-.2,-.1,0],open_lower:[0,.3,.5,.3,0],source_upper:[0,0,0,0,0],source_lower:[0,0,0,0,0],width:[.1,.2],teeth:0}};
+}
 function setup(){registerStreetCharacterManifest(manifest());return actor()}
 function standingSetup(){
   const candidate=manifest();
@@ -21,7 +26,7 @@ function standingSetup(){
 
 function rendererFixture(){
   const requests=[],textures=[];
-  const T={...THREE,TextureLoader:class{
+  const T={...THREE,ShaderChunk,TextureLoader:class{
     load(url,ok,progress,fail){requests.push({url,ok,fail})}
   }};
   const queue=[];
@@ -97,6 +102,57 @@ test('identity resolution accepts explicit aliases and never conflates a similar
   assert.equal(resolveStreetCharacter({id:'test-actor'}),'quiz-test-person');
   assert.equal(resolveStreetCharacter({voiceId:'crowd-test-person'}),null);
   assert.equal(createStreetCharacterSprite({}, {id:'unknown'}, {}, ()=>{}, {}),null);
+});
+
+test('source-bound mouth registrations reject invalid cell mappings before replacing the cast',()=>{
+  for(const change of [p=>p.mouthPaint.standing.rect[0]=2,p=>p.mouthPaint.frames.length=65,p=>p.mouthPaint.frames[0].profile.open_lower[2]=-1]){
+    const candidate=manifest(),p=candidate.characters['quiz-test-person'];
+    p.mouthPaint={standing:mouthRegistration(),frames:[mouthRegistration()]};change(p);
+    assert.throws(()=>registerStreetCharacterManifest(candidate),/mouth|lip|registration/i);
+  }
+});
+
+test('displayed sprite cell and native speech share one mouth registration without freezing body motion',async()=>{
+  const candidate=manifest(),person=candidate.characters['quiz-test-person'];
+  person.mouthPaint={frames:Array.from({length:64},()=>mouthRegistration())};person.mouthPaint.frames[0]=null;
+  registerStreetCharacterManifest(candidate);const n=actor(),f=rendererFixture(),host=f.host();
+  const adapter=createStreetCharacterSprite(f.T,n,host,f.queueAsset,f.camera),pending=f.queue[0].task();
+  await Promise.resolve();const texture=f.finish();await pending;
+  const cue={},speech={speechStatus:'playing',cueToken:cue,mediaTime:.3,mediaDuration:2,mouthOpen:.8,dx:1,dy:0};
+  const first=advanceStreetAnimation(n,5,.1,speech);adapter.sync();
+  assert.equal(first.clip,'right');assert.equal(first.frame,1);assert.equal(adapter.inspect().mouth.active,true);
+  assert.equal(adapter.inspect().mouth.opening[0],.8);assert.deepEqual(adapter.inspect().mouth.rect,[.6875,.95,.0125,.00625]);
+  assert.deepEqual(adapter.inspect().mouth.axes,[12.8,0,0,8]);assert.equal('texture' in adapter.inspect().mouth,false);assert.equal('registration' in adapter.inspect().mouth,false);
+  const positions=host.children[1].geometry.attributes.position.array,requests=f.requests.length;
+  advanceStreetAnimation(n,5,.1,{...speech,mediaTime:.5});adapter.sync();
+  assert.equal(adapter.inspect().pose.frame,2);assert.equal(adapter.inspect().mouth.active,true);
+  assert.equal(host.children[1].geometry.attributes.position.array,positions);assert.equal(f.requests.length,requests);
+  advanceStreetAnimation(n,10,.1,{...speech,dx:0,dy:1});adapter.sync();
+  assert.equal(adapter.inspect().pose.slot,0);assert.equal(adapter.inspect().mouth.active,false,'rear/hidden/null cell has no paint');
+  advanceStreetAnimation(n,5,.1,{...speech,speechStatus:'paused'});adapter.sync();assert.equal(adapter.inspect().mouth.active,false);
+  adapter.dispose();assert.equal(texture.disposals,1);
+  const priorWidth=globalThis.innerWidth;globalThis.innerWidth=390;
+  let mobile;
+  try{
+    const m=actor(),fixture=rendererFixture();mobile=createStreetCharacterSprite(fixture.T,m,fixture.host(),fixture.queueAsset,fixture.camera);
+    const load=fixture.queue[0].task();await Promise.resolve();fixture.finish(0,512,640);await load;
+    advanceStreetAnimation(m,5,.1,speech);mobile.sync();assert.deepEqual(mobile.inspect().mouth.axes,[6.4,0,0,4]);assert.deepEqual(mobile.inspect().mouth.rect,[.6875,.95,.0125,.00625]);
+  }finally{mobile?.dispose();if(priorWidth===undefined)delete globalThis.innerWidth;else globalThis.innerWidth=priorWidth}
+});
+
+test('compact portrait and landscape use compact paint at the actual one-pixel renderer density',async()=>{
+  const oldWidth=globalThis.innerWidth,oldHeight=globalThis.innerHeight,oldDpr=globalThis.devicePixelRatio;
+  try{
+    for(const [width,height,dpr,variant]of [[390,844,1,'mobile'],[390,844,3,'mobile'],[844,390,2,'mobile'],[1280,800,2,'desktop']]){
+      Object.assign(globalThis,{innerWidth:width,innerHeight:height,devicePixelRatio:dpr});
+      const n=setup(),f=rendererFixture(),adapter=createStreetCharacterSprite(f.T,n,f.host(),f.queueAsset,f.camera),pending=f.queue[0].task();
+      await Promise.resolve();assert.equal(adapter.inspect().variant,variant);
+      assert.match(f.requests[0].url,variant==='mobile'?/\/test-mobile\.webp\?v=/:/\/test\.webp\?v=/);
+      f.finish(0,...(variant==='mobile'?[512,640]:[1024,1280]));await pending;adapter.dispose();
+    }
+  }finally{
+    for(const [key,value]of [['innerWidth',oldWidth],['innerHeight',oldHeight],['devicePixelRatio',oldDpr]])if(value===undefined)delete globalThis[key];else globalThis[key]=value;
+  }
 });
 
 test('manifest validation rejects malformed clips, texture bounds, ambiguous identities and negative gait',()=>{
@@ -209,6 +265,33 @@ test('adapter only samples simulation state and binds pivot and UVs with depth-p
   assert.ok(Math.abs(mesh.position.x-4*scale)<1e-8);assert.ok(Math.abs(mesh.position.y-70*scale)<1e-8);
   assert.ok(Math.abs(mesh.geometry.attributes.uv.getX(0)-5/8)<1e-8);assert.equal(body.visible,false);
   adapter.dispose();assert.equal(texture.disposals,1);assert.equal(host.children.length,1);assert.equal(body.visible,true);
+});
+
+test('street paint stays upright at its ground pivot through camera pitch, roll, yaw and host rotation',async()=>{
+  for(const standing of [false,true])for(const yaw of [0,.73,-2.4])for(const hostYaw of [0,1.1]){
+    const n=standing?standingSetup():setup(),f=rendererFixture(),host=f.host();
+    host.position.set(2,.4,-3);host.rotation.y=hostYaw;
+    f.camera.rotation.set(-.56,yaw,.22,'YXZ');
+    const adapter=createStreetCharacterSprite(f.T,n,host,f.queueAsset,f.camera);
+    const task=f.queue[0].task();await Promise.resolve();f.finish(0,...(standing?[128,160]:[1024,1280]));await task;
+    const mesh=host.children[1],scale=1.6/136,root=host.position.clone();
+    const geometry=mesh.geometry.parameters,uv=Array.from(mesh.geometry.attributes.uv.array);
+    for(const pitch of [-.56,-.9,0]){
+      f.camera.rotation.set(pitch,yaw,.22,'YXZ');adapter.sync();host.updateMatrixWorld(true);
+      const worldUp=new THREE.Vector3(0,1,0).transformDirection(mesh.matrixWorld);
+      assert.ok(worldUp.distanceTo(new THREE.Vector3(0,1,0))<1e-10,'paint must not lean into a facade above a clear root');
+      const sourcePivot=new THREE.Vector3((60-64)*scale,(80-150)*scale,0).applyMatrix4(mesh.matrixWorld);
+      assert.ok(sourcePivot.distanceTo(root)<1e-10,'orientation must preserve the painted ground pivot');
+      const head=sourcePivot.clone().add(new THREE.Vector3(0,1.6,0));
+      const renderedHead=new THREE.Vector3((60-64)*scale,(80-150+136)*scale,0).applyMatrix4(mesh.matrixWorld);
+      assert.ok(renderedHead.distanceTo(head)<1e-10,'figure height stays physical and vertical');
+      const normal=new THREE.Vector3(0,0,1).transformDirection(mesh.matrixWorld);
+      assert.ok(normal.distanceTo(new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw)))<1e-10);
+      assert.equal(mesh.geometry.parameters,geometry);assert.deepEqual(Array.from(mesh.geometry.attributes.uv.array),uv);
+      assert.equal(mesh.material.depthTest,true);assert.equal(mesh.material.depthWrite,true);
+    }
+    adapter.dispose();
+  }
 });
 
 test('actors of one identity share a texture until the final owner retires',async()=>{

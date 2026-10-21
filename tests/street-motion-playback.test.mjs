@@ -46,6 +46,25 @@ test('a dense walk settles through its remaining phases before the planted react
  assert.equal(actor.spriteFrame,0);assert.equal(actor.gaitDistance,0);assert.equal(actor.touristFacing,'down');
 });
 
+test('owned phase settles replace held walking before a reaction in every heading and phase',()=>{
+ const person=JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8')).characters['crowd-irmgard-aktenordner'];
+ const m=structuredClone(person.atlasMotion);
+ m.interactions={neutral:m.neutral,states:{greet:{...m.neutral,durations_ms:[120]}}};
+ for(const from of ['down','right','up','left'])for(let phase=0;phase<16;phase++){
+  const actor={x:9,y:11,touristFacing:from,spriteRow:m.walks[from].row,spriteFrame:phase,gaitDistance:7};
+  const plan=reactions.plan(actor,m,{names:['greet'],options:{}}),settle=m.settles[from][phase].frames;
+  const entry=plan.frames[0];
+  assert.deepEqual([entry.row,entry.col,entry.ms,entry.role],[m.walks[from].row,phase,m.walks[from].frame_ms,'settle-entry'],`${from}/${phase} preserves the current painted entry`);
+  assert.deepEqual(Array.from(plan.frames.slice(1,1+settle.length),p=>[p.row,p.col,p.ms]),settle.map(p=>[p.row,p.col,p.ms]));
+  assert(plan.frames.slice(1).every(p=>!Object.values(m.walks).some(w=>p.row===w.row&&p.col<(w.frames??8))),'held reactions must not continue ordinary walking');
+  const turn=from==='down'?[]:m.transitions[from+'-to-down'].frames.slice(m.bridges[from].stop_cols.length,-m.bridges.down.start_cols.length);
+  assert.deepEqual(Array.from(plan.frames.slice(1+settle.length,1+settle.length+turn.length),p=>[p.row,p.col,p.ms]),turn.map(p=>[p.row,p.col,p.ms]));
+  actor.characterInteraction=plan;
+  while(actor.characterInteraction){reactions.advance(actor,.02,m);assert.deepEqual([actor.x,actor.y],[9,11])}
+  assert.equal(actor.touristFacing,from);assert.equal(actor.gaitDistance,0);
+ }
+});
+
 test('the player stays 3D, officers own their painted fallback host, and Sandales cannot enter the mesh study',()=>{
  const world=readFileSync('world3d.js','utf8');
  assert.match(world,/const playerMesh=character\("player"\)/);

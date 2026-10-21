@@ -1,0 +1,24 @@
+{
+  "status": "UNREVIEWED source-proportion successor; no motion/runtime adoption",
+  "method": "built-in image_gen, constrained edit",
+  "prompt": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-prompt.txt",
+  "output": {
+    "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+    "sha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606",
+    "dimensions": [
+      2172,
+      724
+    ]
+  },
+  "references": [
+    {
+      "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v1-candidate.png",
+      "sha256": "8764623987c1912d6a6f4607eca0b4c60015d6832c7140870a08b02e3089c703"
+    },
+    {
+      "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v1-candidate.png",
+      "sha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc"
+    }
+  ],
+  "reason": "V1 normalized quarter views had longer trouser exposure/heavier boot soles than original cardinal sources. V3 intended to restore compact source garment proportions while preserving corrected rear head alignment."
+}

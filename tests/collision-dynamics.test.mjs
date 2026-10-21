@@ -27,7 +27,7 @@ assert.ok(nearVertical.x>.3,"a primarily vertical walker must sidestep when vert
 assert.match(game,/travelled=driveGroundVehicle\(car,desiredSpeed,steeringTarget,dt\)/,"pursuit cars must use steering-based physical driving through collision checks");
 assert.match(game,/moveGroundResponder\(p,rdx\/d\*step,rdy\/d\*step,14\)/,"foot police must use collision-aware movement");
 assert.match(game,/n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE/,"approaching quiz pedestrians must stop following after bounded time or distance");
-assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,13\)/,"interested quiz pedestrians must route around barriers while briefly following the player");
+assert.match(game,/else if\(d>=78\)\{const pace=quizApproachPace\(n\);moveGroundResponder\(n,dx\/d\*pace\*dt,dy\/d\*pace\*dt,13\)/,"interested quiz pedestrians must route around barriers while briefly following the player");
 assert.match(game,/n\.blockedTimer=progress>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.45\)\{n\.blockedTimer=0;chooseBayernTarget\(n,n\.targetSpot\)\}/,"a blocked Bayern route walker must change direction instead of pressing into the obstacle");
 assert.match(game,/alternatives=links\.filter\(spot=>spot!==blockedSpot\).*blockedSpot<0\?links:\[n\.spot\]/,"Bayern must choose another connected direction or reverse at a dead end after an obstruction");
 assert.match(game,/function updateMerkel\([\s\S]*n\.routeDirection=-\(n\.routeDirection\|\|1\);n\.target=\(n\.target\+n\.routeDirection\+n\.route\.length\)%n\.route\.length/,"Merkel must reverse her patrol route after sustained obstruction");

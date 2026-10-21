@@ -1,0 +1,235 @@
+{
+  "status": "held source registration; no motion or runtime adoption",
+  "inputs": {
+    "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+    "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606"
+  },
+  "helperSha256": "7b0688d74aa2d7bbe270c85a93ba651c06ca018e205030c2f6a3d314b28162f7",
+  "sourceSamplerSha256": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+  "working": {
+    "canvas": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sourceSha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+      "component_bounds": [
+        96,
+        10,
+        325,
+        371
+      ],
+      "source_pivot": [
+        214.5,
+        371
+      ],
+      "scale": 1.10803324099723,
+      "workingOrigin": [
+        18.32686980609418,
+        60.91966759002764
+      ],
+      "workingAlphaBounds": [
+        124,
+        72,
+        379,
+        472
+      ],
+      "mouthVisible": true,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+      "sourceSha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606",
+      "component_bounds": [
+        125,
+        127,
+        469,
+        652
+      ],
+      "source_pivot": [
+        300.5,
+        652
+      ],
+      "scale": 0.7619047619047619,
+      "workingOrigin": [
+        27.047619047619065,
+        -24.76190476190476
+      ],
+      "workingAlphaBounds": [
+        123,
+        72,
+        384,
+        472
+      ],
+      "mouthVisible": true,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "right": {
+      "source": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sourceSha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+      "component_bounds": [
+        449,
+        9,
+        678,
+        371
+      ],
+      "source_pivot": [
+        570.5,
+        371
+      ],
+      "scale": 1.10803324099723,
+      "workingOrigin": [
+        -376.13296398891976,
+        60.91966759002764
+      ],
+      "workingAlphaBounds": [
+        121,
+        70,
+        375,
+        472
+      ],
+      "mouthVisible": true,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+      "sourceSha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606",
+      "component_bounds": [
+        659,
+        125,
+        1008,
+        653
+      ],
+      "source_pivot": [
+        857.5,
+        653
+      ],
+      "scale": 0.7619047619047619,
+      "workingOrigin": [
+        -397.33333333333326,
+        -25.52380952380952
+      ],
+      "workingAlphaBounds": [
+        105,
+        70,
+        371,
+        472
+      ],
+      "mouthVisible": false,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "up": {
+      "source": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sourceSha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+      "component_bounds": [
+        787,
+        9,
+        1019,
+        372
+      ],
+      "source_pivot": [
+        898.0,
+        372
+      ],
+      "scale": 1.10803324099723,
+      "workingOrigin": [
+        -739.0138504155125,
+        59.81163434903044
+      ],
+      "workingAlphaBounds": [
+        133,
+        69,
+        390,
+        472
+      ],
+      "mouthVisible": false,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+      "sourceSha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606",
+      "component_bounds": [
+        1175,
+        126,
+        1524,
+        653
+      ],
+      "source_pivot": [
+        1330.5,
+        653
+      ],
+      "scale": 0.7619047619047619,
+      "workingOrigin": [
+        -757.7142857142857,
+        -25.52380952380952
+      ],
+      "workingAlphaBounds": [
+        137,
+        70,
+        404,
+        472
+      ],
+      "mouthVisible": false,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "left": {
+      "source": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sourceSha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+      "component_bounds": [
+        1134,
+        9,
+        1360,
+        373
+      ],
+      "source_pivot": [
+        1240.0,
+        373
+      ],
+      "scale": 1.10803324099723,
+      "workingOrigin": [
+        -1117.9612188365652,
+        58.70360110803324
+      ],
+      "workingAlphaBounds": [
+        138,
+        68,
+        389,
+        472
+      ],
+      "mouthVisible": true,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/quarter-proportions-v3-candidate.png",
+      "sourceSha256": "21abb0c1f48c4bdd27af6c2ce4224af1eae49d780d2a5be593284b430734e606",
+      "component_bounds": [
+        1729,
+        126,
+        2074,
+        652
+      ],
+      "source_pivot": [
+        1879.5,
+        652
+      ],
+      "scale": 0.7619047619047619,
+      "workingOrigin": [
+        -1176.0,
+        -24.76190476190476
+      ],
+      "workingAlphaBounds": [
+        141,
+        71,
+        404,
+        472
+      ],
+      "mouthVisible": true,
+      "status": "candidate; initial foot-band pivot and source proportions require direct inspection"
+    }
+  }
+}

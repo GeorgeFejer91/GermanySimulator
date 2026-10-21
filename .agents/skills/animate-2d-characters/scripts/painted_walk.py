@@ -64,7 +64,7 @@ def warp_layer(layer, ys, dxs, dys):
     return unpack(sample(premul(layer), sx, sy))
 
 
-def animate(source, c, travel=(1, 0), count=8, foreground=1, strength=1, phases=None, rigid_mask=None):
+def animate(source, c, travel=(1, 0), count=8, foreground=1, strength=1, phases=None, rigid_mask=None,limb_pose=None):
     """Landmarks use registered 512-square coordinates, left/right on screen.
 
     Roots remain under the original garment. The split follows transparent
@@ -180,6 +180,7 @@ def animate(source, c, travel=(1, 0), count=8, foreground=1, strength=1, phases=
             nodes = [0, waist, hip, c['hem'][side], c['knee'][side], c['ankle'][side], 511]
             dxs = [0, hip_shift, hip_shift, hip_shift+knee*.35, knee, foot, foot]
             dys = [bob, bob, bob, bob-lift*(.22 if vertical else .15)+depth*.22, bob-lift*(.55 if vertical else .4)+depth*depth_knee_follow, depth-lift, depth-lift]
+            if limb_pose is not None:dxs,dys=limb_pose(side,nodes,dxs,dys)
             moves.append((nodes, dxs, dys, warp_layer(legs[side], nodes, dxs, dys)))
         for side in [1-foreground, foreground]:
             canvas.alpha_composite(moves[side][3])

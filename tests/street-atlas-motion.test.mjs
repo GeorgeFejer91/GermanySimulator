@@ -7,7 +7,7 @@ import vm from 'node:vm';
 
 const root=process.cwd(),code=process.env.STREET_ATLAS_MODULE_ROOT||root;
 const S=await import(pathToFileURL(resolve(code,'street-character-sprites.js')));
-const THREE=await import(pathToFileURL(resolve(root,'assets/vendor/three/0.186.0/build/three.core.js')));
+const THREE=await import(pathToFileURL(resolve(root,'assets/vendor/three/0.186.0/build/three.module.min.js')));
 vm.runInThisContext(readFileSync(resolve(code,'tourist-animation.js'),'utf8'));
 const original=JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8')).characters['crowd-irmgard-aktenordner'];
 const slot=(row,col)=>row*original.grid[0]+col;

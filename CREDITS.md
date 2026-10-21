@@ -387,6 +387,12 @@ The four `KL` questions are original Kugellager history trivia. [Schaeffler's ac
 
 OpenAI's built-in image-generation tool created nine original fictional dossier portraits for the roaming quiz: Gisela Becker, Rüdiger Schmidt, Sabine Krüger, Uwe Möller, Brigitte Neumann, Klaus-Dieter Wagner, Heike Hoffmann, Dr. Dietmar Schulz, and Hartmut Keller, the para-polizeiliche Nachbar. On 21 September 2026 the cast was restyled into a raw psychological-expressionist RPG treatment with broken paint planes, mature asymmetrical faces, restrained eyes, straighter noses, emotionally contained bureaucratic expressions, and one clear scenery-free dossier background. Every complete head retains deliberate top clearance. No real person, agency emblem, logo, official uniform, weapon, badge, or readable document was requested or incorporated. The generated PNGs were resized without cropping and encoded as a single 512 × 512 WebP per identity; prompt summaries, file sizes, and SHA-256 checksums are recorded in `assets/quiz-characters/PROVENANCE.md`.
 
+Painted street animation sources, including Gisela Becker and Heike Hoffmann,
+extend their original project artwork with versioned OpenAI ImageGen directional
+paintings. Walking, planted stops, gestures and mouth bindings use each figure's
+own paint. Exact prompts, source hashes and local authoring recipes are under
+`assets/sprite-sources/street-speaker-motion/`.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

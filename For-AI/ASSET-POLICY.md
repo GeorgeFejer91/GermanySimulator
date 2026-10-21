@@ -465,6 +465,20 @@ evidence. Physical Android and GPU/displayed-frame timing remain NOT RUN.
   explicit legacy exception, not a template for new assets; split or reduce a
   new export only after actual display-size and rendered review.
 
+Gisela Becker's open-city sprite has one scoped desktop exception: the lossless
+16×22 movement bank is2048×3520 (27.5MiB base RGBA), and its demand-leased16×2
+paper-reaction bank is2048×320 (2.5MiB). The half-resolution banks total7.5MiB.
+Keep the128×160 desktop source cells for her live quiz portrait: its observed
+figure height is about105CSSpx, while the compact source has68 painted pixels.
+The192×240 maximum portrait target samples the same current mesh/material through
+the existing renderer at no more than25Hz, without another animation/media clock.
+This is a bounded single-family quality/cost decision, not permission to repeat
+30MiB families across the cast or a whole-cohort/GPU/device memory guarantee.
+Preserve demand leases, cancellation and retirement; broader cast admission still
+requires the shared cohort/playability gates. Source ownership and rebuild inputs:
+`assets/sprite-sources/street-speaker-motion/gisela-becker/README.md`.
+
+
 ### Frame, background work and lifetime contract
 
 All indoor transitions share `building-levels.js` / `level-transitions.js` and

@@ -39,6 +39,7 @@ async function fixture(t){
    .replace(/const cityRecordings=Object\.freeze\([^\n]*\);\n/,curator.cityRecordingsBlock(cast,[],base,base))
    .replace(/const cityAdmissionReceipts=Object\.freeze\(\{[^\n]*\}\);\n/,'const cityAdmissionReceipts=Object.freeze({});\n')
    .replace(/const cityMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'')
+   .replace(/const ambientMouth(?:EnergyReceipt|Recordings)=[^\n]*\n/g,'')
    .replace(/const crowdMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'');
   save(catalogPath,catalog);save(resolve(base,'assets/voices/candidate-dialogue/manifest.json'),{clips:[]});return catalogPath;
  };

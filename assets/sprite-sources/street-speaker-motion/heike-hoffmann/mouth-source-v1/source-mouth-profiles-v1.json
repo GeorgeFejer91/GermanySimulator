@@ -1,0 +1,1230 @@
+{
+  "schemaVersion": 1,
+  "status": "source-cue pilot only; no runtime/full-motion approval",
+  "inputHashes": {
+    "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+    "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+    "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+    "assets/sprite-sources/street-speaker-motion/heike-hoffmann/source-registration-v3.json": "2077f71af5ae6ce6ac11c0e895c1a202dc31bd761d8a9039448df76f4e605d79",
+    "assets/sprite-sources/street-speaker-motion/heike-hoffmann/mouth-source-v1/own-original-mouth-inputs-v1.json": "69cb36d3d1f37a2bdcc2cdbd17e5fe4ac6edbbae55e0a3d11076bb0258b17afe",
+    "tools/build-street-mouths.py": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8"
+  },
+  "historicalGlobalRegistration": {
+    "file": "assets/sprite-sources/street-mouths/registration.json",
+    "sha256": "482488f8160f5092050a78ffaf5663282cf5f43f1a5d50742235baabb5d3b84d"
+  },
+  "sourceSheetOrder": {
+    "cardinals": [
+      "down",
+      "right",
+      "up",
+      "left"
+    ],
+    "quarters": [
+      "front-right",
+      "rear-right",
+      "rear-left",
+      "front-left"
+    ]
+  },
+  "nullReasons": {
+    "rear-right": "Actual rear or rear-quarter source: no visible mouth",
+    "up": "Actual rear or rear-quarter source: no visible mouth",
+    "rear-left": "Actual rear or rear-quarter source: no visible mouth"
+  },
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+        "sha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+        "dimensions": [
+          2048,
+          512
+        ]
+      },
+      "centerPx": [
+        259.878116,
+        217.706371
+      ],
+      "axesPx": [
+        48.753463,
+        3.3241,
+        -0.930748,
+        13.65097
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            235.501385,
+            216.044321
+          ],
+          [
+            247.670864,
+            217.152355
+          ],
+          [
+            259.909417,
+            217.247299
+          ],
+          [
+            272.085252,
+            218.262094
+          ],
+          [
+            284.254848,
+            219.368421
+          ]
+        ],
+        "open_upper": [
+          [
+            235.501385,
+            216.044321
+          ],
+          [
+            247.757693,
+            215.878857
+          ],
+          [
+            260.030013,
+            215.478552
+          ],
+          [
+            272.174494,
+            216.953222
+          ],
+          [
+            284.254848,
+            219.368421
+          ]
+        ],
+        "open_lower": [
+          [
+            235.501385,
+            216.044321
+          ],
+          [
+            247.394095,
+            221.211629
+          ],
+          [
+            259.525016,
+            222.885179
+          ],
+          [
+            271.800796,
+            222.434125
+          ],
+          [
+            284.254848,
+            219.368421
+          ]
+        ],
+        "source_upper": [
+          [
+            235.501385,
+            216.044321
+          ],
+          [
+            247.670864,
+            217.152355
+          ],
+          [
+            259.909417,
+            217.247299
+          ],
+          [
+            272.085252,
+            218.262094
+          ],
+          [
+            284.254848,
+            219.368421
+          ]
+        ],
+        "source_lower": [
+          [
+            235.501385,
+            216.044321
+          ],
+          [
+            247.670864,
+            217.152355
+          ],
+          [
+            259.909417,
+            217.247299
+          ],
+          [
+            272.085252,
+            218.262094
+          ],
+          [
+            284.254848,
+            219.368421
+          ]
+        ]
+      },
+      "width": [
+        0.035,
+        0.18
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own cardinal source pixel fit transported to exact registered v3 source; CPU review candidate",
+        "originalOwnCardinalInput": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/mouth-source-v1/own-original-mouth-inputs-v1.json",
+        "originalOwnCardinalInputSha256": "69cb36d3d1f37a2bdcc2cdbd17e5fe4ac6edbbae55e0a3d11076bb0258b17afe",
+        "historicalGlobalRegistration": {
+          "file": "assets/sprite-sources/street-mouths/registration.json",
+          "sha256": "482488f8160f5092050a78ffaf5663282cf5f43f1a5d50742235baabb5d3b84d"
+        },
+        "observation": "Painted closed crease; no cavity or teeth. Upper red ridge is lip paint, not oral opening."
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ]
+    },
+    "front-right": {
+      "input": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+        "sha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+        "dimensions": [
+          2048,
+          512
+        ]
+      },
+      "centerPx": [
+        275,
+        223
+      ],
+      "axesPx": [
+        50,
+        1,
+        -0.28,
+        14
+      ],
+      "coordinateSystem": "registered sheet pixels; +X right, +Y down; tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            250.0,
+            222.0
+          ],
+          [
+            262.5,
+            222.3
+          ],
+          [
+            275.0,
+            223.0
+          ],
+          [
+            287.5,
+            223.0
+          ],
+          [
+            300.0,
+            223.0
+          ]
+        ],
+        "source_upper": [
+          [
+            250.0,
+            222.0
+          ],
+          [
+            262.5,
+            222.3
+          ],
+          [
+            275.0,
+            223.0
+          ],
+          [
+            287.5,
+            223.0
+          ],
+          [
+            300.0,
+            223.0
+          ]
+        ],
+        "source_lower": [
+          [
+            250.0,
+            222.0
+          ],
+          [
+            262.5,
+            222.3
+          ],
+          [
+            275.0,
+            223.0
+          ],
+          [
+            287.5,
+            223.0
+          ],
+          [
+            300.0,
+            223.0
+          ]
+        ],
+        "open_upper": [
+          [
+            250.0,
+            222.0
+          ],
+          [
+            262.5,
+            221.4
+          ],
+          [
+            275.0,
+            220.6
+          ],
+          [
+            287.5,
+            221.2
+          ],
+          [
+            300.0,
+            223.0
+          ]
+        ],
+        "open_lower": [
+          [
+            250.0,
+            222.0
+          ],
+          [
+            262.5,
+            226.5
+          ],
+          [
+            275.0,
+            228.2
+          ],
+          [
+            287.5,
+            227.5
+          ],
+          [
+            300.0,
+            223.0
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.15
+      ],
+      "teeth": 0,
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "fitEvidence": {
+        "status": "actual own 512 px quarter-source fit candidate; CPU review pending",
+        "observation": "Visible closed lip crease, attached corners, no pre-open cavity and no teeth."
+      }
+    },
+    "right": {
+      "input": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+        "sha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+        "dimensions": [
+          2048,
+          512
+        ]
+      },
+      "centerPx": [
+        826.725762,
+        219.922438
+      ],
+      "axesPx": [
+        21.052632,
+        -1.108033,
+        0.310249,
+        5.894737
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            816.199446,
+            220.476454
+          ],
+          [
+            821.368363,
+            218.408888
+          ],
+          [
+            826.638286,
+            218.260388
+          ],
+          [
+            831.965344,
+            219.197501
+          ],
+          [
+            837.252078,
+            219.368421
+          ]
+        ],
+        "open_upper": [
+          [
+            816.199446,
+            220.476454
+          ],
+          [
+            821.33942,
+            217.858967
+          ],
+          [
+            826.598086,
+            217.496611
+          ],
+          [
+            831.935598,
+            218.632306
+          ],
+          [
+            837.252078,
+            219.368421
+          ]
+        ],
+        "open_lower": [
+          [
+            816.199446,
+            220.476454
+          ],
+          [
+            821.46062,
+            220.161755
+          ],
+          [
+            826.766419,
+            220.694927
+          ],
+          [
+            832.060163,
+            220.99906
+          ],
+          [
+            837.252078,
+            219.368421
+          ]
+        ],
+        "source_upper": [
+          [
+            816.199446,
+            220.476454
+          ],
+          [
+            821.368363,
+            218.408888
+          ],
+          [
+            826.638286,
+            218.260388
+          ],
+          [
+            831.965344,
+            219.197501
+          ],
+          [
+            837.252078,
+            219.368421
+          ]
+        ],
+        "source_lower": [
+          [
+            816.199446,
+            220.476454
+          ],
+          [
+            821.368363,
+            218.408888
+          ],
+          [
+            826.638286,
+            218.260388
+          ],
+          [
+            831.965344,
+            219.197501
+          ],
+          [
+            837.252078,
+            219.368421
+          ]
+        ]
+      },
+      "width": [
+        0.015,
+        0.1
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own cardinal source pixel fit transported to exact registered v3 source; CPU review candidate",
+        "originalOwnCardinalInput": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/mouth-source-v1/own-original-mouth-inputs-v1.json",
+        "originalOwnCardinalInputSha256": "69cb36d3d1f37a2bdcc2cdbd17e5fe4ac6edbbae55e0a3d11076bb0258b17afe",
+        "historicalGlobalRegistration": {
+          "file": "assets/sprite-sources/street-mouths/registration.json",
+          "sha256": "482488f8160f5092050a78ffaf5663282cf5f43f1a5d50742235baabb5d3b84d"
+        },
+        "observation": "Painted closed crease; no cavity or teeth. Upper red ridge is lip paint, not oral opening."
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        512,
+        0
+      ]
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "input": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-cardinals-v3-candidate.png",
+        "sha256": "bfe0660b663a96ac545dfa3da55e37851b16a64a95cb60d9eff66855915badfc",
+        "dimensions": [
+          2048,
+          512
+        ]
+      },
+      "centerPx": [
+        1724.963989,
+        217.706371
+      ],
+      "axesPx": [
+        23.268698,
+        3.3241,
+        -0.930748,
+        6.515235
+      ],
+      "coordinateSystem": "input image pixels; +X right, +Y down; axes tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            1713.32964,
+            216.044321
+          ],
+          [
+            1719.25454,
+            216.121268
+          ],
+          [
+            1725.025547,
+            217.275469
+          ],
+          [
+            1730.80049,
+            218.402113
+          ],
+          [
+            1736.598338,
+            219.368421
+          ]
+        ],
+        "open_upper": [
+          [
+            1713.32964,
+            216.044321
+          ],
+          [
+            1719.34137,
+            215.513463
+          ],
+          [
+            1725.146143,
+            216.431295
+          ],
+          [
+            1730.889731,
+            217.777424
+          ],
+          [
+            1736.598338,
+            219.368421
+          ]
+        ],
+        "open_lower": [
+          [
+            1713.32964,
+            216.044321
+          ],
+          [
+            1718.977772,
+            218.058648
+          ],
+          [
+            1724.641146,
+            219.966276
+          ],
+          [
+            1730.516033,
+            220.39331
+          ],
+          [
+            1736.598338,
+            219.368421
+          ]
+        ],
+        "source_upper": [
+          [
+            1713.32964,
+            216.044321
+          ],
+          [
+            1719.25454,
+            216.121268
+          ],
+          [
+            1725.025547,
+            217.275469
+          ],
+          [
+            1730.80049,
+            218.402113
+          ],
+          [
+            1736.598338,
+            219.368421
+          ]
+        ],
+        "source_lower": [
+          [
+            1713.32964,
+            216.044321
+          ],
+          [
+            1719.25454,
+            216.121268
+          ],
+          [
+            1725.025547,
+            217.275469
+          ],
+          [
+            1730.80049,
+            218.402113
+          ],
+          [
+            1736.598338,
+            219.368421
+          ]
+        ]
+      },
+      "width": [
+        0.015,
+        0.1
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "own cardinal source pixel fit transported to exact registered v3 source; CPU review candidate",
+        "originalOwnCardinalInput": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/mouth-source-v1/own-original-mouth-inputs-v1.json",
+        "originalOwnCardinalInputSha256": "69cb36d3d1f37a2bdcc2cdbd17e5fe4ac6edbbae55e0a3d11076bb0258b17afe",
+        "historicalGlobalRegistration": {
+          "file": "assets/sprite-sources/street-mouths/registration.json",
+          "sha256": "482488f8160f5092050a78ffaf5663282cf5f43f1a5d50742235baabb5d3b84d"
+        },
+        "observation": "Painted closed crease; no cavity or teeth. Upper red ridge is lip paint, not oral opening."
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1536,
+        0
+      ]
+    },
+    "front-left": {
+      "input": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/registered-quarters-v3-candidate.png",
+        "sha256": "d15436d552353fa0c91f8c16e95f790785e90645067e3d50c3a21bfe4585605f",
+        "dimensions": [
+          2048,
+          512
+        ]
+      },
+      "centerPx": [
+        1735.5,
+        222.5
+      ],
+      "axesPx": [
+        33,
+        3.5,
+        -0.98,
+        9.24
+      ],
+      "coordinateSystem": "registered sheet pixels; +X right, +Y down; tangent and normal extents",
+      "contoursPx": {
+        "crease": [
+          [
+            1719.0,
+            220.5
+          ],
+          [
+            1727.25,
+            221.5
+          ],
+          [
+            1735.5,
+            222.5
+          ],
+          [
+            1743.75,
+            223.4
+          ],
+          [
+            1752.0,
+            224.0
+          ]
+        ],
+        "source_upper": [
+          [
+            1719.0,
+            220.5
+          ],
+          [
+            1727.25,
+            221.5
+          ],
+          [
+            1735.5,
+            222.5
+          ],
+          [
+            1743.75,
+            223.4
+          ],
+          [
+            1752.0,
+            224.0
+          ]
+        ],
+        "source_lower": [
+          [
+            1719.0,
+            220.5
+          ],
+          [
+            1727.25,
+            221.5
+          ],
+          [
+            1735.5,
+            222.5
+          ],
+          [
+            1743.75,
+            223.4
+          ],
+          [
+            1752.0,
+            224.0
+          ]
+        ],
+        "open_upper": [
+          [
+            1719.0,
+            220.5
+          ],
+          [
+            1727.25,
+            220.3
+          ],
+          [
+            1735.5,
+            220.1
+          ],
+          [
+            1743.75,
+            221.8
+          ],
+          [
+            1752.0,
+            224.0
+          ]
+        ],
+        "open_lower": [
+          [
+            1719.0,
+            220.5
+          ],
+          [
+            1727.25,
+            225.0
+          ],
+          [
+            1735.5,
+            227.1
+          ],
+          [
+            1743.75,
+            227.0
+          ],
+          [
+            1752.0,
+            224.0
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.15
+      ],
+      "teeth": 0,
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1536,
+        0
+      ],
+      "fitEvidence": {
+        "status": "actual own 512 px quarter-source fit candidate; CPU review pending",
+        "observation": "Visible closed lip crease, attached corners, no pre-open cavity and no teeth."
+      }
+    }
+  },
+  "compiledSourceCells": {
+    "down": {
+      "rect": [
+        0.5075744453125,
+        0.574792244140625,
+        0.09544268203791073,
+        0.026723951672111345
+      ],
+      "axes": [
+        48.753463,
+        3.3241,
+        -0.930748,
+        13.65097
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          0.02029225,
+          -0.03362926,
+          -0.02016721,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.07299767,
+          -0.16319859,
+          -0.11604846,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.31765383,
+          0.37937289,
+          0.28545437,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          0.02029225,
+          -0.03362926,
+          -0.02016721,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          0.02029225,
+          -0.03362926,
+          -0.02016721,
+          -0.0
+        ],
+        "corners": [
+          -0.49999999,
+          0.50000001
+        ],
+        "width": [
+          0.035,
+          0.18
+        ],
+        "teeth": 0
+      }
+    },
+    "front-right": {
+      "rect": [
+        0.537109375,
+        0.564453125,
+        0.09767577929726552,
+        0.027349218203234348
+      ],
+      "axes": [
+        50,
+        1,
+        -0.28,
+        14
+      ],
+      "profile": {
+        "crease": [
+          -0.03570001,
+          -0.03213001,
+          0.0,
+          -0.01785,
+          -0.03570001
+        ],
+        "open_upper": [
+          -0.03570001,
+          -0.09639002,
+          -0.17136003,
+          -0.14637002,
+          -0.03570001
+        ],
+        "open_lower": [
+          -0.03570001,
+          0.26775004,
+          0.37128006,
+          0.30345005,
+          -0.03570001
+        ],
+        "source_upper": [
+          -0.03570001,
+          -0.03213001,
+          0.0,
+          -0.01785,
+          -0.03570001
+        ],
+        "source_lower": [
+          -0.03570001,
+          -0.03213001,
+          0.0,
+          -0.01785,
+          -0.03570001
+        ],
+        "corners": [
+          -0.50019992,
+          0.49980008
+        ],
+        "width": [
+          0.025,
+          0.15
+        ],
+        "teeth": 0
+      }
+    },
+    "right": {
+      "rect": [
+        0.6146987539062501,
+        0.57046398828125,
+        0.04117533318577666,
+        0.011529093345397546
+      ],
+      "axes": [
+        21.052632,
+        -1.108033,
+        0.310249,
+        5.894737
+      ],
+      "profile": {
+        "crease": [
+          -8e-08,
+          -0.30375542,
+          -0.2819549,
+          -0.07598792,
+          -8e-08
+        ],
+        "open_upper": [
+          -8e-08,
+          -0.39704559,
+          -0.41152422,
+          -0.1718692,
+          -8e-08
+        ],
+        "open_lower": [
+          -8e-08,
+          -0.00639405,
+          0.13104724,
+          0.22963369,
+          -8e-08
+        ],
+        "source_upper": [
+          -8e-08,
+          -0.30375542,
+          -0.2819549,
+          -0.07598792,
+          -8e-08
+        ],
+        "source_lower": [
+          -8e-08,
+          -0.30375542,
+          -0.2819549,
+          -0.07598792,
+          -8e-08
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.015,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "rect": [
+        0.36907029101562516,
+        0.574792244140625,
+        0.04590807526078719,
+        0.012854260222282568
+      ],
+      "axes": [
+        23.268698,
+        3.3241,
+        -0.930748,
+        6.515235
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.11574072,
+          -0.06613761,
+          -0.02076411,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.20903054,
+          -0.19570684,
+          -0.11664537,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          0.18162076,
+          0.34686468,
+          0.28485757,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.11574072,
+          -0.06613761,
+          -0.02076411,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.11574072,
+          -0.06613761,
+          -0.02076411,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.015,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-left": {
+      "rect": [
+        0.3896484375,
+        0.5654296875,
+        0.06481462307048874,
+        0.01814809445973685
+      ],
+      "axes": [
+        33,
+        3.5,
+        -0.98,
+        9.24
+      ],
+      "profile": {
+        "crease": [
+          -0.02675531,
+          -0.01337766,
+          0.0,
+          0.00267553,
+          -0.02675531
+        ],
+        "open_upper": [
+          -0.02675531,
+          -0.14180315,
+          -0.25685098,
+          -0.16855846,
+          -0.02675531
+        ],
+        "open_lower": [
+          -0.02675531,
+          0.36119669,
+          0.49229771,
+          0.387952,
+          -0.02675531
+        ],
+        "source_upper": [
+          -0.02675531,
+          -0.01337766,
+          0.0,
+          0.00267553,
+          -0.02675531
+        ],
+        "source_lower": [
+          -0.02675531,
+          -0.01337766,
+          0.0,
+          0.00267553,
+          -0.02675531
+        ],
+        "corners": [
+          -0.50079455,
+          0.49920545
+        ],
+        "width": [
+          0.025,
+          0.15
+        ],
+        "teeth": 0
+      }
+    }
+  },
+  "cpuChecks": {
+    "down": {
+      "inactive": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 2341
+      },
+      "rounded-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 1900
+      },
+      "bite-contact-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 1362
+      }
+    },
+    "front-right": {
+      "inactive": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 2514
+      },
+      "rounded-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 2188
+      },
+      "bite-contact-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 1706
+      }
+    },
+    "right": {
+      "inactive": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 374
+      },
+      "rounded-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 295
+      },
+      "bite-contact-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 208
+      }
+    },
+    "left": {
+      "inactive": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 440
+      },
+      "rounded-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 370
+      },
+      "bite-contact-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 278
+      }
+    },
+    "front-left": {
+      "inactive": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "open": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 1096
+      },
+      "rounded-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 835
+      },
+      "bite-contact-approx": {
+        "sourceAlphaExact": true,
+        "changedRgbPixels": 570
+      }
+    }
+  },
+  "limits": [
+    "Inactive is exact source crop; active cues are offline CPU approximations, not GPU or moving-field validation.",
+    "Profiles specify own bounded spread/round width response, but the current CPU helper fixes widthFactor=1; rounded and bite-contact images show target-contour approximations only and do not prove runtime rounded or biting behavior. No teeth are painted or invented.",
+    "Action keys, body transport, encoded atlases, native playback, mobile/device rendered checks, runtime installation and audio sync remain outside this task."
+  ]
+}

@@ -1,3 +1,352 @@
+# Ambient walking and talking goal — 2026-10-20
+
+Release integration closeout: the five ambient checkpoints, through Heike96378cb,
+are merged with published2c48edd in clean ambient-city-release. Combined Node
+2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and
+31-page build pass. Native Heike caption encounters pass desktop and both Android
+emulations; Gisela's owned recorded Q24/mouth/portrait path passes desktop. Built
+startup passes desktop and Android portrait. Independent Physics and Camera scoped
+release reviews pass on260 frozen files; their broad-world, natural, listening and
+physical-device exclusions remain open. No private Heike audio is admitted. Source
+runtime/assets remain unchanged after those checks; only this progress closeout
+changes. Publication proceeds under the standing policy. The42-character goal
+remains active with37 scoped standing-only identities.
+
+
+Active owner and six milestones: GAME-COMPLETION.md, chat
+01a159fb-e568-79f3-967b-f4749d5266ef. Worktree ambient-city-animation;
+primary dirty checkout and separately owned Merz work remain preserved.
+
+Heike Hoffmann is locally integrated with eight byte-identical reviewed delivery
+files. Final MAIN native browser checks pass on desktop and Android-emulated
+portrait/landscape; full Node regression passes2281/2281 (zero failures/skips),
+Python delivery checks12/12, curator and syntax/whitespace checks pass. Independent
+Physics/Camera/general scoped reviews pass against193 frozen inputs; final exact
+checkpoint contains64 paths, including selected generation ancestry. Private audio
+is excluded. Publication integration with current origin/main remains pending. Her standing image,
+geometry and the other42 manifest entries are preserved;37 scoped identities
+remain standing-only. New Berlin audio remains private and unapproved. Gisela stays at
+local checkpoint9ef7f6a6bdc95b2cc672b1feb16c8835a02664b6. Plan:
+docs/superpowers/plans/2026-10-21-heike-ambient-animation.md. Own V3 eight neutral
+views retain original cardinal bytes. Rear hidden-root compression and dangling
+keys following legs were repaired in source configuration; the first side split
+cut overlapping shoes. Generated complete side-leg V1/V2 are rejected for changed
+shoe painting. V5 full source/stop bakes below are retained failed experiments,
+not accepted Heike assets. V6 wholesale original-near-leg cloning is held. V7
+preserves original visible near/far paint and fills only hidden far areas from
+own paint; independent109-pin review finds hard hem cuts and final neutral edge
+alpha overdraw, so its source gate remains HOLD.
+
+Current source configuration V9 uses original-profile-layers-v4, hash437f11fe….
+Independent alpha tracing identifies redundant connected_garment source-over as
+the127-to191 edge defect; the upper/lower two-row overlap is a separate cause.
+Side-only configuration disables that garment, sets lowerClipSourceY=cut+3 and
+gives left key tips protected ownership. Initial V8 cloth fill still exposed a
+short hem tab: translating the complete underpaint8px up moved its trouser hem
+above the visible original far hem. V9 keeps that hem at its own source height
+and compresses only the hidden shoe toward the original far sole using the
+existing painted_walk field. Visible original far paint remains exact.
+
+Independent sampled side method PASS:4 phases each direction, light/dark512 and
+native diagnostic previews; record heike-original-leg-method-review/
+v9-registered-hem-independent-review.json, SHA daedb22d…. Whole neutral alpha
+support is unchanged; maxRGB right2/left3, maxalpha5/17 from translucent lower
+overlap. This is not bitwise-neutral identity. Full16 gait/stop/encoded/runtime
+checks remain open, and Heike's runtime record is unchanged. Current mouth-field
+capture records actual originalUpper exporter controls beside own frames,
+without reconstructing a second motion rig. Capture smoke preserves all rendered
+RGBA bytes and restores wrappers on failure; walk/stop driver hashesfd399a93…/
+da65c963…. Front/rear also had the three-row upper overlap; their own clip+3
+correction restores bitwise original neutral RGBA and passes four-phase root
+inspection. Fresh full source in heike-walk-source-v2 completed92 cells,
+desktop52d6c6b9…/mobile1bcdb570…, gutters6/4. Root inspected all64 walk cells in
+both variants on light/dark. Independent full92-cell source PASS:
+heike-full-walk-independent-review/heike-v9-full-walk-independent-source-review.json
+SHA c2a001ae…. Fresh256 stops in heike-phase-stop-source-v2 completed,
+desktop27008b97…/mobileefba1c8b…. Independent all256 encoded-art/field PASS,
+review SHAb09dc199…. Stage3 retains one lifted foot before neutral, max12.75
+working pixels; temporal landing and actual world foot contact remain unproved.
+Root inspected both side ordered lower-stop sequences desktop/light; independent
+review covers every stop full-body at96/64 on both backgrounds.
+
+Moving-mouth fragment9210e125… has276 visible/88 selected null registrations,
+all38 input pins, actual captured upper fields, exact own production standing
+fit and all16 fixed gesture heads verified. CPU proof88be30b8…. Ignored
+heike-integration-v1 assembles364 selected/378 logical cells and14 padding nulls;
+source desktopda182640…/mobile5e65cddd…, mouth42ed5605…. Packed preview receipt
+6535fe87… uses21 columns: movement2016x2040/15.69MiB desktop and1344x1360/6.97MiB
+mobile; reaction2016x120/0.92MiB desktop and1344x80/0.41MiB mobile. Main assets and
+street manifest remain unchanged. Actual packed-source GPU checks pass all378
+logical slots on desktop and Android portrait emulation:276 visible mouths
+articulate open/round/bite,102 null slots remain inactive, closed matches source,
+all cues preserve alpha, and disposal returns textures/geometries to zero.
+Report heike-gpu-source-v1/run-v2/report.json SHA199a6405… binds22 unchanged pins.
+Root also reviewed all five visible face profiles on light/dark at both sizes.
+Frozen staged V1 descriptor0fa5ee6b… binds168 inputs for separate fresh Physics,
+Camera and general reviews; none constitutes main-manifest adoption.
+Independent general review964ce165… passes168/168 before/after pins, every
+decoded desktop/mobile selected and padding cell,18 Node and12 Python checks.
+Fresh full Node regression run passes2276/2276, no failures/skips,299162ms;
+voice-library curator check passes67 production characters/one scene exception.
+Camera source/numeric review4278171f… passes89 focused tests and supplied native
+framing, with rendered Heike depth/resize/ground contact still required. Fresh
+Physics CPU proofs pass264 approach cases (max7.1s),27 navigation cases,
+192 stop entries,192 turns and64 reaction entries; rendered sole contact remains
+pending. These scoped results leave the combined candidate on HOLD.
+Camera follow-up5f345afb… accepts bounded actual wall/roof occlusion, faded
+visibility, two-sprite order, pivot/size, resize and pause. Landscape844x390 uses
+38px of card scrolling for lower choices. The late3d.html DCL timeout is retained;
+navigation-only correction passes. A third portrait run's unchanged pixels are
+an invalid arbitrary-window animation expectation: at3.03–3.84s after quiz-start
+the performer holds frame2/slot86 while portrait render count advances36→52.
+Timeline9fb0bbed… establishes no renderer-freeze claim. The shared test fixture
+now checks active owned visible rendering and advancing render count, preserving
+intentional holds; expected red then3/3 green checks, independent fixture review
+e4322120… with8/8 focused tests. This test-only change follows the168-pin V1
+review and needs an explicit successor rebind; no game/art changed.
+Physics report e83f904b… accepts four corrected actual quiz/stop sequences,
+including mobile left phase4 with zero root movement and a small connected
+late landing. Other risky late-stop phases left0/right8/right12 still require
+projected on-screen sole tracking, so P5 and main adoption remain HOLD. The
+initial no-quiz nominal PASS was a fixture error; its captures are invalid for
+landing. The corrected portrait10s capture timed out just before visible quiz;
+45s capture and pre-assert artifact saving correct that observation gap.
+Later sole diagnostic captures exact natural left0 and real right9/11/13;
+requested right8/12 phase misses retain enclosing FAILs. Forced presentation
+V1 also FAILs movement-pack size validation; separate corrected V2 passes with
+actual world renderer/temporary UV selection of right8/12 stop cells, explicitly
+not natural phase coverage. A suspected5.62px right13 toe snap is retracted:
+that number was an overlapping-shoe alpha centroid, not a toe edge. Actual late
+stage/neutral dark-shoe extent stays x96..130; preceding stage extends to132.
+No source/art was edited for that false alarm. Final corrected P5 review is
+being sealed from the exact rendered marks/images; adoption remains pending.
+Final Physics d9a424f8…/P5 closeout5d7623d1… accepts bounded staged P1–P5 after
+correcting that centroid interpretation. Exact natural right8/12 remains NOT RUN;
+forced presentation plus192 actual CPU stop entries and causal natural
+left0/4/right9/11/13 are distinct evidence. No concrete contact defect remained.
+Canonical Heike delivery adoption preserves all8 file hashes; actual manifest
+SHA fb8dcf29…,206490bytes. Expected pre-adoption red and5/5 focused green checks
+cover her actual manifest plus portrait observation. Cache tags now invalidate
+the changed delivery validator through street view, world import and root entry.
+Heike source/delivery paths have scoped-text-filter exclusions for immutable
+hashes. These are local changes pending fresh final MAIN verification.
+
+Audio-region gap: Heike's two default actors are Berlin-only, while her sole
+admitted exact Q24 MP3 (80b2a942…, profile299c6b7e…) uses Germany wording.
+Berlin Q24 is "What number of Bundesländer hat die Bundesrepublik Deutschland?";
+there is no matching own default or preview recording. Native V1 reaches the
+animated Berlin quiz with a live portrait but fails the expected-playing-media
+assertion because correct fallback is silent captions. V2 deliberately selecting
+an existing Germany-region Heike fails because none exists; neither result is
+native speaking acceptance. Read-only audit ef1d6c77… records the missing text,
+owned voice, sealed German grant and held audition; no borrowed/rewritten voice
+or synthesis has been admitted. Native V3 retains the actual Berlin region and
+asserts the correct silent-caption fallback: desktop, Android portrait and
+landscape emulation pass3/3 approach, planted quiz/live portrait, answer,
+pause/resume and return-to-roaming cases. This is body/caption flow evidence,
+not recorded speech or physical-device/listening acceptance. The private reuse
+audit24b6a81d… finds no exact Berlin Q24 Chatterbox take in accessible Heike
+receipts; two unavailable cloud CSV indexes were not negative evidence. The
+existing helper planned and rendered three private approach/context/question
+jobs under the fixed profile/reference/revision, outside shipped assets. All
+three retain explicit unchanged native-analyzer EOS receipts; independent final
+encoded-word/level processing completed. Approach/context fail unchanged word
+checks and remain private. Question24 passes literal and normalized exact words,
+native completion and encoding/levels:4.54s,-18.25LUFS,-2.21dBTP, MP3 SHA
+1c1eed071a20c4700fbbb7f88fe86f262dfb4a472e7a629d7b71bba8c2277c67;
+receipt a2ecef3a…. Existing final-MP3 RMS recipe derives182 mouth bins at40Hz,
+PCM SHA31e0d4e5…. Private review recordddccd5ba… retains all three results.
+User listening/use approval was requested with the normalized question linked;
+it remains pending. No default catalog, main asset or review approval field was
+changed. Isolated opt-in private native fixture91ea7d07… is prepared, not run;
+its exact voice/text lookup and private file route cannot admit default speech.
+V5's three private playback assertions fail because its overlay changed
+recordedClip while the actual quiz uses candidateClip; correct silent fallback
+is retained as failed fixture evidence. V6 ff4d45e6… corrects only that private
+lookup and adds own/foreign/different-source controls. Silent actual native
+question playback passes desktop1/1 and both Android orientations2/2. Summary
+1a3f6d15… verifies26 playing-media projections against final40Hz bins and26
+displayed pose-cue/material pairs with zero mismatches. These two observations
+have different ticks and are not incorrectly compared against each other.
+The public catalog remains unchanged and user approval remains pending.
+Generation does not grant default use or normalized listening approval.
+
+Heike full source bake in output/ambient-city-animation/heike-walk-source-v1
+completed92 selected walk/bridge/turn cells, with16 samples per direction.
+Physical96x120 desktop and64x80 mobile sample working512 paint directly; logical
+128x160/pivot64,150/figure136/world1.6 preserve published standing geometry.
+Desktop source SHAd7448a65…; mobile7593d167…; minimum gutters6/4. These V5 exports
+failed independent source-match review despite complete structural sampling;
+do not integrate them. No Heike runtime record is changed. Own exact
+approved question24 recording is available, not yet proved with this candidate.
+
+Key-gesture-v3 fixes unintended head transport with a fixed boundary and holds
+coat buttons stationary. Its full16 source sampling has14 distinct poses;
+root inspected both encoded variants light/dark, connected elbow/hand/keyring,
+exact source head/mouth, cards and planted feet. This is modest key emphasis,
+not an overhead wave. Desktop strip60330037…; mobile3d0639cc… in ignored
+heike-key-gesture-full16-v1. Five own neutral mouth fits/three rear nulls are held
+under Heike mouth-source-v1; the fitter now uses its owned original three-view
+subset69cb36d3… instead of the held global registration. Packaged profilee9c6494a…
+preserves all five numerical fits and three nulls exactly. CPU round/bite
+approximations are not actual shader evidence. Changing-pose/GPU/media integration
+and independent reviews are open. Dedicated256 V5 phase stops finished in ignored
+heike-phase-stop-source-v1, but inherit the rejected source painting. Fresh walk
+and stop exports must follow an accepted repaired source pilot.
+
+Compact21-column compiler/runtime support is modified but uncommitted. Initial
+read-only review caught the runtime's old16-column admission; repaired focused
+tests pass12 Python/16 Node, including actual native controller row crossing,
+mouth axes and reaction pack. Re-review PASS pins four paths in ignored
+heike-delivery-compiler-review/review-v2.md. Default and explicit16 fixture bytes
+equal9ef7f6a. Actual Heike delivery/native/whole-family acceptance remains open.
+
+Authorized source-only parallel candidates for Uwe and Brigitte live in their
+exclusive street-speaker-motion folders. Root inspected their V2 own neutral
+quarter candidates light/dark against unchanged cardinals; held source mouth
+pilots are not runtime admission. Their bounded gait probes expose incomplete
+hidden side shoes; side gait FAILs remain explicit. Brigitte's rear hidden hip
+repair resolves its compression guard without changing visible source/strength.
+Uwe's generated complete-leg candidate failed source material review. Independent
+original-paint probe217c78f3… also fails visible hidden-boot seams. Bounded V2
+hem/shoe registration, V3 hidden-sole removal and V4 own far-shoe underpaint
+repairs retain a diagonal bridge or amputated heel at512px on light/dark;
+audit02fb74ad… keeps all failed probes and unchanged motion-spec05582eff….
+Native96/64 size does not waive the source defect. Replan the far heel shape or
+gait before another source probe; no Uwe bake/runtime admission. Heavy
+generation/bake/browser/voice jobs remain serialized. Heike is the sole selected
+runtime integration;38 scoped standing-only identities and all goal gates stay
+open.
+
+Current integrated increment: Gisela V4, freeze192pinsf3e2dcde… at
+output/ambient-city-animation/gisela-integration-v3/frozen-candidate-v4.json.
+MAIN in this isolated branch includes her four-direction walk,64 owned phase
+stops, paper presentation and276 moving mouth fits. Quiz approaches use actual
+brisk walking and select nearby people within a shared walking-time budget,
+reserving two seconds for stops/turns. Far people retain their question. The live
+portrait samples the actual sprite/material/media state through the existing
+renderer; sRGB target pixels are unassociated in linear light before ImageData.
+
+FullV4 passes2274/2274 Node checks,0skips,186.44s; source assembly3PASS and packed
+compiler--checkPASS; skill bundles12/68files/48referencesPASS. Independent General
+and Physics V4 pass192before/afterpins. Physics rebinds264 exact-bound cases,
+maxarrival7.1s, plus navigation/pause/cleanup proofs to unchanged V3 bytes. Camera
+V4 accepts actual3profile current-pose portraits, quantization-limited GPU edges,
+own nativeQ24 playback, completion/return, staged VOICE cancel/newcue replay,
+fault/staticfallback and actual pagehide resource retirement. Its wrapped native
+suite retains3 late fixture FAILs from an async receipt lost during navigation;
+all preceding functional assertions passed. Separate synchronous same-origin
+pagehide cases pass3/3, closing that fixture gap; no blanket green claim is made
+for the retained failed wrapper. All failure histories stay in ignored reviews.
+
+The desktop30MiB single-family exception is recorded in For-AI/ASSET-POLICY.md;
+it does not admit the whole cast/cohort/device budget. Physical Android/listening,
+natural random encounters, inherited full-world C1–C5/X1 and publication remain
+open.38 other scoped identities remain standing-only. Historical preparation
+notes below describe predecessors, not the current accepted bounded increment.
+
+Local checkpoint4403afb contains the reviewed shared speech/mouth/movement core:
+eight source-bound standing mouth definitions, actual recorded segment energy,
+lazy optional delivery, native planted reactions, upright flat street paint and
+sealed-body pause/reverse recovery. Full2248/2248 Node checks passed. Independent
+general/Physics/Camera reviews retain their bounded verdicts. Seven native browser
+speech/depth/retreat cases and the three-profile object harness passed. The Camera
+supplement retains missing timed/roof/depth-crossing coverage and one landscape
+fallback image obscured by the loader. Full world acceptance remains open.
+
+Local checkpointdd316d0 adds source-bound connected mouths to all211 visible
+poses across304 existing atlas cells;93 rear/occluded/unused cells remain null.
+Body artwork, scales, pivot, geometry, locomotion and cycle distances are unchanged.
+The native-atlas adapter owns one material per actual actor and shares its texture,
+uses the existing speech projection, fails closed and disposes only owned resources.
+V2 froze94 inputs (descriptor9b28c2b0b11688f27294f6db9d824be3d6778214077e73f932497948c7783173).
+V3 changes only scoped Git byte preservation for8 source registrations and1 fitter
+(descriptore925e9b84cbb29dd1c8bbe25a6dcbb8c7ec1a0de8e8b8a65815abc09d55017f0).
+Runtime/art/data bytes remain identical. Ordinary test/docs LF normalization is
+explicit in index-packaging-v3.json; hash-bound inputs retain exact bytes.
+
+Full2256/2256 Node tests pass,0skips. Independent general review passes25 checks,
+Physics59 existing+4 production fixtures and3648 exact baseline geometry/UV/matrix
+comparisons. Camera reviewed all211 visible and93 null source GPU cells,28 boards,
+six native face/city pairs, and native E/automatic-caption closure on desktop and
+both Android-emulated aspects. Source alpha, null inactivity, material ownership,
+shared-map identity, staged retirement/pagehide cleanup and synthetic-wall depth
+controls pass. Diagnostic source cues are distinct from native recorded speech.
+
+Neither Sandale has an admitted default recording: their two historical MP3s are
+guarded audition assets without runtime metadata. Native actual playback/timing/
+completion is unavailable; captions keep dynamic mouths closed. No auditions were
+promoted or substituted. This remains a goal gap, not full talking acceptance.
+Evidence: output/ambient-city-animation/sandale-mouth-integration and
+reviews/sandale-mouth-v1-{core,physics,camera}. Physical Android/listening and the
+inherited required C1–C5/X1 gaps remain outstanding. No publication yet.
+
+Current selected increment: mouths for already-animated crowd-irmgard-aktenordner
+(the orange-haired binder carrier, distinct from held stadt-irmgard-aktenstapel).
+Main manifest adds one125KB immutable mouth definition:260 visible fits,97 rear/
+occluded/unused nulls, all357 atlas slots plus her own standing source. Body and
+source images, geometry, scale, pivot, stride25.6 and runtime JavaScript are exact
+checkpointdd316d0 bytes. Existing shader/media owners handle the capability.
+Root reviewed all260 source/closed/open CPU fits, both backgrounds, allnull coverage
+and standing. Seven optimizer-limit cases retain direct final-pixel review.
+
+V1 froze100inputs (ca43590ce0ac632bfc9a8db0b743c02c7f0e02f52afc35f48effc131a38ebdbf).
+Full V1 ran2219PASS/38FAIL: three old fixtures imported Three core without shader
+support. V2 changes only those three imports to the existing production module;
+102pins (d796f3a74d0444e7f0a8750462c70dac7f09c63a6eefd256de41adf6c07e7476).
+All49 affected checks and full2257/2257 checks pass,0skips; curator passes.
+Fresh general review90checks plus affine/profile/source oracle passes; Physics
+2142 allslot/variant/camera mappings plus6standing cases pass, with public loader/
+walk/pause/cancel probes. Both independently verify the fixture-only V2 delta.
+Git staged10payload files are all raw-byte equal to their reviewed working files.
+
+Actual source GPU checks pass all357slots at both desktop96x120 and mobile88x110
+cell sizes on the current StreetCharacter renderer. Three native browser cases
+pass on desktop and both Android-emulated aspects: exact admitted own recording,
+profile/text, media clock/shader alignment, same-voice peers/clone closed, natural
+completion, replay, FILE advancing media with lips closed, same-cue resume, VOICE
+and actor cancellation. Native actor motion/text/catalog are unchanged; player
+placement/timers and hidden-dialogue cleanup are explicitly diagnostic. Earlier
+fixture/readiness/range failures are retained. Final independent Camera visual review passes this bounded increment.
+Evidence: output/ambient-city-animation/irmgard-mouths and
+reviews/irmgard-mouth-v1-{core,physics,camera}. No publication/fullworld acceptance.
+
+Irmgard is preserved in local checkpoint34c435b. The goal remains ACTIVE.
+Selected next: Gisela walking/talking/paper-gesture integration. The scoped plan
+is docs/superpowers/plans/2026-10-20-gisela-ambient-animation.md; root implements,
+independent specialist/general reviewers remain read-only. No Gisela runtime
+activation has occurred. Other body candidates stay held.
+
+Source preparation now inspects184 exact Gisela movement cells (64walk+20bridge+
+8turn per desktop/mobile) beside published standing. All gait rows have16unique
+samples. Four marked stance contacts on exact desktopcf62820e… fit9.4gameunits/
+cycle with.5pixel marker uncertainty, supporting provisional9.5 for native testing.
+Measurements: assets/sprite-sources/street-speaker-motion/gisela-becker/
+walk-contact-measurements-v1.json. Evidence source-inspection-v1.json and
+assessment-v1.json live in output/ambient-city-animation/gisela-body-calibration.
+These are source/static checks, not native foot planting or ordered-motion proof.
+
+The source-only16x14 draft is assembled under gisela-integration-v2: all108
+selected body cells retain their exact paint after integer shift2desktop/1mobile;
+84 visible mouth fits and140 nulls preserve published standing and own profiles.
+Root inspected all84 source/zero/open cells at each size and dark open mouths.
+No main Gisela activation occurred. This draft lacks phase-specific stopping art.
+
+21October ruling: CharacterInteractions.plan ignored owned phase settles and
+advanced ordinary gait cells while the simulation held its root. A production
+regression failed on the first entry cell. The minimal preference for existing
+phase settles now passes33 affected motion/reaction checks, preserving legacy
+fallbacks. Source helpers gain an optional complete-limb displacement callback;
+their default pixels remain subject to exact existing-gait/neutral and serialized
+greeting replay checks. Gisela's dedicated stop candidate plants the swinging
+foot before lifting/recentering the previously loaded foot. An initial terminal
+shin compression failure is retained; the successor distributes the vertical
+movement through measured leg nodes. Bakes and source inspection remain pending
+under gisela-phase-stops-v1 and gisela-body-calibration. These are authoring-only
+changes, with no runtime body activation or new body/media clock. Next: finish
+and inspect all stop poses, assemble the revised bounded grid and own mouth fits,
+then packed delivery, real approach/quiz/media verification and independent reviews.
+
 # Station announcement entry — 2026-10-21
 
 Integrator-owned, based on published `21ebceb8`; clean managed worktree
@@ -1965,3 +2314,28 @@ Neighbor-focus checkpoint: game f653775e74c9eed693fba5f657872d2b878c2c551995be70
 2026-10-18 centralized P3 V3 fixture scope: root integrator owns only tests/street-pedestrian-avoidance.test.mjs and tests/street-route-hold.test.mjs plus this journal. Combined neighbor/street source f653775e has CRLF; actual eight-suite run52PASS/2fixture-loadFAIL (54 counted,42.316s) never reaches these movement assertions. Normalize CRLF only when these fixtures read game.js; keep all extraction boundaries and behavioral assertions. No runtime/asset/browser changes. Private V3 source pins must be refreshed for these two owned test readers after checks. Preserve peer neighbor delta and prior V2spentfailure; full browser/native acceptance remains outstanding.
 
 2026-10-18 neighbor dialogue correction: integrator owns game.js, world3d.js only for archived robber representation, neighbor speech manifests/catalog/builder if previous profile restoration requires it, focused tests, cache tokens and owning neighbor/audio/gameplay rules. Preserve prior neighbor-focus and all unrelated canonical work; before hashes/snapshots in primary output/neighbor-dialogue-2026-10-18. User requires actor-owned single-use speech tickets, earlier Heiko voice restored, robber omitted and whole-chapter police protection. Do not release unrelated held runtime. Validate native speech lifecycle, cancellation, content duplication and chapter boundaries; required Physics/Camera reviews use frozen candidate.
+
+
+Inga dialogue revision — 2026-10-21. Integrated the independently reviewed 31-pair German/English rewrite onto current main 5c947877 in the attached inga-neighbor-coaching worktree. Focus: unsolicited neighbor advice, corporate niceness and presumed compliance; selective family boasts follow George’s clarification. All other cast sources and production bindings remain byte-equivalent after excluding Inga’s dialogue; tour structure and gameplay are unchanged. Preserved newer main features, including Heiko’s four notepad lines (114 total neighbor sources).
+
+Source/editorial review PASS, no findings; original evidence in output/inga-dialogue-review-result.json and output/inga-rewrite-receipt.json. Seven subtitle fixture configurations and 29 changed-source checks passed on the authoring base; current-main revalidation follows below. Curator --sync/--check PASS on this integration with five exact Inga recordings (three unchanged, two new). Remaining 29 sources use exact captions pending recordings. Seed 721212 was retired after GPU-contention timeouts; no live Inga renderer remains. Other native voice jobs are still active. Watcher-03 requires an ordinary exact-word retry; electric-02 requires a new completed native render. Private frozen requests remain immutable.
+
+Next: when native voice work is idle, run the existing builder here with a fresh seed, preserving accepted takes; complete exact coverage, synchronize/check the catalog, run speech/browser checks, then publish the reviewed scoped change. Local refs contain an unrelated damaged turn-diff reference; a normal fetch reported it, but current main objects and the managed worktree are readable. No metadata was removed. No commit or publication yet. Physics/camera review omitted because this task changes speech/copy only, preserving staging and movement.
+
+Current-main validation: 29/29 focused voice/caption/source checks PASS; seven production subtitle-fixture configurations PASS (1948 caption parts), six direct-route/cache-version checks PASS, and the complete selected neighbor-flow/ticket/focus/direct-entry command PASS (exit 0, 296039 ms). Three affected entry script cache tags are 20261021-inga-coaching. Seed 721213 admitted watcher-03, electric-02 and gardenRules-01, resolving prior failures; 8 exact Inga takes now retained, 26 pending. A later gardenRules-02 render timed out when the police task started another Heiko GPU render. Only the verified owned Inga batch and child were stopped; other tasks untouched. Permission to message the police task for serial GPU coordination is pending in this thread. Without authorization, await its voice work retiring. No publication or goal completion is claimed. Continue from output/inga-checkpoint.json; retired session 27749 must not be treated as live.
+
+GPU became idle (82 MiB, 0%); one bounded seed-721214 gardenRules-02 take passed exact words and levels (11.8 s, -18.16 LUFS, -4.16 dBTP). Now 9 accepted Inga takes, 25 pending. Prepared output/run-inga-guarded.ps1: finite existing-builder passes, 60-second idle admission, owned-process-only yield when another native voice job starts, hidden child window, preserved logs and accepted takes. This is ignored per-task authoring control, not a shipped runtime or voice service. Pending messaging permission is not assumed.
+
+Guarded pass admitted schedule-01, schedule-02, story-12 and story-13. Total: 13 exact Inga takes; 21 pending. Blinds-01, blinds-02 and story-14 remain held for actual unprompted transcript mismatches; no recognition claim was weakened. The guard detected another native voice job during story-15 and retired only its owned Inga process and child, preserving accepted takes, then entered its 60-second idle wait. Live supervisor session 38490; current per-task state is output/inga-guard-state.json. Pending cross-task messaging permission remains unused.
+
+Audio checker rehearsal PASS on desktop and Android emulation: two exact accepted clips per profile, SHA-256 and runtime source/voice lookup, native decoding and completion; new watcher-02 plays at normal speed silently. This is a probe only, not full-pack acceptance. Initial fixture lookup failures were traced to missing UTF-8 declarations (observed windows-1252 and German mojibake); actual index.html already declares UTF-8. Fixed only the ignored fixture; preserved the failure in output/inga-audio-probe-encoding-failure.json. Full checker remains guarded by 34 accepted takes and zero holds. Source acceptance audit in output/inga-acceptance.json still marks full voice/browser/publication incomplete. Guard session 61878 remains the sole live Inga supervisor.
+
+Scoped verifier correction before editing: tools/curate-voice-library.mjs, tools/build-neighbor-voices.mjs (receipt description only), tests/voice-consistency.test.mjs and For-AI/VOICE-SYNTH-PROTOCOL.md. Finite optional compound spellings for Vertrauensbooster, Starterpaket and Vulkankuchen only; retain all source text, speaker/voice bindings, order, articles, pronouns and negation. Current rejected transcripts also contain real word errors and remain rejected. Official Rechtschreibrat optional compound-hyphen rule supports spelling equivalence; no synonym or arbitrary word-space normalization. TDD: reproduce false spelling mismatches first, then require real word errors to remain failures. Native guard is stopped; no competing render is launched.
+
+Finite compound verifier correction: TDD red reproduced the false Vertrauens-Booster/Vertrauensbooster mismatch; three focused tests passed after three bounded rules. Separate words remain distinct. Actual added-prefix, missing-article, pronoun, negation, inflection and wrong-noun cases remain rejected. All six known rejected transcripts still fail, and 81 historical exact neighbor rows retain equivalence. Broader selected voice tests and curator --sync/--check pass. Independent technical review PASS, no findings; reviewer independently ran 25 voice-consistency tests. Hashes and scope in output/inga-compound-review.json. Captions/transcripts/audio were not rewritten by this correction. Full integrated suite remains required after the ten pending takes are resolved.
+
+Inga integration advanced to 2c48edd, preserving the Schwabingen cleanup changes. Exact reviewed Inga pairs SHA256 remains 2a6f2f75c0f47327a0814727f3cd8398d54328857a2a5dfd0ebba3dc2fa1d0cf; all other cast/binding fields match that base. Full Node run: 2219 tests, 2215 pass, four current Inga pack/catalog failures while authoring is incomplete (character-review, English inventory, neighbor coverage, voice consistency). These remain required reruns after the complete manifest and curator sync. Selected voice coverage now30/34; four word-error holds use a fresh bounded 64-step/0.9-speed retry with the same selected profile, no source changes.
+
+The final blinds-02 take preserves every spoken word; Whisper splits the nominalization in the exact phrase Ihr Nichtreagieren richtig einordnen. A context-bounded comparator rule admits only that full phrase, with both original strings retained. TDD red reproduced the word boundary; four focused checks pass. Independent technical review PASS/no findings (hashes in output/inga-nominalization-review.json); changed pronouns, negation, verbs, false adverb and standalone joining remain rejected. Selected builder/recognition suite148/148 and full voice consistency/cast27/27 pass after this delta.
+
+Final Inga candidate on 7d969f9: 34/34 selected-profile recordings accepted, zero held; 31 German/English pairs and matching recordings replaced, with three unchanged takes retained. Neighbor coverage 114/114, curator sync/check and complete-pack 32/32 tests pass. The final integrated Node suite passes 2,318/2,318. Silent native-browser fixtures pass all 34 recordings on desktop and Android emulation: exact runtime source/English/voice lookup, HTTP/file hashes, native decoding and completion. The caption fixture checks 1,948 parts across seven configurations; its reviewed source pairs and styles.css remain unchanged. Independent final review passes with no findings; hashes are saved in ignored output/inga-final-review.json. The encoded pack is 2,913,944 bytes / 361.24 seconds (previously 2,344,280 bytes / 290.05 seconds), with a largest clip of 129,644 bytes; existing lazy loading, cache and cancellation ownership remain unchanged. There is no perceptual-listening or physical-Android claim. Physics/camera specialists are omitted because this task changes no world geometry, movement or staging. Final startup smoke passes all four checks. Publication and deployed root, 3d.html and neighbor-route verification follow this validated candidate.

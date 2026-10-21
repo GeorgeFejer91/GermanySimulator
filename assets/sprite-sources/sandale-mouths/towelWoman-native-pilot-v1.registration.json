@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "id": "towelWoman",
+  "scope": "Three exact native-cell lip pilots only; no inferred transport, no source art or runtime edits. Moustache upper edge remains fixed. Rear mouths absent.",
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "assets/tourists/towelWoman/character-atlas.png",
+        "sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+        "dimensions": [
+          1536,
+          3952
+        ]
+      },
+      "cell": [
+        192,
+        208
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "centerPx": [
+        99,
+        75
+      ],
+      "axesPx": [
+        12,
+        0,
+        0,
+        3
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            93.0,
+            75
+          ],
+          [
+            96.0,
+            74.6
+          ],
+          [
+            99,
+            74.4
+          ],
+          [
+            102.0,
+            74.7
+          ],
+          [
+            105.0,
+            75
+          ]
+        ],
+        "source_upper": [
+          [
+            93.0,
+            75
+          ],
+          [
+            96.0,
+            74.6
+          ],
+          [
+            99,
+            74.4
+          ],
+          [
+            102.0,
+            74.7
+          ],
+          [
+            105.0,
+            75
+          ]
+        ],
+        "source_lower": [
+          [
+            93.0,
+            75
+          ],
+          [
+            96.0,
+            74.6
+          ],
+          [
+            99,
+            74.4
+          ],
+          [
+            102.0,
+            74.7
+          ],
+          [
+            105.0,
+            75
+          ]
+        ],
+        "open_upper": [
+          [
+            93.0,
+            75
+          ],
+          [
+            96.0,
+            74.14999999999999
+          ],
+          [
+            99,
+            73.75
+          ],
+          [
+            102.0,
+            74.25
+          ],
+          [
+            105.0,
+            75
+          ]
+        ],
+        "open_lower": [
+          [
+            93.0,
+            75
+          ],
+          [
+            96.0,
+            76.19999999999999
+          ],
+          [
+            99,
+            76.9
+          ],
+          [
+            102.0,
+            76.3
+          ],
+          [
+            105.0,
+            75
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.045
+      ],
+      "teeth": 0,
+      "status": "UNREVIEWED pilot measured on final accepted native cell; no runtime binding"
+    },
+    "right": {
+      "input": {
+        "file": "assets/tourists/towelWoman/character-atlas.png",
+        "sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+        "dimensions": [
+          1536,
+          3952
+        ]
+      },
+      "cell": [
+        192,
+        208
+      ],
+      "cellOriginPx": [
+        0,
+        208
+      ],
+      "centerPx": [
+        107,
+        286.5
+      ],
+      "axesPx": [
+        10,
+        0,
+        0,
+        3
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            102.0,
+            286.5
+          ],
+          [
+            104.5,
+            286.4
+          ],
+          [
+            107,
+            286.6
+          ],
+          [
+            109.5,
+            286.9
+          ],
+          [
+            112.0,
+            286.5
+          ]
+        ],
+        "source_upper": [
+          [
+            102.0,
+            286.5
+          ],
+          [
+            104.5,
+            286.4
+          ],
+          [
+            107,
+            286.6
+          ],
+          [
+            109.5,
+            286.9
+          ],
+          [
+            112.0,
+            286.5
+          ]
+        ],
+        "source_lower": [
+          [
+            102.0,
+            286.5
+          ],
+          [
+            104.5,
+            286.4
+          ],
+          [
+            107,
+            286.6
+          ],
+          [
+            109.5,
+            286.9
+          ],
+          [
+            112.0,
+            286.5
+          ]
+        ],
+        "open_upper": [
+          [
+            102.0,
+            286.5
+          ],
+          [
+            104.5,
+            285.95
+          ],
+          [
+            107,
+            285.95000000000005
+          ],
+          [
+            109.5,
+            286.45
+          ],
+          [
+            112.0,
+            286.5
+          ]
+        ],
+        "open_lower": [
+          [
+            102.0,
+            286.5
+          ],
+          [
+            104.5,
+            288.0
+          ],
+          [
+            107,
+            289.1
+          ],
+          [
+            109.5,
+            288.5
+          ],
+          [
+            112.0,
+            286.5
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.045
+      ],
+      "teeth": 0,
+      "status": "UNREVIEWED pilot measured on final accepted native cell; no runtime binding"
+    },
+    "left": {
+      "input": {
+        "file": "assets/tourists/towelWoman/character-atlas.png",
+        "sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+        "dimensions": [
+          1536,
+          3952
+        ]
+      },
+      "cell": [
+        192,
+        208
+      ],
+      "cellOriginPx": [
+        0,
+        624
+      ],
+      "centerPx": [
+        80,
+        700.5
+      ],
+      "axesPx": [
+        7,
+        0,
+        0,
+        2.5
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            76.5,
+            700.5
+          ],
+          [
+            78.25,
+            700.7
+          ],
+          [
+            80,
+            700.6
+          ],
+          [
+            81.75,
+            700.3
+          ],
+          [
+            83.5,
+            700.5
+          ]
+        ],
+        "source_upper": [
+          [
+            76.5,
+            700.5
+          ],
+          [
+            78.25,
+            700.7
+          ],
+          [
+            80,
+            700.6
+          ],
+          [
+            81.75,
+            700.3
+          ],
+          [
+            83.5,
+            700.5
+          ]
+        ],
+        "source_lower": [
+          [
+            76.5,
+            700.5
+          ],
+          [
+            78.25,
+            700.7
+          ],
+          [
+            80,
+            700.6
+          ],
+          [
+            81.75,
+            700.3
+          ],
+          [
+            83.5,
+            700.5
+          ]
+        ],
+        "open_upper": [
+          [
+            76.5,
+            700.5
+          ],
+          [
+            78.25,
+            700.25
+          ],
+          [
+            80,
+            699.95
+          ],
+          [
+            81.75,
+            699.8499999999999
+          ],
+          [
+            83.5,
+            700.5
+          ]
+        ],
+        "open_lower": [
+          [
+            76.5,
+            700.5
+          ],
+          [
+            78.25,
+            702.3000000000001
+          ],
+          [
+            80,
+            703.1
+          ],
+          [
+            81.75,
+            701.9
+          ],
+          [
+            83.5,
+            700.5
+          ]
+        ]
+      },
+      "width": [
+        0.025,
+        0.045
+      ],
+      "teeth": 0,
+      "status": "UNREVIEWED pilot measured on final accepted native cell; no runtime binding"
+    }
+  }
+}
