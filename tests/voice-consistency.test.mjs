@@ -162,7 +162,7 @@ test('failed fixed-voice integration leaves the complete playable catalogue unch
  const scratch=mkdtempSync(join(tmpdir(),'voice-sync-'));
  try{
   for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick','assets/voices/quiz-segments','assets/voices/traffic-dialogue','assets/voices/police-dialogue'])mkdirSync(join(scratch,folder),{recursive:true});
-  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','tools/curate-voice-library.mjs','tools/traffic4-license-evidence.mjs','tools/police8-continuation-evidence.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','tools/curate-voice-library.mjs','tools/traffic4-license-evidence.mjs','tools/police8-continuation-evidence.mjs','tools/police-contact-recordings.mjs','tools/police-contact-voice-source.mjs','tools/neighbor-punishment-reference.mjs','tools/neighbor-dialect-coverage.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
   for(const path of ['assets/voices/quiz-segments/quiz-german9-manifest.json','assets/voices/traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json','assets/voices/police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json']){
    writeFileSync(join(scratch,path),readFileSync(path));
    for(const clip of JSON.parse(readFileSync(path,'utf8')).clips)writeFileSync(join(scratch,clip.file),readFileSync(clip.file));

@@ -17,7 +17,7 @@ class GiselaIntegrationCandidate(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('gisela_candidate', SOURCE / 'build-integration-candidate.py')
         cls.builder = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.builder)
-        cls.folder = tempfile.TemporaryDirectory(prefix='gisela-candidate-', dir=ROOT / 'output/ambient-city-animation')
+        cls.folder = tempfile.TemporaryDirectory(prefix='gisela-candidate-')
         cls.output = Path(cls.folder.name)
         cls.result = cls.builder.build_candidate(cls.output)
 
