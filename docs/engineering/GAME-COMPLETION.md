@@ -2,6 +2,23 @@
 
 ## Active ambient-character animation goal — 2026-10-20
 
+Heike follow-up: Karl's independent mouth transport review exposed a published
+moving-lip axis transpose. All276 nonnull moving fits supplied row-major values
+where the shader expects tangentXY then normalXY. The two-line compiler/proof
+correction regenerates the source fragment and mouth data; body paint, standing
+fit, profiles, source rectangles, gait, pack geometry and recordings stay exact.
+The geometry regression failed6 subcases before correction and passes2 tests
+after; focused Node25/25 and actual-loader/shader378-slot desktop/mobile checks
+pass. Default native caption/quiz/return flows pass3/3 desktop and both Android
+emulations; independent same26-pin Camera/Physics reviews pass. Delivery rebuild
+check passes with unchanged body packs. Clean integration with published Inga99cd9ef
+passes57 focused Node checks,2 geometry tests, both378-slot GPU profiles, all3
+native caption profiles,31-page build and4 built root/3d desktop/mobile startup
+checks. Heike assets are byte-identical to the reviewed repair; Inga is preserved.
+The corrected fit does not admit private audio or establish listening/device evidence.
+Evidence:
+`output/ambient-city-animation/heike-lip-frame-fix-v1/`.
+
 Release integration closeout: the five ambient checkpoints, through Heike96378cb,
 are merged with published2c48edd in clean ambient-city-release. Combined Node
 2315/2315 (zero failures/skips), delivery Python12/12, crown test, curator and

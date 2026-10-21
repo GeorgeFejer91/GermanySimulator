@@ -130,7 +130,7 @@ def compile_cell(entry, source_cell, mapped):
         raise ValueError('Mouth-bearing field folded the connected lips')
     result = {'rect':[float(center_logical[0]/128),float(1-center_logical[1]/160),
                       float(np.linalg.norm(tangent)/128),float(np.linalg.norm(normal)/160)],
-              'axes':[float(tangent[0]),float(normal[0]),float(tangent[1]),float(normal[1])],
+              'axes':[float(tangent[0]),float(tangent[1]),float(normal[0]),float(normal[1])],
               'profile':copy.deepcopy(source_cell['profile'])}
     if not all(math.isfinite(v) for v in [*result['rect'],*result['axes']]):
         raise ValueError('Invalid logical mouth registration')
@@ -146,7 +146,7 @@ def transport_proof(entry, field, expected_hash, compiled_cell):
     working_points = field_map(field,expected_hash)(source_points)
     logical_points = np.asarray([logical(point) for point in working_points])
     expected_axes = np.stack([logical_points[3]-logical_points[0],logical_points[4]-logical_points[0]],axis=1)
-    assert np.allclose(expected_axes.flatten(),np.asarray(compiled_cell['axes']),atol=1e-10)
+    assert np.allclose(expected_axes.T.flatten(),np.asarray(compiled_cell['axes']),atol=1e-10)
     return {'sourceWorking':source_points.tolist(),'warpedWorking':working_points.tolist(),
         'logical':logical_points.tolist(),'centerDeltaWorking':(working_points[0]-center).tolist(),
         'axesLogical':expected_axes.T.tolist(),'field':field}
