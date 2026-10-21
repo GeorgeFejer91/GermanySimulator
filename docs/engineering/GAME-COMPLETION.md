@@ -1,6 +1,47 @@
 # Germany Simulator completion goal
 
+Irmgard Aktenstapel is admitted in the validated release candidate with her own
+364-cell walking/bridge/turn/phase-stop/gesture source,276 visible moving mouths
+and unchanged standing128x160/pivot64,150/world1.6. Native25.57 stride/contact has
+independent Physics support with explicit16-pose/pixel residuals; all12 targeted
+native stops pass, and added side stances close the earlier visibility gap.
+Desktop/Android-portrait GPU378-slot checks pass with276 exact closures. Existing
+Germany01/02 and Berlin04 retain exact text/profile/actor ownership; missing
+Berlin03 retains captions. Recorded E-dialogue holds the physical root. Actual
+MAIN encounters pass3/3; staged Berlin paths pass3/3. These are silent emulated
+checks, without physical-device or perceptual-listening claims.
+
+Clean release:2386/2386 Node checks,29 focused adoption checks,12 delivery Python
+checks, deterministic own delivery rebuild, curator,31-page build and built
+root/3d desktop/Android startup4/4 pass. Source/pack independent review40dadeb0
+and Camera reviewfc06cee5 pass; final Physics/Camera share102-pin freeze91aaa72b.
+The manifest is242728 bytes, own entry only changed,42 other entries raw-exact.
+There are35 scoped standing-only identities in this candidate; the full42 goal
+remains active. Publication and public verification are the next integrator step.
+
+Shared Git metadata was externally renamed into name-clash paths during this
+increment: missing config/refs and invalid unrelated snapshot refs prevented a
+normal fetch. The owned source branch was restored to its exact6ef0327 checkpoint.
+Release uses isolated ignored Git metadata fetched from published57b1446, with a
+read-only alternate for existing objects; primary files, conflict metadata and
+unrelated dirty source/object-QA/pre-commit-hook changes are preserved. No broad
+Git repair, force push or cleanup was performed.
+
+
 ## Active ambient-character animation goal — 2026-10-20
+
+Karl-Heinz Post is published and live verified as57b1446 on149a212. Pages run
+39555580324 succeeded; public root/3d desktop/Android-portrait startup and14-file
+identity checks pass4/4. The clean release passes2383 Node tests,12 delivery Python
+checks, exact pack rebuild, curator, native personal dialogue6/6 and independent
+same63-pin Physics/Camera reviews. Recorded speech uses existing exact owned
+clips; Berlin retains captions where a matching clip is absent. Quiet mobile bite
+quantization, staged/natural, listening and physical-device limits stay explicit.
+Source worktree is now6ef0327 after merging the release; shared dirty source and
+object-QA bytes are preserved. There are36 scoped standing-only identities; the
+full42-character goal remains active. Next increment: Irmgard Aktenstapel plan
+`docs/superpowers/plans/2026-10-21-irmgard-aktenstapel-ambient-animation.md`.
+Publication evidence lives in clean release `output/karl-post-release-v1/`.
 
 Heike follow-up: Karl's independent mouth transport review exposed a published
 moving-lip axis transpose. All276 nonnull moving fits supplied row-major values

@@ -1,0 +1,686 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "familyId": "stadt-irmgard-aktenstapel",
+  "sourceSpecPath": "assets/sprite-sources/street-residents/motion-spec.json",
+  "sourceSpecSha256": "6282d4002d4b9e6a8a70d0f656c5a8bb7d36d165023cc4e2152e4ff8ef1ac564",
+  "standing": {
+    "manifestPath": "assets/characters/street/manifest.json",
+    "manifestSha256": "cf7c7511e77fcb923eabce6486d363b1588b4a8849e029807f4d15cef57810da",
+    "path": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+    "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e",
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136,
+    "figureWorldHeight": 1.6
+  },
+  "probe": {
+    "workingCell": [
+      512,
+      512
+    ],
+    "workingFigureHeight": 400,
+    "workingBaseline": 472,
+    "phaseIndices": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "phaseCount": 16,
+    "directions": [
+      "down",
+      "right",
+      "up",
+      "left"
+    ],
+    "turnCount": 8,
+    "directExports": [
+      {
+        "cell": [
+          96,
+          120
+        ],
+        "pivot": [
+          48,
+          112.5
+        ],
+        "figureHeight": 102
+      },
+      {
+        "cell": [
+          64,
+          80
+        ],
+        "pivot": [
+          32,
+          75
+        ],
+        "figureHeight": 68
+      }
+    ],
+    "cycleDistanceStatus": "source-field fit only; 32 is not admitted",
+    "heldAtlasPivot": [
+      64,
+      148
+    ]
+  },
+  "person": {
+    "actorId": "city-irmgard-aktenstapel",
+    "source": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+    "sourceSha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50",
+    "scale": 0.5797101449275363,
+    "views": {
+      "down": {
+        "component_bounds": [
+          100,
+          15,
+          516,
+          701
+        ],
+        "source_pivot": [
+          315.5,
+          701
+        ],
+        "landmarks": {
+          "waist": 505.49,
+          "hip": 539.79,
+          "hem": [
+            610,
+            610
+          ],
+          "knee": [
+            638,
+            638
+          ],
+          "sock": [
+            657,
+            657
+          ],
+          "ankle": [
+            660,
+            660
+          ],
+          "mid": 315.5,
+          "centres": [
+            240.62,
+            390.38
+          ],
+          "split_path_xy": [
+            [
+              315.5,
+              539.79
+            ],
+            [
+              315.5,
+              701
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 7,
+          "depth_knee_follow": 0.8
+        },
+        "foreground": 1,
+        "protected_polygons": [],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "gait_strength": 0.6
+      },
+      "right": {
+        "component_bounds": [
+          126,
+          17,
+          430,
+          494
+        ],
+        "source_pivot": [
+          280.5,
+          494
+        ],
+        "landmarks": {
+          "waist": 355,
+          "hip": 375,
+          "hem": [
+            391,
+            391
+          ],
+          "knee": [
+            402,
+            402
+          ],
+          "ankle": [
+            414,
+            414
+          ],
+          "sock": [
+            411,
+            411
+          ],
+          "mid": 280,
+          "centres": [
+            215,
+            345
+          ],
+          "split_path_xy": [
+            [
+              280,
+              375
+            ],
+            [
+              280,
+              494
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 32,
+          "lateral_lift": 5,
+          "root_overlap": 2
+        },
+        "foreground": 0,
+        "protected_polygons": [],
+        "fitStatus": "candidate; own complete profile legs, correctly ordered foreground, hidden root overlap; all16sourceframes reviewed light/dark; exact encoded/transition gate outstanding",
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "scale": 0.8368200836820083,
+        "rest_centres": [
+          [
+            188,
+            185,
+            180
+          ],
+          [
+            340,
+            345,
+            350
+          ]
+        ],
+        "rest_targets_working": [
+          [
+            223.59414225941424,
+            221.0836820083682,
+            216.89958158995816
+          ],
+          [
+            260.79079497907946,
+            264.9748953974895,
+            269.15899581589963
+          ]
+        ],
+        "rest_root_translation": true,
+        "originalUpper": {
+          "component_bounds": [
+            681,
+            15,
+            1010,
+            705
+          ],
+          "source_pivot": [
+            859.0,
+            705
+          ],
+          "landmarks": {
+            "waist": 508.35,
+            "hip": 542.85,
+            "hem": [
+              601.5,
+              601.5
+            ],
+            "knee": [
+              625.65,
+              625.65
+            ],
+            "sock": [
+              653.7,
+              653.7
+            ],
+            "ankle": [
+              656.7,
+              656.7
+            ],
+            "mid": 859.0,
+            "centres": [
+              799.78,
+              918.22
+            ],
+            "split_path_xy": [
+              [
+                914.5899999999999,
+                542.85
+              ],
+              [
+                914.5899999999999,
+                656.7
+              ],
+              [
+                980.39,
+                670.5
+              ],
+              [
+                996.8399999999999,
+                705
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "cutSourceY": 614,
+          "featherWorkingPixels": 0
+        },
+        "upper_motion": {
+          "bob": 3,
+          "sway": 3,
+          "head_counter": 0.2,
+          "headBaseSourceY": 311.7,
+          "waistSourceY": 497.99999999999994
+        },
+        "stride_curve": "planted",
+        "sole_points_xy": [
+          [
+            207,
+            489
+          ],
+          [
+            337,
+            490
+          ]
+        ],
+        "shoe_length_source_px": 106.0,
+        "leg_sources": [
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/complete-profile-legs-candidate.png",
+            "sourceSha256": "dbb398695ff87668bc9eed79bac9d8079d5fbc2d84de1904b0f8242cf2b79487",
+            "component_bounds": [
+              88,
+              194,
+              499,
+              597
+            ],
+            "source_pivot": [
+              350.5,
+              597
+            ],
+            "scale": 0.235,
+            "offset_x": -17,
+            "sole_point_xy": [
+              328,
+              592
+            ],
+            "shoe_length_source_px": 409
+          },
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/complete-profile-legs-candidate.png",
+            "sourceSha256": "dbb398695ff87668bc9eed79bac9d8079d5fbc2d84de1904b0f8242cf2b79487",
+            "component_bounds": [
+              680,
+              203,
+              1052,
+              576
+            ],
+            "source_pivot": [
+              768.5,
+              575
+            ],
+            "scale": 0.235,
+            "offset_x": 19,
+            "sole_point_xy": [
+              741,
+              571
+            ],
+            "shoe_length_source_px": 370
+          }
+        ]
+      },
+      "up": {
+        "component_bounds": [
+          1204,
+          15,
+          1614,
+          702
+        ],
+        "source_pivot": [
+          1401.0,
+          702
+        ],
+        "landmarks": {
+          "waist": 506.205,
+          "hip": 540.555,
+          "hem": [
+            610,
+            610
+          ],
+          "knee": [
+            638,
+            638
+          ],
+          "sock": [
+            657,
+            657
+          ],
+          "ankle": [
+            660,
+            660
+          ],
+          "mid": 1401.0,
+          "centres": [
+            1327.2,
+            1474.8
+          ],
+          "split_path_xy": [
+            [
+              1401.0,
+              540.555
+            ],
+            [
+              1401.0,
+              702
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 7,
+          "depth_knee_follow": 0.8
+        },
+        "foreground": 1,
+        "protected_polygons": [],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "gait_strength": 0.6
+      },
+      "left": {
+        "component_bounds": [
+          611,
+          20,
+          894,
+          495
+        ],
+        "source_pivot": [
+          748.0,
+          495
+        ],
+        "landmarks": {
+          "waist": 355,
+          "hip": 375,
+          "hem": [
+            391,
+            391
+          ],
+          "knee": [
+            402,
+            402
+          ],
+          "ankle": [
+            414,
+            414
+          ],
+          "sock": [
+            411,
+            411
+          ],
+          "mid": 755,
+          "centres": [
+            690,
+            820
+          ],
+          "split_path_xy": [
+            [
+              755,
+              375
+            ],
+            [
+              755,
+              495
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 32,
+          "lateral_lift": 5,
+          "root_overlap": 2
+        },
+        "foreground": 1,
+        "protected_polygons": [],
+        "fitStatus": "candidate; own complete profile legs, correctly ordered foreground, hidden root overlap; all16sourceframes reviewed light/dark; exact encoded/transition gate outstanding",
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "scale": 0.8368200836820083,
+        "rest_centres": [
+          [
+            680,
+            675,
+            670
+          ],
+          [
+            837,
+            840,
+            845
+          ]
+        ],
+        "rest_targets_working": [
+          [
+            244.09623430962347,
+            239.91213389121344,
+            235.72803347280342
+          ],
+          [
+            285.4769874476988,
+            287.98744769874486,
+            292.1715481171549
+          ]
+        ],
+        "rest_root_translation": true,
+        "originalUpper": {
+          "component_bounds": [
+            1784,
+            15,
+            2113,
+            705
+          ],
+          "source_pivot": [
+            1927.5,
+            705
+          ],
+          "landmarks": {
+            "waist": 508.35,
+            "hip": 542.85,
+            "hem": [
+              601.5,
+              601.5
+            ],
+            "knee": [
+              625.65,
+              625.65
+            ],
+            "sock": [
+              653.7,
+              653.7
+            ],
+            "ankle": [
+              656.7,
+              656.7
+            ],
+            "mid": 1927.5,
+            "centres": [
+              1868.28,
+              1986.72
+            ],
+            "split_path_xy": [
+              [
+                1879.41,
+                542.85
+              ],
+              [
+                1879.41,
+                656.7
+              ],
+              [
+                1813.61,
+                670.5
+              ],
+              [
+                1797.16,
+                705
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 12,
+            "root_overlap": 2
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+          "cutSourceY": 614,
+          "featherWorkingPixels": 0
+        },
+        "upper_motion": {
+          "bob": 3,
+          "sway": 3,
+          "head_counter": 0.2,
+          "headBaseSourceY": 311.7,
+          "waistSourceY": 497.99999999999994
+        },
+        "stride_curve": "planted",
+        "sole_points_xy": [
+          [
+            702,
+            491
+          ],
+          [
+            822,
+            488
+          ]
+        ],
+        "shoe_length_source_px": 104.5,
+        "leg_sources": [
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/complete-profile-legs-candidate.png",
+            "sourceSha256": "dbb398695ff87668bc9eed79bac9d8079d5fbc2d84de1904b0f8242cf2b79487",
+            "component_bounds": [
+              1660,
+              218,
+              2045,
+              581
+            ],
+            "source_pivot": [
+              1978.5,
+              581
+            ],
+            "scale": 0.235,
+            "offset_x": -17,
+            "sole_point_xy": [
+              1995,
+              576
+            ],
+            "shoe_length_source_px": 383
+          },
+          {
+            "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/complete-profile-legs-candidate.png",
+            "sourceSha256": "dbb398695ff87668bc9eed79bac9d8079d5fbc2d84de1904b0f8242cf2b79487",
+            "component_bounds": [
+              1132,
+              193,
+              1548,
+              588
+            ],
+            "source_pivot": [
+              1306.0,
+              587
+            ],
+            "scale": 0.235,
+            "offset_x": 7,
+            "sole_point_xy": [
+              1443,
+              582
+            ],
+            "shoe_length_source_px": 414
+          }
+        ]
+      }
+    },
+    "sourceBrief": "Elderly female with soft sagging square face, pale eyes, silver short tightly permed curls, large square pale-brown spectacles, no bun. Short broad hunched shoulders but complete connected spine. Moss-green rain cape with hood DOWN, faded lilac blouse, dark ankle-length compact skirt, broad brown boots. A SMALL thick grey file folder held under anatomical LEFT forearm, right empty. Weary closed mouth, dry resigned eyes.",
+    "status": "candidate-unapproved",
+    "turn_sources": [
+      {
+        "neutral": "down"
+      },
+      {
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "component_bounds": [
+          1121,
+          19,
+          1395,
+          497
+        ],
+        "source_pivot": [
+          1268.5,
+          497
+        ],
+        "scale": 0.8368200836820083
+      },
+      {
+        "neutral": "right"
+      },
+      {
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "component_bounds": [
+          123,
+          521,
+          384,
+          991
+        ],
+        "source_pivot": [
+          266.5,
+          991
+        ],
+        "scale": 0.8368200836820083
+      },
+      {
+        "neutral": "up"
+      },
+      {
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "component_bounds": [
+          633,
+          524,
+          897,
+          993
+        ],
+        "source_pivot": [
+          754.0,
+          993
+        ],
+        "scale": 0.8368200836820083
+      },
+      {
+        "neutral": "left"
+      },
+      {
+        "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+        "sourceSha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+        "component_bounds": [
+          1144,
+          521,
+          1396,
+          995
+        ],
+        "source_pivot": [
+          1258.5,
+          995
+        ],
+        "scale": 0.8368200836820083
+      }
+    ],
+    "cycle_distance": 32,
+    "cycleDistanceStatus": "source-field stance fit; exact-export marks and independent runtime/down-up planting remain pending"
+  }
+}

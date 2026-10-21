@@ -399,6 +399,13 @@ His source bindings and authoring recipes are under
 `assets/sprite-sources/resident-motion/stadt-karl-heinz-post/`. Speech uses his
 existing selected voice recordings and their measured mouth tracks.
 
+Irmgard Aktenstapel's named open-city walking, phase-owned stops, free-right-hand
+gesture and source-bound mouths use her original project paint and own ImageGen
+profile/leg sources. Her grey file stays on her left forearm. Source bindings and
+recipes are under `assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/`.
+Speech uses her existing exact selected recordings and40Hz mouth-energy tracks;
+missing regional recordings retain captions.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

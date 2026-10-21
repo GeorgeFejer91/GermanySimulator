@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved; native fitting and exactallframereviewrequired",
+  "tool": "image_gen.imagegen built-in",
+  "toolOutput": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a159fb-e568-79f3-967b-f4749d5266ef\\exec-94e94dfb-d71e-47fd-a8a1-59776350d6ee.png",
+  "reference": {
+    "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/motion-poses-candidate.png",
+    "sha256": "efba4b3925b2f80e18e23c20135197c2372324aa21e4b1d0ce529ab333f84d55",
+    "role": "own boot materials/identity/proportions"
+  },
+  "prompt": {
+    "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/leg-components-prompt.txt",
+    "sha256": "71102b74cd45278eda1f6a194e5d9dea81f4fb923be573d4c3d6aceb75337610"
+  },
+  "output": {
+    "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/complete-profile-legs-candidate.png",
+    "sha256": "dbb398695ff87668bc9eed79bac9d8079d5fbc2d84de1904b0f8242cf2b79487",
+    "size": [
+      2172,
+      724
+    ]
+  },
+  "components": {
+    "right-near": [
+      88,
+      194,
+      499,
+      597
+    ],
+    "right-far": [
+      680,
+      203,
+      1052,
+      576
+    ],
+    "left-near": [
+      1132,
+      193,
+      1548,
+      588
+    ],
+    "left-far": [
+      1660,
+      218,
+      2045,
+      581
+    ]
+  },
+  "observations": [
+    "Complete connected boot/stocking roots; no skirt fragments or detached soles in supplied source.",
+    "Original profile source had skirt pixels assigned to lower limbs; their horizontal remnants survive at intermediates despite four-extreme probes. Connected garment fitting improved but did not fully repair this ownership.",
+    "New own limb layers are an unapproved fitting candidate, never automatically adopt because structural guards pass."
+  ]
+}

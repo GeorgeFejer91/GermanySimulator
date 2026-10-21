@@ -1,0 +1,1571 @@
+{
+  "schemaVersion": 1,
+  "status": "Own neutral source lip candidate; CPU only, independent review pending",
+  "inputHashes": {
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.json": "bb62ccadb4298a21b56f5e77f4248af40e9779b5b18094d5ae533d4f97aba00c",
+    "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e",
+    "tools/build-street-mouths.py": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/walk-source.json": "98e7f1a541ca231dab39bd64f11273e5736124954a4c921ea94f613103029e7b",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/walk-source-mobile.webp": "a56c45e9da7e2e15711841880ba5d7de29c5f071f5f25ce68a93fa64dbdd17e9",
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/fit-source-mouths.py": "75d8ea86222e8d681a7530da6a93327e00992e318451d3d26322f87994737ba4",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-0.png": "f4aebee3b8c84bc70671e13c0d7f188807ae97a06ce07f8c1fafcffd0d7dd5cc",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-1.png": "b6195b16d6243ce65366534af5c48ad63e6bf7001dd52c7402e270fa04709b61",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-2.png": "93d08fcc449c8da8f92768be80f663109066026ab0dee802381e9b059f90c7ce",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-3.png": "261c8db2367fdcec5ca2d2bf0718a76d60569803e2753909a74932fecdb316fb",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-4.png": "e44347f7d22ed484bd1dd051774872586b3990a32a979e6f979ff54c5751f60f",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-5.png": "5d167598cff272cb17632db7f9bf83ce232ed6cdfd80b0a162e40732741c904d",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-6.png": "88a5305de5ea201c6298186ea2f72d8ea8fab1e0c781bf7e904ee373e273ea91",
+    "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-7.png": "012a91e7f7f4fb4e82e18736540a49b96310bda7bd786d353c1c4e8770a8a04d"
+  },
+  "registrations": {
+    "down": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        264.0,
+        195.8
+      ],
+      "axesPx": [
+        40,
+        0,
+        0,
+        7
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "coordinateSystem": "Own native source pixels, +X right, +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            244.0,
+            196.5
+          ],
+          [
+            254.0,
+            195.7
+          ],
+          [
+            264.0,
+            195.4
+          ],
+          [
+            274.0,
+            195.7
+          ],
+          [
+            284.0,
+            196.5
+          ]
+        ],
+        "source_upper": [
+          [
+            244.0,
+            196.5
+          ],
+          [
+            254.0,
+            195.7
+          ],
+          [
+            264.0,
+            195.4
+          ],
+          [
+            274.0,
+            195.7
+          ],
+          [
+            284.0,
+            196.5
+          ]
+        ],
+        "source_lower": [
+          [
+            244.0,
+            196.5
+          ],
+          [
+            254.0,
+            195.7
+          ],
+          [
+            264.0,
+            195.4
+          ],
+          [
+            274.0,
+            195.7
+          ],
+          [
+            284.0,
+            196.5
+          ]
+        ],
+        "open_upper": [
+          [
+            244.0,
+            196.5
+          ],
+          [
+            254.0,
+            195.1
+          ],
+          [
+            264.0,
+            194.6
+          ],
+          [
+            274.0,
+            195.1
+          ],
+          [
+            284.0,
+            196.5
+          ]
+        ],
+        "open_lower": [
+          [
+            244.0,
+            196.5
+          ],
+          [
+            254.0,
+            198.2
+          ],
+          [
+            264.0,
+            199.2
+          ],
+          [
+            274.0,
+            198.2
+          ],
+          [
+            284.0,
+            196.5
+          ]
+        ]
+      },
+      "width": [
+        0.02,
+        0.13
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip; CPU source candidate",
+        "observation": "Front mouth red ridge above a closed dark crease; attached downturn at both corners."
+      }
+    },
+    "front-right": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        786.0,
+        195.6
+      ],
+      "axesPx": [
+        34,
+        -0.4,
+        0,
+        7
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        512,
+        0
+      ],
+      "coordinateSystem": "Own native source pixels, +X right, +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            769.5,
+            196.3
+          ],
+          [
+            777.5,
+            195.5
+          ],
+          [
+            786.0,
+            195.0
+          ],
+          [
+            794.5,
+            195.3
+          ],
+          [
+            803.0,
+            196.2
+          ]
+        ],
+        "source_upper": [
+          [
+            769.5,
+            196.3
+          ],
+          [
+            777.5,
+            195.5
+          ],
+          [
+            786.0,
+            195.0
+          ],
+          [
+            794.5,
+            195.3
+          ],
+          [
+            803.0,
+            196.2
+          ]
+        ],
+        "source_lower": [
+          [
+            769.5,
+            196.3
+          ],
+          [
+            777.5,
+            195.5
+          ],
+          [
+            786.0,
+            195.0
+          ],
+          [
+            794.5,
+            195.3
+          ],
+          [
+            803.0,
+            196.2
+          ]
+        ],
+        "open_upper": [
+          [
+            769.5,
+            196.3
+          ],
+          [
+            777.5,
+            195.0
+          ],
+          [
+            786.0,
+            194.3
+          ],
+          [
+            794.5,
+            194.8
+          ],
+          [
+            803.0,
+            196.2
+          ]
+        ],
+        "open_lower": [
+          [
+            769.5,
+            196.3
+          ],
+          [
+            777.5,
+            197.7
+          ],
+          [
+            786.0,
+            198.3
+          ],
+          [
+            794.5,
+            197.5
+          ],
+          [
+            803.0,
+            196.2
+          ]
+        ]
+      },
+      "width": [
+        0.02,
+        0.13
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip; CPU source candidate",
+        "observation": "Three-quarter closed crease under the nose; no separate cavity or teeth."
+      }
+    },
+    "right": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1336.0,
+        191.4
+      ],
+      "axesPx": [
+        17,
+        -2.3,
+        0,
+        5.5
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1024,
+        0
+      ],
+      "coordinateSystem": "Own native source pixels, +X right, +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1327.5,
+            192.4
+          ],
+          [
+            1332.0,
+            191.8
+          ],
+          [
+            1336.0,
+            191.3
+          ],
+          [
+            1340.5,
+            190.8
+          ],
+          [
+            1344.5,
+            190.1
+          ]
+        ],
+        "source_upper": [
+          [
+            1327.5,
+            192.4
+          ],
+          [
+            1332.0,
+            191.8
+          ],
+          [
+            1336.0,
+            191.3
+          ],
+          [
+            1340.5,
+            190.8
+          ],
+          [
+            1344.5,
+            190.1
+          ]
+        ],
+        "source_lower": [
+          [
+            1327.5,
+            192.4
+          ],
+          [
+            1332.0,
+            191.8
+          ],
+          [
+            1336.0,
+            191.3
+          ],
+          [
+            1340.5,
+            190.8
+          ],
+          [
+            1344.5,
+            190.1
+          ]
+        ],
+        "open_upper": [
+          [
+            1327.5,
+            192.4
+          ],
+          [
+            1332.0,
+            191.5
+          ],
+          [
+            1336.0,
+            190.8
+          ],
+          [
+            1340.5,
+            190.4
+          ],
+          [
+            1344.5,
+            190.1
+          ]
+        ],
+        "open_lower": [
+          [
+            1327.5,
+            192.4
+          ],
+          [
+            1332.0,
+            193.6
+          ],
+          [
+            1336.0,
+            194.3
+          ],
+          [
+            1340.5,
+            192.8
+          ],
+          [
+            1344.5,
+            190.1
+          ]
+        ]
+      },
+      "width": [
+        0.012,
+        0.1
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip; CPU source candidate",
+        "observation": "Profile crease ends before the actual facial silhouette; restrained side opening."
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1230.0,
+        703.2
+      ],
+      "axesPx": [
+        16,
+        2.4,
+        0,
+        5.5
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1024,
+        512
+      ],
+      "coordinateSystem": "Own native source pixels, +X right, +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1222.0,
+            702.1
+          ],
+          [
+            1226.0,
+            702.5
+          ],
+          [
+            1230.0,
+            703.1
+          ],
+          [
+            1234.0,
+            703.8
+          ],
+          [
+            1238.0,
+            704.5
+          ]
+        ],
+        "source_upper": [
+          [
+            1222.0,
+            702.1
+          ],
+          [
+            1226.0,
+            702.5
+          ],
+          [
+            1230.0,
+            703.1
+          ],
+          [
+            1234.0,
+            703.8
+          ],
+          [
+            1238.0,
+            704.5
+          ]
+        ],
+        "source_lower": [
+          [
+            1222.0,
+            702.1
+          ],
+          [
+            1226.0,
+            702.5
+          ],
+          [
+            1230.0,
+            703.1
+          ],
+          [
+            1234.0,
+            703.8
+          ],
+          [
+            1238.0,
+            704.5
+          ]
+        ],
+        "open_upper": [
+          [
+            1222.0,
+            702.1
+          ],
+          [
+            1226.0,
+            702.1
+          ],
+          [
+            1230.0,
+            702.6
+          ],
+          [
+            1234.0,
+            703.5
+          ],
+          [
+            1238.0,
+            704.5
+          ]
+        ],
+        "open_lower": [
+          [
+            1222.0,
+            702.1
+          ],
+          [
+            1226.0,
+            704.5
+          ],
+          [
+            1230.0,
+            706.1
+          ],
+          [
+            1234.0,
+            705.6
+          ],
+          [
+            1238.0,
+            704.5
+          ]
+        ]
+      },
+      "width": [
+        0.012,
+        0.1
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip; CPU source candidate",
+        "observation": "Mirrored facing uses its own asymmetric painted cheek and lip, not a flipped right fit."
+      }
+    },
+    "front-left": {
+      "input": {
+        "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+        "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+        "dimensions": [
+          2048,
+          1024
+        ]
+      },
+      "centerPx": [
+        1759.0,
+        710.5
+      ],
+      "axesPx": [
+        25,
+        0.6,
+        0,
+        6.5
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        1536,
+        512
+      ],
+      "coordinateSystem": "Own native source pixels, +X right, +Y down",
+      "contoursPx": {
+        "crease": [
+          [
+            1747.0,
+            710.8
+          ],
+          [
+            1752.5,
+            710.4
+          ],
+          [
+            1758.5,
+            710.1
+          ],
+          [
+            1765.0,
+            710.6
+          ],
+          [
+            1772.0,
+            711.4
+          ]
+        ],
+        "source_upper": [
+          [
+            1747.0,
+            710.8
+          ],
+          [
+            1752.5,
+            710.4
+          ],
+          [
+            1758.5,
+            710.1
+          ],
+          [
+            1765.0,
+            710.6
+          ],
+          [
+            1772.0,
+            711.4
+          ]
+        ],
+        "source_lower": [
+          [
+            1747.0,
+            710.8
+          ],
+          [
+            1752.5,
+            710.4
+          ],
+          [
+            1758.5,
+            710.1
+          ],
+          [
+            1765.0,
+            710.6
+          ],
+          [
+            1772.0,
+            711.4
+          ]
+        ],
+        "open_upper": [
+          [
+            1747.0,
+            710.8
+          ],
+          [
+            1752.5,
+            710.0
+          ],
+          [
+            1758.5,
+            709.5
+          ],
+          [
+            1765.0,
+            710.2
+          ],
+          [
+            1772.0,
+            711.4
+          ]
+        ],
+        "open_lower": [
+          [
+            1747.0,
+            710.8
+          ],
+          [
+            1752.5,
+            712.3
+          ],
+          [
+            1758.5,
+            713.1
+          ],
+          [
+            1765.0,
+            712.6
+          ],
+          [
+            1772.0,
+            711.4
+          ]
+        ]
+      },
+      "width": [
+        0.02,
+        0.13
+      ],
+      "teeth": 0,
+      "fitEvidence": {
+        "status": "Manually inspected own painted lip; CPU source candidate",
+        "observation": "Own front-left downturn and cheek; no visible pre-open cavity or teeth."
+      }
+    }
+  },
+  "standingRegistration": {
+    "input": {
+      "file": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+      "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e",
+      "dimensions": [
+        128,
+        160
+      ]
+    },
+    "centerPx": [
+      70.0,
+      55.6
+    ],
+    "axesPx": [
+      12.5,
+      0,
+      0,
+      2.3
+    ],
+    "cell": [
+      128,
+      160
+    ],
+    "cellOriginPx": [
+      0,
+      0
+    ],
+    "coordinateSystem": "Own native source pixels, +X right, +Y down",
+    "contoursPx": {
+      "crease": [
+        [
+          63.5,
+          56.0
+        ],
+        [
+          66.5,
+          55.6
+        ],
+        [
+          70.0,
+          55.4
+        ],
+        [
+          73.0,
+          55.6
+        ],
+        [
+          76.0,
+          56.0
+        ]
+      ],
+      "source_upper": [
+        [
+          63.5,
+          56.0
+        ],
+        [
+          66.5,
+          55.6
+        ],
+        [
+          70.0,
+          55.4
+        ],
+        [
+          73.0,
+          55.6
+        ],
+        [
+          76.0,
+          56.0
+        ]
+      ],
+      "source_lower": [
+        [
+          63.5,
+          56.0
+        ],
+        [
+          66.5,
+          55.6
+        ],
+        [
+          70.0,
+          55.4
+        ],
+        [
+          73.0,
+          55.6
+        ],
+        [
+          76.0,
+          56.0
+        ]
+      ],
+      "open_upper": [
+        [
+          63.5,
+          56.0
+        ],
+        [
+          66.5,
+          55.45
+        ],
+        [
+          70.0,
+          55.2
+        ],
+        [
+          73.0,
+          55.45
+        ],
+        [
+          76.0,
+          56.0
+        ]
+      ],
+      "open_lower": [
+        [
+          63.5,
+          56.0
+        ],
+        [
+          66.5,
+          56.5
+        ],
+        [
+          70.0,
+          56.9
+        ],
+        [
+          73.0,
+          56.5
+        ],
+        [
+          76.0,
+          56.0
+        ]
+      ]
+    },
+    "width": [
+      0.02,
+      0.13
+    ],
+    "teeth": 0,
+    "fitEvidence": {
+      "status": "Manually inspected own painted lip; CPU source candidate",
+      "observation": "Direct published 128x160 standing lip pixels; red closed line, no visible teeth."
+    }
+  },
+  "compiledSourceCells": {
+    "down": {
+      "rect": [
+        0.515625,
+        0.617578125,
+        0.078125,
+        0.013671875
+      ],
+      "axes": [
+        40,
+        0,
+        0,
+        7
+      ],
+      "profile": {
+        "crease": [
+          0.1,
+          -0.01428571,
+          -0.05714286,
+          -0.01428571,
+          0.1
+        ],
+        "open_upper": [
+          0.1,
+          -0.1,
+          -0.17142857,
+          -0.1,
+          0.1
+        ],
+        "open_lower": [
+          0.1,
+          0.34285714,
+          0.48571429,
+          0.34285714,
+          0.1
+        ],
+        "source_upper": [
+          0.1,
+          -0.01428571,
+          -0.05714286,
+          -0.01428571,
+          0.1
+        ],
+        "source_lower": [
+          0.1,
+          -0.01428571,
+          -0.05714286,
+          -0.01428571,
+          0.1
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.13
+        ],
+        "teeth": 0
+      }
+    },
+    "front-right": {
+      "rect": [
+        0.53515625,
+        0.61796875,
+        0.06641084542922941,
+        0.013671875
+      ],
+      "axes": [
+        34,
+        -0.4,
+        0,
+        7
+      ],
+      "profile": {
+        "crease": [
+          0.07226891,
+          -0.02857143,
+          -0.08571429,
+          -0.02857143,
+          0.11428571
+        ],
+        "open_upper": [
+          0.07226891,
+          -0.1,
+          -0.18571429,
+          -0.1,
+          0.11428571
+        ],
+        "open_lower": [
+          0.07226891,
+          0.28571429,
+          0.38571429,
+          0.28571429,
+          0.11428571
+        ],
+        "source_upper": [
+          0.07226891,
+          -0.02857143,
+          -0.08571429,
+          -0.02857143,
+          0.11428571
+        ],
+        "source_lower": [
+          0.07226891,
+          -0.02857143,
+          -0.08571429,
+          -0.02857143,
+          0.11428571
+        ],
+        "corners": [
+          -0.48529412,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.13
+        ],
+        "teeth": 0
+      }
+    },
+    "right": {
+      "rect": [
+        0.609375,
+        0.626171875,
+        0.03350563024777748,
+        0.0107421875
+      ],
+      "axes": [
+        17,
+        -2.3,
+        0,
+        5.5
+      ],
+      "profile": {
+        "crease": [
+          -0.02727273,
+          -0.02566845,
+          -0.01818182,
+          0.00160428,
+          -0.02727273
+        ],
+        "open_upper": [
+          -0.02727273,
+          -0.0802139,
+          -0.10909091,
+          -0.07112299,
+          -0.02727273
+        ],
+        "open_lower": [
+          -0.02727273,
+          0.30160428,
+          0.52727273,
+          0.36524064,
+          -0.02727273
+        ],
+        "source_upper": [
+          -0.02727273,
+          -0.02566845,
+          -0.01818182,
+          0.00160428,
+          -0.02727273
+        ],
+        "source_lower": [
+          -0.02727273,
+          -0.02566845,
+          -0.01818182,
+          0.00160428,
+          -0.02727273
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.012,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "rect": [
+        0.40234375,
+        0.6265624999999999,
+        0.03159960690024482,
+        0.0107421875
+      ],
+      "axes": [
+        16,
+        2.4,
+        0,
+        5.5
+      ],
+      "profile": {
+        "crease": [
+          0.01818182,
+          -0.01818182,
+          -0.01818182,
+          -0.0,
+          0.01818182
+        ],
+        "open_upper": [
+          0.01818182,
+          -0.09090909,
+          -0.10909091,
+          -0.05454545,
+          0.01818182
+        ],
+        "open_lower": [
+          0.01818182,
+          0.34545455,
+          0.52727273,
+          0.32727273,
+          0.01818182
+        ],
+        "source_upper": [
+          0.01818182,
+          -0.01818182,
+          -0.01818182,
+          -0.0,
+          0.01818182
+        ],
+        "source_lower": [
+          0.01818182,
+          -0.01818182,
+          -0.01818182,
+          -0.0,
+          0.01818182
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.012,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-left": {
+      "rect": [
+        0.435546875,
+        0.6123046875,
+        0.04884218547558299,
+        0.0126953125
+      ],
+      "axes": [
+        25,
+        0.6,
+        0,
+        6.5
+      ],
+      "profile": {
+        "crease": [
+          0.09046154,
+          0.00861538,
+          -0.05969231,
+          -0.00676923,
+          0.09046154
+        ],
+        "open_upper": [
+          0.09046154,
+          -0.05292308,
+          -0.152,
+          -0.06830769,
+          0.09046154
+        ],
+        "open_lower": [
+          0.09046154,
+          0.30092308,
+          0.40184615,
+          0.30092308,
+          0.09046154
+        ],
+        "source_upper": [
+          0.09046154,
+          0.00861538,
+          -0.05969231,
+          -0.00676923,
+          0.09046154
+        ],
+        "source_lower": [
+          0.09046154,
+          0.00861538,
+          -0.05969231,
+          -0.00676923,
+          0.09046154
+        ],
+        "corners": [
+          -0.48,
+          0.52
+        ],
+        "width": [
+          0.02,
+          0.13
+        ],
+        "teeth": 0
+      }
+    }
+  },
+  "compiledStanding": {
+    "rect": [
+      0.546875,
+      0.6525,
+      0.09765625,
+      0.014374999999999999
+    ],
+    "axes": [
+      12.5,
+      0,
+      0,
+      2.3
+    ],
+    "profile": {
+      "crease": [
+        0.17391304,
+        0.0,
+        -0.08695652,
+        0.0,
+        0.17391304
+      ],
+      "open_upper": [
+        0.17391304,
+        -0.06521739,
+        -0.17391304,
+        -0.06521739,
+        0.17391304
+      ],
+      "open_lower": [
+        0.17391304,
+        0.39130435,
+        0.56521739,
+        0.39130435,
+        0.17391304
+      ],
+      "source_upper": [
+        0.17391304,
+        0.0,
+        -0.08695652,
+        0.0,
+        0.17391304
+      ],
+      "source_lower": [
+        0.17391304,
+        0.0,
+        -0.08695652,
+        0.0,
+        0.17391304
+      ],
+      "corners": [
+        -0.52,
+        0.48
+      ],
+      "width": [
+        0.02,
+        0.13
+      ],
+      "teeth": 0
+    }
+  },
+  "cpuChecks": {
+    "down": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 924
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 845
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 631
+      }
+    },
+    "front-right": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 768
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 706
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 504
+      }
+    },
+    "right": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 280
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 248
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 216
+      }
+    },
+    "left": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 254
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 226
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 187
+      }
+    },
+    "front-left": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 511
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 450
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 321
+      }
+    },
+    "standing": {
+      "inactive": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "owned-closed": {
+        "alphaExact": true,
+        "changedRgbPixels": 0
+      },
+      "max-open": {
+        "alphaExact": true,
+        "changedRgbPixels": 90
+      },
+      "round-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 86
+      },
+      "bite-approx": {
+        "alphaExact": true,
+        "changedRgbPixels": 59
+      }
+    }
+  },
+  "physicalPreviewChecks": {
+    "down": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 28,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 24,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 18,
+        "alphaExact": true
+      }
+    },
+    "front-right": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 20,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 18,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 14,
+        "alphaExact": true
+      }
+    },
+    "right": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 8,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 8,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 7,
+        "alphaExact": true
+      }
+    },
+    "left": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 5,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 5,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 4,
+        "alphaExact": true
+      }
+    },
+    "front-left": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 17,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 16,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 12,
+        "alphaExact": true
+      }
+    },
+    "standing": {
+      "inactive": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "owned-closed": {
+        "changedRgbPixels": 0,
+        "alphaExact": true
+      },
+      "max-open": {
+        "changedRgbPixels": 53,
+        "alphaExact": true
+      },
+      "round-approx": {
+        "changedRgbPixels": 46,
+        "alphaExact": true
+      },
+      "bite-approx": {
+        "changedRgbPixels": 35,
+        "alphaExact": true
+      }
+    }
+  },
+  "nullReasons": {
+    "rear-right": "Rear or rear-quarter source has no visible mouth",
+    "up": "Rear or rear-quarter source has no visible mouth",
+    "rear-left": "Rear or rear-quarter source has no visible mouth"
+  },
+  "limits": [
+    "Original mouths are closed creases without a visible source cavity or teeth; owned closure preserves the painted line.",
+    "Round and bite CPU previews approximate lower-aperture changes; width and contact shader cues remain unrun.",
+    "Mobile64 preview resamples 512 source with the existing exporter; standing64 is diagnostic LANCZOS from published 128. Neither is a GPU speech pass.",
+    "Working 512 fits and direct standing WebP are not transported through gait, GPU or media."
+  ]
+}

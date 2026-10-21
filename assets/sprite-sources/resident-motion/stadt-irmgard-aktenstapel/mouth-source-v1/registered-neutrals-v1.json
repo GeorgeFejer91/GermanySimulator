@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Exact own full-body eight-heading source lips; no runtime adoption",
+  "file": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/mouth-source-v1/registered-neutrals-v1.png",
+  "sha256": "63084b2c8767bec35df5c97599b1365b0b57f58674ffb884959d45c9cf88b81f",
+  "walkReceipt": {
+    "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/walk-source.json",
+    "sha256": "98e7f1a541ca231dab39bd64f11273e5736124954a4c921ea94f613103029e7b"
+  },
+  "standing": {
+    "file": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+    "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e"
+  },
+  "inputs": {
+    "down": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-0.png",
+      "sha256": "f4aebee3b8c84bc70671e13c0d7f188807ae97a06ce07f8c1fafcffd0d7dd5cc",
+      "cellOriginPx": [
+        0,
+        0
+      ]
+    },
+    "front-right": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-1.png",
+      "sha256": "b6195b16d6243ce65366534af5c48ad63e6bf7001dd52c7402e270fa04709b61",
+      "cellOriginPx": [
+        512,
+        0
+      ]
+    },
+    "right": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-2.png",
+      "sha256": "93d08fcc449c8da8f92768be80f663109066026ab0dee802381e9b059f90c7ce",
+      "cellOriginPx": [
+        1024,
+        0
+      ]
+    },
+    "rear-right": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-3.png",
+      "sha256": "261c8db2367fdcec5ca2d2bf0718a76d60569803e2753909a74932fecdb316fb",
+      "cellOriginPx": [
+        1536,
+        0
+      ]
+    },
+    "up": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-4.png",
+      "sha256": "e44347f7d22ed484bd1dd051774872586b3990a32a979e6f979ff54c5751f60f",
+      "cellOriginPx": [
+        0,
+        512
+      ]
+    },
+    "rear-left": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-5.png",
+      "sha256": "5d167598cff272cb17632db7f9bf83ce232ed6cdfd80b0a162e40732741c904d",
+      "cellOriginPx": [
+        512,
+        512
+      ]
+    },
+    "left": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-6.png",
+      "sha256": "88a5305de5ea201c6298186ea2f72d8ea8fab1e0c781bf7e904ee373e273ea91",
+      "cellOriginPx": [
+        1024,
+        512
+      ]
+    },
+    "front-left": {
+      "file": "output/ambient-city-animation/irmgard-aktenstapel-walk-source-v1/working/turn-7.png",
+      "sha256": "012a91e7f7f4fb4e82e18736540a49b96310bda7bd786d353c1c4e8770a8a04d",
+      "cellOriginPx": [
+        1536,
+        512
+      ]
+    }
+  },
+  "driverSha256": "04c29a4bc18df62b1aeb0aa6a9bef3643f94925e9859018c75770c6a3dac3da6"
+}

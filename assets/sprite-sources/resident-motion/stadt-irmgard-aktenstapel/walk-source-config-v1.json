@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "purpose": "Irmgard Aktenstapel own full walk, bridge and turn source; no stride or runtime approval",
+  "sourceFit": {
+    "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/source-fit-v1.json",
+    "sha256": "99f90043aac86958cdfa2fa81d220d03a68ff1b41912e845bbed9cae69eb293d"
+  },
+  "acceptedProbe": {
+    "path": "output/ambient-city-animation/irmgard-aktenstapel-motion-v1/independent-source-review/REVIEW.md",
+    "sha256": "f89f20c8b4bac72ef5fca1332757260cb4d447d2bda031be00b0452981325821",
+    "driverPath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/probe-source-v1.py",
+    "driverSha256": "3483ba7c8d2866dbf1faf89d4a186bb64f0d4dcb019afbb266804e4a92bc4ab9"
+  },
+  "layout": {
+    "grid": [16, 9],
+    "walkRows": ["down", "right", "up", "left"],
+    "bridgeRows": ["down", "right", "up", "left"],
+    "turnRow": 8
+  },
+  "variants": {
+    "desktop": {"cell": [96, 120], "figureHeight": 102, "pivot": [48, 112.5]},
+    "mobile": {"cell": [64, 80], "figureHeight": 68, "pivot": [32, 75]}
+  }
+}

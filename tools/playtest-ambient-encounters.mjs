@@ -151,7 +151,7 @@ function personalGameProbe(id,regionalCase){return `
  }
  function sample(){
   const speech=actor&&getStreetSpeech(actor),item=activeStimulus,clip=item?.recording&&speechCatalog.recordings[item.recording];
-  return{at:performance.now(),modal:state.modal,voiceOn:state.voiceOn,paused:!!window.GermanyHUD?.paused,
+  return{at:performance.now(),audio:audio?{state:audio.state,currentTime:audio.currentTime}:null,modal:state.modal,voiceOn:state.voiceOn,paused:!!window.GermanyHUD?.paused,
    player:{x:player.x,y:player.y},region:state.region,fixture:regionalFixture,actor:actor?{id:actor.id,voiceId:actor.voiceId,x:actor.x,y:actor.y}:null,
    dialogue:state.dialogue?{line:state.dialogueData.i,text:state.dialogueData.lines[state.dialogueData.i],busy:state.dialogueVoiceBusy,complete:state.dialogueData.lineComplete}:null,
    speech:speech?{actorId:speech.actorId,voiceId:speech.voiceId,status:speech.speechStatus,time:speech.mediaTime,opening:speech.mouthOpen}:null,
@@ -350,20 +350,20 @@ export default {
   registerStreetCharacterManifest(manifest);
   const game=readFileSync(resolve(root,'game.js'),'utf8'),world=readFileSync(resolve(root,'world3d.js'),'utf8');
   assert(game.includes('function loop(now){'));assert(world.includes('window.Germany3D={ready:true'));
-   const evidence={voiceId,regionalCase,profile:profile.id,manifestSource:main?'Exact MAIN bytes served without manifest or asset interception':'Raw opt-in Karl candidate manifest and selected Karl asset overlay',hashes:{game:digest(game),world:digest(world),manifest:digest(manifestBytes)},limits:[
+   const evidence={voiceId,regionalCase,profile:profile.id,manifestSource:main?'Exact MAIN bytes served without manifest or asset interception':'Raw opt-in named resident manifest and selected own asset overlay',hashes:{game:digest(game),world:digest(world),manifest:digest(manifestBytes)},limits:[
     regionalCase==='forced-germany'?'Karl is staged once on a validated legal Germany route before world admission; this is a regional fixture, not his natural Berlin placement.':'Existing actor and native E/dialogue/media handlers; player-only staging is not natural traversal.',
    'Speech is state-checked silently; physical Android and perceptual listening are not exercised.',
    'FILE pause is checked after dialogue; this does not certify pausing active dialogue speech.'
   ]};
   const save=()=>artifacts.json('personal-city.json',evidence),sample=()=>page.evaluate(()=>__ambientPersonal.sample());
    if(!main){
-    assert.equal(voiceId,'stadt-karl-heinz-post','Personal-city candidate overlay is scoped to Karl');
-    assert(process.env.AMBIENT_CANDIDATE_ASSETS,'Karl candidate asset root required');
+    assert.equal(person.id,voiceId,'Personal-city candidate must retain the selected resident identity');
+    assert(process.env.AMBIENT_CANDIDATE_ASSETS,'Own candidate asset root required');
     await page.route('**/assets/characters/street/manifest.json?*',route=>route.fulfill({contentType:'application/json',body:manifestBytes}));
-    const assets=candidateAssetRoot(root),prefix='/assets/characters/residents/stadt-karl-heinz-post/';
-    await page.route('**/assets/characters/residents/stadt-karl-heinz-post/**',route=>{
+    const assets=candidateAssetRoot(root),prefix='/assets/characters/residents/'+voiceId+'/';
+    await page.route('**'+prefix+'**',route=>{
      const pathname=new URL(route.request().url()).pathname;if(!pathname.startsWith(prefix))return route.continue();
-     const path=resolve(assets,'.'+pathname);assert(path.startsWith(assets+'/')||path.startsWith(assets+'\\'),'Karl candidate asset escaped staging root');
+     const path=resolve(assets,'.'+pathname);assert(path.startsWith(assets+'/')||path.startsWith(assets+'\\'),'Own candidate asset escaped staging root');
      return route.fulfill({body:readFileSync(path),contentType:pathname.endsWith('.json')?'application/json':'image/webp'});
     });
    }
@@ -410,7 +410,13 @@ export default {
    await interact();
    if(regionalCase==='natural-berlin')await page.waitForFunction(()=>__ambientPersonal.sample().stimulus?.mode==='silent',null,{timeout:20000});
    else await page.waitForFunction(()=>__ambientPersonal.sample().speech?.status==='playing',null,{timeout:20000});
-   evidence.speaking=[];for(let i=0;i<12;i++){evidence.speaking.push(await sample());await page.waitForTimeout(80)}save();
+   evidence.speaking=[];
+   // 'playing' owns the source before the device clock necessarily advances.
+   // Retain startup observations, then require actual media time and opening.
+   const mediaDeadline=Date.now()+15000;
+   do{evidence.speaking.push(await sample());await page.waitForTimeout(80)}
+   while(evidence.speaking.length<12||(regionalCase!=='natural-berlin'&&!evidence.speaking.some(s=>s.speech?.time>0&&s.speech.opening>0&&s.city.selected.paint.mouth.active)&&Date.now()<mediaDeadline));
+   save();
    if(regionalCase==='natural-berlin')for(const s of evidence.speaking)assertCaption(s);
    else{
     assert(evidence.speaking.some(s=>s.speech.time>0&&s.speech.opening>0&&s.city.selected.paint.mouth.active),'Own native media must articulate visible source paint');
