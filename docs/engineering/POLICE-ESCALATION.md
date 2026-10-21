@@ -166,6 +166,13 @@ experiments are archived separately in the private Music production library.
 No reference audio, model weights, private native inputs or local test output
 are part of the published package.
 
+The first Pages attempt found a Linux portability issue in read-only voice
+planning: installed Windows runtime data was required before the plan could
+exit. The planner now requires that installation only for actual authoring.
+A cold-environment regression and the exact 62-case police/neighbor CI group
+pass with LOCALAPPDATA absent; native authoring still fails closed without its
+explicit executable. This changes no runtime, recording or selected profile.
+
 The integrator publishes this coherent candidate to origin/main under the
 standing policy, watches the Pages deployment, then verifies the unmodified
 public root and 3d.html compatibility entry against the built runtime and new

@@ -11,8 +11,6 @@ import {punishmentReferenceInputs,literalPunishmentReference,punishmentSwabianRe
 const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
 const option=(name,fallback)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
 const exe=option('--voice-exe')||(process.env.LOCALAPPDATA?resolve(process.env.LOCALAPPDATA,'Secret Tunnel 6/secret-tunnel-v6.exe'):null);
-if(!exe)throw Error('Pass --voice-exe when LOCALAPPDATA is unavailable');
-const data=readFileSync(resolve(dirname(exe),'voice-data-root.txt'),'utf8').trim();
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const read=path=>JSON.parse(readFileSync(path,'utf8').replace(/^\uFEFF/,''));
 function replaceFile(from,to){for(let attempt=0;;attempt++){try{renameSync(from,to);return}catch(error){if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=19)throw error;Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,50)}}}
@@ -158,6 +156,8 @@ if(takeReceiptsPath){
 }
 if(forceNewNative&&importedTakes.size)throw Error('Explicit native diagnostics cannot reuse pre-rendered imported takes');
 if(args.includes('--plan')){console.log(JSON.stringify({family,binding:binding??null,inferenceParameters,lines,...(referenceConditioning?{referenceConditioning}:{}),...(renderInputs.length?{renderInputs}:{})},null,2));process.exit(0)}
+if(!exe)throw Error('Pass --voice-exe when LOCALAPPDATA is unavailable');
+const data=readFileSync(resolve(dirname(exe),'voice-data-root.txt'),'utf8').trim();
 if(!binding)throw Error(`No selected profile for ${identity.voiceId}`);
 if(family==='heiko'||family==='inga')voiceFilter(binding,identity.voiceId);
 // Refuse timing changes to an accepted take before profile calls or private writes.

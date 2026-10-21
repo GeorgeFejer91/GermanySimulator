@@ -9,6 +9,16 @@ import vm from 'node:vm';
 import {neighborSpokenWords} from '../tools/curate-voice-library.mjs';
 
 const root=resolve(import.meta.dirname,'..'),builder=resolve(root,'tools/build-neighbor-voices.mjs');
+test('cold source plans need no Windows installation while native authoring stays fail-closed',()=>{
+ const env={...process.env};delete env.LOCALAPPDATA;
+ for(const character of ['heiko','inga','schwabingen']){
+  const result=spawnSync(process.execPath,[builder,'--punishment','--character',character,'--plan'],{cwd:root,env,encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);
+  assert.equal(JSON.parse(result.stdout).lines.length,8);
+ }
+ const native=spawnSync(process.execPath,[builder,'--punishment','--character','heiko'],{cwd:root,env,encoding:'utf8'});
+ assert.notEqual(native.status,0);assert.match(native.stderr,/Pass --voice-exe when LOCALAPPDATA is unavailable/);
+});
 test('finite wegmusst compound spacing preserves every letter and rejects changed or additional words',()=>{
  const source='Falls du wegmusst, organisierst du eine Vertretung.';
  assert.equal(neighborSpokenWords(source),neighborSpokenWords('Falls du weg musst, organisierst du eine Vertretung.'));
@@ -144,10 +154,10 @@ test('raw admission accepts only truthful approved render normalization',async t
 });
 
 
-test('explicit voice executable works without Windows environment and missing defaults fail clearly',t=>{
+test('explicit executable plans are portable and native authoring requires an installation',t=>{
  const f=fixture(t),env={...process.env};delete env.LOCALAPPDATA;
  const explicit=spawnSync(process.execPath,[builder,'--voice-exe',resolve(f.dir,'voice-tool.exe'),'--character','heiko','--plan'],{cwd:root,encoding:'utf8',env});
  assert.equal(explicit.status,0,explicit.stderr);assert.equal(JSON.parse(explicit.stdout).family,'heiko');
- const absent=spawnSync(process.execPath,[builder,'--plan'],{cwd:root,encoding:'utf8',env});
+ const absent=spawnSync(process.execPath,[builder],{cwd:root,encoding:'utf8',env});
  assert.notEqual(absent.status,0);assert.match(absent.stderr,/Pass --voice-exe when LOCALAPPDATA is unavailable/);
 });
