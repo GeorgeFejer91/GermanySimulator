@@ -1,5 +1,5 @@
 import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
-import {schwabingenPropFrame,createSchwabingenProps} from './schwabingen-props.js?v=20261020-dialogue-props';
+import {schwabingenPropFrame,createSchwabingenProps} from './schwabingen-props.js?v=20261021-schwabingen-cleanup';
 const NEIGHBOR_PAINT={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'};
 const FRAMES=32,CELL_WIDTH=128,CELL_HEIGHT=192,COLUMNS=16,ROWS=16,PIVOT=180;
 const CLIP_OFFSETS=[0,32,64,96,128,136,152,160,176,184,208,232];
@@ -156,7 +156,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
   for(const mesh of fallback)mesh.visible=true;
   const cameraRight=T.Vector3?new T.Vector3(1,0,0):null;
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,({signal}={})=>new Promise(resolve=>{
-    loadThreeTexture(T,`./assets/characters/neighbors/${name}-standing.png`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
+    loadThreeTexture(T,`./assets/characters/neighbors/${name}-standing.png?v=20261021-crown`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
       if(owner.retired||signal?.aborted||sprite){loaded.dispose();resolve(false);return}
       loaded.colorSpace=T.SRGBColorSpace;loaded.generateMipmaps=false;loaded.minFilter=loaded.magFilter=T.LinearFilter;loaded.premultiplyAlpha=true;
       const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
@@ -165,7 +165,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
     },error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
   }),owner);
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,({signal}={})=>new Promise(resolve=>{
-    const version='20261020-neighbor-face-repair';
+    const version=actor.jwdRole==='swabian'?'20261021-schwabingen-crown':'20261020-neighbor-face-repair';
     loadThreeTexture(T,`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,signal,signal?owner.controller.signal:undefined).then(loaded=>{
       if(owner.retired||signal?.aborted){settled=true;loaded.dispose();resolve(false);return}
       texture=loaded;texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
@@ -207,7 +207,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const dt=lastTime==null?0:Math.min(.1,Math.max(0,now-lastTime));lastTime=now;
       const running=!!hud?.started&&!hud.paused&&!document.hidden&&(!hud.busy||dialogue?.id===actor.id);
       const pose=neighborFrame(actor,playback,dialogue,dt,running,reducedMotion);lastPose=pose;
-      props?.sync(pose.prop,!!sprite);
+      props?.sync(pose.prop,!!sprite,reducedMotion);
       for(const mesh of fallback)mesh.visible=!sprite&&!standing&&pose.visible;
       if(standing){standing.visible=!sprite;standing.quaternion.copy(host.quaternion).invert().multiply(camera.quaternion);const pivot=standing.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);standing.position.set(0,pivot,0).applyQuaternion(standing.quaternion)}
       if(!sprite)return;

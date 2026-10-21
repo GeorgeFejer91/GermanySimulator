@@ -644,7 +644,7 @@
     ]
   },
   "schwabingen": {
-    "sha256": "ba50cdcb4eae5edbeddeee766d08822b1d75a109a9473704b851a143de4270c2",
+    "sha256": "ea3e51f192acc89648313e83eb7d2a751e44f8615272140cdf4e8ad07d9df377",
     "rows": [
       "down",
       "right",
@@ -747,8 +747,8 @@
     "figureWorldHeight": 1.6,
     "distancePerCycle": 7.529411764705883,
     "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
-    "bytes": 1237604,
-    "mobileBytes": 451604,
+    "bytes": 1252400,
+    "mobileBytes": 450764,
     "decodedRgbaBytes": 25165824,
     "mobileDecodedRgbaBytes": 6291456,
     "encodedFrameChecks": [
@@ -756,77 +756,77 @@
         "variant": "desktop",
         "row": 0,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.001595590729266405,
-        "seamChange": 0.001119936932809651
+        "maxChange": 0.0015971913235262036,
+        "seamChange": 0.0011206637136638165
       },
       {
         "variant": "desktop",
         "row": 1,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0017813401063904166,
-        "seamChange": 0.0012826047604903579
+        "maxChange": 0.0017830018186941743,
+        "seamChange": 0.0012810529442504048
       },
       {
         "variant": "desktop",
         "row": 2,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0011988327605649829,
-        "seamChange": 0.0008978067780844867
+        "maxChange": 0.0012015948304906487,
+        "seamChange": 0.0008977008401416242
       },
       {
         "variant": "desktop",
         "row": 3,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0017800513887777925,
-        "seamChange": 0.0015832697972655296
+        "maxChange": 0.0017828326672315598,
+        "seamChange": 0.0015851394273340702
       },
       {
         "variant": "desktop",
         "row": 4,
         "distinctDecodedFrames": 8,
-        "maxChange": 0.004246415104717016,
-        "seamChange": 0.004095025360584259
+        "maxChange": 0.004364353138953447,
+        "seamChange": 0.004209975246340036
       },
       {
         "variant": "desktop",
         "row": 5,
         "distinctDecodedFrames": 16,
-        "maxChange": 0.00012768307351507246,
-        "seamChange": 0.00012768307351507246
+        "maxChange": 0.00013088900595903397,
+        "seamChange": 0.00013088900595903397
       },
       {
         "variant": "desktop",
         "row": 6,
         "distinctDecodedFrames": 5,
-        "maxChange": 0.004016198683530092,
-        "seamChange": 0.004016198683530092
+        "maxChange": 0.0040949564427137375,
+        "seamChange": 0.0040949564427137375
       },
       {
         "variant": "desktop",
         "row": 7,
         "distinctDecodedFrames": 15,
-        "maxChange": 0.002621176652610302,
+        "maxChange": 0.0026885017286986113,
         "seamChange": 0.0
       },
       {
         "variant": "desktop",
         "row": 8,
         "distinctDecodedFrames": 5,
-        "maxChange": 0.00610108720138669,
-        "seamChange": 0.00610108720138669
+        "maxChange": 0.006224466022104025,
+        "seamChange": 0.006224466022104025
       },
       {
         "variant": "desktop",
         "row": 9,
         "distinctDecodedFrames": 18,
-        "maxChange": 0.004444382153451443,
+        "maxChange": 0.00444847671315074,
         "seamChange": 0.0
       },
       {
         "variant": "desktop",
         "row": 10,
         "distinctDecodedFrames": 18,
-        "maxChange": 0.006542931776493788,
+        "maxChange": 0.006551867816597223,
         "seamChange": 0.0
       },
       {
@@ -840,78 +840,78 @@
         "variant": "-mobile",
         "row": 0,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0013881673803552985,
-        "seamChange": 0.0009270035079680383
+        "maxChange": 0.0013950237771496177,
+        "seamChange": 0.0009336891234852374
       },
       {
         "variant": "-mobile",
         "row": 1,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0015501524321734905,
-        "seamChange": 0.0011511673219501972
+        "maxChange": 0.0015555396676063538,
+        "seamChange": 0.0011462426045909524
       },
       {
         "variant": "-mobile",
         "row": 2,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0011297207092866302,
-        "seamChange": 0.0007964904070831835
+        "maxChange": 0.0011297569144517183,
+        "seamChange": 0.0007987550343386829
       },
       {
         "variant": "-mobile",
         "row": 3,
         "distinctDecodedFrames": 32,
-        "maxChange": 0.0015639198245480657,
-        "seamChange": 0.0014300226466730237
+        "maxChange": 0.0015679622301831841,
+        "seamChange": 0.00143629836384207
       },
       {
         "variant": "-mobile",
         "row": 4,
         "distinctDecodedFrames": 8,
-        "maxChange": 0.0035208333283662796,
-        "seamChange": 0.0033589527010917664
+        "maxChange": 0.003530222689732909,
+        "seamChange": 0.003378162859007716
       },
       {
         "variant": "-mobile",
         "row": 5,
         "distinctDecodedFrames": 16,
-        "maxChange": 9.499052976025268e-05,
-        "seamChange": 9.499052976025268e-05
+        "maxChange": 9.81568664428778e-05,
+        "seamChange": 9.81568664428778e-05
       },
       {
         "variant": "-mobile",
         "row": 6,
-        "distinctDecodedFrames": 5,
-        "maxChange": 0.003368532285094261,
-        "seamChange": 0.003368532285094261
+        "distinctDecodedFrames": 6,
+        "maxChange": 0.003361676586791873,
+        "seamChange": 0.0033613548148423433
       },
       {
         "variant": "-mobile",
         "row": 7,
         "distinctDecodedFrames": 16,
-        "maxChange": 0.002272836398333311,
-        "seamChange": 5.062406671640929e-07
+        "maxChange": 0.002259419299662113,
+        "seamChange": 1.146393969975179e-06
       },
       {
         "variant": "-mobile",
         "row": 8,
         "distinctDecodedFrames": 6,
-        "maxChange": 0.005117214750498533,
-        "seamChange": 0.005116767715662718
+        "maxChange": 0.00516117736697197,
+        "seamChange": 0.005157281178981066
       },
       {
         "variant": "-mobile",
         "row": 9,
-        "distinctDecodedFrames": 18,
-        "maxChange": 0.0044103567488491535,
-        "seamChange": 0.0
+        "distinctDecodedFrames": 19,
+        "maxChange": 0.004414988216012716,
+        "seamChange": 4.837131655222038e-07
       },
       {
         "variant": "-mobile",
         "row": 10,
         "distinctDecodedFrames": 19,
-        "maxChange": 0.006516722496598959,
-        "seamChange": 5.062406671640929e-07
+        "maxChange": 0.006530914921313524,
+        "seamChange": 6.626808044529753e-07
       },
       {
         "variant": "-mobile",
