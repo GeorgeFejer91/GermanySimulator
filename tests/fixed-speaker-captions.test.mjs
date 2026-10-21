@@ -64,6 +64,7 @@ function cityFixture(activeLibrary, voice, text, browserVoices = []) {
     ${functionSource(game, 'officialComputerVoice')}
     ${functionSource(game, 'playCaptionStimulus')}
     ${functionSource(game, 'playSyntheticStimulus')}
+    ${functionSource(game, 'syncLockedDialogueAudioFocus')}
     ${functionSource(game, 'playRecordedStimulus')}`, context);
   return {
     spoken, timers, events, item,

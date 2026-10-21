@@ -516,6 +516,14 @@ Reddit discussions, with character-specific fictional complaints and paired
 English subtitles; [the research ledger](docs/engineering/POLICE-NEIGHBOR-RESEARCH.md)
 distinguishes source observations from invented details.
 
+The two encounter recordings reuse Heinrich Wachtmeister's selected Chatterbox
+profile. The 24 neighbor recordings reuse Heiko, Inga and Frau Schwabingen's
+selected OmniVoice profiles. Separate supplement manifests retain exact source,
+reference/input identities, final encoded hashes, recognition results and
+measured lip cues; see [the voice ledger](assets/voices/LICENSES.md). Reference
+audio and model weights remain private. Silent media checks and automated
+transcription do not establish perceptual listening approval.
+
 Heiko’s twelve notebook action keys were generated with the built-in OpenAI
 image tool from his existing miniature painting. Whole connected figures are
 registered after matte cleanup; the original rest pose and all prior atlas cells

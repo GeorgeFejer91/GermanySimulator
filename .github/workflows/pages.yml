@@ -58,7 +58,9 @@ jobs:
       - name: Check potato mirror reflection and interaction
         run: node --test tests/buergeramt-potato-mirror.test.mjs
       - name: Check law pickup, police escalation and neighbor punishment
-        run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs tests/police-contact.test.mjs tests/police-delivery.test.mjs tests/police-sprites.test.mjs tests/neighbor-punishment.test.mjs
+        run: |
+          node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs tests/police-contact.test.mjs tests/police-contact-voice-source.test.mjs tests/police-contact-admission.test.mjs tests/police-contact-recordings.test.mjs tests/police-delivery.test.mjs tests/police-sprites.test.mjs tests/neighbor-punishment.test.mjs tests/neighbor-dialect-coverage.test.mjs tests/neighbor-punishment-reference.test.mjs tests/neighbor-punishment-window.test.mjs
+          python -B tests/test_police_contact_voice_adapter.py
       - name: Check neighbor voice authoring and staged assets
         run: |
           if ! command -v ffmpeg >/dev/null; then
@@ -74,6 +76,7 @@ jobs:
           python -B tests/test_named_reactive_source_adapter.py
           node tools/curate-voice-library.mjs --check
           node tools/audit-neighbor-voice-coverage.mjs --check
+          node tools/audit-neighbor-punishment-coverage.mjs --with-police
           node --test tests/ruediger-homophone.test.mjs
           node --test tests/sandale-voice-curator.test.mjs
           node --test tests/named-reactive-voice-curator.test.mjs

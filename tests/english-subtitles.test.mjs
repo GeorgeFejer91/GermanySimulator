@@ -30,12 +30,14 @@ const cityDirectory=join(root,'assets/voices/city-dialogue'),cityCount=existsSyn
 const trafficDirectory=join(root,'assets/voices/traffic-dialogue'),trafficCount=readdirSync(trafficDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(trafficDirectory,file),'utf8')).clips.length,0);
 const crowdDirectory=join(root,'assets/voices/candidate-dialogue'),crowdCount=readdirSync(crowdDirectory).filter(file=>file.endsWith('-crowd-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(crowdDirectory,file),'utf8')).clips.filter(clip=>clip.approval?.status==='user-approved').length,0);
 const policeDirectory=join(root,'assets/voices/police-dialogue'),policeCount=existsSync(policeDirectory)?readdirSync(policeDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(policeDirectory,file),'utf8')).clips.length,0):0;
+const contactManifestPath=join(root,'assets/voices/police-contact/police-contact-manifest.json'),contactManifest=existsSync(contactManifestPath)?JSON.parse(readFileSync(contactManifestPath,'utf8')):null,contactCount=contactManifest?.clips.length||0;
+if(contactManifest){assert.equal(contactManifest.policeContactAdmission.status,'ROOT-verified-native-policeContact2');assert.equal(contactCount,2);for(const clip of contactManifest.clips)assert.equal(library.recordedClip(clip.voiceId,clip.text),'./'+clip.file);}
 const quizManifestPath=join(root,'assets/voices/quiz-segments/quiz-german9-manifest.json'),quizCount=existsSync(quizManifestPath)?JSON.parse(readFileSync(quizManifestPath,'utf8')).clips.length:0;
 // Two retired phone-button replies remain archived; Rüdiger's second fever line is now recorded.
-assert.equal(Object.keys(library.clips).length,120+knickCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
+assert.equal(Object.keys(library.clips).length,120+knickCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+contactCount+quizCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded coverage follows approved manifests while retired takes stay excluded");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+quizCount+trafficCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+contactCount+quizCount+trafficCount,"recorded coverage follows approved manifests while retired takes stay excluded");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,105+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount+crowdCount+policeCount+contactCount+quizCount+trafficCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);

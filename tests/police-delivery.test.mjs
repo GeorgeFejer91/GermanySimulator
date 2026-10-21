@@ -32,7 +32,7 @@ function fixture(){
  // Supply the existing dialogue-to-broker request boundary, with controlled media.
  h.speak=(text,options)=>{h.activeStimulus={text,recording:'missing-or-controlled.mp3',...options};h.playRecordedStimulus(h.activeStimulus,h.stimulusGeneration)};
  vm.createContext(h);
- for(const name of ['jwdVoice','neighborDialogueTicket','setDialogueVoiceBusy','speakDialogueLine','playRecordedStimulus','playCaptionStimulus','finishStimulus','dialogueReadingSeconds','updateJwdPerformance','nextDialogue'])vm.runInContext(productionFunction(name),h);
+ for(const name of ['jwdVoice','neighborDialogueTicket','setDialogueVoiceBusy','speakDialogueLine','syncLockedDialogueAudioFocus','playRecordedStimulus','playCaptionStimulus','finishStimulus','dialogueReadingSeconds','updateJwdPerformance','nextDialogue'])vm.runInContext(productionFunction(name),h);
  const wall=ms=>{
   const target=now+ms;
   while(true){const next=[...timers].filter(([,timer])=>timer.at<=target).sort((a,b)=>a[1].at-b[1].at)[0];if(!next)break;now=next[1].at;timers.delete(next[0]);next[1].callback()}
@@ -77,4 +77,35 @@ test('a stale delivery cannot finish the dialogue belonging to a new punishment'
  f.h.finishStimulus(oldDelivery,1);oldDelivery.done(oldDelivery);f.wall(24000);f.read(1.1);
  assert.equal(current.lineComplete,false);assert.equal(current.captionFallback,false);
  assert.equal(f.completed,0);assert.equal(f.h.state.modal,true);
+});
+
+test('only the owned locked recording suspends with hidden or paused play and resumes after cancellation',async()=>{
+ let suspends=0,resumes=0;
+ const audio={state:'running',suspend(){suspends++;this.state='suspended';return Promise.resolve()},resume(){resumes++;this.state='running';return Promise.resolve()}};
+ const h={audio,document:{hidden:true},window:{GermanyHUD:{paused:false}},state:{dialogue:true,dialogueData:{locked:true},dialogueVoiceToken:2},activeStimulus:{family:'dialogue',cueToken:1,subtitleMode:'recorded'}};
+ vm.createContext(h);vm.runInContext(productionFunction('syncLockedDialogueAudioFocus')+'\n'+productionFunction('ensureAudio'),h);
+ h.syncLockedDialogueAudioFocus();assert.equal(suspends,0,'a stale receipt cannot pause the current context');
+ h.activeStimulus.cueToken=2;h.syncLockedDialogueAudioFocus();h.syncLockedDialogueAudioFocus();assert.equal(suspends,1);await Promise.resolve();
+ assert.equal(h.ensureAudio(),audio);assert.equal(resumes,0,'ordinary audio preparation respects the owned suspension');
+ await audio.resume();h.syncLockedDialogueAudioFocus();assert.equal(suspends,2,'an intervening resume cannot permanently defeat the owned pause');await Promise.resolve();
+ h.activeStimulus=null;h.syncLockedDialogueAudioFocus();assert.equal(resumes,1,'cancellation does not restart hidden sound');
+ h.document.hidden=false;h.syncLockedDialogueAudioFocus();h.syncLockedDialogueAudioFocus();assert.equal(resumes,2,'visibility releases the owned pause even after cancellation');
+ h.activeStimulus={family:'dialogue',cueToken:2,subtitleMode:'recorded'};h.window.GermanyHUD.paused=true;h.syncLockedDialogueAudioFocus();assert.equal(suspends,3);
+ h.window.GermanyHUD.paused=false;h.syncLockedDialogueAudioFocus();assert.equal(resumes,3);
+ h.state.dialogueData.locked=false;h.document.hidden=true;h.syncLockedDialogueAudioFocus();assert.equal(suspends,3,'ordinary dialogue keeps its existing focus policy');
+});
+
+test('rapid focus reversals reconcile delayed context transitions without duplicate suspend requests',async()=>{
+ const pending=[];
+ const audio={state:'running',suspend(){return new Promise(resolve=>pending.push({kind:'suspend',finish:()=>{this.state='suspended';resolve()}}))},resume(){return new Promise(resolve=>pending.push({kind:'resume',finish:()=>{this.state='running';resolve()}}))}};
+ const h={audio,document:{hidden:true},window:{GermanyHUD:{paused:false}},state:{dialogue:true,dialogueData:{locked:true},dialogueVoiceToken:1},activeStimulus:{family:'dialogue',cueToken:1,subtitleMode:'recorded'}};
+ vm.createContext(h);vm.runInContext(productionFunction('syncLockedDialogueAudioFocus'),h);
+ h.syncLockedDialogueAudioFocus();h.syncLockedDialogueAudioFocus();assert.equal(pending.length,1);
+ h.document.hidden=false;h.syncLockedDialogueAudioFocus();h.document.hidden=true;h.syncLockedDialogueAudioFocus();
+ assert.deepEqual(pending.map(p=>p.kind),['suspend','resume']);
+ pending.shift().finish();await Promise.resolve();pending.shift().finish();await Promise.resolve();
+ assert.deepEqual(pending.map(p=>p.kind),['suspend'],'a late resume rechecks the latest hidden state');
+ pending.shift().finish();await Promise.resolve();assert.equal(audio.state,'suspended');assert.equal(pending.length,0);
+ h.document.hidden=false;h.syncLockedDialogueAudioFocus();pending.shift().finish();await Promise.resolve();
+ assert.equal(audio.state,'running');assert.equal(audio.jwdLecturePaused,false);assert.equal(pending.length,0);
 });

@@ -50,7 +50,7 @@ const playback=vm.createContext({
  startSubtitle:()=>events.push("subtitle"),finishStimulus:()=>events.push("done"),
  playSyntheticStimulus:()=>events.push("synthetic")
 });
-vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource=null,recordedSpeechGain=null;${sourceOf(game,"playRecordedStimulus")};${sourceOf(game,"stopRecordedSpeech")};globalThis.api={playRecordedStimulus,stopRecordedSpeech,sources:()=>recordedSpeechSource};playRecordedStimulus(item,1)`,playback);
+vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource=null,recordedSpeechGain=null;${sourceOf(game,"syncLockedDialogueAudioFocus")};${sourceOf(game,"playRecordedStimulus")};${sourceOf(game,"stopRecordedSpeech")};globalThis.api={playRecordedStimulus,stopRecordedSpeech,sources:()=>recordedSpeechSource};playRecordedStimulus(item,1)`,playback);
 await new Promise(resolve=>setImmediate(resolve));
 assert.deepEqual(started,[10,11.08,13.16],"quiz clips must start in prompt order with a short gap");
 assert.equal(item.subtitleDuration,6.16,"subtitle timing must span the whole composite prompt");
@@ -67,7 +67,7 @@ const fallback=vm.createContext({
  prepareRecording:path=>path==="missing.mp3"?Promise.reject(new Error("404")):Promise.resolve({duration:1}),
  startSubtitle:()=>{},finishStimulus:()=>{},playSyntheticStimulus:received=>events.push(received.text)
 });
-vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource=null,recordedSpeechGain=null;${sourceOf(game,"playRecordedStimulus")};playRecordedStimulus(item,1)`,fallback);
+vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource=null,recordedSpeechGain=null;${sourceOf(game,"syncLockedDialogueAudioFocus")};${sourceOf(game,"playRecordedStimulus")};playRecordedStimulus(item,1)`,fallback);
 await new Promise(resolve=>setImmediate(resolve));
 assert.equal(events.at(-1),"whole quiz prompt","a missing segment must retain the complete text for the fixed-voice fallback policy");
 

@@ -9,6 +9,11 @@ import vm from 'node:vm';
 import {neighborSpokenWords} from '../tools/curate-voice-library.mjs';
 
 const root=resolve(import.meta.dirname,'..'),builder=resolve(root,'tools/build-neighbor-voices.mjs');
+test('finite wegmusst compound spacing preserves every letter and rejects changed or additional words',()=>{
+ const source='Falls du wegmusst, organisierst du eine Vertretung.';
+ assert.equal(neighborSpokenWords(source),neighborSpokenWords('Falls du weg musst, organisierst du eine Vertretung.'));
+ for(const bad of ['Falls du weg nicht musst, organisierst du eine Vertretung.','Falls du musst, organisierst du eine Vertretung.','Falls du weg muss, organisierst du eine Vertretung.','Falls du weg musst, organisierst du einfach eine Vertretung.'])assert.notEqual(neighborSpokenWords(source),neighborSpokenWords(bad));
+});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const json=(path,value)=>writeFileSync(path,JSON.stringify(value));
 function fixture(t){

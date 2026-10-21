@@ -177,4 +177,95 @@ and cleanup protocol sections were read and the live profiles were checked.
 Inga and Schwabingen both have empty saved `reference_text` fields and their
 selected reference hashes match the cast. They retain their existing German
 reference-ASR conditioning path, rather than inheriting Heiko's English rule.
+
+The first short native Inga parts exposed an additional input problem: both
+completed takes echoed the unfinished selected-reference ending “sondern das
+ist”. The full saved Inga reference ends mid-clause at28 seconds; Schwabingen's
+60-second reference also ends mid-clause. Those original whole/part attempts
+remain private, with their actual calls and recognition failures preserved.
+No saved profile or ordinary published recording was changed.
+
+ROOT independently reviewed two finite contiguous reference-input excerpts:
+Inga samples`[0,176640)` (7.36seconds, WAV`79b1ae56…`) and Schwabingen
+samples`[0,146400)` (6.10seconds, WAV`76deb641…`), each mono24k PCM16. Exact
+sample-byte equality, full selected reference/original hashes, actual unprompted
+q4 and CPU readings, complete early utterances and boundary uncertainty are in
+the private proposal receipts. These are declared inference inputs under
+`tools/neighbor-punishment-reference.mjs`; the selected UUID and full-reference
+binding remain unchanged. The finite scope excludes ordinary dialogue and the
+already accepted Inga04/05. Default32steps/speed1 and Schwabingen guidance2 stay
+unchanged. A separate ROOT finite authority permits each private pilot; it does
+not authorize automatic retries or public admission.
+
+The corrected-reference Inga01 pilot completed naturally in12.95seconds plus
+1.89seconds model load. Both independent final-MP3 readings retain every authored
+item; the sole mismatch was German compound spacing`wegmusst`/`weg musst`.
+ROOT reviewed and approved that finite orthographic equivalence, with regressions
+rejecting a missing component, changed verb, inserted negation or extra words.
+CPU-only recovery retains the same actual14.12-second MP3, all original receipts
+and transcripts. It reports normalized word equivalence and explicitly false
+literal transcript identity; no additional native call repaired that spelling.
+
+New Schwabingen punishment takes require ROOT's complete ordered semantic-clause
+review whenever the actual recognition differs from the dialect source. The
+review binds source, native/encoded audio and both recognizers' actual receipts
+and timestamps, preserves`asrWordExact:false`, and never claims listening.
+Original whole01–04 were quarantined after independent readings showed omitted,
+replaced, negated, reordered or repeated story clauses. These are delivery
+failures, not dialect spelling differences. The ordinary33 published recordings
+retain their existing authority. See[the bounded review contract](NEIGHBOR-DIALECT-COVERAGE.md).
 Their distinct final-word policies remain unchanged.
+
+The corrected whole-take Heiko pilot completed, but several q4 readings still
+disagreed with the source. A separate unprompted whole-MP3 reading through the
+already installed CPU faster-whisper environment can assess those same bytes.
+`--independent-asr` preserves the original q4 transcript/receipt and records the
+actual independent model hash, encoded hash, German language, beam 5, CPU int8,
+one thread, no script prompt and no previous-text conditioning. Acceptance still
+requires the unchanged complete-word comparator; no transcript is edited. The
+first correctly configured second reading admitted Heiko04, then Heiko06 and
+Heiko07, completing all eight Heiko sources without another native inference.
+The initial interpreter-selection
+failure remains private and did not admit audio.
+
+An exploratory pass used an explicit 15-second audio chunk threshold and
+12-second chunk duration. Its native receipts showed about 205 seconds for the
+early Heiko pilot, compared with 27–34 seconds for later default whole takes.
+Schwabingen01 reached the native timeout; the next incomplete chunked take and
+remaining queue were stopped after ROOT changed the plan. Those attempts remain
+private and are never labelled completed. An experimental complete-native-parts
+route preserved ordered PCM and exact source spans, but no accepted new punishment
+recording uses it. Its four new producer/admitter/test files and failed proof
+sources were archived privately under `punishment-native-parts-experiment-2026-10-21`
+and removed from the shipped authoring tools. Historical Heiko parts support remains.
+
+The builder also exposes the existing
+protocol's exact 4.080-second professor reference variant for one held Heiko
+source, 64 steps and speed 0.9. It reconstructs the literal original PCM slice and
+checks both already approved hashes before inference; selected profile files are
+unchanged. The actual reference text/hash, input path, native CLI arguments,
+inference parameters and command hash are preserved. Its source/receipt tests do
+not establish that a new take has been rendered or heard.
+
+`tools/audit-neighbor-punishment-coverage.mjs` is the separate completion gate for
+all 24 authored sources: it checks admission, actual MP3 hashes and current exact
+runtime lookup. Incremental source tests permit pending recordings; their success
+alone never means voice production is complete. Human listening remains NOT RUN.
+
+The warning and fine have a separate source-only request contract in
+`tools/police-contact-voice-source.mjs`, with exact paired sources owned by
+Heinrich's `roleProfiles.police.encounterDialogue`. This does not widen the sealed
+historical twelve-slot police grant, authorize a different renderer, or itself
+claim generation/admission. The saved Heinrich Chatterbox identity is retained.
+
+Final coverage is 26/26 admitted recordings: eight monologues per neighbor and
+two police contacts. All new monologues are whole native takes. Heiko and Inga
+use complete normalized word checks, with an explicit finite compound-spacing
+equivalence for Inga01 and exhaustive final-encoding windows for Inga02. The
+eight Schwabingen takes instead retain both actual recognizer readings and
+ROOT-reviewed complete ordered semantic clause coverage; their literal-word
+flags remain false. The exact final Schwabingen08 negation corroboration is
+documented in `NEIGHBOR-DIALECT-COVERAGE.md`. No human listening was performed.
+Approved literal reference excerpts, grants, reviews, original failed takes and
+receipt hashes are preserved in the private production library; saved voice
+identities and ordinary neighbor recordings were not replaced by this supplement.

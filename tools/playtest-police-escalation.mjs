@@ -6,7 +6,7 @@ import {runSuite,isMain} from './browser-harness.mjs';
 
 export async function enter({page,baseURL,root}){
  const source=readFileSync(resolve(root,'game.js'),'utf8');
- await page.route('**/game.js*',route=>route.fulfill({contentType:'text/javascript',body:source.replace('function loop(now){',`window.__police={state,player,jwd,npcs,keys,policeContact,arrestPlayer,moveGroundResponder,update,updateJwdPunishment,updateJwdPerformance,nextDialogue,stopSpeech,getNeighborDialogue,responderBlocked,home:buildings.find(b=>b.id==='jwd-home'),getPolice:()=>police,contact(tier){state.neighborLevel=false;state.wanted=tier;state.wantedCooldown=30;state.policeContactCooldown=0;police.push({x:player.x+31,y:player.y,speed:0,barkAt:Infinity});update(.01)}};function loop(now){`)}));
+ await page.route('**/game.js*',route=>route.fulfill({contentType:'text/javascript',body:source.replace('function loop(now){',`window.__police={state,player,jwd,npcs,keys,policeContact,arrestPlayer,moveGroundResponder,update,updateJwdPunishment,updateJwdPerformance,nextDialogue,stopSpeech,getNeighborDialogue,getStimulus:()=>activeStimulus,responderBlocked,home:buildings.find(b=>b.id==='jwd-home'),getPolice:()=>police,contact(tier){state.neighborLevel=false;state.wanted=tier;state.wantedCooldown=30;state.policeContactCooldown=0;police.push({x:player.x+31,y:player.y,speed:0,barkAt:Infinity});update(.01)}};function loop(now){`)}));
  await page.goto(baseURL+'/?geheim=nachbarn',{waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>window.__police?.state.started&&Germany3D?.startupReady,null,{timeout:90000});
  await page.evaluate(()=>{

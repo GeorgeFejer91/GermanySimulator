@@ -18,8 +18,17 @@ This folder owns the JWD neighbor level's character context.
   subtitles and speaker ownership when implementing or recording dialogue.
 - [Schwabingen dialogue props](../../../docs/engineering/SCHWABINGEN-PROPS.md):
   authored cue IDs, held products, leaf and blackbird/nest ownership and acceptance.
+- [Post-arrest story inventory](../../../neighbor-punishment.js): eight stable
+  bilingual story IDs for each adult, with actor/voice ownership, gesture and
+  source topics. [Research and fictional adaptations](../../../docs/engineering/POLICE-NEIGHBOR-RESEARCH.md)
+  trace every story; [the implementation record](../../../docs/engineering/POLICE-ESCALATION.md)
+  owns its city-arrest trigger and acceptance evidence. New recordings use each
+  selected adult's separate `punishmentDialogue` cast supplement and punishment
+  manifest, preserving ordinary dialogue IDs and takes. Extend the inventory,
+  paired English, cast supplement and exact-take receipt together; never assign
+  an adult punishment to Hartmut or the archived Ede.
 
-The existing root `neighbor-story.js`, `game.js`, `jwd-gardens.js`,
+The existing root `neighbor-story.js`, `neighbor-punishment.js`, `game.js`, `jwd-gardens.js`,
 `neighbor-sprites.js` and `schwabingen-props.js` implement this level within the city runtime. Character
 profiles guide authoring; saving a sample here does not install a runtime line
 or replace an existing recording.

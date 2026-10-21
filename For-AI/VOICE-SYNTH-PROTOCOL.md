@@ -1002,3 +1002,55 @@ authorize an extra word, dropped particle, visible-text edit or ASR waiver.
 ## Heiko completed selected-profile pack (2026-10-19)
 
 All 36 authored Heiko lines now have admitted selected-professor-profile recordings. Together with Inga 34, Schwabingen 33 and Hartmut 7, the active neighbor catalog resolves 110/110 exact owned bilingual sources. The final two sources and their German subtitles use the fuller forms Ich sage es and ich habe. Each changed complete phrase had one initial native take; unchanged qualified native parts were reused byte-for-byte at their new canonical source offsets. Both final joined MP3s passed unprompted whole-file faster-whisper CPU recognition with the unchanged word comparator, final levels/format and 40 Hz energy. Failed historical short forms and nonexact q4 whole readings remain private. The selected 20-second reference is unchanged; actual 4.080-second literal reference inputs remain declared per native leaf. No additional TTS fallback, word waiver, edits within native outputs or public source/reference audio were introduced. Human listening is NOT RUN.
+
+## Police encounters and post-arrest neighbor supplement (2026-10-21)
+
+The police warning and payment lines form a separate two-line supplement to the
+existing Heinrich recordings. `tools/police-contact-voice-source.mjs` extracts
+their exact paired sources and selected production binding. The finite private
+ROOT grant, native and independent-ASR call ledgers, retired process/log proofs,
+actual raw/encoded/EOS bytes and separate encoded-hash use selection govern
+admission through `tools/admit-police-contact-voices.mjs`. These two lines do not
+reuse or extend the historical twelve-line police grant. The public manifest
+retains the actual phase/provenance hashes, final format/levels and remeasured
+40 Hz mouth energy. Perceptual listening remains NOT RUN.
+
+The 24 neighbor monologues belong to separate `punishmentDialogue` cast entries
+and `punishment-<neighbor>-manifest.json` supplements. Ordinary dialogue IDs and
+ordinals remain unchanged. Reuse each speaker's selected native profile and
+processing. In particular, Heiko's English reference uses its saved English
+conditioning text; Inga and Schwabingen use their verified German reference
+transcripts. Schwabingen retains the existing authorized dialect-advisory
+recognition policy and its truthful literal-word result.
+
+For this supplement, complete early PCM excerpts correct incomplete reference
+tails without changing the saved selected profiles. Inga uses original samples
+`[0, 176640)` (7.36 seconds); Schwabingen uses `[0, 146400)` (6.10 seconds),
+both mono PCM16 at 24 kHz. Native-leaf `referenceConditioning` records the exact
+actual WAV/PCM/text hashes, source bounds and reviewed input proof; top-level
+hashes still identify the complete selected reference. Private ROOT review
+checks those bytes and actual CLI arguments. Native grants are per source,
+bounded, and do not authorize automatic retakes. The finite Schwabingen input
+policy expands only `gkehrt` to `gekehrt` in the two affected new sources;
+canonical visible text remains unchanged. It never equates `gehört` with swept.
+
+New Schwabingen monologues with nonliteral recognition require ROOT's explicit
+full-parent clause review under
+[`NEIGHBOR-DIALECT-COVERAGE.md`](../docs/engineering/NEIGHBOR-DIALECT-COVERAGE.md).
+The review binds complete ordered source spans, actual unprompted q4 and CPU
+transcripts, all CPU word timestamps, native audio and final MP3 hashes.
+Dialect/recognition uncertainty remains visible; missing clauses, changed
+negations or another story meaning cannot pass as dialect spelling. Listening
+remains `NOT RUN`. Inga02 uses a separate finite same-MP3 window proof: exhaustive
+consecutive unmodified decoded-PCM windows cover the full file and source,
+including `Sonntags`. Disagreeing whole-file readings remain in the receipt;
+the accepted result is explicitly window verification, not a successful whole
+reading or a suffix waiver.
+
+The new supplement uses complete whole native takes. Experimental separate
+parts production was not needed for admitted media; its held attempts and exact
+tool versions remain in the private authoring archive. Existing historical
+Heiko native-parts contracts above remain authoritative for their own media.
+Preserve held takes and disagreeing ASR receipts. The final completion gate is
+`node tools/audit-neighbor-punishment-coverage.mjs --with-police`, in addition to
+the curator; incremental authoring checks alone do not prove all 26 files exist.

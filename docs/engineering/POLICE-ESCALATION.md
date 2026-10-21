@@ -74,36 +74,69 @@ same attempt completes -> return neighbor -> controls resume, no mission credit.
 Research owner: [source ledger](POLICE-NEIGHBOR-RESEARCH.md).
 Artwork owner: [art record](POLICE-ART.md).
 
-## Current evidence and remaining work
+## Acceptance evidence
 
-Core technical review found and reproduced two P1 defects: silent broker expiry
-was mistaken for recorded completion, and a crowded-porch fallback could leave
-the fixed gate out of reach. Both are repaired with broker delivery metadata and
-existing-path admission to the actual waking point. Fresh delivery regressions
-4/4, contact/ticket/audio checks20/20, and named arrest/occupied-porch cases2/2
-pass. Technical reviewer also drove all three adults from the ordinary porch.
-The old police-escalation response/asset tests are preserved byte-for-byte; new
-contact cases live in `tests/police-contact.test.mjs`.
+Runtime and art were checkpointed at 11d2ab6, then integrated with published
+2c48edd at c87e21e. The final release must also integrate newer published main
+99cd9ef, including ordinary Inga coaching and ambient character animation.
+The dirty primary checkout remains untouched.
 
-The Physics reviewer found one additional late-blocker trap during approach.
-The existing detour now accepts a collision-checked prefix that reaches the
-listener's lecture standoff; it no longer rejects that usable prefix because
-an unused final route segment would touch the listener. Six blocker/dt/side
-regressions pass. Candidate P3 pins 35 runtime/art files in local evidence.
+The implemented causal chain passes focused contact, exactly-once payment,
+body-clear home return, unregistered return, all three adult routes, late-blocker
+standoff, stale callbacks and early-input regressions. Review found and repaired
+silent-broker expiry being mistaken for recorded completion, a crowded-porch
+route trap, a late-blocker route-prefix rejection, a retired shared-texture host,
+and hidden-tab playback consuming the punishment. P7 retains actual-media
+completion and an owned AudioContext suspension that other resume callers honor.
 
-Fresh P3 core browser checks pass desktop, Android portrait and landscape
-(`physics/core-P3/report.json`). The integrated police paint suite passes all
-four profiles, including reduced motion (`art-browser-final/report.json`):
-eight variants, four tiers, real pursuit frames, planted warning gesture,
-held displacement and final texture release. Independent GPU tests cover alpha
-depth, camera-facing orientation and decode/failure lifecycle. Physics P1–P5
-and affected browser X1 pass in `physics/REVIEW-P3.md`; the camera review is
-finishing. Screenshots with a hidden touch dock are labeled diagnostics.
+Silent staged core checks pass desktop, Android portrait/landscape and reduced
+motion in core-P5; integrated painted pursuit/contact checks pass four profiles
+in art-combined-final. Art checks cover eight male/female variants, four equipment
+tiers, shared textures, actual displacement, warning/ticket holds and final
+resource release. All 448 exported cells were inspected at desktop/mobile size;
+the art record owns encoded bytes, source paint and animation details.
 
-The broad Node regression run passed 2,232/2,237. Three isolated fixtures/old
-police-rendering expectations have been corrected and pass their focused
-rerun; two catalog count tests are being updated for separately admitted
-punishment recordings. Voice generation remains in progress, with exact source,
-reference conditioning, encoded words, loudness and mouth cues checked per take.
-The first two corrected-reference Heiko takes are admitted. No full completion
-or publication is claimed until the full voice inventory and release checks pass.
+Independent Physics and Camera reviews pass the affected P7 scope. Unchanged
+geometry, scale, alpha/depth and route proofs are explicitly transferred;
+physical Android and unrelated camera rows remain NOT RUN. Incoming main changes
+require narrow fresh checks of shared speech clocks, modal animation, pedestrian
+recovery, portrait renderer restoration and integrated police/home behavior.
+
+Actual admitted Heiko playback and failed-file reading fallback pass all three
+layouts in speech-focus-final. Fresh recorded-pause checks pass in
+speech-pause-verified. Both new warning/payment recordings pass natural-media
+completion and exactly-once payment on desktop and both Android-emulated layouts
+in speech-browser/run-1792553252551-40392 and police-contact-speech-mobile.
+Actual new Inga01 and Schwabingen01 pass desktop recorded delivery, mouth energy,
+hidden/HUD pause, early-input lock and release in new-neighbor-speech (2/2).
+These are state-checked silent sessions, not perceptual listening.
+
+All 24 current authored texts remain fully reachable in the actual locked panel
+at 320px width, 200% CSS zoom with enlarged type, and landscape with expanded
+spacing: 72 source-bound rows in reading-source-bound. This uses diagnostic
+corpus replacement; it does not represent 24 natural dialogue deliveries.
+
+Voice supplements retain eight owned German/English monologues per neighbor and
+two separate Heinrich encounter lines. The exact selected profiles remain
+unchanged; actual complete literal reference excerpts are declared per native
+leaf. Heiko and Inga require encoded-word qualification, including the exact
+same-MP3 complete-window proof for Inga02. New exaggerated Swabian recordings
+require explicit ROOT source/dual-recognizer clause review, preserving actual
+transcripts, nonliteral flags and recognition uncertainty. The sole final08
+net/nett homophone is bound to its exact source/take/span and the other actual
+recognizer's explicit negative clause; it cannot waive another lost negation.
+Failed takes and private authoring inputs remain archived, and unused new parts
+production is excluded from the shipped workflow. See the voice protocol and
+NEIGHBOR-DIALECT-COVERAGE.md for the finite proof contracts.
+
+The earlier six-run startup budget check passed with zero browser errors and
+no police atlas loaded at boot. Software-rendered timing was slow under host
+contention; it establishes asset/input budgets rather than physical-device
+smoothness. Final catalog and main integration need fresh bounded budget checks.
+
+## Release validation
+
+Pending: freeze the complete 26-file voice catalog, integrate current main,
+repin the combined candidate, finish narrow independent integration review,
+run complete deterministic checks and built-site browser checks, then publish
+and verify both public entry URLs. The goal remains active until those pass.

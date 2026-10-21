@@ -22,7 +22,7 @@ function fixture(){
   prepareRecording:()=>new Promise(resolve=>decode=resolve),setAudioText(){},pumpStimuli(){},playSyntheticStimulus(){assert.fail('the decoded recording must own playback')}};
  h.audio={state:'running',currentTime:7,createGain:()=>gain,createBufferSource:()=>nativeSource={connect(){return gain},start(when){this.when=when},stop(){},disconnect(){}}};h.ensureAudio=()=>h.audio;
  h.englishSubtitle=item=>item.subtitle||'';
- vm.createContext(h);vm.runInContext(['clearSubtitle','setSubtitle','startSubtitle','finishStimulus','playRecordedStimulus'].map(fn).join('\n'),h);
+ vm.createContext(h);vm.runInContext(['clearSubtitle','setSubtitle','startSubtitle','finishStimulus','syncLockedDialogueAudioFocus','playRecordedStimulus'].map(fn).join('\n'),h);
  const frame=()=>{const callbacks=[...frames.values()];frames.clear();callbacks.forEach(callback=>callback())};
  const item={recording:'heiko.mp3',text:'Erster Satz.|Zweiter Satz.',subtitle:'First sentence.|Second sentence.',captionSpeaker:'HEIKO',family:'dialogue'};
  h.activeStimulus=item;

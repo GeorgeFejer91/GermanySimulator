@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import vm from 'node:vm';
-import {neighborRecordingsBlock} from '../tools/curate-voice-library.mjs';
+import {neighborRecordingsBlock,heikoProfessorRenderReference} from '../tools/curate-voice-library.mjs';
 
 function load(){const window={};vm.runInNewContext(readFileSync(new URL('../neighbor-punishment.js',import.meta.url),'utf8'),{window});return window.JwdPunishment;}
 
@@ -63,5 +63,31 @@ test('new punishment recordings reject missing or different reference-text condi
  for(const invalid of [undefined,'0'.repeat(64)]){
   const changed=structuredClone(manifest);changed.clips[0].referenceTextSha256=invalid;
   assert.throws(()=>neighborRecordingsBlock(cast,[changed]),/reference text conditioning/);
+ }
+});
+
+test('literal professor reference rescue stays bound to the reviewed excerpt and actual text hash',()=>{
+ const root=new URL('..',import.meta.url),args=['tools/build-neighbor-voices.mjs','--punishment','--character','heiko','--professor-excerpt','--only','punishment-heiko-04','--plan'];
+ const invalid=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8'});assert.notEqual(invalid.status,0);
+ const valid=spawnSync(process.execPath,[...args,'--steps','64','--speed','0.9'],{cwd:root,encoding:'utf8'});assert.equal(valid.status,0,valid.stderr);
+ assert.deepEqual(JSON.parse(valid.stdout).referenceConditioning,heikoProfessorRenderReference);
+ const cast=JSON.parse(readFileSync(new URL('../For-AI/VOICE-CAST.json',import.meta.url),'utf8'));
+ const manifest=JSON.parse(readFileSync(new URL('../assets/voices/neighbors/punishment-heiko-manifest.json',import.meta.url),'utf8'));
+ const clip=manifest.clips[0];clip.referenceConditioning={...heikoProfessorRenderReference};clip.referenceTextSha256=heikoProfessorRenderReference.referenceTextSha256;clip.nativeCompletion.inferenceParameters={numStep:64,speed:.9,device:'cuda',dtype:'f16',preprocessPrompt:true};
+ assert.match(neighborRecordingsBlock(cast,[manifest]),/punishment-heiko-01/);
+ clip.referenceTextSha256=cast.existingAssetProfiles.find(person=>person.voiceId===clip.voiceId).punishmentReferenceTextSha256;
+ assert.throws(()=>neighborRecordingsBlock(cast,[manifest]),/reference text conditioning/);
+ clip.referenceTextSha256=heikoProfessorRenderReference.referenceTextSha256;clip.referenceConditioning.sourceEndSampleExclusive++;
+ assert.throws(()=>neighborRecordingsBlock(cast,[manifest]));
+});
+
+test('independent whole-file recognition preserves its unprompted policy and encoded-byte identity',()=>{
+ const cast=JSON.parse(readFileSync(new URL('../For-AI/VOICE-CAST.json',import.meta.url),'utf8'));
+ const manifest=JSON.parse(readFileSync(new URL('../assets/voices/neighbors/punishment-heiko-manifest.json',import.meta.url),'utf8'));
+ assert.ok(manifest.clips.some(clip=>clip.asrAlternativeVerification));
+ assert.doesNotThrow(()=>neighborRecordingsBlock(cast,[manifest]));
+ for(const [key,value]of [['scriptPrompt','expected words'],['audioSha256','0'.repeat(64)],['language','en'],['conditionOnPreviousText',true]]){
+  const changed=structuredClone(manifest),clip=changed.clips.find(row=>row.asrAlternativeVerification);clip.asrAlternativeVerification[key]=value;
+  assert.throws(()=>neighborRecordingsBlock(cast,[changed]),/independent neighbor ASR/);
  }
 });

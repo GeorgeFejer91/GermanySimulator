@@ -443,3 +443,38 @@ selected 20-second profile binding. It introduces no new speaker or license clai
 
 
 These synthetic game recordings use the existing OmniVoice runtime/model notices above. All 36 selected-profile MP3s passed independent encoded-word, level and format checks. The final two sources use the fuller written and spoken forms “Ich sage es” and “ich habe”; historical failed short-form takes remain private. Completed native phrase outputs are joined without cuts, silence insertion or crossfades where the manifest declares native parts. The 20-second source/reference audio and authoring models are not shipped. Human listening is NOT RUN. The prior CC0 Heiko profile and its 36 former recordings are historical and preserved privately, including their distinct source/license statement.
+
+## Police warning and payment supplement (2026-10-21)
+
+`police-contact/` contains two original fictional game lines using the existing
+selected Heinrich Wachtmeister profile `24b741bbe55d4f3a843aa481c3459a96`.
+Its existing CC0 EmoDB reference allocation and private original/reference
+hashes remain authoritative in `For-AI/VOICE-CAST.json`; no reference audio ships.
+The renderer is ResembleAI Chatterbox Multilingual V2 0.1.7 (MIT), revision
+`5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18`. The adjacent manifest records exact
+German/English sources, selected reference, both native completions, independent
+encoded-word checks, final hashes, durations, levels and measured mouth energy.
+Separate finite ROOT execution/admission hashes preserve this new supplement's
+provenance. There were two native calls and three independent ASR readings;
+perceptual listening is NOT RUN. Models, references and full authoring inputs
+remain private. These are synthetic dialogue recordings, not real police audio.
+
+## Post-arrest neighbor supplement (2026-10-21)
+
+The three `neighbors/punishment-*-manifest.json` supplements contain eight
+original monologues per selected speaker: Heiko Maaslos, Inga Maaslos and Frau
+Schwabingen. These reuse the existing saved voice identities and OmniVoice
+runtime/model notices above. The saved profiles and their reference provenance
+remain authoritative; no new source-performer license or CC0 allocation is
+assigned to these selected user-source references. Original/reference audio,
+models, held takes and full private authoring receipts are not shipped.
+
+Manifests distinguish the complete selected-reference binding from any literal
+PCM excerpt actually supplied at inference. They retain canonical and actual
+input identities, native completion, final MP3 hashes/levels/format, recognition
+receipts and measured 40 Hz mouth energy. Inga02 explicitly uses complete
+consecutive recognition windows on the same final encoding. The exaggerated
+Swabian recordings retain nonliteral recognition and explicit integrator
+semantic clause reviews, including recognition uncertainty. Neither advisory
+recognition nor a complete native inference establishes exact words or human
+listening. Perceptual listening is NOT RUN for this supplement.
