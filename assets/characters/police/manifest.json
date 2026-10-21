@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "method": "existing intact-painted-limbs; genuine authored neutral/half/raised and ticket gesture keys",
+  "columns": 8,
+  "rows": 7,
+  "desktopCell": [
+    160,
+    192
+  ],
+  "mobileCell": [
+    120,
+    144
+  ],
+  "pivot": [
+    0.5,
+    0.7682291666666667
+  ],
+  "figureHeightWorld": 1.56,
+  "cycleDistance": 17.744075829383885,
+  "clips": {
+    "down": 0,
+    "right": 1,
+    "up": 2,
+    "left": 3,
+    "idle": 4,
+    "warning": 5,
+    "ticket": 6
+  },
+  "mirroring": "left derives from whole right view; equipment hand changes with screen direction",
+  "sources": {
+    "actions.png": "56ccaa0dc2c59a82901e928904e5cd832e5f81bebacd1f671b7b64df7e449975",
+    "female-directions.png": "f52fa18f710d82b7a4a552226ad8e74688d8355feecf2ad6074a00896ae33e94",
+    "interaction-keys.png": "aabdfcfacb71fab31f6d8dc3d94f2a57b895878e73c1b577efcb624487e3e6ea",
+    "male-directions.png": "d489ee2b3ddd41e38611de643f1c89fbc7b730ac53570779acde4de5bfcb3a8e"
+  },
+  "builderSha256": "6f65dbbeab74f54315409ad088a143261b7051889213330c738d8cd40c571773",
+  "animationHelperSha256": "688cf0c0c99217683d9762d72bf9e1f36e33164a6a7737abed3549aa86f14e02",
+  "variants": {
+    "patrol-male": {
+      "desktop": {
+        "file": "patrol-male.webp",
+        "sha256": "617dae6119a9b1d1c105b3856e82b6e226cafb619c64e8083cfa888d156fe805",
+        "bytes": 382122,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "patrol-male-mobile.webp",
+        "sha256": "139beb4141fcb06f45e715ffc8333cdba5db7bba0398297d90be2b7e7c66e097",
+        "bytes": 254650,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "protective-male": {
+      "desktop": {
+        "file": "protective-male.webp",
+        "sha256": "1a9eaf9b77a4bcb38419de24083b80f52c32d87b24124004e798818863a513cd",
+        "bytes": 381530,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "protective-male-mobile.webp",
+        "sha256": "1327681f800b1db023da8c5a691e913516bf863c5f3fd370b177014bcf1d43df",
+        "bytes": 252964,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "riot-male": {
+      "desktop": {
+        "file": "riot-male.webp",
+        "sha256": "a516f7edce8f6d4fc3955a76a044e6304a24e4ba5337c29b5503459363fec74b",
+        "bytes": 389580,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "riot-male-mobile.webp",
+        "sha256": "d7bce4872af469672d2dd3708d65e9cabb7a7f0b6dda953e8e2c650052ced38d",
+        "bytes": 252292,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "heavy-male": {
+      "desktop": {
+        "file": "heavy-male.webp",
+        "sha256": "a29688dc70a13099ac5b75f015a88f20409ae0a78f1598aa65444351ea8f1ee3",
+        "bytes": 404576,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "heavy-male-mobile.webp",
+        "sha256": "6a0abcea403ddcfeb82854631bcd6ae0385fd588a9b4e760c2cac9180644bb8f",
+        "bytes": 267454,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "patrol-female": {
+      "desktop": {
+        "file": "patrol-female.webp",
+        "sha256": "fcb7fc9207a4a9f719270555e7d02ef002e537363785886d720adc6f0b64aceb",
+        "bytes": 398222,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "patrol-female-mobile.webp",
+        "sha256": "94c820730fe37f060e16143156de106f2d771d15e60144a3cb67fdd4d6a319d4",
+        "bytes": 263906,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "protective-female": {
+      "desktop": {
+        "file": "protective-female.webp",
+        "sha256": "3afdae0e81da6125257e23ab1fddceee4dd7170229c7c6413a95761420878fe2",
+        "bytes": 410704,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "protective-female-mobile.webp",
+        "sha256": "9da2fb7d04ad46e32c3c2965f93b2a26748d067a9a6083ff40a0957e56027184",
+        "bytes": 277654,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "riot-female": {
+      "desktop": {
+        "file": "riot-female.webp",
+        "sha256": "dc37414d286c65ee4d4d53efa96009cc2405e583802806cd7e9f3f7d0559a118",
+        "bytes": 416544,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "riot-female-mobile.webp",
+        "sha256": "4e0945dec0eb3e91f5ce753a554845ccabf49d2afd67820c61e1131237a1a367",
+        "bytes": 270222,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "heavy-female": {
+      "desktop": {
+        "file": "heavy-female.webp",
+        "sha256": "40e7eb8e3f5fd07392d1818f18db307b26fadecd59f3b8fb64191e8a9962a4fc",
+        "bytes": 433750,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "heavy-female-mobile.webp",
+        "sha256": "ccbf2669d7f2973455a0aee1c15c669741cccc4d06fbac6ec7855f44cd280426",
+        "bytes": 284046,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    }
+  }
+}

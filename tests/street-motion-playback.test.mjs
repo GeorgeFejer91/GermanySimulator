@@ -46,10 +46,12 @@ test('a dense walk settles through its remaining phases before the planted react
  assert.equal(actor.spriteFrame,0);assert.equal(actor.gaitDistance,0);assert.equal(actor.touristFacing,'down');
 });
 
-test('the player and officers retain the 3D renderer and Sandales cannot enter the mesh study',()=>{
+test('the player stays 3D, officers own their painted fallback host, and Sandales cannot enter the mesh study',()=>{
  const world=readFileSync('world3d.js','utf8');
  assert.match(world,/const playerMesh=character\("player"\)/);
- assert.match(world,/q=character\("police"\)/);
+ assert.match(world,/const root=character\("police"\)/,'officers retain a procedural host until paint is decoded');
+ assert.match(world,/policePaint\.attach\(actor,root,/,'the dedicated police owner attaches the requested tier');
+ assert.match(world,/policePaint\.detach\(p\);retireNpcMesh\(q\)/,'retiring an officer also releases its painted owner');
  assert.match(world,/if\(actor===bridge\.player\|\|bridge\.getPolice\(\)\.includes\(actor\)\|\|actor\.sandale\)return null/);
  assert.match(world,/if\(actor\.special\|\|actor\.jwdRole\|\|\['tourist-guenther-liegestuhl','touristin-walburga-handtuch'\]\.includes\(actor\.voiceId\)\)return null/);
  assert.match(world,/else if\(q\.userData\.grid\)syncAtlasSprite\(q,\{\.\.\.n,spriteFrame:q\.userData\.spriteFrame/,'an existing billboard stays on its own source cell while replacement artwork loads');

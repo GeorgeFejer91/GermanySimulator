@@ -19,7 +19,13 @@ const knickCount=['manifest.json','ambient-manifest.json','queue-call-manifest.j
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
 const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
-const neighborDirectory=join(root,'assets/voices/neighbors'),neighborCount=existsSync(neighborDirectory)?readdirSync(neighborDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(neighborDirectory,file),'utf8')).clips.length,0):0;
+const neighborDirectory=join(root,'assets/voices/neighbors'),neighborManifests=existsSync(neighborDirectory)?readdirSync(neighborDirectory).filter(file=>file.endsWith('-manifest.json')).map(file=>({file,...JSON.parse(readFileSync(join(neighborDirectory,file),'utf8'))})):[];
+const legacyNeighborCount=neighborManifests.filter(manifest=>!manifest.file.startsWith('punishment-')).reduce((n,manifest)=>n+manifest.clips.length,0);
+assert.equal(legacyNeighborCount,116,'ordinary neighbor coverage remains 40 Heiko,34 Inga,33 Schwabingen,7 Hartmut and2 archived Ede');
+const punishmentClips=neighborManifests.filter(manifest=>manifest.file.startsWith('punishment-')).flatMap(manifest=>manifest.clips);
+for(const recording of Object.values(library.recordings).filter(row=>row.id?.startsWith('punishment-')))assert.ok(punishmentClips.some(clip=>clip.clipId===recording.id&&clip.sha256===recording.sha256&&clip.text===recording.source&&clip.english===recording.english&&clip.voiceId===recording.voiceId&&clip.actorId===recording.actorId),'published punishment subtitle has an exact admitted manifest source');
+const admittedPunishmentCount=punishmentClips.filter(clip=>library.recordedClip(clip.voiceId,clip.text)==='./'+clip.file&&library.recordings['./'+clip.file]?.sha256===clip.sha256).length;
+const neighborCount=legacyNeighborCount+admittedPunishmentCount;
 const cityDirectory=join(root,'assets/voices/city-dialogue'),cityCount=existsSync(cityDirectory)?readdirSync(cityDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(cityDirectory,file),'utf8')).clips.length,0):0;
 const trafficDirectory=join(root,'assets/voices/traffic-dialogue'),trafficCount=readdirSync(trafficDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(trafficDirectory,file),'utf8')).clips.length,0);
 const crowdDirectory=join(root,'assets/voices/candidate-dialogue'),crowdCount=readdirSync(crowdDirectory).filter(file=>file.endsWith('-crowd-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(crowdDirectory,file),'utf8')).clips.filter(clip=>clip.approval?.status==='user-approved').length,0);
@@ -67,6 +73,11 @@ const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".m
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
  if(/\/player-phone-(silent|ignore)\.mp3$/.test(url)){assert.equal(library.recordings[url],undefined);continue}
+ if(!library.recordings[url]&&url.includes('/neighbors/punishment-')){
+  const requested=neighborManifests.filter(manifest=>manifest.file.startsWith('punishment-')).flatMap(manifest=>[...manifest.clips,...manifest.heldPrivate]);
+  assert.ok(requested.some(clip=>url===`./assets/voices/neighbors/${clip.clipId}.mp3`),'an unpublished punishment file still requires an explicit owned request');
+  continue;
+ }
  assert.ok(library.recordings[url],`${url} is missing from the audio-text library`);
  assert.ok(library.recordings[url].source,`${url} needs an exact source transcript`);
  assert.ok(library.recordings[url].english,`${url} needs an English subtitle`);

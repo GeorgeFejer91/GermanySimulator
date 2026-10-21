@@ -1124,9 +1124,18 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 ## Street character movement
 
-The user's 2026-10-16 street-animation direction retains the player and police
-officers as their articulated 3D models. Their limb phase follows accepted root
-displacement, and they do not acquire the street paint or contact-rig owner.
+The player retains its articulated 3D model and displacement-driven limb phase.
+The user's 2026-10-21 police request supersedes the earlier police exception:
+officers now use the eight painted patrol/protective/riot/heavy variants in
+`assets/characters/police/`, owned by `police-sprites.js`. The shared asset queue
+loads only the current tier and variant on demand, keeps the previous paint
+until replacement decode, and releases textures when their last actor leaves.
+Missing initial paint retains the existing 3D officer fallback. Actual accepted
+root displacement drives the gait; contact owns the warning/ticket gesture.
+The full alternate library costs 3,217,028 desktop or 2,123,188 mobile encoded
+bytes; each selected atlas decodes to 6,881,280 or 3,870,720 bytes respectively.
+See [the police art record](../docs/engineering/POLICE-ART.md) for source keys,
+calibration, dimensions, hashes, and validation limits.
 Keep abundant, independently named Herr and Frau Sandale on the accepted towel
 sprite atlases alongside the other named citizens. New citizen animation remains
 subject to the source/export, actual-browser and independent world reviews.

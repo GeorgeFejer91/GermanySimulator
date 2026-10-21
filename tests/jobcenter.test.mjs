@@ -112,7 +112,7 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   values.window.Germany3D={get jobcenter(){return encounter.inspect()},levelTransition:{active:false}};
   const rootKeys=game.slice(game.indexOf('function keydown(e){'),game.indexOf('function clearInput(){',game.indexOf('function keydown(e){')));
   const rootState={modal:true,started:true};
-  const rootInput=new Function('window','document','state','keys','indoorVisit','interact',rootKeys+';return {keydown,keyup}')(values.window,doc,rootState,keys,null,()=>assert.fail('immersive movement cannot invoke city interaction'));
+  const rootInput=new Function('window','document','state','keys','indoorVisit','interact','punishmentExitInput',rootKeys+';return {keydown,keyup}')(values.window,doc,rootState,keys,null,()=>assert.fail('immersive movement cannot invoke city interaction'),()=>false);
   const key=code=>({code,target:{closest:()=>null},preventDefault(){}});
   encounter.open({onClose:r=>closed.push(r)});await flush();
   for(const code of ['KeyW','ArrowUp']){

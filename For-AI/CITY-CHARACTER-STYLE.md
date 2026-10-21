@@ -6,9 +6,9 @@ advisers, the Sandales and the JWD neighbors. Use the same short, large-headed
 painted miniature family as Heiko Maaslos, Inga Maaslos, Merkel, Söder and Merz.
 Distinct faces, outfits, moods and props identify people within that family.
 
-Preserve the user's later exception in [the asset policy](./ASSET-POLICY.md):
-the player and police retain their articulated 3D models and running animations.
-This painted-family guidance does not change their rendering or movement owner.
+The player remains an articulated 3D model. The user's later police paint request
+uses this miniature family; [the asset policy](./ASSET-POLICY.md#street-character-movement)
+owns the current rendering, loading and movement exceptions.
 
 ## Reference authority
 

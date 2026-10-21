@@ -57,8 +57,8 @@ jobs:
         run: node --test tests/buergeramt-president-portrait.test.mjs
       - name: Check potato mirror reflection and interaction
         run: node --test tests/buergeramt-potato-mirror.test.mjs
-      - name: Check law pickup and sirens
-        run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs
+      - name: Check law pickup, police escalation and neighbor punishment
+        run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs tests/police-contact.test.mjs tests/police-delivery.test.mjs tests/police-sprites.test.mjs tests/neighbor-punishment.test.mjs
       - name: Check neighbor voice authoring and staged assets
         run: |
           if ! command -v ffmpeg >/dev/null; then

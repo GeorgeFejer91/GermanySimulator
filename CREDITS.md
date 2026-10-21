@@ -504,6 +504,18 @@ The Kripo opening greeting uses a separate compact Piper/VITS name derivative, d
 
 ### Fictional neighborhood sprites
 
+The eight fictional male/female police variants and their directional walking,
+warning and ticket artwork were generated with OpenAI's image tool and baked
+into transparent game atlases. Berlin police uniform references informed the
+navy clothing and escalating protective equipment; no real officer or police
+insignia is reproduced. Source paint, hashes, tool versions and original-art
+provenance are recorded in [the police art notes](docs/engineering/POLICE-ART.md).
+The warning/fine/arrest star thresholds are game fiction. The 24 original
+post-arrest neighbor monologues adapt petty-neighbor topics from the linked
+Reddit discussions, with character-specific fictional complaints and paired
+English subtitles; [the research ledger](docs/engineering/POLICE-NEIGHBOR-RESEARCH.md)
+distinguishes source observations from invented details.
+
 Heiko’s twelve notebook action keys were generated with the built-in OpenAI
 image tool from his existing miniature painting. Whole connected figures are
 registered after matte cleanup; the original rest pose and all prior atlas cells

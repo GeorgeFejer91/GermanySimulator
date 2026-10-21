@@ -98,6 +98,12 @@
 #city-notices .violation-alert p{margin:5px 0;font:.875rem/1.4 "Courier New",monospace;text-transform:none}
 #city-notices #violation-stars{font-size:1rem;letter-spacing:2px}
 .dialogue.automatic:not(.welcome){display:none}
+.dialogue.locked:not([hidden]){display:grid;left:50%;right:auto;transform:translateX(-50%);bottom:calc(var(--subtitle-height,50px) + 12px);width:min(620px,calc(100% - 24px));max-height:calc(100dvh - var(--subtitle-height,50px) - var(--subtitle-toggle-bottom,44px) - 36px);grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);padding:16px;gap:0}
+.dialogue.locked .dialogue-copy{display:block;min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y}
+.dialogue.locked #speaker{display:block;font:700 .875rem/1.4 Arial,sans-serif;letter-spacing:0;overflow-wrap:break-word}
+.dialogue.locked #dialogue-text{font:500 1rem/1.5 Arial,sans-serif;overflow-wrap:break-word}
+.dialogue.locked .dialogue-actions,.dialogue.locked .voice-state{display:none}
+#app:has(.dialogue.locked:not([hidden])) .control-dock{display:none}
 .dialogue{border-color:#746d5e;background:#eee8d8;box-shadow:3px 4px 0 #24211c45}
 .amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
 .amt-walk-top{top:calc(var(--subtitle-toggle-bottom,44px) + 12px)}

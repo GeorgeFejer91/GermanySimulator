@@ -6,10 +6,10 @@ const game=source('game.js');
 const start=game.indexOf(' let sx=',game.indexOf('function update(dt)'));
 const end=game.indexOf('\n if(bumped)',start);
 assert.ok(start>=0&&end>start);
-const cityStep=new Function('keys','player','dt','movePlayerGround',game.slice(start,end));
+const cityStep=new Function('keys','player','dt','movePlayerGround','jwd',game.slice(start,end));
 function cityDistance(keys,energy=100){
  let distance=0;
- cityStep(keys,{x:0,y:0,energy},.1,(dx,dy)=>{distance=Math.hypot(dx,dy)});
+ cityStep(keys,{x:0,y:0,energy},.1,(dx,dy)=>{distance=Math.hypot(dx,dy)},{punishment:null});
  return distance;
 }
 

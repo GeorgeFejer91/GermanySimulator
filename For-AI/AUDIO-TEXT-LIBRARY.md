@@ -1,5 +1,15 @@
 # Speech catalog and subtitle authority
 
+The post-arrest inventory in `neighbor-punishment.js` has eight exact bilingual
+monologues per adult neighbor. `punishmentDialogue` in the existing cast owns
+these additional pairs without changing any earlier story ordinal. Dedicated
+`punishment-*-manifest.json` supplements use the same selected profiles and
+curator. Each arrest adds its attempt ID to the existing speech ticket key, so
+old duplicate protection cannot silence a later punishment. Forced lecture
+completion distinguishes actual recorded media from caption delivery through
+the broker receipt; missing/failed voice retains the full active reading clock.
+
+
 Heiko’s notepad welcome adds four owned German/English pairs, appended as
 `heiko-story-37`–`40` without renumbering earlier clips. All four selected-profile
 recordings pass the existing final-MP3 word/identity/energy gates. The four active

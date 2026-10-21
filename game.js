@@ -30,7 +30,7 @@ const WURST_TYPES=Object.freeze({
  currywurstBadge:{label:"BERLINER CURRYWURST",short:"CURRYWURST",color:"#bd563f",pieces:4,image:"./assets/wurst/currywurst.webp",photo:"RICHARD & BRITTA MISCHAU · CC BY-SA 4.0",history:"On 4 September 1949, Berlin snack-bar owner Herta Heuwer began serving sausage with a tomato-curry sauce she later called Chillup. Other regions tell competing origin stories, but Berlin commemorates her former Charlottenburg stand as the birthplace of the dish."}
 });
 const WURST_IDS=Object.keys(WURST_TYPES);
-const state={neighborLevel:false,started:false,modal:false,dialogue:false,wanted:0,offence:"AKTENLAGE: UNAUFFÄLLIG",wantedCooldown:0,policeContactCooldown:0,runTimer:0,runWarned:false,roadTimer:0,roadWarned:false,jayCooldown:0,grassTimer:0,grassWarned:false,gardenCooldown:0,evasionTimer:0,pettyAuditTimer:16,mission:0,forms:0,pfand:0,germanness:0,wurstBadges:new Set(),lawUnlocked:false,lawCooldown:0,ampelClock:0,ampelWait:0,ampelWaitLight:null,crossingRun:null,wasOnRoad:false,crossRewardAt:-9,quizTimer:9,quizApproach:null,quizApproachQuestion:null,quizBag:[],quizCharacter:null,day:1,minutes:480,stadtbild:0,citizen:false,gameOver:false,lowEnergyRemarked:false,rule:0,ruleTimer:0,lang:"de",voiceOn:true,subtitlesOn:false,region:"berlin",regionCooldown:0};
+const state={neighborLevel:false,started:false,modal:false,dialogue:false,wanted:0,offence:"AKTENLAGE: UNAUFFÄLLIG",wantedCooldown:0,policeContactCooldown:0,policeAccountCents:10000,finesPaidCents:0,runTimer:0,runWarned:false,roadTimer:0,roadWarned:false,jayCooldown:0,grassTimer:0,grassWarned:false,gardenCooldown:0,evasionTimer:0,pettyAuditTimer:16,mission:0,forms:0,pfand:0,germanness:0,wurstBadges:new Set(),lawUnlocked:false,lawCooldown:0,ampelClock:0,ampelWait:0,ampelWaitLight:null,crossingRun:null,wasOnRoad:false,crossRewardAt:-9,quizTimer:9,quizApproach:null,quizApproachQuestion:null,quizBag:[],quizCharacter:null,day:1,minutes:480,stadtbild:0,citizen:false,gameOver:false,lowEnergyRemarked:false,rule:0,ruleTimer:0,lang:"de",voiceOn:true,subtitlesOn:false,region:"berlin",regionCooldown:0};
 const HUD_REFRESH_SECONDS=.1;
 let police=[],policeVehicles=[],policeHelicopters=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=performance.now(),nextFrameAt=last,frameInterval=250,hudRefreshTimer=0;
 const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
@@ -2316,7 +2316,7 @@ const pickups=[
  ...wurstPickups
 ].map(item=>item.type==="wurst"?item:offsetWorldPoint(item));
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
-const jwd={allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,visitor:null,gardenCooldown:0,tour:null,tourSequence:0,completedTours:new Set(),tourProgress:new Map(),dialogueTickets:new Map(),dialogueTicketSequence:0,child:null};
+const jwd={punishment:null,punishmentSequence:0,punishmentSelector:null,allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,visitor:null,gardenCooldown:0,tour:null,tourSequence:0,completedTours:new Set(),tourProgress:new Map(),dialogueTickets:new Map(),dialogueTicketSequence:0,child:null};
 const jwdCopy={
  watcherPremature:{"de":["Wie schön, dass Sie sich schon einbringen möchten! Erst schließen Sie bitte Ihren Einzug ab, dann starten wir Ihr neighborhood onboarding. Ich notiere Ihr Interesse schon einmal. Das notiere ich als Ihr commitment."],"en":["How lovely that you already want to get involved! Please finish your move-in first, then we will start your neighborhood onboarding. I will make a note of your interest. I will record that as your commitment."]},
  parentPremature:{"de":["Ach, Sie möchten schon … die Sache mit Ihrem Einzug klären Sie dann erst, ja? Ich sage Ihnen das nur, damit wir nachher nicht alles zweimal … Wir haben ja noch Zeit, uns kennenzulernen. Sie wissen ja, wie das ist."],"en":["Oh, you would like to already … you will sort out your move-in first, yes? I am only telling you so we do not have to go through everything twice afterwards … We still have time to get to know each other. You know how it is."]},
@@ -2370,7 +2370,7 @@ function jwdVoice(n){return{swabian:'jwd-frau-schwabingen',parent:'jwd-heiko-maa
 function neighborDialogueTicket(dialogue,line){
  const actor=state.characterSpeaker;
  if(!actor||!npcs.includes(actor)||!jwdVoice(actor)||dialogue.speaker!==actor.name||dialogue.voiceId!==jwdVoice(actor))return null;
- const key=JSON.stringify([actor.id,dialogue.voiceId,line]);
+ const key=JSON.stringify([actor.id,dialogue.voiceId,line,...(dialogue.punishmentId?[dialogue.punishmentId]:[])]);
  let ticket=jwd.dialogueTickets.get(key);
  if(!ticket){ticket={id:++jwd.dialogueTicketSequence,actorId:actor.id,voiceId:dialogue.voiceId,owner:dialogue,lineIndex:dialogue.i,status:'issued'};jwd.dialogueTickets.set(key,ticket)}
  return ticket;
@@ -2526,9 +2526,13 @@ function updateJwdTour(dt){
  }else if(t.phase==='settle'&&t.age>=.35&&!state.dialogue){t.phase='ready';updateHud()}
  if(t.phase==='ready'&&!state.dialogue){t.arrivalAge=atNeighborStandingSpot()?(t.arrivalAge||0)+dt:0;if(t.arrivalAge>=.25)speakJwdTourLine(t)}
 }
+function dialogueReadingSeconds(d){
+ if(state.voiceOn&&!d.captionFallback)return 1;
+ return d.locked?Math.max(8,d.lines[d.i].trim().split(/\s+/).length*.5):Math.min(16,Math.max(3,d.lines[d.i].length*.065));
+}
 function updateJwdPerformance(dt){
  for(const n of npcs)if(n.jwdRole&&n.jwdGesture)n.jwdGestureAge=(n.jwdGestureAge||0)+dt;
- const d=state.dialogueData;if(state.dialogue&&d?.automatic){d.lineAge=(d.lineAge||0)+dt;const caption=!state.voiceOn||d.captionFallback,reading=caption?Math.min(16,Math.max(3,d.lines[d.i].length*.065)):1;if((d.lineComplete||caption)&&d.lineAge>=reading)nextDialogue()}
+ const d=state.dialogueData;if(state.dialogue&&d?.automatic){d.lineAge=(d.lineAge||0)+dt;const caption=!state.voiceOn||d.captionFallback,reading=dialogueReadingSeconds(d);if((d.lineComplete||caption)&&d.lineAge>=reading)nextDialogue(true)}
 }
 function updateJwdChild(dt){
  const n=jwd.child;if(!n||n.jwdTouring)return;
@@ -2550,7 +2554,7 @@ function walkJwdRoute(n,dt){
      // Sliding can reach the body's legal lane edge, beyond a centre-distance band.
      const crossing=jwdGardens.paths.find(p=>p.w>p.h&&jwdGardens.crossY>=p.y&&jwdGardens.crossY<=p.y+p.h);
      const inCrossing=crossing&&n.x>=crossing.x+13&&n.x<=crossing.x+crossing.w-13&&n.y>=crossing.y+13&&n.y<=crossing.y+crossing.h-13;
-     const passing=inCrossing&&jwdLaneDetour(n,aim.x,aim.y);if(passing){n.jwdRoute=[...passing,...n.jwdRoute];n.jwdProgress=null;n.jwdMoving=0;return false}
+     const passing=inCrossing&&jwdLaneDetour(n,aim.x,aim.y,jwd.punishment?.actor===n?player:null);if(passing){n.jwdRoute=[...passing,...n.jwdRoute];n.jwdProgress=null;n.jwdMoving=0;return false}
     }
    }
   }
@@ -2563,6 +2567,7 @@ function walkJwdRoute(n,dt){
  return !n.jwdRoute?.length;
 }
 function updateJwdNeighbors(dt,distance){
+ if(jwd.punishment)return false;
  if(distance>650){jwd.atHome=false;jwd.exitPending=false;if(jwd.visitor){returnJwdNeighbor(jwd.visitor);jwd.visitor=null}}
  if(distance>1000)return false;const residents=npcs.filter(n=>jwdGardens.stations[n.id]);
  jwd.gardenCooldown=Math.max(0,jwd.gardenCooldown-dt);
@@ -2585,37 +2590,114 @@ function updateJwdNeighbors(dt,distance){
  }
  return false;
 }
-function arrestPlayer(){
- if(state.neighborLevel)return;
- cancelJwdTour();
- state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;player.energy=Math.max(36,player.energy-12);player.vx=player.vy=0;clearInput();
- if(jwd.allocated){
-  const home=buildings.find(b=>b.id==="jwd-home");let spawn=null;
-  // Never put a waking body inside a visitor. Search the same open porch/lane.
-  for(const dy of [30,65,100])for(const dx of [0,-40,40,-80,80]){const point={x:home.doorX+dx,y:home.doorY+dy};if(!spawn&&!responderBlocked(point.x,point.y,player.r,player))spawn=point}
-  if(!spawn)for(let y=jwdLane.y+player.r;y<=jwdLane.y+jwdLane.h-player.r&&!spawn;y+=35)for(let x=jwdLane.x+player.r;x<=jwdLane.x+jwdLane.w-player.r&&!spawn;x+=35)if(!responderBlocked(x,y,player.r,player))spawn={x,y};
-  if(spawn){player.x=spawn.x;player.y=spawn.y;notifyStreetDiscontinuity(player,"arrest-respawn")}
-  state.wanted=0;clearPoliceActors();police=[];state.region="berlin";state.runTimer=state.roadTimer=state.grassTimer=state.evasionTimer=0;state.pettyAuditTimer=24;
-  jwd.atHome=false;beginJwdVisit();state.offence="HAUSARREST · JWD";
-  toast(state.lang==="en"?"YOU WAKE UP AT HOME · THE NEIGHBORS ARE WAITING":"ZU HAUSE AUFGEWACHT · DIE NACHBARN WARTEN SCHON");
- }else{player.x=policePath.x1;player.y=policePath.y1;notifyStreetDiscontinuity(player,"police-transfer");state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
- syncPoliceResponse();uiTone(180,.18,"sawtooth",.05);updateHud();
+function jwdPunishmentRoute(actor,origin=player){
+ const targets=[jwdGardens.gate,...Array.from({length:16},(_,i)=>({x:origin.x+75*Math.sin(i*Math.PI/8),y:origin.y+75*Math.cos(i*Math.PI/8)}))];
+ for(const target of targets){
+  if(dist(target.x,target.y,origin.x,origin.y)>100||dist(target.x,target.y,origin.x,origin.y)<player.r+16||!pedestrianRouteContains(actor,target.x,target.y,13))continue;
+  const route=jwdPath(actor,target);let from=actor,clear=true;
+  for(const point of route){
+   const steps=Math.max(1,Math.ceil(dist(from.x,from.y,point.x,point.y)/4));
+   for(let i=1;i<=steps;i++){const x=from.x+(point.x-from.x)*i/steps,y=from.y+(point.y-from.y)*i/steps;if(!pedestrianRouteContains(actor,x,y,13)||responderBlocked(x,y,13,actor)){clear=false;break}}
+   if(!clear)break;from=point;
+  }
+  if(clear)return route;
+ }
+ return null;
 }
-function jwdLaneDetour(thief,tx,ty){
+function punishmentExitInput(code){
+ if(!state.started||state.modal||state.dialogue||state.gameOver||window.GermanyHUD?.paused||jwd.punishment?.phase!=='waiting'||!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD'].includes(code))return false;
+ updateJwdPunishment(0,true);return true;
+}
+function updateJwdPunishment(dt,exitAttempt=false){
+ const p=jwd.punishment;if(!p)return false;
+ if(p.phase==='waiting'){
+  if(!exitAttempt)return true;
+  const library=window.JwdPunishment;if(!library)return true;
+  jwd.punishmentSelector??=library.createSelector();
+  for(let i=0;i<library.stories.length;i++){
+   const story=jwd.punishmentSelector.next(),actor=npcs.find(n=>n.id===story.actorId);
+   if(!actor||p.allowedActors&&!p.allowedActors.includes(actor.id))continue;
+   const route=jwdPunishmentRoute(actor);if(!route)continue;
+   p.story=story;p.actor=actor;p.route=route;break;
+  }
+  if(!p.actor)return true;
+  p.phase='approach';p.actor.jwdWorking=false;p.actor.jwdGesture=null;
+  p.actor.jwdRoute=p.route;
+  clearInput();toast(state.lang==='en'?'ONE MOMENT! YOUR NEIGHBOR IS COMING.':'EINEN MOMENT! IHR NACHBAR KOMMT SCHON.');
+ }
+ if(p.phase!=='approach')return true;
+ walkJwdRoute(p.actor,dt);
+ if(dist(player.x,player.y,p.actor.x,p.actor.y)>105)return true;
+ p.phase='lecture';p.actor.jwdRoute=[];p.actor.jwdMoving=0;p.actor.facing=Math.atan2(player.x-p.actor.x,player.y-p.actor.y);
+ p.actor.jwdGesture=p.actor.jwdRole==='parent'?'notebook':p.actor.jwdRole==='swabian'?'inspect':'point';
+ p.actor.jwdGestureAge=0;p.actor.jwdGestureDuration=60;
+ state.characterSpeaker=p.actor;clearInput();
+ const line=p.story.lines[0];let dialogue;
+ openDialogue(p.actor.name,[line.de],'!',()=>{
+  if(jwd.punishment!==p||p.phase!=='lecture'||state.dialogueData!==dialogue)return;
+  p.phase='done';p.actor.jwdGesture=null;returnJwdNeighbor(p.actor);
+  jwd.punishment=null;jwd.atHome=true;jwd.exitPending=false;jwd.gardenCooldown=38;
+  clearInput();updateHud();
+ },line.voiceId,[line.en],false,true,p.actor,{locked:true,punishmentId:p.id});
+ dialogue=state.dialogueData;updateHud();return true;
+}
+function clearPoliceEncounter(){
+ state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;
+ state.wanted=state.wantedCooldown=0;
+ state.runTimer=state.roadTimer=state.grassTimer=state.evasionTimer=0;
+ state.runWarned=state.roadWarned=state.grassWarned=false;state.pettyAuditTimer=24;
+ player.vx=player.vy=0;clearInput();clearPoliceActors();syncPoliceResponse();
+}
+function policeContact(officer=null){
+ if(state.neighborLevel||state.modal||state.dialogue||state.wanted<1||state.policeContactCooldown>0)return;
+ if(state.wanted>=3){arrestPlayer();return}
+ const fine=state.wanted===2,en=state.lang==='en';clearPoliceEncounter();
+ if(officer){officer.encounter=true;officer.gesture=fine?'ticket':'warning';police.push(officer)}
+ state.offence=fine?'VERWARNUNGSGELD · 35 €':'MÜNDLICHE VERWARNUNG';
+ const de=fine?'So, beim zweiten Stern bleibt es bei 35 Euro Verwarnungsgeld. Kein Ausflug zur Wache. Sie bezahlen per Überweisung, ich gebe Ihnen die Quittung. Beim nächsten Mal bitte erst gucken, dann über den Rasen.':'Heute ist Ihr Glückstag. Es bleibt bei einer mündlichen Verwarnung. Sie können weitergehen. Und zwar auf dem Weg. Der Rasen hat sich bereits schriftlich beschwert.';
+ const english=fine?'At two stars this is a €35 warning payment. No trip to the station. Pay by transfer and I will give you the receipt. Next time, look before crossing the lawn.':'Today is your lucky day. Just a verbal warning. You may carry on. On the path, please. The lawn has already complained in writing.';
+ let paid=false,encounter;
+ openDialogue('POLIZEI · EINSATZLEITUNG',[de],'§',()=>{
+  if(paid||state.dialogueData!==encounter)return;paid=true;if(officer)removePoliceActor(officer);if(!fine)return;
+  state.policeAccountCents=(state.policeAccountCents??10000)-3500;
+  state.finesPaidCents=(state.finesPaidCents||0)+3500;
+  const balance=(state.policeAccountCents/100).toFixed(2);
+  toast(en?`€35 PAID · ACCOUNT €${balance}${state.policeAccountCents<0?' · OVERDRAFT':''}`:`35 € BEZAHLT · KONTO ${balance} €${state.policeAccountCents<0?' · DISPO':''}`);updateHud();
+ },'polizei-heinrich-wachtmeister',[english],false,false,null,{paymentCents:fine?3500:0,actionLabel:fine?(en?'PAY €35':'35 € BEZAHLEN'):null});
+ encounter=state.dialogueData;updateHud();
+}
+function arrestPlayer(){
+ if(state.neighborLevel||state.wanted<3)return;
+ const home=buildings.find(b=>b.id==='jwd-home'),residents=npcs.filter(n=>['parent','watcher','swabian'].includes(n.jwdRole));let spawn=null,allowedActors=null;
+ const admit=p=>{if(responderBlocked(p.x,p.y,player.r,player))return false;const reachable=residents.filter(n=>jwdPunishmentRoute(n,p));if(residents.length&&!reachable.length)return false;allowedActors=reachable.map(n=>n.id);spawn=p;return true};
+ // Search real clearance; an arrest never grants registration or introduction credit.
+ for(const dy of [30,65,100])for(const dx of [0,-40,40,-80,80])if(!spawn)admit({x:home.doorX+dx,y:home.doorY+dy});
+ if(!spawn)for(let y=jwdLane.y+player.r;y<=jwdLane.y+jwdLane.h-player.r&&!spawn;y+=35)for(let x=jwdLane.x+player.r;x<=jwdLane.x+jwdLane.w-player.r&&!spawn;x+=35)admit({x,y});
+ if(!spawn){state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;return}
+ cancelJwdTour();clearPoliceEncounter();
+ player.x=spawn.x;player.y=spawn.y;notifyStreetDiscontinuity(player,'arrest-respawn');
+ state.region='berlin';state.offence='ZU HAUSE ENTLASSEN · NACHBARSCHAFTSGESPRÄCH';
+ jwd.punishment={id:++jwd.punishmentSequence,phase:'waiting',origin:{...spawn},story:null,actor:null,allowedActors:residents.length?allowedActors:null};
+ jwd.atHome=false;jwd.exitPending=false;jwd.visitor=null;
+ toast(state.lang==='en'?'YOU WAKE UP AT HOME · TRY TO LEAVE QUIETLY':'ZU HAUSE AUFGEWACHT · VERSUCHEN SIE, LEISE ZU GEHEN');
+ uiTone(180,.18,'sawtooth',.05);updateHud();
+}
+function jwdLaneDetour(thief,tx,ty,listener=null){
  // One short lane has two passing edges. Check every segment before committing;
  // if both are occupied, wait and retry instead of circling a blocked doorway.
  const direction=Math.sign(tx-thief.x)||1,goal={x:tx,y:jwdGardens.crossY};
  for(const y of [jwdGardens.crossY-30,jwdGardens.crossY+24])for(const back of [0,30,65,100]){
-  const x=thief.x-direction*back,points=[{x,y:thief.y},{x,y},{x:goal.x,y},goal];let from=thief,clear=true;
+  const x=thief.x-direction*back,points=[{x,y:thief.y},{x,y},{x:goal.x,y},goal];let from=thief,clear=true;const prefix=[];
   for(const to of points){const length=Math.hypot(to.x-from.x,to.y-from.y),steps=Math.max(1,Math.ceil(length));let px=from.x,py=from.y;
-   for(let i=1;i<=steps;i++){const nx=from.x+(to.x-from.x)*i/steps,ny=from.y+(to.y-from.y)*i/steps;if(responderBlocked(nx,ny,13,thief,px,py)){clear=false;break}px=nx;py=ny}
-   if(!clear)break;from=to;
+   for(let i=1;i<=steps;i++){const nx=from.x+(to.x-from.x)*i/steps,ny=from.y+(to.y-from.y)*i/steps;if(responderBlocked(nx,ny,13,thief,px,py)){clear=false;break}if(listener&&dist(nx,ny,listener.x,listener.y)<=100)return [...prefix,{x:nx,y:ny}];px=nx;py=ny}
+   if(!clear)break;prefix.push(to);from=to;
   }
   if(clear)return points;
  }
  return null;
 }
 function updateJwd(dt){
+ if(jwd.punishment)return updateJwdPunishment(dt,false);
  const home=buildings.find(b=>b.id==="jwd-home"),distance=dist(player.x,player.y,home.doorX,home.doorY);
  if(jwd.allocated&&distance<1200)setNeighborLevelActive(true);
  else if(jwd.met.size>=3&&!jwd.tour)setNeighborLevelActive(false);
@@ -2634,7 +2716,7 @@ function updateJwd(dt){
  return false;
 }
 function getMissionWaypoint(){
- if(!state.started||state.modal||state.dialogue&&!state.dialogueData?.roaming||state.gameOver||window.GermanyHUD?.paused||window.BuergeramtLevel?.active||state.mission>=missions.length)return null;
+ if(jwd.punishment||!state.started||state.modal||state.dialogue&&!state.dialogueData?.roaming||state.gameOver||window.GermanyHUD?.paused||window.BuergeramtLevel?.active||state.mission>=missions.length)return null;
  const mission=currentMission();
  if(mission.target==='jwd-tour'){const t=jwd.tour,n=t.leader||t.actor;return{id:n.id,x:n.x,y:n.y,guide:true}}
  if(mission.target==="jwd-neighbors"){const n=nextJwdNeighbor();return n?{id:n.id,x:n.x,y:n.y}:null}
@@ -3016,7 +3098,7 @@ const TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO[0];
 const TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO.slice(1);
 const TRAIN_IDLE_SECONDS=5,TRAIN_FADE_DISTANCE=320;
 let trainAnnouncementNextAt=0,trainIdleSeconds=0,trainIdleStation=null,trainIdleX=player.x,trainIdleY=player.y;
-function finishStimulus(item,generation){if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.actor)item.actorSpeechStatus=item.subtitleMode==="recorded"&&item.speechStarted?"finished":"cancelled";recordedSpeechSource=null;recordedSpeechGain=null;clearTimeout(item.loadingTimer);item.distanceGain?.disconnect();clearSubtitle();if(item.done)item.done();if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.ambient)nextAmbientAt=performance.now()+AUDIO_MIX.AMBIENT_GAP_MS;activeStimulus=null;clearTimeout(stimulusTimer);stimulusTimer=setTimeout(()=>{for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);if(stimulusQueue.length)pumpStimuli();else setAudioText()},AUDIO_MIX.REQUIRED_GAP_MS)}
+function finishStimulus(item,generation){if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.actor)item.actorSpeechStatus=item.subtitleMode==="recorded"&&item.speechStarted?"finished":"cancelled";recordedSpeechSource=null;recordedSpeechGain=null;clearTimeout(item.loadingTimer);item.distanceGain?.disconnect();clearSubtitle();if(item.done)item.done(item);if(generation!==stimulusGeneration||activeStimulus!==item)return;if(item.ambient)nextAmbientAt=performance.now()+AUDIO_MIX.AMBIENT_GAP_MS;activeStimulus=null;clearTimeout(stimulusTimer);stimulusTimer=setTimeout(()=>{for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);if(stimulusQueue.length)pumpStimuli();else setAudioText()},AUDIO_MIX.REQUIRED_GAP_MS)}
 function playCaptionStimulus(item,generation){const duration=Math.max(3200,Math.min(16000,item.text.length*42)),started=performance.now();item.subtitleMode="silent";item.subtitleDuration=duration/1000;item.subtitleElapsed=()=>(performance.now()-started)/1000;item.start?.(item);startSubtitle(item);stimulusTimer=setTimeout(()=>finishStimulus(item,generation),duration)}
 function officialComputerVoice(voices,preferredNames){
  const localVoices=voices.filter(voice=>voice.localService);
@@ -3539,7 +3621,7 @@ function updatePoliceResponse(dt){
   car.hitCooldown=Math.max(0,car.hitCooldown-dt);car.orbit+=dt*(.5+car.index*.08)*car.avoid;const velocity=Math.hypot(player.vx,player.vy),headingX=velocity>10?player.vx/velocity:Math.sin(player.facing),headingY=velocity>10?player.vy/velocity:Math.cos(player.facing),slot=(car.index-(policeVehicles.length-1)/2)*82,lead=155+Math.min(115,velocity*.62)+Math.abs(slot)*.12,playerDx=player.x-car.x,playerDy=player.y-car.y,playerDistance=Math.hypot(playerDx,playerDy)||1,orbitWobble=24;
   let targetX=player.x+headingX*lead-headingY*slot+Math.cos(car.orbit)*orbitWobble,targetY=player.y+headingY*lead+headingX*slot+Math.sin(car.orbit)*orbitWobble;if(velocity<10){const radius=175+car.index*24,targetAngle=car.orbit+car.index*2.1;targetX=player.x+Math.cos(targetAngle)*radius;targetY=player.y+Math.sin(targetAngle)*radius}if(playerDistance<92){targetX=player.x;targetY=player.y}
    const entering=car.lifecycle==="entering"&&!car.retiring,entryRoad=horizontalRoads[car.roadIndex];if(entering&&car.entryDir>0&&car.x>=entryRoad.x+120||entering&&car.entryDir<0&&car.x<=entryRoad.x+entryRoad.w-120)car.lifecycle="active";const pickupHolding=car.lawPickup&&!car.retiring&&car.lawPickup.phase!=="approach",route=entering?{x:car.entryDir>0?entryRoad.x+240:entryRoad.x+entryRoad.w-240,y:car.y}:policeDrivingTarget(car,car.lawPickup&&!car.retiring?car.lawPickup.parking.x:targetX,car.lawPickup&&!car.retiring?car.lawPickup.parking.y:targetY),dx=route.x-car.x,dy=route.y-car.y,d=Math.hypot(dx,dy)||1,desiredAngle=Math.atan2(dy,dx),driveHeading=car.angle+(car.exitBackwards?Math.PI:0),turn=Math.atan2(Math.sin(desiredAngle-driveHeading),Math.cos(desiredAngle-driveHeading)),alignment=Math.max(.15,Math.cos(turn)),cruise=pickupHolding||d<30?0:Math.min(car.speed,Math.max(0,(d-22)*1.4),route.turnApproach?Math.sqrt(8100+480*Math.max(0,d-190)):Infinity)*alignment,clearance=policeDrivingClearance(car,Math.max(80,(car.driveSpeed||0)**2/480+30),car.exitBackwards?-1:1),forwardSpeed=Math.min(cruise,Math.sqrt(480*Math.max(0,clearance-6))),reversing=!pickupHolding&&(car.exitBackwards||(car.reverseTime||0)>0),desiredSpeed=reversing?-55:forwardSpeed,steeringTarget=clamp(turn*1.6,-.62,.62)*(reversing?-1:1);car.reverseTime=Math.max(0,(car.reverseTime||0)-dt);car.braking=Math.abs(desiredSpeed)<Math.abs(car.driveSpeed||0);const requested=Math.abs(car.driveSpeed||0)*dt,travelled=driveGroundVehicle(car,desiredSpeed,steeringTarget,dt);car.blockedTime=!reversing&&d>45&&(clearance<12||requested>.01&&travelled<requested*.25)?(car.blockedTime||0)+dt:0;if(car.blockedTime>.7){car.reverseTime=1.2;car.blockedTime=0;car.braking=true}const contactDx=player.x-car.x,contactDy=player.y-car.y,contactDistance=Math.hypot(contactDx,contactDy)||1;if(contactDistance<190&&car.passbyReady){car.passbyReady=false;playPolicePassby(car)}else if(contactDistance>330)car.passbyReady=true;
-   if(!car.retiring&&!car.lawPickup&&vehicleBodyDistance(player.x,player.y,car)<player.r+4&&car.hitCooldown===0){car.hitCooldown=2.15;pushPlayer(contactDx/contactDistance*105,contactDy/contactDistance*105);player.energy=Math.max(12,player.energy-(8+state.wanted*3));particles.push({x:player.x,y:player.y,t:1,text:"POLIZEILICHE VERDRÄNGUNG"});if(performance.now()>(car.barkAt||0)){car.barkAt=performance.now()+4300;showWorldBark("STREIFENWAGEN",state.region==="berlin"?"Administrative contact! Bitte resist the Motorhaube less!":"Verwaltungskontakt! Bitte leisten Sie der Motorhaube weniger Widerstand!",true)}toast(state.lang==="en"?"POLICE VEHICLE IMPACT · ENERGY REDUCED":"STREIFENWAGENKONTAKT · ENERGIE VERRINGERT")}
+   if(state.wanted>=3&&!car.retiring&&!car.lawPickup&&vehicleBodyDistance(player.x,player.y,car)<player.r+4&&car.hitCooldown===0){car.hitCooldown=2.15;pushPlayer(contactDx/contactDistance*105,contactDy/contactDistance*105);player.energy=Math.max(12,player.energy-(8+state.wanted*3));particles.push({x:player.x,y:player.y,t:1,text:"POLIZEILICHE VERDRÄNGUNG"});if(performance.now()>(car.barkAt||0)){car.barkAt=performance.now()+4300;showWorldBark("STREIFENWAGEN",state.region==="berlin"?"Administrative contact! Bitte resist the Motorhaube less!":"Verwaltungskontakt! Bitte leisten Sie der Motorhaube weniger Widerstand!",true)}toast(state.lang==="en"?"POLICE VEHICLE IMPACT · ENERGY REDUCED":"STREIFENWAGENKONTAKT · ENERGIE VERRINGERT")}
  }
  for(let index=policeVehicles.length-1;index>=0;index--){const car=policeVehicles[index];if(car.retiring&&vehicleFullyOffMap(car.x,car.y,car.angle)&&!vehicleCameraVisible(car.x,car.y,car.angle))policeVehicles.splice(index,1)}
  const grass=onGardenGrass(player.x,player.y);
@@ -3559,7 +3641,7 @@ function updateHud(){
  const r=rules[state.rule%rules.length];document.getElementById("rule-id").textContent=r[0];document.getElementById("rule-text").textContent=localize(r[1]);
  const fill=document.getElementById("germanness-fill"),power=document.getElementById("law-power"),lawButton=document.getElementById("law-action"),germannessPercent=state.germanness/GERMANNESS_MAX*100;fill.style.height=germannessPercent+"%";fill.style.setProperty("--germanness",germannessPercent+"%");fill.style.filter="grayscale("+(100-germannessPercent)+"%) saturate("+(.25+germannessPercent*.0075)+")";fill.parentElement.setAttribute("aria-valuenow",state.germanness);document.getElementById("germanness-value").textContent=state.germanness+"/"+GERMANNESS_MAX;power.textContent=state.lawUnlocked?(state.lawCooldown>0?"§ IN BEARBEITUNG · "+Math.ceil(state.lawCooldown)+"s":"§ / Q · GESETZ ZITIEREN"):"§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX;lawButton.disabled=state.neighborLevel||!state.lawUnlocked;lawButton.title=power.textContent;renderWurstBadges();
 }
-function openDialogue(speaker,lines,portrait,done,voiceId="",subtitles,roaming=false,automatic=false,actor=null){if(state.dialogueData?.jwdTourId&&jwd.tour&&speaker!==jwd.tour.actor.name&&speaker!==jwd.child?.name)cancelJwdTour();stopSpeech(false);state.modal=!roaming&&!automatic;state.dialogue=true;state.dialogueData={speaker,lines,portrait:portrait||"§",done,voiceId,subtitles,i:0,roaming,automatic,actor,lineAge:0,lineComplete:false};renderDialogue()}
+function openDialogue(speaker,lines,portrait,done,voiceId="",subtitles,roaming=false,automatic=false,actor=null,options=null){options=options||{};if(state.dialogueData?.jwdTourId&&jwd.tour&&speaker!==jwd.tour.actor.name&&speaker!==jwd.child?.name)cancelJwdTour();stopSpeech(false);state.modal=!!options.locked||!roaming&&!automatic;state.dialogue=true;state.dialogueData={speaker,lines,portrait:portrait||"§",done,voiceId,subtitles,i:0,roaming,automatic,actor,lineAge:0,lineComplete:false,...options};renderDialogue()}
 function setDialogueVoiceBusy(busy){state.dialogueVoiceBusy=busy;document.getElementById("dialogue-next").disabled=false;document.getElementById("dialogue-speak").disabled=busy}
 function speakDialogueLine(line,start){
  const dialogue=state.dialogueData,lineIndex=dialogue?.i,ticket=dialogue&&state.characterSpeaker?.jwdRole?neighborDialogueTicket(dialogue,line):null;
@@ -3577,13 +3659,13 @@ function speakDialogueLine(line,start){
  state.neighborSpeechTime=0;
  const token=state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1,speaker=dialogue?.speaker||'',voiceId=dialogue?.voiceId||'',masculine=speaker.startsWith('FRIEDRICH MERZ')||speechCatalog.voices?.[voiceId]?.gender==='male';
  const eligible=()=>token===state.dialogueVoiceToken&&state.dialogue&&state.dialogueData===dialogue&&dialogue.i===lineIndex&&(!ticket||ticket.status==='queued'||ticket.status==='started');
- const done=()=>{if(!eligible())return;if(ticket)ticket.status='finished';setDialogueVoiceBusy(false);dialogue.lineComplete=true};
- const options={start:()=>{if(!eligible()||ticket?.status==='started')return;if(ticket)ticket.status='started';start?.()},done,isEligible:eligible,cueToken:token,actor:dialogue?.actor,subtitle:dialogue?.subtitles?.[lineIndex],family:'dialogue',priority:STIMULUS_PRIORITY.CRITICAL,ambient:false};
+ const done=delivery=>{if(!eligible())return;if(dialogue.locked&&(!delivery||delivery.subtitleMode!=='recorded'||!delivery.speechStarted))dialogue.captionFallback=true;if(ticket)ticket.status='finished';setDialogueVoiceBusy(false);dialogue.lineComplete=true};
+ const options={start:delivery=>{if(!eligible()||ticket?.status==='started')return;if(dialogue.locked&&delivery?.subtitleMode==='silent'){dialogue.captionFallback=true;dialogue.lineAge=0}if(ticket)ticket.status='started';start?.()},done,isEligible:eligible,cueToken:token,actor:dialogue?.actor,subtitle:dialogue?.subtitles?.[lineIndex],family:'dialogue',priority:STIMULUS_PRIORITY.CRITICAL,ambient:false};
  setDialogueVoiceBusy(state.voiceOn);
  if(speaker.startsWith('ANGELA MERKEL'))speakMerkelLine(line,options);else if(speaker.startsWith('FRIEDRICH MERZ'))speakMerzLine(line,options);else speak(line,{...options,masculine,voiceKey:speaker,candidateVoiceId:voiceId});
 }
-function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ"),memorial=d.portrait==="KG"||d.portrait==="GP",welcome=d.portrait==="DE",dialogue=document.getElementById("dialogue"),newLine=d.renderedLineIndex!==d.i;if(newLine){d.renderedLineIndex=d.i;d.lineAge=0;d.lineComplete=false;d.captionFallback=false}document.getElementById("dialogue-next").hidden=d.automatic;document.getElementById("dialogue-speak").hidden=d.automatic;dialogue.classList.toggle("automatic",!!d.automatic);dialogue.classList.toggle("memorial",memorial);dialogue.classList.toggle("welcome",welcome);if(newLine||!d.neighborTicket)dialogue.hidden=d.roaming||state.voiceOn&&!welcome&&!d.captionFallback;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=welcome?(state.lang==="en"?"NEXT":"WEITER"):d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER");document.getElementById("voice-state").textContent=state.voiceOn?(memorial?(d.portrait==="GP"?"KOSTENTAFEL · BAU + WACHSCHUTZ":"HISTORISCHER TEXT · DEUTSCH"):borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");if(memorial)dialogue.scrollTop=0;if(welcome)document.querySelector(".dialogue-copy").scrollTop=0;speakDialogueLine(line,()=>{if(!d.roaming)dialogue.hidden=false})}
-function nextDialogue(){if(!state.dialogue)return;if(state.dialogueData?.portrait==="DE")window.GermanyHUD?.stopWelcomeFax?.();if(state.dialogueVoiceBusy){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;stopSpeech();setDialogueVoiceBusy(false)}else if(textOnlyBark&&textOnlyBark.cueToken===state.dialogueVoiceToken){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;hideWorldBark()}const d=state.dialogueData;d.i++;if(d.i<d.lines.length){renderDialogue();return}document.getElementById("dialogue").hidden=true;state.dialogue=false;state.modal=false;if(state.characterSpeaker){requestCharacterReaction(state.characterSpeaker,"review");state.characterSpeaker=null}if(d.done)d.done()}document.getElementById("dialogue-next").onclick=nextDialogue;
+function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ"),memorial=d.portrait==="KG"||d.portrait==="GP",welcome=d.portrait==="DE",dialogue=document.getElementById("dialogue"),newLine=d.renderedLineIndex!==d.i;if(newLine){d.renderedLineIndex=d.i;d.lineAge=0;d.lineComplete=false;d.captionFallback=false}document.getElementById("dialogue-next").hidden=d.automatic;document.getElementById("dialogue-speak").hidden=d.automatic;dialogue.classList.toggle("automatic",!!d.automatic);dialogue.classList.toggle("locked",!!d.locked);dialogue.classList.toggle("memorial",memorial);dialogue.classList.toggle("welcome",welcome);if(newLine||!d.neighborTicket)dialogue.hidden=d.roaming||state.voiceOn&&!welcome&&!d.captionFallback&&!d.locked;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=d.actionLabel|| (welcome?(state.lang==="en"?"NEXT":"WEITER"):d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER"));document.getElementById("voice-state").textContent=state.voiceOn?(memorial?(d.portrait==="GP"?"KOSTENTAFEL · BAU + WACHSCHUTZ":"HISTORISCHER TEXT · DEUTSCH"):borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");if(memorial)dialogue.scrollTop=0;if(welcome)document.querySelector(".dialogue-copy").scrollTop=0;speakDialogueLine(line,()=>{if(!d.roaming)dialogue.hidden=false})}
+function nextDialogue(fromClock=false){if(!state.dialogue)return;const locked=state.dialogueData;if(locked?.locked&&(!fromClock||!((locked.lineComplete||!state.voiceOn||locked.captionFallback)&&locked.lineAge>=dialogueReadingSeconds(locked))))return;if(state.dialogueData?.portrait==="DE")window.GermanyHUD?.stopWelcomeFax?.();if(state.dialogueVoiceBusy){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;stopSpeech();setDialogueVoiceBusy(false)}else if(textOnlyBark&&textOnlyBark.cueToken===state.dialogueVoiceToken){state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;hideWorldBark()}const d=state.dialogueData;d.i++;if(d.i<d.lines.length){renderDialogue();return}document.getElementById("dialogue").hidden=true;state.dialogue=false;state.modal=false;if(state.characterSpeaker){requestCharacterReaction(state.characterSpeaker,"review");state.characterSpeaker=null}if(d.done)d.done()}document.getElementById("dialogue-next").onclick=nextDialogue;
 document.getElementById("dialogue-speak").onclick=()=>{if(state.dialogue&&!state.dialogueVoiceBusy)speakDialogueLine(state.dialogueData.lines[state.dialogueData.i])};
 function showForm(type){if(state.gameOver||missions[state.mission]?.form!==type)return;state.activeForm={type,mission:state.mission};const def=forms[type],en=formEnglish[type];state.modal=true;document.getElementById("form-modal").hidden=false;document.getElementById("form-code").textContent=def.code;document.getElementById("form-title").textContent=state.lang==="en"&&en?en[0]:def.title;document.getElementById("form-subtitle").textContent=state.lang==="en"&&en?en[1]+" Official field labels remain in German, naturally.":def.subtitle;document.getElementById("form-error").textContent="";const wrap=document.getElementById("form-fields");wrap.innerHTML="";for(const f of def.fields){if(f[0]==="check"){const lab=document.createElement("label");lab.className="check";const inp=document.createElement("input");inp.type="checkbox";inp.required=true;const span=document.createElement("span");span.textContent=f[1];lab.append(inp,span);wrap.append(lab);continue}const lab=document.createElement("label");lab.className="field";const title=document.createElement("span");title.textContent=f[1];lab.append(title);if(f[0]==="select"){const sel=document.createElement("select");sel.required=true;const empty=document.createElement("option");empty.value="";empty.textContent=state.lang==="en"?"PLEASE SELECT / BITTE AUSWÄHLEN":"BITTE AUSWÄHLEN";sel.append(empty);for(const o of f[2]){const op=document.createElement("option");op.value=o;op.textContent=o;sel.append(op)}lab.append(sel)}else{const inp=document.createElement("input");inp.required=true;inp.autocomplete="off";lab.append(inp)}wrap.append(lab)}document.getElementById("bureaucracy-form").dataset.type=type}
 let anmeldungAwarded=false;try{anmeldungAwarded=localStorage.getItem("germany-anmeldung-v1")==="1"}catch{}
@@ -3708,7 +3790,7 @@ function cityInteractionTarget(){
  const norm=normObjects.find(o=>!o.fixed&&dist(player.x,player.y,o.x,o.y)<92);
  return norm?{kind:"norm",object:norm}:null;
 }
-function interact(){if(window.Germany3D?.levelTransition?.active)return;if(state.dialogue){if(!state.dialogueData?.automatic)nextDialogue();return}if(state.modal)return;if(jwd.tour){const t=jwd.tour,guide=t.leader||t.actor;if(dist(player.x,player.y,guide.x,guide.y)<108){if(t.phase==='ready')speakJwdTourLine(t);else toast(state.lang==='en'?'STAY CLOSE · YOUR GUIDE IS SHOWING YOU THE WAY':'BLEIB IN DER NÄHE · DEIN NACHBAR ZEIGT DEN WEG')}return;}const target=cityInteractionTarget();if(!target&&neighborActivityActive())return;if(target?.kind==="neighbor"){talkJwdNeighbor(target.object);return}if(target?.kind==="park"){openDialogue("GÖRLITZER PARK · KOSTENTAFEL",goerlitzerPark.lines,"GP");return}if(target?.kind==="memorial"){openDialogue("KIESINGER (1904–1988) · ERINNERUNGSTAFEL",KIESINGER_PLAQUE_LINES,"KG");return}const m=currentMission();if(target?.kind==="building"){const b=target.object;if(b.id==="jobcenter"){enterJobcenter(b);return}if(b.residential){if(b.id==="jwd-home")visitJwdHome();else if(b.id==="jwd-fink"||b.id==="jwd-kranz")talkJwdNeighbor(npcs.find(n=>n.id===(b.id==="jwd-fink"?"jwd-swabian":"jwd-parent")));else openDialogue(b.name,jwdCopy.villa.de,"!");return}interactBuilding(b,m);return}if(target?.kind==="npc"){const n=target.object;
+function interact(){if(window.Germany3D?.levelTransition?.active)return;if(state.dialogue){if(!state.dialogueData?.automatic)nextDialogue();return}if(state.modal)return;if(jwd.punishment){updateJwdPunishment(0,true);return}if(jwd.tour){const t=jwd.tour,guide=t.leader||t.actor;if(dist(player.x,player.y,guide.x,guide.y)<108){if(t.phase==='ready')speakJwdTourLine(t);else toast(state.lang==='en'?'STAY CLOSE · YOUR GUIDE IS SHOWING YOU THE WAY':'BLEIB IN DER NÄHE · DEIN NACHBAR ZEIGT DEN WEG')}return;}const target=cityInteractionTarget();if(!target&&neighborActivityActive())return;if(target?.kind==="neighbor"){talkJwdNeighbor(target.object);return}if(target?.kind==="park"){openDialogue("GÖRLITZER PARK · KOSTENTAFEL",goerlitzerPark.lines,"GP");return}if(target?.kind==="memorial"){openDialogue("KIESINGER (1904–1988) · ERINNERUNGSTAFEL",KIESINGER_PLAQUE_LINES,"KG");return}const m=currentMission();if(target?.kind==="building"){const b=target.object;if(b.id==="jobcenter"){enterJobcenter(b);return}if(b.residential){if(b.id==="jwd-home")visitJwdHome();else if(b.id==="jwd-fink"||b.id==="jwd-kranz")talkJwdNeighbor(npcs.find(n=>n.id===(b.id==="jwd-fink"?"jwd-swabian":"jwd-parent")));else openDialogue(b.name,jwdCopy.villa.de,"!");return}interactBuilding(b,m);return}if(target?.kind==="npc"){const n=target.object;
  if(n.jwdRole){talkJwdNeighbor(n);return}
  if(requestCharacterReaction(n,["working","waiting"]))state.characterSpeaker=n;
  if(n.special){n.dialogueNearby=true;n.barkAt=performance.now()+8000}
@@ -3751,6 +3833,7 @@ function updateCitySimulation(dt){
 
  let sx=(keys.ArrowRight||keys.KeyD?1:0)-(keys.ArrowLeft||keys.KeyA?1:0),fy=(keys.ArrowUp||keys.KeyW?1:0)-(keys.ArrowDown||keys.KeyS?1:0);
  const mag=Math.hypot(sx,fy);if(mag>1){sx/=mag;fy/=mag}
+ if(jwd.punishment&&(jwd.punishment.phase!=='waiting'||mag>.08)){player.vx=player.vy=0;updateJwdPunishment(dt,mag>.08);return}
  const sprint=!!(keys.KeyR||keys.ShiftLeft||keys.ShiftRight);
  const speed=146*(keys.KeyR?2:sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,bumped=movePlayerGround(sx*speed*dt,-fy*speed*dt);
  if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
@@ -3818,9 +3901,9 @@ function updateCitySimulation(dt){
  state.policeContactCooldown=Math.max(0,state.policeContactCooldown-dt);
 
  for(let i=police.length-1;i>=0;i--){
-   const p=police[i];if(p.pickupCar)continue;const target=player,rdx=target.x-p.x,rdy=target.y-p.y,d=Math.hypot(rdx,rdy)||1,step=p.speed*dt;moveGroundResponder(p,rdx/d*step,rdy/d*step,14);
+   const p=police[i];if(p.pickupCar||p.encounter)continue;const target=player,rdx=target.x-p.x,rdy=target.y-p.y,d=Math.hypot(rdx,rdy)||1,step=p.speed*dt;moveGroundResponder(p,rdx/d*step,rdy/d*step,14);
    if(d<260&&performance.now()>(p.barkAt||0)){p.barkAt=performance.now()+2200+Math.random()*1800;policeBark(false,"",p)}
-   if(d<player.r+14+4){removePoliceActor(p);if(state.policeContactCooldown>0)continue;arrestPlayer();break}
+   if(d<player.r+14+4){if(state.policeContactCooldown>0)continue;policeContact(p);break}
    else if(state.wanted<2&&d>520)removePoliceActor(p)
  }
 
@@ -4635,8 +4718,8 @@ function refreshActiveSubtitle(){const caption=activeStimulus||textOnlyBark;if(c
 window.addEventListener("resize",refreshActiveSubtitle);
 window.addEventListener("caption-layout-change",refreshActiveSubtitle);
 document.getElementById("voice-toggle").onclick=()=>{state.voiceOn=!state.voiceOn;document.getElementById("voice-toggle").textContent=state.voiceOn?"VOICE ON":"VOICE OFF";if(!state.voiceOn){window.GermanyKnickSpeech?.cancelPreparation();window.BuergeramtLevel?.cancelNameAnnouncement?.();stopSpeech(true);state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;setDialogueVoiceBusy(false)}else if(window.GermanyKnickSpeech?.initialName)window.GermanyKnickSpeech.rememberName(window.GermanyKnickSpeech.initialName)};
- function keydown(e){if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active)return;if(e.code==="Escape"&&indoorVisit){stopSpeech();document.getElementById("dialogue").hidden=true;document.getElementById("form-modal").hidden=true;state.dialogue=false;leaveIndoorBuilding();return;}if(e.defaultPrevented||e.target?.closest?.("input,textarea,select,[contenteditable=\"true\"]"))return;if(state.gameOver)return;if(state.modal){if(window.Germany3D?.jobcenter?.active){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;}else if(state.dialogue&&e.code==="KeyE"&&!e.repeat)interact();return;}if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyS"&&!state.started&&!document.getElementById("intro").classList.contains("hidden")){startGame(true);return}if(e.code==="KeyE")interact();if(e.code==="KeyQ"||e.key==="§")useLawPower()}function keyup(e){keys[e.code]=false}function clearInput(){for(const code in keys)keys[code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);addEventListener("blur",clearInput);document.addEventListener("visibilitychange",()=>{last=performance.now();nextFrameAt=last;if(document.hidden){clearInput();trainIdleSeconds=0;trainIdleStation=null;if(activeStimulus?.family==="train")stopSpeech();stopPoliceChaseLoop()}else pumpAssetLoads()});
-document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();keys[code]=true;if(code==="KeyE")interact();if(code==="KeyQ")useLawPower()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
+ function keydown(e){if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active)return;if(e.code==="Escape"&&indoorVisit){stopSpeech();document.getElementById("dialogue").hidden=true;document.getElementById("form-modal").hidden=true;state.dialogue=false;leaveIndoorBuilding();return;}if(e.defaultPrevented||e.target?.closest?.("input,textarea,select,[contenteditable=\"true\"]"))return;if(state.gameOver)return;if(state.modal){if(window.Germany3D?.jobcenter?.active){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;}else if(state.dialogue&&e.code==="KeyE"&&!e.repeat)interact();return;}if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();if(punishmentExitInput(e.code))return;keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyS"&&!state.started&&!document.getElementById("intro").classList.contains("hidden")){startGame(true);return}if(e.code==="KeyE")interact();if(e.code==="KeyQ"||e.key==="§")useLawPower()}function keyup(e){keys[e.code]=false}function clearInput(){for(const code in keys)keys[code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);addEventListener("blur",clearInput);document.addEventListener("visibilitychange",()=>{last=performance.now();nextFrameAt=last;if(document.hidden){clearInput();trainIdleSeconds=0;trainIdleStation=null;if(activeStimulus?.family==="train")stopSpeech();stopPoliceChaseLoop()}else pumpAssetLoads()});
+document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();if(punishmentExitInput(code))return;keys[code]=true;if(code==="KeyE")interact();if(code==="KeyQ")useLawPower()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
 
 const appSurface=document.getElementById("app");
 function editableTarget(target){return !!(target&&target.closest&&target.closest('input, textarea, select, [contenteditable="true"]'))}
