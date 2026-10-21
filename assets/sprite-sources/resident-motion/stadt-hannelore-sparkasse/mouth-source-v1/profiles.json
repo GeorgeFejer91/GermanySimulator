@@ -1,0 +1,1331 @@
+{
+  "schemaVersion": 1,
+  "identity": "stadt-hannelore-sparkasse",
+  "status": "SOURCE-only mouth candidate; independent lip review pending; leg components remain held",
+  "inputPinsSha256": "e9630e821b6dd61977ce07565166b4853b88cd45cd669b320efe588d7a4bd84b",
+  "helper": {
+    "file": "tools/build-street-mouths.py",
+    "sha256": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8"
+  },
+  "neutralPacket": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/registration-receipt.json",
+    "sha256": "d39077d848b113bace59483453887870f2d96fe8ed345b140dde1c03539879c3",
+    "authority": "accepted eight exact neutral image bytes; no walking or head transport"
+  },
+  "directPreviewCalibration": {
+    "paintFigureHeightCanonical": 137,
+    "logicalFigureHeightCanonical": 136,
+    "paintFigureHeightsDirect": {
+      "96x120": 102.75,
+      "64x80": 68.5
+    },
+    "figureWorldHeight": 1.6,
+    "status": "own accepted neutral paint137 calibration; no world scale change"
+  },
+  "mouthVisible": [
+    "down",
+    "front-right",
+    "right",
+    "rear-right",
+    "rear-left",
+    "left",
+    "front-left"
+  ],
+  "explicitNull": [
+    "up"
+  ],
+  "nullReason": {
+    "up": "actual rear hair/head; no painted lip visible"
+  },
+  "registrations": {
+    "down": {
+      "input": {
+        "name": "down",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png",
+        "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "down",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        265.5,
+        216.6
+      ],
+      "axesPx": [
+        38.0,
+        0.19999999999998863,
+        -0.027894350496434354,
+        5.299926594322828
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            246.5,
+            216.5
+          ],
+          [
+            256.0,
+            215.25
+          ],
+          [
+            265.5,
+            215.65
+          ],
+          [
+            275.0,
+            215.5
+          ],
+          [
+            284.5,
+            216.7
+          ]
+        ],
+        "source_upper": [
+          [
+            246.5,
+            216.5
+          ],
+          [
+            256.0,
+            215.25
+          ],
+          [
+            265.5,
+            215.65
+          ],
+          [
+            275.0,
+            215.5
+          ],
+          [
+            284.5,
+            216.7
+          ]
+        ],
+        "source_lower": [
+          [
+            246.5,
+            216.5
+          ],
+          [
+            256.0,
+            215.25
+          ],
+          [
+            265.5,
+            215.65
+          ],
+          [
+            275.0,
+            215.5
+          ],
+          [
+            284.5,
+            216.7
+          ]
+        ],
+        "open_upper": [
+          [
+            246.5,
+            216.5
+          ],
+          [
+            256.002368,
+            214.800006
+          ],
+          [
+            265.503947,
+            214.90001
+          ],
+          [
+            275.002632,
+            215.000007
+          ],
+          [
+            284.5,
+            216.7
+          ]
+        ],
+        "open_lower": [
+          [
+            246.5,
+            216.5
+          ],
+          [
+            255.988421,
+            217.44997
+          ],
+          [
+            265.483158,
+            218.849956
+          ],
+          [
+            274.988158,
+            217.749969
+          ],
+          [
+            284.5,
+            216.7
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 207,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "front-right": {
+      "input": {
+        "name": "front-right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-right-registered.png",
+        "sha256": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "front-right",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        293.25,
+        215.95
+      ],
+      "axesPx": [
+        23.5,
+        -1.0999999999999943,
+        0.23378657584859905,
+        4.994531393129187
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            281.5,
+            216.5
+          ],
+          [
+            287.375,
+            215.1
+          ],
+          [
+            293.25,
+            213.8
+          ],
+          [
+            299.125,
+            213.15
+          ],
+          [
+            305.0,
+            215.4
+          ]
+        ],
+        "source_upper": [
+          [
+            281.5,
+            216.5
+          ],
+          [
+            287.375,
+            215.1
+          ],
+          [
+            293.25,
+            213.8
+          ],
+          [
+            299.125,
+            213.15
+          ],
+          [
+            305.0,
+            215.4
+          ]
+        ],
+        "source_lower": [
+          [
+            281.5,
+            216.5
+          ],
+          [
+            287.375,
+            215.1
+          ],
+          [
+            293.25,
+            213.8
+          ],
+          [
+            299.125,
+            213.15
+          ],
+          [
+            305.0,
+            215.4
+          ]
+        ],
+        "open_upper": [
+          [
+            281.5,
+            216.5
+          ],
+          [
+            287.353959,
+            214.650492
+          ],
+          [
+            293.21727,
+            213.100766
+          ],
+          [
+            299.106297,
+            212.750437
+          ],
+          [
+            305.0,
+            215.4
+          ]
+        ],
+        "open_lower": [
+          [
+            281.5,
+            216.5
+          ],
+          [
+            287.463839,
+            216.997922
+          ],
+          [
+            293.385596,
+            216.696828
+          ],
+          [
+            299.209163,
+            214.948031
+          ],
+          [
+            305.0,
+            215.4
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png",
+        "upstreamSha256": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 204,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "right": {
+      "input": {
+        "name": "right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png",
+        "sha256": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "right",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        307.25,
+        211.39999999999998
+      ],
+      "axesPx": [
+        17.5,
+        -2.4000000000000057,
+        0.611419800122362,
+        4.458269375892212
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            298.5,
+            212.6
+          ],
+          [
+            302.875,
+            211.65
+          ],
+          [
+            307.25,
+            210.4
+          ],
+          [
+            311.625,
+            210.3
+          ],
+          [
+            316.0,
+            210.2
+          ]
+        ],
+        "source_upper": [
+          [
+            298.5,
+            212.6
+          ],
+          [
+            302.875,
+            211.65
+          ],
+          [
+            307.25,
+            210.4
+          ],
+          [
+            311.625,
+            210.3
+          ],
+          [
+            316.0,
+            210.2
+          ]
+        ],
+        "source_lower": [
+          [
+            298.5,
+            212.6
+          ],
+          [
+            302.875,
+            211.65
+          ],
+          [
+            307.25,
+            210.4
+          ],
+          [
+            311.625,
+            210.3
+          ],
+          [
+            316.0,
+            210.2
+          ]
+        ],
+        "open_upper": [
+          [
+            298.5,
+            212.6
+          ],
+          [
+            302.834239,
+            211.352782
+          ],
+          [
+            307.175271,
+            209.8551
+          ],
+          [
+            311.577445,
+            209.953246
+          ],
+          [
+            316.0,
+            210.2
+          ]
+        ],
+        "open_lower": [
+          [
+            298.5,
+            212.6
+          ],
+          [
+            303.078807,
+            213.13609
+          ],
+          [
+            307.576091,
+            212.777744
+          ],
+          [
+            311.822013,
+            211.736553
+          ],
+          [
+            316.0,
+            210.2
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 201,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "rear-right": {
+      "input": {
+        "name": "rear-right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-right-registered.png",
+        "sha256": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "rear-right",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        311.1,
+        211.55
+      ],
+      "axesPx": [
+        11.199999999999989,
+        -4.099999999999994,
+        1.2719189659280663,
+        3.4745103459498408
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            305.5,
+            213.6
+          ],
+          [
+            308.3,
+            212.2
+          ],
+          [
+            311.1,
+            211.8
+          ],
+          [
+            313.9,
+            210.8
+          ],
+          [
+            316.7,
+            209.5
+          ]
+        ],
+        "source_upper": [
+          [
+            305.5,
+            213.6
+          ],
+          [
+            308.3,
+            212.2
+          ],
+          [
+            311.1,
+            211.8
+          ],
+          [
+            313.9,
+            210.8
+          ],
+          [
+            316.7,
+            209.5
+          ]
+        ],
+        "source_lower": [
+          [
+            305.5,
+            213.6
+          ],
+          [
+            308.3,
+            212.2
+          ],
+          [
+            311.1,
+            211.8
+          ],
+          [
+            313.9,
+            210.8
+          ],
+          [
+            316.7,
+            209.5
+          ]
+        ],
+        "open_upper": [
+          [
+            305.5,
+            213.6
+          ],
+          [
+            308.231248,
+            212.012189
+          ],
+          [
+            310.979683,
+            211.47133
+          ],
+          [
+            313.831248,
+            210.612189
+          ],
+          [
+            316.7,
+            209.5
+          ]
+        ],
+        "open_lower": [
+          [
+            305.5,
+            213.6
+          ],
+          [
+            308.678138,
+            213.232963
+          ],
+          [
+            311.718771,
+            213.490302
+          ],
+          [
+            314.26095,
+            211.78601
+          ],
+          [
+            316.7,
+            209.5
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 201,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "up": null,
+    "rear-left": {
+      "input": {
+        "name": "rear-left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-left-registered.png",
+        "sha256": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "rear-left",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        193.2,
+        211.85
+      ],
+      "axesPx": [
+        9.599999999999994,
+        4.699999999999989,
+        -1.495025742041059,
+        3.053669600764722
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            188.4,
+            209.5
+          ],
+          [
+            190.8,
+            210.9
+          ],
+          [
+            193.2,
+            212.0
+          ],
+          [
+            195.6,
+            212.5
+          ],
+          [
+            198.0,
+            214.2
+          ]
+        ],
+        "source_upper": [
+          [
+            188.4,
+            209.5
+          ],
+          [
+            190.8,
+            210.9
+          ],
+          [
+            193.2,
+            212.0
+          ],
+          [
+            195.6,
+            212.5
+          ],
+          [
+            198.0,
+            214.2
+          ]
+        ],
+        "source_lower": [
+          [
+            188.4,
+            209.5
+          ],
+          [
+            190.8,
+            210.9
+          ],
+          [
+            193.2,
+            212.0
+          ],
+          [
+            195.6,
+            212.5
+          ],
+          [
+            198.0,
+            214.2
+          ]
+        ],
+        "open_upper": [
+          [
+            188.4,
+            209.5
+          ],
+          [
+            190.887943,
+            210.720372
+          ],
+          [
+            193.331914,
+            211.730559
+          ],
+          [
+            195.687943,
+            212.320372
+          ],
+          [
+            198.0,
+            214.2
+          ]
+        ],
+        "open_lower": [
+          [
+            188.4,
+            209.5
+          ],
+          [
+            190.382272,
+            211.753231
+          ],
+          [
+            192.518444,
+            213.392114
+          ],
+          [
+            195.160287,
+            213.398138
+          ],
+          [
+            198.0,
+            214.2
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 201,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "left": {
+      "input": {
+        "name": "left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png",
+        "sha256": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "left",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        201.0,
+        210.5
+      ],
+      "axesPx": [
+        22.0,
+        3.6000000000000227,
+        -0.7266985564974383,
+        4.440935623039873
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            190.0,
+            208.7
+          ],
+          [
+            195.5,
+            209.0
+          ],
+          [
+            201.0,
+            210.1
+          ],
+          [
+            206.5,
+            211.1
+          ],
+          [
+            212.0,
+            212.3
+          ]
+        ],
+        "source_upper": [
+          [
+            190.0,
+            208.7
+          ],
+          [
+            195.5,
+            209.0
+          ],
+          [
+            201.0,
+            210.1
+          ],
+          [
+            206.5,
+            211.1
+          ],
+          [
+            212.0,
+            212.3
+          ]
+        ],
+        "source_lower": [
+          [
+            190.0,
+            208.7
+          ],
+          [
+            195.5,
+            209.0
+          ],
+          [
+            201.0,
+            210.1
+          ],
+          [
+            206.5,
+            211.1
+          ],
+          [
+            212.0,
+            212.3
+          ]
+        ],
+        "open_upper": [
+          [
+            190.0,
+            208.7
+          ],
+          [
+            195.548447,
+            208.703938
+          ],
+          [
+            201.088819,
+            209.557219
+          ],
+          [
+            206.556521,
+            210.754594
+          ],
+          [
+            212.0,
+            212.3
+          ]
+        ],
+        "open_lower": [
+          [
+            190.0,
+            208.7
+          ],
+          [
+            195.265842,
+            210.430968
+          ],
+          [
+            200.628576,
+            212.369812
+          ],
+          [
+            206.257767,
+            212.580312
+          ],
+          [
+            212.0,
+            212.3
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 200,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "front-left": {
+      "input": {
+        "name": "front-left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-left-registered.png",
+        "sha256": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "front-left",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        226.6,
+        214.2
+      ],
+      "axesPx": [
+        31.19999999999999,
+        2.200000000000017,
+        -0.36575850789005987,
+        5.187120657349898
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            211.0,
+            213.1
+          ],
+          [
+            218.8,
+            212.5
+          ],
+          [
+            226.6,
+            212.6
+          ],
+          [
+            234.4,
+            213.8
+          ],
+          [
+            242.2,
+            215.3
+          ]
+        ],
+        "source_upper": [
+          [
+            211.0,
+            213.1
+          ],
+          [
+            218.8,
+            212.5
+          ],
+          [
+            226.6,
+            212.6
+          ],
+          [
+            234.4,
+            213.8
+          ],
+          [
+            242.2,
+            215.3
+          ]
+        ],
+        "source_lower": [
+          [
+            211.0,
+            213.1
+          ],
+          [
+            218.8,
+            212.5
+          ],
+          [
+            226.6,
+            212.6
+          ],
+          [
+            234.4,
+            213.8
+          ],
+          [
+            242.2,
+            215.3
+          ]
+        ],
+        "open_upper": [
+          [
+            211.0,
+            213.1
+          ],
+          [
+            218.835169,
+            212.001238
+          ],
+          [
+            226.656271,
+            211.801981
+          ],
+          [
+            234.431652,
+            213.351115
+          ],
+          [
+            242.2,
+            215.3
+          ]
+        ],
+        "open_lower": [
+          [
+            211.0,
+            213.1
+          ],
+          [
+            218.648773,
+            214.644675
+          ],
+          [
+            226.378435,
+            215.742198
+          ],
+          [
+            234.259324,
+            215.795046
+          ],
+          [
+            242.2,
+            215.3
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 203,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    },
+    "standing": {
+      "input": {
+        "name": "standing",
+        "role": "own upstream master or original encoded standing",
+        "file": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+        "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+        "dimensions": [
+          128,
+          160
+        ]
+      },
+      "cell": [
+        128,
+        160
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "registeredView": "standing",
+      "coordinateSystem": "native input pixels; +X right,+Y down; tangent and normal physical pixels",
+      "centerPx": [
+        65.55,
+        62.45
+      ],
+      "axesPx": [
+        8.099999999999994,
+        0.10000000000000142,
+        -0.02098605507883828,
+        1.699870461385875
+      ],
+      "contoursPx": {
+        "crease": [
+          [
+            61.5,
+            62.4
+          ],
+          [
+            63.525,
+            62.15
+          ],
+          [
+            65.55,
+            62.45
+          ],
+          [
+            67.575,
+            62.2
+          ],
+          [
+            69.6,
+            62.5
+          ]
+        ],
+        "source_upper": [
+          [
+            61.5,
+            62.4
+          ],
+          [
+            63.525,
+            62.15
+          ],
+          [
+            65.55,
+            62.45
+          ],
+          [
+            67.575,
+            62.2
+          ],
+          [
+            69.6,
+            62.5
+          ]
+        ],
+        "source_lower": [
+          [
+            61.5,
+            62.4
+          ],
+          [
+            63.525,
+            62.15
+          ],
+          [
+            65.55,
+            62.45
+          ],
+          [
+            67.575,
+            62.2
+          ],
+          [
+            69.6,
+            62.5
+          ]
+        ],
+        "open_upper": [
+          [
+            61.5,
+            62.4
+          ],
+          [
+            63.526481,
+            62.030009
+          ],
+          [
+            65.552469,
+            62.250015
+          ],
+          [
+            67.576481,
+            62.080009
+          ],
+          [
+            69.6,
+            62.5
+          ]
+        ],
+        "open_lower": [
+          [
+            61.5,
+            62.4
+          ],
+          [
+            63.518828,
+            62.649962
+          ],
+          [
+            65.540741,
+            63.199943
+          ],
+          [
+            67.568828,
+            62.699962
+          ],
+          [
+            69.6,
+            62.5
+          ]
+        ]
+      },
+      "width": [
+        0,
+        0
+      ],
+      "teeth": 0,
+      "nativeSource": {
+        "role": "direct original encoded standing",
+        "upstreamFile": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+        "upstreamSha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+      },
+      "fitEvidence": {
+        "status": "SOURCE-only candidate pending independent lip review; accepted neutral body images unchanged",
+        "observation": "Own closed dark/red lip crease; no exposed teeth or confirmed pre-open cavity. Rear quarters have a short visible near-side lip, with far-side anatomy hidden and unregistered.",
+        "sourceUpperLower": "equal measured own closed crease; no inferred hidden cavity",
+        "protectedRowsExclusive": 59,
+        "widthControls": "zero; round/spread/bite visual coverage NOT RUN"
+      }
+    }
+  }
+}

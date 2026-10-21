@@ -1,0 +1,542 @@
+{
+  "schemaVersion": 1,
+  "identity": "stadt-hannelore-sparkasse",
+  "status": "SOURCE-only original-owned near-foot extraction; independent review required; no gait",
+  "neutralReceipt": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/registration-receipt.json",
+    "sha256": "d39077d848b113bace59483453887870f2d96fe8ed345b140dde1c03539879c3"
+  },
+  "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+  "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+  "sourceDimensions": [
+    2172,
+    724
+  ],
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "directPaintHeight": 137,
+  "logicalFigureHeightUnchanged": 136,
+  "worldHeightUnchanged": 1.6,
+  "standing": {
+    "file": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+    "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "logicalFigureHeight": 136,
+    "figureWorldHeight": 1.6
+  },
+  "prior3147Pins": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-occlusion-components-v2/protected-pins-after.json",
+    "sha256": "e2c227ef5dad20e07877f1ad3a3cd7e834e5039f606d4a740b0f02aa9c8c98e1"
+  },
+  "correctedWitnessReceipt": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-occlusion-components-v2/final-receipt.json",
+    "sha256": "e56207900055a6d2d401b8f6a4aaa4e18c5b84625c113c248f695fe267a83f6f"
+  },
+  "sides": {
+    "right": {
+      "anatomicalNearFoot": "RIGHT",
+      "cropRaw": [
+        735,
+        550,
+        985,
+        705
+      ],
+      "ownedPolygonRaw": [
+        [
+          772,
+          574
+        ],
+        [
+          791,
+          576
+        ],
+        [
+          823,
+          577
+        ],
+        [
+          855,
+          576
+        ],
+        [
+          853,
+          584
+        ],
+        [
+          849,
+          594
+        ],
+        [
+          845,
+          603
+        ],
+        [
+          842,
+          613
+        ],
+        [
+          849,
+          615
+        ],
+        [
+          856,
+          622
+        ],
+        [
+          865,
+          629
+        ],
+        [
+          876,
+          637
+        ],
+        [
+          887,
+          643
+        ],
+        [
+          896,
+          651
+        ],
+        [
+          900,
+          660
+        ],
+        [
+          901,
+          669
+        ],
+        [
+          904,
+          670
+        ],
+        [
+          906,
+          675
+        ],
+        [
+          909,
+          679
+        ],
+        [
+          910,
+          684
+        ],
+        [
+          910,
+          704
+        ],
+        [
+          738,
+          704
+        ],
+        [
+          738,
+          610
+        ],
+        [
+          764,
+          610
+        ],
+        [
+          769,
+          601
+        ],
+        [
+          768,
+          588
+        ]
+      ],
+      "intershoeSeamRaw": [
+        [
+          855,
+          576
+        ],
+        [
+          853,
+          584
+        ],
+        [
+          849,
+          594
+        ],
+        [
+          845,
+          603
+        ],
+        [
+          842,
+          613
+        ],
+        [
+          849,
+          615
+        ],
+        [
+          856,
+          622
+        ],
+        [
+          865,
+          629
+        ],
+        [
+          876,
+          637
+        ],
+        [
+          887,
+          643
+        ],
+        [
+          896,
+          651
+        ],
+        [
+          900,
+          660
+        ],
+        [
+          901,
+          669
+        ],
+        [
+          904,
+          670
+        ],
+        [
+          906,
+          675
+        ],
+        [
+          909,
+          679
+        ]
+      ],
+      "occluderBoundaryRaw": [
+        [
+          772,
+          574
+        ],
+        [
+          791,
+          576
+        ],
+        [
+          823,
+          577
+        ],
+        [
+          855,
+          576
+        ]
+      ],
+      "occluderOwner": "static original skirt hem; visible stocking begins below it",
+      "missing": "No concealed upper stocking under the skirt is supplied. Actual far heel/rear opening behind this foreground shoe remains unmeasured.",
+      "view": {
+        "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+        "component_bounds": [
+          680,
+          26,
+          990,
+          697
+        ],
+        "source_pivot": [
+          863,
+          697
+        ],
+        "scale": 0.5952380952380952,
+        "scaleGroup": "cardinals",
+        "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+      },
+      "neutralFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png",
+      "neutralSha256": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+      "directOriginalRawWitnesses": {
+        "kind": "directOriginalRawNear",
+        "heading": "right",
+        "heel": [
+          756,
+          673
+        ],
+        "toe": [
+          907,
+          678
+        ],
+        "soleY": 694,
+        "cuffRear": [
+          775,
+          620
+        ],
+        "cuffFront": [
+          819,
+          640
+        ],
+        "tongueCrown": [
+          846,
+          616
+        ]
+      },
+      "maskMethod": "Binary pixel ownership at actual raw coordinates; same polygon transformed by own accepted source-pivot/uniform scale for512working. No feather, donor or repaint. Source working original is split by complementary masks, never independently re-registered."
+    },
+    "left": {
+      "anatomicalNearFoot": "LEFT",
+      "cropRaw": [
+        1740,
+        550,
+        1985,
+        705
+      ],
+      "ownedPolygonRaw": [
+        [
+          1880,
+          605
+        ],
+        [
+          1896,
+          607
+        ],
+        [
+          1922,
+          606
+        ],
+        [
+          1947,
+          603
+        ],
+        [
+          1963,
+          601
+        ],
+        [
+          1980,
+          601
+        ],
+        [
+          1980,
+          704
+        ],
+        [
+          1823,
+          704
+        ],
+        [
+          1820,
+          687
+        ],
+        [
+          1819,
+          683
+        ],
+        [
+          1821,
+          680
+        ],
+        [
+          1821,
+          674
+        ],
+        [
+          1822,
+          670
+        ],
+        [
+          1826,
+          667
+        ],
+        [
+          1830,
+          662
+        ],
+        [
+          1833,
+          654
+        ],
+        [
+          1838,
+          648
+        ],
+        [
+          1847,
+          643
+        ],
+        [
+          1857,
+          638
+        ],
+        [
+          1862,
+          634
+        ],
+        [
+          1868,
+          628
+        ],
+        [
+          1874,
+          622
+        ],
+        [
+          1878,
+          617
+        ],
+        [
+          1880,
+          615
+        ]
+      ],
+      "intershoeSeamRaw": [
+        [
+          1880,
+          605
+        ],
+        [
+          1880,
+          615
+        ],
+        [
+          1878,
+          617
+        ],
+        [
+          1874,
+          622
+        ],
+        [
+          1868,
+          628
+        ],
+        [
+          1862,
+          634
+        ],
+        [
+          1857,
+          638
+        ],
+        [
+          1847,
+          643
+        ],
+        [
+          1838,
+          648
+        ],
+        [
+          1833,
+          654
+        ],
+        [
+          1830,
+          662
+        ],
+        [
+          1826,
+          667
+        ],
+        [
+          1822,
+          670
+        ],
+        [
+          1821,
+          674
+        ],
+        [
+          1821,
+          680
+        ]
+      ],
+      "occluderBoundaryRaw": [
+        [
+          1880,
+          605
+        ],
+        [
+          1896,
+          607
+        ],
+        [
+          1922,
+          606
+        ],
+        [
+          1947,
+          603
+        ],
+        [
+          1963,
+          601
+        ]
+      ],
+      "occluderOwner": "static original anatomical LEFT purse; no purse pixels assigned to stocking",
+      "missing": "Upper near stocking behind purse is absent; observed paint cannot establish its complete hidden shape or hem connection. Actual far heel/rear opening remains unmeasured.",
+      "view": {
+        "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+        "component_bounds": [
+          1736,
+          26,
+          2038,
+          698
+        ],
+        "source_pivot": [
+          1866,
+          698
+        ],
+        "scale": 0.5952380952380952,
+        "scaleGroup": "cardinals",
+        "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+      },
+      "neutralFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png",
+      "neutralSha256": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+      "directOriginalRawWitnesses": {
+        "kind": "directOriginalRawNear",
+        "heading": "left",
+        "heel": [
+          1962,
+          674
+        ],
+        "toe": [
+          1821,
+          680
+        ],
+        "soleY": 695,
+        "cuffRear": [
+          1958,
+          623
+        ],
+        "cuffFront": [
+          1910,
+          641
+        ],
+        "tongueCrown": [
+          1878,
+          617
+        ]
+      },
+      "maskMethod": "Binary pixel ownership at actual raw coordinates; same polygon transformed by own accepted source-pivot/uniform scale for512working. No feather, donor or repaint. Source working original is split by complementary masks, never independently re-registered."
+    }
+  },
+  "limitations": [
+    "Visible near paint only, not complete legs",
+    "No concealed stocking/heel reconstruction",
+    "V2 candidate hidden backing remains unapproved and unused",
+    "Binary seam ownership must be visually reviewed before deformation",
+    "No gait, four extremes, transport, runtime or atlas"
+  ],
+  "maskRevisionNotes": "Initial inspection removed a far-sole chip at each front toe and a cream far-leg wedge above LEFT near vamp by following the actual intershoe edge. Any antialiased shared seam remains a source-only ownership limit, not new paint."
+}

@@ -1,0 +1,53 @@
+{
+  "scope": "ONLY phase12 articulation per side: near+12fore/aft, lift12, rootraise7; other6keys+2neutrals exact; no16loop",
+  "parentRecipe": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json",
+  "inheritedPinMap": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json",
+    "sha256": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d"
+  },
+  "nearPassingForeAftWorking": 12,
+  "method": "Existing own whole-limb PCHIP nodes/rootX; NEAR dxbase+[0,0,4.2,12,12]*travelSign, dy[-7,-7,-8.75,-12,-12]. FAR/upper exact from floor-v2. Same premultiplied sampler and one final paint137 export.",
+  "inputs": {
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/final-receipt.json": "3fd8c029d8231e87e3ec803cacf6812ffb1e578bcd7b77b68403844c8a9de8ad",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/REPORT.md": "aea1642de716cf2249fa146fd3f2a9ffa06c4661785a0ec7bdc3b6891ea7aab0",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/final-receipt.json": "9c0985cf9d73748af6ba1b301f1ef7803ddcda828ad63059e837c5f300accf4f",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/receipt.json": "56bacc3ac5ef5478306d1f6b02c42e291c2c8b198eb4cd9b9af2816eaaa40c29",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json": "56b73e572960529947a1dd28c5b96107cdbaea1d384e072bace8114c13b1a4dc",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-passing-source-v1/build-passing.py": "c7b549c57c38c3da76d0b14f2fe494df79cd46fceacdf0f859313495b3709872",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/final-receipt.json": "94bce5c11bcf42e1ab913ec0b34dc5d3c7fef836c1379efffeb1c5a84a88923a",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/trial-16/receipt.json": "da3301240d2a295f3df063aec2500101b61c66182d29cc44bfc08a520d79a342",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/receipt.json": "904a32ab76c20f39574dc5eeab3010b31ca908e75273877b014ad5582104f958"
+  },
+  "limits": [
+    "ONE candidate, fixed12fore/aft and12lift/rootraise7 only atphase12. No additional horizontal/lift grid.",
+    "Held horizontal packet94bce5c1 and floor packet9c0985cf immutable.",
+    "FAR high-J calf paint can be visible; cap coverage is not an all-hidden stretch claim.",
+    "No16loop, physicalstride, stops, runtime, GPU, native media or physicaldevice approval."
+  ],
+  "nearSwingLiftWorking": 12,
+  "nearRootRaiseWorking": 7,
+  "inheritedBuilder": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-passing-source-v1/build-passing.py",
+    "sha256": "c7b549c57c38c3da76d0b14f2fe494df79cd46fceacdf0f859313495b3709872",
+    "intentionalDelta": [
+      "Single phase12 articulation: own NEAR +12 travel/lift12/rootraise7; FAR fixed.",
+      "OUT=ROOT/'output/ambient-city-animation/hannelore-sparkasse-side-passing-articulation-v1'",
+      "choices=[12]",
+      "dx=[base,base,base+delta*.35,base+delta,base+delta];dy=[-7,-7,-8.75,-12,-12]",
+      "oldNear=paint.warp_layer(near,nodes,m['dx'],m['dy'])",
+      "bottom==(460 if k==0 else 472)",
+      "-(459 if k==0 else 471)",
+      "(f'near +{args.fore_aft},lift12',frame)",
+      "'nearSwingLiftWorking':12,'nearRootRaiseWorking':7",
+      "'nearPassingForeAftWorking':args.fore_aft,'nearSwingLiftWorking':12,'nearRootRaiseWorking':7,'outputRelativeToRoot'"
+    ]
+  }
+}

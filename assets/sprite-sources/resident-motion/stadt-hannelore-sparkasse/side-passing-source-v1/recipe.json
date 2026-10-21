@@ -1,0 +1,31 @@
+{
+  "scope": "ONLY four side extremes0/4/8/12 per heading plus exact neutral; only phase12 NEAR fore/aft differs from floor-v2",
+  "parentRecipe": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json",
+  "inheritedPinMap": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json",
+    "sha256": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d"
+  },
+  "nearPassingForeAftWorking": 12,
+  "method": "Retain whole-limb PCHIP nodes, root base and dy. Add sign*12 to rigid NEAR dx and sign*4.2 to intermediate dx; FAR/upper exact. One final existing export at own paint137.",
+  "inputs": {
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/final-receipt.json": "3fd8c029d8231e87e3ec803cacf6812ffb1e578bcd7b77b68403844c8a9de8ad",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/REPORT.md": "aea1642de716cf2249fa146fd3f2a9ffa06c4661785a0ec7bdc3b6891ea7aab0",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/final-receipt.json": "9c0985cf9d73748af6ba1b301f1ef7803ddcda828ad63059e837c5f300accf4f",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/receipt.json": "56bacc3ac5ef5478306d1f6b02c42e291c2c8b198eb4cd9b9af2816eaaa40c29",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json": "56b73e572960529947a1dd28c5b96107cdbaea1d384e072bace8114c13b1a4dc",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24"
+  },
+  "limits": [
+    "One +12 trial only unless actual visual failure requires a bounded8 or16 comparison.",
+    "High-J FAR calf paint is partly visible; root cap coverage does not make the full stretch hidden.",
+    "No full16, continuous gait, stop, stride, atlas, runtime, GPU, audio or native-world approval.",
+    "Eight movement keys means2 changed phase12 keys and6 unchanged other keys; both neutrals exact."
+  ]
+}

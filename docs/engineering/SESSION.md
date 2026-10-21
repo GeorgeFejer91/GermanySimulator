@@ -1,5 +1,294 @@
 # Ambient walking and talking goal — 2026-10-20
 
+Current Hannelore clean RELEASE candidate is compact80, validated locally and unpublished. Source
+SIDE32entry review7bbe2837 and fullmouth reviewe6eb491f PASS. Independent Camera
+successor3b144cb0 accepts all470unique encoded fields and18native media frames;
+fresh portable rebuild exactly matches the four tested trial outputs.
+
+Compact native20V2 passes20/20 desktop/portrait with all captured feet visible;
+root inspected all32 actual renderer boards. Receiptfda75268 retains71qualified
+fixed markers and the missing LEFTfarphase0 without substitution. Shoe-surface
+ray spans1.256..1.410gameu (at most7.951% ownshoe), accepted-distance gait error0;
+this is not zero slip. Original compactV1 keeps12PASS/8initial-setupFAIL: its
+route finder incorrectly used lane travel for placement. V2 only selects the
+same placing=true branch as the production initializer; no runtime change.
+
+Independent Camera start/turn ART review5997bf0d accepts actual RIGHT/UP starts,
+critical131→132/rear-left133 turns and complete trusted-E DOWN/LEFT resumes.
+It freshly inspects187native panels; root viewed102critical UP/RIGHT panels and
+all30resume panels. Warm resume V5 passes4/4 with actual clip=resume captures,
+not substituted metadata. First-use playback remains incomplete: V2 is6PASS/
+2missing-fieldFAIL; DOWNdesktop67→69 gap198ms and LEFTportrait117→119 gap69.1ms
+remain recorded. V5 LEFTdesktop also misses122initially, though V2initial was
+complete. Deferring PNG encoding and warming diagnostics did not establish a
+first-use repair. V4 filtered out resume-labelled frames and retained its test
+failures; V5 fixes that observer label only. No source timing, speed, renderer,
+clock or art was changed to pass a capture. This accepts authored transition
+art within the tested paths, not complete first-use pacing or all-world C4.
+
+Compact native media/caption6/6 passes across desktop/portrait/landscape. The
+separate lifetime successor also passes6/6: actual visible replay button,
+same exact German01 recording, EOS/closed mouth, Berlin captions, line02/cancel,
+root hold and walking return. Actual M during dialogue keeps FILE unavailable
+and media advancing; post-dialogue FILE freezes root/pose. Two player-only
+far/return cycles per profile/region retire the native paint and own decoded
+leases, then reload the selected variant with one texture reference and resume
+walking. This is partial lease accounting, not complete GPU memory proof or
+natural traversal. Active-dialogue FILE/VOICE controls are unavailable in the
+production UI; no forced hidden control, listening or physical-device claim.
+
+Independent Physics found a blocking P4 regression with the opt-in candidate:
+four sealed-body retreat cases at30/60Hz travel only18.20..18.43gameu in5s
+after reversal (required26), compared with26.70 for the published family.
+Longer owned stops expose an unnecessary UP/DOWN/LEFT lane correction sequence
+toward a dynamically obstructed new lane. Existing source/encoded/native PASS
+does not waive this failure. No Hannelore admission/publication has occurred.
+
+Repair scope before application edits: game.js pedestrianLane and its initializer call, a focused
+native lane-clearance test and existing pedestrian avoidance regressions;
+preserve collision permissions, exact body art, plan durations, gait, guards,
+mission state, renderer/audio/UI and all unrelated dirty work. Diagnose/verify
+RED before implementing the smallest fully checked path-choice repair. Any
+changed runtime requires successor pins and independent world/browser review;
+the original869-pin candidate and failures remain frozen. Initial source HEAD
+2576397c and pre-existing dirty status are captured in this continuation.
+
+Current repair gameaadba94b: every requested lateral lane path uses existing
+one-unit native responderBlocked sweeps; an obstructed path retains the clear
+parallel line. Initial placement explicitly retains the exact original static
+endpoint semantics, because off-route declarations are not actual travel.
+First sweep-only2b5d851b changed Hannelore's initialized Y2540to2524; that held
+version and its native fixture failures remain archived. The successor restores
+all136 source-seeded initial actor/route records exactly and all132 ordinary
+body guards.20lane tests,38published and38candidate avoidance tests pass96/96;
+two placement REDs and14 original lane REDs are preserved. Last placement test
+now executes the real initializer; its local call-removal mutant fails84vs128.
+
+Independent Physics V1FAIL4ace6f23/receipt81a0c215 remains sealed. V3 own six
+retreat traces reach33.6/33.95u within5s, replacing18.20..18.43without shortening
+poses. Actual existing-prop browserV2 passes4/4: clear32.5u both profiles,
+blocked46.943/47.394u; own source/UV/accepted-distance/native guards hold.
+Root inspected both22-frame renderer boards; reviewer independently inspected
+four16-frame boards and1275UV samples,351held-root comparisons. Native mediaV2
+on the repaired runtime again passes6/6 with original initialized2540guard.
+Original outer-corner V1 keeps1PASS/3FAIL: two observer timeouts missed initial
+contacts; desktop also records an actual startup-contaminated5s recovery miss.
+Separate V2 pauses via existing certification+FILE handlers before first RAF,
+arms at the exact staged root with motion loaded, then closes real FILE. All4
+original Späti outer/citizen cases pass unchanged26u/5s:31.1865/32.4227clear and
+52.2704/53.4443body-blocked. No geometry, clocks or collision threshold changed.
+Independent Physics8f1eade1 accepts this bounded lane/gait increment, with all
+original failures preserved and no new scoped blocker. No authored joined
+concave-L exists in this fixture: native L is NOT RUN;24synthetic CPU cases are
+separate. Feasible-gap moving overtaking retains inherited P3 FAIL: old/current
+game traces are exactly equal per family; longer genuine Hannelore poses reduce
+distance but lane repair does not cause the repeated maneuver. This increment
+does not certify all world passing/recovery behavior.
+
+Own compact density candidate is selected under output/hann-d80-v1/: source470
+desktop cells80x100 (85.625paint), mobile64x80 unchanged; all logical mouth,
+body fields, timings, stride, standing and42other definitions preserved.
+Columns24 movement1920x1900 desktop/1536x1520 mobile costs14592000/9338880RGBA
+bytes (13.916/8.906MiB); reactions768000/491520bytes. Every packed texture fits
+the existing2048/16MiB preferred bounds. Actual shader512slots/profile passes
+desktop+portrait with383closedexact/alpha/profile/axes and disposal0. Independent
+all16bodyboard and six native96/80 comparisons accept the reduced density.
+Portable compiler04d69f78 defaults80 and retains96 reproduction; four fresh
+outputs equal tested trial bytes. Earlier long-path staging failure is preserved;
+a shorter ignored task output reuses the unchanged packer.
+
+Comparable seeded cohort benchmark passes12/12 (three cold contexts per variant
+and viewport),14nearby identities and nine actual input responses/run. Median
+sync dispatch p95 is22→21.7ms desktop and21.7→21.9portrait; these are not displayed
+GPU frame times or causal speedups. Candidate startup16.48/16.09MB stays<=18MB,
+drawing buffer<=1.6MP, selected own variant only, no full source atlas request.
+The first baseline cold load and inherited asset failures remain recorded.
+Order/cache/device variability, complete residency and physical Android remain
+outside this lab comparison. Independent CPU audit reproduces all12records.
+
+Clean RELEASE review candidate now contains134 explicit owned files, base65bf4f03;
+SOURCE canonical and public release stay unchanged. Code reviewa7c92333 passes
+42focused checks after correcting only the inventory Set order (initial41/42
+RED retained). Manifest trailing-CR normalization gives final Git-compatible
+LF SHA f19093bd/133633bytes; entire JSON body and all43typed definitions stay
+exact to opt-in9281. Independent rebind a16ca173 confirms all eight payloads and
+other owned bytes. Full Node V1 is2422/2423: an older adviser VM fixture lacks
+the new existing native body-guard dependency. The fixture now loads actual
+groundContactBlocks/route/responder/lane functions and finite roots, preserving
+all assertions; lane/avoidance/adviser65/65 passes. Full Node V2 passes2423/2423;
+clean build generates31pages and deterministic delivery check is byte-exact.
+Built canonical MAIN dialogue passes6/6 across German recordings/Berlin captions
+and three profiles; built root/3d startup passes6/6 with17served hashes/case.
+Independent wisdom-fixture rebind b734fb4b retains the original failure.
+Commit/deployment and public verification remain. RELEASE-only LF normalization
+of three owner docs and four CRLF attribute lines follows the Git text contract;
+source recipes, runtime and payloads remain frozen.
+All131 protected SOURCE/primary files remain exact. No main checkout writes.
+
+Current continuation: manifest-only release65bf4f03 is LIVE on693a1c24;
+Pages39623412392 SUCCESS; public root/3d desktop/Android-portrait4/4
+pass with16exact served hashes/case. One-file
+JSON whitespace compaction preserves the whole parsed document, all43typed-f64
+definitions and72URLs. It saves143978bytes (257436 to113458), leaving148686bytes
+under the existing262144guard. Independent reviewd2931185/receipte0e44d4e,
+57focused checks and built root/3d desktop/portrait4/4 (16hashes/case) pass.
+SOURCE merge2576397c shares release treec6204420. No world/renderer/audio data
+changed; world specialist recertification is omitted for exact-data formatting.
+The source merge normalized two unrelated CRLF files; their original byte hashes
+were restored and all131 unrelated preserved-file pins pass.
+
+Latest Hannelore continuation: complete own470-cell source family is assembled
+and opt-in packed; no canonical/runtime admission or publication. Four16-frame
+walks SOURCE front/rear3f03fd88/side0bfc137b and gesture16 SOURCE8ecab64f retain
+prior acceptance. Original standing, nominal136/world1.6, ownpaint137 untouched.
+
+Full front/rear32phase-entry stops SOURCE PASS6d8993c4 (REPORT9f1e0250):128
+working/256direct,448freshCLI exact,96goldenPNGs,763pins and six final-frame
+gates. Cap131samples/94poses/9opaque are original navy skirt-edge texels,
+not cream-calf cuts; no all-hidden claim. Root22reviewoutputs exact.
+
+SIDE eightkey stop repair now SOURCE PASScdf7630c (REPORT1120f65c):64working/
+128direct both themes, eight full paths,208freshCLI/rawexact, independent64
+primary-source composites/128direct,512forward-witness comparisons,244pins and
+six192-cell gates. Own pre-landing X waypoint exposes the FAR vamp beneath
+natural partial overlap;64px separation is subtle. No witness relocation,
+pixel/floor fitting or guard relaxation. Old four/eight-stage HOLDs preserved.
+Full32entry SIDE expansion raw a725b87c/final8326a41f has256working/512direct,
+64/128golden exact,235pins835files and all floor/cap/sole/gutter technical checks.
+Its independent allphase SOURCE review passes7bbe2837/REPORTe3708156:
+1071pins+4references,832CLI/raw exact,256working/512direct and2048fixedwitnesses;
+all768six-gate cells pass. No key-to-full waiver.
+
+Ownturn8/fallback source372a120c (author2b283853) retains six exact registered
+views, two exact revised-side neutrals; 51replayfiles exact. Quarters preserve
+over-shoulder head direction; rear-quarter-to-UP live smoothness is unproved.
+Reuse complete phase0 stops in reverse for starts and forward for fallback;
+bridge cols0/1 stay unreferenced. Existing schema needs no change. Full source
+index d8d86f63/final92f218ed has470cells/440PNGrefs/412distinct image hashes,
+383visible-heading/87UPnull;738pins,actual head fields and two replays exact.
+
+Full own transported mouths raw9c03807e/finala2c67cbb:383visible registrations,
+87UPnull/42empty across512slots;752pins2111files exact.383 actual protected-source
+support guards and1149closedRGBA/openalpha checks at512/96/64 pass, maxaffine
+residual.004263313workingpx. ActualJS512+standing schema passes. Independent
+source/CPU mouth review passese6eb491f/REPORT8fb39b73, all66exact native-face
+equivalence groups covering383visible cells inspected; world approval separate.
+
+Ignored source compile outputs470exactcells at96x120/64x80 with gutters7/5,
+102.75/68.5paint and lossless equality. Fullsource transfer1516498/755352bytes.
+Existing columns21 deterministic packed check PASS:454movement/17reaction,
+manifest133634bytes/mouthJSON198580, all42other character definitions preserved.
+Packed delivery3c916163; movement2016x2640/1344x1760,1392078/539300transferbytes,
+20.30/9.02MiB RGBA; reaction21494/11962bytes,.923/.410MiB RGBA. Preferred desktop
+density target still needs its own measured quality/cost+cohort/lifetime decision.
+No inherited Gisela exception or global budget relaxation.
+
+Actual production packed shader diagnostic browser-v1 PASS desktop+Android
+portrait emulation: all512slots/profile,470encoded/383visible/129null. Every
+visible owned closed cue preserves source pixels; open/round/bite preserve
+alpha, profile+bothaxes+actualtexture identity exact. Disposal textures/geometry0.
+Root inspected24representative fivecue body/face cases/profile on both themes
+(16boards); tiny64side/rear-quarter mouths remain restrained. No full-city/native
+speech/timing/playability/listening/physical-device claim follows.
+
+Own exact encoded-source stride assessment b9ce3899 uses72fixed named-foot
+markers in both side headings/resolutions, no omissions. Continuous candidate
+9.670588235294119gameu/cycle; actual compiled CLI value9.67058823529412 differs
+one double ULP, explicitly bound unchanged. Integertexel fits9.41..9.62, uncertainty
+2.09desktop/3.14mobile. Native planting remains unproved. CPU native-contact
+fixture db035ec2 has866pins,72walk marks/eightstop paths/52metadataframes;
+21fixedstop points fail conservative alpha128 attribution and remain absent,
+with production alpha21 coverage recorded separately. Four parsed instrumented
+directions pass; actual native20case desktop/portrait run is active. No root,
+phase, timer or camera forcing after its controlled legal pre-admission setup.
+
+All131 unrelated primary/source file pins freshly exact before assembly. No
+commit/push this continuation; SOURCE HEAD2576397c/public release65bf4f03 remain.
+Full42goal stays8integrated/34remaining. Complete packed/source/native/media/
+cohort/lifetime/independent Physics+Camera/code gates still precede admission.
+Earlier snapshots below retain their original scope/status.
+
+Hannelore now has bounded STATIC connected-leg sourcefit PASS: final9c35de6b,
+independentc1fea1e1/c7eaa8cd, root22inputs/51files exact. Eight accepted source
+PNGs are preserved under ownconnected-leg-source-v1/ (index8de6beb8). Root
+front/rear8key proposal2f418429 passed independent bounded source review
+1f40db44/receipt037db400. The first continuous front/rear field retains all24
+key/direct PNGs exactly but is HOLDab722471: intermediate phases raise both
+feet1–2workingpixels above the shared472pivot. Side V1 is similarly held at
+phase12(bottom465); the upright street sprite plane does not project this gap
+onto ground depth. A fresh same-heading wholefar-leg .95 source variant is
+being tested at commonfloor472, with hidden root caps checked in actual pixels.
+Neither static source approval nor sparse keys approve these floor defects.
+The revised front/rear16phase candidate6148088e (raw8fe215a3) is now frozen
+for independent source review: all32sourcebottoms472,64fixed soles visible,
+all24approved key/direct PNGs exact,16distinctframes/direction. Explicit
+zero-endpoint Hermite swing/stance curves retain own keys and remove the V2
+endpoint-velocity defect; curve sign/monotonicity/support probes pass. Root
+inspected all native/direct96/64 light/dark ordered strips; no native world or
+perceptual playback claim. Own small emptyRIGHT-hand four-key gesture candidate
+9dbb571c is also authored/source-inspected, awaiting independent review;
+head/LEFTpurse/grip/feet remain exact. No full gesture or mouth admission.
+
+Latest bounded gates: front/rear32pose SOURCE PASS1f188b41/receipt3f03fd88
+(145pins,128fresh replay files/rawreceipt exact). DenserYJacobian minima
+.652298817/.700246092 remain above unchanged.5guard. All24goldenPNGs,
+64fixedsoles, strength/wrap/transport and32source+64direct visual checks pass.
+GIF erratum: dense960ms/sparse1000ms diagnostics differ from proposed1024ms
+runtime; no perceptual cadence claim. Independent sourcefloor/actualrenderer
+diagnosisca14cf86/c02efd66 confirms uprightplane behavior without nativeGPU.
+
+Sidefloor-v2 final9c0985cf has geometryPASS/artHOLD aea1642d/3fd8c029:
+phase12 reads as doubled/platform sole at96/64. Some max1.60/1.73 calf stretch
+is VISIBLE, so the author's all-hidden implication is inaccurate. Horizontal
+12/16trials94bce5c1 and single12offset/12lift/7root articulationaf89eb41 stay
+HOLD for that silhouette; old sources/standing/FARstance unchanged. One new
+whole-NEAR calf/shoe12degree toe-up rigidrotation source efc72d29 now passes
+independent bounded8key SOURCE ab0978ae/receiptd472b792. Single primary-paint
+sample through composed inverse maps; no shoe stretch or angle grid. Complete
+side16loop is being authored separately; no full-cycle/native approval yet.
+
+Gesture9dbb571c is HOLD e75c0872/f633955b for elongated fist, not cuff attachment.
+Own rigid-hand keys49475701/rawccb24a26 pass independent SOURCE eeb5be95/
+84aeba63: actual1760pixel cuff/hand block translates[-8,-10]exactly. Full gesture
+16cell source9caa9d62 is authored:15distinctposes, exactneutral first/last,
+1280ms one-shot proposal, all12key/directPNGsexact; rootviewed8native/4direct
+theme boards. Full16 SOURCE/direct sequence now passes independent2e98ec0e/
+8ecab64f:75pins and62fresh replay files/raw exact, all48frames source/direct
+reviewed, continuous mesh minimumarea.474493927. Actual16x80ms GIF metadata
+verified; native cadence/event/EOS/cancel and mouth/media remain unproved.
+
+Own front/rear stop pilotce23a463/raw0b75ab7a has8entrypaths×4stages/32poses+
+64direct, floor472all/64fixedsoles/minJ.5923, rootallthemeboards inspected.
+Independent review found true four-texel enclosed slit downphase12stage1 at
+x314/y393–396: opaque navy source is incorrectly assigned to protected prop
+mask and then uncovered by different transport. HOLD; repair actual source
+prop/garment ownership, not paintfilling/destination patches. Oldwalk32PASS
+is preserved. Stop-only source ownership successor bf106466 closes that exact
+old slit, but new small diagonal seam gaps are under actual source/layer-map
+diagnosis; no successor approval. All16entryphases/side stops remain unfinished.
+Partial own mouth preparation3e6c7c0c now carries actual front/rear walk/gesture
+fields:48slots/32visible/16rear-null, working and exactdirect96/64 scalar0/1
+closure/alpha checks pass. Ownpaint137, separate standing fit unchanged. Source
+visual review and full side/stop/turn, cues, packed shader/media remain pending.
+Full42goal remains8integrated/34remaining;
+no Hannelore loop/mouth/delivery/runtime admission has occurred.
+
+Hannelore pre-admission checks now have verified RED:2 intended missing motion/
+mouth failures plus1 PASS for original standing/two exact40Hz recordings.
+Evidence is hannelore-sparkasse-admission-red-v1/result-v2.tap and status-v2.json.
+The new test is local unfinished feature work; RELEASE/public remains green.
+
+Hannelore's original near-foot isolation remains bounded PASS (f3d3af4e/final4153d446).
+Far-backing-v1 final4ec7aa12 is independently HOLD (report5ee31913/receipt1a0813b5):
+both isolated far shoes expose diagonal sidewall/sole joins. All visiblefar paint
+is exact, but raw source-over changes952/1065workingpixels because original
+near alpha is214–254, not255; the old side.sourceOwnership 'fully opaque' phrase
+is incorrect. Original-owned static neutral reconstruction is a separate diagnostic,
+not moving-layer identity. No gait/mouth/runtime admission follows. Smallest next
+source trial is original-paint correspondence along actual visible far features;
+new paint is reserved for hidden continuation that source correspondence cannot
+supply. LEFT upper stocking remains a separate missing region.
+
 Renate Termin is published and live verified as ac9743ac on deede6d5. Pages run
 39614731293 succeeded. Public root/3d desktop and Android-portrait startup pass
 4/4 with14 exact served hashes/case. SOURCE checkpoint edcfb45a and merge
@@ -55,8 +344,11 @@ found a narrow repeat target and clipped enlarged Continue; V2 passes native,
 English label, actual200%font, text spacing,320px portrait resize and landscape
 return, with full labels/Pretext and restored controls/focus. Root inspected
 representative final states; independent bounded UI review PASS. Current CSS
-is ebac7e25; index cache query advances to visible-city-dialogue. This follow-up
-is validated locally; its clean build/publication/live verification are next.
+is ebac7e25; index cache query advances to visible-city-dialogue. Clean31-page
+build and root/3d built startup4/4 pass with16served hashes/case. Follow-up
+693a1c24 is pushed; source checkpoint8cf4b8e/merge63ec14dd have identical tree
+22d15f28. Pages39617975737 succeeded; live root/3d desktop,portrait,landscape
+startup and16served hashes/case pass6/6 (public-startup-v1,61.05s).
 Evidence: SOURCE output/ambient-city-animation/landscape-speaker-visibility-v1/.
 UI-only scope omits world Physics/C1–C5 recertification because world/rendering,
 collision/scale and source art remain exact. Physical devices/listening remain
@@ -70,14 +362,20 @@ bound without changing prior3,147pins. Do not use historical depth percentages
 to guide new paint until corrected. Own visible shoe/sole contour must remain
 original; donor shelves and narrow exterior stockings are not approved.
 The older1a1a2eb0 generation and V2 exact prompts remain in their own source
-folders; no third blind generation or gait follows from incomplete fit.
+folders; no third blind generation or gait follows from incomplete fit. The
+original-near extraction now passes bounded root/independent source review:
+receiptf3d3af4e/final4153d446, exact512reassembly and once-exported96/64 cells.
+Separately filtered layers retain9/4RIGHT,9/5LEFT differing directpixels; final
+body must assemble before export. A nested own-near-shoe far-backing prototype
+is next, without a hidden-original heel or complete-leg claim. Its owner is
+docs/superpowers/plans/2026-10-21-hannelore-sparkasse-ambient-animation.md.
 
 PRIMARY and unrelated shared resident specification/object-QA/hook work remain
 preserved. All131 initial unrelated dirty-file hashes were checked exact.
 RELEASE uses isolated ignored Git metadata; no broad metadata repair/gc/reset,
 force push or cleanup was performed. Root owns integration/publication and the
-existing Renate plan, now published. Next: publish the validated UI follow-up,
-resolve Hannelore's actual source ownership/measurements and continue the34
+existing Renate plan, now published. Next: resolve Hannelore's far-foot backing/complete-leg source gate and continue
+the34
 remaining scoped characters. Full goal stays active.
 
 Shared Git metadata was externally renamed into name-clash paths during this

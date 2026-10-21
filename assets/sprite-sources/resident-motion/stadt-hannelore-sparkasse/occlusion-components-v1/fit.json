@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "status": "uniform completion registration diagnostic only; independent review required",
+  "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/occlusion-components-v1/completion-sheet-candidate.png",
+  "sourceSha256": "1a1a2eb074ea76b1db3db1cb678431c810eeddc0b1ae1d685ac5c838c16a096e",
+  "workingCell": [512, 512],
+  "method": "One positive uniform scale and translation per complete component; no rotation, anisotropic stretch, cuff move, repaint or donor substitution. Near scale uses original visible heel-to-toe distance; X translation centers those two points and Y anchors the actual sole. Far hidden heels remain unknown; scale is constrained only by visible toe/front-cuff X separation, with visible sole Y as the vertical anchor.",
+  "landmarkUncertainty": {"originalNearRawPx": 2, "originalFarWorkingPx": 1, "completionRawPx": 3},
+  "components": {
+    "right-near": {
+      "bounds": [130, 153, 669, 581],
+      "sourceLandmarks": {"heel": [131, 518], "toe": [668, 532], "soleY": 580, "cuffRear": [180, 350], "cuffFront": [358, 410]},
+      "target": {"kind": "originalNearRawMeasurements", "heading": "right"}
+    },
+    "right-far": {
+      "bounds": [737, 235, 1173, 577],
+      "sourceLandmarks": {"heel": [738, 520], "toe": [1171, 531], "soleY": 576, "cuffRear": [785, 388], "cuffFront": [932, 438]},
+      "target": {"kind": "manuallyVisibleFarWorking", "heading": "right", "toe": [318, 449], "soleY": 460, "cuffFront": [276, 430], "hiddenHeel": null, "hiddenCuffRear": null}
+    },
+    "left-near": {
+      "bounds": [67, 741, 608, 1155],
+      "sourceLandmarks": {"heel": [607, 1095], "toe": [68, 1109], "soleY": 1154, "cuffRear": [548, 929], "cuffFront": [357, 992]},
+      "target": {"kind": "originalNearRawMeasurements", "heading": "left"}
+    },
+    "left-far": {
+      "bounds": [714, 794, 1160, 1146],
+      "sourceLandmarks": {"heel": [1159, 1090], "toe": [715, 1101], "soleY": 1145, "cuffRear": [1114, 950], "cuffFront": [938, 1008]},
+      "target": {"kind": "manuallyVisibleFarWorking", "heading": "left", "toe": [190, 449], "soleY": 460, "cuffFront": [234, 430], "hiddenHeel": null, "hiddenCuffRear": null}
+    }
+  }
+}

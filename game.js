@@ -2883,15 +2883,22 @@ function moveGroundResponder(entity,dx,dy,r){
 function blocked(x,y){return groundStaticMotionBlocked(x,y,player.r,player.x,player.y)||Math.abs(stationElevation(x,y)-stationElevation(player.x,player.y))>.11}
 function blockingPedestrian(x,y){let nearest=null,best=player.r+13;for(const n of npcs){const d=dist(x,y,n.x,n.y);if(d<best&&groundContactBlocks(d,dist(player.x,player.y,n.x,n.y),player.r+13)){nearest=n;best=d}}return nearest}
 function movePlayerGround(dx,dy){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),sx=dx/steps,sy=dy/steps;let bumped=null;for(let i=0;i<steps;i++){if(sx){const nx=player.x+sx,hit=blockingPedestrian(nx,player.y);if(!blocked(nx,player.y)&&!hit&&!dynamicBlocker(nx,player.y,player.x,player.y)){const fromX=player.x;player.x=nx;notifyStreetAccepted(player,fromX,player.y)}else bumped=bumped||hit}if(sy){const ny=player.y+sy,hit=blockingPedestrian(player.x,ny);if(!blocked(player.x,ny)&&!hit&&!dynamicBlocker(player.x,ny,player.x,player.y)){const fromY=player.y;player.y=ny;notifyStreetAccepted(player,player.x,fromY)}else bumped=bumped||hit}}return bumped}
-function pedestrianLane(n){
+function pedestrianLane(n,placing=false){
  const b=n.routeBounds,direction=Math.sign(n.vx||n.vy);let side=n.wisdomId?-1:1;
  if(n.wisdomId&&npcs.some(other=>{if(other===n||other.wisdomId||other.special||other.arrested||!!other.vx!==!!n.vx||Math.sign(other.vx||other.vy)!==-direction)return false;const ahead=(n.vx?other.x-n.x:other.y-n.y)*direction;return ahead>=-28&&ahead<96&&pedestrianRouteContains(n,other.x,other.y)}))side=1;
  const lane=n.vx?b.y+b.h/2+side*direction*Math.min(16,b.h/2-13):b.x+b.w/2-side*direction*Math.min(16,b.w/2-13);
- // A nominal sidewalk lane can lie inside a projecting facade or prop.
- // Keep the current clear parallel line instead of continually steering into
- // that wall and alternating collision-fallback turns. Forward collision and
- // route recovery still belong to the normal movement resolver.
- return groundStaticMotionBlocked(n.vx?n.x:lane,n.vx?lane:n.y,13,n.x,n.y)?(n.vx?n.y:n.x):lane
+ // A clear lane endpoint can still require crossing an obstructed path.
+ // Keep the parallel line until the native body/ground checks permit the
+ // whole lateral change; forward movement keeps its normal resolver.
+ const current=n.vx?n.y:n.x,steps=Math.ceil(Math.abs(lane-current));
+ if(placing)return groundStaticMotionBlocked(n.vx?n.x:lane,n.vx?lane:n.y,13,n.x,n.y)?current:lane;
+ let x=n.x,y=n.y;
+ for(let i=1;i<=steps;i++){
+  const across=current+(lane-current)*i/steps,nx=n.vx?n.x:across,ny=n.vx?across:n.y;
+  if(responderBlocked(nx,ny,13,n,x,y))return current;
+  x=nx;y=ny;
+ }
+ return lane
 }
 function createPedestrianMover({move,blocked,contactBlocks,circles}){
  const maneuvers=new WeakMap();
@@ -3011,7 +3018,7 @@ function initializePedestrianRoutes(){
   for(const b of choices){const x=clamp(n.x,b.x+13,b.x+b.w-13),y=clamp(n.y,b.y+13,b.y+b.h-13),distance=dist(n.x,n.y,x,y);if(distance<bestDistance){best=b;bestDistance=distance}}
   if(!best){n.unplaced=true;continue}
   n.routeBounds={x:best.x,y:best.y,w:best.w,h:best.h};n.min=(n.vx?best.x:best.y)+13;n.max=(n.vx?best.x+best.w:best.y+best.h)-13;n.avoid=1;
-  const along=clamp(n.vx?n.x:n.y,n.min,n.max),lane=pedestrianLane(n);let placed=false;
+  const along=clamp(n.vx?n.x:n.y,n.min,n.max),lane=pedestrianLane(n,true);let placed=false;
   for(let offset=0;offset<=n.max-n.min&&!placed;offset+=16)for(const sign of offset?[1,-1]:[1])for(const cross of [lane,n.vx?best.y+best.h/2:best.x+best.w/2,n.vx?best.y+best.h/2-16:best.x+best.w/2+16]){
    const position=along+offset*sign,x=n.vx?position:cross,y=n.vx?cross:position;if(position<n.min||position>n.max||!pedestrianRouteContains(n,x,y)||responderBlocked(x,y,13,n,x,y))continue;
    n.x=x;n.y=y;notifyStreetDiscontinuity(n,"route-recovery");placed=true;break

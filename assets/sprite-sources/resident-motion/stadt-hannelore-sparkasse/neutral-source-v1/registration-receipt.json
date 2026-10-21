@@ -1,0 +1,976 @@
+{
+  "status": "SOURCE-only neutral readiness packet; independent review pending",
+  "recipeSha256": "9a811989a272a5ec69b3f70c85442fafc489a0a2790022feecf0f3cf1175af13",
+  "preparationHelperSha256": "75ac9ea92dd968f67fe7b4fda2e24a93b9e0b9b382f62ce8982ba5621478f087",
+  "helper": {
+    "file": "tools/build-street-character-sprites.py",
+    "sha256": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127"
+  },
+  "registered": {
+    "down": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png",
+      "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        148,
+        75,
+        372,
+        472
+      ],
+      "workingOrigin": [
+        69.6904761904762,
+        58.904761904761926
+      ],
+      "rawComponentBounds": [
+        132,
+        26,
+        507,
+        694
+      ],
+      "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+      "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+      "scale": 0.5952380952380952,
+      "sourcePivot": [
+        313,
+        694
+      ]
+    },
+    "front-right": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-right-registered.png",
+      "sha256": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        141,
+        72,
+        343,
+        472
+      ],
+      "workingOrigin": [
+        -209.57377049180326,
+        64.25037257824147
+      ],
+      "rawComponentBounds": [
+        588,
+        13,
+        926,
+        684
+      ],
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png",
+      "sourceSha256": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90",
+      "scale": 0.5961251862891207,
+      "sourcePivot": [
+        781,
+        684
+      ]
+    },
+    "right": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png",
+      "sha256": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        147,
+        73,
+        332,
+        472
+      ],
+      "workingOrigin": [
+        -257.69047619047615,
+        57.11904761904765
+      ],
+      "rawComponentBounds": [
+        680,
+        26,
+        990,
+        697
+      ],
+      "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+      "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+      "scale": 0.5952380952380952,
+      "sourcePivot": [
+        863,
+        697
+      ]
+    },
+    "rear-right": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-right-registered.png",
+      "sha256": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        136,
+        72,
+        336,
+        472
+      ],
+      "workingOrigin": [
+        103.76119402985074,
+        -355.86069651741286
+      ],
+      "rawComponentBounds": [
+        49,
+        645,
+        350,
+        1248
+      ],
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+      "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+      "scale": 0.6633499170812603,
+      "sourcePivot": [
+        229.5,
+        1248
+      ]
+    },
+    "up": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/up-registered.png",
+      "sha256": "1930fa20a16be1d09b8a9ae768b80568015c0e3e1b13bce2750b0b80217f20d7",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        144,
+        74,
+        369,
+        472
+      ],
+      "workingOrigin": [
+        -552.0357142857143,
+        58.904761904761926
+      ],
+      "rawComponentBounds": [
+        1169,
+        26,
+        1546,
+        694
+      ],
+      "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+      "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+      "scale": 0.5952380952380952,
+      "sourcePivot": [
+        1357.5,
+        694
+      ]
+    },
+    "rear-left": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-left-registered.png",
+      "sha256": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        170,
+        72,
+        363,
+        472
+      ],
+      "workingOrigin": [
+        -132.39137645107792,
+        -355.86069651741286
+      ],
+      "rawComponentBounds": [
+        456,
+        645,
+        746,
+        1248
+      ],
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+      "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+      "scale": 0.6633499170812603,
+      "sourcePivot": [
+        585.5,
+        1248
+      ]
+    },
+    "left": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png",
+      "sha256": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        179,
+        72,
+        359,
+        472
+      ],
+      "workingOrigin": [
+        -854.7142857142858,
+        56.52380952380952
+      ],
+      "rawComponentBounds": [
+        1736,
+        26,
+        2038,
+        698
+      ],
+      "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+      "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+      "scale": 0.5952380952380952,
+      "sourcePivot": [
+        1866,
+        698
+      ]
+    },
+    "front-left": {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-left-registered.png",
+      "sha256": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha20BBox": [
+        161,
+        72,
+        357,
+        472
+      ],
+      "workingOrigin": [
+        -420.61691542288554,
+        -355.86069651741286
+      ],
+      "rawComponentBounds": [
+        877,
+        645,
+        1172,
+        1248
+      ],
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+      "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+      "scale": 0.6633499170812603,
+      "sourcePivot": [
+        1020,
+        1248
+      ]
+    }
+  },
+  "standingCalibration": {
+    "status": "sourcecomparisoncandidate;notbody/runtimeapproval",
+    "method": "premultipliedRGBA MSE against exact ownstanding,onepaintheight only;fixed64,150pivot",
+    "standing": {
+      "file": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+      "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "logicalFigureHeight": 136,
+      "figureWorldHeight": 1.6
+    },
+    "standingAlpha20BBox": [
+      27,
+      14,
+      104,
+      150
+    ],
+    "bestPaintFigureHeight": 136.89001095044264,
+    "bestMSE": 0.0001561318761422425,
+    "proposedPaintFigureHeight": 137.0,
+    "proposedMSE": 0.00020198218751129403,
+    "nominal136MSE": 0.0025263155850830644,
+    "candidateMetrics": [
+      {
+        "paintFigureHeight": 132,
+        "mse": 0.015126784103965809,
+        "alpha20BBox": [
+          29,
+          19,
+          103,
+          150
+        ]
+      },
+      {
+        "paintFigureHeight": 136,
+        "mse": 0.0025263155850830644,
+        "alpha20BBox": [
+          28,
+          15,
+          104,
+          150
+        ]
+      },
+      {
+        "paintFigureHeight": 137.0,
+        "mse": 0.00020198218751129403,
+        "alpha20BBox": [
+          27,
+          14,
+          104,
+          150
+        ]
+      }
+    ]
+  },
+  "directCells": {
+    "128x160": {
+      "down": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/down.png",
+        "sha256": "09aa7e2b26f4b8b93cc3c6d71665cdb523c4ab902d8ea8f1f8cf4a17d4dbc6bf",
+        "bbox": [
+          27,
+          14,
+          104,
+          150
+        ],
+        "gutter": [
+          27,
+          14,
+          24,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "front-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/front-right.png",
+        "sha256": "845078d5facdca171d2a1b2184e570b6d628690fd66605c1e44f3009ed6b2b51",
+        "bbox": [
+          25,
+          13,
+          94,
+          150
+        ],
+        "gutter": [
+          25,
+          13,
+          34,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/right.png",
+        "sha256": "858ec520941ce04db7304666192ce1d04a094d2180a5704b786e2655a28d89fd",
+        "bbox": [
+          27,
+          14,
+          90,
+          150
+        ],
+        "gutter": [
+          27,
+          14,
+          38,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "rear-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/rear-right.png",
+        "sha256": "1465676ec044ab7ae2123119f80d48b897883b7f7d2b9044a8991ecbec11164b",
+        "bbox": [
+          23,
+          13,
+          92,
+          150
+        ],
+        "gutter": [
+          23,
+          13,
+          36,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "up": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/up.png",
+        "sha256": "231fc66b23c201484d07bf794d0df7bec41b81bee9e587152362b5125ed75e08",
+        "bbox": [
+          26,
+          14,
+          103,
+          150
+        ],
+        "gutter": [
+          26,
+          14,
+          25,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "rear-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/rear-left.png",
+        "sha256": "4bd46ad4af1880342a8454903e2bd72f08fd286de26d65f1e1ffe63aad61cb70",
+        "bbox": [
+          35,
+          13,
+          101,
+          150
+        ],
+        "gutter": [
+          35,
+          13,
+          27,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/left.png",
+        "sha256": "9f9bb00f4575642acb28b72c3c5ac27b88759ac67bc87f281c69587b9af74124",
+        "bbox": [
+          38,
+          13,
+          100,
+          150
+        ],
+        "gutter": [
+          38,
+          13,
+          28,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      },
+      "front-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-128x160/front-left.png",
+        "sha256": "0f875b1fed62354fac18304a9c146d1259b5ab537a559ab506eb9f6c7ee58f92",
+        "bbox": [
+          32,
+          13,
+          99,
+          150
+        ],
+        "gutter": [
+          32,
+          13,
+          29,
+          10
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 137.0,
+        "pivot": [
+          64.0,
+          150.0
+        ]
+      }
+    },
+    "96x120": {
+      "down": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/down.png",
+        "sha256": "c5a824734cc51706989a86b7ceb0169c28fcf5bfc48d7719b43ef88b22fc71b2",
+        "bbox": [
+          21,
+          11,
+          78,
+          113
+        ],
+        "gutter": [
+          21,
+          11,
+          18,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "front-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/front-right.png",
+        "sha256": "60b22f8b542607b0cde916f0ccbbdbee6263d975f56218bdf5f106ea2daf9eda",
+        "bbox": [
+          19,
+          10,
+          71,
+          113
+        ],
+        "gutter": [
+          19,
+          10,
+          25,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/right.png",
+        "sha256": "88797db7d9adf1ac73ac39129a371e0b8b42911d6ee4b0c5550b5011ef467138",
+        "bbox": [
+          20,
+          10,
+          68,
+          113
+        ],
+        "gutter": [
+          20,
+          10,
+          28,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "rear-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/rear-right.png",
+        "sha256": "d471cc9006e60008e143ce6d9be7194ae5b2c1dde5335729c06027b5fba13cd4",
+        "bbox": [
+          17,
+          10,
+          69,
+          113
+        ],
+        "gutter": [
+          17,
+          10,
+          27,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "up": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/up.png",
+        "sha256": "325e2e9a271efbe7cd31f66e1afec23960c53e7cad90082c4e9c171c8349dc38",
+        "bbox": [
+          20,
+          11,
+          77,
+          113
+        ],
+        "gutter": [
+          20,
+          11,
+          19,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "rear-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/rear-left.png",
+        "sha256": "491e8a0f25247a724cda707e4a8555c17d507d00edb88c63d5eea0abdb4b5dfa",
+        "bbox": [
+          26,
+          10,
+          76,
+          113
+        ],
+        "gutter": [
+          26,
+          10,
+          20,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/left.png",
+        "sha256": "91ec1b32f06697a2e7291426a64209e4e0e2296255b28b6c0034bfa380a47bbc",
+        "bbox": [
+          28,
+          10,
+          75,
+          113
+        ],
+        "gutter": [
+          28,
+          10,
+          21,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      },
+      "front-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-96x120/front-left.png",
+        "sha256": "c8f9ab15d62afff67196dfd76871254ffa813d8009defad5211ede9bf123d51d",
+        "bbox": [
+          24,
+          10,
+          74,
+          113
+        ],
+        "gutter": [
+          24,
+          10,
+          22,
+          7
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 102.75,
+        "pivot": [
+          48.0,
+          112.5
+        ]
+      }
+    },
+    "64x80": {
+      "down": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/down.png",
+        "sha256": "cf05329fd5ba779c24a637297a11d6d5020784a89825ef80e457ba57738090ad",
+        "bbox": [
+          14,
+          7,
+          52,
+          75
+        ],
+        "gutter": [
+          14,
+          7,
+          12,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "front-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/front-right.png",
+        "sha256": "c8be8a409414e7a7e89d48ddd696a13761e5247728fa3e8febfa2a99f731c224",
+        "bbox": [
+          13,
+          7,
+          47,
+          75
+        ],
+        "gutter": [
+          13,
+          7,
+          17,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/right.png",
+        "sha256": "ec749e98a1f7184e0b84d234ca1150efb57fac9af7b937dac4acd7474e0bf606",
+        "bbox": [
+          14,
+          7,
+          45,
+          75
+        ],
+        "gutter": [
+          14,
+          7,
+          19,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "rear-right": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/rear-right.png",
+        "sha256": "8392d0eeb84aa79a3776eb72956515eb9024c95b9eb01bd84d9d54c4ed8d2050",
+        "bbox": [
+          12,
+          7,
+          46,
+          75
+        ],
+        "gutter": [
+          12,
+          7,
+          18,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "up": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/up.png",
+        "sha256": "27f4ce8f7f657c2f43e65c6f683fe45d706a73a8d521b3a9323c490e86783401",
+        "bbox": [
+          13,
+          7,
+          52,
+          75
+        ],
+        "gutter": [
+          13,
+          7,
+          12,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "rear-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/rear-left.png",
+        "sha256": "5848a27a6ca63adbac61eee6964916b39e330f6ff8ba661336345a511c23e124",
+        "bbox": [
+          18,
+          7,
+          51,
+          75
+        ],
+        "gutter": [
+          18,
+          7,
+          13,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/left.png",
+        "sha256": "d7d0233108271c766700346471cd9ebbd341e54e43d5952049b1d13b64116097",
+        "bbox": [
+          19,
+          7,
+          50,
+          75
+        ],
+        "gutter": [
+          19,
+          7,
+          14,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      },
+      "front-left": {
+        "file": "output/ambient-city-animation/hannelore-sparkasse-neutral-source-v1/direct-64x80/front-left.png",
+        "sha256": "25ef7e630bb7782f2a447f1e74599bcc88a96ecc2d734b87ea0b0e874ba5539b",
+        "bbox": [
+          16,
+          7,
+          50,
+          75
+        ],
+        "gutter": [
+          16,
+          7,
+          14,
+          5
+        ],
+        "edgeAlphaMax": 0,
+        "nonzeroRgbAtAlphaZeroPixels": 0,
+        "paintFigureHeight": 68.5,
+        "pivot": [
+          32.0,
+          75.0
+        ]
+      }
+    }
+  },
+  "bootMeasurements": {
+    "right": {
+      "originalHeelToeDistanceSourcePx": 151.08275877809487,
+      "originalHeelToeDistanceWorkingPx": 89.93021355838981,
+      "completeNearComponentHeelToeDistanceSourcePx": 254.01771591761076,
+      "uniformBootDerivedComponentScale": 0.35403126602224144,
+      "bodyMasterScale": 0.5952380952380952,
+      "originalMeanMarkedCuffToSoleWorkingPx": 39.583333333333336,
+      "componentMeanMarkedCuffToSoleWorkingPx": 34.34103280415742,
+      "cuffDepthRatioComponentToOriginal": 0.8675629339997664,
+      "status": "measurement only; no attached leg layers or far hidden heel claim",
+      "components": [
+        {
+          "name": "right-near",
+          "sourceHeelToeDistancePx": 254.01771591761076,
+          "scaledWorkingHeelToeDistancePx": 89.93021355838981,
+          "anklePointsWorkingRelativeToSole": [
+            [
+              -46.024064582891384,
+              -39.2974705284688
+            ],
+            [
+              -14.161250640889659,
+              -29.38459507984604
+            ]
+          ]
+        },
+        {
+          "name": "right-far",
+          "sourceHeelToeDistancePx": 244.00819658363937,
+          "scaledWorkingHeelToeDistancePx": 86.38653075630981,
+          "anklePointsWorkingRelativeToSole": [
+            [
+              -47.08615838095811,
+              -38.94343926244656
+            ],
+            [
+              -19.117688365201037,
+              -29.73862634586828
+            ]
+          ]
+        }
+      ]
+    },
+    "left": {
+      "originalHeelToeDistanceSourcePx": 159.02829936838285,
+      "originalHeelToeDistanceWorkingPx": 94.65970200498978,
+      "completeNearComponentHeelToeDistanceSourcePx": 254.00787389370433,
+      "uniformBootDerivedComponentScale": 0.3726644397039534,
+      "bodyMasterScale": 0.5952380952380952,
+      "originalMeanMarkedCuffToSoleWorkingPx": 39.583333333333336,
+      "componentMeanMarkedCuffToSoleWorkingPx": 36.33478287113546,
+      "cuffDepthRatioComponentToOriginal": 0.9179313567444747,
+      "status": "measurement only; no attached leg layers or far hidden heel claim",
+      "components": [
+        {
+          "name": "left-far",
+          "sourceHeelToeDistancePx": 245.0081631293129,
+          "scaledWorkingHeelToeDistancePx": 91.30582983548021,
+          "anklePointsWorkingRelativeToSole": [
+            [
+              38.384437289507204,
+              -41.365752807138826
+            ],
+            [
+              9.316610992598836,
+              -31.303812935132086
+            ]
+          ]
+        },
+        {
+          "name": "left-near",
+          "sourceHeelToeDistancePx": 254.00787389370433,
+          "scaledWorkingHeelToeDistancePx": 94.65970200498978,
+          "anklePointsWorkingRelativeToSole": [
+            [
+              45.83772608358627,
+              -41.365752807138826
+            ],
+            [
+              18.260557545493718,
+              -31.303812935132086
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "inputPinsUnchanged": true,
+  "notRun": [
+    "leg body registration",
+    "gait/contacts/bridges/gesture",
+    "mouth fit/transport",
+    "canonical runtime/audio",
+    "browser/GPU/performance/device"
+  ]
+}

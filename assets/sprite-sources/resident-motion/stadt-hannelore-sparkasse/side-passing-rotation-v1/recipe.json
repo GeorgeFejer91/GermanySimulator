@@ -1,0 +1,48 @@
+{
+  "scope": "ONE wholeNEAR toe-up phase12 perheading from articulated12offset/12lift/7root, other6keys+2neutrals exact; no16loop",
+  "parentRecipe": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json",
+  "inheritedPinMap": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json",
+    "sha256": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d"
+  },
+  "nearPassingForeAftWorking": 12,
+  "method": "Sample primary512 source ONCE: inverseR about targetPCHIP(actual alpha-weighted cut-cap centre), then existing ten-step inversePCHIP. Same composedmap capdiagnostic; original fixedsole forwardPCHIP thenR. Whole connected calf+shoe rotates, not foot-only.",
+  "inputs": {
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/pins.json": "1ec2737d2370b8bd57c2b8f55115165fc5a6d4b2191860b0a8f1187de54f909d",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/final-receipt.json": "3fd8c029d8231e87e3ec803cacf6812ffb1e578bcd7b77b68403844c8a9de8ad",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/review/REPORT.md": "aea1642de716cf2249fa146fd3f2a9ffa06c4661785a0ec7bdc3b6891ea7aab0",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/final-receipt.json": "9c0985cf9d73748af6ba1b301f1ef7803ddcda828ad63059e837c5f300accf4f",
+    "output/ambient-city-animation/hannelore-sparkasse-side-walk-extremes-floor-v2/receipt.json": "56bacc3ac5ef5478306d1f6b02c42e291c2c8b198eb4cd9b9af2816eaaa40c29",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/recipe.json": "56b73e572960529947a1dd28c5b96107cdbaea1d384e072bace8114c13b1a4dc",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-passing-source-v1/build-passing.py": "c7b549c57c38c3da76d0b14f2fe494df79cd46fceacdf0f859313495b3709872",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/final-receipt.json": "94bce5c11bcf42e1ab913ec0b34dc5d3c7fef836c1379efffeb1c5a84a88923a",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/trial-16/receipt.json": "da3301240d2a295f3df063aec2500101b61c66182d29cc44bfc08a520d79a342",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-source-v1/receipt.json": "904a32ab76c20f39574dc5eeab3010b31ca908e75273877b014ad5582104f958",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-passing-articulation-v1/build-articulation.py": "692afc5f9e4d886ee22df181520b409dfd56f04c9e627b0272aa4df5af2fc2bf",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-articulation-v1/final-receipt.json": "af89eb4110176f42324321a4b53220a86ebdc2cb9ba4f2366114b69a40467e11",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-articulation-v1/candidate-v1/receipt.json": "dbfc1bf9905aebf347a65813b87b360a1936e451dde6f268349c461423fe5bcf"
+  },
+  "limits": [
+    "ONE fixed12degree toe-up candidate only, no angle grid/new paint/16loop.",
+    "Complete connected near calf+shoe shares measured target rootpivot. Rotation is allowed in this new source revision; old no-rotation trials remain exact and held.",
+    "FAR partly visible high-J calf unchanged; cap coverage does not make all stretch hidden.",
+    "No accepted native/world/runtime/GPU/media/physicalstride claim."
+  ],
+  "nearSwingLiftWorking": 12,
+  "nearRootRaiseWorking": 7,
+  "inheritedBuilder": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-passing-articulation-v1/build-articulation.py",
+    "sha256": "692afc5f9e4d886ee22df181520b409dfd56f04c9e627b0272aa4df5af2fc2bf"
+  },
+  "toeUpDegrees": {
+    "right": -12,
+    "left": 12
+  }
+}

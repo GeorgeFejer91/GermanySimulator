@@ -1,0 +1,46 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "scope": "actual own sources/standing only, no global manifest/spec dependency",
+  "rows": [
+    {
+      "file": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+      "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+      "dimensions": [
+        2172,
+        724
+      ]
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+      "sha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+      "dimensions": [
+        1222,
+        1287
+      ]
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png",
+      "sha256": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+      "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+      "dimensions": [
+        128,
+        160
+      ]
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/generation.json",
+      "sha256": "2cf54b3f65f4be54173cc08f87c1494e223aa0293595f9dbc281132b3bb9da0e"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/component-generation.json",
+      "sha256": "c6f25273c32ea777ecb65346aa647322d488a992dbb6da50cda0c8ae85c2b554"
+    }
+  ]
+}

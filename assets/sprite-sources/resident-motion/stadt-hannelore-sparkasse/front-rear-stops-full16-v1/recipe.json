@@ -1,0 +1,90 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "mechanism": "Exact approved original-source garment/upper union with unchanged leg/upper maps; phase range expansion only",
+  "approvedBuilder": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/front-rear-stop-shared-garment-v1/build-pilot.py",
+  "approvedBuilderSha256": "06d4fc6b7361b347f1a203e5bdfcc6067737cc3ffbe7c7d6e5723b2a733ec977",
+  "approvedReview": "output/ambient-city-animation/hannelore-sparkasse-front-rear-stop-shared-garment-v1/candidate-v2/review/final-receipt.json",
+  "approvedReviewSha256": "041c6293fa30b6dd6b0c23f2e6a0aee7c4f18053678e5b789e1bf174d7bfef8f",
+  "entryPhases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "headings": [
+    "down",
+    "up"
+  ],
+  "stages": 4,
+  "stageMsProposedUnobserved": 60,
+  "workingBaseline": 472,
+  "paintHeight": 137,
+  "directPaintHeights": [
+    102.75,
+    68.5
+  ],
+  "workingExpected": 128,
+  "directExpected": 256,
+  "goldenWorkingExpected": 32,
+  "goldenDirectExpected": 64,
+  "limits": [
+    "Author SOURCE candidate, independent review required",
+    "No runtime/GPU/native/physical stride approval"
+  ],
+  "fixedSourceSoleWitnesses": {
+    "down": [
+      {
+        "screenSide": "left",
+        "sourceSolePoint": [
+          215,
+          471
+        ],
+        "sourceAlpha": 177
+      },
+      {
+        "screenSide": "right",
+        "sourceSolePoint": [
+          299,
+          471
+        ],
+        "sourceAlpha": 220
+      }
+    ],
+    "up": [
+      {
+        "screenSide": "left",
+        "sourceSolePoint": [
+          220,
+          471
+        ],
+        "sourceAlpha": 160
+      },
+      {
+        "screenSide": "right",
+        "sourceSolePoint": [
+          296,
+          471
+        ],
+        "sourceAlpha": 164
+      }
+    ]
+  },
+  "witnessAuthority": {
+    "file": "output/ambient-city-animation/hannelore-sparkasse-front-rear-extremes-v1/candidate-v3/source-witnesses.json",
+    "sha256": "b84ce4b9bad7d60a49f0bdc83525f32bbc104a341cecad274780f4a949bae7dc",
+    "qualification": "Same own fixed source texels atY471, no relocation by pose; point-centre uncertainty0.5workingpx, not physical floor witnesses"
+  },
+  "capDiagnostic": "Extracted top at sourcehip382 includes exterior navy garment AA. Retain all alpha20/opaque200 versus cover200 diagnostics; do not claim all caps hidden or alter source to satisfy that diagnostic."
+}

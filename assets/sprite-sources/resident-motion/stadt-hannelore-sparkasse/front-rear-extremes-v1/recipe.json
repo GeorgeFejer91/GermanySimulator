@@ -1,0 +1,209 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "scope": "Four front/rear source extremes, not a full gait or runtime admission",
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "paintHeight": 137,
+  "phases": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "proposedCycleMs": 1024,
+  "controlNote": "waist/hip/knee field names are interpolation controls, not measured hidden anatomical joints; actual visible garment/calf/foot support comes from independent source audit",
+  "liftWorking": 6,
+  "depthWorking": 4,
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png",
+      "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+      "travel": [
+        0,
+        1
+      ],
+      "foreground": 1,
+      "landmarks": {
+        "waist": 352,
+        "hip": 382,
+        "mid": 257,
+        "centres": [
+          224,
+          291
+        ],
+        "hem": [
+          400,
+          400
+        ],
+        "knee": [
+          412,
+          412
+        ],
+        "ankle": [
+          425,
+          425
+        ],
+        "foot_centres": [
+          216,
+          299
+        ],
+        "step_width": 10,
+        "root_overlap": 2,
+        "depth_amplitude": 4,
+        "auto_hand_mask": false
+      },
+      "propPolygon": [
+        [
+          320,
+          370
+        ],
+        [
+          333,
+          362
+        ],
+        [
+          351,
+          361
+        ],
+        [
+          367,
+          370
+        ],
+        [
+          371,
+          385
+        ],
+        [
+          372,
+          404
+        ],
+        [
+          366,
+          414
+        ],
+        [
+          355,
+          418
+        ],
+        [
+          330,
+          419
+        ],
+        [
+          320,
+          413
+        ],
+        [
+          316,
+          403
+        ],
+        [
+          317,
+          385
+        ]
+      ]
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/up-registered.png",
+      "sha256": "1930fa20a16be1d09b8a9ae768b80568015c0e3e1b13bce2750b0b80217f20d7",
+      "travel": [
+        0,
+        -1
+      ],
+      "foreground": 1,
+      "landmarks": {
+        "waist": 352,
+        "hip": 382,
+        "mid": 257,
+        "centres": [
+          224,
+          291
+        ],
+        "hem": [
+          400,
+          400
+        ],
+        "knee": [
+          412,
+          412
+        ],
+        "ankle": [
+          429,
+          429
+        ],
+        "foot_centres": [
+          217,
+          298
+        ],
+        "step_width": 10,
+        "root_overlap": 2,
+        "depth_amplitude": 4,
+        "auto_hand_mask": false
+      },
+      "propPolygon": [
+        [
+          155,
+          357
+        ],
+        [
+          176,
+          351
+        ],
+        [
+          186,
+          365
+        ],
+        [
+          192,
+          375
+        ],
+        [
+          197,
+          391
+        ],
+        [
+          196,
+          410
+        ],
+        [
+          189,
+          419
+        ],
+        [
+          165,
+          418
+        ],
+        [
+          150,
+          414
+        ],
+        [
+          144,
+          404
+        ],
+        [
+          145,
+          385
+        ],
+        [
+          151,
+          368
+        ]
+      ]
+    }
+  },
+  "inputPins": {
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "output/ambient-city-animation/hannelore-sparkasse-front-rear-source-audit-v1/REPORT.md": "8760c7579f0f5f1da28c38d23ee12a121635c7b03536998abafef2be7f03221a",
+    "output/ambient-city-animation/hannelore-sparkasse-front-rear-source-audit-v1/final-receipt.json": "edc822b3893045a2646ef9f927ff61892dff4c3551100d4333c3427642c067a5",
+    "output/ambient-city-animation/hannelore-sparkasse-front-rear-source-audit-v1/geometry.json": "39b978724c2508f0cee8bb160f7d05507fa214ca609a7e93f1b3283b3b14b843",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+  }
+}

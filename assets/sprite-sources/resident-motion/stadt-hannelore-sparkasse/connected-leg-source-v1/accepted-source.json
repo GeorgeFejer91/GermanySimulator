@@ -1,0 +1,55 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "scope": "Accepted static own calf+shoe source fit only; four extremes/moving alpha/root contact not yet accepted",
+  "paintHeight": 137,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "standingSha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+  "sourceFreezeSha256": "9c35de6ba24d837757093d120543cf4ac416febc1bc7543b75a3c272caf4136a",
+  "independentReportSha256": "c1fea1e1c7b125b762e16863614f5c2783a7e3266d0bb696e76afc5af6dce19f",
+  "independentReceiptSha256": "c7eaa8cd003408fb9f475f5c50d22920b6bc16e32b736406b9f32ca93c3f364e",
+  "components": {
+    "right": {
+      "near-complete": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png",
+        "sha256": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482"
+      },
+      "far-complete": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-far-complete.png",
+        "sha256": "7957eef1ccd3ad33c8c241ecc65f84387f0043b347a41fd7f5ad7b8d25501265"
+      },
+      "upper-preserved": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-upper-preserved.png",
+        "sha256": "58b3e2355dd3e9a1411b07c69c7f381aed237262f1aa577f5565449bda1131de"
+      },
+      "revised": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-revised.png",
+        "sha256": "5939f3d1c0e7371ee21f8d08bc32fa855b5457c0a41b2f3b48ccc9b27cac19de"
+      }
+    },
+    "left": {
+      "near-complete": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png",
+        "sha256": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e"
+      },
+      "far-complete": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-far-complete.png",
+        "sha256": "b38759417b63b6e2ffc7b6f27d2327485a70467076f9156bba09eaa154612e04"
+      },
+      "upper-preserved": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-upper-preserved.png",
+        "sha256": "499325380c24b14645f8ab6bc9a87de39aeb3d6d01636c3c9bc0f9b3b5f81d19"
+      },
+      "revised": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-revised.png",
+        "sha256": "84430960bb6bf16cd3caa46177aa017a4ef1b515e7b7f1ae40d1f91afdd2b9ad"
+      }
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "scope": "ONE continuous left/right16-sample SOURCE loop, no runtime admission",
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "paintFigure": 137,
+  "nominalFigure": 136,
+  "worldHeight": 1.6,
+  "proposedCycleMs": 1024,
+  "frameMs": 64,
+  "inspectionGifFrameMs": 80,
+  "inspectionGifCycleMs": 1280,
+  "sourceSupportPivotX": 256,
+  "nearForeAftBonusWorking": 12,
+  "nearLiftWorking": 12,
+  "farLiftWorking": 7,
+  "nearRootRaiseBase": 5,
+  "nearRootRaiseSwingBonus": 2,
+  "nearToeUpDegrees": {
+    "right": -12,
+    "left": 12
+  },
+  "provisionalStanceWorkingPixelsPerCycle": 48,
+  "strideStatus": "SOURCE mathematical slope only; not actual encoded assessment or runtime stride admission",
+  "travelCurve": "stance12-3p p0..8; swing12*(-1-2t+12t\u00b2-8t\u00b3), t=(p-8)/8; FARphase(p+8)%16",
+  "weightCurve": "NEARmax(0,-sin(tau*p/16))\u00b2, FARmax(0,sin(tau*p/16))\u00b2",
+  "sides": {
+    "right": {
+      "travelX": 1,
+      "rootY": [
+        399,
+        402.65
+      ],
+      "rigidFromY": [
+        422,
+        424.5
+      ],
+      "garmentCutoffWorking": [
+        [
+          192,
+          396
+        ],
+        [
+          198,
+          397
+        ],
+        [
+          202,
+          398
+        ],
+        [
+          210,
+          399
+        ],
+        [
+          220,
+          399
+        ],
+        [
+          230,
+          400
+        ],
+        [
+          240,
+          400
+        ],
+        [
+          250,
+          400
+        ],
+        [
+          260,
+          399
+        ],
+        [
+          270,
+          399
+        ],
+        [
+          280,
+          398
+        ],
+        [
+          288,
+          397
+        ],
+        [
+          294,
+          397
+        ]
+      ],
+      "measuredShoeBoundsAlpha20": [
+        [
+          192,
+          424,
+          283,
+          472
+        ],
+        [
+          235,
+          426,
+          323,
+          472
+        ]
+      ],
+      "rootRaisePerLimb": [
+        5,
+        9
+      ],
+      "farCentreX": 279,
+      "sources": {
+        "near-complete": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png",
+          "sha256": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482"
+        },
+        "far-complete": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png",
+          "sha256": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+          "status": "NEW uniform floor source candidate, not yet accepted"
+        },
+        "upper-preserved": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-upper-preserved.png",
+          "sha256": "58b3e2355dd3e9a1411b07c69c7f381aed237262f1aa577f5565449bda1131de"
+        }
+      },
+      "sourceFootCentresX": [
+        237.5,
+        279
+      ],
+      "neutralReference": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/right-revised-neutral.png",
+        "sha256": "a6012dc82ff429c52642a3174be5a5d44c5491a322dfebfc6ba8e7fdf0d85fe2",
+        "variant": "accepted own revised floor-v2 neutral, not original standing"
+      }
+    },
+    "left": {
+      "travelX": -1,
+      "rootY": [
+        399,
+        402.65
+      ],
+      "rigidFromY": [
+        422,
+        424.5
+      ],
+      "garmentCutoffWorking": [
+        [
+          218,
+          395
+        ],
+        [
+          225,
+          396
+        ],
+        [
+          230,
+          397
+        ],
+        [
+          235,
+          397
+        ],
+        [
+          240,
+          398
+        ],
+        [
+          248,
+          398
+        ],
+        [
+          255,
+          398
+        ]
+      ],
+      "measuredShoeBoundsAlpha20": [
+        [
+          229,
+          424,
+          320,
+          472
+        ],
+        [
+          188,
+          426,
+          276,
+          472
+        ]
+      ],
+      "rootRaisePerLimb": [
+        5,
+        11
+      ],
+      "farCentreX": 232,
+      "sources": {
+        "near-complete": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png",
+          "sha256": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e"
+        },
+        "far-complete": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png",
+          "sha256": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+          "status": "NEW uniform floor source candidate, not yet accepted"
+        },
+        "upper-preserved": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-upper-preserved.png",
+          "sha256": "499325380c24b14645f8ab6bc9a87de39aeb3d6d01636c3c9bc0f9b3b5f81d19"
+        }
+      },
+      "sourceFootCentresX": [
+        274.5,
+        232
+      ],
+      "neutralReference": {
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/left-revised-neutral.png",
+        "sha256": "f0c510f01e117385b4eda946334983a3f2b5c2de5b86277efb4a8ec9d3177b24",
+        "variant": "accepted own revised floor-v2 neutral, not original standing"
+      }
+    }
+  },
+  "inputPins": {
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-upper-preserved.png": "58b3e2355dd3e9a1411b07c69c7f381aed237262f1aa577f5565449bda1131de",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/right-revised-neutral.png": "a6012dc82ff429c52642a3174be5a5d44c5491a322dfebfc6ba8e7fdf0d85fe2",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-upper-preserved.png": "499325380c24b14645f8ab6bc9a87de39aeb3d6d01636c3c9bc0f9b3b5f81d19",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/left-revised-neutral.png": "f0c510f01e117385b4eda946334983a3f2b5c2de5b86277efb4a8ec9d3177b24",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-rotation-v1/final-receipt.json": "efc72d290f5deb558ae18cf1b590ac0674911e0b0301ad96bd93e202c780ea0d",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-rotation-v1/review/final-receipt.json": "d472b79286888035343217dccadb8d34705b7931373c4b2b61a30dbe4486558e",
+    "output/ambient-city-animation/hannelore-sparkasse-side-passing-rotation-v1/review/REPORT.md": "ab0978ae71bb4d312c7a48be5a62a27333c0ff791a3b26e03de8184c84b7cf9d",
+    "output/ambient-city-animation/hannelore-sparkasse-front-rear-loop-v1/candidate-v3/final-receipt.json": "6148088e2e0ed27b24080aafbf98ffb0e85980a326fe7e96072b22e567ac77e4",
+    "output/ambient-city-animation/hannelore-sparkasse-front-rear-loop-v1/candidate-v3/review/REPORT.md": "1f188b41d81c90cd67b094e62803d37f2f681d21a40a5c32cb7e167c567b0581"
+  },
+  "limits": [
+    "SOURCE-only32 poses, no fullworld/native/GPU/stride/media admission.",
+    "Golden8 keys are freshly evaluated, never cached-pose fallback; any AA roundoff recorded.",
+    "Strength0 means own revised floor-v2 neutral, not original standing.",
+    "DiagnosticGIF80ms/1280ms differs from proposed PNG phase64ms/1024ms.",
+    "FAR calf stretch can be visible. No universal Jacobian anatomical acceptance ratio."
+  ]
+}

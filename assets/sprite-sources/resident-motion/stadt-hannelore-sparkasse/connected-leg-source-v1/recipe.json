@@ -1,0 +1,276 @@
+{
+  "scope": "Connected same-character intact calf+shoe revised source. No gait approval.",
+  "sourceRightNear": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/right-working-near.png",
+  "mirrorOnlyLeftLimbAboutX": 255.5,
+  "leftRegistration": {
+    "uniformScale": 1,
+    "translation": [
+      0,
+      0
+    ],
+    "reason": "Exact limb-only mirror preserves source texels and named sole. Toe \u22120.4047619 and opening \u22121.0 working-pixel residual vs actual LEFT; under0.257px at96 export. No torso/prop mirroring."
+  },
+  "figureWorking": 400,
+  "baseline": 472,
+  "paintFigure": 137,
+  "nominalFigure": 136,
+  "worldHeight": 1.6,
+  "sides": {
+    "right": {
+      "original": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png",
+      "originalNear": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/right-working-near.png",
+      "originalNearShoe": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/right-own-near-shoe-only.png",
+      "originalNearMask": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/right-working-mask.png",
+      "farScale": 0.8781818181818177,
+      "farTranslation": [
+        70.1854545454546,
+        47.06636363636386
+      ],
+      "actualNearLandmarks": {
+        "toe": [
+          282.19047619047626,
+          460.6904761904762
+        ],
+        "cuffFront": [
+          229.80952380952385,
+          438.0714285714286
+        ],
+        "soleY": 470.2142857142857
+      },
+      "targetVisibleFarLandmarks": {
+        "kind": "manuallyVisibleFarWorking",
+        "heading": "right",
+        "toe": [
+          318,
+          449
+        ],
+        "soleY": 460,
+        "cuffFront": [
+          272,
+          431
+        ],
+        "hiddenHeel": null,
+        "hiddenCuffRear": null
+      },
+      "originalFarVisibleMask": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/right-far-visible-mask.png",
+      "inspectionHemBoundaryWorking": [
+        [
+          170,
+          391
+        ],
+        [
+          180,
+          394
+        ],
+        [
+          190,
+          396
+        ],
+        [
+          200,
+          398
+        ],
+        [
+          215,
+          399
+        ],
+        [
+          235,
+          400
+        ],
+        [
+          250,
+          400
+        ],
+        [
+          265,
+          399
+        ],
+        [
+          280,
+          397
+        ],
+        [
+          294,
+          396
+        ],
+        [
+          302,
+          396
+        ],
+        [
+          315,
+          397
+        ],
+        [
+          328,
+          395
+        ],
+        [
+          340,
+          390
+        ]
+      ],
+      "oldCalfRootRemnantRectsWorking": [
+        [
+          199,
+          399,
+          202,
+          404
+        ],
+        [
+          249,
+          400,
+          254,
+          407
+        ],
+        [
+          281,
+          399,
+          285,
+          404
+        ]
+      ]
+    },
+    "left": {
+      "original": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png",
+      "originalNear": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/left-working-near.png",
+      "originalNearShoe": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/left-own-near-shoe-only.png",
+      "originalNearMask": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/left-working-mask.png",
+      "farScale": 0.9312359550561778,
+      "farTranslation": [
+        -23.45258426966234,
+        22.119550561798633
+      ],
+      "actualNearLandmarks": {
+        "toe": [
+          229.21428571428555,
+          461.2857142857143
+        ],
+        "cuffFront": [
+          282.19047619047615,
+          438.07142857142856
+        ],
+        "soleY": 470.2142857142857
+      },
+      "targetVisibleFarLandmarks": {
+        "kind": "manuallyVisibleFarWorking",
+        "heading": "left",
+        "toe": [
+          190,
+          449
+        ],
+        "soleY": 460,
+        "cuffFront": [
+          239.33333333333334,
+          431.5238095238095
+        ],
+        "hiddenHeel": null,
+        "hiddenCuffRear": null
+      },
+      "originalFarVisibleMask": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/left-far-visible-mask.png",
+      "inspectionHemBoundaryWorking": [
+        [
+          170,
+          389
+        ],
+        [
+          200,
+          391
+        ],
+        [
+          210,
+          394
+        ],
+        [
+          220,
+          396
+        ],
+        [
+          235,
+          398
+        ],
+        [
+          248,
+          399
+        ],
+        [
+          252,
+          400
+        ],
+        [
+          254,
+          408
+        ],
+        [
+          258,
+          414
+        ],
+        [
+          266,
+          417
+        ],
+        [
+          280,
+          418
+        ],
+        [
+          297,
+          417
+        ],
+        [
+          311,
+          416
+        ],
+        [
+          326,
+          413
+        ],
+        [
+          335,
+          409
+        ],
+        [
+          340,
+          405
+        ]
+      ],
+      "oldCalfRootRemnantRectsWorking": [
+        [
+          263,
+          418,
+          265,
+          423
+        ]
+      ]
+    }
+  },
+  "inputs": {
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-gait-source-v2/ownership.json": "a6e2822a6f3888abf8174aa7fbf0deba93543bfdacea3e119f76198bda301f21",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-gait-source-v2/far-backing-v1/backing.json": "b33aafab845951521fe4694d2898fa251c32a4a79e1b960019b1b5d9d7cceb7d",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/ownership-receipt.json": "f3d3af4eb1b985067f8025f8f3c9e28496e920a7c26cd41e5c54c05b79e38b66",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/final-receipt.json": "4153d446314a0f8051e530437744301a9e8503e8c61dcde2fa21112c22f48638",
+    "output/ambient-city-animation/hannelore-sparkasse-intact-far-shoe-source-v1/final-receipt.json": "cc92d943bbab4d26fb3847cf8a53a103ed7f664dedcdcc3139eb5ca6dd76a8c2",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "assets/characters/street/stadt-hannelore-sparkasse-standing.webp": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/right-working-near.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/right-working-mask.png": "ba64f48e025fb4fbf265c4af6d2489f61042f5454f71638c754d04c80f403dce",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/right-own-near-shoe-only.png": "0c8789b2dabf873eb6b01f9d667755b97bb4978cf8495cf471d78312cfa63ef4",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/left-working-near.png": "9da83dc3b57f20ea4319495abbf46c9a232e3622946351c9f17fc38735e7fdb9",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/left-working-mask.png": "657f35a48a0d393bbe40b6d08843519de362b6f26dd7e2d11c1cc0e99e47693c",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/left-own-near-shoe-only.png": "b84fd2503114fe76ba2d52ad1d09f1066bc21251eab89f76a757bce9458d12cb",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/right-far-visible-mask.png": "91e78df7d759d8d22c94923ef2eb1e1aca6b69e9549c99d05c83f6e5be11d455",
+    "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/left-far-visible-mask.png": "5b5cdeb743815bc332f02fcbb27a4c69a380749a062517d65c522bc1c0068aa3",
+    "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/source-registration.json": "9a811989a272a5ec69b3f70c85442fafc489a0a2790022feecf0f3cf1175af13"
+  },
+  "composition": "Use original accepted near ownership OR original far-visible ownership to remove actual old lower leg paint, retaining exact original upper/hem/purse/remainder. Compose uniform full far leg, full own near, original foreground remainder. Retained source root strips follow actual source ownership instead of a newly guessed polygon; no generic fill or invented stocking. Source-flat RGBA ownership is static-source assembly, not a moving compositor.",
+  "rootRemnantDiagnosis": "Exact original raw/working inspection: narrow descending tan/black lines are calf-side/interleg edges continuing below the actual garment/purse bottom, not garment paint. Remove only retained old calf points in the listed small rectangles from upper remainder. New untrimmed legs are not clipped/changed. Root overlap strips directly beneath hem/purse remain from original source.",
+  "authorSourceAssessment": {
+    "status": "PASS static connected-source construction for independent review; no gait approval",
+    "observations": "Native light/dark and once-exported96/64 inspected: coherent calf/collar, original near RIGHT preserved, limb-only LEFT mirror, old root needles removed, intact substantial loafers, hem/purse overlaps. Root and independent Camera acceptance pending."
+  }
+}

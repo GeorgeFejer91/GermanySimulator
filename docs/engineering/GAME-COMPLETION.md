@@ -1,5 +1,12 @@
 # Germany Simulator completion goal
 
+Manifest-only capacity prerequisite65bf4f03 is live; Pages39623412392 SUCCESS.
+Whitespace compaction saves143978bytes while preserving all43parsed/typed
+definitions and72URLs. Independent review,57focused tests and built/live
+root/3d desktop/portrait4/4 each pass (16served hashes/case). Existing guard
+stays262144bytes; headroom148686. SOURCE merge2576397c matches release tree.
+This adds no character admission; full goal remains active8/34.
+
 Renate Termin is published and live verified as ac9743ac on deede6d5. Pages
 39614731293 succeeded; public root/3d desktop/Android-portrait startup and14file
 hashes pass4/4. Source edcfb45a/merge6ae4f97b retain the identical published tree.
@@ -20,15 +27,41 @@ face-covering action panel locally. Native actual-mouth projection RED→GREEN,
 final844landscape and568x320 six-state enlarged-text/spacing/resize/focus/native
 cancel tests pass. It uses existing edge layout/Pretext,44px targets and hides
 only the already-inert dock during manual modal ownership. Independent bounded
-UI review PASS; clean build/publication/live verification remain next. World,
+UI review PASS; clean31-page build and root/3d startup4/4 with16hashes pass.
+Follow-up693a1c24 is live, Pages39617975737 SUCCESS. Public root/3d across
+desktop/portrait/landscape pass6/6 with16served hashes/case. Source8cf4b8e/
+merge63ec14dd match that tree. World,
 renderer, person scale and all body/audio bytes stay unchanged.
 
-Hannelore own neutral/static lips pass source review, but both backing sheets
-remain HOLD with no gait. V2 review is correcting inherited near/far toe and
-stocking-opening witness mistakes against actual original pixels; historical
-depth ratios are not final anatomy evidence. Current limits/evidence and the
-UI follow-up live in SESSION.md and existing task packets. The Renate plan is
-docs/superpowers/plans/2026-10-21-renate-termin-ambient-animation.md.
+Hannelore now has a complete own470-cell opt-in source/packed candidate. All
+four16-frame walks,16gesture, fullfront/rear32stop paths and repairedSIDE8key
+paths have bounded independent SOURCE PASS. FullSIDE32entry7bbe2837 and full
+source/CPU mouth reviewe6eb491f also PASS. Complete512slot lip table has383visible,
+87UPnull/42unused; all1149closure/alpha checks and actualJS schema pass. Actual
+production packed shader checks desktop+portrait pass all512slots/profile with
+exact383closed sources, open/round/bite alpha/profile/axes and resource disposal.
+Root inspected24representative fivecue cases/profile both themes. Exact encoded
+source stride uses72own named-foot markers at96/64; selected20native walk/stop cases and
+native exact recordings/Berlin captions6/6 pass. A longer-stop dynamic-lane
+retreat regression is repaired with native swept lane eligibility and preserved
+initial placement:96focused checks and actual prop4/4 pass, with original FAILs
+archived. The repaired runtime's media successor also passes6/6. Selected80px
+desktop delivery fits2048/16MiB preferred limits. Independent encoded/native
+quality review passes, fresh compiler outputs are exact, and shader512/profile,
+compact native20 and media6 all pass. Compact stance retains71qualified markers
+and one explicit LEFTfarphase0 omission. Native repeat/retire/reload6/6 and seeded
+cohort12/12 also pass their bounded checks. Original outer-corner1PASS/3FAIL stays
+preserved; startup-controlled successor passes4/4 unchanged26u/5s. Inherited
+moving-body overtaking P3 FAIL and native concave-L NOT RUN remain explicit.
+Camera5997bf0d accepts authored critical turns and complete actual dialogue-return
+resumes; first-use frame skips remain incomplete and are not relabelled PASS.
+Physics8f1eade1 and technicala7c92333 have no new scoped blocker; full world PASS
+is not claimed. Clean RELEASE passes2423/2423 Node tests, curator67, exact packed
+rebuild and31-page build. Built canonical MAIN dialogues pass6/6; root/3d
+startup passes6/6 across desktop/portrait/landscape with17served hashes/case.
+This is not publication: commit, deployment and live verification remain.
+Current evidence lives in SESSION.md and the existing Hannelore plan. Full42goal
+remains8integrated/34remaining, latest public release65bf4f03 unchanged.
 
 Shared Git metadata was externally renamed into name-clash paths during this
 increment: missing config/refs and invalid unrelated snapshot refs prevented a

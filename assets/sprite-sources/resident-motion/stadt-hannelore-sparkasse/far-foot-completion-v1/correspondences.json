@@ -1,0 +1,239 @@
+{
+  "status": "Measured reference correspondence only; no field,alternate neutral or generation implemented",
+  "source": {
+    "file": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+    "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+    "dimensions": [
+      2172,
+      724
+    ]
+  },
+  "priorFreeze": {
+    "finalReceiptSha256": "4ec7aa12fe4ca3917911a3e1482872ecb52890d86386db04949d6ff8aa9cb724",
+    "inputPinMap": "output/ambient-city-animation/hannelore-sparkasse-side-gait-source-v2/far-backing-v1/input-pins-before.json",
+    "inputPinMapSha256": "2cb54c3367345aa39898ca986d47b758138082ae521932c27e177511c652eaa1",
+    "inputCount": 3304,
+    "verifiedBeforeWork": true
+  },
+  "coordinateConvention": "absolute raw source pixels, Xright,Ydown; uncertainties apply to each manual near and far point",
+  "directions": {
+    "right": [
+      {
+        "id": "opening",
+        "feature": "front cream-to-black opening corner",
+        "nearRaw": [
+          819,
+          640
+        ],
+        "farRaw": [
+          889,
+          628
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "tongue",
+        "feature": "visible tongue crest",
+        "nearRaw": [
+          845,
+          617
+        ],
+        "farRaw": [
+          900,
+          605
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "strap",
+        "feature": "lowest visible strap corner",
+        "nearRaw": [
+          835,
+          654
+        ],
+        "farRaw": [
+          908,
+          640
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "apron",
+        "feature": "forefoot apron seam arc",
+        "nearRaw": [
+          873,
+          652
+        ],
+        "farRaw": [
+          939,
+          639
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 3,
+        "hardConstraint": false
+      },
+      {
+        "id": "highlight",
+        "feature": "diffuse vamp highlight center; soft lighting cue only",
+        "nearRaw": [
+          866,
+          661
+        ],
+        "farRaw": [
+          941,
+          644
+        ],
+        "confidence": "low",
+        "uncertaintyRawPx": 4,
+        "hardConstraint": false
+      },
+      {
+        "id": "midsole",
+        "feature": "upper midsole seam locus; curve sample, not a fixed physical dot",
+        "nearRaw": [
+          882,
+          676
+        ],
+        "farRaw": [
+          951,
+          658
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 3,
+        "hardConstraint": false
+      },
+      {
+        "id": "outsole",
+        "feature": "forefoot lower outsole locus; curve sample",
+        "nearRaw": [
+          876,
+          694
+        ],
+        "farRaw": [
+          942,
+          676
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": false
+      }
+    ],
+    "left": [
+      {
+        "id": "opening",
+        "feature": "front cream-to-black opening corner",
+        "nearRaw": [
+          1910,
+          641
+        ],
+        "farRaw": [
+          1838,
+          630
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "tongue",
+        "feature": "visible tongue crest",
+        "nearRaw": [
+          1882,
+          616
+        ],
+        "farRaw": [
+          1822,
+          606
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "strap",
+        "feature": "lowest visible strap corner",
+        "nearRaw": [
+          1895,
+          655
+        ],
+        "farRaw": [
+          1819,
+          643
+        ],
+        "confidence": "high",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": true
+      },
+      {
+        "id": "apron",
+        "feature": "forefoot apron seam arc",
+        "nearRaw": [
+          1858,
+          652
+        ],
+        "farRaw": [
+          1788,
+          638
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 3,
+        "hardConstraint": false
+      },
+      {
+        "id": "highlight",
+        "feature": "diffuse vamp highlight center; soft lighting cue only",
+        "nearRaw": [
+          1859,
+          660
+        ],
+        "farRaw": [
+          1783,
+          646
+        ],
+        "confidence": "low",
+        "uncertaintyRawPx": 4,
+        "hardConstraint": false
+      },
+      {
+        "id": "midsole",
+        "feature": "upper midsole seam locus; curve sample, not a fixed physical dot",
+        "nearRaw": [
+          1868,
+          677
+        ],
+        "farRaw": [
+          1790,
+          661
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 3,
+        "hardConstraint": false
+      },
+      {
+        "id": "outsole",
+        "feature": "forefoot lower outsole locus; curve sample",
+        "nearRaw": [
+          1868,
+          695
+        ],
+        "farRaw": [
+          1794,
+          678
+        ],
+        "confidence": "medium",
+        "uncertaintyRawPx": 2,
+        "hardConstraint": false
+      }
+    ]
+  },
+  "hiddenFarHeel": null,
+  "hiddenFarRearOpening": null,
+  "alphaCorrection": "Frozen backing.json sides.*.sourceOwnership incorrectly says fully opaque. Actual implementation adds under nonzero accepted near ownership; added near alpha RIGHT214..253,LEFT248..254. Old freeze preserved, no alpha normalization.",
+  "preferredNextDecision": "Whole intact uniformly registered own shoe as a NEW source-pose revision is the smallest visual trial. It removes splice; calf/opening/exterior and direct neutral differences still need actual comparison. Do not add rotation automatically."
+}

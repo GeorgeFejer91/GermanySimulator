@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "bounded-four-extreme-source-pilot",
+  "neutralReceiptSha256": "d39077d848b113bace59483453887870f2d96fe8ed345b140dde1c03539879c3",
+  "working": {"cell": [512, 512], "baseline": 472, "figureHeight": 400},
+  "physicalPaintHeights": {"96x120": 102.75, "64x80": 68.5},
+  "sides": {
+    "right": {
+      "component": "right-far", "scale": 0.38,
+      "nearComponent": "right-near", "nearScale": 0.35403126602224144,
+      "nearDonorToe": [364, 959], "nearDonorSoleY": 991,
+      "nearTargetToeX": 282.2, "nearTargetSoleY": 470.2,
+      "donorToe": [699, 958], "donorSole": [614, 990],
+      "targetToe": [319, 450], "targetSole": [286.7, 462],
+      "sourceSeam": [[255, 396], [255, 410], [263, 420], [277, 425], [285, 430], [285, 511]],
+      "nearShoeCentreX": 237, "farCompleteShoeCentreX": 272.5,
+      "directionSign": 1
+    },
+    "left": {
+      "component": "left-far", "scale": 0.38,
+      "nearComponent": "left-near", "nearScale": 0.3726644397039534,
+      "nearDonorToe": [1170, 957], "nearDonorSoleY": 990,
+      "nearTargetToeX": 218.5, "nearTargetSoleY": 470.2,
+      "donorToe": [835, 957], "donorSole": [918, 989],
+      "targetToe": [194, 450], "targetSole": [225.5, 462],
+      "sourceSeam": [[252, 396], [251, 410], [245, 420], [234, 425], [228, 430], [228, 511]],
+      "nearShoeCentreX": 284.5, "farCompleteShoeCentreX": 240.5,
+      "directionSign": -1
+    }
+  },
+  "field": {"nodesY": [0, 370, 396, 410, 420, 430, 472, 511], "horizontalFractions": [0, 0, 0, 0.1, 0.35, 1, 1, 1], "verticalFractions": [0, 0, 0.1, 0.3, 0.55, 0.75, 1, 1], "travelPx": 12, "swingLiftPx": 10}
+}

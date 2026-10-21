@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "status": "SOURCE-only uniform completion registration; unapproved candidate",
+  "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/occlusion-components-v2/completion-sheet-candidate.png",
+  "sourceSha256": "d242da3cc97f9e92ea3fc24c6298e8956ae57898dd3f43ff344aa89d9a56e557",
+  "workingCell": [
+    512,
+    512
+  ],
+  "method": "One positive uniform scale and translation per complete component; no rotation, anisotropic stretch, cuff move, repaint or donor substitution. Near scale uses original visible heel-to-toe distance; X translation centers those two points and Y anchors the actual sole. Far hidden heels remain unknown; scale is constrained only by visible toe/front-cuff X separation, with visible sole Y as the vertical anchor.",
+  "landmarkUncertainty": {
+    "originalNearRawPx": 2,
+    "originalFarWorkingPx": 1,
+    "completionRawPx": 3
+  },
+  "components": {
+    "right-near": {
+      "bounds": [
+        96,
+        116,
+        675,
+        572
+      ],
+      "sourceLandmarks": {
+        "heel": [
+          97,
+          515
+        ],
+        "toe": [
+          674,
+          524
+        ],
+        "soleY": 571,
+        "cuffRear": [
+          171,
+          320
+        ],
+        "cuffFront": [
+          340,
+          384
+        ],
+        "tongueCrown": [
+          400,
+          286
+        ]
+      },
+      "target": {
+        "kind": "directOriginalRawNear",
+        "heading": "right",
+        "heel": [
+          756,
+          673
+        ],
+        "toe": [
+          907,
+          678
+        ],
+        "soleY": 694,
+        "cuffRear": [
+          775,
+          620
+        ],
+        "cuffFront": [
+          819,
+          640
+        ],
+        "tongueCrown": [
+          846,
+          616
+        ]
+      }
+    },
+    "right-far": {
+      "bounds": [
+        769,
+        220,
+        1173,
+        553
+      ],
+      "sourceLandmarks": {
+        "heel": [
+          770,
+          508
+        ],
+        "toe": [
+          1172,
+          520
+        ],
+        "soleY": 552,
+        "cuffRear": [
+          812,
+          368
+        ],
+        "cuffFront": [
+          944,
+          418
+        ]
+      },
+      "target": {
+        "kind": "manuallyVisibleFarWorking",
+        "heading": "right",
+        "toe": [
+          318,
+          449
+        ],
+        "soleY": 460,
+        "cuffFront": [
+          272,
+          431
+        ],
+        "hiddenHeel": null,
+        "hiddenCuffRear": null
+      }
+    },
+    "left-near": {
+      "bounds": [
+        64,
+        705,
+        663,
+        1165
+      ],
+      "sourceLandmarks": {
+        "heel": [
+          662,
+          1109
+        ],
+        "toe": [
+          65,
+          1122
+        ],
+        "soleY": 1164,
+        "cuffRear": [
+          582,
+          907
+        ],
+        "cuffFront": [
+          402,
+          978
+        ],
+        "tongueCrown": [
+          353,
+          886
+        ]
+      },
+      "target": {
+        "kind": "directOriginalRawNear",
+        "heading": "left",
+        "heel": [
+          1962,
+          674
+        ],
+        "toe": [
+          1821,
+          680
+        ],
+        "soleY": 695,
+        "cuffRear": [
+          1958,
+          623
+        ],
+        "cuffFront": [
+          1910,
+          641
+        ],
+        "tongueCrown": [
+          1878,
+          617
+        ]
+      }
+    },
+    "left-far": {
+      "bounds": [
+        755,
+        811,
+        1184,
+        1150
+      ],
+      "sourceLandmarks": {
+        "heel": [
+          1183,
+          1100
+        ],
+        "toe": [
+          756,
+          1115
+        ],
+        "soleY": 1149,
+        "cuffRear": [
+          1128,
+          957
+        ],
+        "cuffFront": [
+          987,
+          1013
+        ]
+      },
+      "target": {
+        "kind": "manuallyVisibleFarWorking",
+        "heading": "left",
+        "toe": [
+          190,
+          449
+        ],
+        "soleY": 460,
+        "cuffFront": [
+          239.33333333333334,
+          431.5238095238095
+        ],
+        "hiddenHeel": null,
+        "hiddenCuffRear": null
+      }
+    }
+  },
+  "landmarkConvention": "Near heel/toe use complete lateral outsole silhouette points, cuffRear/cuffFront use actual cream-to-black opening ends, soleY actual alpha20 sole bottom. Raw manual uncertainty remains +/-3px. Far original heel/rear cuff remain hidden and unmeasured.",
+  "historicalTargetsSupersededForThisDiagnostic": {
+    "right-near": {
+      "kind": "originalNearRawMeasurements",
+      "heading": "right"
+    },
+    "right-far": {
+      "kind": "manuallyVisibleFarWorking",
+      "heading": "right",
+      "toe": [
+        318,
+        449
+      ],
+      "soleY": 460,
+      "cuffFront": [
+        276,
+        430
+      ],
+      "hiddenHeel": null,
+      "hiddenCuffRear": null
+    },
+    "left-near": {
+      "kind": "originalNearRawMeasurements",
+      "heading": "left"
+    },
+    "left-far": {
+      "kind": "manuallyVisibleFarWorking",
+      "heading": "left",
+      "toe": [
+        190,
+        449
+      ],
+      "soleY": 460,
+      "cuffFront": [
+        234,
+        430
+      ],
+      "hiddenHeel": null,
+      "hiddenCuffRear": null
+    }
+  },
+  "originalNeutralMeasurementsRemainUnchanged": true,
+  "landmarkCorrection": "V2 reinspection: old left-near toe1803,677 belongs to far sole; own near toe is1821,680. Cream-to-black opening endpoints are measured directly: right original775,620/819,640, left original1958,623/1910,641; old left front1895,638 sat on the tongue. Far original visible opening corners are approximately right272,431 and left239.333,431.524 working pixels; hidden far heel/rear cuff remain null. Original V1 and neutral bytes remain exact."
+}

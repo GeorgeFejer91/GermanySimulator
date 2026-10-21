@@ -1,0 +1,711 @@
+{
+  "status": "SOURCE-only static candidate, not runtime or motion metadata",
+  "profilesSha256": "ab34ec2b80c97020d1498ffea1edbfce08bc227dcfa46d0f319525f2875e2109",
+  "registrations": {
+    "down": {
+      "rect": [
+        0.5185546875,
+        0.576953125,
+        0.07421977795340758,
+        0.010351562499999998
+      ],
+      "axes": [
+        38.0,
+        0.19999999999998863,
+        -0.027894350496434354,
+        5.299926594322828
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.24527962,
+          -0.1792428,
+          -0.21697813,
+          0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.33018533,
+          -0.32075231,
+          -0.31131774,
+          0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.16981481,
+          0.42453085,
+          0.20755021,
+          0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.24527962,
+          -0.1792428,
+          -0.21697813,
+          0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.24527962,
+          -0.1792428,
+          -0.21697813,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "down",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png",
+        "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        265.5,
+        216.6
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "front-right": {
+      "rect": [
+        0.57275390625,
+        0.57822265625,
+        0.04594869256717554,
+        0.009765624999999998
+      ],
+      "axes": [
+        23.5,
+        -1.0999999999999943,
+        0.23378657584859905,
+        4.994531393129187
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.22475391,
+          -0.4295297,
+          -0.50444767,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.31475395,
+          -0.56952962,
+          -0.58444777,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          0.1552461,
+          0.15047026,
+          -0.14444773,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.22475391,
+          -0.4295297,
+          -0.50444767,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.22475391,
+          -0.4295297,
+          -0.50444767,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "front-right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-right-registered.png",
+        "sha256": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        293.25,
+        215.95
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png",
+        "upstreamSha256": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "right": {
+      "rect": [
+        0.60009765625,
+        0.587109375,
+        0.03449961874930876,
+        0.0087890625
+      ],
+      "axes": [
+        17.5,
+        -2.4000000000000057,
+        0.611419800122362,
+        4.458269375892212
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.07705651,
+          -0.22016145,
+          -0.11008073,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.14372317,
+          -0.34238376,
+          -0.18785844,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          0.25627688,
+          0.31317197,
+          0.21214139,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.07705651,
+          -0.22016145,
+          -0.11008073,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.07705651,
+          -0.22016145,
+          -0.11008073,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png",
+        "sha256": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        307.25,
+        211.39999999999998
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "rear-right": {
+      "rect": [
+        0.6076171875,
+        0.58681640625,
+        0.023294649300540135,
+        0.007226562500000001
+      ],
+      "axes": [
+        11.199999999999989,
+        -4.099999999999994,
+        1.2719189659280663,
+        3.4745103459498408
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.09517468,
+          0.06344979,
+          0.06979477,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.14922861,
+          -0.03114487,
+          0.01574084,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.20212273,
+          0.54993615,
+          0.35357863,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.09517468,
+          0.06344979,
+          0.06979477,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.09517468,
+          0.06344979,
+          0.06979477,
+          -0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "rear-right",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-right-registered.png",
+        "sha256": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        311.1,
+        211.55
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "up": null,
+    "rear-left": {
+      "rect": [
+        0.37734375,
+        0.58623046875,
+        0.020876521803156182,
+        0.006640624999999999
+      ],
+      "axes": [
+        9.599999999999994,
+        4.699999999999989,
+        -1.495025742041059,
+        3.053669600764722
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          0.05943561,
+          0.03962374,
+          -0.13868309,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          0.00061194,
+          -0.04861143,
+          -0.19750676,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.33884735,
+          0.49550609,
+          0.15543447,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          0.05943561,
+          0.03962374,
+          -0.13868309,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          0.05943561,
+          0.03962374,
+          -0.13868309,
+          -0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "rear-left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-left-registered.png",
+        "sha256": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        193.2,
+        211.85
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "left": {
+      "rect": [
+        0.392578125,
+        0.5888671875,
+        0.04354023372841492,
+        0.0087890625
+      ],
+      "axes": [
+        22.0,
+        3.6000000000000227,
+        -0.7266985564974383,
+        4.440935623039873
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.13158328,
+          -0.08772219,
+          -0.06579164,
+          0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.19824988,
+          -0.20994441,
+          -0.14356939,
+          0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.1906389,
+          0.42338904,
+          0.26754173,
+          0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.13158328,
+          -0.08772219,
+          -0.06579164,
+          0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.13158328,
+          -0.08772219,
+          -0.06579164,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png",
+        "sha256": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        201.0,
+        210.5
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "upstreamSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "front-left": {
+      "rect": [
+        0.442578125,
+        0.581640625,
+        0.061088804547278726,
+        0.01015625
+      ],
+      "axes": [
+        31.19999999999999,
+        2.200000000000017,
+        -0.36575850789005987,
+        5.187120657349898
+      ],
+      "profile": {
+        "crease": [
+          0.0,
+          -0.22060609,
+          -0.30693022,
+          -0.18223982,
+          0.0
+        ],
+        "open_upper": [
+          0.0,
+          -0.31676001,
+          -0.46077646,
+          -0.26877819,
+          0.0
+        ],
+        "open_lower": [
+          0.0,
+          0.19285547,
+          0.29883899,
+          0.20237549,
+          0.0
+        ],
+        "source_upper": [
+          0.0,
+          -0.22060609,
+          -0.30693022,
+          -0.18223982,
+          0.0
+        ],
+        "source_lower": [
+          0.0,
+          -0.22060609,
+          -0.30693022,
+          -0.18223982,
+          0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "front-left",
+        "role": "accepted neutral registration",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-left-registered.png",
+        "sha256": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395",
+        "dimensions": [
+          512,
+          512
+        ]
+      },
+      "cell": [
+        512,
+        512
+      ],
+      "centerPx": [
+        226.6,
+        214.2
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "exact registered neutral; no walking transport",
+        "upstreamFile": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+        "upstreamSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    },
+    "standing": {
+      "rect": [
+        0.512109375,
+        0.6096874999999999,
+        0.06328607234712069,
+        0.010624999999999999
+      ],
+      "axes": [
+        8.099999999999994,
+        0.10000000000000142,
+        -0.02098605507883828,
+        1.699870461385875
+      ],
+      "profile": {
+        "crease": [
+          -0.0,
+          -0.16175238,
+          0.0,
+          -0.16175238,
+          -0.0
+        ],
+        "open_upper": [
+          -0.0,
+          -0.2323407,
+          -0.1176472,
+          -0.2323407,
+          -0.0
+        ],
+        "open_lower": [
+          -0.0,
+          0.13236532,
+          0.44117656,
+          0.13236532,
+          -0.0
+        ],
+        "source_upper": [
+          -0.0,
+          -0.16175238,
+          0.0,
+          -0.16175238,
+          -0.0
+        ],
+        "source_lower": [
+          -0.0,
+          -0.16175238,
+          0.0,
+          -0.16175238,
+          -0.0
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0,
+          0
+        ],
+        "teeth": 0
+      },
+      "input": {
+        "name": "standing",
+        "role": "own upstream master or original encoded standing",
+        "file": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+        "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e",
+        "dimensions": [
+          128,
+          160
+        ]
+      },
+      "cell": [
+        128,
+        160
+      ],
+      "centerPx": [
+        65.55,
+        62.45
+      ],
+      "cellOriginPx": [
+        0,
+        0
+      ],
+      "nativeSource": {
+        "role": "direct original encoded standing",
+        "upstreamFile": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+        "upstreamSha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+      },
+      "status": "candidate; direct pixel fit; visual and rendered review pending"
+    }
+  }
+}

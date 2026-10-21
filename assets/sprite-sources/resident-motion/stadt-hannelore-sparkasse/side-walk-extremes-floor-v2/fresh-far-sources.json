@@ -1,0 +1,76 @@
+{
+  "right": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png",
+    "sha256": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "scale": 0.95,
+    "translation": [
+      53.375,
+      23.600000000000023
+    ],
+    "sourceNearCentreX": 237.5,
+    "farCentreX": 279,
+    "rootY": 402.65,
+    "rigidFromY": 424.5,
+    "legAlpha20Bounds": [
+      235,
+      402,
+      323,
+      472
+    ],
+    "shoeBoundsAlpha20Approx": [
+      235,
+      426,
+      323,
+      472
+    ],
+    "bottomRow": 471,
+    "floorSupportXRange": [
+      280,
+      305
+    ],
+    "measuredShoeBoundsAlpha20": [
+      235,
+      426,
+      323,
+      472
+    ],
+    "measurementQualification": "Actual primaryNEAR shoe pixels selected by own approved source mask then sameuniform mapping; continuous86.45x45.6 differs from alpha20sampled88x46 by edge quantization."
+  },
+  "left": {
+    "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png",
+    "sha256": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+    "scale": 0.95,
+    "translation": [
+      -28.774999999999977,
+      23.600000000000023
+    ],
+    "sourceNearCentreX": 274.5,
+    "farCentreX": 232,
+    "rootY": 402.65,
+    "rigidFromY": 424.5,
+    "legAlpha20Bounds": [
+      188,
+      402,
+      276,
+      472
+    ],
+    "shoeBoundsAlpha20Approx": [
+      188,
+      426,
+      276,
+      472
+    ],
+    "bottomRow": 471,
+    "floorSupportXRange": [
+      205,
+      230
+    ],
+    "measuredShoeBoundsAlpha20": [
+      188,
+      426,
+      276,
+      472
+    ],
+    "measurementQualification": "Actual primaryNEAR shoe pixels selected by own approved source mask then sameuniform mapping; continuous86.45x45.6 differs from alpha20sampled88x46 by edge quantization."
+  }
+}

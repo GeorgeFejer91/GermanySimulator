@@ -1,0 +1,819 @@
+{
+  "identity": "stadt-hannelore-sparkasse",
+  "status": "SOURCE author turn8 candidate; independent review pending",
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      472
+    ],
+    "figureHeight": 400
+  },
+  "canonical": {
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136,
+    "figureWorldHeight": 1.6
+  },
+  "paintFigure": 137,
+  "cardinalAnchors": {
+    "down": 0,
+    "right": 2,
+    "up": 4,
+    "left": 6
+  },
+  "clockwiseOrder": [
+    "down",
+    "front-right",
+    "right",
+    "rear-right",
+    "up",
+    "rear-left",
+    "left",
+    "front-left"
+  ],
+  "turns": [
+    {
+      "index": 0,
+      "heading": "down",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/00-down.png",
+      "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png",
+        "sha256": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+        "rawPainting": {
+          "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+          "component_bounds": [
+            132,
+            26,
+            507,
+            694
+          ],
+          "source_pivot": [
+            313,
+            694
+          ],
+          "scale": 0.5952380952380952,
+          "scaleGroup": "cardinals",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    },
+    {
+      "index": 1,
+      "heading": "front-right",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/01-front-right.png",
+      "sha256": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-right-registered.png",
+        "sha256": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+        "rawPainting": {
+          "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png",
+          "sourceSha256": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90",
+          "component_bounds": [
+            588,
+            13,
+            926,
+            684
+          ],
+          "source_pivot": [
+            781,
+            684
+          ],
+          "scale": 0.5961251862891207,
+          "scaleGroup": "frontRight",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "heading": "right",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/02-right.png",
+      "sha256": "a6012dc82ff429c52642a3174be5a5d44c5491a322dfebfc6ba8e7fdf0d85fe2",
+      "source": {
+        "kind": "SideFields.render",
+        "direction": "right",
+        "phase": 0,
+        "strength": 0,
+        "fields": [
+          {
+            "limb": "near",
+            "nodesY": [
+              0,
+              399,
+              406,
+              422,
+              511
+            ],
+            "dx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "dy": [
+              -5,
+              -5,
+              -3.25,
+              0,
+              0
+            ],
+            "travelWorking": 0.0,
+            "baseX": 0.0,
+            "liftWorking": 0,
+            "rootRaiseWorking": 5,
+            "rotationDegrees": 0,
+            "phase": 0.0,
+            "strength": 0,
+            "sourceSha256": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+            "pivotSourceCapCentroid": [
+              226.01325992555832,
+              400.7064205955335
+            ],
+            "pivotTarget": [
+              226.01325992555832,
+              395.896231169725
+            ],
+            "pivotQualification": "Actual own paint cap control, not a hidden anatomical knee",
+            "minimumVerticalJacobian": 1.0,
+            "maximumVerticalJacobian": 1.3302524657279324,
+            "rootCapNotCoveredByUpperAlpha200": 0,
+            "uncoveredRootBounds": null,
+            "alpha20Bounds": [
+              192,
+              394,
+              283,
+              472
+            ],
+            "fixedSoleWitnesses": {
+              "centre": {
+                "sourcePoint": [
+                  238,
+                  470
+                ],
+                "sourceRgba": [
+                  2,
+                  2,
+                  2,
+                  219
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  238.0,
+                  470.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "heel": {
+                "sourcePoint": [
+                  200,
+                  465
+                ],
+                "sourceRgba": [
+                  25,
+                  25,
+                  21,
+                  45
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  200.0,
+                  465.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "forefoot": {
+                "sourcePoint": [
+                  274,
+                  469
+                ],
+                "sourceRgba": [
+                  14,
+                  17,
+                  14,
+                  106
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  274.0,
+                  469.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "support": {
+                "sourcePoint": [
+                  253,
+                  471
+                ],
+                "sourceRgba": [
+                  4,
+                  3,
+                  2,
+                  201
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  253.0,
+                  471.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              }
+            },
+            "shoeRigidTranslationRotation": true
+          },
+          {
+            "limb": "far",
+            "nodesY": [
+              0,
+              402.65,
+              409.65,
+              424.5,
+              511
+            ],
+            "dx": [
+              0,
+              0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "dy": [
+              -9,
+              -9,
+              -5.85,
+              0,
+              0
+            ],
+            "travelWorking": -0.0,
+            "baseX": 0,
+            "liftWorking": 0,
+            "rootRaiseWorking": 9,
+            "rotationDegrees": 0,
+            "phase": 0.0,
+            "strength": 0,
+            "sourceSha256": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+            "pivotSourceCapCentroid": [
+              268.7638190954774,
+              403.74251256281406
+            ],
+            "pivotTarget": [
+              268.7638190954774,
+              394.8878144874378
+            ],
+            "pivotQualification": "Actual own paint cap control, not a hidden anatomical knee",
+            "minimumVerticalJacobian": 1.0,
+            "maximumVerticalJacobian": 1.5994741501847989,
+            "rootCapNotCoveredByUpperAlpha200": 0,
+            "uncoveredRootBounds": null,
+            "alpha20Bounds": [
+              235,
+              393,
+              323,
+              472
+            ],
+            "fixedSoleWitnesses": {
+              "centre": {
+                "sourcePoint": [
+                  279,
+                  470
+                ],
+                "sourceRgba": [
+                  2,
+                  2,
+                  2,
+                  211
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  279.0,
+                  470.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "heel": {
+                "sourcePoint": [
+                  243,
+                  465
+                ],
+                "sourceRgba": [
+                  7,
+                  7,
+                  5,
+                  98
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  243.0,
+                  465.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": true,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "forefoot": {
+                "sourcePoint": [
+                  314,
+                  469
+                ],
+                "sourceRgba": [
+                  13,
+                  15,
+                  13,
+                  108
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  314.0,
+                  469.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "support": {
+                "sourcePoint": [
+                  293,
+                  471
+                ],
+                "sourceRgba": [
+                  4,
+                  4,
+                  2,
+                  203
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  293.0,
+                  471.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              }
+            },
+            "shoeRigidTranslationRotation": true
+          }
+        ],
+        "neutralReference": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/right-revised-neutral.png",
+          "sha256": "a6012dc82ff429c52642a3174be5a5d44c5491a322dfebfc6ba8e7fdf0d85fe2",
+          "variant": "accepted own revised floor-v2 neutral, not original standing"
+        }
+      }
+    },
+    {
+      "index": 3,
+      "heading": "rear-right",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/03-rear-right.png",
+      "sha256": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-right-registered.png",
+        "sha256": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+        "rawPainting": {
+          "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+          "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+          "component_bounds": [
+            49,
+            645,
+            350,
+            1248
+          ],
+          "source_pivot": [
+            229.5,
+            1248
+          ],
+          "scale": 0.6633499170812603,
+          "scaleGroup": "motionNeutrals",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    },
+    {
+      "index": 4,
+      "heading": "up",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/04-up.png",
+      "sha256": "1930fa20a16be1d09b8a9ae768b80568015c0e3e1b13bce2750b0b80217f20d7",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/up-registered.png",
+        "sha256": "1930fa20a16be1d09b8a9ae768b80568015c0e3e1b13bce2750b0b80217f20d7",
+        "rawPainting": {
+          "source": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sourceSha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+          "component_bounds": [
+            1169,
+            26,
+            1546,
+            694
+          ],
+          "source_pivot": [
+            1357.5,
+            694
+          ],
+          "scale": 0.5952380952380952,
+          "scaleGroup": "cardinals",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    },
+    {
+      "index": 5,
+      "heading": "rear-left",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/05-rear-left.png",
+      "sha256": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-left-registered.png",
+        "sha256": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+        "rawPainting": {
+          "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+          "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+          "component_bounds": [
+            456,
+            645,
+            746,
+            1248
+          ],
+          "source_pivot": [
+            585.5,
+            1248
+          ],
+          "scale": 0.6633499170812603,
+          "scaleGroup": "motionNeutrals",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    },
+    {
+      "index": 6,
+      "heading": "left",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/06-left.png",
+      "sha256": "f0c510f01e117385b4eda946334983a3f2b5c2de5b86277efb4a8ec9d3177b24",
+      "source": {
+        "kind": "SideFields.render",
+        "direction": "left",
+        "phase": 0,
+        "strength": 0,
+        "fields": [
+          {
+            "limb": "near",
+            "nodesY": [
+              0,
+              399,
+              406,
+              422,
+              511
+            ],
+            "dx": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "dy": [
+              -5,
+              -5,
+              -3.25,
+              0,
+              0
+            ],
+            "travelWorking": -0.0,
+            "baseX": -0.0,
+            "liftWorking": 0,
+            "rootRaiseWorking": 5,
+            "rotationDegrees": 0,
+            "phase": 0.0,
+            "strength": 0,
+            "sourceSha256": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+            "pivotSourceCapCentroid": [
+              284.9867400744417,
+              400.7064205955335
+            ],
+            "pivotTarget": [
+              284.9867400744417,
+              395.896231169725
+            ],
+            "pivotQualification": "Actual own paint cap control, not a hidden anatomical knee",
+            "minimumVerticalJacobian": 1.0,
+            "maximumVerticalJacobian": 1.3302524657279324,
+            "rootCapNotCoveredByUpperAlpha200": 0,
+            "uncoveredRootBounds": null,
+            "alpha20Bounds": [
+              229,
+              394,
+              320,
+              472
+            ],
+            "fixedSoleWitnesses": {
+              "centre": {
+                "sourcePoint": [
+                  274,
+                  470
+                ],
+                "sourceRgba": [
+                  3,
+                  3,
+                  3,
+                  194
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  274.0,
+                  470.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "heel": {
+                "sourcePoint": [
+                  311,
+                  465
+                ],
+                "sourceRgba": [
+                  25,
+                  25,
+                  21,
+                  45
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  311.0,
+                  465.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "forefoot": {
+                "sourcePoint": [
+                  237,
+                  469
+                ],
+                "sourceRgba": [
+                  14,
+                  17,
+                  14,
+                  106
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  237.0,
+                  469.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "support": {
+                "sourcePoint": [
+                  258,
+                  471
+                ],
+                "sourceRgba": [
+                  4,
+                  3,
+                  2,
+                  201
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  258.0,
+                  471.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              }
+            },
+            "shoeRigidTranslationRotation": true
+          },
+          {
+            "limb": "far",
+            "nodesY": [
+              0,
+              402.65,
+              409.65,
+              424.5,
+              511
+            ],
+            "dx": [
+              0,
+              0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "dy": [
+              -11,
+              -11,
+              -7.15,
+              0,
+              0
+            ],
+            "travelWorking": 0.0,
+            "baseX": 0,
+            "liftWorking": 0,
+            "rootRaiseWorking": 11,
+            "rotationDegrees": 0,
+            "phase": 0.0,
+            "strength": 0,
+            "sourceSha256": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+            "pivotSourceCapCentroid": [
+              241.2451690821256,
+              403.7431561996779
+            ],
+            "pivotTarget": [
+              241.2451690821256,
+              392.92094761073037
+            ],
+            "pivotQualification": "Actual own paint cap control, not a hidden anatomical knee",
+            "minimumVerticalJacobian": 1.0,
+            "maximumVerticalJacobian": 1.7326906280036432,
+            "rootCapNotCoveredByUpperAlpha200": 0,
+            "uncoveredRootBounds": null,
+            "alpha20Bounds": [
+              188,
+              391,
+              276,
+              472
+            ],
+            "fixedSoleWitnesses": {
+              "centre": {
+                "sourcePoint": [
+                  232,
+                  470
+                ],
+                "sourceRgba": [
+                  4,
+                  4,
+                  4,
+                  184
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  232.0,
+                  470.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "heel": {
+                "sourcePoint": [
+                  267,
+                  465
+                ],
+                "sourceRgba": [
+                  7,
+                  7,
+                  6,
+                  100
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  267.0,
+                  465.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": true,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "forefoot": {
+                "sourcePoint": [
+                  196,
+                  469
+                ],
+                "sourceRgba": [
+                  13,
+                  15,
+                  13,
+                  104
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  196.0,
+                  469.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              },
+              "support": {
+                "sourcePoint": [
+                  217,
+                  471
+                ],
+                "sourceRgba": [
+                  4,
+                  4,
+                  2,
+                  203
+                ],
+                "pixelCentreUncertaintyWorking": 0.5,
+                "transportedPoint": [
+                  217.0,
+                  471.0
+                ],
+                "coveredByUpperAlpha200": false,
+                "coveredByNearAlpha200": false,
+                "qualification": "Fixed source pixel, never relocated for occlusion."
+              }
+            },
+            "shoeRigidTranslationRotation": true
+          }
+        ],
+        "neutralReference": {
+          "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/left-revised-neutral.png",
+          "sha256": "f0c510f01e117385b4eda946334983a3f2b5c2de5b86277efb4a8ec9d3177b24",
+          "variant": "accepted own revised floor-v2 neutral, not original standing"
+        }
+      }
+    },
+    {
+      "index": 7,
+      "heading": "front-left",
+      "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/07-front-left.png",
+      "sha256": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395",
+      "source": {
+        "kind": "exact registered own painting",
+        "file": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-left-registered.png",
+        "sha256": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395",
+        "rawPainting": {
+          "source": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png",
+          "sourceSha256": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+          "component_bounds": [
+            877,
+            645,
+            1172,
+            1248
+          ],
+          "source_pivot": [
+            1020,
+            1248
+          ],
+          "scale": 0.6633499170812603,
+          "scaleGroup": "motionNeutrals",
+          "pivotEvidence": "X midpoint of combined boot support in lowest30source rows atalpha>=20;Y exclusive sole bound"
+        }
+      }
+    }
+  ],
+  "inputPins": {
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/registration-receipt.json": "d39077d848b113bace59483453887870f2d96fe8ed345b140dde1c03539879c3",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/source-registration.json": "9a811989a272a5ec69b3f70c85442fafc489a0a2790022feecf0f3cf1175af13",
+    "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/frontright-and-leg-components-candidate.png": "651f81205040dc47d934d3b5ac195bd127111a5a45e56874ae86ef16cbbeea90",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/motion-poses-candidate.png": "e75b1ac18ab8b4a135ae95593c8a694386b26b097c09b7d25936e31edfac3f76",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/recipe.json": "154bf07c6a8372908e1d80f41ab911f87d33be93cf642bba6ac2b4811776634d",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-near-complete.png": "d7cff9e9c150849a0f241e25a38ae6ddf86cdc2fcc4c1b2ad33608f1afde4482",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/right-far-floor-source.png": "64cde240d72f940e1a32f33f3ad8aa75575277141f73f9bd3b6da6e511444d3a",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/right-upper-preserved.png": "58b3e2355dd3e9a1411b07c69c7f381aed237262f1aa577f5565449bda1131de",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/right-revised-neutral.png": "a6012dc82ff429c52642a3174be5a5d44c5491a322dfebfc6ba8e7fdf0d85fe2",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-near-complete.png": "56ee04df138b5173c8e351bcbc061db9e5d9a54ece8bb8aa94b7dff4799a5e4e",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-walk-extremes-floor-v2/left-far-floor-source.png": "d31abc7a81eace3f93350ee6de0d45cd4abdf0f8e2f8e07d99bb3b8271c17b24",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/connected-leg-source-v1/left-upper-preserved.png": "499325380c24b14645f8ab6bc9a87de39aeb3d6d01636c3c9bc0f9b3b5f81d19",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/left-revised-neutral.png": "f0c510f01e117385b4eda946334983a3f2b5c2de5b86277efb4a8ec9d3177b24",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/side-loop-v1/source_fields.py": "bdac77f68ee32af91013af283e08414ef660bf4017451e92e9e140f2a4acf60a",
+    "tools/build-street-character-sprites.py": "fa624f5440e21d3e1f1a233e2964e43b16a36ea2c70492a535ce27c03188e127",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/turn-source-v1/build-turns.py": "4fe7243fbf70afbfb4dd12cc4dde23abe325f1d8f32881e74c6a7215bb2539e1",
+    "output/ambient-city-animation/hannelore-sparkasse-neutral-source-review-v1/REPORT.md": "5c12f9b9810230ac55b05fcd0bb85a470fd1dd3a8a98675161adc7728fd62917",
+    "output/ambient-city-animation/hannelore-sparkasse-side-loop-v1/review/final-receipt.json": "0bfc137b02c5dc76f5f89fe54e84ed70f43a90a0da90bb2dfe0f5dfc4920b631",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/down-registered.png": "5d4da0a8257c9d7a6ee693421550c8f05a2147053de49d2b52c8b0cb3c32a505",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-right-registered.png": "b2284e3eb7d88bcec18b784334aca7e255c85e508c3211e5e6c06f7e81057fa5",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/right-registered.png": "98d88edea884eff0fc58c58f2f4d74cd5257d8e19c7cc7293a5f15f0071c335b",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-right-registered.png": "e75a3b47359cab86aa8114bb41691f2c86d7aa8ace01dc140ac9cb651ec01d66",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/up-registered.png": "1930fa20a16be1d09b8a9ae768b80568015c0e3e1b13bce2750b0b80217f20d7",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/rear-left-registered.png": "4bc0bbebc18543d6881940142cc689a253e11971345bcc750a77224b7ff827c5",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/left-registered.png": "e882c5fd3f312954e1b3edf6c8738a3b19cbd892d8ccb965b62c7f09f0a992df",
+    "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/neutral-source-v1/front-left-registered.png": "c79ba3d8918ad91c8d5e7c592688223fd8efdb2cb9b3115619a05e7007e39395"
+  },
+  "fallbackProposal": "Reuse complete phase0 stop path in forward order over reversed-start copies; bridge cols0/1 reserved. Front[6,5,4,3,2],side[9,8,7,6,5,4,3,2]. Proposal only; stop source acceptance separate."
+}

@@ -21,14 +21,14 @@ test('a boxed adviser waits until a swept body-clear exit opens',()=>{
 });
 
 test('slow advisers leave a body-clear lane for ordinary same-direction walkers',()=>{
- const h=vm.createContext({npcs:[],groundStaticMotionBlocked:()=>false});vm.runInContext(sourceOf('pedestrianLane'),h);
+ const h=laneFixture();
  for(const vertical of [false,true])for(const direction of [-1,1]){
-  const actor={routeBounds:{x:0,y:0,w:72,h:72},vx:vertical?0:12*direction,vy:vertical?12*direction:0},ordinary=h.pedestrianLane(actor),wisdom=h.pedestrianLane({...actor,wisdomId:'street-waltraud-wartemarke'});
+  const actor={x:36,y:36,routeBounds:{x:0,y:0,w:72,h:72},vx:vertical?0:12*direction,vy:vertical?12*direction:0},ordinary=h.pedestrianLane(actor),wisdom=h.pedestrianLane({...actor,wisdomId:'street-waltraud-wartemarke'});
   assert(Math.abs(ordinary-wisdom)>26,'two radius-13 bodies can pass without overlap');assert(wisdom>=13&&wisdom<=59);
  }
 });
 test('advisers step into the other legal lane for nearby ordinary oncoming traffic',()=>{
- const h=vm.createContext({npcs:[],pedestrianRouteContains:()=>true,groundStaticMotionBlocked:()=>false});vm.runInContext(sourceOf('pedestrianLane'),h);
+ const h=laneFixture();
  for(const vertical of [false,true])for(const direction of [-1,1]){
   const actor={x:200,y:200,routeBounds:{x:100,y:100,w:400,h:400},wisdomId:'street-waltraud-wartemarke',vx:vertical?0:12*direction,vy:vertical?12*direction:0},other={x:actor.x+(vertical?0:60*direction),y:actor.y+(vertical?60*direction:0),vx:-actor.vx,vy:-actor.vy};
   h.npcs=[actor,other];const lane=h.pedestrianLane(actor),oncoming=h.pedestrianLane(other.routeBounds?other:{...other,routeBounds:actor.routeBounds});assert(Math.abs(lane-oncoming)>26);
@@ -37,6 +37,11 @@ test('advisers step into the other legal lane for nearby ordinary oncoming traff
   if(vertical)other.y=actor.y-40*direction;else other.x=actor.x-40*direction;assert.notEqual(h.pedestrianLane(actor),lane,'the adviser returns after the passing body clears');
  }
 });
+function laneFixture(){
+ const h=vm.createContext({npcs:[],police:[],trafficCars:[],policeVehicles:[],trains:[],player:{x:10000,y:10000,r:16},groundStaticMotionBlocked:()=>false,stationElevation:()=>0,dist:(x,y,a,b)=>Math.hypot(x-a,y-b)});
+ for(const name of ['groundContactBlocks','pedestrianRouteContains','responderBlocked','pedestrianLane'])vm.runInContext(sourceOf(name),h);
+ return h;
+}
 function sourceOf(name){const start=game.indexOf(`function ${name}(`);assert(start>=0);let depth=0,opened=false;for(let i=start;i<game.length;i++){if(game[i]==='{'){depth++;opened=true}else if(game[i]==='}'&&opened&&--depth===0)return game.slice(start,i+1)}throw Error(name)}
 function fixture(){
  const context=vm.createContext({window:{},performance:{now:()=>context.clock},clock:25000,requests:[],busy:false,hudUpdates:0});
