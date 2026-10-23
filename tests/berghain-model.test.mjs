@@ -124,9 +124,11 @@ test('static build includes the hidden viewer and excludes private research copi
     writeFileSync(join(root, 'berghain/references/downloads/private.jpg'), 'research-only');
     writeFileSync(join(root, 'berghain/AGENTS.md'), 'instructions');
     writeFileSync(join(root, 'berghain/For-AI/SOURCES.md'), 'Public source catalogue');
+    writeFileSync(join(root, 'berghain/For-AI/INTERIOR.md'), 'Public artwork and sound-system inventory');
     buildLevelPages(root, output);
     assert.ok(existsSync(join(output, 'berghain/model.html')));
     assert.ok(existsSync(join(output, 'berghain/For-AI/SOURCES.md')));
+    assert.ok(existsSync(join(output, 'berghain/For-AI/INTERIOR.md')), 'catalogue interior link must resolve in the built site');
     assert.ok(!existsSync(join(output, 'berghain/references')), 'research downloads must remain local');
     assert.ok(!existsSync(join(output, 'berghain/AGENTS.md')), 'authoring instructions are not viewer runtime');
   } finally { rmSync(directory, {recursive: true, force: true}); }

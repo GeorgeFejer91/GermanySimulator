@@ -2,6 +2,43 @@
 
 2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
 
+## Confirmed public deployment
+
+Runtime/material commit `9c842707e588e5e218109a0f63eb51c73a472b1f` deployed
+successfully through Pages workflow `39977033051` on 2026-10-23. Canonical viewer:
+**https://germanysimulator.de/berghain/model.html**.
+
+- `output/berghain-live-verification.json`: **31/31 published files match the
+  exact commit**, plus HTTP200 for custom-domain root/3d.html and both GitHub
+  short endpoints redirecting correctly. Expected bytes came from published
+  Git objects, not the evolving working tree.
+- `output/berghain-live-browser/report.json`: **2/2 PASS**, actual deployed
+  desktop and Android-portrait-emulated tours, keyboard/touch, room navigation
+  and real native GLB parsing (6,713,940 bytes), no recorded page errors.
+- Earlier immutable raw.githack previews remain valid snapshots. Opening the
+  preview in the app was queued; no foreground opening is claimed.
+
+Research catalogue/inventory edits below are a subsequent documentation update.
+They do not change this verified runtime or imply that the missing art/interior
+objects have been modelled. Physical Android remains NOT RUN.
+
+## Interior inventory and catalogue expansion
+
+Research-only update: 81 unique source IDs, actual low-resolution historic floor
+cartoons and primary gallery/artist/manufacturer records. `INTERIOR.md` separates
+artwork identity, dates, area, dimensions, acquisition and remaining modelling.
+DS210 STEP/DXF downloads have matching file headers; its one-page PDF was rendered
+and visually inspected because dimension labels extract incorrectly. This proves
+reference acquisition, not current venue equipment or artwork geometry.
+
+The static builder now includes the public inventory linked from the catalogue.
+The focused packaging check first failed on that missing public file; the copy
+boundary was extended without including research downloads or authoring guides.
+`node --test tests/berghain-model.test.mjs tests/level-pages.test.mjs`: **15/15 PASS**.
+No renderer, geometry, camera, movement or materials changed. Independent world
+reviewers and new walking browser batches are outside this documentation scope;
+the previous material candidate remains the current runtime evidence.
+
 ## Original material maps — current
 
 Frozen candidate: `output/berghain-material-candidate.json`, **36/36 hashes**
@@ -180,7 +217,7 @@ The Physics reviewer also checked the test correction: bounded real keyboard inp
 
 ## Outstanding
 
-Full measured fidelity, missing rooms/circulation, surface detail, physical Android qualification and the targeted NOT RUN review rows remain outstanding. No full-digital-twin or whole-game acceptance is claimed. Publication is blocked by the unborn local branch and absent Git remote; unrelated staged work was preserved.
+Full measured fidelity, missing rooms/circulation, surface detail, physical Android qualification and the targeted NOT RUN review rows remain outstanding. No full-digital-twin or whole-game acceptance is claimed. At this historical initial stage, publication was blocked by the unborn local branch and absent Git remote. Later isolated bare-repository publication resolved that checkout limitation while preserving unrelated staged work.
 
 ## Official exterior acquisition and export
 

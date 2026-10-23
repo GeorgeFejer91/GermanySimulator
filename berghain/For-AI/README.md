@@ -12,7 +12,7 @@ The working target is the contemporary building, with reference dates retained s
 
 - [x] Register the active goal and create this scoped workspace.
 - [x] Search the public web and GitHub for pre-existing models and references.
-- [x] Create the reviewed online resource catalogue, including source access and reuse status (59 entries).
+- [x] Create the reviewed online resource catalogue, including source access and reuse status (81 entries).
 - [x] Inspect primary architectural images and establish a provisional façade and room-volume study; retain dimensional gaps.
 - [x] Build the hidden architectural viewer with outside/inside navigation and explicit reconstruction status.
 - [ ] Create and refine the full model; document dimensions, source links and uncertain geometry by space.
@@ -70,6 +70,32 @@ review rendered elevations, collision bounds and existing walking paths.
 
 ## Handoff
 
+### Interior design, art and sound research
+
+The user inspected the preview and prioritised the missing interior design,
+including Anna Uddenberg's mannequin sculpture and the sound system. Use
+[INTERIOR.md](INTERIOR.md) as the object/room inventory and implementation order;
+the full architectural outcome and missing rooms remain required. This research
+update owns these notes, the source catalogue and its public static copy boundary
+plus the focused packaging test. No viewer/model/navigation/material changes.
+
+New evidence: the three actual 2009 Chrisse Kunst cartoons were acquired and
+inspected; they are small, stylised historical topology references. Primary
+gallery documentation identifies Uddenberg's *CLIMBER (Angel Kiss)* (2020), with
+published dimensions and an inspected studio photograph. Curator/artist records
+add Bisky, Marr, Göthe, Czebatul, Brandenburg and Tillmans; separate temporary
+exhibition work and removed historic work. The old Piotr Nathan mural was removed
+in April 2017 and is not the contemporary foyer target. Main-hall Funktion-One
+changed in 2023; Panorama PA is documented by Studt-Akustik. Actual DS210 STEP/DXF
+and dimensioned PDF were acquired as research, not as an established current rig.
+
+Next modelling work starts with the main hall/foyer and Panorama's distinctive
+furniture, bar and DJ forms, then missing room connections and the sourced art.
+Bridge research is retained but exterior-only refinement is deferred to this
+interior priority. No named artwork is implemented yet; the user correctly
+identified the current interior's generic appearance. Neither this inventory
+nor the earlier material-map checkpoint satisfies the realistic interior goal.
+
 ### Original material maps
 
 Scope: original tileable mineral/stone/metal/aggregate base-colour, normal and
@@ -86,7 +112,7 @@ checks pass. All 12 shared textures dispose once. Both independent reviews pass
 on `output/berghain-material-candidate.json` (36 files). Faint tiling on the
 long blank hall wall and unique dirt/damage remain fidelity work.
 
-The active app goal remains unfinished. Research and a calibrated, photo-informed model/viewer are implemented; they do not meet the full realistic-asset target yet. See [SOURCES.md](SOURCES.md) for the 59-entry catalogue and [VALIDATION.md](VALIDATION.md) for checks, independent reviews and outstanding coverage.
+The active app goal remains unfinished. Research and a calibrated, photo-informed model/viewer are implemented; they do not meet the full realistic-asset target yet. See [SOURCES.md](SOURCES.md) for the 81-entry catalogue, [INTERIOR.md](INTERIOR.md) for the artwork/equipment and room inventory, and [VALIDATION.md](VALIDATION.md) for checks, independent reviews and outstanding coverage.
 
 Open `/berghain/model.html` through the project's HTTP server. The current local preview is `http://127.0.0.1:49683/berghain/model.html` while that server remains running. The page is direct-link only, with `noindex, nofollow`, and has no ordinary game-navigation entry. It is not access-controlled.
 
@@ -102,6 +128,6 @@ Reproduce extraction after downloading the source files listed in `survey-data.m
 
 The façade now has separate glazing tiers, steel frames, masonry bands, physical inset panels, sills and attic vents informed by P03/P07–P10. Panels use an estimated 7 cm authoring depth (about 5.9–6.0 cm after calibration), with closed solid rims. All three elevations still repeat estimated bays. Original tileable colour/normal/roughness maps add approximate grain; unique site weathering and decay are not established. Regenerate them with `python berghain/build-materials.py`. Roofs retain their simpler material. A12/A13 and I11 add primary Lab.oratory and Panorama references, including the missing extra lounge level and historical lighting/acoustic treatments.
 
-Next work: verify per-elevation openings and roof/rear detail, model the smoking bridge, corroborate circulation/elevations; document and model Lab.oratory, the second Panorama lounge level, bathrooms, services and connecting spaces; add observed surface/weathering and installation detail. The retained 44 m authoring coordinates are transformed at asset construction and are no longer the shipped exterior width; do not treat those old coordinates or inferred partitions/repeated façades as measured facts. Primary exterior data does not establish room dimensions or which annex contains a particular interior use.
+Next work: prioritise the missing interior design using INTERIOR.md, including distinctive furniture, art, room connections and sound-system geometry; model Lab.oratory, the extra Panorama lounge level, bathrooms and services. Verify circulation/elevations rather than adding unlocated objects. Per-elevation openings, roof/rear detail, smoking bridge and observed weathering remain on the full-goal checklist. The retained 44 m authoring coordinates are transformed at asset construction and are no longer the shipped exterior width; do not treat those old coordinates or inferred partitions/repeated façades as measured facts. Primary exterior data does not establish room dimensions or which annex contains a particular interior use.
 
-Repository: `C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator`. The local `codex/neighborhood-walk-talk` branch has no initial commit/remote and substantial pre-existing staged work. For the user's explicit live-preview request, publish only the Berghain scope and builder allowlist against verified `GeorgeFejer91/GermanySimulator` remote `main` using an isolated bare repository/index under ignored `output/`. Preserve the original index and game work. Intended unlisted URL: `https://germanysimulator.de/berghain/model.html`; record confirmed deployment in VALIDATION.md. The shared root handoff remains authoritative for unrelated game work.
+Repository: `C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator`. The local `codex/neighborhood-walk-talk` branch has no initial commit/remote and substantial pre-existing staged work. Publish only the Berghain scope and builder allowlist against verified `GeorgeFejer91/GermanySimulator` remote `main` using an isolated bare repository/index under ignored `output/`; fetch/push by explicit repository URL because this bare repository also has no named origin. Preserve the original index and game work (2,285 staged entries at this checkpoint). Runtime commit `9c842707e588e5e218109a0f63eb51c73a472b1f` is confirmed deployed: **https://germanysimulator.de/berghain/model.html**. Pages workflow `39977033051` succeeded; 31 published-file comparisons and two live browser tours passed, with desktop/Android emulation distinguished in VALIDATION.md. The expanded research inventory is a subsequent documentation-only publication. The shared root handoff remains authoritative for unrelated game work.
