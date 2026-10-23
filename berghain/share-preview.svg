@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="windows" width="53" height="69" patternUnits="userSpaceOnUse"><rect x="12" y="13" width="23" height="42" fill="#253936"/><path d="M24 13v42M12 34h23" stroke="#68746b" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#dfd9c6"/>
+  <path d="M0 505L1200 460V630H0Z" fill="#b7b7a5"/>
+  <g stroke="#424b43" stroke-width="3">
+    <path d="M503 245L1128 204L1165 478L521 512Z" fill="#b1ac97"/>
+    <path d="M541 241V194L733 181V145L918 132V170L1101 158V471L541 499Z" fill="#c3bca7"/>
+    <path d="M551 250L1092 217M551 320L1092 287M551 390L1092 357" fill="none" stroke="#e3dbc4"/>
+    <path d="M560 235L1090 198V458L560 486Z" fill="url(#windows)" stroke="none"/>
+    <path d="M764 143L764 484M914 134L914 476" stroke="#e3dbc4" stroke-width="10"/>
+    <path d="M794 367L871 363V483L794 487Z" fill="#28372f"/>
+    <path d="M832 366V485" stroke="#8e9885"/><path d="M824 424V445M840 423V444" stroke="#d8d6bf"/>
+  </g>
+  <g fill="#313d36" stroke="#313d36" stroke-width="4">
+    <circle cx="747" cy="446" r="13" fill="#ad8971" stroke="none"/>
+    <path d="M734 461Q746 453 759 462L766 503H728Z"/>
+    <path d="M738 502L735 547M756 502L762 544M735 472L717 492M758 471L782 480" fill="none" stroke-width="11"/>
+    <rect x="777" y="468" width="31" height="37" fill="#e6dfc8" stroke-width="2" transform="rotate(-12 777 468)"/>
+  </g>
+  <path d="M51 503H420" stroke="#6c7565" stroke-width="2"/>
+  <g font-family="Arial,sans-serif" fill="#28362e">
+    <text x="53" y="77" font-size="24" letter-spacing="4">GEHEIM · BERGHAIN</text>
+    <text x="49" y="211" font-size="67" font-weight="700">Hier kommst</text>
+    <text x="49" y="285" font-size="67" font-weight="700">du rein.</text>
+    <text x="53" y="353" font-size="24">Keine Gästeliste. Nur WASD.</text>
+    <text x="53" y="545" font-size="22">Begehbare 3D-Rekonstruktion</text>
+    <text x="53" y="580" font-size="19">Germany Simulator · Work in progress</text>
+  </g>
+  <path d="M866 530Q880 513 903 518L1101 516V575H861V539L841 514Z" fill="#eae5d5" stroke="#4c594b" stroke-width="2"/>
+  <text x="881" y="552" fill="#28362e" font-family="Arial,sans-serif" font-size="22">„Ausweis? E reicht.“</text>
+</svg>

@@ -37,18 +37,42 @@ export function levelPage(template, level) {
     .replace('<head>',`<head>\n  <base href="../">\n  <link rel="canonical" href="${escape(url)}">\n${metadata}`);
 }
 
+export function geheimPage(template) {
+  const metadata = [
+    ['property','og:title','Geheim · Hier kommst du rein'],
+    ['property','og:description','Walk around Berghain, open the door and explore inside.'],
+    ['property','og:type','website'], ['property','og:url','https://germanysimulator.de/geheim/'],
+    ['property','og:image','https://germanysimulator.de/assets/social/geheim.png'],
+    ['property','og:image:type','image/png'], ['property','og:image:width','1200'], ['property','og:image:height','630'],
+    ['property','og:image:alt','Berghain reconstruction with a visitor and the caption Hier kommst du rein.'],
+    ['name','description','A controllable human visitor in the Berghain architectural reconstruction.'],
+    ['name','twitter:card','summary_large_image'], ['name','twitter:title','Geheim · Berghain'],
+    ['name','twitter:description','Hier kommst du rein. Walk around and explore inside.'],
+    ['name','twitter:image','https://germanysimulator.de/assets/social/geheim.png']
+  ].map(([attribute,key,value]) => `  <meta ${attribute}="${key}" content="${escape(value)}">`).join('\n');
+  return template.replace('<html ', '<html data-play="true" ')
+    .replace('<head>', '<head>\n  <base href="../berghain/">')
+    .replace(/<title>[^<]*<\/title>/, '<title>Geheim · Berghain</title>')
+    .replace('</head>', `  <link rel="canonical" href="https://germanysimulator.de/geheim/">\n${metadata}\n</head>`);
+}
+
 export function buildLevelPages(root, output) {
   if (resolve(root)===resolve(output)) throw Error('Build output must be separate from source');
   mkdirSync(output,{recursive:true});
   for (const entry of readdirSync(root,{withFileTypes:true})) {
-    if (entry.name.startsWith('.') || ['output','node_modules','tests','tools'].includes(entry.name)) continue;
+    if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim'].includes(entry.name)) continue;
     if (entry.name==='berghain') {
-      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
+      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
         const source=join(root,entry.name,path);
         if (!existsSync(source)) continue;
         const destination=join(output,entry.name,path);
         mkdirSync(resolve(destination,'..'),{recursive:true});
         cpSync(source,destination);
+      }
+      const modelPage = join(root,'berghain/model.html');
+      if (existsSync(modelPage)) {
+        mkdirSync(join(output,'geheim'),{recursive:true});
+        writeFileSync(join(output,'geheim/index.html'),geheimPage(readFileSync(modelPage,'utf8')));
       }
       continue;
     }

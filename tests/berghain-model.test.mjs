@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync, readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {buildLevelPages} from '../tools/build-level-pages.mjs';
+import {buildLevelPages, geheimPage} from '../tools/build-level-pages.mjs';
 
 test('walking preserves full-body wall clearance even across a delayed frame', async () => {
   const moduleURL = new URL('../berghain/navigation.mjs', import.meta.url);
@@ -120,18 +120,36 @@ test('static build includes the hidden viewer and excludes private research copi
     writeFileSync(join(root, 'building-catalogue.js'), 'module.exports={catalogue:[]}');
     writeFileSync(join(root, 'assets/social-preview.png'), 'fixture');
     writeFileSync(join(root, 'assets/social/neighbors.png'), 'fixture');
-    writeFileSync(join(root, 'berghain/model.html'), '<meta name="robots" content="noindex">');
+    writeFileSync(join(root, 'berghain/model.html'), '<html lang="en"><head><meta name="robots" content="noindex"></head><body></body></html>');
     writeFileSync(join(root, 'berghain/references/downloads/private.jpg'), 'research-only');
     writeFileSync(join(root, 'berghain/AGENTS.md'), 'instructions');
     writeFileSync(join(root, 'berghain/For-AI/SOURCES.md'), 'Public source catalogue');
     writeFileSync(join(root, 'berghain/For-AI/INTERIOR.md'), 'Public artwork and sound-system inventory');
+    mkdirSync(join(root, 'geheim'));
+    writeFileSync(join(root, 'geheim/index.html'), 'stale generated page');
     buildLevelPages(root, output);
     assert.ok(existsSync(join(output, 'berghain/model.html')));
+    const secret = readFileSync(join(output, 'geheim/index.html'), 'utf8');
+    assert.match(secret, /data-play="true"/);
+    assert.match(secret, /<base href="\.\.\/berghain\/">/);
+    assert.match(secret, /name="robots" content="noindex"/);
     assert.ok(existsSync(join(output, 'berghain/For-AI/SOURCES.md')));
     assert.ok(existsSync(join(output, 'berghain/For-AI/INTERIOR.md')), 'catalogue interior link must resolve in the built site');
     assert.ok(!existsSync(join(output, 'berghain/references')), 'research downloads must remain local');
     assert.ok(!existsSync(join(output, 'berghain/AGENTS.md')), 'authoring instructions are not viewer runtime');
   } finally { rmSync(directory, {recursive: true, force: true}); }
+});
+
+test('Geheim source matches its generated alias and advertises its own valid preview', () => {
+  const template = readFileSync(new URL('../berghain/model.html',import.meta.url),'utf8');
+  const page = readFileSync(new URL('../geheim/index.html',import.meta.url),'utf8');
+  assert.equal(page.replaceAll('\r\n','\n'),geheimPage(template).replaceAll('\r\n','\n'));
+  assert.match(page,/og:url" content="https:\/\/germanysimulator.de\/geheim\//);
+  assert.match(page,/twitter:card" content="summary_large_image/);
+  assert.match(page,/og:image:width" content="1200/);
+  const preview = readFileSync(new URL('../assets/social/geheim.png',import.meta.url));
+  assert.deepEqual([...preview.subarray(0,8)],[137,80,78,71,13,10,26,10]);
+  assert.equal(preview.readUInt32BE(16),1200); assert.equal(preview.readUInt32BE(20),630);
 });
 
 test('hidden viewer is noindex and absent from ordinary game navigation', () => {

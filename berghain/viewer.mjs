@@ -13,6 +13,9 @@ const enter = document.querySelector('#enter');
 const roomSelect = document.querySelector('#room');
 const sourceDialog = document.querySelector('#source-dialog');
 const instructions = document.querySelector('#instructions');
+const interaction = document.querySelector('#interact');
+const playable = document.documentElement.dataset.play === 'true' || new URLSearchParams(location.search).has('play');
+let walk = null, walkthroughReady = !playable;
 const abort = new AbortController();
 const events = {signal: abort.signal};
 let renderer;
@@ -57,6 +60,7 @@ function invalidate() {
 
 function clearInput() {
   keys.clear(); touchMoves.clear(); pointers.clear();
+  walk?.stop();
 }
 
 function render(time) {
@@ -68,15 +72,26 @@ function render(time) {
     let forward = Number(held.has('w') || held.has('arrowup') || held.has('forward')) - Number(held.has('s') || held.has('arrowdown') || held.has('back'));
     let right = Number(held.has('d') || held.has('arrowright') || held.has('right')) - Number(held.has('a') || held.has('arrowleft') || held.has('left'));
     const length = Math.hypot(forward, right);
-    if (length) {
-      forward /= length; right /= length;
-      visitor = moveVisitor(visitor, {x: (right * Math.cos(yaw) - forward * Math.sin(yaw)) * dt * 3,
-        z: (-forward * Math.cos(yaw) - right * Math.sin(yaw)) * dt * 3}, layout);
-      invalidate();
+    if (length) { forward /= length; right /= length; }
+    const delta = {x: (right * Math.cos(yaw) - forward * Math.sin(yaw)) * dt * 3,
+      z: (-forward * Math.cos(yaw) - right * Math.sin(yaw)) * dt * 3};
+    const before = visitor;
+    visitor = walk ? walk.step(visitor, delta, dt) : (length ? moveVisitor(visitor, delta, layout) : visitor);
+    if (length || walk?.travelling || (walk && Math.hypot(visitor.x - before.x, visitor.z - before.z) > .00001)) invalidate();
+    if (walk) {
+      canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model));
+      const action = walk.action(visitor);
+      if (interaction.hidden !== !action) scheduleMeasurement();
+      interaction.hidden = !action;
+      if (action && interaction.textContent !== action) interaction.textContent = action;
+      const place = visitor.z > 22.28 ? 'Outside Berghain' : 'Inside Berghain';
+      if (document.querySelector('#location').textContent !== place) document.querySelector('#location').textContent = place;
+    } else {
+      camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);
+      camera.rotation.set(pitch, yaw, 0, 'YXZ');
     }
-    camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);
-    camera.rotation.set(pitch, yaw, 0, 'YXZ');
   } else {
+    if (walk) { walk.avatar.group.visible = false; interaction.hidden = true; }
     camera.position.set(target.x + Math.sin(orbitAngle) * Math.sin(orbitPitch) * orbitRadius,
       target.y + Math.cos(orbitPitch) * orbitRadius, target.z + Math.cos(orbitAngle) * Math.sin(orbitPitch) * orbitRadius);
     camera.lookAt(target);
@@ -86,8 +101,10 @@ function render(time) {
   canvas.dataset.position = JSON.stringify(mode === 'interior' ? visitor : camera.position.toArray());
   canvas.dataset.drawCalls = String(renderer.info.render.calls);
   canvas.dataset.triangles = String(renderer.info.render.triangles);
-  canvas.dataset.ready = String(surfacesReady);
-  loading.hidden = surfacesReady && !surfaceError;
+  canvas.dataset.ready = String(surfacesReady && walkthroughReady);
+  canvas.dataset.avatar = walk ? String(walk.avatar.group.visible) : 'false';
+  canvas.dataset.crossing = String(walk?.travelling || false);
+  loading.hidden = surfacesReady && walkthroughReady && !surfaceError;
   if (surfaceError) loading.textContent = 'Surface textures could not load. Showing basic materials; reload to retry.';
 }
 
@@ -109,10 +126,15 @@ function selectView(name) {
   clearInput();
   if (name === 'exterior') {
     mode = 'exterior';
+    camera.fov = 45; camera.updateProjectionMatrix();
     orbitAngle = .7; orbitPitch = 1.28; orbitRadius = fitExteriorRadius(camera.aspect, orbitAngle, orbitPitch);
     document.querySelector('#location').textContent = 'Exterior';
     document.querySelector('#accuracy').textContent = 'Exterior calibrated · interior layout provisional';
     instructions.textContent = 'Drag to orbit · scroll or + / − to zoom · Go inside to explore';
+  } else if (name === 'walk' && walk) {
+    mode = 'interior';
+    instructions.textContent = 'WASD / arrows to walk · drag to look · E or the entrance button to enter and leave';
+    document.querySelector('#accuracy').textContent = 'Controllable visitor · interior reconstruction in progress';
   } else {
     const view = viewpoints[name];
     mode = 'interior'; visitor = {...view.position}; yaw = view.yaw; pitch = 0;
@@ -120,6 +142,7 @@ function selectView(name) {
     document.querySelector('#location').textContent = view.label;
     document.querySelector('#accuracy').textContent = view.confidence + ' · ' + view.sources.join(', ');
     instructions.textContent = 'Drag to look · WASD / arrows to walk · choose a room to change levels · Esc for exterior';
+    if (walk) { walk.step(visitor, {x: 0, z: 0}, 0); instructions.textContent = 'WASD / arrows to walk · drag to look · E at the entrance to leave'; }
   }
   exterior.setAttribute('aria-pressed', String(mode === 'exterior'));
   enter.setAttribute('aria-pressed', String(mode === 'interior'));
@@ -129,11 +152,18 @@ function selectView(name) {
 }
 
 exterior.addEventListener('click', () => selectView('exterior'), events);
-enter.addEventListener('click', () => selectView('foyer'), events);
+enter.addEventListener('click', () => selectView(walk ? 'walk' : 'foyer'), events);
 roomSelect.addEventListener('change', () => selectView(roomSelect.value), events);
 document.querySelector('#sources').addEventListener('click', () => { clearInput(); sourceDialog.showModal(); scheduleMeasurement(); }, events);
 document.querySelector('#close-sources').addEventListener('click', () => sourceDialog.close(), events);
 sourceDialog.addEventListener('close', clearInput, events);
+
+function interact() {
+  if (!walk || walk.travelling || mode !== 'interior' || sourceDialog.open) return;
+  clearInput();
+  if (walk.interact(visitor)) { canvas.focus({preventScroll: true}); invalidate(); }
+}
+interaction.addEventListener('click', interact, events);
 
 canvas.addEventListener('pointerdown', event => {
   canvas.focus({preventScroll: true});
@@ -169,6 +199,7 @@ canvas.addEventListener('wheel', event => {
 
 canvas.addEventListener('keydown', event => {
   const key = event.key.toLowerCase();
+  if (key === 'e' && walk && mode === 'interior') { event.preventDefault(); if (!event.repeat) interact(); return; }
   if (key === 'escape') { selectView('exterior'); return; }
   if (mode === 'exterior') {
     if (['arrowleft', 'arrowright'].includes(key)) orbitAngle += key === 'arrowleft' ? .12 : -.12;
@@ -217,7 +248,7 @@ window.addEventListener('pagehide', event => {
   frame = null;
   if (event.persisted) return;
   resizeObserver.disconnect(); textObserver.disconnect(); textChanges.disconnect();
-  abort.abort(); disposeBerghainModel(model); renderer?.dispose();
+  abort.abort(); walk?.dispose(); disposeBerghainModel(model); renderer?.dispose();
 }, events);
 
 const preparedText = new Map();
@@ -239,7 +270,8 @@ function measureLabels() {
     }
     const width = rect.width - parseFloat(css.paddingLeft) - parseFloat(css.paddingRight) - parseFloat(css.borderLeftWidth) - parseFloat(css.borderRightWidth) - (element === roomSelect ? 16 : 0);
     const height = rect.height - parseFloat(css.paddingTop) - parseFloat(css.paddingBottom) - parseFloat(css.borderTopWidth) - parseFloat(css.borderBottomWidth);
-    const stats = measureLineStats(preparedText.get(key), Math.max(1, width));
+    // DOM dimensions round to 1/64 px; Canvas advances retain finer precision.
+    const stats = measureLineStats(preparedText.get(key), Math.max(1, width + .5));
     const lineHeight = parseFloat(css.lineHeight) || parseFloat(css.fontSize) * 1.4;
     const fits = stats.maxLineWidth <= width + .5 && stats.lineCount * lineHeight <= height + 1;
     const naturalFits = element !== roomSelect || (stats.lineCount === 1 && measureNaturalWidth(preparedText.get(key)) <= width);
@@ -269,6 +301,17 @@ if (renderer) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
   resize();
+  if (playable) import('./walkthrough.mjs').then(({createWalkthrough}) => {
+    if (model.userData.disposed) return;
+    walk = createWalkthrough(); scene.add(walk.avatar.group, walk.door.group);
+    visitor = {...walk.spawn}; yaw = 0; pitch = 0; walkthroughReady = true;
+    enter.textContent = 'Walk';
+    canvas.setAttribute('aria-label', 'Controllable human avatar. WASD or arrows to walk, drag to look, E at the entrance to enter or leave.');
+    selectView('walk');
+  }).catch(() => {
+    loading.hidden = false;
+    loading.textContent = 'The avatar walkthrough could not load. Reload to retry or use the architectural model viewer.';
+  });
   loadSurfaceTextures(model, Math.min(4, renderer.capabilities.getMaxAnisotropy())).then(count => {
     if (model.userData.disposed) return;
     surfacesReady = true;

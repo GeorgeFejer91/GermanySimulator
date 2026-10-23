@@ -31,6 +31,8 @@ footer{display:flex;align-items:center;gap:.75rem 1.4rem;flex-wrap:wrap;padding:
 #touch-controls button[data-move="left"]{grid-column:1;grid-row:2}
 #touch-controls button[data-move="back"]{grid-column:2;grid-row:2}
 #touch-controls button[data-move="right"]{grid-column:3;grid-row:2}
+#interact{position:absolute;right:1rem;bottom:1rem;max-width:calc(100% - 190px);background:#242723ed;white-space:normal}
+@media(max-width:450px){#interact{bottom:calc(1rem + 6.8rem);max-width:calc(100% - 2rem)}html[data-play="true"] main{grid-template-rows:minmax(max(280px,14rem),1fr) auto}}
 dialog{background:#292e27;color:#e9e6dc;border:1px solid #777d6f;border-radius:3px;max-width:640px;width:calc(100% - 2rem);max-height:calc(100dvh - 2rem);padding:1.1rem 1.3rem;line-height:1.55;overflow:auto}
 dialog::backdrop{background:#131713a8}
 .dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:1rem}

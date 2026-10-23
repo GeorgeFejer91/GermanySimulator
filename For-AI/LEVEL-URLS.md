@@ -72,6 +72,31 @@ GitHub Pages run `38606482822` succeeded. Production checks passed all 31 destin
 
 Production browser smoke passed 10/10 cases: city, neighbors, Jobcenter, Bürgeramt and Finanzamt on desktop and Android portrait emulation, including refresh and applicable exit/re-entry/input clearing, with no page or HTTP failures. Report: `output/level-links-production-browser/report.json`. All 31 destinations have complete local desktop/Android flow coverage and byte-matched production HTML/runtime; the live browser smoke samples these five distinct entry paths. Physical Android and sharing-platform cache presentation remain NOT RUN.
 
+## Unlisted Berghain walkthrough
+
+`/geheim/` is an unlisted architectural walkthrough owned by `berghain/`,
+generated from its existing viewer by `geheimPage()` in the same static builder.
+Fresh entry/refresh places a controllable 1.80 m human outside. WASD/arrows or
+touch move the visitor; dragging turns the camera; E/the entrance button opens
+the shared hinged door and walks continuously through it, with the same action
+for exiting. It has no city mission prerequisites or mission rewards.
+
+Permanent URL: [Geheim](https://germanysimulator.de/geheim/). Unique original
+1200 × 630 preview: [geheim.png](../assets/social/geheim.png), authored as
+`berghain/share-preview.svg`. Initial HTML carries noindex/nofollow, canonical,
+Open Graph and Twitter metadata. It stays out of ordinary game navigation and
+the ordinary mission-level catalogue. The separate architectural viewer remains
+at `/berghain/model.html`; both use the same building/runtime resources.
+
+2026-10-23 local checks: direct entry/refresh, actual desktop keys and Android
+portrait/landscape CDP touch, entry/exit, duplicate/cancel handling, 320 px and
+200% text, idle rendering and context recovery pass. Evidence:
+`output/berghain-geheim-release-browser/report.json` (4/4), plus original
+share-preview rendering in `output/berghain-geheim-acceptance/report.json`.
+Publication/live checks
+are recorded in `berghain/For-AI/VALIDATION.md`; no physical Android or social
+platform cache verification is implied. Interior reconstruction remains partial.
+
 ## Release checklist
 
 1. Add a stable, readable path on `https://germanysimulator.de/` and record it here with its owning level/area, aliases, entry behavior, preview asset and last verification date. Cover every playable level, including indoor building levels introduced through the shared transition protocol. Do not silently invent new scopes for mission steps.

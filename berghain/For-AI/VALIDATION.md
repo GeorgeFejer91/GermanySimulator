@@ -4,6 +4,73 @@
 
 ## Confirmed public deployment
 
+### Geheim avatar walkthrough — release candidate
+
+2026-10-23: `/geheim/` is generated from the existing viewer with optional
+third-person mode. Same model, navigation, renderer and assets; no new mission,
+scene handoff or duplicated runtime. Original anonymous procedural human and
+shared hinged door are viewer objects, excluded from the building GLB. Its
+6,713,940-byte SHA256 `1fbb211bc0f63c54334b27bbe29b813e2b648146c699d4d4d434f1e4e734674f`
+remains unchanged. Interior art/equipment research remains a modelling backlog.
+
+- `node --test tests/berghain-walkthrough.test.mjs tests/berghain-model.test.mjs
+  tests/berghain-survey.test.mjs tests/berghain-materials.test.mjs
+  tests/level-pages.test.mjs`: **24/24 PASS**. Covers continuous legal entrance
+  traversal both ways, far/duplicate guards, closed-door delayed movement,
+  cancellation, grounded adult bounds, complete gait-phase radial/height bounds,
+  closed-door-seam camera clearance, existing stairs, export and static packaging.
+- `output/berghain-geheim-release-browser/report.json`: **4/4 PASS**, final human/camera
+  candidate in silent Chromium151 desktop and Android portrait/landscape
+  emulation. Real keyboard or CDP touch approaches the entrance from outside,
+  enters with E/button, walks inside, exits through the same door, refreshes
+  outdoors; crossing positions are sampled continuously. Desktop also covers
+  duplicate E, blur/modal cancellation, 320 px/200% text measurement and no
+  movement-pad overlap, idle frame quiescence and context loss/restoration.
+  Three screenshots and accepted positions per approach record actual moving
+  gait. Camera target .95 m and walk-only FOV60 retain the full human at the
+  contracted entrance camera; complete-body projection checks cover all three
+  aspects. Original exterior/orbit restores FOV45.
+- `output/berghain-geheim-original-viewer/report.json`: **2/2 PASS**, original
+  architectural viewer desktop/Android-portrait tour and native GLB parsing.
+- `output/berghain-geheim-acceptance/report.json`: **5/5 PASS** on the preceding
+  human candidate, including rendering the original 1200 × 630 share preview.
+  The final gait/head repair is covered by the later four-case suite above.
+- Independent Physics review caught the initial shoes/hands exceeding the .28 m
+  collision radius. Repair constrains the complete animated mesh; the new test
+  sweeps 144 gait phases. Integrator screenshot review also caught a centre-ray
+  camera passing between closed leaves; nine offset rays now protect the view.
+
+Causal contract: canvas E (nonrepeat) or entrance-button click → proximity and
+not-travelling guards in `walk.interact` → open actual shared door and set one
+travel target → existing swept full-body `moveVisitor` per frame → continuous
+threshold crossing → close only if the new solid state leaves a legal body.
+There is no reward/mission event. Far/absent E leaves state unchanged; duplicate
+E cannot reset travel; blur/modal/hidden/context loss cancels pending travel and
+held input. A blocked step cancels travel instead of scheduling an endless walk.
+Final-state screenshots are supplemented by sampled intermediate positions and
+the CPU legal-body checks. Shortcut room selection is not entry-flow evidence.
+
+Responsiveness/ownership: optional module is loaded only for Geheim/play mode;
+one 1.80 m human, six shared procedural materials, no downloaded texture and no
+new scheduler. Gait advances from actual displacement. Camera uses actual opaque
+meshes and preserves authored glass/materials. Existing single demand-driven RAF
+and capped pixel count remain authoritative; idle viewer schedules no continual
+animation. Pagehide owns door/avatar geometry/material disposal and input cleanup.
+No device-speed or GPU-memory improvement is claimed.
+
+Both required independent reviewers accepted the same 22-file SHA256 snapshot
+at `output/berghain-geheim-candidate.json`. Physics: scoped P1/P2/P4/P5/X1 PASS,
+including independent 360-phase every-vertex radius .27514561 m, height1.80 m,
+the repaired real plinth case and 25 legal entrance starts; supplied moving
+frames/positions bind to the current hashes. Camera: scoped C1–C5/X1 PASS,
+independent 1,523-vertex projection at the contracted 1.909 m entrance camera;
+all vertices remain framed. Both verified 22/22 hashes and distinguished fresh
+CPU checks from supplied browser rendering. Crowd P3 is out of scope; physical
+Android, full adversarial camera sweep, assistive-technology evaluation and
+social-platform cache rendering remain **NOT RUN**. Context recovery passed
+with no page errors; driver/WebGL disposal warnings were recorded in the forced
+loss scenario. Public deployment remains a separate release check.
+
 Runtime/material commit `9c842707e588e5e218109a0f63eb51c73a472b1f` deployed
 successfully through Pages workflow `39977033051` on 2026-10-23. Canonical viewer:
 **https://germanysimulator.de/berghain/model.html**.

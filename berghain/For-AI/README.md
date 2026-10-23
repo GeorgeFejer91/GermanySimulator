@@ -70,6 +70,46 @@ review rendered elevations, collision bounds and existing walking paths.
 
 ## Handoff
 
+### Geheim playable walkthrough — validated for publication
+
+Current 22-file frozen candidate passed both required independent reviewers,
+24 focused Node checks and four final browser cases. Accepted moving frames,
+entrance/exit, touch, lifecycle and complete-body camera evidence are recorded
+in [VALIDATION.md](VALIDATION.md). Publish only this scoped candidate through
+the existing isolated index, then verify `/geheim/` publicly. The main working
+checkout's unrelated staged files must remain untouched.
+
+The user requests a published `/geheim/` page with a controllable human avatar
+and the interaction of entering the building. Implement as an optional third-
+person mode of the existing viewer/model, with an unlisted generated alias;
+retain the architectural viewer URL. This is a continuous architectural walk,
+not a new mission controller or a second copy of the game runtime. Use the
+existing navigation, local Three.js, shared hinged entrance factory and measured
+Pretext labels. No new library, service or change to the city mission chain.
+
+Allowed integrator writes: this scope; a procedural avatar under the existing
+Berghain asset authority; focused Node/browser checks; the existing static
+builder's alias/copy boundary; a unique share preview under assets/social and
+its direct-URL catalogue entry. Preserve all unrelated staged work and use the
+existing isolated publication procedure. New avatar and door geometry are not
+part of the building GLB export.
+
+Start outside with human scale and third-person camera. WASD/arrows and touch
+move the body through the existing collision owner. E/button at the actual
+entrance opens the hinged door and walks through it; far/duplicate actions do
+nothing. Exit uses the same doorway. Input interruption cancels held movement
+and pending automatic crossing. Camera collision uses the rendered opaque model;
+gait follows accepted displacement and stops when blocked. Rendering remains
+demand driven, with disposal and graphics recovery. This continuous walk does
+not switch indoor levels or invoke the city's cinematic vortex protocol.
+
+Acceptance: source-driven door collision/crossing/guard and avatar bounds checks;
+actual approach/E/inside/exit in silent desktop and Android emulation; touch,
+blur/modal/context recovery, readable 320 px/200% controls and idle cessation;
+generated alias/import links/share image packaging; independent Physics and
+Camera/scale reviews on the same frozen candidate; push and verify the live URL.
+The wider realistic interior/art reconstruction goal remains unfinished.
+
 ### Interior design, art and sound research
 
 The user inspected the preview and prioritised the missing interior design,
