@@ -5,6 +5,7 @@ import {addArtworks,artworkMaterials} from './artworks.mjs';
 import {addLandscape, landscapeMaterials} from './landscape.mjs';
 import {addExteriorDetails} from './exterior-details.mjs';
 import {addUpperLounge,addLoungeFurniture,loungeMaterials} from './upper-lounge.mjs';
+import {addPanoramaCeiling} from './panorama-services.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -262,6 +263,7 @@ export const viewpoints = {
 addLandscape(layout);
 addExteriorDetails(layout);
 addUpperLounge(layout,{box,floor,beam,railing,stair});
+addPanoramaCeiling(layout,{box});
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
 addLoungeFurniture(layout);

@@ -10,6 +10,35 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Panorama ceiling and services — accepted initial increment
+
+The missing fitted Panorama ceiling, staggered acoustic clouds, cast radiators,
+exposed conduit and tube diffusers now follow inspected architect gallery
+views 15/16 (I19). The ceiling soffit 17.95 m, floor 13.25 m, counts and positions are
+estimated. Earlier switchgear counter/cabins are historical references; they
+are not inserted beside the later redesigned counter without survival evidence.
+
+Portable GLB 23,659,832 bytes / 238,560 triangles / 99 mesh-material groups / 18
+original shared maps; SHA-256 88e63d565d8ddc93a8d404f532ca74f5a5bff45d0ce2defd40ea8e28f0d32fa8.
+There are 42 fixture assemblies, preserving the 44-component PA and initial artwork.
+The 72-file freeze passes 61 Node checks; the repaired browser matrix passes 15/15,
+with corrected native radiator detail 3/3 and upper-overlook 3/3 on current hashes.
+Earlier complete 28/28 evidence is pre-collision-repair, explicitly bridged only
+for unchanged renderer/lifecycle. Both independent world reviewers pass the
+final candidate. VALIDATION.md records found/fixed low-metal penetration, native
+camera framing and real aisle/stair access. Normal page transfer adds 3,006 bytes;
+measured product frame cadence remains about 14 ms in local samples.
+
+Publish this coherent scoped source and verify actual public bytes/interactions.
+The primary staged index remains untouched. Physical Android is unrun. Fine
+materials/weathering, exact contemporary room/art/equipment inventory, surveyed
+interior dimensions, Klo Bar/toilets, Lab and full photographic fidelity remain
+required; the full realistic reconstruction goal stays active.
+
+
+The following checkpoints retain prior publication history.
+
+
 Publication baseline: the prior artwork is now canonical. Pages 40007555342
 succeeded; output/berghain-artwork-canonical-verification.json confirms 46/46
 exact public files and all six root/3d/Geheim/model endpoints. The isolated e75
@@ -304,7 +333,7 @@ The active app goal remains unfinished. Research and a calibrated, photo-informe
 
 Open `/berghain/model.html` through the project's HTTP server. The current local preview is `http://127.0.0.1:49683/berghain/model.html` while that server remains running. The page is direct-link only, with `noindex, nofollow`, and has no ordinary game-navigation entry. It is not access-controlled.
 
-The study includes the exterior shell, foyer, main floor, Panorama Bar, Säule, Halle and garden. Exterior orbit, walking with keyboard/touch, room selection, three traversable stairs, graphics recovery and GLB download are implemented. Asset authority: `assets/models/berghain/layout.mjs`; renderer assembly: `model.mjs`. Regenerate with `node berghain/export-model.mjs`. The current GLB is 23,389,640 bytes / 235,320 triangles, with 98 material/mesh groups and 18 embedded original PBR texture maps. It combines original study geometry with Berlin open-data roofs and annexes. No downloaded image or artwork is embedded.
+The study includes the exterior shell, foyer, main floor, Panorama Bar, Säule, Halle and garden. Exterior orbit, walking with keyboard/touch, room selection, four traversable stairs, graphics recovery and GLB download are implemented. Asset authority: `assets/models/berghain/layout.mjs`; renderer assembly: `model.mjs`. Regenerate with `node berghain/export-model.mjs`. The current GLB is 23,659,832 bytes / 238,560 triangles, with 99 material/mesh groups and 18 embedded original PBR texture maps. It combines original study geometry with Berlin open-data roofs and annexes. No downloaded image or artwork is embedded.
 
 Research found an unfinished OpenSCAD/front-façade STL repository, a paid printable STL listing, the original Minecraft creator's withdrawn walkthrough, architects' photographs and eyewitness diagrams. No complete, verified, freely reusable interior/exterior asset has been confirmed. The 2004 application image is only a cover/title-block photograph. The inspected Transformers catalogue (PDF page 70) has an exterior axonometric and site map, without dimensioned interior plans. The official Berlin textured exterior-mesh portal reported maintenance; no tile was acquired.
 
@@ -312,7 +341,7 @@ Official cadastral and LoD2 exterior geometry was acquired from the separate, wo
 
 The walking viewer is now calibrated through `calibration.mjs`: the front/join/rear cross-sections fit the two primary volumes; official roof faces, the taller Halle's exposed front wall, and both western annex meshes are included. The annexes remain closed unmodelled volumes; their internal use is not inferred. The unsupported rooftop box is removed. Interior floors remain provisional, and visitor radius 0.28 m / eye height 1.68 m are unchanged. Mapped polygon floors/solids follow the same geometry, solid heights derive from their actual rendered matrices, and discrete tread undersides supplement the smooth stair support. One inferred western Halle column/beam line was moved clear of the full provisional stair lane. It is not a verified structural grid. Camera reset uses actual shell/annex bounds.
 
-Reproduce extraction after downloading the source files listed in `survey-data.mjs`: run `python berghain/import-berlin-lod2.py`, then `node berghain/export-model.mjs --survey`. The standalone official reference remains separate from the combined walking study export. The shared exporter handles ordinary and instanced meshes. Current combined study SHA-256: `68607e6777b375e67031d59708147fc49e5d9f63a84266bd465c741c7a5dd6c1`.
+Reproduce extraction after downloading the source files listed in `survey-data.mjs`: run `python berghain/import-berlin-lod2.py`, then `node berghain/export-model.mjs --survey`. The standalone official reference remains separate from the combined walking study export. The shared exporter handles ordinary and instanced meshes. Current combined study SHA-256: `88e63d565d8ddc93a8d404f532ca74f5a5bff45d0ce2defd40ea8e28f0d32fa8`.
 
 The façade now has separate glazing tiers, steel frames, masonry bands, physical inset panels, sills and attic vents informed by P03/P07–P10. Panels use an estimated 7 cm authoring depth (about 5.9–6.0 cm after calibration), with closed solid rims. All three elevations still repeat estimated bays. Original tileable colour/normal/roughness maps add approximate grain; unique site weathering and decay are not established. Regenerate them with `python berghain/build-materials.py`. Roofs retain their simpler material. A12/A13 and I11 add primary Lab.oratory and Panorama references, including the missing extra lounge level and historical lighting/acoustic treatments.
 

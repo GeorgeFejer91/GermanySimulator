@@ -28,6 +28,7 @@ export async function renderNativeAsset(page,view){
       renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
     };
     return {bytes:bytes.byteLength,meshes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
+      panoramaServices:metadata.panoramaServices||null,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
   },view);
 }

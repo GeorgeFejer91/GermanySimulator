@@ -223,3 +223,22 @@ research; no changing lighting programme is claimed. The three new original
 microrelief. Seam/tailoring detail, artwork imagery, exact circulation and
 present-day retention remain fidelity work. This is an additional reconstructive
 study, not completion of the full realistic building.
+
+## Panorama ceiling and exposed services
+
+Original geometry reconstructs forms visible in the architect's I19 gallery
+views15/16: pale staggered acoustic clouds, transverse beams, cast radiators,
+parallel conduit and tube diffusers. The estimated ceiling soffit is17.95m above
+site datum,4.70m above the provisional13.25m Panorama floor. Sixteen panels and
+three24-rib radiators are authoring choices; no dimensioned ceiling/reflected
+plan or contemporary fixture inventory is claimed. Existing DJ/light/acoustic
+suspensions now terminate at this ceiling. The acoustic clouds are separated
+from its beams; visible radiator ribs, headers, feet, supply pipes and protruding valves have
+paired body solids, as do the low vertical conduits and their clamps.
+
+This adds no image inputs or texture families: the same18 original shared maps
+and existing instanced renderer/native GLB pipeline are used. Earlier switchgear
+bar/cabin photographs01/03/04/05 remain historical evidence because the architect
+documents a2010 bar redesign. They are not inserted beside the later counter as
+if both configurations were verified contemporary. Actual current retention,
+ceiling heights, service routes and exact counts/placement remain unresolved.

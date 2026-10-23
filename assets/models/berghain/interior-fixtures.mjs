@@ -1,5 +1,6 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
-import {studyToSite,calibration} from './calibration.mjs';
+import {studyToSite} from './calibration.mjs';
+import {addPanoramaServiceFixtures} from './panorama-services.mjs';
 
 export function createAcousticGrilleGeometry() {
   const plate=new THREE.Shape();
@@ -130,7 +131,7 @@ export function addInteriorFixtures(layout) {
     }
     box('mixer',[0,1.12,0],[.51,.12,.6],'rubber');
     for(const x of [-.15,0,.15])for(const z of [-.16,0,.16])cylinder('mixer knob',[x,1.2,z],.035,.035,'aluminium');
-    for(const x of [-1.73,1.73])rod('suspension',[x,1.08,.3],[x,6.1,.3],.018,'steel');
+    for(const x of [-1.73,1.73])rod('suspension',[x,1.08,.3],[x,layout.panoramaServices.ceilingHeight-13.28,.3],.018,'steel');
     assemblyCollision();
   });
 
@@ -150,8 +151,9 @@ export function addInteriorFixtures(layout) {
     for(const x of [-.36,-.12,.12,.36])box('shade rib',[x,4.2,-.407],[.015,.63,.012],'pale');
     rod('suspension',[0,4.55,0],[0,6.22,0],.018,'steel');
   });
-  for(let i=0;i<3;i++)fixture('panorama-pendant-'+i,[-16,13.25,-15+i*4],['A13'],{lowestPoint:2.211,mountingHeight:6.35},()=>{
-    rod('drop cable',[0,2.7,0],[0,6.35,0],.018,'steel');
+  const suspensionHeight=layout.panoramaServices.ceilingHeight-13.28;
+  for(let i=0;i<3;i++)fixture('panorama-pendant-'+i,[-16,13.25,-15+i*4],['A13'],{lowestPoint:2.211,mountingHeight:suspensionHeight},()=>{
+    rod('drop cable',[0,2.7,0],[0,suspensionHeight,0],.018,'steel');
     cylinder('neck',[0,2.58,0],.085,.28,'pale');
     for(let branch=0;branch<3;branch++) {
       const angle=branch*Math.PI*2/3,x=Math.cos(angle)*.14,z=Math.sin(angle)*.14;
@@ -166,6 +168,7 @@ export function addInteriorFixtures(layout) {
       box('enclosure back',[0,3.85,-.261],[1.35,.38,.018],'steel');
       box('dark internal lining',[0,3.85,-.235],[1.31,.34,.015],'rubber');
       part('perforated metal grille',[0,3.85,.27],[1,1,1],'steel','grille');
-      rod('hanger',[0,4.05,0],[0,calibration.mainRoof-13.35,0],.018,'steel');
+      rod('hanger',[0,4.05,0],[0,suspensionHeight,0],.018,'steel');
     });
+  addPanoramaServiceFixtures(layout,{fixture,box,cylinder,rod});
 }
