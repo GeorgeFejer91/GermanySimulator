@@ -440,3 +440,56 @@ Frozen evidence and commit/deployment receipts are in
 are verified separately. Forced placements and emulation do not establish
 natural mission/E traversal, physical Android or perceptual listening. The
 remaining outdoor cast continues.
+
+Sabine publication verified: accepted/pushed `1f7ece91dcdd78b6fcef7e17c2131d7eca98a532`, deployed in `1f7ece91dcdd78b6fcef7e17c2131d7eca98a532`, Pages39988968544 success. All14 deployed files match immutable deployment bytes and the exact accepted Sabine record; actualroot, query/hash-preserving3d.html compatibility and public Sabine standing/movement admission pass with0page/HTTP failures. Root views her public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/sabine-release/live/`.
+
+## Renate Termin: mature painted street family
+
+Only `stadt-renate-termin` changes from accepted public782108f8. All42other
+registry records, police, simulation and concurrent performance/Berghain work
+remain exact. Spiky red hair, plum vest, cream turtleneck, full teal trousers,
+burgundy shoes and anatomical-right yellow ticket retain her own sturdy adult
+identity at2.33world units; empty LEFT remains her gesture hand.
+
+Eight genuine painted headings provide364selected cells in21x18, four16phase
+walks, all64phase stops, eight turn anchors and seven existing actions. Own
+source sole fit9.1665856247565 drives cadence. All276visible mouth poses retain
+closed pixels/alpha exactly at both native densities; rear lips remain null.
+Existing three recordings, captions, cues, routes and collision stay unchanged.
+Movement uses16,220,160/7,208,960 decoded bytes, reactions1,474,560/655,360.
+
+The author reproduces all nine selected outputs/person from own source and
+checks every364encoded frame at both densities, three-profile media/body,
+legal routes, action resume, failures and disposal. Earlier off-sidewalk action
+fixtures triggered an intended police modal; their failures are retained beside
+the corrected legal-observer passes. Root binds44exact worker files/person,
+17evidence reports,10unchanged rebuild dependencies, three original imagegen
+outputs/three receipts/nine portable references and the exact quarter request.
+All200focused integrated Node checks pass. Two native tests cover eight contact
+cases and16protected gesture phases. Actual packaging retains all nine runtime
+files byte-exact and omits three offline paints without altering originals.
+
+Both independent reviewers preserve all61pins. Physics independently re-renders
+six source phases/twelve native cells byte-exactly and checks all728native cells.
+Actual own sole patches oppose motion. Fresh desktop RIGHT/portrait LEFT each
+travel23.5667legal units,16phases, zero stationary gait/90tick pause drift;
+observed9.1unit wraps differ by less than one sample from9.1666. Seven desktop
+actions finish/resume/release their actual owner and reaction packet. Blocked
+movement holds44samples with zero illegal/stationary gait. Natural horizontal
+and explicitly staged vertical floor probes affect at most one boundary raster
+row, with complete visible boots; this is bounded fringe acceptance.
+
+Camera passes desktop/portrait common-ground scale beside Sandales/Soder,
+loaded car/door, two-way opaque depth and one-request standing404 fallback.
+The actual10pose whole-body turn spans240RAF/4.8732s, median16.5ms including PNG
+capture; head, vest, hips, knees, boots and RIGHT ticket stay coherent. Root
+inspects current turn, native contacts, clear desktop/portrait references and
+depth frames and accepts these affected scopes. A brief final Physics crop
+overlap ended before turn timing; timings are diagnostic, not performance
+certification. Staged scenes do not establish natural startup/E/input traversal,
+physical Android or perceptual listening.
+
+Frozen reports and commit/deployment receipts: `output/renate-release/`.
+Acceptance authorizes immediate sequential publication. Public assets/entries/
+actual own paint are verified after successful deployment. Remaining outdoor
+characters continue under the shared style goal.

@@ -1,0 +1,14 @@
+{
+  "actor": "stadt-renate-termin",
+  "tool": "built-in image_gen.imagegen",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1690f-63bc-73b2-932e-20527b19df07\\exec-bea9d58e-fff0-4c28-bda6-b47ab98ecf3c.png",
+  "file": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-diagonals-v1.png",
+  "sha256": "ea87ce0db819158d027a178f160f58a84c7c92e50055409aa1a5f75c757cf57b",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "requestFile": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/quarter-generation-request.json",
+  "requestSha256": "775db13a6167965d263fe00af70310b7ca4ed39ce7470d230565c4c8feb9c451",
+  "status": "Unselected adult source; native/runtime gates pending."
+}

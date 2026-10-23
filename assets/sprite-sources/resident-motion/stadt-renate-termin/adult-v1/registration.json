@@ -1,0 +1,366 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-renate-termin",
+  "sourceHashes": {
+    "stadt-renate-termin-expressionist-directions-v1.png": "51fffb4e38c3a35b403b7bdfd21122f3cc769bc596ef10ba5a26602eb2fb8a55",
+    "stadt-renate-termin-expressionist-diagonals-v1.png": "ea87ce0db819158d027a178f160f58a84c7c92e50055409aa1a5f75c757cf57b"
+  },
+  "frontAlpha20Height": 859,
+  "oneFamilyScale": 0.46565774155995343,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        115,
+        14,
+        483,
+        873
+      ],
+      "sourcePivot": [
+        295.25,
+        873
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 201.0,
+          "bounds": [
+            142,
+            783,
+            260,
+            873
+          ],
+          "pixels": 7908
+        },
+        {
+          "x": 389.5,
+          "bounds": [
+            326,
+            783,
+            453,
+            873
+          ],
+          "pixels": 8267
+        }
+      ],
+      "workingOrigin": [
+        118.51455180442375,
+        65.48079161816065
+      ],
+      "workingBoundsAlpha20": [
+        172,
+        73,
+        344,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/down.png",
+      "registeredSha256": "cbc1046ce1e98b861c1737fdad5ac9fd15f5c4355de24797df2c8d025610a1ee"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        109,
+        12,
+        460,
+        878
+      ],
+      "sourcePivot": [
+        289.0,
+        878
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 196.0,
+          "bounds": [
+            144,
+            788,
+            248,
+            878
+          ],
+          "pixels": 7800
+        },
+        {
+          "x": 382.0,
+          "bounds": [
+            304,
+            788,
+            460,
+            854
+          ],
+          "pixels": 8166
+        }
+      ],
+      "workingOrigin": [
+        121.42491268917345,
+        63.15250291036091
+      ],
+      "workingBoundsAlpha20": [
+        172,
+        69,
+        336,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/front-right.png",
+      "registeredSha256": "d0c64b6f07e8ac369e81fcc84739691f3347f1b0f3025404ca60c66f40827d52"
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        576,
+        17,
+        793,
+        873
+      ],
+      "sourcePivot": [
+        692.0,
+        873
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 692.0,
+          "bounds": [
+            599,
+            783,
+            785,
+            873
+          ],
+          "pixels": 13762
+        }
+      ],
+      "workingOrigin": [
+        -66.23515715948776,
+        65.48079161816065
+      ],
+      "workingBoundsAlpha20": [
+        202,
+        74,
+        304,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/right.png",
+      "registeredSha256": "b1990af5a23357a29e21bbb90441a597c5b99f39122e1a1be7c703b508fae9ed"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        525,
+        12,
+        838,
+        871
+      ],
+      "sourcePivot": [
+        696.0,
+        871
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 696.0,
+          "bounds": [
+            555,
+            781,
+            837,
+            871
+          ],
+          "pixels": 18509
+        }
+      ],
+      "workingOrigin": [
+        -68.09778812572756,
+        66.41210710128058
+      ],
+      "workingBoundsAlpha20": [
+        177,
+        73,
+        322,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/rear-right.png",
+      "registeredSha256": "68f6cf2100a40e4507d084e21c53c72fbea04d6278a69262a48181ae788c7f79"
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        915,
+        14,
+        1286,
+        872
+      ],
+      "sourcePivot": [
+        1100.75,
+        872
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1014.5,
+          "bounds": [
+            956,
+            782,
+            1073,
+            872
+          ],
+          "pixels": 7890
+        },
+        {
+          "x": 1187.0,
+          "bounds": [
+            1127,
+            782,
+            1247,
+            872
+          ],
+          "pixels": 8112
+        }
+      ],
+      "workingOrigin": [
+        -256.5727590221187,
+        65.94644935972059
+      ],
+      "workingBoundsAlpha20": [
+        170,
+        73,
+        342,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/up.png",
+      "registeredSha256": "aa507ebf80cf64adeeb1fae92bba5d93c0514c2a33fea556bba489fc2ebe5013"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        941,
+        11,
+        1258,
+        873
+      ],
+      "sourcePivot": [
+        1109.25,
+        873
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1040.5,
+          "bounds": [
+            962,
+            783,
+            1119,
+            873
+          ],
+          "pixels": 10855
+        },
+        {
+          "x": 1178.0,
+          "bounds": [
+            1115,
+            783,
+            1241,
+            853
+          ],
+          "pixels": 7193
+        }
+      ],
+      "workingOrigin": [
+        -260.53084982537837,
+        65.48079161816065
+      ],
+      "workingBoundsAlpha20": [
+        178,
+        71,
+        326,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/rear-left.png",
+      "registeredSha256": "a5f1e69668e7e652c2d82c938235996249b5a57f8923f02b0b613ff954712f83"
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1387,
+        13,
+        1613,
+        874
+      ],
+      "sourcePivot": [
+        1491.0,
+        874
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1491.0,
+          "bounds": [
+            1393,
+            784,
+            1589,
+            874
+          ],
+          "pixels": 14301
+        }
+      ],
+      "workingOrigin": [
+        -438.29569266589056,
+        65.01513387660071
+      ],
+      "workingBoundsAlpha20": [
+        208,
+        72,
+        313,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/left.png",
+      "registeredSha256": "19e25dd0f56714193a0ea5bae1267c719ca7dd2fc67ff8f33aea7f7ef0263c11"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1331,
+        10,
+        1666,
+        879
+      ],
+      "sourcePivot": [
+        1491.5,
+        879
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1411.0,
+          "bounds": [
+            1331,
+            789,
+            1491,
+            849
+          ],
+          "pixels": 7744
+        },
+        {
+          "x": 1572.0,
+          "bounds": [
+            1506,
+            789,
+            1638,
+            879
+          ],
+          "pixels": 9009
+        }
+      ],
+      "workingOrigin": [
+        -438.5285215366705,
+        62.686845168800915
+      ],
+      "workingBoundsAlpha20": [
+        181,
+        68,
+        338,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-renate-termin/adult-v1/registered/front-left.png",
+      "registeredSha256": "ef6eacf7ac991c2d2b5659c3bc6d63bf69b70d85d2ffd5e5bfabc1192858e438"
+    }
+  }
+}

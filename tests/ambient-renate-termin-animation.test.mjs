@@ -11,10 +11,10 @@ const asset=path=>readFileSync(path.replace(/^\.\//,''));
 registerStreetCharacterManifest(manifest);
 const context=vm.createContext({});vm.runInContext(readFileSync('character-interactions.js','utf8'),context);
 
-test('named Renate keeps her own standing scale and gains phase-owned stops and a free-hand gesture',()=>{
+test('adult Renate retains phase-owned stops and her free-left-hand gesture',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
- assert.equal(p.standing.sha256,'555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da');
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.standing.sha256,'0ad1bd3c5a0b581e5d4e2d066f6a6eee6533c1d9398da01d90a0db45f7936acf');
  assert.equal(hash(asset(p.standing.file)),p.standing.sha256);
  assert(p.strideDistance>0&&Number.isFinite(p.strideDistance));
  const stopSlots=new Set();

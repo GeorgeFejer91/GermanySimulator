@@ -1,0 +1,522 @@
+{
+  "status": "source-candidate-unapproved",
+  "actor": "stadt-renate-termin",
+  "tool": "built-in image_gen.imagegen; exactly one job for this actor; transparent_background=true",
+  "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator resident RENATE TERMIN, candidate for later source review only, no action sheet. Images 1 and 2 are PRIMARY mature painterly Berlin finish and adult head/torso/limb reference (Sabine Krueger and Hartmut Keller); image 3 is SECONDARY adult woman whole-body painterly reference (Brigitte Mueller). Images 4 and 5 show RENATE'S OWN vivid character identity, wardrobe, appointment card and physical hand ownership ONLY; do not carry over their giant head, tiny torso or stubby legs. Preserve this particular middle-aged, sturdily built, assertive woman with vivid cropped spiky RED hair, sharp dark brows, pearl/silver round earrings, small wary adult eyes, furrowed individual angular face and unsmiling impatient expression. Wear her plum/wine quilted sleeveless zip vest over thick pale cream ribbed turtleneck sweater with long complete sleeves, deep dark TEAL work trousers and broad worn BURGUNDY low walking shoes. Exactly one tiny plain pale YELLOW appointment card in her ANATOMICAL RIGHT hand (screen left), held down at hip/upper-thigh level away from mouth; her ANATOMICAL LEFT hand (screen right) hangs free and fully visible for later gestures. Planted front-facing neutral with connected adult shoulders, elbows, hands/fingers, complete thighs, knees, shins, ankles and both substantial entire shoes. Keep her sturdy build and recognizable hair, but use adult stature and believable long limbs like references 1-3. Give her clearly visible natural CLOSED lips with readable corners, not covered by card. Push strongly toward Disco Elysium meets Berlin: weathered asymmetrical angular face, expressive planes and broad irregular drybrush/oil patches that form fabric and flesh, muted plum, dirty ochre, petrol-teal and cool gray-green shadow; no glossy rounded toy volumes, no smooth vector gradients, no repeated geometric facet tiling or fine uniform noise. Exactly ONE centered isolated front figure occupying at most 82% of frame height and 72% width; maintain at least 65 pixels of real transparent margin over spiky hair, under both soles and around hands/props. TRUE RGBA transparency, no background, floor, cast shadow, halo, glow, text, logo, watermark, second figure, pose sheet, alternate view or action pose.",
+  "references": [
+    {
+      "role": "primary mature Berlin painterly finish and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+    },
+    {
+      "role": "primary mature Berlin painterly finish and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+    },
+    {
+      "role": "secondary adult woman front body and painterly limbs",
+      "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+      "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+    },
+    {
+      "role": "Renate own red hair, plum vest, teal trousers, right-hand ticket; prior miniature anatomy rejected",
+      "path": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+      "sha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+    },
+    {
+      "role": "Renate canonical standing identity/colors, not adult proportion authority",
+      "path": "assets/characters/street/stadt-renate-termin-standing.webp",
+      "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da"
+    }
+  ],
+  "generated_path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-428a34bd-3053-4f01-b0e3-e2acf938ef59.png",
+  "generated_sha256": "09a98c61e26cc84a465b1b40f139cb5af2952aea50408a22e09ee70ba45fe9c2",
+  "exact_copied_path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-renate-termin-expressionist-standing-v1.png",
+  "exact_copied_sha256": "09a98c61e26cc84a465b1b40f139cb5af2952aea50408a22e09ee70ba45fe9c2",
+  "exact_bytes_match": true,
+  "mode": "RGBA",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "matte": {
+    "1": {
+      "pixels": 557003,
+      "bounds_xyxy_exclusive": [
+        0,
+        17,
+        1014,
+        1504
+      ],
+      "components": 224,
+      "largest_components": [
+        {
+          "pixels": 556673,
+          "bounds_xyxy_exclusive": [
+            225,
+            20,
+            808,
+            1504
+          ]
+        },
+        {
+          "pixels": 20,
+          "bounds_xyxy_exclusive": [
+            897,
+            1281,
+            902,
+            1288
+          ]
+        },
+        {
+          "pixels": 14,
+          "bounds_xyxy_exclusive": [
+            871,
+            1060,
+            874,
+            1072
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            969,
+            193,
+            970,
+            200
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            547,
+            1426,
+            550,
+            1430
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            913,
+            1042,
+            914,
+            1048
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            875,
+            1059,
+            876,
+            1065
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            985,
+            115,
+            986,
+            120
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 5,
+        "right": 0
+      }
+    },
+    "8": {
+      "pixels": 538677,
+      "bounds_xyxy_exclusive": [
+        228,
+        24,
+        805,
+        1497
+      ],
+      "components": 13,
+      "largest_components": [
+        {
+          "pixels": 538657,
+          "bounds_xyxy_exclusive": [
+            228,
+            24,
+            805,
+            1497
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            718,
+            821,
+            719,
+            826
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            715,
+            821,
+            716,
+            824
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            404,
+            221,
+            405,
+            224
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            726,
+            885,
+            727,
+            886
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            718,
+            827,
+            719,
+            828
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            719,
+            831,
+            720,
+            832
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            744,
+            865,
+            745,
+            866
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "20": {
+      "pixels": 536982,
+      "bounds_xyxy_exclusive": [
+        229,
+        24,
+        805,
+        1497
+      ],
+      "components": 4,
+      "largest_components": [
+        {
+          "pixels": 536979,
+          "bounds_xyxy_exclusive": [
+            229,
+            24,
+            805,
+            1497
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            630,
+            175,
+            631,
+            176
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            640,
+            161,
+            641,
+            162
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            508,
+            35,
+            509,
+            36
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "64": {
+      "pixels": 534547,
+      "bounds_xyxy_exclusive": [
+        229,
+        25,
+        805,
+        1496
+      ],
+      "components": 5,
+      "largest_components": [
+        {
+          "pixels": 534542,
+          "bounds_xyxy_exclusive": [
+            229,
+            25,
+            805,
+            1496
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            392,
+            186,
+            393,
+            188
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            392,
+            119,
+            393,
+            120
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            422,
+            69,
+            423,
+            70
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            622,
+            67,
+            623,
+            68
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "128": {
+      "pixels": 532159,
+      "bounds_xyxy_exclusive": [
+        229,
+        26,
+        804,
+        1496
+      ],
+      "components": 5,
+      "largest_components": [
+        {
+          "pixels": 532152,
+          "bounds_xyxy_exclusive": [
+            229,
+            26,
+            804,
+            1496
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            586,
+            47,
+            588,
+            51
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            625,
+            83,
+            626,
+            84
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            604,
+            61,
+            605,
+            62
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            623,
+            82,
+            624,
+            83
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "250": {
+      "pixels": 514731,
+      "bounds_xyxy_exclusive": [
+        231,
+        34,
+        803,
+        1495
+      ],
+      "components": 274,
+      "largest_components": [
+        {
+          "pixels": 514307,
+          "bounds_xyxy_exclusive": [
+            232,
+            34,
+            802,
+            1494
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            721,
+            856,
+            722,
+            864
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            776,
+            1449,
+            777,
+            1456
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            478,
+            1123,
+            479,
+            1129
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            715,
+            1493,
+            721,
+            1494
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            475,
+            1197,
+            476,
+            1202
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            479,
+            1355,
+            480,
+            1360
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            715,
+            1117,
+            716,
+            1122
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "opaque_128_margins_pixels": {
+    "left": 229,
+    "top": 26,
+    "right": 220,
+    "bottom": 40
+  },
+  "composites": [
+    "output/street-redesign/animated-adult-neutrals-batch3/stadt-renate-termin-on-light.png",
+    "output/street-redesign/animated-adult-neutrals-batch3/stadt-renate-termin-on-dark.png"
+  ],
+  "visual_review": {
+    "style": "Distinct spiky red hair, assertive worn face and large irregular teal/plum brush planes. Quilted vest grid remains part of her outfit; check it does not read as uniform generated facets at gameplay size.",
+    "anatomy": "Substantial connected adult shoulders, sleeves, hands, long trouser legs and complete burgundy walking shoes; sturdy individual build remains.",
+    "identity_handedness": "Plum quilted vest, cream turtleneck, dark teal trousers and burgundy shoes preserved. One pale-yellow ticket in anatomical RIGHT (screen left); LEFT free.",
+    "mouth": "Closed unobstructed lip crease and corners visible above low ticket.",
+    "holds": [
+      "Unapproved source only; no existing walk, turn, free-hand gesture, mouth or recording capability replaced or tested.",
+      "Native figure fit, alpha cleanup and source-to-action identity still need root approval.",
+      "Alpha>=128 margins are {'left': 229, 'top': 26, 'right': 220, 'bottom': 40} pixels; the generated image did not meet the prompt's >=65 px vertical margin, so root must assess native cell gutters and may need canvas padding on a derived export while keeping this source immutable.",
+      "Very weak alpha>=1 flecks touch image edges: {'top': 0, 'bottom': 0, 'left': 5, 'right': 0}; do not treat raw alpha support as a clean export matte."
+    ],
+    "light_dark": "Inspected both actual composites: clear cutout without visible backdrop, floor, cast shadow or broad halo. Low-alpha detached flecks remain a numerical cleanup concern."
+  }
+}

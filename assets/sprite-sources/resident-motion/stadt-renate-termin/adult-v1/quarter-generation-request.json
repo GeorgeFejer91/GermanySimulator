@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "prompt": "Use case: stylized-concept. Create ONE horizontal sheet of exactly FOUR complete independent whole-body painted views of RENATE TERMIN, the SAME mature sturdy middle-aged Berlin woman in the supplied own cardinal reference. Exact left-to-right views: FRONT-RIGHT three-quarter at 45 degrees; REAR-RIGHT three-quarter at 135 degrees; REAR-LEFT three-quarter at 225 degrees; FRONT-LEFT three-quarter at 315 degrees. Rotate the WHOLE body: shoulders, vest zipper/hem, pelvis, trouser legs and both shoe toes, as well as head. These are genuine diagonal intermediate anchors between the cardinal reference views, not profile bodies with rotated heads. Match the reference crown-to-sole size and adult head/torso/limb lengths across all four, shared level sole baseline, connected shoulders/elbows/hands/thighs/knees/ankles and complete practical shoes. Preserve vivid short spiky red pixie hair, stern arched brows and tired angular mature face, round pearl earrings, wine/plum quilted sleeveless zipper vest, pale cream ribbed turtleneck and sleeves, full-length dark petrol-teal trousers, worn burgundy lace-up shoes. Exactly ONE small pale YELLOW appointment ticket in her ANATOMICAL RIGHT hand at upper-thigh height, with natural far-arm occlusion. Her ANATOMICAL LEFT hand is empty and hangs naturally. Front-right shows the near anatomical RIGHT ticket hand; front-left shows the near EMPTY LEFT hand, with far RIGHT ticket allowed partly occluded. Rear views show rear hair/vest and no face; right-hand ownership stays anatomical and no mirroring. Closed natural lips on the two visible front-quarter faces, unobstructed by card. Match the supplied broad irregular mature painterly oil/dry-brush finish, weathered worn Berlin adult cartoon features, subdued plum/petrol/cream, no glossy toy look, no tiny limbs or giant child head. Quiet planted neutral standing, no walking/action pose. Four figures only, all equal height, generous real transparent margins and gaps at least60pixels, all hair/fingers/tickets/soles fully in frame. True RGBA transparent background, no floor, cast shadow, backdrop, halo, text, labels, logos, floating scraps, extra props or extra figures.",
+  "referenced_image_paths": [
+    "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-renate-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-renate-termin-expressionist-directions-v1.png"
+  ],
+  "transparent_background": true,
+  "references": [
+    {
+      "role": "binding own adult identity, cardinal whole-body anatomy, costume and RIGHT ticket",
+      "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-renate-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-renate-termin-expressionist-directions-v1.png",
+      "sha256": "51fffb4e38c3a35b403b7bdfd21122f3cc769bc596ef10ba5a26602eb2fb8a55"
+    }
+  ]
+}
