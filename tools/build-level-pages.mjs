@@ -42,6 +42,16 @@ export function buildLevelPages(root, output) {
   mkdirSync(output,{recursive:true});
   for (const entry of readdirSync(root,{withFileTypes:true})) {
     if (entry.name.startsWith('.') || ['output','node_modules','tests','tools'].includes(entry.name)) continue;
+    if (entry.name==='berghain') {
+      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','For-AI/SOURCES.md']) {
+        const source=join(root,entry.name,path);
+        if (!existsSync(source)) continue;
+        const destination=join(output,entry.name,path);
+        mkdirSync(resolve(destination,'..'),{recursive:true});
+        cpSync(source,destination);
+      }
+      continue;
+    }
     cpSync(join(root,entry.name),join(output,entry.name),{recursive:true});
   }
   const levels = levelLinks(createRequire(import.meta.url)(resolve(root,'building-catalogue.js')).catalogue);
