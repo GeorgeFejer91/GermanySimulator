@@ -53,6 +53,7 @@ export default {
   sourceFiles: () => ['geheim/index.html', 'berghain/model.html', 'berghain/viewer.mjs', 'berghain/viewer.css',
     'berghain/walkthrough.mjs', 'berghain/navigation.mjs', 'assets/models/berghain/avatar.mjs',
     'assets/models/berghain/model.mjs', 'assets/models/berghain/layout.mjs', 'assets/models/berghain/interior-fixtures.mjs', 'level-transitions.js',
+    'assets/models/berghain/speaker-geometries.mjs','assets/models/berghain/sound-system.mjs',
     'assets/models/berghain/berghain-study.glb'].map(path => ({path,
       sha256: createHash('sha256').update(readFileSync(new URL('../' + path, import.meta.url))).digest('hex')})),
   scenarios: [

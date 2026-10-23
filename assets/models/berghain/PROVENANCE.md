@@ -76,6 +76,23 @@ brand-label texture. This does not establish the current sound system, named
 artworks, missing upper lounge or measured room layout. The named artworks and
 unmodelled rooms remain required in `berghain/For-AI/INTERIOR.md`.
 
+## Main-hall sound-equipment candidate
+
+Original speaker geometry uses the product envelopes in manufacturer drawings
+S07–S10. Cabinet walls, flares, phase plugs, ports and handling/connector details
+are reconstructed here; internal acoustic geometry is approximate. Component
+dimensions survive as metre-based metadata in GLB root extras. No manufacturer
+CAD, PDF image, product photograph, logo or audio recording is embedded.
+
+The 44-component arrangement follows community report S05, repeated by blog S06;
+those are one component-information chain. Later S11 supports the bass counts
+but contains conflicting identifiers and a changed overhead-activation claim.
+Four triple-F218/twin-Evo stacks, two satellites and a six-F124 wall replace the
+former flat-horn black boxes. Placement, colour, mounting detail and continued
+presence are inferred. The two old suspended DS210/DS15 assemblies and actual
+Panorama Studt rig remain required work. This is no acoustical simulation or
+verified current installation inventory.
+
 ## Original material maps
 
 `berghain/build-materials.py` generates four tileable families (mineral, stone,

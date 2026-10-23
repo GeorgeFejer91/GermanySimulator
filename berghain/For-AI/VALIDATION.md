@@ -419,3 +419,54 @@ the calibrated candidate above supersedes that geometry. The extraction alone
 did not establish walking, collider, physical Android, measured-interior or
 texture fidelity. The official data is generalised LoD2, not a new building
 survey; source part footprint date is 2023-03-11.
+
+## Reported main-hall speaker equipment — accepted scoped candidate
+
+2026-10-23. Frozen contract: `output/berghain-speaker-candidate.json`,33 files,
+base `83cac59dc3c5fb550db47ce38a42b14c785ed639`. Concurrent exterior/landscape
+changes were preserved in the primary checkout. The original speaker candidate
+was recovered in `output/berghain-speaker-release`, where all33 SHA-256 hashes
+match, including GLB `0fdcdeb142fffdfa1d6e1c226e7cacd1a64db51b3d4b42b00cbc0c7981a98583`.
+No primary index/reset/revert operation was used. The unchanged shared door
+module's extra trailing blank line is excluded from publication.
+
+Editable/native asset:44 components,66 mesh/material groups,130,256 triangles,
+16,643,096 bytes,12 existing embedded original maps; exterior bounds unchanged.
+Twelve F218 MkII, sixteen Evo6EL, ten Evo6EH and six F124 replace generic boxes.
+The four component envelopes match inspected manufacturer drawings S07–S10;
+reported arrangement is S05, repeated in S06, with qualified later S11 evidence.
+Internal horn contours, finish, supports, anchors and currentness remain inferred.
+
+Executed on the isolated served source, silently in headless Chromium151:
+
+| Evidence | Result and scope |
+| --- | --- |
+| Six Node suites: model, fixtures, materials, survey, walkthrough, sound-system |32/32 PASS. Full-body collision/aisle, exact component envelopes, finite normals, hollow apertures, transformed visible/collision agreement, stairs, packaging and export. |
+| `output/berghain-speaker-release-browser/report.json` |7/7 PASS: source/native GLB and avatar near equipment on desktop, Android portrait/landscape emulation;320px/200% text and Pretext labels. All reported source hashes match the frozen release. |
+| `output/berghain-speaker-isolated-entry-browser/report.json` |4/4 PASS: natural keyboard/touch approach, proximity action, hinged door entry/exit, cancelled crossing, layout and lifecycle. Suite and served root both isolated. |
+| `output/berghain-speaker-isolated-stairs-browser/report.json` |2/2 PASS: all three stairs up/down, desktop and Android portrait emulation. Hashes match isolated disk;14 unchanged texture/survey dependencies extend the33-file contract. |
+| `output/berghain-speaker-isolated-furniture-browser/report.json` |4/4 PASS: defining furniture compositions/native GLB and avatar at bar on desktop/Android portrait. Covers the shared native-asset helper extraction. |
+
+Independent read-only Physics reviewer: P1/P2/P4/P5/X1 PASS for this viewer.
+Fresh29/29 scoped tests;44 components/58 equipment solids;176 visible component
+surfaces fit transformed collision envelopes. No opposing same-assembly cabinet
+surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at6.65m;
+tilted towers sit2.68mm above their supports.70/70 shallow overlap starts recover
+legally; seven10m western-aisle lanes each have101/101 legal samples. Supplied
+matching rendered evidence shows body separation. P3 crowd/vehicles out of scope.
+
+Independent read-only Camera/scale reviewer: C1–C5/X1 PASS as adapted to the
+three-dimensional architectural viewer. Fresh32/32 tests; ray probes enter real
+horns .19–.69m; source/native depth persists, full1.80m avatar remains visible,
+and manufacturer cabinet size relates plausibly to it. Both reviewers confirm
+all33 hashes and all17 supplied browser cases. No required fix remains.
+
+Evidence limits: room selection is a diagnostic shortcut in speaker/furniture
+views; natural entrance and stairs are proved separately. Native GLB uses its
+explicit inspection renderer/lighting, so image brightness is not exact parity.
+No acoustic simulation/listening, physical Android/device-GPU test, city
+crowd/vehicle/sprite/fade test, or accurate current installation claim. Earlier
+moving-primary queue failure and diagonally sliding pilot are not acceptance
+evidence; the frozen release passes the original queue guard and head-on block.
+Retained overhead DS assemblies, Panorama Studt rig, named artworks and missing
+rooms remain unfinished. This accepts an equipment increment, not the full goal.

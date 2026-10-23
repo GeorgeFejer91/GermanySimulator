@@ -1,0 +1,35 @@
+export async function renderNativeAsset(page,view){
+  return page.evaluate(async({position,yaw,pitch=0})=>{
+    const THREE=await import('../assets/vendor/three/0.186.0/build/three.module.min.js');
+    const {GLTFLoader}=await import('../assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js');
+    const bytes=await(await fetch('../assets/models/berghain/berghain-study.glb')).arrayBuffer();
+    const gltf=await new GLTFLoader().parseAsync(bytes,'');
+    const metadata=gltf.scene.children[0]?.userData.fixtures?gltf.scene.children[0].userData:gltf.scene.userData;
+    if(!metadata.fixtures?.some(f=>f.id==='panorama-bar'))throw Error('Portable GLB is missing the fixture inventory');
+    const canvas=document.createElement('canvas');canvas.id='native-fixtures';
+    Object.assign(canvas.style,{position:'absolute',inset:'0',width:'100%',height:'100%'});
+    document.querySelector('#viewport').append(canvas);
+    const rect=canvas.getBoundingClientRect(),renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+    renderer.setPixelRatio(Math.min(1,Math.sqrt(1600000/(rect.width*rect.height))));renderer.setSize(rect.width,rect.height,false);
+    renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+    const scene=new THREE.Scene();scene.background=new THREE.Color('#b3b3a6');scene.add(gltf.scene);
+    scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
+    const sun=new THREE.DirectionalLight('#ffedcf',3);sun.position.set(-45,65,50);scene.add(sun);
+    const camera=new THREE.PerspectiveCamera(45,rect.width/rect.height,.08,500);
+    camera.position.set(position.x,position.y+1.68,position.z);camera.rotation.set(pitch,yaw,0,'YXZ');
+    renderer.render(scene,camera);
+    const bounds=new THREE.Box3().setFromObject(gltf.scene);let meshes=0;
+    gltf.scene.traverse(node=>{if(node.isMesh)meshes++;});
+    window.__disposeNativeAsset=()=>{
+      const materials=new Set(),geometries=new Set(),textures=new Set();
+      gltf.scene.traverse(node=>{if(node.isMesh){geometries.add(node.geometry);materials.add(node.material);}});
+      for(const material of materials){for(const key of ['map','normalMap','roughnessMap','metalnessMap'])if(material[key])textures.add(material[key]);material.dispose();}
+      for(const geometry of geometries)geometry.dispose();for(const texture of textures)texture.dispose();
+      renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
+    };
+    return {bytes:bytes.byteLength,meshes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,
+      min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
+  },view);
+}
+
+export async function disposeNativeAsset(page){await page.evaluate(()=>window.__disposeNativeAsset());}

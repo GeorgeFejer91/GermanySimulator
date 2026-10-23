@@ -57,9 +57,38 @@ a generic surrogate as an exact recreation.
 
 | Area | Established evidence | What remains unknown |
 | --- | --- | --- |
-| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | Contemporary cabinet models, exact count, orientation, mounting, subwoofer arrangement and room-relative positions. Current box stacks in the study are placeholders. |
+| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | The component candidate below replaces generic boxes. Installed revisions, current configuration, rigging and exact room coordinates remain unverified. |
 | Panorama Bar | Supplier S02 identifies Studt-Akustik PA. S01 distinguishes Funktion-One DJ monitors from the room PA. | Studt component identifiers, dimensions, hanging hardware, array count and placement; current DJ-monitor configuration. |
 | DS210 component reference | S04's actual manufacturer STEP dummy, DXF elevation and 2022 dimensioned sheet. **1.273 m wide × 0.631 m high × 0.741 m deep**, measured from the sheet, not guessed from a photo. | CAD not yet tessellated/rendered; this component reference does not prove a current Berghain installation. Manufacturer document and live webpage bandwidth values differ, irrelevant to the model's external dimensions but not silently reconciled. |
+
+### Reported main-hall component candidate
+
+S05 is the original community description behind S06's component list. Its
+thread title does not establish official status. The candidate models its
+reported four triple-F218 stacks with twin EL/EH/EL tops, two EH satellites and
+six F124 cabinets, **44 components** in total. S11's 2025 discussion is
+consistent about bass counts but includes conflicting model shorthand and
+claims the retained overhead DS210/DS15 are inactive. Those two suspended legacy
+assemblies remain unmodelled; no acoustic behaviour is simulated.
+
+| Component | Inspected manufacturer drawing: width × height × depth | Geometry status |
+| --- | --- | --- |
+| Evo 6EH | S07: .661 × .656 × .565 m; rear width .260 m | Tapered open cabinet, separate HF/mid-range flares and projecting phase plug; internal contours inferred. |
+| Evo 6EL | S08: .661 × .484 × .565 m; rear width .260 m | Tapered cabinet, recessed flare and open port plate; internal geometry inferred. |
+| F218 MkII | S09: 1.326 × .496 × .723 m | Hollow rectangular enclosure, twin flares, divider and perforated throat strips. |
+| F124 | S10: .702 × .992 × 1.056 m | Portrait-oriented open cabinet, deep flare, actual port openings and lower division. |
+
+Original parametric geometry is in `speaker-geometries.mjs`; `sound-system.mjs`
+assembles it in metres after calibration and replaces the generic main-hall
+stack/horn parts and collision together. Same instanced renderer and native GLB.
+Manufacturer envelopes are verified; installed component revisions, finish,
+guards, bracket details, inferred anchors/aiming and contemporary survival are
+not. The bass wall's position between the left towers follows dated narrative
+topology, not a measured plan. Full realistic-system acceptance remains open.
+
+All four downloaded technical PDFs remain in ignored research storage. Their
+URLs, dates and SHA-256 are in SOURCES.md. No manufacturer CAD, drawing image,
+photograph, logo or label texture is embedded in the shipped candidate.
 
 S04 acquisition, source links and SHA-256:
 
@@ -112,7 +141,7 @@ not evidence that these concrete sofas are timber or that all seating is alike.
 
 `assets/models/berghain/interior-fixtures.mjs` owns assembly metadata; the same
 geometry/materials are exported in the portable GLB. Original reference images
-remain research-only. Named artworks, actual current Funktion-One/Studt systems,
+remain research-only. Named artworks, verified current Funktion-One/Studt configuration,
 toilets/Klo Bar, extra lounge, Lab and verified inter-room relationships remain
 outstanding. A furniture pass does not satisfy full realistic-interior acceptance.
 
