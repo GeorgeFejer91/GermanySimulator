@@ -156,3 +156,15 @@ the new roofs, while existing internal floor levels stay provisional. Eye/body
 dimensions are not scaled. Source roof/annex surfaces themselves are retained
 without that approximation. Actual finer façade, roof, circulation and room
 measurements remain required for full accuracy.
+
+## Exterior site and envelope additions
+
+`landscape.mjs` and `exterior-details.mjs` add original instanced geometry before
+the existing calibration. Broad entrance paving/queue, planted screening and
+mesh service-edge observations follow P07–P10; SITE01/SITE02 establish dated
+garden use and described bamboo/mounds. Exact garden/site layout, plant species,
+rear decorative bays, membrane seams and sparse runoff marks remain inferred.
+They are not surveyed or photo-textured assets. Model/GLB extras retain sources
+and uncertainty. Low opaque planting and physical furniture share calibrated
+collision bounds; high leaf crowns are nonblocking above body height.
+The smoking bridge is explicitly omitted pending its attachment and endpoint.

@@ -1,8 +1,11 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures} from './interior-fixtures.mjs';
+import {addLandscape,landscapeMaterials} from './landscape.mjs';
+import {addExteriorDetails} from './exterior-details.mjs';
 import {addSoundSystem} from './sound-system.mjs';
 
 export const materials = {
+  ...landscapeMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -250,6 +253,8 @@ export const viewpoints = {
     confidence: 'Approximate layout', sources: ['I01']}
 };
 
+addLandscape(layout);
+addExteriorDetails(layout);
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
 addSoundSystem(layout);

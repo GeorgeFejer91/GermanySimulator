@@ -11,6 +11,7 @@ export function createWalkthrough() {
   door.opening.visible = false;
   const space = {floors: layout.floors, solids: []};
   const direction = new THREE.Vector3(), target = new THREE.Vector3(), origin = new THREE.Vector3(), lateral = new THREE.Vector3(), ray = new THREE.Raycaster();
+  const lowLandscape=layout.solids.filter(solid=>solid.renderPart?.section==='landscape'&&solid.y[1]>.5&&solid.y[1]<2.1);
   let travel = null, opened = false, heading = 0;
   function syncDoor(open) {
     opened = open; door.setOpen(Number(open)); door.group.updateMatrixWorld(true);
@@ -62,19 +63,27 @@ export function createWalkthrough() {
     camera(camera, position, yaw, pitch, model) {
       target.set(position.x, position.y + .95, position.z);
       if (camera.fov !== 60) { camera.fov = 60; camera.updateProjectionMatrix(); }
-      const elevation = THREE.MathUtils.clamp(.32 - pitch, -.15, 1.1), radius = 4.2;
-      direction.set(Math.sin(yaw) * Math.cos(elevation), Math.sin(elevation), Math.cos(yaw) * Math.cos(elevation));
+      const nearest=lowLandscape.reduce((distance,solid)=>position.y>=solid.y[1]?distance:Math.min(distance,Math.hypot(
+        Math.max(solid.x[0]-position.x,0,position.x-solid.x[1]),
+        Math.max(solid.z[0]-position.z,0,position.z-solid.z[1]))),Infinity);
+      const proximity=THREE.MathUtils.smoothstep(2-nearest,0,1.5);
+      const elevation = THREE.MathUtils.lerp(THREE.MathUtils.clamp(.32-pitch,-.15,1.1),1.35,proximity), radius = 4.2;
       model.updateMatrixWorld(true); door.group.updateMatrixWorld(true);
       // Give the camera a small envelope. A centre ray alone can pass through
       // the seam between closed leaves while most of the view is behind a door.
-      lateral.set(direction.z, 0, -direction.x).normalize().multiplyScalar(.16);
-      let distance = radius;
-      for (const x of [-1,0,1]) for (const y of [-1,0,1]) {
-        origin.copy(target).addScaledVector(lateral,x); origin.y += y * .16;
-        ray.set(origin, direction); ray.near = .04; ray.far = radius;
-        const hit = ray.intersectObjects([model, door.group], true).find(hit => hit.object.visible && !hit.object.material.transparent);
-        if (hit) distance = Math.min(distance, Math.max(.10, hit.distance - .18));
+      lateral.set(Math.cos(yaw),0,-Math.sin(yaw)).multiplyScalar(.16);
+      function clearance(angle) {
+        direction.set(Math.sin(yaw)*Math.cos(angle),Math.sin(angle),Math.cos(yaw)*Math.cos(angle));
+        let available=radius;
+        for (const x of [-1,0,1]) for (const y of [-1,0,1]) {
+          origin.copy(target).addScaledVector(lateral,x); origin.y += y * .16;
+          ray.set(origin,direction);ray.near=.04;ray.far=radius;
+          const hit=ray.intersectObjects([model,door.group],true).find(hit=>hit.object.visible&&!hit.object.material.transparent);
+          if(hit)available=Math.min(available,Math.max(.10,hit.distance-.18));
+        }
+        return available;
       }
+      const distance=clearance(elevation);
       camera.position.copy(target).addScaledVector(direction, distance); camera.lookAt(target);
       avatar.group.visible = distance > .65;
       return distance;

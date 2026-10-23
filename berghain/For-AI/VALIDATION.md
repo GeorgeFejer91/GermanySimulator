@@ -1,5 +1,93 @@
 # Berghain viewer validation
 
+## Exterior landscape and building refinement — 2026-10-23
+
+The exterior request was split among three scoped workers for landscaping,
+envelope details and reference research, with one integrator. Original geometry
+adds differentiated entrance cobbles/concrete paths, queue rails and bollards,
+drainage, a gated/fenced garden, planting beds, fourteen trees with undergrowth,
+bamboo, grassy mounds, seats, standing tables, a sheltered service counter and
+service cabinets. The Halle gains separate side/rear masonry bays, closed
+service doors and vents; the main building gains entrance reveals, drainage,
+coping, sparse mineral runoff and inferred roof membrane seams. P07–P10 support
+broad site forms; SITE01/SITE02 support seasonal garden use and described
+planting. Positions, species, furniture arrangements and unsurveyed details are
+explicitly inferred. The smoking bridge remains an unresolved modelling gap.
+
+The initial exterior-only freeze on `83cac59` had 47 files. The final
+combined freeze is `output/berghain-exterior-combined-candidate.json` with
+52 source, test and asset hashes on `ed0e0c25`. After the PA update landed on main, its published model/components were
+combined with this exterior delta. The final freeze is rooted at
+`output/berghain-exterior-combined-release` on public `ed0e0c25`.
+All original main-game changes and the accepted PA remain present.
+The combined release GLB is **18,588,552 bytes / 149,276 triangles / 85 groups**,
+SHA-256 `eed42cad4213d733ff2b66593a072b17db4a3cb56241a2c2736c5b22d80d7913`.
+Compared with the public base: +19,020 triangles and +1,945,468 export bytes.
+All twelve existing 512px original maps are unchanged (12 MiB base decoded RGBA,
+16 MiB with mipmaps; GPU/driver overhead additional). No new image, dependency,
+timer or animation loop. Viewing imports procedural modules; the GLB remains an
+explicit download/diagnostic request. The existing owner disposes geometry and
+materials; native diagnostic scenes explicitly dispose their resources.
+
+Local final evidence:
+
+- **42/42 combined Node checks PASS**, including whole-body entry/stair/garden routes,
+  visible collision bounds, official exterior proportions, portable materials,
+  hidden-page packaging and two regressions from independent review.
+- `output/berghain-exterior-publish-browser/report.json`: **8/8 PASS**, silent
+  Chromium desktop and Android portrait/landscape emulation, real mouse/keyboard
+  or CDP touch orbit/garden movement, front/rear/site views, native GLB views,
+  and diagnostic actual-camera/actor shrub-edge rendering. Each profile runs
+  315 actual RAF turn frames at .02 rad/step, retaining the visible avatar and
+  limiting camera movement to <.35m per sampled turn. Diagnostic placement is
+  separate from natural entrance evidence.
+- `output/berghain-exterior-publish-entry-browser/report.json`: **4/4 PASS**,
+  actual outside approach/E/entry/exit, touch, gait, interruption, graphics
+  recovery, idle cessation and narrow/enlarged text.
+- `output/berghain-exterior-combined-material-browser/report.json`: **4/4 PASS**, paired
+  source/GLB material rendering and usable texture-failure movement on all three
+  profiles. Geometry/camera-only final repairs preserve these material paths.
+
+Initial independent review correctly failed walk-through opaque shrubs and a
+subsequent discrete camera-elevation pop. Matching low-planting collision and a
+continuous proximity-based camera rise repaired them, with red-to-green tests.
+The camera keeps its actual opaque-mesh envelope check, now one nine-ray scan;
+it does not ignore plant geometry. High crowns remain nonblocking above people.
+Initial FAIL evidence stays in the two independent review reports under
+`output/berghain-exterior-{physics,camera}-review.md`.
+
+Both independent specialists also reviewed the combined 52-file freeze.
+Physics freshly confirmed all hashes and 37 scoped tests, retaining its
+independent body/solid audit. The unchanged exterior camera keeps its
+315 production-camera turn samples: maximum step **.01840m**, zero
+hidden-avatar samples; two fine-step walking approaches stayed continuous.
+Final rendered turns match these values on all three emulated profiles. No
+required Physics or Camera repair remains for this bounded exterior candidate.
+
+Source/fixture mismatches during isolated-test setup are preserved under the
+earlier release-before/entry reports. Correct-root suites and the immutable
+fax SVG dependency repaired the harness, without weakening assertions.
+Physical Android/GPU qualification, exhaustive paths and surveyed photographic
+fidelity remain NOT RUN/unresolved. Main-game missions/traffic/sprites and their
+root performance benchmark are out of scope; no root game runtime changes.
+Earlier pre-PA source-view diagnostics observed 101 → 132 overview draw calls and
+158,164 → 193,984 rendered triangles (including shadow passes), with no idle
+RAF activity or eager GLB. Host readiness timings are diagnostics, not a device
+performance or optimisation claim. The full reconstruction goal stays open.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
 2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
 
 ## Confirmed public deployment

@@ -1,10 +1,10 @@
 {
   "file": "berghain-study.glb",
-  "bytes": 16643096,
-  "sha256": "0fdcdeb142fffdfa1d6e1c226e7cacd1a64db51b3d4b42b00cbc0c7981a98583",
-  "triangles": 130256,
-  "meshes": 66,
-  "materials": 66,
+  "bytes": 18588552,
+  "sha256": "eed42cad4213d733ff2b66593a072b17db4a3cb56241a2c2736c5b22d80d7913",
+  "triangles": 149276,
+  "meshes": 85,
+  "materials": 85,
   "units": "metres",
   "textures": 12,
   "embeddedTextureBytes": 2754956,
@@ -16,7 +16,7 @@
     ],
     "max": [
       56.44208776950836,
-      22.80299949645996,
+      22.832150169168017,
       58.11853180779144
     ]
   },

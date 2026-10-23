@@ -10,6 +10,25 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+2026-10-23 exterior priority: George requests substantially more work on the
+outer building and parallel completion of its landscaping. Three scoped workers
+own landscape geometry, envelope details and source research. Codex owns hookup,
+portable export, sequential silent browser checks, independent Physics and
+Camera/scale acceptance, and scoped publication. Keep the surveyed exterior
+envelope, existing rooms, visitor dimensions and entrance route. Site planting,
+surface courses and furniture placement remain explicitly inferred. Plan:
+integrate both geometry modules; inspect front/rear/garden and real entry on
+desktop/Android emulation; verify collision/export/resource bounds; freeze and
+review one candidate; publish only the reviewed exterior delta while preserving
+other chats' unpublished sound/interior work. Full architectural completion
+remains open.
+
+
+
+
+
+
+
 - [x] Register the active goal and create this scoped workspace.
 - [x] Search the public web and GitHub for pre-existing models and references.
 - [x] Create the reviewed online resource catalogue, including source access and reuse status (90 entries).
@@ -69,6 +88,21 @@ observations; no photograph, graffiti or artwork is embedded. Re-export and
 review rendered elevations, collision bounds and existing walking paths.
 
 ## Handoff
+
+### Exterior landscape candidate
+
+The current exterior pass adds the planted industrial site, articulated garden,
+forecourt and queue, and richer Halle/entrance/roof-edge details. Low planting
+collision and a continuous camera rise preserve walking and readable turns.
+The final combined candidate preserves the published PA and adds this exterior
+work; see VALIDATION.md for exact export bytes and tests.
+Full architectural fidelity, the bridge and missing interiors remain open.
+
+
+
+
+
+
 
 ### Main-hall sound equipment update
 
