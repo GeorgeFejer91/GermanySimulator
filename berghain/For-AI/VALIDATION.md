@@ -4,7 +4,78 @@
 
 ## Confirmed public deployment
 
+### Source-derived furniture — accepted publication candidate
+
+2026-10-23: the 26-file SHA-256 freeze in
+`output/berghain-fixture-candidate.json` replaces generic foyer/Panorama boxes
+with 35 original furniture and lighting assemblies. Per-assembly source IDs,
+dimensions and uncertainty survive in the GLB extras. Historical photographic
+forms do not establish measured dimensions, exact placement or currentness.
+Named artwork, the actual current PA and missing rooms remain unfinished.
+
+Portable GLB: **10,461,748 bytes, 79,088 triangles, 51 mesh/material groups,
+12 embedded original maps**, SHA-256
+`9132e820a2ac0b72b510e369f9975a04600b587380f0ba185e3ef532ec08b45f`.
+The official exterior reference and model bounds are unchanged. Furniture uses
+shared instanced boxes, cylinders, rings and a genuinely perforated grille;
+no additional texture, decoder, dependency, renderer or animation loop.
+The larger GLB is fetched only for explicit export/native-asset inspection;
+normal startup continues to construct the shared procedural model.
+
+- Focused Node checks: **30/30 PASS** across fixtures, model, materials, survey,
+  walkthrough and level-page packaging tests. Checks include real grille-hole
+  ray traversal, visible-part collision bounds, bar/aisle legality and suspended
+  fixture headroom against every vertex of the actual animated avatar.
+- `output/berghain-fixture-clearance-browser/report.json`: **6/6 PASS** in silent
+  desktop and Android portrait/landscape emulation. Actual keyboard/touch
+  approaches show channel seats and stop at visible bar furniture. Separate
+  diagnostic room selection and native-GLB rendering establish fixture parity;
+  those shortcuts do not stand for natural entry.
+- `output/berghain-fixture-clearance-walkthrough/report.json`: **4/4 PASS** on
+  the same runtime hashes. Actual outside approach, continuous hinged-door
+  entry/exploration/exit, moving gait, refresh, touch, cancellation, narrow/200%
+  text, idle and graphics recovery remain covered.
+- `output/berghain-fixture-text-layout/report.json`: **1/1 PASS**, including
+  eight viewport/text-size combinations with the longer source-ID footer.
+
+Both independent read-only reviewers confirmed **26/26 frozen hashes** and
+fresh **23/23 scoped Node checks**, separately from supplied browser evidence.
+Physics **P1/P2/P4/P5/X1 PASS**: 39 direct solid/render bounds agree, 14 assembly
+proxies contain their parts, 92 shallow overlaps recover, and a separate sweep
+of all three stairs found no pendant overlap at 900 legal avatar positions.
+Camera/scale **C1–C5/X1 PASS**: current source/native/third-person images retain
+coherent room depth and visible stool, bar, seat, fixture and human scale.
+
+The review caught a foyer shade intersecting the avatar in one stair lane.
+Moving it clear and adding a 297-position actual-avatar regression repaired
+that contact. Panorama lenses were raised to **2.211 m** above the room floor,
+leaving **0.411 m** above the fixed 1.80 m avatar. The counter top is 1.13 m,
+stool top .77 m and channel-seat cushion .48 m; these are inferred model sizes.
+There are no remaining required fixes for this bounded candidate. Crowd P3 is
+out of scope. Physical Android, device GPU performance, exhaustive viewpoints
+and contemporary photographic accuracy remain **NOT RUN**. Publication and
+canonical URL verification are separate from these local acceptance results.
+
 ### Geheim avatar walkthrough — release candidate
+
+Runtime commit **`7517a173b798613319673b3113bea6d8d1c7be27`** was pushed to main,
+with parent `b31b4cb6b738a58ea46768be7ee122bded1aaa4b` retained. The working
+checkout's pre-existing index was not used. Immutable public snapshot:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/7517a173b798613319673b3113bea6d8d1c7be27/geheim/index.html
+(fresh browser: provider's Open the page prompt).
+`output/berghain-geheim-immutable-verification.json`: **37/37** published bytes
+match Git objects, including viewer, avatar, door module, GLB and1200×630 PNG.
+`output/berghain-geheim-immutable-open/report.json`: **2/2 PASS**, actual remote
+desktop and Android-portrait-emulated entry, exploration, exit and refresh.
+This verifies that snapshot. Canonical **https://germanysimulator.de/geheim/**
+is now live: combined main `daef7f9cc62db4420215e33651dd6a88808ce32a` retains
+this runtime; Pages run **39988132964 succeeded**. Earlier39985584152 was
+cancelled/superseded. `output/berghain-geheim-live-verification.json` passes
+37/37 published files, 33 ordinary routes, share image/metadata and six canonical,
+bare-path, custom root/3d and GitHub-short endpoint checks. Actual canonical
+desktop/Android-portrait entry/exploration/exit/refresh passes **2/2** in
+`output/berghain-geheim-canonical-browser/report.json`. Expected hashes came
+from the published Git objects; the local furniture candidate is newer.
 
 2026-10-23: `/geheim/` is generated from the existing viewer with optional
 third-person mode. Same model, navigation, renderer and assets; no new mission,
