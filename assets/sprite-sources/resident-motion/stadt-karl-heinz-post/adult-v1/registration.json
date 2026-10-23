@@ -1,0 +1,356 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-karl-heinz-post",
+  "sourceHashes": {
+    "stadt-karl-heinz-post-expressionist-directions-v1.png": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+    "stadt-karl-heinz-post-expressionist-diagonals-v1.png": "fd195ef3e1219c853818bbcd7a7daff195d7a0dc2acf464592ec732e9f66ea33"
+  },
+  "frontAlpha20Height": 768,
+  "oneFamilyScale": 0.5208333333333334,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        91,
+        14,
+        500,
+        782
+      ],
+      "sourcePivot": [
+        307.0,
+        782
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 210.5,
+          "bounds": [
+            141,
+            692,
+            280,
+            781
+          ],
+          "pixels": 9408
+        },
+        {
+          "x": 403.5,
+          "bounds": [
+            328,
+            692,
+            479,
+            782
+          ],
+          "pixels": 9646
+        }
+      ],
+      "workingOrigin": [
+        96.10416666666666,
+        64.70833333333331
+      ],
+      "workingBoundsAlpha20": [
+        144,
+        72,
+        357,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/down.png",
+      "registeredSha256": "75c1c5813d046daac048e080bcd1ba02b77d690051c0080a86c1b287bffdd899"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        133,
+        10,
+        484,
+        775
+      ],
+      "sourcePivot": [
+        307.75,
+        775
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 217.5,
+          "bounds": [
+            169,
+            685,
+            266,
+            775
+          ],
+          "pixels": 7603
+        },
+        {
+          "x": 398.0,
+          "bounds": [
+            312,
+            685,
+            484,
+            745
+          ],
+          "pixels": 8477
+        }
+      ],
+      "workingOrigin": [
+        95.71354166666666,
+        68.35416666666663
+      ],
+      "workingBoundsAlpha20": [
+        165,
+        74,
+        348,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/front-right.png",
+      "registeredSha256": "3d4d77ac41b34067846791a439ca1b50586b4ff3d3f0c72a78b4871f0d4eaca6"
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        649,
+        11,
+        911,
+        784
+      ],
+      "sourcePivot": [
+        785.0,
+        784
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 785.0,
+          "bounds": [
+            659,
+            694,
+            911,
+            784
+          ],
+          "pixels": 17957
+        }
+      ],
+      "workingOrigin": [
+        -152.85416666666669,
+        63.66666666666663
+      ],
+      "workingBoundsAlpha20": [
+        185,
+        70,
+        322,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/right.png",
+      "registeredSha256": "d1880f64cf747cfbaa9c7f733c3d01790ec0b439a2c9a19d0eca780424ea7400"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        613,
+        12,
+        927,
+        763
+      ],
+      "sourcePivot": [
+        786.0,
+        763
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 786.0,
+          "bounds": [
+            646,
+            673,
+            926,
+            763
+          ],
+          "pixels": 17932
+        }
+      ],
+      "workingOrigin": [
+        -153.37500000000006,
+        74.60416666666663
+      ],
+      "workingBoundsAlpha20": [
+        166,
+        81,
+        330,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/rear-right.png",
+      "registeredSha256": "c625b4a41fd85315d8a6aa86a98d42a5e0a76634d815f6585169097893d5e5bc"
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1037,
+        11,
+        1437,
+        781
+      ],
+      "sourcePivot": [
+        1236.0,
+        781
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1143.0,
+          "bounds": [
+            1076,
+            691,
+            1210,
+            780
+          ],
+          "pixels": 9162
+        },
+        {
+          "x": 1329.0,
+          "bounds": [
+            1260,
+            691,
+            1398,
+            781
+          ],
+          "pixels": 9606
+        }
+      ],
+      "workingOrigin": [
+        -387.75,
+        65.22916666666663
+      ],
+      "workingBoundsAlpha20": [
+        152,
+        71,
+        361,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/up.png",
+      "registeredSha256": "0da2c95e93c4f52ddf481b2986b51e14421cc861778783e9fdfac0794dab92fc"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1075,
+        16,
+        1407,
+        771
+      ],
+      "sourcePivot": [
+        1236.5,
+        771
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1153.0,
+          "bounds": [
+            1075,
+            681,
+            1231,
+            771
+          ],
+          "pixels": 10801
+        },
+        {
+          "x": 1320.0,
+          "bounds": [
+            1276,
+            681,
+            1364,
+            759
+          ],
+          "pixels": 5876
+        }
+      ],
+      "workingOrigin": [
+        -388.01041666666674,
+        70.43749999999994
+      ],
+      "workingBoundsAlpha20": [
+        172,
+        79,
+        345,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/rear-left.png",
+      "registeredSha256": "80d0a6bf7c92d6204878acd166444e9e75df538081049940f29c19fb4e10193b"
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1601,
+        12,
+        1866,
+        784
+      ],
+      "sourcePivot": [
+        1728.0,
+        784
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1728.0,
+          "bounds": [
+            1601,
+            694,
+            1855,
+            784
+          ],
+          "pixels": 18107
+        }
+      ],
+      "workingOrigin": [
+        -644.0000000000001,
+        63.66666666666663
+      ],
+      "workingBoundsAlpha20": [
+        190,
+        70,
+        328,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/left.png",
+      "registeredSha256": "49b7933beba4da7ac432b3c3c806b80a7860129144e0fbed7a7a826c24771fbb"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1544,
+        10,
+        1867,
+        776
+      ],
+      "sourcePivot": [
+        1692.5,
+        776
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1692.5,
+          "bounds": [
+            1544,
+            686,
+            1841,
+            776
+          ],
+          "pixels": 17963
+        }
+      ],
+      "workingOrigin": [
+        -625.5104166666667,
+        67.83333333333331
+      ],
+      "workingBoundsAlpha20": [
+        179,
+        73,
+        347,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/registered/front-left.png",
+      "registeredSha256": "65685eb91492fd36ccbe86fa87f874938d2b24dad07cc4a9c79f9f5d30644196"
+    }
+  }
+}

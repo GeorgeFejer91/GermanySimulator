@@ -13,10 +13,10 @@ const readAsset=path=>readFileSync(path.replace(/^\.\//,''));
 const scope=vm.createContext({});
 vm.runInContext(readFileSync('character-interactions.js','utf8'),scope);
 
-test('Karl-Heinz Post has owned phase stops and envelope emphasis without changing his published standing scale',()=>{
+test('Karl-Heinz Post has adult standing paint, owned phase stops and envelope emphasis',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
- assert.equal(p.standing.sha256,'6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877');
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.standing.sha256,'96dc1084803092008e1dddf2c33c4bc1c0b96827c5ce2f034e52f6775214a354');
  assert.equal(hash(readAsset(p.standing.file)),p.standing.sha256);
  assert(Number.isFinite(p.strideDistance)&&p.strideDistance>0);
  for(const [direction,walk] of Object.entries(p.atlasMotion.walks)){

@@ -1,0 +1,52 @@
+{
+  "status": "UNSELECTED OWN QUARTER SOURCE; ordered native review pending",
+  "tool": "built-in image_gen.imagegen",
+  "originalOutputPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16896-d44a-71a1-ad2e-44ca39c2b77a\\exec-faeaf57b-b8d1-4d20-b130-a31d225ad087.png",
+  "archivedSource": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+  "sourceSha256": "fd195ef3e1219c853818bbcd7a7daff195d7a0dc2acf464592ec732e9f66ea33",
+  "exactRequestFile": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/quarter-generation-request.json",
+  "exactRequestSha256": "d1ffaa07667528a268d43a5d038c6e3375213dc73301bad78a6f6c7f8163acb1",
+  "arguments": {
+    "prompt": "Create one transparent horizontal FOUR-FIGURE production sprite source sheet of the SAME mature Berlin man Karl-Heinz Post. FIRST reference is the binding whole-body four-cardinal painting: use exactly his adult head/neck/torso/arms/thighs/shins, stocky mature build, weathered face, tired eyes, dark moustache, brown-grey hair, navy flat cap, ochre work jacket with flap pockets, navy shirt and trousers, substantial grey-brown LACE-UP work boots. SECOND reference is his binding front identity detail only. Preserve the broad irregular painted brush planes and lived-in fabric, Disco Elysium meets Berlin, rather than a toy, glossy game mascot or speckle filter.\n\nThese FOUR poses are missing WHOLE-BODY intermediate standing turns, not head turns: left to right FRONT-RIGHT THREE QUARTER (45 degrees), REAR-RIGHT THREE QUARTER (135 degrees), REAR-LEFT THREE QUARTER (225 degrees), FRONT-LEFT THREE QUARTER (315 degrees). Each entire cap, skull, shoulders, chest, jacket pockets, pelvis, knees and both boots must rotate together in perspective. The two front quarters must be clearly halfway between the first reference's front and true profile: asymmetric shoulder widths, foreshortened far lapel and pocket, nearer arm separating from the torso, oblique belt, diagonal near/far boots and partial far cheek. Do not produce a frontal chest with only the head turned. Rear quarters show jacket back panel and only a natural sliver of profile face. Four distinct views, no duplicated front poses or mirrors.\n\nAnatomical LEFT hand owns exactly ONE modest bundle of white envelopes in all views; anatomical RIGHT hand stays EMPTY. The envelopes are front viewer-right and rear viewer-left; preserve physically correct near/far sleeve and envelope occlusion through the two side turns. Keep their existing low hip-level grip, never switch hands or duplicate the bundle. Both boots planted, natural slight foot separation, shoulders relaxed, lips closed when visible, no new action. Same crown-to-sole height, same head size, one consistent camera and standing registration across all four. Complete cap, hands, fingers, envelopes, toes and heels inside image. Four fully separate silhouettes, generous transparent gaps and 40px clear canvas margins, actual transparent RGBA background. No floor, contact shadow, vignette, lettering, labels, arrows, watermark, floating paint, red fringe or background.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-karl-heinz-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-karl-heinz-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-karl-heinz-post-expressionist-standing-v1.png"
+    ],
+    "transparent_background": true
+  },
+  "referenceHashes": {
+    "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+    "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424"
+  },
+  "dimensions": [
+    1983,
+    793
+  ],
+  "alpha20FigureBounds": [
+    [
+      133,
+      10,
+      484,
+      775
+    ],
+    [
+      613,
+      12,
+      927,
+      763
+    ],
+    [
+      1075,
+      16,
+      1407,
+      771
+    ],
+    [
+      1544,
+      10,
+      1867,
+      776
+    ]
+  ],
+  "sourceObservation": "Four distinct whole-body oblique views, adult proportions and cap/moustache/outfit maintained. Anatomical LEFT white envelopes and empty RIGHT hand preserved. Top/bottom source margins narrow; shared family registration must provide native transparent gutters. Whole torso/pelvis/boot orientation to be checked between cardinal anchors; no final animation approval."
+}

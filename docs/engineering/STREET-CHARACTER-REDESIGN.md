@@ -283,3 +283,63 @@ unchanged world matrices, natural E traversal, physical Android and perceived
 audio are not inferred from staged silent headless fixtures. Karl-Heinz,
 Sabine, Renate and all other unfinished outdoor characters remain under the
 same redesign goal with independent one-character implementation owners.
+
+
+## Karl-Heinz Post: complete adult painted family
+
+Only `stadt-karl-heinz-post` changes from public9c8427. The other42 registry
+records, including Heike/Gisela/Hannelore/Irmgard, all8police families and game
+simulation remain exact. Both separately published Berghain viewer updates are
+preserved. Root runtime edits only refresh cache tokens. His own navy cap,
+moustache, worn ochre jacket, navy trousers/rounded boots and anatomical-left
+white envelopes remain recognizable. Connected adult stature is2.33world units.
+
+The21×18 family retains364 selected cells: four16-phase walks,64phase-specific
+stops, eight whole-body turn anchors, seven original action names and276 fitted
+native-visible mouths. Existing rear/unsupported views stay explicitly null.
+The measured two-heading/two-density sole fit11.8784 selects11.88game units per
+cycle. Native pixel quantization range and hidden-sole limits are documented in
+the own `adult-v1/README.md`; no perfect full-sole traction claim is made.
+
+The initial vertical contact source was held after real native/scene shoe
+burial. An effective own planted-floor limb callback repairs100vertical cells
+per atlas without moving the runtime pivot, cropping shoes or editing shared
+helpers. Standing,194nonvertical cells and both reaction packs remain exact
+versus that held version. Original RED/failure/candidate evidence is retained
+in the worker's `held-vertical-floor-v1`. The eight encoded contact regressions
+pass, and the current selective delivery check is exact. Movement/reaction
+textures use the existing bounded lifetime; decoded movement16,220,160/
+7,208,960bytes and reactions1,474,560/655,360 remain below16MiB each.
+
+The author completed source/selected/mouth/delivery clean byte reproduction,
+all seven action completion/return paths, real three-profile recorded-mouth
+ownership and failure/retirement tests. Corrected three-profile actual material
+contact pairs preserve rounded boots; those18vertical/neutral comparisons are
+explicit UV staging, not a natural vertical route. Its initial impossible
+movement-filename wait on a revoked blobURL is preserved as a fixture failure;
+the final exact-network-hash/native-dimension successor passes.
+
+All126 integrated Node checks pass, including the incoming viewer/packaging
+checks, as do the own contact regression and delivery check. Independent Physics
+on frozen59paths verifies source-owned sole signs, real RIGHT/LEFT legal routes,
+all16phases, zero stationary gait and exact fixed-root pause; actual measured
+cycle11.9167 is within one simulation tick of11.88. Ground probes remove at most
+one boundary raster row. Independent Camera passes actual common-ground adult
+proportions beside Söder/Sandales/car/door, reversed opaque depth and generic
+pre-paint404. Fresh own240RAF turn capture (20.8msmedian with PNGoverhead) keeps
+head/torso/pelvis/boots/envelopes coherent. Root views the exact actual captures
+and accepts these affected scopes; both reviewers match all59pins before/after.
+
+Root narrowly merges one registry object and source closure. New legacy
+provenance records retain their original fields and receive canonical sha256
+alongside sourceSha256 where needed, without changing raw paint or prior public
+metadata. Exact source commands, immutable original person and source-generation
+requests/receipts are tracked; ignored output is evidence only.
+
+Reports and final commit/deployment receipts: `output/karl-release/`.
+This character is accepted for immediate sequential publication. Push/actual
+deployed root, compatibility entry and own paint admission remain separately
+verified; if CI coalesces another goal's later commit, bind the exact deployment
+revision and confirm it retains this accepted person. Natural E traversal,
+physical Android, perceptual listening and exhaustive unchanged world matrices
+remain unclaimed. Remaining outdoor cast continues under the same goal.
