@@ -1,6 +1,7 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
 import {addPanoramaServiceFixtures} from './panorama-services.mjs';
+import {addKloFixtures} from './klo-bar.mjs';
 
 export function createAcousticGrilleGeometry() {
   const plate=new THREE.Shape();
@@ -171,4 +172,5 @@ export function addInteriorFixtures(layout) {
       rod('hanger',[0,4.05,0],[0,suspensionHeight,0],.018,'steel');
     });
   addPanoramaServiceFixtures(layout,{fixture,box,cylinder,rod});
+  addKloFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision});
 }

@@ -6,11 +6,13 @@ import {addLandscape, landscapeMaterials} from './landscape.mjs';
 import {addExteriorDetails} from './exterior-details.mjs';
 import {addUpperLounge,addLoungeFurniture,loungeMaterials} from './upper-lounge.mjs';
 import {addPanoramaCeiling} from './panorama-services.mjs';
+import {addKloRooms,kloMaterials} from './klo-bar.mjs';
 
 export const materials = {
   ...landscapeMaterials,
   ...artworkMaterials,
   ...loungeMaterials,
+  ...kloMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -252,6 +254,10 @@ export const viewpoints = {
     confidence: 'Approximate layout; artwork study', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11', 'ART02', 'ART03', 'ART13']},
   lounge: {label:'Upper Panorama lounge',position:{x:-11.4,y:16.35,z:.8},yaw:Math.PI/2,
     confidence:'Photo-derived forms; layout estimated',sources:['A13','I16','I18','I19','I20']},
+  klo:{label:'Klo Bar',position:{x:-13,y:6.65,z:7.8},yaw:.25,
+    confidence:'Photo-derived forms; room placement estimated; Together figures missing',sources:['ART04','ART14','I19']},
+  toilets:{label:'Toilets',position:{x:-9,y:6.65,z:-4.2},yaw:1.08,pitch:-.08,
+    confidence:'Photographed fittings; floor, arrangement and dimensions estimated',sources:['I21']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
@@ -264,6 +270,7 @@ addLandscape(layout);
 addExteriorDetails(layout);
 addUpperLounge(layout,{box,floor,beam,railing,stair});
 addPanoramaCeiling(layout,{box});
+addKloRooms(layout,{box});
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
 addLoungeFurniture(layout);

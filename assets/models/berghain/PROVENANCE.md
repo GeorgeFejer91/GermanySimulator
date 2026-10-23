@@ -237,8 +237,27 @@ from its beams; visible radiator ribs, headers, feet, supply pipes and protrudin
 paired body solids, as do the low vertical conduits and their clamps.
 
 This adds no image inputs or texture families: the same18 original shared maps
-and existing instanced renderer/native GLB pipeline are used. Earlier switchgear
-bar/cabin photographs01/03/04/05 remain historical evidence because the architect
-documents a2010 bar redesign. They are not inserted beside the later counter as
-if both configurations were verified contemporary. Actual current retention,
+and existing instanced renderer/native GLB pipeline are used. Later ART04 wide
+installation photos identify switchgear views01/03/04/05 as Klo Bar, correcting
+the initial older-Panorama-counter interpretation. The2010 Panorama redesign
+does not establish that this separate bar was removed. Current retention,
 ceiling heights, service routes and exact counts/placement remain unresolved.
+
+## Klo Bar and sanitary architecture
+
+Original geometry based on ART04/ART14/I19 and architect's I21 toilet gallery:
+red enclosure, retained switchgear/mesh/staff gate, segmented glass display
+cases, splayed stools and glass-block back wall. Cases await the actual Together
+figure sequence; no substitute is presented as the completed sculpture. The
+artist documents9m of cola-flavoured sugar preserved with polyurethane,2013.
+No third-party photograph, mesh, artwork image or CAD is embedded.
+
+Four steel WC cubicles with two open doors, hollow steel pans, flush plates,
+paper holders, protected tube lights and a double-sided trough/core reconstruct
+observed sanitary forms. Stainless taps, exposed traps and caged lights/hand
+dryers use existing batching and the same18 original maps. I21 mixes2009/2013/
+2015 projects; individual floor/date assignment is unresolved. Floor6.65m,
+ceiling9.80m, western placement, room connections, counts, dimensions and
+currentness are estimated. This is a reconstructive study, not a measured
+current floor plan. Complete artwork, etched imagery and exact
+contemporary layout remain required by the full-building objective.

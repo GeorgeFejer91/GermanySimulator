@@ -4,7 +4,7 @@ import {surfaceFamilies} from './surface-data.mjs';
 const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
-  loungeLeather:'leather',loungePlum:'leather'};
+  loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];

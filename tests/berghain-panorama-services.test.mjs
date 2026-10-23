@@ -13,7 +13,7 @@ test('Panorama ceiling and services retain observed forms and estimated dimensio
   assert.match(room.confidence,/estimated/);
   assert.ok(room.ceilingHeight-room.floorHeight>=4.2&&room.ceilingHeight-room.floorHeight<=5);
   assert.ok(room.photoViews.includes(15)&&room.photoViews.includes(16));
-  assert.match(room.switchgearHistory,/not.*contemporary/i);
+  assert.match(room.switchgearHistory,/Klo Bar/);
 });
 
 test('the fitted ceiling blocks head penetration while preserving all actual viewpoints',()=>{

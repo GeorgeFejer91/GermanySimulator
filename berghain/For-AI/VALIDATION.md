@@ -87,9 +87,6 @@ performance or optimisation claim. The full reconstruction goal stays open.
 
 2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
 
-
-2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
-
 ## Confirmed public deployment
 
 ### Source-derived furniture — published snapshot, canonical update pending
@@ -200,7 +197,7 @@ remains unchanged. Interior art/equipment research remains a modelling backlog.
   cancellation, grounded adult bounds, complete gait-phase radial/height bounds,
   closed-door-seam camera clearance, existing stairs, export and static packaging.
 - `output/berghain-geheim-release-browser/report.json`: **4/4 PASS**, final human/camera
-  candidate in silent Chromium151 desktop and Android portrait/landscape
+  candidate in silent Chromium 151 desktop and Android portrait/landscape
   emulation. Real keyboard or CDP touch approaches the entrance from outside,
   enters with E/button, walks inside, exits through the same door, refreshes
   outdoors; crossing positions are sampled continuously. Desktop also covers
@@ -513,7 +510,7 @@ survey; source part footprint date is 2023-03-11.
 2026-10-23. Frozen contract: `output/berghain-speaker-candidate.json`,33 files,
 base `83cac59dc3c5fb550db47ce38a42b14c785ed639`. Concurrent exterior/landscape
 changes were preserved in the primary checkout. The original speaker candidate
-was recovered in `output/berghain-speaker-release`, where all 33 SHA-256 hashes
+was recovered in `output/berghain-speaker-release`, where all33 SHA-256 hashes
 match, including GLB `0fdcdeb142fffdfa1d6e1c226e7cacd1a64db51b3d4b42b00cbc0c7981a98583`.
 No primary index/reset/revert operation was used. The unchanged shared door
 module's extra trailing blank line is excluded from publication.
@@ -525,7 +522,7 @@ The four component envelopes match inspected manufacturer drawings S07–S10;
 reported arrangement is S05, repeated in S06, with qualified later S11 evidence.
 Internal horn contours, finish, supports, anchors and currentness remain inferred.
 
-Executed on the isolated served source, silently in headless Chromium151:
+Executed on the isolated served source, silently in headless Chromium 151:
 
 | Evidence | Result and scope |
 | --- | --- |
@@ -536,18 +533,18 @@ Executed on the isolated served source, silently in headless Chromium151:
 | `output/berghain-speaker-isolated-furniture-browser/report.json` |4/4 PASS: defining furniture compositions/native GLB and avatar at bar on desktop/Android portrait. Covers the shared native-asset helper extraction. |
 
 Independent read-only Physics reviewer: P1/P2/P4/P5/X1 PASS for this viewer.
-Fresh 29/29 scoped tests;44 components/58 equipment solids;176 visible component
+Fresh29/29 scoped tests;44 components/58 equipment solids;176 visible component
 surfaces fit transformed collision envelopes. No opposing same-assembly cabinet
-surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at 6.65 m;
-tilted towers sit 2.68 mm above their supports. 70/70 shallow overlap starts recover
-legally; seven 10 m western-aisle lanes each have 101/101 legal samples. Supplied
+surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at6.65m;
+tilted towers sit2.68mm above their supports.70/70 shallow overlap starts recover
+legally; seven10m western-aisle lanes each have101/101 legal samples. Supplied
 matching rendered evidence shows body separation. P3 crowd/vehicles out of scope.
 
 Independent read-only Camera/scale reviewer: C1–C5/X1 PASS as adapted to the
-three-dimensional architectural viewer. Fresh 32/32 tests; ray probes enter real
-horns .19–.69m; source/native depth persists, full 1.80 m avatar remains visible,
+three-dimensional architectural viewer. Fresh32/32 tests; ray probes enter real
+horns .19–.69m; source/native depth persists, full1.80m avatar remains visible,
 and manufacturer cabinet size relates plausibly to it. Both reviewers confirm
-all 33 hashes and all 17 supplied browser cases. No required fix remains.
+all33 hashes and all17 supplied browser cases. No required fix remains.
 
 Evidence limits: room selection is a diagnostic shortcut in speaker/furniture
 views; natural entrance and stairs are proved separately. Native GLB uses its
@@ -571,6 +568,10 @@ are read from the published Git objects. Silent Chromium; no physical device.
 Permanent Geheim equipment deployment remains pending Pages run 40000026294;
 the previously verified canonical avatar/door remains available. Do not label
 immutable preview evidence as canonical Pages evidence.
+
+### Exterior publication checkpoint
+
+Pushed c6041f61a9986558de6c20ee38c37add80663280 to main, parent824681c. All52 frozen files were independently compared with raw commit bytes before push, using a dedicated bare index and no Git text filters. Final publication-byte suites: output/berghain-exterior-publish-browser/report.json 8/8 PASS and output/berghain-exterior-publish-entry-browser/report.json 4/4 PASS; both reviewers rehashed52 and confirmed the LF-only source bridge. Public immutable browser report output/berghain-exterior-immutable-browser/report.json PASS6/6: actual desktop/Android-portrait site orbit/garden movement, portable GLB and natural avatar entrance/exit. The versioned public preview is usable. Canonical HTTP report output/berghain-exterior-canonical-http.json has200 for root/3d/Geheim/model, but old model bytes; Pages 40002583147 is pending behind40001005783. Canonical new-byte and browser verification remains outstanding until that external deployment completes. No physical-device claim.
 
 ## Panorama figure increment — accepted geometry, fidelity remains open
 
@@ -617,6 +618,28 @@ minor face/vertex-normal opposition, total <0.00036m², without visible blocker.
 Physical Android, crowd/vehicle/sprite/fade and acoustics are NOT RUN/out of scope.
 This accepts a visible geometry increment, not a faithful finished artwork or
 the full realistic interior/exterior goal. Remaining rooms and art remain open.
+
+### Public Panorama figure checkpoint
+
+Published runtime/documentation commit e75b829a34e9d27187fcad0a831c5a8b3c34f196,
+parent c6041f61a9986558de6c20ee38c37add80663280, with 25 scoped changed paths.
+Public immutable verification passes 46/46 exact SHA256 comparisons, zero
+line-ending-normalized substitutions, in
+output/berghain-artwork-immutable-verification.json. Actual public desktop and
+Android portrait-emulated natural entrance/exit/refresh, source/native sculpture
+and human-at-artwork cases pass 6/6 in
+output/berghain-artwork-immutable-browser/report.json. Expected bytes come from
+published Git objects. Tests were silent and headless; no physical-device claim.
+
+The permanent domain currently returns the accepted exterior/speakers GLB
+eed42cad4213d733ff2b66593a072b17db4a3cb56241a2c2736c5b22d80d7913.
+Pages artwork run 40007555342 is in progress; canonical artwork byte/browser
+verification remains outstanding. Versioned public preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/e75b829a34e9d27187fcad0a831c5a8b3c34f196/geheim/index.html .
+The original primary index SHA256 remains
+704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
+This local handoff records publication evidence without creating another
+documentation-only push that would supersede the running deployment.
 
 ## Upper Panorama lounge — revised integrated candidate
 
@@ -705,6 +728,34 @@ change is bridged by that exception. The coherent commit is based on a2b23ae,
 preserving the unrelated street-character publications and the original primary
 index. Publication includes only 29 scoped paths, original meshes/maps, tests and
 owning notes; research downloads/output are excluded.
+
+### Upper lounge publication — immutable public acceptance
+
+Commit a9fff2952ebb6ecb6106cb2f1f7a82668137cfcd is pushed by normal fast-forward
+on parent a2b23ae96db0a2b5ee71be4928480577935efeb8. Publication audit now names
+that final commit/tree: 66/68 frozen source bytes exact, with only the two
+previously documented normalized-text differences. Primary staged index remains
+704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
+
+All 50 actual versioned public asset/viewer files exactly match published Git
+objects in output/berghain-lounge-immutable-verification.json. Actual public
+headless desktop and Android portrait emulation pass 6/6 in
+output/berghain-lounge-immutable-browser/report.json: natural door approach,
+entry/exit/refresh, original source/native lounge, and real controlled-human
+walking along the connected upper stair route with correct room labels.
+Suite output/berghain-lounge-published-suite.mjs binds source hashes to the
+published commit. Tests are silent and sequential; no physical-device or
+perceived-audio claim. Source/native desktop image inspected after publication.
+
+Versioned preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/a9fff2952ebb6ecb6106cb2f1f7a82668137cfcd/geheim/index.html
+
+Pages run 40015938981 is pending behind 40015364952, whose current step is
+Check neighbor voice authoring and staged assets. Do not cancel unrelated
+publication. The permanent URL already has a controlled visitor/natural entry,
+but the new upper lounge is not canonical until its 68607e GLB, upper-lounge
+module and six real public cases are verified on germanysimulator.de. Canonical
+check is the next publication step. Full realistic asset remains incomplete.
 
 ## Panorama ceiling and services — revised integrated candidate
 
@@ -808,3 +859,144 @@ solids → moveVisitor full-body exclusion/recovery → existing displacement-dr
 avatar/camera. Renderer and collision use the same part matrices; GLB exports
 the same visible geometry. The physics repair changes only solids, so the
 exported GLB stays byte-identical. No story/mission/audio dependency changes.
+
+### Services publication — immutable public acceptance
+
+Commit851567d3e92efe1c7b50106d352adb73f66f3101 is pushed by normal fast-forward
+on a9fff2952ebb6ecb6106cb2f1f7a82668137cfcd; its16 changed paths contain only
+this scoped source/GLB/tests and owning notes. Primary original index is intact.
+output/berghain-services-publication-byte-audit.json compares all72 frozen files:
+70exact; PROVENANCE.md line endings and unchanged level-transitions.js trailing
+blank are normalized-text equivalent. No runtime semantic change is bridged.
+
+All51 actual versioned public asset/viewer/catalogue files exactly match the
+published Git objects in output/berghain-services-immutable-verification.json.
+Actual public desktop and Android portrait emulation pass6/6 in
+output/berghain-services-immutable-browser/report.json: natural human approach,
+door entry/exit/refresh; original source/native ceiling; real keyboard/touch
+route around column/DJ table, radiator contact and genuinely visible native
+radiator detail. Source hashes bind to actual published Git blobs. Silent,
+headless, sequential; no physical-device or perceived-audio evidence.
+
+Latest verified versioned preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/851567d3e92efe1c7b50106d352adb73f66f3101/geheim/index.html
+
+Pages40020726888 is pending behind40015364952. GitHub's existing concurrency
+policy automatically canceled/superseded the pending a9 lounge run40015938981
+when this descendant was pushed; this chat did not cancel an unrelated run.
+The new commit preserves the lounge. Do not call its new ceiling/lower services
+canonical until the permanent domain has GLB88e63d, panorama-services.mjs,
+51 matching files, six root/3d/Geheim/model entry checks and actual public browser
+cases. Previous e75-artwork canonical verification remains the accepted baseline.
+The next safe publication action is to poll that exact live Pages handle and
+verify the current deployment once terminal. No notes-only push is required.
+
+Next modelling work remains the actual Klo Bar/toilets and Joseph Marr Together
+placement/full sequence, Lab, complete artwork fidelity, contemporary equipment
+and measured inter-room relationships. Begin with the existing primary artist
+ART04 and architect toilet-refurbishment references, retaining evidence gaps.
+No complete-asset or fully-realistic claim is established by this increment.
+
+### Permanent Geheim request — fresh live acceptance
+
+The permanent domain still serves accepted commit
+e75b829a34e9d27187fcad0a831c5a8b3c34f196 while services Pages40020726888 is in
+progress. Fresh output/berghain-geheim-current-canonical-verification.json passes
+46/46 exact published files and six root/3d/Geheim/model entry responses.
+output/berghain-geheim-canonical-live-browser/report.json passes2/2 real public
+desktop and Android portrait-emulated flows: a visible controllable human starts
+outside, keyboard/touch walks to the door, E/tap crosses continuously, movement
+works inside, exit crosses the same doorway and refresh returns outdoors. Source
+hashes bind to actual e75 Git blobs, not the newer local study. Tests were silent,
+headless and sequential. Physical Android qualification remains NOT RUN.
+
+This fulfills the requested live Geheim page and playable entrance at
+https://germanysimulator.de/geheim/ . Latest lounge/services remain verified on
+the851 versioned preview until canonical deployment passes its byte/flow checks.
+No new world sources were changed for this acceptance, so it reuses the existing
+independent physics/camera acceptance; no new world-review claim is made.
+
+Subsequent local research-note correction: expanded primary ART04 photographs
+identify I19's switchgear bar as Klo Bar, not an established older Panorama bar.
+I21 and ART14 plus inspected image subsets are recorded in SOURCES/INTERIOR.
+The851 production freeze and GLB are unchanged; their earlier switchgear-history
+metadata needs correction at the next coherent asset regeneration. Notes-only
+publication must not supersede the in-progress Pages deployment. Full model goal
+remains active with Klo Bar/WC geometry, artwork fidelity and other rooms missing.
+
+## Klo Bar and sanitary architecture — final accepted increment
+
+Current75-file candidate: output/berghain-klo-candidate.json, base851567d3.
+GLB SHA256 cf26925ecb4a8a3d76ef88b2032dc5fabaf568bfa5a9c221ff9034645d15a0d4,
+25,072,100B /257,772tri/108material-mesh groups/18original512px maps,
+4,219,348embedded image bytes,67fixtures and44main PA components. Building
+bounds unchanged. Sources ART04/ART14/I19/I21; catalogue102unique IDs. Klo Bar
+identity is corrected using the artist's wide in-situ photographs. Reference
+downloads remain research-only and excluded from the build.
+
+Original geometry adds the red switchgear-framed bar/cases/gate/back/stools,
+four steel cubicles/two open doors, hollow pans, flush plates/paper holders,
+protected tube lights and lit upper mesh transoms, double-sided trough/taps/
+traps, caged lights/dryers and floor grates. Room arrangement, floor assignment,
+6.65m floor/9.8m ceiling, counts/dimensions and contemporary retention are
+estimated. I21 mixes2009/2013/2015 projects. Together figures remain absent.
+
+Fresh full focused Node matrix69/69 PASS. Test-first evidence caught missing
+rooms and the deeper wash-core recovery case. That repair replaces its redundant
+piece barriers with one existing conservative assembly box; movement code and
+visible mesh are unchanged. Exact invalid core center now recovers0.9885m;
+independent25/25 invalid grid starts recover legally. All3,088 core vertices
+fit its collider to4.2e-7m float32 tolerance. Body-clear corridor/open cubicle/
+return, blocked closed doors, actual furniture contacts and all four stair
+routes remain legal.
+
+Independent Physics P1/P2/P4/P5/scopedX1 PASS,75/75 hashes; latest focused26/26
+tests plus prior full69/69. Independent Camera C1–C5/scopedX1 PASS,75/75 hashes,
+fresh20/20 scoped checks, actual matrix bounds and supplied final frames.
+Bar9.9725×3.055×3.4225m; stool.525×.7485×.525m; wash core2.8×2.9075×1.415m.
+Room clear3.15m versus1.80m avatar; lowest transom rail9.2525m leaves.8025m above
+standing head. These dimensions are authoring estimates, not source measurements.
+
+Current visual/default-view/text evidence:
+output/berghain-klo-transom-browser/report.json PASS4/4: actual source/native bar
+and oblique wash-core/cubicle views on desktop and Android portrait/landscape
+emulation, plus320px/740px and200% label states. All53captured runtime hashes
+match the75freeze. Source/native visibility, open mesh and hollow pan geometry
+are inspected. The earlier head-on blank-core default view is rejected; the
+final oblique view shows core and cubicles together (narrow portrait shows the
+first two stalls; desktop/landscape all four).
+
+Route evidence output/berghain-klo-repaired-browser/report.json PASS7/7 covers
+real mouse/keyboard or touch route from main-floor shortcut, under the high
+Panorama stair, through Klo Bar, around the return into the toilet corridor,
+inside an open cubicle and back; natural labels follow calibrated footprints.
+The exact accepted collision freeze is output/berghain-klo-recovery-candidate.json.
+Its5subsequent changes add only overhead mesh/default selector framing, export/
+manifest and test assertions. Current4/4 covers those visual changes; the old
+route is bridge evidence, not current-hash route evidence. Broader existing-flow
+output/berghain-klo-regression-browser/report.json PASS18/18 predates the local
+core collision repair and transoms; it covers unchanged entrance/lifecycle,
+upper lounge/stair, Panorama ceiling, speakers and furniture. Both reviewers
+explicitly bound that bridge. No old report is represented as a fresh full hash.
+
+Comparable cost reports output/berghain-klo-cost-before/report.json and after
+each PASS9/9: three cold contexts per desktop/portrait/landscape, complete pinned
+851runtime, same local HTTP/Chromium151/DPR2 and Panorama camera/input path,
+no throttling, shared host. Comparison output/berghain-klo-cost-comparison.json.
+Normal transfer5,686,613→5,699,948B (+13,335); no ordinary GLB request. Optional
+GLB grows1,412,268B. Ready medians/ranges ms: desktop1113(874–1489)→1076(926–1465),
+portrait849(845–907)→892(864–916), landscape852(820–854)→906(858–912). Product RAF
+p95 stays13.9–14.1ms. Single-input medians12.3→11.9/17.9→16.5/17.1→18.3ms;
+three samples/shared-host variation do not establish a causal speedup. Draw calls
+rise14–15 including shadow passes; groups99→108. All18idle probes add0frames.
+This path measures global room-geometry cost; it does not qualify every Klo view
+or physical mobile GPUs. No new maps, renderer, library, cache or continuing loop.
+
+Causal scope: observed architectural forms → common rendered layout/fixture
+solids → existing moveVisitor full-body movement/recovery → displacement-driven
+human/camera and footprint-based room label. Room selectors are explicitly
+shortcuts; exterior doorway is separately exercised. No story/audio/mission gate
+changes. Tests are silent/headless/sequential. Physical Android/GPU/listening
+NOT RUN. Full photographic realism, Together/all artwork, exact contemporary
+room connections, Lab/service/cabin spaces and measured interior geometry remain
+required. Both reviewers accept this bounded increment; full goal remains active.

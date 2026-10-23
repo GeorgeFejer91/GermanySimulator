@@ -2,7 +2,7 @@ export function addPanoramaCeiling(layout,{box}){
   const floor=13.25,ceiling=17.95;
   layout.panoramaServices={sources:['A13','I11','I19'],photoViews:[15,16],floorHeight:floor,ceilingHeight:ceiling,
     confidence:'Photographed ceiling, acoustic clouds, radiators and conduit; dimensions, counts and positions estimated',
-    switchgearHistory:'Earlier switchgear counter and cabins are not established as contemporary alongside the redesigned counter'};
+    switchgearHistory:'ART04 wide installation identifies the switchgear-framed counter as Klo Bar; it is not established as an earlier Panorama counter. Contemporary retention remains unverified.'};
   box('Panorama fitted ceiling',[-13.25,ceiling+.09,-13.25],[16.5,.18,16.5],'pale','interior',true);
   for(const z of [-20.4,-15,-9.6])
     box('Panorama ceiling beam',[-13.25,ceiling-.17,z],[16.5,.34,.36],'pale','interior',true);

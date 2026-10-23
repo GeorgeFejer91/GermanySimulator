@@ -110,7 +110,7 @@ No new CAD software installed; no redistribution licence established.
 | Main hall / main bar | Actual structural void and steel stairs, DJ surround, horn-loaded speaker geometry, overhead services/lighting, bar furniture and suspended sofas | I12 now provides all three historic cartoons; I15 adds wall openings/stair/window relationships. Present study does not reproduce these fully. |
 | Panorama | Counter wrapping and stools, illuminated lower bar, pendants, bottle shelving, DJ railing/desk, blinds, acoustic ceiling, Uddenberg and wall/glass art | A13 gallery inspected; I11/14 installation history. Accepted furniture candidate adds bar/stools, shelving, DJ forms and suspended fittings; artwork and complete ceiling/services remain missing. |
 | Lounge / upper level | Extra lounge level, cabins, glazed/stair relationship, circulation to toilets and smoking extension; Weizenegger's *Felsenland* | A13 and I12; primary museum I16 names the 2010 coloured-leather seating landscape, indexed interview I17 places it in Panorama. An initial upper-level, access-stair and Felsenland study now exists using newly inspected I19 photos; floor height/footprint/arrangement remain estimated. Cabins and verified toilet circulation are missing. Preserve measured façade mass while verifying floor elevations. |
-| Klo Bar / toilets | Actual connecting corridor, bar enclosure, toilet compartments/services and Marr display | I12 and ART04. Entire space still missing; placing its sculpture in the existing main hall would be incorrect. |
+| Klo Bar / toilets | Actual connecting corridor, bar enclosure, toilet compartments/services and Marr display | ART04/ART14 identify the switchgear-framed bar as Klo Bar; I21 adds extensive primary toilet photographs. Room/enclosure and sanitary-form candidate now exists; floor relationships, contemporary arrangement and dimensions remain unverified. Placing Marr's sculpture in the existing main hall would be incorrect. |
 | Lab.oratory | Cellar/service character, actual circulation, partitions and installations | A12. Current accessible extent and relation to the rest of the asset unmodelled. |
 | Smoking extension | Panelled/glazed exterior, stair and two-floor connection | A01, P10, I15. Shape visible, section/placement dimensions unresolved. Exterior phase deferred in favour of the user's interior priority. |
 | Accessible circulation | Ground entry, toilets and elevator connecting all floors | A14 confirms requirements. Shaft position/size and connecting routes remain unknown. |
@@ -198,9 +198,41 @@ Panel/beam separation and physical radiator components have focused checks.
 Counts, dimensions, anchors, heights and present retention remain estimates;
 this is not a measured reflected ceiling plan or an acoustic simulation.
 
-The older switchgear counter/cabins in gallery views 01/03/04/05 differ from the
-later redesigned counter in 06/07/15/16. A13 dates a counter refurbishment to2010.
-Those views are not proof that both bars coexist in today's Panorama. They
-remain research references pending current placement/survival evidence.
+Location correction,23 October2026: ART04's expanded wide installation06 and
+partial installation21 show Together within the same switchgear-framed bar as
+I19 views01/03/04/05. The artist identifies it as Klo Bar. The earlier inference
+that these photographs depicted an older Panorama counter is withdrawn; A13's
+2010 Panorama refurbishment does not establish that Klo Bar was removed.
+Present retention, precise floor coordinates and room connections still need
+verification. The published851 asset's switchgearHistory string preserves the
+earlier interpretation; the Klo Bar candidate corrects and re-exports this metadata.
 Klo Bar/toilets, Lab, exact floor connections, complete artwork geometry/images,
 contemporary sound placement and full photographic fidelity remain required.
+
+## Klo Bar and sanitary architecture candidate
+
+ART04 installation06/21 establishes the red ceiling/walls, retained switchgear
+uprights, wire grids, staff gate, segmented glazed counter cases, splayed steel
+stools, bottles and glass-block bar back. Original geometry now reconstructs
+these observed forms. The9m label belongs to Together, not the straight counter.
+Its figures remain absent; illuminated cases do not complete Joseph Marr's work.
+
+I21 main views00–24 are now inspected. They show both dark steel cubicles with
+protected vertical tubes and a separate central trough-sink/core arrangement,
+including taps, exposed drainage, warm caged lights and steel hand dryers.
+The candidate adds four cubicles (two open), genuinely hollow steel pans, flush
+plates/paper canisters/hooks, guarded lights, a double-sided trough core and
+wall fittings. The gallery spans2009/2013/2015; assigning these forms to a single
+contemporary floor is not verified. Western first-floor placement,6.65m floor/
+9.80m ceiling, room footprint, connections, ten stools and fitting counts and
+dimensions are authoring estimates within the calibrated external hull.
+Observed forms and invented arrangement must remain distinguishable.
+
+The main-floor route passes the existing PA, goes under the high portion of
+the Panorama stair, through a side opening into Klo Bar, around the bar return
+and into the sanitary corridor/open cubicle, returning on the same floor.
+Existing body collision and camera remain authoritative. The room label follows
+calibrated footprints/elevation; room selectors remain optional access. Source/
+native rendering, human routes and both specialist reviews are required before
+publication. Etched graphics, complete contemporary room
+layout and Together's full figure sequence remain fidelity work.
