@@ -1,0 +1,52 @@
+{
+  "id": "stadt-klaus-dieter-klein-expressionist-standing-v4",
+  "file": "stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+  "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-9a7bc9fc-0544-4c09-8172-4b807de5cec5.png",
+  "prompt": "Create ONE complete front-facing neutral standing source painting of Klaus-Dieter Klein, a grown-up Berlin street resident for a 2D game. Reference 1 (original Hartmut portrait) is PRIMARY authority for actual Disco Elysium-like oil paint: broad dry broken irregular directional strokes, rough expressive angular adult facial planes, small tired eyes, varied edges and a few strong muddy color masses. Reference 2 (original Gisela portrait) reinforces this original portrait painting language. Borrow neither portrait's identity, clothing, background or objects. Reference 3 is Klaus-Dieter's canonical identity/outfit/hand authority ONLY; its toy proportions and smooth skin are rejected. Do not use earlier adult Klaus studies as references.\n\nKlaus-Dieter is a stocky middle-aged man: receding chestnut-brown side-parted swept hair, heavy dark eyebrows, square jaw with dark evening stubble but NO moustache or beard, small straight nose, reserved mildly helpful CLOSED mouth and narrow weary brown eyes. Mature angular cheek/jaw structure, age lines, asymmetric eyelids, no smooth swollen cherub cheeks. His worn NAVY commuter jacket has lapels, two flap pockets and rolled-up cuffs, over a MUSTARD knitted polo shirt with short button placket. Dark navy denim trousers and substantial TAN lace-up work shoes. His anatomical LEFT hand (viewer-RIGHT in front view) holds ONE folded blank CREAM paper form at thigh level; anatomical RIGHT (viewer-LEFT) hangs EMPTY. Keep his own clothes and identifying colors. Full connected human adult arms and legs, compact mature head about one-sixth height, broad stout torso, visible waist and knees, natural substantial hands and both whole shoes on one invisible sole line. Same complete adult stature as the new painted street cast; no short mascot proportions.\n\nPaint the face with strongly uneven warm/cool planar strokes and dark weary eyelids, not a polished realistic studio portrait or cute caricature. Paint clothes from FEW BROAD irregular fold-following oil/drybrush masses, allowing quiet unpatterned cloth between marks. No tessellation, diamond/rhombus grid, uniform repeated little facets, stipple or digital noise texture. Scuffed jacket/shoes, muted ochre/blue/gray-green Berlin palette. Serious, worn, slightly sardonic grown-up 2D painted cartoon.\n\nONE isolated planted FRONT whole-body figure only, head/hands/paper/feet completely inside with at least 60 pixels genuine alpha-zero margin all sides. TRUE TRANSPARENT RGBA outside figure. No scenery, studio background, haze, ground shadow, floor, halo, vignette, words, labels, text, extra prop, duplicate figure, panel or additional view.",
+  "referencedSources": [
+    "assets/quiz-characters/hartmut-keller.webp",
+    "assets/quiz-characters/gisela-becker.webp",
+    "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png"
+  ],
+  "expectedComponentCount": 1,
+  "sourceReviewReceipt": "output/street-redesign/klaus-dieter-klein-standing-v4/receipt.json",
+  "status": "Provisional source/native pass: original mature small-eyed stubbled face, connected adult limbs and broader directional paint; no integration of held v1/v2/v3; runtime review pending",
+  "integratorSourceReview": "Original canonical identity and source viewed. Mature small-eyed square stubbled face, chestnut side part, navy jacket/mustard polo/dark denim/tan shoes and blank cream form in anatomical LEFT preserved. Broad irregular worn directional paint and full adult limbs replace softer toy face. No moustache, RIGHT empty. Rolled cuffs remain; jacket appears heavier and shirt hem tucked. No native/runtime/motion acceptance.",
+  "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "bytes": 1980717,
+  "componentBounds": [
+    [
+      195,
+      67,
+      850,
+      1494
+    ]
+  ],
+  "alphaExtrema": [
+    0,
+    254
+  ],
+  "minimumCanvasMargin": 42,
+  "generationRequest": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      {
+        "path": "assets/quiz-characters/hartmut-keller.webp",
+        "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+      },
+      {
+        "path": "assets/quiz-characters/gisela-becker.webp",
+        "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+      },
+      {
+        "path": "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png",
+        "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+      }
+    ]
+  },
+  "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding."
+}

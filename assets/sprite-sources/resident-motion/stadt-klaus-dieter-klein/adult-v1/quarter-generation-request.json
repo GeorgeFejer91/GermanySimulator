@@ -1,0 +1,21 @@
+{
+  "tool": "image_gen.imagegen",
+  "request": {
+    "prompt": "Use case: identity-preserving painted 2D game turn views. Image 1 is the exact FOUR cardinal paintings of Klaus-Dieter Klein, the sole identity/costume/proportion/paint authority. Image 2 reinforces the same mature front identity at higher detail. Create FOUR MISSING OBLIQUE whole-body views of this SAME man in ONE horizontal row: FRONT-RIGHT THREE-QUARTER / REAR-RIGHT THREE-QUARTER / REAR-LEFT THREE-QUARTER / FRONT-LEFT THREE-QUARTER. The front-right torso, nose and BOTH shoes face halfway between the first/front and second/right-profile figures of Image 1. Rear-right is halfway between right profile and rear. Rear-left is halfway between rear and left profile. Front-left is halfway between left profile and front. Four distinct actual intermediate views, not copied front/profile paintings and not mirrored art.\n\nTurn the complete head, neck, shoulders, jacket, pelvis, denim legs and tan shoes coherently. Retain one shared mature adult stature and the exact same compact head-to-body ratio, broad stout build and relaxed neutral planted stance. All crowns and soles share one line and scale; both full shoes and all extremities visible, no walking or gesture. Same receding swept chestnut hair, dark uneven brows, SMALL tired eyes, square stubbled jaw, no beard/moustache, reserved closed mouth. Same worn NAVY commuter jacket with flap pockets/rolled cuffs, MUSTARD knit polo, dark denim and substantial TAN lace-up shoes. Strong broad irregular oil-brush garment planes, angular warm/cool facial planes and weathered adult detail, no glossy cute 3D or uniform decorative stipple.\n\nExactly ONE folded blank cream form belongs to his ANATOMICAL LEFT hand at thigh level in ALL views, including where far-side occlusion hides some paper. RIGHT hand stays empty. In front-right the form is held by the far arm, on the right side of the painting; rear-right shows it on the left/far side; rear-left on the left/near side; front-left on the right/near side. Track anatomical ownership rather than mirroring. Do not introduce any other item or swap hand.\n\nFull transparent RGBA outside the four isolated bodies, generous alpha-zero margins and wide gaps. No floor, cast shadow, background glow or painted studio, text, labels, grid, extra figures, heads, props or cropped shoes. Only these four neutral complete turn anchors, consistent with Image 1's adult anatomy and worn painterly finish.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\cardinals.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\cardinals.png",
+      "sha256": "b10c3808755aea5833a02ee745f365ff486b5829ce8747556ccd86ebf316b0af"
+    },
+    {
+      "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+      "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785"
+    }
+  ]
+}

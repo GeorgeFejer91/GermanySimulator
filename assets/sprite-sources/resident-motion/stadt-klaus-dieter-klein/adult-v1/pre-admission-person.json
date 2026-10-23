@@ -1,0 +1,24 @@
+{
+  "id": "stadt-klaus-dieter-klein",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "stadt-klaus-dieter-klein",
+    "city-klaus-dieter-klein"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/stadt-klaus-dieter-klein-standing.webp",
+    "sha256": "3a700d7693101d2de6105677770acab9a7d3fb4268314b1893d84f4b8d927796",
+    "width": 128,
+    "height": 160
+  }
+}

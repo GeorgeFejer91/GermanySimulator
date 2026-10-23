@@ -1,0 +1,372 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-klaus-dieter-klein",
+  "sourceHashes": {
+    "cardinals.png": "b10c3808755aea5833a02ee745f365ff486b5829ce8747556ccd86ebf316b0af",
+    "quarters.png": "d2568fa613df59cd204e7e2174fc5002951dc1cb2c2b1296f2e88172ef507122"
+  },
+  "sourceDensityHeights": {
+    "cardinals.png": 864,
+    "quarters.png": 854
+  },
+  "oneScalePerRawSheet": {
+    "cardinals.png": 0.46296296296296297,
+    "quarters.png": 0.468384074941452
+  },
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        60,
+        15,
+        489,
+        879
+      ],
+      "sourcePivot": [
+        287.75,
+        879
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 181.0,
+          "bounds": [
+            107,
+            789,
+            255,
+            869
+          ],
+          "pixels": 8870
+        },
+        {
+          "x": 394.5,
+          "bounds": [
+            320,
+            789,
+            469,
+            879
+          ],
+          "pixels": 9871
+        }
+      ],
+      "workingOrigin": [
+        122.78240740740742,
+        65.05555555555554
+      ],
+      "workingBoundsAlpha20": [
+        151,
+        72,
+        350,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/down.png",
+      "registeredSha256": "20848adff83171bf57f2db7b2ec99c8ffcbf9084010942be36655fc8b6dad8fb"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        82,
+        16,
+        489,
+        870
+      ],
+      "sourcePivot": [
+        296.5,
+        870
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 192.0,
+          "bounds": [
+            136,
+            780,
+            248,
+            870
+          ],
+          "pixels": 8490
+        },
+        {
+          "x": 401.0,
+          "bounds": [
+            313,
+            780,
+            489,
+            854
+          ],
+          "pixels": 10220
+        }
+      ],
+      "workingOrigin": [
+        117.12412177985948,
+        64.50585480093673
+      ],
+      "workingBoundsAlpha20": [
+        156,
+        72,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/front-right.png",
+      "registeredSha256": "6851285cd16796a8265846420b7c98c960616d398a25d18c94a6077d3cb65994"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        561,
+        17,
+        810,
+        875
+      ],
+      "sourcePivot": [
+        693.0,
+        875
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 693.0,
+          "bounds": [
+            576,
+            785,
+            810,
+            875
+          ],
+          "pixels": 16151
+        }
+      ],
+      "workingOrigin": [
+        -64.83333333333331,
+        66.90740740740739
+      ],
+      "workingBoundsAlpha20": [
+        195,
+        75,
+        311,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/right.png",
+      "registeredSha256": "46d4cc27d27c38f88d3d41bd246caf5694d2ca1485ebc74b3b966e53790d61c9"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        519,
+        14,
+        859,
+        861
+      ],
+      "sourcePivot": [
+        707.5,
+        861
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 707.5,
+          "bounds": [
+            556,
+            771,
+            859,
+            861
+          ],
+          "pixels": 19373
+        }
+      ],
+      "workingOrigin": [
+        -75.38173302107731,
+        68.72131147540983
+      ],
+      "workingBoundsAlpha20": [
+        168,
+        76,
+        327,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/rear-right.png",
+      "registeredSha256": "daed29adffdd2ebf026fc39c448728d4a91bce8fa3b94faaa043d714987021cf"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        913,
+        14,
+        1323,
+        865
+      ],
+      "sourcePivot": [
+        1114.5,
+        865
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1015.5,
+          "bounds": [
+            951,
+            775,
+            1080,
+            864
+          ],
+          "pixels": 9090
+        },
+        {
+          "x": 1213.5,
+          "bounds": [
+            1149,
+            775,
+            1278,
+            865
+          ],
+          "pixels": 9007
+        }
+      ],
+      "workingOrigin": [
+        -259.9722222222222,
+        71.53703703703701
+      ],
+      "workingBoundsAlpha20": [
+        163,
+        78,
+        353,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/up.png",
+      "registeredSha256": "dd040edfd6136a45afa62792f232990d16866d9e71f9eb2f187a2a3c1e22763a"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        927,
+        17,
+        1299,
+        869
+      ],
+      "sourcePivot": [
+        1101.25,
+        869
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1009.5,
+          "bounds": [
+            927,
+            779,
+            1092,
+            869
+          ],
+          "pixels": 12099
+        },
+        {
+          "x": 1193.0,
+          "bounds": [
+            1141,
+            779,
+            1245,
+            860
+          ],
+          "pixels": 7127
+        }
+      ],
+      "workingOrigin": [
+        -259.80796252927405,
+        64.9742388758782
+      ],
+      "workingBoundsAlpha20": [
+        175,
+        73,
+        349,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/rear-left.png",
+      "registeredSha256": "ade7be2c5de4977b748f42f68e76b7d36df7edadba4de34f4d1dee592b3e43d6"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        1412,
+        15,
+        1683,
+        878
+      ],
+      "sourcePivot": [
+        1539.5,
+        878
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1539.5,
+          "bounds": [
+            1412,
+            788,
+            1667,
+            878
+          ],
+          "pixels": 16732
+        }
+      ],
+      "workingOrigin": [
+        -456.7314814814815,
+        65.51851851851853
+      ],
+      "workingBoundsAlpha20": [
+        197,
+        73,
+        323,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/left.png",
+      "registeredSha256": "c480ac822b46abab6813a1764d75eb90a8d4403fef6f5e75037d0e74ca0d74f2"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        1363,
+        16,
+        1705,
+        873
+      ],
+      "sourcePivot": [
+        1523.75,
+        873
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1451.5,
+          "bounds": [
+            1363,
+            783,
+            1540,
+            837
+          ],
+          "pixels": 7996
+        },
+        {
+          "x": 1596.0,
+          "bounds": [
+            1528,
+            783,
+            1664,
+            873
+          ],
+          "pixels": 9547
+        }
+      ],
+      "workingOrigin": [
+        -457.70023419203756,
+        63.10070257611238
+      ],
+      "workingBoundsAlpha20": [
+        181,
+        71,
+        341,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/front-left.png",
+      "registeredSha256": "8274eda06e85a407a57ddfa879beaf11055a16cb6aa1b2479114d75bf79fcca9"
+    }
+  }
+}

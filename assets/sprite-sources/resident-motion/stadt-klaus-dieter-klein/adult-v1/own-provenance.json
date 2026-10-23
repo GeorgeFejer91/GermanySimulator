@@ -1,0 +1,162 @@
+[
+  {
+    "id": "stadt-klaus-dieter-klein-expressionist-standing-v4",
+    "file": "../resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+    "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-9a7bc9fc-0544-4c09-8172-4b807de5cec5.png",
+    "prompt": "Create ONE complete front-facing neutral standing source painting of Klaus-Dieter Klein, a grown-up Berlin street resident for a 2D game. Reference 1 (original Hartmut portrait) is PRIMARY authority for actual Disco Elysium-like oil paint: broad dry broken irregular directional strokes, rough expressive angular adult facial planes, small tired eyes, varied edges and a few strong muddy color masses. Reference 2 (original Gisela portrait) reinforces this original portrait painting language. Borrow neither portrait's identity, clothing, background or objects. Reference 3 is Klaus-Dieter's canonical identity/outfit/hand authority ONLY; its toy proportions and smooth skin are rejected. Do not use earlier adult Klaus studies as references.\n\nKlaus-Dieter is a stocky middle-aged man: receding chestnut-brown side-parted swept hair, heavy dark eyebrows, square jaw with dark evening stubble but NO moustache or beard, small straight nose, reserved mildly helpful CLOSED mouth and narrow weary brown eyes. Mature angular cheek/jaw structure, age lines, asymmetric eyelids, no smooth swollen cherub cheeks. His worn NAVY commuter jacket has lapels, two flap pockets and rolled-up cuffs, over a MUSTARD knitted polo shirt with short button placket. Dark navy denim trousers and substantial TAN lace-up work shoes. His anatomical LEFT hand (viewer-RIGHT in front view) holds ONE folded blank CREAM paper form at thigh level; anatomical RIGHT (viewer-LEFT) hangs EMPTY. Keep his own clothes and identifying colors. Full connected human adult arms and legs, compact mature head about one-sixth height, broad stout torso, visible waist and knees, natural substantial hands and both whole shoes on one invisible sole line. Same complete adult stature as the new painted street cast; no short mascot proportions.\n\nPaint the face with strongly uneven warm/cool planar strokes and dark weary eyelids, not a polished realistic studio portrait or cute caricature. Paint clothes from FEW BROAD irregular fold-following oil/drybrush masses, allowing quiet unpatterned cloth between marks. No tessellation, diamond/rhombus grid, uniform repeated little facets, stipple or digital noise texture. Scuffed jacket/shoes, muted ochre/blue/gray-green Berlin palette. Serious, worn, slightly sardonic grown-up 2D painted cartoon.\n\nONE isolated planted FRONT whole-body figure only, head/hands/paper/feet completely inside with at least 60 pixels genuine alpha-zero margin all sides. TRUE TRANSPARENT RGBA outside figure. No scenery, studio background, haze, ground shadow, floor, halo, vignette, words, labels, text, extra prop, duplicate figure, panel or additional view.",
+    "referencedSources": [
+      "assets/quiz-characters/hartmut-keller.webp",
+      "assets/quiz-characters/gisela-becker.webp",
+      "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png"
+    ],
+    "expectedComponentCount": 1,
+    "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/historical-standing-review.json",
+    "status": "Provisional source/native pass: original mature small-eyed stubbled face, connected adult limbs and broader directional paint; no integration of held v1/v2/v3; runtime review pending",
+    "integratorSourceReview": "Original canonical identity and source viewed. Mature small-eyed square stubbled face, chestnut side part, navy jacket/mustard polo/dark denim/tan shoes and blank cream form in anatomical LEFT preserved. Broad irregular worn directional paint and full adult limbs replace softer toy face. No moustache, RIGHT empty. Rolled cuffs remain; jacket appears heavier and shirt hem tucked. No native/runtime/motion acceptance.",
+    "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785",
+    "dimensions": [
+      1024,
+      1536
+    ],
+    "bytes": 1980717,
+    "componentBounds": [
+      [
+        195,
+        67,
+        850,
+        1494
+      ]
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "minimumCanvasMargin": 42,
+    "generationRequest": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        {
+          "path": "assets/quiz-characters/hartmut-keller.webp",
+          "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+        },
+        {
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "path": "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png",
+          "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+        }
+      ]
+    },
+    "runtimeAcceptance": "Standing V4 used as mature identity/style reference only; newly generated connected eight views remain candidate until own full native/runtime and independent root acceptance.",
+    "originalArchiveFile": "stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+    "portableReferenceClosure": [
+      {
+        "originalPath": "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png",
+        "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/stadt-klaus-dieter-klein-directions-candidate.png",
+        "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+      },
+      {
+        "originalPath": "assets/quiz-characters/hartmut-keller.webp",
+        "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/hartmut-keller.webp",
+        "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+      },
+      {
+        "originalPath": "assets/quiz-characters/gisela-becker.webp",
+        "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/gisela-becker.webp",
+        "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+      }
+    ],
+    "sourceReviewReceiptPortable": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/historical-standing-receipt.json",
+    "sourceReviewReceiptPortableSha256": "e3b96ae9045d4c21f6c6ff700591d49eb40992fccb9b736ec3c1590f8c944af2",
+    "originalSourceReviewReceipt": "output/street-redesign/klaus-dieter-klein-standing-v4/receipt.json",
+    "sourceReviewReceiptSha256": "1816c950eee6b2e595faf9a511c66ac298ea974939cd1a81985b01a440a99f95"
+  },
+  {
+    "id": "stadt-klaus-dieter-klein-adult-cardinals-v1",
+    "file": "../resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+    "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/cardinals.png",
+    "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a169b2-faa3-76b1-b4bf-df2e5620cb2b\\exec-40857755-7f82-42d1-9b28-e8df202064e5.png",
+    "sha256": "b10c3808755aea5833a02ee745f365ff486b5829ce8747556ccd86ebf316b0af",
+    "sourceSha256": "b10c3808755aea5833a02ee745f365ff486b5829ce8747556ccd86ebf316b0af",
+    "prompt": "Use case: identity-preserving stylized concept art. Create a production game source sheet, FOUR separate full-body paintings in ONE horizontal row. Image 1 is Klaus-Dieter Klein's approved mature FRONT identity, anatomy, wardrobe, hand ownership, and painterly finish. Image 2 is his historical identity reference ONLY: reject its toy proportions, inflated eyes and smooth surfaces.\n\nPaint the SAME man from FRONT / strict screen-RIGHT PROFILE / TRUE REAR / strict screen-LEFT PROFILE, in exactly that order. Every direction turns the entire face, chest, pelvis, arms, knees and feet; the rear shows no face, and both profiles are genuine opposite views, not mirrored art. Same sole line, crown height, stout mature human proportions and head size throughout. Neutral planted relaxed standing, both complete tan lace-up shoes, attached adult limbs and compact mature head about one sixth of stature. Full figure visible with generous transparent margin and clear gaps between bodies.\n\nPreserve Klaus-Dieter's receding swept chestnut side part, thick uneven brows, small weary eyes, square jaw and dark evening stubble, NO beard or moustache, reserved closed mouth. Worn NAVY commuter jacket with lapels, flap pockets, rolled cuffs, MUSTARD knit polo, dark denim trousers, brown belt, substantial TAN work shoes. Exactly ONE folded blank cream form in his ANATOMICAL LEFT hand at thigh level: viewer-right front, viewer-left rear, far/partly hidden hand in screen-right profile, near visible hand in screen-left profile. His anatomical RIGHT hand is EMPTY. Do not move, duplicate or mirror the paper.\n\nKeep Image 1's mature worn angular painted facial structure: uneven warm/cool planes, tired eyelids, age creases, rough stubble. Clothes use broad irregular dry oil/acrylic brush masses following folds, worn seams and quiet cloth between strokes. Disco Elysium meets Berlin, grown-up painted 2D cartoon. Avoid swollen cute cheeks, doll eyes, glossy airbrushed 3D, uniform stipple, mosaic or repeated small facets. Preserve the same face and complete naturally connected anatomy in every view.\n\nTRUE TRANSPARENT RGBA outside the four bodies; do not reproduce the hidden brown RGB background of Image 1. No scenery, floor, shadow, haze, halos, text, labels, grid, extra props, duplicates, or cropped extremities. Four whole-body neutral direction anchors only.\n",
+    "generationRequest": {
+      "prompt": "Use case: identity-preserving stylized concept art. Create a production game source sheet, FOUR separate full-body paintings in ONE horizontal row. Image 1 is Klaus-Dieter Klein's approved mature FRONT identity, anatomy, wardrobe, hand ownership, and painterly finish. Image 2 is his historical identity reference ONLY: reject its toy proportions, inflated eyes and smooth surfaces.\n\nPaint the SAME man from FRONT / strict screen-RIGHT PROFILE / TRUE REAR / strict screen-LEFT PROFILE, in exactly that order. Every direction turns the entire face, chest, pelvis, arms, knees and feet; the rear shows no face, and both profiles are genuine opposite views, not mirrored art. Same sole line, crown height, stout mature human proportions and head size throughout. Neutral planted relaxed standing, both complete tan lace-up shoes, attached adult limbs and compact mature head about one sixth of stature. Full figure visible with generous transparent margin and clear gaps between bodies.\n\nPreserve Klaus-Dieter's receding swept chestnut side part, thick uneven brows, small weary eyes, square jaw and dark evening stubble, NO beard or moustache, reserved closed mouth. Worn NAVY commuter jacket with lapels, flap pockets, rolled cuffs, MUSTARD knit polo, dark denim trousers, brown belt, substantial TAN work shoes. Exactly ONE folded blank cream form in his ANATOMICAL LEFT hand at thigh level: viewer-right front, viewer-left rear, far/partly hidden hand in screen-right profile, near visible hand in screen-left profile. His anatomical RIGHT hand is EMPTY. Do not move, duplicate or mirror the paper.\n\nKeep Image 1's mature worn angular painted facial structure: uneven warm/cool planes, tired eyelids, age creases, rough stubble. Clothes use broad irregular dry oil/acrylic brush masses following folds, worn seams and quiet cloth between strokes. Disco Elysium meets Berlin, grown-up painted 2D cartoon. Avoid swollen cute cheeks, doll eyes, glossy airbrushed 3D, uniform stipple, mosaic or repeated small facets. Preserve the same face and complete naturally connected anatomy in every view.\n\nTRUE TRANSPARENT RGBA outside the four bodies; do not reproduce the hidden brown RGB background of Image 1. No scenery, floor, shadow, haze, halos, text, labels, grid, extra props, duplicates, or cropped extremities. Four whole-body neutral direction anchors only.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+        "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-directions-candidate.png"
+      ],
+      "transparent_background": true
+    },
+    "portableReferenceClosure": [
+      {
+        "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+        "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785"
+      },
+      {
+        "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-directions-candidate.png",
+        "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+      }
+    ],
+    "exactRequestPath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/cardinal-generation-request.json",
+    "exactRequestSha256": "50e03fc09e166590373619fb405ce3402e204e47e978949bb77cd24e160c85d8",
+    "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/cardinal-generation-receipt.json",
+    "sourceReviewReceiptSha256": "2aa40cf2b573c95d48917055ce35161b3bb7058e31d9039b4ef25e55a7f1954b",
+    "dimensions": [
+      1774,
+      887
+    ],
+    "bytes": 1914186,
+    "selection": [
+      "down",
+      "right",
+      "up",
+      "left"
+    ],
+    "status": "Author source/native neutral pilot only; full family/runtime and independent integrated acceptance pending."
+  },
+  {
+    "id": "stadt-klaus-dieter-klein-adult-quarters-v1",
+    "file": "../resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+    "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/quarters.png",
+    "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a169b2-faa3-76b1-b4bf-df2e5620cb2b\\exec-83b01459-6475-42a1-b454-3299cdcb5173.png",
+    "sha256": "d2568fa613df59cd204e7e2174fc5002951dc1cb2c2b1296f2e88172ef507122",
+    "sourceSha256": "d2568fa613df59cd204e7e2174fc5002951dc1cb2c2b1296f2e88172ef507122",
+    "prompt": "Use case: identity-preserving painted 2D game turn views. Image 1 is the exact FOUR cardinal paintings of Klaus-Dieter Klein, the sole identity/costume/proportion/paint authority. Image 2 reinforces the same mature front identity at higher detail. Create FOUR MISSING OBLIQUE whole-body views of this SAME man in ONE horizontal row: FRONT-RIGHT THREE-QUARTER / REAR-RIGHT THREE-QUARTER / REAR-LEFT THREE-QUARTER / FRONT-LEFT THREE-QUARTER. The front-right torso, nose and BOTH shoes face halfway between the first/front and second/right-profile figures of Image 1. Rear-right is halfway between right profile and rear. Rear-left is halfway between rear and left profile. Front-left is halfway between left profile and front. Four distinct actual intermediate views, not copied front/profile paintings and not mirrored art.\n\nTurn the complete head, neck, shoulders, jacket, pelvis, denim legs and tan shoes coherently. Retain one shared mature adult stature and the exact same compact head-to-body ratio, broad stout build and relaxed neutral planted stance. All crowns and soles share one line and scale; both full shoes and all extremities visible, no walking or gesture. Same receding swept chestnut hair, dark uneven brows, SMALL tired eyes, square stubbled jaw, no beard/moustache, reserved closed mouth. Same worn NAVY commuter jacket with flap pockets/rolled cuffs, MUSTARD knit polo, dark denim and substantial TAN lace-up shoes. Strong broad irregular oil-brush garment planes, angular warm/cool facial planes and weathered adult detail, no glossy cute 3D or uniform decorative stipple.\n\nExactly ONE folded blank cream form belongs to his ANATOMICAL LEFT hand at thigh level in ALL views, including where far-side occlusion hides some paper. RIGHT hand stays empty. In front-right the form is held by the far arm, on the right side of the painting; rear-right shows it on the left/far side; rear-left on the left/near side; front-left on the right/near side. Track anatomical ownership rather than mirroring. Do not introduce any other item or swap hand.\n\nFull transparent RGBA outside the four isolated bodies, generous alpha-zero margins and wide gaps. No floor, cast shadow, background glow or painted studio, text, labels, grid, extra figures, heads, props or cropped shoes. Only these four neutral complete turn anchors, consistent with Image 1's adult anatomy and worn painterly finish.\n",
+    "generationRequest": {
+      "prompt": "Use case: identity-preserving painted 2D game turn views. Image 1 is the exact FOUR cardinal paintings of Klaus-Dieter Klein, the sole identity/costume/proportion/paint authority. Image 2 reinforces the same mature front identity at higher detail. Create FOUR MISSING OBLIQUE whole-body views of this SAME man in ONE horizontal row: FRONT-RIGHT THREE-QUARTER / REAR-RIGHT THREE-QUARTER / REAR-LEFT THREE-QUARTER / FRONT-LEFT THREE-QUARTER. The front-right torso, nose and BOTH shoes face halfway between the first/front and second/right-profile figures of Image 1. Rear-right is halfway between right profile and rear. Rear-left is halfway between rear and left profile. Front-left is halfway between left profile and front. Four distinct actual intermediate views, not copied front/profile paintings and not mirrored art.\n\nTurn the complete head, neck, shoulders, jacket, pelvis, denim legs and tan shoes coherently. Retain one shared mature adult stature and the exact same compact head-to-body ratio, broad stout build and relaxed neutral planted stance. All crowns and soles share one line and scale; both full shoes and all extremities visible, no walking or gesture. Same receding swept chestnut hair, dark uneven brows, SMALL tired eyes, square stubbled jaw, no beard/moustache, reserved closed mouth. Same worn NAVY commuter jacket with flap pockets/rolled cuffs, MUSTARD knit polo, dark denim and substantial TAN lace-up shoes. Strong broad irregular oil-brush garment planes, angular warm/cool facial planes and weathered adult detail, no glossy cute 3D or uniform decorative stipple.\n\nExactly ONE folded blank cream form belongs to his ANATOMICAL LEFT hand at thigh level in ALL views, including where far-side occlusion hides some paper. RIGHT hand stays empty. In front-right the form is held by the far arm, on the right side of the painting; rear-right shows it on the left/far side; rear-left on the left/near side; front-left on the right/near side. Track anatomical ownership rather than mirroring. Do not introduce any other item or swap hand.\n\nFull transparent RGBA outside the four isolated bodies, generous alpha-zero margins and wide gaps. No floor, cast shadow, background glow or painted studio, text, labels, grid, extra figures, heads, props or cropped shoes. Only these four neutral complete turn anchors, consistent with Image 1's adult anatomy and worn painterly finish.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\cardinals.png",
+        "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png"
+      ],
+      "transparent_background": true
+    },
+    "portableReferenceClosure": [
+      {
+        "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\cardinals.png",
+        "sha256": "b10c3808755aea5833a02ee745f365ff486b5829ce8747556ccd86ebf316b0af"
+      },
+      {
+        "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+        "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785"
+      }
+    ],
+    "exactRequestPath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/quarter-generation-request.json",
+    "exactRequestSha256": "4c4648c894aaf2d565ef13341780d737e09668d698f304e44d92d3641d0f3630",
+    "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/quarter-generation-receipt.json",
+    "sourceReviewReceiptSha256": "6d7ed5916147040549fd35aae4b7c9bcc673647808f4f44aa2358e7df5cd19b3",
+    "dimensions": [
+      1774,
+      887
+    ],
+    "bytes": 1980528,
+    "selection": [
+      "front-right",
+      "rear-right",
+      "rear-left",
+      "front-left"
+    ],
+    "status": "Author source/native neutral pilot only; full family/runtime and independent integrated acceptance pending."
+  }
+]

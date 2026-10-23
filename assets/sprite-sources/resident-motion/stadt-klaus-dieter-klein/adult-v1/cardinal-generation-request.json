@@ -1,0 +1,21 @@
+{
+  "tool": "image_gen.imagegen",
+  "request": {
+    "prompt": "Use case: identity-preserving stylized concept art. Create a production game source sheet, FOUR separate full-body paintings in ONE horizontal row. Image 1 is Klaus-Dieter Klein's approved mature FRONT identity, anatomy, wardrobe, hand ownership, and painterly finish. Image 2 is his historical identity reference ONLY: reject its toy proportions, inflated eyes and smooth surfaces.\n\nPaint the SAME man from FRONT / strict screen-RIGHT PROFILE / TRUE REAR / strict screen-LEFT PROFILE, in exactly that order. Every direction turns the entire face, chest, pelvis, arms, knees and feet; the rear shows no face, and both profiles are genuine opposite views, not mirrored art. Same sole line, crown height, stout mature human proportions and head size throughout. Neutral planted relaxed standing, both complete tan lace-up shoes, attached adult limbs and compact mature head about one sixth of stature. Full figure visible with generous transparent margin and clear gaps between bodies.\n\nPreserve Klaus-Dieter's receding swept chestnut side part, thick uneven brows, small weary eyes, square jaw and dark evening stubble, NO beard or moustache, reserved closed mouth. Worn NAVY commuter jacket with lapels, flap pockets, rolled cuffs, MUSTARD knit polo, dark denim trousers, brown belt, substantial TAN work shoes. Exactly ONE folded blank cream form in his ANATOMICAL LEFT hand at thigh level: viewer-right front, viewer-left rear, far/partly hidden hand in screen-right profile, near visible hand in screen-left profile. His anatomical RIGHT hand is EMPTY. Do not move, duplicate or mirror the paper.\n\nKeep Image 1's mature worn angular painted facial structure: uneven warm/cool planes, tired eyelids, age creases, rough stubble. Clothes use broad irregular dry oil/acrylic brush masses following folds, worn seams and quiet cloth between strokes. Disco Elysium meets Berlin, grown-up painted 2D cartoon. Avoid swollen cute cheeks, doll eyes, glossy airbrushed 3D, uniform stipple, mosaic or repeated small facets. Preserve the same face and complete naturally connected anatomy in every view.\n\nTRUE TRANSPARENT RGBA outside the four bodies; do not reproduce the hidden brown RGB background of Image 1. No scenery, floor, shadow, haze, halos, text, labels, grid, extra props, duplicates, or cropped extremities. Four whole-body neutral direction anchors only.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-klaus-klein-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-directions-candidate.png"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-expressionist-standing-v4.png",
+      "sha256": "4a010abee7df045a48b3b18b990f06adcdbd1ea9f73a207913be8b13f41a3785"
+    },
+    {
+      "path": "assets\\sprite-sources\\resident-motion\\stadt-klaus-dieter-klein\\adult-v1\\raw\\stadt-klaus-dieter-klein-directions-candidate.png",
+      "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+    }
+  ]
+}

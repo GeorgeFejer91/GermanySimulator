@@ -581,3 +581,45 @@ wave does not certify broad concurrency. Scripted placement/UV probes and
 capture timings do not prove natural startup/E traversal, physical Android,
 perceptual listening or city-wide performance. Evidence: `output/brigitte-release/`.
 Publish immediately, verify the deployment and continue the remaining cast.
+
+Hartmut Keller publication verified: accepted/pushed `efb302fccf0a816d23f10f86c02500fb736c9b2a`, deployed in `7c0d8842ff86ce0833e538e48a174dcd974c7fd4`, Pages40012564433 success. All14 deployed files match immutable deployment bytes and the exact accepted Hartmut Keller record; actualroot, query/hash-preserving3d.html compatibility and public Hartmut Keller standing/movement admission pass with0page/HTTP failures. Root views his public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/hartmut-release/live/`.
+
+## Klaus-Dieter Klein: adult painted street family
+
+Only `stadt-klaus-dieter-klein` changes from published a9fff295. His worn face,
+navy jacket, mustard polo, denim and tan shoes remain recognizable; LEFT owns
+the blank cream form and RIGHT stays empty. Eight genuinely painted directions
+use adult connected proportions, nominal height2.33 and own source-fitted11.65
+stride. All42other registry records, police and simulation remain exact.
+
+The412selected cells retain all348 accepted movement-source and packed-movement
+bytes, while restoring64 original quiet performances with actual adult neck/hip
+fits. Idle1280ms and look/success/failure960ms, original sway/nod/lift fields and
+idle-to-wait alias remain. All325supported mouth slots per density preserve
+closed pixels/alpha and native articulation. Three original recordings/cues and
+existing voice, route and selective-loading owners remain unchanged.
+
+Author raw-only21-output/full-person replay,824 formal frame checks and all
+three production layouts pass. Root verifies63 scoped files,379 evidence hashes,
+three original tool outputs and unchanged source/voice/reference dependencies.
+Three attributes/test files use an explicit CRLF-to-LF overlay with identical
+logic; original packet/freeze retained,78of81 final pins unchanged. All70 staged
+candidate files match their intended bytes. Actual packaging retains9runtime
+files, omits3offline originals and preserves original bytes.203focused tests pass.
+
+Independent Physics checks824 native cells, own RGBA sole correspondence,
+three-layout16phase legal gait/cadence, zero-drift stops, original quiet actions,
+44obstruction holds and18staged vertical contact/neutral frames. A depth-plane
+fringe is at most one raster row and bounded by own neutral. Camera checks
+adult population/car/door scale, both opaque depth orders, own136pixel raster
+fallback and all8actual turn anchors on desktop/portrait. Root inspects these
+actual renders. Final81 pins remain stable in both scoped PASS reviews.
+
+Root supplements the author's standing-fallback evidence with three-layout
+movement-delay, actual distance-retirement/zero texture references/new-owner
+reentry and one desktop movement404/no-retry/visible-standing check. All pass;
+all browsers, servers and child processes are closed. Scripted placements,
+staged UV probes, headless emulation and muted state checks do not establish
+natural E traversal, physical Android, perceptual listening or general FPS.
+Old semantic364, incomplete-audit, lip/reporting and fixture REDs remain saved.
+Evidence: `output/klaus-release/`. Publish immediately and continue the cast.

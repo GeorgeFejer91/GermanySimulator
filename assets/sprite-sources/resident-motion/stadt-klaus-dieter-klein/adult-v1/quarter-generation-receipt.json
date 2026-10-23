@@ -1,0 +1,12 @@
+{
+  "request": "quarter-generation-request.json",
+  "originalOutput": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a169b2-faa3-76b1-b4bf-df2e5620cb2b\\exec-83b01459-6475-42a1-b454-3299cdcb5173.png",
+  "raw": "raw/quarters.png",
+  "sha256": "d2568fa613df59cd204e7e2174fc5002951dc1cb2c2b1296f2e88172ef507122",
+  "status": "source provisional: four genuine whole-body obliques, connected mature anatomy; correct anatomical LEFT form and empty RIGHT; native and turn playback outstanding",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "bytes": 1980528
+}

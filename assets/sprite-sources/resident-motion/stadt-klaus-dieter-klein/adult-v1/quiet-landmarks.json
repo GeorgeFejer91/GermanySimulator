@@ -1,0 +1,33 @@
+{
+  "source": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/registered/down.png",
+  "sha256": "20848adff83171bf57f2db7b2ec99c8ffcbf9084010942be36655fc8b6dad8fb",
+  "workingCell": [
+    512,
+    512
+  ],
+  "ownNeckY": 154,
+  "ownHipY": 304,
+  "visualLocations": {
+    "jawBottom": [
+      250,
+      145
+    ],
+    "neckCollarJunction": [
+      250,
+      154
+    ],
+    "mustardCollar": [
+      250,
+      167
+    ],
+    "beltWaist": [
+      250,
+      273
+    ],
+    "connectedHipBand": [
+      250,
+      304
+    ]
+  },
+  "observation": "Personally viewed own registered adult down painting: skin jaw ends around145, skin/collar join154; long navy jacket/mustard torso reaches belt273 then denim hip304. These own pixel coordinates replace old generic neck252. Original state amplitudes remain unchanged."
+}

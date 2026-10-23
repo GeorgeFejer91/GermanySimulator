@@ -1,0 +1,17 @@
+[
+  {
+    "originalPath": "assets/sprite-sources/street-residents/stadt-klaus-dieter-klein-directions-candidate.png",
+    "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/stadt-klaus-dieter-klein-directions-candidate.png",
+    "sha256": "0d1bddec04a218d298032dd955b1a11266f534ec429578658e631c8789a944c4"
+  },
+  {
+    "originalPath": "assets/quiz-characters/hartmut-keller.webp",
+    "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/hartmut-keller.webp",
+    "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+  },
+  {
+    "originalPath": "assets/quiz-characters/gisela-becker.webp",
+    "portablePath": "assets/sprite-sources/resident-motion/stadt-klaus-dieter-klein/adult-v1/raw/gisela-becker.webp",
+    "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+  }
+]
