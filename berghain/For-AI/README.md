@@ -10,6 +10,24 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+The permanent https://germanysimulator.de/geheim/ now serves the accepted partial
+Together runtime80c6660. Pages40037731294 completed SUCCESS; canonical asset
+verification passes63/63 exact Git-object files plus six root/3d/Geheim/model
+responses. Fresh canonical browser acceptance passes9/9 actual public desktop
+and Android portrait-emulation cases, with all91 source hashes bound to Git:
+output/berghain-marr-canonical-browser/report.json. Natural avatar approach,
+E/tap doorway entry/exit/refresh, source/native artwork and continuous bar/WC/
+open-cubicle/return movement pass. Physical Android and listening remain NOT RUN.
+This supersedes earlier pending deployment statements below.
+
+Catalogue update now contains108 unique records: ART17–19 add Bisky's own
+30m/multiple-canvas account, institutional placement opposite the cloakroom and
+a primary gallery date for Göthe's permanent commission. These are new research
+constraints, not new artwork geometry. Documentation-only follow-ups preserve
+all91 runtime/test/authoring bytes; distinguish their deployment from the already
+verified80c6660 model. Full artwork and realistic building reconstruction remain
+ACTIVE, including the explicit fidelity gaps below.
+
 Partial Together release80c66603bcb3a401968e11a351e553230bbf12b0 is pushed.
 It adds the scoped relief/material/export increment described below in41paths.
 Versioned preview:
@@ -19,7 +37,7 @@ output/berghain-marr-immutable-browser/report.json passes9/9 actual public
 desktop/Android portrait artwork, native optics, Klo/WC/continuous human route
 and natural E/tap doorway entry/exit/refresh cases. All91 reported source hashes
 bind to the actual published Git objects. Pages run40037731294 owns deployment;
-permanent-domain acceptance must match this release's actual assets and controls.
+permanent-domain acceptance now matches this release's actual assets and controls.
 Final deployment observations belong in output/berghain-marr-release.json and
 the canonical verification/browser reports. Do not re-push runtime or restart
 CI because an observation times out. The full building/artwork goal stays ACTIVE.

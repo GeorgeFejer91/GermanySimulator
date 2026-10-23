@@ -1128,7 +1128,7 @@ world heights are.221m above the case beds,.95–1.19m above the6.65m floor,
 compared with the1.80m avatar; proportions/placement remain provisional.
 
 Cost was measured on the identical case-facing approach, three cold contexts
-per viewport, Chrome154/Intel Iris Xe D3D11, no CPU throttling. Before9/9:
+per viewport, Chromium151.0.7922.34/Intel Iris Xe D3D11, no CPU throttling. Before9/9:
 output/berghain-marr-cost-before/report.json. Initial full-transmission after9/9:
 output/berghain-marr-cost-after/report.json. These functional passes did NOT
 accept the desktop frame-p95 regression14.1→48.4ms. A diagnostic isolated the
@@ -1175,3 +1175,26 @@ belongs in output/berghain-marr-canonical-verification.json,
 output/berghain-marr-canonical-browser/report.json and the release record.
 This follow-up only corrects inventory/handoff notes; runtime/art bytes remain
 identical and the full photographic goal remains ACTIVE.
+
+### Partial Together permanent-domain acceptance
+
+Pages40037731294 completed SUCCESS for80c66603bcb3a401968e11a351e553230bbf12b0.
+output/berghain-marr-canonical-verification.json passes63/63 exact published
+asset/viewer/catalogue files against actual Git bytes, including the35,996,040B
+GLBd5e2a864…, plus six successful root/3d/Geheim/model URL responses.
+output/berghain-marr-canonical-browser/report.json passes9/9 fresh actual public
+desktop/Android portrait-emulation cases: source/native Together and Klo/WC,
+strict material parity, continuous human main-floor/bar/WC/open-cubicle/return
+movement, and natural exterior approach/E-or-tap entry/exit/refresh. All91
+source hashes bind to the actual published Git objects. Actual canonical
+frames were inspected. Silent/headless/sequential; no physical-device or
+perceptual-listening claim. This supersedes the pending canonical gate above.
+
+Three further primary references (ART17–19) expand the catalogue105→108 and
+improve Bisky/Göthe constraints without adding speculative artwork. The browser
+version in the cost record is corrected to the reports'151.0.7922.34; the earlier
+154 label was a documentation error, not a different cost run. These notes and
+catalogue updates change no frozen runtime/art/test byte. A later notes-only
+deployment does not invalidate the verified80c6660 model; its changed Markdown
+must be distinguished from already-deployed model assets. Full fidelity remains
+unaccepted and the broader reconstruction goal remains ACTIVE.
