@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16957-5651-7952-b630-8d9128ae4bab\\exec-f0f9f7ed-8334-460c-9f3b-9bbf61693e9a.png",
+  "file": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-front-right-v1.png",
+  "sha256": "3309d3de2e26082e7f1587f0c8b7a74f3d3d6e561d79b4cae8605bc636736e16",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "alpha20ComponentBounds": [
+    [
+      240,
+      14,
+      829,
+      1480
+    ]
+  ],
+  "requestFile": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/front-right-generation-request.json",
+  "status": "Own coherent front-right whole-body correction, correct near radio/right and far flashlight/notepad/left. Registration/native/game review pending."
+}

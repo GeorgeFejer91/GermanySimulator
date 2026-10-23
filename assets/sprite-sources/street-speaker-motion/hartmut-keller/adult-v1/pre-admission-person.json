@@ -1,0 +1,24 @@
+{
+  "id": "quiz-hartmut-keller",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "quiz-hartmut-keller",
+    "hartmut-keller"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/quiz-hartmut-keller-standing.webp",
+    "sha256": "aeb6e9d31040be76a9fb7f6e6dc9af4b8e58737a485374517ce6ba2502048e65",
+    "width": 128,
+    "height": 160
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16957-5651-7952-b630-8d9128ae4bab\\exec-e2b7edc3-261b-4055-b2fe-e932a9987499.png",
+  "file": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-diagonals-v1.png",
+  "sha256": "880ec191f0f3b5800464ee4d1f9e942a34b18f281527128534ed785350e1e900",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "requestFile": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/quarter-generation-request.json",
+  "status": "Three obliques usable for registration; first FRONT-RIGHT body remains too frontal and is HELD pending own corrective painting. No runtime admission."
+}

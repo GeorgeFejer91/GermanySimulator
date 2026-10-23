@@ -1,0 +1,20 @@
+{
+  "voiceId": "quiz-hartmut-keller",
+  "binding": {
+    "profileId": "0a1ca192e46a476ca372b33f2d370a70",
+    "profileName": "GS Hartmut Keller (quiz-hartmut-keller)",
+    "originalSha256": "66f055dd3a4e161537c62b12c28960fdc87ba75f044f4796cf26c89e03278402",
+    "referenceSha256": "a7950f0038cd160827f94249241b4fcb8926942e8df986d6843f63d0624be6c0",
+    "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+    "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "processing": null,
+    "fallback": "captions"
+  },
+  "recordings": [],
+  "existingAudition": {
+    "file": "assets/voices/profile-auditions/quiz-hartmut-keller-approach-review.mp3",
+    "sha256": "3f31b6edb962ce0d53b9d7bccc39b2d20408990a9bfcaa65709fda7e2161816d",
+    "source": "Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.",
+    "status": "Existing opt-in audition only; absent from production recordings and no native mouthEnergy metadata. Preserve unchanged."
+  }
+}

@@ -1,0 +1,1169 @@
+{
+  "id": "hartmut-keller",
+  "actorId": "hartmut-keller",
+  "voiceId": "quiz-hartmut-keller",
+  "aliases": [
+    "hartmut-keller",
+    "quiz-hartmut-keller"
+  ],
+  "frame_size": [
+    100,
+    160
+  ],
+  "pivot": [
+    50,
+    146
+  ],
+  "cols": 16,
+  "rows": 16,
+  "grid": [
+    16,
+    16
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "neutralBounds": {
+    "down": [
+      9,
+      10,
+      95,
+      146
+    ],
+    "right": [
+      14,
+      11,
+      82,
+      145
+    ],
+    "up": [
+      7,
+      11,
+      91,
+      146
+    ],
+    "left": [
+      20,
+      11,
+      87,
+      146
+    ]
+  },
+  "neutral": {
+    "row": 8,
+    "col": 0
+  },
+  "walks": {
+    "down": {
+      "row": 0,
+      "frames": 16,
+      "count": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "right": {
+      "row": 1,
+      "frames": 16,
+      "count": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "up": {
+      "row": 2,
+      "frames": 16,
+      "count": 16,
+      "frame_ms": 60,
+      "loop": true
+    },
+    "left": {
+      "row": 3,
+      "frames": 16,
+      "count": 16,
+      "frame_ms": 60,
+      "loop": true
+    }
+  },
+  "bridges": {
+    "down": {
+      "row": 4,
+      "stop_cols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_cols": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "frame_ms": 45
+    },
+    "right": {
+      "row": 5,
+      "stop_cols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_cols": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "frame_ms": 45
+    },
+    "up": {
+      "row": 6,
+      "stop_cols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_cols": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "frame_ms": 45
+    },
+    "left": {
+      "row": 7,
+      "stop_cols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "start_cols": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "frame_ms": 45
+    }
+  },
+  "turns": {
+    "rows": [
+      8
+    ],
+    "pose_count": 8,
+    "frame_ms": 85,
+    "anchors": {
+      "down": 0,
+      "right": 2,
+      "up": 4,
+      "left": 6
+    },
+    "clockwise": true
+  },
+  "transitions": {
+    "down-to-right": {
+      "from": "down",
+      "to": "right",
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "down-to-up": {
+      "from": "down",
+      "to": "up",
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "down-to-left": {
+      "from": "down",
+      "to": "left",
+      "frames": [
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "right-to-down": {
+      "from": "right",
+      "to": "down",
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "right-to-up": {
+      "from": "right",
+      "to": "up",
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "right-to-left": {
+      "from": "right",
+      "to": "left",
+      "frames": [
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "up-to-down": {
+      "from": "up",
+      "to": "down",
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "up-to-right": {
+      "from": "up",
+      "to": "right",
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "up-to-left": {
+      "from": "up",
+      "to": "left",
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "left-to-down": {
+      "from": "left",
+      "to": "down",
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "left-to-right": {
+      "from": "left",
+      "to": "right",
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    },
+    "left-to-up": {
+      "from": "left",
+      "to": "up",
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 45
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 45
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "ms": 45
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "ms": 45
+        }
+      ],
+      "status": "real painted cardinal/quarter turns; awaiting exact ordered review"
+    }
+  },
+  "interactions": {
+    "states": {
+      "greet": {
+        "row": 10,
+        "col": 0,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "loop": false,
+        "status": "candidate source-bound radio raise and recovery; exact neutral endpoints",
+        "next": "neutral"
+      },
+      "wait": {
+        "row": 12,
+        "col": 0,
+        "durations_ms": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "next": "neutral",
+        "status": "candidate; exact neutral entry/recovery",
+        "sourceMotion": "Original neutral painted torso breath"
+      },
+      "work": {
+        "row": 15,
+        "col": 0,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "loop": false,
+        "next": "neutral",
+        "status": "candidate; exact neutral entry/recovery",
+        "sourceMotion": "Measured semantic source correspondence"
+      },
+      "review": {
+        "row": 15,
+        "col": 0,
+        "durations_ms": [
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90,
+          90
+        ],
+        "loop": false,
+        "next": "neutral",
+        "status": "candidate; exact neutral entry/recovery",
+        "sourceMotion": "Shared source reading gesture, slower inspection timing"
+      },
+      "success": {
+        "row": 11,
+        "col": 0,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "loop": false,
+        "status": "candidate radio raise plus source smile; exact neutral endpoints",
+        "next": "neutral"
+      },
+      "failure": {
+        "row": 14,
+        "col": 0,
+        "durations_ms": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "loop": false,
+        "next": "neutral",
+        "status": "candidate; exact neutral entry/recovery",
+        "sourceMotion": "Measured semantic source correspondence"
+      },
+      "look": {
+        "row": 13,
+        "col": 0,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "loop": false,
+        "next": "neutral",
+        "status": "candidate; exact neutral entry/recovery",
+        "sourceMotion": "Measured semantic source correspondence"
+      },
+      "speaking": {
+        "row": 9,
+        "col": 0,
+        "durations_ms": [
+          65,
+          65,
+          65,
+          65,
+          65,
+          65,
+          65,
+          65
+        ],
+        "loop": true,
+        "status": "candidate local mouth correspondence from actual speaking source; exact neutral endpoints",
+        "next": "neutral"
+      }
+    },
+    "neutral": {
+      "row": 8,
+      "col": 0
+    }
+  },
+  "source": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+  "sourceSha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270",
+  "additionalSources": {
+    "right-far-leg-v1.png": "3644832fa2287aa83ee917630bffee2bda55e35a29a4d367ef573e777a316b63",
+    "left-far-leg-v1.png": "7e6a2aafc24fd355c2053c1064f10845ab28274b288ffc0fc28cfd6ede0c0662",
+    "quarter-turns-v1.png": "520cdb1ee25419095b788a6ec9881d3977afe6e5fd58f1971a7d8e5396266942",
+    "right-arm-backing-v1.png": "86486e6d633327a7c9385c5780ba4fd1270218aa7723a38461b0be1fb21dd07e",
+    "left-arm-backing-v1.png": "dd26a9131484bbfe3bdbe53c8faed1217c6479a63d22eceaa6fef8d272fb89d2",
+    "vertical-leg-layers-v2.png": "3f719c11c232f8c4a7066c975d92ffd86e6c1b6a2581f4952b20211ccf7d1538",
+    "vertical-contact-fit.json": "8b7f3ed8a975a55cd382a11d19a49b2b2da81aafb56271118e05b3d4ab954b30",
+    "right-far-leg-shoe-candidate-v3.png": "4c947e2b5d89d7595d070d521d124adb5654d0ee51a88bf733e88803f1c25241",
+    "left-far-leg-shoe-candidate-v2.png": "a633e81b8b8f7f090babe8018e1aab8b374ba8a16858094e284fa9819d01018f"
+  },
+  "motionSpec": "assets/sprite-sources/street-quiz/speaker-motion-spec.json",
+  "variants": {
+    "desktop": {
+      "file": "./assets/characters/street-speakers/quiz-hartmut-keller/desktop.webp",
+      "image": "desktop.webp",
+      "width": 1600,
+      "height": 2560,
+      "bytes": 1902010,
+      "decodedBytes": 16384000,
+      "sha256": "b77e5cec69697a54e2bc6680dc081bd2dc792427e217d4db9a010960d281297f",
+      "frame_size": [
+        100,
+        160
+      ],
+      "pivot": [
+        50,
+        146
+      ]
+    },
+    "mobile": {
+      "file": "./assets/characters/street-speakers/quiz-hartmut-keller/mobile.webp",
+      "image": "mobile.webp",
+      "width": 800,
+      "height": 1280,
+      "bytes": 615754,
+      "decodedBytes": 4096000,
+      "sha256": "35d6cccb14804bf8f39d89dd193d30046328c67bb35032961f05dd85ec2319a0",
+      "frame_size": [
+        50,
+        80
+      ],
+      "pivot": [
+        25,
+        73
+      ]
+    }
+  },
+  "visual_acceptance": {
+    "status": "hold",
+    "findings": [
+      "Narrow far-shoe material repair only. Original upper legs, trajectories and pivots retained; neutral and turns unchanged.",
+      "Profile shoe candidates use each own original reference; full heel, rounded toe and dark sole. Exact encoded native review pending.",
+      "Vertical knee articulation remains subtle at native size; unchanged by this repair.",
+      "Normal/slow temporal loop and current canonical runtime grounding/speed gates remain incomplete.",
+      "Figure world height is1.6. Profile cycle is remeasured from source soles; up/down and camera calibration require new canonical runtime.",
+      "Other eleven families remain source inventory only; no automatic adoption."
+    ]
+  },
+  "cycle_distance": 32.05,
+  "gaitCalibration": {
+    "status": "Exact encoded profile stance remeasured at1.6world; cycle_distance is source-only candidate, not new canonical runtime approval",
+    "figureWorldHeight": 1.6,
+    "gameUnitsPerPixel": 0.5882352941176471,
+    "profileWorkingAmplitude": 52,
+    "strength": 0.8,
+    "verticalStatus": "Previous camera projection/calibration is historical and not valid for the new canonical runtime. Up/down pixels unchanged; fresh runtime measurement required.",
+    "profileFittedDistance": 32.050420168067234,
+    "measurementFile": "output/street-speaker-motion/hartmut-keller/contact-measurements.json"
+  },
+  "loadPolicy": "Opt-in candidate only. Select one client variant; never prefetch whole cast. Existing admission/cache/teardown owners required."
+}

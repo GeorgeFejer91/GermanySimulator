@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "request": {
+    "prompt": "Use case: stylized-concept. Single production 2D adult street-character turn source.\nGenerate ONE COMPLETE full-body Hartmut Keller rotated physically FRONT-RIGHT, a clear halfway view between the exact FRONT and strict RIGHT PROFILE in reference1. Reference2 contains incorrect FIRST near-frontal body: DO NOT COPY that first figure's facing. Reference2 second figure is rear-right; create the complementary FRONT-right body. Same mature adult identity, worn oil-brush paint, olive quilted vest, beige shirt, brown trousers, substantial scuffed brown shoes, rectangular glasses, receding scruffy gray-dark hair and stern lined angular face.\nCRITICAL: Camera sees FRONT AND HIS RIGHT SIDE at comparable visibility. His nose points diagonally toward SCREEN RIGHT; chest, both shoulders, waist/belt, pelvis, knees and BOTH boots ALSO rotate diagonally toward screen-right, approximately45degrees from front. Right shoulder nearer; left shoulder farther. Near right thigh/boot overlaps farther left thigh/boot physically. Show foreshortening across the torso width. Do not give a frontal symmetric torso with head turned. Do not show the back of his vest. Do not produce a side profile. Every body segment rotates coherently together; same adult crown/chin/neck/torso/limb lengths as reference1.\nHis anatomical RIGHT hand holds exactly ONE small black walkie-talkie near right chest, now the NEAR hand and on viewer-left side of his body. His anatomical LEFT hand carries ONE black flashlight with ONE cream spiral notepad together against LEFT torso; this FAR hand and its objects partially occlude naturally behind his turned chest at viewer-right. No swaps, duplicate equipment, floating objects or missing grips. Complete connected anatomical hands.\nQuiet neutral walking-ready stance; both complete shoes planted on one sole plane with modest separation, no step. Preserve closed rest lips. Whole figure and all hair/props/shoes inside generous transparent margin. Genuine transparent RGBA background; no backdrop, floor, shadow, glow, text, labels, grid, extra figure or scraps. ONE figure only. Adult Hartmut Keller, never child Hartmut Maaslos. Not cute, chibi, glossy3D, smooth doll or tiny-head anatomy.",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-hartmut-keller-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-hartmut-keller-expressionist-directions-v1.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-hartmut-keller-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-hartmut-keller-expressionist-diagonals-v1.png"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+    },
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-diagonals-v1.png",
+      "sha256": "880ec191f0f3b5800464ee4d1f9e942a34b18f281527128534ed785350e1e900"
+    }
+  ]
+}

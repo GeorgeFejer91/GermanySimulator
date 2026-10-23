@@ -1,0 +1,385 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "quiz-hartmut-keller",
+  "sourceHashes": {
+    "quiz-hartmut-keller-expressionist-directions-v1.png": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e",
+    "quiz-hartmut-keller-expressionist-diagonals-v1.png": "880ec191f0f3b5800464ee4d1f9e942a34b18f281527128534ed785350e1e900",
+    "quiz-hartmut-keller-expressionist-front-right-v1.png": "3309d3de2e26082e7f1587f0c8b7a74f3d3d6e561d79b4cae8605bc636736e16"
+  },
+  "frontAlpha20Height": 937,
+  "oneFamilyScale": 0.42689434364994666,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        40,
+        33,
+        421,
+        970
+      ],
+      "sourcePivot": [
+        246.75,
+        970
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 143.5,
+          "bounds": [
+            68,
+            880,
+            219,
+            962
+          ],
+          "pixels": 9126
+        },
+        {
+          "x": 350.0,
+          "bounds": [
+            293,
+            880,
+            407,
+            970
+          ],
+          "pixels": 7720
+        }
+      ],
+      "workingOrigin": [
+        150.66382070437567,
+        57.912486659551746
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        168,
+        72,
+        331,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/down.png",
+      "registeredSha256": "d2ddaccfc4e24fc6a125eacd6abe6fde0c83a959f928e1ee2136a9b51807e021"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-front-right-v1.png",
+      "sourceBoundsAlpha20": [
+        240,
+        14,
+        829,
+        1480
+      ],
+      "sourcePivot": [
+        553.25,
+        1480
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 417.0,
+          "bounds": [
+            319,
+            1390,
+            515,
+            1480
+          ],
+          "pixels": 14528
+        },
+        {
+          "x": 689.5,
+          "bounds": [
+            558,
+            1390,
+            821,
+            1412
+          ],
+          "pixels": 3159
+        }
+      ],
+      "workingOrigin": [
+        105.04502046384721,
+        68.18008185538883
+      ],
+      "sourceResolutionScale": 0.2728512960436562,
+      "workingBoundsAlpha20": [
+        171,
+        72,
+        332,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/front-right.png",
+      "registeredSha256": "4ebf3a942399fca742a879ad7693fd5f2079a51b20608288f50ce5f310af6b1a"
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        479,
+        39,
+        741,
+        973
+      ],
+      "sourcePivot": [
+        610.0,
+        973
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 610.0,
+          "bounds": [
+            479,
+            883,
+            741,
+            973
+          ],
+          "pixels": 17566
+        }
+      ],
+      "workingOrigin": [
+        -4.405549626467462,
+        56.631803628601915
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        200,
+        74,
+        312,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/right.png",
+      "registeredSha256": "7a3438846fda4ae50b7d4db6242fafdb7c737d34196140e750317badfed97379"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        435,
+        13,
+        770,
+        950
+      ],
+      "sourcePivot": [
+        598.5,
+        950
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 519.5,
+          "bounds": [
+            455,
+            860,
+            584,
+            930
+          ],
+          "pixels": 7457
+        },
+        {
+          "x": 677.5,
+          "bounds": [
+            585,
+            860,
+            770,
+            950
+          ],
+          "pixels": 13342
+        }
+      ],
+      "workingOrigin": [
+        0.5037353255069092,
+        66.45037353255066
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        186,
+        72,
+        330,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/rear-right.png",
+      "registeredSha256": "b6e0cc0f2cf260945fc84788567f316f94ab7e93894dbdccfd858641548e3af7"
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        764,
+        45,
+        1139,
+        969
+      ],
+      "sourcePivot": [
+        977.0,
+        969
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 885.5,
+          "bounds": [
+            831,
+            879,
+            940,
+            969
+          ],
+          "pixels": 7681
+        },
+        {
+          "x": 1068.5,
+          "bounds": [
+            1011,
+            879,
+            1126,
+            963
+          ],
+          "pixels": 7746
+        }
+      ],
+      "workingOrigin": [
+        -161.07577374599788,
+        58.33938100320171
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        165,
+        78,
+        325,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/up.png",
+      "registeredSha256": "94c243e59e4674d71d94b8fb9d9edfa7125f70ed6fa2ce3a396c1b74ddecd918"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        785,
+        9,
+        1125,
+        954
+      ],
+      "sourcePivot": [
+        968.5,
+        954
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 879.0,
+          "bounds": [
+            799,
+            864,
+            959,
+            954
+          ],
+          "pixels": 11134
+        },
+        {
+          "x": 1058.0,
+          "bounds": [
+            996,
+            864,
+            1120,
+            935
+          ],
+          "pixels": 7100
+        }
+      ],
+      "workingOrigin": [
+        -157.44717182497334,
+        64.74279615795086
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        178,
+        69,
+        323,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/rear-left.png",
+      "registeredSha256": "c4e6928cd8958e076c9db1c17410a244437e42a15bdb7681f81fc11f4a4cedec"
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1215,
+        35,
+        1473,
+        975
+      ],
+      "sourcePivot": [
+        1334.5,
+        975
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1334.5,
+          "bounds": [
+            1215,
+            885,
+            1454,
+            975
+          ],
+          "pixels": 16347
+        }
+      ],
+      "workingOrigin": [
+        -313.69050160085385,
+        55.77801494130199
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        205,
+        71,
+        316,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/left.png",
+      "registeredSha256": "dd38364af6afab657b3085c5807fee35cdc0c8a6457c873b50288cc9ada333ae"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1182,
+        12,
+        1522,
+        958
+      ],
+      "sourcePivot": [
+        1344.25,
+        958
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1270.0,
+          "bounds": [
+            1182,
+            868,
+            1358,
+            926
+          ],
+          "pixels": 8468
+        },
+        {
+          "x": 1418.5,
+          "bounds": [
+            1353,
+            868,
+            1484,
+            958
+          ],
+          "pixels": 8889
+        }
+      ],
+      "workingOrigin": [
+        -317.85272145144074,
+        63.03521878335113
+      ],
+      "sourceResolutionScale": 0.42689434364994666,
+      "workingBoundsAlpha20": [
+        187,
+        68,
+        332,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/hartmut-keller/adult-v1/registered/front-left.png",
+      "registeredSha256": "0748554e64e8563ab53945aae2da6e060d0930e361836e87d21df411971d8037"
+    }
+  }
+}

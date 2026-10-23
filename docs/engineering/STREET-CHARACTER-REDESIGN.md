@@ -493,3 +493,47 @@ Frozen reports and commit/deployment receipts: `output/renate-release/`.
 Acceptance authorizes immediate sequential publication. Public assets/entries/
 actual own paint are verified after successful deployment. Remaining outdoor
 characters continue under the shared style goal.
+
+Irmgard Aktenstapel publication verified: accepted/pushed `782108f8249eb1c9893acb2648807a1ec31aea54`, deployed in `83cac59dc3c5fb550db47ce38a42b14c785ed639`, Pages39993645344 success. All14 deployed files match immutable deployment bytes and the exact accepted Irmgard Aktenstapel record; actualroot, query/hash-preserving3d.html compatibility and public Irmgard Aktenstapel standing/movement admission pass with0page/HTTP failures. Root views her public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/aktenstapel-release/live/`.
+
+Renate Termin publication verified: accepted/pushed `211282f4be89c5efde9943ea951545dd2d7ce73a`, deployed in `c6041f61a9986558de6c20ee38c37add80663280`, Pages40002583147 success. All14 deployed files match immutable deployment bytes and the exact accepted Renate Termin record; actualroot, query/hash-preserving3d.html compatibility and public Renate Termin standing/movement admission pass with0page/HTTP failures. Root views her public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/renate-release/live/`.
+
+## Adult Hartmut Keller: mature painted street family
+
+Only `quiz-hartmut-keller` changes from public211282f4. He retains his older
+lined face, receding grey-dark hair, glasses, olive quilted vest, beige shirt,
+brown trousers/boots, RIGHT radio and LEFT flashlight/notepad. Connected adult
+stature uses nominal2.33world height and own source-fitted9.68stride. All42other
+registry records, police, simulation and existing performance work remain exact.
+
+Eight genuinely painted whole-body directions supply380selected cells: four
+16phase walks, all64phase stops, eight turn anchors, seven original actions and
+16exact own neutral duplicates preserving long quiet holds. All293supported lips
+retain closed pixels/alpha at both native densities; rear lips remain null.
+Hartmut has no admitted own recording: real Synth/caption fallback was tested,
+and native articulation evidence is not relabelled recorded speech coverage.
+
+Root binds57exact worker files/person, three original tool outputs, five
+references and10receipt/baseline records. Original raw-only21output/fullperson
+replay and final encoded380×2 audits pass. A validation-only portability repair
+removes ignored expectations; its exact validator passes in a fresh root with
+those paths absent, without claiming another raw replay. All204focused Node
+checks and actual9file packaging pass; three offline originals remain Git-only.
+
+Both independent reviewers preserve all75current pins. Physics checks760native
+cells,12exact rerenders and own RGB sole direction; desktop/portrait each travel
+28.6167legal units through all16phases,90tick planted stops, all seven desktop
+actions/reaction retirement/route resume and44blocker holds. Actual contact
+probes retain complete boots with at most one raster-row fringe. Camera checks
+all eight actual turn anchors on desktop/portrait, three-layout scale beside
+Sandales/Söder/car/door, both opaque depth orders and standing fallback/hold.
+The hold oracle uses Hartmut's measured135/136painted raster height; its first
+copied-oracle RED is preserved. Root views current turn, reference, depth and
+contact frames and accepts these affected scopes.
+
+Observer-fixture REDs remain beside corrected all-eligible-instance passes.
+Scripted placements/vertical UV probes do not establish natural startup/E
+traversal. Capture timings are diagnostic; physical Android, perceptual listening
+and city-wide performance are not newly certified. Evidence/receipts remain in
+`output/hartmut-release/`. Publish immediately and verify after deployment;
+the remaining outdoor cast continues under the shared style goal.

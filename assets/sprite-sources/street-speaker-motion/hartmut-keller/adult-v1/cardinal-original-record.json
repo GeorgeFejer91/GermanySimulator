@@ -1,0 +1,67 @@
+{
+  "id": "quiz-hartmut-keller-expressionist-directions-v1",
+  "file": "quiz-hartmut-keller-expressionist-directions-v1.png",
+  "prompt": "Create a mature painted 2D street-game character turnaround. FIRST reference is the identity AND painting-style authority: preserve its face, age, attitude, glasses/hair and expressive Disco Elysium oil brushwork, angular weary facial planes, selective coarse dry brush and muted Berlin colors. SECOND reference supplies full clothing and prop ownership only; its tiny toy body and polished cartoon finish are being retired. THIRD reference supplies the new street population's connected adult stature and substantial torso/arm/thigh/shin lengths; do not copy its face or costume. New whole-body painted drawings with grown-up features, realistic wear and readable expressive faces, more adult torso and longer limbs, not chibi or glossy 3D. FOUR complete separate full-body figures in ONE horizontal row: front, strict right-facing profile, genuine back, strict left-facing profile. Match head and limb lengths across all four views, common crown/sole lines. Quiet neutral planted walking-ready stance, closed rest lips, complete separate boots. Whole bodies connected, no detached parts. 60px transparent margins and gutters, genuine alpha, no floor, ground shadow, labels, background or floating brush scraps. SUBJECT: Hartmut Keller, the adult older German neighborhood-watch quiz speaker, NOT the child Hartmut Maaslos. Recognizable long angular face, high lined forehead, receding messy graying dark hair, rectangular black glasses, stern skeptical eyes. Dark olive quilted sleeveless vest over beige button shirt, brown belt, full dark brown trousers, scuffed brown work shoes. Anatomical RIGHT hand holds a small black walkie-talkie, front screen-left/back screen-right. Anatomical LEFT hand carries a small black flashlight and cream spiral notepad together against left torso, front screen-right/back screen-left. Keep these distinct owned objects stable and correctly occluded in profiles. A tired amateur neighborhood watchman with bureaucratic certainty, adult expressive portrait painting translated into a full body.",
+  "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-4b26eba8-b787-4571-a475-36ac750a12fb.png",
+  "status": "Four-view mature expressionist source candidate; contact/turn/action/speech/native checks outstanding.",
+  "referencedSources": [
+    "assets/quiz-characters/hartmut-keller.webp",
+    "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+    "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+  ],
+  "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "bytes": 2390079,
+  "componentBounds": [
+    [
+      40,
+      33,
+      421,
+      970
+    ],
+    [
+      479,
+      39,
+      741,
+      973
+    ],
+    [
+      764,
+      45,
+      1139,
+      969
+    ],
+    [
+      1215,
+      35,
+      1473,
+      975
+    ]
+  ],
+  "alphaExtrema": [
+    0,
+    254
+  ],
+  "minimumCanvasMargin": 33,
+  "generationRequest": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      {
+        "path": "assets/quiz-characters/hartmut-keller.webp",
+        "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+      },
+      {
+        "path": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+        "sha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+      },
+      {
+        "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+        "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+      }
+    ]
+  },
+  "runtimeAcceptance": "Front-derived adult standing paint selected locally; standingOnly retained. Own Sabine native mouth fitted. Rendered/specialist acceptance pending; full-cast goal active and unpublished."
+}
