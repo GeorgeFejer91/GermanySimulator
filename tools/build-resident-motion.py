@@ -98,7 +98,8 @@ def check(key):
         if manifest['turns']['pose_count']:
             for direction,anchor in manifest['turns']['anchors'].items():
                 bridge=manifest['bridges'][direction]
-                if cell({'row':bridge['row'],'col':bridge['stop_cols'][-1]}).tobytes()!=cell({'row':8,'col':anchor}).tobytes():raise ValueError('Turn anchor/stop mismatch')
+                turn_row=manifest['turns']['rows'][anchor//manifest['cols']]
+                if cell({'row':bridge['row'],'col':bridge['stop_cols'][-1]}).tobytes()!=cell({'row':turn_row,'col':anchor%manifest['cols']}).tobytes():raise ValueError('Turn anchor/stop mismatch')
         for transition in manifest['transitions'].values():
             for pos in transition['frames']:
                 if not (0<=pos['row']<manifest['rows'] and 0<=pos['col']<manifest['cols']):raise ValueError('Invalid transition cell')

@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse
 import hashlib
+import importlib.util
 import io
 import json
 import math
@@ -613,10 +614,107 @@ def build_parts(character, check=False):
     print(json.dumps({'character':character,'representation':'parts','check':check,'rigBytes':len(rig_bytes),'variants':variants}))
 
 
+def standing_paint(person, geometry):
+    source = ROOT / person['source']
+    if paint.digest(source) != person['sourceSha256']:
+        raise ValueError('Changed standing source: ' + str(source))
+    definition = importlib.util.spec_from_file_location('standing_component', ROOT / 'tools/build-police-sprites.py')
+    extraction = importlib.util.module_from_spec(definition)
+    definition.loader.exec_module(extraction)
+    view = person['views']['down']
+    isolated = extraction.isolate_source_component(Image.open(source).convert('RGBA'), view['component_bounds'])
+    scale = geometry['working']['figureHeight'] / person['sourceFigureHeight']
+    registered, _ = register_source(isolated, view, scale, geometry['working']['baseline'])
+    pixels = np.asarray(export_cell(registered, geometry)).copy()
+    pixels[pixels[:, :, 3] < 12] = 0
+    image = Image.fromarray(pixels)
+    bounds = image.getbbox()
+    if bounds is None or min(bounds[0], bounds[1], image.width-bounds[2], image.height-bounds[3]) < 2:
+        raise ValueError('Standing export requires transparent cell gutters')
+    return image
+
+
+def standing_mouth(person, ident, geometry, standing_path):
+    registration = person['mouth']
+    source_hash = paint.digest(standing_path)
+    if registration['standingSha256'] != source_hash:
+        raise ValueError('Changed inspected standing mouth paint: ' + ident)
+    definition = importlib.util.spec_from_file_location('standing_lips', ROOT / 'tools/build-street-mouths.py')
+    lips = importlib.util.module_from_spec(definition)
+    definition.loader.exec_module(lips)
+    entry = {key: registration[key] for key in ['centerPx', 'axesPx', 'contoursPx', 'width', 'teeth', 'nativeSource']}
+    entry['input'] = {'file': str(standing_path.resolve()), 'sha256': source_hash, 'dimensions': geometry['cell']}
+    compiled = lips.compile_registration(entry)
+    payload = {'schemaVersion': 1, 'id': ident, 'cell': geometry['cell'], 'grid': None,
+               'sources': {'standing': source_hash, 'desktop': None, 'mobile': None},
+               'standing': {key: compiled[key] for key in ['rect', 'axes', 'profile']}, 'frames': []}
+    return (json.dumps(payload, separators=(',', ':')) + '\n').encode()
+
+
+def build_standing(spec_path, character, directory, check):
+    spec = json.loads(spec_path.read_text())
+    registry = json.loads((DEST / 'manifest.json').read_text())['characters']
+    selected = [character] if character else list(spec['characters'])
+    generated = {}
+    report = {'builderSha256': paint.digest(Path(__file__)), 'specSha256': paint.digest(spec_path),
+              'status': 'candidate; own mouth fitting and rendered acceptance required', 'characters': {}}
+    for ident in selected:
+        if registry[ident].get('standingOnly') is not True:
+            raise ValueError('Standing export must preserve an existing standing-only consumer: ' + ident)
+        person = spec['characters'][ident]
+        if bool(registry[ident].get('mouthPaint')) != bool(person.get('mouth')):
+            raise ValueError('Standing speech capability requires an own native mouth fit: ' + ident)
+        content = encoded(standing_paint(person, spec), 'WEBP', lossless=True, exact=True, method=6)
+        if person.get('mouth') and person['mouth']['standingSha256'] != digest_bytes(content):
+            raise ValueError('Changed inspected standing mouth paint: ' + ident)
+        filename = ident + '-standing.webp'
+        generated[directory / filename] = content
+        report['characters'][ident] = {
+            'source': person['source'], 'sourceSha256': person['sourceSha256'],
+            'standing': {'file': filename, 'sha256': digest_bytes(content), 'bytes': len(content),
+                         'width': spec['cell'][0], 'height': spec['cell'][1]},
+            'figureWorldHeight': spec['figureWorldHeight'],
+            'requiresOwnMouth': bool(registry[ident].get('mouthPaint'))}
+    if check:
+        stale = [str(path) for path, content in generated.items() if not path.exists() or path.read_bytes() != content]
+        if stale:
+            raise ValueError('Missing or stale standing paint: ' + ', '.join(stale))
+    else:
+        directory.mkdir(parents=True, exist_ok=True)
+        for path, content in generated.items():
+            path.write_bytes(content)
+    for ident in selected:
+        person = spec['characters'][ident]
+        if not person.get('mouth'):
+            continue
+        content = standing_mouth(person, ident, spec, directory / (ident + '-standing.webp'))
+        path = directory / ident / 'mouths-standing-adult-v1.json'
+        if check:
+            if not path.exists() or path.read_bytes() != content:
+                raise ValueError('Missing or stale standing mouth: ' + ident)
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+        report['characters'][ident]['mouthPaint'] = {'file': str(path.relative_to(directory)).replace('\\', '/'),
+                                                   'sha256': digest_bytes(content), 'bytes': len(content)}
+    if not check:
+        (directory / 'build-report.json').write_bytes((json.dumps(report, indent=2) + '\n').encode())
+    print(json.dumps({'representation': 'standing', 'check': check, **report}))
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--character', required=True)
+    parser.add_argument('--character')
     parser.add_argument('--check', action='store_true')
-    parser.add_argument('--representation', choices=['atlas','parts'], default='atlas')
+    parser.add_argument('--representation', choices=['atlas','parts','standing'], default='atlas')
+    parser.add_argument('--spec', type=Path)
+    parser.add_argument('--output', type=Path, default=QA / 'standing-adults')
     arguments = parser.parse_args()
-    (build_parts if arguments.representation == 'parts' else build)(arguments.character, arguments.check)
+    if arguments.representation == 'standing':
+        if arguments.spec is None:
+            parser.error('--representation standing requires --spec')
+        build_standing(arguments.spec, arguments.character, arguments.output, arguments.check)
+    else:
+        if not arguments.character:
+            parser.error('--character is required for atlas/parts')
+        (build_parts if arguments.representation == 'parts' else build)(arguments.character, arguments.check)

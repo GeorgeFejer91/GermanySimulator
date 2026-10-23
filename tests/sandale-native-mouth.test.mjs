@@ -32,7 +32,8 @@ test('actual world atlas functions scope material ownership and media sync to Sa
  const camera=new T.PerspectiveCamera();camera.position.set(0,10,15);camera.lookAt(0,0,0);
  let paused=false;const speech={actorId:actor.id,voiceId:actor.voiceId,cueToken:{},speechStatus:'playing',mouthOpen:.8};
  const bridge={getNpcSpriteCanvas:()=>({width:256,height:320}),npcSpriteGrids:{towelMan:grid,merkel:grid},stationElevation:()=>0,getStreetSpeech:n=>n===actor?speech:null,getHUDState:()=>({paused})};
- const scope=vm.createContext({T,bridge,camera,createAtlasCharacterMouth,X:x=>x,Z:y=>y,atlasTextureCache:new Map(),atlasMaterialCache:new Map()});
+ const scope=vm.createContext({T,bridge,camera,createAtlasCharacterMouth,X:x=>x,Z:y=>y,atlasTextureCache:new Map(),atlasMaterialCache:new Map(),
+  registeredStreetPaint:()=>null,fitStreetFallback:()=>assert.fail('ordinary named Sandales must retain their own atlas and mouth')});
  vm.runInContext(source.slice(start,end)+source.slice(syncStart,syncEnd)+';globalThis.api={npcSprite,syncAtlasSprite};',scope);
  const q=scope.api.npcSprite(actor),mission=scope.api.npcSprite({special:'merkel'});
  assert(q.userData.atlasMouth);assert.equal(mission.userData.atlasMouth,undefined);

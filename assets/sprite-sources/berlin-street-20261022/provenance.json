@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "tool": "built-in image_gen.imagegen",
+  "status": "Irmgard release source closure only; unrelated cast excluded",
+  "records": [
+    {
+      "id": "crowd-irmgard-aktenordner-expressionist-turns-v5",
+      "file": "crowd-irmgard-aktenordner-expressionist-turns-v5.png",
+      "prompt": "Use the supplied four-view Irmgard sheet as the exact character and painting authority. Same older stocky red-curled Berlin woman, angular tired face, long asymmetric nose, narrow eyes, mustard quilted vest, navy ribbed high neck jumper, faded olive trousers, tan heavy walking shoes, single burgundy binder under anatomical RIGHT arm held by right hand. Keep this stronger Disco Elysium expressionist oil painting with broad rough paint and adult, weathered features. Match her actual head-to-body size, arm/torso/thigh/shin length and bulk from the reference; do not shrink the head, lengthen the body, beautify the face, make her glossy or introduce a new costume. Coherently repaint whole figures, not detached limbs or head cutouts. Four complete independent figures in one horizontal row with equal crown and ground lines and 60px transparent margins/gaps. All soles, curls, fingers and binder inside canvas. Genuine transparent alpha; no floor, shadow, labels or floating brush scraps. POSES left-to-right are FOUR intermediate planted turn anchors, not cardinals: (1) FRONT-RIGHT THREE-QUARTER, nose pointing diagonally toward viewer and screen right; (2) REAR-RIGHT THREE-QUARTER, body turned diagonally away toward screen right; (3) REAR-LEFT THREE-QUARTER, body turned diagonally away toward screen left; (4) FRONT-LEFT THREE-QUARTER, nose pointing diagonally toward viewer and screen left. Preserve coherent head size throughout rotation; rear views do not show a frontal face. Both boots planted, natural slight foot separation, neutral standing pose. Binder stays anatomical RIGHT arm with correct near/far occlusion, front screen-left/back screen-right. No mirrored right hand painted as left. Match the cardinal reference in connected anatomy and whole-family scale so these fit between its front, profile and back views.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-7e2f5a59-2e7b-4ea3-a40f-0f8a6de3539e.png",
+      "status": "Connected expressive motion source candidate; source registration and ordered review pending.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+      ],
+      "sha256": "90a7ecef82c80a5276b5613d581896530849a9b18bcb4eb829e1814f9c88ed13",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bytes": 1313119,
+      "componentBounds": [
+        [
+          234,
+          19,
+          560,
+          710
+        ],
+        [
+          713,
+          19,
+          998,
+          707
+        ],
+        [
+          1156,
+          21,
+          1468,
+          706
+        ],
+        [
+          1617,
+          19,
+          1936,
+          708
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 14,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+            "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source of locally selected native Irmgard candidate; final world/rendered/full-cast/publication acceptance pending."
+    },
+    {
+      "id": "crowd-irmgard-aktenordner-expressionist-v5",
+      "file": "crowd-irmgard-aktenordner-expressionist-v5.png",
+      "prompt": "Create a revised four-view whole-body turnaround. FIRST image is the PAINTING STYLE authority: keep its strong Disco Elysium expressive oil painting, angular weary adult face, broad rough opaque brushwork, unsentimental mood and muted Berlin colors. SECOND image is ONLY the connected BODY PROPORTION authority, not its smooth rendering. Redraw the FIRST subject's whole anatomy with the compact adult torso/arm/thigh/shin relationships of the SECOND. This must be a newly coherent drawing, not a vertically squashed sheet or a pasted enlarged head. Adult head stays long-faced and angular. Total crown-to-sole height around FOUR crown-to-chin head heights: crown 0%, chin 24%, shoulders 29%, waist 54%, crotch 63%, knee 79%, soles100%. Substantial readable hands and shoes. Do not revert to cute spherical features or polished 3D shading. Face and hair must remain broad expressive brush marks. Preserve character identity, clothing and owned prop. Four independent complete cutouts in one horizontal row: front, strict right-facing profile, back with no face visible, strict left-facing profile. SAME crown and sole line, limbs complete and attached. Generous outer margins and gaps between figures. Genuine transparent background, no floor/shadow, no loose floating paint. Irmgard: older broad-faced stocky woman, copper curls, hollow tired eyes, long asymmetric nose, mustard vest, navy sweater, olive trousers, tan walking shoes, single burgundy binder held under anatomical RIGHT arm/right hand. Binder front screen-left, back screen-right. Preserve worn angular facial drawing of image one; body should belong beside Söder and the Sandales rather than a tall realistic human.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-9e43d379-9306-40bb-8e27-c32827e2468a.png",
+      "references": [
+        "crowd-irmgard-aktenordner-expressionist-v4.png",
+        "crowd-irmgard-aktenordner-directions.png"
+      ],
+      "status": "Compact expressionist resident candidate; motion/scale review outstanding.",
+      "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bytes": 1276475,
+      "componentBounds": [
+        [
+          245,
+          19,
+          581,
+          713
+        ],
+        [
+          749,
+          22,
+          973,
+          714
+        ],
+        [
+          1138,
+          19,
+          1484,
+          712
+        ],
+        [
+          1657,
+          23,
+          1891,
+          715
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Source of locally selected native Irmgard candidate; final world/rendered/full-cast/publication acceptance pending.",
+      "minimumCanvasMargin": 9,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v4.png",
+            "sha256": "df0435c1de2bb477d8915e6942e647afec484dfa5026ad29b4951ba856869913"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-directions.png",
+            "sha256": "12ae3d6ef691e532d35a0b5b6e6093e7b82b66d7b7b59bfadff8c4af81a48203"
+          }
+        ]
+      }
+    },
+    {
+      "id": "crowd-irmgard-aktenordner-directions",
+      "prompt": "Production sprite source redesign, transparent background. Repaint the FIRST reference image, the four-view curly-red-haired resident Irmgard, as a mature worn Berlin street character in the painterly expressionist visual language of Disco Elysium. The SECOND reference is Söder, the THIRD and FOURTH Herr/Frau Sandale: use only their actual adult silhouette and limb-length relationships, about 3.5 to 3.7 head-heights crown-to-sole, NOT Irmgard's old extremely short toy/chibi body. Preserve Irmgard's recognizable curly ginger hair, stout older female build, mustard quilted sleeveless vest over navy ribbed jumper, olive full-length trousers, broad worn tan work shoes, and single burgundy ring binder under anatomical RIGHT arm (front screen-left). Repaint coherent whole anatomy: longer connected adult torso/arms/thighs/calves matching Söder/Sandales, less enormous head, tired small adult eyes, heavy lids, age lines, downturned closed rest lips, asymmetry, slightly jaded self-possession; no cute baby features. Broken brushwork, scuffed cloth, dry oil/gouache texture, subdued ochre/navy/olive, cool gray-violet face shadows; visually readable as a full-body 2D cartoon, not photorealistic, no glossy 3D shading. EXACTLY FOUR full-body figures in ONE horizontal row: front neutral, true right-facing profile, true rear with no visible face, true left-facing profile. Same identity, proportions, shared crown and sole heights across views, relaxed planted neutral stance with separately readable legs and complete feet. Keep the binder in her anatomical RIGHT hand/arm in every view, including correct occlusion, no switching. At least 50 px transparent gutters and margin, all hair, props and soles fully inside the canvas. Transparent background with genuine alpha, NO ground, shadows, scene, text, labels, grid or decorative marks. This sheet is four neutral direction anchors, not walk animation.",
+      "role": "four-direction resident source candidate",
+      "file": "crowd-irmgard-aktenordner-directions.png",
+      "sha256": "12ae3d6ef691e532d35a0b5b6e6093e7b82b66d7b7b59bfadff8c4af81a48203",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bytes": 1314862,
+      "componentBounds": [
+        [
+          172,
+          24,
+          524,
+          698
+        ],
+        [
+          729,
+          25,
+          971,
+          701
+        ],
+        [
+          1177,
+          24,
+          1532,
+          699
+        ],
+        [
+          1725,
+          25,
+          1962,
+          701
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 23
+    },
+    {
+      "id": "crowd-irmgard-aktenordner-expressionist-v4",
+      "file": "crowd-irmgard-aktenordner-expressionist-v4.png",
+      "prompt": "A Disco Elysium character artist's hand-painted full-body turnaround for a Berlin street game. Strong expressionist oil painting, abrasive dry-brush drawing, flat jagged shapes of opaque paint, angular lived-in face, sunken eyes, bleak wit and real social character. Looks like the actual painterly art direction of Disco Elysium, with crude decisive brushstrokes and color dissonance. Dirty ochre light, green-gray skin shadows, desaturated wine and petrol hues. Adult cartoon anatomy with substantial torso and long connected arms and legs, roughly four head-heights tall, heavy practical shoes. No oversized spherical baby head, no shiny 3D rendering, no airbrushing, no microscopic texture overlay. Keep expressive painted drawing in the face even at small size. Four genuinely separate complete views in one horizontal row: front, right-facing profile, back, left-facing profile, identical actor/outfit, same crown and ground line. Neutral planted stance, two complete boots on each figure. Transparent background, isolated clean connected silhouettes, no floor, no shadow, no floating paint scraps, no labels. Wide transparent gutters between figures. An older, stocky East Berlin woman with untidy curly rust-red hair, a tired long nose, lined asymmetric face, skeptical narrow eyes and a tight downturned mouth. Mustard quilted vest over navy high-neck jumper, faded olive trousers, battered tan walking shoes. Burgundy ring binder gripped under her anatomical RIGHT arm and right hand, front screen-left/back screen-right. Clothes sag and hang heavily; age and attitude live in the drawing. Hand-painted broken-edged hair masses, spare broad strokes in fabric, bold face planes. This is Irmgard Aktenordner, a worn bureaucratic street personality, not a pleasant children's character.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-69e966b1-848e-4268-accd-81346fcad6e4.png",
+      "status": "Stronger expressive paint candidate; proportions too naturalistically tall and police notebook ownership needs correction before production.",
+      "sha256": "df0435c1de2bb477d8915e6942e647afec484dfa5026ad29b4951ba856869913",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2441559,
+      "componentBounds": [
+        [
+          8,
+          12,
+          389,
+          979
+        ],
+        [
+          437,
+          14,
+          715,
+          986
+        ],
+        [
+          783,
+          13,
+          1167,
+          976
+        ],
+        [
+          1242,
+          22,
+          1526,
+          995
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": []
+      }
+    },
+    {
+      "id": "crowd-irmgard-aktenordner-expressionist-contacts-v5",
+      "file": "crowd-irmgard-aktenordner-expressionist-contacts-v5.png",
+      "prompt": "Use the supplied four-view Irmgard sheet as the exact character and painting authority. Same older stocky red-curled Berlin woman, angular tired face, long asymmetric nose, narrow eyes, mustard quilted vest, navy ribbed high neck jumper, faded olive trousers, tan heavy walking shoes, single burgundy binder under anatomical RIGHT arm held by right hand. Keep this stronger Disco Elysium expressionist oil painting with broad rough paint and adult, weathered features. Match her actual head-to-body size, arm/torso/thigh/shin length and bulk from the reference; do not shrink the head, lengthen the body, beautify the face, make her glossy or introduce a new costume. Coherently repaint whole figures, not detached limbs or head cutouts. Four complete independent figures in one horizontal row with equal crown and ground lines and 60px transparent margins/gaps. All soles, curls, fingers and binder inside canvas. Genuine transparent alpha; no floor, shadow, labels or floating brush scraps. POSES left-to-right: (1) FRONT contact walking key, (2) strict RIGHT-facing PROFILE contact key, (3) BACK contact key, (4) strict LEFT-facing PROFILE contact key. A walking contact stance with both complete shoes touching the same ground line and the two legs separated by a clear transparent gap all the way down from crotch to inner shoe edges. For side profiles use a modest natural split step: near leg reaching forward, far leg trailing, each boot complete including heel, toe and sole with a visible gap between boots, no crossed or overlapping trouser legs. Both full thighs must connect under the vest, never two disconnected floating legs. Binder remains anatomical RIGHT, front screen-left/back screen-right; no swapping hands. Upper body quiet, rest lips closed. These are four source walking contacts, not an animation strip or four repeated front views.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-b6c4a7f4-8567-4f8c-857d-a17fd1c411b4.png",
+      "status": "Connected expressive motion source candidate; source registration and ordered review pending.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+      ],
+      "sha256": "ab9e65154559915ed4c95b559c16b94d04eaf91e9ebdfa7d8af1672130acbd3e",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "bytes": 1259789,
+      "componentBounds": [
+        [
+          211,
+          20,
+          567,
+          703
+        ],
+        [
+          666,
+          17,
+          1032,
+          697
+        ],
+        [
+          1155,
+          18,
+          1490,
+          703
+        ],
+        [
+          1599,
+          18,
+          1972,
+          697
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 17,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+            "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source of locally selected native Irmgard candidate; final world/rendered/full-cast/publication acceptance pending."
+    }
+  ]
+}

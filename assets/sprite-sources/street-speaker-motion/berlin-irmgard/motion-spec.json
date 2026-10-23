@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "status": "locally integrated expressive candidate; planted-floor repair awaits fresh encoded/world review",
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "cell": [
+    128,
+    160
+  ],
+  "figureHeight": 136,
+  "pivot": [
+    64,
+    148
+  ],
+  "characters": {
+    "crowd-irmgard-aktenordner": {
+      "actorId": "crowd-irmgard-aktenordner",
+      "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+      "sourceSha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7",
+      "scale": 0.5763688760806917,
+      "figureWorldHeight": 2.33,
+      "cycle_distance": 18.64,
+      "cycleDistanceStatus": "Scaled from frozen exact native lateral fit16.8 by2.33/2.1; same-shoe projection and in-game acceptance pending.",
+      "views": {
+        "down": {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+          "sourceSha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7",
+          "component_bounds": [
+            245,
+            19,
+            581,
+            713
+          ],
+          "source_pivot": [
+            412,
+            713
+          ],
+          "scale": 0.5763688760806917,
+          "landmarks": {
+            "waist": 425,
+            "hip": 470,
+            "hem": [
+              520,
+              520
+            ],
+            "knee": [
+              585,
+              585
+            ],
+            "sock": [
+              657,
+              657
+            ],
+            "ankle": [
+              660,
+              660
+            ],
+            "mid": 410,
+            "centres": [
+              343,
+              477
+            ],
+            "split_path_xy": [
+              [
+                410,
+                470
+              ],
+              [
+                410,
+                510
+              ],
+              [
+                414,
+                550
+              ],
+              [
+                414,
+                713
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted"
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                518,
+                420
+              ],
+              [
+                576,
+                429
+              ],
+              [
+                574,
+                497
+              ],
+              [
+                545,
+                507
+              ],
+              [
+                515,
+                484
+              ]
+            ],
+            [
+              [
+                295,
+                253
+              ],
+              [
+                379,
+                255
+              ],
+              [
+                388,
+                402
+              ],
+              [
+                350,
+                421
+              ],
+              [
+                294,
+                404
+              ]
+            ]
+          ],
+          "plantedTransition": "fade-to-source",
+          "fitStatus": "measured expressive whole source; native probe review pending",
+          "plantedFloor": true
+        },
+        "right": {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-contacts-v5.png",
+          "sourceSha256": "ab9e65154559915ed4c95b559c16b94d04eaf91e9ebdfa7d8af1672130acbd3e",
+          "component_bounds": [
+            666,
+            17,
+            1032,
+            697
+          ],
+          "source_pivot": [
+            849,
+            697
+          ],
+          "scale": 0.5763688760806917,
+          "landmarks": {
+            "waist": 408,
+            "hip": 455,
+            "hem": [
+              512,
+              512
+            ],
+            "knee": [
+              575,
+              575
+            ],
+            "sock": [
+              635,
+              635
+            ],
+            "ankle": [
+              638,
+              638
+            ],
+            "mid": 850,
+            "centres": [
+              800,
+              898
+            ],
+            "split_path_xy": [
+              [
+                850,
+                455
+              ],
+              [
+                847,
+                500
+              ],
+              [
+                840,
+                540
+              ],
+              [
+                843,
+                600
+              ],
+              [
+                849,
+                697
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted",
+            "foot_centres": [
+              745,
+              953
+            ]
+          },
+          "foreground": 0,
+          "protected_polygons": [],
+          "plantedTransition": "recenter-contact",
+          "fitStatus": "whole expressive contact source; explicit hand ownership, gait re-centering retained through planted stop"
+        },
+        "up": {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+          "sourceSha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7",
+          "component_bounds": [
+            1138,
+            19,
+            1484,
+            712
+          ],
+          "source_pivot": [
+            1302,
+            712
+          ],
+          "scale": 0.5763688760806917,
+          "landmarks": {
+            "waist": 413,
+            "hip": 466,
+            "hem": [
+              521,
+              521
+            ],
+            "knee": [
+              585,
+              585
+            ],
+            "sock": [
+              657,
+              657
+            ],
+            "ankle": [
+              660,
+              660
+            ],
+            "mid": 1301,
+            "centres": [
+              1243,
+              1371
+            ],
+            "split_path_xy": [
+              [
+                1301,
+                466
+              ],
+              [
+                1301,
+                510
+              ],
+              [
+                1305,
+                550
+              ],
+              [
+                1306,
+                712
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted"
+          },
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                1141,
+                416
+              ],
+              [
+                1194,
+                420
+              ],
+              [
+                1214,
+                483
+              ],
+              [
+                1184,
+                496
+              ],
+              [
+                1146,
+                476
+              ]
+            ],
+            [
+              [
+                1401,
+                270
+              ],
+              [
+                1464,
+                270
+              ],
+              [
+                1480,
+                394
+              ],
+              [
+                1441,
+                411
+              ],
+              [
+                1410,
+                384
+              ]
+            ]
+          ],
+          "plantedTransition": "fade-to-source",
+          "fitStatus": "measured expressive whole source; native probe review pending",
+          "plantedFloor": true
+        },
+        "left": {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-contacts-v5.png",
+          "sourceSha256": "ab9e65154559915ed4c95b559c16b94d04eaf91e9ebdfa7d8af1672130acbd3e",
+          "component_bounds": [
+            1599,
+            18,
+            1972,
+            697
+          ],
+          "source_pivot": [
+            1792,
+            697
+          ],
+          "scale": 0.5763688760806917,
+          "landmarks": {
+            "waist": 408,
+            "hip": 455,
+            "hem": [
+              512,
+              512
+            ],
+            "knee": [
+              575,
+              575
+            ],
+            "sock": [
+              635,
+              635
+            ],
+            "ankle": [
+              638,
+              638
+            ],
+            "mid": 1804,
+            "centres": [
+              1738,
+              1841
+            ],
+            "split_path_xy": [
+              [
+                1804,
+                455
+              ],
+              [
+                1810,
+                500
+              ],
+              [
+                1814,
+                540
+              ],
+              [
+                1815,
+                600
+              ],
+              [
+                1785,
+                697
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted",
+            "foot_centres": [
+              1680,
+              1890
+            ]
+          },
+          "foreground": 1,
+          "protected_polygons": [],
+          "plantedTransition": "recenter-contact",
+          "fitStatus": "whole expressive contact source; explicit hand ownership, gait re-centering retained through planted stop"
+        }
+      },
+      "turn_sources": [
+        {
+          "neutral": "down"
+        },
+        {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-turns-v5.png",
+          "sourceSha256": "90a7ecef82c80a5276b5613d581896530849a9b18bcb4eb829e1814f9c88ed13",
+          "component_bounds": [
+            234,
+            19,
+            560,
+            710
+          ],
+          "source_pivot": [
+            397,
+            710
+          ],
+          "scale": 0.5763688760806917
+        },
+        {
+          "neutral": "right"
+        },
+        {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-turns-v5.png",
+          "sourceSha256": "90a7ecef82c80a5276b5613d581896530849a9b18bcb4eb829e1814f9c88ed13",
+          "component_bounds": [
+            713,
+            19,
+            998,
+            707
+          ],
+          "source_pivot": [
+            855.5,
+            707
+          ],
+          "scale": 0.5763688760806917
+        },
+        {
+          "neutral": "up"
+        },
+        {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-turns-v5.png",
+          "sourceSha256": "90a7ecef82c80a5276b5613d581896530849a9b18bcb4eb829e1814f9c88ed13",
+          "component_bounds": [
+            1156,
+            21,
+            1468,
+            706
+          ],
+          "source_pivot": [
+            1312,
+            706
+          ],
+          "scale": 0.5763688760806917
+        },
+        {
+          "neutral": "left"
+        },
+        {
+          "source": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-turns-v5.png",
+          "sourceSha256": "90a7ecef82c80a5276b5613d581896530849a9b18bcb4eb829e1814f9c88ed13",
+          "component_bounds": [
+            1617,
+            19,
+            1936,
+            708
+          ],
+          "source_pivot": [
+            1776.5,
+            708
+          ],
+          "scale": 0.5763688760806917
+        }
+      ],
+      "sourceBrief": "Expressive v5 Irmgard: weathered red-curled face, mustard/navy/olive; anatomical-right binder. Whole contact profiles expose complete legs.",
+      "status": "expressionist source-fit candidate; native and runtime review pending"
+    }
+  },
+  "nativeExport": true
+}

@@ -69,6 +69,30 @@ class SpeakerFamilyTests(unittest.TestCase):
         self.assertNotEqual(frames[0].tobytes(), frames[2].tobytes())
         self.assertNotEqual(frames[4].tobytes(), frames[2].tobytes())
 
+    def test_upright_billboard_floor_keeps_loaded_shoes_above_ground(self):
+        original_view = copy.deepcopy(self.person['views']['down'])
+        for direction in ['down', 'up']:
+            view = copy.deepcopy(original_view)
+            view.pop('originalUpper')
+            view['plantedFloor'] = True
+            self.person['views'] = {direction: view}
+            frames, records = self.builder.motion(self.person, direction)
+            self.assertLessEqual(max(limb['dy'][-1] for record in records
+                                     for limb in record['limb_displacement']), 1e-9,
+                'An upright billboard cannot put a loaded shoe below its world-ground pivot')
+            for frame in frames:
+                self.assertLessEqual(frame.getbbox()[3], 473,
+                    'The complete source shoe must stay above the floor; no crop or per-cell fitting')
+            self.assertEqual(self.builder.neutral(self.person, direction).tobytes(), self.image.tobytes())
+
+    def test_billboard_floor_is_opt_in_and_rejects_profile_registration(self):
+        view = copy.deepcopy(self.person['views']['down'])
+        view['plantedFloor'] = True
+        self.person['views'] = {'right': view}
+        self.spec_path.write_text(json.dumps(self.spec))
+        with self.assertRaisesRegex(ValueError, 'vertical'):
+            self.family.configure(self.spec_path)
+
 
     def test_world_height_derives_billboard_from_authored_figure_fraction(self):
         self.assertIsNotNone(self.family, 'Family geometry normalization is missing')
@@ -78,6 +102,30 @@ class SpeakerFamilyTests(unittest.TestCase):
         self.assertAlmostEqual(geometry['billboardWorldHeight'], 32 / 17, places=12)
         with self.assertRaisesRegex(ValueError, 'world height'):
             self.family.world_geometry(self.spec, {**self.person, 'figureWorldHeight': 0})
+
+    def test_export_receipts_use_git_stable_lf_bytes(self):
+        output = Path(self.temp.name) / 'nested' / 'manifest.json'
+        self.builder.json_write(output, {'sourceHash': 'abc', 'source': 'Söder'})
+        encoded = output.read_bytes()
+        self.assertNotIn(b'\r', encoded,
+                         'Windows newline translation invalidates saved source/export bindings after Git normalization')
+        self.assertEqual(encoded, (json.dumps({'sourceHash': 'abc', 'source': 'Söder'}, indent=2) + '\n').encode('utf8'))
+
+    def test_standing_fallback_uses_exact_encoded_neutral_not_another_view(self):
+        self.builder.DEST = Path(self.temp.name) / 'export'
+        directory = self.builder.DEST / 'fixture'
+        directory.mkdir(parents=True)
+        atlas = Image.new('RGBA', (256,160), '#a04020')
+        selected = self.image.resize((128,160), Image.Resampling.NEAREST)
+        atlas.paste(selected, (128,0))
+        atlas.save(directory/'test.webp', lossless=True, exact=True)
+        manifest = {'frame_size':[128,160], 'interactions':{'neutral':{'row':0,'col':1}},
+                    'variants':{'desktop':{'image':'test.webp'}}}
+        receipt = self.family.write_standing(self.builder, manifest, 'fixture')
+        output = directory/receipt['image']
+        self.assertEqual(Image.open(output).convert('RGBA').tobytes(), selected.tobytes())
+        self.assertEqual(receipt['sha256'], hashlib.sha256(output.read_bytes()).hexdigest())
+        self.assertEqual(receipt['image_size'], [128,160])
 
     def test_bindings_preserve_core_builder_and_reject_changed_config(self):
         self.assertIsNotNone(self.family, 'Family source binding is missing')
@@ -116,6 +164,57 @@ class SpeakerFamilyTests(unittest.TestCase):
         legacy = load(ROOT / 'tools/build-resident-motion.py', 'original_side')
         self.assertEqual(self.builder.neutral(person, 'right').tobytes(),
                          legacy.neutral(person, 'right').tobytes())
+
+    def test_contact_stop_retains_recentered_feet_instead_of_returning_to_split_source(self):
+        view = copy.deepcopy(self.person['views']['down'])
+        view.pop('originalUpper')
+        view['plantedTransition'] = 'recenter-contact'
+        view['landmarks']['foot_centres'] = [235, 275]
+        self.person['views'] = {'right': view}
+        self.spec['characters']['fixture'] = self.person
+        self.spec_path.write_text(json.dumps(self.spec))
+        builder, _ = self.family.configure(self.spec_path)
+        neutral = builder.neutral(self.person, 'right')
+        source_feet = self.image.crop((0, 450, 512, 480)).getbbox()
+        planted_feet = neutral.crop((0, 450, 512, 480)).getbbox()
+        self.assertLess(planted_feet[2]-planted_feet[0], source_feet[2]-source_feet[0]-20)
+        self.assertEqual(planted_feet[3], source_feet[3], 'Rest shoes must remain on their ground line')
+        self.assertEqual(neutral.crop((0,0,512,300)).tobytes(), self.image.crop((0,0,512,300)).tobytes())
+        bridges = builder.bridge_frames(self.person, 'right')
+        self.assertEqual(bridges[2].tobytes(), neutral.tobytes())
+        self.assertNotEqual(bridges[0].tobytes(), neutral.tobytes())
+        self.assertNotEqual(bridges[4].tobytes(), neutral.tobytes())
+
+    def test_native_layout_keeps_walk_rows_and_all_64_phase_stops_without_overlapping_slots(self):
+        layout = self.family.native_layout()
+        self.assertEqual((layout['cols'],layout['rows']), (21,17))
+        occupied = set()
+        def claim(row,col):
+            self.assertNotIn((row,col),occupied)
+            self.assertTrue(0<=row<17 and 0<=col<21)
+            occupied.add((row,col))
+        for direction in ['down','right','up','left']:
+            walk=layout['walks'][direction]
+            for col in range(16):claim(walk['row'],col)
+            bridge=layout['bridges'][direction]
+            for col in bridge['stop_cols']+bridge['start_cols']:claim(bridge['row'],col)
+            phases=layout['settles'][direction]
+            self.assertEqual(set(phases),set(map(str,range(16))))
+            for frames in [p['frames'] for p in phases.values()]:
+                self.assertEqual(len(frames),5)
+                for cell in frames[:-1]:claim(cell['row'],cell['col'])
+                self.assertEqual(frames[-1],dict(row=bridge['row'],col=bridge['stop_cols'][-1],ms=70))
+        for col in range(8):claim(layout['turns']['rows'][0],col)
+        self.assertEqual(len(occupied),348)
+
+    def test_phase_stop_retains_its_own_gait_sample_and_converges_to_shared_neutral(self):
+        first=self.family.settle_frames(self.builder,self.person,'down',5)
+        opposite=self.family.settle_frames(self.builder,self.person,'down',13)
+        self.assertEqual(len(first),5)
+        self.assertNotEqual(first[0].tobytes(),opposite[0].tobytes())
+        neutral=self.builder.neutral(self.person,'down').tobytes()
+        self.assertEqual(first[-1].tobytes(),neutral)
+        self.assertEqual(opposite[-1].tobytes(),neutral)
 
 
 if __name__ == '__main__':

@@ -14,6 +14,7 @@ const slot=(row,col)=>row*original.grid[0]+col;
 const walkSlot=(direction,phase=0)=>slot(original.atlasMotion.walks[direction].row,phase);
 const neutralSlot=()=>slot(original.atlasMotion.neutral.row,original.atlasMotion.neutral.col);
 const bridgeSlot=(direction,kind,index=0)=>{const b=original.atlasMotion.bridges[direction];return slot(b.row,b[kind][index])};
+const settleCells=original.atlasMotion.settles.left['4'].frames.slice(0,2).map(({row,col})=>({row,col,ms:70}));
 const isWalkSlot=value=>Object.values(original.atlasMotion.walks).some(w=>Math.floor(value/original.grid[0])===w.row&&value%original.grid[0]<w.frames);
 const selectedAtlas=view=>original.variants[view.inspect().variant];
 const manifest=person=>({schemaVersion:1,characters:{'crowd-irmgard-aktenordner':person}});
@@ -114,7 +115,7 @@ test('discontinuity requires matching standing readmission and resumes from neut
 
 
 test('optional phase settles validate direction, phase, dedicated cells, duration and facing neutral',()=>{
- const build=()=>{const p=structuredClone(original),b=p.atlasMotion.bridges.left;p.atlasMotion.settles={left:{'4':{frames:[{row:b.row,col:5,ms:70},{row:b.row,col:b.stop_cols.at(-1),ms:70}]}}};return p};
+ const build=()=>{const p=structuredClone(original),b=p.atlasMotion.bridges.left;p.atlasMotion.settles={left:{'4':{frames:[structuredClone(settleCells[0]),{row:b.row,col:b.stop_cols.at(-1),ms:70}]}}};return p};
  assert.doesNotThrow(()=>S.registerStreetCharacterManifest(manifest(build())));
  for(const change of [
   p=>p.atlasMotion.settles.back=p.atlasMotion.settles.left,
@@ -133,13 +134,13 @@ test('optional phase settles validate direction, phase, dedicated cells, duratio
 
 test('atlas observer projects optional phase settle without a second clock or visible entry pop',async()=>{
  const b=original.atlasMotion.bridges.left,savedSettles=original.atlasMotion.settles;
- original.atlasMotion.settles={left:{'4':{frames:[5,6,b.stop_cols.at(-1)].map(col=>({row:b.row,col,ms:70}))}}};
+ original.atlasMotion.settles={left:{'4':{frames:[...structuredClone(settleCells),{row:b.row,col:b.stop_cols.at(-1),ms:70}]}}};
  let v;
  try{
   const readyView=await ready();const a=readyView.a;v=readyView.v;S.requestStreetSimulationMove(a,-1,0);finish(a);
   move(a,-original.strideDistance*4.5/16,0);tick(a);assert.equal(info(a).phase,4);
   const before=structuredClone(info(a));assert(S.requestStreetSimulationMove(a,1,0));assert.equal(info(a).slot,before.slot);
   for(let i=0;i<3;i++){v.sync();tick(a,.5,true)}assert.equal(info(a).slot,before.slot);assert.equal(info(a).gaitDistance,before.gaitDistance);
-  tick(a,.06);assert.equal(info(a).slot,slot(b.row,5));finish(a);assert.equal(info(a).facing,'right');
+  tick(a,.06);assert.equal(info(a).slot,slot(settleCells[0].row,settleCells[0].col));finish(a);assert.equal(info(a).facing,'right');
  }finally{v?.dispose();original.atlasMotion.settles=savedSettles}
 });
