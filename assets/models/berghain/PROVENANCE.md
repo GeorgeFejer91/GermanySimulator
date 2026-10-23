@@ -10,7 +10,7 @@ node berghain/export-model.mjs
 ```
 
 `berghain-study.glb` contains the same model with PBR materials and vertex tones,
-without external textures, decoders or remote resources. `manifest.json` records
+embedded original textures, and no external files or decoders. `manifest.json` records
 its size, hash and bounds. Berlin open-data roof and annex geometry is embedded
 under the licence recorded below; no third-party photo or artwork is embedded.
 
@@ -48,12 +48,27 @@ now point outward. Interior floor elevations and entrance width are retained.
 Panel insets use an estimated 7 cm depth and four solid masonry rims; this is
 not a measurement extracted from the photographs.
 
-These references inform original geometry and basic material colours only.
-No photograph, graffiti or artwork is embedded. Plain PBR colours and instance
-tones do not reproduce observed concrete/stone grain, dirt or weathering; there
-are no material texture maps yet. The smoking-room bridge and fine roof/rear
-details remain missing. The source catalogue records individual image licences
-and research-only local copies separately from shipped assets.
+These references inform original geometry and material appearance estimates.
+No photograph, graffiti or artwork is embedded. The smoking-room bridge and
+fine roof/rear details remain missing. The source catalogue records individual
+image licences and research-only copies separately from shipped assets.
+
+## Original material maps
+
+`berghain/build-materials.py` generates four tileable families (mineral, stone,
+metal, aggregate), each with a 512×512 base-colour, roughness and normal PNG.
+They use seeded noise with no photographic pixel input. `textures/manifest.json`
+records parameters, image sizes/hashes and the unmeasured microrelief estimates.
+Regenerate with `python berghain/build-materials.py`, then the normal GLB export.
+
+The viewer retains instanced geometry and projects UVs in model metres with
+2 m repeats. The portable asset bakes equivalent UVs and embeds/reuses the same
+12 PNGs. Base colour uses sRGB; roughness/normal use linear data. Roughness is
+packed into G, with B=255 preserving the material's metallic factor in glTF.
+Surface images add grain and modest variation; they are not scans or verified
+stain/damage maps of the building. Less-documented roofs keep their flat PBR
+appearance. Beams, hoppers, glazing, furniture and undocumented installations
+retain their current simpler materials and remain fidelity work.
 
 ## Official exterior calibration reference
 

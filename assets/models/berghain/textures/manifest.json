@@ -1,0 +1,95 @@
+{
+  "generator": "berghain/build-materials.py",
+  "origin": "Original seeded procedural maps; no image inputs",
+  "limits": "Approximate appearance and microrelief, not scanned site materials",
+  "size": [
+    512,
+    512
+  ],
+  "families": {
+    "mineral": {
+      "metresPerTile": 2,
+      "maps": {
+        "baseColor": {
+          "file": "textures/mineral-baseColor.png",
+          "bytes": 108093,
+          "sha256": "1cbdf223d1e1bbb8e9065d26377806812ff091a177e8c1b7a793cfc22a958986"
+        },
+        "roughness": {
+          "file": "textures/mineral-roughness.png",
+          "bytes": 262890,
+          "sha256": "bb5a7d76ab98b9df6a07a7f3350a798de63670cd3956f3f16da5575f5a9a7363"
+        },
+        "normal": {
+          "file": "textures/mineral-normal.png",
+          "bytes": 305128,
+          "sha256": "d961ee62e31e91dda6d30381b5cf8d9366480d275c7aa54c6a1ba47cfc93093f"
+        }
+      },
+      "estimatedReliefMetres": 0.0008
+    },
+    "stone": {
+      "metresPerTile": 2,
+      "maps": {
+        "baseColor": {
+          "file": "textures/stone-baseColor.png",
+          "bytes": 142207,
+          "sha256": "29c5387dbbceee689615511e72d1c04470be9b5e1b12a314a24b80c70d991399"
+        },
+        "roughness": {
+          "file": "textures/stone-roughness.png",
+          "bytes": 262757,
+          "sha256": "efc6d985c468117f2f80c2b24c5efacc993399418afc7b33e15b6c245c67e548"
+        },
+        "normal": {
+          "file": "textures/stone-normal.png",
+          "bytes": 382455,
+          "sha256": "dc4c997fe6e57f9d4bb255e1d0090685e4c2ce2c4106157c05260df8fe46d2f5"
+        }
+      },
+      "estimatedReliefMetres": 0.0015
+    },
+    "metal": {
+      "metresPerTile": 2,
+      "maps": {
+        "baseColor": {
+          "file": "textures/metal-baseColor.png",
+          "bytes": 107214,
+          "sha256": "067add515abf8dffbe370f07fae268d24a0fea765a7656ed68e2ca274c490d17"
+        },
+        "roughness": {
+          "file": "textures/metal-roughness.png",
+          "bytes": 119038,
+          "sha256": "74547d0c532dbe1cbeb7889bf48585beac5e9f339facb793fe111c6b9fbe7964"
+        },
+        "normal": {
+          "file": "textures/metal-normal.png",
+          "bytes": 142349,
+          "sha256": "980d12a0cf880d9de2fe3e023f4fc50c2fa7b34059e52cbaed92ec5c7fcb8156"
+        }
+      },
+      "estimatedReliefMetres": 0.00015
+    },
+    "aggregate": {
+      "metresPerTile": 2,
+      "maps": {
+        "baseColor": {
+          "file": "textures/aggregate-baseColor.png",
+          "bytes": 173101,
+          "sha256": "940a01422ea3d31201ba675a3728077bf07125f0727651dbfba24a0f1e573b97"
+        },
+        "roughness": {
+          "file": "textures/aggregate-roughness.png",
+          "bytes": 262767,
+          "sha256": "af47f6b7e63d06c10cb51e676321d1eae44a6a098a7eb55db2b9f4bda7a7a9f3"
+        },
+        "normal": {
+          "file": "textures/aggregate-normal.png",
+          "bytes": 486957,
+          "sha256": "df7303efb5fcebe74c5fb58f3fb4c9958ce46b46ef03d57379b0e6552a65836a"
+        }
+      },
+      "estimatedReliefMetres": 0.003
+    }
+  }
+}

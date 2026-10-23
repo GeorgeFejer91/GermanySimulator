@@ -1,7 +1,8 @@
-import {writeFileSync} from 'node:fs';
+import {writeFileSync, readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createBerghainModel, disposeBerghainModel} from '../assets/models/berghain/model.mjs';
+import {surfaceUV} from '../assets/models/berghain/surface-materials.mjs';
 
 const official = process.argv.includes('--survey');
 const model = official ? (await import('../assets/models/berghain/survey-model.mjs')).createSurveyModel() : createBerghainModel();
@@ -12,17 +13,22 @@ const gltf = {asset: {version: '2.0', generator: 'Germany Simulator Berghain stu
   meshes: [], materials: [], accessors: [], bufferViews: [], buffers: []};
 const buffers = [];
 let byteOffset = 0, triangles = 0;
+const textureIndices = new Map();
 
-function accessor(array, type, componentType, bounds = false) {
-  const bytes = Buffer.from(array.buffer, array.byteOffset, array.byteLength);
+function bufferView(bytes) {
   const bufferView = gltf.bufferViews.length;
   gltf.bufferViews.push({buffer: 0, byteOffset, byteLength: bytes.length});
   buffers.push(bytes);
   const padding = (4 - bytes.length % 4) % 4;
   if (padding) buffers.push(Buffer.alloc(padding));
   byteOffset += bytes.length + padding;
-  const lanes = type === 'VEC3' ? 3 : 1;
-  const entry = {bufferView, componentType, count: array.length / lanes, type};
+  return bufferView;
+}
+
+function accessor(array, type, componentType, bounds = false) {
+  const view = bufferView(Buffer.from(array.buffer, array.byteOffset, array.byteLength));
+  const lanes = {SCALAR:1,VEC2:2,VEC3:3}[type];
+  const entry = {bufferView:view, componentType, count: array.length / lanes, type};
   if (bounds) {
     entry.min = [Infinity, Infinity, Infinity]; entry.max = [-Infinity, -Infinity, -Infinity];
     for (let i = 0; i < array.length; i++) {
@@ -34,6 +40,18 @@ function accessor(array, type, componentType, bounds = false) {
   return gltf.accessors.length - 1;
 }
 
+function texture(filename) {
+  if (textureIndices.has(filename)) return {index:textureIndices.get(filename)};
+  gltf.images ||= []; gltf.textures ||= [];
+  gltf.samplers ||= [{magFilter:9729,minFilter:9987,wrapS:10497,wrapT:10497}];
+  const bytes=readFileSync(new URL('../assets/models/berghain/'+filename,import.meta.url));
+  const source=gltf.images.length;
+  gltf.images.push({name:filename,mimeType:'image/png',bufferView:bufferView(bytes)});
+  const index=gltf.textures.length;
+  gltf.textures.push({source,sampler:0}); textureIndices.set(filename,index);
+  return {index};
+}
+
 for (const group of model.children) {
   const groupIndex = gltf.nodes.length;
   gltf.nodes[0].children.push(groupIndex);
@@ -43,6 +61,7 @@ for (const group of model.children) {
     const instances = mesh.isInstancedMesh ? mesh.count : 1;
     const vertexCount = sourcePosition.count * instances;
     const positions = new Float32Array(vertexCount * 3), normals = new Float32Array(vertexCount * 3), colors = new Float32Array(vertexCount * 3);
+    const surface = mesh.material.userData.surface, uvs = surface ? new Float32Array(vertexCount*2) : null;
     const sourceIndices = geometry.index?.array || Uint32Array.from({length: sourcePosition.count}, (_, i) => i);
     const indices = new Uint32Array(sourceIndices.length * instances);
     const matrix = new THREE.Matrix4(), normalMatrix = new THREE.Matrix3(), vector = new THREE.Vector3(), color = new THREE.Color();
@@ -57,18 +76,22 @@ for (const group of model.children) {
         vector.fromBufferAttribute(sourcePosition, vertex).applyMatrix4(matrix).toArray(positions, offset);
         vector.fromBufferAttribute(sourceNormal, vertex).applyNormalMatrix(normalMatrix).toArray(normals, offset);
         color.toArray(colors, offset);
+        if (uvs) uvs.set(surfaceUV(positions.subarray(offset,offset+3),normals.subarray(offset,offset+3),surface.metresPerTile),offset/3*2);
       }
       for (let i = 0; i < sourceIndices.length; i++) indices[instance * sourceIndices.length + i] = sourceIndices[i] + instance * sourcePosition.count;
     }
     const material = mesh.material, materialIndex = gltf.materials.length;
     gltf.materials.push({name: mesh.name, pbrMetallicRoughness: {baseColorFactor: [...material.color.toArray(), material.opacity],
-      metallicFactor: material.metalness, roughnessFactor: material.roughness},
+      metallicFactor: material.metalness, roughnessFactor: material.roughness,
+      ...(surface?{baseColorTexture:texture(surface.baseColor),metallicRoughnessTexture:texture(surface.roughness)}:{})},
+      ...(surface?{normalTexture:{...texture(surface.normal),scale:1}}:{}),
       emissiveFactor: material.emissive.toArray().map(component => component * material.emissiveIntensity),
       ...(material.transparent ? {alphaMode: 'BLEND', doubleSided: true} : {}),
       ...(material.side === THREE.DoubleSide ? {doubleSided: true} : {})});
     const meshIndex = gltf.meshes.length;
     gltf.meshes.push({name: mesh.name, primitives: [{attributes: {POSITION: accessor(positions, 'VEC3', 5126, true),
-      NORMAL: accessor(normals, 'VEC3', 5126), COLOR_0: accessor(colors, 'VEC3', 5126)},
+      NORMAL: accessor(normals, 'VEC3', 5126), COLOR_0: accessor(colors, 'VEC3', 5126),
+      ...(uvs?{TEXCOORD_0:accessor(uvs,'VEC2',5126)}:{})},
       indices: accessor(indices, 'SCALAR', 5125), material: materialIndex}]});
     gltf.nodes[groupIndex].children.push(gltf.nodes.length);
     gltf.nodes.push({name: mesh.name, mesh: meshIndex});
@@ -90,6 +113,7 @@ writeFileSync(new URL(filename, directory), output);
 const bounds = new THREE.Box3().setFromObject(model);
 const manifest = {file: filename, bytes: output.length, sha256: createHash('sha256').update(output).digest('hex'),
   triangles, meshes: gltf.meshes.length, materials: gltf.materials.length, units: 'metres',
+  ...(gltf.images?{textures:gltf.images.length,embeddedTextureBytes:[...textureIndices.keys()].reduce((total,path)=>total+readFileSync(new URL('../assets/models/berghain/'+path,import.meta.url)).length,0)}:{}),
   bounds: {min: bounds.min.toArray(), max: bounds.max.toArray()},
   accuracy: official ? model.userData.status : 'Reference-based study; most dimensions and layout are provisional',
   source: official ? 'survey-data.mjs' : 'layout.mjs', build: '../../../berghain/export-model.mjs' + (official ? ' --survey' : '')};

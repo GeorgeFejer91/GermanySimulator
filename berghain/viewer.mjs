@@ -3,6 +3,7 @@ import {createBerghainModel, disposeBerghainModel} from '../assets/models/bergha
 import {layout, viewpoints} from '../assets/models/berghain/layout.mjs';
 import {moveVisitor, eyeHeight} from './navigation.mjs';
 import {fitExteriorRadius, exteriorTarget} from './camera.mjs';
+import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.mjs';
 import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../assets/vendor/pretext/dist/layout.js';
 
 const canvas = document.querySelector('#model');
@@ -46,6 +47,7 @@ for (const [x, y, z, color, intensity, distance] of [[5, 12, -5, '#e3d4af', 180,
 let mode = 'exterior', visitor = {...viewpoints.foyer.position}, yaw = 0, pitch = 0;
 let orbitAngle = .7, orbitPitch = 1.28, orbitRadius = 115;
 let frame = null, lastFrame = 0, lost = false;
+let surfacesReady = false, surfaceError = false;
 const keys = new Set(), touchMoves = new Map(), pointers = new Map();
 const target = new THREE.Vector3(...exteriorTarget);
 
@@ -84,8 +86,9 @@ function render(time) {
   canvas.dataset.position = JSON.stringify(mode === 'interior' ? visitor : camera.position.toArray());
   canvas.dataset.drawCalls = String(renderer.info.render.calls);
   canvas.dataset.triangles = String(renderer.info.render.triangles);
-  canvas.dataset.ready = 'true';
-  loading.hidden = true;
+  canvas.dataset.ready = String(surfacesReady);
+  loading.hidden = surfacesReady && !surfaceError;
+  if (surfaceError) loading.textContent = 'Surface textures could not load. Showing basic materials; reload to retry.';
 }
 
 function resize() {
@@ -266,4 +269,16 @@ if (renderer) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
   resize();
+  loadSurfaceTextures(model, Math.min(4, renderer.capabilities.getMaxAnisotropy())).then(count => {
+    if (model.userData.disposed) return;
+    surfacesReady = true;
+    canvas.dataset.materials = 'ready';
+    canvas.dataset.surfaceTextures = String(count);
+    invalidate();
+  }).catch(() => {
+    if (model.userData.disposed) return;
+    surfacesReady = true; surfaceError = true;
+    canvas.dataset.materials = 'fallback';
+    invalidate();
+  });
 }

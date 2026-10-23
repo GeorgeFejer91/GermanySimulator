@@ -116,7 +116,7 @@ The popular “Berghain empiric study” crowd-type cartoon is not a building bl
 
 | Area | Strongest references | Remaining uncertainty |
 | --- | --- | --- |
-| Exterior and façade | A01, A03, P01–P03, P07–P10, acquired G07–G09; future textured G01 | Study mass, roofs and annexes calibrated; separated window tiers and attic vents now photo-informed. Per-elevation bay counts/opening dimensions, smoking-room bridge, roof/rear detail and material/weathering maps remain unfinished. |
+| Exterior and façade | A01, A03, P01–P03, P07–P10, acquired G07–G09; future textured G01 | Study mass, roofs and annexes calibrated; window tiers/attic vents photo-informed. Original procedural PBR grain maps approximate material appearance. Per-elevation bay counts/opening dimensions, smoking bridge, roof/rear detail and unique weathering remain unfinished. |
 | Foyer / cloakroom / main stair | I01–I02, I08–I10 | Current partitions, stair dimensions and artwork changes. |
 | Berghain dance floor / bars | A01, A07, I01–I02, P04–P06 | Current speaker positions, lighting rig, service routes and exact elevations. |
 | Panorama / lounge / glass stair | A01, A07, A13, I01–I02, I11 | Measured width/depth, missing second lounge level, bathroom redesign, room elevations and current acoustic/lighting installation. |

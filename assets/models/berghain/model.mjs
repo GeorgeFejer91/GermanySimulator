@@ -2,6 +2,7 @@ import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {layout, materials} from './layout.mjs';
 import {createSurveyModel} from './survey-model.mjs';
 import {annexPartIds, mainPartId, hallPartId} from './calibration.mjs';
+import {configureSurfaceMaterial} from './surface-materials.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -21,6 +22,7 @@ export function createBerghainModel() {
     let group = model.getObjectByName(section);
     if (!group) { group = new THREE.Group(); group.name = section; model.add(group); }
     const material = new THREE.MeshStandardMaterial({...materials[materialName]});
+    if (shape === 'box') configureSurfaceMaterial(material, materialName);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
     mesh.castShadow = !material.transparent;
@@ -60,17 +62,24 @@ export function createBerghainModel() {
   }
   const annexes = createSurveyModel({partIds: annexPartIds});
   for (const group of [...annexes.children]) { group.name = 'official annex ' + group.name; model.add(group); }
+  model.traverse(mesh => {
+    if (mesh.isMesh && !mesh.isInstancedMesh && mesh.parent.name !== 'roof' && mesh.name !== 'RoofSurface')
+      configureSurfaceMaterial(mesh.material, 'concrete');
+  });
   return model;
 }
 
 export function disposeBerghainModel(model) {
-  const geometries = new Set(), materials = new Set();
+  model.userData.disposed = true;
+  const geometries = new Set(), materials = new Set(), textures = new Set();
   model.traverse(mesh => {
     if (!mesh.isMesh) return;
     geometries.add(mesh.geometry);
     materials.add(mesh.material);
+    for (const map of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap]) if (map) textures.add(map);
     mesh.dispose?.();
   });
   for (const geometry of geometries) geometry.dispose();
   for (const material of materials) material.dispose();
+  for (const texture of textures) texture.dispose();
 }

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {surfaceFamilies} from '../assets/models/berghain/surface-data.mjs';
+import {materialScenario} from './material-playtest.mjs';
 
 async function ready(page, baseURL) {
   await page.goto(baseURL + '/berghain/model.html');
@@ -41,9 +43,13 @@ export default {
     'assets/models/berghain/layout.mjs', 'assets/models/berghain/model.mjs', 'assets/models/berghain/berghain-study.glb',
     'assets/models/berghain/survey-data.mjs', 'assets/models/berghain/survey-model.mjs',
     'assets/models/berghain/berghain-exterior-lod2.glb', 'assets/models/berghain/survey-manifest.json',
-    'assets/models/berghain/calibration.mjs', 'assets/models/berghain/manifest.json']
+    'assets/models/berghain/calibration.mjs', 'assets/models/berghain/manifest.json',
+    'assets/models/berghain/surface-materials.mjs','assets/models/berghain/surface-data.mjs',
+    'assets/models/berghain/textures/manifest.json',
+    ...Object.values(surfaceFamilies).flatMap(family=>['baseColor','roughness','normal'].map(kind=>'assets/models/berghain/'+family[kind]))]
     .map(path => ({path, sha256: createHash('sha256').update(readFileSync(new URL('../' + path, import.meta.url))).digest('hex')})),
   scenarios: [
+    materialScenario,
     {id: 'official-exterior', modes: ['stress'], profiles: ['desktop'], async run({page, baseURL, artifacts}) {
       await ready(page, baseURL);
       const measured = await page.evaluate(async () => {
@@ -132,7 +138,10 @@ export default {
     {id: 'tour', modes: ['quick', 'stress'], async run({page, context, baseURL, artifacts, profile}) {
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
+      page.on('console',message=>{if(/shader error|VALIDATE_STATUS|program not valid/i.test(message.text())) errors.push(message.text());});
       await ready(page, baseURL);
+      assert.equal(await page.locator('#model').getAttribute('data-materials'),'ready');
+      assert.equal(await page.locator('#model').getAttribute('data-surface-textures'),'12');
       await artifacts.screenshot(page, 'exterior.png');
       assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
       const initial = await page.locator('#model').getAttribute('data-position');
@@ -225,6 +234,20 @@ export default {
       await page.getByText('The 3D viewer could not load.', {exact: false}).waitFor();
       assert.ok(await page.locator('#loading').isVisible());
       return {fallback: 'visible failure with direct catalogue path'};
+    }},
+    {id: 'texture-failure', modes: ['stress'], async run({page, baseURL, artifacts}) {
+      await page.route('**/assets/models/berghain/textures/*.png',route=>route.abort());
+      await ready(page,baseURL);
+      assert.equal(await page.locator('#model').getAttribute('data-materials'),'fallback');
+      assert.match(await page.locator('#loading').textContent(),/Showing basic materials/);
+      assert.ok(await page.locator('#loading').isVisible());
+      await page.locator('#enter').click(); await page.locator('#model').focus();
+      const before=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+      await page.keyboard.down('w'); await page.waitForTimeout(350); await page.keyboard.up('w');
+      const after=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+      assert.ok(Math.hypot(after.x-before.x,after.z-before.z)>.25,'Basic-material fallback must remain usable');
+      await artifacts.screenshot(page,'texture-fallback.png');
+      return {input:'Real keyboard movement with all material images unavailable',before,after};
     }},
     {id: 'graphics-lifecycle', modes: ['stress'], profiles: ['desktop'], async run({page, baseURL, artifacts}) {
       await page.addInitScript(() => {

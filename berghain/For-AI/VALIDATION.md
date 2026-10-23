@@ -2,7 +2,43 @@
 
 2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
 
-## Photo-informed façade with inset panels — current
+## Original material maps — current
+
+Frozen candidate: `output/berghain-material-candidate.json`, **36/36 hashes**
+confirmed by both required read-only reviewers. GLB **6,713,940 bytes /
+40,112 triangles / 39 meshes / 12 embedded PNGs**, SHA-256
+`1fbb211bc0f63c54334b27bbe29b813e2b648146c699d4d4d434f1e4e734674f`.
+Geometry bounds, layout, calibration, navigation and camera hashes are unchanged.
+
+- **18/18 PASS**: material embedding/UV contract plus prior model/survey/packaging
+  checks. The portable asset embeds/deduplicates all 12 images and uses standard
+  base-colour, packed metallic/roughness and normal textures with VEC2 UVs.
+- `output/berghain-materials-revised/report.json`: **7/7 PASS**, desktop/Android
+  portrait/landscape tours and all-texture-download failure with actual walking;
+  desktop graphics loss/restore and stopped idle rendering. No shader error.
+- `output/berghain-material-parity/report.json`: **1/1 PASS** isolated close-up
+  editable/native-GLB rendering with the same lights/camera. Mean 8-bit RGB
+  difference 0.8558, >32-level differences in 0.0314% of pixels, 556 sampled
+  colours. This verifies visible material transfer, not photographic accuracy.
+  All 12 shared source textures emit disposal once. Runtime hashes match freeze.
+- Physics **PASS**, fresh 1,492 solid/render bounds and six legal viewpoints,
+  entry/window-bay sweeps and eight focused movement checks. Vertex code changes
+  UVs only. Prior actual stair routes apply to identical movement and geometry;
+  no redundant new stair browser batch was run for this material-only patch.
+- Camera/material **PASS** scoped: full framing, clear views, readable injected
+  failure banner and near-identical source/export close-ups. Faint vertical
+  tiling remains on the long blank hall wall. Physical Android and site-accurate
+  material/decay fidelity remain **NOT RUN / NOT ESTABLISHED**.
+
+The initial maps (`output/berghain-materials-first/`, 7/7 technical PASS) visibly
+repeated on broad surfaces. Lower macro contrast and excluding undocumented
+roof materials corrected the strong pattern; revised screenshots were inspected.
+Four 512² families use 2 m projected repeats. PNG payload totals 2,754,956 bytes;
+estimated uncompressed RGBA8 storage with complete mip chains is 16 MiB for
+12 maps, excluding geometry, shadow buffers and driver costs. This is a storage
+estimate, not a GPU residency measurement. Production geometry stays instanced.
+
+## Photo-informed façade with inset panels — historical
 
 Frozen candidate: `output/berghain-facade-inset.json`, 16/16 hashes confirmed by
 both independent reviewers. Main GLB **3,406,612 bytes / 40,112 triangles /
