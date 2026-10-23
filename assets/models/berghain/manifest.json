@@ -1,0 +1,24 @@
+{
+  "file": "berghain-study.glb",
+  "bytes": 3406612,
+  "sha256": "75bfc25d0e952bc999d1c71baca9560faac60ccc5e767d2b24a3d759bd5a927b",
+  "triangles": 40112,
+  "meshes": 39,
+  "materials": 39,
+  "units": "metres",
+  "bounds": {
+    "min": [
+      -57.33448576927185,
+      -0.4000000059604645,
+      -92.33324967278168
+    ],
+    "max": [
+      56.44208776950836,
+      22.80299949645996,
+      58.11853180779144
+    ]
+  },
+  "accuracy": "Reference-based study; most dimensions and layout are provisional",
+  "source": "layout.mjs",
+  "build": "../../../berghain/export-model.mjs"
+}

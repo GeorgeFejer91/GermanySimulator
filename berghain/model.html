@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-text-measurement="unavailable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#242723">
+  <title>Berghain · Architectural study</title>
+  <link rel="icon" href="../assets/faxgeraet.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="viewer.css">
+  <script type="importmap">{"imports":{"three":"../assets/vendor/three/0.186.0/build/three.module.min.js"}}</script>
+</head>
+<body>
+  <header>
+    <div class="identity"><h1 data-measure>Berghain</h1><p data-measure>Architectural reconstruction · work in progress</p></div>
+    <nav aria-label="Model controls">
+      <button id="exterior" aria-pressed="true" data-measure>Exterior</button>
+      <button id="enter" aria-pressed="false" data-measure>Go inside</button>
+      <button id="sources" data-measure>Sources &amp; accuracy</button>
+      <a class="button" href="../assets/models/berghain/berghain-study.glb" download data-measure>Download GLB</a>
+    </nav>
+  </header>
+  <main>
+    <div id="viewport" role="region" aria-label="Interactive Berghain model">
+      <canvas id="model" tabindex="0" aria-label="3D model. Drag to look around. Use W A S D or arrow keys to move inside."></canvas>
+      <p id="loading" role="status" data-measure>Preparing the architectural model…</p>
+      <div id="touch-controls" hidden aria-label="Walking controls">
+        <button data-move="forward" aria-label="Walk forward" data-measure>↑</button>
+        <button data-move="left" aria-label="Step left" data-measure>←</button>
+        <button data-move="back" aria-label="Walk backward" data-measure>↓</button>
+        <button data-move="right" aria-label="Step right" data-measure>→</button>
+      </div>
+    </div>
+    <footer>
+      <div class="location"><strong id="location" data-measure>Exterior</strong><span id="accuracy" data-measure>Exterior calibrated · interior layout provisional</span></div>
+      <div id="rooms" hidden aria-label="Interior viewpoints">
+        <label for="room" data-measure>Visit</label>
+        <select id="room" aria-describedby="room-full-name">
+          <option value="foyer">Foyer</option><option value="berghain">Berghain</option>
+          <option value="panorama">Panorama Bar</option><option value="saule">Säule</option>
+          <option value="halle">Halle</option><option value="garden">Garden</option>
+        </select>
+        <span id="room-full-name" data-measure hidden></span>
+      </div>
+      <p id="instructions" data-measure>Drag to orbit · scroll to zoom · Go inside to explore</p>
+    </footer>
+  </main>
+  <dialog id="source-dialog" aria-labelledby="source-heading">
+    <div class="dialog-heading"><h2 id="source-heading" data-measure>Sources &amp; accuracy</h2><button id="close-sources" data-measure>Close</button></div>
+    <p>This architectural study combines Berlin's official cadastral and LoD2 exterior dimensions, roofs and annexes with reference-based façade and interior detail. Room dimensions, partitions, floor elevations and equipment positions remain provisional.</p>
+    <p>The main club, foyer, Panorama Bar, Säule, Halle and garden can be explored. Lab.oratory, service rooms, bathrooms, fine surface detail and several connecting spaces still need verified references and modelling. This is not a complete surveyed digital twin.</p>
+    <ul>
+      <li><a href="https://www.karhard.de/projects/berghain" target="_blank" rel="noreferrer">Studio karhard: club architecture and photographs</a></li>
+      <li><a href="https://www.karhard.de/projects/halle-am-berghain" target="_blank" rel="noreferrer">Studio karhard: Halle refurbishment</a></li>
+      <li><a href="https://www.berlinamateurs.com/berghain-una-mirada-arquitectonica-dentro-del-templo-del-techno/" target="_blank" rel="noreferrer">Moisés Osio: approximate spatial diagrams</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/Category:Berghain" target="_blank" rel="noreferrer">Wikimedia Commons: dated building photographs</a></li>
+      <li><a href="https://gdi.berlin.de/data/a_lod2/atom/" target="_blank" rel="noreferrer">Berlin GDI: official exterior geometry, Germany Zero 2.0</a></li>
+      <li><a href="For-AI/SOURCES.md" target="_blank">Complete research catalogue and evidence gaps</a></li>
+    </ul>
+    <p>Original study geometry plus Berlin open exterior data. Reference photographs and artworks are not embedded as textures. The western annexes are closed volumes until their interiors are documented.</p>
+  </dialog>
+  <script type="module" src="viewer.mjs" onerror="document.querySelector('#loading').textContent='The 3D viewer could not load. Reload the page or open the source catalogue directly at berghain/For-AI/SOURCES.md.'"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "file": "berghain-exterior-lod2.glb",
+  "bytes": 26796,
+  "sha256": "58d3169171da590c83d666b079f769ae28c6128f856b31b31c93c4e7c10d6b17",
+  "triangles": 88,
+  "meshes": 16,
+  "materials": 16,
+  "units": "metres",
+  "bounds": {
+    "min": [
+      -35.58530807495117,
+      0,
+      -54.56065368652344
+    ],
+    "max": [
+      18.974872589111328,
+      22.80299949645996,
+      22
+    ]
+  },
+  "accuracy": "Generalised LoD2 exterior with no windows, wall thickness, interior, equipment or texture. Cadastral classification Heizwerk is a legacy function, not present-day venue use.",
+  "source": "survey-data.mjs",
+  "build": "../../../berghain/export-model.mjs --survey"
+}

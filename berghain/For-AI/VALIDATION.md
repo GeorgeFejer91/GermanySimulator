@@ -1,0 +1,189 @@
+# Berghain viewer validation
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+## Photo-informed façade with inset panels — current
+
+Frozen candidate: `output/berghain-facade-inset.json`, 16/16 hashes confirmed by
+both independent reviewers. Main GLB **3,406,612 bytes / 40,112 triangles /
+39 mesh-material groups**, SHA-256
+`75bfc25d0e952bc999d1c71baca9560faac60ccc5e767d2b24a3d759bd5a927b`.
+Physical inset panels replace the earlier outlines; tiers, spandrels, mullions,
+sills and attic vents follow dated photo observations. Openings and bay counts
+remain estimates, materials plain PBR colours, interior provisional.
+
+- Deterministic scoped model/survey/packaging checks: **17/17 PASS**.
+- `output/berghain-facade-inset-viewer/report.json`: **4/4 PASS** — tours with
+  keyboard/touch, real GLBLoader, desktop and Android portrait/landscape emulation;
+  desktop graphics context loss/restore and stopped idle rendering.
+- `output/berghain-facade-inset-walking/report.json`: **2/2 PASS** — actual
+  keyboard ascent/descent of all three stairs, desktop and Android portrait.
+  All 14 runtime hashes in both reports match the freeze/current files.
+- Independent Physics **PASS** scoped: 1,492 linked solids, exact vertical
+  render/collider bounds, façade XZ discrepancy ≤0.000246 m; all 99 panels and
+  396 rims solid-linked. Entrance centre interval about [-1.05,1.05] m at z22;
+  legal crossing and blocked jamb/window sweeps behave correctly. Six viewpoints
+  legal; nine sampled stair routes pass up/down.
+- Independent Camera/scale **PASS** scoped: full building framing and six eye
+  viewpoints clear; shell enclosed by camera bounds with 0.1 m margin. Insets
+  measure about 5.9–6.0 cm after calibration. Overview screenshots cannot resolve
+  that depth closely; source/mesh measurement establishes the recess, not
+  close-up photogrammetric fidelity.
+
+The original façade batch at `output/berghain-facade-walking/` passed desktop
+but failed Android pilot alignment before Panorama ascent. An unchanged-runtime
+instrumented retry passed. `output/berghain-facade-pilot-delay/` deliberately
+holds key releases for 600 ms and reproduces fixed-duration correction pulses
+oscillating around their target. This shows pilot timing sensitivity; the exact
+cause of the original failure was not recorded and is not asserted proven.
+Final actual-keyboard routes pass on the current inset candidate without
+changing production movement or loosening assertions. Preserve the failed reports.
+
+Physical Android and close-up recess appearance remain **NOT RUN**. Existing
+320 px/200% text and engine-failure evidence below belongs to the unchanged UI
+source and was not repeated for this geometry-only patch. Full weathering,
+per-elevation truth and missing interiors remain unfinished. Catalogue: 59 entries.
+
+## Calibrated walking candidate — historical
+
+The walking viewer now uses the official main-volume cross-sections and roof
+levels, actual roof faces, taller Halle front-wall strip and both western annex
+meshes. Interior floors and detail remain approximate. The following current
+candidate supersedes the initial study and acquisition-only records below.
+
+Freeze: `output/berghain-calibrated-revised.json`, **16/16 current hashes**
+confirmed by both independent reviewers. Combined GLB: **1,716,212 bytes,
+19,988 triangles, 39 meshes/materials**; SHA-256
+`eafd843f4dbb4d96256bbb7952833c83d9c9749c9503ca8d1ce13d523cc3e16a`.
+Units remain metres, visitor radius 0.28 m and eye height 1.68 m.
+
+`node --test tests/berghain-model.test.mjs tests/berghain-survey.test.mjs tests/level-pages.test.mjs`:
+**17 PASS**. Tests now cover sheared polygon collision, unchanged maximum step
+height, exact collider/render vertical bounds, four reproduced tread-underside
+body contacts, full actual stair routes, true updated camera bounds and official
+exterior dimensions, in addition to the existing routing/packaging checks.
+
+Current silent headless browser evidence, with matching runtime hashes:
+
+| Report | Result and scope |
+| --- | --- |
+| `output/berghain-calibrated-revised-walking/report.json` | **2/2 PASS**, desktop and Android portrait emulation. Real keyboard ascent/descent of all three stairs reaches correct landing heights. |
+| `output/berghain-calibrated-revised-viewer/report.json` | **10/10 PASS**, desktop/Android portrait/landscape tours, touch, GLB loading, modal cancellation, eight viewport/text-size combinations per profile, load failure and graphics loss/restore/idle rendering. |
+
+Earlier calibration failures remain in their original reports. The desktop
+doorway-approach failure at `output/berghain-calibrated-stairs/` recorded a
+protocol key-release overshoot to z=22.13 rather than the intended z≈21.03;
+the pilot now corrects both axes via bounded actual keyboard presses before
+each leg and preserves its landing-height assertions.
+
+Independent **Physics P1/P2/P4 and scoped X1 PASS**: all 494 render-linked
+solid Y bounds match actual baked matrices exactly; 2,198 tread underside
+contact samples yield no legal full-cylinder penetration; 297/297 applicable
+column/rail/annex overlap samples recover; all 27 stair routes across nine
+lateral positions per flight reach both landings. Six viewpoints are legal.
+Ramp perimeter support accounts for slope across body radius while retaining
+the 0.36 m per-move candidate step limit. Per-tread underside proxies supplement
+the smooth walking surface; supported feet use that surface rather than being
+blocked by each tread edge.
+
+Independent **Camera C1–C5 and scoped X1 PASS**: all 1,473 box matrices have
+positive determinant; eye-ray probes find no lateral mesh within 0.28 m, nearest
+0.552 m at Panorama. Actual shell extrema fit the camera helper with 0.1 m
+margin. Supplied current desktop/portrait images show unclipped building/annex
+framing, clean roofs, and a closed Halle roof step. The widest floor-versus-box
+XZ approximation is 0.076 m on the forecourt and at most 0.009 m elsewhere.
+
+Review findings were repaired: derive collider heights from exact render parts;
+clear the provisional Halle stair lane by moving an inferred column/beam line;
+block whole-body tread underside contacts; include actual cornice/pipe bounds;
+and remove roof shadow banding. The shadow diagnosis retains its isolated
+evidence in `output/berghain-shadow-{offset,disabled,bias}/`: normal bias alone
+did not remove bands, disabling directional shadows did, and bias=-0.001 with
+normalBias=0.04 removes them while retaining cast shadows. Current production
+screenshots confirm the fix. The column grid remains unverified.
+
+Both reviewers were read-only and launched no competing browser. **Physical
+Android, targeted moving-glass sightlines and a rendered human comparison remain
+NOT RUN.** Main-game missions, crowds, vehicles and sprite/fade gates are outside
+this viewer. Full photographic/material fidelity and undocumented interiors
+are unfinished; the full reconstruction goal is active.
+
+## Initial candidate and asset — historical
+
+Frozen runtime, geometry, GLB, test and builder hashes: `output/berghain-candidate-accepted.json` (local evidence). GLB SHA-256: `bc75ea98dd88a9af0fba260e14580c5a79276bb484819586410793ddb8f75b42`. Size 1,704,276 bytes; 19,980 triangles; 30 mesh/material groups; metres; original geometry with no external textures or decoders. A real browser GLTFLoader parsed the downloadable file and compared mesh count, size and bounds to its manifest.
+
+## Deterministic checks
+
+`node --test tests/berghain-model.test.mjs tests/level-pages.test.mjs`: **13 PASS**. Checks cover full-body wall clearance under delayed motion, floor edges, all six authored viewpoints, ramp undersides/slabs, all three real stair connections up/down, overlap recovery, queue rails, camera framing, hidden-page routing and the builder's exclusion of research/private authoring files. Existing level-route tests also pass. No main-game runtime was changed.
+
+## Browser evidence
+
+Headless Chromium with isolated muted audio. Desktop and Android profiles are emulated; **physical Android NOT RUN**. Batches ran sequentially. No listening claims apply to this silent viewer.
+
+`output/berghain-final/report.json` records 11 PASS / 1 FAIL on the unchanged runtime/geometry candidate. Successful cases cover tours in desktop/Android portrait/landscape, touch hold, actual walking and room changes, modal input clearing, GLB load, eight viewport/text-size combinations per profile (including 320 px and 200% text), load failure, WebGL loss/restore and idle RAF cessation. The failed case was the desktop stair pilot; its original failure remains preserved.
+
+The original pilot waited only for an axis threshold, allowing protocol key-up latency to carry it outside a stair's approach. A diagnostic that injected 600 ms delay into one actual key release reproduced the Panorama height failure at x=-6.8539, y=6.65 beside the ramp (`output/berghain-pilot-delay/`). The same injected delay passes with bounded keyboard corrections and an explicit ±0.18 m final-x assertion (`output/berghain-pilot-corrected/`); the pilot corrects x=-7.0618 to -4.9165 before climbing. No visitor state is injected and the original landing-height assertions remain unchanged. The historical intermittent failure lacked coordinates, so its exact cause cannot be claimed as proven.
+
+Final affected-route rerun: `output/berghain-walking-accepted/report.json`: **2/2 PASS**, desktop and Android portrait emulation, without injected latency. Both routes climb and descend main (0.05↔6.65 m), Panorama (6.65↔13.25 m) and Halle (0.05↔7.05 m). Runtime hashes match the accepted freeze. The test records crossed/aligned approach coordinates and both landing positions in `routes.json`, including before a failed height assertion. Earlier tour/layout/load/lifecycle passes remain applicable to the unchanged production source; the affected rerun replaces the earlier failed stair result, rather than rewriting its report.
+
+## Independent reviews
+
+Two read-only reviewers examined the same frozen production source, supplied rendered evidence and fresh CPU probes. Neither launched a competing browser batch or changed files.
+
+| Scope | Finding and evidence |
+| --- | --- |
+| Physics P1 | Tested walls, queue rails and invalid overlap recovery pass fresh CPU probes; six viewpoint bodies and eye points are clear. 147 single-wall, 196 L-wall and 231 parallel-wall overlap probes recovered. Full rendered collision sweep remains NOT RUN. |
+| Physics P2 | All three actual stairs reach both landings in fresh CPU checks. Panorama climbs across the tested full-body lane x=-6.2 to -3.8. Earlier stair/floor/landing defects were fixed, rather than bypassed through room selection. |
+| Physics P4 | Manual corner recovery passes a bounded CPU L-corner probe. No avatar gait exists in this viewer. Rendered corner sequence NOT RUN. |
+| Camera C1–C2 | Six clear viewpoints pass source/CPU checks and supplied room-image inspection. Targeted moving glass sightline sweep NOT RUN. |
+| Camera C3 | Previous portrait crop fixed. Fresh Three.js projection at 390×577: fit radius 160.162 m, shell x=-0.900 to +0.841 NDC; supplied portrait image contains the shell. |
+| Camera C4–C5 | Representative room depth and source scale relationships pass. Eye/body 1.68/1.8 m, entrance 3.2×3.4 m, stair risers approximately 0.178/0.183/0.179 m. These are model relationships, not surveyed measurements. Rendered human comparison NOT RUN. |
+| Browser X1 | **PASS for the sampled affected desktop and Android-emulation stair routes** on accepted hashes; read-only Physics re-review confirmed both traces and matching runtime hashes. Initial desktop FAIL retained and corrected-pilot delayed-input regression separately passes. Android evidence is emulation only. |
+
+The Physics reviewer also checked the test correction: bounded real keyboard input, preserved height assertions, no state mutation. Both reviewers subsequently confirmed all 11 accepted hashes and the final walking report's eight runtime hashes; both returned scoped viewer X1 PASS. All production files and GLB matched the reviewed freeze; only the test hash changed. Crowd/vehicles/sprites/main-game missions and their broader gates are outside this model viewer's scope.
+
+## Outstanding
+
+Full measured fidelity, missing rooms/circulation, surface detail, physical Android qualification and the targeted NOT RUN review rows remain outstanding. No full-digital-twin or whole-game acceptance is claimed. Publication is blocked by the unborn local branch and absent Git remote; unrelated staged work was preserved.
+
+## Official exterior acquisition and export
+
+The next goal turn acquired the matching ALKIS feature and CityGML LoD2 building
+`DEBE02YY200004SX` from Berlin's working official download service. This is a
+**separate exterior calibration asset**; it is not the study viewer's geometry
+and its isolated render does not establish interior navigation.
+
+- Source/raw-download hashes and reversible local coordinate frame are embedded
+  in `assets/models/berghain/survey-data.mjs`; authoring importer validates the
+  source building address/ID, cadastral front-edge endpoints and feed licence.
+- `node --test tests/berghain-survey.test.mjs tests/berghain-model.test.mjs tests/level-pages.test.mjs`:
+  **14 PASS**. New checks invert the local frame to original EPSG:25833/altitude
+  bounds, preserve the 3,432.10 m² footprint, require annexes and height bounds,
+  and check finite positions/unit normals.
+- `node berghain/export-model.mjs --survey`: **26,796 bytes, 88 triangles,
+  16 meshes/materials**; SHA-256
+  `58d3169171da590c83d666b079f769ae28c6128f856b31b31c93c4e7c10d6b17`.
+  The shared serializer handles ordinary and instanced meshes. Re-exporting
+  the original study produces its unchanged `bc75ea98…` hash.
+- `output/berghain-official-verified/report.json`: **1/1 PASS**, muted headless
+  desktop Chromium. Actual GLTFLoader parsing matches source-model and manifest
+  bounds/mesh count; front/rear rendered images show the four connected volumes.
+  Its source hashes include official data/model/GLB/manifest. Test-only isolated
+  scene preparation is explicitly recorded; it does not claim a user input path.
+- Independent Physics review tied all **162 generated polygon vertices** to
+  raw CityGML across four parts/37 polygons, maximum error **4.82×10⁻⁷ m**;
+  raw ground areas total **3,432.1028 m²**. Front edge **37.949743 m**, raw
+  bounds E394318.997–394393.933, N5819009.577–5819098.896, altitude35.288–58.091.
+  It confirmed raw hashes, GLB metadata/bounds and unchanged study export.
+- Freeze: `output/berghain-official-accepted.json` (8 files). Both independent
+  reviewers confirmed all current frozen hashes and returned **PASS within the
+  isolated exterior calibration-reference scope**. Camera's fresh projection
+  kept front/rear hulls within the supplied desktop frame; maximum absolute
+  NDC component was 0.759. It independently confirmed ground area and source
+  dimensions. Neither reviewer ran a browser or changed source.
+
+At this acquisition-only checkpoint the study still used its older 44 m width;
+the calibrated candidate above supersedes that geometry. The extraction alone
+did not establish walking, collider, physical Android, measured-interior or
+texture fidelity. The official data is generalised LoD2, not a new building
+survey; source part footprint date is 2023-03-11.
