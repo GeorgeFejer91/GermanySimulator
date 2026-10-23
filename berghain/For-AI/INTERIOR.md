@@ -38,7 +38,7 @@ an exact model coordinate. Source IDs resolve in SOURCES.md.
 | Anna Uddenberg, *CLIMBER (Angel Kiss)* | Panorama counter, 2020 exhibition; ART01–03/13 | Gallery dimensions **160×130×110 cm** as published. Bent figure, blonde synthetic hair, mixed clothing, shoes and furniture support visible in ART02 photo. | Initial pose/clothing/hardware geometry and counter placement implemented. Refine anatomy, garments, hands/hair and photo fidelity; confirm axis/support scope and installed contact points. Gallery barrel/table/stool setup must not be assumed to exist in the club. Obtain additional views before claiming a faithful figure. |
 | Norbert Bisky, *Vertigo* | Entrance/foyer, permanent since May 2017; ART05 | Actual complete installation image/layout not yet obtained. | Establish canvas arrangement, extent and placement. A different Bisky canvas reproduced in an article is not a texture substitute. |
 | Piotr Nathan, *Rituale des Verschwindens* | Historic foyer mural; removed April 2017; ART06, A01, I08 | Historic architect photo shows a large panelled wall work. | Keep as a historical reference. Do not install it as the contemporary foyer artwork. |
-| Joseph Marr, *Together* | Klo Bar, permanent 2013; ART04 | **9 m** figurative frieze, cola-coloured translucent sugar preserved with polyurethane; gallery detail inspected. | Build the actual Klo Bar/enclosure first; establish figure sequence and full display form from complete views. A detail image does not establish the installation footprint. |
+| Joseph Marr, *Together* | Klo Bar, permanent 2013; ART04 | **9 m** figurative frieze, cola-coloured translucent sugar preserved with polyurethane; wide in-situ views and details inspected. | Klo Bar/enclosure now has an initial published study; actual figure sequence, case returns/inner rear display and dimensions remain to reconstruct from the expanded gallery. |
 | Zuzanna Czebatul, *Andrea* | Permanent 2023; ART07/08. Interview places it on the main floor. | Raised muscular arm holding a hammer; green bronze surface visible in the artist's handling photo. | Confirm wall, mounting height, orientation and edition dimensions. Printed *Billie/Chris* or other *Andrea* editions are not interchangeable survey data. |
 | Julian Göthe, permanent sculpture | Stair/entrance relationship described by exhibition visitors; permanence confirmed ART03/09/11 | Complete measured form/image still missing. Gallery documents preparatory sketches. | Find sketches or a complete in-situ view; verify title and dimensions. It is not named *The Fat Shadow* on available evidence. That title belongs to a separate exhibition. |
 | Wolfgang Tillmans, photographic works | Panorama, historically documented ART09/10/12 | Historical architect bar photo A13 establishes large wall presentation. | Identify the selected-date works, number, print size and positions. Reports of later rotation are a lead, not a verified current hanging list. |
@@ -56,7 +56,7 @@ a generic surrogate as an exact recreation.
 
 | Area | Established evidence | What remains unknown |
 | --- | --- | --- |
-| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | Contemporary cabinet models, exact count, orientation, mounting, subwoofer arrangement and room-relative positions. Current box stacks in the study are placeholders. |
+| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | Contemporary cabinet models, exact count, orientation, mounting, subwoofer arrangement and room-relative positions. The original manufacturer-dimensioned component study now follows the reported2023 arrangement; exact current installed rig remains unverified. |
 | Panorama Bar | Supplier S02 identifies Studt-Akustik PA. S01 distinguishes Funktion-One DJ monitors from the room PA. | Studt component identifiers, dimensions, hanging hardware, array count and placement; current DJ-monitor configuration. |
 | DS210 component reference | S04's actual manufacturer STEP dummy, DXF elevation and 2022 dimensioned sheet. **1.273 m wide × 0.631 m high × 0.741 m deep**, measured from the sheet, not guessed from a photo. | CAD not yet tessellated/rendered; this component reference does not prove a current Berghain installation. Manufacturer document and live webpage bandwidth values differ, irrelevant to the model's external dimensions but not silently reconciled. |
 
@@ -236,3 +236,32 @@ calibrated footprints/elevation; room selectors remain optional access. Source/
 native rendering, human routes and both specialist reviews are required before
 publication. Etched graphics, complete contemporary room
 layout and Together's full figure sequence remain fidelity work.
+
+
+### Next Together fidelity task — source inspection complete, geometry pending
+
+After c8publication, all24expanded ART04 artist images00–23 are visually
+inspected. Installation07/08/09/10 shows reclining forms, hands/heads crossing
+figure boundaries, glass cases turning around the bar and a separate inner
+rear display. Work12–19/23 gives close side/face/hand views with glossy amber
+body, local bubbles, variable translucency and embedded relief. The earlier
+reading of folds as clothing/cuffs/belts was incorrect: ART15 explicitly
+documents nude adult men combined with historical Baroque architectural
+ornament. These are connected figurative relief forms rather
+than separate upright mannequins. Do not merely lay the walking avatar inside
+an empty case and call that the work. Preserve photographic uncertainty about
+hidden surfaces and overall order; no measured individual dimensions or
+public3Dscan is established.
+
+The primary page's artist/critic text describes a9m/300kg narrative frieze with
+three stages of attachment, ending in peaceful togetherness; medium is sugar/
+Cola Ahoi Brauser, preserved with polyurethane,2013,size variable. No figure
+count is adopted from conflicting community descriptions. Model the observed
+reclining/embracing body relationships and fused base from the primary views;
+refine the approximate case returns/inner rear segment before placing them.
+Initial c8counter dimensions are authoring choices, not9m of measured counter.
+All source pixels remain research-only. Next coherent release must retain
+source/uncertainty metadata, portable original geometry/material response,
+full-body safety, current-hash source/native visual inspection and both world
+reviews. Together and all other remaining building/artwork fidelity are still
+required by the full goal.

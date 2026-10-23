@@ -1000,3 +1000,79 @@ changes. Tests are silent/headless/sequential. Physical Android/GPU/listening
 NOT RUN. Full photographic realism, Together/all artwork, exact contemporary
 room connections, Lab/service/cabin spaces and measured interior geometry remain
 required. Both reviewers accept this bounded increment; full goal remains active.
+
+### Klo publication — immutable public acceptance
+
+Commitc8babb806a484932f441ad3bb94f5de47145f551 pushed by normal fast-forward on
+defd99867ef373831ff3b320a711a013a9e7e4ef. Its22paths contain only this scoped
+asset/runtime/tests and owning notes. It preserves concurrent street animation
+and CI-timeout work. Primary original index SHA256 remains704aa6ef…b2105.
+Publication tree7498f60198a702f5fb0203b81aa0509862ebdbc4 matches73/75 frozen
+bytes exactly; PROVENANCE line endings and untouched level-transitions trailing
+blank are normalized-text equivalent. No runtime semantic change is bridged.
+
+output/berghain-klo-immutable-verification.json passes52/52 actual public asset/
+viewer/catalogue files against Git-object bytes. Actual published desktop and
+Android portrait emulation pass6/6 in output/berghain-klo-immutable-browser/report.json:
+natural human exterior approach/door entry/exit/refresh; source/native Klo Bar
+and oblique sanitary architecture; real continuous main-floor/bar/toilet/open-
+cubicle/return route, natural labels, visible human and actual native hollow pan.
+All75 reported source hashes bind to actual published Git objects. Final public
+frames were inspected. Silent/headless/sequential; physical Android/GPU and
+perceptual listening remain NOT RUN.
+
+Latest verified versioned preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/c8babb806a484932f441ad3bb94f5de47145f551/geheim/index.html
+
+Previous851release now has permanent-domain acceptance:51/51 exact files plus
+six entry URL checks in output/berghain-services-canonical-deployed-verification.json;
+six actual public desktop/portrait entrance, ceiling and radiator cases pass in
+output/berghain-services-canonical-deployed-browser/report.json. Pages40020726888
+completed SUCCESS. The new Klo Pages handle40027742985 is confirmed in progress.
+Do not call Klo/WC canonical until its52files/GLBcf26925e and actual public cases
+match on the permanent domain. Never restart because an observation expires.
+No notes-only push is needed while the scoped deployment is running.
+
+Next fidelity task: Together's actual figure sequence and case returns. New
+artist installation views07–11 and work12 were inspected after publication.
+They show tightly overlapping reclined/embracing human forms, heads and hands
+in the translucent amber surface, and glazed
+cases turning around the counter with an inner rear display. Existing cases
+remain approximate; these views require refinement before placing the frieze.
+No full sequence/order/individual dimensions is yet verified. Keep the broader
+building/artwork goal active; initial room architecture is not completion.
+
+### Klo permanent-domain acceptance and rejected Together study — 24 October 2026
+
+Pages40027742985 completed SUCCESS. The canonical permanent page now has fresh
+acceptance for c8babb806a484932f441ad3bb94f5de47145f551:
+output/berghain-klo-canonical-verification.json passes52/52 exact Git-object
+asset/viewer/catalogue bytes and six root/3d/Geheim/model HTTP responses.
+output/berghain-klo-canonical-browser/report.json passes6/6 actual public desktop
+and Android portrait emulation cases: natural human exterior approach, doorway
+entry/exit/refresh, source/native Klo/WC views, and continuous main-floor/bar/
+toilet/open-cubicle/return movement. The c8-only suite imports the preserved
+baseline independently of the unpublished artwork changes. No physical-device
+or perceptual-listening claim. This supersedes the pending c8 deployment above.
+
+ART15 corrects the earlier clothing interpretation: the subjects are nude adult
+men, interwoven with scanned Baroque architectural ornament. ART16 describes the
+scan/cast process but offers paper prints, not a downloadable sculpture model.
+All24 ART04 views remain research-only, with no photographic textures shipped.
+
+The unpublished procedural Together study passes17/17 scoped structural tests
+and1/1 in output/berghain-marr-first-browser/report.json. Visual inspection of
+all three source/native frames REJECTS its fidelity: mechanical separated body
+parts, rigid slab-like base and opaque brown appearance. These results approve
+neither anatomy nor artwork resemblance; no release candidate is frozen and no
+new specialist acceptance or publication is claimed.
+
+A generic CC0 MakeHuman anatomical study is now downloaded with explicit
+per-file licence/header and SHA256 evidence under R01. No application source
+was imported. output/marr-anatomy-study.py performs original offline weighted
+posing from those data. Two torso studies have10438vertices/20832triangles each;
+their1/1 silent headless inspection is output/marr-anatomy-inspection/report.json.
+Both actual frames were inspected: continuity/hands improve on primitive parts,
+but cut boundaries, reference pose/face framing, fusion with the cast, ornament,
+bubbles and transmitted backlight remain unresolved. This is authoring evidence
+only, not a shipping asset, complete sculpture or public-runtime change.

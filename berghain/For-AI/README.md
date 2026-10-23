@@ -10,6 +10,58 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Active next increment: Together's reclining relief figures and original amber
+material. Integrator owns together-geometry.mjs/together.mjs under the existing
+asset authority, bar rear-case refinement, artwork/material/model/export hooks,
+scoped tests/playtest and owning notes. Reuse the existing Three.js/GLB pipeline
+and original procedural maps; no source pixels or third-party sculpture mesh.
+Anatomical authoring inputs may use the explicitly verified CC0 MakeHuman core
+assets in R01; these are generic anatomy, not Marr's unavailable sculpture scans.
+ART04 all24images now inspected; nine metres and2013 are documented, but figure
+count, exact complete order, missing surfaces and case dimensions remain
+unverified. Anatomical faces/hands/nude bodies/fused base must follow
+observed relationships; a walking-avatar substitute does not satisfy fidelity.
+Keep any provisional reconstruction label until visual review establishes its
+actual fidelity. Preserve accepted c8runtime in output/berghain-marr-baseline.
+Use built-in physical transmission for amber and retain it in portable glTF;
+measure its render/load cost before acceptance. All anatomy must stay inside
+the display glass and existing body barrier. Validate source/native close views,
+bar/WC/entrance routes and both required world reviews on one frozen candidate.
+The full building/artwork goal remains active.
+
+Current publication: Klo Bar/sanitary commit
+c8babb806a484932f441ad3bb94f5de47145f551 pushed by normal fast-forward on
+defd99867ef373831ff3b320a711a013a9e7e4ef, preserving all concurrent street/CI
+work. Versioned preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/c8babb806a484932f441ad3bb94f5de47145f551/geheim/index.html .
+52/52 public asset/viewer/catalogue files exactly match actual Git bytes in
+output/berghain-klo-immutable-verification.json. Actual published public walkthrough passes6/6 in
+output/berghain-klo-immutable-browser/report.json: exterior entry/exit, source/
+native bar and toilets, continuous human open-cubicle/return route; all75source
+hashes bind to actual published Git objects. Final public frames inspected.
+Pages40027742985 completed SUCCESS. The permanent
+https://germanysimulator.de/geheim/ now serves the accepted c8 release:
+output/berghain-klo-canonical-verification.json confirms52/52 exact Git bytes
+and six successful entry responses. Actual public desktop and Android portrait
+emulation pass6/6 in output/berghain-klo-canonical-browser/report.json:
+controllable human exterior approach, E/tap doorway entry/exit, refresh,
+source/native bar and toilets, and continuous open-cubicle/return movement.
+Its isolated c8 suite imports output/berghain-marr-baseline so unpublished
+artwork experiments cannot alter the expected public baseline. Primary staged
+index remains untouched. Physical Android and perceptual listening NOT RUN.
+
+Unpublished Together prototype was visually REJECTED despite17/17 scoped
+structural tests and1/1 source/native browser case: separated primitive anatomy,
+rigid rectangular base and opaque brown response do not match the photographs.
+Do not publish it or treat test PASS as fidelity acceptance. The CC0 anatomical
+authoring study in output/marr-anatomy-study.py produces continuous skin and
+hands from pinned MakeHuman data. Its1/1 neutral/transmission inspection is
+authoring-only: torso cuts, pose relationships, closed cast transitions,
+Baroque ornament, bubbles and backlit amber remain unresolved. No anatomical
+asset or application code has entered the accepted public runtime. Download
+hashes/licences are in the ignored references/downloads/makehuman directory.
+
+
 Klo Bar and sanitary architecture now exist in the integrator-owned candidate.
 Original forms follow ART04/ART14/I19/I21: red enclosure, switchgear mesh/staff
 gate, segmented glazed cases, ten splayed stools, bar back, four steel cubicles
@@ -35,26 +87,25 @@ collider and subsequent overhead/view additions. Both independent reviewers acce
 PASS; Camera C1–C5/scopedX1 PASS. Comparable cost runs pass9/9 before and9/9 after.
 Normal transfer grows13,335B; idle work stops in all18runs and product frame p95
 stays about14ms on the identical Panorama path. Retain exact earlier snapshots
-instead of calling old hashes current. Publication is the next action.
+instead of calling old hashes current. Scoped publication is recorded above.
 No renderer, dependency, texture family or input loop was added.
 
 Previous published Berghain release851567d3e92efe1c7b50106d352adb73f66f3101
 contains the upper lounge/ceiling/services and has51/51 exact immutable files
 and6/6 actual public browser cases. Versioned preview:
 https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/851567d3e92efe1c7b50106d352adb73f66f3101/geheim/index.html .
-The permanent https://germanysimulator.de/geheim/ now serves that851release:
+The permanent https://germanysimulator.de/geheim/ previously served that851release:
 51/51 exact public files and all six entry responses pass in
 output/berghain-services-canonical-deployed-verification.json; actual public
 source/native ceiling/radiator and human door entry/exit/refresh pass6/6 in
 output/berghain-services-canonical-deployed-browser/report.json, desktop and
-Android portrait emulation. Pages40020726888 completed SUCCESS. The newest Klo
-candidate still requires its own scoped publication and public verification.
-Remote main nowdefd998 includes unrelated street work and CI-timeout changes;
-scoped publication must preserve them by composing on freshly fetched main.
+Android portrait emulation. Pages40020726888 completed SUCCESS. The newer Klo
+release and its canonical acceptance supersede that baseline, as recorded above.
+Concurrent street work and CI-timeout changes were preserved in c8's parent.
 Primary original staged-index SHA256 remains
 704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
 
-The catalogue now has102unique sources. Corrected primary identification:
+The catalogue now has105unique source records. Corrected primary identification:
 I19's switchgear counter is Klo Bar, shown with Together in ART04, rather than
 an established earlier Panorama counter. Candidate source/GLB metadata carries
 the correction. Research-only copies remain ignored and excluded from shipping.
@@ -514,3 +565,11 @@ The primary staged index remains untouched. Physical Android is unrun. Fine
 materials/weathering, exact contemporary room/art/equipment inventory, surveyed
 interior dimensions, Klo Bar/toilets, Lab and full photographic fidelity remain
 required; the full realistic reconstruction goal stays active.
+
+
+Next asset release remains Together: all24ART04 images are inspected and
+SOURCES/INTERIOR carry the new primary evidence. Experimental geometry exists
+locally but has failed visual fidelity review; it is excluded from publication.
+Preserve the accepted c8 runtime/test/asset snapshot independently of those
+experiments. The full reconstruction goal and outstanding fidelity work remain
+active. The original staged index remains preserved.
