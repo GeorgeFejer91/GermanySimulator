@@ -1,12 +1,52 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync,mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {levelLinks,levelPage} from '../tools/build-level-pages.mjs';
+import {join,resolve,relative} from 'node:path';
+import {tmpdir} from 'node:os';
+import {levelLinks,levelPage,buildLevelPages} from '../tools/build-level-pages.mjs';
 
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const template=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+
+test('publication omits offline street authoring trees while retaining game and preview assets',()=>{
+  const parent=resolve(tmpdir()),directory=mkdtempSync(join(parent,'germany-pages-sources-'));
+  const root=join(directory,'source'),output=join(directory,'site');
+  const omitted=['resident-motion','berlin-street-20261022','street-residents'].map(name=>`assets/sprite-sources/${name}/source.png`);
+  const retained=[
+    'assets/characters/residents/anna/walk.webp',
+    'assets/characters/police/walk.webp',
+    'assets/sprite-sources/rigs/registry.json',
+    'assets/sprite-sources/candidates/merkel-3d/merkel-sprite.png',
+    'assets/sprite-sources/reference/neutral-walk/guide.png',
+    'assets/sprite-sources/buergeramt/parent/key-0.png',
+    'assets/sprite-archive/towel/key.png',
+    'assets/models/study/sprite-sources/resident-motion/keep.png',
+    'assets/sprite-sources/resident-motion.webp',
+    'For-AI/AUDIO-TEXT-LIBRARY.js',
+  ];
+  try {
+    for(const path of [...omitted,...retained,'assets/social-preview.png','assets/social/neighbors.png']){
+      const file=join(root,path);mkdirSync(resolve(file,'..'),{recursive:true});writeFileSync(file,path);
+    }
+    writeFileSync(join(root,'index.html'),'<html><head><title>Game</title></head></html>');
+    writeFileSync(join(root,'building-catalogue.js'),'module.exports={catalogue:[]}');
+    buildLevelPages(root,output);
+    for(const path of omitted){
+      assert.ok(!existsSync(resolve(output,path,'..')),`offline directory must stay out of publication: ${path}`);
+      assert.ok(!existsSync(join(output,path)),`offline source must stay out of publication: ${path}`);
+      assert.equal(readFileSync(join(root,path),'utf8'),path,'original source must remain intact');
+    }
+    for(const path of retained)assert.equal(readFileSync(join(output,path),'utf8'),path,`required game/preview asset: ${path}`);
+    assert.ok(existsSync(join(output,'city/index.html')));
+    assert.ok(existsSync(join(output,'neighbors/index.html')));
+  } finally {
+    const target=resolve(directory),within=relative(parent,target);
+    assert.ok(within&&!within.startsWith('..')&&!within.includes(':')&&target!==parent,'cleanup stays inside the temporary parent');
+    rmSync(target,{recursive:true,force:true});
+  }
+});
 
 test('every enterable nonresidential building and neighbors have a unique direct route',()=>{
   const levels=levelLinks();

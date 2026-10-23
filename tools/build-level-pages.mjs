@@ -58,6 +58,10 @@ export function geheimPage(template) {
 
 export function buildLevelPages(root, output) {
   if (resolve(root)===resolve(output)) throw Error('Build output must be separate from source');
+  // These originals are provenance only; game textures live in assets/characters.
+  // Other sprite-sources trees remain required by the maintained sprite/office previews.
+  const offlineSources=new Set(['resident-motion','berlin-street-20261022','street-residents']
+    .map(name=>resolve(root,'assets/sprite-sources',name)));
   mkdirSync(output,{recursive:true});
   for (const entry of readdirSync(root,{withFileTypes:true})) {
     if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim'].includes(entry.name)) continue;
@@ -76,7 +80,9 @@ export function buildLevelPages(root, output) {
       }
       continue;
     }
-    cpSync(join(root,entry.name),join(output,entry.name),{recursive:true});
+    cpSync(join(root,entry.name),join(output,entry.name),{
+      recursive:true,filter:source=>!offlineSources.has(resolve(source))
+    });
   }
   const levels = levelLinks(createRequire(import.meta.url)(resolve(root,'building-catalogue.js')).catalogue);
   const template = readFileSync(join(root,'index.html'),'utf8');
