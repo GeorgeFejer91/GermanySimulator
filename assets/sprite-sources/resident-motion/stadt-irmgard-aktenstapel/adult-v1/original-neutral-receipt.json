@@ -1,0 +1,485 @@
+{
+  "status": "source-candidate-unapproved",
+  "actor": "stadt-irmgard-aktenstapel",
+  "tool": "built-in image_gen.imagegen; exactly one job for this actor; transparent_background=true",
+  "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator resident IRMGARD AKTENSTAPEL, a candidate for later review, no action sheet. Images 1 and 2 are PRIMARY mature painterly Berlin face/garment and adult limb/stature authority (Sabine Krueger and Hartmut Keller); image 3 is SECONDARY older-woman whole-body skirt/leg/paint reference (Brigitte Mueller). Images 4 and 5 show IRMGARD'S OWN identity, wardrobe, prop and physical hand ownership only; REJECT their old huge-head very short-limb proportions. Preserve elderly woman with abundant curly silver-white hair, rectangular brown glasses, small tired eyes, individual aged worried face with lined cheeks and uneven furrowed brows; compact substantial older-adult build, not a skinny young fashion figure. Her olive-green weathered hooded raincoat/cape with buttons covers a lavender buttoned blouse, charcoal straight knee-length skirt, dark stockings, broad practical brown lace-up ankle boots. Exactly ONE thick gray file/folder with pale paper edges tucked under her ANATOMICAL LEFT forearm (screen right), held low so lips remain unobstructed; the ANATOMICAL RIGHT hand (screen left) is empty, fully visible and available for later gesture. Front-facing quiet planted stance; complete connected shoulders, elbows, hands and fingers, thighs, knees, shins, ankles and two substantial fully visible shoes; adult head/torso/leg relationship comparable to references 1-3 while retaining Irmgard's stout individual build. Clearly visible natural CLOSED lips and both corners below her nose, no folder over face. Strong Disco Elysium meets Berlin painterly finish: mature weathered expressive angular facial planes, asymmetry, broad irregular oil/drybrush marks that model folds and volume, muted olive, dirty ochre, wine-violet and cool gray-green shadows; no rounded toy face, glossy gradients, repeated geometric facet pattern, or uniform fine speckle. Exactly one centered isolated FRONT figure taking no more than 82% canvas height and 72% width; leave at least 65 genuinely transparent pixels above curls, beneath boot soles and around all outer sides. TRUE RGBA cutout, no backdrop, floor, cast shadow, halo, glow, text, logo, watermark, duplicate, panel, alternate view or action pose.",
+  "references": [
+    {
+      "role": "primary mature Berlin painterly finish and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+    },
+    {
+      "role": "primary mature Berlin painterly finish and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+    },
+    {
+      "role": "secondary older-adult woman body/skirt painting",
+      "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+      "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+    },
+    {
+      "role": "Irmgard own identity, clothes, left-arm file, handedness; prior miniature anatomy rejected",
+      "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+      "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+    },
+    {
+      "role": "Irmgard canonical standing identity/colors, not adult proportion authority",
+      "path": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+      "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e"
+    }
+  ],
+  "generated_path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-b4ce5640-bc8d-4910-9fb1-cce01340d338.png",
+  "generated_sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4",
+  "exact_copied_path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+  "exact_copied_sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4",
+  "exact_bytes_match": true,
+  "mode": "RGBA",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "matte": {
+    "1": {
+      "pixels": 553268,
+      "bounds_xyxy_exclusive": [
+        65,
+        23,
+        1010,
+        1506
+      ],
+      "components": 251,
+      "largest_components": [
+        {
+          "pixels": 552886,
+          "bounds_xyxy_exclusive": [
+            213,
+            37,
+            848,
+            1505
+          ]
+        },
+        {
+          "pixels": 19,
+          "bounds_xyxy_exclusive": [
+            947,
+            349,
+            950,
+            359
+          ]
+        },
+        {
+          "pixels": 16,
+          "bounds_xyxy_exclusive": [
+            951,
+            351,
+            954,
+            360
+          ]
+        },
+        {
+          "pixels": 16,
+          "bounds_xyxy_exclusive": [
+            665,
+            193,
+            671,
+            198
+          ]
+        },
+        {
+          "pixels": 9,
+          "bounds_xyxy_exclusive": [
+            939,
+            661,
+            940,
+            670
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            937,
+            662,
+            938,
+            670
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            107,
+            313,
+            110,
+            318
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            111,
+            311,
+            112,
+            317
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "8": {
+      "pixels": 537792,
+      "bounds_xyxy_exclusive": [
+        220,
+        42,
+        843,
+        1496
+      ],
+      "components": 8,
+      "largest_components": [
+        {
+          "pixels": 537782,
+          "bounds_xyxy_exclusive": [
+            220,
+            42,
+            843,
+            1496
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            303,
+            785,
+            304,
+            788
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            305,
+            777,
+            307,
+            778
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            302,
+            789,
+            303,
+            790
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            301,
+            793,
+            302,
+            794
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            306,
+            775,
+            307,
+            776
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            307,
+            771,
+            308,
+            772
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            389,
+            289,
+            390,
+            290
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "20": {
+      "pixels": 536508,
+      "bounds_xyxy_exclusive": [
+        221,
+        42,
+        843,
+        1496
+      ],
+      "components": 1,
+      "largest_components": [
+        {
+          "pixels": 536508,
+          "bounds_xyxy_exclusive": [
+            221,
+            42,
+            843,
+            1496
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "64": {
+      "pixels": 534264,
+      "bounds_xyxy_exclusive": [
+        221,
+        42,
+        843,
+        1496
+      ],
+      "components": 3,
+      "largest_components": [
+        {
+          "pixels": 534260,
+          "bounds_xyxy_exclusive": [
+            221,
+            42,
+            843,
+            1496
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            590,
+            69,
+            592,
+            71
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            336,
+            195,
+            337,
+            196
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "128": {
+      "pixels": 531578,
+      "bounds_xyxy_exclusive": [
+        222,
+        43,
+        842,
+        1495
+      ],
+      "components": 6,
+      "largest_components": [
+        {
+          "pixels": 531572,
+          "bounds_xyxy_exclusive": [
+            222,
+            43,
+            842,
+            1495
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            595,
+            73,
+            596,
+            75
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            359,
+            260,
+            360,
+            261
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            361,
+            260,
+            362,
+            261
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            357,
+            259,
+            358,
+            260
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            474,
+            51,
+            475,
+            52
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "250": {
+      "pixels": 513780,
+      "bounds_xyxy_exclusive": [
+        224,
+        50,
+        841,
+        1494
+      ],
+      "components": 219,
+      "largest_components": [
+        {
+          "pixels": 513445,
+          "bounds_xyxy_exclusive": [
+            224,
+            50,
+            841,
+            1494
+          ]
+        },
+        {
+          "pixels": 16,
+          "bounds_xyxy_exclusive": [
+            445,
+            1415,
+            446,
+            1431
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            550,
+            1170,
+            551,
+            1178
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            725,
+            1078,
+            726,
+            1084
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            725,
+            957,
+            726,
+            963
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            438,
+            1365,
+            439,
+            1370
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            577,
+            75,
+            582,
+            76
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            671,
+            327,
+            672,
+            332
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "opaque_128_margins_pixels": {
+    "left": 222,
+    "top": 43,
+    "right": 182,
+    "bottom": 41
+  },
+  "composites": [
+    "output/street-redesign/animated-adult-neutrals-batch3/stadt-irmgard-aktenstapel-on-light.png",
+    "output/street-redesign/animated-adult-neutrals-batch3/stadt-irmgard-aktenstapel-on-dark.png"
+  ],
+  "visual_review": {
+    "style": "Weathered elderly face and broad olive/charcoal brush planes; closer to adult Sabine/Brigitte than old mini source, though coat texture still has some regular facets.",
+    "anatomy": "Compact but connected adult build, complete legs and lace-up shoes; lower legs remain shorter than the longest primary figures, suitable only for root visual judgment.",
+    "identity_handedness": "White-gray curls, brown glasses, olive hooded coat, lavender blouse and charcoal skirt match. One gray file under anatomical LEFT arm (screen right); RIGHT hand free.",
+    "mouth": "Closed lips and corners visible, folder below mouth.",
+    "holds": [
+      "Unapproved source only; no walk, gesture, mouth, voice or runtime capability replaced or tested.",
+      "Native fit and light/dark edge cleanup must precede any directional or action expansion.",
+      "Alpha>=128 margins are {'left': 222, 'top': 43, 'right': 182, 'bottom': 41} pixels; the generated image did not meet the prompt's >=65 px vertical margin, so root must assess native cell gutters and may need canvas padding on a derived export while keeping this source immutable."
+    ],
+    "light_dark": "Inspected both actual composites: clear cutout without visible backdrop, floor, cast shadow or broad halo. Low-alpha detached flecks remain a numerical cleanup concern."
+  }
+}

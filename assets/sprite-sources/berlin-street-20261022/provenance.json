@@ -5538,6 +5538,803 @@
       "sourceReviewReceiptSha256": "e5b5b23abf46567a811920bc95abba6a109ec455cbd9705bc70ba1dec1f3f4cb",
       "status": "source candidate: correct front-right whole-body rotation, book in far anatomical LEFT hand, complete planted feet; registered/native/game review pending",
       "runtimeAcceptance": "Unselected source candidate pending native and production checks."
+    },
+    {
+      "id": "stadt-irmgard-aktenstapel-expressionist-directions-v1",
+      "file": "../resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-0dfb9e6f-0b29-4f18-a3ec-8338644be28f.png",
+      "prompt": "Create ONE horizontal four-view whole-body painted source sheet of the SAME mature adult woman Irmgard Aktenstapel, exact left-to-right order FRONT, RIGHT-facing true profile, REAR true back, LEFT-facing true profile. Four separate whole figures, matching sole baseline, head/torso/coat/skirt/calf/shoe proportions and adult height. At least 50px clear genuinely transparent gutter between all silhouettes and generous outer transparent margin. One neutral planted pose in each, not motion/action. FIRST reference is her NEW accepted front wholebody painting and binds facial identity, adult anatomy, outfit, exact hem lengths, grey files/hand and brown lace-up shoes. SECOND Gisela quiz portrait gives only broad broken directional expressionist Berlin oil-paint finish, not Gisela's own face/glasses/coat/books. THIRD old Irmgard direction source verifies her own big curly white-grey hair volume, rectangular brown spectacles, sage-olive HOODED coat, lavender shirt, dark charcoal KNEE-LENGTH skirt, grey file stack, brown LACE-UP low boots and rear/profile construction; its toy-short proportions must NOT be copied. The grey document files are held ONLY by anatomical LEFT hand, FRONT viewer-right, REAR viewer-left. Anatomical RIGHT hand remains empty. On true profiles naturally occlude far-side files/hand if needed, without moving prop ownership or borrowing the near hand. Both hands must remain anatomically possible and no extra files. Preserve coat hood and length, skirt knee hem, covered legs/tights and identical brown laced shoe closure/heel/sole in all four. Older tired angular expressive face, smaller eyes and clearly CLOSED lips in front and both side profiles; rear shows only full curly hair and coat back, no face. Long connected adult legs and believable hands/feet, coherent body rotation, no mirrored-front rear or pasted front face on profile. Broad uneven directional painted garment planes and weathered skin, not regular diamond tiles or tiny speckles over smooth toy volumes. Transparent RGBA alpha-zero empty background; no vignette, backdrop, halo, floor, shadow, captions, arrows, text or watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/gisela-becker.webp",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-directions-candidate.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED HELD: unsupported rear files; rear-v2 is separate provisional repair",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-directions-v1.json",
+      "sourceReviewReceiptSha256": "3df12d0a7b23fa161f34269ac8c167b333dd3e18a98666ef3d487741362f2f4d",
+      "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "sourceSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+          "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+        }
+      ],
+      "producerFindings": "White curly hair, glasses, sage hooded coat, mauve shirt, knee skirt, brown lace-up shoes and grey files remain identifiable. Front and both profiles show LEFT-owned files with right empty. REAR files appear at viewer-left edge of coat without a clearly visible hand or connected arm gripping them; do not fit this held rear as approved source.",
+      "producerCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 70 px), but the top/bottom outer clear margins are 12/9 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 275 edge pixels, maximum edge alpha 3; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping.",
+        "Held for visual rear hand/file attachment regardless of geometry checks."
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-directions-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1873373,
+      "componentBounds": [
+        [
+          42,
+          12,
+          447,
+          877
+        ],
+        [
+          517,
+          16,
+          811,
+          877
+        ],
+        [
+          925,
+          16,
+          1303,
+          871
+        ],
+        [
+          1416,
+          14,
+          1713,
+          877
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 10,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+            "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+          },
+          {
+            "role": "secondary portrait paint finish only",
+            "path": "assets/quiz-characters/gisela-becker.webp",
+            "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+          },
+          {
+            "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+            "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+            "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-directions-candidate.png",
+          "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+        }
+      ],
+      "historicalOriginalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "historicalSourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-directions-batch1/receipt.json",
+      "selection": [
+        "down",
+        "right",
+        "left"
+      ],
+      "selectionLimit": "Original rear remains held; selected rear is separate repaired own source."
+    },
+    {
+      "id": "stadt-irmgard-aktenstapel-expressionist-rear-v2",
+      "file": "../resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-rear-v2.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1669f-271f-7481-8558-a71afb799550\\exec-530f540b-e810-474c-bb6c-4f4365ed3b70.png",
+      "prompt": "Create ONE isolated, complete, full-body TRUE REAR (back-of-head and back-of-body) neutral cardinal source painting of Irmgard Aktenstapel, the SAME mature older adult woman in the supplied accepted standing front. This is Irmgard AKTENSTAPEL, a named city adult, NOT crowd Irmgard Aktenordner. Reference 1 standing-v1 is PRIMARY for her adult size and anatomy, very full curly silver-grey hair, sage/olive hooded coat, mauve blouse, charcoal dark knee-length skirt, brown stockings, brown lace-up low boots, one stack of grey files in anatomical LEFT hand and empty anatomical RIGHT hand. Reference 2 directions-v1 gives her own already painted cardinal back construction, silhouette, hair, hood, coat, skirt, boots and scale; CORRECT its unsupported rear file stack which floats at viewer-left coat edge. Show exactly ONE back view, both shoulders/arms, back of head, coat hood, pelvis, knees, calves and BOTH planted lace-up shoes at coherent adult proportions. No rear face; glasses may show only naturally if a tiny temple/edge is anatomically plausible, otherwise omit them. Her anatomical LEFT side is viewer LEFT in this rear view. Keep the grey file/folder stack still tucked against her anatomical LEFT FRONT RIBS under that left upper arm/forearm, at torso/waist height, as in the accepted front; do not relocate it to the rear of her body just to show it. From the rear, show a modest plausible visible outer edge of the same grey file stack at viewer LEFT, securely caught by her CONNECTED anatomical LEFT arm. Make an anatomically clear connected LEFT elbow and forearm turning around the outer/bottom file edge, with one visibly supporting LEFT hand/fingers gripping that edge OR a clearly credible underarm clamp where the left upper arm and elbow visibly pin the files. The file must never look like a loose vertical strip attached to the coat or floating beside it. Natural rear-view occlusion of most or all of the front-tucked files is acceptable if that is needed for believable anatomy; prioritize truthful carry continuity over visibility of the files. Anatomical RIGHT hand remains EMPTY, hanging at viewer RIGHT; no file in that hand, no extra arm, no duplicate papers, no fabricated carrying brace or strap. Preserve her older stocky yet adult body proportions, same hair volume, hooded olive coat length, dark knee skirt, brown covered lower legs, same brown laced shoe closures and sole scale. Broad irregular weathered Berlin expressionist directional brush planes, no smooth toy volume or repetitive diamond texture. Full figure isolated with generous transparent margins. Genuinely transparent RGBA alpha-zero background, no gradient backdrop, vignette, colored fringe/halo, ground, cast shadow, caption, text, border, or watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-directions-v1.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional single cardinal repair; native family correspondence unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-rear-v2.json",
+      "sourceReviewReceiptSha256": "1eb39bd6eed1622bb6b755804862c89140fc7275e78c2b9be7d82c8f8d623042",
+      "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-rear-v2.png",
+      "sourceSha256": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": null,
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+        },
+        {
+          "role": null,
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+          "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408"
+        }
+      ],
+      "producerFindings": "Provisional; the support is compact and does not show a full wrap grip, while the files still project visibly from the side. Root to judge carry continuity against front/profile.",
+      "producerCaveats": "Root judged the raw repair provisionally; family correspondence and style remain open.",
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-cardinal-repairs-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 2003932,
+      "componentBounds": [
+        [
+          200,
+          30,
+          821,
+          1484
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 30,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": null,
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+            "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+          },
+          {
+            "role": null,
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+            "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+          "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408"
+        }
+      ],
+      "historicalOriginalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-rear-v2.png",
+      "historicalSourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-cardinal-repairs-batch1/receipt.json",
+      "selection": [
+        "up"
+      ]
+    },
+    {
+      "id": "stadt-irmgard-aktenstapel-expressionist-standing-v1",
+      "file": "../resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-b4ce5640-bc8d-4910-9fb1-cce01340d338.png",
+      "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator resident IRMGARD AKTENSTAPEL, a candidate for later review, no action sheet. Images 1 and 2 are PRIMARY mature painterly Berlin face/garment and adult limb/stature authority (Sabine Krueger and Hartmut Keller); image 3 is SECONDARY older-woman whole-body skirt/leg/paint reference (Brigitte Mueller). Images 4 and 5 show IRMGARD'S OWN identity, wardrobe, prop and physical hand ownership only; REJECT their old huge-head very short-limb proportions. Preserve elderly woman with abundant curly silver-white hair, rectangular brown glasses, small tired eyes, individual aged worried face with lined cheeks and uneven furrowed brows; compact substantial older-adult build, not a skinny young fashion figure. Her olive-green weathered hooded raincoat/cape with buttons covers a lavender buttoned blouse, charcoal straight knee-length skirt, dark stockings, broad practical brown lace-up ankle boots. Exactly ONE thick gray file/folder with pale paper edges tucked under her ANATOMICAL LEFT forearm (screen right), held low so lips remain unobstructed; the ANATOMICAL RIGHT hand (screen left) is empty, fully visible and available for later gesture. Front-facing quiet planted stance; complete connected shoulders, elbows, hands and fingers, thighs, knees, shins, ankles and two substantial fully visible shoes; adult head/torso/leg relationship comparable to references 1-3 while retaining Irmgard's stout individual build. Clearly visible natural CLOSED lips and both corners below her nose, no folder over face. Strong Disco Elysium meets Berlin painterly finish: mature weathered expressive angular facial planes, asymmetry, broad irregular oil/drybrush marks that model folds and volume, muted olive, dirty ochre, wine-violet and cool gray-green shadows; no rounded toy face, glossy gradients, repeated geometric facet pattern, or uniform fine speckle. Exactly one centered isolated FRONT figure taking no more than 82% canvas height and 72% width; leave at least 65 genuinely transparent pixels above curls, beneath boot soles and around all outer sides. TRUE RGBA cutout, no backdrop, floor, cast shadow, halo, glow, text, logo, watermark, duplicate, panel, alternate view or action pose.",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-brigitte-mueller-expressionist-standing-v3.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-directions-candidate.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-standing.webp"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional neutral front; producer: source-candidate-unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-standing-v1.json",
+      "sourceReviewReceiptSha256": "5f71b82b1dc1aefd6bcdaaffd7e168455d2deaadac540a5caac6d38021956137",
+      "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+      "sourceSha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary mature Berlin painterly finish and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "role": "primary mature Berlin painterly finish and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "role": "secondary older-adult woman body/skirt painting",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+          "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+        },
+        {
+          "role": "Irmgard own identity, clothes, left-arm file, handedness; prior miniature anatomy rejected",
+          "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+          "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+        },
+        {
+          "role": "Irmgard canonical standing identity/colors, not adult proportion authority",
+          "path": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+          "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e"
+        }
+      ],
+      "producerFindings": {
+        "style": "Weathered elderly face and broad olive/charcoal brush planes; closer to adult Sabine/Brigitte than old mini source, though coat texture still has some regular facets.",
+        "anatomy": "Compact but connected adult build, complete legs and lace-up shoes; lower legs remain shorter than the longest primary figures, suitable only for root visual judgment.",
+        "identity_handedness": "White-gray curls, brown glasses, olive hooded coat, lavender blouse and charcoal skirt match. One gray file under anatomical LEFT arm (screen right); RIGHT hand free.",
+        "mouth": "Closed lips and corners visible, folder below mouth.",
+        "holds": [
+          "Unapproved source only; no walk, gesture, mouth, voice or runtime capability replaced or tested.",
+          "Native fit and light/dark edge cleanup must precede any directional or action expansion.",
+          "Alpha>=128 margins are {'left': 222, 'top': 43, 'right': 182, 'bottom': 41} pixels; the generated image did not meet the prompt's >=65 px vertical margin, so root must assess native cell gutters and may need canvas padding on a derived export while keeping this source immutable."
+        ],
+        "light_dark": "Inspected both actual composites: clear cutout without visible backdrop, floor, cast shadow or broad halo. Low-alpha detached flecks remain a numerical cleanup concern."
+      },
+      "producerCaveats": {
+        "1": {
+          "pixels": 553268,
+          "bounds_xyxy_exclusive": [
+            65,
+            23,
+            1010,
+            1506
+          ],
+          "components": 251,
+          "largest_components": [
+            {
+              "pixels": 552886,
+              "bounds_xyxy_exclusive": [
+                213,
+                37,
+                848,
+                1505
+              ]
+            },
+            {
+              "pixels": 19,
+              "bounds_xyxy_exclusive": [
+                947,
+                349,
+                950,
+                359
+              ]
+            },
+            {
+              "pixels": 16,
+              "bounds_xyxy_exclusive": [
+                951,
+                351,
+                954,
+                360
+              ]
+            },
+            {
+              "pixels": 16,
+              "bounds_xyxy_exclusive": [
+                665,
+                193,
+                671,
+                198
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                939,
+                661,
+                940,
+                670
+              ]
+            },
+            {
+              "pixels": 8,
+              "bounds_xyxy_exclusive": [
+                937,
+                662,
+                938,
+                670
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                107,
+                313,
+                110,
+                318
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                111,
+                311,
+                112,
+                317
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "8": {
+          "pixels": 537792,
+          "bounds_xyxy_exclusive": [
+            220,
+            42,
+            843,
+            1496
+          ],
+          "components": 8,
+          "largest_components": [
+            {
+              "pixels": 537782,
+              "bounds_xyxy_exclusive": [
+                220,
+                42,
+                843,
+                1496
+              ]
+            },
+            {
+              "pixels": 3,
+              "bounds_xyxy_exclusive": [
+                303,
+                785,
+                304,
+                788
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                305,
+                777,
+                307,
+                778
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                302,
+                789,
+                303,
+                790
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                301,
+                793,
+                302,
+                794
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                306,
+                775,
+                307,
+                776
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                307,
+                771,
+                308,
+                772
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                389,
+                289,
+                390,
+                290
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "20": {
+          "pixels": 536508,
+          "bounds_xyxy_exclusive": [
+            221,
+            42,
+            843,
+            1496
+          ],
+          "components": 1,
+          "largest_components": [
+            {
+              "pixels": 536508,
+              "bounds_xyxy_exclusive": [
+                221,
+                42,
+                843,
+                1496
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "64": {
+          "pixels": 534264,
+          "bounds_xyxy_exclusive": [
+            221,
+            42,
+            843,
+            1496
+          ],
+          "components": 3,
+          "largest_components": [
+            {
+              "pixels": 534260,
+              "bounds_xyxy_exclusive": [
+                221,
+                42,
+                843,
+                1496
+              ]
+            },
+            {
+              "pixels": 3,
+              "bounds_xyxy_exclusive": [
+                590,
+                69,
+                592,
+                71
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                336,
+                195,
+                337,
+                196
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "128": {
+          "pixels": 531578,
+          "bounds_xyxy_exclusive": [
+            222,
+            43,
+            842,
+            1495
+          ],
+          "components": 6,
+          "largest_components": [
+            {
+              "pixels": 531572,
+              "bounds_xyxy_exclusive": [
+                222,
+                43,
+                842,
+                1495
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                595,
+                73,
+                596,
+                75
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                359,
+                260,
+                360,
+                261
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                361,
+                260,
+                362,
+                261
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                357,
+                259,
+                358,
+                260
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                474,
+                51,
+                475,
+                52
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "250": {
+          "pixels": 513780,
+          "bounds_xyxy_exclusive": [
+            224,
+            50,
+            841,
+            1494
+          ],
+          "components": 219,
+          "largest_components": [
+            {
+              "pixels": 513445,
+              "bounds_xyxy_exclusive": [
+                224,
+                50,
+                841,
+                1494
+              ]
+            },
+            {
+              "pixels": 16,
+              "bounds_xyxy_exclusive": [
+                445,
+                1415,
+                446,
+                1431
+              ]
+            },
+            {
+              "pixels": 8,
+              "bounds_xyxy_exclusive": [
+                550,
+                1170,
+                551,
+                1178
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                725,
+                1078,
+                726,
+                1084
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                725,
+                957,
+                726,
+                963
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                438,
+                1365,
+                439,
+                1370
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                577,
+                75,
+                582,
+                76
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                671,
+                327,
+                672,
+                332
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-neutrals-batch3/stadt-irmgard-aktenstapel-receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1983587,
+      "componentBounds": [
+        [
+          221,
+          42,
+          843,
+          1496
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 40,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary mature Berlin painterly finish and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "role": "primary mature Berlin painterly finish and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "role": "secondary older-adult woman body/skirt painting",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+            "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+          },
+          {
+            "role": "Irmgard own identity, clothes, left-arm file, handedness; prior miniature anatomy rejected",
+            "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+            "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+          },
+          {
+            "role": "Irmgard canonical standing identity/colors, not adult proportion authority",
+            "path": "assets/characters/street/stadt-irmgard-aktenstapel-standing.webp",
+            "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-brigitte-mueller-expressionist-standing-v3.png",
+          "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-directions-candidate.png",
+          "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+        },
+        {
+          "path": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/references/stadt-irmgard-aktenstapel-standing.webp",
+          "sha256": "3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e"
+        }
+      ],
+      "historicalOriginalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+      "historicalSourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-neutrals-batch3/stadt-irmgard-aktenstapel-receipt.json",
+      "selection": [
+        "reference only"
+      ]
+    },
+    {
+      "id": "stadt-irmgard-aktenstapel-expressionist-diagonals-v1",
+      "file": "../resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1693f-a44c-7cf3-b28c-bf13251b1abd\\exec-4e56ef3b-a1c0-4db1-9204-f8f78ac20338.png",
+      "originalSourcePath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "sha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "sourceSha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "prompt": "Create ONE transparent horizontal FOUR-FIGURE production sprite source sheet of the SAME elderly Berlin adult woman IRMGARD AKTENSTAPEL. Reference 1 is her own adult four-cardinal painting and binds identity, proportions, clothes, anatomy and shoes. Reference 2 is her own repaired true rear and binds the believable left-underarm clamp of the front-tucked grey files. Preserve silver-white abundant short curls, rectangular brown glasses, weary lined asymmetric face, tired small eyes, olive sage hooded raincoat with hood DOWN, lilac buttoned blouse, charcoal KNEE-length straight skirt, brown stockings and broad practical brown LACE-UP low boots. Mature stocky connected adult build, complete adult thighs/knees/calves/ankles, weathered painterly Disco Elysium meets Berlin garment planes.\n\nExactly FOUR distinct neutral WHOLE-BODY turn views left to right: FRONT-RIGHT THREE QUARTER (45 degrees), REAR-RIGHT THREE QUARTER (135), REAR-LEFT THREE QUARTER (225), FRONT-LEFT THREE QUARTER (315). Rotate the full skull, shoulders, chest, coat, pelvis, skirt, knees and both boots together. Front quarters are truly oblique between front and profile, with foreshortened far shoulder/lapel and partial far cheek; do not turn only the head on a frontal torso. Rear quarters show coat back, hood and hair back with only natural face sliver. Same crown-to-sole height and head size across all four, one camera and shared ground line.\n\nExactly ONE grey file stack remains tucked against her anatomical LEFT FRONT RIBS, under her LEFT upper arm and forearm, with believable connected left elbow and fingers supporting the lower/outer edge. Never hang a floating strip beside coat. Files are front viewer-right and rear viewer-left. In rear quarters allow truthful occlusion by torso and left arm rather than relocating file to back or opposite hand. Her anatomical RIGHT hand stays EMPTY and hangs freely for later gesture. No duplicate prop, extra fingers, strap or brace. Both boots firmly planted and fully visible with natural separation, no walking/action, lips closed wherever visible.\n\nFour fully separate complete silhouettes with generous genuine transparent gaps and at least 35px outer clear margin. Requested figures about 850 source pixels crown-to-sole to match first sheet resolution. True RGBA transparent alpha-zero background. No floor, shadow, vignette, background, colored fringe, lettering, labels, arrows, watermark or detached paint. Use broad irregular directional brushwork rather than glossy round toy volumes or repeating diamond texture.",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+        "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-rear-v2.png"
+      ],
+      "generationRequest": {
+        "prompt": "Create ONE transparent horizontal FOUR-FIGURE production sprite source sheet of the SAME elderly Berlin adult woman IRMGARD AKTENSTAPEL. Reference 1 is her own adult four-cardinal painting and binds identity, proportions, clothes, anatomy and shoes. Reference 2 is her own repaired true rear and binds the believable left-underarm clamp of the front-tucked grey files. Preserve silver-white abundant short curls, rectangular brown glasses, weary lined asymmetric face, tired small eyes, olive sage hooded raincoat with hood DOWN, lilac buttoned blouse, charcoal KNEE-length straight skirt, brown stockings and broad practical brown LACE-UP low boots. Mature stocky connected adult build, complete adult thighs/knees/calves/ankles, weathered painterly Disco Elysium meets Berlin garment planes.\n\nExactly FOUR distinct neutral WHOLE-BODY turn views left to right: FRONT-RIGHT THREE QUARTER (45 degrees), REAR-RIGHT THREE QUARTER (135), REAR-LEFT THREE QUARTER (225), FRONT-LEFT THREE QUARTER (315). Rotate the full skull, shoulders, chest, coat, pelvis, skirt, knees and both boots together. Front quarters are truly oblique between front and profile, with foreshortened far shoulder/lapel and partial far cheek; do not turn only the head on a frontal torso. Rear quarters show coat back, hood and hair back with only natural face sliver. Same crown-to-sole height and head size across all four, one camera and shared ground line.\n\nExactly ONE grey file stack remains tucked against her anatomical LEFT FRONT RIBS, under her LEFT upper arm and forearm, with believable connected left elbow and fingers supporting the lower/outer edge. Never hang a floating strip beside coat. Files are front viewer-right and rear viewer-left. In rear quarters allow truthful occlusion by torso and left arm rather than relocating file to back or opposite hand. Her anatomical RIGHT hand stays EMPTY and hangs freely for later gesture. No duplicate prop, extra fingers, strap or brace. Both boots firmly planted and fully visible with natural separation, no walking/action, lips closed wherever visible.\n\nFour fully separate complete silhouettes with generous genuine transparent gaps and at least 35px outer clear margin. Requested figures about 850 source pixels crown-to-sole to match first sheet resolution. True RGBA transparent alpha-zero background. No floor, shadow, vignette, background, colored fringe, lettering, labels, arrows, watermark or detached paint. Use broad irregular directional brushwork rather than glossy round toy volumes or repeating diamond texture.",
+        "referenced_image_paths": [
+          "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-aktenstapel-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-irmgard-aktenstapel\\adult-v1\\raw\\stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+          "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-aktenstapel-complete\\GermanySimulator\\assets\\sprite-sources\\resident-motion\\stadt-irmgard-aktenstapel\\adult-v1\\raw\\stadt-irmgard-aktenstapel-expressionist-rear-v2.png"
+        ],
+        "transparent_background": true
+      },
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/quarter-generation-receipt.json",
+      "sourceReviewReceiptSha256": "29efb89334de85abe6a16c84688b7a1720c9722a82f0fed3ba8618a36c44246e",
+      "exactRequestPath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/quarter-generation-request.json",
+      "exactRequestSha256": "d1aeeb11ceb64fa62fc86f72a77ae9087ca38e384c8b0ef9ae7d9a7e275f07ba",
+      "dimensions": [
+        1918,
+        820
+      ],
+      "bytes": 1584570,
+      "selection": [
+        "front-right",
+        "rear-right",
+        "rear-left",
+        "front-left"
+      ],
+      "status": "Own native/source accepted by author; production/browser and independent integration acceptance pending."
     }
   ]
 }

@@ -1,0 +1,734 @@
+{
+  "date": "2026-10-23",
+  "scope": "Five front/right/rear/left neutral direction source-only rows for animated outdoor actors; existing seven actions, walks, turns and mouths unchanged",
+  "tool": "image_gen.imagegen built-in transparent_background=true, exactly one job per actor, no retries",
+  "order": [
+    "front",
+    "right profile",
+    "rear",
+    "left profile"
+  ],
+  "actors": [
+    {
+      "actor": "quiz-heike-hoffmann",
+      "prompt": "Create ONE horizontal 4-view source sheet for the SAME mature Berlin adult woman Heike Hoffmann: exactly four separate complete whole-body figures in one row, left-to-right FRONT, RIGHT-facing true side profile, REAR (back of head/body), LEFT-facing true side profile. All four have identical adult figure height, head size, shoulder/hip/leg proportions, cardigan length, shoe size and sole baseline, quiet planted neutral stance, ~50+ px truly transparent gutters between silhouettes and transparent outer margins. This is source artwork, not a walk frame. Reference roles: FIRST the new Heike expressionist standing full-body painting is binding identity/outfit/anatomy/paint/prop/shoe source; SECOND her original quiz portrait supplies additional mature irregular broad oil-brush finish and facial detail only; THIRD old Heike key sheet checks actual side/rear hairstyle, costume and anatomical prop ownership but its toy-short body must NOT be copied. Preserve her own grey-silver shoulder-length bob, red-brown glasses, pearl earrings, small weary narrow eyes, mildly wry CLOSED lips (front and both true profiles, rear no invented face), maroon buttoned cardigan, cream small-floral blouse, dark charcoal trousers, brown LACE-UP oxford shoes with SAME lace closure and substantial sole in every view. Key ring with metallic keys stays in her ANATOMICAL RIGHT hand; three green/blue/yellow cards stay fanned in her ANATOMICAL LEFT hand. For the REAR view the screen positions exchange: keys appear on viewer-right / actor-right, cards on viewer-left / actor-left; allow far-side props in profiles to occlude naturally without teleporting hands or placing a free far hand on a near-hand prop. Do not swap/duplicate/drop keys/cards. Four genuinely rotated coherent bodies and true rear hair/cardigan back, no mirrored front as back, no profile front-face paste. Adult connected neck, torso, full limbs, both hands and complete brown lace-up shoes in every view. Weathered angular Disco-Elysium-meets-Berlin hand paint with broad broken irregular directional strokes and lived-in fabric, not uniform diamond tiles, fine stipple, shiny photo, baby eyes or chibi. RGBA alpha-zero empty background, no floor, shadow, colored backdrop, vignette, halo, extra props, text, labels, arrows or watermark.",
+      "references": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        }
+      ],
+      "generatedJobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-4307cf32-09fd-47b2-8888-50fac581a673.png",
+      "copiedSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+      "status": "provisional source pass; left-profile far-side keys occluded",
+      "visualFindings": "All four bodies adult-height and true front/right/rear/left. Grey bob, glasses, maroon cardigan, floral blouse, trousers, brown lace-up shoes preserved. FRONT keys in anatomical RIGHT/viewer-left; cards LEFT/viewer-right. REAR keys viewer-right, cards viewer-left. RIGHT profile keys and cards visible. LEFT profile cards visible but far-side key hand and keys hidden by the body; natural occlusion is plausible but key continuity is not directly provable from that cell.",
+      "generatedJobSha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+      "copiedSourceSha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+      "diagnostics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha16WholeBBoxXYXY": [
+          134,
+          16,
+          1628,
+          867
+        ],
+        "alpha16ClearOuterMarginsLRTB": [
+          134,
+          146,
+          16,
+          20
+        ],
+        "alpha16PerView": [
+          {
+            "name": "front",
+            "alpha16BBoxXYXY": [
+              134,
+              19,
+              453,
+              867
+            ],
+            "paintedHeightPx": 848,
+            "soleYExclusive": 867
+          },
+          {
+            "name": "right profile",
+            "alpha16BBoxXYXY": [
+              586,
+              16,
+              825,
+              867
+            ],
+            "paintedHeightPx": 851,
+            "soleYExclusive": 867
+          },
+          {
+            "name": "rear",
+            "alpha16BBoxXYXY": [
+              941,
+              16,
+              1270,
+              863
+            ],
+            "paintedHeightPx": 847,
+            "soleYExclusive": 863
+          },
+          {
+            "name": "left profile",
+            "alpha16BBoxXYXY": [
+              1399,
+              19,
+              1628,
+              866
+            ],
+            "paintedHeightPx": 847,
+            "soleYExclusive": 866
+          }
+        ],
+        "alpha16GuttersPx": [
+          133,
+          116,
+          129
+        ],
+        "minimumAlpha16GutterPx": 116,
+        "alpha16EightConnectedComponents": 5,
+        "alpha16ComponentAreasDescending": [
+          173076,
+          172127,
+          123675,
+          123021,
+          8
+        ],
+        "alpha16LargeComponentsAbove1000Px": 4,
+        "alpha1to15PixelCount": 51902,
+        "alphaZeroPixelCount": 929729,
+        "alphaZeroPixelsWithHiddenRGB": 1260,
+        "borderNonzeroAlphaPixels": 37,
+        "borderAlphaMax": 1,
+        "paintedHeightRangePx": [
+          847,
+          851
+        ],
+        "soleYRangeExclusive": [
+          863,
+          867
+        ]
+      },
+      "diagnosticPreviews": [
+        {
+          "background": "light",
+          "path": "output/street-redesign/animated-adult-directions-batch1/quiz-heike-hoffmann-light.png",
+          "sha256": "e739605b849942a1dac2be95449bf1863e28c5adbdc5af5c50f7a192374e9db4"
+        },
+        {
+          "background": "dark",
+          "path": "output/street-redesign/animated-adult-directions-batch1/quiz-heike-hoffmann-dark.png",
+          "sha256": "683933a49e5366a35e8591fc61af40d8b1fd5f84b3fa11289a478a4a42610bab"
+        }
+      ],
+      "lightDarkReview": "Viewed native source and light/dark alpha composites; no solid backdrop or floor shadow visible. Refer to visualFindings for anatomy, prop and shoe assessment.",
+      "sourceFormattingCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 116 px), but the top/bottom outer clear margins are 16/20 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 37 edge pixels, maximum edge alpha 1; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ]
+    },
+    {
+      "actor": "stadt-hannelore-sparkasse",
+      "prompt": "Create ONE horizontal row of exactly FOUR separate full-body 2D game source paintings of the SAME mature adult Hannelore Sparkasse, in exact order FRONT, RIGHT-facing true side profile, REAR true back, LEFT-facing true side profile. Full crown/hands/prop/feet for each; all four equal adult height, head and body proportions and shared shoe sole baseline, 50+ px transparent gutter between complete silhouettes plus clear outer margin. Quiet planted standing poses, not walking/action keys. Reference roles: FIRST her NEW expressionist fullbody front painting is binding identity, face, auburn upswept hair, red glasses, burgundy blazer, pale blouse, dark charcoal KNEE-LENGTH pencil skirt, light beige tights, black low-heel STRAP/LOAFER shoes, anatomy, figure scale and prop. SECOND original Gisela quiz portrait supplies only broad irregular angular weathered DE/Berlin oil-paint finish; no glasses/hair/outfit/papers borrowed. THIRD old Hannelore four-direction sheet crosschecks her OWN rear hair/updo, skirt hem, black strap shoes and tan handbag ownership, but its squat toy body MUST NOT set proportions. Maintain her own middle-aged stern face with small eyes and visible CLOSED lips in FRONT and BOTH side profiles; rear has no face or mouth. The single tan structured handbag remains in ANATOMICAL LEFT hand: FRONT viewer-right, REAR viewer-left. The RIGHT hand is empty throughout. True profile may naturally hide part of far-side bag, without moving her hand behind her back or inventing a second bag. Keep full near and far arms/hands and plausible feet in profiles; rotate garment construction genuinely, not pasted front or mirror-only back. Preserve her skirt exactly around knee, light tights fully covering calves, black strap/loafer shoes (no lace-up/boots, no bare black legs). Broad broken directional dry brush, expressive mature angular planes, muted worn cloth; no uniformly repeated diamond facets, stipple, shiny photo or chibi. Genuine RGBA alpha-zero transparent backdrop, no floor, shadow, vignette, halo, text, arrows, labels, logo, watermark.",
+      "references": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+          "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+        }
+      ],
+      "generatedJobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-8f4c1b28-f258-45ce-b68e-4ce5235de518.png",
+      "copiedSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "status": "provisional source pass; left-profile far-side handbag occluded",
+      "visualFindings": "Four grown-up views with auburn updo, red glasses, burgundy blazer, pale shirt, dark knee skirt, light tights and black strap loafers. Tan handbag in LEFT hand front viewer-right and rear viewer-left; visible in RIGHT profile. LEFT profile shows empty near RIGHT hand; handbag/far LEFT hand fully hidden, so ownership in that cell is visually unproved rather than invented.",
+      "generatedJobSha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18",
+      "copiedSourceSha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18",
+      "diagnostics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha16WholeBBoxXYXY": [
+          106,
+          4,
+          1614,
+          882
+        ],
+        "alpha16ClearOuterMarginsLRTB": [
+          106,
+          160,
+          4,
+          5
+        ],
+        "alpha16PerView": [
+          {
+            "name": "front",
+            "alpha16BBoxXYXY": [
+              106,
+              6,
+              493,
+              882
+            ],
+            "paintedHeightPx": 876,
+            "soleYExclusive": 882
+          },
+          {
+            "name": "right profile",
+            "alpha16BBoxXYXY": [
+              564,
+              6,
+              803,
+              882
+            ],
+            "paintedHeightPx": 876,
+            "soleYExclusive": 882
+          },
+          {
+            "name": "rear",
+            "alpha16BBoxXYXY": [
+              901,
+              4,
+              1282,
+              880
+            ],
+            "paintedHeightPx": 876,
+            "soleYExclusive": 880
+          },
+          {
+            "name": "left profile",
+            "alpha16BBoxXYXY": [
+              1391,
+              6,
+              1614,
+              882
+            ],
+            "paintedHeightPx": 876,
+            "soleYExclusive": 882
+          }
+        ],
+        "alpha16GuttersPx": [
+          71,
+          98,
+          109
+        ],
+        "minimumAlpha16GutterPx": 71,
+        "alpha16EightConnectedComponents": 12,
+        "alpha16ComponentAreasDescending": [
+          195154,
+          189822,
+          136930,
+          131441,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "alpha16LargeComponentsAbove1000Px": 4,
+        "alpha1to15PixelCount": 41830,
+        "alphaZeroPixelCount": 878352,
+        "alphaZeroPixelsWithHiddenRGB": 1833,
+        "borderNonzeroAlphaPixels": 589,
+        "borderAlphaMax": 8,
+        "paintedHeightRangePx": [
+          876,
+          876
+        ],
+        "soleYRangeExclusive": [
+          880,
+          882
+        ]
+      },
+      "diagnosticPreviews": [
+        {
+          "background": "light",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-hannelore-sparkasse-light.png",
+          "sha256": "685031002cd80600f04833afff2a1f490fa47e28a9060bc979d963d5ce6dae26"
+        },
+        {
+          "background": "dark",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-hannelore-sparkasse-dark.png",
+          "sha256": "f63e64a1b635be90e599eb967a7f9f849d7f4890208a799df16569fc25e5b3f3"
+        }
+      ],
+      "lightDarkReview": "Viewed native source and light/dark alpha composites; no solid backdrop or floor shadow visible. Refer to visualFindings for anatomy, prop and shoe assessment.",
+      "sourceFormattingCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 71 px), but the top/bottom outer clear margins are 4/5 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 589 edge pixels, maximum edge alpha 8; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ]
+    },
+    {
+      "actor": "stadt-irmgard-aktenstapel",
+      "prompt": "Create ONE horizontal four-view whole-body painted source sheet of the SAME mature adult woman Irmgard Aktenstapel, exact left-to-right order FRONT, RIGHT-facing true profile, REAR true back, LEFT-facing true profile. Four separate whole figures, matching sole baseline, head/torso/coat/skirt/calf/shoe proportions and adult height. At least 50px clear genuinely transparent gutter between all silhouettes and generous outer transparent margin. One neutral planted pose in each, not motion/action. FIRST reference is her NEW accepted front wholebody painting and binds facial identity, adult anatomy, outfit, exact hem lengths, grey files/hand and brown lace-up shoes. SECOND Gisela quiz portrait gives only broad broken directional expressionist Berlin oil-paint finish, not Gisela's own face/glasses/coat/books. THIRD old Irmgard direction source verifies her own big curly white-grey hair volume, rectangular brown spectacles, sage-olive HOODED coat, lavender shirt, dark charcoal KNEE-LENGTH skirt, grey file stack, brown LACE-UP low boots and rear/profile construction; its toy-short proportions must NOT be copied. The grey document files are held ONLY by anatomical LEFT hand, FRONT viewer-right, REAR viewer-left. Anatomical RIGHT hand remains empty. On true profiles naturally occlude far-side files/hand if needed, without moving prop ownership or borrowing the near hand. Both hands must remain anatomically possible and no extra files. Preserve coat hood and length, skirt knee hem, covered legs/tights and identical brown laced shoe closure/heel/sole in all four. Older tired angular expressive face, smaller eyes and clearly CLOSED lips in front and both side profiles; rear shows only full curly hair and coat back, no face. Long connected adult legs and believable hands/feet, coherent body rotation, no mirrored-front rear or pasted front face on profile. Broad uneven directional painted garment planes and weathered skin, not regular diamond tiles or tiny speckles over smooth toy volumes. Transparent RGBA alpha-zero empty background; no vignette, backdrop, halo, floor, shadow, captions, arrows, text or watermark.",
+      "references": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-irmgard-aktenstapel-directions-candidate.png",
+          "sha256": "17271a0a7607de220be7c5b61b9c02b7f0046727549b5d0ac26d3ccd5631cb50"
+        }
+      ],
+      "generatedJobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-0dfb9e6f-0b29-4f18-a3ec-8338644be28f.png",
+      "copiedSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "status": "HELD: rear file-hand attachment unproved",
+      "visualFindings": "White curly hair, glasses, sage hooded coat, mauve shirt, knee skirt, brown lace-up shoes and grey files remain identifiable. Front and both profiles show LEFT-owned files with right empty. REAR files appear at viewer-left edge of coat without a clearly visible hand or connected arm gripping them; do not fit this held rear as approved source.",
+      "generatedJobSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "copiedSourceSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "diagnostics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha16WholeBBoxXYXY": [
+          42,
+          12,
+          1713,
+          878
+        ],
+        "alpha16ClearOuterMarginsLRTB": [
+          42,
+          61,
+          12,
+          9
+        ],
+        "alpha16PerView": [
+          {
+            "name": "front",
+            "alpha16BBoxXYXY": [
+              42,
+              12,
+              447,
+              877
+            ],
+            "paintedHeightPx": 865,
+            "soleYExclusive": 877
+          },
+          {
+            "name": "right profile",
+            "alpha16BBoxXYXY": [
+              517,
+              16,
+              811,
+              878
+            ],
+            "paintedHeightPx": 862,
+            "soleYExclusive": 878
+          },
+          {
+            "name": "rear",
+            "alpha16BBoxXYXY": [
+              925,
+              16,
+              1303,
+              871
+            ],
+            "paintedHeightPx": 855,
+            "soleYExclusive": 871
+          },
+          {
+            "name": "left profile",
+            "alpha16BBoxXYXY": [
+              1416,
+              14,
+              1713,
+              877
+            ],
+            "paintedHeightPx": 863,
+            "soleYExclusive": 877
+          }
+        ],
+        "alpha16GuttersPx": [
+          70,
+          114,
+          113
+        ],
+        "minimumAlpha16GutterPx": 70,
+        "alpha16EightConnectedComponents": 4,
+        "alpha16ComponentAreasDescending": [
+          210188,
+          196160,
+          159198,
+          157032
+        ],
+        "alpha16LargeComponentsAbove1000Px": 4,
+        "alpha1to15PixelCount": 49320,
+        "alphaZeroPixelCount": 801640,
+        "alphaZeroPixelsWithHiddenRGB": 1051,
+        "borderNonzeroAlphaPixels": 275,
+        "borderAlphaMax": 3,
+        "paintedHeightRangePx": [
+          855,
+          865
+        ],
+        "soleYRangeExclusive": [
+          871,
+          878
+        ]
+      },
+      "diagnosticPreviews": [
+        {
+          "background": "light",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-irmgard-aktenstapel-light.png",
+          "sha256": "20b66bef5d38bced7a829ec7dfb75c55e565821c3f98f22f4944f781e7165328"
+        },
+        {
+          "background": "dark",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-irmgard-aktenstapel-dark.png",
+          "sha256": "0d38e086e9e78ccabb1e73cdb1989626d754b230cc46b00b3e023e061f58c0b9"
+        }
+      ],
+      "lightDarkReview": "Viewed native source and light/dark alpha composites; no solid backdrop or floor shadow visible. Refer to visualFindings for anatomy, prop and shoe assessment.",
+      "sourceFormattingCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 70 px), but the top/bottom outer clear margins are 12/9 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 275 edge pixels, maximum edge alpha 3; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping.",
+        "Held for visual rear hand/file attachment regardless of geometry checks."
+      ]
+    },
+    {
+      "actor": "stadt-karl-heinz-post",
+      "prompt": "Create ONE horizontal four-view whole-body 2D painted source sheet of the SAME mature Berlin adult Karl-Heinz Post. Exact order FRONT, RIGHT-facing true side profile, REAR genuine back, LEFT-facing true side profile. Each is a quiet planted neutral figure, same crown and shoe baseline, equal head/torso/arm/thigh/shin length, true grown-up height. Four fully separate silhouettes with at least 50px genuine transparent gutters and generous canvas outer margins; complete hands, prop and feet, no walking/action state. Reference roles: FIRST his NEW expressionist wholebody front source binds own identity, proportions, connected anatomy, outfit, precise white envelopes/hand and shoes. SECOND Hartmut Keller original quiz portrait supplies ONLY worn male DE/Berlin brush finish, angular weathered face and irregular broad oil strokes, not radio/vest/face. THIRD old Karl-Heinz four-direction source crosschecks his own profile/rear navy flat cap construction, brown hair, thick dark moustache, mustard-ochre work jacket with flap pockets, blue shirt, navy trousers, and gray-brown LACE-UP rugged work shoes; DO NOT copy its toy-short build. Keep his own slightly stocky mature adult figure, smaller tired eyes, moustache, prominent nose and CLOSED distinct lips in front and both true profiles; rear cap/hair/coat back only, no invented rear face. Exactly one small bundle of WHITE ENVELOPES in anatomical LEFT hand, FRONT viewer-right, REAR viewer-left; anatomical RIGHT hand empty all views. Natural far-side occlusion allowed in profiles; never move envelopes to right hand or duplicate/drop them. Preserve lace-up shoe closure, substantial rounded toes and sole thickness in all four, no shoe conversion. Genuinely rotated torso/limbs with both near/far hands/feet anatomically credible; no mirrored front masquerading as back, no profile front-face paste. Distinct broad broken irregular painted planes and worn fabric, not regular tiled diamonds, fine speckle, toy face or photo airbrush. Transparent RGBA alpha-zero background, no halo, red outline, vignette, backdrop, floor/shadow, text, labels, arrows, watermark.",
+      "references": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+          "sha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/hartmut-keller.webp",
+          "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+          "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+        }
+      ],
+      "generatedJobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-f4efc497-d547-470f-8831-e0c501244db5.png",
+      "copiedSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "status": "provisional source pass",
+      "visualFindings": "Four coherent adult views, blue cap, moustache, ochre jacket, navy clothes and rugged lace-up shoes consistent. White envelopes stay anatomical LEFT: front viewer-right, rear viewer-left, and visibly attached in both profiles. Opposite hand remains empty. Broad garment paint; no observed major anatomical or prop drift in source stills.",
+      "generatedJobSha256": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+      "copiedSourceSha256": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+      "diagnostics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1983,
+          793
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha16WholeBBoxXYXY": [
+          91,
+          11,
+          1866,
+          784
+        ],
+        "alpha16ClearOuterMarginsLRTB": [
+          91,
+          117,
+          11,
+          9
+        ],
+        "alpha16PerView": [
+          {
+            "name": "front",
+            "alpha16BBoxXYXY": [
+              91,
+              14,
+              500,
+              782
+            ],
+            "paintedHeightPx": 768,
+            "soleYExclusive": 782
+          },
+          {
+            "name": "right profile",
+            "alpha16BBoxXYXY": [
+              648,
+              11,
+              911,
+              784
+            ],
+            "paintedHeightPx": 773,
+            "soleYExclusive": 784
+          },
+          {
+            "name": "rear",
+            "alpha16BBoxXYXY": [
+              1037,
+              11,
+              1437,
+              781
+            ],
+            "paintedHeightPx": 770,
+            "soleYExclusive": 781
+          },
+          {
+            "name": "left profile",
+            "alpha16BBoxXYXY": [
+              1601,
+              12,
+              1866,
+              784
+            ],
+            "paintedHeightPx": 772,
+            "soleYExclusive": 784
+          }
+        ],
+        "alpha16GuttersPx": [
+          148,
+          126,
+          164
+        ],
+        "minimumAlpha16GutterPx": 126,
+        "alpha16EightConnectedComponents": 6,
+        "alpha16ComponentAreasDescending": [
+          190806,
+          188748,
+          134047,
+          133978,
+          1,
+          1
+        ],
+        "alpha16LargeComponentsAbove1000Px": 4,
+        "alpha1to15PixelCount": 33505,
+        "alphaZeroPixelCount": 891433,
+        "alphaZeroPixelsWithHiddenRGB": 1571,
+        "borderNonzeroAlphaPixels": 201,
+        "borderAlphaMax": 2,
+        "paintedHeightRangePx": [
+          768,
+          773
+        ],
+        "soleYRangeExclusive": [
+          781,
+          784
+        ]
+      },
+      "diagnosticPreviews": [
+        {
+          "background": "light",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-karl-heinz-post-light.png",
+          "sha256": "31649e58dff260fdc164ede2949302e198cf8a46c9da24308ece023fdcfc2089"
+        },
+        {
+          "background": "dark",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-karl-heinz-post-dark.png",
+          "sha256": "ee1cd11f2ae70c54038391391d6fb0acd7802b3a8ac94b926e7ddec0917b3a8c"
+        }
+      ],
+      "lightDarkReview": "Viewed native source and light/dark alpha composites; no solid backdrop or floor shadow visible. Refer to visualFindings for anatomy, prop and shoe assessment.",
+      "sourceFormattingCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 126 px), but the top/bottom outer clear margins are 11/9 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 201 edge pixels, maximum edge alpha 2; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ]
+    },
+    {
+      "actor": "stadt-renate-termin",
+      "prompt": "Create ONE horizontal row of exactly FOUR separate complete whole-body 2D game-source paintings of the SAME mature adult Renate Termin. Left-to-right exact order FRONT, RIGHT-facing genuine side profile, REAR genuine back view, LEFT-facing genuine side profile. Equal adult crown-to-sole height, head/torso/arm/thigh/shin proportions, same planted sole baseline; at least 50px transparent gutters and outer margins, no touching/cropping. Quiet neutral standing poses, no action/walk. FIRST reference is her NEW expressionist front wholebody painting and is binding for distinctive short spiky red pixie hair, strongly arched brows, tired narrow eyes, round mature face, pearl earrings, CLOSED stern lips, ivory thick RIBBED TURTLENECK, wine/burgundy QUILTED sleeveless vest with zipper, dark green-teal full-length trousers, burgundy LACE-UP practical shoes with same closure/toe/sole, adult anatomy, exact little yellow ticket and hand. SECOND original Gisela portrait supplies only stronger broad irregular directional weathered Berlin oil-paint finish, not Gisela's face/props/clothing. THIRD old Renate four-direction sheet checks own side/rear hair/vest/ticket/shoe continuity, never use its toy-short proportions. The SINGLE small yellow appointment ticket stays in ANATOMICAL RIGHT hand: FRONT viewer-left; REAR viewer-right. ANATOMICAL LEFT hand remains empty. Profiles may naturally partly hide far-side ticket without shifting it to the wrong hand; show coherent near/far arms and shoes. Preserve identical vest quilting construction and length, white sweater sleeves and ribbed turtle neck, green trousers covering ankles, and burgundy laced shoes in all four. True rotated torso/limbs, true rear hair and vest back, not mirrored front; both profiles have real CLOSED lips, rear no invented face. Strong broad broken irregular painterly garment planes and angular adult facial volume, no repeated diamond/noise filter, photoreal glossy skin or baby/chibi proportions. Genuine RGBA alpha-zero transparent empty background without vignette, halo, floor/shadow, scenery, text, labels, arrows or watermark.",
+      "references": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-standing-v1.png",
+          "sha256": "09a98c61e26cc84a465b1b40f139cb5af2952aea50408a22e09ee70ba45fe9c2"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-renate-termin-directions-candidate.png",
+          "sha256": "3fde683ffd3590c87fef7a92463c05569acd9b67d35a51f72a4e6ba7670156ef"
+        }
+      ],
+      "generatedJobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-0e5875ff-47fe-44a2-8276-50716d2ef0f9.png",
+      "copiedSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-renate-termin-expressionist-directions-v1.png",
+      "status": "provisional source pass; left-profile far-side ticket occluded",
+      "visualFindings": "Four coherent grown-up figures with red pixie, pearl earrings, cream turtleneck, quilted wine vest, teal trousers and burgundy lace-up shoes. Ticket held anatomical RIGHT in front viewer-left, right profile and rear viewer-right. LEFT profile shows empty near LEFT hand; far RIGHT ticket/hand hidden by body, natural occlusion possible but not directly verifiable. Vest's diamond quilting is costume construction, more regular than other broad garment strokes.",
+      "generatedJobSha256": "51fffb4e38c3a35b403b7bdfd21122f3cc769bc596ef10ba5a26602eb2fb8a55",
+      "copiedSourceSha256": "51fffb4e38c3a35b403b7bdfd21122f3cc769bc596ef10ba5a26602eb2fb8a55",
+      "diagnostics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1774,
+          887
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha16WholeBBoxXYXY": [
+          115,
+          13,
+          1613,
+          874
+        ],
+        "alpha16ClearOuterMarginsLRTB": [
+          115,
+          161,
+          13,
+          13
+        ],
+        "alpha16PerView": [
+          {
+            "name": "front",
+            "alpha16BBoxXYXY": [
+              115,
+              14,
+              483,
+              873
+            ],
+            "paintedHeightPx": 859,
+            "soleYExclusive": 873
+          },
+          {
+            "name": "right profile",
+            "alpha16BBoxXYXY": [
+              576,
+              17,
+              793,
+              873
+            ],
+            "paintedHeightPx": 856,
+            "soleYExclusive": 873
+          },
+          {
+            "name": "rear",
+            "alpha16BBoxXYXY": [
+              915,
+              14,
+              1286,
+              872
+            ],
+            "paintedHeightPx": 858,
+            "soleYExclusive": 872
+          },
+          {
+            "name": "left profile",
+            "alpha16BBoxXYXY": [
+              1387,
+              13,
+              1613,
+              874
+            ],
+            "paintedHeightPx": 861,
+            "soleYExclusive": 874
+          }
+        ],
+        "alpha16GuttersPx": [
+          93,
+          122,
+          101
+        ],
+        "minimumAlpha16GutterPx": 93,
+        "alpha16EightConnectedComponents": 12,
+        "alpha16ComponentAreasDescending": [
+          200959,
+          200037,
+          133100,
+          128509,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "alpha16LargeComponentsAbove1000Px": 4,
+        "alpha1to15PixelCount": 34093,
+        "alphaZeroPixelCount": 876829,
+        "alphaZeroPixelsWithHiddenRGB": 1358,
+        "borderNonzeroAlphaPixels": 35,
+        "borderAlphaMax": 1,
+        "paintedHeightRangePx": [
+          856,
+          861
+        ],
+        "soleYRangeExclusive": [
+          872,
+          874
+        ]
+      },
+      "diagnosticPreviews": [
+        {
+          "background": "light",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-renate-termin-light.png",
+          "sha256": "fdef14b1f765d039ec5660723f82677dcccd631716b743e143d3a66216351530"
+        },
+        {
+          "background": "dark",
+          "path": "output/street-redesign/animated-adult-directions-batch1/stadt-renate-termin-dark.png",
+          "sha256": "9f4f44b49382340b2cb338219d18833a331ce1263d1b335371bdb67c5437b523"
+        }
+      ],
+      "lightDarkReview": "Viewed native source and light/dark alpha composites; no solid backdrop or floor shadow visible. Refer to visualFindings for anatomy, prop and shoe assessment.",
+      "sourceFormattingCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 93 px), but the top/bottom outer clear margins are 13/13 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 35 edge pixels, maximum edge alpha 1; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ]
+    }
+  ],
+  "limitations": "Neutral source-only rows; no contact/gait/turn/action/mouth/native/runtime acceptance."
+}

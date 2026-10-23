@@ -1,0 +1,611 @@
+{
+  "status": "source-only diagnostics; no selected atlas or runtime change",
+  "actors": {
+    "gisela-right-v4": {
+      "source": {
+        "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+        "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828",
+        "bytes": 1549693,
+        "mode": "RGBA",
+        "size": [
+          1024,
+          1536
+        ],
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alpha21BBoxExclusive": [
+          315,
+          12,
+          829,
+          1490
+        ],
+        "alpha21MarginsLeftTopRightBottom": [
+          315,
+          12,
+          195,
+          46
+        ],
+        "alpha21ComponentCount": 7,
+        "alpha21ComponentSizesDescending": [
+          341534,
+          5,
+          3,
+          2,
+          1,
+          1,
+          1
+        ],
+        "alphaZeroPixelsWithHiddenRGB": 803634,
+        "borderNonzeroAlphaPixels": 22,
+        "borderMaxAlpha": 1
+      },
+      "rawJob": {
+        "path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1669f-271f-7481-8558-a71afb799550\\exec-2823b933-b0d8-43a0-a609-3cdc8c9583ab.png",
+        "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828",
+        "bytes": 1549693,
+        "mode": "RGBA",
+        "size": [
+          1024,
+          1536
+        ],
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alpha21BBoxExclusive": [
+          315,
+          12,
+          829,
+          1490
+        ],
+        "alpha21MarginsLeftTopRightBottom": [
+          315,
+          12,
+          195,
+          46
+        ],
+        "alpha21ComponentCount": 7,
+        "alpha21ComponentSizesDescending": [
+          341534,
+          5,
+          3,
+          2,
+          1,
+          1,
+          1
+        ],
+        "alphaZeroPixelsWithHiddenRGB": 803634,
+        "borderNonzeroAlphaPixels": 22,
+        "borderMaxAlpha": 1
+      },
+      "references": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+          "bytes": 2023242,
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alpha21BBoxExclusive": [
+            188,
+            6,
+            841,
+            1522
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            188,
+            6,
+            183,
+            14
+          ],
+          "alpha21ComponentCount": 5,
+          "alpha21ComponentSizesDescending": [
+            544247,
+            3,
+            1,
+            1,
+            1
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 778341,
+          "borderNonzeroAlphaPixels": 118,
+          "borderMaxAlpha": 4
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+          "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015",
+          "bytes": 2438975,
+          "mode": "RGBA",
+          "size": [
+            1536,
+            1024
+          ],
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alpha21BBoxExclusive": [
+            39,
+            15,
+            1486,
+            990
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            39,
+            15,
+            50,
+            34
+          ],
+          "alpha21ComponentCount": 4,
+          "alpha21ComponentSizesDescending": [
+            213533,
+            199238,
+            151636,
+            150745
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 801720,
+          "borderNonzeroAlphaPixels": 0,
+          "borderMaxAlpha": 0
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v3.png",
+          "sha256": "a220e241e8fe4cf86447d9fedbe04bf6d901dce7b12e7c386787b42d85978931",
+          "bytes": 1680480,
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alpha21BBoxExclusive": [
+            283,
+            14,
+            808,
+            1513
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            283,
+            14,
+            216,
+            23
+          ],
+          "alpha21ComponentCount": 6,
+          "alpha21ComponentSizesDescending": [
+            369083,
+            4,
+            2,
+            1,
+            1,
+            1
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 899091,
+          "borderNonzeroAlphaPixels": 31,
+          "borderMaxAlpha": 1
+        }
+      ],
+      "sourceEqualsRawJob": true,
+      "composites": [
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/gisela-right-v4-light.png",
+          "sha256": "8725bf3e0a0eef71f8a9d393ee510416b1f33bc7ec051c069b11f83b86fb0afb",
+          "bytes": 695353,
+          "mode": "RGB",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1572864
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 5120,
+          "borderMaxAlpha": 255
+        },
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/gisela-right-v4-dark.png",
+          "sha256": "49b3e47ad2b04325b8051f5cd3137c6ae9d78d1c4b8b893800e1a6259d0041a6",
+          "bytes": 677891,
+          "mode": "RGB",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1572864
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 5120,
+          "borderMaxAlpha": 255
+        }
+      ],
+      "detailComposites": [
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/gisela-right-v4-detail-light.png",
+          "sha256": "4bc867e066eda58a37e76edefa7adda91095d88f5f4616ea77aa942f883292aa",
+          "bytes": 343889,
+          "mode": "RGB",
+          "size": [
+            1220,
+            840
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1220,
+            840
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1024800
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 4120,
+          "borderMaxAlpha": 255
+        },
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/gisela-right-v4-detail-dark.png",
+          "sha256": "7df560931fd5dea7e3bdd39ba5535098ebc9cca68de691a24a80ee9000cb2c0c",
+          "bytes": 339651,
+          "mode": "RGB",
+          "size": [
+            1220,
+            840
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1220,
+            840
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1024800
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 4120,
+          "borderMaxAlpha": 255
+        }
+      ]
+    },
+    "irmgard-rear-v2": {
+      "source": {
+        "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-rear-v2.png",
+        "sha256": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450",
+        "bytes": 2003932,
+        "mode": "RGBA",
+        "size": [
+          1024,
+          1536
+        ],
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alpha21BBoxExclusive": [
+          200,
+          30,
+          821,
+          1484
+        ],
+        "alpha21MarginsLeftTopRightBottom": [
+          200,
+          30,
+          203,
+          52
+        ],
+        "alpha21ComponentCount": 1,
+        "alpha21ComponentSizesDescending": [
+          529215
+        ],
+        "alphaZeroPixelsWithHiddenRGB": 796920,
+        "borderNonzeroAlphaPixels": 0,
+        "borderMaxAlpha": 0
+      },
+      "rawJob": {
+        "path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1669f-271f-7481-8558-a71afb799550\\exec-530f540b-e810-474c-bb6c-4f4365ed3b70.png",
+        "sha256": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450",
+        "bytes": 2003932,
+        "mode": "RGBA",
+        "size": [
+          1024,
+          1536
+        ],
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alpha21BBoxExclusive": [
+          200,
+          30,
+          821,
+          1484
+        ],
+        "alpha21MarginsLeftTopRightBottom": [
+          200,
+          30,
+          203,
+          52
+        ],
+        "alpha21ComponentCount": 1,
+        "alpha21ComponentSizesDescending": [
+          529215
+        ],
+        "alphaZeroPixelsWithHiddenRGB": 796920,
+        "borderNonzeroAlphaPixels": 0,
+        "borderMaxAlpha": 0
+      },
+      "references": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-standing-v1.png",
+          "sha256": "8ee38b29acad6835d9ad4ecf9580b56dbd6ba3703f1a0bf59cf56618da52bbe4",
+          "bytes": 1983587,
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alpha21BBoxExclusive": [
+            221,
+            42,
+            843,
+            1496
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            221,
+            42,
+            181,
+            40
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            536419
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 792703,
+          "borderNonzeroAlphaPixels": 0,
+          "borderMaxAlpha": 0
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+          "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+          "bytes": 1873373,
+          "mode": "RGBA",
+          "size": [
+            1774,
+            887
+          ],
+          "alphaRange": [
+            0,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            42,
+            12,
+            1713,
+            877
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            42,
+            12,
+            61,
+            10
+          ],
+          "alpha21ComponentCount": 4,
+          "alpha21ComponentSizesDescending": [
+            209956,
+            195913,
+            159000,
+            156830
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 1051,
+          "borderNonzeroAlphaPixels": 275,
+          "borderMaxAlpha": 3
+        }
+      ],
+      "sourceEqualsRawJob": true,
+      "composites": [
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/irmgard-rear-v2-light.png",
+          "sha256": "58a484e576aa254ff54f5a5d2fef7d678b404a5b36d019e69365924fda9094a4",
+          "bytes": 1073433,
+          "mode": "RGB",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1572864
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 5120,
+          "borderMaxAlpha": 255
+        },
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/irmgard-rear-v2-dark.png",
+          "sha256": "892a2f4906b8b1c340c06051b8f22d9015e774000dcf33a5eb5bbc2981ddcfe2",
+          "bytes": 1046618,
+          "mode": "RGB",
+          "size": [
+            1024,
+            1536
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            1572864
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 5120,
+          "borderMaxAlpha": 255
+        }
+      ],
+      "detailComposites": [
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/irmgard-rear-v2-detail-light.png",
+          "sha256": "64089a7800609d026d24052f64e876b55a054baf3890d1bde591473b88b15980",
+          "bytes": 253817,
+          "mode": "RGB",
+          "size": [
+            740,
+            800
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            740,
+            800
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            592000
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 3080,
+          "borderMaxAlpha": 255
+        },
+        {
+          "path": "output/street-redesign/animated-cardinal-repairs-batch1/irmgard-rear-v2-detail-dark.png",
+          "sha256": "43e8392e57be303363c0f34a59ea4dd2d1e6f8e6aa792598d7a48277f766eb5f",
+          "bytes": 249845,
+          "mode": "RGB",
+          "size": [
+            740,
+            800
+          ],
+          "alphaRange": [
+            255,
+            255
+          ],
+          "alpha21BBoxExclusive": [
+            0,
+            0,
+            740,
+            800
+          ],
+          "alpha21MarginsLeftTopRightBottom": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "alpha21ComponentCount": 1,
+          "alpha21ComponentSizesDescending": [
+            592000
+          ],
+          "alphaZeroPixelsWithHiddenRGB": 0,
+          "borderNonzeroAlphaPixels": 3080,
+          "borderMaxAlpha": 255
+        }
+      ]
+    }
+  }
+}

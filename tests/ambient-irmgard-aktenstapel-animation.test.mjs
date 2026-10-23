@@ -13,8 +13,8 @@ const context=vm.createContext({});vm.runInContext(readFileSync('character-inter
 
 test('named Irmgard keeps her own standing scale and gains phase-owned stops and a free-hand gesture',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
- assert.equal(p.standing.sha256,'3d330a4d8130ab382545596381fda6fbf016929a15fdf17f8703fee23777bc2e');
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.standing.sha256,'95f555d781252f9f48b4d900b49b9409ec3b18a85650d2b3e1349c27a9b9bda9');
  assert.equal(hash(asset(p.standing.file)),p.standing.sha256);
  assert(p.strideDistance>0&&Number.isFinite(p.strideDistance));
  const stopSlots=new Set();

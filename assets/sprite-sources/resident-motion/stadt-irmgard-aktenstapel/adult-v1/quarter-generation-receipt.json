@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "request": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/quarter-generation-request.json",
+  "requestSha256": "d1aeeb11ceb64fa62fc86f72a77ae9087ca38e384c8b0ef9ae7d9a7e275f07ba",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1693f-a44c-7cf3-b28c-bf13251b1abd\\exec-4e56ef3b-a1c0-4db1-9204-f8f78ac20338.png",
+  "copiedSourcePath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+  "sha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+  "exactCopiedBytes": true,
+  "status": "PROVISIONAL whole-body quarter paint; registration/native gate outstanding",
+  "observations": "Distinct front-right/rear-right/rear-left/front-left whole-body views, curls/glasses/olive hooded coat/lilac shirt/charcoal skirt/brown lace-up shoes. Grey files remain left-owned with right empty. Rear-right naturally occludes files; rear-left connected arm clamps file. Front-right rotates shoulders/coat/skirt and boots but is shallower than requested 45 degrees; ordered turn review required."
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "originalPath": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-directions-batch1/receipt.json",
+    "retainedPath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-directions-v1.json",
+    "sha256": "3df12d0a7b23fa161f34269ac8c167b333dd3e18a98666ef3d487741362f2f4d"
+  },
+  {
+    "originalPath": "assets/sprite-sources/berlin-street-20261022/receipts/animated-cardinal-repairs-batch1/receipt.json",
+    "retainedPath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-rear-v2.json",
+    "sha256": "1eb39bd6eed1622bb6b755804862c89140fc7275e78c2b9be7d82c8f8d623042"
+  },
+  {
+    "originalPath": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-neutrals-batch3/stadt-irmgard-aktenstapel-receipt.json",
+    "retainedPath": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/original-receipts/stadt-irmgard-aktenstapel-expressionist-standing-v1.json",
+    "sha256": "5f71b82b1dc1aefd6bcdaaffd7e168455d2deaadac540a5caac6d38021956137"
+  }
+]

@@ -398,3 +398,45 @@ Reports, frozen pins and commit/deployment receipts live in
 actual deployed files/root/compatibility/own paint are checked separately.
 Forced placements and emulation do not establish natural mission/E traversal,
 physical Android or perceptual listening. The remaining outdoor cast continues.
+
+## Irmgard Aktenstapel: mature painted street family
+
+Only `stadt-irmgard-aktenstapel` changes from reviewed public1f7ece91. All42
+other registry records, police, game simulation and concurrent performance,
+Geheim and Pages packaging work remain preserved. Her silver curls, glasses,
+moss raincoat, lilac blouse, charcoal skirt, brown boots and anatomical-left
+grey files form one connected elderly adult at2.33 world units.
+
+Eight genuine painted headings supply364 selected cells in21x18, four16-phase
+walks, phase stops and the seven existing actions. Her own RGB sole-patch fit
+7.5443057 selects7.544 units/cycle. All276 supported mouths change native RGB
+with exact alpha/closed source; rear unsupported lips remain unarticulated.
+Existing recordings/cues/voice remain exact. Movement uses16,220,160/7,208,960
+decoded bytes, reactions1,474,560/655,360 under existing selective owners.
+
+The author reproduced21 outputs/person from an empty own-input mirror and
+completed native/source audits, three-profile recorded media, legal walking,
+actions/resume, fallbacks and retirement. Earlier partial mirrors and fixture
+failures remain retained. Root preserves60 exact worker files and the one
+person through a narrow provenance union. All191 focused Node checks pass,
+including concurrent performance/Geheim/packaging; three original raw paints,
+three receipts/eight portable references and eight native contact subcases pass.
+
+Both independent reviewers bind all78 unchanged pins. Physics passes fresh
+legal desktop RIGHT/portrait LEFT23.5667-unit walks, all16 phases, zero illegal
+or stationary gait,90tick fixed-root holds, seven terminating actions and
+reaction disposal. Observed7.4667-unit wraps differ by less than one simulation
+sample from7.544. Natural horizontal and explicitly staged vertical floor
+probes affect at most one boundary raster row with intact boot contours;
+portrait neutral controls are equally or more affected. This is bounded fringe
+acceptance. Camera passes common-ground adult scale beside Sandales/Soder,
+loaded car/door, two-way opaque depth and one-request prepaint404. Its actual
+10-pose whole-body turn spans240RAF/4.6368s, median16.5ms with capture overhead;
+head, cape, left file grip, skirt and boots rotate together. Root inspected the
+actual turn, native, desktop/portrait references and depth frames.
+
+Frozen evidence and commit/deployment receipts are in
+`output/aktenstapel-release/`. Actual deployed assets/root/compatibility/paint
+are verified separately. Forced placements and emulation do not establish
+natural mission/E traversal, physical Android or perceptual listening. The
+remaining outdoor cast continues.

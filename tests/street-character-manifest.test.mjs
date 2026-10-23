@@ -22,11 +22,11 @@ test('all forty-three installed standing sprites match shipped manifest hashes a
     assert.deepEqual(person.cell, [128, 160]);
     assert.deepEqual(person.pivot, [64, id === 'crowd-irmgard-aktenordner' ? 148 : 150]);
     assert.equal(person.figureHeight, 136);
-    const expectedStanding = id === 'crowd-irmgard-aktenordner' ? './assets/characters/street-speakers/crowd-irmgard-aktenordner/standing.webp' : id === 'stadt-hannelore-sparkasse' ? './assets/characters/residents/stadt-hannelore-sparkasse/delivery-v2/standing.webp' : id === 'quiz-gisela-becker' ? './assets/characters/street-speakers/quiz-gisela-becker/delivery-adult-v1/standing.webp' : id === 'stadt-karl-heinz-post' ? './assets/characters/residents/stadt-karl-heinz-post/delivery-v2/standing.webp' : id === 'quiz-sabine-krueger' ? './assets/characters/street-speakers/quiz-sabine-krueger/delivery-v2/standing.webp' : `./assets/characters/street/${id}-standing.webp`;
+    const expectedStanding = id === 'crowd-irmgard-aktenordner' ? './assets/characters/street-speakers/crowd-irmgard-aktenordner/standing.webp' : id === 'stadt-hannelore-sparkasse' ? './assets/characters/residents/stadt-hannelore-sparkasse/delivery-v2/standing.webp' : id === 'quiz-gisela-becker' ? './assets/characters/street-speakers/quiz-gisela-becker/delivery-adult-v1/standing.webp' : id === 'stadt-karl-heinz-post' ? './assets/characters/residents/stadt-karl-heinz-post/delivery-v2/standing.webp' : id === 'quiz-sabine-krueger' ? './assets/characters/street-speakers/quiz-sabine-krueger/delivery-v2/standing.webp' : id === 'stadt-irmgard-aktenstapel' ? './assets/characters/residents/stadt-irmgard-aktenstapel/delivery-v2/standing.webp' : `./assets/characters/street/${id}-standing.webp`;
     assert.equal(person.standing.file, expectedStanding);
     assert.equal(person.standing.width, 128);
     assert.equal(person.standing.height, 160);
-    assert.equal(person.figureWorldHeight, ['crowd-irmgard-aktenordner','stadt-hannelore-sparkasse','quiz-gisela-becker','quiz-heike-hoffmann','stadt-karl-heinz-post','quiz-sabine-krueger'].includes(id) ? 2.33 : id === 'spieler-hans-peter-mustermann' ? 1.5 : id === 'polizei-heinrich-wachtmeister' ? 1.56 : 1.6);
+    assert.equal(person.figureWorldHeight, ['crowd-irmgard-aktenordner','stadt-hannelore-sparkasse','quiz-gisela-becker','quiz-heike-hoffmann','stadt-karl-heinz-post','quiz-sabine-krueger','stadt-irmgard-aktenstapel'].includes(id) ? 2.33 : id === 'spieler-hans-peter-mustermann' ? 1.5 : id === 'polizei-heinrich-wachtmeister' ? 1.56 : 1.6);
     const bytes = await readFile(new URL('../' + expectedStanding.slice(2), import.meta.url));
     encodedBytes += bytes.length;
     assert.equal(createHash('sha256').update(bytes).digest('hex'), person.standing.sha256, id);
@@ -38,7 +38,7 @@ test('all forty-three installed standing sprites match shipped manifest hashes a
       assert.equal(resolveStreetCharacter({ id: alias }), id);
     }
   }
-  assert.equal(encodedBytes, 693832);
+  assert.equal(encodedBytes, 690072);
   assert.equal(resolveStreetCharacter({ id: 'player-default' }), 'spieler-hans-peter-mustermann');
   assert.equal(resolveStreetCharacter({ voiceId: 'polizei-heinrich-wachtmeister', id: 'police-27' }), 'polizei-heinrich-wachtmeister');
   assert.equal(resolveStreetCharacter({ id: 'crowd-baerbel-brezel-7' }), null);

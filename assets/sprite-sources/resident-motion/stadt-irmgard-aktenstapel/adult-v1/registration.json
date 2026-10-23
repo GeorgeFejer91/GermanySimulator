@@ -1,0 +1,389 @@
+{
+  "identity": "stadt-irmgard-aktenstapel",
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "densityPolicy": "one fixed original-source density per sheet; cardinal865/quarter790/rear1454, no per-cell fitting",
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "sourceSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "sourceBoundsAlpha20": [
+        42,
+        12,
+        447,
+        877
+      ],
+      "sourceDensityHeight": 865,
+      "sourcePivot": [
+        238.75,
+        877
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            110,
+            797,
+            211,
+            877
+          ],
+          "pixels": 6021,
+          "centerX": 160.5
+        },
+        {
+          "bounds": [
+            264,
+            797,
+            370,
+            877
+          ],
+          "pixels": 6158,
+          "centerX": 317.0
+        }
+      ],
+      "sourceScale": 0.4624277456647399,
+      "workingOrigin": [
+        145.59537572254334,
+        66.45086705202311
+      ],
+      "workingBoundsAlpha20": [
+        165,
+        73,
+        353,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/down.png",
+      "registeredSha256": "49d1514efe4823bfc00375b3576040bb650cd9ea3d8d05a612bd11c9b89171f6"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "sourceSha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "sourceBoundsAlpha20": [
+        60,
+        14,
+        400,
+        802
+      ],
+      "sourceDensityHeight": 790,
+      "sourcePivot": [
+        222.0,
+        802
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            107,
+            729,
+            197,
+            802
+          ],
+          "pixels": 5051,
+          "centerX": 152.0
+        },
+        {
+          "bounds": [
+            231,
+            729,
+            353,
+            788
+          ],
+          "pixels": 5485,
+          "centerX": 292.0
+        }
+      ],
+      "sourceScale": 0.5063291139240507,
+      "workingOrigin": [
+        143.59493670886076,
+        65.92405063291136
+      ],
+      "workingBoundsAlpha20": [
+        174,
+        73,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/front-right.png",
+      "registeredSha256": "19e182470f9d995db40061c8917e2088457378e727ec6daf8dd4f4ea5eb2f1ec"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "sourceSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "sourceBoundsAlpha20": [
+        517,
+        16,
+        811,
+        877
+      ],
+      "sourceDensityHeight": 865,
+      "sourcePivot": [
+        685.0,
+        877
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            598,
+            797,
+            772,
+            877
+          ],
+          "pixels": 11260,
+          "centerX": 685.0
+        }
+      ],
+      "sourceScale": 0.4624277456647399,
+      "workingOrigin": [
+        -60.763005780346816,
+        66.45086705202311
+      ],
+      "workingBoundsAlpha20": [
+        179,
+        74,
+        315,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/right.png",
+      "registeredSha256": "1cc8e3a01a71ece84937db6c744da091204f4a3b3054057016a74edc1fa26942"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "sourceSha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "sourceBoundsAlpha20": [
+        555,
+        13,
+        866,
+        804
+      ],
+      "sourceDensityHeight": 790,
+      "sourcePivot": [
+        727.5,
+        804
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            619,
+            731,
+            836,
+            804
+          ],
+          "pixels": 11886,
+          "centerX": 727.5
+        }
+      ],
+      "sourceScale": 0.5063291139240507,
+      "workingOrigin": [
+        -112.35443037974687,
+        64.91139240506328
+      ],
+      "workingBoundsAlpha20": [
+        169,
+        72,
+        327,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/rear-right.png",
+      "registeredSha256": "ade28b1fb72642e9df666aed5479d0ac0c41624b3777e5327088b9d5dc8a7b0a"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-rear-v2.png",
+      "sourceSha256": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450",
+      "sourceBoundsAlpha20": [
+        200,
+        30,
+        821,
+        1484
+      ],
+      "sourceDensityHeight": 1454,
+      "sourcePivot": [
+        519.75,
+        1484
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            327,
+            1350,
+            471,
+            1484
+          ],
+          "pixels": 15482,
+          "centerX": 399.0
+        },
+        {
+          "bounds": [
+            565,
+            1350,
+            716,
+            1484
+          ],
+          "pixels": 15987,
+          "centerX": 640.5
+        }
+      ],
+      "sourceScale": 0.2751031636863824,
+      "workingOrigin": [
+        113.01513067400276,
+        63.74690508940853
+      ],
+      "workingBoundsAlpha20": [
+        168,
+        72,
+        339,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/up.png",
+      "registeredSha256": "3056e47052fd3aa67efd304f7168a01d5a3460b400d00541408734c8692eaf2c"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "sourceSha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "sourceBoundsAlpha20": [
+        1039,
+        13,
+        1370,
+        805
+      ],
+      "sourceDensityHeight": 790,
+      "sourcePivot": [
+        1198.0,
+        805
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            1082,
+            732,
+            1202,
+            805
+          ],
+          "pixels": 7044,
+          "centerX": 1142.0
+        },
+        {
+          "bounds": [
+            1208,
+            732,
+            1300,
+            787
+          ],
+          "pixels": 4231,
+          "centerX": 1254.0
+        }
+      ],
+      "sourceScale": 0.5063291139240507,
+      "workingOrigin": [
+        -350.58227848101274,
+        64.40506329113919
+      ],
+      "workingBoundsAlpha20": [
+        176,
+        71,
+        343,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/rear-left.png",
+      "registeredSha256": "ebfad1774df55aac1ea4dc602c2347bbd3e5e81e60fc798e01ce3343b572e96f"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "sourceSha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "sourceBoundsAlpha20": [
+        1416,
+        14,
+        1713,
+        877
+      ],
+      "sourceDensityHeight": 865,
+      "sourcePivot": [
+        1541.0,
+        877
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            1452,
+            797,
+            1630,
+            877
+          ],
+          "pixels": 11556,
+          "centerX": 1541.0
+        }
+      ],
+      "sourceScale": 0.4624277456647399,
+      "workingOrigin": [
+        -456.60115606936415,
+        66.45086705202311
+      ],
+      "workingBoundsAlpha20": [
+        199,
+        73,
+        336,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/left.png",
+      "registeredSha256": "bea926fb87e3eb5f4eff2d565e6f7130b4daa92e7006740269eebb9fab93b3c3"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png",
+      "sourceSha256": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+      "sourceBoundsAlpha20": [
+        1522,
+        14,
+        1849,
+        803
+      ],
+      "sourceDensityHeight": 790,
+      "sourcePivot": [
+        1683.75,
+        803
+      ],
+      "sourceShoeSupport": [
+        {
+          "bounds": [
+            1557,
+            730,
+            1683,
+            787
+          ],
+          "pixels": 5486,
+          "centerX": 1620.0
+        },
+        {
+          "bounds": [
+            1712,
+            730,
+            1783,
+            803
+          ],
+          "pixels": 4545,
+          "centerX": 1747.5
+        }
+      ],
+      "sourceScale": 0.5063291139240507,
+      "workingOrigin": [
+        -596.5316455696203,
+        65.41772151898732
+      ],
+      "workingBoundsAlpha20": [
+        174,
+        73,
+        340,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/registered/front-left.png",
+      "registeredSha256": "246d31fe5de6fda420565d1224b926d396103c1ed984a45dc409ccf11c9eb443"
+    }
+  },
+  "inputPins": {
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-diagonals-v1.png": "0a2bce66e0fbe003a1f20b36f9e41b85618709eb9366f8f0500bc5cf367ca61d",
+    "assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-rear-v2.png": "e5e7f9deeaa16ca741eb7e627544553899c90a9acebb91bbc4a50c14765d8450"
+  }
+}
