@@ -10,6 +10,20 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Partial Together release80c66603bcb3a401968e11a351e553230bbf12b0 is pushed.
+It adds the scoped relief/material/export increment described below in41paths.
+Versioned preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/80c66603bcb3a401968e11a351e553230bbf12b0/geheim/index.html .
+output/berghain-marr-immutable-verification.json passes63/63 exact public files;
+output/berghain-marr-immutable-browser/report.json passes9/9 actual public
+desktop/Android portrait artwork, native optics, Klo/WC/continuous human route
+and natural E/tap doorway entry/exit/refresh cases. All91 reported source hashes
+bind to the actual published Git objects. Pages run40037731294 owns deployment;
+permanent-domain acceptance must match this release's actual assets and controls.
+Final deployment observations belong in output/berghain-marr-release.json and
+the canonical verification/browser reports. Do not re-push runtime or restart
+CI because an observation times out. The full building/artwork goal stays ACTIVE.
+
 Research-only publication eb00e1ea9d532afe30daa10c4ef016dad021b073 updates
 only README/INTERIOR/SOURCES/VALIDATION on top of c8. It includes105 unique
 source records and the rejected-study/canonical-acceptance notes below; it
@@ -615,9 +629,11 @@ interior dimensions, Klo Bar/toilets, Lab and full photographic fidelity remain
 required; the full realistic reconstruction goal stays active.
 
 
-Next asset release remains Together: all24ART04 images are inspected and
-SOURCES/INTERIOR carry the new primary evidence. Experimental geometry exists
-locally but has failed visual fidelity review; it is excluded from publication.
-Preserve the accepted c8 runtime/test/asset snapshot independently of those
-experiments. The full reconstruction goal and outstanding fidelity work remain
-active. The original staged index remains preserved.
+Historical rejected-study checkpoint: all24ART04 images had been inspected but
+the early separated-primitive prototype failed visual fidelity review and was
+excluded. The later80c6660 partial anatomical release supersedes that prototype;
+it does not establish full likeness/composition/ornament. The accepted c8 snapshot
+remains useful for cost comparisons. Keep the full reconstruction goal active,
+including complete artwork, Lab/service/cabin spaces, verified contemporary
+room connections, measured interior geometry and fine exterior/material fidelity.
+The original staged index remains preserved.

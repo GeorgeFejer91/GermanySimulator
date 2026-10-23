@@ -1151,3 +1151,27 @@ stays under1.6MP. Observed JS heaps are variable, about35–61MB baseline and
 38–81MB final; these do not measure total process or GPU memory. Publication
 must preserve these limits and bind final assets/controls to actual public bytes.
 The full photographic reconstruction goal remains ACTIVE.
+
+### Partial Together publication binding
+
+Runtime/asset commit80c66603bcb3a401968e11a351e553230bbf12b0 is a normal
+fast-forward on eb00e1ea9d532afe30daa10c4ef016dad021b073. Tree
+e519bdd88af62ddd86bbd5cdb5725b72003d6e2f contains41scoped paths, including only
+the new Marr paragraph in remote CREDITS. Original primary index SHA256 remains
+704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
+All89/91 frozen files are byte-exact in the publication; PROVENANCE line endings
+and untouched level-transitions trailing blank are normalized-text bridges.
+
+output/berghain-marr-immutable-verification.json passes63/63 exact published
+files against Git objects. Actual versioned public browser report
+output/berghain-marr-immutable-browser/report.json passes9/9 on desktop and
+Android portrait emulation: source/native Together/bar/toilets, unchanged strict
+material parity, continuous main-floor/WC/open-cubicle/return human movement and
+natural outside approach, E/tap entry/exit and refresh. All91 recorded source
+hashes bind to actual published Git bytes; actual public frames were inspected.
+Permanent-domain deployment is tracked by Pages40037731294; do not equate the
+versioned preview with completed canonical deployment. Final canonical evidence
+belongs in output/berghain-marr-canonical-verification.json,
+output/berghain-marr-canonical-browser/report.json and the release record.
+This follow-up only corrects inventory/handoff notes; runtime/art bytes remain
+identical and the full photographic goal remains ACTIVE.

@@ -5,7 +5,7 @@ reconstruction acceptance in the [owning guide](https://github.com/GeorgeFejer91
 for the missing interior design, artworks/mannequin sculptures and sound system.
 Those are required parts of the full asset, not optional decoration.
 
-The furniture and speaker updates remain provisional. **CLIMBER has an initial geometry study; other named artworks remain unmodelled.** Research, an object identification
+The furniture and speaker updates remain provisional. **CLIMBER has an initial geometry study and Together has a partial anatomical relief; the other named artworks remain unmodelled.** Research, an object identification
 or a manufacturer's CAD download does not establish a finished interior.
 
 ## Dates and identity
@@ -30,7 +30,7 @@ separate objects and avoid conflating the two rooms.
 
 ## Artwork reconstruction inventory
 
-CLIMBER has an initial pose/material study; all other rows are **unmodelled**. Position confidence refers to a room or area, not
+CLIMBER has an initial pose/material study and Together has a partial generic anatomical relief; the other artwork rows are **unmodelled**. Position confidence refers to a room or area, not
 an exact model coordinate. Source IDs resolve in SOURCES.md.
 
 | Object | Area / date evidence | Geometry and material evidence | Next modelling requirement |
