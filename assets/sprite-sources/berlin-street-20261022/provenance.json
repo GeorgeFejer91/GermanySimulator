@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-22",
   "tool": "built-in image_gen.imagegen",
-  "status": "Irmgard release source closure only; unrelated cast excluded",
+  "status": "Published Irmgard plus complete Hannelore source closure; root integration acceptance pending.",
   "records": [
     {
       "id": "crowd-irmgard-aktenordner-expressionist-turns-v5",
@@ -272,6 +272,867 @@
         ]
       },
       "runtimeAcceptance": "Source of locally selected native Irmgard candidate; final world/rendered/full-cast/publication acceptance pending."
+    },
+    {
+      "id": "stadt-hannelore-sparkasse-expressionist-standing-v1",
+      "file": "stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-b64f9de3-7ea7-4468-9307-ea8162c42b31.png",
+      "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator city resident HANNEL0RE SPARKASSE (Hannelore Sparkasse), for later source review, no action sheet. Images 1 and 2 are PRIMARY painterly mature-Berlin finish and adult stature/connected limb references: Sabine Krueger and Hartmut Keller. Images 3 and 4 are HANNEL0RE identity, specific outfit, prop and handedness references only; discard their prior short toy-like body proportions. She is a mature middle-aged bank-office Berlin woman with a substantial sculpted auburn hair bun, red pointed/cat-eye glasses, small pearl earrings, compact adult build, composed slightly strict expression, small weary adult eyes, angular individual brow/nose/cheek/age-line structure. Preserve wine-burgundy tailored jacket over pale buttoned blouse, dark navy knee-length skirt, cream stockings, black sturdy low loafers. One small tan leather handbag held from its handles in her ANATOMICAL LEFT hand (screen right), hanging naturally beside left thigh; ANATOMICAL RIGHT hand (screen left) relaxed and completely visible, empty and free to gesture later. One purse only. Quiet planted front-facing stance, both hands/fingers and full connected adult arms, thigh/knee/shin/ankles, both complete substantial shoes. Adult head-to-body/leg lengths comparable to Sabine/Hartmut; do not inflate short body or use chibi anatomy. Keep an unobstructed natural CLOSED lip line with visible corners for later speech. Strong painterly Disco Elysium meets Berlin finish: weathered mature asymmetry, broad irregular drybrush/oil pigments that construct the face and clothing, angular expressive planes, muted wine/dirty ochre/petrol/cool gray-green shadows. Worn cloth and leather with irregular brush texture; no smooth toy gradients, generic vector facets, overly cute eyes or fine uniform noise. Exactly ONE centered figure filling at most 84% image height and 72% width, leave at least 65 REAL TRANSPARENT pixels above bun, below soles and around handbag/hands. Genuine transparent RGBA cutout; absolutely no painted backdrop, floor, cast shadow, halo/glow, text, logo, watermark, panel, alternate view or extra figure.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+        "assets/characters/street/stadt-hannelore-sparkasse-standing.webp"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional neutral front; producer: source-candidate-unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-neutrals-batch2/stadt-hannelore-sparkasse-receipt.json",
+      "sourceReviewReceiptSha256": "966e99406ae3288663ce417a2e5773e6fc02d9fd4b813fd488ab66cfdfe57072",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+      "sourceSha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary mature painterly Berlin style and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "role": "primary mature painterly Berlin style and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "role": "Hannelore front/profile/rear identity, outfit, handbag and handedness; old short body rejected",
+          "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+        },
+        {
+          "role": "Hannelore published standing identity and colors; old short body rejected",
+          "path": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+          "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+        }
+      ],
+      "producerFindings": {
+        "style": "Distinct mature face and red glasses, angular worn clothing planes with subdued wine/ochre paint. Some facial/coat transitions are smoother than strongest Sabine/Hartmut marks; root style review remains required.",
+        "anatomy": "One connected adult figure with complete hands, separated stockinged legs and both black loafers. No pose-sheet duplicates.",
+        "identity_handedness": "Auburn bun, burgundy jacket, pale blouse, navy skirt and cream stockings preserved. One tan bag in anatomical LEFT hand (screen right), empty anatomical RIGHT free.",
+        "mouth": "Closed lip line and corners readable, unobstructed by the low-held handbag; native mouth fit still required.",
+        "holds": [
+          "Source-only; existing walk, free-hand gesture, mouth and speech capabilities are unmodified and not revalidated.",
+          "The opaque alpha>=128 bottom margin exceeds 65 px; top margin is 44 px, below the requested >=65 px despite the prompt; assess cell registration before expansion.",
+          "Low-alpha flecks and native-scale texture clarity still need root review."
+        ]
+      },
+      "producerCaveats": {
+        "1": {
+          "pixels": 461858,
+          "bounds_xyxy_exclusive": [
+            0,
+            19,
+            994,
+            1466
+          ],
+          "components": 230,
+          "largest_components": [
+            {
+              "pixels": 461501,
+              "bounds_xyxy_exclusive": [
+                259,
+                39,
+                818,
+                1466
+              ]
+            },
+            {
+              "pixels": 27,
+              "bounds_xyxy_exclusive": [
+                65,
+                1153,
+                70,
+                1160
+              ]
+            },
+            {
+              "pixels": 12,
+              "bounds_xyxy_exclusive": [
+                823,
+                341,
+                826,
+                352
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                823,
+                1168,
+                824,
+                1177
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                289,
+                1135,
+                290,
+                1142
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                819,
+                1169,
+                820,
+                1176
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                291,
+                1136,
+                292,
+                1143
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                0,
+                178,
+                1,
+                184
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 6,
+            "right": 0
+          }
+        },
+        "8": {
+          "pixels": 444408,
+          "bounds_xyxy_exclusive": [
+            264,
+            41,
+            815,
+            1461
+          ],
+          "components": 16,
+          "largest_components": [
+            {
+              "pixels": 444392,
+              "bounds_xyxy_exclusive": [
+                264,
+                41,
+                815,
+                1461
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                700,
+                781,
+                701,
+                783
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                345,
+                835,
+                346,
+                836
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                684,
+                894,
+                685,
+                895
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                699,
+                805,
+                700,
+                806
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                701,
+                785,
+                702,
+                786
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                700,
+                773,
+                701,
+                774
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                690,
+                891,
+                691,
+                892
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "20": {
+          "pixels": 442928,
+          "bounds_xyxy_exclusive": [
+            264,
+            42,
+            815,
+            1461
+          ],
+          "components": 2,
+          "largest_components": [
+            {
+              "pixels": 442927,
+              "bounds_xyxy_exclusive": [
+                264,
+                42,
+                815,
+                1461
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                713,
+                881,
+                714,
+                882
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "64": {
+          "pixels": 440585,
+          "bounds_xyxy_exclusive": [
+            264,
+            42,
+            814,
+            1460
+          ],
+          "components": 1,
+          "largest_components": [
+            {
+              "pixels": 440585,
+              "bounds_xyxy_exclusive": [
+                264,
+                42,
+                814,
+                1460
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "128": {
+          "pixels": 438115,
+          "bounds_xyxy_exclusive": [
+            265,
+            44,
+            814,
+            1460
+          ],
+          "components": 10,
+          "largest_components": [
+            {
+              "pixels": 438095,
+              "bounds_xyxy_exclusive": [
+                265,
+                44,
+                814,
+                1460
+              ]
+            },
+            {
+              "pixels": 10,
+              "bounds_xyxy_exclusive": [
+                609,
+                171,
+                611,
+                181
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                556,
+                71,
+                557,
+                73
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                513,
+                44,
+                515,
+                45
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                447,
+                285,
+                448,
+                286
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                451,
+                285,
+                452,
+                286
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                562,
+                77,
+                563,
+                78
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                609,
+                167,
+                610,
+                168
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "250": {
+          "pixels": 422177,
+          "bounds_xyxy_exclusive": [
+            267,
+            50,
+            813,
+            1459
+          ],
+          "components": 302,
+          "largest_components": [
+            {
+              "pixels": 421705,
+              "bounds_xyxy_exclusive": [
+                268,
+                50,
+                811,
+                1458
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                339,
+                743,
+                340,
+                750
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                519,
+                1372,
+                520,
+                1378
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                273,
+                667,
+                274,
+                672
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                378,
+                1280,
+                379,
+                1285
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                676,
+                377,
+                677,
+                382
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                299,
+                493,
+                300,
+                498
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                430,
+                1302,
+                431,
+                1307
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-neutrals-batch2/stadt-hannelore-sparkasse-receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1745728,
+      "componentBounds": [
+        [
+          264,
+          42,
+          815,
+          1461
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 42,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary mature painterly Berlin style and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "role": "primary mature painterly Berlin style and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "role": "Hannelore front/profile/rear identity, outfit, handbag and handedness; old short body rejected",
+            "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+            "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+          },
+          {
+            "role": "Hannelore published standing identity and colors; old short body rejected",
+            "path": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+            "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+        },
+        {
+          "path": "assets/characters/street/stadt-hannelore-sparkasse-standing.webp",
+          "sha256": "10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e"
+        }
+      ]
+    },
+    {
+      "id": "quiz-hartmut-keller-expressionist-directions-v1",
+      "file": "quiz-hartmut-keller-expressionist-directions-v1.png",
+      "prompt": "Create a mature painted 2D street-game character turnaround. FIRST reference is the identity AND painting-style authority: preserve its face, age, attitude, glasses/hair and expressive Disco Elysium oil brushwork, angular weary facial planes, selective coarse dry brush and muted Berlin colors. SECOND reference supplies full clothing and prop ownership only; its tiny toy body and polished cartoon finish are being retired. THIRD reference supplies the new street population's connected adult stature and substantial torso/arm/thigh/shin lengths; do not copy its face or costume. New whole-body painted drawings with grown-up features, realistic wear and readable expressive faces, more adult torso and longer limbs, not chibi or glossy 3D. FOUR complete separate full-body figures in ONE horizontal row: front, strict right-facing profile, genuine back, strict left-facing profile. Match head and limb lengths across all four views, common crown/sole lines. Quiet neutral planted walking-ready stance, closed rest lips, complete separate boots. Whole bodies connected, no detached parts. 60px transparent margins and gutters, genuine alpha, no floor, ground shadow, labels, background or floating brush scraps. SUBJECT: Hartmut Keller, the adult older German neighborhood-watch quiz speaker, NOT the child Hartmut Maaslos. Recognizable long angular face, high lined forehead, receding messy graying dark hair, rectangular black glasses, stern skeptical eyes. Dark olive quilted sleeveless vest over beige button shirt, brown belt, full dark brown trousers, scuffed brown work shoes. Anatomical RIGHT hand holds a small black walkie-talkie, front screen-left/back screen-right. Anatomical LEFT hand carries a small black flashlight and cream spiral notepad together against left torso, front screen-right/back screen-left. Keep these distinct owned objects stable and correctly occluded in profiles. A tired amateur neighborhood watchman with bureaucratic certainty, adult expressive portrait painting translated into a full body.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-4b26eba8-b787-4571-a475-36ac750a12fb.png",
+      "status": "Four-view mature expressionist source candidate; contact/turn/action/speech/native checks outstanding.",
+      "referencedSources": [
+        "assets/quiz-characters/hartmut-keller.webp",
+        "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+        "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+      ],
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2390079,
+      "componentBounds": [
+        [
+          40,
+          33,
+          421,
+          970
+        ],
+        [
+          479,
+          39,
+          741,
+          973
+        ],
+        [
+          764,
+          45,
+          1139,
+          969
+        ],
+        [
+          1215,
+          35,
+          1473,
+          975
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 33,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/quiz-characters/hartmut-keller.webp",
+            "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+          },
+          {
+            "path": "assets/sprite-sources/street-quiz/hartmut-keller-keys.png",
+            "sha256": "0dada58c16bd0c2394535f36594dc73af5ff5b934958032a166b1619a14f8270"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+            "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Front-derived adult standing paint selected locally; standingOnly retained. Own Sabine native mouth fitted. Rendered/specialist acceptance pending; full-cast goal active and unpublished."
+    },
+    {
+      "id": "quiz-sabine-krueger-expressionist-directions-v1",
+      "file": "quiz-sabine-krueger-expressionist-directions-v1.png",
+      "prompt": "Create a mature painted 2D street-game character turnaround. FIRST reference is the identity AND painting-style authority: preserve its face, age, attitude, glasses/hair and expressive Disco Elysium oil brushwork, angular weary facial planes, selective coarse dry brush and muted Berlin colors. SECOND reference supplies full clothing and prop ownership only; its tiny toy body and polished cartoon finish are being retired. THIRD reference supplies the new street population's connected adult stature and substantial torso/arm/thigh/shin lengths; do not copy its face or costume. New whole-body painted drawings with grown-up features, realistic wear and readable expressive faces, more adult torso and longer limbs, not chibi or glossy 3D. FOUR complete separate full-body figures in ONE horizontal row: front, strict right-facing profile, genuine back, strict left-facing profile. Match head and limb lengths across all four views, common crown/sole lines. Quiet neutral planted walking-ready stance, closed rest lips, complete separate boots. Whole bodies connected, no detached parts. 60px transparent margins and gutters, genuine alpha, no floor, ground shadow, labels, background or floating brush scraps. SUBJECT: Sabine Krüger, the mature German female quiz speaker from the portrait. Preserve her angular slightly smiling skeptical face, round fine glasses, asymmetrical dark brown side-part bob, tired eyes and original middle-aged identity. Mustard knitted V-neck sleeveless vest over off-white button blouse with rolled cuffs, charcoal knee-length skirt, sturdy brown shoes. One closed burgundy book held in anatomical LEFT hand under LEFT arm, front screen-right/back screen-left; right hand empty and relaxed while walking. Keep whole connected thighs/calves and complete sturdy shoes under the skirt; no tiny chibi legs. Subtle personality and warmth remain, never a generic cute doll or an elderly copy of Irmgard.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-ede0da2d-6ad0-4c8e-97ab-aa94eaf766c1.png",
+      "status": "Four-view mature expressionist source candidate; contact/turn/action/speech/native checks outstanding.",
+      "referencedSources": [
+        "assets/quiz-characters/sabine-krueger.webp",
+        "assets/sprite-sources/street-quiz/sabine-krueger-keys.png",
+        "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+      ],
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2292218,
+      "componentBounds": [
+        [
+          75,
+          21,
+          410,
+          983
+        ],
+        [
+          485,
+          24,
+          706,
+          976
+        ],
+        [
+          792,
+          23,
+          1116,
+          977
+        ],
+        [
+          1243,
+          25,
+          1457,
+          980
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 21,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/quiz-characters/sabine-krueger.webp",
+            "sha256": "4e80cfbe4a8133d2737e482a05ba26851b3318c40751a641246b44f25b3f2640"
+          },
+          {
+            "path": "assets/sprite-sources/street-quiz/sabine-krueger-keys.png",
+            "sha256": "17c22e4938ee4bde95e9a70c58bd736d61a3477d050ae11f20a798e9aba913c7"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+            "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Front-derived adult standing paint selected locally; standingOnly retained. Own Sabine native mouth fitted. Rendered/specialist acceptance pending; full-cast goal active and unpublished."
+    },
+    {
+      "id": "stadt-hannelore-sparkasse-expressionist-diagonals-v1",
+      "file": "stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1669f-271f-7481-8558-a71afb799550/exec-7ec495f1-fecb-4af7-aaf2-8c72a4c56ad4.png",
+      "prompt": "Create a transparent source sheet of the SAME mature adult woman from the reference images in FOUR separate complete neutral standing three-quarter direction views, arranged left to right: (1) front-right, between front and true right profile, with face/chest facing toward viewer-right; (2) rear-right, between rear and true right profile, with back/side facing viewer-right; (3) rear-left, between rear and true left profile, with back/side facing viewer-left; (4) front-left, between front and true left profile, with face/chest facing viewer-left. Use the four-cardinal sheet as PRIMARY binding authority for exact costume, anatomy, paint, prop hand, figure dimensions and foot level; use the portrait as secondary facial detail only. Keep auburn updo/bun, RED spectacles, mature serious face, burgundy tailored jacket, pale blouse, navy knee-length skirt, cream stockings, substantial black strap loafers. Her single tan handbag is always held by her anatomical LEFT hand against her left side; her anatomical RIGHT hand is empty at her side. Screen position of handbag exchanges naturally through the back views, and natural far-side occlusion is allowed. Do not transfer, duplicate or float the bag or move it behind her back merely to reveal it. All four are true three-quarter rotations with consistent adult crown/neck/torso/hips/knees/shoe dimensions and one horizontal ground baseline, neutral planted feet and closed lips where visible. Preserve the reference's irregular weathered Berlin painted texture, angular fabric folds and visible hand/shoe anatomy. Four fully separate figures in one row with generous transparent outer margins and clear transparent gaps; no touching, no ground shadow, halo, backdrop, caption, lettering, extra prop, extra arm or extra leg.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "OWN Hannelore authoring source; isolated integration candidate, not public acceptance",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/diagonal-generation-request.json",
+      "sourceReviewReceiptSha256": "bc24a9c771676ebae085e4beaed343507d649d2658d113590c18b35806917d36",
+      "originalSourcePath": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1669f-271f-7481-8558-a71afb799550/exec-7ec495f1-fecb-4af7-aaf2-8c72a4c56ad4.png",
+      "sourceSha256": "98d95a267c23ffd66dc1983f84c91653cd5507b45a1ac6d2a379e8bffa4fa6a5",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary four cardinal views, immutable costume, body proportions, anatomical left bag ownership, shoe and source paint",
+          "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+          "sha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18"
+        },
+        {
+          "role": "secondary face and mature painted texture reference; front morphology and red glasses",
+          "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+          "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+        }
+      ],
+      "producerFindings": "Actual full sheet inspected; prop remains anatomical LEFT in all four rendered views; quarter-turn source is provisional pending native registration, all-frame and turn stress.",
+      "producerCaveats": [
+        "Raw alpha21 top margin is 6 px and bottom margin 11 px; registered sources crop/pad before native export.",
+        "Rear-right painted lip is subpixel at 80x100 client export and is explicitly null."
+      ],
+      "runtimeAcceptance": "Isolated candidate; live desktop/mobile stress and root review pending.",
+      "originalSourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/diagonal-generation-request.json",
+      "sha256": "98d95a267c23ffd66dc1983f84c91653cd5507b45a1ac6d2a379e8bffa4fa6a5",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1611513,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary four cardinal views, immutable costume, body proportions, anatomical left bag ownership, shoe and source paint",
+            "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+            "sha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18"
+          },
+          {
+            "role": "secondary face and mature painted texture reference; front morphology and red glasses",
+            "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+            "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+          }
+        ],
+        "prompt": "Create a transparent source sheet of the SAME mature adult woman from the reference images in FOUR separate complete neutral standing three-quarter direction views, arranged left to right: (1) front-right, between front and true right profile, with face/chest facing toward viewer-right; (2) rear-right, between rear and true right profile, with back/side facing viewer-right; (3) rear-left, between rear and true left profile, with back/side facing viewer-left; (4) front-left, between front and true left profile, with face/chest facing viewer-left. Use the four-cardinal sheet as PRIMARY binding authority for exact costume, anatomy, paint, prop hand, figure dimensions and foot level; use the portrait as secondary facial detail only. Keep auburn updo/bun, RED spectacles, mature serious face, burgundy tailored jacket, pale blouse, navy knee-length skirt, cream stockings, substantial black strap loafers. Her single tan handbag is always held by her anatomical LEFT hand against her left side; her anatomical RIGHT hand is empty at her side. Screen position of handbag exchanges naturally through the back views, and natural far-side occlusion is allowed. Do not transfer, duplicate or float the bag or move it behind her back merely to reveal it. All four are true three-quarter rotations with consistent adult crown/neck/torso/hips/knees/shoe dimensions and one horizontal ground baseline, neutral planted feet and closed lips where visible. Preserve the reference's irregular weathered Berlin painted texture, angular fabric folds and visible hand/shoe anatomy. Four fully separate figures in one row with generous transparent outer margins and clear transparent gaps; no touching, no ground shadow, halo, backdrop, caption, lettering, extra prop, extra arm or extra leg.",
+        "pathRepresentation": "Portable source references retain original hashes; original generated output path recovered from the author own session tool record."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "role": "primary four cardinal views, immutable costume, body proportions, anatomical left bag ownership, shoe and source paint",
+          "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+          "sha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18"
+        },
+        {
+          "role": "secondary face and mature painted texture reference; front morphology and red glasses",
+          "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+          "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+        }
+      ],
+      "sourcePathRecovery": "Author own session JSONL: tool return near line3553; immutable byte copy near line3580. Raw source hash verified by integrator."
+    },
+    {
+      "id": "stadt-hannelore-sparkasse-expressionist-directions-v1",
+      "file": "stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-8f4c1b28-f258-45ce-b68e-4ce5235de518.png",
+      "prompt": "Create ONE horizontal row of exactly FOUR separate full-body 2D game source paintings of the SAME mature adult Hannelore Sparkasse, in exact order FRONT, RIGHT-facing true side profile, REAR true back, LEFT-facing true side profile. Full crown/hands/prop/feet for each; all four equal adult height, head and body proportions and shared shoe sole baseline, 50+ px transparent gutter between complete silhouettes plus clear outer margin. Quiet planted standing poses, not walking/action keys. Reference roles: FIRST her NEW expressionist fullbody front painting is binding identity, face, auburn upswept hair, red glasses, burgundy blazer, pale blouse, dark charcoal KNEE-LENGTH pencil skirt, light beige tights, black low-heel STRAP/LOAFER shoes, anatomy, figure scale and prop. SECOND original Gisela quiz portrait supplies only broad irregular angular weathered DE/Berlin oil-paint finish; no glasses/hair/outfit/papers borrowed. THIRD old Hannelore four-direction sheet crosschecks her OWN rear hair/updo, skirt hem, black strap shoes and tan handbag ownership, but its squat toy body MUST NOT set proportions. Maintain her own middle-aged stern face with small eyes and visible CLOSED lips in FRONT and BOTH side profiles; rear has no face or mouth. The single tan structured handbag remains in ANATOMICAL LEFT hand: FRONT viewer-right, REAR viewer-left. The RIGHT hand is empty throughout. True profile may naturally hide part of far-side bag, without moving her hand behind her back or inventing a second bag. Keep full near and far arms/hands and plausible feet in profiles; rotate garment construction genuinely, not pasted front or mirror-only back. Preserve her skirt exactly around knee, light tights fully covering calves, black strap/loafer shoes (no lace-up/boots, no bare black legs). Broad broken directional dry brush, expressive mature angular planes, muted worn cloth; no uniformly repeated diamond facets, stipple, shiny photo or chibi. Genuine RGBA alpha-zero transparent backdrop, no floor, shadow, vignette, halo, text, arrows, labels, logo, watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+        "assets/quiz-characters/gisela-becker.webp",
+        "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED provisional four-cardinal adult source",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-directions-batch1/receipt.json",
+      "sourceReviewReceiptSha256": "3df12d0a7b23fa161f34269ac8c167b333dd3e18a98666ef3d487741362f2f4d",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sourceSha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+          "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+        }
+      ],
+      "producerFindings": "Four grown-up views with auburn updo, red glasses, burgundy blazer, pale shirt, dark knee skirt, light tights and black strap loafers. Tan handbag in LEFT hand front viewer-right and rear viewer-left; visible in RIGHT profile. LEFT profile shows empty near RIGHT hand; handbag/far LEFT hand fully hidden, so ownership in that cell is visually unproved rather than invented.",
+      "producerCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 71 px), but the top/bottom outer clear margins are 4/5 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 589 edge pixels, maximum edge alpha 8; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-directions-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1657587,
+      "componentBounds": [
+        [
+          106,
+          6,
+          493,
+          882
+        ],
+        [
+          564,
+          6,
+          803,
+          882
+        ],
+        [
+          901,
+          4,
+          1282,
+          880
+        ],
+        [
+          1391,
+          6,
+          1614,
+          882
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 4,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+            "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+          },
+          {
+            "role": "secondary portrait paint finish only",
+            "path": "assets/quiz-characters/gisela-becker.webp",
+            "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+          },
+          {
+            "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+            "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+            "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+          "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+        },
+        {
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "path": "assets/sprite-sources/street-residents/stadt-hannelore-sparkasse-directions-candidate.png",
+          "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
+        }
+      ]
     }
   ]
 }

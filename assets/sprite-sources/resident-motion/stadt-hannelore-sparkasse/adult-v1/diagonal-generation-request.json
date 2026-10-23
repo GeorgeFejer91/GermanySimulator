@@ -1,0 +1,25 @@
+{
+  "status": "RAW_GENERATED_SOURCE_PROVISIONAL",
+  "actor": "stadt-hannelore-sparkasse",
+  "output": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+  "transparentBackground": true,
+  "referenceRoles": [
+    {
+      "role": "primary four cardinal views, immutable costume, body proportions, anatomical left bag ownership, shoe and source paint",
+      "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sha256": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18"
+    },
+    {
+      "role": "secondary face and mature painted texture reference; front morphology and red glasses",
+      "file": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-standing-v1.png",
+      "sha256": "a8a7ed6d545f16980acdce1458794ae15d9b994c512ada476add25321f86a4dc"
+    }
+  ],
+  "prompt": "Create a transparent source sheet of the SAME mature adult woman from the reference images in FOUR separate complete neutral standing three-quarter direction views, arranged left to right: (1) front-right, between front and true right profile, with face/chest facing toward viewer-right; (2) rear-right, between rear and true right profile, with back/side facing viewer-right; (3) rear-left, between rear and true left profile, with back/side facing viewer-left; (4) front-left, between front and true left profile, with face/chest facing viewer-left. Use the four-cardinal sheet as PRIMARY binding authority for exact costume, anatomy, paint, prop hand, figure dimensions and foot level; use the portrait as secondary facial detail only. Keep auburn updo/bun, RED spectacles, mature serious face, burgundy tailored jacket, pale blouse, navy knee-length skirt, cream stockings, substantial black strap loafers. Her single tan handbag is always held by her anatomical LEFT hand against her left side; her anatomical RIGHT hand is empty at her side. Screen position of handbag exchanges naturally through the back views, and natural far-side occlusion is allowed. Do not transfer, duplicate or float the bag or move it behind her back merely to reveal it. All four are true three-quarter rotations with consistent adult crown/neck/torso/hips/knees/shoe dimensions and one horizontal ground baseline, neutral planted feet and closed lips where visible. Preserve the reference's irregular weathered Berlin painted texture, angular fabric folds and visible hand/shoe anatomy. Four fully separate figures in one row with generous transparent outer margins and clear transparent gaps; no touching, no ground shadow, halo, backdrop, caption, lettering, extra prop, extra arm or extra leg.",
+  "rawSha256": "98d95a267c23ffd66dc1983f84c91653cd5507b45a1ac6d2a379e8bffa4fa6a5",
+  "rawSize": [
+    1774,
+    887
+  ],
+  "sourceReview": "Actual full sheet inspected; prop remains anatomical LEFT in all four rendered views; quarter-turn source is provisional pending native registration, all-frame and turn stress."
+}

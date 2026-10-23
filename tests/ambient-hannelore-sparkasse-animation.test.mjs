@@ -13,10 +13,11 @@ registerStreetCharacterManifest(manifest);
 const controller=vm.createContext({});
 vm.runInContext(readFileSync('character-interactions.js','utf8'),controller);
 
-test('Hannelore has four complete walks, stops owned by each phase and a free-hand gesture',()=>{
+test('Hannelore has four complete walks, stops owned by each phase and an own courtesy gesture',()=>{
  assert.equal(p.standingOnly,false,'Hannelore motion must be explicitly admitted');
  assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);
- assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
+ assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.strideDistance,5.825);
  assert(Number.isFinite(p.strideDistance)&&p.strideDistance>0);
  assert.deepEqual(Object.keys(p.atlasMotion.walks).sort(),['down','left','right','up']);
  const ownedStops=new Set();
@@ -48,6 +49,9 @@ test('Hannelore mouths follow selected moving sources and preserve explicit hidd
  assert(p.motionDelivery?.file&&p.mouthPaint?.file,'own motion and mouth delivery required');
  const bytes=asset(p.mouthPaint.file);assert.equal(hash(bytes),p.mouthPaint.sha256);
  const mouths=JSON.parse(bytes);assert.equal(mouths.id,id);assert.deepEqual(mouths.grid,p.grid);
+ assert.equal(mouths.frames.length,512);
+ assert.deepEqual([0,1,2,3,4,5,6,7].map(col=>Boolean(mouths.frames[8*p.grid[0]+col])),[true,true,true,false,false,false,true,true],
+  'native hidden rear-right lip is explicit null while five adult headings remain attached');
  assert.equal(mouths.sources.standing,p.standing.sha256);
  for(const [name,image] of Object.entries(p.variants))assert.equal(mouths.sources[name],image.sha256);
  for(const [direction,walk] of Object.entries(p.atlasMotion.walks)){
@@ -65,8 +69,8 @@ test('Hannelore mouths follow selected moving sources and preserve explicit hidd
  assert.equal(hash(asset(p.motionDelivery.file)),p.motionDelivery.sha256);
 });
 
-test('Hannelore keeps original standing paint and her two exact selected recordings',()=>{
- assert.equal(p.standing.sha256,'10f00a68ec8e46e62be8beeb3dcc0e4818e3a8ae657844f48b04992d0b83272e');
+test('Hannelore keeps own adult standing paint and her two exact selected recordings',()=>{
+ assert.equal(p.standing.sha256,'3de56a9dd36e18dbfaceacf1c2b73f0a40e6c12b9ba345668d0def6245a5c2d6');
  assert.equal(hash(asset(p.standing.file)),p.standing.sha256);
  const c={window:{}};vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),c);
  const audio=c.window.GermanySimulatorAudioText,binding=audio.productionVoices[id];

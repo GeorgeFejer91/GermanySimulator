@@ -1,0 +1,336 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-hannelore-sparkasse",
+  "sourceHashes": {
+    "stadt-hannelore-sparkasse-expressionist-directions-v1.png": "e236753455ac88cb5d67eef6c419649437a3ef9e8db7e8abbe0340c9e0664f18",
+    "stadt-hannelore-sparkasse-expressionist-diagonals-v1.png": "98d95a267c23ffd66dc1983f84c91653cd5507b45a1ac6d2a379e8bffa4fa6a5"
+  },
+  "frontAlpha20Height": 876,
+  "oneFamilyScale": 0.45662100456621,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        106,
+        6,
+        493,
+        882
+      ],
+      "sourcePivot": [
+        280.25,
+        882
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 208.5,
+          "bounds": [
+            164,
+            792,
+            253,
+            882
+          ],
+          "pixels": 5946
+        },
+        {
+          "x": 352.0,
+          "bounds": [
+            290,
+            792,
+            414,
+            879
+          ],
+          "pixels": 7333
+        }
+      ],
+      "workingOrigin": [
+        128.03196347031962,
+        69.26027397260276
+      ],
+      "workingBoundsAlpha20": [
+        177,
+        72,
+        354,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/down.png",
+      "registeredSha256": "95136759f1fc2c28931a597a9ec7a7b1e12718511b280f0c07d4c2abfba65235"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        143,
+        6,
+        440,
+        876
+      ],
+      "sourcePivot": [
+        291.0,
+        876
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 291.0,
+          "bounds": [
+            180,
+            786,
+            402,
+            876
+          ],
+          "pixels": 14962
+        }
+      ],
+      "workingOrigin": [
+        123.12328767123287,
+        72.0
+      ],
+      "workingBoundsAlpha20": [
+        189,
+        75,
+        324,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/front-right.png",
+      "registeredSha256": "a8e32a14d8b7f790f53e3fc6db44f1b92644543a2c04d9d6978e1e9ad5df0b4e"
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        564,
+        6,
+        803,
+        882
+      ],
+      "sourcePivot": [
+        689.5,
+        882
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 689.5,
+          "bounds": [
+            599,
+            792,
+            780,
+            882
+          ],
+          "pixels": 12496
+        }
+      ],
+      "workingOrigin": [
+        -58.84018264840182,
+        69.26027397260276
+      ],
+      "workingBoundsAlpha20": [
+        199,
+        72,
+        308,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/right.png",
+      "registeredSha256": "b654a07a72fbc2b41a2ea13b856ffedc207c5a0605ef6bfab338c852757de12a"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        502,
+        8,
+        797,
+        868
+      ],
+      "sourcePivot": [
+        677.0,
+        868
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 677.0,
+          "bounds": [
+            573,
+            778,
+            781,
+            868
+          ],
+          "pixels": 13829
+        }
+      ],
+      "workingOrigin": [
+        -53.13242009132421,
+        75.65296803652973
+      ],
+      "workingBoundsAlpha20": [
+        176,
+        80,
+        311,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/rear-right.png",
+      "registeredSha256": "f9226bedab8dc42cffdedbd6262c820e3b7187d4d6cb48ba82f4e8456d60038f"
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        901,
+        4,
+        1282,
+        880
+      ],
+      "sourcePivot": [
+        1105.25,
+        880
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1045.5,
+          "bounds": [
+            1000,
+            790,
+            1091,
+            880
+          ],
+          "pixels": 6101
+        },
+        {
+          "x": 1165.0,
+          "bounds": [
+            1123,
+            790,
+            1207,
+            880
+          ],
+          "pixels": 5759
+        }
+      ],
+      "workingOrigin": [
+        -248.68036529680364,
+        70.17351598173519
+      ],
+      "workingBoundsAlpha20": [
+        163,
+        72,
+        337,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/up.png",
+      "registeredSha256": "d6013996000603c217c63b1427a5745fee3fec3df1bb2432a6f8ede03bca083c"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        914,
+        8,
+        1259,
+        872
+      ],
+      "sourcePivot": [
+        1092.0,
+        872
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1092.0,
+          "bounds": [
+            987,
+            782,
+            1197,
+            872
+          ],
+          "pixels": 13836
+        }
+      ],
+      "workingOrigin": [
+        -242.63013698630135,
+        73.82648401826486
+      ],
+      "workingBoundsAlpha20": [
+        175,
+        78,
+        333,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/rear-left.png",
+      "registeredSha256": "07d16af28320a7ce6e0521c9b5f5dd3e01bc621df061bc209b7488b8efb69670"
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1391,
+        6,
+        1614,
+        882
+      ],
+      "sourcePivot": [
+        1491.5,
+        882
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1491.5,
+          "bounds": [
+            1400,
+            792,
+            1583,
+            882
+          ],
+          "pixels": 12659
+        }
+      ],
+      "workingOrigin": [
+        -425.05022831050223,
+        69.26027397260276
+      ],
+      "workingBoundsAlpha20": [
+        210,
+        72,
+        312,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/left.png",
+      "registeredSha256": "88d817425e644ae152fb514c4f6b06ef2b17d7337c7b08ac21617e7598c992fb"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/stadt-hannelore-sparkasse-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1374,
+        7,
+        1674,
+        874
+      ],
+      "sourcePivot": [
+        1506.0,
+        874
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1506.0,
+          "bounds": [
+            1400,
+            784,
+            1612,
+            874
+          ],
+          "pixels": 14338
+        }
+      ],
+      "workingOrigin": [
+        -431.67123287671234,
+        72.91324200913243
+      ],
+      "workingBoundsAlpha20": [
+        196,
+        76,
+        333,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-hannelore-sparkasse/adult-v1/registered/front-left.png",
+      "registeredSha256": "5070e25d8ffed20ff9c18841ba4ca402647e514ce45bb8a9225e4ad2cabdd7eb"
+    }
+  }
+}
