@@ -583,3 +583,14 @@ audio stays private. Profile identity and encoded-take receipts are in
 For-AI/VOICE-CAST.json and assets/voices/neighbors/schwabingen-manifest.json.
 The user explicitly authorized advisory Whisper feedback for dialect; differing
 transcripts are retained without an exact-word or perceptual-listening claim.
+
+### Berghain architectural study
+
+The study under assets/models/berghain combines project-authored reconstruction
+geometry/materials with Berlin LoD2 roof/annex data under Datenlizenz Deutschland
+Zero 2.0; see [asset provenance](assets/models/berghain/PROVENANCE.md).
+The initial figure study represents Anna Uddenberg's *CLIMBER (Angel Kiss)*
+(2020), credited to the artist; [gallery documentation](https://www.k-t-z.com/artworks/4318-anna-uddenberg-climber-angel-kiss-2020/)
+and [research inventory](berghain/For-AI/INTERIOR.md) record the reference and
+fidelity limits. The procedural fabric maps and reconstruction mesh are authored
+for this project; no artist photograph, third-party mesh or source CAD is bundled.

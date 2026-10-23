@@ -190,7 +190,7 @@ At the start of this task, the model source (`assets/models/berghain/layout.mjs`
 | Halle | A05–A06, E01 | Dimensioned plan, opening/stair locations, full roof geometry. |
 | Garden | I01, dated exterior photographs | Seasonal layouts and current site boundary/equipment. |
 | Lab.oratory / service rooms | A12 primary architect page and gallery; A01 bibliography | Lab.oratory is documented below Berghain, but complete plan/elevations/current arrangement are unverified. Inspect the gallery before placing rooms; do not assign it to an annex from massing alone. |
-| Art and distinctive interior objects | ART01–ART13; A13; I08/09/12 | Named artwork and equipment inventory now recorded in INTERIOR.md. No named artwork model implemented; in-situ dimensions/currentness and complete views remain gaps. Historic Nathan mural must not be inserted as today's foyer. |
+| Art and distinctive interior objects | ART01–ART13; A13; I08/09/12 | Named artwork and equipment inventory now recorded in INTERIOR.md. CLIMBER initial pose geometry implemented; other named artwork models absent; in-situ dimensions/currentness and complete views remain gaps. Historic Nathan mural must not be inserted as today's foyer. |
 | Sound systems | S01–S04 | Actual DS210 component CAD acquired, but current main-floor configuration unverified; Panorama Studt PA distinct from Funktion-One monitors. Generic existing speaker boxes remain insufficient. |
 
 ## Handling local copies

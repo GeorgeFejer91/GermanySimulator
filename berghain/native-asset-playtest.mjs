@@ -27,7 +27,7 @@ export async function renderNativeAsset(page,view){
       for(const geometry of geometries)geometry.dispose();for(const texture of textures)texture.dispose();
       renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
     };
-    return {bytes:bytes.byteLength,meshes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,
+    return {bytes:bytes.byteLength,meshes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
   },view);
 }

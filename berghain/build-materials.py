@@ -9,7 +9,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1] / 'assets/models/berghain'
 SIZE = 512
 FAMILIES = {'mineral': (11, .0008), 'stone': (37, .0015),
-            'metal': (71, .00015), 'aggregate': (109, .003)}
+            'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045)}
 
 
 def noise(columns, rows, seed):
@@ -39,6 +39,12 @@ def build_family(name, seed, relief):
     rng = random.Random(seed + 3)
     grain = [rng.random() for _ in broad]
     height = [.55 * d + .45 * g for d, g in zip(detail, grain)]
+    if name == 'fabric':
+        # Original twill weave at textile scale; periodic at both image edges.
+        height = [(.50 + .22 * math.sin(2 * math.pi * (i % SIZE) / 8)
+                   * math.cos(2 * math.pi * (i // SIZE) / 8)
+                   + .15 * math.sin(2 * math.pi * ((i % SIZE) + (i // SIZE)) / 16)
+                   + .06 * grain[i]) for i in range(SIZE * SIZE)]
     colour, roughness, normals = [], [], []
     for i, (b, d, s, g) in enumerate(zip(broad, detail, streak, grain)):
         shade = .94 + .015 * b + .025 * d + .02 * g
@@ -48,14 +54,17 @@ def build_family(name, seed, relief):
             shade = .91 + .02 * b + .04 * d + .03 * g - .035 * max(0, .2 - g) / .2
         elif name == 'metal':
             shade = .97 + .01 * b + .02 * g
+        elif name == 'fabric':
+            shade = .63 + .31 * height[i] + .04 * g
         else:
             shade = .78 + .12 * d + .1 * g
         colour.append(round(shade * 255))
         rough = .65 + .35 * d if name == 'metal' else .82 + .18 * g
         roughness.append((255, round(rough * 255), 255))
         x, y = i % SIZE, i // SIZE
-        dx = (height[y * SIZE + (x + 1) % SIZE] - height[y * SIZE + (x - 1) % SIZE]) * relief * SIZE / 4
-        dy = (height[((y + 1) % SIZE) * SIZE + x] - height[((y - 1) % SIZE) * SIZE + x]) * relief * SIZE / 4
+        tile = .08 if name == 'fabric' else 2
+        dx = (height[y * SIZE + (x + 1) % SIZE] - height[y * SIZE + (x - 1) % SIZE]) * relief * SIZE / (tile * 2)
+        dy = (height[((y + 1) % SIZE) * SIZE + x] - height[((y - 1) % SIZE) * SIZE + x]) * relief * SIZE / (tile * 2)
         length = math.sqrt(dx * dx + dy * dy + 1)
         normals.append(tuple(round((v / length * .5 + .5) * 255) for v in (-dx, -dy, 1)))
     output = {}
@@ -66,7 +75,7 @@ def build_family(name, seed, relief):
         image.save(ROOT / filename, optimize=True)
         content = (ROOT / filename).read_bytes()
         output[kind] = {'file': filename, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()}
-    return {'metresPerTile': 2, 'maps': output, 'estimatedReliefMetres': relief}
+    return {'metresPerTile': .08 if name == 'fabric' else 2, 'maps': output, 'estimatedReliefMetres': relief}
 
 
 def main():
@@ -80,7 +89,7 @@ def main():
                       **{kind: record['file'] for kind, record in entry['maps'].items()}}
                for name, entry in families.items()}
     (ROOT / 'surface-data.mjs').write_text('export const surfaceFamilies = ' + json.dumps(runtime, indent=2) + ';\n', encoding='utf-8')
-    print(json.dumps({'families': len(families), 'maps': 12, 'bytes': sum(m['bytes'] for f in families.values() for m in f['maps'].values())}))
+    print(json.dumps({'families': len(families), 'maps': len(families) * 3, 'bytes': sum(m['bytes'] for f in families.values() for m in f['maps'].values())}))
 
 
 if __name__ == '__main__':

@@ -95,15 +95,15 @@ verified current installation inventory.
 
 ## Original material maps
 
-`berghain/build-materials.py` generates four tileable families (mineral, stone,
-metal, aggregate), each with a 512×512 base-colour, roughness and normal PNG.
+`berghain/build-materials.py` generates five tileable families (mineral, stone,
+metal, aggregate, fabric), each with a 512×512 base-colour, roughness and normal PNG.
 They use seeded noise with no photographic pixel input. `textures/manifest.json`
 records parameters, image sizes/hashes and the unmeasured microrelief estimates.
 Regenerate with `python berghain/build-materials.py`, then the normal GLB export.
 
 The viewer retains instanced geometry and projects UVs in model metres with
-2 m repeats. The portable asset bakes equivalent UVs and embeds/reuses the same
-12 PNGs. Base colour uses sRGB; roughness/normal use linear data. Roughness is
+2 m architecture / 8cm fabric repeats. The portable asset bakes equivalent UVs and embeds/reuses the same
+15 PNGs. Base colour uses sRGB; roughness/normal use linear data. Roughness is
 packed into G, with B=255 preserving the material's metallic factor in glTF.
 Surface images add grain and modest variation; they are not scans or verified
 stain/damage maps of the building. Less-documented roofs keep their flat PBR
@@ -157,6 +157,7 @@ dimensions are not scaled. Source roof/annex surfaces themselves are retained
 without that approximation. Actual finer façade, roof, circulation and room
 measurements remain required for full accuracy.
 
+
 ## Exterior site and envelope additions
 
 `landscape.mjs` and `exterior-details.mjs` add original instanced geometry before
@@ -168,3 +169,29 @@ They are not surveyed or photo-textured assets. Model/GLB extras retain sources
 and uncertainty. Low opaque planting and physical furniture share calibrated
 collision bounds; high leaf crowns are nonblocking above body height.
 The smoking bridge is explicitly omitted pending its attachment and endpoint.
+
+## Panorama figure study
+
+`climber-geometry.mjs` reconstructs a first figure study of Anna Uddenberg's
+*CLIMBER (Angel Kiss)* (2020), credited to the artist. ART02's inspected gallery
+photograph informs raised hips, folded/hanging legs, quilted clothing, olive/blue
+panels, bindings, zipper teeth, metal eyelets and blonde hair. ART03/ART13 place
+it on the Panorama counter. This is original reconstruction geometry, not a
+scan, copied mesh, artist texture or exact replica. Hidden surfaces, garment
+cut, hardware positions and bar location are inferred. The gallery's
+160×130×110 cm retains its unknown axis/support scope; the modelled figure is
+approximately 1.62 m high, 1.58 m long and 1.00 m deep. The studio barrel, table
+and stool are excluded. Artworks and photography remain credited to their creators.
+
+`artworks.mjs` anchors the figure to the existing inferred Panorama counter.
+Eleven collision bounds follow the visible segments and attached details.
+The hanging boot rests on the floor; sampled visible vertices do not enter
+the counter solids. Indexed meshes retain smooth normals. The new fabric
+family contains three original seeded 512px maps from the existing material
+generator: twill colour, normal and roughness at an estimated 8cm tile scale.
+Source and native GLB share this PBR path. No reference photograph is embedded.
+
+This is an initial pose/material study. Figure anatomy, garment fit, hands,
+hair and fine photographic fidelity remain refinement work; current installed
+placement and continued presence are unverified. It does not complete the
+realistic artwork or the full architectural goal.

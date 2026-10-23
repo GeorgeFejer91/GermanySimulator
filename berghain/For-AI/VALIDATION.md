@@ -571,3 +571,49 @@ are read from the published Git objects. Silent Chromium; no physical device.
 Permanent Geheim equipment deployment remains pending Pages run 40000026294;
 the previously verified canonical avatar/door remains available. Do not label
 immutable preview evidence as canonical Pages evidence.
+
+## Panorama figure increment — accepted geometry, fidelity remains open
+
+2026-10-23. Freeze output/berghain-artwork-candidate.json: 62 files, based on
+published exterior/speakers c6041f6. Portable GLB SHA256 9970accf87430557bf37f41674c97c9315f3d8e4f2482bcd00aa7e1ed07c8da7:
+22,371,528 bytes, 229,356 triangles, 94 mesh/material groups, 15 shared embedded maps.
+The new original figure adds 80,080 triangles and uses 9 indexed material groups.
+No downloaded artwork image, artist mesh or studio furniture is embedded.
+
+Fresh nine-suite Node checks pass 47/47. Corrected source/native figure views and
+avatar pass 7/7 in output/berghain-artwork-release-framing-browser/report.json on
+desktop, Android portrait and landscape emulation. Regression passes 10/10 in
+output/berghain-artwork-release-regression/report.json: natural entry/exit all
+three layouts; idle/context restore; texture fallback desktop/portrait; Panorama
+footer 320px/200%; source/native materials with exactly 15 texture disposals;
+furniture/native regressions desktop/portrait. Report hashes match the freeze.
+The earlier landscape test aimed from a stale room position and is superseded;
+the corrected test waits for the actual mapped Panorama spawn before aiming.
+
+Independent Physics P1/P2/P4/P5/X1 PASS: fresh 47/47 tests and 62/62 hashes;
+80,080 transformed triangles vs four counter solids inset 2mm have 0 penetrations.
+Worktop support and hanging boot floor gaps are 3mm. Six outer bar lanes have
+unchanged legality with/without the artwork; 2/2 eligible shallow overlaps recover.
+Independent Camera/scale C1–C5/X1 PASS for this initial increment: inspected the
+ART02 photograph and current source/native/visitor frames, including repaired
+landscape framing. Figure bounds 1.581×1.615×0.999m read plausibly beside the
+1.80m human and 1.13m counter. No required camera or Physics fix remains.
+
+Cost evidence: output/berghain-artwork-cost-{before,after}/report.json and
+output/berghain-artwork-cost-comparison.json. Each has 3 cold runs per layout,
+same local scene/input, Chromium 151, DPR 2, no throttling; baseline is the complete
+published exterior release. Transfer 4,195,332→5,208,268 bytes; export remains
+unrequested in ordinary viewing. Median ready ms desktop 793→932, portrait 675→908,
+landscape 662→915 (ranges before 726–1589/640–742/656–749; after 919–1568/882–1031/
+863–1024). Median product-RAF p95 stays about 14ms, no continuing idle frames.
+Input is one real keyboard/touch sample per run; medians vary 11.4→10.7,23.8→17.5,
+24.9→14.5ms, with a 95.2ms baseline outlier. These short shared-host samples do
+not establish a causal speedup or physical Android/low-end GPU qualification.
+
+Fidelity remains unfinished: anatomy, hair, garment cut, hardware and weathering
+are stylised. Published 160×130×110cm axes/support inclusion, installed pose,
+bar location and current presence remain inferred. Eight tiny triangles have
+minor face/vertex-normal opposition, total <0.00036m², without visible blocker.
+Physical Android, crowd/vehicle/sprite/fade and acoustics are NOT RUN/out of scope.
+This accepts a visible geometry increment, not a faithful finished artwork or
+the full realistic interior/exterior goal. Remaining rooms and art remain open.

@@ -5,8 +5,7 @@ reconstruction acceptance in the [owning guide](https://github.com/GeorgeFejer91
 for the missing interior design, artworks/mannequin sculptures and sound system.
 Those are required parts of the full asset, not optional decoration.
 
-The furniture and speaker updates remain provisional. **None of the named artworks
-below has been recreated in the model yet.** Research, an object identification
+The furniture and speaker updates remain provisional. **CLIMBER has an initial geometry study; other named artworks remain unmodelled.** Research, an object identification
 or a manufacturer's CAD download does not establish a finished interior.
 
 ## Dates and identity
@@ -31,12 +30,12 @@ separate objects and avoid conflating the two rooms.
 
 ## Artwork reconstruction inventory
 
-All rows are **unmodelled**. Position confidence refers to a room or area, not
+CLIMBER has an initial pose/material study; all other rows are **unmodelled**. Position confidence refers to a room or area, not
 an exact model coordinate. Source IDs resolve in SOURCES.md.
 
 | Object | Area / date evidence | Geometry and material evidence | Next modelling requirement |
 | --- | --- | --- | --- |
-| Anna Uddenberg, *CLIMBER (Angel Kiss)* | Panorama counter, 2020 exhibition; ART01–03/13 | Gallery dimensions **160×130×110 cm** as published. Bent figure, blonde synthetic hair, mixed clothing, shoes and furniture support visible in ART02 photo. | Confirm axis order/support inclusion, bar-relative orientation and contact points. Gallery barrel/table/stool setup must not be assumed to exist in the club. Obtain additional views before claiming a faithful figure. |
+| Anna Uddenberg, *CLIMBER (Angel Kiss)* | Panorama counter, 2020 exhibition; ART01–03/13 | Gallery dimensions **160×130×110 cm** as published. Bent figure, blonde synthetic hair, mixed clothing, shoes and furniture support visible in ART02 photo. | Initial pose/clothing/hardware geometry and counter placement implemented. Refine anatomy, garments, hands/hair and photo fidelity; confirm axis/support scope and installed contact points. Gallery barrel/table/stool setup must not be assumed to exist in the club. Obtain additional views before claiming a faithful figure. |
 | Norbert Bisky, *Vertigo* | Entrance/foyer, permanent since May 2017; ART05 | Actual complete installation image/layout not yet obtained. | Establish canvas arrangement, extent and placement. A different Bisky canvas reproduced in an article is not a texture substitute. |
 | Piotr Nathan, *Rituale des Verschwindens* | Historic foyer mural; removed April 2017; ART06, A01, I08 | Historic architect photo shows a large panelled wall work. | Keep as a historical reference. Do not install it as the contemporary foyer artwork. |
 | Joseph Marr, *Together* | Klo Bar, permanent 2013; ART04 | **9 m** figurative frieze, cola-coloured translucent sugar preserved with polyurethane; gallery detail inspected. | Build the actual Klo Bar/enclosure first; establish figure sequence and full display form from complete views. A detail image does not establish the installation footprint. |

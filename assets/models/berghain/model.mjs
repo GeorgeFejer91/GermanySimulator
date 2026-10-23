@@ -5,15 +5,18 @@ import {annexPartIds, mainPartId, hallPartId} from './calibration.mjs';
 import {configureSurfaceMaterial} from './surface-materials.mjs';
 import {createAcousticGrilleGeometry} from './interior-fixtures.mjs';
 import {createSpeakerGeometries} from './speaker-geometries.mjs';
+import {createClimberGeometries} from './climber-geometry.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
   model.name = 'Berghain architectural study';
   model.userData = {units: 'metres', status: layout.calibration.status, catalogue: 'berghain/For-AI/SOURCES.md',
-    externalSource: 'Berlin LoD2 DEBE02YY200004SX; dl-de-zero-2.0',fixtures:layout.fixtures,soundSystem:layout.soundSystem,landscape:layout.landscape,exteriorDetails:layout.exteriorDetails};
+    externalSource: 'Berlin LoD2 DEBE02YY200004SX; dl-de-zero-2.0',fixtures:layout.fixtures,soundSystem:layout.soundSystem,
+    landscape:layout.landscape,exteriorDetails:layout.exteriorDetails,artworks:layout.artworks};
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
-    ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),grille:createAcousticGrilleGeometry(),...createSpeakerGeometries()};
+    ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
+    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries()};
   const batches = new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');
@@ -25,7 +28,7 @@ export function createBerghainModel() {
     let group = model.getObjectByName(section);
     if (!group) { group = new THREE.Group(); group.name = section; model.add(group); }
     const material = new THREE.MeshStandardMaterial({...materials[materialName]});
-    if (shape === 'box') configureSurfaceMaterial(material, materialName);
+    if (shape === 'box'||shape.startsWith('climber-')) configureSurfaceMaterial(material, materialName);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
     mesh.castShadow = !material.transparent && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);

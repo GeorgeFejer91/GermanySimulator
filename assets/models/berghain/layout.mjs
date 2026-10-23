@@ -1,11 +1,13 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures} from './interior-fixtures.mjs';
-import {addLandscape,landscapeMaterials} from './landscape.mjs';
-import {addExteriorDetails} from './exterior-details.mjs';
 import {addSoundSystem} from './sound-system.mjs';
+import {addArtworks,artworkMaterials} from './artworks.mjs';
+import {addLandscape, landscapeMaterials} from './landscape.mjs';
+import {addExteriorDetails} from './exterior-details.mjs';
 
 export const materials = {
   ...landscapeMaterials,
+  ...artworkMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -244,7 +246,7 @@ export const viewpoints = {
   berghain: {label: 'Berghain', position: {x: 5, y: 6.65, z: 5}, yaw: 0,
     confidence: 'Approximate layout; reported PA arrangement', sources: ['A01', 'I01', 'I02', 'P05', 'S05', 'S07', 'S08', 'S09', 'S10']},
   panorama: {label: 'Panorama Bar', position: {x: -11, y: 13.25, z: -7}, yaw: 0,
-    confidence: 'Approximate layout', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11']},
+    confidence: 'Approximate layout; artwork study', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11', 'ART02', 'ART03', 'ART13']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
@@ -258,3 +260,4 @@ addExteriorDetails(layout);
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
 addSoundSystem(layout);
+addArtworks(layout);
