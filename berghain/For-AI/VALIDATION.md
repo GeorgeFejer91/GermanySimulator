@@ -4,7 +4,24 @@
 
 ## Confirmed public deployment
 
-### Source-derived furniture — accepted publication candidate
+### Source-derived furniture — published snapshot, canonical update pending
+
+Runtime commit **`ecfe6aa442fd99072b47c052e272f232b73c60fb`** was pushed with
+main parent `bb00899bbdf9b9d14e36ba7f30503ed1aba85a0d` preserved. Only 14
+scoped files changed; the working checkout's unrelated index was untouched.
+Immutable public preview:
+https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/ecfe6aa442fd99072b47c052e272f232b73c60fb/geheim/index.html
+(`Open the page` prompt on a fresh provider visit).
+`output/berghain-fixture-immutable-verification.json` passes **38/38** published
+files against Git objects, including the new fixture module and native GLB.
+`output/berghain-fixture-immutable-browser/report.json` passes **6/6** remote
+desktop/Android-portrait cases: real exterior entry/exploration/exit/refresh,
+furniture approach/collision, native GLB rendering and human-at-bar framing.
+The furniture/native room selectors are explicitly diagnostic; the separate
+entrance flow uses actual input from outside. The permanent Geheim page is
+already verified for its earlier avatar release below. At this checkpoint the
+new furniture's Pages update is pending behind an existing workflow; canonical
+verification of these newer bytes remains outstanding.
 
 2026-10-23: the 26-file SHA-256 freeze in
 `output/berghain-fixture-candidate.json` replaces generic foyer/Panorama boxes
@@ -55,6 +72,10 @@ There are no remaining required fixes for this bounded candidate. Crowd P3 is
 out of scope. Physical Android, device GPU performance, exhaustive viewpoints
 and contemporary photographic accuracy remain **NOT RUN**. Publication and
 canonical URL verification are separate from these local acceptance results.
+
+The subsequent I16/I17 catalogue additions only clarify *Felsenland*'s identity,
+leather material and historical location; they change no runtime or assets.
+No world reviewers or new browser batch are needed for that documentation.
 
 ### Geheim avatar walkthrough — release candidate
 
