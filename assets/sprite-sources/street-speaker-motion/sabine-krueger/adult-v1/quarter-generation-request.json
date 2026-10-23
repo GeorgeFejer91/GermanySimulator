@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "request": {
+    "prompt": "Use case: stylized-concept, production 2D street-game turn source.\nImage 1 is the exact adult BODY, FACE, PROPORTION, WARDROBE, PAINT AND PROP authority: Sabine Krüger's four cardinal views. Image 2 is her close portrait and face identity reference, not a whole-body proportion reference.\nCreate ONE horizontal row of FOUR DISTINCT COMPLETE whole-body planted NEUTRAL oblique paintings of the SAME middle-aged Sabine, in this exact left-to-right order: FRONT-RIGHT quarter (body midway between front and strict screen-right profile), REAR-RIGHT quarter (body midway between screen-right profile and true rear), REAR-LEFT quarter (body midway between true rear and screen-left profile), FRONT-LEFT quarter (body midway between screen-left profile and front). This is the same body rotating in place: rotate the torso, shoulders, pelvis, skirt, calves and complete shoes together, not just her head. Front quarters need a clearly oblique ribcage/pelvis and visible foreshortening rather than a frontal body with sideways face. Rear quarters show the back of her vest/skirt and back of head with appropriately partial profile.\nMaintain her exact adult head size, crown-to-chin and substantial torso/arm/calf/shoe lengths, approximately 962px sole-to-crown figure height when the sheet is 1536x1024, matching Image1. Same crown and sole lines in all four figures; keep both complete feet planted in a quiet walking-ready stance with subtle separated legs. No walking step or dramatic gesture.\nPreserve Sabine's asymmetrical dark brown side-part bob, fine round spectacles, angular weary intelligent skeptical face, tired adult eyes and closed rest lips. Mustard V-neck sleeveless knit vest, off-white collared blouse with rolled cuffs, charcoal knee-length skirt, visible full stocking-clad calves, substantial worn brown lace-up shoes. Exactly ONE closed burgundy book held in her anatomical LEFT hand/under LEFT arm in every view; RIGHT hand empty. Front shows the book on viewer-right; rear shows it on viewer-left. Right-facing quarters partly occlude the far left forearm/book behind torso as physically appropriate; left-facing quarters show the near left hand gripping the book against the chest. Do not mirror a view or switch book hands.\nMatch the same broad dry broken oil-brush planes and muted ochre/charcoal/wine Berlin colors. Mature Disco Elysium-like hand-painted adult cartoon, angular face and worn cloth, not cute, chibi, glossy 3D, anime or a smooth generic doll. Do not change her age or copy an elderly person's face.\nFour SEPARATE intact figures with generous transparent gutters and outside margin, all hair/arms/book/feet inside canvas. Genuine transparent RGBA outside the four bodies. No brown backdrop from references, no ground, floor, cast shadows, glow, halo, extra people, text, labels, grid, arrows, motion lines or floating brush debris.",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-sabine-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-sabine-krueger-expressionist-directions-v1.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-sabine-complete\\GermanySimulator\\assets\\quiz-characters\\sabine-krueger.webp"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b",
+      "role": "adult whole-body/cardinal identity/style authority"
+    },
+    {
+      "path": "assets/quiz-characters/sabine-krueger.webp",
+      "sha256": "4e80cfbe4a8133d2737e482a05ba26851b3318c40751a641246b44f25b3f2640",
+      "role": "own close face identity"
+    }
+  ]
+}

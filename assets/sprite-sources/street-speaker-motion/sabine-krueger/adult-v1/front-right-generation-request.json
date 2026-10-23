@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "request": {
+    "prompt": "Use case: identity-preserving missing whole-body turn source for a 2D street game. Create EXACTLY ONE complete adult Sabine Krüger, FRONT-RIGHT THREE-QUARTER VIEW. It is the intermediate body orientation halfway between Image1 figure1 FRONT and Image1 figure2 strict screen-RIGHT profile. Nose/chest/both shoe toes point diagonally toward SCREEN RIGHT; the face follows the turned torso. Do NOT make her head look screen-left. Rotate the entire ribcage, shoulders, waist, pelvis, skirt, calves and feet coherently to this approximately45-degree right-facing orientation. The near anatomical RIGHT shoulder/upperarm is clear; the anatomical LEFT forearm and burgundy book sit on the farther side of her ribcage with natural partial occlusion. Both feet quietly planted, not stepping or posing.\nImage1 is absolute adult body, head-size, limb-length, painterly costume and identity authority. Image2 is own facial detail only. Middle-aged woman with asymmetrical dark-brown side-part bob, fine round glasses, angular tired skeptical face, mature small eyes, closed rest lips. Mustard knit V-neck sleeveless vest over off-white button blouse with rolled cuffs, charcoal knee-length skirt, full stocking calves and substantial worn brown lace-up shoes. Exactly ONE burgundy closed book in anatomical LEFT hand under LEFT arm; RIGHT hand empty and relaxed. Keep the same torso-to-leg and head-to-body proportions as the whole-body reference; no longer skirt, shorter legs, larger head or age drift.\nSame broad expressive dry oil-brush planes and muted ochre/charcoal/wine palette, grown-up weathered Disco Elysium meets Berlin. Source painting for animation, no motion effect. Square1024x1024 transparent canvas, entire figure approximately962px sole-to-crown, generous margin all around. Entire hair, elbows, book and both complete shoes inside canvas. True transparent RGBA outside ONE figure. No other people, duplicate poses, ground, cast shadow, floor, brown backdrop, halo, labels, lines, arrows, text or grid.",
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-sabine-complete\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-sabine-krueger-expressionist-directions-v1.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-sabine-complete\\GermanySimulator\\assets\\quiz-characters\\sabine-krueger.webp"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+    },
+    {
+      "path": "assets/quiz-characters/sabine-krueger.webp",
+      "sha256": "4e80cfbe4a8133d2737e482a05ba26851b3318c40751a641246b44f25b3f2640"
+    }
+  ]
+}

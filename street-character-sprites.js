@@ -1,7 +1,7 @@
 import {loadThreeTexture,leaseWithSignal} from './asset-loaders.js?v=20261020-bounded-assets';
 import {attachStreetCharacterMouth,validateStreetMouthRegistration} from './street-character-mouth.js';
 import {validateStreetMotionDelivery,createStreetMotionDelivery} from './street-motion-delivery.js?v=20261021-compact-motion';
-const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261023-karl-adult';
+const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261023-sabine-adult';
 const playbackByActor=new WeakMap(),texturesByThree=new WeakMap(),imagesByConstructor=new WeakMap(),fallbackByHost=new WeakMap();
 const rigDefinitions=new Map(),mouthDefinitions=new Map(),deliveryDefinitions=new Map(),rigForwards={down:[0,0,1],right:[1,0,0],up:[0,0,-1],left:[-1,0,0]};
 const rigCameraAxes=['right','up','forward'];

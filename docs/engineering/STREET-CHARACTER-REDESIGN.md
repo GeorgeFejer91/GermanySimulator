@@ -14,10 +14,13 @@ verifies the deployment and gives the freed worker another character. Earlier
 whole-cast publication holds are superseded; existing unfinished goals remain
 active. Keep shared source integration and pushes under one owner.
 
-The release checkout is
-`C:/Users/cogpsy-vrlab/.codex/worktrees/street-character-live-release/GermanySimulator`,
-starting at public `f167a1130b3731ccb0caffb5210287a90e11c2f1`. Other incomplete
-cast work stays in its separate checkouts. Copy only an accepted character's
+The current sole-integrator release checkout is
+`C:/Users/cogpsy-vrlab/.codex/worktrees/street-current-live-release/GermanySimulator`.
+Its published history includes Irmgard, Hannelore, police, Gisela, Heike and
+Karl-Heinz, while preserving the other goal's Berghain viewer. The older
+`street-character-live-release` checkout is a historical police/Heike source
+bench and must not publish over the current lane. Other incomplete cast work
+stays in its separate checkouts. Copy only an accepted character's
 registry entry and required assets/dependencies; do not replace the whole
 registry with an author's broader local candidate.
 
@@ -184,7 +187,7 @@ Owning source/build/cost/evidence details are in [POLICE-ART.md](./POLICE-ART.md
 The accepted single-character successor to police09636713 changes only
 `quiz-gisela-becker`; the other42 registry records, all8 police families and
 game simulation remain exact. The active acceptance/publication lane is
-`street-gisela-live-release/GermanySimulator`. Earlier release lanes retain
+`street-current-live-release/GermanySimulator`. Earlier release lanes retain
 their source/RED evidence and do not override this newer public tree.
 
 Gisela keeps sandy bob, glasses, pearls/floral scarf, beige coat and wine
@@ -343,3 +346,55 @@ verified; if CI coalesces another goal's later commit, bind the exact deployment
 revision and confirm it retains this accepted person. Natural E traversal,
 physical Android, perceptual listening and exhaustive unchanged world matrices
 remain unclaimed. Remaining outdoor cast continues under the same goal.
+
+Heike publication verified: accepted/pushed `c6ef9419ab234794cb1968babf2a2d2631b16d1a`, deployed in `9c842707e588e5e218109a0f63eb51c73a472b1f`, Pages39977033051 success. All14 deployed files match immutable deployment bytes and the exact accepted Heike record; actualroot, query/hash-preserving3d.html compatibility and public Heike standing/movement admission pass with0page/HTTP failures. Root views her public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/heike-release/live/`.
+
+Karl publication verified: accepted/pushed `10a319e22c0b5e9c12847654dee76c83c4c82b92`, deployed in `ab34df43c9cd4c82136915a790b88ef2350d53fc`, Pages39981190171 success. All14 deployed files match immutable deployment bytes and the exact accepted Karl record; actualroot, query/hash-preserving3d.html compatibility and public Karl standing/movement admission pass with0page/HTTP failures. Root views her public pavement capture; staged approach does not establish natural E traversal. Evidence: `output/karl-release/live/`.
+
+## Sabine Krüger: complete mature painted street family
+
+Only `quiz-sabine-krueger` changes from reviewed public7517a173. All42 other
+registry records, police and game simulation retain that public base. The
+49 incoming performance/office-preview/Geheim files are preserved; root runtime
+edits only advance the three character cache imports. Her asymmetrical brown
+bob, glasses, mustard vest, cream blouse, charcoal knee skirt, worn brown shoes
+and anatomical-left burgundy book now form one connected mature adult at2.33.
+
+Eight genuine painted headings supply364 selected cells, four16-phase walks,
+all64 phase stops and seven original actions in21×18. Own near-sole fit11.5358
+selects11.54 units/cycle; native rounding and hidden opposite-sole limitations
+remain documented. All277 supported mouths change native RGB at both client
+sizes with exact alpha and closed source; true rear/unsupported far lips stay
+explicitly unarticulated. Existing voice, recordings and measured cues remain
+exact. Movement uses16,220,160/7,208,960 decoded bytes, reactions1,474,560/655,360;
+the existing selective admission/disposal owners remain unchanged.
+
+The worker reproduced312 source/output files and a fresh five-file compile
+byte-exactly, checked all728 native floor cases, components/gutters, three-profile
+recorded media, legal walking/stops, all seven terminating actions, delayed/404
+fallback and retirement. Its original action timeout from a private0.05dt
+fixture is retained; the exact production0.12 cap/substeps successor completed.
+The first wrong front-right paint remains held beside its corrective raw source
+and exact original requests. Root narrows own source/provenance union rather
+than copying an old full registry. The new own test was normalized CRLF→LF to
+match Git after a real staged-byte mismatch; production paint remained exact.
+
+All187 integrated Node checks pass, including incoming performance/Geheim and
+packaging checks; own3 raw provenance records/two requests pass. Initial obsolete
+motion-family expectation failures are preserved. Current65pins stay exact
+through both independent reviewers. Physics passes actual legal RIGHT/DOWN
+travel43.561/41.554 units,16phases, zero illegal/stationary gait and90tick
+fixed-root neutral holds; observed11.7 cycle is within one simulation tick of
+11.54. Depth-floor probes remove at most one raster boundary row, with intact
+shoes and the portrait neutral control more affected than moving contacts.
+Camera passes desktop/portrait common-ground adult scale beside Sandales/Söder,
+loaded cars/doorway, two-way opaque depth and prepaint404. Its own actual10pose
+whole-body turn spans240RAF/4.522s, median16.4ms with capture overhead; book,
+head, shoulders, pelvis and boots remain attached. Root views the actual turn,
+native and pavement/reference captures and accepts these affected scopes.
+
+Reports, frozen pins and commit/deployment receipts live in
+`output/sabine-release/`. Acceptance authorizes immediate sequential publication;
+actual deployed files/root/compatibility/own paint are checked separately.
+Forced placements and emulation do not establish natural mission/E traversal,
+physical Android or perceptual listening. The remaining outdoor cast continues.

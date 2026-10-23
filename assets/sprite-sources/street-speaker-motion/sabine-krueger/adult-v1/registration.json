@@ -1,0 +1,365 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "quiz-sabine-krueger",
+  "sourceHashes": {
+    "quiz-sabine-krueger-expressionist-directions-v1.png": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b",
+    "quiz-sabine-krueger-expressionist-diagonals-v1.png": "d7d840e1e572a88bdf1289ad290f5babcffcb20b9ac6128f13c44be9fcdef833",
+    "quiz-sabine-krueger-expressionist-front-right-v1.png": "c5f87b8053a764893d0d6f47ebf6412fc5e601128332f64a8a062d640c36bb6d"
+  },
+  "frontAlpha20Height": 962,
+  "oneFamilyScale": 0.4158004158004158,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        75,
+        21,
+        410,
+        983
+      ],
+      "sourcePivot": [
+        201.75,
+        983
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 120.0,
+          "bounds": [
+            75,
+            893,
+            165,
+            983
+          ],
+          "pixels": 6114
+        },
+        {
+          "x": 283.5,
+          "bounds": [
+            229,
+            893,
+            338,
+            973
+          ],
+          "pixels": 6402
+        }
+      ],
+      "workingOrigin": [
+        172.11226611226613,
+        63.26819126819123
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        204,
+        72,
+        343,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/down.png",
+      "registeredSha256": "8b62ba1e28e256d9f463c1a59d2ae560b237c64ad73b0546b95322844294b848"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-front-right-v1.png",
+      "sourceBoundsAlpha20": [
+        483,
+        18,
+        826,
+        1229
+      ],
+      "sourcePivot": [
+        659.0,
+        1229
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 659.0,
+          "bounds": [
+            492,
+            1139,
+            826,
+            1229
+          ],
+          "pixels": 20484
+        }
+      ],
+      "workingOrigin": [
+        38.32865400495456,
+        66.05450041288191
+      ],
+      "sourceResolutionScale": 0.33030553261767137,
+      "workingBoundsAlpha20": [
+        198,
+        72,
+        312,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/front-right.png",
+      "registeredSha256": "0c8e994ba55d05cfffac8b57193a946c48b0356363fd26ce1e690ed6b0e0b1a9"
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        485,
+        24,
+        706,
+        976
+      ],
+      "sourcePivot": [
+        599.0,
+        976
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 599.0,
+          "bounds": [
+            507,
+            886,
+            691,
+            976
+          ],
+          "pixels": 13184
+        }
+      ],
+      "workingOrigin": [
+        6.9355509355509355,
+        66.17879417879413
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        209,
+        76,
+        301,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/right.png",
+      "registeredSha256": "2e33c2cbbe44d4191d921171d54f81fb65d55348dcc45effdb59cae79ccc90d2"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        477,
+        26,
+        742,
+        979
+      ],
+      "sourcePivot": [
+        615.0,
+        979
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 615.0,
+          "bounds": [
+            488,
+            889,
+            742,
+            979
+          ],
+          "pixels": 16535
+        }
+      ],
+      "workingOrigin": [
+        0.282744282744261,
+        64.9313929313929
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        199,
+        76,
+        309,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/rear-right.png",
+      "registeredSha256": "213d041ef3f9337150df91d8ec65a85ff3056d64e0f74bd85ef0b9b81c5ab785"
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        792,
+        23,
+        1116,
+        977
+      ],
+      "sourcePivot": [
+        963.0,
+        977
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 900.0,
+          "bounds": [
+            859,
+            887,
+            941,
+            977
+          ],
+          "pixels": 5826
+        },
+        {
+          "x": 1026.0,
+          "bounds": [
+            984,
+            887,
+            1068,
+            976
+          ],
+          "pixels": 5802
+        }
+      ],
+      "workingOrigin": [
+        -144.41580041580045,
+        65.76299376299374
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        185,
+        76,
+        320,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/up.png",
+      "registeredSha256": "f16aa60b8e127054f765e6abab93d435c363d429b708490fe7e755b6e4446cc0"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        797,
+        27,
+        1094,
+        981
+      ],
+      "sourcePivot": [
+        962.75,
+        981
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 881.5,
+          "bounds": [
+            816,
+            891,
+            947,
+            981
+          ],
+          "pixels": 8890
+        },
+        {
+          "x": 1044.0,
+          "bounds": [
+            1004,
+            891,
+            1084,
+            971
+          ],
+          "pixels": 5247
+        }
+      ],
+      "workingOrigin": [
+        -144.31185031185032,
+        64.09979209979207
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        187,
+        76,
+        311,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/rear-left.png",
+      "registeredSha256": "d738ec60687159d382d55ea80be747116f1357f02b3db3dc8ac4b814c22f5606"
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sourceBoundsAlpha20": [
+        1243,
+        25,
+        1457,
+        980
+      ],
+      "sourcePivot": [
+        1345.0,
+        980
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1345.0,
+          "bounds": [
+            1243,
+            890,
+            1447,
+            980
+          ],
+          "pixels": 14437
+        }
+      ],
+      "workingOrigin": [
+        -303.25155925155923,
+        64.51559251559252
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        214,
+        75,
+        303,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/left.png",
+      "registeredSha256": "615fa1c8da134b917149b2b1d53f4ac1fb8369d6b0d614832c823225dd82911d"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-diagonals-v1.png",
+      "sourceBoundsAlpha20": [
+        1168,
+        25,
+        1471,
+        994
+      ],
+      "sourcePivot": [
+        1335.25,
+        994
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1263.0,
+          "bounds": [
+            1180,
+            904,
+            1346,
+            963
+          ],
+          "pixels": 7572
+        },
+        {
+          "x": 1407.5,
+          "bounds": [
+            1344,
+            904,
+            1471,
+            994
+          ],
+          "pixels": 8265
+        }
+      ],
+      "workingOrigin": [
+        -299.1975051975053,
+        58.69438669438665
+      ],
+      "sourceResolutionScale": 0.4158004158004158,
+      "workingBoundsAlpha20": [
+        187,
+        70,
+        313,
+        472
+      ],
+      "registered": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/registered/front-left.png",
+      "registeredSha256": "46a7ebf2ea4c4e19a88c7c25a5153538a8a4ea8676c1d8de443cadf8dfd11991"
+    }
+  }
+}

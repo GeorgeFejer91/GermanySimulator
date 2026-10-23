@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a168f4-448e-7303-bdaf-57e01bcf8788\\exec-a3531da7-895f-47fa-8ecd-052fc2087f09.png",
+  "file": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-diagonals-v1.png",
+  "sha256": "d7d840e1e572a88bdf1289ad290f5babcffcb20b9ac6128f13c44be9fcdef833",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "requestFile": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/quarter-generation-request.json",
+  "status": "source candidate: first front-right head facing suspect; remaining three actual obliques retained for evaluation"
+}

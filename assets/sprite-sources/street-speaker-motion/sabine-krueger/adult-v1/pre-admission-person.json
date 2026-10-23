@@ -1,0 +1,28 @@
+{
+  "id": "quiz-sabine-krueger",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "quiz-sabine-krueger",
+    "sabine-krueger"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/quiz-sabine-krueger-standing.webp",
+    "sha256": "1718c7afba11cbc5eebd580c3ab8e881ca137133194c2e0d772a76b9a880a352",
+    "width": 128,
+    "height": 160
+  },
+  "mouthPaint": {
+    "file": "./assets/characters/street/quiz-sabine-krueger/mouths-standing-v1.json",
+    "sha256": "771e31351011fadd89d2a78c5a8f7aa6ee141cbc47156ebf3a39b032e87b483c"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "originalSourcePath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a168f4-448e-7303-bdaf-57e01bcf8788\\exec-5ed7605e-413d-4614-8b7a-1e36fc705934.png",
+  "file": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-front-right-v1.png",
+  "sha256": "c5f87b8053a764893d0d6f47ebf6412fc5e601128332f64a8a062d640c36bb6d",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "alpha20LargestComponent": [
+    [
+      483,
+      18,
+      826,
+      1229
+    ],
+    267903
+  ],
+  "requestFile": "assets/sprite-sources/street-speaker-motion/sabine-krueger/adult-v1/front-right-generation-request.json",
+  "status": "source candidate: correct front-right whole-body rotation, book in far anatomical LEFT hand, complete planted feet; registered/native/game review pending"
+}
