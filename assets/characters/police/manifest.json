@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "method": "existing intact-painted-limbs; genuine authored neutral/half/raised and ticket gesture keys",
+  "version": 2,
+  "method": "source-registered intact painted limbs; four actual directions, owned equipment and authored actions",
   "columns": 8,
   "rows": 7,
   "desktopCell": [
@@ -15,8 +15,10 @@
     0.5,
     0.7682291666666667
   ],
-  "figureHeightWorld": 1.56,
-  "cycleDistance": 17.744075829383885,
+  "figureHeightWorld": 2.33,
+  "sourceFigureHeight": 400,
+  "sourceFrameHeight": 614.4,
+  "cycleDistance": 65.24,
   "clips": {
     "down": 0,
     "right": 1,
@@ -26,83 +28,221 @@
     "warning": 5,
     "ticket": 6
   },
-  "mirroring": "left derives from whole right view; equipment hand changes with screen direction",
-  "sources": {
-    "actions.png": "56ccaa0dc2c59a82901e928904e5cd832e5f81bebacd1f671b7b64df7e449975",
-    "female-directions.png": "f52fa18f710d82b7a4a552226ad8e74688d8355feecf2ad6074a00896ae33e94",
-    "interaction-keys.png": "aabdfcfacb71fab31f6d8dc3d94f2a57b895878e73c1b577efcb624487e3e6ea",
-    "male-directions.png": "d489ee2b3ddd41e38611de643f1c89fbc7b730ac53570779acde4de5bfcb3a8e"
+  "mirroring": "none; each direction has its own source registration",
+  "builderSha256": "b5f6fa99f9a0e92b327378d76afed09ba1d486f94c62879eca7b5291eaa3fd0f",
+  "configurationSha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52",
+  "sourceBindings": {
+    "patrol-male": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-contacts-v1.png",
+          "sha256": "6d70f258507eb757d1ff151975bfa012187b829a2a0aae61891dae802235ca79"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+          "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+        }
+      ],
+      "fittingSha256": "c6612ec81846ede32bff57a92a38389485bdc65437c462ceba174d041a291074",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "patrol-female": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-contacts-v1.png",
+          "sha256": "f73516b0ba938b0fd732fd4977d05c4f3240131dbc9673f70e3bd5985b29e77a"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+          "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+        }
+      ],
+      "fittingSha256": "838a33ec8621d4ee3f38d60bcf034259fb121a5c8065cc173e4f31395d597929",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "protective-male": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-contacts-v1.png",
+          "sha256": "689759ebe6a73638a0cf20fb42b145ebd385de8c871089f63f079b05802709c7"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v4.png",
+          "sha256": "dc650e02b18ca381b88f48cb3ab822e1baebc2860b7072b672342d4781c2dbd9"
+        }
+      ],
+      "fittingSha256": "d1ced4db0be92bffcbcf14dc3819314a42db2672ac098bdd3948e866c815bd37",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "protective-female": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-contacts-v1.png",
+          "sha256": "289ce9d1c0065a6afe917e77a19fd3bfba2aaba0bbac12fe296170df9e67dfd4"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-v3.png",
+          "sha256": "ce2a28eb2e735ae1784ac7b468721233c705c072ceb33a92c119fbe04bc87263"
+        }
+      ],
+      "fittingSha256": "a868b361c4086260e52a6e06b755065d57a71b24f86b90c709cb754781cdaf82",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "riot-male": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-contacts-v1.png",
+          "sha256": "03022d9f285becacda87c5254cd71e97824ee12df050e649b8514b89f8500aa4"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+          "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5"
+        }
+      ],
+      "fittingSha256": "9f0262aa961b2b3fa688753d64389a3dc21edc046deba39f4d7bf341aa857fa7",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "riot-female": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-clear-leg-right-v1.png",
+          "sha256": "2c2542447f003efc0e21fbce1c8d4c9f126d77c3a3878f1d9f7c9b2b3737d300"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-contacts-v1.png",
+          "sha256": "9f8c72d41f3c5d363453df9ebac271d612fc055e34f4791ec8f1190b149942f8"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+          "sha256": "15209578113a755d326821414c6913d2c3f82a0ef334cf84dee7f75dc99c241f"
+        }
+      ],
+      "fittingSha256": "1c69308b39f5cd7c2e7402b2c0b262b413c34f97f3d25e9b96e75e40002c7ad4",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "heavy-male": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-contacts-v1.png",
+          "sha256": "db2c294dfae24819f932bf543dc3a457947caa8973ce2906b604e1d60e651a1e"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+          "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-open-left-contacts-v2.png",
+          "sha256": "dd00f5c87edc18c9d97a76f092a7f008d3b17c870b2915ea4cbb6c3b55d0944e"
+        }
+      ],
+      "fittingSha256": "2f0e6f7448a7cae85ed106e9dca20e9c945974c706eacd971da3af267932a8b7",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    },
+    "heavy-female": {
+      "sources": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-contacts-v1.png",
+          "sha256": "09661fe7573346105392e055aa3c0edde40b16f8da89b05b5d8448f8ea7118fd"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png",
+          "sha256": "da62b0ab52c925ab038a94c75545b540032d6e721fca22cdcbb85182e5d0fcd7"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-open-left-contacts-v2.png",
+          "sha256": "dd00f5c87edc18c9d97a76f092a7f008d3b17c870b2915ea4cbb6c3b55d0944e"
+        }
+      ],
+      "fittingSha256": "008bbcd2042fb5eaca19111383f89134fe27757153e62d1868e4573cf9ff6c59",
+      "builderSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+      "deformationSha256": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+      "familyBuilder": {
+        "path": "tools/build-street-speaker-family.py",
+        "sha256": "fd08a5628abaaad55731926fe9d076c9b8e1e5914363f7cb6a1192e49fced2cf"
+      },
+      "familyConfiguration": {
+        "path": "assets/sprite-sources/police/adult-motion.json",
+        "sha256": "bd2782c3ec684ae78c3e5ce6d92f65c147269e9b4cd5bc524ebc31e5680abf52"
+      }
+    }
   },
-  "builderSha256": "6f65dbbeab74f54315409ad088a143261b7051889213330c738d8cd40c571773",
-  "animationHelperSha256": "688cf0c0c99217683d9762d72bf9e1f36e33164a6a7737abed3549aa86f14e02",
   "variants": {
     "patrol-male": {
       "desktop": {
         "file": "patrol-male.webp",
-        "sha256": "617dae6119a9b1d1c105b3856e82b6e226cafb619c64e8083cfa888d156fe805",
-        "bytes": 382122,
+        "sha256": "2c9f29c827fe8db704161c4b97695bf5b0aba7533400862e47231f911dc9dfb9",
+        "bytes": 302892,
         "width": 1280,
         "height": 1344,
         "decodedRGBA": 6881280
       },
       "mobile": {
         "file": "patrol-male-mobile.webp",
-        "sha256": "139beb4141fcb06f45e715ffc8333cdba5db7bba0398297d90be2b7e7c66e097",
-        "bytes": 254650,
-        "width": 960,
-        "height": 1008,
-        "decodedRGBA": 3870720
-      }
-    },
-    "protective-male": {
-      "desktop": {
-        "file": "protective-male.webp",
-        "sha256": "1a9eaf9b77a4bcb38419de24083b80f52c32d87b24124004e798818863a513cd",
-        "bytes": 381530,
-        "width": 1280,
-        "height": 1344,
-        "decodedRGBA": 6881280
-      },
-      "mobile": {
-        "file": "protective-male-mobile.webp",
-        "sha256": "1327681f800b1db023da8c5a691e913516bf863c5f3fd370b177014bcf1d43df",
-        "bytes": 252964,
-        "width": 960,
-        "height": 1008,
-        "decodedRGBA": 3870720
-      }
-    },
-    "riot-male": {
-      "desktop": {
-        "file": "riot-male.webp",
-        "sha256": "a516f7edce8f6d4fc3955a76a044e6304a24e4ba5337c29b5503459363fec74b",
-        "bytes": 389580,
-        "width": 1280,
-        "height": 1344,
-        "decodedRGBA": 6881280
-      },
-      "mobile": {
-        "file": "riot-male-mobile.webp",
-        "sha256": "d7bce4872af469672d2dd3708d65e9cabb7a7f0b6dda953e8e2c650052ced38d",
-        "bytes": 252292,
-        "width": 960,
-        "height": 1008,
-        "decodedRGBA": 3870720
-      }
-    },
-    "heavy-male": {
-      "desktop": {
-        "file": "heavy-male.webp",
-        "sha256": "a29688dc70a13099ac5b75f015a88f20409ae0a78f1598aa65444351ea8f1ee3",
-        "bytes": 404576,
-        "width": 1280,
-        "height": 1344,
-        "decodedRGBA": 6881280
-      },
-      "mobile": {
-        "file": "heavy-male-mobile.webp",
-        "sha256": "6a0abcea403ddcfeb82854631bcd6ae0385fd588a9b4e760c2cac9180644bb8f",
-        "bytes": 267454,
+        "sha256": "961c418a7558a6fbb8e5c0c3a7fa750c33af53eaadd9dd398862b3d82e22633d",
+        "bytes": 201510,
         "width": 960,
         "height": 1008,
         "decodedRGBA": 3870720
@@ -111,16 +251,34 @@
     "patrol-female": {
       "desktop": {
         "file": "patrol-female.webp",
-        "sha256": "fcb7fc9207a4a9f719270555e7d02ef002e537363785886d720adc6f0b64aceb",
-        "bytes": 398222,
+        "sha256": "af49356b25e7ced181b9c7b67230925be10dc8aea37d6a48a705131a3005b503",
+        "bytes": 294840,
         "width": 1280,
         "height": 1344,
         "decodedRGBA": 6881280
       },
       "mobile": {
         "file": "patrol-female-mobile.webp",
-        "sha256": "94c820730fe37f060e16143156de106f2d771d15e60144a3cb67fdd4d6a319d4",
-        "bytes": 263906,
+        "sha256": "4e8a0cf1da4c0e2f0466d3b778a8f6adcb13cd7f93ff6904b341a5fdad9c9681",
+        "bytes": 198132,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "protective-male": {
+      "desktop": {
+        "file": "protective-male.webp",
+        "sha256": "ccead8ead192c2786b25c8de34404d3a414cead8776797ccc0b3197b0da51f26",
+        "bytes": 313286,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "protective-male-mobile.webp",
+        "sha256": "e61ff660cf49bb437f79d0e0c88091772919ef1d0d086b301e607bf88a46b88f",
+        "bytes": 206734,
         "width": 960,
         "height": 1008,
         "decodedRGBA": 3870720
@@ -129,16 +287,34 @@
     "protective-female": {
       "desktop": {
         "file": "protective-female.webp",
-        "sha256": "3afdae0e81da6125257e23ab1fddceee4dd7170229c7c6413a95761420878fe2",
-        "bytes": 410704,
+        "sha256": "84c6177f9ca757fea35821d2cf22409201b62d43466e829d324057dc7baee859",
+        "bytes": 312044,
         "width": 1280,
         "height": 1344,
         "decodedRGBA": 6881280
       },
       "mobile": {
         "file": "protective-female-mobile.webp",
-        "sha256": "9da2fb7d04ad46e32c3c2965f93b2a26748d067a9a6083ff40a0957e56027184",
-        "bytes": 277654,
+        "sha256": "9420a0131e83a84fdaaa5ee71bd28685a88e9f46a385ce8daed35b1c1d17c415",
+        "bytes": 207716,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "riot-male": {
+      "desktop": {
+        "file": "riot-male.webp",
+        "sha256": "b4b247d18b64bfa75cb46c05aa867e0cc8189c699dbf87f245b3a5b341bddfb2",
+        "bytes": 298638,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "riot-male-mobile.webp",
+        "sha256": "e89dbb0126efc4c4cc48a617d418e6a6658d2bfe6d28353a43c2ae24850aaa89",
+        "bytes": 195180,
         "width": 960,
         "height": 1008,
         "decodedRGBA": 3870720
@@ -147,16 +323,34 @@
     "riot-female": {
       "desktop": {
         "file": "riot-female.webp",
-        "sha256": "dc37414d286c65ee4d4d53efa96009cc2405e583802806cd7e9f3f7d0559a118",
-        "bytes": 416544,
+        "sha256": "9ee91bdc8205bc269ea93e829ff04a0778b1f26cd3ac5707c8c3cc2f1851b56c",
+        "bytes": 308912,
         "width": 1280,
         "height": 1344,
         "decodedRGBA": 6881280
       },
       "mobile": {
         "file": "riot-female-mobile.webp",
-        "sha256": "4e0945dec0eb3e91f5ce753a554845ccabf49d2afd67820c61e1131237a1a367",
-        "bytes": 270222,
+        "sha256": "efd83c58c5e5dda215aab362ea3848650a2eb2c9540a8e7690b3802ff707ae8a",
+        "bytes": 203452,
+        "width": 960,
+        "height": 1008,
+        "decodedRGBA": 3870720
+      }
+    },
+    "heavy-male": {
+      "desktop": {
+        "file": "heavy-male.webp",
+        "sha256": "eb099cbcd0f97daa2cc6575c09cb8b61db3ef5197be9059327a569fccc4cbe73",
+        "bytes": 325676,
+        "width": 1280,
+        "height": 1344,
+        "decodedRGBA": 6881280
+      },
+      "mobile": {
+        "file": "heavy-male-mobile.webp",
+        "sha256": "2d923945d6381c27d7a1aaf291e0ccde2df4fbb4983dbd23efe112082f942ed1",
+        "bytes": 206774,
         "width": 960,
         "height": 1008,
         "decodedRGBA": 3870720
@@ -165,20 +359,21 @@
     "heavy-female": {
       "desktop": {
         "file": "heavy-female.webp",
-        "sha256": "40e7eb8e3f5fd07392d1818f18db307b26fadecd59f3b8fb64191e8a9962a4fc",
-        "bytes": 433750,
+        "sha256": "7961682d5e5750276fe947b114c5e27acc536e5c6451449b9565517c7106e528",
+        "bytes": 330348,
         "width": 1280,
         "height": 1344,
         "decodedRGBA": 6881280
       },
       "mobile": {
         "file": "heavy-female-mobile.webp",
-        "sha256": "ccbf2669d7f2973455a0aee1c15c669741cccc4d06fbac6ec7855f44cd280426",
-        "bytes": 284046,
+        "sha256": "40061867d76ef160e612c77daff4c00d21a22850a090ade51e2d76bd6f5f6011",
+        "bytes": 209414,
         "width": 960,
         "height": 1008,
         "decodedRGBA": 3870720
       }
     }
-  }
+  },
+  "status": "Wider own-source cadence successor; exact native and affected game review required."
 }

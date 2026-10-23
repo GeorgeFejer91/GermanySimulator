@@ -1,0 +1,19 @@
+{
+  "request": {
+    "prompt": "Create ONE isolated complete adult officer in true RIGHT-facing side profile, using these two references as binding authority for the SAME officer, mature face, navy/blue-grey patterned protective uniform, raised clear visor, curly brown hair, elbow/knee/shin armour, belt kit and substantial whole lace-up boots. Keep the worn painterly Berlin / Disco Elysium-inspired angular fabric and adult head-to-body and limb proportions. The first reference is identity/costume authority; the second reference's SECOND figure is the right-profile walking-contact and leg anatomy authority. Paint the complete connected torso, BOTH continuous hip-to-knee trouser legs, BOTH knees, shins and whole boots in a natural clear walking contact: near leg forward, far leg back, both soles on one baseline. This is specifically an occlusion repair: move the anatomical RIGHT forearm and its gripping hand slightly forward so her ONE black baton points diagonally DOWN AND FORWARD entirely in transparent air ahead of the trouser legs and toes. The baton must NOT cross, cover, cut through or obscure either thigh, knee or shin. Keep the baton held naturally in that one right hand; no floating prop, duplicated baton or extra hand. Leave both complete painted leg connections visible so they can be animated without inventing paint hidden behind the baton. The other arm stays relaxed and anatomically attached. Preserve the same serious weathered face without beautifying, enlarging the head or shortening limbs. Entire cap/visor, shoulders, both hands, baton tip and both whole boots fit with generous transparent margins; one figure only, no ground shadow, background, text, border or cropped limbs.",
+    "referenced_image_paths": [
+      "C:/Users/cogpsy-vrlab/.codex/worktrees/street-police-complete/GermanySimulator/assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+      "C:/Users/cogpsy-vrlab/.codex/worktrees/street-police-complete/GermanySimulator/assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-contacts-v1.png"
+    ],
+    "transparent_background": true
+  },
+  "referenceRoles": [
+    "Primary identity/costume/adult proportions",
+    "Second figure: actual right-profile contact and intact anatomical legs"
+  ],
+  "sourceHashes": [
+    "15209578113a755d326821414c6913d2c3f82a0ef334cf84dee7f75dc99c241f",
+    "9f8c72d41f3c5d363453df9ebac271d612fc055e34f4791ec8f1190b149942f8"
+  ],
+  "reason": "Wide source field reveals genuinely occluded thigh beneath fixed baton; overlap-only trial failed and is held."
+}

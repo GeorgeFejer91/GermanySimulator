@@ -1,9 +1,12 @@
 # Police painted family
 
-The user's October 2026 request explicitly changes the former articulated-3D
-police exception. These sprites retain the compact painted city family. The
-procedural 3D officer remains the missing/late/failed-art fallback; simulation,
-collision bodies and arrest ownership belong to the existing city controller.
+The selected candidate replaces the former compact officers with mature,
+weathered adult paintings under the shared
+[city character direction](../../For-AI/CITY-CHARACTER-STYLE.md). Both genders
+retain patrol, protective, riot and heavy equipment, existing pursuit and
+planted warning/ticket actions. The connected procedural officer remains the
+late, missing or failed-art fallback. Simulation, collision and arrest ownership
+stay in the existing city controller.
 
 ## Reference research and original paint
 
@@ -29,100 +32,94 @@ helmet, padding and lowered baton; five adds lowered visor, more protection and
 a shield. Both male and female officers use every tier. No firing mechanic or
 new weapon model is introduced.
 
-All paintings are original built-in ImageGen outputs under
-`assets/sprite-sources/police/`. The existing neighbor directions sheet supplied
-the compact body/head/painting reference. Official photos informed the brief;
-their pixels are not copied into the game. The generated directional masters
-provide front, right and actual rear views for each tier/gender. Left is the
-declared horizontal mirror of right; the carried prop's anatomical hand therefore
-changes in that view. These are fictional officers, not likenesses of the people
-in the reference photographs.
-
-Prompts requested a transparent four-tier, three-view sheet for each gender,
-with a fixed sole line, large expressive head, short substantial limbs, complete
-boots and separate navy patrol/protective/riot/heavy equipment. The action brief
-requested neutral, half-raised warning, fully raised warning and offered-ticket
-keys for all eight variants. A targeted second action-generation call repaired
-overlapping rows/boots. The final `interaction-keys.png` supplied genuine entry
-and return keys with closed mouths; the earlier `actions.png` is authoring
-provenance and is never requested by runtime. Source SHA-256 values are in the
-generated manifest.
+The adult source masters and action paintings are immutable built-in ImageGen
+outputs in `assets/sprite-sources/berlin-street-20261022/`. Their exact prompts,
+reference roles, raw hashes and source-review receipts are in that folder's
+`provenance.json`. `assets/sprite-sources/police/adult-motion.json` selects each
+officer's own front, rear, left and right source registrations and four action
+keys. No selected adult direction is mirrored. Anatomical equipment ownership
+is preserved, including the heavy shield and lowered baton. Earlier compact
+source sheets remain historical authoring material and are not runtime requests.
 
 ## Build and runtime contract
 
-Run `python tools/build-police-sprites.py` from the repository root. The builder
-reuses the project's `painted_walk.py` intact-limb deformation and its connected
-component/fold checks. It measures source-only row registrations once, strips
-detached adjacent-row contamination and preserves one shared figure transform
-through each cycle. Eight genuinely distinct continuous-rig walk samples are
-baked for each of four directions. Warning and ticket clips have three authored
-poses each, with deliberately repeated hold samples; an eight-cell row does not
-mean eight distinct action drawings. Idle rows contain four neutral directions.
+Run the existing builder's adult mode:
 
-All atlases use an eight-column/seven-row layout, shared sole pivot and transparent
-cell gutters. Desktop cells are 160×192 (1280×1344, 6,881,280 base RGBA bytes);
-mobile cells are 120×144 (960×1008, 3,870,720 base RGBA bytes). Lossless WebP keeps
-actual alpha. The builder clears hidden RGB and reopens encoded bytes to test
-every cell's two-pixel gutter. Image copies and GPU copies are additional.
+```text
+python -B tools/build-police-sprites.py --adult --spec assets/sprite-sources/police/adult-motion.json --output assets/characters/police
+python -B tools/build-police-sprites.py --adult --spec assets/sprite-sources/police/adult-motion.json --output assets/characters/police --check
+```
 
-`createPoliceSprites(T,{queueAsset,camera,mobile})` exposes `attach(actor,host,
-{tier,variant})`, `update(actor,{distance,dt,talking,gesture,tier,facing,camera,
-reducedMotion})`, `detach(actor)`, `inspect()` and `dispose()`. Distance is accepted
-game displacement since the prior update. No extra RAF, timer or animation loop
-is created. The existing simulation/renderer drives it.
+It reuses the current source-bound street-family movement implementation and
+native packing. All eight variants retain four eight-frame walks, four idle
+directions, a warning row and a ticket row on the existing eight-column/seven-row
+layout. Action holds deliberately repeat their four painted source keys; eight
+cells do not mean eight independent action drawings. Closed face paint remains
+intact; this module owns no new voice or mouth system.
 
-One texture is shared per tier/gender and selected client resolution. Only an
-attached officer requests its selected variant, through the existing distance/
-visibility queue. There is no eager family fetch or authoring-sheet fetch. The
-last consumer aborts pending work and disposes its texture. Actor geometry and
-material are private; UV selection cannot change another officer's frame. A tier
-change keeps decoded old paint until the replacement arrives; failure retains
-old paint or the 3D fallback. Central disposal aborts pending tiers as well.
+The common working figure is400 pixels with sole472 in a614.4-pixel frame.
+Desktop cells remain160×192 (1280×1344,6,881,280 base RGBA bytes); mobile cells
+remain120×144 (960×1008,3,870,720 base RGBA bytes). Native desktop figure height
+is125 pixels, pivot[80,147.5]. Lossless WebP clears hidden RGB and retains at
+least two transparent gutter pixels. All896 decoded cells pass connected
+substantial-paint and hidden-RGB checks; all32 directional strips have eight
+distinct cells. Exact digests, dimensions and source/builder/configuration
+bindings are in `assets/characters/police/manifest.json`.
 
-The billboard cancels the host heading and uses the camera's complete orientation;
-its pivot offset rotates with the quad. Collision height/route logic is unchanged.
-The side gait's planted stride has 96 working pixels per cycle. At 1.56 world
-units per 422 working pixels and 0.02 world units per game unit, the initial
-cycle distance is 17.744075829383885 game units. This is a source-rig calibration;
-actual oblique browser foot slip still needs the integrated rendered review.
+World figure height is2.33, calibrated against the published adult Irmgard and
+the actual Sandales; Söder remains taller. The distance clock is65.24 game units
+per cycle, equivalent to224 working pixels at400pixels/2.33world units and
+0.02world units/game unit. This is source calibration; actual game sole/cadence
+review is a separate gate. The upright billboard cancels host rotation and
+uses camera yaw, keeping nominal sole at the host ground and crown2.33 above it.
+The articulated fallback uses the same crown/sole span without scaling the host
+or the subsequently admitted painting.
 
-The exact desktop patrol-male right-view sole proxy at frames 3/4/5 is
-`(x midpoint,y) = (73.5,146),(70,146),(66,146)`. The fitted 30 exported
-pixels/cycle agrees with the source-rig distance; the maximum residual about a
-shared contact is 0.25 pixels, approximately 1% of this sole's width. This is a
-single-side encoded-pixel check, not full-cast or oblique-camera calibration.
+The existing shared distance/visibility queue admits only the attached officer's
+selected tier, gender and client resolution. One texture is shared by its live
+consumers; the last release aborts/disposes it. Tier changes keep decoded old
+paint until replacement arrives. Failed replacement keeps old paint or the
+procedural fallback. No eager family/source downloads, new RAF, timer, loader or
+cache are introduced. `game.js`, pursuit, collision radii and vehicle routes are
+unchanged.
+
+The complete alternative desktop library is2,486,636 encoded bytes; mobile is
+1,628,912 bytes. A selected desktop variant costs294,840–330,348 bytes and a
+mobile variant195,180–209,414 bytes. These are alternatives, not simultaneous
+whole-library downloads. Decoded image/GPU copies add to the base RGBA costs.
 
 ## Evidence and acceptance boundary
 
-The builder writes SHA-bound transfer/decode costs to
-`assets/characters/police/manifest.json`. Local review artifacts are under ignored
-`output/police-art/`: per-variant all-encoded light composites, ordered GIFs,
-joint records and the combined dark contact sheet. These are the actual decoded
-shipping WebP pixels, rather than source-only previews.
+The current integrated candidate starts at the live Hannelore release
+`b5744458`; all43 published street entries, including Irmgard and Hannelore,
+remain byte-exact. All68 frozen source/runtime/test pins are recorded at
+`output/police-release/frozen-candidate.json`. Native896-cell review, all8
+source/export bindings,6 adult-builder Python checks,2,435 isolated regression
+checks and92 checks on the integrated public successor pass.
 
-`node --test tests/police-sprites.test.mjs` checks tier selection, collision-travel
-clock, view selection, action ownership, shared admission, pending cancellation,
-all asset digests and byte/dimension bounds. These checks do not certify anatomy
-or screen performance. The integrator owns the running-game desktop/Android
-emulation checks and the required independent Physics and Camera/Scale reviews.
-Physical Android, perceived voice quality and fully phoneme-aligned speaking
-mouths are not established by this art candidate. Original closed face paint is
-preserved during action keys. There is no audio or voice ownership in this module.
+An independent actual pursuit review held the original18.64-unit shuffle after
+observing6.875 full cycles/second. The successor uses own step56 paint and the
+matching65.24-unit distance clock; a guard ties each view's source sole travel
+to the clock, so slowing the clock alone cannot pass. One riot-female profile
+needed a new immutable clear-leg painting because its original baton obscured
+thigh paint. Its exact request/reference hashes are archived with the raw source;
+no invented leg pixels or hidden procedural joint bridge are selected.
 
-Final offline review inspected all eight complete desktop light composites and
-all eight mobile dark composites (all 56 cells each), including real rear views,
-opposite contacts, both side walks,
-gesture entry/return and heavy shield clearance. Repairs removed an adjacent
-row's cap contaminant, corrected uneven action-row extraction so entire boots
-survive, normalized each actor's whole action row once, expanded the common
-canvas for shield gutters, and protected the shield's complete source outline
-from trouser deformation. All desktop/mobile cells pass the encoded two-pixel
-gutter and connected substantial-paint checks. Ordered GIFs are supplied for
-integrated playback review; static-board inspection alone does not approve
-normal-speed rendered motion, turning or stop/start contact.
+Fresh independent production pursuit checks reach all8 phases for both genders
+at wanted2/5 speeds129/165:1.99–2.56 cycles/second. Explicit pause holds root and
+distance exactly. An attempted four-officer ring did not create a stationary
+blocked witness; its fixture RED is retained, and no new blocked-browser claim
+is made. The unchanged zero-displacement clock has focused regression coverage.
+Historical three-profile late/failed/tier/lifetime probes and same-ground adult
+reference/depth checks retain their original scope. Fresh independent moving-edge Camera review passes desktop/portrait/landscape:
+all8phases/all8families,192actor-phase observations,0page/HTTP failures and
+all68pins stable. Clear visible boots/knees/equipment remain connected; a
+fixture bag hides some male boot pixels, which were excluded from clear-edge
+evidence. Root inspected the actual native GPU board and accepts the affected
+visual/cadence scopes. Actual push/Pages/deployed-byte receipts remain separate
+from this local acceptance and are recorded in the street redesign task document.
 
-The final atlas set totals 3,217,028 desktop bytes or 2,123,188 mobile bytes.
-These are alternative complete-library totals. A single selected tier/gender
-costs approximately 0.38–0.42 MB desktop or 0.25–0.28 MB mobile; final exact
-per-file costs and digests are in the manifest. Runtime adds no fetch before
-an attached police actor passes the shared queue's admission checks.
+Silent tests can establish state/timing, not perceived sound. Android browser
+profiles are emulation; physical Android and perceptual listening remain
+uncovered. No whole-world collision, natural mission-chain, vehicle-driving,
+door-clearance or building-material acceptance is inferred from this art change.

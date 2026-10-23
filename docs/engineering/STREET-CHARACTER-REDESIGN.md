@@ -68,7 +68,7 @@ building systems were not changed; the scoped acceptance does not certify those
 broader systems or any unfinished character. Deployment receipts retain the
 actual published revision and live root/compatibility checks.
 
-## Accepted second character: Hannelore Sparkasse
+## Second live character: Hannelore Sparkasse
 
 Only `stadt-hannelore-sparkasse` changes from public `7e6b069`; the other42
 registry entries, including live Irmgard, retain their exact published values.
@@ -144,5 +144,39 @@ and old local source studies are not implicitly approved by this first release.
 Acceptance on23October: corrected body desktop7ad747cc/mobileaf7114db,
 mouth5465325d and delivery72ecc344 are frozen. Camera review is
 `output/hannelore-release/review-camera/REVIEW.md`; Physics successor is
-`output/hannelore-release/review-physics/successor/report.md`. Deployment
-verification must use the actual committed revision before claiming live.
+`output/hannelore-release/review-physics/successor/report.md`. Published at `b5744458817a39ddbd2a6c731eb3041daddfccf0`; Pages run
+`39955027314` succeeded. All14 actual deployed files match the commit. Fresh
+public root, query/hash-preserving compatibility entry and actual Hannelore
+standing/movement admission pass with zero page/HTTP failures. Root viewed her
+full adult walking figure on the public pavement. The first smoke hit one503
+on an existing currywurst image; its evidence is retained, and a complete repeat
+passed. This is staged public approach, not natural E traversal. The remaining
+cast stays unfinished under the same goal.
+
+## Integrated mature police family — wider cadence successor
+
+The next candidate is integrated atop live Hannelore b5744458; all43 street
+records, game simulation and the street renderer remain exact. Both genders
+retain all4 equipment tiers,4 authored eight-frame directions, planted idle,
+warning and ticket actions, and equipment ownership. Mature own paint and the
+connected fallback occupy2.33world units with fixed ground; no pursuit speed,
+collision, vehicle or arrest logic changes. The native896-cell audit passes;
+desktop/mobile libraries total2,486,636/1,628,912encoded bytes, each selected
+texture stays below16MiB decoded. Existing bounded admission/lifetime is reused.
+
+Original narrow gait is held in historical evidence after6.875Hz actual pursuit.
+New own step56/cycle65.24 matches224working pixels of full-cycle sole travel.
+A fresh riot-female clear-leg profile resolves an occluded thigh at wide stride;
+its original raw PNG, exact prompt and references remain immutable.6Python,
+2,435isolated Node and92integrated Node checks pass. Frozen68pins preserve both
+live characters. Independent fresh Physics129/165speed×male/female reachesall8
+frames at1.99–2.56cycles/s and holds root/distance on pause. The attempted blocker
+ring produced no stopped witness, so its fixture RED is preserved without a
+new blocked-browser claim. Camera moving-edge delta PASS: all8families/all8phases across desktop,
+portrait and landscape,192actor-phase observations,0page/HTTP failures and
+all68pins unchanged. Clear moving body/equipment edges were independently
+inspected; some male boot pixels hidden by a fixture bag were excluded. Root
+viewed the actual native GPU board and accepts these affected visual/cadence
+scopes for sequential publication. Broad new wall/door/car matrices, natural
+offense traversal, physical device and listening remain unclaimed.
+Owning source/build/cost/evidence details are in [POLICE-ART.md](./POLICE-ART.md).

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-22",
   "tool": "built-in image_gen.imagegen",
-  "status": "Published Irmgard plus complete Hannelore source closure; root integration acceptance pending.",
+  "status": "Published Irmgard and Hannelore source closure plus complete police wider-cadence integration candidate; raw sources are immutable authoring evidence.",
   "records": [
     {
       "id": "crowd-irmgard-aktenordner-expressionist-turns-v5",
@@ -1133,6 +1133,1867 @@
           "sha256": "0dac70e9530a91e3c16cbef087a64148fb7899ef0270f7c807430de4b99e65e5"
         }
       ]
+    },
+    {
+      "id": "police-patrol-male-expressionist-contacts-v1",
+      "file": "police-patrol-male-expressionist-contacts-v1.png",
+      "prompt": "Four-direction WALK CONTACT source sheet of the EXACT mature male Berlin patrol officer in the reference. Preserve the same lined angular clean-shaven face, small tired adult eyes, short brown side-part hair, navy cap with pale star, navy short-sleeve shirt/pale blue collar, black belt radio/pouches, navy cargo trousers and broad worn black boots. One cream notebook remains in anatomical LEFT hand (front screenRIGHT / rear screenLEFT); RIGHT hand empty. Same adult head size, torso, forearm, thigh, shin lengths, bulk and strong Disco Elysium-Berlin angular oil/gouache painting, cold gray-green skin shadows and broad scuffed indigo paint. No toy-like shortening, glossy 3D surfaces, baby eyes or delicate fashion legs. FOUR complete whole figures in ONE horizontal row with shared crown and sole lines: FRONT walking contact, strict RIGHT-facing PROFILE walking contact, genuine BACK walking contact with no face, strict LEFT-facing PROFILE walking contact. Quiet upright upper body and closed neutral lips. Walking source stance: near leg modestly forward, far leg trailing, both entire boots on the same ground line; separate connected thighs beneath the pelvis, visible transparent gap from crotch down between knees and the two boots. Especially in profiles, do NOT overlap/cross the legs or hide one boot; expose both complete heels/toes/soles with a natural modest split stride. Keep source legs within adult limb lengths, no stretch to manufacture a gap. Whole coherent drawings, not detached leg cutouts or a floating hand/notebook. Anatomical LEFT notebook never changes hands, with correct near/far profile occlusion. All caps/fingers/notebook/soles fully inside canvas. Wide transparent gutters and at least35px outer margins. Real transparent alpha, absolutely no backdrop/gradient/floor/shadow/grid/text/labels or loose paint scraps. This is a source walking contact sheet, not four front-facing repeated figures or a finished animation strip.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-fb16195f-def7-4173-a44b-0a15e00b293d.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png"
+      ],
+      "status": "Whole mature patrol contact source; profiles expose both shoes. Front/rear sole-depth differences and all source proportions require fitting/review; no runtime selection.",
+      "sha256": "6d70f258507eb757d1ff151975bfa012187b829a2a0aae61891dae802235ca79",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2505595,
+      "componentBounds": [
+        [
+          38,
+          28,
+          399,
+          970
+        ],
+        [
+          398,
+          26,
+          830,
+          970
+        ],
+        [
+          794,
+          20,
+          1160,
+          973
+        ],
+        [
+          1147,
+          29,
+          1531,
+          971
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 5,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-patrol-male-expressionist-v7",
+      "file": "police-patrol-male-expressionist-v7.png",
+      "prompt": "Correct the hand ownership on this expressive painted patrol officer turnaround. Keep the same weary angular clean-shaven male face, compact adult silhouette, clothing, rough broad Disco Elysium oil brushwork, desaturated petrol/navy palette and strong painted planes. Preserve the first, second and fourth figures' identities and costume. The THIRD figure is the BACK VIEW: MOVE the single cream ticket notebook from screen-right to SCREEN-LEFT into that back-view figure's LEFT HAND. His back-view screen-right hand must be empty. This is the same anatomical LEFT hand that holds the notebook on SCREEN RIGHT in the FRONT view. FRONT: notebook screen-right; BACK: notebook screen-left. Right-facing profile: notebook is far-side left hand, partially occluded. Left-facing profile: notebook is near-side left hand, visible. Exactly one notebook per figure, never switched or duplicated. All views of one same grown-up Berlin policeman. Four complete full-body cutouts in one horizontal row, front/right-profile/back/left-profile, equal crown and sole lines, no detached parts, no crop. Repaint only as necessary to make connected left-arm grip and occlusion coherent, do not add armor or weapons. Transparent background, no floor, no shadow or loose paint scraps, generous outer margins.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-63924a64-8c7c-4b82-aa15-4257d6a1f32a.png",
+      "status": "Strong expressive source with corrected rear left-hand notebook; population and runtime proportion checks pending.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v5.png"
+      ],
+      "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2509381,
+      "componentBounds": [
+        [
+          25,
+          12,
+          401,
+          1010
+        ],
+        [
+          465,
+          15,
+          718,
+          1013
+        ],
+        [
+          787,
+          11,
+          1173,
+          1013
+        ],
+        [
+          1256,
+          15,
+          1506,
+          1014
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 10,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v5.png",
+            "sha256": "290021a19bba79cc8a87a7a913fd64072fc356972b1042e63340b570fad73fdb"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-patrol-male-expressionist-v5",
+      "file": "police-patrol-male-expressionist-v5.png",
+      "prompt": "Create a revised four-view whole-body turnaround. FIRST image is the PAINTING STYLE authority: keep its strong Disco Elysium expressive oil painting, angular weary adult face, broad rough opaque brushwork, unsentimental mood and muted Berlin colors. SECOND image is ONLY the connected BODY PROPORTION authority, not its smooth rendering. Redraw the FIRST subject's whole anatomy with the compact adult torso/arm/thigh/shin relationships of the SECOND. This must be a newly coherent drawing, not a vertically squashed sheet or a pasted enlarged head. Adult head stays long-faced and angular. Total crown-to-sole height around FOUR crown-to-chin head heights: crown 0%, chin 24%, shoulders 29%, waist 54%, crotch 63%, knee 79%, soles100%. Substantial readable hands and shoes. Do not revert to cute spherical features or polished 3D shading. Face and hair must remain broad expressive brush marks. Preserve character identity, clothing and owned prop. Four independent complete cutouts in one horizontal row: front, strict right-facing profile, back with no face visible, strict left-facing profile. SAME crown and sole line, limbs complete and attached. Generous outer margins and gaps between figures. Genuine transparent background, no floor/shadow, no loose floating paint. Patrol policeman: broad clean-shaven middle-aged male face with heavy brown brows and sidepart, navy cap/silver star, navy short sleeve uniform with pale blue collar, utility belt/radio, cargo trousers and scuffed black boots. Do not make him thin or gaunt. Correct notebook ownership: anatomical LEFT hand in ALL FOUR views, front screen-right and back screen-left. On right-facing profile notebook is far-side and partly occluded; left-facing profile has notebook in near LEFT hand. Empty right hand. Keep strong dry-brush face and large navy paint planes from first image, no camouflage speckling, no armor, no weapon.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-5cbc012e-b3fd-489d-ab18-ad0b51088f9c.png",
+      "references": [
+        "police-patrol-male-expressionist-v4.png",
+        "police-patrol-male-proportions-v2.png"
+      ],
+      "status": "Strong paint study; body still too tall, rear notebook ownership wrong; do not integrate.",
+      "sha256": "290021a19bba79cc8a87a7a913fd64072fc356972b1042e63340b570fad73fdb",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2464780,
+      "componentBounds": [
+        [
+          23,
+          12,
+          400,
+          1010
+        ],
+        [
+          472,
+          16,
+          727,
+          1013
+        ],
+        [
+          788,
+          12,
+          1168,
+          1013
+        ],
+        [
+          1291,
+          16,
+          1532,
+          1013
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 4,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v4.png",
+            "sha256": "d487a7d92f80fe383608a09fe67a3e5461192ab332f28affc54c085b535f2701"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-proportions-v2.png",
+            "sha256": "d4d279e5b74cf27327b20fc1696f3b64b5549457683c37f35fb64c6e237b25ba"
+          }
+        ]
+      }
+    },
+    {
+      "id": "police-patrol-male-proportions-v2",
+      "file": "police-patrol-male-proportions-v2.png",
+      "prompt": "CORRECT THE PROPORTIONS of the FOUR complete patrol-male figures in reference1, preserving their grown-up worn face, brown short side-part hair, clean-shaven heavy brows, navy baseball cap/silver star, short sleeve navy shirt/pale blue collar, duty belt, full navy cargo trousers/scuffed black boots, and notebook in anatomical LEFT hand. Current reference1 body has too-small head and too-long torso/limbs for this game's family. Reference2 Irmgard is the intended grown-up cartoon BODY PROPORTION GUIDE: reproduce her crown-to-sole head/body relationship, about THREE AND A HALF HEAD HEIGHTS total, and substantial hands/feet; use reference3 actual Söder sprite family as second proportion authority. Repaint connected head-neck-shoulders and the entire clothed body together so the head INCLUDING CAP is about 28-30% of whole standing figure height, with visible adult elbows, full forearms, thighs, knees and calves in the remaining 70-72%. Do NOT keep the old 4.7-head/realistic narrow tall body; do NOT paste/enlarge an isolated head or stretch the whole image. Broader stocky adult silhouette, connected proportionate limb widths, complete shoes; believable mature adult cartoon, NOT the old 2-head chibi baby. Same original weathered ADULT facial structure, smaller hooded eyes, age lines, tired asymmetry and rough oil/gouache painterly finish in all views; no cute eyes, glossy toy shading, photorealism or new moustache. Four full-body neutral figures in ONE horizontal row exactly FRONT, true RIGHT profile, true REAR, true LEFT profile, same body/head ratio and crown-to-sole scale in all directions. Both boots planted with readable leg gap. Notebook stays anatomical LEFT hand (front screen-right, rear screen-left), including correct far hand occlusion; no swapping. Preserve uniform/equipment identity, do not add vest/armor/shield/helmet. Clear 50px transparent gutters/margins, full heads/soles/hands/equipment in frame. Genuine transparent alpha, no ground, cast shadow, glow, gradient backdrop, scenery, text labels or grid. This is a coherent full-body anatomy correction toward the supplied game references, not a different police design.",
+      "role": "corrected larger head/connected adult body candidate; compare before propagating to other seven variants",
+      "sha256": "d4d279e5b74cf27327b20fc1696f3b64b5549457683c37f35fb64c6e237b25ba",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1645853,
+      "componentBounds": [
+        [
+          32,
+          110,
+          433,
+          870
+        ],
+        [
+          528,
+          112,
+          838,
+          875
+        ],
+        [
+          895,
+          108,
+          1308,
+          873
+        ],
+        [
+          1387,
+          112,
+          1688,
+          875
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 12
+    },
+    {
+      "id": "police-patrol-male-expressionist-v4",
+      "file": "police-patrol-male-expressionist-v4.png",
+      "prompt": "A Disco Elysium character artist's hand-painted full-body turnaround for a Berlin street game. Strong expressionist oil painting, abrasive dry-brush drawing, flat jagged shapes of opaque paint, angular lived-in face, sunken eyes, bleak wit and real social character. Looks like the actual painterly art direction of Disco Elysium, with crude decisive brushstrokes and color dissonance. Dirty ochre light, green-gray skin shadows, desaturated wine and petrol hues. Adult cartoon anatomy with substantial torso and long connected arms and legs, roughly four head-heights tall, heavy practical shoes. No oversized spherical baby head, no shiny 3D rendering, no airbrushing, no microscopic texture overlay. Keep expressive painted drawing in the face even at small size. Four genuinely separate complete views in one horizontal row: front, right-facing profile, back, left-facing profile, identical actor/outfit, same crown and ground line. Neutral planted stance, two complete boots on each figure. Transparent background, isolated clean connected silhouettes, no floor, no shadow, no floating paint scraps, no labels. Wide transparent gutters between figures. A clean-shaven middle-aged Berlin patrol policeman, exhausted, long broad face with crooked nose, hollow eyes, heavy brown brows, brown sidepart under worn navy baseball cap with a silver star. Dark petrol/navy short sleeve shirt, pale blue collar, full navy cargo trousers, heavy battered black boots, utility belt, pouches and clipped radio. Cream ticket notebook held in anatomical LEFT hand front screen-right/back screen-left. Stern bureaucratic fatigue rather than a heroic tough cop. Empty right hand. No beard or moustache, no armor or weapons. Paint the uniform in large coarse dark blue shapes, no camouflage texture. Mature angular face and restrained expressive caricature.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-d9e37368-f398-4aec-92f3-65199479311d.png",
+      "status": "Stronger expressive paint candidate; proportions too naturalistically tall and police notebook ownership needs correction before production.",
+      "sha256": "d487a7d92f80fe383608a09fe67a3e5461192ab332f28affc54c085b535f2701",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2239842,
+      "componentBounds": [
+        [
+          66,
+          8,
+          391,
+          995
+        ],
+        [
+          491,
+          11,
+          709,
+          996
+        ],
+        [
+          833,
+          8,
+          1171,
+          997
+        ],
+        [
+          1274,
+          11,
+          1490,
+          997
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": []
+      }
+    },
+    {
+      "id": "police-patrol-female-expressionist-v4",
+      "file": "police-patrol-female-expressionist-v4.png",
+      "prompt": "New original mature FEMALE Berlin patrol officer sprite source in the strong expressionist painted visual language of Disco Elysium. Use the supplied male officer only for uniform/equipment and adult limb lengths; use the supplied older red-haired woman only for confident rough angular painting, NEVER copy her identity or costume. A distinct middle-aged woman about48 with dark brown hair in a low bun, solid shoulders, broad cheekbones, long angular nose, heavy tired eyelids over SMALL adult eyes, deep nasolabial lines, taut unsmiling asymmetric closed lips and a slightly crooked jaw. Her face must look lived-in and individually drawn; not a pretty baby face. Rebuild whole connected anatomy as a grown-up woman about five head-heights from cap crown to sole, with adult forearms, hands, long thighs and shins; stout without shortened legs. Thick oil/gouache angular paint masses and abrupt value/color planes, rough broken contours, lost edges in shadow, cold gray-green and petrol facial shadows, dry dirty ochre flecks, blue-black uniform. Strong expressive drawing, not decorative fine noise over smooth rounded storybook surfaces. Avoid doll eyes, rosy baby cheeks, cute gigantic heads, glossy rendering, neat vector outlines and smooth plastic 3D shading. Full readable painted2D game character. EXACTLY FOUR full-body neutral figures in ONE horizontal row: straight front, strict RIGHT-facing profile, true BACK with face absent, strict LEFT-facing profile. Same recognizable woman, cap-to-sole height and head size throughout. Navy baseball cap with pale police star, short-sleeved navy patrol shirt/pale blue collar, black belt radio and pouches, navy cargo trousers, heavy worn black lace-up boots. Notebook held anatomical LEFT: front screenRIGHT, rear screenLEFT; anatomicalRIGHT empty; preserve proper near/far occlusion in profiles. Quiet shoulders, arms relaxed, closed rest mouth, separately readable planted feet and complete soles. Generous transparent gutters and outer margin at least35pixels so no cap/bun/boots/fingers/notebook clipped. Real transparent alpha, no floor, shadow, painted backdrop, labels, grid or text. Four neutral direction anchors, not an animation or action montage.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-250200a8-3cb1-4d79-8e6a-e4b237ef51bc.png",
+      "status": "Stronger whole-anatomy mature female source; final height/limb, contact/action/mouth/export/render checks pending.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+        "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png"
+      ],
+      "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1472268,
+      "componentBounds": [
+        [
+          142,
+          10,
+          467,
+          836
+        ],
+        [
+          603,
+          12,
+          821,
+          838
+        ],
+        [
+          988,
+          8,
+          1317,
+          837
+        ],
+        [
+          1475,
+          11,
+          1701,
+          838
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 7,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/crowd-irmgard-aktenordner-expressionist-v5.png",
+            "sha256": "edd811ccc26636165ee65a9266f5f8b608ec6ad6b780754880a9a42b82324ba7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-female-expressionist-v3",
+      "file": "police-protective-female-expressionist-v3.png",
+      "prompt": "FIRST reference is the exact FEMALE patrol officer face, dark brown low bun, adult anatomy and painted identity authority. SECOND reference supplies protective vest equipment only, never her face. Create his PROTECTIVE-VEST equipment tier, same woman and height, no redesign of identity. Four complete neutral planted full-body figures in ONE horizontal row: FRONT, strict RIGHT profile, true REAR without visible face, strict LEFT profile. Same tired narrow adult eyes, individual middle-aged female lined angular face, dark brown hair in low bun, navy cap with pale star, dark blue shirt/pale blue collar, radio and black belt/pouches, navy cargo trousers, worn black boots. Add a substantial black/navy protective ballistic vest with readable pale POLIZEI marking on front/back, shoulder attachments and practical panel seams. No helmet, no shield, no baton, no notebook; both hands empty and relaxed. Preserve long connected adult torso, upper/lower arm, thigh, knee, shin lengths matching reference, about five head heights, not squat toy or skinny fashion silhouette. Strong Disco Elysium-Berlin expressionist oil/gouache drawing with broad rough angular paint masses, broken contours and cold petrol/gray-green face shadows, scuffed uniform and dirty ochre highlights; no glossy3D surfaces, cute eyes, smooth storybook volumes or fine-noise filter. Real expressive tired adult cartoon. The same head size and crown/shoulder/hip/knee/sole heights in all4views, complete planted feet with transparent gap, closed resting lips. Every cap/ear/finger/boot inside canvas, at least35px outer transparent margin and generous gaps between figures. Genuine transparent alpha, no floor/shadow/background/grid/labels/extra text. Four source neutral direction anchors, not an action montage.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-7f6cfe62-0c47-4273-9921-ab6b011d5c37.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+        "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v3.png"
+      ],
+      "status": "Strong mature painted source candidate; shared-scale fitting, connected motion, own speech, native exports and game render acceptance outstanding.",
+      "sha256": "ce2a28eb2e735ae1784ac7b468721233c705c072ceb33a92c119fbe04bc87263",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1466150,
+      "componentBounds": [
+        [
+          140,
+          7,
+          468,
+          837
+        ],
+        [
+          602,
+          11,
+          823,
+          839
+        ],
+        [
+          987,
+          7,
+          1319,
+          838
+        ],
+        [
+          1476,
+          9,
+          1704,
+          839
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 6,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+            "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v3.png",
+            "sha256": "573e8bd60add389c0738b20ae7f535fc2a6a7ffdcb743d51bf242e597dd51da0"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-male-expressionist-v3",
+      "file": "police-protective-male-expressionist-v3.png",
+      "prompt": "Use this supplied mature male patrol officer as EXACT face, hair, adult anatomy and painted identity authority. Create his PROTECTIVE-VEST equipment tier, same man and height, no redesign of identity. Four complete neutral planted full-body figures in ONE horizontal row: FRONT, strict RIGHT profile, true REAR without visible face, strict LEFT profile. Same tired narrow adult eyes, clean-shaven lined angular face, short brown side-part hair, navy cap with pale star, dark blue shirt/pale blue collar, radio and black belt/pouches, navy cargo trousers, worn black boots. Add a substantial black/navy protective ballistic vest with readable pale POLIZEI marking on front/back, shoulder attachments and practical panel seams. No helmet, no shield, no baton, no notebook; both hands empty and relaxed. Preserve long connected adult torso, upper/lower arm, thigh, knee, shin lengths matching reference, about five head heights, not squat toy or skinny fashion silhouette. Strong Disco Elysium-Berlin expressionist oil/gouache drawing with broad rough angular paint masses, broken contours and cold petrol/gray-green face shadows, scuffed uniform and dirty ochre highlights; no glossy3D surfaces, cute eyes, smooth storybook volumes or fine-noise filter. Real expressive tired adult cartoon. The same head size and crown/shoulder/hip/knee/sole heights in all4views, complete planted feet with transparent gap, closed resting lips. Every cap/ear/finger/boot inside canvas, at least35px outer transparent margin and generous gaps between figures. Genuine transparent alpha, no floor/shadow/background/grid/labels/extra text. Four source neutral direction anchors, not an action montage.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-79c19e8a-fa2f-454c-ad8d-7007cd957cbe.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png"
+      ],
+      "status": "HELD: connected backdrop/alpha between figures; not four isolated transparent source figures. Background removal through ImageGen required; no runtime selection.",
+      "sha256": "573e8bd60add389c0738b20ae7f535fc2a6a7ffdcb743d51bf242e597dd51da0",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2668883,
+      "componentBounds": [
+        [
+          0,
+          10,
+          1536,
+          1024
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 0,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; no runtime acceptance."
+    },
+    {
+      "id": "police-heavy-male-expressionist-contacts-v1",
+      "file": "police-heavy-male-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature MALE HEAVY SHIELD officer. LOWERED clear visor over his actual recognizable adult face; navy helmet, POLIZEI armored vest, shoulder/elbow/forearm/knee/shin pads, gloves, cargo trousers and heavy boots. One rectangular navy POLIZEI shield stays on anatomical LEFT arm (front screenRIGHT/rear screenLEFT). RIGHT hand empty; no baton/notebook. For these walking source contacts, hold the owned shield a little ahead/outside of the body, so BOTH complete connected trouser thighs, knees, shins and boots are visible even in the left-facing profile. Shield must not overlap/cut through a thigh or boot or conceal the leg gap. Natural attached left shoulder/forearm/hand grip, not a floating shield. Keep visor lowered and same protective equipment. Use enough transparent space that each full body, split stride and shield fits with at least60px clear outer margin and gutters; never crop boot/visor/shield edges.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-ad6fc1b8-8649-48b2-be46-fad680130e74.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png"
+      ],
+      "status": "Contact source candidate. LEFT profile remains held for shield occlusion of near thigh; requires a whole-source exposure correction before motion.",
+      "sha256": "db2c294dfae24819f932bf543dc3a457947caa8973ce2906b604e1d60e651a1e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2520843,
+      "componentBounds": [
+        [
+          30,
+          76,
+          434,
+          934
+        ],
+        [
+          359,
+          79,
+          823,
+          935
+        ],
+        [
+          774,
+          79,
+          1152,
+          934
+        ],
+        [
+          1096,
+          78,
+          1526,
+          933
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 10,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+            "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-male-expressionist-v2",
+      "file": "police-heavy-male-expressionist-v2.png",
+      "prompt": "Create the HEAVY SHIELD equipment tier of the EXACT mature male Berlin officer from reference1. Reference1 owns his grown-up anatomy, long connected forearms/thighs/shins, angular lined clean-shaven face, tired small eyes and broad broken Disco Elysium-Berlin oil/gouache paint. Reference2 supplies equipment only, NOT its smooth compact old cartoon body or face. EXACTLY FOUR complete neutral full-body figures in ONE horizontal row: straight FRONT, strict RIGHT profile, true BACK (no face), strict LEFT profile. Same officer and same adult head/body proportions in all4, robust mature build about five head heights. Navy riot helmet with clear visor LOWERED over the actual recognizable face; preserve tired facial planes visible through visor, no replacement generic face. Heavy navy/black ballistic vest with POLIZEI, shoulder/elbow/forearm/knee/shin armor, gloves, utility belt/pouches, full dark navy cargo trousers, scuffed heavy black boots. One tall rectangular navy riot shield with pale POLIZEI marking belongs to anatomical LEFT arm: front screenRIGHT, rear screenLEFT, correct profile near/far occlusion. Anatomical RIGHT hand EMPTY, no baton/notebook/weapon. Source should show both complete boots below shield, quiet planted neutral stance and complete connected body beneath owned equipment. Mature weathered angular human features, rough broad paint masses, lost/broken edges, cold petrol/gray-green skin shadows, scuffed indigo armor, dirty ochre highlights. No huge cute head, short toy legs, glossy3D shading, smooth storybook doll face or fine-noise texture-only treatment. Match crown/hip/knee/sole levels across all views. Generous genuine transparent gutters, all shield/helmet/visor/boots fully inside image with35px outer margins. Transparent alpha only; no backdrop/gradient/floor/shadow/grid/labels or additional text beyond POLIZEI.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-9cb50bff-6e43-4dd6-8403-69df948ceae6.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-male.png"
+      ],
+      "status": "Strong mature equipment-tier cardinal source; hand/visor state inspected, fitting/contact/action/export/game acceptance outstanding.",
+      "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2694691,
+      "componentBounds": [
+        [
+          14,
+          30,
+          448,
+          980
+        ],
+        [
+          472,
+          35,
+          736,
+          985
+        ],
+        [
+          766,
+          34,
+          1188,
+          984
+        ],
+        [
+          1256,
+          35,
+          1504,
+          984
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 14,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male.png",
+            "sha256": "ee587ce534e6f17a9c8af02ff90a8afcdf5ce65ea60af83846002b59f9addfc3"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-male",
+      "prompt": "One final production directional source sheet for the HEAVY MALE officer in the reference. Use the existing same officer from reference1 with brown short side-part hair, broad square clean-shaven face, heavy brows; NO moustache; preserve equipment tier heavy only, no other tiers in this image. Repaint as an older grown-up somewhat worn Berlin adult with mature cartoon anatomy matching reference2's more adult silhouettes: roughly 3.5-3.7 heads tall crown-to-sole, coherent longer forearms/thighs/calves than the original chibi body; do not use giant toddler heads or tiny legs. GTA as if created by Disco Elysium's creators: angular dry oil/gouache brushwork, tired small hooded eyes and eye bags, lined forehead, subtle unevenness in nose/cheeks, weathered face, scuffed navy fabric and black leather, muted blue/gray with ochre skin and cool shadows. Closed resting lips. Stern weary character, not cute/glossy or photorealistic. EXACTLY FOUR complete full-body figures in ONE single horizontal row: FRONT, true RIGHT-facing PROFILE, true REAR (no face), true LEFT-facing PROFILE. NO second row. The SAME person, body/limb/head proportions and crown/sole line in all four views. Equipment: navy helmet with LOWERED clear visor revealing the same tired adult face, heavier navy armor marked POLIZEI, padded sleeves/gloves/knees/shins, duty belt, broad scuffed black boots; ONE rectangular navy shield marked POLIZEI on anatomical LEFT forearm (front screen-right), right hand empty. In right-facing profile the shield is on the FAR left arm and may be partly hidden behind torso; in left-facing profile it is near and visible. Rear reveals the back of shield at anatomical left side (rear screen-left). No baton or gun. Keep props in their anatomical hands throughout turns; natural far-hand occlusion is allowed, never mirror/swap. Both feet planted neutral, complete hands, visible leg gap and whole broad shoes. At least 8% canvas-height transparent margin above heads and below soles, 60px or more transparent gutters between figures, all limbs/hair/equipment fully inside frame; make the canvas wide if needed. Transparent alpha, FULLY OPAQUE painted figure interiors, no cast shadows, gradient backdrop, glow, ground, scene, grid, labels or extra figures. Directional neutral anchors only, no walks/actions.",
+      "role": "one-tier four-direction source candidate",
+      "file": "police-heavy-male.png",
+      "sha256": "ee587ce534e6f17a9c8af02ff90a8afcdf5ce65ea60af83846002b59f9addfc3",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 2020259,
+      "componentBounds": [
+        [
+          32,
+          22,
+          477,
+          852
+        ],
+        [
+          549,
+          25,
+          817,
+          856
+        ],
+        [
+          916,
+          25,
+          1355,
+          850
+        ],
+        [
+          1465,
+          25,
+          1727,
+          856
+        ]
+      ],
+      "visualStatus": "HOLD: equal-height comparison shows head/body too realistic; refit toward corrected patrol-male-v2 before motion expansion",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 22
+    },
+    {
+      "id": "police-riot-male-expressionist-v3",
+      "file": "police-riot-male-expressionist-v3.png",
+      "prompt": "Create the RIOT equipment tier of the EXACT mature male Berlin officer from reference1. Reference1 owns his adult body, individual lined angular clean-shaven face, small tired eyes, brown hair, long connected forearms/thighs/shins, and bold Disco Elysium-Berlin oil/gouache paint. Reference2 supplies armor/equipment ONLY: its compact toy anatomy and smoother face are retired, do not copy them. FOUR complete neutral whole-body figures in ONE horizontal row: straight FRONT, strict RIGHT profile, true BACK with no face, strict LEFT profile. Same officer and adult head/body ratio through all views, about five head-heights overall; naturally robust adult build, not short-legged doll or stretched slender mannequin. Dark navy riot helmet with clear visor RAISED above face, navy/black protective vest with readable POLIZEI front/back, shoulder/elbow/forearm pads, gloves, knee/shin pads, full cargo trousers and worn heavy boots. A single black baton belongs to anatomical RIGHT hand, front screenLEFT / rear screenRIGHT, with correct near/far profile occlusion. LEFT hand empty; no shield/notebook. Quiet upright stance, separate planted boots, complete soles, closed resting lips for later speech. Strong broad rough angular paint masses and broken contours, cold gray-green facial shadows, scuffed blue-black gear and subdued ochre highlights; mature tired imperfect human features, no cute smooth toy face, glossy3D volumes or decorative fine-noise filter. Preserve one crown/hip/knee/ground line and head size across all four. All visor edges/baton/boots/fingers inside canvas, wide genuine transparent gaps and35px outer margins. Transparent alpha only, no backdrop/gradient/floor/shadow/labels/grid or extra text beyond POLIZEI.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-7718322a-08c7-4173-abee-46c801cd455d.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-proportions-v2.png"
+      ],
+      "status": "Strong mature equipment-tier cardinal source; hand/visor state inspected, fitting/contact/action/export/game acceptance outstanding.",
+      "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2661516,
+      "componentBounds": [
+        [
+          20,
+          10,
+          434,
+          1009
+        ],
+        [
+          483,
+          12,
+          729,
+          1013
+        ],
+        [
+          780,
+          12,
+          1191,
+          1011
+        ],
+        [
+          1250,
+          14,
+          1496,
+          1013
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 10,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-proportions-v2.png",
+            "sha256": "b4b0e36d5050ef5ffdfdad5956036b8c511cedcdf789c2a01bf2006db5856fa7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-male-proportions-v2",
+      "file": "police-riot-male-proportions-v2.png",
+      "prompt": "Correct the FOUR complete figures in reference1 to the actual grown-up cartoon proportions of reference2, the corrected male patrol officer. Preserve this male riot officer's existing identity, clean-shaven man with brown short side-part hair, heavy brows and broad square face, no moustache, mature worn facial features and the riot equipment. Reference2 and reference3 (Irmgard) are proportion authority: coherent BROADER STOCKY adult cartoon, about THREE AND A HALF HEAD HEIGHTS total; head INCLUDING hat/helmet approximately 28-30 percent of crown-to-sole height, remaining connected torso and limbs 70-72 percent. The original reference1 has a too-small head/long narrow body; REPAINT the entire connected head-neck-shoulders-torso-pelvis-arms-legs together. Do NOT paste an enlarged head, squeeze an image or retain realistic 4.7-head proportions. Keep readable adult elbows/forearms/thighs/knees/calves and broad full shoes, not 2-head chibi toddler limbs. Exact equipment: navy helmet with RAISED clear visor, POLIZEI vest, padded armored sleeves/gloves/knees/shins and duty belt, substantial scuffed black boots. One lowered dark baton in anatomical RIGHT hand (front screen-left, rear screen-right); far-side baton may be naturally hidden in LEFT-facing profile, never transfer it to the near left hand. Same weathered ADULT face in every view, small hooded eyes, age lines, eye bags, asymmetrical weary mouth closed at rest, dry angular oil/gouache brushwork and subdued Berlin navy/gray/ochre palette, no cute eyes, glossy toy finish, glamor or photorealism. EXACTLY FOUR full-body figures in ONE horizontal row: FRONT, true RIGHT profile, true REAR without face, true LEFT profile, same 3.5-head connected anatomy, body scale and sole line throughout. Preserve actual anatomical prop hands through turns; correct occlusion is allowed, hand swapping is not. Both complete boots planted, visible gap between legs. All hair/hat/equipment/hands/soles within canvas; 50px or more transparent gutters/margins. Genuine transparent alpha, fully opaque painted interiors, no floor, cast shadow, gradient backdrop, glow, scene, labels, text or grid. Neutral direction anchors, not walking/action keys. Match reference2's coherent height and limb-length relationships, while preserving this officer's gender and equipment.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-1d7ee8b5-0c04-4c20-858c-7086f450d3ee.png",
+      "status": "Proportion study only; superseded for final finish by stronger Disco Elysium direction.",
+      "sha256": "b4b0e36d5050ef5ffdfdad5956036b8c511cedcdf789c2a01bf2006db5856fa7",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1786057,
+      "componentBounds": [
+        [
+          54,
+          95,
+          467,
+          886
+        ],
+        [
+          546,
+          98,
+          821,
+          887
+        ],
+        [
+          889,
+          97,
+          1320,
+          884
+        ],
+        [
+          1418,
+          96,
+          1689,
+          887
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; not accepted for runtime.",
+      "minimumCanvasMargin": 0
+    },
+    {
+      "id": "police-riot-female-expressionist-contacts-v1",
+      "file": "police-riot-female-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature FEMALE RIOT officer with her own lined middle-aged face, tired eyes and dark brown low bun. RAISED clear visor above face; navy helmet, POLIZEI armored vest, shoulder/elbow/forearm/knee/shin pads, gloves, cargo trousers and heavy boots. One black baton stays anatomical RIGHT (front screenLEFT/rear screenRIGHT), held down slightly outside the trouser/boot silhouettes so both full legs are exposed; left hand empty. No notebook or shield. Preserve the complete baton and its attached hand, correct near/far occlusion.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-25b9ad32-47a6-4ef0-bacc-9f827b36b45c.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png"
+      ],
+      "status": "Contact source candidate. Profile leg and equipment registration/export review pending; front/back gait contacts have depth differences and are not selected.",
+      "sha256": "9f8c72d41f3c5d363453df9ebac271d612fc055e34f4791ec8f1190b149942f8",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1657575,
+      "componentBounds": [
+        [
+          52,
+          11,
+          464,
+          830
+        ],
+        [
+          504,
+          8,
+          955,
+          827
+        ],
+        [
+          970,
+          7,
+          1360,
+          829
+        ],
+        [
+          1373,
+          7,
+          1841,
+          831
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 7,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+            "sha256": "15209578113a755d326821414c6913d2c3f82a0ef334cf84dee7f75dc99c241f"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-female-expressionist-v3",
+      "file": "police-riot-female-expressionist-v3.png",
+      "prompt": "Create the RIOT equipment tier of the EXACT mature FEMALE Berlin officer from reference1. Reference1 owns her adult body, individual middle-aged woman's lined angular face, small tired eyes, dark brown hair in a low bun, long connected forearms/thighs/shins, and bold Disco Elysium-Berlin oil/gouache paint. Reference2 supplies the RIOT armor/equipment tier only; preserve reference1's own female identity. FOUR complete neutral whole-body figures in ONE horizontal row: straight FRONT, strict RIGHT profile, true BACK with no face, strict LEFT profile. Same woman and adult head/body ratio through all views, about five head-heights overall; naturally robust adult build, not short-legged doll or stretched slender mannequin. Dark navy riot helmet with clear visor RAISED above face, navy/black protective vest with readable POLIZEI front/back, shoulder/elbow/forearm pads, gloves, knee/shin pads, full cargo trousers and worn heavy boots. A single black baton belongs to anatomical RIGHT hand, front screenLEFT / rear screenRIGHT, with correct near/far profile occlusion. LEFT hand empty; no shield/notebook. Quiet upright stance, separate planted boots, complete soles, closed resting lips for later speech. Strong broad rough angular paint masses and broken contours, cold gray-green facial shadows, scuffed blue-black gear and subdued ochre highlights; mature tired imperfect human features, no cute smooth toy face, glossy3D volumes or decorative fine-noise filter. Preserve one crown/hip/knee/ground line and head size across all four. All visor edges/baton/boots/fingers inside canvas, wide genuine transparent gaps and35px outer margins. Transparent alpha only, no backdrop/gradient/floor/shadow/labels/grid or extra text beyond POLIZEI.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-238065e5-0a98-4e9c-8a10-52dd50e5df27.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png"
+      ],
+      "status": "Strong mature equipment-tier cardinal source; hand/visor state inspected, fitting/contact/action/export/game acceptance outstanding.",
+      "sha256": "15209578113a755d326821414c6913d2c3f82a0ef334cf84dee7f75dc99c241f",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1563467,
+      "componentBounds": [
+        [
+          73,
+          6,
+          443,
+          837
+        ],
+        [
+          622,
+          7,
+          828,
+          839
+        ],
+        [
+          973,
+          6,
+          1356,
+          838
+        ],
+        [
+          1502,
+          7,
+          1708,
+          841
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 4,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+            "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+            "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-female-expressionist-v2",
+      "file": "police-heavy-female-expressionist-v2.png",
+      "prompt": "Create the HEAVY SHIELD equipment tier of the EXACT mature FEMALE Berlin officer from reference1. Reference1 owns her grown-up anatomy, long connected forearms/thighs/shins, individual middle-aged woman's angular lined face, tired small eyes and dark brown low bun and broad broken Disco Elysium-Berlin oil/gouache paint. Reference2 supplies the heavy equipment tier only; preserve reference1's own female face/body. EXACTLY FOUR complete neutral full-body figures in ONE horizontal row: straight FRONT, strict RIGHT profile, true BACK (no face), strict LEFT profile. Same woman and same adult head/body proportions in all4, robust mature build about five head heights. Navy riot helmet with clear visor LOWERED over the actual recognizable face; preserve tired facial planes visible through visor, no replacement generic face. Heavy navy/black ballistic vest with POLIZEI, shoulder/elbow/forearm/knee/shin armor, gloves, utility belt/pouches, full dark navy cargo trousers, scuffed heavy black boots. One tall rectangular navy riot shield with pale POLIZEI marking belongs to anatomical LEFT arm: front screenRIGHT, rear screenLEFT, correct profile near/far occlusion. Anatomical RIGHT hand EMPTY, no baton/notebook/weapon. Source should show both complete boots below shield, quiet planted neutral stance and complete connected body beneath owned equipment. Mature weathered angular human features, rough broad paint masses, lost/broken edges, cold petrol/gray-green skin shadows, scuffed indigo armor, dirty ochre highlights. No huge cute head, short toy legs, glossy3D shading, smooth storybook doll face or fine-noise texture-only treatment. Match crown/hip/knee/sole levels across all views. Generous genuine transparent gutters, all shield/helmet/visor/boots fully inside image with35px outer margins. Transparent alpha only; no backdrop/gradient/floor/shadow/grid/labels or additional text beyond POLIZEI.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-d2b60553-e6c0-4259-bbd3-069db338c32a.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png"
+      ],
+      "status": "Strong mature equipment-tier cardinal source; hand/visor state inspected, fitting/contact/action/export/game acceptance outstanding.",
+      "sha256": "da62b0ab52c925ab038a94c75545b540032d6e721fca22cdcbb85182e5d0fcd7",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1708367,
+      "componentBounds": [
+        [
+          66,
+          11,
+          464,
+          832
+        ],
+        [
+          597,
+          9,
+          827,
+          834
+        ],
+        [
+          935,
+          9,
+          1322,
+          833
+        ],
+        [
+          1504,
+          8,
+          1735,
+          834
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+            "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+            "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-male-expressionist-contacts-v1",
+      "file": "police-protective-male-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature male PROTECTIVE officer: navy cap/pale star, short sleeves, black/navy POLIZEI ballistic vest, radio/belt/pouches, navy cargo trousers, worn boots. Both hands EMPTY and relaxed. No notebook, shield or baton. Preserve front/back vest markings.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-32a03981-f352-405e-831f-e7ff12295135.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v4.png"
+      ],
+      "status": "Contact source candidate. Profile leg and equipment registration/export review pending; front/back gait contacts have depth differences and are not selected.",
+      "sha256": "689759ebe6a73638a0cf20fb42b145ebd385de8c871089f63f079b05802709c7",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2556895,
+      "componentBounds": [
+        [
+          26,
+          33,
+          399,
+          978
+        ],
+        [
+          371,
+          35,
+          832,
+          966
+        ],
+        [
+          773,
+          35,
+          1152,
+          969
+        ],
+        [
+          1105,
+          34,
+          1511,
+          967
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 25,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v4.png",
+            "sha256": "dc650e02b18ca381b88f48cb3ab822e1baebc2860b7072b672342d4781c2dbd9"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-male-expressionist-v4",
+      "file": "police-protective-male-expressionist-v4.png",
+      "prompt": "Background-removal edit ONLY. Preserve exactly the four painted adult male police figures, uniform details, faces, hands, proportions, caps and complete boots in the supplied sheet. The current source accidentally has a connected cloudy gray-brown painted backdrop behind and between the figures. Remove ALL backdrop/floor/shadow/gradient pixels everywhere outside the four real silhouettes, including between arms and body and the gaps between boots. Keep every actual figure's own painted opaque interior unchanged, including dark vest/trousers/boots and readable POLIZEI. Four completely separate full-body cutouts on genuine fully transparent alpha, generous clear empty transparent gutters. No new art, no rearranged poses, no facial repaint, no rescaling, no crop and no added outline or shadow. Keep the full original canvas and figure positions. Return PNG with real alpha, transparent_background true.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-0a9537d6-967f-4b43-8fe8-29d19c4c0af5.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v3.png"
+      ],
+      "status": "Background edit now supplies four separate transparent figure components. Tool also changed painted pixels, so treat as a newly generated source with its own fitting, not a lossless matte operation; native/motion/render acceptance pending.",
+      "sha256": "dc650e02b18ca381b88f48cb3ab822e1baebc2860b7072b672342d4781c2dbd9",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2519778,
+      "componentBounds": [
+        [
+          22,
+          10,
+          405,
+          1010
+        ],
+        [
+          460,
+          14,
+          721,
+          1014
+        ],
+        [
+          784,
+          10,
+          1179,
+          1014
+        ],
+        [
+          1255,
+          15,
+          1512,
+          1015
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 9,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v3.png",
+            "sha256": "573e8bd60add389c0738b20ae7f535fc2a6a7ffdcb743d51bf242e597dd51da0"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-female-expressionist-actions-v1",
+      "file": "police-heavy-female-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same middle-aged FEMALE with her own lined face and brown low bun. Same HEAVY tier: helmet with visor LOWERED over the same actual face, POLIZEI armor and one rectangular navy POLIZEI shield owned by anatomical LEFT arm (front screenRIGHT), held stable in ALL4 keys. RIGHT is the free gesture hand. (1) RIGHT empty at rest. (2) RIGHT forearm halfway up, index partly raised. (3) RIGHT index fully raised beside shoulder. (4) RIGHT hand presents one cream ticket/page at chest height. Keep LEFT shield complete and attached, no switch, no baton/extra weapon.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-29ca9be9-ad4d-4cb3-9680-80ba53f3d2e8.png",
+      "sha256": "71f5c2598cbef21c3bf9acc7418b16b596f7c843ab12317a4f9891a7f8e56be2",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1977088,
+      "componentBounds": [
+        [
+          55,
+          4,
+          454,
+          831
+        ],
+        [
+          508,
+          4,
+          916,
+          830
+        ],
+        [
+          957,
+          4,
+          1383,
+          831
+        ],
+        [
+          1464,
+          4,
+          1852,
+          830
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 4,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png",
+            "sha256": "da62b0ab52c925ab038a94c75545b540032d6e721fca22cdcbb85182e5d0fcd7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-male-expressionist-actions-v1",
+      "file": "police-heavy-male-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same mature clean-shaven MALE with his own lined face and short brown hair. Same HEAVY tier: helmet with visor LOWERED over the same actual face, POLIZEI armor and one rectangular navy POLIZEI shield owned by anatomical LEFT arm (front screenRIGHT), held stable in ALL4 keys. RIGHT is the free gesture hand. (1) RIGHT empty at rest. (2) RIGHT forearm halfway up, index partly raised. (3) RIGHT index fully raised beside shoulder. (4) RIGHT hand presents one cream ticket/page at chest height. Keep LEFT shield complete and attached, no switch, no baton/extra weapon.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-ca6d5382-29e5-489f-b215-7f35b077e0b8.png",
+      "sha256": "e755ecb90642800263bc2d31d762510b820ee5a48068862c197b55c7ee5a66ea",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2768199,
+      "componentBounds": [
+        [
+          9,
+          27,
+          406,
+          950
+        ],
+        [
+          392,
+          27,
+          778,
+          949
+        ],
+        [
+          759,
+          27,
+          1157,
+          949
+        ],
+        [
+          1156,
+          27,
+          1533,
+          949
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 3,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+            "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-female-expressionist-actions-v1",
+      "file": "police-riot-female-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same middle-aged FEMALE with her own lined face and brown low bun. Same RIOT tier: helmet with visor RAISED, POLIZEI armor, gloves and pads. The black baton stays anatomical RIGHT (front screenLEFT), lowered alongside the right thigh in ALL4 keys. LEFT is the free gesture hand. (1) LEFT empty at rest. (2) LEFT forearm halfway up, index partly raised. (3) LEFT index fully raised beside shoulder. (4) LEFT hand presents a single cream ticket/page at chest height. Keep RIGHT baton complete and attached, no switch, no extra weapon/shield.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-2b830faf-4c80-41ba-b564-15d9936a6bed.png",
+      "sha256": "945dfe5b3226d150e22e1d71ce2c38404d42cdd0cf6412ce454c2a2f4b32f0a1",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1808031,
+      "componentBounds": [
+        [
+          71,
+          7,
+          448,
+          832
+        ],
+        [
+          525,
+          7,
+          891,
+          832
+        ],
+        [
+          932,
+          6,
+          1326,
+          832
+        ],
+        [
+          1380,
+          6,
+          1741,
+          832
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 6,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+            "sha256": "15209578113a755d326821414c6913d2c3f82a0ef334cf84dee7f75dc99c241f"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-patrol-female-expressionist-contacts-v1",
+      "file": "police-patrol-female-expressionist-contacts-v1.png",
+      "prompt": "Four-direction WALK CONTACT source sheet of the EXACT mature FEMALE Berlin patrol officer in the reference. Preserve the same individual middle-aged woman's lined angular face, small tired adult eyes, dark brown hair in a low bun, navy cap with pale star, navy short-sleeve shirt/pale blue collar, black belt radio/pouches, navy cargo trousers and broad worn black boots. One cream notebook remains in anatomical LEFT hand (front screenRIGHT / rear screenLEFT); RIGHT hand empty. Same adult head size, torso, forearm, thigh, shin lengths, bulk and strong Disco Elysium-Berlin angular oil/gouache painting, cold gray-green skin shadows and broad scuffed indigo paint. No toy-like shortening, glossy 3D surfaces, baby eyes or delicate fashion legs. FOUR complete whole figures in ONE horizontal row with shared crown and sole lines: FRONT walking contact, strict RIGHT-facing PROFILE walking contact, genuine BACK walking contact with no face, strict LEFT-facing PROFILE walking contact. Quiet upright upper body and closed neutral lips. Walking source stance: near leg modestly forward, far leg trailing, both entire boots on the same ground line; separate connected thighs beneath the pelvis, visible transparent gap from crotch down between knees and the two boots. Especially in profiles, do NOT overlap/cross the legs or hide one boot; expose both complete heels/toes/soles with a natural modest split stride. Keep source legs within adult limb lengths, no stretch to manufacture a gap. Whole coherent drawings, not detached leg cutouts or a floating hand/notebook. Anatomical LEFT notebook never changes hands, with correct near/far profile occlusion. All caps/fingers/notebook/soles fully inside canvas. Wide transparent gutters and at least35px outer margins. Real transparent alpha, absolutely no backdrop/gradient/floor/shadow/grid/text/labels or loose paint scraps. This is a source walking contact sheet, not four front-facing repeated figures or a finished animation strip.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-1ff30031-a17e-4c9a-827f-555d21d21e98.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png"
+      ],
+      "status": "Whole mature patrol contact source; profiles expose both shoes. Front/rear sole-depth differences and all source proportions require fitting/review; no runtime selection.",
+      "sha256": "f73516b0ba938b0fd732fd4977d05c4f3240131dbc9673f70e3bd5985b29e77a",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1429407,
+      "componentBounds": [
+        [
+          75,
+          10,
+          402,
+          826
+        ],
+        [
+          516,
+          12,
+          931,
+          820
+        ],
+        [
+          986,
+          10,
+          1313,
+          823
+        ],
+        [
+          1397,
+          12,
+          1819,
+          823
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 10,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+            "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-open-left-contacts-v2",
+      "file": "police-heavy-open-left-contacts-v2.png",
+      "prompt": "Create TWO whole-body LEFT-FACING PROFILE walking-contact keys on transparent background. FIRST figure is the male heavy officer from reference1; SECOND figure is the female heavy officer from reference2. Preserve each exact recognizable mature angular face, hair/bun, adult body proportions, helmet with LOWERED clear visor, navy POLIZEI armor, pads, gloves, belt and scuffed boots, and the same broad rough Disco Elysium-Berlin painting. Both look strictly screenLEFT. Needed correction: the anatomical LEFT arm is the visible near arm and must extend naturally FORWARD toward screenLEFT, carrying its navy rectangular POLIZEI shield well AHEAD OF THE LEGS. Shield grip at chest/waist height, connected shoulder/elbow/forearm/hand; shield remains on LEFT arm, RIGHT hand empty relaxed. There must be a clear transparent horizontal GAP of at least40px between the shield's whole lower half and BOTH leg silhouettes. The shield may NOT cover ANY thigh, knee pad, shin or boot. Place shield farther left than the forward knee/boot, like a braced officer carrying it out in front, rather than against the hip. Both intact trouser thighs must visibly connect to the pelvis, full knee and shin pads exposed, two complete separate boots in a modest split step on one ground line. No crossed/merged legs, no missing hidden thigh paint. Same upper/body height and adult limb lengths as respective references; do not shrink or stretch bodies to clear equipment. Same head size, crown and sole heights across the two. Both figures complete from helmet to soles with big transparent gutters and60px outer margins; widen canvas as needed for extended arm and shield. Exactly TWO separated full figures in one row, no montage, no front/rear/other angles. Real transparent alpha, no backdrop/gradient/floor/shadow/labels/grid/extra text. This is a coherent whole-body source pose, not detached arm/shield patches.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-78e66c3f-e944-4ef7-9ae8-7e2d0c7e8a53.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png"
+      ],
+      "expectedComponentCount": 2,
+      "status": "Two whole LEFT contact exposure sources, male then female; shields ahead of complete thighs/knees. Close upper margin and head/limb consistency need encoded review; no runtime acceptance.",
+      "sha256": "dd00f5c87edc18c9d97a76f092a7f008d3b17c870b2915ea4cbb6c3b55d0944e",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1332090,
+      "componentBounds": [
+        [
+          149,
+          5,
+          779,
+          871
+        ],
+        [
+          1045,
+          10,
+          1659,
+          872
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 5,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-male-expressionist-v2.png",
+            "sha256": "ac6215958b299d973b29f82b8c5e936a20f0498db8de590de3a2e77ac3565ac9"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png",
+            "sha256": "da62b0ab52c925ab038a94c75545b540032d6e721fca22cdcbb85182e5d0fcd7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-heavy-female-expressionist-contacts-v1",
+      "file": "police-heavy-female-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature FEMALE HEAVY SHIELD officer with her own lined middle-aged face, tired eyes and dark brown low bun. LOWERED clear visor over his actual recognizable adult face; navy helmet, POLIZEI armored vest, shoulder/elbow/forearm/knee/shin pads, gloves, cargo trousers and heavy boots. One rectangular navy POLIZEI shield stays on anatomical LEFT arm (front screenRIGHT/rear screenLEFT). RIGHT hand empty; no baton/notebook. For these walking source contacts, hold the owned shield a little ahead/outside of the body, so BOTH complete connected trouser thighs, knees, shins and boots are visible even in the left-facing profile. Shield must not overlap/cut through a thigh or boot or conceal the leg gap. Natural attached left shoulder/forearm/hand grip, not a floating shield. Keep visor lowered and same protective equipment. Use enough transparent space that each full body, split stride and shield fits with at least60px clear outer margin and gutters; never crop boot/visor/shield edges. In the LEFT-FACING profile put the shield clearly AHEAD of the body toward screenLEFT, held by her LEFT arm extended naturally forward. There must be a visible strip of empty transparent space between the shield's bottom half and both armored legs; do not simply copy the reference's shield covering the near thigh. Both complete knee pads and full thighs must be visible behind/beside the carried shield.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-3275c83c-f9be-421b-b9ab-fa87399a480a.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png"
+      ],
+      "status": "Contact source candidate. LEFT profile remains held for shield occlusion of near thigh; requires a whole-source exposure correction before motion.",
+      "sha256": "09661fe7573346105392e055aa3c0edde40b16f8da89b05b5d8448f8ea7118fd",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1741336,
+      "componentBounds": [
+        [
+          51,
+          41,
+          467,
+          800
+        ],
+        [
+          504,
+          39,
+          928,
+          798
+        ],
+        [
+          961,
+          38,
+          1349,
+          805
+        ],
+        [
+          1400,
+          37,
+          1839,
+          800
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 23,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-heavy-female-expressionist-v2.png",
+            "sha256": "da62b0ab52c925ab038a94c75545b540032d6e721fca22cdcbb85182e5d0fcd7"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-female-expressionist-contacts-v1",
+      "file": "police-protective-female-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature FEMALE PROTECTIVE officer with her own angular middle-aged face, tired eyes and brown low bun: navy cap/pale star, short sleeves, black/navy POLIZEI ballistic vest, radio/belt/pouches, navy cargo trousers, worn boots. Both hands EMPTY and relaxed. No notebook, shield or baton. Preserve front/back vest markings.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-36775696-31cd-4a25-91d2-31f6ee5f3232.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-v3.png"
+      ],
+      "status": "Contact source candidate. Profile leg and equipment registration/export review pending; front/back gait contacts have depth differences and are not selected.",
+      "sha256": "289ce9d1c0065a6afe917e77a19fd3bfba2aaba0bbac12fe296170df9e67dfd4",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1552176,
+      "componentBounds": [
+        [
+          95,
+          7,
+          456,
+          834
+        ],
+        [
+          506,
+          8,
+          954,
+          823
+        ],
+        [
+          974,
+          7,
+          1343,
+          830
+        ],
+        [
+          1361,
+          9,
+          1800,
+          828
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 7,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-v3.png",
+            "sha256": "ce2a28eb2e735ae1784ac7b468721233c705c072ceb33a92c119fbe04bc87263"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-male-expressionist-contacts-v1",
+      "file": "police-riot-male-expressionist-contacts-v1.png",
+      "prompt": "Use the supplied mature Berlin officer tier sheet as the EXACT identity, adult anatomy, clothing/equipment, worn color and broad angular Disco Elysium-Berlin oil/gouache paint authority. Do not change the head-to-body ratio, face, age, uniform, equipment or hand ownership. FOUR COMPLETE whole-body walking CONTACT keys in ONE horizontal row: front, strict right-facing profile, true rear with no face, strict left-facing profile. Same crown/shoulder/hip/knee and sole heights across all4. Quiet upper body, closed resting lips, no warning gesture. Natural modest split stride: near leg forward and far leg trailing, two connected thighs under the pelvis and BOTH complete boots on the same ground line. Profiles must expose both full heels/toes/soles with a real transparent gap from crotch down between the knees and boots, no crossing or merging legs. Match the reference's grown-up arm/thigh/shin lengths and substantial boots; do not lengthen or thin limbs merely to create the gap. Whole coherent painted figures, not pasted limb fragments. Preserve the strong tired angular adult face and broad broken paint; no cute doll eyes, short toy body or smooth glossy3D finish. Entire helmet/cap/hands/props/boots inside canvas with generous transparent gutters and35px outer margin. Genuine transparent alpha, no ground, shadow, gradient/backdrop, text/grid/labels or loose paint scraps. SUBJECT: the same mature MALE RIOT officer. RAISED clear visor above face; navy helmet, POLIZEI armored vest, shoulder/elbow/forearm/knee/shin pads, gloves, cargo trousers and heavy boots. One black baton stays anatomical RIGHT (front screenLEFT/rear screenRIGHT), held down slightly outside the trouser/boot silhouettes so both full legs are exposed; left hand empty. No notebook or shield. Preserve the complete baton and its attached hand, correct near/far occlusion.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-d4c3ff99-4212-4931-a283-0803e0d7d860.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png"
+      ],
+      "status": "Contact source candidate. Profile leg and equipment registration/export review pending; front/back gait contacts have depth differences and are not selected.",
+      "sha256": "03022d9f285becacda87c5254cd71e97824ee12df050e649b8514b89f8500aa4",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2639071,
+      "componentBounds": [
+        [
+          11,
+          9,
+          405,
+          964
+        ],
+        [
+          375,
+          12,
+          860,
+          955
+        ],
+        [
+          784,
+          10,
+          1165,
+          963
+        ],
+        [
+          1096,
+          14,
+          1528,
+          964
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+            "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-patrol-female-expressionist-actions-v1",
+      "file": "police-patrol-female-expressionist-actions-v1.png",
+      "prompt": "FIRST reference is the exact FEMALE patrol officer identity and paint authority: same woman with angular weathered face, tired narrow eyes, dark brown low bun, navy police cap/star, short sleeve navy shirt/pale blue collar, radio/pouch utility belt, cargo trousers, worn black boots, adult connected limb lengths. SECOND reference shows ONLY the four action meanings, not her face or body. Make a production action-key sheet with exactly FOUR complete FRONT-facing full-body figures in one horizontal row: (1) quiet neutral, anatomical LEFT hand holding cream notebook down by left thigh, RIGHT empty relaxed; (2) halfway warning, RIGHT forearm rising to chest height and index finger partly raised, LEFT notebook stable; (3) full stern warning, RIGHT forearm up with index finger pointing upward beside shoulder, LEFT notebook stable; (4) ticket presentation, LEFT arm modestly extended toward viewer offering notebook/ticket page at chest height, RIGHT down empty. Notebook always stays anatomicalLEFT (front screenRIGHT); no switching/duplicating props. Genuinely redrawn connected whole arm/shoulder poses, no detached hands or overlapping figures. Maintain identical head/body size and crown/hip/knee/sole levels across all4, matching her original grown-up stature. Whole connected hands and long forearms/thighs/shins; no shortening or enlarging head to fit. Closed neutral lips in each pose usable for owned later speech. Match the strong angular DE/Berlin oil/gouache paint, cold gray-green facial shadows, tired unsmiling individual female features, broad broken brush marks and worn indigo uniform. No glossy cute or soft toy treatment. Complete planted boots with space below soles, caps/ears/bun/fingers/paper inside canvas; wide transparent gutters and at least35px outer margin. Real transparent alpha. No floor/shadow/backdrop/labels/text/grid. Four source action keys, not generated in-between frames.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-65b862e7-b056-4bb9-8fe1-dbf698c40433.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-actions-v1.png"
+      ],
+      "status": "Strong mature painted source candidate; shared-scale fitting, connected motion, own speech, native exports and game render acceptance outstanding.",
+      "sha256": "a5a80cff8284b8b7c4c7eba87abc8ebaf9f3692043190ef0d6b884704caf3fb4",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2678421,
+      "componentBounds": [
+        [
+          27,
+          10,
+          384,
+          989
+        ],
+        [
+          411,
+          10,
+          770,
+          989
+        ],
+        [
+          796,
+          11,
+          1153,
+          989
+        ],
+        [
+          1178,
+          11,
+          1530,
+          989
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 6,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-female-expressionist-v4.png",
+            "sha256": "31432b34be846eac3e401f2cbd483c33fea8c9b56e30339a80b480478ce7e88a"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-actions-v1.png",
+            "sha256": "328bb7dabb50449f581cb250f39374717f4580d1df4bdfe968b9fc0758c4d0e8"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-patrol-male-expressionist-actions-v1",
+      "file": "police-patrol-male-expressionist-actions-v1.png",
+      "prompt": "Use the supplied male patrol officer source as exact identity, costume, body anatomy and bold Disco Elysium-Berlin painting authority. Same mature clean-shaven man with short brown side-parted hair, heavy tired brows, angular lined face, narrow adult eyes, navy cap/pale star, short-sleeved navy shirt/pale blue collar, black utility belt/radio/pouches, full navy cargo trousers and scuffed black lace-up boots. Four complete full-body figures in one horizontal row, all FRONT-facing, sharing identical crown/hip/knee/sole heights and adult limb lengths. Repaint genuine connected action poses, not detached hands pasted on. POSES left-to-right: (1) exact quiet neutral, left hand holding cream notebook down beside left thigh, RIGHT hand empty relaxed; (2) halfway warning entry, anatomical RIGHT forearm rising to chest height with index finger partly raised, LEFT notebook stable; (3) full stern warning, RIGHT forearm raised with index finger clearly pointing upward beside the shoulder, LEFT notebook stable; (4) ticket presentation, anatomical LEFT arm extends slightly toward viewer offering the visible cream notebook/ticket sheet at chest level, RIGHT hand returns down empty. The cream notebook NEVER changes from anatomical LEFT (front screenRIGHT), no duplicate papers, no baton/shield/weapon. Each body's anatomy stays coherent and feet remain planted on the SAME ground line. Keep exact head size, long connected forearms/thighs/shins and worn adult face from reference, with closed rest lips for later owned speech. Strong broad rough angular oil/gouache marks, cold indigo/petrol and ochre-gray skin, scuffed clothes; do not soften into cute or glossy cartoon. Entire heads/caps/fingers/paper/boots inside frame, at least35px transparent margin and wide gaps. Genuine transparent alpha, no floor/shadow/background/text/labels/grid. Four authored production pose keys, not eight duplicate frames.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-2a94b651-fc63-4053-a31a-31afd2b7a8f7.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png"
+      ],
+      "status": "Strong mature painted source candidate; shared-scale fitting, connected motion, own speech, native exports and game render acceptance outstanding.",
+      "sha256": "328bb7dabb50449f581cb250f39374717f4580d1df4bdfe968b9fc0758c4d0e8",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2713765,
+      "componentBounds": [
+        [
+          27,
+          12,
+          400,
+          1003
+        ],
+        [
+          412,
+          12,
+          781,
+          1002
+        ],
+        [
+          801,
+          12,
+          1167,
+          1003
+        ],
+        [
+          1186,
+          13,
+          1529,
+          1002
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 7,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-patrol-male-expressionist-v7.png",
+            "sha256": "1e6cb848819877dbfe42737246f44e5477e43d0095b9f60f36768599d4492a75"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-female-expressionist-actions-v1",
+      "file": "police-protective-female-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same middle-aged FEMALE with her own lined face and brown low bun. Same PROTECTIVE tier: navy star cap, POLIZEI vest, short sleeves, utility belt and cargo trousers. (1) Both hands empty at rest. (2) Anatomical RIGHT forearm rising to chest height, index partly raised. (3) RIGHT index fully raised beside shoulder, LEFT empty. (4) LEFT hand presents one cream ticket/notepad page slightly toward viewer at chest height, RIGHT returns empty at rest. Ticket belongs only to LEFT (front screenRIGHT), newly drawn from equipment for this action. No baton/shield/helmet.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-v3.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-04a87b44-abb1-4780-b625-dfd0548e14bb.png",
+      "sha256": "1fb11a94868301ae0c53f168f28cb6ae897ea5f7cff6e0458dedc89ad49f9d1a",
+      "dimensions": [
+        1862,
+        845
+      ],
+      "bytes": 1636864,
+      "componentBounds": [
+        [
+          142,
+          3,
+          469,
+          826
+        ],
+        [
+          561,
+          5,
+          887,
+          827
+        ],
+        [
+          978,
+          5,
+          1310,
+          826
+        ],
+        [
+          1427,
+          7,
+          1776,
+          827
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 3,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-female-expressionist-v3.png",
+            "sha256": "ce2a28eb2e735ae1784ac7b468721233c705c072ceb33a92c119fbe04bc87263"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-protective-male-expressionist-actions-v1",
+      "file": "police-protective-male-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same mature clean-shaven MALE with his own lined face and short brown hair. Same PROTECTIVE tier: navy star cap, POLIZEI vest, short sleeves, utility belt and cargo trousers. (1) Both hands empty at rest. (2) Anatomical RIGHT forearm rising to chest height, index partly raised. (3) RIGHT index fully raised beside shoulder, LEFT empty. (4) LEFT hand presents one cream ticket/notepad page slightly toward viewer at chest height, RIGHT returns empty at rest. Ticket belongs only to LEFT (front screenRIGHT), newly drawn from equipment for this action. No baton/shield/helmet.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v4.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-ed0dd97d-92ac-4285-a95c-d7f039a8faa7.png",
+      "sha256": "bab69de5aba8faeaf2c54e7618cfcb065ee8866463da2b3043a54f0a5b6abf44",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2744662,
+      "componentBounds": [
+        [
+          25,
+          9,
+          400,
+          1003
+        ],
+        [
+          412,
+          9,
+          769,
+          1002
+        ],
+        [
+          771,
+          10,
+          1142,
+          1002
+        ],
+        [
+          1146,
+          10,
+          1525,
+          1002
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 9,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-protective-male-expressionist-v4.png",
+            "sha256": "dc650e02b18ca381b88f48cb3ab822e1baebc2860b7072b672342d4781c2dbd9"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-male-expressionist-actions-repair-v2",
+      "file": "police-riot-male-expressionist-actions-repair-v2.png",
+      "prompt": "TWO COMPLETE full-body FRONT-facing action keys of the exact mature MALE RIOT officer in reference1, in one widely spaced horizontal row. Reference2 shows the desired action/paint continuity but its last figures touch, so do not reuse its crowded layout. Preserve the same lined angular clean-shaven adult face, tired small eyes, mature long connected limbs, raised visor/navy helmet, POLIZEI armor, gloves/pads, navy cargo trousers, heavy worn boots and broad broken Disco Elysium-Berlin oil/gouache paint. FIRST key: FULL WARNING HOLD, anatomical LEFT forearm raised, LEFT index pointing up beside shoulder; anatomical RIGHT hand retains the black baton lowered by the RIGHT thigh. SECOND key: TICKET PRESENTATION, LEFT hand holds one cream ticket page at chest height toward viewer; RIGHT still holds the same baton lowered. Baton always front screenLEFT, gesture/ticket always screenRIGHT. No hand/prop swapping, no shield. Same head/body size and common crown/hip/knee/sole lines as reference1, closed rest lips, both complete feet planted. Both figures wholly connected, not cutouts. VERY LARGE genuine transparent gap of at least100px between the two silhouettes and60px outer transparent margin; no shoulder, glove, baton or boot may touch or overlap the other figure. Use a roomy wide canvas and slightly smaller whole figures if needed, without changing anatomy. Entire caps/visor edges/fingers/baton/page/soles inside canvas. Transparent alpha only, no backdrop/gradient/floor/shadow/grid/labels or extra text beyond POLIZEI.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-b66b02b0-967f-4c93-8e7b-746d331bf472.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-actions-v1.png"
+      ],
+      "expectedComponentCount": 2,
+      "status": "Two replacement full-warning/ticket keys for the male riot source's merged last pair. Neutral/half-warning still use their own isolated v1 components; native fitting/export/action review pending.",
+      "sha256": "d752f1c56424618b2fd7ef24791338d14a8ea304318de8e76e1b0b3d5518d41c",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1955423,
+      "componentBounds": [
+        [
+          222,
+          9,
+          644,
+          990
+        ],
+        [
+          911,
+          10,
+          1301,
+          990
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 9,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+            "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-actions-v1.png",
+            "sha256": "b976a9fce55de771ebb09f2cd73fa28a884122482062b04fa884f5bd4035c52e"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished.",
+      "registrationCorrection20261023": "Registration23Oct: this supplies full-warning/ticket only. Original-v1 neutral/half-warning are merged; the isolated neutral/half-warning replacement is neutral-repair-v3."
+    },
+    {
+      "id": "police-riot-male-expressionist-actions-v1",
+      "file": "police-riot-male-expressionist-actions-v1.png",
+      "prompt": "Use the supplied mature officer sheet as the EXACT character, adult body proportions, equipment and bold worn Disco Elysium-Berlin painted identity. Create exactly FOUR complete FRONT-facing whole-body action keys in ONE horizontal row. Common cap/helmet crown, head size, shoulder/hip/knee/sole heights throughout; same grown-up forearms/thighs/shins and scuffed boots, no enlarged cute head or shortened body. Quiet planted feet, complete connected hands/arms, closed resting lips and the same individually tired angular face, broad rough paint, cold gray-green shadows and scuffed navy gear. No glossy3D/cartoon-toy smoothing. Four genuine authored keys: NEUTRAL, HALFWAY WARNING ENTRY, FULL WARNING HOLD, TICKET PRESENTATION. Keep all held equipment in its anatomical hand through every pose. No duplicates or switches between hands. Whole coherent redrawn bodies, not hand cutouts or a montage of angles. Entire caps/visors/fingers/props/boots inside canvas; clear transparent gutters and35px outer margins. Real transparent alpha, no backdrop/gradient/floor/shadow/grid/labels/extra text beyond existing POLIZEI.  SUBJECT: the same mature clean-shaven MALE with his own lined face and short brown hair. Same RIOT tier: helmet with visor RAISED, POLIZEI armor, gloves and pads. The black baton stays anatomical RIGHT (front screenLEFT), lowered alongside the right thigh in ALL4 keys. LEFT is the free gesture hand. (1) LEFT empty at rest. (2) LEFT forearm halfway up, index partly raised. (3) LEFT index fully raised beside shoulder. (4) LEFT hand presents a single cream ticket/page at chest height. Keep RIGHT baton complete and attached, no switch, no extra weapon/shield.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png"
+      ],
+      "status": "Mature own four-key action source; equipment-hand continuity specified per tier. Native fitting/export/action playback review outstanding. HELD: unexpected number of separate alpha components; inspect matte/overlap before use.",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-7f418f82-886e-468f-b8db-56b3cad93b6c.png",
+      "sha256": "b976a9fce55de771ebb09f2cd73fa28a884122482062b04fa884f5bd4035c52e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2721933,
+      "componentBounds": [
+        [
+          29,
+          8,
+          770,
+          988
+        ],
+        [
+          764,
+          8,
+          1148,
+          987
+        ],
+        [
+          1145,
+          8,
+          1518,
+          987
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-v3.png",
+            "sha256": "f662dbbc26f7dfe241a509f616cc7c28a1f36b4143e011ceb64e3f100afacad5"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "registrationCorrection20261023": "Registration23Oct: component0 bounds[29,8,770,988] contains touching NEUTRAL and HALF-WARNING figures; only components1/2 are isolated full-warning/ticket. Earlier last-pair wording was incorrect. No merged component is selected."
+    },
+    {
+      "id": "police-riot-male-expressionist-neutral-repair-v3",
+      "file": "police-riot-male-expressionist-neutral-repair-v3.png",
+      "prompt": "Create TWO COMPLETE full-body FRONT-facing action keys of the exact mature MALE RIOT officer in this reference, in one widely spaced horizontal row. Identity-preserving replacement for the reference sheet's touching FIRST TWO figures. Key1 on LEFT: neutral standing, both arms lowered, anatomical RIGHT hand holds the same black baton by RIGHT thigh (front screenLEFT); anatomical LEFT hand empty at side (front screenRIGHT). Key2 on RIGHT: half-warning gesture, LEFT elbow bent and LEFT gloved hand raised to lower chest level, index beginning to rise, RIGHT retains baton lowered by RIGHT thigh. Keep exact adult angular lined face, tired small eyes, clean-shaven brown hair, long connected adult limbs, raised clear visor/navy helmet, POLIZEI armor, gloves/pads, navy cargo trousers, heavy worn boots. Broad expressive broken oil/gouache brush planes, weathered Disco Elysium meets Berlin paint, mature restrained cartoon anatomy. Same figure/head size, crown/hip/knee/sole lines and front stance between both keys; closed rest lips. No shield, ticket or spare baton. Both COMPLETE figures isolated with at least150px clear transparent gap BETWEEN ALL silhouettes and50px transparent outer margin. Use a wide roomy canvas. Absolutely no contact or overlap between hands, baton, shoulders or boots of the two figures. Caps, visor, fingers, baton and complete soles safely inside image. Genuine transparent alpha, no painted backdrop/gradient/floor/shadow/grid/labels or extra text beyond POLIZEI. Preserve this officer's equipment and anatomical prop hands; do not mirror.",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-0568e682-b977-4170-815e-6a715abbd2d8.png",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-actions-v1.png"
+      ],
+      "expectedComponentCount": 2,
+      "status": "Separated neutral and half-warning replacement pair. Original action-v1 components0-1 are a single touching region, contrary to earlier notes. Full-warning/ticket use repair-v2; native fit and action playback pending.",
+      "sha256": "61231802e55ce9ffd0a116cd49a98492cd6fdf7052bb3350981ff7d5a9f106a0",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1937168,
+      "componentBounds": [
+        [
+          295,
+          8,
+          682,
+          990
+        ],
+        [
+          878,
+          9,
+          1265,
+          989
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 8,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/police-riot-male-expressionist-actions-v1.png",
+            "sha256": "b976a9fce55de771ebb09f2cd73fa28a884122482062b04fa884f5bd4035c52e"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Source-bound derived police atlases selected locally23Oct; encoded structural checks pass. Ordered/full-world/device and independent review outstanding; unpublished."
+    },
+    {
+      "id": "police-riot-female-expressionist-clear-leg-right-v1",
+      "file": "police-riot-female-expressionist-clear-leg-right-v1.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-0c58975b-dab1-420e-8d09-f8f8bec23594.png",
+      "originalSourcePath": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a164c0-1149-7050-b55f-fc60afdcf4b5/exec-0c58975b-dab1-420e-8d09-f8f8bec23594.png",
+      "sha256": "2c2542447f003efc0e21fbce1c8d4c9f126d77c3a3878f1d9f7c9b2b3737d300",
+      "sourceSha256": "2c2542447f003efc0e21fbce1c8d4c9f126d77c3a3878f1d9f7c9b2b3737d300",
+      "dimensions": [
+        1145,
+        1374
+      ],
+      "bytes": 1037947,
+      "prompt": "Create ONE isolated complete adult officer in true RIGHT-facing side profile, using these two references as binding authority for the SAME officer, mature face, navy/blue-grey patterned protective uniform, raised clear visor, curly brown hair, elbow/knee/shin armour, belt kit and substantial whole lace-up boots. Keep the worn painterly Berlin / Disco Elysium-inspired angular fabric and adult head-to-body and limb proportions. The first reference is identity/costume authority; the second reference's SECOND figure is the right-profile walking-contact and leg anatomy authority. Paint the complete connected torso, BOTH continuous hip-to-knee trouser legs, BOTH knees, shins and whole boots in a natural clear walking contact: near leg forward, far leg back, both soles on one baseline. This is specifically an occlusion repair: move the anatomical RIGHT forearm and its gripping hand slightly forward so her ONE black baton points diagonally DOWN AND FORWARD entirely in transparent air ahead of the trouser legs and toes. The baton must NOT cross, cover, cut through or obscure either thigh, knee or shin. Keep the baton held naturally in that one right hand; no floating prop, duplicated baton or extra hand. Leave both complete painted leg connections visible so they can be animated without inventing paint hidden behind the baton. The other arm stays relaxed and anatomically attached. Preserve the same serious weathered face without beautifying, enlarging the head or shortening limbs. Entire cap/visor, shoulders, both hands, baton tip and both whole boots fit with generous transparent margins; one figure only, no ground shadow, background, text, border or cropped limbs.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+        "assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-contacts-v1.png"
+      ],
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/police-riot-female-clear-leg-right-v1/request.json",
+      "sourceReviewReceiptSha256": "d35204274c31d909ab0f94b69db44ccb99e54cd271002b00ed3e9cae07e46ccf",
+      "status": "Unselected own-right-profile source repair; native wide-stride/turn/equipment coherence review outstanding.",
+      "producerFindings": "Root viewed actual generated full figure: adult face/uniform, whole continuous legs and boots, baton moved into clear air ahead of knees. No hidden trouser paint fabricated by the animator.",
+      "generationRequest": {
+        "prompt": "Create ONE isolated complete adult officer in true RIGHT-facing side profile, using these two references as binding authority for the SAME officer, mature face, navy/blue-grey patterned protective uniform, raised clear visor, curly brown hair, elbow/knee/shin armour, belt kit and substantial whole lace-up boots. Keep the worn painterly Berlin / Disco Elysium-inspired angular fabric and adult head-to-body and limb proportions. The first reference is identity/costume authority; the second reference's SECOND figure is the right-profile walking-contact and leg anatomy authority. Paint the complete connected torso, BOTH continuous hip-to-knee trouser legs, BOTH knees, shins and whole boots in a natural clear walking contact: near leg forward, far leg back, both soles on one baseline. This is specifically an occlusion repair: move the anatomical RIGHT forearm and its gripping hand slightly forward so her ONE black baton points diagonally DOWN AND FORWARD entirely in transparent air ahead of the trouser legs and toes. The baton must NOT cross, cover, cut through or obscure either thigh, knee or shin. Keep the baton held naturally in that one right hand; no floating prop, duplicated baton or extra hand. Leave both complete painted leg connections visible so they can be animated without inventing paint hidden behind the baton. The other arm stays relaxed and anatomically attached. Preserve the same serious weathered face without beautifying, enlarging the head or shortening limbs. Entire cap/visor, shoulders, both hands, baton tip and both whole boots fit with generous transparent margins; one figure only, no ground shadow, background, text, border or cropped limbs.",
+        "referenced_image_paths": [
+          "C:/Users/cogpsy-vrlab/.codex/worktrees/street-police-complete/GermanySimulator/assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-v3.png",
+          "C:/Users/cogpsy-vrlab/.codex/worktrees/street-police-complete/GermanySimulator/assets/sprite-sources/berlin-street-20261022/police-riot-female-expressionist-contacts-v1.png"
+        ],
+        "transparent_background": true
+      }
     }
   ]
 }

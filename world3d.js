@@ -1,4 +1,4 @@
-import {createPoliceSprites,policeTier} from './police-sprites.js?v=20261021-police';
+import {createPoliceSprites,policeTier} from './police-sprites.js?v=20261023-police-adults';
 import {createStreetPortraitDisplay} from './street-character-portrait.js';
 import {modelLoaderWithSignal,loadTextureImage} from './asset-loaders.js?v=20261020-bounded-assets';
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
@@ -1275,16 +1275,28 @@ function showRendererFailure(error){
     const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
     personFallbackMaterials.set(kind,material);return material;
   }
-  function character(kind,height=kind==="police"?1.56:1.5){
-    if(kind==="player"||kind==="police"){
-      const root=new T.Group(),material=kind==="player"?M.player:M.police;
+  function character(kind,height=kind==="police"?2.33:1.5){
+    if(kind==="police"){
+      const root=new T.Group();
+      box(.42,.76,.3,M.police,0,1.16,0,root);
+      const head=new T.Mesh(new T.SphereGeometry(.18,10,7),M.skin);head.position.y=1.84;root.add(head);
+      const neck=new T.Mesh(new T.CylinderGeometry(.08,.08,.12,8),M.skin);neck.position.y=1.6;root.add(neck);
+      const leg=new T.CylinderGeometry(.06,.07,.78,8),arm=new T.CylinderGeometry(.05,.06,.7,8);
+      const ll=new T.Mesh(leg,M.police),rl=ll.clone(),la=new T.Mesh(arm,M.police),ra=la.clone();
+      ll.position.set(-.1,.39,0);rl.position.set(.1,.39,0);la.position.set(-.27,1.19,0);ra.position.set(.27,1.19,0);
+      root.add(ll,rl,la,ra);root.userData={ll,rl,la,ra};root.name="police animated 3D fallback";
+      const cap=new T.Mesh(new T.CylinderGeometry(.19,.19,.08,10),M.dark);cap.position.y=2.06;root.add(cap);
+      for(const part of root.children){part.position.multiplyScalar(2.33/2.1);part.scale.multiplyScalar(2.33/2.1)}
+      return root;
+    }
+    if(kind==="player"){
+      const root=new T.Group(),material=M.player;
       box(.42,.72,.3,material,0,.72,0,root);
       const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;root.add(head);
       const leg=new T.CylinderGeometry(.06,.07,.5,8),arm=new T.CylinderGeometry(.05,.06,.48,8);
       const ll=new T.Mesh(leg,material),rl=ll.clone(),la=new T.Mesh(arm,material),ra=la.clone();
       ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);
       root.add(ll,rl,la,ra);root.userData={ll,rl,la,ra};root.name=kind+" animated 3D model";
-      if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;root.add(cap)}
       return root;
     }
     const root=new T.Group(),planeHeight=height*192/176;

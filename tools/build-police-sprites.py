@@ -6,11 +6,13 @@ Source sheets are immutable ImageGen paint; no generative upscaling is used.
 from pathlib import Path
 from io import BytesIO
 import hashlib
+import argparse
+import importlib.util
 import json
 import sys
 import numpy as np
 from PIL import Image, ImageDraw
-from scipy.ndimage import label
+from scipy.ndimage import label,find_objects,distance_transform_edt
 label_components=label
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +25,131 @@ QA = ROOT/'output/police-art'
 TIERS = ['patrol', 'protective', 'riot', 'heavy']
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def isolate_source_component(source,bounds):
+    pixels=np.asarray(source.convert('RGBA')).copy()
+    components,_=label(pixels[:,:,3]>=20)
+    matches=[index for index,region in enumerate(find_objects(components),1)
+        if region is not None and [region[1].start,region[0].start,region[1].stop,region[0].stop]==bounds]
+    if len(matches)!=1:raise ValueError('Selected source component bounds no longer match')
+    distance,nearest=distance_transform_edt(components==0,return_indices=True)
+    owned=(components==matches[0])|((pixels[:,:,3]<20)&(distance<=2)&(components[tuple(nearest)]==matches[0]))
+    pixels[~owned]=0
+    return Image.fromarray(pixels)
+
+def adult_rows(builder,person,actions):
+    if len(actions)!=4:raise ValueError('Police actions require four source keys')
+    rows=[];sources=[];audit={}
+    for direction in ['down','right','up','left']:
+        walk,records=builder.motion(person,direction,count=8)
+        rows.append(walk);sources.append(builder.neutral(person,direction));audit[direction]=records
+    rows.append(sources+sources)
+    rows.append([actions[i] for i in [0,1,2,2,2,1,0,0]])
+    rows.append([actions[i] for i in [0,1,3,3,3,1,0,0]])
+    return rows,audit
+
+def validate_adult_geometry(spec):
+    expected={'working':{'figureHeight':400,'baseline':472},'cell':[160,192],
+              'figureHeight':125,'pivot':[80,147.5]}
+    if any(spec.get(key)!=value for key,value in expected.items()):
+        raise ValueError('Adult police geometry must match the fixed native packing')
+    if any(person.get('figureWorldHeight')!=2.33 or person.get('cycle_distance')!=65.24
+           for person in spec['characters'].values()):
+        raise ValueError('Adult police geometry must match the shared world height and cycle')
+    for person in spec['characters'].values():
+        for view in person['views'].values():
+            source_cycle=4*view['landmarks']['step_width']*person['figureWorldHeight']/400/.02
+            if abs(source_cycle-person['cycle_distance'])>1e-9:
+                raise ValueError('Adult police cycle must match authored planted-sole travel')
+
+def load_adult_builder(spec_path):
+    definition=importlib.util.spec_from_file_location('police_family',ROOT/'tools/build-street-speaker-family.py')
+    family=importlib.util.module_from_spec(definition);definition.loader.exec_module(family)
+    builder,spec=family.configure(spec_path)
+    validate_adult_geometry(spec)
+    register=builder.street.register_source
+    def registered_component(source,view,scale,baseline):
+        return register(isolate_source_component(source,view['component_bounds']),view,scale,baseline)
+    builder.street.register_source=registered_component
+    return builder,spec
+
+def adult_action_keys(builder,person):
+    if len(person['actions'])!=4:raise ValueError('Police actions require four source keys')
+    frames=[]
+    for entry in person['actions']:
+        path=ROOT/entry['source']
+        if sha(path)!=entry['sourceSha256']:raise ValueError('Changed police action source')
+        image,_=builder.street.register_source(Image.open(path).convert('RGBA'),entry,entry['scale'],builder.BASELINE)
+        frames.append(image)
+    return frames
+
+def write_adult_variant(rows,size,path):
+    atlas=Image.new('RGBA',(size[0]*8,size[1]*7))
+    for row,strip in enumerate(rows):
+        for col,frame in enumerate(strip):atlas.alpha_composite(pack_cell(frame,size),(col*size[0],row*size[1]))
+    pixels=np.asarray(atlas).copy();pixels[pixels[:,:,3]<12]=0
+    encoded=BytesIO();Image.fromarray(pixels).save(encoded,format='WEBP',lossless=True,method=6,exact=True)
+    path.write_bytes(encoded.getvalue());decoded=Image.open(path).convert('RGBA')
+    for row in range(7):
+        for col in range(8):
+            alpha=np.asarray(decoded.crop((col*size[0],row*size[1],(col+1)*size[0],(row+1)*size[1])))[:,:,3]
+            if any([alpha[:2].max(),alpha[-2:].max(),alpha[:,:2].max(),alpha[:,-2:].max()]):
+                raise ValueError(f'Nontransparent adult police gutter: {path.name}/{row}/{col}')
+            groups,_=label(alpha>=128)
+            if sum(area>max(4,size[0]*size[1]*.001) for area in np.bincount(groups.ravel())[1:])!=1:
+                raise ValueError(f'Detached adult police paint: {path.name}/{row}/{col}')
+    return {'file':path.name,'sha256':sha(path),'bytes':path.stat().st_size,
+            'width':decoded.width,'height':decoded.height,'decodedRGBA':decoded.width*decoded.height*4}
+
+def adult_main():
+    parser=argparse.ArgumentParser(description='Source-registered adult police export using the existing family movement builder')
+    parser.add_argument('--adult',action='store_true')
+    parser.add_argument('--spec',type=Path,default=SOURCE/'adult-motion.json')
+    parser.add_argument('--output',type=Path,default=QA/'adult-export')
+    parser.add_argument('--character',action='append')
+    parser.add_argument('--probe',action='store_true')
+    parser.add_argument('--check',action='store_true')
+    args=parser.parse_args();builder,spec=load_adult_builder(args.spec)
+    selected=args.character or list(spec['characters'])
+    if any(key not in spec['characters'] for key in selected):raise ValueError('Unknown adult police family')
+    output=args.output.resolve();review=QA/'adult-fit';review.mkdir(parents=True,exist_ok=True)
+    if args.check:
+        manifest=json.loads((output/'manifest.json').read_text())
+        if manifest['builderSha256']!=sha(Path(__file__)) or manifest['configurationSha256']!=sha(args.spec):
+            raise ValueError('Stale adult police builder/configuration binding')
+        for key in selected:
+            person=spec['characters'][key]
+            if manifest['sourceBindings'][key]!=builder.source_bindings(person):raise ValueError('Changed police source binding')
+            adult_action_keys(builder,person)
+            for asset in manifest['variants'][key].values():
+                path=output/asset['file']
+                if sha(path)!=asset['sha256'] or path.stat().st_size!=asset['bytes']:raise ValueError('Changed police export')
+        print('Adult police source/export bindings passed:',','.join(selected));return
+    manifest={'version':2,'method':'source-registered intact painted limbs; four actual directions, owned equipment and authored actions',
+        'columns':8,'rows':7,'desktopCell':[160,192],'mobileCell':[120,144],
+        'pivot':[.5,472/614.4],'figureHeightWorld':2.33,'sourceFigureHeight':400,'sourceFrameHeight':614.4,
+        'cycleDistance':65.24,'clips':{'down':0,'right':1,'up':2,'left':3,'idle':4,'warning':5,'ticket':6},
+        'mirroring':'none; each direction has its own source registration','builderSha256':sha(Path(__file__)),
+        'configurationSha256':sha(args.spec),'sourceBindings':{},'variants':{},'status':'candidate; encoded/rendered review outstanding'}
+    for key in selected:
+        person=spec['characters'][key];actions=adult_action_keys(builder,person)
+        rows,audit=adult_rows(builder,person,actions)
+        for row,direction in enumerate(['down','right','up','left']):
+            for index in [0,2,4,6]:rows[row][index].save(review/f'{key}-{direction}-probe-{index}.png')
+            builder.street.opaque_board(rows[row]+[rows[4][row]],3,'#eee8db').save(review/f'{key}-{direction}-working.png')
+        if args.probe:
+            print('Prepared adult police extreme/neutral probes:',key,flush=True)
+            continue
+        output.mkdir(parents=True,exist_ok=True);variants={}
+        for client,size in [('desktop',(160,192)),('mobile',(120,144))]:
+            path=output/f'{key}{"-mobile" if client=="mobile" else ""}.webp'
+            variants[client]=write_adult_variant(rows,size,path)
+            image=Image.open(path).convert('RGBA');background=Image.new('RGB',image.size,'#eee8db' if client=='desktop' else '#25272b')
+            background.paste(image,(0,0),image);background.save(review/f'{key}-{client}-all.png')
+        manifest['variants'][key]=variants;manifest['sourceBindings'][key]=builder.source_bindings(person)
+        builder.json_write(review/f'{key}-motion-records.json',audit)
+        print('Exported adult police candidate:',key,flush=True)
+    if not args.probe:builder.json_write(output/'manifest.json',manifest)
 
 def extract(sheet, col, row, columns, rows):
     # One sheet-wide transform. Never independently fit generated cells/frames.
@@ -155,4 +282,6 @@ def main():
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
     print(json.dumps({'variants':len(manifest['variants']),'desktopBytes':sum(v['desktop']['bytes'] for v in manifest['variants'].values()),'mobileBytes':sum(v['mobile']['bytes'] for v in manifest['variants'].values()),'review':str(QA)}))
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    if '--adult' in sys.argv:adult_main()
+    else:main()

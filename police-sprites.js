@@ -1,7 +1,7 @@
 import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
 
 export const POLICE_TIERS=Object.freeze(['patrol','protective','riot','heavy']);
-export const POLICE_SPRITE_LAYOUT=Object.freeze({columns:8,rows:7,cellWidth:160,cellHeight:192,pivot:472/614.4,cycleDistance:1.56/.02/422*96});
+export const POLICE_SPRITE_LAYOUT=Object.freeze({columns:8,rows:7,cellWidth:160,cellHeight:192,pivot:472/614.4,cycleDistance:65.24});
 export function policeTier(stars){return stars>=5?'heavy':stars>=4?'riot':stars>=3?'protective':'patrol'}
 
 // Distance is collision-resolved game travel since the previous update, not speed.
@@ -25,7 +25,7 @@ export function policeSpriteFrame(state,{distance=0,dt=0,talking=false,gesture=n
 
 export function createPoliceSprites(T,{queueAsset,camera,mobile=false}={}){
   const actors=new Map(),resources=new Map();let retired=false;
-  const height=1.56*614.4/422;
+  const height=2.33*614.4/400;
   function release(resource){
     if(--resource.refs>0)return;
     resource.owner.retired=true;resource.owner.controller.abort();resource.texture?.dispose();
@@ -37,7 +37,7 @@ export function createPoliceSprites(T,{queueAsset,camera,mobile=false}={}){
     resources.set(key,resource);
     const load=async({signal}={})=>{
       try{
-        const texture=await loadThreeTexture(T,`./assets/characters/police/${key}${mobile?'-mobile':''}.webp?v=20261021-police`,signal,resource.owner.controller.signal);
+        const texture=await loadThreeTexture(T,`./assets/characters/police/${key}${mobile?'-mobile':''}.webp?v=20261023-police-adults`,signal,resource.owner.controller.signal);
         if(resource.owner.retired||retired||signal?.aborted){texture.dispose();return false}
         texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
         resource.texture=texture;return true;
@@ -88,7 +88,11 @@ export function createPoliceSprites(T,{queueAsset,camera,mobile=false}={}){
     for(const {mesh} of state.fallback)mesh.visible=false;
     const uv=state.mesh.geometry.attributes.uv,u=pose.frame/8,v=1-(pose.row+1)/7;
     uv.setXY(0,u,v+1/7);uv.setXY(1,u+1/8,v+1/7);uv.setXY(2,u,v);uv.setXY(3,u+1/8,v);uv.needsUpdate=true;
-    if(view){state.mesh.quaternion.copy(state.host.quaternion).invert().multiply(view.quaternion);state.mesh.position.set(0,height*(POLICE_SPRITE_LAYOUT.pivot-.5),0).applyQuaternion(state.mesh.quaternion)}
+    if(view){
+      const yaw=state.mesh.rotation.setFromQuaternion(view.quaternion,'YXZ').y;
+      state.mesh.quaternion.copy(state.host.quaternion).invert();state.mesh.rotateY(yaw);
+      state.mesh.position.set(0,height*(POLICE_SPRITE_LAYOUT.pivot-.5),0).applyQuaternion(state.mesh.quaternion);
+    }
     return true;
   }
   return {attach,update,detach,

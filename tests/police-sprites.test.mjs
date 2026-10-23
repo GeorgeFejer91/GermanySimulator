@@ -32,6 +32,28 @@ test('view-relative facing uses actual front, rear and both side rows',()=>{
   assert.deepEqual([0,Math.PI/2,Math.PI,-Math.PI/2].map(facing=>policeSpriteFrame({},{facing,distance:1}).row),[0,1,2,3]);
   assert.equal(policeSpriteFrame({},{facing:Math.PI,cameraYaw:Math.PI,distance:1}).row,0);
 });
+
+test('admitted adult paint uses its authored figure height and planted stride',async()=>{
+  const original={fetch:globalThis.fetch,Image:globalThis.Image},jobs=[],sizes=[];
+  const T={
+    Texture:class{dispose(){}},
+    PlaneGeometry:class{constructor(width,height){sizes.push({width,height});this.attributes={uv:{setXY(){}}}}dispose(){}},
+    MeshBasicMaterial:class{constructor(options){Object.assign(this,options)}dispose(){}},
+    Mesh:class{constructor(geometry,material){Object.assign(this,{geometry,material,userData:{}})}}
+  };
+  const system=createPoliceSprites(T,{queueAsset:(_position,_priority,run)=>jobs.push(run)});
+  try{
+    globalThis.fetch=async()=>({ok:true,blob:async()=>new Blob(['police source'])});
+    globalThis.Image=class{set src(value){if(value)queueMicrotask(()=>this.onload?.())}};
+    const fallback={visible:true},host={position:{x:0,z:0},children:[fallback],add(){},remove(){}},actor={};
+    system.attach(actor,host);assert.equal(await jobs[0](),true);
+    assert.equal(system.update(actor),true);assert.equal(fallback.visible,false);
+    assert.ok(Math.abs(sizes[0].height-2.33*614.4/400)<1e-12,'the whole adult source occupies2.33world units');
+    assert.ok(Math.abs(sizes[0].width/sizes[0].height-160/192)<1e-12);
+    assert.equal(POLICE_SPRITE_LAYOUT.cycleDistance,65.24);
+    assert.equal(POLICE_SPRITE_LAYOUT.pivot,472/614.4);
+  }finally{system.dispose();Object.assign(globalThis,original)}
+});
 test('one admitted texture job is shared; final detach aborts it and preserves fallback',()=>{
   const jobs=[],owner={};
   const system=createPoliceSprites({}, {queueAsset:(position,priority,run,lifetime)=>jobs.push({position,priority,run,lifetime}),mobile:true});
@@ -67,6 +89,8 @@ test('shared pending texture admission follows the nearest surviving officer',()
 test('every encoded gender/equipment/client atlas is bound to a digest and bounded decode',()=>{
   const path=new URL('../assets/characters/police/manifest.json',import.meta.url);
   const manifest=JSON.parse(readFileSync(path));assert.equal(Object.keys(manifest.variants).length,8);
+  assert.equal(manifest.figureHeightWorld,2.33);assert.equal(manifest.sourceFigureHeight,400);
+  assert.equal(manifest.sourceFrameHeight,614.4);assert.equal(manifest.cycleDistance,POLICE_SPRITE_LAYOUT.cycleDistance);
   for(const variants of Object.values(manifest.variants))for(const [client,asset] of Object.entries(variants)){
     const bytes=readFileSync(new URL(asset.file,path));assert.equal(bytes.length,asset.bytes);
     assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256);
