@@ -5,7 +5,7 @@ reconstruction acceptance in the [owning guide](https://github.com/GeorgeFejer91
 for the missing interior design, artworks/mannequin sculptures and sound system.
 Those are required parts of the full asset, not optional decoration.
 
-The live study still contains generic fixtures. **None of the named artworks
+The furniture and speaker updates remain provisional. **None of the named artworks
 below has been recreated in the model yet.** Research, an object identification
 or a manufacturer's CAD download does not establish a finished interior.
 

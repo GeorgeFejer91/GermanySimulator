@@ -245,3 +245,21 @@ The façade now has separate glazing tiers, steel frames, masonry bands, physica
 Next work: prioritise the missing interior design using INTERIOR.md, including distinctive furniture, art, room connections and sound-system geometry; model Lab.oratory, the extra Panorama lounge level, bathrooms and services. Verify circulation/elevations rather than adding unlocated objects. Per-elevation openings, roof/rear detail, smoking bridge and observed weathering remain on the full-goal checklist. The retained 44 m authoring coordinates are transformed at asset construction and are no longer the shipped exterior width; do not treat those old coordinates or inferred partitions/repeated façades as measured facts. Primary exterior data does not establish room dimensions or which annex contains a particular interior use.
 
 Repository: `C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator`. The local `codex/neighborhood-walk-talk` branch has no initial commit/remote and substantial pre-existing staged work. Publish only the Berghain scope and builder allowlist against verified `GeorgeFejer91/GermanySimulator` remote `main` using an isolated bare repository/index under ignored `output/`; fetch/push by explicit repository URL because this bare repository also has no named origin. Preserve the original index and game work (2,285 staged entries at this checkpoint). Runtime commit `9c842707e588e5e218109a0f63eb51c73a472b1f` is confirmed deployed: **https://germanysimulator.de/berghain/model.html**. Pages workflow `39977033051` succeeded; 31 published-file comparisons and two live browser tours passed, with desktop/Android emulation distinguished in VALIDATION.md. The expanded research inventory is a subsequent documentation-only publication. The shared root handoff remains authoritative for unrelated game work.
+
+### Speaker update published — versioned preview verified
+
+Runtime commit `ed0e0c251ccc1869ce981d3ba3cf704b8f013b94`, parent `211282f`, is pushed to main.
+Public preview: **https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/ed0e0c251ccc1869ce981d3ba3cf704b8f013b94/geheim/index.html**. A fresh visit may show the provider's
+Open the page button. `output/berghain-speaker-immutable-verification.json`
+confirms all 39 published files exactly match Git objects. The actual public
+desktop/Android-portrait entry/exit, speaker/native GLB and avatar cases pass 6/6
+in `output/berghain-speaker-immutable-browser/report.json`.
+
+The permanent **https://germanysimulator.de/geheim/** already has the verified
+controllable avatar and natural entrance interaction. Its equipment update is
+queued in Pages run 40000026294 behind run 39993645344; do not claim the new
+speaker model is canonical until file and browser checks confirm deployment.
+The published speaker catalogue has 90 entries. Concurrent exterior work in the
+primary checkout is separate and preserved. The primary index remains SHA256
+`704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105`.
+The full realistic reconstruction remains active; art/room gaps are in INTERIOR.md.

@@ -425,7 +425,7 @@ survey; source part footprint date is 2023-03-11.
 2026-10-23. Frozen contract: `output/berghain-speaker-candidate.json`,33 files,
 base `83cac59dc3c5fb550db47ce38a42b14c785ed639`. Concurrent exterior/landscape
 changes were preserved in the primary checkout. The original speaker candidate
-was recovered in `output/berghain-speaker-release`, where all33 SHA-256 hashes
+was recovered in `output/berghain-speaker-release`, where all 33 SHA-256 hashes
 match, including GLB `0fdcdeb142fffdfa1d6e1c226e7cacd1a64db51b3d4b42b00cbc0c7981a98583`.
 No primary index/reset/revert operation was used. The unchanged shared door
 module's extra trailing blank line is excluded from publication.
@@ -448,18 +448,18 @@ Executed on the isolated served source, silently in headless Chromium151:
 | `output/berghain-speaker-isolated-furniture-browser/report.json` |4/4 PASS: defining furniture compositions/native GLB and avatar at bar on desktop/Android portrait. Covers the shared native-asset helper extraction. |
 
 Independent read-only Physics reviewer: P1/P2/P4/P5/X1 PASS for this viewer.
-Fresh29/29 scoped tests;44 components/58 equipment solids;176 visible component
+Fresh 29/29 scoped tests;44 components/58 equipment solids;176 visible component
 surfaces fit transformed collision envelopes. No opposing same-assembly cabinet
-surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at6.65m;
-tilted towers sit2.68mm above their supports.70/70 shallow overlap starts recover
-legally; seven10m western-aisle lanes each have101/101 legal samples. Supplied
+surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at 6.65 m;
+tilted towers sit 2.68 mm above their supports. 70/70 shallow overlap starts recover
+legally; seven 10 m western-aisle lanes each have 101/101 legal samples. Supplied
 matching rendered evidence shows body separation. P3 crowd/vehicles out of scope.
 
 Independent read-only Camera/scale reviewer: C1–C5/X1 PASS as adapted to the
-three-dimensional architectural viewer. Fresh32/32 tests; ray probes enter real
-horns .19–.69m; source/native depth persists, full1.80m avatar remains visible,
+three-dimensional architectural viewer. Fresh 32/32 tests; ray probes enter real
+horns .19–.69m; source/native depth persists, full 1.80 m avatar remains visible,
 and manufacturer cabinet size relates plausibly to it. Both reviewers confirm
-all33 hashes and all17 supplied browser cases. No required fix remains.
+all 33 hashes and all 17 supplied browser cases. No required fix remains.
 
 Evidence limits: room selection is a diagnostic shortcut in speaker/furniture
 views; natural entrance and stairs are proved separately. Native GLB uses its
@@ -470,3 +470,16 @@ moving-primary queue failure and diagonally sliding pilot are not acceptance
 evidence; the frozen release passes the original queue guard and head-on block.
 Retained overhead DS assemblies, Panorama Studt rig, named artworks and missing
 rooms remain unfinished. This accepts an equipment increment, not the full goal.
+
+### Public speaker preview verification
+
+Pushed `ed0e0c251ccc1869ce981d3ba3cf704b8f013b94` with 17 scoped changed paths, preserving parent `211282f`
+and the unrelated staged primary checkout. Immutable public files pass 39/39 exact
+SHA-256 comparisons in `output/berghain-speaker-immutable-verification.json`.
+`output/berghain-speaker-immutable-browser/report.json` passes 6/6 on the actual
+public URL: natural entrance/exit/refresh, source/native speakers and controlled
+human near equipment, desktop and Android portrait emulation. Expected hashes
+are read from the published Git objects. Silent Chromium; no physical device.
+Permanent Geheim equipment deployment remains pending Pages run 40000026294;
+the previously verified canonical avatar/door remains available. Do not label
+immutable preview evidence as canonical Pages evidence.
