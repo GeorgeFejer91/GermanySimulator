@@ -15,7 +15,7 @@ async function selectRoom(page,name){
   },viewpoints[name].position);
 }
 
-async function travel(ctx,target,heading){
+export async function travel(ctx,target,heading){
   const {page,context,profile}=ctx;
   const start=JSON.parse(await page.locator('#model').getAttribute('data-position'));
   const yaw=Math.atan2(start.x-target.x,start.z-target.z);

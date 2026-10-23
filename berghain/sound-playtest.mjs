@@ -24,7 +24,7 @@ export default {
     await dragLook(page,context,profile,-yaw/.004);
     await artifacts.screenshot(page,'main-hall-speaker-stack.png');
     const native=await renderNativeAsset(page,{position:before,yaw});
-    assert.equal(native.equipment,44);assert.equal(native.fixtures,35);
+    assert.equal(native.equipment,44);assert.equal(native.fixtures,42);
     const manifest=JSON.parse(readFileSync(new URL('../assets/models/berghain/manifest.json',import.meta.url)));
     assert.equal(native.bytes,manifest.bytes);assert.equal(native.meshes,manifest.meshes);
     await artifacts.screenshot(page,'native-glb-speaker-stack.png');await disposeNativeAsset(page);

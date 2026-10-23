@@ -705,3 +705,106 @@ change is bridged by that exception. The coherent commit is based on a2b23ae,
 preserving the unrelated street-character publications and the original primary
 index. Publication includes only 29 scoped paths, original meshes/maps, tests and
 owning notes; research downloads/output are excluded.
+
+## Panorama ceiling and services — revised integrated candidate
+
+Base a9fff2952ebb6ecb6106cb2f1f7a82668137cfcd. Primary staged index is preserved
+704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105. This goal
+turn is PROGRESS: new source-derived ceiling/services geometry, export and
+independent repair evidence. Full-building completion remains unproven.
+
+I19 actual architect gallery views 15/16 inform pale staggered acoustic clouds,
+transverse beams, cast radiators and visible conduit/tube fittings. Earlier
+switchgear bar/cabins01/03/04/05 are not inserted into the contemporary base;
+A13 documents a 2010 counter redesign, so the gallery is not one dated survey.
+No photograph or external mesh is embedded. Counts, positions, floor 13.25 m and
+soffit 17.95 m (4.70m clear) remain authoring estimates. No acoustic simulation.
+
+The 72-file freeze is output/berghain-services-candidate.json. Final source and
+native GLB geometry: 23,659,832 B, 238,560 triangles, 99 mesh/material groups, 18 shared
+original maps (4,219,348 embedded PNG bytes), unchanged calibrated exterior bounds.
+GLB SHA-256 88e63d565d8ddc93a8d404f532ca74f5a5bff45d0ce2defd40ea8e28f0d32fa8.
+Six fixtures are added, bringing the source/native inventory to 42. The stale
+sound-playtest count 35 predated the lounge addition; it now checks exact 42,
+while equipment remains exact 44 and artworks 1. No assertion is disabled.
+
+Observed RED tests covered missing architecture, cloud/beam intersections and
+actual low-metal body penetration. Revised focused Node suite passes 61/61.
+Sixteen clouds now avoid all three beams; fresh independent minimum AABB gap
+.237m, lowest cloud17.50m and top .15m below ceiling underside. A 1.80 m person on
+13.25m floor has 2.45 m cloud head clearance. Lowest intentionally uncollided new
+fitting is diffuser end cap 15.31 m: .26m above standing head 15.05 m.
+
+Physics review found missing thin-conduit collision and a .045m full-body
+penetration at radiator valves. Repairs give each radiator 32 linked solids
+(24 ribs, 2 headers, 2 feet, 2 supply pipes, 2 valves) and each of two tube fixtures 2 rod +
+6 clamp solids. All 112 solids enclose all 3,832 transformed box/cylinder vertices;
+max outside 0. Fresh rejected overlap centers and zero-input recovery are legal.
+The body-clear window aisle remains connected, with minimum legal-center span
+.86 author m (approximately 1.30 m physical clearance including body diameter).
+All four actual production stairs ascend/descend legally in fresh CPU probes.
+
+Browser evidence is sequential, headless and muted before navigation:
+- output/berghain-services-pilot-browser:1/2; the initial route hit an existing
+  column, retained as failed diagnostic. Routing around the column/DJ table
+  passes1/1 in output/berghain-services-route-browser. Those are pre-final.
+- output/berghain-services-final-browser/report.json:28/28 on the saved
+  pre-collision freeze. It covers source/native services/lounge, all3layouts,
+  natural entrance, stairs, lifecycle, texture failure,18shared-map disposal,
+  furniture/artwork/speakers. It cannot clear the later contact repairs.
+- output/berghain-services-repaired-browser/report.json:15/15 with exact72
+  accepted collision-candidate hashes, covering all3layouts at the new service
+  geometry/window aisle, upper route, entry/exit and existing furniture/art avatar.
+- Camera review found the initial native radiator image was aimed at the wall.
+  The sole subsequent change is test framing: use the clear approach1.15m away
+  and pitch−.75. Production bytes, geometry and collision are unchanged.
+  output/berghain-services-native-detail-browser/report.json passes3/3 with
+  all72current hashes and genuinely visible native radiator detail.
+- output/berghain-services-overlook-browser/report.json passes3/3 on the same
+  current72hashes: real upper-rail approach and downward look, full human,
+  editable/native lower-room ceiling relation in desktop/portrait/landscape.
+
+The old28, repaired15 and final detail/overlook evidence are not one undated
+current-hash run. The sole test-framing bridge is preserved against
+output/berghain-services-collision-candidate.json; independent Physics explicitly
+rebinds it and passes P1/P2/P4/P5/scopedX1. Camera final visual verdict was pending
+at that checkpoint; final acceptance below supersedes it. Physical Android/device GPU and listening NOT RUN. General
+photographic fidelity, real ceiling elevations, contemporary fixture inventory,
+full art/remaining-room geometry and measured circulation remain incomplete.
+
+### Final services acceptance and measured cost
+
+Both required independent reviewers accept the final 72-file candidate.
+Physics P1/P2/P4/P5/scoped X1 PASS: fresh 61 Node tests, repaired low-metal
+contacts and continuous aisle/four-stair probes. Camera C1–C5/scoped X1 PASS:
+fresh 20 Node tests, actual matrices/bounds, inspected source photographs and
+all supplied final source/native/radiator/overlook frames in three layouts.
+Current detail/overlook reports match all 72 hashes; the 15-case report is
+bridged solely across its later test-camera framing change. Earlier blank
+radiator frames are explicitly invalid for native-detail visual acceptance.
+No physical Android, device-GPU or perceptual listening evidence is implied.
+
+Comparable local reports output/berghain-services-cost-before/report.json and
+output/berghain-services-cost-after/report.json each pass 9/9: three cold
+contexts per desktop/Android-emulated portrait/landscape, same view/input,
+Chromium 151, DPR 2, local HTTP with no throttling, shared host. The baseline is
+an isolated complete a9fff29 runtime (91 files), reusing the prior pinned
+baseline plus exact published lounge blobs. Comparison data is in
+output/berghain-services-cost-comparison.json.
+
+Ordinary viewer transfer 5,683,608 to 5,686,614 bytes (+3,006); no GLB is fetched
+by ordinary viewing. The optional export grows by 270,192 bytes. Median ready
+milliseconds: desktop 872 to 1044 (ranges845–1492/896–1401); portrait885 to895
+(873–904/852–1087); landscape840 to922 (840–844/872–997). Product RAF p95 stays
+about 14 ms; all 18 runs stop continuing frames while idle. Median single-input
+sample per run: desktop11.9 to12.9ms, portrait17.8 to18.4ms, landscape20.2 to15.1ms.
+Overlapping shared-host timings and three samples do not prove a causal speedup
+or physical low-end-GPU qualification. Draw calls increase by 2 per viewport
+(including shadow passes); source asset groups increase 98 to 99. Texture count
+and embedded bytes remain 18 / 4,219,348. No added renderer, dependency or loop.
+
+Causal scope: source-derived solid ceiling/panels/low metal → existing layout
+solids → moveVisitor full-body exclusion/recovery → existing displacement-driven
+avatar/camera. Renderer and collision use the same part matrices; GLB exports
+the same visible geometry. The physics repair changes only solids, so the
+exported GLB stays byte-identical. No story/mission/audio dependency changes.

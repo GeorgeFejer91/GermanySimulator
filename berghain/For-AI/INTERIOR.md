@@ -186,3 +186,21 @@ printed installation imagery is still missing. No source photo pixels are shippe
 The frozen candidate and final checks are recorded in VALIDATION.md. Klo Bar/
 toilets, Lab.oratory, service/elevator positions, cabins and full artwork fidelity
 remain required. The entire reconstruction goal stays active.
+
+## Panorama ceiling and services increment
+
+I19 views 15/16 add clear later photographs of staggered pale acoustic panels,
+beam ceiling, cast radiators and exposed conduit. The source/native asset now
+models these forms with an estimated 17.95 m soffit (4.70 m clear above 13.25 m), 16
+clouds, three 24-rib radiators, parallel conduit and tube diffusers. Existing
+pendants, DJ supports and perforated enclosure hangers terminate at the ceiling.
+Panel/beam separation and physical radiator components have focused checks.
+Counts, dimensions, anchors, heights and present retention remain estimates;
+this is not a measured reflected ceiling plan or an acoustic simulation.
+
+The older switchgear counter/cabins in gallery views 01/03/04/05 differ from the
+later redesigned counter in 06/07/15/16. A13 dates a counter refurbishment to2010.
+Those views are not proof that both bars coexist in today's Panorama. They
+remain research references pending current placement/survival evidence.
+Klo Bar/toilets, Lab, exact floor connections, complete artwork geometry/images,
+contemporary sound placement and full photographic fidelity remain required.
