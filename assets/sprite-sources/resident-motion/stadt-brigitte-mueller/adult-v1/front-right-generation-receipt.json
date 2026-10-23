@@ -1,0 +1,22 @@
+{
+  "id": "stadt-brigitte-mueller-adult-front-right-v2",
+  "tool": "built-in image_gen.imagegen",
+  "originalOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1697f-806b-7970-bd49-5bb18e620eab/exec-77f3d2d9-e975-4253-8469-ad28bbf8874f.png",
+  "file": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/front-right-v2.png",
+  "sha256": "41bf185746c9145053ae91dcd838409a2f1316c1f070058ed9f9bb4f782099dc",
+  "generationRequest": {
+    "prompt": "Use case: precise identity-preserving whole-body turn-anchor correction. Create EXACTLY ONE SINGLE complete older Berlin woman Brigitte Müller in FRONT-RIGHT THREE-QUARTER view, not four views. Image 1 establishes her mature adult cardinal identity; Image 2 shows her own attempted quarters. Correct ONLY the first quarter in Image2, whose body is too frontal: rotate the ENTIRE body farther toward the RIGHT PROFILE, halfway between the FRONT and RIGHT PROFILE of Image1. The result must clearly show the right side of her torso as well as a narrower portion of her front. Shoulder, bust, jacket lapels, pelvis, knees and BOTH full strap shoes rotate together by about45degrees. Nose points diagonally screen-right, the far eye partly shortened, right shoulder nearer and left shoulder receding. She looks to her own body heading, no independent head-only turn. NOT a front-facing torso, NOT true right profile, NOT rear view.\nKeep the exact same older woman's brown chin-length bob and pronounced grey front streak, small tired asymmetrical eyes behind round wire glasses, angular age-specific features, olive scarf, short BRICK RED jacket with lapels and buttons, charcoal KNEE skirt, grey stockings, BLACK FLAT STRAP shoes with cross-foot straps/round toes/low soles, NO laces. Her anatomical RIGHT hand is the near arm and EMPTY, relaxed attached down beside her. ONE cream envelope stays held by her anatomical LEFT hand/forearm against her LEFT hip, now the FAR arm: the envelope must naturally recede and may be partly hidden by torso. Do not relocate it to the near right hand. Full connected adult proportions and complete relaxed planted legs, same source identity and broad dry expressionist oil-brush garment finish as references. Roughly six-to-seven-head adult proportions; no oversized head, toy shading or new accessories.\nEntire single complete figure centered with generous transparent margins, both full shoes included and planted, all anatomy connected. Actual transparent RGBA outside figure including all corners. No ground/shadow/halo/gradient/environment/text/labels/other people.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/cardinals-v1.png",
+        "sha256": "22b094d405bfbcad221927fc3b62682c641244595c53ea2b16f7f69353212085"
+      },
+      {
+        "path": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/quarters-v1.png",
+        "sha256": "1ec16b986fa6a266b52512641b93e18264cab8eef9a100ee8cfd759ed973c4d5"
+      }
+    ]
+  },
+  "review": "PROVISIONAL source PASS: complete45-degree front-right torso/pelvis/knees/shoes, mature same woman, envelope held FAR left hand with empty NEAR right hand, own strap flats; full native turn sequence review remains."
+}

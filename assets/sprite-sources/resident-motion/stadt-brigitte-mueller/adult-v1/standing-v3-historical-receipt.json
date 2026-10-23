@@ -1,0 +1,51 @@
+{
+  "id": "stadt-brigitte-mueller-expressionist-standing-v3",
+  "file": "stadt-brigitte-mueller-expressionist-standing-v3.png",
+  "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8/exec-85c18ba4-439b-4519-810e-4fd754442143.png",
+  "prompt": "Use case: new identity-preserving FRONT standing sprite painting of ONE fictional Berlin resident.\nImage 1 is the PRIMARY FINISH/PROPORTION authority: Hartmut Keller. Use his distinctly mature, weathered expressionist oil/acrylic paint: hard cheek and brow planes, shadowed small eyes, broken broad directional brushwork, worn garment folds, real adult anatomy. Do not borrow his features, vest, radio or other clothes.\nImage 2 is the SECONDARY FINISH authority: Sabine Krueger. Use her elegant angular face construction, asymmetric gaze, controlled full-body adult proportions and broad blocked garment texture. Do not borrow her hair, mustard vest, blouse, book or shoes.\nImage 3 is Brigitte Müller's IDENTITY/OUTFIT authority only: preserve THIS older woman's warm brown bob with pronounced GREY FRONT STREAK, wire round glasses, reserved slightly stern face, olive green scarf, short BRICK-RED jacket with lapels and buttons, CHARCOAL KNEE SKIRT, GREY STOCKINGS, and BLACK FLAT STRAP SHOES (visible cross-foot leather straps, rounded toes, low flat soles; specifically NO laces or oxfords). ONE blank cream envelope tucked under her ANATOMICAL LEFT arm, on viewer-right in this front view, visibly held by the left hand. Her anatomical right hand on viewer-left is empty. Do not inherit Image 3's toy body, glossy face or smooth repetitive cloth shading.\nCreate EXACTLY ONE SINGLE COMPLETE WHOLE-BODY FRONT-FACING neutral standing Brigitte, not a turnaround or multiple people. Adult body and head scale like Hartmut/Sabine, lived-in and age-specific. Smaller tired eyes behind her glasses, asymmetrical eyelids, angled nose/cheeks, clear jaw/neck structure and fine age creases; retain her own face and grey-streak bob. Coat, skirt, scarf and stockings formed by BROAD oil-brush marks and angular value blocks tied to seams, drape and light; avoid all-over fine speckle and polished toy volume. Preserve the entire figure, both attached hands, distinct calves and both full strap flats with generous transparent margin, shared planted soles. Wardrobe and envelope must match Brigitte, while paint FINISH must stand beside Hartmut/Sabine as an original mature Berlin character.\nActual transparent RGBA outside the single figure, including all corners; do not include the brown backdrop of Image 1/2, ground, shadow, halo, glow, grid, text or other objects.",
+  "referencedSources": [
+    "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+    "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+    "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png"
+  ],
+  "expectedComponentCount": 1,
+  "status": "provisional-source-pass; One mature front-facing adult with original bob/grey streak, glasses, green scarf, brick-red jacket, charcoal knee skirt, grey stockings, and black flat strap shoes. One envelope visibly gripped by anatomical left hand; right hand empty. Face and garment planes read substantially closer to Sabine/Hartmut than v1/v2. No visible missing anatomy at native source size; visual acceptance at actual standing sprite size remains for integrator.",
+  "sourceReviewReceipt": "output/resident-source-batch-v3/receipt.json",
+  "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "bytes": 1815413,
+  "componentBounds": [
+    [
+      239,
+      23,
+      800,
+      1493
+    ]
+  ],
+  "alphaExtrema": [
+    0,
+    254
+  ],
+  "minimumCanvasMargin": 23,
+  "generationRequest": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      {
+        "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+      },
+      {
+        "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+      },
+      {
+        "path": "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png",
+        "sha256": "d95780d9cf524234b47b34bc602259ea245ff5bb109bef8f580c77afdb99b622"
+      }
+    ]
+  },
+  "runtimeAcceptance": "Front-derived adult standing paint selected locally; original standingOnly/no-mouth capability preserved. Native source/export review complete; rendered/specialist acceptance incomplete. Full-cast goal active and unpublished."
+}

@@ -1,0 +1,7 @@
+{
+  "actor": "stadt-brigitte-mueller",
+  "strideDistance": 11.83,
+  "sourceCalibration": "output/street-redesign/brigitte-mueller-end-to-end/sole-cadence/report.json",
+  "sourceCalibrationSha256": "7258cebaa7d7a28fd6e636eb0763f43075bdcdf997762e692456ab3f526038f4",
+  "purpose": "Own source-derived motion parameter; no mutable/full-registry generation dependency."
+}

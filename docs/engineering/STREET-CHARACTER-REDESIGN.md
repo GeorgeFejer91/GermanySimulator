@@ -537,3 +537,47 @@ traversal. Capture timings are diagnostic; physical Android, perceptual listenin
 and city-wide performance are not newly certified. Evidence/receipts remain in
 `output/hartmut-release/`. Publish immediately and verify after deployment;
 the remaining outdoor cast continues under the shared style goal.
+
+## Brigitte Mueller: mature painted street family
+
+Only `stadt-brigitte-mueller` changes from public7c0d8842. Her lined face,
+grey-streak brown bob, glasses, olive scarf, brick jacket, knee skirt, stockings
+and flat strap shoes remain distinct. LEFT owns the cream envelope; RIGHT stays
+empty. Adult nominal height2.33 and own source-fitted11.83stride read beside
+Sandales/Söder; all42other registry records, police and simulation stay exact.
+
+Eight genuine whole-body paintings supply412selected cells, four16phase walks,
+64phase stops, eight turn anchors and four distinct original quiet performances
+with original1280/960/960/960durations and idle/wait alias. All324supported mouth
+cells at each native size retain exact closed pixels/alpha and visible RGB
+articulation; rear lips remain null. Both original German recordings and cues,
+caption/voice ownership, routes and selective reaction lifecycle are preserved.
+
+Author22-output raw-only replay, three-profile media/body/fallback/lifecycle and
+formal412×2encoded-frame audits pass. Root verifies original53files/79pins,
+2104evidence hashes, four preserved references, seven generation helpers and
+four original tool outputs. A minimal integrator overlay supplies a tracked
+own motion spec and validation-only22hash/person baseline, preserving identical
+generator arguments and all22outputs. The exact repaired validator passes with
+old ignored expectations/current full registry absent; no second raw replay is
+claimed. A scoped Git attribute preserves the exact hash-bound mouth JSON;
+all73previous hashes remain unchanged in the final74pin candidate. All63candidate
+files are byte-exact. Actual packaging retains all9runtime files and omits all
+four offline originals without altering them. All209focused Node checks pass.
+
+Independent Physics checks824native cells, own RGB sole direction, all16gait
+phases on three layouts, planted stops, all four actions/reaction retirement/
+resume and54blocker holds. Staged vertical contacts retain complete shoes with
+at most one raster-row fringe. Camera checks three-layout population/car/door
+scale, both opaque depth orders, exact own136pixel fallback/hold and all eight
+actual turn anchors on desktop/portrait. Both final reviews preserve74pins;
+the earlier73native report is explicitly rebound through the attribute-only
+delta. Root views turn, scale and contact captures and accepts affected scopes.
+
+Prior URL/window/observer/staging-count fixture REDs and earlier missing-audit
+packet remain preserved. Camera resource wording records additional authorized
+Klaus CPU work alongside Ursula; the1.07GiB source/1147MiB camera low-memory
+wave does not certify broad concurrency. Scripted placement/UV probes and
+capture timings do not prove natural startup/E traversal, physical Android,
+perceptual listening or city-wide performance. Evidence: `output/brigitte-release/`.
+Publish immediately, verify the deployment and continue the remaining cast.

@@ -1,0 +1,362 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-brigitte-mueller",
+  "sourceHashes": {
+    "cardinals-v1.png": "22b094d405bfbcad221927fc3b62682c641244595c53ea2b16f7f69353212085",
+    "quarters-v1.png": "1ec16b986fa6a266b52512641b93e18264cab8eef9a100ee8cfd759ed973c4d5",
+    "front-right-v2.png": "41bf185746c9145053ae91dcd838409a2f1316c1f070058ed9f9bb4f782099dc"
+  },
+  "frontAlpha20Height": 846,
+  "wholeSourceDensityHeights": {
+    "cardinals-v1.png": 846,
+    "quarters-v1.png": 842,
+    "front-right-v2.png": 1472
+  },
+  "workingFigureHeight": 400,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        77,
+        25,
+        431,
+        871
+      ],
+      "sourcePivot": [
+        245.25,
+        871
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 172.5,
+          "bounds": [
+            127,
+            774,
+            218,
+            871
+          ],
+          "pixels": 5819
+        },
+        {
+          "x": 318.0,
+          "bounds": [
+            267,
+            774,
+            369,
+            871
+          ],
+          "pixels": 6163
+        }
+      ],
+      "workingOrigin": [
+        140.04255319148936,
+        60.17966903073284
+      ],
+      "workingBoundsAlpha20": [
+        177,
+        72,
+        344,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/down.png",
+      "registeredSha256": "50322f00e4b89b47c41cd757c00c2c51a40785278f7fdf0c593556a318adbc8f"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/front-right-v2.png",
+      "sourceBoundsAlpha20": [
+        313,
+        16,
+        749,
+        1488
+      ],
+      "sourcePivot": [
+        548.25,
+        1488
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 463.0,
+          "bounds": [
+            371,
+            1319,
+            555,
+            1488
+          ],
+          "pixels": 19618
+        },
+        {
+          "x": 633.5,
+          "bounds": [
+            518,
+            1319,
+            749,
+            1439
+          ],
+          "pixels": 18557
+        }
+      ],
+      "workingOrigin": [
+        107.01902173913044,
+        67.6521739130435
+      ],
+      "workingBoundsAlpha20": [
+        192,
+        72,
+        311,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/front-right.png",
+      "registeredSha256": "905f147832f378484f14b3a8618b83b72242948ee74ae2c94b15c90de7111743"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        559,
+        28,
+        777,
+        871
+      ],
+      "sourcePivot": [
+        681.0,
+        871
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 681.0,
+          "bounds": [
+            600,
+            774,
+            762,
+            871
+          ],
+          "pixels": 11277
+        }
+      ],
+      "workingOrigin": [
+        -65.98581560283691,
+        60.17966903073284
+      ],
+      "workingBoundsAlpha20": [
+        199,
+        73,
+        302,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/right.png",
+      "registeredSha256": "fdd468d2fcba4cb868e75d63eb6275f78cc8cd6e8900d601b75b5e0b12865cd4"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        547,
+        17,
+        819,
+        858
+      ],
+      "sourcePivot": [
+        695.5,
+        858
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 695.5,
+          "bounds": [
+            581,
+            761,
+            810,
+            858
+          ],
+          "pixels": 14429
+        }
+      ],
+      "workingOrigin": [
+        -74.40380047505937,
+        64.39904988123516
+      ],
+      "workingBoundsAlpha20": [
+        186,
+        73,
+        315,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/rear-right.png",
+      "registeredSha256": "6b097c81ca2269a2d87628516ed279467fd6c5e1ca6805dbd8402ea9b08a970d"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        931,
+        30,
+        1257,
+        869
+      ],
+      "sourcePivot": [
+        1102.25,
+        869
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1040.5,
+          "bounds": [
+            999,
+            773,
+            1082,
+            869
+          ],
+          "pixels": 5532
+        },
+        {
+          "x": 1164.0,
+          "bounds": [
+            1120,
+            773,
+            1208,
+            869
+          ],
+          "pixels": 5672
+        }
+      ],
+      "workingOrigin": [
+        -265.1583924349882,
+        61.125295508274235
+      ],
+      "workingBoundsAlpha20": [
+        175,
+        76,
+        330,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/up.png",
+      "registeredSha256": "4c8a92f09a192c7d457f1a5d352d1d468b08f29357c5c5512d277d999cec9361"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        958,
+        19,
+        1220,
+        859
+      ],
+      "sourcePivot": [
+        1095.75,
+        859
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1040.0,
+          "bounds": [
+            975,
+            762,
+            1105,
+            859
+          ],
+          "pixels": 7989
+        },
+        {
+          "x": 1151.5,
+          "bounds": [
+            1107,
+            762,
+            1196,
+            848
+          ],
+          "pixels": 5435
+        }
+      ],
+      "workingOrigin": [
+        -264.5463182897862,
+        63.92399049881237
+      ],
+      "workingBoundsAlpha20": [
+        191,
+        73,
+        315,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/rear-left.png",
+      "registeredSha256": "2e0749f7c1e70ccab2738eba28e6acef7557f48dc216015d73a53dab9848ba34"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        1438,
+        29,
+        1661,
+        870
+      ],
+      "sourcePivot": [
+        1530.5,
+        870
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1530.5,
+          "bounds": [
+            1438,
+            773,
+            1623,
+            870
+          ],
+          "pixels": 12889
+        }
+      ],
+      "workingOrigin": [
+        -467.6406619385343,
+        60.65248226950354
+      ],
+      "workingBoundsAlpha20": [
+        212,
+        75,
+        318,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/left.png",
+      "registeredSha256": "60fc3d41c6c7cd3507b91c71dd74e3c5238e6447dfd9f979971ae00dcf91f0e4"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1361,
+        22,
+        1664,
+        862
+      ],
+      "sourcePivot": [
+        1514.5,
+        862
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1514.5,
+          "bounds": [
+            1401,
+            765,
+            1628,
+            862
+          ],
+          "pixels": 14227
+        }
+      ],
+      "workingOrigin": [
+        -463.4774346793349,
+        62.49881235154396
+      ],
+      "workingBoundsAlpha20": [
+        183,
+        73,
+        327,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/registered/front-left.png",
+      "registeredSha256": "2e510a4f25ca6f618975ca24aadb8fe7b3c4f356beb55a6104df656fb29e822e"
+    }
+  }
+}

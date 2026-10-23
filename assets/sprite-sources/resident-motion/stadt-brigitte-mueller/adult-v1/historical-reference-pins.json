@@ -1,0 +1,20 @@
+{
+  "historicalRecordSha256": "1a68ef3f9e2cf7522a635b36c1e5911f0e67feef2955dae9334421fd2f4adfe2",
+  "references": {
+    "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png": {
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e",
+      "bytes": 2390079,
+      "role": "Preserved historical standing-v3 source authority; not newly generated or runtime selected here."
+    },
+    "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png": {
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b",
+      "bytes": 2292218,
+      "role": "Preserved historical standing-v3 source authority; not newly generated or runtime selected here."
+    },
+    "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png": {
+      "sha256": "d95780d9cf524234b47b34bc602259ea245ff5bb109bef8f580c77afdb99b622",
+      "bytes": 1546293,
+      "role": "Preserved historical standing-v3 source authority; not newly generated or runtime selected here."
+    }
+  }
+}
