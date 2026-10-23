@@ -12,7 +12,7 @@ The working target is the contemporary building, with reference dates retained s
 
 - [x] Register the active goal and create this scoped workspace.
 - [x] Search the public web and GitHub for pre-existing models and references.
-- [x] Create the reviewed online resource catalogue, including source access and reuse status (81 entries).
+- [x] Create the reviewed online resource catalogue, including source access and reuse status (83 entries).
 - [x] Inspect primary architectural images and establish a provisional façade and room-volume study; retain dimensional gaps.
 - [x] Build the hidden architectural viewer with outside/inside navigation and explicit reconstruction status.
 - [ ] Create and refine the full model; document dimensions, source links and uncertain geometry by space.
@@ -131,9 +131,15 @@ Accepted for scoped publication on 2026-10-23: 26 frozen hashes, 30 Node checks,
 6 furniture browser cases, 4 natural entry/lifecycle cases and one text-layout
 case pass; both independent reviewers return scoped PASS with no required fix.
 The native export contains the same 35 assemblies. Evidence and remaining
-device/fidelity limits are in [VALIDATION.md](VALIDATION.md). Publish on current
-main through the isolated index, preserving newer unrelated street work; verify
-the deployed bytes and actual desktop/touch entry again before reporting live.
+device/fidelity limits are in [VALIDATION.md](VALIDATION.md). Published runtime
+commit `ecfe6aa442fd99072b47c052e272f232b73c60fb` preserves main parent
+`bb00899`; only 14 scoped files changed through the isolated index. Immutable
+public verification passes 38/38 files and 6/6 desktop/Android-portrait browser
+cases, covering natural entry, fixture approaches, native GLB and avatar at bar.
+Canonical Pages update is queued behind the existing main deployment. Follow
+the newest workflow containing this commit, verify canonical bytes and repeat
+the actual desktop/touch routes before claiming this furniture live there.
+The permanent Geheim avatar page itself is already live as recorded above.
 
 Replace generic foyer concrete blocks with the channel-section seats visible
 in I09, and Panorama's generic counter/DJ box with A13's framed illuminated bar,
