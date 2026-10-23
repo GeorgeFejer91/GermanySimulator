@@ -1,0 +1,49 @@
+{
+  "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-compact-right-v1.png",
+  "sha256": "271cbdbe5f726bd7e7556f3d4ad933d9a8ab0b2f412e2d3f70d90946c6a26914",
+  "bytes": 1645683,
+  "rawJob": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-5bf5bcc8-f36f-4844-b9af-a0eb863fda2f.png",
+  "sourceEqualsJob": true,
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "componentBounds": [
+    [
+      334,
+      24,
+      754,
+      1497
+    ]
+  ],
+  "sourcePivotDiagnostic": [
+    552.5,
+    1497
+  ],
+  "request": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+      "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png"
+    ],
+    "prompt": "Create ONE isolated complete full-body RIGHT-FACING STRICT SIDE PROFILE of the same adult Heike Hoffmann, as a compact upright neutral/passing source anchor for a painted 2D game walk. Input image 1 is the binding adult identity/paint and upper-body pose: use ONLY its LEFT figure, the woman facing SCREEN-RIGHT. Keep exactly that grey-silver bob, red glasses, pearl earring, mature tired closed-mouth profile, burgundy cardigan and floral cream blouse collar, connected shoulders/arms, charcoal trousers and large brown LACE-UP OXFORD shoes. Preserve the UPPER BODY and hand positions of this figure as closely as possible. Her anatomical RIGHT near hand hangs beside/behind the hip holding ONE key ring with its existing keys; her anatomical LEFT far hand holds the green/blue/yellow cards in front of the chest. No hand or prop swaps, extra support hands, missing cards, duplicated keys or new props. Input 2 is the same woman's four cardinal neutrals, for a more upright compact lower-body silhouette only; do NOT replace the binding upper-body or hand pose with its different arm arrangement.\n\nRepair ONLY the spread-contact lower-body pose into a calm compact upright stance: connected hip, thighs, knees, straight but relaxed shins, complete trouser cuffs, ankles and BOTH complete brown laced Oxfords. No wide diagonal contact legs, crouching, bent-in thighs, crossed shins or excessive forward/backward stride. The NEAR anatomical RIGHT leg is nearly vertical and weight bearing under its hip. The FAR anatomical LEFT leg is also nearly vertical, offset slightly behind it so its lower trouser cuff and its own complete shoe remain distinguishable; natural upper-thigh occlusion behind the near leg is correct. Both soles planted on the SAME horizontal baseline. The shoes are close but not fused or drawn as one two-headed shoe: each cuff leads to exactly its own ankle and shoe, with a small real transparent notch between the visible lower shoes where anatomy permits. Do not bend the far leg behind the waist to expose it. No added exposed skin, skirt, socks outside the trousers, new shoe straps, tiny feet or changed Oxford shape. Keep head-to-crown/torso/hip/knee/ankle/foot lengths and garment hem identical in physical proportion to the first reference's grown-adult figure; only leg pose changes. One common adult figure, not a long-legged miniature or toy.\n\nMatch the first source's mature irregular expressive Berlin dry-brush oil paint, angular lived-in face and broad broken cloth planes. No smooth plastic, glossy 3D, cute face, photorealistic skin, repetitive diamond tiling, or fine noise filter. One figure, no second view or pose. Complete hair/fingers/keys/shoes fully inside canvas with generous transparent margins. Genuine alpha-zero transparent background: NO backdrop, colored vignette, halo, ground shadow, floor, scenery, lettering, labels, grid or watermark. This is a source anchor, not a complete gait."
+  },
+  "native": {
+    "file": "native.webp",
+    "sha256": "7e66c950c72b2264a8fffa78b88d34d83690dbc20053b036d59722d86ccfe104",
+    "bytes": 8262,
+    "exactDecode": true
+  },
+  "status": "UNSELECTED HELD for paint finish: conspicuous repeating diamond motifs on cardigan/trousers; geometry/correspondence diagnostic only, not an approved final source",
+  "rootObservation": "Raw output keeps right-facing mature Heike identity, keys in anatomical right near hand/cards in far left, compact vertical trouser legs and two planted lace Oxfords. Far upper leg remains naturally occluded; separate source-bound crossing not yet established. Regular geometric cloth pattern contradicts requested broad irregular brush planes. No accepted neutral/gait/action/mouth/runtime replacement.",
+  "references": [
+    {
+      "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+      "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229"
+    },
+    {
+      "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+      "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-22",
   "tool": "built-in image_gen.imagegen",
-  "status": "Published Irmgard/Hannelore/police source closure plus accepted Gisela adult family; immutable authoring sources.",
+  "status": "Published Irmgard/Hannelore/police/Gisela source closure plus corrected single Heike integration candidate; immutable authoring sources.",
   "records": [
     {
       "id": "crowd-irmgard-aktenordner-expressionist-turns-v5",
@@ -3546,6 +3546,1237 @@
         ]
       },
       "runtimeAcceptance": "Front-derived adult standing paint selected locally; original standingOnly/no-mouth capability preserved. Native source/export review complete; rendered/specialist acceptance incomplete. Full-cast goal active and unpublished."
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-compact-right-v1",
+      "file": "quiz-heike-hoffmann-expressionist-compact-right-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-5bf5bcc8-f36f-4844-b9af-a0eb863fda2f.png",
+      "prompt": "Create ONE isolated complete full-body RIGHT-FACING STRICT SIDE PROFILE of the same adult Heike Hoffmann, as a compact upright neutral/passing source anchor for a painted 2D game walk. Input image 1 is the binding adult identity/paint and upper-body pose: use ONLY its LEFT figure, the woman facing SCREEN-RIGHT. Keep exactly that grey-silver bob, red glasses, pearl earring, mature tired closed-mouth profile, burgundy cardigan and floral cream blouse collar, connected shoulders/arms, charcoal trousers and large brown LACE-UP OXFORD shoes. Preserve the UPPER BODY and hand positions of this figure as closely as possible. Her anatomical RIGHT near hand hangs beside/behind the hip holding ONE key ring with its existing keys; her anatomical LEFT far hand holds the green/blue/yellow cards in front of the chest. No hand or prop swaps, extra support hands, missing cards, duplicated keys or new props. Input 2 is the same woman's four cardinal neutrals, for a more upright compact lower-body silhouette only; do NOT replace the binding upper-body or hand pose with its different arm arrangement.\n\nRepair ONLY the spread-contact lower-body pose into a calm compact upright stance: connected hip, thighs, knees, straight but relaxed shins, complete trouser cuffs, ankles and BOTH complete brown laced Oxfords. No wide diagonal contact legs, crouching, bent-in thighs, crossed shins or excessive forward/backward stride. The NEAR anatomical RIGHT leg is nearly vertical and weight bearing under its hip. The FAR anatomical LEFT leg is also nearly vertical, offset slightly behind it so its lower trouser cuff and its own complete shoe remain distinguishable; natural upper-thigh occlusion behind the near leg is correct. Both soles planted on the SAME horizontal baseline. The shoes are close but not fused or drawn as one two-headed shoe: each cuff leads to exactly its own ankle and shoe, with a small real transparent notch between the visible lower shoes where anatomy permits. Do not bend the far leg behind the waist to expose it. No added exposed skin, skirt, socks outside the trousers, new shoe straps, tiny feet or changed Oxford shape. Keep head-to-crown/torso/hip/knee/ankle/foot lengths and garment hem identical in physical proportion to the first reference's grown-adult figure; only leg pose changes. One common adult figure, not a long-legged miniature or toy.\n\nMatch the first source's mature irregular expressive Berlin dry-brush oil paint, angular lived-in face and broad broken cloth planes. No smooth plastic, glossy 3D, cute face, photorealistic skin, repetitive diamond tiling, or fine noise filter. One figure, no second view or pose. Complete hair/fingers/keys/shoes fully inside canvas with generous transparent margins. Genuine alpha-zero transparent background: NO backdrop, colored vignette, halo, ground shadow, floor, scenery, lettering, labels, grid or watermark. This is a source anchor, not a complete gait.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png"
+      ],
+      "exactOriginalRequestedReferences": [
+        {
+          "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229"
+        },
+        {
+          "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+        }
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED HELD: conspicuous repeating diamond motifs on cardigan/trousers; geometry diagnostic only",
+      "producerFindings": "Root viewed raw and native compact right profile. Mature Heike, keys near anatomical right/cards far left and two planted Oxfords persist. Upright compact legs may support a source-bound correspondence diagnostic, but repeating diamond fabric contradicts the required irregular broad painted finish. No neutral/gait/action/mouth/runtime replacement is accepted.",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/heike-compact-right-v1/receipt.json",
+      "sourceReviewReceiptSha256": "c4924c08eaf609c2fe9008cfb4450c6fba8bbaa19cc91c4319c0eeb74d5a0286",
+      "originalSourceReviewReceipt": "output/street-redesign/heike-compact-right-v1/receipt.json",
+      "producerCaveats": "Unreferenced source only; no selected registry/atlas/body/mouth/configuration or physical stature change.",
+      "sha256": "271cbdbe5f726bd7e7556f3d4ad933d9a8ab0b2f412e2d3f70d90946c6a26914",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1645683,
+      "componentBounds": [
+        [
+          334,
+          24,
+          754,
+          1497
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 24,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+            "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229"
+          },
+          {
+            "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+            "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+        }
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding."
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-directions-v1",
+      "file": "quiz-heike-hoffmann-expressionist-directions-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-4307cf32-09fd-47b2-8888-50fac581a673.png",
+      "prompt": "Create ONE horizontal 4-view source sheet for the SAME mature Berlin adult woman Heike Hoffmann: exactly four separate complete whole-body figures in one row, left-to-right FRONT, RIGHT-facing true side profile, REAR (back of head/body), LEFT-facing true side profile. All four have identical adult figure height, head size, shoulder/hip/leg proportions, cardigan length, shoe size and sole baseline, quiet planted neutral stance, ~50+ px truly transparent gutters between silhouettes and transparent outer margins. This is source artwork, not a walk frame. Reference roles: FIRST the new Heike expressionist standing full-body painting is binding identity/outfit/anatomy/paint/prop/shoe source; SECOND her original quiz portrait supplies additional mature irregular broad oil-brush finish and facial detail only; THIRD old Heike key sheet checks actual side/rear hairstyle, costume and anatomical prop ownership but its toy-short body must NOT be copied. Preserve her own grey-silver shoulder-length bob, red-brown glasses, pearl earrings, small weary narrow eyes, mildly wry CLOSED lips (front and both true profiles, rear no invented face), maroon buttoned cardigan, cream small-floral blouse, dark charcoal trousers, brown LACE-UP oxford shoes with SAME lace closure and substantial sole in every view. Key ring with metallic keys stays in her ANATOMICAL RIGHT hand; three green/blue/yellow cards stay fanned in her ANATOMICAL LEFT hand. For the REAR view the screen positions exchange: keys appear on viewer-right / actor-right, cards on viewer-left / actor-left; allow far-side props in profiles to occlude naturally without teleporting hands or placing a free far hand on a near-hand prop. Do not swap/duplicate/drop keys/cards. Four genuinely rotated coherent bodies and true rear hair/cardigan back, no mirrored front as back, no profile front-face paste. Adult connected neck, torso, full limbs, both hands and complete brown lace-up shoes in every view. Weathered angular Disco-Elysium-meets-Berlin hand paint with broad broken irregular directional strokes and lived-in fabric, not uniform diamond tiles, fine stipple, shiny photo, baby eyes or chibi. RGBA alpha-zero empty background, no floor, shadow, colored backdrop, vignette, halo, extra props, text, labels, arrows or watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+        "assets/quiz-characters/heike-hoffmann.webp",
+        "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED provisional four-cardinal adult source",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-directions-batch1/receipt.json",
+      "sourceReviewReceiptSha256": "3df12d0a7b23fa161f34269ac8c167b333dd3e18a98666ef3d487741362f2f4d",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+      "sourceSha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        }
+      ],
+      "producerFindings": "All four bodies adult-height and true front/right/rear/left. Grey bob, glasses, maroon cardigan, floral blouse, trousers, brown lace-up shoes preserved. FRONT keys in anatomical RIGHT/viewer-left; cards LEFT/viewer-right. REAR keys viewer-right, cards viewer-left. RIGHT profile keys and cards visible. LEFT profile cards visible but far-side key hand and keys hidden by the body; natural occlusion is plausible but key continuity is not directly provable from that cell.",
+      "producerCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 116 px), but the top/bottom outer clear margins are 16/20 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 37 edge pixels, maximum edge alpha 1; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-directions-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1536519,
+      "componentBounds": [
+        [
+          134,
+          19,
+          453,
+          867
+        ],
+        [
+          586,
+          16,
+          825,
+          866
+        ],
+        [
+          941,
+          16,
+          1269,
+          863
+        ],
+        [
+          1399,
+          19,
+          1628,
+          866
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 16,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+            "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+          },
+          {
+            "role": "secondary portrait paint finish only",
+            "path": "assets/quiz-characters/heike-hoffmann.webp",
+            "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+          },
+          {
+            "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+            "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+            "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+        },
+        {
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        },
+        {
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        }
+      ]
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-keys-gesture-v1",
+      "prompt": "Create exactly ONE full-body 2D painted action source of mature adult Heike Hoffmann, FRONT view, same adult scale, face, silver-grey bob, red-brown glasses, pearl earrings, maroon cardigan, cream floral blouse, full charcoal trousers, realistic substantial brown lace-up Oxford shoes and planted feet as Reference1. Her anatomical RIGHT elbow bends naturally; her right hand lifts the SAME metal keyring with grey and brass keys to lower-chest height as a modest key emphasis, not overhead. Anatomical LEFT hand keeps a tight fan of EXACTLY THREE green, blue, yellow cards near upper chest. Both hands and forearms clearly attached, no duplicated prop, keys never in left hand. Reference2 old short character sheet provides ONLY the key-gesture intent; DO NOT COPY its squat toy anatomy or shorts. Reference3 adult four-view sheet binds anatomical hand ownership and wardrobe. Keep relaxed planted body, whole head/hands/shoes visible, clear closed lips, small tired mature angular face, broad irregular directional hand-painted Berlin/Disco Elysium-inspired worn oil brush and cloth planes; no uniform diamond texture, no cute eyes, no glossy photo finish. SINGLE separated figure in generous actual RGBA transparent margins; NO background/floor/halo/shadow/text/extra person.",
+      "role": "Heike adult source attempt; selected use limited to reviewed turn source",
+      "file": "quiz-heike-hoffmann-expressionist-keys-gesture-v1.png",
+      "sha256": "c40d282f67bcd200f346a3ab5b54d7cf4bbe2521cc146b72b66bfe6ff8889040",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1801760,
+      "componentBounds": [
+        [
+          242,
+          31,
+          798,
+          1494
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Source-only paint; family animation requires separate exact native and runtime acceptance.",
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult identity, full-body anatomy and painterly finish"
+        },
+        {
+          "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+          "role": "key/elbow action semantics only; old body proportion excluded"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "adult costume and anatomical prop hand ownership"
+        }
+      ],
+      "exactPromptSha256": "c4da1ff55766fdcb22d84fca967b635eff4fee2dde19d484d2500fdc3c344e97"
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-keys-intermediate-v1",
+      "prompt": "Use case: stylized-concept\nAsset type: one intermediate full-body painted action source for the existing 2D game character Heike Hoffmann.\nCreate EXACTLY ONE whole mature adult woman facing FRONT in a quiet planted stance, both complete hands and both complete brown lace-up Oxford shoes inside generous true transparent margins. This is the SINGLE MIDPOINT between reference 1's low hanging right-hand keys and reference 2's chest-height raised right-hand keys. Put her anatomical RIGHT keyring grip beside the lower abdomen at WAIST height, substantially above the hip but BELOW her right elbow; bend the right elbow moderately beside the lower ribs, keep the shoulder relaxed. The grey/brass keyring with two visible keys hangs freely from that SAME right hand. No wrist reversal, no grip crossing above its own elbow, no duplicate keyring, no extra hand. Her anatomical LEFT hand holds the same tight fan of THREE green/blue/yellow cards at upper chest, exactly as both adult references. Preserve a closed visible lip crease.\nReference 1 is binding for Heike's accepted front identity, older angular small-eyed face, silver-grey bob, red-brown glasses, pearl earrings, maroon cardigan, cream floral blouse, long charcoal trousers, substantial brown Oxfords, exact adult head/torso/leg proportions, original planted shoe positions, and directional expressionist paint. Reference 2 binds the same anatomical RIGHT key-hand action endpoint and same left card ownership; this requested image must fall halfway between the two right arm poses while the rest of the body stays aligned to reference 1. Reference 3 binds her back/profile costume and worn paint continuity only. Keep her facial identity, gaze, body length, waistband, hems, both legs and Oxfords essentially unchanged from reference 1. Do not borrow any other character's anatomy or clothes.\nPainterly mature Berlin expressionism: broad broken irregular dry-oil brush planes, tired specific face, weathered cloth and shoe structure. No uniform diamond facets, microstipple, smooth toy face, chibi proportions, photoreal skin, halo, floor, shadow, background, typography, or additional person. Real RGBA alpha-zero exterior, no dark background.\n",
+      "role": "Heike adult source attempt; selected use limited to reviewed turn source",
+      "file": "quiz-heike-hoffmann-expressionist-keys-intermediate-v1.png",
+      "sha256": "5f5ed01fa4551cf9a97e7c3b186275fa8cfac2a38bd08c19c42d57645b38d8dc",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1815515,
+      "componentBounds": [
+        [
+          248,
+          39,
+          797,
+          1493
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Source-only paint; family animation requires separate exact native and runtime acceptance.",
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult front identity, anatomy, costume, paint and planted soles"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-keys-gesture-v1.png",
+          "sha256": "c40d282f67bcd200f346a3ab5b54d7cf4bbe2521cc146b72b66bfe6ff8889040",
+          "role": "binding chest-height key-gesture endpoint and left card ownership"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "adult costume and view continuity"
+        }
+      ],
+      "exactPromptSha256": "dbd336343be6366b95c4859421e2121d850ac44e2c9006e2f673787228f33f35"
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-right-opposite-contact-v1",
+      "file": "quiz-heike-hoffmann-expressionist-right-opposite-contact-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-7dd294fc-5394-40bd-bfd0-eedfc381d02b.png",
+      "prompt": "Edit the woman in INPUT 1 into ONE OPPOSITE WALK CONTACT, facing SCREEN RIGHT. Input 1 is her adult identity, shoes, head/upper body and original contact A. INPUT 2 is an authored pose diagram: use ONLY its lower-body near/far placement, not its colours, text or drawing style. It shows the missing OPPOSITE contact B. Produce ONE full-body figure only on genuine transparent background.\n\nThe most important edit is the leg ownership: the NEAR anatomical RIGHT leg, which is in front of the other leg in the picture, must now run from her hip DIAGONALLY BACK to SCREEN LEFT. We see this near thigh overlapping and covering the upper part of the far thigh at the hip. Its near knee and near calf continue BACK LEFT, and its brown Oxford trails at the LEFT, heel raised with only the toe touching the floor. The FAR anatomical LEFT leg passes BEHIND that near thigh, extends FORWARD to SCREEN RIGHT and plants its own brown Oxford HEEL on the floor at the RIGHT. This is the opposite planted leg to input1. Do not repeat input1's foreground thigh slanting down-right. Do not mirror the woman or swap the hands. The near/right trouser contour must visibly lead BACK LEFT; the far/left leg leads right behind it. One anatomically connected knee, cuff, ankle and Oxford per leg; modest stride, no crouch, no plastic tubes, bent-back knees or fused shoes.\n\nKeep the head, upper body and hands of input1 as closely as possible: adult older Heike Hoffmann with silver bob, red-brown glasses, pearl earring, mature tired closed-mouth profile, burgundy cardigan, cream floral blouse collar. NEAR RIGHT hand hangs at hip holding ONE key ring; FAR LEFT hand holds the green/blue/yellow cards in front of chest. Keep these grips and arms exactly. Full-length charcoal trousers, substantial BROWN LACED OXFORD shoes. Same physical adult body scale, head size, torso/hip/limb lengths and camera; change leg pose, not identity or proportions. Same floor line. No right-facing clone of the original contact.\n\nAlso replace ALL repeating diamond/argyle/faceted motifs on cardigan and trousers with completely PLAIN WORN CLOTH. Plain burgundy heavy knit cardigan and plain charcoal wool trousers: broad, uneven, irregular brush masses, restrained natural seams and real folds only. No patterned triangles, lozenges, diamonds, check, hatch grid, tiled polygons, fine noise or printed decoration. The cream blouse collar alone keeps its little flowers. Mature DISCO ELYSIUM meets BERLIN expressive dry-brush painting: sculptural worn face, scumbled wine/charcoal/ochre/grey-green surfaces, lived-in heavy fabric. No cute baby face, glossy 3D or smooth toy render. The output is painted character art, not the pose diagram: no orange/blue guide marks, bones, circles, arrows or text. Complete hair/hands/keys/cards/shoes, generous clear margins, true alpha-zero background, no vignette, halo, ground shadow or scenery.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/references/heike-right-opposite-contact-v1-contact-a-identity-reference.png",
+        "assets/sprite-sources/berlin-street-20261022/references/heike-right-opposite-contact-v1-opposite-contact-authored-pose-guide.png"
+      ],
+      "exactOriginalRequestedReferences": [
+        {
+          "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\contact-a-identity-reference.png",
+          "sha256": "93a64e667d32426d017d0c8e2d875ae44c7ca0eb4398c543c422454d8a30805e"
+        },
+        {
+          "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\opposite-contact-authored-pose-guide.png",
+          "sha256": "37ba3104e225b47d13e91f4a095e64bc6baa701c4dc717d0d9285613716c7ec7"
+        }
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED HELD: targeted opposite-contact request does not clearly change foreground leading leg; repeating cloth remains",
+      "producerFindings": "Root inspected the full raw output against its contact-A crop and separately authored orange-near/blue-far pose diagram. The front-leading thigh silhouette remains; fixed anatomical owner is not proved by two shoes alone. Cardigan retains repeated diamond texture. Source is held, not a valid opposite contact. Stop repeating this same source-generation instruction; no encoded motion or runtime acceptance.",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/heike-right-opposite-contact-v1/receipt.json",
+      "sourceReviewReceiptSha256": "8750a819bd2c35573586492939aa93b6fbfbde76b34b55119ba2808dd8dc281e",
+      "producerCaveats": "Held source study only. The separately drawn pose guide is authored geometry, not source evidence or replacement artwork.",
+      "sha256": "ff3b7781012caebea00d0bb062463c4fe1c9ae9d98fc9674b351e1d70cca7b10",
+      "dimensions": [
+        1067,
+        1474
+      ],
+      "bytes": 1025272,
+      "componentBounds": [
+        [
+          76,
+          47,
+          969,
+          1425
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 47,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\contact-a-identity-reference.png",
+            "sha256": "93a64e667d32426d017d0c8e2d875ae44c7ca0eb4398c543c422454d8a30805e"
+          },
+          {
+            "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\opposite-contact-authored-pose-guide.png",
+            "sha256": "37ba3104e225b47d13e91f4a095e64bc6baa701c4dc717d0d9285613716c7ec7"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/references/heike-right-opposite-contact-v1-contact-a-identity-reference.png",
+          "sha256": "93a64e667d32426d017d0c8e2d875ae44c7ca0eb4398c543c422454d8a30805e"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/references/heike-right-opposite-contact-v1-opposite-contact-authored-pose-guide.png",
+          "sha256": "37ba3104e225b47d13e91f4a095e64bc6baa701c4dc717d0d9285613716c7ec7"
+        }
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding."
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-right-walk-keys-v1",
+      "file": "quiz-heike-hoffmann-expressionist-right-walk-keys-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-5df72d1b-8db1-4c82-916c-22ebf622d693.png",
+      "prompt": "Use case: stylized-concept. Asset type: four painted source KEY POSES for a 2D game walk, not a finished atlas.\n\nCreate ONE transparent 2 by 2 sheet showing the SAME mature woman HEIKE HOFFMANN in FOUR successive poses of a calm RIGHTWARD walking cycle. EVERY figure faces SCREEN RIGHT in strict SIDE PROFILE. Each complete figure occupies its own equally sized quadrant with generous transparent gutters and all hair, fingers, keys and shoes inside its cell. No labels, text, lines, background, floor or ground shadow. The reference image is the binding adult identity and prop ownership, not a request to repeat its wide stride or patterned cloth.\n\nLOCK IDENTITY in every cell: grown adult stature and long connected limbs, silver-grey bob, red-brown glasses, pearl earring, angular tired older face, closed fine resting lip line, burgundy knitted cardigan over cream floral-collar blouse, full-length charcoal trousers, substantial worn brown LACE-UP OXFORD shoes. Her NEAR anatomical RIGHT arm hangs beside the hip and its ONE hand carries ONE key ring. Her FAR anatomical LEFT hand carries the green/blue/yellow cards in front of her chest. Keep those arms, hands and props consistent in all four cells; no swaps, extra hands, extra keys, missing cards, changes of grip or separate floating props. Natural far-arm occlusion is correct. Keep her original head, torso, hip, thigh and shin proportions. She walks upright and deliberately, not crouched, waddling or exaggeratedly marching. Modest normal stride, connected waist/seat/thigh/knee/cuff/ankle/shoe anatomy, complete feet.\n\nORDER OF FOUR CELLS, read left-to-right then top-to-bottom:\nTOP LEFT: contact A. The NEAR RIGHT leg steps FORWARD to screen right, heel just planted, knee relaxed. The FAR LEFT leg trails to screen left, heel raised and toe still touching the same floor line. This is a modest walk step, not a wide lunge.\nTOP RIGHT: passing A. The NEAR RIGHT leg is planted nearly vertical under the hip, bearing weight. The FAR LEFT knee swings FORWARD across the body, with its shoe lifted a little clear of the floor. The far thigh/shin may be occluded naturally by the near leg; retain the correct two legs and one shoe for each. Pelvis/head slightly higher than contact, no squat or twisted knees.\nBOTTOM LEFT: contact B, the OPPOSITE contact, NOT a copy of top left. The FAR LEFT leg now leads FORWARD to screen right with its heel planted. The NEAR RIGHT leg trails to screen left with its heel raised and toe touching the floor. Keep the same fixed near RIGHT versus far LEFT depth ownership; do not mirror the body, swap props or redraw her facing left.\nBOTTOM RIGHT: passing B. The FAR LEFT leg is planted nearly vertical under the hip, bearing weight. The NEAR RIGHT knee swings FORWARD, its own Oxford lifted slightly off the floor. This is the opposite passing pose, not the same planted leg as top right. Keep natural occlusion and intact knees/cuffs/shoes, not crossed rubber shins or one fused two-headed foot.\n\nAll four are the same physical size and camera projection, anchored on the SAME relative horizontal floor level in their equally sized cells. Natural small vertical pelvis/head rise at passing is intentional. Do not resize each pose to equal crown-to-sole height or vary head/limb lengths to fit a cell. Keep camera distance and adult body scale identical.\n\nPaint this further toward DISCO ELYSIUM MEETS BERLIN: angular expressive worn face, broad irregular scumbled dry-brush oil paint, subdued wine/charcoal/dirty ochre/cool grey-green shadows, lived-in heavy cloth, believable shoes. REPLACE the reference's repeating diamonds with PLAIN maroon knit and PLAIN charcoal cloth, defined by large irregular brush marks and a few real garment folds. Absolutely no repeated diamond, argyle, polygon tiling, check pattern or decorative faceting on cardigan or trousers. Not glossy 3D, cute, smooth plastic, photorealistic skin or a grain filter. Preserve the small floral blouse collar only. Actual alpha-zero transparent background everywhere outside the four figures; no coloured vignette, halo or scenery. Four poses only, no fifth figure.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/references/heike-right-walk-keys-v1-heike-binding-right-reference.png"
+      ],
+      "exactOriginalRequestedReferences": [
+        {
+          "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-walk-keys-v1\\heike-binding-right-reference.png",
+          "sha256": "40d801c47e8a1744994a47f691d66ec23cc809277bf413d06e9c714172d97073"
+        }
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED HELD: repeated leading/stance leg and repeating diamond cloth; no four-key gait acceptance",
+      "producerFindings": "Root inspected the full raw 2x2 output: same older Heike/card/near-key identity and adult scale, but both contact cells repeat the foreground forward thigh and both passing cells repeat the foreground planted leg. Repeating diamond/faceted cloth remains despite plain-cloth instruction. No opposite contact/passing, interpolation, source selection or final paint approval.",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/heike-right-walk-keys-v1/receipt.json",
+      "sourceReviewReceiptSha256": "c714bd40742a84a40fdac8a48cea13d28c1fc0e8bf8d44e3b60377a38431b0e0",
+      "producerCaveats": "Held source study only. The separately drawn pose guide is authored geometry, not source evidence or replacement artwork.",
+      "sha256": "d6605ba7100f3c0b222643f4fd95cff644802b1ea7449ecdcc89e8c4d7bbd97f",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 2052499,
+      "componentBounds": [
+        [
+          86,
+          776,
+          586,
+          1494
+        ],
+        [
+          103,
+          33,
+          529,
+          739
+        ],
+        [
+          667,
+          33,
+          898,
+          741
+        ],
+        [
+          669,
+          777,
+          898,
+          1506
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 30,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-walk-keys-v1\\heike-binding-right-reference.png",
+            "sha256": "40d801c47e8a1744994a47f691d66ec23cc809277bf413d06e9c714172d97073"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/references/heike-right-walk-keys-v1-heike-binding-right-reference.png",
+          "sha256": "40d801c47e8a1744994a47f691d66ec23cc809277bf413d06e9c714172d97073"
+        }
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding."
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-side-contacts-v1",
+      "file": "quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-97ec2420-8550-43d1-a5bc-cc1a0e90333f.png",
+      "prompt": "Use case: stylized-concept. Asset: one transparent 2D painted GAME SPRITE SOURCE sheet for a Heike Hoffmann walking-contact source repair, not a completed gait. Make EXACTLY TWO separate whole adult figures in one horizontal row: LEFT FIGURE is a genuine anatomical RIGHT-facing strict side-profile walking CONTACT, RIGHT FIGURE is a genuine anatomical LEFT-facing strict side-profile walking CONTACT. Both are the SAME older adult woman Heike, same crown-to-sole height, grown-up head/torso/leg proportions, same cardigan hem, knee height, shoe dimensions and shared sole baseline; generous alpha-zero transparent outer padding and a wide alpha-zero gutter, no cropped hair/limbs/feet. REFERENCE 1, her accepted expressionist standing-v1 full body, is BINDING for identity, own adult body/face, silver-grey chin-length bob, red-brown glasses, pearl earrings, weary small eyes, maroon button cardigan, cream floral blouse, charcoal FULL trousers, brown lace-up low Oxford shoes, cards and keys. REFERENCE 2, her own four cardinal directions-v1, is BINDING for both true side-profile head/hair/upper-body views, clothing hems/shoes, and anatomical hand ownership; its overlapping opaque single trouser mass is the measured defect to REPAIR with new painted complete far-side leg paint, NOT a shape to copy. REFERENCE 3, her original quiz portrait, supplies ONLY broad worn angular Berlin expressionist oil/dry-brush finish; do not borrow its waist-up pose or proportions. In BOTH poses keep head and upper body calm and upright, mouth a single CLOSED unobstructed visible side-profile lip line suitable for later source-bound speech. Anatomical RIGHT hand owns only a small silver/brass ring of several hanging keys; anatomical LEFT hand owns only the fan of THREE green, blue, yellow rectangular cards; hands have realistic complete fingers. In right-facing profile the right/key hand is near and keys legible below the cardigan at her side, while far LEFT card hand can be naturally partially occluded but remains in its own left hand at upper chest. In left-facing profile the LEFT cards are near and visible at upper chest, while far RIGHT key hand can be partially occluded; never transfer props, move one behind the back only for visibility, put both hands on one prop, or invent extra items. CONTACT anatomy is the entire purpose: for EACH side view, the NEAR trouser leg extends moderately forward in travel direction and its full brown lace-up Oxford HEEL is planted flat at the baseline; the FAR trouser leg trails behind with a full toe touching that same baseline. Visibly paint two DISTINCT complete grown-up charcoal-clothed legs from connected pelvis/upper thigh through distinct knee, calf, cuff and complete brown lace-up shoe, including believable hidden-side cloth seams/shading. Show a clear genuine transparent wedge between the two legs below the joined crotch/upper thighs, continuing toward separated shoes; no fused tube trouser silhouette, no cutout of one leg, no copied near-leg texture onto the far leg, no detached shin, no cloned shoe, no extra leg. Moderate human step width and leg lengths, no lunge/split, no airborne shoe, no exposed bare skin under full trousers, no changed shoe closures. Preserve strong broad irregular directional worn painted masses and angular adult face, not regular diamond tessellation or fine stipple; do not polish to photorealism or soften to toy/chibi. True RGBA alpha-zero transparent background; no floor, shadow, halo, colored outline, scenery, captions, labels, arrows, watermark or third figure.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+        "assets/quiz-characters/heike-hoffmann.webp"
+      ],
+      "expectedComponentCount": 2,
+      "status": "UNSELECTED provisional two-contact study; no full gait approval",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/heike-adult-side-contacts-v1/receipt.json",
+      "sourceReviewReceiptSha256": "2239c2ca906272f9a178307e6b38175f4ac7ed6987146d7a666d8cbffc1625ac",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+      "sourceSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary binding Heike adult identity, proportions, face, own clothing, anatomical hand props",
+          "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+        },
+        {
+          "role": "secondary binding side-view rotations, prop and shoe continuity; fused trouser mass is defect to repair",
+          "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+        },
+        {
+          "role": "tertiary original Heike portrait, broad angular worn paint only",
+          "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        }
+      ],
+      "producerFindings": {
+        "status": "PROVISIONAL source-contact anchors; not native correspondence or full gait approval",
+        "inspection": "Viewed raw generated PNG, actual light/dark source composites and both exact decoded native WebP cells on light/dark beside locked front.",
+        "identityAndHands": "Silver-grey bob, red-brown glasses, pearl earrings, maroon cardigan, cream floral blouse, charcoal full trousers and brown lace-up low Oxfords remain recognizable. Anatomical RIGHT retains hanging keys in both profiles, anatomical LEFT retains the green/blue/yellow card fan at chest; no extra hands or props observed. Closed profile lips remain visible.",
+        "legsAndContacts": "Both views paint separate connected far thigh, knee, calf, cuff and shoe behind a separate near leg; transparent interleg wedge exists across four sampled lower-body rows. Near forward heel appears planted and far rear toe contacts the sole line in both views. Native stills show two distinct legs and complete shoes.",
+        "caveats": "Stride is somewhat broad and trouser/cardigan surfaces retain repeated diagonal faceting from the binding cardinal source rather than purely broad irregular brush. Source vertical outer margins are only 17/32 pixels at alpha20, below requested generous padding. Contact artwork alone does not prove a passing pose, opposite contact, gait seam, prop masks, mouth fit or running camera."
+      },
+      "producerCaveats": [
+        "parent source review",
+        "view-specific leg correspondence and protected prop masks",
+        "right/left opposite contacts and passing poses",
+        "ordered full gait and loop seam",
+        "turns and seven interaction states",
+        "source-bound mouth fitting",
+        "native playback, camera, desktop/mobile and speed review"
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/heike-adult-side-contacts-v1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1934434,
+      "componentBounds": [
+        [
+          178,
+          17,
+          742,
+          992
+        ],
+        [
+          817,
+          18,
+          1381,
+          992
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 17,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary binding Heike adult identity, proportions, face, own clothing, anatomical hand props",
+            "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+            "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+          },
+          {
+            "role": "secondary binding side-view rotations, prop and shoe continuity; fused trouser mass is defect to repair",
+            "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+            "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+          },
+          {
+            "role": "tertiary original Heike portrait, broad angular worn paint only",
+            "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/quiz-characters/heike-hoffmann.webp",
+            "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524"
+        },
+        {
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        }
+      ]
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-standing-v1",
+      "file": "quiz-heike-hoffmann-expressionist-standing-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-b8b4a27d-d4e8-4a74-9395-c58cdee1510b.png",
+      "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator street quiz speaker HEIKE HOFFMANN, for later source review, no action sheet. Images 1 and 2 are PRIMARY painterly mature-Berlin finish and adult stature/connected limb references: Sabine Krueger and Hartmut Keller. Images 3 and 4 are HEIKE identity, specific outfit, prop and handedness references only; do not copy their old short-body proportions. Heike is a mature older adult woman with gray ash-brown chin-length bob swept sideways, narrow reddish-brown glasses, pearl earrings, sly mildly skeptical small-eyed expression, lined asymmetric angular face. Preserve burgundy button-front jacket/cardigan over cream floral-collared blouse, charcoal long trousers, sturdy worn brown leather walking shoes. In her ANATOMICAL RIGHT hand (screen left) hang one small bunch of metal house keys on a ring, clearly readable but held low away from her mouth; in ANATOMICAL LEFT hand (screen right) hold exactly three flat colored cards fanned green, blue and yellow near her lower torso, also away from face. One of each prop, no invented object. Front-facing quiet planted pose with complete adult hands, fingers, arms, connected thighs, knees, shins, ankles and both entire substantial shoes; adult head-to-body/leg lengths comparable to Sabine/Hartmut, not chibi. A visible natural CLOSED lip line and clear corners for later speech; no card or key over mouth. Painterly Disco Elysium meets Berlin: weathered mature facial asymmetry, drybrush/oil marks in BROAD irregular planes, worn wine/ochre/petrol/cool gray-green shadow, expressive angular cheek/nose/brow/garment shapes, no smooth toy gradients or regular faceted pattern or fine uniform speckle. One centered figure occupies at most 85% image height and 75% width, with at least 60 real transparent pixels above hair, below shoe soles, and outside hands/props; do not crop or push the figure to canvas edges. GENUINE TRANSPARENT RGBA cutout, no painted background, floor, shadow, glow, halo, outline frame, lettering, logos, watermark, panel, other views or extra figures.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/quiz-characters/heike-hoffmann.webp",
+        "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional neutral front; producer: source-candidate-unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-neutrals-batch2/quiz-heike-hoffmann-receipt.json",
+      "sourceReviewReceiptSha256": "735e7cb3ef567d05e3d71a0b1a3a2ef9a44b4f7df163c739aeebcf84a32611d7",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+      "sourceSha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary mature painterly Berlin style and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "role": "primary mature painterly Berlin style and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "role": "Heike portrait identity, clothes and props; no full-body length authority",
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        },
+        {
+          "role": "Heike action source, clothes, key/card hands; old squat body proportions rejected",
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        }
+      ],
+      "producerFindings": {
+        "style": "Older small-eyed face, distinct silver bob, expressive wine jacket and irregular broad trouser/coat paint. Mature adult silhouette; still subject to root style judgment.",
+        "anatomy": "Both adult trouser legs and complete substantial brown shoes are present; hands and fingers connected to arms.",
+        "identity_handedness": "Gray bob, narrow reddish glasses, pearl earrings, floral blouse, burgundy cardigan preserved. Keys hang from anatomical RIGHT hand (screen left); green-blue-yellow card fan in anatomical LEFT (screen right).",
+        "mouth": "Closed lips and both corners visibly clear of hands and props; source mouth still requires root registration and native fit.",
+        "holds": [
+          "Source-only; existing walk, gesture, mouth and speech capabilities are unmodified and not revalidated.",
+          "Opaque alpha>=128 top margin is 39 px, one pixel under the requested >=40 px target; native cell/gutter fit must be checked.",
+          "Low-alpha edge specks and encoded-scale brush readability need review before any action-family expansion."
+        ]
+      },
+      "producerCaveats": {
+        "1": {
+          "pixels": 522135,
+          "bounds_xyxy_exclusive": [
+            31,
+            31,
+            1004,
+            1517
+          ],
+          "components": 366,
+          "largest_components": [
+            {
+              "pixels": 521247,
+              "bounds_xyxy_exclusive": [
+                239,
+                31,
+                802,
+                1498
+              ]
+            },
+            {
+              "pixels": 215,
+              "bounds_xyxy_exclusive": [
+                799,
+                289,
+                817,
+                316
+              ]
+            },
+            {
+              "pixels": 42,
+              "bounds_xyxy_exclusive": [
+                945,
+                659,
+                950,
+                672
+              ]
+            },
+            {
+              "pixels": 38,
+              "bounds_xyxy_exclusive": [
+                112,
+                563,
+                118,
+                574
+              ]
+            },
+            {
+              "pixels": 27,
+              "bounds_xyxy_exclusive": [
+                872,
+                707,
+                878,
+                718
+              ]
+            },
+            {
+              "pixels": 15,
+              "bounds_xyxy_exclusive": [
+                145,
+                465,
+                148,
+                472
+              ]
+            },
+            {
+              "pixels": 14,
+              "bounds_xyxy_exclusive": [
+                103,
+                1413,
+                106,
+                1424
+              ]
+            },
+            {
+              "pixels": 11,
+              "bounds_xyxy_exclusive": [
+                319,
+                1493,
+                330,
+                1494
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "8": {
+          "pixels": 501919,
+          "bounds_xyxy_exclusive": [
+            246,
+            37,
+            799,
+            1493
+          ],
+          "components": 16,
+          "largest_components": [
+            {
+              "pixels": 501898,
+              "bounds_xyxy_exclusive": [
+                246,
+                37,
+                799,
+                1493
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                327,
+                983,
+                328,
+                990
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                357,
+                999,
+                358,
+                1000
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                532,
+                1051,
+                533,
+                1052
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                327,
+                981,
+                328,
+                982
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                530,
+                959,
+                531,
+                960
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                530,
+                955,
+                531,
+                956
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                321,
+                987,
+                322,
+                988
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "20": {
+          "pixels": 499697,
+          "bounds_xyxy_exclusive": [
+            246,
+            38,
+            799,
+            1493
+          ],
+          "components": 6,
+          "largest_components": [
+            {
+              "pixels": 499688,
+              "bounds_xyxy_exclusive": [
+                246,
+                38,
+                799,
+                1493
+              ]
+            },
+            {
+              "pixels": 4,
+              "bounds_xyxy_exclusive": [
+                591,
+                61,
+                595,
+                63
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                576,
+                55,
+                578,
+                56
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                529,
+                931,
+                530,
+                932
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                663,
+                213,
+                664,
+                214
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                595,
+                65,
+                596,
+                66
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "64": {
+          "pixels": 496104,
+          "bounds_xyxy_exclusive": [
+            247,
+            39,
+            798,
+            1493
+          ],
+          "components": 10,
+          "largest_components": [
+            {
+              "pixels": 496069,
+              "bounds_xyxy_exclusive": [
+                247,
+                39,
+                798,
+                1493
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                276,
+                524,
+                278,
+                530
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                557,
+                41,
+                564,
+                46
+              ]
+            },
+            {
+              "pixels": 8,
+              "bounds_xyxy_exclusive": [
+                665,
+                215,
+                667,
+                221
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                275,
+                534,
+                276,
+                536
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                621,
+                87,
+                622,
+                89
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                600,
+                65,
+                602,
+                67
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                665,
+                232,
+                666,
+                233
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "128": {
+          "pixels": 492810,
+          "bounds_xyxy_exclusive": [
+            247,
+            39,
+            798,
+            1493
+          ],
+          "components": 22,
+          "largest_components": [
+            {
+              "pixels": 492727,
+              "bounds_xyxy_exclusive": [
+                247,
+                39,
+                798,
+                1493
+              ]
+            },
+            {
+              "pixels": 12,
+              "bounds_xyxy_exclusive": [
+                606,
+                74,
+                613,
+                78
+              ]
+            },
+            {
+              "pixels": 11,
+              "bounds_xyxy_exclusive": [
+                654,
+                182,
+                658,
+                190
+              ]
+            },
+            {
+              "pixels": 10,
+              "bounds_xyxy_exclusive": [
+                662,
+                200,
+                665,
+                207
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                459,
+                62,
+                466,
+                66
+              ]
+            },
+            {
+              "pixels": 8,
+              "bounds_xyxy_exclusive": [
+                636,
+                123,
+                639,
+                130
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                568,
+                49,
+                573,
+                56
+              ]
+            },
+            {
+              "pixels": 4,
+              "bounds_xyxy_exclusive": [
+                505,
+                42,
+                509,
+                43
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "250": {
+          "pixels": 473472,
+          "bounds_xyxy_exclusive": [
+            250,
+            47,
+            795,
+            1491
+          ],
+          "components": 198,
+          "largest_components": [
+            {
+              "pixels": 470671,
+              "bounds_xyxy_exclusive": [
+                253,
+                47,
+                794,
+                1491
+              ]
+            },
+            {
+              "pixels": 2319,
+              "bounds_xyxy_exclusive": [
+                300,
+                915,
+                352,
+                997
+              ]
+            },
+            {
+              "pixels": 207,
+              "bounds_xyxy_exclusive": [
+                334,
+                973,
+                350,
+                994
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                668,
+                1159,
+                669,
+                1166
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                310,
+                906,
+                311,
+                912
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                331,
+                1490,
+                336,
+                1491
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                360,
+                847,
+                361,
+                852
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                711,
+                793,
+                712,
+                798
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-neutrals-batch2/quiz-heike-hoffmann-receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1849846,
+      "componentBounds": [
+        [
+          246,
+          38,
+          799,
+          1493
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 38,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary mature painterly Berlin style and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "role": "primary mature painterly Berlin style and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "role": "Heike portrait identity, clothes and props; no full-body length authority",
+            "path": "assets/quiz-characters/heike-hoffmann.webp",
+            "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+          },
+          {
+            "role": "Heike action source, clothes, key/card hands; old squat body proportions rejected",
+            "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+            "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "path": "assets/quiz-characters/heike-hoffmann.webp",
+          "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+        },
+        {
+          "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+        }
+      ]
+    },
+    {
+      "id": "quiz-heike-hoffmann-expressionist-turns-v1",
+      "prompt": "Create one transparent 2D game source sheet with exactly FOUR separate whole-body painted figures in ONE horizontal row, each the SAME older adult woman Heike Hoffmann and same height/sole baseline. Left to right: FRONT-RIGHT three-quarter (face/chest 45 degrees toward viewer-right); REAR-RIGHT three-quarter (true back dominant, angled right); REAR-LEFT three-quarter (true back dominant, angled left); FRONT-LEFT three-quarter (face/chest 45 degrees toward viewer-left). All planted neutral turn poses, complete head/two arms/two grown-up legs/two full brown lace-up Oxford shoes, clear transparent gutters and outer margins, no labels, no floor/shadow/halo/background. True RGBA alpha.\nUse reference 1 as binding Heike front ID and paint: older angular tired face with smaller eyes, silver-grey bob, reddish-brown glasses, pearl earrings, maroon cardigan, cream floral blouse, charcoal long trousers, brown lace Oxfords. Reference 2 binds her front/right/rear/left anatomy and costume. Reference 3 binds oblique mature scale and props. Small metal keyring (grey and brass keys) belongs to anatomical RIGHT hand by hip. Tight fan of exactly three green/blue/yellow cards belongs to anatomical LEFT hand at chest. Natural occlusion in rear/side angles, but do not switch hands or add limbs/props. Faces show closed lips; no face pasted on true rear views. Strong hand-painted angular Berlin/Disco Elysium-inspired irregular broad directional worn-oil brushwork and broken cloth planes, matching reference light direction; no repeated diamond faceting, fine stipple, cute/childlike face, glossy plastic/photo finish. Preserve same crown, neckline, waist, hem, knee and soles across all 4; separate clean components.",
+      "role": "Heike adult source attempt; selected use limited to reviewed turn source",
+      "file": "quiz-heike-hoffmann-expressionist-turns-v1.png",
+      "sha256": "ebf19dd753db5b45ebc6c2fa5ebcb05b9c2008b452ca9bc00a20db5c1f5120b9",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2534984,
+      "componentBounds": [
+        [
+          1152,
+          28,
+          1506,
+          962
+        ],
+        [
+          56,
+          26,
+          404,
+          962
+        ],
+        [
+          790,
+          26,
+          1104,
+          961
+        ],
+        [
+          458,
+          24,
+          755,
+          960
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "runtimeAcceptance": "Source-only paint; family animation requires separate exact native and runtime acceptance.",
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult front identity, anatomy, clothes, props, paint"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "binding cardinal costume, rear/profile continuity, anatomical prop hands"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+          "role": "adult oblique proportions and held objects"
+        }
+      ],
+      "exactPromptSha256": "3ac5b79197b7c50716c8f5c60e27fd90bd5ac80411171f67e416d6cfb2161b40"
     }
   ]
 }

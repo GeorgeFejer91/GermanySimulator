@@ -12,38 +12,38 @@
     ]
   },
   "definitionHashFormat": "typed-json-f64-v1",
-  "definitionSha256": "50d7ef13355e299bbe652c2f1980d5423fe883c5fece64b50912583df05e5e3d",
+  "definitionSha256": "881ff91eb836415546b95a99b263c0d34034aa99228872afeeb1837d4b6647e6",
   "sources": {
     "desktop": {
       "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/source-desktop.webp",
-      "sha256": "da18264079b02e9ad4c0450788eae38cd289ba4013cd5a138909335587daf89e",
+      "sha256": "1ce46b5cfdbdcbd6fa586008919e23bfe6fd2c08a93d1291aa58161f659f3fa8",
       "width": 2016,
       "height": 2160,
       "cell": [
         96,
         120
       ],
-      "rgba_sha256": "8a7b386e9c9e53dd52fe97974711a42bae6f0a4833bac5f37f29dabb11f788fa",
+      "rgba_sha256": "001b7c9e64f82d04314d3fdba2258c954497235b62d70786ee7309249db7711f",
       "decodedBytes": 17418240
     },
     "mobile": {
       "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/source-mobile.webp",
-      "sha256": "5e65cddd87fec2db5b4a2e631b262146e779ea8f15245454bdbd68f1108cd774",
+      "sha256": "5a8d5c38a45569a57d2e33368dfe867b763d84f2a433524bb9fee08c000c110b",
       "width": 1344,
       "height": 1440,
       "cell": [
         64,
         80
       ],
-      "rgba_sha256": "b6e8eaa647c734b52dbfa6359f0ea41b78aa0387df75ebb6df070f4c07a24f41",
+      "rgba_sha256": "3ba447acfe15e605eee32cd79155306915ac2c46f933112a4dd0c0ff9eef2c69",
       "decodedBytes": 7741440
     }
   },
   "packs": {
     "movement": {
       "grid": [
-        21,
-        17
+        16,
+        22
       ],
       "slots": [
         0,
@@ -397,38 +397,33 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "variants": {
         "desktop": {
           "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/delivery/movement-desktop.webp",
-          "width": 2016,
-          "height": 2040,
-          "bytes": 2131084,
-          "sha256": "7d2bee6d3c761f2c5f5b2bc07bc7dcff521c644755c26f99d80ac80edc0b1f67",
-          "rgba_sha256": "6cd27824c3ad2f7310288d8b9db3fbb360dfa32e44f8c913e0f98958f34fda23",
-          "decodedBytes": 16450560
+          "width": 1536,
+          "height": 2640,
+          "bytes": 1838688,
+          "sha256": "a8dfa47119fe72ae0168a7a29e134a450e13adce9b84ed193e7f5971063a3e06",
+          "rgba_sha256": "c31ce87e0ee535e332826ae1c96ba2d81689bb6a0eb7753e10c400a86f11901f",
+          "decodedBytes": 16220160
         },
         "mobile": {
           "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/delivery/movement-mobile.webp",
-          "width": 1344,
-          "height": 1360,
-          "bytes": 915964,
-          "sha256": "3378ca8019711e924701a0c9a883e09348efd1d48021ed7b3b6facfb53a60529",
-          "rgba_sha256": "93ed7d2ce09a1c00375a404c43c319bfa13215e7a8fb8ea0195c48b2d3374f2b",
-          "decodedBytes": 7311360
+          "width": 1024,
+          "height": 1760,
+          "bytes": 829016,
+          "sha256": "fdefa71f94a59e4ec8bfc3e0012b27acbc5927075cde37f5431fd9ac57ebf629",
+          "rgba_sha256": "aabeabd99f3331ade77e475eaf8053660545bfbec41215c49f8a2c1451523bdc",
+          "decodedBytes": 7208960
         }
       }
     },
     "reactions": {
       "grid": [
-        21,
-        1
+        16,
+        2
       ],
       "slots": [
         86,
@@ -451,26 +446,37 @@
         null,
         null,
         null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null
       ],
       "variants": {
         "desktop": {
           "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/delivery/reactions-desktop.webp",
-          "width": 2016,
-          "height": 120,
-          "bytes": 42288,
-          "sha256": "073b13d2f29f915fcd08fc41e81c9f060b241bc076194d0b4f20488f01cc37fd",
-          "rgba_sha256": "7f9f1b8a15e1fe183cca6db5111bed6b4460521408334b7b02db9d86663b4a01",
-          "decodedBytes": 967680
+          "width": 1536,
+          "height": 240,
+          "bytes": 46976,
+          "sha256": "ff8e5f4cf619de4d54d4f9fcf31e5306b2de667b8571cde5d78c204710496a88",
+          "rgba_sha256": "964613fce6c814a04310693ea017d2da35339d408b73d3ea16ba4e97024ed370",
+          "decodedBytes": 1474560
         },
         "mobile": {
           "file": "./assets/characters/street-speakers/quiz-heike-hoffmann/delivery-v1/delivery/reactions-mobile.webp",
-          "width": 1344,
-          "height": 80,
-          "bytes": 20862,
-          "sha256": "4e0c95a47213599284595c5d33c5ab9d4f9612f38f2bfcbd6f55dd358056b7b8",
-          "rgba_sha256": "5f4ca3ac7aafce1d94bc331237d0f8c615b9e4e96d2680d5d4030816d0b805be",
-          "decodedBytes": 430080
+          "width": 1024,
+          "height": 160,
+          "bytes": 17182,
+          "sha256": "fb681a18ab6a958ca31432bf8b06c43faf86974e5530ee1fc77d83167ae3a72b",
+          "rgba_sha256": "beb70310e75b004be33d3d5213318e7e8069c0e7c3f07e4d48e76d42772e22b8",
+          "decodedBytes": 655360
         }
       }
     }

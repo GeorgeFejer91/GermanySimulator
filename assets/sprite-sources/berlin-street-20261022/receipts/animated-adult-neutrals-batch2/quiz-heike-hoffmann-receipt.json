@@ -1,0 +1,581 @@
+{
+  "status": "source-candidate-unapproved",
+  "actor": "quiz-heike-hoffmann",
+  "tool": "built-in image_gen.imagegen; exactly one job; transparent_background=true",
+  "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator street quiz speaker HEIKE HOFFMANN, for later source review, no action sheet. Images 1 and 2 are PRIMARY painterly mature-Berlin finish and adult stature/connected limb references: Sabine Krueger and Hartmut Keller. Images 3 and 4 are HEIKE identity, specific outfit, prop and handedness references only; do not copy their old short-body proportions. Heike is a mature older adult woman with gray ash-brown chin-length bob swept sideways, narrow reddish-brown glasses, pearl earrings, sly mildly skeptical small-eyed expression, lined asymmetric angular face. Preserve burgundy button-front jacket/cardigan over cream floral-collared blouse, charcoal long trousers, sturdy worn brown leather walking shoes. In her ANATOMICAL RIGHT hand (screen left) hang one small bunch of metal house keys on a ring, clearly readable but held low away from her mouth; in ANATOMICAL LEFT hand (screen right) hold exactly three flat colored cards fanned green, blue and yellow near her lower torso, also away from face. One of each prop, no invented object. Front-facing quiet planted pose with complete adult hands, fingers, arms, connected thighs, knees, shins, ankles and both entire substantial shoes; adult head-to-body/leg lengths comparable to Sabine/Hartmut, not chibi. A visible natural CLOSED lip line and clear corners for later speech; no card or key over mouth. Painterly Disco Elysium meets Berlin: weathered mature facial asymmetry, drybrush/oil marks in BROAD irregular planes, worn wine/ochre/petrol/cool gray-green shadow, expressive angular cheek/nose/brow/garment shapes, no smooth toy gradients or regular faceted pattern or fine uniform speckle. One centered figure occupies at most 85% image height and 75% width, with at least 60 real transparent pixels above hair, below shoe soles, and outside hands/props; do not crop or push the figure to canvas edges. GENUINE TRANSPARENT RGBA cutout, no painted background, floor, shadow, glow, halo, outline frame, lettering, logos, watermark, panel, other views or extra figures.",
+  "references": [
+    {
+      "role": "primary mature painterly Berlin style and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+    },
+    {
+      "role": "primary mature painterly Berlin style and adult anatomy",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+      "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+    },
+    {
+      "role": "Heike portrait identity, clothes and props; no full-body length authority",
+      "path": "assets/quiz-characters/heike-hoffmann.webp",
+      "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060"
+    },
+    {
+      "role": "Heike action source, clothes, key/card hands; old squat body proportions rejected",
+      "path": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+      "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605"
+    }
+  ],
+  "generated_path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-b8b4a27d-d4e8-4a74-9395-c58cdee1510b.png",
+  "generated_sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+  "exact_copied_path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-heike-hoffmann-expressionist-standing-v1.png",
+  "exact_copied_sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+  "exact_bytes_match": true,
+  "mode": "RGBA",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "matte": {
+    "1": {
+      "pixels": 522135,
+      "bounds_xyxy_exclusive": [
+        31,
+        31,
+        1004,
+        1517
+      ],
+      "components": 366,
+      "largest_components": [
+        {
+          "pixels": 521247,
+          "bounds_xyxy_exclusive": [
+            239,
+            31,
+            802,
+            1498
+          ]
+        },
+        {
+          "pixels": 215,
+          "bounds_xyxy_exclusive": [
+            799,
+            289,
+            817,
+            316
+          ]
+        },
+        {
+          "pixels": 42,
+          "bounds_xyxy_exclusive": [
+            945,
+            659,
+            950,
+            672
+          ]
+        },
+        {
+          "pixels": 38,
+          "bounds_xyxy_exclusive": [
+            112,
+            563,
+            118,
+            574
+          ]
+        },
+        {
+          "pixels": 27,
+          "bounds_xyxy_exclusive": [
+            872,
+            707,
+            878,
+            718
+          ]
+        },
+        {
+          "pixels": 15,
+          "bounds_xyxy_exclusive": [
+            145,
+            465,
+            148,
+            472
+          ]
+        },
+        {
+          "pixels": 14,
+          "bounds_xyxy_exclusive": [
+            103,
+            1413,
+            106,
+            1424
+          ]
+        },
+        {
+          "pixels": 11,
+          "bounds_xyxy_exclusive": [
+            319,
+            1493,
+            330,
+            1494
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "8": {
+      "pixels": 501919,
+      "bounds_xyxy_exclusive": [
+        246,
+        37,
+        799,
+        1493
+      ],
+      "components": 16,
+      "largest_components": [
+        {
+          "pixels": 501898,
+          "bounds_xyxy_exclusive": [
+            246,
+            37,
+            799,
+            1493
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            327,
+            983,
+            328,
+            990
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            357,
+            999,
+            358,
+            1000
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            532,
+            1051,
+            533,
+            1052
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            327,
+            981,
+            328,
+            982
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            530,
+            959,
+            531,
+            960
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            530,
+            955,
+            531,
+            956
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            321,
+            987,
+            322,
+            988
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "20": {
+      "pixels": 499697,
+      "bounds_xyxy_exclusive": [
+        246,
+        38,
+        799,
+        1493
+      ],
+      "components": 6,
+      "largest_components": [
+        {
+          "pixels": 499688,
+          "bounds_xyxy_exclusive": [
+            246,
+            38,
+            799,
+            1493
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            591,
+            61,
+            595,
+            63
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            576,
+            55,
+            578,
+            56
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            529,
+            931,
+            530,
+            932
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            663,
+            213,
+            664,
+            214
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            595,
+            65,
+            596,
+            66
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "64": {
+      "pixels": 496104,
+      "bounds_xyxy_exclusive": [
+        247,
+        39,
+        798,
+        1493
+      ],
+      "components": 10,
+      "largest_components": [
+        {
+          "pixels": 496069,
+          "bounds_xyxy_exclusive": [
+            247,
+            39,
+            798,
+            1493
+          ]
+        },
+        {
+          "pixels": 9,
+          "bounds_xyxy_exclusive": [
+            276,
+            524,
+            278,
+            530
+          ]
+        },
+        {
+          "pixels": 9,
+          "bounds_xyxy_exclusive": [
+            557,
+            41,
+            564,
+            46
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            665,
+            215,
+            667,
+            221
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            275,
+            534,
+            276,
+            536
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            621,
+            87,
+            622,
+            89
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            600,
+            65,
+            602,
+            67
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            665,
+            232,
+            666,
+            233
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "128": {
+      "pixels": 492810,
+      "bounds_xyxy_exclusive": [
+        247,
+        39,
+        798,
+        1493
+      ],
+      "components": 22,
+      "largest_components": [
+        {
+          "pixels": 492727,
+          "bounds_xyxy_exclusive": [
+            247,
+            39,
+            798,
+            1493
+          ]
+        },
+        {
+          "pixels": 12,
+          "bounds_xyxy_exclusive": [
+            606,
+            74,
+            613,
+            78
+          ]
+        },
+        {
+          "pixels": 11,
+          "bounds_xyxy_exclusive": [
+            654,
+            182,
+            658,
+            190
+          ]
+        },
+        {
+          "pixels": 10,
+          "bounds_xyxy_exclusive": [
+            662,
+            200,
+            665,
+            207
+          ]
+        },
+        {
+          "pixels": 9,
+          "bounds_xyxy_exclusive": [
+            459,
+            62,
+            466,
+            66
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            636,
+            123,
+            639,
+            130
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            568,
+            49,
+            573,
+            56
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            505,
+            42,
+            509,
+            43
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "250": {
+      "pixels": 473472,
+      "bounds_xyxy_exclusive": [
+        250,
+        47,
+        795,
+        1491
+      ],
+      "components": 198,
+      "largest_components": [
+        {
+          "pixels": 470671,
+          "bounds_xyxy_exclusive": [
+            253,
+            47,
+            794,
+            1491
+          ]
+        },
+        {
+          "pixels": 2319,
+          "bounds_xyxy_exclusive": [
+            300,
+            915,
+            352,
+            997
+          ]
+        },
+        {
+          "pixels": 207,
+          "bounds_xyxy_exclusive": [
+            334,
+            973,
+            350,
+            994
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            668,
+            1159,
+            669,
+            1166
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            310,
+            906,
+            311,
+            912
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            331,
+            1490,
+            336,
+            1491
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            360,
+            847,
+            361,
+            852
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            711,
+            793,
+            712,
+            798
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "composites": [
+    "output/street-redesign/animated-adult-neutrals-batch2/quiz-heike-hoffmann-on-light.png",
+    "output/street-redesign/animated-adult-neutrals-batch2/quiz-heike-hoffmann-on-dark.png"
+  ],
+  "visual_review": {
+    "style": "Older small-eyed face, distinct silver bob, expressive wine jacket and irregular broad trouser/coat paint. Mature adult silhouette; still subject to root style judgment.",
+    "anatomy": "Both adult trouser legs and complete substantial brown shoes are present; hands and fingers connected to arms.",
+    "identity_handedness": "Gray bob, narrow reddish glasses, pearl earrings, floral blouse, burgundy cardigan preserved. Keys hang from anatomical RIGHT hand (screen left); green-blue-yellow card fan in anatomical LEFT (screen right).",
+    "mouth": "Closed lips and both corners visibly clear of hands and props; source mouth still requires root registration and native fit.",
+    "holds": [
+      "Source-only; existing walk, gesture, mouth and speech capabilities are unmodified and not revalidated.",
+      "Opaque alpha>=128 top margin is 39 px, one pixel under the requested >=40 px target; native cell/gutter fit must be checked.",
+      "Low-alpha edge specks and encoded-scale brush readability need review before any action-family expansion."
+    ]
+  }
+}

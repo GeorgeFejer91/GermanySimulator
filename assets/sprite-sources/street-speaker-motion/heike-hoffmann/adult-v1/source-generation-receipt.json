@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "actorId": "quiz-heike-hoffmann",
+  "scope": "adult source attempts generated in isolated Heike worktree",
+  "jobs": [
+    {
+      "name": "turns-v1",
+      "generator": "built-in image_gen; one job per source, no automated retry",
+      "trackedRawCopy": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-turns-v1.png",
+      "rawCopySha256": "ebf19dd753db5b45ebc6c2fa5ebcb05b9c2008b452ca9bc00a20db5c1f5120b9",
+      "savedRequest": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/adult-v1/turns-v1-exact-prompt.txt",
+        "sha256": "3ac5b79197b7c50716c8f5c60e27fd90bd5ac80411171f67e416d6cfb2161b40",
+        "precision": "exact submitted imagegen template-literal prompt recovered read-only from this worker's own Codex session JSONL"
+      },
+      "sessionCallRow": 6122,
+      "generatedOriginalPath": null,
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult front identity, anatomy, clothes, props, paint"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "binding cardinal costume, rear/profile continuity, anatomical prop hands"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+          "role": "adult oblique proportions and held objects"
+        }
+      ],
+      "image": {
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA",
+        "alphaZeroPixels": 722609,
+        "alpha128Components": [
+          {
+            "alpha128Pixels": 206861,
+            "boundsXYXY": [
+              1152,
+              28,
+              1506,
+              962
+            ]
+          },
+          {
+            "alpha128Pixels": 205436,
+            "boundsXYXY": [
+              56,
+              26,
+              404,
+              962
+            ]
+          },
+          {
+            "alpha128Pixels": 190001,
+            "boundsXYXY": [
+              790,
+              26,
+              1104,
+              961
+            ]
+          },
+          {
+            "alpha128Pixels": 183750,
+            "boundsXYXY": [
+              458,
+              24,
+              755,
+              960
+            ]
+          },
+          {
+            "alpha128Pixels": 5,
+            "boundsXYXY": [
+              329,
+              149,
+              331,
+              153
+            ]
+          },
+          {
+            "alpha128Pixels": 4,
+            "boundsXYXY": [
+              309,
+              64,
+              313,
+              68
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              332,
+              135,
+              333,
+              138
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              513,
+              63,
+              515,
+              65
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              1406,
+              85,
+              1407,
+              87
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              1425,
+              151,
+              1427,
+              153
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              653,
+              41,
+              654,
+              42
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              881,
+              54,
+              882,
+              55
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              1237,
+              71,
+              1238,
+              72
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              313,
+              73,
+              314,
+              74
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              315,
+              77,
+              316,
+              78
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              1425,
+              119,
+              1426,
+              120
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              126,
+              125,
+              127,
+              126
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              1059,
+              147,
+              1060,
+              148
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              1057,
+              151,
+              1058,
+              152
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              1050,
+              164,
+              1051,
+              165
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              321,
+              167,
+              322,
+              168
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              320,
+              169,
+              321,
+              170
+            ]
+          }
+        ],
+        "borderAlphaMax": 1,
+        "hiddenRGBAtAlphaZero": 722609
+      },
+      "review": "source-only provisional; native family, action interpolation, runtime and mobile gates pending"
+    },
+    {
+      "name": "keys-gesture-v1",
+      "generator": "built-in image_gen; one job per source, no automated retry",
+      "trackedRawCopy": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-keys-gesture-v1.png",
+      "rawCopySha256": "c40d282f67bcd200f346a3ab5b54d7cf4bbe2521cc146b72b66bfe6ff8889040",
+      "savedRequest": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/adult-v1/keys-gesture-v1-exact-prompt.txt",
+        "sha256": "c4da1ff55766fdcb22d84fca967b635eff4fee2dde19d484d2500fdc3c344e97",
+        "precision": "exact submitted imagegen template-literal prompt recovered read-only from this worker's own Codex session JSONL"
+      },
+      "sessionCallRow": 6617,
+      "generatedOriginalPath": null,
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult identity, full-body anatomy and painterly finish"
+        },
+        {
+          "file": "assets/sprite-sources/street-quiz/heike-hoffmann-keys.png",
+          "sha256": "fae6498e2a8b81b149f514c9c815ea586e64424b2f41ac22c40cbb52cab39605",
+          "role": "key/elbow action semantics only; old body proportion excluded"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "adult costume and anatomical prop hand ownership"
+        }
+      ],
+      "image": {
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alphaZeroPixels": 1083512,
+        "alpha128Components": [
+          {
+            "alpha128Pixels": 466930,
+            "boundsXYXY": [
+              242,
+              31,
+              798,
+              1494
+            ]
+          },
+          {
+            "alpha128Pixels": 22,
+            "boundsXYXY": [
+              415,
+              73,
+              427,
+              84
+            ]
+          },
+          {
+            "alpha128Pixels": 11,
+            "boundsXYXY": [
+              650,
+              203,
+              653,
+              209
+            ]
+          },
+          {
+            "alpha128Pixels": 6,
+            "boundsXYXY": [
+              371,
+              219,
+              374,
+              223
+            ]
+          },
+          {
+            "alpha128Pixels": 5,
+            "boundsXYXY": [
+              571,
+              54,
+              576,
+              55
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              461,
+              47,
+              464,
+              49
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              597,
+              67,
+              600,
+              70
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              615,
+              89,
+              617,
+              92
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              650,
+              198,
+              652,
+              201
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              626,
+              121,
+              627,
+              123
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              529,
+              33,
+              530,
+              34
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              557,
+              46,
+              558,
+              47
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              428,
+              69,
+              429,
+              70
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              411,
+              88,
+              412,
+              89
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              619,
+              100,
+              620,
+              101
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              387,
+              125,
+              388,
+              126
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              391,
+              127,
+              392,
+              128
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              353,
+              191,
+              354,
+              192
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              652,
+              197,
+              653,
+              198
+            ]
+          }
+        ],
+        "borderAlphaMax": 0,
+        "hiddenRGBAtAlphaZero": 766991
+      },
+      "review": "source-only provisional; native family, action interpolation, runtime and mobile gates pending"
+    },
+    {
+      "name": "keys-intermediate-v1",
+      "generator": "built-in image_gen; one job per source, no automated retry",
+      "trackedRawCopy": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-keys-intermediate-v1.png",
+      "rawCopySha256": "5f5ed01fa4551cf9a97e7c3b186275fa8cfac2a38bd08c19c42d57645b38d8dc",
+      "savedRequest": {
+        "file": "assets/sprite-sources/street-speaker-motion/heike-hoffmann/adult-v1/keys-intermediate-v1-exact-prompt.txt",
+        "sha256": "dbd336343be6366b95c4859421e2121d850ac44e2c9006e2f673787228f33f35",
+        "precision": "exact submitted imagegen prompt saved before invocation"
+      },
+      "sessionCallRow": null,
+      "generatedOriginalPath": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8/exec-493b1dc5-4451-4e12-9b53-8c13b9c12e3b.png",
+      "references": [
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+          "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+          "role": "binding adult front identity, anatomy, costume, paint and planted soles"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-keys-gesture-v1.png",
+          "sha256": "c40d282f67bcd200f346a3ab5b54d7cf4bbe2521cc146b72b66bfe6ff8889040",
+          "role": "binding chest-height key-gesture endpoint and left card ownership"
+        },
+        {
+          "file": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+          "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+          "role": "adult costume and view continuity"
+        }
+      ],
+      "image": {
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alphaZeroPixels": 1081112,
+        "alpha128Components": [
+          {
+            "alpha128Pixels": 471831,
+            "boundsXYXY": [
+              248,
+              39,
+              797,
+              1493
+            ]
+          },
+          {
+            "alpha128Pixels": 20,
+            "boundsXYXY": [
+              660,
+              195,
+              665,
+              206
+            ]
+          },
+          {
+            "alpha128Pixels": 14,
+            "boundsXYXY": [
+              654,
+              184,
+              659,
+              191
+            ]
+          },
+          {
+            "alpha128Pixels": 11,
+            "boundsXYXY": [
+              620,
+              267,
+              628,
+              272
+            ]
+          },
+          {
+            "alpha128Pixels": 4,
+            "boundsXYXY": [
+              567,
+              48,
+              571,
+              52
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              611,
+              76,
+              614,
+              79
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              634,
+              111,
+              636,
+              114
+            ]
+          },
+          {
+            "alpha128Pixels": 3,
+            "boundsXYXY": [
+              435,
+              260,
+              438,
+              261
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              565,
+              51,
+              567,
+              53
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              408,
+              115,
+              410,
+              117
+            ]
+          },
+          {
+            "alpha128Pixels": 2,
+            "boundsXYXY": [
+              640,
+              132,
+              641,
+              134
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              571,
+              53,
+              572,
+              54
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              572,
+              55,
+              573,
+              56
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              633,
+              109,
+              634,
+              110
+            ]
+          },
+          {
+            "alpha128Pixels": 1,
+            "boundsXYXY": [
+              613,
+              273,
+              614,
+              274
+            ]
+          }
+        ],
+        "borderAlphaMax": 0,
+        "hiddenRGBAtAlphaZero": 747680
+      },
+      "review": "source-only provisional; native family, action interpolation, runtime and mobile gates pending"
+    }
+  ],
+  "limitations": [
+    "The copied PNGs are the preserved raw RGBA attempts.",
+    "Earlier generated temporary paths for turns and raised gesture have not yet been recovered; their exact submitted prompts are stored beside this receipt. The distinct preflight request drafts are also retained."
+  ]
+}

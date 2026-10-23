@@ -1,0 +1,32 @@
+{
+  "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-right-opposite-contact-v1.png",
+  "sha256": "ff3b7781012caebea00d0bb062463c4fe1c9ae9d98fc9674b351e1d70cca7b10",
+  "rawJob": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a164c0-1149-7050-b55f-fc60afdcf4b5\\exec-7dd294fc-5394-40bd-bfd0-eedfc381d02b.png",
+  "sourceEqualsJob": true,
+  "bytes": 1025272,
+  "dimensions": [
+    1067,
+    1474
+  ],
+  "request": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\contact-a-identity-reference.png",
+      "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\opposite-contact-authored-pose-guide.png"
+    ],
+    "prompt": "Edit the woman in INPUT 1 into ONE OPPOSITE WALK CONTACT, facing SCREEN RIGHT. Input 1 is her adult identity, shoes, head/upper body and original contact A. INPUT 2 is an authored pose diagram: use ONLY its lower-body near/far placement, not its colours, text or drawing style. It shows the missing OPPOSITE contact B. Produce ONE full-body figure only on genuine transparent background.\n\nThe most important edit is the leg ownership: the NEAR anatomical RIGHT leg, which is in front of the other leg in the picture, must now run from her hip DIAGONALLY BACK to SCREEN LEFT. We see this near thigh overlapping and covering the upper part of the far thigh at the hip. Its near knee and near calf continue BACK LEFT, and its brown Oxford trails at the LEFT, heel raised with only the toe touching the floor. The FAR anatomical LEFT leg passes BEHIND that near thigh, extends FORWARD to SCREEN RIGHT and plants its own brown Oxford HEEL on the floor at the RIGHT. This is the opposite planted leg to input1. Do not repeat input1's foreground thigh slanting down-right. Do not mirror the woman or swap the hands. The near/right trouser contour must visibly lead BACK LEFT; the far/left leg leads right behind it. One anatomically connected knee, cuff, ankle and Oxford per leg; modest stride, no crouch, no plastic tubes, bent-back knees or fused shoes.\n\nKeep the head, upper body and hands of input1 as closely as possible: adult older Heike Hoffmann with silver bob, red-brown glasses, pearl earring, mature tired closed-mouth profile, burgundy cardigan, cream floral blouse collar. NEAR RIGHT hand hangs at hip holding ONE key ring; FAR LEFT hand holds the green/blue/yellow cards in front of chest. Keep these grips and arms exactly. Full-length charcoal trousers, substantial BROWN LACED OXFORD shoes. Same physical adult body scale, head size, torso/hip/limb lengths and camera; change leg pose, not identity or proportions. Same floor line. No right-facing clone of the original contact.\n\nAlso replace ALL repeating diamond/argyle/faceted motifs on cardigan and trousers with completely PLAIN WORN CLOTH. Plain burgundy heavy knit cardigan and plain charcoal wool trousers: broad, uneven, irregular brush masses, restrained natural seams and real folds only. No patterned triangles, lozenges, diamonds, check, hatch grid, tiled polygons, fine noise or printed decoration. The cream blouse collar alone keeps its little flowers. Mature DISCO ELYSIUM meets BERLIN expressive dry-brush painting: sculptural worn face, scumbled wine/charcoal/ochre/grey-green surfaces, lived-in heavy fabric. No cute baby face, glossy 3D or smooth toy render. The output is painted character art, not the pose diagram: no orange/blue guide marks, bones, circles, arrows or text. Complete hair/hands/keys/cards/shoes, generous clear margins, true alpha-zero background, no vignette, halo, ground shadow or scenery."
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\contact-a-identity-reference.png",
+      "sha256": "93a64e667d32426d017d0c8e2d875ae44c7ca0eb4398c543c422454d8a30805e"
+    },
+    {
+      "path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\output\\street-redesign\\heike-right-opposite-contact-v1\\opposite-contact-authored-pose-guide.png",
+      "sha256": "37ba3104e225b47d13e91f4a095e64bc6baa701c4dc717d0d9285613716c7ec7"
+    }
+  ],
+  "status": "UNSELECTED HELD: targeted opposite-contact request does not clearly change foreground leading leg; repeating cloth remains",
+  "rootObservation": "Root inspected the full raw output against its contact-A crop and separately authored orange-near/blue-far pose diagram. The front-leading thigh silhouette remains; fixed anatomical owner is not proved by two shoes alone. Cardigan retains repeated diamond texture. Source is held, not a valid opposite contact. Stop repeating this same source-generation instruction; no encoded motion or runtime acceptance.",
+  "acceptance": "No selected body/atlas/configuration/mouth/runtime changes."
+}

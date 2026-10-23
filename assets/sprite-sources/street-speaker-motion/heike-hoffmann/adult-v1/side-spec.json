@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "status": "private four-checkpoint Heike side fitting; no source/runtime selection",
+  "sourceResolutionConversion": {
+    "cardinalFrontSourceFigureHeight": 848,
+    "cardinalFrontScale": 0.4716981132075472,
+    "contactSourceFigureHeight": 975,
+    "contactScale": 0.41025641025641024,
+    "rule": "Both source families register to one physical 400-working-pixel adult and nominal 136 native pixels. Different source resolutions change only whole-view scale; no leg/head/individual output frame scale."
+  },
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "characters": {
+    "quiz-heike-hoffmann": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+      "sourceSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+      "scale": 0.41025641025641024,
+      "figureWorldHeight": 2.1,
+      "views": {
+        "right": {
+          "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sourceSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+          "scale": 0.41025641025641024,
+          "plantedTransition": "recenter-contact",
+          "gait_strength": 0.75,
+          "component_bounds": [
+            178,
+            17,
+            742,
+            992
+          ],
+          "source_pivot": [
+            452,
+            992
+          ],
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                519,
+                263
+              ],
+              [
+                612,
+                265
+              ],
+              [
+                621,
+                365
+              ],
+              [
+                592,
+                410
+              ],
+              [
+                540,
+                415
+              ],
+              [
+                520,
+                357
+              ]
+            ],
+            [
+              [
+                282,
+                516
+              ],
+              [
+                355,
+                519
+              ],
+              [
+                356,
+                579
+              ],
+              [
+                341,
+                619
+              ],
+              [
+                286,
+                627
+              ],
+              [
+                280,
+                577
+              ]
+            ],
+            [
+              [
+                281,
+                620
+              ],
+              [
+                340,
+                620
+              ],
+              [
+                336,
+                650
+              ],
+              [
+                310,
+                673
+              ],
+              [
+                281,
+                690
+              ],
+              [
+                276,
+                670
+              ]
+            ]
+          ],
+          "landmarks": {
+            "waist": 505,
+            "hip": 545,
+            "hem": [
+              680,
+              680
+            ],
+            "knee": [
+              755,
+              755
+            ],
+            "sock": [
+              888,
+              888
+            ],
+            "ankle": [
+              895,
+              895
+            ],
+            "mid": 450,
+            "centres": [
+              360,
+              535
+            ],
+            "foot_centres": [
+              268,
+              634
+            ],
+            "split_path_xy": [
+              [
+                445,
+                545
+              ],
+              [
+                450,
+                675
+              ],
+              [
+                452,
+                700
+              ],
+              [
+                445,
+                750
+              ],
+              [
+                432,
+                800
+              ],
+              [
+                420,
+                875
+              ],
+              [
+                420,
+                930
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted"
+          }
+        },
+        "left": {
+          "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+          "sourceSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+          "scale": 0.41025641025641024,
+          "plantedTransition": "recenter-contact",
+          "gait_strength": 0.75,
+          "component_bounds": [
+            817,
+            18,
+            1381,
+            992
+          ],
+          "source_pivot": [
+            1099,
+            992
+          ],
+          "foreground": 0,
+          "protected_polygons": [
+            [
+              [
+                941,
+                269
+              ],
+              [
+                1069,
+                269
+              ],
+              [
+                1072,
+                390
+              ],
+              [
+                1032,
+                414
+              ],
+              [
+                955,
+                402
+              ],
+              [
+                940,
+                330
+              ]
+            ],
+            [
+              [
+                1212,
+                516
+              ],
+              [
+                1271,
+                520
+              ],
+              [
+                1273,
+                578
+              ],
+              [
+                1292,
+                620
+              ],
+              [
+                1289,
+                660
+              ],
+              [
+                1230,
+                675
+              ],
+              [
+                1218,
+                630
+              ]
+            ]
+          ],
+          "landmarks": {
+            "waist": 505,
+            "hip": 545,
+            "hem": [
+              680,
+              680
+            ],
+            "knee": [
+              755,
+              755
+            ],
+            "sock": [
+              888,
+              888
+            ],
+            "ankle": [
+              895,
+              895
+            ],
+            "mid": 1120,
+            "centres": [
+              1015,
+              1220
+            ],
+            "foot_centres": [
+              912,
+              1285
+            ],
+            "split_path_xy": [
+              [
+                1120,
+                545
+              ],
+              [
+                1114,
+                675
+              ],
+              [
+                1112,
+                700
+              ],
+              [
+                1120,
+                750
+              ],
+              [
+                1130,
+                800
+              ],
+              [
+                1140,
+                875
+              ],
+              [
+                1130,
+                930
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 16,
+            "root_overlap": 4,
+            "stride_curve": "planted"
+          }
+        }
+      }
+    }
+  }
+}

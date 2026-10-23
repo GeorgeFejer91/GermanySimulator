@@ -240,3 +240,46 @@ are progressing in separate one-character checkouts. Only root integrates and
 publishes, one accepted family at a time; no other local cast is approved by
 this release. Completed owners hand off frozen work and a new owner starts
 the next uncompleted character immediately.
+
+Gisela publication verified: `57c1751f490943d8c3b2e118e08b5ec847121093`, Pages39969614861 success. All14 deployed files match immutable commit bytes; actual root, query/hash-preserving3d.html compatibility and public Gisela standing/movement admission pass with0page/HTTP failures. Root inspects the public pavement capture; staged public approach does not claim natural E traversal. Evidence: `output/gisela-release/live/`.
+
+
+## Heike Hoffmann: corrected adult complete family
+
+Only `quiz-heike-hoffmann` changes from public Gisela57c1751f. Other42 records,
+all police, game simulation, collision, recordings and loading architecture
+remain exact. Cache-token refresh is the only runtime-module change. Own mature
+grey bob/glasses, burgundy cardigan, anatomical-right keys and left cards remain
+recognizable. Her2.33-world-unit connected adult source retains364 selected
+cells, four16-phase walks, eight turns,64 phase-specific stops, all seven
+original action names and276 source-bound visible mouths. Measured stride29.125
+is retained. Movement16,220,160/7,208,960decoded bytes and reactions1,474,560/
+655,360stay within existing budgets.
+
+Independent review of the initial76-pin candidate found a real source defect:
+vertical contact shoes descended3–4native rows below the fixed sprite ground
+and were visibly buried by the sidewalk. Original RED report, delivery and
+freeze remain under the old source-repair lane's `before-floor-fix` and
+`review-physics`. The correction enables the existing actor-local plantedFloor
+callback in the own front/rear source specifications; it does not move the
+runtime pivot or edit shared helpers. A failing8-contact regression turns GREEN
+after rebuilding body, stops, actions, assembly, fitted mouths and selective
+delivery from tracked own sources. Selected SHA values and exact clean commands
+are in the actor's `adult-v1/README.md`.
+
+Latest public integration is frozen78 paths atop57c1751f; both independent
+specialists return to these exact bytes for their affected source/ground,
+adult-scale/depth and actual-turn checks. Root inspects native/rendered evidence
+and accepts only those scoped rows. All103 focused integration checks and the
+source-contact regression pass; Git also preserves the exact SHA-bound mouth
+bytes. The author supplied three emulated profiles, actual recorded-mouth
+ownership/closure, all seven action witnesses, movement/standing404 behavior,
+resource retirement/reentry, and a43-sample1.057second actual turn trace. Fresh
+review evidence and limits are in `output/heike-release/review-{physics,camera}`.
+
+This is sequential single-family acceptance; publication and actual deployed
+root/compatibility/admission verification remain separate receipts. Broader
+unchanged world matrices, natural E traversal, physical Android and perceived
+audio are not inferred from staged silent headless fixtures. Karl-Heinz,
+Sabine, Renate and all other unfinished outdoor characters remain under the
+same redesign goal with independent one-character implementation owners.

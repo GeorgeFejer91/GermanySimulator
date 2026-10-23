@@ -1,0 +1,322 @@
+{
+  "status": "source-only estimated binding with v2 corrected Oxford ownership; no pose render or motion approval",
+  "inputs": {
+    "auditReceipt": "heike-cuff-source-audit/receipt.json",
+    "auditReceiptSHA256": "15fcf20b6033fdf7003f0d44e7e82ca6287cdd9e5e624c8e349721978992522d",
+    "extractionV2Receipt": "heike-source-corrected-three-poses/extraction-v2/receipt.json",
+    "extractionV2ReceiptSHA256": "f9aeb048538c655d9f0eaeddb0673a2ae3c50474aa689de711c4d38248951ce1",
+    "contactSource": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+    "contactSourceSHA256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+    "shoeMaskPaths": {
+      "far": "heike-source-corrected-three-poses/extraction-v2/far-shoe-source.png",
+      "near": "heike-source-corrected-three-poses/extraction-v2/near-shoe-source.png"
+    },
+    "shoeMaskSHA256": {
+      "far": "4ffdb9741dfb16edbe5b0b0e168fe2b8835660903ccb7f4d2ff92d5e55bf8414",
+      "near": "0c6fa1cdd1d33ce0628f2cd1e36d05ffb3e6d6abb5c7f7abb5dd65aa9542253a"
+    }
+  },
+  "conventions": {
+    "coordinates": "source pixels, x right/y down; one common source family scale 400/975 to working",
+    "shoePixelSupport": "union of unit squares [x,x+1]×[y,y+1] for source mask alpha>=20; rotate all four corners continuously, no resampling",
+    "rotationMatrixImageXY": "[[cos(a), sin(a)], [-sin(a), cos(a)]]",
+    "rotationRuleDegrees": "source sole axis minus desired sole axis",
+    "rootChoice": "minimum image-y hip (highest physical hip) on hip-above-ankle branch meeting both full bone lengths minus exactly two working pixels reach reserve",
+    "sourceToWorking": 0.41025641025641024,
+    "reachReserveWorking": 2,
+    "reachReserveSource": 4.875,
+    "shoeCentreCheckpoints": "authored intended x values, not measured source-centre observations",
+    "contactLimit": "endpoint sole-axis alignment and alpha20 support bottom at floor do not prove simultaneous heel/forefoot contact on a curved sole"
+  },
+  "sourceBinding": {
+    "estimatedHipXY": [
+      450.0,
+      545.0
+    ],
+    "originalKneesXY": {
+      "far": [
+        339.0,
+        755.0
+      ],
+      "near": [
+        540.0,
+        755.0
+      ]
+    },
+    "sourceCuffTopInterpolatedY": {
+      "farAt252": 912.6,
+      "nearAt586": 942.6
+    },
+    "equalAboveCuffOffsetNearMinusFarY": 30.0,
+    "estimatedAnklePivotsXY": {
+      "far": [
+        252.0,
+        895.0
+      ],
+      "near": [
+        586.0,
+        925.0
+      ]
+    },
+    "ankleCaveat": "far pivot retained as previous authored estimate; near y is equal offset above visible cuff, not an observed bone or reach fit",
+    "legs": {
+      "far": {
+        "sourceKnee": [
+          339.0,
+          755.0
+        ],
+        "sourceAnklePivotEstimated": [
+          252.0,
+          895.0
+        ],
+        "upperSource": 237.5310506018108,
+        "lowerSource": 164.83021567661677,
+        "totalSource": 402.3612662784276,
+        "totalWorking": 165.07128872961133,
+        "sourceBendCross": -2730.0,
+        "bendSign": -1,
+        "reconstructedSourceKnee": [
+          339.0,
+          755.0000000000001
+        ],
+        "sourceKneeReconstructionError": 1.1368683772161603e-13
+      },
+      "near": {
+        "sourceKnee": [
+          540.0,
+          755.0
+        ],
+        "sourceAnklePivotEstimated": [
+          586.0,
+          925.0
+        ],
+        "upperSource": 228.47319317591726,
+        "lowerSource": 176.11359970201053,
+        "totalSource": 404.5867928779278,
+        "totalWorking": 165.98432528325242,
+        "sourceBendCross": -5640.0,
+        "bendSign": -1,
+        "reconstructedSourceKnee": [
+          540.0000000000007,
+          754.9999999999998
+        ],
+        "sourceKneeReconstructionError": 7.190186943645084e-13
+      }
+    }
+  },
+  "poses": {
+    "neutral": {
+      "hipRootXY": [
+        450.0,
+        524.4050782814445
+      ],
+      "rootYOffsetFromSource": -20.594921718555497,
+      "rootYOffsetWorking": -8.449198653766357,
+      "limitingLeg": "near",
+      "legs": {
+        "far": {
+          "sourceSoleAxisDeg": 19.39206851078167,
+          "desiredSoleAxisDeg": 0.0,
+          "imageRotationDeg": 19.39206851078167,
+          "shoeSupport": {
+            "alpha20PixelCount": 9524,
+            "rotatedSupportBBoxXYXY": [
+              189.50279363911093,
+              900.1238351991118,
+              381.4843714014121,
+              974.8608953051545
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 33.4935825202615,
+            "bottomOffsetFromPivot": 79.86089530515449
+          },
+          "authoredShoeCentreCheckpointX": 444.0,
+          "targetSoleBottomY": 992.0,
+          "targetAnklePivotXY": [
+            410.5064174797385,
+            912.1391046948455
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 516.6197134892052,
+          "hipToAnkleSource": 389.7401933327286,
+          "remainingReachSource": 12.621072945698984,
+          "remainingReachWorking": 5.1778760802867625,
+          "reconstructedTargetKneeXY": [
+            475.31305459292753,
+            760.5835050421787
+          ]
+        },
+        "near": {
+          "sourceSoleAxisDeg": -1.4943335912665376,
+          "desiredSoleAxisDeg": 0.0,
+          "imageRotationDeg": -1.4943335912665376,
+          "shoeSupport": {
+            "alpha20PixelCount": 10858,
+            "rotatedSupportBBoxXYXY": [
+              538.8421303834937,
+              908.414338206766,
+              741.0602909159891,
+              992.9855665015109
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 53.95121064974137,
+            "bottomOffsetFromPivot": 67.9855665015109
+          },
+          "authoredShoeCentreCheckpointX": 513.0,
+          "targetSoleBottomY": 992.0,
+          "targetAnklePivotXY": [
+            459.04878935025863,
+            924.0144334984891
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 524.4050782814445,
+          "hipToAnkleSource": 399.71179287792785,
+          "remainingReachSource": 4.874999999999943,
+          "remainingReachWorking": 1.9999999999999767,
+          "reconstructedTargetKneeXY": [
+            486.1553212322947,
+            749.9993883750052
+          ]
+        }
+      }
+    },
+    "passing": {
+      "hipRootXY": [
+        450.0,
+        516.4251130926261
+      ],
+      "rootYOffsetFromSource": -28.574886907373866,
+      "rootYOffsetWorking": -11.723030526102098,
+      "limitingLeg": "far",
+      "legs": {
+        "far": {
+          "sourceSoleAxisDeg": 19.39206851078167,
+          "desiredSoleAxisDeg": 0.0,
+          "imageRotationDeg": 19.39206851078167,
+          "shoeSupport": {
+            "alpha20PixelCount": 9524,
+            "rotatedSupportBBoxXYXY": [
+              189.50279363911093,
+              900.1238351991118,
+              381.4843714014121,
+              974.8608953051545
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 33.4935825202615,
+            "bottomOffsetFromPivot": 79.86089530515449
+          },
+          "authoredShoeCentreCheckpointX": 446.0,
+          "targetSoleBottomY": 992.0,
+          "targetAnklePivotXY": [
+            412.5064174797385,
+            912.1391046948455
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 516.4251130926261,
+          "hipToAnkleSource": 397.48626627842754,
+          "remainingReachSource": 4.875000000000057,
+          "remainingReachWorking": 2.000000000000023,
+          "reconstructedTargetKneeXY": [
+            458.34081576614597,
+            753.809676180362
+          ]
+        },
+        "near": {
+          "sourceSoleAxisDeg": -1.4943335912665376,
+          "desiredSoleAxisDeg": 0.0,
+          "imageRotationDeg": -1.4943335912665376,
+          "shoeSupport": {
+            "alpha20PixelCount": 10858,
+            "rotatedSupportBBoxXYXY": [
+              538.8421303834937,
+              908.414338206766,
+              741.0602909159891,
+              992.9855665015109
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 53.95121064974137,
+            "bottomOffsetFromPivot": 67.9855665015109
+          },
+          "authoredShoeCentreCheckpointX": 522.0,
+          "targetSoleBottomY": 972.0,
+          "targetAnklePivotXY": [
+            468.04878935025863,
+            904.0144334984891
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 504.7103406460899,
+          "hipToAnkleSource": 388.00932990031146,
+          "remainingReachSource": 16.577462977616335,
+          "remainingReachWorking": 6.80101045235542,
+          "reconstructedTargetKneeXY": [
+            517.0217547349665,
+            734.8469169315424
+          ]
+        }
+      }
+    },
+    "opposite": {
+      "hipRootXY": [
+        450.0,
+        527.9184598313534
+      ],
+      "rootYOffsetFromSource": -17.081540168646598,
+      "rootYOffsetWorking": -7.00781135123963,
+      "limitingLeg": "near",
+      "legs": {
+        "far": {
+          "sourceSoleAxisDeg": 19.39206851078167,
+          "desiredSoleAxisDeg": -1.4943335912665376,
+          "imageRotationDeg": 20.88640210204821,
+          "shoeSupport": {
+            "alpha20PixelCount": 9524,
+            "rotatedSupportBBoxXYXY": [
+              190.70596379386856,
+              901.2085653211195,
+              382.62933474237104,
+              973.6030162146802
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 34.66764926811982,
+            "bottomOffsetFromPivot": 78.60301621468022
+          },
+          "authoredShoeCentreCheckpointX": 571.875,
+          "targetSoleBottomY": 992.0,
+          "targetAnklePivotXY": [
+            537.2073507318802,
+            913.3969837853198
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 525.5952175976297,
+          "hipToAnkleSource": 395.2199570510095,
+          "remainingReachSource": 7.141309227418105,
+          "remainingReachWorking": 2.92976788817153,
+          "reconstructedTargetKneeXY": [
+            537.9465327816322,
+            748.5684255501118
+          ]
+        },
+        "near": {
+          "sourceSoleAxisDeg": -1.4943335912665376,
+          "desiredSoleAxisDeg": 19.39206851078167,
+          "imageRotationDeg": -20.88640210204821,
+          "shoeSupport": {
+            "alpha20PixelCount": 10858,
+            "rotatedSupportBBoxXYXY": [
+              522.7872699425167,
+              927.4346749055308,
+              720.2545837813047,
+              1021.6634682492491
+            ],
+            "horizontalBBoxCentreOffsetFromPivot": 35.520926861910766,
+            "bottomOffsetFromPivot": 96.66346824924915
+          },
+          "authoredShoeCentreCheckpointX": 328.125,
+          "targetSoleBottomY": 992.0,
+          "targetAnklePivotXY": [
+            292.60407313808923,
+            895.3365317507509
+          ],
+          "minimumHipYWithTwoWorkingPixelReserve": 527.9184598313534,
+          "hipToAnkleSource": 399.71179287792785,
+          "remainingReachSource": 4.874999999999943,
+          "remainingReachWorking": 1.9999999999999767,
+          "reconstructedTargetKneeXY": [
+            389.398664284878,
+            748.2079922870357
+          ]
+        }
+      }
+    }
+  }
+}

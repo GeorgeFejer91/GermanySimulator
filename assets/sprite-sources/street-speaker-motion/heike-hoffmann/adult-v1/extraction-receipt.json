@@ -1,0 +1,276 @@
+{
+  "status": "source-only extraction-v2 with authorized original-paint Oxford contour reassignment; no body pose",
+  "sourceSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+  "inputs": {
+    "output/street-redesign/heike-source-corrected-three-poses/extract.py": "5eb7b7ffcd6147a8fddb71455eb373fff7940298809a769787028d67ffa76d67",
+    "output/street-redesign/heike-source-corrected-three-poses/receipt.json": "cc583520077130c3884ac974a25729c3ea227819a2b04e5bb1aaa8689500d954",
+    "output/street-redesign/heike-cuff-source-audit/receipt.json": "15fcf20b6033fdf7003f0d44e7e82ca6287cdd9e5e624c8e349721978992522d",
+    "output/street-redesign/heike-cuff-source-audit/far-whole-oxford-source-mask.png": "ac656d7a5f177a473c7907b475c2609c51bdb1da5b0e9757b1d8ea5a8b301819",
+    "output/street-redesign/heike-cuff-source-audit/near-whole-oxford-source-mask.png": "bffff3a02383e2697b58703533be9fef56e5604d401a71fed9ada4111eaf0ed3"
+  },
+  "authorizedRegionRules": {
+    "far": {
+      "toe": [
+        328,
+        943,
+        359,
+        962
+      ],
+      "heel": [
+        176,
+        914,
+        182,
+        926
+      ]
+    },
+    "near": {
+      "toe": [
+        668,
+        920,
+        745,
+        965
+      ]
+    }
+  },
+  "delta": {
+    "far": {
+      "regions": {
+        "toe": {
+          "requestedBoundsXYXY": [
+            328,
+            943,
+            359,
+            962
+          ],
+          "sourceAlphaPositivePixels": 141,
+          "sourceAlpha20Pixels": 74,
+          "sourceComponentsAlpha20": [
+            {
+              "pixels": 74,
+              "boundsXYXY": [
+                329,
+                944,
+                354,
+                960
+              ]
+            }
+          ]
+        },
+        "heel": {
+          "requestedBoundsXYXY": [
+            176,
+            914,
+            182,
+            926
+          ],
+          "sourceAlphaPositivePixels": 22,
+          "sourceAlpha20Pixels": 13,
+          "sourceComponentsAlpha20": [
+            {
+              "pixels": 13,
+              "boundsXYXY": [
+                178,
+                916,
+                180,
+                924
+              ]
+            }
+          ]
+        }
+      },
+      "unionDeltaAlphaPositivePixels": 163,
+      "unionDeltaAlpha20Pixels": 87,
+      "v1DetachedCalf": [
+        {
+          "pixels": 74,
+          "boundsXYXY": [
+            329,
+            944,
+            354,
+            960
+          ]
+        },
+        {
+          "pixels": 13,
+          "boundsXYXY": [
+            178,
+            916,
+            180,
+            924
+          ]
+        }
+      ],
+      "v2CalfComponentsAlpha20": [
+        {
+          "pixels": 20051,
+          "boundsXYXY": [
+            201,
+            735,
+            415,
+            926
+          ]
+        }
+      ],
+      "v2ShoeComponentsAlpha20": [
+        {
+          "pixels": 9524,
+          "boundsXYXY": [
+            178,
+            885,
+            359,
+            991
+          ]
+        }
+      ]
+    },
+    "near": {
+      "regions": {
+        "toe": {
+          "requestedBoundsXYXY": [
+            668,
+            920,
+            745,
+            965
+          ],
+          "sourceAlphaPositivePixels": 389,
+          "sourceAlpha20Pixels": 172,
+          "sourceComponentsAlpha20": [
+            {
+              "pixels": 151,
+              "boundsXYXY": [
+                698,
+                929,
+                742,
+                960
+              ]
+            },
+            {
+              "pixels": 15,
+              "boundsXYXY": [
+                678,
+                927,
+                688,
+                930
+              ]
+            },
+            {
+              "pixels": 5,
+              "boundsXYXY": [
+                691,
+                930,
+                696,
+                931
+              ]
+            },
+            {
+              "pixels": 1,
+              "boundsXYXY": [
+                673,
+                923,
+                674,
+                924
+              ]
+            }
+          ]
+        }
+      },
+      "unionDeltaAlphaPositivePixels": 389,
+      "unionDeltaAlpha20Pixels": 172,
+      "v1DetachedCalf": [
+        {
+          "pixels": 151,
+          "boundsXYXY": [
+            698,
+            929,
+            742,
+            960
+          ]
+        },
+        {
+          "pixels": 15,
+          "boundsXYXY": [
+            678,
+            927,
+            688,
+            930
+          ]
+        },
+        {
+          "pixels": 5,
+          "boundsXYXY": [
+            691,
+            930,
+            696,
+            931
+          ]
+        },
+        {
+          "pixels": 1,
+          "boundsXYXY": [
+            673,
+            923,
+            674,
+            924
+          ]
+        }
+      ],
+      "v2CalfComponentsAlpha20": [
+        {
+          "pixels": 21802,
+          "boundsXYXY": [
+            481,
+            735,
+            655,
+            959
+          ]
+        }
+      ],
+      "v2ShoeComponentsAlpha20": [
+        {
+          "pixels": 10858,
+          "boundsXYXY": [
+            540,
+            907,
+            742,
+            992
+          ]
+        }
+      ]
+    }
+  },
+  "coverage": {
+    "sourceAlphaPositivePixels": 232831,
+    "sourceAlpha20Pixels": 219156,
+    "uncoveredAlphaPositivePixels": 0,
+    "moreThanTwoOwnersPixels": 0,
+    "onlyThighCalfDuplicateAlpha20Pixels": {
+      "far": 4740,
+      "near": 4178
+    },
+    "shoeInOppositeFootPixels": 0,
+    "shoeInRotatingLegOrUpperPixels": 0,
+    "byteExactOriginalRGBAOneOwnerReconstruction": true,
+    "v2ShoeAlpha20Pixels": {
+      "far": 9524,
+      "near": 10858
+    }
+  },
+  "outputs": {
+    "upper-source.png": "2c5ab24805e2b906dff35ab24c231a5a637c34dafc541899311d69918417273e",
+    "far-thigh-source.png": "4f2a37c3cfb222e1ab1c506aa2ba1be7e3b5e14c89cd703d56207fadb7a16ad3",
+    "near-thigh-source.png": "05128dd6edcee82dde10ddedf15daef2771458e6204864560c551fb392c33ebb",
+    "far-calf-source.png": "a76c915cc14b4657ea878e266f20bdbb31dc21ce04fd49f9abaa655e5f1ba314",
+    "near-calf-source.png": "81fbe64d7f1f7e93f625540c4873eadb54922b8c0ac252364040edfd01cc4bb3",
+    "far-shoe-source.png": "4ffdb9741dfb16edbe5b0b0e168fe2b8835660903ccb7f4d2ff92d5e55bf8414",
+    "near-shoe-source.png": "0c6fa1cdd1d33ce0628f2cd1e36d05ffb3e6d6abb5c7f7abb5dd65aa9542253a",
+    "source-layers-light-dark.png": "825f374395348e21227ef8ff2604ce07988a7a1341d575ed4c5b54eff34b6a6a",
+    "authorized-regions-original-paint.png": "fecd2f6129ea51e1559da09408b821c70e678b4989b242d64ed3e51e184b9802"
+  },
+  "semanticReview": {
+    "sourceRegionPlacement": "far toe beyond cuff, far heel left of cuff, near toe beyond cuff",
+    "noGreyCuffSeenInAuthorizedRegions": true,
+    "visualEvidence": "authorized-regions-original-paint.png inspected at source-pixel nearest-neighbor detail; all three red boxes contain Oxford toe/heel paint, not grey cuff",
+    "shoeFrontierPolylineUnchanged": true
+  },
+  "poseGate": "WAITING on revised sole-aligned geometry derived from these v2 whole-shoe hashes; no render"
+}

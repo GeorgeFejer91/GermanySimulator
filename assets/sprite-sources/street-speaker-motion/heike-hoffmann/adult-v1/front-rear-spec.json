@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "status": "private probe",
+  "working": {
+    "figureHeight": 400,
+    "baseline": 472
+  },
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "characters": {
+    "quiz-heike-hoffmann": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+      "sourceSha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+      "scale": 0.4716981132075472,
+      "figureWorldHeight": 2.33,
+      "views": {
+        "down": {
+          "component_bounds": [
+            134,
+            19,
+            453,
+            867
+          ],
+          "source_pivot": [
+            290.25,
+            867
+          ],
+          "foreground": 1,
+          "protected_polygons": [
+            [
+              [
+                145,
+                480
+              ],
+              [
+                204,
+                480
+              ],
+              [
+                200,
+                535
+              ],
+              [
+                196,
+                630
+              ],
+              [
+                145,
+                630
+              ]
+            ]
+          ],
+          "landmarks": {
+            "waist": 419,
+            "hip": 470,
+            "hem": [
+              520,
+              520
+            ],
+            "knee": [
+              652,
+              652
+            ],
+            "sock": [
+              794,
+              794
+            ],
+            "ankle": [
+              809,
+              809
+            ],
+            "mid": 290.25,
+            "centres": [
+              220,
+              366
+            ],
+            "split_path_xy": [
+              [
+                290.25,
+                470
+              ],
+              [
+                290.25,
+                865
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 36,
+            "root_overlap": 3,
+            "depth_amplitude": 17,
+            "depth_knee_follow": 0.68,
+            "stride_curve": "planted"
+          },
+          "plantedFloor": true
+        },
+        "up": {
+          "component_bounds": [
+            941,
+            16,
+            1269,
+            863
+          ],
+          "source_pivot": [
+            1111,
+            863
+          ],
+          "foreground": 0,
+          "protected_polygons": [
+            [
+              [
+                1205,
+                457
+              ],
+              [
+                1271,
+                456
+              ],
+              [
+                1271,
+                653
+              ],
+              [
+                1207,
+                655
+              ]
+            ]
+          ],
+          "landmarks": {
+            "waist": 420,
+            "hip": 467,
+            "hem": [
+              520,
+              520
+            ],
+            "knee": [
+              650,
+              650
+            ],
+            "sock": [
+              790,
+              790
+            ],
+            "ankle": [
+              805,
+              805
+            ],
+            "mid": 1111,
+            "centres": [
+              1033,
+              1178
+            ],
+            "split_path_xy": [
+              [
+                1111,
+                467
+              ],
+              [
+                1111,
+                861
+              ]
+            ],
+            "auto_hand_mask": false,
+            "step_width": 36,
+            "root_overlap": 3,
+            "depth_amplitude": 17,
+            "depth_knee_follow": 0.68,
+            "stride_curve": "planted"
+          },
+          "plantedFloor": true
+        }
+      }
+    }
+  }
+}

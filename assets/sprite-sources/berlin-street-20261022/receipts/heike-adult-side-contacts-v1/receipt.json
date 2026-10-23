@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "status": "source-only provisional candidate pending exact diagnostics and parent review; no full gait/action/mouth/runtime acceptance",
+  "generation": {
+    "tool": "built-in image_gen.imagegen",
+    "jobCount": 1,
+    "transparentBackground": true,
+    "prompt": "Use case: stylized-concept. Asset: one transparent 2D painted GAME SPRITE SOURCE sheet for a Heike Hoffmann walking-contact source repair, not a completed gait. Make EXACTLY TWO separate whole adult figures in one horizontal row: LEFT FIGURE is a genuine anatomical RIGHT-facing strict side-profile walking CONTACT, RIGHT FIGURE is a genuine anatomical LEFT-facing strict side-profile walking CONTACT. Both are the SAME older adult woman Heike, same crown-to-sole height, grown-up head/torso/leg proportions, same cardigan hem, knee height, shoe dimensions and shared sole baseline; generous alpha-zero transparent outer padding and a wide alpha-zero gutter, no cropped hair/limbs/feet. REFERENCE 1, her accepted expressionist standing-v1 full body, is BINDING for identity, own adult body/face, silver-grey chin-length bob, red-brown glasses, pearl earrings, weary small eyes, maroon button cardigan, cream floral blouse, charcoal FULL trousers, brown lace-up low Oxford shoes, cards and keys. REFERENCE 2, her own four cardinal directions-v1, is BINDING for both true side-profile head/hair/upper-body views, clothing hems/shoes, and anatomical hand ownership; its overlapping opaque single trouser mass is the measured defect to REPAIR with new painted complete far-side leg paint, NOT a shape to copy. REFERENCE 3, her original quiz portrait, supplies ONLY broad worn angular Berlin expressionist oil/dry-brush finish; do not borrow its waist-up pose or proportions. In BOTH poses keep head and upper body calm and upright, mouth a single CLOSED unobstructed visible side-profile lip line suitable for later source-bound speech. Anatomical RIGHT hand owns only a small silver/brass ring of several hanging keys; anatomical LEFT hand owns only the fan of THREE green, blue, yellow rectangular cards; hands have realistic complete fingers. In right-facing profile the right/key hand is near and keys legible below the cardigan at her side, while far LEFT card hand can be naturally partially occluded but remains in its own left hand at upper chest. In left-facing profile the LEFT cards are near and visible at upper chest, while far RIGHT key hand can be partially occluded; never transfer props, move one behind the back only for visibility, put both hands on one prop, or invent extra items. CONTACT anatomy is the entire purpose: for EACH side view, the NEAR trouser leg extends moderately forward in travel direction and its full brown lace-up Oxford HEEL is planted flat at the baseline; the FAR trouser leg trails behind with a full toe touching that same baseline. Visibly paint two DISTINCT complete grown-up charcoal-clothed legs from connected pelvis/upper thigh through distinct knee, calf, cuff and complete brown lace-up shoe, including believable hidden-side cloth seams/shading. Show a clear genuine transparent wedge between the two legs below the joined crotch/upper thighs, continuing toward separated shoes; no fused tube trouser silhouette, no cutout of one leg, no copied near-leg texture onto the far leg, no detached shin, no cloned shoe, no extra leg. Moderate human step width and leg lengths, no lunge/split, no airborne shoe, no exposed bare skin under full trousers, no changed shoe closures. Preserve strong broad irregular directional worn painted masses and angular adult face, not regular diamond tessellation or fine stipple; do not polish to photorealism or soften to toy/chibi. True RGBA alpha-zero transparent background; no floor, shadow, halo, colored outline, scenery, captions, labels, arrows, watermark or third figure.",
+    "referencedImagePaths": [
+      {
+        "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-standing-v1.png",
+        "role": "primary binding Heike adult identity, proportions, face, own clothing, anatomical hand props",
+        "sha256": "682e78a98dec314584811756a97c7862ef96b1e020fc08935c2ce7457c50c8d9",
+        "dimensions": [
+          1024,
+          1536
+        ]
+      },
+      {
+        "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-directions-v1.png",
+        "role": "secondary binding side-view rotations, prop and shoe continuity; fused trouser mass is defect to repair",
+        "sha256": "db53351aac7348f14088f4a8d21988c96bc607868103b3bfac10bd38e7077524",
+        "dimensions": [
+          1774,
+          887
+        ]
+      },
+      {
+        "path": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/quiz-characters/heike-hoffmann.webp",
+        "role": "tertiary original Heike portrait, broad angular worn paint only",
+        "sha256": "b3a99cb42cf35baf6bddf9e07fc78aa3aec8b2059bb7badeb3ada8fbf5317060",
+        "dimensions": [
+          512,
+          512
+        ]
+      }
+    ],
+    "jobPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-97ec2420-8550-43d1-a5bc-cc1a0e90333f.png",
+    "jobSha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229"
+  },
+  "source": {
+    "path": "assets/sprite-sources/berlin-street-20261022/quiz-heike-hoffmann-expressionist-side-contacts-v1.png",
+    "views": [
+      "right-facing contact",
+      "left-facing contact"
+    ],
+    "sha256": "9427d72732bee2d87b0d8fffc6255145e76603f177e7d997e04a398f92cfd229",
+    "copyEqualsJob": true,
+    "mode": "RGBA",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "hiddenRgbAtAlpha0": 968669,
+    "alpha20GutterBetweenFigures": 75,
+    "outerMarginsLTRBAtAlpha20": [
+      178,
+      155,
+      17,
+      32
+    ],
+    "lightComposite": {
+      "path": "output/street-redesign/heike-adult-side-contacts-v1/source-light.png",
+      "sha256": "9c51c2742b80c03c294ead764035941ecef809e598ea2cd39a299af015367a21"
+    },
+    "darkComposite": {
+      "path": "output/street-redesign/heike-adult-side-contacts-v1/source-dark.png",
+      "sha256": "299a0c2be82d12c09d94054557593dd82d7106335caf739f7112688c264b7da7"
+    }
+  },
+  "diagnosticGeometry": {
+    "working": {
+      "figureHeight": 400,
+      "baseline": 472
+    },
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136
+  },
+  "oneDiagnosticScale": 0.41025641025641024,
+  "views": {
+    "right-facing contact": {
+      "sourceAlpha20BoundsXYXY": [
+        178,
+        17,
+        742,
+        992
+      ],
+      "sourceAlpha20Height": 975,
+      "sourcePivot": [
+        460.0,
+        992
+      ],
+      "legGapRowSamples": {
+        "0.6": {
+          "y": 602,
+          "runsXYXY": [
+            [
+              293,
+              346
+            ],
+            [
+              356,
+              550
+            ]
+          ]
+        },
+        "0.7": {
+          "y": 699,
+          "runsXYXY": [
+            [
+              319,
+              436
+            ],
+            [
+              468,
+              583
+            ]
+          ]
+        },
+        "0.8": {
+          "y": 797,
+          "runsXYXY": [
+            [
+              258,
+              372
+            ],
+            [
+              494,
+              603
+            ]
+          ]
+        },
+        "0.88": {
+          "y": 875,
+          "runsXYXY": [
+            [
+              205,
+              318
+            ],
+            [
+              520,
+              627
+            ]
+          ]
+        }
+      },
+      "nativePath": "output/street-redesign/heike-adult-side-contacts-v1/right-facing-contact.webp",
+      "nativeSha256": "5291e7012e1bdbf8630bbf4904743c8691c99681c9e2e91a1f44f5fda026c51c",
+      "nativeBytes": 10462,
+      "exactDecoded": true,
+      "native": {
+        "alpha21BoundsXYXY": [
+          25,
+          15,
+          104,
+          150
+        ],
+        "alpha21Height": 135,
+        "transparentGuttersLTRB": [
+          25,
+          24,
+          15,
+          10
+        ],
+        "opaque128ComponentsAtLeast3": 1,
+        "opaque128Largest": [
+          4199
+        ],
+        "hiddenRgbAtAlpha0": 0
+      }
+    },
+    "left-facing contact": {
+      "sourceAlpha20BoundsXYXY": [
+        817,
+        18,
+        1381,
+        992
+      ],
+      "sourceAlpha20Height": 974,
+      "sourcePivot": [
+        1099.0,
+        992
+      ],
+      "legGapRowSamples": {
+        "0.6": {
+          "y": 602,
+          "runsXYXY": [
+            [
+              1007,
+              1211
+            ],
+            [
+              1229,
+              1276
+            ]
+          ]
+        },
+        "0.7": {
+          "y": 700,
+          "runsXYXY": [
+            [
+              972,
+              1089
+            ],
+            [
+              1134,
+              1256
+            ]
+          ]
+        },
+        "0.8": {
+          "y": 797,
+          "runsXYXY": [
+            [
+              954,
+              1059
+            ],
+            [
+              1196,
+              1315
+            ]
+          ]
+        },
+        "0.88": {
+          "y": 875,
+          "runsXYXY": [
+            [
+              935,
+              1033
+            ],
+            [
+              1252,
+              1359
+            ]
+          ]
+        }
+      },
+      "nativePath": "output/street-redesign/heike-adult-side-contacts-v1/left-facing-contact.webp",
+      "nativeSha256": "ca7746a18cce63aeaf528fe083968658dee9f437035fae26fe98d6d564f7093e",
+      "nativeBytes": 10146,
+      "exactDecoded": true,
+      "native": {
+        "alpha21BoundsXYXY": [
+          25,
+          15,
+          104,
+          150
+        ],
+        "alpha21Height": 135,
+        "transparentGuttersLTRB": [
+          25,
+          24,
+          15,
+          10
+        ],
+        "opaque128ComponentsAtLeast3": 1,
+        "opaque128Largest": [
+          4071
+        ],
+        "hiddenRgbAtAlpha0": 0
+      }
+    }
+  },
+  "nativeComparison": {
+    "lockedFrontPath": "output/street-redesign/animated-adult-cardinal-diagnostics/quiz-heike-hoffmann-locked-front.webp",
+    "lockedFrontSha256": "654642ce2d85fe21251e7cef805f1dcbc27cdbe51b73b86ca2eb9a18da8920c7",
+    "boardPath": "output/street-redesign/heike-adult-side-contacts-v1/native-light-dark.png",
+    "boardSha256": "855bbbde30ec90bd5daa49c32e625f76e4178c7d8d6c924cc4afef24ff2e03e6"
+  },
+  "visualReview": {
+    "status": "PROVISIONAL source-contact anchors; not native correspondence or full gait approval",
+    "inspection": "Viewed raw generated PNG, actual light/dark source composites and both exact decoded native WebP cells on light/dark beside locked front.",
+    "identityAndHands": "Silver-grey bob, red-brown glasses, pearl earrings, maroon cardigan, cream floral blouse, charcoal full trousers and brown lace-up low Oxfords remain recognizable. Anatomical RIGHT retains hanging keys in both profiles, anatomical LEFT retains the green/blue/yellow card fan at chest; no extra hands or props observed. Closed profile lips remain visible.",
+    "legsAndContacts": "Both views paint separate connected far thigh, knee, calf, cuff and shoe behind a separate near leg; transparent interleg wedge exists across four sampled lower-body rows. Near forward heel appears planted and far rear toe contacts the sole line in both views. Native stills show two distinct legs and complete shoes.",
+    "caveats": "Stride is somewhat broad and trouser/cardigan surfaces retain repeated diagonal faceting from the binding cardinal source rather than purely broad irregular brush. Source vertical outer margins are only 17/32 pixels at alpha20, below requested generous padding. Contact artwork alone does not prove a passing pose, opposite contact, gait seam, prop masks, mouth fit or running camera."
+  },
+  "remainingGates": [
+    "parent source review",
+    "view-specific leg correspondence and protected prop masks",
+    "right/left opposite contacts and passing poses",
+    "ordered full gait and loop seam",
+    "turns and seven interaction states",
+    "source-bound mouth fitting",
+    "native playback, camera, desktop/mobile and speed review"
+  ]
+}

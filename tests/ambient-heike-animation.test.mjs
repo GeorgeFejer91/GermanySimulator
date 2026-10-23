@@ -13,12 +13,12 @@ const readAsset=path=>readFileSync(path.replace(/^\.\//,''));
 const scope=vm.createContext({});
 vm.runInContext(readFileSync('character-interactions.js','utf8'),scope);
 
-test('Heike has owned phase stops and key emphasis without changing her published standing scale',()=>{
+test('Heike has adult standing scale, calibrated stride and owned phase stops/key emphasis',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
- assert.equal(p.standing.sha256,'589063cdfc9f8bd5f8e45135d890bc8b2ee6501d43d81f91a98f15409c22b6f1');
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.standing.sha256,'91926abced1426eb7d0eab05dbc3a6d08fe59ee84b20bf0c367cfbc1cd6f48ef');
  assert.equal(hash(readAsset(p.standing.file)),p.standing.sha256);
- assert.equal(p.strideDistance,9.6);
+ assert.equal(p.strideDistance,29.125);
  for(const [direction,walk] of Object.entries(p.atlasMotion.walks)){
   assert.equal(walk.frames,16);
   for(let phase=0;phase<16;phase++){
