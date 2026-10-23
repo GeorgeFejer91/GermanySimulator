@@ -85,7 +85,7 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       await artifacts.screenshot(page,'upper-lounge-source.png');
       const native=await renderNativeAsset(page,{position,yaw:viewpoints.lounge.yaw});
       assert.equal(native.upperLounge.floorHeight,16.35);assert.equal(native.upperLounge.furniture.title,'Felsenland');
-      assert.equal(native.equipment,44);assert.equal(native.artworks,1);
+      assert.equal(native.equipment,44);assert.equal(native.artworks,layout.artworks.length);
       await artifacts.screenshot(page,'upper-lounge-native.png');await disposeNativeAsset(page);
       return {position,native,scope:'Room shortcut; observed furnishings, estimated footprint/elevations; glass artwork imagery absent'};
     }},

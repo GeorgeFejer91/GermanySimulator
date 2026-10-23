@@ -18,7 +18,7 @@ export default {name:'Klo Bar, sanitary architecture and continuous visitor rout
       await page.waitForFunction(expected=>JSON.parse(document.querySelector('#model').dataset.position).y===expected,6.65);
       await artifacts.screenshot(page,key+'-source.png');
       const native=await renderNativeAsset(page,{position:viewpoints[key].position,yaw:viewpoints[key].yaw,pitch:viewpoints[key].pitch||0});
-      assert.equal(native.kloBar.artwork.status,'Figure sequence not yet modelled');
+      assert.equal(native.kloBar.artwork.status,layout.kloBar.artwork.status);
       assert.equal(native.fixtures,layout.fixtures.length);assert.equal(native.equipment,44);
       assert.equal(native.kloBar.sources.includes('I21'),true);
       await artifacts.screenshot(page,key+'-native.png');await disposeNativeAsset(page);results.push({key,native});

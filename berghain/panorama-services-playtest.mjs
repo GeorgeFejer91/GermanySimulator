@@ -37,7 +37,7 @@ export default {name:'Panorama fitted ceiling, acoustic clouds and exposed servi
       await artifacts.screenshot(page,'panorama-services-source.png');
       const native=await renderNativeAsset(page,{position,yaw:1.18,pitch:.3});
       assert.equal(native.panoramaServices.ceilingHeight,17.95);
-      assert.equal(native.fixtures,layout.fixtures.length);assert.equal(native.equipment,44);assert.equal(native.artworks,1);
+      assert.equal(native.fixtures,layout.fixtures.length);assert.equal(native.equipment,44);assert.equal(native.artworks,layout.artworks.length);
       await artifacts.screenshot(page,'panorama-services-native.png');await disposeNativeAsset(page);
       return {position,native,scope:'Room shortcut; observed later architect photos15/16; dimensions/counts/positions estimated'};
     }},

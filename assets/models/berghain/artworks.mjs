@@ -1,6 +1,8 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {climberGeometryData,climberMaterials} from './climber-geometry.mjs';
-export {climberMaterials as artworkMaterials};
+import {togetherMaterials} from './together-geometry.mjs';
+import {addTogether} from './together.mjs';
+export const artworkMaterials={...climberMaterials,...togetherMaterials};
 
 export function addArtworks(layout){
   const counter=layout.fixtures.find(item=>item.id==='panorama-bar');
@@ -25,4 +27,5 @@ export function addArtworks(layout){
       confidence:'Bounds of the visible figure segment and attached details',
       x:[bounds.min.x,bounds.max.x],y:[bounds.min.y,bounds.max.y],z:[bounds.min.z,bounds.max.z]});
   }
+  addTogether(layout);
 }

@@ -602,3 +602,12 @@ Hermann August Weizenegger's *Felsenland* (2010), credited to the designer.
 observed seating forms; the image files are research-only. Leather grain maps
 are generated for this project with no photographic input. Dimensions,
 placement and unobserved details remain estimates; see the asset provenance.
+
+The Klo Bar includes a partial reconstruction of Joseph Marr's *Together* (2013),
+credited to the artist and informed by his [installation photographs](https://josephmarr.de/portfolio/together-berghain/).
+Its generic anatomical base derives from the explicitly CC0 [MakeHuman core assets](https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/LICENSE.md),
+with original offline poses, relief adaptation and original sugar surface maps.
+The source revision, input hashes and full CC0 asset licence accompany the model.
+No artist scan or photograph is bundled. Full figure order, likeness, ornament,
+dimensions and material measurements remain unverified; this is an incomplete
+study, not the artist's original digital composition.

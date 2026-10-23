@@ -132,6 +132,37 @@
         }
       },
       "estimatedReliefMetres": 7e-05
+    },
+    "amber": {
+      "metresPerTile": 0.08,
+      "maps": {
+        "baseColor": {
+          "file": "textures/amber-baseColor.png",
+          "bytes": 3674,
+          "sha256": "373b5efc053e51193be89e3f04d8e97d5c8b96e818a8ff89802fc9a8775d5c89"
+        },
+        "roughness": {
+          "file": "textures/amber-roughness.png",
+          "bytes": 119699,
+          "sha256": "76e27614112c6ff701aabbcea5b1e3a03d1f8b02793f8c0b9e718de03b2689fc"
+        },
+        "normal": {
+          "file": "textures/amber-normal.png",
+          "bytes": 381226,
+          "sha256": "6d30e5902d095f80e0fbe4cce189a54a1a1b83929185ce713a4ff01f671dc5f8"
+        }
+      },
+      "estimatedReliefMetres": 0.0014
     }
+  },
+  "amberLighting": {
+    "file": "textures/amber-lighting.png",
+    "size": [
+      512,
+      256
+    ],
+    "bytes": 2199,
+    "sha256": "39abc05a17e65d80a1be4548e43bc099919923dd9596897faa5d1ea63f22b847",
+    "origin": "Original procedural reflection panels, not a surveyed room light probe"
   }
 }

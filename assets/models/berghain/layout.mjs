@@ -255,7 +255,7 @@ export const viewpoints = {
   lounge: {label:'Upper Panorama lounge',position:{x:-11.4,y:16.35,z:.8},yaw:Math.PI/2,
     confidence:'Photo-derived forms; layout estimated',sources:['A13','I16','I18','I19','I20']},
   klo:{label:'Klo Bar',position:{x:-13,y:6.65,z:7.8},yaw:.25,
-    confidence:'Photo-derived forms; room placement estimated; Together figures missing',sources:['ART04','ART14','I19']},
+    confidence:'Photo-derived forms; room placement and Together sequence estimated',sources:['ART04','ART14','I19']},
   toilets:{label:'Toilets',position:{x:-9,y:6.65,z:-4.2},yaw:1.08,pitch:-.08,
     confidence:'Photographed fittings; floor, arrangement and dimensions estimated',sources:['I21']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,

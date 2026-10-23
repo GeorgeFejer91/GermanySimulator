@@ -22,6 +22,7 @@ const events = {signal: abort.signal};
 let renderer;
 try {
   renderer = new THREE.WebGLRenderer({canvas, antialias: true, powerPreference: 'low-power'});
+  renderer.transmissionResolutionScale = .5;
 } catch {
   loading.textContent = '3D graphics are unavailable in this browser. Try a WebGL-capable browser; the source catalogue is available under Sources & accuracy.';
   enter.disabled = exterior.disabled = true;

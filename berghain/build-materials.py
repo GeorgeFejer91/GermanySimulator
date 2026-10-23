@@ -4,13 +4,13 @@ import hashlib
 import json
 import math
 import random
-from PIL import Image
+from PIL import Image,ImageDraw,ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1] / 'assets/models/berghain'
 SIZE = 512
 FAMILIES = {'mineral': (11, .0008), 'stone': (37, .0015),
             'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045),
-            'leather': (181, .00007)}
+            'leather': (181, .00007), 'amber': (211, .0014)}
 
 
 def noise(columns, rows, seed):
@@ -35,7 +35,7 @@ def noise(columns, rows, seed):
 
 
 def build_family(name, seed, relief):
-    tile = .08 if name == 'fabric' else .04 if name == 'leather' else 2
+    tile = .08 if name in ('fabric', 'amber') else .04 if name == 'leather' else 2
     broad, detail = noise(4, 4, seed), noise(64, 64, seed + 1)
     streak = noise(32, 2, seed + 2)
     rng = random.Random(seed + 3)
@@ -49,6 +49,17 @@ def build_family(name, seed, relief):
                    + .06 * grain[i]) for i in range(SIZE * SIZE)]
     elif name == 'leather':
         height = [.72 * d + .16 * b + .12 * min(g, .55) for b, d, g in zip(broad, detail, grain)]
+    elif name == 'amber':
+        height = [.02 * d + .01 * g for d, g in zip(detail, grain)]
+        for _ in range(360):
+            cx, cy, radius = rng.uniform(0, SIZE), rng.uniform(0, SIZE), rng.uniform(1.2, 6.5)
+            extent = math.ceil(radius * 2.4)
+            for dy in range(-extent, extent+1):
+                for dx in range(-extent, extent+1):
+                    distance = math.hypot(dx, dy) / radius
+                    if distance > 2.4: continue
+                    x, y = (round(cx)+dx) % SIZE, (round(cy)+dy) % SIZE
+                    height[y*SIZE+x] += -.36 * math.exp(-distance*distance*3) + .10 * math.exp(-((distance-.95)/.25)**2)
     colour, roughness, normals = [], [], []
     for i, (b, d, s, g) in enumerate(zip(broad, detail, streak, grain)):
         shade = .94 + .015 * b + .025 * d + .02 * g
@@ -62,12 +73,16 @@ def build_family(name, seed, relief):
             shade = .63 + .31 * height[i] + .04 * g
         elif name == 'leather':
             shade = .93 + .065 * d + .005 * g
+        elif name == 'amber':
+            shade = .995 + .005 * max(-1, min(1, height[i]))
         else:
             shade = .78 + .12 * d + .1 * g
         colour.append(round(shade * 255))
         rough = .65 + .35 * d if name == 'metal' else .82 + .18 * g
         if name == 'leather':
             rough = .65 + .25 * d
+        elif name == 'amber':
+            rough = .72 + .25 * min(1, abs(height[i]) * 3)
         roughness.append((255, round(rough * 255), 255))
         x, y = i % SIZE, i // SIZE
         dx = (height[y * SIZE + (x + 1) % SIZE] - height[y * SIZE + (x - 1) % SIZE]) * relief * SIZE / (tile * 2)
@@ -88,9 +103,19 @@ def build_family(name, seed, relief):
 def main():
     (ROOT / 'textures').mkdir(exist_ok=True)
     families = {name: build_family(name, *parameters) for name, parameters in FAMILIES.items()}
+    lighting=Image.new('RGB',(512,256),(29,25,22));draw=ImageDraw.Draw(lighting)
+    draw.rectangle((0,128,511,255),fill=(67,52,35))
+    for x in (36,166,302,443):
+        draw.rounded_rectangle((x,65,x+37,101),radius=5,fill=(255,243,219))
+    draw.rectangle((0,124,511,130),fill=(128,91,45))
+    lighting=lighting.filter(ImageFilter.GaussianBlur(2));lighting.save(ROOT/'textures/amber-lighting.png',optimize=True)
+    lighting_bytes=(ROOT/'textures/amber-lighting.png').read_bytes()
     manifest = {'generator': 'berghain/build-materials.py', 'origin': 'Original seeded procedural maps; no image inputs',
                 'limits': 'Approximate appearance and microrelief, not scanned site materials',
-                'size': [SIZE, SIZE], 'families': families}
+                'size': [SIZE, SIZE], 'families': families,
+                'amberLighting':{'file':'textures/amber-lighting.png','size':[512,256],
+                  'bytes':len(lighting_bytes),'sha256':hashlib.sha256(lighting_bytes).hexdigest(),
+                  'origin':'Original procedural reflection panels, not a surveyed room light probe'}}
     (ROOT / 'textures/manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     runtime = {name: {'metresPerTile': entry['metresPerTile'],
                       **{kind: record['file'] for kind, record in entry['maps'].items()}}

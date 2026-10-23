@@ -8,6 +8,7 @@ import {createSpeakerGeometries} from './speaker-geometries.mjs';
 import {createClimberGeometries} from './climber-geometry.mjs';
 import {createLoungeGeometries} from './upper-lounge.mjs';
 import {createKloGeometries} from './klo-bar.mjs';
+import {createTogetherGeometries} from './together-geometry.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -19,7 +20,7 @@ export function createBerghainModel() {
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
-    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries()};
+    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries()};
   const batches = new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');
@@ -30,11 +31,12 @@ export function createBerghainModel() {
     const [section, materialName, shape] = key.split('/');
     let group = model.getObjectByName(section);
     if (!group) { group = new THREE.Group(); group.name = section; model.add(group); }
-    const material = new THREE.MeshStandardMaterial({...materials[materialName]});
-    if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')) configureSurfaceMaterial(material, materialName);
+    const Material=materials[materialName].transmission?THREE.MeshPhysicalMaterial:THREE.MeshStandardMaterial;
+    const material = new Material({...materials[materialName]});
+    if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')) configureSurfaceMaterial(material, materialName);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
-    mesh.castShadow = !material.transparent && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);
+    mesh.castShadow = !material.transparent && !material.transmission && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);
     mesh.receiveShadow = true;
     parts.forEach((part, index) => {
       transform.quaternion.identity();
@@ -85,7 +87,7 @@ export function disposeBerghainModel(model) {
     if (!mesh.isMesh) return;
     geometries.add(mesh.geometry);
     materials.add(mesh.material);
-    for (const map of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap]) if (map) textures.add(map);
+    for (const map of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap,mesh.material.thicknessMap,mesh.material.envMap]) if (map) textures.add(map);
     mesh.dispose?.();
   });
   for (const geometry of geometries) geometry.dispose();

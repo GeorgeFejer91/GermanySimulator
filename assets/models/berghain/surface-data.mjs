@@ -34,5 +34,11 @@ export const surfaceFamilies = {
     "baseColor": "textures/leather-baseColor.png",
     "roughness": "textures/leather-roughness.png",
     "normal": "textures/leather-normal.png"
+  },
+  "amber": {
+    "metresPerTile": 0.08,
+    "baseColor": "textures/amber-baseColor.png",
+    "roughness": "textures/amber-roughness.png",
+    "normal": "textures/amber-normal.png"
   }
 };

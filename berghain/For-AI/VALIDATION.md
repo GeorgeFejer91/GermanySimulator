@@ -1076,3 +1076,78 @@ Both actual frames were inspected: continuity/hands improve on primitive parts,
 but cut boundaries, reference pose/face framing, fusion with the cast, ornament,
 bubbles and transmitted backlight remain unresolved. This is authoring evidence
 only, not a shipping asset, complete sculpture or public-runtime change.
+
+
+### Partial Together relief and portable amber acceptance — 24 October 2026
+
+This supersedes the rejected primitive prototype above, not the remaining full
+artwork/building goal. Final output/berghain-marr-candidate.json freezes91files;
+owning notes and CREDITS are maintained separately. Original offline posing of
+explicitly CC0 MakeHuman core data produces two closed/wound anatomical relief
+bases,10440vertices/20876triangles each. Pinned inputs and full asset licence
+ship in anatomy-provenance.json and licenses/MakeHuman-CC0.txt. No MakeHuman
+application code, artist scans, photo pixels or raw authoring input is shipped.
+Four sections contain nine authored generic figures (2+4+2+1); exact real count,
+complete narrative order, likeness and dimensions remain unverified.
+
+GLB35,996,040B /467,408triangles /113mesh-material groups /22embedded maps,
+SHA256d5e2a864733c82a707da41c43e8eba91acf7515f5fa84166f6598a0208e59c5b.
+Bounds remain unchanged;67fixtures,44main PA components,2artworks. All18prior
+PBR maps retain their hashes. Original amber maps add microbubbles/coat normals;
+a1024x1024 UV1/G thickness atlas estimates the authored relief's vertical
+envelope. Standard KHR transmission/volume/ior/clearcoat preserve optical
+fields in the GLB. Reflection-panel PNG is an original viewer environment aid,
+not embedded HDR evidence or a measured lighting survey. Rebuilding the anatomy
+module reproduces its hash. Full artist composition, masks/animal ornament,
+complex pose fusion and darker cola mottling remain visibly incomplete.
+
+All74 scoped Node tests pass in output/berghain-marr-node-final.txt. Initial
+close-view source/native parity FAILED (mean RGB3.9367/255): the exporter
+incorrectly forced double-sided rendering for transparent glass. A red
+regression test demonstrated it; exporter now preserves the actual source side.
+The same unchanged1-RGB-level/1.5%-large-delta tolerances pass: meanRGB.36818,
+pixels differing>32 levels.0835%, all23textures disposed exactly once.
+
+Exact final output/berghain-marr-half-integrated-browser/report.json passes
+20/20,91/91 source hashes matching the final freeze: source/native art/cases,
+controlled close detail, strict material parity, Klo/sanitary views, continuous
+human main-floor/bar/WC/open-cubicle/return route,320px/200% labels, natural
+Geheim exterior approach and E/tap entry/exit/refresh, and Panorama lounge.
+Desktop/Android portrait/landscape emulation, silent/headless/sequential.
+Controlled native detail uses its own renderer; actual viewer close frames
+separately verify the product transmission setting. Physical Android/device
+GPU and perceptual listening NOT RUN.
+
+Both independent reviewers rehash all91files and accept final scoped technical
+checks: Physics P1/P2/P4/P5/X1 and Camera C1–C5/X1 PASS. Actual149,612 transformed
+relief vertices have zero glass/bar-boundary violations and introduce no art
+colliders. Lids clear by at least.0619m; the nested rear base expands the existing
+bar assembly edge by.0075m. All25 deep rear-base invalid starts recover to a
+canStand position. Same-floor routes and visible human remain valid. Figure
+world heights are.221m above the case beds,.95–1.19m above the6.65m floor,
+compared with the1.80m avatar; proportions/placement remain provisional.
+
+Cost was measured on the identical case-facing approach, three cold contexts
+per viewport, Chrome154/Intel Iris Xe D3D11, no CPU throttling. Before9/9:
+output/berghain-marr-cost-before/report.json. Initial full-transmission after9/9:
+output/berghain-marr-cost-after/report.json. These functional passes did NOT
+accept the desktop frame-p95 regression14.1→48.4ms. A diagnostic isolated the
+transmission background pass. Product viewer now uses Three.js
+transmissionResolutionScale=.5: quarter-area background capture, unchanged main
+buffer/geometry/specular and normal shading. Actual final9/9:
+output/berghain-marr-cost-half-final/report.json,91/91 frozen source hashes.
+Final three-sample median p95 is20.9ms desktop,20.8ms portrait/landscape; baseline
+14.1/13.9/13.9ms. Desktop final range20.9–21.0ms. This retains roughly6.8–6.9ms
+overhead and is not a60fps or physical-device qualification.
+
+Cold-ready medians desktop952→1373ms (final1368–3225), portrait940→1387
+(1326–1527), landscape895→1347(1302–1350). Input-latency medians16→22.7ms,
+19.9→23.0ms,16.6→26.1ms respectively. Normal transfer5,699,947→6,653,006B,
+53→61requests,18→23textures; optional GLB adds10,923,940B and is not fetched by
+the ordinary viewer. Desktop draw calls228→340,triangles429,588→811,768;
+portrait223→329/426,948→759,520;landscape231→345/434,712→822,004.
+Idle adds zero frames across all before/initial/final samples and main buffer
+stays under1.6MP. Observed JS heaps are variable, about35–61MB baseline and
+38–81MB final; these do not measure total process or GPU memory. Publication
+must preserve these limits and bind final assets/controls to actual public bytes.
+The full photographic reconstruction goal remains ACTIVE.

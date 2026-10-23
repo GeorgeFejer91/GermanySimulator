@@ -29,7 +29,7 @@ test('Klo Bar and toilets carry primary evidence, explicit placement estimates a
   assert.match(layout.kloBar.confidence,/estimated/);
   assert.equal(layout.kloBar.floorHeight,6.65);
   assert.ok(layout.kloBar.ceilingHeight-6.65>=2.8);
-  assert.equal(layout.kloBar.artwork.status,'Figure sequence not yet modelled');
+  assert.match(layout.kloBar.artwork.status,/Partial figure reconstruction/);
   assert.match(layout.panoramaServices.switchgearHistory,/Klo Bar/);
   for(const key of ['klo','toilets']){
     assert.ok(viewpoints[key]&&canStand(viewpoints[key].position,layout),key+' body clearance');

@@ -1,6 +1,6 @@
 # Berghain architectural study
 
-Procedural study geometry authored for this project on 2026-10-23, calibrated
+Study geometry authored for this project on 2026-10-23–24, calibrated
 to Berlin's official exterior geometry and combined with its roof/annex meshes.
 `layout.mjs` is the authoritative metre-based architectural study; `model.mjs`
 assembles its reusable geometry and materials. Regenerate the portable export:
@@ -250,7 +250,8 @@ red enclosure, retained switchgear/mesh/staff gate, segmented glass display
 cases, splayed stools and glass-block back wall. Cases await the actual Together
 figure sequence; no substitute is presented as the completed sculpture. The
 artist documents9m of cola-flavoured sugar preserved with polyurethane,2013.
-No third-party photograph, mesh, artwork image or CAD is embedded.
+No photograph, artist-owned scan, artwork image or CAD is embedded. The Together
+anatomical base described below is a modified, explicitly licensed CC0 mesh.
 
 Four steel WC cubicles with two open doors, hollow steel pans, flush plates,
 paper holders, protected tube lights and a double-sided trough/core reconstruct
@@ -261,3 +262,45 @@ ceiling9.80m, western placement, room connections, counts, dimensions and
 currentness are estimated. This is a reconstructive study, not a measured
 current floor plan. Complete artwork, etched imagery and exact
 contemporary layout remain required by the full-building objective.
+
+## Together: partial relief study and optical material
+
+ART04/ART14–16 identify Joseph Marr's2013 work in the Klo Bar:9m of cola sugar,
+preserved with polyurethane. The four authored display paths total9m, but their
+allocation, nine depicted figures, complete order, hidden surfaces, case sizes
+and optical values are inferred. This is a partial visual study, not the artist's
+scan or a verified complete composition. Full narrative, satyr/animal masks,
+original ornamental arrangement and contemporary installation verification remain.
+
+Continuous anatomical surfaces derive from MakeHuman core CC0 data, pinned at
+a8bc2d54ff0ac92e78ff71431b1023eda42bf482. Individual base/morph/skeleton/weight
+hashes and source URLs are in anatomy-provenance.json; the full asset licence is
+licenses/MakeHuman-CC0.txt. No MakeHuman application source is imported. Original
+offline posing, torso closure/relief adaptation and assembly create the study;
+this generic anatomical basis does not establish the actual subjects' likenesses.
+The earlier separated-primitive prototype was rejected and is not the asset here.
+
+Original poured-base contours, ivy and a cast pipe/valve fragment supplement
+the reclining forms. ART15 documents ivy and historical Baroque ornament;
+ART04 view22 shows the industrial cast detail. Placement and detail are authored
+estimates. The rear case follows installation08/09; all pieces remain within the
+glass and protected bar envelope, with no new visitor collision behavior.
+
+Sugar uses shared original colour/roughness/normal maps and a separate UV1/G
+volume atlas. The atlas approximates vertical thickness of the two posed bases;
+small decorative elements use20mm. It is not exact oblique ray thickness or
+measured material. KHR_materials_transmission/volume/ior/clearcoat and UV1 are
+retained in the GLB, including clearcoat normal detail. The viewer supplies an
+original512×256 reflection-panel environment; other GLB viewers supply their own
+lighting. This is not a site HDR capture. The portable asset embeds22 maps; the
+reflection environment is a viewer lighting aid. Case glazing is a separate clear
+material rather than the upper lounge's heavily tinted enclosure material.
+
+Regenerate using the existing asset pipeline (Python authoring needs NumPy/Pillow):
+
+```powershell
+python berghain/build-together.py --download --asset
+python berghain/build-materials.py
+node berghain/build-together-volume.mjs
+node berghain/export-model.mjs
+```

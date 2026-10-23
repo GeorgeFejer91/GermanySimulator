@@ -62,6 +62,7 @@ for (const group of model.children) {
     const vertexCount = sourcePosition.count * instances;
     const positions = new Float32Array(vertexCount * 3), normals = new Float32Array(vertexCount * 3), colors = new Float32Array(vertexCount * 3);
     const surface = mesh.material.userData.surface, uvs = surface ? new Float32Array(vertexCount*2) : null;
+    const sourceVolumeUV=geometry.attributes.uv1,volumeUVs=mesh.material.userData.volumeMap?new Float32Array(vertexCount*2):null;
     const sourceIndices = geometry.index?.array || Uint32Array.from({length: sourcePosition.count}, (_, i) => i);
     const indices = new Uint32Array(sourceIndices.length * instances);
     const matrix = new THREE.Matrix4(), normalMatrix = new THREE.Matrix3(), vector = new THREE.Vector3(), color = new THREE.Color();
@@ -77,21 +78,35 @@ for (const group of model.children) {
         vector.fromBufferAttribute(sourceNormal, vertex).applyNormalMatrix(normalMatrix).toArray(normals, offset);
         color.toArray(colors, offset);
         if (uvs) uvs.set(surfaceUV(positions.subarray(offset,offset+3),normals.subarray(offset,offset+3),surface.metresPerTile),offset/3*2);
+        if(volumeUVs)volumeUVs.set([sourceVolumeUV.getX(vertex),sourceVolumeUV.getY(vertex)],offset/3*2);
       }
       for (let i = 0; i < sourceIndices.length; i++) indices[instance * sourceIndices.length + i] = sourceIndices[i] + instance * sourcePosition.count;
     }
     const material = mesh.material, materialIndex = gltf.materials.length;
+    const physical=material.transmission>0?{
+      KHR_materials_transmission:{transmissionFactor:material.transmission},
+      KHR_materials_volume:{thicknessFactor:material.thickness,attenuationDistance:material.attenuationDistance,
+        attenuationColor:material.attenuationColor.toArray()},
+      KHR_materials_ior:{ior:material.ior},
+      KHR_materials_clearcoat:{clearcoatFactor:material.clearcoat,clearcoatRoughnessFactor:material.clearcoatRoughness}
+    }:null;
+    if(physical&&material.userData.volumeMap)
+      physical.KHR_materials_volume.thicknessTexture={...texture(material.userData.volumeMap),texCoord:1};
+    if(physical&&surface)physical.KHR_materials_clearcoat.clearcoatNormalTexture=texture(surface.normal);
+    if(physical)gltf.extensionsUsed=[...new Set([...(gltf.extensionsUsed||[]),...Object.keys(physical)])];
     gltf.materials.push({name: mesh.name, pbrMetallicRoughness: {baseColorFactor: [...material.color.toArray(), material.opacity],
       metallicFactor: material.metalness, roughnessFactor: material.roughness,
       ...(surface?{baseColorTexture:texture(surface.baseColor),metallicRoughnessTexture:texture(surface.roughness)}:{})},
       ...(surface?{normalTexture:{...texture(surface.normal),scale:1}}:{}),
+      ...(physical?{extensions:physical}:{}),
       emissiveFactor: material.emissive.toArray().map(component => component * material.emissiveIntensity),
-      ...(material.transparent ? {alphaMode: 'BLEND', doubleSided: true} : {}),
+      ...(material.transparent ? {alphaMode: 'BLEND'} : {}),
       ...(material.side === THREE.DoubleSide ? {doubleSided: true} : {})});
     const meshIndex = gltf.meshes.length;
     gltf.meshes.push({name: mesh.name, primitives: [{attributes: {POSITION: accessor(positions, 'VEC3', 5126, true),
       NORMAL: accessor(normals, 'VEC3', 5126), COLOR_0: accessor(colors, 'VEC3', 5126),
-      ...(uvs?{TEXCOORD_0:accessor(uvs,'VEC2',5126)}:{})},
+      ...(uvs?{TEXCOORD_0:accessor(uvs,'VEC2',5126)}:{}),
+      ...(volumeUVs?{TEXCOORD_1:accessor(volumeUVs,'VEC2',5126)}:{})},
       indices: accessor(indices, 'SCALAR', 5125), material: materialIndex}]});
     gltf.nodes[groupIndex].children.push(gltf.nodes.length);
     gltf.nodes.push({name: mesh.name, mesh: meshIndex});

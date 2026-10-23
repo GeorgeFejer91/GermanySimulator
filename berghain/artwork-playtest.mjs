@@ -82,7 +82,7 @@ export default {
     await dragLook(page,context,profile,-yaw/.004);const near=await forward(page,context,profile,1000);await lookDown(page,context,profile);
     assert.ok(canStand(near,layout));assert.ok(Math.hypot(near.x-before.x,near.z-before.z)>.5);
     await artifacts.screenshot(page,'climber-on-panorama-counter.png');
-    const native=await renderNativeAsset(page,{position:near,yaw,pitch:-.24});assert.equal(native.artworks,1);assert.equal(native.equipment,44);
+    const native=await renderNativeAsset(page,{position:near,yaw,pitch:-.24});assert.equal(native.artworks,layout.artworks.length);assert.equal(native.equipment,44);
     const manifest=JSON.parse(readFileSync(new URL('../assets/models/berghain/manifest.json',import.meta.url)));
     assert.equal(native.bytes,manifest.bytes);assert.equal(native.meshes,manifest.meshes);
     await artifacts.screenshot(page,'native-glb-climber.png');await disposeNativeAsset(page);

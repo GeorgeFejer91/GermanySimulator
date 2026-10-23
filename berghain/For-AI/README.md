@@ -10,7 +10,20 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Active next increment: Together's reclining relief figures and original amber
+Research-only publication eb00e1ea9d532afe30daa10c4ef016dad021b073 updates
+only README/INTERIOR/SOURCES/VALIDATION on top of c8. It includes105 unique
+source records and the rejected-study/canonical-acceptance notes below; it
+ships no experimental runtime, anatomy or research download. Pages run
+40032215770 completed SUCCESS. Canonical verification at
+output/berghain-research-canonical-verification.json confirms52/52 exact public
+files against eb00e1e and six root/3d/Geheim/model entry responses. The105-record
+catalogue is deployed on the permanent domain.
+Fresh output/berghain-geheim-final-entry-verification/report.json passes2/2
+actual canonical desktop/Android portrait natural human approach, entry,
+exit and refresh. No new world review is needed for this documentation-only
+commit; c8 remains the accepted world/runtime baseline.
+
+Accepted partial increment: Together's reclining relief figures and original amber
 material. Integrator owns together-geometry.mjs/together.mjs under the existing
 asset authority, bar rear-case refinement, artwork/material/model/export hooks,
 scoped tests/playtest and owning notes. Reuse the existing Three.js/GLB pipeline
@@ -29,7 +42,40 @@ the display glass and existing body barrier. Validate source/native close views,
 bar/WC/entrance routes and both required world reviews on one frozen candidate.
 The full building/artwork goal remains active.
 
-Current publication: Klo Bar/sanitary commit
+Current technical candidate is output/berghain-marr-candidate.json (91 frozen
+runtime/test/authoring/asset files; owning acceptance notes are separate).
+Continuous CC0-derived anatomical relief replaces the rejected primitive bodies;
+original poured contour/ivy/pipe fragment, clear display glazing and a rear case
+are included. A separate UV1/G thickness atlas, original bubble/coat normal maps
+and viewer reflection panels improve the amber response. The GLB preserves those
+standard physical-material fields and every embedded material map. Full artwork
+fidelity remains unproven: generic faces, pale/smooth high-lit views, the complete
+complex pose/narrative/likeness and satyr/animal ornament still differ from ART04.
+Both independent reviewers accept scoped technical C/P/X1 checks on the final
+91-file freeze; they do not certify full artwork realism. Exact final integrated
+browser report output/berghain-marr-half-integrated-browser/report.json passes
+20/20 across desktop and Android portrait/landscape emulation; all91 source
+hashes match the freeze. All74 focused Node tests pass after the exporter fix. Matching source/native art
+parity is mean RGB.36818/255, large-delta pixels.0835%, textures23/23 disposed.
+The initial parity failure exposed exporter-forced double-sided glass; preserving
+the authored side fixes it without changing the1-RGB-level comparison tolerance.
+Matching before/after cost suites pass9/9 each. Full-resolution transmission
+initially regressed desktop frame-p95 from14.1 to48.4ms; this candidate uses
+Three.js transmissionResolutionScale=.5, reducing it to20.9ms median in three
+case-facing samples. Main-view resolution and geometry remain unchanged.
+Portrait/landscape emulation medians are20.8ms, versus13.9ms baseline. Cold-ready
+medians increase by421–452ms; normal transfer adds953,059B and the optional GLB
+adds10,923,940B. Draw calls and geometry cost remain higher; this is not physical
+Android or60fps qualification. See VALIDATION.md for evidence and limits.
+The frozen GLB is35,996,040B,467,408 triangles,113mesh/material groups,22embedded
+material maps, SHA256d5e2a864733c82a707da41c43e8eba91acf7515f5fa84166f6598a0208e59c5b.
+Existing camera and visitor movement algorithms remain unchanged; the viewer's
+transmission setting is the only renderer quality adjustment.
+Publish this accepted partial increment by scoped fast-forward after tree review;
+record public-byte/actual public-route verification separately. The broader
+artwork and full-building goal remains active.
+
+Prior accepted architectural publication: Klo Bar/sanitary commit
 c8babb806a484932f441ad3bb94f5de47145f551 pushed by normal fast-forward on
 defd99867ef373831ff3b320a711a013a9e7e4ef, preserving all concurrent street/CI
 work. Versioned preview:
@@ -57,8 +103,10 @@ Do not publish it or treat test PASS as fidelity acceptance. The CC0 anatomical
 authoring study in output/marr-anatomy-study.py produces continuous skin and
 hands from pinned MakeHuman data. Its1/1 neutral/transmission inspection is
 authoring-only: torso cuts, pose relationships, closed cast transitions,
-Baroque ornament, bubbles and backlit amber remain unresolved. No anatomical
-asset or application code has entered the accepted public runtime. Download
+Baroque ornament, bubbles and backlit amber remain unresolved. At that rejected-study checkpoint no anatomical
+asset or application code entered the accepted runtime. The later partial
+anatomical increment described above supersedes the study; it imports no
+MakeHuman application code. Download
 hashes/licences are in the ignored references/downloads/makehuman directory.
 
 
@@ -67,8 +115,8 @@ Original forms follow ART04/ART14/I19/I21: red enclosure, switchgear mesh/staff
 gate, segmented glazed cases, ten splayed stools, bar back, four steel cubicles
 (two open), hollow pans, protected vertical lights, upper lit mesh transoms,
 a double-sided trough/core with taps/drainage, hand dryers and floor grates.
-Joseph Marr's Together figure sequence is still absent; cases are not a finished
-sculpture. Absolute western first-floor arrangement,6.65m floor/9.80m ceiling,
+The c8 checkpoint had no Together figures. The later partial increment adds
+generic anatomy; its full figure sequence and artwork likeness remain unfinished. Absolute western first-floor arrangement,6.65m floor/9.80m ceiling,
 connections/counts/dimensions and currentness are explicitly estimated. Toilet
 photographs span2009/2013/2015 and individual floor assignment remains unknown.
 

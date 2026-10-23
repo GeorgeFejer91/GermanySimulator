@@ -4,11 +4,15 @@ import {surfaceFamilies} from './surface-data.mjs';
 const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
-  loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal'};
+  loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];
   if (family) material.userData.surface = {family, ...surfaceFamilies[family]};
+  if(name==='artAmber'){
+    material.userData.volumeMap='textures/amber-thickness.png';
+    material.userData.environmentMap='textures/amber-lighting.png';
+  }
 }
 
 export function surfaceUV(position, normal, metresPerTile) {
@@ -20,6 +24,7 @@ export function surfaceUV(position, normal, metresPerTile) {
 
 function projectedMaterial(material, maps) {
   Object.assign(material,{map:maps.baseColor,roughnessMap:maps.roughness,normalMap:maps.normal});
+  if(material.clearcoat>0)material.clearcoatNormalMap=maps.normal;
   material.onBeforeCompile = shader => {
     shader.uniforms.berghainTileMetres={value:material.userData.surface.metresPerTile};
     shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nuniform float berghainTileMetres;');
@@ -37,7 +42,10 @@ function projectedMaterial(material, maps) {
         :vec2(-surfacePosition.x*sign(surfaceNormal.z),surfacePosition.y);
       vMapUv=surfaceUv/berghainTileMetres;
       vNormalMapUv=vMapUv;
-      vRoughnessMapUv=vMapUv;`);
+      vRoughnessMapUv=vMapUv;
+      #ifdef USE_CLEARCOAT_NORMALMAP
+        vClearcoatNormalMapUv=vMapUv;
+      #endif`);
   };
   material.customProgramCacheKey=()=> 'berghain-metre-uv-v1';
   material.needsUpdate=true;
@@ -56,6 +64,13 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
     if(kind==='baseColor') texture.colorSpace=THREE.SRGBColorSpace;
     textures.set(key,texture);
   }));
+  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap]).filter(Boolean));
+  for(const key of extras)requests.push((async()=>{
+    const texture=await loader.loadAsync(new URL(key,import.meta.url).href);texture.name=key;texture.flipY=false;
+    if(key.endsWith('lighting.png')){texture.mapping=THREE.EquirectangularReflectionMapping;texture.colorSpace=THREE.SRGBColorSpace;}
+    else texture.channel=1;
+    textures.set(key,texture);
+  })());
   const results=await Promise.allSettled(requests);
   const failure=results.find(result=>result.status==='rejected');
   if(failure||model.userData.disposed){
@@ -66,6 +81,8 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
   for(const material of materials){
     const surface=material.userData.surface;
     projectedMaterial(material,Object.fromEntries(['baseColor','roughness','normal'].map(kind=>[kind,textures.get(surface[kind])])));
+    if(material.userData.volumeMap)material.thicknessMap=textures.get(material.userData.volumeMap);
+    if(material.userData.environmentMap)material.envMap=textures.get(material.userData.environmentMap);
   }
   return textures.size;
 }

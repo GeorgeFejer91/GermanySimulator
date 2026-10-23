@@ -1,0 +1,17 @@
+{
+  "generator": "berghain/build-together-volume.mjs",
+  "file": "textures/amber-thickness.png",
+  "bytes": 100341,
+  "sha256": "42b563a053df1851d1a007486a9fb3c0da4e9c73ecf16a024979f463b0a0dbd9",
+  "size": [
+    1024,
+    1024
+  ],
+  "channel": "G",
+  "texCoord": 1,
+  "thicknessFactorMetres": 0.25,
+  "nonzeroPixels": 1047219,
+  "min": 1,
+  "max": 158,
+  "limits": "Vertical envelope of the two authored anatomical poses; decorative details use20mm. Not measured sugar, exact ray thickness or scanned artwork"
+}

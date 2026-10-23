@@ -15,6 +15,7 @@ export function kloRoomAt(position){
 export const kloMaterials={
   kloRed:{color:'#713b38',roughness:.96},
   stainless:{color:'#c2c6c2',roughness:.43,metalness:.45},
+  kloDisplayGlass:{color:'#eef2ee',roughness:.12,transparent:true,opacity:.045},
   kloWarm:{color:'#e2c18a',roughness:.55,emissive:'#ffb754',emissiveIntensity:1.05}
 };
 
@@ -76,25 +77,27 @@ export function addKloFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCol
       for(const [x,width]of [[-4.7,1.75],[.65,6.5]]){
         box('lower cabinet',[x,.43,0],[width,.86,.74],'rubber',true);
         box('case base',[x,.89,0],[width+.06,.06,.84],'steel',true);
-        box('display glass',[x,1.07,.424],[width,.32,.018],'lightGlass');
-        box('display glass',[x,1.07,-.424],[width,.32,.018],'lightGlass');
-        box('display glass',[x,1.24,0],[width,.016,.84],'lightGlass');
+        box('display glass',[x,1.07,.424],[width,.32,.018],'kloDisplayGlass');
+        box('display glass',[x,1.07,-.424],[width,.32,.018],'kloDisplayGlass');
+        box('display glass',[x,1.24,0],[width,.016,.84],'kloDisplayGlass');
         for(const side of [-1,1]){
-          box('display glass',[x+side*width/2,1.07,0],[.018,.32,.84],'lightGlass');
+          box('display glass',[x+side*width/2,1.07,0],[.018,.32,.84],'kloDisplayGlass');
           box('case corner',[x+side*width/2,1.07,.43],[.025,.36,.025],'steel');
         }
         for(const y of [.91,1.245])for(const z of [-.43,.43])
           box('case frame',[x,y,z],[width+.05,.035,.035],'steel');
         box('display strip light',[x,.937,-.32],[width-.12,.025,.045],'kloWarm');
+        box('display luminous bed',[x,.939,0],[width-.08,.008,.70],'kloWarm');
       }
       box('return cabinet',[3.84,.43,-1.34],[.74,.86,2.68],'rubber',true);
       for(const x of [3.41,4.27]){
-        box('display glass',[x,1.07,-1.34],[.018,.32,2.68],'lightGlass');
+        box('display glass',[x,1.07,-1.34],[.018,.32,2.68],'kloDisplayGlass');
         for(const y of [.91,1.245])box('return frame',[x,y,-1.34],[.035,.035,2.73],'steel');
       }
-      box('return case top',[3.84,1.24,-1.34],[.86,.016,2.68],'lightGlass');
-      box('return case end',[3.84,1.07,-2.68],[.86,.32,.018],'lightGlass');
+      box('return case top',[3.84,1.24,-1.34],[.86,.016,2.68],'kloDisplayGlass');
+      box('return case end',[3.84,1.07,-2.68],[.86,.32,.018],'kloDisplayGlass');
       box('return strip light',[3.84,.937,-1.34],[.045,.025,2.5],'kloWarm');
+      box('return luminous bed',[3.84,.939,-1.34],[.70,.008,2.5],'kloWarm');
       for(const x of [-5.62,-3.78,-2.63,0,3.93]){
         box('retained switchgear upright',[x,1.51,-.04],[.13,3.02,.17],'steel',true);
         for(const y of [.2,2.15,2.95])box('frame bolt',[x,y,.058],[.045,.045,.018],'aluminium');
@@ -109,7 +112,16 @@ export function addKloFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCol
         for(const x of [-.12,.12])rod('switch lever',[x,y+.19,.19],[0,y,.18],.03,'steel');
       }
       box('bar rear cabinet',[-.6,.47,-2.65],[6.7,.94,.65],'steel',true);
-      for(const y of [1.2,2.05])box('bottle shelf',[-.6,y,-2.6],[6.7,.045,.55],'steel');
+      box('bottle shelf',[-.6,2.05,-2.6],[6.7,.045,.55],'steel');
+      box('rear display base',[-1.8,.95,-2.65],[1.65,.04,.66],'steel',true);
+      for(const z of [-2.97,-2.33]){
+        box('rear display glass',[-1.8,1.115,z],[1.6,.29,.018],'kloDisplayGlass');
+        for(const y of [.973,1.266])box('rear display frame',[-1.8,y,z],[1.64,.025,.025],'steel');
+      }
+      box('rear display lid',[-1.8,1.267,-2.65],[1.64,.015,.66],'kloDisplayGlass');
+      for(const x of [-2.6,-1])box('rear display glass',[x,1.115,-2.65],[.018,.29,.64],'kloDisplayGlass');
+      box('rear display strip',[-1.8,.978,-2.65],[1.5,.018,.025],'kloWarm');
+      box('rear luminous bed',[-1.8,.966,-2.65],[1.5,.008,.56],'kloWarm');
       for(let i=0;i<22;i++){
         cylinder('bottle',[-3.6+i*.285,2.22,-2.6],.07,.3,'glass');
         cylinder('bottle neck',[-3.6+i*.285,2.4,-2.6],.028,.07,'glass');
