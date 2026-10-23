@@ -40,7 +40,7 @@ async function walkTo(page, key, axis, value, sign) {
 export default {
   name: 'Berghain architectural viewer',
   sourceFiles: () => ['berghain/model.html', 'berghain/viewer.css', 'berghain/viewer.mjs', 'berghain/navigation.mjs', 'berghain/camera.mjs',
-    'assets/models/berghain/layout.mjs', 'assets/models/berghain/model.mjs', 'assets/models/berghain/berghain-study.glb',
+    'assets/models/berghain/layout.mjs', 'assets/models/berghain/model.mjs', 'assets/models/berghain/interior-fixtures.mjs', 'assets/models/berghain/berghain-study.glb',
     'assets/models/berghain/survey-data.mjs', 'assets/models/berghain/survey-model.mjs',
     'assets/models/berghain/berghain-exterior-lod2.glb', 'assets/models/berghain/survey-manifest.json',
     'assets/models/berghain/calibration.mjs', 'assets/models/berghain/manifest.json',

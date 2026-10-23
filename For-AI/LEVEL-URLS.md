@@ -93,8 +93,10 @@ portrait/landscape CDP touch, entry/exit, duplicate/cancel handling, 320 px and
 200% text, idle rendering and context recovery pass. Evidence:
 `output/berghain-geheim-release-browser/report.json` (4/4), plus original
 share-preview rendering in `output/berghain-geheim-acceptance/report.json`.
-Publication/live checks
-are recorded in `berghain/For-AI/VALIDATION.md`; no physical Android or social
+Canonical deployment verified on 2026-10-23: Pages 39988132964 succeeded;
+37/37 Berghain files match the published runtime 7517a17, both Geheim path forms
+and all 33 ordinary routes pass, with canonical desktop/Android-portrait flow 2/2.
+Publication/live checks are recorded in `berghain/For-AI/VALIDATION.md`; no physical Android or social
 platform cache verification is implied. Interior reconstruction remains partial.
 
 ## Release checklist

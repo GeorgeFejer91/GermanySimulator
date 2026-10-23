@@ -70,14 +70,27 @@ review rendered elevations, collision bounds and existing walking paths.
 
 ## Handoff
 
-### Geheim playable walkthrough — validated for publication
+### Geheim playable walkthrough — published and verified live
 
 Current 22-file frozen candidate passed both required independent reviewers,
 24 focused Node checks and four final browser cases. Accepted moving frames,
 entrance/exit, touch, lifecycle and complete-body camera evidence are recorded
 in [VALIDATION.md](VALIDATION.md). Publish only this scoped candidate through
-the existing isolated index, then verify `/geheim/` publicly. The main working
-checkout's unrelated staged files must remain untouched.
+the existing isolated index. Runtime was pushed as
+`7517a173b798613319673b3113bea6d8d1c7be27`, preserving main parent `b31b4cb`.
+Immutable public preview has 37/37 published-file hash matches and 2/2 real
+desktop/Android-portrait entrance flows at
+`https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/7517a173b798613319673b3113bea6d8d1c7be27/geheim/index.html`.
+Its provider asks Open the page on a fresh visit. Canonical
+**https://germanysimulator.de/geheim/** is now verified live through successful
+combined Pages run `39988132964` on main `daef7f9`, retaining the Geheim commit.
+`output/berghain-geheim-live-verification.json`: 37/37 published files match,
+all 33 ordinary routes and both custom/GitHub root/3d endpoints pass. Canonical
+desktop/Android-portrait real entry/exit/refresh passes 2/2 in
+`output/berghain-geheim-canonical-browser/report.json`, bound to published Git
+objects, not the evolving local furniture candidate. Earlier run 39985584152 was
+cancelled/superseded; prior run 39983168968 hit a Pages API 500 after its checks.
+The main working checkout's unrelated staged files remain untouched.
 
 The user requests a published `/geheim/` page with a controllable human avatar
 and the interaction of entering the building. Implement as an optional third-
@@ -111,6 +124,38 @@ Camera/scale reviews on the same frozen candidate; push and verify the live URL.
 The wider realistic interior/art reconstruction goal remains unfinished.
 
 ### Interior design, art and sound research
+
+#### Active interior furniture checkpoint
+
+Accepted for scoped publication on 2026-10-23: 26 frozen hashes, 30 Node checks,
+6 furniture browser cases, 4 natural entry/lifecycle cases and one text-layout
+case pass; both independent reviewers return scoped PASS with no required fix.
+The native export contains the same 35 assemblies. Evidence and remaining
+device/fidelity limits are in [VALIDATION.md](VALIDATION.md). Publish on current
+main through the isolated index, preserving newer unrelated street work; verify
+the deployed bytes and actual desktop/touch entry again before reporting live.
+
+Replace generic foyer concrete blocks with the channel-section seats visible
+in I09, and Panorama's generic counter/DJ box with A13's framed illuminated bar,
+metal stools, bottle rack, hanging fixtures and acoustic fittings. Retain the
+observed forms; dimensions, present survival and exact room placement remain
+inferred because these are historical photographs, not measured plans. Do not
+embed the photographs or substitute generic wall art for named artwork. Keep
+the known artist/equipment backlog and missing rooms in INTERIOR.md.
+
+Author within the existing layout/model/exporter and asset scope, using shared
+instanced box/cylinder/ring primitives and the existing metre-based export.
+Place human-scale furniture after exterior calibration so site scaling cannot
+distort stool/seat dimensions. Replace the former parts and collision together;
+derive proxies from visible assemblies and preserve entrance/stair/room routes.
+No new runtime, image texture, dependency, animation loop or main-game change.
+
+Acceptance: legal full-body approach to furniture and existing routes; reference
+ledger and inferred dimensions; native GLB parity/materials; defining room
+screenshots on desktop/mobile; bounded geometry/resources and idle lifecycle;
+both independent world reviewers on one frozen candidate. Publication follows
+the already-pushed Geheim candidate; live verification must use published Git
+objects rather than this evolving local model. Keep the full goal active.
 
 The user inspected the preview and prioritised the missing interior design,
 including Anna Uddenberg's mannequin sculpture and the sound system. Use

@@ -1,4 +1,5 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
+import {addInteriorFixtures} from './interior-fixtures.mjs';
 
 export const materials = {
   render: {color: '#b4b0a5', roughness: .96},
@@ -18,7 +19,10 @@ export const materials = {
   ground: {color: '#444843', roughness: 1},
   foliage: {color: '#3f5140', roughness: 1},
   warm: {color: '#c2ad7d', roughness: .6, emissive: '#bfa36f', emissiveIntensity: .5},
-  red: {color: '#6f2521', roughness: .5, emissive: '#be3020', emissiveIntensity: .55}
+  red: {color: '#6f2521', roughness: .5, emissive: '#be3020', emissiveIntensity: .55},
+  upholstery: {color:'#282825',roughness:.88},
+  aluminium: {color:'#8b9087',roughness:.38,metalness:.72},
+  opal: {color:'#cbd6c2',roughness:.6,emissive:'#8abc9b',emissiveIntensity:.35}
 };
 
 export const layout = {units: 'metres', confidence: 'provisional', floors: [], solids: [], parts: []};
@@ -231,11 +235,11 @@ for (const x of [-12, -6, 6, 12]) {
 
 export const viewpoints = {
   foyer: {label: 'Foyer', position: {x: 0, y: .05, z: 19}, yaw: -.3,
-    confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'I08']},
+    confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'I08', 'I09']},
   berghain: {label: 'Berghain', position: {x: 5, y: 6.65, z: 5}, yaw: 0,
     confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'P05']},
   panorama: {label: 'Panorama Bar', position: {x: -11, y: 13.25, z: -7}, yaw: 0,
-    confidence: 'Approximate layout', sources: ['A01', 'A07', 'I01', 'I02']},
+    confidence: 'Approximate layout', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
@@ -245,3 +249,4 @@ export const viewpoints = {
 };
 
 calibrateStudy(layout, viewpoints);
+addInteriorFixtures(layout);

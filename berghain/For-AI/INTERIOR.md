@@ -78,9 +78,9 @@ No new CAD software installed; no redistribution licence established.
 
 | Area | Required distinguishing content | Sources / current state |
 | --- | --- | --- |
-| Foyer | Ticket/cloakroom relationship, steel gallery, industrial services, distinctive channel-section concrete sofas, pendant fixtures, current artwork | I08/09 show actual structure/furniture. Current benches are generic boxes; the old mural photo is historical. |
+| Foyer | Ticket/cloakroom relationship, steel gallery, industrial services, distinctive channel-section concrete sofas, pendant fixtures, current artwork | I08/09 show actual structure/furniture. Accepted furniture candidate adds channel seats and ribbed shades; the old mural photo is historical. |
 | Main hall / main bar | Actual structural void and steel stairs, DJ surround, horn-loaded speaker geometry, overhead services/lighting, bar furniture and suspended sofas | I12 now provides all three historic cartoons; I15 adds wall openings/stair/window relationships. Present study does not reproduce these fully. |
-| Panorama | Counter wrapping and stools, illuminated lower bar, pendants, bottle shelving, DJ railing/desk, blinds, acoustic ceiling, Uddenberg and wall/glass art | A13 gallery inspected; I11/14 installation history. Existing long black box counter and empty walls are insufficient. |
+| Panorama | Counter wrapping and stools, illuminated lower bar, pendants, bottle shelving, DJ railing/desk, blinds, acoustic ceiling, Uddenberg and wall/glass art | A13 gallery inspected; I11/14 installation history. Accepted furniture candidate adds bar/stools, shelving, DJ forms and suspended fittings; artwork and complete ceiling/services remain missing. |
 | Lounge / upper level | Extra lounge level, cabins, glazed/stair relationship, circulation to toilets and smoking extension | A13 and I12. Current study omits the extra level and cabins. Preserve measured façade mass while verifying floor elevations. |
 | Klo Bar / toilets | Actual connecting corridor, bar enclosure, toilet compartments/services and Marr display | I12 and ART04. Entire space still missing; placing its sculpture in the existing main hall would be incorrect. |
 | Lab.oratory | Cellar/service character, actual circulation, partitions and installations | A12. Current accessible extent and relation to the rest of the asset unmodelled. |
@@ -92,6 +92,29 @@ support a historical connectivity study; exact positions/elevations cannot be
 read as a modern plan. The room floor heights in `layout.mjs` remain provisional.
 
 ## Next implementation and acceptance
+
+### Furniture implementation candidate, 2026-10-23
+
+The local candidate replaces the generic foyer/Panorama furniture with 35
+source-derived assemblies. It is not yet the canonical deployment. Forms follow
+the inspected I08/I09/A13 photos; I11 corroborates acoustic/light installation.
+The manufacturer case I05's BauBuche event benches are a separate commission,
+not evidence that these concrete sofas are timber or that all seating is alike.
+
+| Candidate feature | Evidence and implementation | Remaining uncertainty |
+| --- | --- | --- |
+| Foyer channel seats | I09: concrete slab, full-height ends/back channel, dark seat/back cushions. Model seat top .48m; overall3.2×1.35×1.02m. | Dimensions/count/placement inferred; photograph is historical. |
+| Panorama counter | A13: dark wrapping worktop, framed luminous lower panels and metal foot rail. Model top1.13m, long run8.9m, return3.8m. | Shape observed, lengths/corner and location inferred; current counter configuration needs a fresh record. |
+| Metal stools | A13: round seats, four splayed legs, circular foot ring, floor feet. Model top .77m. | Twelve modeled seats are a reconstruction choice, not a documented count. |
+| Backbar and DJ forms | A13: open metal bottle rack, multiple shelves, equipment table/decks/mixer and slender overhead supports. | Bottle labels, electronics model, exact suspension and furniture positions not verified. |
+| Suspended fittings | I08 ribbed foyer shades; A13 three-way shades and perforated rectangular enclosures; I11 acoustic/RGB project. | Nine enclosures/three branch pendants are inferred placement/count, unrelated to the reported50 control circuits. No moving lighting programme implemented. |
+| Low banquettes | A13 dark upholstered seating form. | These do not recreate the separate Weizenegger lounge seat or the missing upper lounge. |
+
+`assets/models/berghain/interior-fixtures.mjs` owns assembly metadata; the same
+geometry/materials are exported in the portable GLB. Original reference images
+remain research-only. Named artworks, actual current Funktion-One/Studt systems,
+toilets/Klo Bar, extra lounge, Lab and verified inter-room relationships remain
+outstanding. A furniture pass does not satisfy full realistic-interior acceptance.
 
 Integrator-owned writes remain in the existing Berghain asset/viewer/tools/tests
 and these owning notes. Preserve the main game, official exterior reference,
@@ -108,6 +131,7 @@ input/camera contracts and all unrelated staged work. No new engine or service.
    success. Required independent Physics and Camera/scale reviews apply to each
    frozen world-affecting candidate, with desktop and Android-emulated walking.
 
-The current research-only update changes no runtime, geometry, collision, camera
-or materials. World reviewers and new browser regression batches do not apply to
-the documentation itself. Full realistic interior acceptance remains outstanding.
+The earlier research-only checkpoint changed no runtime. The furniture candidate
+does change world geometry and collision and has both independent reviewers and
+current rendered regression evidence recorded in VALIDATION.md. Full realistic
+interior acceptance remains outstanding.

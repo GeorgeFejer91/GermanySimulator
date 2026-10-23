@@ -53,6 +53,29 @@ No photograph, graffiti or artwork is embedded. The smoking-room bridge and
 fine roof/rear details remain missing. The source catalogue records individual
 image licences and research-only copies separately from shipped assets.
 
+## Source-derived interior furniture
+
+`interior-fixtures.mjs` replaces the former foyer/Panorama furniture boxes with
+35 original assemblies observed in architect photographs I08/I09/A13 and the
+lighting installer's historical record I11. Includes concrete channel-section
+seats and cushions, an illuminated L-shaped counter, round metal stools with
+splayed legs/foot rings, bottle rack, DJ table/decks/mixer, low banquettes,
+ribbed foyer pendants, three-way Panorama shades and acoustic enclosures with
+actual openings cut through extruded metal grille plates.
+
+Forms are reference-based; dimensions, counts, placement and continued presence
+are inferred. The bar top is 1.13 m above the provisional room floor, stool tops
+.77 m, foyer seat cushions .48 m. Furniture is assembled in metres after exterior
+calibration to preserve these human-scale dimensions. The root GLB extras retain
+per-assembly source IDs, anchors, dimensions and uncertainty. Collision follows
+visible boxes/rails or declared conservative multi-part furniture bounds.
+
+All geometry and flat/PBR material colours are authored here, with no embedded
+reference photographs, Tillmans image, gallery artwork, manufacturer CAD or
+brand-label texture. This does not establish the current sound system, named
+artworks, missing upper lounge or measured room layout. The named artworks and
+unmodelled rooms remain required in `berghain/For-AI/INTERIOR.md`.
+
 ## Original material maps
 
 `berghain/build-materials.py` generates four tileable families (mineral, stone,
