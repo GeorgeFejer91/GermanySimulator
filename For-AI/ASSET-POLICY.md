@@ -2,6 +2,34 @@
 
 ## Decision
 
+The 2026-10-23 real-time repair keeps station platform boxes at their original
+transforms but batches opaque structure into five material groups per station.
+Glass, labels and clock faces retain their existing meshes and sorting. Native
+instancing reuses the existing static-box helper; there is no new model or
+download. Only immutable streetlamp, tree and garden-shed roots cache their
+complete loaded/fallback bounds and matrices, refreshed on model installation;
+camera re-entry restores them through the existing visibility pass. Animated
+props and building fade ownership stay on their current paths.
+
+Train scenery projections retain the exact sampled rail result per loop and
+object while XY and sample-array identity are unchanged. Radius and obstacle
+inclusion remain live; moving bodies never use that cache. Mid-road traffic
+defers wrap visibility/contact probes until its intended step can reach the
+edge, preserving the existing complete-body wrap gate. Office shader preparation
+and source-paint handover follow [the episode contract](./BUERGERAMT.md#painted-gaussian-action-arcs).
+
+Each synthesized theme uses three finite native voices (lead, bass, percussion)
+with all note automation on the existing Web Audio clock. Music cancellation
+releases for 25 ms, stops native sources after another 10 ms, and retires the
+captured graph/filter after 55 ms even if its audio clock is suspended. The Wurst
+handoff retains its longer 120 ms release. Cleanup is tied to the captured old
+graph, preserving successors. Only the completed percussion voice advances a
+theme, guarded by its bus and playback generation. A suspended native clock
+cannot stack tracks; cancelled Wurst transitions and consumed sung-song gap
+timers cannot restart a successor. No new scheduler or audio asset is introduced.
+Measurements and coverage are recorded in the
+[task report](../docs/engineering/REALTIME-PERFORMANCE.md).
+
 The five additional traffic/police defaults total 279,004 encoded MP3 bytes.
 Silent forced-broker checks on Chromium desktop and Android emulation observed
 no target recording fetch at startup, then one fetch/decode per requested clip,

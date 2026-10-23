@@ -1,9 +1,9 @@
 // Optional close-up paint interpolation. The simulation owns every action;
 // the existing render pass and two-job admission queue own preparation/update.
 // Both the encounter and ordinary action paint load this exact module identity.
-export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261013-mouth-audit');
+export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261023-realtime-performance');
 export const amtActorOwnsSpeech=(speech,id,actor)=>!!(speech?.active&&(speech.actor===id||speech.actor===actor.id||speech.actor===actor.lipId||actor.performance&&speech.actor==='clerk-'+actor.counter));
-export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
+export function createAmtGaussianScene({THREE,renderer,scene,camera,compilePaint,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;
   let generation=null,controller=new AbortController(),owner=null,ownerPromise=null,failure='';
   const enqueue=(task,options)=>queueLoad?queueLoad(task,options):Promise.resolve().then(task);
@@ -13,7 +13,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
     if(!ownerPromise){
       const request=controller;
       ownerPromise=loadAmtSplatModule().then(module=>
-        module.createAmtSplatOwner({THREE,renderer,scene,actorLayer,signal:request.signal})).then(value=>{
+        module.createAmtSplatOwner({THREE,renderer,scene,camera,compilePaint,actorLayer,signal:request.signal})).then(value=>{
         if(request!==controller||request.signal.aborted){void value.dispose();throw new DOMException('Retired office','AbortError')}
         owner=value;return value;
       }).catch(error=>{if(!request.signal.aborted)failure=error.message;throw error});
@@ -82,7 +82,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
         const prepare=async({signal}={})=>{
           signal?.addEventListener('abort',()=>request.abort(signal.reason),{once:true});
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261020-bounded-assets'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261023-realtime-performance'),getOwner()]);
           request.signal.throwIfAborted();
           const effect=await module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261013-character-lips`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
           if(request.signal.aborted){effect?.dispose();return null}return effect;

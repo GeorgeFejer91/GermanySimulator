@@ -22,7 +22,7 @@ const flush=async()=>{for(let i=0;i<16;i++)await Promise.resolve()};
 function fixture({shared=true,loader=true}={}){
   const requests=[],pending=[],warnings=[],installed=[];let now=0,active=0,maxActive=0;
   const player={x:0,y:0},level={active:false},body={classList:{contains:()=>false}};
-  const streetBodies=[];let streetPrepareCalls=0;
+  const streetBodies=[],staticPreparations=[];let streetPrepareCalls=0;
   const bridge={player,buildings:[]};
   if(shared)bridge.queueAssetLoad=task=>{installed.push(task);return Promise.resolve().then(task)};
   const context=vm.createContext({bridge,amtDirectRoute:false,document:{hidden:false,body},window:{BuergeramtLevel:level},performance:{now:()=>now},X:x=>x*.02,Z:y=>y*.02,S:.02,
@@ -31,12 +31,13 @@ function fixture({shared=true,loader=true}={}){
     // street-character-* tests. Keep its startup hook observable here instead
     // of silently omitting a production dependency from the GLB fixture.
     prepareStreetPaint(){streetPrepareCalls++},forEachStreetBody(visit){for(const item of streetBodies)visit(item.actor,item.root)},
+    prepareStaticCitySlot(slot){staticPreparations.push(slot)},
     updateAssetView:()=>{},isCityAssetVisible:()=>false,initialPlayerX:0,initialPlayerZ:0,cityAssetSlots:[],localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},loadAmtImages:()=>{},
     modelLoaderWithSignal:loader=>loader,modelLoader:loader?{loadAsync(url){requests.push(url);active++;maxActive=Math.max(active,maxActive);return new Promise((resolve,reject)=>pending.push({url,resolve:value=>{active--;resolve(value)},reject:error=>{active--;reject(error)}}))}}:null,
     cityModelUrl:file=>"./assets/models/city-kit/"+file+".glb",fitResponseModel:()=>{}
   });
   vm.runInContext(["cityModelsEnabled","cityModelDistance","queueCityAsset","queueCityModel","startupModelsReady","streetStartupPresented","captureStartupAssets","prepareNearbyAssets","loadLocalModel","installCityModel","installTrainModel","installVehicleModel","installResponseModel","amtTexture"].map(productionFunction).join("\n"),context);
-  return {context,requests,pending,warnings,installed,player,level,streetBodies,setTime:value=>{now=value},get streetPrepareCalls(){return streetPrepareCalls},get maxActive(){return maxActive}};
+  return {context,requests,pending,warnings,installed,player,level,streetBodies,staticPreparations,setTime:value=>{now=value},get streetPrepareCalls(){return streetPrepareCalls},get maxActive(){return maxActive}};
 }
 const source=()=>({scene:{clone:()=>({})}});
 function group(x=0,z=0){return {position:{x,z},children:[],add(model){this.children.push(model)}}}
@@ -44,6 +45,7 @@ function city(f,file,x=0,z=0,radius=1){const target=group(x,z),fallback={visible
 
 test("city admission preloads only the starting neighborhood, sorted near first and with two source jobs",async()=>{
   const f=fixture(),a=city(f,"bench",25),b=city(f,"garden-shed",5),c=city(f,"streetlamp",15),far=city(f,"far-landmark",90);
+  assert.equal(f.staticPreparations.length,4,'every registered fallback visits the static-render preparation owner');
   const streetRoot={userData:{streetPaintView:{startupRequired:true,presented:false,paint:{inspect:()=>({loaded:true})}}}};
   f.streetBodies.push({actor:{id:"street-startup"},root:streetRoot});
   for(const item of [a,b,c])f.context.startupModelJobs.add(item.job);f.context.startupModelsCaptured=true;
@@ -58,6 +60,7 @@ test("city admission preloads only the starting neighborhood, sorted near first 
   streetRoot.userData.streetPaintView.presented=true;assert.equal(f.context.streetStartupPresented(),true);
   assert.equal(f.maxActive,2);assert.equal(far.fallback.visible,true);
   assert.ok([a,b,c].every(item=>!item.fallback.visible&&item.target.children.length===1));
+  assert.equal(f.staticPreparations.length,7,'successful replacements refresh the static-render owner once each');
   f.player.x=4500;f.setTime(500);f.context.prepareNearbyAssets();await flush();
   assert.equal(f.requests.at(-1),"./assets/models/city-kit/far-landmark.glb","actual player approach triggers the distant source");
 });
@@ -174,8 +177,11 @@ test("office preparation requires an actual approach after startup and only whil
 test("office texture placeholders count settled required loads and share the asset admission queue",async()=>{
   const f=fixture(),tasks=[],images=[],callbacks=[];
   class Texture {image=null;userData={};listeners={};addEventListener(type,handler){this.listeners[type]=handler}dispose(){this.listeners.dispose?.()}}
-  Object.assign(f.context,{AbortController,T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,officeAssetTotal:0,officePreparationBackground:false,
+  Object.assign(f.context,{AbortController,T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,officeAssetTotal:0,officePreparationBackground:false,officeShadersRequested:true,
     amtTextureLoader:{load(url,onLoad,_progress,onError){images.push({url,onLoad,onError})}}});
+  // This fixture isolates texture accounting after scene preparation; the
+  // production readiness test separately covers its native compile job.
+  vm.runInContext(productionFunction('officeAssetSettled'),f.context);
   f.context.bridge.queueAssetLoad=task=>{const promise=Promise.resolve().then(task);tasks.push(promise);return promise};
   const texture=f.context.amtTexture("selected-mobile.webp",loaded=>callbacks.push(loaded),undefined,true);
   assert.equal(texture.image,null);assert.equal(f.context.officeAssetPending,1);assert.equal(f.context.officeAssetTotal,1);await flush();assert.equal(images.length,1);

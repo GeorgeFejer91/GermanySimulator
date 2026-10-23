@@ -53,6 +53,7 @@ test('default station steps visibly cover the full walkable frontage',()=>{
  class Mesh {constructor(){this.position={set(){},copy(){},x:0,z:0};}}
  const context=vm.createContext({T:{Group,Mesh,MeshStandardMaterial:class{},CircleGeometry:class{},TorusGeometry:class{},DoubleSide:2},S:.02,X:x=>x*.02,Z:y=>y*.02,
   bridge:{vehicleApproaches:[],props:[]},world:{add(){}},mat:()=>({}),M:{cross:{},dark:{},metal:{}},box:(width,height,depth,material,x,y,z)=>boxes.push({width,height,depth,x,y,z}),
+  staticBoxes:(name,material,parts)=>{for(const [x,y,z,width,height,depth] of parts)boxes.push({width,height,depth,x,y,z})},
   label:()=>({scale:{set(){}},position:{set(){}}})});
  vm.runInContext(source.slice(start,end)+'\nglobalThis.build=stationPlatform',context);
  for(const station of world.layout.stations){

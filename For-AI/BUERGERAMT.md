@@ -864,6 +864,26 @@ the old painted plane and cropped the new texture patches; multi-actor checks
 must compare the true native image and isolated actor at the same height, not
 preserve that old width error. The shader cache regression is tested directly.
 
+Mapped native patches prepare their actual shader with the existing renderer,
+office scene/camera and bounded asset queue before admission. Both ordinary fog
+and the isolated speaker's fog-exempt variant must be ready for the main output
+and the mirror's owned render target. Flat sprite and patch supports use one
+double-sided pass; front/back visibility and reflected paint remain unchanged.
+Required room assets include native scene compilation in `officeAssetsReady`.
+Preparation adds no simulation or animation clock.
+
+While a requested native image pair is unavailable, retain the original sprite
+instead of starting a temporary packed cloud; cloud-only actors keep their
+existing supported path. Speech paint likewise retains the complete source
+mouth until its current fog variant is prepared, then samples the current cue
+playhead. Pending or failed preparation cannot cut a hole in the source, and
+retirement cannot admit old paint. Performance evidence and device limits are
+in the [real-time task record](../docs/engineering/REALTIME-PERFORMANCE.md).
+Logical retirement hides and detaches paint immediately. A pending native shader
+readiness poll retains its material until that exact preparation promise settles
+or rejects; release it once afterward. Other owned image/geometry resources and
+the source-mouth fallback still retire immediately.
+
 Patch sigma is one selected sampling stride; support is 2.7 strides. The shader
 partitions log transmittance with kernel mass 6.20, adjusted for the small phase
 expansion, so overlapping supports do not turn a half-transparent painted edge

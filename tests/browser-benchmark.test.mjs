@@ -17,14 +17,16 @@ assert.match(source,/!openingRenderWithinBudget\(intro\)/,'the release gate must
 
 // Execute the production sampler with delayed browser/host scheduling. The
 // browser clock, rather than the requested wait, defines the captured window.
-const a=source.indexOf('async function sample()'),b=source.indexOf('\n  const intro=',a);
+const a=source.indexOf('async function sample('),b=source.indexOf('\n  const intro=',a);
 assert.ok(a>=0&&b>a);
-let now=1000;
+let now=1000,expectedDuration=3000;
 const scope={performance:{now:()=>now},__frames:[],__mutations:{},Germany3D:{inspectAssets:()=>({render:{},memory:{}})},document:{getElementById:()=>({width:390,height:844})}};
 scope.window=scope;
-scope.page={evaluate:callback=>vm.runInNewContext(`(${callback.toString()})()`,scope),waitForTimeout:async ms=>{assert.equal(ms,3000);scope.__frames=[1250,1500,1750,2000];now+=4250}};
+scope.page={evaluate:callback=>vm.runInNewContext(`(${callback.toString()})()`,scope),waitForTimeout:async ms=>{assert.equal(ms,expectedDuration);scope.__frames=[now+250,now+500,now+750,now+1000];now+=expectedDuration+1250}};
 const sample=vm.runInNewContext(`${source.slice(a,b)};sample`,scope);
 const result=await sample();
 assert.equal(result.elapsedMs,4250);assert.equal(result.syncCalls,4);
 assert.equal(result.frameMs.p50,250);assert.ok(within(result));
+expectedDuration=10000;
+const steady=await sample(expectedDuration);assert.equal(steady.elapsedMs,11250);assert.equal(steady.syncCalls,4);assert.ok(within(steady));
 console.log('Measured opening-screen duration, delayed receipts and real excess cadence checks OK');

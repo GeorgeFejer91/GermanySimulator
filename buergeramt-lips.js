@@ -178,7 +178,7 @@ function installMask(T,actor){
    "vec2 lipPatch=(amtFace-amtLipRect.xy)/amtLipRect.zw;\nfloat lipCover=1.-smoothstep(.48,.64,max(abs(lipPatch.x),abs(lipPatch.y)));\ndiffuseColor.a*=1.-amtLipHole*lipCover;\n#include <alphatest_fragment>");
  };
 }
-function createPaintSplat(T,paintGlsl,profileValues){
+function createPaintSplat(T,paintGlsl,profileValues,prepare){
  const speaking={value:0};
  const angle={value:0},frame={value:new T.Vector4()},profileCache=new WeakMap();
  const curves={value:new T.Matrix4()},lower={value:new T.Vector4()},ends={value:new T.Vector4()},tail={value:new T.Vector3()},style={value:new T.Vector3()};
@@ -219,6 +219,7 @@ function createPaintSplat(T,paintGlsl,profileValues){
  };
  const mesh=new T.Mesh(geometry,material);mesh.frustumCulled=false;mesh.visible=false;
  let actor=null,disposed=false;
+ const preparedFog=new Set();let preparing=null,prepareFailed=false;
  return{
   update(source,speech,now){
    if(disposed)return;
@@ -248,9 +249,19 @@ function createPaintSplat(T,paintGlsl,profileValues){
    if(material.fog!==actor.mesh.material.fog){material.fog=actor.mesh.material.fog;material.needsUpdate=true}
    material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;material.depthTest=actor.mesh.material.depthTest;mesh.renderOrder=actor.mesh.renderOrder;
    mesh.layers.mask=actor.mesh.layers.mask;
+   if(prepare&&!preparedFog.has(material.fog)){
+    // The source painting keeps its mouth until this exact shader is ready.
+    // Subsequent cues use their current media pose, never a delayed pose.
+    mesh.visible=false;actor.mesh.material.userData.lipHole.value=0;
+    if(!preparing&&!prepareFailed){
+     const fog=material.fog;
+     preparing=Promise.resolve().then(()=>{if(!disposed)return prepare(mesh,fog)}).then(()=>{if(!disposed)preparedFog.add(fog)})
+      .catch(()=>{prepareFailed=true}).finally(()=>{preparing=null});
+    }
+   }
   },
   inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,pose:actor?.mouthPose??null,angle:angle.value,rect:rect.value.toArray(),visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
-  dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();material.dispose()},
+   dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();if(preparing)preparing.then(()=>material.dispose(),()=>material.dispose());else material.dispose()},
  };
 }
 let recordingModule;

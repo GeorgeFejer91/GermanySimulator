@@ -2840,7 +2840,7 @@ function vehicleMotionBlocked(x,y,car,fromX=car.x,fromY=car.y,fromAngle=car.angl
  return circle(player,player.r)
 }
 function groundStaticMotionBlocked(x,y,r,fromX,fromY){
- const circle=(cx,cy,radius)=>Math.abs(x-cx)<=r+radius+1e-6&&Math.abs(y-cy)<=r+radius+1e-6&&groundContactBlocks(dist(x,y,cx,cy),dist(fromX,fromY,cx,cy),r+radius),rect=b=>groundContactBlocks(signedRectDistance(x,y,b),signedRectDistance(fromX,fromY,b),r);
+ const circle=(cx,cy,radius)=>Math.abs(x-cx)<=r+radius+1e-6&&Math.abs(y-cy)<=r+radius+1e-6&&groundContactBlocks(dist(x,y,cx,cy),dist(fromX,fromY,cx,cy),r+radius),rect=b=>x>=b.x-r&&x<=b.x+b.w+r&&y>=b.y-r&&y<=b.y+b.h+r&&groundContactBlocks(signedRectDistance(x,y,b),signedRectDistance(fromX,fromY,b),r);
  if(groundContactBlocks(x,fromX,r+9)||groundContactBlocks(y,fromY,r+9)||groundContactBlocks(WORLD.w-x,WORLD.w-fromX,r+9)||groundContactBlocks(WORLD.h-y,WORLD.h-fromY,r+9))return true;
  if(rect(goerlitzerPark)||circle(wirtschaftswunderSite.x,wirtschaftswunderSite.y,wirtschaftswunderSite.collisionRadius)||rect({x:kiesingerMemorial.x-173,y:kiesingerMemorial.y-147,w:346,h:294}))return true;
  for(const b of buildings)if(rect(b))return true;
@@ -3125,8 +3125,7 @@ function setNeighborLevelActive(active){
   clearTimeout(toast.t);document.getElementById("toast").classList.remove("show");document.getElementById("app").classList.remove("enforcement");
  }
  musicPlaybackSerial++;clearTimeout(musicTimer);stopIntroMusic();sungMusicAudio.pause();sungMusicActive=false;wurstTransitioning=false;
- musicBus?.disconnect();musicBus=null;
- for(const source of musicSources){source.stop()}musicSources.clear();
+ releaseMusicBus();
  if(musicOn)startMusic();updateHud();
 }
 function neighborActivityActive(){return state.neighborLevel||!!jwd.tour||state.dialogue&&!!state.characterSpeaker?.jwdRole||jwd.allocated&&state.mission>0&&jwd.met.size<3&&player.x>=jwdLane.x-120&&player.x<=jwdLane.x+jwdLane.w+120&&player.y>=jwdLane.y-120&&player.y<=jwdLane.y+jwdLane.h+120}
@@ -3292,7 +3291,7 @@ function updateTraffic(dt){
   if(car.vortexPhase!=="road"){updateWirtschaftswunderCar(car,dt);continue}
   let queueGap=Infinity;for(const other of trafficCars)if(other!==car&&other.lane===car.lane&&other.vortexPhase==="road")queueGap=Math.min(queueGap,trafficForwardGap(car,other.x)-188);
   const playerGap=Math.abs(player.y-car.y)<51+player.r+6?trafficForwardGap(car,player.x)-94-player.r:Infinity,obstacleGap=Math.min(queueGap,playerGap,trafficGroundGap(car)),target=obstacleGap<TRAFFIC_BRAKE_DISTANCE?Math.max(0,(obstacleGap-TRAFFIC_STOP_GAP)*1.8):car.cruiseSpeed,rate=target<car.speed?310:car.acceleration;
-  car.speed+=clamp(target-car.speed,-rate*dt,rate*dt);const intended=Math.max(0,car.speed*dt),entryGap=car.roadIndex===wirtschaftswunderSite.roadIndex?trafficForwardGap(car,wirtschaftswunderSite.entryX):Infinity,endGap=car.dir>0?TRAFFIC_MAX_X-car.x:car.x-TRAFFIC_MIN_X,spawnX=car.dir>0?TRAFFIC_MIN_X:TRAFFIC_MAX_X,wrapBlocked=vehicleCameraVisible(car.x,car.y,car.angle)||vehicleCameraVisible(spawnX,car.y,car.angle)||vehicleCameraVisible(car.dir>0?TRAFFIC_MAX_X:TRAFFIC_MIN_X,car.y,car.angle)||vehicleMotionBlocked(spawnX,car.y,car,spawnX,car.y),requested=Math.min(intended,Math.max(0,obstacleGap-TRAFFIC_STOP_GAP),entryGap,wrapBlocked?Math.max(0,endGap):Infinity);let advance=0;
+  car.speed+=clamp(target-car.speed,-rate*dt,rate*dt);const intended=Math.max(0,car.speed*dt),entryGap=car.roadIndex===wirtschaftswunderSite.roadIndex?trafficForwardGap(car,wirtschaftswunderSite.entryX):Infinity,endGap=car.dir>0?TRAFFIC_MAX_X-car.x:car.x-TRAFFIC_MIN_X,spawnX=car.dir>0?TRAFFIC_MIN_X:TRAFFIC_MAX_X,wrapBlocked=endGap<=intended+.01&&(vehicleCameraVisible(car.x,car.y,car.angle)||vehicleCameraVisible(spawnX,car.y,car.angle)||vehicleCameraVisible(car.dir>0?TRAFFIC_MAX_X:TRAFFIC_MIN_X,car.y,car.angle)||vehicleMotionBlocked(spawnX,car.y,car,spawnX,car.y)),requested=Math.min(intended,Math.max(0,obstacleGap-TRAFFIC_STOP_GAP),entryGap,wrapBlocked?Math.max(0,endGap):Infinity);let advance=0;
   while(advance<requested){const step=Math.min(1,requested-advance),nextX=car.x+car.dir*step;if(responderBlocked(nextX,car.y,TRAFFIC_CAR_RADIUS,car,car.x,car.y))break;car.x=nextX;advance+=step}
   if(advance+.01<requested||wrapBlocked&&endGap<=advance+.01)car.speed=0;if(entryGap<=advance+.01){enterWirtschaftswunder(car);continue}if(car.dir>0?car.x>=TRAFFIC_MAX_X:car.x<=TRAFFIC_MIN_X){const wrappedX=car.x-car.dir*TRAFFIC_LANE_LENGTH;if(!wrapBlocked&&vehicleFullyOffMap(car.x,car.y,car.angle)&&vehicleFullyOffMap(wrappedX,car.y,car.angle)&&!vehicleCameraVisible(car.x,car.y,car.angle)&&!vehicleCameraVisible(wrappedX,car.y,car.angle)&&!vehicleMotionBlocked(wrappedX,car.y,car,wrappedX,car.y))car.x=wrappedX;else car.speed=0}
   const wasBlocked=car.blockedByPlayer;car.blockedByPlayer=playerGap<=queueGap+.01&&playerGap<TRAFFIC_BRAKE_DISTANCE;car.queued=advance+.01<intended||obstacleGap<TRAFFIC_BRAKE_DISTANCE;
@@ -3300,20 +3299,34 @@ function updateTraffic(dt){
   else if(car.blockedByPlayer&&car.speed<30){car.hold+=dt;if(car.honkCooldown===0){playTrafficHorn(car,true);car.honkCooldown=1.1+Math.random()*1.2}}else car.hold=0
  }
 }
-function nearestRailLocation(loop,x,y){let nearest=null,best=Infinity;for(const sample of loop.samples){const d=(sample.x-x)**2+(sample.y-y)**2;if(d<best){best=d;nearest=sample}}return{progress:nearest.progress,distance:Math.sqrt(best)}}
+function nearestRailLocation(loop,x,y,staticItem=null){
+ let cache;
+ if(staticItem){
+  // Only fixed scenery supplies an identity. Live bodies still project every
+  // substep; changed scenery coordinates invalidate their exact result.
+  const loops=nearestRailLocation.staticObstacles||(nearestRailLocation.staticObstacles=new WeakMap());
+  cache=loops.get(loop);if(!cache)loops.set(loop,cache=new WeakMap());
+  const previous=cache.get(staticItem);
+  if(previous&&previous.x===x&&previous.y===y&&previous.samples===loop.samples)return previous.result;
+ }
+ let nearest=null,best=Infinity;for(const sample of loop.samples){const d=(sample.x-x)**2+(sample.y-y)**2;if(d<best){best=d;nearest=sample}}
+ const result={progress:nearest.progress,distance:Math.sqrt(best)};
+ if(cache)cache.set(staticItem,{x,y,samples:loop.samples,result});
+ return result;
+}
 function signedRailSeparation(from,to,length){return wrapRailProgress(to-from+length/2,length)-length/2}
 function startTrainBounce(a,b){
  if(a.reversePending||b.reversePending||a.collisionCooldown>0||b.collisionCooldown>0)return;
  for(const train of [a,b]){train.speed=0;train.bouncePause=TRAIN_BOUNCE_PAUSE;train.reversePending=true;train.collisionCooldown=1.35;train.queued=true;train.bump=1;train.incidentReason="collision";train.incidentUntil=performance.now()+22000}
 }
 function updateBorderTrains(dt){
- const groundObstacles=[{item:player,radius:player.r,player:true},...trafficCars.filter(item=>item.vortexPhase!=="swallowed").map(item=>({item,radius:107})),...policeVehicles.map(item=>({item,radius:107})),...police.map(item=>({item,radius:14})),...npcs.map(item=>({item,radius:13})),...props.map(item=>({item,radius:propRadius(item)})),...normObjects.map(item=>({item,radius:normObjectRadius(item)})),...trees.map(item=>({item,radius:TREE_RADIUS}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
+ const groundObstacles=[{item:player,radius:player.r,player:true},...trafficCars.filter(item=>item.vortexPhase!=="swallowed").map(item=>({item,radius:107})),...policeVehicles.map(item=>({item,radius:107})),...police.map(item=>({item,radius:14})),...npcs.map(item=>({item,radius:13})),...props.map(item=>({item,radius:propRadius(item),static:true})),...normObjects.map(item=>({item,radius:normObjectRadius(item),static:true})),...trees.map(item=>({item,radius:TREE_RADIUS,static:true}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
  // Each train on a loop sees the same obstacle poses in this simulation substep.
  // Project once per loop; discard only obstacles outside the existing exact clearance.
  const obstaclesByLoop=new Map();
  for(const train of trains)if(!obstaclesByLoop.has(train.loopIndex)){
   const loop=railLoops[train.loopIndex],nearby=[];
-  for(const obstacle of groundObstacles){const rail=nearestRailLocation(loop,obstacle.item.x,obstacle.item.y);if(rail.distance<TRAIN_CAR_HALF_WIDTH+obstacle.radius+6)nearby.push({...obstacle,progress:rail.progress})}
+  for(const obstacle of groundObstacles){const rail=nearestRailLocation(loop,obstacle.item.x,obstacle.item.y,obstacle.static?obstacle.item:null);if(rail.distance<TRAIN_CAR_HALF_WIDTH+obstacle.radius+6)nearby.push({...obstacle,progress:rail.progress})}
   obstaclesByLoop.set(train.loopIndex,nearby);
  }
  for(const train of trains){
@@ -4601,12 +4614,19 @@ const SUNG_MUSIC=Object.freeze([
 ]),SUNG_MUSIC_PLAYLIST=SUNG_MUSIC.map((_,index)=>index),introMusicAudio=new Audio(INTRO_MUSIC_AUDIO),sungMusicAudio=new Audio(),MUSIC_LEVEL=.4,INTRO_MUSIC_LEVEL=.7,SUNG_MUSIC_LEVEL=.7,SOUND_EFFECT_LEVEL=.8;introMusicAudio.preload="none";introMusicAudio.playsInline=true;introMusicAudio.volume=INTRO_MUSIC_LEVEL;introMusicAudio.dataset.audioClass=AUDIO_CLASS.BACKGROUND;sungMusicAudio.preload="metadata";sungMusicAudio.playsInline=true;sungMusicAudio.volume=SUNG_MUSIC_LEVEL;sungMusicAudio.dataset.audioClass=AUDIO_CLASS.BACKGROUND;
 function rampIntroVolume(target,duration){cancelAnimationFrame(introRampFrame);const from=introMusicAudio.volume,started=performance.now(),total=Math.max(1,duration*1000),step=now=>{const progress=clamp((now-started)/total,0,1);introMusicAudio.volume=from+(target-from)*progress;if(progress<1)introRampFrame=requestAnimationFrame(step)};introRampFrame=requestAnimationFrame(step)}
 function rampSungVolume(target,duration){cancelAnimationFrame(sungRampFrame);const from=sungMusicAudio.volume,started=performance.now(),total=Math.max(1,duration*1000),step=now=>{const progress=clamp((now-started)/total,0,1);sungMusicAudio.volume=from+(target-from)*progress;if(progress<1)sungRampFrame=requestAnimationFrame(step)};sungRampFrame=requestAnimationFrame(step)}
-function rampGain(param,target,duration){const t=audio.currentTime;param.cancelScheduledValues(t);param.setValueAtTime(param.value,t);param.linearRampToValueAtTime(target,t+duration)}
+function rampGain(param,target,duration){const t=audio.currentTime;if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(t);else{param.cancelScheduledValues(t);param.setValueAtTime(param.value,t)}param.linearRampToValueAtTime(target,t+duration)}
+function releaseMusicBus(duration=.025){
+ clearTimeout(musicTimer);const bus=musicBus;if(!bus)return;musicBus=null;
+ rampGain(bus.gain,0,duration);
+ // Native stop deadlines survive a blocked main thread or a hidden page.
+ const retiring=[...musicSources];for(const source of retiring){try{source.stop(audio.currentTime+duration+.01)}catch{}}
+ setTimeout(()=>{bus.disconnect();bus.musicFilter?.disconnect();delete bus.musicFilter;for(const source of retiring)if(musicSources.has(source)){source.onended?.();source.onended=null}},(duration+.03)*1000);
+}
 function applyAudioDucking(){const ducked=musicDucked||audioTextActive(),factor=ducked?AUDIO_MIX.BACKGROUND:1,duration=ducked?AUDIO_MIX.ATTACK_SECONDS:AUDIO_MIX.RELEASE_SECONDS;rampIntroVolume(amtMusicMuted?0:INTRO_MUSIC_LEVEL*factor,duration);rampSungVolume(amtMusicMuted?0:SUNG_MUSIC_LEVEL*factor,duration);if(!audio)return;if(musicBus)rampGain(musicBus.gain,amtMusicMuted?0:currentMusicLevel()*factor,duration);if(soundEffectBus)rampGain(soundEffectBus.gain,SOUND_EFFECT_LEVEL*factor,duration)}
-function setAmtMusicMuted(muted){if(amtMusicMuted===muted)return;amtMusicMuted=muted;if(muted){clearTimeout(musicTimer);introMusicAudio.pause();sungMusicAudio.pause();musicBus?.disconnect();musicBus=null}else if(musicOn)startMusic();applyAudioDucking()}
+function setAmtMusicMuted(muted){if(amtMusicMuted===muted)return;amtMusicMuted=muted;if(muted){musicPlaybackSerial++;wurstTransitioning=false;clearTimeout(musicTimer);introMusicAudio.pause();sungMusicAudio.pause();releaseMusicBus()}else if(musicOn)startMusic();applyAudioDucking()}
 function setMusicDucked(ducked){musicDucked=ducked;applyAudioDucking()}
 function currentMusicLevel(){return state.neighborLevel?.14:MUSIC_LEVEL}
-function createMusicBus(){const bus=audio.createGain(),filter=audio.createBiquadFilter(),factor=musicDucked||audioTextActive()?AUDIO_MIX.BACKGROUND:1;bus.audioClass=AUDIO_CLASS.BACKGROUND;bus.gain.value=currentMusicLevel()*factor;filter.type="lowpass";filter.frequency.value=1600;filter.Q.value=.45;bus.connect(filter).connect(masterOutput());return bus}
+function createMusicBus(){const bus=audio.createGain(),filter=audio.createBiquadFilter(),factor=musicDucked||audioTextActive()?AUDIO_MIX.BACKGROUND:1;bus.audioClass=AUDIO_CLASS.BACKGROUND;bus.musicFilter=filter;bus.gain.value=currentMusicLevel()*factor;filter.type="lowpass";filter.frequency.value=1600;filter.Q.value=.45;bus.connect(filter).connect(masterOutput());return bus}
 const midiFreq=note=>440*2**((note-69)/12);
 const MUSIC_PLAYLIST=MUSIC.map((_,index)=>index);
 function nextTune(){
@@ -4616,44 +4636,54 @@ function nextTune(){
 }
 function stopIntroMusic(){if(introMusicFinished)return;introMusicFinished=true;introMusicAudio.pause()}
 function queueNationalAnthem(){forcedTune=1;if(musicOn)startMusic()}
-function chip(a,freq,when,dur,type="triangle",gain=.028){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.018);g.gain.setValueAtTime(gain,when+dur*.68);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);musicSources.add(o);o.onended=()=>musicSources.delete(o);o.start(when);o.stop(when+dur+.02)}
-function stamp(a,when,gain=.014){const o=a.createOscillator(),g=a.createGain();o.type="triangle";o.frequency.setValueAtTime(78,when);o.frequency.exponentialRampToValueAtTime(48,when+.065);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.08);o.connect(g).connect(musicBus);musicSources.add(o);o.onended=()=>musicSources.delete(o);o.start(when);o.stop(when+.09)}
+function createMusicVoice(type,start,end,finished){
+ const o=audio.createOscillator(),g=audio.createGain();o.type=type;g.gain.value=0;o.connect(g).connect(musicBus);
+ musicSources.add(o);o.onended=()=>{if(!musicSources.delete(o))return;o.disconnect();g.disconnect();finished?.()};o.start(start);o.stop(end+.02);
+ return {frequency:o.frequency,gain:g.gain};
+}
+function chip(voice,freq,when,dur,gain=.028){const g=voice.gain;voice.frequency.setValueAtTime(freq,when);g.setValueAtTime(0,when);g.linearRampToValueAtTime(gain,when+.018);g.setValueAtTime(gain,when+dur*.68);g.exponentialRampToValueAtTime(.0001,when+dur);g.setValueAtTime(0,when+dur+.001)}
+function stamp(voice,when,gain=.014){const g=voice.gain;voice.frequency.setValueAtTime(78,when);voice.frequency.exponentialRampToValueAtTime(48,when+.065);g.setValueAtTime(0,when);g.linearRampToValueAtTime(gain,when+.002);g.exponentialRampToValueAtTime(.0001,when+.08);g.setValueAtTime(0,when+.081)}
 function scheduleTheme(){
  if(document.hidden||!audio||!musicOn)return;
- const tune=nextTune(),quarter=60/tune.bpm,start=audio.currentTime+.05,bassCycle=[tune.root,tune.root+7,tune.root+12,tune.root+7];let t=start,beatIndex=0;
+ const tune=nextTune(),quarter=60/tune.bpm,start=audio.currentTime+.1,end=start+tune.notes.reduce((beats,[,length])=>beats+length,0)*quarter,bassCycle=[tune.root,tune.root+7,tune.root+12,tune.root+7];let t=start,beatIndex=0;
+ // Three continuous voices, rather than hundreds of live/future oscillator nodes.
+ const bus=musicBus,serial=musicPlaybackSerial;
+ const lead=createMusicVoice("triangle",start,end),bassVoice=createMusicVoice("sine",start,end),percussion=createMusicVoice("triangle",start,end,()=>{
+   // A suspended audio clock cannot finish a score or queue another one.
+   if(bus!==musicBus||serial!==musicPlaybackSerial)return;
+   clearTimeout(musicTimer);musicTimer=setTimeout(()=>{if(bus===musicBus&&serial===musicPlaybackSerial)schedulePlaylistItem()},10);
+ });
  eightBitTracksSinceSong++;
  document.getElementById("mute").title=`NOW PLAYING · ${tune.title}`;
  for(const [note,quarters] of tune.notes){
    const dur=quarters*quarter;
    if(note!==null){
-     chip(audio,midiFreq(note-12),t,Math.max(.07,dur*.9),"triangle",.028);
+     chip(lead,midiFreq(note-12),t,Math.max(.07,dur*.9),.028);
      const bass=bassCycle[Math.floor(beatIndex/2)%bassCycle.length];
-     chip(audio,midiFreq(bass-12),t,Math.max(.06,dur*.94),"sine",.016);
+     chip(bassVoice,midiFreq(bass-12),t,Math.max(.06,dur*.94),.016);
    }else{
-     for(let beat=0;beat<quarters;beat++)stamp(audio,t+beat*quarter,beat%2?.009:.011);
+     for(let beat=0;beat<quarters;beat++)stamp(percussion,t+beat*quarter,beat%2?.009:.011);
    }
-   if(note!==null&&Math.floor(beatIndex)%2===0)stamp(audio,t,.0035);
+   if(note!==null&&Math.floor(beatIndex)%2===0)stamp(percussion,t,.0035);
    t+=dur;beatIndex+=quarters;
  }
- clearTimeout(musicTimer);
- musicTimer=setTimeout(schedulePlaylistItem,Math.max(100,(t-audio.currentTime+.03)*1000));
 }
 function finishSungMusic(){if(!sungMusicActive)return;sungMusicActive=false;if(musicOn)musicTimer=setTimeout(schedulePlaylistItem,AUDIO_MIX.REQUIRED_GAP_MS)}
 function playSungMusic(song=SUNG_MUSIC[nextVariant("sung-music",SUNG_MUSIC_PLAYLIST)]){if(state.neighborLevel)return;const serial=++musicPlaybackSerial;sungMusicActive=true;eightBitTracksSinceSong=0;sungMusicAudio.src=song.src;sungMusicAudio.volume=0;document.getElementById("mute").title=`NOW PLAYING · ${song.title}`;Promise.resolve(sungMusicAudio.play()).then(()=>{if(serial!==musicPlaybackSerial)return;rampSungVolume(SUNG_MUSIC_LEVEL*(musicDucked||audioTextActive()?AUDIO_MIX.BACKGROUND:1),.12);if(song===WURST_MUSIC){wurstSongPending=false;wurstSongPlayed=true;wurstTransitioning=false}}).catch(()=>{if(serial!==musicPlaybackSerial)return;if(song===WURST_MUSIC)wurstTransitioning=false;finishSungMusic()})}
-function playWurstSong(){if(state.neighborLevel||document.hidden||amtMusicMuted||!musicOn||!wurstSongPending||wurstTransitioning)return;wurstTransitioning=true;clearTimeout(musicTimer);const oldBus=musicBus;if(oldBus){rampGain(oldBus.gain,0,.12);musicBus=null;setTimeout(()=>oldBus.disconnect(),160)}if(!introMusicFinished)rampIntroVolume(0,.12);if(sungMusicActive)rampSungVolume(0,.12);setTimeout(()=>{if(state.neighborLevel||document.hidden||amtMusicMuted||!musicOn){wurstTransitioning=false;return}musicPlaybackSerial++;stopIntroMusic();sungMusicAudio.pause();sungMusicActive=false;playSungMusic(WURST_MUSIC)},160)}
+function playWurstSong(){if(state.neighborLevel||document.hidden||amtMusicMuted||!musicOn||!wurstSongPending||wurstTransitioning)return;const serial=++musicPlaybackSerial;wurstTransitioning=true;clearTimeout(musicTimer);releaseMusicBus(.12);if(!introMusicFinished)rampIntroVolume(0,.12);if(sungMusicActive)rampSungVolume(0,.12);setTimeout(()=>{if(serial!==musicPlaybackSerial||!wurstTransitioning)return;if(state.neighborLevel||document.hidden||amtMusicMuted||!musicOn){wurstTransitioning=false;return}stopIntroMusic();sungMusicAudio.pause();sungMusicActive=false;playSungMusic(WURST_MUSIC)},160)}
 function queueWurstSong(){if(wurstSongPlayed||wurstSongPending)return;wurstSongPending=true;playWurstSong()}
 function schedulePlaylistItem(){if(document.hidden||!audio||!musicOn||amtMusicMuted||sungMusicActive)return;if(!state.neighborLevel&&forcedTune<0&&eightBitTracksSinceSong>=3){playSungMusic();return}if(!musicBus)musicBus=createMusicBus();scheduleTheme()}
 const MUSIC_UNLOCK_EVENTS=["pointerdown","click","keydown"];
 function removeMusicUnlockListeners(){for(const type of MUSIC_UNLOCK_EVENTS)document.removeEventListener(type,startMusic,true)}
 function startMusic(event){
  if(state.neighborLevel)stopIntroMusic();
- if(document.hidden||!musicOn||amtMusicMuted)return;if(!event&&!introMusicFinished&&introMusicAudio.paused)return;if(event){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(!audio.jwdLecturePaused)audio.resume()}if(wurstSongPending&&!state.neighborLevel){playWurstSong();return}if(!introMusicFinished){introMusicAudio.play().catch(()=>{});return}if(sungMusicActive){removeMusicUnlockListeners();sungMusicAudio.play().catch(()=>{});return}if(musicBus)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(!audio.jwdLecturePaused)audio.resume();musicBus=createMusicBus();removeMusicUnlockListeners();schedulePlaylistItem()
+ if(document.hidden||!musicOn||amtMusicMuted)return;if(!event&&!introMusicFinished&&introMusicAudio.paused)return;if(event){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(!audio.jwdLecturePaused)audio.resume()}if(wurstSongPending&&!state.neighborLevel){playWurstSong();return}if(!introMusicFinished){introMusicAudio.play().catch(()=>{});return}if(sungMusicActive){removeMusicUnlockListeners();sungMusicAudio.play().catch(()=>{});return}if(musicBus)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(!audio.jwdLecturePaused)audio.resume();clearTimeout(musicTimer);musicBus=createMusicBus();removeMusicUnlockListeners();schedulePlaylistItem()
 }
 introMusicAudio.onerror=()=>{introMusicFinished=true;startMusic()};introMusicAudio.onplay=()=>document.getElementById("mute").title="NOW PLAYING · INTRO SONG";introMusicAudio.onended=()=>{introMusicFinished=true;startMusic()};introMusicAudio.addEventListener("playing",removeMusicUnlockListeners,{once:true});for(const type of MUSIC_UNLOCK_EVENTS)document.addEventListener(type,startMusic,{capture:true});startMusic();
 sungMusicAudio.onended=finishSungMusic;sungMusicAudio.onerror=finishSungMusic;
-document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"MUSIC ON":"MUSIC OFF";if(musicOn)startMusic();else{musicPlaybackSerial++;wurstTransitioning=false;clearTimeout(musicTimer);stopIntroMusic();sungMusicAudio.pause();sungMusicActive=false;musicBus?.disconnect();musicBus=null}};
+document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"MUSIC ON":"MUSIC OFF";if(musicOn)startMusic();else{musicPlaybackSerial++;wurstTransitioning=false;clearTimeout(musicTimer);stopIntroMusic();sungMusicAudio.pause();sungMusicActive=false;releaseMusicBus()}};
 document.addEventListener("visibilitychange",()=>{
- if(document.hidden){backgroundWasPlaying=!!musicBus||sungMusicActive||!introMusicAudio.paused;musicPlaybackSerial++;wurstTransitioning=false;clearTimeout(musicTimer);cancelAnimationFrame(introRampFrame);cancelAnimationFrame(sungRampFrame);introRampFrame=sungRampFrame=0;introMusicAudio.pause();sungMusicAudio.pause();musicBus?.disconnect();musicBus=null;for(const source of musicSources){try{source.stop()}catch{}}musicSources.clear()}
+ if(document.hidden){backgroundWasPlaying=!!musicBus||sungMusicActive||!introMusicAudio.paused;musicPlaybackSerial++;wurstTransitioning=false;clearTimeout(musicTimer);cancelAnimationFrame(introRampFrame);cancelAnimationFrame(sungRampFrame);introRampFrame=sungRampFrame=0;introMusicAudio.pause();sungMusicAudio.pause();releaseMusicBus()}
  else if(backgroundWasPlaying){backgroundWasPlaying=false;startMusic({type:"visibilitychange"})}
 });
 const humorPages=[

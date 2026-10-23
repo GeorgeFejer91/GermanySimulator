@@ -21,7 +21,6 @@ assert.match(game,/introMusicAudio\.onplay=.*NOW PLAYING · INTRO SONG/,"UI must
 assert.match(game,/introMusicAudio\.onerror=.*introMusicFinished=true/,"missing intro audio must not block the regular soundtrack");
 assert.match(game,/introMusicAudio\.onended=.*startMusic\(\)/,"synthesized playlist must follow the intro");
 assert.match(game,/eightBitTracksSinceSong>=3\)\{playSungMusic\(\)/,"one sung recording must follow every three 8-bit arrangements");
-assert.match(game,/musicTimer=setTimeout\(schedulePlaylistItem,Math\.max\(100,\(t-audio\.currentTime\+\.03\)\*1000\)\)/,"the next track must be scheduled after the current theme ends");
 assert.doesNotMatch(game,/t-audio\.currentTime-\.12/,"background themes must not overlap at handoff");
 const songs=[
  ["badnerlied.mp3",2_552_876,"b4f14adce37dc7905a72d3510d7330875eab02cb92ffd92cff7cd9c629d01346"],

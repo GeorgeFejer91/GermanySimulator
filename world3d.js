@@ -2,12 +2,12 @@ import {createPoliceSprites,policeTier} from './police-sprites.js?v=20261023-pol
 import {createStreetPortraitDisplay} from './street-character-portrait.js';
 import {modelLoaderWithSignal,loadTextureImage} from './asset-loaders.js?v=20261020-bounded-assets';
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261020-bounded-assets';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261023-realtime-performance';
 import {mouthPaintGlsl,mouthProfileValues,validateMouthProfile} from './buergeramt-mouth-paint.js?v=20261018-mouth-single-exit';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261014-rivulets1';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261014-rivulets1';
 import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
-import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
+import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261023-realtime-performance';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261020-explicit-update';
@@ -16,7 +16,7 @@ import {createBuildingLevels} from './building-levels.js?v=20261020-explicit-upd
 import {createNeighborSprite} from './neighbor-sprites.js?v=20261021-schwabingen-cleanup';
 import {createBillboardGroundProjector} from './billboard-ground.js?v=20261019-complete-development';
 import {createAtlasCharacterMouth} from './atlas-character-mouth.js';
-import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261023-heike-adult';
+import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261023-realtime-performance';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -127,9 +127,9 @@ function showRendererFailure(error){
 
   const box=(w,h,d,m,x,y,z,p=world)=>{const q=new T.Mesh(new T.BoxGeometry(w,h,d),m);q.position.set(x,y,z);p.add(q);return q};
   const plane=(w,d,m,x,z,y=.002)=>{const q=new T.Mesh(new T.PlaneGeometry(w,d),m),tile=m.userData.tileSize;if(tile){const uv=q.geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,(x-w/2+uv.getX(i)*w)/tile,(z-d/2+(1-uv.getY(i))*d)/tile)}q.rotation.x=-Math.PI/2;q.position.set(x,y,z);world.add(q);return q};
-  function staticBoxes(name,material,parts){
+  function staticBoxes(name,material,parts,parent=world){
     if(!parts.length)return;const mesh=new T.InstancedMesh(new T.BoxGeometry(1,1,1),material,parts.length),dummy=new T.Object3D();mesh.name=name;
-    parts.forEach(([x,y,z,w,h,d],i)=>{dummy.position.set(x,y,z);dummy.scale.set(w,h,d);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix)});mesh.computeBoundingSphere();world.add(mesh);
+    parts.forEach(([x,y,z,w,h,d],i)=>{dummy.position.set(x,y,z);dummy.scale.set(w,h,d);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix)});mesh.computeBoundingSphere();parent.add(mesh);
   }
   const rect=(r,m,y=.005)=>plane(r.w*S,r.h*S,m,X(r.x+r.w/2),Z(r.y+r.h/2),y);
   plane(bridge.WORLD.w*S,bridge.WORLD.h*S,M.ground,0,0,0);
@@ -340,6 +340,11 @@ function showRendererFailure(error){
   }
   function stationPlatform(s){
     const g=new T.Group(),length=Math.max(s.w,s.h)*S,depth=Math.min(s.w,s.h)*S,edge=-depth/2,back=depth/2-.52,stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
+    const opaqueBoxes=new Map(),box=(w,h,d,material,x,y,z)=>{
+      if(material.transparent){const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);g.add(mesh);return mesh}
+      if(!opaqueBoxes.has(material))opaqueBoxes.set(material,[]);
+      opaqueBoxes.get(material).push([x,y,z,w,h,d]);
+    };
     const throughRoad=(bridge.vehicleApproaches||[]).find(r=>r.side===s.side&&r.y>=s.y&&r.y+r.h<=s.y+s.h),passHalf=throughRoad?throughRoad.h*S/2:0;
     g.position.set(X(s.x+s.w/2),0,Z(s.y+s.h/2));g.rotation.y=s.side==="west"?Math.PI/2:s.side==="east"?-Math.PI/2:s.side==="south"?Math.PI:0;world.add(g);
     box(length,.3,depth,stone,0,.15,0,g);
@@ -356,6 +361,7 @@ function showRendererFailure(error){
     for(const side of [-1,1]){const x=side*(length/2-1);box(.07,1.9,.07,M.metal,x,1.25,back,g);const sign=label(jwd?"JWD":"AMT-BAHN",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.name="Platform sign / "+s.name;sign.scale.set(2.45,.54,1);sign.position.set(x,2.45,back);g.add(sign)}
     const clockFace=new T.Mesh(new T.CircleGeometry(.26,24),M.cross);clockFace.position.set(-canopy*.58,2.47,back+.58);g.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.27,.03,6,24),M.dark);clockRim.position.copy(clockFace.position);g.add(clockRim);box(.02,.17,.02,M.dark,clockFace.position.x,2.51,clockFace.position.z+.02,g);
     box(.48,1.18,.4,M.metal,canopy*.61,.9,back,g);box(.32,.43,.025,M.dark,canopy*.61,1.16,back+.22,g);
+    for(const [material,parts] of opaqueBoxes)staticBoxes("Station platform / "+s.id,material,parts,g);
   }
   const stationSlots=(bridge.stations||[]).map(state=>{
     const before=new Set(world.children);stationPlatform(state);
@@ -434,10 +440,19 @@ function showRendererFailure(error){
     }
     return localModels.get(url);
   }
+  function staticCityMatrixUpdate(){}
+  function prepareStaticCitySlot(slot){
+    // These owners never animate transforms. Rebuild once when a model replaces its stand-in.
+    if(!["streetlamp","deciduous-tree","garden-shed"].includes(slot.file))return;
+    slot.group.updateWorldMatrix(true,true);
+    slot.viewBounds=new T.Box3().setFromObject(slot.group);
+    slot.group.traverse(node=>{node.updateMatrix();node.matrixAutoUpdate=false});
+    slot.group.updateMatrixWorld=staticCityMatrixUpdate;
+  }
   function installCityModel(group,fallback,file,fit,location=null,prepare=null){
-    const slot={file,group,fallback,model:null};cityAssetSlots.push(slot);if(!modelLoader)return;
+    const slot={file,group,fallback,model:null};cityAssetSlots.push(slot);prepareStaticCitySlot(slot);if(!modelLoader)return;
     return queueCityModel(()=>location?{x:X(location.x),z:Z(location.y)}:{x:group.position.x,z:group.position.z},Math.hypot(fit.x,fit.z)/2,async({signal}={})=>{
-      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file),signal);if(signal?.aborted||!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);prepare?.(model);model.name=file;group.add(model);slot.model=model;fallback.visible=false;return true}
+      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file),signal);if(signal?.aborted||!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);prepare?.(model);model.name=file;group.add(model);slot.model=model;fallback.visible=false;prepareStaticCitySlot(slot);return true}
       catch(error){console.warn("Keeping procedural city asset "+file,error);return false}
     },slot);
   }
@@ -1425,7 +1440,7 @@ function showRendererFailure(error){
     return accepted;
   }
   function hasStreetReaction(actor){
-    return !!readyStreetReactionView(actor)&&hasPaintedStreetReaction(actor);
+    return hasPaintedStreetReaction(actor)&&!!readyStreetReactionView(actor);
   }
   function releaseStreetPaint(root){
     const view=root.userData.streetPaintView;if(!view)return;
@@ -1721,7 +1736,7 @@ function showRendererFailure(error){
   const presidentName=amtLabel("FRANK-WALTER STEINMEIER",768,128,"#e1c174","#17130c",.75),presidentNameplate=new T.Mesh(new T.PlaneGeometry(1.55,.16),new T.MeshBasicMaterial({map:presidentName.texture}));
   presidentNameplate.position.set(0,-1.06,.14);presidentFrame.add(presidentNameplate);
   function amtPaintMaterial(height){
-    const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide});
+    const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide,forceSinglePass:true});
     const breath={value:0};material.userData.breath=breath;
     material.onBeforeCompile=shader=>{shader.uniforms.amtBreath=breath;shader.uniforms.amtBodyHeight={value:height};
       // Continuous chest/shoulder motion, with the lower body and sole pivot planted.
@@ -1745,7 +1760,7 @@ function showRendererFailure(error){
     texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
     texture.minFilter=texture.magFilter=T.LinearFilter;
     const loading=(bridge.queueAssetLoad?bridge.queueAssetLoad(load,{background:required&&officePreparationBackground,signal:request.signal}):load()).catch(error=>{onError?.(error);return null});
-    if(required){officeAssetTotal++;officeAssetPending++;loading.then(result=>{if(!result)officeAssetFailures++}).finally(()=>officeAssetPending--)}
+    if(required){officeAssetTotal++;officeAssetPending++;loading.then(result=>{if(!result)officeAssetFailures++}).finally(officeAssetSettled)}
     return texture;
   }
   function amtUv(actor,col,row,cols,rows){
@@ -1794,8 +1809,29 @@ function showRendererFailure(error){
   amtPaintedProp(1,1.05,2.75,6.8,1.4,-5.55);
   amtPaintedProp(2,.65,1.45,-6.65,2.58,-10.27);
   amtPaintedProp(3,1.15,2.85,7.55,1.55,.2,-Math.PI/2);
-  let amtImagesRequested=false,officeDetail=null,officeAssetPending=0,officeAssetFailures=0,officeAssetTotal=0,officePreparationBackground=false;
+  let amtImagesRequested=false,officeDetail=null,officeAssetPending=0,officeAssetFailures=0,officeAssetTotal=0,officePreparationBackground=false,officeShadersRequested=false;
   const amtStationaryDetails=new Map();
+  async function compileAmtPaint(root,fog=root.material?.fog){
+    const compile=reflection=>{
+      if(root!==amtScene&&!root.parent)throw new DOMException('Retired office paint','AbortError');
+      const material=root.material,previous=material?.fog,mask=amtCamera.layers.mask;if(material)material.fog=fog;
+      // Light counts also participate in Basic-material program keys. Match
+      // the real room, actor, and reflected-actor passes, then restore now.
+      amtCamera.layers.mask=root===amtScene?1:reflection?6:2;
+      try{return reflection?amtPotatoMirror.prepare(renderer,root,amtCamera,amtScene):renderer.compileAsync(root,amtCamera,amtScene)}
+      finally{if(material)material.fog=previous;amtCamera.layers.mask=mask}
+    };
+    await compile(false);await compile(true);
+  }
+  function officeAssetSettled(){
+    officeAssetPending--;
+    if(officeAssetPending||officeShadersRequested)return;
+    officeShadersRequested=true;officeAssetTotal++;officeAssetPending++;
+    const prepare=async()=>{await compileAmtPaint(amtScene);await compileAmtPaint(amtActorEnvironment)};
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(prepare,{background:officePreparationBackground}):prepare())
+      .catch(error=>{officeAssetFailures++;console.warn('Bürgeramt shader preparation unavailable',error)})
+      .finally(()=>officeAssetPending--);
+  }
   function loadAmtImages({background=false}={}){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
     officeAssetTotal++;officeAssetPending++;
@@ -1804,7 +1840,7 @@ function showRendererFailure(error){
       if(!response.ok)throw new Error('Lip profiles unavailable: '+response.status);
       const profiles=await response.json();if(!signal?.aborted)window.GermanyAmtLips.setProfiles(profiles,validateMouthProfile);
     };
-    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadLipProfiles,{background:officePreparationBackground}):loadLipProfiles()).catch(error=>{officeAssetFailures++;console.warn('Bürgeramt painted lip profiles unavailable',error)}).finally(()=>officeAssetPending--);
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadLipProfiles,{background:officePreparationBackground}):loadLipProfiles()).catch(error=>{officeAssetFailures++;console.warn('Bürgeramt painted lip profiles unavailable',error)}).finally(officeAssetSettled);
     amtTexture('./assets/buergeramt/mirror/potato-skin.webp?v=20261013-live-mirror',texture=>amtPotatoMirror.setSkinTexture(texture),undefined,true);
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetTotal++;officeAssetPending++;
@@ -1816,7 +1852,7 @@ function showRendererFailure(error){
       for(const mesh of plainDeskSupplies)mesh.visible=false;
       window.BuergeramtLevel?.setOfficeObstacles(detail.obstacles);
     });
-    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadDetail,{background:officePreparationBackground}):loadDetail()).catch(error=>{officeAssetFailures++;console.warn("Bürgeramt office detail unavailable",error)}).finally(()=>officeAssetPending--);
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadDetail,{background:officePreparationBackground}):loadDetail()).catch(error=>{officeAssetFailures++;console.warn("Bürgeramt office detail unavailable",error)}).finally(officeAssetSettled);
     const textures=new Map();
     for(const actor of amtCharacters){
       let texture=textures.get(actor.url);
@@ -2079,7 +2115,7 @@ function showRendererFailure(error){
     const transparent=fading||original.transparent;if(material.transparent!==transparent){material.transparent=transparent;material.needsUpdate=true}
     material.depthWrite=fading?false:original.depthWrite;
   }}
-  const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,actorLayer:1,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
+  const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,camera:amtCamera,compilePaint:compileAmtPaint,actorLayer:1,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
   let amtOmenSplat=null,amtOmenRequest=null,amtOmenVisit=-1,amtOmenSkipped=false,amtOmenFailure="";
   function clearAmtOmenSplat(){
     amtOmenRequest?.abort();amtOmenRequest=null;
@@ -2124,7 +2160,10 @@ function showRendererFailure(error){
   addEventListener("pagehide",()=>{amtMouthSplat?.dispose();amtMouthSplat=null},{once:true});
   function updateAmtMouth(level,now){
     const speech=level.lipSpeech,actor=speech?.actor&&([...amtMoving,...amtCharacters].find(item=>item.id===speech.actor||item.lipId===speech.actor||item.performance&&speech.actor==="clerk-"+item.counter));
-    if(!amtMouthSplat&&actor&&speech.active&&window.GermanyAmtLips.displayedMouthProfile(actor))amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl,mouthProfileValues);
+    if(!amtMouthSplat&&actor&&speech.active&&window.GermanyAmtLips.displayedMouthProfile(actor))amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl,mouthProfileValues,(mesh,fog)=>{
+      const prepare=()=>compileAmtPaint(mesh,fog);
+      return bridge.queueAssetLoad?bridge.queueAssetLoad(prepare):prepare();
+    });
     amtMouthSplat?.update(actor||null,speech,now);
   }
   let lastCall="",amtHiDpi=false;
@@ -2254,6 +2293,7 @@ function showRendererFailure(error){
   function visibleGroupMatrixUpdate(force){if(this.visible)T.Object3D.prototype.updateMatrixWorld.call(this,force)}
   function updateGroupVisibility(){
     camera.updateMatrixWorld();renderViewMatrix.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);renderFrustum.setFromProjectionMatrix(renderViewMatrix);
+    for(const slot of cityAssetSlots)if(slot.viewBounds)slot.group.visible=renderFrustum.intersectsBox(slot.viewBounds);
     forEachStreetBody((_actor,root)=>{
       const paint=root.userData.personFallback;if(!paint)return;
       if(paint.userData.streetFallbackHeight){

@@ -12,6 +12,17 @@ function mirrorRenderer(){
  return{target:null,autoClear:true,xr:{enabled:false},shadowMap:{autoUpdate:true},scissorTest:false,
   getDrawingBufferSize:v=>v.set(1280,800),getRenderTarget(){return this.target},setRenderTarget(t){this.target=t},getViewport:v=>v.copy(viewport),setViewport:v=>viewport.copy(v),getScissor:v=>v.copy(scissor),setScissor:v=>scissor.copy(v),getScissorTest(){return this.scissorTest},setScissorTest(v){this.scissorTest=v},clear(){}};
 }
+test('native preparation covers the owned reflection target and restores renderer state before awaiting',async()=>{
+ const scene=new THREE.Scene(),mirror=harness().window.BuergeramtStory.potatoMirror,effect=createPotatoMirror({THREE,scene,mirror}),renderer=mirrorRenderer(),camera=new THREE.PerspectiveCamera(),root=new THREE.Mesh();
+ const original=new THREE.WebGLRenderTarget(19,23);renderer.target=original;renderer.setViewport(new THREE.Vector4(2,3,17,18));renderer.setScissor(new THREE.Vector4(4,5,8,9));renderer.scissorTest=true;
+ let release,calls=0;const gate=new Promise(resolve=>{release=resolve});
+ renderer.compileAsync=(mesh,view,lights)=>{calls++;assert.equal(mesh,root);assert.equal(view,camera);assert.equal(lights,scene);assert.notEqual(renderer.target,original);assert.equal(renderer.target.texture.type,THREE.HalfFloatType);return gate};
+ try{
+  const pending=effect.prepare(renderer,root,camera,scene);assert.equal(calls,1);assert.equal(renderer.target,original);assert.equal(renderer.scissorTest,true);assert.deepEqual(renderer.getViewport(new THREE.Vector4()).toArray(),[2,3,17,18]);assert.deepEqual(renderer.getScissor(new THREE.Vector4()).toArray(),[4,5,8,9]);assert.equal(effect.inspect().reflection.frames,0);
+  release();await pending;
+  renderer.compileAsync=()=>{throw Error('compile failed')};assert.throws(()=>effect.prepare(renderer,root,camera,scene),/compile failed/);assert.equal(renderer.target,original);assert.equal(renderer.scissorTest,true);
+ }finally{release();effect.dispose();original.dispose();root.geometry.dispose();root.material.dispose()}
+});
 
 test('the reflected-camera proxy stays at the real player position, including impossible and partial self-image views',()=>{
  const mirror=harness().window.BuergeramtStory.potatoMirror;

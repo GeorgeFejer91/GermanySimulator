@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261020-bounded-assets';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261023-realtime-performance';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 
@@ -211,7 +211,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
           // would duplicate its silhouette as a soft halo or ghost trail.
           // The low-resolution cloud has no oral cavity. During speech keep
           // the articulated original sprite until native mouth paint is ready.
-          strength.value=anchorOpacity>0||state.speaking?0:1;
+          // A temporarily missing native pair keeps the existing full-detail
+          // sprite. Do not compile a transient packed cloud just for that gap.
+          strength.value=paint||state.speaking?0:1;
           const color=sourceMesh.material?.color,paintBreath=sourceMesh.material?.userData?.breath?.value??0;
           const key=[sample.segment,sample.u,anchorOpacity,state.speaking,...(state.lipShape||[]),reducedMotion,atmosphere,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.x,sourceMesh.scale.y,sourceMesh.scale.z,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
           if(key!==lastKey){

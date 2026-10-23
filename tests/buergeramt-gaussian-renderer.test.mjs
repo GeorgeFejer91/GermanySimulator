@@ -3,10 +3,27 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {sampleArc,sampleOwnedTrajectory,validateGaussianManifest,unpackGaussianRecords,createGaussianActor} from '../buergeramt-gaussian-animation.js';
+import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 
 const manifest=name=>JSON.parse(readFileSync(new URL(`../assets/buergeramt/animation/${name}.json`,import.meta.url)));
 const clerk=manifest('clerk'),regular=manifest('aktenkurier');
 const near=(actual,wanted)=>assert.ok(Math.abs(actual-wanted)<1e-6,`${actual} != ${wanted}`);
+test('pending native painting states retain the source sprite without starting a temporary cloud',async()=>{
+ const originalFetch=globalThis.fetch,originalBitmap=globalThis.createImageBitmap,members=new Set();
+ globalThis.fetch=async url=>{const bytes=readFileSync(new URL(url));return{ok:true,json:async()=>JSON.parse(bytes.toString()),arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}};
+ globalThis.createImageBitmap=async()=>({width:1024,height:832,close(){}});
+ class SplatMesh extends THREE.Object3D{initialized=Promise.resolve();dispose(){}}
+ const dyno={Gsplat:'Gsplat',Dyno:class{apply(){return{gsplat:{}}}},unindentLines:x=>x,dynoFloat:value=>({value}),dynoVec3:value=>({value}),dynoSampler2D:x=>x,dynoBlock:(_a,_b,build)=>build({gsplat:{}})};
+ const owner={SplatMesh,dyno,attach:mesh=>members.add(mesh),retire(mesh,cleanup){members.delete(mesh);cleanup()},attachPaint:mesh=>members.add(mesh),retirePaint:mesh=>members.delete(mesh),inspect:()=>({ready:true,startedUpdates:1,completedUpdates:1,activeSplats:7680})};
+ let actor;
+ try{
+  actor=await createGaussianActor({THREE,owner,manifestUrl:new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)});
+  const source=new THREE.Mesh(new THREE.PlaneGeometry(2,1.82),new THREE.MeshBasicMaterial()),state={arc:'stamp',phase:.4,pose:'raised'};
+  assert.equal(actor.update(state,source),false,'source owns paint while the requested pair is unavailable');
+  assert.equal(actor.inspect().cloudVisible,false,'a native actor must not compile a temporary packed-cloud variant');
+  await actor.settle();actor.update(state,source);assert.equal(actor.inspect().anchor.visible,true);assert.equal(actor.inspect().cloudVisible,false);
+ }finally{actor?.dispose();globalThis.fetch=originalFetch;globalThis.createImageBitmap=originalBitmap}
+});
 
 test('clerk arcs traverse authored segments linearly and reverse without intermediate holds',()=>{
  const first=sampleArc(clerk,{arc:'raise',phase:0,pose:'ready'});

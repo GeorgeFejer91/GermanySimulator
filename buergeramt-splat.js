@@ -31,7 +31,7 @@ export function omenSplatPose(omen,reducedMotion=false){
   };
 }
 
-export async function createAmtSplatOwner({THREE,renderer,scene,actorLayer=0,signal,sparkModule,nowMs=()=>performance.now()}){
+export async function createAmtSplatOwner({THREE,renderer,scene,camera,compilePaint,actorLayer=0,signal,sparkModule,nowMs=()=>performance.now()}){
   const {SparkRenderer,SplatMesh,dyno}=sparkModule??await import('./assets/vendor/spark/2.3.1/spark.module.js');
   signal?.throwIfAborted();
   const spark=new SparkRenderer({renderer,autoUpdate:false,enableLod:false,enableDriveLod:false,enableLodFetching:false,
@@ -60,6 +60,18 @@ export async function createAmtSplatOwner({THREE,renderer,scene,actorLayer=0,sig
   const owner={
     spark,SplatMesh,dyno,
     attachPaint(mesh){if(disposed||failure)throw new Error('Bürgeramt paint owner unavailable');mesh.layers?.set(actorLayer);paints.add(mesh);scene.add(mesh)},
+    async preparePaint(mesh){
+      if(disposed||failure)throw new Error('Bürgeramt paint owner unavailable');
+      const fog=mesh.material.fog;
+      const compile=()=>compilePaint?compilePaint(mesh):renderer.compileAsync?.(mesh,camera,scene);
+      try{
+        await compile();
+        // The same actor becomes fog-exempt during its isolated encounter.
+        // Prepare that exact variant too, while its original sprite owns view.
+        if(!disposed&&paints.has(mesh)&&fog){mesh.material.fog=false;mesh.material.needsUpdate=true;await compile()}
+      }finally{mesh.material.fog=fog;mesh.material.needsUpdate=true}
+      if(disposed||!paints.has(mesh))throw new DOMException('Retired office paint','AbortError');
+    },
     retirePaint(mesh){paints.delete(mesh);mesh.visible=false;scene.remove(mesh);if(!paints.size)paintDepth=null},
     withReflectedView(camera,draw){
       const prior=reflectedPaintOnly,visible=spark.visible,poses=[...paints].filter(mesh=>mesh.visible).map(mesh=>[mesh,mesh.rotation.clone()]);

@@ -10,14 +10,14 @@ function fn(name){
  assert.ok(start>=0,name);return source.slice(start,next<0?source.length:next);
 }
 function fixture(){
- const h=pickupHarness(),nodes=new Map(),events=[],scheduled=[];
+ const h=pickupHarness(),nodes=new Map(),events=[],scheduled=[],voices=[];
  const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,title:'',classList:{remove:value=>events.push(['remove',id,value])}});return nodes.get(id)};
- Object.assign(h,{window:{},AUDIO_CLASS:{BACKGROUND:"background-music"},document:{hidden:false,getElementById:node},musicOn:true,musicTimer:0,musicPlaybackSerial:0,sungMusicActive:true,wurstTransitioning:true,musicBus:{disconnect:()=>events.push('disconnect')},musicSources:new Set([{stop:()=>events.push('stop-source')}]),
+ Object.assign(h,{window:{},AUDIO_CLASS:{BACKGROUND:"background-music"},document:{hidden:false,getElementById:node},musicOn:true,musicTimer:0,musicPlaybackSerial:0,sungMusicActive:true,wurstTransitioning:true,musicBus:{gain:{},disconnect:()=>events.push('disconnect')},musicSources:new Set([{stop:()=>events.push('stop-source')}]),
   clearTimeout:()=>{},setTimeout:(callback,delay)=>{scheduled.push({callback,delay});return scheduled.length},stopIntroMusic:()=>events.push('stop-intro'),sungMusicAudio:{pause:()=>events.push('pause-sung')},startMusic:()=>events.push('start-music'),updateHud:()=>events.push('hud'),stopPoliceChaseLoop:()=>events.push('stop-siren'),violationAlert:{},toast:Object.assign(()=>events.push('toast'),{t:0}),
   audio:{currentTime:0,createGain:()=>({gain:{value:0},connect:target=>target}),createBiquadFilter:()=>({frequency:{value:0},Q:{value:0},connect(){}})},masterOutput:()=>({}),audioTextActive:()=>false,musicDucked:false,amtMusicMuted:false,MUSIC_LEVEL:.4,INTRO_MUSIC_LEVEL:.7,SUNG_MUSIC_LEVEL:.7,SOUND_EFFECT_LEVEL:.8,AUDIO_MIX:{BACKGROUND:.22,ATTACK_SECONDS:.12,RELEASE_SECONDS:.4},
-  rampIntroVolume:()=>{},rampSungVolume:()=>{},rampGain:(param,value)=>{param.value=value},soundEffectBus:{gain:{}},forcedTune:-1,currentTune:-1,eightBitTracksSinceSong:12,MUSIC_PLAYLIST:[0,1],nextVariant:()=>0,rememberVariant:()=>{},chip:()=>{},stamp:()=>{},midiFreq:note=>note,playSungMusic:()=>events.push('sung'),jwd:{allocated:true,tour:null,met:new Set()},jwdLane:{x:0,y:0,w:100,h:100}});
- vm.runInContext(source.slice(source.indexOf('const erikaA=['),source.indexOf('state.neighborLevel=document.'))+['setNeighborLevelActive','updateLawRelease','currentMusicLevel','applyAudioDucking','createMusicBus','nextTune','scheduleTheme','schedulePlaylistItem','neighborActivityActive','citySpeechAllowed','wanted','spawnPolice','arrestPlayer','softWarn','violationAlert','useLawPower','policeSirenCars'].map(fn).join('\n'),h);
- return {h,nodes,events,scheduled};
+  rampIntroVolume:()=>{},rampSungVolume:()=>{},rampGain:(param,value)=>{param.value=value},soundEffectBus:{gain:{}},forcedTune:-1,currentTune:-1,eightBitTracksSinceSong:12,MUSIC_PLAYLIST:[0,1],nextVariant:()=>0,rememberVariant:()=>{},createMusicVoice(type,start,end,finished){const voice={type,start,end,finished};voices.push(voice);return voice},chip:()=>{},stamp:()=>{},midiFreq:note=>note,playSungMusic:()=>events.push('sung'),jwd:{allocated:true,tour:null,met:new Set()},jwdLane:{x:0,y:0,w:100,h:100}});
+ vm.runInContext(source.slice(source.indexOf('const erikaA=['),source.indexOf('state.neighborLevel=document.'))+['releaseMusicBus','setNeighborLevelActive','updateLawRelease','currentMusicLevel','applyAudioDucking','createMusicBus','nextTune','scheduleTheme','schedulePlaylistItem','neighborActivityActive','citySpeechAllowed','wanted','spawnPolice','arrestPlayer','softWarn','violationAlert','useLawPower','policeSirenCars'].map(fn).join('\n'),h);
+ return {h,nodes,events,scheduled,voices};
 }
 
 test('neighbor entry clears enforcement, cancels old music and leaves notices reusable',()=>{
@@ -43,9 +43,9 @@ test('neighbor enforcement cannot raise stars, arrest, warn, spawn or dispatch a
 });
 
 test('anthem alone repeats beyond the sung-song threshold and keeps quieter dialogue ducking',()=>{
- const {h,scheduled,events,nodes}=fixture();h.state.neighborLevel=true;h.sungMusicActive=false;h.musicBus=null;
- for(let i=0;i<6;i++)h.schedulePlaylistItem();
- assert.equal(scheduled.length,6);assert.ok(scheduled.every(item=>item.delay>1000));
+ const {h,scheduled,events,nodes,voices}=fixture();h.state.neighborLevel=true;h.sungMusicActive=false;h.musicBus=null;
+ for(let i=0;i<6;i++){h.schedulePlaylistItem();assert.equal(scheduled.length,i,'wall time alone cannot end the anthem');assert.equal(voices.length,(i+1)*3);voices.at(-1).finished()}
+ assert.equal(scheduled.length,6);assert.ok(scheduled.every(item=>item.delay===10));
  assert.ok(nodes.get('mute').title.includes('Deutschlandlied'));assert.equal(events.includes('sung'),false);
  assert.equal(h.currentTune,1);assert.equal(h.musicBus.gain.value,.14);
  h.musicDucked=true;h.applyAudioDucking();assert.equal(h.musicBus.gain.value,.14*.22);

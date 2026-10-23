@@ -428,8 +428,8 @@ export function tickStreetSimulation(actor,dt,options){
 }
 
 export function hasStreetReaction(actor){
-  if(characters[resolveStreetCharacter(actor)]?.standingOnly===true)return false;
-  const state=playbackByActor.get(actor);return !!(state?.current||state?.pending);
+  const state=playbackByActor.get(actor);if(!state?.current&&!state?.pending)return false;
+  return characters[resolveStreetCharacter(actor)]?.standingOnly!==true;
 }
 
 function validReactionSequence(person,sequence){

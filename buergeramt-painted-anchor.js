@@ -30,7 +30,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   for(const pair of manifest.segments){
     if(pair.paint_warp_gain!==undefined&&(!Number.isFinite(pair.paint_warp_gain)||pair.paint_warp_gain<0||pair.paint_warp_gain>1))throw new Error('Invalid painted warp gain');
   }
-  const cache=new Map(),failures=new Map(),controller=new AbortController();let disposed=false,wanted=[],pending=null,selected=null,opacity=0;
+  const cache=new Map(),failures=new Map(),controller=new AbortController();let disposed=false,wanted=[],pending=null,preparing=null,selected=null,opacity=0;
   const geometry=new THREE.PlaneGeometry(manifest.canvas_xy[0]/manifest.canvas_xy[1],1);
   geometry.setAttribute('anchorSlot',new THREE.Float32BufferAttribute(new Float32Array(4),1));
   let patches=null;
@@ -42,7 +42,9 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
     patches.setAttribute('anchorSlot',new THREE.InstancedBufferAttribute(Float32Array.from({length:paired.count},(_,i)=>i),1));
     patches.instanceCount=paired.count;
   }
-  const material=new THREE.MeshBasicMaterial({transparent:true,alphaTest:.0001,depthWrite:false,side:THREE.DoubleSide});
+  // Every support is coplanar. One double-sided pass preserves its paint and
+  // avoids compiling/drawing separate front and back variants of each actor.
+  const material=new THREE.MeshBasicMaterial({transparent:true,alphaTest:.0001,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true});
   const breath={value:0},mouth={value:0},lipShape={value:new THREE.Vector4()},mouthA={value:new THREE.Vector4()},mouthB={value:new THREE.Vector4()},mapB={value:null},mix={value:0},phase={value:0},segment={value:0},mode={value:0},effect={value:0};material.userData.breath=breath;
   const speaking={value:0};
   const mouthAngleA={value:0},mouthAngleB={value:0};
@@ -181,9 +183,23 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
     },
     async settle(){for(let n=0;n<3;n++){pump();if(!pending)break;await pending}},
     inspect(){return{state:selected,pair:manifest.segments[segment.value],mouthA:[mouthA.value.x,mouthA.value.y,mouthA.value.z,mouthA.value.w],mouthB:[mouthB.value.x,mouthB.value.y,mouthB.value.z,mouthB.value.w],opacity:mesh.visible?opacity:0,textureMix:mix.value,phase:phase.value,lipShape:[lipShape.value.x,lipShape.value.y,lipShape.value.z,lipShape.value.w],technique:mode.value?'native-texture-gaussians':'native-anchor-fallback',splatCount:mode.value?paired.count:0,visible:!disposed&&mesh.visible,resident:cache.size,pending:!!pending,failures:Object.fromEntries(failures),dimensions:mesh.visible?[spec.frames[states[0]].width,spec.frames[states[0]].height]:null}},
-    dispose(){if(disposed)return;disposed=true;controller.abort();signal?.removeEventListener?.('abort',onAbort);mesh.visible=false;mesh.userData.anchorActive=false;owner.retirePaint(mesh);geometry.dispose();patches?.dispose();material.dispose();for(const entry of cache.values())free(entry);cache.clear()},
+    dispose(){if(disposed)return;disposed=true;controller.abort();signal?.removeEventListener?.('abort',onAbort);mesh.visible=false;mesh.userData.anchorActive=false;owner.retirePaint(mesh);geometry.dispose();patches?.dispose();if(preparing)preparing.then(()=>material.dispose(),()=>material.dispose());else material.dispose();for(const entry of cache.values())free(entry);cache.clear()},
   };
   signal?.addEventListener?.('abort',onAbort,{once:true});
   wanted=[manifest.segments[0].from,manifest.segments[0].to];
-  try{for(const id of wanted)await load(id);signal?.throwIfAborted?.();return api}catch(error){api.dispose();throw error}
+  try{
+    for(const id of wanted)await load(id);
+    signal?.throwIfAborted?.();
+    material.map=cache.get(wanted[0]).texture;mapB.value=cache.get(wanted[1]).texture;
+    mesh.geometry=patches??geometry;
+    // Keep the original sprite until the actual mapped shader is ready. This
+    // remains inside the shared bounded preparation job, never the draw pass.
+    // Native readiness polling still owns this material's program after the
+    // view retires. Keep only that material alive until this exact wait ends.
+    preparing=Promise.resolve(owner.preparePaint?.(mesh));
+    try{await preparing}finally{preparing=null}
+    signal?.throwIfAborted?.();
+    mesh.geometry=geometry;
+    return api;
+  }catch(error){api.dispose();throw error}
 }

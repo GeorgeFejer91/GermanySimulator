@@ -78,6 +78,36 @@ function rig(){
  const source={geometry:{parameters:{height:1.9}},scale:{y:1.2},position:{x:3,y:1.14,z:-7},quaternion:{},material:{color:{r:.8,g:.7,b:.6},userData:{breath:{value:.2}}}};
  return{THREE,owner,source,disposed,closed,members};
 }
+test('native paint stays hidden and preparation holds admission until its real material is compiled',async()=>{
+ const oldFetch=globalThis.fetch,oldBitmap=globalThis.createImageBitmap,r=rig();let release,compiled=0,finished=false;
+ const gate=new Promise(resolve=>{release=resolve});
+ globalThis.fetch=async url=>({ok:true,arrayBuffer:async()=>{const bytes=readFileSync(new URL(url));return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}});
+ globalThis.createImageBitmap=async()=>({width:1024,height:832,close(){r.closed.push(this)}});
+ r.owner.preparePaint=async mesh=>{compiled++;assert.equal(mesh.visible,false);assert.ok(mesh.material.map?.image);assert.equal(mesh.material.forceSinglePass,true);assert.equal(mesh.geometry.instanceCount,256);await gate};
+ let paint;
+ try{
+  const preparing=createPaintedAnchor({...r,manifest,paired:{count:256,rows:1,stride:5,textures:[{},{},{}]},manifestUrl:new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)}).then(value=>{finished=true;return value});
+  await new Promise(resolve=>setTimeout(resolve,10));assert.equal(compiled,1,'compile the actual mapped native patch before handover');assert.equal(finished,false,'existing sprite owns the whole pending interval');
+  release();paint=await preparing;paint.update({segment:0,u:0,arc:'raise'},r.source,true);assert.equal(paint.inspect().visible,true);
+  await paint.settle();assert.equal(compiled,1,'ordinary pose changes do not recompile');
+ }finally{release();paint?.dispose();globalThis.fetch=oldFetch;globalThis.createImageBitmap=oldBitmap}
+});
+test('retiring a pending shader preparation cannot admit or leak its paintings',async()=>{
+ for(const rejected of [false,true]){
+ const oldFetch=globalThis.fetch,oldBitmap=globalThis.createImageBitmap,r=rig(),signal=new AbortController();let release,started=false;
+ const gate=new Promise((resolve,reject)=>{release=()=>rejected?reject(new DOMException('Retired paint','AbortError')):resolve()});
+ globalThis.fetch=async url=>({ok:true,arrayBuffer:async()=>{const bytes=readFileSync(new URL(url));return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}});
+ globalThis.createImageBitmap=async()=>({width:1024,height:832,close(){r.closed.push(this)}});
+ let materialFrees=0;r.owner.preparePaint=async mesh=>{started=true;mesh.material.dispose=()=>{materialFrees++};await gate};
+ try{
+  const preparing=createPaintedAnchor({...r,manifest,manifestUrl:new URL('../assets/buergeramt/animation/clerk.json',import.meta.url),signal:signal.signal});
+  const retirement=assert.rejects(preparing,{name:'AbortError'});
+  await new Promise(resolve=>setTimeout(resolve,10));assert.equal(started,true);signal.abort();assert.equal(r.members.size,0);assert.equal(r.closed.length,2);
+  assert.equal(materialFrees,0,'native compile must retain its program until its readiness poll settles');
+  release();await retirement;assert.equal(r.members.size,0);assert.equal(r.closed.length,2);assert.equal(materialFrees,1);
+ }finally{release();globalThis.fetch=oldFetch;globalThis.createImageBitmap=oldBitmap}
+ }
+});
 test('paint keeps registered canvas aspect/floor, bounds residency and cancels late decode',async()=>{
  const oldFetch=globalThis.fetch,oldBitmap=globalThis.createImageBitmap,r=rig();let bitmapGate=null,decodes=0,jobs=0;
  globalThis.fetch=async url=>({ok:true,arrayBuffer:async()=>{const bytes=readFileSync(new URL(url));return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}});

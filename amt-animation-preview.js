@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261010-liquid';
-import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261018-mouth-single-exit';
+import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261023-realtime-performance';
+import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261023-realtime-performance';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
 const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
 const names={knick:'Frau Knick',aktenkurier:'Aktenkurier',archivbotin:'Archivbotin',formularsammler:'Formularsammler',nummernfluesterer:'Nummernflüsterer',nachtschichtmelderin:'Nachtschichtmelderin',pfandarchitektin:'Pfandarchitektin',kopiependler:'Kopiependler',warteschlangenpoetin:'Warteschlangenpoetin',renter:'Konrad Wohnungszettel',parent:'Mechthild Elternbogen',pensioner:'Wolfram Rentenbescheid'};
@@ -11,7 +11,7 @@ const manifest=await response.json(),duration=id==='clerk'?manifest.arcs.reduce(
 const view=$('view'),renderer=new THREE.WebGLRenderer({antialias:false});renderer.outputColorSpace=THREE.SRGBColorSpace;view.append(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x66685f);
 const camera=new THREE.PerspectiveCamera(43,1,.1,50),signal=new AbortController(),reduced=matchMedia('(prefers-reduced-motion:reduce)');
-const owner=await createAmtSplatOwner({THREE,renderer,scene,signal:signal.signal});
+const owner=await createAmtSplatOwner({THREE,renderer,scene,camera,signal:signal.signal});
 const variant=matchMedia('(max-width:700px)').matches?'mobile':'desktop';
 const actor=await createGaussianActor({THREE,owner,manifestUrl,variant,signal:signal.signal});
 const source=new THREE.Mesh(new THREE.PlaneGeometry(3.4*manifest.canvas_xy[0]/832,3.4));source.position.y=1.7;

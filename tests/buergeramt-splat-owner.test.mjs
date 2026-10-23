@@ -21,10 +21,20 @@ async function fixture(actorLayer=0){
   dispose(){this.disposals++}
  }
  const dyno={Gsplat:'Gsplat',dynoFloat:value=>({value}),dynoVec2:value=>({value}),dynoBlock:()=>({})};
- const renderer={setTransparentSort(value){this.sort=value}};
- const owner=await createAmtSplatOwner({THREE:{},renderer,scene,actorLayer,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
- return{owner,renderer,scene,members,jobs,cameras,SplatMesh,setTime:value=>time=value};
+ const renderer={setTransparentSort(value){this.sort=value}},camera={name:'office-camera'};
+ const owner=await createAmtSplatOwner({THREE:{},renderer,scene,camera,actorLayer,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
+ return{owner,renderer,scene,camera,members,jobs,cameras,SplatMesh,setTime:value=>time=value};
 }
+test('paint preparation uses the existing native renderer and office scene, rejecting retirement',async()=>{
+ const f=await fixture(1),gate=deferred(),mesh={visible:false,material:{fog:true}};let calls=0;
+ f.owner.attachPaint(mesh);
+ const variants=[];f.renderer.compileAsync=(root,camera,scene)=>{calls++;variants.push(root.material.fog);assert.equal(root,mesh);assert.equal(camera,f.camera);assert.equal(scene,f.scene);assert.equal(root.visible,false);return gate.promise};
+ let finished=false;const ready=f.owner.preparePaint(mesh).then(()=>{finished=true});
+ await Promise.resolve();assert.equal(calls,1);assert.equal(finished,false);gate.resolve();await ready;assert.deepEqual(variants,[true,false]);assert.equal(mesh.material.fog,true);
+ const pending=deferred();f.renderer.compileAsync=()=>pending.promise;
+ const retired=f.owner.preparePaint(mesh);f.owner.retirePaint(mesh);pending.resolve();await assert.rejects(retired,{name:'AbortError'});
+ await f.owner.dispose();
+});
 
 test('secondary mirror views adapt sorting without replacing the main GPU update camera',async()=>{
  const f=await fixture(1),main={name:'main'},mirror={name:'mirror'};f.owner.attach(new f.SplatMesh());

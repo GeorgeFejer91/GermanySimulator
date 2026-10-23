@@ -98,6 +98,19 @@ export function createPotatoMirror({THREE:T,scene,mirror,mobile=false}){
   skin.needsUpdate=rootSkin.needsUpdate=true;
  }
  function releaseTarget(){if(target){target.dispose();target=null;glass.uniforms.reflection.value=null}lastCapture=-Infinity;capturedView=null}
+ function ensureTarget(width,height){
+  if(!target){target=new T.WebGLRenderTarget(width,height,{type:T.HalfFloatType,depthBuffer:true});target.texture.generateMipmaps=false;glass.uniforms.reflection.value=target.texture}
+  else if(target.width!==width||target.height!==height)target.setSize(width,height);
+ }
+ function prepare(renderer,root,camera,sourceScene){
+  if(disposed)throw new DOMException('Retired mirror','AbortError');
+  // Target output colour space is part of Three's shader key. Prepare against
+  // the owned target without drawing, then restore state before awaiting.
+  if(!target)ensureTarget(1,1);
+  const oldTarget=renderer.getRenderTarget(),viewport=renderer.getViewport(new T.Vector4()),scissor=renderer.getScissor(new T.Vector4()),scissorTest=renderer.getScissorTest(),shadow=renderer.shadowMap.autoUpdate;
+  try{renderer.shadowMap.autoUpdate=false;renderer.setRenderTarget(target);return renderer.compileAsync(root,camera,sourceScene)}
+  finally{renderer.setRenderTarget(oldTarget);renderer.setViewport(viewport);renderer.setScissor(scissor);renderer.setScissorTest(scissorTest);renderer.shadowMap.autoUpdate=shadow}
+ }
  function update(next){
   view=next;
   if(!view){rig.visible=false;previous=null;lastPose=null;releaseTarget();return}
@@ -122,8 +135,7 @@ export function createPotatoMirror({THREE:T,scene,mirror,mobile=false}){
   if(!mirrorGlassVisible({THREE:T,frustum,mirror})){capturedView=null;return false}
   if(target&&now-lastCapture<1000/60-.5)return false;
   renderer.getDrawingBufferSize(size);const scale=Math.min(1,cap/Math.max(size.x,size.y)),width=Math.max(32,Math.round(size.x*scale)),height=Math.max(32,Math.round(size.y*scale));
-  if(!target){target=new T.WebGLRenderTarget(width,height,{type:T.HalfFloatType,depthBuffer:true});target.texture.generateMipmaps=false;glass.uniforms.reflection.value=target.texture}
-  else if(target.width!==width||target.height!==height)target.setSize(width,height);
+  ensureTarget(width,height);
   prepareMirrorCamera({THREE:T,camera,reflected,mirror,pane,textureMatrix});
   const oldTarget=renderer.getRenderTarget(),oldAuto=renderer.autoClear,oldXr=renderer.xr.enabled,oldShadow=renderer.shadowMap.autoUpdate;
   const viewport=renderer.getViewport(new T.Vector4()),scissor=renderer.getScissor(new T.Vector4()),scissorTest=renderer.getScissorTest();
@@ -140,6 +152,6 @@ export function createPotatoMirror({THREE:T,scene,mirror,mobile=false}){
  const resources={geometries:geometries.length,materials:materials.length,geometryBytes:0,meshes:0,triangles:0};
  for(const g of geometries){for(const a of Object.values(g.attributes))resources.geometryBytes+=a.array.byteLength;resources.geometryBytes+=g.index?.array.byteLength||0}
  for(const root of [group,rig])root.traverse(o=>{if(o.isMesh){resources.meshes++;resources.triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3}});
- return{update,render,setSkinTexture,inspect(){return{visible:rig.visible,pose:lastPose,joints:legs.map(leg=>[leg.rotation.x,leg.rotation.z]),mirror:{...mirror},glass:{opacity:glass.opacity,depthWrite:glass.depthWrite},reflection:{frames,target:target?[target.width,target.height]:null,cap,maxHz:60,camera:reflected.position.toArray()},resources:{...resources,textures:skinTexture?1:0,textureBytes:skinTexture?(skinTexture.image?.width||0)*(skinTexture.image?.height||0)*4:0}}},
+ return{update,render,prepare,setSkinTexture,inspect(){return{visible:rig.visible,pose:lastPose,joints:legs.map(leg=>[leg.rotation.x,leg.rotation.z]),mirror:{...mirror},glass:{opacity:glass.opacity,depthWrite:glass.depthWrite},reflection:{frames,target:target?[target.width,target.height]:null,cap,maxHz:60,camera:reflected.position.toArray()},resources:{...resources,textures:skinTexture?1:0,textureBytes:skinTexture?(skinTexture.image?.width||0)*(skinTexture.image?.height||0)*4:0}}},
   dispose(){disposed=true;releaseTarget();group.removeFromParent();rig.removeFromParent();for(const g of geometries)g.dispose();for(const m of materials)m.dispose();skinTexture?.dispose();skinTexture=null;previous=null;view=null;rig.visible=false}};
 }

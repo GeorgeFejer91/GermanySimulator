@@ -2,10 +2,39 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
-import {validateMouthProfile} from '../buergeramt-mouth-paint.js';
+import {validateMouthProfile,mouthPaintGlsl,mouthProfileValues} from '../buergeramt-mouth-paint.js';
+import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {harness,source} from './amt-harness.mjs';
 await import('../buergeramt-lips.js');
 const {createTrack,score,poseAt,mouths}=globalThis.GermanyAmtLips;
+test('speech paint retains the complete source mouth until its native fog variant is prepared',async()=>{
+ const lips=globalThis.GermanyAmtLips,profiles=JSON.parse(readFileSync(new URL('../assets/buergeramt/characters/mouth-profiles.json',import.meta.url)));
+ lips.setProfiles(profiles,validateMouthProfile);
+ const mesh=new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.82),new THREE.MeshBasicMaterial({map:new THREE.Texture({width:1536,height:2496})}));mesh.material.userData.breath={value:0};
+ const actor={mesh,performance:true,lipId:'clerk',mouthPose:0,renderKey:'detail:0',uv:mesh.geometry.attributes.uv,base:mesh.geometry.attributes.uv.array};lips.installMask(THREE,actor);
+ let release;const calls=[];const paint=lips.createPaintSplat(THREE,mouthPaintGlsl,mouthProfileValues,root=>{calls.push(root.material.fog);assert.equal(root.visible,false);return new Promise(resolve=>{release=resolve})});
+ const speech={active:true,shape:[1,.25,0,0]};
+ try{
+  paint.update(actor,speech,0);await Promise.resolve();const mouth=mesh.children[0];assert.equal(calls.length,1);assert.equal(mouth.visible,false);assert.equal(mesh.material.userData.lipHole.value,0,'pending paint cannot cut a hole in the source');
+  release();await new Promise(resolve=>setTimeout(resolve,0));paint.update(actor,speech,1);assert.equal(mouth.visible,true);assert.equal(mesh.material.userData.lipHole.value,1);
+  mesh.material.fog=false;paint.update(actor,speech,2);await Promise.resolve();assert.deepEqual(calls,[true,false]);assert.equal(mouth.visible,false);assert.equal(mesh.material.userData.lipHole.value,0);
+  let materialFrees=0;mouth.material.addEventListener('dispose',()=>{materialFrees++});
+  paint.dispose();assert.equal(mesh.children.length,0);assert.equal(materialFrees,0,'retire the view immediately but preserve the program under its native readiness poll');
+  release();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(mesh.children.length,0);assert.equal(mesh.material.userData.lipHole.value,0);assert.equal(materialFrees,1);
+ }finally{paint.dispose();mesh.geometry.dispose();mesh.material.map.dispose();mesh.material.dispose()}
+});
+test('retired speech paint releases its program once after rejected native preparation',async()=>{
+ const lips=globalThis.GermanyAmtLips,profiles=JSON.parse(readFileSync(new URL('../assets/buergeramt/characters/mouth-profiles.json',import.meta.url)));
+ lips.setProfiles(profiles,validateMouthProfile);
+ const mesh=new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.82),new THREE.MeshBasicMaterial({map:new THREE.Texture({width:1536,height:2496})}));mesh.material.userData.breath={value:0};
+ const actor={mesh,performance:true,lipId:'clerk',mouthPose:0,renderKey:'detail:0',uv:mesh.geometry.attributes.uv,base:mesh.geometry.attributes.uv.array};lips.installMask(THREE,actor);
+ let reject,frees=0;const paint=lips.createPaintSplat(THREE,mouthPaintGlsl,mouthProfileValues,()=>new Promise((_resolve,no)=>{reject=no}));
+ try{
+  paint.update(actor,{active:true,shape:[1,.25,0,0]},0);await Promise.resolve();const mouth=mesh.children[0];mouth.material.addEventListener('dispose',()=>{frees++});
+  paint.dispose();paint.dispose();assert.equal(mesh.children.length,0);assert.equal(mesh.material.userData.lipHole.value,0);assert.equal(frees,0);
+  reject(new Error('compile failed'));await new Promise(resolve=>setTimeout(resolve,0));assert.equal(frees,1);paint.dispose();assert.equal(frees,1);
+ }finally{paint.dispose();mesh.geometry.dispose();mesh.material.map.dispose();mesh.material.dispose()}
+});
 
 test('mouth registration belongs to the displayed pose and atlas cell, never speech time',()=>{
  const {displayedMouth}=globalThis.GermanyAmtLips,actor={id:'aktenkurier',mouthPose:0,renderKey:'detail:4'};

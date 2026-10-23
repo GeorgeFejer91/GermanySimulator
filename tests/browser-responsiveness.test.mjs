@@ -60,9 +60,12 @@ hud.state.wanted=2;hud.updateHud();assert.ok(writes>initial,'a displayed change 
 // Hidden-tab cleanup stops all scheduled background music without changing user preference.
 const musicHandler=game.match(/document.addEventListener\("visibilitychange",\(\)=>\{\s*if\(document.hidden\)\{backgroundWasPlaying[\s\S]*?\n\}\);/)?.[0]||'';
 assert.ok(musicHandler.startsWith('document.addEventListener'));
-let handler,stops=0,pauses=0,resumes=0;const musicDoc={hidden:true,addEventListener:(_,fn)=>handler=fn};
-const music=vm.createContext({document:musicDoc,backgroundWasPlaying:false,musicBus:{disconnect(){}},sungMusicActive:false,introMusicAudio:{paused:false,pause(){pauses++}},sungMusicAudio:{pause(){pauses++}},musicPlaybackSerial:0,wurstTransitioning:false,musicTimer:1,introRampFrame:1,sungRampFrame:2,musicSources:new Set([{stop(){stops++}},{stop(){stops++}}]),clearTimeout(){},cancelAnimationFrame(){},startMusic(){resumes++}});
-vm.runInContext(musicHandler,music);handler();assert.equal(stops,2);assert.equal(pauses,2);assert.equal(music.musicSources.size,0);assert.equal(music.musicBus,null);
+let handler,stops=0,pauses=0,resumes=0,disconnected=0;const musicReleases=[],musicDoc={hidden:true,addEventListener:(_,fn)=>handler=fn};
+const music=vm.createContext({document:musicDoc,backgroundWasPlaying:false,audio:{currentTime:6},musicBus:{gain:{},disconnect(){disconnected++}},rampGain(gain,target,seconds){assert.equal(target,0);assert.equal(seconds,.025)},sungMusicActive:false,introMusicAudio:{paused:false,pause(){pauses++}},sungMusicAudio:{pause(){pauses++}},musicPlaybackSerial:0,wurstTransitioning:false,musicTimer:1,introRampFrame:1,sungRampFrame:2,musicSources:new Set(),setTimeout(fn,ms){musicReleases.push({fn,ms})},clearTimeout(){},cancelAnimationFrame(){},startMusic(){resumes++}});
+for(let i=0;i<2;i++){const source={stop(deadline){stops++;assert.equal(deadline,6.035)},onended(){music.musicSources.delete(source)}};music.musicSources.add(source)}
+const releaseSource=game.slice(game.indexOf('function releaseMusicBus('),game.indexOf('\nfunction applyAudioDucking'));
+vm.runInContext(releaseSource+'\n'+musicHandler,music);handler();assert.equal(stops,2);assert.equal(pauses,2);assert.equal(music.musicBus,null);assert.equal(disconnected,0,'the finite release remains connected');
+assert.equal(musicReleases.length,1);assert.equal(musicReleases[0].ms,55);musicReleases[0].fn();assert.equal(music.musicSources.size,0);assert.equal(disconnected,1,'captured sources retire even with a suspended clock');
 musicDoc.hidden=false;handler();assert.equal(resumes,1);handler();assert.equal(resumes,1);
 
 // A decode completed after the tab is hidden cannot start a siren.

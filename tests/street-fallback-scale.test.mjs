@@ -60,6 +60,7 @@ test('fitted fallback stays upright and anchored at its feet through camera pitc
   const begin=source.indexOf('  function updateGroupVisibility(){'),end=source.indexOf('    for(const root of jwdScenery)',begin);
   assert(begin>=0&&end>begin);
   f.scope.renderFrustum=new T.Frustum();f.scope.renderViewMatrix=new T.Matrix4();
+  f.scope.cityAssetSlots=[];
   vm.runInContext(source.slice(begin,end)+'  }',f.scope);
   for(const pitch of [-.8,0,.6])for(const yaw of [-1.2,0,.7]){
     f.camera.rotation.set(pitch,.8,.12,'YXZ');f.root.rotation.y=yaw;f.scope.updateGroupVisibility();f.root.updateMatrixWorld(true);
