@@ -1,0 +1,67 @@
+{
+  "rawPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16551-3399-7ce1-9880-edfabf5c71e2\\exec-795efd66-7137-4dd7-9597-729433648b1e.png",
+  "copiedPath": "output\\street-redesign\\gisela-end-to-end\\generated-adult-turns\\four-diagonals-v1.png",
+  "sha256": "eabda310e6c94ddd30cd34c7aaf5b514d4c075dd16cea586b145d6e708ce8290",
+  "size": [
+    1536,
+    1024
+  ],
+  "components": [
+    {
+      "pixels": 203253,
+      "bounds": [
+        36,
+        15,
+        407,
+        991
+      ]
+    },
+    {
+      "pixels": 200516,
+      "bounds": [
+        1149,
+        13,
+        1506,
+        992
+      ]
+    },
+    {
+      "pixels": 182671,
+      "bounds": [
+        791,
+        18,
+        1108,
+        981
+      ]
+    },
+    {
+      "pixels": 178113,
+      "bounds": [
+        450,
+        17,
+        773,
+        980
+      ]
+    }
+  ],
+  "requestSha256": "ab2fa503500b246a8fc9a3bfde5be49c644fc288f6c38406a984c977ee549f8e",
+  "referenceHashes": [
+    {
+      "role": "front adult identity, silhouette, exact right paper/left burgundy book",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+    },
+    {
+      "role": "four adult cardinal silhouettes including rear and left",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+    },
+    {
+      "role": "book-grip repaired adult right profile",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828"
+    }
+  ],
+  "prompt": "Create ONE transparent 2D painterly sprite SOURCE SHEET containing EXACTLY FOUR separate full-body adult Gisela Becker quarter-turn views in a single evenly spaced LEFT-TO-RIGHT row. These are true body/head orientations BETWEEN the supplied front, right, rear and left cardinal source views, never a mirrored or cropped cardinal. Pose 1 FRONT-RIGHT three-quarter: 45 degrees away from frontal toward screen RIGHT, both eyes partly visible, front of coat/scarf/book/paper. Pose 2 REAR-RIGHT three-quarter: back of sandy bob and weathered beige coat dominant, one profile sliver toward screen RIGHT, rear legs/heels true depth. Pose 3 REAR-LEFT three-quarter: back of bob/coat dominant, one profile sliver toward screen LEFT, true opposite body angle. Pose 4 FRONT-LEFT three-quarter: 45 degrees from frontal toward screen LEFT, both eyes partly visible, front coat/scarf/book/paper. Keep the SAME one mature slender adult woman across all four: short sandy swept bob, black glasses, pearl earrings, floral scarf, beige worn angular drybrush coat, wine top, dark knee-length skirt, stockings and brown SINGLE-INSTEP-STRAP shoes. Both shoes and complete adult limbs must meet ONE common straight sole line in each pose, all four same crown-to-floor height; grounded natural adult head/torso/hip/knee proportions, no compact or chibi body. Her anatomical RIGHT hand always owns ONE WHITE PAPER; her anatomical LEFT hand always supports ONE BURGUNDY BOOK against the torso. In front-right, paper lies on her right/screen-left-to-right-side as perspective requires; in rear views preserve the hand identities without swapping objects, allowing natural partial occlusion; in front-left the near left book hand stays near torso while paper is far. Quiet planted neutral body stance, not gait/contact, no exaggerated presentation or waving. Match the aged, worn German Berlin oil/drybrush source paint and actual reference lighting, with no regular repeated diamond fabric pattern. Four isolated separate silhouettes with transparent gaps, generous alpha-zero outside margins, no overlap, shadows, ground, text, labels, duplicate hands, extra props, mirror, fifth view or background. Output a single sheet only.",
+  "status": "raw source, 4 poses; angles and anatomy pending native ordered review"
+}

@@ -119,10 +119,7 @@ its immutable SHA verified, resolving the earlier provenance caveat. Broader
 route/material matrices, natural E traversal, physical Android and listening
 remain uncovered; none is inferred from staged headless tests.
 
-The separate complete police candidate is held for an observed pursuit cadence
-failure:6.875 full gait cycles/second on a clear actual production path. Root is
-testing a broader own-source leg field and calibrated distance clock before
-repeating the affected review. Its pending assets are not included here.
+The original narrow police gait was held after6.875 cycles/second. Its accepted wider successor is now live; see the police release below.
 
 ## Parallel character owners
 
@@ -180,3 +177,66 @@ viewed the actual native GPU board and accepts these affected visual/cadence
 scopes for sequential publication. Broad new wall/door/car matrices, natural
 offense traversal, physical device and listening remain unclaimed.
 Owning source/build/cost/evidence details are in [POLICE-ART.md](./POLICE-ART.md).
+
+
+## Third live street family: Gisela Becker
+
+The accepted single-character successor to police09636713 changes only
+`quiz-gisela-becker`; the other42 registry records, all8 police families and
+game simulation remain exact. The active acceptance/publication lane is
+`street-gisela-live-release/GermanySimulator`. Earlier release lanes retain
+their source/RED evidence and do not override this newer public tree.
+
+Gisela keeps sandy bob, glasses, pearls/floral scarf, beige coat and wine
+sweater, dark skirt and strap shoes, anatomical-right paper and left book.
+The own2.33-world-unit family preserves364 selected cells, four16-phase walks,
+all64 phase-specific stops, eight connected body turns, seven original action
+names and278 native-visible source-bound mouths. Stride is18.64 game units.
+Existing lazy movement/reaction delivery stays below16MiB decoded per texture
+(desktop movement16,220,160bytes; mobile7,208,960). Source atlases are authoring
+authority, not eager runtime downloads. Own immutable baseline, raw generation
+requests/outputs and exact clean rebuild commands are in `adult-v1/README.md`.
+
+All101 focused Node checks and3 source/delivery Python checks pass; the full
+integrated Node run passes2,434/2,435; its sole failure detects Git normalizing
+the new SHA-bound mouth delivery path. An own-path `-text` rule fixes packaging
+without changing selected bytes; both exact-byte/binding successor checks pass.
+The original RED run remains retained. The author completed
+all seven actual interaction sequences including terminal resource release,
+three emulated profiles, changing-pose recorded-mouth checks and selected
+movement404 fallback. Fresh independent Physics observes legal LEFT/UP travel,
+fixed-root phase stops, and actual quarter/bridge turns at247RAF samples with
+16.7ms median/33.4ms maximum on this current runtime. Both decoded364-cell
+variants are connected with grounded soles; the actual depth-plane probe
+removes at most one boundary screen row rather than burying contact shoes.
+
+Independent Camera checks common-ground adult limbs/stature beside both
+Sandales and Söder, loaded car/clear door context, and reversed opaque
+two-sprite ordering on desktop and Android portrait emulation. Its final report
+also records the generic pre-paint fallback check. Both reviewers bind the same
+91-file candidate before/after. Root inspects their actual rendered evidence;
+only the shared provenance description is corrected after that freeze, without
+changing any record, paint, runtime or test byte. The immutable final commit
+owns publication bytes. Runtime edits only refresh cache tokens.
+
+Physics/Camera reports are `output/gisela-release/review-{physics,camera}/`;
+source/test/asset hashes and final commit/deployed-byte receipts remain under
+`output/gisela-release/`. Actual-rate evidence resolves the author's slow
+headless capture limitation for this bounded current-public scene. Exhaustive
+world matrices, natural E traversal, physical Android and perceived audio remain
+unclaimed. Existing collisions, routes, vehicles, missions and recordings are
+unchanged. Gisela is accepted for immediate sequential publication; push and
+Pages/public startup/admission verification are recorded separately.
+
+The mature8-family police release is live at
+`096367133c43e67200005c09fb5366d617068864` (Pages39961642504): all23 deployed
+files exact, root/compatibility and actual male/female patrol paint admission
+pass with0page/HTTP failures. Its original narrow-gait RED remains preserved.
+
+Active next owners: Heike's source-ground successor has an8-contact regression
+GREEN after a real multi-row sole-clipping RED; Karl-Heinz has the same own
+source repair and fresh in-game validation. Sabine Krüger and Renate Termin
+are progressing in separate one-character checkouts. Only root integrates and
+publishes, one accepted family at a time; no other local cast is approved by
+this release. Completed owners hand off frozen work and a new owner starts
+the next uncompleted character immediately.

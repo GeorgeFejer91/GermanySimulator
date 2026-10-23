@@ -1,143 +1,82 @@
-"""Protect the shared ground registration and source-owned paper/lip pixels."""
+"""Check Gisela's selected adult source, owned stops, actions and mouth bindings."""
 from pathlib import Path
+import hashlib
 import importlib.util
 import json
-import tempfile
 import unittest
 
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / 'assets/sprite-sources/street-speaker-motion/gisela-becker'
+ROOT=Path(__file__).resolve().parents[1]
+ID='quiz-gisela-becker'
+ASSETS=ROOT/'assets/characters/street-speakers'/ID/'delivery-adult-v1'
+PERSON=json.loads((ROOT/'assets/characters/street/manifest.json').read_text())['characters'][ID]
+SHA=lambda path:hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 class GiselaIntegrationCandidate(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        spec = importlib.util.spec_from_file_location('gisela_candidate', SOURCE / 'build-integration-candidate.py')
-        cls.builder = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(cls.builder)
-        cls.folder = tempfile.TemporaryDirectory(prefix='gisela-candidate-')
-        cls.output = Path(cls.folder.name)
-        cls.result = cls.builder.build_candidate(cls.output)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.folder.cleanup()
-
-    def test_only_owned_movement_and_gesture_cells_share_the_published_ground_pivot(self):
-        person = self.result['person']
-        self.assertEqual(person['cell'], [128, 160])
-        self.assertEqual(person['pivot'], [64, 150])
-        self.assertEqual(person['figureWorldHeight'], 1.6)
-        self.assertEqual(person['grid'], [21, 18])
-        self.assertEqual(set(person['atlasMotion']['settles']), {'down','right','up','left'})
-        selected = {(r, c) for r in range(4) for c in range(16)}
-        selected |= {(r, c) for r in range(4, 8) for c in range(5)}
-        selected |= {(8, c) for c in range(8)}
-        self.assertEqual(len(selected), 92)
-        stop_slots={}
-        for direction_index,direction in enumerate(['down','right','up','left']):
-            phases=person['atlasMotion']['settles'][direction]
+    def test_adult_body_and_seven_states_have_owned_selected_sources(self):
+        p=PERSON
+        self.assertEqual((p['cell'],p['pivot'],p['grid'],p['figureWorldHeight']),
+                         ([128,160],[64,150],[21,18],2.33))
+        self.assertEqual(set(p['atlasMotion']['interactions']['states']),
+                         {'greet','work','review','look','wait','success','failure'})
+        self.assertEqual(p['atlasMotion']['neutral'],{'row':4,'col':2})
+        self.assertEqual(p['atlasMotion']['interactions']['neutral'],{'row':4,'col':2})
+        stops=set()
+        for direction_index,direction in enumerate(('down','right','up','left')):
+            phases=p['atlasMotion']['settles'][direction]
             self.assertEqual(set(phases),{str(i) for i in range(16)})
             for phase in range(16):
                 sequence=phases[str(phase)]['frames']
-                self.assertEqual(sequence[-1],dict(row=direction_index+4,col=2,ms=70))
                 self.assertEqual(len(sequence),5)
-                for stage,position in enumerate(sequence[:-1]):
-                    key=position['row'],position['col']
-                    self.assertNotIn(key,stop_slots)
-                    self.assertNotIn(key,selected)
-                    self.assertFalse(key[0]==13 and key[1]<16)
-                    stop_slots[key]=(direction_index*16+phase)*4+stage
-        self.assertEqual(len(stop_slots),256)
-        for name, factor in [('desktop', 1), ('mobile', .5)]:
-            w, h, shift = int(128*factor), int(160*factor), int(2*factor)
-            atlas = Image.open(self.output / f'source-{name}.webp').convert('RGBA')
-            original = Image.open(ROOT / f'assets/characters/street-speakers/quiz-gisela-becker/character-{name}.webp').convert('RGBA')
-            gesture = Image.open(SOURCE / f'greet-gesture-v2/approved/greet16-{name}.webp').convert('RGBA')
-            stops = Image.open(SOURCE / f'phase-stops-v1/approved/stops-{name}.webp').convert('RGBA')
-            for row in range(18):
-                for col in range(21):
-                    expected = Image.new('RGBA', (w, h))
-                    if (row,col) in stop_slots:
-                        slot=stop_slots[row,col];x,y=(slot%16)*w,(slot//16)*h
-                        cell=stops.crop((x,y,x+w,y+h))
-                    elif (row, col) in selected or row == 13 and col<16:
-                        source = gesture if row == 13 else original
-                        source_row = 0 if row == 13 else row
-                        cell = source.crop((col*w, source_row*h, (col+1)*w, (source_row+1)*h))
-                    else:cell=None
-                    if cell is not None:
-                        self.assertIsNone(cell.getchannel('A').crop((0,h-shift,w,h)).getbbox(), (name,row,col,'clipped source'))
-                        expected.alpha_composite(cell, (0, shift))
-                    actual = atlas.crop((col*w,row*h,(col+1)*w,(row+1)*h))
-                    self.assertEqual(actual.tobytes(), expected.tobytes(), (name,row,col))
-            neutral = atlas.crop((2*w,4*h,3*w,5*h))
-            for col in [0, 15]:
-                self.assertEqual(atlas.crop((col*w,13*h,(col+1)*w,14*h)).tobytes(), neutral.tobytes(), (name,'gesture must enter/leave neutral'))
+                self.assertEqual(sequence[-1],{'row':4+direction_index,'col':2,'ms':70})
+                for pose in sequence[:-1]:
+                    slot=pose['row']*21+pose['col']
+                    self.assertNotIn(slot,stops)
+                    stops.add(slot)
+        self.assertEqual(len(stops),256)
+        for name in ('desktop','mobile'):
+            path=ROOT/p['variants'][name]['file'][2:]
+            self.assertEqual(SHA(path),p['variants'][name]['sha256'])
+        self.assertEqual(SHA(ROOT/p['standing']['file'][2:]),p['standing']['sha256'])
 
-    def test_published_standing_and_own_pose_lips_survive_the_same_translation(self):
-        payload = self.result['mouth']
-        old = json.loads((ROOT / 'assets/characters/street/quiz-gisela-becker/mouths-candidate.json').read_text())
-        standing = json.loads((ROOT / 'assets/characters/street/quiz-gisela-becker/mouths-standing-v1.json').read_text())
-        gesture = json.loads((SOURCE / 'greet-gesture-v2/approved/mouth-fragment.json').read_text())['variants']
-        self.assertEqual(payload['standing'], standing['standing'])
-        self.assertEqual(payload['sources']['standing'], standing['sources']['standing'])
-        self.assertEqual(len(payload['frames']), 378)
-        self.assertEqual(sum(x is not None for x in payload['frames']), 276)
-        expected={}
-        for row in range(9):
-            for col in range(16 if row<4 else 5 if row<8 else 8):expected[row*21+col]=old['frames'][row*16+col]
-        for col in range(16):expected[13*21+col]=gesture['desktop']['frames'][col]
-        for direction_index,direction in enumerate(['down','right','up','left']):
-            for phase,sequence in self.result['person']['atlasMotion']['settles'][direction].items():
-                source=old['frames'][direction_index*16+int(phase)]
-                target=old['frames'][(direction_index+4)*16+2]
-                for stage,position in enumerate(sequence['frames'][:-1]):
-                    from copy import deepcopy
-                    frame=deepcopy(source)
-                    if frame is not None:frame['rect'][:2]=[b+(a-b)*[.8,.6,.4,.2][stage] for a,b in zip(source['rect'][:2],target['rect'][:2])]
-                    expected[position['row']*21+position['col']]=frame
-        for slot, actual in enumerate(payload['frames']):
-            source = expected.get(slot)
-            if source is None:
-                self.assertIsNone(actual, slot)
-                continue
-            self.assertEqual(actual['profile'], source['profile'], slot)
-            self.assertEqual(actual['axes'], source['axes'], slot)
-            self.assertEqual(actual['rect'][0], source['rect'][0], slot)
-            self.assertAlmostEqual(actual['rect'][1]+2/160, source['rect'][1], places=14, msg=str(slot))
-            self.assertEqual(actual['rect'][2:], source['rect'][2:], slot)
-        for desktop, mobile in zip(gesture['desktop']['frames'], gesture['mobile']['frames']):
-            self.assertEqual(desktop['rect'], mobile['rect'])
-            self.assertEqual(desktop['profile'], mobile['profile'])
-            self.assertEqual(desktop['axes'], [2*v for v in mobile['axes']])
+    def test_exact_selected_paint_has_grounded_own_action_and_mouths(self):
+        p=PERSON
+        atlas=Image.open(ASSETS/'source-desktop.webp').convert('RGBA')
+        self.assertEqual(atlas.size,(2016,2160))
+        def cell(row,col):return atlas.crop((col*96,row*120,(col+1)*96,(row+1)*120))
+        neutral=cell(4,2).tobytes()
+        self.assertEqual(cell(13,0).tobytes(),neutral)
+        self.assertEqual(cell(13,15).tobytes(),neutral)
+        for direction in ('down','right','up','left'):
+            for phase in range(16):
+                pose=cell(p['atlasMotion']['walks'][direction]['row'],phase)
+                box=pose.getchannel('A').point(lambda value:255 if value>=21 else 0).getbbox()
+                self.assertIsNotNone(box)
+                self.assertLessEqual(box[3],114)
+                self.assertGreaterEqual(box[0],7)
+                self.assertLessEqual(box[2],89)
+        mouth=ASSETS/'mouths-v1.json'
+        self.assertEqual(SHA(mouth),p['mouthPaint']['sha256'])
+        definition=json.loads(mouth.read_text())
+        self.assertEqual(definition['sources'],{
+            'standing':SHA(ASSETS/'standing.webp'),
+            'desktop':SHA(ASSETS/'source-desktop.webp'),
+            'mobile':SHA(ASSETS/'source-mobile.webp'),
+        })
+        self.assertEqual((sum(v is not None for v in definition['frames']),
+                          sum(v is None for v in definition['frames'])),(278,100))
+        for phase in range(16):
+            for pose in p['atlasMotion']['settles']['up'][str(phase)]['frames']:
+                self.assertIsNone(definition['frames'][pose['row']*21+pose['col']])
 
-    def test_phase_stop_recipe_holds_the_loaded_sole_until_the_other_foot_lands(self):
-        spec = importlib.util.spec_from_file_location('gisela_stops', SOURCE / 'build-phase-stops.py')
-        stops = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(stops)
-        for swing in [0, 1]:
-            source = [dict(dx=[0,1,2,3,4,5,5],dy=[-1,-1,-1,-2,-3,-4,-4]),
-                      dict(dx=[0,-1,-2,-3,-4,-5,-5],dy=[-1,-1,-1,0,0,0,0])]
-            for limb in source:limb['nodes_y']=[0,250,300,335,380,430,511]
-            target = [dict(dx=[0]*7,dy=[0]*7) for _ in range(2)]
-            fields = [stops.stop_fields(source,target,swing,stage) for stage in range(4)]
-            loaded = 1-swing
-            for stage in [0,1]:
-                for axis in ['dx','dy']:
-                    self.assertEqual(fields[stage][loaded][axis][-2:],source[loaded][axis][-2:])
-            self.assertEqual(fields[0][swing]['dx'][-1],0)
-            self.assertLess(fields[0][swing]['dy'][-1], min(source[swing]['dy'][-1],0))
-            self.assertEqual(fields[1][swing]['dy'][-1],0)
-            for stage in [2,3]:
-                self.assertEqual(fields[stage][swing]['dx'][-2:],[0,0])
-                self.assertEqual(fields[stage][swing]['dy'][-2:],[0,0])
-                self.assertLess(fields[stage][loaded]['dy'][-1],min(source[loaded]['dy'][-1],0))
-            self.assertEqual(fields[2][loaded]['dx'][-1],source[loaded]['dx'][-1])
-            self.assertEqual(fields[3][loaded]['dx'][-1],0)
+    def test_packed_delivery_decodes_exact_selected_source(self):
+        spec=importlib.util.spec_from_file_location('street_delivery',ROOT/'tools/build-street-motion-delivery.py')
+        packer=importlib.util.module_from_spec(spec);spec.loader.exec_module(packer)
+        record=packer.run(ROOT/'assets/characters/street/manifest.json',ID,ASSETS/'delivery',check=True,root=ROOT)
+        self.assertEqual(sum(slot is not None for slot in record['packs']['movement']['slots']),348)
+        self.assertEqual(sum(slot is not None for slot in record['packs']['reactions']['slots']),17)
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__=='__main__':unittest.main()

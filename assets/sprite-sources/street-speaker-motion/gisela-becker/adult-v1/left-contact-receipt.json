@@ -1,0 +1,41 @@
+{
+  "rawPath": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16551-3399-7ce1-9880-edfabf5c71e2\\exec-3089246f-4efb-4fff-a247-55cc21694dbc.png",
+  "copiedPath": "output\\street-redesign\\gisela-end-to-end\\generated-left-contact\\left-contact-generated-v1.png",
+  "sha256": "64986dbe27364b206e784b0ee7db9bc79ace33b895945288b6dda7627b43c790",
+  "sourceFormat": [
+    1024,
+    1536
+  ],
+  "alpha20FigureBounds": [
+    134,
+    14,
+    880,
+    1492
+  ],
+  "alpha20FigurePixels": 424791,
+  "requestSha256": "23b9d3779ffe3797ffb9e1f6ad5a227f6956d33f9e96a3bac8827cedad46ad65",
+  "referenceHashes": [
+    {
+      "role": "edit target; faithful isolated enlarged left cardinal",
+      "path": "output/street-redesign/gisela-end-to-end/generated-left-contact/left-cardinal-isolated-reference.png",
+      "sha256": "5420ef12621818598655b9843f1637844135c0b4112eddcf78541acc32d16c02"
+    },
+    {
+      "role": "source sheet of edit target",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+    },
+    {
+      "role": "locked full front identity and single-strap shoes",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+    },
+    {
+      "role": "opposite right-profile adult shape and prop ownership",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828"
+    }
+  ],
+  "prompt": "EDIT image 1, the isolated transparent full-body painterly adult Gisela Becker in strict LEFT PROFILE facing screen LEFT. Images 2-4 bind her source provenance, mature identity, props and brown SINGLE-INSTEP-STRAP shoes. Preserve her exact sandy bob, spectacles, pearl earrings, floral scarf, weathered beige coat, wine knit, dark KNEE-LENGTH skirt, stockings, angular worn Berlin oil/drybrush paint, adult proportions, and grounded full-body height. Preserve the upper pose and handed props: her anatomical LEFT hand, nearer this camera, supports ONE BURGUNDY BOOK at her torso; the far anatomical RIGHT hand holds ONE WHITE PAPER, partly visible in front. Change only the LOWER BODY into a readable two-foot planted LEFTWARD stride contact: the near anatomical LEFT leg is BACK at screen RIGHT, with its full brown strapped shoe heel and toe on the same straight ground; the far anatomical RIGHT leg reaches FORWARD at screen LEFT, with complete hip-to-hem, calf, ankle, visible instep strap, heel and toe on that same ground. The legs belong to her own two hips beneath a continuous cloth skirt; allow natural near/far occlusion and only modest walking cloth flare. No detached or fused limbs, duplicated shoes, swapped hands, extra book/paper, laces, trouser legs, regular diamond fabric pattern, mirror of right view, crouching, shortened body, shadow, floor, text or background. Keep generous true alpha-zero margins. Produce ONE isolated left-facing full-body source, not a sprite sheet, mockup or animation.",
+  "status": "raw generated source, visual/native/animation selection pending"
+}

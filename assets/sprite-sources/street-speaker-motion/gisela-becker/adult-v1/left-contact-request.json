@@ -1,0 +1,36 @@
+{
+  "status": "prepared exact request before job; imagegen lease granted by root",
+  "mode": "built-in imagegen edit",
+  "transparentBackground": true,
+  "references": [
+    {
+      "role": "edit target; faithful isolated enlarged left cardinal",
+      "path": "output/street-redesign/gisela-end-to-end/generated-left-contact/left-cardinal-isolated-reference.png",
+      "sha256": "5420ef12621818598655b9843f1637844135c0b4112eddcf78541acc32d16c02"
+    },
+    {
+      "role": "source sheet of edit target",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+    },
+    {
+      "role": "locked full front identity and single-strap shoes",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+    },
+    {
+      "role": "opposite right-profile adult shape and prop ownership",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828"
+    }
+  ],
+  "sourceComponentBounds": [
+    1237,
+    17,
+    1486,
+    990
+  ],
+  "derivedReferenceMethod": "isolated exact alpha20 component from left cardinal, LANCZOS whole-image scale 1.5, transparent 1024x1536 canvas, common sole y1490",
+  "prompt": "EDIT image 1, the isolated transparent full-body painterly adult Gisela Becker in strict LEFT PROFILE facing screen LEFT. Images 2-4 bind her source provenance, mature identity, props and brown SINGLE-INSTEP-STRAP shoes. Preserve her exact sandy bob, spectacles, pearl earrings, floral scarf, weathered beige coat, wine knit, dark KNEE-LENGTH skirt, stockings, angular worn Berlin oil/drybrush paint, adult proportions, and grounded full-body height. Preserve the upper pose and handed props: her anatomical LEFT hand, nearer this camera, supports ONE BURGUNDY BOOK at her torso; the far anatomical RIGHT hand holds ONE WHITE PAPER, partly visible in front. Change only the LOWER BODY into a readable two-foot planted LEFTWARD stride contact: the near anatomical LEFT leg is BACK at screen RIGHT, with its full brown strapped shoe heel and toe on the same straight ground; the far anatomical RIGHT leg reaches FORWARD at screen LEFT, with complete hip-to-hem, calf, ankle, visible instep strap, heel and toe on that same ground. The legs belong to her own two hips beneath a continuous cloth skirt; allow natural near/far occlusion and only modest walking cloth flare. No detached or fused limbs, duplicated shoes, swapped hands, extra book/paper, laces, trouser legs, regular diamond fabric pattern, mirror of right view, crouching, shortened body, shadow, floor, text or background. Keep generous true alpha-zero margins. Produce ONE isolated left-facing full-body source, not a sprite sheet, mockup or animation.",
+  "acceptance": "Inspect own left legs/skirt/book/paper at full source and exact native; no selected approval from generation alone."
+}

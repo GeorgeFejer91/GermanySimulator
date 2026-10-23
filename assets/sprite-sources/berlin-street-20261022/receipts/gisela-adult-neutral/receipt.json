@@ -1,0 +1,617 @@
+{
+  "status": "source-candidate-unapproved",
+  "tool": "built-in image_gen.imagegen, one job; transparent_background=true",
+  "prompt": "Use case: stylized-concept. Asset: ONE isolated high-resolution immutable source painting for Germany Simulator quiz speaker Gisela Becker; neutral FRONT full-body adult standing pose only, to be assessed before any motion or runtime work. Image 1 is PRIMARY style and adult leg/arm-length reference: Sabine Krueger's accepted four-view painterly Berlin source. Image 2 is SECONDARY whole-body texture/anatomy reference: Brigitte Mueller standing. Images 3 and 4 are GISELA IDENTITY, clothing, prop and hand-ownership references only; their squat old body proportions must be discarded. Paint the SAME recognizable older German woman: tousled sandy-blonde short bob, small tired eyes behind low narrow dark glasses, furrowed distinct angular face, worried skeptical expression, pearl earrings, floral burgundy scarf, worn beige trench jacket over deep wine knit sweater and dark knee-length skirt, brown stockings and sturdy brown low shoes. Keep the white unmarked rectangular paper in her anatomical RIGHT hand (screen left) and the one dark burgundy book tucked in her anatomical LEFT hand/arm (screen right), as in Gisela's original; preserve one of each and no extra props. Quiet planted stance, feet separated just enough for two complete legs, full hands and fingers, visible knee/shin/ankle/shoe structure and connected adult limbs. Crown-to-sole adult stature and head/torso/limb relationship like image 1, no cropped part, no tiny feet. Keep a readable CLOSED natural lip crease clearly visible below the nose, with paper and book below/away from face for later source-owned speech. The facial paint and coat should push further toward Disco Elysium meets Berlin: mature weary asymmetrical structure, angular expressive planes, broad irregular drybrush and oil brush color marks, layered pigment, muted dirty ochre, petrol, wine, gray-green cool shadows. Painterly marks form volumes, not uniform speckle noise. No smoothed vector facets, glossy cartoon, cute big eyes, chibi proportions, toy face, generic clean costume, photorealistic skin, or delicate even outline. One figure centered with generous transparent margins, true RGBA alpha, absolutely no backdrop/floor/cast shadow/glow/halo/text/lettering/watermark. Front view only; no panel, sheet, multiple figures or pose variants.",
+  "references": [
+    {
+      "role": "primary mature paint and adult limb reference",
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+      "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+    },
+    {
+      "role": "secondary whole-body anatomy/texture reference",
+      "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+      "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+    },
+    {
+      "role": "Gisela portrait identity, outfit, prop/hand ownership reference",
+      "path": "assets/quiz-characters/gisela-becker.webp",
+      "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+    },
+    {
+      "role": "Gisela prior action family identity, outfit, prop/hand ownership reference; rejected body proportions",
+      "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+      "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+    }
+  ],
+  "generated_path": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-fdab266d-7676-4591-b9db-12d2afb39fff.png",
+  "generated_sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+  "exact_copied_path": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-painted-adults\\GermanySimulator\\assets\\sprite-sources\\berlin-street-20261022\\quiz-gisela-becker-expressionist-standing-v1.png",
+  "exact_copied_sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+  "exact_bytes_match": true,
+  "mode": "RGBA",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "alpha_thresholds": {
+    "1": {
+      "pixels": 562913,
+      "bounds_xyxy_exclusive": [
+        0,
+        0,
+        1012,
+        1536
+      ],
+      "components": 310,
+      "largest_components": [
+        {
+          "pixels": 562155,
+          "bounds_xyxy_exclusive": [
+            183,
+            0,
+            847,
+            1525
+          ]
+        },
+        {
+          "pixels": 83,
+          "bounds_xyxy_exclusive": [
+            33,
+            1487,
+            44,
+            1502
+          ]
+        },
+        {
+          "pixels": 81,
+          "bounds_xyxy_exclusive": [
+            801,
+            1376,
+            816,
+            1390
+          ]
+        },
+        {
+          "pixels": 46,
+          "bounds_xyxy_exclusive": [
+            823,
+            1387,
+            828,
+            1406
+          ]
+        },
+        {
+          "pixels": 39,
+          "bounds_xyxy_exclusive": [
+            817,
+            1388,
+            822,
+            1400
+          ]
+        },
+        {
+          "pixels": 20,
+          "bounds_xyxy_exclusive": [
+            987,
+            950,
+            992,
+            958
+          ]
+        },
+        {
+          "pixels": 15,
+          "bounds_xyxy_exclusive": [
+            887,
+            175,
+            894,
+            182
+          ]
+        },
+        {
+          "pixels": 13,
+          "bounds_xyxy_exclusive": [
+            681,
+            1535,
+            694,
+            1536
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 86,
+        "bottom": 14,
+        "left": 18,
+        "right": 0
+      }
+    },
+    "8": {
+      "pixels": 545905,
+      "bounds_xyxy_exclusive": [
+        188,
+        4,
+        842,
+        1522
+      ],
+      "components": 11,
+      "largest_components": [
+        {
+          "pixels": 545890,
+          "bounds_xyxy_exclusive": [
+            188,
+            5,
+            842,
+            1522
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            638,
+            137,
+            639,
+            141
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            348,
+            137,
+            351,
+            140
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            366,
+            175,
+            367,
+            176
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            395,
+            209,
+            396,
+            210
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            321,
+            840,
+            322,
+            841
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            358,
+            155,
+            359,
+            156
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            477,
+            5,
+            478,
+            6
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "32": {
+      "pixels": 543522,
+      "bounds_xyxy_exclusive": [
+        188,
+        6,
+        841,
+        1522
+      ],
+      "components": 2,
+      "largest_components": [
+        {
+          "pixels": 543521,
+          "bounds_xyxy_exclusive": [
+            188,
+            6,
+            841,
+            1522
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            633,
+            87,
+            634,
+            88
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "64": {
+      "pixels": 541858,
+      "bounds_xyxy_exclusive": [
+        188,
+        6,
+        841,
+        1522
+      ],
+      "components": 6,
+      "largest_components": [
+        {
+          "pixels": 541847,
+          "bounds_xyxy_exclusive": [
+            188,
+            6,
+            841,
+            1522
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            382,
+            197,
+            385,
+            201
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            354,
+            148,
+            355,
+            150
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            380,
+            197,
+            381,
+            198
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            625,
+            165,
+            626,
+            166
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            389,
+            71,
+            390,
+            72
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "128": {
+      "pixels": 539251,
+      "bounds_xyxy_exclusive": [
+        189,
+        7,
+        840,
+        1522
+      ],
+      "components": 16,
+      "largest_components": [
+        {
+          "pixels": 539219,
+          "bounds_xyxy_exclusive": [
+            189,
+            7,
+            840,
+            1522
+          ]
+        },
+        {
+          "pixels": 8,
+          "bounds_xyxy_exclusive": [
+            545,
+            9,
+            551,
+            13
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            394,
+            45,
+            399,
+            51
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            626,
+            168,
+            627,
+            170
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            353,
+            143,
+            354,
+            145
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            635,
+            156,
+            636,
+            158
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            384,
+            64,
+            385,
+            66
+          ]
+        },
+        {
+          "pixels": 1,
+          "bounds_xyxy_exclusive": [
+            626,
+            173,
+            627,
+            174
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "224": {
+      "pixels": 534530,
+      "bounds_xyxy_exclusive": [
+        189,
+        9,
+        840,
+        1521
+      ],
+      "components": 19,
+      "largest_components": [
+        {
+          "pixels": 534490,
+          "bounds_xyxy_exclusive": [
+            189,
+            10,
+            840,
+            1521
+          ]
+        },
+        {
+          "pixels": 9,
+          "bounds_xyxy_exclusive": [
+            558,
+            17,
+            567,
+            19
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            360,
+            135,
+            364,
+            136
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            599,
+            41,
+            602,
+            45
+          ]
+        },
+        {
+          "pixels": 4,
+          "bounds_xyxy_exclusive": [
+            637,
+            105,
+            639,
+            108
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            630,
+            145,
+            632,
+            148
+          ]
+        },
+        {
+          "pixels": 3,
+          "bounds_xyxy_exclusive": [
+            374,
+            97,
+            376,
+            100
+          ]
+        },
+        {
+          "pixels": 2,
+          "bounds_xyxy_exclusive": [
+            416,
+            35,
+            418,
+            36
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "250": {
+      "pixels": 524303,
+      "bounds_xyxy_exclusive": [
+        191,
+        12,
+        839,
+        1521
+      ],
+      "components": 233,
+      "largest_components": [
+        {
+          "pixels": 523967,
+          "bounds_xyxy_exclusive": [
+            191,
+            15,
+            838,
+            1521
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            700,
+            1077,
+            701,
+            1084
+          ]
+        },
+        {
+          "pixels": 7,
+          "bounds_xyxy_exclusive": [
+            693,
+            1014,
+            694,
+            1021
+          ]
+        },
+        {
+          "pixels": 6,
+          "bounds_xyxy_exclusive": [
+            629,
+            124,
+            632,
+            130
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            587,
+            1331,
+            588,
+            1336
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            649,
+            1383,
+            650,
+            1388
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            473,
+            1161,
+            474,
+            1166
+          ]
+        },
+        {
+          "pixels": 5,
+          "bounds_xyxy_exclusive": [
+            668,
+            1157,
+            669,
+            1162
+          ]
+        }
+      ],
+      "edge_pixels": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "composites": [
+    "output/street-redesign/gisela-adult-neutral/gisela-source-on-light.png",
+    "output/street-redesign/gisela-adult-neutral/gisela-source-on-dark.png"
+  ],
+  "visual_review": {
+    "style": "Mature angular wary face and broad broken ochre/wine brush planes; substantially closer to Sabine/Brigitte than the prior squat Gisela source. Some coat texture remains patterned/faceted, so final style acceptance belongs to integrator.",
+    "anatomy": "One connected front adult figure. Full separated lower legs, ankles and sturdy shoes; complete visible hands and fingers. Relative head/limb stature visually aligns with the adult references far better than the original short-body sheet.",
+    "identity": "Tousled sandy blonde bob, narrow low glasses, pearls, floral burgundy scarf, beige trench, wine knit sweater, dark skirt and concerned expression retain Gisela Becker.",
+    "handedness": "White blank paper stays in anatomical right hand (screen left); one burgundy book stays in anatomical left hand/arm (screen right). Closed mouth crease remains visible and clear of both props.",
+    "light_dark": "Both composites show a clean isolated silhouette without visible painted backdrop, floor, cast shadow, or broad halo. Low-alpha detached flecks exist numerically, including canvas-edge pixels at alpha >= 1.",
+    "holds": [
+      "Source candidate only; no runtime, mouth fit, movement, matching profile/rear views, or game-scale acceptance was performed.",
+      "At alpha >= 128 the hair starts 7 pixels below the top and shoes end 14 pixels above the bottom; native motion/cell registration may require extra gutter.",
+      "At alpha >= 1, 310 connected components include weak detached edge flecks; clean/inspect these before any encoded export without altering this immutable original."
+    ]
+  }
+}

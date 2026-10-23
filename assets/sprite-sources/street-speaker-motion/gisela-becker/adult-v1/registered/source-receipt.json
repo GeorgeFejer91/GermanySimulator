@@ -1,0 +1,183 @@
+{
+  "sourceComponents": {
+    "standing": [
+      {
+        "pixels": 544311,
+        "bounds": [
+          188,
+          6,
+          841,
+          1522
+        ],
+        "index": 1
+      }
+    ],
+    "directions": [
+      {
+        "pixels": 213588,
+        "bounds": [
+          39,
+          16,
+          423,
+          989
+        ],
+        "index": 2
+      },
+      {
+        "pixels": 151684,
+        "bounds": [
+          483,
+          16,
+          745,
+          988
+        ],
+        "index": 3
+      },
+      {
+        "pixels": 199290,
+        "bounds": [
+          789,
+          15,
+          1151,
+          984
+        ],
+        "index": 1
+      },
+      {
+        "pixels": 150794,
+        "bounds": [
+          1237,
+          17,
+          1486,
+          990
+        ],
+        "index": 4
+      }
+    ],
+    "right": [
+      {
+        "pixels": 341603,
+        "bounds": [
+          315,
+          12,
+          829,
+          1490
+        ],
+        "index": 1
+      }
+    ]
+  },
+  "viewRecords": {
+    "down": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sourceSha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+      "componentBounds": [
+        188,
+        6,
+        841,
+        1522
+      ],
+      "sourcePivot": [
+        514.5,
+        1522
+      ],
+      "sourceToWorkingScale": 0.2638522427440633,
+      "nativeAlphaBounds": [
+        35,
+        14,
+        94,
+        150
+      ],
+      "workingAlphaBounds": [
+        170,
+        72,
+        343,
+        472
+      ]
+    },
+    "right": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sourceSha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828",
+      "componentBounds": [
+        315,
+        12,
+        829,
+        1490
+      ],
+      "sourcePivot": [
+        572.0,
+        1490
+      ],
+      "sourceToWorkingScale": 0.2638522427440633,
+      "nativeAlphaBounds": [
+        41,
+        18,
+        88,
+        150
+      ],
+      "workingAlphaBounds": [
+        189,
+        82,
+        324,
+        472
+      ]
+    },
+    "up": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sourceSha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015",
+      "componentBounds": [
+        789,
+        15,
+        1151,
+        984
+      ],
+      "sourcePivot": [
+        970.0,
+        984
+      ],
+      "sourceToWorkingScale": 0.41109969167523125,
+      "nativeAlphaBounds": [
+        39,
+        15,
+        90,
+        150
+      ],
+      "workingAlphaBounds": [
+        182,
+        74,
+        331,
+        472
+      ]
+    },
+    "left": {
+      "source": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sourceSha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015",
+      "componentBounds": [
+        1237,
+        17,
+        1486,
+        990
+      ],
+      "sourcePivot": [
+        1361.5,
+        990
+      ],
+      "sourceToWorkingScale": 0.41109969167523125,
+      "nativeAlphaBounds": [
+        47,
+        14,
+        82,
+        150
+      ],
+      "workingAlphaBounds": [
+        205,
+        72,
+        308,
+        472
+      ]
+    }
+  },
+  "familyFigureHeightWorking": 400,
+  "nativeFigureHeight": 136,
+  "note": "Private source-to-native scale diagnostic, not walk/action/renderer approval."
+}

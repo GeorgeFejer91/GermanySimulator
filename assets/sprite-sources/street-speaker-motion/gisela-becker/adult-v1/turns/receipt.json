@@ -1,0 +1,132 @@
+{
+  "source": "output\\street-redesign\\gisela-end-to-end\\generated-adult-turns\\four-diagonals-v1.png",
+  "sha256": "eabda310e6c94ddd30cd34c7aaf5b514d4c075dd16cea586b145d6e708ce8290",
+  "heightMaxSourcePx": 979,
+  "scaleOneForAllFour": 0.40858018386108275,
+  "spec": {
+    "working": {
+      "figureHeight": 400,
+      "baseline": 472
+    },
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136
+  },
+  "views": [
+    {
+      "direction": "down-right",
+      "componentBounds": [
+        36,
+        15,
+        407,
+        991
+      ],
+      "area": 203253,
+      "sourcePivot": [
+        221.5,
+        991
+      ],
+      "workingAlphaBounds": [
+        180,
+        73,
+        332,
+        472
+      ],
+      "nativeAlphaBounds": [
+        38,
+        15,
+        90,
+        150
+      ],
+      "maxAlpha": 254
+    },
+    {
+      "direction": "up-right",
+      "componentBounds": [
+        450,
+        17,
+        773,
+        980
+      ],
+      "area": 178113,
+      "sourcePivot": [
+        611.5,
+        980
+      ],
+      "workingAlphaBounds": [
+        190,
+        79,
+        322,
+        472
+      ],
+      "nativeAlphaBounds": [
+        42,
+        17,
+        87,
+        150
+      ],
+      "maxAlpha": 254
+    },
+    {
+      "direction": "up-left",
+      "componentBounds": [
+        791,
+        18,
+        1108,
+        981
+      ],
+      "area": 182671,
+      "sourcePivot": [
+        949.5,
+        981
+      ],
+      "workingAlphaBounds": [
+        191,
+        79,
+        321,
+        472
+      ],
+      "nativeAlphaBounds": [
+        42,
+        17,
+        87,
+        150
+      ],
+      "maxAlpha": 253
+    },
+    {
+      "direction": "down-left",
+      "componentBounds": [
+        1149,
+        13,
+        1506,
+        992
+      ],
+      "area": 200516,
+      "sourcePivot": [
+        1327.5,
+        992
+      ],
+      "workingAlphaBounds": [
+        183,
+        72,
+        329,
+        472
+      ],
+      "nativeAlphaBounds": [
+        39,
+        14,
+        89,
+        150
+      ],
+      "maxAlpha": 254
+    }
+  ],
+  "status": "private native registration only, human angle/identity/style pending"
+}

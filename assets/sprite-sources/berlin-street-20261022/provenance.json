@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-22",
   "tool": "built-in image_gen.imagegen",
-  "status": "Published Irmgard and Hannelore source closure plus complete police wider-cadence integration candidate; raw sources are immutable authoring evidence.",
+  "status": "Published Irmgard/Hannelore/police source closure plus accepted Gisela adult family; immutable authoring sources.",
   "records": [
     {
       "id": "crowd-irmgard-aktenordner-expressionist-turns-v5",
@@ -2994,6 +2994,558 @@
         ],
         "transparent_background": true
       }
+    },
+    {
+      "id": "quiz-gisela-becker-expressionist-directions-v1",
+      "file": "quiz-gisela-becker-expressionist-directions-v1.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1663c-3386-7c83-bd17-e9e508f9fa7e/exec-be596407-fefc-4c2f-b233-db706548bb12.png",
+      "prompt": "Create ONE production source image: a transparent-RGBA, single horizontal row of EXACTLY FOUR separate complete neutral standing views of the SAME mature German woman, Gisela Becker. This is a hand-painted sprite source sheet, not an action sheet. Use referenced image 1, \"quiz-gisela-becker-expressionist-standing-v1.png\", as the PRIMARY and binding authority for her new adult proportions, recognizable older face, sandy-blonde tousled bob, narrow low-set eyeglasses, pearl earrings, burgundy floral scarf, beige trench coat, dark burgundy knit top, knee-length charcoal skirt, stockings, low sturdy brown strap shoes, broad irregular drybrush/oil color planes, and her two distinct carried props. Reference image 2, \"quiz-sabine-krueger-expressionist-directions-v1.png\", is SECONDARY ONLY for four cardinal view registration, mature Berlin painterly cohesion, equal full-body height and sole line; do not borrow Sabine's face, clothes, book, backdrop, or colors. Reference image 3, \"gisela-becker-keys.png\", is TERTIARY ONLY to cross-check Gisela's canonical identity, clothing, and anatomical prop-hand ownership; its chibi/toy body proportions and old simplified face are rejected, and its action poses are NOT requested.\n\nExactly four separate equal-scale full-length ADULT figures, ordered LEFT TO RIGHT: FRONT facing viewer; RIGHT PROFILE facing screen right; REAR facing away; LEFT PROFILE facing screen left. Each figure has an unbroken head, neck, torso, BOTH arms and complete hands, two anatomically connected adult legs, and complete paired shoes. All four views share the same head/body ratio, coat length, skirt length, shoulder width, shoe design, figure height, and horizontal sole baseline. Natural planted neutral pose, very small stance variations only for clear silhouettes, no walking/gesturing/action. Equal generous fully transparent outer margins and transparent vertical gutters between ALL four figures; no overlap and no element crossing into its neighbor's cell. Each standing figure must be comfortably inside its own quarter of the image with plenty of alpha-zero space around head, sides, and shoes. No guides, letters, labels, text, panels, floor, ground line, contact shadow, glow, halo, painterly backdrop, or white opaque background.\n\nGisela's ANATOMICAL RIGHT hand owns and supports the single WHITE PAPER/document; her ANATOMICAL LEFT hand owns and supports the single DARK BURGUNDY BOOK. In the FRONT view the paper is on screen LEFT and book on screen RIGHT. In the REAR view the paper is on screen RIGHT and book on screen LEFT. RIGHT PROFILE faces right: near anatomical-right hand visibly grips the paper, far anatomical-left hand keeps the burgundy book plausibly supported even if naturally partly occluded. LEFT PROFILE faces left: near anatomical-left hand visibly grips the burgundy book, far anatomical-right hand keeps the white paper plausibly supported even if naturally partly occluded. One book and one paper per figure, no duplicates, floating objects, impossible grips, extra fingers or arms. Arrange props below and outside the face so they do not cover the mouth. FRONT and both PROFILE views show a small, clearly OWNED, CLOSED lip line with visible corners, consistent with the same weathered angular adult face; rear view has no face. Keep identical eyeglasses and consistent nose/chin/bob silhouette across visible views, including credible profile anatomy, not a front face pasted sideways. Her expression is weary, skeptical, lived-in; small adult eyes, angular cheekbones and nose, mature individual features. Long connected adult arms and legs; narrow-but-sturdy real adult shoulders, torso and hands. Paint in muted gray-ochre/wine/charcoal Berlin palette with broad, irregular expressive oil/drybrush strokes and varied edge quality. Avoid smooth vector facets, uniform geometric faceting, repetitive microstipple, toy caricature, oversized head or eyes, short legs, and doll hands.\n\nImportant: Four unmirrored views of one coherent character, true transparent alpha outside painted pixels. No scenery.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/street-quiz/gisela-becker-keys.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED HELD: HELD — not suitable for runtime or animation expansion without a new source decision.",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/gisela-adult-directions/receipt.md",
+      "sourceReviewReceiptSha256": "e3f088bb741bca79de9d966a595e526fbe8c8fe8bebf0ec8bb08b139e2de5a04",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v1.png",
+      "sourceSha256": "605aeace450d69a60c1f22ae529bfed0675d057531c3e9c3e80ebd7853058613",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "Primary adult identity/proportion/paint: ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+        },
+        {
+          "role": "Secondary four-cardinal registration and mature paint: ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724DDE486C231973AA9260C397CB0681DDA851999D56C4A2831EB440514528B"
+        },
+        {
+          "role": "Tertiary canonical identity, clothing, prop ownership cross-check only; old toy proportions rejected: ",
+          "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+          "sha256": "C367A9062CE40EFDADCD6436AC712D0F9E502A3C2E206B3BE1A3C7D2D2EE5D74"
+        }
+      ],
+      "producerFindings": "adult limbs, and true transparent gutters. Gisela's hair, glasses, scarf, coat, skirt, front-view paper/book, and rear screen-side exchange remain recognizable. The neutral paper and book stay below her face; both light and dark composites were inspected.\n\nThe **right-facing profile omits a discernible burgundy book**: it shows the white paper in the near right hand and another hand near the paper, but no visibly supported book or clear far-left-hand/book silhouette. The two side profiles also change her low strapped shoes into visibly laced shoes, whereas the primary neutral and front/rear sheet views use straps. These are concrete prop/costume continuity failures for unmirrored directional art. The source top clearance is only 16-18 px despite requested generous margins. Coat/skirt/legs use fairly repetitive fine facets, weaker than the requested broad irregular oil planes. Treat all four views together as HELD; no gait/action expansion or runtime selection follows from this source.\n",
+      "producerCaveats": "Original receipt text retained verbatim in staged receipt copy.",
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/gisela-adult-directions/receipt.md",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "605aeace450d69a60c1f22ae529bfed0675d057531c3e9c3e80ebd7853058613",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2455292,
+      "componentBounds": [
+        [
+          40,
+          18,
+          422,
+          988
+        ],
+        [
+          484,
+          17,
+          741,
+          985
+        ],
+        [
+          789,
+          16,
+          1149,
+          983
+        ],
+        [
+          1239,
+          17,
+          1482,
+          987
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 16,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "Primary adult identity/proportion/paint: ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+            "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+          },
+          {
+            "role": "Secondary four-cardinal registration and mature paint: ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724DDE486C231973AA9260C397CB0681DDA851999D56C4A2831EB440514528B"
+          },
+          {
+            "role": "Tertiary canonical identity, clothing, prop ownership cross-check only; old toy proportions rejected: ",
+            "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+            "sha256": "C367A9062CE40EFDADCD6436AC712D0F9E502A3C2E206B3BE1A3C7D2D2EE5D74"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+          "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+        }
+      ]
+    },
+    {
+      "id": "quiz-gisela-becker-expressionist-directions-v2",
+      "file": "quiz-gisela-becker-expressionist-directions-v2.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1663c-3386-7c83-bd17-e9e508f9fa7e/exec-2261b596-9c37-412f-8c68-da177cbf4c08.png",
+      "prompt": "EDIT the first attached image, a transparent four-view horizontal cardinal sheet of the SAME adult Gisela Becker. This is a bounded repair of that exact source sheet, not a new character design. The second attached image is her accepted standing/front source and is binding for Gisela's identity, outfit, body proportions, prop ownership and especially her low brown SINGLE-INSTEP-STRAP shoes. Preserve all four views' adult scale, face age and recognizable hair/glasses/pearl earrings, beige coat, burgundy floral scarf and knit top, dark knee skirt, stockings, planted legs, oil-painted color and expression. Keep exactly the existing cardinal order and equal sole line: FRONT, RIGHT PROFILE facing screen right, REAR, LEFT PROFILE facing screen left. Keep FRONT and REAR views as close to their current pixels, composition, pose, clothes, props and shoes as possible. Keep all four full figures separated by genuine alpha-zero gutters, with complete hair, hands, legs and shoes, and clean transparent outer margins. No background, floor, shadow, halo or text.\n\nMake only these concrete anatomical continuity repairs to the TWO PROFILE views:\n1) Replace BOTH profile views' current lace-up / eyelet / tied-lace shoes with the SAME low sturdy brown STRAP shoes worn by Gisela in accepted reference image 2 and in the sheet's FRONT and REAR views. Show one broad, clear single instep strap crossing each shoe's vamp, rounded toe, low block heel, same brown leather and worn paint. There must be NO laces, tongue, eyelets, crisscrossed lines or sneaker shape in either profile. Both feet in each profile retain complete anatomically plausible shoe silhouettes and same sole level.\n2) RIGHT PROFILE faces screen RIGHT. Her near ANATOMICAL RIGHT hand grips the one WHITE PAPER/document, clear below and away from her mouth. Her far ANATOMICAL LEFT hand grips and supports the one DARK BURGUNDY BOOK against the far side of her torso, partially occluded naturally but with a CLEAR DISCERNIBLE BURGUNDY BOOK EDGE/SPINE visible beside the torso, toward screen LEFT of the paper. This far left hand must not drift forward to touch or duplicate the paper hand. One separate paper and one separate book, each with its OWN anatomically correct hand. No second hand crowded beside or sharing the paper.\n3) LEFT PROFILE faces screen LEFT. Her near ANATOMICAL LEFT hand grips the one DARK BURGUNDY BOOK; far ANATOMICAL RIGHT hand retains the one WHITE PAPER, naturally partially occluded yet still visibly owned. Preserve this profile's adult head and clothing.\n\nThe FRONT view owns paper screen LEFT/right anatomical hand and book screen RIGHT/left anatomical hand. The REAR view swaps screen sides: paper screen RIGHT/right anatomical hand and book screen LEFT/left anatomical hand. Do not mirror the profiles, swap the props or change either visible profile's small CLOSED lips and eyeglasses. Fix local hands/props to be connected, with realistic fingers, not extra arms or floating items. Work in same uneven broad weathered Berlin oil/drybrush paint, no smooth toy finish or repeated filter. Deliver only the repaired FOUR-view transparent RGBA sheet.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED HELD: HELD",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/gisela-adult-directions-repair-v2/receipt.md",
+      "sourceReviewReceiptSha256": "d7b16808d790306e24dad3f59f47eae9b96081c8a6ac5d16e5a0d7a7f17a1fcb",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+      "sourceSha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "First image, direct EDIT target/held four-cardinal source: ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v1.png",
+          "sha256": "605AEACE450D69A60C1F22AE529BFED0675D057531C3E9C3E80EBD7853058613"
+        },
+        {
+          "role": "Second image, accepted Gisela front identity and clothing/prop-hand/shoe authority: ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+        }
+      ],
+      "producerFindings": "o obvious laces. Four front/right/rear/left figures remain complete and separated. Gisela's mature angular face, bob, glasses, scarf, beige coat, skirt, legs and rear prop screen-side exchange remain recognizable. Front and rear are visually similar to v1, though the generator repainted small texture/details across the sheet rather than preserving literal pixels. The existing rather regular diamond/faceted cloth marks persist; v2 does not improve that broader style caveat.\n\nThe right-facing profile still **does not show an identifiable burgundy book or a far left hand supporting it**. The enlarged crop instead shows a second hand immediately under the near-right paper grip, with no book between that hand and her torso. That fails the explicit anatomical-left book ownership requirement. The left-facing profile retains a near-hand burgundy book and far-side paper. The source top margin remains tight at 15–17 px. Do not use this four-view source for gait, actions, or canonical selection.\n",
+      "producerCaveats": "Original receipt text retained verbatim in staged receipt copy.",
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/gisela-adult-directions-repair-v2/receipt.md",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2438975,
+      "componentBounds": [
+        [
+          39,
+          16,
+          423,
+          989
+        ],
+        [
+          483,
+          16,
+          745,
+          988
+        ],
+        [
+          789,
+          15,
+          1151,
+          984
+        ],
+        [
+          1237,
+          17,
+          1486,
+          990
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 15,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "First image, direct EDIT target/held four-cardinal source: ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v1.png",
+            "sha256": "605AEACE450D69A60C1F22AE529BFED0675D057531C3E9C3E80EBD7853058613"
+          },
+          {
+            "role": "Second image, accepted Gisela front identity and clothing/prop-hand/shoe authority: ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+            "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v1.png",
+          "sha256": "605aeace450d69a60c1f22ae529bfed0675d057531c3e9c3e80ebd7853058613"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+        }
+      ]
+    },
+    {
+      "id": "quiz-gisela-becker-expressionist-right-v3",
+      "file": "quiz-gisela-becker-expressionist-right-v3.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1663c-3386-7c83-bd17-e9e508f9fa7e/exec-1f7c8e9d-c5d1-4f28-86a0-574a3d2fc309.png",
+      "prompt": "Create exactly ONE isolated COMPLETE FULL-BODY RIGHT-FACING SIDE PROFILE source of the adult Gisela Becker, not a four-view sheet and not a front/three-quarter face pasted sideways. She faces SCREEN RIGHT: a genuine continuous nose, eyeglasses, chin, neck, torso, legs, strap shoes all in anatomical right profile. Use image 1 (Gisela accepted adult front standing) as PRIMARY binding reference for her identity, adult head-to-body and limb proportions, mature angular weary face, sandy tousled bob, narrow glasses, pearl earring, closed lip line, beige trench jacket, burgundy floral scarf, wine knitted top, knee-length dark skirt, brown stockings, and her TWO props with correct anatomical hands. Use image 2 (four-cardinal v2 sheet) SECONDARY ONLY for the RIGHT-facing standing side-view height, coat/skirt lengths, silhouette, planted sole level, and brown low SINGLE-INSTEP-STRAP shoes. Its right-profile hand/prop arrangement is WRONG: the far burgundy book vanished and two hands crowded the paper. Correct that instead of copying it. Use image 3 (original Gisela portrait) TERTIARY only for broad irregular weathered Berlin oil/drybrush paint and her individual identity; no painted backdrop.\n\nThe ANATOMICAL RIGHT arm is the NEAR side arm clearly emerging from the near shoulder and holding ONE white paper/document in its own right hand at lower chest or waist, forward of the torso and fully below the face. The ANATOMICAL LEFT arm is the FAR side arm, behind the torso, and its left hand supports ONE dark BURGUNDY HARD-COVER BOOK at her far-left/rear waist or flank. Show enough of that book's dark red cover/spine and pale page edge PEEKING OUT FROM BEHIND THE BACK/SERVER-LEFT COAT SILHOUETTE that a viewer can unmistakably see a separate BOOK exists. A small but clear part of her far-left hand should grip the book at its lower edge behind the waist. This LEFT book hand must NOT appear under, alongside, or touching the white paper; it never shares the paper grip. Separate the two prop silhouettes and hands spatially: paper forward toward screen RIGHT, book behind torso toward screen LEFT. It is okay to lower both props to waist/hip height to make ownership obvious. Exactly one white paper and one burgundy book; no extra object, floating item, duplicate hand, extra arm or detached fingers. The two arms are anatomically attached even when the far one is mostly hidden.\n\nOne quiet neutral planted stance appropriate for a later cardinal walk rig. Adult long connected legs, complete BOTH feet/shoes, full hands where visible; no tiny toy limbs or outsized head. Both shoes match accepted front and v2 front/rear: sturdy worn brown leather LOW shoes with ONE VISIBLE SINGLE INSTEP STRAP over each vamp, rounded toes, block heels, NO laces, no eyelets, no criss-crossing, no sneaker styling. The near shoe points screen right and the far shoe remains anatomically plausible; soles share an invisible baseline. Keep her small readable CLOSED lips and profile glasses away from paper/book. Mature smaller eye, weathered/angular individual face. Beige coat, wine scarf/top, dark skirt and stockings, muted paint, broad uneven brush masses, no uniform tiny diamonds or vector smoothness.\n\nTransparent RGBA canvas with GENEROUS alpha-zero outer margins on all four sides around complete hair, both arms/props and both shoes. Exactly one figure. No floor, ground line, shadow, halo, colored atmospheric backdrop, vignette, text, border, guide, extra view or other person.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+        "assets/quiz-characters/gisela-becker.webp"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED HELD: provisional source pass for right-profile prop ownership",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/gisela-adult-right-v3/receipt.md",
+      "sourceReviewReceiptSha256": "e56ff2a7040d819b240196e2f581e6bff7ebdf14054bfcc4b5f92e090973f309",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v3.png",
+      "sourceSha256": "a220e241e8fe4cf86447d9fedbe04bf6d901dce7b12e7c386787b42d85978931",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "**Primary identity/anatomy/outfit/shoes/prop ownership**: accepted front source ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+        },
+        {
+          "role": "**Secondary right-profile proportions/head/skirt/shoe form and sole reference, with its hand/prop defect explicitly rejected**: held ",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+          "sha256": "BEAD3FDAC5601DD56D5A614319A019D1527C2CDF2D904B769BF5AB37F5205015"
+        },
+        {
+          "role": "**Tertiary original portrait paint and individual identity only**: ",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85F3A906CF39F092F5ED0D6D1E56FFC15364A7E3A9F5A227E2E78CFAE18A5A7C"
+        }
+      ],
+      "producerFindings": "aper. The far-side arm is naturally hidden behind the coat/body. Hands and objects are spatially separate and remain below her closed mouth. Both complete feet wear brown instep-strap shoes without laces. Hair, glasses, pearl, scarf, coat, wine top, dark skirt and stockings match Gisela's accepted front source; no opaque halo or floor appears on either composite.\n\nThe equal-height diagnostic comparison with v2 shows compatible adult height/head/coat/skirt/shoe registration and a clear repair of the v2 book/second-hand ambiguity. The new isolated figure is somewhat wider at the paper/book span, so any future cardinal atlas would require its own fit. The source retains fairly regular faceted marks on coat/skirt/legs rather than ideal broad irregular portrait strokes. Alpha is genuine but top/bottom margins are tight (14/23 px). This is a provisional right-source study, **not** a completed four-view cardinal sheet, gait, action family, mouth registration, native fit, or runtime approval.\n",
+      "producerCaveats": "Original receipt text retained verbatim in staged receipt copy.",
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/gisela-adult-right-v3/receipt.md",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "a220e241e8fe4cf86447d9fedbe04bf6d901dce7b12e7c386787b42d85978931",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1680480,
+      "componentBounds": [
+        [
+          282,
+          14,
+          808,
+          1513
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 14,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "**Primary identity/anatomy/outfit/shoes/prop ownership**: accepted front source ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+            "sha256": "0C4729AC00B5489E6A57F35785D94386626358A3CE89B38D33A942B9F8968405"
+          },
+          {
+            "role": "**Secondary right-profile proportions/head/skirt/shoe form and sole reference, with its hand/prop defect explicitly rejected**: held ",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+            "sha256": "BEAD3FDAC5601DD56D5A614319A019D1527C2CDF2D904B769BF5AB37F5205015"
+          },
+          {
+            "role": "**Tertiary original portrait paint and individual identity only**: ",
+            "path": "assets/quiz-characters/gisela-becker.webp",
+            "sha256": "85F3A906CF39F092F5ED0D6D1E56FFC15364A7E3A9F5A227E2E78CFAE18A5A7C"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+          "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+        },
+        {
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        }
+      ]
+    },
+    {
+      "id": "quiz-gisela-becker-expressionist-right-v4",
+      "file": "quiz-gisela-becker-expressionist-right-v4.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1669f-271f-7481-8558-a71afb799550\\exec-2823b933-b0d8-43a0-a609-3cdc8c9583ab.png",
+      "prompt": "Create ONE isolated, complete, full-body RIGHT-facing TRUE SIDE PROFILE source painting of Gisela Becker, the exact same mature adult woman in the attached accepted front. This is a cardinal neutral source anchor, not a motion pose or a sheet. Reference 1 (standing-v1) is PRIMARY and binds her identity, adult proportions, costume, prop ownership, broad painterly finish and planted foot scale. Reference 2 (directions-v2) is SECONDARY and shows her rightward true-profile head silhouette, body scale, beige trench, wine floral scarf, dark knee skirt, brown stockings and brown SINGLE-INSTEP-STRAP low shoes; its ambiguous two-hand paper grip is a defect to CORRECT. Do not reproduce the separate v3 experiment where the book was moved behind her back. She faces viewer RIGHT with one rightward nose, one rightward face profile, short layered warm-blond bob, black rectangular glasses, pearl earring, mature tired expression and CLOSED lips. Beige trench over wine knit, floral wine-and-cream scarf, dark charcoal knee-length skirt, two connected adult lower legs in brown stockings, both brown shoes with ONE instep strap and buckle across each vamp, no laces. Anatomical RIGHT arm is the near visible arm on the viewer-facing side; its SINGLE RIGHT HAND alone holds exactly ONE white paper forward at waist/chest height, paper projecting to viewer RIGHT. Show only this one hand gripping the paper; there is NO second hand, spare fingers, or supporting hand below it. Anatomical LEFT arm is the far-side arm; it STILL carries exactly ONE burgundy hardback book close against her FRONT-LEFT ribs/waist, under that far forearm, just as in the accepted front. In true right-facing profile the torso and near arm may completely and naturally occlude that far-side left hand and book. Do not expose the book by moving it behind the spine, outside the rear coat contour, to the rear hip, or into her right hand. No extra book, paper, arm or hand. One neutral planted adult silhouette with correct connected crown/neck/shoulder/hips/knees/ankles/shoes and believable body rotation; retain her original mature face and broad, irregular, weathered Berlin expressionist brush planes, no regular small tile texture. Generous clear margin around entire figure, genuinely transparent RGBA alpha-zero background, no backdrop, vignette, light halo, ground, cast shadow, text, border or watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional single cardinal repair; native family correspondence unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-cardinal-repairs-batch1/receipt.json",
+      "sourceReviewReceiptSha256": "1eb39bd6eed1622bb6b755804862c89140fc7275e78c2b9be7d82c8f8d623042",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sourceSha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": null,
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+        },
+        {
+          "role": null,
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+          "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+        }
+      ],
+      "producerFindings": "Provisional; root must decide whether the partly exposed book has believable hidden support.",
+      "producerCaveats": "Root judged the raw repair provisionally; family correspondence and style remain open.",
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-cardinal-repairs-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1549693,
+      "componentBounds": [
+        [
+          315,
+          12,
+          829,
+          1490
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 12,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": null,
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+            "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+          },
+          {
+            "role": null,
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+            "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+          "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-directions-v2.png",
+          "sha256": "bead3fdac5601dd56d5a614319a019d1527c2cdf2d904b769bf5ab37f5205015"
+        }
+      ]
+    },
+    {
+      "id": "quiz-gisela-becker-expressionist-standing-v1",
+      "file": "quiz-gisela-becker-expressionist-standing-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-fdab266d-7676-4591-b9db-12d2afb39fff.png",
+      "prompt": "Use case: stylized-concept. Asset: ONE isolated high-resolution immutable source painting for Germany Simulator quiz speaker Gisela Becker; neutral FRONT full-body adult standing pose only, to be assessed before any motion or runtime work. Image 1 is PRIMARY style and adult leg/arm-length reference: Sabine Krueger's accepted four-view painterly Berlin source. Image 2 is SECONDARY whole-body texture/anatomy reference: Brigitte Mueller standing. Images 3 and 4 are GISELA IDENTITY, clothing, prop and hand-ownership references only; their squat old body proportions must be discarded. Paint the SAME recognizable older German woman: tousled sandy-blonde short bob, small tired eyes behind low narrow dark glasses, furrowed distinct angular face, worried skeptical expression, pearl earrings, floral burgundy scarf, worn beige trench jacket over deep wine knit sweater and dark knee-length skirt, brown stockings and sturdy brown low shoes. Keep the white unmarked rectangular paper in her anatomical RIGHT hand (screen left) and the one dark burgundy book tucked in her anatomical LEFT hand/arm (screen right), as in Gisela's original; preserve one of each and no extra props. Quiet planted stance, feet separated just enough for two complete legs, full hands and fingers, visible knee/shin/ankle/shoe structure and connected adult limbs. Crown-to-sole adult stature and head/torso/limb relationship like image 1, no cropped part, no tiny feet. Keep a readable CLOSED natural lip crease clearly visible below the nose, with paper and book below/away from face for later source-owned speech. The facial paint and coat should push further toward Disco Elysium meets Berlin: mature weary asymmetrical structure, angular expressive planes, broad irregular drybrush and oil brush color marks, layered pigment, muted dirty ochre, petrol, wine, gray-green cool shadows. Painterly marks form volumes, not uniform speckle noise. No smoothed vector facets, glossy cartoon, cute big eyes, chibi proportions, toy face, generic clean costume, photorealistic skin, or delicate even outline. One figure centered with generous transparent margins, true RGBA alpha, absolutely no backdrop/floor/cast shadow/glow/halo/text/lettering/watermark. Front view only; no panel, sheet, multiple figures or pose variants.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+        "assets/quiz-characters/gisela-becker.webp",
+        "assets/sprite-sources/street-quiz/gisela-becker-keys.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional neutral front; producer: source-candidate-unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/gisela-adult-neutral/receipt.json",
+      "sourceReviewReceiptSha256": "98982dec947e132399efc47d5771f1f7bea7bd9527cda1c6d1569f58bf1bb95b",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sourceSha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary mature paint and adult limb reference",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "role": "secondary whole-body anatomy/texture reference",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+          "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+        },
+        {
+          "role": "Gisela portrait identity, outfit, prop/hand ownership reference",
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "role": "Gisela prior action family identity, outfit, prop/hand ownership reference; rejected body proportions",
+          "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+          "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+        }
+      ],
+      "producerFindings": {
+        "style": "Mature angular wary face and broad broken ochre/wine brush planes; substantially closer to Sabine/Brigitte than the prior squat Gisela source. Some coat texture remains patterned/faceted, so final style acceptance belongs to integrator.",
+        "anatomy": "One connected front adult figure. Full separated lower legs, ankles and sturdy shoes; complete visible hands and fingers. Relative head/limb stature visually aligns with the adult references far better than the original short-body sheet.",
+        "identity": "Tousled sandy blonde bob, narrow low glasses, pearls, floral burgundy scarf, beige trench, wine knit sweater, dark skirt and concerned expression retain Gisela Becker.",
+        "handedness": "White blank paper stays in anatomical right hand (screen left); one burgundy book stays in anatomical left hand/arm (screen right). Closed mouth crease remains visible and clear of both props.",
+        "light_dark": "Both composites show a clean isolated silhouette without visible painted backdrop, floor, cast shadow, or broad halo. Low-alpha detached flecks exist numerically, including canvas-edge pixels at alpha >= 1.",
+        "holds": [
+          "Source candidate only; no runtime, mouth fit, movement, matching profile/rear views, or game-scale acceptance was performed.",
+          "At alpha >= 128 the hair starts 7 pixels below the top and shoes end 14 pixels above the bottom; native motion/cell registration may require extra gutter.",
+          "At alpha >= 1, 310 connected components include weak detached edge flecks; clean/inspect these before any encoded export without altering this immutable original."
+        ]
+      },
+      "producerCaveats": [
+        "Source candidate only; no runtime, mouth fit, movement, matching profile/rear views, or game-scale acceptance was performed.",
+        "At alpha >= 128 the hair starts 7 pixels below the top and shoes end 14 pixels above the bottom; native motion/cell registration may require extra gutter.",
+        "At alpha >= 1, 310 connected components include weak detached edge flecks; clean/inspect these before any encoded export without altering this immutable original."
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/gisela-adult-neutral/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 2023242,
+      "componentBounds": [
+        [
+          188,
+          6,
+          841,
+          1522
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 6,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary mature paint and adult limb reference",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "role": "secondary whole-body anatomy/texture reference",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+            "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+          },
+          {
+            "role": "Gisela portrait identity, outfit, prop/hand ownership reference",
+            "path": "assets/quiz-characters/gisela-becker.webp",
+            "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+          },
+          {
+            "role": "Gisela prior action family identity, outfit, prop/hand ownership reference; rejected body proportions",
+            "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+            "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+          "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+        },
+        {
+          "path": "assets/quiz-characters/gisela-becker.webp",
+          "sha256": "85f3a906cf39f092f5ed0d6d1e56ffc15364a7e3a9f5a227e2e78cfae18a5a7c"
+        },
+        {
+          "path": "assets/sprite-sources/street-quiz/gisela-becker-keys.png",
+          "sha256": "c367a9062ce40efdadcd6436ac712d0f9e502a3c2e206b3be1a3c7d2d2ee5d74"
+        }
+      ]
+    },
+    {
+      "id": "stadt-brigitte-mueller-expressionist-standing-v3",
+      "file": "stadt-brigitte-mueller-expressionist-standing-v3.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8/exec-85c18ba4-439b-4519-810e-4fd754442143.png",
+      "prompt": "Use case: new identity-preserving FRONT standing sprite painting of ONE fictional Berlin resident.\nImage 1 is the PRIMARY FINISH/PROPORTION authority: Hartmut Keller. Use his distinctly mature, weathered expressionist oil/acrylic paint: hard cheek and brow planes, shadowed small eyes, broken broad directional brushwork, worn garment folds, real adult anatomy. Do not borrow his features, vest, radio or other clothes.\nImage 2 is the SECONDARY FINISH authority: Sabine Krueger. Use her elegant angular face construction, asymmetric gaze, controlled full-body adult proportions and broad blocked garment texture. Do not borrow her hair, mustard vest, blouse, book or shoes.\nImage 3 is Brigitte Müller's IDENTITY/OUTFIT authority only: preserve THIS older woman's warm brown bob with pronounced GREY FRONT STREAK, wire round glasses, reserved slightly stern face, olive green scarf, short BRICK-RED jacket with lapels and buttons, CHARCOAL KNEE SKIRT, GREY STOCKINGS, and BLACK FLAT STRAP SHOES (visible cross-foot leather straps, rounded toes, low flat soles; specifically NO laces or oxfords). ONE blank cream envelope tucked under her ANATOMICAL LEFT arm, on viewer-right in this front view, visibly held by the left hand. Her anatomical right hand on viewer-left is empty. Do not inherit Image 3's toy body, glossy face or smooth repetitive cloth shading.\nCreate EXACTLY ONE SINGLE COMPLETE WHOLE-BODY FRONT-FACING neutral standing Brigitte, not a turnaround or multiple people. Adult body and head scale like Hartmut/Sabine, lived-in and age-specific. Smaller tired eyes behind her glasses, asymmetrical eyelids, angled nose/cheeks, clear jaw/neck structure and fine age creases; retain her own face and grey-streak bob. Coat, skirt, scarf and stockings formed by BROAD oil-brush marks and angular value blocks tied to seams, drape and light; avoid all-over fine speckle and polished toy volume. Preserve the entire figure, both attached hands, distinct calves and both full strap flats with generous transparent margin, shared planted soles. Wardrobe and envelope must match Brigitte, while paint FINISH must stand beside Hartmut/Sabine as an original mature Berlin character.\nActual transparent RGBA outside the single figure, including all corners; do not include the brown backdrop of Image 1/2, ground, shadow, halo, glow, grid, text or other objects.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "provisional-source-pass; One mature front-facing adult with original bob/grey streak, glasses, green scarf, brick-red jacket, charcoal knee skirt, grey stockings, and black flat strap shoes. One envelope visibly gripped by anatomical left hand; right hand empty. Face and garment planes read substantially closer to Sabine/Hartmut than v1/v2. No visible missing anatomy at native source size; visual acceptance at actual standing sprite size remains for integrator.",
+      "sourceReviewReceipt": "output/resident-source-batch-v3/receipt.json",
+      "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 1815413,
+      "componentBounds": [
+        [
+          239,
+          23,
+          800,
+          1493
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 23,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "path": "assets/sprite-sources/street-residents/stadt-brigitte-mueller-directions-candidate.png",
+            "sha256": "d95780d9cf524234b47b34bc602259ea245ff5bb109bef8f580c77afdb99b622"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Front-derived adult standing paint selected locally; original standingOnly/no-mouth capability preserved. Native source/export review complete; rendered/specialist acceptance incomplete. Full-cast goal active and unpublished."
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "status": "exact request recovered from own Codex JSONL; original call was not edited",
+  "threadId": "01a16551-3399-7ce1-9880-edfabf5c71e2",
+  "callId": "call_ae5b9cdd9d71469eaa8fcc27ad6109c6",
+  "timestamp": "2026-10-23T10:06:13.093Z",
+  "sessionLogLineSha256": "be2c42aa43229f2608b5e626329249a918acda0139e6f7cdd9fb0d5812a44b93",
+  "submittedPrompt": "Use case: stylized-concept. Create one full-body right-profile 2D painted sprite source of mature adult Gisela Becker, facing screen right, transparent background. Preserve the attached first reference's sandy bob, glasses, pearl earrings, floral scarf, beige coat, wine sweater, dark knee skirt, white paper in anatomical right hand and burgundy book in anatomical left hand. The second reference locks her strap shoes and face. Show a single planted stride contact: near right leg back screen left and far left leg forward screen right, both complete knees/stockings/brown single-instep-strap shoes and two soles on one floor line under a continuous knee skirt. Keep mature angular Berlin oil paint. No laces, extra props/limbs, duplicated hands, cropped feet, repeating diamond pattern, floor, shadows, halo, text or background.",
+  "referencedImagePaths": [
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-right-v4.png",
+      "sha256": "cbf36cfba57dcd09f2fe48d81c49a0f9ae15756d13b63b7a9131fde7e21e2828"
+    },
+    {
+      "path": "assets/sprite-sources/berlin-street-20261022/quiz-gisela-becker-expressionist-standing-v1.png",
+      "sha256": "0c4729ac00b5489e6a57f35785d94386626358a3ce89b38d33a942b9f8968405"
+    }
+  ],
+  "transparentBackground": true,
+  "generatedResult": {
+    "path": "output/street-redesign/gisela-end-to-end/generated-right-contact/right-contact-b.png",
+    "sha256": "55c9c79fea0c3b2fcfc53ecbad9f7bb0a75bfe515d4cafbca4cfb28dd369d475"
+  },
+  "mappingEvidence": "Second sequential right-contact imagegen invocation after first logged request; saved raw result B from second invocation."
+}

@@ -11,12 +11,12 @@ const readAsset=path=>readFileSync(path.replace(/^\.\//,''));
 const scope=vm.createContext({});
 vm.runInContext(readFileSync('character-interactions.js','utf8'),scope);
 
-test('Gisela has owned phase stops and paper presentation without changing her published standing scale',()=>{
+test('Gisela has adult scale, owned phase stops and paper presentation',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,1.6);
- assert.equal(p.standing.sha256,'44b36e0d7c337758c52e10007ffe27ec6bd6f470b6368e9c0c0f0c41e8808021');
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.equal(p.standing.sha256,'3a6acc2d5010078f4cb6e669229958ad3e140a26ad87a2c0c2d91a1e5a70348c');
  assert.equal(hash(readAsset(p.standing.file)),p.standing.sha256);
- assert.equal(p.strideDistance,9.5);
+ assert.equal(p.strideDistance,18.64);
  for(const [direction,walk] of Object.entries(p.atlasMotion.walks)){
   assert.equal(walk.frames,16);
   for(let phase=0;phase<16;phase++){
@@ -28,14 +28,14 @@ test('Gisela has owned phase stops and paper presentation without changing her p
   }
  }
  for(const state of ['greet','work','review'])assert.deepEqual(p.atlasMotion.interactions.states[state].durations_ms,Array(16).fill(80));
- for(const state of ['look','wait','success','failure'])assert.deepEqual([p.atlasMotion.interactions.states[state].row,p.atlasMotion.interactions.states[state].col],[4,2]);
+ for(const state of ['look','wait','success','failure'])assert.deepEqual([p.atlasMotion.interactions.states[state].row,p.atlasMotion.interactions.states[state].col],[8,0]);
 });
 
 test('Gisela moving lips bind the actual selected sources and keep rear stopping poses closed',()=>{
  assert(p.motionDelivery?.file,'existing packed delivery is required');
  const bytes=readAsset(p.mouthPaint.file);assert.equal(hash(bytes),p.mouthPaint.sha256);
  const mouth=JSON.parse(bytes);assert.deepEqual(mouth.grid,p.grid);assert.equal(mouth.sources.standing,p.standing.sha256);
- assert.equal(mouth.frames.filter(Boolean).length,276);assert.equal(mouth.frames.filter(x=>x===null).length,102);
+ assert.equal(mouth.frames.filter(Boolean).length,278);assert.equal(mouth.frames.filter(x=>x===null).length,100);
  for(const [name,variant] of Object.entries(p.variants))assert.equal(mouth.sources[name],variant.sha256);
  for(let phase=0;phase<16;phase++)for(const cell of p.atlasMotion.settles.up[phase].frames)assert.equal(mouth.frames[cell.row*p.grid[0]+cell.col],null);
  const delivery=readAsset(p.motionDelivery.file);assert.equal(hash(delivery),p.motionDelivery.sha256);
