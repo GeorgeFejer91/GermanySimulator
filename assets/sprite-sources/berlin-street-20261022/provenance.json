@@ -4777,6 +4777,685 @@
         }
       ],
       "exactPromptSha256": "3ac5b79197b7c50716c8f5c60e27fd90bd5ac80411171f67e416d6cfb2161b40"
+    },
+    {
+      "id": "stadt-karl-heinz-post-expressionist-standing-v1",
+      "file": "stadt-karl-heinz-post-expressionist-standing-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1663c-3386-7c83-bd17-e9e508f9fa7e\\exec-c351e51a-57f0-44f7-918c-513c16c99fe2.png",
+      "prompt": "Use case: stylized-concept. Asset: ONE immutable high-resolution neutral FRONT complete full-body source painting of Germany Simulator resident KARL-HEINZ POST, candidate for later source review only, no action sheet. Images 1 and 2 are PRIMARY mature painterly Berlin facial/garment and adult anatomical stature references (Sabine Krueger and Hartmut Keller); image 3 is SECONDARY adult broad-shouldered male front silhouette and paint reference (Wolfgang Schulz). Images 4 and 5 establish KARL-HEINZ'S OWN identity, clothes and prop hand only; their old huge-head miniature/very short legs must NOT be copied. He is a solidly built older German postal worker, wary tired small eyes, distinctive broad brown moustache, strong uneven eyebrows, weathered somewhat heavy but mature angular face, brown-gray hair under worn dark blue flat/newsboy cap. Preserve mustard-yellow worn work jacket with two chest pockets over dark navy button shirt, navy work trousers and substantial scuffed charcoal-gray walking boots. Exactly one neat short stack of plain white envelopes held low at his ANATOMICAL LEFT side in his ANATOMICAL LEFT hand (screen right). His ANATOMICAL RIGHT hand (screen left) relaxed, completely visible and empty for later gesture. The envelopes must not hide his mouth. Front-facing quiet planted stance with complete connected adult shoulder/elbow/wrist/fingers, trouser-covered thighs, knees, shins, ankles, and two entire sturdy substantial shoes. Preserve his broad build but use adult head/torso/limb relation comparable to primary references; no toy, chibi or little stump legs. Closed natural mouth line visible beneath moustache with source-owned corners, not an open grin. Painterly Disco Elysium meets Berlin finish: mature angular individual face, asymmetry, aged creases, broad irregular drybrush/oil shapes forming fabric and face volumes, muted dirty mustard, petrol/navy, brown and cool gray-green shadows; no smooth glossy toy shading, evenly tiled facet pattern, fine uniform speckle, or clean vector edges. Exactly ONE centered isolated front whole-body figure occupies at most 82% canvas height and 72% width; leave at least 65 truly transparent pixels above cap, below soles and outside every hand/envelope. TRUE RGBA alpha cutout, no backdrop, ground, cast shadow, halo, glow, text, logo, watermark, second figure, sheet, alternate angle or action pose.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/stadt-wolfgang-schulz-expressionist-standing-v1.png",
+        "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+        "assets/characters/street/stadt-karl-heinz-post-standing.webp"
+      ],
+      "expectedComponentCount": 1,
+      "status": "UNSELECTED provisional neutral front; producer: source-candidate-unapproved",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-neutrals-batch3/stadt-karl-heinz-post-receipt.json",
+      "sourceReviewReceiptSha256": "098987953998ea22410e524a72e7a66400a12aeb6ce2839579b199d74d878e20",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+      "sourceSha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "primary mature Berlin painterly finish and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "role": "primary mature Berlin painterly finish and adult anatomy",
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "role": "secondary stout adult man front stature/paint",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-wolfgang-schulz-expressionist-standing-v1.png",
+          "sha256": "c98319d4176fda4db90bdf1866a78c776ac9064d60e0d1b3a3bfad68078bddf2"
+        },
+        {
+          "role": "Karl-Heinz own cap, moustache, mustard jacket, envelopes and left-hand ownership; old miniature anatomy rejected",
+          "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+          "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+        },
+        {
+          "role": "Karl-Heinz canonical standing identity/colors, not adult proportion authority",
+          "path": "assets/characters/street/stadt-karl-heinz-post-standing.webp",
+          "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877"
+        }
+      ],
+      "producerFindings": {
+        "style": "Weathered strong-faced man with broad irregular mustard/navy cloth paint; recognizably Karl-Heinz, although yellow jacket has a partly repeated facet pattern.",
+        "anatomy": "Broad adult body, complete connected trouser legs, hands and substantial scuffed dark boots.",
+        "identity_handedness": "Blue cap, brown mustache, mustard jacket/navy shirt/trousers kept. Single white envelope stack held anatomical LEFT (screen right); RIGHT empty.",
+        "mouth": "Closed line below mustache visible and clear of low envelopes; native source lip fit remains unproved.",
+        "holds": [
+          "Unapproved source only; no existing walk, turn, gesture, mouth or recording capability replaced or tested.",
+          "Check native fit, alpha edge and expressionist strength before expanding the action family.",
+          "Alpha>=128 margins are {'left': 171, 'top': 60, 'right': 164, 'bottom': 49} pixels; the generated image did not meet the prompt's >=65 px vertical margin, so root must assess native cell gutters and may need canvas padding on a derived export while keeping this source immutable.",
+          "Very weak alpha>=1 flecks touch image edges: {'top': 0, 'bottom': 1, 'left': 46, 'right': 0}; do not treat raw alpha support as a clean export matte."
+        ],
+        "light_dark": "Inspected both actual composites: clear cutout without visible backdrop, floor, cast shadow or broad halo. Low-alpha detached flecks remain a numerical cleanup concern."
+      },
+      "producerCaveats": {
+        "1": {
+          "pixels": 608947,
+          "bounds_xyxy_exclusive": [
+            0,
+            16,
+            1018,
+            1536
+          ],
+          "components": 559,
+          "largest_components": [
+            {
+              "pixels": 607472,
+              "bounds_xyxy_exclusive": [
+                165,
+                49,
+                864,
+                1490
+              ]
+            },
+            {
+              "pixels": 147,
+              "bounds_xyxy_exclusive": [
+                801,
+                223,
+                818,
+                240
+              ]
+            },
+            {
+              "pixels": 127,
+              "bounds_xyxy_exclusive": [
+                931,
+                399,
+                942,
+                418
+              ]
+            },
+            {
+              "pixels": 49,
+              "bounds_xyxy_exclusive": [
+                339,
+                49,
+                350,
+                58
+              ]
+            },
+            {
+              "pixels": 45,
+              "bounds_xyxy_exclusive": [
+                872,
+                320,
+                880,
+                330
+              ]
+            },
+            {
+              "pixels": 42,
+              "bounds_xyxy_exclusive": [
+                1009,
+                512,
+                1018,
+                520
+              ]
+            },
+            {
+              "pixels": 38,
+              "bounds_xyxy_exclusive": [
+                0,
+                945,
+                4,
+                961
+              ]
+            },
+            {
+              "pixels": 35,
+              "bounds_xyxy_exclusive": [
+                371,
+                55,
+                378,
+                64
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 1,
+            "left": 46,
+            "right": 0
+          }
+        },
+        "8": {
+          "pixels": 589932,
+          "bounds_xyxy_exclusive": [
+            170,
+            59,
+            860,
+            1488
+          ],
+          "components": 3,
+          "largest_components": [
+            {
+              "pixels": 589929,
+              "bounds_xyxy_exclusive": [
+                170,
+                59,
+                860,
+                1488
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                368,
+                211,
+                369,
+                213
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                715,
+                877,
+                716,
+                878
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "20": {
+          "pixels": 588591,
+          "bounds_xyxy_exclusive": [
+            170,
+            59,
+            860,
+            1487
+          ],
+          "components": 3,
+          "largest_components": [
+            {
+              "pixels": 588589,
+              "bounds_xyxy_exclusive": [
+                170,
+                59,
+                860,
+                1487
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                380,
+                187,
+                381,
+                188
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                629,
+                178,
+                630,
+                179
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "64": {
+          "pixels": 586305,
+          "bounds_xyxy_exclusive": [
+            170,
+            60,
+            860,
+            1487
+          ],
+          "components": 2,
+          "largest_components": [
+            {
+              "pixels": 586304,
+              "bounds_xyxy_exclusive": [
+                170,
+                60,
+                860,
+                1487
+              ]
+            },
+            {
+              "pixels": 1,
+              "bounds_xyxy_exclusive": [
+                394,
+                265,
+                395,
+                266
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "128": {
+          "pixels": 584036,
+          "bounds_xyxy_exclusive": [
+            171,
+            60,
+            860,
+            1487
+          ],
+          "components": 4,
+          "largest_components": [
+            {
+              "pixels": 584029,
+              "bounds_xyxy_exclusive": [
+                171,
+                60,
+                860,
+                1487
+              ]
+            },
+            {
+              "pixels": 3,
+              "bounds_xyxy_exclusive": [
+                605,
+                242,
+                606,
+                245
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                601,
+                252,
+                602,
+                254
+              ]
+            },
+            {
+              "pixels": 2,
+              "bounds_xyxy_exclusive": [
+                617,
+                205,
+                619,
+                206
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "250": {
+          "pixels": 568336,
+          "bounds_xyxy_exclusive": [
+            174,
+            61,
+            858,
+            1486
+          ],
+          "components": 226,
+          "largest_components": [
+            {
+              "pixels": 567964,
+              "bounds_xyxy_exclusive": [
+                174,
+                62,
+                857,
+                1485
+              ]
+            },
+            {
+              "pixels": 12,
+              "bounds_xyxy_exclusive": [
+                749,
+                1232,
+                750,
+                1244
+              ]
+            },
+            {
+              "pixels": 12,
+              "bounds_xyxy_exclusive": [
+                321,
+                836,
+                322,
+                848
+              ]
+            },
+            {
+              "pixels": 9,
+              "bounds_xyxy_exclusive": [
+                359,
+                1471,
+                368,
+                1472
+              ]
+            },
+            {
+              "pixels": 7,
+              "bounds_xyxy_exclusive": [
+                506,
+                1375,
+                507,
+                1382
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                750,
+                1248,
+                751,
+                1254
+              ]
+            },
+            {
+              "pixels": 6,
+              "bounds_xyxy_exclusive": [
+                297,
+                891,
+                298,
+                897
+              ]
+            },
+            {
+              "pixels": 5,
+              "bounds_xyxy_exclusive": [
+                751,
+                1263,
+                752,
+                1268
+              ]
+            }
+          ],
+          "edge_pixels": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-neutrals-batch3/stadt-karl-heinz-post-receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 2122059,
+      "componentBounds": [
+        [
+          170,
+          59,
+          860,
+          1487
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 49,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "primary mature Berlin painterly finish and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+            "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+          },
+          {
+            "role": "primary mature Berlin painterly finish and adult anatomy",
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "role": "secondary stout adult man front stature/paint",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-wolfgang-schulz-expressionist-standing-v1.png",
+            "sha256": "c98319d4176fda4db90bdf1866a78c776ac9064d60e0d1b3a3bfad68078bddf2"
+          },
+          {
+            "role": "Karl-Heinz own cap, moustache, mustard jacket, envelopes and left-hand ownership; old miniature anatomy rejected",
+            "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+            "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+          },
+          {
+            "role": "Karl-Heinz canonical standing identity/colors, not adult proportion authority",
+            "path": "assets/characters/street/stadt-karl-heinz-post-standing.webp",
+            "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-sabine-krueger-expressionist-directions-v1.png",
+          "sha256": "0724dde486c231973aa9260c397cb0681dda851999d56c4a2831eb440514528b"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+          "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+        },
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-wolfgang-schulz-expressionist-standing-v1.png",
+          "sha256": "c98319d4176fda4db90bdf1866a78c776ac9064d60e0d1b3a3bfad68078bddf2"
+        },
+        {
+          "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+          "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+        },
+        {
+          "path": "assets/characters/street/stadt-karl-heinz-post-standing.webp",
+          "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877"
+        }
+      ]
+    },
+    {
+      "id": "stadt-wolfgang-schulz-expressionist-standing-v1",
+      "file": "stadt-wolfgang-schulz-expressionist-standing-v1.png",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8/exec-d42c448a-ba72-4cc4-94a9-3b3225f2bf5f.png",
+      "prompt": "Use case: identity-preserving NEW single standing source painting for the existing Germany Simulator city resident Wolfgang Schulz.\nImage 1 is the PRIMARY PAINTING AND ADULT-ANATOMY reference: Hartmut Keller's expressionist street source. Use the mature weathered facial planes, smaller tired eyes, asymmetric age lines, angular cheek/brow/nose shapes, broad directional oil/acrylic brush marks, worn clothes and fully grounded adult limb proportions. Do not copy Hartmut's actual face, spectacles, white shirt, green vest, radio, notebook, flashlight or props.\nImage 2 is the SECONDARY SOURCE-FINISH AND WHOLE-BODY reference: Brigitte Müller's mature front-standing source. Match its connected adult body scale, coherent rough paint and clear transparent silhouette; do not copy Brigitte's face, hair, skirt, scarf, jacket or envelope.\nImage 3 is Wolfgang's IDENTITY, OUTFIT AND PROP authority ONLY: keep this specific late-middle-aged man's round broad but WEATHERED face, dense cropped salt-and-pepper curls, dark horseshoe brows, SMALL black moustache, no glasses, stocky adult belly and distracted appointment-minded expression. He wears an OLIVE WOOL CARDIGAN with visible TAN ELBOW PATCHES and front pockets/buttons over a PALE BLUE COLLARED SHIRT, DEEP BROWN full-length chunky trousers and BROAD BLACK RUBBER-SOLED shoes. Exactly ONE BATTERED BURGUNDY LEATHER BRIEFCASE hangs by its handle from his ANATOMICAL RIGHT hand (viewer-LEFT in the front view); anatomical LEFT hand (viewer-right) empty. Keep worn case flap and metal clasp. Do not take the toy body scale, large doll eyes, smooth glossy face or micro-pattern textile finish from Image 3.\nProduce EXACTLY ONE SINGLE FRONT-FACING COMPLETE WHOLE-BODY adult in a quiet neutral planted stance, not a four-view row or another person. Preserve Wolfgang's recognizable curls/moustache/stocky build while repainting his brow, eyes, cheeks, jaw and neck as honest angular aged adult planes with shadowed smaller eyes and broad broken strokes, like Hartmut. Cardigan and trousers should have large fold-linked brush masses and weathered weave, not fine uniform stipple. Keep both full attached arms/hands, clearly gripped case in right hand, distinct complete legs and both grounded black shoes. Generous transparent margin around hair, briefcase and shoes; one sole baseline. True transparent RGBA outside the ONE figure, no brown painted background from references, shadow, floor, glow, text, grid, halo or extra object.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+        "assets/sprite-sources/street-residents/stadt-wolfgang-schulz-directions-candidate.png"
+      ],
+      "expectedComponentCount": 1,
+      "status": "provisional-source-pass; Identity matches canonical source: late-middle-age broad weathered face, dense salt-and-pepper curls, dark moustache and brows, no glasses, stocky belly, olive cardigan with both tan elbow patches over pale blue collared shirt, brown full-length trousers, broad black shoes. Exactly one battered burgundy briefcase with clasp is visibly gripped by anatomical RIGHT hand (viewer-left); left hand empty. Native detail and light/dark composites show complete connected adult anatomy, mature angular face, broad worn cloth strokes and clean silhouette. No visible prop or identity failure.",
+      "sourceReviewReceipt": "output/street-redesign/resident-standing-batch-2/receipt.json",
+      "sha256": "c98319d4176fda4db90bdf1866a78c776ac9064d60e0d1b3a3bfad68078bddf2",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 2253021,
+      "componentBounds": [
+        [
+          100,
+          25,
+          885,
+          1501
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "minimumCanvasMargin": 25,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/quiz-hartmut-keller-expressionist-directions-v1.png",
+            "sha256": "041c21c07d75c80ea7fdd9de3f654dba1778b9553a4ac3bdbf535224386a499e"
+          },
+          {
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-brigitte-mueller-expressionist-standing-v3.png",
+            "sha256": "d6edfbc1485cfc267bf174defc887556e99d689151023226ed312ed1d66935c0"
+          },
+          {
+            "path": "assets/sprite-sources/street-residents/stadt-wolfgang-schulz-directions-candidate.png",
+            "sha256": "0497e4f9d928f42821726c57501404a52c4381cef3bfc871587c35a09f5ac3bf"
+          }
+        ]
+      },
+      "runtimeAcceptance": "Front-derived adult standing paint selected locally; original standingOnly/no-mouth capability preserved. Native source/export review complete; rendered/specialist acceptance incomplete. Full-cast goal active and unpublished."
+    },
+    {
+      "id": "stadt-karl-heinz-post-expressionist-directions-v1",
+      "file": "stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a165e9-4b7f-71c2-b31c-2a6ca2a8d0f8\\exec-f4efc497-d547-470f-8831-e0c501244db5.png",
+      "prompt": "Create ONE horizontal four-view whole-body 2D painted source sheet of the SAME mature Berlin adult Karl-Heinz Post. Exact order FRONT, RIGHT-facing true side profile, REAR genuine back, LEFT-facing true side profile. Each is a quiet planted neutral figure, same crown and shoe baseline, equal head/torso/arm/thigh/shin length, true grown-up height. Four fully separate silhouettes with at least 50px genuine transparent gutters and generous canvas outer margins; complete hands, prop and feet, no walking/action state. Reference roles: FIRST his NEW expressionist wholebody front source binds own identity, proportions, connected anatomy, outfit, precise white envelopes/hand and shoes. SECOND Hartmut Keller original quiz portrait supplies ONLY worn male DE/Berlin brush finish, angular weathered face and irregular broad oil strokes, not radio/vest/face. THIRD old Karl-Heinz four-direction source crosschecks his own profile/rear navy flat cap construction, brown hair, thick dark moustache, mustard-ochre work jacket with flap pockets, blue shirt, navy trousers, and gray-brown LACE-UP rugged work shoes; DO NOT copy its toy-short build. Keep his own slightly stocky mature adult figure, smaller tired eyes, moustache, prominent nose and CLOSED distinct lips in front and both true profiles; rear cap/hair/coat back only, no invented rear face. Exactly one small bundle of WHITE ENVELOPES in anatomical LEFT hand, FRONT viewer-right, REAR viewer-left; anatomical RIGHT hand empty all views. Natural far-side occlusion allowed in profiles; never move envelopes to right hand or duplicate/drop them. Preserve lace-up shoe closure, substantial rounded toes and sole thickness in all four, no shoe conversion. Genuinely rotated torso/limbs with both near/far hands/feet anatomically credible; no mirrored front masquerading as back, no profile front-face paste. Distinct broad broken irregular painted planes and worn fabric, not regular tiled diamonds, fine speckle, toy face or photo airbrush. Transparent RGBA alpha-zero background, no halo, red outline, vignette, backdrop, floor/shadow, text, labels, arrows, watermark.",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+        "assets/quiz-characters/hartmut-keller.webp",
+        "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png"
+      ],
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED provisional four-cardinal adult source",
+      "sourceReviewReceipt": "assets/sprite-sources/berlin-street-20261022/receipts/animated-adult-directions-batch1/receipt.json",
+      "sourceReviewReceiptSha256": "3df12d0a7b23fa161f34269ac8c167b333dd3e18a98666ef3d487741362f2f4d",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+      "sourceSha256": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+      "exactOriginalRequestedReferences": [
+        {
+          "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+          "sha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424"
+        },
+        {
+          "role": "secondary portrait paint finish only",
+          "path": "assets/quiz-characters/hartmut-keller.webp",
+          "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+        },
+        {
+          "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+          "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+          "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+        }
+      ],
+      "producerFindings": "Four coherent adult views, blue cap, moustache, ochre jacket, navy clothes and rugged lace-up shoes consistent. White envelopes stay anatomical LEFT: front viewer-right, rear viewer-left, and visibly attached in both profiles. Opposite hand remains empty. Broad garment paint; no observed major anatomical or prop drift in source stills.",
+      "producerCaveats": [
+        "All three alpha>=16 inter-figure gutters exceed 50 px (minimum 126 px), but the top/bottom outer clear margins are 11/9 px, below the requested 50 px. Preserve full figures and add transparent padding in a later authorized fit before packing.",
+        "Low-alpha (1-15) residual fringe touches 201 edge pixels, maximum edge alpha 2; composites looked clean, but final matte should clear edge residue and hidden RGB before shipping."
+      ],
+      "runtimeAcceptance": "Unreferenced authoring source; native/movement/render acceptance outstanding.",
+      "originalSourceReviewReceipt": "output/street-redesign/animated-adult-directions-batch1/receipt.json",
+      "referencePathProvenance": "Original input locations and hashes retained as recorded in producer receipt; repository-relative paths are its worktree-relative representation. New references/ copies are byte-identical portable equivalents.",
+      "sha256": "54c17ac7904811c1affbb79bd6c7a87382720251a7e56a7e148436d77bac30fa",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "bytes": 1695512,
+      "componentBounds": [
+        [
+          91,
+          14,
+          500,
+          782
+        ],
+        [
+          649,
+          11,
+          911,
+          784
+        ],
+        [
+          1037,
+          11,
+          1437,
+          781
+        ],
+        [
+          1601,
+          12,
+          1866,
+          784
+        ]
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "minimumCanvasMargin": 9,
+      "generationRequest": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          {
+            "role": "binding new adult front identity/anatomy/wardrobe/props/shoes",
+            "path": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+            "sha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424"
+          },
+          {
+            "role": "secondary portrait paint finish only",
+            "path": "assets/quiz-characters/hartmut-keller.webp",
+            "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+          },
+          {
+            "role": "old canonical own four-view outfit/prop cross-check; no toy proportions",
+            "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+            "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+          }
+        ],
+        "pathRepresentation": "Original input locations as recorded by the producer receipt; repository-relative paths resolve against the authoring worktree. Portable copies below are equivalents, not original tool paths."
+      },
+      "portableReferenceEquivalents": [
+        {
+          "path": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png",
+          "sha256": "5dfb9375e3e6ed11e968f33d242510622b29e6ac27bf908fcbd88f22378af424"
+        },
+        {
+          "path": "assets/quiz-characters/hartmut-keller.webp",
+          "sha256": "eb26c3eab4bbb285bcabb04eba259f228e9f58ccde170997f8947a7fa15c334a"
+        },
+        {
+          "path": "assets/sprite-sources/street-residents/stadt-karl-heinz-post-directions-candidate.png",
+          "sha256": "f729563bbc2a88d37befa59d500092fc11d204258a524acbdcdc7df190d88ec5"
+        }
+      ]
+    },
+    {
+      "id": "stadt-karl-heinz-post-expressionist-diagonals-v1",
+      "file": "stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "source": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16896-d44a-71a1-ad2e-44ca39c2b77a\\exec-faeaf57b-b8d1-4d20-b130-a31d225ad087.png",
+      "prompt": "Create one transparent horizontal FOUR-FIGURE production sprite source sheet of the SAME mature Berlin man Karl-Heinz Post. FIRST reference is the binding whole-body four-cardinal painting: use exactly his adult head/neck/torso/arms/thighs/shins, stocky mature build, weathered face, tired eyes, dark moustache, brown-grey hair, navy flat cap, ochre work jacket with flap pockets, navy shirt and trousers, substantial grey-brown LACE-UP work boots. SECOND reference is his binding front identity detail only. Preserve the broad irregular painted brush planes and lived-in fabric, Disco Elysium meets Berlin, rather than a toy, glossy game mascot or speckle filter.\n\nThese FOUR poses are missing WHOLE-BODY intermediate standing turns, not head turns: left to right FRONT-RIGHT THREE QUARTER (45 degrees), REAR-RIGHT THREE QUARTER (135 degrees), REAR-LEFT THREE QUARTER (225 degrees), FRONT-LEFT THREE QUARTER (315 degrees). Each entire cap, skull, shoulders, chest, jacket pockets, pelvis, knees and both boots must rotate together in perspective. The two front quarters must be clearly halfway between the first reference's front and true profile: asymmetric shoulder widths, foreshortened far lapel and pocket, nearer arm separating from the torso, oblique belt, diagonal near/far boots and partial far cheek. Do not produce a frontal chest with only the head turned. Rear quarters show jacket back panel and only a natural sliver of profile face. Four distinct views, no duplicated front poses or mirrors.\n\nAnatomical LEFT hand owns exactly ONE modest bundle of white envelopes in all views; anatomical RIGHT hand stays EMPTY. The envelopes are front viewer-right and rear viewer-left; preserve physically correct near/far sleeve and envelope occlusion through the two side turns. Keep their existing low hip-level grip, never switch hands or duplicate the bundle. Both boots planted, natural slight foot separation, shoulders relaxed, lips closed when visible, no new action. Same crown-to-sole height, same head size, one consistent camera and standing registration across all four. Complete cap, hands, fingers, envelopes, toes and heels inside image. Four fully separate silhouettes, generous transparent gaps and 40px clear canvas margins, actual transparent RGBA background. No floor, contact shadow, vignette, lettering, labels, arrows, watermark, floating paint, red fringe or background.\n",
+      "referencedSources": [
+        "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-directions-v1.png",
+        "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-standing-v1.png"
+      ],
+      "sourceSha256": "fd195ef3e1219c853818bbcd7a7daff195d7a0dc2acf464592ec732e9f66ea33",
+      "expectedComponentCount": 4,
+      "status": "UNSELECTED OWN QUARTER SOURCE; ordered native review pending",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-karl-heinz-post/adult-v1/quarter-generation-receipt.json",
+      "sourceReviewReceiptSha256": "c23308ebaab75248612090869a1527a06b921e42a70e5ed8a632d532ea2b3dd5",
+      "originalSourcePath": "assets/sprite-sources/berlin-street-20261022/stadt-karl-heinz-post-expressionist-diagonals-v1.png",
+      "producerFindings": "Four distinct whole-body oblique views, adult proportions and cap/moustache/outfit maintained. Anatomical LEFT white envelopes and empty RIGHT hand preserved. Top/bottom source margins narrow; shared family registration must provide native transparent gutters. Whole torso/pelvis/boot orientation to be checked between cardinal anchors; no final animation approval.",
+      "sha256": "fd195ef3e1219c853818bbcd7a7daff195d7a0dc2acf464592ec732e9f66ea33"
     }
   ]
 }
