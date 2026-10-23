@@ -3,7 +3,7 @@ import {surfaceFamilies} from './surface-data.mjs';
 
 const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
-  gravel:'aggregate', ground:'aggregate'};
+  gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];

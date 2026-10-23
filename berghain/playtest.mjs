@@ -41,6 +41,7 @@ export default {
   name: 'Berghain architectural viewer',
   sourceFiles: () => ['berghain/model.html', 'berghain/viewer.css', 'berghain/viewer.mjs', 'berghain/navigation.mjs', 'berghain/camera.mjs',
     'assets/models/berghain/layout.mjs', 'assets/models/berghain/model.mjs', 'assets/models/berghain/interior-fixtures.mjs', 'assets/models/berghain/berghain-study.glb',
+    'assets/models/berghain/speaker-geometries.mjs','assets/models/berghain/sound-system.mjs',
     'assets/models/berghain/survey-data.mjs', 'assets/models/berghain/survey-model.mjs',
     'assets/models/berghain/berghain-exterior-lod2.glb', 'assets/models/berghain/survey-manifest.json',
     'assets/models/berghain/calibration.mjs', 'assets/models/berghain/manifest.json',
@@ -141,7 +142,7 @@ export default {
       page.on('console',message=>{if(/shader error|VALIDATE_STATUS|program not valid/i.test(message.text())) errors.push(message.text());});
       await ready(page, baseURL);
       assert.equal(await page.locator('#model').getAttribute('data-materials'),'ready');
-      assert.equal(await page.locator('#model').getAttribute('data-surface-textures'),'12');
+      assert.equal(await page.locator('#model').getAttribute('data-surface-textures'),'15');
       await artifacts.screenshot(page, 'exterior.png');
       assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
       const initial = await page.locator('#model').getAttribute('data-position');

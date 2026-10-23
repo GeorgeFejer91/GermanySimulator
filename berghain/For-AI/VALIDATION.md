@@ -1,5 +1,93 @@
 # Berghain viewer validation
 
+## Exterior landscape and building refinement — 2026-10-23
+
+The exterior request was split among three scoped workers for landscaping,
+envelope details and reference research, with one integrator. Original geometry
+adds differentiated entrance cobbles/concrete paths, queue rails and bollards,
+drainage, a gated/fenced garden, planting beds, fourteen trees with undergrowth,
+bamboo, grassy mounds, seats, standing tables, a sheltered service counter and
+service cabinets. The Halle gains separate side/rear masonry bays, closed
+service doors and vents; the main building gains entrance reveals, drainage,
+coping, sparse mineral runoff and inferred roof membrane seams. P07–P10 support
+broad site forms; SITE01/SITE02 support seasonal garden use and described
+planting. Positions, species, furniture arrangements and unsurveyed details are
+explicitly inferred. The smoking bridge remains an unresolved modelling gap.
+
+The initial exterior-only freeze on `83cac59` had 47 files. The final
+combined freeze is `output/berghain-exterior-combined-candidate.json` with
+52 source, test and asset hashes on `ed0e0c25`. After the PA update landed on main, its published model/components were
+combined with this exterior delta. The final freeze is rooted at
+`output/berghain-exterior-combined-release` on public `ed0e0c25`.
+All original main-game changes and the accepted PA remain present.
+The combined release GLB is **18,588,552 bytes / 149,276 triangles / 85 groups**,
+SHA-256 `eed42cad4213d733ff2b66593a072b17db4a3cb56241a2c2736c5b22d80d7913`.
+Compared with the public base: +19,020 triangles and +1,945,468 export bytes.
+All twelve existing 512px original maps are unchanged (12 MiB base decoded RGBA,
+16 MiB with mipmaps; GPU/driver overhead additional). No new image, dependency,
+timer or animation loop. Viewing imports procedural modules; the GLB remains an
+explicit download/diagnostic request. The existing owner disposes geometry and
+materials; native diagnostic scenes explicitly dispose their resources.
+
+Local final evidence:
+
+- **42/42 combined Node checks PASS**, including whole-body entry/stair/garden routes,
+  visible collision bounds, official exterior proportions, portable materials,
+  hidden-page packaging and two regressions from independent review.
+- `output/berghain-exterior-publish-browser/report.json`: **8/8 PASS**, silent
+  Chromium desktop and Android portrait/landscape emulation, real mouse/keyboard
+  or CDP touch orbit/garden movement, front/rear/site views, native GLB views,
+  and diagnostic actual-camera/actor shrub-edge rendering. Each profile runs
+  315 actual RAF turn frames at .02 rad/step, retaining the visible avatar and
+  limiting camera movement to <.35m per sampled turn. Diagnostic placement is
+  separate from natural entrance evidence.
+- `output/berghain-exterior-publish-entry-browser/report.json`: **4/4 PASS**,
+  actual outside approach/E/entry/exit, touch, gait, interruption, graphics
+  recovery, idle cessation and narrow/enlarged text.
+- `output/berghain-exterior-combined-material-browser/report.json`: **4/4 PASS**, paired
+  source/GLB material rendering and usable texture-failure movement on all three
+  profiles. Geometry/camera-only final repairs preserve these material paths.
+
+Initial independent review correctly failed walk-through opaque shrubs and a
+subsequent discrete camera-elevation pop. Matching low-planting collision and a
+continuous proximity-based camera rise repaired them, with red-to-green tests.
+The camera keeps its actual opaque-mesh envelope check, now one nine-ray scan;
+it does not ignore plant geometry. High crowns remain nonblocking above people.
+Initial FAIL evidence stays in the two independent review reports under
+`output/berghain-exterior-{physics,camera}-review.md`.
+
+Both independent specialists also reviewed the combined 52-file freeze.
+Physics freshly confirmed all hashes and 37 scoped tests, retaining its
+independent body/solid audit. The unchanged exterior camera keeps its
+315 production-camera turn samples: maximum step **.01840m**, zero
+hidden-avatar samples; two fine-step walking approaches stayed continuous.
+Final rendered turns match these values on all three emulated profiles. No
+required Physics or Camera repair remains for this bounded exterior candidate.
+
+Source/fixture mismatches during isolated-test setup are preserved under the
+earlier release-before/entry reports. Correct-root suites and the immutable
+fax SVG dependency repaired the harness, without weakening assertions.
+Physical Android/GPU qualification, exhaustive paths and surveyed photographic
+fidelity remain NOT RUN/unresolved. Main-game missions/traffic/sprites and their
+root performance benchmark are out of scope; no root game runtime changes.
+Earlier pre-PA source-view diagnostics observed 101 → 132 overview draw calls and
+158,164 → 193,984 rendered triangles (including shadow passes), with no idle
+RAF activity or eager GLB. Host readiness timings are diagnostics, not a device
+performance or optimisation claim. The full reconstruction goal stays open.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
+2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
+
+
 2026-10-23; integrator-owned local candidate. This record covers the provisional architectural viewer and GLB, not measured fidelity, the main game or physical-device qualification.
 
 ## Confirmed public deployment
@@ -419,3 +507,113 @@ the calibrated candidate above supersedes that geometry. The extraction alone
 did not establish walking, collider, physical Android, measured-interior or
 texture fidelity. The official data is generalised LoD2, not a new building
 survey; source part footprint date is 2023-03-11.
+
+## Reported main-hall speaker equipment — accepted scoped candidate
+
+2026-10-23. Frozen contract: `output/berghain-speaker-candidate.json`,33 files,
+base `83cac59dc3c5fb550db47ce38a42b14c785ed639`. Concurrent exterior/landscape
+changes were preserved in the primary checkout. The original speaker candidate
+was recovered in `output/berghain-speaker-release`, where all 33 SHA-256 hashes
+match, including GLB `0fdcdeb142fffdfa1d6e1c226e7cacd1a64db51b3d4b42b00cbc0c7981a98583`.
+No primary index/reset/revert operation was used. The unchanged shared door
+module's extra trailing blank line is excluded from publication.
+
+Editable/native asset:44 components,66 mesh/material groups,130,256 triangles,
+16,643,096 bytes,12 existing embedded original maps; exterior bounds unchanged.
+Twelve F218 MkII, sixteen Evo6EL, ten Evo6EH and six F124 replace generic boxes.
+The four component envelopes match inspected manufacturer drawings S07–S10;
+reported arrangement is S05, repeated in S06, with qualified later S11 evidence.
+Internal horn contours, finish, supports, anchors and currentness remain inferred.
+
+Executed on the isolated served source, silently in headless Chromium151:
+
+| Evidence | Result and scope |
+| --- | --- |
+| Six Node suites: model, fixtures, materials, survey, walkthrough, sound-system |32/32 PASS. Full-body collision/aisle, exact component envelopes, finite normals, hollow apertures, transformed visible/collision agreement, stairs, packaging and export. |
+| `output/berghain-speaker-release-browser/report.json` |7/7 PASS: source/native GLB and avatar near equipment on desktop, Android portrait/landscape emulation;320px/200% text and Pretext labels. All reported source hashes match the frozen release. |
+| `output/berghain-speaker-isolated-entry-browser/report.json` |4/4 PASS: natural keyboard/touch approach, proximity action, hinged door entry/exit, cancelled crossing, layout and lifecycle. Suite and served root both isolated. |
+| `output/berghain-speaker-isolated-stairs-browser/report.json` |2/2 PASS: all three stairs up/down, desktop and Android portrait emulation. Hashes match isolated disk;14 unchanged texture/survey dependencies extend the33-file contract. |
+| `output/berghain-speaker-isolated-furniture-browser/report.json` |4/4 PASS: defining furniture compositions/native GLB and avatar at bar on desktop/Android portrait. Covers the shared native-asset helper extraction. |
+
+Independent read-only Physics reviewer: P1/P2/P4/P5/X1 PASS for this viewer.
+Fresh 29/29 scoped tests;44 components/58 equipment solids;176 visible component
+surfaces fit transformed collision envelopes. No opposing same-assembly cabinet
+surface vertices penetrate the adjacent trapezoid. Bottom cabinets sit at 6.65 m;
+tilted towers sit 2.68 mm above their supports. 70/70 shallow overlap starts recover
+legally; seven 10 m western-aisle lanes each have 101/101 legal samples. Supplied
+matching rendered evidence shows body separation. P3 crowd/vehicles out of scope.
+
+Independent read-only Camera/scale reviewer: C1–C5/X1 PASS as adapted to the
+three-dimensional architectural viewer. Fresh 32/32 tests; ray probes enter real
+horns .19–.69m; source/native depth persists, full 1.80 m avatar remains visible,
+and manufacturer cabinet size relates plausibly to it. Both reviewers confirm
+all 33 hashes and all 17 supplied browser cases. No required fix remains.
+
+Evidence limits: room selection is a diagnostic shortcut in speaker/furniture
+views; natural entrance and stairs are proved separately. Native GLB uses its
+explicit inspection renderer/lighting, so image brightness is not exact parity.
+No acoustic simulation/listening, physical Android/device-GPU test, city
+crowd/vehicle/sprite/fade test, or accurate current installation claim. Earlier
+moving-primary queue failure and diagonally sliding pilot are not acceptance
+evidence; the frozen release passes the original queue guard and head-on block.
+Retained overhead DS assemblies, Panorama Studt rig, named artworks and missing
+rooms remain unfinished. This accepts an equipment increment, not the full goal.
+
+### Public speaker preview verification
+
+Pushed `ed0e0c251ccc1869ce981d3ba3cf704b8f013b94` with 17 scoped changed paths, preserving parent `211282f`
+and the unrelated staged primary checkout. Immutable public files pass 39/39 exact
+SHA-256 comparisons in `output/berghain-speaker-immutable-verification.json`.
+`output/berghain-speaker-immutable-browser/report.json` passes 6/6 on the actual
+public URL: natural entrance/exit/refresh, source/native speakers and controlled
+human near equipment, desktop and Android portrait emulation. Expected hashes
+are read from the published Git objects. Silent Chromium; no physical device.
+Permanent Geheim equipment deployment remains pending Pages run 40000026294;
+the previously verified canonical avatar/door remains available. Do not label
+immutable preview evidence as canonical Pages evidence.
+
+## Panorama figure increment — accepted geometry, fidelity remains open
+
+2026-10-23. Freeze output/berghain-artwork-candidate.json: 62 files, based on
+published exterior/speakers c6041f6. Portable GLB SHA256 9970accf87430557bf37f41674c97c9315f3d8e4f2482bcd00aa7e1ed07c8da7:
+22,371,528 bytes, 229,356 triangles, 94 mesh/material groups, 15 shared embedded maps.
+The new original figure adds 80,080 triangles and uses 9 indexed material groups.
+No downloaded artwork image, artist mesh or studio furniture is embedded.
+
+Fresh nine-suite Node checks pass 47/47. Corrected source/native figure views and
+avatar pass 7/7 in output/berghain-artwork-release-framing-browser/report.json on
+desktop, Android portrait and landscape emulation. Regression passes 10/10 in
+output/berghain-artwork-release-regression/report.json: natural entry/exit all
+three layouts; idle/context restore; texture fallback desktop/portrait; Panorama
+footer 320px/200%; source/native materials with exactly 15 texture disposals;
+furniture/native regressions desktop/portrait. Report hashes match the freeze.
+The earlier landscape test aimed from a stale room position and is superseded;
+the corrected test waits for the actual mapped Panorama spawn before aiming.
+
+Independent Physics P1/P2/P4/P5/X1 PASS: fresh 47/47 tests and 62/62 hashes;
+80,080 transformed triangles vs four counter solids inset 2mm have 0 penetrations.
+Worktop support and hanging boot floor gaps are 3mm. Six outer bar lanes have
+unchanged legality with/without the artwork; 2/2 eligible shallow overlaps recover.
+Independent Camera/scale C1–C5/X1 PASS for this initial increment: inspected the
+ART02 photograph and current source/native/visitor frames, including repaired
+landscape framing. Figure bounds 1.581×1.615×0.999m read plausibly beside the
+1.80m human and 1.13m counter. No required camera or Physics fix remains.
+
+Cost evidence: output/berghain-artwork-cost-{before,after}/report.json and
+output/berghain-artwork-cost-comparison.json. Each has 3 cold runs per layout,
+same local scene/input, Chromium 151, DPR 2, no throttling; baseline is the complete
+published exterior release. Transfer 4,195,332→5,208,268 bytes; export remains
+unrequested in ordinary viewing. Median ready ms desktop 793→932, portrait 675→908,
+landscape 662→915 (ranges before 726–1589/640–742/656–749; after 919–1568/882–1031/
+863–1024). Median product-RAF p95 stays about 14ms, no continuing idle frames.
+Input is one real keyboard/touch sample per run; medians vary 11.4→10.7,23.8→17.5,
+24.9→14.5ms, with a 95.2ms baseline outlier. These short shared-host samples do
+not establish a causal speedup or physical Android/low-end GPU qualification.
+
+Fidelity remains unfinished: anatomy, hair, garment cut, hardware and weathering
+are stylised. Published 160×130×110cm axes/support inclusion, installed pose,
+bar location and current presence remain inferred. Eight tiny triangles have
+minor face/vertex-normal opposition, total <0.00036m², without visible blocker.
+Physical Android, crowd/vehicle/sprite/fade and acoustics are NOT RUN/out of scope.
+This accepts a visible geometry increment, not a faithful finished artwork or
+the full realistic interior/exterior goal. Remaining rooms and art remain open.

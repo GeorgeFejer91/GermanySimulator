@@ -10,9 +10,28 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+2026-10-23 exterior priority: George requests substantially more work on the
+outer building and parallel completion of its landscaping. Three scoped workers
+own landscape geometry, envelope details and source research. Codex owns hookup,
+portable export, sequential silent browser checks, independent Physics and
+Camera/scale acceptance, and scoped publication. Keep the surveyed exterior
+envelope, existing rooms, visitor dimensions and entrance route. Site planting,
+surface courses and furniture placement remain explicitly inferred. Plan:
+integrate both geometry modules; inspect front/rear/garden and real entry on
+desktop/Android emulation; verify collision/export/resource bounds; freeze and
+review one candidate; publish only the reviewed exterior delta while preserving
+other chats' unpublished sound/interior work. Full architectural completion
+remains open.
+
+
+
+
+
+
+
 - [x] Register the active goal and create this scoped workspace.
 - [x] Search the public web and GitHub for pre-existing models and references.
-- [x] Create the reviewed online resource catalogue, including source access and reuse status (83 entries).
+- [x] Create the reviewed online resource catalogue, including source access and reuse status (97 entries).
 - [x] Inspect primary architectural images and establish a provisional façade and room-volume study; retain dimensional gaps.
 - [x] Build the hidden architectural viewer with outside/inside navigation and explicit reconstruction status.
 - [ ] Create and refine the full model; document dimensions, source links and uncertain geometry by space.
@@ -69,6 +88,44 @@ observations; no photograph, graffiti or artwork is embedded. Re-export and
 review rendered elevations, collision bounds and existing walking paths.
 
 ## Handoff
+
+### Exterior landscape candidate
+
+The current exterior pass adds the planted industrial site, articulated garden,
+forecourt and queue, and richer Halle/entrance/roof-edge details. Low planting
+collision and a continuous camera rise preserve walking and readable turns.
+The final combined candidate preserves the published PA and adds this exterior
+work; see VALIDATION.md for exact export bytes and tests.
+Full architectural fidelity, the bridge and missing interiors remain open.
+
+
+
+
+
+
+
+### Main-hall sound equipment update
+
+The speaker update replaces the former generic main-floor boxes with 44 original
+Funktion-One component models: twelve F218 MkII, sixteen Evo 6EL, ten Evo 6EH and
+six F124. Four inspected manufacturer drawings establish outer cabinet dimensions.
+The reported 2023 arrangement comes from one community evidence chain, with a
+later 2025 discussion; coordinates, rigging, colour, internal horn contours and
+present-day installation status remain inferred. No acoustic simulation or
+listening claim is made. The retained overhead DS assemblies, actual Panorama
+Studt installation, artworks and missing rooms remain unfinished.
+
+`speaker-geometries.mjs` owns shared hollow cabinet/horn geometry;
+`sound-system.mjs` owns assemblies and collision derived from their transforms.
+Portable GLB and editable rendering retain the same 44-component metadata.
+The extracted `native-asset-playtest.mjs` helper serves furniture and speaker
+export checks. No manufacturer CAD, PDF image, logo or recording is shipped.
+See INTERIOR.md, SOURCES.md S05–S11 and VALIDATION.md for evidence and limits.
+
+The frozen speaker release lives under ignored output solely as a validation
+and publication artifact. Concurrent exterior/landscape edits in the primary
+checkout were preserved. No primary-index operation is part of publication.
+Full realistic-asset acceptance remains outstanding and the app goal stays active.
 
 ### Geheim playable walkthrough — published and verified live
 
@@ -203,11 +260,11 @@ checks pass. All 12 shared textures dispose once. Both independent reviews pass
 on `output/berghain-material-candidate.json` (36 files). Faint tiling on the
 long blank hall wall and unique dirt/damage remain fidelity work.
 
-The active app goal remains unfinished. Research and a calibrated, photo-informed model/viewer are implemented; they do not meet the full realistic-asset target yet. See [SOURCES.md](SOURCES.md) for the 81-entry catalogue, [INTERIOR.md](INTERIOR.md) for the artwork/equipment and room inventory, and [VALIDATION.md](VALIDATION.md) for checks, independent reviews and outstanding coverage.
+The active app goal remains unfinished. Research and a calibrated, photo-informed model/viewer are implemented; they do not meet the full realistic-asset target yet. See [SOURCES.md](SOURCES.md) for the 97-entry catalogue, [INTERIOR.md](INTERIOR.md) for the artwork/equipment and room inventory, and [VALIDATION.md](VALIDATION.md) for checks, independent reviews and outstanding coverage.
 
 Open `/berghain/model.html` through the project's HTTP server. The current local preview is `http://127.0.0.1:49683/berghain/model.html` while that server remains running. The page is direct-link only, with `noindex, nofollow`, and has no ordinary game-navigation entry. It is not access-controlled.
 
-The study includes the exterior shell, foyer, main floor, Panorama Bar, Säule, Halle and garden. Exterior orbit, walking with keyboard/touch, room selection, three traversable stairs, graphics recovery and GLB download are implemented. Asset authority: `assets/models/berghain/layout.mjs`; renderer assembly: `model.mjs`. Regenerate with `node berghain/export-model.mjs`. The current GLB is 6,713,940 bytes / 40,112 triangles, with 39 material/mesh groups and 12 embedded original PBR texture maps. It combines original study geometry with Berlin open-data roofs and annexes. No downloaded image or artwork is embedded.
+The study includes the exterior shell, foyer, main floor, Panorama Bar, Säule, Halle and garden. Exterior orbit, walking with keyboard/touch, room selection, three traversable stairs, graphics recovery and GLB download are implemented. Asset authority: `assets/models/berghain/layout.mjs`; renderer assembly: `model.mjs`. Regenerate with `node berghain/export-model.mjs`. The current GLB is 22,371,528 bytes / 229,356 triangles, with 94 material/mesh groups and 15 embedded original PBR texture maps. It combines original study geometry with Berlin open-data roofs and annexes. No downloaded image or artwork is embedded.
 
 Research found an unfinished OpenSCAD/front-façade STL repository, a paid printable STL listing, the original Minecraft creator's withdrawn walkthrough, architects' photographs and eyewitness diagrams. No complete, verified, freely reusable interior/exterior asset has been confirmed. The 2004 application image is only a cover/title-block photograph. The inspected Transformers catalogue (PDF page 70) has an exterior axonometric and site map, without dimensioned interior plans. The official Berlin textured exterior-mesh portal reported maintenance; no tile was acquired.
 
@@ -215,10 +272,47 @@ Official cadastral and LoD2 exterior geometry was acquired from the separate, wo
 
 The walking viewer is now calibrated through `calibration.mjs`: the front/join/rear cross-sections fit the two primary volumes; official roof faces, the taller Halle's exposed front wall, and both western annex meshes are included. The annexes remain closed unmodelled volumes; their internal use is not inferred. The unsupported rooftop box is removed. Interior floors remain provisional, and visitor radius 0.28 m / eye height 1.68 m are unchanged. Mapped polygon floors/solids follow the same geometry, solid heights derive from their actual rendered matrices, and discrete tread undersides supplement the smooth stair support. One inferred western Halle column/beam line was moved clear of the full provisional stair lane. It is not a verified structural grid. Camera reset uses actual shell/annex bounds.
 
-Reproduce extraction after downloading the source files listed in `survey-data.mjs`: run `python berghain/import-berlin-lod2.py`, then `node berghain/export-model.mjs --survey`. The standalone official reference remains separate from the combined walking study export. The shared exporter handles ordinary and instanced meshes. Current combined study SHA-256: `1fbb211bc0f63c54334b27bbe29b813e2b648146c699d4d4d434f1e4e734674f`.
+Reproduce extraction after downloading the source files listed in `survey-data.mjs`: run `python berghain/import-berlin-lod2.py`, then `node berghain/export-model.mjs --survey`. The standalone official reference remains separate from the combined walking study export. The shared exporter handles ordinary and instanced meshes. Current combined study SHA-256: `9970accf87430557bf37f41674c97c9315f3d8e4f2482bcd00aa7e1ed07c8da7`.
 
 The façade now has separate glazing tiers, steel frames, masonry bands, physical inset panels, sills and attic vents informed by P03/P07–P10. Panels use an estimated 7 cm authoring depth (about 5.9–6.0 cm after calibration), with closed solid rims. All three elevations still repeat estimated bays. Original tileable colour/normal/roughness maps add approximate grain; unique site weathering and decay are not established. Regenerate them with `python berghain/build-materials.py`. Roofs retain their simpler material. A12/A13 and I11 add primary Lab.oratory and Panorama references, including the missing extra lounge level and historical lighting/acoustic treatments.
 
 Next work: prioritise the missing interior design using INTERIOR.md, including distinctive furniture, art, room connections and sound-system geometry; model Lab.oratory, the extra Panorama lounge level, bathrooms and services. Verify circulation/elevations rather than adding unlocated objects. Per-elevation openings, roof/rear detail, smoking bridge and observed weathering remain on the full-goal checklist. The retained 44 m authoring coordinates are transformed at asset construction and are no longer the shipped exterior width; do not treat those old coordinates or inferred partitions/repeated façades as measured facts. Primary exterior data does not establish room dimensions or which annex contains a particular interior use.
 
 Repository: `C:/Users/cogpsy-vrlab/Documents/GitHub/GermanySimulator`. The local `codex/neighborhood-walk-talk` branch has no initial commit/remote and substantial pre-existing staged work. Publish only the Berghain scope and builder allowlist against verified `GeorgeFejer91/GermanySimulator` remote `main` using an isolated bare repository/index under ignored `output/`; fetch/push by explicit repository URL because this bare repository also has no named origin. Preserve the original index and game work (2,285 staged entries at this checkpoint). Runtime commit `9c842707e588e5e218109a0f63eb51c73a472b1f` is confirmed deployed: **https://germanysimulator.de/berghain/model.html**. Pages workflow `39977033051` succeeded; 31 published-file comparisons and two live browser tours passed, with desktop/Android emulation distinguished in VALIDATION.md. The expanded research inventory is a subsequent documentation-only publication. The shared root handoff remains authoritative for unrelated game work.
+
+### Speaker update published — versioned preview verified
+
+Runtime commit `ed0e0c251ccc1869ce981d3ba3cf704b8f013b94`, parent `211282f`, is pushed to main.
+Public preview: **https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/ed0e0c251ccc1869ce981d3ba3cf704b8f013b94/geheim/index.html**. A fresh visit may show the provider's
+Open the page button. `output/berghain-speaker-immutable-verification.json`
+confirms all 39 published files exactly match Git objects. The actual public
+desktop/Android-portrait entry/exit, speaker/native GLB and avatar cases pass 6/6
+in `output/berghain-speaker-immutable-browser/report.json`.
+
+The permanent **https://germanysimulator.de/geheim/** already has the verified
+controllable avatar and natural entrance interaction. Its equipment update is
+queued in Pages run 40000026294 behind run 39993645344; do not claim the new
+speaker model is canonical until file and browser checks confirm deployment.
+The published speaker catalogue has 90 entries. Concurrent exterior work in the
+primary checkout is separate and preserved. The primary index remains SHA256
+`704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105`.
+The full realistic reconstruction remains active; art/room gaps are in INTERIOR.md.
+
+### Panorama figure — accepted initial geometry increment
+
+CLIMBER (Angel Kiss), Anna Uddenberg, 2020, now has an original reconstructed
+figure on the inferred Panorama counter. Sources ART02/03/13 and PROVENANCE.md
+retain the distinction between observed pose/clothes and inferred hidden form,
+hardware, placement/currentness and the published dimensions' unknown axes.
+The studio barrel/table/stool and all photograph pixels are excluded.
+
+climber-geometry.mjs/artworks.mjs share the existing model, instancing, PBR and
+GLB exporter. Source/native and visitor views pass 7/7; natural-entry/material/
+lifecycle/fallback/text/furniture regression 10/10; Node 47/47. Both independent
+world reviewers accept the initial increment. VALIDATION.md records the 62-file
+freeze, measured costs and limitations. No physical Android qualification.
+
+This study is visibly stylised: anatomy, hair, garment fit, hardware and material
+weathering require further work before faithful artwork acceptance. Other named
+artworks, Klo Bar/toilets, extra lounge, Lab and verified room connections remain
+required. The full realistic reconstruction goal stays active.

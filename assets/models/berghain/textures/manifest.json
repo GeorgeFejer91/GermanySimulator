@@ -90,6 +90,27 @@
         }
       },
       "estimatedReliefMetres": 0.003
+    },
+    "fabric": {
+      "metresPerTile": 0.08,
+      "maps": {
+        "baseColor": {
+          "file": "textures/fabric-baseColor.png",
+          "bytes": 166217,
+          "sha256": "65480c6df0acd4b024b03fd6a2e90a77aa96d19d2aec72e4f32d4b7ff2fdc895"
+        },
+        "roughness": {
+          "file": "textures/fabric-roughness.png",
+          "bytes": 262893,
+          "sha256": "4ea6fa5899b3519a38f412a86c23c6d689c19150c27eee291a93edc619f14a98"
+        },
+        "normal": {
+          "file": "textures/fabric-normal.png",
+          "bytes": 568469,
+          "sha256": "e14b18b78a46f458d1c4cc3130a829843b21d0e4f5249e3c61ac3bc27aa15cfe"
+        }
+      },
+      "estimatedReliefMetres": 0.00045
     }
   }
 }

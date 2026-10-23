@@ -1,7 +1,13 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures} from './interior-fixtures.mjs';
+import {addSoundSystem} from './sound-system.mjs';
+import {addArtworks,artworkMaterials} from './artworks.mjs';
+import {addLandscape, landscapeMaterials} from './landscape.mjs';
+import {addExteriorDetails} from './exterior-details.mjs';
 
 export const materials = {
+  ...landscapeMaterials,
+  ...artworkMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -22,7 +28,8 @@ export const materials = {
   red: {color: '#6f2521', roughness: .5, emissive: '#be3020', emissiveIntensity: .55},
   upholstery: {color:'#282825',roughness:.88},
   aluminium: {color:'#8b9087',roughness:.38,metalness:.72},
-  opal: {color:'#cbd6c2',roughness:.6,emissive:'#8abc9b',emissiveIntensity:.35}
+  opal: {color:'#cbd6c2',roughness:.6,emissive:'#8abc9b',emissiveIntensity:.35},
+  speakerViolet:{color:'#73657c',roughness:.82}
 };
 
 export const layout = {units: 'metres', confidence: 'provisional', floors: [], solids: [], parts: []};
@@ -237,9 +244,9 @@ export const viewpoints = {
   foyer: {label: 'Foyer', position: {x: 0, y: .05, z: 19}, yaw: -.3,
     confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'I08', 'I09']},
   berghain: {label: 'Berghain', position: {x: 5, y: 6.65, z: 5}, yaw: 0,
-    confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'P05']},
+    confidence: 'Approximate layout; reported PA arrangement', sources: ['A01', 'I01', 'I02', 'P05', 'S05', 'S07', 'S08', 'S09', 'S10']},
   panorama: {label: 'Panorama Bar', position: {x: -11, y: 13.25, z: -7}, yaw: 0,
-    confidence: 'Approximate layout', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11']},
+    confidence: 'Approximate layout; artwork study', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11', 'ART02', 'ART03', 'ART13']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
@@ -248,5 +255,9 @@ export const viewpoints = {
     confidence: 'Approximate layout', sources: ['I01']}
 };
 
+addLandscape(layout);
+addExteriorDetails(layout);
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
+addSoundSystem(layout);
+addArtworks(layout);

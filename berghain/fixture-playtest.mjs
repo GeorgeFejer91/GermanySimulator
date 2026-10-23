@@ -3,8 +3,9 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {canStand} from './navigation.mjs';
 import {layout} from '../assets/models/berghain/layout.mjs';
+import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs';
 
-async function dragLook(page,context,profile,delta) {
+export async function dragLook(page,context,profile,delta) {
   const box=await page.locator('#model').boundingBox();
   const touch=profile.hasTouch?await context.newCDPSession(page):null;
   for(let remaining=delta;Math.abs(remaining)>.01;) {
@@ -20,7 +21,7 @@ async function dragLook(page,context,profile,delta) {
   }
   if(touch)await touch.detach();
 }
-async function forward(page,context,profile,ms) {
+export async function forward(page,context,profile,ms) {
   const touch=profile.hasTouch?await context.newCDPSession(page):null;
   if(touch) {
     const b=await page.locator('[data-move="forward"]').boundingBox();
@@ -35,6 +36,7 @@ async function forward(page,context,profile,ms) {
 export default {
   name:'Berghain source-derived interior furniture',
   sourceFiles:()=>['assets/models/berghain/interior-fixtures.mjs','assets/models/berghain/layout.mjs','assets/models/berghain/model.mjs',
+    'assets/models/berghain/speaker-geometries.mjs','assets/models/berghain/sound-system.mjs',
     'assets/models/berghain/berghain-study.glb','assets/models/berghain/manifest.json','berghain/viewer.mjs','berghain/navigation.mjs']
     .map(path=>({path,sha256:createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex')})),
   scenarios:[{id:'furniture-rooms',modes:['quick','stress'],async run({page,context,profile,baseURL,artifacts}){
@@ -58,38 +60,9 @@ export default {
     const blocked=await forward(page,context,profile,700);
     assert.ok(Math.hypot(blocked.x-stopped.x,blocked.z-stopped.z)<.025,'physical furniture stops continued forward input');
     await artifacts.screenshot(page,'bar-body-clearance.png');
-    const native=await page.evaluate(async position=>{
-      const THREE=await import('../assets/vendor/three/0.186.0/build/three.module.min.js');
-      const {GLTFLoader}=await import('../assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js');
-      const bytes=await(await fetch('../assets/models/berghain/berghain-study.glb')).arrayBuffer();
-      const gltf=await new GLTFLoader().parseAsync(bytes,'');
-      const fixtures=gltf.scene.children[0]?.userData.fixtures||gltf.scene.userData.fixtures;
-      if(!fixtures?.some(f=>f.id==='panorama-bar'))throw Error('Portable GLB is missing the fixture inventory');
-      const canvas=document.createElement('canvas');canvas.id='native-fixtures';
-      Object.assign(canvas.style,{position:'absolute',inset:'0',width:'100%',height:'100%'});
-      document.querySelector('#viewport').append(canvas);
-      const rect=canvas.getBoundingClientRect(),renderer=new THREE.WebGLRenderer({canvas,antialias:true});
-      renderer.setPixelRatio(Math.min(1,Math.sqrt(1600000/(rect.width*rect.height))));renderer.setSize(rect.width,rect.height,false);
-      renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
-      const scene=new THREE.Scene();scene.background=new THREE.Color('#b3b3a6');scene.add(gltf.scene);
-      scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
-      const sun=new THREE.DirectionalLight('#ffedcf',3);sun.position.set(-45,65,50);scene.add(sun);
-      const camera=new THREE.PerspectiveCamera(45,rect.width/rect.height,.08,500);
-      camera.position.set(position.x,position.y+1.68,position.z);camera.rotation.set(0,1.18,0,'YXZ');
-      renderer.render(scene,camera);
-      const bounds=new THREE.Box3().setFromObject(gltf.scene);let meshes=0;
-      gltf.scene.traverse(node=>{if(node.isMesh)meshes++;});
-      window.__disposeNativeFixture=()=>{
-        const materials=new Set(),geometries=new Set(),textures=new Set();
-        gltf.scene.traverse(node=>{if(node.isMesh){geometries.add(node.geometry);materials.add(node.material);}});
-        for(const material of materials){for(const key of ['map','normalMap','roughnessMap','metalnessMap'])if(material[key])textures.add(material[key]);material.dispose();}
-        for(const geometry of geometries)geometry.dispose();for(const texture of textures)texture.dispose();
-        renderer.dispose();canvas.remove();delete window.__disposeNativeFixture;
-      };
-      return {bytes:bytes.byteLength,meshes,fixtures:fixtures.length,min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
-    },before);
+    const native=await renderNativeAsset(page,{position:before,yaw:1.18});
     await artifacts.screenshot(page,'portable-glb-panorama.png');
-    await page.evaluate(()=>window.__disposeNativeFixture());
+    await disposeNativeAsset(page);
     const manifest=JSON.parse(readFileSync(new URL('../assets/models/berghain/manifest.json',import.meta.url)));
     assert.equal(native.bytes,manifest.bytes);assert.equal(native.meshes,manifest.meshes);
     for(let axis=0;axis<3;axis++)assert.ok(Math.abs(native.max[axis]-manifest.bounds.max[axis])<.01);

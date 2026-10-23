@@ -80,6 +80,25 @@ test('third-person camera stays inside a closed entrance even when its centre ra
   walk.dispose(); disposeBerghainModel(model);
 });
 
+test('the camera lifts over a low garden shrub without losing the visitor', async () => {
+  const {createWalkthrough} = await import('../berghain/walkthrough.mjs');
+  const {createBerghainModel,disposeBerghainModel} = await import('../assets/models/berghain/model.mjs');
+  const walk=createWalkthrough(),model=createBerghainModel(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500);
+  const position={x:33.25,y:.05,z:18.5};
+  assert.ok(canStand(position,layout));walk.step(position,{x:0,z:0},0);
+  const distance=walk.camera(camera,position,1.57,0,model);
+  assert.ok(distance>.65,`low planting collapsed the camera to ${distance}`);
+  assert.equal(walk.avatar.group.visible,true);
+  let previous=camera.position.clone();
+  for(let yaw=0;yaw<Math.PI*2;yaw+=.02){
+    walk.camera(camera,position,yaw,0,model);
+    if(yaw>0)assert.ok(camera.position.distanceTo(previous)<.35,'slow garden turns must not pop between camera elevations');
+    assert.equal(walk.avatar.group.visible,true);
+    previous.copy(camera.position);
+  }
+  walk.dispose();disposeBerghainModel(model);
+});
+
 test('the complete animated human stays inside the navigation body at every gait phase', async () => {
   const {createVisitorAvatar} = await import('../assets/models/berghain/avatar.mjs');
   const avatar = createVisitorAvatar(), point = new THREE.Vector3();
