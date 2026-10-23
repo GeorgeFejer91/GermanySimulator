@@ -30,6 +30,18 @@ timers cannot restart a successor. No new scheduler or audio asset is introduced
 Measurements and coverage are recorded in the
 [task report](../docs/engineering/REALTIME-PERFORMANCE.md).
 
+The existing direct-page builder omits exactly three offline authoring trees:
+`assets/sprite-sources/resident-motion/`, `berlin-street-20261022/` and
+`street-residents/`. Originals and provenance remain in the repository; browser
+loaders use the exported character assets. Other source trees stay published
+because maintained sprite and office previews fetch their manifests, study
+atlases and animation-state images. Preserve `assets/sprite-archive/` and the
+runtime `For-AI/AUDIO-TEXT-LIBRARY.js`. Build into a fresh output directory when
+checking this copy filter: the builder does not remove stale output files.
+The reduced publication must fit [GitHub Pages' 1 GB site limit](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits);
+the task's complete asset-hash/size check and browser preview checks bind the
+actual publication, rather than assuming every source asset is unused.
+
 The five additional traffic/police defaults total 279,004 encoded MP3 bytes.
 Silent forced-broker checks on Chromium desktop and Android emulation observed
 no target recording fetch at startup, then one fetch/decode per requested clip,
