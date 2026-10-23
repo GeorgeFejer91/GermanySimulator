@@ -63,6 +63,16 @@ function clearInput() {
   walk?.stop();
 }
 
+function syncLoungeRoom(){
+  const room=Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+    roomSelect.value==='lounge'&&Math.abs(visitor.y-13.25)<.15?'panorama':null;
+  if(!room||roomSelect.value===room)return;
+  const view=viewpoints[room];roomSelect.value=room;
+  document.querySelector('#location').textContent=view.label;
+  document.querySelector('#accuracy').textContent=view.confidence+' · '+view.sources.join(', ');
+  scheduleMeasurement();
+}
+
 function render(time) {
   frame = null;
   const dt = Math.min(.05, Math.max(0, (time - lastFrame) / 1000));
@@ -77,6 +87,7 @@ function render(time) {
       z: (-forward * Math.cos(yaw) - right * Math.sin(yaw)) * dt * 3};
     const before = visitor;
     visitor = walk ? walk.step(visitor, delta, dt) : (length ? moveVisitor(visitor, delta, layout) : visitor);
+    syncLoungeRoom();
     if (length || walk?.travelling || (walk && Math.hypot(visitor.x - before.x, visitor.z - before.z) > .00001)) invalidate();
     if (walk) {
       canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model));
@@ -84,7 +95,8 @@ function render(time) {
       if (interaction.hidden !== !action) scheduleMeasurement();
       interaction.hidden = !action;
       if (action && interaction.textContent !== action) interaction.textContent = action;
-      const place = visitor.z > 22.28 ? 'Outside Berghain' : 'Inside Berghain';
+      const place = visitor.z > 22.28 ? 'Outside Berghain' :
+        Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain';
       if (document.querySelector('#location').textContent !== place) document.querySelector('#location').textContent = place;
     } else {
       camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);

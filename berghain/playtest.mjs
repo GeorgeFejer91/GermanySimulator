@@ -142,7 +142,7 @@ export default {
       page.on('console',message=>{if(/shader error|VALIDATE_STATUS|program not valid/i.test(message.text())) errors.push(message.text());});
       await ready(page, baseURL);
       assert.equal(await page.locator('#model').getAttribute('data-materials'),'ready');
-      assert.equal(await page.locator('#model').getAttribute('data-surface-textures'),'15');
+      assert.equal(await page.locator('#model').getAttribute('data-surface-textures'),'18');
       await artifacts.screenshot(page, 'exterior.png');
       assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
       const initial = await page.locator('#model').getAttribute('data-position');

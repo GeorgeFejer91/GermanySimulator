@@ -9,7 +9,8 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1] / 'assets/models/berghain'
 SIZE = 512
 FAMILIES = {'mineral': (11, .0008), 'stone': (37, .0015),
-            'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045)}
+            'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045),
+            'leather': (181, .00007)}
 
 
 def noise(columns, rows, seed):
@@ -34,6 +35,7 @@ def noise(columns, rows, seed):
 
 
 def build_family(name, seed, relief):
+    tile = .08 if name == 'fabric' else .04 if name == 'leather' else 2
     broad, detail = noise(4, 4, seed), noise(64, 64, seed + 1)
     streak = noise(32, 2, seed + 2)
     rng = random.Random(seed + 3)
@@ -45,6 +47,8 @@ def build_family(name, seed, relief):
                    * math.cos(2 * math.pi * (i // SIZE) / 8)
                    + .15 * math.sin(2 * math.pi * ((i % SIZE) + (i // SIZE)) / 16)
                    + .06 * grain[i]) for i in range(SIZE * SIZE)]
+    elif name == 'leather':
+        height = [.72 * d + .16 * b + .12 * min(g, .55) for b, d, g in zip(broad, detail, grain)]
     colour, roughness, normals = [], [], []
     for i, (b, d, s, g) in enumerate(zip(broad, detail, streak, grain)):
         shade = .94 + .015 * b + .025 * d + .02 * g
@@ -56,13 +60,16 @@ def build_family(name, seed, relief):
             shade = .97 + .01 * b + .02 * g
         elif name == 'fabric':
             shade = .63 + .31 * height[i] + .04 * g
+        elif name == 'leather':
+            shade = .93 + .065 * d + .005 * g
         else:
             shade = .78 + .12 * d + .1 * g
         colour.append(round(shade * 255))
         rough = .65 + .35 * d if name == 'metal' else .82 + .18 * g
+        if name == 'leather':
+            rough = .65 + .25 * d
         roughness.append((255, round(rough * 255), 255))
         x, y = i % SIZE, i // SIZE
-        tile = .08 if name == 'fabric' else 2
         dx = (height[y * SIZE + (x + 1) % SIZE] - height[y * SIZE + (x - 1) % SIZE]) * relief * SIZE / (tile * 2)
         dy = (height[((y + 1) % SIZE) * SIZE + x] - height[((y - 1) % SIZE) * SIZE + x]) * relief * SIZE / (tile * 2)
         length = math.sqrt(dx * dx + dy * dy + 1)
@@ -75,7 +82,7 @@ def build_family(name, seed, relief):
         image.save(ROOT / filename, optimize=True)
         content = (ROOT / filename).read_bytes()
         output[kind] = {'file': filename, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()}
-    return {'metresPerTile': .08 if name == 'fabric' else 2, 'maps': output, 'estimatedReliefMetres': relief}
+    return {'metresPerTile': tile, 'maps': output, 'estimatedReliefMetres': relief}
 
 
 def main():

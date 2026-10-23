@@ -95,15 +95,15 @@ verified current installation inventory.
 
 ## Original material maps
 
-`berghain/build-materials.py` generates five tileable families (mineral, stone,
-metal, aggregate, fabric), each with a 512×512 base-colour, roughness and normal PNG.
+`berghain/build-materials.py` generates six tileable families (mineral, stone,
+metal, aggregate, fabric, leather), each with a 512×512 base-colour, roughness and normal PNG.
 They use seeded noise with no photographic pixel input. `textures/manifest.json`
 records parameters, image sizes/hashes and the unmeasured microrelief estimates.
 Regenerate with `python berghain/build-materials.py`, then the normal GLB export.
 
 The viewer retains instanced geometry and projects UVs in model metres with
-2 m architecture / 8cm fabric repeats. The portable asset bakes equivalent UVs and embeds/reuses the same
-15 PNGs. Base colour uses sRGB; roughness/normal use linear data. Roughness is
+2 m architecture / 8cm fabric / 4cm leather repeats. The portable asset bakes equivalent UVs and embeds/reuses the same
+18 PNGs. Base colour uses sRGB; roughness/normal use linear data. Roughness is
 packed into G, with B=255 preserving the material's metallic factor in glTF.
 Surface images add grain and modest variation; they are not scans or verified
 stain/damage maps of the building. Less-documented roofs keep their flat PBR
@@ -195,3 +195,31 @@ This is an initial pose/material study. Figure anatomy, garment fit, hands,
 hair and fine photographic fidelity remain refinement work; current installed
 placement and continued presence are unverified. It does not complete the
 realistic artwork or the full architectural goal.
+
+## Upper Panorama lounge and Felsenland
+
+`upper-lounge.mjs` adds the previously missing second lounge level documented
+by the architect (A13). Newly inspected primary gallery views I19 show its access
+stair, steel balustrades, glazed enclosure, radiators, low ceiling and angular
+upholstered seating. I16/I17/I20 identify Hermann August Weizenegger's 2010
+*Felsenland*. The original reconstructed furniture has raised plinths, padded
+edges, angled chaises and dark/plum leather; no photograph or designer mesh is
+embedded. Five assemblies and their dimensions/arrangement are estimates from
+one complete furniture view, not fabrication drawings or a contemporary survey.
+
+The new floor is at 16.35m, 3.10m above the existing provisional Panorama floor,
+with an estimated 19.00m ceiling. Its footprint and relationship to the current
+building coordinate frame remain inferred. It has a continuous fourth stair,
+physical floor/treads/rail collision and a room viewpoint through the same viewer.
+The former generic bench nearest the approach is shortened to keep the route
+clear. Hanging acoustic enclosures are kept in the lower Panorama room, outside
+the mezzanine. A chair is positioned clear of the existing inferred column grid.
+
+The glass frame is modelled; Marc Brandenburg's documented printed artwork is
+not reproduced. Old rectangular platforms and a horse seen in dated/outtake
+photographs are excluded. I18's historical corridor-lighting image informs the
+research; no changing lighting programme is claimed. The three new original
+512px leather maps use seeded grain at an estimated 4cm repeat with 0.07mm
+microrelief. Seam/tailoring detail, artwork imagery, exact circulation and
+present-day retention remain fidelity work. This is an additional reconstructive
+study, not completion of the full realistic building.

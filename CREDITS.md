@@ -594,3 +594,11 @@ The initial figure study represents Anna Uddenberg's *CLIMBER (Angel Kiss)*
 and [research inventory](berghain/For-AI/INTERIOR.md) record the reference and
 fidelity limits. The procedural fabric maps and reconstruction mesh are authored
 for this project; no artist photograph, third-party mesh or source CAD is bundled.
+
+
+The upper Panorama lounge includes an original, provisional reconstruction of
+Hermann August Weizenegger's *Felsenland* (2010), credited to the designer.
+[Architect photographs](https://www.karhard.de/projects/panorama-bar) inform its
+observed seating forms; the image files are research-only. Leather grain maps
+are generated for this project with no photographic input. Dimensions,
+placement and unobserved details remain estimates; see the asset provenance.

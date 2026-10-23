@@ -617,3 +617,91 @@ minor face/vertex-normal opposition, total <0.00036m², without visible blocker.
 Physical Android, crowd/vehicle/sprite/fade and acoustics are NOT RUN/out of scope.
 This accepts a visible geometry increment, not a faithful finished artwork or
 the full realistic interior/exterior goal. Remaining rooms and art remain open.
+
+## Upper Panorama lounge — revised integrated candidate
+
+2026-10-23. Base e75b829a34e9d27187fcad0a831c5a8b3c34f196;
+output/berghain-lounge-candidate.json freezes 68 source/test/asset files.
+GLB 68607e6777b375e67031d59708147fc49e5d9f63a84266bd465c741c7a5dd6c1:
+23,389,640B / 235,320 triangles / 98 mesh/material groups / 18 shared PBR maps,
+4,219,348 embedded image bytes. Whole exterior bounds remain unchanged.
+The increment adds an estimated upper floor 16.35m, ceiling 19m, fourth stair
+with 3.1m rise and Felsenland forms from primary photos I19. No photo is shipped.
+
+Fresh scoped Node checks pass 53/53. Initial integrated browser 7/7 and first
+frozen release 22/22 are pre-review-repair evidence. Physics identified missing
+radiator collision and bench intrusion; Camera identified stale room labels on
+natural ascent. Repairs add 50 exact radiator solids, a full-width lower landing,
+bench 2 width 1.6m, and room/accuracy/selector synchronization without teleporting.
+The final matching browser batch is output/berghain-lounge-final-browser/report.json.
+The matching revised candidate passes 22/22 in that report. Both independent
+reviewers accept the scoped geometry/camera increment. A later UI-only enlarged
+text-spacing check found header labels overflowing; a text-sized minimum width
+lets the header reflow. The final current-hash rerun is
+output/berghain-lounge-publish-browser/report.json, complete PASS 22/22 with all 68
+matching source hashes. Both reviewers reconfirm only viewer.css changed from
+their accepted physical candidate. The dedicated spacing report
+output/berghain-lounge-final-text-spacing-browser/report.json passes 1/1, covering
+eight viewport/font combinations. Its failed diagnostic predecessors remain
+pre-fix evidence, not acceptance.
+
+Fresh revised Physics probes: 68/68 hashes; 53/53 tests; seven stair lanes at
+author x offsets −.65/−.60/−.55/0/+.55/+.60/+.65 reach both floors continuously.
+All 50 radiator box bounds match render parts to ≤6.2e−7m; approach stops and
+invalid-center recovery stay legal. Foot/shoe geometry can clip the discrete
+visual treads by up to 0.039m because walking follows the continuous ramp support;
+this remains an animation/contact fidelity limitation, not measured stair contact.
+
+Supplied source/native/visitor frames distinguish the earlier rectangular
+platforms from the later dark/plum Felsenland commission. Its five seating units,
+arrangement, footprint, absolute heights, unseen surfaces and present retention
+remain estimates. Printed Brandenburg glass artwork and fine upholstery seams
+are absent. Physical Android/low-end GPU, acoustics and main-game crowd/vehicle
+cases are not established by this viewer evidence. Full realistic reconstruction
+is still incomplete.
+
+### Prior artwork canonical deployment confirmed
+
+Pages 40007555342 on e75b829 succeeded. The permanent domain matches 46/46
+exact published Git-object file hashes and all six custom/GitHub entry URLs
+in output/berghain-artwork-canonical-verification.json. The isolated e75 test
+code passes 6/6 actual canonical desktop/Android-portrait source/native sculpture,
+controlled human and natural entrance/exit/refresh cases in
+output/berghain-artwork-canonical-browser/report.json. This supersedes the
+earlier pending deployment notes; no physical-device evidence is implied.
+
+### Lounge cost and causality evidence
+
+Comparable cost reports: output/berghain-lounge-cost-before/report.json and
+output/berghain-lounge-cost-final-after/report.json; comparison in
+output/berghain-lounge-cost-comparison.json. Both pass 9/9: three cold contexts
+per desktop/Android-emulated portrait/landscape, Chromium 151, DPR 2, local HTTP,
+no throttling and identical Panorama viewpoint/movement. Baseline is the isolated
+complete e75 published source, not a partial asset folder.
+
+Ordinary viewer transfer 5,208,267→5,683,609B (+475,342B), with no GLB requested
+until explicit download/inspection. Median ready ms desktop 839→915 (ranges
+828–1717→873–1411), portrait 840→860 (820–922→850–982), landscape 880→876
+(837–940→810–916). Median product-RAF p95 stays ≈14ms. All 18 runs stop issuing
+frames when idle. One real-input sample per run yields median 12→12.2,15.6→19.6,
+19.4→16.1ms; small shared-host samples do not establish a causal speedup or
+physical Android/low-end GPU qualification. Additional decoded leather maps
+are shared; source/native lifecycle checks require exactly 18 texture disposals.
+
+Causal map: real keyboard/touch motion → moveVisitor ramp support → actual
+visitor floor 16.35m → syncLoungeRoom updates selector/location/source confidence
+→ scheduled Pretext remeasurement. Programmatic selector synchronization does
+not dispatch the room-selection event or teleport the visitor. Matching real
+input routes prove ascent, room entry, label update, descent and lower-label
+restoration in all three layouts; initial Panorama selection is a diagnostic
+shortcut, and natural building entry is independently checked. No story/mission
+state changes. The full architectural and artwork fidelity goal remains open.
+
+Publication-byte audit: all 68 frozen files are compared to the prepared Git tree
+in output/berghain-lounge-publication-byte-audit.json. 66 match exactly; only
+PROVENANCE.md line endings and the unchanged shared level-transitions.js trailing
+blank differ, with normalized text identical. No model/render/navigation semantic
+change is bridged by that exception. The coherent commit is based on a2b23ae,
+preserving the unrelated street-character publications and the original primary
+index. Publication includes only 29 scoped paths, original meshes/maps, tests and
+owning notes; research downloads/output are excluded.

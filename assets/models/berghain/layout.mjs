@@ -4,10 +4,12 @@ import {addSoundSystem} from './sound-system.mjs';
 import {addArtworks,artworkMaterials} from './artworks.mjs';
 import {addLandscape, landscapeMaterials} from './landscape.mjs';
 import {addExteriorDetails} from './exterior-details.mjs';
+import {addUpperLounge,addLoungeFurniture,loungeMaterials} from './upper-lounge.mjs';
 
 export const materials = {
   ...landscapeMaterials,
   ...artworkMaterials,
+  ...loungeMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -59,17 +61,17 @@ function railing(name, start, end, section = 'interior') {
   }
 }
 
-function stair(name, x, z0, z1, y0, y1, width, steps) {
+function stair(name, x, z0, z1, y0, y1, width, steps, section='structure') {
   const ramp = {name, x: [x - width / 2, x + width / 2], z: [z0, z1], y: y1, endY: y0};
   layout.floors.push(ramp);
   layout.solids.push({name, x: ramp.x, z: ramp.z, y: [y0 - .15, y1], ramp});
   for (let i = 0; i < steps; i++) {
     const depth = (z1 - z0) / steps, height = y1 - (y1 - y0) * (i + .5) / steps;
-    box(name + ' tread', [x, height - .06, z0 + depth * (i + .5)], [width, .12, depth + .015], 'steel', 'structure', true);
+    box(name + ' tread', [x, height - .06, z0 + depth * (i + .5)], [width, .12, depth + .015], 'steel', section, true);
     layout.solids.at(-1).undersideOnly = true;
     layout.solids.at(-1).treadFloor = ramp;
   }
-  for (const dx of [-width / 2, width / 2]) railing(name + ' rail', [x + dx, y1, z0], [x + dx, y0, z1]);
+  for (const dx of [-width / 2, width / 2]) railing(name + ' rail', [x + dx, y1, z0], [x + dx, y0, z1],section);
 }
 
 function facade(axis, fixed, minimum, maximum, top, name) {
@@ -247,6 +249,8 @@ export const viewpoints = {
     confidence: 'Approximate layout; reported PA arrangement', sources: ['A01', 'I01', 'I02', 'P05', 'S05', 'S07', 'S08', 'S09', 'S10']},
   panorama: {label: 'Panorama Bar', position: {x: -11, y: 13.25, z: -7}, yaw: 0,
     confidence: 'Approximate layout; artwork study', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11', 'ART02', 'ART03', 'ART13']},
+  lounge: {label:'Upper Panorama lounge',position:{x:-11.4,y:16.35,z:.8},yaw:Math.PI/2,
+    confidence:'Photo-derived forms; layout estimated',sources:['A13','I16','I18','I19','I20']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
@@ -257,7 +261,9 @@ export const viewpoints = {
 
 addLandscape(layout);
 addExteriorDetails(layout);
+addUpperLounge(layout,{box,floor,beam,railing,stair});
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
+addLoungeFurniture(layout);
 addSoundSystem(layout);
 addArtworks(layout);

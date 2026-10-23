@@ -6,6 +6,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:1rem;pa
 h1{font-size:1.4rem;font-weight:600;line-height:1.25;letter-spacing:.03em;margin:0}
 .identity p{font-size:.9rem;line-height:1.4;margin:.2rem 0 0;color:#b8b9b0}
 nav{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+nav>*{min-width:min(100%,8rem)}
 button,select,.button{font:inherit;line-height:1.4;border:1px solid #64675d;border-radius:2px;background:#30342e;color:inherit;padding:.55rem .8rem;min-height:44px;text-align:center;white-space:normal;overflow-wrap:break-word}
 button,.button{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
 button:hover,.button:hover{background:#42483e}
@@ -22,7 +23,7 @@ footer{display:flex;align-items:center;gap:.75rem 1.4rem;flex-wrap:wrap;padding:
 .location strong{font-size:1rem;line-height:1.4}
 .location span{font-size:.85rem;line-height:1.4;color:#b8b9b0}
 #rooms{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;flex:0 1 220px}
-#room{width:100%;flex:1 1 140px;padding-right:1.8rem;text-align:left}
+#room{width:100%;flex:1 1 140px;padding-right:1.8rem;text-align:left;white-space:nowrap}
 #room-full-name{flex-basis:100%}
 #instructions{margin:0;font-size:.85rem;line-height:1.4;color:#c5c7bc;flex:1 1 260px}
 #touch-controls{position:absolute;left:1rem;bottom:1rem;display:grid;grid-template-columns:repeat(3,48px);gap:5px}

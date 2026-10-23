@@ -134,12 +134,15 @@ export function addInteriorFixtures(layout) {
     assemblyCollision();
   });
 
-  for(let i=0;i<3;i++)fixture('panorama-banquette-'+i,[-18+i*4,13.25,7.7],['A13'],
-    {width:3.25,depth:.9,height:.85,seatHeight:.43},()=>{
-      box('seat base',[0,.22,0],[3.25,.32,.9],'upholstery',true);
-      for(const x of [-.8,.8])box('seat pad',[x,.4,-.07],[1.57,.12,.72],'upholstery',true);
-      box('back',[0,.64,.36],[3.25,.42,.18],'upholstery',true);
-    });
+  for(let i=0;i<3;i++){
+    const width=i===2?1.6:3.25,padWidth=(width-.11)/2;
+    fixture('panorama-banquette-'+i,[-18+i*4,13.25,7.7],['A13'],
+      {width,depth:.9,height:.85,seatHeight:.43},()=>{
+        box('seat base',[0,.22,0],[width,.32,.9],'upholstery',true);
+        for(const side of [-1,1])box('seat pad',[side*(padWidth+.03)/2,.4,-.07],[padWidth,.12,.72],'upholstery',true);
+        box('back',[0,.64,.36],[width,.42,.18],'upholstery',true);
+      });
+  }
 
   for(const [i,x] of [-13,-2,15].entries())fixture('foyer-pendant-'+i,[x,.05,15.5],['I08'],{width:1.15,height:.66},()=>{
     box('ribbed shade',[0,4.2,0],[1.15,.66,.8],'warm');
@@ -156,7 +159,7 @@ export function addInteriorFixtures(layout) {
       cylinder('lamp lens',[x,2.22,z],.055,.018,'warm');
     }
   });
-  for(const x of [-19,-13,-7.5])for(const z of [-17,-10,-3])fixture('panorama-acoustic-'+x+'-'+z,[x,13.25,z],['A13','I11'],
+  for(const x of [-19,-13,-7.5])for(const z of [-17,-12,-7])fixture('panorama-acoustic-'+x+'-'+z,[x,13.25,z],['A13','I11'],
     {width:1.35,height:.38,depth:.54,mountHeight:3.85},()=>{
       for(const y of [3.669,4.031])box('enclosure rim',[0,y,0],[1.35,.018,.54],'steel');
       for(const side of [-.666,.666])box('enclosure side',[side,3.85,0],[.018,.38,.54],'steel');

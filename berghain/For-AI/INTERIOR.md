@@ -56,7 +56,7 @@ a generic surrogate as an exact recreation.
 
 | Area | Established evidence | What remains unknown |
 | --- | --- | --- |
-| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | The component candidate below replaces generic boxes. Installed revisions, current configuration, rigging and exact room coordinates remain unverified. |
+| Berghain main hall | Funktion-One manufacturer statements in S01: original 2005 Dance Stacks replaced in 2023. | Contemporary cabinet models, exact count, orientation, mounting, subwoofer arrangement and room-relative positions. Current box stacks in the study are placeholders. |
 | Panorama Bar | Supplier S02 identifies Studt-Akustik PA. S01 distinguishes Funktion-One DJ monitors from the room PA. | Studt component identifiers, dimensions, hanging hardware, array count and placement; current DJ-monitor configuration. |
 | DS210 component reference | S04's actual manufacturer STEP dummy, DXF elevation and 2022 dimensioned sheet. **1.273 m wide × 0.631 m high × 0.741 m deep**, measured from the sheet, not guessed from a photo. | CAD not yet tessellated/rendered; this component reference does not prove a current Berghain installation. Manufacturer document and live webpage bandwidth values differ, irrelevant to the model's external dimensions but not silently reconciled. |
 
@@ -109,7 +109,7 @@ No new CAD software installed; no redistribution licence established.
 | Foyer | Ticket/cloakroom relationship, steel gallery, industrial services, distinctive channel-section concrete sofas, pendant fixtures, current artwork | I08/09 show actual structure/furniture. Accepted furniture candidate adds channel seats and ribbed shades; the old mural photo is historical. |
 | Main hall / main bar | Actual structural void and steel stairs, DJ surround, horn-loaded speaker geometry, overhead services/lighting, bar furniture and suspended sofas | I12 now provides all three historic cartoons; I15 adds wall openings/stair/window relationships. Present study does not reproduce these fully. |
 | Panorama | Counter wrapping and stools, illuminated lower bar, pendants, bottle shelving, DJ railing/desk, blinds, acoustic ceiling, Uddenberg and wall/glass art | A13 gallery inspected; I11/14 installation history. Accepted furniture candidate adds bar/stools, shelving, DJ forms and suspended fittings; artwork and complete ceiling/services remain missing. |
-| Lounge / upper level | Extra lounge level, cabins, glazed/stair relationship, circulation to toilets and smoking extension; Weizenegger's *Felsenland* | A13 and I12; primary museum I16 names the 2010 coloured-leather seating landscape, indexed interview I17 places it in Panorama. Current study omits this furniture, extra level and cabins. Preserve measured façade mass while verifying floor elevations. |
+| Lounge / upper level | Extra lounge level, cabins, glazed/stair relationship, circulation to toilets and smoking extension; Weizenegger's *Felsenland* | A13 and I12; primary museum I16 names the 2010 coloured-leather seating landscape, indexed interview I17 places it in Panorama. An initial upper-level, access-stair and Felsenland study now exists using newly inspected I19 photos; floor height/footprint/arrangement remain estimated. Cabins and verified toilet circulation are missing. Preserve measured façade mass while verifying floor elevations. |
 | Klo Bar / toilets | Actual connecting corridor, bar enclosure, toilet compartments/services and Marr display | I12 and ART04. Entire space still missing; placing its sculpture in the existing main hall would be incorrect. |
 | Lab.oratory | Cellar/service character, actual circulation, partitions and installations | A12. Current accessible extent and relation to the rest of the asset unmodelled. |
 | Smoking extension | Panelled/glazed exterior, stair and two-floor connection | A01, P10, I15. Shape visible, section/placement dimensions unresolved. Exterior phase deferred in favour of the user's interior priority. |
@@ -140,7 +140,7 @@ not evidence that these concrete sofas are timber or that all seating is alike.
 
 `assets/models/berghain/interior-fixtures.mjs` owns assembly metadata; the same
 geometry/materials are exported in the portable GLB. Original reference images
-remain research-only. Named artworks, verified current Funktion-One/Studt configuration,
+remain research-only. Named artworks, actual current Funktion-One/Studt systems,
 toilets/Klo Bar, extra lounge, Lab and verified inter-room relationships remain
 outstanding. A furniture pass does not satisfy full realistic-interior acceptance.
 
@@ -163,3 +163,26 @@ The earlier research-only checkpoint changed no runtime. The furniture candidate
 does change world geometry and collision and has both independent reviewers and
 current rendered regression evidence recorded in VALIDATION.md. Full realistic
 interior acceptance remains outstanding.
+
+## Upper lounge increment — implementation and evidence boundary
+
+Primary architect gallery I19 now has inspected mezzanine, stair, overlook,
+glazed enclosure and later angular seating views. The earlier plain rectangular
+platforms are not used for the Felsenland reconstruction. I16/I17/I20 identify
+Weizenegger's permanent 2010 commission; individual photographs are undated.
+The five original seating units use padded dark/plum leather, raised plinths
+and angled chaises, with original grain maps. Fine panel seams, exact shape and
+current retention remain refinement/evidence gaps.
+
+upper-lounge.mjs owns the added level, fourth stair and seating through the
+existing layout/model/export. Estimated floor16.35m, ceiling19m and rise3.10m
+are human-scale authoring choices within the calibrated envelope. The route from
+Panorama uses the lower lounge passage and returns continuously; it is not proof
+of the real building's measured circulation. The generic bench nearest the
+stair is shortened, acoustic enclosures stay over the lower room, and the chair
+clears the existing column. The glass framework is modelled; Marc Brandenburg's
+printed installation imagery is still missing. No source photo pixels are shipped.
+
+The frozen candidate and final checks are recorded in VALIDATION.md. Klo Bar/
+toilets, Lab.oratory, service/elevator positions, cabins and full artwork fidelity
+remain required. The entire reconstruction goal stays active.

@@ -52,6 +52,6 @@ export const materialScenario={id:'exported-materials',modes:['stress'],profiles
   assert.ok(measured.sampledColours>20,'Comparison must contain a rendered, shaded asset');
   assert.ok(measured.meanRGBDifference<=1,'Portable material render must agree within one 8-bit RGB level on average');
   assert.ok(measured.largePixelFraction<=.015,'Large colour differences must remain below 1.5% of pixels');
-  assert.equal(cleanup.textures,15);assert.equal(cleanup.disposed,15,'Shared source textures must be disposed exactly once');
+  assert.equal(cleanup.textures,18);assert.equal(cleanup.disposed,18,'Shared source textures must be disposed exactly once');
   return {measured,cleanup,scope:'Isolated close-up source and standard GLB render; no walking-path claim'};
 }};

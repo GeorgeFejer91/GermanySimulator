@@ -111,6 +111,27 @@
         }
       },
       "estimatedReliefMetres": 0.00045
+    },
+    "leather": {
+      "metresPerTile": 0.04,
+      "maps": {
+        "baseColor": {
+          "file": "textures/leather-baseColor.png",
+          "bytes": 70281,
+          "sha256": "ec23e2040a6afb899a673e8b06f49ebc1e6daa56246f434f47a37a1496f5cdb3"
+        },
+        "roughness": {
+          "file": "textures/leather-roughness.png",
+          "bytes": 105587,
+          "sha256": "b271c65b7916f31d878cf7dfad46cc134078964cdefe63a83760124ced0e641d"
+        },
+        "normal": {
+          "file": "textures/leather-normal.png",
+          "bytes": 290945,
+          "sha256": "35ea20fc38802dc96c2ee4e10823aec674a2cf18234fc2514ff33f17baf6ec80"
+        }
+      },
+      "estimatedReliefMetres": 7e-05
     }
   }
 }
