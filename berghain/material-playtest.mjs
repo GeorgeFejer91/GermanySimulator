@@ -55,7 +55,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
   assert.ok(measured.sampledColours>20,'Comparison must contain a rendered, shaded asset');
   assert.ok(measured.meanRGBDifference<=1,'Portable material render must agree within one 8-bit RGB level on average');
   assert.ok(measured.largePixelFraction<=.015,'Large colour differences must remain below 1.5% of pixels');
-  assert.equal(cleanup.textures,23);assert.equal(cleanup.disposed,23,'Shared source textures must be disposed exactly once');
+  assert.equal(cleanup.textures,26);assert.equal(cleanup.disposed,26,'Shared source textures must be disposed exactly once');
   return {measured,cleanup,scope:'Isolated close-up source and standard GLB render; no walking-path claim'};
 }
 export const materialScenario={id:'exported-materials',modes:['stress'],profiles:['desktop'],run:compareMaterialRender};

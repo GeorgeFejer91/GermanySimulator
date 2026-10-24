@@ -1,5 +1,80 @@
 # Berghain viewer validation
 
+## Lab.oratory partial reconstruction — 2026-10-24
+
+A12/I22's ten inspected architect photographs supply the industrial forms;
+A15 documents connected/separable steel-glass partitions. The western footprint,
+floor.05m, soffit4.15m, beam underside3.60m, gate location/state and1.20m local
+sanitary drop are inferred. No dimensioned interior plan was recovered. The
+first lofty5.95m ceiling was rejected against the photographs despite passing
+technical checks. Bar/cell fittings were rearranged after a transformed-vertex
+check found3,536 intersections with retained columns. The final check finds0.
+
+The final98-file freeze is output/berghain-lab-candidate.json. GLB SHA256
+4608f39d17e04761b59f7edb45de0000de03e7a261a6873b753a1e576e727137,
+46,003,152B /607,956tri /143 groups /25 embedded images. Eight original shared
+surface families, thickness and environment total26 runtime textures. All23
+old image hashes remain unchanged; the new aged family adds677,174 encoded
+bytes and3MiB decoded RGBA (4MiB with mipmaps), excluding driver overhead.
+
+- 91/91 Node PASS, including the shared queue's checks; 6/6 route-packaging PASS.
+- Final silent integrated browser report
+  output/berghain-lab-admission-integrated-browser/report.json:35/35 PASS with
+  all98 captured hashes equal to the freeze. Desktop and Android portrait/
+  landscape emulation use actual keyboard/mouse or CDP touch. Natural exterior
+  approach/E-or-tap entry → Säule → Lab/bar → sanitary descent/return → exterior
+  exit/refresh passes without room selection or forced placement. Prior Klo,
+  Together, upper lounge and doorway paths remain covered.
+- Source/native portal rays clear the aperture both ways; Lab/Säule roof and
+  raised gate underside distances agree within2mm. Same-light material parity
+  mean RGB difference.544/255, large-delta pixel fraction.0001399; all26 source
+  textures dispose exactly once. The actual source/native frames were inspected.
+- Admission/resume passes all 3 profiles: 26 real image jobs, peak 2 active, 0 starts
+  while the deterministic hidden getter is true, and0 remaining active/pending.
+  This is a simulated visibility contract check, not physical background-device
+  evidence. All-image failure retains visible basic-material fallback/movement;
+  interrupted entry, graphics loss/restore, idle cessation and320px/200% text pass.
+
+Independent Physics P1/P2/P4/P5 and Camera C1–C5/X1 pass the exact98 freeze and
+terminal35-case report. Review found and repaired six missing screen-post
+colliders and proud casting clearance.63,192 low screen vertices are covered by
+same-fixture solids; the previous reachable arm-through-post witness is blocked.
+Tested portal lanes and sanitary stair center/±.66 author lanes work both ways.
+25/30 invalid nearby post samples recover within.87m; five starts deep inside
+the multiply occupied screen/guard remain invalid on zero motion, with no legal
+route or spawn there. The gate's authored8cm recess is an inferred fine-fit
+detail, not a blocked passage. Pendant bottom≈2.215m above the Lab floor clears
+the1.80m avatar; gate underside2.65m and beam underside3.60m remain legible.
+
+Comparable cost reports are output/berghain-lab-cost-before/report.json and
+...cost-after/report.json,9/9 PASS each: three fresh contexts per viewport,
+Chromium151.0.7922.34, Intel Iris Xe / ANGLE Direct3D11, no CPU/network throttle.
+The accepted pre-Lab baseline changes only the Säule shortcut camera to the
+new Lab position/yaw; old geometry/materials/renderer/navigation stay intact.
+This compares the same controlled view/backward input, not a natural baseline
+Lab route. Starts match exactly and paired ends differ by at most3.37cm.
+
+| Profile | Ready median/range ms, before → after | Frame p95 median/range ms, before → after | First changed-state latency median/range ms, before → after |
+| --- | --- | --- | --- |
+| Desktop |1374/1339–3256 →1496/1398–3338|14.1/14.0–14.1 →14.1/14.1–20.7|18.9/15.7–19.1 →17.9/17.6–18.9|
+| Android portrait emulation |1354/1341–1441 →1446/1346–1507|13.9/13.9–13.9 →14.0/14.0–14.0|20.8/18.1–21.9 →18.0/17.9–22.0|
+| Android landscape emulation |1370/1332–1379 →1337/1325–1361|13.9/13.9–13.9 →14.0/13.9–14.0|18.2/16.2–23.3 →20.0/19.3–23.8|
+
+Desktop frame p50 increases7.2→13.8ms; emulated profiles remain7.0ms. Normal
+transfer6,653,014→7,354,948B, requests61→66. The GLB is not requested. Idle
+adds0frames; buffers stay≤1.6MP. End-view draw calls220/218/220→264/256/270;
+triangles401,016/400,812/401,016→653,248/638,676/673,876. JS heap medians
+43.90/63.57/82.54→51.58/83.63/67.36MB vary with GC; these samples do not
+establish a memory reduction or device frame-rate qualification. Complete
+per-run heap ranges, long tasks, bytes and GPU strings remain in the reports.
+
+This accepts an initial partial Lab study. Exact contemporary plan/elevation,
+outside entrance, hidden spaces, current equipment inventory, fine historic
+cast ornament, weathering and full photographic fidelity remain open. Physical
+Android/device-GPU targets and perceptual listening are NOT RUN. The complete
+realistic Berghain asset goal remains ACTIVE. Publication receipts and actual
+public-byte/browser verification belong in output/berghain-lab-release.json.
+
 ## Exterior landscape and building refinement — 2026-10-23
 
 The exterior request was split among three scoped workers for landscaping,

@@ -7,12 +7,14 @@ import {addExteriorDetails} from './exterior-details.mjs';
 import {addUpperLounge,addLoungeFurniture,loungeMaterials} from './upper-lounge.mjs';
 import {addPanoramaCeiling} from './panorama-services.mjs';
 import {addKloRooms,kloMaterials} from './klo-bar.mjs';
+import {addLabRooms,labMaterials} from './lab-oratory.mjs';
 
 export const materials = {
   ...landscapeMaterials,
   ...artworkMaterials,
   ...loungeMaterials,
   ...kloMaterials,
+  ...labMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
@@ -260,6 +262,8 @@ export const viewpoints = {
     confidence:'Photographed fittings; floor, arrangement and dimensions estimated',sources:['I21']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},
+  lab:{label:'Lab.oratory',position:{x:-8.5,y:.05,z:-8.5},yaw:.65,
+    confidence:'Photographed forms; footprint, levels, arrangement and connection estimated',sources:['A12','I22','A15']},
   halle: {label: 'Halle', position: {x: 4, y: .05, z: -25}, yaw: 0,
     confidence: 'Height documented; layout approximate', sources: ['A05', 'A06']},
   garden: {label: 'Garden', position: {x: 29, y: .05, z: 15}, yaw: -.2,
@@ -271,6 +275,7 @@ addExteriorDetails(layout);
 addUpperLounge(layout,{box,floor,beam,railing,stair});
 addPanoramaCeiling(layout,{box});
 addKloRooms(layout,{box});
+addLabRooms(layout,{box,floor,beam,railing,stair});
 calibrateStudy(layout, viewpoints);
 addInteriorFixtures(layout);
 addLoungeFurniture(layout);

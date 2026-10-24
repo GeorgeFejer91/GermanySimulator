@@ -6,6 +6,7 @@ import {fitExteriorRadius, exteriorTarget} from './camera.mjs';
 import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.mjs';
 import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../assets/vendor/pretext/dist/layout.js';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
+import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
 
 const canvas = document.querySelector('#model');
 const loading = document.querySelector('#loading');
@@ -66,7 +67,8 @@ function clearInput() {
 }
 
 function syncLoungeRoom(){
-  const room=kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+  const room=labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+    roomSelect.value==='lab'&&Math.abs(visitor.y-.05)<.15?'saule':
     roomSelect.value==='lounge'&&Math.abs(visitor.y-13.25)<.15?'panorama':
     ['klo','toilets'].includes(roomSelect.value)&&Math.abs(visitor.y-6.65)<.15?'berghain':null);
   if(!room||roomSelect.value===room)return;
@@ -99,6 +101,7 @@ function render(time) {
       interaction.hidden = !action;
       if (action && interaction.textContent !== action) interaction.textContent = action;
       const place = visitor.z > 22.28 ? 'Outside Berghain' :
+        labRoomAt(visitor)?viewpoints.lab.label:
         kloRoomAt(visitor)?viewpoints[kloRoomAt(visitor)].label:
         Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain';
       if (document.querySelector('#location').textContent !== place) document.querySelector('#location').textContent = place;

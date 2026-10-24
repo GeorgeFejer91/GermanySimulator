@@ -40,5 +40,11 @@ export const surfaceFamilies = {
     "baseColor": "textures/amber-baseColor.png",
     "roughness": "textures/amber-roughness.png",
     "normal": "textures/amber-normal.png"
+  },
+  "aged": {
+    "metresPerTile": 2.4,
+    "baseColor": "textures/aged-baseColor.png",
+    "roughness": "textures/aged-roughness.png",
+    "normal": "textures/aged-normal.png"
   }
 };

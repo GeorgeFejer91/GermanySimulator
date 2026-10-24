@@ -153,6 +153,27 @@
         }
       },
       "estimatedReliefMetres": 0.0014
+    },
+    "aged": {
+      "metresPerTile": 2.4,
+      "maps": {
+        "baseColor": {
+          "file": "textures/aged-baseColor.png",
+          "bytes": 319527,
+          "sha256": "df9ff1452bbc82430a985e36da0de21189621020057cbe0a97ed8838d5105831"
+        },
+        "roughness": {
+          "file": "textures/aged-roughness.png",
+          "bytes": 231605,
+          "sha256": "8281448d9b14130d78f2d7b7e418b49a13f6e248859b40662d74ba8f685ee595"
+        },
+        "normal": {
+          "file": "textures/aged-normal.png",
+          "bytes": 126042,
+          "sha256": "b3b500a4f2afef50411748f4c5f8eb6f923dfdc3f92df228dfa8d88656906ac1"
+        }
+      },
+      "estimatedReliefMetres": 0.0014
     }
   },
   "amberLighting": {

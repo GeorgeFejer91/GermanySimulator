@@ -9,6 +9,48 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Lab.oratory: lower-floor rooms and photographed industrial fittings
+
+A12/I22 document studio karhard's2005 conversion and ten expanded project
+photographs by Stefan Wolf Lucks, inspected24 October2026. Original geometry
+reconstructs a pipe/gauge counter, T stools, insulator pendants, barred sling
+cells, industrial bunks, brick alcove/low opening, cast-iron sanitary screen,
+window bench and the photographed small sanitary descent. A15 documents
+Säule's separable/connected steel-glass elements; the chosen opening position
+and raised state are inferred. No source image pixels or decorative graphics
+are embedded. All new meshes and surface maps are authored for this project.
+
+The western lower-floor fit, floor.05m, soffit4.15m, beam underside3.60m,
+1.20m sanitary drop, footprint,
+counts, dimensions and arrangement are authoring estimates within the calibrated
+hull. A former slag/coal cellar below Berghain does not establish an entire
+underground storey. The photographed stair's relative drop is reconstructed
+with a real opening through both overlapping slabs, seven treads and a landing;
+actual absolute elevations and complete room connections remain unverified.
+The lower soffit follows the photographed compressed industrial interior; its
+height is an estimate, not a measured dimension. The raised gate and upper
+mechanism sit wholly on the taller Säule side of the inferred connection.
+The external Lab entrance, hidden rooms, full sanitary inventory and current
+installation are not established. This is a partial architecture study.
+
+Fittings are arranged around the retained structural columns. Hollow pipe ends,
+gauge graduations, sagging sling surfaces, interleaved chain links, brick bond,
+cast rosettes/leaves and an open stair guard are actual geometry. The casting
+ornament and finish simplify the photographs and are not a recovered original
+casting pattern. The low brick opening is not a standing-height door.
+Each sanitary-screen post has a linked solid; panel clearance includes the
+shallow cast ornament without blocking the open L-shaped bay.
+
+One original seeded aged-plaster/oxidation map family adds broad stains and
+surface relief without photographic input; its2.4m tile and1.4mm relief are
+estimated. All23 previously accepted image files retain their hashes. There
+are26 shared runtime maps including thickness/environment,25 embedded material
+maps in the portable GLB. Standard source/native lighting and rendering remain
+authoritative; no new renderer, physics engine or runtime dependency is added.
+The standalone viewer now reuses the game's existing two-job asset admission
+queue for all surface images. Hidden pages defer optional starts until visible;
+queued work for a disposed model is skipped and late maps are disposed.
+
 `berghain-study.glb` contains the same model with PBR materials and vertex tones,
 embedded original textures, and no external files or decoders. `manifest.json` records
 its size, hash and bounds. Berlin open-data roof and annex geometry is embedded

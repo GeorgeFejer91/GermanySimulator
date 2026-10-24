@@ -1,10 +1,18 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {surfaceFamilies} from './surface-data.mjs';
+import * as assetQueue from '../../../asset-queue.js';
+
+// The standalone viewer uses the same native admission owner as the game.
+// Namespace fallback keeps this classic shared module usable by Node tooling.
+const {createAssetQueue}=globalThis.GermanyAssetQueue||assetQueue.default;
+const surfaceQueue=createAssetQueue({isHidden:()=>typeof document!=='undefined'&&document.hidden});
+if(typeof document!=='undefined')document.addEventListener('visibilitychange',()=>surfaceQueue.pump());
 
 const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
-  loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber'};
+  loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
+  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];
@@ -56,21 +64,23 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
   model.traverse(mesh=>{if(mesh.isMesh&&mesh.material.userData.surface) materials.add(mesh.material);});
   const families=[...new Set([...materials].map(material=>material.userData.surface.family))];
   const loader=new THREE.TextureLoader(), textures=new Map();
-  const requests=families.flatMap(family=>['baseColor','roughness','normal'].map(async kind=>{
+  const requests=families.flatMap(family=>['baseColor','roughness','normal'].map(kind=>surfaceQueue.enqueue(async()=>{
+    if(model.userData.disposed)return;
     const key=surfaceFamilies[family][kind], texture=await loader.loadAsync(new URL(key,import.meta.url).href);
     texture.name=key; texture.flipY=false;
     texture.wrapS=texture.wrapT=THREE.RepeatWrapping;
     texture.anisotropy=anisotropy;
     if(kind==='baseColor') texture.colorSpace=THREE.SRGBColorSpace;
     textures.set(key,texture);
-  }));
+  })));
   const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap]).filter(Boolean));
-  for(const key of extras)requests.push((async()=>{
+  for(const key of extras)requests.push(surfaceQueue.enqueue(async()=>{
+    if(model.userData.disposed)return;
     const texture=await loader.loadAsync(new URL(key,import.meta.url).href);texture.name=key;texture.flipY=false;
     if(key.endsWith('lighting.png')){texture.mapping=THREE.EquirectangularReflectionMapping;texture.colorSpace=THREE.SRGBColorSpace;}
     else texture.channel=1;
     textures.set(key,texture);
-  })());
+  }));
   const results=await Promise.allSettled(requests);
   const failure=results.find(result=>result.status==='rejected');
   if(failure||model.userData.disposed){

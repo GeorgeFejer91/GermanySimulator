@@ -10,7 +10,37 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-The permanent https://germanysimulator.de/geheim/ now serves the accepted partial
+The [Lab.oratory increment](LAB-PLAN.md) now includes photographed industrial
+forms from all ten architect gallery views (A12/I22): pipe/gauge bar, T stools,
+insulator pendants, barred sling cells, bunks, brick passage, ornate green
+sanitary screen, historic window forms and bench. An inferred raised gate from
+Säule permits continuous avatar entry; a real seven-tread stair/opening reaches
+a lower tiled landing and returns. A15 supplies connection context, not its
+coordinates. Floor.05m, soffit4.15m, beam underside3.60m and sanitary drop1.20m
+are authoring estimates. Complete plan, outside Lab entrance, hidden rooms,
+equipment inventory, fine finishes and current installation remain unresolved.
+
+The98-file candidate passes91 Node checks,6 route-packaging checks and35 silent
+browser cases across desktop and Android portrait/landscape emulation. Both
+independent world reviews accept this partial increment. Source/native portal
+rays, close views, material parity, real entry/bar/stair/exit routes, image
+admission/failure, graphics recovery and text layout pass. Existing rooms,
+artworks and PA remain present. The shared image loader now uses the existing
+two-job asset queue, pauses optional starts while hidden and skips retired work.
+VALIDATION.md records measured before/after costs and the remaining limitations.
+
+Portable GLB:46,003,152B /607,956 triangles /143 groups /25 embedded maps;
+SHA2564608f39d17e04761b59f7edb45de0000de03e7a261a6873b753a1e576e727137.
+There are83 fixture assemblies,44 PA components and2 partial artwork studies.
+Three original aged maps reuse the existing material pipeline; all23 previous
+images retain their hashes. Normal page transfer adds701,934B, without loading
+the GLB. The accepted pre-Lab runtime is preserved in output/berghain-lab-baseline.
+The source catalogue now has110 unique records. Public route remains
+https://germanysimulator.de/geheim/; the current publication/verification receipt
+belongs in output/berghain-lab-release.json. Full realistic reconstruction stays
+ACTIVE; physical Android and perceptual listening remain NOT RUN.
+
+Pre-Lab canonical checkpoint: https://germanysimulator.de/geheim/ serves the partial
 Together runtime80c6660. Pages40037731294 completed SUCCESS; canonical asset
 verification passes63/63 exact Git-object files plus six root/3d/Geheim/model
 responses. Fresh canonical browser acceptance passes9/9 actual public desktop

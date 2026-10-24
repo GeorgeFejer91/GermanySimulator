@@ -1,5 +1,5 @@
 export async function renderNativeAsset(page,view){
-  return page.evaluate(async({position,yaw,pitch=0,fov=45})=>{
+  return page.evaluate(async({position,yaw,pitch=0,fov=45,rays=[]})=>{
     const THREE=await import('../assets/vendor/three/0.186.0/build/three.module.min.js');
     const {GLTFLoader}=await import('../assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js');
     const bytes=await(await fetch('../assets/models/berghain/berghain-study.glb')).arrayBuffer();
@@ -34,9 +34,21 @@ export async function renderNativeAsset(page,view){
       for(const geometry of geometries)geometry.dispose();for(const texture of textures)texture.dispose();
       renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
     };
-    return {bytes:bytes.byteLength,meshes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
+    let geometryProbes;
+    if(rays.length){
+      const {createBerghainModel,disposeBerghainModel}=await import('../assets/models/berghain/model.mjs');
+      const source=createBerghainModel();source.updateMatrixWorld(true);gltf.scene.updateMatrixWorld(true);
+      try{
+        const sample=model=>rays.map(({origin,direction})=>{
+          const ray=new THREE.Raycaster(new THREE.Vector3(...origin),new THREE.Vector3(...direction).normalize());
+          return ray.intersectObject(model,true)[0]?.distance??null;
+        });
+        geometryProbes={source:sample(source),native:sample(gltf.scene)};
+      }finally{disposeBerghainModel(source);}
+    }
+    return {bytes:bytes.byteLength,meshes,geometryProbes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
       panoramaServices:metadata.panoramaServices||null,
-      kloBar:metadata.kloBar||null,
+      kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,
       physicalMaterials,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
   },view);

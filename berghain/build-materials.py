@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1] / 'assets/models/berghain'
 SIZE = 512
 FAMILIES = {'mineral': (11, .0008), 'stone': (37, .0015),
             'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045),
-            'leather': (181, .00007), 'amber': (211, .0014)}
+            'leather': (181, .00007), 'amber': (211, .0014), 'aged': (239, .0014)}
 
 
 def noise(columns, rows, seed):
@@ -35,7 +35,7 @@ def noise(columns, rows, seed):
 
 
 def build_family(name, seed, relief):
-    tile = .08 if name in ('fabric', 'amber') else .04 if name == 'leather' else 2
+    tile = .08 if name in ('fabric', 'amber') else .04 if name == 'leather' else 2.4 if name == 'aged' else 2
     broad, detail = noise(4, 4, seed), noise(64, 64, seed + 1)
     streak = noise(32, 2, seed + 2)
     rng = random.Random(seed + 3)
@@ -60,6 +60,9 @@ def build_family(name, seed, relief):
                     if distance > 2.4: continue
                     x, y = (round(cx)+dx) % SIZE, (round(cy)+dy) % SIZE
                     height[y*SIZE+x] += -.36 * math.exp(-distance*distance*3) + .10 * math.exp(-((distance-.95)/.25)**2)
+    elif name == 'aged':
+        crust=noise(14,14,seed+5)
+        height=[.12*d+.03*g+.5*max(0,min(1,(c-.48)*12)) for d,g,c in zip(detail,grain,crust)]
     colour, roughness, normals = [], [], []
     for i, (b, d, s, g) in enumerate(zip(broad, detail, streak, grain)):
         shade = .94 + .015 * b + .025 * d + .02 * g
@@ -75,14 +78,18 @@ def build_family(name, seed, relief):
             shade = .93 + .065 * d + .005 * g
         elif name == 'amber':
             shade = .995 + .005 * max(-1, min(1, height[i]))
+        elif name == 'aged':
+            shade = .48+.30*b+.08*d-.19*max(0,s-.45)-.07*max(0,.25-g)/.25
         else:
             shade = .78 + .12 * d + .1 * g
-        colour.append(round(shade * 255))
+        colour.append(tuple(round(shade*tint*255) for tint in (1,.93,.82)) if name=='aged' else round(shade*255))
         rough = .65 + .35 * d if name == 'metal' else .82 + .18 * g
         if name == 'leather':
             rough = .65 + .25 * d
         elif name == 'amber':
             rough = .72 + .25 * min(1, abs(height[i]) * 3)
+        elif name == 'aged':
+            rough = .88+.10*g
         roughness.append((255, round(rough * 255), 255))
         x, y = i % SIZE, i // SIZE
         dx = (height[y * SIZE + (x + 1) % SIZE] - height[y * SIZE + (x - 1) % SIZE]) * relief * SIZE / (tile * 2)
@@ -90,7 +97,7 @@ def build_family(name, seed, relief):
         length = math.sqrt(dx * dx + dy * dy + 1)
         normals.append(tuple(round((v / length * .5 + .5) * 255) for v in (-dx, -dy, 1)))
     output = {}
-    for kind, mode, pixels in [('baseColor', 'L', colour), ('roughness', 'RGB', roughness), ('normal', 'RGB', normals)]:
+    for kind, mode, pixels in [('baseColor', 'RGB' if name=='aged' else 'L', colour), ('roughness', 'RGB', roughness), ('normal', 'RGB', normals)]:
         filename = f'textures/{name}-{kind}.png'
         image = Image.new(mode, (SIZE, SIZE))
         image.putdata(pixels)
