@@ -1,6 +1,32 @@
 # Berghain viewer validation
 
-## Säule concrete installations and human framing — current candidate
+## Entrance/topology evidence increment — 2026-10-24
+
+Scope is three owning documents: SOURCES.md, README.md and this validation
+record. No world, asset, controls, HTML or dependency changes. Catalogue139
+unique IDs; continuous Markdown tables verified, including repair of the
+pre-existing blank before I24. Six engineer photographs and seven historical
+model/exhibition images were actually inspected, with URLs/bytes/SHA256 in
+ignored research metadata. Raw institutional pages and OSM/ALKIS responses
+are retained for research, not copied into shipped media.
+
+Both independent source audits reproduce the entrance-node projection near
+x−6.65m. The camera addendum identifies P07/I15's broad portal beside the narrow
+opening apparently matched by OSM. Thus neither exact relocation nor current
+centering is verified; no geometry move was accepted. Sources/detail disposition
+are in SOURCES.md. Reports are output/berghain-entrance-source-physics.md,
+output/berghain-entrance-source-camera.md and its -addendum.md. These are source
+reviews, not new rendered, physical-device or measured-building evidence.
+
+Preserved baseline: output/berghain-entrance-baseline/manifest.json,141 files
+from accepted687b408. All109 accepted runtime/asset/test inputs must remain
+hash-identical for this documentation publication. The existing18 public
+browser passes remain evidence for that unchanged runtime, not an execution
+of new Halle/entrance geometry. Additional world acceptance reviews and GPU
+batches are omitted because this increment has no world changes. Full model
+remains ACTIVE; physical Android/GPU and listening remain NOT RUN.
+
+## Säule concrete installations and human framing — 2026-10-24
 
 A15's eight project images and I24's three installer photographs were inspected
 and catalogued with URL/bytes/SHA256. The original assembly adds six massive
@@ -104,6 +130,20 @@ retained in output/berghain-saule-cost-before-first-matrix. No timeout was widen
 The unchanged baseline repeat and separate current batch each pass9/9.
 These samples do not qualify first-ever startup or explain away that timeout.
 The full reconstruction goal remains ACTIVE.
+
+Publication687b408cca2aa8a7e36c9bcd276f1e18af20f971 is a normal fast-forward
+on e3ad14b,18 scoped paths; primary index remains untouched. Pages40082417656
+completed SUCCESS for that exact head. Canonical verification passes72/72 exact
+public files against Git objects and six successful root/3d/Geheim/model URLs.
+Actual public output/berghain-saule-canonical-browser/report.json passes18/18
+on109 published input hashes: source/native Säule, natural Säule/Lab/main-bar
+routes/reverse exit, near-pier full-human turns and loaded main-bar camera,
+each on desktop and Android portrait/landscape emulation. Six required public
+frames plus an additional bar landscape frame were actually inspected. Their
+hashes are retained in output/berghain-saule-public-visual-review.json. Final
+receipt output/berghain-saule-release.json passes the release finalizer, preserving
+all138 baseline files and the frozen current runtime. No physical-device or
+perceptual-listening claim; full architectural/artwork fidelity remains ACTIVE.
 
 ## Aged bar plaster and portable practical lighting — 2026-10-24
 

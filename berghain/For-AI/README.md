@@ -10,7 +10,28 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Current goal turn: **PROGRESS**. Aged-plaster/practical-light release
+Current goal turn: **PROGRESS**. The entrance/topology research increment
+catalogues139 unique records, six additional engineer-published Halle photographs
+and seven historical-model/exhibition images. Both independent source reviewers
+reproduced the mapped entrance offset; the camera reviewer then identified a
+meaningful adjacent-opening conflict in P07/I15. The OSM point is not accepted
+as a door centre, and the current centred entrance remains provisional. No
+runtime geometry was changed. The full reconstruction remains ACTIVE.
+
+Previous goal turn: **PROGRESS**. Säule/camera release
+687b408cca2aa8a7e36c9bcd276f1e18af20f971 is deployed at
+https://germanysimulator.de/geheim/. Pages40082417656 succeeded;72 public files
+match Git bytes, six entry URLs respond and18/18 actual public desktop and
+Android-emulated cases pass. Source/native structures, natural exterior entry,
+Säule/Lab/main-bar routes, reverse exit and whole-avatar near-pier framing were
+checked. Actual public frames were inspected. Final109-input freeze,113 Node
+checks,22 local browser cases, both independent reviews and9+9 cost samples
+remain bound in output/berghain-saule-release.json. All138 baseline files and
+the original primary index are preserved. Full reconstruction stays ACTIVE;
+exact topology, contemporary inventory, complete concrete wear/light wash and
+artwork fidelity remain open. Physical Android/GPU and listening NOT RUN.
+
+Previous goal turn: **PROGRESS**. Aged-plaster/practical-light release
 e3ad14bc7fbdd884f6c7248e7395a424812db6a8 is deployed at
 https://germanysimulator.de/geheim/. Pages40076278682 succeeded; 71 public
 files match Git bytes, six entry URLs respond and 15/15 actual public desktop
@@ -38,9 +59,62 @@ respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: Säule concrete installations and belt housings
+## Current increment: entrance alignment and architectural topology evidence
 
-Locally accepted candidate; public deployment pending:109-file freeze SHA256
+Scope: catalogue, source audit and this owner only. No HTML, runtime, collision,
+controls, portable model, asset pipeline or dependency change. Baseline687b408
+is preserved in output/berghain-entrance-baseline/manifest.json:109 frozen
+inputs plus32 ancillary files. The original primary index hash is unchanged.
+
+G10's entrance=main node7553884077 belongs to building way25649554 and approach
+footway1482428682. Matching the same official ALKIS ring in EPSG25833/4326 gives
+a maximum affine residual below0.001m and projects the point to site
+x−6.65445,z22.14898, compared with the model's x0,z22.28 door. Physics independently
+computed x−6.6571,z22.1451. Camera's local-tangent calculation agreed. These
+checks establish the mapping, not doorway-centre accuracy. Node history has
+nearly identical2020/2026 positions and supplies no site survey.
+
+Camera's follow-up matched P07's broad recessed twin-leaf portal and adjacent
+narrow bay to I15's broad grey opening and green-poster opening. The mapped
+fraction appears nearer the narrow adjacent opening. P08 cannot establish a
+metric position. **Do not rebase the playable entrance on this OSM point.** The
+current centre is also provisional. Resolve a registered photograph/drawing
+before moving shell opening, animated door, interaction/spawn/queue and route
+together. Source reports: output/berghain-entrance-source-physics.md,
+output/berghain-entrance-source-camera.md and its -addendum.md. No new rendered
+or device claim is made by those read-only audits.
+
+SOURCES.md owns the139-record catalogue and dated evidence disposition.
+New primary heritage/library/history/ARCH+/AdK records identify specific archive
+routes without claiming original plans were acquired. ARCH+ contents146–151
+conflict with the architect bibliography126–131. The Topolovac caption's2009
+date conflicts with its visible2017/18 plaque. Models remain unmeasured; the
+exhibition invitation requesting drawings is not evidence of delivered files.
+Osio's cutaway has no north/site registration and cannot settle cardinal
+main-bar or Lab placement. Research-only downloads/hashes remain ignored.
+
+- [x] Revalidate the accepted publication and preserve its complete141-file
+  baseline before any possible runtime edit.
+- [x] Independently georeference the community entrance and check photo identity.
+- [x] Record the unresolved adjacent-opening conflict; leave geometry provisional.
+- [x] Catalogue verified new sources and explicit date/page/topology limits.
+- [ ] Verify the narrow documentation diff, publish and check exact public bytes.
+
+Next model increment: **Halle structural topology**, still under this same owner.
+A05 describes two straight cast-concrete stairs and three floor openings.
+Six newly inspected A06 engineer photographs show massive/corbelled concrete,
+mesh guards, stair nosings, cable trays/linear luminaires, patched walls and
+retained hoppers. Current study has one western steel stair and a large central
+void. Reconcile these forms and their room registration before replacing floors.
+Preserve main club/Lab/Säule/art/sound assets and accepted109-file baseline;
+new geometry requires fresh source/native checks, natural body/camera routes,
+silent desktop/Android-emulated rendering, comparable cost evidence and both
+independent world reviews. No dimensioned Halle plan/floor datum has been found.
+Physical Android/GPU and listening remain NOT RUN; full goal stays ACTIVE.
+
+## Previous increment (published): Säule concrete installations and belt housings
+
+Published and verified:109-file freeze SHA256
 ec7b9b1ec0fac956aec49b0b917a3db625f47096008d044a558205f23fd070f3,
 output/berghain-saule-candidate.json. Current Node113/113 and terminal
 output/berghain-saule-camera-final-browser22/22 PASS. Both independent
@@ -50,9 +124,28 @@ each pass9/9 after a retained baseline first-navigation failure. VALIDATION.md
 records the landscape p95 median increase14.1→20.7ms and all ranges,7,081 added
 normal-load bytes, unchanged26 maps/zero idle work and uncertified first startup.
 The isolated acceptance gate passes113 Node,22 browser, both reviews and cost
-hash bindings. Complete diff review precedes publication; the public page still
-serves accepted e3ad14b.
+hash bindings. All18 scoped paths were reviewed and pushed normally in
+687b408cca2aa8a7e36c9bcd276f1e18af20f971, preserving the primary index.
+Pages40082417656 succeeded for that exact head. All72 public files match Git
+bytes and all six entry URLs respond. Actual public matrix is terminal18/18
+PASS in output/berghain-saule-canonical-browser/report.json; its109 captured
+hashes bind to published Git bytes. Six required public frames plus an additional
+main-bar landscape frame were inspected; output/berghain-saule-public-visual-review.json
+records their hashes. Release finalizer PASS; output/berghain-saule-release.json.
+No browser/GPU batch remains running. Keep full reconstruction ACTIVE.
 Preserve all failed and pre-camera evidence.
+
+After public acceptance, prioritize the uncertain building/room topology before
+adding more isolated detail. Research lead and four primary page snapshots:
+output/berghain-topology-research-lead.md and
+output/berghain-topology-primary-snapshots/metadata.json. Official heritage
+record09085197 points to Stadttechnik(2006),pp302–306/396; full text/plans were
+not obtained. Reconcile the current inferred western Lab and side-wall bar
+with primary original-building evidence and the rotated survey frame. Secondary
+layout descriptions are hypotheses to verify, not instructions to rotate rooms
+or replace the official exterior. This initial lead is now promoted into the
+139-entry catalogue above, with its unresolved limits retained. No institution
+contacted or book purchased.
 
 Continue from the verified e3ad14b release. A15's eight actual project images
 (hero, three gallery views and four outtakes) and I24's three installer images
@@ -91,7 +184,7 @@ Keep the primary index untouched and use the established separate publisher.
   desktop and Android portrait/landscape emulation; compare cost with baseline.
 - [x] Freeze one integrated candidate and obtain both mandatory independent
   Physics and Camera/scale reviews; repair findings and rerun affected checks.
-- [ ] Publish accepted work and verify public bytes and interaction. Keep the
+- [x] Publish accepted work and verify public bytes and interaction. Keep the
   full goal ACTIVE and explicitly retain all unverified architectural gaps.
 
 Independent Camera review found a real crop in near-pier turn2 on all layouts
