@@ -18,6 +18,15 @@ export async function cross({page,profile}){
 export async function enterNaturally(ctx){
   const {page,baseURL,profile,context}=ctx;
   await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
+  if(layout.admission){
+    let heading=0;
+    for(const target of layout.admission.route.slice(1,9))heading=(await travel(ctx,target,heading)).yaw;
+    await cross(ctx);
+    for(const target of [...layout.admission.route.slice(10),studyToSite({x:0,y:.05,z:14.4}),studyToSite({x:0,y:.05,z:19.7})])
+      heading=(await travel(ctx,target,heading)).yaw;
+    await dragLook(page,context,profile,heading/.004);
+    return;
+  }
   let touch;
   if(profile.hasTouch){
     touch=await context.newCDPSession(page);const b=await page.locator('[data-move="forward"]').boundingBox();

@@ -2,7 +2,7 @@ import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {layout, materials} from './layout.mjs';
 import {createSurveyModel} from './survey-model.mjs';
 import {annexPartIds, mainPartId, hallPartId} from './calibration.mjs';
-import {configureSurfaceMaterial} from './surface-materials.mjs';
+import {configureSurfaceMaterial,configureInstanceNormals} from './surface-materials.mjs';
 import {createAcousticGrilleGeometry} from './interior-fixtures.mjs';
 import {createSpeakerGeometries} from './speaker-geometries.mjs';
 import {createClimberGeometries} from './climber-geometry.mjs';
@@ -20,7 +20,8 @@ export function createBerghainModel() {
   model.userData = {units: 'metres', status: layout.calibration.status, catalogue: 'berghain/For-AI/SOURCES.md',
     externalSource: 'Berlin LoD2 DEBE02YY200004SX; dl-de-zero-2.0',fixtures:layout.fixtures,soundSystem:layout.soundSystem,
     landscape:layout.landscape,exteriorDetails:layout.exteriorDetails,artworks:layout.artworks,upperLounge:layout.upperLounge,
-    panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar,saule:layout.saule,halle:layout.halle,interiorTopology:layout.interiorTopology,admission:layout.admission};
+    panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar,saule:layout.saule,halle:layout.halle,interiorTopology:layout.interiorTopology,
+    architecturalCirculation:layout.architecturalCirculation,mainHallDetails:layout.mainHallDetails,groundSanitary:layout.groundSanitary,admission:layout.admission};
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
@@ -41,6 +42,7 @@ export function createBerghainModel() {
     if (!group) { group = new THREE.Group(); group.name = section; model.add(group); }
     const Material=materials[materialName].transmission?THREE.MeshPhysicalMaterial:THREE.MeshStandardMaterial;
     const material = new Material({...materials[materialName]});
+    configureInstanceNormals(material);
     if(shape==='halle-mesh')material.side=THREE.DoubleSide;
     if(section==='admission')configureSurfaceMaterial(material,
       ({admissionWall:'labWall',admissionScuff:'concrete',admissionZinc:'steel',admissionRust:'rust'})[materialName]??materialName);

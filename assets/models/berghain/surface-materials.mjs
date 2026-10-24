@@ -15,6 +15,23 @@ const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', 
   labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'aged',
   sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather'};
 
+function correctInstanceNormals(shader){
+  // Calibrated walls and stair guards can have shear. Three's default instance
+  // normal shortcut assumes orthogonal axes; the GLB already uses the full
+  // inverse transpose. Use the same transform here, including texture fallback.
+  shader.vertexShader=shader.vertexShader.replace('#include <defaultnormal_vertex>',`#include <defaultnormal_vertex>
+    #ifdef USE_INSTANCING
+      transformedNormal=normalMatrix*transpose(inverse(mat3(instanceMatrix)))*objectNormal;
+      #ifdef FLIP_SIDED
+        transformedNormal=-transformedNormal;
+      #endif
+    #endif`);
+}
+export function configureInstanceNormals(material){
+  material.onBeforeCompile=correctInstanceNormals;
+  material.customProgramCacheKey=()=> 'berghain-inverse-instance-normal-v1';
+}
+
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];
   if (family) material.userData.surface = {family, ...surfaceFamilies[family]};
@@ -35,6 +52,7 @@ function projectedMaterial(material, maps) {
   Object.assign(material,{map:maps.baseColor,roughnessMap:maps.roughness,normalMap:maps.normal});
   if(material.clearcoat>0)material.clearcoatNormalMap=maps.normal;
   material.onBeforeCompile = shader => {
+    correctInstanceNormals(shader);
     shader.uniforms.berghainTileMetres={value:material.userData.surface.metresPerTile};
     shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nuniform float berghainTileMetres;');
     shader.vertexShader=shader.vertexShader.replace('#include <uv_vertex>',`#include <uv_vertex>
@@ -56,7 +74,7 @@ function projectedMaterial(material, maps) {
         vClearcoatNormalMapUv=vMapUv;
       #endif`);
   };
-  material.customProgramCacheKey=()=> 'berghain-metre-uv-normal-v2';
+  material.customProgramCacheKey=()=> 'berghain-metre-uv-normal-v3';
   material.needsUpdate=true;
 }
 

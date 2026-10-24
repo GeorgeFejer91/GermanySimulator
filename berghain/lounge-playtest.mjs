@@ -19,6 +19,10 @@ async function selectRoom(page,name){
 export async function travel(ctx,target,heading){
   const {page,context,profile}=ctx;
   const start=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+  if(Math.hypot(start.x-target.x,start.z-target.z)<.02){
+    assert.ok(canStand(start,layout));assert.ok(Math.abs(start.y-target.y)<.05);
+    return {yaw:heading,position:start,corrections:[]};
+  }
   const yaw=Math.atan2(start.x-target.x,start.z-target.z);
   const turn=Math.atan2(Math.sin(yaw-heading),Math.cos(yaw-heading));
   await dragLook(page,context,profile,-turn/.004);

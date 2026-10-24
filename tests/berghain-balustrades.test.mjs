@@ -24,7 +24,8 @@ test('the full visitor cannot cross the foyer balustrade between its main posts'
 });
 
 test('each documented rail run has complete human-height infill with exact visible-part solids',()=>{
-  assert.equal(layout.balustrades?.length,6,'Both original stairs and both foyer-gallery runs need infill');
+  assert.deepEqual(layout.balustrades.map(a=>a.id),['panorama-stair-left','panorama-stair-right','foyer-gallery-west'],
+    'Main switchback and east return now use the photographed plate-sided guards');
   const cube=new THREE.BoxGeometry(1,1,1),point=new THREE.Vector3();
   try{
     for(const assembly of layout.balustrades){
@@ -51,7 +52,14 @@ test('each documented rail run has complete human-height infill with exact visib
 
 test('continuous stair-centre ascent/descent and clear ground beneath the upper flight remain legal',()=>{
   assert.equal(canStand(studyToSite({x:8,y:.05,z:11}),layout),true);
-  for(const [x,z0,z1,lower,upper]of [[8,20.5,9.4,.05,6.65],[-5,8.5,-5,6.65,13.25]]){
+  const route=layout.architecturalCirculation.mainStair.siteRoute;
+  let p={...route[0]};
+  for(const target of [...route.slice(1),...route.toReversed().slice(1)]){
+    const steps=Math.ceil(Math.hypot(target.x-p.x,target.z-p.z)/.06),dx=(target.x-p.x)/steps,dz=(target.z-p.z)/steps;
+    for(let i=0;i<steps;i++){p=moveVisitor(p,{x:dx,z:dz},layout);assert.ok(canStand(p,layout));}
+    assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.03&&Math.abs(p.y-target.y)<.03,'Folded main stair reaches every landing');
+  }
+  for(const [x,z0,z1,lower,upper]of [[-5,8.5,-5,6.65,13.25]]){
     const a=studyToSite({x,y:lower,z:z0+.6}),b=studyToSite({x,y:upper,z:z1-.6});
     let position={...a};
     const dx=b.x-a.x,dz=b.z-a.z,steps=Math.ceil(Math.hypot(dx,dz)/.08);
@@ -65,8 +73,9 @@ test('continuous stair-centre ascent/descent and clear ground beneath the upper 
 test('portable GLB contains the same original-balustrade assemblies as the editable model',()=>{
   const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
   const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
-  assert.equal(gltf.nodes[0].extras.balustrades?.length,6,'The shipped native asset must include the updated assemblies');
+  assert.equal(gltf.nodes[0].extras.balustrades?.length,3,'The shipped native asset must retain the three unchanged original assemblies');
   assert.deepEqual(gltf.nodes[0].extras.balustrades,layout.balustrades);
+  assert.deepEqual(gltf.nodes[0].extras.architecturalCirculation,layout.architecturalCirculation,'Native export includes new circulation and uncertainty metadata');
 });
 
 test('Gallery-guard first-person camera keeps the eye inside the legal body through turns',async()=>{

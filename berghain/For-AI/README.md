@@ -10,6 +10,35 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Karhard architecture and supplied cutaways — 25 October 2026
+
+All 61 images on the exact architect project page have been inspected and mapped
+to 34 feature families in [KARHARD-MAPPING.md](KARHARD-MAPPING.md); the companion
+JSON retains image URLs/hashes. U01/U02 record George's two unscaled cutaways.
+The original geometry now includes opposed main stair flights/open gallery,
+the tiled Eisbar and narrow stairs/hoist, a glazed smoking/escape stair with
+sparse horizontal guards, and separate ground cloakroom toilets. The existing
+main-floor Klo and upper Panorama toilets remain distinct. Drum lights, duct
+ribs, radiators, open trusses, paired DJ-wall recesses, screened booth and
+visible maintenance access follow the photographed feature families.
+
+The public wardrobe/foyer doorway is an explicitly inferred connection in an
+existing provisional partition. Backstage boundaries, the upper smoking-to-
+Panorama attachment, lift, FLINTA location and full room registration remain
+unresolved. No private room or public backstage shortcut has been invented.
+The ground WC's three stalls are illustrative. Historical artwork/rig images
+do not establish contemporary inventory; the removed Nathan mural stays absent.
+
+This bounded implementation passes source/native geometry and rendering,
+continuous desktop and Android-emulated routes, room controls/fallback and
+independent Physics/Camera review. [VALIDATION.md](VALIDATION.md) owns exact
+evidence. Steady local stair/WC cues retain the accepted warm orientation fill.
+The full reconstruction goal remains open: a working source-informed model
+does not resolve the documented architectural registration gaps. The earlier
+low-smoking-bridge hypothesis below is superseded by gallery 30–34.
+
+Publication and public-byte checks are recorded in `output/karhard-release.json`.
+
 ### Warm interior orientation light — 25 October 2026
 
 Following George's request, a warm reflected fill now makes room boundaries,
@@ -81,7 +110,7 @@ No invented backstage room or public shortcut is part of this candidate.
   routes, desktop/Android-emulated visibility, entry/exit and bounded cost.
 - [x] Freeze the integrated candidate; complete independent Physics and
   Camera/scale reviews and repair findings.
-- [ ] Publish and verify the accepted night/sanitary increment.
+- [x] Publish and verify the accepted night/sanitary increment.
 - [ ] Resolve smoking extension attachment and floor registration; reconstruct
   supported circulation. Locate backstage and remaining sanitary/service areas
   before claiming all internal inaccuracies corrected.
@@ -109,6 +138,25 @@ layout/fixture integration; berghain/night-lighting.mjs and viewer integration;
 scoped Node/browser tests. No main-game runtime change. Candidate research:
 output/berghain-interior-topology-notes.md. Pre-edit source/index hashes:
 output/berghain-night-baseline.json. Latest accepted base is the release below.
+
+Published night/sanitary increment: **73f741cdc8e37ab40a6ab3c9916de805cf9223fc** at
+https://germanysimulator.de/geheim/. Pages 40133238964 succeeded;
+all 76 public files match committed bytes, six entry URLs respond and 6/6
+actual public desktop/Android-emulated room-tour and sanitary-route cases pass.
+Receipt: output/berghain-night-release.json. This paragraph and the validation
+handoff are local post-publication task-state notes; no additional runtime change.
+
+The app goal remains ACTIVE. Full layout fidelity is not achieved. Subsequent
+read-only access checking found I13/E05's film unavailable both at its player
+and inside the creator page; no video frames were acquired or inspected.
+Retain output/berghain-after-hours-reference/ and berghain-after-hours-embedded/.
+Their capture PASS records the access diagnostic, not successful footage access.
+Latest user priority: map all architectural and visual features on
+https://www.karhard.de/projects/berghain against the model, including the full
+project gallery, dated outtakes and usable drawings. Record each feature's
+source, model counterpart, discrepancy and correction or explicit uncertainty.
+Use registered stair/door/window sequences to revise the connected room graph.
+Backstage still needs locatable evidence.
 
 ## Previous accepted first-person/Halle baseline
 

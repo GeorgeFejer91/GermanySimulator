@@ -1,5 +1,70 @@
 # Berghain viewer validation
 
+## Karhard architectural correction — 25 October 2026
+
+Accepted bounded candidate: `output/karhard-candidate.json`, SHA256 `0d256e3f59d0dabca21b44f8c1c997406d38ae5c009faaf6c592f1a4fb500166`,
+179 frozen files. Final documentation is bridged separately; runtime remains
+unchanged. Admission and warm lighting from `408bc443bf55eaf074755d5c7b83cf098b02fb10` are preserved. The primary
+unborn checkout/index remains untouched by the isolated publisher.
+
+- 163/163 Node checks: `output/karhard-node-warm.txt`.
+- 16 final browser cases: `output/karhard-final-desktop/report.json`,
+  `output/karhard-final-mobile/report.json` and
+  `output/karhard-final-mobile-routes/report.json`. These cover source/native
+  views, actual desktop entry/main stairs, real walking/touch stair and toilet
+  routes, all three ground stalls, new room selectors and texture fallback.
+  Controls are measured with locked Pretext at 320/740/1280/2400px and 200% text
+  with expanded spacing. Android evidence is emulation, not physical hardware.
+  The final desktop Eisbar descent light repair is rechecked in
+  `output/karhard-eisbar-light-recheck/report.json`; only its cue definition
+  changes from the six-case desktop snapshot in karhard-candidate-warm.json.
+  Four mobile source/native and smoking-route cases pass in the first mobile
+  report. Its two selector assertions raced the next render and are retained
+  as FAIL; they are replaced by two fresh PASS cases in
+  `output/karhard-mobile-controls-recheck/report.json` after awaiting the
+  selected room's rendered state. Only the browser test changes in that bridge;
+  all 178 other files are identical to karhard-candidate-cues.json.
+- Independent Physics: 32 route roundtrips/45,168 legal movement substeps;
+  all 15 room viewpoints legal; 20 endpoint posts have fitted containment;
+  202 source/native meshes and 1,025,841 vertices agree within 0.000004 m.
+  Independent Camera review inspects actual walking turns, room views, sparse
+  smoking guards, fallback and UI. Exact signed-off reports are
+  `output/karhard-physics-final.md` and `output/karhard-camera-final.md`.
+- Export: 56,489,136 bytes / 741,480 triangles,
+  202 meshes, 25 embedded textures; SHA256 `fc0c34c94095bc61bd12e8e9d423fa8381b79846b3141255586aa9db12cfbf14`.
+  Correct inverse-transpose instance normals remove the earlier source/native
+  shading mismatch on angled guards without changing exported geometry.
+- Comparable cost evidence: `output/karhard-cost-comparison.json`. Nine final
+  samples use the same main-hall view, three-second input and profile settings
+  as the accepted baseline; no extra perpetual render loop or texture family.
+  Baseline 73f741c predates admission/warm-fill releases, so the measured delta
+  describes the cumulative integrated revision and does not isolate each change.
+
+| Profile | Frame p50 / p95 ms, before → after | Input ms, before → after | Draw calls |
+| --- | --- | --- | --- |
+| desktop | 7.0/14.2 → 13.8/14.2 | 16.5 → 15.7 | 318 → 338 |
+| android-portrait | 6.9/7.1 → 6.9/7.1 | 16.7 → 12.9 | 285 → 304 |
+| android-landscape | 6.9/7.1 → 6.9/7.1 | 12.7 → 17.2 | 328 → 345 |
+
+Normal page transfer rises 56,865 bytes to 7,469,851 bytes in this local comparison;
+the 56.49 MB GLB is still fetched only on an explicit download/native test. The
+desktop median frame interval rises 7.0→13.8 ms, while its p95 stays 14.2 ms; the
+increase is retained in acceptance, not described as a speedup. The visible
+architectural additions and corrected angled shading justify this bounded cost.
+These short same-host samples do not establish physical-device performance.
+
+Earlier failed captures and fixes remain in output: missing wardrobe connector,
+source/native angled-normal mismatch, smoking endpoint post contact, label
+precedence and resize-before-render screenshot race. These are not counted as
+passes. Final clips/colliders, corrected shader and settled captures replace
+them. All browser sessions were silent/headless; perceived audio was not tested.
+
+This accepts implementation, navigation and bounded visual/readability evidence.
+It does not certify measured architecture, current venue lighting, a real fire-
+escape plan, backstage registration or complete artwork/room fidelity. Missing
+evidence remains in KARHARD-MAPPING.md and AUTHENTICITY-AUDIT.md. Public bytes,
+deployment and entry checks belong to `output/karhard-release.json`.
+
 ## Warm interior orientation light — 25 October 2026
 
 The follow-up to admission release `40c50359acfafd0d6b5e18df45ac137a6995c090` changes only the existing
@@ -156,7 +221,11 @@ Export: 51,008,524 bytes; 673,728 triangles; 171 groups; 25 embedded maps; SHA25
 The preserved baseline contains 153 files from 3f54d69; primary index remains
 704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
 
-Publication and deployed-byte/control verification are pending. Physical
+Verified public release: 73f741cdc8e37ab40a6ab3c9916de805cf9223fc; Pages 40133238964
+succeeded. All 76 public file hashes and six entry URLs pass; six actual public
+desktop/Android-emulated room-tour and sanitary-route cases pass. Actual public
+frames were inspected. Receipt: output/berghain-night-release.json. This is a
+local post-publication handoff, not an additional runtime publication. Physical
 Android, measured photometry, complete natural entrance-to-upper-WC travel,
 smoking attachment, backstage locations and full contemporary fidelity remain
 unverified. The enlarged source catalogue has 147 records; AU26 explicitly

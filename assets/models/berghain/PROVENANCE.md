@@ -1,5 +1,25 @@
 # Berghain architectural study
 
+## Karhard architecture and source limits
+
+The subsequent Karhard/cutaway increment adds three original modules:
+`architectural-circulation.mjs` (folded main stair, Eisbar and smoking/escape
+tower), `main-hall-details.mjs` (architectural fixtures and maintenance access)
+and `ground-sanitary.mjs` (cloakroom-adjacent ground WC). The full reference
+mapping is `berghain/For-AI/KARHARD-MAPPING.md`, with 61 image identities and
+hashes in its companion JSON. No photograph pixels are used in these meshes.
+Photographed forms and cutaway floor/adjacency claims are separated from
+estimated dimensions, placement and currentness in exported metadata.
+
+Smoking main-floor access and lower escape are modelled provisionally; its
+upper attachment to Panorama is unresolved and closed. Backstage, lift and
+FLINTA locations are unassigned. The ground WC's three cubicles are illustrative,
+not a recovered fixture count. Visible maintenance stairs do not create a public
+backstage route. Viewer-only `architectural-lighting.mjs` adds steady practical
+cues for the reconstructed routes while retaining the three-light reuse limit.
+
+The inferred wardrobe-to-foyer doorway clips the existing glass run while preserving both leaves and its header. The non-public maintenance stair does not establish a backstage location.
+
 ## Entrance forecourt and admission room
 
 The 24 October 2026 entrance increment uses ENT01's three user-supplied
@@ -53,8 +73,9 @@ exterior inspection. The portable GLB retains geometry, uncertainty metadata
 and its existing bar lights; it does not embed the viewer's adaptive cue rig.
 No current club-lighting program, photometry or IVL rig layout is asserted.
 
-The east smoking projection/upper-return connection and backstage placement
-remain unresolved. They are explicitly unmodelled in `interiorTopology`.
+The smoking tower is now modelled by the Karhard increment above. Its upper
+interior attachment and backstage placement remain unresolved in
+`interiorTopology`.
 
 ## Halle: provisional post-2022 structure
 

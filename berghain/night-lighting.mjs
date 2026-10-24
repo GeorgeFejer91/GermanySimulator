@@ -1,3 +1,4 @@
+import {architecturalRoomAt,architecturalCues} from './architectural-lighting.mjs';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
@@ -10,11 +11,12 @@ import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 // candela or a programmed show. These steady cues are authored, not a rig survey.
 const spot=(position,target,color,intensity,angle=.65,range=24)=>({position,target,color,intensity,angle,range});
 const cues={
+  ...architecturalCues(spot),
   outside:[spot([-8,4,22.9],[-7,0,27],'#e8ddc2',160,1,16),spot([0,2.8,22.65],[0,0,24.5],'#ffe3b5',95,.95,10),spot([8,4,22.9],[8,0,26],'#e6ddc7',150,1,15)],
   admission:[...[18.05,20.45].map(z=>spot([-5.25,2.79,z],[-5.25,.6,z],'#e1dcc9',160,1.25,10)),
     spot([-3.1,1.94,18.55],[-3.1,1.1,17.5],'#e8dcc5',60,1.1,5)],
-  foyer:[spot([7,5.9,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',100,.8,12)],
-  berghain:[spot([2,16,-8],[6,6.65,-13],'#bb3025',1000,.43,24),spot([10,15,0],[4,6.65,-1],'#537bc0',760,.48,22),spot([8,10,9],[8,6.65,11],'#d19661',90,.85,9)],
+  foyer:[spot([7,5.9,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',130,1.1,12),spot([-3,3.8,14.7],[-4,.05,14.4],'#c1a688',140,1.25,10)],
+  berghain:[spot([2,16,-8],[6,6.65,-13],'#bb3025',1000,.43,24),spot([10,15,0],[4,6.65,-1],'#537bc0',760,.48,22),spot([5,12,-14],[5,11,-21.5],'#a26051',260,.9,14)],
   panorama:[spot([-18,17,-14],[-12,13.25,-14],'#b34375',230,.8,13),spot([-8,17,-8],[-14,13.25,-8],'#567db1',180,.78,12),spot([-8,17,3],[-9,13.25,3],'#d5a06e',75,.8,9)],
   panoramaToilets:[-1.9,.3,2.5].map(z=>spot([-19.3,15.6,z],[-18.7,13.25,z],'#a7b9a8',100,1.1,7)),
   lounge:[-3.7,3,8.2].map(z=>spot([-20.4,18.7,z],[-16,16.35,z],'#cd9a70',90,.9,11)),
@@ -31,6 +33,7 @@ for(const lights of Object.values(cues))for(const light of lights){light.positio
 function roomAt(p){
   if(p.z>22.28)return 'outside';
   if(admissionRoomAt(p))return 'admission';
+  const architecture=architecturalRoomAt(p);if(architecture)return architecture;
   if(p.z<-15.4)return 'halle';
   if(p.x>22)return 'garden';
   if(p.y>15.8)return 'lounge';

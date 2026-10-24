@@ -1,6 +1,7 @@
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createBerghainModel, disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 import {layout, viewpoints} from '../assets/models/berghain/layout.mjs';
+import {architecturalRoomAt} from './architectural-lighting.mjs';
 import {moveVisitor, eyeHeight, walkingSpeed} from './navigation.mjs';
 import {fitExteriorRadius, exteriorTarget} from './camera.mjs';
 import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.mjs';
@@ -59,7 +60,9 @@ function clearInput() {
 }
 
 function syncLoungeRoom(){
-  const room=(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+  const architectural=architecturalRoomAt(visitor),newRoom=architectural==='smokingEscape'?'smoking':viewpoints[architectural]?architectural:null;
+  const room=newRoom||(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+    ['groundToilets','smoking','eisbar'].includes(roomSelect.value)?(visitor.y<5?'foyer':visitor.y<12?'berghain':'panorama'):
     roomSelect.value==='admission'&&Math.abs(visitor.y-.05)<.15?'foyer':
     roomSelect.value==='lab'&&Math.abs(visitor.y-.05)<.15?'saule':
     roomSelect.value==='lounge'&&Math.abs(visitor.y-13.25)<.15?'panorama':
@@ -98,10 +101,11 @@ function render(time) {
       interaction.hidden = !action;
       if (action && interaction.textContent !== action) interaction.textContent = action;
       const place = visitor.z > 22.28 ? 'Outside Berghain' :
-        admissionRoomAt(visitor)?viewpoints.admission.label:
+        viewpoints[architecturalRoomAt(visitor)]?.label||
+        (admissionRoomAt(visitor)?viewpoints.admission.label:
         labRoomAt(visitor)?viewpoints.lab.label:
         kloRoomAt(visitor)?viewpoints[kloRoomAt(visitor)].label:
-        Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain';
+        Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain');
       if (document.querySelector('#location').textContent !== place) document.querySelector('#location').textContent = place;
     } else {
       camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);

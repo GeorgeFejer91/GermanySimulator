@@ -65,7 +65,7 @@ test('continuous metal belts enclose the piers and padded concrete seats have ac
 
 test('the full body can pass the concrete installations and return to the Lab connection and main stair',()=>{
   assert.ok(layout.saule,'The new physical structure must be present for this route check');
-  const targets=[[5,15],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5,15]];
+  const targets=[[5,15],[5.7,15],[5.7,4],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5.7,4],[5.7,15],[5,15]];
   let position=studyToSite({x:5,y:.05,z:15});assert.ok(canStand(position,layout));
   for(const [x,z]of targets.slice(1)){
     const target=studyToSite({x,y:.05,z}),dx=target.x-position.x,dz=target.z-position.z,steps=Math.ceil(Math.hypot(dx,dz)/.04);

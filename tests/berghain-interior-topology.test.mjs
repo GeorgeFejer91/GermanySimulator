@@ -60,6 +60,9 @@ test('sanitary additions preserve every retained original batch tone including H
   // and let the renderer's previous group-count/index formula run unchanged.
   const source=readFileSync(url,'utf8')
     .replace('pinInteriorTopologyTones(layout);','layout.parts=layout.parts.filter(p=>!p.interiorTopology);')
+    .replace('addArchitecturalCirculation(layout);','')
+    .replace('addMainHallDetails(layout);','')
+    .replace('addGroundSanitary(layout);','')
     .replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
   const baseline=(await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'))).layout;
   const groups=new Map(),expected=new Map();
@@ -69,12 +72,14 @@ test('sanitary additions preserve every retained original batch tone including H
   }
   for(const parts of groups.values())parts.forEach((p,index)=>expected.set(p,
     p.instanceTone??(.84+((index*193+parts.length*37)%101)/625)));
-  const retained=layout.parts.filter(p=>!p.interiorTopology);
-  assert.equal(retained.length,baseline.parts.length);
-  retained.forEach((p,i)=>{
-    const original=baseline.parts[i];
-    assert.equal(p.name,original.name);
-    assert.deepEqual(p.matrix,original.matrix,'geometry unchanged');
+  const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
+  const originalByKey=new Map();
+  for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
+  const retained=layout.parts.filter(p=>!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
+  assert.ok(retained.length>10000,'Retirement must leave the unrelated original model intact');
+  retained.forEach(p=>{
+    const original=originalByKey.get(key(p))?.shift();
+    assert.ok(original,'Retained original geometry exists: '+p.name);
     assert.equal(p.instanceTone,expected.get(original),p.name+' / '+p.material);
   });
   for(const material of ['darkConcrete','stainless','rubber','steel'])

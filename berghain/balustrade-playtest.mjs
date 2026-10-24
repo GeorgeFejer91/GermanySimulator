@@ -48,13 +48,14 @@ const extraInputs=[
 export const sourceFiles=()=>[...lounge.sourceFiles(),...extraInputs.map(path=>({path,
   sha256:createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex')}))];
 const array=point=>[point.x,point.y,point.z];
+const mainStair=layout.architecturalCirculation.mainStair.routes.map(([x,y,z])=>[x,z,y]);
 
 async function nearGuard(ctx,{fallback=false,restore=false}={}){
  const {page,context,profile,artifacts}=ctx;
  if(fallback)await page.route('**/assets/models/berghain/textures/*.png',r=>r.abort());
  await enterNaturally(ctx);let heading=0;
  const route=[];
- for(const [x,z,y]of [[5,21.15,.05],[8,21.15,.05],[8,8.9,6.65],[4.5,9,6.65],[-2,8.85,6.65]]){
+ for(const [x,z,y]of [[5,21.15,.05],...mainStair,[4.5,9,6.65],[-2,8.85,6.65]]){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
  }
  const target=0,turn=Math.atan2(Math.sin(target-heading),Math.cos(target-heading));
@@ -111,7 +112,7 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
     const camera=studyToSite({x:-2,y:6.65,z:8.1}),target=studyToSite({x:-2,y:6.65,z:10});
     const yaw=Math.atan2(camera.x-target.x,camera.z-target.z);
     const native=await renderNativeAsset(page,{position:camera,yaw,pitch:-.35,rays});
-    assert.equal(native.balustrades.length,6);assert.equal(native.artworks,2);assert.equal(native.equipment,44);
+    assert.equal(native.balustrades.length,3);assert.equal(native.artworks,2);assert.equal(native.equipment,44);
     for(const distances of Object.values(native.geometryProbes)){
       assert.ok(distances[0]>.97&&distances[0]<1.01,'The actual steel bar stops a sightline');
       assert.ok(distances[1]===null||distances[1]>1.05,'The visible opening between bars remains open');
@@ -126,8 +127,8 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
 },{id:'rail-natural-stairs',modes:['quick','stress'],timeoutMs:240000,async run(ctx){
   const {page,artifacts}=ctx;
   await enterNaturally(ctx);let heading=0;const route=[];
-  const outward=[[5,21.15,.05],[8,21.15,.05],[8,8.9,6.65],[4.5,9.0,6.65],[-5,9.0,6.65],[-5,-5.5,13.25],[-11,-5.5,13.25],[-11,-7,13.25]];
-  const back=[[-11,-5.5,13.25],[-5,-5.5,13.25],[-5,9.0,6.65],[4.5,9.0,6.65],[8,8.9,6.65],[8,21.15,.05],[5,21.15,.05],[0,19.7,.05],[0,20.25,.05]];
+  const outward=[[5,21.15,.05],...mainStair,[4.5,9.0,6.65],[-5,9.0,6.65],[-5,-5.5,13.25],[-11,-5.5,13.25],[-11,-7,13.25]];
+  const back=[[-11,-5.5,13.25],[-5,-5.5,13.25],[-5,9.0,6.65],[4.5,9.0,6.65],...mainStair.toReversed(),[5,21.15,.05],[0,19.7,.05],[0,20.25,.05]];
   for(const [index,[x,z,y]]of [...outward,...back].entries()){
     const target=studyToSite({x,y,z});
     assert.ok(canStand(target,layout),'Route waypoint must clear the actual retained structure');

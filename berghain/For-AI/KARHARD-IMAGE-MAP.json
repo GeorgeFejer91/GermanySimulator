@@ -1,0 +1,979 @@
+{
+  "source": "https://www.karhard.de/projects/berghain",
+  "acquiredAt": "2026-10-24T21:34:09.364430+00:00",
+  "scope": "All61 project-related images in fully scrolled page DOM; shared site-header slideshow and social icons excluded.",
+  "rights": "Reference identities and original observations only. Downloaded photographic pixels remain private research and are not shipped.",
+  "datePolicy": "Individual project photos undated. Explicit captions and depicted events retain their own dates; contemporary survival is not implied.",
+  "images": [
+    {
+      "id": "hero-00",
+      "url": "https://static.wixstatic.com/media/d133a5_de755d6a42004812bb519b265c299078~mv2.jpg",
+      "sha256": "18af5d9c3a8177b97a4afd992b4a87cb0cf23d1c57f2ba1c790dd5921bcc0077",
+      "size": [
+        2000,
+        950
+      ],
+      "observed": "Main hall, central void, cross-gallery, stair pair, roof/truss system, long-bar glass wall.",
+      "features": [
+        "F03",
+        "F04",
+        "F05",
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-00",
+      "url": "https://static.wixstatic.com/media/d133a5_7972d85b59f24352ae215594d6167b0e~mv2.jpg",
+      "sha256": "a344fc38ab97edbbcb320289615d1c3a4a4abfa1c4b3f3179d1759f550e88cfd",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Ballet performance; fixed wall openings, booth screen and maintenance stair visible behind performers.",
+      "features": [
+        "F12",
+        "F13",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-01",
+      "url": "https://static.wixstatic.com/media/d133a5_18a7d60ed9c34d55bd294d8b50af09e3~mv2.jpg",
+      "sha256": "25b91460a5fffc5616925265c5d31910763cb6a5a4efca91b868557af38f96b4",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Historical foyer mural, faceted suspended lamps, column line and floor-level radiators.",
+      "features": [
+        "F06",
+        "F07",
+        "F29"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-02",
+      "url": "https://static.wixstatic.com/media/d133a5_31bfee63ad9e4afc9ad596d132e6e715~mv2.jpg",
+      "sha256": "771c7abe50ff8329ff7e645af71df75249e00a713a104790f9d8fe793bb6ca5e",
+      "size": [
+        1920,
+        1080
+      ],
+      "observed": "Staged After Hours still with concrete channel seats and stairs beyond; animal is temporary.",
+      "features": [
+        "F06",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-03",
+      "url": "https://static.wixstatic.com/media/d133a5_956e7313de6d4cc8a8f98a10a45265f3~mv2.jpg",
+      "sha256": "39f05f72412ac0d2ad1cdfb11fabd28b948125bf932c038f5cf6b484b95c7621",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Dense concrete channel-seat aisle, broad rectangular overhead duct and pendant sequence.",
+      "features": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-04",
+      "url": "https://static.wixstatic.com/media/d133a5_756ffbbf3a5443558977c03666508a40~mv2.jpg",
+      "sha256": "2364c5b11ef024714892ee5626771383f6b1e491984c61bad092f5e9ead8e595",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Pier-mounted vertical fin radiator, surface conduit, rectangular overhead duct and bar behind piers.",
+      "features": [
+        "F03",
+        "F08",
+        "F09"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-05",
+      "url": "https://static.wixstatic.com/media/d133a5_1d30fcd21b52463d958566e45d09aaf0~mv2.jpg",
+      "sha256": "6770eebed36df0a802f9ef78c7d766a707127a2fa71f02060fc93e94721955aa",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Concrete inverted-U standing table, haunched posts and close-pitch gallery underside beams.",
+      "features": [
+        "F03",
+        "F06"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-06",
+      "url": "https://static.wixstatic.com/media/d133a5_a28bb7785a7c4a3a9672e94e55e86372~mv2.jpg",
+      "sha256": "64efa6563a5d9340611bcc857505b575c806799ab0691feb31f1577b3076e604",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Lower stair flight, crossing upper flight, solid guards, concrete posts and low upholstered seats.",
+      "features": [
+        "F03",
+        "F04",
+        "F06"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-07",
+      "url": "https://static.wixstatic.com/media/d133a5_d4ecd45c24904e0bb05a46697d182db6~mv2.jpg",
+      "sha256": "2c1e35974b57af0bd3679078b3fdfa7137eb252ce865d42dc67037bd8108e7fa",
+      "size": [
+        741,
+        1024
+      ],
+      "observed": "Folded steel stair, sheet-metal guard panels, landings, upper gallery, glass blocks and high gridded bays.",
+      "features": [
+        "F04",
+        "F05",
+        "F10"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-08",
+      "url": "https://static.wixstatic.com/media/d133a5_6c3af71a8b9c402c804a0caf6259eadb~mv2.jpg",
+      "sha256": "c73781ea1cc0b4ccc34be3fa66299e4324f6e1e9f2a58f1d8ac1b10ed8a9ad9f",
+      "size": [
+        1024,
+        683
+      ],
+      "observed": "Side view ties switchback stair to lower bar, concrete table, piers and gallery.",
+      "features": [
+        "F03",
+        "F04",
+        "F06"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-09",
+      "url": "https://static.wixstatic.com/media/d133a5_fe412ee1bf35478c9c91883ed45ee2dd~mv2.jpg",
+      "sha256": "8b3a9c9d2d6aefeb20ba928861f2ee965a2eaf7549267f0402ec75572fc96d79",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Ballet performance with temporary floor lamps; industrial ladder and wall retained behind it.",
+      "features": [
+        "F13",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-10",
+      "url": "https://static.wixstatic.com/media/d133a5_1167d8d7e0074e9598525e218ce400cb~mv2.jpg",
+      "sha256": "5e2b8198f225b44da087ade3df41f1b1d1bb6f2b4b17bc482a72ae64813f80cb",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Colored event-lighting state, central void, opposed stairs, booth, glazing and overhead rig.",
+      "features": [
+        "F04",
+        "F05",
+        "F11",
+        "F12",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-11",
+      "url": "https://static.wixstatic.com/media/d133a5_19fdb03e98e74a00a6ae485f5373f6a1~mv2.jpg",
+      "sha256": "41a87c5a8d9d397ea2700cc4d320cad612dc274766c1be6ed771f4736dff40d3",
+      "size": [
+        741,
+        1024
+      ],
+      "observed": "Long bar aisle, stool row, inner historic facade, blue gridded roof bays and far-end opening.",
+      "features": [
+        "F10",
+        "F14",
+        "F15",
+        "F16"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-12",
+      "url": "https://static.wixstatic.com/media/d133a5_f1606498a610446f95d4789db6b6a5ac~mv2.jpg",
+      "sha256": "08ad83521b21d10dec3992c39cb93cf06688c053cc36d9515d31001906a940b6",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Rounded bar return, two luminous tile bands, stools and tall relief-bearing inner facade.",
+      "features": [
+        "F14",
+        "F15"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-13",
+      "url": "https://static.wixstatic.com/media/d133a5_21b4646e602e46ffaec1fa4e27fb3ef9~mv2.jpg",
+      "sha256": "0503ae0a337d9ab7f25971b4a663624f2bcfaf5986508d7f12467388d4b0af10",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Fine luminous ribbing, worn plaster, metal stools, worktop and service fittings.",
+      "features": [
+        "F14",
+        "F15",
+        "F16"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-14",
+      "url": "https://static.wixstatic.com/media/d133a5_eeae2cf9409f44d3876938e68484e990~mv2.jpg",
+      "sha256": "9f8bd8cd189430b2c642fa1f603faa7b9175c46eaf0c7dbb0c9a778eab72b956",
+      "size": [
+        817,
+        1024
+      ],
+      "observed": "Same rounded bar under red/warm lighting with blue upper bays and lit end doorway.",
+      "features": [
+        "F10",
+        "F14",
+        "F15",
+        "F16"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-15",
+      "url": "https://static.wixstatic.com/media/d133a5_a935b2b28c694a58a369a07302aaceed~mv2.jpg",
+      "sha256": "ba586b810ce25cbf1642a5eaf99c7a9a72bfbf2fed53f0931c83590f22d0b55e",
+      "size": [
+        1024,
+        768
+      ],
+      "observed": "Ballet performers on screened booth; expanded metal and rounded guard visible.",
+      "features": [
+        "F12",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-16",
+      "url": "https://static.wixstatic.com/media/d133a5_77d9b60538ef4c5e9b4956836c950de5~mv2.jpg",
+      "sha256": "ecbc34a63ab1f1bb40a970ef1e9e2c994d9cbe04208f99d907ca21a6aa3de929",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Hall-facing steel/glass grid, bar depth, lower radiator zone and two facade tiers.",
+      "features": [
+        "F09",
+        "F14",
+        "F15"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-17",
+      "url": "https://static.wixstatic.com/media/d133a5_5202730897c54f9598838a0e020ef832~mv2.jpg",
+      "sha256": "5073a00d2fa4c6d54e8745ec28385190462e81d00deef2e2415eb7303fa18cf6",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Historical suspended truss rig and speaker installation beside long-bar glass screen.",
+      "features": [
+        "F11",
+        "F14",
+        "F30"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-18",
+      "url": "https://static.wixstatic.com/media/d133a5_5dd72e4f504842d880bbde66e9ae9006~mv2.jpg",
+      "sha256": "cea3061b2927cd6f39d734b5a836fd4e1062bb11faecc4c6771b7a35edd28065",
+      "size": [
+        1024,
+        683
+      ],
+      "observed": "Frontal long-bar glazing and lower radiators, old PA placement, low seating and truss bars.",
+      "features": [
+        "F06",
+        "F09",
+        "F11",
+        "F14",
+        "F30"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-19",
+      "url": "https://static.wixstatic.com/media/d133a5_3b1585b704e8486ba8ebc8110de3f298~mv2.jpg",
+      "sha256": "bd2ef845feefae9e3c716fbb3c5bea2c1054afdb292b7d8ebf41ff9fc25d7f34",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "DJ-wall circular openings, maintenance stair/ladder, suspended fixtures and historic speaker towers.",
+      "features": [
+        "F11",
+        "F12",
+        "F13",
+        "F30"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-20",
+      "url": "https://static.wixstatic.com/media/d133a5_5a753252f4c8483e89e16765aef4a2a3~mv2.jpg",
+      "sha256": "2891144665ed5f2d5e8de45fbd9803ab4e5cf92f452e81b78f29edfce6386894",
+      "size": [
+        1024,
+        1008
+      ],
+      "observed": "Lower level with standing table, concrete frame and two legs of main switchback.",
+      "features": [
+        "F03",
+        "F04",
+        "F06"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-21",
+      "url": "https://static.wixstatic.com/media/d133a5_16e60b3b245c400f9ee85b87bdc6518a~mv2.jpg",
+      "sha256": "6a9407f490aef5e9ff2fa12f741544beaa7db0ae1865fe2d7995f06d9f6a0417",
+      "size": [
+        1024,
+        956
+      ],
+      "observed": "Coherent hall view: lower void, bridge/gallery, plate-sided descending flight and separate rising stair.",
+      "features": [
+        "F03",
+        "F04",
+        "F05",
+        "F09",
+        "F10",
+        "F11"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-22",
+      "url": "https://static.wixstatic.com/media/d133a5_29d2b67c6e7841689b388dbe2e75b999~mv2.jpg",
+      "sha256": "cfa5adcb1177895c6c16f6342904154fc184947d0a619529c0715aa740184fff",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Opposite main-hall view, glass bar wall, truss, old PA and concrete seats.",
+      "features": [
+        "F06",
+        "F10",
+        "F11",
+        "F14",
+        "F30"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-23",
+      "url": "https://static.wixstatic.com/media/d133a5_5d5c2d01f4dc44749cba3028b8251c53~mv2.jpg",
+      "sha256": "786f7564a6e590c2242d5c9258de97a589c7a8c793d2e8b92becf805003d3b59",
+      "size": [
+        1024,
+        408
+      ],
+      "observed": "Wide view of central void, upper stair, DJ wall and glazed bar edge.",
+      "features": [
+        "F04",
+        "F05",
+        "F10",
+        "F12",
+        "F14"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-24",
+      "url": "https://static.wixstatic.com/media/d133a5_9b04d93e366843d0b263df470900a5ca~mv2.jpg",
+      "sha256": "8b03642212a985a943153ff50da698354cbbc38ad4e2cf8c154166db4b9f9608",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "DJ booth with expanded-metal front/rounded guard, circular wall openings and stair above.",
+      "features": [
+        "F12",
+        "F13"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-25",
+      "url": "https://static.wixstatic.com/media/d133a5_d2ccdbe5f236407f80e74d8b39a79977~mv2.jpg",
+      "sha256": "a78e63a7357ccd82dc6cb34ef38637c23f3207ef55034b81c4c0c7fa6c84dd90",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Lower void, opposed sheet-sided flights, table and concrete piers in one view.",
+      "features": [
+        "F03",
+        "F04",
+        "F06"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-26",
+      "url": "https://static.wixstatic.com/media/d133a5_b81ded837cda4359a02aa17cbf6dd4b4~mv2.jpg",
+      "sha256": "86cc163bcac61d5a30e06ae6d0d0532fee833fb65af3f60c9fa10a92cb47711d",
+      "size": [
+        1310,
+        674
+      ],
+      "observed": "Staged After Hours wolf; mesh partition, doors and radiator are background architecture.",
+      "features": [
+        "F09",
+        "F28"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-27",
+      "url": "https://static.wixstatic.com/media/d133a5_cb59121c9f5a40c9a7742f623c5a5fed~mv2.jpg",
+      "sha256": "8ba3cabd756a481c4e0d88b3bcb1c1ef62f5db9fa3f210453c7e968deb959007",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Eisbar metal-tile stepped counter, dark base, blue toe wash and side fittings.",
+      "features": [
+        "F17",
+        "F18"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-28",
+      "url": "https://static.wixstatic.com/media/d133a5_cff5ba5fe04e434f8b0f2153c73a85e7~mv2.jpg",
+      "sha256": "2f694b62caf17254410d6c700c5437cafc994ebe606848866b37783ca009a238",
+      "size": [
+        741,
+        1024
+      ],
+      "observed": "Eisbar counter with metal tiles, industrial hoist/rail, pendant lamps and gridded upper bay.",
+      "features": [
+        "F10",
+        "F17",
+        "F18",
+        "F19"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-29",
+      "url": "https://static.wixstatic.com/media/d133a5_fa18abf90275474284478d372d0c5322~mv2.jpg",
+      "sha256": "ca0b8b106db61753fa01f2a05c18c1f3fd84a2afb66a722da56b4f66d9001fe1",
+      "size": [
+        741,
+        1024
+      ],
+      "observed": "Narrow internal steel stair and upper landing behind Eisbar; hoist and rail cross the bay.",
+      "features": [
+        "F17",
+        "F18",
+        "F19"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-30",
+      "url": "https://static.wixstatic.com/media/d133a5_0f43a4c499d94e8cb4113b33e971b12b~mv2.jpg",
+      "sha256": "23f3c169b9e5596ba48930afcf77ab401a03b3a7dcd7270add23c4d4c885bc4e",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Glazed exterior stair enclosure at main-block/Halle-side adjacency; open lower escape flights.",
+      "features": [
+        "F20",
+        "F21",
+        "F22"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-31",
+      "url": "https://static.wixstatic.com/media/d133a5_f0b1530107ed41519dcf76a654806712~mv2.jpg",
+      "sha256": "07ac25cf3baf5b7d320a8379800f07f761b07eb1d8d927db8a4fc50e3917c936",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Exterior stair front and opaque end panels; exposed steel legs, framed glazing and lower stair.",
+      "features": [
+        "F20",
+        "F21",
+        "F22"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-32",
+      "url": "https://static.wixstatic.com/media/d133a5_924bf9bfd17846f392d2e8c214b7f0e8~mv2.jpg",
+      "sha256": "ce2d4b1766a26734cb23b0deee54aa34ae4d2c0e010f1b431fe2a7d69cb8e1b5",
+      "size": [
+        690,
+        1024
+      ],
+      "observed": "Inside stair enclosure: metal treads/deck, horizontal-wire guards, ashtray shelf and panelled end/ceiling.",
+      "features": [
+        "F21",
+        "F22",
+        "F23"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-33",
+      "url": "https://static.wixstatic.com/media/d133a5_445990ea4b0c45708a9ef4e6a5fbb5f7~mv2.jpg",
+      "sha256": "98b0328ba4f7ae92ea7c4e4153f1a2a660102ff83e7d4e48e049d87b0ff42394",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Upper enclosure landing, lower flight, operable glass panes and visible exterior skyline.",
+      "features": [
+        "F20",
+        "F21",
+        "F22",
+        "F23"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "gallery-34",
+      "url": "https://static.wixstatic.com/media/d133a5_7c106e6ff1c243509fcbfbbe4d5f216e~mv2.jpg",
+      "sha256": "e9969ad54ade11775d46a5ec2354e0e1a0952c1772cd254c983b9e4594ad2cda",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Glazed enclosure underside, diagonal flight, bolted frame, projecting windows and opaque flank.",
+      "features": [
+        "F20",
+        "F21",
+        "F22"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-00",
+      "url": "https://static.wixstatic.com/media/d133a5_6ef06c11aff84690a110a96bdb855858~mv2.jpg",
+      "sha256": "afa005eea1433f8a9e1afd23ac00aaf4fc5c8c2ddff43cbba73848e0c043afbe",
+      "size": [
+        1215,
+        1920
+      ],
+      "observed": "Anniversary chronology dates smoking stair, Eisbar, WC/garderobe works, FLINTA urinals and entrance canopy. No room plan.",
+      "features": [
+        "F17",
+        "F20",
+        "F24",
+        "F25",
+        "F26",
+        "F27",
+        "F31"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-01",
+      "url": "https://static.wixstatic.com/media/d133a5_57d121e3cf104d0ba49e0cdbd17fb01c~mv2.jpg",
+      "sha256": "af886722868475e3028570260b037c2fff689c7e8d616c17d1badb9af3e603cb",
+      "size": [
+        3024,
+        3024
+      ],
+      "observed": "Philip Topolovac exhibition model; useful broad massing, approximate miniature geometry.",
+      "features": [
+        "F01",
+        "F02",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-02",
+      "url": "https://static.wixstatic.com/media/d133a5_f6d128513d464cc8a5198c55978b5f63~mv2.png",
+      "sha256": "166bc665c4758677736fcc2a26a765780b048fe8ccbc00c6f409046f7a5ef1a4",
+      "size": [
+        1766,
+        1354
+      ],
+      "observed": "2011 gouache interprets stair, void and window grid; artistic depiction, not measured geometry.",
+      "features": [
+        "F04",
+        "F05",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-03",
+      "url": "https://static.wixstatic.com/media/d133a5_9aca0c71672b4f2f8d5f10525bc10fcf~mv2.png",
+      "sha256": "4fc50a39e93d1e87a8e1974653195941d8ba85bd12d523a21335c9df78cd89e7",
+      "size": [
+        1768,
+        2406
+      ],
+      "observed": "2011 illustrated cover with exterior silhouette; not an interior plan.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-04",
+      "url": "https://static.wixstatic.com/media/d133a5_f9b9cf0e8e924f578390c7408027c03b~mv2.png",
+      "sha256": "20dd16fc11af095e2c01c59e392c2fecc14b51496ba8ca540f48d429e2f985ff",
+      "size": [
+        1268,
+        1798
+      ],
+      "observed": "2011 paper-cut interpretation of windows, stair and platform.",
+      "features": [
+        "F04",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-05",
+      "url": "https://static.wixstatic.com/media/d133a5_c066d70d4a0043a983fbcc8a837b4eb7~mv2.png",
+      "sha256": "3d94357fae6333990747c76e43d3dc10bacc4e88d5004e3bf930ad510670c48e",
+      "size": [
+        886,
+        1362
+      ],
+      "observed": "Berghain Novelle book cover; bibliographic context only.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-06",
+      "url": "https://static.wixstatic.com/media/d133a5_dc2e494aa33e476192e7781e844261ec~mv2.jpeg",
+      "sha256": "34fa7ba2c8697ef79dded808ca52536f3c03e5c9a315d8bf602190bd8573b230",
+      "size": [
+        2960,
+        3760
+      ],
+      "observed": "2019 exhibition cover; does not document a permanent club fixture.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-07",
+      "url": "https://static.wixstatic.com/media/d133a5_c8d75f07954a4f74b7063e5e0ad9f059~mv2.png",
+      "sha256": "6d1662d5e0ddbb919438246bff32a8d2804de1c4a03eb8c490c42de9b1852030",
+      "size": [
+        835,
+        1696
+      ],
+      "observed": "2019 artistic main-hall illustration with suspended speakers/stair; not a measured current inventory.",
+      "features": [
+        "F04",
+        "F30",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-08",
+      "url": "https://static.wixstatic.com/media/d133a5_5e1fdd9199e74bb1941b97841abd0fa0~mv2.png",
+      "sha256": "6b86491dfd416d69f3f474061f15f77b165f327c8acd92aabfec89890bee4476",
+      "size": [
+        1458,
+        806
+      ],
+      "observed": "2014 crew model close-up, edible crowd/fence/tree miniatures; not architectural measurement.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-09",
+      "url": "https://static.wixstatic.com/media/d133a5_059c4b755b584652a34b3195ec879963~mv2.png",
+      "sha256": "22146945cb87accea14a671f75ef4d880f400b23f8dac7efa79bea3dc274735b",
+      "size": [
+        1448,
+        1082
+      ],
+      "observed": "2014 crew model facade and site; broad form only, confectionery simplification.",
+      "features": [
+        "F01",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-10",
+      "url": "https://static.wixstatic.com/media/d133a5_ccc612e0ddc54bd7b3c360ffe3320e68~mv2.jpg",
+      "sha256": "be60671a2f816fa47087636ce2fad8bd3b3624e534d2464c5ce7066b6fb7d203",
+      "size": [
+        2448,
+        1629
+      ],
+      "observed": "Kultur:Stadt model exhibit label; no additional room dimensions.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-11",
+      "url": "https://static.wixstatic.com/media/d133a5_d339ecce086c4afba0afa6e908811d04~mv2.jpg",
+      "sha256": "b42bf57361e00e11967812b5b015db0c701a04b3bdc7f7efef12efa3e34fcf9d",
+      "size": [
+        2062,
+        1650
+      ],
+      "observed": "Matias Bechthold model displayed in exhibition; low-resolution inset windows/interior.",
+      "features": [
+        "F01",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-12",
+      "url": "https://static.wixstatic.com/media/d133a5_8d33745a7263465fad100d0ae69b4639~mv2.png",
+      "sha256": "c375c70cbeb67b040815184967ddbca7fa33523630321353157ae59755227aa9",
+      "size": [
+        1348,
+        2346
+      ],
+      "observed": "Academy exhibition correspondence; documentary context, no construction dimensions.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-13",
+      "url": "https://static.wixstatic.com/media/d133a5_8cf961ca07ae4c9d9a9dcac77c7644a9~mv2.jpg",
+      "sha256": "c43cc0b8e927c85c423139df44c13b05c7a953f66e78d68ed9854f15a9f4cdba",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Kultur:Stadt exhibition graphic; not club geometry.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-14",
+      "url": "https://static.wixstatic.com/media/d133a5_eb23e341cdd6494b9eeeea1e111eabb2~mv2.jpeg",
+      "sha256": "941baf386c5778e9184d6d2cc546a107f36b32bc46a9265ba4d7ed144eb30f8e",
+      "size": [
+        2420,
+        1815
+      ],
+      "observed": "January 2006 cardboard model: facade tiers, cornice, rusticated plinth and annex silhouette.",
+      "features": [
+        "F01",
+        "F02",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-15",
+      "url": "https://static.wixstatic.com/media/d133a5_a6bcdac8d46b49028cc79445eedbb2c1~mv2.jpeg",
+      "sha256": "3bf0138984743b0d37d5ed61f50b2065ca8b8d1ae63a49241ea1d8a5e8bb584a",
+      "size": [
+        2240,
+        1680
+      ],
+      "observed": "Rainy 2005 exterior/night view; dated facade/lighting context.",
+      "features": [
+        "F01",
+        "F28",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-16",
+      "url": "https://static.wixstatic.com/media/d133a5_cb2176c17da247858b134b7dfce4968c~mv2.jpeg",
+      "sha256": "73bf6a0e2347f05b0359e526dbbc3ca8e7cbf53a269ce8a97421eedff5463041",
+      "size": [
+        1209,
+        907
+      ],
+      "observed": "March 2004 permit-signing photograph; partial title block only, no readable dimensioned floor plan.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-17",
+      "url": "https://static.wixstatic.com/media/d133a5_8ae239022a13475db6207c4b8a6d5076~mv2.jpg",
+      "sha256": "4aedb6239de07649682ea936e1898c82a9e86124314a9d2b7d5d8ad3d55f29e4",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Former power-station exterior; main/Halle massing and rails before current club additions.",
+      "features": [
+        "F01",
+        "F02",
+        "F33"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-18",
+      "url": "https://static.wixstatic.com/media/d133a5_e9897c4ca07b44879f51140488bdbba9~mv2.jpg",
+      "sha256": "bf9926d2192aea1c1aae6c0cd542e481fc4a900e4be55280dd0d1ada5b98e7bf",
+      "size": [
+        2480,
+        1772
+      ],
+      "observed": "Industrial conveyor and coal-handling yard; historical infrastructure, not current club fixture.",
+      "features": [
+        "F33"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "outtake-19",
+      "url": "https://static.wixstatic.com/media/d133a5_027b9f43ab4d446b9384db26338b79fb~mv2.jpg",
+      "sha256": "73941803e8b49494620b220682f5b3112745653e63a4fd1fff1d206de2481148",
+      "size": [
+        2480,
+        1772
+      ],
+      "observed": "Power station with two chimneys; historical massing, chimneys not present-day additions.",
+      "features": [
+        "F01",
+        "F33"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "press-00",
+      "url": "https://static.wixstatic.com/media/d133a5_f9193049cfe54eee8476db2eb42677d1~mv2.jpg",
+      "sha256": "2a68063b267504c201dc1b45fa7b426ee06a9513596bc59be3b6152621222e18",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Kultur:Stadt pages170–171: small section and stair/exterior photographs; useful relationships, no legible scale/dimensions.",
+      "features": [
+        "F01",
+        "F03",
+        "F04",
+        "F20",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "press-01",
+      "url": "https://static.wixstatic.com/media/d133a5_d6aa1d9ea6534edf8896c91860dbf867~mv2.jpg",
+      "sha256": "9bb5177e86df230c043c9f6369a61617e24b594a1fb03aee4e17b17f7d6e46f8",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Architecture interview spread with interpreted hall/stair drawing; historical context, unmeasured geometry.",
+      "features": [
+        "F03",
+        "F04",
+        "F05",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "press-02",
+      "url": "https://static.wixstatic.com/media/d133a5_ea29c1f9735e47abb6c9e23195e2dee2~mv2.png",
+      "sha256": "98a6dfa0e8444f6cf00c1670e9be23e3bf08cca5af0527886d6564370d5b0167",
+      "size": [
+        1644,
+        2084
+      ],
+      "observed": "2011 newspaper on the Novelle exhibition; reproduces artwork, not an as-built drawing.",
+      "features": [
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "press-03",
+      "url": "https://static.wixstatic.com/media/d133a5_920108f43d6a4805aa3222ec170b369f~mv2.jpg",
+      "sha256": "79f11c4a3db3058d2a2dccb0b22a3b1e7a40dd3281d609193a1895759d9e688d",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Historic facade and prose spread; confirms facade vocabulary, not contemporary room coordinates.",
+      "features": [
+        "F01",
+        "F02",
+        "F32"
+      ],
+      "visuallyInspected": true
+    },
+    {
+      "id": "press-04",
+      "url": "https://static.wixstatic.com/media/d133a5_8573a7efd58f4dd19fdff442642da3f9~mv2.jpg",
+      "sha256": "2877a6deb1299e125086f7f3ddbb5dc1e0f4ecf1930f5206c2abb2aa5a0fa749",
+      "size": [
+        1024,
+        690
+      ],
+      "observed": "Magazine entry photograph shows stair beyond channel seats; captioned club architecture, no plan.",
+      "features": [
+        "F04",
+        "F06",
+        "F32"
+      ],
+      "visuallyInspected": true
+    }
+  ]
+}

@@ -14,11 +14,12 @@ import {dragLook} from './fixture-playtest.mjs';
 export const sourceFiles=()=>[...rail.sourceFiles(),...['berghain/main-bar-playtest.mjs','tests/berghain-main-bar.test.mjs'].map(path=>
  ({path,sha256:createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex')}))];
 const array=p=>[p.x,p.y,p.z];
+const mainStair=layout.architecturalCirculation.mainStair.routes.map(([x,y,z])=>[x,z,y]);
 async function screenCamera(ctx,{fallback=false,restore=false}={}){
  const {page,context,profile,artifacts}=ctx;
  if(fallback)await page.route('**/assets/models/berghain/textures/*.png',route=>route.abort());
  await enterNaturally(ctx);let heading=0;
- for(const [x,z,y]of [[5,21.15,.05],[8,21.15,.05],[8,8.9,6.65],[14,7,6.65],[16.1,7,6.65],[16.1,-4,6.65],[15.8,-4,6.65]]){
+ for(const [x,z,y]of [[5,21.15,.05],...mainStair,[16.1,7,6.65],[16.1,-4,6.65],[15.8,-4,6.65]]){
   heading=(await travel(ctx,studyToSite({x,y,z}),heading)).yaw;
  }
  if(fallback){
@@ -67,7 +68,7 @@ export default {name:'Photographed long bar and glazed separation',sourceFiles,s
 }},
 {id:'main-bar-natural-route',modes:['quick','stress'],timeoutMs:200000,async run(ctx){
  const {page,artifacts}=ctx;await enterNaturally(ctx);let heading=0;const route=[];
- const targets=[[5,21.15,.05],[8,21.15,.05],[8,8.9,6.65],[14,7,6.65],[16.1,7,6.65],[16.1,4,6.65],[16.1,-13.5,6.65]];
+ const targets=[[5,21.15,.05],...mainStair,[16.1,7,6.65],[16.1,4,6.65],[16.1,-13.5,6.65]];
  for(const [i,[x,z,y]]of targets.entries()){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
   await assertFirstPersonView(page);

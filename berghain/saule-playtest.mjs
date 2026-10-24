@@ -36,7 +36,7 @@ export default {name:'Säule photographed concrete installations and continuous 
  }},
  {id:'saule-natural-route',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
    const {page,artifacts}=ctx;await enterNaturally(ctx);let heading=0;const route=[];
-   for(const [index,[x,z]]of [[5,15],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5,15],[0,19.7],[0,20.25]].entries()){
+   for(const [index,[x,z]]of [[5,15],[5.7,15],[5.7,4],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5.7,4],[5.7,15],[5,15],[0,19.7],[0,20.25]].entries()){
      const end=await travel(ctx,studyToSite({x,y:.05,z}),heading);heading=end.yaw;route.push(end.position);
      await assertFirstPersonView(page);
      if([1,2,4,5,7].includes(index))await artifacts.screenshot(page,'human-saule-route-'+index+'.png');

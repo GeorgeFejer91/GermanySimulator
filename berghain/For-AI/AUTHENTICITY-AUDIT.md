@@ -4,9 +4,24 @@ Audited 24 October 2026 at George's request. The model is a recognisable archite
 
 This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f971`, unchanged by the research publication `a1f75fd142ee115dfb4255abcf55d5da0f95c213`. The 109-input freeze is `output/berghain-saule-candidate.json`; 141 preserved baseline files are in `output/berghain-entrance-baseline/`. A subsequent Halle correction is being modelled by GPT-6 Astra. Its proposed dimensions are not accepted as measured facts or counted as completed fixes here.
 
-[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains 147 unique resource records; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
+[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains 154 unique resource records; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
 
 ## Evidence and review boundaries
+
+25 October Karhard/cutaway candidate supersedes the earlier AU08 omission
+rationale below. The complete gallery30–34 shows a tall glazed stair enclosure,
+open lower escape flights and upper platforms; it is not merely a low bridge.
+`architectural-circulation.mjs` models that form at an explicitly inferred
+east-side bay near the main/Halle join. Main-floor access and ground escape are
+connected; the upper Panorama attachment remains closed and unresolved. AU04
+now has opposed main stair flights, turn landing, opaque guards and an open
+foyer void. AU09 has a tiled Eisbar, narrow stairs and hoist. U02 additionally
+supports a distinct cloakroom-adjacent ground WC, implemented provisionally in
+`ground-sanitary.mjs`. These pass the bounded implementation gates in VALIDATION.md,
+not newly surveyed geometry. [KARHARD-MAPPING.md](KARHARD-MAPPING.md) maps all
+61 inspected project images and distinguishes historical features, implemented
+forms and unresolved registration. AU26 backstage and the FLINTA/lift locations
+remain unregistered; the maintenance ladder is not a backstage-room substitute.
 
 24 October follow-up: the current candidate addresses AU10 with a separate
 Panorama sanitary enclosure below the existing upper lounge and AU24 with
@@ -18,7 +33,7 @@ The original table below is retained as the dated audit, not a claim that all
 its findings remain untouched or are now resolved. Current acceptance belongs
 to README.md and VALIDATION.md.
 
-AU08 registration follow-up: inspected I15/P10 place the smoking projection on
+Earlier AU08 registration hypothesis (superseded by full-gallery inspection): inspected I15/P10 place the smoking projection on
 the east/front side, approximately spanning the plinth belt to the lower tall
 window tier. G09's western annexes cannot be relabelled as this room. The model's
 west Panorama floor at 13.25 m does not directly register with that projection;

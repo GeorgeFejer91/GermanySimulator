@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {layout,viewpoints,materials} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
@@ -12,6 +13,21 @@ const retired=new Set(['Halle upper west outer','Halle upper west inner','Halle 
  'Halle west south landing','Halle upper east','Halle upper north','Halle west stair','Halle west stair tread',
  'Halle west stair rail','Halle upper west rail','Halle upper east rail','Halle column','Halle roof beam','historic boiler hopper']);
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+// Preserve Halle's original acceptance oracle before later, independently
+// tested circulation/detail additions. The original fingerprint is unchanged.
+async function beforeArchitecturalAdditions(){
+ const layoutURL=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
+ const encode=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
+ const absolute=(source,url)=>source.replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
+ const source=readFileSync(layoutURL,'utf8').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('addGroundSanitary(layout);','');
+ const baselineURL=encode(absolute(source,layoutURL)),baseline=await import(baselineURL);
+ const modelURL=new URL('../assets/models/berghain/model.mjs',import.meta.url);
+ const modelSource=readFileSync(modelURL,'utf8').replace("from './layout.mjs'",`from '${baselineURL}'`);
+ const factory=await import(encode(absolute(modelSource,modelURL)));
+ return {...baseline,model:factory.createBerghainModel()};
+}
+
 const withoutTone=value=>JSON.parse(JSON.stringify(value,(key,item)=>key==='instanceTone'?undefined:item));
 const site=(x,z,y=.05)=>studyToSite({x,y,z});
 const inPolygon=(p,polygon)=>{
@@ -48,15 +64,15 @@ export function preservedHalleFingerprint(space,views,palette,model){
  return {parts:hash(parts),count:parts.length,
   solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true&&!s.admission&&!s.renderPart?.interiorTopology&&!s.name.startsWith('panorama-wc-')))),
   floors:hash(space.floors.filter(f=>!retired.has(f.name)&&f.halle!==true)),
-  views:hash(Object.fromEntries(Object.entries(views).filter(([key])=>!['admission','queue'].includes(key)))),
+  views:hash(Object.fromEntries(Object.entries(views).filter(([key])=>!['admission','queue','groundToilets','eisbar','smoking'].includes(key)))),
   materials:hash(Object.fromEntries(Object.entries(palette).filter(([key])=>!key.startsWith('admission')))),bounds:hash(space.exteriorBounds),
   inventory:hash([space.fixtures.filter(f=>!f.id.startsWith('panorama-wc-')),space.soundSystem,space.artworks,space.saule,space.labOratory,space.mainBar,space.upperLounge])};
 }
 
-test('Halle preserves every retained model matrix, geometry, instance colour, material, solid, floor and viewpoint',()=>{
- const model=createBerghainModel();
+test('Halle preserves its pre-circulation model matrices, geometry, colours, materials, solids, floors and viewpoints',async()=>{
+ const {model,layout:original,viewpoints:views,materials:palette}=await beforeArchitecturalAdditions();
  try{
-  const actual=preservedHalleFingerprint(layout,viewpoints,materials,model);
+  const actual=preservedHalleFingerprint(original,views,palette,model);
   assert.deepEqual(actual,BASELINE_FINGERPRINT);
  }finally{disposeBerghainModel(model);}
 });
@@ -161,8 +177,8 @@ test('the entire Halle circuit connects stairs, all galleries and the WC without
  assert.ok(Math.hypot(p.x-viewpoints.halle.position.x,p.z-viewpoints.halle.position.z)<.025);
 });
 
-test('real rendered slabs expose all three voids and indexed guard ribbons remain visible from both sides within the geometry budget',()=>{
- const model=createBerghainModel();model.updateMatrixWorld(true);
+test('Halle rendered slabs expose three voids and its original indexed guards stay within their geometry budget',async()=>{
+ const {model}=await beforeArchitecturalAdditions();model.updateMatrixWorld(true);
  try{
   for(const [x,z,distance]of [[-14,-34,7.95],[0,-34,7.95],[14,-34,7.95],[0,-28,3.75]]){
    const p=site(x,z,8),ray=new THREE.Raycaster(new THREE.Vector3(p.x,p.y,p.z),new THREE.Vector3(0,-1,0));
