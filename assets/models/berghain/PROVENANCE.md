@@ -9,6 +9,52 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Halle: provisional post-2022 structure
+
+Architect A05 documents three floor voids, two single-flight cast-in-place
+concrete stairs and a WC under the western stair. Structural engineer A06 and
+the inspected architect/engineer photographs support massive rectangular
+piers, haunches, concrete stair bodies, framed mesh guards and rectangular
+tapered hoppers. Several photographs belong to the same sequence; these are
+not independent measured surveys.
+
+Original `halle.mjs` replaces the old long steel flight and open gallery with
+three actual bounded slab openings, connected perimeter/bridge supports, two
+concrete flights, landing guards and an inferred west under-stair WC. Lower
+floor remains0.05m; the upper4.25m datum is a photographic proportion estimate,
+not a recovered section. Flights rise4.2m over7.2m, with24 nominal risers and
+2.4m clear width after the existing nonuniform site calibration. The16-position
+pier grid, eight tall northern piers, three hoppers, all exact coordinates,
+service runs, wall patches and WC dimensions/fittings remain authoring
+hypotheses. They must not be described as a measured contemporary inventory.
+
+Mesh guard panels have real open ribbon geometry and separate conservative
+body collision. Concrete stair treads, closed risers, nosings and waists are
+visible geometry; existing ramp support supplies continuous walking. Retained
+parts keep their original matrices, instance colours, materials and collision.
+Existing original material maps are reused; no reference-photo pixels, new
+map family, light, renderer or dependency is added.
+
+A05 describes a facade escape opening aligned with the eastern stair; it does
+not explicitly register an east-facade position. That opening is deliberately
+unmodelled and identified as missing in metadata. Every shell wall, the
+official hull and the sealed north club boundary are preserved. The Halle
+selector and its local walking circuit do not establish a natural entrance
+from the exterior or nightclub. The WC is a provisional enclosure, not an
+accessibility certification. Exact floor/plan registration, exit, full surface
+wear, lighting and current condition remain open.
+
+Each orthogonal stair landing physically laps3cm into its affine bridge slab;
+the rendered/collision/support boundaries match. This closes an uncovered
+millimetre wedge found by independent full-body testing at small walking steps.
+The walkthrough now uses the user's requested first-person camera at1.68m eye
+height, fixed60degree vertical lens and direct yaw/pitch. It constructs no
+visible player mesh. The existing1.8m physical body, navigation and entrance
+controller remain. Earlier third-person fitting is superseded; its failed
+landing/head-occlusion evidence remains recorded. No architectural geometry is
+faded to expose the visitor. Original synthesized footsteps use authored room
+reverberation, not recorded or measured club acoustics.
+
 ## Säule concrete installations
 
 A15's hero and three main gallery photographs show large concrete piers,
@@ -36,11 +82,11 @@ separate entry, full bar/services, photometry and contemporary condition remain
 open reconstruction work. Manufacturer CAD research L01–08 is unplaced and
 unshipped; it does not identify these custom Säule luminaires.
 
-The live walkthrough's camera uses a bounded visitor-side orbit near these
-opaque bodies and fits the actual animated human bounds when clearance
-contracts. The ordinary lens is60degrees, widened only as needed up to100,
-with gradual restoration. Nine original opaque-clearance rays remain active;
-physical geometry is not faded or disabled to expose the avatar.
+The earlier Säule release used a bounded third-person orbit and animated-human
+frustum fitting. George subsequently requested first person only. The current
+candidate uses the eye-height camera described above; those historical avatar
+checks do not establish its first-person acceptance. Opaque piers and their
+body collision remain unchanged.
 
 ## Bar plaster and practical wall wash
 

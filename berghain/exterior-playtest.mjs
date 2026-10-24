@@ -53,7 +53,7 @@ export default {
       document.querySelector('#viewport').append(canvas);const rect=canvas.getBoundingClientRect();
       const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setSize(rect.width,rect.height,false);
       renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
-      const scene=new THREE.Scene();scene.background=new THREE.Color('#b3b3a6');scene.add(model,walk.avatar.group,walk.door.group);
+      const scene=new THREE.Scene();scene.background=new THREE.Color('#b3b3a6');scene.add(model,walk.door.group);
       scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
       const sun=new THREE.DirectionalLight('#ffedcf',3);sun.position.set(-45,65,50);scene.add(sun);
       const camera=new THREE.PerspectiveCamera(60,rect.width/rect.height,.08,500),position={x:33.25,y:.05,z:18.5};
@@ -61,19 +61,19 @@ export default {
       walk.step(position,{x:0,z:0},0);
       window.__foliagePose=yaw=>{
         const start=performance.now(),distance=walk.camera(camera,position,yaw,0,model),cameraMs=performance.now()-start;
-        renderer.render(scene,camera);return {yaw,distance,visible:walk.avatar.group.visible,camera:camera.position.toArray(),cameraMs};
+        renderer.render(scene,camera);return {yaw,distance,firstPerson:walk.avatar===undefined,camera:camera.position.toArray(),cameraMs};
       };
       window.__disposeFoliage=()=>{walk.dispose();disposeBerghainModel(model);renderer.dispose();canvas.remove();delete window.__foliagePose;delete window.__disposeFoliage;};
       return [0,.78,1.57,2.35,3.14,3.92,4.71,5.49].map(window.__foliagePose);
     });
-    assert.ok(poses.every(pose=>pose.visible&&pose.distance>.65),'the legal shrub-edge turn must retain the avatar');
+    assert.ok(poses.every(pose=>pose.firstPerson&&pose.distance===0),'The legal shrub-edge turn uses first-person eye position');
     const turn=await page.evaluate(async()=>{
       let previous=null,maxStep=0,minDistance=Infinity,hidden=0;
       for(let step=0;step<=314;step++){
         await new Promise(requestAnimationFrame);
         const pose=window.__foliagePose(step*.02);
         if(previous)maxStep=Math.max(maxStep,Math.hypot(...pose.camera.map((value,axis)=>value-previous[axis])));
-        previous=pose.camera;minDistance=Math.min(minDistance,pose.distance);if(!pose.visible)hidden++;
+        previous=pose.camera;minDistance=Math.min(minDistance,pose.distance);if(!pose.firstPerson)hidden++;
       }
       return {frames:315,yawStep:.02,maxStep,minDistance,hidden};
     });

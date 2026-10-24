@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
@@ -37,7 +38,7 @@ export default {name:'Klo Bar, sanitary architecture and continuous visitor rout
       if(i===7){assert.equal(await page.locator('#room').inputValue(),'toilets');await artifacts.screenshot(page,'human-toilet-corridor.png');}
     }
     assert.equal(await page.locator('#location').textContent(),'Toilets');
-    assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
+    await assertFirstPersonView(page);
     await artifacts.screenshot(page,'human-open-cubicle.png');
     const native=await renderNativeAsset(page,{position:route.at(-1),yaw:Math.PI/2,pitch:-.75});
     await artifacts.screenshot(page,'native-hollow-pan-and-cubicle.png');await disposeNativeAsset(page);

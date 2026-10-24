@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -38,11 +39,11 @@ async function screenCamera(ctx,{fallback=false,restore=false}={}){
  for(let i=0;i<=16;i++){
   if(i){await dragLook(page,context,profile,-Math.PI/8/.004);heading+=Math.PI/8;}
   await page.waitForFunction(()=>document.querySelector('#model').dataset.cameraTurning!=='true');
-  const sample={yaw:heading,distance:Number(await page.locator('#model').getAttribute('data-camera-distance')),avatar:await page.locator('#model').getAttribute('data-avatar')};samples.push(sample);
-  if(i%4===0||sample.avatar!=='true')await artifacts.screenshot(page,'glass-screen-yaw-'+i+'.png');
+  const sample={yaw:heading,...await assertFirstPersonView(page)};samples.push(sample);
+  if(i%4===0)await artifacts.screenshot(page,'glass-screen-yaw-'+i+'.png');
  }
  await artifacts.json('glass-screen-camera.json',{samples,fallback,restore});
- assert.ok(samples.every(s=>s.distance>.65&&s.avatar==='true'),'The steel/glass screen must preserve the controllable human: '+JSON.stringify(samples.filter(s=>s.avatar!=='true')));
+ assert.ok(samples.every(s=>s.perspective==='first-person'&&s.avatar==='false'));
  return {samples,fallback,restore,scope:'Natural exterior entry and stair/aisle route, real yaw gestures beside the screen; no forced placement'};
 }
 export default {name:'Photographed long bar and glazed separation',sourceFiles,scenarios:[
@@ -69,7 +70,7 @@ export default {name:'Photographed long bar and glazed separation',sourceFiles,s
  const targets=[[5,21.15,.05],[8,21.15,.05],[8,8.9,6.65],[14,7,6.65],[16.1,7,6.65],[16.1,4,6.65],[16.1,-13.5,6.65]];
  for(const [i,[x,z,y]]of targets.entries()){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
-  assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true','Human remains visible on the actual bar approach');
+  await assertFirstPersonView(page);
   if([4,5,6].includes(i))await artifacts.screenshot(page,'human-long-bar-'+i+'.png');
  }
  for(const [x,z,y]of [...targets.slice(0,-1).reverse(),[0,19.7,.05],[0,20.25,.05]]){

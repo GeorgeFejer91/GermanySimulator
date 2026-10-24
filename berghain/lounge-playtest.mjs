@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -116,7 +117,7 @@ export default {name:'Upper Panorama lounge and Felsenland study',
         const result=await travel(ctx,studyToSite({x,y,z}),heading);heading=result.yaw;route.push(result.position);
         if(y>15)await artifacts.screenshot(page,'upper-route-'+route.length+'.png');
       }
-      assert.ok(Math.abs(route.at(-1).y-16.35)<.01);assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
+      assert.ok(Math.abs(route.at(-1).y-16.35)<.01);await assertFirstPersonView(page);
       assert.equal(await page.locator('#room').inputValue(),'lounge','natural ascent identifies the upper room');
       assert.equal(await page.locator('#location').textContent(),'Upper Panorama lounge');
       await dragLook(page,ctx.context,ctx.profile,-Math.atan2(Math.sin(Math.PI/2-heading),Math.cos(Math.PI/2-heading))/.004);heading=Math.PI/2;

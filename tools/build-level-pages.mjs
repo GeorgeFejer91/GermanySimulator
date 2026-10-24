@@ -45,7 +45,7 @@ export function geheimPage(template) {
     ['property','og:image','https://germanysimulator.de/assets/social/geheim.png'],
     ['property','og:image:type','image/png'], ['property','og:image:width','1200'], ['property','og:image:height','630'],
     ['property','og:image:alt','Berghain reconstruction with a visitor and the caption Hier kommst du rein.'],
-    ['name','description','A controllable human visitor in the Berghain architectural reconstruction.'],
+    ['name','description','Explore the Berghain reconstruction in first person with footsteps and room reverb.'],
     ['name','twitter:card','summary_large_image'], ['name','twitter:title','Geheim · Berghain'],
     ['name','twitter:description','Hier kommst du rein. Walk around and explore inside.'],
     ['name','twitter:image','https://germanysimulator.de/assets/social/geheim.png']
@@ -66,7 +66,7 @@ export function buildLevelPages(root, output) {
   for (const entry of readdirSync(root,{withFileTypes:true})) {
     if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim'].includes(entry.name)) continue;
     if (entry.name==='berghain') {
-      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
+      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','footsteps.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
         const source=join(root,entry.name,path);
         if (!existsSync(source)) continue;
         const destination=join(output,entry.name,path);

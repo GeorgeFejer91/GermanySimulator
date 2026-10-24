@@ -69,16 +69,18 @@ test('stair undersides and floor slabs block the visitor body', async () => {
   const {studyToSite} = await import('../assets/models/berghain/calibration.mjs');
   assert.equal(canStand(studyToSite({x: 8, y: .05, z: 18.5}), layout), false, 'low stair underside must block head penetration');
   assert.equal(canStand(studyToSite({x: 8, y: .05, z: 11}), layout), true, 'full-height clearance beneath upper flight should remain available');
-  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x: -4.505546, y: 6.65, z: 7.223457},
-    {x: -15.283070, y: .05, z: -28.020796}, {x: -15.283070, y: .05, z: -27.7008}]) {
+  const halleUndersides=layout.halle.stairs.flatMap(stair=>[.25,.3].map(t=>({
+    x:stair.axis[0][0]+(stair.axis[1][0]-stair.axis[0][0])*t,y:.05,
+    z:stair.axis[0][1]+(stair.axis[1][1]-stair.axis[0][1])*t})));
+  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x: -4.505546, y: 6.65, z: 7.223457},...halleUndersides]) {
     assert.equal(canStand(point, layout), false, 'full cylinder must not pass through a tread underside: ' + JSON.stringify(point));
   }
 });
 
-test('the actual three stairs connect both landings continuously in both directions', async () => {
+test('main, Panorama and both Halle stairs connect both landings continuously in both directions', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   const {canStand, moveVisitor} = await import('../berghain/navigation.mjs');
-  for (const name of ['main stair', 'Panorama stair', 'Halle west stair']) {
+  for (const name of ['main stair', 'Panorama stair']) {
     const ramp = layout.floors.find(floor => floor.name === name);
     const x = (ramp.x[0] + ramp.x[1]) / 2, z = ramp.z[1] - .5;
     let position = {x, z, y: ramp.y + (ramp.endY - ramp.y) * (z - ramp.z[0]) / (ramp.z[1] - ramp.z[0])};
@@ -96,6 +98,18 @@ test('the actual three stairs connect both landings continuously in both directi
     }
     assert.ok(position.z > ramp.z[1] + .3, name + ' must reach lower landing');
     assert.ok(Math.abs(position.y - ramp.endY) < .01, name + ' lower height');
+  }
+  for(const stair of layout.halle.stairs){
+    let position={...stair.lowerApproach};assert.ok(canStand(position,layout));
+    for(const target of [stair.upperApproach,stair.lowerApproach]){
+      const dx=target.x-position.x,dz=target.z-position.z,count=Math.ceil(Math.hypot(dx,dz)/.1);
+      for(let i=0;i<count;i++){
+        position=moveVisitor(position,{x:dx/count,z:dz/count},layout);
+        assert.ok(canStand(position,layout),stair.name+' complete-body route');
+      }
+      assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.02,stair.name+' landing');
+      assert.ok(Math.abs(position.y-target.y)<.01,stair.name+' landing height');
+    }
   }
 });
 
@@ -121,6 +135,7 @@ test('static build includes the hidden viewer and excludes private research copi
     writeFileSync(join(root, 'assets/social-preview.png'), 'fixture');
     writeFileSync(join(root, 'assets/social/neighbors.png'), 'fixture');
     writeFileSync(join(root, 'berghain/model.html'), '<html lang="en"><head><meta name="robots" content="noindex"></head><body></body></html>');
+    writeFileSync(join(root, 'berghain/footsteps.mjs'), 'export const footstep = true;');
     writeFileSync(join(root, 'berghain/references/downloads/private.jpg'), 'research-only');
     writeFileSync(join(root, 'berghain/AGENTS.md'), 'instructions');
     writeFileSync(join(root, 'berghain/For-AI/SOURCES.md'), 'Public source catalogue');
@@ -129,6 +144,7 @@ test('static build includes the hidden viewer and excludes private research copi
     writeFileSync(join(root, 'geheim/index.html'), 'stale generated page');
     buildLevelPages(root, output);
     assert.ok(existsSync(join(output, 'berghain/model.html')));
+    assert.ok(existsSync(join(output, 'berghain/footsteps.mjs')), 'The public first-person viewer must ship its imported footstep module');
     const secret = readFileSync(join(output, 'geheim/index.html'), 'utf8');
     assert.match(secret, /data-play="true"/);
     assert.match(secret, /<base href="\.\.\/berghain\/">/);

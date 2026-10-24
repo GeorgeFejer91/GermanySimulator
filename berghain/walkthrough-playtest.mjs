@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -67,7 +68,7 @@ export default {
       const failed = [];
       page.on('response', response => { if (response.status() >= 400) failed.push([response.status(), response.url()]); });
       await ready(page, baseURL);
-      assert.equal(await page.locator('#model').getAttribute('data-avatar'), 'true');
+      await assertFirstPersonView(page);
       const start = await position(page);
       assert.ok(start.z > 27, 'direct fresh entry starts outside');
       await artifacts.screenshot(page, 'outside.png');

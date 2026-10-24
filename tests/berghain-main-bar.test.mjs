@@ -6,38 +6,21 @@ import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createMainBarGeometries} from '../assets/models/berghain/main-bar.mjs';
 
-test('the screen crossbars do not hide the human during a full camera turn',async()=>{
+test('Main-bar first-person camera keeps the eye inside the legal body through turns',async()=>{
  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
- const {createBerghainModel,disposeBerghainModel}=await import('../assets/models/berghain/model.mjs');
- const walk=createWalkthrough(),model=createBerghainModel(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500);
+ const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
  try{
-  for(const x of [15.8,16.1]){
-   const position=studyToSite({x,y:6.65,z:-4});assert.ok(canStand(position,layout));walk.step(position,{x:0,z:0},0);
-   for(let yaw=0;yaw<Math.PI*2;yaw+=Math.PI/32){
-    const distance=walk.camera(camera,position,yaw,0,model);
-    assert.ok(distance>.65,`Screen at x=${x}, yaw=${yaw} hides the human at ${distance}m`);
-    assert.equal(walk.avatar.group.visible,true);
-    for(let frame=0;frame<90&&walk.cameraTurning;frame++){
-     const previous=camera.position.clone();walk.camera(camera,position,yaw,0,model);
-     const beforeAngle=Math.atan2(previous.x-position.x,previous.z-position.z),afterAngle=Math.atan2(camera.position.x-position.x,camera.position.z-position.z);
-     assert.ok(Math.abs(Math.atan2(Math.sin(afterAngle-beforeAngle),Math.cos(afterAngle-beforeAngle)))<.051,'Bound the azimuth change; real opaque obstacles may still contract the radius immediately');
-    }
-    assert.equal(walk.cameraTurning,false,'The demand-driven camera must settle');
-    assert.ok(Math.abs(camera.position.y-position.y-.95-Math.sin(.32)*camera.position.distanceTo(new THREE.Vector3(position.x,position.y+.95,position.z)))<.0001,'Retain the ordinary walking elevation');
-    const bounds=new THREE.Box3().setFromObject(walk.avatar.group);
-    for(const aspect of [1280/650,390/570,844/170]){
-     camera.aspect=aspect;camera.updateProjectionMatrix();camera.updateMatrixWorld(true);
-     for(const bx of [bounds.min.x,bounds.max.x])for(const by of [bounds.min.y,bounds.max.y])for(const bz of [bounds.min.z,bounds.max.z]){
-      const projected=new THREE.Vector3(bx,by,bz).project(camera);
-      assert.ok(Math.abs(projected.x)<.94&&Math.abs(projected.y)<.94,'The complete human must fit beside the screen');
-     }
-    }
+  for(const position of [15.8,16.1].map(x=>studyToSite({x,y:6.65,z:-4}))){
+   assert.ok(canStand(position,layout));
+   for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
+    walk.camera(camera,position,yaw,pitch);
+    assert.deepEqual(camera.position.toArray(),[position.x,position.y+1.68,position.z]);
+    assert.equal(camera.fov,60);assert.equal(walk.avatar,undefined);
+    camera.getWorldDirection(direction);
+    assert.ok(direction.distanceTo(new THREE.Vector3(-Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch)))<1e-12);
    }
   }
-  const below=studyToSite({x:15.8,y:.05,z:-4});
-  const distance=walk.camera(camera,below,0,0,model);
-  assert.ok(Math.abs((camera.position.y-below.y-.95)/distance-Math.sin(.32))<.0001,'A screen on another floor must not lift this camera');
- }finally{walk.dispose();disposeBerghainModel(model);}
+ }finally{walk.dispose();}
 });
 
 test('the long-bar assembly replaces the two-metre placeholder with photo-informed human-scale furniture',()=>{

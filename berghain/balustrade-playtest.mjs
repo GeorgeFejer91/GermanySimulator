@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -84,17 +85,17 @@ async function nearGuard(ctx,{fallback=false,restore=false}={}){
  const samples=[];
  for(let i=0;i<=16;i++){
   if(i){await dragLook(page,context,profile,-Math.PI/8/.004);heading+=Math.PI/8;}
-  const sample={yaw:heading,position:JSON.parse(await page.locator('#model').getAttribute('data-position')),
-   distance:Number(await page.locator('#model').getAttribute('data-camera-distance')),avatar:await page.locator('#model').getAttribute('data-avatar')};
+  const sample={yaw:heading,...await assertFirstPersonView(page)};
   samples.push(sample);
-  if(i%4===0||sample.avatar!=='true')await artifacts.screenshot(page,'near-rail-yaw-'+i+'.png');
+  if(i%4===0)await artifacts.screenshot(page,'near-rail-yaw-'+i+'.png');
  }
  await artifacts.json('camera-yaw-samples.json',{route,samples,scope:'Actual exterior entry, real stair ascent and gallery approach followed by real pointer drags; no forced placement or room selector'});
- assert.ok(samples.every(s=>s.distance>.65&&s.avatar==='true'),'A low open guard must not collapse the follow camera and hide the human: '+JSON.stringify(samples.filter(s=>s.avatar!=='true')));
+ assert.ok(samples.every(s=>s.perspective==='first-person'&&s.avatar==='false'));
  const returned=await travel(ctx,studyToSite({x:-2,y:6.65,z:7.8}),heading);
  await dragLook(page,context,profile,Math.atan2(Math.sin(returned.yaw),Math.cos(returned.yaw))/.004);
  const clearDistance=Number(await page.locator('#model').getAttribute('data-camera-distance'));
- assert.ok(clearDistance>3.9,'Moving clear of the guard restores the ordinary camera');
+ assert.equal(clearDistance,0,'First-person camera has no follow distance');
+ await assertFirstPersonView(page);
  await artifacts.screenshot(page,'clear-camera-restored.png');
  return {route,before,blocked,held,samples,clearDistance,fallback,restore};
 }
@@ -135,11 +136,11 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
     }finally{
       await artifacts.json('route-leg-'+index+'.json',{index,target,position:JSON.parse(await page.locator('#model').getAttribute('data-position'))});
     }
-    assert.ok(Number(await page.locator('#model').getAttribute('data-camera-distance'))>.65,'Guards must not collapse the follow camera');
+    await assertFirstPersonView(page);
     if([2,5,6,8,11].includes(index))await artifacts.screenshot(page,'human-original-stairs-'+index+'.png');
   }
   assert.ok(canStand(route.at(-1),layout));
-  assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
+  await assertFirstPersonView(page);
   await cross(ctx);
   const exit=JSON.parse(await page.locator('#model').getAttribute('data-position'));
   assert.ok(Math.abs(exit.z-24.85)<.025&&Math.abs(exit.x)<.025,'Exit must reach the actual doorway outside destination');

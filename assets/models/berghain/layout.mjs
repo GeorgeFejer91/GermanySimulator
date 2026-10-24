@@ -11,6 +11,7 @@ import {addLabRooms,labMaterials} from './lab-oratory.mjs';
 import {addOriginalBalustrades} from './original-balustrades.mjs';
 import {mainBarMaterials} from './main-bar.mjs';
 import {sauleMaterials} from './saule.mjs';
+import {addHalleStructure} from './halle.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -287,3 +288,4 @@ addInteriorFixtures(layout);
 addLoungeFurniture(layout);
 addSoundSystem(layout);
 addArtworks(layout);
+addHalleStructure(layout);

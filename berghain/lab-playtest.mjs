@@ -3,7 +3,7 @@ import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {travel} from './lounge-playtest.mjs';
 import lounge from './lounge-playtest.mjs';
-import {dragLook} from './fixture-playtest.mjs';
+import {dragLook,assertFirstPersonView} from './fixture-playtest.mjs';
 import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs';
 import {compareMaterialRender} from './material-playtest.mjs';
 
@@ -79,7 +79,7 @@ export default {name:'Lab.oratory photographed industrial interior and connected
      if([3,6,9,10].includes(i))await artifacts.screenshot(page,['','','','human-through-lab-gate','','','human-at-lab-bar','','','human-at-sanitary-stair','human-lower-sanitary-landing'][i]+'.png');
    }
    assert.ok(Math.abs(route.at(-1).y+1.15)<.06);assert.equal(await page.locator('#room').inputValue(),'lab');
-   const camera=Number(await page.locator('#model').getAttribute('data-camera-distance'));assert.ok(Number.isFinite(camera)&&camera>.08);
+   const camera=await assertFirstPersonView(page);
    for(const [x,z]of [...targets.slice(0,-1).reverse(),[0,19.7],[0,20.25]]){
      const end=await travel(ctx,studyToSite({x,y:.05,z}),heading);heading=end.yaw;route.push(end.position);
    }

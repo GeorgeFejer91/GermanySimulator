@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -48,8 +49,8 @@ export default {
     await dragLook(page,context,profile,-yaw/.004);
     await artifacts.screenshot(page,'visitor-and-speaker-stack.png');
     const position=await forward(page,context,profile,3300);
-    assert.ok(canStand(position,layout));assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
-    assert.ok(Number(await page.locator('#model').getAttribute('data-camera-distance'))>.65);
+    assert.ok(canStand(position,layout));await assertFirstPersonView(page);
+    await assertFirstPersonView(page);
     await artifacts.screenshot(page,'visitor-speaker-clearance.png');
     return {before,position,roomShortcut:true};
   }},

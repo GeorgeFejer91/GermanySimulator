@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {surfaceFamilies} from '../assets/models/berghain/surface-data.mjs';
 import {materialScenario} from './material-playtest.mjs';
+import {layout} from '../assets/models/berghain/layout.mjs';
 
 async function ready(page, baseURL) {
   await page.goto(baseURL + '/berghain/model.html');
@@ -106,7 +107,7 @@ export default {
         const site = (x, z) => studyToSite({x, y: 0, z});
         const mainBottom = site(7.95, 20.85), mainTop = site(7.95, 8.9);
         const panoramaBottom = site(-5, 8.9), panoramaTop = site(-5, -5.5);
-        const halleBottom = site(-17, -24.2), halleTop = site(-17, -40);
+        const halleBottom = layout.halle.stairs[0].lowerApproach, halleTop = layout.halle.stairs[0].upperApproach;
         await walkTo(page, 's', 'z', mainBottom.z, 1);
         const mainApproach = await walkTo(page, 'd', 'x', mainBottom.x, 1);
         await walkTo(page, 'w', 'z', mainTop.z, -1);
@@ -123,17 +124,18 @@ export default {
         await walkTo(page, 's', 'z', panoramaBottom.z, 1);
         routes[1].lower = JSON.parse(await page.locator('#model').getAttribute('data-position'));
         await page.locator('#room').selectOption('halle');
-        await walkTo(page, 's', 'z', halleBottom.z, 1);
-        const halleApproach = await walkTo(page, 'a', 'x', halleBottom.x, -1);
-        await walkTo(page, 'w', 'z', halleTop.z, -1);
+        await walkTo(page, 'w', 'z', site(4,-28).z, -1);
+        await walkTo(page, 'a', 'x', halleBottom.x, -1);
+        const halleApproach = await walkTo(page, 'w', 'z', halleBottom.z, -1);
+        await walkTo(page, 'd', 'x', halleTop.x, 1);
         routes.push({name: 'Halle', approach: halleApproach, upper: JSON.parse(await page.locator('#model').getAttribute('data-position'))});
         await artifacts.screenshot(page, 'halle-upper-landing.png');
-        await walkTo(page, 's', 'z', halleBottom.z, 1);
+        await walkTo(page, 'a', 'x', halleBottom.x, -1);
         routes[2].lower = JSON.parse(await page.locator('#model').getAttribute('data-position'));
         await artifacts.json('routes.json', {routes});
         assert.ok(Math.abs(routes[0].upper.y - 6.65) < .01 && Math.abs(routes[0].lower.y - .05) < .01);
         assert.ok(Math.abs(routes[1].upper.y - 13.25) < .01 && Math.abs(routes[1].lower.y - 6.65) < .01);
-        assert.ok(Math.abs(routes[2].upper.y - 7.05) < .01 && Math.abs(routes[2].lower.y - .05) < .01);
+        assert.ok(Math.abs(routes[2].upper.y - 4.25) < .01 && Math.abs(routes[2].lower.y - .05) < .01);
         return {routes, input: 'actual keyboard movement from authored room viewpoints; no state injection'};
       }},
     {id: 'tour', modes: ['quick', 'stress'], async run({page, context, baseURL, artifacts, profile}) {

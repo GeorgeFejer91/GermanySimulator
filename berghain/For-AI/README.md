@@ -10,13 +10,70 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Current goal turn: **PROGRESS**. The entrance/topology research increment
-catalogues139 unique records, six additional engineer-published Halle photographs
-and seven historical-model/exhibition images. Both independent source reviewers
-reproduced the mapped entrance offset; the camera reviewer then identified a
-meaningful adjacent-opening conflict in P07/I15. The OSM point is not accepted
-as a door centre, and the current centred entrance remains provisional. No
-runtime geometry was changed. The full reconstruction remains ACTIVE.
+Current goal turn: **PROGRESS**. George requested a comprehensive interior
+authenticity audit against archival and verbal materials after the research
+publication. Audit the actual accepted model room by room; distinguish primary
+architecture, dated photographs, designer/artist/installer records and eyewitness
+accounts from inferred geometry and currentness. Durable audit findings will
+live in AUTHENTICITY-AUDIT.md; this README remains the only task/plan owner.
+
+The139-record research update is published in a1f75fd142ee115dfb4255abcf55d5da0f95c213.
+Pages40086607090 succeeded.72 exact public files and six entry URLs pass;
+all109 runtime/asset/test inputs and the141-file baseline remain unchanged.
+Receipt: output/berghain-topology-research-release.json. No new world or device
+claim; the accepted runtime remains687b408. Full reconstruction stays ACTIVE.
+
+Current audit scope: room-by-room source/visual comparison and the coherent
+Halle correction below. Physics owns room/floor/circulation evidence; Camera
+owns photographed fixture/art/material comparison. Integrator owns archival/
+firsthand synthesis, audit documentation, all GPU batches and publication.
+George explicitly requested GPT-6 Astra for complex Berghain modelling on
+24 October2026; preserve that preference for subsequent complex modelling tasks.
+The active modelling worker is /root/berghain_astra_modelling using gpt-6-astra.
+George also requested keeping the current chat on Astra; do not select another
+model or silently downgrade complex reconstruction work.
+
+Latest steering replaces the visible avatar/third-person camera with first-person
+walking only, plus emulated footsteps with room reverb. Preserve the physical
+1.8m visitor body and navigation, natural entry/exit and Astra's repaired Halle
+geometry. Integrator owns viewer/walkthrough/camera, a scoped procedural footstep
+module, sound control and affected tests/browser cases. Steps follow accepted
+displacement, never held keys or blocked motion; user gesture unlocks Web Audio.
+Room reverberation is an authored approximation, not measured acoustic data.
+Normal first-person travel and the entrance crossing use1.6m/s with the same
+collision/body rules;0.66m per footfall gives about145steps/minute at full pace.
+Blur/hidden/modal/exterior/context-loss/exit clear input and sound ownership.
+Old avatar-frustum acceptance is superseded by eye-height, headroom, collision,
+look/route and audio-lifecycle checks. Retain rejected third-person evidence.
+The superseded third-person GPU batches were stopped and their failures retained.
+The combined first-person candidate has 121 frozen inputs, 137 passing Node
+checks and 44 accepted browser case/profile combinations. The explicit 20+21+3
+bridge changes only browser oracles and retains all four raw failures. Its 44-case sequential desktop/Android-emulated acceptance aggregate is
+output/berghain-first-person-accepted-browser/report.json. Independent Physics,
+Camera and audio reviews accept that same candidate within their technical
+scopes. Nine baseline and nine current cost samples pass. The final deployed
+commit and public verification belong in output/berghain-first-person-release.json;
+this increment does not establish full architectural fidelity.
+
+Footstep beat `berghain-walk-step`: accepted movement in the existing render
+controller accumulates0.66m of3D travel, then schedules one finite original
+sole/heel buffer on Web Audio time. A held key with no displacement and room
+selection teleport cannot emit a step. Concrete, metal, tile and grit synthesis
+reuse one lazy AudioContext, bounded four-source polyphony and one tail-suspend
+timer. Position-based authored room profiles select stereo convolution; the
+Halle and WC differ, outdoors has no wet tail. Footsteps: on/off is the local
+user control. Native source end disconnects nodes; modal/blur/hidden/exterior/
+context loss reset voices and reverberation; page disposal closes the context.
+No recording, copied sound, audio service or extra frame loop is introduced.
+Tests are silent; PCM/state checks cannot establish perceived sound quality.
+
+Architectural reality checks requested by George are now in
+check-architecture.mjs and For-AI/ARCHITECTURAL-CHECKS.md. They measure actual
+geometry against dated source quantities and retain unknown/different-scope
+results. The official hull import matches; Halle's22.753m floor-to-exterior-roof
+proxy versus reported up-to21m remains unresolved. A06 project areas are not
+the same domain as whole-hull floor supports. No dimensioned interior blueprint
+has been acquired, and no invented percentage tolerance certifies the model.
 
 Previous goal turn: **PROGRESS**. Säule/camera release
 687b408cca2aa8a7e36c9bcd276f1e18af20f971 is deployed at
@@ -59,7 +116,76 @@ respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: entrance alignment and architectural topology evidence
+## Current increment: authenticity audit and Astra Halle reconstruction
+
+User steering24 October2026: audit the interior against as many archival and
+verbal materials as possible, then maximize authenticity; use Astra for complex
+modelling. AUTHENTICITY-AUDIT.md owns evidence findings, not task state. Both
+independent source audits are output/berghain-authenticity-{architecture,objects}-audit.md.
+Astra's reviewed proposal is output/berghain-astra-halle-design.md.
+
+Accepted provisional implementation choices: Halle-only upper datum4.25m
+(photographic proportion estimate, not measured), three distinct slab voids,
+two single-flight concrete stairs with guarded landings, west under-stair WC,
+corbelled frame, original rectangular hoppers and bounded mesh guards/services/
+wall patches. Inherited7.05m floor and26.093m mapped steel flight are unverified.
+A05 fixes an escape opening aligned with the eastern stair, **not an explicitly
+east-facade position**. Do not cut or place that unresolved exit. Keep every
+shell wall and official hull, the north club wall and all non-Halle rooms.
+Room-selector starts establish local Halle circulation only, not natural entry.
+
+Astra worker may edit only new assets/models/berghain/halle.mjs; final scoped
+assembly in layout.mjs; targeted shape/metadata registration in model.mjs;
+new tests/berghain-halle.test.mjs and berghain/halle-playtest.mjs; obsolete Halle
+route expectations in tests/berghain-model.test.mjs and berghain/playtest.mjs;
+Halle parity diagnostics in native-asset-playtest.mjs. No camera/navigation/UI/
+other-room/dependency/root-game changes. Integrator owns GLB/manifest export,
+all owning docs/provenance, browser/cost runs, freeze and publication. Preserve
+all109 accepted inputs in the141-file baseline; pin retained instance tones
+before changed batches can recolour other rooms. Worker does not commit/push.
+
+Acceptance exposed a2.412mm support seam at the two affine bridge/orthogonal
+landing joins; Astra owns rendered/support repair and multi-lane/step-size
+regressions in the existing scope. The first integrated freeze is retained as
+output/berghain-halle-rejected-candidate.json. Source/native6cases and the
+desktop real-input circuit passed before the batch was stopped for repair;
+those partial passes do not clear the independent physical failure.
+
+Camera's independent actual-mesh sweep found whole-human cropping beside a
+Halle guard/pier and the enclosed WC during the superseded third-person work.
+George then explicitly replaced that perspective with first-person walking.
+The current camera sits at the physical body's 1.68 m eye height with a 60 degree
+lens and direct yaw/pitch. No player avatar is constructed or attached. The
+1.8 m body, stair/guard collision, headroom and natural entry remain acceptance
+requirements. Old third-person failures are retained; they do not approve the
+new perspective. No geometry fading or collision bypass was introduced.
+
+Fresh public desktop observational tour captured20 views across10 selector
+rooms. An initial avatar-visible assertion failed at Panorama's quarter-turn;
+keep output/berghain-authenticity-public-tour/report.json as failed evidence.
+Observation-only continuation output/berghain-authenticity-public-observations/
+report.json records the0.3994m camera contraction and hidden avatar. Its capture
+PASS does not clear that camera issue or prove historical fidelity/natural routes.
+Selected actual frames were inspected. That observation used the earlier public
+runtime; the first-person candidate needs its own rendered acceptance.
+
+- [x] Preserve/revalidate published research and accepted runtime; source audit
+  by both independent reviewers and fresh rendered room comparison.
+- [x] Complete dated archival/verbal evidence audit and prioritised room findings;
+ 25 findings in AUTHENTICITY-AUDIT.md, catalogue145. The full model remains incomplete.
+- [x] Astra implements/tests the coherent Halle proposal, including physical
+  landing seams and reduced mesh duplication within the asset budget.
+- [x] Verify 10,419 retained parts and non-Halle isolation, export the portable
+  asset and freeze the integrated 121-input first-person/audio/checker candidate.
+- [x] Finish silent source/native/local body routes on desktop and Android
+  emulation, retained entrance/Lab/main-bar regressions and the cost comparison.
+- [x] Independent Physics and Camera/scale acceptance on identical candidate;
+  repair and repeat affected checks. Preserve failed source/visual evidence.
+- [ ] Review coherent diff, publish accepted work and verify actual public bytes/
+  controls. Full reconstruction remains ACTIVE; physical-device/listening gaps
+  and all unsupported dimensions/currentness remain explicit.
+
+## Published increment: entrance alignment and architectural topology evidence
 
 Scope: catalogue, source audit and this owner only. No HTML, runtime, collision,
 controls, portable model, asset pipeline or dependency change. Baseline687b408
@@ -98,7 +224,7 @@ main-bar or Lab placement. Research-only downloads/hashes remain ignored.
 - [x] Independently georeference the community entrance and check photo identity.
 - [x] Record the unresolved adjacent-opening conflict; leave geometry provisional.
 - [x] Catalogue verified new sources and explicit date/page/topology limits.
-- [ ] Verify the narrow documentation diff, publish and check exact public bytes.
+- [x] Verify the narrow documentation diff, publish and check exact public bytes.
 
 Next model increment: **Halle structural topology**, still under this same owner.
 A05 describes two straight cast-concrete stairs and three floor openings.

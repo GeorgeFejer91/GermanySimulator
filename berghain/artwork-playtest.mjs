@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -94,9 +95,9 @@ export default {
     const before=JSON.parse(await page.locator('#model').getAttribute('data-position'));
     const art=layout.artworks[0],yaw=Math.atan2(before.x-art.anchor[0],before.z-art.anchor[2]);
     await dragLook(page,context,profile,-yaw/.004);await forward(page,context,profile,2800);
-    assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
+    await assertFirstPersonView(page);
     const position=JSON.parse(await page.locator('#model').getAttribute('data-position'));assert.ok(canStand(position,layout));
-    assert.ok(Number(await page.locator('#model').getAttribute('data-camera-distance'))>.65);
+    await assertFirstPersonView(page);
     await artifacts.screenshot(page,'human-and-uddenberg-figure.png');return {position,yaw,roomShortcut:true};
   }}]
 };

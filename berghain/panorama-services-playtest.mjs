@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -56,7 +57,7 @@ export default {name:'Panorama fitted ceiling, acoustic clouds and exposed servi
       const stopped=await forward(page,context,profile,900),blocked=await forward(page,context,profile,700);
       assert.ok(canStand(stopped,layout)&&stopped.x>x+.28);
       assert.ok(Math.hypot(blocked.x-stopped.x,blocked.z-stopped.z)<.025,'radiator prevents continued full-body motion');
-      assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
+      await assertFirstPersonView(page);
       await artifacts.screenshot(page,'radiator-human-contact.png');
       const native=await renderNativeAsset(page,{position:final.position,yaw:Math.PI/2,pitch:-.75});
       await artifacts.screenshot(page,'radiator-native-detail.png');await disposeNativeAsset(page);

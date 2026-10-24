@@ -1,5 +1,131 @@
 # Berghain viewer validation
 
+## First-person, archival audit and Astra Halle increment — 2026-10-24
+
+Current increment: **PROGRESS; local technical acceptance PASS**. Candidate
+output/berghain-first-person-candidate.json freezes 121 unique inputs, SHA256
+f4a48df1f5fac8d3f6ffc15069b608179cf473720808f1d47e64c273a087493b.
+The final Node run passes 137/137 tests in
+output/berghain-first-person-final-node.log. The sequential 44-case browser
+acceptance aggregate is output/berghain-first-person-accepted-browser/report.json; it records 44 unique passing case/profile combinations through the explicit
+browser-test-only bridge below. Incomplete runs are not counted as acceptance.
+
+George replaced the avatar with first-person walking: eye height 1.68 m,
+60 degree lens, direct look and 1.6 m/s travel, with the existing 1.8 m physical
+body and 0.28 m radius. The walkthrough neither imports nor creates the avatar.
+Natural entry/exit and room geometry remain physical requirements. Original
+finite heel/sole synthesis follows accepted displacement every 0.66 m; concrete,
+metal, tile and grit use authored room convolution. These are approximations,
+not recordings, measured room responses or a reproduction of the sound system.
+One lazy AudioContext, at most four voices and one tail timer are owned by the
+viewer; blocked movement, teleport, blur, hidden state, modal, exterior, mute
+and disposal have explicit silence/reset behavior. No extra frame loop.
+
+AUTHENTICITY-AUDIT.md records 25 findings against the earlier 687b408 runtime.
+SOURCES.md contains 145 unique records, including dated firsthand Säule evidence,
+organiser testimony, Andersson's 2022 article/method, Tony Andrews's 2011
+transcript, the 2017 Studt/installer interview and the creator's 2013 film archive.
+Full film footage has not been frame-indexed; no new interviews were conducted.
+Related source chains are identified. Neither audit nor count certifies fidelity.
+Fresh observation captured 20 views across ten selector rooms; selected actual
+frames in every room category were inspected. The initial Panorama quarter-turn
+avatar assertion failed; retain output/berghain-authenticity-public-tour/report.json.
+The observation continuation's PASS establishes capture only.
+
+Astra's provisional post-2022 Halle study adds three real slab voids, two concrete
+flights, guarded connected galleries, a west under-stair WC, corbelled frame and
+rectangular hoppers. The 4.25 m upper datum, plan, counts beyond documented
+elements and detailed dimensions are inferred. The escape opening aligned with
+the eastern stair remains unregistered and unmodelled. Every shell wall and the
+club boundary remain. Selector-start local circuits do not establish natural
+exterior/club access. PROVENANCE.md owns the geometry interpretation.
+
+The integrator independently recomputed the preserved baseline fingerprint:
+10,419 retained parts, actual geometry/matrices/colours, other-room inventory,
+solids/floors/views and materials match. Evidence:
+output/berghain-halle-retained-independent.json. The 141-file accepted baseline
+and original primary index remain preserved. The portable GLB is 50,894,016 bytes,
+671,592 triangles, 171 material groups and 25 embedded maps (5,501,462 bytes).
+SHA256 69d6b296cb703eaacf5bcdce50d7cf53349b33cce405cfc3d2d1b28de7a918c3.
+Deltas are +1,387,560 bytes, +13,368 triangles and +9 groups. Runtime maps stay 26.
+
+check-architecture.mjs measures actual geometry with three representation checks
+and 16 typed source comparisons; its seven tests include deliberately changed
+geometry and mismatched definitions/datums/scopes. Matching official footprint,
+frontage and roof values establish same-source import consistency. Halle's
+22.753 m floor-to-exterior-roof proxy versus reported up-to-21 m inner height
+remains an unresolved datum/soffit discrepancy, not an accepted dimensional match.
+A06 project areas are not whole-hull supports. Interior floor levels, the Halle
+legacy mapping's roughly 2.09 axis-scale ratio and stair dimensions remain
+unverified. No dimensioned interior blueprint was acquired. See the owning
+ARCHITECTURAL-CHECKS.md and output/berghain-first-person-architecture.json.
+
+Retained failures and repairs before combined acceptance:
+
+- Initial duplicate guard faces exceeded the triangle budget; indexed DoubleSide
+  ribbons preserve real holes. The first 51,177,216-byte export exceeded the
+  1.5 MB increment budget; 42 rather than 54 ribbons per panel brought it within.
+- Physics found a 2.412 mm landing/bridge support seam skipped by a coarser route
+  sample. Actual slab/support/guard laps repair it; 80 traversals across two
+  stairs, five lanes, four step sizes and both directions, plus 30 mesh seam
+  rays, now pass. Preserve rejected freezes and partial matrices.
+- The superseded third-person camera cropped the visitor at guards and WC.
+  Its partial browser passes are not first-person acceptance.
+- Native PCM initially read zero because the safety harness muted offline
+  rendering. Offline contexts cannot emit hardware audio; a tested exemption
+  restores analysis while every real-time destination remains muted. Three
+  corrected native PCM cases pass in berghain-first-person-pcm-accepted.
+- Independent audio review found low-frame-rate idle suspension, long-stall
+  recovery, delayed resume, Säule room selection and optional panner issues.
+  Repairs have eight causal audio tests. The three-profile held-input/650 ms
+  stall pilot passes; the final matrix repeats it at the chosen walking pace.
+- Initial baseline cost completed 8/9; desktop first-start navigation hit the
+  existing 30 s deadline. An unchanged repeat passed 9/9. Both remain recorded
+  in berghain-halle-cost-baseline{,-repeat}/report.json. No timeout was widened;
+  this does not qualify first-ever startup.
+
+The browser acceptance aggregate explicitly uses 20 unaffected original passes,
+21 unaffected remainder passes and three fresh confirmed-contact input/audio
+passes. The only source changes between these captures were two browser tests:
+Lab's third-person offset became the exact first-person eye/FOV/no-avatar check;
+the input/audio approach now confirms real closed-door contact before the same
+<1 mm movement and no-extra-step negatives. All production and Node-test bytes
+were unchanged across the bridge; the final 137-test Node run was repeated fresh.
+Three raw Lab failures remain in berghain-first-person-final-browser/report.json;
+one raw desktop timed-approach failure remains in the remainder report. Actual
+normal and deliberate 6x CPU diagnostic captures show 11.04 mm / 0.48 m of legal
+remaining approach after the old timed setup; after confirmed contact, both
+additional holds produced zero movement and zero extra cues. Corrected input
+cases pass on all three profiles. No timeout or physical tolerance was widened.
+
+Independent Physics and Camera reviews accept the final 121-input freeze within
+the viewer's technical scope; Astra's independent audio source/CPU review is
+also bound to it. Reports: output/berghain-first-person-{physics,camera,audio}-review.md.
+Actual local source/native, first-person route/opaque-depth and responsive UI
+frames were inspected. None establishes a measured contemporary floor plan.
+
+Cost: nine preserved baseline and nine current cold-context samples pass on the
+local Intel Iris Xe with three samples per screen profile. Before/current
+median ready times are 1663/1790 ms desktop, 1595/1731 portrait and 1597/1723
+landscape. Observed p95 frame intervals are 14.2/14.1, 14/7.1 and 14/7.1 ms.
+The same starting target and three-second input are used; the user-directed
+first-person camera and 1.6 m/s travel intentionally differ from the old
+third-person 3 m/s view. This is not a same-view performance improvement claim.
+Transfer grows by 15,683 bytes and one request (69 to 70); eager/playable startup
+code adds 5,337 gzip bytes, below 20 KiB. No GLB loads during normal startup,
+no idle RAF is added, texture maps stay 26 and the drawing buffer stays below
+1.6 million pixels. Audio buffers/native convolution memory are not fully
+represented by the JS heap metric. Cost summary:
+output/berghain-halle-cost-summary.json; code budget:
+output/berghain-first-person-js-budget.json.
+
+Publication is isolated from the pre-existing primary index. The final deployed
+commit, Pages result, exact public file/URL checks and actual public control runs
+are recorded in output/berghain-first-person-release.json after verification.
+Physical Android/device GPU and perceptual listening NOT RUN. Full contemporary
+interior fidelity remains incomplete; earlier releases below retain their own
+historical scope.
+
 ## Entrance/topology evidence increment — 2026-10-24
 
 Scope is three owning documents: SOURCES.md, README.md and this validation

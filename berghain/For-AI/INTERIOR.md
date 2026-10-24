@@ -19,6 +19,40 @@ or installed orientation. The ignored local anatomical form study renders but
 fails shoulder/muscle/grip/hammer fidelity and has visible UV seams; it is not in
 the live model. Revise against both views before placement/material acceptance.
 
+## Current authenticity audit
+
+George requested a comprehensive archive/verbal comparison on24 October2026.
+[AUTHENTICITY-AUDIT.md](https://github.com/GeorgeFejer91/GermanySimulator/blob/main/berghain/For-AI/AUTHENTICITY-AUDIT.md) records25 source-bound findings,
+including missing circulation/art/equipment, partial likeness and dated-layer
+conflicts. SOURCES.md now has145 resource records. A fresh public desktop
+selector survey captured20 views across10 rooms; its observation capture does
+not establish historical accuracy. The retained Panorama issue belongs to the
+superseded third-person view, whose failures remain recorded.
+See README.md for current Astra modelling ownership and the only active plan.
+
+The accepted runtime687b408 remains the audited baseline. Astra's Halle-only
+three-void/two-concrete-stair geometry has local technical acceptance; its4.25m upper datum,
+arrangement, counts beyond documented elements and detailed dimensions are
+explicitly inferred. Technical acceptance does not certify a surveyed interior;
+the deployed commit/public checks are recorded in the final release receipt.
+A05 describes an escape opening aligned with the eastern stair, not an
+explicitly east-facade location; no speculative shell cut is authorised.
+
+The user replaced the visible-avatar view with first-person walking. The new
+candidate retains the physical body and adds original synthesized footsteps
+with position-based, authored room reverberation. These effects are not measured
+club acoustics or a simulation of the documented PA. The architectural checker
+records official hull consistency, unverified datums and the unresolved Halle
+floor-to-external-roof span versus the architect's up-to21m interior height.
+
+S12 adds a direct2017 Studt/installer interview for Panorama's separate PA:
+four-point arrays, six double18-inch subs and two4×10-inch low-mid units.
+Current generic Panorama boxes are placeholders, not an authentic installation.
+V01's opening report says at least eight Säule piers TOTAL arranged in pairs,
+not eight pairs; its2017 mezzanine/entry layout must be reconciled with later
+project images. V02 says Gaillard's2020 engraving was intended permanent;
+continued survival and exact panel identity/placement remain unverified.
+
 ## Dates and identity
 
 The working target is contemporary Berghain, with dated historic references.
@@ -147,7 +181,7 @@ an exact model coordinate. Source IDs resolve in SOURCES.md.
 | Wolfgang Tillmans, photographic works | Panorama, historically documented ART09/10/12 | Historical architect bar photo A13 establishes large wall presentation. | Identify the selected-date works, number, print size and positions. Reports of later rotation are a lead, not a verified current hanging list. |
 | Marc Brandenburg, glass installation | Panorama/glass area; permanent artist listed ART03/09; historical operator mention ART12 | Glass work is documented; exact panel reproduction/dimensions not acquired. | Locate complete permitted views and locate the glass partition relative to stairs and lounge. |
 | Isa Genzken, mirror intervention | Panorama during Studio Berlin; ART13 | Eyewitness account of taped mirror. | Verify exact work identity, dimensions and present-day retention. Do not treat exhibition participation as permanent status. |
-| Cyprien Gaillard, toilet-cubicle engraving | In-situ intervention described by curator, 2020; ART03 | Engraving into an existing cubicle surface; no complete panel image inspected. | Establish present survival, actual cubicle face and scale. Model bathrooms/circulation before artwork placement. |
+| Cyprien Gaillard, toilet-cubicle engraving | In-situ intervention described by curator, 2020; ART03/V02; intended permanent then | Engraving into an existing cubicle surface; no complete panel image inspected. | Establish present survival, actual cubicle face and scale. Model bathrooms/circulation before artwork placement. |
 | Christine Sun Kim, floor intervention; Michael Sailstorfer, salt teeth | Studio Berlin exhibition; ART03/13 | Temporary floor/stair interventions described in exhibition records. | Retain as a historical exhibition layer unless continuing installation is verified; not part of the contemporary base by default. |
 
 Artwork imagery, photography and downloadable geometry have separate reuse

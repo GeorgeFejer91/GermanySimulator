@@ -74,40 +74,19 @@ test('the full body can pass the concrete installations and return to the Lab co
   }
 });
 
-test('the actual whole human stays framed through a camera turn beside and almost touching a massive pier',()=>{
-  const model=createBerghainModel(),pier=layout.fixtures.find(f=>f.id==='saule-pier-4');
-  const positions=[{x:pier.anchor[0]-2,y:.05,z:pier.anchor[2]+1.65},
-    {x:pier.anchor[0],y:.05,z:pier.anchor[2]+1.35}];
-  try{
-    for(const position of positions)for(const aspect of [1280/650,390/570,844/170]){
-      assert.ok(canStand(position,layout));
-      const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,aspect,.08,500);
-      try{
-        walk.step(position,{x:0,z:0},0);
-        for(let i=0;i<16;i++){
-          const yaw=i*Math.PI/8;
-          let distance;
-          for(let frame=0;frame<180;frame++){
-            const before=frame||i?Math.atan2(camera.position.x-position.x,camera.position.z-position.z):null;
-            distance=walk.camera(camera,position,yaw,0,model);camera.updateMatrixWorld(true);
-            const after=Math.atan2(camera.position.x-position.x,camera.position.z-position.z);
-            if(before!==null)assert.ok(Math.abs(Math.atan2(Math.sin(after-before),Math.cos(after-before)))<.051,'Bound the orbit change while the actor stands still');
-            assert.ok(walk.avatar.group.visible&&distance>.65,'A solid pier must not hide the controlled human');
-            const bounds=new THREE.Box3().setFromObject(walk.avatar.group);
-            for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
-              const p=new THREE.Vector3(x,y,z).project(camera);
-              assert.ok(p.z>-1&&p.z<1&&Math.abs(p.x)<.941&&Math.abs(p.y)<.941,
-                `The complete human must fit: aspect=${aspect}, yaw=${yaw}, distance=${distance}, vertex=${p.toArray()}`);
-            }
-            if(!walk.cameraTurning)break;
-          }
-          assert.equal(walk.cameraTurning,false,'A stationary camera request must settle');
-          assert.ok(camera.fov>=60&&camera.fov<=100);
-        }
-        const clear={x:0,y:0,z:29};walk.step(clear,{x:0,z:0},0);
-        for(let frame=0;frame<90;frame++)walk.camera(camera,clear,0,0,model);
-        assert.equal(camera.fov,60,'Restore the ordinary lens after returning to a clear exterior view');
-      }finally{walk.dispose();}
-    }
-  }finally{disposeBerghainModel(model);}
+test('Säule-pier first-person camera keeps the eye inside the legal body through turns',async()=>{
+ const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
+ const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
+ try{
+  for(const position of layout.fixtures.filter(f=>/^saule-pier-/.test(f.id)).map(f=>({x:f.anchor[0]-2,y:.05,z:f.anchor[2]+1.65}))){
+   assert.ok(canStand(position,layout));
+   for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
+    walk.camera(camera,position,yaw,pitch);
+    assert.deepEqual(camera.position.toArray(),[position.x,position.y+1.68,position.z]);
+    assert.equal(camera.fov,60);assert.equal(walk.avatar,undefined);
+    camera.getWorldDirection(direction);
+    assert.ok(direction.distanceTo(new THREE.Vector3(-Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch)))<1e-12);
+   }
+  }
+ }finally{walk.dispose();}
 });

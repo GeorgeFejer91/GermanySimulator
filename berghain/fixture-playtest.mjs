@@ -5,6 +5,16 @@ import {canStand} from './navigation.mjs';
 import {layout} from '../assets/models/berghain/layout.mjs';
 import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs';
 
+export async function assertFirstPersonView(page){
+ const view=await page.locator('#model').evaluate(canvas=>({perspective:canvas.dataset.perspective,avatar:canvas.dataset.avatar,
+  position:JSON.parse(canvas.dataset.position),camera:JSON.parse(canvas.dataset.cameraPosition),
+  direction:JSON.parse(canvas.dataset.cameraDirection),fov:Number(canvas.dataset.cameraFov)}));
+ assert.equal(view.perspective,'first-person');assert.equal(view.avatar,'false');assert.equal(view.fov,60);
+ assert.ok(Math.hypot(view.camera[0]-view.position.x,view.camera[1]-view.position.y-1.68,view.camera[2]-view.position.z)<.000001,'The eye stays inside the actual legal walking body');
+ assert.ok(Math.abs(Math.hypot(...view.direction)-1)<.000001);
+ return view;
+}
+
 export async function dragLook(page,context,profile,delta) {
   const box=await page.locator('#model').boundingBox();
   const touch=profile.hasTouch?await context.newCDPSession(page):null;
@@ -78,8 +88,8 @@ export default {
     await artifacts.screenshot(page,'visitor-bar-approach.png');
     const position=await forward(page,context,profile,3300);
     assert.ok(canStand(position,layout));
-    assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
-    assert.ok(Number(await page.locator('#model').getAttribute('data-camera-distance'))>.65);
+    await assertFirstPersonView(page);
+    await assertFirstPersonView(page);
     await artifacts.screenshot(page,'visitor-bar-clearance.png');
     return {position,entryEvidence:'Authored room selector for furniture camera only; natural exterior/door flow covered separately'};
   }}]

@@ -1,5 +1,6 @@
 export const visitorRadius = .28;
 export const eyeHeight = 1.68;
+export const walkingSpeed = 1.6;
 const footprint = [[0, 0], [visitorRadius, 0], [-visitorRadius, 0], [0, visitorRadius], [0, -visitorRadius],
   [.198, .198], [-.198, .198], [.198, -.198], [-.198, -.198]];
 

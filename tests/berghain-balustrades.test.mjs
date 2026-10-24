@@ -69,40 +69,19 @@ test('portable GLB contains the same original-balustrade assemblies as the edita
   assert.deepEqual(gltf.nodes[0].extras.balustrades,layout.balustrades);
 });
 
-test('a legal visitor beside an open gallery guard remains readable during camera turns',async()=>{
-  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
-  const {createBerghainModel,disposeBerghainModel}=await import('../assets/models/berghain/model.mjs');
-  const walk=createWalkthrough(),model=createBerghainModel(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500);
-  try{
-    for(const z of [8.8,8.9,9.0,9.03]){
-      const position=studyToSite({x:-2,y:6.65,z});assert.ok(canStand(position,layout));
-      walk.step(position,{x:0,z:0},0);
-      for(let yaw=0;yaw<=Math.PI*2;yaw+=Math.PI/16){
-        const distance=walk.camera(camera,position,yaw,0,model);
-        assert.ok(distance>.65,`Guard at study z=${z}, yaw=${yaw} hides the visitor at ${distance}m`);
-        assert.equal(walk.avatar.group.visible,true);
-      }
-      for(const aspect of [1280/650,390/570,844/170]){
-        camera.aspect=aspect;camera.updateProjectionMatrix();walk.camera(camera,position,0,0,model);camera.updateMatrixWorld(true);
-        const bounds=new THREE.Box3().setFromObject(walk.avatar.group);
-        for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
-          const projected=new THREE.Vector3(x,y,z).project(camera);
-          assert.ok(Math.abs(projected.x)<.94&&Math.abs(projected.y)<.94,'The complete visitor stays in frame beside a guard');
-        }
-      }
-      let previous;
-      for(let yaw=-.3;yaw<=.3;yaw+=.02){
-        walk.camera(camera,position,yaw,0,model);
-        if(previous)assert.ok(camera.position.distanceTo(previous)<.2,'Small turns beside the guard must not jump through picket gaps');
-        previous=camera.position.clone();
-      }
-    }
-    const clear=studyToSite({x:-2,y:6.65,z:7.8});assert.ok(canStand(clear,layout));
-    const distance=walk.camera(camera,clear,0,0,model);
-    assert.ok(Math.abs(distance-4.2)<.0001,'A clear distant view retains its original camera radius');
-    assert.ok(Math.abs(camera.position.y-clear.y-.95-Math.sin(.32)*4.2)<.0001,'A distant guard must not lift the camera');
-    const below=studyToSite({x:-2,y:.05,z:8.9});assert.ok(canStand(below,layout));
-    const belowDistance=walk.camera(camera,below,0,0,model);
-    assert.ok(Math.abs((camera.position.y-below.y-.95)/belowDistance-Math.sin(.32))<.0001,'The same guard overhead must not lift a ground-floor camera');
-  }finally{walk.dispose();disposeBerghainModel(model);}
+test('Gallery-guard first-person camera keeps the eye inside the legal body through turns',async()=>{
+ const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
+ const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
+ try{
+  for(const position of [8.8,8.9,9.0,9.03].map(z=>studyToSite({x:-2,y:6.65,z}))){
+   assert.ok(canStand(position,layout));
+   for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
+    walk.camera(camera,position,yaw,pitch);
+    assert.deepEqual(camera.position.toArray(),[position.x,position.y+1.68,position.z]);
+    assert.equal(camera.fov,60);assert.equal(walk.avatar,undefined);
+    camera.getWorldDirection(direction);
+    assert.ok(direction.distanceTo(new THREE.Vector3(-Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch)))<1e-12);
+   }
+  }
+ }finally{walk.dispose();}
 });

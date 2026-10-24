@@ -11,6 +11,7 @@ export function silenceBrowserAudio() {
   if (globalThis.AudioNode) {
     const connect = AudioNode.prototype.connect;
     AudioNode.prototype.connect = function (target, ...args) {
+      if (typeof OfflineAudioContext !== 'undefined' && this.context instanceof OfflineAudioContext) return connect.call(this, target, ...args);
       if (target === this.context.destination) {
         const silent = this.context.createGain();
         silent.gain.value = 0;

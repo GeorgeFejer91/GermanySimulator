@@ -1,12 +1,13 @@
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createBerghainModel, disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 import {layout, viewpoints} from '../assets/models/berghain/layout.mjs';
-import {moveVisitor, eyeHeight} from './navigation.mjs';
+import {moveVisitor, eyeHeight, walkingSpeed} from './navigation.mjs';
 import {fitExteriorRadius, exteriorTarget} from './camera.mjs';
 import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.mjs';
 import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../assets/vendor/pretext/dist/layout.js';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
+import {createFootsteps} from './footsteps.mjs';
 
 const canvas = document.querySelector('#model');
 const loading = document.querySelector('#loading');
@@ -16,6 +17,8 @@ const roomSelect = document.querySelector('#room');
 const sourceDialog = document.querySelector('#source-dialog');
 const instructions = document.querySelector('#instructions');
 const interaction = document.querySelector('#interact');
+const soundButton = document.querySelector('#footsteps');
+const footsteps = createFootsteps({onChange:state=>{canvas.dataset.footsteps=JSON.stringify(state);}});
 const playable = document.documentElement.dataset.play === 'true' || new URLSearchParams(location.search).has('play');
 let walk = null, walkthroughReady = !playable;
 const abort = new AbortController();
@@ -64,6 +67,7 @@ function invalidate() {
 function clearInput() {
   keys.clear(); touchMoves.clear(); pointers.clear();
   walk?.stop();
+  footsteps.reset();
 }
 
 function syncLoungeRoom(){
@@ -88,16 +92,17 @@ function render(time) {
     let right = Number(held.has('d') || held.has('arrowright') || held.has('right')) - Number(held.has('a') || held.has('arrowleft') || held.has('left'));
     const length = Math.hypot(forward, right);
     if (length) { forward /= length; right /= length; }
-    const delta = {x: (right * Math.cos(yaw) - forward * Math.sin(yaw)) * dt * 3,
-      z: (-forward * Math.cos(yaw) - right * Math.sin(yaw)) * dt * 3};
+    const delta = {x: (right * Math.cos(yaw) - forward * Math.sin(yaw)) * dt * walkingSpeed,
+      z: (-forward * Math.cos(yaw) - right * Math.sin(yaw)) * dt * walkingSpeed};
     const before = visitor;
     visitor = walk ? walk.step(visitor, delta, dt) : (length ? moveVisitor(visitor, delta, layout) : visitor);
+    footsteps.advance(before,visitor);
     syncLoungeRoom();
     if (length || walk?.travelling || (walk && Math.hypot(visitor.x - before.x, visitor.z - before.z) > .00001)) invalidate();
     if (walk) {
       canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model, dt));
       canvas.dataset.cameraTurning = String(walk.cameraTurning);
-      canvas.dataset.avatarFrame=JSON.stringify(walk.cameraFrame);
+      canvas.dataset.perspective = 'first-person';
       if (walk.cameraTurning) invalidate();
       const action = walk.action(visitor);
       if (interaction.hidden !== !action) scheduleMeasurement();
@@ -111,9 +116,10 @@ function render(time) {
     } else {
       camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);
       camera.rotation.set(pitch, yaw, 0, 'YXZ');
+      if (camera.fov !== 60) { camera.fov = 60; camera.updateProjectionMatrix(); }
     }
   } else {
-    if (walk) { walk.avatar.group.visible = false; interaction.hidden = true; }
+    if (walk) interaction.hidden = true;
     camera.position.set(target.x + Math.sin(orbitAngle) * Math.sin(orbitPitch) * orbitRadius,
       target.y + Math.cos(orbitPitch) * orbitRadius, target.z + Math.cos(orbitAngle) * Math.sin(orbitPitch) * orbitRadius);
     camera.lookAt(target);
@@ -124,7 +130,12 @@ function render(time) {
   canvas.dataset.drawCalls = String(renderer.info.render.calls);
   canvas.dataset.triangles = String(renderer.info.render.triangles);
   canvas.dataset.ready = String(surfacesReady && walkthroughReady);
-  canvas.dataset.avatar = walk ? String(walk.avatar.group.visible) : 'false';
+  canvas.dataset.avatar = 'false';
+  canvas.dataset.cameraPosition = JSON.stringify(camera.position.toArray());
+  canvas.dataset.cameraDirection = JSON.stringify(camera.getWorldDirection(new THREE.Vector3()).toArray());
+  canvas.dataset.cameraFov = String(camera.fov);
+  canvas.dataset.footsteps = JSON.stringify(footsteps.state);
+  canvas.dataset.perspective = mode === 'interior' ? 'first-person' : 'exterior';
   canvas.dataset.crossing = String(walk?.travelling || false);
   loading.hidden = surfacesReady && walkthroughReady && !surfaceError;
   if (surfaceError) loading.textContent = 'Surface textures could not load. Showing basic materials; reload to retry.';
@@ -156,7 +167,7 @@ function selectView(name) {
   } else if (name === 'walk' && walk) {
     mode = 'interior';
     instructions.textContent = 'WASD / arrows to walk · drag to look · E or the entrance button to enter and leave';
-    document.querySelector('#accuracy').textContent = 'Controllable visitor · interior reconstruction in progress';
+    document.querySelector('#accuracy').textContent = 'First-person walk · interior reconstruction in progress';
   } else {
     const view = viewpoints[name];
     mode = 'interior'; visitor = {...view.position}; yaw = view.yaw; pitch = view.pitch || 0;
@@ -174,8 +185,13 @@ function selectView(name) {
 }
 
 exterior.addEventListener('click', () => selectView('exterior'), events);
-enter.addEventListener('click', () => selectView(walk ? 'walk' : 'foyer'), events);
-roomSelect.addEventListener('change', () => selectView(roomSelect.value), events);
+enter.addEventListener('click', () => {selectView(walk ? 'walk' : 'foyer');footsteps.unlock();}, events);
+roomSelect.addEventListener('change', () => {selectView(roomSelect.value);footsteps.unlock();}, events);
+soundButton.addEventListener('click',()=>{
+  const enabled=soundButton.getAttribute('aria-pressed')!=='true';
+  soundButton.setAttribute('aria-pressed',String(enabled));soundButton.textContent=enabled?'Footsteps: on':'Footsteps: off';
+  footsteps.setEnabled(enabled);scheduleMeasurement();invalidate();
+},events);
 document.querySelector('#sources').addEventListener('click', () => { clearInput(); sourceDialog.showModal(); scheduleMeasurement(); }, events);
 document.querySelector('#close-sources').addEventListener('click', () => sourceDialog.close(), events);
 sourceDialog.addEventListener('close', clearInput, events);
@@ -183,6 +199,7 @@ sourceDialog.addEventListener('close', clearInput, events);
 function interact() {
   if (!walk || walk.travelling || mode !== 'interior' || sourceDialog.open) return;
   clearInput();
+  footsteps.unlock();
   if (walk.interact(visitor)) { canvas.focus({preventScroll: true}); invalidate(); }
 }
 interaction.addEventListener('click', interact, events);
@@ -191,6 +208,7 @@ canvas.addEventListener('pointerdown', event => {
   canvas.focus({preventScroll: true});
   canvas.setPointerCapture(event.pointerId);
   pointers.set(event.pointerId, {x: event.clientX, y: event.clientY});
+  if(mode==='interior')footsteps.unlock();
 }, events);
 canvas.addEventListener('pointermove', event => {
   const previous = pointers.get(event.pointerId);
@@ -227,7 +245,7 @@ canvas.addEventListener('keydown', event => {
     if (['arrowleft', 'arrowright'].includes(key)) orbitAngle += key === 'arrowleft' ? .12 : -.12;
     else if (['+', '=', '-', '_', 'arrowup', 'arrowdown'].includes(key)) orbitRadius = THREE.MathUtils.clamp(orbitRadius * (['-', '_', 'arrowdown'].includes(key) ? 1.1 : .9), 72, Math.max(180, fitExteriorRadius(camera.aspect, orbitAngle, orbitPitch) * 1.8));
     else return;
-  } else if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) keys.add(key);
+  } else if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) {keys.add(key);footsteps.unlock();}
   else return;
   event.preventDefault(); invalidate();
 }, events);
@@ -238,10 +256,11 @@ for (const button of document.querySelectorAll('[data-move]')) {
   button.addEventListener('pointerdown', event => {
     event.preventDefault(); button.setPointerCapture(event.pointerId);
     touchMoves.set(event.pointerId, button.dataset.move); invalidate();
+    footsteps.unlock();
   }, events);
   for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(event, e => touchMoves.delete(e.pointerId), events);
   button.addEventListener('keydown', event => {
-    if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); touchMoves.set('keyboard', button.dataset.move); invalidate(); }
+    if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); touchMoves.set('keyboard', button.dataset.move); footsteps.unlock();invalidate(); }
   }, events);
   button.addEventListener('keyup', () => touchMoves.delete('keyboard'), events);
   button.addEventListener('blur', () => touchMoves.delete('keyboard'), events);
@@ -270,7 +289,7 @@ window.addEventListener('pagehide', event => {
   frame = null;
   if (event.persisted) return;
   resizeObserver.disconnect(); textObserver.disconnect(); textChanges.disconnect();
-  abort.abort(); walk?.dispose(); disposeBerghainModel(model); renderer?.dispose();
+  abort.abort(); footsteps.dispose();walk?.dispose(); disposeBerghainModel(model); renderer?.dispose();
 }, events);
 
 const preparedText = new Map();
@@ -325,14 +344,14 @@ if (renderer) {
   resize();
   if (playable) import('./walkthrough.mjs').then(({createWalkthrough}) => {
     if (model.userData.disposed) return;
-    walk = createWalkthrough(); scene.add(walk.avatar.group, walk.door.group);
+    walk = createWalkthrough(); scene.add(walk.door.group);
     visitor = {...walk.spawn}; yaw = 0; pitch = 0; walkthroughReady = true;
     enter.textContent = 'Walk';
-    canvas.setAttribute('aria-label', 'Controllable human avatar. WASD or arrows to walk, drag to look, E at the entrance to enter or leave.');
+    canvas.setAttribute('aria-label', 'First-person walking view. WASD or arrows to walk, drag to look, E at the entrance to enter or leave.');
     selectView('walk');
   }).catch(() => {
     loading.hidden = false;
-    loading.textContent = 'The avatar walkthrough could not load. Reload to retry or use the architectural model viewer.';
+    loading.textContent = 'The walkthrough could not load. Reload to retry or use the architectural model viewer.';
   });
   loadSurfaceTextures(model, Math.min(4, renderer.capabilities.getMaxAnisotropy())).then(count => {
     if (model.userData.disposed) return;

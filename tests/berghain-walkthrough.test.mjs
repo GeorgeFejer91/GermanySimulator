@@ -59,44 +59,21 @@ test('human avatar is adult-sized, grounded and idle joints stop when displaceme
   avatar.dispose();
 });
 
-test('third-person camera stays inside a closed entrance even when its centre ray fits between leaves', async () => {
-  const {createWalkthrough} = await import('../berghain/walkthrough.mjs');
-  const {createBerghainModel,disposeBerghainModel} = await import('../assets/models/berghain/model.mjs');
-  const walk = createWalkthrough(), model = createBerghainModel(), camera = new THREE.PerspectiveCamera(45,1.5,.08,500);
-  const inside = {x:0,y:.05,z:20.25};
-  walk.step(inside,{x:0,z:0},0);
-  const distance = walk.camera(camera,inside,0,0,model);
-  assert.ok(distance > .65 && distance < 2.2, 'camera contracts on the actual door leaves');
-  assert.ok(camera.position.z < 22.15, 'camera and avatar remain on the interior side');
-  assert.equal(walk.avatar.group.visible,true);
-  for(const aspect of [1280/650,390/570,844/170]) {
-    camera.aspect=aspect; camera.updateProjectionMatrix(); walk.camera(camera,inside,0,0,model); camera.updateMatrixWorld(true);
-    const bounds=new THREE.Box3().setFromObject(walk.avatar.group);
-    for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
-      const projected=new THREE.Vector3(x,y,z).project(camera);
-      assert.ok(Math.abs(projected.x)<.94&&Math.abs(projected.y)<.94,`complete avatar clipped at aspect ${aspect}: ${projected.toArray()}`);
-    }
+test('Entrance and shrub first-person camera keeps the eye inside the legal body through turns',async()=>{
+ const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
+ const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
+ try{
+  for(const position of [{x:0,y:.05,z:20.25},{x:33.25,y:.05,z:18.5}]){
+   assert.ok(canStand(position,layout));
+   for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
+    walk.camera(camera,position,yaw,pitch);
+    assert.deepEqual(camera.position.toArray(),[position.x,position.y+1.68,position.z]);
+    assert.equal(camera.fov,60);assert.equal(walk.avatar,undefined);
+    camera.getWorldDirection(direction);
+    assert.ok(direction.distanceTo(new THREE.Vector3(-Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch)))<1e-12);
+   }
   }
-  walk.dispose(); disposeBerghainModel(model);
-});
-
-test('the camera lifts over a low garden shrub without losing the visitor', async () => {
-  const {createWalkthrough} = await import('../berghain/walkthrough.mjs');
-  const {createBerghainModel,disposeBerghainModel} = await import('../assets/models/berghain/model.mjs');
-  const walk=createWalkthrough(),model=createBerghainModel(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500);
-  const position={x:33.25,y:.05,z:18.5};
-  assert.ok(canStand(position,layout));walk.step(position,{x:0,z:0},0);
-  const distance=walk.camera(camera,position,1.57,0,model);
-  assert.ok(distance>.65,`low planting collapsed the camera to ${distance}`);
-  assert.equal(walk.avatar.group.visible,true);
-  let previous=camera.position.clone();
-  for(let yaw=0;yaw<Math.PI*2;yaw+=.02){
-    walk.camera(camera,position,yaw,0,model);
-    if(yaw>0)assert.ok(camera.position.distanceTo(previous)<.35,'slow garden turns must not pop between camera elevations');
-    assert.equal(walk.avatar.group.visible,true);
-    previous.copy(camera.position);
-  }
-  walk.dispose();disposeBerghainModel(model);
+ }finally{walk.dispose();}
 });
 
 test('the complete animated human stays inside the navigation body at every gait phase', async () => {

@@ -1,3 +1,4 @@
+import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -37,8 +38,7 @@ export default {name:'Säule photographed concrete installations and continuous 
    const {page,artifacts}=ctx;await enterNaturally(ctx);let heading=0;const route=[];
    for(const [index,[x,z]]of [[5,15],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5,15],[0,19.7],[0,20.25]].entries()){
      const end=await travel(ctx,studyToSite({x,y:.05,z}),heading);heading=end.yaw;route.push(end.position);
-     assert.equal(await page.locator('#model').getAttribute('data-avatar'),'true');
-     assert.ok(Number(await page.locator('#model').getAttribute('data-camera-distance'))>.65,'The concrete must not collapse the follow camera onto the human');
+     await assertFirstPersonView(page);
      if([1,2,4,5,7].includes(index))await artifacts.screenshot(page,'human-saule-route-'+index+'.png');
    }
    await cross(ctx);assert.ok((await position(page)).z>22);
@@ -60,11 +60,8 @@ export default {name:'Säule photographed concrete installations and continuous 
    for(let i=0;i<8;i++){
      await dragLook(page,ctx.context,ctx.profile,-Math.PI/4/.004);
      await page.waitForFunction(()=>document.querySelector('#model').dataset.cameraTurning!=='true');
-     const sample={avatar:await page.locator('#model').getAttribute('data-avatar'),distance:Number(await page.locator('#model').getAttribute('data-camera-distance'))};
-     assert.equal(sample.avatar,'true');assert.ok(sample.distance>.65);samples.push(sample);
-     sample.frame=JSON.parse(await page.locator('#model').getAttribute('data-avatar-frame'));
-     assert.ok(sample.frame.min.every(v=>v>-.941)&&sample.frame.max.every(v=>v<.941),'The actual animated human bounds must fit the rendered viewport');
+     const sample=await assertFirstPersonView(page);samples.push(sample);
      if(i%2===0)await artifacts.screenshot(page,'human-beside-pier-turn-'+i+'.png');
    }
-   return {position:end.position,samples,scope:'Room shortcut then real movement and drag beside concrete/corbel/seat; loaded human visibility, no natural-entry claim'};
+   return {position:end.position,samples,scope:'Room shortcut then real movement and drag beside concrete/corbel/seat; first-person eye-height and opaque pier views, no natural-entry claim'};
  }}]};
