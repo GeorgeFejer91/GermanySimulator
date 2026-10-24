@@ -1,12 +1,19 @@
 # Berghain interior: objects, art and equipment
 
-Checked 2026-10-23. This inventory extends [SOURCES.md](SOURCES.md) and the
+Checked 2026-10-23–24. This inventory extends [SOURCES.md](SOURCES.md) and the
 reconstruction acceptance in the [owning guide](https://github.com/GeorgeFejer91/GermanySimulator/blob/main/berghain/For-AI/README.md). The user explicitly asked
 for the missing interior design, artworks/mannequin sculptures and sound system.
 Those are required parts of the full asset, not optional decoration.
 
 The furniture and speaker updates remain provisional. **CLIMBER has an initial geometry study and Together has a partial anatomical relief; the other named artworks remain unmodelled.** Research, an object identification
 or a manufacturer's CAD download does not establish a finished interior.
+
+Andrea's first-work reference is now stronger: ART20 identifies the club
+commission as Andrea I, while ART21/25 give a dated bronze-series record.
+Creation, fair presentation and permanent installation dates must stay distinct.
+The unlabelled dimension axes and actual club mounting are still unresolved.
+An original form study can now follow the unobstructed ART23 view; geometry
+and in-situ fidelity have not yet been accepted.
 
 ## Dates and identity
 
@@ -39,7 +46,7 @@ an exact model coordinate. Source IDs resolve in SOURCES.md.
 | Norbert Bisky, *Vertigo* | Entrance/foyer, permanent since May 2017; ART05/17/18 | Artist reports multiple canvases across a 30m wall; institutional text places them opposite the cloakroom. Actual complete installation image/layout not yet obtained. | Establish exact canvas order, dimensions and elevations; 30m is an artist-reported wall extent, not surveyed individual prints. A different Bisky painting is not a texture substitute. |
 | Piotr Nathan, *Rituale des Verschwindens* | Historic foyer mural; removed April 2017; ART06, A01, I08 | Historic architect photo shows a large panelled wall work. | Keep as a historical reference. Do not install it as the contemporary foyer artwork. |
 | Joseph Marr, *Together* | Klo Bar, permanent 2013; ART04 | **9 m** figurative frieze, cola-coloured translucent sugar preserved with polyurethane; wide in-situ views and details inspected. | Klo Bar now includes a partial reclining anatomical relief, clearer cases/returns and an inner rear display. Generic anatomy, full figure sequence/likeness, Baroque ornament, darker mottled amber and measured dimensions remain unresolved; see the partial increment below. |
-| Zuzanna Czebatul, *Andrea* | Permanent 2023; ART07/08. Interview places it on the main floor. | Raised muscular arm holding a hammer; green bronze surface visible in the artist's handling photo. | Confirm wall, mounting height, orientation and edition dimensions. Printed *Billie/Chris* or other *Andrea* editions are not interchangeable survey data. |
+| Zuzanna Czebatul, *Andrea I / Andrea* | Permanent commission2023, ART07/08/20; interview places it on the main floor. | First bronze dated2022; gallery gives49.9×44.6×63.7cm and edition6+2AP (ART21/25). Clear bent-arm/fist/hammer view now inspected (ART23). | Unmodelled. Confirm axes, installed cast, wall, mounting height/orientation and hidden attachment. II/III and printed *Billie/Chris* remain distinct versions. |
 | Julian Göthe, permanent sculpture | Stair/entrance relationship described by exhibition visitors; permanence confirmed ART03/09/11; ART19 dates it to 2019 | Complete measured form/image still missing. Gallery documents preparatory sketches. | Find sketches or a complete in-situ view; verify title and dimensions. It is not named *The Fat Shadow* on available evidence; that is a separate exhibition. ART19's 70×50cm describes a drawing, not the installed sculpture. |
 | Wolfgang Tillmans, photographic works | Panorama, historically documented ART09/10/12 | Historical architect bar photo A13 establishes large wall presentation. | Identify the selected-date works, number, print size and positions. Reports of later rotation are a lead, not a verified current hanging list. |
 | Marc Brandenburg, glass installation | Panorama/glass area; permanent artist listed ART03/09; historical operator mention ART12 | Glass work is documented; exact panel reproduction/dimensions not acquired. | Locate complete permitted views and locate the glass partition relative to stairs and lounge. |

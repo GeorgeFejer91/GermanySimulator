@@ -1,5 +1,29 @@
 # Berghain viewer validation
 
+## Lab public acceptance and next research evidence — 2026-10-24
+
+Previous goal turn: PROGRESS. Runtime ad12fc4 is deployed by successful Pages
+run40046556651. Both output/berghain-lab-immutable-verification.json and
+...canonical-verification.json pass68/68 exact public Git-file comparisons;
+the canonical report also checks six root/3d/Geheim/model responses. Both public
+browser reports pass9/9, including actual entry/Lab sanitary descent/return/
+exit/refresh, source/native views, artwork and existing Klo routes. Their98
+source hashes bind to actual published Git objects through the byte audit.
+The primary index remains704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
+
+The following source-catalogue increment changes only five owning Markdown
+documents. M07's official JSON/poster and M08's visible creator page were
+inspected; no world mesh was acquired. ART20–25 resolve useful first-work
+references and preserve conflicting dates/axis order. Full source cards are in
+SOURCES.md; the installed work remains unmodelled. New source IDs are checked
+for uniqueness and table continuity before publication.
+
+Physics/Camera reviews and new gameplay tests are omitted for this research-only
+increment because geometry, assets, runtime, controls and rendering are unchanged.
+Retain the exact accepted98-file world freeze and its91 Node/35 browser evidence
+below. This is research progress toward the full asset, not full reconstruction
+acceptance. Physical Android/device-GPU and perceptual listening remain NOT RUN.
+
 ## Lab.oratory partial reconstruction — 2026-10-24
 
 A12/I22's ten inspected architect photographs supply the industrial forms;

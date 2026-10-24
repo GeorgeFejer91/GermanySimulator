@@ -59,9 +59,14 @@ goal and the Lab gap in INTERIOR.md; it is not a claim to recover a floor plan.
   the old geometry/materials/renderer; do not call it a natural baseline route.
 - [x] Freeze one integrated candidate. Obtain independent read-only Physics
   and Camera/scale reviews, repair required findings, and rebind final hashes.
-- [ ] Review scoped publication against current remote main, preserve the
+- [x] Review scoped publication against current remote main, preserve the
   original primary index, publish and verify actual public bytes and movement.
   Record remaining full-building/photographic-fidelity gaps; keep the goal active.
+
+Public acceptance receipt: ad12fc4 is deployed on the permanent Geheim URL;
+68/68 exact public files and9/9 canonical browser cases pass. See the owning
+README/VALIDATION and output/berghain-lab-release.json. This closes the initial
+Lab increment, while the complete realistic building goal remains active.
 
 Integrator owns `assets/models/berghain/`, scoped `berghain/` viewer/authoring,
 its For-AI notes and `tests/berghain-*.test.mjs`. No root game behavior or unrelated

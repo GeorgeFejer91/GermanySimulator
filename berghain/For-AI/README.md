@@ -10,6 +10,27 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Previous goal turn: **PROGRESS**. Lab release
+ad12fc4f15f8b14e41c55977b56c2df6b6100fd4 is deployed at
+https://germanysimulator.de/geheim/. Pages40046556651 succeeded; all68 published
+files match Git bytes, all six root/3d/Geheim/model routes respond, and9/9 actual
+canonical desktop/Android-portrait-emulated browser cases pass. Full realistic
+reconstruction remains ACTIVE. The original primary index is unchanged.
+
+The current research pass adds eight resources (M07–08, ART20–25). Official
+VRChat metadata confirms a public Berghain-inspired world, but its poster and
+login-gated page do not establish a reusable architectural asset. The UE5
+creator's22-image film gallery is now directly inspected; its LED-volume
+adaptation cannot supply measured building dimensions. Fresh public GitHub
+searches found no source for those two projects. SOURCES.md records the limits.
+
+Andrea research now distinguishes the installed Andrea I commission from later
+versions and supplies first-work scale references. Next aligned asset work is
+an original form study using ART07/08/20/23/25, with published axis ambiguity,
+unverified cast/mounting and hidden attachment kept explicit in INTERIOR.md.
+Do not substitute a later edition or a generic arm and claim faithful acceptance.
+No world, renderer, controls or model assets changed during this research pass.
+
 The [Lab.oratory increment](LAB-PLAN.md) now includes photographed industrial
 forms from all ten architect gallery views (A12/I22): pipe/gauge bar, T stools,
 insulator pendants, barred sling cells, bunks, brick passage, ornate green
@@ -20,7 +41,7 @@ coordinates. Floor.05m, soffit4.15m, beam underside3.60m and sanitary drop1.20m
 are authoring estimates. Complete plan, outside Lab entrance, hidden rooms,
 equipment inventory, fine finishes and current installation remain unresolved.
 
-The98-file candidate passes91 Node checks,6 route-packaging checks and35 silent
+The published98-file Lab freeze passes91 Node checks,6 route-packaging checks and35 silent
 browser cases across desktop and Android portrait/landscape emulation. Both
 independent world reviews accept this partial increment. Source/native portal
 rays, close views, material parity, real entry/bar/stair/exit routes, image
@@ -35,7 +56,7 @@ There are83 fixture assemblies,44 PA components and2 partial artwork studies.
 Three original aged maps reuse the existing material pipeline; all23 previous
 images retain their hashes. Normal page transfer adds701,934B, without loading
 the GLB. The accepted pre-Lab runtime is preserved in output/berghain-lab-baseline.
-The source catalogue now has110 unique records. Public route remains
+The source catalogue now has118 unique records. Public route remains
 https://germanysimulator.de/geheim/; the current publication/verification receipt
 belongs in output/berghain-lab-release.json. Full realistic reconstruction stays
 ACTIVE; physical Android and perceptual listening remain NOT RUN.
