@@ -11,6 +11,12 @@ hashes in its companion JSON. No photograph pixels are used in these meshes.
 Photographed forms and cutaway floor/adjacency claims are separated from
 estimated dimensions, placement and currentness in exported metadata.
 
+Smoking registration follow-up: the long axis now projects outward in the
+entrance-side region, following G30/31 and P08–10. The old rear-quarter placement
+was an unsupported reading of a background annex. Opaque entrance-facing
+cladding and the glazed reverse follow the same rising stair envelope. The
+selected bay, size, heights and current retention remain estimates.
+
 Smoking main-floor access and lower escape are modelled provisionally; its
 upper attachment to Panorama is unresolved and closed. Backstage, lift and
 FLINTA locations are unassigned. The ground WC's three cubicles are illustrative,

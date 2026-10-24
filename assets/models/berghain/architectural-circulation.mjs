@@ -1,9 +1,17 @@
 import {studyToSite} from './calibration.mjs';
 
-const site=p=>{const q=studyToSite({x:p[0],y:p[1],z:p[2]});return[q.x,q.y,q.z];};
+const registeredSite=p=>{const q=studyToSite({x:p[0],y:p[1],z:p[2]});return[q.x,q.y,q.z];};
 const bounds=(points,i)=>[Math.min(...points.map(p=>p[i])),Math.max(...points.map(p=>p[i]))];
 
+// G30/31 and P08–10 show the long stair enclosure projecting out from the
+// side wall, nearer the entrance. Retain its estimated construction frame,
+// but register it perpendicular to the facade. The selected front-side bay
+// and elevations are still estimates, not recovered survey coordinates.
+export const smokingToAuthor=([x,y,z])=>[43.6+z,y,32-x];
+
 export function addArchitecturalCirculation(layout){
+  let smokingFrame=false;
+  const site=p=>registeredSite(smokingFrame?smokingToAuthor(p):p);
   const retired=p=>p.name==='main stair'||p.name==='main stair tread'||p.name==='main stair landing'||
     ['main-stair-left','main-stair-right','foyer-gallery-east'].includes(p.balustrade);
   layout.parts=layout.parts.filter(p=>!retired(p));
@@ -79,7 +87,8 @@ export function addArchitecturalCirculation(layout){
     const a=site([x,y0,z0]),b=site([x,y1,z1]);
     const f={name,polygon,x:bounds(polygon,0),z:bounds(polygon,1),y:y0,endY:y1,rampAxis:[[a[0],a[2]],[b[0],b[2]]]};
     layout.floors.push(f);layout.solids.push({name,polygon,x:f.x,z:f.z,y:[Math.min(y0,y1)-.15,Math.max(y0,y1)],ramp:f});
-    data.stairs.push({name,author:{x,z:[z0,z1],y:[y0,y1],width},steps});
+    data.stairs.push({name,author:{x,z:[z0,z1],y:[y0,y1],width},steps,
+      coordinateFrame:smokingFrame?'smoking construction frame':'building author frame'});
     for(let i=0;i<steps;i++){
       const t=(i+.5)/steps,z=z0+(z1-z0)*t,y=y0+(y1-y0)*t,depth=(z1-z0)/steps;
       box(name+' tread',[x,y-.06,z],[width,.12,depth+.012]);
@@ -198,16 +207,11 @@ export function addArchitecturalCirculation(layout){
     stairUpperConnection:'Unresolved service-gallery destination; no invented Panorama doorway',
     registration:'Estimated at rear end of long-bar bay; historical December2006 installation'};
 
-  // Gallery30–34 show a tall glazed enclosure with sloping flight undersides,
-  // not the formerly assumed low opaque bridge. The side near the main/Halle
-  // join is photo-led; precise bay, flight lengths and floor heights inferred.
-  const tower={x:[22,29],z:[-21.6,-10.6]};
-  // The earlier generic garden boundary crossed the photographed stair site.
-  // Retain its continuation, rather than burying the open escape flight in it.
-  layout.parts=layout.parts.filter(p=>!['north garden wall','north garden wall coping'].includes(p.name));
-  layout.solids=layout.solids.filter(p=>p.name!=='north garden wall');
-  box('north garden wall continuation',[39,.62,-18.4],[19,1.24,.42],'concrete');
-  box('north garden wall coping continuation',[39,1.3,-18.4],[19,.12,.52],'stone',false);
+  // The photographed long axis projects OUT from the side wall. Background
+  // buildings in G30 did not establish a main/Halle-join attachment. P08–10
+  // constrain the front-side region; the exact bay and heights remain inferred.
+  smokingFrame=true;
+  const tower={x:[22,33],z:[3,10]};
   slab('smoking escape ground landing',[22.8,28.2],[-21.6,-19],.05);
   flight('smoking exposed lower escape stair',24,-19,-12,.05,3.35,2.4,19,false);
   slab('smoking escape intermediate landing',[22.8,28.2],[-12,-10.6],3.35);
@@ -215,34 +219,39 @@ export function addArchitecturalCirculation(layout){
   guard('smoking escape far end',22.8,-10.6,28.2,-10.6,3.35,false);
   guard('smoking escape middle',25.2,-12,25.8,-12,3.35,false);
   flight('smoking exposed upper escape stair',27,-19,-12,6.65,3.35,2.4,19,false);
-  slab('smoking lower landing',[21.4,29],[-21.6,-19],6.65);
+  slab('smoking lower landing',[22.4,29],[-22.3,-19],6.65);
   flight('smoking lower enclosed stair',24,-19,-12,6.65,9.95,2.4,19,false);
   slab('smoking intermediate landing',[22.8,28.2],[-12,-10.6],9.95);
   guard('smoking enclosed middle',25.2,-12,25.8,-12,9.95,false);
   flight('smoking upper enclosed stair',27,-19,-12,13.25,9.95,2.4,19,false);
   slab('smoking upper landing',[22,29],[-21.6,-19],13.25);
+  const enclosureBottom=z=>z<=-19?6.35:z>=-12?9.79:6.35+(z+19)*3.3/7;
   for(const x of [22.4,29]){
-    if(x===22.4){
-      box('smoking glazed long face',[x,10.9,-14.8],[.06,9.1,8.4],'lightGlass');
-      box('smoking entry upper glazing',[x,12.25,-20.3],[.06,6.4,2.6],'lightGlass');
-    }else{
-      box('smoking landing glazing',[x,10.9,-20.3],[.06,9.1,2.6],'lightGlass');
+    const entranceFace=x===22.4,cladding=entranceFace?'pale':'lightGlass';
+      box(entranceFace?'smoking opaque entrance-side face':'smoking landing glazing',[x,10.9,-20.3],[.06,9.1,2.6],cladding);
       for(let i=0;i<19;i++){
         const z=-19+(i+.5)*7/19,low=6.4+(i+.5)*3.3/19;
         box('smoking sloped underside fascia',[x,low,z],[.14,.3,7/19+.01],'pale',true,
           [[.14,0,0],[0,.3,0],[0,3.3/19,7/19+.01]]);
-        box('smoking stair glazing',[x,(low+15.45)/2,z],[.06,15.45-low,7/19+.01],'lightGlass');
+        box(entranceFace?'smoking opaque entrance-side slope':'smoking stair glazing',[x,(low+15.45)/2,z],[.06,15.45-low,7/19+.01],cladding);
       }
-      box('smoking intermediate glazing',[x,12.7,-11.3],[.06,5.5,1.4],'lightGlass');
-    }
+      box(entranceFace?'smoking opaque intermediate face':'smoking intermediate glazing',[x,12.7,-11.3],[.06,5.5,1.4],cladding);
     for(let z=-21.6;z<=-10.5;z+=1.375){
-      const entry=x===22.4&&z>-21.5&&z<-19;
-      box('smoking facade mullion',[x,entry?12.25:10.9,z],[.07,entry?6.4:9.1,.07],'steel');
+      const low=enclosureBottom(z);
+      box('smoking facade mullion',[x,(low+15.45)/2,z],[.07,15.45-low,.07],'steel');
     }
-    for(const y of [6.4,9.95,13.25,15.45])box('smoking horizontal glazing rail',[x,y,-16.1],[.08,.08,11],'steel');
+    for(const y of [6.4,9.95,13.25,15.45]){
+      const end=y===6.4?-19:-10.6;
+      box('smoking horizontal glazing rail',[x,y,(-21.6+end)/2],[.08,.08,end+21.6],'steel');
+    }
   }
-  box('smoking opaque far end',[25.7,10.9,-10.6],[6.6,9.1,.12],'pale');
-  box('smoking glazed join end',[25.7,10.9,-21.6],[6.6,9.1,.06],'lightGlass');
+  box('smoking opaque far end',[25.7,(9.79+15.45)/2,-10.6],[6.6,15.45-9.79,.12],'pale');
+  // Building-facing end: a real lower doorway, with the unknown upper
+  // attachment still closed. No entry hole remains in the long exterior face.
+  box('smoking join glazing left',[22.7,10.9,-21.6],[.6,9.1,.06],'lightGlass');
+  box('smoking join glazing right',[27,10.9,-21.6],[4,9.1,.06],'lightGlass');
+  box('smoking join doorway header',[24,12.25,-21.6],[2,6.4,.06],'lightGlass');
+  box('smoking join doorway sill',[24,6.5,-21.6],[2,.3,.06],'lightGlass');
   box('smoking roof',[25.7,15.5,-16.1],[6.6,.15,11],'pale');
   for(let z=-21.6;z<-10.5;z+=1.375)
     box('smoking roof joist',[25.7,15.36,z],[6.6,.14,.08],'steel',false);
@@ -268,9 +277,16 @@ export function addArchitecturalCirculation(layout){
     for(const z of [z0,(z0+z1)/2,z1])box('smoking operable pane upright',[28.96,(low+high)/2,z],[.04,high-low,.035],'steel',false);
     box('smoking pane handle',[28.92,(low+high)/2,(z0+z1)/2+.1],[.05,.16,.035],'steel',false);
   }
+  // P08–10's entrance-facing surface is opaque, with framed dark panels.
+  // G30/31's opposite face is glazed. These are two sides of one enclosure.
+  for(const [y,z] of [[8,-19.1],[11.7,-19.1],[10.2,-12.7]]){
+    box('smoking entrance-side window',[22.365,y,z],[.025,.8,2.2],'glass',false);
+    for(const dy of [-.43,.43])box('smoking entrance-side window frame',[22.34,y+dy,z],[.04,.055,2.3],'steel',false);
+    for(const dz of [-1.13,1.13])box('smoking entrance-side window jamb',[22.34,y,z+dz],[.04,.9,.055],'steel',false);
+  }
   // Open one registered bay in the study facade, retaining its masonry above
   // and below. This edits the provisional detail shell only, never LoD2 mass.
-  const door=site([22,0,-20]),replacements=new Map();
+  const door=site([24,0,-21.6]),replacements=new Map();
   for(const p of layout.parts){
     if(!p.name.startsWith('east ')||!p.matrix||Math.abs(p.center[2]-door[2])>.94)continue;
     const low=p.center[1]-p.size[1]/2,high=p.center[1]+p.size[1]/2;
@@ -288,15 +304,18 @@ export function addArchitecturalCirculation(layout){
     ({...s,name:p.name,renderPart:p,y:[p.center[1]-p.size[1]/2,p.center[1]+p.size[1]/2]})):[s]);
   // Historic facade remains closed at the upper attachment until the
   // provisional Panorama orientation can be reconciled. No phantom walkway.
-  data.smoking={gallery:['30','31','32','33','34'],authorBounds:tower,
+  const constructionRoute=[[24,6.65,-23.1],[24,6.65,-20],[24,9.95,-11.3],[27,9.95,-11.3],[27,13.25,-20]];
+  data.smoking={sources:['A01','I23','P08','P09','P10','U02'],gallery:['30','31','32','33','34'],authorBounds:tower,
     enclosedGuard:'Gallery32/33 sparse posts and continuous horizontal rails; separate invisible body containment, spacing estimated',
+    faces:'G30/31 glazed reverse; P08–10 opaque entrance-facing cladding with framed windows; pane dimensions and counts estimated',
     floorHeights:[6.65,9.95,13.25],upperConnection:'Closed: Panorama registration unresolved',
-    lowerConnection:'Estimated doorway through rear east study-facade bay at author z=-20',
+    lowerConnection:'Estimated doorway through front-side study-facade bay at author z=8',
     history:'April2008 Treppe Rauchbereich per architect anniversary timeline; gallery date unknown',
-    registration:'Estimated east-side bay near main/Halle join, not surveyed; official hull untouched',
-    authorRoute:[[20.5,6.65,-20],[24,6.65,-20],[24,9.95,-11.3],[27,9.95,-11.3],[27,13.25,-20]],
-    lightAnchors:[[25.5,14.7,-20],[25.5,11.2,-11.4]]};
-  data.smoking.siteRoute=data.smoking.authorRoute.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
+    registration:'Outward long axis and front-side region photo-supported; exact bay, dimensions and elevations estimated; official hull untouched',
+    supersedes:'Parallel rear-quarter orientation in 121459a; background annex was not proof of the main/Halle join',
+    authorRoute:constructionRoute.map(smokingToAuthor),
+    lightAnchors:[[25.5,14.7,-20],[25.5,11.2,-11.4]].map(smokingToAuthor)};
+  data.smoking.siteRoute=constructionRoute.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
   Object.assign(layout.interiorTopology.smoking,{sources:['A01','I23'],status:'Estimated photographed tower represented',
     reason:'Full architect gallery30–34 supersedes low-bridge assumption; exact upper return stair and Panorama attachment remain unresolved',
     architecturalCirculation:'smoking'});

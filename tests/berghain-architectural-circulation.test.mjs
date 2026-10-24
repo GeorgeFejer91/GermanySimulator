@@ -3,8 +3,19 @@ import assert from 'node:assert/strict';
 import {layout,materials} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
+import {smokingToAuthor} from '../assets/models/berghain/architectural-circulation.mjs';
 
 const site=([x,y,z])=>studyToSite({x,y,z});
+const towerSite=p=>site(smokingToAuthor(p));
+test('smoking enclosure projects outward from the entrance-side facade with distinct opaque and glazed faces',()=>{
+  const s=layout.architecturalCirculation.smoking;
+  assert.ok(s.authorBounds.x[1]-s.authorBounds.x[0]>s.authorBounds.z[1]-s.authorBounds.z[0],
+    'G30/31 long axis must project outward, not run parallel to the side wall');
+  assert.ok(s.authorBounds.z[0]>0,'P08/09 attachment region is in the entrance-side half');
+  assert.ok(layout.parts.some(p=>p.name==='Architecture smoking opaque entrance-side face'&&p.material==='pale'));
+  assert.ok(layout.parts.some(p=>p.name==='Architecture smoking stair glazing'&&p.material==='lightGlass'));
+  assert.match(s.registration,/estimated/,'metric registration is not a surveyed claim');
+});
 function walk(route){
   let p={...route[0]};assert.ok(canStand(p,layout),'legal route start');
   for(const target of [...route.slice(1),...route.toReversed().slice(1)]){
@@ -46,10 +57,12 @@ test('wardrobe connects through a real glass doorway to main stairs and ground W
 test('smoking main-floor doorway and both enclosed flights connect in both directions',()=>{
   walk(layout.architecturalCirculation.smoking.siteRoute);
   assert.match(layout.architecturalCirculation.smoking.upperConnection,/Closed/);
-  assert.equal(canStand(site([22,13.25,-20]),layout),false,'unknown upper attachment remains closed');
+  assert.equal(canStand(site([22,13.25,5]),layout),false,'unknown upper attachment remains closed');
+  assert.equal(canStand(site([22,6.65,8]),layout),true,'new lower facade entry is body clear');
+  assert.equal(canStand(site([22,6.65,-20]),layout),false,'former rear entry restored to facade');
 });
 test('open escape flights below smoking enclosure and Eisbar stair remain traversable',()=>{
-  walk([[24,.05,-20],[24,3.35,-11.3],[27,3.35,-11.3],[27,6.65,-20]].map(site));
+  walk([[24,.05,-20],[24,3.35,-11.3],[27,3.35,-11.3],[27,6.65,-20]].map(towerSite));
   walk([[14.1,6.65,-14],[14.1,9.95,-20.7],[16.5,9.95,-20.7],[16.5,13.25,-13.9]].map(site));
 });
 test('new architecture has finite portable transforms, known materials and matching visible-part solids',()=>{
@@ -84,7 +97,8 @@ test('replacement landing guards block the full body independently of missing fl
     ['smoking escape middle',[25.5,3.35,-11.3],[25.5,3.35,-12.7]],
     ['smoking enclosed middle',[25.5,9.95,-11.3],[25.5,9.95,-12.7]]];
   for(const [name,a,b] of checks){
-    const p=site(a),target=site(b),space={floors:[{x:[-100,100],z:[-100,100],y:a[1]}],
+    const frame=name.startsWith('smoking')?towerSite:site;
+    const p=frame(a),target=frame(b),space={floors:[{x:[-100,100],z:[-100,100],y:a[1]}],
       solids:layout.solids.filter(s=>s.name.startsWith('Architecture '+name))};
     assert.ok(space.solids.length&&canStand(p,space),name+' start');
     const stopped=moveVisitor(p,{x:target.x-p.x,z:target.z-p.z},space);
@@ -97,7 +111,7 @@ test('tower posts touch actual landing cross-girders and hoist is outside the up
   assert.equal(posts.length,4);assert.equal(girders.length,2);
   for(const p of posts){
     const top=p.center[1]+p.size[1]/2;
-    assert.ok(girders.some(g=>Math.abs(g.center[2]-p.center[2])<.05&&Math.abs(g.center[1]-g.size[1]/2-top)<1e-8));
+    assert.ok(girders.some(g=>Math.abs(g.center[0]-p.center[0])<.15&&Math.abs(g.center[1]-g.size[1]/2-top)<1e-8));
   }
   for(const g of girders){
     const top=g.center[1]+g.size[1]/2;
@@ -121,14 +135,14 @@ test('enclosed smoking guards have sparse posts and full-length rails with indep
     const rails=parts.filter(p=>p.name.includes('continuous '));assert.equal(rails.length,8);
     rails.forEach((rail,i)=>{
       const x=f.author.x+(i<4?-1:1)*f.author.width/2;
-      const a=site([x,f.author.y[0],f.author.z[0]]),b=site([x,f.author.y[1],f.author.z[1]]);
+      const a=towerSite([x,f.author.y[0],f.author.z[0]]),b=towerSite([x,f.author.y[1],f.author.z[1]]);
       assert.ok(Math.abs(Math.hypot(...rail.matrix.slice(8,11))-Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z))<1e-8,'rail spans entire slope');
     });
     const solids=layout.solids.filter(s=>s.name===f.name+' guard containment');assert.equal(solids.length,38);
     assert.ok(solids.every(s=>!s.renderPart&&s.collisionPolicy.includes('Invisible')));
     for(const t of [.13,.38,.63,.88])for(const sign of [-1,1]){
       const y=f.author.y[0]+(f.author.y[1]-f.author.y[0])*t,z=f.author.z[0]+(f.author.z[1]-f.author.z[0])*t;
-      const start=site([f.author.x+sign*(f.author.width/2-.5),y,z]),target=site([f.author.x+sign*(f.author.width/2+.6),y,z]);
+      const start=towerSite([f.author.x+sign*(f.author.width/2-.5),y,z]),target=towerSite([f.author.x+sign*(f.author.width/2+.6),y,z]);
       const space={floors:[{x:[-100,100],z:[-100,100],y}],solids};
       assert.ok(canStand(start,space));
       const stopped=moveVisitor(start,{x:target.x-start.x,z:target.z-start.z},space);
@@ -148,8 +162,8 @@ test('reachable smoking endpoint posts have fitted solids and stop both landing 
     }
   }
   for(const [x,y,startX] of [[22.8,6.65,24],[28.2,13.25,27]]){
-    let p=site([startX,y,-20]);
-    for(const t of [site([x,y,-20]),site([x,y,-19.34])]){
+    let p=towerSite([startX,y,-20]);
+    for(const t of [towerSite([x,y,-20]),towerSite([x,y,-19.34])]){
       const n=Math.ceil(Math.hypot(t.x-p.x,t.z-p.z)/.025),dx=(t.x-p.x)/n,dz=(t.z-p.z)/n;
       for(let i=0;i<n;i++){p=moveVisitor(p,{x:dx,z:dz},layout);assert.ok(canStand(p,layout));}
     }

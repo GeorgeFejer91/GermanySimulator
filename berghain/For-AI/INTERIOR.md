@@ -8,7 +8,8 @@ glazed smoking/escape enclosure and ground cloakroom WC. Original trusses,
 drum pendants, radiators, duct ribs, DJ-wall circular recesses and maintenance
 access now follow the observed feature families. Exact sizes, counts and
 registered room positions remain inferred. The upper smoking/Panorama
-connection, backstage boundaries, lift and 2024 FLINTA location remain open.
+connection, backstage boundaries, lift and exact upper FLINTA location remain open. V07 distinguishes an earlier
+mobile trial from the July 2024 architect intervention.
 See [KARHARD-MAPPING.md](KARHARD-MAPPING.md) for individual evidence and limits.
 Bounded source/export/browser validation remains recorded in VALIDATION.md;
 this inventory does not independently certify architectural accuracy.

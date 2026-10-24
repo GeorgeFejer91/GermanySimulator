@@ -1,5 +1,50 @@
 # Berghain viewer validation
 
+## Smoking registration correction — 25 October 2026
+
+Base929f6d8249d4a8b074285b1d151ae31b75625d98; 215-file frozen candidate
+output/berghain-smoking-candidate.json, SHA256
+c0b5964576124315ebdd58e67bfa8e2f7c0b5f2d5e1ae7ca1e913882bea84529.
+A documentation-only bridge records these acceptance notes.
+
+- 33 scoped Node checks passed before cladding repair; 12 directly affected
+  checks passed on the final envelope in output/berghain-smoking-final-node.txt.
+  The unchanged dependency-closure/build regression passed in the 33.
+- Desktop source/native and real smoking approach/return: 2/2;
+  Android-emulated portrait/landscape routes and controls/fallback: 4/4.
+  Receipts: output/berghain-smoking-desktop/report.json and
+  output/berghain-smoking-mobile/report.json.
+- The initial opaque skirt and partial side-only correction were visually
+  rejected despite passing browser assertions. Both manifests and renders are
+  retained. Final output/berghain-smoking-envelope-final/report.json passes
+  1/1 and its actual exterior/interior frames clear that finding. Unchanged
+  route, floor, guard, camera, cue and material code bridge earlier mobile
+  evidence; the repaired exterior was freshly rendered on desktop.
+- Independent Physics: 23 roundtrips, 50,354 accepted axis steps and
+  100,032 support samples with zero smoking source-box overlaps. Garden
+  approach detours around the visible braces; both escape flights connect.
+  Seven contacts, five invalid-start recoveries and all 15 viewpoints pass.
+- Independent Camera: body-clear doorway 1.6793m wide / 2.4m high; enclosed
+  flight width2.0151m; minimum actual joist clearance2.04m. Three transformed
+  cue rays reach their landings. Reports: output/berghain-smoking-physics-review.md
+  and output/berghain-smoking-camera-review.md.
+- Final portable model: 56,556,248 bytes, 742,152 triangles, 202 meshes and
+  25 embedded original textures. SHA256
+  0314bb9310f67a3e4cd960cd90f9e3d3cb254a81b1b06048639312726e3b34d3.
+  Independent source/native check covers 1,027,185 vertices.
+- Nine before/nine after comparable silent browser contexts pass the bounded
+  cost gate. Desktop median frame p95 changes14.2→14.1ms; portrait/landscape
+  remain7.1ms. Page bytes7,469,851→7,471,243; +1/+1/+2 draw calls respectively.
+  No idle rendering, automatic GLB download or new textures. Baseline production
+  inputs match the published parent with recorded line-ending differences.
+  Receipt: output/berghain-smoking-cost-comparison.json.
+
+This establishes the bounded correction, not surveyed dimensions or complete
+interior fidelity. Physical Android and measured photometry remain NOT RUN.
+Upper Panorama connection, exact sanitary/backstage registration and Eisbar
+counter elevation remain open. Publication/live proof belongs to
+output/berghain-smoking-release.json; the primary Git index stays untouched.
+
 ## Karhard architectural correction — 25 October 2026
 
 Accepted bounded candidate: `output/karhard-candidate.json`, SHA256 `0d256e3f59d0dabca21b44f8c1c997406d38ae5c009faaf6c592f1a4fb500166`,
@@ -64,6 +109,20 @@ It does not certify measured architecture, current venue lighting, a real fire-
 escape plan, backstage registration or complete artwork/room fidelity. Missing
 evidence remains in KARHARD-MAPPING.md and AUTHENTICITY-AUDIT.md. Public bytes,
 deployment and entry checks belong to `output/karhard-release.json`.
+
+Verified public release: `929f6d8249d4a8b074285b1d151ae31b75625d98` (architecture
+parent `121459a79787858dca6e31bed3d046b4be2cb056`). Pages 40140639388 succeeded;
+86/86 public files match, all six entry URLs respond, and three fresh desktop,
+Android portrait and landscape cases pass through both public viewer routes.
+Actual public desktop/mobile frames were inspected. The initial public check
+found four omitted files, including the required architectural lighting import;
+`output/karhard-initial-public-failure.json` retains that failure. The repaired
+explicit build list passes eight Node build checks and three generated-site
+browser cases. The new module-graph regression runs inside the existing CI
+level-page suite. This follow-up changes only build/test files; it preserves the
+complete reviewed model, lighting, navigation and camera trees. No new Physics
+or Camera execution was required for packaging. Primary index remains unchanged.
+This paragraph is a local post-publication handoff, not a runtime change.
 
 ## Warm interior orientation light — 25 October 2026
 

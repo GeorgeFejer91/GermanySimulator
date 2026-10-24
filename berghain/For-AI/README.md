@@ -10,6 +10,30 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Smoking stair registration follow-up — 25 October 2026
+
+The current candidate corrects the smoking tower's long axis from parallel to
+outward-projecting and moves it from the rear quarter to an estimated front-side
+bay. G30/31 and P08–10 support that direction and region, not exact coordinates.
+The entrance-facing side is opaque; the reverse is glazed. The old rear opening
+is restored; the new lower entry, floors, guards, collision, viewpoint and
+lighting move together. Upper Panorama attachment remains unresolved.
+
+V07/A22 now distinguish the historical upper urinal trial from later architect
+work; V08's room location is disputed. These are separate from ground cloakroom
+WC, Säule facilities and ordinary Panorama toilets. No exact current urinal
+room or backstage geometry is asserted. Eisbar's counter elevation and the
+Panorama/frontage registration remain pending source reconciliation.
+
+Candidate: output/berghain-smoking-runtime, frozen in
+output/berghain-smoking-candidate.json. Scoped Physics/Camera reviews pass,
+along with real desktop/mobile-emulated routes, native render/parity, fallback
+and nine-before/nine-after cost checks. VALIDATION.md retains the two rejected
+cladding iterations and final repair. Publication is the remaining release step;
+output/berghain-smoking-release.json will record its commit and live checks.
+The full architectural goal remains ACTIVE.
+
+
 ### Karhard architecture and supplied cutaways — 25 October 2026
 
 All 61 images on the exact architect project page have been inspected and mapped
@@ -37,7 +61,16 @@ The full reconstruction goal remains open: a working source-informed model
 does not resolve the documented architectural registration gaps. The earlier
 low-smoking-bridge hypothesis below is superseded by gallery 30–34.
 
-Publication and public-byte checks are recorded in `output/karhard-release.json`.
+Published architectural revision `121459a79787858dca6e31bed3d046b4be2cb056`,
+followed by packaging repair `929f6d8249d4a8b074285b1d151ae31b75625d98`.
+Pages run 40140639388 succeeded. All 86 checked public files match committed
+bytes, six entry URLs respond, and three live desktop/Android-emulated cases
+exercise both `/geheim/` and `/berghain/model.html`. The repair includes the
+lighting module and evidence documents in the explicit build list, with a
+dependency-closure regression and three generated-site browser cases.
+Receipt: `output/karhard-release.json`. This is a local post-publication handoff;
+the reviewed candidate and public runtime remain unchanged. The app goal stays
+ACTIVE because the documented architectural registration gaps remain open.
 
 ### Warm interior orientation light — 25 October 2026
 
@@ -51,8 +84,8 @@ Five focused Node checks, three desktop/Android-emulated room tours and a fresh
 desktop admission-to-wardrobe return pass. Physics acceptance bridges over
 identical geometry/navigation; Camera review inspects the new rendered views.
 This is authored orientation lighting, not measured venue photometry or formal
-accessibility certification. Physical Android remains untested. Final combined
-deployment verification is recorded in `output/berghain-warm-light-release.json`.
+accessibility certification. Physical Android remains untested. Published `408bc44`; exact public files and four live desktop/Android-emulated
+route/native checks passed. Receipt: `output/berghain-warm-light-release.json`.
 
 ### Entrance and admission reconstruction — accepted 25 October 2026
 
@@ -78,6 +111,12 @@ concurrent architectural corrections stay preserved in the shared checkout.
 The primary index remains untouched. The established isolated publisher owns
 the scoped release; `output/berghain-admission-release.json` records the final
 commit, deployment and public checks. Full Berghain reconstruction remains open.
+
+Published `40c5035` and verified at https://germanysimulator.de/geheim/.
+The public receipt confirms 77 exact files, six entry URLs and four
+live desktop/Android-emulated route/native-model cases. Full receipt:
+`output/berghain-admission-release.json`. The subsequent architectural work
+is now exported, validated and published in the Karhard release above.
 
 Current goal, 24 October 2026: isolate and correct internal architectural and
 interior-design inaccuracies, especially toilets, smoking and backstage areas,

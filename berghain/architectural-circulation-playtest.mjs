@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import lounge,{travel} from './lounge-playtest.mjs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {smokingToAuthor} from '../assets/models/berghain/architectural-circulation.mjs';
 import {canStand} from './navigation.mjs';
 import {enterNaturally} from './lab-playtest.mjs';
 import {dragLook,assertFirstPersonView} from './fixture-playtest.mjs';
@@ -58,8 +59,8 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   const samples=[];
   for(const [name,a,b] of [
    ['main-stair',[5,.05,19],[10,3.1,15]],['main-wall',[5,6.65,-9],[5,12,-21]],
-   ['eisbar',[18,6.65,-14],[16,9,-18]],['smoking',[27,13.25,-20],[24,10,-12]],
-   ['smoking-exterior',[36,.05,-19],[25,9,-16]],['ground-toilets',[-13.2,.05,20.6],[-18,1,19.5]]
+   ['eisbar',[18,6.65,-14],[16,9,-18]],['smoking',smokingToAuthor([27,13.25,-20]),smokingToAuthor([24,10,-12])],
+   ['smoking-exterior',[36,.05,15],[27,9,7]],['ground-toilets',[-13.2,.05,20.6],[-18,1,19.5]]
   ]){
    const p=site(a),t=site(b);assert.ok(canStand(p,layout),name);
    const yaw=Math.atan2(p.x-t.x,p.z-t.z),pitch=Math.atan2(t.y-(p.y+1.68),Math.hypot(t.x-p.x,t.z-p.z));
@@ -85,11 +86,12 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
  }},
  {id:'architecture-smoking-route',modes:['quick','stress'],timeoutMs:240000,async run(ctx){
   let heading=await select(ctx,'berghain');
-  let r=await route(ctx,[...hallApproach,...[[20,6.65,-14.3],[20,6.65,-20]].map(site),...layout.architecturalCirculation.smoking.siteRoute],heading,'tower-up',{8:[27,10.5,-14],10:[27,10.7,-14]});heading=r.heading;
+  let r=await route(ctx,[[5,6.65,8],[14,6.65,8],[20,6.65,8]].map(site).concat(layout.architecturalCirculation.smoking.siteRoute),heading,'tower-up',
+   {5:smokingToAuthor([27,10.5,-14]),7:smokingToAuthor([27,10.7,-14])});heading=r.heading;
   assert.equal((await light(ctx.page)).room,'smoking');await ctx.artifacts.screenshot(ctx.page,'smoking-upper-source.png');
   const back=await route(ctx,layout.architecturalCirculation.smoking.siteRoute.toReversed(),heading,'tower-down');
   await ctx.artifacts.screenshot(ctx.page,'smoking-main-door-source.png');
-  return {out:r.records,back:back.records,scope:'Main-floor room shortcut then real keyboard/touch approach through bar end, doorway and enclosed smoking flights in both directions; upper interior connection remains closed'};
+  return {out:r.records,back:back.records,scope:'Main-floor room shortcut then real keyboard/touch approach through front-side doorway and outward smoking flights in both directions; upper interior connection remains closed'};
  }},
  {id:'architecture-eisbar-route',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
   let heading=await select(ctx,'berghain');

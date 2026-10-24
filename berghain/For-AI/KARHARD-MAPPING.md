@@ -48,13 +48,13 @@ it has a named object in the source.
 | F17 | Separate Eisbar with small metallic tiles, stepped L counter and recessed dark base; text2006, G27–29, O00 | Circulation/Eisbar reconstruction adds its distinct counter instead of relabelling Panorama, Klo or main bar. | Photographs establish form; floor footprint/elevation must be reconciled with the cutaways. |
 | F18 | Narrow stair and guarded upper continuation behind Eisbar; G29; text2006 | Reconstructed route includes a real stair and landing with separate counter/route bodies. | Exact endpoints and relationship to the Panorama stair remain inferred. |
 | F19 | Exposed industrial rail, blue-green hoist, cable loop and hook; G28/29 | Candidate stationary machinery study in the Eisbar bay. | No operational machinery behavior or hidden mechanism inferred. |
-| F20 | Smoking/escape enclosure connects club levels; text2008, G30–34, O00 | Reconstructed glazed exterior stair beside main/Halle side; replaces the earlier assumption that only a low bridge silhouette was available. | Upper interior attachment and whole Panorama registration still need reconciliation. Do not invent a cross-hall shortcut. |
+| F20 | Smoking/escape enclosure connects club levels; text2008, G30–34, O00 | Outward-projecting exterior stair in the entrance-side region; G30/31 plus P08–10 supersede the former parallel rear-quarter registration. | Upper interior attachment and whole Panorama registration still need reconciliation. Do not invent a cross-hall shortcut. |
 | F21 | Open lower escape flights, real upper platforms and sloping/stepped enclosure underside; G30–34 | Reconstructed continuous main-floor/tower circulation with each flight and landing represented. | Unseen upper doorway remains explicitly unresolved; no claim of a surveyed fire-escape plan. |
-| F22 | Thin bolted steel/glass frame, operable panes, opaque end panels, supporting legs and thin roof; G30/31/34 | Reconstructed tower envelope follows these visible features. | Exact pane count, sections, depth and current glazing unspecified. |
+| F22 | Thin bolted steel/glass frame, operable panes, opaque end panels, supporting legs and thin roof; G30/31/34 | Reconstructed tower envelope has a glazed reverse and opaque entrance-facing side, following G30/31 and P08–10. | Exact pane count, sections, depth and current glazing unspecified. |
 | F23 | Checker-plate deck, plain ceiling panels, horizontal-wire guards and metal ashtray shelf; G32/33 | Reconstructed tower interior detail and real edge guards. | Metal shelf purpose inferred from visible trays; no current fixture count or occupancy claim. |
 | F24 | Separate WC interventions: upper2013 and wardrobe/ground2015; O00 and linked A13/I21; ground/wardrobe adjacency in U02 | `ground-sanitary.mjs` adds a separate ground cloakroom WC wing, east public entry, three illustrative stalls and trough; existing main/Klo and Panorama facilities remain distinct. | West/front registration, dimensions and count inferred. This page has no floor-specific sanitary photographs; no FLINTA attribution is made. |
 | F25 | Wardrobe enlargement2016; O00 | Existing provisional cloakroom counter/foyer requires footprint reconciliation. | Timeline supplies intervention date, not before/after dimensions. |
-| F26 | FLINTA urinals opened2024; O00 | Required contemporary inventory gap; not yet located/modelled. | The poster does not identify room or access stair. |
+| F26 | FLINTA urinal intervention July2024; O00; earlier trial V07 | Required contemporary inventory gap; not yet located/modelled. | The poster does not identify room or access stair; V07 predates it, and V08 supplies only disputed room relationships. |
 | F27 | Entrance roof added2024; O00 | Current entrance details lack a verified canopy design. | No usable contemporary form in this page's photographs; do not turn timeline text into an arbitrary roof. |
 | F28 | Ballet, colored event scenes, staged animals and rainy night photography; G00/02/09/10/15/26, O15 | Lighting appearance may inform the authored night cues. Performers, animals and temporary stage apparatus excluded from permanent architecture. | Staged exposure is not current club-night photometry. |
 | F29 | Piotr Nathan foyer mural,175 panels; text, G01 | Historical record only; removed2017 per ART06, so not reinstalled in the contemporary model. | Current collection authority is INTERIOR/SOURCES, not this old photograph. |
@@ -83,7 +83,7 @@ I02 is a third, different drawing; do not count these as duplicate views of I02.
 
 ## Acceptance boundary
 
-The mapped corrections pass the bounded implementation gates recorded in
+The earlier mapped corrections passed the bounded implementation gates recorded in
 VALIDATION.md: source/native geometry and renders, continuous body routes,
 desktop/Android-emulated controls and independent Physics/Camera review.
 Feature rows retain their source-specific limits. Coordinates, counts and
@@ -92,3 +92,10 @@ FLINTA/lift locations, full Panorama registration and the upper smoking
 attachment remain unresolved. The ground WC is a provisional adjacency model.
 All61 photographs mapped does not mean every hidden room or contemporary
 detail has been reconstructed.
+
+25 October registration follow-up: G30/31 establish an outward long axis;
+P08–10 place the projection toward the entrance side. The former main/Halle-join
+inference from a background building was unsupported. The corrected model uses
+an estimated front-side bay (author z=8), restores the old rear opening, and
+moves geometry, collision, room arrival and local cues together. Width, depth,
+heights and upper return remain estimates. Validation status belongs to README.md.

@@ -4,9 +4,25 @@ Audited 24 October 2026 at George's request. The model is a recognisable archite
 
 This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f971`, unchanged by the research publication `a1f75fd142ee115dfb4255abcf55d5da0f95c213`. The 109-input freeze is `output/berghain-saule-candidate.json`; 141 preserved baseline files are in `output/berghain-entrance-baseline/`. A subsequent Halle correction is being modelled by GPT-6 Astra. Its proposed dimensions are not accepted as measured facts or counted as completed fixes here.
 
-[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains 154 unique resource records; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
+[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains the dated resource catalogue; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
 
 ## Evidence and review boundaries
+
+25 October registration correction supersedes the rear-quarter assignment below.
+G30/31 show the tower's long axis projecting out from the wall; P08–10 favor the
+entrance-side region. The background annex does not identify the Halle join.
+The revised tower is rotated and moved to an estimated front-side bay, with
+opaque entrance-facing cladding and a glazed reverse. Its previous rear door
+is closed again. Exact elevations, dimensions and upper connection stay open.
+Panorama's window orientation must be reconciled jointly with its stair/WC
+wing; no corridor across the main hall is justified by this correction.
+
+V07 establishes a December 2023 upper-urinal trial, predating the July 2024
+architect entry. It does not establish present inventory. V08's room testimony
+is disputed; do not identify ground WC or ordinary Panorama stalls as that room.
+AU26 backstage still lacks location evidence. Eisbar's counter datum also needs
+reconciliation with V05's above-bar account and the historical cutaways.
+
 
 25 October Karhard/cutaway candidate supersedes the earlier AU08 omission
 rationale below. The complete gallery30–34 shows a tall glazed stair enclosure,
