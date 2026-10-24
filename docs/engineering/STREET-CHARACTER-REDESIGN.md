@@ -623,3 +623,42 @@ staged UV probes, headless emulation and muted state checks do not establish
 natural E traversal, physical Android, perceptual listening or general FPS.
 Old semantic364, incomplete-audit, lip/reporting and fixture REDs remain saved.
 Evidence: `output/klaus-release/`. Publish immediately and continue the cast.
+
+Brigitte Müller publication verified: accepted `a2b23ae96db0a2b5ee71be4928480577935efeb8`, deployed in `defd99867ef373831ff3b320a711a013a9e7e4ef` by successful Pages run40024573758. All14 public files match the immutable deployment and exact accepted character record. The root URL, query/hash-preserving `3d.html` compatibility entry and public standing/movement admission pass in portrait emulation with no page or HTTP failures. Root personally viewed her public pavement capture. Post-deployment desktop and physical Android remain unrun; the staged approach does not establish natural E traversal. Evidence: `output/brigitte-release/live/`.
+
+Klaus-Dieter Klein publication verified: accepted `71290b1536e8eb60a410b1ba62915ad30402f131`, deployed in `defd99867ef373831ff3b320a711a013a9e7e4ef` by successful Pages run40024573758. All14 public files match the immutable deployment and exact accepted character record. The root URL, query/hash-preserving `3d.html` compatibility entry and public standing/movement admission pass in portrait emulation with no page or HTTP failures. Root personally viewed his public pavement capture. Post-deployment desktop and physical Android remain unrun; the staged approach does not establish natural E traversal. Evidence: `output/klaus-release/live/`.
+
+## Wolfgang Schulz: adult painted street family
+
+Wolfgang now uses mature connected proportions, angular worn features, olive
+knitwear, brown trousers and whole black shoes. His burgundy briefcase remains
+in his RIGHT hand and his LEFT stays empty. Eight genuine painted directions
+share height2.33 and his own source-fitted11.941927192781767 stride. All42other
+registry records, police, route/collision logic and original voice takes remain
+unchanged. The412selected cells preserve walking, bridges, turns, stops and the
+four original quiet performances;324 supported mouth slots per density use his
+actual lips and retain the three rear views without visible mouths.
+
+Root verifies the52-file packet, two original tool images, source/dependency
+closure, actual sparse packaging of9runtime files and194focused tests. A single
+runtime attributes file uses an explicit CRLF-to-LF overlay; artwork and recipe
+logic are exact. The full source/native and clean-rebuild evidence is retained.
+Independent Physics verifies824native cells, own RGBA sole correspondence and
+three complete actual route cycles, all16phases, planted stops, quiet4 completion,
+reaction release/resume and88player-obstruction holds without overlap. Floor
+fringes remain within one row and the actor's own neutral. Independent Camera
+reviews mature population/car/door scale, actual source requests, alpha-aware
+near/far person and opaque wall order, turns and standing handover. Fresh
+desktop/portrait evidence and sealed author landscape evidence are attributed
+separately; root personally inspects actual integrated images.
+
+The full299-frame Physics runs remain RED: later contact with an unchanged
+full-size traffic proxy occurs after the required clear three-cycle witness.
+The rendered vortex car's transformed body was not logged, so visible-body
+penetration is unproved. The older author's frame257 exact blocker remains
+unresolved. These are disclosed shared-world/historical qualifications, not an
+all-world collision PASS or an inferred actor-art regression. Earlier fixture
+and resource failures remain saved. Camera's old combined turn fixture RED is
+retained beside the final scoped result. Silent headless emulation and scripted
+placements do not establish physical Android, natural mission traversal,
+perceptual audio quality or general FPS. Evidence: output/wolfgang-release/.

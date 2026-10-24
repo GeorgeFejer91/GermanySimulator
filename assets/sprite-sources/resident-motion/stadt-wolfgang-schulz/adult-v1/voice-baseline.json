@@ -1,0 +1,15 @@
+{
+  "id": "stadt-wolfgang-schulz",
+  "actorId": "city-wolfgang-schulz",
+  "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+  "selectedRecordingCount": 3,
+  "hashes": {
+    "assets/voices/city-dialogue/stadt-wolfgang-schulz-01.mp3": "2cb1b47f27334f0196b87b08c1ac4397e03d093e2aad9d3eb14794cbe7cee08b",
+    "assets/voices/city-dialogue/stadt-wolfgang-schulz-02.mp3": "5bf496d4083b6e5b83c94ff0f763aa4584e03334aa9e3c125ecedb8de4e0a584",
+    "assets/voices/city-dialogue/stadt-wolfgang-schulz-03.mp3": "1ac0e37cf1f48e9c0eb3837af18a7d6579337f4d08793e03aeaf9db5168f85ce",
+    "assets/voices/city-dialogue/stadt-wolfgang-schulz-manifest.json": "c28ec64d6ef40bfb4a19eebce5ab666793497b77e1d9a676fc7dcb031f502083",
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170"
+  },
+  "policy": "Preserve existing exact catalog admission, native40Hz cues and missing Berlin04 synthesis/caption fallback; no new voice or listening claim"
+}

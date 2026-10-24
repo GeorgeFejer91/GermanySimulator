@@ -1,0 +1,11 @@
+{
+  "tool": "built-in imagegen",
+  "original": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16a10-4d36-73a0-965c-ea69697e9463/exec-7773ba6b-e587-41c6-bd33-d2a952ad7a76.png",
+  "originalSha256": "fcaffc33bdf0a6de7aa6c9711e05f6c814b1d8c4852cba9754fe5c1c36737d30",
+  "portable": "raw/quarters.png",
+  "request": "quarter-generation-request.json",
+  "referenceHashes": {
+    "references/identity-standing.png": "c98319d4176fda4db90bdf1866a78c776ac9064d60e0d1b3a3bfad68078bddf2",
+    "raw/cardinals.png": "9b14146372afcf7e4e82e009c2583e3708f858a0b2eed1e8fb45c86f56d7b733"
+  }
+}

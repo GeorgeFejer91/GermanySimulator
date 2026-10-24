@@ -1,0 +1,362 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-wolfgang-schulz",
+  "sourceHashes": {
+    "cardinals.png": "9b14146372afcf7e4e82e009c2583e3708f858a0b2eed1e8fb45c86f56d7b733",
+    "quarters.png": "fcaffc33bdf0a6de7aa6c9711e05f6c814b1d8c4852cba9754fe5c1c36737d30"
+  },
+  "sourceDensityHeights": {
+    "cardinals.png": 600,
+    "quarters.png": 581
+  },
+  "oneScalePerRawSheet": {
+    "cardinals.png": 0.6666666666666666,
+    "quarters.png": 0.6884681583476764
+  },
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        183,
+        8,
+        546,
+        608
+      ],
+      "sourcePivot": [
+        393.0,
+        608
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 314.5,
+          "bounds": [
+            264,
+            518,
+            365,
+            608
+          ],
+          "pixels": 6911
+        },
+        {
+          "x": 471.5,
+          "bounds": [
+            411,
+            518,
+            532,
+            608
+          ],
+          "pixels": 7728
+        }
+      ],
+      "workingOrigin": [
+        -6.0,
+        66.66666666666669
+      ],
+      "workingBoundsAlpha20": [
+        116,
+        72,
+        358,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/down.png",
+      "registeredSha256": "1c28b5f1627f091682d704d1af2cce2663ae8787a5d5ac6f1718d39f857fc58b"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        223,
+        20,
+        536,
+        601
+      ],
+      "sourcePivot": [
+        407.5,
+        601
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 344.0,
+          "bounds": [
+            304,
+            511,
+            384,
+            601
+          ],
+          "pixels": 6140
+        },
+        {
+          "x": 471.0,
+          "bounds": [
+            406,
+            511,
+            536,
+            592
+          ],
+          "pixels": 7501
+        }
+      ],
+      "workingOrigin": [
+        -24.55077452667814,
+        58.2306368330465
+      ],
+      "workingBoundsAlpha20": [
+        129,
+        72,
+        345,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/front-right.png",
+      "registeredSha256": "baa17042ad5f8ff59b08e41fdb5b6177e409aab1a0f5d9cd46c21fe1c5495307"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        811,
+        12,
+        1013,
+        608
+      ],
+      "sourcePivot": [
+        928.5,
+        608
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 928.5,
+          "bounds": [
+            844,
+            518,
+            1013,
+            608
+          ],
+          "pixels": 11739
+        }
+      ],
+      "workingOrigin": [
+        -363.0,
+        66.66666666666669
+      ],
+      "workingBoundsAlpha20": [
+        178,
+        75,
+        313,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/right.png",
+      "registeredSha256": "1b68f05313a694793d7c435eb04fd90587aa710a1c3870667175e90aa90ac456"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        796,
+        23,
+        1051,
+        597
+      ],
+      "sourcePivot": [
+        923.0,
+        597
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 923.0,
+          "bounds": [
+            818,
+            507,
+            1028,
+            597
+          ],
+          "pixels": 13972
+        }
+      ],
+      "workingOrigin": [
+        -379.45611015490533,
+        60.9845094664372
+      ],
+      "workingBoundsAlpha20": [
+        169,
+        77,
+        345,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/rear-right.png",
+      "registeredSha256": "2646e4dc38f611a3a80b6dd3d5038d6241ae002ad3939a1dfa203f163d53d1e4"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        224,
+        614,
+        562,
+        1198
+      ],
+      "sourcePivot": [
+        382.5,
+        1198
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 304.0,
+          "bounds": [
+            247,
+            1108,
+            361,
+            1198
+          ],
+          "pixels": 7406
+        },
+        {
+          "x": 461.0,
+          "bounds": [
+            410,
+            1108,
+            512,
+            1198
+          ],
+          "pixels": 7095
+        }
+      ],
+      "workingOrigin": [
+        1.0,
+        -326.66666666666663
+      ],
+      "workingBoundsAlpha20": [
+        150,
+        83,
+        376,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/up.png",
+      "registeredSha256": "ae4271576dcaf5d4c7f171d5062a75b15e608a04ec2d34837925f9a33cf06a0d"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        258,
+        620,
+        549,
+        1178
+      ],
+      "sourcePivot": [
+        385.25,
+        1178
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 325.0,
+          "bounds": [
+            258,
+            1088,
+            392,
+            1178
+          ],
+          "pixels": 8859
+        },
+        {
+          "x": 445.5,
+          "bounds": [
+            402,
+            1088,
+            489,
+            1169
+          ],
+          "pixels": 5724
+        }
+      ],
+      "workingOrigin": [
+        -9.2323580034423,
+        -339.0154905335628
+      ],
+      "workingBoundsAlpha20": [
+        168,
+        88,
+        369,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/rear-left.png",
+      "registeredSha256": "1028412a1a5bd8386fea71eedc6a27c4da25fa2eb0f07ebce2fd5d1da16bd53d"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/cardinals.png",
+      "sourceBoundsAlpha20": [
+        799,
+        614,
+        1021,
+        1202
+      ],
+      "sourcePivot": [
+        892.0,
+        1202
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 892.0,
+          "bounds": [
+            799,
+            1112,
+            985,
+            1202
+          ],
+          "pixels": 12916
+        }
+      ],
+      "workingOrigin": [
+        -338.66666666666663,
+        -329.33333333333326
+      ],
+      "workingBoundsAlpha20": [
+        194,
+        80,
+        342,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/left.png",
+      "registeredSha256": "79ed54d22ff03622b8cc2cac7b589ad7802f15414fc2e4f47d4cfcd6611a6b45"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/raw/quarters.png",
+      "sourceBoundsAlpha20": [
+        763,
+        618,
+        1020,
+        1191
+      ],
+      "sourcePivot": [
+        900.0,
+        1191
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 900.0,
+          "bounds": [
+            790,
+            1101,
+            1010,
+            1191
+          ],
+          "pixels": 13750
+        }
+      ],
+      "workingOrigin": [
+        -363.62134251290877,
+        -347.9655765920826
+      ],
+      "workingBoundsAlpha20": [
+        162,
+        78,
+        339,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-wolfgang-schulz/adult-v1/registered/front-left.png",
+      "registeredSha256": "56db74f07bb8987cddc1f7a9be6ab0d0933bf56c49e263aab21bad689bba6218"
+    }
+  }
+}
