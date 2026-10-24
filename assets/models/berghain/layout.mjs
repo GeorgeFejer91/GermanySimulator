@@ -10,6 +10,7 @@ import {addKloRooms,kloMaterials} from './klo-bar.mjs';
 import {addLabRooms,labMaterials} from './lab-oratory.mjs';
 import {addOriginalBalustrades} from './original-balustrades.mjs';
 import {mainBarMaterials} from './main-bar.mjs';
+import {sauleMaterials} from './saule.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -18,6 +19,7 @@ export const materials = {
   ...kloMaterials,
   ...labMaterials,
   ...mainBarMaterials,
+  ...sauleMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},

@@ -12,7 +12,8 @@ const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', 
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
-  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'aged'};
+  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'aged',
+  sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];

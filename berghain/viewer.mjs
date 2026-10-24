@@ -97,6 +97,7 @@ function render(time) {
     if (walk) {
       canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model, dt));
       canvas.dataset.cameraTurning = String(walk.cameraTurning);
+      canvas.dataset.avatarFrame=JSON.stringify(walk.cameraFrame);
       if (walk.cameraTurning) invalidate();
       const action = walk.action(visitor);
       if (interaction.hidden !== !action) scheduleMeasurement();

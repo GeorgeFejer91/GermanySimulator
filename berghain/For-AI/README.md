@@ -10,7 +10,19 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Current goal turn: **PROGRESS**. Roof/lower-relief release
+Current goal turn: **PROGRESS**. Aged-plaster/practical-light release
+e3ad14bc7fbdd884f6c7248e7395a424812db6a8 is deployed at
+https://germanysimulator.de/geheim/. Pages40076278682 succeeded; 71 public
+files match Git bytes, six entry URLs respond and 15/15 actual public desktop
+and Android-emulated cases pass. These include source/native finish and light
+parity, natural exterior entry/stairs/full bar aisle/reverse exit, and loaded
+human camera visibility on all three layouts. The final 106-input freeze and
+accepted 138-file baseline remain preserved; the primary index is untouched.
+Final receipt: output/berghain-barfinish-release.json. Full reconstruction
+stays ACTIVE. Physical Android/GPU qualification and listening remain NOT RUN;
+the light pools and procedural wear still need photographic refinement.
+
+Previous goal turn: **PROGRESS**. Roof/lower-relief release
 8ce9014b0391e37a0df2094e2e91f026dfb583e6 is deployed at
 https://germanysimulator.de/geheim/. Pages40071899249 succeeded; 71 public
 files match Git bytes, six entry URLs respond and 12/12 actual public desktop
@@ -26,7 +38,74 @@ respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: aged bar plaster and warm pilaster wash
+## Current increment: Säule concrete installations and belt housings
+
+Locally accepted candidate; public deployment pending:109-file freeze SHA256
+ec7b9b1ec0fac956aec49b0b917a3db625f47096008d044a558205f23fd070f3,
+output/berghain-saule-candidate.json. Current Node113/113 and terminal
+output/berghain-saule-camera-final-browser22/22 PASS. Both independent
+Physics and Camera reports explicitly pass this same freeze after inspecting
+the repaired complete-human frames. Isolated baseline repeat and current cost
+each pass9/9 after a retained baseline first-navigation failure. VALIDATION.md
+records the landscape p95 median increase14.1→20.7ms and all ranges,7,081 added
+normal-load bytes, unchanged26 maps/zero idle work and uncertified first startup.
+The isolated acceptance gate passes113 Node,22 browser, both reviews and cost
+hash bindings. Complete diff review precedes publication; the public page still
+serves accepted e3ad14b.
+Preserve all failed and pre-camera evidence.
+
+Continue from the verified e3ad14b release. A15's eight actual project images
+(hero, three gallery views and four outtakes) and I24's three installer images
+show massive rectangular concrete piers, flared upper transitions, projecting
+corbels, padded concrete seats and continuous dark metal lighting belts. The
+current 0.62m-wide columns with short red strips omit these defining forms.
+Photo geometry supports the forms, not a recovered plan or precise dimensions.
+
+Author an original post-calibration assembly through the existing fixture API.
+Retain the current six central grid anchors as provisional placement; make
+1.6×2.1m piers, flared caps meeting the retained floor underside, four attached
+seats and two outward corbels. These are authoring estimates. Replace the six
+central red strips with four-sided metal belt channels and recessed upper/lower
+lenses. Preserve the three outer strips pending stronger perimeter evidence.
+The belt's full photographic wash, unique cast-concrete damage, exact grid,
+separate entry and complete bar/services still require later reconstruction.
+This increment establishes physical structure and light-fixture geometry; it
+does not claim calibrated or complete lighting.
+
+Writable runtime scope: new assets/models/berghain/saule.mjs; layout.mjs,
+interior-fixtures.mjs, model.mjs and surface-materials.mjs integration; GLB and
+manifest regeneration. Reuse existing concrete/metal/leather map families and
+lounge-pad geometry. Dedicated materials isolate old instance tones. No new
+runtime, renderer, texture family, dependency, loop, lighting pass or UI.
+Tests and existing native/material/natural-route browser pilots may extend
+for the changed geometry; owning research/provenance/validation notes follow.
+Keep the primary index untouched and use the established separate publisher.
+
+- [x] Revalidate the accepted release and preserve its 106 inputs plus32
+  ancillary dependencies in output/berghain-saule-baseline before edits.
+- [x] Download and inspect all eight A15 project images; preserve actual gallery
+  order, outtake distinction, URLs and SHA256 in karhard-saule-metadata.json.
+- [x] Observe failing physical-form/contact/collision tests, then implement the
+  photo-derived piers, caps, corbels, seats and actual wraparound belt housings.
+- [x] Inspect source/native geometry/material views and actual human routes on
+  desktop and Android portrait/landscape emulation; compare cost with baseline.
+- [x] Freeze one integrated candidate and obtain both mandatory independent
+  Physics and Camera/scale reviews; repair findings and rerun affected checks.
+- [ ] Publish accepted work and verify public bytes and interaction. Keep the
+  full goal ACTIVE and explicitly retain all unverified architectural gaps.
+
+Independent Camera review found a real crop in near-pier turn2 on all layouts
+despite16/16 automated scalar checks. Keep the pre-camera freeze and those
+reports as failed acceptance evidence. Extend writable scope to camera.mjs,
+walkthrough.mjs and viewer.mjs solely to keep the complete human framed beside
+the new opaque installations. Add independent actual-avatar frustum RED checks,
+retain nine-ray collision safety, preserve the ordinary60-degree lens, and
+verify real rendered frames and bounded camera settling. Do not accept the
+geometry while this visual failure remains. Separately, the first landscape
+pilot read stale exterior coordinates after room selection; its trace proves
+the cause and the selected-position publication wait repairs that test race.
+
+## Previous increment (published): aged bar plaster and warm pilaster wash
 
 I23 views12/13/16 show mottled, worn cream plaster and localized warm upward
 wash at the pilasters. The current clean pale material and uniform lighting
@@ -70,9 +149,19 @@ frozen integrated candidate; silent headless GPU batches remain sequential.
   Node109/109 and monolithic current-hash browser22/22 PASS. Both scoped world
   reviews pass after supporting all six lights. Cost covers nine cold contexts
   per side at the actual bar aisle; VALIDATION.md records metrics and limits.
-- [ ] Publish and verify public bytes and actual natural entry/exit. Full
+- [x] Publish and verify public bytes and actual natural entry/exit. Full
   reconstruction remains ACTIVE; lighting falloff and unique site wear remain
   more regular than the photographs and need further fidelity work.
+
+Research gathered during the bar-finish deployment is now incorporated as
+I24 and L01–08 in SOURCES.md, bringing the local catalogue to128 records.
+Primary manuals, manufacturer CAD inventories and inspected Säule installer
+photos remain under references/downloads/; no third-party media ships as
+assets. The manufacturer reports eight IVL
+Dice and four IVL Photon across Berghain/Panorama; room split and placement are
+unverified. Säule photographs show column-belt lights and bar/partition details
+that warrant comparison with the current assembly. Keep the current owning
+plan here; incorporate the evidence and rights limits before the next change.
 
 Rendered diagnosis found a pre-existing surface-normal projection error under
 nonuniform scale: 2,990/3,960 relief vertices select different UV planes from

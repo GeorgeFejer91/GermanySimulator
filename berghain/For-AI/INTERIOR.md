@@ -205,6 +205,41 @@ STEP/DXF headers inspected. The single-page PDF was text-extracted, rendered and
 visually inspected because its dimension labels extract as corrupted glyphs.
 No new CAD software installed; no redistribution licence established.
 
+## Säule concrete installations — A15/I24, checked24 October2026
+
+Eight actual A15 project images were downloaded and inspected: hero00 and
+gallery01–03 show massive rectangular concrete forms, flared capitals, short
+projecting corbels, dark continuous pier belts and concrete seats with black
+pads. Outtakes04/05 show construction floor cuts/markings,06 glass stacks and
+07 steel mesh-frame fabrication in a workshop. They are not a current plan.
+The shared header slideshow's1/12 counter is unrelated to these eight images.
+URL/bytes/SHA256 inventory: references/downloads/karhard-saule-metadata.json.
+
+I24 independently identifies a custom luminaire development/installation.
+Its three inspected photographs show concealed wash above and below the
+horizontal dark belts, rough concrete/sloping capitals, padded plinth seats,
+exposed services and a warm ribbed bar behind steel upper partitions. Its
+image-upload paths do not date the capture or prove present-day operation.
+The explicit photo rights stay with the photographer/architect/installer;
+research downloads are not shipped textures.
+
+The current local assembly uses six inherited central grid anchors, metric
+1.6×2.1m bodies, caps below the retained6.25m upper-floor underside, four
+attached seats and two outward corbels. Counts, dimensions, grid spacing and
+room heights remain estimates; the photographed aisle cannot establish the
+current model's wide span. Channels have actual back plates, webs, fascias and
+upper/lower lenses. Reused generic concrete wear and lens emissive appearance
+do not reproduce the photographic pitting, complete wash or lighting programme.
+The bar, surrounding partitions, overhead openings/services, separate entrance,
+outer column row and surveyed topology remain required work.
+
+L01–08 now catalogue primary manufacturer IVL inventory, manuals and actual
+CAD archives. L01 reports8Dice+4Photon across Berghain/Panorama, without room
+split or coordinates. Two rendered manual drawings contain small dimension
+differences from product text; retain revisions, rather than averaging them.
+Archive inventories/CRC/hash checks do not decode or license their DWG meshes.
+These files remain research-only and do not supply the custom Säule belt design.
+
 ## Architectural fixtures and missing spaces
 
 | Area | Required distinguishing content | Sources / current state |

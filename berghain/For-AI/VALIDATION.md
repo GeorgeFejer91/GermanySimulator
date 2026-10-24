@@ -1,5 +1,110 @@
 # Berghain viewer validation
 
+## Säule concrete installations and human framing — current candidate
+
+A15's eight project images and I24's three installer photographs were inspected
+and catalogued with URL/bytes/SHA256. The original assembly adds six massive
+metric piers/caps, two corbels, four padded concrete seats and complete belt
+channel geometry. Dimensions, counts, inherited wide grid and6.25m floor
+underside are estimates. The full wash, concrete pitting/joints, complete bar,
+separate entry and contemporary room plan remain unfinished. Manufacturer
+L01–08 references do not identify these custom belt luminaires.
+
+Preserved baseline: output/berghain-saule-baseline/manifest.json, accepted
+e3ad14bc7fbdd884f6c7248e7395a424812db6a8,106 inputs plus32 ancillary files.
+Isolation confirms10,404 retained parts' actual shape buffers, matrices, tones
+and materials, and all3,509 old solids unchanged. Six old red strips are
+removed;142 new parts have142 paired solids. The three remaining outer red
+strips preserve their prior instance tones. No texture family or light added.
+
+Current GLB:49,506,456bytes,658,224triangles,162groups,25embedded maps totaling
+5,501,462bytes, same world bounds. SHA256
+8bf8dbbda534c80aa78b0265892024ee11ffd335fd66d3c1602c71f11fe3845a.
+Delta:+202,156bytes/+1,848triangles/+6groups. Runtime maps remain26.
+
+Retained diagnostics and repairs:
+
+- output/berghain-saule-red.log: three intended missing-assembly failures.
+  The initial physical geometry/route checks then passed3/3.
+- output/berghain-saule-tone-red.log: removing central red strips changed the
+  three retained strips' batch-derived color. Explicit prior tones repair the
+  regression; isolation then passes all10,404 retained parts.
+- First source/native renders passed but looked brown. Cool concrete tint
+  corrects the reused warm aged map; the neutral render passes meanRGB0.40864
+  with zero large-difference pixels. Generic wear is still not site-specific.
+- First whole browser matrix output/berghain-saule-final-browser completed
+  15/16. Landscape camera pilot read stale exterior start(0,0,29) after room
+  selection. The trace proves it; waiting for the selected position's actual
+  rendered publication repairs the pilot without changing timeouts/tolerances.
+- Repaired pilot matrix output/berghain-saule-accepted-browser passed16/16 on
+  109 current inputs, but independent Camera review inspected turn2 and found
+  real head/feet cropping on all profiles. Scalar avatar-visible/distance
+  checks were insufficient. This is failed visual acceptance, despite its
+  automated PASS. The pre-camera freeze and frames remain preserved.
+- output/berghain-saule-camera-red.log independently projects the actual human
+  corners and reproduces the crop. The camera repair keeps a visitor-side
+  bounded orbit near the actual opaque pier bodies, retains all nine original
+  clearance rays, fits the animated human with a60–100degree lens and gradual
+  return to60, and exposes projected bounds through existing diagnostics.
+  Focused CPU checks include every interpolating frame at16yaws,3aspects and
+  two positions (including almost touching the pier), bounded angular change
+  and clear-view lens restoration. Rendered review and the final matrix were
+  still required; acceptance was not inferred from these diagnostics alone.
+
+Final109-input freeze: output/berghain-saule-candidate.json, SHA256
+ec7b9b1ec0fac956aec49b0b917a3db625f47096008d044a558205f23fd070f3.
+Current Node113/113 PASS includes four route-packaging checks. The terminal
+output/berghain-saule-camera-final-browser/report.json passes22/22 on all109
+current hashes: source/native structures(3), natural Säule/Lab/reverse exit(3),
+near-pier whole-human turns(3), Lab natural route(3), main-bar loaded camera(3),
+fallback(3), restored desktop(1) and main-bar natural route(3). Source/native
+meanRGB0.40864, zero large-difference pixels,26 source textures disposed once.
+All three near-pier turn2 frames now contain the complete avatar, with projected
+vertical bounds approximately−0.417..+0.372 and4.2m camera distance at all eight
+final sampled yaws. These bounded views do not prove every possible camera start.
+
+Both independent scoped world reports explicitly PASS this freeze. Physics
+checks142 parts/4,200 actual transformed vertices inside their linked solids,
+48/48 upper/lower belt aperture rays,75/75 newly invalid shallow starts recovered
+legally, grounded supports and fitted joins. Five straight lower-floor lanes
+traverse; x6 is close with0.027m margin beyond the0.28m visitor radius, while
+x2–5 retain at least0.889m. Existing concrete cores inside new piers and one
+stage/platform join are the only retained/new solid intersections. Camera
+review distinguishes fresh source/hash checks from supplied actual frames,
+and retains the earlier real crop as failed acceptance. Physical Android/device
+GPU and perceptual listening remain NOT RUN.
+
+Comparable cost covers three cold contexts per viewport per side, nine final
+before and nine after, on local Chromium151.0.7922.34/Intel Iris Xe D3D11, no
+throttling. Baseline106 and current109 source hashes bind to their respective
+reports. The room shortcut plus real-input approach reaches the same lower-floor
+target within0.23m, followed by3s forward; inspected start frames show the human
+and changed installations. This is separate from natural-entry evidence.
+Normal load adds7,081 encoded bytes(7,380,742→7,387,823),68→69 requests; runtime
+maps stay26, no startup GLB, zero idle frames, buffers<=1.6MP. Desktop draw calls
+261→272, portrait251→262, landscape278→290; triangle medians rise by2,616/3,660/
+3,696 respectively. This modest cost buys the missing physical structures.
+
+Active RAF-interval p50 medians remain13.9/13.8/13.9ms desktop/portrait/landscape.
+p95 medians before/after are20.7/20.8,14.0/14.1 and14.1/20.7ms. Landscape's
+6.6ms tail increase is retained: ranges14.0–20.8 before and14.1–20.8 after.
+These samples do not establish unchanged performance or displayed-frame/GPU time.
+Input-response medians are21.6/18.6,27.2/28.5,24.4/25.3ms; ready medians1904/1886,
+1728/1810,1878/1783ms. Desktop ready ranges1822–7557/1803–12161ms. Observed
+JS heap medians47.0→37.6,87.7→70.4,88.8→73.9MB are noisy retained-page samples,
+not total process/GPU memory or evidence of a memory optimization. Distributions:
+output/berghain-saule-cost-summary.json. Physical-device30fps target NOT RUN.
+
+The initial quick command used the runner's
+desktop-only default: three PASS contexts are preserved separately in
+output/berghain-saule-cost-before-desktop-pilot. Its first ready time was27.136s.
+The explicit three-profile baseline then completed8/9: first desktop navigation
+exceeded the existing30s limit. Failure frame/trace and zero page errors are
+retained in output/berghain-saule-cost-before-first-matrix. No timeout was widened.
+The unchanged baseline repeat and separate current batch each pass9/9.
+These samples do not qualify first-ever startup or explain away that timeout.
+The full reconstruction goal remains ACTIVE.
+
 ## Aged bar plaster and portable practical lighting — 2026-10-24
 
 I23 views12/13/16 show mottled cream plaster and localized warm upward wash

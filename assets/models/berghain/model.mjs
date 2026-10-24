@@ -11,6 +11,7 @@ import {createKloGeometries} from './klo-bar.mjs';
 import {createTogetherGeometries} from './together-geometry.mjs';
 import {createLabGeometries} from './lab-oratory.mjs';
 import {createMainBarGeometries,createMainBarLights} from './main-bar.mjs';
+import {createSauleGeometries} from './saule.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -18,11 +19,11 @@ export function createBerghainModel() {
   model.userData = {units: 'metres', status: layout.calibration.status, catalogue: 'berghain/For-AI/SOURCES.md',
     externalSource: 'Berlin LoD2 DEBE02YY200004SX; dl-de-zero-2.0',fixtures:layout.fixtures,soundSystem:layout.soundSystem,
     landscape:layout.landscape,exteriorDetails:layout.exteriorDetails,artworks:layout.artworks,upperLounge:layout.upperLounge,
-    panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar};
+    panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar,saule:layout.saule};
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
-    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries()};
+    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries()};
   const batches = new Map(), toneBatches=new Map(), shades=new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');
@@ -32,14 +33,14 @@ export function createBerghainModel() {
     if(!toneBatches.has(toneKey))toneBatches.set(toneKey,[]);
     toneBatches.get(toneKey).push(part);
   }
-  for(const parts of toneBatches.values())parts.forEach((part,index)=>shades.set(part,.84+((index*193+parts.length*37)%101)/625));
+  for(const parts of toneBatches.values())parts.forEach((part,index)=>shades.set(part,part.instanceTone??(.84+((index*193+parts.length*37)%101)/625)));
   for (const [key, parts] of batches) {
     const [section, materialName, shape] = key.split('/');
     let group = model.getObjectByName(section);
     if (!group) { group = new THREE.Group(); group.name = section; model.add(group); }
     const Material=materials[materialName].transmission?THREE.MeshPhysicalMaterial:THREE.MeshStandardMaterial;
     const material = new Material({...materials[materialName]});
-    if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')) configureSurfaceMaterial(material, materialName);
+    if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')) configureSurfaceMaterial(material, materialName);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
     mesh.castShadow = !material.transparent && !material.transmission && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);

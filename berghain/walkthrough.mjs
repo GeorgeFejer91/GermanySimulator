@@ -3,6 +3,7 @@ import {createVisitorAvatar} from '../assets/models/berghain/avatar.mjs';
 import {layout} from '../assets/models/berghain/layout.mjs';
 import {moveVisitor, canStand} from './navigation.mjs';
 import {createLevelDoor} from '../level-transitions.js';
+import {pierOrbitConstraint,frameVisitorCamera} from './camera.mjs';
 
 export function createWalkthrough() {
   const avatar = createVisitorAvatar();
@@ -12,7 +13,7 @@ export function createWalkthrough() {
   const space = {floors: layout.floors, solids: []};
   const direction = new THREE.Vector3(), target = new THREE.Vector3(), origin = new THREE.Vector3(), lateral = new THREE.Vector3(), ray = new THREE.Raycaster();
   const lowLandscape=layout.solids.filter(solid=>solid.renderPart?.section==='landscape'&&solid.y[1]>.5&&solid.y[1]<2.1);
-  let travel = null, opened = false, heading = 0, screenYaw = null, cameraTurning = false;
+  let travel = null, opened = false, heading = 0, screenYaw = null, pierYaw=null, cameraTurning = false, cameraFrame=null;
   function syncDoor(open) {
     opened = open; door.setOpen(Number(open)); door.group.updateMatrixWorld(true);
     const solids = [];
@@ -63,7 +64,6 @@ export function createWalkthrough() {
     },
     camera(camera, position, yaw, pitch, model, dt = 1 / 60) {
       target.set(position.x, position.y + .95, position.z);
-      if (camera.fov !== 60) { camera.fov = 60; camera.updateProjectionMatrix(); }
       const nearest=lowLandscape.reduce((distance,solid)=>position.y>=solid.y[1]?distance:Math.min(distance,Math.hypot(
         Math.max(solid.x[0]-position.x,0,position.x-solid.x[1]),
         Math.max(solid.z[0]-position.z,0,position.z-solid.z[1]))),Infinity);
@@ -98,6 +98,15 @@ export function createWalkthrough() {
         cameraTurning=Math.abs(center+wanted-orbitYaw)>.002;
         screenYaw=orbitYaw;
       }else screenYaw=null;
+      const pier=pierOrbitConstraint(position,Math.min(horizontal,2.3));
+      if(pier){
+        const relative=angle=>Math.atan2(Math.sin(angle-pier.center),Math.cos(angle-pier.center));
+        const wanted=THREE.MathUtils.clamp(relative(orbitYaw),-pier.limit,pier.limit);
+        const previous=relative(pierYaw??(pier.center+wanted));
+        orbitYaw=pier.center+previous+THREE.MathUtils.clamp(wanted-previous,-3*Math.min(dt,.05),3*Math.min(dt,.05));
+        cameraTurning ||= Math.abs(pier.center+wanted-orbitYaw)>.002;
+        pierYaw=orbitYaw;
+      }else pierYaw=null;
       model.updateMatrixWorld(true); door.group.updateMatrixWorld(true);
       // Give the camera a small envelope. A centre ray alone can pass through
       // the seam between closed leaves while most of the view is behind a door.
@@ -115,9 +124,12 @@ export function createWalkthrough() {
       }
       const distance=clearance(elevation);
       camera.position.copy(target).addScaledVector(direction, distance); camera.lookAt(target);
+      const framing=frameVisitorCamera(camera,avatar.group,dt);
+      cameraFrame=framing.frame;cameraTurning ||= framing.settling;
       avatar.group.visible = distance > .65;
       return distance;
     },
+    get cameraFrame(){return cameraFrame;},
     dispose() { avatar.dispose(); door.dispose(); }
   };
 }

@@ -9,6 +9,39 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Säule concrete installations
+
+A15's hero and three main gallery photographs show large concrete piers,
+flared upper forms, local corbels, continuous dark metal belts and padded
+concrete seating. Four further outtakes document construction, glass and steel
+frame fabrication. I24's installer photographs corroborate the belts and their
+upper/lower wash, plus bar/partition details not yet reconstructed here.
+
+Original geometry in saule.mjs adds six1.6×2.1m lower pier bodies, flared caps
+meeting the existing6.25m floor underside, two projecting corbels, four padded
+concrete seats and four-sided channel housings with recessed upper/lower
+lenses. Their grid anchors, dimensions and counts are authoring estimates;
+the preserved room heights and wide grid are not surveyed or established by
+these photographs. Existing upper structure remains unchanged. Six short red
+placeholder strips are removed; three outer-row strips remain unresolved.
+
+Concrete, metal and upholstery reuse this project's original maps and pad
+geometry; there are no new texture pixels or copied photo content. The
+concrete's cool base tint compensates the warm aged map. This is generic wear,
+not reproduction of the photographed site-specific pits, joints and stains.
+The belt channels have actual webs, back plates, fascias and mounted lenses,
+but their full cast wash and changing programme remain unimplemented.
+No new light, shadow map, renderer or runtime is added. The exact footprint,
+separate entry, full bar/services, photometry and contemporary condition remain
+open reconstruction work. Manufacturer CAD research L01–08 is unplaced and
+unshipped; it does not identify these custom Säule luminaires.
+
+The live walkthrough's camera uses a bounded visitor-side orbit near these
+opaque bodies and fits the actual animated human bounds when clearance
+contracts. The ordinary lens is60degrees, widened only as needed up to100,
+with gradual restoration. Nine original opaque-clearance rays remain active;
+physical geometry is not faded or disabled to expose the avatar.
+
 ## Bar plaster and practical wall wash
 
 I23 views12/13/16 show mottled cream plaster and localized warm upward wash

@@ -4,6 +4,7 @@ import {addPanoramaServiceFixtures} from './panorama-services.mjs';
 import {addKloFixtures} from './klo-bar.mjs';
 import {addLabFixtures} from './lab-oratory.mjs';
 import {addMainBarFixtures} from './main-bar.mjs';
+import {addSauleFixtures} from './saule.mjs';
 
 export function createAcousticGrilleGeometry() {
   const plate=new THREE.Shape();
@@ -177,4 +178,5 @@ export function addInteriorFixtures(layout) {
   addKloFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision});
   addLabFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision});
   addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision});
+  addSauleFixtures(layout,{fixture,box,part});
 }
