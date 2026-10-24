@@ -39,6 +39,23 @@ in 2023 while withholding its exact configuration. S02 identifies **Studt-Akusti
 for Panorama Bar's PA renewal. Keep PA stacks, subwoofers and DJ monitors as
 separate objects and avoid conflating the two rooms.
 
+## Original foyer and stair guards
+
+I08/I09/I15 show closely spaced vertical steel infill. Six runs now replace
+the earlier horizontal-only original main/Panorama stair and foyer-gallery
+guards. These are original box/beam meshes using the existing steel material:
+1.08m handrails,45mm posts,22mm infill and maximum actual center pitch0.1283m.
+Dimensions, spacing, locations and photographic currentness remain inferred;
+the old foyer mural visible in I08 is not installed as contemporary artwork.
+
+The actual metre-scale uprights are authored after exterior calibration, so
+the upper Panorama rail is not shortened by roof fitting. Each of618 upright
+parts has its own matching solid; dense infill stops the full0.28m-radius
+visitor without a large sloped bounding box blocking the undercroft. Open
+stair ends remain clear. The standard GLB contains the same six run metadata
+and visible openings between bars. No source photograph or artwork pixels
+are embedded. Detailed rail finishes and exact surveyed joins remain open.
+
 ## Artwork reconstruction inventory
 
 CLIMBER has an initial pose/material study and Together has a partial generic anatomical relief; the other artwork rows are **unmodelled**. Position confidence refers to a room or area, not

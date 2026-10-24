@@ -8,14 +8,14 @@ import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs'
 import {compareMaterialRender} from './material-playtest.mjs';
 
 const position=async page=>JSON.parse(await page.locator('#model').getAttribute('data-position'));
-async function cross({page,profile}){
+export async function cross({page,profile}){
   await page.locator('#interact').waitFor({state:'visible'});
   if(profile.hasTouch)await page.locator('#interact').tap();
   else{await page.locator('#model').focus();await page.keyboard.press('e');}
   await page.waitForFunction(()=>document.querySelector('#model').dataset.crossing==='true');
   await page.waitForFunction(()=>document.querySelector('#model').dataset.crossing==='false',null,{timeout:20000});
 }
-async function enterNaturally(ctx){
+export async function enterNaturally(ctx){
   const {page,baseURL,profile,context}=ctx;
   await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
   let touch;

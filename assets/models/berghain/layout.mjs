@@ -8,6 +8,7 @@ import {addUpperLounge,addLoungeFurniture,loungeMaterials} from './upper-lounge.
 import {addPanoramaCeiling} from './panorama-services.mjs';
 import {addKloRooms,kloMaterials} from './klo-bar.mjs';
 import {addLabRooms,labMaterials} from './lab-oratory.mjs';
+import {addOriginalBalustrades} from './original-balustrades.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -277,6 +278,7 @@ addPanoramaCeiling(layout,{box});
 addKloRooms(layout,{box});
 addLabRooms(layout,{box,floor,beam,railing,stair});
 calibrateStudy(layout, viewpoints);
+addOriginalBalustrades(layout);
 addInteriorFixtures(layout);
 addLoungeFurniture(layout);
 addSoundSystem(layout);

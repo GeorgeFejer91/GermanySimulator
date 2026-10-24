@@ -66,8 +66,17 @@ export function createWalkthrough() {
       const nearest=lowLandscape.reduce((distance,solid)=>position.y>=solid.y[1]?distance:Math.min(distance,Math.hypot(
         Math.max(solid.x[0]-position.x,0,position.x-solid.x[1]),
         Math.max(solid.z[0]-position.z,0,position.z-solid.z[1]))),Infinity);
-      const proximity=THREE.MathUtils.smoothstep(2-nearest,0,1.5);
-      const elevation = THREE.MathUtils.lerp(THREE.MathUtils.clamp(.32-pitch,-.15,1.1),1.35,proximity), radius = 4.2;
+      // As with low planting, lift smoothly before a close guard enters the
+      // camera envelope. A yaw-dependent retry pops through the picket gaps.
+      const nearestGuard=layout.balustrades.reduce((distance,guard)=>{
+        const [a,b]=[guard.start,guard.end],dx=b[0]-a[0],dz=b[2]-a[2];
+        const t=THREE.MathUtils.clamp(((position.x-a[0])*dx+(position.z-a[2])*dz)/(dx*dx+dz*dz),0,1);
+        const top=a[1]+(b[1]-a[1])*t+guard.handrailHeight-position.y;
+        return top<.5||top>1.3?distance:Math.min(distance,Math.hypot(position.x-a[0]-dx*t,position.z-a[2]-dz*t)-.0225);
+      },Infinity);
+      const baseElevation=THREE.MathUtils.clamp(.32-pitch,-.15,1.1);
+      const elevation = Math.max(THREE.MathUtils.lerp(baseElevation,1.35,THREE.MathUtils.smoothstep(2-nearest,0,1.5)),
+        THREE.MathUtils.lerp(baseElevation,1.1,THREE.MathUtils.smoothstep(1-nearestGuard,0,.65))), radius = 4.2;
       model.updateMatrixWorld(true); door.group.updateMatrixWorld(true);
       // Give the camera a small envelope. A centre ray alone can pass through
       // the seam between closed leaves while most of the view is behind a door.

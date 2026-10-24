@@ -10,6 +10,46 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Current increment: six original foyer/gallery and main/Panorama stair
+balustrade runs now have vertical steel infill, supported by I08/I09/I15.
+Handrails are1.08m above the local stair/floor after exterior calibration;
+post/picket sections, pitch, placement and current installation are estimates.
+The618 upright parts have matching box solids. Both original stairs, their
+open lower approaches and sampled legal undercroft routes remain usable.
+Halle, upper-lounge and Lab guards retain their existing geometry.
+
+Near a low guard the follow camera lifts smoothly, using six nearest run
+segments and their interpolated local height. The nine opaque-mesh sightline
+rays remain active. The lift also affects an away-facing view while close to
+a guard; moving farther than1m away restores the ordinary elevation. A guard
+above a ground-floor visitor does not trigger it. A reproduced fallback touch
+navigation bug is fixed by letting the noninteractive status pass pointer
+events to the existing canvas. Text geometry and Pretext0.0.9 are unchanged.
+
+Candidate output/berghain-balustrade-candidate.json freezes101 files. Both
+independent Physics and Camera/scale reviews accept this partial increment.
+Browser coverage is16 passing cases from the preserved17-case run plus a
+current-hash rerun of the corrected restore test; it is not a fresh monolithic
+17/17 batch. All100 other inputs are unchanged across that test-only bridge.
+Publication is being verified; the owning receipt records its actual state.
+Full reconstruction stays ACTIVE.
+The earlier hidden-avatar and mobile about:blank failures are retained locally.
+The public playtest now uses only repository inputs and includes natural
+guard contact, loaded/fallback yaw sweeps, distant return and graphics restore.
+
+Portable GLB:46,673,124B /614,496tri /143 groups /25 embedded maps;
+SHA2567d52346664f97ee93bba670e9f32ee8ccff04f55c082c61f6f33bc4bf0fbdebc.
+Delta from accepted Lab:+669,972B and6,540tri; no new texture/material family.
+There are still83 fixture assemblies,44 PA components and2 partial artworks.
+The catalogue contains118 unique records. Exact current release/deployment
+evidence belongs in output/berghain-balustrade-release.json.
+
+Andrea v2/v3 diagnostics remain unaccepted and outside shipped assets. The
+custom loft is pipe-like; the heavier CC0 anatomical target improves mass but
+does not reproduce the shoulder cut, exact arm/grip or cast detail. Evidence:
+output/berghain-andrea-additional-study-evidence.json. Keep Andrea on the full
+artwork backlog; neither successful render establishes artwork fidelity.
+
 Previous goal turn: **PROGRESS**. Lab release
 ad12fc4f15f8b14e41c55977b56c2df6b6100fd4 is deployed at
 https://germanysimulator.de/geheim/. Pages40046556651 succeeded; all68 published
@@ -66,7 +106,7 @@ artworks and PA remain present. The shared image loader now uses the existing
 two-job asset queue, pauses optional starts while hidden and skips retired work.
 VALIDATION.md records measured before/after costs and the remaining limitations.
 
-Portable GLB:46,003,152B /607,956 triangles /143 groups /25 embedded maps;
+Lab baseline portable GLB:46,003,152B /607,956 triangles /143 groups /25 embedded maps;
 SHA2564608f39d17e04761b59f7edb45de0000de03e7a261a6873b753a1e576e727137.
 There are83 fixture assemblies,44 PA components and2 partial artwork studies.
 Three original aged maps reuse the existing material pipeline; all23 previous

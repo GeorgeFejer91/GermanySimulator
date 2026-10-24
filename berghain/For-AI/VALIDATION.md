@@ -1,5 +1,77 @@
 # Berghain viewer validation
 
+## Original balustrade increment — 2026-10-24
+
+The101-file candidate adds six photo-informed original stair/gallery guards
+from I08/I09/I15. Handrail1.08m,45mm posts,22mm pickets and spacing are estimates.
+The source and native GLB contain actual separate bars/open gaps, not a flat
+opaque panel. GLB46,673,124B /614,496tri /143groups /25 embedded maps;
+SHA2567d52346664f97ee93bba670e9f32ee8ccff04f55c082c61f6f33bc4bf0fbdebc.
+Delta from Lab:+669,972B and6,540tri, with the same26 shared runtime maps.
+
+Fresh full Node96/96 PASS and packaging4/4 PASS. Detailed Physics probes find
+618 paired visible uprights/solids, effective full-body separation along all
+six guards, legal bidirectional stair lanes and unchanged sampled undercroft
+access. Reachable rail-end recovery passes. Eleven invalid starts deep in
+far retained-barrier joints remain unrecovered; they cannot arise by legal
+walking/spawn. These probes do not establish surveyed installation accuracy.
+
+The original near-rail camera failure is preserved in
+output/berghain-balustrade-near-camera-first/report.json:0/3 PASS. The camera
+now lifts smoothly near low guards, using six run segments and interpolated
+local height; nine opaque sightline rays remain enforced. CPU tests cover
+four close legal positions, yaw continuity, full-body framing at three aspects,
+a distant negative and the same XZ below an overhead gallery. Away-facing
+views are intentionally elevated while near the rail; distant views recover.
+
+The first combined browser run was15/17 PASS, with two real fallback-touch
+failures. A fresh witness proves the fallback status caught a touch drag with
+touch-action:auto and the browser navigated to about:blank. CSS pointer-events:
+none passes this noninteractive status through to the existing canvas; the
+same witness then targets #model/touch-action:none, stays on the page and
+passes natural entry/contact/yaw. Failure and repair traces remain in
+output/berghain-fallback-touch-red and ...green. No timeout or product guard
+was relaxed. The public playtest no longer requires ignored output files.
+
+The next17-case run passed16 cases; only graphics restoration failed a bitwise
+position assertion by1.03e-8m. That test sampled while input was still held.
+The corrected restore branch samples after the real release reaches the render
+loop and requires preservation within1micrometre. Its focused rerun passes;
+held/released/restored positions are exactly equal in the final artifact.
+The original16/17 report is retained. output/berghain-balustrade-browser-coverage.json
+explicitly bridges its16 passing cases with this one current-hash rerun; it
+does not claim a fresh monolithic17/17 batch. Only that test file changed;
+all100 other captured hashes match the final101 freeze. Both independent
+Physics P1/P2/P4/P5/X1 and Camera C1–C5/X1 reviewers accept this scoped evidence.
+Their fresh evidence is CPU/source/hash; browser evidence is supplied by the
+integrator. The owning release receipt records exact Git/public bytes and
+actual canonical route checks after deployment.
+
+Cost evidence retains nine cold-context samples/side (three per viewport),
+plus a12-case back-to-back old/new check prompted by slower tail frames.
+The actual98-file accepted baseline is preserved with hashes. All starts use
+the same foyer-facing camera and real backward aisle input. Runtime encoded
+transfer7354948→7358688B (+3740B),66→67 requests;26 textures, zero GLB startup
+requests, zero idle frames and the1.6MP drawing-buffer cap remain unchanged.
+The optional GLB adds669972B; measured rendered triangles add12744 desktop/
+portrait or18948 landscape, while draw calls decrease by1/2 respectively.
+
+Nine-sample before→final median frame p95: desktop14.1→20.5ms, portrait13.9→14.0ms,
+landscape14.0→20.8ms. Back-to-back three samples/side reproduce landscape
+14.0→20.8ms; desktop is14.1→14.1ms. In that paired check landscape median
+frame p50 stays13.8ms and input latency19.1→18.9ms; desktop p50 varies7.2→13.7ms
+and input12.6→13.4ms. Do not claim no render cost or a speed improvement.
+The thinner bars increase geometry, and wide-view tail timing is worse in
+some runs. Raw ranges, readiness/heap variation and GPU/browser identity are
+retained in output/berghain-balustrade-cost-summary.json and
+...paired-cost-summary.json. This is local Intel Iris Xe/Chromium evidence,
+not physical Android or low-end GPU qualification. No extra texture, shader,
+dependency or render pass was introduced.
+All automated browser work is silent/headless. Android is Chromium emulation;
+physical Android/device GPU and perceptual listening remain NOT RUN. Full
+building, artwork likeness, hidden rooms, finishes and current layout remain
+required backlog; this increment does not complete the full reconstruction.
+
 ## Andrea reference views and rejected local feasibility study — 2026-10-24
 
 ART23's remaining three gallery images were inspected: two painting views and

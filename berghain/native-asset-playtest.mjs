@@ -48,7 +48,7 @@ export async function renderNativeAsset(page,view){
     }
     return {bytes:bytes.byteLength,meshes,geometryProbes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
       panoramaServices:metadata.panoramaServices||null,
-      kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,
+      kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,balustrades:metadata.balustrades||null,
       physicalMaterials,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
   },view);
