@@ -1,0 +1,119 @@
+{
+  "actor": "crowd-brigitte-bueroklammer",
+  "reviewer": "Own author; actual eight registered512px source paintings individually plus light/dark boards",
+  "status": "SOURCE POSES SUPPORT SMALL MOTION PILOT ONLY",
+  "rawSha256": "dfef207b68b974ebd10c75d06ea3fc542b7ef32959108e809736e3a3b6450f42",
+  "oneScale": 0.8247422680412371,
+  "baseline": 472,
+  "views": {
+    "down": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/down.png",
+      "sha256": "427e334dc364bc84e280f6c2864c58eeec75aa0cb16f00a8c73103a79f69ca6d",
+      "actualViewed": true,
+      "bounds": [
+        153,
+        72,
+        361,
+        472
+      ],
+      "mouth": "own closed lips visible; exact fit pending"
+    },
+    "front-right": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/front-right.png",
+      "sha256": "81e141ad6dde7b1e8d7f1cfe8851a86f871f25eea703b6bea90c6304a4180c7f",
+      "actualViewed": true,
+      "bounds": [
+        153,
+        70,
+        347,
+        472
+      ],
+      "mouth": "own closed lips visible; exact fit pending"
+    },
+    "right": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/right.png",
+      "sha256": "67ffbac3689ada4f58e9bcce71681cc4dd6ae9ec761a73520e11746aa10c7fdc",
+      "actualViewed": true,
+      "bounds": [
+        174,
+        69,
+        329,
+        472
+      ],
+      "mouth": "own closed lips visible; exact fit pending"
+    },
+    "rear-right": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/rear-right.png",
+      "sha256": "608aabfe729be35a69626c8f00c3027936530d38d70ae17d5f697c59eeb861b3",
+      "actualViewed": true,
+      "bounds": [
+        158,
+        70,
+        346,
+        472
+      ],
+      "mouth": "deliberate null; rear hair/occlusion"
+    },
+    "up": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/up.png",
+      "sha256": "28eda11ff5de3a024cb34149cdf5bdaebcffb1669f705376a42f83b77bc5ffc5",
+      "actualViewed": true,
+      "bounds": [
+        156,
+        72,
+        357,
+        472
+      ],
+      "mouth": "deliberate null; rear hair/occlusion"
+    },
+    "rear-left": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/rear-left.png",
+      "sha256": "35b5d0af51c9c8cc6888dd4f29d195bde95629d9b116273f3e97954a2b385854",
+      "actualViewed": true,
+      "bounds": [
+        168,
+        69,
+        353,
+        472
+      ],
+      "mouth": "deliberate null; rear hair/occlusion"
+    },
+    "left": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/left.png",
+      "sha256": "0f9b6abdd8229072f1f465b40f901f1b8d73bbe7264df5728e6c9bfbd78a02a3",
+      "actualViewed": true,
+      "bounds": [
+        184,
+        68,
+        341,
+        472
+      ],
+      "mouth": "own closed lips visible; exact fit pending"
+    },
+    "front-left": {
+      "file": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/front-left.png",
+      "sha256": "a4adfac59fbe3f01c030ca601fcb742895516d973d2a4cf7e3308e36b9223b50",
+      "actualViewed": true,
+      "bounds": [
+        164,
+        70,
+        362,
+        472
+      ],
+      "mouth": "own closed lips visible; exact fit pending"
+    }
+  },
+  "observations": {
+    "identity": "Coherent black chin bob/silver streak, burgundy rectangular glasses, tired sharp middle-aged face; dusty rose waistcoat/grey rolled blouse/brown trousers/plum shoes",
+    "proportions": "Crown68..72 and common sole472 at one source scale; attached neck/torso/thigh/knee/ankle proportions stay coherent through genuine eight-view rotation without per-view fitting",
+    "rendering_style": "Angular face and broad worn cloth planes replace old glossy giant-head/short-leg volumes; cloth planes remain painterly rather than smooth toy shading",
+    "anatomy_occlusion": "LEFT green pouch stays attached in front/rear/left/quarter views, naturally hidden in strict right; RIGHT empty. Whole broad shoes and continuous trouser-to-shoe joins",
+    "alpha": "Actual light/dark registered composites show no atmospheric vignette/matte rectangle or visible contrasting fringe; raw colored alpha0 RGB was not treated as background paint",
+    "motion": "Only static8view source rotation inspected;16-extreme pilot, exact lip endpoints, own sole calibration, native/all-frame/runtime remain pending"
+  },
+  "limits": [
+    "No412expansion or native/runtime acceptance",
+    "No mouth fit or foot-planting claim from these neutral paintings",
+    "Canonical neutral crops personally viewed, equal-height board prepared for next pilot output"
+  ]
+}

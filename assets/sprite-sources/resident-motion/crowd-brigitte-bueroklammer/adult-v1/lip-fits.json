@@ -1,0 +1,18 @@
+{
+  "identity":"crowd-brigitte-bueroklammer",
+  "status":"Own manually traced five visible closed creases from registered v2; endpoint/native inspection pending. Rear three mouths absent.",
+  "sourceRegistration":"registration.json",
+  "views":{
+    "down":{"centerPx":[261,156],"axesPx":[25,0,0,4],"crease":[0.2,-0.1,-0.2,-0.05,0.25],"openLower":[0.2,0.38,0.78,0.43,0.25]},
+    "front-right":{"centerPx":[284,152.5],"axesPx":[17,-1,0,3.2],"crease":[0.15,-0.05,-0.08,0,0.1],"openLower":[0.15,0.36,0.78,0.4,0.1]},
+    "right":{"centerPx":[298.9,149.6],"axesPx":[6.4,-1.2,0,2.6],"crease":[0.1,0.02,-0.06,0.02,0.08],"openLower":[0.1,0.36,0.75,0.35,0.08]},
+    "rear-right":null,
+    "up":null,
+    "rear-left":null,
+    "left":{"centerPx":[218.8,147.15],"axesPx":[7,0.7,0,2.8],"crease":[0,-0.02,-0.04,0,0.1],"openLower":[0,0.35,0.76,0.37,0.1]},
+    "front-left":{"centerPx":[235.5,152.1],"axesPx":[18.8,1.6,0,3.4],"crease":[0.1,-0.07,-0.1,0.02,0.17],"openLower":[0.1,0.36,0.78,0.4,0.17]}
+  },
+  "width":[0.02,0.08],
+  "teeth":0,
+  "method":"The tangent spans actual painted crease between local corners -0.5 and0.5; normal points down. Source upper/lower exactly closed crease. Every opening keeps both corners fixed. All eight headings explicit; no mirrored profile or borrowed geometry. V1 RIGHT corner303.5 hit alpha150; v3 corrected302.1 alpha247. V3 LEFT near corner212.3,146.5 hit alpha0, visibly outside lip. LEFT near moves inward to215.3,146.8 using centre218.8,147.15/tangent7,.7, preserving far corner222.3,147.78 and source normal/profile. Other four fits unchanged. Fresh v4 alpha/endpoint check pending."
+}

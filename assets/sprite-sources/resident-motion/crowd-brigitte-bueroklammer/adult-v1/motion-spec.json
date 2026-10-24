@@ -1,0 +1,14 @@
+{
+  "actor": "crowd-brigitte-bueroklammer",
+  "figureWorldHeight": 2.33,
+  "strideDistance": 13.802906358505636,
+  "strideBasis": "Arithmetic mean of four actual both-foot native fits: right/left desktop/mobile; one shared cycle distance, not a per-view clock.",
+  "calibrationReportSha256": "045b8cce370d8555433b77ecfdab6c1f105c2dc32f88ced185750ab7d34f1dac",
+  "commonClockReportSha256": "68d9ffbab9979637f988c06918f8bf217ff7ab9f6797269d35a311750587a902",
+  "actualImageReviewSha256": "872c97de9c429f493c8eb124bd65686716fe281c9026d2ee009de583c574223e",
+  "framesPerWalk": 16,
+  "selectedSourceCells": 412,
+  "propHand": "Anatomical LEFT holds one flat green document pouch; RIGHT empty. Genuine eight views, no mirrored prop swap.",
+  "quietPolicy": "Original idle/look/success/failure durations and vectors retained from pre-admission-family.json; wait maps to original idle.",
+  "currentStatus": "Author source/native calibration only; final encoded family and actual world-ground/route/speech review pending."
+}

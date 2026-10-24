@@ -1,0 +1,92 @@
+{
+  "pid": 114744,
+  "initialAvailableBytes": 3090259968,
+  "finalAvailableBytes": 3048185856,
+  "peakWorkingSetBytes": 52117504,
+  "peakPagefileBytes": 43958272,
+  "elapsedSeconds": 0.21799999999348074,
+  "childrenCreated": 0,
+  "atlasDecodes": "three sequential; each image closed",
+  "cells": 3,
+  "size": [
+    192,
+    208
+  ],
+  "references": [
+    {
+      "id": "soeder",
+      "manifest": "assets/characters/bayern/manifest.json",
+      "manifestSha256": "33dcae5177efe9106ce26c8ab39c34524053404e93c5147d51ef9c63303b85b0",
+      "atlas": "assets/characters/bayern/character-atlas.png",
+      "atlasSha256": "36d2f68f9fe23539bf1f71be77880e7387ec346441b56b0d2262813d01c42e55",
+      "row": 5,
+      "col": 2,
+      "cell": [
+        192,
+        208
+      ],
+      "pivot": [
+        96.0,
+        203
+      ],
+      "boundsRGBA": [
+        49,
+        43,
+        142,
+        204
+      ],
+      "extracted": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/reference-soeder-neutral.png",
+      "sha256": "be57eab7a72377b9bc6488a7ace5e0f7eed7c2dbd885beec04929e693252e25e"
+    },
+    {
+      "id": "herr-sandale",
+      "manifest": "assets/tourists/towelMan/manifest.json",
+      "manifestSha256": "26838e9747180d3d45a67c7f3dcf5a027dd4126bfac22ade7d276dd2e4c0548b",
+      "atlas": "assets/tourists/towelMan/character-atlas.png",
+      "atlasSha256": "e63653a5ecca3b683114e440b2632586a6396af1d41dbcaffbbc58570d94e4a3",
+      "row": 6,
+      "col": 2,
+      "cell": [
+        192,
+        208
+      ],
+      "pivot": [
+        96,
+        203
+      ],
+      "boundsRGBA": [
+        40,
+        36,
+        152,
+        202
+      ],
+      "extracted": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/reference-herr-sandale-neutral.png",
+      "sha256": "923b9fe3817396dc1640e38ba2e684b1b8f5acc53cc48e93dd8a8ff159669d5a"
+    },
+    {
+      "id": "frau-sandale",
+      "manifest": "assets/tourists/towelWoman/manifest.json",
+      "manifestSha256": "ef2ccfcd4ae7e956e97a9f0837f054c1ede6f4bfe3fe7b16bc703cda659e2e8e",
+      "atlas": "assets/tourists/towelWoman/character-atlas.png",
+      "atlasSha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+      "row": 6,
+      "col": 2,
+      "cell": [
+        192,
+        208
+      ],
+      "pivot": [
+        96,
+        203
+      ],
+      "boundsRGBA": [
+        44,
+        37,
+        148,
+        202
+      ],
+      "extracted": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/reference-frau-sandale-neutral.png",
+      "sha256": "43c909929af039d3ea17318c63abc1446962ae61b545c45befdbe8e875a86ecd"
+    }
+  ]
+}

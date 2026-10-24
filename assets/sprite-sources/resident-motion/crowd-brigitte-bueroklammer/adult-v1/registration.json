@@ -1,0 +1,305 @@
+{
+  "identity": "crowd-brigitte-bueroklammer",
+  "raw": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/raw-directions-v2.png",
+  "rawSha256": "dfef207b68b974ebd10c75d06ea3fc542b7ef32959108e809736e3a3b6450f42",
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "status": "SOURCE REGISTRATION ONLY; actual source anatomy/hand/alpha inspection pending",
+  "views": {
+    "down": {
+      "sourceCellXYXY": [
+        0,
+        0,
+        384,
+        512
+      ],
+      "sourceBoundsAlpha20": [
+        124,
+        18,
+        375,
+        503
+      ],
+      "sourcePivot": [
+        248.0,
+        503
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 85063
+        }
+      ],
+      "workingOrigin": [
+        51.46391752577321,
+        57.15463917525773
+      ],
+      "workingBoundsRGBA": [
+        153,
+        72,
+        361,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/down.png",
+      "registeredSha256": "427e334dc364bc84e280f6c2864c58eeec75aa0cb16f00a8c73103a79f69ca6d"
+    },
+    "front-right": {
+      "sourceCellXYXY": [
+        384,
+        0,
+        768,
+        512
+      ],
+      "sourceBoundsAlpha20": [
+        501,
+        17,
+        737,
+        504
+      ],
+      "sourcePivot": [
+        626.0,
+        504
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 82288
+        }
+      ],
+      "workingOrigin": [
+        56.41237113402062,
+        56.329896907216494
+      ],
+      "workingBoundsRGBA": [
+        153,
+        70,
+        347,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/front-right.png",
+      "registeredSha256": "81e141ad6dde7b1e8d7f1cfe8851a86f871f25eea703b6bea90c6304a4180c7f"
+    },
+    "right": {
+      "sourceCellXYXY": [
+        768,
+        0,
+        1152,
+        512
+      ],
+      "sourceBoundsAlpha20": [
+        854,
+        16,
+        1042,
+        505
+      ],
+      "sourcePivot": [
+        953.0,
+        505
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 63217
+        }
+      ],
+      "workingOrigin": [
+        103.42268041237114,
+        55.50515463917526
+      ],
+      "workingBoundsRGBA": [
+        174,
+        69,
+        329,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/right.png",
+      "registeredSha256": "67ffbac3689ada4f58e9bcce71681cc4dd6ae9ec761a73520e11746aa10c7fdc"
+    },
+    "rear-right": {
+      "sourceCellXYXY": [
+        1152,
+        0,
+        1536,
+        512
+      ],
+      "sourceBoundsAlpha20": [
+        1188,
+        14,
+        1416,
+        502
+      ],
+      "sourcePivot": [
+        1307.0,
+        502
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 77868
+        }
+      ],
+      "workingOrigin": [
+        128.16494845360825,
+        57.97938144329902
+      ],
+      "workingBoundsRGBA": [
+        158,
+        70,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/rear-right.png",
+      "registeredSha256": "608aabfe729be35a69626c8f00c3027936530d38d70ae17d5f697c59eeb861b3"
+    },
+    "up": {
+      "sourceCellXYXY": [
+        0,
+        512,
+        384,
+        1024
+      ],
+      "sourceBoundsAlpha20": [
+        122,
+        515,
+        365,
+        1000
+      ],
+      "sourcePivot": [
+        243.5,
+        1000
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 83919
+        }
+      ],
+      "workingOrigin": [
+        55.175257731958766,
+        69.5257731958763
+      ],
+      "workingBoundsRGBA": [
+        156,
+        72,
+        357,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/up.png",
+      "registeredSha256": "28eda11ff5de3a024cb34149cdf5bdaebcffb1669f705376a42f83b77bc5ffc5"
+    },
+    "rear-left": {
+      "sourceCellXYXY": [
+        384,
+        512,
+        768,
+        1024
+      ],
+      "sourceBoundsAlpha20": [
+        493,
+        513,
+        717,
+        1002
+      ],
+      "sourcePivot": [
+        599.5,
+        1002
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 79699
+        }
+      ],
+      "workingOrigin": [
+        78.26804123711341,
+        67.87628865979383
+      ],
+      "workingBoundsRGBA": [
+        168,
+        69,
+        353,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/rear-left.png",
+      "registeredSha256": "35b5d0af51c9c8cc6888dd4f29d195bde95629d9b116273f3e97954a2b385854"
+    },
+    "left": {
+      "sourceCellXYXY": [
+        768,
+        512,
+        1152,
+        1024
+      ],
+      "sourceBoundsAlpha20": [
+        849,
+        514,
+        1039,
+        1004
+      ],
+      "sourcePivot": [
+        936.5,
+        1004
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 62673
+        }
+      ],
+      "workingOrigin": [
+        117.03092783505156,
+        66.22680412371136
+      ],
+      "workingBoundsRGBA": [
+        184,
+        68,
+        341,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/left.png",
+      "registeredSha256": "0f9b6abdd8229072f1f465b40f901f1b8d73bbe7264df5728e6c9bfbd78a02a3"
+    },
+    "front-left": {
+      "sourceCellXYXY": [
+        1152,
+        512,
+        1536,
+        1024
+      ],
+      "sourceBoundsAlpha20": [
+        1179,
+        515,
+        1418,
+        1003
+      ],
+      "sourcePivot": [
+        1290.5,
+        1003
+      ],
+      "substantialComponents": [
+        {
+          "label": 1,
+          "pixels": 82861
+        }
+      ],
+      "workingOrigin": [
+        141.77319587628867,
+        67.0515463917526
+      ],
+      "workingBoundsRGBA": [
+        164,
+        70,
+        362,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/registered/front-left.png",
+      "registeredSha256": "a4adfac59fbe3f01c030ca601fcb742895516d973d2a4cf7e3308e36b9223b50"
+    }
+  },
+  "oneScalePerRawSheet": 0.8247422680412371
+}

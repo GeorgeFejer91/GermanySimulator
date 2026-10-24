@@ -1,0 +1,816 @@
+{
+  "actorId": null,
+  "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+  "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+  "scale": 0.5780346820809249,
+  "views": {
+    "down": {
+      "component_bounds": [
+        34,
+        57,
+        471,
+        748
+      ],
+      "source_pivot": [
+        254,
+        748
+      ],
+      "landmarks": {
+        "waist": 509.605,
+        "hip": 544.155,
+        "hem": [
+          578.705,
+          578.705
+        ],
+        "knee": [
+          630.53,
+          630.53
+        ],
+        "sock": [
+          679.355,
+          679.355
+        ],
+        "ankle": [
+          682.355,
+          682.355
+        ],
+        "mid": 254,
+        "centres": [
+          175.34,
+          332.65999999999997
+        ],
+        "split_path_xy": [
+          [
+            254,
+            544.155
+          ],
+          [
+            254,
+            748
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 12,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [
+        [
+          [
+            34,
+            500
+          ],
+          [
+            115,
+            500
+          ],
+          [
+            120,
+            564
+          ],
+          [
+            72,
+            590
+          ],
+          [
+            34,
+            571
+          ]
+        ],
+        [
+          [
+            343,
+            489
+          ],
+          [
+            400,
+            480
+          ],
+          [
+            437,
+            517
+          ],
+          [
+            469,
+            516
+          ],
+          [
+            471,
+            565
+          ],
+          [
+            438,
+            606
+          ],
+          [
+            368,
+            623
+          ],
+          [
+            347,
+            544
+          ]
+        ]
+      ],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+    },
+    "right": {
+      "component_bounds": [
+        547,
+        60,
+        911,
+        750
+      ],
+      "source_pivot": [
+        755.5,
+        750
+      ],
+      "landmarks": {
+        "waist": 511.95,
+        "hip": 546.45,
+        "hem": [
+          580.95,
+          580.95
+        ],
+        "knee": [
+          632.7,
+          632.7
+        ],
+        "sock": [
+          681.45,
+          681.45
+        ],
+        "ankle": [
+          684.45,
+          684.45
+        ],
+        "mid": 755.5,
+        "centres": [
+          689.98,
+          821.02
+        ],
+        "split_path_xy": [
+          [
+            805.44,
+            546.45
+          ],
+          [
+            805.44,
+            684.45
+          ],
+          [
+            878.24,
+            715.5
+          ],
+          [
+            896.44,
+            750
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 32,
+        "root_overlap": 2
+      },
+      "foreground": 0,
+      "protected_polygons": [
+        [
+          [
+            642,
+            515
+          ],
+          [
+            729,
+            514
+          ],
+          [
+            740,
+            553
+          ],
+          [
+            721,
+            583
+          ],
+          [
+            667,
+            589
+          ],
+          [
+            642,
+            560
+          ]
+        ]
+      ],
+      "fitStatus": "complete-source-limbs-native-probe-pending",
+      "cutSourceY": 552,
+      "featherWorkingPixels": 2,
+      "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+      "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+      "scale": 0.5780346820809249,
+      "originalUpper": {
+        "component_bounds": [
+          547,
+          60,
+          911,
+          750
+        ],
+        "source_pivot": [
+          755.5,
+          750
+        ],
+        "landmarks": {
+          "waist": 511.95,
+          "hip": 546.45,
+          "hem": [
+            580.95,
+            580.95
+          ],
+          "knee": [
+            632.7,
+            632.7
+          ],
+          "sock": [
+            681.45,
+            681.45
+          ],
+          "ankle": [
+            684.45,
+            684.45
+          ],
+          "mid": 755.5,
+          "centres": [
+            689.98,
+            821.02
+          ],
+          "split_path_xy": [
+            [
+              805.44,
+              546.45
+            ],
+            [
+              805.44,
+              684.45
+            ],
+            [
+              878.24,
+              715.5
+            ],
+            [
+              896.44,
+              750
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 2
+        },
+        "foreground": 0,
+        "protected_polygons": [
+          [
+            [
+              642,
+              515
+            ],
+            [
+              729,
+              514
+            ],
+            [
+              740,
+              553
+            ],
+            [
+              721,
+              583
+            ],
+            [
+              667,
+              589
+            ],
+            [
+              642,
+              560
+            ]
+          ],
+          [
+            [
+              601,
+              508
+            ],
+            [
+              869,
+              508
+            ],
+            [
+              868,
+              552
+            ],
+            [
+              737,
+              550
+            ],
+            [
+              666,
+              537
+            ],
+            [
+              601,
+              523
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "cutSourceY": 520,
+        "featherWorkingPixels": 0
+      },
+      "upper_motion": {
+        "bob": 3.8,
+        "sway": 4,
+        "head_counter": 0.2,
+        "headBaseSourceY": 370,
+        "waistSourceY": 540
+      },
+      "knee_follow": 0.65,
+      "hem_follow": 0.55,
+      "connected_garment": false,
+      "connected_garment_owns_upper_legs": false,
+      "leg_sources": [
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+          "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+          "component_bounds": [
+            59,
+            158,
+            451,
+            691
+          ],
+          "source_pivot": [
+            215,
+            691
+          ],
+          "scale": 0.23,
+          "offset_x": -12,
+          "sole_point_xy": [
+            284,
+            686
+          ],
+          "shoe_length_source_px": 392
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+          "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+          "component_bounds": [
+            561,
+            153,
+            951,
+            695
+          ],
+          "source_pivot": [
+            710,
+            695
+          ],
+          "scale": 0.23,
+          "offset_x": 12,
+          "sole_point_xy": [
+            779,
+            690
+          ],
+          "shoe_length_source_px": 390
+        }
+      ]
+    },
+    "up": {
+      "component_bounds": [
+        1028,
+        58,
+        1460,
+        750
+      ],
+      "source_pivot": [
+        1243,
+        750
+      ],
+      "landmarks": {
+        "waist": 511.26,
+        "hip": 545.86,
+        "hem": [
+          580.46,
+          580.46
+        ],
+        "knee": [
+          632.36,
+          632.36
+        ],
+        "sock": [
+          681.26,
+          681.26
+        ],
+        "ankle": [
+          684.26,
+          684.26
+        ],
+        "mid": 1243,
+        "centres": [
+          1165.24,
+          1320.76
+        ],
+        "split_path_xy": [
+          [
+            1243,
+            545.86
+          ],
+          [
+            1243,
+            750
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 12,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [
+        [
+          [
+            1028,
+            498
+          ],
+          [
+            1108,
+            499
+          ],
+          [
+            1110,
+            622
+          ],
+          [
+            1067,
+            633
+          ],
+          [
+            1060,
+            577
+          ],
+          [
+            1031,
+            561
+          ]
+        ],
+        [
+          [
+            1385,
+            499
+          ],
+          [
+            1454,
+            499
+          ],
+          [
+            1460,
+            568
+          ],
+          [
+            1423,
+            590
+          ],
+          [
+            1387,
+            570
+          ]
+        ]
+      ],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+    },
+    "left": {
+      "component_bounds": [
+        1571,
+        61,
+        1934,
+        750
+      ],
+      "source_pivot": [
+        1723.5,
+        750
+      ],
+      "landmarks": {
+        "waist": 512.2950000000001,
+        "hip": 546.745,
+        "hem": [
+          581.195,
+          581.195
+        ],
+        "knee": [
+          632.87,
+          632.87
+        ],
+        "sock": [
+          681.545,
+          681.545
+        ],
+        "ankle": [
+          684.545,
+          684.545
+        ],
+        "mid": 1723.5,
+        "centres": [
+          1658.16,
+          1788.84
+        ],
+        "split_path_xy": [
+          [
+            1676.27,
+            546.745
+          ],
+          [
+            1676.27,
+            684.545
+          ],
+          [
+            1603.67,
+            715.55
+          ],
+          [
+            1585.52,
+            750
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 32,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [
+        [
+          [
+            1708,
+            522
+          ],
+          [
+            1872,
+            522
+          ],
+          [
+            1885,
+            616
+          ],
+          [
+            1840,
+            640
+          ],
+          [
+            1720,
+            636
+          ]
+        ]
+      ],
+      "fitStatus": "complete-source-limbs-native-probe-pending",
+      "cutSourceY": 552,
+      "featherWorkingPixels": 2,
+      "source": "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png",
+      "sourceSha256": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+      "scale": 0.5780346820809249,
+      "originalUpper": {
+        "component_bounds": [
+          1571,
+          61,
+          1934,
+          750
+        ],
+        "source_pivot": [
+          1723.5,
+          750
+        ],
+        "landmarks": {
+          "waist": 512.2950000000001,
+          "hip": 546.745,
+          "hem": [
+            581.195,
+            581.195
+          ],
+          "knee": [
+            632.87,
+            632.87
+          ],
+          "sock": [
+            681.545,
+            681.545
+          ],
+          "ankle": [
+            684.545,
+            684.545
+          ],
+          "mid": 1723.5,
+          "centres": [
+            1658.16,
+            1788.84
+          ],
+          "split_path_xy": [
+            [
+              1676.27,
+              546.745
+            ],
+            [
+              1676.27,
+              684.545
+            ],
+            [
+              1603.67,
+              715.55
+            ],
+            [
+              1585.52,
+              750
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 2
+        },
+        "foreground": 1,
+        "protected_polygons": [
+          [
+            [
+              1707,
+              523
+            ],
+            [
+              1868,
+              522
+            ],
+            [
+              1876,
+              598
+            ],
+            [
+              1840,
+              620
+            ],
+            [
+              1723,
+              633
+            ],
+            [
+              1708,
+              597
+            ]
+          ],
+          [
+            [
+              1614,
+              508
+            ],
+            [
+              1886,
+              508
+            ],
+            [
+              1879,
+              525
+            ],
+            [
+              1791,
+              550
+            ],
+            [
+              1617,
+              552
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "cutSourceY": 520,
+        "featherWorkingPixels": 0
+      },
+      "upper_motion": {
+        "bob": 3.8,
+        "sway": 4,
+        "head_counter": 0.2,
+        "headBaseSourceY": 370,
+        "waistSourceY": 540
+      },
+      "knee_follow": 0.65,
+      "hem_follow": 0.55,
+      "connected_garment": false,
+      "connected_garment_owns_upper_legs": false,
+      "leg_sources": [
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+          "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+          "component_bounds": [
+            1532,
+            154,
+            1927,
+            693
+          ],
+          "source_pivot": [
+            1780,
+            693
+          ],
+          "scale": 0.23,
+          "offset_x": -12,
+          "sole_point_xy": [
+            1694,
+            688
+          ],
+          "shoe_length_source_px": 395
+        },
+        {
+          "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/isolated-legs-candidate.png",
+          "sourceSha256": "e211e54bd256a7022abf0175393e1fb1dbe172d3320a4154af0e32a53c8d3297",
+          "component_bounds": [
+            1045,
+            152,
+            1437,
+            694
+          ],
+          "source_pivot": [
+            1290,
+            694
+          ],
+          "scale": 0.23,
+          "offset_x": 12,
+          "sole_point_xy": [
+            1206,
+            689
+          ],
+          "shoe_length_source_px": 392
+        }
+      ]
+    }
+  },
+  "sourceBrief": "Middle-aged female with enormous narrow angular head, smooth black chin bob with one silver streak, small rectangular burgundy glasses, sharp nose. Short squat adult. Dusty rose knitted waistcoat over grey blouse, deep brown compact trousers, broad plum shoes. One little flat green document pouch held anatomical LEFT hand, right empty. Bored heavy eyelids and closed straight mouth.",
+  "status": "candidate-unapproved",
+  "turn_sources": [
+    {
+      "neutral": "down"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+      "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+      "component_bounds": [
+        57,
+        55,
+        486,
+        749
+      ],
+      "source_pivot": [
+        283,
+        749
+      ],
+      "scale": 0.5747126436781609
+    },
+    {
+      "neutral": "right"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+      "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+      "component_bounds": [
+        547,
+        57,
+        946,
+        750
+      ],
+      "source_pivot": [
+        770.5,
+        750
+      ],
+      "scale": 0.5747126436781609
+    },
+    {
+      "neutral": "up"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+      "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+      "component_bounds": [
+        1033,
+        58,
+        1433,
+        751
+      ],
+      "source_pivot": [
+        1216.5,
+        751
+      ],
+      "scale": 0.5747126436781609
+    },
+    {
+      "neutral": "left"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/turns-v2.png",
+      "sourceSha256": "a0b7afd0d5c9856199315e305ac5add1a172dd86d213bd567c1c21504d83094e",
+      "component_bounds": [
+        1515,
+        56,
+        1931,
+        750
+      ],
+      "source_pivot": [
+        1701,
+        750
+      ],
+      "scale": 0.5747126436781609
+    }
+  ]
+}

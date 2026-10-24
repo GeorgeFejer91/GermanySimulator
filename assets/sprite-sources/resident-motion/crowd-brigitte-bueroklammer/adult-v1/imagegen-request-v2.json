@@ -1,0 +1,11 @@
+{
+  "status": "pre-call",
+  "tool": "built-in imagegen",
+  "transparent_background": true,
+  "prompt": "Repaint this exact eight-view source sheet of Brigitte Büroklammer as MUCH MORE EXPRESSIONIST adult Berlin RPG character art, Disco Elysium meets Berlin. Keep all eight complete independent whole-body views, same adult stature and connected long limbs, same arrangement front/front-right/right/rear-right; rear/rear-left/left/front-left. Preserve her black chin bob with one silver streak, small rectangular burgundy glasses, sharp tired middle-aged angular face, dusty rose knitted waistcoat, grey rolled blouse sleeves, deep brown long trousers, broad plum shoes. One flat green document pouch stays in anatomical LEFT hand, RIGHT empty. Keep existing correct near/far occlusion and hand mapping. Preserve complete planted shoes and both legs. Replace polished smooth outlined commercial cartoon shading with BOLD angular face and cloth planes, asymmetrical tired eyelids/creases, broken dry-brush shapes, scraped scumbled pigment, visible broad brush strokes, muted dusty rose with petrol/cool grey-green shadows, dirty ochre highlights. Entire body and face must be painted this way, not a noise filter over smooth volumes. Still coherent readable satirical game animation source, no photographic realism. Closed natural lips in five visible front/profile views, rear three views have no mouth. IMPORTANT: remove ALL of the dark painted vignette/backdrop and ground wash; make every pixel outside the actual figure silhouettes genuinely transparent alpha0, including all margins and gaps between legs and fingers. No ground shadows, no gradients, no smoky atmospheric background, no checkerboard paint, no labels or frame. Keep generous clean transparent gutters. This is one targeted finish/background refinement, not a new identity or pose family.",
+  "referenced_image_paths": [
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-bueroklammer/GermanySimulator/assets/sprite-sources/resident-motion/crowd-brigitte-bueroklammer/adult-v1/raw-directions-v1.png"
+  ],
+  "referenceSha256": "a96cf9a0b86b3d47e01aa6bff6faf8a9f5dd43b31ceaa793a6c717d60e11f7ee",
+  "role": "edit target; identity, adult anatomy, arrangement and physical LEFT pouch locked; finish and alpha background repair"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "crowd-brigitte-bueroklammer",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "crowd-brigitte-bueroklammer"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/crowd-brigitte-bueroklammer-standing.webp",
+    "sha256": "19812a78230f7358704f389be2f20b1cc7c5b9ad8ddebd381470213292d0073c",
+    "width": 128,
+    "height": 160
+  }
+}

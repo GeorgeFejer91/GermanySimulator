@@ -1,0 +1,127 @@
+{
+  "character": "crowd-brigitte-bueroklammer",
+  "publishedPresentation": "standingOnly; no selected published locomotion family",
+  "sourceAuthority": "assets/characters/residents/crowd-brigitte-bueroklammer/manifest.json",
+  "sourceSha256": "a2d1392263b72dfd786a40cdac15ca6fab8e4064df9ce43e3e61ece4827d4c4c",
+  "legacyUnselectedCycleDistance": 9.5,
+  "interactions": {
+    "neutral": {
+      "row": 4,
+      "col": 2
+    },
+    "states": {
+      "idle": {
+        "row": 9,
+        "durations_ms": [
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "look": {
+        "row": 10,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "success": {
+        "row": 11,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      },
+      "failure": {
+        "row": 12,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "visualStatus": "candidate-source-bound-body-reaction"
+      }
+    }
+  },
+  "settingsSource": "tools/build-resident-motion.py",
+  "settingsSourceSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+  "quietSettings": {
+    "idle": {
+      "sway_pixels": 1.2,
+      "nod_pixels": 1,
+      "lift_pixels": 0
+    },
+    "look": {
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    },
+    "success": {
+      "sway_pixels": 2,
+      "nod_pixels": -3,
+      "lift_pixels": 10
+    },
+    "failure": {
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    }
+  }
+}

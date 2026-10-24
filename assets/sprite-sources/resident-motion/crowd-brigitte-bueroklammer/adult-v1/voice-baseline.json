@@ -1,0 +1,39 @@
+{
+  "id": "crowd-brigitte-bueroklammer",
+  "profileId": "735315eb7b9845dca5919c108814c1a9",
+  "selectedRecordingCount": 3,
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-germany-01.mp3",
+      "sha256": "0bb2f2fe49734184ffbaf07e6524681b420296c132d91d291ac8d697563b9b04",
+      "source": "Die Büroklammer hält den Vorgang, nicht Ihre Schlange; bitte ziehen Sie eine Nummer.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-germany-02.mp3",
+      "sha256": "dce9f5bb553a83e3d9b95b1e0c87ab5b19f6217756dbff53fffcc690ade4451f",
+      "source": "Ich habe Ihre Unterlagen geheftet; das lose Blatt braucht einen eigenen Antrag.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-berlin-02.mp3",
+      "sha256": "b58e9f43d40c5f8614cf5222fb02d3e89d7573b069879af4a62b42f461b346c7",
+      "source": "Ich habe Ihre Unterlagen geheftet; the loose page needs einen eigenen Antrag.",
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-01.mp3": "daf13c97b5002677665166aebee66b14a65167c174995cedc8c1fcbceb687642",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-02.mp3": "6e41c27583402706f4f6211a85b2e3e99678a9112f4c2febf83359850b74fa58",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-03.mp3": "90817951d52d498785e895706be01e3e2c3e4c9a7835d94c04b90f6b239c0c96",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-04.mp3": "5352a2e1f6c607a4427c4fe74cca9391951da9c4298757b2c5ea5e1da79bae47",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-berlin-02.mp3": "b58e9f43d40c5f8614cf5222fb02d3e89d7573b069879af4a62b42f461b346c7",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-crowd-manifest.json": "f23ed1e5da1dbd7cb436f945e31c90a8aea34260b4fe7d9ee9a62a07c4377680",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-germany-01.mp3": "0bb2f2fe49734184ffbaf07e6524681b420296c132d91d291ac8d697563b9b04",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-germany-02.mp3": "dce9f5bb553a83e3d9b95b1e0c87ab5b19f6217756dbff53fffcc690ade4451f",
+    "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-remaining27-crowd-manifest.json": "64c0f811c54622a5e6ffee9a6e232fb2627600030bfeddd749cdda5e6927e755"
+  },
+  "policy": "No voice, recording, visible line or audio catalog change authorized for this art packet."
+}

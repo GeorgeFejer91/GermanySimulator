@@ -1,0 +1,25 @@
+{
+  "actor": "crowd-brigitte-bueroklammer",
+  "source": "raw-directions-v2.png",
+  "sourceSha256": "dfef207b68b974ebd10c75d06ea3fc542b7ef32959108e809736e3a3b6450f42",
+  "status": "Authoring contract; not source/native approval",
+  "shared": {
+    "physicalPropHand": "LEFT",
+    "prop": "one small flat green document pouch",
+    "rightHand": "empty",
+    "registration": "one raw-sheet scale, common baseline; no per-view fitting",
+    "mouth": "own closed painted crease fitted individually in each visible face; no generic shared slit",
+    "actionSemantics": "four frozen original quiet states, durations and settings; no new gesture/clock"
+  },
+  "views": [
+    {"id":"down","cell":[0,0],"facingDegrees":0,"mouth":"visible-own-fit","pouch":"LEFT, screen-right; grip attached"},
+    {"id":"front-right","cell":[1,0],"facingDegrees":45,"mouth":"visible-own-fit","pouch":"LEFT farther hand; retain real partial visibility"},
+    {"id":"right","cell":[2,0],"facingDegrees":90,"mouth":"visible-own-fit","pouch":"LEFT far hand, completely occluded behind body; do not paint it onto empty near RIGHT hand"},
+    {"id":"rear-right","cell":[3,0],"facingDegrees":135,"mouth":"null-rear-occluded","pouch":"LEFT farther hand; existing silhouette may show at far edge"},
+    {"id":"up","cell":[0,1],"facingDegrees":180,"mouth":"null-rear","pouch":"LEFT, screen-left; grip attached"},
+    {"id":"rear-left","cell":[1,1],"facingDegrees":225,"mouth":"null-rear-occluded","pouch":"LEFT near hand; real rear-quarter visibility"},
+    {"id":"left","cell":[2,1],"facingDegrees":270,"mouth":"visible-own-fit","pouch":"LEFT near hand; entire owned pouch visible"},
+    {"id":"front-left","cell":[3,1],"facingDegrees":315,"mouth":"visible-own-fit","pouch":"LEFT near hand; grip remains attached"}
+  ],
+  "runtimeSelection": "Select an actual crowd instance by current voiceId and resolveStreetCharacter result, not id prefix: some generated prefixes are superseded by quiz or Sandale identity. Preserve chosen instance route/speed and native legality."
+}

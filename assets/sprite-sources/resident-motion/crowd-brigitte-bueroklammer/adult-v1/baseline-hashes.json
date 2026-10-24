@@ -1,0 +1,19 @@
+{
+  "base": "78e86bc1c878fe95c757906f1a84dc58c2ed1309",
+  "files": {
+    "assets/characters/street/manifest.json": "100c19c60865e41a812cf61ec1117b55a5dad237a0ffe06c9bfd867dafd71b55",
+    "assets/characters/residents/crowd-brigitte-bueroklammer/manifest.json": "a2d1392263b72dfd786a40cdac15ca6fab8e4064df9ce43e3e61ece4827d4c4c",
+    "assets/sprite-sources/resident-motion/crowd-motion-spec.json": "54d53aa5c4946acf2f94ac447e12ee1c39ed6a50126874b4629e9ec1614811c9",
+    "assets/sprite-sources/street-residents/crowd-brigitte-bueroklammer-directions-candidate.png": "2788ed973e4750d4415f802400e0e24632a2af3525b2e730e6110cac58af6c7a",
+    "tools/build-resident-motion.py": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+    "game.js": "84afb12d24ef33d427e008a5711a61e7c6c475f2af2dd30b9517ff6e2f39de52",
+    "world3d.js": "67e3de3ae78a72b9fda6a230f8b4aff245f47bffc756b4f126fc5934597ee771",
+    "street-character-sprites.js": "59a2b857b388897e65a22b71aa5421a7165fdd03e3b6bdba0d18af5cd5cf7a3f",
+    "assets/characters/bayern/manifest.json": "33dcae5177efe9106ce26c8ab39c34524053404e93c5147d51ef9c63303b85b0",
+    "assets/characters/bayern/character-atlas.png": "36d2f68f9fe23539bf1f71be77880e7387ec346441b56b0d2262813d01c42e55",
+    "assets/tourists/towelMan/manifest.json": "26838e9747180d3d45a67c7f3dcf5a027dd4126bfac22ade7d276dd2e4c0548b",
+    "assets/tourists/towelMan/character-atlas.png": "e63653a5ecca3b683114e440b2632586a6396af1d41dbcaffbbc58570d94e4a3",
+    "assets/tourists/towelWoman/manifest.json": "ef2ccfcd4ae7e956e97a9f0837f054c1ede6f4bfe3fe7b16bc703cda659e2e8e",
+    "assets/tourists/towelWoman/character-atlas.png": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "tool": "built-in imagegen",
+  "savedOriginal": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16b52-94f2-7781-8d8e-5c763c74524c/exec-49b28fb1-c4a9-4c83-8b22-2111d4a6f8c2.png",
+  "copied": "raw-directions-v2.png",
+  "sha256": "dfef207b68b974ebd10c75d06ea3fc542b7ef32959108e809736e3a3b6450f42",
+  "output_hint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16b52-94f2-7781-8d8e-5c763c74524c as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a16b52-94f2-7781-8d8e-5c763c74524c\\exec-49b28fb1-c4a9-4c83-8b22-2111d4a6f8c2.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "verdict": "HOLD pending actual alpha and source inspection; stronger angular face/cloth paint and preserved complete eight-view identity. Preview still visibly contains atmospheric dark backdrop."
+}
