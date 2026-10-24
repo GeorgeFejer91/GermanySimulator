@@ -10,18 +10,96 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Current goal turn: **PROGRESS**. George requested a comprehensive interior
-authenticity audit against archival and verbal materials after the research
-publication. Audit the actual accepted model room by room; distinguish primary
-architecture, dated photographs, designer/artist/installer records and eyewitness
-accounts from inferred geometry and currentness. Durable audit findings will
-live in AUTHENTICITY-AUDIT.md; this README remains the only task/plan owner.
+Current goal, 24 October 2026: isolate and correct internal architectural and
+interior-design inaccuracies, especially toilets, smoking and backstage areas,
+and render representative club-night lighting. This README remains the sole
+task/plan owner. The active app goal is scoped to that request; full contemporary
+accuracy cannot be asserted without resolving the evidence gaps below.
 
-The139-record research update is published in a1f75fd142ee115dfb4255abcf55d5da0f95c213.
+The current candidate adds a distinct Panorama sanitary enclosure below the
+upper lounge, retaining main-floor Klo. A13/I21 establish separate sanitary
+interventions; V05 corroborates the lounge-above-toilets relationship. The
+footprint, heights, fixtures and opening are still estimated. The viewer now
+uses low ambient light, localized colored dance-floor cues, practical lighting
+and two bounded shadow maps indoors; exterior inspection retains daylight.
+These steady cues are an appearance study, not a reproduction of a current
+lighting program or the documented IVL fixture inventory.
+
+Smoking registration is unresolved: I15/P10 show the east/front projection
+approximately between the plinth belt and the lower tall-window tier, whereas
+the current Panorama floor is at 13.25 m on the west side. The official western
+annexes are not this projection. Its hidden attachment/depth and upper-return
+route remain unknown. Do not solve this by labelling a western annex smoking
+or extending an upper slab across the dance hall. V06 confirms backstage
+dressing/cooling/storage rooms existed in 2010 but does not locate them.
+No invented backstage room or public shortcut is part of this candidate.
+
+- [x] Recheck architect, installer and firsthand evidence; isolate supported
+  room relationships from uncertain placement. Source records V05/V06 added.
+- [x] Implement separate upper toilets and a club-night lighting candidate.
+- [x] Export and verify source/native geometry, continuous sanitary and lounge
+  routes, desktop/Android-emulated visibility, entry/exit and bounded cost.
+- [x] Freeze the integrated candidate; complete independent Physics and
+  Camera/scale reviews and repair findings.
+- [ ] Publish and verify the accepted night/sanitary increment.
+- [ ] Resolve smoking extension attachment and floor registration; reconstruct
+  supported circulation. Locate backstage and remaining sanitary/service areas
+  before claiming all internal inaccuracies corrected.
+
+Local technical acceptance: 141/141 Node tests, 18/18 silent desktop/Android-
+emulated browser cases, independent Physics/Camera rechecks and 9+9 cost
+samples pass. See VALIDATION.md for receipts and limits. The tested 129-input
+freeze is output/berghain-night-tested-candidate.json; later publication docs
+are tracked through an explicit documentation-only bridge. No full-fidelity
+or physical-device qualification is implied.
+
+Further registration evidence: V05's author acknowledged a commenter correction
+to Panorama's southwest-facing windows, conflicting with the current northwest
+window wall. This is one testimony chain, not measured orientation. I01's
+indexed circulation account describes an enclosed Panorama-to-foyer/Säule
+shortcut; the low outside smoking box need not contain its entire stair.
+Do not interpret the external height mismatch as proof that no upper link exists.
+The next bounded investigation is I13/E05 After Hours footage and the primary
+architect gallery for a continuous window/door/landing sequence before moving
+connected floors. Details: output/berghain-smoking-registration-followup.md.
+The catalogue now has 147 sources and the dated audit plus AU26 has 26 findings.
+
+Implementation paths: assets/models/berghain/interior-topology.mjs and its
+layout/fixture integration; berghain/night-lighting.mjs and viewer integration;
+scoped Node/browser tests. No main-game runtime change. Candidate research:
+output/berghain-interior-topology-notes.md. Pre-edit source/index hashes:
+output/berghain-night-baseline.json. Latest accepted base is the release below.
+
+## Previous accepted first-person/Halle baseline
+
+Published first-person/Halle increment:
+**3f54d69b35f0c65fbb9b172cc85b1c26dc5bdf49** at
+https://germanysimulator.de/geheim/. Pages **40100987700** succeeded. All 74
+checked public files match committed bytes, six entry URLs respond, and **19/19
+actual public browser cases pass**. Desktop and Android-emulated entry/exit,
+main-bar stairs, Säule, desktop Lab, local Halle circuit, source/native views,
+footsteps, blocked-door silence, mute/reset and stall recovery are covered.
+Actual public frames were inspected. Final receipt:
+output/berghain-first-person-release.json. The final 121-input freeze,
+137 fresh Node checks, 44 local browser case/profile combinations (explicit
+20+21+3 test-only bridge), independent Physics/Camera/audio acceptance and
+9+9 cost samples are retained. All 141 baseline files and the original primary
+index remain preserved. This paragraph and the matching validation handoff are
+local post-publication task-state notes; no additional runtime change.
+
+Full reconstruction remains incomplete. AUTHENTICITY-AUDIT.md owns 25 findings;
+SOURCES.md contains 145 resource records. Next work must reconcile registered
+Halle floor/soffit/entry evidence, Säule's dated pier/mezzanine/entry accounts,
+and missing/partial artwork and PA inventory before claiming contemporary
+fidelity. No dimensioned interior blueprint has been acquired. Physical
+Android/device GPU and perceptual listening remain NOT RUN. Keep Astra for
+subsequent complex Berghain modelling.
+
+Earlier documentation-only publication: the139-record research update is published in a1f75fd142ee115dfb4255abcf55d5da0f95c213.
 Pages40086607090 succeeded.72 exact public files and six entry URLs pass;
-all109 runtime/asset/test inputs and the141-file baseline remain unchanged.
+all109 runtime/asset/test inputs and the141-file baseline remained unchanged in that earlier documentation-only publication.
 Receipt: output/berghain-topology-research-release.json. No new world or device
-claim; the accepted runtime remains687b408. Full reconstruction stays ACTIVE.
+claim; the accepted runtime at that stage was687b408. The newer first-person/Halle release above supersedes it.
 
 Current audit scope: room-by-room source/visual comparison and the coherent
 Halle correction below. Physics owns room/floor/circulation evidence; Camera
@@ -116,7 +194,7 @@ respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: authenticity audit and Astra Halle reconstruction
+## Published increment: authenticity audit and Astra Halle reconstruction
 
 User steering24 October2026: audit the interior against as many archival and
 verbal materials as possible, then maximize authenticity; use Astra for complex
@@ -181,7 +259,7 @@ runtime; the first-person candidate needs its own rendered acceptance.
   emulation, retained entrance/Lab/main-bar regressions and the cost comparison.
 - [x] Independent Physics and Camera/scale acceptance on identical candidate;
   repair and repeat affected checks. Preserve failed source/visual evidence.
-- [ ] Review coherent diff, publish accepted work and verify actual public bytes/
+- [x] Review coherent diff, publish accepted work and verify actual public bytes/
   controls. Full reconstruction remains ACTIVE; physical-device/listening gaps
   and all unsupported dimensions/currentness remain explicit.
 

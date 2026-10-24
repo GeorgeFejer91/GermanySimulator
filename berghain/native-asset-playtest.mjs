@@ -1,5 +1,5 @@
 export async function renderNativeAsset(page,view){
-  return page.evaluate(async({position,yaw,pitch=0,fov=45,rays=[]})=>{
+  return page.evaluate(async({position,yaw,pitch=0,fov=45,rays=[],clubNight=false})=>{
     const THREE=await import('../assets/vendor/three/0.186.0/build/three.module.min.js');
     const {GLTFLoader}=await import('../assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js');
     const bytes=await(await fetch('../assets/models/berghain/berghain-study.glb')).arrayBuffer();
@@ -16,8 +16,16 @@ export async function renderNativeAsset(page,view){
     renderer.setPixelRatio(Math.min(1,Math.sqrt(1600000/(rect.width*rect.height))));renderer.setSize(rect.width,rect.height,false);
     renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
     const scene=new THREE.Scene();scene.background=new THREE.Color('#b3b3a6');scene.add(gltf.scene);
-    scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
-    const sun=new THREE.DirectionalLight('#ffedcf',3);sun.position.set(-45,65,50);scene.add(sun);
+    let nightLighting;
+    if(clubNight){
+      const {createViewerLighting}=await import('./night-lighting.mjs');
+      nightLighting=createViewerLighting(scene);nightLighting.update('interior',position);
+      renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
+      gltf.scene.traverse(node=>{if(node.isMesh){node.castShadow=!node.material.transparent&&!node.material.transmission;node.receiveShadow=true;}});
+    }else{
+      scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
+      const sun=new THREE.DirectionalLight('#ffedcf',3);sun.position.set(-45,65,50);scene.add(sun);
+    }
     const camera=new THREE.PerspectiveCamera(fov,rect.width/rect.height,.08,500);
     camera.position.set(position.x,position.y+1.68,position.z);camera.rotation.set(pitch,yaw,0,'YXZ');
     renderer.render(scene,camera);
@@ -32,7 +40,7 @@ export async function renderNativeAsset(page,view){
       for(const material of materials){for(const key of ['map','normalMap','roughnessMap','metalnessMap','thicknessMap','envMap'])if(material[key])textures.add(material[key]);material.dispose();}
       textures.add(reflection);
       for(const geometry of geometries)geometry.dispose();for(const texture of textures)texture.dispose();
-      renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
+      nightLighting?.dispose();renderer.dispose();canvas.remove();delete window.__disposeNativeAsset;
     };
     let geometryProbes;
     if(rays.length){
@@ -48,7 +56,7 @@ export async function renderNativeAsset(page,view){
     }
     return {bytes:bytes.byteLength,meshes,geometryProbes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
       panoramaServices:metadata.panoramaServices||null,
-      kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,balustrades:metadata.balustrades||null,mainBar:metadata.mainBar||null,saule:metadata.saule||null,halle:metadata.halle||null,
+      kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,balustrades:metadata.balustrades||null,mainBar:metadata.mainBar||null,saule:metadata.saule||null,halle:metadata.halle||null,interiorTopology:metadata.interiorTopology||null,lighting:nightLighting?.state||null,
       physicalMaterials,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};
   },view);

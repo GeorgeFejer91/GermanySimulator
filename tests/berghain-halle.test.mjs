@@ -37,17 +37,19 @@ export function preservedHalleFingerprint(space,views,palette,model){
  for(const part of space.parts){
   const key=[part.section,part.material,part.shape].join('/'),index=counters.get(key)||0;
   counters.set(key,index+1);
-  if(retired.has(part.name)||part.section==='halle')continue;
+  // The later Panorama sanitary increment has its own route/geometry checks.
+  // Preserve the original fingerprint for every pre-existing non-Halle part.
+  if(retired.has(part.name)||part.section==='halle'||part.interiorTopology)continue;
   const mesh=model.getObjectByName(key),matrix=new THREE.Matrix4(),color=new THREE.Color();
   mesh.getMatrixAt(index,matrix);mesh.getColorAt(index,color);
   const geometry=mesh.geometry,attributes=Object.fromEntries(Object.entries(geometry.attributes).map(([name,attribute])=>[name,Array.from(attribute.array)]));
   parts.push([withoutTone(part),matrix.toArray(),color.toArray(),hash([attributes,geometry.index?Array.from(geometry.index.array):null])]);
  }
  return {parts:hash(parts),count:parts.length,
-  solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true))),
+  solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true&&!s.renderPart?.interiorTopology&&!s.name.startsWith('panorama-wc-')))),
   floors:hash(space.floors.filter(f=>!retired.has(f.name)&&f.halle!==true)),
   views:hash(views),materials:hash(palette),bounds:hash(space.exteriorBounds),
-  inventory:hash([space.fixtures,space.soundSystem,space.artworks,space.saule,space.labOratory,space.mainBar,space.upperLounge])};
+  inventory:hash([space.fixtures.filter(f=>!f.id.startsWith('panorama-wc-')),space.soundSystem,space.artworks,space.saule,space.labOratory,space.mainBar,space.upperLounge])};
 }
 
 test('Halle preserves every retained model matrix, geometry, instance colour, material, solid, floor and viewpoint',()=>{

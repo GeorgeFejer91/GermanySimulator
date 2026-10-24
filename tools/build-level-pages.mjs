@@ -66,7 +66,7 @@ export function buildLevelPages(root, output) {
   for (const entry of readdirSync(root,{withFileTypes:true})) {
     if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim'].includes(entry.name)) continue;
     if (entry.name==='berghain') {
-      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','footsteps.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
+      for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','footsteps.mjs','night-lighting.mjs','For-AI/SOURCES.md','For-AI/INTERIOR.md']) {
         const source=join(root,entry.name,path);
         if (!existsSync(source)) continue;
         const destination=join(output,entry.name,path);

@@ -8,6 +8,7 @@ import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../ass
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
 import {createFootsteps} from './footsteps.mjs';
+import {createViewerLighting} from './night-lighting.mjs';
 
 const canvas = document.querySelector('#model');
 const loading = document.querySelector('#loading');
@@ -37,21 +38,7 @@ scene.background = new THREE.Color('#b3b3a6');
 const camera = new THREE.PerspectiveCamera(45, 1, .08, 500);
 const model = createBerghainModel();
 scene.add(model);
-scene.add(new THREE.HemisphereLight('#e0e6dd', '#6a665b', 2.1));
-const sun = new THREE.DirectionalLight('#ffedcf', 3);
-sun.position.set(-45, 65, 50);
-sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024);
-Object.assign(sun.shadow.camera, {left: -65, right: 65, top: 65, bottom: -65, near: 1, far: 180});
-sun.shadow.bias = -.001;
-sun.shadow.normalBias = .04;
-sun.target.position.set(0, 5, -8);
-scene.add(sun, sun.target);
-for (const [x, y, z, color, intensity, distance] of [[5, 12, -5, '#e3d4af', 180, 40], [-12, 17, -10, '#dfb574', 110, 30], [4, 3.8, -5, '#c46b50', 65, 25], [0, 12, -33, '#d9ded1', 180, 45]]) {
-  const light = new THREE.PointLight(color, intensity, distance, 2);
-  light.position.set(x, y, z);
-  scene.add(light);
-}
+const lighting = createViewerLighting(scene);
 
 let mode = 'exterior', visitor = {...viewpoints.foyer.position}, yaw = 0, pitch = 0;
 let orbitAngle = .7, orbitPitch = 1.28, orbitRadius = 115;
@@ -124,6 +111,8 @@ function render(time) {
       target.y + Math.cos(orbitPitch) * orbitRadius, target.z + Math.cos(orbitAngle) * Math.sin(orbitPitch) * orbitRadius);
     camera.lookAt(target);
   }
+  lighting.update(mode,visitor);
+  canvas.dataset.lighting = JSON.stringify(lighting.state);
   renderer.render(scene, camera);
   canvas.dataset.view = mode;
   canvas.dataset.position = JSON.stringify(mode === 'interior' ? visitor : camera.position.toArray());
@@ -289,7 +278,7 @@ window.addEventListener('pagehide', event => {
   frame = null;
   if (event.persisted) return;
   resizeObserver.disconnect(); textObserver.disconnect(); textChanges.disconnect();
-  abort.abort(); footsteps.dispose();walk?.dispose(); disposeBerghainModel(model); renderer?.dispose();
+  abort.abort(); footsteps.dispose();walk?.dispose(); lighting.dispose(); disposeBerghainModel(model); renderer?.dispose();
 }, events);
 
 const preparedText = new Map();

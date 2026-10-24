@@ -4,9 +4,41 @@ Audited 24 October 2026 at George's request. The model is a recognisable archite
 
 This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f971`, unchanged by the research publication `a1f75fd142ee115dfb4255abcf55d5da0f95c213`. The 109-input freeze is `output/berghain-saule-candidate.json`; 141 preserved baseline files are in `output/berghain-entrance-baseline/`. A subsequent Halle correction is being modelled by GPT-6 Astra. Its proposed dimensions are not accepted as measured facts or counted as completed fixes here.
 
-[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains 145 unique resource records; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
+[README.md](README.md) is the sole task and implementation owner. [SOURCES.md](SOURCES.md) contains 147 unique resource records; [INTERIOR.md](INTERIOR.md) retains object-specific evidence and limitations. This document owns the audit findings, not a second work plan.
 
 ## Evidence and review boundaries
+
+24 October follow-up: the current candidate addresses AU10 with a separate
+Panorama sanitary enclosure below the existing upper lounge and AU24 with
+localized club-night lighting. The exact footprint, fixture attribution and
+lighting parameters remain authored estimates. V05 corroborates the vertical
+room relationship, not dimensions. The latest accepted base before this work
+is first-person/Halle release `3f54d69b35f0c65fbb9b172cc85b1c26dc5bdf49`.
+The original table below is retained as the dated audit, not a claim that all
+its findings remain untouched or are now resolved. Current acceptance belongs
+to README.md and VALIDATION.md.
+
+AU08 registration follow-up: inspected I15/P10 place the smoking projection on
+the east/front side, approximately spanning the plinth belt to the lower tall
+window tier. G09's western annexes cannot be relabelled as this room. The model's
+west Panorama floor at 13.25 m does not directly register with that projection;
+its hidden attachment/depth and upper-return stair require further evidence.
+No unsupported external volume or public connecting door has been inserted.
+V05's author-acknowledged orientation correction places Panorama windows toward
+the southwest, conflicting with the model's northwest window wall (AU12).
+The comment and corrected article are one testimony chain, not a geodetic survey.
+I01's indexed account describes an enclosed Panorama-to-foyer/Säule shortcut.
+The low external box may be only one segment of that route: its photographed
+height does not rule out an internal upper connection. A continuous stair/door/
+window sequence is still needed before revising the connected room geometry.
+
+Additional finding **AU26 — backstage/service rooms unmodelled**: V06's 2010
+primary Höppner interview establishes dressing, cooling and storage spaces.
+It gives no plan, position, access path or current inventory. The existing DJ
+desks are not substitutes for those rooms; no public backstage shortcut should
+be fabricated. V05 also reports a separate stair to FLINTA toilets, whose
+position and contemporary access remain unregistered. These are open scope,
+not corrected inaccuracies.
 
 The comparison uses architect and structural-engineer accounts; their actual project photographs; artist, furniture-maker and lighting-installer records; technical product drawings; published curator/manufacturer interviews; dated firsthand visits; and historical diagrams. Source counts are discovery records, not independent confirmations. A13/I19 and A12/I22 repeat the same architect galleries. Several Halle architect/engineer pictures are the same photographic sequence. S06 repeats S05's community speaker list. Interviews with the same exhibition organisers form a related testimony chain.
 

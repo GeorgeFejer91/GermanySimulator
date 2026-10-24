@@ -12,6 +12,7 @@ import {addOriginalBalustrades} from './original-balustrades.mjs';
 import {mainBarMaterials} from './main-bar.mjs';
 import {sauleMaterials} from './saule.mjs';
 import {addHalleStructure} from './halle.mjs';
+import {addInteriorTopology,pinInteriorTopologyTones} from './interior-topology.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -281,6 +282,7 @@ addExteriorDetails(layout);
 addUpperLounge(layout,{box,floor,beam,railing,stair});
 addPanoramaCeiling(layout,{box});
 addKloRooms(layout,{box});
+addInteriorTopology(layout,{box});
 addLabRooms(layout,{box,floor,beam,railing,stair});
 calibrateStudy(layout, viewpoints);
 addOriginalBalustrades(layout);
@@ -288,4 +290,5 @@ addInteriorFixtures(layout);
 addLoungeFurniture(layout);
 addSoundSystem(layout);
 addArtworks(layout);
+pinInteriorTopologyTones(layout);
 addHalleStructure(layout);

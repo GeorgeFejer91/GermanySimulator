@@ -21,6 +21,15 @@ the live model. Revise against both views before placement/material acceptance.
 
 ## Current authenticity audit
 
+24 October follow-up: a separate Panorama sanitary enclosure now sits below
+the upper lounge, supported at the relationship level by A13/I21/V05. The
+footprint, floor height, door and three illustrative cubicles remain estimated;
+main-floor Klo is retained. The viewer's club-night mode replaces daylight fill
+with steady localized colored cues and practical illumination. It is an
+authored appearance state, not measured photometry or the current lighting show.
+See README.md for active acceptance and AUTHENTICITY-AUDIT.md for unresolved
+smoking-extension registration and backstage/service-space placement.
+
 George requested a comprehensive archive/verbal comparison on24 October2026.
 [AUTHENTICITY-AUDIT.md](https://github.com/GeorgeFejer91/GermanySimulator/blob/main/berghain/For-AI/AUTHENTICITY-AUDIT.md) records25 source-bound findings,
 including missing circulation/art/equipment, partial likeness and dated-layer

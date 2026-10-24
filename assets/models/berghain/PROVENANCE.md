@@ -9,6 +9,28 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Separate Panorama sanitary area and night lighting
+
+The 24 October 2026 increment adds an original sanitary enclosure beneath the
+existing upper lounge. A13/I21 establish separate Panorama facilities; V05's
+2025 firsthand account supports the lounge-above-toilets relationship. Its
+13.25 m floor, footprint, three cubicles, trough and opening are estimated,
+using the existing sanitary geometry/material vocabulary. I21 mixes several
+refurbishment dates and does not assign each photographed fitting to a floor.
+Main-floor Klo remains separate. All 46 added parts use a fixed tone; retained
+geometry and instance colors remain unchanged. No reference pixels are shipped.
+
+`berghain/night-lighting.mjs` supplies viewer-only steady night cues from I23/I24
+and L01's broad lighting vocabulary. Positions, intensities and colors are
+authored appearance parameters. It removes indoor sun/daylight, keeps local
+colored illumination and shadowed practical light, and retains daylight for
+exterior inspection. The portable GLB retains geometry, uncertainty metadata
+and its existing bar lights; it does not embed the viewer's adaptive cue rig.
+No current club-lighting program, photometry or IVL rig layout is asserted.
+
+The east smoking projection/upper-return connection and backstage placement
+remain unresolved. They are explicitly unmodelled in `interiorTopology`.
+
 ## Halle: provisional post-2022 structure
 
 Architect A05 documents three floor voids, two single-flight cast-in-place

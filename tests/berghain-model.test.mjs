@@ -136,6 +136,7 @@ test('static build includes the hidden viewer and excludes private research copi
     writeFileSync(join(root, 'assets/social/neighbors.png'), 'fixture');
     writeFileSync(join(root, 'berghain/model.html'), '<html lang="en"><head><meta name="robots" content="noindex"></head><body></body></html>');
     writeFileSync(join(root, 'berghain/footsteps.mjs'), 'export const footstep = true;');
+    writeFileSync(join(root, 'berghain/night-lighting.mjs'), 'export const night = true;');
     writeFileSync(join(root, 'berghain/references/downloads/private.jpg'), 'research-only');
     writeFileSync(join(root, 'berghain/AGENTS.md'), 'instructions');
     writeFileSync(join(root, 'berghain/For-AI/SOURCES.md'), 'Public source catalogue');
@@ -145,6 +146,7 @@ test('static build includes the hidden viewer and excludes private research copi
     buildLevelPages(root, output);
     assert.ok(existsSync(join(output, 'berghain/model.html')));
     assert.ok(existsSync(join(output, 'berghain/footsteps.mjs')), 'The public first-person viewer must ship its imported footstep module');
+    assert.ok(existsSync(join(output, 'berghain/night-lighting.mjs')), 'The viewer must ship its imported lighting module');
     const secret = readFileSync(join(output, 'geheim/index.html'), 'utf8');
     assert.match(secret, /data-play="true"/);
     assert.match(secret, /<base href="\.\.\/berghain\/">/);

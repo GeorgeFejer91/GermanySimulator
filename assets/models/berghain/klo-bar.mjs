@@ -1,5 +1,6 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
+import {addPanoramaSanitaryFixtures} from './interior-topology.mjs';
 
 const footprints={klo:{x:[-21.5,-7.25],z:[-3.5,9.2]},toilets:{x:[-21.5,-7.25],z:[-20.7,-3.5]}};
 const zones=Object.entries(footprints).map(([name,{x,z}])=>({name,polygon:
@@ -67,6 +68,7 @@ export function createKloGeometries(){
 }
 
 export function addKloFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision}){
+  addPanoramaSanitaryFixtures(layout,{fixture,box,part,rod,assemblyCollision});
   const floor=layout.kloBar.floorHeight,across=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),Math.PI/2);
   function grid(name,x0,x1,y0,y1,z,pitch=.1){
     for(let x=x0;x<=x1+.001;x+=pitch)box(name,[x,(y0+y1)/2,z],[.014,y1-y0,.018],'steel');

@@ -1,5 +1,67 @@
 # Berghain viewer validation
 
+## Panorama sanitary area and club-night increment — 2026-10-24
+
+**PROGRESS; local technical acceptance PASS. Full architectural goal incomplete.**
+The 129-input tested freeze is output/berghain-night-tested-candidate.json,
+SHA256 e9f10cdea0a81cd761614786f9dfca51840c16aa8325db603d83388ef5697713.
+Final publication documentation is bridged separately; production, tests and
+GLB bytes remain identical. The original rejected freeze and failed review
+reports remain under output/berghain-night-rejected-candidate.json and the
+night Physics/Camera review reports.
+
+The candidate adds 46 original parts for separate Panorama toilets below the
+existing lounge. The relationship is supported; dimensions, footprint, count,
+orientation and doorway placement remain estimates. Main-floor Klo is retained.
+Viewer night cues replace global daylight with localized steady illumination;
+they are authored appearance parameters, not measured current club fixtures.
+Exterior inspection retains daylight. The portable GLB carries geometry and
+uncertainty metadata; the adaptive cue bank belongs to the viewer.
+
+- 141/141 fresh Node checks pass: output/berghain-night-repaired-node.log.
+- 18/18 sequential browser cases pass: output/berghain-night-repaired-browser/
+  report.json. Three viewport profiles cover room tours, real-input Panorama WC
+  round trip with matching 60-degree native view, lounge stairs, input/audio,
+  Halle stair/guard views and night room tours with all 26 texture requests blocked.
+  No JavaScript page errors; expected fallback resource failures and one shader
+  precision warning are recorded, not hidden as a zero-console-error claim.
+- Independent Physics and Camera rechecks pass on the same freeze:
+  output/berghain-night-physics-recheck.md and
+  output/berghain-night-camera-recheck.md. Fresh specialist CPU checks and
+  supplied integrator browser evidence are distinguished in those reports.
+- Physics verifies all three cubicles and lounge ascent/descent at 30/60 fps and
+  delayed steps. Minimum sampled new-solid body clearance 0.216 m, lintel
+  headroom 2.26 m. Six invalid starts recover legally; the trough repair escapes
+  its complete rim by 0.601 m. Camera confirms actual light/ceiling rays, room
+  readability and source/native bounds within 3.2e-6 m.
+
+Review repairs lowered the Klo light below its opaque ceiling, supplied useful
+Halle entry/stair illumination, matched the native comparison lens, and replaced
+thin trough colliders with its conservative assembly boundary. Earlier failed
+lighting/oracle/physics evidence is retained. The original 12-case browser pass
+is historical, not used instead of rerunning changed production.
+
+Nine baseline and nine current local cost samples pass, using the same
+first-person 60-degree lens, 1.6 m/s speed, real-input Säule start and 3 s travel.
+Median p95 frame intervals remain 14.2 ms desktop and 7.1 ms on both Android-emulated
+viewports. Median ready time increases 159–400 ms; portrait input latency rises
+11.2→16.3 ms. Draw calls rise by 3; transfer grows 10,966 bytes and 2 requests. No
+idle frames or runtime GLB download; 26 texture loads and 1.6M-pixel buffer cap
+remain. Scoped model/runtime JS adds 4,404 individual-gzip bytes. This is one
+controlled route on Intel Iris Xe, not all-room or physical-device performance.
+Receipts: output/berghain-night-cost-summary.json and night-size-delta.json.
+
+Export: 51,008,524 bytes; 673,728 triangles; 171 groups; 25 embedded maps; SHA256
+3688016d51c5bf32e7deba80101ed63b8a64689f4a8e8c303111574af8d51c6a.
+The preserved baseline contains 153 files from 3f54d69; primary index remains
+704aa6efaa460b62afae0eb826c95ec075c54aff3b91b61dd4a5f6f00ecb2105.
+
+Publication and deployed-byte/control verification are pending. Physical
+Android, measured photometry, complete natural entrance-to-upper-WC travel,
+smoking attachment, backstage locations and full contemporary fidelity remain
+unverified. The enlarged source catalogue has 147 records; AU26 explicitly
+records missing backstage/service spaces. README.md owns the remaining work.
+
 ## First-person, archival audit and Astra Halle increment — 2026-10-24
 
 Current increment: **PROGRESS; local technical acceptance PASS**. Candidate
@@ -125,6 +187,23 @@ are recorded in output/berghain-first-person-release.json after verification.
 Physical Android/device GPU and perceptual listening NOT RUN. Full contemporary
 interior fidelity remains incomplete; earlier releases below retain their own
 historical scope.
+
+### Verified public release and local handoff
+
+Commit 3f54d69b35f0c65fbb9b172cc85b1c26dc5bdf49 is deployed at
+https://germanysimulator.de/geheim/. Pages40100987700 succeeded on that exact
+head. All74 public files match Git bytes, six entry URLs respond and19/19
+actual public desktop/Android-emulated checks pass. These include the desktop
+Halle source/native/circuit, natural Säule and main-bar routes on all three
+layouts, desktop Lab route, native silent PCM and real input/audio/stall checks
+on all three layouts. Actual public frames were inspected. Remote main still
+points to this commit. Final receipt: output/berghain-first-person-release.json.
+
+All121 frozen local inputs, 141 preserved baseline files and the original
+primary index remain intact. This subsection and the owning README publication
+paragraph are local post-publication task-state notes; they do not change the
+deployed runtime. No physical Android, perceptual listening, measured acoustics
+or complete contemporary architectural fidelity is certified.
 
 ## Entrance/topology evidence increment — 2026-10-24
 
