@@ -522,6 +522,17 @@ GitHub Pages views before publishing changes to this contract.
 
 For speed calibration, follow the skill's [planted-foot assessment](../.agents/skills/animate-2d-characters/references/painted-walking.md#calibrate-ground-speed-to-planted-feet): mark exact-export sole contacts, fit ground distance per cycle at the character's actual billboard scale, compare residual slide in shoe lengths, and inspect the live gait. The current distance-driven controller prevents stepping while blocked, but that alone does not verify that a planted shoe stays fixed on the ground.
 
+Check both feet in both side views at distributed interior stance samples,
+including at least five positions per planted interval. Three endpoints/midpoint
+can hide cubic easing: in a 16-sample cycle use near phases 4/6/8/10/12 and
+opposite phases 12/14/16/18/20, wrapping indices as needed. Inspect consecutive
+actual source/native contact travel and fit residuals, not just net displacement
+or cycle wraps. A negated planted/swing curve is not its half-cycle shift; verify
+each foot's own support interval. Record any near-only or three-point evidence
+as that limited scope. Judge native residual against measured shoe size and
+playback; the skill specifies no universal pixel threshold. Preserve unchanged
+art and exact reviewed cells when repairing a field.
+
 The accepted side-view cycle distances, in game units, are Merkel 24, Alice 27, Bayern 32, Merz 25, Herr Sandale 13.5, and Frau Sandale 14. `assets/characters/gait-calibration.json` records twelve SHA-256-bound right/left contact traces, prior settings, billboard scales, fitted distances and sole-edge measurement regions. The project skill's `scripts/assess_walk_speed.py` reproduces the fit and slip comparison. These are sole-edge contact proxies from the exact accepted pixels; inspect actual foot identity and normal-speed game playback when revising the atlas. The manifests own the runtime values and the character review sandbox reads them, so it shows the same cadence as the game. No approved art pixels or route speeds changed.
 
 ## Walking quality for every character

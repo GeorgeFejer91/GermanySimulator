@@ -1,0 +1,370 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-manfred-din",
+  "sourceHashes": {
+    "cardinals-v3.png": "e14cd283fb2a06a4590ec49c41486f379c4d49864c58995d7157c667f6b7b236",
+    "quarters-v1.png": "6fa15c8b0d8f5659b8d146c3986b9b4b1ff115f24738afca4329ff3715b82b02"
+  },
+  "frontAlpha20Height": 971,
+  "wholeSourceDensityHeights": {
+    "cardinals-v3.png": 971,
+    "quarters-v1.png": 973
+  },
+  "workingFigureHeight": 400,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        60,
+        13,
+        402,
+        984
+      ],
+      "sourcePivot": [
+        235.5,
+        984
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 141.0,
+          "bounds": [
+            74,
+            872,
+            208,
+            984
+          ],
+          "pixels": 9820
+        },
+        {
+          "x": 330.0,
+          "bounds": [
+            260,
+            872,
+            400,
+            984
+          ],
+          "pixels": 10160
+        }
+      ],
+      "workingOrigin": [
+        158.98661174047373,
+        66.64469618949533
+      ],
+      "workingBoundsAlpha20": [
+        184,
+        73,
+        325,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/down.png",
+      "registeredSha256": "330edc97d444ae35f3e61512fb114c07480ca4cd2d0de40634aa176e0699cfd5"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        60,
+        14,
+        390,
+        987
+      ],
+      "sourcePivot": [
+        220.25,
+        987
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 142.0,
+          "bounds": [
+            77,
+            875,
+            207,
+            987
+          ],
+          "pixels": 10773
+        },
+        {
+          "x": 298.5,
+          "bounds": [
+            207,
+            875,
+            390,
+            954
+          ],
+          "pixels": 10964
+        }
+      ],
+      "workingOrigin": [
+        165.4552929085303,
+        66.24460431654677
+      ],
+      "workingBoundsAlpha20": [
+        190,
+        72,
+        326,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/front-right.png",
+      "registeredSha256": "1e82fae3b316219e1f7d120019bdcef175ed7ea96ff7812bef98006d910ebe90"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        487,
+        14,
+        729,
+        990
+      ],
+      "sourcePivot": [
+        610.5,
+        990
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 610.5,
+          "bounds": [
+            492,
+            878,
+            729,
+            990
+          ],
+          "pixels": 20185
+        }
+      ],
+      "workingOrigin": [
+        4.506694129763105,
+        64.17301750772396
+      ],
+      "workingBoundsAlpha20": [
+        205,
+        70,
+        305,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/right.png",
+      "registeredSha256": "84665d096ee950aafdc9b76bdc1eb98e18967380f7f9ef1a835a721183ccc16b"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        432,
+        17,
+        756,
+        975
+      ],
+      "sourcePivot": [
+        586.5,
+        975
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 510.0,
+          "bounds": [
+            450,
+            865,
+            570,
+            948
+          ],
+          "pixels": 7710
+        },
+        {
+          "x": 663.0,
+          "bounds": [
+            570,
+            865,
+            756,
+            975
+          ],
+          "pixels": 14815
+        }
+      ],
+      "workingOrigin": [
+        14.890030832476867,
+        71.1778006166495
+      ],
+      "workingBoundsAlpha20": [
+        193,
+        78,
+        326,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/rear-right.png",
+      "registeredSha256": "6a13031de24ce2e75b5cfa072f9f3d57ecbe3e692aa878dc59aec81bbd7e5fae"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        779,
+        14,
+        1125,
+        979
+      ],
+      "sourcePivot": [
+        962.0,
+        979
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 872.0,
+          "bounds": [
+            812,
+            868,
+            932,
+            979
+          ],
+          "pixels": 10013
+        },
+        {
+          "x": 1052.0,
+          "bounds": [
+            991,
+            868,
+            1113,
+            974
+          ],
+          "pixels": 9722
+        }
+      ],
+      "workingOrigin": [
+        -140.29248197734296,
+        68.70442842430481
+      ],
+      "workingBoundsAlpha20": [
+        181,
+        75,
+        324,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/up.png",
+      "registeredSha256": "99d2719c379f7194138cd329d782c23c222a55d793c8689a978c8baec29bdc23"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        804,
+        15,
+        1131,
+        976
+      ],
+      "sourcePivot": [
+        972.25,
+        976
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 887.5,
+          "bounds": [
+            804,
+            865,
+            971,
+            976
+          ],
+          "pixels": 13213
+        },
+        {
+          "x": 1057.0,
+          "bounds": [
+            1002,
+            865,
+            1112,
+            955
+          ],
+          "pixels": 7649
+        }
+      ],
+      "workingOrigin": [
+        -143.6916752312436,
+        70.76670092497432
+      ],
+      "workingBoundsAlpha20": [
+        187,
+        77,
+        321,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/rear-left.png",
+      "registeredSha256": "212a7687a39f7e81a0391846fa9e32b3797875f0d74e7222a8c26a349a9101a4"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        1233,
+        15,
+        1475,
+        993
+      ],
+      "sourcePivot": [
+        1353.0,
+        993
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1353.0,
+          "bounds": [
+            1233,
+            881,
+            1473,
+            993
+          ],
+          "pixels": 20053
+        }
+      ],
+      "workingOrigin": [
+        -301.3635427394439,
+        62.937178166838294
+      ],
+      "workingBoundsAlpha20": [
+        207,
+        69,
+        306,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/left.png",
+      "registeredSha256": "f0ffe81970610092d1fb5ccc49b869aaf94c970f473b7645b2bcb39dd6f95f11"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/raw/quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1191,
+        15,
+        1504,
+        987
+      ],
+      "sourcePivot": [
+        1340.0,
+        987
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1340.0,
+          "bounds": [
+            1191,
+            875,
+            1489,
+            987
+          ],
+          "pixels": 22100
+        }
+      ],
+      "workingOrigin": [
+        -294.8735868448099,
+        66.24460431654677
+      ],
+      "workingBoundsAlpha20": [
+        195,
+        73,
+        324,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-manfred-din/adult-v1/registered/front-left.png",
+      "registeredSha256": "27179c0571f37d2d6429bfffafad68c3427e54c80d4fc035d01c64967c1a5ece"
+    }
+  }
+}

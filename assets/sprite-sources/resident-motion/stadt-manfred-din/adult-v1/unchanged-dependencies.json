@@ -1,0 +1,17 @@
+{
+  "base": "a9fff2952ebb6ecb6106cb2f1f7a82668137cfcd",
+  "hashes": {
+    "tools/build-street-character-sprites.py": "f767870a304d1b6a99bf0ba8dd02b8d7842efcd97c7ef0f64a633fb3c3ecba9a",
+    "tools/build-street-mouths.py": "da45773cfd1195df275186aba6efe8332c4ba704187710e3a26f5874997d88a8",
+    "tools/build-street-motion-delivery.py": "4aedd5e1ad531e13320788e4eb9405d9ee5ca0e1bb30d7473ab8e543e5f0a33b",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    ".agents/skills/animate-2d-characters/scripts/harmonize_material.py": "15a5ca18a4743284d73afda6ece61b97d31bb548496d1ee7f423798e43cc98ef",
+    ".agents/skills/animate-2d-characters/scripts/assess_walk_speed.py": "deac5ae5f9efc0cad9a0832fbf0df1be807396ef2f2a283482bc77980a5f70d9",
+    "game.js": "84afb12d24ef33d427e008a5711a61e7c6c475f2af2dd30b9517ff6e2f39de52",
+    "world3d.js": "18cad4aff9885637961c07fb7c5758c41f2db33b3bcd5207b8f68e79dec13821",
+    "street-character-sprites.js": "daf8980435274b7757e2e58a6549b7bdae59f82ec332736dbb4839aac383c7c5",
+    "character-interactions.js": "0d97ec61fe9cdb373e4dceb3becadd42282219f8c89907f290d42cff7752e633",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806"
+  }
+}

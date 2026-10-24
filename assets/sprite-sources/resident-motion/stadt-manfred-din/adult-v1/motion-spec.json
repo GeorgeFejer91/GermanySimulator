@@ -1,0 +1,6 @@
+{
+  "actor": "stadt-manfred-din",
+  "strideDistance": 11.5,
+  "sourceCalibration": "output/street-redesign/manfred-din-end-to-end/sole-cadence/report.json",
+  "purpose": "Own source RGB sole centroid calibrated motion parameter; generation reads no current registry."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "stadt-manfred-din",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "stadt-manfred-din",
+    "city-manfred-din"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/stadt-manfred-din-standing.webp",
+    "sha256": "b4aa9671a9c330ac89d21336bfe7463fe221666df0841ca7c73a767f13065841",
+    "width": 128,
+    "height": 160
+  }
+}

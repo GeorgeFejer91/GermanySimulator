@@ -1,0 +1,19 @@
+{
+  "reviewer": "Manfred DIN actor owner",
+  "status": "EIGHT_PAINTED_SOURCES_ACCEPTED_FOR_ANIMATION",
+  "selectedRawSha256": {
+    "raw/cardinals-v3.png": "e14cd283fb2a06a4590ec49c41486f379c4d49864c58995d7157c667f6b7b236",
+    "raw/quarters-v1.png": "6fa15c8b0d8f5659b8d146c3986b9b4b1ff115f24738afca4329ff3715b82b02"
+  },
+  "registrationSha256": "7e16ef41366d4107dee832fa73a6790ffb20abeb6c32182f5b14c5795aafd548",
+  "actuallyInspected": ["untouched cardinals-v3 and quarters-v1", "eight registered complete bodies on common light source board", "all eight separate registered dark composites", "front and both profile enlarged faces", "five actual visible lip coordinate grids", "right opposite contact phases4/12 and down/up contact examples"],
+  "observations": {
+    "identity": "Older Manfred retains grey side-parted hair, round black glasses, white goatee, mustard knitted vest over grey short sleeves, charcoal full trousers and broad brown shoes. The new face is mature, tired, angular and pedantic.",
+    "proportions": "Small head, connected adult shoulders/elbows/wrists and long full hip/knee/ankle chains replace the old huge-head miniature. The same400px source-group scale and sole472 apply across the eight views; no cell is independently fitted.",
+    "physicalProps": "ONE folded ruler stays low in anatomical RIGHT hand: viewer-left front, viewer-right rear. LEFT hand is empty; the white spiral notepad stays in LEFT breast pocket and naturally vanishes from rear/far projection.",
+    "turns": "Head, shirt, vest, pelvis, trousers and complete shoes turn together in four distinct cardinal and four genuine oblique paintings. Each quarter has its own silhouette and correct near/far hands; no cardinal reflection or head-only swivel.",
+    "alpha": "Real light/dark composites show clean transparent margins and gaps without the brown hiddenRGB backdrop displayed by imagegen preview. No detached substantial painted patch or clipped shoe is visible.",
+    "mouth": "Front, both profiles and front quarters have identifiable closed lip creases. Rear and both rear quarters deliberately have null profiles; a small rear cheek edge is not frontal lips.",
+    "limits": "This is a source gate. Full native body/mouth cells, exact reproduction, source-derived cadence and actual game stress remain separate required gates. Physical Android and listening were not performed."
+  }
+}

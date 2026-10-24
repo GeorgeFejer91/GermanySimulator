@@ -714,3 +714,28 @@ failure; the fresh desktop retry passed. Silent emulation and scripted placement
 do not establish physical Android, perceptual listening, natural mission
 traversal, general FPS or all-world collision/HUD certification. Evidence:
 `output/ursula-release/`.
+
+Ursula deployment `20c3b5a98d6b6d4632d79991eabe6dff9695498f` succeeded in
+Pages run 40049855127. All 14 public files match the immutable deployment;
+actual silent portrait root and query/hash-preserving compatibility startup
+pass without page or HTTP errors. A separate postdeployment actor paint view
+has not run. Evidence: `output/ursula-release/live/`.
+
+### Side-view planted-foot followup, 24 October
+
+A denser in-progress gait pilot found an actor-local field error: negating the
+near foot's planted/swing displacement applies cubic swing easing during the
+opposite foot's planted interval. Five interior stance samples reveal a
+15 percent source-slope discrepancy that endpoint/midpoint or near-only tests
+can miss. Brigitte, Dietmar and Günther's authors confirmed the pattern; root
+also identified it in Manfred and the newly published Ursula recipes. Existing
+source/native, cycle and route results retain their actual measured scope and
+are not retroactively called both-foot uniform-stance proof.
+
+Affected in-progress families are held for per-actor half-cycle field repair,
+actual source-RGBA five-point contacts for both feet/views, final native replay
+and affected review. Raw paintings, identity, props and approved main poses
+remain intact; exact unchanged cells may retain their prior visual evidence.
+Ursula's improved visual family stays live while its specific cadence correction
+is queued. The owning sampling rule is in the sprite generation protocol.
+Evidence: `output/street-cast-continuation/far-stance-source-finding.json`.
