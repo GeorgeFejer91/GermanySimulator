@@ -10,13 +10,68 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Previous goal turn: **PROGRESS**. Main-bar release
+f18cd2cbedfe85c20231356934404b1e95031c79 is deployed at the permanent Geheim URL.
+Pages40063573644 succeeded;71 public files match Git bytes, all six entry URLs
+respond, and9/9 actual public desktop/Android-emulated cases pass. The104-input
+freeze and original primary index remain preserved. Receipt:
+output/berghain-mainbar-release.json. Full reconstruction stays ACTIVE.
+
+## Current increment: historic interior bar façade
+
+Re-reading primary architect A07 confirms an approximately11m-high bar room
+containing a former exterior façade that is now inside. I23 views12/16 show
+deep window reveals, two rows of circular reliefs, tall stepped pilasters and
+an upper cornice. Existing generic outer-wall windows do not reproduce this.
+Author an independent interior assembly from original geometry, preserving
+the measured exterior hull. The bar-side absolute location, bay dimensions,
+counts and currentness remain inferred;11m is an architect-reported room height,
+not a survey. Do not change outer elevations from an interior photograph.
+
+Extend main-bar.mjs and its existing geometry factory/fixture API: five inferred
+bays behind the service counter, recessed dark windows, two circular relief
+rows, pilaster bases/caps and stepped horizontal trim. Add the room's ceiling
+at11m clear height; retain its actual supports and the open guest aisle.
+Reuse existing materials/maps/instancing/export and the accepted camera/input.
+No new runtime, dependency, UI or photographic texture. Preserve accepted104
+inputs plus32 ancillary dependencies in output/berghain-barwall-baseline.
+
+Allowed writes: main-bar.mjs, GLB/manifest, scoped wall Node/browser tests and
+owning Berghain source/interior/provenance/validation notes. Model metadata
+already exports mainBar; only change another hook if required by actual evidence.
+The shared lounge-playtest travel pilot also needs bounded real-input corrections:
+a traced landscape stair run crossed its target before touch release arrived.
+Keep the existing .23m accuracy requirement and production controls unchanged.
+
+- [x] Verify the previous release, primary index, source images and architect text.
+- [x] Preserve the accepted baseline before touching production geometry.
+- [x] Observe meaningful failures for missing relief/recess geometry and11m room.
+- [x] Build and inspect the complete wall composition against both primary views;
+  verify real depth, existing counter/structure clearances and traversable routes.
+- [x] Export native geometry, inspect source/native/human frames across desktop
+  and Android emulation, and compare actual loaded/idle/transfer cost.
+- [x] Freeze one integrated candidate, obtain both independent world reviews
+  and repair findings. Final 106-input freeze SHA256
+  b77612dc44df5168a19eff8090ca2a05fee1523f0208a0b596823a26e6859e69;
+  Node 100 plus packaging 4, fresh browser 13/13 and extra corrective-input
+  branch 1/1 pass. Both scoped independent reviews pass. Cost: nine cold
+  contexts per side, same requests/maps and broadly stable local p95 tails.
+- [ ] Publish and verify canonical bytes plus real public interaction. The
+  owning output/berghain-barwall-release.json receipt records actual results.
+
+Actual medallion/recess geometry and scale are scoped progress. The heavily
+weathered facade finish and photographed blue gridded high roof/skylight remain
+unreproduced. Do not claim the comparatively clean wall and flat dark ceiling
+complete the room's visual fidelity. The service path is a tight one-person
+pinch; deep unreachable wall/cabinet starts exceed bounded collision recovery.
+
 Previous goal turn: **PROGRESS**. The balustrade release dd20eb55cf52baedd389deaca5501c60edc749e4
 is deployed at https://germanysimulator.de/geheim/. Pages40058076329 succeeded;
 70 public files match exact Git bytes and 9/9 actual canonical desktop/Android
 portrait/landscape cases pass. All 101 accepted inputs and the primary index
 remain preserved. Receipt: output/berghain-balustrade-release.json. Full goal ACTIVE.
 
-## Current increment: long main bar and glazed room boundary
+## Previous increment: long main bar and glazed room boundary
 
 I23 adds 17 directly inspected architect lightbox views (00–16). Views11–14
 show the long counter, curved return, two luminous ribbed bands, dark middle

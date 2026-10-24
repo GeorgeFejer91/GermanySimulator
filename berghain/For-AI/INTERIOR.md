@@ -73,6 +73,25 @@ by the existing nine actual opaque-frame/wall/door rays. It settles through
 finite demand rendering. Glass and steel retain their authored depth/materials;
 other floors, original guards, garden and entrance clearance remain unchanged.
 
+### Historic inner facade and bar-room ceiling
+
+A07 explicitly describes an approximately11m-high bar room with a former
+exterior facade now inside. I23 views12/16 supply the visible circular reliefs,
+recessed windows, pilaster bases/caps and upper cornice. The independent interior
+assembly now has five inferred bays, two relief rows, deep framed windows and
+the room ceiling. It retains the calibrated outer hull. The absolute floor
+datum6.65m, bay pattern/dimensions, placement and currentness remain inferred;
+the interview does not supply an architectural section or survey.
+
+The service counter fits the new pilasters with cabinet/worktop notches and
+bay-centred inferred sinks. All15 columns remain. The earlier inferred beam
+across the upper reliefs is trimmed within the bar, retaining its two exterior
+sections. A preserved first rendered study and failing sightline check expose
+that conflict; source/native rays must now reach the actual relief. Concrete
+ceiling/support joints are intentional. These original meshes add no reference
+pixels or texture family. Fine plaster wear, accurate moulding profiles and
+verified contemporary dimensions/room topology remain required.
+
 ## Original foyer and stair guards
 
 I08/I09/I15 show closely spaced vertical steel infill. Six runs now replace

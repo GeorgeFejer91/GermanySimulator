@@ -9,6 +9,25 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Historic interior bar facade and room ceiling
+
+Primary architect interview A07 describes an approximately11m-high bar room
+with a former exterior facade now inside the building. It gives no floor datum
+or measured section. I23 views12/16 show recessed windows, circular reliefs,
+tall pilasters and stepped trim. Original geometry extends main-bar.mjs with
+five inferred bays, ten profiled medallions, framed window recesses and ceiling.
+Nominal11m clear height uses the still-inferred6.65m floor datum. Bay dimensions,
+counts, ornament profile, absolute placement and contemporary condition remain
+estimates. The measured exterior hull and all15 columns remain unchanged.
+
+Service cabinetry/worktop is notched around the actual new pilaster bases;
+sinks move to the inferred window bays. The earlier generic longitudinal beam
+blocked the upper relief row, contrary to these photographs. Its bar-room span
+is removed while both outside sections remain. This corrects inferred geometry;
+it does not assert a new measured structural plan. Existing concrete supports
+meet the added room ceiling as deliberate structural joints. No photograph
+pixels, new textures, runtime dependency or render pass are introduced.
+
 ## Main long bar and hall-facing glass screen
 
 Original geometry in main-bar.mjs uses architect I23 lightbox views11–14/16:

@@ -1,5 +1,74 @@
 # Berghain viewer validation
 
+## Historic interior bar facade — 2026-10-24
+
+Primary architect interview A07 describes an approximately 11 m-high bar room
+containing a former exterior facade. I23 views 12/16 show recessed dark windows,
+two circular relief rows, stepped pilasters and cornice. The new independent
+inner assembly has five inferred bays, ten actual profiled medallions and deep
+window reveals. The 11 m clear height uses an inferred 6.65 m floor datum; bay
+counts, positions, profiles, floor relationship and currentness are estimates.
+The calibrated outer hull, all 15 columns, original floors/stairs, 44 PA
+components and two partial artwork studies remain. This is scoped progress.
+
+The first rendered study exposed an old inferred beam crossing the upper
+reliefs. The accepted correction clips only its bar-room span, retaining two
+outer segments and every column. The source/native relief sightline is 4.36 m;
+all five windows have real 0.27 m recess depth. Cabinet/worktop rear notches
+clear the new pilasters, with three sink recesses aligned to window bays.
+Ceiling underside and screen head meet at y17.65; retained columns deliberately
+join the ceiling. The photographic blue gridded roof/skylight and heavily
+weathered finish are not reproduced by this flat ceiling and cleaner wall.
+
+GLB: 49,104,348 bytes, 654,252 triangles, 151 mesh-material groups, 25 embedded
+maps; SHA256 fd81c7078f9667c36b70d9467acd633114ec34512b305140fabac516f469ffc6.
+Delta from f18cd2c: +597,664 bytes, +10,436 triangles and +2 groups. The same
+26 runtime maps and 5,501,462 embedded texture bytes are reused. No new runtime
+module, texture, dependency, lighting pass, production input or camera change.
+
+Final 106-input freeze: output/berghain-barwall-candidate.json, SHA256
+b77612dc44df5168a19eff8090ca2a05fee1523f0208a0b596823a26e6859e69.
+Current Node 100/100 plus route-packaging 4/4 pass. The fresh monolithic
+output/berghain-barwall-accepted-browser/report.json passes 13/13 on all current
+hashes: source/native 3, natural exterior entry/stair/full aisle/reverse exit 3,
+loaded screen yaw 3, fallback 3 and desktop graphics restoration 1. Controlled
+source/native mean RGB differences are 0.76/0.83/0.81, with 26/26 maps disposed.
+Room shortcuts and controlled cameras do not establish natural route evidence.
+
+The retained earlier final-browser report is FAIL 9/10: landscape touch
+overshot the original stair waypoint. An instrumented unchanged-pilot rerun
+reproduced the overshoot: threshold z11.058 at 12837.7 ms, real pointer release
+109 ms later at z10.746, then no further movement. The shared test pilot now
+uses at most eight short real touch/keyboard correction pulses after release;
+the same 0.23 m accuracy and legal-body gates remain. Production controls are
+unchanged. An extra release-latency injection case passes: a test-driver-only
+120 ms delay causes a 0.981 m overshoot, two real back-button pulses recover
+to 0.148 m error, and the full yaw sweep passes. No teleport or selector is used.
+Failure/diagnosis/injection evidence is preserved under output/berghain-barwall-*.
+
+Independent Physics probes bound all 284 facade parts and 10,536 actual vertices,
+including 3,960 medallion vertices; no facade vertex penetrates retained columns.
+All 80 sampled wall crossings are blocked at legal stops. All 4,400 service
+fixture vertices clear pilasters. Guest and service routes traverse. The service
+pinch is about 0.795 m wide, with a sampled 0.20 m legal-center interval for the
+0.56 m visitor. This is one-person access. Local facade recovery passes 54/54;
+18 deep multiply occupied wall/cabinet starts in the full model remain invalid,
+1.08–1.25 m from legal centers. They are unreachable by legal walking and are
+not spawns. Preserve this bounded recovery limitation. Scoped independent
+review reports are output/berghain-barwall-{physics,camera}-review-final.md.
+
+Cost compares the preserved accepted 104 inputs plus 32 HTTP dependencies:
+three cold contexts per profile per side, nine before (desktop 3 plus mobile 6)
+and nine after. The normal page adds 6,467 encoded bytes, with 68 requests,
+26 maps, no startup GLB request, zero idle frames and drawing buffers <=1.6 MP.
+Local median p95 before/after: desktop 14.3/14.1 ms, portrait 14.0/14.0 ms,
+landscape 20.8/20.8 ms. Input medians are 13.2/13.9, 18.6/24.9 and 17.9/27.8 ms;
+ready medians 1530/1442, 1428/1422 and 1485/1419 ms. These local samples establish
+no speedup or physical-device guarantee. Distributions and raw report paths are
+in output/berghain-barwall-cost-summary.json. Physical Android/device GPU and
+perceptual listening remain NOT RUN. Publication and exact public verification
+belong to output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
+
 ## Main long bar and glazed hall boundary — 2026-10-24
 
 I23 adds17 directly inspected primary architect lightbox views (00–16), with

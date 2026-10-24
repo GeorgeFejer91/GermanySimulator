@@ -35,10 +35,29 @@ export async function travel(ctx,target,heading){
     if(touch){await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await touch.detach();}
     else await page.keyboard.up('w');
   }
-  const end=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+  let end=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+  const corrections=[];
+  for(let attempt=0;attempt<8&&Math.hypot(end.x-target.x,end.z-target.z)>=.23;attempt++){
+    assert.ok(canStand(end,layout),'route is legal before corrective input');
+    const remaining=(end.x-target.x)*Math.sin(yaw)+(end.z-target.z)*Math.cos(yaw);
+    const forward=remaining>0,before=end;
+    if(profile.hasTouch){
+      const correction=await context.newCDPSession(page);
+      const b=await page.locator(`[data-move="${forward?'forward':'back'}"]`).boundingBox();
+      try{
+        await correction.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2}]});
+        await page.waitForTimeout(25);
+      }finally{
+        await correction.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await correction.detach();
+      }
+    }else await page.keyboard.press(forward?'w':'s',{delay:25});
+    end=JSON.parse(await page.locator('#model').getAttribute('data-position'));
+    corrections.push({before,forward,end});
+  }
+  if(corrections.length)ctx.artifacts.log('route-correction',JSON.stringify({target,corrections}));
   assert.ok(canStand(end,layout),'full-body route remains legal');
   assert.ok(Math.hypot(end.x-target.x,end.z-target.z)<.23,JSON.stringify({target,end}));
-  return {yaw,position:end};
+  return {yaw,position:end,corrections};
 }
 
 const runtime=['geheim/index.html','berghain/model.html','berghain/viewer.mjs','berghain/viewer.css',

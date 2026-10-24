@@ -21,15 +21,83 @@ export function createMainBarGeometries(){
   const seat=[[0,-.025],[.14,-.025],[.193,-.012],[.2,.016],[.192,.026],[.16,.009],[0,.004]];
   const fitting=[[0,0],[.075,0],[.075,.025],[.045,.04],[.065,.065],[.065,.085],[.037,.10],
     [.055,.13],[.055,.15],[.025,.17],[.04,.20],[.04,.22],[0,.22]];
+  const relief=[[0,0],[.56,0],[.595,.008],[.61,.025],[.60,.043],[.57,.05],
+    [.53,.027],[.51,.019],[.18,.019],[.155,.035],[.14,.058],[0,.058]];
   return {
     'main-bar-corner-top':arcPlan(corner.outer,corner.inner,.075),
     'main-bar-corner-body':arcPlan(corner.outer-.025,corner.inner+.025,1.025),
     'main-bar-corner-band':arcPlan(corner.outer+.012,corner.outer-.012,.16),
     'main-bar-stool-seat':new THREE.LatheGeometry(seat.map(p=>new THREE.Vector2(...p)),24).translate(0,-.0005,0).scale(2.5,1/.051,2.5),
-    'main-bar-stepped-fitting':new THREE.LatheGeometry(fitting.map(p=>new THREE.Vector2(...p)),20)
+    'main-bar-stepped-fitting':new THREE.LatheGeometry(fitting.map(p=>new THREE.Vector2(...p)),20),
+    'main-bar-medallion':new THREE.LatheGeometry(relief.map(p=>new THREE.Vector2(...p)),32)
+      .translate(0,-.029,0).scale(1/1.22,1/.058,1/1.22)
   };
 }
 const site=values=>{const p=studyToSite({x:values[0],y:values[1],z:values[2]});return[p.x,p.y,p.z];};
+
+function addHistoricBarFacade(layout,{fixture,part,box}){
+  const floor=layout.mainBar.floorHeight,anchor=site([22,floor,-4]);
+  const next=site([22,floor,0]),pitch=Math.hypot(next[0]-anchor[0],next[2]-anchor[2]),length=pitch*5;
+  const angle=Math.atan2(next[0]-anchor[0],next[2]-anchor[2]);
+  const rotation=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),angle);
+  const discRotation=rotation.clone().multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),Math.PI/2));
+  const offset=point=>new THREE.Vector3(...point).applyQuaternion(rotation).toArray();
+  const placed=(name,center,size,material='pale',solid=true)=>part(name,offset(center),size,material,'box',solid,rotation);
+  const bayCenters=Array.from({length:5},(_,i)=>offset([0,0,(i-2)*pitch]).map((v,j)=>v+anchor[j]));
+  const beamCenter=site([19,12.95,-6]);
+  const inferred=layout.parts.find(p=>p.name==='structural beam'&&p.center.every((v,i)=>Math.abs(v-beamCenter[i])<(i===1?.05:.001)));
+  if(!inferred)throw Error('The inferred bar-room beam must be resolved before adding the historic facade');
+  layout.parts=layout.parts.filter(p=>p!==inferred);
+  for(const [low,high]of [[-21,-14],[6,9]]){
+    const fraction=(high-low)/30,shift=((low+high)/2+6)/30,matrix=[...inferred.matrix];
+    for(let i=0;i<3;i++){matrix[12+i]+=inferred.matrix[8+i]*shift;matrix[8+i]*=fraction;}
+    layout.parts.push({...inferred,name:'retained bar-boundary beam',center:matrix.slice(12,15),
+      size:[inferred.size[0],inferred.size[1],inferred.size[2]*fraction],matrix});
+  }
+  layout.mainBar.interiorFacade={sources:['A07','I23'],clearHeight:11,ceilingUnderside:floor+11,bayCenters,
+    role:'Former exterior facade now inside the bar room',bayCount:5,medallionRows:2,
+    confidence:'Architect-reported approximate room height; footprint, bay sizes/counts, ornament depth and contemporary arrangement inferred',
+    structuralConnections:'Existing concrete supports meet the new room ceiling; exterior hull and floor grid retained',
+    beamCorrection:'I23 views12/16 show clear space across the upper relief row. Trim the old inferred longitudinal beam within this bar room; retain its exterior sections and all columns.'};
+  fixture('main-bar-interior-facade',[22,floor,-4],['A07','I23'],{clearHeight:11,length,bays:5},()=>{
+    const width=1.55,flank=(pitch-width)/2;
+    for(let bay=0;bay<5;bay++){
+      const z=(bay-2)*pitch;
+      for(const side of [-1,1])placed('window flank',[-.53,5.5,z+side*(pitch+width)/4],[.10,11,flank]);
+      for(const [low,high]of [[0,1.85],[5.1,6.95],[10.12,11]])
+        placed('masonry field',[-.53,(low+high)/2,z],[.10,high-low,width]);
+      for(const y of [1.02,6]){
+        for(const side of [-1,1])placed('relief panel side rim',[-.596,y,z+side*.81],[.032,1.56,.055]);
+        for(const side of [-1,1])placed('relief panel horizontal rim',[-.596,y+side*.78,z],[.032,.055,1.675]);
+        part('circular medallion',offset([-.609,y,z]),[1.22,.058,1.22],'pale','main-bar-medallion',true,discRotation).role='circular relief';
+      }
+      for(const [low,high]of [[1.85,5.1],[6.95,10.12]]){
+        const y=(low+high)/2,height=high-low;
+        placed('window backing',[-.27,y,z],[.02,height,width],'rubber');
+        placed('recessed window glass',[-.293,y,z],[.014,height-.12,width-.12],'mainBarGlass');
+        for(const side of [-1,1]){
+          placed('window side reveal',[-.44,y,z+side*(width/2+.025)],[.28,height,.05]);
+          placed('window horizontal reveal',[-.44,y+side*height/2,z],[.28,.065,width+.10]);
+        }
+        for(let i=0;i<=3;i++)placed('old window mullion',[-.32,y,z-width/2+i*width/3],[.04,height,i===0||i===3?.065:.032],'rust');
+        for(let i=0;i<=4;i++)placed('old window transom',[-.32,low+i*height/4,z],[.04,i===0||i===4?.065:.032,width],'rust');
+        placed('stepped window sill',[-.61,low-.035,z],[.16,.07,width+.18]);
+      }
+    }
+    for(let pier=0;pier<=5;pier++){
+      const z=-length/2+pier*pitch;
+      for(const [name,y,height,depth,width]of [['pilaster base',.11,.22,.36,1.28],['pilaster plinth',.365,.29,.29,1.18],
+        ['pilaster stem',5.25,9.9,.24,1.1],['pilaster capital',10.24,.18,.34,1.25],['pilaster cap',10.39,.12,.40,1.38]])
+        placed(name,[-.58-depth/2,y,z],[depth,height,width]).role='pilaster';
+      for(const side of [-1,1])placed('pilaster shallow edge',[-.827,5.25,z+side*.45],[.014,9.8,.032]);
+    }
+    for(const [y,height,depth]of [[10.17,.10,.18],[10.30,.16,.26],[10.48,.14,.34],[10.70,.30,.20],[10.95,.10,.28]])
+      placed('stepped cornice',[-.58-depth/2,y,0],[depth,height,length+.12]);
+    const wallWest=anchor[0]-.58,screenWest=layout.mainBar.screenAnchor[0]-.15;
+    box('ceiling',[(wallWest+screenWest)/2-anchor[0],11.09,0],[wallWest-screenWest+.20,.18,length+.15],'concrete',true);
+    placed('screen head beam',[screenWest-anchor[0]+.15,10.85,0],[.20,.30,length+.15],'darkConcrete');
+  });
+}
 
 export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assemblyCollision}){
   const replaced=new Set(['bar hall counter','bar back','bar bottle']);
@@ -117,10 +185,28 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
       assemblyCollision();
     });
   }
+  addHistoricBarFacade(layout,{fixture,part,box});
   fixture('main-bar-service-worktop',[20.6,6.65,-5],['I23'],{height:.94,length:13.4,depth:.58},()=>{
-    box('service cabinet',[0,.45,0],[.58,.90,13.4],'rubber',true);
-    box('brushed worktop',[0,.91,0],[.62,.06,13.45],'stainless',true);
-    for(const z of [-4.8,-.8,3.9]){
+    const service=site([20.6,6.65,-5]);
+    const cuts=layout.solids.filter(s=>s.renderPart?.fixture==='main-bar-interior-facade'&&s.renderPart.role==='pilaster'&&
+      s.y[0]<7.59&&s.x[0]<service[0]+.31&&s.z[1]>service[2]-6.725&&s.z[0]<service[2]+6.725)
+      .map(s=>({lo:Math.max(-6.725,s.z[0]-service[2]-.025),hi:Math.min(6.725,s.z[1]-service[2]+.025),x:s.x[0]-service[0]-.025})).sort((a,b)=>a.lo-b.lo);
+    const rearLimit=Math.min(.27,...cuts.map(c=>c.x));
+    layout.mainBar.interiorFacade.serviceNotches=cuts;
+    box('service cabinet front',[(-.29+rearLimit)/2,.45,0],[rearLimit+.29,.90,13.4],'rubber',true);
+    box('brushed worktop front',[(-.31+rearLimit)/2,.91,0],[rearLimit+.31,.06,13.45],'stainless',true);
+    let start=-6.725;
+    for(const cut of [...cuts,{lo:6.725,hi:6.725}]){
+      if(cut.lo>start){
+        const z=(start+cut.lo)/2,length=cut.lo-start;
+        box('worktop rear segment',[(rearLimit+.31)/2,.91,z],[.31-rearLimit,.06,length],'stainless',true);
+        const low=Math.max(start,-6.7),high=Math.min(cut.lo,6.7);
+        if(high>low)box('service cabinet rear segment',[(rearLimit+.29)/2,.45,(low+high)/2],[.29-rearLimit,.90,high-low],'rubber',true);
+      }
+      start=Math.max(start,cut.hi);
+    }
+    const sinks=layout.mainBar.interiorFacade.bayCenters.map(p=>p[2]-service[2]).filter(z=>Math.abs(z)<6.2).slice(1,4);
+    for(const z of sinks){
       for(const dx of [-.195,.195])box('sink side',[dx,.946,z],[.018,.012,.48],'stainless');
       for(const dz of [-.24,.24])box('sink end',[0,.946,z+dz],[.39,.012,.018],'stainless');
       box('sink recess',[0,.941,z],[.37,.005,.46],'steel');
