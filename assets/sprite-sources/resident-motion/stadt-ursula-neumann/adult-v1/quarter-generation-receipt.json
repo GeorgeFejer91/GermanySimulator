@@ -1,0 +1,12 @@
+{
+  "request": "quarter-generation-request.json",
+  "portableOutput": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+  "tool": "built-in image_gen",
+  "status": "SOURCE INSPECTED; registration/motion pending",
+  "sha256": "7f4262323eeb9589b93e542e27154fc7a6324ed994a66e3ea54d8d9fbf79e525",
+  "originalOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16a2c-f85b-72c0-8177-c242086c559d/exec-86bb74e2-7535-4e1b-9e04-73898cacdb36.png",
+  "executedToolReferencePaths": [
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-ursula-complete/GermanySimulator/assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png"
+  ],
+  "originalUntouchedSha256": "7f4262323eeb9589b93e542e27154fc7a6324ed994a66e3ea54d8d9fbf79e525"
+}

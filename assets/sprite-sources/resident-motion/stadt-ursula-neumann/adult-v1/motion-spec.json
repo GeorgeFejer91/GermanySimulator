@@ -1,0 +1,51 @@
+{
+  "nativeFitRange": [
+    11.82771417170145,
+    11.83630927548324
+  ],
+  "actor": "stadt-ursula-neumann",
+  "sourceMarkers": {
+    "right": {
+      "point": [
+        260,
+        468
+      ],
+      "rgba": [
+        87,
+        64,
+        58,
+        252
+      ]
+    },
+    "left": {
+      "point": [
+        260,
+        468
+      ],
+      "rgba": [
+        76,
+        53,
+        46,
+        252
+      ]
+    }
+  },
+  "calibrationReportSha256": "4d0bdcf16b7aef48286f9e67c943b2be1385526e0e42094a8ce977adad6e25db",
+  "strideDistance": 11.8313,
+  "fittedNativeCycle": 11.831289062707604,
+  "validation": "Independently source/native fitted; actual rendered contact/cadence separate",
+  "originalActions": [
+    "idle",
+    "look",
+    "success",
+    "failure"
+  ],
+  "calibrationMethod": "Actual own RGBA near-sole patch transported through own source sampling field, alpha-weighted native centroids, existing assess_walk_speed slope fit",
+  "worldHeight": 2.33,
+  "sourceSheetDensity": {
+    "quarter": 701,
+    "cardinal": 700
+  },
+  "workingFigureHeight": 400,
+  "workingSole": 472
+}

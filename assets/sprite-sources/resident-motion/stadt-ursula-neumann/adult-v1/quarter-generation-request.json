@@ -1,0 +1,13 @@
+{
+  "transparent_background": true,
+  "tool": "built-in image_gen",
+  "status": "ARCHIVED BEFORE CALL",
+  "prompt": "Use case: stylized-concept. Create a second transparent source sheet of the EXACT older woman in the reference, with FOUR genuinely painted whole-body diagonal turn views in one horizontal row. Match her mature sturdy ADULT proportions, common crown-to-sole scale, angular weary skeptical aged face, short swept cream-blonde hair, teal quilted short jacket, cream blouse, full plum trousers and complete substantial burgundy shoes. Same worn painterly Disco Elysium Berlin finish, broken broad brush planes and cool grey-green/wine shadows. No smoother younger toy redesign.\nLeft to right: (1) FRONT-RIGHT whole-body three-quarter, genuinely halfway between FRONT and strict RIGHT profile, nose/chest/pelvis/knees/toes all turned about45degrees toward screen-right; show substantial side plane, NOT a frontal figure with turned head. (2) REAR-RIGHT whole-body three-quarter halfway between strict right profile and BACK, back of jacket dominant, a little right face profile. (3) REAR-LEFT whole-body three-quarter halfway between BACK and strict left profile, back dominant. (4) FRONT-LEFT whole-body three-quarter halfway between strict left profile and FRONT, substantial left side plane and foreshortening. All body parts turn coherently, both soles planted and readable, shoes separated subtly, same level sole line and full body height.\nPROP OWNERSHIP: exactly ONE rolled newspaper held low beside the anatomical RIGHT thigh by anatomical RIGHT hand. Anatomical LEFT hand empty throughout. In front-right, right arm/paper is NEAR and screen-left of body, visible. In rear-right, right arm/paper on NEAR viewer-facing flank, screen-right of body's back. In rear-left, right arm is FAR side and paper may be partly/fully hidden by body; near left hand empty. In front-left, right arm is FAR side and paper may be partly/fully occluded, never transfer it to near left hand. Preserve hand-to-grip attachment, never add an extra paper to show the prop. Relaxed arms low clear of hips. Complete connected shoulders, elbows, wrists, hips, knees, ankles and whole shoes. Closed readable lip crease on visible faces. Transparent background and wide transparent gutters; no text, shadow, floor or labels. Four independent paintings, never reflect/mirror a source. No clipping, no other objects.",
+  "references": [
+    {
+      "role": "locked new adult Ursula cardinals",
+      "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "sha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00"
+    }
+  ]
+}

@@ -7492,6 +7492,70 @@
       "status": "Own eight genuine mature whole-body source paintings selected by current412cell source/native/artifact and23output true-clean proof; wholebody runtime stress pending",
       "anatomicalAuthority": "Burgundy briefcase physical RIGHT hand, LEFT empty. Quarter request screen-side shorthand is not anatomical authority; actual connected right forearm/hand throughout rotations was inspected.",
       "runtimeAcceptance": "Independent integrated specialist acceptance, publication and deployed verification belong to root; see separate final receipts."
+    },
+    {
+      "generationRequest": {
+        "prompt": "Use case: stylized-concept. Asset: transparent full-body game character source sheet, FOUR genuinely painted views in one horizontal row. Ursula Neumann is the older sturdy German woman in references1/2: short swept cream-blonde hair, skeptical angular weary face, worn teal diamond-quilted short jacket over cream blouse, full plum trousers reaching ankles, substantial burgundy leather shoes. Preserve her identity and clothing but entirely redesign the obsolete huge-head/short-toy-limb anatomy: mature connected ADULT stature, about six heads tall, believable torso, long connected upper/lower arms, grown-up thighs, knees, calves and whole shoes. Use reference3 ONLY for mature painterly adult population scale and expressive paint, never its outfit, face, skirt, glasses or files. Further push angular Disco Elysium meets Berlin: broad broken dry-brush planes, tired asymmetrical eyes, facial age lines, muted petrol/wine/cool grey shadows, worn seams, no smooth cute rounded toy finish.\nCOMPOSITION: four separate complete standing figures, same crown-to-sole scale and level baseline, large transparent gutters. Left to right: FRONT facing viewer; STRICT RIGHT-FACING profile nose points screen-right; BACK facing away with back of head/jacket and heels; STRICT LEFT-FACING profile nose points screen-left. Full torso/pelvis/arms/legs/feet rotate with heading. Closed readable lip crease for visible faces. Both feet planted, subtly separated so both complete shoes and trouser legs can be read. Relaxed arms low clear of hips, connected shoulders/elbows/wrists. ONE small rolled NEWSPAPER held low by the anatomical RIGHT hand beside RIGHT thigh. LEFT hand is EMPTY in every view. Front: newspaper screen-LEFT. Rear: newspaper screen-RIGHT. Right-facing profile: right hand/newspaper is NEAR side and visible. Left-facing profile: right hand/newspaper is FAR side, may be partly or fully occluded by her body; near left hand is empty. Never move the newspaper to the left hand to keep it visible. Same single paper throughout. No extra objects, handbag, glasses, skirt or hat. No reflection/mirrored source, no pose duplicates, no text/labels, no ground/shadow/backdrop. Genuine alpha transparency. Full crown and complete shoe soles within frame, no clipping.",
+        "referenced_image_paths": [
+          {
+            "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-directions-candidate.png",
+            "sha256": "f225d9be3a4081a1be935e1fdc0c47d6b0f02a849448118d55ace2fca0d6037c",
+            "role": "Ursula identity/clothing only; obsolete proportions"
+          },
+          {
+            "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-standing.webp",
+            "sha256": "7aded52e8a8f4196531273181153fb22c557cacf7351e5d50dd614bf45e7a787",
+            "role": "Ursula identity/clothing only; obsolete proportions"
+          },
+          {
+            "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+            "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+            "role": "adult painted population style/proportion only"
+          }
+        ],
+        "transparent_background": true
+      },
+      "status": "Source inspected: genuine whole-body adult heading paint, own RIGHT newspaper/LEFTempty; native/runtime final acceptance separate",
+      "sha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00",
+      "prompt": "Use case: stylized-concept. Asset: transparent full-body game character source sheet, FOUR genuinely painted views in one horizontal row. Ursula Neumann is the older sturdy German woman in references1/2: short swept cream-blonde hair, skeptical angular weary face, worn teal diamond-quilted short jacket over cream blouse, full plum trousers reaching ankles, substantial burgundy leather shoes. Preserve her identity and clothing but entirely redesign the obsolete huge-head/short-toy-limb anatomy: mature connected ADULT stature, about six heads tall, believable torso, long connected upper/lower arms, grown-up thighs, knees, calves and whole shoes. Use reference3 ONLY for mature painterly adult population scale and expressive paint, never its outfit, face, skirt, glasses or files. Further push angular Disco Elysium meets Berlin: broad broken dry-brush planes, tired asymmetrical eyes, facial age lines, muted petrol/wine/cool grey shadows, worn seams, no smooth cute rounded toy finish.\nCOMPOSITION: four separate complete standing figures, same crown-to-sole scale and level baseline, large transparent gutters. Left to right: FRONT facing viewer; STRICT RIGHT-FACING profile nose points screen-right; BACK facing away with back of head/jacket and heels; STRICT LEFT-FACING profile nose points screen-left. Full torso/pelvis/arms/legs/feet rotate with heading. Closed readable lip crease for visible faces. Both feet planted, subtly separated so both complete shoes and trouser legs can be read. Relaxed arms low clear of hips, connected shoulders/elbows/wrists. ONE small rolled NEWSPAPER held low by the anatomical RIGHT hand beside RIGHT thigh. LEFT hand is EMPTY in every view. Front: newspaper screen-LEFT. Rear: newspaper screen-RIGHT. Right-facing profile: right hand/newspaper is NEAR side and visible. Left-facing profile: right hand/newspaper is FAR side, may be partly or fully occluded by her body; near left hand is empty. Never move the newspaper to the left hand to keep it visible. Same single paper throughout. No extra objects, handbag, glasses, skirt or hat. No reflection/mirrored source, no pose duplicates, no text/labels, no ground/shadow/backdrop. Genuine alpha transparency. Full crown and complete shoe soles within frame, no clipping.",
+      "sourceReviewReceiptSha256": "5004f344c60fd5a29a12467b36685556b6228301e5b54d6ee8fce7216714cd10",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16a2c-f85b-72c0-8177-c242086c559d/exec-654b1898-bea9-4819-b7e8-d19c395fff78.png",
+      "runtimeAcceptance": "Only raw source/registration/contact/lip pilot reviewed. Full encoded family, formal final-frame gate, clean replay and actual production stress remain pending.",
+      "file": "../resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-directions-candidate.png",
+        "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-standing.webp",
+        "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-directions-v1.png"
+      ],
+      "sourceSha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00",
+      "id": "stadt-ursula-neumann-adult-cardinal-v1",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/cardinal-generation-receipt.json"
+    },
+    {
+      "generationRequest": {
+        "prompt": "Use case: stylized-concept. Create a second transparent source sheet of the EXACT older woman in the reference, with FOUR genuinely painted whole-body diagonal turn views in one horizontal row. Match her mature sturdy ADULT proportions, common crown-to-sole scale, angular weary skeptical aged face, short swept cream-blonde hair, teal quilted short jacket, cream blouse, full plum trousers and complete substantial burgundy shoes. Same worn painterly Disco Elysium Berlin finish, broken broad brush planes and cool grey-green/wine shadows. No smoother younger toy redesign.\nLeft to right: (1) FRONT-RIGHT whole-body three-quarter, genuinely halfway between FRONT and strict RIGHT profile, nose/chest/pelvis/knees/toes all turned about45degrees toward screen-right; show substantial side plane, NOT a frontal figure with turned head. (2) REAR-RIGHT whole-body three-quarter halfway between strict right profile and BACK, back of jacket dominant, a little right face profile. (3) REAR-LEFT whole-body three-quarter halfway between BACK and strict left profile, back dominant. (4) FRONT-LEFT whole-body three-quarter halfway between strict left profile and FRONT, substantial left side plane and foreshortening. All body parts turn coherently, both soles planted and readable, shoes separated subtly, same level sole line and full body height.\nPROP OWNERSHIP: exactly ONE rolled newspaper held low beside the anatomical RIGHT thigh by anatomical RIGHT hand. Anatomical LEFT hand empty throughout. In front-right, right arm/paper is NEAR and screen-left of body, visible. In rear-right, right arm/paper on NEAR viewer-facing flank, screen-right of body's back. In rear-left, right arm is FAR side and paper may be partly/fully hidden by body; near left hand empty. In front-left, right arm is FAR side and paper may be partly/fully occluded, never transfer it to near left hand. Preserve hand-to-grip attachment, never add an extra paper to show the prop. Relaxed arms low clear of hips. Complete connected shoulders, elbows, wrists, hips, knees, ankles and whole shoes. Closed readable lip crease on visible faces. Transparent background and wide transparent gutters; no text, shadow, floor or labels. Four independent paintings, never reflect/mirror a source. No clipping, no other objects.",
+        "referenced_image_paths": [
+          {
+            "role": "locked new adult Ursula cardinals",
+            "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+            "sha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00"
+          }
+        ],
+        "transparent_background": true
+      },
+      "status": "Source inspected: genuine whole-body adult heading paint, own RIGHT newspaper/LEFTempty; native/runtime final acceptance separate",
+      "sha256": "7f4262323eeb9589b93e542e27154fc7a6324ed994a66e3ea54d8d9fbf79e525",
+      "prompt": "Use case: stylized-concept. Create a second transparent source sheet of the EXACT older woman in the reference, with FOUR genuinely painted whole-body diagonal turn views in one horizontal row. Match her mature sturdy ADULT proportions, common crown-to-sole scale, angular weary skeptical aged face, short swept cream-blonde hair, teal quilted short jacket, cream blouse, full plum trousers and complete substantial burgundy shoes. Same worn painterly Disco Elysium Berlin finish, broken broad brush planes and cool grey-green/wine shadows. No smoother younger toy redesign.\nLeft to right: (1) FRONT-RIGHT whole-body three-quarter, genuinely halfway between FRONT and strict RIGHT profile, nose/chest/pelvis/knees/toes all turned about45degrees toward screen-right; show substantial side plane, NOT a frontal figure with turned head. (2) REAR-RIGHT whole-body three-quarter halfway between strict right profile and BACK, back of jacket dominant, a little right face profile. (3) REAR-LEFT whole-body three-quarter halfway between BACK and strict left profile, back dominant. (4) FRONT-LEFT whole-body three-quarter halfway between strict left profile and FRONT, substantial left side plane and foreshortening. All body parts turn coherently, both soles planted and readable, shoes separated subtly, same level sole line and full body height.\nPROP OWNERSHIP: exactly ONE rolled newspaper held low beside the anatomical RIGHT thigh by anatomical RIGHT hand. Anatomical LEFT hand empty throughout. In front-right, right arm/paper is NEAR and screen-left of body, visible. In rear-right, right arm/paper on NEAR viewer-facing flank, screen-right of body's back. In rear-left, right arm is FAR side and paper may be partly/fully hidden by body; near left hand empty. In front-left, right arm is FAR side and paper may be partly/fully occluded, never transfer it to near left hand. Preserve hand-to-grip attachment, never add an extra paper to show the prop. Relaxed arms low clear of hips. Complete connected shoulders, elbows, wrists, hips, knees, ankles and whole shoes. Closed readable lip crease on visible faces. Transparent background and wide transparent gutters; no text, shadow, floor or labels. Four independent paintings, never reflect/mirror a source. No clipping, no other objects.",
+      "sourceReviewReceiptSha256": "5d25bea9c5301df437dd53607c92ef073cd27639929da35e04498ee60e569139",
+      "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16a2c-f85b-72c0-8177-c242086c559d/exec-86bb74e2-7535-4e1b-9e04-73898cacdb36.png",
+      "runtimeAcceptance": "Only raw source/registration/contact/lip pilot reviewed. Full encoded family, formal final-frame gate, clean replay and actual production stress remain pending.",
+      "file": "../resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+      "referencedSources": [
+        "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png"
+      ],
+      "sourceSha256": "7f4262323eeb9589b93e542e27154fc7a6324ed994a66e3ea54d8d9fbf79e525",
+      "id": "stadt-ursula-neumann-adult-quarter-v1",
+      "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/quarter-generation-receipt.json"
     }
   ]
 }

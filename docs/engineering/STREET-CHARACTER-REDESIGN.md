@@ -662,3 +662,55 @@ and resource failures remain saved. Camera's old combined turn fixture RED is
 retained beside the final scoped result. Silent headless emulation and scripted
 placements do not establish physical Android, natural mission traversal,
 perceptual audio quality or general FPS. Evidence: output/wolfgang-release/.
+
+Wolfgang Schulz publication verified: accepted, pushed and deployed as
+`78e86bc1c878fe95c757906f1a84dc58c2ed1309`; Pages run 40044277061 succeeded.
+All 14 deployed files match the immutable deployment and accepted actor record.
+Actual root startup, query/hash-preserving `3d.html` compatibility, and public
+standing/movement admission pass with zero page or HTTP failures. Root personally
+viewed the public pavement capture. This silent portrait emulation and staged
+approach do not establish physical Android, postdeployment desktop or natural
+E traversal. Evidence: `output/wolfgang-release/live/`.
+
+## Ursula Neumann: adult painted street family
+
+Ursula now has mature connected proportions, a worn angular face, short blonde
+hair, teal quilted jacket, cream blouse, plum trousers and whole burgundy shoes.
+Her rolled newspaper remains in her RIGHT hand and her LEFT stays empty. Eight
+genuine headings share height 2.33 and her own source-fitted stride 11.8313.
+The other 42 registry records, all police, simulation/routes and original voice
+takes are preserved. The 412 selected cells retain walking, bridges, turns,
+stops and four separate quiet states; look/failure retain their shared original
+sway formula. There are 324 supported mouth slots per density and three rear
+headings without visible mouths.
+
+Root verifies 53 sealed files, two original tool images, 1,937 author evidence
+hashes, source/dependency compatibility, clean reconstruction of 22 outputs,
+actual sparse packaging of nine runtime files and 198 focused tests. The two
+shared source differences are cache queries only. All 71 integrated candidate
+pins remain exact while preserving the separate published Berghain descendant.
+Independent Physics samples 32 final native cells and own source-RGBA contacts,
+then freshly verifies actual desktop UP10 movement: all 16 phases, three complete
+11.833333 stride intervals, legal body bounds, planted stops, four quiet states,
+release/resume and 55 player obstruction holds without overlap. Supplied author
+portrait/landscape movement, 824 body cells, 648 mouth cells and 116 actually
+inspected boards are identified separately.
+
+Independent Camera freshly checks desktop and portrait source identity, actual
+LINEAR alpha-aware person ordering with over 99.7 percent correct-exclusive and
+zero wrong-exclusive pixels, opaque wall occlusion, loaded car/door/Bundestag
+relationships and standing/fallback handover. At common desktop ground Ursula
+is 82 pixels high, Herr Sandale 82, Frau Sandale 81 and the existing larger
+Söder caricature 100. Loaded standing crown differs from the nominal fallback
+by one native pixel, with zero foot error. Root personally views and binds 16
+source/native, desktop movement and desktop/portrait camera images.
+
+The bounded one-row ground fringe is retained quantitatively: neutral camera
+fringe is 8 desktop and 23 portrait pixels; Physics contact paint remains within
+its own neutral. Existing white Wurst seals and the first portrait fax overlay
+are separate world/HUD content. Shared unchanged fade behavior uses supplied
+accepted evidence. Initial memory refusal remains NOT RUN rather than gameplay
+failure; the fresh desktop retry passed. Silent emulation and scripted placement
+do not establish physical Android, perceptual listening, natural mission
+traversal, general FPS or all-world collision/HUD certification. Evidence:
+`output/ursula-release/`.

@@ -1,0 +1,370 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "stadt-ursula-neumann",
+  "sourceHashes": {
+    "ursula-cardinals-v1.png": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00",
+    "ursula-quarters-v1.png": "7f4262323eeb9589b93e542e27154fc7a6324ed994a66e3ea54d8d9fbf79e525"
+  },
+  "frontAlpha20Height": 700,
+  "wholeSourceDensityHeights": {
+    "ursula-cardinals-v1.png": 700,
+    "ursula-quarters-v1.png": 701
+  },
+  "workingFigureHeight": 400,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        161,
+        12,
+        495,
+        709
+      ],
+      "sourcePivot": [
+        321.5,
+        709
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 238.5,
+          "bounds": [
+            182,
+            629,
+            295,
+            709
+          ],
+          "pixels": 6744
+        },
+        {
+          "x": 404.5,
+          "bounds": [
+            344,
+            629,
+            465,
+            700
+          ],
+          "pixels": 6609
+        }
+      ],
+      "workingOrigin": [
+        72.2857142857143,
+        66.85714285714289
+      ],
+      "workingBoundsAlpha20": [
+        164,
+        74,
+        355,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/down.png",
+      "registeredSha256": "d72b84d99c360e288a82ba9c80512e5d780126a26b83dfdc50e9ba2de0620126"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        170,
+        13,
+        463,
+        712
+      ],
+      "sourcePivot": [
+        310.75,
+        712
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 231.0,
+          "bounds": [
+            189,
+            632,
+            273,
+            712
+          ],
+          "pixels": 6049
+        },
+        {
+          "x": 390.5,
+          "bounds": [
+            318,
+            632,
+            463,
+            688
+          ],
+          "pixels": 6593
+        }
+      ],
+      "workingOrigin": [
+        78.68188302425105,
+        65.72325249643364
+      ],
+      "workingBoundsAlpha20": [
+        176,
+        73,
+        343,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/front-right.png",
+      "registeredSha256": "c0c90cdffa87e8889592df7c5e6aa3de48212720a5dc0ba8284bac54dad59b64"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        747,
+        14,
+        958,
+        710
+      ],
+      "sourcePivot": [
+        857.0,
+        710
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 857.0,
+          "bounds": [
+            756,
+            630,
+            958,
+            710
+          ],
+          "pixels": 12626
+        }
+      ],
+      "workingOrigin": [
+        -233.71428571428567,
+        66.28571428571433
+      ],
+      "workingBoundsAlpha20": [
+        193,
+        74,
+        314,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/right.png",
+      "registeredSha256": "8a651c0e1666cff70f7a6014f40c72c2a49c4754abbfaa33857bc54622dfd00d"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        689,
+        11,
+        975,
+        708
+      ],
+      "sourcePivot": [
+        828.0,
+        708
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 828.0,
+          "bounds": [
+            701,
+            628,
+            955,
+            708
+          ],
+          "pixels": 14828
+        }
+      ],
+      "workingOrigin": [
+        -216.4679029957204,
+        68.00570613409411
+      ],
+      "workingBoundsAlpha20": [
+        177,
+        74,
+        340,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/rear-right.png",
+      "registeredSha256": "a6d0411398df17545f0b2225db28aa112842dcd655579ca137dfd1e2eb99f21b"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        1183,
+        17,
+        1501,
+        701
+      ],
+      "sourcePivot": [
+        1348.5,
+        701
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1269.0,
+          "bounds": [
+            1212,
+            622,
+            1326,
+            701
+          ],
+          "pixels": 7225
+        },
+        {
+          "x": 1428.0,
+          "bounds": [
+            1375,
+            622,
+            1481,
+            701
+          ],
+          "pixels": 6643
+        }
+      ],
+      "workingOrigin": [
+        -514.5714285714286,
+        71.42857142857144
+      ],
+      "workingBoundsAlpha20": [
+        162,
+        81,
+        343,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/up.png",
+      "registeredSha256": "093ad7cad47b67ba5ed3ee79f7bf91491a0462807b793fadccc70b4557d988bf"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1194,
+        13,
+        1476,
+        708
+      ],
+      "sourcePivot": [
+        1357.75,
+        708
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1282.5,
+          "bounds": [
+            1211,
+            628,
+            1354,
+            708
+          ],
+          "pixels": 9213
+        },
+        {
+          "x": 1433.0,
+          "bounds": [
+            1395,
+            628,
+            1471,
+            690
+          ],
+          "pixels": 4006
+        }
+      ],
+      "workingOrigin": [
+        -518.7503566333809,
+        68.00570613409411
+      ],
+      "workingBoundsAlpha20": [
+        163,
+        76,
+        324,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/rear-left.png",
+      "registeredSha256": "f29516ef74c10fd2a4e272d844d6b6e9480259ecc6d9c9625027d501f2b5c027"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+      "sourceBoundsAlpha20": [
+        1756,
+        13,
+        1970,
+        713
+      ],
+      "sourcePivot": [
+        1859.5,
+        713
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1859.5,
+          "bounds": [
+            1756,
+            633,
+            1963,
+            713
+          ],
+          "pixels": 13033
+        }
+      ],
+      "workingOrigin": [
+        -806.5714285714284,
+        64.57142857142861
+      ],
+      "workingBoundsAlpha20": [
+        197,
+        72,
+        320,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/left.png",
+      "registeredSha256": "38675ae9776c0718df92be0a05c28a8b8fe4ec8cd900bfa7b7609cd7011e1194"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1713,
+        11,
+        1986,
+        712
+      ],
+      "sourcePivot": [
+        1857.75,
+        712
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1787.0,
+          "bounds": [
+            1713,
+            631,
+            1861,
+            683
+          ],
+          "pixels": 6386
+        },
+        {
+          "x": 1928.5,
+          "bounds": [
+            1871,
+            631,
+            1986,
+            712
+          ],
+          "pixels": 7156
+        }
+      ],
+      "workingOrigin": [
+        -804.0570613409416,
+        65.72325249643364
+      ],
+      "workingBoundsAlpha20": [
+        173,
+        72,
+        329,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/registered/front-left.png",
+      "registeredSha256": "a62d7bb60e75e35bbca8861b08e2a9e7850384db1ab9bdb24752fa547ccdf688"
+    }
+  }
+}

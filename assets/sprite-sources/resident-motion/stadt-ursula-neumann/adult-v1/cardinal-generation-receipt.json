@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "request": "cardinal-generation-request.json",
+  "status": "UNREVIEWED",
+  "originalOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16a2c-f85b-72c0-8177-c242086c559d/exec-654b1898-bea9-4819-b7e8-d19c395fff78.png",
+  "sha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00",
+  "portableOutput": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/raw/ursula-cardinals-v1.png",
+  "executedToolReferencePaths": [
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-ursula-complete/GermanySimulator/assets/sprite-sources/street-residents/stadt-ursula-neumann-directions-candidate.png",
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-ursula-complete/GermanySimulator/assets/characters/street/stadt-ursula-neumann-standing.webp",
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-ursula-complete/GermanySimulator/assets/sprite-sources/resident-motion/stadt-irmgard-aktenstapel/adult-v1/raw/stadt-irmgard-aktenstapel-expressionist-directions-v1.png"
+  ],
+  "originalUntouchedSha256": "3f36ca7bf3039fe812a64d5a6220a8383b3e3a30cb6cbc0a63a3336878086f00"
+}

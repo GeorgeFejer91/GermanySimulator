@@ -1,0 +1,24 @@
+{
+  "prompt": "Use case: stylized-concept. Asset: transparent full-body game character source sheet, FOUR genuinely painted views in one horizontal row. Ursula Neumann is the older sturdy German woman in references1/2: short swept cream-blonde hair, skeptical angular weary face, worn teal diamond-quilted short jacket over cream blouse, full plum trousers reaching ankles, substantial burgundy leather shoes. Preserve her identity and clothing but entirely redesign the obsolete huge-head/short-toy-limb anatomy: mature connected ADULT stature, about six heads tall, believable torso, long connected upper/lower arms, grown-up thighs, knees, calves and whole shoes. Use reference3 ONLY for mature painterly adult population scale and expressive paint, never its outfit, face, skirt, glasses or files. Further push angular Disco Elysium meets Berlin: broad broken dry-brush planes, tired asymmetrical eyes, facial age lines, muted petrol/wine/cool grey shadows, worn seams, no smooth cute rounded toy finish.\nCOMPOSITION: four separate complete standing figures, same crown-to-sole scale and level baseline, large transparent gutters. Left to right: FRONT facing viewer; STRICT RIGHT-FACING profile nose points screen-right; BACK facing away with back of head/jacket and heels; STRICT LEFT-FACING profile nose points screen-left. Full torso/pelvis/arms/legs/feet rotate with heading. Closed readable lip crease for visible faces. Both feet planted, subtly separated so both complete shoes and trouser legs can be read. Relaxed arms low clear of hips, connected shoulders/elbows/wrists. ONE small rolled NEWSPAPER held low by the anatomical RIGHT hand beside RIGHT thigh. LEFT hand is EMPTY in every view. Front: newspaper screen-LEFT. Rear: newspaper screen-RIGHT. Right-facing profile: right hand/newspaper is NEAR side and visible. Left-facing profile: right hand/newspaper is FAR side, may be partly or fully occluded by her body; near left hand is empty. Never move the newspaper to the left hand to keep it visible. Same single paper throughout. No extra objects, handbag, glasses, skirt or hat. No reflection/mirrored source, no pose duplicates, no text/labels, no ground/shadow/backdrop. Genuine alpha transparency. Full crown and complete shoe soles within frame, no clipping.",
+  "intent": "generate using identity/style references",
+  "references": [
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-directions-candidate.png",
+      "sha256": "f225d9be3a4081a1be935e1fdc0c47d6b0f02a849448118d55ace2fca0d6037c",
+      "role": "Ursula identity/clothing only; obsolete proportions"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-ursula-neumann-standing.webp",
+      "sha256": "7aded52e8a8f4196531273181153fb22c557cacf7351e5d50dd614bf45e7a787",
+      "role": "Ursula identity/clothing only; obsolete proportions"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-ursula-neumann/adult-v1/references/stadt-irmgard-aktenstapel-expressionist-directions-v1.png",
+      "sha256": "82f2b786fe164a4440a23bd4c85296c7e2b80fc2c9d32754a1eebdc58faae408",
+      "role": "adult painted population style/proportion only"
+    }
+  ],
+  "transparent_background": true,
+  "status": "ARCHIVED BEFORE CALL",
+  "tool": "built-in image_gen"
+}

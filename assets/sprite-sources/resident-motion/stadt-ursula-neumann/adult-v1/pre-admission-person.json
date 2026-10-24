@@ -1,0 +1,24 @@
+{
+  "id": "stadt-ursula-neumann",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "stadt-ursula-neumann",
+    "city-ursula-neumann"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/stadt-ursula-neumann-standing.webp",
+    "sha256": "7aded52e8a8f4196531273181153fb22c557cacf7351e5d50dd614bf45e7a787",
+    "width": 128,
+    "height": 160
+  }
+}
