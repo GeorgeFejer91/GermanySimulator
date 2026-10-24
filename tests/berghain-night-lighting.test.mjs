@@ -11,7 +11,13 @@ test('club-night lighting removes daylight and restores the exterior inspection 
   for(const room of ['queue','admission','foyer','berghain','panorama','klo','toilets','lab','halle','garden']){
     rig.update('interior',viewpoints[room].position);
     assert.equal(rig.state.daylight,false,room);
-    assert.ok(rig.state.ambient<=(['queue','admission'].includes(room)?.7:.2),room);
+    assert.ok(rig.state.ambient<=.85,room);
+    if(!['queue','garden'].includes(room)){
+      assert.ok(rig.state.ambient>=.6,room+' has orientation fill');
+      const fill=scene.getObjectByProperty('isHemisphereLight',true);
+      assert.ok(fill.color.r>fill.color.g&&fill.color.g>fill.color.b,room+' stays warm');
+      assert.ok(fill.groundColor.r>fill.groundColor.b,room+' floor bounce stays warm');
+    }
     assert.ok(rig.state.activeLights>0,room);
     assert.ok(rig.state.shadowMaps<=2,room);
   }

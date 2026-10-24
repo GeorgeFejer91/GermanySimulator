@@ -10,6 +10,21 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Warm interior orientation light — 25 October 2026
+
+Following George's request, a warm reflected fill now makes room boundaries,
+columns and circulation easier to see while retaining colored techno spots,
+localized pools and darker corners. It reuses the existing hemisphere light
+and lowers interior fog density; no lamp, shadow map, mesh, texture or UI is added.
+Outdoor/admission cues and exterior daylight remain as previously accepted.
+
+Five focused Node checks, three desktop/Android-emulated room tours and a fresh
+desktop admission-to-wardrobe return pass. Physics acceptance bridges over
+identical geometry/navigation; Camera review inspects the new rendered views.
+This is authored orientation lighting, not measured venue photometry or formal
+accessibility certification. Physical Android remains untested. Final combined
+deployment verification is recorded in `output/berghain-warm-light-release.json`.
+
 ### Entrance and admission reconstruction — accepted 25 October 2026
 
 The requested outdoor waiting area and indoor admission/ticketing space are

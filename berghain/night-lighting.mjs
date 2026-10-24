@@ -66,11 +66,14 @@ export function createViewerLighting(scene){
     if(previous===room)return state;previous=room;
     const day=room==='exterior';sun.visible=day;
     const practical=room==='outside'||room==='admission';
-    ambient.intensity=day?2.1:practical?.7:.18;
-    ambient.color.set(day?'#e0e6dd':practical?'#e0d5bd':'#c5cbd8');ambient.groundColor.set(day?'#6a665b':practical?'#8c806a':'#63657a');
+    const interior=!day&&room!=='outside'&&room!=='garden';
+    // Warm reflected fill keeps circulation surfaces legible between club cues.
+    ambient.intensity=day?2.1:practical?.7:interior?.72:.18;
+    ambient.color.set(day?'#e0e6dd':practical?'#e0d5bd':interior?'#efd4b0':'#c5cbd8');
+    ambient.groundColor.set(day?'#6a665b':practical?'#8c806a':interior?'#9f8061':'#63657a');
     scene.background=new THREE.Color(day?'#b3b3a6':'#05070b');
     // Keep surfaces clear enough for orientation; no opaque fake haze volumes.
-    scene.fog=day?null:new THREE.FogExp2('#08090e',.009);
+    scene.fog=day?null:new THREE.FogExp2(interior?'#120e0a':'#08090e',interior?.006:.009);
     const definitions=cues[room]||[];
     lamps.forEach((light,i)=>{
       const definition=definitions[i];light.visible=!!definition;

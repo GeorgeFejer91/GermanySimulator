@@ -1,5 +1,38 @@
 # Berghain viewer validation
 
+## Warm interior orientation light — 25 October 2026
+
+The follow-up to admission release `40c50359acfafd0d6b5e18df45ac137a6995c090` changes only the existing
+hemisphere/fog parameters and their two focused check files. Tested freeze:
+`output/berghain-warm-light-candidate.json`, SHA256 `3f4d4e92260aead163d8f9e7f10ff0ec94a69a2469b0793797308b7d2df08402`.
+Interior fill rises from 0.18 to 0.72 with warm sky/ground colors; interior
+fog density falls from 0.009 to 0.006 with a warm dark tint. Admission stays
+at 0.7, outdoors retain their prior cues and exterior inspection keeps daylight.
+Colored spotlights, their positions, three-light reuse and two-shadow limit
+remain unchanged. Geometry, camera, collision and portable GLB are identical.
+
+Fresh evidence: five Node checks in `output/berghain-warm-light-node.txt`;
+three silent room tours (desktop, Android portrait and landscape emulation)
+in `output/berghain-warm-light-rooms/report.json`; one real desktop queue,
+admission, wardrobe and reverse route in `output/berghain-warm-light-route/`.
+Before frames remain in `output/berghain-warm-light-before/`. All ten comparable
+desktop views retain identical draw-call and triangle counts, recorded in
+`output/berghain-warm-light-render-cost.json`. These are render-work counts,
+not new timing or physical-phone measurements.
+
+Independent Physics/Camera review reports are
+`output/berghain-warm-light-physics-review.md` and
+`output/berghain-warm-light-camera-review.md`. Prior geometric/door acceptance
+bridges over exact unchanged bytes; new screenshots establish the scoped visual
+change. Room-selector views do not by themselves prove natural routes. Warm fill
+improves orientation without claiming venue photometry, full model fidelity or
+formal accessibility compliance. Physical Android and listening remain NOT RUN.
+
+Final public bytes and live route checks belong to
+`output/berghain-warm-light-release.json`; the earlier admission release is
+included in this combined result. Only these two Markdown documents change
+after the review freeze; runtime/GLB/test files remain exact.
+
 ## Entrance/admission increment — accepted 25 October 2026
 
 Scoped technical acceptance PASS; full architectural fidelity remains unverified.

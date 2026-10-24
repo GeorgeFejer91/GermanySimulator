@@ -11,12 +11,12 @@ export default {name:'Club-night lighting and retained first-person room visibil
     const baseline=process.env.BERGHAIN_BASELINE;
     await page.locator('#enter').click();
     const rows=[];
-    for(const room of ['foyer','berghain','panorama','lounge','klo','toilets','saule','lab','halle','garden']){
+    for(const room of ['admission','foyer','berghain','panorama','lounge','klo','toilets','saule','lab','halle','garden']){
       await page.locator('#room').selectOption(room);
       await page.waitForTimeout(200);
       const state=await page.locator('#model').evaluate(e=>({lighting:e.dataset.lighting?JSON.parse(e.dataset.lighting):null,position:JSON.parse(e.dataset.position),drawCalls:+e.dataset.drawCalls,triangles:+e.dataset.triangles}));
       assert.ok(state.drawCalls>0);
-      if(!baseline){assert.equal(state.lighting.daylight,false);assert.ok(state.lighting.ambient<=.2);}
+      if(!baseline){assert.equal(state.lighting.daylight,false);assert.ok(state.lighting.ambient<=.85);if(room!=='garden')assert.ok(state.lighting.ambient>=.6);}
       await artifacts.screenshot(page,room+'.png');rows.push({room,...state});
     }
     await page.locator('#exterior').click();
