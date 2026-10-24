@@ -75,6 +75,20 @@ other floors, original guards, garden and entrance clearance remain unchanged.
 
 ### Historic inner facade and bar-room ceiling
 
+The latest roof study uses I23 views11/12: actual concrete cross-beams, inset
+blue panels and a steel lattice replace the first flat ceiling. Four roof bays,
+six-by-four cells and0.44m recess are inferred. The lowest beam underside keeps
+the nominal11m height. Blue materials capture a photographed appearance; glass,
+light source and contemporary operation are unverified. Appearance panes and
+lattice are notched around retained columns; concrete roof joints are deliberate.
+No new texture family, light, render pass or runtime is added.
+
+The lower reliefs now fully clear the rear worktop, as in I23 views12/13/16:
+their inferred center is1.90m above the study floor and the lower sill2.80m.
+The prior1.02m center buried the lower part of each disc behind the worktop.
+Upper-row proportions, exact mouldings and heavy plaster wear remain unverified;
+this relative repair is not a measured elevation or complete-room acceptance.
+
 A07 explicitly describes an approximately11m-high bar room with a former
 exterior facade now inside. I23 views12/16 supply the visible circular reliefs,
 recessed windows, pilaster bases/caps and upper cornice. The independent interior

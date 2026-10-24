@@ -24,8 +24,58 @@ test('the bar has the architect-reported eleven-metre room and actual circular r
    assert.ok(actual.max.y-actual.min.y>1.1&&actual.max.y-actual.min.y<1.3);
   }
  }finally{for(const item of Object.values(geometries))item.dispose();}
- const ceiling=layout.solids.find(s=>s.name==='main-bar-interior-facade ceiling');
- assert.ok(ceiling);assert.ok(Math.abs(ceiling.y[0]-layout.mainBar.floorHeight-11)<.001);
+ const roof=layout.solids.filter(s=>s.name==='main-bar-interior-facade ceiling'||
+  s.renderPart?.fixture==='main-bar-interior-facade'&&s.renderPart.role==='roof beam');
+ assert.ok(roof.length);assert.ok(Math.abs(Math.min(...roof.map(s=>s.y[0]))-layout.mainBar.floorHeight-11)<.001);
+});
+
+test('the photographed blue gridded roof sits in real recesses above concrete cross-beams',()=>{
+ const facade=layout.mainBar.interiorFacade,roof=facade.roof;
+ assert.ok(roof,'The flat ceiling is missing the photographed roof construction');
+ assert.match(roof.confidence,/inferred/i);
+ const parts=layout.parts.filter(p=>p.fixture==='main-bar-interior-facade');
+ const beams=parts.filter(p=>p.role==='roof beam'),panes=parts.filter(p=>p.role==='roof appearance pane');
+ assert.ok(beams.length>=6&&panes.length>=48,'Roof beams, pane cells and steel lattice must be real geometry');
+ assert.ok(parts.some(p=>p.role==='roof lattice'));
+ assert.equal(parts.some(p=>p.name==='main-bar-interior-facade ceiling'),false,'The old flat ceiling cannot hide the new recesses');
+ const model=createBerghainModel();model.updateMatrixWorld(true);
+ const hitAt=(x,z)=>{
+  const ray=new THREE.Raycaster(new THREE.Vector3(x,layout.mainBar.floorHeight+10.5,z),new THREE.Vector3(0,1,0));
+  const hit=ray.intersectObject(model,true)[0];assert.ok(hit);
+  const [section,material,shape]=hit.object.name.split('/');
+  return {y:hit.point.y,part:layout.parts.filter(p=>p.section===section&&p.material===material&&p.shape===shape)[hit.instanceId]};
+ };
+ try{
+  const pane=panes.find(p=>p.center[0]<roof.center[0]&&p.center[2]>roof.center[2]),beam=beams.find(p=>p.name.endsWith('roof cross-beam'));
+  const panelHit=hitAt(pane.center[0],pane.center[2]),beamHit=hitAt(pane.center[0],beam.center[2]);
+  assert.equal(panelHit.part.role,'roof appearance pane');assert.equal(beamHit.part.role,'roof beam');
+  assert.ok(panelHit.y-beamHit.y>.3,'Blue panes must be geometrically above the beam underside');
+  for(const p of panes)assert.equal(model.getObjectByName([p.section,p.material,p.shape].join('/')).material.transparent,false,'Unverified optical material must not create a hole through the roof');
+  const columns=layout.solids.filter(s=>s.name==='load-bearing column');
+  for(const p of parts.filter(p=>p.role==='roof appearance pane'||p.role==='roof lattice')){
+   const actual=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(new THREE.Matrix4().fromArray(p.matrix));
+   for(const c of columns){
+    const overlap=actual.clone().intersect(new THREE.Box3(new THREE.Vector3(c.x[0],c.y[0],c.z[0]),new THREE.Vector3(c.x[1],c.y[1],c.z[1])));
+    assert.ok(overlap.isEmpty()||overlap.getSize(new THREE.Vector3()).toArray().some(v=>v<.001),'Roof appearance panes and lattice must stop at retained column profiles');
+   }
+  }
+ }finally{disposeBerghainModel(model);}
+});
+
+test('the lower circular reliefs and their panels are fully visible above the service worktop',()=>{
+ const parts=layout.parts.filter(p=>p.fixture==='main-bar-interior-facade');
+ const worktop=Math.max(...layout.solids.filter(s=>s.renderPart?.fixture==='main-bar-service-worktop'&&/worktop/.test(s.name)).map(s=>s.y[1]));
+ const geometries=createMainBarGeometries(),disc=geometries['main-bar-medallion'];disc.computeBoundingBox();
+ try{
+  const lower=parts.filter(p=>p.role==='circular relief'&&p.center[1]<layout.mainBar.floorHeight+4);
+  assert.equal(lower.length,5);
+  for(const p of lower){
+   const bounds=disc.boundingBox.clone().applyMatrix4(new THREE.Matrix4().fromArray(p.matrix));
+   assert.ok(bounds.min.y>worktop+.2,'I23 views12/13/16 show the lower relief fully above the rear worktop');
+  }
+  const rims=layout.solids.filter(s=>s.renderPart?.fixture==='main-bar-interior-facade'&&/relief panel horizontal rim/.test(s.name)&&s.y[1]<layout.mainBar.floorHeight+4);
+  assert.ok(Math.min(...rims.map(s=>s.y[0]))>worktop+.1,'The lower relief panel must also clear the worktop');
+ }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
 
 test('recessed windows and flanking masonry have different actual depth in the source model',()=>{

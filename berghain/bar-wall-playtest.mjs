@@ -29,5 +29,21 @@ export default {name:'Historic interior bar facade and eleven-metre room',source
   await ctx.artifacts.screenshot(ctx.page,'historic-wall-native.png');await disposeNativeAsset(ctx.page);
   return {parity,native,scope:'Actual original wall profiles/reveals/ceiling in source and GLB; approximate dimensions/placement, architect-reported room height'};
  }},
+ {id:'bar-roof-source-native',modes:['quick','stress'],timeoutMs:150000,async run(ctx){
+  const roof=layout.mainBar.interiorFacade.roof,floor=layout.mainBar.floorHeight;
+  const eye={x:roof.center[0]-.4,y:floor+7.9,z:roof.coffers.at(-1).z[1]+2};
+  const target={x:eye.x,y:floor+10.5,z:roof.coffers[0].z[0]+1.2};
+  const parity=await compareMaterialRender(ctx,{position:array(eye),target:array(target)});
+  const pane=layout.parts.find(p=>p.role==='roof appearance pane'&&p.center[0]<roof.center[0]&&p.center[2]<roof.center[2]);
+  const beam=layout.parts.find(p=>p.role==='roof beam'&&p.name.endsWith('roof cross-beam'));
+  const rays=[pane.center[2],beam.center[2]].map(z=>({origin:[pane.center[0],floor+10.5,z],direction:[0,1,0]}));
+  const native=await renderNativeAsset(ctx.page,{position:{...eye,y:eye.y-1.68},
+   yaw:Math.atan2(eye.x-target.x,eye.z-target.z),pitch:Math.atan2(target.y-eye.y,Math.hypot(target.x-eye.x,target.z-eye.z)),rays});
+  assert.equal(native.mainBar.interiorFacade.roof.bayCount,4);
+  for(const probe of Object.values(native.geometryProbes))assert.ok(probe[0]>probe[1]+.3,'Source and GLB retain the actual coffer recess above the beam');
+  native.geometryProbes.source.forEach((distance,i)=>assert.ok(Math.abs(distance-native.geometryProbes.native[i])<.002));
+  await ctx.artifacts.screenshot(ctx.page,'bar-roof-native.png');await disposeNativeAsset(ctx.page);
+  return {parity,native,scope:'Controlled source/native camera beneath the roof; original beam/lattice/pane geometry, inferred counts/finish, no natural walking claim'};
+ }},
  {...natural,id:'bar-wall-natural-route'}
 ]};

@@ -3,7 +3,9 @@ import {studyToSite} from './calibration.mjs';
 
 export const mainBarMaterials={
   mainBarGlass:{color:'#a0aaa4',roughness:.22,transparent:true,opacity:.14},
-  mainBarGlow:{color:'#d6c394',roughness:.48,emissive:'#efc773',emissiveIntensity:.7}
+  mainBarGlow:{color:'#d6c394',roughness:.48,emissive:'#efc773',emissiveIntensity:.7},
+  mainBarRoofBlue:{color:'#142ca2',roughness:.38,emissive:'#080cb4',emissiveIntensity:.65},
+  mainBarRoofDim:{color:'#15256f',roughness:.42,emissive:'#07146b',emissiveIntensity:.45}
 };
 const corner={x:.75,z:7,outer:1.3,inner:.25,segments:24};
 function arcPlan(outer,inner,depth){
@@ -35,6 +37,48 @@ export function createMainBarGeometries(){
 }
 const site=values=>{const p=studyToSite({x:values[0],y:values[1],z:values[2]});return[p.x,p.y,p.z];};
 
+function addBarRoof(layout,box,anchor,length){
+  const floor=layout.mainBar.floorHeight,west=layout.mainBar.screenAnchor[0]-.25,east=anchor[0]-.48;
+  const width=east-west,depth=length+.15,start=anchor[2]-depth/2,bayDepth=depth/4;
+  const columns=layout.solids.filter(s=>s.name==='load-bearing column'&&s.y[1]>floor+11&&s.y[0]<floor+11.73);
+  const roof={sources:['I23'],bayCount:4,grid:{columns:6,rows:4},center:[(west+east)/2,floor+11,anchor[2]],
+    beamUnderside:floor+11,panelUnderside:floor+11.44,coffers:[],
+    columnNotches:'Blue panes and steel lattice are fitted around retained column bounds; concrete backing and roof beams meet columns as structural joints',
+    confidence:'I23 view11 observed concrete cross-beams and blue gridded panels; four bays, dimensions, grid count and captured color inferred. Optical medium and current illumination unverified.'};
+  layout.mainBar.interiorFacade.roof=roof;
+  const add=(name,center,size,material,role)=>{
+    let rectangles=[[center[0]-size[0]/2,center[0]+size[0]/2,center[2]-size[2]/2,center[2]+size[2]/2]];
+    if(role==='roof appearance pane'||role==='roof lattice')for(const c of columns){
+      const [cx0,cx1,cz0,cz1]=[c.x[0]-.015,c.x[1]+.015,c.z[0]-.015,c.z[1]+.015];
+      rectangles=rectangles.flatMap(([x0,x1,z0,z1])=>{
+        if(x1<=cx0||x0>=cx1||z1<=cz0||z0>=cz1)return [[x0,x1,z0,z1]];
+        const left=Math.max(x0,cx0),right=Math.min(x1,cx1),low=Math.max(z0,cz0),high=Math.min(z1,cz1);
+        return [[x0,left,z0,z1],[right,x1,z0,z1],[left,right,z0,low],[left,right,high,z1]]
+          .filter(([a,b,c,d])=>b-a>.01&&d-c>.01);
+      });
+    }
+    for(const [x0,x1,z0,z1]of rectangles)
+      box(name,[(x0+x1)/2-anchor[0],center[1]-anchor[1],(z0+z1)/2-anchor[2]],[x1-x0,size[1],z1-z0],material,true).role=role;
+  };
+  add('roof backing',[(west+east)/2,floor+11.64,anchor[2]],[width,.18,depth+.28],'concrete','roof backing');
+  for(const x of [west+.12,east-.12])
+    add('roof longitudinal beam',[x,floor+11.275,anchor[2]],[.24,.55,depth+.28],'concrete','roof beam');
+  for(let i=0;i<=4;i++)
+    add('roof cross-beam',[(west+east)/2,floor+11.275,start+i*bayDepth],[width,.55,.28],'concrete','roof beam');
+  for(let bay=0;bay<4;bay++){
+    const x0=west+.24,x1=east-.24,z0=start+bay*bayDepth+.14,z1=start+(bay+1)*bayDepth-.14;
+    const cellWidth=(x1-x0)/6,cellDepth=(z1-z0)/4;
+    roof.coffers.push({x:[x0,x1],z:[z0,z1]});
+    for(let column=0;column<6;column++)for(let row=0;row<4;row++)
+      add('blue roof pane',[x0+(column+.5)*cellWidth,floor+11.46,z0+(row+.5)*cellDepth],
+        [cellWidth-.035,.04,cellDepth-.035],row===0?'mainBarRoofBlue':'mainBarRoofDim','roof appearance pane');
+    for(let column=0;column<=6;column++)
+      add('roof longitudinal lattice',[x0+column*cellWidth,floor+11.405,(z0+z1)/2],[.035,.07,z1-z0+.035],'steel','roof lattice');
+    for(let row=0;row<=4;row++)
+      add('roof cross lattice',[(x0+x1)/2,floor+11.405,z0+row*cellDepth],[x1-x0+.035,.07,.035],'steel','roof lattice');
+  }
+}
+
 function addHistoricBarFacade(layout,{fixture,part,box}){
   const floor=layout.mainBar.floorHeight,anchor=site([22,floor,-4]);
   const next=site([22,floor,0]),pitch=Math.hypot(next[0]-anchor[0],next[2]-anchor[2]),length=pitch*5;
@@ -55,6 +99,7 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
       size:[inferred.size[0],inferred.size[1],inferred.size[2]*fraction],matrix});
   }
   layout.mainBar.interiorFacade={sources:['A07','I23'],clearHeight:11,ceilingUnderside:floor+11,bayCenters,
+    lowerReliefCenterHeight:1.9,lowerWindowSillHeight:2.8,
     role:'Former exterior facade now inside the bar room',bayCount:5,medallionRows:2,
     confidence:'Architect-reported approximate room height; footprint, bay sizes/counts, ornament depth and contemporary arrangement inferred',
     structuralConnections:'Existing concrete supports meet the new room ceiling; exterior hull and floor grid retained',
@@ -64,14 +109,14 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
     for(let bay=0;bay<5;bay++){
       const z=(bay-2)*pitch;
       for(const side of [-1,1])placed('window flank',[-.53,5.5,z+side*(pitch+width)/4],[.10,11,flank]);
-      for(const [low,high]of [[0,1.85],[5.1,6.95],[10.12,11]])
+      for(const [low,high]of [[0,2.8],[5.1,6.95],[10.12,11]])
         placed('masonry field',[-.53,(low+high)/2,z],[.10,high-low,width]);
-      for(const y of [1.02,6]){
+      for(const y of [1.9,6]){
         for(const side of [-1,1])placed('relief panel side rim',[-.596,y,z+side*.81],[.032,1.56,.055]);
         for(const side of [-1,1])placed('relief panel horizontal rim',[-.596,y+side*.78,z],[.032,.055,1.675]);
         part('circular medallion',offset([-.609,y,z]),[1.22,.058,1.22],'pale','main-bar-medallion',true,discRotation).role='circular relief';
       }
-      for(const [low,high]of [[1.85,5.1],[6.95,10.12]]){
+      for(const [low,high]of [[2.8,5.1],[6.95,10.12]]){
         const y=(low+high)/2,height=high-low;
         placed('window backing',[-.27,y,z],[.02,height,width],'rubber');
         placed('recessed window glass',[-.293,y,z],[.014,height-.12,width-.12],'mainBarGlass');
@@ -93,8 +138,8 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
     }
     for(const [y,height,depth]of [[10.17,.10,.18],[10.30,.16,.26],[10.48,.14,.34],[10.70,.30,.20],[10.95,.10,.28]])
       placed('stepped cornice',[-.58-depth/2,y,0],[depth,height,length+.12]);
-    const wallWest=anchor[0]-.58,screenWest=layout.mainBar.screenAnchor[0]-.15;
-    box('ceiling',[(wallWest+screenWest)/2-anchor[0],11.09,0],[wallWest-screenWest+.20,.18,length+.15],'concrete',true);
+    addBarRoof(layout,box,anchor,length);
+    const screenWest=layout.mainBar.screenAnchor[0]-.15;
     placed('screen head beam',[screenWest-anchor[0]+.15,10.85,0],[.20,.30,length+.15],'darkConcrete');
   });
 }

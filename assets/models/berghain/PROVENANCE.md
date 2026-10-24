@@ -9,6 +9,26 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Bar roof construction and lower relief relationship
+
+I23 views11/12 show concrete cross-beams enclosing inset blue gridded panels.
+The old flat ceiling is replaced with original geometry: four inferred roof
+bays, concrete framing/backing and a six-by-four pane lattice per bay. Lowest
+roof-beam underside retains the nominal11m height; panes sit0.44m higher.
+Counts, dimensions, blue palette and present-day state are estimates. Opaque
+blue appearance materials represent the photographed color without claiming
+verified skylight glazing or an operating lighting installation. There are no
+new textures, lights, render passes, dependencies or source-image pixels.
+
+Blue panes and lattice fit around retained column profiles rather than running
+through concrete. The concrete roof framing/backing deliberately meets those
+columns. I23 views12/13/16 show lower circular reliefs fully above the rear
+worktop. Their inferred center moves from1.02m to1.90m above the study floor,
+and the lower window sill from1.85m to2.80m, preserving actual deep reveals.
+These repair relative composition; they do not establish a surveyed elevation.
+Upper-row ratios, exact bay rhythm, heavy plaster weathering and illumination
+remain open fidelity work.
+
 ## Historic interior bar facade and room ceiling
 
 Primary architect interview A07 describes an approximately11m-high bar room

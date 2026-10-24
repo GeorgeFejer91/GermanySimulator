@@ -1,5 +1,82 @@
 # Berghain viewer validation
 
+## Bar roof and lower relief composition — 2026-10-24
+
+Primary architect gallery I23 views 11/12 show concrete cross-beams and inset
+blue gridded panels; views 12/13/16 place the lower circular reliefs fully
+above the service worktop. The former flat ceiling becomes four inferred
+coffers, seven concrete beams, a backing slab, 102 notched blue pane pieces
+and 50 steel lattice pieces. Four bays, nominal 6×4 cells per bay, material,
+dimensions and present-day condition remain estimates. Opaque emissive blue
+is an appearance study; neither glass optics nor operating lights is verified.
+
+The nominal 11 m beam underside is at y17.65 above the inferred y6.65 floor.
+Actual pane undersides are y18.09, giving 0.44 m of recess. All 160 roof parts
+have linked solids and 3,840 bounded box vertices. Pane/lattice AABBs clear
+every retained column; concrete backing/beam-column joins are deliberate.
+The first construction failed the existing column-intersection test; clipping
+nonstructural rectangles around those columns corrected it without moving
+the structure. All 15 original columns, floors/stairs, bar furniture, PA,
+partial artworks, production camera and input remain unchanged.
+
+Lower medallion bottoms now sit at y7.94, 0.35 m above the y7.59 service
+worktop; panel rims clear it by 0.1525 m. The lower window sill rises with
+that composition while real 0.27 m reveals remain. These are relative
+photo-informed corrections; precise bay/window/relief ratios remain open.
+
+GLB: 49,278,668 bytes, 656,160 triangles, 153 mesh-material groups and 25
+embedded maps; SHA256 3383284a3d1a96cd84c780e065f7c5add071b1a699702a27b6bda72e6a04ca15.
+Delta from f1195e8: +174,320 bytes, +1,908 triangles and +2 groups. Existing
+26 runtime maps and 5,501,462 embedded texture bytes are reused. No new
+runtime, texture, dependency, camera, production control, light or render pass.
+
+Final 106-input freeze: output/berghain-barroof-candidate.json, SHA256
+abfd98409d76ade28b71503fdcf1c5f5f59a456d0576927e8a1210f25009b2f8.
+Current Node 106/106 pass, including four route-packaging checks. Focused
+geometry checks have observed RED before the repair and PASS afterward.
+
+Browser coverage uses an explicit 3+13 bridge. The initial geometry freeze's
+output/berghain-barroof-final-browser/report.json is terminal 16/16 PASS,
+including natural exterior entry, stair, full bar aisle, reverse and exit on
+all three profiles. Visual review found most original roof panes too dark.
+Only two roof materials' RGB/emissive factors then changed. The strict
+output/berghain-barroof-color-bridge.json proves the GLB BIN exact, source
+outside the material map exact and 103 other inputs exact; only 12 numeric
+GLB material components differ. The three unchanged natural routes are retained.
+Current output/berghain-barroof-color-browser/report.json passes 13/13 on all
+106 final hashes: wall source/native 3, roof source/native 3, loaded screen
+turns 3, fallback 3 and desktop graphics restoration 1. This is 16-case
+coverage, not a monolithic final-hash 16-case rerun. Roof RGB mean differences
+are 0.935/0.676/0.709, with 26/26 source textures disposed. Controlled upward
+views establish construction and parity, not ordinary walking route evidence.
+
+Independent final Physics and Camera/scale reviews pass scoped P1/P2/P4/P5,
+C1–C5 and X1 against the same final freeze, with supplied browser evidence
+distinguished from fresh source/mesh/contact/photo/frame inspection. Physics
+finds 61/61 legal wall approaches stop legally and four near-contact starts
+recover within 0.013 m. The inherited narrow one-person service pinch and
+unreachable deep multiply occupied invalid starts remain limitations.
+Reports: output/berghain-barroof-{physics,camera}-review-final.md.
+
+Cost preserves the accepted 106 inputs plus 32 ancillary dependencies and
+compares three cold contexts per viewport per side, nine before and nine
+after, with the same foyer-facing view and real backward input. Normal load
+adds 3,132 encoded bytes (7,375,475 → 7,378,607), with 68 requests, 26 maps,
+no startup GLB download, zero idle frames and <=1.6 MP drawing buffers.
+Local Intel Iris Xe p95 frame-time medians before/after are desktop
+14.1/20.2 ms (ranges 14.1–20.9/14.1–20.6), portrait 14.0/14.0 ms and landscape
+20.8/20.8 ms. Desktop p50 is 13.8/13.9 ms. Input medians are 15.0/18.9,
+22.1/20.9 and 22.1/18.4 ms; ready medians 1986/1434, 1429/1498 and 1533/1403 ms.
+The higher sampled desktop tail is retained as a cost; these samples establish
+neither a speedup nor a physical-device guarantee. Detailed distributions:
+output/berghain-barroof-cost-summary.json. Physical Android/device GPU and
+perceptual listening remain NOT RUN.
+
+Heavy weathering, uneven blue/practical illumination, precise wall ratios,
+room topology and complete artwork/building fidelity remain open. Publication
+and actual canonical interaction/byte checks belong to the scoped
+output/berghain-barroof-release.json receipt. Full reconstruction stays ACTIVE.
+
 ## Historic interior bar facade — 2026-10-24
 
 Primary architect interview A07 describes an approximately 11 m-high bar room

@@ -10,6 +10,54 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Previous goal turn: **PROGRESS**. Historic-wall release
+f1195e8700d91afab333eebbf6a9fc30744c267c is deployed at the permanent Geheim URL.
+Pages40068029116 succeeded; 71 public files match Git bytes, six entry URLs
+respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
+freeze and original primary index remain preserved. Receipt:
+output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
+
+## Current increment: bar roof and relief/worktop relationship
+
+I23 photos 11/12 show concrete cross-beams surrounding inset blue gridded roof
+panels above the bar/guest aisle. At least three panels are visible, but the
+full count, optical material, dimensions and present-day illumination are not
+established. Recreate the visible construction with four inferred roof bays,
+real beam depth, inset opaque blue appearance panels and a steel lattice. Keep
+the architect-reported nominal 11 m height at the lowest roof-beam underside;
+the backing and panels sit above it. Do not describe the blue finish as a
+verified current skylight or operating lighting system.
+
+I23 photos 12/13/16 place the lower reliefs fully above the service worktop.
+The prior 1.02 m center partly buries them behind it. Raise that row and its
+panel rims, move the lower window sill above the relief panel, and retain
+actual deep reveals. These are photo-informed relative corrections; neither
+the 6.65 m floor datum nor wall/window/bay dimensions becomes surveyed. The
+upper row and full room proportions still need stronger metrical evidence.
+
+Use main-bar.mjs, its existing materials/box fixture interface and native GLB
+export. Preserve outer hull, all columns/floors/stairs, counter/stools/service
+notches, PA, partial artwork, camera and production controls. No new texture,
+dependency, renderer, lighting pass or runtime. Allowed writes: main-bar.mjs,
+GLB/manifest, focused roof/wall tests and browser pilot, Berghain owning notes.
+Reuse the current plan owner and existing browser/performance harness.
+
+- [x] Preserve accepted 106 inputs and 32 ancillary dependencies before edits.
+- [x] Observe failing real roof-depth and relief/worktop separation checks.
+- [x] Replace the flat ceiling with photo-informed roof construction and
+  correct the lower wall composition; inspect matched source/native frames.
+- [x] Check actual meshes/clearances, natural entry/aisle/return, camera turns,
+  fallback/restoration and before/after cost on the supported emulated layouts.
+- [x] Freeze the combined candidate, obtain both independent read-only world
+  reviews and repair findings. Final 106-input SHA256
+  abfd98409d76ade28b71503fdcf1c5f5f59a456d0576927e8a1210f25009b2f8;
+  Node106/106 and explicit three retained natural routes plus13 final-material
+  visual/lifecycle cases pass, with exact geometry/BIN equivalence. Cost compares
+  nine cold contexts per side. VALIDATION.md records the desktop tail cost,
+  evidence bridge and scope limits. Both independent scoped reviews pass.
+- [ ] Publish and verify exact public bytes and actual canonical interaction;
+  keep the full reconstruction goal ACTIVE.
+
 Previous goal turn: **PROGRESS**. Main-bar release
 f18cd2cbedfe85c20231356934404b1e95031c79 is deployed at the permanent Geheim URL.
 Pages40063573644 succeeded;71 public files match Git bytes, all six entry URLs
@@ -17,7 +65,7 @@ respond, and9/9 actual public desktop/Android-emulated cases pass. The104-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-mainbar-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: historic interior bar façade
+## Previous increment: historic interior bar façade
 
 Re-reading primary architect A07 confirms an approximately11m-high bar room
 containing a former exterior façade that is now inside. I23 views12/16 show
@@ -56,13 +104,13 @@ Keep the existing .23m accuracy requirement and production controls unchanged.
   Node 100 plus packaging 4, fresh browser 13/13 and extra corrective-input
   branch 1/1 pass. Both scoped independent reviews pass. Cost: nine cold
   contexts per side, same requests/maps and broadly stable local p95 tails.
-- [ ] Publish and verify canonical bytes plus real public interaction. The
+- [x] Publish and verify canonical bytes plus real public interaction. The
   owning output/berghain-barwall-release.json receipt records actual results.
 
-Actual medallion/recess geometry and scale are scoped progress. The heavily
-weathered facade finish and photographed blue gridded high roof/skylight remain
-unreproduced. Do not claim the comparatively clean wall and flat dark ceiling
-complete the room's visual fidelity. The service path is a tight one-person
+At that release, medallion/recess geometry and scale were scoped progress.
+The weathered facade finish and photographed blue gridded roof remained absent;
+the current increment addresses the roof and lower relief relationship.
+The comparatively clean wall does not complete room fidelity. The service path is a tight one-person
 pinch; deep unreachable wall/cabinet starts exceed bounded collision recovery.
 
 Previous goal turn: **PROGRESS**. The balustrade release dd20eb55cf52baedd389deaca5501c60edc749e4
