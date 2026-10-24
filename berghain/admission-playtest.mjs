@@ -61,7 +61,9 @@ export default {name:'Photograph-informed entrance and reported admission sequen
    for(let i=0;i<rays.length;i++)assert.ok(Math.abs(native.geometryProbes.source[i]-native.geometryProbes.native[i])<.005);
    await artifacts.screenshot(page,name+'-native.png');await disposeNativeAsset(page);samples.push({name,native});
   }
-  await page.locator('#exterior').click();assert.equal((await lit(page)).daylight,true);
+  await page.locator('#exterior').click();
+  await page.waitForFunction(()=>document.querySelector('#model').dataset.view==='exterior');
+  assert.equal((await lit(page)).daylight,true);
   await artifacts.screenshot(page,'restored-daylight.png');await artifacts.json('native.json',samples);return {samples};
  }},
  {id:'admission-fallback-labels',modes:['quick','stress'],timeoutMs:90000,async run({page,baseURL,artifacts}){
