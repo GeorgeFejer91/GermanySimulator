@@ -39,16 +39,36 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
       if(delta>32)large++;
       if(i%128===0)colours.add(`${a[i]},${a[i+1]},${a[i+2]}`);
     }
+    let lighting=null;
+    const sourceLights=[],portableLights=[];
+    source.traverse(object=>{if(object.isSpotLight)sourceLights.push(object);});
+    portable.traverse(object=>{if(object.isSpotLight)portableLights.push(object);});
+    if(view?.practicalLighting){
+      for(const light of sourceLights)light.visible=false;
+      const unlit=draw(source),change=[0,0,0];let warmPixels=0;
+      for(let i=0;i<a.length;i+=4){
+        const delta=[0,1,2].map(c=>a[i+c]-unlit[i+c]);
+        delta.forEach((value,c)=>change[c]+=value);
+        if(delta[0]>=6&&delta[0]>delta[2]*1.25)warmPixels++;
+      }
+      for(const light of sourceLights)light.visible=true;
+      lighting={source:sourceLights.length,portable:portableLights.length,
+        meanChange:change.map(value=>value/(width*height)),warmFraction:warmPixels/(width*height)};
+    }
     const textures=new Set();source.traverse(mesh=>{if(mesh.isMesh)for(const texture of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap,mesh.material.thicknessMap,mesh.material.envMap])if(texture)textures.add(texture);});
     let disposed=0;for(const texture of textures)texture.addEventListener('dispose',()=>disposed++);
-    window.materialEvidence={show:kind=>draw(kind==='source'?source:portable),cleanup:()=>{
+    window.materialEvidence={show:kind=>{
+      for(const light of sourceLights)light.visible=kind!=='unlit';
+      return draw(kind==='portable'?portable:source);
+    },cleanup:()=>{
       disposeBerghainModel(source);disposeBerghainModel(portable);renderer.dispose();
       return {textures:textures.size,disposed};
     }};
     document.querySelector('#instructions').textContent='Isolated source / GLB comparison · same camera and lights';
-    return {meanRGBDifference:sum/(width*height*3),largePixelFraction:large/(width*height),sampledColours:colours.size,width,height};
+    return {meanRGBDifference:sum/(width*height*3),largePixelFraction:large/(width*height),sampledColours:colours.size,width,height,lighting};
   },view);
   await page.evaluate(()=>window.materialEvidence.show('source'));await artifacts.screenshot(page,'source-materials.png');
+  if(view?.practicalLighting){await page.evaluate(()=>window.materialEvidence.show('unlit'));await artifacts.screenshot(page,'practical-lights-off.png');}
   await page.evaluate(()=>window.materialEvidence.show('portable'));await artifacts.screenshot(page,'exported-materials.png');
   const cleanup=await page.evaluate(()=>window.materialEvidence.cleanup());
   await artifacts.json('material-comparison.json',{measured,cleanup});

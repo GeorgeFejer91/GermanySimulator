@@ -45,5 +45,16 @@ export default {name:'Historic interior bar facade and eleven-metre room',source
   await ctx.artifacts.screenshot(ctx.page,'bar-roof-native.png');await disposeNativeAsset(ctx.page);
   return {parity,native,scope:'Controlled source/native camera beneath the roof; original beam/lattice/pane geometry, inferred counts/finish, no natural walking claim'};
  }},
+ {id:'bar-finish-source-native',modes:['quick','stress'],timeoutMs:150000,async run(ctx){
+  const center=layout.mainBar.interiorFacade.bayCenters[2],floor=layout.mainBar.floorHeight;
+  const eye={x:center[0]-4.8,y:floor+2.1,z:center[2]+9.1},target={x:center[0]-.8,y:floor+5,z:center[2]-2.5};
+  const parity=await compareMaterialRender(ctx,{position:array(eye),target:array(target),practicalLighting:true});
+  assert.equal(parity.measured.lighting.source,6);assert.equal(parity.measured.lighting.portable,6);
+  assert.ok(parity.measured.lighting.warmFraction>.005,'Actual practical light must add a localized warm wash to visible plaster');
+  const native=await renderNativeAsset(ctx.page,{position:{...eye,y:eye.y-1.68},
+    yaw:Math.atan2(eye.x-target.x,eye.z-target.z),pitch:Math.atan2(target.y-eye.y,Math.hypot(target.x-eye.x,target.z-eye.z))});
+  await ctx.artifacts.screenshot(ctx.page,'bar-finish-native.png');await disposeNativeAsset(ctx.page);
+  return {parity,native,scope:'Original aged plaster maps, inferred practical light wash, matched source/native and actual light-off contrast; no surveyed finish/current-lighting claim'};
+ }},
  {...natural,id:'bar-wall-natural-route'}
 ]};

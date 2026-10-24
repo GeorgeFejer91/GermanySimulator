@@ -2,6 +2,9 @@ import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
 
 export const mainBarMaterials={
+  mainBarPlaster:{color:'#ece5d4',roughness:.98},
+  mainBarFixture:{color:'#252824',roughness:.65,metalness:.6},
+  mainBarLamp:{color:'#ffe5bd',roughness:.4,emissive:'#ffcd89',emissiveIntensity:1.6},
   mainBarGlass:{color:'#a0aaa4',roughness:.22,transparent:true,opacity:.14},
   mainBarGlow:{color:'#d6c394',roughness:.48,emissive:'#efc773',emissiveIntensity:.7},
   mainBarRoofBlue:{color:'#142ca2',roughness:.38,emissive:'#080cb4',emissiveIntensity:.65},
@@ -36,6 +39,16 @@ export function createMainBarGeometries(){
   };
 }
 const site=values=>{const p=studyToSite({x:values[0],y:values[1],z:values[2]});return[p.x,p.y,p.z];};
+
+export function createMainBarLights(lighting){
+  const group=new THREE.Group();group.name='bar practical lights';
+  for(const definition of lighting.lights){
+    const light=new THREE.SpotLight(definition.color,definition.intensity,definition.range,definition.angle,definition.penumbra,2);
+    light.name=definition.name;light.position.fromArray(definition.position);light.target.position.fromArray(definition.target);
+    group.add(light,light.target);
+  }
+  return group;
+}
 
 function addBarRoof(layout,box,anchor,length){
   const floor=layout.mainBar.floorHeight,west=layout.mainBar.screenAnchor[0]-.25,east=anchor[0]-.48;
@@ -86,7 +99,7 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
   const rotation=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),angle);
   const discRotation=rotation.clone().multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),Math.PI/2));
   const offset=point=>new THREE.Vector3(...point).applyQuaternion(rotation).toArray();
-  const placed=(name,center,size,material='pale',solid=true)=>part(name,offset(center),size,material,'box',solid,rotation);
+  const placed=(name,center,size,material='mainBarPlaster',solid=true)=>part(name,offset(center),size,material,'box',solid,rotation);
   const bayCenters=Array.from({length:5},(_,i)=>offset([0,0,(i-2)*pitch]).map((v,j)=>v+anchor[j]));
   const beamCenter=site([19,12.95,-6]);
   const inferred=layout.parts.find(p=>p.name==='structural beam'&&p.center.every((v,i)=>Math.abs(v-beamCenter[i])<(i===1?.05:.001)));
@@ -104,6 +117,9 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
     confidence:'Architect-reported approximate room height; footprint, bay sizes/counts, ornament depth and contemporary arrangement inferred',
     structuralConnections:'Existing concrete supports meet the new room ceiling; exterior hull and floor grid retained',
     beamCorrection:'I23 views12/16 show clear space across the upper relief row. Trim the old inferred longitudinal beam within this bar room; retain its exterior sections and all columns.'};
+  const practicalLighting={sources:['I23'],lights:[],
+    confidence:'Views12/13/16 show warm localized upward wall wash. Six fixtures, housings, color, candela, range and cone are inferred appearance parameters; exact equipment and present-day operation unverified.'};
+  layout.mainBar.interiorFacade.practicalLighting=practicalLighting;
   fixture('main-bar-interior-facade',[22,floor,-4],['A07','I23'],{clearHeight:11,length,bays:5},()=>{
     const width=1.55,flank=(pitch-width)/2;
     for(let bay=0;bay<5;bay++){
@@ -114,7 +130,7 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
       for(const y of [1.9,6]){
         for(const side of [-1,1])placed('relief panel side rim',[-.596,y,z+side*.81],[.032,1.56,.055]);
         for(const side of [-1,1])placed('relief panel horizontal rim',[-.596,y+side*.78,z],[.032,.055,1.675]);
-        part('circular medallion',offset([-.609,y,z]),[1.22,.058,1.22],'pale','main-bar-medallion',true,discRotation).role='circular relief';
+        part('circular medallion',offset([-.609,y,z]),[1.22,.058,1.22],'mainBarPlaster','main-bar-medallion',true,discRotation).role='circular relief';
       }
       for(const [low,high]of [[2.8,5.1],[6.95,10.12]]){
         const y=(low+high)/2,height=high-low;
@@ -135,6 +151,12 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
         ['pilaster stem',5.25,9.9,.24,1.1],['pilaster capital',10.24,.18,.34,1.25],['pilaster cap',10.39,.12,.40,1.38]])
         placed(name,[-.58-depth/2,y,z],[depth,height,width]).role='pilaster';
       for(const side of [-1,1])placed('pilaster shallow edge',[-.827,5.25,z+side*.45],[.014,9.8,.032]);
+      placed('uplight housing',[-1.14,1.015,z],[.16,.08,.16],'mainBarFixture').role='bar practical housing';
+      placed('uplight wall bracket',[-.97,.95,z],[.5,.05,.12],'mainBarFixture').role='bar practical bracket';
+      placed('uplight lens',[-1.14,1.065,z],[.105,.02,.105],'mainBarLamp').role='bar practical lens';
+      const world=point=>offset(point).map((value,i)=>value+anchor[i]);
+      practicalLighting.lights.push({name:`bar pilaster uplight ${pier+1}`,position:world([-1.14,1.08,z]),
+        target:world([-.82,6.4,z]),color:'#ffd3a0',intensity:600,range:11,angle:.42,penumbra:.68});
     }
     for(const [y,height,depth]of [[10.17,.10,.18],[10.30,.16,.26],[10.48,.14,.34],[10.70,.30,.20],[10.95,.10,.28]])
       placed('stepped cornice',[-.58-depth/2,y,0],[depth,height,length+.12]);

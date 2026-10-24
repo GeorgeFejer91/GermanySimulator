@@ -12,7 +12,7 @@ const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', 
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
-  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged'};
+  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'aged'};
 
 export function configureSurfaceMaterial(material, name) {
   const family = familyByMaterial[name];
@@ -41,7 +41,7 @@ function projectedMaterial(material, maps) {
       vec3 surfaceNormal=normal;
       #ifdef USE_INSTANCING
         surfacePosition=(instanceMatrix*vec4(position,1.0)).xyz;
-        surfaceNormal=mat3(instanceMatrix)*normal;
+        surfaceNormal=transpose(inverse(mat3(instanceMatrix)))*normal;
       #endif
       vec3 dominant=abs(surfaceNormal);
       vec2 surfaceUv=dominant.x>=dominant.y&&dominant.x>=dominant.z
@@ -55,7 +55,7 @@ function projectedMaterial(material, maps) {
         vClearcoatNormalMapUv=vMapUv;
       #endif`);
   };
-  material.customProgramCacheKey=()=> 'berghain-metre-uv-v1';
+  material.customProgramCacheKey=()=> 'berghain-metre-uv-normal-v2';
   material.needsUpdate=true;
 }
 

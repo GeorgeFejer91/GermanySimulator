@@ -55,3 +55,26 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
   assert.equal(gltf.samplers[0].wrapS,10497);
   assert.equal(gltf.samplers[0].wrapT,10497);
 });
+
+test('portable bar practical lights preserve source color, candela, cone, range and world direction',()=>{
+ const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
+ const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString().trim());
+ const lights=gltf.extensions?.KHR_lights_punctual?.lights;
+ assert.equal(lights?.length,6,'Portable lighting must survive export, beyond an emissive strip');
+ const model=createBerghainModel();model.updateMatrixWorld(true);
+ try{
+  const source=[];model.traverse(object=>{if(object.isSpotLight)source.push(object);});
+  const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-6,`${a} differs from ${b}`);
+  for(const [i,light]of source.entries()){
+   const node=gltf.nodes.find(n=>n.extensions?.KHR_lights_punctual?.light===i);
+   assert.ok(node);assert.equal(lights[i].type,'spot');
+   near(lights[i].intensity,light.intensity);near(lights[i].range,light.distance);
+   near(lights[i].spot.outerConeAngle,light.angle);near(lights[i].spot.innerConeAngle,light.angle*(1-light.penumbra));
+   lights[i].color.forEach((v,j)=>near(v,light.color.toArray()[j]));
+   const position=light.getWorldPosition(new THREE.Vector3()),target=light.target.getWorldPosition(new THREE.Vector3());
+   node.translation.forEach((v,j)=>near(v,position.toArray()[j]));
+   const direction=new THREE.Vector3(0,0,-1).applyQuaternion(new THREE.Quaternion().fromArray(node.rotation));
+   assert.ok(direction.distanceTo(target.sub(position).normalize())<1e-6,'glTF -Z axis must follow the actual source beam');
+  }
+ }finally{disposeBerghainModel(model);}
+});

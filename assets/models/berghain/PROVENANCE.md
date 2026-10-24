@@ -9,6 +9,27 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Bar plaster and practical wall wash
+
+I23 views12/13/16 show mottled cream plaster and localized warm upward wash
+along the bar pilasters. Dedicated plaster reuses this project's original
+seeded aged color/roughness/normal maps at their existing metre scale. This is
+an approximate worn finish, not a photographic site scan or unique damage map.
+No source-photo pixels or new texture family are embedded.
+
+Six small uplight housings/lenses, attached steel wall brackets and warm spot
+lights are original inferred geometry/lighting. Positions, count, fixture design, color, candela, cone and
+range are appearance parameters; the photographs establish neither exact
+equipment nor current operation. Lights cast no new shadow maps. The portable
+GLB preserves them through KHR_lights_punctual with linear RGB, candela, range,
+cone angles and world direction. Complete photometric or shadow fidelity is
+not established. All original geometry/solids and instance tones are retained.
+
+The source surface projection now transforms normals by inverse transpose,
+matching the exporter's metre-UV calculation on unevenly scaled curved shapes.
+This corrects a source/export texture-plane mismatch exposed by relief wear;
+the native texture images and UV algorithm are unchanged.
+
 ## Bar roof construction and lower relief relationship
 
 I23 views11/12 show concrete cross-beams enclosing inset blue gridded panels.

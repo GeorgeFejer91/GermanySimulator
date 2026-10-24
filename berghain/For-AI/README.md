@@ -10,6 +10,15 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+Current goal turn: **PROGRESS**. Roof/lower-relief release
+8ce9014b0391e37a0df2094e2e91f026dfb583e6 is deployed at
+https://germanysimulator.de/geheim/. Pages40071899249 succeeded; 71 public
+files match Git bytes, six entry URLs respond and 12/12 actual public desktop
+and Android-emulated cases pass, including natural entry/stairs/full bar aisle/
+reverse exit on all three layouts. The 106-input freeze and accepted baseline
+remain preserved; the primary index is untouched. Final receipt:
+output/berghain-barroof-release.json. Full reconstruction stays ACTIVE.
+
 Previous goal turn: **PROGRESS**. Historic-wall release
 f1195e8700d91afab333eebbf6a9fc30744c267c is deployed at the permanent Geheim URL.
 Pages40068029116 succeeded; 71 public files match Git bytes, six entry URLs
@@ -17,7 +26,65 @@ respond and 9/9 actual public desktop/Android-emulated cases pass. The 106-input
 freeze and original primary index remain preserved. Receipt:
 output/berghain-barwall-release.json. Full reconstruction stays ACTIVE.
 
-## Current increment: bar roof and relief/worktop relationship
+## Current increment: aged bar plaster and warm pilaster wash
+
+I23 views12/13/16 show mottled, worn cream plaster and localized warm upward
+wash at the pilasters. The current clean pale material and uniform lighting
+miss that composition. Reuse the original aged PBR family on a dedicated bar
+plaster material; add six inferred warm practical uplights and small housings
+above the rear worktop. Fixture count/type, candela, color, beam shape, precise
+wear and present-day operation remain authoring estimates, not measured facts.
+
+Physics review found the initial housings floating: four35mm above the worktop
+and two without any worktop below. Six short actual steel brackets now connect
+each housing underside to its pilaster, with paired solids. A new real-mesh
+contact ray and support/pilaster overlap check covers every mount. The first
+bracket ended at the pilaster face; extend its inner end into the pier so its
+physical connection is unambiguous. Beam positions/settings remain unchanged.
+
+Keep the same geometry factory, native Three.js lights, existing surface loader
+and GLB exporter. Export the practical spots through KHR_lights_punctual so the
+portable asset retains the same lighting. No new texture, dependency, runtime,
+render loop, shadow map or UI. Preserve the calibrated hull, all existing
+geometry/solids, navigation, camera and controls. Preserve existing instance
+tones outside the wall when splitting its material batch; material regrouping
+must not arbitrarily recolor unrelated pale surfaces.
+
+Writable scope: main-bar.mjs, model.mjs, surface-materials.mjs, exporter and
+GLB/manifest; existing bar-wall/material tests and browser pilots; owning
+Berghain research/provenance/interior/validation notes. The current README owns
+the plan. Mandatory independent Physics and Camera/scale review uses the same
+frozen integrated candidate; silent headless GPU batches remain sequential.
+
+- [x] Revalidate the prior release and preserve its 106 inputs plus32 ancillary
+  dependencies in output/berghain-barfinish-baseline before production edits.
+- [x] Observe RED for actual aged plaster assignment, aimed practical lights
+  and portable light color/intensity/range/cone/transform preservation.
+- [x] Implement the finish and practicals; export and inspect source/native
+  matched views and lit/unlit wall contrast against I23 photographs.
+- [x] Verify unchanged geometry/solids and unrelated instance tones, walk routes,
+  loaded/fallback/restore behavior and comparable nine-context-per-side cost.
+- [x] Freeze one candidate, obtain both independent scoped reviews and repair
+  findings. Final106-input SHA256
+  6965cf57176a40cbbc36219bd71bcee3be8dc2c60234c9b834dc05d9917642fa;
+  Node109/109 and monolithic current-hash browser22/22 PASS. Both scoped world
+  reviews pass after supporting all six lights. Cost covers nine cold contexts
+  per side at the actual bar aisle; VALIDATION.md records metrics and limits.
+- [ ] Publish and verify public bytes and actual natural entry/exit. Full
+  reconstruction remains ACTIVE; lighting falloff and unique site wear remain
+  more regular than the photographs and need further fidelity work.
+
+Rendered diagnosis found a pre-existing surface-normal projection error under
+nonuniform scale: 2,990/3,960 relief vertices select different UV planes from
+the exporter's inverse-transpose normal. Disabling normal-map strength leaves
+the color mismatch; neutralizing base color or hiding reliefs removes it.
+Correct the shared Berghain surface shader to use inverse-transpose normals,
+retaining the existing parity tolerance. This also corrects projected maps on
+other unevenly scaled curved fittings; inspect representative artwork/furniture
+source/native views. Existing geometry, materials outside the plaster, instance
+tones and exported metre-UV algorithm remain preserved.
+
+## Previous increment: bar roof and relief/worktop relationship
 
 I23 photos 11/12 show concrete cross-beams surrounding inset blue gridded roof
 panels above the bar/guest aisle. At least three panels are visible, but the
@@ -55,7 +122,7 @@ Reuse the current plan owner and existing browser/performance harness.
   visual/lifecycle cases pass, with exact geometry/BIN equivalence. Cost compares
   nine cold contexts per side. VALIDATION.md records the desktop tail cost,
   evidence bridge and scope limits. Both independent scoped reviews pass.
-- [ ] Publish and verify exact public bytes and actual canonical interaction;
+- [x] Publish and verify exact public bytes and actual canonical interaction;
   keep the full reconstruction goal ACTIVE.
 
 Previous goal turn: **PROGRESS**. Main-bar release

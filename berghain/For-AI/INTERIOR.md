@@ -75,6 +75,14 @@ other floors, original guards, garden and entrance clearance remain unchanged.
 
 ### Historic inner facade and bar-room ceiling
 
+I23 views12/13/16 also show mottled cream plaster and warm upward pilaster
+wash. The new dedicated plaster uses original seeded aged PBR maps; six small
+inferred practical housings/lenses mount to the pilasters on actual short steel
+brackets above the worktop, with real warm spot
+lights retained in native GLB. No shadow maps, new texture family, dependency
+or render pass. Exact damage, fixtures/count, color, candela, cone/range and
+current operation remain unverified; this is appearance reconstruction.
+
 The latest roof study uses I23 views11/12: actual concrete cross-beams, inset
 blue panels and a steel lattice replace the first flat ceiling. Four roof bays,
 six-by-four cells and0.44m recess are inferred. The lowest beam underside keeps

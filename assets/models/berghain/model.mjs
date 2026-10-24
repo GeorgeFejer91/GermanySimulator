@@ -10,7 +10,7 @@ import {createLoungeGeometries} from './upper-lounge.mjs';
 import {createKloGeometries} from './klo-bar.mjs';
 import {createTogetherGeometries} from './together-geometry.mjs';
 import {createLabGeometries} from './lab-oratory.mjs';
-import {createMainBarGeometries} from './main-bar.mjs';
+import {createMainBarGeometries,createMainBarLights} from './main-bar.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -23,12 +23,16 @@ export function createBerghainModel() {
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
     grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries()};
-  const batches = new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
+  const batches = new Map(), toneBatches=new Map(), shades=new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');
     if (!batches.has(key)) batches.set(key, []);
     batches.get(key).push(part);
+    const toneKey=[part.section,part.material==='mainBarPlaster'?'pale':part.material,part.shape].join('/');
+    if(!toneBatches.has(toneKey))toneBatches.set(toneKey,[]);
+    toneBatches.get(toneKey).push(part);
   }
+  for(const parts of toneBatches.values())parts.forEach((part,index)=>shades.set(part,.84+((index*193+parts.length*37)%101)/625));
   for (const [key, parts] of batches) {
     const [section, materialName, shape] = key.split('/');
     let group = model.getObjectByName(section);
@@ -55,7 +59,7 @@ export function createBerghainModel() {
       if (part.matrix) transform.matrix.fromArray(part.matrix);
       else transform.updateMatrix();
       mesh.setMatrixAt(index, transform.matrix);
-      const shade = .84 + ((index * 193 + parts.length * 37) % 101) / 625;
+      const shade = shades.get(part);
       mesh.setColorAt(index, new THREE.Color(shade, shade, shade));
     });
     mesh.computeBoundingBox();
@@ -79,6 +83,7 @@ export function createBerghainModel() {
     if (mesh.isMesh && !mesh.isInstancedMesh && mesh.parent.name !== 'roof' && mesh.name !== 'RoofSurface')
       configureSurfaceMaterial(mesh.material, 'concrete');
   });
+  model.add(createMainBarLights(layout.mainBar.interiorFacade.practicalLighting));
   return model;
 }
 

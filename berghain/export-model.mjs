@@ -57,6 +57,19 @@ for (const group of model.children) {
   gltf.nodes[0].children.push(groupIndex);
   gltf.nodes.push({name: group.name, children: [], ...(official ? {extras: group.userData} : {})});
   for (const mesh of group.children) {
+    if(mesh.isSpotLight){
+      gltf.extensions||={};gltf.extensions.KHR_lights_punctual||={lights:[]};
+      gltf.extensionsUsed=[...new Set([...(gltf.extensionsUsed||[]),'KHR_lights_punctual'])];
+      const lights=gltf.extensions.KHR_lights_punctual.lights;
+      const index=lights.length,position=mesh.getWorldPosition(new THREE.Vector3());
+      const direction=mesh.target.getWorldPosition(new THREE.Vector3()).sub(position).normalize();
+      const rotation=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,-1),direction);
+      lights.push({name:mesh.name,type:'spot',color:mesh.color.toArray(),intensity:mesh.intensity,range:mesh.distance,
+        spot:{innerConeAngle:mesh.angle*(1-mesh.penumbra),outerConeAngle:mesh.angle}});
+      gltf.nodes[groupIndex].children.push(gltf.nodes.length);
+      gltf.nodes.push({name:mesh.name,translation:position.toArray(),rotation:rotation.toArray(),extensions:{KHR_lights_punctual:{light:index}}});
+    }
+    if(!mesh.isMesh)continue;
     const geometry = mesh.geometry, sourcePosition = geometry.attributes.position, sourceNormal = geometry.attributes.normal;
     const instances = mesh.isInstancedMesh ? mesh.count : 1;
     const vertexCount = sourcePosition.count * instances;

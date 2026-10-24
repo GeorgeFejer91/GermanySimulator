@@ -1,5 +1,93 @@
 # Berghain viewer validation
 
+## Aged bar plaster and portable practical lighting — 2026-10-24
+
+I23 views12/13/16 show mottled cream plaster and localized warm upward wash
+at the bar pilasters. The dedicated plaster assignment reuses the project's
+original aged PBR maps on172 existing parts. Six inferred warm spotlights and
+18 small housing/lens/bracket parts add actual localized light, retained in
+the portable GLB through KHR_lights_punctual. Linear RGB, candela, range,
+inner/outer cone and world beam direction round-trip. Fixture type/count,
+positions, output and current operation remain estimates; generic repeating
+mottling does not reproduce unique site damage. No photo pixels are shipped.
+
+The first visual comparison failed the existing mean-RGB tolerance at1.658.
+Isolation showed the large mismatch remained with normal-map strength zero,
+but neutral base color or hidden reliefs removed it. The source's ordinary
+matrix normal transform chose a different projection plane from the native
+inverse-transpose calculation at2,990/3,960 relief vertices. Correcting the
+shared surface projection removes that curved-surface mismatch without
+changing the standard GLB UV algorithm or texture images. The original
+tolerance remains. Representative Together, lounge and climber views pass.
+One diagnostic page navigation hit its30s limit; the timeout was not widened.
+Subsequent diagnostic and accepted runs pass. First-ever driver shader-cache
+compilation performance remains unqualified.
+
+Independent Physics review found the first housings unsupported: four35mm
+above the worktop and two without a worktop below. Six actual0.50×0.05×0.12m
+brackets now connect housings to pilasters, with paired solids. Every bracket
+top meets housing bottom at y7.625; lens bottoms meet housing tops at7.705.
+Each bracket enters the stem by about0.107×0.050×0.126m. A new real-mesh mount
+check observed RED and now passes. Its initial contact-ray origin was inside
+the support; moving it above the contact fixes that probe without changing
+distance/role gates. The first support ended at the pier face; the final one
+extends into it. These are intentional structural joints, not floating lamps.
+
+Source isolation preserves all10,392 original part shape buffers, matrices
+and instance tones, all3,491 original solids and10,220 material assignments.
+Only172 plaster assignments change;18 practical parts are new. Material
+regrouping preserves old tone batches so unrelated pale surfaces are not
+arbitrarily recolored. The surface-normal correction also improves projected
+maps on other nonuniform curved fittings. Geometry/collision/camera/input are
+otherwise unchanged. No new texture family, dependency, shadow map, render
+loop or pass; the six spots add actual light evaluation in the existing pass.
+
+GLB49,304,300B /656,376tri /156 mesh-material groups /25 embedded maps;
+SHA2566468b692b39d7d814bad8608c9850050e18633327e651c72a035eb66238d812f.
+Delta from8ce9014: +25,632B /216tri /3groups, with the same26 runtime maps
+and5,501,462 embedded texture bytes. Bounds and original asset scale remain.
+
+Final106-input freeze: output/berghain-barfinish-candidate.json, SHA256
+6965cf57176a40cbbc36219bd71bcee3be8dc2c60234c9b834dc05d9917642fa.
+Current Node109/109 PASS includes four route-packaging checks. The monolithic
+output/berghain-barfinish-accepted-browser/report.json passes22/22 on all106
+current hashes: wall/roof/finish source-native views on three profiles(9),
+natural exterior entry/stair/full bar/reverse exit(3), loaded camera(3),
+fallback(3), desktop restoration(1) and three representative curved-fitting
+regressions. Earlier unmounted22/22 is historical, not final acceptance.
+Finish RGB differences are0.867/0.953/0.947, large-pixel fractions<=0.000117;
+26/26 source textures dispose once. Actual light-off frames remove the warm
+pools; controlled views do not establish natural entry evidence.
+
+Both final independent Physics and Camera/scale reports pass scoped P1/P2/P4/P5,
+C1–C5 and X1 on this freeze. Physics freshly bounds all18 new parts/432 actual
+vertices in their solids, checks the six support joints, traverses seven
+guest/service lanes both ways and finds zero newly blocked centers among1,122
+locally legal samples. Six invalid fixture-contact starts recover legally.
+Reviewer-fresh checks and author-supplied browser evidence are distinguished
+in output/berghain-barfinish-{physics,camera}-review-final.md. The inherited
+one-person service pinch and deep unreachable invalid starts remain limits.
+
+Cost compares preserved106 inputs plus32 ancillary dependencies against the
+final freeze: three cold browser contexts per viewport per side, nine before
+and nine after. A room shortcut plus real input reaches the bar-aisle target
+x13.72,z6.8 within0.23m, then walks north for3s with the lit plaster visible.
+Actual start ranges are recorded; this setup is not natural-entry proof.
+Normal load adds2,135 encodedB(7,378,607→7,380,742), with68 requests,26 maps,
+no startup GLB request, zero idle frames and drawing buffers<=1.6MP.
+Local Intel Iris Xe p95 frame medians before/after: desktop20.7/20.9ms
+(ranges15.5–20.9/20.7–20.9), portrait14.0/14.0ms, landscape14.0/14.0ms.
+Input medians are15.1/14.4,20.7/21.3,22.0/18.9ms; ready medians1504/1649,
+1458/1577,1404/1586ms. Desktop ready ranges1396–3738/1578–4413ms.
+These local samples establish neither a speedup nor a physical-device or
+first-driver-cache guarantee. Distributions: output/berghain-barfinish-cost-summary.json.
+Physical Android/device GPU and perceptual listening remain NOT RUN.
+
+The six bright, regular teardrop pools still differ from the photographed
+warm falloff. Exact wear, photometry, room topology, wall ratios and complete
+building/artwork fidelity remain open. Publication/actual public checks belong
+to output/berghain-barfinish-release.json. Full reconstruction stays ACTIVE.
+
 ## Bar roof and lower relief composition — 2026-10-24
 
 Primary architect gallery I23 views 11/12 show concrete cross-beams and inset

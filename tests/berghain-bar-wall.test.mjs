@@ -78,6 +78,46 @@ test('the lower circular reliefs and their panels are fully visible above the se
  }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
 
+test('bar plaster retains aged physical maps and practical beams reach the actual pilaster faces',()=>{
+ const model=createBerghainModel();model.updateMatrixWorld(true);
+ try{
+  const wall=model.getObjectByName('interior/mainBarPlaster/box');
+  assert.ok(wall,'The photographed wall must have its own worn plaster surface');
+  assert.equal(wall.material.userData.surface.family,'aged');
+  const lights=[];model.traverse(object=>{if(object.isSpotLight)lights.push(object);});
+  assert.equal(lights.length,6,'Localized warm pilaster wash must exist as actual lights');
+  const wallMeshes=[];model.getObjectByName('interior').traverse(object=>{if(object.isMesh)wallMeshes.push(object);});
+  for(const light of lights){
+   const from=light.getWorldPosition(new THREE.Vector3()),to=light.target.getWorldPosition(new THREE.Vector3());
+   assert.ok(to.y>from.y+3&&from.y>layout.mainBar.floorHeight+.94,'Aim upward from above the service worktop');
+   const hits=new THREE.Raycaster(from,to.sub(from).normalize(),.02,light.distance).intersectObjects(wallMeshes,false);
+   assert.ok(hits.length&&hits[0].object===wall,'The real cone center must reach plaster, not pass through the wall');
+   assert.ok(light.color.r>light.color.b*1.5&&light.decay===2&&light.castShadow===false);
+   assert.ok(light.intensity>0&&light.distance<=12&&light.angle<Math.PI/3);
+  }
+ }finally{disposeBerghainModel(model);}
+});
+
+test('every practical housing rests on an actual bracket connected to its pilaster',()=>{
+ const model=createBerghainModel();model.updateMatrixWorld(true);
+ try{
+  const parts=layout.parts.filter(p=>p.material==='mainBarFixture'&&p.shape==='box');
+  const mesh=model.getObjectByName('interior/mainBarFixture/box');
+  const bounds=part=>new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(new THREE.Matrix4().fromArray(part.matrix));
+  const housings=parts.filter(p=>p.role==='bar practical housing'),brackets=parts.filter(p=>p.role==='bar practical bracket');
+  assert.equal(housings.length,6);assert.equal(brackets.length,6,'End fixtures need a real mount as well as the four over the worktop');
+  for(const housing of housings){
+   const box=bounds(housing),origin=box.getCenter(new THREE.Vector3());origin.y=box.min.y+.001;
+   const hit=new THREE.Raycaster(origin,new THREE.Vector3(0,-1,0),0,.15).intersectObject(mesh,false)[0];
+   assert.ok(hit&&hit.distance<.003&&parts[hit.instanceId].role==='bar practical bracket','The underside must physically meet its support');
+   const bracket=parts[hit.instanceId],support=bounds(bracket);
+   const stems=layout.parts.filter(p=>p.fixture==='main-bar-interior-facade'&&p.name.endsWith('pilaster stem'));
+   assert.ok(stems.some(p=>{const size=support.clone().intersect(bounds(p)).getSize(new THREE.Vector3());return size.x*size.y*size.z>.0001;}),'Support must enter the actual pilaster');
+   assert.ok(layout.solids.some(s=>s.renderPart===bracket),'The visible bracket must retain its physical solid');
+  }
+ }finally{disposeBerghainModel(model);}
+});
+
 test('recessed windows and flanking masonry have different actual depth in the source model',()=>{
  const wall=layout.mainBar.interiorFacade;assert.ok(wall,'The interior wall must own its original geometry');
  const model=createBerghainModel(),ray=new THREE.Raycaster();model.updateMatrixWorld(true);
