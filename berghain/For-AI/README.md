@@ -10,39 +10,54 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
-Current increment: six original foyer/gallery and main/Panorama stair
-balustrade runs now have vertical steel infill, supported by I08/I09/I15.
-Handrails are1.08m above the local stair/floor after exterior calibration;
-post/picket sections, pitch, placement and current installation are estimates.
-The618 upright parts have matching box solids. Both original stairs, their
-open lower approaches and sampled legal undercroft routes remain usable.
-Halle, upper-lounge and Lab guards retain their existing geometry.
+Previous goal turn: **PROGRESS**. The balustrade release dd20eb55cf52baedd389deaca5501c60edc749e4
+is deployed at https://germanysimulator.de/geheim/. Pages40058076329 succeeded;
+70 public files match exact Git bytes and 9/9 actual canonical desktop/Android
+portrait/landscape cases pass. All 101 accepted inputs and the primary index
+remain preserved. Receipt: output/berghain-balustrade-release.json. Full goal ACTIVE.
 
-Near a low guard the follow camera lifts smoothly, using six nearest run
-segments and their interpolated local height. The nine opaque-mesh sightline
-rays remain active. The lift also affects an away-facing view while close to
-a guard; moving farther than1m away restores the ordinary elevation. A guard
-above a ground-floor visitor does not trigger it. A reproduced fallback touch
-navigation bug is fixed by letting the noninteractive status pass pointer
-events to the existing canvas. Text geometry and Pretext0.0.9 are unchanged.
+## Current increment: long main bar and glazed room boundary
 
-Candidate output/berghain-balustrade-candidate.json freezes101 files. Both
-independent Physics and Camera/scale reviews accept this partial increment.
-Browser coverage is16 passing cases from the preserved17-case run plus a
-current-hash rerun of the corrected restore test; it is not a fresh monolithic
-17/17 batch. All100 other inputs are unchanged across that test-only bridge.
-Publication is being verified; the owning receipt records its actual state.
-Full reconstruction stays ACTIVE.
-The earlier hidden-avatar and mobile about:blank failures are retained locally.
-The public playtest now uses only repository inputs and includes natural
-guard contact, loaded/fallback yaw sweeps, distant return and graphics restore.
+I23 adds 17 directly inspected architect lightbox views (00–16). Views11–14
+show the long counter, curved return, two luminous ribbed bands, dark middle
+panel and metal stools. View16 shows its glass screen toward the hall; it is
+not evidence of an outside window. Other views expose ducts, standing tables
+and a switchback stair whose exact location/floor remains unresolved. Do not
+replace a stair based only on an unlocated photograph.
 
-Portable GLB:46,673,124B /614,496tri /143 groups /25 embedded maps;
-SHA2567d52346664f97ee93bba670e9f32ee8ccff04f55c082c61f6f33bc4bf0fbdebc.
-Delta from accepted Lab:+669,972B and6,540tri; no new texture/material family.
-There are still83 fixture assemblies,44 PA components and2 partial artworks.
-The catalogue contains118 unique records. Exact current release/deployment
-evidence belongs in output/berghain-balustrade-release.json.
+Design: replace the generic two-metre-high main-bar boxes with an original
+1.12m counter, rounded return, ribbed luminous bands, service worktop and metal
+stools. Add the photographed tall steel/glass separation toward the main hall,
+with open ends and a body-clear guest aisle. Retain the calibrated hull, floors,
+column grid, original stairs, PA and artworks. Room footprint, counts, height,
+photo dates/currentness and relation to existing columns remain estimates.
+Fit actual cabinet/worktop notches around retained piers rather than hiding
+intersections or moving the structure to make a test pass.
+
+Allowed writes: new main-bar.mjs within the root Berghain asset authority;
+layout/fixture/model hooks, GLB/manifest, focused Node/browser checks and owning
+research/validation notes. A reproduced near-screen hidden-avatar failure also
+requires scoped walkthrough camera steering and passing existing frame dt from
+the viewer. Reuse existing Three.js, box/rod/ring batches, PBR maps and navigation.
+No new runtime, dependency, lighting pass or texture family.
+
+- [x] Inspect the actual primary gallery and archive selected URLs/hashes.
+- [x] Preserve the accepted 101-file baseline plus 32 ancillary dependencies.
+- [x] Observe failing human-height, glass separation and continuous-aisle checks.
+- [x] Build the complete bar assembly and glazed boundary; inspect actual mesh
+  bounds, retained-structure intersections and human clearances.
+- [x] Export the same native GLB, inspect same-light/source/native composition,
+  walk from the actual entrance to the bar and return on all three viewports,
+  and verify fallback/graphics recovery with comparable cost.
+- [x] Freeze the integrated candidate for both independent read-only Physics
+  and Camera/scale reviewers and repair findings. Final104-file freeze SHA256
+  2f6d287764e57d84b30a5847905cbf6cd08283fd149f0d0564c3a9643e10e1b8;
+  99 Node checks and13-case browser coverage pass. VALIDATION.md records the
+  explicit9+4 evidence bridge after the fallback-banner repair and measured cost.
+
+Publication and exact public-byte/route verification belong to the same scoped
+release; consult output/berghain-mainbar-release.json for the actual commit,
+Pages result and canonical browser receipt. Full realistic goal stays ACTIVE.
 
 Andrea v2/v3 diagnostics remain unaccepted and outside shipped assets. The
 custom loft is pipe-like; the heavier CC0 anatomical target improves mass but

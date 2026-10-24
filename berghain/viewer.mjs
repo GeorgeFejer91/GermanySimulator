@@ -95,7 +95,9 @@ function render(time) {
     syncLoungeRoom();
     if (length || walk?.travelling || (walk && Math.hypot(visitor.x - before.x, visitor.z - before.z) > .00001)) invalidate();
     if (walk) {
-      canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model));
+      canvas.dataset.cameraDistance = String(walk.camera(camera, visitor, yaw, pitch, model, dt));
+      canvas.dataset.cameraTurning = String(walk.cameraTurning);
+      if (walk.cameraTurning) invalidate();
       const action = walk.action(visitor);
       if (interaction.hidden !== !action) scheduleMeasurement();
       interaction.hidden = !action;

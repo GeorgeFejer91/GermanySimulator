@@ -39,6 +39,40 @@ in 2023 while withholding its exact configuration. S02 identifies **Studt-Akusti
 for Panorama Bar's PA renewal. Keep PA stacks, subwoofers and DJ monitors as
 separate objects and avoid conflating the two rooms.
 
+## Main long bar and hall-facing glass screen
+
+Primary architect reference I23 now includes 17 directly inspected lightbox
+views (00–16). Views11–14 show a long dark counter, rounded return, pale
+worktop strip, two bands of ribbed luminous blocks, and concave round stools
+with four thin legs and metal foot rings. View16 looks through the tall steel
+and glass separation from the main hall toward the bar. The glazing faces the
+hall; it is not evidence of an exterior window. Eleven selected original URLs,
+file hashes and retained watermarks are archived for research only.
+
+The original assembly replaces the earlier two-metre counter placeholder.
+Its counter is1.12m high, stools have0.76m seats, and the screen is10.7m high
+with open ends. These dimensions, the14m counter length,18 stools, footprint,
+room relationships and currentness are estimates. The calibrated floors,
+original stairs and15 structural columns remain intact; worktop and cabinet
+segments fit around retained piers. The glass and furniture have matching
+body solids, including curved return sectors and human-sized stool envelopes.
+
+The luminous bands are original ribbed geometry using existing materials;
+no reference pixels are embedded. Small stepped counter fittings follow the
+visible silhouette without assigning an unsupported apparatus identity.
+The service worktop, sinks and bottle arrangement are inferred. Complete
+ornate wall detail, exact equipment, historical changes and a surveyed room
+plan remain required. Other I23 photographs show a switchback stair whose
+floor and room are unresolved; they do not justify replacing an existing flight.
+
+The original follow camera contracted against a screen crossbar and hid the
+visitor. A steep elevation trial passed its visibility flag but failed visual
+review as an overhead head close-up. The accepted design uses screen-side
+azimuth steering at ordinary walking elevation, bounded to3rad/s and followed
+by the existing nine actual opaque-frame/wall/door rays. It settles through
+finite demand rendering. Glass and steel retain their authored depth/materials;
+other floors, original guards, garden and entrance clearance remain unchanged.
+
 ## Original foyer and stair guards
 
 I08/I09/I15 show closely spaced vertical steel infill. Six runs now replace

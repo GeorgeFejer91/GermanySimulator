@@ -9,6 +9,7 @@ import {addPanoramaCeiling} from './panorama-services.mjs';
 import {addKloRooms,kloMaterials} from './klo-bar.mjs';
 import {addLabRooms,labMaterials} from './lab-oratory.mjs';
 import {addOriginalBalustrades} from './original-balustrades.mjs';
+import {mainBarMaterials} from './main-bar.mjs';
 
 export const materials = {
   ...landscapeMaterials,
@@ -16,6 +17,7 @@ export const materials = {
   ...loungeMaterials,
   ...kloMaterials,
   ...labMaterials,
+  ...mainBarMaterials,
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},

@@ -9,6 +9,23 @@ assembles its reusable geometry and materials. Regenerate the portable export:
 node berghain/export-model.mjs
 ```
 
+## Main long bar and hall-facing glass screen
+
+Original geometry in main-bar.mjs uses architect I23 lightbox views11–14/16:
+rounded dark counter, two ribbed luminous bands, concave metal stools and tall
+steel/glass screen. Seventeen primary views were inspected; eleven selected
+research originals retain their watermarks and acquisition hashes outside
+shipped assets. No photograph pixels are embedded. The photographed glazing
+separates the bar from the main hall; it is not an exterior-window reference.
+
+The1.12m counter,0.76m seats,10.7m screen,14m length,18 stools and overall
+placement are estimated. Existing calibrated floors, stairs and columns remain
+unchanged; segmented cabinetry fits the retained piers. Glass panels, furniture
+and curved return have paired body solids. Countertop fitting identity and
+contemporary installation dates are unverified. Service details are inferred;
+exact ornate wall, equipment, materials and measured room topology remain open.
+The same assemblies and mainBar uncertainty metadata are exported in the GLB.
+
 ## Lab.oratory: lower-floor rooms and photographed industrial fittings
 
 A12/I22 document studio karhard's2005 conversion and ten expanded project

@@ -1,5 +1,69 @@
 # Berghain viewer validation
 
+## Main long bar and glazed hall boundary — 2026-10-24
+
+I23 adds17 directly inspected primary architect lightbox views (00–16), with
+eleven selected research URLs/hashes archived locally. Views11–14 document the
+long bar and curved return; view16 establishes the glass screen toward the hall.
+Counter1.12m, stool seats0.76m, screen10.7m,14m length,18 stools and placement
+remain estimated. Existing calibrated structure, floors, stairs,44 PA components
+and two partial artwork studies remain. Complete room/artwork fidelity is open.
+
+Portable GLB48,506,684B /643,816tri /149 mesh-material groups /25 embedded maps;
+SHA256 ba3e941fd5e2372e39ed7b6347a354dcbbfb149f79fb33a517f843f01feb3f84.
+The original bar/screen geometry reuses26 runtime maps; no new texture, engine,
+dependency or lighting pass. Cabinet/worktop segments retain all15 piers.
+
+Final104-file freeze: output/berghain-mainbar-candidate.json, SHA256
+2f6d287764e57d84b30a5847905cbf6cd08283fd149f0d0564c3a9643e10e1b8.
+All99 Node checks pass, including four route-packaging checks. Independent
+Physics and Camera reviews pass scoped P1/P2/P4/P5/C1–C5/X1 against this freeze.
+Physics independently checks52 linked screen solids/2,444 actual vertices,
+73 blocked screen-crossing samples, five17.5m aisle lanes in both directions,
+24 rounded-return solids with zero sampled leaks,18 stool envelopes, corner
+recovery, and zero41,443-vertex penetration into retained columns. The narrowest
+sampled legal-center aisle interval is0.80m: one-person access, not crowd capacity.
+
+The original near-screen camera failed an actual desktop turn: a steel transom
+contracted the camera to about0.16m and hid the avatar. A1.35rad lift passed its
+visibility flag but failed visual review as an overhead head close-up. The final
+camera uses screen-side azimuth steering at ordinary walking elevation, bounded
+to3rad/s and followed by the same nine actual opaque frame/wall/door rays. Finite
+settling ends demand rendering. CPU checks cover64 yaws at two legal positions,
+full-body bounds for three aspects, angular rate, settling and another-floor
+negative. Existing garden, guards and entrance checks pass.
+
+output/berghain-mainbar-final-browser/report.json passes13/13: same-light
+source/native3, actual exterior entry/main stairs/full aisle/reverse exit3,
+loaded near-screen turns3, fallback3 and desktop context restore1. Source/native
+mean RGB differences are0.54/0.59/0.58 with large-pixel fraction0; actual screen
+ray distances match. No forced placement or room selector proves the natural
+route. These are silent Chromium desktop and Android-emulated profiles.
+
+Final acceptance uses an explicit9+4 bridge. Camera review found that the
+centered fallback notice covered the human. The preserved landscape RED fails
+the new banner bound. Only viewer.css and its pilot assertion then changed;
+102 other inputs stay exact. The repaired top-edge notice retains the full
+message and pointer passthrough, with actual locked Pretext0.0.9 fit and a bound
+above the central body. output/berghain-mainbar-banner-final/report.json passes
+the affected fallback3+restore1 on all104 current hashes. Nine unchanged loaded/
+source-native/natural cases bridge the earlier report. This is13-case coverage,
+not a monolithic current-hash13-case rerun. Both reviewers inspect actual frames.
+
+Cost: preserved accepted101-file/32-ancillary baseline; three cold contexts per
+profile per side,9/9 before and9/9 after. GLB adds1,833,560B /29,320tri. The normal
+page adds10,266 encodedB and one request (67→68), with26 maps, no GLB startup
+download,0 idle frames and≤1.6MP drawing buffers. The later hidden-status CSS
+repair adds54 uncompressed bytes; geometry/camera and other102 inputs remain
+exact. Local median p95 before→after: desktop14.1→14.2ms, portrait14.0→14.0ms,
+landscape14.0→20.8ms. Ready medians1408→1582,1390→1419,1354→1416ms respectively.
+These samples show a short-wide-view tail cost, not a speedup or device guarantee.
+Physical Android, low-end device GPU qualification and perceptual listening
+remain NOT RUN. Detailed distributions: output/berghain-mainbar-cost-summary.json.
+
+Acceptance/review/publication receipts live under output/berghain-mainbar-*.
+The primary staged index stays untouched. The full reconstruction goal is ACTIVE.
+
 ## Original balustrade increment — 2026-10-24
 
 The101-file candidate adds six photo-informed original stair/gallery guards

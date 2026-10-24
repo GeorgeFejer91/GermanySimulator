@@ -12,7 +12,7 @@ export function createWalkthrough() {
   const space = {floors: layout.floors, solids: []};
   const direction = new THREE.Vector3(), target = new THREE.Vector3(), origin = new THREE.Vector3(), lateral = new THREE.Vector3(), ray = new THREE.Raycaster();
   const lowLandscape=layout.solids.filter(solid=>solid.renderPart?.section==='landscape'&&solid.y[1]>.5&&solid.y[1]<2.1);
-  let travel = null, opened = false, heading = 0;
+  let travel = null, opened = false, heading = 0, screenYaw = null, cameraTurning = false;
   function syncDoor(open) {
     opened = open; door.setOpen(Number(open)); door.group.updateMatrixWorld(true);
     const solids = [];
@@ -33,6 +33,7 @@ export function createWalkthrough() {
   const nearEntrance = position => position.y < .3 && Math.abs(position.x) < 1.25 && Math.abs(position.z - 22.28) < 2.8;
   return {avatar, door, space, spawn: {x: 0, y: 0, z: 29},
     get travelling() { return travel !== null; },
+    get cameraTurning() { return cameraTurning; },
     get opened() { return opened; },
     action(position) { return !travel && nearEntrance(position) ? (position.z > 22.28 ? 'E · Enter Berghain' : 'E · Leave Berghain') : null; },
     interact(position) {
@@ -60,7 +61,7 @@ export function createWalkthrough() {
       }
       return next;
     },
-    camera(camera, position, yaw, pitch, model) {
+    camera(camera, position, yaw, pitch, model, dt = 1 / 60) {
       target.set(position.x, position.y + .95, position.z);
       if (camera.fov !== 60) { camera.fov = 60; camera.updateProjectionMatrix(); }
       const nearest=lowLandscape.reduce((distance,solid)=>position.y>=solid.y[1]?distance:Math.min(distance,Math.hypot(
@@ -77,12 +78,32 @@ export function createWalkthrough() {
       const baseElevation=THREE.MathUtils.clamp(.32-pitch,-.15,1.1);
       const elevation = Math.max(THREE.MathUtils.lerp(baseElevation,1.35,THREE.MathUtils.smoothstep(2-nearest,0,1.5)),
         THREE.MathUtils.lerp(baseElevation,1.1,THREE.MathUtils.smoothstep(1-nearestGuard,0,.65))), radius = 4.2;
+      // Slide the orbit along the glazed screen on the visitor's side. Keep
+      // ordinary walking elevation and test the resulting view against every
+      // opaque frame/wall/door below. A bounded turn avoids switching tangents
+      // abruptly when the requested view points straight through the screen.
+      const screen=layout.mainBar,normal=screen?position.x-screen.screenAnchor[0]:Infinity;
+      const screenDistance=screen&&Math.abs(position.y-screen.floorHeight)<.3
+        ?Math.hypot(normal,Math.max(Math.abs(position.z-screen.screenAnchor[2])-7.4,0)):Infinity;
+      let orbitYaw=yaw;
+      cameraTurning=false;
+      const horizontal=radius*Math.cos(elevation);
+      if(screenDistance<horizontal){
+        const center=Math.sign(normal)*Math.PI/2;
+        const limit=Math.acos(-THREE.MathUtils.clamp((screenDistance-.32)/horizontal,0,1));
+        const relative=angle=>Math.atan2(Math.sin(angle-center),Math.cos(angle-center));
+        const wanted=THREE.MathUtils.clamp(relative(yaw),-limit,limit);
+        const previous=THREE.MathUtils.clamp(screenYaw===null?wanted:relative(screenYaw),-limit,limit);
+        orbitYaw=center+previous+THREE.MathUtils.clamp(wanted-previous,-3*Math.min(dt,.05),3*Math.min(dt,.05));
+        cameraTurning=Math.abs(center+wanted-orbitYaw)>.002;
+        screenYaw=orbitYaw;
+      }else screenYaw=null;
       model.updateMatrixWorld(true); door.group.updateMatrixWorld(true);
       // Give the camera a small envelope. A centre ray alone can pass through
       // the seam between closed leaves while most of the view is behind a door.
-      lateral.set(Math.cos(yaw),0,-Math.sin(yaw)).multiplyScalar(.16);
+      lateral.set(Math.cos(orbitYaw),0,-Math.sin(orbitYaw)).multiplyScalar(.16);
       function clearance(angle) {
-        direction.set(Math.sin(yaw)*Math.cos(angle),Math.sin(angle),Math.cos(yaw)*Math.cos(angle));
+        direction.set(Math.sin(orbitYaw)*Math.cos(angle),Math.sin(angle),Math.cos(orbitYaw)*Math.cos(angle));
         let available=radius;
         for (const x of [-1,0,1]) for (const y of [-1,0,1]) {
           origin.copy(target).addScaledVector(lateral,x); origin.y += y * .16;
