@@ -4,7 +4,7 @@ import {moveVisitor, canStand, eyeHeight, walkingSpeed} from './navigation.mjs';
 import {createLevelDoor} from '../level-transitions.js';
 
 export function createWalkthrough() {
-  const door = createLevelDoor(THREE, {width: 2.65, height: 3.4, color: 0x39433c});
+  const door = createLevelDoor(THREE, {width: 1.35, height: 2.45, color: 0x39433c});
   door.group.position.set(0, .02, 22.28);
   door.opening.visible = false;
   const space = {floors: layout.floors, solids: []};
@@ -33,9 +33,14 @@ export function createWalkthrough() {
     get opened() { return opened; },
     action(position) { return !travel && nearEntrance(position) ? (position.z > 22.28 ? 'E · Enter Berghain' : 'E · Leave Berghain') : null; },
     interact(position) {
-      if (travel || !nearEntrance(position)) return false;
+      if (travel || !nearEntrance(position) || !canStand(position,space)) return false;
+      const destination = {x: 0, z: position.z > 22.28 ? 20.25 : 24.85};
       syncDoor(true);
-      travel = {x: 0, z: position.z > 22.28 ? 20.25 : 24.85};
+      if (!canStand(position,space)) {
+        // Keep the leaf closed while the visitor walks clear of its swing.
+        syncDoor(false);
+        travel = {x: 0, z: position.z > 22.28 ? 23.4 : 21.2, destination};
+      } else travel = destination;
       return true;
     },
     stop() { travel = null; },
@@ -49,9 +54,16 @@ export function createWalkthrough() {
       const distance = Math.hypot(next.x - position.x, next.z - position.z);
       if (travel && dt > 0 && distance < .000001) travel = null;
       if (travel && Math.hypot(next.x - travel.x, next.z - travel.z) < .02) {
-        travel = null;
-        syncDoor(false);
-        if (!canStand(next, space)) syncDoor(true);
+        if (travel.destination) {
+          const destination=travel.destination;
+          syncDoor(true);
+          if (canStand(next,space)) travel=destination;
+          else {syncDoor(false);travel=null;}
+        } else {
+          travel = null;
+          syncDoor(false);
+          if (!canStand(next, space)) syncDoor(true);
+        }
       }
       return next;
     },

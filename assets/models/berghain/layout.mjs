@@ -1,3 +1,4 @@
+import {addAdmission,finishAdmission,admissionMaterials} from './admission.mjs';
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures} from './interior-fixtures.mjs';
 import {addSoundSystem} from './sound-system.mjs';
@@ -15,6 +16,7 @@ import {addHalleStructure} from './halle.mjs';
 import {addInteriorTopology,pinInteriorTopologyTones} from './interior-topology.mjs';
 
 export const materials = {
+  ...admissionMaterials,
   ...landscapeMaterials,
   ...artworkMaterials,
   ...loungeMaterials,
@@ -255,6 +257,10 @@ for (const x of [-12, -6, 6, 12]) {
 }
 
 export const viewpoints = {
+  admission:{label:'Admission',position:{x:-6.3,y:.05,z:20.8},yaw:-.55,
+    confidence:'Reported sequence; room and counter positions estimated',sources:['ENT03','ENT04']},
+  queue:{label:'Queue',position:{x:-1.2,y:0,z:28.4},yaw:.2,
+    confidence:'Photographed forms; arrangement and dimensions estimated',sources:['ENT01','ENT02']},
   foyer: {label: 'Foyer', position: {x: 0, y: .05, z: 19}, yaw: -.3,
     confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'I08', 'I09']},
   berghain: {label: 'Berghain', position: {x: 5, y: 6.65, z: 5}, yaw: 0,
@@ -284,7 +290,9 @@ addPanoramaCeiling(layout,{box});
 addKloRooms(layout,{box});
 addInteriorTopology(layout,{box});
 addLabRooms(layout,{box,floor,beam,railing,stair});
+addAdmission(layout);
 calibrateStudy(layout, viewpoints);
+finishAdmission(layout);
 addOriginalBalustrades(layout);
 addInteriorFixtures(layout);
 addLoungeFurniture(layout);

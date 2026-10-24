@@ -1,6 +1,6 @@
 # Berghain online resource catalogue
 
-Checked 2026-10-23–24; latest pass adds V01–V04, S12 and E05 for the interior authenticity audit, including firsthand opening reports, interview/lecture transcripts and a film archive. The catalogue contains145 unique records. This is a maintained discovery catalogue, not a claim to list every resource on the internet. Entries distinguish verified sources from leads and do not imply permission to redistribute source images or models.
+Checked 2026-10-24; the catalogue contains152 unique records. ENT01–ENT05 add the supplied photographs, Google Images discovery and firsthand admission accounts. Reference access does not grant image reuse rights.
 
 ## What exists
 
@@ -9,6 +9,22 @@ No complete, measured, freely reusable exterior-and-interior digital twin was co
 The [architectural checker](https://github.com/GeorgeFejer91/GermanySimulator/blob/main/berghain/For-AI/ARCHITECTURAL-CHECKS.md) now compares actual model geometry with scoped source quantities. Official exterior import consistency is separate from unknown interior floor datums and incompatible height/area definitions. No dimensioned interior blueprint has been acquired. The Canadian iGUIDE sample called “77 Denon St, Berghain, ON” and a Wuppertal student conversion brief are unrelated search results and are excluded as Berlin plans.
 
 `Verified` means the page/file content was inspected. `Indexed` means search results expose a listing but full access was not verified. `Lead` means a relevant archive or reference route still needs inspection. Download and reuse rights are separate from access. None of the commercial listings was purchased, and nobody was contacted.
+
+## Entrance, queue and admission references — checked 24 October 2026
+
+Google Images discovery used `Berghain entrance queue ticket cashier` and
+`Berghain Kasse Eingangsbereich innen`. Results were inspected visually and
+traced to the pages below. Generic club photographs, AI imagined interiors,
+Halle exhibition views and historic foyer art are not ticket-room evidence.
+Research downloads stay outside shipped assets.
+
+| ID | Resource | Access and useful content | Limits / reuse |
+| --- | --- | --- | --- |
+| ENT01 | User-supplied Google-search photographs `1000058598.jpg`, `1000058601.jpg`, `1000058600.jpg` | **Visually inspected.** Nighttime queue, tubular and portable rails, cobbles, green post, chain, small door, lamps, layered plinth graffiti and upright steel ring/brace assembly. | Capture dates, authors and original URLs not supplied. Dimensions and hidden faces estimated. Reference only; no photo pixels or identifiable visitors shipped. |
+| ENT02 | [Alberto Cabello — Entrance Queue Area, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Berghain_Berlin_Entrance_Queue_Area.jpg) | **Google-discovered; original downloaded and visually inspected.** Dated 2 January 2017. Shows front elevation, near-door rail maze, broad unpaved approach, trees and temporary wire fencing. Research copy `entrance-queue-cabello-2017.jpg`. | Historical arrangement, not a contemporary inventory or measured survey. CC BY 2.0; retained as research rather than embedded media. |
+| ENT03 | [Hello Berlin — How To Get Into Berghain](https://helloberl.in/how-to-get-into-berghain/) | **Read firsthand account**, updated 12 August 2026. Describes bag check in a small room left of the entrance, then cashier and return to the hall/wardrobe. | Supports relative sequence only. No dimensioned plan or verified counter materials/orientation. |
+| ENT04 | [Magical Dancefloors — Sweaty Panorama](https://www.magicaldancefloors.com/p/berghain-sweaty-panoramas-part-38) | **Read firsthand account**, 5 April 2025. Describes security room, phone-camera stickers, payment/wristband counter and hanging plastic-strip exit to the cloakroom area. | Testimony, not a photographed room survey. Count, dimensions, placement and currentness remain uncertain. |
+| ENT05 | [Shutterstock 632348330 — Berghain queue exterior](https://www.shutterstock.com/image-photo/berghain-berlin-queue-people-front-most-632348330) | **Google-discovered public watermarked preview downloaded and visually inspected.** Long outdoor line and open approach, not the supplied nighttime close-up. | Low-resolution preview; no purchase or image reuse. Exposure date not established. Research copy `entrance-shutterstock-632348330-preview.jpg`. |
 
 ## Existing 3D reconstructions
 

@@ -1,5 +1,72 @@
 # Berghain viewer validation
 
+## Entrance/admission increment — accepted 25 October 2026
+
+Scoped technical acceptance PASS; full architectural fidelity remains unverified.
+The tested 170-file candidate is `output/berghain-admission-tested-candidate.json`,
+SHA256 `9fdd338f9d8a9c7fd01874bd194e83fa5591c683656d271f16729784c7f4e503`, based on accepted release `73f741cdc8e37ab40a6ab3c9916de805cf9223fc`.
+All 148 Node checks pass. The accepted browser report contains 12 cases across
+desktop and Android portrait/landscape emulation: six fresh near-hinge/natural
+route cases plus six retained source/native and texture-fallback cases.
+`output/berghain-admission-accepted-browser/report.json` records the exact bridge.
+Geometry, GLB, materials, lighting and camera stayed unchanged during the door repair.
+
+Independent Physics and Camera rechecks accept this freeze. Physics identified
+an initial open-leaf overlap at mirrored close-hinge starts; the repaired door
+keeps closed while the visitor walks clear at normal speed, then opens and
+continues. The failing freeze/probes remain retained. An old synthetic left
+approach began inside a queue post; its corrected test now asserts a legal
+start before interaction. This was a test-only bridge, not relaxed collision.
+
+Fresh reviewer probes cover actual mesh/collider bounds, continuous body-clear
+routes and reverse, near-plane rays, door occlusion, source/native bounds,
+curtain alpha and human-relative scale. Supplied GPU images were independently
+inspected. The wardrobe arrival remains too dark for detailed fidelity claims.
+Fallback small sizes have DOM measurements; retained fallback images are the
+final 1280×800 / 200% text case. Physical Android and perceptual audio are NOT RUN.
+
+Reports: `output/berghain-admission-repaired-node.txt`,
+`output/berghain-admission-physics-recheck.md`,
+`output/berghain-admission-camera-recheck.md`, and
+`output/berghain-admission-cost-summary.json`.
+
+Three before/after samples per profile use the same retained Säule aisle:
+
+| Profile | Ready ms | Frame p95 ms | Input latency ms |
+| --- | --- | --- | --- |
+| desktop | 2148.0 → 3565.0 | 14.2 → 27.6 | 6.8 → 12.3 |
+| android-portrait | 2118.0 → 3918.0 | 7.1 → 7.1 | 14.2 → 10.9 |
+| android-landscape | 2197.0 → 2121.0 | 7.1 → 13.9 | 15.3 → 58.7 |
+
+One focused sequential repeat retained three further samples for desktop and
+landscape because the first run contained large timing spikes:
+
+| Profile | Ready ms | Frame p95 ms | Input latency ms |
+| --- | --- | --- | --- |
+| desktop | 2519.0 → 2238.0 | 14.1 → 14.2 | 6.4 → 6.2 |
+| android-landscape | 2084.0 → 2040.0 | 7.1 → 7.1 | 15.9 → 19.1 |
+
+The repeat did not reproduce the initial spikes; both results are retained.
+Timing variability prevents a precise speed-regression estimate. The stable
+scene-work delta on this route is six draw calls and 12,168 submitted triangles;
+network transfer increases by 18,149 bytes and one module request. This is not
+a claim of zero performance cost or physical-phone performance.
+
+These medians measure cold-context load and shared-scene walking cost, not a
+queue-specific worst-case or throttled/physical-device benchmark. No runtime
+GLB fetch, new texture or dependency was added. The new section adds 31,056
+triangles and 28 batches; the full portable export is 53,462,952 bytes,
+704,784 triangles and 199 meshes, SHA256
+`fdc61d4479c14d76e3a9a03939466a0021eee1c6fe52d59395663e75a9b15743`.
+
+Release preparation preserves the primary index and all concurrent unfinished
+architectural/game edits. Only the entrance increment is replayed onto the
+accepted base in the established isolated publisher. Documentation changes
+after review are recorded in `output/berghain-admission-docs-bridge.json`;
+publication and exact public-byte/route checks belong in
+`output/berghain-admission-release.json`. This section records local acceptance;
+that receipt owns deployment confirmation.
+
 ## Panorama sanitary area and club-night increment — 2026-10-24
 
 **PROGRESS; local technical acceptance PASS. Full architectural goal incomplete.**

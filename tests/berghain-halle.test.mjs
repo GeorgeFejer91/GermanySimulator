@@ -39,16 +39,17 @@ export function preservedHalleFingerprint(space,views,palette,model){
   counters.set(key,index+1);
   // The later Panorama sanitary increment has its own route/geometry checks.
   // Preserve the original fingerprint for every pre-existing non-Halle part.
-  if(retired.has(part.name)||part.section==='halle'||part.interiorTopology)continue;
+  if(retired.has(part.name)||part.section==='halle'||part.interiorTopology||part.admission)continue;
   const mesh=model.getObjectByName(key),matrix=new THREE.Matrix4(),color=new THREE.Color();
   mesh.getMatrixAt(index,matrix);mesh.getColorAt(index,color);
   const geometry=mesh.geometry,attributes=Object.fromEntries(Object.entries(geometry.attributes).map(([name,attribute])=>[name,Array.from(attribute.array)]));
   parts.push([withoutTone(part),matrix.toArray(),color.toArray(),hash([attributes,geometry.index?Array.from(geometry.index.array):null])]);
  }
  return {parts:hash(parts),count:parts.length,
-  solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true&&!s.renderPart?.interiorTopology&&!s.name.startsWith('panorama-wc-')))),
+  solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true&&!s.admission&&!s.renderPart?.interiorTopology&&!s.name.startsWith('panorama-wc-')))),
   floors:hash(space.floors.filter(f=>!retired.has(f.name)&&f.halle!==true)),
-  views:hash(views),materials:hash(palette),bounds:hash(space.exteriorBounds),
+  views:hash(Object.fromEntries(Object.entries(views).filter(([key])=>!['admission','queue'].includes(key)))),
+  materials:hash(Object.fromEntries(Object.entries(palette).filter(([key])=>!key.startsWith('admission')))),bounds:hash(space.exteriorBounds),
   inventory:hash([space.fixtures.filter(f=>!f.id.startsWith('panorama-wc-')),space.soundSystem,space.artworks,space.saule,space.labOratory,space.mainBar,space.upperLounge])};
 }
 
@@ -176,7 +177,8 @@ test('real rendered slabs expose all three voids and indexed guard ribbons remai
    const ray=new THREE.Raycaster(center.clone().add(new THREE.Vector3(0,0,sign)),new THREE.Vector3(0,0,-sign));
    assert.ok(ray.intersectObject(panel).length,'Actual ribbon triangles are visible from either side');
   }
-  let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh){groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*(mesh.count??1);}});
+  // Admission has its own measured geometry budget and must not consume Halle's.
+  let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh&&!mesh.name.startsWith('admission/')){groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*(mesh.count??1);}});
   assert.ok(triangles<=658224+20000,`Triangle growth ${triangles-658224} exceeds the agreed provisional guard`);
   assert.ok(groups<=162+10,`Mesh/material-group growth ${groups-162} exceeds the agreed provisional guard`);
  }finally{disposeBerghainModel(model);}

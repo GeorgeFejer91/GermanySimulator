@@ -8,10 +8,10 @@ test('club-night lighting removes daylight and restores the exterior inspection 
   const scene=new THREE.Scene(), rig=createViewerLighting(scene);
   rig.update('exterior',viewpoints.foyer.position);
   assert.equal(rig.state.daylight,true);
-  for(const room of ['foyer','berghain','panorama','klo','toilets','lab','halle','garden']){
+  for(const room of ['queue','admission','foyer','berghain','panorama','klo','toilets','lab','halle','garden']){
     rig.update('interior',viewpoints[room].position);
     assert.equal(rig.state.daylight,false,room);
-    assert.ok(rig.state.ambient<=.2,room);
+    assert.ok(rig.state.ambient<=(['queue','admission'].includes(room)?.7:.2),room);
     assert.ok(rig.state.activeLights>0,room);
     assert.ok(rig.state.shadowMaps<=2,room);
   }
@@ -19,6 +19,21 @@ test('club-night lighting removes daylight and restores the exterior inspection 
   assert.equal(rig.state.daylight,true);
   assert.equal(scene.fog,null);
   rig.dispose();assert.equal(scene.children.length,0);
+});
+
+test('admission lights remain inside the low room and select only on its floor',()=>{
+  const scene=new THREE.Scene(),rig=createViewerLighting(scene);
+  rig.update('interior',viewpoints.admission.position);
+  assert.equal(rig.state.room,'admission');
+  scene.traverse(light=>{
+    if(light.isSpotLight&&light.visible){
+      assert.ok(light.position.y<3.05-.1);
+      assert.ok(light.position.y>1.8);
+    }
+  });
+  rig.update('interior',{...viewpoints.admission.position,y:6.65});
+  assert.notEqual(rig.state.room,'admission');
+  rig.dispose();
 });
 
 test('lounge practical lights sit beneath its opaque ceiling',()=>{

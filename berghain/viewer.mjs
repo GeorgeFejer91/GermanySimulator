@@ -7,6 +7,7 @@ import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.m
 import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../assets/vendor/pretext/dist/layout.js';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
+import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 import {createFootsteps} from './footsteps.mjs';
 import {createViewerLighting} from './night-lighting.mjs';
 
@@ -58,7 +59,8 @@ function clearInput() {
 }
 
 function syncLoungeRoom(){
-  const room=labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+  const room=(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+    roomSelect.value==='admission'&&Math.abs(visitor.y-.05)<.15?'foyer':
     roomSelect.value==='lab'&&Math.abs(visitor.y-.05)<.15?'saule':
     roomSelect.value==='lounge'&&Math.abs(visitor.y-13.25)<.15?'panorama':
     ['klo','toilets'].includes(roomSelect.value)&&Math.abs(visitor.y-6.65)<.15?'berghain':null);
@@ -96,6 +98,7 @@ function render(time) {
       interaction.hidden = !action;
       if (action && interaction.textContent !== action) interaction.textContent = action;
       const place = visitor.z > 22.28 ? 'Outside Berghain' :
+        admissionRoomAt(visitor)?viewpoints.admission.label:
         labRoomAt(visitor)?viewpoints.lab.label:
         kloRoomAt(visitor)?viewpoints[kloRoomAt(visitor)].label:
         Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain';

@@ -10,6 +10,31 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Entrance and admission reconstruction — accepted 25 October 2026
+
+The requested outdoor waiting area and indoor admission/ticketing space are
+implemented as a bounded source-informed study. ENT01–ENT05 record the three
+supplied photos, Google-discovered exterior images and firsthand accounts.
+The new sequence is queue → narrow entrance → left inspection room → cashier
+→ parted curtain → foyer/wardrobe. Exact interior dimensions, arrangement and
+current finishes remain estimates; no surveyed ticket-room plan was found.
+
+- [x] Inspect and catalogue references with dates and uncertainty.
+- [x] Build the queue, cobbles, rails, green post/chain, paint, lamps, rings,
+  inspection counters, cashier hatch and connected curtain return.
+- [x] Export; pass 148 Node checks and 12 accepted desktop/Android-emulated
+  cases, including real routes, source/native parity and texture fallback.
+- [x] Repair the independent door-opening collision finding, recheck both
+  Physics and Camera, and compare nine before/nine after cost samples plus
+  one focused six-before/six-after repeat for variable desktop/landscape timing.
+
+Local acceptance and exact evidence bridges are in [VALIDATION.md](VALIDATION.md).
+The validated runtime is isolated in `output/berghain-admission-candidate-runtime`;
+concurrent architectural corrections stay preserved in the shared checkout.
+The primary index remains untouched. The established isolated publisher owns
+the scoped release; `output/berghain-admission-release.json` records the final
+commit, deployment and public checks. Full Berghain reconstruction remains open.
+
 Current goal, 24 October 2026: isolate and correct internal architectural and
 interior-design inaccuracies, especially toilets, smoking and backstage areas,
 and render representative club-night lighting. This README remains the sole

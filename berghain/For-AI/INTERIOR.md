@@ -1,5 +1,21 @@
 # Berghain interior: objects, art and equipment
 
+## Admission and ticketing — 24 October 2026
+
+ENT01/ENT02 establish photographed entrance forms. ENT03/ENT04 describe a
+left-side inspection/payment room and return through a plastic-strip curtain
+toward the cloakroom. The model now connects that sequence with a walkable
+room, inspection trays, phone-sticker sheets, a cashier hatch and a parted
+curtain. The model viewer exposes Queue and Admission choices; the playable
+route also reaches both through ordinary keyboard/touch movement.
+
+The interior footprint, two-counter arrangement, hatch orientation, ceiling,
+finishes and lighting remain estimates. No verified ticket-room photograph
+or dimensioned plan was found in the Google Images searches. The space is
+an architectural reconstruction study; ticket transactions and staff/crowds
+are not simulated. Existing cloakroom geometry is retained, and the dark
+arrival view is not evidence for its detailed fidelity.
+
 Checked 2026-10-23–24. This inventory extends [SOURCES.md](SOURCES.md) and the
 reconstruction acceptance in the [owning guide](https://github.com/GeorgeFejer91/GermanySimulator/blob/main/berghain/For-AI/README.md). The user explicitly asked
 for the missing interior design, artworks/mannequin sculptures and sound system.

@@ -1,5 +1,30 @@
 # Berghain architectural study
 
+## Entrance forecourt and admission room
+
+The 24 October 2026 entrance increment uses ENT01's three user-supplied
+photographs and Google-discovered ENT02/ENT05 exterior references. Original
+instanced geometry depicts close tubular switchbacks, portable stickered
+barriers, cobbles, a green post, side chain, narrow recessed door, wall lamps,
+layered paint and the photographed upright ring/brace structure. Paint marks
+are original gestures; no reference photographs, identifiable visitors or
+copied readable tags are embedded. The ring's artist/title is not asserted.
+ENT02 is dated 2017; the user photographs' capture dates remain unknown.
+
+ENT03/ENT04 firsthand accounts support a small room left of the entrance,
+inspection before payment, and a plastic-strip return toward the cloakroom.
+They do not establish a measured plan. Room footprint, ceiling height, two
+inspection counters, cashier orientation, fittings, materials, light output
+and current arrangement are authored estimates. The 1.35 × 2.45 m doorway
+is a human-scale reconstruction choice, not a surveyed dimension. The ring
+assembly uses an explicitly conservative full footprint for body collision.
+
+`admission.mjs` owns the source distinctions, calibrated route and primitives.
+The study adds 2,000 instances / 28 batches / 31,056 triangles, reusing existing
+surface maps. Its transparent curtain is visibly parted and body-clear.
+Viewer lighting is an authored steady appearance study; adaptive room cues
+and the interactive door are runtime behavior, not baked into the GLB.
+
 Study geometry authored for this project on 2026-10-23–24, calibrated
 to Berlin's official exterior geometry and combined with its roof/annex meshes.
 `layout.mjs` is the authoritative metre-based architectural study; `model.mjs`

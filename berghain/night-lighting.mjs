@@ -3,13 +3,16 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
+import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 
 // Appearance study: I23/I24 establish localized architectural wash; L01
 // establishes colored club lighting, but neither gives current positions,
 // candela or a programmed show. These steady cues are authored, not a rig survey.
 const spot=(position,target,color,intensity,angle=.65,range=24)=>({position,target,color,intensity,angle,range});
 const cues={
-  outside:[spot([0,3.6,24],[0,0,25],'#ddaa72',45,.95,10),spot([7,4,19],[6,0,18],'#c77849',80,.7,10)],
+  outside:[spot([-8,4,22.9],[-7,0,27],'#e8ddc2',160,1,16),spot([0,2.8,22.65],[0,0,24.5],'#ffe3b5',95,.95,10),spot([8,4,22.9],[8,0,26],'#e6ddc7',150,1,15)],
+  admission:[...[18.05,20.45].map(z=>spot([-5.25,2.79,z],[-5.25,.6,z],'#e1dcc9',160,1.25,10)),
+    spot([-3.1,1.94,18.55],[-3.1,1.1,17.5],'#e8dcc5',60,1.1,5)],
   foyer:[spot([7,5.9,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',100,.8,12)],
   berghain:[spot([2,16,-8],[6,6.65,-13],'#bb3025',1000,.43,24),spot([10,15,0],[4,6.65,-1],'#537bc0',760,.48,22),spot([8,10,9],[8,6.65,11],'#d19661',90,.85,9)],
   panorama:[spot([-18,17,-14],[-12,13.25,-14],'#b34375',230,.8,13),spot([-8,17,-8],[-14,13.25,-8],'#567db1',180,.78,12),spot([-8,17,3],[-9,13.25,3],'#d5a06e',75,.8,9)],
@@ -27,6 +30,7 @@ for(const lights of Object.values(cues))for(const light of lights){light.positio
 
 function roomAt(p){
   if(p.z>22.28)return 'outside';
+  if(admissionRoomAt(p))return 'admission';
   if(p.z<-15.4)return 'halle';
   if(p.x>22)return 'garden';
   if(p.y>15.8)return 'lounge';
@@ -61,8 +65,9 @@ export function createViewerLighting(scene){
     const room=mode==='exterior'?'exterior':roomAt(position);
     if(previous===room)return state;previous=room;
     const day=room==='exterior';sun.visible=day;
-    ambient.intensity=day?2.1:.18;
-    ambient.color.set(day?'#e0e6dd':'#c5cbd8');ambient.groundColor.set(day?'#6a665b':'#63657a');
+    const practical=room==='outside'||room==='admission';
+    ambient.intensity=day?2.1:practical?.7:.18;
+    ambient.color.set(day?'#e0e6dd':practical?'#e0d5bd':'#c5cbd8');ambient.groundColor.set(day?'#6a665b':practical?'#8c806a':'#63657a');
     scene.background=new THREE.Color(day?'#b3b3a6':'#05070b');
     // Keep surfaces clear enough for orientation; no opaque fake haze volumes.
     scene.fog=day?null:new THREE.FogExp2('#08090e',.009);
