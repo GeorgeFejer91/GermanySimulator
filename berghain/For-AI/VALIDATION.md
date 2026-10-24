@@ -1,5 +1,27 @@
 # Berghain viewer validation
 
+## Andrea reference views and rejected local feasibility study — 2026-10-24
+
+ART23's remaining three gallery images were inspected: two painting views and
+the bronze displayed on a crate. ART25's labelled1600×2296 reverse three-quarter
+photograph supplies the standing shoulder cut, outer arm, fingers around the
+rectangular shaft and projecting handle below the fist. Neither source locates
+the club mounting. The catalogue still contains118 unique records.
+
+An ignored offline R01 CC0 anatomical study was rendered silently with the
+existing browser harness. output/andrea-form-review-eighth/report.json records
+one successful desktop diagnostic case and four frames; this only proves the
+study renders. Reference comparison FAILS: generic shoulder cap/arm proportions,
+insufficient cast anatomy and grip likeness, hammer form and conspicuous UV seams.
+No source photo pixels or third-party sculpture geometry were embedded.
+
+This study is NOT ACCEPTED, not exported into the portable asset and not loaded
+by the viewer. All98 accepted Lab source/test/authoring/asset files are unchanged.
+Physics/Camera runtime reviews are omitted because no world candidate is being
+accepted or published. Revise three-dimensional form against both primary views
+before surface refinement and any placement; normal source/native, human-route
+and independent reviews remain required for a future integrated candidate.
+
 ## Lab public acceptance and next research evidence — 2026-10-24
 
 Previous goal turn: PROGRESS. Runtime ad12fc4 is deployed by successful Pages

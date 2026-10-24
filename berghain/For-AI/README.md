@@ -31,6 +31,22 @@ unverified cast/mounting and hidden attachment kept explicit in INTERIOR.md.
 Do not substitute a later edition or a generic arm and claim faithful acceptance.
 No world, renderer, controls or model assets changed during this research pass.
 
+Local Andrea feasibility study remains **UNACCEPTED / NOT SHIPPED**. The ignored
+output/study-andrea-form.py uses verified R01 CC0 anatomy with original poses;
+output/andrea-form-review-eighth records four silent desktop diagnostic views.
+Rendering succeeds, but its generic shoulder cap, muscle/hand relationships,
+hammer form and UV seams fail reference fidelity. Do not promote this study or
+mistake the one-case render result for artwork acceptance. All98 accepted Lab
+world/test/asset files remain unchanged. No new in-world placement was made.
+
+Further direct ART23/25 image inspection supplies a reverse three-quarter view
+and a fair display on a crate. The shoulder cut is visible as a standing base;
+neither fair photograph proves the club's wall, orientation or attachment.
+Revise the actual three-dimensional shoulder/elbow/wrist relationship against
+both views before more surface work. Use the existing metre-scale assembly,
+material/export pipeline, then source/native and human-route checks plus both
+independent world reviews before any runtime acceptance. Full goal stays ACTIVE.
+
 The [Lab.oratory increment](LAB-PLAN.md) now includes photographed industrial
 forms from all ten architect gallery views (A12/I22): pipe/gauge bar, T stools,
 insulator pendants, barred sling cells, bunks, brick passage, ornate green

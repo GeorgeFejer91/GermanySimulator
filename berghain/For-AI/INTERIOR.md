@@ -12,8 +12,12 @@ Andrea's first-work reference is now stronger: ART20 identifies the club
 commission as Andrea I, while ART21/25 give a dated bronze-series record.
 Creation, fair presentation and permanent installation dates must stay distinct.
 The unlabelled dimension axes and actual club mounting are still unresolved.
-An original form study can now follow the unobstructed ART23 view; geometry
-and in-situ fidelity have not yet been accepted.
+ART23's four images and ART25's captioned reverse three-quarter bronze view
+have now been inspected. The fair display rests on a crate/wood surface, with
+the shoulder cut forming a standing base. That does not prove a club wall mount
+or installed orientation. The ignored local anatomical form study renders but
+fails shoulder/muscle/grip/hammer fidelity and has visible UV seams; it is not in
+the live model. Revise against both views before placement/material acceptance.
 
 ## Dates and identity
 
