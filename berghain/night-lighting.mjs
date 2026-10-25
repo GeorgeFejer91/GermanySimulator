@@ -48,6 +48,10 @@ for(const room of ['panoramaToilets','lounge'])for(const light of cues[room]){
 // Registered world-space positions keep the bar wash and low corridor practical
 // below their respective ceilings. No inferred fixture inventory or live show.
 const worldSpot=(...args)=>{const light=spot(...args);light.position=new THREE.Vector3(...light.position);light.target=new THREE.Vector3(...light.target);return light;};
+// G24 records a red curtain accent. This steady local interpretation shares
+// the same three lights; it is not a claim about present rig programming.
+cues.mainDJ=[...[-5,-3].map(z=>worldSpot([-18.58,7.92,z],[-18.8775,6.8,z],'#d92338',32,.7,3)),
+ worldSpot([-16.2,8.4,-4],[-15.03,6.86,-4],'#b78662',45,.8,7)];
 // V16's red ceiling/booth and localized pier wash are a steady club-night
 // interpretation. Keep the same three reusable lamps and bounded shadow budget.
 cues.saule=[worldSpot([-14.6,4.6,0],[-18,2.3,0],'#b84128',170,.9,13),
@@ -112,6 +116,7 @@ function roomAt(p){
   if(panoramaPassageAt(p))return 'panoramaPassage';
   if(p.y>8.5)return 'panorama';
   const sanitary=kloRoomAt(p);if(sanitary)return sanitary;
+  if(p.y>5.2&&p.y<5.8&&p.x<-9&&p.z>-7&&p.z<2)return 'mainDJ';
   if(p.y>4.8)return 'berghain';
   if(p.x>=-17.5&&p.x<=7.3&&p.z>=6.1&&p.z<=10.9){
    if(p.y>2.6||p.x<-11||p.x>1)return 'sauleBalcony';

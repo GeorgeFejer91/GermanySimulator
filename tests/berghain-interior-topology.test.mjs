@@ -82,7 +82,7 @@ test('the historical pre-ground sanitary additions preserve retained batch tones
   const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
   const originalByKey=new Map();
   for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
-  const retained=layout.parts.filter(p=>!p.groundFit&&!p.hallRoofFrame&&!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
+  const retained=layout.parts.filter(p=>!p.djBay&&!p.groundFit&&!p.hallRoofFrame&&!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
   assert.ok(retained.length>10000,'Retirement must leave the unrelated original model intact');
   retained.forEach(p=>{
     const original=originalByKey.get(key(p))?.shift();

@@ -1,5 +1,76 @@
 # Berghain reconstruction: goal and work state
 
+## DJ bay independent-review repair — v2
+
+V1 was rejected: the thicker wall embedded two satellite cabinets and the
+counter/support assembly crossed retained guard rods. Both complete satellite
+assemblies, their brackets, collision and equipment metadata now follow the
+wall by 0.33 m. The complete counter, legs, stretchers and equipment move
+0.18 m behind the unchanged guard; the counter light target follows the mixer.
+No other PA component, public floor, guard or route changes. A new regression
+checks complete cabinet envelopes and the furniture-to-guard separation.
+
+27 focused checks and 237 full Node checks pass. V2 requires fresh affected
+browser/source-native/fallback and cost evidence plus both independent reviews.
+The rejected 239-file V1 and its findings remain preserved. Physical Android
+NOT RUN; exact private-room plans and current inventories remain unresolved.
+
+
+## Main DJ bay: visible opening, counter and curtain lighting
+
+Karhard G19/G24 show a recessed red curtain, a neighbouring white door, a
+maintenance hatch above the opening and a thin counter behind an open guard.
+`main-dj-bay.mjs` replaces the oversized flat opening and opaque desk block.
+The opening head is now 8.00 m against the adjacent door head of 7.65 m;
+the 0.53 m wall/return depth fits inside the retained hull and clears the
+existing Eisbar landing. All metric values remain inferred photographic fits.
+The earlier 1.43 m prototype depth blocked that landing and was rejected.
+
+The deck top meets the retained guard feet at 5.75 m. The thin counter top is
+6.70 m, below the ordinary 7.13 m eye; four legs support it on the deck. Generic
+small deck/mixer forms are original equipment studies, not a current inventory.
+The wall-mounted maintenance assembly, circular features and hatches move
+together by 0.33 m. The external hull, public floors, guard, other PA, glass screen,
+stairs, toilets and all other fixture/route assemblies remain unchanged.
+Two red curtain washes and one subdued counter pool reuse the three scene lights
+and two shadow maps when approaching the booth. G24 supports the red accent;
+outputs, fixture count and current night programming are not measured.
+
+V11 (June 2024 visitor) associates a compact private space and toilet with the
+main DJ curtain. V12 (October 2026 interview) independently describes a booth
+toilet without specifying which booth. The model records these different claims
+without inventing a cubicle coordinate, hidden corridor or public backstage path.
+
+237 Node checks pass. Required browser evidence covers source/native pixels and
+actual recess rays, day/night views, real keyboard/touch approaches and texture
+fallback. Matched cost compares the same DJ approach and two-second strafe.
+Independent Physics and Camera reviews must accept the same frozen candidate
+before publication. Receipts: output/berghain-dj-bay-*. Physical Android NOT RUN.
+
+Export: 61,133,368 bytes, 791,124 triangles, 212 groups, 25 textures; SHA-256
+09c97ce03af699e3b7d965efff73902138223e57693c47e499d77c1184225c75.
+Full goal ACTIVE. Exact backstage/FLINTA coordinates, hidden floor plans and
+current equipment inventories remain unresolved; this is not a surveyed twin.
+
+
+### Published Säule ceiling correction
+
+Commit `9e7adfaea0417445e02f042d6d5cb110cde3a062`; Pages run 40214500691 succeeded. All 91 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-saule-ceiling-release.json. Primary staged index unchanged.
+
+Chamfered concrete members, six capped circular recesses and exposed service/fixture
+studies now follow A15/I24's visible forms. The occupied slab, all public floors,
+earlier collision envelopes, piers, toilets, stairs and night-light cues are preserved.
+Dimensions, recess depth and equipment counts remain fitted estimates.
+
+231 Node checks, seven local browser cases, eighteen matched cost contexts and
+independent Physics/Camera reviews pass within their recorded scope. Physical
+Android NOT RUN. The full goal remains ACTIVE: exact ceiling registration,
+current inventories, separate admission and private/backstage/FLINTA locations
+still require stronger evidence.
+
+
 ## Säule ceiling: source-informed concrete and services
 
 A15's photographs and I24 show chamfered concrete members, circular underside

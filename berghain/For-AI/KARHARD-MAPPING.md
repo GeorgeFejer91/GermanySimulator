@@ -1,5 +1,34 @@
 # Karhard Berghain: evidence-to-model map
 
+## DJ bay independent-review repair — v2
+
+V1 was rejected: the thicker wall embedded two satellite cabinets and the
+counter/support assembly crossed retained guard rods. Both complete satellite
+assemblies, their brackets, collision and equipment metadata now follow the
+wall by 0.33 m. The complete counter, legs, stretchers and equipment move
+0.18 m behind the unchanged guard; the counter light target follows the mixer.
+No other PA component, public floor, guard or route changes. A new regression
+checks complete cabinet envelopes and the furniture-to-guard separation.
+
+27 focused checks and 237 full Node checks pass. V2 requires fresh affected
+browser/source-native/fallback and cost evidence plus both independent reviews.
+The rejected 239-file V1 and its findings remain preserved. Physical Android
+NOT RUN; exact private-room plans and current inventories remain unresolved.
+
+
+## Main DJ bay follow-up
+
+G19/G24 now inform a lower curtain opening with real side/head returns, a thin
+supported counter and an open guard with supported feet. The 0.53 m recess,
+0.30 m deck rise and all placement remain inferred. A deeper prototype was
+rejected because it blocked the Eisbar landing; the accepted geometry must
+preserve all public lanes. The local red curtain accent shares three scene
+lights/two shadows with the rest of the viewer. V11 supports a private toilet
+association behind the main curtain; V12 corroborates a booth toilet without
+identifying the booth. Neither establishes an exact private cubicle plan.
+README/VALIDATION own current checks and release status.
+
+
 Current joint-hall follow-up: `main-hall-registration.mjs` now fits F03/F04/F05,
 F12/F14 and F17/F18/F20 together. The open hall places the Panorama stair left
 and glazed bar right when facing the DJ wall; the main switchback reaches the
@@ -66,7 +95,7 @@ it has a named object in the source.
 | F09 | Vertical pier radiator and low radiator banks at glazing/gallery edges; G04/08/16–18/21 | The circulation reconstruction owns vertical radiator; `main-hall-details.mjs` adds bounded low banks at the main glass wall. | Different contexts must not become one radiator repeated along all walls. Exact sizes/pipe routes inferred. |
 | F10 | High gridded bays, blue/purple appearance, heavy beam-separated roof section; G07/11/17–23/28 | Existing `main-bar.mjs` high-bay study; `main-hall-details.mjs` removes the generic upper grid, closes side-pier/roof contacts and fits a separate stationary industrial bridge (scoped geometry, rendered and browser checks pass). Exact roof/clerestory construction remains incomplete. | Blue photograph appearance does not establish blue glass or a permanently emissive roof. |
 | F11 | Open lattice trusses, suspensions, yokes, projector bodies and cables; hero, G17–24 | `main-hall-details.mjs` uses connected transverse/longitudinal open lattice runs (G17/G22), six suspensions and bounded original fixture geometry; the fitted connected rig passes scoped geometry, rendered and browser validation. `night-lighting.mjs` retains the limited steady cue bank. | Archived rig vocabulary, not an exact current fixture inventory or reproduced light show. |
-| F12 | Booth with rounded rails/open metal screen and paired circular wall features; G00/15/19/24 | `main-hall-details.mjs` reconstruction adds genuine open lattice guard and framed dark recesses at the registered corner-side booth/wall with a closed red recess. | Circular feature purpose/depth unknown. Existing booth footprint is still inferred. |
+| F12 | Booth with rounded rails/open metal screen and paired circular wall features; G00/15/19/24 | `main-hall-details.mjs` reconstruction adds genuine open lattice guard and framed dark recesses at the registered corner-side booth/wall with a closed red recess; `main-dj-bay.mjs` fits its lower opening, side returns, supported thin counter and local red accent. | Circular feature purpose/depth unknown. Recess, deck and counter dimensions remain inferred. |
 | F13 | Upper maintenance stair and ladder near DJ end wall; G00/19/24 | `main-hall-details.mjs` adds a visible ladder, small landing, diagonal steel stair and closed service hatches. | Endpoints and dimensions estimated; no public climb route or backstage destination inferred. |
 | F14 | Long bar, rounded return, luminous ribbed bands, steel/glass hall screen; G11–18 | Existing `main-bar.mjs` covers the main forms; added radiator band strengthens its lower edge. | The glass-to-DJ-wall corner and Eisbar interfaces are fitted together. Exact screen grid, doorway dimensions and window registration remain estimates. |
 | F15 | Tall inner historic facade, paired relief/window tiers, pilasters and warm wall wash; G11–16 | Existing `main-bar.mjs` ornamental facade/roof and six practical uplights retained. | Repeated bay/relief counts, profiles and present arrangement are estimates, not newly proved by the full gallery. |

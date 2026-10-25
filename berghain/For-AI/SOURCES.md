@@ -472,3 +472,11 @@ Säule ceiling follow-up: A15/I24 support the concrete recess/member and exposed
 service vocabulary now fitted in saule-ceiling.mjs. Cavity depth, full grid,
 service routing and current fixture inventory remain unmeasured. A15 hero00 and
 I24 detail are the same photograph; gallery01/02 share a camera position.
+
+Main DJ follow-up: G19/G24 support the visible red-curtained recess, lower opening
+relative to the white door, high maintenance hatch, open guard and thin counter.
+The 0.53 m return depth and all new metric values are original fitted estimates.
+V11's main-curtain WC association is distinguished from V12's unspecified booth
+WC; neither supplies an exact cubicle location. The closed model boundary does
+not turn the maintenance stair into a backstage route. Two red washes plus a
+counter pool interpret G24 within the existing light budget, not a current rig.

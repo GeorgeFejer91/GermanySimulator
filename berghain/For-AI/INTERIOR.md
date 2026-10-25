@@ -1,5 +1,34 @@
 # Berghain interior: objects, art and equipment
 
+## DJ bay independent-review repair — v2
+
+V1 was rejected: the thicker wall embedded two satellite cabinets and the
+counter/support assembly crossed retained guard rods. Both complete satellite
+assemblies, their brackets, collision and equipment metadata now follow the
+wall by 0.33 m. The complete counter, legs, stretchers and equipment move
+0.18 m behind the unchanged guard; the counter light target follows the mixer.
+No other PA component, public floor, guard or route changes. A new regression
+checks complete cabinet envelopes and the furniture-to-guard separation.
+
+27 focused checks and 237 full Node checks pass. V2 requires fresh affected
+browser/source-native/fallback and cost evidence plus both independent reviews.
+The rejected 239-file V1 and its findings remain preserved. Physical Android
+NOT RUN; exact private-room plans and current inventories remain unresolved.
+
+
+## Main DJ bay follow-up
+
+G19/G24 now inform a lower curtain opening with real side/head returns, a thin
+supported counter and an open guard with supported feet. The 0.53 m recess,
+0.30 m deck rise and all placement remain inferred. A deeper prototype was
+rejected because it blocked the Eisbar landing; the accepted geometry must
+preserve all public lanes. The local red curtain accent shares three scene
+lights/two shadows with the rest of the viewer. V11 supports a private toilet
+association behind the main curtain; V12 corroborates a booth toilet without
+identifying the booth. Neither establishes an exact private cubicle plan.
+README/VALIDATION own current checks and release status.
+
+
 ## Säule ceiling follow-up
 
 `saule-ceiling.mjs` fits A15/I24's chamfered members, circular underside cavities

@@ -1,5 +1,6 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {panoramaWorldPoint} from './panorama-registration.mjs';
+import {fitMainDJBay} from './main-dj-bay.mjs';
 
 // Karhard G21/G23 register the hall, the narrow Panorama stair and the
 // longitudinal glazed bar together. Only that relative arrangement is known;
@@ -267,4 +268,5 @@ export function registerMainHall(layout,viewpoints){
   ground:'Admission, wardrobe, quiet WC, Lab and Säule retained as the initial fit hypothesis',
   open:['Unsurveyed dimensions and hidden structural continuity','Exact contemporary room boundaries and private destinations'],
   backstage:'No inferred private room or connection; photographed maintenance access does not establish backstage'};
+ fitMainDJBay(layout);
 }
