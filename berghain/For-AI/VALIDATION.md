@@ -1,5 +1,81 @@
 # Berghain viewer validation
 
+## Säule ground arrangement — accepted for publication
+
+V01/V15–V18 constrain the relative arrangement: eight piers in pairs, an end
+stage, a side WC/balcony band with two stairs, an opposite bar and conditional
+Lab connection behind it. A15/I24 inform concrete, belts, padded seats, ribbed
+counter, round stools, refrigerators and upper framed glazing. Dimensions,
+three neutral cubicles, seven stools and coordinates remain fitted estimates.
+FLINTA evidence stays at the Säule-zone level without an invented stall label.
+
+Lab's prior inferred footprint moves behind the bar, with closed event
+boundaries and separate selector access. Its relocated sanitary pit cuts both
+overlapping slabs. The 2.70 m balcony has 2.05 m minimum beam clearance.
+Halle's upper structure remains unchanged; its ground circuit avoids Lab.
+
+The first independent review rejected Lab fixture/frame intersections and
+source/export glass differences. The complete 525-part bar assembly now moves
+3.5 m clear of the beams; service runs and lintels are lowered locally. New
+ground glazing uses the same transparent depth-write policy in source and GLB,
+and its upper edges clear the retained beams. Fixture sizes remain unchanged.
+
+All 227 Node checks, eight affected lighting checks and the architecture CLI pass. Fifteen selected local
+browser cases pass: two source/native comparisons, ground/Lab/fallback routes
+on desktop and both Android emulations, downward views of both balcony stairs
+on all three profiles, and the affected desktop Halle circuit. Natural public
+admission is tested separately from Lab's explicit room-selector start.
+Six V2 natural/local routes and V3 fallback remain bound by exact preservation
+checks and fresh V4 source/native and stair views. V3 repaired four collision
+strips; V4 changes only two stair light cues to keep lower treads readable.
+Independent Physics and Camera reviews accept this frozen v4 candidate within
+their recorded scope. The rejected v1/v2/v3 evidence remains preserved.
+The overlapping original landscape attempt and interrupted parity run are
+excluded; isolated landscape confirmation and final parity supply that evidence.
+
+Eighteen matched cost contexts pass the comparison gate. Median p95 frame
+intervals are 20.9 to 21.0 / 14.0 to 20.8 / 20.9 to 20.9 ms for desktop, portrait and landscape.
+Normal transfer changes by +26,211 bytes; the optional GLB changes by
++1,056,644 bytes. Three reusable lights, two shadow maps, idle rendering stop and
+lazy GLB loading remain. These are local emulation results, not qualification
+of a physical Android device or an unchanged-speed claim.
+
+Accepted for publication; deployment verification remains pending.
+Physical Android NOT RUN; full goal ACTIVE.
+
+Current export: 60,777,456 bytes, 787,960 triangles, 207 groups, 25 textures;
+SHA-256 219a026b66849c2fc61b63ed5c37c0f97dcd5b017da8d90d71a932750d9442ed.
+Three reusable cue lights and two shadow maps remain; local bar, WC and balcony
+cues are authored night interpretations, not measurements of an actual rig.
+External Säule admission, complete Lab plan, wooden arches, ceiling/service
+details, private backstage and exact upper/garden FLINTA registration remain open.
+
+Base cab382c382ab49a86f692160cd593ed15bc5d7ea. Root is sole writer/publisher.
+Candidate output/berghain-saule-layout-runtime; evidence output/berghain-saule-layout-*.
+Primary runtime and its unrelated staged index remain untouched.
+
+### Published compact foyer-chair correction
+
+Commit `11a817477b060d9f6d2208ffb27b355335a3642e`; Pages run 40201191430 succeeded. All 89 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-foyer-seating-release.json. Primary staged index unchanged.
+
+Karhard G02/G03 support compact armchairs with one recessed seat/back pad,
+replacing the unsupported long-sofa forms. Two existing anchors remain
+provisional: the photographs do not register the entire aisle or establish
+current inventory. The other 16,294 parts retain exact transforms and colours;
+public floors, other colliders, navigation and club lighting code are unchanged.
+
+All 218 Node tests, six input/fallback/look cases, two source/native comparisons
+with four day/night views and independent Physics/Camera reviews pass. Nine
+matched samples per version pass the declared comparison gate: median p95
+34.8 to 34.8 / 27.8 to 27.8 / 27.9 to 34.7 ms. The landscape slowdown remains
+explicit. Ordinary transfer grows 2,080 bytes; GLB shrinks 3,836 bytes.
+Physical Android NOT RUN. Full goal ACTIVE: aisle registration, remaining
+photographic details, current inventory, exact private/backstage, FLINTA and
+lift locations remain unresolved.
+
+
 ## Compact foyer chairs — accepted for publication
 
 I09 is the same original image as Karhard G02. Its compact chair shell and

@@ -57,8 +57,11 @@ test('an invalid start inside the Panorama trough recovers past its complete rim
   assert.ok(Math.hypot(recovered.x-start.x,recovered.z-start.z)<1,'local recovery');
 });
 
-test('sanitary additions preserve every retained original batch tone including Halle retirement',async()=>{
+test('the historical pre-ground sanitary additions preserve retained batch tones including Halle retirement',async()=>{
   const url=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
+  const preGround=readFileSync(url,'utf8').replace('registerGround(layout,viewpoints);','')
+    .replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
+  const {layout}=await import('data:text/javascript;base64,'+Buffer.from(preGround).toString('base64'));
   // Independent baseline: remove additions before the original Halle retirement
   // and let the renderer's previous group-count/index formula run unchanged.
   const source=readFileSync(url,'utf8')
@@ -66,7 +69,7 @@ test('sanitary additions preserve every retained original batch tone including H
       {const groups=new Map();for(const p of layout.parts){const k=[p.section,p.material==='mainBarPlaster'?'pale':p.material,p.shape].join('/');if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p);}for(const parts of groups.values())parts.forEach((p,i)=>p.instanceTone??=.84+((i*193+parts.length*37)%101)/625);}`)
     .replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','')
     .replace('addMainHallDetails(layout);','').replace('fitMainHallRoofFrame(layout);','')
-    .replace('addGroundSanitary(layout);','')
+    .replace('addGroundSanitary(layout);','').replace('registerGround(layout,viewpoints);','')
     .replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
   const baseline=(await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'))).layout;
   const groups=new Map(),expected=new Map();
@@ -79,7 +82,7 @@ test('sanitary additions preserve every retained original batch tone including H
   const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
   const originalByKey=new Map();
   for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
-  const retained=layout.parts.filter(p=>!p.hallRoofFrame&&!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
+  const retained=layout.parts.filter(p=>!p.groundFit&&!p.hallRoofFrame&&!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
   assert.ok(retained.length>10000,'Retirement must leave the unrelated original model intact');
   retained.forEach(p=>{
     const original=originalByKey.get(key(p))?.shift();

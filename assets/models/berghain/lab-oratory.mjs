@@ -1,9 +1,9 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
+import {groundLabPolygon} from './ground-registration.mjs';
 
 const footprint={x:[-21.5,-4],z:[-21.5,9.4]};
-const polygon=[[footprint.x[0],footprint.z[0]],[footprint.x[1],footprint.z[0]],
-  [footprint.x[1],footprint.z[1]],[footprint.x[0],footprint.z[1]]].map(([x,z])=>studyToSite({x,y:0,z}));
+const polygon=groundLabPolygon.map(([x,z])=>({x,z}));
 export function labRoomAt(position){
   if(position.y< -1.3||position.y>.25)return null;
   return polygon.every((a,i)=>{const b=polygon[(i+1)%polygon.length];

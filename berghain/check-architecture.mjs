@@ -86,7 +86,7 @@ export function measureArchitecture(){
  const parts=survey.parts.map(part=>({id:part.id,footprintDate:part.footprintDate,measuredHeight:part.measuredHeight,
   area:polygonArea(part.surfaces.find(s=>s.type==='GroundSurface').polygons[0].outer.map(p=>[p[0],p[2]])),
   roof:Math.max(...part.surfaces.filter(s=>s.type==='RoofSurface').flatMap(s=>s.polygons.flatMap(p=>p.outer.map(v=>v[1]))))}));
- const ground=layout.floors.find(f=>f.name==='Halle ground'),upper=layout.floors.filter(f=>f.halle&&f.endY===undefined);
+ const groundParts=layout.floors.filter(f=>f.name==='Halle ground'),ground=groundParts[0],upper=layout.floors.filter(f=>f.halle&&f.endY===undefined);
  const floors=layout.floors.map(f=>({name:f.name,y:f.y,endY:f.endY,area:f.polygon?polygonArea(f.polygon):(f.x[1]-f.x[0])*(f.z[1]-f.z[0])}));
  const stairs=layout.floors.filter(f=>f.endY!==undefined).map(f=>({name:f.name,datums:[f.y,f.endY],rise:Math.abs(f.endY-f.y),
   run:Math.hypot(f.rampAxis[1][0]-f.rampAxis[0][0],f.rampAxis[1][1]-f.rampAxis[0][1])}));
@@ -99,7 +99,7 @@ export function measureArchitecture(){
   return {units:'metres',parts,officialFootprintArea:parts.reduce((sum,p)=>sum+p.area,0),frontage:distance(site(-22,22),site(22,22)),
    halleWidth:distance(site(-22,-33),site(22,-33)),halleDepth:distance(site(0,-22),site(0,-44)),
    bases:[[0,0],[0,-33],[-20,-43],[20,-23]].map(([x,z])=>localBasis(studyToSite,x,z)),
-   halleGroundArea:polygonArea(ground.polygon),halleUpperArea:unionArea(upper.map(f=>f.polygon)),
+   halleGroundArea:unionArea(groundParts.map(f=>f.polygon)),halleUpperArea:unionArea(upper.map(f=>f.polygon)),
    halleUpperSum:upper.reduce((sum,f)=>sum+polygonArea(f.polygon),0),halleUpperDatum:upper[0].y,
    barBeamClearance:beamBottom-layout.mainBar.floorHeight,barFloor:layout.mainBar.floorHeight,mainGroundDatum:floors.find(f=>f.name.startsWith('foyer')).y,
    floors,stairs,rays,halleTopology:halleTopology(layout.floors),sourceGroundAltitudeOffset:survey.frame.origin[2]};

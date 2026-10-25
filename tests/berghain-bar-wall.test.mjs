@@ -163,7 +163,7 @@ test('the photographed upper relief row remains visible across the bar rather th
   assert.ok(hit);const [section,material,shape]=hit.object.name.split('/');
   const part=layout.parts.filter(p=>p.section===section&&p.material===material&&p.shape===shape)[hit.instanceId];
   assert.equal(part?.role,'circular relief','I23 views12/16 show a clear view of the upper reliefs across this room');
-  assert.equal(layout.parts.filter(p=>p.name==='load-bearing column').length,15);
+  assert.equal(layout.parts.filter(p=>p.name==='load-bearing column').length,7);
  }finally{disposeBerghainModel(model);}
 });
 

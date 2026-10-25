@@ -8,6 +8,7 @@ import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.m
 import {prepareWithSegments, measureLineStats, measureNaturalWidth} from '../assets/vendor/pretext/dist/layout.js';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
+import {groundRoomAt} from '../assets/models/berghain/ground-registration.mjs';
 import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 import {createFootsteps} from './footsteps.mjs';
 import {createViewerLighting} from './night-lighting.mjs';
@@ -61,7 +62,7 @@ function clearInput() {
 
 function syncLoungeRoom(){
   const architectural=architecturalRoomAt(visitor),newRoom=architectural==='smokingEscape'?'smoking':viewpoints[architectural]?architectural:null;
-  const room=newRoom||(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+  const room=newRoom||(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(groundRoomAt(visitor)?'saule':null)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
     Math.abs(visitor.y-layout.panoramaServices.floorHeight)<.15?'panorama':
     roomSelect.value==='panorama'&&Math.abs(visitor.y-5.45)<.15?'berghain':
     ['groundToilets','smoking','eisbar'].includes(roomSelect.value)?(visitor.y<5?'foyer':visitor.y<8.5?'berghain':'panorama'):
@@ -106,6 +107,7 @@ function render(time) {
         viewpoints[architecturalRoomAt(visitor)]?.label||
         (admissionRoomAt(visitor)?viewpoints.admission.label:
         labRoomAt(visitor)?viewpoints.lab.label:
+        groundRoomAt(visitor)?viewpoints.saule.label:
         kloRoomAt(visitor)?viewpoints[kloRoomAt(visitor)].label:
         Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:
         Math.abs(visitor.y-layout.panoramaServices.floorHeight)<.15?viewpoints.panorama.label:'Inside Berghain');

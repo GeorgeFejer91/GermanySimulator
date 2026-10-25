@@ -1,6 +1,7 @@
 import {layout} from '../assets/models/berghain/layout.mjs';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
+import {groundRoomAt} from '../assets/models/berghain/ground-registration.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 
 export const acousticProfiles={
@@ -23,10 +24,10 @@ const halleWC=layout.solids.find(s=>s.halle&&s.role==='WC ceiling');
 const sauleFront=[-22,22].map(x=>studyToSite({x,y:0,z:9}));
 export function footstepEnvironment(position){
  const floors=layout.floors.filter(f=>contains(position,f));
- const sanitary=kloRoomAt(position);
+ const sanitary=kloRoomAt(position),ground=groundRoomAt(position);
  const front=sauleFront[0].z+(sauleFront[1].z-sauleFront[0].z)*(position.x-sauleFront[0].x)/(sauleFront[1].x-sauleFront[0].x);
  const room=position.y<.3&&contains(position,halleWC)?'wc':labRoomAt(position)?'lab':sanitary==='toilets'?'wc':sanitary==='klo'?'klo':
-  floors.some(f=>f.name==='Halle ground')?'halle':
+  ground==='sauleWC'?'wc':ground?'saule':floors.some(f=>f.name==='Halle ground')?'halle':
   floors.some(f=>/garden|forecourt/.test(f.name))&&!floors.some(f=>/foyer/.test(f.name))?'outside':
   position.y>11.6?'lounge':position.y>8.5?'panorama':position.y>3?'berghain':
   position.z<front?'saule':'foyer';

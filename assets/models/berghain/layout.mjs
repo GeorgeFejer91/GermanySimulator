@@ -19,6 +19,7 @@ import {addMainHallDetails,fitMainHallRoofFrame} from './main-hall-details.mjs';
 import {addGroundSanitary} from './ground-sanitary.mjs';
 import {registerPanorama} from './panorama-registration.mjs';
 import {registerMainHall} from './main-hall-registration.mjs';
+import {registerGround} from './ground-registration.mjs';
 
 export const materials = {
   ...admissionMaterials,
@@ -40,6 +41,7 @@ export const materials = {
   rust: {color: '#55483c', roughness: .92, metalness: .3},
   glass: {color: '#647773', roughness: .3, metalness: .12},
   lightGlass: {color: '#83938e', roughness: .25, transparent: true, opacity: .32},
+  groundGlass: {color: '#83938e', roughness: .25, transparent: true, opacity: .32, depthWrite: false},
   rubber: {color: '#171a19', roughness: .92},
   timber: {color: '#6b5947', roughness: .9},
   gravel: {color: '#76766a', roughness: 1},
@@ -354,3 +356,4 @@ addGroundSanitary(layout);
 registerPanorama(layout,viewpoints);
 registerMainHall(layout,viewpoints);
 fitMainHallRoofFrame(layout);
+registerGround(layout,viewpoints);

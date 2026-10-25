@@ -734,3 +734,94 @@ close views and both technical world reviews pass on the final91-file freeze;
 see VALIDATION.md. Pale/smooth highlights, generic faces and simplified limb
 relationships still differ from the darker, variegated and intertwined ART04
 photographs. This is a partial reconstruction, not a completed artwork or scan.
+
+
+### Säule/WC/balcony and Lab ground arrangement — candidate, 25 October 2026
+
+V01's eight-pier minimum (eight total, not eight pairs), V15's WC/balcony and
+opposite-bar relationship, V16's side mezzanine and partitions, and V18's
+conditional behind-bar Lab connection now inform one integrated candidate.
+The four paired rows, end stage, WC band and two balcony stairs replace the old
+six-pier grid. Three neutral cubicles remain an estimated inventory; V09 locates
+FLINTA facilities in the Säule zone, without identifying an exact enclosure.
+The quiet cloakroom WC, upper facilities and garden urinals remain distinct.
+
+The balcony is fitted at 2.70 m, with 2.05 m minimum clearance beneath retained
+beams. These are tested model dimensions, not measured club dimensions. I24's
+ribbed counter, round stools, refrigerators/shelves and upper framed glazing
+inform the bar details. Its 8.4 m length, seven stools, bottle inventory and all
+new sanitary fixtures remain estimates. The separate Säule entry, wooden arches,
+ceiling pockets, concealed belt wash and contemporary equipment remain open.
+
+The former western Lab fit is rigidly moved behind the bar into the lower
+boiler-house region. A12 establishes the former ash-cellar conversion; V18
+supports the bar relationship. Neither establishes this exact polygon, floor
+datum or internal order. Wikipedia's more precise south-half claim cites A12,
+which supplies no plan, so it is not independent confirmation. The Flickr scan
+lead is labelled Stern 9, 23 February 2012, despite Wikipedia's 2023 wording;
+the inaccessible scan was not inspected and is not treated as a current plan.
+
+Original Lab fixtures and conservative physical margins move together. The
+sanitary pit is cut through both overlapping slabs and the old hole filled.
+Halle's upper stairs, slabs, voids and hoppers remain unchanged; its ground
+circuit goes around the closed Lab boundary. Lab is selected separately in this
+ordinary-night study. No permanent public Lab/backstage shortcut is invented.
+Local bar, WC, balcony and dance cues reuse three lights and two shadow maps.
+Their colour, intensity and position remain authored interpretations, not a
+measured rig. The complete candidate still requires browser and independent
+Physics/Camera acceptance before publication.
+
+
+### Ground candidate review repair, 25 October 2026
+
+The first independent review failed on actual Lab fixture/frame intersections
+and ground-glass source/GLB blending. The complete 525-part Lab bar/gauge/canopy
+assembly moves another 3.5 m along the fitted room, retaining dimensions and
+linked physical margins. Service runs move down 0.20 m and historic lintels
+0.03 m; canopy metadata now agrees with the earlier 0.40 m lowering. These
+are model-fit repairs, not newly established historical coordinates. Actual
+ceiling underside is 3.76 m and lowest beam underside 3.40 m.
+
+New ground glass clears the beams and shares transparent depthWrite=false
+between the source renderer and GLB loader. Retained glass elsewhere is
+unchanged. The rebuilt export passes source/native image and ray comparisons;
+226 Node checks pass. Fresh route, cost and independent review acceptance
+remain pending; the original failed review is preserved in local evidence.
+
+
+### Stair recovery follow-up
+
+V2 ordinary walking passed, but independent invalid re-entry probing found a
+4 mm floor-support shortfall at both sides of both new stairs. V3 extends only
+those four conservative collision strips by 6 mm per edge. Visible rails,
+floors, fixtures and export geometry are unchanged. All four regression poses
+recover locally with zero input and reverse/tangent/diagonal movement at
+60/30 Hz and 100 ms. Nine focused ground checks pass; final acceptance remains
+pending. Three V2 fallback runs stopped correctly at a solid seat because the
+test requested an invalid approach waypoint; the scenario now starts outside it.
+
+
+### Stair lighting review repair — v4
+
+All 227 V3 Node checks and all six repaired fallback/stair browser cases pass;
+Physics accepts the four collision-strip repair. Camera review still rejected
+lower-half stair views because the bright pool fell behind the descending eye.
+V4 changes only the two stair light cues: centred, broader downward pools at
+80 intensity, with the same three-light/two-shadow budget. Fresh geometric
+proposal rays reach all 18 tread centres per flight, including both ends.
+At this pre-acceptance checkpoint, rendered descent readability and final
+cost/release acceptance were pending; the bounded acceptance below supersedes
+that checkpoint.
+No geometry, collision, fixture, floor or exported GLB changes in this revision.
+
+
+### Ground candidate bounded acceptance
+
+The repaired v4 integrated candidate passes 227 Node checks, the architecture
+CLI, fifteen selected local browser cases, eight affected lighting checks, eighteen matched cost contexts and both
+independent specialist reviews. Real-input views include both balcony stair
+descents; source and exported glass agree. See VALIDATION.md for measurements
+and evidence boundaries. This accepts the model integration, not a surveyed
+plan or complete photographic reconstruction. Private geometry, current
+inventory and physical Android coverage remain unresolved. Publication and
+canonical deployment verification follow this local acceptance.

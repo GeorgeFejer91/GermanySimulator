@@ -18,16 +18,17 @@ export const sourceFiles=()=>[...previousFiles(),...['berghain/halle-playtest.mj
 
 export function halleCircuit(){
  const [west,east]=layout.halle.stairs,wc=layout.halle.wc;
- return [site(4,-28),{...west.lowerApproach,z:site(4,-28).z},west.lowerApproach,west.upperApproach,
+ const corridor={x:3.5,y:.05,z:-31.55};
+ return [corridor,{...west.lowerApproach,z:corridor.z},west.lowerApproach,west.upperApproach,
   site(-6.5,-28.7,4.25),site(-20.6,-28.7,4.25),site(-20.6,-37.2,4.25),site(-6.5,-37.2,4.25),
   site(-6.5,-32.3,4.25),site(-6.5,-28.7,4.25),site(6.5,-28.7,4.25),site(6.5,-37.2,4.25),
   site(20.6,-37.2,4.25),site(20.6,-28.7,4.25),site(6.5,-28.7,4.25),east.upperApproach,east.lowerApproach,
-  {...east.lowerApproach,z:site(4,-28).z},site(4,-28),site(4,-34),wc.approach,wc.inside,wc.approach,
-  site(4,-34),site(4,-28),viewpoints.halle.position];
+  {...east.lowerApproach,z:corridor.z},corridor,site(4,-34),wc.approach,wc.inside,wc.approach,
+  site(4,-34),corridor,viewpoints.halle.position];
 }
 
 const appearance=[
- {id:'halle-lower-source-native',camera:site(8,-27,2.1),target:site(-3,-38,8.3)},
+ {id:'halle-lower-source-native',camera:{x:3.5,y:1.73,z:-36},target:site(-3,-38,8.3)},
  {id:'halle-upper-source-native',camera:site(16,-27,7.1),target:site(-8,-38,10.2)}
 ].map(view=>({id:view.id,modes:['quick','stress'],timeoutMs:150000,async run(ctx){
  const parity=await compareMaterialRender(ctx,{position:array(view.camera),target:array(view.target)});

@@ -14,7 +14,7 @@ const partsFor=id=>layout.parts.filter(p=>p.fixture===id);
 test('Säule has grounded massive concrete bodies and actual flared capitals below the retained upper floor',()=>{
   assert.ok(layout.saule?.sources.includes('A15'),'Use the inspected architect concrete installations');
   const piers=layout.fixtures.filter(f=>f.id.startsWith('saule-pier-'));
-  assert.equal(piers.length,6);
+  assert.equal(piers.length,8);
   const model=createBerghainModel();
   try{
     for(const pier of piers){
@@ -59,16 +59,16 @@ test('continuous metal belts enclose the piers and padded concrete seats have ac
       assert.ok(a.min.x<=b.min.x&&a.max.x>=b.max.x&&a.min.z<=b.min.z&&a.max.z>=b.max.z);
     }
   }
-  assert.equal(layout.parts.filter(p=>p.role==='seat cushion'&&p.fixture?.startsWith('saule-pier-')).length,4);
-  assert.equal(layout.parts.filter(p=>p.name==='Säule column light').length,3,'Only the unreconstructed outer row retains its historical placeholder');
+  assert.equal(layout.parts.filter(p=>p.role==='seat cushion'&&p.fixture?.startsWith('saule-pier-')).length,8);
+  assert.equal(layout.parts.filter(p=>p.name==='Säule column light').length,0,'The unsupported lower grid and its placeholder lamps are retired');
 });
 
-test('the full body can pass the concrete installations and return to the Lab connection and main stair',()=>{
+test('the full body can pass the paired concrete installations and return to the foyer',()=>{
   assert.ok(layout.saule,'The new physical structure must be present for this route check');
-  const targets=[[5,15],[5.7,15],[5.7,4],[5,4],[5,-14],[5,4],[2,2.6],[-5.2,2.6],[2,2.6],[5,4],[5.7,4],[5.7,15],[5,15]];
-  let position=studyToSite({x:5,y:.05,z:15});assert.ok(canStand(position,layout));
+  const targets=[[9,15],[9,0],[3,0],[-14,0],[3,0],[9,0],[9,15]];
+  let position={x:9,y:.05,z:15};assert.ok(canStand(position,layout));
   for(const [x,z]of targets.slice(1)){
-    const target=studyToSite({x,y:.05,z}),dx=target.x-position.x,dz=target.z-position.z,steps=Math.ceil(Math.hypot(dx,dz)/.04);
+    const target={x,y:.05,z},dx=target.x-position.x,dz=target.z-position.z,steps=Math.ceil(Math.hypot(dx,dz)/.04);
     for(let i=0;i<steps;i++){position=moveVisitor(position,{x:dx/steps,z:dz/steps},layout);assert.ok(canStand(position,layout));}
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.02,'Continuous body-clear motion must reach the intended waypoint');
   }

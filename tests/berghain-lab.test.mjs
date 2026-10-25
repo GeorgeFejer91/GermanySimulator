@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
-import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {studyToSite as originalStudyPoint} from '../assets/models/berghain/calibration.mjs';
+import {groundLabPoint} from '../assets/models/berghain/ground-registration.mjs';
+const world=p=>{const [x,y,z]=groundLabPoint([p.x,p.y,p.z]);return{x,y,z};};
+const studyToSite=p=>world(originalStudyPoint(p));
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 
@@ -33,13 +36,13 @@ function follow(position,authorTarget){
   assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.08,'reach '+authorTarget+'; actual '+JSON.stringify(position));
   return position;
 }
-test('a standing human walks from Säule through Lab to the bar, down the sanitary stair and back without teleporting',()=>{
+test('a standing human walks within the separately selected Lab to the bar and sanitary landing and back',()=>{
   assert.ok(layout.labOratory);
-  let p={...viewpoints.saule.position};
-  const route=[[2,2.6],[-5.2,2.6],[-8.5,2.6],[-8.5,-8.5],[-12.8,-12.8],[-8.5,-8.5],[-8.5,2.6],[-17.4,.8],[-17.4,5.1]];
+  let p={...viewpoints.lab.position};
+  const route=[[-12.8,-12.8],[-8.5,-8.5],[-8.5,2.6],[-17.4,.8],[-17.4,5.1]];
   for(const waypoint of route)p=follow(p,waypoint);
   assert.ok(Math.abs(p.y+1.15)<.06,'the actual sanitary descent reaches the lower landing');
-  for(const waypoint of [...route.slice(0,-1).reverse(),[5,4]])p=follow(p,waypoint);
+  for(const waypoint of [...route.slice(0,-1).reverse(),[-8.5,-8.5]])p=follow(p,waypoint);
   assert.ok(Math.abs(p.y-.05)<.001,'continuous return reaches the original ground floor');
 });
 
@@ -78,23 +81,23 @@ test('the hanging sling has a shaped sagging surface with finite normals',async(
 });
 
 test('the reachable sanitary screen posts and proud cast ornament stop the complete standing body',()=>{
-  const witness={x:-18.61420950413223,y:.05,z:6.9049882332221095};
+  const oldWitness={x:-18.61420950413223,y:.05,z:6.9049882332221095},witness=world(oldWitness);
   // Start 20 cm away: the repaired conservative post box also blocks the old
   // 10 cm starting pose, so that pose no longer represents a legal approach.
-  const start={x:witness.x+.2*Math.sin(Math.PI/3),y:.05,z:witness.z+.2*Math.cos(Math.PI/3)};
+  const start=world({x:oldWitness.x+.2*Math.sin(Math.PI/3),y:.05,z:oldWitness.z+.2*Math.cos(Math.PI/3)});
   assert.ok(canStand(start,layout),'the approach is legal before contact');
   assert.equal(canStand(witness,layout),false,'the previously reachable arm-through-post contact must be blocked');
   const end=moveVisitor(start,{x:witness.x-start.x,z:witness.z-start.z},layout);
   assert.ok(canStand(end,layout));assert.ok(Math.hypot(end.x-witness.x,end.z-witness.z)>.01);
-  const ornament={x:-18.06906,y:.05,z:6.96123};
+  const ornament=world({x:-18.06906,y:.05,z:6.96123});
   assert.equal(canStand(ornament,layout),false,'clearance includes the cast relief in front of the plate');
   const posts=layout.parts.filter(p=>p.name==='lab-green-screen cast upright');
   assert.equal(posts.length,6);
   assert.ok(posts.every(p=>layout.solids.some(s=>s.renderPart===p)),'each rendered upright has a linked solid');
 });
 
-test('the lower Lab soffit contains all fittings while its raised gate stays wholly on the taller Säule side',()=>{
-  assert.equal(layout.labOratory.ceilingHeight,4.15,'photo-informed estimated ceiling');
+test('the fitted Lab ceiling contains retained fixtures and its ordinary-night boundaries are closed',()=>{
+  assert.equal(layout.labOratory.ceilingHeight,3.76,'actual fitted ceiling underside below retained Halle slab');
   const model=createBerghainModel(),point=new THREE.Vector3(),matrix=new THREE.Matrix4();
   try{
     for(const part of layout.parts.filter(p=>p.fixture?.startsWith('lab-'))){
@@ -102,16 +105,17 @@ test('the lower Lab soffit contains all fittings while its raised gate stays who
       matrix.fromArray(part.matrix);
       for(let i=0;i<mesh.geometry.attributes.position.count;i++){
         point.fromBufferAttribute(mesh.geometry.attributes.position,i).applyMatrix4(matrix);
-        assert.ok(point.y<layout.labOratory.ceilingHeight-.005,part.name+' clips the soffit');
+        assert.ok(point.y<3.76-.005,part.name+' clips the soffit');
       }
     }
-    const ceiling=layout.parts.find(p=>p.name==='Lab concrete soffit');
+    assert.equal(layout.parts.some(p=>/^Lab (raised steel-glass gate|gate track|gate upper head)$/.test(p.name)),false,'The former permanently open gate was not spatially supported');
+    const ceiling=layout.parts.find(p=>p.name==='Ground fit Lab fitted ceiling');
     const ceilingInverse=new THREE.Matrix4().fromArray(ceiling.matrix).invert();
-    for(const part of layout.parts.filter(p=>/^Lab (raised steel-glass gate|gate track|gate upper head)$/.test(p.name))){
+    for(const part of layout.parts.filter(p=>/^Ground fit Lab (north boundary|south event boundary)$/.test(p.name))){
       matrix.fromArray(part.matrix);
       for(const x of [-.5,.5])for(const y of [-.5,.5])for(const z of [-.5,.5]){
         point.set(x,y,z).applyMatrix4(matrix).applyMatrix4(ceilingInverse);
-        assert.ok(point.x>.5+.001,'raised gate mechanism overlaps the lower Lab roof');
+        assert.ok(point.y<=-.5+.001,'closed boundary meets the lower roof underside without protruding through it');
       }
     }
   }finally{disposeBerghainModel(model);}

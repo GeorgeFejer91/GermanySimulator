@@ -13,6 +13,7 @@ import {createLabGeometries} from './lab-oratory.mjs';
 import {createMainBarGeometries,createMainBarLights} from './main-bar.mjs';
 import {createSauleGeometries} from './saule.mjs';
 import {createHalleGeometries} from './halle.mjs';
+import {createGroundGeometries} from './ground-registration.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -25,7 +26,7 @@ export function createBerghainModel() {
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
-    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries(),...createHalleGeometries()};
+    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries(),...createHalleGeometries(),...createGroundGeometries()};
   const batches = new Map(), toneBatches=new Map(), shades=new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');
@@ -46,7 +47,7 @@ export function createBerghainModel() {
     if(shape==='halle-mesh')material.side=THREE.DoubleSide;
     if(section==='admission')configureSurfaceMaterial(material,
       ({admissionWall:'labWall',admissionScuff:'concrete',admissionZinc:'steel',admissionRust:'rust'})[materialName]??materialName);
-    else if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')||shape.startsWith('halle-')) configureSurfaceMaterial(material, materialName);
+    else if (shape === 'box'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')||shape.startsWith('halle-')||shape.startsWith('ground-')) configureSurfaceMaterial(material, materialName);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
     mesh.castShadow = !material.transparent && !material.transmission && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);
@@ -71,6 +72,16 @@ export function createBerghainModel() {
     });
     mesh.computeBoundingBox();
     mesh.computeBoundingSphere();
+    if(shape==='ground-slab-triangle'){
+      // An affine triangle's fourth bounding-box corner is not geometry.
+      // Bound the actual six vertices so the cut floor cannot enlarge framing.
+      const bounds=new THREE.Box3(),vertex=new THREE.Vector3(),matrix=new THREE.Matrix4();
+      for(let i=0;i<mesh.count;i++){
+        mesh.getMatrixAt(i,matrix);
+        for(let j=0;j<mesh.geometry.attributes.position.count;j++)bounds.expandByPoint(vertex.fromBufferAttribute(mesh.geometry.attributes.position,j).applyMatrix4(matrix));
+      }
+      mesh.boundingBox=bounds;mesh.boundingSphere=bounds.getBoundingSphere(new THREE.Sphere());
+    }
     group.add(mesh);
   }
   const roofs = createSurveyModel({partIds: [mainPartId, hallPartId], surfaceTypes: ['RoofSurface']});

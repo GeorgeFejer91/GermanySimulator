@@ -22,10 +22,10 @@ function subtract(subject,clip){
  return result;
 }
 
-test('all six retained capital top faces meet the slab union, without filling the central void',()=>{
+test('all eight fitted capital top faces meet the slab union, without filling the central void',()=>{
  const slabs=layout.parts.filter(p=>p.shape==='box'&&p.matrix&&Math.abs(p.center[1]-p.size[1]/2-5.05)<1e-6&&
   ['floor','concrete'].includes(p.material)).map(p=>corners(p).map(q=>[q[0],q[2]]));
- const caps=layout.parts.filter(p=>p.shape==='saule-capital');assert.equal(caps.length,6);
+ const caps=layout.parts.filter(p=>p.shape==='saule-capital');assert.equal(caps.length,8);
  for(const cap of caps){
   let uncovered=[corners(cap).map(q=>[q[0],q[2]])];
   for(const slab of slabs)uncovered=uncovered.flatMap(p=>subtract(p,slab));
@@ -33,8 +33,7 @@ test('all six retained capital top faces meet the slab union, without filling th
  }
  assert.equal(canStand({x:12,y:5.45,z:0},layout),false,'the main foyer volume remains open');
  assert.ok(canStand({x:10,y:.05,z:0},layout),'retained ground circulation remains below the void, between its supports');
- const gate=layout.parts.filter(p=>/^Lab (raised|gate)/.test(p.name));assert.ok(gate.length>3);
- for(const p of gate)assert.ok(p.center[1]+p.size[1]/2<5.05,'raised gate mechanism stays below slab underside');
+ assert.equal(layout.parts.filter(p=>/^Lab (raised|gate)/.test(p.name)).length,0,'Unsupported permanent Lab gate retired by the ground fit');
 });
 
 test('complete Panorama tread and guard envelopes clear the full-size upper side piers',()=>{

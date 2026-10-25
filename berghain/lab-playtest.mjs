@@ -41,62 +41,10 @@ export async function enterNaturally(ctx){
 }
 
 export default {name:'Lab.oratory photographed industrial interior and connected human circulation',sourceFiles:lounge.sourceFiles,
- scenarios:[{id:'lab-source-native',modes:['quick','stress'],timeoutMs:150000,async run(ctx){
-   const {page,baseURL,artifacts}=ctx;
-   await page.goto(baseURL+'/berghain/model.html');await page.locator('#model[data-ready="true"]').waitFor();
-   await page.locator('#enter').click();await page.locator('#room').selectOption('lab');
-   await artifacts.screenshot(page,'lab-room-source.png');
-   const a=studyToSite({x:-5,y:1.8,z:2.6}),b=studyToSite({x:-3,y:1.8,z:2.6});
-   const span=Math.hypot(a.x-b.x,a.z-b.z),asArray=p=>[p.x,p.y,p.z];
-   const rays=[{origin:asArray(a),direction:[b.x-a.x,0,b.z-a.z]},
-     {origin:asArray(b),direction:[a.x-b.x,0,a.z-b.z]},
-     ...[-4.3,-3.5,-3.8].map(x=>({origin:asArray(studyToSite({x,y:.05,z:2.6})),direction:[0,1,0]}))];
-   const native=await renderNativeAsset(page,{position:viewpoints.lab.position,yaw:viewpoints.lab.yaw,rays});
-   for(const samples of Object.values(native.geometryProbes)){
-     assert.ok(samples[0]>span&&samples[1]>span,'real clear gate aperture in both directions');
-     assert.ok(Math.abs(samples[2]-4.1)<.002,'lower Lab roof ends at its own seam');
-     assert.ok(samples[3]>5.9,'taller Säule roof remains beyond the seam');
-     assert.ok(Math.abs(samples[4]-2.6)<.002,'raised gate retains its real clear height');
-   }
-   native.geometryProbes.source.forEach((d,i)=>assert.ok(Math.abs(d-native.geometryProbes.native[i])<.002,'source/native portal rays match'));
-   assert.equal(native.labOratory.sanitaryDrop,1.2);assert.equal(native.fixtures,layout.fixtures.length);
-   assert.equal(native.artworks,2);assert.equal(native.equipment,44);
-   await artifacts.screenshot(page,'lab-room-native.png');await disposeNativeAsset(page);
-   const close=await travel(ctx,studyToSite({x:-12.8,y:.05,z:-12.8}),viewpoints.lab.yaw);
-   const bar=layout.fixtures.find(f=>f.id==='lab-pipe-bar');
-   const yaw=Math.atan2(close.position.x-bar.anchor[0],close.position.z-bar.anchor[2]);
-   await dragLook(page,ctx.context,ctx.profile,-(yaw-close.yaw)/.004);
-   await artifacts.screenshot(page,'lab-pipe-bar-source.png');
-   await renderNativeAsset(page,{position:close.position,yaw});
-   await artifacts.screenshot(page,'lab-pipe-bar-native.png');await disposeNativeAsset(page);
-   const cage=layout.fixtures.find(f=>f.id==='lab-cage-0'),screen=layout.fixtures.find(f=>f.id==='lab-green-screen');
-   for(const [name,view]of [
-     ['lab-cells',{position:{x:cage.anchor[0]+.3,y:.05,z:cage.anchor[2]+2.4},yaw:.12,pitch:-.05}],
-     ['lab-green-cast',{position:{x:screen.anchor[0]+3.2,y:.05,z:screen.anchor[2]+.3},yaw:Math.PI/2,pitch:0}],
-     ['lab-sanitary-opening',{position:studyToSite({x:-17.4,y:.05,z:.8}),yaw:Math.PI,pitch:-.6}]
-   ]){
-     await renderNativeAsset(page,view);await artifacts.screenshot(page,name+'-native.png');await disposeNativeAsset(page);
-   }
-   return {native,close:close.position,scope:'Source controls/native GLB and controlled native detail; footprint/dimensions/currentness inferred'};
- }},{id:'lab-natural-route',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
-   const {page,artifacts}=ctx;await enterNaturally(ctx);let heading=0;const route=[];
-   await artifacts.screenshot(page,'human-entered-from-outside.png');
-   const targets=[[5,15],[5,4],[2,2.6],[-5.2,2.6],[-8.5,2.6],[-8.5,-8.5],[-12.8,-12.8],[-8.5,-8.5],[-8.5,2.6],[-17.4,.8],[-17.4,5.1]];
-   for(let i=0;i<targets.length;i++){
-     const [x,z]=targets[i],end=await travel(ctx,studyToSite({x,y:i===targets.length-1?-1.15:.05,z}),heading);
-     heading=end.yaw;route.push(end.position);
-     if([3,6,9,10].includes(i))await artifacts.screenshot(page,['','','','human-through-lab-gate','','','human-at-lab-bar','','','human-at-sanitary-stair','human-lower-sanitary-landing'][i]+'.png');
-   }
-   assert.ok(Math.abs(route.at(-1).y+1.15)<.06);assert.equal(await page.locator('#room').inputValue(),'lab');
-   const camera=await assertFirstPersonView(page);
-   for(const [x,z]of [...targets.slice(0,-1).reverse(),[0,19.7],[0,20.25]]){
-     const end=await travel(ctx,studyToSite({x,y:.05,z}),heading);heading=end.yaw;route.push(end.position);
-   }
-   assert.ok(Math.abs(route.at(-1).y-.05)<.001);await cross(ctx);assert.ok((await position(page)).z>22);
-   await artifacts.screenshot(page,'human-outside-after-lab.png');
-   await page.reload();await page.locator('#model[data-ready="true"]').waitFor();assert.ok((await position(page)).z>22);
-   return {route,camera,input:ctx.profile.hasTouch?'Real touch movement and door tap':'Real keyboard/mouse and E',
-     scope:'Natural exterior approach/entry → Säule → Lab/bar → real sanitary descent/return → exterior exit/refresh; no selector or forced placement'};
+ scenarios:[{id:'lab-source-native',modes:['quick','stress'],profiles:['desktop'],timeoutMs:150000,async run(ctx){
+   const {labParity}=await import('./ground-layout-playtest.mjs');return labParity.run(ctx);
+ }},{id:'lab-internal-route',modes:['quick','stress'],timeoutMs:150000,async run(ctx){
+   const {labRoute}=await import('./ground-layout-playtest.mjs');return labRoute.run(ctx);
  }},{id:'lab-material-parity',modes:['stress'],profiles:['desktop'],async run(ctx){
    const bar=layout.fixtures.find(f=>f.id==='lab-pipe-bar');
    return compareMaterialRender(ctx,{position:[bar.anchor[0]+1,2.2,bar.anchor[2]+3],target:[bar.anchor[0],1.9,bar.anchor[2]-.7]});

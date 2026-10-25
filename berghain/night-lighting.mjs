@@ -4,6 +4,7 @@ import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
+import {groundRoomAt} from '../assets/models/berghain/ground-registration.mjs';
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
 import {panoramaWorldPoint,panoramaPassageAt} from '../assets/models/berghain/panorama-registration.mjs';
 import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
@@ -47,6 +48,20 @@ for(const room of ['panoramaToilets','lounge'])for(const light of cues[room]){
 // Registered world-space positions keep the bar wash and low corridor practical
 // below their respective ceilings. No inferred fixture inventory or live show.
 const worldSpot=(...args)=>{const light=spot(...args);light.position=new THREE.Vector3(...light.position);light.target=new THREE.Vector3(...light.target);return light;};
+// V16's red ceiling/booth and localized pier wash are a steady club-night
+// interpretation. Keep the same three reusable lamps and bounded shadow budget.
+cues.saule=[worldSpot([-14.6,4.6,0],[-18,2.3,0],'#b84128',170,.9,13),
+ worldSpot([-4,4.7,0],[-4,.05,0],'#667c9b',145,.95,15),
+ worldSpot([2,4.6,4.4],[3,.05,3.2],'#a28870',65,.85,10)];
+cues.sauleWC=[-9,-5,-1].map(x=>worldSpot([x,2.3,7],[x,.05,9],'#a7b9a8',60,1.15,7));
+cues.sauleBar=[worldSpot([-4,2.55,-7.7],[-4,.6,-7.95],'#d5aa73',100,1.22,10),
+ worldSpot([-7,2.35,-9.1],[-6,1.45,-10.5],'#d5aa73',70,1.1,8),
+ worldSpot([-1,2.35,-9.1],[-2,1.45,-10.5],'#d5aa73',70,1.1,8)];
+cues.sauleBalcony=[worldSpot([-13.9,4.65,9.5],[-13.9,.05,9.5],'#c2a17e',80,1.35,8),
+ worldSpot([-5,4.7,8.4],[-5,2.70,8.4],'#c2a17e',45,1.1,8),
+ worldSpot([3.65,4.65,9.5],[3.65,.05,9.5],'#c2a17e',80,1.35,8)];
+cues.lab=[worldSpot([-10,3.3,-22],[-11,.05,-22],'#a34c29',65,.85,9),
+ worldSpot([0,3.3,-22],[0,.05,-23],'#6c776b',55,.9,10)];
 cues.panorama=[worldSpot([-13.5,17,14.4],[-15.6,14.1,14.4],'#b34375',230,.8,13),
   worldSpot([-9,17,17],[-9,13.25,14],'#567db1',180,.78,12),
   worldSpot([-2,15.9,12.3],[1.5,13.25,12.3],'#d5a06e',75,1,9)];
@@ -86,6 +101,8 @@ function roomAt(p){
   if(admissionRoomAt(p))return 'admission';
   const architecture=architecturalRoomAt(p);if(architecture)return architecture;
   if(p.y>5.2&&p.y<5.8&&p.x>7.6&&p.x<18.8&&p.z>8.1&&p.z<21.5)return 'frontPublicWing';
+  if(labRoomAt(p))return 'lab';
+  if(groundRoomAt(p)==='sauleBar')return 'sauleBar';
   if(p.z<-15.4)return 'halle';
   if(p.x>22)return 'garden';
   if(p.x>-.7&&p.x<8.5&&p.z>4.3&&p.z<7.3&&p.y>5.2&&p.y<9.2)return 'panoramaStair';
@@ -96,7 +113,10 @@ function roomAt(p){
   if(p.y>8.5)return 'panorama';
   const sanitary=kloRoomAt(p);if(sanitary)return sanitary;
   if(p.y>4.8)return 'berghain';
-  if(labRoomAt(p))return 'lab';
+  if(p.x>=-17.5&&p.x<=7.3&&p.z>=6.1&&p.z<=10.9){
+   if(p.y>2.6||p.x<-11||p.x>1)return 'sauleBalcony';
+   return 'sauleWC';
+  }
   return p.z>11?'foyer':'saule';
 }
 

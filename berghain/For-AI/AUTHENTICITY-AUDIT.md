@@ -345,3 +345,77 @@ together. The nearby wall speaker, its bracket and linked collision move clear
 of the approach. The existing foyer light sits below the slab. These changes
 improve internal consistency; exact spacings, light fixtures, private destinations
 and photographic fidelity are still not established by the source material.
+
+
+### AU05/AU06/AU22 working correction, 25 October 2026
+
+The unpublished ground candidate integrates V01/V15–V18 and A15/I24: eight
+paired piers, WC beneath a side balcony, both end stairs, opposite bar and a
+physically closed event-dependent Lab connection. AU05 is no longer a simple
+six-versus-eight omission in this candidate, but its metric registration and
+contemporary count remain unverified. AU06's distinct external admissions and
+complete Lab/Halle connections remain incomplete. AU22's photographed bar forms
+are partially represented; ceiling pockets, wooden arches, full pier wash and
+surface fidelity remain open. AU26 backstage/private-room geometry remains
+unmodelled. V09 gives a Säule-zone FLINTA association, not an exact stall.
+
+The new Lab outline is a disclosed fit, not recovered architecture. All 224
+Node checks pass at the first refined export, including real body routes,
+overhead rays and preservation of the upper Halle structure. That establishes
+internal consistency, not photographic or contemporary accuracy. Browser and
+independent review are still required; do not mark these findings closed yet.
+
+
+### Ground candidate review repair, 25 October 2026
+
+The first independent review failed on actual Lab fixture/frame intersections
+and ground-glass source/GLB blending. The complete 525-part Lab bar/gauge/canopy
+assembly moves another 3.5 m along the fitted room, retaining dimensions and
+linked physical margins. Service runs move down 0.20 m and historic lintels
+0.03 m; canopy metadata now agrees with the earlier 0.40 m lowering. These
+are model-fit repairs, not newly established historical coordinates. Actual
+ceiling underside is 3.76 m and lowest beam underside 3.40 m.
+
+New ground glass clears the beams and shares transparent depthWrite=false
+between the source renderer and GLB loader. Retained glass elsewhere is
+unchanged. The rebuilt export passes source/native image and ray comparisons;
+226 Node checks pass. Fresh route, cost and independent review acceptance
+remain pending; the original failed review is preserved in local evidence.
+
+
+### Stair recovery follow-up
+
+V2 ordinary walking passed, but independent invalid re-entry probing found a
+4 mm floor-support shortfall at both sides of both new stairs. V3 extends only
+those four conservative collision strips by 6 mm per edge. Visible rails,
+floors, fixtures and export geometry are unchanged. All four regression poses
+recover locally with zero input and reverse/tangent/diagonal movement at
+60/30 Hz and 100 ms. Nine focused ground checks pass; final acceptance remains
+pending. Three V2 fallback runs stopped correctly at a solid seat because the
+test requested an invalid approach waypoint; the scenario now starts outside it.
+
+
+### Stair lighting review repair — v4
+
+All 227 V3 Node checks and all six repaired fallback/stair browser cases pass;
+Physics accepts the four collision-strip repair. Camera review still rejected
+lower-half stair views because the bright pool fell behind the descending eye.
+V4 changes only the two stair light cues: centred, broader downward pools at
+80 intensity, with the same three-light/two-shadow budget. Fresh geometric
+proposal rays reach all 18 tread centres per flight, including both ends.
+At this pre-acceptance checkpoint, rendered descent readability and final
+cost/release acceptance were pending; the bounded acceptance below supersedes
+that checkpoint.
+No geometry, collision, fixture, floor or exported GLB changes in this revision.
+
+
+### Ground candidate bounded acceptance
+
+The repaired v4 integrated candidate passes 227 Node checks, the architecture
+CLI, fifteen selected local browser cases, eight affected lighting checks, eighteen matched cost contexts and both
+independent specialist reviews. Real-input views include both balcony stair
+descents; source and exported glass agree. See VALIDATION.md for measurements
+and evidence boundaries. This accepts the model integration, not a surveyed
+plan or complete photographic reconstruction. Private geometry, current
+inventory and physical Android coverage remain unresolved. Publication and
+canonical deployment verification follow this local acceptance.

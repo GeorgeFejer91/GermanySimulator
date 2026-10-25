@@ -57,7 +57,7 @@ test('actual bar meshes fit around the retained concrete columns and stool colli
   const geometries={box:new THREE.BoxGeometry(1,1,1),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),...createMainBarGeometries()};
   const columns=layout.solids.filter(s=>s.name==='load-bearing column'||s.name==='Hall fit side frame pier');
-  assert.equal(columns.length,23,'Retain fifteen ground/front supports and eight separate upper boundary piers');
+  assert.equal(columns.length,15,'Retain seven foyer/front supports and eight upper boundary piers; the new paired Säule row has separate collision coverage');
   const point=new THREE.Vector3();let intersections=0;
   try{
     for(const part of layout.parts.filter(p=>p.fixture?.startsWith('main-'))){
