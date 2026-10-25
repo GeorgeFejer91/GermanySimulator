@@ -162,11 +162,12 @@ export function addArchitecturalCirculation(layout){
   for(let i=0;i<15;i++)box('foyer radiator fin',[4+i*.072,1.55,11.7],[.045,2.7,.14],'steel');
   data.fixtures.push({id:'lower-stair-services',gallery:['03','04','05','20','25'],placement:'Estimated adjacency to new main stair; exact service bay unmeasured'});
 
-  // Gallery27–29: small stainless tiles on an offset counter, narrow open
-  // stair behind it, and retained crane hardware. Heights are registration,
-  // not dimensions recovered from these oblique historical photographs.
+  // I03/I04 and U01/U02 identify a mezzanine, not a counter on the main floor.
+  // G27–29 show a guarded drop, onward ascent and overhead crane. The datum,
+  // bay, narrow lower approach and upper endpoint remain authoring estimates.
+  const eisbarFloor=9.95;
   const counter=(name,c,s)=>{
-    box(name+' plinth',[c[0],6.85,c[2]],[s[0]-.12,.4,s[2]-.12],'rubber');
+    box(name+' plinth',[c[0],eisbarFloor+.25,c[2]],[s[0]-.12,.5,s[2]-.12],'rubber');
     box(name+' body',c,s,'stainless');
     for(let x=c[0]-s[0]/2+.12;x<c[0]+s[0]/2;x+=.12)
       box(name+' tile vertical joint',[x,c[1],c[2]+s[2]/2+.004],[.009,s[1],.008],'steel',false);
@@ -182,30 +183,51 @@ export function addArchitecturalCirculation(layout){
     for(const sign of [-1,1])for(let y=c[1]-s[1]/2+.12;y<c[1]+s[1]/2;y+=.12)
       box(name+' return horizontal joint',[c[0]+sign*(s[0]/2+.004),y,c[2]],[.008,.009,s[2]],'steel',false);
   };
-  counter('Eisbar front counter',[17.5,7.6,-16],[3.6,1.05,.8]);
-  counter('Eisbar return counter',[15.95,7.71,-17.05],[.5,1.27,1.3]);
-  box('Eisbar back service shelf',[20.8,7.7,-17],[.6,.1,2.5],'stainless');
-  box('Eisbar coffee machine',[20.6,8,-17.4],[.5,.5,.7],'stainless');
-  box('Eisbar low refrigerator',[20.7,7.15,-16.5],[.65,1,.8],'steel');
+  counter('Eisbar front counter',[19.35,eisbarFloor+.8,-17],[3,.6,.8]);
+  counter('Eisbar return counter',[18.1,eisbarFloor+.9,-18.05],[.5,.8,1.3]);
+  box('Eisbar back service shelf',[18.75,eisbarFloor+.94,-21.35],[2.1,.1,.5],'stainless');
+  box('Eisbar coffee machine',[18.5,eisbarFloor+1.25,-21.35],[.7,.5,.45],'stainless');
+  box('Eisbar low refrigerator',[20.3,eisbarFloor+.5,-21],[.65,1,.8],'steel');
   flight('Eisbar narrow lower stair',14.1,-20,-14.5,9.95,6.65,1.6,19,false);
-  slab('Eisbar intermediate landing',[13.3,17.3],[-21.4,-20],9.95);
-  flight('Eisbar narrow upper stair',16.5,-20,-14.5,9.95,13.25,1.6,19,false);
-  slab('Eisbar upper service landing',[15.7,17.3],[-14.5,-13.3],13.25);
-  guard('Eisbar landing rear',13.3,-21.4,17.3,-21.4,9.95,false);
-  for(const x of [13.3,17.3])guard('Eisbar intermediate side',x,-21.4,x,-20,9.95,false);
-  guard('Eisbar intermediate middle',14.9,-20,15.7,-20,9.95,false);
-  for(const x of [15.7,17.3])guard('Eisbar upper side',x,-14.5,x,-13.3,13.25,false);
-  guard('Eisbar upper termination',15.7,-13.3,17.3,-13.3,13.25,false);
-  box('Eisbar crane track',[18.2,15.3,-17.5],[.24,.45,8],'steel');
-  box('Eisbar crane trolley',[18.2,14.95,-17],[.7,.3,.6],'steel');
-  box('Eisbar hoist cable',[18.2,13.8,-17],[.025,2,.025],'steel');
-  box('Eisbar hoist block',[18.2,12.75,-17],[.32,.4,.22],'steel');
-  box('Eisbar hook shank',[18.2,12.4,-17],[.055,.3,.055],'steel');
-  box('Eisbar hook bend',[18.27,12.24,-17],[.18,.06,.055],'steel');
-  box('Eisbar hook tip',[18.35,12.31,-17],[.055,.15,.055],'steel');
-  data.eisbar={gallery:['27','28','29'],floorHeight:6.65,counterAuthor:[17.5,7.6,-16],
+  slab('Eisbar intermediate landing',[13.3,21.4],[-21.6,-20],eisbarFloor,'floor');
+  slab('Eisbar mezzanine platform',[16.8,21.4],[-20,-13.2],eisbarFloor,'floor');
+  box('Eisbar platform cross beam',[19.1,eisbarFloor-.28,-18],[4.6,.4,.3],'concrete');
+  box('Eisbar platform wall beam',[21.25,eisbarFloor-.28,-17.4],[.3,.4,8.4],'concrete');
+  flight('Eisbar narrow upper stair',16.2,-20,-14.5,9.95,13.25,1,19,false);
+  slab('Eisbar upper service landing',[15.7,16.7],[-14.5,-13.3],13.25);
+  guard('Eisbar landing rear',13.3,-21.6,21.4,-21.6,eisbarFloor,false);
+  guard('Eisbar intermediate side',13.3,-21.6,13.3,-20,eisbarFloor,false);
+  guard('Eisbar intermediate middle',14.9,-20,15.7,-20,eisbarFloor,false);
+  guard('Eisbar mezzanine west',16.8,-20,16.8,-13.2,eisbarFloor,false);
+  guard('Eisbar mezzanine east',21.4,-21.6,21.4,-13.2,eisbarFloor,false);
+  guard('Eisbar mezzanine front',16.8,-13.2,21.4,-13.2,eisbarFloor,false);
+  for(const x of [15.7,16.7])guard('Eisbar upper side',x,-14.5,x,-13.3,13.25,false);
+  guard('Eisbar upper termination',15.7,-13.3,16.7,-13.3,13.25,false);
+  // G27's relief and window form a local backdrop beside the guarded opening.
+  // Their end-wall registration is inferred; no opening is cut into the hull.
+  box('Eisbar relief panel',[14.1,11.9,-21.72],[1.65,1.6,.08],'mainBarPlaster');
+  const medallion=box('Eisbar circular relief',[14.1,11.9,-21.655],[1.22,.058,1.22],'mainBarPlaster',false,
+    [[-1.22,0,0],[0,0,.058],[0,1.22,0]]);
+  medallion.shape='main-bar-medallion';
+  box('Eisbar high window recess',[14.1,14.15,-21.75],[1.5,2.15,.035],'rubber',false);
+  for(const x of [13.38,14.1,14.82])box('Eisbar window mullion',[x,14.15,-21.7],[.045,2.15,.035],'steel',false);
+  for(const y of [13.1,14.15,15.2])box('Eisbar window transom',[14.1,y,-21.7],[1.5,.045,.035],'steel',false);
+  box('Eisbar crane track',[18.2,16.3,-17.5],[.24,.45,8],'steel');
+  box('Eisbar crane trolley',[18.2,15.95,-17],[.7,.3,.6],'steel');
+  box('Eisbar hoist cable',[18.2,14.8,-17],[.025,2,.025],'steel');
+  box('Eisbar hoist block',[18.2,13.75,-17],[.32,.4,.22],'steel');
+  box('Eisbar hook shank',[18.2,13.4,-17],[.055,.3,.055],'steel');
+  box('Eisbar hook bend',[18.27,13.24,-17],[.18,.06,.055],'steel');
+  box('Eisbar hook tip',[18.35,13.31,-17],[.055,.15,.055],'steel');
+  data.eisbar={sources:['A01','I03','I04','I23','U01','U02'],gallery:['27','28','29'],
+    floorHeight:eisbarFloor,counterAuthor:[19.35,eisbarFloor+.8,-17],counterHeight:1.15,returnHeight:1.35,
+    authorGuestRoute:[[14.1,6.65,-14],[14.1,eisbarFloor,-20.7],[17.3,eisbarFloor,-20.7],
+      [17.3,eisbarFloor,-19.9],[17.3,eisbarFloor,-15.8],[18.8,eisbarFloor,-15.8],[18.8,eisbarFloor,-14.6]],
+    authorUpperRoute:[[14.1,6.65,-14],[14.1,eisbarFloor,-20.7],[16.2,eisbarFloor,-20.7],[16.2,13.25,-13.9]],
     stairUpperConnection:'Unresolved service-gallery destination; no invented Panorama doorway',
-    registration:'Estimated at rear end of long-bar bay; historical December2006 installation'};
+    registration:'Raised mezzanine supported by dated accounts/cutaways; datum, end bay, footprint and access routes estimated; historical December2006 installation',
+    section:'Distinct main-floor approach, guarded counter platform and onward ascent; crane/relief relationship estimated together'};
+  for(const kind of ['Guest','Upper'])data.eisbar['site'+kind+'Route']=data.eisbar['author'+kind+'Route'].map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
 
   // The photographed long axis projects OUT from the side wall. Background
   // buildings in G30 did not establish a main/Halle-join attachment. P08–10

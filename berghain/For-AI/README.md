@@ -10,6 +10,38 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Eisbar mezzanine correction — 25 October 2026
+
+I03/I04 describe a mezzanine containing the ice-cream bar; these are one dated
+eyewitness evidence chain, not two independent surveys. Karhard G27–29 show a
+guarded opening, tiled L counter, narrow onward ascent, relief/window backdrop
+and overhead crane. U01/U02 corroborate an elevated bar-end relationship.
+The former main-floor counter is replaced by a guarded intermediate platform,
+lower approach and separately bounded upper continuation. Counter, service
+furniture, crane, room arrival and local night cues move together.
+
+The intermediate datum 9.95 m, platform footprint, selected end bay, aisle and
+stair coordinates remain authoring estimates. This corrects the supported level
+relationship; it does not recover a measured section or present-day inventory.
+No Panorama doorway or backstage connection is inferred from the upper landing.
+Panorama/frontage registration, exact upper WC/FLINTA room and backstage remain
+unresolved. The full architectural goal stays ACTIVE.
+
+The repaired candidate passes 31 focused Node checks, nine final browser cases
+(source/native, real routes and fallback controls across desktop and both Android
+emulations), nine-before/nine-after cost samples, and independent Physics/Camera
+review. VALIDATION.md records the rejected glass-screen/light-placement version
+and the final repair. The upper stair is a narrow estimated service stair;
+its destination remains unresolved. Physical Android has not been tested.
+Publication/live status is recorded in output/berghain-eisbar-release.json.
+
+Next: reconcile Panorama frontage/window bays, stair mouth, upper toilets and
+lounge as a connected group. Read output/berghain-upper-registration-followup.md;
+do not rotate the existing rectangles without checking those connections.
+Backstage research in output/berghain-backstage-followup-20261025.md distinguishes
+unbuilt Kubus proposals and temporary concert dressing areas from permanent
+spaces. No current backstage location was recovered; that placement stays open.
+
 ### Smoking stair registration follow-up — 25 October 2026
 
 The current candidate corrects the smoking tower's long axis from parallel to
@@ -22,15 +54,16 @@ lighting move together. Upper Panorama attachment remains unresolved.
 V07/A22 now distinguish the historical upper urinal trial from later architect
 work; V08's room location is disputed. These are separate from ground cloakroom
 WC, Säule facilities and ordinary Panorama toilets. No exact current urinal
-room or backstage geometry is asserted. Eisbar's counter elevation and the
-Panorama/frontage registration remain pending source reconciliation.
+room or backstage geometry is asserted. The former main-floor Eisbar datum is superseded by the mezzanine correction
+above; its exact elevation and Panorama/frontage registration remain inferred.
 
 Candidate: output/berghain-smoking-runtime, frozen in
 output/berghain-smoking-candidate.json. Scoped Physics/Camera reviews pass,
 along with real desktop/mobile-emulated routes, native render/parity, fallback
 and nine-before/nine-after cost checks. VALIDATION.md retains the two rejected
-cladding iterations and final repair. Publication is the remaining release step;
-output/berghain-smoking-release.json will record its commit and live checks.
+cladding iterations and final repair. Published as c5bd07329a8d6e94fd70474c8bb7f134fdd14dc0. Pages run 40143577166
+succeeded; 86 public file hashes and three live desktop/mobile-emulated cases
+passed. output/berghain-smoking-release.json retains the release receipt.
 The full architectural goal remains ACTIVE.
 
 

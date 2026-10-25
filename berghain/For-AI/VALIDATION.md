@@ -45,6 +45,14 @@ Upper Panorama connection, exact sanitary/backstage registration and Eisbar
 counter elevation remain open. Publication/live proof belongs to
 output/berghain-smoking-release.json; the primary Git index stays untouched.
 
+Public checkpoint for the smoking correction: c5bd07329a8d6e94fd70474c8bb7f134fdd14dc0,
+Pages40143577166 success; 86/86 exact public files, six entry URLs and three
+fresh live browser cases on desktop/Android portrait/landscape emulation.
+The normal public view and short real inputs were checked on both viewer URLs.
+The release receipt retains the bounded scope and unresolved architecture.
+Primary source/GLB match the accepted candidate; original index unchanged.
+This paragraph is a local post-publication handoff, not a runtime change.
+
 ## Karhard architectural correction — 25 October 2026
 
 Accepted bounded candidate: `output/karhard-candidate.json`, SHA256 `0d256e3f59d0dabca21b44f8c1c997406d38ae5c009faaf6c592f1a4fb500166`,
@@ -2267,3 +2275,58 @@ catalogue updates change no frozen runtime/art/test byte. A later notes-only
 deployment does not invalidate the verified80c6660 model; its changed Markdown
 must be distinguished from already-deployed model assets. Full fidelity remains
 unaccepted and the broader reconstruction goal remains ACTIVE.
+
+
+## Eisbar mezzanine correction — final bounded acceptance
+
+Base c5bd07329a8d6e94fd70474c8bb7f134fdd14dc0; final 216-file runtime freeze
+output/berghain-eisbar-candidate.json, SHA256
+e681f55d6457552a21001c6052749944e9245bc08c351871737d7fa7630f318d.
+GLB SHA256 6a2a297bf6d187aa78529e22e90839691758a4f49ba54daf5f344f810b0bfa48;
+56,590,328 bytes, 742,928 triangles, 202 groups, 25 reused original textures.
+
+An initial added lower camera was inside existing furniture; only its test
+position was corrected. The first centreline routes passed but independent
+review found the wide upper landing crossing the retained glass screen and a
+counter cue shining through a retained beam. Those versions remain rejected in
+the earlier manifests/reports. The final upper flight/landing/guards are narrower
+and shifted clear of the screen; the cue starts below the beam. Arrival yaw now
+frames the stair/counter on portrait. No existing glass or column was removed.
+
+- 31 focused Node checks pass: Eisbar, architecture, main hall/bar, night cues,
+  sanitary topology and publication dependency closure. Receipt:
+  output/berghain-eisbar-final-node.txt.
+- Final browser report output/berghain-eisbar-final-browser/report.json passes
+  9/9: source/native geometry and seven native views, real counter and upper
+  stair roundtrips, room selectors, texture failure and resized/enlarged text,
+  each on desktop and Android portrait/landscape emulation. The room selector
+  is the starting shortcut; these are not claims of a new natural-entry tour.
+- Independent Physics: 32 roundtrips at 60/30 fps and .05/.1 s input; 42,184
+  accepted steps and 83,392 support samples, zero detected unsupported/illegal
+  positions or new-box overlap. Seven contact escapes and five recoveries pass.
+  Under-platform route clearance is at least 2.82 m; upper landing width is
+  0.86214 m before guard thickness and west rail clears glass by 0.11203 m.
+  All 15 viewpoints remain legal. Full source/native vertex error ≤0.000003815 m.
+- Independent Camera: the repaired cue first hits the counter worktop; upper
+  cue reaches its stair. Medallion has positive determinant and front-facing
+  relief. Rendered views, fallback and first-person clearance are reviewed in
+  output/berghain-eisbar-camera-review.md. Physics report retains the initial FAIL.
+
+Nine cold contexts before and after use the same main-hall view and three-second
+real input, on the same host/GPU. These measure shared model cost, not a matched
+Eisbar photograph or physical device. Full receipts:
+output/berghain-eisbar-cost-comparison.json and the before/after browser reports.
+
+| Profile | Median frame p95, ms | Median input latency, ms | Normal transfer bytes |
+| --- | --- | --- | --- |
+| desktop | 14.1 → 14.2 | 14.2 → 13.9 | 7470929 → 7473079 |
+| android-portrait | 7.1 → 7.1 | 15.3 → 15.6 | 7470929 → 7473079 |
+| android-landscape | 7.1 → 7.1 | 16.3 → 14.1 | 7470929 → 7473079 |
+
+No idle frames, automatic portable-GLB request or added texture family; drawing
+buffer remains at most 1.6 MP. All browser tests are isolated, headless and muted.
+Physical Android and perceptual audio are NOT RUN. Exact section, end bay,
+counter/column registration, current inventory and photometry remain estimates.
+Panorama and private/sanitary registration gaps are not completed by these tests.
+The broader goal remains ACTIVE. Publication is recorded separately in
+output/berghain-eisbar-release.json; the primary Git index stays untouched.

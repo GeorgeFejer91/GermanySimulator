@@ -262,8 +262,8 @@ for (const x of [-12, -6, 6, 12]) {
 export const viewpoints = {
   groundToilets:{label:'Ground toilets',position:{x:-13.2,y:.05,z:20.6},yaw:Math.PI/2,
     confidence:'Ground cloakroom adjacency supported; placement and fittings estimated',sources:['U02','A01']},
-  eisbar:{label:'Eisbar',position:{x:18,y:6.65,z:-14},yaw:.4,pitch:.2,
-    confidence:'Photographed form; dimensions and registration estimated',sources:['A01','I23','U02']},
+  eisbar:{label:'Eisbar',position:{x:18.8,y:9.95,z:-14.6},yaw:.32,pitch:.12,
+    confidence:'Raised mezzanine supported; datum, dimensions and registration estimated',sources:['A01','I04','I23','U02']},
   smoking:{label:'Smoking stair',position:Object.fromEntries(smokingToAuthor([27,13.25,-20]).map((v,i)=>[['x','y','z'][i],v])),yaw:2.8+Math.PI/2,pitch:-.4,
     confidence:'Photographed enclosure; upper interior connection unresolved',sources:['A01','I23','U02']},
   admission:{label:'Admission',position:{x:-6.3,y:.05,z:20.8},yaw:-.55,

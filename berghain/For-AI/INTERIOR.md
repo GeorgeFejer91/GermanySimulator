@@ -1,5 +1,22 @@
 # Berghain interior: objects, art and equipment
 
+### Eisbar mezzanine correction — 25 October 2026
+
+I03/I04 describe a mezzanine containing the ice-cream bar; these are one dated
+eyewitness evidence chain, not two independent surveys. Karhard G27–29 show a
+guarded opening, tiled L counter, narrow onward ascent, relief/window backdrop
+and overhead crane. U01/U02 corroborate an elevated bar-end relationship.
+The former main-floor counter is replaced by a guarded intermediate platform,
+lower approach and separately bounded upper continuation. Counter, service
+furniture, crane, room arrival and local night cues move together.
+
+The intermediate datum 9.95 m, platform footprint, selected end bay, aisle and
+stair coordinates remain authoring estimates. This corrects the supported level
+relationship; it does not recover a measured section or present-day inventory.
+No Panorama doorway or backstage connection is inferred from the upper landing.
+Panorama/frontage registration, exact upper WC/FLINTA room and backstage remain
+unresolved. The full architectural goal stays ACTIVE.
+
 ## Karhard and cutaway corrections — 25 October 2026
 
 25 October Karhard follow-up: the complete 35-image project gallery and the

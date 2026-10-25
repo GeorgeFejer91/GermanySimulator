@@ -63,7 +63,7 @@ test('smoking main-floor doorway and both enclosed flights connect in both direc
 });
 test('open escape flights below smoking enclosure and Eisbar stair remain traversable',()=>{
   walk([[24,.05,-20],[24,3.35,-11.3],[27,3.35,-11.3],[27,6.65,-20]].map(towerSite));
-  walk([[14.1,6.65,-14],[14.1,9.95,-20.7],[16.5,9.95,-20.7],[16.5,13.25,-13.9]].map(site));
+  walk(layout.architecturalCirculation.eisbar.siteUpperRoute);
 });
 test('new architecture has finite portable transforms, known materials and matching visible-part solids',()=>{
   const additions=layout.parts.filter(p=>p.architecturalCirculation);
@@ -89,9 +89,9 @@ test('replacement landing guards block the full body independently of missing fl
     ['main landing middle',[10,3.35,11.9],[10,3.35,13.1]],
     ['main top inner gap',[13.75,6.65,20.95],[13.75,6.65,19.9]],
     ['Eisbar intermediate side',[13.9,9.95,-20.7],[12.7,9.95,-20.7]],
-    ['Eisbar intermediate side',[16.7,9.95,-20.7],[17.9,9.95,-20.7]],
-    ['Eisbar intermediate middle',[15.3,9.95,-20.7],[15.3,9.95,-19.4]],
-    ['Eisbar upper side',[16.2,13.25,-13.8],[15.1,13.25,-13.8]],
+    ['Eisbar landing rear',[19,9.95,-20.8],[19,9.95,-22.2]],
+    ['Eisbar intermediate middle',[15,9.95,-20.7],[15,9.95,-19.4]],
+    ['Eisbar upper side',[16.2,13.25,-13.8],[15.2,13.25,-13.8]],
     ['smoking escape landing side',[27.7,3.35,-11.3],[28.8,3.35,-11.3]],
     ['smoking escape far end',[25.5,3.35,-11.3],[25.5,3.35,-10]],
     ['smoking escape middle',[25.5,3.35,-11.3],[25.5,3.35,-12.7]],
@@ -118,7 +118,7 @@ test('tower posts touch actual landing cross-girders and hoist is outside the up
     assert.ok(layout.parts.some(p=>p.name.includes('smoking')&&p.name.includes('landing')&&!p.name.includes('cross-girder')&&
       Math.abs(p.center[1]-p.size[1]/2-top)<1e-8));
   }
-  const p=site([16.2,11.95,-17]);assert.ok(canStand(p,layout));
+  const p=site([16.2,11.75,-17]);assert.ok(canStand(p,layout));
   for(const part of layout.parts.filter(p=>/Architecture Eisbar (hoist|hook)/.test(p.name))){
     const s=layout.solids.find(s=>s.renderPart===part);assert.ok(s,'Hoist has collision');
     const dx=p.x-Math.max(s.x[0],Math.min(p.x,s.x[1])),dz=p.z-Math.max(s.z[0],Math.min(p.z,s.z[1]));

@@ -54,12 +54,13 @@ async function route(ctx,targets,heading,tag,views={}){
 const hallApproach=[[5,6.65,8],[14,6.65,8],[16.1,6.65,7],[16.1,6.65,-14.3]].map(site);
 export default {name:'Karhard architectural circulation, fixtures and night cues',sourceFiles:lounge.sourceFiles,scenarios:[
  {id:'architecture-source-native',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
-  const v=site([18,6.65,-14]),target=site([16,9.3,-19]);
+  const v=site([18.8,9.95,-14.6]),target=site([17.4,12.3,-19]);
   const parity=await compareMaterialRender(ctx,{position:[v.x,v.y+1.68,v.z],target:[target.x,target.y,target.z]});
   const samples=[];
   for(const [name,a,b] of [
    ['main-stair',[5,.05,19],[10,3.1,15]],['main-wall',[5,6.65,-9],[5,12,-21]],
-   ['eisbar',[18,6.65,-14],[16,9,-18]],['smoking',smokingToAuthor([27,13.25,-20]),smokingToAuthor([24,10,-12])],
+   ['eisbar',[18.8,9.95,-14.6],[17.4,12.3,-19]],['eisbar-lower',[14.1,6.65,-14],[18.8,10,-17]],
+   ['smoking',smokingToAuthor([27,13.25,-20]),smokingToAuthor([24,10,-12])],
    ['smoking-exterior',[36,.05,15],[27,9,7]],['ground-toilets',[-13.2,.05,20.6],[-18,1,19.5]]
   ]){
    const p=site(a),t=site(b);assert.ok(canStand(p,layout),name);
@@ -93,14 +94,20 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   await ctx.artifacts.screenshot(ctx.page,'smoking-main-door-source.png');
   return {out:r.records,back:back.records,scope:'Main-floor room shortcut then real keyboard/touch approach through front-side doorway and outward smoking flights in both directions; upper interior connection remains closed'};
  }},
- {id:'architecture-eisbar-route',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
+ {id:'architecture-eisbar-route',modes:['quick','stress'],timeoutMs:300000,async run(ctx){
   let heading=await select(ctx,'berghain');
-  const stair=[[14.1,6.65,-14],[14.1,9.95,-20.7],[16.5,9.95,-20.7],[16.5,13.25,-13.9]].map(site);
-  let r=await route(ctx,[...hallApproach,...stair],heading,'eisbar-up',{4:[14.1,8,-17],5:[16.5,11,-18],7:[16.5,10.8,-18]});heading=r.heading;
-  assert.equal((await light(ctx.page)).room,'eisbar');await ctx.artifacts.screenshot(ctx.page,'eisbar-upper-source.png');
-  const back=await route(ctx,stair.toReversed(),heading,'eisbar-down');
+  const e=layout.architecturalCirculation.eisbar;
+  let r=await route(ctx,[...hallApproach,...e.siteGuestRoute],heading,'eisbar-counter',
+    {4:[14.1,8,-17],5:[16.2,11,-18],8:[19.35,11,-17],10:[18.4,11.5,-19]});heading=r.heading;
+  assert.equal((await light(ctx.page)).room,'eisbar');
+  assert.ok(Math.abs((await position(ctx.page)).y-e.floorHeight)<.15);
+  await routeView(ctx,heading,site([18.4,11.5,-19]),'eisbar-counter-source');
+  const counterBack=await route(ctx,e.siteGuestRoute.toReversed(),heading,'eisbar-counter-return');
+  const upper=await route(ctx,e.siteUpperRoute,counterBack.heading,'eisbar-upper',{3:[16.2,10.8,-18]});
+  await ctx.artifacts.screenshot(ctx.page,'eisbar-upper-source.png');
+  const back=await route(ctx,e.siteUpperRoute.toReversed(),upper.heading,'eisbar-down');
   await ctx.artifacts.screenshot(ctx.page,'eisbar-lower-source.png');
-  return {out:r.records,back:back.records,scope:'Main-floor shortcut then real input through both narrow Eisbar flights; endpoint remains a bounded service landing'};
+  return {out:r.records,counterBack:counterBack.records,upper:upper.records,back:back.records,scope:'Main-floor shortcut then real input to the raised counter and back, followed by upper stair roundtrip; endpoint remains a bounded service landing'};
  }},
  {id:'architecture-ground-toilets',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
   let heading=await select(ctx,'foyer');

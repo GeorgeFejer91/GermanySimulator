@@ -20,8 +20,11 @@ wing; no corridor across the main hall is justified by this correction.
 V07 establishes a December 2023 upper-urinal trial, predating the July 2024
 architect entry. It does not establish present inventory. V08's room testimony
 is disputed; do not identify ground WC or ordinary Panorama stalls as that room.
-AU26 backstage still lacks location evidence. Eisbar's counter datum also needs
-reconciliation with V05's above-bar account and the historical cutaways.
+AU26 backstage still lacks location evidence. AU09 now places Eisbar on a
+separate guarded mezzanine using I03/I04, G27–29 and U01/U02. Its 9.95 m datum,
+footprint, end bay and narrow access routes remain inferred; only the elevated
+relationship is supported. Upper stair destination stays unconnected. Functional
+acceptance is separately recorded in VALIDATION.md; exact section is unresolved.
 
 
 25 October Karhard/cutaway candidate supersedes the earlier AU08 omission
