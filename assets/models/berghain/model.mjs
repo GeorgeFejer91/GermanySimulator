@@ -46,7 +46,7 @@ export function createBerghainModel() {
     const Material=materials[materialName].transmission?THREE.MeshPhysicalMaterial:THREE.MeshStandardMaterial;
     const material = new Material({...materials[materialName]});
     configureInstanceNormals(material);
-    if(shape==='halle-mesh')material.side=THREE.DoubleSide;
+    if(shape==='halle-mesh'||/^speaker-(s26510l|s218study)-grille$/.test(shape))material.side=THREE.DoubleSide;
     if(section==='admission')configureSurfaceMaterial(material,
       ({admissionWall:'labWall',admissionScuff:'concrete',admissionZinc:'steel',admissionRust:'rust'})[materialName]??materialName);
     else if (shape === 'box'||shape==='upper-sanitary-slab'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')||shape.startsWith('halle-')||shape.startsWith('ground-')) configureSurfaceMaterial(material, materialName);

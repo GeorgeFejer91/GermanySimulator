@@ -1,5 +1,43 @@
 # Berghain interior: objects, art and equipment
 
+## Accepted Panorama PA correction — 25 October 2026
+
+This acceptance supersedes the pending draft entries below. The V3 product
+replaces two hidden tower proxies with four articulated line-array studies
+and six suspended double18 cabinet studies. All retained room connections,
+lighting, public routes and main-floor PA remain unchanged.
+
+The 2017 installer interview, manufacturer envelopes and later community
+reports support different parts of this reconstruction. Current counts,
+revisions, anchors, splay and support design remain inferred. Low-mid and DJ
+monitor placement remain unresolved; no acoustic or structural capacity claim.
+
+All 250 Node checks pass on the byte-identical V2 product/test sources; V3's
+seven actual-input, fallback and source/native browser checks pass. Eighteen
+matched cost contexts and both independent Physics/Camera reviews pass within
+their recorded scope. Desktop frame-p95 medians are 20.7→20.9 ms; both Android
+emulation profiles remain 7.1 ms. Normal load grows 11,178 bytes; the GLB adds
+4,254,896 bytes and remains demand-loaded. Night views resolve silhouettes;
+inspection lighting is needed for grille and mounting detail.
+
+Frozen evidence: output/berghain-panorama-pa-candidate-v3.json and its V2/V3
+bridge. Release assembly only prepends this status to four owning documents;
+product, export and test bytes remain frozen. Deployment verification is a
+separate gate recorded in output/berghain-panorama-pa-release.json. Physical
+Android NOT RUN. The full goal remains ACTIVE: precise private-room plans,
+current inventories and complete photographic fidelity remain unresolved.
+
+
+## Panorama PA V2
+
+Original thin, double-sided pierced grille sheets retain physical openings and recessed backing. V1 extruded hole walls exceeded the intended cost; V2 adds36,084 triangles and4,254,896 GLB bytes against the accepted base, with no new texture files or light sources. Current inventory, exact registration and support design remain inferred. Separate PA budget:40,000 triangles and twelve affected material/geometry groups. Full frozen-candidate verification pending; no publication acceptance.
+
+
+## Panorama PA draft
+
+Four articulated four-module line-array studies use S12/S14; six overhead double18 envelope studies combine dated S12 inventory with S15 dimensions and S17 later relocation reports. Anchors, splay, count/current revision and mounting remain provisional. Old hidden tall proxies and their solids retire together. Low-mid/DJ-monitor placement remains unresolved. Full acceptance pending; see README.
+
+
 ## Suspended main subwoofer array — candidate
 
 The six full F124 assemblies move from their obsolete left floor wall into

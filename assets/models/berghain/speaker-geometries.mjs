@@ -104,6 +104,87 @@ function speakerGeometry(specification) {
 }
 
 export function createSpeakerGeometries(){
-  return Object.fromEntries(Object.entries(speakerSpecifications).flatMap(([type,specification])=>
-    Object.entries(speakerGeometry(specification)).map(([surface,geometry])=>['speaker-'+type+'-'+surface,geometry])));
+  return {...createPanoramaSpeakerGeometries(),...Object.fromEntries(Object.entries(speakerSpecifications).flatMap(([type,specification])=>
+    Object.entries(speakerGeometry(specification)).map(([surface,geometry])=>['speaker-'+type+'-'+surface,geometry])))};
+}
+
+// Manufacturer envelopes, not a claim that the current installed revisions
+// are these products. Cabinet contours and grille pitch are original studies.
+export const panoramaSpeakerSpecifications=Object.freeze({
+  s26510l:{width:.605,height:.195,depth:.370,source:'S14'},
+  s218study:{width:1.180,height:.580,depth:.740,source:'S15'}
+});
+
+function createPanoramaSpeakerGeometries(){
+  const result={};
+  for(const [type,spec]of Object.entries(panoramaSpeakerSpecifications)){
+    const {width:w,height:h,depth:d}=spec,line=type==='s26510l',t=.012;
+    const buffers={cabinet:[],grille:[],lining:[],hardware:[]};
+    function append(target,geometry,center=[0,0,0],rotation=new THREE.Euler()){
+      geometry.rotateX(rotation.x);geometry.rotateY(rotation.y);geometry.rotateZ(rotation.z);geometry.translate(...center);
+      const flat=geometry.index?geometry.toNonIndexed():geometry;
+      buffers[target].push(...flat.attributes.position.array);
+      if(flat!==geometry)flat.dispose();geometry.dispose();
+    }
+    const box=(target,c,size)=>append(target,new THREE.BoxGeometry(...size),c);
+    const face=(target,a,b,c,e)=>buffers[target].push(...a,...b,...c,...a,...c,...e);
+    const rearH=line?.10:h,front=d/2,back=-d/2;
+    // Closed wedge shell; inner shadow and the grille are distinct surfaces.
+    const f=[[-w/2,-h/2,front],[w/2,-h/2,front],[w/2,h/2,front],[-w/2,h/2,front]];
+    const b=[[-w/2,-rearH/2,back],[w/2,-rearH/2,back],[w/2,rearH/2,back],[-w/2,rearH/2,back]];
+    for(let i=0;i<4;i++)face('cabinet',f[i],b[i],b[(i+1)%4],f[(i+1)%4]);
+    face('cabinet',b[3],b[2],b[1],b[0]);
+    for(const sign of [-1,1]){
+      box('cabinet',[sign*(w-t)/2,0,front-.012],[t,h,.024]);
+      box('cabinet',[0,sign*(h-t)/2,front-.012],[w-2*t,t,.024]);
+    }
+    box('lining',[0,0,front-.035],[w-.02,h-.02,.014]);
+    const plate=new THREE.Shape(),pw=w-.026,ph=h-.026;
+    plate.moveTo(-pw/2,-ph/2);plate.lineTo(pw/2,-ph/2);plate.lineTo(pw/2,ph/2);plate.lineTo(-pw/2,ph/2);plate.closePath();
+    const columns=line?19:27,rows=line?5:11,dx=pw/(columns+1),dy=ph/(rows+1),radius=Math.min(dx,dy)*.36;
+    for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
+      const hole=new THREE.Path(),x=(col-(columns-1)/2)*dx+(row%2?dx*.22:0),y=(row-(rows-1)/2)*dy;
+      for(let i=0;i<6;i++){const a=-i*Math.PI/3,p=[x+radius*Math.cos(a),y+radius*Math.sin(a)];if(i)hole.lineTo(...p);else hole.moveTo(...p);}
+      hole.closePath();plate.holes.push(hole);
+    }
+    // A thin, double-sided pierced sheet retains actual apertures without
+    // thousands of sub-pixel hole-edge quads. The cabinet rim supplies depth.
+    append('grille',new THREE.ShapeGeometry(plate,1),[0,0,front-.006]);
+    // Recessed sockets and corner hardware stay inside the product envelope.
+    box('lining',[0,0,back+.001],[line?.12:.16,line?.065:.12,.002]);
+    for(const x of [-.035,.035])append('hardware',new THREE.TorusGeometry(.01,.002,4,8),[x,0,back+.003]);
+    for(const sign of [-1,1]){
+      box('hardware',[sign*(w-.008)/2,0,front-.045],[.008,h*.82,.018]);
+      for(const y of [-h*.32,h*.32])box('hardware',[sign*(w-.010)/2,y,front-.025],[.010,.012,.024]);
+    }
+    for(const [surface,positions]of Object.entries(buffers)){
+      // Coplanar hexagon rows can make the triangulator emit zero-area faces.
+      // Remove only those faces before computing real surface normals.
+      const raw=new Float32Array(positions),clean=[],a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3();
+      for(let i=0;i<raw.length;i+=9){
+        a.fromArray(raw,i);b.fromArray(raw,i+3).sub(a);c.fromArray(raw,i+6).sub(a);
+        if(b.cross(c).lengthSq()>1e-18)for(let j=0;j<9;j++)clean.push(raw[i+j]);
+      }
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(clean,3));
+      g.computeVertexNormals();g.scale(1/w,1/h,1/d);g.computeBoundingBox();
+      result['speaker-'+type+'-'+surface]=g;
+    }
+  }
+  // Open flight-frame study: three pierced longitudinal ears and four
+  // crossmembers. No hidden cap or imported manufacturer mesh.
+  const frame=[];
+  const appendFrame=(g,position,rotate=0)=>{
+    g.rotateY(rotate);g.translate(...position);const flat=g.index?g.toNonIndexed():g;
+    frame.push(...flat.attributes.position.array);if(flat!==g)flat.dispose();g.dispose();
+  };
+  for(const x of [-.2995,-.003,.2935]){
+    const ear=new THREE.Shape();ear.moveTo(-.185,-.06);ear.lineTo(.185,-.06);ear.lineTo(.185,.06);ear.lineTo(-.185,.06);ear.closePath();
+    for(let i=0;i<9;i++){const hole=new THREE.Path();hole.absarc(-.16+i*.04,.032,.009,0,Math.PI*2,true);ear.holes.push(hole);}
+    appendFrame(new THREE.ExtrudeGeometry(ear,{depth:.006,bevelEnabled:false,curveSegments:4}),[x,0,0],Math.PI/2);
+  }
+  for(const z of [-.16,-.055,.055,.16])appendFrame(new THREE.BoxGeometry(.605,.02,.025),[0,-.05,z]);
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(frame,3));
+  g.computeVertexNormals();g.scale(1/.605,1/.12,1/.370);g.computeBoundingBox();
+  result['panorama-flightframe']=g;
+  return result;
 }

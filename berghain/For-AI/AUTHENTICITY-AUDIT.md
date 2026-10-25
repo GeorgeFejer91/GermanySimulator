@@ -1,5 +1,38 @@
 # Berghain interior authenticity audit
 
+## Accepted Panorama PA correction — 25 October 2026
+
+This acceptance supersedes the pending draft entries below. The V3 product
+replaces two hidden tower proxies with four articulated line-array studies
+and six suspended double18 cabinet studies. All retained room connections,
+lighting, public routes and main-floor PA remain unchanged.
+
+The 2017 installer interview, manufacturer envelopes and later community
+reports support different parts of this reconstruction. Current counts,
+revisions, anchors, splay and support design remain inferred. Low-mid and DJ
+monitor placement remain unresolved; no acoustic or structural capacity claim.
+
+All 250 Node checks pass on the byte-identical V2 product/test sources; V3's
+seven actual-input, fallback and source/native browser checks pass. Eighteen
+matched cost contexts and both independent Physics/Camera reviews pass within
+their recorded scope. Desktop frame-p95 medians are 20.7→20.9 ms; both Android
+emulation profiles remain 7.1 ms. Normal load grows 11,178 bytes; the GLB adds
+4,254,896 bytes and remains demand-loaded. Night views resolve silhouettes;
+inspection lighting is needed for grille and mounting detail.
+
+Frozen evidence: output/berghain-panorama-pa-candidate-v3.json and its V2/V3
+bridge. Release assembly only prepends this status to four owning documents;
+product, export and test bytes remain frozen. Deployment verification is a
+separate gate recorded in output/berghain-panorama-pa-release.json. Physical
+Android NOT RUN. The full goal remains ACTIVE: precise private-room plans,
+current inventories and complete photographic fidelity remain unresolved.
+
+
+## AU18 — Panorama PA draft
+
+Four four-module hangs and six flown double18 envelope studies replace the two hidden tall proxies in the isolated candidate. S12 dates the inventory to2017; S14/S15 support selected product forms; S17 describes later suspension. Exact current counts/revisions, anchors, splay and hardware are unverified. Low-mid and DJ-monitor registration remains unresolved. Acceptance pending; preserve all room/light/private-route geometry.
+
+
 ## Suspended main subwoofer array — candidate
 
 The floor-mounted main F124 wall contradicted S13/V19's dated post-December2023

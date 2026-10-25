@@ -55,11 +55,14 @@ test('every room viewpoint is on a legal floor and outside full-body solids', as
   }
 });
 
-test('calibrated solid height bounds match their actual rendered box matrices', async () => {
+test('calibrated solid height bounds match their actual rendered primitive envelopes', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   for (const solid of layout.solids.filter(solid => solid.renderPart)) {
     const matrix = solid.renderPart.matrix;
-    const radius = (Math.abs(matrix[1]) + Math.abs(matrix[5]) + Math.abs(matrix[9])) / 2;
+    // The standard ring has major radius0.5 and tube radius0.035; it is
+    // wider than the unit box used by the other registered solid envelopes.
+    const extent=solid.renderPart.shape==='ring'?[.535,.535,.035]:[.5,.5,.5];
+    const radius=Math.abs(matrix[1])*extent[0]+Math.abs(matrix[5])*extent[1]+Math.abs(matrix[9])*extent[2];
     assert.ok(Math.abs(solid.y[0] - (matrix[13] - radius)) < .00001, solid.name + ' lower bound');
     assert.ok(Math.abs(solid.y[1] - (matrix[13] + radius)) < .00001, solid.name + ' upper bound');
   }

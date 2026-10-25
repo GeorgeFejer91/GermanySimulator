@@ -188,8 +188,16 @@ test('Halle rendered slabs expose three voids and its original indexed guards st
    const ray=new THREE.Raycaster(center.clone().add(new THREE.Vector3(0,0,sign)),new THREE.Vector3(0,0,-sign));
    assert.ok(ray.intersectObject(panel).length,'Actual ribbon triangles are visible from either side');
   }
-  // Admission has its own measured geometry budget and must not consume Halle's.
-  let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh&&!mesh.name.startsWith('admission/')){groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*(mesh.count??1);}});
+  // Admission and the separate Panorama PA have their own bounded geometry
+  // checks. Exclude only actual PA instances; retain the existing Halle guard.
+  const paInstances=new Map();
+  for(const p of layout.parts.filter(p=>p.equipment?.startsWith('panorama-'))){
+    const key=[p.section,p.material,p.shape].join('/');paInstances.set(key,(paInstances.get(key)||0)+1);
+  }
+  let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh&&!mesh.name.startsWith('admission/')){
+    const retained=(mesh.count??1)-(paInstances.get(mesh.name)||0);
+    if(retained>0)groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*retained;
+  }});
   assert.ok(triangles<=658224+20000,`Triangle growth ${triangles-658224} exceeds the agreed provisional guard`);
   assert.ok(groups<=162+10,`Mesh/material-group growth ${groups-162} exceeds the agreed provisional guard`);
  }finally{disposeBerghainModel(model);}

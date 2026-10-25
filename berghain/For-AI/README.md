@@ -1,5 +1,116 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted Panorama PA correction — 25 October 2026
+
+This acceptance supersedes the pending draft entries below. The V3 product
+replaces two hidden tower proxies with four articulated line-array studies
+and six suspended double18 cabinet studies. All retained room connections,
+lighting, public routes and main-floor PA remain unchanged.
+
+The 2017 installer interview, manufacturer envelopes and later community
+reports support different parts of this reconstruction. Current counts,
+revisions, anchors, splay and support design remain inferred. Low-mid and DJ
+monitor placement remain unresolved; no acoustic or structural capacity claim.
+
+All 250 Node checks pass on the byte-identical V2 product/test sources; V3's
+seven actual-input, fallback and source/native browser checks pass. Eighteen
+matched cost contexts and both independent Physics/Camera reviews pass within
+their recorded scope. Desktop frame-p95 medians are 20.7→20.9 ms; both Android
+emulation profiles remain 7.1 ms. Normal load grows 11,178 bytes; the GLB adds
+4,254,896 bytes and remains demand-loaded. Night views resolve silhouettes;
+inspection lighting is needed for grille and mounting detail.
+
+Frozen evidence: output/berghain-panorama-pa-candidate-v3.json and its V2/V3
+bridge. Release assembly only prepends this status to four owning documents;
+product, export and test bytes remain frozen. Deployment verification is a
+separate gate recorded in output/berghain-panorama-pa-release.json. Physical
+Android NOT RUN. The full goal remains ACTIVE: precise private-room plans,
+current inventories and complete photographic fidelity remain unresolved.
+
+
+## Panorama PA browser-route correction — V3
+
+V3 retains every V2 product, native-asset and Node-test byte. Its browser route
+steps0.5m farther from the close hang before looking up: the old test eye needed
+1.156radians, just beyond the unchanged1.15radian look limit. Six V2 route cases
+failed that helper assertion; the source/native render case passed. Those
+results remain preserved. The product camera limit is unchanged.
+
+All250 V2 Node checks pass and both specialists' V2 physical/native checks pass
+within scope; exact hash bridging is required for V3. Fresh actual-input routes,
+matched cost and final reviewer decisions remain pending. Current candidate:
+output/berghain-panorama-pa-runtime-v3, freeze manifest candidate-v3.json.
+Last verified public release remains6dd1f8c; full goal ACTIVE.
+
+
+## Panorama PA geometry repair — V2
+
+V1 remains preserved and rejected: its fully extruded perforations added nearly
+100,000 triangles. V2 keeps real pierced grille sheets and recessed cabinet
+backing, using two-sided sheet materials only for the two new PA grille batches.
+This removes unseen3mm hole-edge quads without a new texture/rendering pipeline.
+The final draft export is65,914,188bytes and834,828 triangles: +4,254,896bytes
+and36,084 triangles against6dd1f8c, with225 groups and25 embedded textures.
+
+The existing Halle guard still has its original limits; actual Panorama PA
+instances now have a separate40,000-triangle/twelve-group cap. The solid-height
+check now measures the standard torus envelope correctly. Three focused repair
+checks pass. Full regression, actual source/native/day/night/fallback input,
+matched browser cost and both independent specialist gates remain pending.
+
+Frozen V2: output/berghain-panorama-pa-candidate-v2.json; runtime:
+output/berghain-panorama-pa-runtime-v2. V1's249-test run had247 passes and two
+failures; neither V1 nor V2 is accepted for publication yet. Preserve all V1
+negative evidence, the last verified release and primary staged index. Goal ACTIVE.
+
+
+## Panorama PA — active draft
+
+The current accepted release is 6dd1f8c (suspended main subwoofers), verified
+live on both entry pages and three desktop/Android-emulated profiles. AU18 is
+now the active correction: four four-module Studt line-array form studies and
+six provisional overhead double18-inch sub cabinets replace two hidden tall
+boxes. Independent preaudits found the old proxies behind the DJ-end lining;
+the new anchors fit the dance-room volume without moving architecture.
+
+The 2017 installer interview supplies the dated inventory, manufacturer sheets
+supply selected product envelopes, and 2025/2026 community reports support
+later overhead/down-firing subs. These are separate evidence layers. Current
+counts/revisions, exact anchors, splay, fasteners and rig capacity are unverified.
+Low-mid placement and exact DJ-monitor models remain unresolved; no historical
+floor sub wall or new unsupported private/public connection is added.
+
+Candidate: output/berghain-panorama-pa-runtime, based on the accepted commit.
+Source audit and independent preaudits: output/berghain-panorama-pa-*. Three
+focused Node checks pass after repairing degenerate grille triangles and
+choosing a baseline-clear crossing route. The draft lower sub rails were also
+corrected to contact all six cabinets. Full regression, source/native pixels,
+desktop/Android input, matched cost and frozen-candidate specialist reviews
+remain pending. Do not publish or call this draft accepted. Physical Android
+NOT RUN; full goal ACTIVE. Preserve prior immutable releases and staged index.
+
+
+### Published suspended main subwoofers
+
+Commit `6dd1f8cf03cf117a6e0bc64050f09f7592b6ecb1`; Pages run 40227040778 succeeded. All93 checked
+public files match, six entry URLs respond, and three live browser profiles
+pass. Receipt: output/berghain-suspended-subs-release.json. Primary staged index unchanged.
+
+S13/V19's reported overhead relocation is implemented, clearing the former
+floor wall. Six complete F124 cabinet/collider assemblies retain manufacturer
+dimensions. Hanging height, anchor, downward orientation and support details
+remain provisional. Other PA, rooms, lighting and circulation are unchanged.
+No structural capacity or acoustic simulation is claimed.
+
+244 Node checks, seven local browser cases, eighteen matched cost contexts
+and independent Physics/Camera reviews pass within their recorded scope.
+Physical Android NOT RUN. Full goal ACTIVE. The separate Panorama PA remains
+a supported dated-installation discrepancy (S12/AU18); current backstage plans,
+measured room registration and comprehensive photographic fidelity remain
+unresolved. Preserve the immutable suspended-array review snapshot and prior
+upper-sanitary release evidence.
+
+
 ## Suspended main subwoofer array — candidate
 
 S13 and V19 report that the left floor-mounted F124 wall moved overhead in

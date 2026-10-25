@@ -1,5 +1,15 @@
 # Berghain architectural study
 
+## Panorama PA V2
+
+Original thin, double-sided pierced grille sheets retain physical openings and recessed backing. V1 extruded hole walls exceeded the intended cost; V2 adds36,084 triangles and4,254,896 GLB bytes against the accepted base, with no new texture files or light sources. Current inventory, exact registration and support design remain inferred. Separate PA budget:40,000 triangles and twelve affected material/geometry groups. Full frozen-candidate verification pending; no publication acceptance.
+
+
+## Panorama PA original geometry
+
+Original cabinet, perforated grille, pierced flight-frame and visual support geometry follows S12/S14–S17. Third-party photographs, PDFs and CAD remain research-only. Product envelopes are not a verified current venue inventory; current anchors/count/revision/splay, hardware and rig capacity are unverified. No acoustic simulation is provided.
+
+
 ## Main subwoofer suspension
 
 S13/V19 support overhead relocation since December2023. The six original

@@ -1,6 +1,6 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures,fitFoyerChairs} from './interior-fixtures.mjs';
-import {addSoundSystem,suspendMainSubwall} from './sound-system.mjs';
+import {addSoundSystem,suspendMainSubwall,fitPanoramaSoundSystem} from './sound-system.mjs';
 import {addArtworks,artworkMaterials} from './artworks.mjs';
 import {addLandscape, landscapeMaterials} from './landscape.mjs';
 import {addExteriorDetails} from './exterior-details.mjs';
@@ -53,7 +53,8 @@ export const materials = {
   upholstery: {color:'#282825',roughness:.88},
   aluminium: {color:'#8b9087',roughness:.38,metalness:.72},
   opal: {color:'#cbd6c2',roughness:.6,emissive:'#8abc9b',emissiveIntensity:.35},
-  speakerViolet:{color:'#73657c',roughness:.82}
+  speakerViolet:{color:'#73657c',roughness:.82},
+  paRedMetal:{color:'#822f28',roughness:.58,metalness:.4}
 };
 
 export const layout = {units: 'metres', confidence: 'provisional', floors: [], solids: [], parts: []};
@@ -360,3 +361,4 @@ fitMainHallRoofFrame(layout);
 registerGround(layout,viewpoints);
 fitUpperSanitary(layout);
 suspendMainSubwall(layout);
+fitPanoramaSoundSystem(layout);
