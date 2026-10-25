@@ -80,8 +80,8 @@ function fitWindowWall(layout){
   for(const fraction of [-.5,-1/6,1/6,.5])box(i+' inner upright',[x+width*fraction,(low+high)/2,z],[.045,high-low,.065]);
   for(const fraction of [0,.25,.5,.75,1])box(i+' inner transom',[x,low+(high-low)*fraction,z],[width,fraction===.5?.085:.035,.065]);
  }
- // DJ-end wall visible in I19 gallery04. The public rear opening's exact
- // location is an estimate; it reaches the existing ordinary WC/lounge aisle.
+ // Estimated lower DJ-end boundary and public opening. I19 gallery04 is Klo
+ // Bar, not evidence for this wall; the upper fit uses the overlook in13/14.
  for(const [a,b] of [[7.4,10],[12,21.56]])box('DJ end lining',[.62,11.5,(a+b)/2],[.16,4.9,b-a],'pale');
  box('DJ end entry header',[.62,12.9,11],[.16,2.1,2],'pale');
  layout.panoramaRegistration.windowRoom={sources:['I19','P02','P16'],count:6,

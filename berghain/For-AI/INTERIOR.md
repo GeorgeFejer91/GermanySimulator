@@ -1,5 +1,33 @@
 # Berghain interior: objects, art and equipment
 
+## Separate upper sanitary room and compact DJ overlook
+
+V07's dated six-unit trial, the fuller V08 clarification and V19's split-level
+account support separating upper urinals from ordinary Panorama WC below.
+I19 images08–12 show turning printed glazing and a clear-fronted garment
+compartment;13/14 show a compact guarded view above the DJ. The former wardrobe
+identification is testimony correlated with those images, not an architect's
+dimensioned current toilet plan. Gallery04 is Klo Bar and no longer serves as
+evidence for a blank Panorama DJ-end wall.
+
+`upper-sanitary.mjs` applies one final-world fit on the retained12.15 slab.
+The estimated room X2.55–4.30/Z12.05–21.31 meets the skewed rear glass plane;
+its east door branches from the existing upper arrival. Six illustrative
+recessed stainless bowls follow MSS24's750×320×185mm product form and curved
+rails, with inferred spacing, shared aisle and floor construction. Current
+installed product revision/count, privacy treatment, drainage and other hidden
+services are unverified. No source photographs or Brandenburg artwork pixels
+are shipped. The room is a visual/navigation study, not a use/accessibility plan.
+
+The raised sofa remains intact. One three-metre chaise is rigidly moved to the
+north lounge strip; modern furniture placement is estimated. The narrow gap
+behind the sofa is not a circulation aisle. The retained west guard borders a
+small viewing opening in the inferred lining; the0.38m unsupported separation
+is not filled or made walkable. The reported entrance-to-Panorama/front stair
+still lacks a separate registered route. No private backstage connection is
+added. README/VALIDATION own candidate acceptance and publication status.
+
+
 ## DJ bay independent-review repair — v2
 
 V1 was rejected: the thicker wall embedded two satellite cabinets and the
@@ -52,7 +80,7 @@ placed relative to other rooms without establishing surveyed coordinates:
 | Space | Supported relationship | Still unresolved in the model |
 | --- | --- | --- |
 | Ground FLINTA cubicles | Within ground-floor Säule, before the stairs (V09); distinct from upper urinals | Exact entrance, boundaries, count and relationship to the older quiet cloakroom WC |
-| Upper FLINTA urinals | Near the top of the Panorama stair, separate from ordinary Panorama cubicles (V07/V08/V10) | Which landing and former room; visitors disagree about the balcony-adjacent room; 2023 trial count is not current inventory |
+| Upper FLINTA urinals | Upper stairhead; former overflow cloakroom between chill and overlook, with the initial V08 denial later withdrawn (V07/V08/V10/V19) | Provisional separate upper room now fitted to the glass-corner/overlook relationship; metric registration, reported front stair and current inventory remain unverified |
 | Garden urinals | Reported on the left upon entering the garden (V10) | Which entry is meant in site coordinates, fixtures, footprint and seasonal configuration |
 | Main-floor private toilet | Compact space behind the DJ curtain in V11; booth-associated toilet independently corroborated by V12 | Private room outline, service connections, furnishing and exact access sequence; existing closed recess does not reconstruct its interior |
 | Alleged Panorama private room | V13 contains incompatible accounts | Existence/location cannot be accepted from that thread alone |

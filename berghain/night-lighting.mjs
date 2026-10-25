@@ -99,6 +99,9 @@ cues.panoramaStair=[worldSpot([5.4,8.5,5.83],[5.4,6.1,5.83],'#afbad0',65,1,8),
 cues.frontPublicWing=[worldSpot([10,8.5,9.6],[10,5.45,9.6],'#b7a185',75,1.1,8),
  worldSpot([14,8.5,12.8],[14,5.45,12.8],'#b7a185',70,1.1,8),
  worldSpot([17.4,8.5,10.25],[17.5,5.45,10.25],'#b7a185',75,1.1,8)];
+cues.upperSanitary=[14,17,20].map(z=>worldSpot([3.85,14.65,z],[3.1,12.25,z],'#b4c4b5',55,.95,6));
+cues.panoramaOverlook=[cues.panorama[0],cues.panorama[1],
+ worldSpot([2.1,14.1,14.4],[1.7,12.15,14.4],'#c8ab88',30,1,5)];
 
 function roomAt(p){
   if(p.z>22.28)return 'outside';
@@ -111,6 +114,8 @@ function roomAt(p){
   if(p.x>22)return 'garden';
   if(p.x>-.7&&p.x<8.5&&p.z>4.3&&p.z<7.3&&p.y>5.2&&p.y<9.2)return 'panoramaStair';
   if(p.x>4.95&&p.x<12.85&&p.z>8.9&&p.z<11.4&&p.y>8.9&&p.y<12.3)return 'loungeStair';
+  if(p.y>11.6&&p.x>2.55&&p.x<4.30&&p.z>12.05&&p.z<21.31)return 'upperSanitary';
+  if(p.y>11.6&&p.x>1.05&&p.x<2.55&&p.z>12.05&&p.z<17)return 'panoramaOverlook';
   if(p.y>11.6)return 'lounge';
   if(panoramaSanitaryAt(p))return 'panoramaToilets';
   if(panoramaPassageAt(p))return 'panoramaPassage';

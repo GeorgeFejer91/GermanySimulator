@@ -20,6 +20,7 @@ import {addGroundSanitary} from './ground-sanitary.mjs';
 import {registerPanorama} from './panorama-registration.mjs';
 import {registerMainHall} from './main-hall-registration.mjs';
 import {registerGround} from './ground-registration.mjs';
+import {fitUpperSanitary} from './upper-sanitary.mjs';
 
 export const materials = {
   ...admissionMaterials,
@@ -357,3 +358,4 @@ registerPanorama(layout,viewpoints);
 registerMainHall(layout,viewpoints);
 fitMainHallRoofFrame(layout);
 registerGround(layout,viewpoints);
+fitUpperSanitary(layout);

@@ -1,5 +1,44 @@
 # Berghain viewer validation
 
+### Recess underside repair — V4
+
+The integrator found that V3's full-depth holes plus one-sided bowl surfaces
+exposed the upper room from below. V4 limits recess construction to the upper
+0.19m and retains a solid0.21m slab underside. Top footprint, floor support,
+fixtures, furniture, collision, routes and lights are unchanged. Six upward
+negative probes now require the original11.75 underside; the source/native
+browser probes also include an upward ray. V1/V2/V3 evidence is preserved.
+Fresh V4 validation and both reviews are required before release.
+
+
+### Upper sanitary review repair — V2
+
+V1 was rejected because the new recessed slab shape lost the retained mineral
+surface configuration. V2 restores its original base, normal and roughness
+maps in both source and portable asset. A regression checks both independently
+of source/native pixel equality. Geometry, fixtures, floor support, routes and
+light cues are unchanged from V1. The rejected snapshot and reviews remain
+preserved. Fresh V2 browser/cost checks and both specialist approvals are pending.
+
+
+### Published main DJ bay correction
+
+Commit `01321839e10bcdbfbcb4f25be15ad00c8970e13d`; Pages run 40217653915 succeeded. All 92 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-dj-bay-release.json. Primary staged index unchanged.
+
+Karhard G19/G24 now inform the lower recessed curtain opening, thin supported
+counter, retained open guard and red curtain accent. All public floors, toilets,
+smoking connections and Eisbar lanes remain intact. Dimensions, equipment and
+current lighting programs remain inferred. V11's reported private WC association
+is recorded without an invented cubicle or hidden corridor.
+
+237 Node checks, seven local browser cases, eighteen matched cost contexts and
+independent Physics/Camera reviews pass within their recorded scope. Physical
+Android NOT RUN. Full goal ACTIVE; exact current backstage/FLINTA plans and
+unmeasured dimensions remain unresolved.
+
+
 ## DJ bay independent-review repair — v2
 
 V1 was rejected: the thicker wall embedded two satellite cabinets and the

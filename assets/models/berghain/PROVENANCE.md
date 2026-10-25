@@ -1,5 +1,15 @@
 # Berghain architectural study
 
+## Upper sanitary and overlook fit
+
+V07/V08/V19 and Karhard I19 images08–14 support relative upper-room/overlook
+relationships. The new original procedural bowls/rails use public MSS24 product
+dimensions (A23); no research image, logo or artwork pixels are embedded.
+Room/door coordinates, fixture count and spacing, construction and current
+installation identity remain inferred. The public front-stair correspondence
+is still unregistered. The portable manifest owns current asset size/hash.
+
+
 The initial frontage candidate was held after Physics review found pre-existing
 decorative rustication strips spanning the open entrance. This repaired candidate
 trims those strips at the existing jamb aperture, including above head height.

@@ -22,7 +22,7 @@ async function beforeArchitecturalAdditions(){
  const layoutURL=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
  const encode=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
  const absolute=(source,url)=>source.replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
- const source=readFileSync(layoutURL,'utf8').replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('fitMainHallRoofFrame(layout);','').replace('addGroundSanitary(layout);','').replace('registerPanorama(layout,viewpoints);','').replace('registerGround(layout,viewpoints);','');
+ const source=readFileSync(layoutURL,'utf8').replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('fitMainHallRoofFrame(layout);','').replace('addGroundSanitary(layout);','').replace('registerPanorama(layout,viewpoints);','').replace('registerGround(layout,viewpoints);','').replace('fitUpperSanitary(layout);','');
  const baselineURL=encode(absolute(source,layoutURL)),baseline=await import(baselineURL);
  const modelURL=new URL('../assets/models/berghain/model.mjs',import.meta.url);
  const modelSource=readFileSync(modelURL,'utf8').replace("from './layout.mjs'",`from '${baselineURL}'`);
