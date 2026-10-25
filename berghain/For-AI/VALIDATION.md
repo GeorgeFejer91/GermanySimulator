@@ -1,5 +1,47 @@
 # Berghain viewer validation
 
+### Spatial club-lighting acceptance
+
+The frozen candidate passes 17 affected Node checks and seven browser cases:
+open-floor access and four eye directions on desktop and both Android-emulated
+orientations, landscape texture failure, and natural admission/main-stair/bar/
+exit routes on all three profiles. Toilets, smoking stairs and foyer retain
+their circulation lighting; daylight restoration passes. An additional matched
+desktop baseline supplies before/after views. Physical Android is NOT RUN.
+
+Nine cold contexts before and nine after use continuous two-second rightward
+input at the same main-floor arrival. The scoped cost comparison passes; idle
+rendering stops, no GLB is requested during normal viewing, and no extra light,
+texture, timer or render loop is introduced. Earlier timed-turn samples are
+retained but excluded from frame-cadence acceptance because their injected input
+gaps dominate frame spacing. Two initial view harness errors (hidden room
+selector and early daylight assertion) and a route into a retained speaker
+cabinet are also preserved; the corrected route passes without runtime repair.
+
+The only production change is the main-floor three-cue definition. All geometry,
+materials, navigation and portable GLB bytes are unchanged. Three scene cues
+and two 512px shadow maps are reused alongside the six retained bar uplights.
+Independent reviewers check the same 226-file freeze and this Markdown-only
+acceptance bridge. Their final reports and publication receipt are in output
+under the berghain-spatial-light prefix; local checks alone do not prove release.
+
+L09 supports the spatial lighting principle, not exact coordinates, colors,
+output or a current show. The three sources clear existing fixture geometry;
+the first two center rays reach opposed architectural surfaces, while the third
+reaches the real floor. The third cue retains its prior non-shadowing budget.
+Full goal ACTIVE: current backstage/FLINTA locations, L09 schematic registration,
+the F06 compact-chair aisle and full photographic fidelity remain unresolved.
+Source follow-up: output/berghain-spatial-light-source-followup.md.
+
+
+## Spatial club-lighting candidate
+
+Base1a48630bdabb4e873f747acd30b27451c03351ec. The production change is limited
+to the main-floor three-light cue. Fresh results are recorded above; independent reviews bind this exact candidate. Physical Android remains NOT RUN.
+The initial before-view harness omitted entering the model before selecting a
+room; its failed report is retained. This is a harness error, not a runtime fix.
+
+
 ### Main-bar return acceptance
 
 The three added stools pass 36 fresh affected Node checks and seven browser

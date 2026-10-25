@@ -203,7 +203,17 @@ The popular “Berghain empiric study” crowd-type cartoon is not a building bl
 | L06 | [IVL Photon user manual AF](https://minuitune.com/wp-content/uploads/2025/11/IVL-PHOTON-USER-MANUAL-AF.pdf) | **Primary PDF**, downloaded; dimension page5 rendered and visually inspected. Drawing shows480mm housing diameter,651mm overall hardware width,556mm total height,329mm depth and another545mm front span. | Zero-based render index4. Preserve revision/hash and differences from L03; no exact installed-unit identification. |
 | L07 | [IVL Dice CAD library](https://minuitune.com/wp-content/uploads/2023/12/CAD-files-Library-for-IVL-Dice.zip) | **Primary3D CAD archive**, downloaded/CRC checked:3,905,368bytes, containing IVL Dice - 3D.DWG. Exact archive hash/member sizes in ivl-cad-metadata.json. | DWG geometry and units not decoded/imported. No CAD geometry shipped and no reuse licence established. |
 | L08 | [IVL Photon CAD library](https://minuitune.com/wp-content/uploads/2023/02/IVL-Photon-CAD-files.zip) | **Primary CAD archive**, downloaded/CRC checked:20,481,562bytes, containing one3D DWG and front/top/side2D DWGs. Exact archive hash/member sizes in ivl-cad-metadata.json. | Geometry/units remain uninspected; no club placement or licence inferred. Numeric dimensions can guide original authoring. |
+| L09 | [Natalie Heckl — Momente des Lichts: Design für temporäre Lichträume](https://publikationsserver.thm.de/xmlui/handle/123456789/452), in *Herausforderungen in der Veranstaltungstechnik und im Veranstaltungsmanagement*, 2024, pp. 19–23, DOI 10.25716/thm-399. | **Primary design-research chapter**, public university PDF acquired; chapter text and rendered pp. 20–21 inspected. Describes Berghain's decentralized DJ position, central trusses, multidirectional dance-floor light and side walls as additional illuminated planes. | Qualitative analysis, not photometry or a measured plan. Fig.2 is an unscaled schematic despite its section caption; orientation and room registration remain unresolved. Every photographed venue example is Printworks. No Berghain fixture count, color cue, intensity, live choreography or private-room coordinates inferred. |
+| L10 | [Stadt nach Acht 2019 — Natalie Heckl](https://2019.stadt-nach-acht.de/speaker/natalie-heckl/index.html) | **Primary conference biography** identifies Heckl as a lighting designer/engineer at Berghain Ostgut GmbH in 2019. | Corroborates relevant experience, not current employment or independent verification of every L09 drawing. |
 
+L09 research download: `references/downloads/thm-science-talks-2024.pdf`,
+2,234,002bytes, SHA256
+`1b13aad9ada9706f1d4df5ac4c754854596eda1ab58ad7ed8f3c80c8f2bf4884`.
+PDF and rendered pages stay in ignored research/output; no third-party pixels
+or figures are shipped. The three scene cues, alongside retained bar practicals, represent one steady
+appearance study rather than the complete real rig. Opposing washes and a separate
+floor pool apply L09's spatial principle using estimated coordinates and the
+existing palette. The source does not resolve contemporary toilets/backstage.
 
 ## Artworks and installation history
 

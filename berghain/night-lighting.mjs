@@ -9,8 +9,9 @@ import {panoramaWorldPoint,panoramaPassageAt} from '../assets/models/berghain/pa
 import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 
 // Appearance study: I23/I24 establish localized architectural wash; L01
-// establishes colored club lighting, but neither gives current positions,
-// candela or a programmed show. These steady cues are authored, not a rig survey.
+// establishes colored club lighting. L09 describes multidirectional dance-floor
+// and side-wall light. Positions, colors and output remain authored estimates;
+// this steady moment does not reproduce a measured rig or a programmed show.
 const spot=(position,target,color,intensity,angle=.65,range=24)=>({position,target,color,intensity,angle,range});
 const cues={
   ...architecturalCues(spot),
@@ -18,7 +19,9 @@ const cues={
   admission:[...[18.05,20.45].map(z=>spot([-5.25,2.79,z],[-5.25,.6,z],'#e1dcc9',160,1.25,10)),
     spot([-3.1,1.94,18.55],[-3.1,1.1,17.5],'#e8dcc5',60,1.1,5)],
   foyer:[spot([7,5.9,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',130,1.1,12),spot([-3,3.8,14.7],[-4,.05,14.4],'#c1a688',140,1.25,10)],
-  berghain:[spot([2,16,-8],[6,5.45,-13],'#bb3025',1000,.43,24),spot([10,15,0],[4,5.45,-1],'#537bc0',760,.48,22),spot([5,12,-14],[5,11,-21.5],'#a26051',260,.9,14)],
+  // Opposing architectural planes and a separate floor pool avoid making the
+  // DJ wall the only illuminated vertical focus. Sources clear the truss bodies.
+  berghain:[spot([2,14.3,-6],[-7.5,7.7,-6],'#bb3025',1000,.62,24),spot([10,14.3,4],[21.7,9.8,-2],'#537bc0',760,.62,24),spot([6,14.3,-16],[5,5.45,-10],'#a26051',260,.6,15)],
   panorama:[spot([-18,17,-14],[-12,13.25,-14],'#b34375',230,.8,13),spot([-8,17,-8],[-14,13.25,-8],'#567db1',180,.78,12),spot([-8,17,3],[-9,13.25,3],'#d5a06e',75,.8,9)],
   panoramaToilets:[-1.9,.3,2.5].map(z=>spot([-19.3,15.6,z],[-18.7,13.25,z],'#a7b9a8',100,1.1,7)),
   lounge:[-3.7,3,8.2].map(z=>spot([-20.4,18.7,z],[-16,16.35,z],'#cd9a70',90,.9,11)),
