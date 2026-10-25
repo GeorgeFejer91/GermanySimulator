@@ -49,7 +49,7 @@ export function createBerghainModel() {
     if(shape==='halle-mesh'||/^speaker-(s26510l|s218study)-grille$/.test(shape))material.side=THREE.DoubleSide;
     if(section==='admission')configureSurfaceMaterial(material,
       ({admissionWall:'labWall',admissionScuff:'concrete',admissionZinc:'steel',admissionRust:'rust'})[materialName]??materialName);
-    else if (shape === 'box'||shape==='upper-sanitary-slab'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')||shape.startsWith('halle-')||shape.startsWith('ground-')) configureSurfaceMaterial(material, materialName);
+    else if (shape === 'box'||shape==='upper-sanitary-slab'||shape.startsWith('climber-')||shape.startsWith('lounge-')||shape.startsWith('together-')||shape.startsWith('lab-')||shape.startsWith('main-bar-')||shape.startsWith('saule-')||shape.startsWith('halle-')||shape.startsWith('ground-')) configureSurfaceMaterial(material, materialName, section);
     const mesh = new THREE.InstancedMesh(geometries[shape], material, parts.length);
     mesh.name = key;
     mesh.castShadow = !material.transparent && !material.transmission && !parts.every(part => part.center && part.center[1] + part.size[1] / 2 < .15);

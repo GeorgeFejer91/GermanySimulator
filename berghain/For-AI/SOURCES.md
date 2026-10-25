@@ -1,5 +1,18 @@
 # Berghain online resource catalogue
 
+### Mineral surface observations — 26 October 2026
+
+Reinspection of I23 views12/14/16 shows pale remaining plaster, grey exposed
+patches, vertical staining and uneven repairs around the main bar's reliefs,
+pilasters and reveals. A15 view01 and I24/detail show rough aggregate loss,
+discontinuous wear and shallow horizontal casting seams on Säule's concrete.
+These observations support distinct material studies, not a registered damage
+map. Their original procedural textures use inferred tile scales and relief.
+Photograph exposure and colored illumination are not baked into albedo.
+
+Individual photo dates, precise patch locations, concrete loss depths and current
+condition remain unverified. No site pixels are used by build-materials.py.
+
 ### Radiator, window and connected-section correction — current candidate
 
 The previous joint section placed 0.8025 m rigid radiators partly over the

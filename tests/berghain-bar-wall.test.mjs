@@ -82,12 +82,12 @@ test('the lower circular reliefs and their panels are fully visible above the se
  }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
 
-test('bar plaster retains aged physical maps and practical beams reach the actual pilaster faces',()=>{
+test('bar plaster uses its own physical maps and practical beams reach the actual pilaster faces',()=>{
  const model=createBerghainModel();model.updateMatrixWorld(true);
  try{
   const wall=model.getObjectByName('interior/mainBarPlaster/box');
   assert.ok(wall,'The photographed wall must have its own worn plaster surface');
-  assert.equal(wall.material.userData.surface.family,'aged');
+  assert.equal(wall.material.userData.surface.family,'plaster');
   const lights=[];model.traverse(object=>{if(object.isSpotLight)lights.push(object);});
   assert.equal(lights.length,6,'Localized warm pilaster wash must exist as actual lights');
   const wallMeshes=[];model.getObjectByName('interior').traverse(object=>{if(object.isMesh)wallMeshes.push(object);});

@@ -1,5 +1,37 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted main-bar plaster and Säule concrete — 26 October 2026
+
+I23 main-bar photographs support mostly continuous pale plaster with localized
+scars and streaking; A15/I24 support rougher eroded cast concrete in Säule.
+Two original 512-pixel PBR families distinguish these finishes. Tile scale,
+patch position and relief are estimates, not a registered scan. No photo pixels
+are copied. The new concrete finish and neutral tint apply only to interior
+Säule batches; Halle and Lab retain their previous maps and palette.
+
+The shared live-model normal maps now follow the tangent-free GLB loader's
+negative-Y convention, including clearcoat. This fixes a demonstrated shading
+disagreement without changing geometry. All 17,256 parts, 6,169 solids, floors,
+viewpoints and light definitions remain exact. Eight export groups have changed
+UV scale; all positions, normals, instance colors and indices remain exact.
+The export retains 837,388 triangles and 226 groups, with 31 embedded textures.
+The viewer loads 32 textures including the shared reflection map.
+
+V1 was rejected for dense plaster mottling. V2 exposed an unintended Halle
+material change, which V3 removes. V4 corrects only a test's omitted existing
+structure/labWall expectation; its runtime/export/browser suite is byte-identical
+to V3. V4 passes all 259 Node tests. Fifteen frozen V3 browser cases cover broad
+source/native comparisons and actual loaded/fallback round trips across desktop
+and Android portrait/landscape emulation, including desktop context recovery.
+Matched costs and independent Physics/Camera reviews pass. Physical Android
+NOT RUN. Rejected evidence is preserved; no failed candidate is accepted.
+
+Frozen acceptance: output/berghain-mineral-surfaces-candidate-v4.json.
+Deployment is verified separately in output/berghain-mineral-surfaces-release.json.
+The full goal remains ACTIVE: source-specific Säule belt wash, private plans,
+lift registration, selected-date artwork and broader photographic fidelity
+remain open. This is a source-informed improvement, not a verified digital twin.
+
 ## Accepted upper-lounge form correction — 25 October 2026
 
 Karhard's expanded Panorama image 19 supports faceted dark/plum seats, a partial

@@ -1,5 +1,45 @@
 # Berghain viewer validation
 
+## Mineral surface V4 — accepted scoped validation, 26 October 2026
+
+All 259 V4 Node tests pass, including the unchanged historic Halle oracle.
+Fifteen frozen V3 browser cases pass: nine controlled source/native views,
+including Halle and both day-inspection/night views of the affected surfaces;
+six actual approach/turn/return cases across desktop and Android-emulated
+portrait/landscape, covering loaded and failed texture requests. Desktop also
+recovers from WebGL context loss without moving the visitor. V4 differs only
+in one test expectation; all runtime, export and browser-suite bytes are exact.
+Independent Physics and Camera reviews bind V4. Physical Android NOT RUN.
+
+The baseline comparison preserves all layout, collision, floors, viewpoint and
+light data, 780 native attribute streams apart from eight intended UV rescalings,
+all indices and 25 pre-existing embedded image payloads. Only interior Säule
+batch color factors change. The shared normal-Y fix alters mapped shading,
+not geometry normals. 837,388 triangles, 226 groups, 31 embedded maps; GLB
+67,478,360 bytes. No new lights, timers or draw calls.
+
+Eighteen matched cost contexts cover two rooms each, with three contexts per
+profile and condition. Each uses actual two-second keyboard/touch movement,
+the same legal approach and heading, bounded drawing buffers, and idle checks.
+No automatic GLB download; texture loads increase from 26 to 32.
+
+- desktop, saule: frame-p95 median 14.1→14.2 ms; candidate maximum input latency 22.1 ms.
+- desktop, berghain: frame-p95 median 21.3→21.1 ms; candidate maximum input latency 10.1 ms.
+- android-portrait, saule: frame-p95 median 7.1→7.1 ms; candidate maximum input latency 16.2 ms.
+- android-portrait, berghain: frame-p95 median 7.1→13.8 ms; candidate maximum input latency 14.1 ms.
+- android-landscape, saule: frame-p95 median 7.1→7.1 ms; candidate maximum input latency 17.8 ms.
+- android-landscape, berghain: frame-p95 median 13.9→13.9 ms; candidate maximum input latency 17.4 ms.
+
+Frame times meet the scoped budget; samples do not establish a causal speedup
+or physical-device performance. Full cost receipt:
+output/berghain-mineral-surfaces-cost-comparison-v4.json.
+
+V1's dense plaster, V2's shared Halle finish and the initial invalid map-removal
+shader diagnostic remain rejected evidence. V3's first section-keyed material
+assertion omitted the existing structure/labWall group; V4 explicitly includes
+its retained aged family. The Halle preservation oracle was never relaxed.
+See [current scope and remaining uncertainty](README.md).
+
 ## Upper-lounge V4 — accepted scoped validation, 25 October 2026
 
 V3 passed all 258 Node tests in one full run. V4 changes only the descriptive

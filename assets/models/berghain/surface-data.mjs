@@ -46,5 +46,17 @@ export const surfaceFamilies = {
     "baseColor": "textures/aged-baseColor.png",
     "roughness": "textures/aged-roughness.png",
     "normal": "textures/aged-normal.png"
+  },
+  "plaster": {
+    "metresPerTile": 6.4,
+    "baseColor": "textures/plaster-baseColor.png",
+    "roughness": "textures/plaster-roughness.png",
+    "normal": "textures/plaster-normal.png"
+  },
+  "pier": {
+    "metresPerTile": 3.2,
+    "baseColor": "textures/pier-baseColor.png",
+    "roughness": "textures/pier-roughness.png",
+    "normal": "textures/pier-normal.png"
   }
 };

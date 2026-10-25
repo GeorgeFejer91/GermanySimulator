@@ -12,7 +12,7 @@ const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', 
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
-  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'aged',
+  labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'plaster',
   sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather'};
 
 function correctInstanceNormals(shader){
@@ -32,8 +32,11 @@ export function configureInstanceNormals(material){
   material.customProgramCacheKey=()=> 'berghain-inverse-instance-normal-v1';
 }
 
-export function configureSurfaceMaterial(material, name) {
-  const family = familyByMaterial[name];
+export function configureSurfaceMaterial(material, name, section) {
+  // Halle reuses the concrete palette; only Säule's interior receives I24's finish.
+  const sauleInterior=name==='sauleConcrete'&&section==='interior';
+  const family = sauleInterior?'pier':familyByMaterial[name];
+  if(sauleInterior)material.color.set('#b7b5ac');
   if (family) material.userData.surface = {family, ...surfaceFamilies[family]};
   if(name==='artAmber'){
     material.userData.volumeMap='textures/amber-thickness.png';
@@ -50,7 +53,11 @@ export function surfaceUV(position, normal, metresPerTile) {
 
 function projectedMaterial(material, maps) {
   Object.assign(material,{map:maps.baseColor,roughnessMap:maps.roughness,normalMap:maps.normal});
-  if(material.clearcoat>0)material.clearcoatNormalMap=maps.normal;
+  // Projected meshes use derivative tangents. Match GLTFLoader's convention
+  // for the same tangent-free, standard glTF normal maps; +Y here reverses
+  // the vertical relief in the live model relative to the portable asset.
+  material.normalScale.y=-1;
+  if(material.clearcoat>0){material.clearcoatNormalMap=maps.normal;material.clearcoatNormalScale.y=-1;}
   material.onBeforeCompile = shader => {
     correctInstanceNormals(shader);
     shader.uniforms.berghainTileMetres={value:material.userData.surface.metresPerTile};

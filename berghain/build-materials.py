@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1] / 'assets/models/berghain'
 SIZE = 512
 FAMILIES = {'mineral': (11, .0008), 'stone': (37, .0015),
             'metal': (71, .00015), 'aggregate': (109, .003), 'fabric': (151, .00045),
-            'leather': (181, .00007), 'amber': (211, .0014), 'aged': (239, .0014)}
+            'leather': (181, .00007), 'amber': (211, .0014), 'aged': (239, .0014),
+            'plaster': (263, .004), 'pier': (283, .016)}
 
 
 def noise(columns, rows, seed):
@@ -35,6 +36,8 @@ def noise(columns, rows, seed):
 
 
 def build_family(name, seed, relief):
+    if name in ('plaster', 'pier'):
+        return build_mineral_treatment(name, seed, relief)
     tile = .08 if name in ('fabric', 'amber') else .04 if name == 'leather' else 2.4 if name == 'aged' else 2
     broad, detail = noise(4, 4, seed), noise(64, 64, seed + 1)
     streak = noise(32, 2, seed + 2)
@@ -96,8 +99,13 @@ def build_family(name, seed, relief):
         dy = (height[((y + 1) % SIZE) * SIZE + x] - height[((y - 1) % SIZE) * SIZE + x]) * relief * SIZE / (tile * 2)
         length = math.sqrt(dx * dx + dy * dy + 1)
         normals.append(tuple(round((v / length * .5 + .5) * 255) for v in (-dx, -dy, 1)))
+    return write_family(name, tile, relief, colour, roughness, normals,
+                        'RGB' if name == 'aged' else 'L')
+
+
+def write_family(name, tile, relief, colour, roughness, normals, colour_mode):
     output = {}
-    for kind, mode, pixels in [('baseColor', 'RGB' if name=='aged' else 'L', colour), ('roughness', 'RGB', roughness), ('normal', 'RGB', normals)]:
+    for kind, mode, pixels in [('baseColor', colour_mode, colour), ('roughness', 'RGB', roughness), ('normal', 'RGB', normals)]:
         filename = f'textures/{name}-{kind}.png'
         image = Image.new(mode, (SIZE, SIZE))
         image.putdata(pixels)
@@ -105,6 +113,66 @@ def build_family(name, seed, relief):
         content = (ROOT / filename).read_bytes()
         output[kind] = {'file': filename, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()}
     return {'metresPerTile': tile, 'maps': output, 'estimatedReliefMetres': relief}
+
+
+def build_mineral_treatment(name, seed, relief):
+    """Original material studies from I23/I24 observations, without image inputs.
+
+    Macro patches, directional wear and uneven casting seams replace the same
+    generic mottling in two visibly different rooms. Their location, frequency
+    and depth are authored estimates, not a scan or a registered damage map.
+    """
+    tile = 6.4 if name == 'plaster' else 3.2
+    broad = noise(5, 7, seed)
+    broken = noise(23, 29, seed + 1)
+    streak = noise(41, 4, seed + 2)
+    aggregate = noise(109, 103, seed + 3)
+    rng = random.Random(seed + 4)
+    grain = [rng.random() for _ in broad]
+    smooth = lambda a, b, v: max(0, min(1, (v - a) / (b - a))) ** 2 * (3 - 2 * max(0, min(1, (v - a) / (b - a))))
+    heights, colour, roughness = [], [], []
+    for i, (b, d, s, a, g) in enumerate(zip(broad, broken, streak, aggregate, grain)):
+        x, y = i % SIZE, i // SIZE
+        damage = smooth(.54, .70, .43*b + .25*d + .32*a)
+        worn = smooth(.55, .81, s) * smooth(.31, .69, .55*b+.45*d)
+        if name == 'plaster':
+            # Mostly continuous plaster with a few original localized scars.
+            # A whole-face erosion field would incorrectly mottle the reliefs.
+            mask = 0
+            for cx, cy, rx, ry in ((.12,.22,.014,.07),(.62,.65,.03,.04),(.75,.43,.016,.08),(.33,.87,.035,.025)):
+                dx, dy = abs(x/SIZE-cx), abs(y/SIZE-cy)
+                radius = math.hypot(min(dx,1-dx)/rx,min(dy,1-dy)/ry)
+                mask = max(mask, max(0,1-radius)**.7)
+            loss = smooth(.24,.68,mask+.20*(d-.5)+.14*(a-.5))
+            shade = .88 + .025*b + .012*g - .20*loss - .055*worn
+            tint = (1, .985 - .015*loss, .965 - .025*loss)
+            height = .018*d + .018*g - .68*loss - .018*worn
+            rough = .86 + .10*loss + .02*g
+        else:
+            # Cast concrete with irregular aggregate loss and shallow form seams.
+            seam = 0
+            for row in (.16, .36, .57, .77, .94):
+                centre = row*SIZE + 1.1*math.sin(x*math.tau/SIZE*3 + row*9)
+                seam = max(seam, math.exp(-((y-centre)/.75)**2))
+            pit = smooth(.52,.67,.55*a+.30*d+.15*g) * (.20+.80*damage)
+            shade = .77 + .08*b + .018*g - .09*damage - .12*pit - .07*worn - .09*seam
+            tint = (1, .99, .955)
+            height = .10*a + .07*g - .62*pit - .16*damage - .09*seam
+            rough = .88 + .075*pit + .025*g
+        colour.append(tuple(round(max(0, min(1, shade*t))*255) for t in tint))
+        roughness.append((255, round(min(1, rough)*255), 255))
+        heights.append(height)
+    normals = []
+    for i in range(SIZE*SIZE):
+        x, y = i % SIZE, i // SIZE
+        dx = (heights[y*SIZE+(x+1)%SIZE]-heights[y*SIZE+(x-1)%SIZE])*relief*SIZE/(tile*2)
+        dy = (heights[((y+1)%SIZE)*SIZE+x]-heights[((y-1)%SIZE)*SIZE+x])*relief*SIZE/(tile*2)
+        length = math.sqrt(dx*dx + dy*dy + 1)
+        normals.append(tuple(round((v/length*.5+.5)*255) for v in (-dx, -dy, 1)))
+    result = write_family(name, tile, relief, colour, roughness, normals, 'RGB')
+    result['references'] = ['I23 views12–16'] if name == 'plaster' else ['A15 views00–03', 'I24 detail']
+    result['limits'] = 'Original inferred surface treatment; tile scale, patch positions and relief are not measured. No silhouette or collision displacement.'
+    return result
 
 
 def main():

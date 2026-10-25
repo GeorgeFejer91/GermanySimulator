@@ -174,6 +174,57 @@
         }
       },
       "estimatedReliefMetres": 0.0014
+    },
+    "plaster": {
+      "metresPerTile": 6.4,
+      "maps": {
+        "baseColor": {
+          "file": "textures/plaster-baseColor.png",
+          "bytes": 212457,
+          "sha256": "3270770461dbfb1b23c39e63daa7404c9cafa252d72913be7341355d86e94d3f"
+        },
+        "roughness": {
+          "file": "textures/plaster-roughness.png",
+          "bytes": 143962,
+          "sha256": "31edd2fb803d214655354da7efaf35d05791b9d494410597bbc9d834ec8cca64"
+        },
+        "normal": {
+          "file": "textures/plaster-normal.png",
+          "bytes": 130591,
+          "sha256": "50b381e822e85d2efb278ac1074fdff5dab81f384e75f6b5d00a647ac9363105"
+        }
+      },
+      "estimatedReliefMetres": 0.004,
+      "references": [
+        "I23 views12\u201316"
+      ],
+      "limits": "Original inferred surface treatment; tile scale, patch positions and relief are not measured. No silhouette or collision displacement."
+    },
+    "pier": {
+      "metresPerTile": 3.2,
+      "maps": {
+        "baseColor": {
+          "file": "textures/pier-baseColor.png",
+          "bytes": 290396,
+          "sha256": "9bc5372abc272b7a4438577e8f0e1ed5742b50998ed9dda0d94283058294cc84"
+        },
+        "roughness": {
+          "file": "textures/pier-roughness.png",
+          "bytes": 185293,
+          "sha256": "04da24a66b8ff86f4d738be3f9d5194165ec7de0a2fc42d67aca419c8f877e88"
+        },
+        "normal": {
+          "file": "textures/pier-normal.png",
+          "bytes": 485712,
+          "sha256": "4f3f94e819e09c771dca21af7126e36c3b9b3df3102ee4df32ef7978d2d1f794"
+        }
+      },
+      "estimatedReliefMetres": 0.016,
+      "references": [
+        "A15 views00\u201303",
+        "I24 detail"
+      ],
+      "limits": "Original inferred surface treatment; tile scale, patch positions and relief are not measured. No silhouette or collision displacement."
     }
   },
   "amberLighting": {

@@ -8,15 +8,27 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
     const {createBerghainModel,disposeBerghainModel}=await import('../assets/models/berghain/model.mjs');
     const {loadSurfaceTextures}=await import('../assets/models/berghain/surface-materials.mjs');
     const {GLTFLoader}=await import('../assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js');
-    const source=createBerghainModel(); await loadSurfaceTextures(source);
+    const source=createBerghainModel(); const expectedTextures=await loadSurfaceTextures(source);
     const bytes=await(await fetch('../assets/models/berghain/berghain-study.glb')).arrayBuffer();
     const portable=(await new GLTFLoader().parseAsync(bytes,'')).scene;
     let sourceReflection;source.traverse(mesh=>{if(mesh.isMesh&&mesh.material.envMap)sourceReflection=mesh.material.envMap;});
     const portableReflection=sourceReflection?.clone();
     portable.traverse(mesh=>{if(mesh.isMesh&&mesh.material.transmission>0)mesh.material.envMap=portableReflection;});
     const scene=new THREE.Scene(); scene.background=new THREE.Color('#b3b3a6');
-    scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
-    const sun=new THREE.DirectionalLight('#ffedcf',3); sun.position.set(-45,65,50); scene.add(sun);
+    let nightLighting;
+    if(view?.clubNight){
+      const {createViewerLighting}=await import('./night-lighting.mjs');
+      nightLighting=createViewerLighting(scene);
+      nightLighting.update('interior',{x:view.position[0],y:view.position[1]-1.68,z:view.position[2]});
+      portable.traverse(mesh=>{if(mesh.isMesh){
+        const authored=source.getObjectByName(mesh.material.name);
+        if(!authored)throw Error('Portable shadow owner missing: '+mesh.material.name);
+        mesh.castShadow=authored.castShadow;mesh.receiveShadow=authored.receiveShadow;
+      }});
+    }else{
+      scene.add(new THREE.HemisphereLight('#e0e6dd','#6a665b',2.1));
+      const sun=new THREE.DirectionalLight('#ffedcf',3); sun.position.set(-45,65,50); scene.add(sun);
+    }
     const canvas=document.createElement('canvas');
     Object.assign(canvas.style,{position:'absolute',inset:'0',width:'100%',height:'100%'});
     document.querySelector('#viewport').append(canvas);
@@ -24,6 +36,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
     const renderer=new THREE.WebGLRenderer({canvas,antialias:false,preserveDrawingBuffer:true});
     renderer.setSize(width,height,false);renderer.outputColorSpace=THREE.SRGBColorSpace;
     renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+    if(view?.clubNight){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;}
     const camera=new THREE.PerspectiveCamera(45,width/height,.08,400);
     camera.position.set(...(view?.position||[7,10,30]));camera.lookAt(...(view?.target||[0,10,22]));
     const draw=model=>{
@@ -61,11 +74,11 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
       for(const light of sourceLights)light.visible=kind!=='unlit';
       return draw(kind==='portable'?portable:source);
     },cleanup:()=>{
-      disposeBerghainModel(source);disposeBerghainModel(portable);renderer.dispose();
+      disposeBerghainModel(source);disposeBerghainModel(portable);nightLighting?.dispose();renderer.dispose();
       return {textures:textures.size,disposed};
     }};
     document.querySelector('#instructions').textContent='Isolated source / GLB comparison · same camera and lights';
-    return {meanRGBDifference:sum/(width*height*3),largePixelFraction:large/(width*height),sampledColours:colours.size,width,height,lighting};
+    return {meanRGBDifference:sum/(width*height*3),largePixelFraction:large/(width*height),sampledColours:colours.size,width,height,lighting,expectedTextures,nightLighting:nightLighting?.state||null};
   },view);
   await page.evaluate(()=>window.materialEvidence.show('source'));await artifacts.screenshot(page,'source-materials.png');
   if(view?.practicalLighting){await page.evaluate(()=>window.materialEvidence.show('unlit'));await artifacts.screenshot(page,'practical-lights-off.png');}
@@ -75,7 +88,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
   assert.ok(measured.sampledColours>20,'Comparison must contain a rendered, shaded asset');
   assert.ok(measured.meanRGBDifference<=1,'Portable material render must agree within one 8-bit RGB level on average');
   assert.ok(measured.largePixelFraction<=.015,'Large colour differences must remain below 1.5% of pixels');
-  assert.equal(cleanup.textures,26);assert.equal(cleanup.disposed,26,'Shared source textures must be disposed exactly once');
+  assert.equal(cleanup.textures,measured.expectedTextures);assert.equal(cleanup.disposed,measured.expectedTextures,'Shared source textures must be disposed exactly once');
   return {measured,cleanup,scope:'Isolated close-up source and standard GLB render; no walking-path claim'};
 }
 export const materialScenario={id:'exported-materials',modes:['stress'],profiles:['desktop'],run:compareMaterialRender};

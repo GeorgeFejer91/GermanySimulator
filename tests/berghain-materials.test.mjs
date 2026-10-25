@@ -5,6 +5,24 @@ import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 import {loadSurfaceTextures} from '../assets/models/berghain/surface-materials.mjs';
 
+test('bar plaster and Säule concrete have distinct observed surface treatments',()=>{
+  const model=createBerghainModel(),observed=new Map();
+  try{
+    model.traverse(mesh=>{
+      if(!mesh.isMesh)return;
+      const [section,materialName]=mesh.name.split('/');
+      if(['mainBarPlaster','sauleConcrete','labWall'].includes(materialName)){
+        assert.ok(mesh.material.userData.surface,mesh.name);
+        observed.set(section+'/'+materialName,mesh.material.userData.surface.family);
+        if(materialName==='sauleConcrete')assert.deepEqual(mesh.material.color.toArray(),new THREE.Color(section==='interior'?'#b7b5ac':'#b1bdd6').toArray());
+        assert.equal(mesh.material.transparent,false,'Opaque mineral fabric remains opaque');
+        assert.equal(mesh.material.depthWrite,true);
+      }
+    });
+    assert.deepEqual(Object.fromEntries(observed),{'halle/sauleConcrete':'aged','interior/mainBarPlaster':'plaster','interior/sauleConcrete':'pier','interior/labWall':'aged','structure/labWall':'aged'});
+  }finally{disposeBerghainModel(model);}
+});
+
 test('the shared image admission queue bounds all surface loads and skips retired-model work',async()=>{
   const original=THREE.TextureLoader.prototype.loadAsync;
   let active=0,peak=0,started=0,disposed=0;
@@ -15,9 +33,17 @@ test('the shared image admission queue bounds all surface loads and skips retire
   };
   try{
     const model=createBerghainModel();
-    try{assert.equal(await loadSurfaceTextures(model),26);assert.ok(peak<=2,'at most two image jobs');}
+    try{
+      assert.equal(await loadSurfaceTextures(model),32);assert.ok(peak<=2,'at most two image jobs');
+      let mapped=0,coated=0;
+      model.traverse(mesh=>{if(mesh.isMesh&&mesh.material.normalMap){
+        mapped++;assert.deepEqual(mesh.material.normalScale.toArray(),[1,-1],mesh.name+' must match tangent-free glTF orientation');
+        if(mesh.material.clearcoatNormalMap){coated++;assert.deepEqual(mesh.material.clearcoatNormalScale.toArray(),[1,-1]);}
+      }});
+      assert.ok(mapped>20);assert.ok(coated>0,'The sugar clearcoat follows the same normal convention');
+    }
     finally{disposeBerghainModel(model);}
-    assert.equal(started,26);assert.equal(disposed,26);
+    assert.equal(started,32);assert.equal(disposed,32);
     active=peak=started=disposed=0;
     const retired=createBerghainModel(),pending=loadSurfaceTextures(retired);
     await new Promise(resolve=>queueMicrotask(resolve));disposeBerghainModel(retired);
@@ -30,7 +56,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
   const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
   const jsonLength=bytes.readUInt32LE(12), gltf=JSON.parse(bytes.subarray(20,20+jsonLength).toString().trim());
   assert.ok(gltf.images?.length>=3,'The portable asset must include material maps');
-  assert.equal(gltf.images.length,25,'Eight three-map surface families and one shared sugar thickness atlas');
+  assert.equal(gltf.images.length,31,'Ten shared three-map surface families and one sugar thickness atlas');
   const binaryStart=20+jsonLength+8;
   for(const image of gltf.images){
     assert.equal(image.mimeType,'image/png');
@@ -51,7 +77,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
     assert.equal(uv.type,'VEC2');
     assert.equal(uv.count,gltf.accessors[primitive.attributes.POSITION].count);
   }
-  assert.equal(gltf.textures.length,25,'Material groups must reuse image textures');
+  assert.equal(gltf.textures.length,31,'Material groups must reuse image textures');
   assert.equal(gltf.samplers[0].wrapS,10497);
   assert.equal(gltf.samplers[0].wrapT,10497);
 });
