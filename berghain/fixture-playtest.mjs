@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {canStand} from './navigation.mjs';
-import {layout} from '../assets/models/berghain/layout.mjs';
+import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs';
 
 export async function assertFirstPersonView(page){
@@ -61,16 +61,18 @@ export default {
     assert.ok(canStand(foyer,layout),'natural foyer approach stays legal');
     await artifacts.screenshot(page,'foyer-channel-seats.png');
     await page.locator('#room').selectOption('panorama');
-    await dragLook(page,context,profile,-295);
+    const p=viewpoints.panorama.position,a=layout.fixtures.find(f=>f.id==='panorama-bar').anchor;
+    const yaw=Math.atan2(p.x-a[0],p.z-a[2]);
+    await dragLook(page,context,profile,-(yaw-viewpoints.panorama.yaw)/.004);
     await artifacts.screenshot(page,'panorama-bar.png');
     const before=JSON.parse(await page.locator('#model').getAttribute('data-position'));
-    const stopped=await forward(page,context,profile,3300);
+    const stopped=await forward(page,context,profile,6000);
     assert.ok(Math.hypot(stopped.x-before.x,stopped.z-before.z)>.5);
     assert.ok(canStand(stopped,layout),'body remains legal at visible furniture');
     const blocked=await forward(page,context,profile,700);
     assert.ok(Math.hypot(blocked.x-stopped.x,blocked.z-stopped.z)<.025,'physical furniture stops continued forward input');
     await artifacts.screenshot(page,'bar-body-clearance.png');
-    const native=await renderNativeAsset(page,{position:before,yaw:1.18});
+    const native=await renderNativeAsset(page,{position:before,yaw,clubNight:true});
     await artifacts.screenshot(page,'portable-glb-panorama.png');
     await disposeNativeAsset(page);
     const manifest=JSON.parse(readFileSync(new URL('../assets/models/berghain/manifest.json',import.meta.url)));
@@ -84,9 +86,11 @@ export default {
     await page.goto(baseURL+'/geheim/');
     await page.locator('#model[data-ready="true"]').waitFor();
     await page.locator('#room').selectOption('panorama');
-    await dragLook(page,context,profile,-295);
+    const p=viewpoints.panorama.position,a=layout.fixtures.find(f=>f.id==='panorama-bar').anchor;
+    const yaw=Math.atan2(p.x-a[0],p.z-a[2]);
+    await dragLook(page,context,profile,-(yaw-viewpoints.panorama.yaw)/.004);
     await artifacts.screenshot(page,'visitor-bar-approach.png');
-    const position=await forward(page,context,profile,3300);
+    const position=await forward(page,context,profile,6000);
     assert.ok(canStand(position,layout));
     await assertFirstPersonView(page);
     await assertFirstPersonView(page);

@@ -10,6 +10,45 @@ The working target is the contemporary building, with reference dates retained s
 
 ## Current work
 
+### Panorama frontage and public connections — 25 October 2026
+
+U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,
+with the long bar across the window wall and the DJ at the opposite end. The
+room, acoustic ceiling, radiators, furniture, CLIMBER, ordinary WC and upper
+lounge now move together, preserving the physical size of each fixture.
+The ordinary WC stays below the lounge, distinct from the ground cloakroom WC,
+main Klo and the unregistered historical wardrobe/FLINTA trial room.
+
+The main stair has matching visible rails, body barriers and landings, with an
+approach around retained columns. A guarded passage at the hall edge reaches
+an upper smoking doorway through both facade layers. The existing main-floor
+tower entry and two enclosed flights remain. The upper lounge shifts 0.4 m and
+the nearby lower seat 1.4 m to clear the retained column and stair approach.
+Room dimensions, floor heights, passage footprint and door positions remain
+estimates. No backstage room or private access route is inferred.
+
+Localized night cues follow the moved rooms, WC approach and passage within
+the existing three scene spots and two shadow maps. The main-bar end uplight
+now reaches plaster below the Eisbar slab that intercepted its previous aim.
+The illumination is an appearance study, not a surveyed contemporary show.
+
+The floor/window section still conflicts with I19's low-sill tall windows.
+The repeated facade tiers are also estimated; this change does not establish
+a measured floor datum or bay-specific window pattern. Backstage and FLINTA
+locations, present inventory, artwork fidelity and other open audit findings
+remain unresolved. The full architectural goal stays ACTIVE.
+
+The bounded increment passes 177 Node tests and 17 final browser cases, plus
+nine baseline/nine candidate cost samples. Both independent world reviewers
+accept the scoped geometry and rendering. The browser matrix uses desktop and
+Android portrait/landscape emulation; physical Android is NOT RUN. See
+VALIDATION.md for source binding and measured limits. Publication and deployed
+byte/control verification are recorded in output/berghain-panorama-release.json.
+
+Next: resolve the common facade/window bay and interior floor section before
+changing either estimated datum. Exact backstage and FLINTA placement still
+need a located primary source. No full-reconstruction completion is claimed.
+
 ### Eisbar mezzanine correction — 25 October 2026
 
 I03/I04 describe a mezzanine containing the ice-cream bar; these are one dated
@@ -41,6 +80,19 @@ do not rotate the existing rectangles without checking those connections.
 Backstage research in output/berghain-backstage-followup-20261025.md distinguishes
 unbuilt Kubus proposals and temporary concert dressing areas from permanent
 spaces. No current backstage location was recovered; that placement stays open.
+
+Published Eisbar correction `a315b8489ee931fca814df9db8bb9abb1a79c8bb`; Pages run 40146269790
+succeeded. All 86 checked public files match the commit, six entry URLs respond,
+and three fresh live browser cases pass on desktop and both Android emulations.
+Both public viewers arrive on the 9.95 m authored mezzanine and accept real input.
+Receipt: output/berghain-eisbar-release.json. This local publication handoff does
+not change the reviewed runtime. The complete architectural goal remains ACTIVE.
+
+The next Panorama registration pass also needs its floor/window section checked:
+output/berghain-panorama-section-audit.json records the current 1.55 m upper-window
+sill above the Panorama floor, unlike the low-sill relationship in I19 views15/16.
+See output/berghain-panorama-section-followup.md for the coupled source owners.
+The facade tiers are estimates too; this finding does not select a new floor height.
 
 ### Smoking stair registration follow-up — 25 October 2026
 

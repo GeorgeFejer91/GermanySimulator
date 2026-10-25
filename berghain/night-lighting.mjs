@@ -4,6 +4,7 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {kloRoomAt} from '../assets/models/berghain/klo-bar.mjs';
 import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
+import {panoramaWorldPoint,panoramaPassageAt} from '../assets/models/berghain/panorama-registration.mjs';
 import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
 
 // Appearance study: I23/I24 establish localized architectural wash; L01
@@ -29,6 +30,28 @@ const cues={
 };
 const point=([x,y,z])=>{const p=studyToSite({x,y,z});return new THREE.Vector3(p.x,p.y,p.z);};
 for(const lights of Object.values(cues))for(const light of lights){light.position=point(light.position);light.target=point(light.target);}
+for(const room of ['panoramaToilets','lounge'])for(const light of cues[room]){
+  light.position.fromArray(panoramaWorldPoint(light.position.toArray()));
+  light.target.fromArray(panoramaWorldPoint(light.target.toArray()));
+  if(room==='lounge'){light.position.z+=.4;light.target.z+=.4;}
+}
+// Registered world-space positions keep the bar wash and low corridor practical
+// below their respective ceilings. No inferred fixture inventory or live show.
+const worldSpot=(...args)=>{const light=spot(...args);light.position=new THREE.Vector3(...light.position);light.target=new THREE.Vector3(...light.target);return light;};
+cues.panorama=[worldSpot([-13.5,17,14.4],[-15.6,14.1,14.4],'#b34375',230,.8,13),
+  worldSpot([-9,17,17],[-9,13.25,14],'#567db1',180,.78,12),
+  worldSpot([-2,15.9,12.3],[1.5,13.25,12.3],'#d5a06e',75,1,9)];
+cues.panoramaPassage=[worldSpot([9,15.6,9.6],[10,13.25,9.6],'#b7a185',80,1.1,9),
+  worldSpot([14,15.6,9.6],[14,13.25,9.6],'#b7a185',80,1.1,9),
+  worldSpot([17.4,15.25,7.7],[18.6,13.25,7.7],'#b7a185',75,1.1,8)];
+// Fixed low-output circulation washes reveal treads while retaining dark rooms.
+// These reuse the same three lights; the positions are authoring estimates.
+cues.panoramaStair=[worldSpot([5.4,10.3,5.83],[5.4,7.6,5.83],'#afbad0',65,1,8),
+  worldSpot([.6,13.1,5.88],[.6,10.3,5.88],'#bca88e',75,1,8),
+  worldSpot([-4.3,16.2,5.93],[-4.3,13.2,5.93],'#bca88e',85,1,8)];
+cues.loungeStair=[worldSpot([6.4,15.75,10],[5.8,13.75,10],'#c8ab88',65,1.1,7),
+  worldSpot([3.7,17.4,10],[3.7,14.7,10],'#c8ab88',70,1,7),
+  worldSpot([.6,18.7,10],[.6,16.3,10],'#c8ab88',70,1,7)];
 
 function roomAt(p){
   if(p.z>22.28)return 'outside';
@@ -36,8 +59,11 @@ function roomAt(p){
   const architecture=architecturalRoomAt(p);if(architecture)return architecture;
   if(p.z<-15.4)return 'halle';
   if(p.x>22)return 'garden';
+  if(p.x>-6&&p.x<8.5&&p.z>4.3&&p.z<7.3&&p.y>6.4&&p.y<13.4)return 'panoramaStair';
+  if(p.x>-.4&&p.x<7.5&&p.z>8.9&&p.z<11.4&&p.y>13.1&&p.y<16.5)return 'loungeStair';
   if(p.y>15.8)return 'lounge';
   if(panoramaSanitaryAt(p))return 'panoramaToilets';
+  if(panoramaPassageAt(p))return 'panoramaPassage';
   if(p.y>12)return 'panorama';
   const sanitary=kloRoomAt(p);if(sanitary)return sanitary;
   if(p.y>5)return 'berghain';

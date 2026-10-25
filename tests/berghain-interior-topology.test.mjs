@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
-import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {panoramaStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(panoramaStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 
@@ -20,11 +21,12 @@ test('Panorama sanitary area is distinct from main-floor Klo and below upper lou
 
 test('walk from Panorama through separate WC entrance into each cubicle and return',()=>{
   let position={...viewpoints.panorama.position};
-  const route=[[-11,-6],[-11,1],[-15.5,1],[-15.5,-1.9],[-18.5,-1.9],[-15.5,-1.9],
+  const cubicles=[[-15.5,1],[-15.5,-1.9],[-18.5,-1.9],[-15.5,-1.9],
     [-15.5,.3],[-18.5,.3],[-15.5,.3],[-15.5,2.5],[-18.5,2.5],[-15.5,2.5],
-    [-15.5,1],[-11,1],[-11,-6],[-11,-7]];
-  for(const [x,z] of route){
-    const target=studyToSite({x,y:13.25,z});
+    [-15.5,1]];
+  const approach=layout.panoramaRegistration.toiletRoute.slice(0,-1);
+  const route=[...approach,...cubicles.map(([x,z])=>studyToSite({x,y:13.25,z})),...approach.toReversed()];
+  for(const target of route){
     for(let i=0;i<160;i++){
       position=moveVisitor(position,{x:(target.x-position.x)/(160-i),z:(target.z-position.z)/(160-i)},layout);
       assert.ok(canStand(position,layout),'full body clearance');
@@ -59,7 +61,8 @@ test('sanitary additions preserve every retained original batch tone including H
   // Independent baseline: remove additions before the original Halle retirement
   // and let the renderer's previous group-count/index formula run unchanged.
   const source=readFileSync(url,'utf8')
-    .replace('pinInteriorTopologyTones(layout);','layout.parts=layout.parts.filter(p=>!p.interiorTopology);')
+    .replace('pinInteriorTopologyTones(layout);',`layout.parts=layout.parts.filter(p=>!p.interiorTopology);
+      {const groups=new Map();for(const p of layout.parts){const k=[p.section,p.material==='mainBarPlaster'?'pale':p.material,p.shape].join('/');if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p);}for(const parts of groups.values())parts.forEach((p,i)=>p.instanceTone??=.84+((i*193+parts.length*37)%101)/625);}`)
     .replace('addArchitecturalCirculation(layout);','')
     .replace('addMainHallDetails(layout);','')
     .replace('addGroundSanitary(layout);','')
@@ -75,7 +78,7 @@ test('sanitary additions preserve every retained original batch tone including H
   const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
   const originalByKey=new Map();
   for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
-  const retained=layout.parts.filter(p=>!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
+  const retained=layout.parts.filter(p=>!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
   assert.ok(retained.length>10000,'Retirement must leave the unrelated original model intact');
   retained.forEach(p=>{
     const original=originalByKey.get(key(p))?.shift();

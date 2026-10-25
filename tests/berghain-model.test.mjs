@@ -72,7 +72,7 @@ test('stair undersides and floor slabs block the visitor body', async () => {
   const halleUndersides=layout.halle.stairs.flatMap(stair=>[.25,.3].map(t=>({
     x:stair.axis[0][0]+(stair.axis[1][0]-stair.axis[0][0])*t,y:.05,
     z:stair.axis[0][1]+(stair.axis[1][1]-stair.axis[0][1])*t})));
-  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x: -4.505546, y: 6.65, z: 7.223457},...halleUndersides]) {
+  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x:4.5,y:6.65,z:5.83},...halleUndersides]) {
     assert.equal(canStand(point, layout), false, 'full cylinder must not pass through a tread underside: ' + JSON.stringify(point));
   }
 });
@@ -80,7 +80,7 @@ test('stair undersides and floor slabs block the visitor body', async () => {
 test('main, Panorama and both Halle stairs connect both landings continuously in both directions', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   const {canStand, moveVisitor} = await import('../berghain/navigation.mjs');
-  for (const name of ['main stair', 'Panorama stair']) {
+  for (const name of ['main stair']) {
     const ramp = layout.floors.find(floor => floor.name === name);
     const x = (ramp.x[0] + ramp.x[1]) / 2, z = ramp.z[1] - .5;
     let position = {x, z, y: ramp.y + (ramp.endY - ramp.y) * (z - ramp.z[0]) / (ramp.z[1] - ramp.z[0])};
@@ -98,6 +98,13 @@ test('main, Panorama and both Halle stairs connect both landings continuously in
     }
     assert.ok(position.z > ramp.z[1] + .3, name + ' must reach lower landing');
     assert.ok(Math.abs(position.y - ramp.endY) < .01, name + ' lower height');
+  }
+  const panorama=layout.panoramaRegistration.stairRoute;
+  let p={...panorama[0]};
+  for(const target of [...panorama.slice(1),...panorama.toReversed().slice(1)]){
+    const n=Math.ceil(Math.hypot(target.x-p.x,target.z-p.z)/.04),dx=(target.x-p.x)/n,dz=(target.z-p.z)/n;
+    for(let i=0;i<n;i++){p=moveVisitor(p,{x:dx,z:dz},layout);assert.ok(canStand(p,layout));}
+    assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.05&&Math.abs(p.y-target.y)<.05,'Panorama reaches real landing');
   }
   for(const stair of layout.halle.stairs){
     let position={...stair.lowerApproach};assert.ok(canStand(position,layout));

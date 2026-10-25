@@ -113,21 +113,21 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       await artifacts.screenshot(page,'upper-lounge-native.png');await disposeNativeAsset(page);
       return {position,native,scope:'Room shortcut; observed furnishings, estimated footprint/elevations; glass artwork imagery absent'};
     }},
-    {id:'lounge-connected-route',modes:['stress'],timeoutMs:180000,async run(ctx){
+    {id:'lounge-connected-route',modes:['stress'],timeoutMs:240000,async run(ctx){
       const {page,baseURL,artifacts}=ctx;
       await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
-      await selectRoom(page,'panorama');let heading=0;const route=[];
-      for(const [x,z,y]of [[-11.65,-7,13.25],[-11.65,9,13.25],[-7.9,9,13.25],[-7.9,.8,16.35],[-11.4,.8,16.35]]){
-        const result=await travel(ctx,studyToSite({x,y,z}),heading);heading=result.yaw;route.push(result.position);
-        if(y>15)await artifacts.screenshot(page,'upper-route-'+route.length+'.png');
+      await selectRoom(page,'panorama');let heading=viewpoints.panorama.yaw;const route=[];
+      for(const target of layout.panoramaRegistration.loungeRoute.slice(1)){
+        const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);
+        if(target.y>15)await artifacts.screenshot(page,'upper-route-'+route.length+'.png');
       }
       assert.ok(Math.abs(route.at(-1).y-16.35)<.01);await assertFirstPersonView(page);
       assert.equal(await page.locator('#room').inputValue(),'lounge','natural ascent identifies the upper room');
       assert.equal(await page.locator('#location').textContent(),'Upper Panorama lounge');
-      await dragLook(page,ctx.context,ctx.profile,-Math.atan2(Math.sin(Math.PI/2-heading),Math.cos(Math.PI/2-heading))/.004);heading=Math.PI/2;
+      await dragLook(page,ctx.context,ctx.profile,-Math.atan2(Math.sin(viewpoints.lounge.yaw-heading),Math.cos(viewpoints.lounge.yaw-heading))/.004);heading=viewpoints.lounge.yaw;
       await artifacts.screenshot(page,'human-in-upper-lounge.png');
-      for(const [x,z,y]of [[-7.9,.8,16.35],[-7.9,9,13.25],[-11.65,9,13.25],[-11.65,-7,13.25]]){
-        const result=await travel(ctx,studyToSite({x,y,z}),heading);heading=result.yaw;route.push(result.position);
+      for(const target of layout.panoramaRegistration.loungeRoute.toReversed().slice(1)){
+        const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);
       }
       assert.ok(Math.abs(route.at(-1).y-13.25)<.01);
       assert.equal(await page.locator('#room').inputValue(),'panorama','natural descent restores the lower room');

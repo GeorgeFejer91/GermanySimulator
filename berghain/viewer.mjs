@@ -62,6 +62,8 @@ function clearInput() {
 function syncLoungeRoom(){
   const architectural=architecturalRoomAt(visitor),newRoom=architectural==='smokingEscape'?'smoking':viewpoints[architectural]?architectural:null;
   const room=newRoom||(admissionRoomAt(visitor)?'admission':null)||labRoomAt(visitor)||kloRoomAt(visitor)||(Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?'lounge':
+    Math.abs(visitor.y-13.25)<.15?'panorama':
+    roomSelect.value==='panorama'&&Math.abs(visitor.y-6.65)<.15?'berghain':
     ['groundToilets','smoking','eisbar'].includes(roomSelect.value)?(visitor.y<5?'foyer':visitor.y<12?'berghain':'panorama'):
     roomSelect.value==='admission'&&Math.abs(visitor.y-.05)<.15?'foyer':
     roomSelect.value==='lab'&&Math.abs(visitor.y-.05)<.15?'saule':
@@ -105,7 +107,8 @@ function render(time) {
         (admissionRoomAt(visitor)?viewpoints.admission.label:
         labRoomAt(visitor)?viewpoints.lab.label:
         kloRoomAt(visitor)?viewpoints[kloRoomAt(visitor)].label:
-        Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:'Inside Berghain');
+        Math.abs(visitor.y-layout.upperLounge.floorHeight)<.15?viewpoints.lounge.label:
+        Math.abs(visitor.y-13.25)<.15?viewpoints.panorama.label:'Inside Berghain');
       if (document.querySelector('#location').textContent !== place) document.querySelector('#location').textContent = place;
     } else {
       camera.position.set(visitor.x, visitor.y + eyeHeight, visitor.z);

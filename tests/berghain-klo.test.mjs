@@ -42,13 +42,14 @@ test('main floor connects continuously to bar, toilets, an open cubicle and back
   assert.ok(layout.kloBar);
   const outward=[[5,0],[-6.35,0],[-6.35,3.8],[-8.05,3.8],[-8.05,-4.1],[-9,-4.1],[-9,-8.3],[-13.8,-8.3],[-13.8,-10],[-18.2,-10]];
   let position={...viewpoints.berghain.position};
-  for(const pair of [...outward,...outward.slice(0,-1).reverse(),[5,5]]){
-    const target=studyToSite({x:pair[0],y:6.65,z:pair[1]});
+  const bypass=[{x:8.3,y:6.65,z:viewpoints.berghain.position.z},{x:8.3,y:6.65,z:3.8}];
+  const targets=[...bypass,...[...outward,...outward.slice(0,-1).reverse()].map(([x,z])=>studyToSite({x,y:6.65,z})),...bypass.toReversed(),viewpoints.berghain.position];
+  for(const target of targets){
     for(let step=0;step<180;step++){
       position=moveVisitor(position,{x:(target.x-position.x)/(180-step),z:(target.z-position.z)/(180-step)},layout);
       assert.ok(canStand(position,layout),'body-clear continuous route');
     }
-    assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.1,'reach '+pair+' actual '+JSON.stringify(position));
+    assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.1,'reach '+JSON.stringify(target)+' actual '+JSON.stringify(position));
     assert.equal(position.y,6.65,'no teleport or floor change');
   }
 });

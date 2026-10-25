@@ -59,14 +59,12 @@ test('continuous stair-centre ascent/descent and clear ground beneath the upper 
     for(let i=0;i<steps;i++){p=moveVisitor(p,{x:dx,z:dz},layout);assert.ok(canStand(p,layout));}
     assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.03&&Math.abs(p.y-target.y)<.03,'Folded main stair reaches every landing');
   }
-  for(const [x,z0,z1,lower,upper]of [[-5,8.5,-5,6.65,13.25]]){
-    const a=studyToSite({x,y:lower,z:z0+.6}),b=studyToSite({x,y:upper,z:z1-.6});
-    let position={...a};
-    const dx=b.x-a.x,dz=b.z-a.z,steps=Math.ceil(Math.hypot(dx,dz)/.08);
-    for(let i=0;i<steps;i++)position=moveVisitor(position,{x:dx/steps,z:dz/steps},layout);
-    assert.ok(position.y>=upper-.01&&canStand(position,layout),'Continuous original stair ascent must reach its upper landing');
-    for(let i=0;i<steps;i++)position=moveVisitor(position,{x:-dx/steps,z:-dz/steps},layout);
-    assert.ok(position.y<=lower+.01&&canStand(position,layout),'Continuous return must reach the lower landing');
+  const upperRoute=layout.panoramaRegistration.stairRoute;
+  let position={...upperRoute[0]};
+  for(const target of [...upperRoute.slice(1),...upperRoute.toReversed().slice(1)]){
+    const n=Math.ceil(Math.hypot(target.x-position.x,target.z-position.z)/.04),dx=(target.x-position.x)/n,dz=(target.z-position.z)/n;
+    for(let i=0;i<n;i++)position=moveVisitor(position,{x:dx,z:dz},layout);
+    assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.06&&Math.abs(position.y-target.y)<.06,'Relocated Panorama stair and landing stay continuously accessible');
   }
 });
 

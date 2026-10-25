@@ -21,7 +21,7 @@ export function createBerghainModel() {
     externalSource: 'Berlin LoD2 DEBE02YY200004SX; dl-de-zero-2.0',fixtures:layout.fixtures,soundSystem:layout.soundSystem,
     landscape:layout.landscape,exteriorDetails:layout.exteriorDetails,artworks:layout.artworks,upperLounge:layout.upperLounge,
     panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar,saule:layout.saule,halle:layout.halle,interiorTopology:layout.interiorTopology,
-    architecturalCirculation:layout.architecturalCirculation,mainHallDetails:layout.mainHallDetails,groundSanitary:layout.groundSanitary,admission:layout.admission};
+    architecturalCirculation:layout.architecturalCirculation,mainHallDetails:layout.mainHallDetails,groundSanitary:layout.groundSanitary,admission:layout.admission,panoramaRegistration:layout.panoramaRegistration};
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),

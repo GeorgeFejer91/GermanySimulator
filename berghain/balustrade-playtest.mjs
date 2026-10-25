@@ -124,13 +124,13 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
     await artifacts.screenshot(page,'foyer-balustrade-native.png');await disposeNativeAsset(page);
     return {parity,native,scope:'Controlled close-up, standard GLB, real mesh holes; no natural-route claim'};
   }
-},{id:'rail-natural-stairs',modes:['quick','stress'],timeoutMs:240000,async run(ctx){
+},{id:'rail-natural-stairs',modes:['quick','stress'],timeoutMs:360000,async run(ctx){
   const {page,artifacts}=ctx;
   await enterNaturally(ctx);let heading=0;const route=[];
-  const outward=[[5,21.15,.05],...mainStair,[4.5,9.0,6.65],[-5,9.0,6.65],[-5,-5.5,13.25],[-11,-5.5,13.25],[-11,-7,13.25]];
-  const back=[[-11,-5.5,13.25],[-5,-5.5,13.25],[-5,9.0,6.65],[4.5,9.0,6.65],...mainStair.toReversed(),[5,21.15,.05],[0,19.7,.05],[0,20.25,.05]];
-  for(const [index,[x,z,y]]of [...outward,...back].entries()){
-    const target=studyToSite({x,y,z});
+  const site=([x,z,y])=>studyToSite({x,y,z});
+  const main=[...[[5,21.15,.05],...mainStair,[14,8,6.65],[5,8,6.65],[5,5,6.65]].map(site),...layout.panoramaRegistration.mainApproach.slice(1)];
+  const back=[...main.toReversed().slice(1),...[[0,19.7,.05],[0,20.25,.05]].map(site)];
+  for(const [index,target]of [...main,...back].entries()){
     assert.ok(canStand(target,layout),'Route waypoint must clear the actual retained structure');
     try{
       const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);

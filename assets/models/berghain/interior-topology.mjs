@@ -1,4 +1,5 @@
 import {studyToSite} from './calibration.mjs';
+import {panoramaStudyPoint} from './panorama-registration.mjs';
 
 // A13/I21 establish a distinct Panorama sanitary area and an added lounge.
 // The footprint below registers that relationship to the existing provisional
@@ -79,7 +80,7 @@ export function pinInteriorTopologyTones(layout){
 }
 
 const corners=[[-21.5,-3.5],[-13,-3.5],[-13,4.8],[-21.5,4.8]]
-  .map(([x,z])=>studyToSite({x,y:13.25,z}));
+  .map(([x,z])=>{const p=panoramaStudyPoint([x,13.25,z]);return{x:p[0],y:p[1],z:p[2]};});
 export function panoramaSanitaryAt(position){
   return Math.abs(position.y-13.25)<.15&&corners.every((a,i)=>{
     const b=corners[(i+1)%4];

@@ -48,8 +48,8 @@ it has a named object in the source.
 | F17 | Separate Eisbar with small metallic tiles, stepped L counter and recessed dark base; text2006, G27–29, O00 | Distinct stepped counter rests on a guarded mezzanine; service furniture, crane, arrival and night cues share that level. | I03/I04 and U01/U02 support the elevated relationship; the 9.95 m datum, footprint and end-bay registration remain estimated. Historical 2006 installation, current inventory unverified. |
 | F18 | Narrow stair and guarded upper continuation behind Eisbar; G29; text2006 | Lower approach reaches the counter platform; the narrow onward ascent ends at a guarded service landing. Relief/window backdrop beside the opening follows G27. | Exact endpoints, dimensions and Panorama relationship remain inferred. No upper Panorama doorway or backstage passage is invented. |
 | F19 | Exposed industrial rail, blue-green hoist, cable loop and hook; G28/29 | Candidate stationary machinery study in the Eisbar bay. | No operational machinery behavior or hidden mechanism inferred. |
-| F20 | Smoking/escape enclosure connects club levels; text2008, G30–34, O00 | Outward-projecting exterior stair in the entrance-side region; G30/31 plus P08–10 supersede the former parallel rear-quarter registration. | Upper interior attachment and whole Panorama registration still need reconciliation. Do not invent a cross-hall shortcut. |
-| F21 | Open lower escape flights, real upper platforms and sloping/stepped enclosure underside; G30–34 | Reconstructed continuous main-floor/tower circulation with each flight and landing represented. | Unseen upper doorway remains explicitly unresolved; no claim of a surveyed fire-escape plan. |
+| F20 | Smoking/escape enclosure connects club levels; text2008, G30–34, O00 | Outward-projecting exterior stair in the entrance-side region; G30/31 plus P08–10 supersede the former parallel rear-quarter registration. | Public upper doorway now connects to the registered Panorama wing by a guarded hall-edge passage; exact bay, dimensions, floor/window section and current access remain estimated. |
+| F21 | Open lower escape flights, real upper platforms and sloping/stepped enclosure underside; G30–34 | Reconstructed continuous main-floor/tower circulation with each flight and landing represented. | An estimated upper doorway now serves the public Panorama connection; exact dimensions and bay registration remain unresolved. No surveyed fire-escape plan is claimed. |
 | F22 | Thin bolted steel/glass frame, operable panes, opaque end panels, supporting legs and thin roof; G30/31/34 | Reconstructed tower envelope has a glazed reverse and opaque entrance-facing side, following G30/31 and P08–10. | Exact pane count, sections, depth and current glazing unspecified. |
 | F23 | Checker-plate deck, plain ceiling panels, horizontal-wire guards and metal ashtray shelf; G32/33 | Reconstructed tower interior detail and real edge guards. | Metal shelf purpose inferred from visible trays; no current fixture count or occupancy claim. |
 | F24 | Separate WC interventions: upper2013 and wardrobe/ground2015; O00 and linked A13/I21; ground/wardrobe adjacency in U02 | `ground-sanitary.mjs` adds a separate ground cloakroom WC wing, east public entry, three illustrative stalls and trough; existing main/Klo and Panorama facilities remain distinct. | West/front registration, dimensions and count inferred. This page has no floor-specific sanitary photographs; no FLINTA attribution is made. |
@@ -62,7 +62,7 @@ it has a named object in the source.
 | F31 | Garden, Säule, Halle and other venue milestones; O00 | Existing garden/Säule/Halle studies remain under their own primary references. | This timeline is not an interior plan or a reason to add neighboring Kantine/Bierhof as invented club rooms. |
 | F32 | Physical models, artistic cutaways, publication images and permit-signing photo; O01–16, P00–04 | Cross-check relationships and dates. Small P00 section strengthens split-level/stair interpretation. | O16 does not expose a readable dimensioned plan. Exhibition models and drawn perspective are not measured surveys. |
 | F33 | Power-station-era rail/conveyor/coal/chimney infrastructure; O17–19 | Historical context; retained industrial vocabulary only where present in actual club images. | Demolished industrial equipment is not added to current exterior. |
-| F34 | Panorama rubber bar, Tillmans photographs, glass/grid bar and several darkrooms; page text | Existing Panorama bar/art study and long-bar glass; darkroom/cabin arrangement requires dated cutaway reconciliation. | Historical statement is not a complete current artwork or room inventory; no backstage location is supplied. |
+| F34 | Panorama rubber bar, Tillmans photographs, glass/grid bar and several darkrooms; page text | Panorama room/bar/DJ, upper lounge and ordinary WC are registered toward the entrance frontage using A13/I19 and U02/V05; long-bar glass retained. Darkroom/cabin arrangement remains unresolved. | Historical statement is not a complete current artwork or room inventory; no backstage location is supplied. |
 
 ## User-supplied cutaways
 
@@ -88,8 +88,8 @@ VALIDATION.md: source/native geometry and renders, continuous body routes,
 desktop/Android-emulated controls and independent Physics/Camera review.
 Feature rows retain their source-specific limits. Coordinates, counts and
 currentness marked estimated have not become surveyed facts. Backstage,
-FLINTA/lift locations, full Panorama registration and the upper smoking
-attachment remain unresolved. The ground WC is a provisional adjacency model.
+FLINTA/lift locations and the common Panorama floor/window section remain
+unresolved. The public upper smoking connection is now an estimated working link. The ground WC is a provisional adjacency model.
 All61 photographs mapped does not mean every hidden room or contemporary
 detail has been reconstructed.
 

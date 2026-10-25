@@ -8,6 +8,14 @@ This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f9
 
 ## Evidence and review boundaries
 
+Latest 25 October Panorama registration supersedes earlier closed-upper-door and
+rear-facing room statements below. AU10/AU12 now have a connected entrance-side
+Panorama, ordinary WC beneath the lounge, relocated bar/DJ and guarded public
+upper smoking link. AU08/AU24 lighting follows those spaces. Exact floor/window
+section, dimensions, private spaces and contemporary inventory remain unresolved;
+these are bounded model corrections, not a verified floor plan. The dated audit
+table is retained for provenance; current acceptance is in VALIDATION.md.
+
 25 October registration correction supersedes the rear-quarter assignment below.
 G30/31 show the tower's long axis projecting out from the wall; P08–10 favor the
 entrance-side region. The background annex does not identify the Halle join.

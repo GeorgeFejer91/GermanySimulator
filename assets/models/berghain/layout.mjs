@@ -17,6 +17,7 @@ import {addAdmission,finishAdmission,admissionMaterials} from './admission.mjs';
 import {addArchitecturalCirculation,smokingToAuthor} from './architectural-circulation.mjs';
 import {addMainHallDetails} from './main-hall-details.mjs';
 import {addGroundSanitary} from './ground-sanitary.mjs';
+import {registerPanorama} from './panorama-registration.mjs';
 
 export const materials = {
   ...admissionMaterials,
@@ -312,3 +313,4 @@ addArchitecturalCirculation(layout);
 addHalleStructure(layout);
 addMainHallDetails(layout);
 addGroundSanitary(layout);
+registerPanorama(layout,viewpoints);

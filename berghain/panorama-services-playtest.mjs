@@ -2,7 +2,7 @@ import {assertFirstPersonView} from './fixture-playtest.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {layout} from '../assets/models/berghain/layout.mjs';
+import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand} from './navigation.mjs';
 import {dragLook,forward} from './fixture-playtest.mjs';
@@ -36,7 +36,7 @@ export default {name:'Panorama fitted ceiling, acoustic clouds and exposed servi
       await dragLook(page,context,profile,-295);await lookUp(ctx);
       const position=JSON.parse(await page.locator('#model').getAttribute('data-position'));
       await artifacts.screenshot(page,'panorama-services-source.png');
-      const native=await renderNativeAsset(page,{position,yaw:1.18,pitch:.3});
+      const native=await renderNativeAsset(page,{position,yaw:viewpoints.panorama.yaw+1.18,pitch:.3,clubNight:true});
       assert.equal(native.panoramaServices.ceilingHeight,17.95);
       assert.equal(native.fixtures,layout.fixtures.length);assert.equal(native.equipment,44);assert.equal(native.artworks,layout.artworks.length);
       await artifacts.screenshot(page,'panorama-services-native.png');await disposeNativeAsset(page);
@@ -45,21 +45,21 @@ export default {name:'Panorama fitted ceiling, acoustic clouds and exposed servi
     {id:'panorama-radiator-visitor',modes:['stress'],timeoutMs:180000,async run(ctx){
       const {page,context,profile,baseURL,artifacts}=ctx;
       await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
-      await page.locator('#room').selectOption('panorama');let heading=0;const route=[];
-      for(const [x,z]of [[-11.65,-9],[-7.4,-9],[-7.4,-20.4],[-19.9,-20.4]]){
+      await page.locator('#room').selectOption('panorama');let heading=viewpoints.panorama.yaw;const route=[];
+      for(const [x,z]of [[-8.3,12.37],[-8.3,19.5],[-7.336,19.9]]){
         artifacts.json('route-progress.json',{route,next:{x,z}});
-        const result=await travel(ctx,studyToSite({x,y:13.25,z}),heading);heading=result.yaw;route.push(result.position);
+        const result=await travel(ctx,{x,y:13.25,z},heading);heading=result.yaw;route.push(result.position);
       }
-      const fixture=layout.fixtures.find(f=>f.id==='panorama-radiator-0'),[x,y,z]=fixture.anchor;
-      const final=await travel(ctx,{x:x+1.15,y,z},heading);heading=final.yaw;route.push(final.position);
-      await dragLook(page,context,profile,-Math.atan2(Math.sin(Math.PI/2-heading),Math.cos(Math.PI/2-heading))/.004);
+      const fixture=layout.fixtures.find(f=>f.id==='panorama-radiator-2'),[x,y,z]=fixture.anchor;
+      const final=await travel(ctx,{x,y,z:z-1.15},heading);heading=final.yaw;route.push(final.position);
+      await dragLook(page,context,profile,-Math.atan2(Math.sin(Math.PI-heading),Math.cos(Math.PI-heading))/.004);
       await artifacts.screenshot(page,'radiator-human-approach.png');
       const stopped=await forward(page,context,profile,900),blocked=await forward(page,context,profile,700);
-      assert.ok(canStand(stopped,layout)&&stopped.x>x+.28);
+      assert.ok(canStand(stopped,layout)&&stopped.z<z-.28);
       assert.ok(Math.hypot(blocked.x-stopped.x,blocked.z-stopped.z)<.025,'radiator prevents continued full-body motion');
       await assertFirstPersonView(page);
       await artifacts.screenshot(page,'radiator-human-contact.png');
-      const native=await renderNativeAsset(page,{position:final.position,yaw:Math.PI/2,pitch:-.75});
+      const native=await renderNativeAsset(page,{position:final.position,yaw:Math.PI,pitch:-.75,clubNight:true});
       await artifacts.screenshot(page,'radiator-native-detail.png');await disposeNativeAsset(page);
       return {route,stopped,blocked,native,scope:'Panorama shortcut followed by real keyboard/touch route and visible radiator collision'};
     }}

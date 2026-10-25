@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
-import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {upperLoungeStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(upperLoungeStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {surfaceFamilies} from '../assets/models/berghain/surface-data.mjs';
 
@@ -20,8 +21,7 @@ test('the added upper lounge retains primary references and estimated dimensions
 test('the lounge stair supports continuous full-body travel up, into the room and back',()=>{
   assert.ok(layout.upperLounge,'Upper lounge and stair required');
   let position={...viewpoints.panorama.position};
-  for(const [x,z]of [[-11.65,-7],[-11.65,9],[-7.9,9]]){
-    const target=studyToSite({x,y:13.25,z});
+  for(const target of layout.panoramaRegistration.loungeRoute.slice(1,-2)){
     for(let i=0;i<300;i++)position=moveVisitor(position,{x:(target.x-position.x)/(300-i),z:(target.z-position.z)/(300-i)},layout);
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.1,'continuous lower corridor route');
   }

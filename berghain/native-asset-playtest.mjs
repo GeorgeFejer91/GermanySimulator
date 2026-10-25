@@ -55,7 +55,7 @@ export async function renderNativeAsset(page,view){
       }finally{disposeBerghainModel(source);}
     }
     return {bytes:bytes.byteLength,meshes,geometryProbes,fixtures:metadata.fixtures.length,equipment:metadata.soundSystem?.components.length||0,artworks:metadata.artworks?.length||0,upperLounge:metadata.upperLounge||null,
-      panoramaServices:metadata.panoramaServices||null,
+      panoramaServices:metadata.panoramaServices||null,panoramaRegistration:metadata.panoramaRegistration||null,
       kloBar:metadata.kloBar||null,labOratory:metadata.labOratory||null,balustrades:metadata.balustrades||null,mainBar:metadata.mainBar||null,saule:metadata.saule||null,halle:metadata.halle||null,interiorTopology:metadata.interiorTopology||null,architecturalCirculation:metadata.architecturalCirculation||null,mainHallDetails:metadata.mainHallDetails||null,groundSanitary:metadata.groundSanitary||null,lighting:nightLighting?.state||null,
       admission:metadata.admission||null,physicalMaterials,
       min:bounds.min.toArray(),max:bounds.max.toArray(),triangles:renderer.info.render.triangles};

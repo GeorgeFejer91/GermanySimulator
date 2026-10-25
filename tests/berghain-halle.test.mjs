@@ -20,7 +20,7 @@ async function beforeArchitecturalAdditions(){
  const layoutURL=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
  const encode=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
  const absolute=(source,url)=>source.replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
- const source=readFileSync(layoutURL,'utf8').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('addGroundSanitary(layout);','');
+ const source=readFileSync(layoutURL,'utf8').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('addGroundSanitary(layout);','').replace('registerPanorama(layout,viewpoints);','');
  const baselineURL=encode(absolute(source,layoutURL)),baseline=await import(baselineURL);
  const modelURL=new URL('../assets/models/berghain/model.mjs',import.meta.url);
  const modelSource=readFileSync(modelURL,'utf8').replace("from './layout.mjs'",`from '${baselineURL}'`);

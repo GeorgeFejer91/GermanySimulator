@@ -1,5 +1,76 @@
 # Berghain viewer validation
 
+### Panorama frontage and public connections — 25 October 2026
+
+U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,
+with the long bar across the window wall and the DJ at the opposite end. The
+room, acoustic ceiling, radiators, furniture, CLIMBER, ordinary WC and upper
+lounge now move together, preserving the physical size of each fixture.
+The ordinary WC stays below the lounge, distinct from the ground cloakroom WC,
+main Klo and the unregistered historical wardrobe/FLINTA trial room.
+
+The main stair has matching visible rails, body barriers and landings, with an
+approach around retained columns. A guarded passage at the hall edge reaches
+an upper smoking doorway through both facade layers. The existing main-floor
+tower entry and two enclosed flights remain. The upper lounge shifts 0.4 m and
+the nearby lower seat 1.4 m to clear the retained column and stair approach.
+Room dimensions, floor heights, passage footprint and door positions remain
+estimates. No backstage room or private access route is inferred.
+
+Localized night cues follow the moved rooms, WC approach and passage within
+the existing three scene spots and two shadow maps. The main-bar end uplight
+now reaches plaster below the Eisbar slab that intercepted its previous aim.
+The illumination is an appearance study, not a surveyed contemporary show.
+
+The floor/window section still conflicts with I19's low-sill tall windows.
+The repeated facade tiers are also estimated; this change does not establish
+a measured floor datum or bay-specific window pattern. Backstage and FLINTA
+locations, present inventory, artwork fidelity and other open audit findings
+remain unresolved. The full architectural goal stays ACTIVE.
+
+## Panorama registration — bounded acceptance
+
+Base a315b8489ee931fca814df9db8bb9abb1a79c8bb; exact 219-file freeze:
+output/berghain-panorama-candidate.json, SHA256 a5c46b0629a88b1a53d0aab2c9d75efcf92a72c466ce92b66e365a4b939b4a20.
+GLB SHA256 64e726d5c2e1a0b6e5563e8ad23ff6742beaa4410073d66dba330145d9019ed3.
+
+- Full Node run: 177 passed, zero failed/skipped (berghain-panorama-final-node-repaired.txt).
+- Final browser cases: 17 passed, zero failed/not-run across the two reports
+  bound in output/berghain-panorama-evidence-binding.json. These cover room
+  source/native views, controlled pixel parity, complete main/Panorama/WC/lounge/
+  smoking roundtrips, nine route sightlines, retained furniture/radiator/Klo/
+  cubicle/natural entrance routes, texture failure and resized/enlarged text.
+- Controlled source/native pixel mean RGB difference is 0.348 with zero large
+  difference pixels. All 26 runtime textures dispose in the comparison probe.
+- Independent Physics and Camera reports: output/berghain-panorama-physics-review.md
+  and output/berghain-panorama-camera-review.md. CPU geometry and supplied rendered
+  evidence remain distinguished. Source/native maximum vertex error is below
+  0.000004 m; fixture transforms preserve scale. Estimated section remains open.
+- Initial review rejected a decorative sill crossing the upper smoking portal
+  without collision. The facade cutter now includes that unprefixed shell detail.
+  Fixed main/lounge stair cue banks repair dark treads within the same light budget.
+  Pitched-down top and mid-flight views cover the revised circulation lighting.
+  Earlier initial/mixed reports are historical; all final report hashes match.
+
+Nine cold contexts on each side compare the exact published baseline with the
+candidate, using the same main-hall camera and two-second eastward real input.
+Local host/GPU only; no throttled or physical Android qualification.
+
+| Profile | Median frame p95, ms | Median input latency, ms | Normal transfer bytes |
+| --- | --- | --- | --- |
+| desktop | 20.9 → 20.8 | 8.4 → 9.1 | 7473079 → 7486680 |
+| android-portrait | 7.1 → 7.1 | 11.0 → 15.0 | 7473079 → 7486680 |
+| android-landscape | 7.1 → 7.1 | 13.5 → 13.7 | 7473079 → 7486680 |
+
+Receipts: output/berghain-panorama-cost-comparison.json and before/after reports.
+No idle RAF, automatic GLB request or new texture family; drawing buffer at most
+1.6 MP. Tests ran headlessly and muted. Perceptual audio and physical Android
+are NOT RUN. Review acceptance covers the functional authored reconstruction,
+not historical accuracy of estimated dimensions or complete contemporary layout.
+
+
+
+
 ## Smoking registration correction — 25 October 2026
 
 Base929f6d8249d4a8b074285b1d151ae31b75625d98; 215-file frozen candidate
@@ -2276,6 +2347,19 @@ deployment does not invalidate the verified80c6660 model; its changed Markdown
 must be distinguished from already-deployed model assets. Full fidelity remains
 unaccepted and the broader reconstruction goal remains ACTIVE.
 
+
+Published Eisbar correction `a315b8489ee931fca814df9db8bb9abb1a79c8bb`; Pages run 40146269790
+succeeded. All 86 checked public files match the commit, six entry URLs respond,
+and three fresh live browser cases pass on desktop and both Android emulations.
+Both public viewers arrive on the 9.95 m authored mezzanine and accept real input.
+Receipt: output/berghain-eisbar-release.json. This local publication handoff does
+not change the reviewed runtime. The complete architectural goal remains ACTIVE.
+
+The next Panorama registration pass also needs its floor/window section checked:
+output/berghain-panorama-section-audit.json records the current 1.55 m upper-window
+sill above the Panorama floor, unlike the low-sill relationship in I19 views15/16.
+See output/berghain-panorama-section-followup.md for the coupled source owners.
+The facade tiers are estimates too; this finding does not select a new floor height.
 
 ## Eisbar mezzanine correction — final bounded acceptance
 

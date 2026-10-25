@@ -1,5 +1,40 @@
 # Berghain architectural study
 
+### Panorama frontage and public connections — 25 October 2026
+
+U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,
+with the long bar across the window wall and the DJ at the opposite end. The
+room, acoustic ceiling, radiators, furniture, CLIMBER, ordinary WC and upper
+lounge now move together, preserving the physical size of each fixture.
+The ordinary WC stays below the lounge, distinct from the ground cloakroom WC,
+main Klo and the unregistered historical wardrobe/FLINTA trial room.
+
+The main stair has matching visible rails, body barriers and landings, with an
+approach around retained columns. A guarded passage at the hall edge reaches
+an upper smoking doorway through both facade layers. The existing main-floor
+tower entry and two enclosed flights remain. The upper lounge shifts 0.4 m and
+the nearby lower seat 1.4 m to clear the retained column and stair approach.
+Room dimensions, floor heights, passage footprint and door positions remain
+estimates. No backstage room or private access route is inferred.
+
+Localized night cues follow the moved rooms, WC approach and passage within
+the existing three scene spots and two shadow maps. The main-bar end uplight
+now reaches plaster below the Eisbar slab that intercepted its previous aim.
+The illumination is an appearance study, not a surveyed contemporary show.
+
+The floor/window section still conflicts with I19's low-sill tall windows.
+The repeated facade tiers are also estimated; this change does not establish
+a measured floor datum or bay-specific window pattern. Backstage and FLINTA
+locations, present inventory, artwork fidelity and other open audit findings
+remain unresolved. The full architectural goal stays ACTIVE.
+
+
+
+
+The portable model is 56,993,976 bytes, 746,948 triangles and 202 mesh/material
+groups, reusing 25 original embedded maps. Dynamic lighting remains viewer-owned.
+No source photograph or printed artwork pixels are embedded.
+
 ## Karhard architecture and source limits
 
 The subsequent Karhard/cutaway increment adds three original modules:

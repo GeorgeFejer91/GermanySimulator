@@ -41,7 +41,7 @@ test('wardrobe connects through a real glass doorway to main stairs and ground W
   walk([site([0,.05,14.4]),...layout.groundSanitary.route]);
   assert.equal(canStand(site([-4,.05,14.4]),layout),true,'door opening clear');
   for(const z of [13,15.8])assert.equal(canStand(site([-4,.05,z]),layout),false,'remaining glass leaves block');
-  const slices=layout.parts.filter(p=>p.circulationDoorway);
+  const slices=layout.parts.filter(p=>p.circulationDoorway&&p.name.startsWith('Public wardrobe'));
   assert.equal(slices.length,3);
   const header=slices.find(p=>p.name.endsWith('header'));
   assert.ok(Math.abs(header.center[1]-header.size[1]/2-2.45)<1e-8);
@@ -56,8 +56,8 @@ test('wardrobe connects through a real glass doorway to main stairs and ground W
 });
 test('smoking main-floor doorway and both enclosed flights connect in both directions',()=>{
   walk(layout.architecturalCirculation.smoking.siteRoute);
-  assert.match(layout.architecturalCirculation.smoking.upperConnection,/Closed/);
-  assert.equal(canStand(site([22,13.25,5]),layout),false,'unknown upper attachment remains closed');
+  assert.match(layout.architecturalCirculation.smoking.upperConnection,/estimated/);
+  assert.equal(canStand(site([22,13.25,5]),layout),true,'estimated public upper attachment is body clear');
   assert.equal(canStand(site([22,6.65,8]),layout),true,'new lower facade entry is body clear');
   assert.equal(canStand(site([22,6.65,-20]),layout),false,'former rear entry restored to facade');
 });

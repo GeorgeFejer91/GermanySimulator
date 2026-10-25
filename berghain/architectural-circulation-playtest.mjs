@@ -92,7 +92,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   assert.equal((await light(ctx.page)).room,'smoking');await ctx.artifacts.screenshot(ctx.page,'smoking-upper-source.png');
   const back=await route(ctx,layout.architecturalCirculation.smoking.siteRoute.toReversed(),heading,'tower-down');
   await ctx.artifacts.screenshot(ctx.page,'smoking-main-door-source.png');
-  return {out:r.records,back:back.records,scope:'Main-floor room shortcut then real keyboard/touch approach through front-side doorway and outward smoking flights in both directions; upper interior connection remains closed'};
+  return {out:r.records,back:back.records,scope:'Main-floor room shortcut then real keyboard/touch approach through front-side doorway and outward smoking flights in both directions; upper doorway connects through the separately tested estimated Panorama passage'};
  }},
  {id:'architecture-eisbar-route',modes:['quick','stress'],timeoutMs:300000,async run(ctx){
   let heading=await select(ctx,'berghain');
@@ -126,7 +126,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   await page.route('**/assets/models/berghain/textures/**',r=>r.abort());
   await page.goto(baseURL+'/berghain/model.html');await page.locator('#model[data-ready="true"]').waitFor();await page.locator('#enter').click();
   assert.equal(await page.locator('#model').getAttribute('data-materials'),'fallback');
-  for(const name of ['groundToilets','eisbar','smoking']){
+  for(const name of ctx.rooms||['groundToilets','eisbar','smoking']){
    await page.locator('#room').selectOption(name);
    await page.waitForFunction(expected=>JSON.parse(document.querySelector('#model').dataset.lighting).room===expected,name,{timeout:5000});
    assert.equal((await light(page)).room,name);await assertFirstPersonView(page);
@@ -149,7 +149,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   }
   // The permanent playable route uses an additional walking-location update.
   await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
-  for(const name of ['groundToilets','eisbar','smoking']){
+  for(const name of ctx.rooms||['groundToilets','eisbar','smoking']){
    await page.locator('#room').selectOption(name);await page.waitForTimeout(80);
    assert.equal(await page.locator('#location').textContent(),viewpoints[name].label);
   }

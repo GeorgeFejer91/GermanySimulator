@@ -89,7 +89,7 @@ test('bar plaster retains aged physical maps and practical beams reach the actua
   const wallMeshes=[];model.getObjectByName('interior').traverse(object=>{if(object.isMesh)wallMeshes.push(object);});
   for(const light of lights){
    const from=light.getWorldPosition(new THREE.Vector3()),to=light.target.getWorldPosition(new THREE.Vector3());
-   assert.ok(to.y>from.y+3&&from.y>layout.mainBar.floorHeight+.94,'Aim upward from above the service worktop');
+   assert.ok(to.y>from.y+(light.name==='bar pilaster uplight 1'?1.3:3)&&from.y>layout.mainBar.floorHeight+.94,'Aim upward from above the service worktop');
    const hits=new THREE.Raycaster(from,to.sub(from).normalize(),.02,light.distance).intersectObjects(wallMeshes,false);
    assert.ok(hits.length&&hits[0].object===wall,'The real cone center must reach plaster, not pass through the wall');
    assert.ok(light.color.r>light.color.b*1.5&&light.decay===2&&light.castShadow===false);
@@ -111,7 +111,7 @@ test('every practical housing rests on an actual bracket connected to its pilast
    const hit=new THREE.Raycaster(origin,new THREE.Vector3(0,-1,0),0,.15).intersectObject(mesh,false)[0];
    assert.ok(hit&&hit.distance<.003&&parts[hit.instanceId].role==='bar practical bracket','The underside must physically meet its support');
    const bracket=parts[hit.instanceId],support=bounds(bracket);
-   const stems=layout.parts.filter(p=>p.fixture==='main-bar-interior-facade'&&p.name.endsWith('pilaster stem'));
+   const stems=layout.parts.filter(p=>p.fixture==='main-bar-interior-facade'&&p.name.includes('pilaster stem'));
    assert.ok(stems.some(p=>{const size=support.clone().intersect(bounds(p)).getSize(new THREE.Vector3());return size.x*size.y*size.z>.0001;}),'Support must enter the actual pilaster');
    assert.ok(layout.solids.some(s=>s.renderPart===bracket),'The visible bracket must retain its physical solid');
   }

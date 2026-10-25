@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
-import {studyToSite} from '../assets/models/berghain/calibration.mjs';
+import {panoramaStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(panoramaStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 
 test('Panorama ceiling and services retain observed forms and estimated dimensions',()=>{
@@ -44,10 +45,10 @@ test('radiators have cylindrical headers, individual ribs and matching physical 
       const bounds=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(m);
       assert.ok(Math.abs(bounds.min.y-solid.y[0])<1e-6&&Math.abs(bounds.max.y-solid.y[1])<1e-6);
     }
-    const [x,y,z]=fixture.anchor,start={x:x+1.15,y,z};
+    const [x,y,z]=fixture.anchor,start={x,y,z:z-1.15};
     assert.ok(canStand(start,layout),fixture.id+' clear approach');
-    const stopped=moveVisitor(start,{x:-1.8,z:0},layout);
-    assert.ok(stopped.x>x+.28&&canStand(stopped,layout),'visible radiator stops full body');
+    const stopped=moveVisitor(start,{x:0,z:1.8},layout);
+    assert.ok(stopped.z<z-.28&&canStand(stopped,layout),'visible radiator stops full body');
   }
 });
 
@@ -94,6 +95,6 @@ test('visible conduit and clamps block the full visitor body',()=>{
 test('radiator valve protrusions block the whole body beyond the rib envelope',()=>{
   for(const id of ['panorama-radiator-0','panorama-radiator-2']){
     const fixture=layout.fixtures.find(f=>f.id===id),[x,y,z]=fixture.anchor;
-    for(const side of [-1,1])assert.equal(canStand({x:x+.40,y,z:z+side*.78},layout),false,'full-body cylinder cannot overlap protruding valve');
+    for(const side of [-1,1])assert.equal(canStand({x:x+side*.78,y,z:z-.40},layout),false,'full-body cylinder cannot overlap protruding valve');
   }
 });
