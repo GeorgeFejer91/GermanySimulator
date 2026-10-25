@@ -68,3 +68,53 @@ test('actual bar meshes fit around the retained concrete columns and stool colli
     }
   }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
+
+test('stools follow the visible curved counter with separated seats and complete collision bounds',()=>{
+  const corner=layout.parts.find(p=>p.fixture==='main-long-bar'&&p.shape==='main-bar-corner-body');
+  const seats=layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&p.center[2]>corner.center[2]+.1);
+  assert.ok(seats.length>=3,'The straight row must continue around the return');
+  const angles=seats.map(p=>Math.atan2(p.center[2]-corner.center[2],p.center[0]-corner.center[0]));
+  assert.ok(Math.max(...angles)-Math.min(...angles)>.8,'Seats occupy different sides of the curve');
+  const geometries={cylinder:new THREE.CylinderGeometry(.5,.5,1,12),ring:new THREE.TorusGeometry(.5,.035,6,20),...createMainBarGeometries()};
+  const counter=new THREE.Mesh(geometries['main-bar-corner-body'],new THREE.MeshBasicMaterial());
+  counter.matrixAutoUpdate=false;counter.matrix.fromArray(corner.matrix);counter.updateMatrixWorld(true);
+  try{
+    for(const seat of seats){
+      const origin=new THREE.Vector3(...seat.center),direction=new THREE.Vector3(corner.center[0],origin.y,corner.center[2]).sub(origin).normalize();
+      const hit=new THREE.Raycaster(origin,direction).intersectObject(counter)[0];
+      assert.ok(hit&&hit.distance>.45&&hit.distance<.6,'Real curved cabinet remains separated from the seat');
+      const solid=layout.solids.find(s=>s.fixture===seat.fixture);
+      assert.ok(solid,'The complete stool assembly needs a collider');
+      for(const part of layout.parts.filter(p=>p.fixture===seat.fixture)){
+        const geometry=geometries[part.shape],matrix=new THREE.Matrix4().fromArray(part.matrix);
+        for(let i=0;i<geometry.attributes.position.count;i++){
+          const point=new THREE.Vector3().fromBufferAttribute(geometry.attributes.position,i).applyMatrix4(matrix);
+          for(const axis of ['x','y','z'])assert.ok(point[axis]>=solid[axis][0]-1e-6&&point[axis]<=solid[axis][1]+1e-6,'Actual mesh fits its stool collision');
+        }
+      }
+      for(const other of layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&p!==seat))
+        assert.ok(Math.hypot(seat.center[0]-other.center[0],seat.center[2]-other.center[2])>.6,'Separate stool bodies');
+    }
+  }finally{counter.material.dispose();for(const geometry of Object.values(geometries))geometry.dispose();}
+});
+
+test('the full visitor can walk around the furnished bar return in both directions and escape stool contact',()=>{
+  const c=layout.parts.find(p=>p.fixture==='main-long-bar'&&p.shape==='main-bar-corner-body').center;
+  const arc=Array.from({length:211},(_,i)=>{const a=(180-i*.5)*Math.PI/180;return{x:c[0]+2.9*Math.cos(a),y:5.45,z:c[2]+2.9*Math.sin(a)};});
+  for(const route of [arc,[...arc].reverse()]){
+    let position=route[0];assert.ok(canStand(position,layout));
+    for(const target of route.slice(1)){
+      position=moveVisitor(position,{x:target.x-position.x,z:target.z-position.z},layout);
+      assert.ok(canStand(position,layout));
+      assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<1e-6,'Continuous body-clear arc');
+    }
+  }
+  for(const seat of layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&p.center[2]>c[2]+.1)){
+    const dx=seat.center[0]-c[0],dz=seat.center[2]-c[2],length=Math.hypot(dx,dz),out={x:dx/length,z:dz/length};
+    const start={x:seat.center[0]+out.x*.85,y:5.45,z:seat.center[2]+out.z*.85};assert.ok(canStand(start,layout));
+    const stopped=moveVisitor(start,{x:-out.x*2,z:-out.z*2},layout);assert.ok(canStand(stopped,layout));
+    assert.ok(Math.hypot(stopped.x-seat.center[0],stopped.z-seat.center[2])>.4,'Delayed step stops outside stool');
+    const escaped=moveVisitor(stopped,{x:out.x*.8,z:out.z*.8},layout);assert.ok(canStand(escaped,layout));
+    assert.ok(Math.hypot(escaped.x-stopped.x,escaped.z-stopped.z)>.56,'Reverse clears one full body diameter');
+  }
+});

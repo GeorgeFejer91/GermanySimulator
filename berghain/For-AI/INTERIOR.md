@@ -1,5 +1,24 @@
 # Berghain interior: objects, art and equipment
 
+## Main-bar seating follow-up — 25 October 2026
+
+G12 shows the concave circular stools following both the straight counter and
+its rounded return. G13 supports the splayed four-leg/ring-rest form; G14
+shows an empty bar. These undated photographs establish a furniture family
+and an observed arrangement, not a fixed or current count.
+
+The model's existing 18-stool row now continues with three matching stools
+around the existing counter arc. Their centers lie 0.50 m outward from the
+counter's 1.30 m outer radius at local angles 170, 140 and 110 degrees. Those
+offsets and the count are authoring estimates in the existing fitted room.
+The retained end pier limits the usable terminal sector; no source establishes
+its exact registration. Each stool retains the 0.76 m seat height, 0.40 m
+visible seat diameter and complete assembly collider. Validation must check
+actual meshes, the public aisle, the outer return route and contact recovery.
+The compact-chair aisle in G03/05 remains unregistered and is not conflated
+with this main-bar seating correction.
+
+
 ## Foyer gallery frame — source-informed correction
 
 Karhard G04/07/20/25 support rectangular gallery piers, local beam haunches,

@@ -236,11 +236,18 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     for(const z of [-5.4,-1.2,3.2])part('stepped countertop fitting',[-.22,1.125,z],[1,1,1],'steel','main-bar-stepped-fitting');
   });
 
-  for(let i=0;i<18;i++){
-    // Author offsets in metres, like the existing Panorama fixtures.
-    const z=-6.45+i*.75;
-    fixture('main-bar-stool-'+i,[18.4,5.45,-5],['I23'],{seatHeight:.76,width:.5,placement:'Estimated row'},()=>{
-      const offset=[-1.05,0,z];
+  // G12 shows the stools continuing around the rounded counter. G14 shows
+  // an empty setup: this is an estimated furnished arrangement, not an inventory.
+  const stoolOffsets=Array.from({length:18},(_,i)=>[-1.05,0,-6.45+i*.75]);
+  for(const degrees of [170,140,110]){
+    const angle=degrees*Math.PI/180,radius=corner.outer+.5;
+    stoolOffsets.push([corner.x+Math.cos(angle)*radius,0,corner.z+Math.sin(angle)*radius]);
+  }
+  layout.mainBar.seating={gallery:['12','14'],straight:18,curved:3,
+    confidence:'Photographed stool family and curved arrangement; count and spacing estimated; current inventory unknown'};
+  for(const [i,offset]of stoolOffsets.entries()){
+    fixture('main-bar-stool-'+i,[18.4,5.45,-5],['I23'],
+      {seatHeight:.76,width:.5,placement:i<18?'Estimated row':'Estimated curve'},()=>{
       part('concave round seat',[offset[0],.76,offset[2]],[.4,.051,.4],'steel','main-bar-stool-seat');
       for(let leg=0;leg<4;leg++){
         const a=Math.PI/4+leg*Math.PI/2,c=Math.cos(a),s=Math.sin(a);

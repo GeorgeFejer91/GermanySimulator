@@ -1,5 +1,54 @@
 # Berghain reconstruction: goal and work state
 
+### Main-bar return acceptance
+
+The three added stools pass 36 fresh affected Node checks and seven browser
+cases: natural admission, main stairs, the curved aisle in both directions,
+the straight guest aisle and exit on desktop and both Android-emulated touch
+orientations; two source/GLB and day/night view cases; a missing-texture
+stationary turn; and a downward fallback view added after Camera review found
+that the original landscape crops did not show the complete stools.
+Downward mesh rays confirm all three seat surfaces.
+Independent Physics and Camera reviews accept the frozen 226-file candidate,
+base 957443bc9de81cab1399dd18eca0a0025f37701b. Physical Android is NOT RUN.
+
+Three cold contexts per viewport before and after meet the scoped rendering
+and input limits. Draw calls stay unchanged; ordinary viewing adds 548 bytes
+and does not request the GLB. Idle rendering remains stopped. The portable
+model is 59,284,836 bytes, 767,936 triangles and 204 mesh groups with 25 embedded
+maps. The change adds 30 parts and 2,736 triangles, with no new light, timer,
+texture or material. Existing geometry and material definitions are retained.
+The existing instance-tone sequencing changes shades on 792 retained parts;
+the reviewed renders show no blocking appearance defect. This is not a claim
+that every retained instance has an identical color value.
+
+Receipts: output/berghain-bar-return-candidate.json, -node.tap,
+-browser-acceptance.json, -cost-comparison.json, -physics-review.md and
+-camera-review.md. The incomplete initial cost-before report is retained:
+its probe crossed an existing column. The corrected cost-before-recheck and
+cost-after batches use the same validated route and each pass nine cases.
+No runtime repair was needed for that harness error. This documentation bridge
+updates only the acceptance record and task handoff, leaving geometry frozen.
+
+G12 supports the curved seating arrangement; G14 shows an empty counter.
+Three seats and their spacing are a fitted estimate, not a current inventory.
+The compact-chair aisle, current backstage/FLINTA positions and complete
+photographic fidelity remain unresolved. README.md remains the single owner;
+output/berghain-bar-return-release.json records publication verification.
+
+
+## Main-bar return seating — current correction
+
+Karhard G12 shows stools continuing around the curved counter end. The
+existing straight row has been extended by three instances of the same
+concave seat, splayed legs and ring rest. G14 shows the bar without stools,
+so this is an estimated furnished arrangement, not a current inventory.
+The candidate retains the room, counter, column and screen geometry. Fresh
+body-route, source/GLB, day/night and desktop/mobile-emulated checks and both
+independent reviews are recorded above. README remains task owner.
+Backstage/FLINTA placement and the compact-chair aisle remain unresolved.
+
+
 ### Foyer frame acceptance
 
 The foyer gallery correction passed 195 fresh Node checks and eight browser
