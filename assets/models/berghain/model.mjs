@@ -14,6 +14,7 @@ import {createMainBarGeometries,createMainBarLights} from './main-bar.mjs';
 import {createSauleGeometries} from './saule.mjs';
 import {createHalleGeometries} from './halle.mjs';
 import {createGroundGeometries} from './ground-registration.mjs';
+import {createSauleCeilingGeometries} from './saule-ceiling.mjs';
 
 export function createBerghainModel() {
   const model = new THREE.Group();
@@ -26,7 +27,7 @@ export function createBerghainModel() {
   const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
-    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries(),...createHalleGeometries(),...createGroundGeometries()};
+    grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries(),...createHalleGeometries(),...createGroundGeometries(),...createSauleCeilingGeometries()};
   const batches = new Map(), toneBatches=new Map(), shades=new Map(), transform = new THREE.Object3D(), direction = new THREE.Vector3(), vertical = new THREE.Vector3(0, 1, 0);
   for (const part of layout.parts) {
     const key = [part.section, part.material, part.shape].join('/');

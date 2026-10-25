@@ -1,5 +1,19 @@
 # Berghain interior: objects, art and equipment
 
+## Säule ceiling follow-up
+
+`saule-ceiling.mjs` fits A15/I24's chamfered members, circular underside cavities
+and exposed central services to the existing pier pairs. Six real recesses stop
+at the intact slab; no upper floor holes are inferred. Two generic beams retain
+their side-room segments while their conflicting central portions are replaced.
+The complete earlier floor/collision/fixture/route state is preserved. All
+ceiling dimensions, bore depth/function and service/fixture counts remain
+estimates. Karhard 00 and I24 detail duplicate the same view; Karhard 01/02 show
+one camera position under different lighting, not independent surveyed views.
+README/VALIDATION own the scoped checks and publication receipt. Full fidelity
+and exact private-room registration remain unfinished.
+
+
 ## Toilet, backstage and smoking source follow-up — 25 October 2026
 
 The user's requested Reddit search and independent interview checks add the

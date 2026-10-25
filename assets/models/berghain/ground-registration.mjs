@@ -1,5 +1,6 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
+import {fitSauleCeiling} from './saule-ceiling.mjs';
 
 // Relative topology from V01/V15/V16/V18; every metric below is a fitted
 // hypothesis. This is not a recovered or measured plan of the operating club.
@@ -323,4 +324,5 @@ export function registerGround(layout,views){
  // Preserve the wardrobe door, but use the foyer outside the new glazed wall.
  const route=layout.architecturalCirculation.wardrobeConnection.siteRoute;
  layout.architecturalCirculation.wardrobeConnection.siteRoute=[...route.slice(0,2),{x:9,y:datum,z:15.6164},{x:9,y:datum,z:0},{x:9,y:datum,z:-2.2},{x:8.424688967975206,y:datum,z:-2.2},layout.architecturalCirculation.mainStair.siteRoute[0]];
+ fitSauleCeiling(layout);
 }

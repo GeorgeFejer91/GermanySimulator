@@ -1,6 +1,61 @@
 # Berghain reconstruction: goal and work state
 
-## Säule ground arrangement — accepted for publication
+## Säule ceiling: source-informed concrete and services
+
+A15's photographs and I24 show chamfered concrete members, circular underside
+cavities and a higher central service space with exposed pipes and suspended
+fixtures. The new original geometry fits those forms to the existing four pier
+pairs. Six circular recesses have actual sidewalls and are capped by the intact
+upper slab. Their 0.85 m diameter, 0.35 m depth and all bay dimensions are fitted
+estimates; the images do not establish through-floor openings or original function.
+
+Only the central portions of two unsupported generic beams are replaced; their
+side-room portions and outer end faces retain their affine geometry. The fit
+adds four chamfered members, side soffits, three service bays and six small
+fixture studies. All public floors, previous collision envelopes, piers, rooms,
+stairs, guards, glass, viewpoints and night-light cues remain unchanged. The
+lowest new haunch is 4.20 m above the fitted datum; no upper walking surface is
+added. Three reusable spotlights and two shadow maps remain the lighting budget.
+
+231 Node checks pass, including real recess/cap rays, exact preservation, body
+headroom, clear light rays and the existing toilet/balcony circuits. The browser
+matrix covers source/native pixel and geometry comparisons, day/night views and
+real desktop/Android-emulated aisle travel with upward/downward looking in both
+loaded and texture-fallback states. Matched before/after cost uses the same Säule
+arrival and two-second real strafe. Detailed receipts and independent Physics
+and Camera reviews are retained under output/berghain-saule-ceiling-*.
+Physical Android NOT RUN. Publication is gated by those scoped results.
+
+Export: 61,116,208 bytes, 790,956 triangles, 212 groups, 25 textures; SHA-256
+a3d35161e3382615d0a8113491eb5cb190e0a7dec4237e6aac0f965ece3abd59.
+Full goal ACTIVE: exact ceiling grid/depth, current service/fixture inventory,
+separate Säule admission, complete Lab plan and exact private/backstage and
+upper/garden FLINTA locations remain unresolved. V16's wooden arch forms describe
+picnic tables, not an unmodelled architectural arcade.
+
+
+### Published ground-interior correction
+
+Commit `8633deea6a264d1a18a5fd9fbf319d61d1aab66b`; Pages run 40211190774 succeeded. All 90 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-saule-layout-release.json. Primary staged index unchanged.
+
+Eight paired piers, a side WC/balcony band with two stairs, an opposite bar and
+a closed event-dependent Lab connection now follow the documented relationships.
+Local bar, WC and balcony light cues share the existing three-light budget.
+All coordinates, dimensions and current inventories remain provisional. No
+exact FLINTA cubicle or private backstage room is claimed as verified.
+
+227 Node checks plus eight affected lighting checks, 15 selected local browser cases,
+18 matched cost contexts and both
+independent reviews pass within their recorded scope. Physical Android NOT RUN.
+Full goal ACTIVE: separate exterior admission, complete plans, detailed ceiling
+and picnic-table forms, exact backstage and upper/garden FLINTA remain unresolved.
+V16's wooden arch forms refer to picnic tables, not separate architectural arcades;
+the next source comparison is recorded in output/berghain-saule-followup-evidence.md.
+
+
+## Säule ground arrangement — published and verified
 
 V01/V15–V18 constrain the relative arrangement: eight piers in pairs, an end
 stage, a side WC/balcony band with two stairs, an opposite bar and conditional
@@ -40,19 +95,19 @@ Normal transfer changes by +26,211 bytes; the optional GLB changes by
 lazy GLB loading remain. These are local emulation results, not qualification
 of a physical Android device or an unchanged-speed claim.
 
-Accepted for publication; deployment verification remains pending.
+Published and verified; see the release receipt above.
 Physical Android NOT RUN; full goal ACTIVE.
 
 Current export: 60,777,456 bytes, 787,960 triangles, 207 groups, 25 textures;
 SHA-256 219a026b66849c2fc61b63ed5c37c0f97dcd5b017da8d90d71a932750d9442ed.
 Three reusable cue lights and two shadow maps remain; local bar, WC and balcony
 cues are authored night interpretations, not measurements of an actual rig.
-External Säule admission, complete Lab plan, wooden arches, ceiling/service
+External Säule admission, complete Lab plan, picnic-table forms, ceiling/service
 details, private backstage and exact upper/garden FLINTA registration remain open.
 
 Base cab382c382ab49a86f692160cd593ed15bc5d7ea. Root is sole writer/publisher.
 Candidate output/berghain-saule-layout-runtime; evidence output/berghain-saule-layout-*.
-Primary runtime and its unrelated staged index remain untouched.
+Validated runtime promoted to the primary checkout; unrelated staged index unchanged.
 
 ### Published compact foyer-chair correction
 
