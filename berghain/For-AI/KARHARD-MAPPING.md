@@ -1,5 +1,12 @@
 # Karhard Berghain: evidence-to-model map
 
+Current section follow-up: F09/F20/F34 share the estimated floor/window fit
+recorded in INTERIOR.md and README.md. Panorama now spans the six observed bays;
+the six rigid radiators sit below their actual openings, and main/Klo, ordinary
+WC, lounge and smoking circulation follow the common section. This resolves
+the prior model overlap; exact datums and current private-room placement remain
+unverified. VALIDATION.md owns acceptance of this candidate.
+
 Panorama follow-up to F34: linked I19 views06/15/16 support an opaque pale
 counter-end wall, high service band and small recess. The model now represents
 these with a separate lining and a closed recess; dimensions/construction remain
@@ -52,7 +59,7 @@ it has a named object in the source.
 | F14 | Long bar, rounded return, luminous ribbed bands, steel/glass hall screen; G11–18 | Existing `main-bar.mjs` covers the main forms; added radiator band strengthens its lower edge. | End doorway/window relationship and exact screen grid remain unregistered. |
 | F15 | Tall inner historic facade, paired relief/window tiers, pilasters and warm wall wash; G11–16 | Existing `main-bar.mjs` ornamental facade/roof and six practical uplights retained. | Repeated bay/relief counts, profiles and present arrangement are estimates, not newly proved by the full gallery. |
 | F16 | Concave stools and ring rests, stools around return, worktop fittings and localized worn plaster; G12–14 | Existing straight stool row and service fittings; return-facing stools and site-specific damage remain refinements. | Avoid adding chairs into the new circulation route or treating different photo setups as a contradictory fixed inventory. |
-| F17 | Separate Eisbar with small metallic tiles, stepped L counter and recessed dark base; text2006, G27–29, O00 | Distinct stepped counter rests on a guarded mezzanine; service furniture, crane, arrival and night cues share that level. | I03/I04 and U01/U02 support the elevated relationship; the 9.95 m datum, footprint and end-bay registration remain estimated. Historical 2006 installation, current inventory unverified. |
+| F17 | Separate Eisbar with small metallic tiles, stepped L counter and recessed dark base; text2006, G27–29, O00 | Distinct stepped counter rests on a guarded mezzanine; service furniture, crane, arrival and night cues share that level. | I03/I04 and U01/U02 support the elevated relationship; the revised 8.75 m datum, footprint and end-bay registration remain estimated. Historical 2006 installation, current inventory unverified. |
 | F18 | Narrow stair and guarded upper continuation behind Eisbar; G29; text2006 | Lower approach reaches the counter platform; the narrow onward ascent ends at a guarded service landing. Relief/window backdrop beside the opening follows G27. | Exact endpoints, dimensions and Panorama relationship remain inferred. No upper Panorama doorway or backstage passage is invented. |
 | F19 | Exposed industrial rail, blue-green hoist, cable loop and hook; G28/29 | Candidate stationary machinery study in the Eisbar bay. | No operational machinery behavior or hidden mechanism inferred. |
 | F20 | Smoking/escape enclosure connects club levels; text2008, G30–34, O00 | Outward-projecting exterior stair in the entrance-side region; G30/31 plus P08–10 supersede the former parallel rear-quarter registration. | Public upper doorway now connects to the registered Panorama wing by a guarded hall-edge passage; exact bay, dimensions, floor/window section and current access remain estimated. |

@@ -8,9 +8,9 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 
 test('new routes select their own cue on the correct floor before generic garden/Panorama classification',()=>{
   for(const [p,room] of [
-    [[23.6,13.25,7],'smoking'],[[23.6,6.65,7],'smoking'],[[23.6,.05,8],'smokingEscape'],
-    [[16,9.95,-20],'eisbar'],[[12,5,18],'mainStair'],[[-15,.05,20.6],'groundToilets'],
-    [[23.6,17,7],null],[[25,13.25,-20],null],[[-15,6.65,20.6],null],[[5,6.65,5],null]
+    [[23.6,9.05,7],'smoking'],[[23.6,5.45,7],'smoking'],[[23.6,.05,8],'smokingEscape'],
+    [[16,8.75,-20],'eisbar'],[[12,5,18],'mainStair'],[[-15,.05,20.6],'groundToilets'],
+    [[23.6,17,7],null],[[25,13.25,-20],null],[[-15,5.45,20.6],null],[[5,5.45,5],null]
   ])assert.equal(architecturalRoomAt(studyToSite({x:p[0],y:p[1],z:p[2]})),room);
   for(const lights of Object.values(architecturalCues((position,target,color,intensity,angle,range)=>({position,target,color,intensity,angle,range})))){
     assert.ok(lights.length>0&&lights.length<=3);

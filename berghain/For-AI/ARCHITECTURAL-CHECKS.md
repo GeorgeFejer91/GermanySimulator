@@ -1,5 +1,54 @@
 # Architectural consistency and proportion checks
 
+### Radiator, window and connected-section correction — current candidate
+
+The previous joint section placed 0.8025 m rigid radiators partly over the
+glazing. I19 gallery04/expanded16 show their tops at or below the sill. The
+current working fit lowers the connected main/Klo, Panorama and upper-lounge
+floors by 0.20 m to 5.45, 9.05 and 12.15 m, respectively; the south tall-row
+sill moves from 9.70 to 9.90 m. Its head remains 13.65 m. The actual exterior
+opening, masonry below it, sill and inner frame change together. No cover
+panel conceals glazing and no radiator is compressed. Ceiling-mounted Panorama
+bodies remain at their previous elevation beneath the 13.95 m fitted ceiling.
+
+This balances photographed relations rather than recovering unique datums:
+the floor-to-sill distance is 0.85 m; the radiator top clears it by 0.0475 m;
+the 3.75 m opening remains elongated, and the 1.15 m upper inter-row gap is
+30.7% of its height. Common Klo headroom remains 3.15 m with full-height
+switchgear. Main and escape half-landings are 2.75 m; the smoking landings
+are 5.45, 7.25 and 9.05 m. The lower slab underside is 5.29 m and enclosure
+fascia underside 5.30 m, above the provisional lower aperture head 5.25 m.
+These are model quantities and photo-informed estimates, not surveyed facts.
+The Eisbar/service landings follow at 8.75/12.05 m; the closed upper endpoint
+does not assert a permanent private or Panorama connection.
+
+This working section is an evidence-constrained estimate. README.md owns the
+current task and publication state; VALIDATION.md owns the fresh test evidence.
+Earlier candidate notes below retain their historical datums. The old joint
+section was rejected after its radiator/glazing overlap was found; the first
+sill candidate was rejected for a stale smoking-doorway lining. Both are
+preserved in output. Current source: output/berghain-joint-sill-repaired-runtime,
+225-file freeze SHA256
+493f2977d80975688251f4b0e2b75a6f3348bd1ca459c5dbd8e530b1561690c0.
+Full photographic fidelity, exact current toilet/backstage inventories and
+physical Android qualification remain unresolved.
+
+
+## Current numerical snapshot — joint section, 25 October 2026
+
+The checker now measures main/Klo 5.45 m, Panorama 9.05 m and upper lounge 12.15 m.
+Main-floor-to-external-roof height is 14.924 m; the main bar retains 11 m beam
+clearance. The main stair has two 2.7 m rises over approximately 6.719 m runs;
+Panorama rise/run is 3.6/5.991828 m; upper lounge 3.1/5.544882 m. The enclosed
+smoking flights rise 1.8 m over approximately 3.277 m each. These are measured
+model quantities, not independently measured building dimensions. The earlier
+6.65/13.25/16.35 m examples below describe the previous model snapshot.
+
+The official exterior geometry checks remain consistent and Halle geometry is
+unchanged. Exterior agreement cannot certify the inferred interior section.
+Current report: output/berghain-joint-sill-architecture-report.json.
+
+
 The CPU tool [check-architecture.mjs](../check-architecture.mjs) measures the current model and compares scoped quantities with the existing [source catalogue](SOURCES.md). It does not establish a dimensioned interior blueprint or replace rendered, physical, accessibility or contemporary-inventory review. Keep task ownership and acceptance in [README.md](README.md); this page owns checker semantics only.
 
 ```powershell
@@ -30,7 +79,7 @@ The default CLI writes JSON to stdout. `--out` writes only the requested file; i
 
 Only floating-point arithmetic roundoff is allowed for nominal equality. No percentage tolerance is used to force agreement with architectural prose. Changes in unknown or incompatible comparisons do not disappear behind a green test run. Catalogue/source updates must preserve historical dates and exact quantity meanings.
 
-## Current source relationships and limits
+## Source relationships and limits (historical numerical examples)
 
 G07/G09 are official ALKIS/LoD2 exterior data, acquired23October2026. LoD2 creation date2026-03-02 and footprint-date attribute2023-03-11 are distinct. The3,432.102366m² polygon sum agrees with the rounded cadastral figure. The source-ground altitude offset is35.288m; the vertical datum has not been independently established. Generalised exterior surfaces supply no interior wall thickness, floors, windows or equipment. The main roof surface20.374m differs by1mm from its20.373m`measuredHeight` attribute; preserve both values rather than changing floors.
 

@@ -4,7 +4,8 @@ import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {panoramaStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
-const studyToSite=({x,y,z})=>Object.fromEntries(panoramaStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
+import {dancePanoramaPoint} from '../assets/models/berghain/panorama-section.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(dancePanoramaPoint(panoramaStudyPoint([x,y+4.2,z])).map((v,i)=>[['x','y','z'][i],v]));
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 
 test('Panorama ceiling and services retain observed forms and estimated dimensions',()=>{
@@ -29,7 +30,7 @@ test('the fitted ceiling blocks head penetration while preserving all actual vie
 
 test('radiators have cylindrical headers, individual ribs and matching physical barriers',()=>{
   const radiators=layout.fixtures.filter(f=>f.id.startsWith('panorama-radiator-'));
-  assert.equal(radiators.length,3);
+  assert.equal(radiators.length,6);
   for(const fixture of radiators){
     assert.ok(fixture.sources.includes('I19'));
     const rendered=layout.parts.filter(p=>p.fixture===fixture.id);
@@ -46,9 +47,12 @@ test('radiators have cylindrical headers, individual ribs and matching physical 
       assert.ok(Math.abs(bounds.min.y-solid.y[0])<1e-6&&Math.abs(bounds.max.y-solid.y[1])<1e-6);
     }
     const [x,y,z]=fixture.anchor,start={x,y,z:z-1.15};
-    assert.ok(canStand(start,layout),fixture.id+' clear approach');
-    const stopped=moveVisitor(start,{x:0,z:1.8},layout);
-    assert.ok(stopped.z<z-.28&&canStand(stopped,layout),'visible radiator stops full body');
+    // Some photographed window seats are in front of these radiators. Probe
+    // the radiator itself so that a seat cannot mask a missing metal collider.
+    const probe={floors:[{x:[-100,100],z:[-100,100],y}],solids};
+    assert.ok(canStand(start,probe),fixture.id+' isolated approach');
+    const stopped=moveVisitor(start,{x:0,z:1.8},probe);
+    assert.ok(stopped.z<z-.28&&canStand(stopped,probe),'visible radiator stops full body');
   }
 });
 

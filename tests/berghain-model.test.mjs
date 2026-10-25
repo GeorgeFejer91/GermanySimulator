@@ -72,7 +72,7 @@ test('stair undersides and floor slabs block the visitor body', async () => {
   const halleUndersides=layout.halle.stairs.flatMap(stair=>[.25,.3].map(t=>({
     x:stair.axis[0][0]+(stair.axis[1][0]-stair.axis[0][0])*t,y:.05,
     z:stair.axis[0][1]+(stair.axis[1][1]-stair.axis[0][1])*t})));
-  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x:4.5,y:6.65,z:5.83},...halleUndersides]) {
+  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x:4.5,y:5.45,z:5.83},...halleUndersides]) {
     assert.equal(canStand(point, layout), false, 'full cylinder must not pass through a tread underside: ' + JSON.stringify(point));
   }
 });

@@ -21,7 +21,7 @@ test('Lab identification follows its calibrated footprint at both photographed r
   const {labRoomAt}=await import('../assets/models/berghain/lab-oratory.mjs');
   assert.equal(labRoomAt(studyToSite({x:-8.5,y:.05,z:-8.5})),'lab');
   assert.equal(labRoomAt(studyToSite({x:-17.4,y:-1.15,z:5.1})),'lab');
-  for(const p of [{x:5,y:.05,z:4},{x:-12,y:6.65,z:5},{x:0,y:.05,z:19}])assert.equal(labRoomAt(studyToSite(p)),null);
+  for(const p of [{x:5,y:.05,z:4},{x:-12,y:5.45,z:5},{x:0,y:.05,z:19}])assert.equal(labRoomAt(studyToSite(p)),null);
 });
 
 function follow(position,authorTarget){

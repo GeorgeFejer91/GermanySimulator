@@ -8,9 +8,9 @@ import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghai
 import {kloRoomAt,createKloGeometries} from '../assets/models/berghain/klo-bar.mjs';
 
 test('natural room identification uses calibrated footprints and floor elevation',()=>{
-  assert.equal(kloRoomAt(studyToSite({x:-13,y:6.65,z:5})),'klo');
-  assert.equal(kloRoomAt(studyToSite({x:-13.8,y:6.65,z:-8.3})),'toilets');
-  for(const p of [{x:5,y:6.65,z:5},{x:-13,y:13.25,z:5},{x:-13,y:.05,z:5}])
+  assert.equal(kloRoomAt(studyToSite({x:-13,y:5.45,z:5})),'klo');
+  assert.equal(kloRoomAt(studyToSite({x:-13.8,y:5.45,z:-8.3})),'toilets');
+  for(const p of [{x:5,y:5.45,z:5},{x:-13,y:13.25,z:5},{x:-13,y:.05,z:5}])
     assert.equal(kloRoomAt(studyToSite(p)),null);
 });
 
@@ -27,8 +27,8 @@ test('Klo Bar and toilets carry primary evidence, explicit placement estimates a
   assert.ok(layout.kloBar,'Missing Klo Bar must be reconstructed as a room');
   assert.ok(layout.kloBar.sources.includes('ART04')&&layout.kloBar.sources.includes('I21'));
   assert.match(layout.kloBar.confidence,/estimated/);
-  assert.equal(layout.kloBar.floorHeight,6.65);
-  assert.ok(layout.kloBar.ceilingHeight-6.65>=2.8);
+  assert.equal(layout.kloBar.floorHeight,5.45);
+  assert.ok(layout.kloBar.ceilingHeight-5.45>=2.8);
   assert.match(layout.kloBar.artwork.status,/Partial figure reconstruction/);
   assert.match(layout.panoramaServices.switchgearHistory,/Klo Bar/);
   for(const key of ['klo','toilets']){
@@ -42,15 +42,15 @@ test('main floor connects continuously to bar, toilets, an open cubicle and back
   assert.ok(layout.kloBar);
   const outward=[[5,0],[-6.35,0],[-6.35,3.8],[-8.05,3.8],[-8.05,-4.1],[-9,-4.1],[-9,-8.3],[-13.8,-8.3],[-13.8,-10],[-18.2,-10]];
   let position={...viewpoints.berghain.position};
-  const bypass=[{x:8.3,y:6.65,z:viewpoints.berghain.position.z},{x:8.3,y:6.65,z:3.8}];
-  const targets=[...bypass,...[...outward,...outward.slice(0,-1).reverse()].map(([x,z])=>studyToSite({x,y:6.65,z})),...bypass.toReversed(),viewpoints.berghain.position];
+  const bypass=[{x:8.3,y:5.45,z:viewpoints.berghain.position.z},{x:8.3,y:5.45,z:3.8}];
+  const targets=[...bypass,...[...outward,...outward.slice(0,-1).reverse()].map(([x,z])=>studyToSite({x,y:5.45,z})),...bypass.toReversed(),viewpoints.berghain.position];
   for(const target of targets){
     for(let step=0;step<180;step++){
       position=moveVisitor(position,{x:(target.x-position.x)/(180-step),z:(target.z-position.z)/(180-step)},layout);
       assert.ok(canStand(position,layout),'body-clear continuous route');
     }
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.1,'reach '+JSON.stringify(target)+' actual '+JSON.stringify(position));
-    assert.equal(position.y,6.65,'no teleport or floor change');
+    assert.equal(position.y,5.45,'no teleport or floor change');
   }
 });
 
@@ -82,18 +82,18 @@ test('sanitary fittings include hollow bowls, protected lights, sinks with taps 
   assert.ok(layout.parts.some(p=>p.name.endsWith('trap pipe')));
   const mesh=layout.parts.filter(p=>p.name==='WC cubicle upper mesh');
   assert.ok(mesh.length>100,'Photographed open transoms are mesh geometry');
-  for(const p of mesh)assert.ok(p.matrix[13]-p.size[1]/2>6.65+2.5,'mesh transoms remain above standing head height');
+  for(const p of mesh)assert.ok(p.matrix[13]-p.size[1]/2>5.45+2.5,'mesh transoms remain above standing head height');
   for(const p of bowls)assert.ok(p.matrix.every(Number.isFinite));
 });
 
 test('closed cubicle doors and glazed bar counters stop full-body motion',()=>{
   assert.ok(layout.kloBar);
-  const start=studyToSite({x:-16.3,y:6.65,z:-12});
+  const start=studyToSite({x:-16.3,y:5.45,z:-12});
   assert.ok(canStand(start,layout));
   const stopped=moveVisitor(start,{x:-3,z:0},layout);
-  assert.ok(stopped.x>studyToSite({x:-17.4,y:6.65,z:-12}).x&&canStand(stopped,layout));
+  assert.ok(stopped.x>studyToSite({x:-17.4,y:5.45,z:-12}).x&&canStand(stopped,layout));
   const bar=layout.fixtures.find(f=>f.id==='klo-switchgear-bar');
-  const front={x:bar.anchor[0]+1.5,y:6.65,z:bar.anchor[2]+2.2};
+  const front={x:bar.anchor[0]+1.5,y:5.45,z:bar.anchor[2]+2.2};
   assert.ok(canStand(front,layout));
   const blocked=moveVisitor(front,{x:0,z:-4},layout);
   assert.ok(blocked.z>bar.anchor[2]+.5&&canStand(blocked,layout));

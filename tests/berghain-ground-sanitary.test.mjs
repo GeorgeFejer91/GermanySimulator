@@ -9,11 +9,11 @@ const site=(x,z,y=.05)=>studyToSite({x,y,z});
 
 test('ground quiet WC is a distinct provisional level without a guessed FLINTA assignment',()=>{
   const room=layout.groundSanitary;
-  assert.equal(room.floorHeight,.05);assert.equal(layout.kloBar.floorHeight,6.65);
-  assert.equal(layout.interiorTopology.panoramaToilets.floorHeight,13.25);
+  assert.equal(room.floorHeight,.05);assert.equal(layout.kloBar.floorHeight,5.45);
+  assert.equal(layout.interiorTopology.panoramaToilets.floorHeight,9.05);
   assert.match(room.confidence,/estimated/);assert.match(room.flintaLocation,/Unassigned/);
   assert.equal(room.stalls.length,3);assert.equal(groundSanitaryAt(room.arrival.position),true);
-  assert.equal(groundSanitaryAt({...room.arrival.position,y:6.65}),false);
+  assert.equal(groundSanitaryAt({...room.arrival.position,y:5.45}),false);
   assert.equal(groundSanitaryAt(site(-9.5,19.6)),false);
 });
 test('public cloakroom-end corridor, east doorway, all three stalls and wash return fit the full body',()=>{

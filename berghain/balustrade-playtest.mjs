@@ -55,7 +55,7 @@ async function nearGuard(ctx,{fallback=false,restore=false}={}){
  if(fallback)await page.route('**/assets/models/berghain/textures/*.png',r=>r.abort());
  await enterNaturally(ctx);let heading=0;
  const route=[];
- for(const [x,z,y]of [[5,21.15,.05],...mainStair,[4.5,9,6.65],[-2,8.85,6.65]]){
+ for(const [x,z,y]of [[5,21.15,.05],...mainStair,[4.5,9,5.45],[-2,8.85,5.45]]){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
  }
  const target=0,turn=Math.atan2(Math.sin(target-heading),Math.cos(target-heading));
@@ -92,7 +92,7 @@ async function nearGuard(ctx,{fallback=false,restore=false}={}){
  }
  await artifacts.json('camera-yaw-samples.json',{route,samples,scope:'Actual exterior entry, real stair ascent and gallery approach followed by real pointer drags; no forced placement or room selector'});
  assert.ok(samples.every(s=>s.perspective==='first-person'&&s.avatar==='false'));
- const returned=await travel(ctx,studyToSite({x:-2,y:6.65,z:7.8}),heading);
+ const returned=await travel(ctx,studyToSite({x:-2,y:5.45,z:7.8}),heading);
  await dragLook(page,context,profile,Math.atan2(Math.sin(returned.yaw),Math.cos(returned.yaw))/.004);
  const clearDistance=Number(await page.locator('#model').getAttribute('data-camera-distance'));
  assert.equal(clearDistance,0,'First-person camera has no follow distance');
@@ -109,7 +109,7 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
     const bars=layout.parts.filter(p=>p.balustrade==='foyer-gallery-west'&&p.role==='picket');
     const a=bars[Math.floor(bars.length*.7)].center,b=bars[Math.floor(bars.length*.7)+1].center;
     const rays=[a,a.map((v,i)=>(v+b[i])/2)].map(p=>({origin:[p[0],p[1],p[2]+1],direction:[0,0,-1]}));
-    const camera=studyToSite({x:-2,y:6.65,z:8.1}),target=studyToSite({x:-2,y:6.65,z:10});
+    const camera=studyToSite({x:-2,y:5.45,z:8.1}),target=studyToSite({x:-2,y:5.45,z:10});
     const yaw=Math.atan2(camera.x-target.x,camera.z-target.z);
     const native=await renderNativeAsset(page,{position:camera,yaw,pitch:-.35,rays});
     assert.equal(native.balustrades.length,3);assert.equal(native.artworks,2);assert.equal(native.equipment,44);
@@ -128,7 +128,7 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
   const {page,artifacts}=ctx;
   await enterNaturally(ctx);let heading=0;const route=[];
   const site=([x,z,y])=>studyToSite({x,y,z});
-  const main=[...[[5,21.15,.05],...mainStair,[14,8,6.65],[5,8,6.65],[5,5,6.65]].map(site),...layout.panoramaRegistration.mainApproach.slice(1)];
+  const main=[...[[5,21.15,.05],...mainStair,[14,8,5.45],[5,8,5.45],[5,5,5.45]].map(site),...layout.panoramaRegistration.mainApproach.slice(1)];
   const back=[...main.toReversed().slice(1),...[[0,19.7,.05],[0,20.25,.05]].map(site)];
   for(const [index,target]of [...main,...back].entries()){
     assert.ok(canStand(target,layout),'Route waypoint must clear the actual retained structure');

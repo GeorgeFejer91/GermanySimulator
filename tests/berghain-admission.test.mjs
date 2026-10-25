@@ -67,7 +67,7 @@ test('door registration clears the physical visitor and matches the real hinged-
 test('admission room classification and source confidence distinguish route evidence from estimates',()=>{
   for(const [x,z] of [[-5.7,20.15],[-3.2,19],[-6.6,17.4]])assert.equal(admissionRoomAt(site(x,z)),true);
   for(const [x,z] of [[0,20.25],[-6.6,15.2],[-1.2,28.4],[-15,15.7]])assert.equal(admissionRoomAt(site(x,z)),false);
-  assert.equal(admissionRoomAt(site(-5.7,20.15,6.65)),false,'upper floor cannot inherit admission lights');
+  assert.equal(admissionRoomAt(site(-5.7,20.15,5.45)),false,'upper floor cannot inherit admission lights');
   assert.ok(layout.admission.interior.supported.includes('bag-check room left of entrance'));
   assert.ok(layout.admission.interior.estimated.includes('cashier orientation'));
   for(const p of layout.parts.filter(p=>p.admission)){

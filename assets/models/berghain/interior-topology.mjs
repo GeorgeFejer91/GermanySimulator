@@ -1,3 +1,4 @@
+import {adjacentPanoramaPoint,panoramaSection} from './panorama-section.mjs';
 import {studyToSite} from './calibration.mjs';
 import {panoramaStudyPoint} from './panorama-registration.mjs';
 
@@ -80,9 +81,9 @@ export function pinInteriorTopologyTones(layout){
 }
 
 const corners=[[-21.5,-3.5],[-13,-3.5],[-13,4.8],[-21.5,4.8]]
-  .map(([x,z])=>{const p=panoramaStudyPoint([x,13.25,z]);return{x:p[0],y:p[1],z:p[2]};});
+  .map(([x,z])=>{const p=adjacentPanoramaPoint(panoramaStudyPoint([x,13.25,z]));return{x:p[0],y:p[1],z:p[2]};});
 export function panoramaSanitaryAt(position){
-  return Math.abs(position.y-13.25)<.15&&corners.every((a,i)=>{
+  return Math.abs(position.y-panoramaSection.floor)<.15&&corners.every((a,i)=>{
     const b=corners[(i+1)%4];
     return (b.x-a.x)*(position.z-a.z)-(b.z-a.z)*(position.x-a.x)>=0;
   });

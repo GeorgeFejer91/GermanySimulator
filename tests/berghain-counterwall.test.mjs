@@ -10,7 +10,7 @@ test('the counter has a continuous opaque interior backdrop above its worktop',(
  const boxes=layout.parts.filter(p=>p.section==='interior'&&p.shape==='box'&&p.matrix&&
   !materials[p.material].transparent&&!materials[p.material].transmission).map(p=>
    new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(new THREE.Matrix4().fromArray(p.matrix)));
- for(const y of [14.6,15.2,15.8,16.4])for(const z of [10,11,12,13,14,15,16,17,18,19,20]){
+ for(const y of [10.6,11.2,11.8,12.4])for(const z of [10,11,12,13,14,15,16,17,18,19,20]){
   const ray=new THREE.Ray(new THREE.Vector3(-18.1,y,z),new THREE.Vector3(-1,0,0));
   assert.ok(boxes.some(b=>{const hit=ray.intersectBox(b,new THREE.Vector3());return hit&&hit.x>=-18.55;}),`opaque inner plane at ${y},${z}`);
  }
@@ -25,9 +25,9 @@ test('wall, service opening and overhead panels have visible body barriers witho
   for(const [axis,i] of [['x',0],['y',1],['z',2]])assert.deepEqual(s[axis],[b.min.getComponent(i),b.max.getComponent(i)]);
  }
  // Use a supported test plane so a missing floor cannot masquerade as a wall.
- const space={floors:[{x:[-30,0],y:13.25,z:[0,30]}],solids:layout.solids.filter(s=>s.renderPart?.fixture==='panorama-counter-wall')};
+ const space={floors:[{x:[-30,0],y:9.05,z:[0,30]}],solids:layout.solids.filter(s=>s.renderPart?.fixture==='panorama-counter-wall')};
  for(const z of [8.8,14.5,19.5]){
-  const p=moveVisitor({x:-17.8,y:13.25,z},{x:-2,z:0},space);
+  const p=moveVisitor({x:-17.8,y:9.05,z},{x:-2,z:0},space);
   assert.ok(p.x>=-18.07,'closed wall/recess must stop the full body');
  }
  assert.equal(layout.panoramaRegistration.counterWall.throughAccess,false);
@@ -35,7 +35,7 @@ test('wall, service opening and overhead panels have visible body barriers witho
 });
 
 test('the retained service aisle is body-clear and the rack stays separate from the lining',()=>{
- const route=[{x:-16.85,y:13.25,z:9.3},{x:-16.85,y:13.25,z:17.8}];
+ const route=[{x:-16.85,y:9.05,z:9.3},{x:-16.85,y:9.05,z:17.8}];
  let p={...route[0]};assert.ok(canStand(p,layout));
  for(const target of [route[1],route[0]]){
   const n=Math.ceil(Math.abs(target.z-p.z)/.02),dz=(target.z-p.z)/n;
@@ -43,7 +43,7 @@ test('the retained service aisle is body-clear and the rack stays separate from 
   assert.ok(Math.abs(p.z-target.z)<.04);
  }
  const rack=layout.solids.find(s=>s.name==='panorama-bottle-rack assembly clearance');
- const lining=layout.solids.filter(s=>s.renderPart?.fixture==='panorama-counter-wall'&&s.y[0]<15&&s.z[0]<rack.z[1]&&s.z[1]>rack.z[0]);
+ const lining=layout.solids.filter(s=>s.renderPart?.fixture==='panorama-counter-wall'&&s.y[0]<11&&s.z[0]<rack.z[1]&&s.z[1]>rack.z[0]);
  assert.ok(rack.x[0]-Math.max(...lining.map(s=>s.x[1]))>.25,'rack does not intersect the wall');
 });
 

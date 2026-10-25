@@ -170,14 +170,14 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
   const replaced=new Set(['bar hall counter','bar back','bar bottle']);
   layout.parts=layout.parts.filter(p=>!replaced.has(p.name));
   layout.solids=layout.solids.filter(s=>!replaced.has(s.name));
-  const anchor=site([18.4,6.65,-5]);
-  layout.mainBar={sources:['A01','I02','I23'],floorHeight:6.65,counterHeight:1.12,screenHeight:10.7,
-    counterAnchor:anchor,screenAnchor:site([15.4,6.65,-5]),guestAisleStudyX:16.1,
+  const anchor=site([18.4,5.45,-5]);
+  layout.mainBar={sources:['A01','I02','I23'],floorHeight:5.45,counterHeight:1.12,screenHeight:10.7,
+    counterAnchor:anchor,screenAnchor:site([15.4,5.45,-5]),guestAisleStudyX:16.1,
     observedViews:{longBar:[11,12,13,14],glazedSeparation:[16]},
     confidence:'Photographed forms; room footprint, dimensions, counts, column relationship and currentness estimated',
     remaining:'Surveyed plan/elevations, complete ornate wall, exact apparatus/materials and contemporary installation'};
 
-  fixture('main-bar-glass-screen',[15.4,6.65,-5],['I23'],{height:10.7,length:14.8},()=>{
+  fixture('main-bar-glass-screen',[15.4,5.45,-5],['I23'],{height:10.7,length:14.8},()=>{
     const bays=22,pitch=14.8/bays;
     for(let i=0;i<bays;i++){
       const z=-7.4+(i+.5)*pitch;
@@ -187,7 +187,7 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     for(const y of [.04,1.08,2.75,4.6,6.5,8.6,10.7])box('steel transom',[0,y,0],[.065,.045,14.85],'steel',true);
   });
 
-  fixture('main-long-bar',[18.4,6.65,-5],['I23'],{height:1.12,length:14,depth:1.1,returnLength:1.8},()=>{
+  fixture('main-long-bar',[18.4,5.45,-5],['I23'],{height:1.12,length:14,depth:1.1,returnLength:1.8},()=>{
     // Keep the real retained pier out of the worktop/cabinet; only the front
     // strip continues across its bay. No structural column is relocated.
     const cuts=layout.solids.filter(s=>s.name==='load-bearing column'&&s.x[1]>anchor[0]-.55&&s.x[0]<anchor[0]+.55&&
@@ -199,7 +199,7 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     box('continuous front cabinet',[(frontLimit-.55)/2,.525,0],[stripWidth,1.05,14],'rubber',true);
     box('continuous worktop',[(frontLimit-.55)/2,1.0825,0],[stripWidth,.075,14],'rubber',true);
     layout.solids.push({name:'main bar front apron clearance',fixture:'main-long-bar',
-      x:[anchor[0]-.592,anchor[0]+frontLimit],z:[anchor[2]-7,anchor[2]+7],y:[6.65,7.77]});
+      x:[anchor[0]-.592,anchor[0]+frontLimit],z:[anchor[2]-7,anchor[2]+7],y:[5.45,6.57]});
     let start=-7;
     for(const cut of [...cuts,{lo:7,hi:7}]){
       if(cut.lo>start){
@@ -215,14 +215,14 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     box('return cabinet',[1.275,.525,7.775],[1.05,1.05,1.05],'rubber',true);
     box('return top',[1.275,1.0825,7.775],[1.05,.075,1.05],'rubber',true);
     layout.solids.push({name:'main bar return apron clearance',fixture:'main-long-bar',
-      x:[anchor[0]+.75,anchor[0]+1.8],z:[anchor[2]+7.25,anchor[2]+8.3255],y:[6.65,7.77]});
+      x:[anchor[0]+.75,anchor[0]+1.8],z:[anchor[2]+7.25,anchor[2]+8.3255],y:[5.45,6.57]});
     for(let i=0;i<corner.segments;i++){
       const a=Math.PI-i*Math.PI/2/corner.segments,b=Math.PI-(i+1)*Math.PI/2/corner.segments;
       const polygon=[[corner.outer+.012,a],[corner.outer+.012,b],[corner.inner,b],[corner.inner,a]].map(([r,t])=>
         [anchor[0]+corner.x+Math.cos(t)*r,anchor[2]+corner.z+Math.sin(t)*r]);
       layout.solids.push({name:'main bar rounded worktop clearance',fixture:'main-long-bar',polygon,
         x:[Math.min(...polygon.map(p=>p[0])),Math.max(...polygon.map(p=>p[0]))],
-        z:[Math.min(...polygon.map(p=>p[1])),Math.max(...polygon.map(p=>p[1]))],y:[6.65,7.77]});
+        z:[Math.min(...polygon.map(p=>p[1])),Math.max(...polygon.map(p=>p[1]))],y:[5.45,6.57]});
     }
     for(const y of [.23,.88]){
       for(let i=0;i<60;i++){
@@ -239,7 +239,7 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
   for(let i=0;i<18;i++){
     // Author offsets in metres, like the existing Panorama fixtures.
     const z=-6.45+i*.75;
-    fixture('main-bar-stool-'+i,[18.4,6.65,-5],['I23'],{seatHeight:.76,width:.5,placement:'Estimated row'},()=>{
+    fixture('main-bar-stool-'+i,[18.4,5.45,-5],['I23'],{seatHeight:.76,width:.5,placement:'Estimated row'},()=>{
       const offset=[-1.05,0,z];
       part('concave round seat',[offset[0],.76,offset[2]],[.4,.051,.4],'steel','main-bar-stool-seat');
       for(let leg=0;leg<4;leg++){
@@ -253,10 +253,10 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     });
   }
   addHistoricBarFacade(layout,{fixture,part,box});
-  fixture('main-bar-service-worktop',[20.6,6.65,-5],['I23'],{height:.94,length:13.4,depth:.58},()=>{
-    const service=site([20.6,6.65,-5]);
+  fixture('main-bar-service-worktop',[20.6,5.45,-5],['I23'],{height:.94,length:13.4,depth:.58},()=>{
+    const service=site([20.6,5.45,-5]);
     const cuts=layout.solids.filter(s=>s.renderPart?.fixture==='main-bar-interior-facade'&&s.renderPart.role==='pilaster'&&
-      s.y[0]<7.59&&s.x[0]<service[0]+.31&&s.z[1]>service[2]-6.725&&s.z[0]<service[2]+6.725)
+      s.y[0]<6.39&&s.x[0]<service[0]+.31&&s.z[1]>service[2]-6.725&&s.z[0]<service[2]+6.725)
       .map(s=>({lo:Math.max(-6.725,s.z[0]-service[2]-.025),hi:Math.min(6.725,s.z[1]-service[2]+.025),x:s.x[0]-service[0]-.025})).sort((a,b)=>a.lo-b.lo);
     const rearLimit=Math.min(.27,...cuts.map(c=>c.x));
     layout.mainBar.interiorFacade.serviceNotches=cuts;

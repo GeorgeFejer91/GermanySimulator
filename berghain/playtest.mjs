@@ -133,8 +133,8 @@ export default {
         await walkTo(page, 'a', 'x', halleBottom.x, -1);
         routes[2].lower = JSON.parse(await page.locator('#model').getAttribute('data-position'));
         await artifacts.json('routes.json', {routes});
-        assert.ok(Math.abs(routes[0].upper.y - 6.65) < .01 && Math.abs(routes[0].lower.y - .05) < .01);
-        assert.ok(Math.abs(routes[1].upper.y - 13.25) < .01 && Math.abs(routes[1].lower.y - 6.65) < .01);
+        assert.ok(Math.abs(routes[0].upper.y - 5.45) < .01 && Math.abs(routes[0].lower.y - .05) < .01);
+        assert.ok(Math.abs(routes[1].upper.y - 9.05) < .01 && Math.abs(routes[1].lower.y - 5.45) < .01);
         assert.ok(Math.abs(routes[2].upper.y - 4.25) < .01 && Math.abs(routes[2].lower.y - .05) < .01);
         return {routes, input: 'actual keyboard movement from authored room viewpoints; no state injection'};
       }},

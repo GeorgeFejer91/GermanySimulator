@@ -23,7 +23,7 @@ test('Säule has grounded massive concrete bodies and actual flared capitals bel
       assert.ok(body.size[0]>1.2&&body.size[2]>1.5,'Photographed heavy concrete masses must replace the pencil-like lower silhouette');
       const b=boundsOf(body),c=boundsOf(cap);
       assert.ok(Math.abs(b.min.y-.05)<1e-6&&Math.abs(c.min.y-b.max.y)<1e-6,'Body stands on the floor and meets the capital');
-      assert.ok(Math.abs(c.max.y-6.25)<1e-6,'Capital meets the existing upper-floor underside');
+      assert.ok(Math.abs(c.max.y-5.05)<1e-6,'Capital meets the existing upper-floor underside');
       const mesh=model.getObjectByName([cap.section,cap.material,cap.shape].join('/'));
       const vertices=mesh.geometry.attributes.position;
       const top=[],bottom=[];

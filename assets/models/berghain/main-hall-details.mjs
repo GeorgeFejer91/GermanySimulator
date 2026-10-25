@@ -3,7 +3,9 @@ import {studyToSite} from './calibration.mjs';
 
 // A01/I23 gallery 01, 16–24: visible architectural vocabulary. These are
 // original, dimension-estimated forms, not an inventory of the current rig.
-const point=([x,y,z])=>{const p=studyToSite({x,y,z});return [p.x,p.y,p.z];};
+// Main-room details follow the provisional main datum by rigid translation.
+// Ground pendants below use their own anchors; roof suspension stays at the hull.
+const point=([x,y,z])=>{const p=studyToSite({x,y:y>=6.65?y-1.2:y,z});return [p.x,p.y,p.z];};
 
 export function addMainHallDetails(layout){
   const retired=new Set(['main lighting truss','main lamp']);
@@ -42,7 +44,7 @@ export function addMainHallDetails(layout){
       beam('truss top brace',[x,16.7,z-.2],[x+1,16.7,z+.2],.025,'aluminium');
       beam('truss lower brace',[x,16.3,z+.2],[x+1,16.3,z-.2],.025,'aluminium');
     }
-    for(const x of [-2.5,11.5])beam('truss suspension',[x,16.7,z],[x,layout.calibration.mainRoof,z],.014);
+    for(const x of [-2.5,11.5])beam('truss suspension',[x,16.7,z],[x,layout.calibration.mainRoof+1.2,z],.014);
     for(const [i,x] of [-2,2,6,10].entries()){
       const c=point([x,15.94,z]);
       add('projector body',c,[.29,.46,.29],'rubber','cylinder');
@@ -102,7 +104,7 @@ export function addMainHallDetails(layout){
   register('low glass-wall radiator bank',[16,18]);
   const screen=layout.mainBar.screenAnchor;
   for(const dz of [-5,-1.8,1.4,4.6]){
-    const center=[screen[0]-.18,7.03,screen[2]+dz];
+    const center=[screen[0]-.18,5.83,screen[2]+dz];
     for(let i=0;i<22;i++)add('glass-wall radiator fin',[center[0],center[1],center[2]-1.1+i*.105],[.14,.64,.036],'steel');
     const body=add('glass-wall radiator body',center,[.13,.56,2.28],'steel','box',true);
     // Its hidden body supplies collision; closely spaced fins remain open.
@@ -120,7 +122,7 @@ export function addMainHallDetails(layout){
       add('foyer drum vertical rib',[x+dx,y+4.2,z+dz],[.014,.65,.014],'pale');
     }
     for(const height of [3.86,4.54])add('foyer drum rim',[x,y+height,z],[1.11,1.11,1.11],'steel','ring',false,horizontal);
-    add('foyer drum suspension',[x,y+5.38,z],[.018,1.67,.018],'steel','cylinder');
+    add('foyer drum suspension',[x,y+4.78,z],[.018,.48,.018],'steel','cylinder');
   }
   detail.parts=layout.parts.filter(p=>p.mainHallDetail).length;
 }

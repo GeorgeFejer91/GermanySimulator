@@ -16,7 +16,7 @@ export default {name:'Klo Bar, sanitary architecture and continuous visitor rout
     await page.locator('#enter').click();const results=[];
     for(const key of ['klo','toilets']){
       await page.locator('#room').selectOption(key);
-      await page.waitForFunction(expected=>JSON.parse(document.querySelector('#model').dataset.position).y===expected,6.65);
+      await page.waitForFunction(expected=>JSON.parse(document.querySelector('#model').dataset.position).y===expected,5.45);
       await artifacts.screenshot(page,key+'-source.png');
       const native=await renderNativeAsset(page,{position:viewpoints[key].position,yaw:viewpoints[key].yaw,pitch:viewpoints[key].pitch||0});
       assert.equal(native.kloBar.artwork.status,layout.kloBar.artwork.status);
@@ -30,12 +30,12 @@ export default {name:'Klo Bar, sanitary architecture and continuous visitor rout
     const {page,baseURL,artifacts}=ctx;
     await page.goto(baseURL+'/geheim/');await page.locator('#model[data-ready="true"]').waitFor();
     await page.locator('#room').selectOption('berghain');let heading=0;const route=[];
-    const bypass=[{x:8.3,y:6.65,z:viewpoints.berghain.position.z},{x:8.3,y:6.65,z:3.8}];
+    const bypass=[{x:8.3,y:5.45,z:viewpoints.berghain.position.z},{x:8.3,y:5.45,z:3.8}];
     for(const target of bypass){const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);}
     const outward=[[5,0],[-6.35,0],[-6.35,3.8],[-8.05,3.8],[-8.05,-4.1],[-9,-4.1],[-9,-8.3],[-13.8,-8.3],[-13.8,-10],[-18.2,-10]];
     for(let i=0;i<outward.length;i++){
       const [x,z]=outward[i];artifacts.json('route-progress.json',{route,next:{x,z}});
-      const result=await travel(ctx,studyToSite({x,y:6.65,z}),heading);heading=result.yaw;route.push(result.position);
+      const result=await travel(ctx,studyToSite({x,y:5.45,z}),heading);heading=result.yaw;route.push(result.position);
       if(i===3){assert.equal(await page.locator('#room').inputValue(),'klo');await artifacts.screenshot(page,'human-entered-klo-bar.png');}
       if(i===7){assert.equal(await page.locator('#room').inputValue(),'toilets');await artifacts.screenshot(page,'human-toilet-corridor.png');}
     }
@@ -45,10 +45,10 @@ export default {name:'Klo Bar, sanitary architecture and continuous visitor rout
     const native=await renderNativeAsset(page,{position:route.at(-1),yaw:Math.PI/2,pitch:-.75});
     await artifacts.screenshot(page,'native-hollow-pan-and-cubicle.png');await disposeNativeAsset(page);
     for(const [x,z]of outward.slice(0,-1).reverse()){
-      const result=await travel(ctx,studyToSite({x,y:6.65,z}),heading);heading=result.yaw;route.push(result.position);
+      const result=await travel(ctx,studyToSite({x,y:5.45,z}),heading);heading=result.yaw;route.push(result.position);
     }
     for(const target of [...bypass.toReversed(),viewpoints.berghain.position]){const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);}
-    assert.ok(route.every(p=>p.y===6.65&&canStand(p,layout)));
+    assert.ok(route.every(p=>p.y===5.45&&canStand(p,layout)));
     assert.equal(await page.locator('#room').inputValue(),'berghain');
     await artifacts.screenshot(page,'human-returned-to-main-floor.png');
     return {route,native,input:ctx.profile.hasTouch?'Actual CDP touch holds/steering':'Actual keyboard and mouse',

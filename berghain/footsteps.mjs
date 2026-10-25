@@ -28,7 +28,7 @@ export function footstepEnvironment(position){
  const room=position.y<.3&&contains(position,halleWC)?'wc':labRoomAt(position)?'lab':sanitary==='toilets'?'wc':sanitary==='klo'?'klo':
   floors.some(f=>f.name==='Halle ground')?'halle':
   floors.some(f=>/garden|forecourt/.test(f.name))&&!floors.some(f=>/foyer/.test(f.name))?'outside':
-  position.y>15?'lounge':position.y>11?'panorama':position.y>3?'berghain':
+  position.y>11.6?'lounge':position.y>8.5?'panorama':position.y>3?'berghain':
   position.z<front?'saule':'foyer';
  const stair=floors.find(f=>f.endY!==undefined&&position.y>=Math.min(f.y,f.endY)-.1&&position.y<=Math.max(f.y,f.endY)+.1);
  return {room,surface:stair&&!stair.halle?'metal':room==='outside'?'grit':room==='wc'?'tile':'concrete'};

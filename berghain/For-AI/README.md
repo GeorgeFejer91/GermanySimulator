@@ -1,5 +1,80 @@
 # Berghain reconstruction: goal and work state
 
+### Radiator, window and connected-section correction — current candidate
+
+The previous joint section placed 0.8025 m rigid radiators partly over the
+glazing. I19 gallery04/expanded16 show their tops at or below the sill. The
+current working fit lowers the connected main/Klo, Panorama and upper-lounge
+floors by 0.20 m to 5.45, 9.05 and 12.15 m, respectively; the south tall-row
+sill moves from 9.70 to 9.90 m. Its head remains 13.65 m. The actual exterior
+opening, masonry below it, sill and inner frame change together. No cover
+panel conceals glazing and no radiator is compressed. Ceiling-mounted Panorama
+bodies remain at their previous elevation beneath the 13.95 m fitted ceiling.
+
+This balances photographed relations rather than recovering unique datums:
+the floor-to-sill distance is 0.85 m; the radiator top clears it by 0.0475 m;
+the 3.75 m opening remains elongated, and the 1.15 m upper inter-row gap is
+30.7% of its height. Common Klo headroom remains 3.15 m with full-height
+switchgear. Main and escape half-landings are 2.75 m; the smoking landings
+are 5.45, 7.25 and 9.05 m. The lower slab underside is 5.29 m and enclosure
+fascia underside 5.30 m, above the provisional lower aperture head 5.25 m.
+These are model quantities and photo-informed estimates, not surveyed facts.
+The Eisbar/service landings follow at 8.75/12.05 m; the closed upper endpoint
+does not assert a permanent private or Panorama connection.
+
+This working section is an evidence-constrained estimate. README.md owns the
+current task and publication state; VALIDATION.md owns the fresh test evidence.
+Earlier candidate notes below retain their historical datums. The old joint
+section was rejected after its radiator/glazing overlap was found; the first
+sill candidate was rejected for a stale smoking-doorway lining. Both are
+preserved in output. Current source: output/berghain-joint-sill-repaired-runtime,
+225-file freeze SHA256
+493f2977d80975688251f4b0e2b75a6f3348bd1ca459c5dbd8e530b1561690c0.
+Full photographic fidelity, exact current toilet/backstage inventories and
+physical Android qualification remain unresolved.
+
+
+### Current acceptance and remaining work
+
+The repaired section has passed a fresh 191-test Node run, 21 browser
+scenario/profile cases and nine cold-context cost samples against the unchanged
+nine-sample published baseline. Keyboard and emulated touch routes cover
+main/Panorama stairs, ordinary WC, upper lounge, smoking access, Klo and Eisbar.
+Independent Physics and Camera reports must accept this exact freeze and the
+documentation evidence bridge before publication. Their final verdicts and the
+deployment status belong to output/berghain-joint-sill-release.json. Local test
+success alone is not evidence of publication.
+
+The goal remains ACTIVE. Exact surveyed datums and footprints, full artwork and
+photographic fidelity, the printed-glass lounge's exterior registration, and
+contemporary private/backstage/FLINTA placement remain open. No new permanent
+private-room position is claimed. Physical Android is NOT RUN. The official hull
+and all Halle geometry remain unchanged. Historical publication records follow.
+
+### Published entrance elevation and doorway correction
+
+Commit `4652f776372e4a4c823f4cf4ab726c33922272a3`; Pages run 40158331947 succeeded. All 87 checked
+public files match the commit, six URLs respond and three live browser cases
+pass on desktop and Android portrait/landscape emulation across both viewers.
+Receipt: output/berghain-frontage-repaired-release.json. Initial frontage rejection is preserved;
+the repaired candidate's 184 Node checks, 17 browser cases, repeated costs and
+both independent reviews own acceptance. The primary staged index is unchanged.
+
+The frontage now has twelve nonuniform openings, nine lower attic grilles and
+seventeen upper vents. Decorative joints stop at the working entrance aperture.
+This corrects observable features without asserting recovered floor heights.
+The full goal remains ACTIVE: register Panorama's six-window footprint and its
+floor section jointly with ordinary WC, upper lounge and smoking access. The
+six left shuttered bays are a promising correspondence. The read-only diagnostic
+output/berghain-panorama-frontage-coverage.json finds only four of those six
+within the current Panorama slab's world-x bounds. This is not an accepted new
+footprint or floor datum; output/berghain-frontage-section-next.md records the
+joint section/plan follow-up. Exact heights and backstage/FLINTA placement
+remain unverified. Older decorative shadow-patch
+registration and photographic fidelity also remain open. Physical Android is
+NOT RUN. This local publication handoff changes no reviewed runtime or index.
+
+
 The initial frontage candidate was held after Physics review found pre-existing
 decorative rustication strips spanning the open entrance. This repaired candidate
 trims those strips at the existing jamb aperture, including above head height.

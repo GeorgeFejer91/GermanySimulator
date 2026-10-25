@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createViewerLighting} from '../berghain/night-lighting.mjs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
+import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 
 test('club-night lighting removes daylight and restores the exterior inspection view',()=>{
   const scene=new THREE.Scene(), rig=createViewerLighting(scene);
@@ -37,7 +38,7 @@ test('admission lights remain inside the low room and select only on its floor',
       assert.ok(light.position.y>1.8);
     }
   });
-  rig.update('interior',{...viewpoints.admission.position,y:6.65});
+  rig.update('interior',{...viewpoints.admission.position,y:5.45});
   assert.notEqual(rig.state.room,'admission');
   rig.dispose();
 });
@@ -77,4 +78,21 @@ test('Klo practical lights are below the model ceiling soffit',()=>{
     if(light.isSpotLight&&light.visible)assert.ok(light.position.y<soffit-.1);
   });
   rig.dispose();
+});
+
+test('Panorama light sources clear the actual suspended acoustic geometry',()=>{
+ const scene=new THREE.Scene(),rig=createViewerLighting(scene),model=createBerghainModel();
+ model.updateMatrixWorld(true);rig.update('interior',viewpoints.panorama.position);
+ try{
+  const ray=new THREE.Raycaster();let checked=0;
+  scene.traverse(light=>{
+   if(!light.isSpotLight||!light.visible)return;
+   ray.set(light.position,light.target.position.clone().sub(light.position).normalize());
+   ray.far=.2;
+   const hits=ray.intersectObject(model,true).filter(h=>!h.object.material.transparent&&!h.object.material.transmission);
+   assert.equal(hits.length,0,light.name+' must not emit from inside an opaque panel; shadow near clipping is not clearance');
+   checked++;
+  });
+  assert.equal(checked,3);
+ }finally{rig.dispose();disposeBerghainModel(model);}
 });

@@ -51,16 +51,18 @@ async function route(ctx,targets,heading,tag,views={}){
  }
  return {heading,records};
 }
-const hallApproach=[[5,6.65,8],[14,6.65,8],[16.1,6.65,7],[16.1,6.65,-14.3]].map(site);
+// Approach on the hall side of the glass screen. Cutting diagonally back
+// around its far post clips the screen before reaching the stair foot.
+const hallApproach=[[5,5.45,8],[14.1,5.45,8]].map(site);
 export default {name:'Karhard architectural circulation, fixtures and night cues',sourceFiles:lounge.sourceFiles,scenarios:[
  {id:'architecture-source-native',modes:['quick','stress'],timeoutMs:180000,async run(ctx){
-  const v=site([18.8,9.95,-14.6]),target=site([17.4,12.3,-19]);
+  const v=site([18.8,8.75,-14.6]),target=site([17.4,12.3,-19]);
   const parity=await compareMaterialRender(ctx,{position:[v.x,v.y+1.68,v.z],target:[target.x,target.y,target.z]});
   const samples=[];
   for(const [name,a,b] of [
-   ['main-stair',[5,.05,19],[10,3.1,15]],['main-wall',[5,6.65,-9],[5,12,-21]],
-   ['eisbar',[18.8,9.95,-14.6],[17.4,12.3,-19]],['eisbar-lower',[14.1,6.65,-14],[18.8,10,-17]],
-   ['smoking',smokingToAuthor([27,13.25,-20]),smokingToAuthor([24,10,-12])],
+   ['main-stair',[5,.05,19],[10,3.1,15]],['main-wall',[5,5.45,-9],[5,12,-21]],
+   ['eisbar',[18.8,8.75,-14.6],[17.4,12.3,-19]],['eisbar-lower',[14.1,5.45,-14],[18.8,10,-17]],
+   ['smoking',smokingToAuthor([27,9.05,-20]),smokingToAuthor([24,7.25,-12])],
    ['smoking-exterior',[36,.05,15],[27,9,7]],['ground-toilets',[-13.2,.05,20.6],[-18,1,19.5]]
   ]){
    const p=site(a),t=site(b);assert.ok(canStand(p,layout),name);
@@ -87,7 +89,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
  }},
  {id:'architecture-smoking-route',modes:['quick','stress'],timeoutMs:240000,async run(ctx){
   let heading=await select(ctx,'berghain');
-  let r=await route(ctx,[[5,6.65,8],[14,6.65,8],[20,6.65,8]].map(site).concat(layout.architecturalCirculation.smoking.siteRoute),heading,'tower-up',
+  let r=await route(ctx,[[5,5.45,8],[14,5.45,8],[20,5.45,8]].map(site).concat(layout.architecturalCirculation.smoking.siteRoute),heading,'tower-up',
    {5:smokingToAuthor([27,10.5,-14]),7:smokingToAuthor([27,10.7,-14])});heading=r.heading;
   assert.equal((await light(ctx.page)).room,'smoking');await ctx.artifacts.screenshot(ctx.page,'smoking-upper-source.png');
   const back=await route(ctx,layout.architecturalCirculation.smoking.siteRoute.toReversed(),heading,'tower-down');
@@ -98,7 +100,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   let heading=await select(ctx,'berghain');
   const e=layout.architecturalCirculation.eisbar;
   let r=await route(ctx,[...hallApproach,...e.siteGuestRoute],heading,'eisbar-counter',
-    {4:[14.1,8,-17],5:[16.2,11,-18],8:[19.35,11,-17],10:[18.4,11.5,-19]});heading=r.heading;
+    {2:[14.1,8,-17],3:[16.2,11,-18],6:[19.35,11,-17],8:[18.4,11.5,-19]});heading=r.heading;
   assert.equal((await light(ctx.page)).room,'eisbar');
   assert.ok(Math.abs((await position(ctx.page)).y-e.floorHeight)<.15);
   await routeView(ctx,heading,site([18.4,11.5,-19]),'eisbar-counter-source');

@@ -8,10 +8,10 @@ import {canStand} from '../berghain/navigation.mjs';
 test('entrance elevation follows observed twelve openings, nine grilles and seventeen vents',()=>{
  const windows=layout.parts.filter(p=>p.name==='south tier window');
  assert.equal(windows.length,48);
- for(const y of [4.875,7.225,11.675,16.05])assert.equal(windows.filter(p=>Math.abs(p.center[1]-y)<.001).length,12);
+ for(const y of [4.875,7.225,11.775,16.05])assert.equal(windows.filter(p=>Math.abs(p.center[1]-y)<.001).length,12);
  assert.equal(layout.parts.filter(p=>p.name==='south attic grille recess').length,9);
  assert.equal(layout.parts.filter(p=>p.name==='south upper attic vent').length,17);
- const row=windows.filter(p=>Math.abs(p.center[1]-11.675)<.001).sort((a,b)=>a.center[0]-b.center[0]);
+ const row=windows.filter(p=>Math.abs(p.center[1]-11.775)<.001).sort((a,b)=>a.center[0]-b.center[0]);
  const spacing=row.slice(1).map((p,i)=>p.center[0]-row[i].center[0]);
  assert.ok(spacing[0]>spacing[3]*1.6&&spacing.at(-1)>spacing[7]*1.35,'wide blind fields at both ends');
  assert.ok(row.every(p=>p.size[0]>1.2&&p.size[0]<1.6),'photo-estimated narrow openings');

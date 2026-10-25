@@ -1,3 +1,4 @@
+import {reconcilePanoramaSection} from './panorama-section.mjs';
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
 
@@ -12,8 +13,8 @@ const apply=(p,m)=>new THREE.Vector3(...p).applyMatrix4(m).toArray();
 export const panoramaWorldPoint=p=>apply(p,frontageMatrix);
 export const panoramaStudyPoint=p=>panoramaWorldPoint(site(p));
 export const upperLoungeStudyPoint=p=>{const q=panoramaStudyPoint(p);q[2]+=.4;return q;};
-export const panoramaPassageAt=p=>p.y>12&&p.y<15.5&&
- ((p.x>=7.1&&p.x<=17.25&&p.z>=8.5&&p.z<=10.65)||(p.x>=16.8&&p.x<=19.15&&p.z>=6.7&&p.z<=10.65));
+export const panoramaPassageAt=p=>p.y>8&&p.y<11.5&&
+ ((p.x>=12.45&&p.x<=17.25&&p.z>=8.5&&p.z<=10.65)||(p.x>=16.8&&p.x<=19.15&&p.z>=6.7&&p.z<=10.65));
 const pointObject=p=>({x:p[0],y:p[1],z:p[2]});
 
 function reposition(rotation,oldAnchor,newAnchor){
@@ -84,6 +85,10 @@ function counterWall(layout){
 // and body barriers together; no floor spans the central dance-hall volume.
 function smokingPassage(layout){
  const floorY=13.25;
+ // The relocated connector is above the last pilaster practical. Keep its
+ // localized upward aim beneath that real slab instead of lighting through it.
+ const endLight=layout.mainBar.interiorFacade.practicalLighting.lights.at(-1);
+ endLight.target[1]=8.45;endLight.intensity=80;endLight.range=4;
  // The bar-room lining is a second visible wall in front of the outer facade.
  // Cut both rendering and collisions at the same estimated upper doorway.
  const replacements=new Map();
@@ -91,8 +96,8 @@ function smokingPassage(layout){
   if(p.fixture!=='main-bar-interior-facade'||p.shape!=='box'||!p.matrix)continue;
   const m=p.matrix,low=p.center[1]-p.size[1]/2,high=p.center[1]+p.size[1]/2;
   const z0=Math.max(-.5,(6.7-m[14])/m[10]),z1=Math.min(.5,(8.7-m[14])/m[10]);
-  if(high<=floorY||low>=15.35||z1<=z0)continue;
-  const y0=Math.max(-.5,(floorY-m[13])/m[5]),y1=Math.min(.5,(15.35-m[13])/m[5]);
+  if(high<=9.05||low>=11.15||z1<=z0)continue;
+  const y0=Math.max(-.5,(9.05-m[13])/m[5]),y1=Math.min(.5,(11.15-m[13])/m[5]);
   const slices=[];
   for(const [a,b,c,d] of [[-.5,z0,-.5,.5],[z1,.5,-.5,.5],[z0,z1,-.5,y0],[z0,z1,y1,.5]]){
    if(b-a<.0001||d-c<.0001)continue;
@@ -136,7 +141,7 @@ function smokingPassage(layout){
  guard('lower lounge edge',[7.4,10.65],[7.4,21.2]);
  guard('stair landing west',[-5.94,4.31],[-5.94,7.2]);
  guard('stair landing end',[-5.94,4.31],[-4.68,4.31]);
- return [[7,13.25,9.6],[8,13.25,9.6],[17.5,13.25,9.6],[17.5,13.25,7.73],[20,13.25,7.73]].map(pointObject);
+ return [[7,13.25,9.6],[8,13.25,9.6],[17.5,13.25,9.6],[17.5,13.25,7.95],[18.8,13.25,7.95],[20,13.25,7.73]].map(pointObject);
 }
 
 export function registerPanorama(layout,viewpoints){
@@ -218,11 +223,12 @@ export function registerPanorama(layout,viewpoints){
   windowSection:'Unresolved: uniform facade tiers do not match photographed low-sill tall windows; do not infer a new floor datum from those estimated tiers',
   barRelation:'Long counter across window wall, DJ at opposite end; observed I19 views06/07/15/16',
   stairRoute:stairRoute.map(pointObject),
-  mainApproach:[viewpoints.berghain.position,{x:8.3,y:6.65,z:viewpoints.berghain.position.z},{x:8.3,y:6.65,z:5.8},...stairRoute.map(pointObject)],
+  mainApproach:[viewpoints.berghain.position,{x:8.3,y:5.45,z:viewpoints.berghain.position.z},{x:8.3,y:5.45,z:5.8},...stairRoute.map(pointObject)],
   toiletRoute,loungeRoute,smokingRoute,
   smokingConnection:'Two-level public link supported by architect; hall-edge passage footprint and elevations estimated',
   ordinaryToilets:'Distinct from ground cloakroom WC, main Klo and unregistered FLINTA room',
   counterWall:counterWall(layout),
   stairClearance:{retired,sources:['I23'],confidence:'One unregistered grid beam retired from the occupied stair; exact structural arrangement remains estimated'},
   backstage:'No new room or private connection'};
+ reconcilePanoramaSection(layout,viewpoints);
 }

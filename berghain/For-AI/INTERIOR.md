@@ -1,5 +1,76 @@
 # Berghain interior: objects, art and equipment
 
+### Radiator, window and connected-section correction — current candidate
+
+The previous joint section placed 0.8025 m rigid radiators partly over the
+glazing. I19 gallery04/expanded16 show their tops at or below the sill. The
+current working fit lowers the connected main/Klo, Panorama and upper-lounge
+floors by 0.20 m to 5.45, 9.05 and 12.15 m, respectively; the south tall-row
+sill moves from 9.70 to 9.90 m. Its head remains 13.65 m. The actual exterior
+opening, masonry below it, sill and inner frame change together. No cover
+panel conceals glazing and no radiator is compressed. Ceiling-mounted Panorama
+bodies remain at their previous elevation beneath the 13.95 m fitted ceiling.
+
+This balances photographed relations rather than recovering unique datums:
+the floor-to-sill distance is 0.85 m; the radiator top clears it by 0.0475 m;
+the 3.75 m opening remains elongated, and the 1.15 m upper inter-row gap is
+30.7% of its height. Common Klo headroom remains 3.15 m with full-height
+switchgear. Main and escape half-landings are 2.75 m; the smoking landings
+are 5.45, 7.25 and 9.05 m. The lower slab underside is 5.29 m and enclosure
+fascia underside 5.30 m, above the provisional lower aperture head 5.25 m.
+These are model quantities and photo-informed estimates, not surveyed facts.
+The Eisbar/service landings follow at 8.75/12.05 m; the closed upper endpoint
+does not assert a permanent private or Panorama connection.
+
+This working section is an evidence-constrained estimate. README.md owns the
+current task and publication state; VALIDATION.md owns the fresh test evidence.
+Earlier candidate notes below retain their historical datums. The old joint
+section was rejected after its radiator/glazing overlap was found; the first
+sill candidate was rejected for a stale smoking-doorway lining. Both are
+preserved in output. Current source: output/berghain-joint-sill-repaired-runtime,
+225-file freeze SHA256
+493f2977d80975688251f4b0e2b75a6f3348bd1ca459c5dbd8e530b1561690c0.
+Full photographic fidelity, exact current toilet/backstage inventories and
+physical Android qualification remain unresolved.
+
+
+### Earlier joint section — superseded by the correction above
+
+The six-window Panorama photograph I19 and entrance photographs P02/P16 expose
+a plan/section mismatch: the former footprint included four of the six bays,
+and its 13.25 m floor cut above the estimated photographed sill. That candidate
+section in panorama-section.mjs widens the room 5.35 m to the east and lowers
+its floor to 9.25 m, with ceiling at 13.95 m. Six three-column glazing frames,
+radiators, service risers, low seats and opaque end linings follow the bays.
+Rigid objects translate without stretching. Their fine dimensions and spacing
+are still estimates; licensed artwork is not reproduced.
+
+Ordinary WC, lower lounge and upper lounge move together with the adjacent
+footprint. Upper lounge is 12.35–15 m; its printed inner glazing remains separate
+from the external six-window wall. The main/Klo floor becomes 5.65 m so that Klo
+keeps its 3.15 m headroom and tall fittings. The ceiling finish at 8.80–8.85 m
+meets the Panorama slab underside. Main furniture, PA and bar retain their size;
+Säule capitals meet the new 5.25 m slab underside. An unregistered intermediate
+beam at authored [8,12.95,-6] is retired because it crossed the relocated lounge
+stair. This is a removed placeholder, not a claimed survey of the structure.
+
+G30/31 support a level wall-side smoking extension and concentrated projecting
+incline. The modeled levels are 5.65/7.45/9.25 m, ten treads per enclosed flight,
+with a guarded extended upper landing and a left-side lower approach above the
+escape stair. Risers are 0.18 m and site goings about 0.328 m. U02 supports its
+relative adjacency but cannot fix those dimensions. Eisbar moves with the main
+floor to 8.95 m and retains a bounded upper service landing at 12.25 m. It does
+not acquire a speculative public passage or a permanent backstage designation.
+
+Night lighting follows the revised room volumes. The two end uplights below
+Eisbar and the Panorama passage use shortened aim/range below the slabs. Room
+arrival, camera and footstep predicates use the same levels. This is an
+estimated club-night interpretation, not a measured event lighting scene.
+All 691 Halle parts, 450 solids, 11 floors, metadata and viewpoint are unchanged
+from the published baseline; independent comparison is in the output receipt.
+Historical entries below retain the datums of the candidates they described.
+
+
 The first counter-wall candidate was held after independent Physics review found
 an older generic intermediate beam intersecting all Panorama stair lanes, with
 only1.303 m headroom at the settled counterexample. This repaired candidate

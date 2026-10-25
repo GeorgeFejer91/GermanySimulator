@@ -40,7 +40,7 @@ export function addSoundSystem(layout){
   const bass=speakerSpecifications.f218mk2,low=speakerSpecifications.evo6el,high=speakerSpecifications.evo6eh;
   let stack=0;
   for(const x of [-1.5,11.5])for(const z of [-15,4]){
-    const anchor=mapped(x,6.65,z),target=mapped(5,6.65,-5.5),yaw=Math.atan2(target.x-anchor.x,target.z-anchor.z);
+    const anchor=mapped(x,5.45,z),target=mapped(5,5.45,-5.5),yaw=Math.atan2(target.x-anchor.x,target.z-anchor.z);
     const assembly='main-stack-'+stack++,base=matrix(anchor,yaw);
     for(let level=0;level<3;level++)component(assembly+'-bass-'+level,'f218mk2',base.clone().multiply(
       new THREE.Matrix4().makeTranslation(0,bass.height*(level+.5),0)),assembly);
@@ -58,13 +58,13 @@ export function addSoundSystem(layout){
       }
     }
   }
-  const sub=speakerSpecifications.f124,anchor=mapped(-1.6,6.65,-5.5),wall=matrix(anchor,Math.PI/2);
+  const sub=speakerSpecifications.f124,anchor=mapped(-1.6,5.45,-5.5),wall=matrix(anchor,Math.PI/2);
   for(let column=0;column<2;column++)for(let row=0;row<3;row++)component('main-subwall-'+column+'-'+row,'f124',
     wall.clone().multiply(new THREE.Matrix4().makeTranslation((column-.5)*(sub.width+.012),(row+.5)*sub.height,0)),'main-subwall');
   for(const [index,x]of [-1.5,11.5].entries()){
-    const position=mapped(x,10.8,-21.1),target=mapped(5,8.2,-5.5);
+    const position=mapped(x,9.6,-21.1),target=mapped(5,7,-5.5);
     component('main-satellite-'+index,'evo6eh',matrix(position,Math.atan2(target.x-position.x,target.z-position.z),.12),'main-satellites');
-    const wall=mapped(x,10.8,-21.78),difference=wall.clone().sub(position),length=difference.length();
+    const wall=mapped(x,9.6,-21.78),difference=wall.clone().sub(position),length=difference.length();
     mounting('main-satellite-'+index+' wall bracket',matrix(position.clone().add(wall).multiplyScalar(.5),Math.atan2(difference.x,difference.z)),[0,0,0],[.065,.09,length]);
   }
 }

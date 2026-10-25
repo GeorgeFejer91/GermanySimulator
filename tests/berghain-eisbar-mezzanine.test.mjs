@@ -16,9 +16,9 @@ function walk(route){
 test('Eisbar counter and visitor platform occupy a distinct intermediate level',()=>{
  const e=layout.architecturalCirculation.eisbar;
  assert.ok(e.floorHeight>layout.mainBar.floorHeight+1.8,'mezzanine must be above main bar with a body-clear space below');
- assert.ok(e.floorHeight<13.25,'counter below the recorded upper continuation');
+ assert.ok(e.floorHeight<12.05,'counter below the recorded upper continuation');
  assert.match(e.registration,/estimated/i);
- const lower=site([19.5,6.65,-19.5]),upper=site([19.5,e.floorHeight,-19.5]);
+ const lower=site([19.5,5.45,-19.5]),upper=site([19.5,e.floorHeight,-19.5]);
  assert.ok(canStand(lower,layout),'main-floor access beneath elevated platform');
  assert.ok(canStand(upper,layout),'actual supported mezzanine visitor area');
  const counters=layout.parts.filter(p=>/^Architecture Eisbar (front|return) counter plinth$/.test(p.name));
@@ -34,8 +34,8 @@ test('main floor reaches the counter and upper continuation independently in bot
 test('narrow upper stair clears the retained glass screen beyond its centre line',()=>{
  const e=layout.architecturalCirculation.eisbar;
  for(const offset of [-.1,.1])walk(e.authorUpperRoute.map((p,i)=>site(i<2?p:[p[0]+offset,p[1],p[2]])));
- walk([[14.1,6.65,-14],[16.1,6.65,-14.3],[17.4,6.65,-14.3],
-  [17.4,6.65,-19.4],[20.5,6.65,-19.4],[20.5,6.65,-17.8]].map(site));
+ walk([[14.1,5.45,-14],[16.1,5.45,-14.3],[17.4,5.45,-14.3],
+  [17.4,5.45,-19.4],[20.5,5.45,-19.4],[20.5,5.45,-17.8]].map(site));
 });
 test('mezzanine edge guards stop the full body before the drop',()=>{
  const floor=layout.architecturalCirculation.eisbar.floorHeight;

@@ -117,7 +117,7 @@ function facade(axis, fixed, minimum, maximum, top, name) {
   const authorY = y => y <= 13.25 ? y : 13.25 + (y - 13.25) * (top - 13.25) / (calibration.mainRoof - 13.25);
   const band = (label, along, low, high, width, depth, material, solid = true, out = 0) =>
     face(label, along, (authorY(low) + authorY(high)) / 2, width, authorY(high) - authorY(low), depth, material, solid, out);
-  const tiers = [[4.5, 5.25], [6.3, 8.15], [9.7, 13.65], [14.8, 17.3]];
+  const tiers = [[4.5, 5.25], [6.3, 8.15], [name === 'south' ? 9.9 : 9.7, 13.65], [14.8, 17.3]];
   // The ground entrance/plinth has its own retained arrangement.
   for (let i = 0; i < count; i++) {
     const along = minimum + (i + .5) * pitch;
@@ -203,9 +203,9 @@ function facade(axis, fixed, minimum, maximum, top, name) {
 
 floor('forecourt', [-65, 65], [-65, 65], 0, 'ground', 'site');
 floor('foyer', [-21.5, 21.5], [-21.5, 21.5], .05);
-floor('Berghain dance floor', [-4, 21.5], [-21.5, 9.4], 6.65);
-floor('main stair landing', [6.4, 9.6], [8.8, 9.5], 6.65);
-floor('western first-floor passage', [-21.5, -4], [-21.5, 9.4], 6.65);
+floor('Berghain dance floor', [-4, 21.5], [-21.5, 9.4], 5.45);
+floor('main stair landing', [6.4, 9.6], [8.8, 9.5], 5.45);
+floor('western first-floor passage', [-21.5, -4], [-21.5, 9.4], 5.45);
 floor('Panorama Bar', [-21.5, -5], [-21.5, -5], 13.25);
 floor('Panorama lounge', [-21.5, -7], [-5, 9.4], 13.25);
 floor('Panorama stair landing', [-7.1, -3.1], [-6.5, -5], 13.25);
@@ -217,11 +217,11 @@ floor('Halle west south landing', [-18.5, -15.5], [-25, -22.5], 7.05);
 floor('Halle upper east', [13, 21.5], [-43.5, -22.5], 7.05);
 floor('Halle upper north', [-13, 13], [-43.5, -39], 7.05);
 floor('garden', [22.5, 49], [-19, 22], .05, 'gravel', 'garden');
-stair('main stair', 8, 9.4, 20.5, .05, 6.65, 3, 37);
-stair('Panorama stair', -5, -5, 8.5, 6.65, 13.25, 3, 36);
+stair('main stair', 8, 9.4, 20.5, .05, 5.45, 3, 37);
+stair('Panorama stair', -5, -5, 8.5, 5.45, 13.25, 3, 36);
 stair('Halle west stair', -17, -39.5, -25, .05, 7.05, 3, 39);
-railing('foyer gallery west rail', [-21.5, 6.65, 9.4], [6.4, 6.65, 9.4]);
-railing('foyer gallery east rail', [9.6, 6.65, 9.4], [21.5, 6.65, 9.4]);
+railing('foyer gallery west rail', [-21.5, 5.45, 9.4], [6.4, 5.45, 9.4]);
+railing('foyer gallery east rail', [9.6, 5.45, 9.4], [21.5, 5.45, 9.4]);
 railing('Halle upper west rail', [-13, 7.05, -39], [-13, 7.05, -22.6]);
 railing('Halle upper east rail', [13, 7.05, -39], [13, 7.05, -22.6]);
 
@@ -244,17 +244,17 @@ for (const x of [-9, 0, 9]) layout.parts.push({name: 'historic boiler hopper', c
 
 for (const x of [-19, -10, -1, 8, 19]) {
   for (const z of [-18, -7, 6]) box('load-bearing column', [x, 12.1, z], [.72, 24.1, .72], 'concrete', 'structure', true);
-  for (const y of [6.3, 12.95, 23.6]) box('structural beam', [x, y, -6], [.65, .7, 30], 'concrete');
+  for (const y of [5.1, 12.95, 23.6]) box('structural beam', [x, y, -6], [.65, .7, 30], 'concrete');
 }
 for (const z of [-18, -7, 6]) box('cross beam', [0, 23.4, z], [43, 1, .8], 'concrete');
-box('Säule glass partition left', [-4, 2.6, 1], [.12, 5.1, 33], 'lightGlass', 'interior', true);
-box('foyer west partition', [-10, 2.9, 12], [20, 5.7, .22], 'darkConcrete', 'interior', true);
+box('Säule glass partition left', [-4, 2.5, 1], [.12, 4.9, 33], 'lightGlass', 'interior', true);
+box('foyer west partition', [-10, 2.55, 12], [20, 5, .22], 'darkConcrete', 'interior', true);
 box('cloakroom counter', [-15, 1.08, 15.7], [10, 1.1, 1.1], 'rubber', 'interior', true);
 for (let x = -19; x < -10; x += .45) beam('cloakroom hanger', [x, 2.2, 17], [x, 2.6, 17], .025);
 box('Säule stage', [5, .3, -18], [6, .5, 3], 'rubber', 'interior', true);
 box('Säule booth', [5, 1.15, -18], [3.8, 1.2, .9], 'steel', 'interior', true);
-box('main DJ platform', [5, 6.95, -18.6], [6, .6, 3.7], 'rubber', 'interior', true);
-box('main DJ desk', [5, 8, -18], [3.8, 1.3, .85], 'rubber', 'interior', true);
+box('main DJ platform', [5, 5.75, -18.6], [6, .6, 3.7], 'rubber', 'interior', true);
+box('main DJ desk', [5, 6.8, -18], [3.8, 1.3, .85], 'rubber', 'interior', true);
 for (const x of [-1.5, 11.5]) for (const z of [-15, 4]) {
   box('speaker stack', [x, 8.6, z], [1.1, 3.8, 1.2], 'rubber', 'interior', true);
   for (const y of [7.35, 8.3, 9.25]) box('speaker horn', [x, y, z + .62], [.86, .65, .06], 'darkConcrete');
@@ -299,7 +299,7 @@ for (const x of [-12, -6, 6, 12]) {
 export const viewpoints = {
   groundToilets:{label:'Ground toilets',position:{x:-13.2,y:.05,z:20.6},yaw:Math.PI/2,
     confidence:'Ground cloakroom adjacency supported; placement and fittings estimated',sources:['U02','A01']},
-  eisbar:{label:'Eisbar',position:{x:18.8,y:9.95,z:-14.6},yaw:.32,pitch:.12,
+  eisbar:{label:'Eisbar',position:{x:18.8,y:8.75,z:-14.6},yaw:.32,pitch:.12,
     confidence:'Raised mezzanine supported; datum, dimensions and registration estimated',sources:['A01','I04','I23','U02']},
   smoking:{label:'Smoking stair',position:Object.fromEntries(smokingToAuthor([27,13.25,-20]).map((v,i)=>[['x','y','z'][i],v])),yaw:2.8+Math.PI/2,pitch:-.4,
     confidence:'Photographed enclosure; upper interior connection unresolved',sources:['A01','I23','U02']},
@@ -309,15 +309,15 @@ export const viewpoints = {
     confidence:'Photographed forms; arrangement and dimensions estimated',sources:['ENT01','ENT02']},
   foyer: {label: 'Foyer', position: {x: 0, y: .05, z: 19}, yaw: -.3,
     confidence: 'Approximate layout', sources: ['A01', 'I01', 'I02', 'I08', 'I09']},
-  berghain: {label: 'Berghain', position: {x: 5, y: 6.65, z: 5}, yaw: 0,
+  berghain: {label: 'Berghain', position: {x: 5, y: 5.45, z: 5}, yaw: 0,
     confidence: 'Approximate layout; reported PA arrangement', sources: ['A01', 'I01', 'I02', 'P05', 'S05', 'S07', 'S08', 'S09', 'S10']},
   panorama: {label: 'Panorama Bar', position: {x: -11, y: 13.25, z: -7}, yaw: 0,
     confidence: 'Approximate layout; artwork study', sources: ['A01', 'A07', 'I01', 'I02', 'A13', 'I11', 'ART02', 'ART03', 'ART13']},
   lounge: {label:'Upper Panorama lounge',position:{x:-11.4,y:16.35,z:.8},yaw:Math.PI/2,
     confidence:'Photo-derived forms; layout estimated',sources:['A13','I16','I18','I19','I20']},
-  klo:{label:'Klo Bar',position:{x:-13,y:6.65,z:7.8},yaw:.25,
+  klo:{label:'Klo Bar',position:{x:-13,y:5.45,z:7.8},yaw:.25,
     confidence:'Photo-derived forms; room placement and Together sequence estimated',sources:['ART04','ART14','I19']},
-  toilets:{label:'Toilets',position:{x:-9,y:6.65,z:-4.2},yaw:1.08,pitch:-.08,
+  toilets:{label:'Toilets',position:{x:-9,y:5.45,z:-4.2},yaw:1.08,pitch:-.08,
     confidence:'Photographed fittings; floor, arrangement and dimensions estimated',sources:['I21']},
   saule: {label: 'Säule', position: {x: 5, y: .05, z: 4}, yaw: 0,
     confidence: 'Approximate layout', sources: ['I01', 'I02', 'I06']},

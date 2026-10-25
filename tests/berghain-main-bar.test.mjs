@@ -10,7 +10,7 @@ test('Main-bar first-person camera keeps the eye inside the legal body through t
  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
  const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
  try{
-  for(const position of [15.8,16.1].map(x=>studyToSite({x,y:6.65,z:-4}))){
+  for(const position of [15.8,16.1].map(x=>studyToSite({x,y:5.45,z:-4}))){
    assert.ok(canStand(position,layout));
    for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
     walk.camera(camera,position,yaw,pitch);
@@ -35,12 +35,12 @@ test('the long-bar assembly replaces the two-metre placeholder with photo-inform
 });
 
 test('the actual glass screen separates the hall while the body can enter, traverse and leave the guest aisle',()=>{
-  const glass=studyToSite({x:15.4,y:6.65,z:-5});
+  const glass=studyToSite({x:15.4,y:5.45,z:-5});
   assert.equal(canStand(glass,layout),false,'Visible glass must physically stop the full body');
   const targets=[[14,7],[16.1,7],[16.1,4],[16.1,-13.5],[16.1,4],[16.1,7],[14,7]];
-  let position=studyToSite({x:targets[0][0],y:6.65,z:targets[0][1]});assert.ok(canStand(position,layout));
+  let position=studyToSite({x:targets[0][0],y:5.45,z:targets[0][1]});assert.ok(canStand(position,layout));
   for(const [x,z]of targets.slice(1)){
-    const target=studyToSite({x,y:6.65,z}),dx=target.x-position.x,dz=target.z-position.z;
+    const target=studyToSite({x,y:5.45,z}),dx=target.x-position.x,dz=target.z-position.z;
     const steps=Math.ceil(Math.hypot(dx,dz)/.06);
     for(let i=0;i<steps;i++)position=moveVisitor(position,{x:dx/steps,z:dz/steps},layout);
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.02,'Full body must traverse the real bar aisle');

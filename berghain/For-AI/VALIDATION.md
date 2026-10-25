@@ -1,5 +1,121 @@
 # Berghain viewer validation
 
+### Radiator, window and connected-section correction — current candidate
+
+The previous joint section placed 0.8025 m rigid radiators partly over the
+glazing. I19 gallery04/expanded16 show their tops at or below the sill. The
+current working fit lowers the connected main/Klo, Panorama and upper-lounge
+floors by 0.20 m to 5.45, 9.05 and 12.15 m, respectively; the south tall-row
+sill moves from 9.70 to 9.90 m. Its head remains 13.65 m. The actual exterior
+opening, masonry below it, sill and inner frame change together. No cover
+panel conceals glazing and no radiator is compressed. Ceiling-mounted Panorama
+bodies remain at their previous elevation beneath the 13.95 m fitted ceiling.
+
+This balances photographed relations rather than recovering unique datums:
+the floor-to-sill distance is 0.85 m; the radiator top clears it by 0.0475 m;
+the 3.75 m opening remains elongated, and the 1.15 m upper inter-row gap is
+30.7% of its height. Common Klo headroom remains 3.15 m with full-height
+switchgear. Main and escape half-landings are 2.75 m; the smoking landings
+are 5.45, 7.25 and 9.05 m. The lower slab underside is 5.29 m and enclosure
+fascia underside 5.30 m, above the provisional lower aperture head 5.25 m.
+These are model quantities and photo-informed estimates, not surveyed facts.
+The Eisbar/service landings follow at 8.75/12.05 m; the closed upper endpoint
+does not assert a permanent private or Panorama connection.
+
+This working section is an evidence-constrained estimate. README.md owns the
+current task and publication state; VALIDATION.md owns the fresh test evidence.
+Earlier candidate notes below retain their historical datums. The old joint
+section was rejected after its radiator/glazing overlap was found; the first
+sill candidate was rejected for a stale smoking-doorway lining. Both are
+preserved in output. Current source: output/berghain-joint-sill-repaired-runtime,
+225-file freeze SHA256
+493f2977d80975688251f4b0e2b75a6f3348bd1ca459c5dbd8e530b1561690c0.
+Full photographic fidelity, exact current toilet/backstage inventories and
+physical Android qualification remain unresolved.
+
+
+### Current repaired sill/section evidence
+
+The 225-file freeze above includes GLB SHA256
+4ce05d173847793b1ba6cc9af7d31a7351e103066aea507524ccbfe6e9fb5479:
+59,109,044 bytes, 764,876 triangles, 203 mesh groups and 25 embedded maps.
+This documentation bridge changes documentation only. It does not replace the
+frozen runtime, tests, source/export parity or preserved failures.
+
+- Fresh full Node run: **191/191 PASS**, output/berghain-joint-sill-node-repaired.tap,
+  SHA256 5f74f947dc9b23b1ddcdd7901ed22fe82c1990095c75b2bfb8084b13601df98c.
+  The first sill run's 186 PASS / 5 FAIL remains preserved. Those failures exposed
+  the smoking doorway lining and stale test expectations; the repaired run is
+  complete, not an aggregate of earlier checks.
+- Fresh repaired browser cases: **21/21 PASS** across repaired-browser (11),
+  desktop-browser (7), fallback-browser (2) and frontage-browser (1), all under
+  output/berghain-joint-sill-.
+  Each report binds the same 225 frozen files. This includes native/source views,
+  six-window day/night views, desktop keyboard and Android-emulated touch routes,
+  radiator approach, and five-room texture fallback with eight size/text settings.
+  The earlier seven rendered cases bind the rejected sill candidate and are
+  preserved separately; they do not establish its doorway accessibility.
+- Independent fresh Physics matrix: **51/51 PASS**, 137,388 accepted axis states,
+  273,280 dense support samples, including the smoking passage at delayed,
+  30 fps and 60 fps updates. Native parity covers 203 batches and 1,087,845 vertices
+  within 0.000003815 m. The independent Physics report owns its exact scope.
+- Repaired source/native image comparison: mean RGB difference 0.385333 and
+  large-pixel fraction 0.00000208768. Independent Camera review inspects actual
+  render images and photographic relationships; it does not establish a survey.
+
+| Profile | Frame p95 before / after (ms) | Input latency before / after (ms) | Ready before / after (ms) |
+| --- | ---: | ---: | ---: |
+| desktop | 14.20 / 21.00 | 17.90 / 23.10 | 2235.00 / 2365.00 |
+| android-portrait | 7.10 / 13.90 | 15.80 / 18.20 | 2200.00 / 2091.00 |
+| android-landscape | 7.10 / 14.00 | 22.40 / 25.40 | 2110.00 / 2070.00 |
+
+Nine earlier before samples bind the unchanged published 4652f776 baseline;
+nine fresh after samples bind this repaired freeze. The same Panorama arrival
+and two-second movement are used in three cold contexts per profile, in sequential
+muted headless batches. Idle frames remain zero and normal viewing does not load
+the GLB. A preliminary quick command selected desktop only; its three successful
+samples are preserved in output/berghain-joint-sill-cost-desktop-initial and are
+not pooled into the balanced three-profile comparison. The full run explicitly
+selected all three profiles before inspecting its timing results.
+Results pass the declared regression bound; they do not establish a
+causal speedup or low-end-device performance. Physical Android is **NOT RUN**.
+Audio was silently state-checked, with no perceptual listening claim.
+
+All 691 Halle parts, 450 solids, 11 floors, metadata and viewpoint are unchanged
+against the published baseline. Six actual rigid radiators clear the sill by
+47.50 mm and the inner frame by 30 mm. Those are measured model clearances,
+not claimed as-built values. Main/Klo/Panorama/lounge datums remain estimates.
+
+The final independent reports are output/berghain-joint-sill-physics-review.md
+and output/berghain-joint-sill-camera-review.md. Both must bind the freeze and
+this documentation bridge before release. Publication is separately recorded
+in output/berghain-joint-sill-release.json after CI, exact public-file comparison
+and live browser checks. The full reconstruction goal remains ACTIVE.
+
+### Published entrance elevation and doorway correction
+
+Commit `4652f776372e4a4c823f4cf4ab726c33922272a3`; Pages run 40158331947 succeeded. All 87 checked
+public files match the commit, six URLs respond and three live browser cases
+pass on desktop and Android portrait/landscape emulation across both viewers.
+Receipt: output/berghain-frontage-repaired-release.json. Initial frontage rejection is preserved;
+the repaired candidate's 184 Node checks, 17 browser cases, repeated costs and
+both independent reviews own acceptance. The primary staged index is unchanged.
+
+The frontage now has twelve nonuniform openings, nine lower attic grilles and
+seventeen upper vents. Decorative joints stop at the working entrance aperture.
+This corrects observable features without asserting recovered floor heights.
+The full goal remains ACTIVE: register Panorama's six-window footprint and its
+floor section jointly with ordinary WC, upper lounge and smoking access. The
+six left shuttered bays are a promising correspondence. The read-only diagnostic
+output/berghain-panorama-frontage-coverage.json finds only four of those six
+within the current Panorama slab's world-x bounds. This is not an accepted new
+footprint or floor datum; output/berghain-frontage-section-next.md records the
+joint section/plan follow-up. Exact heights and backstage/FLINTA placement
+remain unverified. Older decorative shadow-patch
+registration and photographic fidelity also remain open. Physical Android is
+NOT RUN. This local publication handoff changes no reviewed runtime or index.
+
+
 ### Entrance elevation: bounded acceptance
 
 Freeze: output/berghain-frontage-repaired-candidate.json, SHA256 49dbc93aedbf337f15ba17910ebae4ebbd1d0cb49e7d6262ea3c76cf7c81b00a; 223 files.

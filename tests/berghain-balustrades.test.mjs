@@ -7,14 +7,14 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 
 test('the full visitor cannot cross the foyer balustrade between its main posts',()=>{
-  const point=studyToSite({x:-11.1,y:6.65,z:9.4});
-  const ahead=studyToSite({x:-11.1,y:6.65,z:10.4});
+  const point=studyToSite({x:-11.1,y:5.45,z:9.4});
+  const ahead=studyToSite({x:-11.1,y:5.45,z:10.4});
   const length=Math.hypot(ahead.x-point.x,ahead.z-point.z);
   const normal={x:(ahead.x-point.x)/length,z:(ahead.z-point.z)/length};
-  const space={floors:[{x:[-100,100],z:[-100,100],y:6.65}],
+  const space={floors:[{x:[-100,100],z:[-100,100],y:5.45}],
     solids:layout.solids.filter(solid=>solid.balustrade==='foyer-gallery-west')};
   for(const offset of [-.21,0,.19]){
-    const start={x:point.x+offset-normal.x*.75,y:6.65,z:point.z-normal.z*.75};
+    const start={x:point.x+offset-normal.x*.75,y:5.45,z:point.z-normal.z*.75};
     assert.ok(canStand(start,space));
     const stopped=moveVisitor(start,{x:normal.x*1.5,z:normal.z*1.5},space);
     const crossing=(stopped.x-point.x-offset)*normal.x+(stopped.z-point.z)*normal.z;
@@ -80,7 +80,7 @@ test('Gallery-guard first-person camera keeps the eye inside the legal body thro
  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
  const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
  try{
-  for(const position of [8.8,8.9,9.0,9.03].map(z=>studyToSite({x:-2,y:6.65,z}))){
+  for(const position of [8.8,8.9,9.0,9.03].map(z=>studyToSite({x:-2,y:5.45,z}))){
    assert.ok(canStand(position,layout));
    for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
     walk.camera(camera,position,yaw,pitch);

@@ -108,7 +108,7 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       assert.ok(canStand(position,layout));
       await artifacts.screenshot(page,'upper-lounge-source.png');
       const native=await renderNativeAsset(page,{position,yaw:viewpoints.lounge.yaw});
-      assert.equal(native.upperLounge.floorHeight,16.35);assert.equal(native.upperLounge.furniture.title,'Felsenland');
+      assert.equal(native.upperLounge.floorHeight,12.15);assert.equal(native.upperLounge.furniture.title,'Felsenland');
       assert.equal(native.equipment,44);assert.equal(native.artworks,layout.artworks.length);
       await artifacts.screenshot(page,'upper-lounge-native.png');await disposeNativeAsset(page);
       return {position,native,scope:'Room shortcut; observed furnishings, estimated footprint/elevations; glass artwork imagery absent'};
@@ -121,7 +121,7 @@ export default {name:'Upper Panorama lounge and Felsenland study',
         const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);
         if(target.y>15)await artifacts.screenshot(page,'upper-route-'+route.length+'.png');
       }
-      assert.ok(Math.abs(route.at(-1).y-16.35)<.01);await assertFirstPersonView(page);
+      assert.ok(Math.abs(route.at(-1).y-12.15)<.01);await assertFirstPersonView(page);
       assert.equal(await page.locator('#room').inputValue(),'lounge','natural ascent identifies the upper room');
       assert.equal(await page.locator('#location').textContent(),'Upper Panorama lounge');
       await dragLook(page,ctx.context,ctx.profile,-Math.atan2(Math.sin(viewpoints.lounge.yaw-heading),Math.cos(viewpoints.lounge.yaw-heading))/.004);heading=viewpoints.lounge.yaw;
@@ -129,7 +129,7 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       for(const target of layout.panoramaRegistration.loungeRoute.toReversed().slice(1)){
         const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);
       }
-      assert.ok(Math.abs(route.at(-1).y-13.25)<.01);
+      assert.ok(Math.abs(route.at(-1).y-9.05)<.01);
       assert.equal(await page.locator('#room').inputValue(),'panorama','natural descent restores the lower room');
       return {route,input:ctx.profile.hasTouch?'real touch steering and movement':'real mouse steering and WASD',
         evidence:'Panorama shortcut, then continuous corridor/stair/room/return; natural building entrance tested separately'};

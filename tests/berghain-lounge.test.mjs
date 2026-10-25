@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {upperLoungeStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
-const studyToSite=({x,y,z})=>Object.fromEntries(upperLoungeStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
+import {adjacentPanoramaPoint} from '../assets/models/berghain/panorama-section.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(adjacentPanoramaPoint(upperLoungeStudyPoint([x,y,z])).map((v,i)=>[['x','y','z'][i],v]));
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {surfaceFamilies} from '../assets/models/berghain/surface-data.mjs';
 
@@ -11,7 +12,7 @@ test('the added upper lounge retains primary references and estimated dimensions
   assert.ok(layout.upperLounge,'The architect documents an additional lounge level');
   assert.deepEqual(layout.upperLounge.sources,['A13','I16','I18','I19','I20']);
   assert.match(layout.upperLounge.confidence,/estimated/);
-  assert.ok(layout.upperLounge.floorHeight>13.25+2.7);
+  assert.ok(layout.upperLounge.floorHeight>9.05+2.7);
   assert.ok(layout.upperLounge.ceilingHeight-layout.upperLounge.floorHeight>=2.5);
   assert.ok(viewpoints.lounge&&canStand(viewpoints.lounge.position,layout));
   for(const path of ['berghain/model.html','geheim/index.html'])
@@ -32,13 +33,13 @@ test('the lounge stair supports continuous full-body travel up, into the room an
     assert.ok(canStand(position,layout),'continuous ascent');
   }
   assert.ok(Math.hypot(position.x-high.x,position.z-high.z)<.15,'upper landing reached');
-  assert.ok(Math.abs(position.y-16.35)<.01,'additional level reached');
+  assert.ok(Math.abs(position.y-12.15)<.01,'additional level reached');
   const room=studyToSite({x:-11.4,y:16.35,z:.8});
   for(let i=0;i<50;i++)position=moveVisitor(position,{x:(room.x-position.x)/(50-i),z:(room.z-position.z)/(50-i)},layout);
   assert.ok(Math.hypot(position.x-room.x,position.z-room.z)<.15,'room connects to stair');
   for(const target of [high,studyToSite({x:-7.9,y:13.25,z:8.9})])
     for(let i=0;i<110;i++)position=moveVisitor(position,{x:(target.x-position.x)/(110-i),z:(target.z-position.z)/(110-i)},layout);
-  assert.ok(Math.abs(position.y-13.25)<.01,'returns continuously to Panorama level');
+  assert.ok(Math.abs(position.y-9.05)<.01,'returns continuously to Panorama level');
 });
 
 test('the mezzanine slab, stair underside, rails and seating remain real body barriers',()=>{
@@ -48,7 +49,7 @@ test('the mezzanine slab, stair underside, rails and seating remain real body ba
   assert.equal(canStand(studyToSite({x:-15.5,y:16.35,z:3}),layout),false,'sculptural seating');
   assert.equal(canStand(studyToSite({x:-14,y:16.35,z:-4.45}),layout),false,'overlook rail');
   const blocked=moveVisitor(studyToSite({x:-11.4,y:16.35,z:.8}),{x:0,z:-10},layout);
-  assert.ok(canStand(blocked,layout)&&blocked.y===16.35,'no unsupported walk off gallery');
+  assert.ok(canStand(blocked,layout)&&Math.abs(blocked.y-12.15)<.001,'no unsupported walk off gallery');
 });
 
 test('Felsenland is original padded geometry with its designer and observed form recorded',async()=>{

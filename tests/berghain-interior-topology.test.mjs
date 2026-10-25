@@ -3,20 +3,21 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {layout,viewpoints} from '../assets/models/berghain/layout.mjs';
 import {panoramaStudyPoint} from '../assets/models/berghain/panorama-registration.mjs';
-const studyToSite=({x,y,z})=>Object.fromEntries(panoramaStudyPoint([x,y,z]).map((v,i)=>[['x','y','z'][i],v]));
+import {adjacentPanoramaPoint} from '../assets/models/berghain/panorama-section.mjs';
+const studyToSite=({x,y,z})=>Object.fromEntries(adjacentPanoramaPoint(panoramaStudyPoint([x,y,z])).map((v,i)=>[['x','y','z'][i],v]));
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 
 test('Panorama sanitary area is distinct from main-floor Klo and below upper lounge',()=>{
   const area=layout.interiorTopology.panoramaToilets;
-  assert.equal(area.floorHeight,13.25);
-  assert.equal(layout.kloBar.floorHeight,6.65);
+  assert.equal(area.floorHeight,9.05);
+  assert.equal(layout.kloBar.floorHeight,5.45);
   assert.ok(area.floorHeight+2.7<layout.upperLounge.floorHeight);
   assert.match(area.placement,/estimated/);
   assert.match(area.photoAssignment,/unresolved/);
   assert.equal(layout.fixtures.filter(f=>f.id.startsWith('panorama-wc-pan-')).length,3);
   assert.equal(panoramaSanitaryAt(studyToSite({x:-15,y:13.25,z:1})),true);
-  assert.equal(panoramaSanitaryAt(studyToSite({x:-15,y:6.65,z:1})),false);
+  assert.equal(panoramaSanitaryAt(studyToSite({x:-15,y:5.45,z:1})),false);
 });
 
 test('walk from Panorama through separate WC entrance into each cubicle and return',()=>{
@@ -30,7 +31,7 @@ test('walk from Panorama through separate WC entrance into each cubicle and retu
     for(let i=0;i<160;i++){
       position=moveVisitor(position,{x:(target.x-position.x)/(160-i),z:(target.z-position.z)/(160-i)},layout);
       assert.ok(canStand(position,layout),'full body clearance');
-      assert.equal(position.y,13.25,'same floor without teleport');
+      assert.equal(position.y,9.05,'same floor without teleport');
     }
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.05,JSON.stringify({target,position}));
   }

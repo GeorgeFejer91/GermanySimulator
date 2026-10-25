@@ -21,7 +21,7 @@ export function addArchitecturalCirculation(layout){
   const data=layout.architecturalCirculation={sources:['A01','I23'],
     gallery:['07','08','20','21','25','27','28','29','30','31','32','33','34'],
     confidence:'Photographed architectural forms and relative connections; registered coordinates, elevations and counts estimated',
-    mainStair:{floorHeights:[.05,3.35,6.65],routes:[],gallery:['07','08','20','21','25']},
+    mainStair:{floorHeights:[.05,2.75,5.45],routes:[],gallery:['07','08','20','21','25']},
     fixtures:[],stairs:[]};
   // U02 and the public admission/wardrobe sequence require a foyer connection.
   // This is an inferred doorway in the provisional glass run, not an opening
@@ -134,30 +134,30 @@ export function addArchitecturalCirculation(layout){
 
   // Plate-sided switchback around the open foyer void, retaining the existing
   // entrance approach and main-floor elevation. No slab fills the atrium.
-  flight('main stair',8,12.5,20.5,3.35,.05,3,19);
-  slab('main intermediate landing',[6.5,13.5],[10.5,12.5],3.35);
-  flight('main upper flight',12,12.5,20.5,3.35,6.65,3,19);
-  slab('main upper turn',[10.5,17],[20.5,21.5],6.65);
-  slab('main upper return',[14,17],[9.1,20.5],6.65);
-  guard('main landing north',6.5,10.5,13.5,10.5,3.35);
-  guard('main landing west',6.5,10.5,6.5,12.5,3.35);
-  guard('main landing east',13.5,10.5,13.5,12.5,3.35);
-  guard('main landing middle',9.5,12.5,10.5,12.5,3.35);
-  guard('main top south',10.5,21.5,17,21.5,6.65);
-  guard('main top west',10.5,20.5,10.5,21.5,6.65);
-  guard('main top inner gap',13.5,20.5,14,20.5,6.65);
-  guard('main return outside',17,9.4,17,21.5,6.65);
-  guard('main return void',14,9.4,14,20.5,6.65);
-  guard('closed old main opening',6.4,9.4,14,9.4,6.65);
-  guard('east gallery remainder',17,9.4,21.5,9.4,6.65);
-  data.mainStair.routes=[[8,.05,21.1],[8,3.35,11.5],[12,3.35,11.5],[12,6.65,21],[15.5,6.65,21],[15.5,6.65,8.8],[14,6.65,7]];
+  flight('main stair',8,12.5,20.5,2.75,.05,3,16);
+  slab('main intermediate landing',[6.5,13.5],[10.5,12.5],2.75);
+  flight('main upper flight',12,12.5,20.5,2.75,5.45,3,16);
+  slab('main upper turn',[10.5,17],[20.5,21.5],5.45);
+  slab('main upper return',[14,17],[9.1,20.5],5.45);
+  guard('main landing north',6.5,10.5,13.5,10.5,2.75);
+  guard('main landing west',6.5,10.5,6.5,12.5,2.75);
+  guard('main landing east',13.5,10.5,13.5,12.5,2.75);
+  guard('main landing middle',9.5,12.5,10.5,12.5,2.75);
+  guard('main top south',10.5,21.5,17,21.5,5.45);
+  guard('main top west',10.5,20.5,10.5,21.5,5.45);
+  guard('main top inner gap',13.5,20.5,14,20.5,5.45);
+  guard('main return outside',17,9.4,17,21.5,5.45);
+  guard('main return void',14,9.4,14,20.5,5.45);
+  guard('closed old main opening',6.4,9.4,14,9.4,5.45);
+  guard('east gallery remainder',17,9.4,21.5,9.4,5.45);
+  data.mainStair.routes=[[8,.05,21.1],[8,2.75,11.5],[12,2.75,11.5],[12,5.45,21],[15.5,5.45,21],[15.5,5.45,8.8],[14,5.45,7]];
   data.mainStair.siteRoute=data.mainStair.routes.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
   // Table/duct/radiator adjacency is shown together with the stair in20/25.
   box('foyer standing table top',[2.5,1.05,15.5],[3.5,.18,.85],'concrete');
   for(const x of [1.05,3.95])box('foyer standing table leg',[x,.48,15.5],[.18,.96,.85],'concrete');
-  box('foyer broad service duct',[2.5,5.4,16],[2.1,.4,9],'aluminium');
-  for(const z of [12,14,16,18,20])box('foyer duct transverse seam',[2.5,5.19,z],[2.12,.025,.035],'steel',false);
-  for(let z=11.6;z<20.5;z+=.16)box('foyer duct underside rib',[2.5,5.185,z],[2.06,.035,.025],'steel',false);
+  box('foyer broad service duct',[2.5,5.2,16],[2.1,.4,9],'aluminium');
+  for(const z of [12,14,16,18,20])box('foyer duct transverse seam',[2.5,4.99,z],[2.12,.025,.035],'steel',false);
+  for(let z=11.6;z<20.5;z+=.16)box('foyer duct underside rib',[2.5,4.985,z],[2.06,.035,.025],'steel',false);
   box('foyer radiator header',[4.5,2.9,11.7],[1.1,.06,.11],'steel');
   for(let i=0;i<15;i++)box('foyer radiator fin',[4+i*.072,1.55,11.7],[.045,2.7,.14],'steel');
   data.fixtures.push({id:'lower-stair-services',gallery:['03','04','05','20','25'],placement:'Estimated adjacency to new main stair; exact service bay unmeasured'});
@@ -165,11 +165,11 @@ export function addArchitecturalCirculation(layout){
   // I03/I04 and U01/U02 identify a mezzanine, not a counter on the main floor.
   // G27–29 show a guarded drop, onward ascent and overhead crane. The datum,
   // bay, narrow lower approach and upper endpoint remain authoring estimates.
-  const eisbarFloor=9.95;
+  const eisbarFloor=8.75;
   // The mezzanine intercepts the end uplight's former tall-wall aim. Keep
   // this estimated practical below the slab rather than shining through it.
   const underEisbarLight=layout.mainBar.interiorFacade.practicalLighting.lights[0];
-  underEisbarLight.target[1]=9.3;underEisbarLight.intensity=80;underEisbarLight.range=4;
+  underEisbarLight.target[1]=8.1;underEisbarLight.intensity=80;underEisbarLight.range=4;
   const counter=(name,c,s)=>{
     box(name+' plinth',[c[0],eisbarFloor+.25,c[2]],[s[0]-.12,.5,s[2]-.12],'rubber');
     box(name+' body',c,s,'stainless');
@@ -192,42 +192,42 @@ export function addArchitecturalCirculation(layout){
   box('Eisbar back service shelf',[18.75,eisbarFloor+.94,-21.35],[2.1,.1,.5],'stainless');
   box('Eisbar coffee machine',[18.5,eisbarFloor+1.25,-21.35],[.7,.5,.45],'stainless');
   box('Eisbar low refrigerator',[20.3,eisbarFloor+.5,-21],[.65,1,.8],'steel');
-  flight('Eisbar narrow lower stair',14.1,-20,-14.5,9.95,6.65,1.6,19,false);
+  flight('Eisbar narrow lower stair',14.1,-20,-14.5,8.75,5.45,1.6,19,false);
   slab('Eisbar intermediate landing',[13.3,21.4],[-21.6,-20],eisbarFloor,'floor');
   slab('Eisbar mezzanine platform',[16.8,21.4],[-20,-13.2],eisbarFloor,'floor');
   box('Eisbar platform cross beam',[19.1,eisbarFloor-.28,-18],[4.6,.4,.3],'concrete');
   box('Eisbar platform wall beam',[21.25,eisbarFloor-.28,-17.4],[.3,.4,8.4],'concrete');
-  flight('Eisbar narrow upper stair',16.2,-20,-14.5,9.95,13.25,1,19,false);
-  slab('Eisbar upper service landing',[15.7,16.7],[-14.5,-13.3],13.25);
+  flight('Eisbar narrow upper stair',16.2,-20,-14.5,8.75,12.05,1,19,false);
+  slab('Eisbar upper service landing',[15.7,16.7],[-14.5,-13.3],12.05);
   guard('Eisbar landing rear',13.3,-21.6,21.4,-21.6,eisbarFloor,false);
   guard('Eisbar intermediate side',13.3,-21.6,13.3,-20,eisbarFloor,false);
   guard('Eisbar intermediate middle',14.9,-20,15.7,-20,eisbarFloor,false);
   guard('Eisbar mezzanine west',16.8,-20,16.8,-13.2,eisbarFloor,false);
   guard('Eisbar mezzanine east',21.4,-21.6,21.4,-13.2,eisbarFloor,false);
   guard('Eisbar mezzanine front',16.8,-13.2,21.4,-13.2,eisbarFloor,false);
-  for(const x of [15.7,16.7])guard('Eisbar upper side',x,-14.5,x,-13.3,13.25,false);
-  guard('Eisbar upper termination',15.7,-13.3,16.7,-13.3,13.25,false);
+  for(const x of [15.7,16.7])guard('Eisbar upper side',x,-14.5,x,-13.3,12.05,false);
+  guard('Eisbar upper termination',15.7,-13.3,16.7,-13.3,12.05,false);
   // G27's relief and window form a local backdrop beside the guarded opening.
   // Their end-wall registration is inferred; no opening is cut into the hull.
-  box('Eisbar relief panel',[14.1,11.9,-21.72],[1.65,1.6,.08],'mainBarPlaster');
-  const medallion=box('Eisbar circular relief',[14.1,11.9,-21.655],[1.22,.058,1.22],'mainBarPlaster',false,
+  box('Eisbar relief panel',[14.1,10.7,-21.72],[1.65,1.6,.08],'mainBarPlaster');
+  const medallion=box('Eisbar circular relief',[14.1,10.7,-21.655],[1.22,.058,1.22],'mainBarPlaster',false,
     [[-1.22,0,0],[0,0,.058],[0,1.22,0]]);
   medallion.shape='main-bar-medallion';
-  box('Eisbar high window recess',[14.1,14.15,-21.75],[1.5,2.15,.035],'rubber',false);
-  for(const x of [13.38,14.1,14.82])box('Eisbar window mullion',[x,14.15,-21.7],[.045,2.15,.035],'steel',false);
-  for(const y of [13.1,14.15,15.2])box('Eisbar window transom',[14.1,y,-21.7],[1.5,.045,.035],'steel',false);
-  box('Eisbar crane track',[18.2,16.3,-17.5],[.24,.45,8],'steel');
-  box('Eisbar crane trolley',[18.2,15.95,-17],[.7,.3,.6],'steel');
-  box('Eisbar hoist cable',[18.2,14.8,-17],[.025,2,.025],'steel');
-  box('Eisbar hoist block',[18.2,13.75,-17],[.32,.4,.22],'steel');
-  box('Eisbar hook shank',[18.2,13.4,-17],[.055,.3,.055],'steel');
-  box('Eisbar hook bend',[18.27,13.24,-17],[.18,.06,.055],'steel');
-  box('Eisbar hook tip',[18.35,13.31,-17],[.055,.15,.055],'steel');
+  box('Eisbar high window recess',[14.1,12.95,-21.75],[1.5,2.15,.035],'rubber',false);
+  for(const x of [13.38,14.1,14.82])box('Eisbar window mullion',[x,12.95,-21.7],[.045,2.15,.035],'steel',false);
+  for(const y of [11.9,12.95,14])box('Eisbar window transom',[14.1,y,-21.7],[1.5,.045,.035],'steel',false);
+  box('Eisbar crane track',[18.2,15.1,-17.5],[.24,.45,8],'steel');
+  box('Eisbar crane trolley',[18.2,14.75,-17],[.7,.3,.6],'steel');
+  box('Eisbar hoist cable',[18.2,13.6,-17],[.025,2,.025],'steel');
+  box('Eisbar hoist block',[18.2,12.55,-17],[.32,.4,.22],'steel');
+  box('Eisbar hook shank',[18.2,12.2,-17],[.055,.3,.055],'steel');
+  box('Eisbar hook bend',[18.27,12.04,-17],[.18,.06,.055],'steel');
+  box('Eisbar hook tip',[18.35,12.11,-17],[.055,.15,.055],'steel');
   data.eisbar={sources:['A01','I03','I04','I23','U01','U02'],gallery:['27','28','29'],
     floorHeight:eisbarFloor,counterAuthor:[19.35,eisbarFloor+.8,-17],counterHeight:1.15,returnHeight:1.35,
-    authorGuestRoute:[[14.1,6.65,-14],[14.1,eisbarFloor,-20.7],[17.3,eisbarFloor,-20.7],
+    authorGuestRoute:[[14.1,5.45,-14],[14.1,eisbarFloor,-20.7],[17.3,eisbarFloor,-20.7],
       [17.3,eisbarFloor,-19.9],[17.3,eisbarFloor,-15.8],[18.8,eisbarFloor,-15.8],[18.8,eisbarFloor,-14.6]],
-    authorUpperRoute:[[14.1,6.65,-14],[14.1,eisbarFloor,-20.7],[16.2,eisbarFloor,-20.7],[16.2,13.25,-13.9]],
+    authorUpperRoute:[[14.1,5.45,-14],[14.1,eisbarFloor,-20.7],[16.2,eisbarFloor,-20.7],[16.2,12.05,-13.9]],
     stairUpperConnection:'Unresolved service-gallery destination; no invented Panorama doorway',
     registration:'Raised mezzanine supported by dated accounts/cutaways; datum, end bay, footprint and access routes estimated; historical December2006 installation',
     section:'Distinct main-floor approach, guarded counter platform and onward ascent; crane/relief relationship estimated together'};
@@ -239,83 +239,87 @@ export function addArchitecturalCirculation(layout){
   smokingFrame=true;
   const tower={x:[22,33],z:[3,10]};
   slab('smoking escape ground landing',[22.8,28.2],[-21.6,-19],.05);
-  flight('smoking exposed lower escape stair',24,-19,-12,.05,3.35,2.4,19,false);
-  slab('smoking escape intermediate landing',[22.8,28.2],[-12,-10.6],3.35);
-  for(const x of [22.8,28.2])guard('smoking escape landing side',x,-12,x,-10.6,3.35,false);
-  guard('smoking escape far end',22.8,-10.6,28.2,-10.6,3.35,false);
-  guard('smoking escape middle',25.2,-12,25.8,-12,3.35,false);
-  flight('smoking exposed upper escape stair',27,-19,-12,6.65,3.35,2.4,19,false);
-  slab('smoking lower landing',[22.4,29],[-22.3,-19],6.65);
-  flight('smoking lower enclosed stair',24,-19,-12,6.65,9.95,2.4,19,false);
-  slab('smoking intermediate landing',[22.8,28.2],[-12,-10.6],9.95);
-  guard('smoking enclosed middle',25.2,-12,25.8,-12,9.95,false);
-  flight('smoking upper enclosed stair',27,-19,-12,13.25,9.95,2.4,19,false);
-  slab('smoking upper landing',[22,29],[-21.6,-19],13.25);
-  const enclosureBottom=z=>z<=-19?6.35:z>=-12?9.79:6.35+(z+19)*3.3/7;
+  flight('smoking exposed lower escape stair',24,-19,-12,.05,2.75,2.4,16,false);
+  slab('smoking escape intermediate landing',[22.8,28.2],[-12,-10.6],2.75);
+  for(const x of [22.8,28.2])guard('smoking escape landing side',x,-12,x,-10.6,2.75,false);
+  guard('smoking escape far end',22.8,-10.6,28.2,-10.6,2.75,false);
+  guard('smoking escape middle',25.2,-12,25.8,-12,2.75,false);
+  flight('smoking exposed upper escape stair',27,-19,-12,5.45,2.75,2.4,16,false);
+  slab('smoking lower landing',[22.4,29],[-22.3,-19],5.45);
+  slab('smoking lower approach',[22.8,25.2],[-19,-15.8],5.45);
+  guard('smoking lower approach inner',25.2,-19,25.2,-15.8,5.45,false);
+  flight('smoking lower enclosed stair',24,-15.8,-12,5.45,7.25,2.4,10,false);
+  slab('smoking intermediate landing',[22.8,28.2],[-12,-10.6],7.25);
+  guard('smoking enclosed middle',25.2,-12,25.8,-12,7.25,false);
+  flight('smoking upper enclosed stair',27,-15.8,-12,9.05,7.25,2.4,10,false);
+  slab('smoking upper landing',[22,29],[-21.6,-15.8],9.05);
+  const enclosureBottom=z=>z<=-15.8?5.3:z>=-12?7.09:5.3+(z+15.8)*(7.09-5.3)/3.8;
   for(const x of [22.4,29]){
     const entranceFace=x===22.4,cladding=entranceFace?'pale':'lightGlass';
-      box(entranceFace?'smoking opaque entrance-side face':'smoking landing glazing',[x,10.9,-20.3],[.06,9.1,2.6],cladding);
+      box(entranceFace?'smoking opaque entrance-side face':'smoking landing glazing',[x,8.275,-20.3],[.06,5.95,2.6],cladding);
       for(let i=0;i<19;i++){
-        const z=-19+(i+.5)*7/19,low=6.4+(i+.5)*3.3/19;
+        const z=-19+(i+.5)*7/19,low=enclosureBottom(z)+.15;
+        const rise=enclosureBottom(z+3.5/19)-enclosureBottom(z-3.5/19);
         box('smoking sloped underside fascia',[x,low,z],[.14,.3,7/19+.01],'pale',true,
-          [[.14,0,0],[0,.3,0],[0,3.3/19,7/19+.01]]);
-        box(entranceFace?'smoking opaque entrance-side slope':'smoking stair glazing',[x,(low+15.45)/2,z],[.06,15.45-low,7/19+.01],cladding);
+          [[.14,0,0],[0,.3,0],[0,rise,7/19+.01]]);
+        box(entranceFace?'smoking opaque entrance-side slope':'smoking stair glazing',[x,(low+11.25)/2,z],[.06,11.25-low,7/19+.01],cladding);
       }
-      box(entranceFace?'smoking opaque intermediate face':'smoking intermediate glazing',[x,12.7,-11.3],[.06,5.5,1.4],cladding);
+      box(entranceFace?'smoking opaque intermediate face':'smoking intermediate glazing',[x,9.17,-11.3],[.06,4.16,1.4],cladding);
     for(let z=-21.6;z<=-10.5;z+=1.375){
       const low=enclosureBottom(z);
-      box('smoking facade mullion',[x,(low+15.45)/2,z],[.07,15.45-low,.07],'steel');
+      box('smoking facade mullion',[x,(low+11.25)/2,z],[.07,11.25-low,.07],'steel');
     }
-    for(const y of [6.4,9.95,13.25,15.45]){
-      const end=y===6.4?-19:-10.6;
+    for(const y of [5.35,7.25,9.05,11.25]){
+      const end=y===5.35?-15.8:-10.6;
       box('smoking horizontal glazing rail',[x,y,(-21.6+end)/2],[.08,.08,end+21.6],'steel');
     }
   }
-  box('smoking opaque far end',[25.7,(9.79+15.45)/2,-10.6],[6.6,15.45-9.79,.12],'pale');
+  box('smoking opaque far end',[25.7,(7.09+11.25)/2,-10.6],[6.6,11.25-7.09,.12],'pale');
   // Building-facing end: separate lower and upper doorways. The latter meets
   // the estimated public Panorama passage registered after room assembly.
-  box('smoking join glazing left',[22.7,10.9,-21.6],[.6,9.1,.06],'lightGlass');
-  box('smoking join glazing middle',[25.5,10.9,-21.6],[1,9.1,.06],'lightGlass');
-  box('smoking join glazing right',[28.5,10.9,-21.6],[1,9.1,.06],'lightGlass');
-  box('smoking upper doorway sill',[27,9.8,-21.6],[2,6.9,.06],'lightGlass');
-  box('smoking upper doorway header',[27,15.4,-21.6],[2,.1,.06],'lightGlass');
-  box('smoking join doorway header',[24,12.25,-21.6],[2,6.4,.06],'lightGlass');
-  box('smoking join doorway sill',[24,6.5,-21.6],[2,.3,.06],'lightGlass');
-  box('smoking roof',[25.7,15.5,-16.1],[6.6,.15,11],'pale');
+  box('smoking join glazing left',[22.7,8.275,-21.6],[.6,5.95,.06],'lightGlass');
+  box('smoking join glazing middle',[25.5,8.275,-21.6],[1,5.95,.06],'lightGlass');
+  box('smoking join glazing right',[28.5,8.275,-21.6],[1,5.95,.06],'lightGlass');
+  box('smoking upper doorway sill',[27,7.175,-21.6],[2,3.75,.06],'lightGlass');
+  box('smoking upper doorway header',[27,11.2,-21.6],[2,.1,.06],'lightGlass');
+  box('smoking join doorway header',[24,9.55,-21.6],[2,3.4,.06],'lightGlass');
+  box('smoking join doorway sill',[24,5.375,-21.6],[2,.15,.06],'lightGlass');
+  box('smoking roof',[25.7,11.3,-16.1],[6.6,.15,11],'pale');
   for(let z=-21.6;z<-10.5;z+=1.375)
-    box('smoking roof joist',[25.7,15.36,z],[6.6,.14,.08],'steel',false);
-  for(const [z,top,width] of [[-20.8,6.49,6.7],[-11.4,9.79,6]]){
+    box('smoking roof joist',[25.7,11.16,z],[6.6,.14,.08],'steel',false);
+  for(const [z,top,width] of [[-20.8,5.29,6.7],[-11.4,7.09,6]]){
     box('smoking landing cross-girder',[25.5,top-.15,z],[width,.3,.24],'steel');
     for(const x of [23,28.3])box('smoking exterior support',[x,(top-.3+.05)/2,z],[.18,top-.3-.05,.18],'steel');
   }
-  for(const x of [23,28.3])box('smoking lower diagonal tie',[x,3.4,-16.1],[.08,.08,9.4],'steel',true,
-    [[.08,0,0],[0,.08,0],[0,5.8,9.4]]);
-  guard('smoking upper landing opening',22.8,-19,25.8,-19,13.25,false);
-  guard('smoking lower landing middle',25.2,-19,25.8,-19,6.65,false);
-  guard('smoking lower landing outer edge',28.2,-19,29,-19,6.65,false);
-  box('smoking upper shelf',[28.7,14.2,-20.3],[.45,.08,1.4],'steel');
-  box('smoking ashtray',[28.65,14.28,-20.3],[.2,.08,.2],'stainless',false);
+  for(const x of [23,28.3])box('smoking lower diagonal tie',[x,2.8,-16.1],[.08,.08,9.4],'steel',true,
+    [[.08,0,0],[0,.08,0],[0,4.6,9.4]]);
+  guard('smoking upper landing opening',22.8,-15.8,25.8,-15.8,9.05,false);
+  guard('smoking upper landing outer edge',28.2,-15.8,29,-15.8,9.05,false);
+  guard('smoking lower landing middle',25.2,-19,25.8,-19,5.45,false);
+  guard('smoking lower landing outer edge',28.2,-19,29,-19,5.45,false);
+  box('smoking upper shelf',[28.7,10,-20.3],[.45,.08,1.4],'steel');
+  box('smoking ashtray',[28.65,10.08,-20.3],[.2,.08,.2],'stainless',false);
   // Restrained original geometry for the checkerplate and sliding-pane detail
   // visible in32/33; no downloaded photograph is used as a texture.
-  for(const [y,z0,z1] of [[13.25,-21.3,-19.2],[9.95,-11.8,-10.8]])
+  for(const [y,z0,z1] of [[9.05,-21.3,-16],[7.25,-11.8,-10.8]])
     for(let x=23.1;x<28.7;x+=.45)for(let z=z0;z<z1;z+=.38)
       box('smoking checkerplate raised lug',[x,y+.006,z],[.13,.008,.025],'aluminium',false,
         [[.1,0,.08],[0,.008,0],[-.016,0,.02]]);
-  for(const [low,high,z0,z1] of [[11.1,12.35,-18.8,-15.8],[14,14.8,-21.1,-19.7]]){
+  for(const [low,high,z0,z1] of [[7.9,9.15,-18.8,-15.8],[9.8,10.6,-21.1,-19.7]]){
     for(const y of [low,high])box('smoking operable pane horizontal',[28.96,y,(z0+z1)/2],[.04,.035,z1-z0],'steel',false);
     for(const z of [z0,(z0+z1)/2,z1])box('smoking operable pane upright',[28.96,(low+high)/2,z],[.04,high-low,.035],'steel',false);
     box('smoking pane handle',[28.92,(low+high)/2,(z0+z1)/2+.1],[.05,.16,.035],'steel',false);
   }
   // P08–10's entrance-facing surface is opaque, with framed dark panels.
   // G30/31's opposite face is glazed. These are two sides of one enclosure.
-  for(const [y,z] of [[8,-19.1],[11.7,-19.1],[10.2,-12.7]]){
-    box('smoking entrance-side window',[22.365,y,z],[.025,.8,2.2],'glass',false);
-    for(const dy of [-.43,.43])box('smoking entrance-side window frame',[22.34,y+dy,z],[.04,.055,2.3],'steel',false);
-    for(const dz of [-1.13,1.13])box('smoking entrance-side window jamb',[22.34,y,z+dz],[.04,.9,.055],'steel',false);
+  for(const [y,z,width] of [[6.8,-19.1,2.2],[9.2,-19.1,2.2],[10,-11.3,1]]){
+    box('smoking entrance-side window',[22.365,y,z],[.025,.8,width],'glass',false);
+    for(const dy of [-.43,.43])box('smoking entrance-side window frame',[22.34,y+dy,z],[.04,.055,width+.1],'steel',false);
+    for(const dz of [-width/2-.03,width/2+.03])box('smoking entrance-side window jamb',[22.34,y,z+dz],[.04,.9,.055],'steel',false);
   }
   // Open one registered bay in the study facade, retaining its masonry above
   // and below. This edits the provisional detail shell only, never LoD2 mass.
-  for(const [doorX,doorLow,doorHigh] of [[24,6.65,9.05],[27,13.25,15.35]]){
+  for(const [doorX,doorLow,doorHigh] of [[24,5.45,7.85],[27,9.05,11.15]]){
   const door=site([doorX,0,-21.6]),replacements=new Map();
   for(const p of layout.parts){
     // Decorative sill/reveal boxes have no elevation-name prefix and still
@@ -335,17 +339,17 @@ export function addArchitecturalCirculation(layout){
   layout.solids=layout.solids.flatMap(s=>replacements.has(s.renderPart)?replacements.get(s.renderPart).map(p=>
     ({...s,name:p.name,renderPart:p,y:[p.center[1]-p.size[1]/2,p.center[1]+p.size[1]/2]})):[s]);
   }
-  const constructionRoute=[[24,6.65,-23.1],[24,6.65,-20],[24,9.95,-11.3],[27,9.95,-11.3],[27,13.25,-20]];
+  const constructionRoute=[[24,5.45,-23.1],[24,5.45,-20],[24,7.25,-11.3],[27,7.25,-11.3],[27,9.05,-20]];
   data.smoking={sources:['A01','I23','P08','P09','P10','U02'],gallery:['30','31','32','33','34'],authorBounds:tower,
     enclosedGuard:'Gallery32/33 sparse posts and continuous horizontal rails; separate invisible body containment, spacing estimated',
     faces:'G30/31 glazed reverse; P08–10 opaque entrance-facing cladding with framed windows; pane dimensions and counts estimated',
-    floorHeights:[6.65,9.95,13.25],upperConnection:'Public Panorama connection supported; doorway and guarded passage registration estimated',
+    floorHeights:[5.45,7.25,9.05],upperConnection:'Public Panorama connection supported; doorway and guarded passage registration estimated',
     lowerConnection:'Estimated doorway through front-side study-facade bay at author z=8',
     history:'April2008 Treppe Rauchbereich per architect anniversary timeline; gallery date unknown',
     registration:'Outward long axis and front-side region photo-supported; exact bay, dimensions and elevations estimated; official hull untouched',
     supersedes:'Parallel rear-quarter orientation in 121459a; background annex was not proof of the main/Halle join',
     authorRoute:constructionRoute.map(smokingToAuthor),
-    lightAnchors:[[25.5,14.7,-20],[25.5,11.2,-11.4]].map(smokingToAuthor)};
+    lightAnchors:[[25.5,10.5,-20],[25.5,9.5,-11.4]].map(smokingToAuthor)};
   data.smoking.siteRoute=constructionRoute.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
   Object.assign(layout.interiorTopology.smoking,{sources:['A01','I23'],status:'Estimated photographed tower represented',
     reason:'Full architect gallery30–34 supports stair form and two-level connection; upper return stair and Panorama attachment are estimated, not surveyed',

@@ -1,5 +1,62 @@
 # Berghain online resource catalogue
 
+### Radiator, window and connected-section correction — current candidate
+
+The previous joint section placed 0.8025 m rigid radiators partly over the
+glazing. I19 gallery04/expanded16 show their tops at or below the sill. The
+current working fit lowers the connected main/Klo, Panorama and upper-lounge
+floors by 0.20 m to 5.45, 9.05 and 12.15 m, respectively; the south tall-row
+sill moves from 9.70 to 9.90 m. Its head remains 13.65 m. The actual exterior
+opening, masonry below it, sill and inner frame change together. No cover
+panel conceals glazing and no radiator is compressed. Ceiling-mounted Panorama
+bodies remain at their previous elevation beneath the 13.95 m fitted ceiling.
+
+This balances photographed relations rather than recovering unique datums:
+the floor-to-sill distance is 0.85 m; the radiator top clears it by 0.0475 m;
+the 3.75 m opening remains elongated, and the 1.15 m upper inter-row gap is
+30.7% of its height. Common Klo headroom remains 3.15 m with full-height
+switchgear. Main and escape half-landings are 2.75 m; the smoking landings
+are 5.45, 7.25 and 9.05 m. The lower slab underside is 5.29 m and enclosure
+fascia underside 5.30 m, above the provisional lower aperture head 5.25 m.
+These are model quantities and photo-informed estimates, not surveyed facts.
+The Eisbar/service landings follow at 8.75/12.05 m; the closed upper endpoint
+does not assert a permanent private or Panorama connection.
+
+This working section is an evidence-constrained estimate. README.md owns the
+current task and publication state; VALIDATION.md owns the fresh test evidence.
+Earlier candidate notes below retain their historical datums. The old joint
+section was rejected after its radiator/glazing overlap was found; the first
+sill candidate was rejected for a stale smoking-doorway lining. Both are
+preserved in output. Current source: output/berghain-joint-sill-repaired-runtime,
+225-file freeze SHA256
+493f2977d80975688251f4b0e2b75a6f3348bd1ca459c5dbd8e530b1561690c0.
+Full photographic fidelity, exact current toilet/backstage inventories and
+physical Android qualification remain unresolved.
+
+
+## Earlier joint-section proposal: evidence limits
+
+P02 (Jane Mejdahl, 2007) and P16 (2017 façade photograph), together with I19's
+six-window Panorama interior, support correcting the former four-bay footprint.
+The reversal of the wide end spacing is consistent between interior and exterior.
+A manual projective-height sensitivity study of P02 brackets the sill at
+7.306–11.588 m and head at 11.106–15.313 m under its stated image picks and hull
+height assumptions; these are sensitivity ranges, not confidence intervals or
+survey measurements. Its central sill estimate is 9.642 m. The former 13.25 m
+floor is above the whole chosen sill range. The initial 9.25 m replacement was a working
+hypothesis, not a uniquely recovered value. Inputs/results remain in
+output/berghain-panorama-photo-height.json.
+
+Karhard G30/31 place the smoking attachment against exterior tiers and show a
+level near-wall underside followed by a projecting incline; G32/33 show paired
+flights. These constrain relative relationships. They do not measure the selected
+main5.65/Panorama9.25/upper-lounge12.35 m common section. U02 is a historic,
+unscaled cutaway: it supports ordinary WC, Klo and smoking adjacency, but does
+not resolve metric footprints or modern FLINTA/backstage rooms. The 2012 Kubus
+backstage proposal was unbuilt; a 2019 temporary dressing installation is not
+evidence of a permanent current location. No new private-room position is claimed.
+
+
 Checked 2026-10-23–24; latest entrance pass adds ENT01–ENT05, with supplied photographs, Google Images discovery and firsthand accounts. The catalogue contains154 unique records, including concurrent architectural research. This is a maintained discovery catalogue, not a claim to list every resource on the internet. Entries distinguish verified sources from leads and do not imply permission to redistribute source images or models.
 
 ## What exists

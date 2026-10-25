@@ -4,9 +4,9 @@ import {addPanoramaSanitaryFixtures} from './interior-topology.mjs';
 
 const footprints={klo:{x:[-21.5,-7.25],z:[-3.5,9.2]},toilets:{x:[-21.5,-7.25],z:[-20.7,-3.5]}};
 const zones=Object.entries(footprints).map(([name,{x,z}])=>({name,polygon:
-  [[x[0],z[0]],[x[1],z[0]],[x[1],z[1]],[x[0],z[1]]].map(([x,z])=>studyToSite({x,y:6.65,z}))}));
+  [[x[0],z[0]],[x[1],z[0]],[x[1],z[1]],[x[0],z[1]]].map(([x,z])=>studyToSite({x,y:5.45,z}))}));
 export function kloRoomAt(position){
-  if(Math.abs(position.y-6.65)>.15)return null;
+  if(Math.abs(position.y-5.45)>.15)return null;
   return zones.find(({polygon})=>polygon.every((a,i)=>{
     const b=polygon[(i+1)%polygon.length];
     return (b.x-a.x)*(position.z-a.z)-(b.z-a.z)*(position.x-a.x)>=-1e-7;
@@ -21,15 +21,18 @@ export const kloMaterials={
 };
 
 export function addKloRooms(layout,{box}){
-  const floor=6.65,ceiling=9.8;
+  const floor=5.45,ceiling=8.6;
   layout.kloBar={sources:['ART04','ART14','I19','I21'],floorHeight:floor,ceilingHeight:ceiling,
     confidence:'Photographed architectural forms; floor assignment, footprint, connections, counts and dimensions estimated',
     artwork:{artist:'Joseph Marr',title:'Together',date:2013,lengthMetres:9,
       material:'Cola-flavoured sugar preserved with polyurethane',status:'Figure sequence not yet modelled'},
     toiletDates:[2009,2013,2015],toiletGalleryAssignment:'Photographs span multiple refurbishments; individual floor/date unresolved',
     barFootprint:footprints.klo,toiletFootprint:footprints.toilets};
-  box('Klo red ceiling',[-14.375,ceiling+.08,2.85],[14.25,.16,12.7],'kloRed','interior',true);
-  box('WC concrete ceiling',[-14.375,ceiling+.08,-12.1],[14.25,.16,17.2],'darkConcrete','interior',true);
+  // Estimated finish below the upper slab, preserving the photographed
+  // headroom and the rigid switchgear assembly rather than compressing them.
+  layout.kloBar.ceilingFinishThickness=.05;
+  box('Klo red ceiling',[-14.375,ceiling+.025,2.85],[14.25,.05,12.7],'kloRed','interior',true);
+  box('WC concrete ceiling',[-14.375,ceiling+.025,-12.1],[14.25,.05,17.2],'darkConcrete','interior',true);
   box('Klo bar red back wall',[-15.95,floor+1.575,-3.5],[11.1,3.15,.16],'kloRed','interior',true);
   box('Klo WC doorway lintel',[-8.825,floor+2.79,-3.5],[3.15,.72,.16],'darkConcrete','interior',true);
   box('Klo red south wall',[-14.375,floor+1.575,9.2],[14.25,3.15,.16],'kloRed','interior',true);

@@ -60,7 +60,7 @@ test('Panorama hanging lights leave comfortable clearance over a standing visito
   assert.equal(lenses.length,9);
   for(const part of lenses){
     const m=part.matrix,lowest=m[13]-(Math.abs(m[1])+Math.abs(m[5])+Math.abs(m[9]))/2;
-    assert.ok(lowest-13.25>=2.1,'inferred light placement must clear a standing person comfortably');
+    assert.ok(lowest-layout.panoramaServices.floorHeight>=2.1,'inferred light placement must clear a standing person comfortably');
   }
 });
 

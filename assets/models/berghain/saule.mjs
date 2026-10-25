@@ -35,7 +35,7 @@ function addBelt({part},width,depth){
 }
 
 export function addSauleFixtures(layout,api){
-  const {fixture,part,box}=api,floorHeight=.05,bodyHeight=5.35,width=1.6,depth=2.1;
+  const {fixture,part,box}=api,floorHeight=.05,bodyHeight=4.15,width=1.6,depth=2.1;
   const retainedLights=layout.parts.filter(p=>p.name==='Säule column light');
   const central=retainedLights.filter(p=>p.center[0]<12);
   retainedLights.forEach((p,index)=>{
@@ -43,7 +43,7 @@ export function addSauleFixtures(layout,api){
   });
   layout.parts=layout.parts.filter(p=>!central.includes(p));
   layout.saule={sources:['A15','I24'],floorHeight,pierCount:6,bodyWidth:width,bodyDepth:depth,
-    bodyHeight,capitalTop:6.25,beltHeight:floorHeight+2.5,
+    bodyHeight,capitalTop:5.05,beltHeight:floorHeight+2.5,
     placement:'Six existing central grid anchors retained as provisional; not a recovered column plan',
     confidence:'Photographed concrete forms, belt construction and seating; dimensions, counts and placement inferred',
     remaining:'Exact footprint/grid and separate entry, bar/partitions/services, original concrete damage, full belt wash and current operation'};

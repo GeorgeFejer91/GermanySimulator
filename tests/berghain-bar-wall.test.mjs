@@ -89,7 +89,8 @@ test('bar plaster retains aged physical maps and practical beams reach the actua
   const wallMeshes=[];model.getObjectByName('interior').traverse(object=>{if(object.isMesh)wallMeshes.push(object);});
   for(const light of lights){
    const from=light.getWorldPosition(new THREE.Vector3()),to=light.target.getWorldPosition(new THREE.Vector3());
-   assert.ok(to.y>from.y+(light.name==='bar pilaster uplight 1'?1.3:3)&&from.y>layout.mainBar.floorHeight+.94,'Aim upward from above the service worktop');
+   const underSlab=['bar pilaster uplight 1','bar pilaster uplight 6'].includes(light.name);
+   assert.ok(to.y>from.y+(underSlab?1.3:3)&&from.y>layout.mainBar.floorHeight+.94,'Aim upward from above the service worktop, below any intercepting slab');
    const hits=new THREE.Raycaster(from,to.sub(from).normalize(),.02,light.distance).intersectObjects(wallMeshes,false);
    assert.ok(hits.length&&hits[0].object===wall,'The real cone center must reach plaster, not pass through the wall');
    assert.ok(light.color.r>light.color.b*1.5&&light.decay===2&&light.castShadow===false);
@@ -141,7 +142,7 @@ test('recessed windows and flanking masonry have different actual depth in the s
 test('wall detailing preserves the full guest aisle and the service aisle behind the counter',()=>{
  assert.ok(layout.mainBar.interiorFacade,'The wall must be present for this route check');
  for(const x of [13.72,16.72]){
-  let position={x,y:6.65,z:-8.7};assert.ok(canStand(position,layout));
+  let position={x,y:5.45,z:-8.7};assert.ok(canStand(position,layout));
   for(const z of [5.9,-8.7]){
    const start=position.z,steps=Math.ceil(Math.abs(z-start)/.05);
    for(let i=0;i<steps;i++)position=moveVisitor(position,{x:0,z:(z-start)/steps},layout);
@@ -153,7 +154,7 @@ test('wall detailing preserves the full guest aisle and the service aisle behind
 test('the photographed upper relief row remains visible across the bar rather than hidden behind an inferred beam',()=>{
  const wall=layout.mainBar.interiorFacade,model=createBerghainModel(),ray=new THREE.Raycaster();model.updateMatrixWorld(true);
  try{
-  const bay=wall.bayCenters[2];ray.set(new THREE.Vector3(13.72,12.65,bay[2]),new THREE.Vector3(1,0,0));
+  const bay=wall.bayCenters[2];ray.set(new THREE.Vector3(13.72,11.65,bay[2]),new THREE.Vector3(1,0,0));
   const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent);
   assert.ok(hit);const [section,material,shape]=hit.object.name.split('/');
   const part=layout.parts.filter(p=>p.section===section&&p.material===material&&p.shape===shape)[hit.instanceId];

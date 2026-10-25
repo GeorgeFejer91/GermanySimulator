@@ -15,8 +15,9 @@ const retired=new Set(['Halle upper west outer','Halle upper west inner','Halle 
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
 // Preserve Halle's original acceptance oracle before later, independently
-// tested circulation/detail additions. The entrance-elevation correction refreshes
-// the envelope fingerprint; frontage regressions and its scoped delta audit own that change.
+// tested circulation/detail additions. The joint main/Panorama section refreshes
+// the non-Halle fingerprint; its scoped tests own that change. The independent
+// published4652 comparison retained all691 Halle parts,450 solids and11 floors.
 async function beforeArchitecturalAdditions(){
  const layoutURL=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
  const encode=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
@@ -202,11 +203,12 @@ test('Halle rendered slabs expose three voids and its original indexed guards st
 });
 
 const BASELINE_FINGERPRINT={
- parts:'b130f7a10f440f7b31c09764b55109766148d4325acb5c4e563b9aa078819433',count:10526,
- solids:'6252e5f7124c9d1db25b6cde2fad8a8be6c5c899b448bc386cedde7b2612ae66',
- floors:'823664a99da7f870a23e636e08b519c48b6123e5a1aa6812431772f984bf52d4',
- views:'1957c4449c8a8ef57f2aec1c945f2d5af57363b9ecd77cc84140681a02a5f091',
- materials:'2a7791d4f7f958e124c5a7c060067963411342d10063279babb8a36cbb82d28d',
- bounds:'404f3286a2883f1ab3d0cef2a29671a2ee319641922cf96c6e703d409bf0874a',
- inventory:'ce5c8649a815772905589d09ac044d7a3d73f3b0918c4f0d031a50d1439cc70e'
+  "parts": "d40a1ba61837a01e248a303d63d528e2b29385b098af36f42263a230254a0c54",
+  "count": 10526,
+  "solids": "3856390b7b470af448b8cc5d1eaf32bb8a6a6fee354129e9257765c0419fc2e5",
+  "floors": "4b0c82668372e971e320accb699603b217d90483c5f69cc904cc8bb882a4a0bb",
+  "views": "0acbbaaa98b16739aa1b6547c52a240721a7416a98e004d515078750273695a8",
+  "materials": "2a7791d4f7f958e124c5a7c060067963411342d10063279babb8a36cbb82d28d",
+  "bounds": "404f3286a2883f1ab3d0cef2a29671a2ee319641922cf96c6e703d409bf0874a",
+  "inventory": "9d4a9279277857add1eb46b0e07e6602a314084e173e45308db4e3eb10fb9680"
 };

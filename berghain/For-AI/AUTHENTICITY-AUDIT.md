@@ -1,5 +1,21 @@
 # Berghain interior authenticity audit
 
+## AU12 joint section correction — 25 October 2026
+
+The new candidate resolves the demonstrable four-versus-six Panorama window
+coverage error and the floor/window conflict. It registers adjacent ordinary WC,
+upper lounge, Klo, Eisbar and smoking stairs in one internally coherent estimated
+section. Full-height Klo fittings are retained rather than compressed to hide the
+overlap. The smoking flights are concentrated toward the projecting end, matching
+the qualitative relationship in G30/31. See INTERIOR.md for the implementation
+and SOURCES.md for assumptions.
+
+AU12 remains partly open: no dimensioned interior plan establishes the chosen
+floor heights, exact room footprints, upper lounge construction or contemporary
+backstage/FLINTA layout. Independent collision/render acceptance is separate from
+photographic fidelity. Historic notes below describe the earlier candidates.
+
+
 The initial frontage candidate was held after Physics review found pre-existing
 decorative rustication strips spanning the open entrance. This repaired candidate
 trims those strips at the existing jamb aperture, including above head height.

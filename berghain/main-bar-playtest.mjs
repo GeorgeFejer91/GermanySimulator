@@ -19,7 +19,7 @@ async function screenCamera(ctx,{fallback=false,restore=false}={}){
  const {page,context,profile,artifacts}=ctx;
  if(fallback)await page.route('**/assets/models/berghain/textures/*.png',route=>route.abort());
  await enterNaturally(ctx);let heading=0;
- for(const [x,z,y]of [[5,21.15,.05],...mainStair,[16.1,7,6.65],[16.1,-4,6.65],[15.8,-4,6.65]]){
+ for(const [x,z,y]of [[5,21.15,.05],...mainStair,[16.1,7,5.45],[16.1,-4,5.45],[15.8,-4,5.45]]){
   heading=(await travel(ctx,studyToSite({x,y,z}),heading)).yaw;
  }
  if(fallback){
@@ -54,7 +54,7 @@ export default {name:'Photographed long bar and glazed separation',sourceFiles,s
  const screen=layout.mainBar.screenAnchor;
  const rays=[{origin:[screen[0]+.7,8.35,screen[2]+.2],direction:[-1,0,0]},
    {origin:[screen[0]+.7,8.35,screen[2]+8.2],direction:[-1,0,0]}];
- const position=studyToSite({x:16.1,y:6.65,z:3.8}),target=studyToSite({x:18.4,y:6.65,z:-7});
+ const position=studyToSite({x:16.1,y:5.45,z:3.8}),target=studyToSite({x:18.4,y:5.45,z:-7});
  const yaw=Math.atan2(position.x-target.x,position.z-target.z);
  const native=await renderNativeAsset(page,{position,yaw,rays});
  assert.equal(native.mainBar.counterHeight,1.12);assert.equal(native.equipment,44);assert.equal(native.artworks,2);
@@ -68,7 +68,7 @@ export default {name:'Photographed long bar and glazed separation',sourceFiles,s
 }},
 {id:'main-bar-natural-route',modes:['quick','stress'],timeoutMs:200000,async run(ctx){
  const {page,artifacts}=ctx;await enterNaturally(ctx);let heading=0;const route=[];
- const targets=[[5,21.15,.05],...mainStair,[16.1,7,6.65],[16.1,4,6.65],[16.1,-13.5,6.65]];
+ const targets=[[5,21.15,.05],...mainStair,[16.1,7,5.45],[16.1,4,5.45],[16.1,-13.5,5.45]];
  for(const [i,[x,z,y]]of targets.entries()){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
   await assertFirstPersonView(page);

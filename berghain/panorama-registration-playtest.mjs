@@ -36,7 +36,7 @@ export default {name:'Panorama frontage, sanitary and smoking connections',sourc
  }},
  {id:'panorama-registration-parity',profiles:['desktop'],modes:['stress'],timeoutMs:180000,async run(ctx){
   const p=viewpoints.panorama.position;
-  return compareMaterialRender(ctx,{position:[p.x,p.y+1.68,p.z],target:[-15.6,14.4,14.4]});
+  return compareMaterialRender(ctx,{position:[p.x,p.y+1.68,p.z],target:[-15.6,10.4,14.4]});
  }},
  {id:'panorama-public-connections',modes:['stress'],timeoutMs:360000,async run(ctx){
   let heading=await select(ctx,'berghain');const r=layout.panoramaRegistration,records=[];
@@ -54,7 +54,7 @@ export default {name:'Panorama frontage, sanitary and smoking connections',sourc
   await ctx.artifacts.screenshot(ctx.page,'smoking-public-door.png');
   run=await route(ctx,smoking.toReversed(),heading,'smoking-return');heading=run.heading;records.push(run);
   run=await route(ctx,r.stairRoute.toReversed(),heading,'main-down');records.push(run);
-  assert.ok(Math.abs((await position(ctx.page)).y-6.65)<.1);
+  assert.ok(Math.abs((await position(ctx.page)).y-5.45)<.1);
   return {records,scope:'Main-floor shortcut followed by real keyboard/touch main-to-Panorama, WC, upper lounge, smoking and return; no teleport between destinations'};
  }}
 ]};
