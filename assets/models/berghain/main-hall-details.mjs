@@ -149,3 +149,77 @@ export function addMainHallDetails(layout){
   }
   detail.parts=layout.parts.filter(p=>p.mainHallDetail).length;
 }
+
+// G17/G21/G22 distinguish the broad central roof from the deep industrial
+// bridge above the lighting rig. Work in the already registered world frame;
+// retain the official roof, pier footprints, side heads and public floors.
+export function fitMainHallRoofFrame(layout){
+  const retired=layout.parts.filter(p=>['structural beam','cross beam'].includes(p.name)&&p.center[1]>18);
+  const removed=new Set(retired);layout.parts=layout.parts.filter(p=>!removed.has(p));
+  layout.solids=layout.solids.filter(s=>!removed.has(s.renderPart));
+  const piers=layout.parts.filter(p=>p.name==='Hall fit side frame pier');
+  for(const p of piers){
+    const bottom=p.center[1]-p.size[1]/2;
+    p.size[1]=layout.calibration.mainRoof-bottom;p.center[1]=(layout.calibration.mainRoof+bottom)/2;
+    p.matrix=new THREE.Matrix4().compose(new THREE.Vector3(...p.center),new THREE.Quaternion(),new THREE.Vector3(...p.size)).toArray();
+    p.hallRoofPierFit=true;
+    const solid=layout.solids.find(s=>s.renderPart===p);if(solid)solid.y=[bottom,layout.calibration.mainRoof];
+  }
+  const add=(name,center,size,material='steel',shape='box',rotation=new THREE.Quaternion())=>{
+    const matrix=new THREE.Matrix4().compose(new THREE.Vector3(...center),rotation,new THREE.Vector3(...size));
+    const p={name:'Hall roof '+name,section:'interior',shape,material,center,size,matrix:matrix.toArray(),instanceTone:.94,hallRoofFrame:true};
+    layout.parts.push(p);return p;
+  };
+  const beam=(name,a,b,width)=>{
+    const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),direction=end.clone().sub(start);
+    return add(name,start.add(end).multiplyScalar(.5).toArray(),[width,direction.length(),width],'steel','box',
+      new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize()));
+  };
+  const heads=layout.parts.filter(p=>p.name==='Hall fit long side head').sort((a,b)=>a.center[2]-b.center[2]);
+  // Inboard brackets leave the tall piers clear. Their dimensions are a
+  // coherent reconstruction, not a surveyed machinery specification.
+  const railZ=heads.map((p,i)=>p.center[2]+(i===0?1:-1)*(p.size[2]/2+.3));
+  const [left,right]=railZ,span=right-left,middle=(left+right)/2;
+  const runwayTop=16.6,railTop=runwayTop+.21,bridgeX=5.2,webXs=[bridgeX-.6,bridgeX+.6];
+  const alongZ=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),Math.PI/2);
+  const alongX=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),Math.PI/2);
+  for(const [index,head] of heads.entries()){
+    const x=head.center[0],z=railZ[index],inward=index===0?1:-1,length=head.size[0]-.3;
+    for(const pier of piers.filter(p=>Math.abs(p.center[2]-head.center[2])<.01))
+      add('runway bracket',[pier.center[0],16.15,head.center[2]+inward*(head.size[2]/2+.26)],[.45,.30,.52],'steel');
+    add('runway girder lower flange',[x,16.325,z],[length,.05,.3],'rust');
+    add('runway girder web',[x,16.45,z],[length,.2,.045],'rust');
+    add('runway girder upper flange',[x,16.575,z],[length,.05,.3],'rust');
+    add('runway foot',[x,runwayTop+.025,z],[length,.05,.28],'rust');
+    add('runway web',[x,runwayTop+.11,z],[length,.12,.045],'rust');
+    add('runway head',[x,runwayTop+.19,z],[length,.04,.11],'steel');
+    for(const dx of [-.65,.65])add('bridge wheel',[bridgeX+dx,railTop+.18,z],[.36,.12,.36],'steel','cylinder',alongZ);
+    add('end carriage',[bridgeX,railTop+.41,z],[1.8,.14,.36],'rust');
+    for(const dx of [-.65,.65])add('bridge axle',[bridgeX+dx,railTop+.18,z],[.07,.45,.07],'steel','cylinder',alongZ);
+  }
+  const lower=railTop+.48,upper=lower+.96;
+  for(const x of webXs){
+    add('bridge lower flange',[x,lower+.04,middle],[.36,.08,span],'rust');
+    add('bridge web',[x,lower+.52,middle],[.085,.88,span],'rust');
+    add('bridge upper flange',[x,upper+.04,middle],[.36,.08,span],'rust');
+    add('trolley rail',[x,upper+.13,middle],[.10,.10,span],'steel');
+  }
+  for(const z of [left+.2,middle,right-.2])add('bridge tie',[bridgeX,lower+.16,z],[1.2,.16,.14],'steel');
+  const trolleyZ=-.7,trolleyRailTop=upper+.18;
+  for(const x of webXs)for(const dz of [-.32,.32])
+    add('trolley wheel',[x,trolleyRailTop+.13,trolleyZ+dz],[.26,.12,.26],'steel','cylinder',alongX);
+  add('trolley frame',[bridgeX,trolleyRailTop+.26,trolleyZ],[1.42,.16,1.05],'steel');
+  add('hoist housing',[bridgeX,trolleyRailTop+.5,trolleyZ],[.94,.4,.8],'rust');
+  add('bridge maker plate',[webXs[0]-.049,lower+.57,trolleyZ],[.012,.24,.48],'pale');
+  // A still, open hook silhouette; no live machinery or hidden drive mechanism.
+  for(const dx of [-.055,.055])beam('hoist cable',[bridgeX+dx,trolleyRailTop+.18,trolleyZ],[bridgeX+dx,16.28,trolleyZ],.014);
+  add('hook block',[bridgeX,16.15,trolleyZ],[.22,.26,.18],'steel');
+  const hook=[[0,16.02],[0,15.84],[.06,15.74],[.16,15.70],[.26,15.75],[.29,15.85]];
+  for(let i=1;i<hook.length;i++)beam('open hook',[bridgeX,hook[i-1][1],trolleyZ+hook[i-1][0]],[bridgeX,hook[i][1],trolleyZ+hook[i][0]],.055);
+  layout.mainHallDetails.roofFrame={sources:['A01','I23'],gallery:[17,19,21,22],
+    role:'Broad retained roof with a separate stationary industrial bridge; gantry/crane interpretation inferred from photographed form',
+    retiredGenericUpperBeams:retired.length,officialRoof:layout.calibration.mainRoof,
+    heads:heads.map(p=>p.center),railZ,bridgeX,railTop,
+    confidence:'Photographed relationships; dimensions, machinery details, exact registration and current retention estimated',
+    distinction:'Separate from the Eisbar hoist and temporary light trusses; no private destination or public maintenance route inferred'};
+}

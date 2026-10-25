@@ -1,5 +1,20 @@
 # Berghain interior authenticity audit
 
+## AU29 — broad roof, side frame and industrial bridge
+
+G17/G19/G21/G22 support a broad central roof and a deep red-brown industrial
+bridge separate from the open lighting trusses. The previous generic upper
+beam grid obscured that relationship. The validated model removes its eight boxes,
+closes the fitted side-pier/roof gaps and adds a stationary bridge on inboard
+bracketed runways. Gantry/crane identification is a form-based inference;
+bridge position, wheel/hoist details, brackets, dimensions, capacity and current
+retention are not documented. The blank plate does not claim a maker or rating.
+Existing roof/floor datums, high glazed bays, Eisbar hoist and light rig remain.
+F10's broad relationships improve, but detailed roof/clerestory construction
+and exact section registration remain incomplete. No blue-glass or permanent
+emission claim is inferred from the archive's blue/purple appearance.
+
+
 ## AU28 — overhead rig connection
 
 Karhard G17/G22 show open longitudinal box-truss runs meeting transverse runs.

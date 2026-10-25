@@ -433,3 +433,13 @@ transverse runs. Their topology supports the connected-rig correction; fitted
 dimensions, counts, anchors and current retention are unverified. G21's central
 roof and narrow high glazed bays differ from the separate coffered Eisbar roof
 in G28. No whole-hall roof transfer or inferred blue glazing is made here.
+
+### 2026-10-25 main roof and industrial bridge
+
+A01/I23 G17/G19/G21/G22 show a broad central opaque roof, high side bays and a
+red-brown industrial bridge above the independent light trusses. The gantry/crane
+interpretation follows visible form, not a machinery drawing. Exact span,
+position, brackets, wheel/hoist details and present retention remain estimated.
+G28/G29's separate Eisbar hoist and coffered bar roof are not transferred to the
+main hall. The archived turbine-volume height contains two levels and does not
+provide a new dance-floor-to-roof datum. No source pixels are shipped.

@@ -1,5 +1,68 @@
 # Berghain reconstruction: goal and work state
 
+### Roof and industrial bridge — accepted for publication
+
+Base e2178e6; candidate `output/berghain-roof-frame-runtime`. Karhard
+G17/G19/G21/G22 distinguish the broad opaque main roof, high side bays and
+red-brown industrial bridge above the independent aluminium light rig. Eight
+unsupported generic upper-grid boxes are removed. Eight side piers now meet
+the retained official roof at 20.374 m, preserving their 5.45 m bottoms and
+0.8 m square footprints. A stationary bridge is fitted to inboard bracketed
+runways; its rail wheels, trolley, housing and open hook are an estimated
+interpretation of the archive form, not surveyed machinery or current inventory.
+The separate Eisbar hoist remains. No private room or public service route is
+inferred. Roof and dance-floor datums stay fixed; the source's 18 m turbine
+volume contains two floors and is not a new dance-floor-to-roof measurement.
+
+The prototype's rail/pier intersections and 0.374 m pier-top gaps were detected
+and repaired before freezing. All 215 Berghain tests pass, including five roof/contact regressions. Two
+historical pre-addition fixtures now exclude the new later roof fit. The earlier
+prototype and fixture failures remain in the local evidence.
+Preservation checks keep 16,246 other source parts and their actual matrices and
+colours exact, all floors, all other solids, eight pier X/Z footprints and bottom
+heights, viewpoints, fixtures and navigation/viewer/night-lighting code.
+Minimum conservative clearance beneath new hardware is 6.95 m.
+
+Export: 59,724,648 bytes, 772,760 triangles, 204 mesh groups, 25 embedded maps;
+SHA-256 7391b470b2b4a17e0c2f59921fb22792777ebcfbd35224d950b5a5930e36e1c9.
+Six real-input desktop/mobile-emulation/fallback cases, including views toward the
+industrial bridge, and three source/GLB
+material comparisons with six day/night views pass. Independent Physics and
+Camera reviews pass the scoped candidate. Nine matched cost samples per version
+retain median p95 frame times of 27.9 to 27.8 / 13.9 to 13.9 / 14.0 to 14.0 ms
+(desktop/portrait/landscape). Normal transfer grows 5,632 bytes; the optional
+GLB grows 83,600 bytes and 1,008 triangles. Idle rendering stops; the GLB stays
+lazy-loaded, with three active lights and two shadows. These local runs do not
+establish low-end or physical-device performance. Evidence uses
+`output/berghain-roof-frame-*`. Physical Android and listening are NOT RUN.
+The full goal remains ACTIVE: detailed roof/clerestory construction, art
+fidelity, contemporary inventory and concealed backstage/FLINTA/lift locations
+remain unresolved. This candidate is not published.
+
+
+### Published connected overhead rig
+
+Commit `e2178e6627b8697860de711397556eb6e7c619f9`; Pages run 40191171429 succeeded. All 89 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-overhead-rig-release.json. Primary staged index unchanged.
+
+The lattice side runs now connect the transverse rig, following Karhard G17/G22.
+All 15,838 non-rig parts retain their actual geometry and colours. Floors,
+collision, navigation and lighting code are preserved. The fitted rig remains
+dimension-estimated; exact anchors, current inventory and load capacity are
+unverified. The broader interior remains a reconstruction in progress.
+
+All 210 Node tests, four input/fallback cases, three source/GLB comparisons with
+six day/night views, independent Physics/Camera reviews and nine matched cost
+samples per version pass their scoped gates. Median p95 frame times remain
+20.9/7.1/7.2 ms; normal transfer grows 1,575 bytes. Desktop startup median rises
+2.133 to 3.228 seconds in the small sample. Physical Android and listening are
+NOT RUN. Full goal ACTIVE; F10 roof/clerestory registration and exact private,
+FLINTA and lift locations remain unresolved. The next source/section handoff is
+output/berghain-after-overhead-rig-next-audit.md, with actual model measurements
+and a plan/section diagram in output/berghain-roof-section-audit.json and .png.
+
+
 ### Connected overhead rig — accepted for publication
 
 The candidate based on d72ea78 corrects the disconnected transverse rig using
