@@ -29,7 +29,7 @@ function syncSolid(s){
  const p=s.renderPart,m=p?.matrix;if(!m)return;
  const corners=[];for(const x of [-.5,.5])for(const y of [-.5,.5])for(const z of [-.5,.5])
   corners.push(new THREE.Vector3(x,y,z).applyMatrix4(new THREE.Matrix4().fromArray(m)));
- setBounds(s,[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]].map(([x,z])=>[m[12]+m[0]*x+m[8]*z,m[14]+m[2]*x+m[10]*z]));
+ setBounds(s,(p.bodyFootprint||[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]]).map(([x,z])=>[m[12]+m[0]*x+m[8]*z,m[14]+m[2]*x+m[10]*z]));
  s.y=[Math.min(...corners.map(p=>p.y)),Math.max(...corners.map(p=>p.y))];
 }
 

@@ -1,5 +1,44 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted upper-lounge form correction — 25 October 2026
+
+Karhard's expanded Panorama image 19 supports faceted dark/plum seats, a partial
+offset back attached to the long chaise, recessed supports and dark overhead
+forms. Original geometry now represents these features. The chaise follows the
+glazed wall; the rear chair fits a connected window-side route. Ceiling forms
+meet the slab and retain at least 2.12 m actual headroom. Their technical purpose
+and designer are unverified. Image 08 shows an earlier furniture configuration.
+
+Dimensions, arrangement, ceiling count and current retention remain estimates.
+No photographic pixels or printed glass artwork are reproduced. The upper
+sanitary partition, other rooms and public/private connections are retained.
+All 17,230 non-lounge parts and 6,153 non-lounge solids are exact, as are floors,
+viewpoints and retained lighting parameters. The new polygon footprints survive
+both registration passes. Night cues reach the occupied floor/seating.
+
+V1 was rejected for a chaise/glass intrusion; V2 for a chair overlap and a
+blocked rear area. V3 fits whole assemblies and validates the complete route
+through the window-side seating and back. Both rejected versions remain local
+evidence. V3 passed 258 Node tests; V4 corrects only the descriptive back height from
+1.05 m to the actual 1.06 m. Its GLB differs by one JSON byte; geometry, materials
+and textures are exact. Fourteen fresh metadata-affected tests pass. Seven
+frozen V3 browser cases, matched three-sample
+cost checks per desktop/Android-emulated profile and both independent reviews
+pass within scope. Physical Android was NOT RUN.
+
+The GLB has 837,388 triangles, 226 groups and 25 embedded textures: 44 fewer triangles,
+one additional group and 6,424 fewer bytes than the published baseline. No new
+runtime lights, timers or texture requests. Frozen evidence:
+output/berghain-lounge-form-candidate-v4.json. Publication verification is
+recorded separately in output/berghain-lounge-form-release.json.
+
+The full goal remains ACTIVE. Exact private-room plans, lift registration,
+current inventories, selected-date artwork and full photographic detail remain
+open. The older AU table records baseline findings; accepted corrections above
+supersede its old missing-stair/smoking/toilet/PA descriptions. Its unresolved
+measurement/currentness limits still apply. The current source maps account
+for the Karhard images; mapping alone does not establish complete reproduction.
+
 ## Accepted ordinary Panorama WC correction — 25 October 2026
 
 The earlier single transverse bank is replaced by separate front/rear right

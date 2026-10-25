@@ -1,5 +1,17 @@
 # Berghain interior: objects, art and equipment
 
+## Accepted upper-lounge forms — 25 October 2026
+
+I19/19 now informs original faceted seats, attached partial offset backs,
+recessed supports and dark faceted overhead elements. The long chaise follows
+the glazing; the rear chair leaves the window-side seating connected. Three
+overhead studies meet the slab and retain at least 2.12 m headroom. Their function
+and designer, all dimensions/placements and current retention are unverified.
+I19/08 depicts an earlier arrangement; its inventory is not mixed into this fit.
+Source pixels and Brandenburg's glass imagery are not copied. Other rooms,
+sanitary partitions, routes and light settings remain exact. See [current
+acceptance and remaining scope](README.md) and [validation](VALIDATION.md).
+
 ## Accepted ordinary Panorama WC correction — 25 October 2026
 
 The earlier single transverse bank is replaced by separate front/rear right

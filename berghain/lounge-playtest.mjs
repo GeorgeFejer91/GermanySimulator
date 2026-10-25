@@ -7,6 +7,7 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand} from './navigation.mjs';
 import {dragLook} from './fixture-playtest.mjs';
 import {renderNativeAsset,disposeNativeAsset} from './native-asset-playtest.mjs';
+import {compareMaterialRender} from './material-playtest.mjs';
 
 async function selectRoom(page,name){
   await page.locator('#room').selectOption(name);
@@ -72,7 +73,7 @@ function assets(directory='assets/models/berghain'){
   return readdirSync(new URL('../'+directory,import.meta.url),{withFileTypes:true}).flatMap(item=>
     item.isDirectory()?assets(directory+'/'+item.name):[directory+'/'+item.name]);
 }
-export default {name:'Upper Panorama lounge and Felsenland study',
+const suite={name:'Upper Panorama lounge and Felsenland study',
   sourceFiles:()=>[...runtime,...assets()].map(path=>({path,
     sha256:createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex')})),
   scenarios:[
@@ -101,7 +102,8 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       }
       await artifacts.screenshot(page,'lounge-long-name-200-percent.png');return {samples};
     }},
-    {id:'lounge-source-native',modes:['quick','stress'],async run({page,baseURL,artifacts}){
+    {id:'lounge-source-native',modes:['quick','stress'],profiles:['desktop'],async run(ctx){
+      const {page,baseURL,artifacts}=ctx;
       await page.goto(baseURL+'/berghain/model.html');await page.locator('#model[data-ready="true"]').waitFor();
       await page.locator('#enter').click();await selectRoom(page,'lounge');await page.evaluate(()=>document.fonts.ready);
       const position=JSON.parse(await page.locator('#model').getAttribute('data-position'));
@@ -111,7 +113,21 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       assert.equal(native.upperLounge.floorHeight,12.15);assert.equal(native.upperLounge.furniture.title,'Felsenland');
       assert.equal(native.equipment,44);assert.equal(native.artworks,layout.artworks.length);
       await artifacts.screenshot(page,'upper-lounge-native.png');await disposeNativeAsset(page);
-      return {position,native,scope:'Room shortcut; observed furnishings, estimated footprint/elevations; glass artwork imagery absent'};
+      const comparisons=[],samples=[],rays=layout.parts.filter(p=>p.shape==='lounge-ceiling-facet'||p.shape==='lounge-faceted-pad').map(p=>({
+        origin:[p.center[0],p.shape==='lounge-ceiling-facet'?13.83:13.4,p.center[2]],
+        direction:[0,p.shape==='lounge-ceiling-facet'?1:-1,0]}));
+      for(const [name,body,target]of [['seat-end',[12,12.15,14],[7,12.85,16.6]],['glass-side',[5,12.15,20],[8,13,16.6]]]){
+        const stand={x:body[0],y:body[1],z:body[2]};assert.ok(canStand(stand,layout));
+        comparisons.push(await compareMaterialRender(ctx,{position:[body[0],body[1]+1.68,body[2]],target}));
+        const d=target.map((v,i)=>v-body[i]-(i===1?1.68:0)),yaw=Math.atan2(-d[0],-d[2]),pitch=Math.atan2(d[1],Math.hypot(d[0],d[2]));
+        for(const clubNight of [false,true]){
+          const render=await renderNativeAsset(page,{position:stand,yaw,pitch,fov:60,clubNight,rays});
+          render.geometryProbes.source.forEach((v,i)=>assert.ok(v!==null&&Math.abs(v-render.geometryProbes.native[i])<.002,'actual source/native surfaces agree'));
+          await artifacts.screenshot(page,name+'-'+(clubNight?'night':'day')+'.png');await disposeNativeAsset(page);
+          samples.push({name,clubNight,geometry:render.geometryProbes,lighting:render.lighting});
+        }
+      }
+      return {position,native,comparisons,samples,scope:'Room shortcut and controlled legal standing views; observed forms, estimated dimensions/layout; glass artwork imagery absent'};
     }},
     {id:'lounge-connected-route',modes:['stress'],timeoutMs:240000,async run(ctx){
       const {page,baseURL,artifacts}=ctx;
@@ -124,6 +140,10 @@ export default {name:'Upper Panorama lounge and Felsenland study',
       assert.ok(Math.abs(route.at(-1).y-12.15)<.01);await assertFirstPersonView(page);
       assert.equal(await page.locator('#room').inputValue(),'lounge','natural ascent identifies the upper room');
       assert.equal(await page.locator('#location').textContent(),'Upper Panorama lounge');
+      const roomArrival=route.at(-1),aisle=[[5.54,15.45],[11.4,15.45],[11.4,16.05],[12,16.05],[12,17.5],[10,18],[5,18],[5,20]].map(([x,z])=>({x,y:12.15,z}));
+      for(const target of [...aisle,...aisle.toReversed().slice(1),roomArrival]){
+        const result=await travel(ctx,target,heading);heading=result.yaw;route.push(result.position);
+      }
       await dragLook(page,ctx.context,ctx.profile,-Math.atan2(Math.sin(viewpoints.lounge.yaw-heading),Math.cos(viewpoints.lounge.yaw-heading))/.004);heading=viewpoints.lounge.yaw;
       await artifacts.screenshot(page,'human-in-upper-lounge.png');
       for(const target of layout.panoramaRegistration.loungeRoute.toReversed().slice(1)){
@@ -135,3 +155,9 @@ export default {name:'Upper Panorama lounge and Felsenland study',
         evidence:'Panorama shortcut, then continuous corridor/stair/room/return; natural building entrance tested separately'};
     }}
   ]};
+const route=suite.scenarios.find(s=>s.id==='lounge-connected-route');
+export default {...suite,scenarios:[...suite.scenarios,{...route,id:'lounge-fallback-route',async run(ctx){
+  await ctx.page.route('**/assets/models/berghain/textures/*.png',r=>r.abort());
+  const result=await route.run(ctx);assert.equal(await ctx.page.locator('#model').getAttribute('data-materials'),'fallback');
+  return {...result,fallback:true};
+}}]};

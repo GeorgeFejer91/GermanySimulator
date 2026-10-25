@@ -3,9 +3,28 @@ import {studyToSite} from './calibration.mjs';
 
 export const loungeMaterials={
   loungeLeather:{color:'#38313b',roughness:.57},
-  loungePlum:{color:'#603543',roughness:.61}
+  loungePlum:{color:'#603543',roughness:.61},
+  loungeCeiling:{color:'#242329',roughness:.68}
 };
 
+// Original convex studies from I19/19. The photo supports the faceted vocabulary,
+// offset backs and dark overhead forms, not a fabrication drawing or duct function.
+const seatPlan=[[-.5,-.5],[.38,-.5],[.5,-.28],[.5,.5],[-.35,.5],[-.5,.28]];
+const ceilingPlan=[[-.5,-.5],[.35,-.5],[.5,-.22],[.5,.5],[-.32,.5],[-.5,.2]];
+function loft(rings){
+  const vertices=[],n=rings[0].length;
+  const triangle=(a,b,c)=>vertices.push(...a,...b,...c);
+  for(let k=0;k<rings.length-1;k++)for(let i=0;i<n;i++){
+    const j=(i+1)%n,a=rings[k][i],b=rings[k][j],c=rings[k+1][j],d=rings[k+1][i];
+    triangle(a,d,c);triangle(a,c,b);
+  }
+  for(let i=1;i<n-1;i++){
+    triangle(rings[0][0],rings[0][i],rings[0][i+1]);
+    triangle(rings.at(-1)[0],rings.at(-1)[i+1],rings.at(-1)[i]);
+  }
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+  geometry.computeVertexNormals();return geometry;
+}
 export function createLoungeGeometries(){
   const shape=new THREE.Shape();
   shape.moveTo(-.465,-.465);shape.lineTo(.465,-.465);
@@ -13,7 +32,11 @@ export function createLoungeGeometries(){
   const pad=new THREE.ExtrudeGeometry(shape,{depth:.93,bevelEnabled:true,
     bevelThickness:.035,bevelSize:.035,bevelSegments:3,steps:1});
   pad.translate(0,0,-.465);pad.rotateX(-Math.PI/2);
-  return {'lounge-pad':pad};
+  const faceted=loft([[-.5,.98],[-.43,1],[.40,1],[.48,.995],[.5,.98]].map(([y,s])=>seatPlan.map(([x,z])=>[x*s,y,z*s])));
+  const rectangle=[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]];
+  const back=loft([rectangle.map(([x,z])=>[x,-.5,z]),rectangle.map(([x,z])=>[x*.94,.5,z*.72+.10])]);
+  const ceiling=loft([ceilingPlan.map(([x,z])=>[x,-.5+(x+.5)*.22,z]),ceilingPlan.map(([x,z])=>[x,.5,z])]);
+  return {'lounge-pad':pad,'lounge-faceted-pad':faceted,'lounge-sloped-back':back,'lounge-ceiling-facet':ceiling};
 }
 
 export function addUpperLounge(layout,{box,floor,beam,railing,stair}){
@@ -22,7 +45,8 @@ export function addUpperLounge(layout,{box,floor,beam,railing,stair}){
     confidence:'Photo-derived mezzanine, stair and furniture; floor elevations, footprint and placement estimated',
     glassArtwork:'Marc Brandenburg enclosure documented; printed imagery not reproduced',
     furniture:{title:'Felsenland',designer:'Hermann August Weizenegger',year:2010,
-      sources:['I16','I17','I19','I20'],confidence:'Observed angular seating; dimensions, unseen surfaces and arrangement estimated'}};
+      sources:['I16','I17','I19','I20'],confidence:'I19/19 faceted seating and offset backs; dimensions, unseen surfaces, arrangement and current retention estimated'},
+    ceilingForms:{sources:['I19'],image:19,confidence:'Visible dark faceted overhead elements; dimensions, exact layout, material and technical purpose unverified'}};
   floor('upper Panorama lounge',[-21.5,-9],[-4.5,9.4],level);
   floor('upper lounge landing',[-9,-6.8],[-4.5,1.9],level);
   floor('upper lounge lower landing',[-9,-6.8],[8.5,9.4],13.25);
@@ -72,48 +96,55 @@ export function addUpperLounge(layout,{box,floor,beam,railing,stair}){
 
 export function addLoungeFurniture(layout){
   const parts=[];
-  function part(name,author,size,material,shape='box',yaw=0,solid=false){
+  function part(name,author,size,material,shape='box',yaw=0,solid=false,offset=[0,0],ceiling=false){
     const site=studyToSite({x:author[0],y:author[1],z:author[2]});
+    site.x+=Math.cos(yaw)*offset[0]+Math.sin(yaw)*offset[1];
+    site.z+=-Math.sin(yaw)*offset[0]+Math.cos(yaw)*offset[1];
     const matrix=new THREE.Matrix4().compose(new THREE.Vector3(site.x,site.y,site.z),
       new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),yaw),new THREE.Vector3(...size));
-    const rendered={name:'Felsenland '+name,fixture:'felsenland',section:'interior',shape,material,
+    const rendered={name:(ceiling?'upper lounge ':'Felsenland ')+name,fixture:ceiling?'upper-lounge-ceiling':'felsenland',section:'interior',shape,material,
       center:[site.x,site.y,site.z],size,matrix:matrix.toArray()};
+    if(shape==='lounge-faceted-pad')rendered.bodyFootprint=seatPlan;
+    if(shape==='lounge-ceiling-facet')rendered.bodyFootprint=ceilingPlan;
     layout.parts.push(rendered);parts.push(rendered);
     if(solid){
-      const polygon=[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]].map(([x,z])=>{
+      const polygon=(rendered.bodyFootprint||[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]]).map(([x,z])=>{
         const v=new THREE.Vector3(x,0,z).applyMatrix4(matrix);return [v.x,v.z];
       });
-      layout.solids.push({name:rendered.name,fixture:'felsenland',polygon,
+      layout.solids.push({name:rendered.name,fixture:rendered.fixture,polygon,
         x:[Math.min(...polygon.map(p=>p[0])),Math.max(...polygon.map(p=>p[0]))],
         z:[Math.min(...polygon.map(p=>p[1])),Math.max(...polygon.map(p=>p[1]))],
         y:[site.y-size[1]/2,site.y+size[1]/2],renderPart:rendered});
     }
   }
-  function seat(name,x,z,width,depth,yaw,back=false){
-    const floor=layout.upperLounge.floorHeight,c=Math.cos(yaw),s=Math.sin(yaw);
+  function seat(name,x,z,width,depth,yaw,back=null){
+    const floor=layout.upperLounge.floorHeight;
     // Furniture retains metre dimensions after the exterior authoring frame is mapped.
-    part(name+' plinth',[x,floor+.13,z],[width-.36,.26,depth-.25],'loungePlum','box',yaw,true);
-    part(name+' upholstered seat',[x,floor+.39,z],[width,.26,depth],'loungeLeather','lounge-pad',yaw,true);
+    part(name+' plinth',[x,floor+.13,z],[width-.65,.26,depth-.32],'loungePlum','box',yaw,true);
+    part(name+' upholstered seat',[x,floor+.39,z],[width,.26,depth],'loungeLeather','lounge-faceted-pad',yaw,true);
     for(const end of [-1,1]){
-      const site=studyToSite({x,y:floor,z}),dx=end*(width/2-.14)*c,dz=-end*(width/2-.14)*s;
-      const foot={x:site.x+dx,z:site.z+dz};
-      part(name+' end foot',[x,floor+.08,z],[.16,.16,depth-.15],'steel','box',yaw);
-      const rendered=parts.at(-1);rendered.center=[foot.x,floor+.08,foot.z];rendered.matrix[12]=foot.x;rendered.matrix[14]=foot.z;
+      part(name+' end foot',[x,floor+.08,z],[.16,.16,depth-.32],'steel','box',yaw,false,[end*(width/2-.4),0]);
     }
     if(back){
-      const offset=depth*.36;
-      part(name+' raised back',[x,floor+.76,z],[width*.78,.58,.25],'loungePlum','lounge-pad',yaw,true);
-      const backPart=parts.at(-1),solid=layout.solids.at(-1),dx=s*offset,dz=c*offset;
-      backPart.center[0]+=dx;backPart.center[2]+=dz;backPart.matrix[12]+=dx;backPart.matrix[14]+=dz;
-      solid.x=solid.x.map(v=>v+dx);solid.z=solid.z.map(v=>v+dz);solid.polygon=solid.polygon.map(([a,b])=>[a+dx,b+dz]);
+      part(name+' raised back',[x,floor+.79,z],[width*back.fraction,.54,.33],
+        'loungePlum','lounge-sloped-back',yaw,true,[width*back.offset,depth*.32]);
     }
   }
-  seat('long chaise',-15.5,3,6.3,1.18,-.08);
-  seat('raised sofa',-15.1,.35,4.8,1.2,.04,true);
+  // Parallel to the glazed wall, with the photographed partial back. Other
+  // seats are illustrative studies; the image does not recover a whole plan.
+  seat('long chaise',-15.5,3.4,6.3,1.18,Math.PI/2,{fraction:.46,offset:.22});
+  seat('raised sofa',-18.7,3.7,2.6,1.25,Math.PI/2,{fraction:.62,offset:.12});
   seat('angled chaise',-18.7,-1.65,3.0,1.1,-.42);
-  seat('rear chair',-16.9,7,2.2,1.1,.15,true);
+  seat('rear chair',-19.1,7.6,2.2,1.1,.15,{fraction:.70,offset:-.10});
   seat('central stool',-12.9,6.5,1.6,.95,-.2);
-  const anchor=studyToSite({x:-15.5,y:layout.upperLounge.floorHeight,z:3});
+  for(const [i,x,z,width,depth,yaw,drop] of [
+    [0,-15.7,3,6.7,1.55,.12,.48],
+    [1,-17.6,1.2,4.2,1.4,-.28,.53],
+    [2,-15.7,6.8,5.0,1.3,-.14,.45]]){
+    part('faceted ceiling element '+i,[x,layout.upperLounge.ceilingHeight-drop/2,z],
+      [width,drop,depth],'loungeCeiling','lounge-ceiling-facet',yaw,true,[0,0],true);
+  }
+  const anchor=studyToSite({x:-15.5,y:layout.upperLounge.floorHeight,z:3.4});
   layout.fixtures.push({id:'felsenland',anchor:[anchor.x,anchor.y,anchor.z],sources:['I16','I19','I20'],
-    confidence:layout.upperLounge.furniture.confidence,dimensions:{seatHeight:.52,backHeight:1.05,longChaise:6.3}});
+    confidence:layout.upperLounge.furniture.confidence,dimensions:{seatHeight:.52,backHeight:1.06,longChaise:6.3}});
 }

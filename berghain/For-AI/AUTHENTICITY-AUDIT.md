@@ -1,5 +1,17 @@
 # Berghain interior authenticity audit
 
+## AU16 lounge form correction — accepted, 25 October 2026
+
+The uniform seat-pad baseline is superseded by I19/19 faceted upholstery,
+connected partial backs and dark overhead forms. V1 glazing intrusion and V2
+chair overlap/blocked rear access were rejected. V3 fits whole assemblies and
+passes complete window-side circulation, actual mesh/export and independent
+review. Dimensions, arrangement and present retention remain estimates; printed
+glass and selected-date wall artwork remain unresolved. Full goal ACTIVE.
+See [current acceptance](README.md) and [validation](VALIDATION.md). Older AU
+rows retain baseline findings; accepted notes supersede their former missing
+stair, smoking, upper-toilet and PA descriptions, not their evidence limits.
+
 ## Accepted ordinary Panorama WC correction — 25 October 2026
 
 The earlier single transverse bank is replaced by separate front/rear right
@@ -414,7 +426,7 @@ The model directionally represents the former turbine main room, former control-
 | AU15 · Together · partial | Correct Klo Bar identity and switchgear/display vocabulary; generic reclining figures do not recover the full scanned male sequence, three-stage narrative, satyr/vine/claw/ram ornament or cola-sugar optics. | **Artist ART04**, in-situ photographs and ART14–16. **High** identity/material/story; exact figure boundaries, dimensions and case sequence unresolved. | Reconstruct the complete composition and characteristic ornament from views; refine dark amber transmission/roughness. Generic CC0 anatomy is an authoring base, not Marr likeness. |
 | AU16 · Panorama glass and wall works · missing/inferred | The glass frame lacks Brandenburg's printed imagery; Tillmans hanging is absent. Upper lounge seating has the broad Felsenland idea but simplified profiles and speculative layout. | **A13** explicitly connects 2009 lounge to Brandenburg glass and 2010 relaunch to Tillmans/Weizenegger; I16/I19/I20 support Felsenland. **High** identities, **low** current selected images/layout. | Restore the distinctive glass/seating relationship with correctly sourced artwork and silhouettes; verify the selected-date hanging. Do not use random Tillmans-like images. |
 | AU17 · Temporal art layers · prevent false additions | Removed Nathan mural and temporary Studio Berlin interventions would make a contemporary base inaccurate. Gaillard's engraving is currently absent. | ART06 dated 2017 Nathan removal. V02 describes *Land of Cocaine* as **intended permanent** in 2020; ART03 provides related curator testimony. **High** then-intended status, present survival unknown. | Keep removed/temporary layers dated. Correct the earlier overly broad treatment of Gaillard as merely temporary, while leaving current panel identity/placement unverified. |
-| AU18 · Panorama PA · placeholder contradicted by dated installation account | Two generic `Panorama speaker` boxes do not depict the documented Studt installation. Funktion-One main-hall equipment must not be copied wholesale upstairs. | **S02 manufacturer**, **S12 direct 2017 manufacturer/installer interview**: four-point arrays, six double18-inch subs and two4×10-inch low-mid units. S01 distinguishes Funktion-One DJ monitors from Panorama PA. **High** dated identity/configuration, current geometry unverified. | Obtain cabinet/rig references and model the separate PA/monitor systems. Keep the 2017 configuration date visible; do not claim verified 2026 placement or acoustic response. |
+| AU18 · Panorama PA · dated study corrected; current installation unverified | Baseline finding: two generic boxes did not depict the documented Studt installation. Published correction: four articulated hangs and six suspended double18 studies; main-hall equipment remains separate. | **S02 manufacturer**, **S12 direct 2017 manufacturer/installer interview**: four-point arrays, six double18-inch subs and two4×10-inch low-mid units. S01 distinguishes Funktion-One DJ monitors from Panorama PA. **High** dated identity/configuration, current geometry unverified. | The scoped PA correction is accepted above. Low-mid/DJ-monitor placement and current inventory remain unresolved. Retain the2017 configuration date; no verified2026 placement or acoustic response is claimed. |
 | AU19 · Main-hall PA · supported cabinet dimensions, uncertain venue configuration | 44 dimensioned component studies form a plausible reported rig; counts, angles and coordinates come from community evidence. | S07–11 manufacturer drawings support products. S05 is a community report; S06 cites it. S01's 2023 manufacturer statements withhold exact system design. **High** product-envelope evidence, **low/medium** installed configuration. | Verify the selected-date rig using installation evidence. Repeated reports do not independently confirm the count. CAD/product dimensions alone do not make a venue inventory or sound simulation. |
 
 ## Surface, lighting and room character

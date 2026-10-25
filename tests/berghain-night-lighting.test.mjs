@@ -145,3 +145,17 @@ test('ordinary Panorama WC cues clear the cubicle panels and reach the floor',()
   });assert.equal(count,3);
  }finally{rig.dispose();disposeBerghainModel(model);}
 });
+
+test('lounge cues clear the added ceiling forms and reach the occupied level',()=>{
+ const scene=new THREE.Scene(),rig=createViewerLighting(scene),model=createBerghainModel();
+ try{
+  model.updateMatrixWorld(true);rig.update('interior',viewpoints.lounge.position);let count=0;
+  scene.traverse(light=>{
+   if(!light.isSpotLight||!light.visible)return;
+   const ray=new THREE.Raycaster(light.position,light.target.position.clone().sub(light.position).normalize(),0,light.distance);
+   const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent&&!h.object.material.transmission);
+   assert.ok(hit&&hit.distance>2&&hit.point.y<layout.upperLounge.floorHeight+1.1,
+     'cue must reach the floor or seating rather than the overhead forms');count++;
+  });assert.equal(count,3);
+ }finally{rig.dispose();disposeBerghainModel(model);}
+});

@@ -57,7 +57,7 @@ export function createUpperSanitaryGeometries(layout){
 function bounds(s,p){
   const m=new THREE.Matrix4().fromArray(p.matrix),b=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(m);
   s.x=[b.min.x,b.max.x];s.y=[b.min.y,b.max.y];s.z=[b.min.z,b.max.z];
-  s.polygon=[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]].map(([x,z])=>{const v=new THREE.Vector3(x,0,z).applyMatrix4(m);return[v.x,v.z];});
+  s.polygon=(p.bodyFootprint||[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]]).map(([x,z])=>{const v=new THREE.Vector3(x,0,z).applyMatrix4(m);return[v.x,v.z];});
 }
 
 export function fitUpperSanitary(layout){

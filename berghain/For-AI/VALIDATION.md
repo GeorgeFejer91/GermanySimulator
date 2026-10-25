@@ -1,5 +1,35 @@
 # Berghain viewer validation
 
+## Upper-lounge V4 — accepted scoped validation, 25 October 2026
+
+V3 passed all 258 Node tests in one full run. V4 changes only the descriptive
+backHeight from 1.05 to 1.06; one GLB JSON byte changes, all render bytes remain exact.
+Fourteen fresh lounge/material tests pass on V4. This is an exact bridge, not
+a repeated full 258-test V4 run. Seven frozen V3 browser cases cover
+source/native views and actual Panorama-to-lounge, complete window-side seating
+and return routes on desktop and Android portrait/landscape emulation, including
+material-load failure. Eighteen matched cost contexts and both independent
+Physics/Camera reviews pass. Physical Android NOT RUN. V1/V2 failures remain
+preserved; neither is an accepted candidate.
+
+17,230 non-lounge parts and 6,153 non-lounge solids, all floors/viewpoints and
+retained light settings remain exact. Export: 837,388 triangles, 226 groups,
+25 embedded textures; 44 fewer triangles, one added group and 6,424 fewer bytes.
+No new runtime lights, timers or texture requests. Freeze:
+output/berghain-lounge-form-candidate-v4.json. Public deployment is a separate
+gate. Matched desktop frame-p95 medians are 14.2→20.8 ms (maximum 20.9 ms);
+both Android-emulated profiles remain 7.1 ms. Maximum input latency is 22.3 ms.
+The measured scene adds three draw calls and 2,109 normal-load bytes. Results
+stay within the scoped budget; no causal speedup or physical-device claim.
+Public receipt:
+output/berghain-lounge-form-release.json. These checks establish the
+bounded implementation, not surveyed accuracy or complete photographic fidelity.
+The retained lower approach uses a nine-point floor-support approximation:
+denser probes at one body point find the same two unsupported ring samples in
+baseline and V3. This is documented existing behaviour, not a changed lounge
+defect. Named public routes pass; no claim covers every isolated legal grid cell.
+See [current work and unresolved scope](README.md).
+
 ## Accepted ordinary Panorama WC correction — 25 October 2026
 
 The earlier single transverse bank is replaced by separate front/rear right

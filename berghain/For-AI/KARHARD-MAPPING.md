@@ -113,7 +113,7 @@ it has a named object in the source.
 | F27 | Entrance roof added2024; O00 | Current entrance details lack a verified canopy design. | No usable contemporary form in this page's photographs; do not turn timeline text into an arbitrary roof. |
 | F28 | Ballet, colored event scenes, staged animals and rainy night photography; G00/02/09/10/15/26, O15 | Lighting appearance may inform the authored night cues. Performers, animals and temporary stage apparatus excluded from permanent architecture. | Staged exposure is not current club-night photometry. |
 | F29 | Piotr Nathan foyer mural,175 panels; text, G01 | Historical record only; removed2017 per ART06, so not reinstalled in the contemporary model. | Current collection authority is INTERIOR/SOURCES, not this old photograph. |
-| F30 | Historical speaker towers and suspended boxes; G17–22, O07 | Existing post2023 main PA study retained under S01/S05/S11; contemporary Panorama PA remains unresolved. | Do not overwrite newer equipment evidence with undated older photographs. |
+| F30 | Historical speaker towers and suspended boxes; G17–22, O07 | Existing post2023 main PA study retained under S01/S05/S11. Published Panorama study now has four articulated hangs and six suspended double18 cabinets under S02/S12; low-mid and DJ-monitor placement remain unresolved. | Do not overwrite newer evidence with undated photographs. Panorama counts/anchors/splay/current retention are estimates; no acoustic or structural-capacity claim. |
 | F31 | Garden, Säule, Halle and other venue milestones; O00 | Existing garden/Säule/Halle studies remain under their own primary references. | This timeline is not an interior plan or a reason to add neighboring Kantine/Bierhof as invented club rooms. |
 | F32 | Physical models, artistic cutaways, publication images and permit-signing photo; O01–16, P00–04 | Cross-check relationships and dates. Small P00 section strengthens split-level/stair interpretation. | O16 does not expose a readable dimensioned plan. Exhibition models and drawn perspective are not measured surveys. |
 | F33 | Power-station-era rail/conveyor/coal/chimney infrastructure; O17–19 | Historical context; retained industrial vocabulary only where present in actual club images. | Demolished industrial equipment is not added to current exterior. |
@@ -154,3 +154,9 @@ inference from a background building was unsupported. The corrected model uses
 an estimated front-side bay (author z=8), restores the old rear opening, and
 moves geometry, collision, room arrival and local cues together. Width, depth,
 heights and upper return remain estimates. Validation status belongs to README.md.
+
+Upper lounge follow-up to F34 / AU16: I19/19 supplies faceted upholstery, the
+attached offset chaise back and dark overhead elements. The candidate maps
+these forms while retaining estimated dimensions and layout. I19/08 is an
+earlier furniture configuration, not a simultaneous inventory. See the current
+[work state](README.md) and [source limits](SOURCES.md#interior-diagrams-materials-furniture-and-installation-references).
