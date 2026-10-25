@@ -1,5 +1,20 @@
 # Berghain interior authenticity audit
 
+The initial frontage candidate was held after Physics review found pre-existing
+decorative rustication strips spanning the open entrance. This repaired candidate
+trims those strips at the existing jamb aperture, including above head height.
+The original rejected root/freeze is preserved. Ground support, jambs, door and
+interior routes remain unchanged; fresh body/mesh and rendered checks are required.
+
+
+## AU12 entrance-bay correction — 25 October 2026
+
+P02/P16 isolate a count/pattern error: eleven uniform modeled bays versus twelve
+photographed openings with wider end fields. The candidate corrects the entrance
+elevation and its two attic vent rows. It does not close AU12: floor heights,
+Panorama's six-window footprint, upper lounge/WC section and smoking attachment
+still need common registration. Backstage placement remains unverified.
+
 Audited 24 October 2026 at George's request. The model is a recognisable architectural study, with substantial invented layout and simplified objects. **It does not yet pass as a faithful contemporary interior reconstruction.** Rendering, collision and export acceptance establish that the authored model works; they do not establish that it matches the club.
 
 This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f971`, unchanged by the research publication `a1f75fd142ee115dfb4255abcf55d5da0f95c213`. The 109-input freeze is `output/berghain-saule-candidate.json`; 141 preserved baseline files are in `output/berghain-entrance-baseline/`. A subsequent Halle correction is being modelled by GPT-6 Astra. Its proposed dimensions are not accepted as measured facts or counted as completed fixes here.

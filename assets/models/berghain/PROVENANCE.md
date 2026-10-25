@@ -1,5 +1,25 @@
 # Berghain architectural study
 
+The initial frontage candidate was held after Physics review found pre-existing
+decorative rustication strips spanning the open entrance. This repaired candidate
+trims those strips at the existing jamb aperture, including above head height.
+The original rejected root/freeze is preserved. Ground support, jambs, door and
+interior routes remain unchanged; fresh body/mesh and rendered checks are required.
+
+
+## Entrance elevation — 25 October 2026
+
+P02 (Jane Mejdahl, 10 June 2007, CC BY-SA 2.0) and P16 (Darkroomduck,
+31 December 2017, CC BY-SA 4.0; later rotation/tonality correction by Rio65trio)
+support twelve openings, larger end fields, nine attic grilles and seventeen
+upper vents. See SOURCES.md for original pages. Counts are observed; normalized
+spacing, widths, heights and construction remain estimates. Research photographs
+are not embedded in the model. The six shuttered windows are a Panorama
+registration lead only; shutters/floor relocation are not added in this change.
+
+Current portable asset: 765,428 triangles, 203 mesh/material groups, 59,176,088
+bytes and 25 embedded original maps. No new texture family or light is added.
+
 The first counter-wall candidate was held after independent Physics review found
 an older generic intermediate beam intersecting all Panorama stair lanes, with
 only1.303 m headroom at the settled counterexample. This repaired candidate

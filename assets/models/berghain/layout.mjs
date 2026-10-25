@@ -92,6 +92,19 @@ function stair(name, x, z0, z1, y0, y1, width, steps, section='structure') {
   for (const dx of [-width / 2, width / 2]) railing(name + ' rail', [x + dx, y1, z0], [x + dx, y0, z1],section);
 }
 
+// P02 (2007) and P16 (2017): twelve entrance-elevation openings,
+// wider blind fields near both ends, nine lower grilles and seventeen vents.
+// Fractions are perspective-photo estimates, not measured bay dimensions.
+export const entranceElevation = {
+  sources:['P02','P16'],
+  openings:[.075,.197,.268,.339,.409,.480,.551,.622,.691,.759,.826,.926],
+  openingWidth:.036,
+  grilles:[.082,.198,.304,.410,.517,.624,.724,.820,.923],
+  vents:Array.from({length:17},(_,i)=>.084+i*.0524),
+  confidence:'Observed counts and end-field pattern; spacing, widths and elevations estimated',
+  panorama:'Six shuttered openings match the primary six-window sequence; exact room/floor registration unresolved'
+};
+
 function facade(axis, fixed, minimum, maximum, top, name) {
   const count = Math.round((maximum - minimum) / 4), pitch = (maximum - minimum) / count;
   const outward = fixed < 0 ? -1 : 1;
@@ -105,7 +118,7 @@ function facade(axis, fixed, minimum, maximum, top, name) {
   const band = (label, along, low, high, width, depth, material, solid = true, out = 0) =>
     face(label, along, (authorY(low) + authorY(high)) / 2, width, authorY(high) - authorY(low), depth, material, solid, out);
   const tiers = [[4.5, 5.25], [6.3, 8.15], [9.7, 13.65], [14.8, 17.3]];
-  const opening = pitch * .52;
+  // The ground entrance/plinth has its own retained arrangement.
   for (let i = 0; i < count; i++) {
     const along = minimum + (i + .5) * pitch;
     const entrance = name === 'south' && Math.abs(along) < 2;
@@ -119,9 +132,20 @@ function facade(axis, fixed, minimum, maximum, top, name) {
       band('plinth upper panel', along, 3.2, 4.1, 1.15, .55, 'stone');
       face('ground window', along, 2.25, 1.15, 1.9, .07, 'glass', true);
     }
+  }
+  const front = name === 'south';
+  const centers = front ? entranceElevation.openings.map(t=>minimum+t*(maximum-minimum))
+    : Array.from({length:count},(_,i)=>minimum+(i+.5)*pitch);
+  const opening = front ? entranceElevation.openingWidth*(maximum-minimum) : pitch*.52;
+  for (let i=0;i<centers.length;i++) {
+    const along=centers[i],left=i===0?minimum:(centers[i-1]+along)/2,
+      right=i===centers.length-1?maximum:(along+centers[i+1])/2;
+    for (const [a,b] of (front ? [[left,along-opening/2],[along+opening/2,right]] : []))
+      band('window jamb field',(a+b)/2,4.1,17.7,b-a,.54,'render');
     for (const side of [-1, 1]) {
-      band('window jamb field', along + side * (pitch + opening) / 4, 4.1, 17.7, (pitch - opening) / 2, .54, 'render');
-      band('pilaster', along + side * (pitch / 2 - .25), 4.1, 17.7, .5, .76, 'render');
+      // Each observed opening has its own projecting masonry edge.
+      if (!front) band('window jamb field', along + side * (pitch + opening) / 4, 4.1, 17.7, (pitch - opening) / 2, .54, 'render');
+      band('pilaster', along + side * (front ? opening/2+.2 : pitch/2-.25), 4.1, 17.7, front?.4:.5, .76, 'render');
     }
     let previous = 4.1;
     for (const [low, high] of tiers) {
@@ -147,16 +171,28 @@ function facade(axis, fixed, minimum, maximum, top, name) {
       previous = high;
     }
     band('masonry head', along, previous, 17.7, opening, .54, 'render');
-    band('attic', along, 17.7, calibration.mainRoof, pitch, .55, 'render');
-    if (i % 2 === 0) {
-      band('attic grille recess', along, 18.05, 19.12, .6, .03, 'rubber', false, .29);
-      for (let row = 0; row < 13; row++) {
-        const y = 18.08 + row * .083;
-        band('attic grille slat', along, y, y + .028, .56, .04, 'pale', false, .32);
-      }
+  }
+  if(front)band('attic',(minimum+maximum)/2,17.7,calibration.mainRoof,maximum-minimum,.55,'render');
+  else for(const along of centers)band('attic',along,17.7,calibration.mainRoof,pitch,.55,'render');
+  const grilleCenters=front?entranceElevation.grilles.map(t=>minimum+t*(maximum-minimum))
+    :centers.filter((_,i)=>i%2===0);
+  for(const along of grilleCenters){
+    band('attic grille recess',along,18.05,19.12,.6,.03,'rubber',false,.29);
+    for(let row=0;row<13;row++){
+      const y=18.08+row*.083;
+      band('attic grille slat',along,y,y+.028,.56,.04,'pale',false,.32);
     }
-    band('upper attic vent', along, 19.7, 19.84, .52, .03, 'rubber', false, .29);
-    for (let y = .55; y < 4; y += .63) face('rustication', along, y, pitch - .06, .035, .025, 'recess', false, .29);
+  }
+  const ventCenters=front?entranceElevation.vents.map(t=>minimum+t*(maximum-minimum)):centers;
+  for(const along of ventCenters)band('upper attic vent',along,19.7,19.84,.52,.03,'rubber',false,.29);
+  for(let i=0;i<count;i++)for(let y=.55;y<4;y+=.63){
+    const along=minimum+(i+.5)*pitch;
+    // The entrance jambs define a clear +/-1.6 m opening below 3.4 m.
+    // Decorative joints stop at that opening, including above visitor height.
+    if(name==='south'&&Math.abs(along)<2&&y<3.4){
+      const edge=pitch/2-.03,width=edge-1.6;
+      for(const side of [-1,1])face('rustication',along+side*(edge+1.6)/2,y,width,.035,.025,'recess',false,.29);
+    }else face('rustication',along,y,pitch-.06,.035,.025,'recess',false,.29);
   }
   for (const [low, high, depth, extension] of [[17.7, 17.86, .86, .25], [19.22, 19.31, .75, .2],
     [20.23, 20.39, 1.05, .8], [20.4, 20.52, 1.15, 1]]) {

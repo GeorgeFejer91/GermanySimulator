@@ -1,5 +1,75 @@
 # Berghain viewer validation
 
+### Entrance elevation: bounded acceptance
+
+Freeze: output/berghain-frontage-repaired-candidate.json, SHA256 49dbc93aedbf337f15ba17910ebae4ebbd1d0cb49e7d6262ea3c76cf7c81b00a; 223 files.
+GLB SHA256 82546d90984fd7baf618f8fa9cca7b3042ca8e0b7403a825b7fd35cb30289104.
+
+All 184 Node checks pass on the repaired candidate, zero failures/skips.
+The earlier envelope fingerprint was refreshed for the deliberate facade changes.
+The new doorway regression verifies that visible joints stop at the jamb aperture.
+Initial Physics rejection and candidate are preserved; repaired acceptance uses
+fresh evidence. Report: output/berghain-frontage-repaired-node.txt.
+
+Seventeen browser cases pass, with all 223 source hashes bound to the freeze:
+source/native frontage rendering, actual counter approach and contact, and
+texture fallback controls across desktop/Android portrait/landscape emulation;
+complete main-stair, WC, lounge and smoking roundtrips on desktop. New actual
+exterior fallback and real opened-door entry/return cover all three profiles. The desktop
+exterior view establishes the complete count; portrait crops the end bays and
+only establishes central-detail parity. The independent Physics and Camera/Scale
+reports accept this bounded correction. One additional desktop aperture comparison
+shows the repaired jamb ends directly in both procedural and exported GLB renders;
+the mean RGB difference is 0.755 with no large-pixel deviations. That isolated
+image does not establish a walking path; real entry/return is covered by the
+sixteen-case main batch. Physical Android remains NOT RUN.
+
+The changed entrance envelope retains collision/render correspondence. Other
+geometry, floors, viewpoints and routes are unchanged. Existing batch shading
+changes retained instance tones; the independent camera report records the
+precise scope and limits. Nine sampled rays retain older decorative shadow-patch
+overlaps at lower window edges; those detail placements remain provisional.
+
+Fresh sequential cost batches use three cold contexts per profile/version,
+the same Panorama arrival and two seconds of real input. Initial desktop-only and unrepaired
+batches are excluded; accepted comparisons use repaired-cost-before and
+repaired-cost-after. These short shared-PC samples are not GPU timing guarantees.
+
+| Profile | Frame p95 median, ms | Input response median, ms |
+|---|---:|---:|
+| desktop | 14.2 → 20.8 | 24.1 → 20.2 |
+| android-portrait | 7.1 → 7.1 | 13.2 → 17.5 |
+| android-landscape | 7.1 → 7.1 | 19.8 → 17.8 |
+
+The export adds 1,284 triangles and 125,904 bytes, retaining 203 mesh/material
+groups and 25 embedded maps. Runtime retains 26 textures, the existing lighting
+budget and demand-driven rendering. No physical-device claim is made.
+
+The facade count correction does not resolve Panorama's six-window footprint,
+the common floor/window section, exact sanitary/backstage placement or current
+inventory. Full goal ACTIVE. Publication/live status is recorded separately in
+output/berghain-frontage-repaired-release.json. The two-document receipt bridge changes
+only README/VALIDATION; the remaining 221 frozen files stay exact.
+
+
+The initial frontage candidate was held after Physics review found pre-existing
+decorative rustication strips spanning the open entrance. This repaired candidate
+trims those strips at the existing jamb aperture, including above head height.
+The original rejected root/freeze is preserved. Ground support, jambs, door and
+interior routes remain unchanged; fresh body/mesh and rendered checks are required.
+
+
+## Entrance elevation candidate — 25 October 2026
+
+Candidate scope: twelve entrance-side openings with nonuniform spacing, nine
+attic grilles and seventeen upper vents; retained ground entrance and interior
+floors/routes. Base d05f9bae5a7935a7b1bd0d4655026c95e98bb506.
+Required checks: photo-count/spacing regression, continuous facade collision,
+source/native rendered parity, actual input and public-route controls on desktop
+and Android portrait/landscape emulation, comparable cost, and independent
+Physics and Camera/Scale review. Physical Android remains NOT RUN.
+Evidence: output/berghain-frontage-*. Full interior reconstruction is incomplete.
+
 The first counter-wall candidate was held after independent Physics review found
 an older generic intermediate beam intersecting all Panorama stair lanes, with
 only1.303 m headroom at the settled counterexample. This repaired candidate
@@ -26,6 +96,23 @@ implementation testing exposed an over-broad rack-gap assertion that compared
 the rack with a ledge outside its z-span; the check now tests overlapping spans.
 The physical aisle passed both runs. The bounded acceptance and remaining limits are recorded below.
 
+
+Published counter backdrop and stair-headroom correction `d05f9bae5a7935a7b1bd0d4655026c95e98bb506`;
+Pages run 40154989892 succeeded. All 87 checked public files match the
+commit, six entry URLs respond, and three live browser cases pass on desktop
+and Android portrait/landscape emulation across both viewers. Receipt:
+output/berghain-counterwall-repaired-release.json. The original beam-clashing candidate remains
+rejected and preserved. The accepted model has a clear main-to-Panorama stair,
+an opaque counter backdrop and a closed service recess; no private route is inferred.
+
+The full goal remains ACTIVE. Next architectural registration work must reconcile
+the common facade/window bay, floor section and remaining generic structure;
+do not derive surveyed floor heights from the model's estimated facade tiers.
+Exact backstage/FLINTA placement and current inventory/artwork remain unresolved.
+The next read-only bay diagnostic is output/berghain-panorama-bay-followup.json;
+its source limits and unsuccessful archive follow-up are recorded in
+output/berghain-panorama-section-followup.md. It does not select a floor datum.
+This local publication handoff does not alter the reviewed runtime or Git index.
 
 ## Counter backdrop — bounded acceptance
 

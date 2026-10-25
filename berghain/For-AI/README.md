@@ -1,5 +1,30 @@
 # Berghain reconstruction: goal and work state
 
+The initial frontage candidate was held after Physics review found pre-existing
+decorative rustication strips spanning the open entrance. This repaired candidate
+trims those strips at the existing jamb aperture, including above head height.
+The original rejected root/freeze is preserved. Ground support, jambs, door and
+interior routes remain unchanged; fresh body/mesh and rendered checks are required.
+
+
+## Entrance elevation registration — 25 October 2026
+
+Current isolated candidate: output/berghain-frontage-repaired-runtime, based on published
+d05f9bae5a7935a7b1bd0d4655026c95e98bb506. P02 and P16 show twelve openings,
+wider masonry fields near both ends, nine lower attic grilles and seventeen
+upper vents. These replace the eleven evenly spaced entrance-elevation bays.
+The opening widths/positions remain perspective-photo estimates. The ground
+entrance, interior datums and routes are retained. The frozen candidate passes 184 Node checks, seventeen browser cases,
+nine-before/nine-after cost samples and both independent world reviews.
+VALIDATION.md records limitations; publication status belongs to
+output/berghain-frontage-repaired-release.json.
+
+Six shuttered tall openings in the historical exterior photographs correspond
+plausibly to I19's six-window Panorama sequence. This is a registration lead,
+not a resolved floor section. Do not infer metric floor heights from the
+existing model tiers, move the lounge/WC independently, or add backstage doors.
+The full reconstruction goal remains ACTIVE. Physical Android is untested.
+
 The first counter-wall candidate was held after independent Physics review found
 an older generic intermediate beam intersecting all Panorama stair lanes, with
 only1.303 m headroom at the settled counterexample. This repaired candidate
@@ -45,6 +70,23 @@ exterior and existing fixture scale are preserved. One unsupported generic beam
 that crossed the Panorama stair is retired, with fresh body and eye clearance checks. VALIDATION.md records the
 desktop timing increase and physical-device limitation. Publication/live status
 belongs to output/berghain-counterwall-repaired-release.json; full goal stays ACTIVE.
+
+Published counter backdrop and stair-headroom correction `d05f9bae5a7935a7b1bd0d4655026c95e98bb506`;
+Pages run 40154989892 succeeded. All 87 checked public files match the
+commit, six entry URLs respond, and three live browser cases pass on desktop
+and Android portrait/landscape emulation across both viewers. Receipt:
+output/berghain-counterwall-repaired-release.json. The original beam-clashing candidate remains
+rejected and preserved. The accepted model has a clear main-to-Panorama stair,
+an opaque counter backdrop and a closed service recess; no private route is inferred.
+
+The full goal remains ACTIVE. Next architectural registration work must reconcile
+the common facade/window bay, floor section and remaining generic structure;
+do not derive surveyed floor heights from the model's estimated facade tiers.
+Exact backstage/FLINTA placement and current inventory/artwork remain unresolved.
+The next read-only bay diagnostic is output/berghain-panorama-bay-followup.json;
+its source limits and unsuccessful archive follow-up are recorded in
+output/berghain-panorama-section-followup.md. It does not select a floor datum.
+This local publication handoff does not alter the reviewed runtime or Git index.
 
 ### Panorama frontage and public connections — 25 October 2026
 
