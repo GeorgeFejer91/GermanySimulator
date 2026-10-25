@@ -1,5 +1,83 @@
 # Berghain reconstruction: goal and work state
 
+### Main switchback acceptance
+
+The source-informed main stair now rises toward the dance-floor edge through
+a short arrival. Its two flights, shared turn, guards, fitted stringer collision
+and wardrobe approach pass 57 affected Node checks and six final browser cases:
+natural admission/ascent/descent/WC/exit on desktop and both Android-emulated
+orientations, two source/export day/night view cases and a landscape texture
+fallback route. Four further normal-walk approach cases verify that the descent
+is visible before entry, including missing textures. Physical Android is NOT RUN.
+
+The original stringer-underlap rejection and later dark-approach rejection are
+preserved. The final approach repair changes only the upper-floor cue boundary;
+the same three lights and two shadow maps remain. A matched baseline view and
+nine cold contexts per version support the bounded appearance/cost comparison.
+Idle rendering stops and ordinary viewing does not request the portable GLB.
+The sampled desktop p95 frame interval rose from 14.2 to 20.8 ms, within the
+33.3 ms limit; mobile-emulated samples remain about 7.1 ms. This is a bounded
+pass rather than an unchanged-speed claim. Draw calls are unchanged; ordinary
+transfer rises by 678 bytes. Median observed input latency stays below 27 ms.
+
+The exported model has 767,564 triangles, 204 mesh groups and 25 maps, with
+59,247,956 bytes. Independent Physics and Camera reports bind the same 226-file
+freeze and this documentation-only bridge. The reports and release receipt use
+output/berghain-hall-registration-* and output/berghain-main-switchback-*.
+Local acceptance does not itself establish publication.
+
+The stair rise is photo-supported; exact dimensions and the ground approach
+are estimates. AU27's broader hall/Panorama/Klo orientation and booth-wall
+registration remain open. Fit their complete section and the ground/smoking
+interfaces before changing that frame. Full goal ACTIVE; current backstage,
+FLINTA locations and full photographic fidelity remain unresolved.
+
+
+### Main switchback correction and coupled hall audit
+
+Isolated candidate: output/berghain-hall-registration-runtime, based on published
+ca53e930c4a2de3eec60d9a0e5a1e5bbf1ed8d3a. Karhard G20/21/23/25 contradict the
+old upper main-flight rise away from the dance floor. Both flights, the turning
+landing, upper opening, guards and route cues are rebuilt together. The upper
+flight now arrives at the dance-floor edge through a short landing; the long
+return bridge is removed. Dimensions and the ground approach remain estimated.
+Fresh source/export, body, natural keyboard/touch and independent reviews pass
+as recorded above. The larger orientation change is NOT implemented.
+
+AU27 remains open: Panorama was quarter-turned toward the entrance facade while
+the hall/bar/void/Klo cluster kept its earlier frame. Independent read-only
+audits confirm the near-perpendicular stair axes. Camera/photo analysis also
+identifies the booth's unsupported central placement. A shared hall orientation is the preferred estimated study,
+but literal rotation crosses the retained main/Halle boundary and moving Säule
+would overlap retained ground rooms. Fit the complete ground/main section, bar and Klo boundaries,
+smoking interfaces and booth wall before applying that rotation. Do not rotate
+Panorama twice or treat the unscaled lighting sketch as a surveyed plan.
+
+Evidence: output/berghain-hall-registration-{camera,physics}-audit.md and
+output/berghain-hall-registration-comparison.png (analytical, not a runtime
+candidate). Full goal ACTIVE; current backstage/FLINTA positions and complete
+photographic fidelity remain unresolved. README remains the sole task owner.
+
+
+### Published spatial club-lighting correction
+
+Commit `ca53e930c4a2de3eec60d9a0e5a1e5bbf1ed8d3a`; Pages run 40173760340 succeeded. All 88 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-spatial-light-release.json. Primary staged index unchanged.
+
+Main-floor lighting now washes two opposing architectural surfaces and the
+dance floor, following L09's spatial principle. Colors, positions and output
+remain estimates. Seventeen Node checks, seven local browser cases, nine matched
+cost samples per version and independent Physics/Camera reviews pass. Geometry,
+navigation and the portable GLB remain unchanged; physical Android is NOT RUN.
+
+Full goal ACTIVE. Next: register L09's unscaled DJ/FOH/stair/void sketch against
+Karhard and the current room topology before relocating any architecture.
+Current backstage/FLINTA positions, the compact-chair aisle and full photographic
+fidelity remain unresolved. Source follow-up: output/berghain-spatial-light-source-followup.md.
+The prior After Hours check remains unavailable/challenged; no footage viewed.
+
+
 ### Spatial club-lighting acceptance
 
 The frozen candidate passes 17 affected Node checks and seven browser cases:

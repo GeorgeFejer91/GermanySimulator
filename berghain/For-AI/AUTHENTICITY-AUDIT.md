@@ -1,5 +1,41 @@
 # Berghain interior authenticity audit
 
+## AU27 — coupled main-hall registration and switchback
+
+Fresh pixel/source checks against ca53e930 identify three contradictions.
+Looking from the foyer void toward the DJ wall, G21/G23 show the narrow public
+Panorama stair along the left side and the glazed bar on the right. The model
+instead places that stair almost perpendicular to the bar/main-stair axis
+(89.43 degrees). G20/21/23/25 show the upper main flight rising toward the
+dance-floor rim; the model rises away and adds a roughly 9.57 m return walkway.
+Hero/G19/G24 show an offset booth by the glass-side corner, with a rectangular
+wall recess and red curtain; the modeled booth projects near the wall center.
+The opening does not establish any backstage destination or public passage.
+
+The accepted switchback correction addresses the second relation by rebuilding
+both flights and their landings/guards together. Its flight runs, widths,
+intermediate height and ground approach remain estimates. It does not resolve
+the first and third discrepancies. Existing route passes cannot certify them.
+
+U02, Osio I02 and L09 support a shared relative arrangement, but supply no
+reliable compass tie or metric room survey. Completing the quarter-turn for
+the still-unregistered hall/bar/void/Klo cluster is the preferred joint study,
+not a drop-in transform. Already-registered Panorama stays fixed. The literal
+transform puts bar-wall centers around model Z -16.03..-16.19, beyond the
+main/Halle join near -14.96. Those projected bay centers and the floor corners
+beyond the join lie within the official Halle footprint. The retained interior
+boundary, openings and floor/support continuity still require resolution; point
+containment does not establish full-volume fit. Foyer/Säule, Lab/admission/ground WC, upper smoking
+support and Eisbar also need coherent interfaces. A07's former-exterior-wall
+statement alone cannot select a Halle-junction bay. Preserve the official hull;
+do not stretch furniture, invent hidden corridors or assert private-room uses.
+
+The independent Camera and Physics reports in output/berghain-hall-registration-*
+are preimplementation audits, not release approvals. The comparison diagram is
+an analytical plan study only. Full photographic/current architectural accuracy
+remains outstanding; no backstage/FLINTA location is established.
+
+
 ## Foyer gallery frame — source-informed correction
 
 Karhard G04/07/20/25 support rectangular gallery piers, local beam haunches,

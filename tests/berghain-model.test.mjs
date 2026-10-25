@@ -67,12 +67,12 @@ test('stair undersides and floor slabs block the visitor body', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   const {canStand} = await import('../berghain/navigation.mjs');
   const {studyToSite} = await import('../assets/models/berghain/calibration.mjs');
-  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 18.5}), layout), false, 'low stair underside must block head penetration');
-  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 11}), layout), true, 'full-height clearance beneath upper flight should remain available');
+  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 14}), layout), false, 'low stair underside must block head penetration');
+  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 18.5}), layout), true, 'headroom below the high end of the lower flight remains available');
   const halleUndersides=layout.halle.stairs.flatMap(stair=>[.25,.3].map(t=>({
     x:stair.axis[0][0]+(stair.axis[1][0]-stair.axis[0][0])*t,y:.05,
     z:stair.axis[0][1]+(stair.axis[1][1]-stair.axis[0][1])*t})));
-  for (const point of [{x: 6.831869, y: .05, z: 17.937928}, {x:4.5,y:5.45,z:5.83},...halleUndersides]) {
+  for (const point of [studyToSite({x:8,y:.05,z:15}), {x:4.5,y:5.45,z:5.83},...halleUndersides]) {
     assert.equal(canStand(point, layout), false, 'full cylinder must not pass through a tread underside: ' + JSON.stringify(point));
   }
 });
@@ -80,7 +80,7 @@ test('stair undersides and floor slabs block the visitor body', async () => {
 test('main, Panorama and both Halle stairs connect both landings continuously in both directions', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   const {canStand, moveVisitor} = await import('../berghain/navigation.mjs');
-  for (const name of ['main stair']) {
+  for (const name of ['main stair','main upper flight']) {
     const ramp = layout.floors.find(floor => floor.name === name);
     const x = (ramp.x[0] + ramp.x[1]) / 2, z = ramp.z[1] - .5;
     let position = {x, z, y: ramp.y + (ramp.endY - ramp.y) * (z - ramp.z[0]) / (ramp.z[1] - ramp.z[0])};
@@ -88,16 +88,16 @@ test('main, Panorama and both Halle stairs connect both landings continuously in
     const routeSteps = Math.ceil((ramp.z[1] - ramp.z[0] + 1) / .1);
     for (let i = 0; i < routeSteps; i++) {
       position = moveVisitor(position, {x: 0, z: -.1}, layout);
-      assert.ok(canStand(position, layout), name + ' uphill body');
+      assert.ok(canStand(position, layout), name + ' body toward axis start');
     }
-    assert.ok(position.z < ramp.z[0] - .3, name + ' must reach upper landing');
-    assert.ok(Math.abs(position.y - ramp.y) < .01, name + ' upper height');
+    assert.ok(position.z < ramp.z[0] - .3, name + ' must reach axis-start landing');
+    assert.ok(Math.abs(position.y - ramp.y) < .01, name + ' axis-start height');
     for (let i = 0; i < routeSteps + 15; i++) {
       position = moveVisitor(position, {x: 0, z: .1}, layout);
-      assert.ok(canStand(position, layout), name + ' downhill body');
+      assert.ok(canStand(position, layout), name + ' body toward axis end');
     }
-    assert.ok(position.z > ramp.z[1] + .3, name + ' must reach lower landing');
-    assert.ok(Math.abs(position.y - ramp.endY) < .01, name + ' lower height');
+    assert.ok(position.z > ramp.z[1] + .3, name + ' must reach axis-end landing');
+    assert.ok(Math.abs(position.y - ramp.endY) < .01, name + ' axis-end height');
   }
   const panorama=layout.panoramaRegistration.stairRoute;
   let p={...panorama[0]};

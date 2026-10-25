@@ -79,7 +79,7 @@ export default {name:'Karhard architectural circulation, fixtures and night cues
   let heading;
   if(ctx.profile.id==='desktop'){await enterNaturally(ctx);heading=0;}
   else heading=await select(ctx,'foyer');
-  const approach=[[0,.05,21.1],[5,.05,21.1]].map(site);
+  const approach=[[0,.05,21.1],[5,.05,21.1],[5,.05,10.6]].map(site);
   let r=await route(ctx,[...approach,...layout.architecturalCirculation.mainStair.siteRoute],heading,'main-up',{2:[8,2.2,14],3:[12,4.2,15],4:[12,5.5,19],5:[12,4.5,15]});heading=r.heading;
   await ctx.artifacts.screenshot(ctx.page,'main-upper-arrival-source.png');
   const back=await route(ctx,layout.architecturalCirculation.mainStair.siteRoute.toReversed(),heading,'main-down');

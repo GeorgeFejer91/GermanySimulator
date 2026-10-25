@@ -18,6 +18,13 @@ test('new routes select their own cue on the correct floor before generic garden
   }
 });
 
+test('the upper stair approach is lit before descent without changing ground or upper-room cues',()=>{
+  for(const [p,room] of [
+    [[12,5.45,7.4],'mainStair'],[[12,5.45,8],'mainStair'],[[12,5.45,8.8],'mainStair'],[[12,5.45,9.5],'mainStair'],
+    [[12,.05,8],null],[[12,9.05,8],null],[[12,5.45,7.2],null],[[4.9,5.45,8],null],[[17.3,5.45,8],null]
+  ])assert.equal(architecturalRoomAt(studyToSite({x:p[0],y:p[1],z:p[2]})),room,JSON.stringify(p));
+});
+
 test('visible truss cables meet the actual roof mesh and all four circular recesses have closed dark centres',()=>{
   const model=createBerghainModel();model.updateMatrixWorld(true);
   try{

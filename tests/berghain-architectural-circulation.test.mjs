@@ -35,6 +35,29 @@ test('folded main stair reaches the main floor and returns around the open foyer
   assert.equal(canStand(site([11,5.45,17]),layout),false,'void is not filled with a phantom support slab');
   assert.ok(!layout.parts.some(p=>p.name==='main stair tread'),'old straight stair retired');
 });
+test('upper main flight rises toward the DJ-side floor rim without a long return bridge',()=>{
+  const upper=layout.floors.find(f=>f.name==='main upper flight');
+  const high=upper.y>upper.endY?upper.rampAxis[0]:upper.rampAxis[1];
+  const low=upper.y>upper.endY?upper.rampAxis[1]:upper.rampAxis[0];
+  const dj=layout.parts.find(p=>p.name==='main DJ desk').center;
+  const ascent=[high[0]-low[0],high[1]-low[1]],toward=[dj[0]-low[0],dj[2]-low[1]];
+  assert.ok((ascent[0]*toward[0]+ascent[1]*toward[1])/(Math.hypot(...ascent)*Math.hypot(...toward))>.9,
+    'G21/G23 upper flight arrives toward the DJ end, rather than returning from the opposite rim');
+  assert.ok(!layout.floors.some(f=>f.name==='main upper return'),'no unsupported long return bridge');
+  const arrival=layout.floors.find(f=>f.name==='main upper turn');
+  assert.ok(arrival.z[1]-arrival.z[0]<2.1,'only a short landing bridges the flight to the gallery edge');
+});
+test('visible main-flight stringers stop the body approaching their low undersides',()=>{
+  for(const name of ['main stair','main upper flight']){
+    const parts=layout.parts.filter(p=>p.name==='Architecture '+name+' stringer');
+    assert.equal(parts.length,32);
+    for(const part of parts){const s=layout.solids.find(s=>s.renderPart===part);assert.ok(s?.undersideOnly&&s.treadFloor.name===name);}
+  }
+  let p={x:4.761803,y:.05,z:18.136704};assert.ok(canStand(p,layout));
+  for(let i=0;i<26;i++)p=moveVisitor(p,{x:.02,z:0},layout);
+  assert.ok(p.x<5.26,'body must stop before the visible low stringer, including its below-tread depth');
+  assert.ok(canStand(p,layout));
+});
 test('wardrobe connects through a real glass doorway to main stairs and ground WC in both directions',()=>{
   const c=layout.architecturalCirculation.wardrobeConnection;
   walk([...c.siteRoute,...layout.architecturalCirculation.mainStair.siteRoute.slice(1)]);
@@ -86,8 +109,8 @@ test('new architecture has finite portable transforms, known materials and match
 
 test('replacement landing guards block the full body independently of missing floor support',()=>{
   const checks=[
-    ['main landing middle',[10,2.75,11.9],[10,2.75,13.1]],
-    ['main top inner gap',[13.75,5.45,20.95],[13.75,5.45,19.9]],
+    ['main landing middle',[10,2.75,20.1],[10,2.75,18.9]],
+    ['main arrival east',[12.8,5.45,10.3],[14.1,5.45,10.3]],
     ['Eisbar intermediate side',[13.9,8.75,-20.7],[12.7,8.75,-20.7]],
     ['Eisbar landing rear',[19,8.75,-20.8],[19,8.75,-22.2]],
     ['Eisbar intermediate middle',[15,8.75,-20.7],[15,8.75,-19.4]],

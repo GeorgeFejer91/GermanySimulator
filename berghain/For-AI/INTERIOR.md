@@ -1,5 +1,18 @@
 # Berghain interior: objects, art and equipment
 
+## Main switchback — photo-supported rise, estimated fit
+
+G20/21/23/25 require the upper flight to rise toward the main-floor/DJ rim.
+The corrected switchback keeps floor datums0.05/2.75/5.45, 16 treads per flight
+and author width3. It uses author Z11.4..19.5, a turn at19.5..21.5 and a short
+upper arrival at9.1..11.4. Both flights, guards and supported openings move
+together. These coordinates are fitted estimates, not measured architecture.
+The previous long return is removed; passage beneath the high lower-flight end
+remains physically available. The wardrobe approach skirts its retained
+partition. Three existing cue lights follow the new landings; no light is added.
+The independent hall/Panorama frame and booth-wall errors remain AU27.
+
+
 ## Main-bar seating follow-up — 25 October 2026
 
 G12 shows the concave circular stools following both the straight counter and

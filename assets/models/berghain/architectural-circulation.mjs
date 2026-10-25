@@ -49,7 +49,7 @@ export function addArchitecturalCirculation(layout){
   }):[s]);
   data.wardrobeConnection={sources:['U02'],confidence:'Public adjacency supported; doorway location and dimensions inferred in existing provisional glass partition',
     authorOpening:{x:-4,z:[13.5,15.3],y:[.05,2.45]},
-    authorRoute:[[-11,.05,14.4],[0,.05,14.4],[0,.05,21.1],[8,.05,21.1]],
+    authorRoute:[[-11,.05,14.4],[0,.05,14.4],[5,.05,14.4],[5,.05,10.6],[8,.05,10.6]],
     boundary:'Public wardrobe-to-foyer only; original Lab boundary and admission geometry retained'};
   data.wardrobeConnection.siteRoute=data.wardrobeConnection.authorRoute.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
   const parts=[];
@@ -97,8 +97,10 @@ export function addArchitecturalCirculation(layout){
         box(name+' grating inset',[x+dx,y+.003,z],[.025,.006,depth*.78],'rubber',false);
       for(const sign of [-1,1]){
         const sx=x+sign*width/2;
-        box(name+' stringer',[sx,y-.14,z],[.09,.28,depth],'steel',false,
+        const mainStringer=name==='main stair'||name==='main upper flight';
+        box(name+' stringer',[sx,y-.14,z],[.09,.28,depth],'steel',mainStringer,
           [[.09,0,0],[0,.28,0],[0,(y1-y0)/steps,depth]]);
+        if(mainStringer)Object.assign(layout.solids.at(-1),{undersideOnly:true,treadFloor:f});
         if(enclosed){
           // Continuous body containment is separate from the photographed
           // sparse-post/wire guard. It is not a visible plate or extra pickets.
@@ -132,25 +134,27 @@ export function addArchitecturalCirculation(layout){
     return f;
   }
 
-  // Plate-sided switchback around the open foyer void, retaining the existing
-  // entrance approach and main-floor elevation. No slab fills the atrium.
-  flight('main stair',8,12.5,20.5,2.75,.05,3,16);
-  slab('main intermediate landing',[6.5,13.5],[10.5,12.5],2.75);
-  flight('main upper flight',12,12.5,20.5,2.75,5.45,3,16);
-  slab('main upper turn',[10.5,17],[20.5,21.5],5.45);
-  slab('main upper return',[14,17],[9.1,20.5],5.45);
-  guard('main landing north',6.5,10.5,13.5,10.5,2.75);
-  guard('main landing west',6.5,10.5,6.5,12.5,2.75);
-  guard('main landing east',13.5,10.5,13.5,12.5,2.75);
-  guard('main landing middle',9.5,12.5,10.5,12.5,2.75);
-  guard('main top south',10.5,21.5,17,21.5,5.45);
-  guard('main top west',10.5,20.5,10.5,21.5,5.45);
-  guard('main top inner gap',13.5,20.5,14,20.5,5.45);
-  guard('main return outside',17,9.4,17,21.5,5.45);
-  guard('main return void',14,9.4,14,20.5,5.45);
-  guard('closed old main opening',6.4,9.4,14,9.4,5.45);
-  guard('east gallery remainder',17,9.4,21.5,9.4,5.45);
-  data.mainStair.routes=[[8,.05,21.1],[8,2.75,11.5],[12,2.75,11.5],[12,5.45,21],[15.5,5.45,21],[15.5,5.45,8.8],[14,5.45,7]];
+  // G20/21/23/25: the upper plate-sided flight rises toward the dance-floor
+  // rim. The previous reversed rise required an unsupported long return.
+  // Rebuild both flights, their turn, opening and guards together. These
+  // dimensions/ground approach remain fitted estimates; no slab fills the void.
+  flight('main stair',8,11.4,19.5,.05,2.75,3,16);
+  slab('main intermediate landing',[6.5,13.5],[19.5,21.5],2.75);
+  flight('main upper flight',12,11.4,19.5,5.45,2.75,3,16);
+  slab('main upper turn',[10.5,13.5],[9.1,11.4],5.45);
+  guard('main landing south',6.5,21.5,13.5,21.5,2.75);
+  guard('main landing west',6.5,19.5,6.5,21.5,2.75);
+  guard('main landing east',13.5,19.5,13.5,21.5,2.75);
+  guard('main landing middle',9.5,19.5,10.5,19.5,2.75);
+  guard('main arrival west',10.5,9.4,10.5,11.4,5.45);
+  guard('main arrival east',13.5,9.4,13.5,11.4,5.45);
+  guard('closed old main opening',6.4,9.4,10.5,9.4,5.45);
+  guard('east gallery remainder',13.5,9.4,21.5,9.4,5.45);
+  data.mainStair.routes=[[8,.05,10.6],[8,2.75,20.5],[12,2.75,20.5],[12,5.45,10.7],[12,5.45,8.5],[14,5.45,7]];
+  data.mainStair.riseRelation={sources:['A01','I23'],gallery:['20','21','23','25'],
+    upper:'Rises toward the dance-floor rim and DJ end of the void',
+    lower:'Opposing switchback; ground approach and landing dimensions estimated',
+    registration:'Hall compass/frame remains unresolved; independent of the Panorama orientation error'};
   data.mainStair.siteRoute=data.mainStair.routes.map(p=>{const q=site(p);return{x:q[0],y:q[1],z:q[2]};});
   // Table/duct/radiator adjacency is shown together with the stair in20/25.
   box('foyer standing table top',[2.5,1.05,15.5],[3.5,.18,.85],'concrete');

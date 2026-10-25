@@ -55,7 +55,7 @@ async function nearGuard(ctx,{fallback=false,restore=false}={}){
  if(fallback)await page.route('**/assets/models/berghain/textures/*.png',r=>r.abort());
  await enterNaturally(ctx);let heading=0;
  const route=[];
- for(const [x,z,y]of [[5,21.15,.05],...mainStair,[4.5,9,5.45],[-2,8.85,5.45]]){
+ for(const [x,z,y]of [[5,21.15,.05],[5,10.6,.05],...mainStair,[4.5,9,5.45],[-2,8.85,5.45]]){
   const end=await travel(ctx,studyToSite({x,y,z}),heading);heading=end.yaw;route.push(end.position);
  }
  const target=0,turn=Math.atan2(Math.sin(target-heading),Math.cos(target-heading));
@@ -128,7 +128,7 @@ export default {name:'Original foyer and stair balustrades',sourceFiles,scenario
   const {page,artifacts}=ctx;
   await enterNaturally(ctx);let heading=0;const route=[];
   const site=([x,z,y])=>studyToSite({x,y,z});
-  const main=[...[[5,21.15,.05],...mainStair,[14,8,5.45],[5,8,5.45],[5,5,5.45]].map(site),...layout.panoramaRegistration.mainApproach.slice(1)];
+  const main=[...[[5,21.15,.05],[5,10.6,.05],...mainStair,[14,8,5.45],[5,8,5.45],[5,5,5.45]].map(site),...layout.panoramaRegistration.mainApproach.slice(1)];
   const back=[...main.toReversed().slice(1),...[[0,19.7,.05],[0,20.25,.05]].map(site)];
   for(const [index,target]of [...main,...back].entries()){
     assert.ok(canStand(target,layout),'Route waypoint must clear the actual retained structure');

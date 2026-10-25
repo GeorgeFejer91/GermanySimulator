@@ -215,6 +215,14 @@ appearance study rather than the complete real rig. Opposing washes and a separa
 floor pool apply L09's spatial principle using estimated coordinates and the
 existing palette. The source does not resolve contemporary toilets/backstage.
 
+I12/U01 provenance follow-up: [publisher](https://www.sueddeutsche.de/magazin/leben-und-gesellschaft/berghain-architektur-von-innnen-szm.76298) confirms 8 April 2009, issue15/09. The drawings match I12/U01; this remains one historical evidence chain.
+
+Karhard hero/G19–25 support relative hall/stair/bar/booth relationships described
+in AU27. L09's schematic corroborates relative zones only; no compass or scale
+is recovered. A07's former exterior facade statement does not locate a specific
+building join. The analytical quarter-turn comparison is a hypothesis; exact
+ground/main-floor fit, Eisbar end bay and private-room positions remain open.
+
 ## Artworks and installation history
 
 The [interior inventory](INTERIOR.md) maps these records to modelling tasks.

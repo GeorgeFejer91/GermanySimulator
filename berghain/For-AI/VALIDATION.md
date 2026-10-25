@@ -1,5 +1,94 @@
 # Berghain viewer validation
 
+### Main switchback acceptance
+
+The source-informed main stair now rises toward the dance-floor edge through
+a short arrival. Its two flights, shared turn, guards, fitted stringer collision
+and wardrobe approach pass 57 affected Node checks and six final browser cases:
+natural admission/ascent/descent/WC/exit on desktop and both Android-emulated
+orientations, two source/export day/night view cases and a landscape texture
+fallback route. Four further normal-walk approach cases verify that the descent
+is visible before entry, including missing textures. Physical Android is NOT RUN.
+
+The original stringer-underlap rejection and later dark-approach rejection are
+preserved. The final approach repair changes only the upper-floor cue boundary;
+the same three lights and two shadow maps remain. A matched baseline view and
+nine cold contexts per version support the bounded appearance/cost comparison.
+Idle rendering stops and ordinary viewing does not request the portable GLB.
+The sampled desktop p95 frame interval rose from 14.2 to 20.8 ms, within the
+33.3 ms limit; mobile-emulated samples remain about 7.1 ms. This is a bounded
+pass rather than an unchanged-speed claim. Draw calls are unchanged; ordinary
+transfer rises by 678 bytes. Median observed input latency stays below 27 ms.
+
+The exported model has 767,564 triangles, 204 mesh groups and 25 maps, with
+59,247,956 bytes. Independent Physics and Camera reports bind the same 226-file
+freeze and this documentation-only bridge. The reports and release receipt use
+output/berghain-hall-registration-* and output/berghain-main-switchback-*.
+Local acceptance does not itself establish publication.
+
+The stair rise is photo-supported; exact dimensions and the ground approach
+are estimates. AU27's broader hall/Panorama/Klo orientation and booth-wall
+registration remain open. Fit their complete section and the ground/smoking
+interfaces before changing that frame. Full goal ACTIVE; current backstage,
+FLINTA locations and full photographic fidelity remain unresolved.
+
+
+## Upper stair approach repair
+
+Freeze 55e55a2a passed six route/view cases but is superseded after Camera
+identified a nearly black descent at the upper approach. A normal keyboard
+walk reproduced the cue change between author z=8.8 and 9.5. The stair cue now
+includes z=7.3..9.3 on the main-floor approach only (y=5.2..5.8); the ground
+footprint, three light anchors, materials, geometry and GLB remain unchanged.
+The new classifier regression fails before the repair. Exact rejected manifest
+and changed preimages are in output/berghain-main-stair-dark-approach-rejected/.
+Fresh approach and final-candidate browser evidence pass as recorded above.
+
+## Main switchback review repair
+
+The first freeze b1636327 is rejected: Physics found visible lower-flight
+stringers extending below their collision envelopes. Both changed main flights
+now give every stringer a fitted linked underside collider, preserving walking
+support and headroom. The rejected freeze and exact two changed source/test
+preimages are retained in output/berghain-hall-registration-rejected/.
+
+The first browser run completed the main ascent/descent but its exit shortcut
+crossed the existing foyer table. CPU replay identifies that exact final leg;
+the harness now goes around the table and records every WC/exit waypoint.
+Natural night and fallback routes add pitched midflight/turn/descent views.
+Those harness repairs do not change product geometry or collision behavior.
+
+## Main switchback candidate
+
+Base ca53e930. Main switchback geometry, associated cue anchors, route metadata
+and affected harnesses change together. A new regression fails the old upper
+rise direction. The initial candidate wardrobe route crossed the existing
+partition; its revised approach goes around the open end. The first broad Node
+batch also observed the pre-export GLB and a deliberately stale underside
+coordinate. Those failures are preserved; export and the physical underside
+probes are updated before the final checks. No geometry is accepted from these
+preliminary results. Physical Android remains NOT RUN.
+
+
+### Published spatial club-lighting correction
+
+Commit `ca53e930c4a2de3eec60d9a0e5a1e5bbf1ed8d3a`; Pages run 40173760340 succeeded. All 88 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-spatial-light-release.json. Primary staged index unchanged.
+
+Main-floor lighting now washes two opposing architectural surfaces and the
+dance floor, following L09's spatial principle. Colors, positions and output
+remain estimates. Seventeen Node checks, seven local browser cases, nine matched
+cost samples per version and independent Physics/Camera reviews pass. Geometry,
+navigation and the portable GLB remain unchanged; physical Android is NOT RUN.
+
+Full goal ACTIVE. Next: register L09's unscaled DJ/FOH/stair/void sketch against
+Karhard and the current room topology before relocating any architecture.
+Current backstage/FLINTA positions, the compact-chair aisle and full photographic
+fidelity remain unresolved. Source follow-up: output/berghain-spatial-light-source-followup.md.
+The prior After Hours check remains unavailable/challenged; no footage viewed.
+
+
 ### Spatial club-lighting acceptance
 
 The frozen candidate passes 17 affected Node checks and seven browser cases:
