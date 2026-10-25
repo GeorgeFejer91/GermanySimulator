@@ -1,5 +1,16 @@
 # Berghain interior authenticity audit
 
+## AU28 — overhead rig connection
+
+Karhard G17/G22 show open longitudinal box-truss runs meeting transverse runs.
+The prior model had three isolated transverse assemblies. The validated fitted model adds
+two side runs between those assemblies, with open chords, webs and fitted
+junctions. Photographs support this topology; the model's lengths, bay count,
+member thicknesses, suspension anchors and contemporary inventory are not
+surveyed. Six existing hangers and twelve projector assemblies are retained.
+This does not establish structural load capacity or reproduce a light show.
+The main roof/clerestory relation F10 is a separate unresolved section audit.
+
 ## AU27 — accepted source-informed joint hall fit, 2026-10-25
 
 The locally accepted candidate implements the relative arrangement identified

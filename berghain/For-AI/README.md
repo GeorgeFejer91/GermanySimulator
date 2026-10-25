@@ -1,5 +1,61 @@
 # Berghain reconstruction: goal and work state
 
+### Connected overhead rig — accepted for publication
+
+The candidate based on d72ea78 corrects the disconnected transverse rig using
+the longitudinal lattice runs visible in Karhard G17/G22. It retains the six
+hangers, twelve projector assemblies and fitted roof. Exact dimensions, bay
+counts, anchors, current inventory and structural load capacity are unverified.
+
+All 210 Berghain tests, four real-input desktop/mobile-emulation/fallback cases,
+three source/GLB material comparisons with six day/night views, and independent
+Physics/Camera reviews pass their scoped gates. All 15,838 non-rig parts retain
+their actual matrices and colours; floors, collision, viewpoints and navigation
+and lighting code are unchanged. Minimum conservative floor clearance is 6.027 m.
+
+Nine matched cost samples per version retain median p95 frame times of
+20.9/7.1/7.2 ms. Normal transfer rises 1,575 bytes; the optional GLB grows
+234,368 bytes to 59,641,048 bytes and adds 2,784 triangles. Three lights, two
+shadow maps, idle rendering stop and lazy GLB loading remain. Desktop readiness
+median rose from 2.133 to 3.228 seconds in this small sample; loading speed is
+not claimed unchanged. Physical Android and perceptual listening are NOT RUN.
+
+Evidence: `output/berghain-overhead-rig-*`, frozen 228-file candidate 3d787063.
+The original disconnected-rig regression and two corrected external probe
+errors remain preserved. No production repair was needed after the freeze.
+Publication and canonical verification are pending. Full goal ACTIVE: F10's
+roof/clerestory section and concealed backstage/FLINTA locations remain unresolved.
+
+### Published joint hall registration
+
+Commit `d72ea782584e9207c99307747a9e85709ed7d3b0`; Pages run 40188502082 succeeded. All 89 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-joint-hall-release.json. Primary staged index unchanged.
+
+The hall, glazed bar, main WC/Klo, booth and main switchback now share the
+source-informed arrangement with Panorama. The fitted front wing reaches the
+smoking stair. Complete Eisbar and PA assemblies clear the retained full-size
+piers; the foyer wash reaches the ground below the slab. Admission, quiet ground
+WC, Lab, Saeule and Halle are preserved. Exact dimensions and concealed room
+connections remain unverified.
+
+All 209 Node checks, ten keyboard/touch/fallback route cases, one six-view
+source/native case, two actual walking descent-view cases and independent
+Physics/Camera reviews pass. Nine matched cost samples per version preserve
+median p95 frame time (desktop 20.9 ms; mobile emulation 7.1/7.2 ms). Draw calls
+increase with the opened hall, and ordinary transfer rises 19,625 bytes. Three
+lights, two shadow maps, stopped idle rendering and lazy GLB loading remain.
+Physical Android and listening quality are NOT RUN.
+
+Full goal ACTIVE. Remaining work is source-supported photographic detail and
+uncertain roof/hidden structure; exact backstage/FLINTA locations require better
+evidence. The 61-image Karhard map records coverage, not complete fidelity.
+Next bounded source audit: main-hall roof/clerestory relation F10 and the missing
+longitudinal lattice runs visible in G17/G22 (F11). See
+output/berghain-after-joint-hall-next-audit.md for the source observations and
+registered baseline; no roof change is yet implemented or accepted.
+
+
 ### Joint hall registration — accepted for publication
 
 The candidate `output/berghain-joint-hall-runtime`, based on published 285186b,

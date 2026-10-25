@@ -36,14 +36,28 @@ export function addMainHallDetails(layout){
   const horizontal=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),Math.PI/2);
 
   register('open lighting trusses',[17,18,19,22]);
-  for(const z of [-16,-6,4]){
-    for(const y of [16.3,16.7])for(const dz of [-.2,.2])beam('truss chord',[-3,y,z+dz],[12,y,z+dz],.045,'aluminium');
-    for(let i=0;i<15;i++){
-      const x=-3+i;
-      for(const dz of [-.2,.2])beam('truss diagonal',[x,16.3,z+dz],[x+1,16.7,z+dz],.025,'aluminium');
-      beam('truss top brace',[x,16.7,z-.2],[x+1,16.7,z+.2],.025,'aluminium');
-      beam('truss lower brace',[x,16.3,z+.2],[x+1,16.3,z-.2],.025,'aluminium');
+  const trussRows=[-16,-6,4];
+  // G17/G22 show cross-runs joined by longitudinal box trusses. This fitted
+  // archived rig keeps the existing bounds/fixtures, not a claimed current rig
+  // inventory or certified load-bearing construction.
+  const lattice=(a,b)=>{
+    const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),panels=Math.ceil(length);
+    const node=(t,y,side)=>[a[0]+dx*t-dz/length*side,y,a[1]+dz*t+dx/length*side];
+    for(const y of [16.3,16.7])for(const side of [-.2,.2])
+      beam('truss chord',node(0,y,side),node(1,y,side),.045,'aluminium');
+    for(let i=0;i<panels;i++){
+      const t=i/panels,u=(i+1)/panels,up=i%2===0;
+      for(const side of [-.2,.2])beam('truss diagonal',node(t,up?16.3:16.7,side),node(u,up?16.7:16.3,side),.025,'aluminium');
+      for(const y of [16.3,16.7])beam(y===16.7?'truss top brace':'truss lower brace',
+        node(t,y,up?-.2:.2),node(u,y,up?.2:-.2),.025,'aluminium');
     }
+    for(const t of [0,1]){
+      for(const side of [-.2,.2])beam('truss end post',node(t,16.3,side),node(t,16.7,side),.025,'aluminium');
+      for(const y of [16.3,16.7])beam('truss end brace',node(t,y,-.2),node(t,y,.2),.025,'aluminium');
+    }
+  };
+  for(const z of trussRows){
+    lattice([-3,z],[12,z]);
     for(const x of [-2.5,11.5])beam('truss suspension',[x,16.7,z],[x,layout.calibration.mainRoof+1.2,z],.014);
     for(const [i,x] of [-2,2,6,10].entries()){
       const c=point([x,15.94,z]);
@@ -54,6 +68,15 @@ export function addMainHallDetails(layout){
       beam('projector cable',[x+.18,16.12,z],[x+.35,16.65,z],.018,'rubber');
     }
   }
+  // Side runs meet the inner faces of the cross-runs. Their outer chords align
+  // with the retained transverse endpoints, leaving actual open corner joints.
+  for(const x of [-2.8,11.8])for(let i=0;i<trussRows.length-1;i++)
+    lattice([x,trussRows[i]+.2],[x,trussRows[i+1]-.2]);
+  detail.lightingRig={sources:['A01','I23'],gallery:[17,22],
+    form:'Connected open box-truss rectangles with transverse and longitudinal runs',
+    author:{crossRows:trussRows,transverseX:[-3,12],longitudinalCentersX:[-2.8,11.8],bottomY:16.3,topY:16.7},
+    registration:'Author construction coordinates receive the existing floor datum, site calibration and main-hall registration',
+    limits:'Photographed topology; dimensions, suspension anchors, fixture inventory and current installation unverified'};
 
   register('framed DJ-wall recesses',[19,24]);
   const a=point([0,0,-21.7]),b=point([1,0,-21.7]);

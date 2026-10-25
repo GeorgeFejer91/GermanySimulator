@@ -425,3 +425,11 @@ together. The nearby wall speaker, its bracket and linked collision move clear
 of the approach. The existing foyer light sits below the slab. These changes
 improve internal consistency; exact spacings, light fixtures, private destinations
 and photographic fidelity are still not established by the source material.
+
+### 2026-10-25 overhead rig topology
+
+A01/I23, gallery 17 and 22, show longitudinal open lattice trusses connecting
+transverse runs. Their topology supports the connected-rig correction; fitted
+dimensions, counts, anchors and current retention are unverified. G21's central
+roof and narrow high glazed bays differ from the separate coffered Eisbar roof
+in G28. No whole-hall roof transfer or inferred blue glazing is made here.

@@ -47,3 +47,17 @@ test('visible truss cables meet the actual roof mesh and all four circular reces
     assert.equal(layout.floors.some(f=>/maintenance/.test(f.name)),false,'Visible maintenance access is not an invented public route');
   }finally{disposeBerghainModel(model);}
 });
+
+test('the photographed overhead rig has connected cross and longitudinal lattice runs',()=>{
+  const runs=layout.parts.filter(p=>p.name.startsWith('main detail truss ')&&p.material==='aluminium');
+  assert.ok(runs.length>100,'inspect the complete open lattice');
+  const segments=runs.map(p=>[new THREE.Vector3(...p.start),new THREE.Vector3(...p.end)]);
+  const roots=segments.map((_,i)=>i),root=i=>roots[i]===i?i:(roots[i]=root(roots[i]));
+  const touches=(p,[a,b])=>new THREE.Line3(a,b).closestPointToPoint(p,true,new THREE.Vector3()).distanceTo(p)<1e-6;
+  for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++)
+    if(segments[i].some(p=>touches(p,segments[j]))||segments[j].some(p=>touches(p,segments[i])))roots[root(i)]=root(j);
+  assert.equal(new Set(segments.map((_,i)=>root(i))).size,1,'isolated crossbars do not reproduce the connected rig');
+  assert.ok(segments.some(([a,b])=>Math.abs(b.x-a.x)>7&&Math.abs(b.z-a.z)<.2),'longitudinal runs cross the gaps between transverse members');
+  assert.ok(segments.some(([a,b])=>Math.abs(b.z-a.z)>10&&Math.abs(b.x-a.x)<.2),'cross-runs retain the hall width');
+  assert.ok(runs.every(p=>p.shape==='beam'&&p.width<=.045),'open chords and webs must not become a solid overhead box');
+});
