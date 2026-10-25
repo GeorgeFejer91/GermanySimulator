@@ -1,5 +1,27 @@
 # Berghain interior authenticity audit
 
+## AU27 — accepted source-informed joint hall fit, 2026-10-25
+
+The locally accepted candidate implements the relative arrangement identified
+in G21/23: Panorama stair on the left, longitudinal glazed bar on the right,
+main switchback at the foyer void, and an open upper hall. G19/hero/G24 guide
+the completed glass corner, paired wall features and offset DJ booth with a
+closed red recess. Generic intermediate columns/cross-beams that contradicted
+the open hall are retired above the first floor; ground supports remain.
+The photo-visible side frames are separate estimated assemblies. This does not
+claim surveyed column spacing or hidden structural continuity.
+
+U02's public front-wing/smoking adjacency is represented by a fitted floor outside
+the foyer void. Ground WC, Lab and admission retain their earlier layout. The
+bar moves 1.3m within the fitted frame to stay on the main side of the Halle join;
+that is an estimated fit, not a recovered compass/metric registration. Pier,
+stair, glass and PA clearances are validated together. Exact wall thicknesses,
+roof-grid orientation, backstage destinations and current FLINTA locations remain
+unresolved. The maintenance stair and closed door/recess establish no private
+connection. The scoped movement, rendering and cost gates pass; publication verification follows.
+These checks accept a fitted study, not a surveyed interior.
+
+
 ## AU27 — coupled main-hall registration and switchback
 
 Fresh pixel/source checks against ca53e930 identify three contradictions.
@@ -260,3 +282,13 @@ V03 is a useful longitudinal interpretation, but its author explicitly reports n
 The highest-value corrections are coherent space and structure, then characteristic installations, then local surface/lighting fidelity. Astra's current Halle work addresses AU01–03 in a provisional study; none is marked repaired until the integrated source/native model, body routes, rendered comparison and independent Physics/Camera reviews pass. The main stair, lift, smoking connection, Säule mezzanine, full collection and distinct Panorama PA remain substantial separate gaps.
 
 Every accepted correction must record separately: supported identity/form, dimensions/axes, placement/room registration, material/lighting behaviour, source date and present survival. Unknown fields remain explicit. Preserve the single shipped asset authority, source-image rights and existing playable entry/exit. The overall Berghain goal remains ACTIVE.
+
+### Joint-fit clearance follow-up, 2026-10-25
+
+Independent review rejected lower Eisbar stair/frame overlap and an occluded
+foyer cue. Both complete stair widths and full pier dimensions are retained;
+fitted spacing, connected landing/guards and the public opening are corrected
+together. The nearby wall speaker, its bracket and linked collision move clear
+of the approach. The existing foyer light sits below the slab. These changes
+improve internal consistency; exact spacings, light fixtures, private destinations
+and photographic fidelity are still not established by the source material.

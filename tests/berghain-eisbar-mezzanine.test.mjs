@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {layout} from '../assets/models/berghain/layout.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor,visitorRadius} from '../berghain/navigation.mjs';
-const site=([x,y,z])=>studyToSite({x,y,z});
+import {mainHallWorldPoint,mainHallOriginalPoint,mainBarWorldPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const registered=(p,fn=mainHallWorldPoint)=>{const[x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
+const site=([x,y,z])=>registered(studyToSite({x,y,z}),mainBarWorldPoint);
 function walk(route){
  let p={...route[0]};assert.ok(canStand(p,layout),'supported start '+JSON.stringify(p));
  for(const target of [...route.slice(1),...route.toReversed().slice(1)]){
@@ -34,8 +36,10 @@ test('main floor reaches the counter and upper continuation independently in bot
 test('narrow upper stair clears the retained glass screen beyond its centre line',()=>{
  const e=layout.architecturalCirculation.eisbar;
  for(const offset of [-.1,.1])walk(e.authorUpperRoute.map((p,i)=>site(i<2?p:[p[0]+offset,p[1],p[2]])));
- walk([[14.1,5.45,-14],[16.1,5.45,-14.3],[17.4,5.45,-14.3],
-  [17.4,5.45,-19.4],[20.5,5.45,-19.4],[20.5,5.45,-17.8]].map(site));
+ // The completed glass screen closes the former unsubstantiated gap below
+ // the mezzanine. Public access returns around the bar's open front end.
+ walk([...e.mainApproach.toReversed(),...[[14,5.45,7],[16.1,5.45,7],[16.1,5.45,-14.3],[17.4,5.45,-14.3],
+  [17.4,5.45,-19.4],[20.5,5.45,-19.4],[20.5,5.45,-17.8]].map(site)]);
 });
 test('mezzanine edge guards stop the full body before the drop',()=>{
  const floor=layout.architecturalCirculation.eisbar.floorHeight;

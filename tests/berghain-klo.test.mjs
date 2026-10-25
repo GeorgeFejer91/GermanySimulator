@@ -7,11 +7,15 @@ import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 import {kloRoomAt,createKloGeometries} from '../assets/models/berghain/klo-bar.mjs';
 
+import {mainHallWorldPoint,mainBarWorldPoint,mainHallOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const toWorld=p=>{const[x,y,z]=mainHallWorldPoint([p.x,p.y,p.z]);return{x,y,z};};
+const hallSite=p=>toWorld(studyToSite(p));
+
 test('natural room identification uses calibrated footprints and floor elevation',()=>{
-  assert.equal(kloRoomAt(studyToSite({x:-13,y:5.45,z:5})),'klo');
-  assert.equal(kloRoomAt(studyToSite({x:-13.8,y:5.45,z:-8.3})),'toilets');
+  assert.equal(kloRoomAt(hallSite({x:-13,y:5.45,z:5})),'klo');
+  assert.equal(kloRoomAt(hallSite({x:-13.8,y:5.45,z:-8.3})),'toilets');
   for(const p of [{x:5,y:5.45,z:5},{x:-13,y:13.25,z:5},{x:-13,y:.05,z:5}])
-    assert.equal(kloRoomAt(studyToSite(p)),null);
+    assert.equal(kloRoomAt(hallSite(p)),null);
 });
 
 test('steel pan has a genuine hollow rim and interior rather than a capped cylinder',()=>{
@@ -40,10 +44,11 @@ test('Klo Bar and toilets carry primary evidence, explicit placement estimates a
 
 test('main floor connects continuously to bar, toilets, an open cubicle and back',()=>{
   assert.ok(layout.kloBar);
-  const outward=[[5,0],[-6.35,0],[-6.35,3.8],[-8.05,3.8],[-8.05,-4.1],[-9,-4.1],[-9,-8.3],[-13.8,-8.3],[-13.8,-10],[-18.2,-10]];
+  const outward=[[-13.8,-8.3],[-13.8,-10],[-18.2,-10]];
   let position={...viewpoints.berghain.position};
-  const bypass=[{x:8.3,y:5.45,z:viewpoints.berghain.position.z},{x:8.3,y:5.45,z:3.8}];
-  const targets=[...bypass,...[...outward,...outward.slice(0,-1).reverse()].map(([x,z])=>studyToSite({x,y:5.45,z})),...bypass.toReversed(),viewpoints.berghain.position];
+  const bypass=[[7.5,0],[7.5,7.6],[6,7.6],[6,8.4],[3,8.4],[3,10],[6,10]].map(([x,z])=>({x,y:5.45,z}));
+  bypass.push(viewpoints.klo.position,{x:5,y:5.45,z:9.7},{x:-4,y:5.45,z:9.7});
+  const targets=[...bypass,...[...outward,...outward.slice(0,-1).reverse()].map(([x,z])=>hallSite({x,y:5.45,z})),...bypass.toReversed(),viewpoints.berghain.position];
   for(const target of targets){
     for(let step=0;step<180;step++){
       position=moveVisitor(position,{x:(target.x-position.x)/(180-step),z:(target.z-position.z)/(180-step)},layout);
@@ -88,15 +93,16 @@ test('sanitary fittings include hollow bowls, protected lights, sinks with taps 
 
 test('closed cubicle doors and glazed bar counters stop full-body motion',()=>{
   assert.ok(layout.kloBar);
-  const start=studyToSite({x:-16.3,y:5.45,z:-12});
+  const start=hallSite({x:-16.3,y:5.45,z:-12});
   assert.ok(canStand(start,layout));
-  const stopped=moveVisitor(start,{x:-3,z:0},layout);
-  assert.ok(stopped.x>studyToSite({x:-17.4,y:5.45,z:-12}).x&&canStand(stopped,layout));
+  const stopped=moveVisitor(start,{x:0,z:3},layout);
+  assert.ok(mainHallOriginalPoint(stopped).x>studyToSite({x:-17.4,y:5.45,z:-12}).x&&canStand(stopped,layout));
   const bar=layout.fixtures.find(f=>f.id==='klo-switchgear-bar');
-  const front={x:bar.anchor[0]+1.5,y:5.45,z:bar.anchor[2]+2.2};
+  const old=mainHallOriginalPoint({x:bar.anchor[0],y:5.45,z:bar.anchor[2]});
+  const front=toWorld({x:old.x+1.5,y:5.45,z:old.z+2.2});
   assert.ok(canStand(front,layout));
-  const blocked=moveVisitor(front,{x:0,z:-4},layout);
-  assert.ok(blocked.z>bar.anchor[2]+.5&&canStand(blocked,layout));
+  const blocked=moveVisitor(front,{x:-4,z:0},layout);
+  assert.ok(mainHallOriginalPoint(blocked).z>old.z+.5&&canStand(blocked,layout));
 });
 
 test('an invalid deep start within the wash assembly recovers to the nearest body-clear edge',()=>{

@@ -6,12 +6,15 @@ import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghai
 import {architecturalRoomAt,architecturalCues} from '../berghain/architectural-lighting.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 
+import {mainHallWorldPoint,mainBarWorldPoint,mainHallOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const registered=(p,kind)=>{const q=studyToSite({x:p[0],y:p[1],z:p[2]});if(!kind)return q;const[x,y,z]=(kind==='eisbar'?mainBarWorldPoint:mainHallWorldPoint)([q.x,q.y,q.z]);return{x,y,z};};
+
 test('new routes select their own cue on the correct floor before generic garden/Panorama classification',()=>{
   for(const [p,room] of [
     [[23.6,9.05,7],'smoking'],[[23.6,5.45,7],'smoking'],[[23.6,.05,8],'smokingEscape'],
     [[16,8.75,-20],'eisbar'],[[12,5,18],'mainStair'],[[-15,.05,20.6],'groundToilets'],
     [[23.6,17,7],null],[[25,13.25,-20],null],[[-15,5.45,20.6],null],[[5,5.45,5],null]
-  ])assert.equal(architecturalRoomAt(studyToSite({x:p[0],y:p[1],z:p[2]})),room);
+  ])assert.equal(architecturalRoomAt(registered(p,['eisbar','mainStair'].includes(room)?room:null)),room);
   for(const lights of Object.values(architecturalCues((position,target,color,intensity,angle,range)=>({position,target,color,intensity,angle,range})))){
     assert.ok(lights.length>0&&lights.length<=3);
     assert.ok(lights.every(l=>l.position.every(Number.isFinite)&&l.target.every(Number.isFinite)&&l.intensity<=160));
@@ -22,7 +25,7 @@ test('the upper stair approach is lit before descent without changing ground or 
   for(const [p,room] of [
     [[12,5.45,7.4],'mainStair'],[[12,5.45,8],'mainStair'],[[12,5.45,8.8],'mainStair'],[[12,5.45,9.5],'mainStair'],
     [[12,.05,8],null],[[12,9.05,8],null],[[12,5.45,7.2],null],[[4.9,5.45,8],null],[[17.3,5.45,8],null]
-  ])assert.equal(architecturalRoomAt(studyToSite({x:p[0],y:p[1],z:p[2]})),room,JSON.stringify(p));
+  ])assert.equal(architecturalRoomAt(registered(p,'mainStair')),room,JSON.stringify(p));
 });
 
 test('visible truss cables meet the actual roof mesh and all four circular recesses have closed dark centres',()=>{

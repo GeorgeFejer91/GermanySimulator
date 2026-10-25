@@ -111,10 +111,21 @@ test('main-floor cues reach opposing architecture and the floor without near-cli
    assert.ok(hit.distance>.3,light.name+' emits outside the opaque rig');
    return hit;
   });
-  assert.ok(hits[0].point.x<lights[0].position.x-5,'left wash reaches the opposite architectural plane');
-  assert.ok(hits[1].point.x>lights[1].position.x+5,'right wash reaches the opposite architectural plane');
+  assert.ok(hits[0].point.z>lights[0].position.z+5,'left wash reaches the opposite architectural plane');
+  assert.ok(hits[1].point.z<lights[1].position.z-5,'right wash reaches the opposite architectural plane');
   for(const hit of hits.slice(0,2))assert.ok(hit.point.y>7&&hit.point.y<12,'wall wash lands above visitor height');
   assert.ok(Math.abs(hits[2].point.y-5.45)<.01,'separate pool reaches the actual dance floor');
   assert.ok(lights.slice(0,2).every(l=>l.castShadow),'architectural washes respect intervening opaque geometry');
+ }finally{rig.dispose();disposeBerghainModel(model);}
+});
+
+test('foyer wash emits below its actual soffit and reaches the ground',()=>{
+ const scene=new THREE.Scene(),rig=createViewerLighting(scene),model=createBerghainModel();
+ try{
+  model.updateMatrixWorld(true);rig.update('interior',viewpoints.foyer.position);assert.equal(rig.state.room,'foyer');
+  const light=scene.getObjectByName('club cue 1');assert.ok(light?.visible&&light.castShadow);
+  const ray=new THREE.Raycaster(light.position,light.target.position.clone().sub(light.position).normalize(),0,light.distance);
+  const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent&&!h.object.material.transmission);
+  assert.ok(hit&&hit.distance>1&&hit.point.y<1,'foyer wash is intercepted above ground '+JSON.stringify(hit&&{distance:hit.distance,point:hit.point.toArray()}));
  }finally{rig.dispose();disposeBerghainModel(model);}
 });

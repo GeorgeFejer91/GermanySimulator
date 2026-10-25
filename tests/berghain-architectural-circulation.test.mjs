@@ -5,7 +5,10 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import {smokingToAuthor} from '../assets/models/berghain/architectural-circulation.mjs';
 
+import {mainHallWorldPoint,mainBarWorldPoint,mainHallOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
 const site=([x,y,z])=>studyToSite({x,y,z});
+const mapPoint=(p,fn)=>{const [x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
+const hall=p=>mapPoint(site(p),mainHallWorldPoint),bar=p=>mapPoint(site(p),mainBarWorldPoint);
 const towerSite=p=>site(smokingToAuthor(p));
 test('smoking enclosure projects outward from the entrance-side facade with distinct opaque and glazed faces',()=>{
   const s=layout.architecturalCirculation.smoking;
@@ -31,8 +34,8 @@ function walk(route){
 }
 test('folded main stair reaches the main floor and returns around the open foyer void',()=>{
   walk(layout.architecturalCirculation.mainStair.siteRoute);
-  assert.equal(canStand(site([8,.05,11]),layout),true,'under upper landing has body clearance');
-  assert.equal(canStand(site([11,5.45,17]),layout),false,'void is not filled with a phantom support slab');
+  assert.equal(canStand(hall([8,.05,11]),layout),true,'under upper landing has body clearance');
+  assert.equal(canStand(hall([11,5.45,17]),layout),false,'void is not filled with a phantom support slab');
   assert.ok(!layout.parts.some(p=>p.name==='main stair tread'),'old straight stair retired');
 });
 test('upper main flight rises toward the DJ-side floor rim without a long return bridge',()=>{
@@ -45,7 +48,7 @@ test('upper main flight rises toward the DJ-side floor rim without a long return
     'G21/G23 upper flight arrives toward the DJ end, rather than returning from the opposite rim');
   assert.ok(!layout.floors.some(f=>f.name==='main upper return'),'no unsupported long return bridge');
   const arrival=layout.floors.find(f=>f.name==='main upper turn');
-  assert.ok(arrival.z[1]-arrival.z[0]<2.1,'only a short landing bridges the flight to the gallery edge');
+  assert.ok(Math.min(...arrival.polygon.map((p,i)=>Math.hypot(p[0]-arrival.polygon[(i+1)%4][0],p[1]-arrival.polygon[(i+1)%4][1])))<2.1,'only a short landing bridges the flight to the gallery edge');
 });
 test('visible main-flight stringers stop the body approaching their low undersides',()=>{
   for(const name of ['main stair','main upper flight']){
@@ -53,9 +56,9 @@ test('visible main-flight stringers stop the body approaching their low undersid
     assert.equal(parts.length,32);
     for(const part of parts){const s=layout.solids.find(s=>s.renderPart===part);assert.ok(s?.undersideOnly&&s.treadFloor.name===name);}
   }
-  let p={x:4.761803,y:.05,z:18.136704};assert.ok(canStand(p,layout));
-  for(let i=0;i<26;i++)p=moveVisitor(p,{x:.02,z:0},layout);
-  assert.ok(p.x<5.26,'body must stop before the visible low stringer, including its below-tread depth');
+  let p=mapPoint({x:4.761803,y:.05,z:18.136704},mainHallWorldPoint);assert.ok(canStand(p,layout));
+  for(let i=0;i<26;i++)p=moveVisitor(p,{x:0,z:-.02},layout);
+  assert.ok(mainHallOriginalPoint(p).x<5.26,'body must stop before the visible low stringer, including its below-tread depth');
   assert.ok(canStand(p,layout));
 });
 test('wardrobe connects through a real glass doorway to main stairs and ground WC in both directions',()=>{
@@ -120,7 +123,7 @@ test('replacement landing guards block the full body independently of missing fl
     ['smoking escape middle',[25.5,2.75,-11.3],[25.5,2.75,-12.7]],
     ['smoking enclosed middle',[25.5,7.25,-11.3],[25.5,7.25,-12.7]]];
   for(const [name,a,b] of checks){
-    const frame=name.startsWith('smoking')?towerSite:site;
+    const frame=name.startsWith('smoking')?towerSite:name.startsWith('Eisbar')?bar:hall;
     const p=frame(a),target=frame(b),space={floors:[{x:[-100,100],z:[-100,100],y:a[1]}],
       solids:layout.solids.filter(s=>s.name.startsWith('Architecture '+name))};
     assert.ok(space.solids.length&&canStand(p,space),name+' start');
@@ -141,7 +144,7 @@ test('tower posts touch actual landing cross-girders and hoist is outside the up
     assert.ok(layout.parts.some(p=>p.name.includes('smoking')&&p.name.includes('landing')&&!p.name.includes('cross-girder')&&
       Math.abs(p.center[1]-p.size[1]/2-top)<1e-8));
   }
-  const p=site([16.2,10.75,-17]);assert.ok(canStand(p,layout));
+  const p=bar([16.2,10.75,-17]);assert.ok(canStand(p,layout));
   for(const part of layout.parts.filter(p=>/Architecture Eisbar (hoist|hook)/.test(p.name))){
     const s=layout.solids.find(s=>s.renderPart===part);assert.ok(s,'Hoist has collision');
     const dx=p.x-Math.max(s.x[0],Math.min(p.x,s.x[1])),dz=p.z-Math.max(s.z[0],Math.min(p.z,s.z[1]));

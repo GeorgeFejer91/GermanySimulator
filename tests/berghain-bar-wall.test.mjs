@@ -6,6 +6,10 @@ import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghai
 import {createMainBarGeometries} from '../assets/models/berghain/main-bar.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 
+import {mainHallWorldPoint,mainHallOriginalPoint,mainBarWorldPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const registered=(p,fn=mainHallWorldPoint)=>{const[x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
+const barPoint=p=>registered(p,mainBarWorldPoint);
+
 test('the bar has the architect-reported eleven-metre room and actual circular reliefs in two rows',()=>{
  const wall=layout.mainBar.interiorFacade;
  assert.ok(wall,'The photographed historic interior facade is missing');
@@ -20,7 +24,7 @@ test('the bar has the architect-reported eleven-metre room and actual circular r
   assert.ok(bounds.max.y-bounds.min.y>.99,'The normalized relief must retain real depth');
   for(const relief of reliefs){
    const actual=bounds.clone().applyMatrix4(new THREE.Matrix4().fromArray(relief.matrix));
-   assert.ok(actual.max.x-actual.min.x>.04&&actual.max.x-actual.min.x<.1);
+   assert.ok(actual.max.z-actual.min.z>.04&&actual.max.z-actual.min.z<.1);
    assert.ok(actual.max.y-actual.min.y>1.1&&actual.max.y-actual.min.y<1.3);
   }
  }finally{for(const item of Object.values(geometries))item.dispose();}
@@ -47,7 +51,7 @@ test('the photographed blue gridded roof sits in real recesses above concrete cr
  };
  try{
   const pane=panes.find(p=>p.center[0]<roof.center[0]&&p.center[2]>roof.center[2]),beam=beams.find(p=>p.name.endsWith('roof cross-beam'));
-  const panelHit=hitAt(pane.center[0],pane.center[2]),beamHit=hitAt(pane.center[0],beam.center[2]);
+  const panelHit=hitAt(pane.center[0],pane.center[2]),beamHit=hitAt(beam.center[0],pane.center[2]);
   assert.equal(panelHit.part.role,'roof appearance pane');assert.equal(beamHit.part.role,'roof beam');
   assert.ok(panelHit.y-beamHit.y>.3,'Blue panes must be geometrically above the beam underside');
   for(const p of panes)assert.equal(model.getObjectByName([p.section,p.material,p.shape].join('/')).material.transparent,false,'Unverified optical material must not create a hole through the roof');
@@ -124,14 +128,14 @@ test('recessed windows and flanking masonry have different actual depth in the s
  const model=createBerghainModel(),ray=new THREE.Raycaster();model.updateMatrixWorld(true);
  const partFor=hit=>{const [section,material,shape]=hit.object.name.split('/');return layout.parts.filter(p=>p.section===section&&p.material===material&&p.shape===shape)[hit.instanceId];};
  const hitAt=(z,y)=>{
-  ray.set(new THREE.Vector3(17.1,y,z),new THREE.Vector3(1,0,0));
+  const p=barPoint({x:17.1,y,z});ray.set(new THREE.Vector3(p.x,p.y,p.z),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent);
   assert.ok(hit);return {hit,part:partFor(hit)};
  };
  try{
   for(const bay of wall.bayCenters){
-   const window=hitAt(bay[2],layout.mainBar.floorHeight+3.4);
-   const masonry=hitAt(bay[2]+1.02,layout.mainBar.floorHeight+3.4);
+   const window=hitAt(mainBarOriginalPoint({x:bay[0],y:bay[1],z:bay[2]}).z,layout.mainBar.floorHeight+3.4);
+   const masonry=hitAt(mainBarOriginalPoint({x:bay[0],y:bay[1],z:bay[2]}).z+1.02,layout.mainBar.floorHeight+3.4);
    assert.equal(window.part.fixture,'main-bar-interior-facade');assert.match(window.part.name,/window backing/);
    assert.equal(masonry.part.fixture,'main-bar-interior-facade');
    assert.ok(window.hit.distance-masonry.hit.distance>.18,'The window must sit inside a real masonry reveal');
@@ -142,11 +146,11 @@ test('recessed windows and flanking masonry have different actual depth in the s
 test('wall detailing preserves the full guest aisle and the service aisle behind the counter',()=>{
  assert.ok(layout.mainBar.interiorFacade,'The wall must be present for this route check');
  for(const x of [13.72,16.72]){
-  let position={x,y:5.45,z:-8.7};assert.ok(canStand(position,layout));
+  let position=barPoint({x,y:5.45,z:-8.7});assert.ok(canStand(position,layout));
   for(const z of [5.9,-8.7]){
-   const start=position.z,steps=Math.ceil(Math.abs(z-start)/.05);
-   for(let i=0;i<steps;i++)position=moveVisitor(position,{x:0,z:(z-start)/steps},layout);
-   assert.ok(Math.abs(position.z-z)<.02,'Both full-body aisles must remain traversable');
+   const start=mainBarOriginalPoint(position).z,steps=Math.ceil(Math.abs(z-start)/.05);
+   for(let i=0;i<steps;i++)position=moveVisitor(position,{x:(z-start)/steps,z:0},layout);
+   assert.ok(Math.abs(mainBarOriginalPoint(position).z-z)<.02,'Both full-body aisles must remain traversable');
   }
  }
 });
@@ -154,7 +158,7 @@ test('wall detailing preserves the full guest aisle and the service aisle behind
 test('the photographed upper relief row remains visible across the bar rather than hidden behind an inferred beam',()=>{
  const wall=layout.mainBar.interiorFacade,model=createBerghainModel(),ray=new THREE.Raycaster();model.updateMatrixWorld(true);
  try{
-  const bay=wall.bayCenters[2];ray.set(new THREE.Vector3(13.72,11.65,bay[2]),new THREE.Vector3(1,0,0));
+  const bay=wall.bayCenters[2],old=mainBarOriginalPoint({x:bay[0],y:bay[1],z:bay[2]}),p=barPoint({x:13.72,y:11.65,z:old.z});ray.set(new THREE.Vector3(p.x,p.y,p.z),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent);
   assert.ok(hit);const [section,material,shape]=hit.object.name.split('/');
   const part=layout.parts.filter(p=>p.section===section&&p.material===material&&p.shape===shape)[hit.instanceId];

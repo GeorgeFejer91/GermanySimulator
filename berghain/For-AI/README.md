@@ -1,5 +1,78 @@
 # Berghain reconstruction: goal and work state
 
+### Joint hall registration — accepted for publication
+
+The candidate `output/berghain-joint-hall-runtime`, based on published 285186b,
+registers the main hall, glazed bar, Klo/main WC and main switchback with the
+existing Panorama stair. Karhard G19/21/23/24 and hero guide the open central
+hall, boundary frames, glass-to-DJ-wall corner and offset booth with a closed red
+recess. U02 guides the front public wing/smoking adjacency. These are relative
+source relations; coordinates, dimensions, frame counts and hidden structure
+remain estimates. Admission, Lab, quiet ground WC, Saeule, Panorama and Halle
+retain their accepted layouts. No new private destination is inferred.
+
+The complete lower Eisbar flight, landing guard/opening, side-frame pier row
+and nearby wall speaker now fit together. Both stair widths, full-size piers
+and the visitor body are retained. The foyer wash sits below the slab and reaches
+the ground. Three active lights and two shadow maps remain the night budget.
+
+The 228-file frozen candidate 7345b8f4 passes all 209 Berghain Node checks,
+ten real-input desktop/mobile-emulation/fallback route cases, one six-view
+source/native comparison and two walking descent-view cases. Both independent
+Physics and Camera reviews pass their scoped gates. Nine matched cost samples
+per version retain median p95 frame times of 20.9/7.1/7.2 ms; draw calls rise
+with the opened hall and transferred bytes rise by 19,625. Idle rendering stops;
+normal viewing does not fetch the 59,406,680-byte portable GLB.
+
+Rejected c2d31c63 and 65dbf5ff candidates and their failures remain preserved.
+The final review discloses an unchanged sub-millimetre Panorama floor seam and
+687 retained steel/rubber instances with different in-range seeded shades;
+neither is claimed byte-identical or geometrically perfect. Physical Android
+and perceptual audio listening are NOT RUN. Source/native agreement does not
+establish photographic authenticity. Publication and canonical URL checks are
+the next step; evidence is under `output/berghain-joint-hall-*`.
+
+Full goal ACTIVE. Remaining uncertainty includes roof-grid orientation, hidden
+structural continuity, unsurveyed dimensions, current backstage/FLINTA locations
+and complete photographic/artwork fidelity. README remains the task owner.
+
+
+### Published main switchback correction
+
+Commit `285186b01a3e50151427576b625361ad534c7538`; Pages run 40179272291 succeeded. All 88 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-hall-registration-release.json. Primary staged index unchanged.
+
+The upper main flight rises toward the dance floor through a short arrival;
+the long return bridge is removed. Both flights, turn, guards and stringer
+collision are integrated. The upper approach activates the existing stair
+lighting before descent. Fifty-seven Node checks, ten final local browser cases,
+nine matched cost samples per version and independent Physics/Camera reviews
+pass. Dimensions remain estimates; physical Android is NOT RUN.
+
+The first public mobile runs read the previous room position before its next
+render. The final harness waits for the selected room's actual rendered position;
+logs reproduce the stale read and all three final profiles pass. Production was
+unchanged. See output/berghain-hall-registration-public-harness-note.md.
+
+Full goal ACTIVE. Next: solve AU27's hall/Panorama/Klo orientation and booth-wall
+registration with the ground-room, Eisbar and smoking interfaces in one section.
+Backstage/FLINTA locations and full photographic fidelity remain unresolved.
+
+The next analytical ground-floor study is output/berghain-next-ground-fit.json
+and .png, based on this commit. Turning only Säule places four of six projected
+pier centers inside the retained Lab footprint. Turning Lab too overlaps the
+quiet ground WC by 23.914 m² and admission by 24.471 m². These are model-plan
+intersections, not measured room areas or a runtime correction. They do not prove
+that ground rooms must rotate. The next option keeps Lab, admission, ground WC
+and Säule anchors in place while fitting the upper hall and its foyer frame.
+See output/berghain-next-joint-plan.json and .png and the independent reports
+output/berghain-next-retained-ground-physics.md and -camera.md. Those studies
+identify capital/slab edges, old foyer ribs/supports, the raised Lab gate/slab,
+main/Halle boundary and the detached smoking approach as unresolved interfaces.
+No new arrangement is implemented or accepted. Do not apply a bulk transform.
+
+
 ### Main switchback acceptance
 
 The source-informed main stair now rises toward the dance-floor edge through

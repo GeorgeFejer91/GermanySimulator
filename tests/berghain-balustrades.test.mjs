@@ -7,24 +7,24 @@ import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 
 test('the full visitor cannot cross the foyer balustrade between its main posts',()=>{
-  const point=studyToSite({x:-11.1,y:5.45,z:9.4});
-  const ahead=studyToSite({x:-11.1,y:5.45,z:10.4});
+  const point={x:8.1,y:5.45,z:0};
+  const ahead={x:9.1,y:5.45,z:0};
   const length=Math.hypot(ahead.x-point.x,ahead.z-point.z);
   const normal={x:(ahead.x-point.x)/length,z:(ahead.z-point.z)/length};
   const space={floors:[{x:[-100,100],z:[-100,100],y:5.45}],
-    solids:layout.solids.filter(solid=>solid.balustrade==='foyer-gallery-west')};
+    solids:layout.solids.filter(solid=>solid.name.startsWith('Hall fit gallery central'))};
   for(const offset of [-.21,0,.19]){
-    const start={x:point.x+offset-normal.x*.75,y:5.45,z:point.z-normal.z*.75};
+    const start={x:point.x-normal.z*offset-normal.x*.75,y:5.45,z:point.z+normal.x*offset-normal.z*.75};
     assert.ok(canStand(start,space));
     const stopped=moveVisitor(start,{x:normal.x*1.5,z:normal.z*1.5},space);
-    const crossing=(stopped.x-point.x-offset)*normal.x+(stopped.z-point.z)*normal.z;
+    const crossing=(stopped.x-point.x)*normal.x+(stopped.z-point.z)*normal.z;
     assert.ok(crossing<-.27,'Dense visible steel infill must stop the body on the approach side');
     assert.ok(canStand(stopped,space));
   }
 });
 
 test('each documented rail run has complete human-height infill with exact visible-part solids',()=>{
-  assert.deepEqual(layout.balustrades.map(a=>a.id),['panorama-stair-left','panorama-stair-right','foyer-gallery-west'],
+  assert.deepEqual(layout.balustrades.map(a=>a.id),['panorama-stair-left','panorama-stair-right'],
     'Main switchback and east return now use the photographed plate-sided guards');
   const cube=new THREE.BoxGeometry(1,1,1),point=new THREE.Vector3();
   try{
@@ -71,7 +71,7 @@ test('continuous stair-centre ascent/descent and clear ground beneath the upper 
 test('portable GLB contains the same original-balustrade assemblies as the editable model',()=>{
   const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
   const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
-  assert.equal(gltf.nodes[0].extras.balustrades?.length,3,'The shipped native asset must retain the three unchanged original assemblies');
+  assert.equal(gltf.nodes[0].extras.balustrades?.length,2,'The shipped native asset retains the two original Panorama guards; the gallery edge is rebuilt with the hall');
   assert.deepEqual(gltf.nodes[0].extras.balustrades,layout.balustrades);
   assert.deepEqual(gltf.nodes[0].extras.architecturalCirculation,layout.architecturalCirculation,'Native export includes new circulation and uncertainty metadata');
 });
@@ -80,7 +80,7 @@ test('Gallery-guard first-person camera keeps the eye inside the legal body thro
  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
  const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
  try{
-  for(const position of [8.8,8.9,9.0,9.03].map(z=>studyToSite({x:-2,y:5.45,z}))){
+  for(const position of [7.4,7.5,7.6,7.7].map(x=>({x,y:5.45,z:0}))){
    assert.ok(canStand(position,layout));
    for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
     walk.camera(camera,position,yaw,pitch);

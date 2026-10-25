@@ -72,7 +72,7 @@ test('the complete walking avatar clears suspended foyer furniture across all ma
   const avatar=createVisitorAvatar(),point=new THREE.Vector3();let legal=0;
   try{
     for(const dx of [-.7,0,.7])for(let sample=0;sample<=100;sample++){
-      const t=sample/100,position={x:a[0]+t*(b[0]-a[0])+dx,y:ramp.y+t*(ramp.endY-ramp.y),z:a[1]+t*(b[1]-a[1])};
+      const t=sample/100,length=Math.hypot(b[0]-a[0],b[1]-a[1]),position={x:a[0]+t*(b[0]-a[0])-dx*(b[1]-a[1])/length,y:ramp.y+t*(ramp.endY-ramp.y),z:a[1]+t*(b[1]-a[1])+dx*(b[0]-a[0])/length};
       if(!canStand(position,layout))continue;legal++;
       avatar.group.position.set(position.x,position.y,position.z);avatar.pose(.03,0);avatar.group.updateMatrixWorld(true);
       const body=new THREE.Box3().setFromObject(avatar.group);

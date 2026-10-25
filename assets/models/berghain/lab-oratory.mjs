@@ -59,11 +59,12 @@ export function addLabRooms(layout,{box,floor,beam,railing,stair}){
   layout.solids=layout.solids.filter(s=>s.name!=='Säule glass partition left');
   for(const [a,b]of [[-21.5,1.5],[3.7,17.5]])
     box('Säule glass partition left',[-4,2.6,(a+b)/2],[.12,5.1,b-a],'lightGlass','interior',true);
-  // The raised panel and tracks occupy the taller Säule side of the boundary,
-  // so their inferred upper mechanism never cuts through the lower Lab soffit.
-  box('Lab raised steel-glass gate',[-3.8,3.9,2.6],[.12,2.5,2.2],'lightGlass','interior',true);
-  for(const z of [1.43,3.77])box('Lab gate track',[-3.8,2.85,z],[.17,5.6,.11],'steel','interior',true);
-  box('Lab gate upper head',[-3.8,5.64,2.6],[.18,.14,2.5],'steel','interior',true);
+  // A15 supports raised steel/glass separations, not this exact gate or bay.
+  // Keep the estimated mechanism on the taller Säule side and wholly beneath
+  // the first-floor underside (5.05 m), with 2.67 m clear below the panel.
+  box('Lab raised steel-glass gate',[-3.8,3.72,2.6],[.12,2.1,2.2],'lightGlass','interior',true);
+  for(const z of [1.43,3.77])box('Lab gate track',[-3.8,2.47,z],[.17,4.84,.11],'steel','interior',true);
+  box('Lab gate upper head',[-3.8,4.94,2.6],[.18,.14,2.5],'steel','interior',true);
   box('Lab front room partition',[-12.75,2.09,9.4],[17.5,4.08,.18],'labWall','interior',true);
   box('Lab concrete soffit',[-12.75,4.24,-6.05],[17.5,.18,30.9],'labWall','interior',true);
   for(const z of [-18,-7,6])box('Lab low concrete beam',[-12.75,3.83,z],[17.5,.46,.65],'labWall','interior',true);

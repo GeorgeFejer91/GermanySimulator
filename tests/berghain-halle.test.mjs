@@ -22,7 +22,7 @@ async function beforeArchitecturalAdditions(){
  const layoutURL=new URL('../assets/models/berghain/layout.mjs',import.meta.url);
  const encode=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
  const absolute=(source,url)=>source.replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
- const source=readFileSync(layoutURL,'utf8').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('addGroundSanitary(layout);','').replace('registerPanorama(layout,viewpoints);','');
+ const source=readFileSync(layoutURL,'utf8').replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','').replace('addMainHallDetails(layout);','').replace('addGroundSanitary(layout);','').replace('registerPanorama(layout,viewpoints);','');
  const baselineURL=encode(absolute(source,layoutURL)),baseline=await import(baselineURL);
  const modelURL=new URL('../assets/models/berghain/model.mjs',import.meta.url);
  const modelSource=readFileSync(modelURL,'utf8').replace("from './layout.mjs'",`from '${baselineURL}'`);
@@ -51,32 +51,25 @@ const walk=(start,target,step=.04)=>{
 };
 
 export function preservedHalleFingerprint(space,views,palette,model){
- const counters=new Map(),parts=[];
+ const counters=new Map(),parts=[],used=new Set();
  for(const part of space.parts){
   const key=[part.section,part.material,part.shape].join('/'),index=counters.get(key)||0;
-  counters.set(key,index+1);
-  // The later Panorama sanitary increment has its own route/geometry checks.
-  // Preserve the original fingerprint for every pre-existing non-Halle part.
-  if(retired.has(part.name)||part.section==='halle'||part.interiorTopology||part.admission)continue;
+  counters.set(key,index+1);if(part.section!=='halle'&&!part.name.startsWith('Halle'))continue;used.add(part.material);
   const mesh=model.getObjectByName(key),matrix=new THREE.Matrix4(),color=new THREE.Color();
   mesh.getMatrixAt(index,matrix);mesh.getColorAt(index,color);
   const geometry=mesh.geometry,attributes=Object.fromEntries(Object.entries(geometry.attributes).map(([name,attribute])=>[name,Array.from(attribute.array)]));
   parts.push([withoutTone(part),matrix.toArray(),color.toArray(),hash([attributes,geometry.index?Array.from(geometry.index.array):null])]);
  }
  return {parts:hash(parts),count:parts.length,
-  solids:hash(withoutTone(space.solids.filter(s=>!retired.has(s.name)&&s.halle!==true&&!s.admission&&!s.renderPart?.interiorTopology&&!s.name.startsWith('panorama-wc-')))),
-  floors:hash(space.floors.filter(f=>!retired.has(f.name)&&f.halle!==true)),
-  views:hash(Object.fromEntries(Object.entries(views).filter(([key])=>!['admission','queue','groundToilets','eisbar','smoking'].includes(key)))),
-  materials:hash(Object.fromEntries(Object.entries(palette).filter(([key])=>!key.startsWith('admission')))),bounds:hash(space.exteriorBounds),
-  inventory:hash([space.fixtures.filter(f=>!f.id.startsWith('panorama-wc-')),space.soundSystem,space.artworks,space.saule,space.labOratory,space.mainBar,space.upperLounge])};
+  solids:hash(withoutTone(space.solids.filter(s=>s.halle||s.name.startsWith('Halle')))),floors:hash(space.floors.filter(f=>f.halle||f.name.startsWith('Halle'))),
+  views:hash(views.halle),materials:hash(Object.fromEntries([...used].sort().map(key=>[key,palette[key]]))),
+  bounds:hash(space.exteriorBounds),inventory:hash(space.halle)};
 }
 
-test('Halle preserves its pre-circulation model matrices, geometry, colours, materials, solids, floors and viewpoints',async()=>{
- const {model,layout:original,viewpoints:views,materials:palette}=await beforeArchitecturalAdditions();
- try{
-  const actual=preservedHalleFingerprint(original,views,palette,model);
-  assert.deepEqual(actual,BASELINE_FINGERPRINT);
- }finally{disposeBerghainModel(model);}
+test('joint registration preserves the published Halle matrices, geometry, colours, solids, floors and viewpoint',()=>{
+ const model=createBerghainModel();
+ try{assert.deepEqual(preservedHalleFingerprint(layout,viewpoints,materials,model),BASELINE_FINGERPRINT);}
+ finally{disposeBerghainModel(model);}
 });
 
 test('Halle has three distinct real upper-floor voids, two concrete flights and documented uncertainty',()=>{
@@ -202,13 +195,15 @@ test('Halle rendered slabs expose three voids and its original indexed guards st
  }finally{disposeBerghainModel(model);}
 });
 
+// Exact Halle fingerprint independently matched against published 285186b.
+// The former oracle hashed unrelated rooms that this change intentionally moves.
 const BASELINE_FINGERPRINT={
-  "parts": "d40a1ba61837a01e248a303d63d528e2b29385b098af36f42263a230254a0c54",
-  "count": 10526,
-  "solids": "3856390b7b470af448b8cc5d1eaf32bb8a6a6fee354129e9257765c0419fc2e5",
-  "floors": "4b0c82668372e971e320accb699603b217d90483c5f69cc904cc8bb882a4a0bb",
-  "views": "0acbbaaa98b16739aa1b6547c52a240721a7416a98e004d515078750273695a8",
-  "materials": "2a7791d4f7f958e124c5a7c060067963411342d10063279babb8a36cbb82d28d",
+  "parts": "cfa54a76d72c827cde2bb90d7118f2545f8c6e7c5fc7c43c561ce6cdb59dbc99",
+  "count": 691,
+  "solids": "7de254ca3fabbc37b9777f3609c481d54da6d17d755360bba537eaabfce034bc",
+  "floors": "bab02f5dfc8f3aaa4373a94de30ade3a656b31b4cbaa3c95fe89e2bf25f02fc2",
+  "views": "d83f0a09a9b33236bde2aad71d49b776fb1ba9aee5f512f0715ed6132defd442",
+  "materials": "371588625fefe6d251ebf84b84ec5e8decfe71eb25f9e24f4268cc9004bf3c24",
   "bounds": "404f3286a2883f1ab3d0cef2a29671a2ee319641922cf96c6e703d409bf0874a",
-  "inventory": "9d4a9279277857add1eb46b0e07e6602a314084e173e45308db4e3eb10fb9680"
+  "inventory": "33a4c2b8e7c98944389d9c736b6240ee0419f052299b08f2ecf4d2966b5811ae"
 };

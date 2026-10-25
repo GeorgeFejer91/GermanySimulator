@@ -39,7 +39,7 @@ test('the retained service aisle is body-clear and the rack stays separate from 
  let p={...route[0]};assert.ok(canStand(p,layout));
  for(const target of [route[1],route[0]]){
   const n=Math.ceil(Math.abs(target.z-p.z)/.02),dz=(target.z-p.z)/n;
-  for(let i=0;i<n;i++){p=moveVisitor(p,{x:0,z:dz},layout);assert.ok(canStand(p,layout));}
+  for(let i=0;i<n;i++){p=moveVisitor(p,{x:0,z:dz},layout);assert.ok(canStand(p,layout),JSON.stringify({p,dz}));}
   assert.ok(Math.abs(p.z-target.z)<.04);
  }
  const rack=layout.solids.find(s=>s.name==='panorama-bottle-rack assembly clearance');
@@ -51,15 +51,15 @@ test('the actual structural beams leave full-body headroom across all five Panor
  const beams=layout.parts.filter(p=>p.name==='structural beam').map(p=>new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(new THREE.Matrix4().fromArray(p.matrix)));
  for(const dz of [-.9,-.7,0,.7,.9]){
   const [a,b]=layout.panoramaRegistration.stairRoute.slice(0,2).map(p=>({...p,z:p.z+dz}));
-  let p={...a};assert.ok(canStand(p,layout));
+  let p={...a};assert.ok(canStand(p,layout),JSON.stringify({p,dz}));
   for(const target of [b,a]){
    const n=Math.ceil(Math.hypot(target.x-p.x,target.z-p.z)/.025),step={x:(target.x-p.x)/n,z:(target.z-p.z)/n};
    for(let i=0;i<n;i++){
-    p=moveVisitor(p,step,layout);assert.ok(canStand(p,layout));
+    p=moveVisitor(p,step,layout);assert.ok(canStand(p,layout),JSON.stringify({p,dz}));
     const body=new THREE.Box3(new THREE.Vector3(p.x-.28,p.y+.12,p.z-.28),new THREE.Vector3(p.x+.28,p.y+1.8,p.z+.28));
     assert.ok(beams.every(b=>!b.intersectsBox(body)),'visible beam intersects the occupied body '+JSON.stringify(p));
    }
-   assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.09);
+   assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.09,JSON.stringify({p,target,dz}));
   }
  }
  assert.equal(layout.panoramaRegistration.stairClearance.retired.length,1);

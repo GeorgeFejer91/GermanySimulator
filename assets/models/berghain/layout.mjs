@@ -18,6 +18,7 @@ import {addArchitecturalCirculation,smokingToAuthor} from './architectural-circu
 import {addMainHallDetails} from './main-hall-details.mjs';
 import {addGroundSanitary} from './ground-sanitary.mjs';
 import {registerPanorama} from './panorama-registration.mjs';
+import {registerMainHall} from './main-hall-registration.mjs';
 
 export const materials = {
   ...admissionMaterials,
@@ -350,3 +351,4 @@ addHalleStructure(layout);
 addMainHallDetails(layout);
 addGroundSanitary(layout);
 registerPanorama(layout,viewpoints);
+registerMainHall(layout,viewpoints);

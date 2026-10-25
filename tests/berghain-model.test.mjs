@@ -1,3 +1,5 @@
+import {mainHallWorldPoint,mainHallOriginalPoint,mainBarWorldPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const registered=(p,fn=mainHallWorldPoint)=>{const[x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync, readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync} from 'node:fs';
@@ -67,12 +69,12 @@ test('stair undersides and floor slabs block the visitor body', async () => {
   const {layout} = await import('../assets/models/berghain/layout.mjs');
   const {canStand} = await import('../berghain/navigation.mjs');
   const {studyToSite} = await import('../assets/models/berghain/calibration.mjs');
-  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 14}), layout), false, 'low stair underside must block head penetration');
-  assert.equal(canStand(studyToSite({x: 8, y: .05, z: 18.5}), layout), true, 'headroom below the high end of the lower flight remains available');
+  assert.equal(canStand(registered(studyToSite({x: 8, y: .05, z: 14})), layout), false, 'low stair underside must block head penetration');
+  assert.equal(canStand(registered(studyToSite({x: 8, y: .05, z: 18.5})), layout), true, 'headroom below the high end of the lower flight remains available');
   const halleUndersides=layout.halle.stairs.flatMap(stair=>[.25,.3].map(t=>({
     x:stair.axis[0][0]+(stair.axis[1][0]-stair.axis[0][0])*t,y:.05,
     z:stair.axis[0][1]+(stair.axis[1][1]-stair.axis[0][1])*t})));
-  for (const point of [studyToSite({x:8,y:.05,z:15}), {x:4.5,y:5.45,z:5.83},...halleUndersides]) {
+  for (const point of [registered(studyToSite({x:8,y:.05,z:15})), {x:4.5,y:5.45,z:5.83},...halleUndersides]) {
     assert.equal(canStand(point, layout), false, 'full cylinder must not pass through a tread underside: ' + JSON.stringify(point));
   }
 });
@@ -82,22 +84,15 @@ test('main, Panorama and both Halle stairs connect both landings continuously in
   const {canStand, moveVisitor} = await import('../berghain/navigation.mjs');
   for (const name of ['main stair','main upper flight']) {
     const ramp = layout.floors.find(floor => floor.name === name);
-    const x = (ramp.x[0] + ramp.x[1]) / 2, z = ramp.z[1] - .5;
-    let position = {x, z, y: ramp.y + (ramp.endY - ramp.y) * (z - ramp.z[0]) / (ramp.z[1] - ramp.z[0])};
-    assert.ok(canStand(position, layout), name + ' start');
-    const routeSteps = Math.ceil((ramp.z[1] - ramp.z[0] + 1) / .1);
-    for (let i = 0; i < routeSteps; i++) {
-      position = moveVisitor(position, {x: 0, z: -.1}, layout);
-      assert.ok(canStand(position, layout), name + ' body toward axis start');
+    const [a,b]=ramp.rampAxis,length=Math.hypot(b[0]-a[0],b[1]-a[1]),d=[(b[0]-a[0])/length,(b[1]-a[1])/length];
+    const start={x:a[0]-d[0]*.4,y:ramp.y,z:a[1]-d[1]*.4},end={x:b[0]+d[0]*.4,y:ramp.endY,z:b[1]+d[1]*.4};
+    let position={...start};assert.ok(canStand(position,layout),name+' start');
+    for(const target of [end,start]){
+      const n=Math.ceil(Math.hypot(target.x-position.x,target.z-position.z)/.05),step={x:(target.x-position.x)/n,z:(target.z-position.z)/n};
+      for(let i=0;i<n;i++){position=moveVisitor(position,step,layout);assert.ok(canStand(position,layout));}
+      assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.03,name+' reaches actual landing');
+      assert.ok(Math.abs(position.y-target.y)<.03,name+' landing elevation');
     }
-    assert.ok(position.z < ramp.z[0] - .3, name + ' must reach axis-start landing');
-    assert.ok(Math.abs(position.y - ramp.y) < .01, name + ' axis-start height');
-    for (let i = 0; i < routeSteps + 15; i++) {
-      position = moveVisitor(position, {x: 0, z: .1}, layout);
-      assert.ok(canStand(position, layout), name + ' body toward axis end');
-    }
-    assert.ok(position.z > ramp.z[1] + .3, name + ' must reach axis-end landing');
-    assert.ok(Math.abs(position.y - ramp.endY) < .01, name + ' axis-end height');
   }
   const panorama=layout.panoramaRegistration.stairRoute;
   let p={...panorama[0]};

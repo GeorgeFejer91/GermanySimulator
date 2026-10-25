@@ -1,16 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {layout} from '../assets/models/berghain/layout.mjs';
+import {mainBarWorldPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createMainBarGeometries} from '../assets/models/berghain/main-bar.mjs';
 
+const toWorld=p=>{const[x,y,z]=mainBarWorldPoint([p.x,p.y,p.z]);return{x,y,z};};
+const barSite=p=>toWorld(studyToSite(p));
+const original=p=>mainBarOriginalPoint({x:p.center[0],y:p.center[1],z:p.center[2]});
+
 test('Main-bar first-person camera keeps the eye inside the legal body through turns',async()=>{
  const {createWalkthrough}=await import('../berghain/walkthrough.mjs');
  const walk=createWalkthrough(),camera=new THREE.PerspectiveCamera(60,1.5,.08,500),direction=new THREE.Vector3();
  try{
-  for(const position of [15.8,16.1].map(x=>studyToSite({x,y:5.45,z:-4}))){
+  for(const position of [15.8,16.1].map(x=>barSite({x,y:5.45,z:-4}))){
    assert.ok(canStand(position,layout));
    for(let yaw=0;yaw<Math.PI*2;yaw+=.02)for(const pitch of [-.8,0,.8]){
     walk.camera(camera,position,yaw,pitch);
@@ -35,12 +40,12 @@ test('the long-bar assembly replaces the two-metre placeholder with photo-inform
 });
 
 test('the actual glass screen separates the hall while the body can enter, traverse and leave the guest aisle',()=>{
-  const glass=studyToSite({x:15.4,y:5.45,z:-5});
+  const glass=barSite({x:15.4,y:5.45,z:-5});
   assert.equal(canStand(glass,layout),false,'Visible glass must physically stop the full body');
   const targets=[[14,7],[16.1,7],[16.1,4],[16.1,-13.5],[16.1,4],[16.1,7],[14,7]];
-  let position=studyToSite({x:targets[0][0],y:5.45,z:targets[0][1]});assert.ok(canStand(position,layout));
+  let position=barSite({x:targets[0][0],y:5.45,z:targets[0][1]});assert.ok(canStand(position,layout));
   for(const [x,z]of targets.slice(1)){
-    const target=studyToSite({x,y:5.45,z}),dx=target.x-position.x,dz=target.z-position.z;
+    const target=barSite({x,y:5.45,z}),dx=target.x-position.x,dz=target.z-position.z;
     const steps=Math.ceil(Math.hypot(dx,dz)/.06);
     for(let i=0;i<steps;i++)position=moveVisitor(position,{x:dx/steps,z:dz/steps},layout);
     assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<.02,'Full body must traverse the real bar aisle');
@@ -51,8 +56,8 @@ test('the actual glass screen separates the hall while the body can enter, trave
 test('actual bar meshes fit around the retained concrete columns and stool collision uses human-sized seats',()=>{
   const geometries={box:new THREE.BoxGeometry(1,1,1),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),...createMainBarGeometries()};
-  const columns=layout.solids.filter(s=>s.name==='load-bearing column');
-  assert.equal(columns.length,15,'Retain the structural grid');
+  const columns=layout.solids.filter(s=>s.name==='load-bearing column'||s.name==='Hall fit side frame pier');
+  assert.equal(columns.length,23,'Retain fifteen ground/front supports and eight separate upper boundary piers');
   const point=new THREE.Vector3();let intersections=0;
   try{
     for(const part of layout.parts.filter(p=>p.fixture?.startsWith('main-'))){
@@ -71,7 +76,7 @@ test('actual bar meshes fit around the retained concrete columns and stool colli
 
 test('stools follow the visible curved counter with separated seats and complete collision bounds',()=>{
   const corner=layout.parts.find(p=>p.fixture==='main-long-bar'&&p.shape==='main-bar-corner-body');
-  const seats=layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&p.center[2]>corner.center[2]+.1);
+  const seats=layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&original(p).z>original(corner).z+.1);
   assert.ok(seats.length>=3,'The straight row must continue around the return');
   const angles=seats.map(p=>Math.atan2(p.center[2]-corner.center[2],p.center[0]-corner.center[0]));
   assert.ok(Math.max(...angles)-Math.min(...angles)>.8,'Seats occupy different sides of the curve');
@@ -99,8 +104,8 @@ test('stools follow the visible curved counter with separated seats and complete
 });
 
 test('the full visitor can walk around the furnished bar return in both directions and escape stool contact',()=>{
-  const c=layout.parts.find(p=>p.fixture==='main-long-bar'&&p.shape==='main-bar-corner-body').center;
-  const arc=Array.from({length:211},(_,i)=>{const a=(180-i*.5)*Math.PI/180;return{x:c[0]+2.9*Math.cos(a),y:5.45,z:c[2]+2.9*Math.sin(a)};});
+  const corner=layout.parts.find(p=>p.fixture==='main-long-bar'&&p.shape==='main-bar-corner-body'),c=corner.center,old=original(corner);
+  const arc=Array.from({length:211},(_,i)=>{const a=(180-i*.5)*Math.PI/180;return toWorld({x:old.x+2.9*Math.cos(a),y:5.45,z:old.z+2.9*Math.sin(a)});});
   for(const route of [arc,[...arc].reverse()]){
     let position=route[0];assert.ok(canStand(position,layout));
     for(const target of route.slice(1)){
@@ -109,7 +114,7 @@ test('the full visitor can walk around the furnished bar return in both directio
       assert.ok(Math.hypot(position.x-target.x,position.z-target.z)<1e-6,'Continuous body-clear arc');
     }
   }
-  for(const seat of layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&p.center[2]>c[2]+.1)){
+  for(const seat of layout.parts.filter(p=>p.shape==='main-bar-stool-seat'&&original(p).z>old.z+.1)){
     const dx=seat.center[0]-c[0],dz=seat.center[2]-c[2],length=Math.hypot(dx,dz),out={x:dx/length,z:dz/length};
     const start={x:seat.center[0]+out.x*.85,y:5.45,z:seat.center[2]+out.z*.85};assert.ok(canStand(start,layout));
     const stopped=moveVisitor(start,{x:-out.x*2,z:-out.z*2},layout);assert.ok(canStand(stopped,layout));

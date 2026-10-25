@@ -5,7 +5,9 @@ import {layout} from '../assets/models/berghain/layout.mjs';
 import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
+import {mainHallWorldPoint,mainBarWorldPoint,mainHallOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
 const site=([x,y,z])=>studyToSite({x,y,z});
+const frameSite=p=>{const q=site(p),[x,y,z]=mainHallWorldPoint([q.x,q.y,q.z]);return{x:x+.65,y,z};};
 const parts=layout.parts.filter(p=>p.foyerFrame);
 const limits=p=>layout.solids.find(s=>s.renderPart===p);
 test('gallery piers and haunches meet the edge beam beneath the retained slab',()=>{
@@ -22,7 +24,7 @@ test('gallery piers and haunches meet the edge beam beneath the retained slab',(
 test('the radiator has a nearby concrete pier behind its complete fin array',()=>{
  const model=createBerghainModel();model.updateMatrixWorld(true);
  try{
-  const a=site([4.5,1.55,9.64]),b=site([4.5,1.55,9.05]);
+  const a=frameSite([4.5,1.55,9.64]),b=frameSite([4.5,1.55,9.05]);
   const ray=new THREE.Raycaster(new THREE.Vector3(a.x,a.y,a.z),new THREE.Vector3(b.x-a.x,0,b.z-a.z).normalize());
   const hit=ray.intersectObject(model,true)[0];assert.ok(hit&&hit.distance>.001&&hit.distance<.08,'radiator must stand immediately in front of concrete');
   const group=layout.parts.filter(p=>[p.section,p.material,p.shape].join('/')===hit.object.name);
@@ -36,16 +38,17 @@ test('the radiator has a nearby concrete pier behind its complete fin array',()=
 });
 test('pier collision blocks all approaches while the gallery arrival remains above it',()=>{
  for(const x of layout.architecturalCirculation.foyerFrame.author.pierXs){
-  const center=site([x,.05,9.05]);assert.equal(canStand(center,layout),false);
-  const pier=parts.find(p=>p.name.endsWith('pier')&&Math.abs(p.center[0]-center.x)<.01);
+  const center=frameSite([x,.05,9.05]);assert.equal(canStand(center,layout),false);
+  const pier=parts.find(p=>p.name.endsWith('pier')&&Math.hypot(p.center[0]-center.x,p.center[2]-center.z)<.01);
   const space={floors:[{x:[-100,100],z:[-100,100],y:.05}],solids:[limits(pier)]};
   for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
-   let p=site([x+dx*2,.05,9.05+dz*2]);assert.ok(canStand(p,space));
+   let p=frameSite([x+dx*2,.05,9.05+dz*2]);assert.ok(canStand(p,space));
    const start={...p};p=moveVisitor(p,{x:(center.x-p.x)*2,z:(center.z-p.z)*2},space);
    assert.ok(canStand(p,space));assert.ok(Math.hypot(p.x-start.x,p.z-start.z)<2,'large movement cannot cross the pier');
   }
  }
- assert.ok(canStand(site([15.5,5.45,9.1]),layout),'existing upper return connects above the support');
+ assert.ok(canStand({x:7.5,y:5.45,z:0},layout),'public gallery remains walkable beside its edge guard');
+ assert.equal(canStand({x:8.1,y:5.45,z:0},layout),false,'the widened gallery still contains the body at its visible edge');
  assert.ok(canStand(site([0,.05,14.4]),layout),'wardrobe crossing stays clear');
 });
 test('actual haunch vertices remain inside their declared overhead collision envelope',()=>{

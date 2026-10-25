@@ -78,14 +78,18 @@ test('visible component surfaces fit their shared transformed collision envelope
   }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
 
+import {mainHallWorldPoint,mainHallOriginalPoint,mainBarWorldPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
+const registered=(p,fn=mainHallWorldPoint)=>{const[x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
+const hallSite=p=>registered(studyToSite(p));
+
 test('a visitor stops at the bass wall and can traverse its western circulation aisle',()=>{
-  const start=studyToSite({x:2,y:5.45,z:-5.5});
+  const start=hallSite({x:2,y:5.45,z:-5.5});
   assert.ok(canStand(start,layout));
-  const blocked=moveVisitor(start,{x:-5,z:0},layout);
-  assert.ok(canStand(blocked,layout)&&blocked.x>studyToSite({x:-1.6,y:5.45,z:-5.5}).x,'Bass wall blocks the whole body');
-  let position=studyToSite({x:-3.8,y:5.45,z:-10.5});
+  const blocked=moveVisitor(start,{x:0,z:5},layout);
+  assert.ok(canStand(blocked,layout)&&mainHallOriginalPoint(blocked).x>studyToSite({x:-1.6,y:5.45,z:-5.5}).x,'Bass wall blocks the whole body');
+  let position=hallSite({x:-3.8,y:5.45,z:-10.5});
   assert.ok(canStand(position,layout),'Aisle begins at a legal position');
-  const destination=studyToSite({x:-3.8,y:5.45,z:-.5});
+  const destination=hallSite({x:-3.8,y:5.45,z:-.5});
   for(let step=0;step<100;step++)position=moveVisitor(position,{x:(destination.x-position.x)/Math.max(1,100-step),z:(destination.z-position.z)/Math.max(1,100-step)},layout);
   assert.ok(Math.hypot(position.x-destination.x,position.z-destination.z)<.05&&canStand(position,layout),'Body-clear passage stays available beside sub wall');
 });

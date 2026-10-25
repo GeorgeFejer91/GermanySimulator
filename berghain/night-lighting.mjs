@@ -7,6 +7,7 @@ import {labRoomAt} from '../assets/models/berghain/lab-oratory.mjs';
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
 import {panoramaWorldPoint,panoramaPassageAt} from '../assets/models/berghain/panorama-registration.mjs';
 import {admissionRoomAt} from '../assets/models/berghain/admission.mjs';
+import {mainHallWorldPoint,mainBarWorldPoint} from '../assets/models/berghain/main-hall-registration.mjs';
 
 // Appearance study: I23/I24 establish localized architectural wash; L01
 // establishes colored club lighting. L09 describes multidirectional dance-floor
@@ -18,7 +19,7 @@ const cues={
   outside:[spot([-8,4,22.9],[-7,0,27],'#e8ddc2',160,1,16),spot([0,2.8,22.65],[0,0,24.5],'#ffe3b5',95,.95,10),spot([8,4,22.9],[8,0,26],'#e6ddc7',150,1,15)],
   admission:[...[18.05,20.45].map(z=>spot([-5.25,2.79,z],[-5.25,.6,z],'#e1dcc9',160,1.25,10)),
     spot([-3.1,1.94,18.55],[-3.1,1.1,17.5],'#e8dcc5',60,1.1,5)],
-  foyer:[spot([7,5.9,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',130,1.1,12),spot([-3,3.8,14.7],[-4,.05,14.4],'#c1a688',140,1.25,10)],
+  foyer:[spot([7,4.7,16],[6,0,14],'#dfa46c',160,.85,15),spot([-13,4,16],[-14,0,15],'#bd663f',130,1.1,12),spot([-3,3.8,14.7],[-4,.05,14.4],'#c1a688',140,1.25,10)],
   // Opposing architectural planes and a separate floor pool avoid making the
   // DJ wall the only illuminated vertical focus. Sources clear the truss bodies.
   berghain:[spot([2,14.3,-6],[-7.5,7.7,-6],'#bb3025',1000,.62,24),spot([10,14.3,4],[21.7,9.8,-2],'#537bc0',760,.62,24),spot([6,14.3,-16],[5,5.45,-10],'#a26051',260,.6,15)],
@@ -34,6 +35,10 @@ const cues={
 };
 const point=([x,y,z])=>{const p=studyToSite({x,y,z});return new THREE.Vector3(p.x,p.y,p.z);};
 for(const lights of Object.values(cues))for(const light of lights){light.position=point(light.position);light.target=point(light.target);}
+for(const room of ['berghain','klo','toilets','mainStair','eisbar'])for(const light of cues[room]){
+ const transform=room==='eisbar'?mainBarWorldPoint:mainHallWorldPoint;
+ for(const key of ['position','target'])light[key].fromArray(transform(light[key].toArray()));
+}
 for(const room of ['panoramaToilets','lounge'])for(const light of cues[room]){
   light.position.fromArray(adjacentPanoramaPoint(panoramaWorldPoint(light.position.toArray())));
   light.target.fromArray(adjacentPanoramaPoint(panoramaWorldPoint(light.target.toArray())));
@@ -72,11 +77,15 @@ cues.panoramaPassage=[worldSpot([13,11.4,9.6],[13.5,9.05,9.6],'#b7a185',80,1.1,9
 cues.panoramaStair=[worldSpot([5.4,8.5,5.83],[5.4,6.1,5.83],'#afbad0',65,1,8),
  worldSpot([3,10.3,5.88],[3,7.8,5.88],'#bca88e',75,1,8),
  worldSpot([1,11.6,5.93],[1,9,5.93],'#bca88e',85,1,8)];
+cues.frontPublicWing=[worldSpot([10,8.5,9.6],[10,5.45,9.6],'#b7a185',75,1.1,8),
+ worldSpot([14,8.5,12.8],[14,5.45,12.8],'#b7a185',70,1.1,8),
+ worldSpot([17.4,8.5,10.25],[17.5,5.45,10.25],'#b7a185',75,1.1,8)];
 
 function roomAt(p){
   if(p.z>22.28)return 'outside';
   if(admissionRoomAt(p))return 'admission';
   const architecture=architecturalRoomAt(p);if(architecture)return architecture;
+  if(p.y>5.2&&p.y<5.8&&p.x>7.6&&p.x<18.8&&p.z>8.1&&p.z<21.5)return 'frontPublicWing';
   if(p.z<-15.4)return 'halle';
   if(p.x>22)return 'garden';
   if(p.x>-.7&&p.x<8.5&&p.z>4.3&&p.z<7.3&&p.y>5.2&&p.y<9.2)return 'panoramaStair';

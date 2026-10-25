@@ -34,15 +34,14 @@ test('room widening preserves the metre spacing inside each radiator assembly',(
 });
 
 test('the main hall reaches the Eisbar stair on the hall side of the glass screen',()=>{
- const approach=[[5,5.45,8],[14.1,5.45,8]].map(([x,y,z])=>studyToSite({x,y,z}));
- const route=[viewpoints.berghain.position,...approach,layout.architecturalCirculation.eisbar.siteGuestRoute[0]];
+ const route=layout.architecturalCirculation.eisbar.mainApproach;
  for(const points of [route,route.toReversed()]){
   let p={...points[0]};
   for(const target of points.slice(1)){
    const n=Math.ceil(Math.hypot(target.x-p.x,target.z-p.z)/.025);
    const step={x:(target.x-p.x)/n,z:(target.z-p.z)/n};
    for(let i=0;i<n;i++)p=moveVisitor(p,step,layout);
-   assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.03,'Full body must clear each approach segment');
+   assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.03,'Full body must clear each approach segment '+JSON.stringify({p,target}));
    assert.ok(Math.abs(p.y-target.y)<.03);
   }
  }

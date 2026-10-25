@@ -404,3 +404,24 @@ and validate continuous body/camera routes. Dimensions and locations remain open
 Research-only downloads live in `berghain/references/downloads/` and are ignored by Git and excluded from the viewer's static-site packaging. The source catalogue and source-specific attribution must travel with any later licensed asset use. Original procedural geometry may use architectural observations; this does not convert copyrighted photographs, artworks or someone else's mesh into freely redistributable textures/models.
 
 Next priority, following the user's preview feedback: replace generic interiors with the documented furniture/bar/DJ forms, recover missing room connections, and reconstruct the sourced art and selected-date sound systems. The three 2009 cartoons have now been acquired; they do not resolve contemporary dimensions. Exterior refinements, G01 textured-tile recovery, remaining galleries and dimensioned-plan access stay on the full-goal checklist. See INTERIOR.md for object-specific gaps.
+
+### 2026-10-25 joint hall fitting interpretation
+
+Karhard G19, G21, G23, G24 and hero are used jointly for the open hall, side
+frames, relative stair/glass-bar arrangement, glass corner and booth-wall
+features. These photographs do not supply metric pier positions, a complete
+roof plan, hidden structural connections or backstage destinations. U02 supports
+public front-wing/smoking adjacency without establishing the new fitted boundary.
+The Eisbar landing opening, retained ground-room fit and individual PA offsets
+are explicitly modelled estimates needed to reconcile the existing public routes.
+All dimensional, currentness and private-room uncertainties remain open.
+
+### Joint-fit clearance follow-up, 2026-10-25
+
+Independent review rejected lower Eisbar stair/frame overlap and an occluded
+foyer cue. Both complete stair widths and full pier dimensions are retained;
+fitted spacing, connected landing/guards and the public opening are corrected
+together. The nearby wall speaker, its bracket and linked collision move clear
+of the approach. The existing foyer light sits below the slab. These changes
+improve internal consistency; exact spacings, light fixtures, private destinations
+and photographic fidelity are still not established by the source material.

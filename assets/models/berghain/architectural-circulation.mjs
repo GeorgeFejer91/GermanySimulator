@@ -227,16 +227,18 @@ export function addArchitecturalCirculation(layout){
   box('Eisbar back service shelf',[18.75,eisbarFloor+.94,-21.35],[2.1,.1,.5],'stainless');
   box('Eisbar coffee machine',[18.5,eisbarFloor+1.25,-21.35],[.7,.5,.45],'stainless');
   box('Eisbar low refrigerator',[20.3,eisbarFloor+.5,-21],[.65,1,.8],'steel');
-  flight('Eisbar narrow lower stair',14.1,-20,-14.5,8.75,5.45,1.6,19,false);
-  slab('Eisbar intermediate landing',[13.3,21.4],[-21.6,-20],eisbarFloor,'floor');
+  // Fitted spacing preserves both stair widths and the full side pier; the
+  // intermediate guard is trimmed against its real faces at final registration.
+  flight('Eisbar narrow lower stair',13.8,-20,-14.5,8.75,5.45,1.6,19,false);
+  slab('Eisbar intermediate landing',[13.0,21.4],[-21.6,-20],eisbarFloor,'floor');
   slab('Eisbar mezzanine platform',[16.8,21.4],[-20,-13.2],eisbarFloor,'floor');
   box('Eisbar platform cross beam',[19.1,eisbarFloor-.28,-18],[4.6,.4,.3],'concrete');
   box('Eisbar platform wall beam',[21.25,eisbarFloor-.28,-17.4],[.3,.4,8.4],'concrete');
   flight('Eisbar narrow upper stair',16.2,-20,-14.5,8.75,12.05,1,19,false);
   slab('Eisbar upper service landing',[15.7,16.7],[-14.5,-13.3],12.05);
-  guard('Eisbar landing rear',13.3,-21.6,21.4,-21.6,eisbarFloor,false);
-  guard('Eisbar intermediate side',13.3,-21.6,13.3,-20,eisbarFloor,false);
-  guard('Eisbar intermediate middle',14.9,-20,15.7,-20,eisbarFloor,false);
+  guard('Eisbar landing rear',13.0,-21.6,21.4,-21.6,eisbarFloor,false);
+  guard('Eisbar intermediate side',13.0,-21.6,13.0,-20,eisbarFloor,false);
+  guard('Eisbar intermediate middle',14.6,-20,15.7,-20,eisbarFloor,false);
   guard('Eisbar mezzanine west',16.8,-20,16.8,-13.2,eisbarFloor,false);
   guard('Eisbar mezzanine east',21.4,-21.6,21.4,-13.2,eisbarFloor,false);
   guard('Eisbar mezzanine front',16.8,-13.2,21.4,-13.2,eisbarFloor,false);
@@ -260,9 +262,9 @@ export function addArchitecturalCirculation(layout){
   box('Eisbar hook tip',[18.35,12.11,-17],[.055,.15,.055],'steel');
   data.eisbar={sources:['A01','I03','I04','I23','U01','U02'],gallery:['27','28','29'],
     floorHeight:eisbarFloor,counterAuthor:[19.35,eisbarFloor+.8,-17],counterHeight:1.15,returnHeight:1.35,
-    authorGuestRoute:[[14.1,5.45,-14],[14.1,eisbarFloor,-20.7],[17.3,eisbarFloor,-20.7],
+    authorGuestRoute:[[13.8,5.45,-14],[13.8,eisbarFloor,-20.9],[17.3,eisbarFloor,-20.9],
       [17.3,eisbarFloor,-19.9],[17.3,eisbarFloor,-15.8],[18.8,eisbarFloor,-15.8],[18.8,eisbarFloor,-14.6]],
-    authorUpperRoute:[[14.1,5.45,-14],[14.1,eisbarFloor,-20.7],[16.2,eisbarFloor,-20.7],[16.2,12.05,-13.9]],
+    authorUpperRoute:[[13.8,5.45,-14],[13.8,eisbarFloor,-20.9],[16.2,eisbarFloor,-20.9],[16.2,12.05,-13.9]],
     stairUpperConnection:'Unresolved service-gallery destination; no invented Panorama doorway',
     registration:'Raised mezzanine supported by dated accounts/cutaways; datum, end bay, footprint and access routes estimated; historical December2006 installation',
     section:'Distinct main-floor approach, guarded counter platform and onward ascent; crane/relief relationship estimated together'};

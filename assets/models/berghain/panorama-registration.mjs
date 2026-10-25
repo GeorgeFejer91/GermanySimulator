@@ -85,33 +85,8 @@ function counterWall(layout){
 // and body barriers together; no floor spans the central dance-hall volume.
 function smokingPassage(layout){
  const floorY=13.25;
- // The relocated connector is above the last pilaster practical. Keep its
- // localized upward aim beneath that real slab instead of lighting through it.
- const endLight=layout.mainBar.interiorFacade.practicalLighting.lights.at(-1);
- endLight.target[1]=8.45;endLight.intensity=80;endLight.range=4;
- // The bar-room lining is a second visible wall in front of the outer facade.
- // Cut both rendering and collisions at the same estimated upper doorway.
- const replacements=new Map();
- for(const p of layout.parts){
-  if(p.fixture!=='main-bar-interior-facade'||p.shape!=='box'||!p.matrix)continue;
-  const m=p.matrix,low=p.center[1]-p.size[1]/2,high=p.center[1]+p.size[1]/2;
-  const z0=Math.max(-.5,(6.7-m[14])/m[10]),z1=Math.min(.5,(8.7-m[14])/m[10]);
-  if(high<=9.05||low>=11.15||z1<=z0)continue;
-  const y0=Math.max(-.5,(9.05-m[13])/m[5]),y1=Math.min(.5,(11.15-m[13])/m[5]);
-  const slices=[];
-  for(const [a,b,c,d] of [[-.5,z0,-.5,.5],[z1,.5,-.5,.5],[z0,z1,-.5,y0],[z0,z1,y1,.5]]){
-   if(b-a<.0001||d-c<.0001)continue;
-   const matrix=[...m];
-   for(let i=0;i<3;i++){matrix[12+i]+=m[8+i]*(a+b)/2+m[4+i]*(c+d)/2;matrix[8+i]*=b-a;matrix[4+i]*=d-c;}
-   slices.push({...p,name:p.name+' upper doorway trim',matrix,center:matrix.slice(12,15),size:[p.size[0],p.size[1]*(d-c),p.size[2]*(b-a)],circulationDoorway:true});
-  }
-  replacements.set(p,slices);
- }
- layout.parts=layout.parts.flatMap(p=>replacements.get(p)??[p]);
- layout.solids=layout.solids.flatMap(s=>replacements.has(s.renderPart)?replacements.get(s.renderPart).map(p=>{
-  const m=p.matrix,polygon=[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5]].map(([x,z])=>[m[12]+m[0]*x+m[8]*z,m[14]+m[2]*x+m[10]*z]);
-  const solid={...s,name:p.name,renderPart:p,y:[p.center[1]-p.size[1]/2,p.center[1]+p.size[1]/2]};bounds(solid,polygon);return solid;
- }):[s]);
+ // The main bar is now registered on the other longitudinal side. Its wall
+ // has no doorway to this separate, fixed public smoking connector.
  function box(name,c,size,material='steel'){
   const matrix=new THREE.Matrix4().makeScale(...size).setPosition(...c).toArray();
   const p={name:'Panorama connection '+name,section:'interior',shape:'box',material,center:c,size,matrix,instanceTone:.94,panoramaConnection:true};

@@ -60,7 +60,7 @@ export function addMainHallDetails(layout){
   const yaw=Math.atan2(-(b[2]-a[2]),b[0]-a[0]);
   const wallRotation=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),yaw);
   const discRotation=wallRotation.clone().multiply(horizontal);
-  for(const x of [1.7,8.3])for(const y of [12.3,14.15]){
+  for(const x of [1.7,12.9])for(const y of [12.3,14.15]){
     // Gallery00/24 show a broad, stepped surround on both sides of the booth.
     // Overlapping concentric rings keep the opaque back continuous at the rim.
     for(const [i,size] of [1.16,1.06,.96,.86].entries())

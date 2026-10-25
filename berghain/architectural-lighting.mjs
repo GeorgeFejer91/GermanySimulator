@@ -1,6 +1,7 @@
 import {studyToSite} from '../assets/models/berghain/calibration.mjs';
 import {groundSanitaryAt} from '../assets/models/berghain/ground-sanitary.mjs';
 import {smokingToAuthor} from '../assets/models/berghain/architectural-circulation.mjs';
+import {mainHallOriginalPoint,mainBarOriginalPoint} from '../assets/models/berghain/main-hall-registration.mjs';
 
 const footprint=(x,z)=>[[x[0],z[0]],[x[1],z[0]],[x[1],z[1]],[x[0],z[1]]].map(([x,z])=>studyToSite({x,y:0,z}));
 const inside=(p,polygon)=>{
@@ -22,7 +23,8 @@ const mainStairApproach=footprint([5,17.2],[7.3,9.3]);
 export function architecturalRoomAt(p){
   if(groundSanitaryAt(p))return 'groundToilets';
   if(inside(p,smoking)&&p.y<11.3)return p.y<5.2?'smokingEscape':'smoking';
-  if(inside(p,eisbar)&&p.y>5.2&&p.y<14)return 'eisbar';
+  if(inside(mainBarOriginalPoint(p),eisbar)&&p.y>5.2&&p.y<14)return 'eisbar';
+  p=mainHallOriginalPoint(p);
   if(inside(p,mainStair)&&p.y<6)return 'mainStair';
   if(p.y>5.2&&p.y<5.8&&inside(p,mainStairApproach))return 'mainStair';
   return null;

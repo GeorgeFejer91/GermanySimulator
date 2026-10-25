@@ -1,5 +1,13 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
+import {mainBarOriginalPoint,mainHallSidePiers} from './main-hall-registration.mjs';
+
+// Fit cabinet/roof notches against the registered side-frame bodies. The
+// retired generic grid cannot continue to leave unexplained holes in the bar.
+function registeredColumns(){return mainHallSidePiers.map(([x,z])=>{
+ const corners=[[-.4,-.4],[.4,-.4],[.4,.4],[-.4,.4]].map(([dx,dz])=>mainBarOriginalPoint({x:x+dx,y:0,z:z+dz}));
+ return {x:[Math.min(...corners.map(p=>p.x)),Math.max(...corners.map(p=>p.x))],z:[Math.min(...corners.map(p=>p.z)),Math.max(...corners.map(p=>p.z))]};
+});}
 
 export const mainBarMaterials={
   mainBarPlaster:{color:'#ece5d4',roughness:.98},
@@ -53,7 +61,7 @@ export function createMainBarLights(lighting){
 function addBarRoof(layout,box,anchor,length){
   const floor=layout.mainBar.floorHeight,west=layout.mainBar.screenAnchor[0]-.25,east=anchor[0]-.48;
   const width=east-west,depth=length+.15,start=anchor[2]-depth/2,bayDepth=depth/4;
-  const columns=layout.solids.filter(s=>s.name==='load-bearing column'&&s.y[1]>floor+11&&s.y[0]<floor+11.73);
+  const columns=registeredColumns();
   const roof={sources:['I23'],bayCount:4,grid:{columns:6,rows:4},center:[(west+east)/2,floor+11,anchor[2]],
     beamUnderside:floor+11,panelUnderside:floor+11.44,coffers:[],
     columnNotches:'Blue panes and steel lattice are fitted around retained column bounds; concrete backing and roof beams meet columns as structural joints',
@@ -188,9 +196,9 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
   });
 
   fixture('main-long-bar',[18.4,5.45,-5],['I23'],{height:1.12,length:14,depth:1.1,returnLength:1.8},()=>{
-    // Keep the real retained pier out of the worktop/cabinet; only the front
-    // strip continues across its bay. No structural column is relocated.
-    const cuts=layout.solids.filter(s=>s.name==='load-bearing column'&&s.x[1]>anchor[0]-.55&&s.x[0]<anchor[0]+.55&&
+    // Fit the worktop/cabinet to the registered frame. An empty cut list
+    // produces a continuous cabinet, rather than holes from the old grid.
+    const cuts=registeredColumns().filter(s=>s.x[1]>anchor[0]-.55&&s.x[0]<anchor[0]+.55&&
       s.z[1]>anchor[2]-7&&s.z[0]<anchor[2]+7)
       .map(s=>({lo:Math.max(-7,s.z[0]-anchor[2]-.025),hi:Math.min(7,s.z[1]-anchor[2]+.025),x:s.x[0]-anchor[0]-.025})).sort((a,b)=>a.lo-b.lo);
     const frontLimit=Math.min(.55,...cuts.map(c=>c.x));

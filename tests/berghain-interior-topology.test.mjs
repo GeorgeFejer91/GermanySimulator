@@ -64,7 +64,7 @@ test('sanitary additions preserve every retained original batch tone including H
   const source=readFileSync(url,'utf8')
     .replace('pinInteriorTopologyTones(layout);',`layout.parts=layout.parts.filter(p=>!p.interiorTopology);
       {const groups=new Map();for(const p of layout.parts){const k=[p.section,p.material==='mainBarPlaster'?'pale':p.material,p.shape].join('/');if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p);}for(const parts of groups.values())parts.forEach((p,i)=>p.instanceTone??=.84+((i*193+parts.length*37)%101)/625);}`)
-    .replace('addArchitecturalCirculation(layout);','')
+    .replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','')
     .replace('addMainHallDetails(layout);','')
     .replace('addGroundSanitary(layout);','')
     .replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,url).href}'`);
@@ -79,15 +79,20 @@ test('sanitary additions preserve every retained original batch tone including H
   const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
   const originalByKey=new Map();
   for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
-  const retained=layout.parts.filter(p=>!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
+  const retained=layout.parts.filter(p=>!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));
   assert.ok(retained.length>10000,'Retirement must leave the unrelated original model intact');
   retained.forEach(p=>{
     const original=originalByKey.get(key(p))?.shift();
     assert.ok(original,'Retained original geometry exists: '+p.name);
     assert.equal(p.instanceTone,expected.get(original),p.name+' / '+p.material);
   });
-  for(const material of ['darkConcrete','stainless','rubber','steel'])
+  for(const material of ['darkConcrete','rubber','steel'])
     assert.ok(retained.some(p=>p.material===material),material+' exercised');
+  // The stainless fittings now belong to the registered Klo/hall assembly.
+  // Compare their named tone inventory independently of the intentional move.
+  const tones=parts=>parts.filter(p=>p.material==='stainless').map(p=>JSON.stringify([p.name,p.shape,p.instanceTone??expected.get(p)])).sort();
+  const stainless=layout.parts.filter(p=>p.material==='stainless'&&!p.interiorTopology&&!p.architecturalCirculation&&!p.groundSanitary);
+  assert.ok(stainless.length>0);assert.deepEqual(tones(stainless),tones(baseline.parts));
   const added=layout.parts.filter(p=>p.interiorTopology);
   assert.ok(added.length>0);
   assert.ok(added.every(p=>p.instanceTone===.94));

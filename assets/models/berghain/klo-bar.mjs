@@ -1,11 +1,13 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {studyToSite} from './calibration.mjs';
 import {addPanoramaSanitaryFixtures} from './interior-topology.mjs';
+import {mainHallOriginalPoint} from './main-hall-registration.mjs';
 
 const footprints={klo:{x:[-21.5,-7.25],z:[-3.5,9.2]},toilets:{x:[-21.5,-7.25],z:[-20.7,-3.5]}};
 const zones=Object.entries(footprints).map(([name,{x,z}])=>({name,polygon:
   [[x[0],z[0]],[x[1],z[0]],[x[1],z[1]],[x[0],z[1]]].map(([x,z])=>studyToSite({x,y:5.45,z}))}));
 export function kloRoomAt(position){
+  position=mainHallOriginalPoint(position);
   if(Math.abs(position.y-5.45)>.15)return null;
   return zones.find(({polygon})=>polygon.every((a,i)=>{
     const b=polygon[(i+1)%polygon.length];
