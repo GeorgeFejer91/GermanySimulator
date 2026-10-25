@@ -1,5 +1,27 @@
 # Berghain architectural study
 
+The first counter-wall candidate was held after independent Physics review found
+an older generic intermediate beam intersecting all Panorama stair lanes, with
+only1.303 m headroom at the settled counterexample. This repaired candidate
+retires that single unregistered beam-grid placeholder (authored x=-1,y12.95,z-6).
+G21/G23 show a clear rising stair, but do not establish exact structural dimensions.
+Other beams, columns, floors, stair geometry and routes are retained. No beam cut
+or new structural member is invented. Initial rejected evidence is preserved at
+output/berghain-counterwall-physics-review-rejected-beam.md; repaired acceptance
+requires new source/native, five-lane body/headroom and actual camera checks.
+
+
+### Panorama counter backdrop — 25 October 2026
+
+I19 views06/15/16 support the opaque counter-end wall and high segmented band.
+The separate interior lining, closed shallow recess and seven perforated panels
+are original geometry. Their dimensions and exact placement are estimated.
+The exterior is unchanged; no private through-route or present artwork is inferred.
+The portable asset now contains 764,144 triangles, 203 mesh/material groups and
+59,050,184 bytes, retaining the same 25 original embedded maps. Existing physical
+fixture dimensions and material tones are preserved. See INTERIOR/VALIDATION.
+
+
 ### Panorama frontage and public connections — 25 October 2026
 
 U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,

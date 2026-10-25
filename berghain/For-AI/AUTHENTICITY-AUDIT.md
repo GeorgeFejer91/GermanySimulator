@@ -8,6 +8,14 @@ This audit compares the accepted runtime `687b408cca2aa8a7e36c9bcd276f1e18af20f9
 
 ## Evidence and review boundaries
 
+25 October counter-wall follow-up isolates a further visible discrepancy in
+AU12: generic facade openings behind Panorama's counter contradicted the opaque
+backdrop in I19 views06/15/16. A separate internal lining, closed recess and high
+service band address that feature. Their exact dimensions, construction and
+present-day artwork are unverified; this does not close the floor/window section
+or establish backstage placement. Validation is scoped in VALIDATION.md.
+
+
 Latest 25 October Panorama registration supersedes earlier closed-upper-door and
 rear-facing room statements below. AU10/AU12 now have a connected entrance-side
 Panorama, ordinary WC beneath the lounge, relocated bar/DJ and guarded public

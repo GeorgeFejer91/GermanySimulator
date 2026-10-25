@@ -1,5 +1,34 @@
 # Berghain interior: objects, art and equipment
 
+The first counter-wall candidate was held after independent Physics review found
+an older generic intermediate beam intersecting all Panorama stair lanes, with
+only1.303 m headroom at the settled counterexample. This repaired candidate
+retires that single unregistered beam-grid placeholder (authored x=-1,y12.95,z-6).
+G21/G23 show a clear rising stair, but do not establish exact structural dimensions.
+Other beams, columns, floors, stair geometry and routes are retained. No beam cut
+or new structural member is invented. Initial rejected evidence is preserved at
+output/berghain-counterwall-physics-review-rejected-beam.md; repaired acceptance
+requires new source/native, five-lane body/headroom and actual camera checks.
+
+
+### Panorama counter end wall — 25 October 2026
+
+I19 views06/15/16 show a pale opaque wall behind the counter, a high boxed band
+with perforated panels below the beam, and a small service opening at the inner
+end in view15. These photographs are one primary gallery, not independent surveys.
+Views06 and15/16 have different artwork and lighting configurations; capture dates
+and the present installation are unknown.
+
+`panorama-registration.mjs` fits a separate 0.16 m lining to the estimated
+Panorama footprint (13.25–17.95 m vertical range), leaving exterior windows intact.
+The small recess has a physical closed back; its onward destination is unknown.
+Seven high service housings reuse the existing perforated-plate geometry. Panel
+count, scale and function are estimates. Every box has a matching body barrier;
+the high plates lie above the standing body. The existing bar/rack/service aisle
+and public stair/WC/lounge/smoking paths are retained. No photograph pixels or
+new artwork copies are embedded in the model. Window/floor section remains open.
+
+
 ### Panorama frontage and public connections — 25 October 2026
 
 U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,

@@ -1,5 +1,12 @@
 # Karhard Berghain: evidence-to-model map
 
+Panorama follow-up to F34: linked I19 views06/15/16 support an opaque pale
+counter-end wall, high service band and small recess. The model now represents
+these with a separate lining and a closed recess; dimensions/construction remain
+estimated and current artwork is unknown. These are already catalogued I19
+images, not additions to the 61-image Berghain gallery count. See INTERIOR.md.
+
+
 Requested explicitly by George on 24 October 2026. Primary authority:
 [studio karhard — Berghain](https://www.karhard.de/projects/berghain), catalogue
 A01/I23. This is a feature map, not a second task plan; [README](README.md)

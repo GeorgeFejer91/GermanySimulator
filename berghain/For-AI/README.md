@@ -1,5 +1,16 @@
 # Berghain reconstruction: goal and work state
 
+The first counter-wall candidate was held after independent Physics review found
+an older generic intermediate beam intersecting all Panorama stair lanes, with
+only1.303 m headroom at the settled counterexample. This repaired candidate
+retires that single unregistered beam-grid placeholder (authored x=-1,y12.95,z-6).
+G21/G23 show a clear rising stair, but do not establish exact structural dimensions.
+Other beams, columns, floors, stair geometry and routes are retained. No beam cut
+or new structural member is invented. Initial rejected evidence is preserved at
+output/berghain-counterwall-physics-review-rejected-beam.md; repaired acceptance
+requires new source/native, five-lane body/headroom and actual camera checks.
+
+
 Created 2026-10-23 at George's request. Owner: Codex integrator in the current chat. The active app goal is the Berghain exterior/interior reconstruction; this page is its durable task state. Do not resume unrelated paused game-completion work.
 
 ## Requested outcome
@@ -9,6 +20,31 @@ Create a full, realistic, three-dimensional architectural asset of Berghain, ins
 The working target is the contemporary building, with reference dates retained so historical layouts are not silently mixed. This is a builder assumption, not a surveyed as-built claim. Include the main club, Panorama Bar, Säule, foyer/coat check, stairs, bars, public service spaces, Halle, Lab.oratory and garden in coverage tracking; undocumented spaces remain explicit gaps.
 
 ## Current work
+
+### Panorama counter backdrop — 25 October 2026
+
+I19 views06/15/16 consistently show an opaque pale wall behind the counter,
+perpendicular to the glazed side. The registered model instead exposed generic
+facade openings there. The bounded candidate adds an interior lining, a shallow
+closed service recess and the photographed high segmented service/acoustic band.
+The exterior, floor datum, bar, bottle rack and public routes stay registered
+as before. No backstage connection or current artwork inventory is inferred.
+
+The wall thickness, extent, recess and panel count/dimensions are estimates.
+The installed artwork differs between the undated photographs and is not
+reproduced by this correction. Source observations belong to INTERIOR.md;
+candidate and acceptance evidence belong to VALIDATION.md. Full goal ACTIVE.
+Remaining architectural work includes the common facade/window section,
+backstage and FLINTA placement, present inventory and photographic fidelity.
+
+
+This bounded correction passes 181 Node checks, eleven final browser cases and
+nine-before/nine-after cost samples with both independent world reviews. The
+counter backdrop renders in the source and portable GLB; the public routes,
+exterior and existing fixture scale are preserved. One unsupported generic beam
+that crossed the Panorama stair is retired, with fresh body and eye clearance checks. VALIDATION.md records the
+desktop timing increase and physical-device limitation. Publication/live status
+belongs to output/berghain-counterwall-repaired-release.json; full goal stays ACTIVE.
 
 ### Panorama frontage and public connections — 25 October 2026
 
@@ -48,6 +84,20 @@ byte/control verification are recorded in output/berghain-panorama-release.json.
 Next: resolve the common facade/window bay and interior floor section before
 changing either estimated datum. Exact backstage and FLINTA placement still
 need a located primary source. No full-reconstruction completion is claimed.
+
+Published Panorama registration `88df5637aed81e26dfe912784987ad61d67f727f`; Pages run 40151974691
+succeeded. All 87 checked public files match the commit and six entry URLs
+respond. Three fresh live browser cases pass on desktop and Android portrait/
+landscape emulation, exercising both viewers, room arrivals and real movement.
+Receipt: output/berghain-panorama-release.json. The full architectural goal stays
+ACTIVE: the common facade/window section, exact floor dimensions, backstage,
+FLINTA placement, current inventory and remaining visual fidelity stay open.
+Next visible correction: I19 views06/15/16 show an opaque wall behind the
+Panorama counter, while the registered render exposes generic facade openings.
+Read output/berghain-panorama-section-followup.md and the source inventory in
+output/berghain-panorama-counter-wall-audit.json. Keep the exterior hull, room
+routes and uncertain floor datum separate from this possible interior lining.
+This local publication receipt does not alter the reviewed runtime or index.
 
 ### Eisbar mezzanine correction — 25 October 2026
 

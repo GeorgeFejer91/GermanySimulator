@@ -1,5 +1,85 @@
 # Berghain viewer validation
 
+The first counter-wall candidate was held after independent Physics review found
+an older generic intermediate beam intersecting all Panorama stair lanes, with
+only1.303 m headroom at the settled counterexample. This repaired candidate
+retires that single unregistered beam-grid placeholder (authored x=-1,y12.95,z-6).
+G21/G23 show a clear rising stair, but do not establish exact structural dimensions.
+Other beams, columns, floors, stair geometry and routes are retained. No beam cut
+or new structural member is invented. Initial rejected evidence is preserved at
+output/berghain-counterwall-physics-review-rejected-beam.md; repaired acceptance
+requires new source/native, five-lane body/headroom and actual camera checks.
+
+
+### Panorama counter backdrop candidate — 25 October 2026
+
+Base: 88df5637aed81e26dfe912784987ad61d67f727f. The isolated counterwall candidate
+owns the counter lining/high band and one retired generic stair-crossing beam,
+with tests, documentation and its GLB.
+Required scope: opaque backdrop/source-native parity, closed recess/body wall,
+bar/rack/service clearance, retained public connections, loaded/fallback visuals,
+desktop and Android portrait/landscape emulation, comparable cold-input cost,
+and independent Physics/Camera review. Physical Android remains NOT RUN.
+
+The first regression run detected the missing interior backdrop. Initial
+implementation testing exposed an over-broad rack-gap assertion that compared
+the rack with a ledge outside its z-span; the check now tests overlapping spans.
+The physical aisle passed both runs. The bounded acceptance and remaining limits are recorded below.
+
+
+## Counter backdrop — bounded acceptance
+
+Base 88df5637aed81e26dfe912784987ad61d67f727f; 221-file freeze
+output/berghain-counterwall-repaired-candidate.json, SHA256 407ff95856154088b1064d1daee9f32c6d4d1fc13ebedfdc42d3bf3efc84ade7.
+GLB SHA256 91f0519223adb7387e5106fb43e3568a50dab0ceb70527db2443c88b1927f88d.
+
+- 181 Node checks pass, zero failed/skipped: output/berghain-counterwall-repaired-node.txt.
+- Eleven final browser cases pass: output/berghain-counterwall-repaired-final-browser/report.json.
+  Counter approach/contact, source/native night views and texture fallback cover
+  desktop and Android portrait/landscape emulation. Complete retained public
+  stair/WC/lounge/smoking roundtrips and controlled pixel parity run on desktop.
+  Three additional actual-eye source/native views cover the repaired stair crossing.
+  All 221 report source hashes match the repaired freeze. Earlier candidates are
+  excluded from acceptance; the original beam rejection remains preserved.
+- Each of three counter-view cases has 24 source/native wall ray-depth probes.
+  Controlled pixel mean RGB difference: 0.430200;
+  large-difference fraction: 0.000000.
+  All 26 runtime textures are disposed by the controlled comparison.
+- Independent Physics and Camera reviews accept the scoped candidate; detailed
+  fresh CPU versus supplied rendering evidence is in the two
+  output/berghain-counterwall-repaired-{physics,camera}-review.md reports.
+
+The new actual-mesh/body regression fails on the original beam and passes after
+retirement across five lateral stair lanes and both directions. The removed
+beam was an unregistered grid placeholder; no as-built structural claim is made.
+
+Three cold runs per viewport/version compare the same Panorama shortcut and
+two-second real movement toward the counter. Use cost-before and cost-after;
+all initial/rejected counterwall measurements are excluded after the beam repair.
+The retained cost-before uses the unchanged exact public base.
+
+| Profile | Frame p95 median, ms | After range, ms | Input response median, ms |
+|---|---:|---:|---:|
+| desktop | 14.2 → 20.8 | 14.2–20.8 | 23.7 → 24.6 |
+| android-portrait | 7.1 → 7.1 | 7.1–7.1 | 18.6 → 18.6 |
+| android-landscape | 7.1 → 7.1 | 7.1–7.1 | 19.2 → 23.6 |
+
+Desktop frame timing increased in these short shared-PC samples; mobile-emulated
+timing is stable. A desktop input sample reached 76.9 ms and cold readiness ranged
+from 2.354 to12.249 seconds; the table reports medians, not worst-case guarantees.
+There are two extra median rendered calls per frame, 17,196 extra asset
+triangles and one additional mesh/material group. Runtime transfer rises from
+7,486,680 to7,491,002 bytes; GLB grows from56,993,976 to59,050,184 bytes and remains
+download-on-request. No idle RAF, new texture family or added scene light is
+introduced. The existing three scene spots/two shadow maps remain the limit.
+These diagnostics do not establish causal speedup, GPU time or physical Android
+qualification. Physical Android remains NOT RUN. Full architectural accuracy,
+exact dimensions, current artwork and backstage/FLINTA placement remain open.
+
+Acceptance receipts are appended through a two-Markdown-only hash bridge;
+runtime, GLB, tests and other sources stay frozen. Publication/live verification
+is separately recorded in output/berghain-counterwall-repaired-release.json.
+
 ### Panorama frontage and public connections — 25 October 2026
 
 U02, A13/I19 views 06/07/15/16 and V05 support an entrance-facing Panorama wing,
@@ -27,6 +107,20 @@ The repeated facade tiers are also estimated; this change does not establish
 a measured floor datum or bay-specific window pattern. Backstage and FLINTA
 locations, present inventory, artwork fidelity and other open audit findings
 remain unresolved. The full architectural goal stays ACTIVE.
+
+Published Panorama registration `88df5637aed81e26dfe912784987ad61d67f727f`; Pages run 40151974691
+succeeded. All 87 checked public files match the commit and six entry URLs
+respond. Three fresh live browser cases pass on desktop and Android portrait/
+landscape emulation, exercising both viewers, room arrivals and real movement.
+Receipt: output/berghain-panorama-release.json. The full architectural goal stays
+ACTIVE: the common facade/window section, exact floor dimensions, backstage,
+FLINTA placement, current inventory and remaining visual fidelity stay open.
+Next visible correction: I19 views06/15/16 show an opaque wall behind the
+Panorama counter, while the registered render exposes generic facade openings.
+Read output/berghain-panorama-section-followup.md and the source inventory in
+output/berghain-panorama-counter-wall-audit.json. Keep the exterior hull, room
+routes and uncertain floor datum separate from this possible interior lining.
+This local publication receipt does not alter the reviewed runtime or index.
 
 ## Panorama registration — bounded acceptance
 
