@@ -1,8 +1,8 @@
 {
   "file": "berghain-study.glb",
-  "bytes": 61641300,
-  "sha256": "00efd99d0af0b10e1db9fd1e51f7c7ade904064ee9fc7c6f799d0c10978a427f",
-  "triangles": 798576,
+  "bytes": 61659292,
+  "sha256": "c532278806b02969ebbe26b09e5bdb4bc32fa417a6adaf8d41c52fde3553c0ff",
+  "triangles": 798744,
   "meshes": 215,
   "materials": 215,
   "units": "metres",

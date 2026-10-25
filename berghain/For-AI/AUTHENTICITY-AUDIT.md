@@ -1,5 +1,15 @@
 # Berghain interior authenticity audit
 
+## Suspended main subwoofer array — candidate
+
+The floor-mounted main F124 wall contradicted S13/V19's dated post-December2023
+accounts. The candidate reopens its footprint and suspends the same six
+manufacturer-sized cabinets. It corrects that supported historical mismatch;
+it does not establish current height, orientation, anchor positions or rigging.
+January2024's reopened darkroom connection is corroboration, not a floor plan.
+See SOURCES.md S13/V19 and README.md for the pending acceptance state.
+
+
 ## DJ bay independent-review repair — v2
 
 V1 was rejected: the thicker wall embedded two satellite cabinets and the

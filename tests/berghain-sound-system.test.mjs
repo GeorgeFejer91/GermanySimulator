@@ -82,14 +82,60 @@ import {mainHallWorldPoint,mainHallOriginalPoint,mainBarWorldPoint,mainBarOrigin
 const registered=(p,fn=mainHallWorldPoint)=>{const[x,y,z]=fn([p.x,p.y,p.z]);return{x,y,z};};
 const hallSite=p=>registered(studyToSite(p));
 
-test('a visitor stops at the bass wall and can traverse its western circulation aisle',()=>{
-  const start=hallSite({x:2,y:5.45,z:-5.5});
-  assert.ok(canStand(start,layout));
-  const blocked=moveVisitor(start,{x:0,z:5},layout);
-  assert.ok(canStand(blocked,layout)&&mainHallOriginalPoint(blocked).x>studyToSite({x:-1.6,y:5.45,z:-5.5}).x,'Bass wall blocks the whole body');
+test('the suspended array clears the former bass wall and retains its western aisle',()=>{
+  const old=hallSite({x:-1.6,y:5.45,z:-5.5});
+  assert.ok(canStand(old,layout),'The formerly occupied floor is now available');
+  for(const direction of [-1,1]){
+    let position={x:old.x,y:5.45,z:old.z-direction*1.5};
+    assert.ok(canStand(position,layout));
+    for(let i=0;i<90;i++){
+      position=moveVisitor(position,{x:0,z:direction/30},layout);
+      assert.ok(canStand(position,layout),'Body remains legal through the old footprint');
+    }
+    assert.ok(Math.abs(position.z-(old.z+direction*1.5))<.01,'No obsolete collider blocks the reopened crossing');
+  }
   let position=hallSite({x:-3.8,y:5.45,z:-10.5});
   assert.ok(canStand(position,layout),'Aisle begins at a legal position');
   const destination=hallSite({x:-3.8,y:5.45,z:-.5});
   for(let step=0;step<100;step++)position=moveVisitor(position,{x:(destination.x-position.x)/Math.max(1,100-step),z:(destination.z-position.z)/Math.max(1,100-step)},layout);
   assert.ok(Math.hypot(position.x-destination.x,position.z-destination.z)<.05&&canStand(position,layout),'Body-clear passage stays available beside sub wall');
+});
+
+test('suspension keeps all six manufacturer envelopes and a clear floor below',()=>{
+  const rig=layout.soundSystem.suspension;
+  assert.ok(rig.sources.includes('S13')&&rig.sources.includes('V19'));
+  assert.match(rig.confidence,/unverified/);
+  const subs=layout.soundSystem.components.filter(c=>c.assembly==='main-subwall');
+  assert.equal(subs.length,6);
+  for(const c of subs){
+    assert.deepEqual(c.dimensions,[.702,.992,1.056]);
+    const m=new THREE.Matrix4().fromArray(c.matrix);
+    const forward=new THREE.Vector3(0,0,1).transformDirection(m);
+    assert.ok(forward.distanceTo(new THREE.Vector3(0,-1,0))<1e-8,'The actual aperture faces down');
+    const solid=layout.solids.find(s=>s.equipment===c.id);
+    assert.ok(Math.abs(solid.y[0]-12.472)<1e-6);
+    assert.ok(Math.abs(solid.y[1]-13.528)<1e-6);
+    assert.ok(canStand({x:c.position[0],y:5.45,z:c.position[2]},layout));
+  }
+  for(const anchor of rig.anchors){
+    assert.ok(Math.abs(anchor.upper[1]+.025-layout.calibration.mainRoof)<1e-8,'Anchor cap meets the actual roof');
+    assert.ok(Math.abs(anchor.lower[1]-13.688)<1e-8,'Cable reaches the rear support rail');
+  }
+});
+
+test('upward rays enter all six real subwoofer apertures and find their throats',()=>{
+  const geometries=createSpeakerGeometries(),material=new THREE.MeshBasicMaterial({side:THREE.DoubleSide});
+  try{
+    for(const c of layout.soundSystem.components.filter(c=>c.type==='f124')){
+      const group=new THREE.Group();
+      for(const p of layout.parts.filter(p=>p.equipment===c.id)){
+        const mesh=new THREE.Mesh(geometries[p.shape],material);
+        mesh.matrix.fromArray(p.matrix);mesh.matrixAutoUpdate=false;group.add(mesh);
+      }
+      group.updateMatrixWorld(true);
+      const probe=new THREE.Vector3(0,.15,2).applyMatrix4(new THREE.Matrix4().fromArray(c.matrix));
+      const hits=new THREE.Raycaster(probe,new THREE.Vector3(0,1,0),0,4).intersectObject(group);
+      assert.ok(hits.length&&hits[0].distance>2-1.056/2+.12,'Visible mouth retains actual cavity depth');
+    }
+  }finally{material.dispose();for(const g of Object.values(geometries))g.dispose();}
 });

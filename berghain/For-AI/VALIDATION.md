@@ -1,5 +1,37 @@
 # Berghain viewer validation
 
+## Suspended main subwoofer array — candidate
+
+Eight focused speaker checks pass, including actual upward cavity rays and
+bidirectional body movement across the removed wall. Full Node regression,
+rendered desktop/Android-emulated coverage, source/native export parity,
+matched cost and independent Physics/Camera acceptance are pending.
+Use output/berghain-suspended-subs-*; candidate state belongs to README.md.
+Physical Android NOT RUN; the published18c90dad release remains accepted.
+
+
+### Published upper sanitary room and Panorama overlook
+
+Commit `18c90dadf1ee7753ffff6bf219cfd2e23965e5d8`; Pages run 40224162126 succeeded. All93 checked
+public files match, six entry URLs respond, and three live browser profiles
+pass. Receipt: output/berghain-upper-sanitary-release.json. Primary staged index unchanged.
+
+The separate provisional upper urinal room, glazed lounge relationship, intact
+chaise refit and compact guarded DJ sightline are implemented. Six original
+recessed bowls/rails follow a dated trial count and MSS24 form study; dimensions,
+current inventory, finishes and the separate front-stair correspondence remain
+unverified. The restored floor retains its original PBR maps. Neutral sanitary
+practicals and adjacent Panorama washes reuse three lights/two shadows.
+
+242 Node checks, seven local browser cases, eighteen matched cost contexts and
+independent Physics/Camera reviews pass within their recorded scope. Physical
+Android NOT RUN. Full goal ACTIVE. Next supported correction: main subwoofer
+wall suspension, documented by S13; exact backstage plans and measured room
+registration remain unresolved. Preserve this release and the immutable V1–V4
+review evidence; V1 was rejected for its lost upper-floor surface treatment; V3 was rejected
+for recesses open from below. V4 retains a solid slab underside.
+
+
 ### Recess underside repair — V4
 
 The integrator found that V3's full-depth holes plus one-sided bowl surfaces

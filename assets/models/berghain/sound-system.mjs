@@ -68,3 +68,59 @@ export function addSoundSystem(layout){
     mounting('main-satellite-'+index+' wall bracket',matrix(position.clone().add(wall).multiplyScalar(.5),Math.atan2(difference.x,difference.z)),[0,0,0],[.065,.09,length]);
   }
 }
+
+// S13/V19 document removal of the floor wall in December 2023. Fit the
+// reported overhead array after room registration, preserving each complete
+// manufacturer's envelope. Position, down-firing orientation and supports
+// are a provisional visual reconstruction, not a surveyed rigging design.
+export function suspendMainSubwall(layout){
+  const components=layout.soundSystem.components.filter(c=>c.assembly==='main-subwall');
+  const oldCenter=new THREE.Vector3();
+  for(const c of components)oldCenter.add(new THREE.Vector3(...c.position));
+  oldCenter.multiplyScalar(1/components.length);
+  const center=new THREE.Vector3(-5.1,13,-.6);
+  const transform=new THREE.Matrix4().makeTranslation(...center.toArray())
+    .multiply(new THREE.Matrix4().makeRotationX(-Math.PI/2))
+    .multiply(new THREE.Matrix4().makeTranslation(...oldCenter.clone().negate().toArray()));
+  const ids=new Set(components.map(c=>c.id));
+  const updateBounds=solid=>{
+    const b=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5))
+      .applyMatrix4(new THREE.Matrix4().fromArray(solid.renderPart.matrix));
+    for(const axis of ['x','y','z'])solid[axis]=[b.min[axis],b.max[axis]];
+    solid.polygon=[[b.min.x,b.min.z],[b.max.x,b.min.z],[b.max.x,b.max.z],[b.min.x,b.max.z]];
+  };
+  for(const p of layout.parts.filter(p=>ids.has(p.equipment))){
+    p.matrix=transform.clone().multiply(new THREE.Matrix4().fromArray(p.matrix)).toArray();
+    p.center=p.matrix.slice(12,15);
+  }
+  for(const s of layout.solids.filter(s=>ids.has(s.equipment)))updateBounds(s);
+  for(const c of components){
+    c.matrix=transform.clone().multiply(new THREE.Matrix4().fromArray(c.matrix)).toArray();
+    c.position=c.matrix.slice(12,15);c.sources=[...c.sources,'S13','V19'];
+    c.confidence='Manufacturer envelope; reported suspension; height, anchor, down-firing orientation and mounting inferred';
+  }
+  const support=(name,position,size)=>{
+    const matrix=new THREE.Matrix4().makeScale(...size).setPosition(...position);
+    const p={name:'main-subwall '+name,equipment:'main-subwall-support',section:'interior',
+      shape:'box',material:'steel',instanceTone:.94,center:position,size,matrix:matrix.toArray()};
+    const s={name:p.name+' clearance',equipment:p.equipment,renderPart:p};
+    updateBounds(s);layout.parts.push(p);layout.solids.push(s);return p;
+  };
+  const back=13+speakerSpecifications.f124.depth/2;
+  for(const x of [-5.84,-4.36])support('rear longitudinal rail',[x,back+.04,-.6],[.08,.08,3.056]);
+  for(const z of [-2.088,-1.096,-.104,.888])support('rear cross rail',[-5.1,back+.12,z],[1.56,.08,.08]);
+  const cableBottom=back+.16,roof=layout.calibration.mainRoof,cableTop=roof-.025;
+  const anchors=[];
+  for(const x of [-5.84,-4.36])for(const z of [-2.088,.888]){
+    support('suspension cable',[x,(cableBottom+cableTop)/2,z],[.018,cableTop-cableBottom,.018]);
+    support('roof anchor plate',[x,roof-.0125,z],[.18,.025,.18]);
+    anchors.push({lower:[x,cableBottom,z],upper:[x,cableTop,z]});
+  }
+  layout.soundSystem.sources=[...layout.soundSystem.sources,'S13','V19'];
+  layout.soundSystem.configuration='Reported main-hall components with provisional post-December-2023 suspended sub array';
+  layout.soundSystem.suspension={sources:['S13','V19'],reportedSince:'2023-12',
+    center:center.toArray(),cabinetUnderside:13-speakerSpecifications.f124.depth/2,
+    formerCenter:oldCenter.toArray(),anchors,
+    confidence:'Suspension reported; exact height, horizontal anchor, orientation, support construction and current inventory unverified',
+    scope:'Visual arrangement only; no structural capacity or acoustic simulation'};
+}

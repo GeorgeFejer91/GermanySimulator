@@ -1,5 +1,16 @@
 # Berghain interior: objects, art and equipment
 
+## Suspended main subwoofer array — candidate
+
+The six full F124 assemblies move from their obsolete left floor wall into
+a provisional downward-facing grid centred(-5.1,13.0,-0.6), underside12.472.
+Rear rails and four cables meet roof contact plates. The old footprint opens
+to floor-level movement. No other PA unit, room, stair or light is moved.
+S13/V19 support suspension; height, position, orientation and all support
+details are estimates. This is not a structural or acoustic specification.
+Current acceptance and evidence belong to README.md and VALIDATION.md.
+
+
 ## Separate upper sanitary room and compact DJ overlook
 
 V07's dated six-unit trial, the fuller V08 clarification and V19's split-level

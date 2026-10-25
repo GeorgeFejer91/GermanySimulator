@@ -1,6 +1,6 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures,fitFoyerChairs} from './interior-fixtures.mjs';
-import {addSoundSystem} from './sound-system.mjs';
+import {addSoundSystem,suspendMainSubwall} from './sound-system.mjs';
 import {addArtworks,artworkMaterials} from './artworks.mjs';
 import {addLandscape, landscapeMaterials} from './landscape.mjs';
 import {addExteriorDetails} from './exterior-details.mjs';
@@ -359,3 +359,4 @@ registerMainHall(layout,viewpoints);
 fitMainHallRoofFrame(layout);
 registerGround(layout,viewpoints);
 fitUpperSanitary(layout);
+suspendMainSubwall(layout);

@@ -1,5 +1,14 @@
 # Berghain architectural study
 
+## Main subwoofer suspension
+
+S13/V19 support overhead relocation since December2023. The six original
+F124 meshes keep their S10 manufacturer dimensions; their horizontal array,
+height, downward orientation and support frame are inferred. The floor wall
+is removed with its collision. No photograph, CAD, logo or acoustic simulation
+is added. Current installation geometry and rigging capacity are unverified.
+
+
 ## Upper sanitary and overlook fit
 
 V07/V08/V19 and Karhard I19 images08–14 support relative upper-room/overlook

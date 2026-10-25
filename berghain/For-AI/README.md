@@ -1,5 +1,53 @@
 # Berghain reconstruction: goal and work state
 
+## Suspended main subwoofer array — candidate
+
+S13 and V19 report that the left floor-mounted F124 wall moved overhead in
+December 2023. The correction keeps the six complete cabinet assemblies and
+manufacturer envelopes, rotating them into a provisional downward-facing grid
+centred at (-5.1,13.0,-0.6). Its underside is12.472, or7.022m above the floor.
+The former floor footprint is now available for walking and sightlines.
+All other PA units, rooms, stairs, lights and public/private connections stay
+as before. Thin rear rails, four suspension lines and roof contact plates are
+original visual support studies; they are not an engineered rigging design.
+
+Suspension is reported; exact height, horizontal position, orientation,
+attachments and current inventory remain unverified. A dated January2024
+discussion corroborates the reopened floor/darkroom connection and is added
+to S13 without creating a duplicate source ID. Acoustic claims are excluded.
+
+The draft export adds168 triangles and17,992bytes:798,744 triangles,
+61,659,292bytes,215 material/mesh groups and25 embedded textures. No new
+requests, light sources, shadow maps, timers or renderer path are introduced.
+Focused geometry/circulation checks pass; full regression, actual desktop/
+Android-emulated input, source/native renders, matched cost and both required
+independent reviews are pending. Physical Android NOT RUN; full goal ACTIVE.
+Evidence uses output/berghain-suspended-subs-*; preserve the published
+18c90dad upper sanitary release and all its review evidence.
+
+
+### Published upper sanitary room and Panorama overlook
+
+Commit `18c90dadf1ee7753ffff6bf219cfd2e23965e5d8`; Pages run 40224162126 succeeded. All93 checked
+public files match, six entry URLs respond, and three live browser profiles
+pass. Receipt: output/berghain-upper-sanitary-release.json. Primary staged index unchanged.
+
+The separate provisional upper urinal room, glazed lounge relationship, intact
+chaise refit and compact guarded DJ sightline are implemented. Six original
+recessed bowls/rails follow a dated trial count and MSS24 form study; dimensions,
+current inventory, finishes and the separate front-stair correspondence remain
+unverified. The restored floor retains its original PBR maps. Neutral sanitary
+practicals and adjacent Panorama washes reuse three lights/two shadows.
+
+242 Node checks, seven local browser cases, eighteen matched cost contexts and
+independent Physics/Camera reviews pass within their recorded scope. Physical
+Android NOT RUN. Full goal ACTIVE. Next supported correction: main subwoofer
+wall suspension, documented by S13; exact backstage plans and measured room
+registration remain unresolved. Preserve this release and the immutable V1–V4
+review evidence; V1 was rejected for its lost upper-floor surface treatment; V3 was rejected
+for recesses open from below. V4 retains a solid slab underside.
+
+
 ### Recess underside repair — V4
 
 The integrator found that V3's full-depth holes plus one-sided bowl surfaces
