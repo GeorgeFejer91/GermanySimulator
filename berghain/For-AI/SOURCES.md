@@ -443,3 +443,11 @@ position, brackets, wheel/hoist details and present retention remain estimated.
 G28/G29's separate Eisbar hoist and coffered bar roof are not transferred to the
 main hall. The archived turbine-volume height contains two levels and does not
 provide a new dance-floor-to-roof datum. No source pixels are shipped.
+
+### 2026-10-25 compact foyer seating
+
+I09 resolves to the same original URL as A01/I23 gallery02. G02/G03 show
+compact concrete armchairs with separate seat/back pads; they do not establish
+the former 3.2 m sofas. G08/G20/G25 give a stair/table-bay association, not a
+surveyed aisle registration, count or current inventory. Retained model anchors
+remain provisional; G03 background stairs do not justify a new connection.

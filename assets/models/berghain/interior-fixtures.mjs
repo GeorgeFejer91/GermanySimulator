@@ -17,6 +17,42 @@ export function createAcousticGrilleGeometry() {
   return new THREE.ExtrudeGeometry(plate,{depth:.018,bevelEnabled:false,curveSegments:12});
 }
 
+// I09 is Karhard G02: the close-up and G03 show compact armchairs, not
+// two-person sofas. Apply after existing instance tones are pinned so removing
+// the extra pads cannot recolour unrelated furniture. Retain the provisional
+// anchors: G20/G25 associate a chair with the stair/table bay, but do not locate
+// the complete G03 aisle or establish its current inventory.
+export function fitFoyerChairs(layout) {
+  const removed=new Set(),changed=new Set();
+  for(const fixture of layout.fixtures.filter(f=>f.id.startsWith('foyer-channel-seat-'))){
+    const parts=layout.parts.filter(p=>p.fixture===fixture.id);
+    const set=(part,offset,size)=>{
+      part.center=fixture.anchor.map((n,i)=>n+offset[i]);part.size=size;
+      part.matrix=new THREE.Matrix4().makeScale(...size).setPosition(...part.center).toArray();
+      changed.add(part);
+    };
+    set(parts.find(p=>p.name.endsWith('concrete seat slab')),[0,.19,-.07],[.87,.38,.96]);
+    set(parts.find(p=>p.name.endsWith('back channel')),[0,.51,.48],[1.15,1.02,.14]);
+    parts.filter(p=>p.name.endsWith('channel end')).forEach((p,i)=>set(p,[(i?1:-1)*.505,.51,-.07],[.14,1.02,.96]));
+    for(const [name,offset,size]of [
+      ['seat cushion',[0,.43,-.07],[.83,.1,.84]],
+      ['back cushion',[0,.76,.3625],[.73,.18,.095]],
+    ]){
+      const pads=parts.filter(p=>p.name.endsWith(name));set(pads[0],offset,size);
+      pads.slice(1).forEach(p=>removed.add(p));
+    }
+    fixture.dimensions={width:1.15,depth:1.1,height:1.02,seatHeight:.48};
+    fixture.confidence='Compact armchair form from Karhard G02/G03; dimensions, inventory and retained placement inferred; complete aisle unregistered';
+    fixture.gallery=[2,3,8,20,25];
+  }
+  layout.parts=layout.parts.filter(p=>!removed.has(p));
+  layout.solids=layout.solids.filter(s=>!removed.has(s.renderPart));
+  for(const solid of layout.solids)if(changed.has(solid.renderPart)){
+    const {center,size}=solid.renderPart;
+    for(const [i,axis]of ['x','y','z'].entries())solid[axis]=[center[i]-size[i]/2,center[i]+size[i]/2];
+  }
+}
+
 export function addInteriorFixtures(layout) {
   const replaced=new Set(['foyer concrete seat','foyer seat back','Panorama bar counter','Panorama DJ desk',
     'lounge concrete seat','lounge cushion']);

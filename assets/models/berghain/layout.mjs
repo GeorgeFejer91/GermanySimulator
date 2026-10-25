@@ -1,5 +1,5 @@
 import {calibrateStudy, calibration} from './calibration.mjs';
-import {addInteriorFixtures} from './interior-fixtures.mjs';
+import {addInteriorFixtures,fitFoyerChairs} from './interior-fixtures.mjs';
 import {addSoundSystem} from './sound-system.mjs';
 import {addArtworks,artworkMaterials} from './artworks.mjs';
 import {addLandscape, landscapeMaterials} from './landscape.mjs';
@@ -346,6 +346,7 @@ addLoungeFurniture(layout);
 addSoundSystem(layout);
 addArtworks(layout);
 pinInteriorTopologyTones(layout);
+fitFoyerChairs(layout);
 addArchitecturalCirculation(layout);
 addHalleStructure(layout);
 addMainHallDetails(layout);

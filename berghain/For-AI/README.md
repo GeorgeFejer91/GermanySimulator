@@ -1,5 +1,66 @@
 # Berghain reconstruction: goal and work state
 
+## Compact foyer chairs — accepted for publication
+
+I09 is the same original image as Karhard G02. Its compact chair shell and
+G03's opposing chair aisle do not support the former two 3.2 m sofa forms.
+The candidate fits the two existing fixtures as individual concrete armchairs,
+1.15 x 1.10 x 1.02 m with a 0.48 m seat, thick high arms/back, one recessed
+seat pad and one small back pad. These dimensions remain human-scale estimates.
+The shell now rests on the 0.05 m ground floor; its linked solids follow it.
+
+G08/G20/G25 associate a compact chair with the main-stair/table bay, but do not
+locate G03's complete aisle, endpoint or contemporary inventory. The two old
+anchors are retained as provisional placement, not newly verified coordinates.
+No corridor, backstage route, wall or additional seat count is invented.
+Source pixels and staged animals are not reproduced. F06 remains incomplete.
+
+All 218 Node tests pass, including three new chair-form/contact/circulation
+regressions. Actual source-model comparison preserves 16,294 unrelated parts'
+matrices and colours, all floors, other colliders, public routes, art and PA,
+viewer/navigation and night-lighting code. The export has 772,712 triangles,
+204 groups and 25 textures; 59,720,812 bytes, SHA-256
+`508631b96e79264baed855a46779cee65e2e6a335f3e6ba7ac2f0f7352c83578`.
+Six real-input contact/circulation/look/fallback cases and one source/native
+scenario (two material comparisons and four day/night views) pass. Independent
+Physics and Camera reviews accept the scoped frozen candidate. Nine matched
+cost contexts per version pass the declared comparison gate. Median p95 frame
+intervals are 34.8 to 34.8 / 27.8 to 27.8 / 27.9 to 34.7 ms for desktop,
+portrait and landscape emulation. The landscape slowdown is recorded; this
+does not establish unchanged speed or low-end device performance. Normal
+transfer grows 2,080 bytes; the optional GLB shrinks 3,836 bytes and 48 triangles.
+Three active lights, two shadow maps, idle render stop and lazy GLB loading remain.
+Physical Android NOT RUN. This is not a full interior-accuracy completion.
+
+Evidence: `output/berghain-foyer-seating-{candidate.json,node.txt,preservation.json}`.
+Base: `7725a77eaafb7e2bd86ba817412d6b1bcc12b6f5`. Root owns integration.
+
+
+### Published roof and industrial bridge correction
+
+Commit `7725a77eaafb7e2bd86ba817412d6b1bcc12b6f5`; Pages run 40195100756 succeeded. All 89 checked
+public files match the commit, six entry URLs respond, and three live browser
+profiles pass. Receipt: output/berghain-roof-frame-release.json. Primary staged index unchanged.
+
+The unsupported upper beam grid is removed; eight side piers meet the retained
+roof. A separate stationary industrial bridge follows Karhard G17/G19/G21/G22.
+Its dimensions, machinery details and present retention remain estimates.
+All 16,246 other parts retain their actual geometry and colours. Public floors,
+pier footprints, other colliders, navigation and lighting code are preserved.
+
+All 215 Node tests, six input/fallback cases, three source/GLB comparisons with
+six day/night views and independent Physics/Camera reviews pass. Nine matched
+cost samples per version retain median p95 frame times of 27.9 to 27.8 / 13.9 to 13.9
+/ 14.0 to 14.0 ms. Normal transfer increases 5,632 bytes; GLB increases 83,600 bytes.
+Three lights, two shadows, idle rendering stop and lazy GLB loading remain.
+Physical Android and listening are NOT RUN. Full goal ACTIVE: detailed
+roof/clerestory construction, contemporary inventory, art fidelity and exact
+private/backstage, upper FLINTA and lift locations remain unresolved.
+Next bounded source audit: `output/berghain-after-roof-frame-next-audit.md`
+records the compact foyer seating comparison; establish a visible mismatch
+and safe placement before changing existing long benches or circulation.
+
+
 ### Roof and industrial bridge — accepted for publication
 
 Base e2178e6; candidate `output/berghain-roof-frame-runtime`. Karhard

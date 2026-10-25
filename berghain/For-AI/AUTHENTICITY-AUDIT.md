@@ -1,5 +1,21 @@
 # Berghain interior authenticity audit
 
+## AU30 — compact foyer chair form, unregistered aisle
+
+I09 is the same original image as Karhard G02. Its compact chair shell and
+G03's opposing chair aisle do not support the former two 3.2 m sofa forms.
+The candidate fits the two existing fixtures as individual concrete armchairs,
+1.15 x 1.10 x 1.02 m with a 0.48 m seat, thick high arms/back, one recessed
+seat pad and one small back pad. These dimensions remain human-scale estimates.
+The shell now rests on the 0.05 m ground floor; its linked solids follow it.
+
+G08/G20/G25 associate a compact chair with the main-stair/table bay, but do not
+locate G03's complete aisle, endpoint or contemporary inventory. The two old
+anchors are retained as provisional placement, not newly verified coordinates.
+No corridor, backstage route, wall or additional seat count is invented.
+Source pixels and staged animals are not reproduced. F06 remains incomplete.
+
+
 ## AU29 — broad roof, side frame and industrial bridge
 
 G17/G19/G21/G22 support a broad central roof and a deep red-brown industrial

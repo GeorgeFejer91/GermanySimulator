@@ -1,5 +1,21 @@
 # Berghain interior: objects, art and equipment
 
+## Compact foyer chairs — isolated candidate
+
+I09 is the same original image as Karhard G02. Its compact chair shell and
+G03's opposing chair aisle do not support the former two 3.2 m sofa forms.
+The candidate fits the two existing fixtures as individual concrete armchairs,
+1.15 x 1.10 x 1.02 m with a 0.48 m seat, thick high arms/back, one recessed
+seat pad and one small back pad. These dimensions remain human-scale estimates.
+The shell now rests on the 0.05 m ground floor; its linked solids follow it.
+
+G08/G20/G25 associate a compact chair with the main-stair/table bay, but do not
+locate G03's complete aisle, endpoint or contemporary inventory. The two old
+anchors are retained as provisional placement, not newly verified coordinates.
+No corridor, backstage route, wall or additional seat count is invented.
+Source pixels and staged animals are not reproduced. F06 remains incomplete.
+
+
 ## Main switchback — photo-supported rise, estimated fit
 
 G20/21/23/25 require the upper flight to rise toward the main-floor/DJ rim.
@@ -541,7 +557,7 @@ not evidence that these concrete sofas are timber or that all seating is alike.
 
 | Candidate feature | Evidence and implementation | Remaining uncertainty |
 | --- | --- | --- |
-| Foyer channel seats | I09: concrete slab, full-height ends/back channel, dark seat/back cushions. Model seat top .48m; overall3.2×1.35×1.02m. | Dimensions/count/placement inferred; photograph is historical. |
+| Foyer channel seats | I09: concrete slab, full-height ends/back channel, dark seat/back cushions. Model seat top .48m; compact overall1.15×1.10×1.02m. | Dimensions/count/placement inferred; photograph is historical. |
 | Panorama counter | A13: dark wrapping worktop, framed luminous lower panels and metal foot rail. Model top1.13m, long run8.9m, return3.8m. | Shape observed, lengths/corner and location inferred; current counter configuration needs a fresh record. |
 | Metal stools | A13: round seats, four splayed legs, circular foot ring, floor feet. Model top .77m. | Twelve modeled seats are a reconstruction choice, not a documented count. |
 | Backbar and DJ forms | A13: open metal bottle rack, multiple shelves, equipment table/decks/mixer and slender overhead supports. | Bottle labels, electronics model, exact suspension and furniture positions not verified. |
