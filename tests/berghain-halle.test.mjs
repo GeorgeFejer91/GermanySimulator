@@ -188,17 +188,20 @@ test('Halle rendered slabs expose three voids and its original indexed guards st
    const ray=new THREE.Raycaster(center.clone().add(new THREE.Vector3(0,0,sign)),new THREE.Vector3(0,0,-sign));
    assert.ok(ray.intersectObject(panel).length,'Actual ribbon triangles are visible from either side');
   }
-  // Admission and the separate Panorama PA have their own bounded geometry
-  // checks. Exclude only actual PA instances; retain the existing Halle guard.
+  // Admission, Panorama PA and ordinary WC have independent geometry budgets.
+  // Exclude actual scoped instances, retaining this historical Halle allowance.
   const paInstances=new Map();
-  for(const p of layout.parts.filter(p=>p.equipment?.startsWith('panorama-'))){
+  for(const p of layout.parts.filter(p=>p.equipment?.startsWith('panorama-')||p.name.startsWith('Panorama WC ')||p.name.startsWith('panorama-wc-'))){
     const key=[p.section,p.material,p.shape].join('/');paInstances.set(key,(paInstances.get(key)||0)+1);
   }
   let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh&&!mesh.name.startsWith('admission/')){
     const retained=(mesh.count??1)-(paInstances.get(mesh.name)||0);
     if(retained>0)groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*retained;
   }});
-  assert.ok(triangles<=658224+20000,`Triangle growth ${triangles-658224} exceeds the agreed provisional guard`);
+  // Published7730 ordinary WC basis:46instances /2136triangles. This removes
+  // its old contribution as well; the20,000 Halle allowance is unchanged.
+  const basis=658224-2136;
+  assert.ok(triangles<=basis+20000,`Triangle growth ${triangles-basis} exceeds the agreed provisional guard`);
   assert.ok(groups<=162+10,`Mesh/material-group growth ${groups-162} exceeds the agreed provisional guard`);
  }finally{disposeBerghainModel(model);}
 });

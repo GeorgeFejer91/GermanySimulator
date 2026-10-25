@@ -129,3 +129,19 @@ test('foyer wash emits below its actual soffit and reaches the ground',()=>{
   assert.ok(hit&&hit.distance>1&&hit.point.y<1,'foyer wash is intercepted above ground '+JSON.stringify(hit&&{distance:hit.distance,point:hit.point.toArray()}));
  }finally{rig.dispose();disposeBerghainModel(model);}
 });
+
+test('ordinary Panorama WC cues clear the cubicle panels and reach the floor',()=>{
+ const scene=new THREE.Scene(),rig=createViewerLighting(scene),model=createBerghainModel();
+ try{
+  model.updateMatrixWorld(true);rig.update('interior',{x:5.7,y:9.05,z:17});
+  assert.equal(rig.state.room,'panoramaToilets');let count=0;
+  scene.traverse(light=>{
+   if(!light.isSpotLight||!light.visible)return;
+   const ray=new THREE.Raycaster(light.position,light.target.position.clone().sub(light.position).normalize(),0,light.distance);
+   const hit=ray.intersectObject(model,true).find(h=>!h.object.material.transparent&&!h.object.material.transmission);
+   assert.ok(hit&&hit.distance>1.5&&Math.abs(hit.point.y-9.05)<.01,
+    light.name+' must reach the supported floor, not a near cubicle divider: '+JSON.stringify(hit&&{distance:hit.distance,point:hit.point.toArray()}));
+   count++;
+  });assert.equal(count,3);
+ }finally{rig.dispose();disposeBerghainModel(model);}
+});

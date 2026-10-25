@@ -1,5 +1,40 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted ordinary Panorama WC correction — 25 October 2026
+
+The earlier single transverse bank is replaced by separate front/rear right
+groups and an illustrative left group. Dated visitor accounts describe two
+right groups of three in 2022 and three rear stalls past a column in 2026.
+Two left cells, metric spacing and the straight bank remain estimates; this
+does not establish the present total inventory or a surveyed floorplan.
+
+The rear lining is lowered to a solid 1m parapet, revealing existing facade
+glazing without opening a route beyond the supported floor. Its top masks
+the lowest .15m of the existing sill; bay registration remains estimated.
+Pans meet the floor; flush plates and rear casings meet calibrated back panels.
+I21 supplies sanitary form vocabulary, with gallery floor/date unresolved.
+
+All 17,155 non-WC parts and all retained floor, viewpoint and non-WC collision
+data remain exact. The public entrance, upper urinals, lounge/slab, main Klo,
+ground toilets, smoking connection and backstage boundaries are retained. The
+third WC practical moves into the clear aisle; all three beam paths now reach
+the floor. Light power, count and shadow budget are retained. Current single-use
+assignments and queue policies are unverified.
+
+All 252 distinct Node checks (229 unchanged plus 23 fresh affected checks), five
+browser route/fallback/source-native cases, matched
+three-sample cost checks on each desktop/Android-emulated profile and both
+independent specialist reviews pass within scope. The export adds 2,604
+triangles and 121,164 bytes, with the same 225 groups and 25 embedded textures; no new
+lights, timers or texture requests. Physical Android NOT RUN. Frozen evidence:
+output/berghain-panorama-wc-candidate-v2.json and its exact V1/V2 bridge. The
+preserved V1 lighting failure is repaired; Halle's historical 20k allowance now
+excludes WC instances and their old basis, with a separate 5k WC limit. Publication verification is
+tracked separately in output/berghain-panorama-wc-release.json.
+
+The full reconstruction goal remains ACTIVE. Private plans, current inventories,
+selected-date artwork and comprehensive photographic fidelity remain unresolved.
+
 ## Accepted Panorama PA correction — 25 October 2026
 
 This acceptance supersedes the pending draft entries below. The V3 product

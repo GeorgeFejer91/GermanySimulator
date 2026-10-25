@@ -7,6 +7,22 @@ import {adjacentPanoramaPoint} from '../assets/models/berghain/panorama-section.
 const studyToSite=({x,y,z})=>Object.fromEntries(adjacentPanoramaPoint(panoramaStudyPoint([x,y,z])).map((v,i)=>[['x','y','z'][i],v]));
 import {panoramaSanitaryAt} from '../assets/models/berghain/interior-topology.mjs';
 import {canStand,moveVisitor} from '../berghain/navigation.mjs';
+import {createBerghainModel,disposeBerghainModel} from '../assets/models/berghain/model.mjs';
+
+test('ordinary Panorama WC stays within its own bounded geometry budget',()=>{
+  const model=createBerghainModel(),counts=new Map();
+  try{
+    for(const p of layout.parts.filter(p=>p.name.startsWith('Panorama WC ')||p.name.startsWith('panorama-wc-'))){
+      const key=[p.section,p.material,p.shape].join('/');counts.set(key,(counts.get(key)||0)+1);
+    }
+    let triangles=0;for(const [key,count]of counts){
+      const mesh=model.getObjectByName(key);assert.ok(mesh,key);
+      triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*count;
+    }
+    assert.ok(triangles<=5000,'Ordinary WC exceeds its5,000-triangle budget: '+triangles);
+    assert.ok(counts.size<=5,'Reuse existing shared shapes/materials');
+  }finally{disposeBerghainModel(model);}
+});
 
 test('Panorama sanitary area is distinct from main-floor Klo and below upper lounge',()=>{
   const area=layout.interiorTopology.panoramaToilets;
@@ -15,16 +31,20 @@ test('Panorama sanitary area is distinct from main-floor Klo and below upper lou
   assert.ok(area.floorHeight+2.7<layout.upperLounge.floorHeight);
   assert.match(area.placement,/estimated/);
   assert.match(area.photoAssignment,/unresolved/);
-  assert.equal(layout.fixtures.filter(f=>f.id.startsWith('panorama-wc-pan-')).length,3);
+  assert.equal(layout.fixtures.filter(f=>f.id.startsWith('panorama-wc-pan-')).length,8);
   assert.equal(panoramaSanitaryAt(studyToSite({x:-15,y:13.25,z:1})),true);
   assert.equal(panoramaSanitaryAt(studyToSite({x:-15,y:5.45,z:1})),false);
 });
 
 test('walk from Panorama through separate WC entrance into each cubicle and return',()=>{
   let position={...viewpoints.panorama.position};
-  const cubicles=[[-15.5,1],[-15.5,-1.9],[-18.5,-1.9],[-15.5,-1.9],
-    [-15.5,.3],[-18.5,.3],[-15.5,.3],[-15.5,2.5],[-18.5,2.5],[-15.5,2.5],
-    [-15.5,1]];
+  // Independent route through front/right, rear/right and left groups.
+  // These are estimated metric samples; dated accounts establish topology.
+  const cubicles=[[-15.5,1]];
+  for(const x of [-13.85,-15.05,-16.25,-17.9,-19.1,-20.3])
+    cubicles.push([x,1],[x,-1.6],[x,1]);
+  for(const x of [-18.5,-20.1])cubicles.push([x,1],[x,2.75],[x,1]);
+  cubicles.push([-15.5,1]);
   const approach=layout.panoramaRegistration.toiletRoute.slice(0,-1);
   const route=[...approach,...cubicles.map(([x,z])=>studyToSite({x,y:13.25,z})),...approach.toReversed()];
   for(const target of route){
