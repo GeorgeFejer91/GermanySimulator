@@ -1,5 +1,55 @@
 # Berghain reconstruction: goal and work state
 
+### Foyer frame acceptance
+
+The foyer gallery correction passed 195 fresh Node checks and eight browser
+cases: the folded main stair in desktop keyboard and both Android-emulated
+touch orientations; the ground WC crossing; two fallback/material-control
+cases; and two source/portable/day/night render cases. Source and exported
+materials agree under the same camera. The independent Physics and Camera
+reviewers accepted the frozen226-file candidate, base e153041.
+
+Three cold contexts per viewport before and after the change meet the scoped
+rendering/input limits; idle rendering remains stopped and ordinary viewing
+does not request the GLB. Physical Android remains NOT RUN. The exported model
+has204 mesh groups and765200 triangles; the local frame adds27 parts,324
+triangles and one batch. It adds no texture, light or timer.
+
+Receipts: output/berghain-foyer-frame-candidate.json, -node.tap,
+-browser-acceptance.json, -cost-comparison.json, -physics-review.md and
+-camera-review.md. The documentation bridge changes only this acceptance
+record and the task-owner handoff; geometry remains frozen. The initial browser
+report retains four failed harness attempts: a camera intersected the existing
+table and the playable common-room label expectation was wrong. Four corrected
+checks pass in -browser-recheck/report.json alongside the initial four route
+passes. No runtime change was needed or failed evidence discarded.
+
+This closes the local missing gallery-frame/radiator relationship in F03.
+Exact frame registration, full current room/artwork inventory and private or
+FLINTA placement remain unverified; no measured interior plan was supplied.
+README.md remains the single task owner. Publication verification is recorded
+in output/berghain-foyer-frame-release.json when deployment completes.
+
+
+## Foyer gallery frame — source-informed correction
+
+Karhard G04/07/20/25 support rectangular gallery piers, local beam haunches,
+transverse slab ribs and a tall radiator mounted on a pier. A controlled render
+of e153041 showed a flat unsupported gallery edge and a freestanding radiator.
+The local correction fits three piers, six haunches, a continuous edge beam
+and seventeen ribs beneath the existing gallery. The radiator moves against
+the middle pier. The tapered corbel primitive and existing concrete material
+are reused; every new part has a linked solid. Haunch solids conservatively
+contain the overhead wedges.
+
+These counts, sections and coordinates are estimates, not a recovered grid.
+The authoring slab edge remains z9.4, underside5.05 and floor5.45; beam bottom
+is4.4, pier bases0.05 and haunch minimum3.8. Pier centers are x−2.4,4.5,16.55
+at z9.05; radiator center z9.72. Existing Säule capitals, stairs, gallery
+walk surface, official exterior and private-room boundaries are unchanged.
+The source photos support forms and relationships, not structural adequacy.
+
+
 ### Radiator, window and connected-section correction — current candidate
 
 The previous joint section placed 0.8025 m rigid radiators partly over the

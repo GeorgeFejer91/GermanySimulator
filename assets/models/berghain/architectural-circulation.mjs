@@ -158,9 +158,40 @@ export function addArchitecturalCirculation(layout){
   box('foyer broad service duct',[2.5,5.2,16],[2.1,.4,9],'aluminium');
   for(const z of [12,14,16,18,20])box('foyer duct transverse seam',[2.5,4.99,z],[2.12,.025,.035],'steel',false);
   for(let z=11.6;z<20.5;z+=.16)box('foyer duct underside rib',[2.5,4.985,z],[2.06,.035,.025],'steel',false);
-  box('foyer radiator header',[4.5,2.9,11.7],[1.1,.06,.11],'steel');
-  for(let i=0;i<15;i++)box('foyer radiator fin',[4+i*.072,1.55,11.7],[.045,2.7,.14],'steel');
+  box('foyer radiator header',[4.5,2.9,9.72],[1.1,.06,.11],'steel');
+  for(let i=0;i<15;i++)box('foyer radiator fin',[4+i*.072,1.55,9.72],[.045,2.7,.14],'steel');
   data.fixtures.push({id:'lower-stair-services',gallery:['03','04','05','20','25'],placement:'Estimated adjacency to new main stair; exact service bay unmeasured'});
+
+  // G04/07/20/25 show the gallery edge carried by rectangular piers with
+  // local beam haunches, transverse soffit ribs and a pier-mounted radiator.
+  // Fit these relations to the existing slab edge (author z9.4), not a newly
+  // asserted survey grid. Keep the separate Säule capitals and all floor datums.
+  const frameParts=[];
+  const frameBox=(name,center,size,axes=null)=>{
+    const p=box('foyer gallery '+name,center,size,'concrete',true,axes);
+    p.foyerFrame=true;frameParts.push(p);return p;
+  };
+  frameBox('edge beam',[8.75,4.725,9.05],[25.5,.65,.7]);
+  const pierXs=[-2.4,4.5,16.55];
+  for(const x of pierXs){
+    frameBox('pier',[x,2.225,9.05],[1.2,4.35,1.1]);
+    for(const sign of [-1,1]){
+      const p=frameBox('haunch',[x+sign*1.1,4.1,9.05],[1,.6,.7],
+        [[sign,0,0],[0,.6,0],[0,0,sign*.7]]);
+      // Reuse the existing tapered concrete corbel primitive. The linked
+      // overhead collision envelope conservatively contains its wedge.
+      p.shape='saule-corbel';
+    }
+  }
+  for(let x=-3.2;x<21.1;x+=1.5)
+    frameBox('soffit rib',[x,4.94,7.4],[.16,.22,2.6]);
+  data.foyerFrame={gallery:['04','07','20','25'],sources:['A01','I23'],
+    confidence:'Photographed forms and adjacency; pier count, spacing and sections estimated within the existing gallery',
+    author:{slabEdge:9.4,slabUnderside:5.05,beam:{x:[-4,21.5],z:[8.7,9.4],y:[4.4,5.05]},
+      pierXs,pierZ:9.05,pierSize:[1.2,4.35,1.1],pierBase:.05,haunchBottom:3.8,
+      ribPitch:1.5,ribCount:17,radiatorZ:9.72},
+    parts:frameParts.length,
+    boundary:'Local foyer gallery only; no recovered structural plan, room datum, private door or structural adequacy claim'};
 
   // I03/I04 and U01/U02 identify a mezzanine, not a counter on the main floor.
   // G27–29 show a guarded drop, onward ascent and overhead crane. The datum,

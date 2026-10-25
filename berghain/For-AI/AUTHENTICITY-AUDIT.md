@@ -1,5 +1,24 @@
 # Berghain interior authenticity audit
 
+## Foyer gallery frame — source-informed correction
+
+Karhard G04/07/20/25 support rectangular gallery piers, local beam haunches,
+transverse slab ribs and a tall radiator mounted on a pier. A controlled render
+of e153041 showed a flat unsupported gallery edge and a freestanding radiator.
+The local correction fits three piers, six haunches, a continuous edge beam
+and seventeen ribs beneath the existing gallery. The radiator moves against
+the middle pier. The tapered corbel primitive and existing concrete material
+are reused; every new part has a linked solid. Haunch solids conservatively
+contain the overhead wedges.
+
+These counts, sections and coordinates are estimates, not a recovered grid.
+The authoring slab edge remains z9.4, underside5.05 and floor5.45; beam bottom
+is4.4, pier bases0.05 and haunch minimum3.8. Pier centers are x−2.4,4.5,16.55
+at z9.05; radiator center z9.72. Existing Säule capitals, stairs, gallery
+walk surface, official exterior and private-room boundaries are unchanged.
+The source photos support forms and relationships, not structural adequacy.
+
+
 ## AU12 joint section correction — 25 October 2026
 
 The new candidate resolves the demonstrable four-versus-six Panorama window

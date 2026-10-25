@@ -1,5 +1,40 @@
 # Berghain viewer validation
 
+### Foyer frame acceptance
+
+The foyer gallery correction passed 195 fresh Node checks and eight browser
+cases: the folded main stair in desktop keyboard and both Android-emulated
+touch orientations; the ground WC crossing; two fallback/material-control
+cases; and two source/portable/day/night render cases. Source and exported
+materials agree under the same camera. The independent Physics and Camera
+reviewers accepted the frozen226-file candidate, base e153041.
+
+Three cold contexts per viewport before and after the change meet the scoped
+rendering/input limits; idle rendering remains stopped and ordinary viewing
+does not request the GLB. Physical Android remains NOT RUN. The exported model
+has204 mesh groups and765200 triangles; the local frame adds27 parts,324
+triangles and one batch. It adds no texture, light or timer.
+
+Receipts: output/berghain-foyer-frame-candidate.json, -node.tap,
+-browser-acceptance.json, -cost-comparison.json, -physics-review.md and
+-camera-review.md. The documentation bridge changes only this acceptance
+record and the task-owner handoff; geometry remains frozen. The initial browser
+report retains four failed harness attempts: a camera intersected the existing
+table and the playable common-room label expectation was wrong. Four corrected
+checks pass in -browser-recheck/report.json alongside the initial four route
+passes. No runtime change was needed or failed evidence discarded.
+
+This closes the local missing gallery-frame/radiator relationship in F03.
+Exact frame registration, full current room/artwork inventory and private or
+FLINTA placement remain unverified; no measured interior plan was supplied.
+README.md remains the single task owner. Publication verification is recorded
+in output/berghain-foyer-frame-release.json when deployment completes.
+
+
+## Foyer frame candidate
+
+Base e153041. Focused geometry checks cover slab/beam/pier contact, radiator-to-pier rays, pier collision and actual haunch vertices. Fresh browser, full Node and independent review evidence is recorded above. Earlier release results below apply to their named candidates.
+
 ### Radiator, window and connected-section correction — current candidate
 
 The previous joint section placed 0.8025 m rigid radiators partly over the
