@@ -1,5 +1,27 @@
 # Berghain interior: objects, art and equipment
 
+## Toilet, backstage and smoking source follow-up — 25 October 2026
+
+The user's requested Reddit search and independent interview checks add the
+dated constraints V09–V14 in [SOURCES.md](SOURCES.md). They refine what can be
+placed relative to other rooms without establishing surveyed coordinates:
+
+| Space | Supported relationship | Still unresolved in the model |
+| --- | --- | --- |
+| Ground FLINTA cubicles | Within ground-floor Säule, before the stairs (V09); distinct from upper urinals | Exact entrance, boundaries, count and relationship to the older quiet cloakroom WC |
+| Upper FLINTA urinals | Near the top of the Panorama stair, separate from ordinary Panorama cubicles (V07/V08/V10) | Which landing and former room; visitors disagree about the balcony-adjacent room; 2023 trial count is not current inventory |
+| Garden urinals | Reported on the left upon entering the garden (V10) | Which entry is meant in site coordinates, fixtures, footprint and seasonal configuration |
+| Main-floor private toilet | Compact space behind the DJ curtain in V11; booth-associated toilet independently corroborated by V12 | Private room outline, service connections, furnishing and exact access sequence; existing closed recess does not reconstruct its interior |
+| Alleged Panorama private room | V13 contains incompatible accounts | Existence/location cannot be accepted from that thread alone |
+| Smoking circulation | Windowed metal stair/corridor above garden; visitor route links bridge, smoking and Panorama (V14) | Exact hidden attachments; existing source-informed public route remains an estimate |
+
+Do not merge the FLINTA facilities, treat the July 2024 architect intervention
+as their first opening, or label all historical backstage/service rooms as one
+current lounge. The sources support a compact booth-associated private area;
+they do not justify a large generic backstage suite. This is research progress,
+not a new geometry acceptance. Runtime metadata still describes the preceding
+geometry revision and must be reconciled when the affected layout is changed.
+
 ## Compact foyer chairs — isolated candidate
 
 I09 is the same original image as Karhard G02. Its compact chair shell and

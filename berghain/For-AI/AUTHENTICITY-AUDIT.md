@@ -234,11 +234,22 @@ window sequence is still needed before revising the connected room geometry.
 
 Additional finding **AU26 — backstage/service rooms unmodelled**: V06's 2010
 primary Höppner interview establishes dressing, cooling and storage spaces.
-It gives no plan, position, access path or current inventory. The existing DJ
-desks are not substitutes for those rooms; no public backstage shortcut should
-be fabricated. V05 also reports a separate stair to FLINTA toilets, whose
-position and contemporary access remain unregistered. These are open scope,
-not corrected inaccuracies.
+The 25 October 2026 Reddit/other-source follow-up adds a narrower contemporary
+constraint: V12's named October 2026 interview corroborates a booth-associated
+private toilet, while V11's June 2024 accounts put a compact curtained waiting
+space/toilet behind the main-floor DJ booth. This supports adjacency, not the
+room outline, fixtures, door sequence or an identity with V06's older service
+rooms. The existing closed DJ recess remains a photographed boundary, not a
+reconstruction of everything behind it. V13's alleged Panorama private room
+is disputed. No public backstage shortcut is supported.
+
+**FLINTA follow-up, 25 October 2026:** V09 supports ground-floor Säule cubicles;
+V07/V08/V10 support separate upper squatting urinals reached near the Panorama
+stair, and V10 also reports garden urinals. Do not collapse these into one room,
+relabel the historical quiet cloakroom WC without evidence, or equate the 2023
+mobile trial count with the present installation. The upper landing, exact
+footprints, entrances and contemporary inventory remain unregistered. These
+are improved constraints for outstanding geometry, not completed corrections.
 
 The comparison uses architect and structural-engineer accounts; their actual project photographs; artist, furniture-maker and lighting-installer records; technical product drawings; published curator/manufacturer interviews; dated firsthand visits; and historical diagrams. Source counts are discovery records, not independent confirmations. A13/I19 and A12/I22 repeat the same architect galleries. Several Halle architect/engineer pictures are the same photographic sequence. S06 repeats S05's community speaker list. Interviews with the same exhibition organisers form a related testimony chain.
 
