@@ -816,7 +816,7 @@
     },
     {
       "path": "assets/models/berghain/layout.mjs",
-      "sha256": "b9f17de4e75874aaaedb8eb199fe78a35438815a662f5240a44494fbc30a5658"
+      "sha256": "188c17d3b93a6ba6771e2f5d143a6bae748b5b497e23299abdc940b2c3acb52b"
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
@@ -836,7 +836,7 @@
     },
     {
       "path": "assets/models/berghain/model.mjs",
-      "sha256": "a0cf9d4c2884a6bad6ab6b353a4fb6014da25fc10236d636395b928f45fa2f12"
+      "sha256": "be0d6a81f52b616dafe85117784a7bc38b329a3f5a686bc70f90de6e2a26c0ef"
     },
     {
       "path": "assets/models/berghain/original-balustrades.mjs",
@@ -905,6 +905,10 @@
     {
       "path": "assets/models/berghain/upper-sanitary.mjs",
       "sha256": "8fe9ee9c723fc5857bb8a30ab38f5afd4edb700b77ac1ead6cbf713d77cee987"
+    },
+    {
+      "path": "assets/models/berghain/wardrobe.mjs",
+      "sha256": "3fc77baff78205415763278e6d983f924e993510bc7082a825182b23b6e2e53e"
     },
     {
       "path": "assets/models/berghain/textures/pier-baseColor.png",

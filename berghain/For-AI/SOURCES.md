@@ -1,5 +1,21 @@
 # Berghain online resource catalogue
 
+## Garderobe evidence — 26 October 2026
+
+ENT06 — [Firsthand cloakroom routines, 8–9 January 2024](https://www.reddit.com/r/Berghain_Community/comments/191zcv0/what_are_your_little_berghain_rituals/).
+Read 26 October 2026. Original poster places couches across from the Garderobe;
+an independent reply describes bag check, cashier, changing on a couch and
+depositing a bag before going upstairs. Supports function and relative facing,
+not dimensions, materials, counts or the present floorplan. Corroborates ENT04.
+
+ENT07 — [Entrance rearrangement discussion, January 2023](https://www.reddit.com/r/Berghain_Community/comments/10dks75).
+Search-indexed replies inspected 26 October 2026; full page unavailable.
+Describes a cashier diversion beside security, with another reply calling it
+temporary. Do not treat it as a permanent current plan. ENT03/ENT04 remain the
+later sequence references. Karhard's 2016 enlargement date does not supply its
+geometry. No source photographs or Reddit content are redistributed as textures.
+
+
 Säule fixed-light interpretation (26 October 2026): A15/I24's continuous upper
 and lower grazing wash is represented by original radiance baked from authored
 recessed rectangular emitters. Strip dimensions, luminance (125 in the study

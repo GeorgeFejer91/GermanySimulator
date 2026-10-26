@@ -1,5 +1,21 @@
 # Berghain architectural study
 
+## Garderobe and ticket-entry correction — accepted
+
+Retain the reported security → cashier/wristband → strip curtain → Garderobe
+route. Replace the floating ground-floor counter and disconnected rods with
+a grounded service surface at model Y1.15 m (1.10 m above the floor) and supported hanger rack; add two facing
+changing couches. Public WC and foyer connections remain clear in CPU checks.
+ENT04/ENT06 support the seating function and relationship; U02 supports the
+ground room. Footprint, quantities, materials and dimensions remain estimates;
+this does not reconstruct the undocumented 2016 enlargement. No prices or
+payment mechanics are added. Acceptance: 286 Node checks, nine source/native and actual-input browser cases,
+independent Physics/Camera review and six matched cost contexts. The corrected
+GLB is rebuilt; baked image pixels and unrelated parts remain exact. Publication
+is verified separately in output/berghain-wardrobe-entry-release.json.
+Broader exact-interior completion remains blocked on other missing evidence.
+
+
 ## Panorama PA V2
 
 Original thin, double-sided pierced grille sheets retain physical openings and recessed backing. V1 extruded hole walls exceeded the intended cost; V2 adds36,084 triangles and4,254,896 GLB bytes against the accepted base, with no new texture files or light sources. Current inventory, exact registration and support design remain inferred. Separate PA budget:40,000 triangles and twelve affected material/geometry groups. Full frozen-candidate verification pending; no publication acceptance.

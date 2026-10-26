@@ -21,6 +21,7 @@ import {registerPanorama} from './panorama-registration.mjs';
 import {registerMainHall} from './main-hall-registration.mjs';
 import {registerGround} from './ground-registration.mjs';
 import {fitUpperSanitary} from './upper-sanitary.mjs';
+import {addWardrobe} from './wardrobe.mjs';
 
 export const materials = {
   ...admissionMaterials,
@@ -365,3 +366,4 @@ fitUpperSanitary(layout);
 suspendMainSubwall(layout);
 fitPanoramaSoundSystem(layout);
 fitPanoramaOverheadHardware(layout);
+addWardrobe(layout,{box,beam});

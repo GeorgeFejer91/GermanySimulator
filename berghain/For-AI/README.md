@@ -1,5 +1,50 @@
 # Berghain reconstruction: goal and work state
 
+## Garderobe and ticket-entry correction — accepted
+
+Retain the reported security → cashier/wristband → strip curtain → Garderobe
+route. Replace the floating ground-floor counter and disconnected rods with
+a grounded service surface at model Y1.15 m (1.10 m above the floor) and supported hanger rack; add two facing
+changing couches. Public WC and foyer connections remain clear in CPU checks.
+ENT04/ENT06 support the seating function and relationship; U02 supports the
+ground room. Footprint, quantities, materials and dimensions remain estimates;
+this does not reconstruct the undocumented 2016 enlargement. No prices or
+payment mechanics are added. Acceptance: 286 Node checks, nine source/native and actual-input browser cases,
+independent Physics/Camera review and six matched cost contexts. The corrected
+GLB is rebuilt; baked image pixels and unrelated parts remain exact. Publication
+is verified separately in output/berghain-wardrobe-entry-release.json.
+Broader exact-interior completion remains blocked on other missing evidence.
+
+
+
+## Goal blocked on remaining architectural evidence — 26 October 2026
+
+The goal service is now **BLOCKED**, not complete, after three consecutive
+current-state audits found the same missing-evidence condition. The verified
+published checkpoint remains `c2a7a4839f38a3192c3533a9237e4be80f09af22`.
+Backstage geometry, exact upper FLINTA/front-stair registration, lift landings,
+later canopy/wardrobe geometry and selected-date inventories still lack usable
+location evidence. Existing sources establish dates or relationships without
+resolving these placements. Do not invent coordinates to claim completion.
+
+Audit chain: `output/berghain-completion-audit-after-hardware-1.json` through
+`-3.json`; the first audit's Markdown records the requirement matrix. The final
+check binds the same remote commit, 283 primary paths and 18 evidence files.
+All prior completed corrections and validation remain intact; no pending live
+process was abandoned. A user-requested resume starts a fresh blocked audit and
+should pursue a concrete new reference or changed requirement.
+
+## Published Panorama overhead hardware — 26 October 2026
+
+Verified commit `c2a7a4839f38a3192c3533a9237e4be80f09af22`; Pages run 40281358801 succeeded.
+All 114 checked public files match and six entry URLs respond. Both viewer
+entries pass actual keyboard/touch approaches on desktop and Android portrait/
+landscape emulation. Receipt: output/berghain-panorama-hardware-release.json.
+The primary index is unchanged. This supersedes the pending publication checkbox.
+Full reconstruction remains ACTIVE; current private plans and measured registration
+remain unresolved. Physical Android is untested.
+
+
 ## Accepted Panorama overhead hardware — 26 October 2026
 
 A13/01 and I19/06/07/15/16 place perforated housings in the high wall band.

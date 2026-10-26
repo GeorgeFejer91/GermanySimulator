@@ -1,5 +1,33 @@
 # Berghain viewer validation
 
+## Garderobe and ticket-entry correction — accepted
+
+286 Node checks, nine root browser cases and both independent specialist reviews
+pass on frozen candidate d3dbc1b4d6995d349dd31337a6d82ca90933dfbe2db0bff577a900e1ef048879.
+See GARDEROBE-ENTRY.md for support, route, geometry and source/native evidence.
+Six matched cost contexts pass; physical Android NOT RUN. Baked image pixels,
+unrelated parts and all original admission geometry remain unchanged.
+
+- desktop: p95 21.0 → 21.1 ms; input 13.9 ms.
+- android-portrait: p95 13.9 → 13.9 ms; input 17.8 ms.
+- android-landscape: p95 14.0 → 14.0 ms; input 18.1 ms.
+
+These bounded measurements do not establish a stable performance improvement.
+Public deployment is verified separately; the broader goal remains blocked.
+
+
+
+## Published Panorama overhead hardware — 26 October 2026
+
+Verified commit `c2a7a4839f38a3192c3533a9237e4be80f09af22`; Pages run 40281358801 succeeded.
+All 114 checked public files match and six entry URLs respond. Both viewer
+entries pass actual keyboard/touch approaches on desktop and Android portrait/
+landscape emulation. Receipt: output/berghain-panorama-hardware-release.json.
+The primary index is unchanged. This supersedes the pending publication checkbox.
+Full reconstruction remains ACTIVE; current private plans and measured registration
+remain unresolved. Physical Android is untested.
+
+
 ## Accepted Panorama overhead hardware
 
 Frozen V2 manifest dfab58f7f5520632da01580005f07da78b29621170dc2c19ef9cf125832f8085 passes all 284 Node checks, nine root browser
