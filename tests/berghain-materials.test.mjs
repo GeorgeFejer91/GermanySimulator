@@ -34,7 +34,7 @@ test('the shared image admission queue bounds all surface loads and skips retire
   try{
     const model=createBerghainModel();
     try{
-      assert.equal(await loadSurfaceTextures(model),37);assert.ok(peak<=2,'at most two image jobs');
+      assert.equal(await loadSurfaceTextures(model),38);assert.ok(peak<=2,'at most two image jobs');
       let mapped=0,coated=0;
       model.traverse(mesh=>{if(mesh.isMesh&&mesh.material.normalMap){
         mapped++;assert.deepEqual(mesh.material.normalScale.toArray(),[1,-1],mesh.name+' must match tangent-free glTF orientation');
@@ -43,7 +43,7 @@ test('the shared image admission queue bounds all surface loads and skips retire
       assert.ok(mapped>20);assert.ok(coated>0,'The sugar clearcoat follows the same normal convention');
     }
     finally{disposeBerghainModel(model);}
-    assert.equal(started,37);assert.equal(disposed,37);
+    assert.equal(started,38);assert.equal(disposed,38);
     active=peak=started=disposed=0;
     const retired=createBerghainModel(),pending=loadSurfaceTextures(retired);
     await new Promise(resolve=>queueMicrotask(resolve));disposeBerghainModel(retired);
@@ -56,7 +56,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
   const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
   const jsonLength=bytes.readUInt32LE(12), gltf=JSON.parse(bytes.subarray(20,20+jsonLength).toString().trim());
   assert.ok(gltf.images?.length>=3,'The portable asset must include material maps');
-  assert.equal(gltf.images.length,36,'Eleven surface families, sugar thickness, glass emission and the fixed belt-light atlas');
+  assert.equal(gltf.images.length,37,'Eleven surface families, sugar thickness, glass emission and two fixed radiance atlases');
   const binaryStart=20+jsonLength+8;
   for(const image of gltf.images){
     assert.equal(image.mimeType,'image/png');
@@ -77,7 +77,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
     assert.equal(uv.type,'VEC2');
     assert.equal(uv.count,gltf.accessors[primitive.attributes.POSITION].count);
   }
-  assert.equal(gltf.textures.length,36,'Material groups must reuse image textures');
+  assert.equal(gltf.textures.length,37,'Material groups must reuse image textures');
   assert.equal(gltf.samplers[0].wrapS,10497);
   assert.equal(gltf.samplers[0].wrapT,10497);
 });

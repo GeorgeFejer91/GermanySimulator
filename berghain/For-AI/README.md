@@ -1,5 +1,23 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted Panorama acoustic-ceiling wash — 26 October 2026
+
+The newly inspected I11 installer photograph shows coloured ceiling wash behind
+Panorama acoustic elements; I19/15/16 show their pale daylight finish. One
+original 512×512 fixed red radiance map now follows the existing registered
+ceiling and panels. All geometry, collision, routes, instance colours, existing
+images and runtime lights are preserved. Top/edge faces sample black; failed
+texture loading retains nonluminous plaster. The wash persists in neutral/day
+views too: it is a fixed authored state, not an automatic lighting program.
+
+The combined 275 Node checks, nine route/comparison browser cases, independent
+Physics/Camera review and six matched cost spot checks pass within scope. Final
+LF packaging also passes 26 affected checks and three fresh ceiling comparisons. Physical Android remains
+untested. Exact cove construction, photometry, current inventory and full panel
+arrangement remain unverified. Beam shadows, moving occlusion and indirect room
+spill are not included. Full reconstruction remains ACTIVE. Publication is
+verified separately by output/berghain-panorama-ceiling-wash-release.json.
+
 ## Accepted low foyer platform study — 26 October 2026
 
 Karhard G08/G20/G25 show freestanding low boxes near the main staircase,

@@ -1,0 +1,981 @@
+{
+  "clipped": 0,
+  "nonzero": 245430,
+  "records": [
+    {
+      "cloud": 0,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -15.525928186315221,
+        13.612000000000002,
+        20.714461586173297
+      ],
+      "width": 1.55039897522167,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 0,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -15.524946269107838,
+        13.612000000000002,
+        19.434263146099436
+      ],
+      "width": 1.55039897522167,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 0,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -16.300588295521187,
+        13.612000000000002,
+        20.083026525971594
+      ],
+      "width": 1.2801988166409755,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 0,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -14.750286159901874,
+        13.612000000000002,
+        20.06569820630114
+      ],
+      "width": 1.2801988166409755,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 1,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -15.522904612513313,
+        13.552000000000003,
+        17.869576163786935
+      ],
+      "width": 1.550301229115913,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 1,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -15.52192269530593,
+        13.552000000000003,
+        16.589377723713067
+      ],
+      "width": 1.550301229115913,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 1,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -16.29751550582013,
+        13.552000000000003,
+        17.23817144859375
+      ],
+      "width": 1.2801988166409772,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 1,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -14.747311801999114,
+        13.552000000000003,
+        17.22078243890625
+      ],
+      "width": 1.2801988166409772,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 2,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -15.51988103871142,
+        13.612000000000002,
+        15.024690741400567
+      ],
+      "width": 1.5502034854729272,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 2,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -15.518899121504036,
+        13.612000000000002,
+        13.744492301326703
+      ],
+      "width": 1.5502034854729272,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 2,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -16.29444271611909,
+        13.612000000000002,
+        14.393316371215908
+      ],
+      "width": 1.2801988166409772,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 2,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -14.744337444096368,
+        13.612000000000002,
+        14.375866671511362
+      ],
+      "width": 1.2801988166409772,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 3,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -15.516857464909524,
+        13.552000000000003,
+        12.179805319014207
+      ],
+      "width": 1.5501057442931778,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 3,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -15.515875547702134,
+        13.552000000000003,
+        10.89960687894034
+      ],
+      "width": 1.5501057442931778,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 3,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -16.291369926418042,
+        13.552000000000003,
+        11.548461293838068
+      ],
+      "width": 1.2801988166409786,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 3,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -14.741363086193617,
+        13.552000000000003,
+        11.530950904116478
+      ],
+      "width": 1.2801988166409786,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 4,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -12.730890110783733,
+        13.612000000000002,
+        20.088461155127842
+      ],
+      "width": 1.5503782409934705,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 4,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -12.729965812189985,
+        13.612000000000002,
+        18.808227189190344
+      ],
+      "width": 1.5503782409934705,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 4,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -13.505568589560335,
+        13.612000000000002,
+        19.45701476881431
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 4,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -11.955287333413382,
+        13.612000000000002,
+        19.439673575503875
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 5,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -12.728043959405419,
+        13.552000000000003,
+        17.24349678637784
+      ],
+      "width": 1.5502804954100806,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 5,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -12.727119660811663,
+        13.552000000000003,
+        15.963262820440342
+      ],
+      "width": 1.5502804954100806,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 5,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -13.50267322228287,
+        13.552000000000003,
+        16.61208074507283
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 5,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -11.952490397934213,
+        13.552000000000003,
+        16.59467886174535
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 6,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -12.725197808027103,
+        13.612000000000002,
+        14.398532417627841
+      ],
+      "width": 1.5501827522895637,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 6,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -12.724273509433354,
+        13.612000000000002,
+        13.118298451690343
+      ],
+      "width": 1.5501827522895637,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 6,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -13.49977785500541,
+        13.612000000000002,
+        13.767146721331354
+      ],
+      "width": 1.280234299598298,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 6,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -11.949693462455047,
+        13.612000000000002,
+        13.74968414798683
+      ],
+      "width": 1.280234299598298,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 7,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -12.72235165664878,
+        13.552000000000003,
+        11.55356804887784
+      ],
+      "width": 1.5500850116323757,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 7,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -12.721427358055035,
+        13.552000000000003,
+        10.273334082940343
+      ],
+      "width": 1.5500850116323757,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 7,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -13.49688248772794,
+        13.552000000000003,
+        10.922212697589876
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 7,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -11.946896526975875,
+        13.552000000000003,
+        10.904689434228308
+      ],
+      "width": 1.2802342995982996,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 8,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -7.841233733574317,
+        13.612000000000002,
+        20.6525229492358
+      ],
+      "width": 1.5503989752216762,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 8,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -7.840410267554432,
+        13.612000000000002,
+        19.372226813036935
+      ],
+      "width": 1.5503989752216762,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 8,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -8.615973068374034,
+        13.612000000000002,
+        20.021039040971594
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 8,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -7.065670932754715,
+        13.612000000000002,
+        20.00371072130114
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 9,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -7.838698071437275,
+        13.552000000000003,
+        17.807420424349427
+      ],
+      "width": 1.550301229115921,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 9,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -7.8378746054173885,
+        13.552000000000003,
+        16.527124288150564
+      ],
+      "width": 1.550301229115921,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 9,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -8.613388190337844,
+        13.552000000000003,
+        17.175966861093745
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 9,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -7.063184486516819,
+        13.552000000000003,
+        17.158577851406246
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 10,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -7.836162409300229,
+        13.612000000000002,
+        14.962317899463068
+      ],
+      "width": 1.5502034854729352,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 10,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -7.835338943280346,
+        13.612000000000002,
+        13.682021763264204
+      ],
+      "width": 1.5502034854729352,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 10,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -8.610803312301652,
+        13.612000000000002,
+        14.33089468121591
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 10,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -7.060698040278924,
+        13.612000000000002,
+        14.313444981511363
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 11,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -7.83362674716319,
+        13.552000000000003,
+        12.117215374576705
+      ],
+      "width": 1.5501057442931858,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 11,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -7.8328032811433,
+        13.552000000000003,
+        10.836919238377842
+      ],
+      "width": 1.5501057442931858,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 11,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -8.608218434265462,
+        13.552000000000003,
+        11.485822501338069
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 11,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -7.058211594041029,
+        13.552000000000003,
+        11.468312111616479
+      ],
+      "width": 1.2802964010189304,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 12,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -2.0190360504489293,
+        13.612000000000002,
+        20.00205825533342
+      ],
+      "width": 1.5503782409934703,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 12,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -2.0183326232074537,
+        13.612000000000002,
+        18.721688106918645
+      ],
+      "width": 1.5503782409934703,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 12,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -2.7938249649016687,
+        13.612000000000002,
+        19.37054377778125
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 12,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -1.2435437087547143,
+        13.612000000000002,
+        19.353202584470814
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 13,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -2.0168700183610193,
+        13.552000000000003,
+        17.15679125885615
+      ],
+      "width": 1.5502804954100788,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 13,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -2.0161665911195383,
+        13.552000000000003,
+        15.876421110441374
+      ],
+      "width": 1.5502804954100788,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 13,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -2.791609716914607,
+        13.552000000000003,
+        16.5253071263125
+      ],
+      "width": 1.2803703416439938,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 13,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -1.2414268925659506,
+        13.552000000000003,
+        16.50790524298502
+      ],
+      "width": 1.2803703416439938,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 14,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -2.014703986273104,
+        13.612000000000002,
+        14.311524262378875
+      ],
+      "width": 1.550182752289562,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 14,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -2.0140005590316266,
+        13.612000000000002,
+        13.031154113964103
+      ],
+      "width": 1.550182752289562,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 14,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -2.789394468927547,
+        13.612000000000002,
+        13.680070474843752
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 14,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -1.2393100763771836,
+        13.612000000000002,
+        13.662607901499225
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 15,
+      "axis": 0,
+      "sign": -1,
+      "position": [
+        -2.0125379541851873,
+        13.552000000000003,
+        11.466257265901604
+      ],
+      "width": 1.5500850116323774,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 15,
+      "axis": 0,
+      "sign": 1,
+      "position": [
+        -2.0118345269437126,
+        13.552000000000003,
+        10.185887117486832
+      ],
+      "width": 1.5500850116323774,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 15,
+      "axis": 2,
+      "sign": -1,
+      "position": [
+        -2.7871792209404838,
+        13.552000000000003,
+        10.834833823375002
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    },
+    {
+      "cloud": 15,
+      "axis": 2,
+      "sign": 1,
+      "position": [
+        -1.2371932601884164,
+        13.552000000000003,
+        10.817310560013434
+      ],
+      "width": 1.2803703416439907,
+      "stripWidth": 0.04
+    }
+  ],
+  "strength": 2,
+  "color": "#df2034",
+  "luminance": 55,
+  "atlas": [
+    512,
+    512
+  ],
+  "scope": "Original fixed direct radiance on the existing ceiling. Estimated cove placement/output/state; no beam shadows, changing state, moving occlusion or indirect room spill. No runtime area lights.",
+  "generatedFrom": [
+    {
+      "path": "assets/models/berghain/admission.mjs",
+      "sha256": "4a1fb2f362862ac664f277b9a0957959f79cea9d71f0640790f166b3da9edb54"
+    },
+    {
+      "path": "assets/models/berghain/architectural-circulation.mjs",
+      "sha256": "afb23f9502b2591721dfcc1d527be88d31eb3ced79b6ad34ab0a111c6c429e37"
+    },
+    {
+      "path": "assets/models/berghain/artworks.mjs",
+      "sha256": "64d8c2b0cd9677bf66b982387b87315c26b4bb78db8c53c6262e084e29c17ad1"
+    },
+    {
+      "path": "assets/models/berghain/avatar.mjs",
+      "sha256": "7d3ff5c4d01ee52f826278f9afddda010f7fb21938f345831f602891ad09b77c"
+    },
+    {
+      "path": "assets/models/berghain/baked-belt.mjs",
+      "sha256": "4f7a1e9060980447bc13a58db2928e70fcf7ce2df14d56bd3110775529b0e6bb"
+    },
+    {
+      "path": "assets/models/berghain/baked-panorama-ceiling.mjs",
+      "sha256": "961edc9a95f6f3bee14c44365be4c444405b7e2cffee91250f33cacecc5dc398"
+    },
+    {
+      "path": "assets/models/berghain/calibration.mjs",
+      "sha256": "09eebd835d4ade8f6195eafb29805abeae48a165cc0fc43e8f23b0281e611fde"
+    },
+    {
+      "path": "assets/models/berghain/climber-geometry.mjs",
+      "sha256": "adcca63d587ddbfc912f2b33e4ccf4fb0b5aaf93c043e71cabb1426acf0c7de6"
+    },
+    {
+      "path": "assets/models/berghain/exterior-details.mjs",
+      "sha256": "1ad65c247d000e480ef5af31e2f5c3a3851fb9878f22ca12bc9cef03dd4b0c25"
+    },
+    {
+      "path": "assets/models/berghain/ground-registration.mjs",
+      "sha256": "d885bb95a34e0f6a4ea84a921d70e1221b65df86449f3d1afcc45d66787d2f71"
+    },
+    {
+      "path": "assets/models/berghain/ground-sanitary.mjs",
+      "sha256": "fba40ae058ccd5ac0bce8d031b760b70c2190c59783e46922b2b82af06e91ec4"
+    },
+    {
+      "path": "assets/models/berghain/halle.mjs",
+      "sha256": "ab809c9c82548572ce006725dd013dba059d8a29a4d4859e60ace7b7f2049616"
+    },
+    {
+      "path": "assets/models/berghain/interior-fixtures.mjs",
+      "sha256": "69e657261cc3d0a01dba9660038bd1c720af7316b99548efbe377d003ce7407c"
+    },
+    {
+      "path": "assets/models/berghain/interior-topology.mjs",
+      "sha256": "b6ec0f28280192de4de5d4e7b7ff50d98966a277017c1cace51b7f5f43db3787"
+    },
+    {
+      "path": "assets/models/berghain/klo-bar.mjs",
+      "sha256": "ce2b7bb9a367a355d26ccdbad47119151b612b79988b82008c011fab0467f195"
+    },
+    {
+      "path": "assets/models/berghain/lab-oratory.mjs",
+      "sha256": "93bd83d6452a07c6d809471a636c2f01b8fabc09546ebb70b08866ac896045ce"
+    },
+    {
+      "path": "assets/models/berghain/landscape.mjs",
+      "sha256": "db23bd2855b6682558e0812f94b137b8126ee15133d281d53e37e2f08919b0e6"
+    },
+    {
+      "path": "assets/models/berghain/layout.mjs",
+      "sha256": "ae08d17e1aed30c17de9c2024036ee3ee34507bf2a13efa9c4a07c437792abd1"
+    },
+    {
+      "path": "assets/models/berghain/main-bar.mjs",
+      "sha256": "cebce73c7bd3bb41e585250308a669a03841d01c163830d086ed08145ceae331"
+    },
+    {
+      "path": "assets/models/berghain/main-dj-bay.mjs",
+      "sha256": "fd7cfe3dc08022767d3863fd6b4955569b9a9a230bed856f3380c8aa6d661a20"
+    },
+    {
+      "path": "assets/models/berghain/main-hall-details.mjs",
+      "sha256": "1ece0007a8808fd79786788ebbb7838be0f7ec3b5e311b5ee01dcd9d593e6af0"
+    },
+    {
+      "path": "assets/models/berghain/main-hall-registration.mjs",
+      "sha256": "d6a303a34adfd514ffefae6d2e9a223cbfa2272a52e63d8463f254d8249f0890"
+    },
+    {
+      "path": "assets/models/berghain/model.mjs",
+      "sha256": "a0cf9d4c2884a6bad6ab6b353a4fb6014da25fc10236d636395b928f45fa2f12"
+    },
+    {
+      "path": "assets/models/berghain/original-balustrades.mjs",
+      "sha256": "e60134a15ad3794f8d3b90dd83779fff82e8ac19df42201c08b9aa9809f70599"
+    },
+    {
+      "path": "assets/models/berghain/panorama-registration.mjs",
+      "sha256": "61826ffa001bc2646b74bb7a9c28b5cc8921ea04bc6b9e43eb33c17c687423ed"
+    },
+    {
+      "path": "assets/models/berghain/panorama-section.mjs",
+      "sha256": "c5a3036c362b7c5c3cb8fbba7e37643257f006077210c21cc2585d9e4268847b"
+    },
+    {
+      "path": "assets/models/berghain/panorama-services.mjs",
+      "sha256": "e6af50cae70e3e358be1cb30d91da082110461ee092b6f4cd3a9be530beec7a2"
+    },
+    {
+      "path": "assets/models/berghain/saule-ceiling.mjs",
+      "sha256": "c9b0dde458c67f5d81c2c02f02025e554defc9b10a7482f07b6645e0f9e34673"
+    },
+    {
+      "path": "assets/models/berghain/saule.mjs",
+      "sha256": "9b27ad32a39bee9a3712068f9b180eef108297aee5872cf652169c85640711fd"
+    },
+    {
+      "path": "assets/models/berghain/sound-system.mjs",
+      "sha256": "12fc12ded2ba8084f5dfde09435f81d72c6a7f239c31475d5745281c23e2dd82"
+    },
+    {
+      "path": "assets/models/berghain/speaker-geometries.mjs",
+      "sha256": "be77d0eb0d346445bc14c52e382f4a54e922a06d948f7d2f9073095984f07d60"
+    },
+    {
+      "path": "assets/models/berghain/surface-data.mjs",
+      "sha256": "f72d69b729cf7b531cccd2a298f51d5a298f7d68a973e41076f2b39246bc2faa"
+    },
+    {
+      "path": "assets/models/berghain/surface-materials.mjs",
+      "sha256": "f42084fcbf1f119fda1f7571eec7bb2e2636b60e29a2f700380173903b3e0143"
+    },
+    {
+      "path": "assets/models/berghain/survey-data.mjs",
+      "sha256": "9b9aa88ec06e1343ed440153779173d31fd1bf39f90a49529e4114b30c6a07a4"
+    },
+    {
+      "path": "assets/models/berghain/survey-model.mjs",
+      "sha256": "d04b1998be0d7b50ab997819b9b34d9f55192569f31b5c7df65e234eb80ef700"
+    },
+    {
+      "path": "assets/models/berghain/together-anatomy.mjs",
+      "sha256": "a8c99ce69fb93d83eed1d71eaaae10271823917ee8bce830bef9e7e4271ed178"
+    },
+    {
+      "path": "assets/models/berghain/together-geometry.mjs",
+      "sha256": "19b25b80baa032c421c38d7bd78585fea8a7cf9685bb296b29f317677e6103d1"
+    },
+    {
+      "path": "assets/models/berghain/together.mjs",
+      "sha256": "377cd892f4896d4bc41b0eba298b12730a641e0ce0601cb76c3a88699ade2e6a"
+    },
+    {
+      "path": "assets/models/berghain/upper-lounge.mjs",
+      "sha256": "4dc491ee1abf5e16e0baf7c88d8ed0a31d050db122227eec94519bdf9463256d"
+    },
+    {
+      "path": "assets/models/berghain/upper-sanitary.mjs",
+      "sha256": "8fe9ee9c723fc5857bb8a30ab38f5afd4edb700b77ac1ead6cbf713d77cee987"
+    },
+    {
+      "path": "assets/models/berghain/textures/mineral-baseColor.png",
+      "sha256": "1cbdf223d1e1bbb8e9065d26377806812ff091a177e8c1b7a793cfc22a958986"
+    },
+    {
+      "path": "assets/models/berghain/textures/mineral-normal.png",
+      "sha256": "d961ee62e31e91dda6d30381b5cf8d9366480d275c7aa54c6a1ba47cfc93093f"
+    },
+    {
+      "path": "assets/models/berghain/textures/mineral-roughness.png",
+      "sha256": "bb5a7d76ab98b9df6a07a7f3350a798de63670cd3956f3f16da5575f5a9a7363"
+    },
+    {
+      "path": "berghain/build-panorama-ceiling-lighting.mjs",
+      "sha256": "0e4fc05c9c97af18456330fe27527b878740dfaece1499675b2cb490428d2e79"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/build/three.module.min.js",
+      "sha256": "6a238d5d0c711f1f008488aff06a2ab9ab478959842044d243e89c316f6a5fc2"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/build/three.core.js",
+      "sha256": "f3556fb8c9aff8fc6f8e090b918ae5d4e6b45152afb93815002d3319d875cdec"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/examples/jsm/lights/RectAreaLightUniformsLib.js",
+      "sha256": "494fef2d731ff1689050cc6040ad78d927c22b9125a12f532beb0374c2811c6e"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/examples/jsm/lights/RectAreaLightTexturesLib.js",
+      "sha256": "6dd4043bb052594357a5eeff13dc0519f0a80b100b97ec80c12808f887897bc1"
+    }
+  ],
+  "image": {
+    "file": "panorama-ceiling-bake.png",
+    "bytes": 219796,
+    "sha256": "b22e94b560ab564e22464302d7479890adb1de634afc9d4dc83a6988feede45b"
+  }
+}

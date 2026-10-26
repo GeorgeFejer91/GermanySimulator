@@ -100,7 +100,7 @@ export function pinInteriorTopologyTones(layout){
   const groups=new Map();
   for(const part of layout.parts){
     if(part.interiorTopology){part.instanceTone=.94;continue;}
-    const key=[part.section,part.material==='mainBarPlaster'?'pale':part.material,part.shape].join('/');
+    const key=[part.section,['mainBarPlaster','panoramaCeilingWash'].includes(part.material)?'pale':part.material,part.shape].join('/');
     if(!groups.has(key))groups.set(key,[]);
     groups.get(key).push(part);
   }

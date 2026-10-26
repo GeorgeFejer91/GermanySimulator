@@ -54,7 +54,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
     }
     let lighting=null;
     const sourceLights=[],portableLights=[],sourceBakes=[];
-    source.traverse(object=>{if(object.isMesh&&object.material.userData.beltBake)sourceBakes.push(object.material);});
+    source.traverse(object=>{if(object.isMesh&&(object.material.userData.beltBake||object.material.userData.radianceBake))sourceBakes.push(object.material);});
     source.traverse(object=>{if(object.isSpotLight)sourceLights.push(object);});
     portable.traverse(object=>{if(object.isSpotLight)portableLights.push(object);});
     if(view?.practicalLighting){
@@ -67,7 +67,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
         if(delta[0]>=6&&delta[0]>delta[2]*1.25)warmPixels++;
       }
       for(const light of sourceLights)light.visible=true;
-      for(const material of sourceBakes)material.emissiveIntensity=material.userData.beltBake.strength;
+      for(const material of sourceBakes)material.emissiveIntensity=(material.userData.beltBake||material.userData.radianceBake).strength;
       lighting={source:sourceLights.length,portable:portableLights.length,bakedMaterials:sourceBakes.length,
         meanChange:change.map(value=>value/(width*height)),warmFraction:warmPixels/(width*height)};
     }
@@ -75,7 +75,7 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
     let disposed=0;for(const texture of textures)texture.addEventListener('dispose',()=>disposed++);
     window.materialEvidence={show:kind=>{
       for(const light of sourceLights)light.visible=kind!=='unlit';
-      for(const material of sourceBakes)material.emissiveIntensity=kind==='unlit'?0:material.userData.beltBake.strength;
+      for(const material of sourceBakes)material.emissiveIntensity=kind==='unlit'?0:(material.userData.beltBake||material.userData.radianceBake).strength;
       return draw(kind==='portable'?portable:source);
     },cleanup:()=>{
       disposeBerghainModel(source);disposeBerghainModel(portable);nightLighting?.dispose();renderer.dispose();

@@ -196,7 +196,9 @@ test('Halle rendered slabs expose three voids and its original indexed guards st
   }
   let triangles=0,groups=0;model.traverse(mesh=>{if(mesh.isMesh&&!mesh.name.startsWith('admission/')){
     const retained=(mesh.count??1)-(paInstances.get(mesh.name)||0);
-    if(retained>0)groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*retained;
+    // The one ceiling-only material split has its own bounded wash test/cost gate.
+    // Keep its triangles in this budget; only exclude that additional group.
+    if(retained>0&&mesh.name!=='interior/panoramaCeilingWash/box')groups++;triangles+=(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3*retained;
   }});
   // Published7730 ordinary WC basis:46instances /2136triangles. This removes
   // its old contribution as well; the20,000 Halle allowance is unchanged.

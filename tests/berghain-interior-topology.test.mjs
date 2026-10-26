@@ -86,6 +86,8 @@ test('the historical pre-ground sanitary additions preserve retained batch tones
   // and let the renderer's previous group-count/index formula run unchanged.
   const source=readFileSync(url,'utf8')
     .replace('pinInteriorTopologyTones(layout);',`layout.parts=layout.parts.filter(p=>!p.interiorTopology);
+      // Restore the single deliberate ceiling material split to its historical family.
+      for(const p of layout.parts)if(p.name==='Panorama fitted ceiling')p.material='pale';
       {const groups=new Map();for(const p of layout.parts){const k=[p.section,p.material==='mainBarPlaster'?'pale':p.material,p.shape].join('/');if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p);}for(const parts of groups.values())parts.forEach((p,i)=>p.instanceTone??=.84+((i*193+parts.length*37)%101)/625);}`)
     .replace('registerMainHall(layout,viewpoints);','').replace('addArchitecturalCirculation(layout);','')
     .replace('addMainHallDetails(layout);','').replace('fitMainHallRoofFrame(layout);','')
@@ -99,7 +101,7 @@ test('the historical pre-ground sanitary additions preserve retained batch tones
   }
   for(const parts of groups.values())parts.forEach((p,index)=>expected.set(p,
     p.instanceTone??(.84+((index*193+parts.length*37)%101)/625)));
-  const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.material,p.shape]);
+  const key=p=>JSON.stringify([p.name,p.matrix,p.start,p.end,p.name==='Panorama fitted ceiling'?'pale':p.material,p.shape]);
   const originalByKey=new Map();
   for(const p of baseline.parts){const k=key(p);if(!originalByKey.has(k))originalByKey.set(k,[]);originalByKey.get(k).push(p);}
   const retained=layout.parts.filter(p=>!p.djBay&&!p.groundFit&&!p.hallRoofFrame&&!p.mainHallRegistered&&!p.hallSection&&!p.hallSectionChanged&&!p.interiorTopology&&!p.architecturalCirculation&&!p.mainHallDetail&&!p.groundSanitary&&!p.panoramaConnection&&!p.circulationDoorway&&!p.name.endsWith('smoking doorway trim'));

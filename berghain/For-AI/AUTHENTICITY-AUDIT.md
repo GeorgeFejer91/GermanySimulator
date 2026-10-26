@@ -1,5 +1,18 @@
 # Berghain interior authenticity audit
 
+## AU24 / Panorama concealed ceiling wash — accepted
+
+The 2010 installer photograph I11 was previously uninspected. It shows coloured
+ceiling illumination around dark acoustic-element silhouettes. I19/15/16 show
+pale panels in daylight. Current controlled source/native views lacked that wash.
+The isolated correction adds an original ceiling-only direct-radiance texture
+while retaining panel geometry and pale material response. One fixed red state,
+estimated cove sources and output; no current-light-show or exact rig claim.
+The older general AU24 finding is not a demand to brighten every room or repeat
+accepted main-bar/Säule lighting corrections. Panel proportions/count/anchors,
+beam occlusion, changing state and room bounce remain limitations. Scoped acceptance passes; this correction does not close private-room or current inventory gaps.
+
+
 ## AU16 lounge form correction — accepted, 25 October 2026
 
 The uniform seat-pad baseline is superseded by I19/19 faceted upholstery,

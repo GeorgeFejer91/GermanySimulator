@@ -1,5 +1,47 @@
 # Berghain viewer validation
 
+## Accepted Panorama ceiling wash
+
+Frozen manifest 5665e9dfefc6f905639ba50e8f34e09bc6361ede9d304329dd0ded09a53907c8
+accounts for 275 distinct passing Node checks and nine root browser cases: three controlled source/native
+views plus actual loaded/fallback Panorama walks on desktop and Android portrait/
+landscape emulation. Desktop context recovery preserves position and materials.
+The full V1 run passed 271/275; four stale test expectations were repaired in
+three files and all 18 affected-file checks passed. V2 changes only those tests;
+runtime/assets/docs are exact. V3 then restores baseline LF in 14 existing files
+and actually regenerates the two bake manifests. Normalized text and every
+product image/GLB remain exact; 26 affected checks and three fresh comparisons
+pass. Independent Physics/Camera reviews bind the evidence through both explicit
+bridges to frozen V3. This is combined evidence, not one fresh 275-test V3 run.
+
+All 16,858 transforms/instance colours and 6,175 collider shapes remain exact;
+floor/viewpoint/fixture metadata and lights are unchanged. 1,009 unchanged native
+streams and all 180 split pale-batch parts are checked per vertex. All 36 prior
+embedded images remain exact. The model retains 832,676 triangles and adds one
+material batch and one 512×512 image: 228 batches, 37 embedded images, 38 runtime
+textures. GLB: 71,964,004 bytes, SHA256
+6d1a813079f4f81dc585d9c232551938b90dc64a5cb676056a0dccdee4127c8d.
+
+The initial prototype's colour drift was rejected and fixed in both tone-group
+owners. A second preservation-probe correction accounts only for the ceiling
+solid's renderPart material reference; collider geometry still must match exactly.
+Both radiance maps were actually regenerated; the previous Säule PNG is exact.
+Lower atlas encoding strength reduces gradient quantization without adding lights.
+
+Six sequential fresh browser cost contexts cover one sample per profile per
+condition. They are bounded local spot checks, not stable latency estimates:
+
+- desktop: p95 20.9 to 20.9 ms; candidate input 7.3 ms.
+- android-portrait: p95 7.2 to 7.1 ms; candidate input 12.6 ms.
+- android-landscape: p95 7.1 to 7.1 ms; candidate input 12.6 ms.
+
+No runtime area lights, extra spot lights or idle redraws. Normal viewing does
+not fetch the GLB. The additional 512×512 RGBA map with mip levels is about
+1.40 MB of texture storage. Current cove construction, colour/output and panel
+inventory remain estimates. This fixed ceiling-only radiance persists in neutral/
+day views; no beam shadows, moving occlusion or indirect spill. Physical Android
+NOT RUN. Public verification is a separate release receipt; full goal stays active.
+
 ## Accepted low foyer platforms — 26 October 2026
 
 Checks cover full transformed bodies against existing solids, floor support,

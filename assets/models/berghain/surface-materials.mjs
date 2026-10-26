@@ -9,7 +9,7 @@ const {createAssetQueue}=globalThis.GermanyAssetQueue||assetQueue.default;
 const surfaceQueue=createAssetQueue({isHidden:()=>typeof document!=='undefined'&&document.hidden});
 if(typeof document!=='undefined')document.addEventListener('visibilitychange',()=>surfaceQueue.pump());
 
-const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
+const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral',panoramaCeilingWash:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',foyerPlatformTop:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
@@ -104,12 +104,12 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
     textures.set(key,texture);
   })));
   const emissionMaps=new Set([...materials].map(m=>m.userData.emissionMap).filter(Boolean));
-  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap,m.userData.beltBake?.map,m.userData.emissionMap]).filter(Boolean));
+  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap,m.userData.beltBake?.map,m.userData.radianceBake?.map,m.userData.emissionMap]).filter(Boolean));
   for(const key of extras)requests.push(surfaceQueue.enqueue(async()=>{
     if(model.userData.disposed)return;
     const texture=await loader.loadAsync(new URL(key,import.meta.url).href);texture.name=key;texture.flipY=false;
     if(key.endsWith('lighting.png')){texture.mapping=THREE.EquirectangularReflectionMapping;texture.colorSpace=THREE.SRGBColorSpace;}
-    else {texture.channel=emissionMaps.has(key)?0:1;if(emissionMaps.has(key)||key==='textures/saule-belt-bake.png')texture.colorSpace=THREE.SRGBColorSpace;}
+    else {texture.channel=emissionMaps.has(key)?0:1;if(emissionMaps.has(key)||['textures/saule-belt-bake.png','textures/panorama-ceiling-bake.png'].includes(key))texture.colorSpace=THREE.SRGBColorSpace;}
     textures.set(key,texture);
   }));
   const results=await Promise.allSettled(requests);
@@ -124,6 +124,7 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
     projectedMaterial(material,Object.fromEntries(['baseColor','roughness','normal'].map(kind=>[kind,textures.get(surface[kind])])));
     if(material.userData.emissionMap)material.emissiveMap=textures.get(material.userData.emissionMap);
     if(material.userData.beltBake){material.emissiveMap=textures.get(material.userData.beltBake.map);material.emissive.set(0xffffff);material.emissiveIntensity=material.userData.beltBake.strength;}
+    if(material.userData.radianceBake){material.emissiveMap=textures.get(material.userData.radianceBake.map);material.emissive.set(0xffffff);material.emissiveIntensity=material.userData.radianceBake.strength;}
     if(material.userData.volumeMap)material.thicknessMap=textures.get(material.userData.volumeMap);
     if(material.userData.environmentMap)material.envMap=textures.get(material.userData.environmentMap);
   }

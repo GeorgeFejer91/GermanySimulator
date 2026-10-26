@@ -767,6 +767,10 @@
       "sha256": "4f7a1e9060980447bc13a58db2928e70fcf7ce2df14d56bd3110775529b0e6bb"
     },
     {
+      "path": "assets/models/berghain/baked-panorama-ceiling.mjs",
+      "sha256": "961edc9a95f6f3bee14c44365be4c444405b7e2cffee91250f33cacecc5dc398"
+    },
+    {
       "path": "assets/models/berghain/calibration.mjs",
       "sha256": "09eebd835d4ade8f6195eafb29805abeae48a165cc0fc43e8f23b0281e611fde"
     },
@@ -796,7 +800,7 @@
     },
     {
       "path": "assets/models/berghain/interior-topology.mjs",
-      "sha256": "cc2f2b547ea3de9719c60025311a0e3a55c1b36b3052dc8694f6539bdaf064f6"
+      "sha256": "b6ec0f28280192de4de5d4e7b7ff50d98966a277017c1cace51b7f5f43db3787"
     },
     {
       "path": "assets/models/berghain/klo-bar.mjs",
@@ -812,7 +816,7 @@
     },
     {
       "path": "assets/models/berghain/layout.mjs",
-      "sha256": "c67d95437009ba21b80f5babf521d590904fc9ebbba8e1181e78f8c38914745f"
+      "sha256": "ae08d17e1aed30c17de9c2024036ee3ee34507bf2a13efa9c4a07c437792abd1"
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
@@ -832,7 +836,7 @@
     },
     {
       "path": "assets/models/berghain/model.mjs",
-      "sha256": "c784c91eeb683c0c8a993addad6d207d972177749c64786e589f2cf9e3e8f694"
+      "sha256": "a0cf9d4c2884a6bad6ab6b353a4fb6014da25fc10236d636395b928f45fa2f12"
     },
     {
       "path": "assets/models/berghain/original-balustrades.mjs",
@@ -848,7 +852,7 @@
     },
     {
       "path": "assets/models/berghain/panorama-services.mjs",
-      "sha256": "45a1cd897e976bd217e6b0732591b55683c659fe48df56ac1921b78eae7411f5"
+      "sha256": "e6af50cae70e3e358be1cb30d91da082110461ee092b6f4cd3a9be530beec7a2"
     },
     {
       "path": "assets/models/berghain/saule-ceiling.mjs",
@@ -872,7 +876,7 @@
     },
     {
       "path": "assets/models/berghain/surface-materials.mjs",
-      "sha256": "bda3f9bc82b92a7fb6d8a60c0473a3f40e7ff8272e83eab19cd4a5c8f39e33c9"
+      "sha256": "f42084fcbf1f119fda1f7571eec7bb2e2636b60e29a2f700380173903b3e0143"
     },
     {
       "path": "assets/models/berghain/survey-data.mjs",

@@ -12,6 +12,7 @@ import {createTogetherGeometries} from './together-geometry.mjs';
 import {createLabGeometries} from './lab-oratory.mjs';
 import {createMainBarGeometries,createMainBarLights} from './main-bar.mjs';
 import {configureBeltBake} from './baked-belt.mjs';
+import {configurePanoramaCeilingBake} from './baked-panorama-ceiling.mjs';
 import {createSauleGeometries} from './saule.mjs';
 import {createHalleGeometries} from './halle.mjs';
 import {createGroundGeometries} from './ground-registration.mjs';
@@ -35,7 +36,7 @@ export function createBerghainModel() {
     const key = [part.section, part.material, part.shape].join('/');
     if (!batches.has(key)) batches.set(key, []);
     batches.get(key).push(part);
-    const toneKey=[part.section,part.material==='mainBarPlaster'?'pale':part.material,part.shape].join('/');
+    const toneKey=[part.section,['mainBarPlaster','panoramaCeilingWash'].includes(part.material)?'pale':part.material,part.shape].join('/');
     if(!toneBatches.has(toneKey))toneBatches.set(toneKey,[]);
     toneBatches.get(toneKey).push(part);
   }
@@ -74,6 +75,7 @@ export function createBerghainModel() {
       mesh.setColorAt(index, new THREE.Color(shade, shade, shade));
     });
     configureBeltBake(mesh,parts,layout.parts);
+    configurePanoramaCeilingBake(mesh,parts);
     mesh.computeBoundingBox();
     mesh.computeBoundingSphere();
     if(shape==='ground-slab-triangle'){

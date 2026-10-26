@@ -34,6 +34,7 @@ export const materials = {
   render: {color: '#b4b0a5', roughness: .96},
   concrete: {color: '#77766e', roughness: .98},
   pale: {color: '#c0bcb1', roughness: .94},
+  panoramaCeilingWash: {color: '#c0bcb1', roughness: .94},
   recess: {color: '#8e8c83', roughness: .98},
   darkConcrete: {color: '#53554f', roughness: 1},
   stone: {color: '#85837b', roughness: .98},

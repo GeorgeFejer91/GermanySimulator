@@ -76,7 +76,7 @@ for (const group of model.children) {
     const vertexCount = sourcePosition.count * instances;
     const positions = new Float32Array(vertexCount * 3), normals = new Float32Array(vertexCount * 3), colors = new Float32Array(vertexCount * 3);
     const surface = mesh.material.userData.surface, uvs = surface ? new Float32Array(vertexCount*2) : null;
-    const sourceVolumeUV=geometry.attributes.uv1,volumeUVs=(mesh.material.userData.volumeMap||mesh.material.userData.beltBake)?new Float32Array(vertexCount*2):null;
+    const sourceVolumeUV=geometry.attributes.uv1,volumeUVs=(mesh.material.userData.volumeMap||mesh.material.userData.beltBake||mesh.material.userData.radianceBake)?new Float32Array(vertexCount*2):null;
     const sourceIndices = geometry.index?.array || Uint32Array.from({length: sourcePosition.count}, (_, i) => i);
     const indices = new Uint32Array(sourceIndices.length * instances);
     const matrix = new THREE.Matrix4(), normalMatrix = new THREE.Matrix3(), vector = new THREE.Vector3(), color = new THREE.Color();
@@ -109,7 +109,7 @@ for (const group of model.children) {
       physical.KHR_materials_volume.thicknessTexture={...texture(material.userData.volumeMap),texCoord:1};
     if(physical&&surface)physical.KHR_materials_clearcoat.clearcoatNormalTexture=texture(surface.normal);
     if(physical)gltf.extensionsUsed=[...new Set([...(gltf.extensionsUsed||[]),...Object.keys(physical)])];
-    const bake=material.userData.beltBake,extensions={...(physical||{}),...(bake?{KHR_materials_emissive_strength:{emissiveStrength:bake.strength}}:{})};
+    const bake=material.userData.beltBake||material.userData.radianceBake,extensions={...(physical||{}),...(bake?{KHR_materials_emissive_strength:{emissiveStrength:bake.strength}}:{})};
     if(bake)gltf.extensionsUsed=[...new Set([...(gltf.extensionsUsed||[]),'KHR_materials_emissive_strength'])];
     gltf.materials.push({name: mesh.name, pbrMetallicRoughness: {baseColorFactor: [...material.color.toArray(), material.opacity],
       metallicFactor: material.metalness, roughnessFactor: material.roughness,
