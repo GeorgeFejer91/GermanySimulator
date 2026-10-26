@@ -1,4 +1,5 @@
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
+import {configureBeltBakeShader} from './baked-belt.mjs';
 import {surfaceFamilies} from './surface-data.mjs';
 import * as assetQueue from '../../../asset-queue.js';
 
@@ -80,8 +81,9 @@ function projectedMaterial(material, maps) {
       #ifdef USE_CLEARCOAT_NORMALMAP
         vClearcoatNormalMapUv=vMapUv;
       #endif`);
+    if(material.userData.beltBake)configureBeltBakeShader(shader);
   };
-  material.customProgramCacheKey=()=> 'berghain-metre-uv-normal-v3';
+  material.customProgramCacheKey=()=> 'berghain-metre-uv-normal-v3'+(material.userData.beltBake?'-belt-bake-v1':'');
   material.needsUpdate=true;
 }
 
@@ -99,12 +101,12 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
     if(kind==='baseColor') texture.colorSpace=THREE.SRGBColorSpace;
     textures.set(key,texture);
   })));
-  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap]).filter(Boolean));
+  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap,m.userData.beltBake?.map]).filter(Boolean));
   for(const key of extras)requests.push(surfaceQueue.enqueue(async()=>{
     if(model.userData.disposed)return;
     const texture=await loader.loadAsync(new URL(key,import.meta.url).href);texture.name=key;texture.flipY=false;
     if(key.endsWith('lighting.png')){texture.mapping=THREE.EquirectangularReflectionMapping;texture.colorSpace=THREE.SRGBColorSpace;}
-    else texture.channel=1;
+    else {texture.channel=1;if(key==='textures/saule-belt-bake.png')texture.colorSpace=THREE.SRGBColorSpace;}
     textures.set(key,texture);
   }));
   const results=await Promise.allSettled(requests);
@@ -117,6 +119,7 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
   for(const material of materials){
     const surface=material.userData.surface;
     projectedMaterial(material,Object.fromEntries(['baseColor','roughness','normal'].map(kind=>[kind,textures.get(surface[kind])])));
+    if(material.userData.beltBake){material.emissiveMap=textures.get(material.userData.beltBake.map);material.emissive.set(0xffffff);material.emissiveIntensity=material.userData.beltBake.strength;}
     if(material.userData.volumeMap)material.thicknessMap=textures.get(material.userData.volumeMap);
     if(material.userData.environmentMap)material.envMap=textures.get(material.userData.environmentMap);
   }

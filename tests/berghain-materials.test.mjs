@@ -34,7 +34,7 @@ test('the shared image admission queue bounds all surface loads and skips retire
   try{
     const model=createBerghainModel();
     try{
-      assert.equal(await loadSurfaceTextures(model),32);assert.ok(peak<=2,'at most two image jobs');
+      assert.equal(await loadSurfaceTextures(model),33);assert.ok(peak<=2,'at most two image jobs');
       let mapped=0,coated=0;
       model.traverse(mesh=>{if(mesh.isMesh&&mesh.material.normalMap){
         mapped++;assert.deepEqual(mesh.material.normalScale.toArray(),[1,-1],mesh.name+' must match tangent-free glTF orientation');
@@ -43,7 +43,7 @@ test('the shared image admission queue bounds all surface loads and skips retire
       assert.ok(mapped>20);assert.ok(coated>0,'The sugar clearcoat follows the same normal convention');
     }
     finally{disposeBerghainModel(model);}
-    assert.equal(started,32);assert.equal(disposed,32);
+    assert.equal(started,33);assert.equal(disposed,33);
     active=peak=started=disposed=0;
     const retired=createBerghainModel(),pending=loadSurfaceTextures(retired);
     await new Promise(resolve=>queueMicrotask(resolve));disposeBerghainModel(retired);
@@ -56,7 +56,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
   const bytes=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url));
   const jsonLength=bytes.readUInt32LE(12), gltf=JSON.parse(bytes.subarray(20,20+jsonLength).toString().trim());
   assert.ok(gltf.images?.length>=3,'The portable asset must include material maps');
-  assert.equal(gltf.images.length,31,'Ten shared three-map surface families and one sugar thickness atlas');
+  assert.equal(gltf.images.length,32,'Ten surface families, sugar thickness and the fixed belt-light atlas');
   const binaryStart=20+jsonLength+8;
   for(const image of gltf.images){
     assert.equal(image.mimeType,'image/png');
@@ -64,9 +64,9 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
     const view=gltf.bufferViews[image.bufferView], offset=binaryStart+view.byteOffset;
     assert.ok(offset+view.byteLength<=bytes.length,'Embedded image must be in bounds');
     assert.equal(bytes.subarray(offset+1,offset+4).toString(),'PNG');
-    const size=image.name==='textures/amber-thickness.png'?1024:512;
-    assert.equal(bytes.readUInt32BE(offset+16),size);
-    assert.equal(bytes.readUInt32BE(offset+20),size);
+    const [width,height]=image.name==='textures/saule-belt-bake.png'?[1024,4096]:image.name==='textures/amber-thickness.png'?[1024,1024]:[512,512];
+    assert.equal(bytes.readUInt32BE(offset+16),width);
+    assert.equal(bytes.readUInt32BE(offset+20),height);
   }
   for(const mesh of gltf.meshes) for(const primitive of mesh.primitives){
     const material=gltf.materials[primitive.material];
@@ -77,7 +77,7 @@ test('portable Berghain asset embeds shared standard PBR maps and metre UVs', ()
     assert.equal(uv.type,'VEC2');
     assert.equal(uv.count,gltf.accessors[primitive.attributes.POSITION].count);
   }
-  assert.equal(gltf.textures.length,31,'Material groups must reuse image textures');
+  assert.equal(gltf.textures.length,32,'Material groups must reuse image textures');
   assert.equal(gltf.samplers[0].wrapS,10497);
   assert.equal(gltf.samplers[0].wrapT,10497);
 });

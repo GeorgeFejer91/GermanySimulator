@@ -53,11 +53,13 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
       if(i%128===0)colours.add(`${a[i]},${a[i+1]},${a[i+2]}`);
     }
     let lighting=null;
-    const sourceLights=[],portableLights=[];
+    const sourceLights=[],portableLights=[],sourceBakes=[];
+    source.traverse(object=>{if(object.isMesh&&object.material.userData.beltBake)sourceBakes.push(object.material);});
     source.traverse(object=>{if(object.isSpotLight)sourceLights.push(object);});
     portable.traverse(object=>{if(object.isSpotLight)portableLights.push(object);});
     if(view?.practicalLighting){
       for(const light of sourceLights)light.visible=false;
+      for(const material of sourceBakes)material.emissiveIntensity=0;
       const unlit=draw(source),change=[0,0,0];let warmPixels=0;
       for(let i=0;i<a.length;i+=4){
         const delta=[0,1,2].map(c=>a[i+c]-unlit[i+c]);
@@ -65,13 +67,15 @@ export async function compareMaterialRender({page,baseURL,artifacts},view=null){
         if(delta[0]>=6&&delta[0]>delta[2]*1.25)warmPixels++;
       }
       for(const light of sourceLights)light.visible=true;
-      lighting={source:sourceLights.length,portable:portableLights.length,
+      for(const material of sourceBakes)material.emissiveIntensity=material.userData.beltBake.strength;
+      lighting={source:sourceLights.length,portable:portableLights.length,bakedMaterials:sourceBakes.length,
         meanChange:change.map(value=>value/(width*height)),warmFraction:warmPixels/(width*height)};
     }
-    const textures=new Set();source.traverse(mesh=>{if(mesh.isMesh)for(const texture of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap,mesh.material.thicknessMap,mesh.material.envMap])if(texture)textures.add(texture);});
+    const textures=new Set();source.traverse(mesh=>{if(mesh.isMesh)for(const texture of [mesh.material.map,mesh.material.normalMap,mesh.material.roughnessMap,mesh.material.thicknessMap,mesh.material.envMap,mesh.material.emissiveMap])if(texture)textures.add(texture);});
     let disposed=0;for(const texture of textures)texture.addEventListener('dispose',()=>disposed++);
     window.materialEvidence={show:kind=>{
       for(const light of sourceLights)light.visible=kind!=='unlit';
+      for(const material of sourceBakes)material.emissiveIntensity=kind==='unlit'?0:material.userData.beltBake.strength;
       return draw(kind==='portable'?portable:source);
     },cleanup:()=>{
       disposeBerghainModel(source);disposeBerghainModel(portable);nightLighting?.dispose();renderer.dispose();

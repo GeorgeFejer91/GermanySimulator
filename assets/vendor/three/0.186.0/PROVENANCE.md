@@ -22,3 +22,9 @@ The minified modules retain the upstream license header. Version/API/scene
 behavior are unchanged; hosting these dependencies with the game removes
 external engine/CDN availability from startup. Preview-only pages keep their
 existing independent import maps.
+
+Authoring-only additions, retrieved 26 October 2026 from the exact upstream r186 tag:
+`examples/jsm/lights/RectAreaLightUniformsLib.js` and `RectAreaLightTexturesLib.js`.
+Unmodified Three.js MIT sources; hashes in the manifest. Used by the isolated
+Säule fixed-light bake, never imported by the visitor runtime. The second file
+credits the upstream LTC approximation data and research.

@@ -1,0 +1,947 @@
+{
+  "records": [
+    {
+      "fixture": "saule-pier-0",
+      "part": "saule-pier-0 concrete body",
+      "row": 0,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -12,
+        2.125,
+        -3.7
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-0",
+      "part": "saule-pier-0 concrete body",
+      "row": 0,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -12,
+        2.125,
+        -2.0999999999999996
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-0",
+      "part": "saule-pier-0 concrete body",
+      "row": 0,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -10.95,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-0",
+      "part": "saule-pier-0 concrete body",
+      "row": 0,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -13.05,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-1",
+      "part": "saule-pier-1 concrete body",
+      "row": 1,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -12,
+        2.125,
+        2.0999999999999996
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-1",
+      "part": "saule-pier-1 concrete body",
+      "row": 1,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -12,
+        2.125,
+        3.7
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-1",
+      "part": "saule-pier-1 concrete body",
+      "row": 1,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -10.95,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-1",
+      "part": "saule-pier-1 concrete body",
+      "row": 1,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -13.05,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-2",
+      "part": "saule-pier-2 concrete body",
+      "row": 2,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -6,
+        2.125,
+        -3.7
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-2",
+      "part": "saule-pier-2 concrete body",
+      "row": 2,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -6,
+        2.125,
+        -2.0999999999999996
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-2",
+      "part": "saule-pier-2 concrete body",
+      "row": 2,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -4.95,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-2",
+      "part": "saule-pier-2 concrete body",
+      "row": 2,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -7.05,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-3",
+      "part": "saule-pier-3 concrete body",
+      "row": 3,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -6,
+        2.125,
+        2.0999999999999996
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-3",
+      "part": "saule-pier-3 concrete body",
+      "row": 3,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -6,
+        2.125,
+        3.7
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-3",
+      "part": "saule-pier-3 concrete body",
+      "row": 3,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -4.95,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-3",
+      "part": "saule-pier-3 concrete body",
+      "row": 3,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -7.05,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-4",
+      "part": "saule-pier-4 concrete body",
+      "row": 4,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        4.898587196589413e-17,
+        2.125,
+        -3.7
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-4",
+      "part": "saule-pier-4 concrete body",
+      "row": 4,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -4.898587196589413e-17,
+        2.125,
+        -2.0999999999999996
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-4",
+      "part": "saule-pier-4 concrete body",
+      "row": 4,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        1.05,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-4",
+      "part": "saule-pier-4 concrete body",
+      "row": 4,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -1.05,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-5",
+      "part": "saule-pier-5 concrete body",
+      "row": 5,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        4.898587196589413e-17,
+        2.125,
+        2.0999999999999996
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-5",
+      "part": "saule-pier-5 concrete body",
+      "row": 5,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        -4.898587196589413e-17,
+        2.125,
+        3.7
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-5",
+      "part": "saule-pier-5 concrete body",
+      "row": 5,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        1.05,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-5",
+      "part": "saule-pier-5 concrete body",
+      "row": 5,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        -1.05,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-6",
+      "part": "saule-pier-6 concrete body",
+      "row": 6,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        5,
+        2.125,
+        -3.7
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-6",
+      "part": "saule-pier-6 concrete body",
+      "row": 6,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        5,
+        2.125,
+        -2.0999999999999996
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-6",
+      "part": "saule-pier-6 concrete body",
+      "row": 6,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        6.05,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-6",
+      "part": "saule-pier-6 concrete body",
+      "row": 6,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        3.95,
+        2.125,
+        -2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    },
+    {
+      "fixture": "saule-pier-7",
+      "part": "saule-pier-7 concrete body",
+      "row": 7,
+      "col": 0,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        5,
+        2.125,
+        2.0999999999999996
+      ],
+      "normal": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ],
+      "right": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-7",
+      "part": "saule-pier-7 concrete body",
+      "row": 7,
+      "col": 1,
+      "width": 2.1,
+      "height": 4.15,
+      "center": [
+        5,
+        2.125,
+        3.7
+      ],
+      "normal": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        6.123233995736766e-17
+      ]
+    },
+    {
+      "fixture": "saule-pier-7",
+      "part": "saule-pier-7 concrete body",
+      "row": 7,
+      "col": 2,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        6.05,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        1,
+        0,
+        6.123233995736766e-17
+      ],
+      "right": [
+        6.123233995736766e-17,
+        0,
+        -1
+      ]
+    },
+    {
+      "fixture": "saule-pier-7",
+      "part": "saule-pier-7 concrete body",
+      "row": 7,
+      "col": 3,
+      "width": 1.6,
+      "height": 4.15,
+      "center": [
+        3.95,
+        2.125,
+        2.9
+      ],
+      "normal": [
+        -1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "right": [
+        -6.123233995736766e-17,
+        0,
+        1
+      ]
+    }
+  ],
+  "clipped": 0,
+  "atlas": [
+    1024,
+    4096
+  ],
+  "strength": 64,
+  "lightsPerPier": 8,
+  "scope": "Original direct-light bake, estimated luminance, no shadow/indirect or moving-occluder support",
+  "generatedFrom": [
+    {
+      "path": "assets/models/berghain/admission.mjs",
+      "sha256": "4a1fb2f362862ac664f277b9a0957959f79cea9d71f0640790f166b3da9edb54"
+    },
+    {
+      "path": "assets/models/berghain/architectural-circulation.mjs",
+      "sha256": "57c78f0fb33bb042db778345b4450b9644e503e4edb96d32abf82ba1c513abf2"
+    },
+    {
+      "path": "assets/models/berghain/artworks.mjs",
+      "sha256": "64d8c2b0cd9677bf66b982387b87315c26b4bb78db8c53c6262e084e29c17ad1"
+    },
+    {
+      "path": "assets/models/berghain/avatar.mjs",
+      "sha256": "7d3ff5c4d01ee52f826278f9afddda010f7fb21938f345831f602891ad09b77c"
+    },
+    {
+      "path": "assets/models/berghain/baked-belt.mjs",
+      "sha256": "4f7a1e9060980447bc13a58db2928e70fcf7ce2df14d56bd3110775529b0e6bb"
+    },
+    {
+      "path": "assets/models/berghain/calibration.mjs",
+      "sha256": "09eebd835d4ade8f6195eafb29805abeae48a165cc0fc43e8f23b0281e611fde"
+    },
+    {
+      "path": "assets/models/berghain/climber-geometry.mjs",
+      "sha256": "adcca63d587ddbfc912f2b33e4ccf4fb0b5aaf93c043e71cabb1426acf0c7de6"
+    },
+    {
+      "path": "assets/models/berghain/exterior-details.mjs",
+      "sha256": "1ad65c247d000e480ef5af31e2f5c3a3851fb9878f22ca12bc9cef03dd4b0c25"
+    },
+    {
+      "path": "assets/models/berghain/ground-registration.mjs",
+      "sha256": "d885bb95a34e0f6a4ea84a921d70e1221b65df86449f3d1afcc45d66787d2f71"
+    },
+    {
+      "path": "assets/models/berghain/ground-sanitary.mjs",
+      "sha256": "fba40ae058ccd5ac0bce8d031b760b70c2190c59783e46922b2b82af06e91ec4"
+    },
+    {
+      "path": "assets/models/berghain/halle.mjs",
+      "sha256": "ab809c9c82548572ce006725dd013dba059d8a29a4d4859e60ace7b7f2049616"
+    },
+    {
+      "path": "assets/models/berghain/interior-fixtures.mjs",
+      "sha256": "69e657261cc3d0a01dba9660038bd1c720af7316b99548efbe377d003ce7407c"
+    },
+    {
+      "path": "assets/models/berghain/interior-topology.mjs",
+      "sha256": "cc2f2b547ea3de9719c60025311a0e3a55c1b36b3052dc8694f6539bdaf064f6"
+    },
+    {
+      "path": "assets/models/berghain/klo-bar.mjs",
+      "sha256": "ce2b7bb9a367a355d26ccdbad47119151b612b79988b82008c011fab0467f195"
+    },
+    {
+      "path": "assets/models/berghain/lab-oratory.mjs",
+      "sha256": "93bd83d6452a07c6d809471a636c2f01b8fabc09546ebb70b08866ac896045ce"
+    },
+    {
+      "path": "assets/models/berghain/landscape.mjs",
+      "sha256": "db23bd2855b6682558e0812f94b137b8126ee15133d281d53e37e2f08919b0e6"
+    },
+    {
+      "path": "assets/models/berghain/layout.mjs",
+      "sha256": "9697ac8bf17dbe6a55de600f6aa2a9072632b86092b0db4c357c47aa2c04ef48"
+    },
+    {
+      "path": "assets/models/berghain/main-bar.mjs",
+      "sha256": "5c474f7ad8c2822c35335df6fa2324965f61fe2b3df68611acd884d0cea9e454"
+    },
+    {
+      "path": "assets/models/berghain/main-dj-bay.mjs",
+      "sha256": "fd7cfe3dc08022767d3863fd6b4955569b9a9a230bed856f3380c8aa6d661a20"
+    },
+    {
+      "path": "assets/models/berghain/main-hall-details.mjs",
+      "sha256": "1ece0007a8808fd79786788ebbb7838be0f7ec3b5e311b5ee01dcd9d593e6af0"
+    },
+    {
+      "path": "assets/models/berghain/main-hall-registration.mjs",
+      "sha256": "d6a303a34adfd514ffefae6d2e9a223cbfa2272a52e63d8463f254d8249f0890"
+    },
+    {
+      "path": "assets/models/berghain/model.mjs",
+      "sha256": "c784c91eeb683c0c8a993addad6d207d972177749c64786e589f2cf9e3e8f694"
+    },
+    {
+      "path": "assets/models/berghain/original-balustrades.mjs",
+      "sha256": "e60134a15ad3794f8d3b90dd83779fff82e8ac19df42201c08b9aa9809f70599"
+    },
+    {
+      "path": "assets/models/berghain/panorama-registration.mjs",
+      "sha256": "61826ffa001bc2646b74bb7a9c28b5cc8921ea04bc6b9e43eb33c17c687423ed"
+    },
+    {
+      "path": "assets/models/berghain/panorama-section.mjs",
+      "sha256": "c5a3036c362b7c5c3cb8fbba7e37643257f006077210c21cc2585d9e4268847b"
+    },
+    {
+      "path": "assets/models/berghain/panorama-services.mjs",
+      "sha256": "45a1cd897e976bd217e6b0732591b55683c659fe48df56ac1921b78eae7411f5"
+    },
+    {
+      "path": "assets/models/berghain/saule-ceiling.mjs",
+      "sha256": "c9b0dde458c67f5d81c2c02f02025e554defc9b10a7482f07b6645e0f9e34673"
+    },
+    {
+      "path": "assets/models/berghain/saule.mjs",
+      "sha256": "9b27ad32a39bee9a3712068f9b180eef108297aee5872cf652169c85640711fd"
+    },
+    {
+      "path": "assets/models/berghain/sound-system.mjs",
+      "sha256": "12fc12ded2ba8084f5dfde09435f81d72c6a7f239c31475d5745281c23e2dd82"
+    },
+    {
+      "path": "assets/models/berghain/speaker-geometries.mjs",
+      "sha256": "be77d0eb0d346445bc14c52e382f4a54e922a06d948f7d2f9073095984f07d60"
+    },
+    {
+      "path": "assets/models/berghain/surface-data.mjs",
+      "sha256": "5bf43200e0729011f71b31aefb0f0130aee99b77a80cc0282f0974e4545d16f8"
+    },
+    {
+      "path": "assets/models/berghain/surface-materials.mjs",
+      "sha256": "5e554cf4d750d7425a6b0e7823ea353bca4012c5450f626049ee08f78a69d7d2"
+    },
+    {
+      "path": "assets/models/berghain/survey-data.mjs",
+      "sha256": "9b9aa88ec06e1343ed440153779173d31fd1bf39f90a49529e4114b30c6a07a4"
+    },
+    {
+      "path": "assets/models/berghain/survey-model.mjs",
+      "sha256": "d04b1998be0d7b50ab997819b9b34d9f55192569f31b5c7df65e234eb80ef700"
+    },
+    {
+      "path": "assets/models/berghain/together-anatomy.mjs",
+      "sha256": "a8c99ce69fb93d83eed1d71eaaae10271823917ee8bce830bef9e7e4271ed178"
+    },
+    {
+      "path": "assets/models/berghain/together-geometry.mjs",
+      "sha256": "19b25b80baa032c421c38d7bd78585fea8a7cf9685bb296b29f317677e6103d1"
+    },
+    {
+      "path": "assets/models/berghain/together.mjs",
+      "sha256": "377cd892f4896d4bc41b0eba298b12730a641e0ce0601cb76c3a88699ade2e6a"
+    },
+    {
+      "path": "assets/models/berghain/upper-lounge.mjs",
+      "sha256": "4dc491ee1abf5e16e0baf7c88d8ed0a31d050db122227eec94519bdf9463256d"
+    },
+    {
+      "path": "assets/models/berghain/upper-sanitary.mjs",
+      "sha256": "8fe9ee9c723fc5857bb8a30ab38f5afd4edb700b77ac1ead6cbf713d77cee987"
+    },
+    {
+      "path": "assets/models/berghain/textures/pier-baseColor.png",
+      "sha256": "9bc5372abc272b7a4438577e8f0e1ed5742b50998ed9dda0d94283058294cc84"
+    },
+    {
+      "path": "assets/models/berghain/textures/pier-normal.png",
+      "sha256": "4f3f94e819e09c771dca21af7126e36c3b9b3df3102ee4df32ef7978d2d1f794"
+    },
+    {
+      "path": "assets/models/berghain/textures/pier-roughness.png",
+      "sha256": "04da24a66b8ff86f4d738be3f9d5194165ec7de0a2fc42d67aca419c8f877e88"
+    },
+    {
+      "path": "berghain/build-belt-lighting.mjs",
+      "sha256": "b7a622d78e446db6010a871896433142aeb40dd0da099f77f83f4327b364bc4c"
+    },
+    {
+      "path": "berghain/belt-emitter-study.mjs",
+      "sha256": "971b460399752d0cb34bc846d995767c466c3f92228f63b64bcb8add5cff3037"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/build/three.module.min.js",
+      "sha256": "6a238d5d0c711f1f008488aff06a2ab9ab478959842044d243e89c316f6a5fc2"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/build/three.core.js",
+      "sha256": "f3556fb8c9aff8fc6f8e090b918ae5d4e6b45152afb93815002d3319d875cdec"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/examples/jsm/lights/RectAreaLightUniformsLib.js",
+      "sha256": "494fef2d731ff1689050cc6040ad78d927c22b9125a12f532beb0374c2811c6e"
+    },
+    {
+      "path": "assets/vendor/three/0.186.0/examples/jsm/lights/RectAreaLightTexturesLib.js",
+      "sha256": "6dd4043bb052594357a5eeff13dc0519f0a80b100b97ec80c12808f887897bc1"
+    }
+  ],
+  "image": {
+    "file": "saule-belt-bake.png",
+    "bytes": 4528960,
+    "sha256": "9dadbe160c7cd3f94aac866b6474998e92e867998167a285c16c2de36d64714a"
+  }
+}

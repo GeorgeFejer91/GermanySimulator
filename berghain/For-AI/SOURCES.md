@@ -1,5 +1,14 @@
 # Berghain online resource catalogue
 
+Säule fixed-light interpretation (26 October 2026): A15/I24's continuous upper
+and lower grazing wash is represented by original radiance baked from authored
+recessed rectangular emitters. Strip dimensions, luminance (125 in the study
+renderer), tint and exposure remain estimates. No source image pixels are used.
+The material bake follows the existing original concrete maps and inferred
+pier registration. It omits surrounding static cast shadows, moving shadows, variable colour,
+adjacent-surface spill and indirect bounce; it does not establish the current lighting show.
+
+
 ### Mineral surface observations — 26 October 2026
 
 Reinspection of I23 views12/14/16 shows pale remaining plaster, grey exposed

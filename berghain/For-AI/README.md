@@ -1,5 +1,44 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted fixed Säule column wash — 26 October 2026
+
+A15/I24 show continuous concealed light above and below dark column bands.
+The eight registered pier bodies now carry an original fixed radiance bake
+from rectangular emitters aligned with their existing recessed lenses. Existing
+room cues remain live. No additional runtime lights, timers, triangles or solid
+objects are introduced. One 1024 × 4096 RGB atlas adds 4,528,960 image bytes;
+the portable GLB uses standard emissive texture/UV and emissive-strength fields.
+This texture stores precomputed reflected light, not luminous concrete.
+
+Intensity, colour and material response are visual estimates. The bake includes
+rough view-normal specular response; it cannot respond to moving occluders,
+changing fixture colour or fixture switching. Surrounding static cast shadows, nearby furniture, ceiling/floor spill and
+indirect bounce are not baked. Source photographs do not establish
+current lighting operation. An atlas-load failure retains the previous
+nonluminous material fallback. These are explicit fidelity limits.
+
+`node tools/test-browser.mjs quick --suite berghain/build-belt-lighting.mjs --root .`
+rebuilds the atlas in an isolated silent browser through the existing harness;
+then run `node berghain/export-model.mjs`. The generator excludes the previous
+bake and records source hashes, face registration and output clipping in
+`textures/saule-belt-bake-manifest.json`. Pinned Three area-light helpers are
+used only for authoring; the visitor runtime does not import them.
+
+The full reconstruction goal remains ACTIVE. Exact private plans, lift
+registration, current room/equipment inventories, selected-date artwork and
+complete photographic detail remain unverified. This correction is not a
+verified digital twin. V6 passes 263 Node checks. Thirteen V5 browser cases transfer through an exact
+executable-text/binary bridge after line-ending normalization; the V6 baker
+regenerates the exact image and GLB. A fresh independent V6 camera walkthrough,
+18 matched cost contexts and both independent reviews pass within scope.
+Release cleanup removes two trailing blank lines and refreshes the bake input
+hashes through actual regeneration. The atlas and GLB remain exact; eight
+focused material/export/fallback checks pass on the cleaned release.
+Physical Android remains NOT RUN. Frozen acceptance and deployment are separate:
+output/berghain-saule-belt-candidate-v6.json and
+output/berghain-saule-belt-release.json.
+
+
 ## Accepted main-bar plaster and Säule concrete — 26 October 2026
 
 I23 main-bar photographs support mostly continuous pale plaster with localized

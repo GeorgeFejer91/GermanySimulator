@@ -1,5 +1,57 @@
 # Berghain viewer validation
 
+## Säule fixed-light V6 — accepted bounded validation, 26 October 2026
+
+All 263 V6 Node checks pass. Thirteen V5 browser cases cover five controlled
+front/reverse/rear source/native views, retained bar/Halle materials, and actual
+loaded/fallback walks on desktop and Android portrait/landscape emulation.
+Desktop also recovers from context loss. V6 changes only line endings and
+regenerated bake-input byte hashes; executable text, all image bytes and GLB
+are equivalent or exact through the recorded bridge. The actual V6 bake is
+unclipped and reproduces the exact V5 atlas. Independent Camera adds a fresh
+V6 opposite-corner walk, atlas-only failure and reload recovery; both Physics
+and Camera reviews pass within this scope. Release cleanup removes two trailing blank lines and refreshes the bake input
+hashes through actual regeneration. The atlas and GLB remain exact; eight
+focused material/export/fallback checks pass on the cleaned release.
+Physical Android NOT RUN.
+
+The preserved model retains all 17,256 parts, 6,169 solids, 74 floors and all
+physical code. All 1,006 existing native attribute/index streams, 31 embedded
+images and six practical-light definitions remain exact. One concrete box
+batch gains secondary UVs and fixed reflected-radiance mapping. Its eight pier
+bodies use their own atlas rows; other instances and horizontal faces remain
+unlit by the bake. Geometry remains 837,388 triangles and 226 groups. GLB:
+72,012,380 bytes, 32 embedded images. Normal loading uses 33 textures; no runtime
+area lights, new timer or automatic GLB download is introduced.
+
+Eighteen matched cost contexts cover three contexts per profile and condition,
+two rooms per context, actual two-second keyboard/touch movement, matched
+requested starting poses/headings (observed bar starts span at most 2.12 cm), bounded drawing buffers and idle checks. Start-pose
+render counts distinguish exact geometry from small movement-end timing
+variation. The original RGB atlas adds 4,528,960 transfer bytes and about
+21.3 MiB of RGBA mip storage; actual GPU allocation is driver-dependent.
+
+- desktop, saule: median frame p95 14.1 to 14.1 ms; maximum candidate input response 19.6 ms.
+- desktop, berghain: median frame p95 21.0 to 21.0 ms; maximum candidate input response 12.3 ms.
+- android-portrait, saule: median frame p95 7.1 to 7.1 ms; maximum candidate input response 17.5 ms.
+- android-portrait, berghain: median frame p95 7.2 to 7.1 ms; maximum candidate input response 16.1 ms.
+- android-landscape, saule: median frame p95 7.1 to 7.1 ms; maximum candidate input response 21.6 ms.
+- android-landscape, berghain: median frame p95 13.9 to 13.9 ms; maximum candidate input response 18.2 ms.
+
+Measured frame/input costs meet the scoped budget. Samples are local lab
+observations, not a causal speedup or physical-device claim. Full receipt:
+output/berghain-saule-belt-cost-comparison-v6.json.
+
+The first spot-light version produced discrete cones and was rejected. The
+64-area-light version timed out in both desktop contexts. An eight-light
+single-column study established the continuous wash. The first low-range
+bake clipped and was rejected; the final encoding preserves bright values.
+The final bake omits surrounding static cast-shadow interactions, moving
+shadows, adjacent-surface spill and indirect bounce. It stores rough
+view-normal specular response and does not respond to changing fixture colour.
+Brightness, tint and geometry registration remain estimates; the full goal
+stays ACTIVE. See the current scope and sources.
+
 ## Mineral surface V4 — accepted scoped validation, 26 October 2026
 
 All 259 V4 Node tests pass, including the unchanged historic Halle oracle.

@@ -6,7 +6,7 @@ import {compareMaterialRender} from './material-playtest.mjs';
 import {travel} from './lounge-playtest.mjs';
 import {dragLook,assertFirstPersonView} from './fixture-playtest.mjs';
 import {sourceFiles as priorFiles} from './saule-playtest.mjs';
-const extra=['berghain/mineral-surface-playtest.mjs',...['plaster','pier'].flatMap(f=>['baseColor','roughness','normal'].map(k=>'assets/models/berghain/textures/'+f+'-'+k+'.png'))];
+const extra=['berghain/mineral-surface-playtest.mjs','assets/models/berghain/baked-belt.mjs','assets/models/berghain/textures/saule-belt-bake.png',...['plaster','pier'].flatMap(f=>['baseColor','roughness','normal'].map(k=>'assets/models/berghain/textures/'+f+'-'+k+'.png'))];
 export const sourceFiles=()=>[...priorFiles(),...extra.map(path=>({path,sha256:createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex')}))];
 const views=[{id:'bar',position:[3,7.13,-10.15],target:[-4,10.2,-14.8]},
  {id:'pier',position:[3,1.73,0],target:[0,2.35,-2.9]}];
@@ -50,7 +50,7 @@ async function walkMaterials(ctx,{fallback=false,restore=false}={}){
 export default {name:'Distinct bar plaster and Säule concrete; portable normal convention',sourceFiles,scenarios:[
  ...views.flatMap(view=>(['bar','pier'].includes(view.id)?[false,true]:[false]).map(clubNight=>({
   id:'mineral-'+view.id+(clubNight?'-night':'-inspection'),modes:['quick','stress'],profiles:['desktop'],timeoutMs:180000,
-  async run(ctx){const result=await compareMaterialRender(ctx,{...view,clubNight});assert.equal(result.measured.expectedTextures,32);return {...result,view,clubNight};}}))),
+  async run(ctx){const result=await compareMaterialRender(ctx,{...view,clubNight});assert.equal(result.measured.expectedTextures,33);return {...result,view,clubNight};}}))),
  {id:'mineral-walk',modes:['quick','stress'],timeoutMs:180000,run:ctx=>walkMaterials(ctx,{restore:ctx.profile.id==='desktop'})},
  {id:'mineral-fallback',modes:['quick','stress'],timeoutMs:180000,run:ctx=>walkMaterials(ctx,{fallback:true})}
 ]};
