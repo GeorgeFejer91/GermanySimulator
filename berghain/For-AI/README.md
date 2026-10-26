@@ -1,5 +1,22 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted Panorama acoustic-panel forms — 26 October 2026
+
+I11 and I19/15/16 show square, broad and elongated acoustic bodies with differing
+depths. The repeated form now uses those families at sixteen retained provisional
+horizontal anchors. Lower faces remain fixed for equipment clearance; thicker
+bodies extend upward. Dimensions, per-anchor assignment and current inventory
+remain estimates; this is not a recovered complete rig layout.
+
+All 280 integrated Node checks and nine root browser cases pass, with independent
+Physics/Camera review and six matched cost spot checks. Room/floor/private
+boundaries, equipment and runtime lights remain exact. Ten inherited fixture/
+cloud contacts remain unresolved fitting details, not validated supports.
+Physical Android is untested.
+Actual ceiling radiance is regenerated; a larger encoding range prevents clipping
+without changing authored light output. Full goal remains ACTIVE. Publication is
+verified separately by output/berghain-panorama-panel-forms-release.json.
+
 ## Accepted Panorama acoustic-ceiling wash — 26 October 2026
 
 The newly inspected I11 installer photograph shows coloured ceiling wash behind

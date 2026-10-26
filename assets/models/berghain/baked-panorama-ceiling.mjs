@@ -3,7 +3,7 @@ import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 // I11's concealed RGB ceiling wash, in one authored fixed state. This map is
 // outgoing ceiling radiance, not luminous paint or a recovered lighting program.
 // The atlas contains the soffit only; an unused black row serves all other faces.
-export const panoramaCeilingBake={map:'textures/panorama-ceiling-bake.png',strength:2};
+export const panoramaCeilingBake={map:'textures/panorama-ceiling-bake.png',strength:4};
 export function configurePanoramaCeilingBake(mesh,parts){
  if(!parts.some(p=>p.name==='Panorama fitted ceiling'))return;
  if(parts.length!==1)throw Error('Panorama ceiling bake requires its own material batch');

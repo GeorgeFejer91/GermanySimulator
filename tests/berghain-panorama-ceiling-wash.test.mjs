@@ -25,7 +25,7 @@ test('ceiling wash is confined to the downward soffit and adds no runtime light'
 test('portable ceiling light map preserves the standard UV channel, exact image and intensity',()=>{
  const bytes=readFileSync(new URL('assets/models/berghain/berghain-study.glb',root)),g=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
  const material=g.materials.find(m=>m.name==='interior/panoramaCeilingWash/box');assert.ok(material);
- assert.equal(material.emissiveTexture.texCoord,1);assert.equal(material.extensions.KHR_materials_emissive_strength.emissiveStrength,2);
+ assert.equal(material.emissiveTexture.texCoord,1);assert.equal(material.extensions.KHR_materials_emissive_strength.emissiveStrength,4);
  assert.deepEqual(material.emissiveFactor,[1,1,1]);
  const image=g.images[g.textures[material.emissiveTexture.index].source],v=g.bufferViews[image.bufferView],offset=28+bytes.readUInt32LE(12)+v.byteOffset;
  assert.equal(image.name,'textures/panorama-ceiling-bake.png');assert.equal(sha(bytes.subarray(offset,offset+v.byteLength)),sha(readFileSync(new URL('assets/models/berghain/'+image.name,root))));
@@ -34,7 +34,7 @@ test('portable ceiling light map preserves the standard UV channel, exact image 
 
 test('ceiling radiance records actual generation inputs, bounded encoding and a dated appearance scope',()=>{
  const manifest=JSON.parse(readFileSync(new URL('assets/models/berghain/textures/panorama-ceiling-bake-manifest.json',root)));
- assert.equal(manifest.clipped,0);assert.equal(manifest.records.length,64);assert.ok(manifest.nonzero>10000);assert.deepEqual(manifest.atlas,[512,512]);assert.equal(manifest.strength,2);
+ assert.equal(manifest.clipped,0);assert.equal(manifest.records.length,64);assert.ok(manifest.nonzero>10000);assert.deepEqual(manifest.atlas,[512,512]);assert.equal(manifest.strength,4);
  assert.match(manifest.scope,/Estimated/);assert.match(manifest.scope,/no beam shadows/);
  const bytes=readFileSync(new URL('assets/models/berghain/textures/'+manifest.image.file,root));assert.equal(sha(bytes),manifest.image.sha256);assert.equal(bytes.length,manifest.image.bytes);
  for(const input of manifest.generatedFrom)assert.equal(sha(readFileSync(new URL(input.path,root))),input.sha256,'Regenerate ceiling radiance after changing '+input.path);

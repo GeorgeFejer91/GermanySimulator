@@ -6,9 +6,20 @@ export function addPanoramaCeiling(layout,{box}){
   box('Panorama fitted ceiling',[-13.25,ceiling+.09,-13.25],[16.5,.18,16.5],'panoramaCeilingWash','interior',true);
   for(const z of [-20.4,-15,-9.6])
     box('Panorama ceiling beam',[-13.25,ceiling-.17,z],[16.5,.34,.36],'pale','interior',true);
+  // I11 and I19/15/16 show square, broad and elongated bodies of differing
+  // depth. Their assignment below is an authored fit at retained provisional
+  // anchors, not recovered panel-by-panel registration or a current inventory.
+  const profiles={square:[1.6,.34,1.6],wide:[2.4,.24,1.2],long:[1.2,.42,2.5]};
+  const forms=[['square','long','long','square'],['wide','long','square','wide'],
+    ['long','square','wide','long'],['square','wide','long','square']];
+  layout.panoramaServices.acousticForms={sources:['I11','I19'],photoViews:[15,16],
+    confidence:'Observed form families; dimensions, depths and per-anchor assignment estimated',
+    placement:'Retained provisional horizontal anchors and lower datums; no recovered complete rig registration',
+    inventory:'Sixteen existing study panels retained; cropped photographs and fifty control circuits do not establish the room inventory'};
   for(let row=0;row<4;row++)for(let column=0;column<4;column++){
     const x=-19.8+column*3.3+(row%2)*.7,z=[-18.9,-16.5,-12.3,-7.3][row];
-    box('Panorama acoustic cloud',[x,ceiling-.27-(column%2)*.06,z],[1.65,.24,2.05],'pale','interior',true);
+    const size=profiles[forms[row][column]],bottom=ceiling-.39-(column%2)*.06;
+    box('Panorama acoustic cloud',[x,bottom+size[1]/2,z],size,'pale','interior',true);
   }
 }
 

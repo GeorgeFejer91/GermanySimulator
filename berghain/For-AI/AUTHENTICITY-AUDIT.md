@@ -1,5 +1,17 @@
 # Berghain interior authenticity audit
 
+## Panorama acoustic forms — accepted
+
+The ceiling-wash correction retained sixteen identical panel forms. I11's night
+photograph and I19/15/16 daylight photographs show square and differently oriented
+elongated bodies with varied depths. The correction addresses this visible form
+mismatch at retained provisional horizontal anchors, with estimated dimensions
+and assignment. Lower faces remain fixed to avoid new overhead hardware
+intersections; this does not establish exact suspension datums or a current
+inventory. The cropped photograph is not a whole-room plan. Ten pre-existing
+thin service/hanger contacts remain explicitly recorded. Scoped acceptance passes; exact present-day registration remains unresolved.
+
+
 ## AU24 / Panorama concealed ceiling wash — accepted
 
 The 2010 installer photograph I11 was previously uninspected. It shows coloured

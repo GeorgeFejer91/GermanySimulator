@@ -1,5 +1,48 @@
 # Berghain viewer validation
 
+## Accepted Panorama panel forms
+
+Frozen manifest b1f9ff0e474d1c408e65c549cdc40d201c9aad6069b41af26a96b34f3757c3c9
+passes all 280 Node checks and nine root browser cases: front/oblique neutral
+and wider night source/native views, plus actual loaded/fallback walks on desktop
+and Android portrait/landscape emulation. Desktop context recovery is included.
+Independent Physics and Camera reviews bind this exact 280-file candidate.
+
+All 16,842 unrelated parts, 6,159 unrelated solids, 74 floors, viewpoints and
+fixtures remain exact; all 16,858 instance colours are preserved. Sixteen panels
+retain horizontal anchors and lower faces. The complete rendered-body AABB
+screen finds no new overlap; inherited fixture/cloud contacts decrease from
+twelve to ten, with some retained insertion depths increasing. Those contacts
+remain unresolved fitting details, not mechanical support validation. The
+named acoustic hangers belong to separate retained enclosures. Minimum panel
+standing clearance is 4.25 m.
+
+Native preservation checks cover 1,017 unchanged streams, 163 retained pale
+parts, all 179 pale-part colours and every one of 384 changed panel vertices.
+Thirty-six prior images and native lights remain exact; only the ceiling atlas
+changes. GLB: 71,922,564 bytes, SHA256
+f558d0af753252184a21eccfe5a35319884986de6619809a6290198d6c5aef66.
+Counts stay at 832,676 triangles, 228 batches, 37 embedded images and 38 runtime
+textures. Both radiance builders were actually run; the Säule PNG remains exact.
+
+The first top-preserving fit failed with 22 new overlaps and was rejected. The
+first ceiling bake clipped 2,126 pixels and was rejected; encoding strength 4
+now passes zero clipping at the same authored source output 55. Earlier failing
+evidence and rationale remain in the plan/ledger; no threshold was relaxed.
+
+Six sequential fresh cost contexts are bounded local spot checks, not stable
+latency estimates or physical-device evidence:
+
+- desktop: p95 21.0 to 21.0 ms; candidate input 9.8 ms.
+- android-portrait: p95 7.1 to 7.1 ms; candidate input 11.2 ms.
+- android-landscape: p95 7.0 to 7.1 ms; candidate input 11.4 ms.
+
+No added runtime lights, texture count or idle redraws; ordinary viewing does
+not fetch the GLB. Exact current panel arrangement, photometry and cove
+construction remain unverified. Fixed red radiance persists in neutral/day views
+and does not include beam shadows, moving occlusion or indirect room spill.
+Physical Android NOT RUN. Public deployment is a separate verified receipt.
+
 ## Accepted Panorama ceiling wash
 
 Frozen manifest 5665e9dfefc6f905639ba50e8f34e09bc6361ede9d304329dd0ded09a53907c8
