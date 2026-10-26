@@ -1,5 +1,18 @@
 # Berghain interior: objects, art and equipment
 
+## Main-bar luminous blocks — 26 October 2026
+
+I23 gallery12/14 show two rows of separate amber backlit rectangular apertures,
+fine horizontal ribs and dark joints continuing around the rounded return.
+The former continuous curved luminous strip is now divided into fitted blocks.
+Original procedural base-colour, normal, roughness and emission maps represent
+the ribbed appearance; no photograph pixels are shipped. This is an opaque
+backlit-surface approximation, not measured transmission through glass.
+Block count, dimensions, optical material, intensity and current operation are
+unverified. Existing counter, stools and collision clearances are retained.
+This change does not add light spill onto nearby surfaces.
+
+
 ## Accepted upper-lounge forms — 25 October 2026
 
 I19/19 now informs original faceted seats, attached partial offset backs,

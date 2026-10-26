@@ -1,4 +1,11 @@
 export const surfaceFamilies = {
+  "barGlass": {
+    "metresPerTile": 1,
+    "intrinsicUV": true,
+    "baseColor": "textures/bar-glass-baseColor.png",
+    "roughness": "textures/bar-glass-roughness.png",
+    "normal": "textures/bar-glass-normal.png"
+  },
   "mineral": {
     "metresPerTile": 2,
     "baseColor": "textures/mineral-baseColor.png",

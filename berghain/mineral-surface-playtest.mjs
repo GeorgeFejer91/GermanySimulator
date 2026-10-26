@@ -50,7 +50,7 @@ async function walkMaterials(ctx,{fallback=false,restore=false}={}){
 export default {name:'Distinct bar plaster and Säule concrete; portable normal convention',sourceFiles,scenarios:[
  ...views.flatMap(view=>(['bar','pier'].includes(view.id)?[false,true]:[false]).map(clubNight=>({
   id:'mineral-'+view.id+(clubNight?'-night':'-inspection'),modes:['quick','stress'],profiles:['desktop'],timeoutMs:180000,
-  async run(ctx){const result=await compareMaterialRender(ctx,{...view,clubNight});assert.equal(result.measured.expectedTextures,33);return {...result,view,clubNight};}}))),
+  async run(ctx){const result=await compareMaterialRender(ctx,{...view,clubNight});assert.equal(result.measured.expectedTextures,37);return {...result,view,clubNight};}}))),
  {id:'mineral-walk',modes:['quick','stress'],timeoutMs:180000,run:ctx=>walkMaterials(ctx,{restore:ctx.profile.id==='desktop'})},
  {id:'mineral-fallback',modes:['quick','stress'],timeoutMs:180000,run:ctx=>walkMaterials(ctx,{fallback:true})}
 ]};

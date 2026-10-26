@@ -14,7 +14,7 @@ const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', 
   gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
   labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'plaster',
-  sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather'};
+  sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather',mainBarGlow:'barGlass'};
 
 function correctInstanceNormals(shader){
   // Calibrated walls and stair guards can have shear. Three's default instance
@@ -39,6 +39,7 @@ export function configureSurfaceMaterial(material, name, section) {
   const family = sauleInterior?'pier':familyByMaterial[name];
   if(sauleInterior)material.color.set('#b7b5ac');
   if (family) material.userData.surface = {family, ...surfaceFamilies[family]};
+  if(name==='mainBarGlow')material.userData.emissionMap='textures/bar-glass-emission.png';
   if(name==='artAmber'){
     material.userData.volumeMap='textures/amber-thickness.png';
     material.userData.environmentMap='textures/amber-lighting.png';
@@ -59,6 +60,7 @@ function projectedMaterial(material, maps) {
   // the vertical relief in the live model relative to the portable asset.
   material.normalScale.y=-1;
   if(material.clearcoat>0){material.clearcoatNormalMap=maps.normal;material.clearcoatNormalScale.y=-1;}
+  if(material.userData.surface.intrinsicUV){configureInstanceNormals(material);material.needsUpdate=true;return;}
   material.onBeforeCompile = shader => {
     correctInstanceNormals(shader);
     shader.uniforms.berghainTileMetres={value:material.userData.surface.metresPerTile};
@@ -101,12 +103,13 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
     if(kind==='baseColor') texture.colorSpace=THREE.SRGBColorSpace;
     textures.set(key,texture);
   })));
-  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap,m.userData.beltBake?.map]).filter(Boolean));
+  const emissionMaps=new Set([...materials].map(m=>m.userData.emissionMap).filter(Boolean));
+  const extras=new Set([...materials].flatMap(m=>[m.userData.volumeMap,m.userData.environmentMap,m.userData.beltBake?.map,m.userData.emissionMap]).filter(Boolean));
   for(const key of extras)requests.push(surfaceQueue.enqueue(async()=>{
     if(model.userData.disposed)return;
     const texture=await loader.loadAsync(new URL(key,import.meta.url).href);texture.name=key;texture.flipY=false;
     if(key.endsWith('lighting.png')){texture.mapping=THREE.EquirectangularReflectionMapping;texture.colorSpace=THREE.SRGBColorSpace;}
-    else {texture.channel=1;if(key==='textures/saule-belt-bake.png')texture.colorSpace=THREE.SRGBColorSpace;}
+    else {texture.channel=emissionMaps.has(key)?0:1;if(emissionMaps.has(key)||key==='textures/saule-belt-bake.png')texture.colorSpace=THREE.SRGBColorSpace;}
     textures.set(key,texture);
   }));
   const results=await Promise.allSettled(requests);
@@ -119,6 +122,7 @@ export async function loadSurfaceTextures(model, anisotropy=1) {
   for(const material of materials){
     const surface=material.userData.surface;
     projectedMaterial(material,Object.fromEntries(['baseColor','roughness','normal'].map(kind=>[kind,textures.get(surface[kind])])));
+    if(material.userData.emissionMap)material.emissiveMap=textures.get(material.userData.emissionMap);
     if(material.userData.beltBake){material.emissiveMap=textures.get(material.userData.beltBake.map);material.emissive.set(0xffffff);material.emissiveIntensity=material.userData.beltBake.strength;}
     if(material.userData.volumeMap)material.thicknessMap=textures.get(material.userData.volumeMap);
     if(material.userData.environmentMap)material.envMap=textures.get(material.userData.environmentMap);

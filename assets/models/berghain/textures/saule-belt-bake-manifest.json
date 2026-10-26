@@ -816,7 +816,7 @@
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
-      "sha256": "5c474f7ad8c2822c35335df6fa2324965f61fe2b3df68611acd884d0cea9e454"
+      "sha256": "d5e78398de39c53a152cfe38fac9d452883825c8bfec1abd66a2d43f1be6cafa"
     },
     {
       "path": "assets/models/berghain/main-dj-bay.mjs",
@@ -868,11 +868,11 @@
     },
     {
       "path": "assets/models/berghain/surface-data.mjs",
-      "sha256": "5bf43200e0729011f71b31aefb0f0130aee99b77a80cc0282f0974e4545d16f8"
+      "sha256": "f72d69b729cf7b531cccd2a298f51d5a298f7d68a973e41076f2b39246bc2faa"
     },
     {
       "path": "assets/models/berghain/surface-materials.mjs",
-      "sha256": "5e554cf4d750d7425a6b0e7823ea353bca4012c5450f626049ee08f78a69d7d2"
+      "sha256": "8f58b5976339244d373447130cd77442981710d458b582ae57832642ba494a32"
     },
     {
       "path": "assets/models/berghain/survey-data.mjs",

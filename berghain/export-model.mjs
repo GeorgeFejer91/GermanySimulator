@@ -91,7 +91,7 @@ for (const group of model.children) {
         vector.fromBufferAttribute(sourcePosition, vertex).applyMatrix4(matrix).toArray(positions, offset);
         vector.fromBufferAttribute(sourceNormal, vertex).applyNormalMatrix(normalMatrix).toArray(normals, offset);
         color.toArray(colors, offset);
-        if (uvs) uvs.set(surfaceUV(positions.subarray(offset,offset+3),normals.subarray(offset,offset+3),surface.metresPerTile),offset/3*2);
+        if (uvs) uvs.set(surface.intrinsicUV?[geometry.attributes.uv.getX(vertex),geometry.attributes.uv.getY(vertex)]:surfaceUV(positions.subarray(offset,offset+3),normals.subarray(offset,offset+3),surface.metresPerTile),offset/3*2);
         if(volumeUVs){const uv=[sourceVolumeUV.getX(vertex),sourceVolumeUV.getY(vertex)];
           volumeUVs.set(mesh.material.userData.beltBake?beltBakeUV(uv,geometry.attributes.beltBakeIndex.getX(instance)):uv,offset/3*2);}
       }
@@ -117,6 +117,7 @@ for (const group of model.children) {
       ...(surface?{normalTexture:{...texture(surface.normal),scale:1}}:{}),
       ...(Object.keys(extensions).length?{extensions}:{}),
       ...(bake?{emissiveTexture:{...texture(bake.map),texCoord:1}}:{}),
+      ...(material.userData.emissionMap?{emissiveTexture:texture(material.userData.emissionMap)}:{}),
       emissiveFactor: bake?[1,1,1]:material.emissive.toArray().map(component => component * material.emissiveIntensity),
       ...(material.transparent ? {alphaMode: 'BLEND'} : {}),
       ...(material.side === THREE.DoubleSide ? {doubleSided: true} : {})});

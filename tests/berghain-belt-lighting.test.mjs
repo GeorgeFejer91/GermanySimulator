@@ -34,7 +34,7 @@ test('fixed strip illumination belongs to all eight pier bodies, without lightin
 
 test('export carries the same fixed radiance in standard emissive UV and strength fields',()=>{
  const b=readFileSync(new URL('../assets/models/berghain/berghain-study.glb',import.meta.url)),g=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)));
- const baked=g.materials.filter(m=>m.emissiveTexture);assert.equal(baked.length,1);
+ const baked=g.materials.filter(m=>m.extensions?.KHR_materials_emissive_strength);assert.equal(baked.length,1);
  const m=baked[0];assert.equal(m.name,'interior/sauleConcrete/box');assert.deepEqual(m.emissiveFactor,[1,1,1]);
  assert.equal(m.extensions.KHR_materials_emissive_strength.emissiveStrength,64);assert.equal(m.emissiveTexture.texCoord,1);
  assert.ok(g.extensionsUsed.includes('KHR_materials_emissive_strength'));

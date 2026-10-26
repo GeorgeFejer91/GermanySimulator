@@ -1,0 +1,35 @@
+{
+  "generator": "berghain/build-bar-glass.py",
+  "generatorSha256": "840e3af6226411cca91572854d8f028c80903d09a2f7725a1319028cd5005c8b",
+  "sources": [
+    "I23 gallery12",
+    "I23 gallery14"
+  ],
+  "scope": "Original illustrative glass-block maps; no sampled photo data, measured photometry or surveyed block dimensions",
+  "dimensions": [
+    512,
+    512
+  ],
+  "files": [
+    {
+      "path": "assets/models/berghain/textures/bar-glass-baseColor.png",
+      "bytes": 32180,
+      "sha256": "a0a48baffb46951582e86ca7ba32688c5386776e62369e893705d6207520328f"
+    },
+    {
+      "path": "assets/models/berghain/textures/bar-glass-normal.png",
+      "bytes": 25261,
+      "sha256": "a3e75799a1dbe7651429a4d95c1093cb7d6132e50719dea53353dae39f687946"
+    },
+    {
+      "path": "assets/models/berghain/textures/bar-glass-roughness.png",
+      "bytes": 15879,
+      "sha256": "39d32ace63b7e477d1cde6d6f63dffd5b07d1e9f4c427f7e48f3962b337a16a6"
+    },
+    {
+      "path": "assets/models/berghain/textures/bar-glass-emission.png",
+      "bytes": 27800,
+      "sha256": "0cb67c6c32d6e022b5fdf7b11b69a8f6c1f99024f3e2c39ba2e8536a09f02508"
+    }
+  ]
+}

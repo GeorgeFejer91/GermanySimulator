@@ -1,5 +1,23 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted main-bar ribbed luminous blocks — 26 October 2026
+
+The photographed two rows now retain separate amber apertures around the
+rounded return. Original procedural maps add fine ribs and edge detail using
+authored per-block UVs in the live model and standard GLB. The four shared
+512px maps total 101,120 bytes; the model loses 5,504 triangles. Existing
+counter/stool geometry, physical routes, room layout and lights are unchanged.
+This is an estimated backlit-surface study: block inventory, exact dimensions,
+glass transmission, surrounding spill and current photometry remain open.
+
+The full reconstruction goal stays ACTIVE. Current/private plans, lift
+registration, inventories and complete photographic detail remain unresolved.
+I13/E05 now record the unsuccessful After Hours playback checks; no footage
+or new current-room coordinates are claimed. Source notes and validation live
+in SOURCES.md, INTERIOR.md and VALIDATION.md. Local acceptance/publication
+receipts use output/berghain-bar-glass-*. All 267 Node checks and ten desktop/mobile-emulated browser cases pass. Eighteen matched performance contexts and independent Physics/Camera reviews pass within scope. Physical Android remains NOT RUN. Deployment verification is recorded separately in output/berghain-bar-glass-release.json.
+
+
 ## Accepted fixed Säule column wash — 26 October 2026
 
 A15/I24 show continuous concealed light above and below dark column bands.

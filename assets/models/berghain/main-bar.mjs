@@ -14,11 +14,32 @@ export const mainBarMaterials={
   mainBarFixture:{color:'#252824',roughness:.65,metalness:.6},
   mainBarLamp:{color:'#ffe5bd',roughness:.4,emissive:'#ffcd89',emissiveIntensity:1.6},
   mainBarGlass:{color:'#a0aaa4',roughness:.22,transparent:true,opacity:.14},
-  mainBarGlow:{color:'#d6c394',roughness:.48,emissive:'#efc773',emissiveIntensity:.7},
+  mainBarGlow:{color:'#ffffff',roughness:.32,metalness:.04,emissive:'#ffb23e',emissiveIntensity:.95},
   mainBarRoofBlue:{color:'#142ca2',roughness:.38,emissive:'#080cb4',emissiveIntensity:.65},
   mainBarRoofDim:{color:'#15256f',roughness:.42,emissive:'#07146b',emissiveIntensity:.45}
 };
 const corner={x:.75,z:7,outer:1.3,inner:.25,segments:24};
+// G12/G14 show individual ribbed apertures continuing around the return.
+// Nine blocks and the joint width are fitted estimates, not a measured inventory.
+const glassCurveBlocks=9;
+function curvedGlassBlock(){
+  const positions=[],uvs=[],indices=[],half=(Math.PI/2/glassCurveBlocks-.015/(corner.outer+.012))/2;
+  const point=(r,a,y)=>[r*Math.cos(a),y,r*Math.sin(a)];
+  const face=(points,uv)=>{const start=positions.length/3;positions.push(...points.flat());uvs.push(...uv.flat());indices.push(start,start+1,start+2,start,start+2,start+3);};
+  const outer=corner.outer+.012,inner=corner.outer-.025,h=.08;
+  for(let i=0;i<4;i++){
+    const u=i/4,v=(i+1)/4,a=-half+2*half*u,b=-half+2*half*v;
+    face([point(outer,a,-h),point(outer,a,h),point(outer,b,h),point(outer,b,-h)],[[u,0],[u,1],[v,1],[v,0]]);
+    face([point(inner,b,-h),point(inner,b,h),point(inner,a,h),point(inner,a,-h)],[[v,0],[v,1],[u,1],[u,0]]);
+    face([point(inner,a,h),point(inner,b,h),point(outer,b,h),point(outer,a,h)],[[u,0],[v,0],[v,1],[u,1]]);
+    face([point(outer,a,-h),point(outer,b,-h),point(inner,b,-h),point(inner,a,-h)],[[u,1],[v,1],[v,0],[u,0]]);
+  }
+  for(const side of [-1,1]){
+    const a=side*half,p=[point(inner,a,-h),point(inner,a,h),point(outer,a,h),point(outer,a,-h)],uv=[[0,0],[0,1],[1,1],[1,0]];
+    face(side<0?p:p.reverse(),side<0?uv:uv.reverse());
+  }
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setIndex(indices);geometry.computeVertexNormals();return geometry;
+}
 function arcPlan(outer,inner,depth){
   const points=[];
   for(let i=0;i<=corner.segments;i++){
@@ -39,7 +60,7 @@ export function createMainBarGeometries(){
   return {
     'main-bar-corner-top':arcPlan(corner.outer,corner.inner,.075),
     'main-bar-corner-body':arcPlan(corner.outer-.025,corner.inner+.025,1.025),
-    'main-bar-corner-band':arcPlan(corner.outer+.012,corner.outer-.012,.16),
+    'main-bar-curved-glass-block':curvedGlassBlock(),
     'main-bar-stool-seat':new THREE.LatheGeometry(seat.map(p=>new THREE.Vector2(...p)),24).translate(0,-.0005,0).scale(2.5,1/.051,2.5),
     'main-bar-stepped-fitting':new THREE.LatheGeometry(fitting.map(p=>new THREE.Vector2(...p)),20),
     'main-bar-medallion':new THREE.LatheGeometry(relief.map(p=>new THREE.Vector2(...p)),32)
@@ -182,6 +203,8 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
   layout.mainBar={sources:['A01','I02','I23'],floorHeight:5.45,counterHeight:1.12,screenHeight:10.7,
     counterAnchor:anchor,screenAnchor:site([15.4,5.45,-5]),guestAisleStudyX:16.1,
     observedViews:{longBar:[11,12,13,14],glazedSeparation:[16]},
+    luminousBlocks:{sources:['I23 gallery12','I23 gallery14'],rows:2,straightPerRow:60,curvePerRow:9,returnPerRow:5,
+      confidence:'Separate amber ribbed apertures and dark joints observed; count, dimensions, glass-like optics and luminance estimated. No measured transmission or surrounding light spill.'},
     confidence:'Photographed forms; room footprint, dimensions, counts, column relationship and currentness estimated',
     remaining:'Surveyed plan/elevations, complete ornate wall, exact apparatus/materials and contemporary installation'};
 
@@ -235,11 +258,14 @@ export function addMainBarFixtures(layout,{fixture,box,part,cylinder,rod,assembl
     for(const y of [.23,.88]){
       for(let i=0;i<60;i++){
         const z=-6.89+i*13.78/59;
-        box('luminous ribbed block',[-.568,y,z],[.025,.16,.214],'mainBarGlow').role='luminous band';
-        for(const dy of [-.048,-.016,.016,.048])box('glass rib',[-.585,y+dy,z],[.014,.005,.205],'mainBarGlow');
+        box('luminous ribbed block',[-.556,y,z],[.012,.16,.214],'mainBarGlow').role='luminous band';
       }
-      part('curved luminous band',[corner.x,y,corner.z],[1,1,1],'mainBarGlow','main-bar-corner-band').role='luminous band';
-      for(let i=0;i<5;i++)box('return luminous block',[.84+i*.21,y,8.313],[.195,.16,.025],'mainBarGlow');
+      for(let i=0;i<glassCurveBlocks;i++){
+        const angle=Math.PI-(i+.5)*Math.PI/2/glassCurveBlocks;
+        part('curved ribbed glass block',[corner.x,y,corner.z],[1,1,1],'mainBarGlow','main-bar-curved-glass-block',false,
+          new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),-angle)).role='luminous band';
+      }
+      for(let i=0;i<5;i++)box('return luminous block',[.84+i*.21,y,8.306],[.195,.16,.012],'mainBarGlow').role='luminous band';
     }
     for(const z of [-5.4,-1.2,3.2])part('stepped countertop fitting',[-.22,1.125,z],[1,1,1],'steel','main-bar-stepped-fitting');
   });

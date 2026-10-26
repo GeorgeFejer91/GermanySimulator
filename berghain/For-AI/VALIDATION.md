@@ -1,5 +1,47 @@
 # Berghain viewer validation
 
+## Accepted main-bar glass-block validation — 26 October 2026
+
+The V3 preservation audit retains 6,169 solids, 74 floors, all room viewpoints,
+all non-glass parts, 999 native attribute/index streams, 32 prior embedded
+images and six practical-light definitions exactly. The fixed Säule atlas was
+regenerated and matches its published bytes. Four original shared glass maps
+add 101,120 image bytes; normal loading uses 37 textures, the standard GLB
+embeds 36 images. Geometry is 831,884 triangles in 226 groups.
+
+Checks cover discrete curved block joints, face direction, UV/export parity,
+generator provenance, failed emission requests, retained Säule materials,
+actual keyboard/touch routes and context restoration. Full acceptance evidence,
+independent Physics/Camera reviews, cost measurements and public verification
+are separate output/berghain-bar-glass-* receipts. Physical Android is NOT RUN.
+No claim of surveyed dimensions, measured glass optics or current lighting.
+
+All 267 Node checks pass. Ten browser cases cover three controlled main-bar
+source/native views, a retained Säule night view, and actual loaded/fallback
+walks on desktop and Android portrait/landscape emulation. The walk follows
+the straight counter, circles its return and reverses to the arrival point;
+desktop also recovers from context loss. Failed glass emission requests keep
+the readable untextured fallback and dispose admitted textures. Independent
+Physics and Camera reviews are bound to the same frozen candidate.
+
+Eighteen fresh cost contexts (three per profile and condition) use matched
+requested poses/headings and actual two-second keyboard/touch motion. Drawing
+buffers are bounded; idle redraw stays at zero; no GLB is fetched during normal
+viewing. No extra runtime light is introduced. The four maps add approximately
+5.33 MiB of RGBA mip storage; driver allocation can differ. Measured values:
+
+- desktop: median frame p95 21.2 to 21.0 ms; maximum candidate input response 9.1 ms.
+- android-portrait: median frame p95 13.8 to 13.8 ms; maximum candidate input response 15.5 ms.
+- android-landscape: median frame p95 13.9 to 13.9 ms; maximum candidate input response 15.7 ms.
+
+Observed starting positions span at most 1.28 cm across these samples.
+These are local measurements, not a causal speedup or physical-device claim.
+Frozen candidate: output/berghain-bar-glass-candidate-v3.json. Cost receipt:
+output/berghain-bar-glass-cost-comparison-v3.json. Public verification remains
+separate. The full reconstruction goal stays ACTIVE.
+
+
+
 ## Säule fixed-light V6 — accepted bounded validation, 26 October 2026
 
 All 263 V6 Node checks pass. Thirteen V5 browser cases cover five controlled
