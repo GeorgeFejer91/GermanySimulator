@@ -11,7 +11,7 @@ if(typeof document!=='undefined')document.addEventListener('visibilitychange',()
 
 const familyByMaterial = {render:'mineral', concrete:'mineral', pale:'mineral', recess:'mineral',
   darkConcrete:'mineral', floor:'mineral', stone:'stone', steel:'metal', rust:'metal',
-  gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',
+  gravel:'aggregate', ground:'aggregate',artDenim:'fabric',artQuilt:'fabric',foyerPlatformTop:'fabric',
   loungeLeather:'leather',loungePlum:'leather',kloRed:'mineral',stainless:'metal',artAmber:'amber',
   labWall:'aged',labBrick:'stone',labMortar:'mineral',labOxide:'metal',labGreen:'aged',labTile:'mineral',labPlate:'aged',mainBarPlaster:'plaster',
   sauleConcrete:'aged',sauleSteel:'metal',sauleCushion:'leather',mainBarGlow:'barGlass'};

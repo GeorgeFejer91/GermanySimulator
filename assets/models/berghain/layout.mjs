@@ -51,6 +51,7 @@ export const materials = {
   warm: {color: '#c2ad7d', roughness: .6, emissive: '#bfa36f', emissiveIntensity: .5},
   red: {color: '#6f2521', roughness: .5, emissive: '#be3020', emissiveIntensity: .55},
   upholstery: {color:'#282825',roughness:.88},
+  foyerPlatformTop: {color:'#817867',roughness:.93},
   aluminium: {color:'#8b9087',roughness:.38,metalness:.72},
   opal: {color:'#cbd6c2',roughness:.6,emissive:'#8abc9b',emissiveIntensity:.35},
   speakerViolet:{color:'#73657c',roughness:.82},

@@ -1,5 +1,19 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted low foyer platform study — 26 October 2026
+
+Karhard G08/G20/G25 show freestanding low boxes near the main staircase,
+with dark sides, contrasting fine patterned tops and small fasteners. Three
+forms are fitted to the retained stair bay. The earlier phrase “padded blocks”
+overstated material evidence: upholstery is not established. These are separate
+from the 2015 BauBuche event benches. Exact placement, dimensions, material,
+inventory and current retention remain unverified. Full reconstruction stays
+ACTIVE. All 271 Node checks and nine root browser cases pass within scope,
+with independent Physics/Camera reviews and six matched cost contexts.
+Publication is verified separately in output/berghain-foyer-platforms-release.json.
+No new texture image, lighting fixture or private-room arrangement is added.
+
+
 ## Accepted main-bar wall wash — 26 October 2026
 
 Karhard G12/G14 show light spreading from the base of the pilasters and fading

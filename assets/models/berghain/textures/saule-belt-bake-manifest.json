@@ -752,7 +752,7 @@
     },
     {
       "path": "assets/models/berghain/architectural-circulation.mjs",
-      "sha256": "57c78f0fb33bb042db778345b4450b9644e503e4edb96d32abf82ba1c513abf2"
+      "sha256": "afb23f9502b2591721dfcc1d527be88d31eb3ced79b6ad34ab0a111c6c429e37"
     },
     {
       "path": "assets/models/berghain/artworks.mjs",
@@ -812,7 +812,7 @@
     },
     {
       "path": "assets/models/berghain/layout.mjs",
-      "sha256": "9697ac8bf17dbe6a55de600f6aa2a9072632b86092b0db4c357c47aa2c04ef48"
+      "sha256": "c67d95437009ba21b80f5babf521d590904fc9ebbba8e1181e78f8c38914745f"
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
@@ -872,7 +872,7 @@
     },
     {
       "path": "assets/models/berghain/surface-materials.mjs",
-      "sha256": "8f58b5976339244d373447130cd77442981710d458b582ae57832642ba494a32"
+      "sha256": "bda3f9bc82b92a7fb6d8a60c0473a3f40e7ff8272e83eab19cd4a5c8f39e33c9"
     },
     {
       "path": "assets/models/berghain/survey-data.mjs",

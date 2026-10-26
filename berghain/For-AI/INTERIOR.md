@@ -1,5 +1,28 @@
 # Berghain interior: objects, art and equipment
 
+## F06 low freestanding foyer platforms — 26 October 2026
+
+G08 shows two dark low rectangular forms near the folded stair; G20/G25 also
+show a third in the foreground. Their contrasting fine patterned tops and small
+edge/corner fasteners are visible. A flat top is not evidence of upholstery,
+steel or timber. Replace the earlier unsupported “padded” description.
+
+`architectural-circulation.mjs` fits three original box assemblies around the
+retained stair bay, with a 0.42 m estimated overall height. Horizontal dimensions
+and anchors pass through the existing author-to-site and hall registrations;
+they are not survey measurements. Dark side material and a neutral top reuse
+the existing palette and fine pattern maps as visual approximations, without
+claiming a fabric construction. The photographs do not establish a current
+inventory or permanent positions. The third foreground anchor is especially
+uncertain. These forms do not stand in for the separate I05 BauBuche benches.
+
+Each body and top has matching solid geometry. Original floors, stair flights,
+columns, routes, chairs, table, cues and fixtures are retained. The ordinary
+visitor walks around these obstacles; no climbable platform route is invented.
+The source/native comparison, contact and circulation checks are recorded in
+output/berghain-foyer-platforms-*. F06's complete chair aisle remains unregistered.
+
+
 ## Main-bar broad practical wash — 26 October 2026
 
 F15 / I23 gallery12/14 show warm lower wall wash with a gradual upward falloff,

@@ -1,5 +1,37 @@
 # Berghain viewer validation
 
+## Accepted low foyer platforms — 26 October 2026
+
+Checks cover full transformed bodies against existing solids, floor support,
+held-input contact, corner recovery and the original wardrobe/main-stair route
+at 30/60 Hz and delayed steps. Rendered checks cover source/native top and wide
+views, club-night conditions, actual keyboard/touch approaches and returns,
+texture failure and graphics-context restoration. Prior geometry, instance
+colours, images and lights are compared separately. Independent Physics and Camera reviews pass within this scope.
+Publication is checked separately. Physical Android is NOT RUN. Source registration remains estimated.
+
+Frozen manifest 62c934999b5ce85915ce9f3ae73a71bc444f434cf0d1ed2a79ebd42b63d13728
+passes all 271 Node checks and nine root browser cases: three source/native
+views and loaded/fallback actual walks on desktop plus Android portrait and
+landscape emulation. Desktop context restoration preserves visitor position.
+The 16,792 previous parts, 6,169 previous solids, all floors/viewpoints and
+instance transforms/colours remain exact. There are 66 new parts and six solids,
+792 additional triangles and one material batch. All 36 embedded images and
+all light definitions remain exact; runtime textures stay at 37. Unchanged
+native batches retain all 1,001 geometry streams. The GLB is 71,742,340 bytes.
+
+Six sequential fresh browser contexts compare the same approach and two-second
+input, one per profile per condition. These are bounded local spot checks,
+not stable performance estimates or physical-device qualification:
+
+- desktop: frame p95 14.1 to 14.1 ms; candidate input response 8.2 ms.
+- android-portrait: frame p95 7.1 to 7.1 ms; candidate input response 9.7 ms.
+- android-landscape: frame p95 7.1 to 7.1 ms; candidate input response 12.5 ms.
+
+No new image downloads, runtime lights or idle redraws are introduced. Normal viewing does not fetch the GLB.
+
+
+
 ## Accepted main-bar wall wash — 26 October 2026
 
 The correction changes only six beam envelopes and five peak intensities.

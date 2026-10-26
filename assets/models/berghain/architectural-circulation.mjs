@@ -166,6 +166,34 @@ export function addArchitecturalCirculation(layout){
   for(let i=0;i<15;i++)box('foyer radiator fin',[4+i*.072,1.55,9.72],[.045,2.7,.14],'steel');
   data.fixtures.push({id:'lower-stair-services',gallery:['03','04','05','20','25'],placement:'Estimated adjacency to new main stair; exact service bay unmeasured'});
 
+  // G08/G20/G25: low freestanding platforms, dark sides, a fine patterned
+  // top and small bright fasteners. Material, dimensions and current inventory
+  // are unknown. Three photographed forms are fitted around the stair bay;
+  // this is not the separately documented 2015 BauBuche event furniture.
+  data.foyerPlatforms={gallery:['08','20','25'],sources:['A01','I23'],
+    confidence:'Photographed form; material identity, dimensions, placement and current retention unverified',
+    ids:[],count:3};
+  for(const [id,x,z,width,depth] of [
+    ['near-flight',12.1,13.8,1.65,1.65],
+    ['under-return',12.1,18,2.5,1.4],
+    ['foreground',17.4,17.5,2.9,1.4]
+  ]){
+    const tag='foyer platform '+id;data.foyerPlatforms.ids.push(tag);
+    const add=(name,center,size,material,solid=false)=>{
+      const part=box(tag+' '+name,center,size,material,solid);
+      part.foyerPlatform=id;return part;
+    };
+    add('body',[x,.254,z],[width,.408,depth],'rubber',true);
+    add('top',[x,.464,z],[width,.012,depth],'foyerPlatformTop',true);
+    for(const sx of [-1,1])for(const sz of [-1,1]){
+      add('top fastener',[x+sx*(width/2-.045),.4705,z+sz*(depth/2-.045)],[.016,.001,.016],'aluminium');
+      for(const y of [.085,.43]){
+        add('side fastener',[x+sx*(width/2-.002),y,z+sz*(depth/2-.045)],[.004,.016,.016],'aluminium');
+        add('end fastener',[x+sx*(width/2-.045),y,z+sz*(depth/2-.002)],[.016,.016,.004],'aluminium');
+      }
+    }
+  }
+
   // G04/07/20/25 show the gallery edge carried by rectangular piers with
   // local beam haunches, transverse soffit ribs and a pier-mounted radiator.
   // Fit these relations to the existing slab edge (author z9.4), not a newly
