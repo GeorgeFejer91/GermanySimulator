@@ -1,5 +1,21 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted main-bar wall wash — 26 October 2026
+
+Karhard G12/G14 show light spreading from the base of the pilasters and fading
+up the historic facade. The existing six fixtures now use wider, fully soft
+cones; the five tall-wall fixtures use lower peak intensity. The fixture below
+the Eisbar slab retains its bounded aim, range and intensity. No room layout,
+geometry, materials, cue positions, shadow maps or runtime light count changes.
+This is a fitted appearance study, not measured contemporary photometry.
+The full reconstruction goal stays ACTIVE. Source limits remain in SOURCES.md
+and the existing Karhard mapping. Validation is recorded separately in
+output/berghain-bar-wash-*. All 268 Node checks, nine root browser cases,
+independent Physics/Camera reviews and eighteen matched cost contexts pass
+within scope. Physical Android remains NOT RUN. Public verification is
+recorded separately in output/berghain-bar-wash-release.json.
+
+
 ## Accepted main-bar ribbed luminous blocks — 26 October 2026
 
 The photographed two rows now retain separate amber apertures around the

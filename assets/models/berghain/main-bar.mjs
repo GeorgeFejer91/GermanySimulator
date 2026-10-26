@@ -185,7 +185,9 @@ function addHistoricBarFacade(layout,{fixture,part,box}){
       placed('uplight lens',[-1.14,1.065,z],[.105,.02,.105],'mainBarLamp').role='bar practical lens';
       const world=point=>offset(point).map((value,i)=>value+anchor[i]);
       practicalLighting.lights.push({name:`bar pilaster uplight ${pier+1}`,position:world([-1.14,1.08,z]),
-        target:world([-.82,6.4,z]),color:'#ffd3a0',intensity:600,range:11,angle:.42,penumbra:.68});
+        // G12/G14: broad wash begins just above the lamp and fades up the wall.
+        // Appearance estimates; a narrow high-intensity cone left bright detached ovals.
+        target:world([-.82,6.4,z]),color:'#ffd3a0',intensity:90,range:11,angle:.95,penumbra:1});
     }
     for(const [y,height,depth]of [[10.17,.10,.18],[10.30,.16,.26],[10.48,.14,.34],[10.70,.30,.20],[10.95,.10,.28]])
       placed('stepped cornice',[-.58-depth/2,y,0],[depth,height,length+.12]);

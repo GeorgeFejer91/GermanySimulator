@@ -1,5 +1,20 @@
 # Berghain interior: objects, art and equipment
 
+## Main-bar broad practical wash — 26 October 2026
+
+F15 / I23 gallery12/14 show warm lower wall wash with a gradual upward falloff,
+dark recessed windows and a contrasting blue ceiling. The prior narrow beams
+formed bright isolated ovals above the worktop. Existing practical fixtures use
+0.95 radian outer half-cones and full penumbra; five tall-wall fixtures change
+from 600 to 90 candela. The Eisbar-end fixture retains 80 candela / 4 m range.
+All six positions, aims, colours and housings remain exact. Wider 600-candela
+pilot cones overexposed the facade and were rejected. The selected lower-output
+study retains readable plaster and broad warm coverage in matched views.
+These values are authored estimates. The photographs do not establish actual
+lamp output, beam angles, current equipment or an exact show state. Existing
+blue/red room cues remain; colour interaction and nearby spill are approximate.
+
+
 ## Main-bar luminous blocks — 26 October 2026
 
 I23 gallery12/14 show two rows of separate amber backlit rectangular apertures,

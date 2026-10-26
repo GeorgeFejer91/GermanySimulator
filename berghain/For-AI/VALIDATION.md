@@ -1,5 +1,45 @@
 # Berghain viewer validation
 
+## Accepted main-bar wall wash — 26 October 2026
+
+The correction changes only six beam envelopes and five peak intensities.
+Acceptance checks compare all collision/floor/part/viewpoint data, native
+geometry streams, embedded images, material definitions and light transforms
+against a1411bfb654b7edb5fd66dc662243c024bf767a2. The Säule bake is regenerated
+to refresh its input provenance; its image must remain byte-exact.
+The lower-wall regression probes actual pilaster geometry 35 cm above each
+lamp; narrow predecessor cones fail its nonzero wash condition. Browser checks
+cover matched source/native night views, actual keyboard/touch wall approaches,
+texture-load failure and context restoration. Independent reviews, costs and
+public verification are separate output/berghain-bar-wash-* receipts.
+Physical Android is NOT RUN. No surveyed or present-day photometry is claimed.
+
+All 268 Node checks pass. Nine root browser cases cover three source/native
+night views and actual loaded/fallback keyboard/touch walks on desktop and
+Android portrait/landscape emulation. Desktop also restores a lost graphics
+context without moving the visitor. All 6,169 solids, 74 floors, 16,792 parts,
+viewpoints, 1,009 native geometry streams, 36 embedded images, material
+definitions and node/light transforms match the baseline. The Säule atlas
+remains byte-exact. The portable GLB carries the changed beam parameters.
+
+Eighteen fresh sequential cost contexts use the same requested starting pose,
+heading and two-second input. No maps, runtime lights or shadow maps are added.
+Idle redraw remains zero; normal viewing does not request the GLB. Results:
+
+- desktop: median frame p95 21.1 to 21.1 ms; maximum candidate input response 8.9 ms.
+- android-portrait: median frame p95 13.8 to 7.2 ms; maximum candidate input response 16.4 ms.
+- android-landscape: median frame p95 13.9 to 13.9 ms; maximum candidate input response 12.9 ms.
+
+Observed start positions span at most 2.19 cm.
+These are local measurements, not physical-device or causal-speedup evidence.
+Independent reviews bind to frozen manifest
+be683274df7b61bbd4314d6c6ad1a0862ad7f55e1d8bfe0215838bc769b1ad63.
+The softer wash still has a rounded bright lower edge above the fixture.
+It improves the source relationship but does not reproduce continuous
+near-base illumination, indirect bounce or measured fixture photometry.
+
+
+
 ## Accepted main-bar glass-block validation — 26 October 2026
 
 The V3 preservation audit retains 6,169 solids, 74 floors, all room viewpoints,

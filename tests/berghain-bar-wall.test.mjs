@@ -183,3 +183,20 @@ test('the service fittings fit the actual new pilaster profiles without buried f
   assert.equal(buried,0,'Cabinet/worktop notches and bay-centred sinks must clear the photographed piers');
  }finally{for(const geometry of Object.values(geometries))geometry.dispose();}
 });
+
+test('the practical wash reaches the lower pilaster instead of leaving a detached oval',()=>{
+ const model=createBerghainModel();model.updateMatrixWorld(true);
+ try{
+  const lights=[];model.traverse(o=>{if(o.isSpotLight)lights.push(o);});
+  for(const light of lights){
+   const from=light.getWorldPosition(new THREE.Vector3()),target=light.target.getWorldPosition(new THREE.Vector3());
+   // Probe the actual wall plane 35 cm above its lamp, within the photographed lower wash.
+   const probe=new THREE.Vector3(target.x,from.y+.35,target.z),axis=target.clone().sub(from).normalize();
+   const direction=probe.sub(from).normalize(),cosine=direction.dot(axis);
+   const attenuation=THREE.MathUtils.smoothstep(cosine,Math.cos(light.angle),Math.cos(light.angle*(1-light.penumbra)));
+   assert.ok(attenuation>.1,'Lower wall must receive a soft nonzero beam, not start above the lower relief');
+   const hit=new THREE.Raycaster(from,direction,.02,.6).intersectObject(model,true).find(h=>h.object===model.getObjectByName('interior/mainBarPlaster/box'));
+   assert.ok(hit,'The probe must reach the real pilaster, not an empty inferred plane');
+  }
+ }finally{disposeBerghainModel(model);}
+});
