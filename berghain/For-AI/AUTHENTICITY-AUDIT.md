@@ -1,5 +1,16 @@
 # Berghain interior authenticity audit
 
+## Panorama overhead hardware — accepted
+
+Fresh actual triangle witnesses confirmed ten inherited panel/hardware
+penetrations. Source correspondence then located the perforated enclosures in
+the high wall band, already represented separately. The unsupported nine-unit
+free-hanging grid is retired; remaining conduit/junction/fixing bodies fit clear
+of panels and structure. This source-interpretation correction is not a new
+claim about current equipment count or construction. Scoped V2 acceptance passes; see README/VALIDATION. The older contact ledger
+below is superseded by this correction.
+
+
 ## Panorama acoustic forms — accepted
 
 The ceiling-wash correction retained sixteen identical panel forms. I11's night

@@ -816,7 +816,7 @@
     },
     {
       "path": "assets/models/berghain/layout.mjs",
-      "sha256": "ae08d17e1aed30c17de9c2024036ee3ee34507bf2a13efa9c4a07c437792abd1"
+      "sha256": "b9f17de4e75874aaaedb8eb199fe78a35438815a662f5240a44494fbc30a5658"
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
@@ -852,7 +852,7 @@
     },
     {
       "path": "assets/models/berghain/panorama-services.mjs",
-      "sha256": "57c01f9746d3343c96bb245cfcb387b44a60f19e704404323a463ae952898075"
+      "sha256": "305510cb2945f05f0d7c67edb98c213ab4ce6d7bd286704c555b04db6188d402"
     },
     {
       "path": "assets/models/berghain/saule-ceiling.mjs",

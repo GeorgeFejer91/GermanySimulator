@@ -1,5 +1,23 @@
 # Berghain interior: objects, art and equipment
 
+## Panorama overhead fixture interpretation corrected
+
+A13/01 and I19/06/07/15/16 place perforated housings in the high wall band.
+The earlier nine free-hanging enclosures duplicated that source interpretation.
+This correction retires their 72 parts/9 metadata entries, retaining the wall
+band, pale acoustic panels, pendants and dated PA. Eighteen existing service
+parts keep X/Z registration and fit above the panels, below the ceiling.
+
+The older furniture and ceiling ledger entries below record the former nine-
+enclosure interpretation. This correction supersedes that inventory/placement,
+including its separate hangers. The photographed band remains in
+panorama-registration.mjs; pale clouds are in panorama-services.mjs. The final
+hardware fit pins affected existing instance tones before removal, avoiding
+unrelated colour changes. Retained exposed-service runs now use the registered
+ceiling as their vertical reference; exact routes and fixture dimensions are
+estimated. Current acceptance status is owned by README/VALIDATION.
+
+
 ## F06 low freestanding foyer platforms — 26 October 2026
 
 G08 shows two dark low rectangular forms near the folded stair; G20/G25 also

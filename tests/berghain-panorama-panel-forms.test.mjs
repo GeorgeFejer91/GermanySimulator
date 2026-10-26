@@ -35,10 +35,7 @@ test('panel form evidence distinguishes observed shapes from provisional anchors
 });
 
 
-// Explicit pre-existing thin conduit/mount contacts from published 5711e11.
-// These remain unresolved source details, not permission for new body overlap.
-const priorContacts=new Set(["0/panorama-service-overhead exposed conduit/-15.44177,13.47000,14.37426", "0/panorama-service-overhead junction box/-15.44177,13.44000,20.37426", "0/panorama-service-overhead ceiling fixing/-15.44177,13.60750,20.37426", "1/panorama-service-overhead exposed conduit/-15.44177,13.47000,14.37426", "2/panorama-service-overhead exposed conduit/-15.44177,13.47000,14.37426", "3/panorama-service-overhead exposed conduit/-15.44177,13.47000,14.37426", "4/panorama-acoustic--19--17 hanger/-13.31250,13.61000,19.36683", "6/panorama-acoustic--13--17 hanger/-13.30726,13.61000,14.19420", "8/panorama-acoustic--19--12 hanger/-7.49091,13.61000,19.31983", "10/panorama-acoustic--13--12 hanger/-7.48634,13.61000,14.14690", "12/panorama-acoustic--19--7 hanger/-1.66932,13.61000,19.27283", "14/panorama-acoustic--13--7 hanger/-1.66543,13.61000,14.09960"]);
-test('changed panels introduce no new full rendered-body intersections with retained equipment',()=>{
+test('all panel bodies clear retained equipment without inherited intersection exceptions',()=>{
  const model=createBerghainModel(),counts=new Map();
  try{
   const bodies=layout.parts.map(p=>{const name=[p.section,p.material,p.shape].join('/'),mesh=model.getObjectByName(name),i=counts.get(name)||0;counts.set(name,i+1);
@@ -48,7 +45,7 @@ test('changed panels introduce no new full rendered-body intersections with reta
   for(const [i,cloud]of clouds.entries())for(const other of bodies){
    if(other===cloud)continue;
    const size=cloud.box.clone().intersect(other.box).getSize(new THREE.Vector3());
-   if(size.x>1e-6&&size.y>1e-6&&size.z>1e-6)assert.ok(priorContacts.has(i+'/'+other.key),'New whole-body overlap at panel '+i+': '+other.key);
+   assert.ok(!(size.x>1e-6&&size.y>1e-6&&size.z>1e-6),'Whole-body overlap at panel '+i+': '+other.key);
   }
  }finally{disposeBerghainModel(model);}
 });

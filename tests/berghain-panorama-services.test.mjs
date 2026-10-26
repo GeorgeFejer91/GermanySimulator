@@ -60,8 +60,9 @@ test('clouds and shortened suspension fit below the new ceiling',()=>{
   assert.ok(layout.panoramaServices,'Ceiling required');
   const clouds=layout.parts.filter(p=>p.name==='Panorama acoustic cloud');
   assert.ok(clouds.length>=12,'Observed staggered acoustic treatment is modelled');
-  const rods=layout.parts.filter(p=>(p.fixture?.startsWith('panorama-pendant-')||p.fixture?.startsWith('panorama-acoustic-')||p.fixture==='panorama-dj-table')&&/drop cable|suspension|hanger/.test(p.name));
-  assert.ok(rods.length>=14);
+  const rods=layout.parts.filter(p=>(p.fixture?.startsWith('panorama-pendant-')||p.fixture==='panorama-dj-table')&&/drop cable|suspension/.test(p.name));
+  assert.equal(rods.filter(p=>p.fixture.startsWith('panorama-pendant-')).length,3,'One retained drop per three-way pendant');
+  assert.equal(rods.filter(p=>p.fixture==='panorama-dj-table').length,2,'Retain both DJ suspension members');
   for(const part of [...clouds,...rods]){
     const m=part.matrix,top=m[13]+(Math.abs(m[1])+Math.abs(m[5])+Math.abs(m[9]))/2;
     assert.ok(top<=layout.panoramaServices.ceilingHeight+.001,part.name+' must terminate at the ceiling');

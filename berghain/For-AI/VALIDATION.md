@@ -1,5 +1,44 @@
 # Berghain viewer validation
 
+## Accepted Panorama overhead hardware
+
+Frozen V2 manifest dfab58f7f5520632da01580005f07da78b29621170dc2c19ef9cf125832f8085 passes all 284 Node checks, nine root browser
+cases, independent Physics/Camera review and six sequential cost contexts.
+The browser cases cover front/oblique/night source/native views, actual loaded
+and fallback walks on desktop and Android portrait/landscape emulation, and
+desktop context recovery. Physical Android NOT RUN.
+
+The retired grid contained 72 parts and nine fixture entries, with no solids.
+All 16,768 unrelated parts, 6,175 collider bounds, floors/viewpoints and 16,786
+retained instance colours remain exact. The complete body screen resolves all
+ten inherited panel contacts with no new external/internal contact pairs.
+Mechanical construction and exact source dimensions remain unverified.
+
+Independent review rejected V1 because eight fixings ended 15.000416 mm below
+the actual soffit. The regression test first failed against V1, then V2 extended
+only those upper ends. The other 16,778 V1 parts and both baked images remain
+exact. Actual endpoint contact is required within 20 micrometres while positive-
+volume penetration is rejected. Failure evidence is retained in the plan ledger.
+
+Both actual radiance builders and native export were rerun. The native comparison
+preserves 1,003 unaffected streams, 4,252 retained parts in changed batches,
+all 37 embedded images and lights. All 952 fitted service vertices/normals match
+source; the old export fails all 952 changed positions. GLB: 69,221,852 bytes;
+SHA256 8d0698f423cb3165b47263dd8c69dd2102387f9af1870c7d6e7044f814fd4b97.
+The model has 809,888 triangles and 227 batches: 22,788 fewer triangles and one
+fewer batch. Runtime textures stay at 38, with no new lights or idle redraws.
+
+Six fresh cost contexts are bounded spot checks, not stable latency estimates:
+
+- desktop: p95 27.6 to 20.9 ms; candidate input 7.4 ms.
+- android-portrait: p95 7.1 to 7.1 ms; candidate input 13.0 ms.
+- android-landscape: p95 7.1 to 7.0 ms; candidate input 15.8 ms.
+
+Normal viewing does not fetch the GLB. Fixed red ceiling radiance still has no
+beam/moving shadows or indirect room spill. This does not establish measured
+photometry, current private-room plans or a complete contemporary inventory.
+Public deployment is a separate verified receipt; full reconstruction is ACTIVE.
+
 ## Accepted Panorama panel forms
 
 Frozen manifest b1f9ff0e474d1c408e65c549cdc40d201c9aad6069b41af26a96b34f3757c3c9

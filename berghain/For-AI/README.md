@@ -1,5 +1,23 @@
 # Berghain reconstruction: goal and work state
 
+## Accepted Panorama overhead hardware — 26 October 2026
+
+A13/01 and I19/06/07/15/16 place perforated housings in the high wall band.
+The unsupported second grid of nine free-hanging enclosures is removed. The
+wall band, 16 pale panels, three pendants and dated PA remain. Eighteen retained
+service parts fit above the panels; eight fixings now meet the ceiling.
+
+All 284 Node checks, nine root browser cases, both independent reviews and six
+matched cost contexts pass within scope. Ten inherited panel/hardware contacts
+are resolved without changing room routes, collision bounds or runtime lights.
+V1 was rejected for eight 15 mm fixing gaps; V2 corrects them and passes fresh
+acceptance. The actual radiance builders preserve both images; GLB is regenerated.
+
+Exact service routes, current equipment inventory and panel registration remain
+estimates. Private-room coordinates, lift registration and selected-date artwork
+remain unresolved. Physical Android is untested. Full goal stays ACTIVE;
+publication is verified separately by output/berghain-panorama-hardware-release.json.
+
 ## Accepted Panorama acoustic-panel forms — 26 October 2026
 
 I11 and I19/15/16 show square, broad and elongated acoustic bodies with differing

@@ -1,3 +1,5 @@
+import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
+
 export function addPanoramaCeiling(layout,{box}){
   const floor=13.25,ceiling=17.95;
   layout.panoramaServices={sources:['A13','I11','I19'],photoViews:[15,16],floorHeight:floor,ceilingHeight:ceiling,
@@ -21,6 +23,46 @@ export function addPanoramaCeiling(layout,{box}){
     const size=profiles[forms[row][column]],bottom=ceiling-.39-(column%2)*.06;
     box('Panorama acoustic cloud',[x,bottom+size[1]/2,z],size,'pale','interior',true);
   }
+}
+
+// A13/01 and I19/06/07/15/16 locate the perforated housings in the high
+// counter-wall band. The earlier nine suspended copies were an unsupported
+// second interpretation. Retire them after registration, retaining the actual
+// wall band, pale clouds, pendants and separately sourced PA.
+export function fitPanoramaOverheadHardware(layout){
+  const legacy=p=>p.fixture?.startsWith('panorama-acoustic-');
+  const retired=new Set(layout.parts.filter(legacy));
+  const toneKey=p=>[p.section,['mainBarPlaster','panoramaCeilingWash'].includes(p.material)?'pale':p.material,p.shape].join('/');
+  const affected=new Set([...retired].map(toneKey)),groups=new Map();
+  for(const p of layout.parts){const key=toneKey(p);if(!affected.has(key))continue;
+    if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p);}
+  for(const parts of groups.values())parts.forEach((p,i)=>{p.instanceTone??=.84+((i*193+parts.length*37)%101)/625;});
+  layout.parts=layout.parts.filter(p=>!retired.has(p));
+  layout.solids=layout.solids.filter(s=>!retired.has(s.renderPart)&&!legacy(s));
+  const oldFixtures=layout.fixtures.filter(f=>f.id.startsWith('panorama-acoustic-'));
+  layout.fixtures=layout.fixtures.filter(f=>!oldFixtures.includes(f));
+
+  // Keep the existing exposed-service runs in X/Z. Their whole junction and
+  // fixing bodies fit above the panels, using the final registered ceiling.
+  // The gap and route are an authored clearance fit, not a measured assembly.
+  const ceiling=layout.panoramaServices.ceilingHeight;
+  for(const p of layout.parts.filter(p=>p.fixture==='panorama-service-overhead')){
+    const m=new THREE.Matrix4().fromArray(p.matrix);
+    if(p.name.endsWith('exposed conduit'))m.elements[13]=ceiling-.08;
+    else if(p.name.endsWith('junction box'))m.elements[13]=ceiling-.09;
+    else if(p.name.endsWith('ceiling fixing')){
+      const low=ceiling-.05,high=ceiling;
+      m.elements[5]=high-low;m.elements[13]=(low+high)/2;p.size[1]=high-low;
+    }
+    p.matrix=m.toArray();p.center=p.matrix.slice(12,15);
+  }
+  const fixture=layout.fixtures.find(f=>f.id==='panorama-service-overhead');
+  fixture.dimensions.height=ceiling-layout.panoramaServices.floorHeight;
+  layout.panoramaServices.overheadHardware={sources:['A13','I19'],photoViews:[6,7,15,16],
+    retiredFreeHangingEnclosures:oldFixtures.length,
+    reason:'Perforated housings belong to the photographed high wall band; the room-wide grid duplicated that source feature',
+    placement:'Existing service X/Z runs retained; vertical fit and fixture dimensions estimated, not surveyed construction',
+    retained:'High wall band, sixteen pale panels, three-way pendants and dated PA remain distinct assemblies'};
 }
 
 export function addPanoramaServiceFixtures(layout,{fixture,box,cylinder,rod}){
