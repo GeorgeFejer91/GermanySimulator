@@ -1,3 +1,4 @@
+import {detailPanoramaDjConsole} from './panorama-dj-console.mjs';
 import {calibrateStudy, calibration} from './calibration.mjs';
 import {addInteriorFixtures,fitFoyerChairs} from './interior-fixtures.mjs';
 import {addSoundSystem,suspendMainSubwall,fitPanoramaSoundSystem} from './sound-system.mjs';
@@ -367,3 +368,5 @@ suspendMainSubwall(layout);
 fitPanoramaSoundSystem(layout);
 fitPanoramaOverheadHardware(layout);
 addWardrobe(layout,{box,beam});
+
+detailPanoramaDjConsole(layout);

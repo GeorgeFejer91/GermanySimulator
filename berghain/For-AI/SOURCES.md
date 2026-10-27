@@ -1,5 +1,56 @@
 # Berghain online resource catalogue
 
+## Additional account research and console corroboration — 27 October 2026
+
+M16 — [Euronews: Berliner Clubs en miniature, 19 February 2021](https://de.euronews.com/2021/02/19/berliner-clubs-en-miniature).
+Read the article and inspected sampled frames of its public 117-second report.
+It follows Bibo's handmade entrance series and contains actual historical venue
+exteriors, including Berghain at approximately 72 seconds. Other sampled doors
+belong to other clubs. No inspected frame establishes a Berghain interior or its
+ticket/wardrobe layout. This is historical corroboration, not current surveying.
+Video/frame research copies remain in ignored output and are not shipped.
+
+Original Bibo captions also identify [Tresor, 14 February 2021](https://www.instagram.com/p/CLRo0vIs6wS/)
+and [Gretchen, 17 February 2021](https://www.instagram.com/p/CLZivgwMisO/).
+These confirm the series, not Berghain geometry. The public creator gallery and
+account metadata yielded no additional verified Berghain interior walkthrough.
+
+Console mapping: A13/04 and I19/00/06 show the Panorama station's sloped metal
+instrument front, square meter faces, rails and vertical chain links. I04's
+2010 firsthand description independently distinguishes the chain-hung DJ table
+from a steel-tube crowd railing carrying old dials/meters. The model retains its
+existing desk/support estimate and adds those visible motifs within the retained
+footprint. Three panel/meter groups, slope, gauge, chain-link count, attachments
+and readings are authored approximations, not a measured or current inventory.
+No photo pixels are copied. M13/M14 merely prompted the comparison; their
+invented spatial arrangement is not used. The sheet's precise seat weight is
+not evidence alone, although Karhard/I04 independently document historical
+concrete channel seating. Current chair placement remains separately sourced.
+
+
+## Instagram club miniatures — 27 October 2026
+
+The user's unnamed account has two plausible matches. Identity is not yet
+confirmed by the user; neither inspected series establishes all Berlin clubs.
+
+| ID | Resource | Access and useful content | Limits / reuse |
+| --- | --- | --- | --- |
+| M13 | [Cardboard Club Cuts / @thismightbejustme](https://www.instagram.com/thismightbejustme/) and [creator gallery](https://cardboardclubs.com/) | Public profile metadata, creator HTML and public gallery bundle inspected. The website links this account and identifies AI-generated dioramas. Its Berghain gallery image was downloaded and visually inspected: concrete hall, open steel stair, gallery bar, speaker stacks, crowd silhouettes and a colored fan of beams. | Imagined artwork, not a site survey. The account says the interiors are imagined. No measured scale, current inventory or room registration. The hall/bar/stair composition cannot replace A01/A13/I19/U02. No new placement evidence for toilets, smoking, backstage, cashier or Garderobe. |
+| M14 | [Berghain diorama](https://cardboardclubs.com/assets/ws-berg_1774180268474-DUsFNttf.webp), [Quick Build sheet](https://cardboardclubs.com/assets/01_1775830091423-BBaQWst5.jpg), [print version](https://cardboardclubs.com/assets/01-Berghain-U_1775830415461-BAyAsfie.jpg) | All three downloaded and visually inspected. The two sheets are versions of the same composition, not independent corroboration. They depict pipe seating, an industrial stair/window, speakers, entry-token motifs and generic foyer art. | Visual leads only. Do not import the sheet's precise-looking seat weight, speaker placement, lighting geometry, pictured art or crowd stereotypes as factual venue properties. Creator terms restrict generated images to personal noncommercial use absent consent; no source pixels or assets are shipped. |
+| M15 | [Bibo / @einfachbibo](https://www.instagram.com/einfachbibo/), formerly @bibostickas; [11-club compilation](https://www.instagram.com/reel/CKlrxquqb9u/) | Current profile metadata and original compilation caption inspected directly. The 28 January 2021 caption identifies eleven completed Berlin club miniatures and includes Berghain. Original SO36/Else/Festsaal posts now also identify einfachbibo. [Tagesspiegel's 3 February 2021 interview](https://www.tagesspiegel.de/berlin/kunstler-baut-berliner-clubs-nach-5388802.html) documents the handmade entrance series and includes a Berghain-door photograph. | Historical entrance art, not interior testimony: the interview says Bibo had not visited Berghain and used online imagery for its door. Article text/caption verified; its image download returned 403 and the compilation video was not played. No dimensions, contemporary canopy, ticketing room or cloakroom plan established. |
+
+Cross-check: [FAZEmag's creator coverage](https://www.fazemag.de/kuenstler-geht-viral-beruehmte-clubs-als-pappmodell-neu-interpretiert/)
+was read through public HTTP after the web reader failed. It independently
+describes the AI-generated, deliberately nonfaithful series. Its embedded
+[5 March 2026 reel](https://www.instagram.com/reel/DVgR3o3CjlY/) is **Tresor**, as
+confirmed by the original Instagram caption; do not mislabel it as a Berghain
+walkthrough. No specific Berghain Instagram reel permalink was verified.
+
+Research copies, exact URLs, image hashes and the assessment are in
+`output/berghain-instagram-research-2026-10-27/`. No geometry or lighting change
+is justified by these images alone. Existing photographic/architectural sources
+remain the authority; the broader exact-interior evidence gaps remain open.
+
 ## Garderobe evidence — 26 October 2026
 
 ENT06 — [Firsthand cloakroom routines, 8–9 January 2024](https://www.reddit.com/r/Berghain_Community/comments/191zcv0/what_are_your_little_berghain_rituals/).

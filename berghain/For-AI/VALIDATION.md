@@ -1,5 +1,58 @@
 # Berghain viewer validation
 
+## Panorama console — accepted, 27 October 2026
+
+289 Node checks and nine source/native and actual-input browser cases pass.
+The initially obsolete two-rod assertion was replaced by checks of both chain
+paths, their link counts and actual ceiling clearance; its failed run is retained.
+The independent Physics and Camera reports bind frozen candidate
+a6b02cd4ecf411b295992ccd4ab47d57fa3a23623ede040673c5fe0e25d08c06.
+
+V1 was rejected after independent review found panel/equipment penetration and
+a 1.65 mm support gap. V2 steepens and refits the intact panel assemblies, with
+an exact table contact and separation regression that fails V1 and passes V2.
+Both reviewers and the affected rendered checks are repeated on V2. V3 then
+closes the inherited 30 mm floor gap at four retained rods and passes renewed
+contact/native/camera checks. The rods remain estimated fittings, not a verified
+structural arrangement.
+
+Two straight rods are replaced with 102 chain links plus sloped panels, meter
+details, rails and attachments (148 new parts total). All 16,919 untouched parts'
+matrices and actual colours are exact. Four retained rods are extended 30 mm
+to meet the floor with their upper endpoints and horizontal anchors preserved;
+the assembly clearance now starts at floor level. All horizontal bounds, floors,
+admission and viewpoints remain. No external body intersections. The assembly's
+upper clearance reaches the ceiling; desk/support geometry remains estimated.
+821,804 triangles (+10,248), 228 batches (+1), six model lights and 38 runtime
+textures. Both radiance builders preserve the baked pixels. GLB 69,768,428 bytes,
+SHA256 f346c114f79a4d463831a4baf1e5a81923c5895c0b45f777c37cb4c62fa06da6.
+
+Three fresh matched runs per condition/profile compare a real approach facing
+the console and two seconds of keyboard/touch movement. All costs remain within
+the preregistered bounds. Measurements are browser observations on this PC,
+not physical-phone qualification or a causal speedup claim. Physical Android
+NOT RUN. No perceptual audio test. New research supplies historical exteriors
+and artistic leads, not measured private-room locations. The broader goal
+remains blocked on architectural evidence. Publication/live verification is
+recorded separately in output/berghain-dj-console-release.json.
+
+- desktop: p95 median 21.1 → 21.1 ms (candidate range 21.1–21.1); maximum observed input 12.7 ms.
+- android-portrait: p95 median 14.0 → 13.9 ms (candidate range 13.9–14.0); maximum observed input 21.2 ms.
+- android-landscape: p95 median 14.0 → 14.0 ms (candidate range 14.0–14.0); maximum observed input 18.2 ms.
+
+
+## Published Garderobe and ticket-entry correction — 26 October 2026
+
+Verified commit `d87c5f5d76d426e8e811aa7b3beafb7629007aeb`; Pages CI succeeded. All 115 checked
+public files match, six entry URLs respond, and both viewer entries pass actual
+keyboard/touch cashier-to-cloakroom approaches on desktop and Android portrait/
+landscape emulation. Receipt: output/berghain-wardrobe-entry-release.json.
+The primary index and unrelated local work remain unchanged. This supersedes
+the pending publication checkbox. Exact current fitting dimensions/inventory
+remain estimates; the broader architecture goal is still blocked on evidence.
+Physical Android remains untested.
+
+
 ## Garderobe and ticket-entry correction — accepted
 
 286 Node checks, nine root browser cases and both independent specialist reviews

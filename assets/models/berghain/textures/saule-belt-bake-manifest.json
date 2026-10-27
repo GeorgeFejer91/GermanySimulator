@@ -816,7 +816,7 @@
     },
     {
       "path": "assets/models/berghain/layout.mjs",
-      "sha256": "188c17d3b93a6ba6771e2f5d143a6bae748b5b497e23299abdc940b2c3acb52b"
+      "sha256": "068db568090d66d8567061a5395516ee956828a8fdeefd2eab7fb2fd598d80fb"
     },
     {
       "path": "assets/models/berghain/main-bar.mjs",
@@ -836,11 +836,15 @@
     },
     {
       "path": "assets/models/berghain/model.mjs",
-      "sha256": "be0d6a81f52b616dafe85117784a7bc38b329a3f5a686bc70f90de6e2a26c0ef"
+      "sha256": "871a6f3fda7e8043a50935a769c6dbfc8e1629e2bbf9b6319a1a71f4cd9399d4"
     },
     {
       "path": "assets/models/berghain/original-balustrades.mjs",
       "sha256": "e60134a15ad3794f8d3b90dd83779fff82e8ac19df42201c08b9aa9809f70599"
+    },
+    {
+      "path": "assets/models/berghain/panorama-dj-console.mjs",
+      "sha256": "95003009740e5a4edbbadb87b4df2a911f225e446c82b35690a9a11e75ac2750"
     },
     {
       "path": "assets/models/berghain/panorama-registration.mjs",

@@ -1,5 +1,18 @@
 # Berghain architectural study
 
+## Panorama DJ console detail — accepted, 27 October 2026
+
+A13/I19 photographs and I04's historical firsthand account support a sloped
+instrument front, square meter faces, metal rails and chain links. Original
+low-poly fittings replace the two straight suspension rods. The existing desk,
+equipment and horizontal collision footprint remain. Four estimated rods now
+reach the floor with unchanged upper endpoints; the assembly clearance extends
+from the floor to the ceiling attachment. Dimensions,
+inventory, attachments and current retention remain inferred. No new images or
+lights, no copied source pixels. M13/M14 imagined artwork is a discovery lead
+only; M15/M16 entrance art/footage does not establish an interior plan.
+
+
 ## Garderobe and ticket-entry correction — accepted
 
 Retain the reported security → cashier/wristband → strip curtain → Garderobe

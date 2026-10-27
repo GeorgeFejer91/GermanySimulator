@@ -62,11 +62,16 @@ test('clouds and shortened suspension fit below the new ceiling',()=>{
   assert.ok(clouds.length>=12,'Observed staggered acoustic treatment is modelled');
   const rods=layout.parts.filter(p=>(p.fixture?.startsWith('panorama-pendant-')||p.fixture==='panorama-dj-table')&&/drop cable|suspension/.test(p.name));
   assert.equal(rods.filter(p=>p.fixture.startsWith('panorama-pendant-')).length,3,'One retained drop per three-way pendant');
-  assert.equal(rods.filter(p=>p.fixture==='panorama-dj-table').length,2,'Retain both DJ suspension members');
-  for(const part of [...clouds,...rods]){
-    const m=part.matrix,top=m[13]+(Math.abs(m[1])+Math.abs(m[5])+Math.abs(m[9]))/2;
+  const console=layout.fixtures.find(f=>f.id==='panorama-dj-table').console;
+  assert.equal(console.chains.length,2,'Retain both DJ suspension paths');
+  const chains=layout.parts.filter(p=>p.consoleDetail&&(/chain/.test(p.name)));
+  assert.equal(chains.filter(p=>p.name.endsWith('upper chain attachment')).length,2);
+  assert.equal(chains.filter(p=>p.shape==='dj-chain').length,console.chains.reduce((n,c)=>n+c.count,0));
+  for(const part of [...clouds,...rods,...chains]){
+    const m=part.matrix,half=part.shape==='dj-chain'?[.59,.59,.09]:[.5,.5,.5];
+    const extent=Math.abs(m[1])*half[0]+Math.abs(m[5])*half[1]+Math.abs(m[9])*half[2],top=m[13]+extent;
     assert.ok(top<=layout.panoramaServices.ceilingHeight+.001,part.name+' must terminate at the ceiling');
-    const low=m[13]-(Math.abs(m[1])+Math.abs(m[5])+Math.abs(m[9]))/2;
+    const low=m[13]-extent;
     if(part.fixture!=='panorama-dj-table')assert.ok(low-layout.panoramaServices.floorHeight>=2.1,part.name+' standing head clearance');
   }
 });

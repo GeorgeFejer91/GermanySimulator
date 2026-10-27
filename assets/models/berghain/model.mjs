@@ -1,3 +1,4 @@
+import {createDjChainGeometry} from './panorama-dj-console.mjs';
 import * as THREE from '../../vendor/three/0.186.0/build/three.module.min.js';
 import {layout, materials} from './layout.mjs';
 import {createSurveyModel} from './survey-model.mjs';
@@ -27,7 +28,7 @@ export function createBerghainModel() {
     landscape:layout.landscape,exteriorDetails:layout.exteriorDetails,artworks:layout.artworks,upperLounge:layout.upperLounge,
     panoramaServices:layout.panoramaServices,kloBar:layout.kloBar,labOratory:layout.labOratory,balustrades:layout.balustrades,mainBar:layout.mainBar,saule:layout.saule,halle:layout.halle,interiorTopology:layout.interiorTopology,
     architecturalCirculation:layout.architecturalCirculation,mainHallDetails:layout.mainHallDetails,groundSanitary:layout.groundSanitary,admission:layout.admission,wardrobe:layout.wardrobe,panoramaRegistration:layout.panoramaRegistration,mainHallRegistration:layout.mainHallRegistration};
-  const geometries = {box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
+  const geometries = {'dj-chain':createDjChainGeometry(),box: new THREE.BoxGeometry(1, 1, 1), beam: new THREE.BoxGeometry(1, 1, 1),
     hopper: new THREE.CylinderGeometry(.5, .12, 1, 16),cylinder:new THREE.CylinderGeometry(.5,.5,1,12),
     ring:new THREE.TorusGeometry(.5,.035,6,20),sphere:new THREE.IcosahedronGeometry(.5,1),
     grille:createAcousticGrilleGeometry(),...createSpeakerGeometries(),...createClimberGeometries(),...createLoungeGeometries(),...createKloGeometries(),...createTogetherGeometries(),...createLabGeometries(),...createMainBarGeometries(),...createSauleGeometries(),...createHalleGeometries(),...createGroundGeometries(),...createSauleCeilingGeometries(),...createUpperSanitaryGeometries(layout)};
