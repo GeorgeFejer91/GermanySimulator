@@ -6,7 +6,7 @@ Klein-Korinthen is isolated on `codex/experimental-klein-korinthen`; it is not l
 
 | Level | Permanent experimental release URL | Unique preview | Verification |
 | --- | --- | --- | --- |
-| Klein-Korinthen · Verein zur Wahrung des rechten Winkels | [Experimental v0.1.0](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html) | [1200 × 630 PNG](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/assets/klein-korinthen/share.png) | Local natural mission and desktop/Android-emulated layout PASS; live publication pending. Physical Android and perceptual listening NOT RUN. |
+| Klein-Korinthen · Verein zur Wahrung des rechten Winkels | [Experimental v0.1.0](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html) | [1200 × 630 PNG](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/assets/klein-korinthen/share.png) | Verified 2026-10-28: full natural mission, layout matrix, live desktop/Android-emulated entry and 26 HTTPS asset hashes PASS. First visit: select the preview host’s “Open the page”. Physical Android and perceptual listening NOT RUN. |
 
 This is the maintained catalogue of public level and named-area links. George requires a permanent direct URL and a unique comical share-preview image for every new level. Update this catalogue in the same change as level creation, renaming, routing, hosting or preview changes. Existing links are compatibility contracts: retain old paths as aliases when names change.
 

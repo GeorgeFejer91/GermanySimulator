@@ -19,11 +19,11 @@ Scope: new `labor/vereinigung-7f3c9d/` entry, `levels/klein-korinthen/*.mjs` con
 - [x] Sixteen synthesized German recordings with exact subtitles, independent ASR, -18 LUFS levels and fixed profile receipts. Perceptual listening NOT RUN.
 - [x] Desktop and Android-emulated portrait/landscape silent playtests; keyboard, real emulated touch walk/look/menu, resize, loading failure and bounded text checks PASS.
 - [x] Independent Physics P1–P4 source/numeric and Camera C4/C5 rendered reviews PASS; source hashes and evidence modes recorded separately.
-- [ ] Experimental branch publication and live unlisted entry/assets verification; main stays unchanged.
+- [x] Experimental branch/tag published; live desktop/phone entry and all 26 new runtime/media hashes verified. Main remains 99a5f0c.
 
 ## State
 
-Implementation complete; release verification in progress. Eight focused tests pass. Full natural keyboard mission and five-viewport UI matrix pass, including 200% text and iframe mount/pause/resume/dispose/remount. See `tools/check-klein-korinthen-edges.mjs` for touch and failure checks. The optional adapter and host ownership contract are in [INTEGRATION.md](INTEGRATION.md).
+Released 2026-10-28 at experimental commit d22a74e63a92ffea46aceafe428451d79d97d9e2; tag experimental-klein-korinthen-v0.1.0. [Play the unlisted level](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html). The preview provider shows a first-visit “Open the page” notice. Eight focused tests pass. Full natural keyboard mission and five-viewport UI matrix pass, including 200% text and iframe mount/pause/resume/dispose/remount. See `tools/check-klein-korinthen-edges.mjs` for touch and failure checks. The optional adapter and host ownership contract are in [INTEGRATION.md](INTEGRATION.md).
 
 The existing primary checkout has damaged/synchronization-conflicted Git metadata; preserve it. Publication uses an isolated index based on GitHub main `99a5f0ce3a1fdf5ccf080b31a1d437fd8e6558a5`, with only this level and four new registry entries. Never absorb unrelated local changes or redeploy the main site from this experimental snapshot.
 
