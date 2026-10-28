@@ -5242,6 +5242,62 @@
       "fallback": "captions",
       "selectedOn": "2026-10-14",
       "selection": "User requested dedicated GS voice from the emotional voice database; Berlin burglar disappointed by negative loot: dry low-arousal resignation, sardonic rather than angry; distinct boredom reference. Use authorized; perceptual listening NOT RUN"
+    },
+    "kk-dietmar-kantenreiter": {
+      "profileId": "d41afe8101af41abb93b57b209ca1c30",
+      "profileName": "GS Dietmar Kantenreiter (kk-dietmar-kantenreiter)",
+      "originalSha256": "18cedeeeb30fbb8fa13de5ba832b32087b496820b51375521979bb21487b0492",
+      "referenceSha256": "18cedeeeb30fbb8fa13de5ba832b32087b496820b51375521979bb21487b0492",
+      "sourceProfileId": "0042c79859fd493bb623e734ee5264eb",
+      "source": "EmoDB 2.0 neutral CC0 local audition",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "highpass 65Hz; EBU R128 -18 LUFS, -2.5dBTP; 24kHz mono MP3 64kbps",
+      "fallback": "captions",
+      "selectedOn": "2026-10-28",
+      "selection": "User-requested original experimental neighborhood cast; distinct source speakers 15/13/3/8; perceptual listening NOT RUN"
+    },
+    "kk-gisela-durchschlag": {
+      "profileId": "4ebe0a37ded644e4a83b036ade516ab4",
+      "profileName": "GS Gisela Durchschlag (kk-gisela-durchschlag)",
+      "originalSha256": "73bd54dcbb997fd0fa9160c40923eb805e8e67f6a37528545c73188aca0b3fb1",
+      "referenceSha256": "73bd54dcbb997fd0fa9160c40923eb805e8e67f6a37528545c73188aca0b3fb1",
+      "sourceProfileId": "b8e442e72d8a495398d9c18e9d7f0a13",
+      "source": "EmoDB 2.0 neutral CC0 local audition",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "highpass 65Hz; EBU R128 -18 LUFS, -2.5dBTP; 24kHz mono MP3 64kbps",
+      "fallback": "captions",
+      "selectedOn": "2026-10-28",
+      "selection": "User-requested original experimental neighborhood cast; distinct source speakers 15/13/3/8; perceptual listening NOT RUN"
+    },
+    "kk-ronny-restbreite": {
+      "profileId": "86ef153690154416b1c133e822d9243f",
+      "profileName": "GS Ronny Restbreite (kk-ronny-restbreite)",
+      "originalSha256": "10f8d6a1ba65984d1e46ce4249a99fb137457d8530ee4c2267c62db0b2557558",
+      "referenceSha256": "10f8d6a1ba65984d1e46ce4249a99fb137457d8530ee4c2267c62db0b2557558",
+      "sourceProfileId": "85143d8946134380a66a1f4e004eb542",
+      "source": "EmoDB 2.0 positive local audition - attribution retained",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "highpass 65Hz; EBU R128 -18 LUFS, -2.5dBTP; 24kHz mono MP3 64kbps",
+      "fallback": "captions",
+      "selectedOn": "2026-10-28",
+      "selection": "User-requested original experimental neighborhood cast; distinct source speakers 15/13/3/8; perceptual listening NOT RUN"
+    },
+    "kk-ute-heckenmass": {
+      "profileId": "c00c63731e5d4c94ae578e8283b857f1",
+      "profileName": "GS Dr. Ute Heckenmaß (kk-ute-heckenmass)",
+      "originalSha256": "a314f73823d413e1762be524da658c05ff1dedfa7c8406282aa60f2d271f0ce4",
+      "referenceSha256": "a314f73823d413e1762be524da658c05ff1dedfa7c8406282aa60f2d271f0ce4",
+      "sourceProfileId": "0eb3aa7605454f6eaa5612a4a9214085",
+      "source": "EmoDB 2.0 predominantly neutral reference - attribution retained",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "highpass 65Hz; EBU R128 -18 LUFS, -2.5dBTP; 24kHz mono MP3 64kbps",
+      "fallback": "captions",
+      "selectedOn": "2026-10-28",
+      "selection": "User-requested original experimental neighborhood cast; distinct source speakers 15/13/3/8; perceptual listening NOT RUN"
     }
   },
   "productionExceptions": [

@@ -1,5 +1,9 @@
 # Speech catalog and subtitle authority
 
+## Experimental Klein-Korinthen
+
+The isolated `klein-korinthen` level owns its exact German/English lines in `levels/klein-korinthen/content.mjs` and its 16 recording receipts in `assets/klein-korinthen/voices.json`. Four `kk-*` identities resolve through the shared `VOICE-CAST.json.productionVoices` registry; the ordinary generated production table includes them. Its scene-local media owner loads one recording at a time, checks exact text and speaker, uses actual media time for measured mouth cues, and retains captions on failure. [Integration and event ownership](../levels/klein-korinthen/For-AI/INTEGRATION.md) documents entry, interruption and cleanup. These clips do not play in the main city until explicitly integrated.
+
 The post-arrest inventory in `neighbor-punishment.js` has eight exact bilingual
 monologues per adult neighbor. `punishmentDialogue` in the existing cast owns
 these additional pairs without changing any earlier story ordinal. Dedicated

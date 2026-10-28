@@ -611,3 +611,7 @@ The source revision, input hashes and full CC0 asset licence accompany the model
 No artist scan or photograph is bundled. Full figure order, likeness, ornament,
 dimensions and material measurements remain unverified; this is an incomplete
 study, not the artist's original digital composition.
+
+## Klein-Korinthen experimental chapter
+
+Original neighborhood geometry, vehicles, gardens, map, dialogue, story and sound-effect synthesis were created for Grand Theft Amt. The original four-character painted sheet and satirical share illustration were produced with OpenAI's built-in image generation. Four new fictional voices use the existing CC0 EmoDB reference collection (speakers 15, 13, 3 and 8), synthesized with the installed native OmniVoice Rust authoring runtime. Exact take/reference hashes, independent transcript checks and measured levels are recorded with the assets; perceptual listening was not performed. See [asset provenance](assets/klein-korinthen/README.md). No reference recording or authoring model is shipped. Three.js, Pretext and the existing fonts retain their licenses in the shared asset directories.

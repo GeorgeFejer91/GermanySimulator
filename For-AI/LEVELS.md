@@ -10,6 +10,7 @@ This document owns level lookup and compartmentalization. Root `For-AI/` owns sh
 | `neighbors` | Heiko, Inga, Frau Schwabingen, Hartmut and recurring visitor Ede character context; runtime belongs to city. | [Neighbor AGENTS](../levels/neighbors/AGENTS.md) | [Neighbor guide](../levels/neighbors/For-AI/README.md) |
 | `buergeramt` | First Bürgeramt interior, queue, Schalter, Anmeldung interview, fever cast and QR/phone companion. Later city paperwork is not a separate level. | [Bürgeramt AGENTS](../levels/buergeramt/AGENTS.md) | [Bürgeramt guide](../levels/buergeramt/For-AI/README.md) |
 | `jobcenter` | Optional Jobcenter interior/flame encounter and its entry/return boundary. | [Jobcenter AGENTS](../levels/jobcenter/AGENTS.md) | [Jobcenter guide](../levels/jobcenter/For-AI/README.md) |
+| `klein-korinthen` | Experimental Brandenburg neighborhood association; standalone unlisted playground, not linked to the city yet. | [Klein-Korinthen AGENTS](../levels/klein-korinthen/AGENTS.md) | [Level guide](../levels/klein-korinthen/For-AI/README.md), [integration adapter](../levels/klein-korinthen/For-AI/INTEGRATION.md) |
 
 Resolve specific interiors before the broad city scope. Entry, exit, rewards or scene switching cross a boundary: read both affected guides and trace their callbacks. JWD and named landmarks are city areas, not independent runtimes. The eight paperwork procedures are mission steps, not eight level directories. For an unknown name, search existing sources/contracts before inventing a scope.
 

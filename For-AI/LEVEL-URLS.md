@@ -1,5 +1,13 @@
 # Direct level URLs and share previews
 
+## Experimental, unlisted playground
+
+Klein-Korinthen is isolated on `codex/experimental-klein-korinthen`; it is not linked from the main game or sitemap. The entry has `noindex,nofollow,noarchive`. Unlisted does not mean authenticated/private. Its same-origin mounting adapter is documented in [the integration contract](../levels/klein-korinthen/For-AI/INTEGRATION.md).
+
+| Level | Permanent experimental release URL | Unique preview | Verification |
+| --- | --- | --- | --- |
+| Klein-Korinthen · Verein zur Wahrung des rechten Winkels | [Experimental v0.1.0](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html) | [1200 × 630 PNG](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/assets/klein-korinthen/share.png) | Local natural mission and desktop/Android-emulated layout PASS; live publication pending. Physical Android and perceptual listening NOT RUN. |
+
 This is the maintained catalogue of public level and named-area links. George requires a permanent direct URL and a unique comical share-preview image for every new level. Update this catalogue in the same change as level creation, renaming, routing, hosting or preview changes. Existing links are compatibility contracts: retain old paths as aliases when names change.
 
 The existing `/3d.html` link is a compatibility entry to the maintained `index.html` city game. It preserves query and hash and replaces the compatibility history entry, including for relative `file://` entry. Its raw HTML retains the city share metadata and existing root preview; it is not a new level or an independent renderer/controller. Historical HTTP and browser checks below retain their original revisions and do not prove this routing change.
