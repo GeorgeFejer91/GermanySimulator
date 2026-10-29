@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
+import {installSpriteDepth} from '../sprite-depth.js';
 import {createPoliceSprites} from '../police-sprites.js';
 const source=readFileSync('world3d.js','utf8');
 function declaration(name,next){
@@ -14,7 +15,7 @@ function fixture(){
   const adultMaterial=new T.MeshBasicMaterial({map:new T.Texture(adultImage)});
   const person={id:'adult',figureWorldHeight:2.33,standingOnly:true,standing:{}};
   const camera=new T.PerspectiveCamera();camera.rotation.set(-.65,.8,.1,'YXZ');
-  const scope=vm.createContext({T,camera,world:new T.Group(),
+  const scope=vm.createContext({T,installSpriteDepth,camera,world:new T.Group(),
     M:Object.fromEntries(['player','police','skin','dark'].map(k=>[k,new T.MeshBasicMaterial()])),
     streetPaintManifest:{adult:person},atlasTextureCache:new Map(),atlasMaterialCache:new Map(),
     personFallbackMaterial:()=>adultMaterial,

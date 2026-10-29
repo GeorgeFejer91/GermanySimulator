@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
+import {installSpriteDepth} from '../sprite-depth.js';
 
 const source=readFileSync('world3d.js','utf8');
 function declaration(name,next){
@@ -15,7 +16,7 @@ function fixture(height=2.33){
   const person={figureWorldHeight:height,standingOnly:true,standing:{}};
   let root;const status={loaded:false,failed:false};
   const camera=new T.PerspectiveCamera();camera.rotation.set(-.65,.8,.1,'YXZ');
-  const scope=vm.createContext({T,camera,streetPaintOwner:{retired:false},streetPaintManifest:{adult:person},
+  const scope=vm.createContext({T,installSpriteDepth,camera,streetPaintOwner:{retired:false},streetPaintManifest:{adult:person},
     cityModelsEnabled:()=>true,jobcenter:{active:false},buildingLevels:{office:null},startupModelsReady:()=>true,
     bridge:{preparingStart:false,getHUDState:()=>({started:true}),stationElevation:()=>0},
     forEachStreetBody:visit=>visit(actor,root),registeredStreetPaint:()=> 'adult',

@@ -45,6 +45,68 @@ that depth proxy. Keep the comparator until synchronous owner disposal. The
 actual-body near/far-person and opaque-wall GPU probes are required alongside
 ordinary sprite probes; Spark's scene origin alone cannot establish body depth.
 
+## Painted sprite depth protocol
+
+Use this protocol for every new or changed painted character/prop. It supplements
+C1–C4 below; it does not replace their building-fade or device checks.
+
+1. **Declare the anchor.** Use the simulation's ground X/Z, platform elevation
+   and the atlas's registered sole pivot, frame dimensions and displayed height.
+   The same pivot applies to idle, walking, speech, mirrored and fallback paint.
+   Do not infer ground position from the middle of the visible texture. Legacy
+   square sheets without sole metadata use the simulation ground point explicitly.
+2. **Separate silhouette from depth.** A camera-facing painting may retain its
+   accepted screen shape, but its world depth belongs to an upright plane through
+   its feet. `sprite-depth.js` installs this rule on city atlases, procedural fallback paint (including
+   replacement geometry) and both standing and moving neighbors. The fragment shader intersects each camera ray with that
+   plane and tests/writes its projected depth; it leaves geometry, UVs, art,
+   animation and collision unchanged. A tilted billboard's upper body must not
+   drift behind a wall that is behind its feet. Near-overhead views use the
+   existing geometric depth when the upright plane becomes edge-on. Fixed upright
+   office paintings and genuinely articulated world meshes use their real depth.
+   Install this depth rule after a speech owner clones a material, preserving
+   the native mouth shader. Native upright street/police paint and articulated
+   rigs retain their real geometry depth.
+3. **Respect painted coverage.** People and solid painted props keep depth testing
+   and depth writing enabled, with alpha rejection before a pixel can occlude
+   anything. Preserve the family's alpha threshold and premultiplied-alpha setup.
+   Transparent atlas padding must never hide another person, roof or prop. Pure
+   glows, smoke and intentionally fading surfaces retain their authored policy.
+4. **Keep scene ownership.** City people use the ordinary world layer/order. Do
+   not fix an overlap with a global front layer or an actor-specific order number.
+   The office's required late person pass retains the room's depth buffer; solid
+   painted props write depth before it. Office people write depth within that
+   pass. Preserve its equal person order, Gaussian isolation and layer restoration.
+   New fixed props must declare a plausible world plane; a person-shaped quad
+   cannot stand in for arbitrary volumetric furniture.
+5. **Check both sides and crossing.** Render front/behind an opaque wall, a low
+   obstacle, a roof/overhang and a faded wall; cross two people's depth; inspect
+   alpha margins and feet. Vary camera yaw/pitch, platform height, viewport/aspect,
+   paused/modal state and loaded/fallback art. Include the standing-to-moving
+   handover and room entry/exit. Record actual scene/actor/camera coordinates and
+   screenshots, rather than judging order from object creation order alone.
+6. **Gate changes with real pixels.** Run `node --test tests/sprite-depth.test.mjs
+   tests/billboard-ground.test.mjs tests/neighbor-sprites.test.mjs`, then
+   `node tools/test-browser.mjs stress --suite ./tools/sprite-depth-suite.mjs`.
+   The suite uses the production atlas and office material/prop constructors on
+   WebGL, with desktop and Android portrait/landscape emulation. Pixel probes
+   cover camera angles, walls, low props, elevation, people crossing, alpha
+   padding, overhead fallback and the office's retained-depth person pass. Its
+   second scenario renders the actual courier Spark body with the production
+   shared owner, no native paint anchor, and a camera-local tunnel: opaque/faded
+   walls and near/far native people must respect that body's depth. These
+   controlled fixtures complement actual game views from
+   `node tools/playtest-object-consistency.mjs`; they do not prove the full natural
+   gameplay chain or physical Android. Keep the failing baseline when repairing a
+   defect. Both independent specialists review the same frozen candidate.
+
+The implementation adds no asset requests, texture variants, timer or render
+pass. It adds one three-component sole attribute per existing vertex and a small
+fragment-depth calculation. Existing cache/geometry disposal owns its lifetime;
+the material installer uses weak ownership and composes existing mouth/breath
+shader hooks. Measure browser cost under the shared playability gate; a correct
+pixel probe alone does not establish frame-time or device acceptance.
+
 ## Executable verification matrix
 
 Record initial position, route/heading, actor radii/solid dimensions, elapsed simulated time, frame step, camera transform and loaded/fallback state for each scenario. Use existing deterministic Node harnesses against production functions, then reproduce representative cases in the browser. A source-regex assertion is source evidence only; a CPU geometry check does not establish rendered depth, animation, visual fade or device performance. A screenshot proves one frame; record a timed sequence for collision recovery and smooth fade. For articulated or pitched cars, verify transformed mesh vertices or precise post-transform bounds at attainable steering/ramp extrema; upright dimensions alone can miss a projecting bonnet, while transforming already-conservative mesh bounding corners can overestimate it.

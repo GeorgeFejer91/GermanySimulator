@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
+import {installSpriteDepth} from '../sprite-depth.js';
 
 const source=readFileSync('world3d.js','utf8');
 function declaration(name,next){return source.slice(source.indexOf('  function '+name+'('),source.indexOf('  function '+next+'('))}
 function fixture(){
  const player={x:0,y:0,voiceId:'player'},officer={x:20,y:20,voiceId:'police'},material=new T.MeshStandardMaterial();
- const scope=vm.createContext({T,M:{player:material,police:material,skin:material,dark:material},X:x=>x*.02,Z:y=>y*.02,
+ const scope=vm.createContext({T,installSpriteDepth,M:{player:material,police:material,skin:material,dark:material},X:x=>x*.02,Z:y=>y*.02,
   bridge:{player,getPolice:()=>[officer],stationElevation:()=>0},personFallbackMaterial:()=>material,streetPaintManifest:{player:{standing:{}},police:{standing:{}},citizen:{standing:{}}},resolveStreetCharacter:actor=>actor.voiceId,
   box:(w,h,d,m,x,y,z,parent)=>{const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),m);mesh.position.set(x,y,z);parent.add(mesh);return mesh}});
  vm.runInContext(declaration('character','jwdCharacter')+declaration('registeredStreetPaint','npcSpriteRequired'),scope);

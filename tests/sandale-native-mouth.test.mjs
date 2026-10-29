@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
+import {installSpriteDepth} from '../sprite-depth.js';
 import {createAtlasCharacterMouth} from '../atlas-character-mouth.js';
 
 test('both accepted Sandale atlases have complete source-bound mouth coverage',()=>{
@@ -32,7 +33,7 @@ test('actual world atlas functions scope material ownership and media sync to Sa
  const camera=new T.PerspectiveCamera();camera.position.set(0,10,15);camera.lookAt(0,0,0);
  let paused=false;const speech={actorId:actor.id,voiceId:actor.voiceId,cueToken:{},speechStatus:'playing',mouthOpen:.8};
  const bridge={getNpcSpriteCanvas:()=>({width:256,height:320}),npcSpriteGrids:{towelMan:grid,merkel:grid},stationElevation:()=>0,getStreetSpeech:n=>n===actor?speech:null,getHUDState:()=>({paused})};
- const scope=vm.createContext({T,bridge,camera,createAtlasCharacterMouth,X:x=>x,Z:y=>y,atlasTextureCache:new Map(),atlasMaterialCache:new Map(),
+ const scope=vm.createContext({T,installSpriteDepth,bridge,camera,createAtlasCharacterMouth,X:x=>x,Z:y=>y,atlasTextureCache:new Map(),atlasMaterialCache:new Map(),
   registeredStreetPaint:()=>null,fitStreetFallback:()=>assert.fail('ordinary named Sandales must retain their own atlas and mouth')});
  vm.runInContext(source.slice(start,end)+source.slice(syncStart,syncEnd)+';globalThis.api={npcSprite,syncAtlasSprite};',scope);
  const q=scope.api.npcSprite(actor),mission=scope.api.npcSprite({special:'merkel'});

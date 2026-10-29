@@ -8,6 +8,8 @@ Use the smallest coherent change. Update the owning document when a lasting rule
 
 ## Read by task
 
+- [Painted sprite depth protocol](./OBJECT-CONSISTENCY.md#painted-sprite-depth-protocol): sole anchors, upright depth, speech-material ownership and actual sprite/Gaussian GPU checks.
+
 - [Architecture implementation record](../docs/engineering/ARCHITECTURE-IMPROVEMENTS.md): demand loading, bounded asset lifetimes, browser deployment checks, transition ownership, shared building data and keyboard/modal access; scoped evidence and device limits.
 - [`PROJECT-HANDOFF.md`](./PROJECT-HANDOFF.md): user-requested pause/resume checkpoint, unpublished walking pilot, exact remaining passing failure and bounded next tasks.
 - [`LEVEL-URLS.md`](./LEVEL-URLS.md): maintained public direct-level URL catalogue, production status, unique comical share previews, and mandatory checks for every new level.

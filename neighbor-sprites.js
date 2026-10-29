@@ -1,5 +1,6 @@
 import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
 import {schwabingenPropFrame,createSchwabingenProps} from './schwabingen-props.js?v=20261021-schwabingen-cleanup';
+import {installSpriteDepth} from './sprite-depth.js?v=20261029-foot-depth';
 const NEIGHBOR_PAINT={parent:'heiko',watcher:'inga',swabian:'schwabingen',child:'theodore'};
 const FRAMES=32,CELL_WIDTH=128,CELL_HEIGHT=192,COLUMNS=16,ROWS=16,PIVOT=180;
 const CLIP_OFFSETS=[0,32,64,96,128,136,152,160,176,184,208,232];
@@ -161,6 +162,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       loaded.colorSpace=T.SRGBColorSpace;loaded.generateMipmaps=false;loaded.minFilter=loaded.magFilter=T.LinearFilter;loaded.premultiplyAlpha=true;
       const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
       standing=new T.Mesh(new T.PlaneGeometry(height*CELL_WIDTH/CELL_HEIGHT,height),new T.MeshBasicMaterial({map:loaded,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide}));
+      installSpriteDepth(T,standing,[0,-height*(PIVOT/CELL_HEIGHT-.5),0]);
       standing.name=`${name} standing paint`;standing.userData.neighborPaint=true;host.add(standing);resolve(true);
     },error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
   }),owner);
@@ -198,7 +200,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.025,.008,.006),neighborCavity);`);
       };
       material.customProgramCacheKey=()=> 'neighbor-pose-lips-v3';
-      sprite=new T.Mesh(geometry,material);sprite.name=`${name} painted neighbor`;
+      sprite=new T.Mesh(geometry,material);installSpriteDepth(T,sprite,[0,-height*(PIVOT/CELL_HEIGHT-.5),0]);sprite.name=`${name} painted neighbor`;
       sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);settled=true;resolve(true);
     },error=>{settled=true;failed=true;console.warn('Neighbor animation unavailable; keeping standing paint',error);resolve(false)});
   }),owner);

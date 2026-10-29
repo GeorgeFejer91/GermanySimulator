@@ -25,7 +25,7 @@ try{
    speechSynthesis.speak=u=>{u.volume=0;window.__speech=u;u.onstart?.()};
  });
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(/Shader Error|VALIDATE_STATUS|GL_INVALID/.test(m.text()))errors.push(m.text())});
- await page.route('**/world3d.js*',async r=>{const response=await r.fetch();let body=baseline.get(path.resolve('world3d.js'))?.toString()||await response.text();body=body.replace('  function renderAmt(){',`  window.__officeDepthProbe=()=>{
+ await page.route('**/world3d.js*',async r=>{const response=await r.fetch();let body=baseline.get(path.resolve('world3d.js'))?.toString()||await response.text();body=body.replace(/  function renderAmt\((?:pullCamera=null)?\)\{/,`  window.__officeDepthProbe=()=>{
     const original=window.BuergeramtLevel,view=original.view,level={...original,omen:{...original.omen,phase:'',strength:0,life:{...original.omen.life,isolation:0}},fever:{active:false,strength:0}};
     // Keep centers on the same camera ray as distance changes.
     const point=(side,height,distance)=>new T.Vector3(view.x-Math.sin(view.yaw)*distance+Math.cos(view.yaw)*side,1.68+(height-1.68)*distance/3,view.z-Math.cos(view.yaw)*distance-Math.sin(view.yaw)*side);
@@ -42,7 +42,7 @@ try{
       return{blocked,aboveEffect,alphaEdge,nearPerson,farPerson,view};
     }finally{window.BuergeramtLevel=original;amtScene.remove(paint,blocker,near);for(const mesh of [paint,blocker,near]){mesh.geometry.dispose();mesh.material.dispose()}texture.dispose();overlay.material.dispose();overlay.material=material;renderAmt()}
   };
-  function renderAmt(){`);await r.fulfill({response,body});});
+  function renderAmt(pullCamera=null){`);await r.fulfill({response,body});});
  if(profile.name==='anchor-failure'){await page.route('**/animation/*-anchor-*.webp',r=>r.abort());await page.route('**/assets/models/**',r=>r.abort())}
  await page.route('**/buergeramt.js*',async r=>{const response=await r.fetch();let body=await response.text();body=body.replace(/const candidate=allowCatalogClip[^;]+;/,'const candidate=null;');body=body.replace('window.BuergeramtLevel={',`window.__endFever=()=>feverClock.done();window.__layerFixture=id=>{options.cinematics=true;omen.phase="";omen.strength=0;const actor=id==='clerk'?{id,x:3.9,z:-9.77}:characters.find(a=>a.id===id)??{...story.patrons[id],id,static:true};window.__layerActor=()=>Germany3D.amtCharacters.find(a=>a.name===id||a.id===id||id==='clerk'&&a.name==='clerk');const side=actor.z>2.8?-1:1;view.x=actor.x;view.z=actor.z+side*2.7;view.yaw=side<0?Math.PI:0;setStage("walk-sign");if(id==='clerk'){setStage('counter');encounterArmed=true;content(story.clerk[0].speaker,story.clerk[0].line)}else showCharacter(actor);};window.BuergeramtLevel={`);await r.fulfill({response,body});});
  await page.route('**/game.js*',async r=>{const response=await r.fetch(),body=(await response.text()).replace('const directConfig={','const directConfig=window.__layerRootConfig={');await r.fulfill({response,body})});
@@ -73,9 +73,11 @@ try{
  if(pixels){assert(pixels.blocked[2]>200&&pixels.blocked[0]<20,'solid room geometry hides the painting');assert(pixels.aboveEffect[0]>200&&pixels.aboveEffect[2]<20,'the actor pass follows the effect');assert(pixels.alphaEdge[0]>200&&pixels.alphaEdge[2]>200,'transparent paint reveals the effect');assert(pixels.nearPerson[1]>200&&pixels.nearPerson[0]<20,'nearer people draw last');assert(pixels.farPerson[0]>200&&pixels.farPerson[1]<20,'crossing person depth restores the opposite order')}
  const paused=await page.evaluate(()=>BuergeramtLevel.characters);await page.waitForTimeout(100);assert.deepEqual(await page.evaluate(()=>BuergeramtLevel.characters),paused,'rendering must not advance the action clock');
  await page.evaluate(id=>{__layerFixture(id);__step(.65)},profile.id||'nachtschichtmelderin');
- await page.locator('#amt-leave').evaluate(n=>n.click());await page.evaluate(()=>Germany3D.sync());await page.waitForTimeout(100);const exited=await page.evaluate(()=>Germany3D.amtGaussian);assert.equal(exited.actors.length,0);assert.equal(exited.owner,null);
+ await page.locator('#amt-leave').evaluate(n=>n.click());
+ await page.waitForFunction(()=>!BuergeramtLevel.active&&!Germany3D.levelTransition.active&&!document.body.classList.contains('amt-direct-mode'),null,{timeout:15000});
+ await page.evaluate(()=>Germany3D.sync());const exited=await page.evaluate(()=>Germany3D.amtGaussian);assert.equal(exited.actors.length,0);assert.equal(exited.owner,null);
  if(!process.env.PROBE_REF)assert(await page.evaluate(()=>Germany3D.amtCharacters.every(a=>a.depthTest===true&&a.layer===1&&!a.foreground&&a.opacity===1)),'mid-encounter close restores every original sprite and its ordinary layer');
- assert(await page.locator('#amt-direct-result').isVisible(),'the real root close callback presents the closed visit');
+ assert(!await page.locator('#amt-direct-result').isVisible(),'the real root close callback restores the city');
  assert.deepEqual(errors,[]);results.push({profile,states,pixels,errors,exited});console.log(JSON.stringify({profile:profile.name,result:'PASS',states:states.length,pixels}));await context.close();await browser.close();browser=null;
  }
 }finally{fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({results,limits:['forced production-scene encounters and controlled geometry/pixel probes','speech mocked for visual fixtures; no playback or listening claim','Android emulation; physical Android NOT RUN']},null,2));await browser?.close();await new Promise(r=>server.close(r))}

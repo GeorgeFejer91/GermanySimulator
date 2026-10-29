@@ -34,6 +34,8 @@ jobs:
         run: node --test tests/neighbor-conversations.test.mjs tests/neighbor-subtitle-sync.test.mjs tests/neighbor-dialogue-tickets.test.mjs tests/neighbor-focus.test.mjs tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/neighbor-halo.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs tests/jobcenter-rumble.test.mjs tests/jobcenter-release.test.mjs tests/jobcenter-direct.test.mjs tests/jobcenter-touch.test.mjs tests/welcome-dialogue.test.mjs
+      - name: Check painted sprite depth and sole ownership
+        run: node --test tests/sprite-depth.test.mjs tests/billboard-ground.test.mjs
       - name: Check bounded asset jobs and cancellation
         run: node --test tests/asset-queue.test.mjs tests/asset-loaders.test.mjs tests/building-catalogue.test.mjs
       - name: Check shared building transitions and exit ownership
@@ -133,6 +135,13 @@ jobs:
           --profile desktop --profile android-portrait --profile android-landscape
           --profile reduced --profile system-cursor
           --output output/browser-ci/interaction-cursor
+      - name: Check built sprite and actual Gaussian body depth
+        timeout-minutes: 8
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/browser-ci/node_modules/playwright
+          CHROMIUM_MESA: '1'
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a node tools/test-browser.mjs stress --root output/site --suite ./tools/sprite-depth-suite.mjs --output output/browser-ci/sprite-depth
       - name: Retain failed browser evidence
         if: failure()
         uses: actions/upload-artifact@v4

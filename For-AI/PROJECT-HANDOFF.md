@@ -1,5 +1,56 @@
 # Current combined release candidate — 19 October 2026
 
+## Painted sprite depth release — 29 October 2026
+
+This scoped successor starts from published cursor main `5215712e` in
+`C:/Users/cogpsy-vrlab/.codex/worktrees/sprite-depth-release-2026-10-29/GermanySimulator`.
+It ports only the requested sprite-depth repair from the older primary candidate;
+the primary checkout and its held feature work remain preserved. The current
+published renderer, speech material cloning, native adult figures, cursor, static
+architecture and query/hash-preserving `3d.html` redirect remain authoritative.
+
+The maintained protocol is [Painted sprite depth](./OBJECT-CONSISTENCY.md#painted-sprite-depth-protocol).
+Camera-facing city atlases, procedural fallback paint and neighbor handovers use
+an upright depth plane through the simulation sole while retaining their visual
+geometry, UVs, mouth shaders and feet. Refit geometry and private speech materials
+receive the same policy. Native upright street/police paint and articulated bodies
+keep their existing geometry. Solid office paint and props write alpha-rejected
+depth inside the existing room/pass ownership; Spark ownership is unchanged.
+
+Fresh evidence belongs in this worktree's ignored `output/sprite-depth-release/`.
+Candidate 2 freezes 19 source/contract paths; both independent specialists rebind
+to these hashes. The procedural fallback regression fails before repair and passes
+after it, using the actual source paint and production transform. Isolated VM tests
+now bind the real helper. The city fixture's stale police height changes from
+1.56 to the already-published 2.33 m with its original tolerance; it also supplies
+the missing empty city-asset fixture. Its original software-rendered fade timeout
+is retained. The subsequent headless hardware-rendered city run passes all three
+profiles, including 51 geometry/pixel checks per profile, loaded/fallback fades,
+negative obstruction cases, and root/compatibility route consistency.
+
+Actual office encounters pass desktop, Android portrait and landscape emulation:
+eight fever/release states per profile, room depth, effect/alpha coverage, crossing
+person order, action-clock pause and close/cleanup. Both browser fixtures use
+controlled diagnostic placement; they do not establish the natural mission route.
+Physical Android, perceptual audio and the complete timed movement matrix are
+NOT RUN. No simulation, collision, gait, assets or audio sources change.
+
+Acceptance: all 2,786 Node tests in 310 files pass (concurrency 2; no skips),
+the rebuilt-site GPU suite passes six cases/111 pixel assertions, and the two
+independent scoped Physics/Camera reviews pass on the same 19 hashes. Workflow
+static validation and its ten Python unit tests pass. The site builder emits 31
+direct routes plus aliases. One cold baseline/candidate performance pair per
+desktop/portrait viewport passes existing startup/input gates: the candidate adds
+3,598 bytes at startup, stays below 18 MB, accepts nine measured inputs per view
+and logs no browser errors. Concurrent CPU work and asynchronous asset scheduling
+prevent attributing timing differences to the shader; this is lab evidence.
+
+Pages retains the published cursor gate and adds focused CPU and actual
+Gaussian-body/sprite GPU depth gates. The integrator publishes this validated
+successor to main under the standing release policy, then verifies deployment and
+both root/compatibility entries; exact commit/deployment receipts stay with the
+ignored task evidence and the release response.
+
 ## Prussian hand cursor release — 29 October 2026
 
 This scoped successor starts from published `99a5f0ce` in the isolated

@@ -1,3 +1,39 @@
+# Sprite-depth release integration — 2026-10-29
+
+Integrator-owned branch `codex/sprite-depth-protocol`, based on published
+`5215712e5b7a491f4262b11d742076267e23cbef`, in the isolated
+`sprite-depth-release-2026-10-29/GermanySimulator` Git worktree. The shared primary
+checkout and its held work are read-only inputs, never replacement runtime sources.
+
+Allowed changes: the new `sprite-depth.js`, its `world3d.js`/`neighbor-sprites.js`
+consumers, index script versions, focused tests/browser probes, the existing
+object-consistency protocol/index, scoped release handoff and Pages checks.
+Preserve native upright street/police/rig depth, newer speech-material cloning,
+single-pass performance settings, 3d.html's redirect, collision/gait, assets,
+mission/audio/input owners and all unrelated features. Initial worktree is clean;
+baseline results and fresh integration evidence belong in ignored
+`output/sprite-depth-release/`. One runtime integrator owns commit/publication;
+both independent specialists review the same frozen successor before acceptance.
+
+The integrated successor also covers procedural fallback characters and their
+replacement geometry. Isolated source-extraction tests bind the real depth helper.
+The old browser fixture expected a 1.56 m officer; current published geometry and
+its maintained CPU contract specify 2.33 m. Correct only that expected height,
+keeping the original tolerance, and bind its missing empty cityAssetSlots fixture.
+A new production fallback pixel test fails before the fix and passes afterward.
+Preserve both the published cursor CI gate and the added sprite-depth gate.
+
+Acceptance evidence: candidate-2's 19 hashes remain unchanged. Full Node suite
+2,786/2,786 PASS; built GPU 6/6 cases (111 checks); actual city and office scenes
+all three profiles PASS; paired baseline/current startup/input checks PASS;
+static workflow validation and 10 Python tests PASS; independent Physics and
+Camera successor reviews PASS within their declared scope. Physical Android,
+full timed movement/mission traversal and perceptual listening remain NOT RUN.
+Publication uses the ordinary non-force origin/main path; exact release receipts
+belong in ignored task output and the user-facing completion report.
+
+## Prior session context
+
 # Ambient walking and talking goal — 2026-10-20
 
 Current Hannelore clean RELEASE candidate is compact80, validated locally and unpublished. Source

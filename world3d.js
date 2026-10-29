@@ -13,8 +13,9 @@ import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets
 import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261020-explicit-update';
 import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
 import {createBuildingLevels} from './building-levels.js?v=20261020-explicit-update';
-import {createNeighborSprite} from './neighbor-sprites.js?v=20261021-schwabingen-cleanup';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261029-foot-depth';
 import {createBillboardGroundProjector} from './billboard-ground.js?v=20261019-complete-development';
+import {installSpriteDepth} from './sprite-depth.js?v=20261029-foot-depth';
 import {createAtlasCharacterMouth} from './atlas-character-mouth.js';
 import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,requestStreetSimulationMove,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261024-bueroklammer-adult';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
@@ -1317,6 +1318,7 @@ function showRendererFailure(error){
     const root=new T.Group(),planeHeight=height*192/176;
     const paint=new T.Mesh(new T.PlaneGeometry(planeHeight*.5,planeHeight),personFallbackMaterial(kind));
     paint.name=`${kind} procedural 2D fallback`;paint.userData.personFallback=true;
+    installSpriteDepth(T,paint,[0,-planeHeight*(184/192-.5),0]);
     root.add(paint);root.userData.personFallback=paint;return root;
   }
   function fitStreetFallback(root,person){
@@ -1327,6 +1329,7 @@ function showRendererFailure(error){
     const planeHeight=height*192/176,previous=paint.geometry;
     paint.geometry=new T.PlaneGeometry(planeHeight*.5,planeHeight);previous.dispose();
     paint.material=personFallbackMaterial("adult");paint.userData.streetFallbackHeight=height;
+    installSpriteDepth(T,paint,[0,-planeHeight*(184/192-.5),0]);
     if(atlas)paint.userData.plantedHeight=planeHeight*(184/192-.5);
   }
   function syncChar(q,o,l=0){
@@ -1348,17 +1351,20 @@ function showRendererFailure(error){
     if(q.userData.neighborPaint){q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));if(Number.isFinite(n.facing))q.rotation.y=n.facing;return}
     syncChar(q,n);if(Number.isFinite(n.facing))q.rotation.y=n.facing;
   }
-  const atlasTextureCache=new Map(),atlasMaterialCache=new Map(),projectBillboardFeet=createBillboardGroundProjector(T);
+  const atlasTextureCache=new Map(),atlasMaterialCache=new Map(),projectBillboardFeet=createBillboardGroundProjector(T),atlasDepthFoot=new T.Vector3();
   function atlasSprite(kind,scale){
     const source=bridge.getNpcSpriteCanvas?.(kind),grid=bridge.npcSpriteGrids?.[kind];if(!source||!grid)return null;
     let tx=atlasTextureCache.get(kind);if(!tx){tx=new T.Texture(source);tx.needsUpdate=true;tx.colorSpace=T.SRGBColorSpace;tx.generateMipmaps=false;tx.minFilter=tx.magFilter=T.LinearFilter;tx.premultiplyAlpha=true;atlasTextureCache.set(kind,tx)}
     let material=atlasMaterialCache.get(kind);if(!material){material=new T.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});atlasMaterialCache.set(kind,material)}
-    const geometry=new T.PlaneGeometry(scale*(grid.frameWidth&&grid.frameHeight?grid.frameWidth/grid.frameHeight:1),scale,1,grid.groundProjection?32:1),uv=geometry.attributes.uv,q=new T.Mesh(geometry,material);q.userData={[kind+"Sprite"]:true,grid,plantedHeight:grid.pivot?scale*(grid.pivot[1]/grid.frameHeight-.5):null,baseUv:Float32Array.from(uv.array),spriteFrame:-1,spriteRow:-1,spriteFlip:null};return q
+    const geometry=new T.PlaneGeometry(scale*(grid.frameWidth&&grid.frameHeight?grid.frameWidth/grid.frameHeight:1),scale,1,grid.groundProjection?32:1),uv=geometry.attributes.uv,q=new T.Mesh(geometry,material);q.userData={[kind+"Sprite"]:true,grid,plantedHeight:grid.pivot?scale*(grid.pivot[1]/grid.frameHeight-.5):null,baseUv:Float32Array.from(uv.array),spriteFrame:-1,spriteRow:-1,spriteFlip:null};installSpriteDepth(T,q,[0,-(q.userData.plantedHeight??scale/2),0]);return q
   }
   function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",Germany3DBridge.npcSpriteGrids.borderPourer.pivot?2.62*224/208:2.62):n.special==="merkel"?atlasSprite("merkel",2.42):n.special==="bayern"?atlasSprite("bayern",2.91):n.special==="alice"?atlasSprite("alice",2.42):null}
   function npcSprite(n){
     const sprite=specialSprite(n)||(n.spriteKind?atlasSprite(n.spriteKind,n.spriteScale||2.42):null);
-    if(sprite&&n.sandale)sprite.userData.atlasMouth=createAtlasCharacterMouth(T,sprite,n);
+    if(sprite&&n.sandale){
+      sprite.userData.atlasMouth=createAtlasCharacterMouth(T,sprite,n);
+      installSpriteDepth(T,sprite,[0,-(sprite.userData.plantedHeight??sprite.geometry.parameters.height/2),0]);
+    }
     const id=registeredStreetPaint(n);if(sprite&&id)fitStreetFallback(sprite,streetPaintManifest[id]);
     return sprite;
   }
@@ -1375,6 +1381,12 @@ function showRendererFailure(error){
     if(frame!==q.userData.spriteFrame||row!==q.userData.spriteRow||flip!==q.userData.spriteFlip){const uv=q.geometry.attributes.uv,base=q.userData.baseUv,u0=frame/grid.cols,v0=1-(row+1)/grid.rows;for(let i=0;i<uv.count;i++){const bx=base[i*2],by=base[i*2+1];uv.setXY(i,u0+(flip?1-bx:bx)/grid.cols,v0+by/grid.rows)}uv.needsUpdate=true;q.userData.spriteFrame=frame;q.userData.spriteRow=row;q.userData.spriteFlip=flip}
     const ground=bridge.stationElevation(o.x,o.y),p=q.userData.plantedHeight,r=camera.quaternion;q.quaternion.copy(r);
     if(p!=null)q.position.set(X(o.x)+2*(r.x*r.y-r.z*r.w)*p,ground+(1-2*(r.x*r.x+r.z*r.z))*p,Z(o.y)+2*(r.y*r.z+r.x*r.w)*p);else q.position.set(X(o.x),height+ground,Z(o.y))
+    if(p==null){
+      q.updateWorldMatrix(true,false);atlasDepthFoot.set(X(o.x),ground,Z(o.y));q.worldToLocal(atlasDepthFoot);
+      const anchors=q.geometry.attributes.spriteDepthFoot;
+      for(let i=0;i<anchors.count;i++)anchors.setXYZ(i,atlasDepthFoot.x,atlasDepthFoot.y,atlasDepthFoot.z);
+      anchors.needsUpdate=true;
+    }
     if(grid.groundProjection)projectBillboardFeet(q,camera,ground+.012);
     q.userData.atlasMouth?.sync(grid,o,bridge.getStreetSpeech?.(o),bridge.getHUDState?.()?.paused===true);
   }
@@ -1736,7 +1748,7 @@ function showRendererFailure(error){
   const presidentName=amtLabel("FRANK-WALTER STEINMEIER",768,128,"#e1c174","#17130c",.75),presidentNameplate=new T.Mesh(new T.PlaneGeometry(1.55,.16),new T.MeshBasicMaterial({map:presidentName.texture}));
   presidentNameplate.position.set(0,-1.06,.14);presidentFrame.add(presidentNameplate);
   function amtPaintMaterial(height){
-    const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide,forceSinglePass:true});
+    const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:true,side:T.DoubleSide,forceSinglePass:true});
     const breath={value:0};material.userData.breath=breath;
     material.onBeforeCompile=shader=>{shader.uniforms.amtBreath=breath;shader.uniforms.amtBodyHeight={value:height};
       // Continuous chest/shoulder motion, with the lower body and sole pivot planted.
@@ -1800,7 +1812,7 @@ function showRendererFailure(error){
     const geometry=new T.PlaneGeometry(width,height),uv=geometry.attributes.uv;
     for(let i=0;i<uv.count;i++)uv.setX(i,(column*384+4+uv.getX(i)*376)/1536);
     uv.needsUpdate=true;
-    const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,depthWrite:false,side:T.DoubleSide}));
+    const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:true,side:T.DoubleSide}));
     mesh.position.set(x,y,z);mesh.rotation.y=turn;mesh.visible=false;
     amtScene.add(mesh);amtPaintedProps.push(mesh);
   }

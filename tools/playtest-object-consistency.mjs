@@ -1,13 +1,12 @@
 // Real Three.js geometry checks plus diagnostic views of the canonical city.
 // Run: node tools/playtest-object-consistency.mjs (PLAYWRIGHT_MODULE may override).
-import {createRequire} from 'node:module';
 import {createServer} from 'node:http';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {resolve,sep,extname} from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-const require=createRequire(import.meta.url);
-const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+import {installedPlaywright,chromiumExecutable} from './browser-harness.mjs';
+const {chromium}=installedPlaywright();
 const root=fileURLToPath(new URL('..',import.meta.url)).replace(/[\\/]$/,'');
 const output=resolve(process.env.PLAYTEST_OUTPUT||'output/object-consistency');mkdirSync(output,{recursive:true});
 const source=readFileSync(resolve(root,'world3d.js'),'utf8');
@@ -18,7 +17,12 @@ async function settleVisibility(page,id,obstructing){
  // Capture the actual completed state rather than assuming software-rendered
  // diagnostic frames meet a wall-clock screenshot delay. Fade timing has its
  // separate production-function checks below.
+ try{
  await page.waitForFunction(({id,obstructing})=>{Germany3D.sync();Germany3D.prepareNearbyAssets();const state=Germany3D.buildingVisibility.find(b=>b.id===id);return Germany3D.nearbyAssetsReady&&state.obstructing===obstructing&&(obstructing?state.opacity<=.04:state.opacity>=.99)},{id,obstructing},{polling:200,timeout:30000});
+ }catch(error){
+  console.error(JSON.stringify({stage:'visibility-timeout',id,obstructing,state:await page.evaluate(id=>({building:Germany3D.buildingVisibility.find(b=>b.id===id),nearbyAssetsReady:Germany3D.nearbyAssetsReady,player:{x:Germany3DBridge.player.x,y:Germany3DBridge.player.y},assets:Germany3D.inspectAssets()}),id)}));
+  throw error;
+ }
 }
 async function awaitCanonicalEntry(page,requestedUrl){
  await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
@@ -32,7 +36,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 let browser;
 const report={geometryOnly,pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed','Root and compatibility URLs sample the same maintained renderer; landmark comparison is route consistency, not independent-prototype parity']};
 try{
- browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
+ browser=await chromium.launch({headless:true,executablePath:chromiumExecutable(chromium),args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}],['android-landscape-emulated',{width:844,height:390}]]){
   const context=await browser.newContext({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop'});
   try{
@@ -58,6 +62,7 @@ try{
   }
   const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,personMaterial,personCharacter,personBox,playerTargets,visibility,url})=>{
    const T=await import(url),X=x=>x,Z=y=>y,S=.02;
+   const {installSpriteDepth}=await import('./sprite-depth.js');
    const bridge={player:{x:0,y:0},stationElevation:()=>0};
    const camera=new T.PerspectiveCamera(48,1,.1,100);camera.position.set(0,10,10);
    const buildingSightline=new T.Raycaster(),sightlineTarget=new T.Vector3(),sightlineDirection=new T.Vector3();
@@ -95,10 +100,10 @@ try{
    for(const [i,model] of models.entries()){
     let planes=0;model.traverse(node=>{if(node.isMesh&&node.geometry.type==='PlaneGeometry')planes++});
     check('3d-body-articulated-'+i,planes===0&&!!model.userData.ll&&!!model.userData.ra);
-    const bounds=new T.Box3().setFromObject(model);check('3d-body-height-'+i,Math.abs(bounds.max.y-(i?1.56:1.5))<1e-6&&bounds.min.y>=0);
+    const bounds=new T.Box3().setFromObject(model);check('3d-body-height-'+i,Math.abs(bounds.max.y-(i?2.33:1.5))<1e-6&&bounds.min.y>=0);
    }
    playerMesh=character('npc');const personScene=new T.Scene();personScene.add(playerMesh);playerMesh.rotation.y=1.2;
-   const forEachStreetBody=visit=>visit(bridge.player,playerMesh),jwdScenery=[],trainSlots=[];
+   const forEachStreetBody=visit=>visit(bridge.player,playerMesh),cityAssetSlots=[],jwdScenery=[],trainSlots=[];
    const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
    const updateGroupVisibility=eval(`(${visibility.trim()})`);
    camera.position.set(0,11.5,14);camera.lookAt(0,1,-2.7);updateGroupVisibility();
@@ -119,7 +124,6 @@ try{
    playerMesh.position.set(3,2,4);playerMesh.rotation.y=.7;updateGroupVisibility();const moved=streetPlayerSightlineTargets();
    check('fallback-targets-use-fresh-parent-transform',moved[0].distanceTo(head.clone().add(new T.Vector3(3,2,4)))<1e-6);
    check('collision-root-pose-unchanged',playerMesh.position.equals(new T.Vector3(3,2,4))&&Math.abs(playerMesh.rotation.y-.7)<1e-12);
-   for(const material of personFallbackMaterials.values()){material.map.dispose();material.dispose()}fallback.geometry.dispose();
    for(const model of models){const geometries=new Set();model.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});for(const geometry of geometries)geometry.dispose()}for(const material of Object.values(M))material.dispose();
    // Pixel checks use the actual production sprite material and ordinary depth.
    const painted=document.createElement('canvas');painted.width=painted.height=16;painted.getContext('2d').fillStyle='#ff0000';painted.getContext('2d').fillRect(2,2,12,12);
@@ -128,6 +132,17 @@ try{
    const sprite=atlasSprite('probe',2),wall=new T.Mesh(new T.PlaneGeometry(2,2),new T.MeshBasicMaterial({color:0x0000ff}));
    const scene=new T.Scene();scene.add(sprite,wall);const view=new T.PerspectiveCamera(48,1,.1,20);view.position.set(0,0,5);view.lookAt(0,0,0);
    const renderer=new T.WebGLRenderer({preserveDrawingBuffer:true});renderer.setSize(64,64);renderer.outputColorSpace=T.SRGBColorSpace;
+   // Render the actual procedural paint with its production pitch/pivot update.
+   // This wall is behind the simulation sole, but ahead of the old tilted head.
+   playerMesh.position.set(0,0,0);camera.position.set(0,11.5,14);camera.lookAt(0,1,-2.7);updateGroupVisibility();
+   const fallbackWall=new T.Mesh(new T.BoxGeometry(4,4,.1),new T.MeshBasicMaterial({color:0x0000ff}));fallbackWall.position.set(0,2,-.35);
+   renderer.setSize(256,256);renderer.render(personScene,camera);
+   const fallbackPixel=()=>{const p=streetPlayerSightlineTargets()[0].clone().project(camera),rgba=new Uint8Array(4),gl=renderer.getContext();gl.readPixels(Math.round((p.x+1)*128),Math.round((p.y+1)*128),1,1,gl.RGBA,gl.UNSIGNED_BYTE,rgba);return [...rgba]};
+   const bareHead=fallbackPixel();personScene.add(fallbackWall);renderer.render(personScene,camera);const headBehindWall=fallbackPixel();
+   check('procedural-fallback-visible-head-pixel',bareHead[3]===255&&bareHead[2]<200);
+   check('procedural-fallback-in-front-of-wall',headBehindWall.every((v,i)=>v===bareHead[i]));
+   fallbackWall.geometry.dispose();fallbackWall.material.dispose();
+   for(const material of personFallbackMaterials.values()){material.map.dispose();material.dispose()}fallback.geometry.dispose();renderer.setSize(64,64);
    function pixel(z){sprite.position.z=z;renderer.render(scene,view);const rgba=new Uint8Array(4);renderer.getContext().readPixels(32,32,1,1,renderer.getContext().RGBA,renderer.getContext().UNSIGNED_BYTE,rgba);return [...rgba]}
    const front=pixel(1),back=pixel(-1);check('sprite-in-front-of-wall',front[0]>200&&front[2]<20);check('sprite-behind-wall',back[2]>200&&back[0]<20);check('sprite-pixel-depth',sprite.material.depthWrite&&sprite.material.depthTest);
    wall.material.transparent=true;wall.material.opacity=.03;wall.material.depthWrite=false;wall.material.needsUpdate=true;const faded=pixel(-1);check('sprite-visible-through-faded-wall',faded[0]>180);
