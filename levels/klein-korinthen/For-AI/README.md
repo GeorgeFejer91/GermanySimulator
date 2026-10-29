@@ -29,7 +29,7 @@ The existing primary checkout has damaged/synchronization-conflicted Git metadat
 
 Evidence belongs under ignored `output/klein-korinthen/`. Physical Android and perceptual audio listening must be reported separately from emulation/silent checks.
 
-## v0.2 surreal bureaucracy expansion — active
+## v0.2 surreal bureaucracy expansion — released
 
 User request 2026-10-29: push the surreal German bureaucratic nightmare further, keep the buildings and styling easy to integrate later, and finish stress and UI tests. The v0.1 release remains available while this candidate is validated. Owner: the same Codex integrator.
 
@@ -44,7 +44,7 @@ The archive consists of monumental ring binders that grow from an ordinary house
 - [x] Seeded reducer stress, collision/building translation properties, lifecycle/input/resize browser stress.
 - [x] Desktop, narrow portrait, landscape, large display and enlarged-text UI checks.
 - [x] Same frozen candidate: independent Physics P1–P4 and Camera C4/C5 plus applicable X1 evidence. C1–C3 third-person fading does not apply to this first-person camera; stationary cast P5 and non-driving parked cars P6/P7 are unchanged/out of scope.
-- [ ] Experimental v0.2 tag and unlisted URL verified; main remains untouched.
+- [x] Experimental v0.2 tag and unlisted URL verified; no main-game source changed in this release.
 
 ### v0.2 executed evidence
 
@@ -67,6 +67,8 @@ The archive consists of monumental ring binders that grow from an ordinary house
 | Interrupted measurement produces no evidence | Modal/blur/visibility cancellation | Real-input cancel/retry case |
 | Host owns persistent city rewards | Stable achievement ID; isolated adapter callbacks | State guard tests and host lifecycle; the main-city reward integration itself is not yet installed |
 
-Perceptual listening and physical Android remain NOT RUN. Browser tests are headless and muted before navigation; game audio scheduling stays enabled where tested. Final review and live-release evidence will be recorded below.
+Perceptual listening and physical Android remain NOT RUN. Browser tests are headless and muted before navigation; game audio scheduling stays enabled where tested. Final review and live-release evidence is recorded below.
 
 Independent reviews on all 39 hashes in `candidate-v2.json` PASS. Physics freshly checked 274 solids, all 172 kit-emitted solid signatures, 3,378 movement probes, every solid-center recovery, and full 0.3 m-grid reachability to all car/resident/station approaches. The integrator supplied rendered collision and natural-route evidence. Camera freshly rendered six loaded/fallback desktop/portrait/landscape profiles plus three full-entry pause/resize profiles, verified C4 depth/grounding and C5 ordinary/monument proportions, and found no actionable issue. Both distinguish source/CPU, fresh rendered, supplied and unrun physical-device evidence. Reports: ignored `physics-v2-review.md` and `camera-v2-review.md` under `output/klein-korinthen/`.
+
+Released on 2026-10-29 as commit `07aace2a961ec8ab7546479a8a33b2934bf7c834`, tag `experimental-klein-korinthen-v0.2.0`, branch `codex/experimental-klein-korinthen`. [Play v0.2](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/labor/vereinigung-7f3c9d/index.html). Live verification at 01:43 UTC: all 33 runtime/media files match their local SHA-256 hashes; desktop and Android-emulated entry/start/map pass with zero page exceptions or failed level requests. Both main-site `/` and `/3d.html` return HTTP 200. The release diff contains no change to the main entry/controller/style/renderer. Main has advanced independently since v0.1; this experiment remains based on its own released branch. The preview provider may show its first-visit “Open the page” notice. The URL is unlisted and noindex, not authenticated. v0.1 remains available at its original immutable tag. Receipt: ignored `live-verification-v2.json`.

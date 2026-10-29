@@ -122,3 +122,5 @@ Maintenance belongs to the integrator of each affected release. This requirement
 ### Klein-Korinthen v0.2 — bureaucratic nightmare
 
 Experimental tag `experimental-klein-korinthen-v0.2.0`: [unlisted playable level](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/labor/vereinigung-7f3c9d/index.html). Same isolated path and unique `assets/klein-korinthen/share.png` illustration; canonical/OG metadata uses the versioned URL. A0 application authorization, E31 ruler oath and C5 final audit join the five-report mission. v0.1 stays available at its original tag. No main-game link or main deployment is changed. Browser evidence and physical-device limits are owned by `levels/klein-korinthen/For-AI/README.md`.
+
+Verified 2026-10-29: 33/33 runtime/media HTTPS hashes, live desktop and Android-emulated entry/start/map PASS. Main root and 3d.html both HTTP 200. Full natural mission, 72 UI states, 40,000 seeded actions, 15 lifecycle stress visits and independent Physics/Camera reviews PASS. Physical Android and perceptual listening NOT RUN. First visit may require the preview host’s “Open the page”.
