@@ -1,0 +1,41 @@
+{
+  "generator": "OpenAI built-in image_gen",
+  "created": "2026-10-23",
+  "useCase": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: one transparent game mouse cursor, standalone cutout, square canvas.\nPrimary request: An original old-fashioned Prussian heraldic war-hand sigil reimagined for the melancholy painterly bureaucratic world of Disco Elysium and Germany Simulator. A single antique ivory-white gloved right hand / heraldic manicule, dorsal three-quarter view, index finger pointing diagonally toward the upper-left, other fingers naturally curled. A short severe Prussian-blue officer's cuff, chipped black enamel trim, tarnished brass piping and one small embossed Prussian eagle seal at the wrist. The gesture reads immediately as a pointing interaction cursor.\nStyle/medium: hand-painted expressionist oil/gouache game illustration; coarse purposeful brush planes, weathered ivory, soot, oxidized brass, muted petrol teal and restrained rust-red accents. Angular melancholy political-surrealist mood. Distinct strong silhouette and a dark ink edge with a thin ivory rim to remain legible over dark and pale backgrounds.\nComposition: exactly ONE hand, filling most of the square canvas with modest clear padding; fingertip is the highest and leftmost point near the upper-left corner, cuff trails to the lower-right. Compact hand-and-wrist only. Deliberately simple broad planes that survive reduction to a 48-pixel cursor. No thin dangling filigree, no detached ornament, no circle or plaque behind it.\nBackground: genuine transparent alpha, completely empty outside the hand, no checkerboard painted into image, no ground, no scene.\nConstraints: no words, no labels, no letters, no watermark, no multiple views, no cursor arrow symbol, no UI mockup. Clean continuous silhouette.",
+  "source": "Generated transparent PNG retained outside shipped runtime under CODEX_HOME/generated_images/01a1695a-d74a-75f1-b823-e0f1484d3f22/exec-29b68ce9-f7b5-4dd7-9914-bc2bc57cd8ff.png",
+  "packaging": "Existing bundled Sharp; original transparent artwork resized without visual edits. 48 and 56 px PNG native cursors; 512 px WebP review master, never requested at runtime.",
+  "hotspot": [
+    3,
+    3
+  ],
+  "exports": [
+    {
+      "file": "prussian-hand-48.png",
+      "width": 48,
+      "height": 48,
+      "runtime": true,
+      "encodedBytes": 4017,
+      "decodedRgbaBytes": 9216,
+      "sha256": "fdbaceea1124e51dbaaf6dc86c8878c4105f7e8b72379699c3c6d4f2de414df8"
+    },
+    {
+      "file": "prussian-hand-56.png",
+      "width": 56,
+      "height": 56,
+      "runtime": true,
+      "encodedBytes": 5243,
+      "decodedRgbaBytes": 12544,
+      "sha256": "f55c4927a6fab2dda317386078ad96f2348c527fd1a43031c73bb122cc766db5"
+    },
+    {
+      "file": "prussian-hand.webp",
+      "width": 512,
+      "height": 512,
+      "runtime": false,
+      "encodedBytes": 70538,
+      "decodedRgbaBytes": 1048576,
+      "sha256": "63f9f722682afa7636e1122f85d1ff8c793a9eae858c99d90d6a94b934e71e93"
+    }
+  ]
+}

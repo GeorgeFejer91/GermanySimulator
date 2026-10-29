@@ -1,5 +1,46 @@
 # Current combined release candidate — 19 October 2026
 
+## Prussian hand cursor release — 29 October 2026
+
+This scoped successor starts from published `99a5f0ce` in the isolated
+`C:/Users/cogpsy-vrlab/.codex/worktrees/prussian-cursor-release/GermanySimulator`
+checkout. It reuses the original 23 October cursor artwork and native 48/56 px
+exports, with prompt and hashes under `assets/cursors/`. Only the canonical
+`index.html` needs a stylesheet link; `3d.html` remains its query/hash-preserving
+compatibility redirect. No held primary runtime, game simulation, world geometry,
+camera, audio, text layout or input owner is copied or changed. Physics/Camera
+reviews are omitted for this unrelated screen-space native cursor scope.
+
+The primary authoring checkout's missing config/HEAD and corrupt refs are preserved.
+Clean, shallow upstream metadata and a separate release worktree recover source
+authority for this candidate without repairing that shared checkout. The native
+worktree tool could not use the recovered metadata outside the listed workspace,
+so the Git fallback is used explicitly; app attachment is unavailable for it.
+Fresh evidence is under this checkout's ignored `output/interaction-cursor-release/`:
+19 focused Node checks pass; the site builder emits 31 direct pages plus aliases;
+the built-site cursor suite passes all 33 checks across desktop, Android portrait/
+landscape emulation, reduced motion and forced system colors. Real Start and
+file-button actions, the compatibility redirect, transparent image decoding,
+fingertip hotspot, failure fallback and no touch/system-color art downloads pass.
+Source/export hashes match. Menu/city captures use a clearly documented QA-only
+image because browser screenshots omit the OS cursor. Questionnaire/welcome skips
+stage the city check and do not establish natural mission flow.
+
+Three cold hardware benchmark runs per desktop/portrait profile pass the existing
+startup, title cadence, drawing-buffer, input and console gates both before and
+after the cursor link. All runs accept nine inputs and have no page errors.
+Desktop startup is 16,502,472 -> 16,512,934 bytes; portrait is 16,126,694 ->
+16,127,509 bytes. Chrome 156.0.8078.49 / Intel Iris Xe, DPR 2, seed 38, local HTTP.
+Host timing is noisy: median desktop input p95 is 430.1/296.9 ms and portrait
+129.4/170.1 ms; sync-interval p95 is 264.5/135.2 ms and 133.1/56.3 ms respectively.
+These measurements establish neither a causal speedup nor physical-device frame
+performance. Physical Android and GPU/displayed-frame timing remain NOT RUN.
+
+The reviewed scoped candidate is ready for the normal fast-forward push to
+origin/main. Refresh upstream before pushing so other validated successors are
+preserved. Pages CI now runs the maintained cursor suite on the built artifact;
+after deployment verify the live root, both PNG hashes and `3d.html` redirect.
+
 ## Merz audio update — 20 October 2026
 
 Integrator-owned scoped successor from published `4362d88`: six supplied MP3s

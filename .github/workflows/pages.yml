@@ -121,6 +121,18 @@ jobs:
           --scenario input --scenario lifecycle --scenario keyboard-de --scenario keyboard-en
           --profile desktop --profile android-portrait --profile android-landscape
           --iterations 1 --output output/browser-ci
+      - name: Check native hand cursor and compatibility entry
+        timeout-minutes: 15
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/tools/browser-ci/node_modules/playwright
+          CHROMIUM_MESA: '1'
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: >-
+          xvfb-run -a node tools/test-browser.mjs stress --root output/site
+          --suite ./tools/interaction-cursor-suite.mjs
+          --profile desktop --profile android-portrait --profile android-landscape
+          --profile reduced --profile system-cursor
+          --output output/browser-ci/interaction-cursor
       - name: Retain failed browser evidence
         if: failure()
         uses: actions/upload-artifact@v4

@@ -403,6 +403,20 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 
 ## Desktop and mobile
 
+The shared `cursor.css` selects original painted Prussian hand art through native
+CSS cursors for a fine hovering pointer outside forced colors. The base 48 × 48
+PNG costs 4,017 encoded / 9,216 decoded RGBA bytes; enabled clickable controls use
+the 56 × 56 PNG at 5,243 / 12,544 bytes. Their combined native delivery stays at
+most 12 KiB. Both have a `(3,3)` fingertip hotspot.
+The browser owns loading, caching and page retirement; there is no JavaScript
+pointer tracking, animation, game texture or new frame work. Touch-only and
+forced-color clients request neither image. Image failure retains `auto`/`pointer`
+fallbacks; existing text, signature, disabled and drag affordances remain in force.
+The root game supplies the same cursor after the existing `3d.html` compatibility
+redirect. The 512 px WebP master and prompt/provenance are never runtime requests.
+Exact bytes and hashes live in `assets/cursors/provenance.json`; the maintained
+browser check is `tools/interaction-cursor-suite.mjs` through the existing harness.
+
 - Desktop billboard direction: high-resolution, Weimar-era-inspired commercial artwork with deterministic game-rendered copy. For commercial fax artwork, avoid real propaganda, extremist symbols, political insignia, and text baked unreliably into generated images. The user-requested dated historical flag on the Kiesinger monument and CDU landmark banners are separate, code-drawn environment details under the contracts below.
 - Mobile billboard direction: the existing minimalist fax-machine vector style or an equally small deterministic alternative.
 - The shipped desktop fax-ad pool is the two user-supplied, game-readable motifs under `assets/billboards/fax/`; the eagle-insignia variants from the source pack are intentionally not shipped. Three.js maps them onto 3D billboard meshes, while viewports below 700 px keep a generated lightweight fax texture and do not request the WebPs.

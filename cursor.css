@@ -1,0 +1,12 @@
+/* Native cursor: the fingertip stays at the input coordinate; no tracking loop. */
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  :root {
+    cursor: url("./assets/cursors/prussian-hand-48.png") 3 3, auto;
+  }
+
+  :root :is(button, a[href], summary, select, label[for],
+    input[type="button"], input[type="submit"], input[type="reset"],
+    input[type="checkbox"], input[type="radio"], [role="button"]):not(:disabled):not([aria-disabled="true"]) {
+    cursor: url("./assets/cursors/prussian-hand-56.png") 3 3, pointer;
+  }
+}

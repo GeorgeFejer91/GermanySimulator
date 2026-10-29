@@ -1,5 +1,13 @@
 # Germany Simulator credits
 
+## Prussian heraldic mouse cursor
+
+The weathered ivory glove, Prussian-blue officer's cuff and brass eagle seal are
+original artwork generated for this game with OpenAI ImageGen, following the
+user's Prussian heraldry and Disco Elysium reference. The
+[generation prompt, export sizes and hashes](assets/cursors/provenance.json)
+accompany the transparent 48/56 px native cursors and the non-runtime review master.
+
 Six additional user-supplied `GS Merz` synthetic takes were integrated on
 20 October 2026 (five new speeches and one replacement). The existing selected
 profile and model-license restrictions remain; source and encoded receipts are
