@@ -27,6 +27,10 @@ try{
     async function dialogue(){for(let i=0;i<8&&await page.locator('#conversation').isVisible();i++)await page.locator('#dialogue-next').click();}
     await walk(-9,37);await page.keyboard.press('e');await dialogue();assert.equal((await snapshot()).state.stage,'patrol');
     await page.screenshot({path:out+'/joined.png'});
+    await walk(-9,33);await walk(-17,31);await walk(-24,31);await walk(-26,35);await page.keyboard.press('e');await page.locator('#paperwork').waitFor({state:'visible'});
+    await page.locator('[data-choice="wohnen"]').click();assert.equal((await snapshot()).state.rejections,1);assert.equal((await snapshot()).state.permits.length,0);
+    await page.locator('[data-choice="feststellung"]').click();assert.deepEqual((await snapshot()).state.permits,['A0']);await page.screenshot({path:out+'/application.png'});await page.locator('#form-close').click();
+    await walk(-24,31);await walk(-17,31);await walk(-8,32);await walk(-8,26.7);await page.keyboard.press('e');await page.locator('#paperwork').waitFor({state:'visible'});await page.locator('[data-choice="genehmigung"]').click();await page.locator('#form-close').click();
     async function measure(id,point){await walk(...point);await page.keyboard.press('e');await page.locator('#evidence').waitFor({state:'visible'});assert.equal((await snapshot()).state.measured.includes(id),true);console.log('Measured '+id);}
     await walk(-6,30);await measure('kk-01',[-5.3,26]);await page.screenshot({path:out+'/measurement.png'});await page.locator('#file-report').click();
     await walk(-5.3,20);await walk(5.3,20);await measure('kk-02',[5.3,15]);await page.locator('#file-report').click();assert.equal((await snapshot()).state.reports.length,1);assert.equal((await snapshot()).state.mistakes,1);
@@ -34,7 +38,8 @@ try{
     await walk(-5.3,-10);await walk(5.3,-10);await measure('kk-04',[5.3,-18]);await page.locator('#file-report').click();await dialogue();
     await walk(5.3,-51.5);await walk(47,-51.5);await measure('kk-09',[47,-20]);await page.locator('#file-report').click();
     await measure('kk-07',[47,17]);await page.locator('#file-report').click();await dialogue();assert.equal((await snapshot()).state.stage,'return');
-    await walk(47,52.5);await walk(-12,52.5);await walk(-12,40);await walk(-9,33);await walk(-18,33);await page.keyboard.press('e');await dialogue();await page.locator('#certificate').waitFor({state:'visible'});assert.equal((await snapshot()).state.stage,'member');
+    await walk(47,52.5);await walk(12,52.5);await walk(12,40.5);await page.keyboard.press('e');await page.locator('#paperwork').waitFor({state:'visible'});await page.locator('[data-choice="vollstaendig"]').click();await page.screenshot({path:out+'/audit.png'});await page.locator('#form-close').click();
+    await walk(12,52.5);await walk(-12,52.5);await walk(-12,40);await walk(-9,33);await walk(-18,33);await page.keyboard.press('e');await dialogue();await page.locator('#certificate').waitFor({state:'visible'});assert.equal((await snapshot()).state.stage,'member');
     await page.screenshot({path:out+'/certificate.png'});await page.locator('#continue').click();await dialogue();
     await page.reload();await page.waitForFunction(()=>window.__kleinKorinthen);assert.equal((await snapshot()).state.stage,'member');
     assert.deepEqual(errors,[]);writeFileSync(out+'/natural-flow.json',JSON.stringify({verdict:'PASS',snapshot:await snapshot(),errors},null,2));console.log('PASS natural keyboard mission, legal rejection, graduation and reload');

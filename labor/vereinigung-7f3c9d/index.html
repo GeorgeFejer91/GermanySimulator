@@ -6,14 +6,15 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#233c32">
   <title>Klein-Korinthen · Grand Theft Amt</title>
-  <meta name="description" content="Fünf Meldungen. Keine Freunde. Willkommen im Verein zur Wahrung des rechten Winkels.">
+  <meta name="description" content="Beantragen Sie die Antragsberechtigung. Vereidigen Sie den Zollstock. Fünf Meldungen. Keine Freunde. Klein-Korinthens Bürokratie wächst bis in den Himmel.">
   <meta property="og:title" content="Klein-Korinthen · Fünf Meldungen. Keine Freunde.">
-  <meta property="og:description" content="Ein neues Kapitel Grand Theft Amt: Werden Sie Mitglied Ihrer örtlichen Nachbarschaftsvereinigung. Bringen Sie einen Zollstock mit.">
+  <meta property="og:description" content="Grand Theft Amt: Ein Dorf aus Aktenordnern, ein vereidigter Zollstock und eine Prüfung der Vollständigkeitsprüfung. Fünf Meldungen bis zur Zugehörigkeit.">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html">
-  <meta property="og:url" content="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/labor/vereinigung-7f3c9d/index.html">
-  <meta property="og:image" content="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.1.0/assets/klein-korinthen/share.png">
+  <link rel="canonical" href="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/labor/vereinigung-7f3c9d/index.html">
+  <meta property="og:url" content="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/labor/vereinigung-7f3c9d/index.html">
+  <meta property="og:image" content="https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/assets/klein-korinthen/share.png">
   <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Dietmar misst den Bordsteinabstand, während Gisela die Nachbarschaft abstempelt. Klein-Korinthen: Fünf Meldungen. Keine Freunde.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/faxgeraet.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../levels/klein-korinthen/level.css">
@@ -27,7 +28,7 @@
       <div class="location"><span class="eyebrow" data-fit>GRAND THEFT AMT · BRANDENBURG</span><strong data-fit>Klein-Korinthen</strong><span id="membership" data-fit>Unauffälliger Zugezogener</span></div>
       <nav aria-label="Spielmenü"><button id="map-button" data-fit>Karte <kbd>M</kbd></button><button id="ledger-button" data-fit>Akte <kbd>J</kbd></button><button id="menu-button" aria-label="Pause und Einstellungen" data-fit>Pause</button></nav>
     </header>
-    <aside id="objective" hidden aria-label="Auftrag"><div class="objective-top"><span data-fit>AUFNAHMEVERFAHREN</span><b id="counter" data-fit>0 / 5</b></div><p id="objective-text" data-fit>Beim Vorsitzenden vorstellig werden.</p><div class="progress" aria-hidden="true"><i id="progress-fill"></i></div></aside>
+    <aside id="objective" hidden aria-label="Auftrag"><div class="objective-top"><span data-fit>AUFNAHMEVERFAHREN</span><b id="counter" data-fit>0 / 5</b></div><p id="objective-text" data-fit>Beim Vorsitzenden vorstellig werden.</p><div id="paper-trail" aria-label="Verfahrensstempel" data-fit></div><div class="progress" aria-hidden="true"><i id="progress-fill"></i></div></aside>
     <div id="reticle" hidden aria-hidden="true">+</div>
     <div id="toast" role="status" hidden data-fit></div>
     <div id="hint" hidden><span id="nearby" data-fit></span><button id="interact" data-fit>E · Ansprechen</button></div>
@@ -45,7 +46,7 @@
       <p class="chapter" data-fit>Verein zur Wahrung des rechten Winkels e. V.</p>
       <h1 id="title" data-fit>Klein-<br>Korinthen.</h1>
       <p class="tagline" data-fit>Fünf Meldungen.<br>Keine Freunde.</p>
-      <p class="intro" data-fit>Berlin liegt hinter Ihnen. Die Integration noch vor Ihnen. Werden Sie Mitglied der örtlichen Nachbarschaftsvereinigung — ein falsch geparktes Auto nach dem anderen.</p>
+      <p class="intro" data-fit>Berlin liegt hinter Ihnen. Die Antragsberechtigung noch vor Ihnen. Vereidigen Sie Ihren Zollstock. Prüfen Sie fünf Autos. Lassen Sie die Prüfung prüfen. Werden Sie endlich normal.</p>
       <button id="start" class="primary" data-fit disabled>Die Nachbarschaft wird vermessen …</button>
       <p class="fineprint" id="loading" role="status" data-fit>Die Hecken werden auf Linie gebracht.</p>
       <span class="stamp" aria-hidden="true">GEPRÜFT<br>AUF VERDACHT</span>
@@ -57,6 +58,8 @@
     <p id="spoken" data-fit></p><p id="translation" lang="en" data-fit></p>
     <div class="dialogue-footer"><span id="voice-status" data-fit></span><button id="dialogue-next" class="primary" data-fit>Weiter</button></div>
   </dialog>
+
+  <dialog id="paperwork" aria-labelledby="form-title"><span class="eyebrow" data-fit>AMT FÜR DIE VERWALTUNG DES VERWALTENS</span><h2 id="form-title" data-fit></h2><p id="form-question" data-fit></p><div id="form-choices"></div><p id="form-response" role="status" data-fit></p><button id="form-close" data-close="paperwork" data-fit>Vorgang verlassen</button></dialog>
 
   <dialog id="evidence" aria-labelledby="evidence-title">
     <span class="eyebrow" data-fit>ANLAGE 30-C · BORDSTEINABSTAND</span><h2 id="evidence-title" data-fit>Messprotokoll</h2>
@@ -70,6 +73,7 @@
   <dialog id="ledger-dialog" aria-labelledby="ledger-title"><div class="panel-head"><h2 id="ledger-title" data-fit>Ihre Nachbarschaftsakte</h2><button data-close="ledger-dialog" aria-label="Akte schließen">×</button></div><p data-fit>Nur gemessene Überschreitungen zählen. Mehr als 30 cm. Nicht mindestens.</p><div id="ledger-list"></div><div class="ledger-nav"><button id="ledger-prev" data-fit>Zurück</button><span id="ledger-page" data-fit></span><button id="ledger-next" data-fit>Weiter</button></div></dialog>
   <dialog id="settings" aria-labelledby="settings-title"><div class="panel-head"><h2 id="settings-title" data-fit>Dienstunterbrechung</h2><button data-close="settings" aria-label="Pause beenden">×</button></div><p data-fit>Die Nachbarschaft kann kurz ohne Sie falsch parken.</p><label class="setting" data-fit><input id="audio-enabled" type="checkbox" checked> Stimmen und Geräusche</label><label class="setting" data-fit><input id="english-enabled" type="checkbox" checked> Englische Untertitel / English subtitles</label><p class="settings-help" data-fit>WASD oder Pfeiltasten: gehen. Maus auf der Welt ziehen oder Q / R: umsehen. E: ansprechen / messen. M: Karte. J: Akte. Escape: schließen / pausieren. Auf dem Handy: links gehen, rechts wischen.</p><button id="resume" class="primary" data-fit>Pflichtgefühl fortsetzen</button><button id="restart" data-fit>Neues Aufnahmeverfahren</button><p class="fineprint" data-fit>Experimentelles Kapitel · Fortschritt wird nur in diesem Browser gespeichert.</p></dialog>
   <dialog id="certificate" aria-labelledby="certificate-title"><span class="eyebrow" data-fit>VEREIN ZUR WAHRUNG DES RECHTEN WINKELS E. V.</span><h2 id="certificate-title" data-fit>Sie gehören jetzt dazu.</h2><p class="certificate-sub" data-fit>Ordentliches Mitglied.<br>Außerordentlich anstrengend.</p><div class="seal" aria-hidden="true">§<small>MITGLIED</small></div><p id="certificate-result" data-fit></p><p id="certificate-bonus" data-fit></p><p data-fit>Ihr nächstes Ehrenamt: prüfen, ob andere ihr Ehrenamt ernst genug nehmen.</p><div class="actions"><button id="continue" class="primary" data-fit>Weiter kontrollieren</button><button id="certificate-restart" data-fit>Noch einmal zuziehen</button></div></dialog>
+  <p id="bulletin" hidden data-fit></p>
   <button id="exit-level" hidden>Zurück nach Berlin</button>
   <script type="module" src="../../levels/klein-korinthen/app.mjs"></script>
 </body>

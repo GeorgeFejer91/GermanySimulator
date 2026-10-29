@@ -3,6 +3,19 @@ export const REQUIRED_REPORTS = 5;
 export const SAVE_KEY = 'gta-klein-korinthen-v1';
 export const SPAWN = {x: -8, z: 45, yaw: 0};
 export const BOUNDS = {minX:-66,maxX:66,minZ:-62,maxZ:62};
+export const STATIONS = {
+  A0:{id:'A0',x:-26,z:33,support:.18,title:'Antrag auf Antragsberechtigung',short:'A0 · Existenzstelle',sign:'ANTRAGSANNAHME',subtitle:'Anwesenheit nur mit Anwesenheitsgrund.',question:'Warum sind Sie hier?',choices:[['wohnen','Weil ich hier wohne.'],['feststellung','Zur Feststellung meiner Anwesenheit.'],['hilfe','Ich brauche eigentlich nur Hilfe.']],answer:'feststellung',rejection:'Sachverhalte ersetzen keine Begründung. Bitte begründen Sie Ihre Existenz verwaltungstechnisch.',receipt:'A0 erteilt. Ihre Anwesenheit ist vorläufig nicht auszuschließen.',next:'Weiter zum Eichaltar E31, neben dem orangefarbenen Auto.'},
+  E31:{id:'E31',x:-8,z:24,support:-.01,title:'Eidesstattliche Zentimetererklärung',short:'E31 · Eichaltar',sign:'EICHALTAR',subtitle:'Der Zollstock glaubt. Sie unterschreiben.',question:'Was ist ein Zentimeter?',choices:[['einheit','Eine Längeneinheit.'],['gefuehl','Ungefähr so viel.'],['genehmigung','Ein genehmigter Abstand zwischen zwei Strichen.']],answer:'genehmigung',rejection:'Messbare Wirklichkeit ist ohne Zuständigkeit nur eine Privatmeinung.',receipt:'E31 erteilt. Der Zollstock ist nun länger zuständig als Sie.',next:'Jetzt fünf verschiedene Überschreitungen messen und melden.'},
+  C5:{id:'C5',x:12,z:38,support:-.01,title:'Prüfung der Vollständigkeitsprüfung',short:'C5 · Schlussprüfung',sign:'SCHLUSSPRÜFUNG',subtitle:'Geöffnet bis zum Beginn der Öffnungszeit.',question:'Sind Ihre fünf Meldungen vollständig?',choices:[['ja','Ja.'],['vollstaendig','Die Unvollständigkeit wurde vollständig ausgeschlossen.'],['nachsehen','Sie können doch einfach nachsehen.']],answer:'vollstaendig',rejection:'„Ja“ ist eine Meinung. Nachsehen wäre eine Dienstleistung. Wir benötigen eine Feststellung.',receipt:'C5 erteilt. Die Prüfung wurde ungeprüft geprüft.',next:'Gisela am Vereinsheim darf Sie jetzt abstempeln.'}
+};
+export const BUREAUCRACY_BULLETINS = [
+  'Ruhezeit gilt auch für innere Unruhe.',
+  'Der Antrag auf Abschaffung des Antrags ist nur auf Antrag erhältlich.',
+  'Ab drei Meldungen ist Ihr Misstrauen gemeinnützig.',
+  'Die Digitalisierung wurde ausgedruckt und zur Sicherheit abgeheftet.',
+  'Der Dienstweg ist das Ziel. Das Ziel ist heute nicht im Haus.',
+  'Fünf Fälle. Die Menschlichkeit kann jetzt geschlossen werden.'
+];
 export const CAST = {
   dietmar:{name:'Dietmar Kantenreiter',role:'Vorsitzender · DIN ist sein Vorname',x:-11,z:36,column:0,voiceId:'kk-dietmar-kantenreiter'},
   gisela:{name:'Gisela Durchschlag',role:'Schriftführung · dreifach hält besser',x:-20,z:34,column:1,voiceId:'kk-gisela-durchschlag'},
@@ -40,6 +53,14 @@ export const LINES = {
   certificate:{speaker:'gisela',de:'Fünf Meldungen, keine Freunde. Sie sind angekommen. Hiermit ernenne ich Sie zum ordentlichen Mitglied mit außerordentlichem Mitteilungsbedürfnis.',en:'Five reports, no friends. You have arrived. I hereby appoint you an ordinary member with an extraordinary urge to inform.'},
   epilogue:{speaker:'dietmar',de:'Nächsten Sonntag messen wir, ob die Gartenzwerge ausreichend Abstand voneinander halten. Gemeinschaft braucht Grenzen.',en:'Next Sunday we measure whether the garden gnomes maintain adequate distance from one another. Community needs boundaries.'}
 };
+Object.assign(LINES,{
+  application:{speaker:'gisela',de:'Bevor Sie etwas beantragen, beantragen Sie bitte die Berechtigung, etwas zu beantragen. Automat links. Wenn er Sie ablehnt, haben Sie immerhin schon einen Vorgang.',en:'Before applying for anything, apply for permission to apply. Machine on the left. If it rejects you, at least you will already have a case.'},
+  calibration:{speaker:'dietmar',de:'Ein ungeeichter Zollstock ist ein Lineal mit politischen Ansichten. Gehen Sie zum Eichaltar. Dort wird aus Länge endlich Zuständigkeit.',en:'An uncertified folding ruler is a ruler with political opinions. Go to the calibration altar. There, length finally becomes jurisdiction.'},
+  reviewRequired:{speaker:'gisela',de:'Fünf Meldungen reichen selbstverständlich nicht. Es fehlt die Prüfung, ob fünf Meldungen reichen. Der Schlussprüfer steht drüben. Er ist ein Automat. Also praktisch unkündbar.',en:'Five reports are obviously not enough. We still need the review of whether five reports are enough. The final auditor is over there. It is a machine. Effectively impossible to dismiss.'},
+  finalAudit:{speaker:'gisela',de:'Ihre Existenz ist erfasst. Ihr Zollstock ist vereidigt. Ihre Prüfung ist geprüft. Jetzt fehlt nur noch ein Mensch, der das alles für normal hält. Herzlichen Glückwunsch. Das sind Sie.',en:'Your existence is recorded. Your ruler has taken its oath. Your review has been reviewed. All we need now is someone who considers this normal. Congratulations. That is you.'},
+  nightmare:{speaker:'ute',de:'Das Archiv wächst jede Nacht um eine Etage. Man hat einmal versucht, es abzureißen. Der Antrag auf Abriss trägt jetzt das Dach.',en:'The archive grows by one storey every night. Someone once tried to demolish it. The demolition application now supports the roof.'},
+  machine:{speaker:'ronny',de:'Früher hatten wir hier einen Menschen am Schalter. Den haben wir durch einen Stempel ersetzt. Seitdem sind die Gespräche deutlich persönlicher.',en:'We used to have a person behind that counter. We replaced him with a stamp. The conversations have been much more personal ever since.'}
+});
 export const SIGN_TEXTS = [
   ['KLEIN-KORINTHEN','Hier kennt jeder Ihre Angelegenheiten.'],
   ['VEREINSHEIM','Verein zur Wahrung des rechten Winkels e. V.'],

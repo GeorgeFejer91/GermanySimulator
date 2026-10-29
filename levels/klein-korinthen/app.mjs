@@ -1,5 +1,5 @@
-import {CAST,CARS,LINES,LIMIT_CM,REQUIRED_REPORTS,SAVE_KEY,SPAWN} from './content.mjs';
-import {freshState,restoreState,transition,reportStatus,carMeasurePoint,moveBody} from './state.mjs';
+import {CAST,CARS,LINES,STATIONS,BUREAUCRACY_BULLETINS,LIMIT_CM,REQUIRED_REPORTS,SAVE_KEY,SPAWN} from './content.mjs';
+import {freshState,restoreState,transition,reportStatus,stationStatus,carMeasurePoint,moveBody} from './state.mjs';
 const pretext=await import('../../assets/vendor/pretext/dist/layout.js').catch(()=>null);
 const {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale}=pretext??{};
 
@@ -20,17 +20,20 @@ function dispatch(action){const next=transition(state,action);if(next!==state){s
 function updateHUD(){
   text('counter',`${state.reports.length} / ${REQUIRED_REPORTS}`);$('progress-fill').style.width=`${Math.min(100,state.reports.length/REQUIRED_REPORTS*100)}%`;
   text('membership',({arrival:'Zugezogen · noch nicht zuständig',patrol:'Anwärter · bewaffnet mit Zollstock',return:'Aufnahmeprüfung bestanden',member:'Ordentliches Mitglied · endlich zuständig'})[state.stage]);
-  text('objective-text',({arrival:'Dietmar wartet vor dem Vereinsheim. Sprechen Sie ihn an.',patrol:'Fünf Autos messen und melden. Nur mehr als 30 cm zählen.',return:'Fünf Fälle belegt. Zurück zu Gisela am Vereinsheim.',member:'Mitgliedschaft erteilt. Die Nachbarschaft bleibt unter Beobachtung.'})[state.stage]);
+  const next=state.stage==='arrival'?'Dietmar wartet vor dem Vereinsheim. Sprechen Sie ihn an.':!state.permits.includes('A0')?'A0: Am Antragsautomaten im Vereinshof die Antragsberechtigung beantragen.':!state.permits.includes('E31')?'E31: Den Zollstock am Eichaltar neben dem orangefarbenen Wagen vereidigen.':state.reports.length<5?'Fünf Autos messen und melden. Mehr als 30 cm zählen.':!state.permits.includes('C5')?'C5: Fünf Fälle belegt. Zum Schlussprüfer gegenüber dem Vereinsheim.':state.stage!=='member'?'Die Prüfung ist geprüft. Zurück zu Gisela am Vereinsheim.':'Mitgliedschaft erteilt. Die Nachbarschaft bleibt unter Beobachtung.';
+  text('objective-text',next);
+  text('paper-trail',Object.keys(STATIONS).map(id=>`${state.permits.includes(id)?'✓':'□'} ${id}`).join(' · '));
+  text('bulletin',BUREAUCRACY_BULLETINS[Math.min(BUREAUCRACY_BULLETINS.length-1,state.permits.length+Math.floor(state.reports.length/2))]);
 }
 function toast(message){text('toast',message);$('toast').hidden=false;toastUntil=time+5;}
 function cancelMeasure(restore=true){if(restore&&measurement?.originalLook)Object.assign(player,measurement.originalLook);measurement=null;$('measure-ui').hidden=true;world?.measure(null);}
-function clearInput(){keys.clear();stick.x=stick.y=0;$('stick-knob').style.transform='';lookButton=0;drag=null;}
+function clearInput(){keys.clear();stick.x=stick.y=0;stickId=null;stickCenter=null;$('stick-knob').style.transform='';lookButton=0;drag=null;}
 let previousFocus=null;
 function openDialog(id){
   clearInput();cancelMeasure();previousFocus=document.activeElement;
   for(const d of dialogs)if(d.open)d.close();
   $(id).showModal();paused=true;$('hint').hidden=true;
-  requestAnimationFrame(()=>$(id).querySelector('button,input')?.focus());queueFit();
+  requestAnimationFrame(()=>{if(id==='conversation'){$('spoken').tabIndex=-1;$('spoken').focus({preventScroll:true});$(id).scrollTop=0}else $(id).querySelector('button,input')?.focus()});queueFit();
 }
 function closeDialog(id){$(id).close();if(id==='evidence'&&inspectionLook){Object.assign(player,inspectionLook);inspectionLook=null}paused=externalPaused||dialogs.some(d=>d.open);clearInput();if(!paused){$('world').focus({preventScroll:true});previousFocus=null}}
 for(const d of dialogs)d.addEventListener('cancel',event=>{
@@ -68,22 +71,35 @@ function speak(key){
 }
 function dialogue(lines,onEnd=null){dialogueQueue=[...lines];dialogueEnd=onEnd;openDialog('conversation');advanceDialogue();}
 function advanceDialogue(){
-  if(!dialogueQueue.length){finishDialogue();return}const key=dialogueQueue.shift();speak(key);text('dialogue-next',dialogueQueue.length?'Weiter':'Verstanden');queueFit();
+  if(!dialogueQueue.length){finishDialogue();return}const key=dialogueQueue.shift();speak(key);$('conversation').scrollTop=0;text('dialogue-next',dialogueQueue.length?'Weiter':'Verstanden');queueFit();
 }
 function finishDialogue(){stopVoice();dialogueQueue=[];closeDialog('conversation');const end=dialogueEnd;dialogueEnd=null;end?.();}
 $('dialogue-next').onclick=advanceDialogue;
 function talk(id){
   if(id==='dietmar'){
-    if(state.stage==='arrival')dialogue(['welcome','invitation','rule','first'],()=>{dispatch({type:'join'});toast('Zollstock erhalten. Zum orangefarbenen Wagen: Straße rechts vom Vereinsheim.')});
+    if(state.stage==='arrival')dialogue(['welcome','invitation','rule','first','application'],()=>{dispatch({type:'join'});toast('Zollstock erhalten. Noch nicht geeicht. Erst A0 im Vereinshof beantragen.')});
     else dialogue([state.bonus?'chair':state.stage==='member'?'epilogue':'progress']);
   }else if(id==='gisela'){
-    if(state.stage==='return')dialogue(['certificate'],()=>{dispatch({type:'graduate'});cue('stamp');showCertificate()});
+    if(state.stage==='return'&&state.permits.includes('C5'))dialogue(['finalAudit','certificate'],()=>{dispatch({type:'graduate'});cue('stamp');showCertificate()});
+    else if(state.stage==='return')dialogue(['reviewRequired']);
     else dialogue([state.stage==='member'?'certificate':'giselaIntro',...(state.stage==='member'?[]:['giselaWait'])]);
-  }else if(id==='ronny')dialogue([state.reports.includes('kk-09')?'ronnyAfter':'ronny']);
-  else dialogue(['ute','uteHint']);
+  }else if(id==='ronny')dialogue([state.reports.includes('kk-09')?'ronnyAfter':'ronny','machine']);
+  else dialogue(['ute','nightmare','uteHint']);
+}
+function paperwork(id){
+  const station=STATIONS[id],status=stationStatus(state,id);openDialog('paperwork');
+  text('form-title',`${id} · ${station.title}`);text('form-question',station.question);$('form-choices').replaceChildren();
+  const messages={locked:'Ohne Aufnahmeverfahren keine Zuständigkeit. Erst zu Dietmar.',application:'A0 fehlt. Die Eichung eines unberechtigten Antragstellers wäre unberechtigtes Eichen.',reports:`Es fehlen ${Math.max(0,5-state.reports.length)} belegte Meldungen. Die Prüfung der Prüfung ist noch nicht prüffähig.`,complete:station.receipt,ready:'Eine Antwort. In dreifacher geistiger Ausfertigung.'};
+  text('form-response',messages[status]);
+  if(status==='ready')station.choices.forEach(([key,label])=>{const button=document.createElement('button');button.textContent=label;button.dataset.fit='';button.dataset.choice=key;button.onclick=()=>{
+    const before=state.permits.length;dispatch({type:'paperwork',id,answer:key});
+    if(state.permits.length>before){cue('stamp');$('form-choices').replaceChildren();text('form-response',station.receipt+' '+station.next);$('form-close').focus();}
+    else{cue('wrong');text('form-response',station.rejection+` Zurückweisungen: ${state.rejections}.`)}queueFit();
+  };$('form-choices').append(button)});
 }
 function beginMeasurement(car){
   if(state.stage==='arrival'){toast('Erst beim Vorsitzenden den Zollstock abholen. Ordnung braucht Zuständigkeit.');return}
+  if(!state.permits.includes('E31')){if(state.permits.includes('A0'))dialogue(['calibration']);else toast('A0 fehlt. Erst die Berechtigung zum Antrag beantragen. Automat im Vereinshof.');return}
   if(state.reports.includes(car.id)){toast('Bereits gemeldet. Doppelte Empörung zählt nicht doppelt.');return}
   const targetX=car.road+car.side*(4-car.gap/200),dx=targetX-player.x,dz=car.z-player.z;
   measurement={car,elapsed:0,origin:{x:player.x,z:player.z},originalLook:{yaw:player.yaw,pitch:player.pitch},look:{yaw:Math.atan2(-dx,-dz),pitch:Math.atan2(.2-1.68,Math.hypot(dx,dz))}};
@@ -106,13 +122,14 @@ $('file-report').onclick=()=>{
 };
 $('leave-car').onclick=()=>{closeDialog('evidence');selectedCar=null};
 function showCertificate(){
-  text('certificate-result',`${state.reports.length} belegte Meldungen · ${state.mistakes} zurückgewiesene Beschwerden · Germanness +30`);
+  text('certificate-result',`${state.reports.length} belegte Meldungen · 3 geprüfte Prüfungen · ${state.rejections+state.mistakes} Zurückweisungen · Germanness +30`);
   text('certificate-bonus',state.bonus?'Sondervermerk: Auch den Vorsitzenden gemeldet. Ihre Unabhängigkeit wurde missbilligend anerkannt.':'Ihr Mitgliedsbeitrag: ein Sonntag und der letzte Rest Unbefangenheit.');openDialog('certificate');
 }
 $('continue').onclick=()=>{closeDialog('certificate');dialogue(['epilogue'])};
 function restart(){stopVoice();for(const d of dialogs)if(d.open)d.close();state=freshState();Object.assign(player,SPAWN,{pitch:-.03});paused=false;selectedCar=null;dialogueEnd=null;cancelMeasure();clearInput();save();updateHUD();toast('Neuer Zuzug. Die Nachbarn haben Sie schon bemerkt.');$('world').focus()}
 $('restart').onclick=restart;$('certificate-restart').onclick=restart;
 function ledger(){
+  $('ledger-dialog').insertBefore($('bulletin'),$('ledger-list'));$('bulletin').hidden=false;
   const page=CARS.slice(ledgerPage*4,ledgerPage*4+4);$('ledger-list').replaceChildren();
   for(const car of page){const row=document.createElement('div');row.className='ledger-row';
     const label=document.createElement('b'),value=document.createElement('span'),owner=document.createElement('small');[label,value,owner].forEach(e=>e.dataset.fit='');label.textContent=car.plate;
@@ -128,6 +145,7 @@ function drawMap(){
   for(const s of world.solids.filter(s=>s.kind==='house'||s.kind==='clubhouse'||s.kind==='garage')){ctx.fillStyle=s.kind==='clubhouse'?'#916c3e':'#92937b';ctx.fillRect(sx(s.minX),sz(s.minZ),(s.maxX-s.minX)*5.3,(s.maxZ-s.minZ)*5.2)}
   CARS.forEach((car,i)=>{ctx.fillStyle=state.reports.includes(car.id)?'#45694c':'#f0d187';ctx.fillRect(sx(car.x)-13,sz(car.z)-14,26,28);ctx.fillStyle='#20372a';ctx.font='bold 17px "Roboto Condensed"';ctx.textAlign='center';ctx.fillText(String(i+1),sx(car.x),sz(car.z)+6)});
   ctx.fillStyle='#253b31';ctx.font='bold 24px "Roboto Condensed"';ctx.fillText('V',sx(-22),sz(45));ctx.fillText('G',sx(CAST.gisela.x),sz(CAST.gisela.z));ctx.fillText('N ↑',c.width-42,35);
+  for(const station of Object.values(STATIONS)){ctx.fillStyle=state.permits.includes(station.id)?'#45694c':'#943e34';ctx.fillRect(sx(station.x)-17,sz(station.z)-12,34,24);ctx.fillStyle='#fff6db';ctx.font='bold 17px "Roboto Condensed"';ctx.fillText(station.id,sx(station.x),sz(station.z)+6)}
   ctx.save();ctx.translate(sx(player.x),sz(player.z));ctx.rotate(-player.yaw);ctx.fillStyle='#b13e2d';ctx.strokeStyle='#fff6db';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,-13);ctx.lineTo(9,10);ctx.lineTo(0,5);ctx.lineTo(-9,10);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
 }
 $('map-button').onclick=()=>{drawMap();openDialog('map-dialog')};
@@ -139,9 +157,10 @@ function nearestTarget(){
   let target=null,distance=3.0;
   for(const[id,actor]of Object.entries(CAST)){const d=Math.hypot(player.x-actor.x,player.z-actor.z);if(d<distance){distance=d;target={kind:'person',id,label:actor.name}}}
   for(const car of CARS){const p=carMeasurePoint(car),d=Math.hypot(player.x-p.x,player.z-p.z);if(d<distance){distance=d;target={kind:'car',id:car.id,car,label:car.plate}}}
+  for(const station of Object.values(STATIONS)){const d=Math.hypot(player.x-station.x,player.z-station.z);if(d<distance){distance=d;target={kind:'station',id:station.id,label:station.title}}}
   return target;
 }
-function interact(){stats.inputCount++;if(!started||paused||measurement||!activeTarget)return;audio();activeTarget.kind==='person'?talk(activeTarget.id):beginMeasurement(activeTarget.car)}
+function interact(){stats.inputCount++;if(!started||paused||measurement||!activeTarget)return;audio();if(activeTarget.kind==='person')talk(activeTarget.id);else if(activeTarget.kind==='station')paperwork(activeTarget.id);else beginMeasurement(activeTarget.car)}
 $('interact').onclick=interact;
 // Some mobile gesture sequences deliver pointerup but omit the compatibility
 // click. Preserve native button activation, with a fallback only if it is absent.
@@ -182,7 +201,8 @@ document.addEventListener('visibilitychange',()=>{clearInput();cancelMeasure();i
 window.addEventListener('focus',()=>{if(started&&!document.hidden&&!externalPaused&&$('audio-enabled').checked){audioContext?.resume();if(voice&&$('conversation').open)voice.play().catch(()=>{})}});
 window.addEventListener('resize',()=>{world?.resize();queueFit()});
 function frame(now){
-  if(disposed)return;frameId=requestAnimationFrame(frame);if(document.hidden||!world)return;
+  if(disposed)return;frameId=requestAnimationFrame(frame);if(document.hidden||!world||externalPaused)return;
+  if(!started&&lastFrame&&now-lastFrame<250)return;
   const raw=lastFrame?now-lastFrame:16,dt=Math.min(.045,raw/1000);lastFrame=now;time+=dt;stats.frames++;if(started)stats.maxFrameMs=Math.max(stats.maxFrameMs,raw);
   if(started&&!paused){
     if(measurement){
@@ -199,7 +219,7 @@ function frame(now){
       const dx=(-Math.sin(player.yaw)*f+Math.cos(player.yaw)*side)/norm*speed,dz=(-Math.cos(player.yaw)*f-Math.sin(player.yaw)*side)/norm*speed;
       const next=moveBody(player,dx,dz,world.solids,world.bounds);player.x=next.x;player.z=next.z;footDistance+=next.distance;if(footDistance>.8){footDistance%=.8;cue('step')}
       activeTarget=nearestTarget();$('hint').hidden=!activeTarget;
-      if(activeTarget){text('nearby',activeTarget.label);text('interact',activeTarget.kind==='person'?'E · Ansprechen':state.reports.includes(activeTarget.id)?'E · Bereits gemeldet':'E · Abstand messen')}
+      if(activeTarget){text('nearby',activeTarget.label);text('interact',activeTarget.kind==='person'?'E · Ansprechen':activeTarget.kind==='station'?'E · Verfahren eröffnen':state.reports.includes(activeTarget.id)?'E · Bereits gemeldet':'E · Abstand messen')}
     }
   }
   if(toastUntil&&time>toastUntil){$('toast').hidden=true;toastUntil=0}
@@ -218,11 +238,16 @@ function fitText(){
       if(w<=0||h<=0)continue;const content=e.innerText,font=`${s.fontStyle} ${s.fontWeight} ${s.fontSize} ${s.fontFamily}`,spacing=parseFloat(s.letterSpacing)||0,key=[content,font,spacing].join('|');
       let prepared=fitCache.get(key);if(!prepared){prepared=prepareWithSegments(content,font,{letterSpacing:spacing,whiteSpace:'pre-wrap'});if(fitCache.size>220)fitCache.clear();fitCache.set(key,prepared)}
       const m=measureLineStats(prepared,w+.5),line=parseFloat(s.lineHeight)||parseFloat(s.fontSize)*1.4,natural=measureNaturalWidth(prepared);
-      const fits=m.maxLineWidth<=w+2&&m.lineCount*line<=h+3&&e.scrollWidth<=e.clientWidth+2;
-      measurements.push([e,fits,natural,m.lineCount]);checked++;if(!fits)noFit++;
+      let fits=m.maxLineWidth<=w+2&&m.lineCount*line<=h+3&&e.scrollWidth<=e.clientWidth+2,method='pretext';
+      // Variable-font shaping can disagree with Canvas predictions. Reconcile
+      // against actual DOM line rectangles without shrinking or hiding text.
+      if(!fits){const range=document.createRange();range.selectNodeContents(e);const lines=[...range.getClientRects()],left=rect.left+parseFloat(s.paddingLeft)+parseFloat(s.borderLeftWidth),top=rect.top+parseFloat(s.paddingTop)+parseFloat(s.borderTopWidth);
+        if(lines.length&&e.scrollWidth<=e.clientWidth+2&&e.scrollHeight<=e.clientHeight+2&&lines.every(r=>r.left>=left-2&&r.right<=left+w+2&&r.top>=top-3&&r.bottom<=top+h+3)){fits=true;method='dom-range'}
+      }
+      measurements.push([e,fits,natural,m.lineCount,method]);checked++;if(!fits)noFit++;
     }
-    for(const [e,fits,natural,lines]of measurements){e.dataset.fitState=fits?'fit':'no-fit';e.dataset.measuredLines=String(lines);e.dataset.naturalWidth=String(Math.round(natural))}
-    document.documentElement.dataset.textMeasurement=noFit?'reflow-needed':'ready';stats.fitChecks+=checked;
+    for(const [e,fits,natural,lines,method]of measurements){e.dataset.fitState=fits?'fit':'no-fit';e.dataset.fitMethod=method;e.dataset.measuredLines=String(lines);e.dataset.naturalWidth=String(Math.round(natural))}
+    document.documentElement.dataset.textMeasurement=noFit?'reflow-needed':measurements.some(m=>m[4]==='dom-range')?'browser-verified':'ready';stats.fitChecks+=checked;
   }catch(error){document.documentElement.dataset.textMeasurement='unavailable';}
 }
 const resizeObserver=new ResizeObserver(queueFit);resizeObserver.observe(document.body);
@@ -250,8 +275,8 @@ $('start').onclick=()=>{
   toast(state.stage==='arrival'?'Vor dem Vereinsheim wartet Dietmar. Gehen Sie zu ihm und drücken Sie E.':'Aufnahmeakte wiederhergestellt. Die Nachbarschaft hat gewartet.');
 };
 try{
-  await document.fonts.ready;const {createWorld}=await import('./world.mjs');world=createWorld(worldCanvas);updateHUD();$('start').disabled=false;text('start',state.stage==='arrival'?'Ein ordentliches Leben beginnen':'Aufnahmeverfahren fortsetzen');text('loading','WASD / Pfeile zum Gehen · Maus ziehen zum Umsehen · E für Aktionen');
+  await document.fonts.ready;const {createWorld}=await import('./world.mjs');world=createWorld(worldCanvas);await world.ready;updateHUD();$('start').disabled=false;text('start',state.stage==='arrival'?'Ein ordentliches Leben beginnen':'Aufnahmeverfahren fortsetzen');text('loading','WASD / Pfeile zum Gehen · Maus ziehen zum Umsehen · E für Aktionen');
   frameId=requestAnimationFrame(frame);queueFit();emit('ready');
 }catch(error){text('loading','Die 3D-Nachbarschaft konnte nicht starten. Bitte WebGL aktivieren und die Seite neu laden.');text('start','3D-Grafik nicht verfügbar');document.documentElement.dataset.loadError=String(error.message);console.error(error);}
 // Read-only diagnostics: the playtest drives real keyboard/pointer controls, never mission setters.
-window.__kleinKorinthen=Object.freeze({snapshot:()=>structuredClone({state,player,stats,started,paused,measurement:measurement?{id:measurement.car.id,elapsed:measurement.elapsed}:null,target:activeTarget?{kind:activeTarget.kind,id:activeTarget.id}:null,solids:world?.solids,drawCalls:world?.renderer.info.render.calls,triangles:world?.renderer.info.render.triangles,dialogs:dialogs.filter(d=>d.open).map(d=>d.id),voice:{speaker,playing:!!voice&&!voice.paused,time:voice?.currentTime??0},fit:document.documentElement.dataset.textMeasurement})});
+window.__kleinKorinthen=Object.freeze({snapshot:()=>structuredClone({state,player,stats:{...stats,resources:world?{...world.renderer.info.memory,programs:world.renderer.info.programs.length}:null},started,paused,measurement:measurement?{id:measurement.car.id,elapsed:measurement.elapsed}:null,target:activeTarget?{kind:activeTarget.kind,id:activeTarget.id}:null,solids:world?.solids,drawCalls:world?.renderer.info.render.calls,triangles:world?.renderer.info.render.triangles,dialogs:dialogs.filter(d=>d.open).map(d=>d.id),voice:{speaker,playing:!!voice&&!voice.paused,time:voice?.currentTime??0},fit:document.documentElement.dataset.textMeasurement})});

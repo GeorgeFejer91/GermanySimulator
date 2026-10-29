@@ -1,10 +1,11 @@
 import * as THREE from '../../assets/vendor/three/0.186.0/build/three.module.min.js';
-import {CARS,CAST,BOUNDS} from './content.mjs';
+import {CARS,CAST,BOUNDS,STATIONS} from './content.mjs';
+import {emitHouse,emitBureaucraticLandmarks,emitServiceStation} from './building-kit.mjs';
 import {carMeasurePoint} from './state.mjs';
 
 export function createWorld(canvas){
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure=1.2;
@@ -64,33 +65,8 @@ export function createWorld(canvas){
   sign(-21,39.7,'VEREINSHEIM','Verein zur Wahrung des rechten Winkels',0,8);
   sign(-7,51,'KLEIN-KORINTHEN','Hier kennt jeder Ihre Angelegenheiten.',0,4.4);
   // Authored plots with wide street access; each facade faces its adjacent road.
-  const houseColors=[0xc6b694,0xe0c9a6,0xb5b6a1,0xc0a38c,0xd3c3a7,0xb4bbad];
-  function house(x,z,i){
-    const w=i%3===0?10:9,d=9,h=i%4===0?5.8:4.5,face=x<0?1:-1;
-    box(x,h/2,z,w,h,d,houseColors[i%houseColors.length]);solid(x,z,w+.2,d+.2,'house');
-    box(x,.25,z,w+.2,.5,d+.2,0x7d7667);
-    shape('cone',x,h+1.3,z,w+1,2.9,d+1,i%2?0x6a6459:0x956b4c,0,Math.PI/4);
-    box(x+1.7,h+2.25,z-1,1,2.2,.85,0x746050);
-    const front=x+face*(w/2+.03);
-    box(front,1.25,z,.16,2.5,1.2,0x475a4e);
-    solid(front,z,.16,1.2,'house-door');
-    for(const dz of [-2.7,2.7])for(const yy of [1.8,...(h>5?[4.3]:[])]){
-      box(front,yy,z+dz,.12,1.3,1.3,0x435659);box(front+face*.08,yy,z+dz,.06,1.35,.06,0xe4d4b4);box(front+face*.08,yy,z+dz,.06,.06,1.36,0xe4d4b4);
-      for(const side of [-1,1])box(front+face*.1,yy,z+dz+side*.93,.08,1.4,.38,0x5f7160);
-      if(yy<3)solid(front+face*.04,z+dz,.2,2.24,'window');
-      box(front+face*.3,yy-.85,z+dz,.6,.23,1.5,0x674938);
-      if(yy<3)solid(front+face*.3,z+dz,.6,1.5,'window-planter');
-      for(let k=-1;k<=1;k++)shape('ball',front+face*.3,yy-.66,z+dz+k*.43,.35,.3,.34,k%2?0x8e5648:0xc4ab61);
-    }
-    // A paved gate path, two hedge sections, and a mailbox leave body-clear access.
-    box(front+face*2,.03,z,4,.06,1.7,0xab9f84);
-    const hedgeOffset=Math.abs(x)>40?1.1:3.7;
-    for(const dz of [-3.1,3.1]){box(front+face*hedgeOffset,.65,z+dz,.65,1.3,4.2,0x4d6449);solid(front+face*hedgeOffset,z+dz,.65,4.2,'hedge');}
-    box(front+face*(hedgeOffset-.2),1.0,z+1.4,.4,.45,.4,0x5e6257);pole(front+face*(hedgeOffset-.2),z+1.4,.8);
-    solid(front+face*(hedgeOffset-.2),z+1.4,.4,.4,'mailbox');
-    // Rain barrel and terracotta planter.
-    shape('cylinder',x-face*(w/2+.65),.55,z+3,1.1,1.1,1.1,0x4e645a);solid(x-face*(w/2+.65),z+3,1.1,1.1,'barrel');
-  }
+  const kit={box,shape,solid,pole,sign};
+  const house=(x,z,index)=>emitHouse(kit,{x,z,index,face:x<0?1:-1,outer:Math.abs(x)>40});
   let hi=0;
   for(const x of [-56,-22,22,56])for(const z of [-28,-8,12])house(x,z,hi++);
   house(22,34,hi++);house(-56,34,hi++);
@@ -124,6 +100,8 @@ export function createWorld(canvas){
   box(10,1.4,55,.12,2.8,3,0x4c6259);solid(10,55,.12,3,'shelter');box(12,2.9,55,4.3,.18,3.2,0x647066);pole(14,54,2.8);pole(14,56,2.8);
   sign(16,51,'H · BERLIN','Nächster Bus: nach der Gebietsreform.',0,3.6);
   for(let i=0;i<7;i++){const x=-29+i*1.35;box(x,.35,-39,.9,.7,3,0x686346);solid(x,-39,.9,3,'planter');box(x,.74,-39,.78,.1,2.8,0x594d36);for(let k=0;k<3;k++)shape('ball',x,.9,-40+k,.5,.4,.5,0x729052);}
+  emitBureaucraticLandmarks(kit);
+  Object.values(STATIONS).forEach(station=>emitServiceStation(kit,station));
   // Cars use actual authored width, length and curb gap. No visual-only measurement value.
   for(const car of CARS){
     const {x,z,width:w,length:l,color}=car,h=car.kind==='van'?1.85:car.kind==='suv'?1.65:1.35;
@@ -140,7 +118,8 @@ export function createWorld(canvas){
   }
   // Flush the static scene into a handful of instanced draw calls.
   for(const [type,entries]of batches){const mesh=new THREE.InstancedMesh(shapes[type],material,entries.length);entries.forEach((e,i)=>{mesh.setMatrixAt(i,e.matrix);mesh.setColorAt(i,e.color)});mesh.castShadow=true;mesh.receiveShadow=true;mesh.computeBoundingSphere();scene.add(mesh);resources.push(mesh);}
-  const characterTexture=new THREE.TextureLoader().load(new URL('../../assets/klein-korinthen/cast.webp',import.meta.url).href,()=>{document.documentElement.dataset.characterArt='ready'},undefined,()=>{
+  let resolveArt;const ready=new Promise(resolve=>{resolveArt=resolve});
+  const characterTexture=new THREE.TextureLoader().load(new URL('../../assets/klein-korinthen/cast.webp',import.meta.url).href,()=>{document.documentElement.dataset.characterArt='ready';resolveArt()},undefined,()=>{
     document.documentElement.dataset.characterArt='fallback';
     for(const a of Object.values(actors)){
       a.mesh.visible=false;const m=new THREE.MeshStandardMaterial({color:0x566a51});
@@ -149,6 +128,7 @@ export function createWorld(canvas){
       for(const x of [-.12,.12]){const leg=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,.65,6),m);leg.position.set(x,.325,0);a.group.add(leg);resources.push(leg.geometry)}
       resources.push(m,body.geometry,head.geometry,head.material);
     }
+    resolveArt();
   });
   characterTexture.colorSpace=THREE.SRGBColorSpace;characterTexture.generateMipmaps=false;characterTexture.minFilter=THREE.LinearFilter;
   const mouths=[[.603,.860,.046,.010],[.535,.811,.046,.011],[.481,.866,.050,.012],[.551,.833,.045,.010]];
@@ -198,8 +178,8 @@ export function createWorld(canvas){
     }
     renderer.render(scene,camera);
   }
-  function resize(){const {width,height}=canvas.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();}
+  function resize(){const {width,height}=canvas.getBoundingClientRect();if(width<=0||height<=0)return;renderer.setPixelRatio(Math.min(devicePixelRatio,1,Math.sqrt(1600000/(width*height))));renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();}
   function project(x,z){const v=new THREE.Vector3(x,1,z).project(camera);return{x:(v.x+.999)/2*canvas.clientWidth,y:(1-v.y)/2*canvas.clientHeight,visible:v.z<1&&v.z>0};}
   function dispose(){renderer.dispose();characterTexture.dispose();Object.values(shapes).forEach(g=>g.dispose());material.dispose();resources.forEach(r=>r.dispose?.());for(const m of [strip,...tips]){m.geometry.dispose();m.material.dispose();}}
-  resize();return{renderer,scene,camera,solids,actors,update,resize,measure,project,dispose,bounds:BOUNDS,measurePoints:CARS.map(car=>({id:car.id,...carMeasurePoint(car)}))};
+  resize();return{ready,renderer,scene,camera,solids,actors,update,resize,measure,project,dispose,bounds:BOUNDS,measurePoints:CARS.map(car=>({id:car.id,...carMeasurePoint(car)}))};
 }

@@ -1,5 +1,5 @@
 // Optional main-game integration. Nothing runs until the host explicitly mounts the level.
-export const levelDefinition=Object.freeze({id:'klein-korinthen',version:1,title:'Klein-Korinthen',achievementId:'klein-korinthen-membership',entry:new URL('../../labor/vereinigung-7f3c9d/index.html',import.meta.url).href});
+export const levelDefinition=Object.freeze({id:'klein-korinthen',version:2,title:'Klein-Korinthen',achievementId:'klein-korinthen-membership',entry:new URL('../../labor/vereinigung-7f3c9d/index.html',import.meta.url).href});
 export function mountKleinKorinthen({container,state,settings={},onState=()=>{},onComplete=()=>{},onExit=()=>{}}){
   if(!(container instanceof HTMLElement))throw new TypeError('A host container is required');
   const channel=crypto.randomUUID(),url=new URL(levelDefinition.entry);url.searchParams.set('embedded','1');url.searchParams.set('channel',channel);

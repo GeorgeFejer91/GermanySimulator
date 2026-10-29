@@ -118,3 +118,7 @@ platform cache verification is implied. Interior reconstruction remains partial.
 7. Run routing/metadata regression checks during deployment, covering every catalogue entry and alias. Recheck existing links whenever hosting, entry HTML, runtime prerequisites or deployment output changes. If a link breaks, mark it broken here and fix it before calling the release complete. A new level is incomplete until its direct URL and individual share image pass these checks.
 
 Maintenance belongs to the integrator of each affected release. This requirement does not establish a scheduled monitor; ongoing maintenance means updating and verifying the catalogue as part of every relevant change. Runtime entry/return and world changes use the existing Physics and Camera reviews; documentation-only catalogue updates may omit those reviews with their scope reason.
+
+### Klein-Korinthen v0.2 — bureaucratic nightmare
+
+Experimental tag `experimental-klein-korinthen-v0.2.0`: [unlisted playable level](https://rawcdn.githack.com/GeorgeFejer91/GermanySimulator/experimental-klein-korinthen-v0.2.0/labor/vereinigung-7f3c9d/index.html). Same isolated path and unique `assets/klein-korinthen/share.png` illustration; canonical/OG metadata uses the versioned URL. A0 application authorization, E31 ruler oath and C5 final audit join the five-report mission. v0.1 stays available at its original tag. No main-game link or main deployment is changed. Browser evidence and physical-device limits are owned by `levels/klein-korinthen/For-AI/README.md`.

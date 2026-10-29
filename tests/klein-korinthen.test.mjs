@@ -2,29 +2,32 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {CARS,CAST,LINES,LIMIT_CM,BOUNDS} from '../levels/klein-korinthen/content.mjs';
+import {CARS,CAST,LINES,STATIONS,LIMIT_CM,BOUNDS} from '../levels/klein-korinthen/content.mjs';
 import {freshState,transition,restoreState,reportStatus,moveBody,carMeasurePoint,isWithinReach} from '../levels/klein-korinthen/state.mjs';
+import {emitHouse,BUILDING_STYLE,emitServiceStation} from '../levels/klein-korinthen/building-kit.mjs';
+const permit=(s,id)=>transition(s,{type:'paperwork',id,answer:STATIONS[id].answer});
+const patrol=()=>permit(permit(transition(freshState(),{type:'join'}),'A0'),'E31');
 test('membership requires an invitation, five distinct measured offences, then return',()=>{
   let s=freshState();assert.equal(transition(s,{type:'graduate'}),s);
   assert.equal(transition(s,{type:'measure',id:'kk-01'}),s);assert.equal(transition(s,{type:'report',id:'kk-01'}),s);
-  s=transition(s,{type:'join'});const valid=CARS.filter(c=>c.gap>LIMIT_CM);
+  s=patrol();const valid=CARS.filter(c=>c.gap>LIMIT_CM);
   for(let i=0;i<5;i++){
     assert.equal(transition(s,{type:'report',id:valid[i].id}),s);
     s=transition(s,{type:'measure',id:valid[i].id});s=transition(s,{type:'report',id:valid[i].id});
     assert.equal(s.reports.length,i+1);assert.equal(transition(s,{type:'report',id:valid[i].id}),s);
     assert.equal(s.stage,i<4?'patrol':'return');if(i<4)assert.equal(transition(s,{type:'graduate'}),s);
   }
-  s=transition(s,{type:'graduate'});assert.equal(s.stage,'member');assert.equal(transition(s,{type:'graduate'}),s);
+  assert.equal(transition(s,{type:'graduate'}),s);s=permit(s,'C5');s=transition(s,{type:'graduate'});assert.equal(s.stage,'member');assert.equal(transition(s,{type:'graduate'}),s);
 });
 test('exactly thirty is legal, incorrect complaints and duplicates cannot advance mission',()=>{
-  let s=transition(freshState(),{type:'join'});
+  let s=patrol();
   for(const car of CARS.filter(c=>c.gap<=30)){s=transition(s,{type:'measure',id:car.id});assert.equal(reportStatus(s,car.id),'legal');s=transition(s,{type:'report',id:car.id});}
   assert.equal(s.reports.length,0);assert.equal(s.mistakes,3);assert.equal(s.stage,'patrol');
 });
 test('save repair rejects invalid IDs, unmeasured reports, duplicates and premature rewards',()=>{
   const s=restoreState({version:1,stage:'member',measured:['kk-01','kk-02','evil'],reports:['kk-01','kk-01','kk-02','kk-03','evil'],mistakes:-5,bonus:true});
   assert.deepEqual(s.reports,['kk-01']);assert.equal(s.stage,'patrol');assert.equal(s.bonus,false);assert.equal(s.mistakes,0);
-  assert.deepEqual(restoreState({version:2,stage:'member'}),freshState());
+  assert.deepEqual(restoreState({version:99,stage:'member'}),freshState());
 });
 test('actual car body and curb produce authored distances, all measurement positions are in reach',()=>{
   for(const car of CARS){const curb=car.road+car.side*4,bodyEdge=car.x+car.side*car.width/2;assert.ok(Math.abs(Math.abs(curb-bodyEdge)*100-car.gap)<1e-8);assert.ok(isWithinReach(carMeasurePoint(car),carMeasurePoint(car)));assert.ok(car.gap>0)}
@@ -56,4 +59,40 @@ test('every shipped voice is the exact current script, fixed cast binding and ve
     assert.match(clip.file,/^voices\/[a-zA-Z]+\.mp3$/);const bytes=readFileSync(new URL('../assets/klein-korinthen/'+clip.file,import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),clip.sha256);
     assert.equal(clip.asrWordExact,true);assert.equal(clip.asrScriptPrompt,null);assert.equal(clip.nativeCompletion,true);assert.ok(Math.abs(clip.integratedLufs+18)<=.3);assert.ok(clip.truePeakDbtp<=-1.5);assert.ok(clip.energy.some(e=>e>0));
   }
+});
+
+test('bureaucratic prerequisites are necessary, wrong answers retry, duplicate stamps are inert',()=>{
+  let s=freshState();assert.equal(permit(s,'A0'),s);s=transition(s,{type:'join'});
+  for(const id of ['__proto__','constructor','toString'])assert.equal(transition(s,{type:'paperwork',id}),s);
+  assert.equal(permit(s,'E31'),s);assert.equal(permit(s,'C5'),s);assert.equal(transition(s,{type:'measure',id:'kk-01'}),s);
+  s=transition(s,{type:'paperwork',id:'A0',answer:-1});assert.equal(s.rejections,1);assert.deepEqual(s.permits,[]);
+  s=permit(s,'A0');assert.equal(permit(s,'A0'),s);assert.equal(transition(s,{type:'measure',id:'kk-01'}),s);
+  s=permit(s,'E31');assert.equal(permit(s,'C5'),s);assert.equal(transition(s,{type:'measure',id:'kk-01'}).measured.length,1);
+});
+
+test('legacy saves preserve completed membership; current malformed saves cannot invent permits',()=>{
+  const ids=CARS.filter(c=>c.gap>30).slice(0,5).map(c=>c.id),old={version:1,stage:'member',measured:ids,reports:ids};
+  const migrated=restoreState(old);assert.equal(migrated.stage,'member');assert.deepEqual(migrated.permits,['A0','E31','C5']);
+  const forged=restoreState({...old,version:2,permits:['C5','E31']});assert.deepEqual(forged.permits,[]);assert.deepEqual(forged.reports,[]);assert.equal(forged.stage,'patrol');
+});
+
+test('80 seeded adversarial action sequences preserve causal and persistence invariants',()=>{
+  for(let seed=1;seed<=80;seed++){
+    let random=seed,s=freshState();const next=()=>{random=(Math.imul(random,1664525)+1013904223)>>>0;return random};
+    for(let step=0;step<500;step++){
+      const kind=next()%7,id=CARS[next()%CARS.length].id,station=['A0','E31','C5'][next()%3];
+      const actions=[{type:'join'},{type:'measure',id},{type:'report',id},{type:'graduate'},{type:'paperwork',id:station,answer:STATIONS[station].choices[next()%3][0]},{type:'paperwork',id:'missing',answer:0},{type:'measure',id:'missing'}];
+      s=transition(s,actions[kind]);assert.deepEqual(restoreState(s),s,`seed ${seed}, step ${step}`);
+      assert.equal(new Set(s.reports).size,s.reports.length);assert.ok(s.reports.every(id=>s.measured.includes(id)&&CARS.find(c=>c.id===id).gap>30));
+      if(s.permits.includes('E31'))assert.ok(s.permits.includes('A0'));if(s.permits.includes('C5'))assert.ok(s.reports.length>=5&&s.permits.includes('E31'));
+      if(s.stage==='member')assert.ok(s.reports.length>=5&&s.permits.includes('C5'));assert.ok(s.rejections<=99&&s.mistakes<=99);
+    }
+  }
+});
+
+test('building kit emits identical translated houses without renderer or mission dependencies',()=>{
+  const capture=options=>{const records=[];const sink=Object.fromEntries(['box','shape','solid','pole'].map(kind=>[kind,(...args)=>records.push({kind,args})]));emitHouse(sink,options);return records};
+  const a=capture({x:0,z:0,index:3,face:1,outer:false}),b=capture({x:120,z:-75,index:3,face:1,outer:false});assert.equal(BUILDING_STYLE.metresPerUnit,1);assert.equal(a.length,b.length);
+  a.forEach((record,i)=>{const translated=[...record.args];const offset=record.kind==='shape'?1:0;translated[offset]+=120;translated[offset+(record.kind==='solid'||record.kind==='pole'?1:2)]-=75;assert.equal(b[i].kind,record.kind);translated.forEach((v,j)=>typeof v==='number'?assert.ok(Math.abs(b[i].args[j]-v)<1e-10):assert.equal(b[i].args[j],v))});
+  for(const station of Object.values(STATIONS)){const solids=[];emitServiceStation({box(){},shape(){},sign(){},solid:(...s)=>solids.push(s)},station);assert.equal(solids.length,1);assert.equal(solids[0][4],'station:'+station.id)}
 });

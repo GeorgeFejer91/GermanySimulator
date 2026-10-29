@@ -19,3 +19,7 @@ dialog{position:fixed;border:0;border-top:5px solid var(--gold);border-radius:2p
 dialog>*{flex-shrink:0}.panel-head h2{overflow-wrap:anywhere}.objective-top{display:grid;grid-template-columns:minmax(0,1fr) auto}.objective-top>span{overflow-wrap:anywhere}#objective{width:min(15rem,calc(100% - 28px))}.touch-look button{width:3rem;height:3rem;padding:0}.location strong{padding-right:3px}#counter,.ledger-nav>span{padding-inline:2px}html[data-large-text] #objective{top:8rem;max-width:45vw}html[data-large-text] .location{max-width:55vw}html[data-large-text] #hud{flex-wrap:wrap}
 #objective-text{padding-inline-end:3px}
 button,input{touch-action:manipulation}
+#paper-trail{font-size:.73rem;font-weight:700;letter-spacing:.05em;margin:.4rem 0 .55rem;color:#79463c}#form-choices{display:grid;gap:8px}#form-choices button{text-align:left}#form-response{border-left:3px solid var(--red);padding-left:12px;font-size:.9rem}#paperwork{width:min(690px,calc(100% - 24px))}#form-title{overflow-wrap:anywhere}#form-question{font-weight:700}
+#paperwork>p{margin:0}#paperwork[open]{gap:10px}#hud nav{flex:none}#hud nav button{white-space:nowrap}
+@media(max-width:360px){.location .eyebrow,.location #membership{display:none}.location strong{font-size:1.55rem}#objective{top:94px}}
+@media(max-height:520px){#paperwork[open]{padding:12px 18px;gap:7px}#paperwork h2{font-size:1.5rem}#form-choices{gap:5px}#form-response{font-size:.85rem}}
