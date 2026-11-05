@@ -143,6 +143,47 @@ primary/shared metadata's phantom deletions. Stage only reviewed source paths.
 The live whole-cast goal remains open:23 short citizen families, police,
 Sandales and adult neighbors still need the current requested end state.
 
+Publication verified: normal push `67f17f99c3eb591d15b3e00761d619a4b183c23a`,
+Pages42073708346 SUCCESS,29public runtime files exact to immutable commit,
+public root/compatibility and Hildegard desktop/portrait + Klaus desktop own
+standing/movement-bank admission with zero page/HTTP errors or opposite
+variant requests. This public bank-admission proof uses neutral poses; actual
+timed walking is independently covered by predeployment Physics. The verifier
+imports the committed codec and never uses the next mutable police candidate.
+Root viewed the deployed Hildegard desktop capture. Evidence:
+`output/adult-stature/live/`. Physical Android/natural traversal remain unrun.
+
+Police sizing is now accepted for publication: all8mature equipment/gender
+appearances select2.77height/77.56proportional stride and shared grounded3D
+fallback. Source manifest2.33/65.24 and all16images stay exact.26focused checks,
+25affected boundary checks and441street CI checks pass. Two VM fixtures now
+inject the actual layout import; their initial REDs remain saved. Independent
+Physics passes12actual pursuit/state cases and1,789body-clear endpoints;
+Camera + independent Physics inspection close all192clean visible phase
+samples across3layouts. Camera passes all8common-ground,4,514depth samples/
+zero wrong, opaque order, held/missing paint, tier retention/retire/reentry,
+loaded car/door and loaded/fallback Bundestag. Actual source-alpha projected
+stature differs from Söder by less than one police native crown row; the
+existing rootY0.04 remains. All35pins are stable and511protected paths exact.
+Only the two owning documents change after review. Exact measurements,
+coverage limits and retained fixture failures are in
+`output/police-stature/` and [the police record](./POLICE-ART.md). Publish this
+eight-path slice normally, verify immutable deployed root/3d and own police
+paint/fallback admission, then integrate Bärbel without closing the goal.
+
+Bärbel source/native/raw/formal closure is now complete and private: own
+412-cell adult family,824body and648mouth checks,52actually inspected pages,
+26-output raw-only replay and formal412frames/density. The folding profile toe
+is repaired with an actor-specific positive-Jacobian field; independent far
+foot source curve remains. Source2.33stride11.544642991872621 prepares selected
+2.77stride13.724747247848567 with exact full-definition packet rebind; no
+production metadata changed yet. Integrator next owns canonical install,
+strict selected tests and both final world reviews/publication. Ute's own
+eight-view adult source, registration, source pilot and provisional five lip
+fits are separate/private; native/motion/source-replay gates remain open.
+Dietmar DIN's corrected mature cardinal source is approved for own quarter
+expansion. Politicians, child and Bürgeramt remain untouched.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

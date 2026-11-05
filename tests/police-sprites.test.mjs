@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import vm from 'node:vm';
+import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {createPoliceSprites,policeSpriteFrame,policeTier,POLICE_SPRITE_LAYOUT} from '../police-sprites.js';
 
 test('wanted escalation selects four readable equipment tiers',()=>{
@@ -33,7 +35,7 @@ test('view-relative facing uses actual front, rear and both side rows',()=>{
   assert.equal(policeSpriteFrame({},{facing:Math.PI,cameraYaw:Math.PI,distance:1}).row,0);
 });
 
-test('admitted adult paint uses its authored figure height and planted stride',async()=>{
+test('admitted adult paint uses the selected reference height and proportional planted stride',async()=>{
   const original={fetch:globalThis.fetch,Image:globalThis.Image},jobs=[],sizes=[];
   const T={
     Texture:class{dispose(){}},
@@ -48,9 +50,10 @@ test('admitted adult paint uses its authored figure height and planted stride',a
     const fallback={visible:true},host={position:{x:0,z:0},children:[fallback],add(){},remove(){}},actor={};
     system.attach(actor,host);assert.equal(await jobs[0](),true);
     assert.equal(system.update(actor),true);assert.equal(fallback.visible,false);
-    assert.ok(Math.abs(sizes[0].height-2.33*614.4/400)<1e-12,'the whole adult source occupies2.33world units');
+    assert.equal(POLICE_SPRITE_LAYOUT.figureWorldHeight,2.77);
+    assert.ok(Math.abs(sizes[0].height-2.77*614.4/400)<1e-12,'the adult source uses the selected reference height');
     assert.ok(Math.abs(sizes[0].width/sizes[0].height-160/192)<1e-12);
-    assert.equal(POLICE_SPRITE_LAYOUT.cycleDistance,65.24);
+    assert.equal(POLICE_SPRITE_LAYOUT.cycleDistance,77.56);
     assert.equal(POLICE_SPRITE_LAYOUT.pivot,472/614.4);
   }finally{system.dispose();Object.assign(globalThis,original)}
 });
@@ -90,7 +93,8 @@ test('every encoded gender/equipment/client atlas is bound to a digest and bound
   const path=new URL('../assets/characters/police/manifest.json',import.meta.url);
   const manifest=JSON.parse(readFileSync(path));assert.equal(Object.keys(manifest.variants).length,8);
   assert.equal(manifest.figureHeightWorld,2.33);assert.equal(manifest.sourceFigureHeight,400);
-  assert.equal(manifest.sourceFrameHeight,614.4);assert.equal(manifest.cycleDistance,POLICE_SPRITE_LAYOUT.cycleDistance);
+  assert.equal(manifest.sourceFrameHeight,614.4);assert.equal(manifest.cycleDistance,65.24);
+  assert.equal(POLICE_SPRITE_LAYOUT.cycleDistance,manifest.cycleDistance*POLICE_SPRITE_LAYOUT.figureWorldHeight/manifest.figureHeightWorld);
   for(const variants of Object.values(manifest.variants))for(const [client,asset] of Object.entries(variants)){
     const bytes=readFileSync(new URL(asset.file,path));assert.equal(bytes.length,asset.bytes);
     assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256);
@@ -98,4 +102,19 @@ test('every encoded gender/equipment/client atlas is bound to a digest and bound
     assert.ok(asset.bytes<2*1024*1024);assert.ok(asset.decodedRGBA<16*1024*1024);
     assert.equal(asset.width,client==='mobile'?960:1280);
   }
+});
+
+test('the actual procedural police fallback shares the selected height and keeps its feet on ground',()=>{
+  const source=readFileSync(new URL('../world3d.js',import.meta.url),'utf8');
+  const start=source.indexOf('  function character('),end=source.indexOf('\n  function fitStreetFallback',start);
+  assert(start>=0&&end>start);
+  const box=source.match(/^  const box=.+$/m)?.[0];assert(box);
+  const material=new T.MeshBasicMaterial(),context={T,POLICE_SPRITE_LAYOUT,M:{police:material,skin:material,dark:material}};
+  const root=vm.runInNewContext(box+'\n'+source.slice(start,end)+'\ncharacter("police")',context);
+  try{
+    const bounds=new T.Box3().setFromObject(root);
+    assert.equal(root.name,'police animated 3D fallback');
+    assert(Math.abs(bounds.min.y)<1e-6,'grounded procedural feet');
+    assert(Math.abs(bounds.max.y-2.77)<1e-6,'actual cap crown shares reference height');
+  }finally{root.traverse(node=>node.geometry?.dispose());material.dispose()}
 });

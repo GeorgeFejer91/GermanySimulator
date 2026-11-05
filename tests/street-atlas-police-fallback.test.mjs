@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 import {installSpriteDepth} from '../sprite-depth.js';
-import {createPoliceSprites} from '../police-sprites.js';
+import {createPoliceSprites,POLICE_SPRITE_LAYOUT} from '../police-sprites.js';
 const source=readFileSync('world3d.js','utf8');
 function declaration(name,next){
   const begin=source.indexOf('  function '+name+'('),end=source.indexOf('  function '+next+'(',begin);
@@ -15,7 +15,7 @@ function fixture(){
   const adultMaterial=new T.MeshBasicMaterial({map:new T.Texture(adultImage)});
   const person={id:'adult',figureWorldHeight:2.33,standingOnly:true,standing:{}};
   const camera=new T.PerspectiveCamera();camera.rotation.set(-.65,.8,.1,'YXZ');
-  const scope=vm.createContext({T,installSpriteDepth,camera,world:new T.Group(),
+  const scope=vm.createContext({T,installSpriteDepth,POLICE_SPRITE_LAYOUT,camera,world:new T.Group(),
     M:Object.fromEntries(['player','police','skin','dark'].map(k=>[k,new T.MeshBasicMaterial()])),
     streetPaintManifest:{adult:person},atlasTextureCache:new Map(),atlasMaterialCache:new Map(),
     personFallbackMaterial:()=>adultMaterial,
@@ -78,7 +78,7 @@ test('police fallback and native adult body share a root-to-crown span',()=>{
   const f=fixture(),root=f.scope.character('police');root.updateMatrixWorld(true);
   const bounds=new T.Box3().setFromObject(root);
   assert(Math.abs(bounds.min.y)<1e-6,'officer soles start at their host root');
-  assert(Math.abs(bounds.max.y-2.33)<1e-6,'officer crown matches selected adult paint');
+  assert(Math.abs(bounds.max.y-2.77)<1e-6,'officer crown matches selected reference-height paint');
   for(const name of ['ll','rl','la','ra']){
     const limb=root.userData[name];assert(limb?.isMesh);
     assert(root.getObjectById(limb.id),'existing movement owner retains the same limb objects');
@@ -107,7 +107,7 @@ test('admitted officer paint retains the fallback crown and sole through camera 
       const foot=paint.localToWorld(new T.Vector3(0,height*(.5-472/614.4),0));
       const crown=paint.localToWorld(new T.Vector3(0,height*(.5-72/614.4),0));
       assert(foot.distanceTo(host.position)<1e-6,'source sole remains on the officer host');
-      assert(Math.abs(crown.y-host.position.y-2.33)<1e-6,'painted crown preserves upright adult fallback stature');
+      assert(Math.abs(crown.y-host.position.y-2.77)<1e-6,'painted crown preserves upright reference-height fallback stature');
     }
   }finally{system.dispose();Object.assign(globalThis,original)}
 });

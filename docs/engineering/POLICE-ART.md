@@ -66,14 +66,14 @@ substantial-paint and hidden-RGB checks; all32 directional strips have eight
 distinct cells. Exact digests, dimensions and source/builder/configuration
 bindings are in `assets/characters/police/manifest.json`.
 
-World figure height is2.33, calibrated against the published adult Irmgard and
-the actual Sandales; Söder remains taller. The distance clock is65.24 game units
-per cycle, equivalent to224 working pixels at400pixels/2.33world units and
-0.02world units/game unit. This is source calibration; actual game sole/cadence
-review is a separate gate. The upright billboard cancels host rotation and
-uses camera yaw, keeping nominal sole at the host ground and crown2.33 above it.
-The articulated fallback uses the same crown/sole span without scaling the host
-or the subsequently admitted painting.
+The Söder-height follow-up selects world figure height2.77 and proportional
+cycle77.56 through `POLICE_SPRITE_LAYOUT`. The original source manifest/builder
+retains authored height2.33 and cycle65.24:224working pixels per cycle at
+400pixels/2.33world units and0.02world units/game unit. Scaling body and stride
+together preserves that source calibration. No police image or source binding
+changes. The upright billboard cancels host rotation and uses camera yaw,
+keeping nominal sole at the host ground. The articulated fallback consumes
+the same selected height, without scaling the host or admitted painting.
 
 The existing shared distance/visibility queue admits only the attached officer's
 selected tier, gender and client resolution. One texture is shared by its live
@@ -90,7 +90,48 @@ whole-library downloads. Decoded image/GPU copies add to the base RGBA costs.
 
 ## Evidence and acceptance boundary
 
-The current integrated candidate starts at the live Hannelore release
+The5November follow-up is based on17-adult release
+`67f17f99c3eb591d15b3e00761d619a4b183c23a`. Only the selected police size/stride,
+matching fallback, module cache tokens and focused tests change. All16 police
+WebPs and their authored metadata stay exact. Native idle alpha spans124–126
+desktop or93–94mobile rows.26focused checks, the strict25-case affected VM
+boundary group and all441street CI checks pass. Both extracted-character VM
+fixtures now inject the actual imported layout constant; their initial REDs
+remain saved. Actual fallback geometry is grounded at crown2.77 and the
+strict proportional stride/source relationship passes.
+
+Independent Physics passes12actual wanted2/5×gender×layout pursuit/state cases,
+all8phases,1,789radius14body-clear endpoints, zero distance-clock error, planted
+modal/gesture/cancel and tier replacement. Native896-cell checks retain exact
+paint; no new source-slide repair is claimed. The inherited pursuit camera
+leaves early portrait phases offscreen/partly pickup-covered. A separate clean
+Camera192-phase capture set, independently inspected by Physics, closes that
+specific visible-cycle gap without recasting it as natural pursuit footage.
+
+Camera passes all8families×3layouts,4,514correct depth samples/zero wrong,
+opaque front/behind ordering, all-tier held/404 fallback, hot tier retention,
+zero-ref retirement and exact two-request reentry. Actual police vs Söder
+crown-to-registered-sole spans are123.6899/124.7827vs124.3018desktop,
+130.8770vs131.1384portrait and60.4768vs60.5971landscape pixels. The extra native
+crown row projects1.09desktop pixels; existing police rootY0.04 is preserved.
+Whole boots/equipment remain coherent in clean native captures. Actual loaded
+car/ordinary door and loaded/fallback Bundestag comparisons pass; landmark
+geometry stays unchanged/uniform. Root personally inspected source/current
+pair, clean portrait phase and loaded-landmark images.
+
+All35frozen pins match before/after;511protected paths and all16police WebPs/
+authored metadata match accepted67. Final edits only update the two owning
+documents. The fit adds no image download, texture/decode cost, allocation
+owner or clock; existing queue/resource bounds remain, with fresh same-owner
+failure/tier/lifetime evidence. Functional Chrome uses IrisXe D3D11; physical
+Android, FPS, natural offense/arrest traversal, listening, full solid/substep/
+corner matrix and wider unchanged building-fade matrix remain NOT RUN.
+The historical no-stationary-witness ring RED and the overbroad offscreen
+female-decode fixture RED remain saved. Scoped acceptance is ready for normal
+publication; deployed-byte/root/compatibility receipts follow separately.
+Evidence: `output/police-stature/`.
+
+The October integrated candidate started at the live Hannelore release
 `b5744458`; all43 published street entries, including Irmgard and Hannelore,
 remain byte-exact. All68 frozen source/runtime/test pins are recorded at
 `output/police-release/frozen-candidate.json`. Native896-cell review, all8

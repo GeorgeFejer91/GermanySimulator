@@ -1,4 +1,4 @@
-import {createPoliceSprites,policeTier} from './police-sprites.js?v=20261023-police-adults';
+import {createPoliceSprites,policeTier,POLICE_SPRITE_LAYOUT} from './police-sprites.js?v=20261105-police-stature';
 import {createStreetPortraitDisplay} from './street-character-portrait.js';
 import {modelLoaderWithSignal,loadTextureImage} from './asset-loaders.js?v=20261020-bounded-assets';
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
@@ -1291,7 +1291,7 @@ function showRendererFailure(error){
     const material=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
     personFallbackMaterials.set(kind,material);return material;
   }
-  function character(kind,height=kind==="police"?2.33:1.5){
+  function character(kind,height=kind==="police"?POLICE_SPRITE_LAYOUT.figureWorldHeight:1.5){
     if(kind==="police"){
       const root=new T.Group();
       box(.42,.76,.3,M.police,0,1.16,0,root);
@@ -1302,7 +1302,7 @@ function showRendererFailure(error){
       ll.position.set(-.1,.39,0);rl.position.set(.1,.39,0);la.position.set(-.27,1.19,0);ra.position.set(.27,1.19,0);
       root.add(ll,rl,la,ra);root.userData={ll,rl,la,ra};root.name="police animated 3D fallback";
       const cap=new T.Mesh(new T.CylinderGeometry(.19,.19,.08,10),M.dark);cap.position.y=2.06;root.add(cap);
-      for(const part of root.children){part.position.multiplyScalar(2.33/2.1);part.scale.multiplyScalar(2.33/2.1)}
+      for(const part of root.children){part.position.multiplyScalar(height/2.1);part.scale.multiplyScalar(height/2.1)}
       return root;
     }
     if(kind==="player"){

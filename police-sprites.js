@@ -1,7 +1,7 @@
 import {loadThreeTexture} from './asset-loaders.js?v=20261020-bounded-assets';
 
 export const POLICE_TIERS=Object.freeze(['patrol','protective','riot','heavy']);
-export const POLICE_SPRITE_LAYOUT=Object.freeze({columns:8,rows:7,cellWidth:160,cellHeight:192,pivot:472/614.4,cycleDistance:65.24});
+export const POLICE_SPRITE_LAYOUT=Object.freeze({columns:8,rows:7,cellWidth:160,cellHeight:192,pivot:472/614.4,figureWorldHeight:2.77,cycleDistance:77.56});
 export function policeTier(stars){return stars>=5?'heavy':stars>=4?'riot':stars>=3?'protective':'patrol'}
 
 // Distance is collision-resolved game travel since the previous update, not speed.
@@ -25,7 +25,7 @@ export function policeSpriteFrame(state,{distance=0,dt=0,talking=false,gesture=n
 
 export function createPoliceSprites(T,{queueAsset,camera,mobile=false}={}){
   const actors=new Map(),resources=new Map();let retired=false;
-  const height=2.33*614.4/400;
+  const height=POLICE_SPRITE_LAYOUT.figureWorldHeight*614.4/400;
   function release(resource){
     if(--resource.refs>0)return;
     resource.owner.retired=true;resource.owner.controller.abort();resource.texture?.dispose();
