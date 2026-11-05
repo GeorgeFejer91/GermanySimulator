@@ -46,8 +46,9 @@ verifies the deployment and gives the freed worker another character. Earlier
 whole-cast publication holds are superseded; existing unfinished goals remain
 active. Keep shared source integration and pushes under one owner.
 
-The current sole-integrator release checkout is
-`C:/Users/cogpsy-vrlab/.codex/worktrees/street-current-live-release/GermanySimulator`.
+The historical release checkout was
+`C:/Users/cogpsy-vrlab/.codex/worktrees/street-current-live-release/GermanySimulator`;
+the resumed scope above owns the current source and publication lane.
 Its published history includes Irmgard, Hannelore, police, Gisela, Heike and
 Karl-Heinz, while preserving the other goal's Berghain viewer. The older
 `street-character-live-release` checkout is a historical police/Heike source
@@ -94,6 +95,22 @@ Final62 source/test/asset pins and review receipts are in ignored
 Physical Android, natural traversal, perceptual listening and the broader
 unchanged world matrix remain unclaimed. The candidate is accepted for scoped
 publication; deployment receipts are recorded separately after the push.
+
+Publication checkpoint: accepted commit `a40474704c2642d646023a0c995366f1dab7f122`
+was normally pushed to public main. Pages run [42053657607](https://github.com/GeorgeFejer91/GermanySimulator/actions/runs/42053657607)
+completed with **FAILURE** in the street roster checks: the immutable family
+list, own standing path, height and exact standing-byte total still described
+Günther as standing-only. Those expectations are now corrected explicitly; the
+full44-file street CI group passes435 checks. Runtime/asset bytes are unchanged
+from the accepted character commit, so Physics/Camera replays are unnecessary
+for this test-only correction. The original failure and local RED remain under
+`output/soeder-height/`. Publish the correction, track its successor Pages run,
+then verify public root/3d.html and actual own movement admission.
+The coherent local commit contains62 reviewed paths; three staged files have
+LF-only normalization, while every SHA-bound actor payload/source stays exact.
+Read `output/soeder-height/commit-receipt.json`, `staging.json`, `push.log` and the
+two independent reviews before continuing. The isolated release index is
+`output/soeder-height/release.index`; the default index remains unreliable.
 
 The whole-cast goal remains active:24 short citizen families still need adult
 redesigns; the15 earlier adult families, police, Sandales and adult neighbors
