@@ -533,6 +533,20 @@ as that limited scope. Judge native residual against measured shoe size and
 playback; the skill specifies no universal pixel threshold. Preserve unchanged
 art and exact reviewed cells when repairing a field.
 
+Contact travel, a positive field Jacobian and connected alpha do not prove
+that a shoe retains its shape. Before a full bake, track actual visible heel
+and toe paint from the same shoe through the complete side cycle and inspect
+unmarked source/native crops beside its own neutral. A blend through a boot
+can compress/stretch it while one contact point still fits perfectly. Check
+both shoes, including the opposite-contact frames where previously occluded
+paint becomes visible. A near-sole repair cannot supply a missing far sole:
+approve actual complete own leg/shoe source paint and use the existing
+connected leg layers when disocclusion needs it. Keep fixed foreground and
+owned prop masks; never infer hidden foot geometry from a visible upper toe.
+Use the actor's own source/size and visual evidence rather than a universal
+rigidity threshold. Preserve the failed candidate and repeat affected export,
+calibration, native and world checks before acceptance.
+
 The accepted side-view cycle distances, in game units, are Merkel 24, Alice 27, Bayern 32, Merz 25, Herr Sandale 13.5, and Frau Sandale 14. `assets/characters/gait-calibration.json` records twelve SHA-256-bound right/left contact traces, prior settings, billboard scales, fitted distances and sole-edge measurement regions. The project skill's `scripts/assess_walk_speed.py` reproduces the fit and slip comparison. These are sole-edge contact proxies from the exact accepted pixels; inspect actual foot identity and normal-speed game playback when revising the atlas. The manifests own the runtime values and the character review sandbox reads them, so it shows the same cadence as the game. No approved art pixels or route speeds changed.
 
 ## Walking quality for every character

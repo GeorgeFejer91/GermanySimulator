@@ -1,0 +1,23 @@
+{
+  "id": "crowd-baerbel-brezel",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "crowd-baerbel-brezel"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/crowd-baerbel-brezel-standing.webp",
+    "sha256": "0c096be166423c463bdf9192928b08cc64145c756c0701500fe0ead9e77efee2",
+    "width": 128,
+    "height": 160
+  }
+}

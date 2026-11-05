@@ -1,0 +1,22 @@
+{
+  "stage": "B\u00e4rbel missing far lower-leg/shoe source v1",
+  "request": "far-leg-parts-request-v1.json",
+  "requestSha256": "bedc1eef2b6bf262c2d0659cdf6325450c91c37e0f160e0d5e3e3271ade9dff9",
+  "toolOriginal": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac22-8fac-7cd1-ae51-b88073bffadc\\exec-8ac1e811-250e-4a42-a054-f2aad8b4a00f.png",
+  "raw": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png",
+  "sha256": "0732bc0226c18fcad300f658cc09b84e6119c170b4377c6840eb63e5fa5568e3",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "mode": "RGBA",
+  "alpha": [
+    0,
+    255
+  ],
+  "views": [
+    "anatomical LEFT far leg in RIGHT profile, inner shoe side, toe right",
+    "anatomical RIGHT far leg in LEFT profile, inner shoe side, toe left"
+  ],
+  "selection": "RAW PART SOURCE; first registration/composite/pilot and root art review pending; no fullfamily bake"
+}

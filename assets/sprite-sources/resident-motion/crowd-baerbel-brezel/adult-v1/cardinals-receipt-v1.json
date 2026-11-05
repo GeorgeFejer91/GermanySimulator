@@ -1,0 +1,17 @@
+{
+  "tool": "built-in imagegen",
+  "request": "cardinals-request-v1.json",
+  "requestSha256": "c45663ead0570c7482918d1815aebb89879ea80c9d3db90b40aa235105765498",
+  "immutableOriginal": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac22-8fac-7cd1-ae51-b88073bffadc/exec-37b2daa2-a4d4-4102-97cd-7cd16c22808a.png",
+  "raw": "raw-cardinals-v1.png",
+  "sha256": "f7a6917cba2b9251cc2f2c438148dc795f88a78b20613890c9f96a7bcc949c8c",
+  "size": [
+    2172,
+    724
+  ],
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "status": "New candidate; root source inspection required before quarters/family. No runtime selection."
+}

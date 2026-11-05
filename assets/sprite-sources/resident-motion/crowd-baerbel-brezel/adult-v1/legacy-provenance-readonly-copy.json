@@ -1,0 +1,43 @@
+{
+  "status": "candidate-unapproved",
+  "route": "Built-in image_gen, referenced original character source, transparent background",
+  "originalSource": "assets/sprite-sources/street-residents/crowd-baerbel-brezel-directions-candidate.png",
+  "selectedSources": [
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/profiles-clean-candidate.png",
+      "sha256": "9ccebed24bba160ccbc0b2420ec34dc465911be201d3a228de9fdbf07898794f",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "opaqueBounds": [
+        159,
+        23,
+        1373,
+        977
+      ],
+      "hasTransparency": true
+    },
+    {
+      "path": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+      "sha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "opaqueBounds": [
+        105,
+        17,
+        2058,
+        702
+      ],
+      "hasTransparency": true
+    }
+  ],
+  "profilePromptSummary": "Two genuine opposing strict side profiles of this exact character, arms folded above waist, no prop in the lower-body source, compact anatomy, both complete shoes exposed with a clear gap. Original upper body and physical prop hand retained by source masks.",
+  "turnPromptSummary": "Four genuine whole-body planted diagonal views in front-right, rear-right, rear-left, front-left order; same character, outfit, head proportions and physical prop hand.",
+  "validationLimits": [
+    "Source fitting and static probes do not constitute runtime acceptance.",
+    "Cohort source, exports, ordered playback and projected grounding need integrator review."
+  ]
+}

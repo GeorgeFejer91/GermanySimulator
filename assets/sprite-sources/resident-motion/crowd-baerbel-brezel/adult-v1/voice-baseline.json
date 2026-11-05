@@ -1,0 +1,39 @@
+{
+  "id": "crowd-baerbel-brezel",
+  "profileId": "94f8291ad5664b5485cf38bea8d4a2ec",
+  "selectedRecordingCount": 3,
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-baerbel-brezel-germany-01.mp3",
+      "sha256": "fb46a938899c6b60629b391229f77911dd1eb13311a63654dd58a6b785960aea",
+      "source": "Die Brezel ist rund; Ihr Anspruch braucht trotzdem ein Formular mit Ecken.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-baerbel-brezel-germany-02.mp3",
+      "sha256": "516c3ada8401cd8330df1a012e66b57caadf183544178b646473504666cd710b",
+      "source": "Salz ist nur nach Antrag zuständig; bitte reichen Sie die Krümel geordnet ein.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-baerbel-brezel-berlin-01.mp3",
+      "sha256": "c54dcbe0e32f6e2b9daac9d3bec309992f2d3af9a76a1c4b248debdd26ddfd54",
+      "source": "Die Brezel ist rund; your Anspruch braucht trotzdem ein Formular mit Ecken.",
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-01.mp3": "861bc4bfa3dd1726ee2c58bc42d9acaacad21cc33a8cf37bef174d5688869851",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-02.mp3": "32fc42ca1bd8c425432a357eeb68716fb25732a0fd375e81c477697daa4c684a",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-03.mp3": "4b27be3568d050ef0454c8449514581b5bd52338e9b5f51d1d1072fb0f69680a",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-04.mp3": "807f2cf0a9da32da7faec26d208fa3ef4b2b51ca189163c92341d1d465f50afb",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-berlin-01.mp3": "c54dcbe0e32f6e2b9daac9d3bec309992f2d3af9a76a1c4b248debdd26ddfd54",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-crowd-manifest.json": "abd26e3be73535f2b25092f9bd9fbf9d7123fdb246940f79b4212f3752c7176e",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-germany-01.mp3": "fb46a938899c6b60629b391229f77911dd1eb13311a63654dd58a6b785960aea",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-germany-02.mp3": "516c3ada8401cd8330df1a012e66b57caadf183544178b646473504666cd710b",
+    "assets/voices/candidate-dialogue/crowd-baerbel-brezel-remaining27-crowd-manifest.json": "a3db6fec21d067fe83c57bcf520a7e167854debd6d1026300f89ae2defd45b07"
+  },
+  "policy": "No voice, recording, visible line or catalog edits authorized for this art packet."
+}

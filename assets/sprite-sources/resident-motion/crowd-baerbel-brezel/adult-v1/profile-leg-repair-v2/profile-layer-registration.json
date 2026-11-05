@@ -1,0 +1,174 @@
+{
+  "status": "SOURCE_REGISTRATION_FOR_VISUAL_REVIEW; no movement/native/game acceptance",
+  "inputs": {
+    "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png": "0732bc0226c18fcad300f658cc09b84e6119c170b4377c6840eb63e5fa5568e3",
+    "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/right.png": "0bab128b8ee5438bf3e9892e2159727b686d592d49eab05f4262f012e0ba35e3",
+    "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/left.png": "08183abc739dc9d2c0e8b83005938dfd2851d9ffe94a9c13d04b1f34a8b93ced"
+  },
+  "uniformScaleBothAxesBothPieces": 0.16,
+  "selectionBasis": "Original ankle-to-sole depth, unchanged source aspect; actual near shoe remains intact",
+  "cleaning": {
+    "rule": "RGBA zero only original alpha<20 before premultiplied registration",
+    "preservedAlphaAtLeast20Exact": true,
+    "clearedAlpha1To19": 17579,
+    "clearedHiddenRgb": 110
+  },
+  "profiles": {
+    "right": {
+      "controls": {
+        "component": [
+          225,
+          68,
+          750,
+          834
+        ],
+        "rawAnkle": [
+          393,
+          600
+        ],
+        "targetAnkleX": 255,
+        "baseline": 472,
+        "nearBoundaryYX": [
+          [
+            382,
+            247
+          ],
+          [
+            412,
+            246
+          ],
+          [
+            432,
+            247
+          ],
+          [
+            438,
+            257
+          ],
+          [
+            442,
+            267
+          ],
+          [
+            448,
+            280
+          ],
+          [
+            453,
+            310
+          ]
+        ],
+        "wholeShoeBelowY": 435
+      },
+      "origin": [
+        192.12,
+        338.56
+      ],
+      "farBounds": [
+        229,
+        350,
+        313,
+        472
+      ],
+      "nearBounds": [
+        210,
+        383,
+        298,
+        472
+      ],
+      "foregroundRgbaExact": true,
+      "nearRetainedPixelsExact": true,
+      "completeOriginalBelow453Exact": true,
+      "farShoeAlpha20BoundsY435Plus": [
+        234,
+        435,
+        313,
+        472
+      ],
+      "layers": {
+        "near-leg": "ae791be730eea8e1cc102c58210d3189ae9bfbfeec2541e73c293906ebe753e0",
+        "far-leg": "8aaa2a0e090b675e97eb5475d77794c54422d11241464f6923a8d616ca17befd",
+        "foreground-mask": "3c80a2cb9ce2b12ea28512662e83a83b6e4ebe652d9e48724a5ba730e661e97c",
+        "planted": "071847969a22992391391c9b5c6bcdcdc8f4f6ede5ba3646474af744062e1bb4"
+      }
+    },
+    "left": {
+      "controls": {
+        "component": [
+          1016,
+          67,
+          1547,
+          833
+        ],
+        "rawAnkle": [
+          1378.5,
+          600
+        ],
+        "targetAnkleX": 255,
+        "baseline": 472,
+        "nearBoundaryYX": [
+          [
+            382,
+            270
+          ],
+          [
+            412,
+            269
+          ],
+          [
+            430,
+            269
+          ],
+          [
+            435,
+            265
+          ],
+          [
+            440,
+            251
+          ],
+          [
+            448,
+            230
+          ],
+          [
+            453,
+            210
+          ]
+        ],
+        "wholeShoeBelowY": 435
+      },
+      "origin": [
+        34.44,
+        338.72
+      ],
+      "farBounds": [
+        197,
+        350,
+        282,
+        472
+      ],
+      "nearBounds": [
+        215,
+        383,
+        303,
+        472
+      ],
+      "foregroundRgbaExact": true,
+      "nearRetainedPixelsExact": true,
+      "completeOriginalBelow453Exact": true,
+      "farShoeAlpha20BoundsY435Plus": [
+        197,
+        435,
+        277,
+        472
+      ],
+      "layers": {
+        "near-leg": "a4eb44e7124c0f9d33c384327edfcbf7206631f5a43b0e993ea79f13601d7bcc",
+        "far-leg": "14cd63ba9361708f12f6190ee1fc84a5720a088bd5fc06a64cdc077401d6d3a0",
+        "foreground-mask": "c0cb6d6dc8df419dd00dbd64154958f5304f495b4db3e81e3a621471db8f3ec5",
+        "planted": "9ea2d31243e8d8f747c9a5b141b2418a5d5fafb6ee3931c16afd1c788910ce8a"
+      }
+    }
+  }
+}

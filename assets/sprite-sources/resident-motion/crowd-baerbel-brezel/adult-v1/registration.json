@@ -1,0 +1,362 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "crowd-baerbel-brezel",
+  "sourceHashes": {
+    "raw-cardinals-v3.png": "0bcd5c6d352e0d832ab86b4bfd5ee9f250ddeb149a39eaed0a0789cb7b039dcc",
+    "raw-quarters-v1.png": "c03b94beb724278369e04726298143c8fe17b9d73d168e192a93a7c08bf5955c"
+  },
+  "matteCleaning": {
+    "raw-cardinals-v3.png": {
+      "rawSha256": "0bcd5c6d352e0d832ab86b4bfd5ee9f250ddeb149a39eaed0a0789cb7b039dcc",
+      "cleanedSha256": "ca47fd3733d92dce48e3cdd402ee2ab83366032ebce664e41eb6a841af8f9865",
+      "rule": "Set all RGBA to zero only where original alpha <20, before any premultiplied resampling",
+      "removedAlpha1To19Pixels": 22075,
+      "clearedHiddenRgbAlpha0Pixels": 255,
+      "preservedAlphaAtLeast20BytesExact": true,
+      "preservedPixelCount": 492222
+    },
+    "raw-quarters-v1.png": {
+      "rawSha256": "c03b94beb724278369e04726298143c8fe17b9d73d168e192a93a7c08bf5955c",
+      "cleanedSha256": "44b635fcfd01149048c0cb5ebec878ac2f5b6c168499b426a36e3c8bbabe5898",
+      "rule": "Set all RGBA to zero only where original alpha <20, before any premultiplied resampling",
+      "removedAlpha1To19Pixels": 55528,
+      "clearedHiddenRgbAlpha0Pixels": 248,
+      "preservedAlphaAtLeast20BytesExact": true,
+      "preservedPixelCount": 489721
+    }
+  },
+  "sourceDensityHeights": {
+    "raw-cardinals-v3.png": 665,
+    "raw-quarters-v1.png": 680
+  },
+  "oneScalePerRawSheet": {
+    "raw-cardinals-v3.png": 0.6015037593984962,
+    "raw-quarters-v1.png": 0.5882352941176471
+  },
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        153,
+        46,
+        493,
+        711
+      ],
+      "sourcePivot": [
+        312.5,
+        711
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 259.5,
+          "bounds": [
+            226,
+            621,
+            293,
+            711
+          ],
+          "pixels": 4729
+        },
+        {
+          "x": 365.5,
+          "bounds": [
+            323,
+            621,
+            408,
+            711
+          ],
+          "pixels": 5266
+        }
+      ],
+      "workingOrigin": [
+        68.03007518796994,
+        44.33082706766919
+      ],
+      "workingBoundsAlpha20": [
+        160,
+        72,
+        365,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/down.png",
+      "registeredSha256": "f44573d8873481f961632d6608194e9e5df437aeee00c83895616643bb85a4de"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        170,
+        35,
+        438,
+        715
+      ],
+      "sourcePivot": [
+        309.5,
+        715
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 309.5,
+          "bounds": [
+            224,
+            625,
+            395,
+            715
+          ],
+          "pixels": 11188
+        }
+      ],
+      "workingOrigin": [
+        73.94117647058823,
+        51.41176470588232
+      ],
+      "workingBoundsAlpha20": [
+        174,
+        72,
+        332,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/front-right.png",
+      "registeredSha256": "e2f6afe9ca75b651cd5072e4869f65e8a6941f3704e4998cf993c6919cb4fc21"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        675,
+        49,
+        897,
+        711
+      ],
+      "sourcePivot": [
+        796.0,
+        711
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 796.0,
+          "bounds": [
+            727,
+            621,
+            865,
+            711
+          ],
+          "pixels": 8755
+        }
+      ],
+      "workingOrigin": [
+        -222.796992481203,
+        44.33082706766919
+      ],
+      "workingBoundsAlpha20": [
+        183,
+        74,
+        317,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/right.png",
+      "registeredSha256": "0bab128b8ee5438bf3e9892e2159727b686d592d49eab05f4262f012e0ba35e3"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        647,
+        37,
+        906,
+        712
+      ],
+      "sourcePivot": [
+        791.5,
+        712
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 791.5,
+          "bounds": [
+            712,
+            622,
+            871,
+            712
+          ],
+          "pixels": 10351
+        }
+      ],
+      "workingOrigin": [
+        -209.58823529411768,
+        53.176470588235304
+      ],
+      "workingBoundsAlpha20": [
+        171,
+        75,
+        324,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/rear-right.png",
+      "registeredSha256": "d8de07e0138f6b656cd6cb3fe520d56a6de5bdd71ed730173e49c3453bef489c"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        1141,
+        52,
+        1486,
+        711
+      ],
+      "sourcePivot": [
+        1327.0,
+        711
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1273.5,
+          "bounds": [
+            1240,
+            621,
+            1307,
+            711
+          ],
+          "pixels": 4626
+        },
+        {
+          "x": 1380.5,
+          "bounds": [
+            1347,
+            621,
+            1414,
+            711
+          ],
+          "pixels": 4686
+        }
+      ],
+      "workingOrigin": [
+        -542.1954887218045,
+        44.33082706766919
+      ],
+      "workingBoundsAlpha20": [
+        144,
+        76,
+        352,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/up.png",
+      "registeredSha256": "ac2e8f6aeb35062c7bfbc26d2c2376e5e6693f20163a3f7f9cbe433ba4f432e5"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1161,
+        38,
+        1468,
+        715
+      ],
+      "sourcePivot": [
+        1323.5,
+        715
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1323.5,
+          "bounds": [
+            1240,
+            625,
+            1407,
+            715
+          ],
+          "pixels": 10611
+        }
+      ],
+      "workingOrigin": [
+        -522.5294117647059,
+        51.41176470588232
+      ],
+      "workingBoundsAlpha20": [
+        161,
+        74,
+        341,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/rear-left.png",
+      "registeredSha256": "7e406b21fcb39815e1cd1f3121241d6b821640b8797c13060ca7bf5df3f61ebb"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        1727,
+        50,
+        1956,
+        712
+      ],
+      "sourcePivot": [
+        1834.5,
+        712
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1834.5,
+          "bounds": [
+            1766,
+            622,
+            1903,
+            712
+          ],
+          "pixels": 8463
+        }
+      ],
+      "workingOrigin": [
+        -847.4586466165413,
+        43.72932330827069
+      ],
+      "workingBoundsAlpha20": [
+        192,
+        74,
+        330,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/left.png",
+      "registeredSha256": "08183abc739dc9d2c0e8b83005938dfd2851d9ffe94a9c13d04b1f34a8b93ced"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/raw-quarters-v1.png",
+      "sourceBoundsAlpha20": [
+        1731,
+        37,
+        1999,
+        713
+      ],
+      "sourcePivot": [
+        1847.5,
+        713
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1847.5,
+          "bounds": [
+            1760,
+            623,
+            1935,
+            713
+          ],
+          "pixels": 11413
+        }
+      ],
+      "workingOrigin": [
+        -830.7647058823529,
+        52.588235294117624
+      ],
+      "workingBoundsAlpha20": [
+        188,
+        75,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/registered/front-left.png",
+      "registeredSha256": "938ea57dacb78be20079c6eabad2b9d328769d628d06efd4cefc7b60e2c3e98e"
+    }
+  }
+}

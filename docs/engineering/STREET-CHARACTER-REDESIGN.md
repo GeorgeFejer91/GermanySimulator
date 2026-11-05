@@ -184,6 +184,191 @@ fits are separate/private; native/motion/source-replay gates remain open.
 Dietmar DIN's corrected mature cardinal source is approved for own quarter
 expansion. Politicians, child and Bürgeramt remain untouched.
 
+## Bärbel integrated candidate — 5 November 2026
+
+Police accepted commit `1f069adc63c501d5ac095013414e0741887faf98` is normally
+pushed; Pages42081376355 succeeded. All22public files match that immutable
+commit. Six silent contexts pass root/compatibility and actual patrol/heavy,
+male/female desktop/portrait paint and fallback admission, with zero page or
+HTTP errors. The public verifier uses committed blobs independently of the
+next mutable source. Evidence: `output/police-stature/live/`; physicalAndroid
+and natural pursuit traversal are not inferred.
+
+Only Bärbel changes among43canonical records; other42expanded records stay
+exact. Her own adult source keeps the wavy copper bob, teal cable knit/cream
+collar, brown knee skirt, grey stockings, burgundy buckle MaryJanes and one
+anatomical-left paper grocery bag with empty RIGHT. Eight own views supply
+412body cells,16distinct walk samples,64phase stops, original quiet4 and
+324visible mouths per density; rear-three mouths are deliberately absent.
+
+Selected height2.77/stride13.724747247848567 and packet5d0c13d5 bind the full
+typed-f64 definition. Selected sidecar and canonical entry agree; strict
+canonical actor4tests and all441street checks pass. The original private-only
+test was explicitly migrated to production selection; its pre-install RED is
+retained. The actual canonical Python delivery check reproduces both packs.
+All source/body/mouth image bytes stay exact after fitting; current wire is
+120,917bytes, standing total635,034bytes and18mature walkers. Source2.33 and
+all26raw-rebuilt outputs remain separately pinned; fitting again directly from
+that initially absent clean mirror reproduces the selectedperson/packet
+byte-exact without rebuilding images or touching production.
+
+Both comparable cold browser budgets pass unchanged18MB/4Hz/1.6MP/input gates:
+desktop16,385,415→16,385,884bytes; portrait15,999,990→16,000,350;9accepted input
+observations and zero errors per case. One sequential run/profile used
+SwiftShader, seed38 and no other author-heavy child; this is lab acceptance,
+not FPS, physicalAndroid, causal speedup or final actor approach evidence.
+The actual sparse builder retains162required runtime/module files exactly
+and omits both original Bärbel paints without changing them; it is not a
+whole-site size or browser claim. Evidence: `output/baerbel-height/`.
+
+Next: freeze the integrated candidate, then fresh independent Physics actual
+normal-owner native contact/cadence/quiet/turn/obstruction/original-media and
+desktop/portrait/landscape checks; separate Camera source/height/depth/
+fallback/lifetime/car/door/landmark checks. Existing preparedB19/native17 is a
+source/VM inventory, not final observed identity; preserve any mismatch RED and
+bind the actual original nonquiz/non-Sandale producer. Publish only after
+those affected gates pass, verify public bytes/root/compatibility/admission,
+then continue22short citizens, bothSandales and3adult neighbors. The user’s
+overall goal stays active. Ute and Dietmar source work remains private and
+must not enter Bärbel’s reviewed release paths.
+
+### Bärbel held for source repair
+
+Independent Physics on the113-pin candidate confirms actual normalB19/native17
+and passes desktop full-state, portrait/landscape gait/stop, selected native
+contacts, quiet4, turn/obstruction and original-media ownership. It nevertheless
+finds a real visual FAIL: same visible near-shoe heel/toe span compresses and
+stretches across the side cycle. RIGHT68working pixels varies47.998–87.998;
+LEFT67 varies47.025–86.891, visible as roughly12–22desktop and8–15mobile pixels.
+Contact-point residuals did not detect that within-shoe deformation. No Bärbel
+Camera browser ran and no release is accepted. All113failed-candidate pins
+are archived exactly at `output/baerbel-height/held-candidate-v1/`; passing
+source/runtime/benchmark receipts retain their limited scope beside the FAIL.
+
+Source owner has Bärbel back for actor-specific repair. Preserve approved
+upper body, props and unchanged views; obtain complete own profile leg/shoe
+paint where hidden far anatomy is absent, use the existing connected leg
+layers/protected bag, and prove whole near/far shoe shape/disocclusion before
+rebaking. Dietmar's near-sole-only repair exposed an incomplete far upper toe,
+so his full bake is also held; source anatomy correction is required rather
+than a smaller shuffle or numerical waiver. Ute's x-blend pilot remains
+provisional for this same concern. The owning pre-bake rule is now in the
+[sprite protocol](../../For-AI/SPRITE-GENERATION-PROTOCOL.md). No new shared
+renderer, deformation service, physics engine or voice change is authorized
+by this finding. Repeat affected source/raw/native/finalfit and independent
+world gates on a successor before publication. Overall goal remains active.
+
+The bounded follow-up audit also confirms the same visible near-shoe defect
+in Günther TÜV and Hildegard, both profiles. Günther's own source spans vary
+46.76–91.37 from69pixels RIGHT and54.97–100.97 from78 LEFT; Hildegard varies
+41–81 from61 RIGHT and48–88 from68 LEFT. All128selected encoded cells exactly
+reproduce their own source exports. Those newly authored families now have
+actor-specific repair work queued; their verified height, public bytes and
+earlier state/contact-point checks retain their stated scope. No inference
+is made about the earlier15families. Audit and unmarked source/native views:
+`output/adult-stature/new-family-shoe-audit/`.
+
+Bärbel's complete additional FAR calf/ankle/shoes are registered uniformly
+beside exact original NEAR paint. Root inspected both planted feet and the
+full dark layer board. Separate-layer source pilots preserve whole shoes;
+the original LEFTbag slit is retained as a failed pilot before fixing its
+hidden root overlap. Native/strength/family/replay/world gates remain open.
+Günther has a separate scoped source-repair owner, Ute remains source-only,
+and Dietmar's full bake stays held. Overall goal remains active; all
+politicians, child and Bürgeramt remain protected.
+
+Independent Bärbel source/native-v2 preflight now permits the full rebake:
+160actual source poses and320native cells reproduce the repaired layers,
+320whole-shoe checks equal constant translations, and10native mouth pairs
+retain their actual five-visible/three-null fits. The reviewer inspected all
+20native boards and unmarked source cycles; real alpha-aware visible paint
+checks pass, while the upper FAR heel remains explicitly occluded/layer-only.
+Source cadence is11.65 at2.33 from actual400px figure,40px stance slope and
+the existing0.02world mapping; native residual is at most0.370703pixel,
+2.66percent of its own shoe length. This replaces the old11.5446 source fit;
+the actual final2.77 fit must be rebound by the integrator. The old60second
+diagnostic and five-visible-key fixture REDs remain beside their bounded,
+corrected successors. Full412/mouth/raw/formal rebake is in progress in the
+owned Bärbel namespace; shared canonical integration and world acceptance
+remain open. Evidence: `output/baerbel-height/review-physics-source-v2/`.
+
+Ute's own separate layers pass both16phase source cycles: exact whole-shoe
+translation, actual visible near/far paint correspondence, connected hem,
+fixed face/LEFTbook/hands and independent five-position slopes−40. Root
+viewed both unmarked feet strips and full dark cycles. The two bounded children
+closed13.796/14.047seconds,169.34/168.97MiB; no native/fullfamily/world claim.
+Her first hidden-root gap is preserved beside corrected registration02.
+All five own source mouth endpoints have now been viewed on light and dark.
+Günther's initial hard hip-root notch is likewise preserved; root viewed and
+approved corrected registration02 for short source/native prototypes only.
+Hildegard has two new complete own grey-stocking/black-MaryJane FAR parts,
+raw SHA256`bda9a1ffbf871ec7b8e6412b930a00a5cd8a75059a4446905a6075831183a7d3`;
+registration and motion proof remain pending. No G/H delivery changed.
+Current deployed commit remains1f069ad; the overall cast goal remains active.
+
+### Bärbel repaired successor integrated, world acceptance pending
+
+The repaired412-cell family now selects2.77/13.85 with packet
+`7de44b461ad31a27154d53ae211931ef6ea8ac8494dd819aa9673f6be95cfbcf`.
+All104authored source/runtime pins and9evidence pins were exact before fitting;
+only the selected person and packet change in the final metadata fit. The
+actual raw01 mirror independently produces the identical selected person and
+packet through the existing Node fitter. Other42expanded records stay exact;
+wire120,904bytes and standing total635,034bytes remain below unchanged limits.
+Canonical selected10checks, all441street CI checks and the actual Python
+canonical selective-packet replay pass. Actual sparse packaging retains162
+required files and excludes all three selected original tool paints.
+
+New full-native closure checks824body cells and648mouth pairs, with52actual
+author-viewed pages and formal412frames/density. The raw01run rebuilt every
+output in11successful generation children, then stopped at a validation-only
+old-path-prefix typo. Corrected bounded validation proves all26outputs and
+the authored person exact, with every generation input and71wrapper pins
+unchanged. The original command RED and its wrong baseline remain preserved;
+an unnecessary duplicate02 was intentionally cancelled and is not evidence.
+This is split reconstruction/validation proof, not a fresh all-in-one PASS.
+Detailed root integration and packaging receipts use the `-v2` suffix in
+`output/baerbel-height/`. Fresh comparable budgets and both independent world
+reviews are next; the old113-pin candidate remains held.
+
+Ute now has160source profile/stop poses and320exact native body exports.
+The first mobile RIGHT mouth was correctly held for zero visible RGB change.
+Its actor-specific refit preserves actual closed-lip heights, original alpha
+and nose/glasses aboveY121 while giving the lower jaw its own opening space;
+all10current native mouth pairs pass. Both old fit and failed mobile attempt
+remain saved. Full native visual/preflight and412family gates remain open.
+Günther's160source/320native pilot is frozen for independent preflight; no
+Günther, Hildegard or Ute runtime delivery was changed by this integration.
+
+Bärbel's repaired successor is now accepted for normal publication. Fresh
+independent Physics passes actual B19/native17, all16gait phases and planted
+stops in desktop/portrait/landscape; desktop also passes original quiet4,
+all8turns,98obstruction holds and one original Germany01 recording cold/warm,
+pause/end/cancel. Fresh40source/native/delivered contact samples match the
+actual final movement packs; residual is at most0.370703native pixel. The
+upper far heel remains explicitly occluded/layer-only. One bottom raster row
+remains in desktop/portrait floor probes; zero landscape. This is not a
+literal zero-penetration or all-world collision claim.
+
+Independent Camera passes C4/C5/X1 in19silent contexts: actual heights
+124/130/60rows versus Söder124/131/60,4,846correct depth samples/zero wrong,
+opaque walls, all24turn views, standing/packet held+404, retirement/reentry,
+loaded car/door and loaded/fallback Bundestag. Other42expanded records and
+1,318other tracked PNG/WebP assets are exact to public1f. C1–C3 remain unchanged
+and not freshly rerun. Root personally viewed desktop/portrait Söder pairs,
+actual LEFTwalk phases4/12 and the complete desktop8heading world board.
+
+Fresh comparable cold budgets pass unchanged limits: baseline1f desktop
+16,368,106bytes/portrait15,999,990 versus candidate16,385,771/16,000,346,9accepted
+inputs and0errors each. Both sequential pairs use SwiftShader, seed38 and no
+other author-heavy child; functional reviewers use IrisXe/D3D11. No FPS,
+physicalAndroid, natural mission traversal or listening claim is inferred.
+All reviewer/benchmark contexts, browsers, servers and CPU children are closed.
+The new actor's four checks are now wired into the existing Pages street step;
+the exact expanded445-check command passes. Final changes after the142-pin
+world reviews are this task record and CI wiring only; runtime/art remain exact.
+Immutable publication verification is next, then the remaining street cast.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

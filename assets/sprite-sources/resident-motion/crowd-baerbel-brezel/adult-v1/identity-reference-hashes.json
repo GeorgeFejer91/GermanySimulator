@@ -1,0 +1,20 @@
+[
+  {
+    "role": "Identity/outfit/prop ownership only; old toy anatomy is rejected",
+    "original": "assets/sprite-sources/street-residents/crowd-baerbel-brezel-directions-candidate.png",
+    "portable": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/identity-cardinals-original.png",
+    "sha256": "9073fdb592c9512be17e221478a87618e218bf09bfe54613e659d97cf3934560"
+  },
+  {
+    "role": "Identity/outfit/prop ownership only; old toy anatomy is rejected",
+    "original": "assets/characters/street/crowd-baerbel-brezel-standing.webp",
+    "portable": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/identity-standing-original.webp",
+    "sha256": "0c096be166423c463bdf9192928b08cc64145c756c0701500fe0ead9e77efee2"
+  },
+  {
+    "role": "Identity/outfit/prop ownership only; old toy anatomy is rejected",
+    "original": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/turns-candidate.png",
+    "portable": "assets/sprite-sources/resident-motion/crowd-baerbel-brezel/adult-v1/identity-quarters-original.png",
+    "sha256": "a213c0c4fee145fdf200713f859350e28ba29d18f4393a27f726edaf3d44e2b3"
+  }
+]

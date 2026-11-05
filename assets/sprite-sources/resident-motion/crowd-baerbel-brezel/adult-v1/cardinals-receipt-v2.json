@@ -1,0 +1,17 @@
+{
+  "tool": "built-in imagegen",
+  "request": "cardinals-request-v2.json",
+  "requestSha256": "1976414dfe65aa729f6ee7b4157e9a74575de078510931f7f09c880fbaf6b138",
+  "immutableOriginal": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac22-8fac-7cd1-ae51-b88073bffadc/exec-8fd0183b-0f99-48eb-8dff-1ee25392defb.png",
+  "raw": "raw-cardinals-v2.png",
+  "sha256": "c3874517fd8761f954ce9b9adf1f580537db00a3e20b819eae6ac6380c9e3464",
+  "size": [
+    2172,
+    724
+  ],
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "status": "Targeted head-size successor; root review pending; no quarter/family selected"
+}
