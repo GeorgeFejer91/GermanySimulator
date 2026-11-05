@@ -1,0 +1,102 @@
+{
+  "id": "crowd-hildegard-brotzeit",
+  "status": "NEW AUTHORING PLAN; no prior public locomotion family exists",
+  "sourceHelper": "tools/build-resident-motion.py",
+  "sourceSettingsBasis": "Existing shared four supported names and duration vectors; own anatomy/lip/prop/sole coordinates will be measured from Hildegard's registered paint",
+  "states": {
+    "idle": {
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "sway_pixels": 1.2,
+      "nod_pixels": 1,
+      "lift_pixels": 0
+    },
+    "look": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    },
+    "success": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 2,
+      "nod_pixels": -3,
+      "lift_pixels": 10
+    },
+    "failure": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    }
+  },
+  "runtimeWaitAlias": "exact idle alias required by existing idle-to-wait mapping",
+  "limits": "This new capability preserves actual generic nonquiz crowd speech, routes and original recordings. Own neck/waist/skirt/calf/ankle and basket masks must be fitted after registration. No rejected compact action paint is promoted."
+}

@@ -1,10 +1,11 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.core.js';
 import { registerStreetCharacterManifest, resolveStreetCharacter, createStreetCharacterSprite, advanceStreetAnimation } from '../street-character-sprites.js';
 
-const manifest = JSON.parse(await readFile(new URL('../assets/characters/street/manifest.json', import.meta.url), 'utf8'));
+const manifest = expandStreetManifest(JSON.parse(await readFile(new URL('../assets/characters/street/manifest.json', import.meta.url), 'utf8')));
 const playerId = 'spieler-hans-peter-mustermann';
 const sample = [64, 23];
 const scale = 1.5 / 136;

@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -8,7 +9,7 @@ import {motionObserverSource,pedestrianAvoidanceSource} from './street-simulatio
 
 const game=readFileSync('game.js','utf8').replaceAll('\r\n','\n'),world=readFileSync('world3d.js','utf8');
 vm.runInThisContext(readFileSync('tourist-animation.js','utf8'));
-const person=JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8')).characters['crowd-irmgard-aktenordner'];
+const person=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8'))).characters['crowd-irmgard-aktenordner'];
 const legacy=JSON.parse(readFileSync('assets/tourists/towelWoman/manifest.json','utf8'));legacy.movementOnly=true;
 function between(source,start,end){const a=source.indexOf(start),b=source.indexOf(end,a+start.length);assert(a>=0&&b>a,start);return source.slice(a,b)}
 const block=(a,b)=>between(game,a,b);

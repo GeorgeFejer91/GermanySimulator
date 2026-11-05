@@ -1192,6 +1192,17 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 ## Street character movement
 
+The canonical street registry remains bounded to256KiB and64entries. Its optional
+`atlasMotion.compactClips` schema1 stores stop slots and turn slot/duration pairs;
+`street-manifest.js` restores the complete original frames before validation,
+simulation or typed-f64 delivery hashing. Uniform stops alone may omit their
+already-owned final neutral; nonuniform/extended source records stay expanded.
+The Python delivery builder normalizes the same format, retaining exact pack
+bytes and source fingerprints. This changes metadata transport only: no extra
+image requests, frame loop, polling, asset owner or image decoder is introduced.
+The17-adult height candidate uses116,462wire bytes; actual approach/variant,
+decoded-memory, input/render and independent-world gates remain required.
+
 The player retains its articulated 3D model and displacement-driven limb phase.
 The user's 2026-10-21 police request supersedes the earlier police exception:
 officers now use the eight painted patrol/protective/riot/heavy variants in

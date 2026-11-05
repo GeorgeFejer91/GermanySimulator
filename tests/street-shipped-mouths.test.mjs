@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -6,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {validateStreetMouthRegistration} from '../street-character-mouth.js';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 
-const manifest=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const manifest=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const file=path=>readFileSync(path.replace(/^\.\//,''));
 

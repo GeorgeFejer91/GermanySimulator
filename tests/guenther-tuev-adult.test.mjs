@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 const author='assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/';
-const registry=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const registry=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const person=registry.characters['stadt-guenther-tuev'];
 const old=JSON.parse(readFileSync(author+'pre-admission-family.json'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');

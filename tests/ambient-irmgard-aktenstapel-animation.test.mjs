@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 
-const id='stadt-irmgard-aktenstapel',manifest=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const id='stadt-irmgard-aktenstapel',manifest=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=manifest.characters[id],hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const asset=path=>readFileSync(path.replace(/^\.\//,''));
 registerStreetCharacterManifest(manifest);
@@ -13,7 +14,7 @@ const context=vm.createContext({});vm.runInContext(readFileSync('character-inter
 
 test('named Irmgard keeps her own standing scale and gains phase-owned stops and a free-hand gesture',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.77);
  assert.equal(p.standing.sha256,'95f555d781252f9f48b4d900b49b9409ec3b18a85650d2b3e1349c27a9b9bda9');
  assert.equal(hash(asset(p.standing.file)),p.standing.sha256);
  assert(p.strideDistance>0&&Number.isFinite(p.strideDistance));

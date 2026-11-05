@@ -40,7 +40,7 @@ def definition_fingerprint(person):
         if isinstance(value, dict):
             return ['object', [[k, typed(value[k])] for k in sorted(value)]]
         return ['string', value]
-    source = {k: v for k, v in person.items() if k != 'motionDelivery'}
+    source = {k: v for k, v in expand_person(person).items() if k != 'motionDelivery'}
     return digest(json.dumps(typed(source), ensure_ascii=False, separators=(',', ':')).encode('utf-8'))
 
 
@@ -62,7 +62,58 @@ def pair(value, label):
     return [integer(n, 1, 4096, label) for n in value]
 
 
+def expand_person(person):
+    motion = person.get('atlasMotion')
+    if not isinstance(motion, dict) or 'compactClips' not in motion:
+        return person
+    packed = mapping(motion['compactClips'], 'compact clips')
+    if type(packed.get('schemaVersion')) is not int or packed['schemaVersion'] != 1 or set(packed) - {'schemaVersion', 'settles', 'transitions'}:
+        raise ValueError('Invalid compact clip version or fields')
+    cols, rows = pair(person.get('grid'), 'compact grid')
+    integer(cols, 1, 64, 'compact columns')
+    integer(rows, 1, 64, 'compact rows')
+    expanded = {k: v for k, v in motion.items() if k != 'compactClips'}
+
+    def frame(slot, ms):
+        integer(slot, 0, cols * rows - 1, 'compact slot')
+        if type(ms) not in (int, float) or not math.isfinite(ms) or not 0 < ms <= 1000:
+            raise ValueError('Invalid compact frame duration')
+        return {'row': slot // cols, 'col': slot % cols, 'ms': ms}
+
+    if 'transitions' in packed:
+        transitions = mapping(packed['transitions'], 'compact transitions')
+        names = {a + '-to-' + b for a in DIRECTIONS for b in DIRECTIONS if a != b}
+        if 'transitions' in expanded or set(transitions) != names:
+            raise ValueError('Ambiguous or invalid compact transitions')
+        expanded['transitions'] = {}
+        for key, sequence in transitions.items():
+            if not isinstance(sequence, list) or not 1 <= len(sequence) <= 64 or any(not isinstance(p, list) or len(p) != 2 for p in sequence):
+                raise ValueError('Invalid compact transition frames')
+            expanded['transitions'][key] = {'frames': [frame(*p) for p in sequence]}
+    if 'settles' in packed:
+        stops = mapping(packed['settles'], 'compact settles')
+        phases = mapping(stops.get('phases'), 'compact settle phases')
+        if 'settles' in expanded or set(stops) != {'ms', 'phases'} or set(phases) != set(DIRECTIONS):
+            raise ValueError('Ambiguous or invalid compact settles')
+        expanded['settles'] = {}
+        for direction in DIRECTIONS:
+            sequences = phases[direction]
+            count = integer(expanded['walks'][direction]['frames'], 1, 64, 'compact phase count')
+            bridge = expanded['bridges'][direction]
+            if not isinstance(sequences, list) or len(sequences) != count:
+                raise ValueError('Invalid compact phase sequences')
+            expanded['settles'][direction] = {}
+            for phase, slots in enumerate(sequences):
+                if not isinstance(slots, list) or not 1 <= len(slots) <= 15:
+                    raise ValueError('Invalid compact settle slots')
+                end = {'row': bridge['row'], 'col': bridge['stop_cols'][-1], 'ms': stops['ms']}
+                frames = [frame(slot, stops['ms']) for slot in slots] + [end]
+                expanded['settles'][direction][str(phase)] = {'frames': frames}
+    return {**person, 'atlasMotion': expanded}
+
+
 def collect_slots(person):
+    person = expand_person(person)
     cols, rows = pair(person.get('grid'), 'logical grid')
     integer(cols, 1, 64, 'logical columns')
     integer(rows, 1, 64, 'logical rows')

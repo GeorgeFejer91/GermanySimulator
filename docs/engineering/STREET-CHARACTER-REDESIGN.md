@@ -57,6 +57,92 @@ stays in its separate checkouts. Copy only an accepted character's
 registry entry and required assets/dependencies; do not replace the whole
 registry with an author's broader local candidate.
 
+## Seventeen-adult integrated candidate — 5 November 2026
+
+Public Günther successor `e4e5a79e16a2066d7e597032f119964615481114` is verified
+live: Pages42055778984 SUCCESS,14 public files exact, root/compatibility/own
+movement admission without page/HTTP errors. The first failed roster gate is
+preserved; its exact44-file successor passes435 checks. The runtime did not
+change in that test-only successor.
+
+The accepted candidate selects Hildegard's complete own412-cell adult family and
+calibrates the15 earlier mature citizens to2.77 with proportional strides.
+Günther stays exact. Other27 expanded registry records remain unchanged.
+Only per-person packet definition digests change for the earlier15; their
+body/mouth images, actions, timings, recordings and identities remain exact.
+Hildegard retains braid, turquoise glasses, cream cardigan, rust blouse,
+charcoal skirt, grey stockings, Mary Janes and one anatomical-right basket.
+Her source2.33/native stride10.823723553789875 rebuild reproduces24 outputs;
+actual final2.77 fit/packet uses stride12.86768851673732.824 native body and
+648 mouth checks, all28 personally viewed native pages, raw-only replay and
+formal412-frame/eight-category records per density pass in
+`output/hildegard-height/`. Actual own production movement, quiet4, turns,
+original media cold/warm/pause/cancel and player obstruction pass separately.
+
+The old256KiB metadata cap prevented adding another complete family. Lossless
+compact stop/turn references reduce this integrated canonical registry to
+116,462bytes; loader and Python packer restore identical full records before
+validation and delivery digest checks. No budget was increased. Existing raw
+semantic readers now explicitly expand the wire; strict selected-height,
+stride, identity, byte-count and source-image assertions remain. All16 actual
+compact-canonical selective packets reproduce exactly through the original
+packer in check mode, with unchanged image bytes. Python14 checks, codec and
+height unit checks,64 actor checks and the exact441-check street CI group pass.
+
+Independent Physics passes48 actual-producer gait/stop cases: all16changed
+actors in desktop, Android portrait and landscape emulation, all16phases,
+cadence/wraps, zero illegal/stationary gait and zero pause root drift. Fresh
+Hildegard both-foot/view/density native contact fitting agrees with selected
+stride; maximum residual0.3786native pixels/3.45percent of her own shoe length.
+Her actual full-state desktop case passes legal movement, all quiet actions,
+eight anchors,16RIGHTphases,98player holds and native speech ownership.
+Existing old negated far-foot recipe exposures remain explicitly unfixed;
+these proportional fits preserve the old shoe-relative source residual.
+
+Independent Camera passes all17actual identities across all3layouts,
+9,807correct depth samples/zero wrong, opaque wall ordering,150/148pivot
+fallback, held/missing texture, strict distance-retirement/reentry and loaded
+car/door/Bundestag contexts. Actual painted heights are123–124vsSöder124desktop,
+129–131vs131portrait and60–61vs60landscape. The portrait two-row variation is
+one actual mobile crown row projecting2.104–2.111screen pixels, plus0.428pixel
+reference projection residual; shared registered soles align. Keep a fixed
+family scale through poses. Root personally viewed both17-person comparison
+boards. Heike's two-row33/37pixel sole fringe remains bounded by her own
+neutral, with recognizable whole shoes in fresh centered views.
+
+Comparable cold browser budgets pass unchanged limits on desktop/portrait:
+startup16,385,300/15,999,875bytes,9accepted input observations per layout,
+bounded title updates/drawing buffer and zero page errors. That pair used
+SwiftShader software rendering; fresh functional Physics/Camera used IrisXe
+D3D11. Neither establishes physical Android performance or a causal speedup.
+Actual sparse packaging retains153 required files exactly and omits both raw
+Hildegard originals.510protected politician/child/neighbor/Bürgeramt files and
+124existing body/mouth files are exact to public e4e5a79e.
+
+The two source-preserving fixture failures (Wolfgang's extra contact wait and
+Hildegard's VM identity/legal observer), the camera-outside-world extra-owner
+request-count RED and all earlier authoring failures remain in ignored output.
+Their corrected cases retain the original production owners and assertions.
+Detailed receipts: `output/adult-stature/`, including the frozen246file pins,
+independent `review-physics/` and `review-camera/`, actual packet replays,
+formal handoff, packaging and comparable budgets. Final changes after review
+are only this task record and the asset policy's explicit image-decoder wording.
+The119reviewed release paths exclude Bärbel's unfinished namespace;86stage
+bytes are exact and33only normalize ordinary text CRLFtoLF. Five hash-bound
+author scripts retain their exact blankEOF; all other whitespace checks pass.
+Physical Android, natural mission traversal, perceptual listening and broader
+unchanged-world matrices remain NOT RUN. Publish this accepted coherent slice,
+verify deployed root/compatibility and actual new/cohort admission, then resume
+police sizing, Bärbel and the remaining cast without closing the overall goal.
+
+The default managed-worktree index and branch ref repeatedly disappear.
+Task-only publishing metadata at `output/soeder-height/publisher.git` now
+borrows existing objects, retains the repository's `.githooks`, and tracks
+accepted e4e5a79e. Use explicit `--git-dir` there; do not repair or stage the
+primary/shared metadata's phantom deletions. Stage only reviewed source paths.
+The live whole-cast goal remains open:23 short citizen families, police,
+Sandales and adult neighbors still need the current requested end state.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

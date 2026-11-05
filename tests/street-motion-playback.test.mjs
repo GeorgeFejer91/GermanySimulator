@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -47,7 +48,7 @@ test('a dense walk settles through its remaining phases before the planted react
 });
 
 test('owned phase settles replace held walking before a reaction in every heading and phase',()=>{
- const person=JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8')).characters['crowd-irmgard-aktenordner'];
+ const person=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8'))).characters['crowd-irmgard-aktenordner'];
  const m=structuredClone(person.atlasMotion);
  m.interactions={neutral:m.neutral,states:{greet:{...m.neutral,durations_ms:[120]}}};
  for(const from of ['down','right','up','left'])for(let phase=0;phase<16;phase++){

@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -7,7 +8,7 @@ import * as S from '../street-character-sprites.js';
 import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 for(const file of ['tourist-animation.js','character-interactions.js'])vm.runInThisContext(readFileSync(file,'utf8'));
-const original=JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8')).characters['crowd-irmgard-aktenordner'];
+const original=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json','utf8'))).characters['crowd-irmgard-aktenordner'];
 function person(){const p=structuredClone(original);p.atlasMotion.interactions={neutral:{...p.atlasMotion.neutral},states:{greet:{row:15,col:3,durations_ms:[50,120,80]},review:{row:15,col:8,durations_ms:[60,180,70]},success:{row:16,col:1,durations_ms:[50,140,80]}}};return p}
 const manifest=p=>({schemaVersion:1,characters:{'reaction-fixture':{...p,id:'reaction-fixture',actorId:'reaction-fixture',aliases:[]}}});
 const info=a=>S.inspectStreetSimulation(a);

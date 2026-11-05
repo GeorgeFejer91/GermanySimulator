@@ -1,15 +1,16 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
-const registry=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const registry=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=registry.characters['quiz-hartmut-keller'];
 const hash=x=>createHash('sha256').update(x).digest('hex');
 const asset=p=>readFileSync(p.replace(/^\.\//,''));
 test('Hartmut adult paint retains full walking, all phase stops and seven owned actions',()=>{
- assert.equal(p.figureWorldHeight,2.33);assert.equal(p.standingOnly,false);
+ assert.equal(p.figureWorldHeight,2.77);assert.equal(p.standingOnly,false);
  assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.deepEqual(p.grid,[21,19]);
  assert.equal(p.figureHeight,136);assert(p.strideDistance>0);registerStreetCharacterManifest(registry);
  for(const heading of ['down','right','up','left']){
@@ -36,7 +37,7 @@ test('Hartmut adult exact bytes retain own lips and selective movement/reaction 
  const delivery=JSON.parse(asset(p.motionDelivery.file));
  assert.equal(delivery.packs.movement.slots.filter(x=>x!==null).length,348);
  assert.equal(delivery.packs.reactions.slots.filter(x=>x!==null).length,32);
- assert.equal(registry.characters['crowd-irmgard-aktenordner'].figureWorldHeight,2.33);
+ assert.equal(registry.characters['crowd-irmgard-aktenordner'].figureWorldHeight,2.77);
  for(const pack of Object.values(delivery.packs))for(const v of Object.values(pack.variants))assert(v.width*v.height*4<=16*1024*1024,'one admitted texture stays within decoded budget');
 });
 test('Hartmut owned interaction plans terminate from every direction and gait phase',()=>{

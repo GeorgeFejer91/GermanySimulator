@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -6,7 +7,7 @@ import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 
 const id='stadt-hannelore-sparkasse';
-const manifest=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const manifest=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=manifest.characters[id],asset=path=>readFileSync(path.replace(/^\.\//,''));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 registerStreetCharacterManifest(manifest);
@@ -16,8 +17,8 @@ vm.runInContext(readFileSync('character-interactions.js','utf8'),controller);
 test('Hannelore has four complete walks, stops owned by each phase and an own courtesy gesture',()=>{
  assert.equal(p.standingOnly,false,'Hannelore motion must be explicitly admitted');
  assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);
- assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
- assert.equal(p.strideDistance,5.825);
+ assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.77);
+ assert.equal(p.strideDistance,6.925);
  assert(Number.isFinite(p.strideDistance)&&p.strideDistance>0);
  assert.deepEqual(Object.keys(p.atlasMotion.walks).sort(),['down','left','right','up']);
  const ownedStops=new Set();

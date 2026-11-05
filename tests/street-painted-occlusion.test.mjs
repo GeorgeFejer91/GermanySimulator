@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -6,7 +7,7 @@ import * as THREE from '../assets/vendor/three/0.186.0/build/three.core.js';
 import {registerStreetCharacterManifest,createStreetCharacterSprite} from '../street-character-sprites.js';
 
 const world=readFileSync(new URL('../world3d.js',import.meta.url),'utf8');
-const manifest=JSON.parse(readFileSync(new URL('../assets/characters/street/manifest.json',import.meta.url),'utf8'));
+const manifest=expandStreetManifest(JSON.parse(readFileSync(new URL('../assets/characters/street/manifest.json',import.meta.url),'utf8')));
 function production(name){
  const start=world.indexOf(`  function ${name}(`),end=world.indexOf('\n  }',start);
  assert(start>=0&&end>start,name);return world.slice(start,end+4);

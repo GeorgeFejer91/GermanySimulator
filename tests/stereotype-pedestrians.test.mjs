@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
@@ -48,7 +49,7 @@ for(const person of ordinary){
  assert.equal(profiles.find(p=>p.voiceId===person.voiceId).fullName.toUpperCase(),person.fullName);
 }
 vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),context);
-const painted=JSON.parse(readFileSync('assets/characters/street/manifest.json')).characters;
+const painted=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json'))).characters;
 for(const person of quiz){
  const identity=context.window.GermanySimulatorQuizCharacters.characters[Math.floor(context.npcs.indexOf(person)/3)%9],profile=profiles.find(p=>p.voiceId===person.voiceId),binding=cast.productionVoices[person.voiceId],catalogBinding=context.window.GermanySimulatorAudioText.productionVoices[person.voiceId];
  assert.equal(person.quizCharacterId,identity.id);assert.equal(person.voiceId,identity.voiceId);assert.equal(person.name,identity.name);assert.equal(person.fullName,identity.name);

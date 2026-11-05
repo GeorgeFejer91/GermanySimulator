@@ -1,7 +1,8 @@
 import {loadThreeTexture,leaseWithSignal} from './asset-loaders.js?v=20261020-bounded-assets';
+import {expandStreetManifest} from './street-manifest.js?v=20261105-compact-clips';
 import {attachStreetCharacterMouth,validateStreetMouthRegistration} from './street-character-mouth.js';
 import {validateStreetMotionDelivery,createStreetMotionDelivery} from './street-motion-delivery.js?v=20261021-compact-motion';
-const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261105-guenther-height';
+const MANIFEST_URL='./assets/characters/street/manifest.json?v=20261105-adult-stature';
 const playbackByActor=new WeakMap(),texturesByThree=new WeakMap(),imagesByConstructor=new WeakMap(),fallbackByHost=new WeakMap();
 const rigDefinitions=new Map(),mouthDefinitions=new Map(),deliveryDefinitions=new Map(),rigForwards={down:[0,0,1],right:[1,0,0],up:[0,0,-1],left:[-1,0,0]};
 const rigCameraAxes=['right','up','forward'];
@@ -126,6 +127,7 @@ function validateExternalMouthPaint(definition,person){
 
 export function registerStreetCharacterManifest(manifest){
   if(manifest?.schemaVersion!==1||!manifest.characters||Array.isArray(manifest.characters))throw new TypeError('Invalid street character manifest');
+  manifest=expandStreetManifest(manifest);
   const entries=Object.entries(manifest.characters),nextAliases=new Map();
   if(entries.length>64)throw new RangeError('Street cast exceeds manifest bound');
   for(const [voiceId,person] of entries){

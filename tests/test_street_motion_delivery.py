@@ -223,6 +223,50 @@ class MotionDeliveryTests(unittest.TestCase):
         self.assertIn(23, record['packs']['reactions']['slots'])
         self.assertEqual(record['packs']['movement']['slots'][:12], [0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 18, 19])
 
+    def test_compact_wire_keeps_identical_cells_packet_bytes_and_full_definition(self):
+        motion = self.person['atlasMotion']
+        example = next(iter(motion['transitions'].values()))
+        motion['transitions'] = {a + '-to-' + b: copy.deepcopy(motion['transitions'].get(a + '-to-' + b, example))
+                                 for a in delivery.DIRECTIONS for b in delivery.DIRECTIONS if a != b}
+        motion['settles'] = {d: {str(p): {'frames': [{'row': 4, 'col': 3, 'ms': 40},
+                                                  {'row': 4, 'col': 1, 'ms': 40}]}
+                                  for p in range(2)} for d in delivery.DIRECTIONS}
+        self.write_manifest()
+        original = copy.deepcopy(self.person)
+        expected = self.run_build()
+        transitions = motion.pop('transitions')
+        motion.pop('settles')
+        motion['compactClips'] = {
+            'schemaVersion': 1,
+            'transitions': {key: [[f['row'] * 4 + f['col'], f['ms']] for f in clip['frames']]
+                            for key, clip in transitions.items()},
+            'settles': {'ms': 40, 'phases': {d: [[19], [19]] for d in delivery.DIRECTIONS}}}
+        wire = copy.deepcopy(self.person)
+        self.write_manifest()
+        self.assertEqual(delivery.expand_person(wire), original)
+        self.assertEqual(delivery.definition_fingerprint(wire), expected['definitionSha256'])
+        self.assertEqual(self.run_build(check=True), expected)
+        self.assertEqual(self.person, wire)
+
+    def test_compact_wire_rejects_unsupported_version_and_out_of_bounds_slots(self):
+        motion = self.person['atlasMotion']
+        example = next(iter(motion['transitions'].values()))
+        motion['transitions'] = {a + '-to-' + b: copy.deepcopy(motion['transitions'].get(a + '-to-' + b, example))
+                                 for a in delivery.DIRECTIONS for b in delivery.DIRECTIONS if a != b}
+        transitions = motion.pop('transitions')
+        motion['compactClips'] = {'schemaVersion': 1, 'transitions': {
+            key: [[f['row'] * 4 + f['col'], f['ms']] for f in clip['frames']]
+            for key, clip in transitions.items()}}
+        valid = copy.deepcopy(self.person)
+        for mutate in [lambda p: p['atlasMotion']['compactClips'].update(schemaVersion=2),
+                       lambda p: p['atlasMotion']['compactClips']['transitions']['down-to-right'][0].__setitem__(0, 9999)]:
+            self.person = copy.deepcopy(valid)
+            mutate(self.person)
+            self.write_manifest()
+            with self.assertRaisesRegex(ValueError, 'compact'):
+                self.run_build()
+            self.assertFalse(self.out.exists())
+
     def test_rejects_external_traversal_output_and_source_paths(self):
         for out in [self.root / 'output', self.root / 'assets/characters/residents/other/delivery', self.family]:
             with self.subTest(out=out), self.assertRaisesRegex(ValueError, 'output directory'):

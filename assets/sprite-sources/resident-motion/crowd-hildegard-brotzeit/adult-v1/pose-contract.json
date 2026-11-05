@@ -1,0 +1,93 @@
+{
+  "actor": "crowd-hildegard-brotzeit",
+  "status": "Authoring contract; no local registration/native/runtime acceptance",
+  "rawSheets": {
+    "cardinal": {
+      "file": "raw-cardinals-v3.png",
+      "sha256": "d2cfe4230be3d95b3923a8f420ce746ed028858f28ed0334c4eaef63c6a835c9",
+      "order": [
+        "down",
+        "right",
+        "up",
+        "left"
+      ]
+    },
+    "quarter": {
+      "file": "raw-quarters-v3.png",
+      "sha256": "6e2660c95f48de74aa79027922f044a6ce18775a92f08cf2eb7dfdad4dbb6863",
+      "order": [
+        "front-right",
+        "rear-right",
+        "rear-left",
+        "front-left"
+      ]
+    }
+  },
+  "shared": {
+    "physicalPropHand": "RIGHT",
+    "prop": "one wicker lunch basket",
+    "leftHand": "empty",
+    "registration": "one density scale per raw sheet, common512square400figure472baseline; no individual-view resize",
+    "mouth": "five source-painted natural closed creases independently fitted; rear three null",
+    "actionSemantics": "new supported idle/look/success/failure four-name capability and wait exact idle alias; original broker/voice/route untouched",
+    "renderAuthority": "street-character-sprites.js resolved actual nonquiz crowd voice, original shared loader/cache/renderer and native speech owner"
+  },
+  "views": [
+    {
+      "id": "down",
+      "facingDegrees": 0,
+      "basket": "RIGHT basket screen-left attached grip",
+      "mouth": "visible-own-fit"
+    },
+    {
+      "id": "front-right",
+      "facingDegrees": 45,
+      "basket": "RIGHT near basket screen-left attached grip",
+      "mouth": "visible-own-fit"
+    },
+    {
+      "id": "right",
+      "facingDegrees": 90,
+      "basket": "RIGHT near full basket, left empty",
+      "mouth": "visible-own-fit"
+    },
+    {
+      "id": "rear-right",
+      "facingDegrees": 135,
+      "basket": "RIGHT near full basket screen-right attached grip",
+      "mouth": "null-rear-occluded"
+    },
+    {
+      "id": "up",
+      "facingDegrees": 180,
+      "basket": "RIGHT basket screen-right attached grip",
+      "mouth": "null-rear"
+    },
+    {
+      "id": "rear-left",
+      "facingDegrees": 225,
+      "basket": "RIGHT farther basket partly visible screen-right, near LEFT empty",
+      "mouth": "null-rear-occluded"
+    },
+    {
+      "id": "left",
+      "facingDegrees": 270,
+      "basket": "RIGHT far basket completely occluded, near LEFT empty",
+      "mouth": "visible-own-fit"
+    },
+    {
+      "id": "front-left",
+      "facingDegrees": 315,
+      "basket": "RIGHT far basket visible screen-left, near LEFT empty",
+      "mouth": "visible-own-fit"
+    }
+  ],
+  "runtimeSelection": "Actual voiceId and renderer resolveStreetCharacter result must both equal crowd-hildegard-brotzeit. Prefix alone insufficient because quiz/Sandale assignment replaces identity.",
+  "acceptance": {
+    "source": "shared figure/ground line and exact source/light/dark/native before expansion, own complete shoe masks and basket ownership",
+    "gait": "both feet, both side views, five actual source RGBA stance samples each, each own half-cycle linear planted curve; native residual quantified separately, actual game four phase crossings/three intervals",
+    "game": "selected all16phase headings witness, context fatal guards, floor4+12 witnesses then own-neutral one-AArow comparison; stop/quiet4/block-release/turn/original recording natural ended-mouthclose/fullquad",
+    "root": "independent Physics+Camera integrated candidate and sequential accepted live release"
+  },
+  "terminalCharacterComplete": false
+}

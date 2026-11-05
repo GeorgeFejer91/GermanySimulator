@@ -1,14 +1,15 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
-const registry=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const registry=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=registry.characters['stadt-karl-heinz-post'];
 const hash=x=>createHash('sha256').update(x).digest('hex');
 const asset=p=>readFileSync(p.replace(/^\.\//,''));
 test('Karl adult paint retains full walking, all phase stops and seven owned actions',()=>{
- assert.equal(p.figureWorldHeight,2.33);assert.equal(p.standingOnly,false);
+ assert.equal(p.figureWorldHeight,2.77);assert.equal(p.standingOnly,false);
  assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.deepEqual(p.grid,[21,18]);
  assert.equal(p.figureHeight,136);assert(p.strideDistance>0);registerStreetCharacterManifest(registry);
  for(const heading of ['down','right','up','left']){
@@ -30,5 +31,5 @@ test('Karl adult exact bytes retain own lips and selective movement/reaction del
  const delivery=JSON.parse(asset(p.motionDelivery.file));
  assert.equal(delivery.packs.movement.slots.filter(x=>x!==null).length,348);
  assert.equal(delivery.packs.reactions.slots.filter(x=>x!==null).length,17);
- assert.equal(registry.characters['crowd-irmgard-aktenordner'].figureWorldHeight,2.33);
+ assert.equal(registry.characters['crowd-irmgard-aktenordner'].figureWorldHeight,2.77);
 });

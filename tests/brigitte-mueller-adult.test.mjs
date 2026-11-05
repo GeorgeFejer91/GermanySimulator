@@ -1,17 +1,18 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
-const registry=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const registry=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=registry.characters['stadt-brigitte-mueller'];
 const old=JSON.parse(readFileSync('assets/sprite-sources/resident-motion/stadt-brigitte-mueller/adult-v1/pre-admission-family.json'));
 const hash=x=>createHash('sha256').update(x).digest('hex');
 const asset=p=>readFileSync(p.replace(/^\.\//,''));
 
 test('Brigitte adult family keeps four original actions, every phase stop and eight own headings',()=>{
- assert.equal(p.figureWorldHeight,2.33);assert.equal(p.standingOnly,false);registerStreetCharacterManifest(registry);
+ assert.equal(p.figureWorldHeight,2.77);assert.equal(p.standingOnly,false);registerStreetCharacterManifest(registry);
  assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.deepEqual(p.grid,[21,20]);
  assert.equal(p.figureHeight,136);assert(p.strideDistance>0);
  for(const heading of ['down','right','up','left']){

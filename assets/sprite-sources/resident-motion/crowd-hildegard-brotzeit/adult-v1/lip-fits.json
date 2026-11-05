@@ -1,0 +1,308 @@
+{
+  "status": "PROVISIONAL v5 RIGHT posterior interior upper-lip correction; endpoint-v5/native-v4 NOT RUN",
+  "sourceRegistration": "registration.json",
+  "evidence": "Actual five original lip grids plus all10 endpoint-v1 light/dark closed|maxopen boards; rejected input snapshots retained beside original output",
+  "viewNotes": {
+    "down": "closed small rose crease beneath nose, attached asymmetrical corners",
+    "front-right": "shorter foreshortened closed crease at front of face, far corner remains within skin",
+    "right": "narrow profile crease behind nose contour, no outward floating corner",
+    "left": "opposing profile has its own shorter crease and angle; no mirrored right coordinates",
+    "front-left": "own foreshortened crease and downward corners, face/eyeglasses untouched"
+  },
+  "views": {
+    "down": {
+      "centerPx": [
+        265.5,
+        119.7
+      ],
+      "axesPx": [
+        16,
+        0.5,
+        -0.1,
+        3.4
+      ],
+      "profile": {
+        "crease": [
+          0.12,
+          -0.06,
+          -0.12,
+          -0.02,
+          0.16
+        ],
+        "source_upper": [
+          0.12,
+          -0.06,
+          -0.12,
+          -0.02,
+          0.16
+        ],
+        "source_lower": [
+          0.12,
+          -0.06,
+          -0.12,
+          -0.02,
+          0.16
+        ],
+        "open_upper": [
+          0.12,
+          -0.06,
+          -0.12,
+          -0.02,
+          0.16
+        ],
+        "open_lower": [
+          0.12,
+          0.52,
+          0.87,
+          0.54,
+          0.16
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-right": {
+      "centerPx": [
+        269,
+        118.7
+      ],
+      "axesPx": [
+        12.5,
+        0.6,
+        -0.1,
+        3.1
+      ],
+      "profile": {
+        "crease": [
+          0.12,
+          -0.1,
+          -0.08,
+          0.06,
+          0.22
+        ],
+        "source_upper": [
+          0.12,
+          -0.1,
+          -0.08,
+          0.06,
+          0.22
+        ],
+        "source_lower": [
+          0.12,
+          -0.1,
+          -0.08,
+          0.06,
+          0.22
+        ],
+        "open_upper": [
+          0.12,
+          -0.1,
+          -0.08,
+          0.06,
+          0.22
+        ],
+        "open_lower": [
+          0.12,
+          0.48,
+          0.82,
+          0.5,
+          0.22
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "right": {
+      "centerPx": [
+        270.5,
+        119.4
+      ],
+      "axesPx": [
+        7,
+        -0.3,
+        0.1,
+        2.8
+      ],
+      "profile": {
+        "crease": [
+          0.2,
+          0.06,
+          -0.06,
+          -0.02,
+          0.1
+        ],
+        "source_upper": [
+          0.2,
+          0.06,
+          -0.06,
+          -0.02,
+          0.1
+        ],
+        "source_lower": [
+          0.2,
+          0.06,
+          -0.06,
+          -0.02,
+          0.1
+        ],
+        "open_upper": [
+          0.2,
+          -1.15,
+          -1.05,
+          -0.65,
+          0.1
+        ],
+        "open_lower": [
+          0.2,
+          0.65,
+          1.24,
+          0.75,
+          0.1
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "rear-right": null,
+    "up": null,
+    "rear-left": null,
+    "left": {
+      "centerPx": [
+        236.8,
+        118.8
+      ],
+      "axesPx": [
+        8,
+        0.4,
+        -0.1,
+        2.9
+      ],
+      "profile": {
+        "crease": [
+          0.1,
+          0.04,
+          -0.05,
+          0.06,
+          0.2
+        ],
+        "source_upper": [
+          0.1,
+          0.04,
+          -0.05,
+          0.06,
+          0.2
+        ],
+        "source_lower": [
+          0.1,
+          0.04,
+          -0.05,
+          0.06,
+          0.2
+        ],
+        "open_upper": [
+          0.1,
+          -0.35,
+          -0.6,
+          -0.35,
+          0.2
+        ],
+        "open_lower": [
+          0.1,
+          0.42,
+          0.73,
+          0.4,
+          0.2
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-left": {
+      "centerPx": [
+        233,
+        118
+      ],
+      "axesPx": [
+        12.5,
+        -0.3,
+        0.1,
+        3.2
+      ],
+      "profile": {
+        "crease": [
+          0.18,
+          0.02,
+          -0.1,
+          -0.04,
+          0.12
+        ],
+        "source_upper": [
+          0.18,
+          0.02,
+          -0.1,
+          -0.04,
+          0.12
+        ],
+        "source_lower": [
+          0.18,
+          0.02,
+          -0.1,
+          -0.04,
+          0.12
+        ],
+        "open_upper": [
+          0.18,
+          0.02,
+          -0.1,
+          -0.04,
+          0.12
+        ],
+        "open_lower": [
+          0.18,
+          0.48,
+          0.83,
+          0.5,
+          0.12
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    }
+  },
+  "repairHypothesis": "Only RIGHTopen_upper index1 rises1.4sourcepixels at unchanged own centre/axes/crease/corners. Source-v4 LEFT success and other4fits exact. Target connected upper opening at actual RIGHT mobile sample; source nasal skin/cheek continuity and actual native perceptibility required, no RGB-counter threshold."
+}

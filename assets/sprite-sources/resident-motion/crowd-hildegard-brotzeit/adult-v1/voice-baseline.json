@@ -1,0 +1,39 @@
+{
+  "id": "crowd-hildegard-brotzeit",
+  "profileId": "82aee08c3fe14b66b457f3783650e825",
+  "selectedRecordingCount": 3,
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-germany-01.mp3",
+      "sha256": "4d6e63ca3c3b1897df5bb50ae2e59aadfe12dda6cdbf2e14405a7e427494d865",
+      "source": "Die Brotzeit beginnt erst nach der Pausenmarke; die Brezel liegt hier nur zur Aktenlage.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-germany-02.mp3",
+      "sha256": "16bba1d4c28235e48b4ca4d95196db6f1582bf5143aba15b0e61018894c1b290",
+      "source": "Der Senf ist beantragt, nicht bewilligt; bitte warten Sie neben der Serviette.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-berlin-02.mp3",
+      "sha256": "75cae48effcb228f2e47acbd66dde86c8d0f38a676b9376524972524f132f5e0",
+      "source": "Der Senf ist beantragt, not bewilligt; bitte warten Sie neben der Serviette.",
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-01.mp3": "4e1533c4e5e2eaa58bc9b86791d04fa1906edb660840202299d49b13ef2a2034",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-02.mp3": "ef5006f4e6ed11f0452d67968a04cff2280586d5dc3761cf6956fd579853a526",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-03.mp3": "95d6d66abd7829c6b666376210effdd9360c511bb1a570f7a23627b7ef6f26d3",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-04.mp3": "83e10191da66499f439d88ee8d6af13d5d2f98d56bd5d864217df78d6af0c1f5",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-berlin-02.mp3": "75cae48effcb228f2e47acbd66dde86c8d0f38a676b9376524972524f132f5e0",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-crowd-manifest.json": "64cdd37ae94b5f883907de67e7a5fa2fc92b6327330a71684856d483049b90ab",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-germany-01.mp3": "4d6e63ca3c3b1897df5bb50ae2e59aadfe12dda6cdbf2e14405a7e427494d865",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-germany-02.mp3": "16bba1d4c28235e48b4ca4d95196db6f1582bf5143aba15b0e61018894c1b290",
+    "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-remaining27-crowd-manifest.json": "610e82b449764a5be1a5f1c2c9e2f6b7c6b3174f5e40dc04c1e09a2e2445dfcf"
+  },
+  "policy": "No voice, recording, visible line or audio catalog change authorized for this art packet."
+}

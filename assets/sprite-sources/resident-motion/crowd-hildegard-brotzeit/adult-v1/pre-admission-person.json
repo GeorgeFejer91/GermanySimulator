@@ -1,0 +1,23 @@
+{
+  "id": "crowd-hildegard-brotzeit",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "crowd-hildegard-brotzeit"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/crowd-hildegard-brotzeit-standing.webp",
+    "sha256": "f9d7fcf65e6c3f33ac20adfaef4dfee01908683c756b91d62bd3d3e1e9a65747",
+    "width": 128,
+    "height": 160
+  }
+}

@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 
-const manifest=JSON.parse(readFileSync('assets/characters/street/manifest.json'));
+const manifest=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const p=manifest.characters['quiz-heike-hoffmann'];
 registerStreetCharacterManifest(manifest);
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -15,10 +16,10 @@ vm.runInContext(readFileSync('character-interactions.js','utf8'),scope);
 
 test('Heike has adult standing scale, calibrated stride and owned phase stops/key emphasis',()=>{
  assert.equal(p.standingOnly,false);
- assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.33);
+ assert.deepEqual(p.cell,[128,160]);assert.deepEqual(p.pivot,[64,150]);assert.equal(p.figureHeight,136);assert.equal(p.figureWorldHeight,2.77);
  assert.equal(p.standing.sha256,'91926abced1426eb7d0eab05dbc3a6d08fe59ee84b20bf0c367cfbc1cd6f48ef');
  assert.equal(hash(readAsset(p.standing.file)),p.standing.sha256);
- assert.equal(p.strideDistance,29.125);
+ assert.equal(p.strideDistance,34.625);
  for(const [direction,walk] of Object.entries(p.atlasMotion.walks)){
   assert.equal(walk.frames,16);
   for(let phase=0;phase<16;phase++){

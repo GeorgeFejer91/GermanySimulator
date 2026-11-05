@@ -1,0 +1,382 @@
+{
+  "status": "ADULT_SOURCE_REGISTRATION_PROVISIONAL",
+  "identity": "crowd-hildegard-brotzeit",
+  "sourceHashes": {
+    "raw-cardinals-v3.png": "d2cfe4230be3d95b3923a8f420ce746ed028858f28ed0334c4eaef63c6a835c9",
+    "raw-quarters-v3.png": "6e2660c95f48de74aa79027922f044a6ce18775a92f08cf2eb7dfdad4dbb6863"
+  },
+  "sourceDensityHeights": {
+    "raw-cardinals-v3.png": 703,
+    "raw-quarters-v3.png": 688
+  },
+  "oneScalePerRawSheet": {
+    "raw-cardinals-v3.png": 0.5689900426742532,
+    "raw-quarters-v3.png": 0.5813953488372093
+  },
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        133,
+        46,
+        479,
+        749
+      ],
+      "sourcePivot": [
+        321.75,
+        749
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 251.5,
+          "bounds": [
+            211,
+            659,
+            292,
+            747
+          ],
+          "pixels": 4897
+        },
+        {
+          "x": 392.0,
+          "bounds": [
+            350,
+            659,
+            434,
+            749
+          ],
+          "pixels": 5114
+        }
+      ],
+      "workingOrigin": [
+        72.92745376955901,
+        45.82645803698432
+      ],
+      "workingBoundsAlpha20": [
+        149,
+        72,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/down.png",
+      "registeredSha256": "5934c601e95d7ca75b8028908c822fc27263c2f5286021d9558c8d989bb12c27"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-quarters-v3.png",
+      "sourceBoundsAlpha20": [
+        125,
+        54,
+        455,
+        742
+      ],
+      "sourcePivot": [
+        319.5,
+        742
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 257.0,
+          "bounds": [
+            212,
+            652,
+            302,
+            742
+          ],
+          "pixels": 5740
+        },
+        {
+          "x": 382.0,
+          "bounds": [
+            322,
+            652,
+            442,
+            728
+          ],
+          "pixels": 6021
+        }
+      ],
+      "workingOrigin": [
+        70.24418604651163,
+        40.604651162790674
+      ],
+      "workingBoundsAlpha20": [
+        143,
+        72,
+        335,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/front-right.png",
+      "registeredSha256": "b88cf799a9fc1baa814fb909543ca43b4bf46dab7928fde633913270c23f9382"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        680,
+        48,
+        899,
+        748
+      ],
+      "sourcePivot": [
+        808.5,
+        748
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 808.5,
+          "bounds": [
+            720,
+            658,
+            897,
+            748
+          ],
+          "pixels": 11280
+        }
+      ],
+      "workingOrigin": [
+        -204.02844950213375,
+        46.39544807965859
+      ],
+      "workingBoundsAlpha20": [
+        183,
+        74,
+        308,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/right.png",
+      "registeredSha256": "c24b2db2e546dc13842940a716393e5c4b6878a5ed51ea844490100756e547c0"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-quarters-v3.png",
+      "sourceBoundsAlpha20": [
+        631,
+        53,
+        930,
+        737
+      ],
+      "sourcePivot": [
+        775.0,
+        737
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 716.0,
+          "bounds": [
+            672,
+            647,
+            760,
+            719
+          ],
+          "pixels": 4679
+        },
+        {
+          "x": 834.0,
+          "bounds": [
+            767,
+            647,
+            901,
+            737
+          ],
+          "pixels": 7853
+        }
+      ],
+      "workingOrigin": [
+        -194.58139534883725,
+        43.51162790697674
+      ],
+      "workingBoundsAlpha20": [
+        172,
+        74,
+        346,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/rear-right.png",
+      "registeredSha256": "ed5346a87e05e5a59cc799f1e4518ec6e2f3525865ab28d529b72b0128ba07d1"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        1116,
+        45,
+        1449,
+        746
+      ],
+      "sourcePivot": [
+        1260.5,
+        746
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1193.5,
+          "bounds": [
+            1157,
+            656,
+            1230,
+            746
+          ],
+          "pixels": 4879
+        },
+        {
+          "x": 1327.5,
+          "bounds": [
+            1287,
+            656,
+            1368,
+            746
+          ],
+          "pixels": 5222
+        }
+      ],
+      "workingOrigin": [
+        -461.21194879089626,
+        47.53342816500708
+      ],
+      "workingBoundsAlpha20": [
+        174,
+        74,
+        363,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/up.png",
+      "registeredSha256": "0b416f46bc1f81627d2d5822ee42e358eb5e1e2f5281f9b29b35c70e5d5c7665"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-quarters-v3.png",
+      "sourceBoundsAlpha20": [
+        1088,
+        55,
+        1408,
+        737
+      ],
+      "sourcePivot": [
+        1235.0,
+        737
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1173.5,
+          "bounds": [
+            1112,
+            647,
+            1235,
+            737
+          ],
+          "pixels": 7339
+        },
+        {
+          "x": 1296.5,
+          "bounds": [
+            1258,
+            647,
+            1335,
+            727
+          ],
+          "pixels": 4668
+        }
+      ],
+      "workingOrigin": [
+        -462.0232558139535,
+        43.51162790697674
+      ],
+      "workingBoundsAlpha20": [
+        171,
+        76,
+        357,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/rear-left.png",
+      "registeredSha256": "9bfb331ead3fc6e574159c8501db94f0712cd65230494c3880b6624ba5e3c1df"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png",
+      "sourceBoundsAlpha20": [
+        1642,
+        49,
+        1869,
+        752
+      ],
+      "sourcePivot": [
+        1742.5,
+        752
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1742.5,
+          "bounds": [
+            1642,
+            662,
+            1843,
+            752
+          ],
+          "pixels": 12863
+        }
+      ],
+      "workingOrigin": [
+        -735.4651493598863,
+        44.11948790896156
+      ],
+      "workingBoundsAlpha20": [
+        199,
+        72,
+        328,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/left.png",
+      "registeredSha256": "ae05c56358507380e401ed909e8227187cde19770cc8564707aacd0a055d67ef"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-quarters-v3.png",
+      "sourceBoundsAlpha20": [
+        1517,
+        55,
+        1823,
+        743
+      ],
+      "sourcePivot": [
+        1694.5,
+        743
+      ],
+      "sourceShoeSupport": [
+        {
+          "x": 1635.5,
+          "bounds": [
+            1572,
+            653,
+            1699,
+            728
+          ],
+          "pixels": 6298
+        },
+        {
+          "x": 1753.5,
+          "bounds": [
+            1700,
+            653,
+            1807,
+            743
+          ],
+          "pixels": 6332
+        }
+      ],
+      "workingOrigin": [
+        -729.1744186046512,
+        40.02325581395348
+      ],
+      "workingBoundsAlpha20": [
+        153,
+        72,
+        331,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/front-left.png",
+      "registeredSha256": "e947895db6af9395ec671dac168399b22fc157cc869411b141d378898340630b"
+    }
+  }
+}

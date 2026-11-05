@@ -1,3 +1,4 @@
+import {expandStreetManifest} from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {validateStreetMouthRegistration} from '../street-character-mouth.js';
 
 const id='crowd-irmgard-aktenordner',manifestPath='assets/characters/street/manifest.json';
-const person=JSON.parse(readFileSync(manifestPath)).characters[id];
+const person=expandStreetManifest(JSON.parse(readFileSync(manifestPath))).characters[id];
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 
 test('expressive adult Aktenordner has complete mouth coverage bound to her redesigned walking paint',()=>{
@@ -15,7 +16,7 @@ test('expressive adult Aktenordner has complete mouth coverage bound to her rede
  const mouth=JSON.parse(bytes);
  // The user explicitly replaces the earlier short body. Retain source and
  // playback ownership checks rather than freezing that superseded design.
- assert.equal(person.figureWorldHeight,2.33);
+ assert.equal(person.figureWorldHeight,2.77);
  assert.equal(person.figureHeight,136);
  assert.equal(person.standingOnly,false);
  assert.equal(mouth.id,id);assert.deepEqual(mouth.cell,[128,160]);assert.deepEqual(mouth.grid,[21,17]);
@@ -23,8 +24,10 @@ test('expressive adult Aktenordner has complete mouth coverage bound to her rede
  const family=JSON.parse(readFileSync('assets/characters/street-speakers/'+id+'/manifest.json'));
  const anchors=JSON.parse(readFileSync('assets/sprite-sources/street-speaker-motion/berlin-irmgard/mouth-source-v1/anchors-v1.json'));
  assert.equal(anchors.sourceSha256,person.variants.desktop.sha256);
- assert.equal(family.figureWorldHeight,person.figureWorldHeight);
- assert.equal(family.cycle_distance,person.strideDistance);
+ assert.equal(family.figureWorldHeight,2.33);
+ assert.equal(person.figureWorldHeight,2.77);
+ assert.equal(family.cycle_distance,18.64);
+ assert.equal(person.strideDistance,family.cycle_distance*person.figureWorldHeight/family.figureWorldHeight);
  assert.equal(family.variants.desktop.sha256,person.variants.desktop.sha256);
  assert.equal(family.variants.mobile.sha256,person.variants.mobile.sha256);
  for(const variant of Object.values(family.variants)){
