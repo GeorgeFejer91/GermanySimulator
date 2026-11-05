@@ -1,0 +1,684 @@
+{
+  "actorId": "city-guenther-tuev",
+  "source": "assets/sprite-sources/street-residents/stadt-guenther-tuev-directions-candidate.png",
+  "sourceSha256": "eff47352ede2b6120953bb53e615344e162f27e0dc5d5a0ba7e7a1feb106a8bc",
+  "scale": 0.5943536404160475,
+  "views": {
+    "down": {
+      "component_bounds": [
+        79,
+        31,
+        498,
+        701
+      ],
+      "source_pivot": [
+        289.0,
+        701
+      ],
+      "landmarks": {
+        "waist": 466.5,
+        "hip": 496.65,
+        "hem": [
+          526.8,
+          526.8
+        ],
+        "knee": [
+          583.75,
+          583.75
+        ],
+        "sock": [
+          631.0,
+          631.0
+        ],
+        "ankle": [
+          634.0,
+          634.0
+        ],
+        "mid": 289.0,
+        "centres": [
+          213.57999999999998,
+          364.42
+        ],
+        "split_path_xy": [
+          [
+            289.0,
+            496.65
+          ],
+          [
+            289.0,
+            701
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 12,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+    },
+    "right": {
+      "component_bounds": [
+        129,
+        22,
+        427,
+        502
+      ],
+      "source_pivot": [
+        273.5,
+        502
+      ],
+      "landmarks": {
+        "waist": 335,
+        "hip": 355,
+        "hem": [
+          365,
+          365
+        ],
+        "knee": [
+          385,
+          385
+        ],
+        "ankle": [
+          414,
+          414
+        ],
+        "sock": [
+          411,
+          411
+        ],
+        "mid": 270,
+        "centres": [
+          215,
+          325
+        ],
+        "split_path_xy": [
+          [
+            225,
+            355
+          ],
+          [
+            211,
+            375
+          ],
+          [
+            236,
+            394
+          ],
+          [
+            260,
+            416
+          ],
+          [
+            264,
+            448
+          ],
+          [
+            267,
+            502
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 32,
+        "lateral_lift": 6,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "scale": 0.8264462809917356,
+      "rest_root_translation": true,
+      "connected_garment": true,
+      "connected_garment_end_source": [
+        416,
+        416
+      ],
+      "knee_follow": 0.8,
+      "hem_follow": 0.65,
+      "rest_centres": [
+        [
+          202.0,
+          200.0,
+          204.5
+        ],
+        [
+          275.5,
+          283.5,
+          308.5
+        ]
+      ],
+      "rest_hip_centres": [
+        203.5,
+        276.0
+      ],
+      "rest_hip_targets_working": [
+        237,
+        275
+      ],
+      "rest_targets_working": [
+        [
+          240,
+          247,
+          250
+        ],
+        [
+          272,
+          266,
+          262
+        ]
+      ],
+      "originalUpper": {
+        "component_bounds": [
+          693,
+          32,
+          984,
+          704
+        ],
+        "source_pivot": [
+          843.0,
+          704
+        ],
+        "landmarks": {
+          "waist": 468.8,
+          "hip": 499.04,
+          "hem": [
+            529.28,
+            529.28
+          ],
+          "knee": [
+            586.4,
+            586.4
+          ],
+          "sock": [
+            633.8,
+            633.8
+          ],
+          "ankle": [
+            636.8,
+            636.8
+          ],
+          "mid": 843.0,
+          "centres": [
+            790.62,
+            895.38
+          ],
+          "split_path_xy": [
+            [
+              899.61,
+              499.04
+            ],
+            [
+              899.61,
+              636.8
+            ],
+            [
+              957.81,
+              670.4
+            ],
+            [
+              972.36,
+              704
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 2
+        },
+        "foreground": 0,
+        "protected_polygons": [
+          [
+            [
+              740,
+              455
+            ],
+            [
+              811,
+              455
+            ],
+            [
+              835,
+              480
+            ],
+            [
+              830,
+              515
+            ],
+            [
+              815,
+              530
+            ],
+            [
+              772,
+              530
+            ],
+            [
+              750,
+              520
+            ]
+          ],
+          [
+            [
+              835,
+              432
+            ],
+            [
+              878,
+              432
+            ],
+            [
+              892,
+              451
+            ],
+            [
+              890,
+              474
+            ],
+            [
+              876,
+              488
+            ],
+            [
+              855,
+              494
+            ],
+            [
+              847,
+              511
+            ],
+            [
+              849,
+              533
+            ],
+            [
+              840,
+              555
+            ],
+            [
+              828,
+              587
+            ],
+            [
+              811,
+              590
+            ],
+            [
+              801,
+              581
+            ],
+            [
+              814,
+              543
+            ],
+            [
+              823,
+              535
+            ],
+            [
+              827,
+              508
+            ],
+            [
+              822,
+              494
+            ],
+            [
+              832,
+              479
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "cutSourceY": 519.04,
+        "featherWorkingPixels": 5
+      },
+      "upper_motion": {
+        "bob": 3.8,
+        "sway": 4,
+        "head_counter": 0.2,
+        "headBaseSourceY": 320.96,
+        "waistSourceY": 455.36
+      }
+    },
+    "up": {
+      "component_bounds": [
+        1174,
+        32,
+        1593,
+        701
+      ],
+      "source_pivot": [
+        1376.0,
+        701
+      ],
+      "landmarks": {
+        "waist": 466.85,
+        "hip": 496.955,
+        "hem": [
+          527.06,
+          527.06
+        ],
+        "knee": [
+          583.925,
+          583.925
+        ],
+        "sock": [
+          631.1,
+          631.1
+        ],
+        "ankle": [
+          634.1,
+          634.1
+        ],
+        "mid": 1376.0,
+        "centres": [
+          1300.58,
+          1451.42
+        ],
+        "split_path_xy": [
+          [
+            1376.0,
+            496.955
+          ],
+          [
+            1376.0,
+            701
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 12,
+        "root_overlap": 2
+      },
+      "foreground": 1,
+      "protected_polygons": [],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review"
+    },
+    "left": {
+      "component_bounds": [
+        583,
+        21,
+        881,
+        502
+      ],
+      "source_pivot": [
+        731.0,
+        502
+      ],
+      "landmarks": {
+        "waist": 335,
+        "hip": 355,
+        "hem": [
+          365,
+          365
+        ],
+        "knee": [
+          385,
+          385
+        ],
+        "ankle": [
+          414,
+          414
+        ],
+        "sock": [
+          411,
+          411
+        ],
+        "mid": 735,
+        "centres": [
+          680,
+          790
+        ],
+        "split_path_xy": [
+          [
+            790,
+            355
+          ],
+          [
+            803,
+            375
+          ],
+          [
+            779,
+            395
+          ],
+          [
+            752,
+            416
+          ],
+          [
+            748,
+            448
+          ],
+          [
+            747,
+            502
+          ]
+        ],
+        "auto_hand_mask": false,
+        "step_width": 32,
+        "lateral_lift": 6,
+        "root_overlap": 2
+      },
+      "foreground": 0,
+      "protected_polygons": [],
+      "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "scale": 0.8264462809917356,
+      "rest_root_translation": true,
+      "connected_garment": true,
+      "connected_garment_end_source": [
+        416,
+        416
+      ],
+      "knee_follow": 0.8,
+      "hem_follow": 0.65,
+      "rest_centres": [
+        [
+          735.0,
+          727.5,
+          700.5
+        ],
+        [
+          807.0,
+          811.0,
+          803.5
+        ]
+      ],
+      "rest_hip_centres": [
+        733.5,
+        804.5
+      ],
+      "rest_hip_targets_working": [
+        237,
+        275
+      ],
+      "rest_targets_working": [
+        [
+          240,
+          247,
+          250
+        ],
+        [
+          272,
+          266,
+          262
+        ]
+      ],
+      "originalUpper": {
+        "component_bounds": [
+          1778,
+          32,
+          2070,
+          705
+        ],
+        "source_pivot": [
+          1911.5,
+          705
+        ],
+        "landmarks": {
+          "waist": 469.45,
+          "hip": 499.735,
+          "hem": [
+            530.02,
+            530.02
+          ],
+          "knee": [
+            587.225,
+            587.225
+          ],
+          "sock": [
+            634.7,
+            634.7
+          ],
+          "ankle": [
+            637.7,
+            637.7
+          ],
+          "mid": 1911.5,
+          "centres": [
+            1858.94,
+            1964.06
+          ],
+          "split_path_xy": [
+            [
+              1862.68,
+              499.735
+            ],
+            [
+              1862.68,
+              637.7
+            ],
+            [
+              1804.28,
+              671.35
+            ],
+            [
+              1789.68,
+              705
+            ]
+          ],
+          "auto_hand_mask": false,
+          "step_width": 12,
+          "root_overlap": 2
+        },
+        "foreground": 1,
+        "protected_polygons": [
+          [
+            [
+              1909,
+              461
+            ],
+            [
+              2012,
+              462
+            ],
+            [
+              2017,
+              521
+            ],
+            [
+              1982,
+              536
+            ],
+            [
+              1933,
+              532
+            ],
+            [
+              1910,
+              513
+            ]
+          ]
+        ],
+        "fitStatus": "initial-source-inspection-needs-native-extreme-review",
+        "cutSourceY": 519.735,
+        "featherWorkingPixels": 5
+      },
+      "upper_motion": {
+        "bob": 3.8,
+        "sway": 4,
+        "head_counter": 0.2,
+        "headBaseSourceY": 321.39,
+        "waistSourceY": 455.99
+      }
+    }
+  },
+  "sourceBrief": "Older male with tall wide forehead within huge head, swept-back iron-grey pompadour, clean-shaven square chin, small stern dark eyes no glasses. Very compact muscular body. Cobalt-blue mechanic overalls over beige short-sleeve shirt, rolled short sturdy trouser hems, heavy wide steel-toe black boots. One small round unmarked tyre-pressure gauge in anatomical RIGHT hand, left empty. Alert forceful closed mouth, no insignia/uniform.",
+  "status": "candidate-unapproved",
+  "turn_sources": [
+    {
+      "neutral": "down"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "component_bounds": [
+        1120,
+        19,
+        1395,
+        503
+      ],
+      "source_pivot": [
+        1271.0,
+        503
+      ],
+      "scale": 0.8264462809917356
+    },
+    {
+      "neutral": "right"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "component_bounds": [
+        144,
+        518,
+        408,
+        1002
+      ],
+      "source_pivot": [
+        278.5,
+        1002
+      ],
+      "scale": 0.8264462809917356
+    },
+    {
+      "neutral": "up"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "component_bounds": [
+        616,
+        519,
+        886,
+        1002
+      ],
+      "source_pivot": [
+        742.0,
+        1002
+      ],
+      "scale": 0.8264462809917356
+    },
+    {
+      "neutral": "left"
+    },
+    {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/motion-poses-candidate.png",
+      "sourceSha256": "760416a7c1d519f24bbbe3877ce12737acb1955dce48bca1b253666b3ebe3a31",
+      "component_bounds": [
+        1129,
+        519,
+        1403,
+        1001
+      ],
+      "source_pivot": [
+        1259.0,
+        1001
+      ],
+      "scale": 0.8264462809917356
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "identity": "stadt-guenther-tuev",
+  "raw": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+  "rawSha256": "2d372ae604b708dd213e4dd16d80f49e75d246d708ce25591d48484255c0d8c8",
+  "oneScalePerRawSheet": 0.6611570247933884,
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "centerX": 256,
+    "baselineY": 472
+  },
+  "views": {
+    "down": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        42,
+        16,
+        314,
+        621
+      ],
+      "sourcePivot": [
+        176.5,
+        621
+      ],
+      "workingOrigin": [
+        139.30578512396693,
+        61.42148760330576
+      ],
+      "workingBoundsAlpha20": [
+        167,
+        72,
+        347,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/down.png",
+      "registeredSha256": "da028476ce461c7075a646c562577777303ad92f90844c2ac03b57242e6b2d73"
+    },
+    "front-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        372,
+        19,
+        628,
+        624
+      ],
+      "sourcePivot": [
+        511.0,
+        624
+      ],
+      "workingOrigin": [
+        -81.85123966942149,
+        59.43801652892563
+      ],
+      "workingBoundsAlpha20": [
+        165,
+        72,
+        334,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/front-right.png",
+      "registeredSha256": "4b180f1d3ffe7c71667bb4529693b9ae7e7e2e34fa19c6d2880c49f595557376"
+    },
+    "right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        722,
+        23,
+        890,
+        629
+      ],
+      "sourcePivot": [
+        807.0,
+        629
+      ],
+      "workingOrigin": [
+        -277.55371900826447,
+        56.132231404958645
+      ],
+      "workingBoundsAlpha20": [
+        200,
+        71,
+        311,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/right.png",
+      "registeredSha256": "e4049162220631a7a553bec1a34e1e1ff9dadc6501ed5fce5db3f4fcef6a4372"
+    },
+    "rear-right": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        992,
+        25,
+        1235,
+        631
+      ],
+      "sourcePivot": [
+        1124.5,
+        631
+      ],
+      "workingOrigin": [
+        -487.4710743801653,
+        54.80991735537191
+      ],
+      "workingBoundsAlpha20": [
+        168,
+        72,
+        329,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/rear-right.png",
+      "registeredSha256": "fa2379a5d8283bc24080f3cfdc04a963158d93ad446c357235eb8b31c65ea89e"
+    },
+    "up": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        38,
+        641,
+        308,
+        1233
+      ],
+      "sourcePivot": [
+        170.0,
+        1233
+      ],
+      "workingOrigin": [
+        143.60330578512395,
+        -343.2066115702479
+      ],
+      "workingBoundsAlpha20": [
+        169,
+        81,
+        348,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/up.png",
+      "registeredSha256": "dd2c7201d8383c3c4afa11cb8c718ef665ff18d27d88978dcbab4ed117ec6ef9"
+    },
+    "rear-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        347,
+        641,
+        606,
+        1232
+      ],
+      "sourcePivot": [
+        466.0,
+        1232
+      ],
+      "workingOrigin": [
+        -52.09917355371903,
+        -342.5454545454546
+      ],
+      "workingBoundsAlpha20": [
+        177,
+        81,
+        349,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/rear-left.png",
+      "registeredSha256": "a2e505159fd78ddeb0098152e5d52728225c59eaf2a1be9acdaf9876b3bdc1b6"
+    },
+    "left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        689,
+        639,
+        861,
+        1238
+      ],
+      "sourcePivot": [
+        772.5,
+        1238
+      ],
+      "workingOrigin": [
+        -254.74380165289256,
+        -346.5123966942149
+      ],
+      "workingBoundsAlpha20": [
+        201,
+        76,
+        315,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/left.png",
+      "registeredSha256": "3ec2608f3a3397b1e19c0f9f347697f6a197119ec4bd521da6d1068bbe65d89b"
+    },
+    "front-left": {
+      "source": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+      "sourceBoundsAlpha20": [
+        963,
+        639,
+        1228,
+        1236
+      ],
+      "sourcePivot": [
+        1084.5,
+        1236
+      ],
+      "workingOrigin": [
+        -461.02479338842977,
+        -345.1900826446281
+      ],
+      "workingBoundsAlpha20": [
+        176,
+        77,
+        351,
+        472
+      ],
+      "registered": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/front-left.png",
+      "registeredSha256": "eef8460fe1cb260b9cac6fa834c867a13672a383b0a3da479702f887531eded4"
+    }
+  }
+}

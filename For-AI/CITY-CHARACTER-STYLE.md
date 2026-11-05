@@ -1,5 +1,20 @@
 # Open-city character style and proportions
 
+## Current scope — 5 November 2026
+
+Continue the street-only redesign until adult 2D street characters have the
+same visible crown-to-sole height as Söder at a matched camera distance and
+ground line. Söder is the height authority; the Sandales remain useful anatomy
+references but their shorter current rendering is not the target height.
+Redesign remaining short adults with connected, mature Disco Elysium-style
+paint rather than stretching squat source artwork.
+
+**Preserve every politician exactly as they are, including Söder. Preserve
+children and all Bürgeramt characters.** Only street sprites are in scope.
+This latest user direction supersedes the older politician-redesign language
+below. Existing 2.33-world-unit acceptance records do not prove the new rendered
+height requirement; compare selected pixels through the production projection.
+
 The user's **2026-10-22 direction supersedes the 2026-10-14 short-body,
 large-head direction**. The active goal covers **all relevant 2D sprites walking
 on the street**, including police, crowd pedestrians, roaming quiz speakers,
@@ -13,9 +28,9 @@ adult cartoon characters. Preserve distinct identities, outfits, moods and
 props. This is an active redesign goal, not a claim that existing sprites have
 already been replaced or visually accepted.
 
-The user's follow-up explicitly pushes **the rest of the characters further
-toward Disco Elysium too**. This applies to residents, quiz speakers, advisers,
-outdoor neighbors, politicians and the Sandales as well as every police tier.
+The user's follow-up explicitly pushes **the rest of the street characters
+further toward Disco Elysium too**. This applies to residents, quiz speakers,
+advisers, outdoor adult neighbors and the Sandales as well as every police tier.
 The existing rounded, smoothly shaded source studies establish proportions
 only; they do not set the final finish. Redraw faces and garment planes with
 angular, expressive shapes, tired asymmetrical features, broad dry-brush marks

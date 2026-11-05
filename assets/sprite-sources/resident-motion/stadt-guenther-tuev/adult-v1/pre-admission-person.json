@@ -1,0 +1,24 @@
+{
+  "id": "stadt-guenther-tuev",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "stadt-guenther-tuev",
+    "city-guenther-tuev"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/stadt-guenther-tuev-standing.webp",
+    "sha256": "76b88f78e3841b335a4e8df49fbd442cbd5d38b4be0e1daad3efd6a4da46a1e6",
+    "width": 128,
+    "height": 160
+  }
+}

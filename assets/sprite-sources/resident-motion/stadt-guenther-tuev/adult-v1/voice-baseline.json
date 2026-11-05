@@ -1,0 +1,26 @@
+{
+  "id": "stadt-guenther-tuev",
+  "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+  "selectedRecordingCount": 2,
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/city-dialogue/stadt-guenther-tuev-01.mp3",
+      "sha256": "5bf1d92fdba97c79b1f2d1b386bc94ca3cb690b66aba9c5aa0051f6f2dc6b864",
+      "source": "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/city-dialogue/stadt-guenther-tuev-02.mp3",
+      "sha256": "804029066f075f0d2858d6515282061a2b831a3357f2cb8237017dac471f4a12",
+      "source": "Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft.",
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/city-dialogue/stadt-guenther-tuev-01.mp3": "5bf1d92fdba97c79b1f2d1b386bc94ca3cb690b66aba9c5aa0051f6f2dc6b864",
+    "assets/voices/city-dialogue/stadt-guenther-tuev-02.mp3": "804029066f075f0d2858d6515282061a2b831a3357f2cb8237017dac471f4a12",
+    "assets/voices/city-dialogue/stadt-guenther-tuev-manifest.json": "d99b0dd6d1c4ca01e3978dd980583cc1405a57a81b225ed24f966f421488d504"
+  }
+}

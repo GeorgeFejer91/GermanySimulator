@@ -1,0 +1,19 @@
+{
+  "tool": "built-in imagegen",
+  "calls": [
+    {
+      "request": "imagegen-request-v1.json",
+      "sha256": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3",
+      "raw": "raw-directions-v1.png",
+      "original": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16b02-05bb-7090-986b-23315c0fac2e/exec-795541eb-7cd9-44f9-8e33-44f7f086bb56.png",
+      "status": "HELD soft commercial paint; adult identity reference only"
+    },
+    {
+      "request": "imagegen-request-v2.json",
+      "sha256": "2d372ae604b708dd213e4dd16d80f49e75d246d708ce25591d48484255c0d8c8",
+      "raw": "raw-directions-v2.png",
+      "original": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16b02-05bb-7090-986b-23315c0fac2e/exec-431f92a4-d791-4389-82e5-2f3b94d4cb98.png",
+      "status": "SELECTED for source registration; runtime acceptance pending"
+    }
+  ]
+}

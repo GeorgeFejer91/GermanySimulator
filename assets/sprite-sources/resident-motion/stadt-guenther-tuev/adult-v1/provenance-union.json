@@ -1,0 +1,66 @@
+[
+  {
+    "requestSha256": "7e9a89c653e06b7230213dbd47a1e3fbbc70033c8be7fb9dad3cbbf30702e9cb",
+    "sha256": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3",
+    "anatomicalAuthority": "One round tyre-pressure gauge plus black hose in anatomical RIGHT; LEFT empty. Front screenleft/rear screenright, strict LEFT far-side gauge occluded. Eight genuine whole-body paintings; no mirroring or procedural style filter.",
+    "runtimeAcceptance": "Corrected own near/far source, targeted120-slot repair, native40-board review, encoded40-contact replay, both412-cell formal gates, own4 tests and23-output/exact-person raw-only clean replay PASS. V1 near-only proof and failures remain preserved. Actual game-context acceptance is recorded by the separately hashed author runtime gate in handoff-final.json; source registration alone makes no runtime claim. Root owns integrated independent reviews and publication.",
+    "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/imagegen-receipts.json",
+    "file": "../resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png",
+    "id": "stadt-guenther-tuev-adult-eight-views-v1",
+    "sourceReviewReceiptSha256": "db824877f73d1b69b02acab618a906260ffcc35d1c3f2c003d7f2f2bd15b5d65",
+    "tool": "built-in imagegen",
+    "generationRequest": {
+      "referenced_image_paths": [
+        "C:/Users/cogpsy-vrlab/.codex/worktrees/street-guenther-complete/GermanySimulator/assets/sprite-sources/street-residents/stadt-guenther-tuev-directions-candidate.png"
+      ],
+      "prompt": "Create a production transparent RGBA sprite source sheet with exactly EIGHT full-body paintings of the SAME older German mechanic Günther TÜV, arranged 4 columns x 2 rows, ample transparent margins and no labels. Read reference1 ONLY for identity/outfit/physical prop hand; its squat large-head proportions are OBSOLETE. Redesign his anatomy as a mature adult with long connected human limbs, approximately 6.5 heads tall, substantial hands and black work boots. Disco Elysium meets Berlin: strong angular expressive shape planes, worn asymmetrical square clean-shaven face, tired stern eyes, thick dark grey brows, swept-back iron-grey hair, deep age creases, broken dry-brush paint, dirty beige short sleeved shirt, faded petrol-blue work overalls with rolled hems, cool grey-green and dirty ochre shadows. NO glossy toy volumes, cute baby face or chibi giant head. Broad sturdy older working man but adult leg length and torso. Keep ONE small round tyre-pressure gauge with short black rubber hose in anatomical RIGHT hand throughout every view; LEFT hand empty. Gauge is at screen LEFT in frontal view, at screen RIGHT in rear view. No clipboard, wrench or second tool. Both arms relaxed beside torso, equipment below waist, gauge and hose clearly attached to right hand and not touching shoe. Complete connected shoulders/elbows/hands/hips/knees/ankles/boots. Both shoes planted on same ground line, feet modestly apart, no cast ground shadow. Same figure height/lighting/clothing design. Eight truly independently painted whole-body views rotating body, head and both boots together: TOP ROW front (0), front-RIGHT threequarter (45), strict RIGHT profile (90), rear-RIGHT threequarter (135); BOTTOM ROW strict rear (180), rear-LEFT threequarter (225), strict LEFT profile (270), front-LEFT threequarter (315). No mirrored reuse, no head-only swivel. Front-facing gaze serious neutral, closed narrow natural painted lips readable for later articulation. Rear paintings show no face. Square-ish source sheet, large full-body figures with transparent gutter around each; no background or panel borders or writing.",
+      "transparent_background": true
+    },
+    "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16b02-05bb-7090-986b-23315c0fac2e/exec-795541eb-7cd9-44f9-8e33-44f7f086bb56.png",
+    "status": "HELD soft commercial paint; adult identity reference only",
+    "referencePins": [
+      {
+        "sha256": "eff47352ede2b6120953bb53e615344e162f27e0dc5d5a0ba7e7a1feb106a8bc",
+        "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/identity-original.png"
+      }
+    ],
+    "prompt": "Create a production transparent RGBA sprite source sheet with exactly EIGHT full-body paintings of the SAME older German mechanic Günther TÜV, arranged 4 columns x 2 rows, ample transparent margins and no labels. Read reference1 ONLY for identity/outfit/physical prop hand; its squat large-head proportions are OBSOLETE. Redesign his anatomy as a mature adult with long connected human limbs, approximately 6.5 heads tall, substantial hands and black work boots. Disco Elysium meets Berlin: strong angular expressive shape planes, worn asymmetrical square clean-shaven face, tired stern eyes, thick dark grey brows, swept-back iron-grey hair, deep age creases, broken dry-brush paint, dirty beige short sleeved shirt, faded petrol-blue work overalls with rolled hems, cool grey-green and dirty ochre shadows. NO glossy toy volumes, cute baby face or chibi giant head. Broad sturdy older working man but adult leg length and torso. Keep ONE small round tyre-pressure gauge with short black rubber hose in anatomical RIGHT hand throughout every view; LEFT hand empty. Gauge is at screen LEFT in frontal view, at screen RIGHT in rear view. No clipboard, wrench or second tool. Both arms relaxed beside torso, equipment below waist, gauge and hose clearly attached to right hand and not touching shoe. Complete connected shoulders/elbows/hands/hips/knees/ankles/boots. Both shoes planted on same ground line, feet modestly apart, no cast ground shadow. Same figure height/lighting/clothing design. Eight truly independently painted whole-body views rotating body, head and both boots together: TOP ROW front (0), front-RIGHT threequarter (45), strict RIGHT profile (90), rear-RIGHT threequarter (135); BOTTOM ROW strict rear (180), rear-LEFT threequarter (225), strict LEFT profile (270), front-LEFT threequarter (315). No mirrored reuse, no head-only swivel. Front-facing gaze serious neutral, closed narrow natural painted lips readable for later articulation. Rear paintings show no face. Square-ish source sheet, large full-body figures with transparent gutter around each; no background or panel borders or writing.",
+    "referencedSources": [
+      "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/identity-original.png"
+    ],
+    "requestFile": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/imagegen-request-v1.json",
+    "sourceSha256": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3"
+  },
+  {
+    "requestSha256": "e06f4f59bbe87a5a1e47018570bc3bf815c239afdbc3584b7d5314d9d5558503",
+    "sha256": "2d372ae604b708dd213e4dd16d80f49e75d246d708ce25591d48484255c0d8c8",
+    "anatomicalAuthority": "One round tyre-pressure gauge plus black hose in anatomical RIGHT; LEFT empty. Front screenleft/rear screenright, strict LEFT far-side gauge occluded. Eight genuine whole-body paintings; no mirroring or procedural style filter.",
+    "runtimeAcceptance": "Corrected own near/far source, targeted120-slot repair, native40-board review, encoded40-contact replay, both412-cell formal gates, own4 tests and23-output/exact-person raw-only clean replay PASS. V1 near-only proof and failures remain preserved. Actual game-context acceptance is recorded by the separately hashed author runtime gate in handoff-final.json; source registration alone makes no runtime claim. Root owns integrated independent reviews and publication.",
+    "sourceReviewReceipt": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/imagegen-receipts.json",
+    "file": "../resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png",
+    "id": "stadt-guenther-tuev-adult-eight-views-v2",
+    "sourceReviewReceiptSha256": "db824877f73d1b69b02acab618a906260ffcc35d1c3f2c003d7f2f2bd15b5d65",
+    "tool": "built-in imagegen",
+    "generationRequest": {
+      "referenced_image_paths": [
+        "C:/Users/cogpsy-vrlab/.codex/worktrees/street-guenther-complete/GermanySimulator/assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png"
+      ],
+      "prompt": "Refine this exact eight-view older mechanic source sheet into expressive painted GAME CHARACTER ART in the style direction Disco Elysium meets Berlin. Keep all eight complete independent full-body directions, adult stature/long legs/large boots, arrangement and anatomy, one round tyre-pressure gauge+black hose in anatomical RIGHT hand, LEFT empty, swept iron-grey hair, heavy eyebrows, clean-shaven stern older face, beige short sleeves and blue work overalls with rolled hems. Replace the polished soft commercial illustration look with MUCH stronger angular face and garment planes, asymmetrical tired age lines, broad coarse visible brush strokes, scraped scumbled pigment, muted petrol blue, dirty ochre, cool grey-green shadows. Edges and shadows should feel hand-painted and expressive, not a photoreal render, not glossy doll shading, not merely a fine grain overlay. Keep a recognisable severe weathered Berlin mechanic. Faces readable with closed natural lips. Whole figure cohesion; no detached parts, no melting, no extra tools. Transparent background with generous clean transparent gaps; no ground shadow, no labels. Preserve exact order front/front-right/right/rear-right; rear/rear-left/left/front-left. Both feet planted. This is genuine repainting across every view, not a procedural style filter.",
+      "transparent_background": true
+    },
+    "source": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a16b02-05bb-7090-986b-23315c0fac2e/exec-431f92a4-d791-4389-82e5-2f3b94d4cb98.png",
+    "status": "SELECTED for source registration; runtime acceptance pending",
+    "referencePins": [
+      {
+        "sha256": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3",
+        "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png"
+      }
+    ],
+    "prompt": "Refine this exact eight-view older mechanic source sheet into expressive painted GAME CHARACTER ART in the style direction Disco Elysium meets Berlin. Keep all eight complete independent full-body directions, adult stature/long legs/large boots, arrangement and anatomy, one round tyre-pressure gauge+black hose in anatomical RIGHT hand, LEFT empty, swept iron-grey hair, heavy eyebrows, clean-shaven stern older face, beige short sleeves and blue work overalls with rolled hems. Replace the polished soft commercial illustration look with MUCH stronger angular face and garment planes, asymmetrical tired age lines, broad coarse visible brush strokes, scraped scumbled pigment, muted petrol blue, dirty ochre, cool grey-green shadows. Edges and shadows should feel hand-painted and expressive, not a photoreal render, not glossy doll shading, not merely a fine grain overlay. Keep a recognisable severe weathered Berlin mechanic. Faces readable with closed natural lips. Whole figure cohesion; no detached parts, no melting, no extra tools. Transparent background with generous clean transparent gaps; no ground shadow, no labels. Preserve exact order front/front-right/right/rear-right; rear/rear-left/left/front-left. Both feet planted. This is genuine repainting across every view, not a procedural style filter.",
+    "referencedSources": [
+      "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png"
+    ],
+    "requestFile": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/imagegen-request-v2.json",
+    "sourceSha256": "2d372ae604b708dd213e4dd16d80f49e75d246d708ce25591d48484255c0d8c8"
+  }
+]

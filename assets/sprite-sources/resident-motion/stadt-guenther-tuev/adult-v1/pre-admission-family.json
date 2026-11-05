@@ -1,0 +1,95 @@
+{
+  "cycle_distance": 9.5,
+  "sourceAuthority": "tools/build-resident-motion.py lines529-537",
+  "schemaVersion": 1,
+  "interactions": {
+    "states": {
+      "look": {
+        "row": 10,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ]
+      },
+      "idle": {
+        "row": 9,
+        "durations_ms": [
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80,
+          80
+        ]
+      },
+      "failure": {
+        "row": 12,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ]
+      },
+      "success": {
+        "row": 11,
+        "durations_ms": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ]
+      }
+    }
+  },
+  "sourceSha256": "7db19b8b825dee75b39bf06e80902ba4a5caacc855e342052f0ad0b4bef43b55",
+  "status": "SOURCE-DERIVED quiet timing contract; Guenther was standing-only in published registry and had no published motion-family manifest"
+}

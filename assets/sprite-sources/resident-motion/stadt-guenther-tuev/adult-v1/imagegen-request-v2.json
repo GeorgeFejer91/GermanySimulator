@@ -1,0 +1,11 @@
+{
+  "status": "pre-call",
+  "tool": "built-in imagegen",
+  "transparent_background": true,
+  "prompt": "Refine this exact eight-view older mechanic source sheet into expressive painted GAME CHARACTER ART in the style direction Disco Elysium meets Berlin. Keep all eight complete independent full-body directions, adult stature/long legs/large boots, arrangement and anatomy, one round tyre-pressure gauge+black hose in anatomical RIGHT hand, LEFT empty, swept iron-grey hair, heavy eyebrows, clean-shaven stern older face, beige short sleeves and blue work overalls with rolled hems. Replace the polished soft commercial illustration look with MUCH stronger angular face and garment planes, asymmetrical tired age lines, broad coarse visible brush strokes, scraped scumbled pigment, muted petrol blue, dirty ochre, cool grey-green shadows. Edges and shadows should feel hand-painted and expressive, not a photoreal render, not glossy doll shading, not merely a fine grain overlay. Keep a recognisable severe weathered Berlin mechanic. Faces readable with closed natural lips. Whole figure cohesion; no detached parts, no melting, no extra tools. Transparent background with generous clean transparent gaps; no ground shadow, no labels. Preserve exact order front/front-right/right/rear-right; rear/rear-left/left/front-left. Both feet planted. This is genuine repainting across every view, not a procedural style filter.",
+  "referenced_image_paths": [
+    "C:/Users/cogpsy-vrlab/.codex/worktrees/street-guenther-complete/GermanySimulator/assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png"
+  ],
+  "referenceSha256": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3",
+  "role": "edit target; adult identity/pose locked; painted style refinement"
+}

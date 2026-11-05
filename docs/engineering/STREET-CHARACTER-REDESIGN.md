@@ -1,5 +1,37 @@
 # Street character redesign — sequential character releases
 
+## Resumed scope — 5 November 2026
+
+Active goal: finish adult street-only 2D sprites at Söder's visible height,
+redesigning undersized adults in the established mature Disco Elysium style.
+All politicians, children and Bürgeramt actors are protected. This overrides
+older instructions in this record to repaint politicians or accept the shorter
+Sandale rendering as the height target.
+
+Integrator-owned candidate:
+`C:/Users/cogpsy-vrlab/.codex/worktrees/street-soeder-height/GermanySimulator`,
+based on verified public main `a8ac4c2882e69a28cde7f0191dc74f9c7fc09753`.
+Older authoring checkouts retain their unfinished work; do not overwrite this
+newer runtime with their whole registries. The primary checkout remains intact.
+
+Execution order and acceptance:
+
+1. Inventory latest production selectors and measure Söder's exact neutral
+   pixels and projection beside street adults; preserve reference hashes.
+2. Complete existing prepared adult families, starting with Günther TÜV's own
+   eight-view source, corrected independent far-foot stance, actions and mouths.
+3. Calibrate selected adults and their fallback/stride ownership to the actual
+   reference; do not resize politicians, children or interior actors.
+4. Verify encoded frames, source replay, normal loading/failure/retirement,
+   silent desktop and Android emulation, and independent Physics/Camera gates.
+5. Publish accepted coherent changes and verify the deployed root and 3d.html.
+   Whole-cast completion remains unproved until every scoped family passes.
+
+Fresh inventory, projection comparison and build/review receipts belong under
+ignored `output/`; the per-family table below remains historical until updated
+from current selected assets. Physical Android and natural traversal are not
+inferred from staged headless scenes.
+
 The active user goal covers all outdoor 2D street characters and police: mature,
 weathered, painterly **Disco Elysium meets Berlin** faces and connected adult
 limbs, with actual Söder and Herr/Frau Sandale stature as references. Söder is
@@ -23,6 +55,56 @@ bench and must not publish over the current lane. Other incomplete cast work
 stays in its separate checkouts. Copy only an accepted character's
 registry entry and required assets/dependencies; do not replace the whole
 registry with an author's broader local candidate.
+
+## Günther TÜV — verified Söder-height candidate, 5 November 2026
+
+Only `stadt-guenther-tuev` changes among the43 registry records. His own mature
+paint retains grey swept hair, lined clean-shaven face, beige shirt, blue
+work overalls, substantial black boots and one anatomical-right gauge/hose.
+Eight genuine headings supply412 selected body cells, all64 phase stops,
+16-phase walks and four original quiet performances;324 mouth slots per density
+retain original German recordings and exact media ownership.
+
+The unchanged authored source rebuild reproduces23 baseline outputs at2.33.
+The final rendered fit is2.77 with proportional stride15.647644496661778.
+Source replay, height fit and packet rebind are documented in his own README;
+the final runtime packet binds the actual height/stride typed-f64 digest.
+Initial standing-only renders missed a real movement-definition mismatch;
+independent Camera found it, and the rebuilt packet plus strict canonical
+selection regression now pass. Preserve the failed evidence.
+
+Fresh independent Physics passes both-foot final encoded contacts, desktop
+legal movement/all16phases/three cycles, planted stops, four quiet actions,
+actual eight-anchor turns, player obstruction and native speech ownership.
+Portrait and landscape emulation pass own mobile gait/cadence/stop/contact.
+Camera passes fresh desktop/portrait actual movement admission, both depth
+orders (5075 correct samples, zero wrong), opaque wall, held/404 fallback,
+root/compatibility startup and loaded/fallback Bundestag context. Supplied
+common-ground height is123/124 desktop,130/131 portrait and60/60 landscape
+Günther/Söder pixels, within one native sampling row. The mobile hose remains
+diagonally connected; four-neighbor component counting had split its join.
+
+Root inspected actual source/native atlases and in-game comparison captures.
+The109 focused Node checks, critical sprite gate, source/native audits and
+actual sparse packaging pass. All9 runtime images/packets are retained exactly;
+three raw originals are omitted. Independent raw Git-blob checks preserve510
+politician/child/Bürgeramt files, and all42 other registry records stay exact.
+Final62 source/test/asset pins and review receipts are in ignored
+`output/soeder-height/`; the metadata finisher replays with all62 hashes exact.
+Physical Android, natural traversal, perceptual listening and the broader
+unchanged world matrix remain unclaimed. The candidate is accepted for scoped
+publication; deployment receipts are recorded separately after the push.
+
+The whole-cast goal remains active:24 short citizen families still need adult
+redesigns; the15 earlier adult families, police, Sandales and adult neighbors
+still require the current Söder-height target. Hildegard has eight painted
+views and corrected source contacts but no complete family/native packet;
+finish her existing source pipeline after calibrating the earlier mature cast.
+
+Git metadata: this new managed worktree's default index repeatedly disappears,
+reporting staged deletions despite unchanged files. Publication uses an isolated
+task-owned Git index with explicit reviewed paths; unrelated hook/primary
+changes remain excluded. Do not stage the apparent default-index deletions.
 
 ## First live character: Irmgard Aktenordner
 

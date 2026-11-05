@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import vm from 'node:vm';
+const id='stadt-guenther-tuev',context={window:{}};
+vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),context);
+const catalog=context.window.GermanySimulatorAudioText;
+const recordings=Object.entries(catalog.recordings).filter(([,clip])=>clip.voiceId===id);
+const files=['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/VOICE-CAST.json',...readdirSync('assets/voices/city-dialogue').filter(name=>name.startsWith(id+'-')).map(name=>'assets/voices/city-dialogue/'+name)];
+const hashes=Object.fromEntries(files.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
+const baseline={id,profileId:catalog.productionVoices[id].profileId,selectedRecordingCount:recordings.length,selectedRecordings:recordings.map(([file,clip])=>({file,sha256:clip.sha256,source:clip.source,mouthHz:clip.mouthHz??null})),hashes};
+writeFileSync('assets/sprite-sources/resident-motion/'+id+'/adult-v1/voice-baseline.json',JSON.stringify(baseline,null,2)+'\n');
+console.log(JSON.stringify({id,profileId:baseline.profileId,selectedRecordingCount:recordings.length,sourceFiles:files.length}));
