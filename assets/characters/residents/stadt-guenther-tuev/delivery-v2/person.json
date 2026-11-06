@@ -25,17 +25,17 @@
     21,
     20
   ],
-  "strideDistance": 15.647644496661778,
+  "strideDistance": 15.9275,
   "variants": {
     "desktop": {
       "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/source-desktop.webp",
-      "sha256": "4eceb3c49c620d451daea19541e488b35d82de29554a6aa1b407de5b75982ef3",
+      "sha256": "68a977877ae62bfc46066ae92ff601459cf97e2f1615e123856a39ebf827eae7",
       "width": 2016,
       "height": 2400
     },
     "mobile": {
       "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/source-mobile.webp",
-      "sha256": "3cf2cda58a8e1c621c638da2b25731ef5543f894a72bf92f51cc61fd8067fee4",
+      "sha256": "b31e7890ce574d1d1c240efb86bc2399beb7cd42309488a8a574b049b9e7400f",
       "width": 1344,
       "height": 1600
     }
@@ -2650,10 +2650,10 @@
   },
   "mouthPaint": {
     "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/mouths-v1.json",
-    "sha256": "0fe4a081046b30b8dd93862a91503deed0806a0aceef1c951619ea51fd3f1fe7"
+    "sha256": "718e3443fcb966fdd6ff42dbabebb946c948d7ae1db8edebc8d3661302edd610"
   },
   "motionDelivery": {
     "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/delivery/motion-delivery.json",
-    "sha256": "343500e9444c28be9a5fb5788059a0de37a6eae1a3ce64e7db8d8f774c7cae2d"
+    "sha256": "f239fce8300b708893ec1d9032e51acb77eb9ddcf4cd0ff801e3777ac068384d"
   }
 }

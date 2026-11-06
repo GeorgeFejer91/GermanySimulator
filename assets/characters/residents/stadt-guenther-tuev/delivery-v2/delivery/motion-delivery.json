@@ -12,30 +12,30 @@
     ]
   },
   "definitionHashFormat": "typed-json-f64-v1",
-  "definitionSha256": "58b7d1829e086cd01bc5072deea1106f31f714dcb2853cbe89b520f6a1d82ec6",
+  "definitionSha256": "55253f903206d478ef4a4437ba9e6f1fd068493f18d9dc6c1c2601cb5767ea0f",
   "sources": {
     "desktop": {
       "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/source-desktop.webp",
-      "sha256": "4eceb3c49c620d451daea19541e488b35d82de29554a6aa1b407de5b75982ef3",
+      "sha256": "68a977877ae62bfc46066ae92ff601459cf97e2f1615e123856a39ebf827eae7",
       "width": 2016,
       "height": 2400,
       "cell": [
         96,
         120
       ],
-      "rgba_sha256": "a8bf8da5022404562e77301d500852a2170e1c08e230446aac37a0742bf731d1",
+      "rgba_sha256": "429a0b378230dc1cc40bede6869d1862a449201226ca8700f8ddcb982e9012c8",
       "decodedBytes": 19353600
     },
     "mobile": {
       "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/source-mobile.webp",
-      "sha256": "3cf2cda58a8e1c621c638da2b25731ef5543f894a72bf92f51cc61fd8067fee4",
+      "sha256": "b31e7890ce574d1d1c240efb86bc2399beb7cd42309488a8a574b049b9e7400f",
       "width": 1344,
       "height": 1600,
       "cell": [
         64,
         80
       ],
-      "rgba_sha256": "7a119eed99556ca22c54327c1417a0690110205e06f934e18ec5b21ba513117e",
+      "rgba_sha256": "7704de72ad00352242ae0402dea85789d7ff17ec43cf59697cf725d9d9a60895",
       "decodedBytes": 8601600
     }
   },
@@ -404,18 +404,18 @@
           "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/delivery/movement-desktop.webp",
           "width": 1536,
           "height": 2640,
-          "bytes": 1588140,
-          "sha256": "1c01602cf10f02ebe360424c5559244e9eb2351871fc91f0ec83f9f3b5f5d439",
-          "rgba_sha256": "931390d9cd290e5eb7f212f78d9dee99f6e17f5ca53e4b2c19d2096cfcfc3eab",
+          "bytes": 1562682,
+          "sha256": "f75a8250eaed434dace49296ff63cc8378f3e903fecc8688bfcfd9e7f9000fd4",
+          "rgba_sha256": "a3c537c61d1a53963caec0135840314e9a88b416f88ab3dacefa4c2c606de060",
           "decodedBytes": 16220160
         },
         "mobile": {
           "file": "./assets/characters/residents/stadt-guenther-tuev/delivery-v2/delivery/movement-mobile.webp",
           "width": 1024,
           "height": 1760,
-          "bytes": 621230,
-          "sha256": "f7366d24d3f6a226a6cf30aa5628d7f90e225348accdf919c49571d29ce3c602",
-          "rgba_sha256": "9b70443290bba4661b8faca1240d27d7a80e80cecdde0ffff38066b4966f7596",
+          "bytes": 607494,
+          "sha256": "9fa6386e287d99e47fcc426e99febfbbb3adc92a9fd191b6debc0b07047b5e0f",
+          "rgba_sha256": "6132ecb5c79aa20a73e583365296cecaa123eb1a7113223c409632af626fe531",
           "decodedBytes": 7208960
         }
       }

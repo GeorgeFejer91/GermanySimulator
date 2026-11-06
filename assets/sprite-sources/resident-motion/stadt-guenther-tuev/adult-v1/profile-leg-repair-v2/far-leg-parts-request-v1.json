@@ -1,0 +1,27 @@
+{
+  "mode": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit / anatomy completion. Asset: transparent painted 2D game-character cutout parts sheet for the exact mechanic in these two references. Image1 is the exact RIGHT-facing G\u00fcnther T\u00dcV profile identity/paint reference; image2 is the exact LEFT-facing profile. Preserve both originals unchanged; the output is a separate missing FAR-leg anatomy sheet, not a replacement whole character.\nPaint exactly TWO separate complete FAR LEG cutouts, side by side on true transparent background with wide empty gutters. LEFT COLUMN: one complete far trouser leg and work boot facing RIGHT, matching image1. RIGHT COLUMN: one complete far trouser leg and work boot facing LEFT, matching image2. Each cutout runs from high upper thigh just below the hip all the way through connected knee, calf, turned-up light denim cuff, ankle and ONE COMPLETE solid work boot with full heel, upper, toe and continuous thick sole. The hidden portions behind the near leg must be painted as real complete coherent anatomy; do not leave a concave missing heel, partial shoe, split ankle, white hole or transparent cut inside the leg. One leg and one boot per column, total2legs2boots. Upright planted neutral side profiles, flat ground sole, same one density scale both columns and both axes. Give each piece enough top overlap under existing overalls/pelvis; no torso, head, arms, hands, props or extra limbs.\nMatch G\u00fcnther's actual worn faded dark-blue overall trousers, realistic broad cloth planes, rolled light-grey denim hems and substantial scuffed brown-black laced mechanic boots exactly to the reference, including chunky heel/toe/sole volume. This is a mature painterly angular Disco Elysium-style mechanic, not glossy 3D, vector, toy anatomy or a generic black silhouette. Keep natural adult lower-leg proportions and the same ample boot size relative to cuff and calf. Use the references' light/shadows/material palette. No perspective view, no walking pose, no raised toe, no bent knee, no foreshortened leg, no ground/shadow/backdrop, no labels/text/borders/watermark. Large clean cutout parts, fully visible with transparent margins. The two output pieces are distinct genuine side paintings, not mirrored copies; match the actual referenced facing and cloth surface.",
+  "references": [
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/right.png",
+      "sha256": "e4049162220631a7a553bec1a34e1e1ff9dadc6501ed5fce5db3f4fcef6a4372"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/left.png",
+      "sha256": "3ec2608f3a3397b1e19c0f9f347697f6a197119ec4bd521da6d1068bbe65d89b"
+    }
+  ],
+  "transparentBackground": true,
+  "status": "REQUESTED new missing anatomy only; raw8 and originals immutable",
+  "actualToolPrompt": "Use case: precise-object-edit / anatomy completion. Create a separate transparent painted game-character parts sheet for the exact G\u00fcnther T\u00dcV mechanic in image1 RIGHT-facing profile and image2 LEFT-facing profile. Originals stay unchanged. Paint exactly TWO isolated complete FAR LEG cutouts side by side with wide transparent gutters, same density scale: LEFT COLUMN one leg facing RIGHT matching image1, RIGHT COLUMN one leg facing LEFT matching image2. Each piece runs from high upper thigh just below hip through connected knee, calf, turned-up light-grey denim cuff, ankle and ONE COMPLETE chunky work boot with full heel, upper, toe, continuous thick sole, upright planted neutral profile. Paint the genuinely missing hidden far-leg anatomy as complete coherent opaque cloth/boot; no concave missing heel, cutout ankle, split boot, hole or partial silhouette. Total2legs2boots. Top overlap must extend under existing overalls/pelvis. Match his worn faded dark-blue overall trousers, angular weathered cloth planes, rolled light-grey hems, substantial scuffed brown-black laced mechanic boots exactly to the reference. Adult anatomy, same ample boot size relative to cuff/calf, same paint palette/light/shadow. Mature expressive Disco Elysium-style paint. Distinct genuine side paintings matching the actual reference facings and cloth surfaces, no mirrored copy. No torso/head/arms/hands/gauge/hose/extra limbs, no walking or bent knee, no raised toe/foreshortening, no glossy3D/vector/toy/black silhouette, no ground shadow/backdrop/text/labels/borders/watermark. Large fully visible cutouts, true transparent alpha, comfortable margins.",
+  "actualToolReferences": [
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/right.png",
+      "sha256": "e4049162220631a7a553bec1a34e1e1ff9dadc6501ed5fce5db3f4fcef6a4372"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/registered/left.png",
+      "sha256": "3ec2608f3a3397b1e19c0f9f347697f6a197119ec4bd521da6d1068bbe65d89b"
+    }
+  ]
+}

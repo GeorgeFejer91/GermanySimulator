@@ -369,6 +369,103 @@ the exact expanded445-check command passes. Final changes after the142-pin
 world reviews are this task record and CI wiring only; runtime/art remain exact.
 Immutable publication verification is next, then the remaining street cast.
 
+### Bärbel publication verified — 6 November 2026
+
+Repaired Bärbel is normally pushed as
+`27099967e2bd6f14a80d1ab70289bd1df69a34d8`; Pages42121520756 succeeded.
+All18public files, including all9own runtime assets, match immutable committed
+blobs. Four silent contexts pass root, query/hash-preserving compatibility and
+actual ordinary B19 desktop/portrait standing plus movement-bank admission.
+A supplemental portrait uses the existing fax-dismiss handler, awaits its
+actual animation completion, and proves the complete displayed quad fits the
+390×844viewport. Root personally viewed the desktop and clean portrait captures.
+The first portrait remains overlay-obscured; its same-tick dismissal assertion
+RED is preserved beside the event-aware successor. Source bytes and game code
+were unchanged. Descriptive one-context timings are not new budget/FPS proof.
+All browsers and contexts are closed. Evidence: `output/baerbel-height/live/`.
+
+The whole-cast goal remains active:22short active citizen families, bothSandales
+and3adult neighbor families still need completion. Police and18mature citizens
+now use the accepted height. Günther/Hildegard whole-shoe followups remain
+separate from the accepted height/publication results. Günther's repaired
+412body family is now accepted for the scoped successor release below.
+Ute's160source/320native pilot and
+10mouth pairs have root visual review of20native pages and independent PASS
+on160source/320native/10mouth checks with317stable pins. Her bounded full412
+source bake now supplies412cells/348unique images. Exact actual native audits
+pass824body cells and648mouth pairs, with root inspection of34pages covering
+the whole set. Its private own-only348movement/64reaction delivery rebuilds
+and check-reproduces at2.33/11.65; clean raw/formal/finalfit/world gates remain
+open, and original production remains standing-only1.6. Its formal provenance/
+completeness auditors now pass412frames/eightcategories per density with zero
+errors. A bounded raw-only replay recipe and validation-only authored baseline
+are prepared; no clean Ute rebuild is yet claimed.
+Dietmar's own5.2pxLEFT-mouth proposal is approved for pilot after root views
+actual source/desktop/mobile pairs; its mobile change remains small. All160
+source/320native pilot body and10mouth checks now pass independent review with
+376stable pins. Hidden FARheel limits remain explicit. His full412 bake has
+started in bounded sections; runtime/canonical selection remains held.
+Hildegard's complete FAR parts register uniformly
+at0.20 beside exact original NEAR paint. Held01's under-hem gap is preserved;
+the corrected whole-part LEFT translation closes it. Root views both16phase
+source cycles with rigid whole shoes and actual near/far five-point slopes−40.
+Her64full-strength native cells and10mouth endpoints also pass, with root
+inspection of12actual pages. All-stop/independent/fullfamily/world closure
+remains pending. Her first FARheel
+support was one pixel too low for a complete5×5opaque patch; the unchanged
+paint and failed check remain preserved beside actual inward support points.
+Politicians, children and Bürgeramt characters remain protected.
+Task-only publisher HEAD is27099967; no further release is staged. Continue the
+same owning checklist and sequential publication lane without closing the goal.
+
+### Günther whole-shoe successor accepted — 6 November 2026
+
+Only Günther's selected family changes: height2.77, own fitted stride15.9275,
+person SHA694bc07e…31c534 and packet SHAf239fce8…384d. Complete separately painted
+FAR legs and original whole NEAR paint replace the old shoe deformation. Four
+existing own source/movement WebPs change; standing/reactions and1366other
+tracked PNG/WebPs stay exact. Other42expanded citizen records and protected
+politicians, children and Bürgeramt characters remain unchanged.
+
+Both clean raw reconstructions reproduce10runtime/person files and the final
+height fit exactly.824native body cells,648mouth pairs and formal412frames/
+eightcategories per density pass. The portable raw recipe needs no generated
+parts or selected production outputs. All445street checks and canonical Python
+packet check pass. Actual sparse packaging retains162runtime/module files
+exactly and omits all3own raw paintings.721frozen candidate pins stay exact
+through both final independent reviews; the final seal permits this task-record
+update only after those reviews close.
+
+Physics freshly checks80own source/native/delivered foot-region comparisons,
+three-layout original-owner walking/stops, desktop quiet4/eightactualturns,
+98obstruction holds and original recorded speech lifecycle. Maximum measured
+native stencil residual is0.268279px. Exposed FAR regions and hidden endpoints
+remain distinguished. Sampled floor fringes occupy one bottom raster row;
+zero-raster penetration is not claimed. Camera freshly checks three layouts,
+5621correct depth samples/zero wrong, opaque walls, held/404fallback,
+retirement/reentry,24actualturns and loaded car/door/landmark contexts.
+Günther/Söder measure124/124desktop,129/131portrait,60/60landscape under the
+existing one-native-crown-row sampling rule. One fixed family scale is retained.
+The Camera reviewer authored historical Günther art, but none of this v2repair;
+separate Physics and root own final acceptance. Root personally views actual
+encoded feet, world walking/planting, common-ground comparisons and turn boards.
+
+Comparable immutable27099967/candidate cold browser budgets pass unchanged
+limits: candidate desktop16,385,769bytes and portrait16,000,344bytes,9accepted
+input observations and zero errors per layout. This is a quiet SwiftShader lab
+pair, not a causal speedup or FPS/physical-device claim. Functional reviews use
+IrisXe/D3D11. Original HUD occlusion in forced portrait/landscape pages is
+disclosed beside complete raw-canvas/actual-route views. PhysicalAndroid,
+listening, natural mission traversal and broader unchanged-world matrices are
+not inferred. All source jobs, review browsers and local servers are closed.
+
+Evidence: `output/guenther-shoe-repair/` and
+`output/guenther-height/review-camera-v2-street-roster/`. Publish the explicitly
+reviewed40planned paths through the task publisher, then verify immutable
+deployed root/compatibility and actual desktop/portrait Günther admission.
+Ute raw replay, Dietmar's remaining source sections and Hildegard's all-stop
+pilot resume after the public verification lease closes. Whole-cast goal open.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

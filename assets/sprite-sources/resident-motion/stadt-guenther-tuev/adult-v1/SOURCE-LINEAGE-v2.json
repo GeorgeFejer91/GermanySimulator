@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "actor": "stadt-guenther-tuev",
+  "rawInputs": {
+    "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v1.png": "71f664ab5a339897e77d6feb3e24e1b7803508a101b8b5a10700a353ee9659d3",
+    "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/raw-directions-v2.png": "2d372ae604b708dd213e4dd16d80f49e75d246d708ce25591d48484255c0d8c8",
+    "assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png": "293c6e20e1f7e8ac38a6e7b71d0887ed9ba7666ff657fc5c9ad9744746149564"
+  },
+  "oldRecipesPreserved": {
+    "build-family-source.py": "922ad62cd172da6886b20ab5d500009fd365ed4c7bf78f907788cffac37714b6",
+    "clean-rebuild.py": "42d258c1dd8d4e7538e316dcf32de0de39c6279e81c22c28e7494878dc96e38c",
+    "validation-baseline.json": "54328e9c3c550199ca31822a79bcf33a3f7502685e057793dc8df1e60c26c11d",
+    "README.md": "4ba63d844802912ac2dfcff7d37de22e8f6ef0f377b7061b209294f0431c9850"
+  },
+  "method": "Own raw8 and complete farleg paint; originalNEAR retained, two distinct layers through existing painted_walk.warp_layer; ownrootfit02, one.27density, completecuff/shoe plateau407. Fixed RIGHTgauge/hose and LEFTempty. No xblend within a shoe.",
+  "rawProof": {
+    "runtimeFilesExact": 10,
+    "sourceCellsExact": 412,
+    "uniqueSourceImagesExact": 348,
+    "sourceHeight": 2.33,
+    "sourceStride": 13.3975,
+    "privatePacketSha256": "243c0440df5e033011d6fb087c2657134bc9bf804389aa46d9cadbc6801a92ec"
+  },
+  "generationAuthority": "Actor-owned portable v2helpers +own rawpaint/fits +existing shared tools only. No local ignored/cached products or expected hashes enter generation.",
+  "formalScope": "Owner actual824native bodies and648native mouthpairs inspected; independent production Physics/Camera still required after selected2.77fit."
+}

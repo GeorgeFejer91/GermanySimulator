@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "originalOutput": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac27-119e-75d1-b510-19e4ba8f1fe0\\exec-ca39a488-fca1-4576-a64f-4d13c90f280a.png",
+  "sourceCopy": "assets\\sprite-sources\\resident-motion\\stadt-guenther-tuev\\adult-v1\\profile-leg-repair-v2\\raw-far-leg-parts-v1.png",
+  "sha256": "293c6e20e1f7e8ac38a6e7b71d0887ed9ba7666ff657fc5c9ad9744746149564",
+  "size": [
+    1774,
+    887
+  ],
+  "mode": "RGBA",
+  "transparentRequested": true,
+  "status": "RAW NEW FAR-LEG PAINT; registration/visual/root gate pending"
+}

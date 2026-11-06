@@ -7,12 +7,13 @@ import {streetMotionDeliveryDefinitionBytes} from '../street-motion-delivery.js'
 
 const read=path=>JSON.parse(readFileSync(new URL('../'+path,import.meta.url),'utf8'));
 
-test('production selects Günther’s complete adult family with its Söder-height fit',()=>{
+test('production selects Günther’s complete layered adult family with its Söder-height fit',()=>{
   const selected=expandStreetManifest(read('assets/characters/street/manifest.json')).characters['stadt-guenther-tuev'];
   assert.equal(selected.standingOnly,false);
   assert.equal(selected.figureWorldHeight,2.77);
-  const authored=read('assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/validation-baseline.json').person;
+  const authored=read('assets/sprite-sources/resident-motion/stadt-guenther-tuev/adult-v1/validation-baseline-v2.json').person;
   assert.equal(authored.figureWorldHeight,2.33);
+  assert.equal(authored.strideDistance,13.3975);
   assert.deepEqual(selected,{
     ...authored,
     figureWorldHeight:2.77,
