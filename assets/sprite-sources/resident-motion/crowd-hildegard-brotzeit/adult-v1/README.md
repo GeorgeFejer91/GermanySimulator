@@ -1,5 +1,40 @@
 # Hildegard Brotzeit adult family
 
+## Current intact-shoe source successor — 6 November 2026
+
+The owning whole-shoe recipe is `clean-rebuild-v2.py`. It retains the original
+NEAR leg and uses complete own FAR calf/cuff/Mary Jane paint at one isotropic
+0.20 density. The fixed skirt overlap is350..359; both shoes translate intact
+from425 down. RIGHT retains the basket, LEFT stays empty. Earlier recipes and
+failed trials below are historical and remain preserved.
+
+Use a genuinely absent short mirror under `C:/Users/cogpsy-vrlab/.codex/tmp/`
+(absolute length below65) and an absent report directory under
+`output/hildegard-height/`. Run each step through `run-stage.py` in this order:
+`init`, `register`, `parts`, `fit`, `body-down`, `body-right`, `body-up`,
+`body-left`, `body-turn-actions`, `body-finalize`, `mouths`, `cycle`, `compile`,
+`packet-init`, `packet-build`, `packet-bind`, `packet-check`, `baseline`,
+`validate`. Each call takes `--step`, `--mirror` and `--outdir`. Baseline creation
+and validation read expected original products only after all16 generation
+steps finish; never copy expected/registered/compiled paint into the mirror.
+For an existing validation baseline, omit `baseline` and preserve its bytes.
+
+The accepted raw-source proof uses30 raw/code/control inputs and reproduces
+387 files:348 unique body-source PNGs, eight registered views, eleven generated
+profile parts, ten delivery/person files and ten source/compiled metadata or
+atlas files. All412 logical cells, authored2.33/11.65 person and complete physical
+cycle semantics match. The actual world module remains pinned; only its full
+diagnostic digest is outside physical-cycle semantic equality so cache-query
+changes do not invalidate identical source physics. Existing map-scale checks
+remain mandatory. New selected fitting is2.77/13.85 and reproduces identically
+from original and raw-rebuilt packets.824 native body and648 mouth pairs were
+reviewed on34 actual root-viewed pages; both412×8 formal exports pass.
+
+These are source/native proofs. Current selected runtime, independent final
+Physics/Camera, budgets and publication are owned by the existing
+[street-character task record](../../../../../docs/engineering/STREET-CHARACTER-REDESIGN.md).
+`SOURCE-LINEAGE-v2.json` binds the source recipe and raw inputs.
+
 Single owner: crowd-hildegard-brotzeit. Isolated base a78d6e8dcb093d2639bc1611a9e0505e9eff375e; root integrates, accepts and publishes. This worker does not commit or push. Writable scope is this source folder, this actor's street-speakers delivery-v2 folder, own focused test if justified, and private output/street-redesign/hildegard-brotzeit-end-to-end evidence. Pre-existing .githooks/pre-commit modification is outside scope and preserved.
 
 The original personally viewed source owns blonde low braid, turquoise round spectacles, freckles, cream buttoned knit cardigan over rust-red checked blouse, charcoal knee skirt, grey stockings, broad complete black Mary Jane shoes. Anatomical RIGHT owns the single wicker lunch basket (front screen-left and rear screen-right); LEFT stays empty. The older compact reference defines identity only. User-approved new direction requires mature angular weathered painterly adult proportions comparable to Söder and the Sandales, connected long adult limbs, and dry-brush expressionist planes throughout.

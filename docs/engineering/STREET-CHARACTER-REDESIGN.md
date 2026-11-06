@@ -682,6 +682,107 @@ goal active. Next source work is Hildegard's prepared whole-shoe fit, Horst's
 own160source/320native motion pilot, and Gartenzaun's eight new genuine raw
 views/transparent source registration trial; none is included in this release.
 
+Dietmar publication: normal pushed commit
+`89e96783788126adaa491177253d981132d42c78`, Pages42167503481 SUCCESS. Normal
+critical-sprite hook and both selected hook tests pass. All66staged paths were
+60byte-exact/6ordinary text CRLFtoLF; runtime/source JSON preserves nativeCRLF
+for its exact hashes. CRLF-aware whitespace checks retain only two explicit
+hash-bound source blankEOFs (`pilot-motion.py`, `prepare-neutrals.py`); all
+other whitespace passes. Nothing is staged; Hildegard README/guard edits and
+H/Horst/Gartenzaun private assets remain excluded.
+
+Independent public verification is COMPLETE in `output/dietmar-height/live/`.
+All19critical public files/4994357unique bytes, including nineown runtime assets/
+3882843bytes, match immutable89e. Four accepted scopes pass: attempt02root/3d
+query-hash compatibility/original-adviser desktop plus supplementalportraitv2.
+Root personally views both complete crown/body/wholeboot captures and enlarged
+head checks. The first portrait remains admissionPASS/visibilityHOLD for its
+billboard-clipped cap. Preserve both fixture failures (early observerTDZ and
+undefined optional-pause check), exact helpers/reports/held captures, and the
+first supplemental trace-copy omission. All9attempted contexts are closed:
+7automatedPASS/2fixtureFAIL, with four final accepted scopes. Portrait v2 waits
+20.1672units of original natural walking; production optional-pause semantics
+are matched, with no actor/controller/clock/DOM/style forcing. All13notices are
+clear; fax hidden transitions are real, border/toast were already clear. No
+fresh16000ms expiry or coldmouth/performance claim is invented. Root receipt:
+`output/dietmar-height/live/root-viewed.json`. No browser/server remains.
+The deployed selection now contains20mature citizens plus police;20short active
+citizens, both Sandales and three adult JWDneighbors remain. The cast goal stays
+active. Next candidates retain their separate source gates: Hildegard fit ready;
+Horst's phase1hand-edge cloth-underlap failure is held with a new own hidden-
+cloth raw proposal; Gartenzaun's eight registered views and complete FAR-paint
+design are approved, but part fitting/motion remain unaccepted. Public GPU is
+released; bounded source trials resume. Horst's first RIGHT hidden-cloth trial
+closes mechanically with unchanged visible near/cuff/boot/hand/key/FAR paint,
+neutral and failed phase1 recheck; actual root visual review remains pending.
+Next runtime integration is Hildegard's prepared whole-shoe successor from the
+now-verified89e base. Keep the overall goal open.
+
+### Hildegard whole-shoe integrated candidate — 6 November 2026
+
+Only `crowd-hildegard-brotzeit` changes among43expanded records versus verified
+public89e. Height stays2.77; the actual own intact-foot source clock2.33/11.65
+fits selected13.85, replacing old12.86768851673732. Selected person48c2d463…54acf,
+packet5266f011…69570 and allnine runtime assets reproduce from the raw-only
+387file/fullperson proof. Original NEAR and complete FAR stockings/MaryJanes
+remain separate with fixed350..359hem and whole425+cuff/shoe transport. Braid,
+glasses and RIGHTbasket stay unchanged.
+
+New source-bound regression fails the prior clock, then all4focused checks pass.
+The exact Pages street group now includes these4checks and passes457total;
+preserve initial454PASS/3old-cacheURL fixtureREDs. Literal successor cache checks
+keep exact new version matching. Sparse packaging retains181required files and
+omits3own raw paints; canonical Python selected-packet check passes. Only four
+prior tracked Hmovement/source WebPs change; standing and reaction paint remain
+exact, as do42other records. Wire metadata is129575bytes under unchanged cap.
+
+Source closure35paths and55planned release paths are prepared. Native824body/
+648mouth/root34page/formal412×8/source-independent/raw387gates pass as recorded
+above. Fresh final selected Physics and Camera, comparable immutable89e budget
+pair, publication and public body proof remain open. Ordinary originalH1/native14
+is a prior runtime hint to re-observe, not a new proxy. Other source owners are
+CPU-quiet for this review: Horst RIGHT16/32passes with its genuine hidden-cloth
+repair, remaining144/288held; Gartenzaun pairedFAR trial .22655037722724597 is
+held for semantic hand/towel/near-trouser mask repair. Neither is selected here.
+
+Final affected-scope acceptance passes on762frozen pins, all272source-pilot pins,
+and32expected changed paths from55planned paths. Independent Physics freshly
+observes the original ordinary H1/native14 owner on its original route:80own
+RGBA contacts/32native cells (maximum residual .401777px), all16phases and
+four desktop/two portrait wraps, planted stops, four quiet states,98obstruction
+holds (minimum separation29.0945), eight actual turns and original Berlin02
+media first-use/replay/pause/end/cancel. Mouth was already warm; no cold-mouth
+or listening claim. The first blocked-observer fixture RED stays beside the
+lawful-offset successor. One-row floor fringes remain quantified rather than
+called zero; the portrait raw canvas is separate from its notice-covered page.
+
+Independent Camera closes27contexts, including the three required faded-wall
+supplemental contexts omitted by its retained initial24case helper. Actual
+premultiplied depth sampling passes7088pixels with zero wrong/other. Same-ground
+Hildegard/Söder visible rows are124/124 desktop,129/131 portrait and60/60 landscape.
+The portrait difference fits the existing2.53894px own-native sampling bound;
+no per-view scale or tolerance changes. All24actual turn figures, ordinary
+standing/packet delay/404 lifetime and actual car/door/loaded+fallback landmark
+views pass. Fresh broad natural building-fade C1–C3 remains NOT RUN. Root reads
+both full independent reports and personally views ten selected native/world
+images: complete stockings/MaryJanes, RIGHTbasket and empty LEFT remain coherent.
+
+The comparable quiet cold lab pair overrides all14existing shared/own paths
+from immutable89e at baseline. Desktop/portrait startup bytes are
+16394457/16009029 before and16394454/16009029 after, nine accepted inputs and
+zero errors per profile under unchanged18MB/4Hz/1.6MP gates. One run per profile,
+SwiftShader/DPR2/seed38 is lab evidence, not FPS or physical Android. All review
+and budget contexts, browsers, helpers and servers closed. Evidence:
+`output/hildegard-height/{review-physics-final-v2,review-camera-layered-v2}/`,
+`budget-layered-v2-pair-v1.json`, `root-layered-v2-world-viewed-v1.json`.
+
+Publication and immutable public whole-body proof are next. Overall cast goal
+stays active:20mature citizens plus police live;20short active citizens, both
+Sandales and three adult JWD neighbors remain. Source-only Horst continues his
+bounded remaining profile pilot; Gartenzaun receives only the semantic-mask
+neutral trial after root actually views all four original prop/root crops.
+Neither private actor is admitted by this Hildegard acceptance.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

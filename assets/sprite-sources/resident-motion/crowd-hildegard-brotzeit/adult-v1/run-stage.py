@@ -43,6 +43,8 @@ pin_paths=list(author.glob('*.py'))+[author/name for name in ['lip-fits.json','r
 pin_paths += list(author.glob('raw-*.png'))+list(author.glob('reference-*.png'))+list((author/'registered').glob('*.png'))+[root/'tools'/name for name in ['build-street-character-sprites.py','build-street-mouths.py']]+[root/'.agents/skills/animate-2d-characters/scripts'/name for name in ['painted_walk.py','harmonize_material.py']]
 pin_paths += [root/'output/street-redesign/hildegard-brotzeit-end-to-end'/name for name in ['full-working/body-index.json','family-mouths/mouths-working.json']]
 input_pins={path.relative_to(root).as_posix():hashlib.sha256(path.read_bytes()).hexdigest() for path in pin_paths if path.exists()}
+for path in [author/'profile-leg-controls-v2.json',*list((author/'profile-leg-repair-v2').glob('*.png')),*list((author/'profile-leg-repair-v2').glob('*.json'))]:
+ if path.exists():input_pins[path.relative_to(root).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
 try:
  with (out/(a.stage+'.stdout.txt')).open('w') as log,(out/(a.stage+'.stderr.txt')).open('w') as err:
   child=subprocess.Popen(command,cwd=root,env={**os.environ,'OMP_NUM_THREADS':'1','OPENBLAS_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},creationflags=subprocess.CREATE_NO_WINDOW|subprocess.BELOW_NORMAL_PRIORITY_CLASS,stdout=log,stderr=err)

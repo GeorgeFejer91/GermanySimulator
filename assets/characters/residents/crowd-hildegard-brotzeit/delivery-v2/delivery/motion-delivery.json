@@ -12,30 +12,30 @@
     ]
   },
   "definitionHashFormat": "typed-json-f64-v1",
-  "definitionSha256": "3cabeb64bc9386600f1dd9104fe6c43bfb76b0a2ebd08de1be3df50b9d3915ee",
+  "definitionSha256": "127e832d066dee65f7e7573c6aaf36717e90eacf6dae9085b451584845e82215",
   "sources": {
     "desktop": {
       "file": "./assets/characters/residents/crowd-hildegard-brotzeit/delivery-v2/source-desktop.webp",
-      "sha256": "d0cd5c1dd48d1484ac4d2a0f1859c293c1db87b51e762bc57024a320f177abce",
+      "sha256": "7ac57f48a3197775c3c38c261b2b26c05e7e1288289786ef5f5a48b60a52f0a0",
       "width": 2016,
       "height": 2400,
       "cell": [
         96,
         120
       ],
-      "rgba_sha256": "e026c13b583682f77223b409b1b95ba676d2d5e0e3d733ce51cf116159cb5b7c",
+      "rgba_sha256": "dea968f6367c421bdc7f084a8b30726d2eca55e4fa0e15f82b7102e2da72427e",
       "decodedBytes": 19353600
     },
     "mobile": {
       "file": "./assets/characters/residents/crowd-hildegard-brotzeit/delivery-v2/source-mobile.webp",
-      "sha256": "47648c81f216cd25f582585aac9ba25fddd0a0395d74e57cfa2771f4678fdd57",
+      "sha256": "19a1f97cde9487c176762bab8a41f216f2f3cdf7942a7b1ed13040ca27de204d",
       "width": 1344,
       "height": 1600,
       "cell": [
         64,
         80
       ],
-      "rgba_sha256": "cd9903a968e043418c37d5e3b82cfe377e5b0f57ec320a52f59f33b887940418",
+      "rgba_sha256": "188040748a12bab69dab22764c296a8328ec8170272df1cc13c1a73412e5207d",
       "decodedBytes": 8601600
     }
   },
@@ -404,18 +404,18 @@
           "file": "./assets/characters/residents/crowd-hildegard-brotzeit/delivery-v2/delivery/movement-desktop.webp",
           "width": 1536,
           "height": 2640,
-          "bytes": 1238950,
-          "sha256": "5176df15216e60bea711de1670fee80c5689b92732421b368e5a735dda766baa",
-          "rgba_sha256": "da42d0fa3467ac31d3d9d654c0e4b50c2b130ceaa0cb6bb53ebd8c1c27116cb4",
+          "bytes": 1244256,
+          "sha256": "182cac84f526d46f6f3e196d6f440cbfe07620c600931b59f237d1ae75d79d6b",
+          "rgba_sha256": "1cc3f1d047fd13169a31e2fa2d735a19f3196ecd66555308ccd408a93d653941",
           "decodedBytes": 16220160
         },
         "mobile": {
           "file": "./assets/characters/residents/crowd-hildegard-brotzeit/delivery-v2/delivery/movement-mobile.webp",
           "width": 1024,
           "height": 1760,
-          "bytes": 492770,
-          "sha256": "405e78ea38789b4495a38542f6486cc6883a22466566a764c0c89c4e4f0788ea",
-          "rgba_sha256": "1e6e6444cd458d6d812ef6506ae808de7597e65cf4923e7b49154aca6b9d9840",
+          "bytes": 491702,
+          "sha256": "b14a5b762d88e7b46e5bac20e023285f47a9863cca7c44ff25800ce56e0dd82e",
+          "rgba_sha256": "c255a7cadce022f4becc7e569d13369382d21c7bdd485aceb205f8e260a3db1c",
           "decodedBytes": 7208960
         }
       }

@@ -1,0 +1,19 @@
+{
+  "tool": "image_gen.imagegen",
+  "references": [
+    {
+      "file": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/right.png",
+      "sha256": "c24b2db2e546dc13842940a716393e5c4b6878a5ed51ea844490100756e547c0"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/registered/left.png",
+      "sha256": "ae05c56358507380e401ed909e8227187cde19770cc8564707aacd0a055d67ef"
+    }
+  ],
+  "original": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac20-c534-7740-bdb0-e4b33e952898\\exec-61703a27-bc4e-4b30-85cf-ccfbd8136cb2.png",
+  "rootVisual": "Two whole grey wool stocking/calf/ankle and matte black single-strap inner MaryJane parts. Complete heels/toes/soles, no outer buckles. Preserve original8/nearpaint/face/RIGHTbasket. Own uniform registration and light/dark alpha composites still required.",
+  "file": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png",
+  "bytes": 1635837,
+  "status": "SOURCE_PARTS_ONLY; raw tool output personally viewed, registration/source-native/fullfamily acceptance pending",
+  "sha256": "bda9a1ffbf871ec7b8e6412b930a00a5cd8a75059a4446905a6075831183a7d3"
+}

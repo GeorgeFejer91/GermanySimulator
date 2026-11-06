@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "crowd-hildegard-brotzeit",
+  "generation": "Own cardinalv3/quarterv3 and complete FAR-leg raw paintings; original NEAR remains whole; separate half-cycle leg transport, fixed hem350..359 and intact425+shoe/cuff plateau.",
+  "rawInputs": {
+    "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png": "d2cfe4230be3d95b3923a8f420ce746ed028858f28ed0334c4eaef63c6a835c9",
+    "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-quarters-v3.png": "6e2660c95f48de74aa79027922f044a6ce18775a92f08cf2eb7dfdad4dbb6863",
+    "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png": "bda9a1ffbf871ec7b8e6412b930a00a5cd8a75059a4446905a6075831183a7d3"
+  },
+  "authored": {
+    "height": 2.33,
+    "stride": 11.65
+  },
+  "selected": {
+    "height": 2.77,
+    "stride": 13.85
+  },
+  "rawReplay": {
+    "initialInputs": 30,
+    "exactFiles": 387,
+    "logicalCells": 412,
+    "uniqueSourceImages": 348,
+    "bodyIndexSha256": "45b186d6ae6729b0a45756f9fc728b716e567f0fb08ea581f6435d9347dcb844",
+    "cycleSemanticsExact": true
+  },
+  "validationOnly": "Expected products are read after all16 generation steps. Never initial mirror inputs.",
+  "worldModule": "Full actual raw module is pinned. All cycle semantics/source pins match; only full-module diagnostic digest is outside semantic equality, permitting cache-query changes.",
+  "scope": "Source/native/formal/raw and proportional fitting pass. Final selected runtime/world/budgets/publication remain owned by the task record."
+}

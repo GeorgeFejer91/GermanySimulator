@@ -1,0 +1,30 @@
+{
+  "status": "SOURCE_REGISTRATION_PROPOSAL; own composite review required before motion",
+  "uniformScale": 0.2,
+  "scaleBasis": "Own whole registered near shoes span about74..79pixels including their exterior alpha; raw additional shoe silhouettes span about355pixels. Uniform0.20 preserves raw aspect and whole calf/ankle proportions; both parts and axes share it.",
+  "fixedForegroundAboveY": 350,
+  "upperOverlapUntilY": 360,
+  "sourceRootY": 360,
+  "wholeShoeTranslationFromY": 425,
+  "nodesY": [0, 325, 359, 395, 425, 511],
+  "stepAmplitude": 10,
+  "liftAmplitude": 4,
+  "profiles": {
+    "right": {
+      "component": [302, 68, 674, 928],
+      "rawAnkleX": 413,
+      "targetAnkleX": 259,
+      "baseline": 472,
+      "nearSide": "lesser-x",
+      "nearBoundaryYX": [[359,266],[370,262],[395,253],[417,244],[426,246],[433,258],[440,265],[446,270],[452,275],[457,280],[472,280]]
+    },
+    "left": {
+      "component": [862, 68, 1223, 929],
+      "rawAnkleX": 1125,
+      "targetAnkleX": 259,
+      "baseline": 472,
+      "nearSide": "greater-x",
+      "nearBoundaryYX": [[359,267],[370,267],[390,269],[410,274],[425,280],[435,272],[440,263],[445,253],[450,245],[455,237],[472,234]]
+    }
+  }
+}

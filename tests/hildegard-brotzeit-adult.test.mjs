@@ -8,11 +8,16 @@ import {registerStreetCharacterManifest} from '../street-character-sprites.js';
 const author='assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/';
 const registry=expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json')));
 const person=registry.characters['crowd-hildegard-brotzeit'];
+const authored=JSON.parse(readFileSync(author+'validation-baseline-v2.json')).person;
 const old={interactions:{states:JSON.parse(readFileSync(author+'new-motion-capability-plan.json')).states}};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const asset=path=>readFileSync(path.replace(/^\.\//,''));
 test('Hildegard production family retains source-defined quiet4 timings, idle alias, eight anchors and phase stops',()=>{
  registerStreetCharacterManifest(registry);assert.equal(person.figureWorldHeight,2.77);assert.equal(person.standingOnly,false);
+ assert.equal(authored.figureWorldHeight,2.33);assert.equal(authored.strideDistance,11.65);
+ assert.equal(person.strideDistance,13.85);
+ assert.deepEqual(person,{...authored,figureWorldHeight:2.77,strideDistance:13.85,motionDelivery:person.motionDelivery});
+ assert.deepEqual(person,JSON.parse(readFileSync('assets/characters/residents/crowd-hildegard-brotzeit/delivery-v2/person.json')));
  assert.deepEqual(person.cell,[128,160]);assert.deepEqual(person.pivot,[64,150]);assert.deepEqual(person.grid,[21,20]);assert(person.strideDistance>0);
  for(const heading of ['down','right','up','left']){
   assert.equal(person.atlasMotion.walks[heading].frames,16);assert.equal(Object.keys(person.atlasMotion.settles[heading]).length,16);

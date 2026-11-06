@@ -429,6 +429,15 @@ recipes are under `assets/sprite-sources/resident-motion/stadt-hannelore-sparkas
 Speech reuses her two exact selected German recordings and40Hz mouth-energy
 tracks; missing regional recordings retain captions.
 
+Hildegard Brotzeit's mature open-city family uses her own directional paintings
+and complete far-leg stocking/Mary Jane sources made with OpenAI ImageGen.
+Her braid, turquoise glasses and anatomical-right basket remain unchanged.
+The repaired profile gait keeps original near-leg paint and transports each
+complete cuff and shoe through the existing sampler. Prompts, raw hashes,
+controls and clean rebuild recipe are under
+`assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/`.
+Her original voice, recordings and texts remain unchanged.
+
 Ute Ruhe's mature open-city family uses her archived original project identity,
 own OpenAI ImageGen eight-direction paintings and complete far-leg sources.
 Her closed blue book remains in her anatomical left hand. Connected walking,
