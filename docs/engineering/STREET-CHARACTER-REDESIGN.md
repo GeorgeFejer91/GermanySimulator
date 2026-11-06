@@ -384,8 +384,8 @@ RED is preserved beside the event-aware successor. Source bytes and game code
 were unchanged. Descriptive one-context timings are not new budget/FPS proof.
 All browsers and contexts are closed. Evidence: `output/baerbel-height/live/`.
 
-The whole-cast goal remains active:22short active citizen families, bothSandales
-and3adult neighbor families still need completion. Police and18mature citizens
+The whole-cast goal remains active:21short active citizen families, bothSandales
+and3adult neighbor families still need completion. Police and19mature citizens
 now use the accepted height. Günther/Hildegard whole-shoe followups remain
 separate from the accepted height/publication results. Günther's repaired
 412body family is now accepted for the scoped successor release below.
@@ -432,7 +432,7 @@ Her first FARheel
 support was one pixel too low for a complete5×5opaque patch; the unchanged
 paint and failed check remain preserved beside actual inward support points.
 Politicians, children and Bürgeramt characters remain protected.
-Task-only publisher HEAD is86c4a7ef; no further release is staged. Continue the
+Task-only publisher HEAD is45dd3c59; no further release is staged. Continue the
 same owning checklist and sequential publication lane without closing the goal.
 
 ### Günther whole-shoe successor accepted — 6 November 2026
@@ -567,6 +567,120 @@ through the task publisher and verify immutable deployed root/compatibility/
 actual desktop+portrait Ute body/admission. Dnative compilation, Hfullsource
 and Horst whole-FAR-leg source gate continue in the remote CI window. Keep the
 whole street-cast goal active after this one-character release.
+
+Ute publication verified: normal pushed commit
+`45dd3c592f76dd82dac499c9a5cf461bb92013a6`, Pages42152965400 SUCCESS. All19public
+files/nineown assets match immutable committed blobs. Four silent contexts pass
+root/3dquery-hash compatibility and original city-ute-ruhe desktop+portrait own
+standing/movement admission with correct2.77/13.85 and no opposite variant or
+page/HTTP failures. Existing fax hidden transitions are awaited; border/toast
+states were already clear, not freshly timed expiries. All12notice rectangles
+leave the full projected quad clear. Root personally views both complete body/
+shoe captures; all browsers/contexts are closed. Public proof remains scoped
+to admission/visibility, with dynamic gait/height/depth evidence above separate.
+Evidence: `output/ute-height/live/`, including root-viewed.json. The61staged
+paths had56exact bytes and5ordinary text CRLFtoLF normalizations. Four reviewed
+hash-bound source scripts retain exact blankEOF; other whitespace checks pass.
+Private D/H/Horst work stays excluded from publication.
+
+Current continuation: Dietmar's own repaired412/348source,824native bodies,
+648mouth pairs and both412×8formal exports pass. Root views all824body cells
+on18native light/dark pages. The corrected FR4.8mouth is adopted only in its
+own v6control/slot169; other323mouth slots, standing and all body images remain
+exact. His fresh raw-only replay passes389files/fullperson and complete cycle
+semantics in a short initially absent mirror after a static269character
+Windows-tempfile preflight held the original long mirror. The generation
+driver/report stay immutable; a separate validation-only auditor corrects the
+held405file assumption after all16generation steps close. No paint is rebaked
+for this validation-only correction.
+Only the full world-module diagnostic digest is excluded from cycle semantic
+equality; actual world input remains pinned and all physical/source fields
+remain exact. Final2.77/13.85fit reproduces from original and raw packages:
+person28871d6b…c60e8/packetf70e588d…10816. Production checks/reviews/release next.
+
+Hildegard's whole-shoe successor now has complete412/348source,824body and
+648mouth checks, root34page native inspection and both412×8formal passes.
+The short private package passes at authored2.33/11.65. Fresh raw-only replay
+passes387files/fullperson/cycle semantics from30inputs; selected2.77/13.85fit
+reproduces from both packages (person48c2d463…54acf/packet5266f011…69570).
+Preserve the prior entry-point and validation-count failures. The
+latter completed all16generation steps, then refused before baseline creation
+because ten delivery/person files were mistakenly counted as26. No source art
+changed in these recipe corrections. Final selected review/publication remains
+open; the currently published Hildegard family stays selected until acceptance.
+
+Horst's eight own directions and complete FAR-leg paint are uniformly registered
+at195/687. Neutral v4 preserves complete original NEAR boots and all12real key
+tips, but root/owner held the remaining moving forearm edge. The narrow v5
+source contour now passes94exactRGBA/fixed/zero-moving samples; root personally
+views the repaired hand/key strip and both assembled neutrals. Motion-pilot
+preparation is authorized; no full bake or runtime selection is accepted yet.
+Evidence stays under each existing output/<name>-height/ owner. Public/main
+remains45dd3c592f76dd82dac499c9a5cf461bb92013a6; nothing is staged.19mature
+citizens plus police are live;21short active citizens, both Sandales and three
+adult JWDneighbors remain. Original politicians, children and Bürgeramt actors
+remain unchanged. Keep the cast goal active.
+
+### Dietmar integrated review candidate — 6 November 2026
+
+Only the original street adviser `crowd-dietmar-din-norm` changes among43
+expanded records versus public45dd3c59. His own mature412-cell family retains
+the sage flatcap/jacket, RIGHTyellow folding ruler, LEFTbriefcase and complete
+brown work boots. New quiet4 capabilities are explicitly authored for the old
+standing-only actor. The selected2.77/13.85person28871d6b…c60e8 and packet
+f70e588d…10816 reproduce from both original and raw-rebuilt authored2.33/11.65
+packets. Root views all824body cells on18native pages; the owner's52page review
+and unchanged-mouth hashes are separate from the root-approved FR169successor.
+
+Four admission/action/hash/voice checks pass. The exact Pages street group
+passes453checks after preserving the initial447PASS/6fixtureRED run. The
+successor keeps strict20adult/43standing identities, actual625168standing
+encoded bytes, and three literal cache-URL assertions for the new query token.
+Canonical Python selective-packet check passes; sparse packaging retains181
+required runtime/module/ownsidecar files exactly and omits all3own raw paints.
+The66planned paths contain44own source paths, selected assets/cache/test/CI/
+credits/task migration. Freeze this candidate for independent final Physics
+and Camera, then comparable cold budgets, normal publication and public proof.
+All local source/test/package/check jobs are closed; no world acceptance is
+inferred. Hildegard/Horst private successors remain outside this release.
+
+Dietmar final affected-scope acceptance now passes on839frozen pins/66paths.
+Independent Physics binds all376pilot pins with0deltas and80actual source/
+native/delivered contacts across32cells, maximum native residual0.3023451px.
+Original adviser/native12/route3252,3488,1636,72 remain intact. Desktop65.6units/
+all16phases/fourwraps, mobile34.2each/twowraps, stops, newquiet4/eightturns/
+98obstruction holds and original3.68srule06 first-use audio/replay/pause/end/
+cancel pass. The first city-fixture cadenceRED was the actual4.628srule03
+pause; its successor waits that real pause, with no wisdom/cursor/cooldown seed.
+Mouth assets were already warm during the later media case; no fresh cold-mouth
+timing is claimed. Floor probes retain one-bottom-row fringes and mobile Physics
+world captures are roof-occluded, preserving their visibility qualification.
+
+Independent Camera closes controlled mobile whole-body visibility separately:
+24contexts,7407qualified depth samples/0wrong, opaque/faded/restored wall,
+standing/packet delay404, retirement/reentry, loadedcar/door/landmark/fallback,
+compatibility and all24actual turn views pass. Visible heights match Söder
+124/124desktop,131/131portrait,60/60landscape with one family scale. Natural
+C1–C3building-fade/wholeworld matrices remain unrun. Root personally views12
+delivered/native/world/comparison/turn images, including all24Camera turn crops.
+All42other records and1386prior tracked paintings stay exact to public45dd.
+
+Comparable quiet cold budgets pass unchanged18MB/4Hz/1.6MP gates: baseline
+16390278/16004741bytes, candidate16394454/16009029desktop/portrait,9accepted
+input observations and0errors per layout. All4changed cache/metadata modules
+and oldstanding are immutable45ddbaseline blobs;10new paths are explicitly
+absent/denied with0attempted baseline requests. This one-run/profile SwiftShader
+lab pair is separate from IrisXe/D3D11 functional reviews and makes no FPS,
+physicalAndroid, listening, natural mission or causal speedup claim. All browser,
+context, server and source children are closed.
+
+Both terminal reviews and budgets are read by root. Only this task record changes
+after review; all838other pins remain exact. Seal and publish the66reviewed paths
+normally, then verify immutable deployed root/compatibility/original-adviser
+desktop+portrait admission and complete body visibility. Keep the whole-cast
+goal active. Next source work is Hildegard's prepared whole-shoe fit, Horst's
+own160source/320native motion pilot, and Gartenzaun's eight new genuine raw
+views/transparent source registration trial; none is included in this release.
 
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 

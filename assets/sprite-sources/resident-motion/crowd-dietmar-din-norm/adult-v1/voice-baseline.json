@@ -1,0 +1,29 @@
+{
+  "id": "crowd-dietmar-din-norm",
+  "profileId": "44123656a3404719abf0a2d6a05047ee",
+  "selectedRecordingCount": 2,
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/street-wisdom/street-dietmar-din-norm-rule-03.mp3",
+      "sha256": "099c2c9daf0b07a237fbe1a5b106544ec89f201436b2e29a4f2ced0c5a658d86",
+      "source": "Fahrbahnen sind ausschlie\u00dflich an geometrisch vorgesehenen Stellen zu \u00fcberqueren.",
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/street-wisdom/street-dietmar-din-norm-rule-06.mp3",
+      "sha256": "ed648d3271f33a15709a9e5345613e35c6291a0050efb9a80363a4c9d5bed39c",
+      "source": "Leergut ist kein M\u00fcll, sondern tempor\u00e4r illiquides Verm\u00f6gen.",
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-01.mp3": "c68845ee898000c8d7278f0f82a619bc4d070f42f267c3e1b2c88c152769b656",
+    "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-02.mp3": "436ef92782c4d0e77fdfb9e0509979e5b507b685a74e934d229cb67a7f1478f5",
+    "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-03.mp3": "7c03560d40516ed378dd37b550aa118c4044745860d42cce9e72231d3fb1e3b9",
+    "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-04.mp3": "4c9493091df7b105363cf55fa6e6606457d4c19889e165ea9b844c03c5b8eb28",
+    "street-wisdom.js": "63697e599c58c27f0acb259e60ee092eda4472673c1bfc2907ac6e1d14a07ae2"
+  },
+  "policy": "Existing dedicated StreetWisdom adviser voice, authored deck and routes remain unchanged. Not quiz-dietmar-schulz."
+}

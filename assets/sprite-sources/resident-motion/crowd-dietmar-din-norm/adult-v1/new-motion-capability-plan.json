@@ -1,0 +1,100 @@
+{
+  "id": "crowd-dietmar-din-norm",
+  "status": "New adult-family implementation of existing shared four supported state names/vectors; original adviser voice/rule deck/routes untouched",
+  "priorPublic": "standingOnly:true with no admitted motion/action atlas; old adviser key sheet is identity reference only",
+  "settingsAuthority": "tools/build-resident-motion.py existing quiet vectors; source-specific neck/hip/grips fit current approved paint",
+  "states": {
+    "idle": {
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "sway_pixels": 1.2,
+      "nod_pixels": 1,
+      "lift_pixels": 0
+    },
+    "look": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    },
+    "success": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 2,
+      "nod_pixels": -3,
+      "lift_pixels": 10
+    },
+    "failure": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    }
+  }
+}

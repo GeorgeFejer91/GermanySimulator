@@ -1,0 +1,14 @@
+{
+  "status": "ROOT SMALL HANDLE PILOT APPROVED",
+  "personallyViewed": {
+    "output/dietmar-height/handle-repair-v3-pilot-01/down-07-source-light.png": "553a0f84e9835947c089cfbc193c3413e07d33ffeb287fda44587ef2f4626b29",
+    "output/dietmar-height/handle-repair-v3-pilot-01/down-08-source-dark.png": "8900e5e0f703e41f6201c1abd84e7d03e6f6e38b478b0fbc0b914ccdb069d2cf",
+    "output/dietmar-height/handle-repair-v3-pilot-01/down-07-handle-light-4x.png": "da2dbe0b07d283e7a8666d7ef12dea924dca168c2c4e6d462ed651206141eeec",
+    "output/dietmar-height/handle-repair-v3-pilot-01/down-08-handle-light-4x.png": "fb7bacbb70cbcfc32a4919cdf4f79b5b6ebd12daac3e3076639ce8afb73a9bbb",
+    "output/dietmar-height/handle-repair-v3-pilot-01/desktop-native-light.png": "79eb062f6a9d6cb715227309fe8ba2ffcef1820b5d86ba985aa9d72fd48ed164",
+    "output/dietmar-height/handle-repair-v3-pilot-01/mobile-native-dark.png": "458e57f3042fd44065031e5ad45173c1b1995b1e76d958d7a6412044efab33ea"
+  },
+  "observations": "Original painted handle remains joined to hand and case rim in candidate07/08. Source/reference/held comparisons show the old outer sliver removed by actual own rigid-grip mask closure; no new handle paint or case distortion. Four neighbor phases and both native densities look coherent. Face/ruler/lowerbody remain exact per mechanical receipts.",
+  "scope": "Approval to expand actor-owned successor source family only; full-family/native/formal/raw/world/publication acceptance remains pending.",
+  "reportSha256": "1c2378b3aef8e61f1944607557f587dbf6e717fe4cf35e7d05376c0df414da50"
+}

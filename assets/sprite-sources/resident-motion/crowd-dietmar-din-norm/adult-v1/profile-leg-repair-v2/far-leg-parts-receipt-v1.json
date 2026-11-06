@@ -1,0 +1,35 @@
+{
+  "stage": "Dietmar DIN missing complete FAR trouser-leg/work-shoe raw v1",
+  "toolOriginal": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac22-8fac-7cd1-ae51-b88073bffadc/exec-e57cbda9-671c-4f08-bd13-9770d06d32b8.png",
+  "projectRaw": "output/dietmar-height/profile-leg-repair-v2/raw-far-leg-parts-v1.png",
+  "sha256": "ef0a5d1f39ee855d4d53a29aa09762892af1f52bb9b5f0c4ae438a03c246ef79",
+  "rawByteExactCopy": true,
+  "originalPreserved": true,
+  "requestFile": "far-leg-parts-request-v1.json",
+  "references": [
+    {
+      "file": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-soeder-height/GermanySimulator/assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/raw-cardinals-v1.png",
+      "sha256": "dc73d3cf711c6cb84909bd58192c835bd14de14808887e970e27eea5087f9211",
+      "personallyViewed": true
+    },
+    {
+      "file": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-soeder-height/GermanySimulator/assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/right.png",
+      "sha256": "01a7a03ce192ae9f48253bae14e8dfb8fb1ba41f6a05c98456ef8c15af8cb023",
+      "personallyViewed": true
+    },
+    {
+      "file": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-soeder-height/GermanySimulator/assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/left.png",
+      "sha256": "cbf53056be1636e137fe2978a874f64df9fab1006478f471e2ce1ecc47ffa77b",
+      "personallyViewed": true
+    }
+  ],
+  "sourceViews": [
+    "LEFT panel: anatomicalLEFT far leg for RIGHTprofile, toeRIGHT/inner shoe side",
+    "RIGHT panel: anatomicalRIGHT far leg for LEFTprofile, toeLEFT/inner shoe side"
+  ],
+  "observations": "Personally viewed generated raw: connected mature charcoal/taupe trousers, complete covered cuff/ankle and full scuffed brown lace-up work shoes, with actual whole heel/arch/toe/sole; no props/body/stockings/buckle/loafer substitution.",
+  "selection": "RAW ART FOR ROOT VIEW ONLY; uniform near/far scale, alpha/matte, own registration/foreground and animation gates unrun",
+  "localWork": "Only reference reads/views, built-in remote ImageGen, exact rawcopy/hash/receipt; no localPython/Node/sourceprocessing/render/registration/bake/GPU",
+  "bFilesChanged": false,
+  "actorSourcesOrRuntimeChanged": false
+}

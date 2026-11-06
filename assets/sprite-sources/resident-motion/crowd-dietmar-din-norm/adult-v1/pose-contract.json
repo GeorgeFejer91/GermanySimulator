@@ -1,0 +1,17 @@
+{
+  "actor": "crowd-dietmar-din-norm",
+  "runtimeActor": "street-dietmar-din-norm",
+  "voiceId": "crowd-dietmar-din-norm",
+  "quizActorExcluded": "quiz-dietmar-schulz",
+  "sourceApproval": "source-approval-v1.json",
+  "stage": "Own controls and source pilot; native/full-family/renderer acceptance pending",
+  "props": {
+    "RIGHT": "bent forearm holds yellow folding ruler upright at chest",
+    "LEFT": "leather brass-clasp briefcase hangs at thigh"
+  },
+  "sourceOrientationQualification": "Rear-left case flap differs from pure rear; free hanging case swivels with wrist. No rigid optical-turn equivalence claim.",
+  "sourceRig": "Own full trouser chains and protected owned hand/prop polygons. Profile far-foot independent half-cycle planted curve, positive-Jacobian inverse. V1 x-only boot seam visibly pinched broad shoe; held unselected pending curved lower-sole pilot.",
+  "sourceMouth": "Five independently traced own compressed asymmetric creases; rear-three deliberately null. Source-v1 closed RGBA/open-alpha exact and10source endpoint boards personally viewed, native gate pending.",
+  "timing": "Previously public standing-only adviser; existing shared quiet4names/vectors are newly supported by authored family, no original rule/voice/route changes.",
+  "terminalCharacterComplete": false
+}

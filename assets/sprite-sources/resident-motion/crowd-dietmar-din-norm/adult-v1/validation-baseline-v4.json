@@ -1,0 +1,3213 @@
+{
+  "id": "crowd-dietmar-din-norm",
+  "role": "VALIDATION_ONLY_AFTER_ALL_RAW_GENERATION; never copied to generation mirror",
+  "authoredHeight": 2.33,
+  "authoredStride": 11.65,
+  "expectedHashes": {
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/motion-delivery.json": "10fa09c6eb5ad0c8765643f005837dc17ab54aa6d9b82a1318c87aedcf3dfcf7",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/movement-desktop.webp": "f71e1603e8a2e4ddc39f31fe6f3d4641f63dd101b03e9d94498e525b21b81047",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/movement-mobile.webp": "5c234dd128644b9dbbb292cec56e059c9f4a594162a903c33923e52fb2510680",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/reactions-desktop.webp": "7451ef54367dba2548fb98fd11951e7c6b2e4bed54e7a5a338a9d1db635d5766",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/reactions-mobile.webp": "83a4291f7e650b47dab7ce992011e9879a2896837dfc9c5ca5e6136acef1f74d",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/mouths-v1.json": "678fc1171270ab60b6c8c74ca620644932705f66aaf47cff6a1f5c3c5b52fe0a",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/person.json": "30defb2075267947c08de9124546e36dde3d3b570dcaa760e4ad255aacffd137",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/source-desktop.webp": "74b99945606e2cad194ca52401418b9cc166bb1e1f4c211bb7c85b82c796fde3",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/source-mobile.webp": "b538cbf03fc4b7317094a20d792c861a38ac8322810d2d65ef42785f46e16c0f",
+    "output/dietmar-height/authored-packet-v4/assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/standing.webp": "2a0b4dbb64bebb06077ba5e1d0a6577f4bdf7404561eef2772b79de764cd7912",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-00.png": "22ebcd646bcdfbc9ee3f93a3a67f2a8e5ecadaf383c0b3db5b3f709d9dfb5788",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-01.png": "1facaa518c9d134ad8ec406b3ce0585b1714e7d89750b866f02e8ac13f3d00ab",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-02.png": "59dea6bf63c364f1de6797f5c6d4a67dd81887517d0e8783ff430ea2a98e74b8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-03.png": "63ae5db4d74af29c2a957ad4db84b3a797747ac4e5a81f4808e9f739c9c04042",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-04.png": "a07f5c58e131d2d7eed591614310413bdab256c0c6104f67c100483919089411",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-05.png": "5abdf99f7603d84a93a9404fa0e2740eea1a51bb84bd24e019218e7c554dbe2a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-06.png": "e73c7f11197bc4b144ed0d5ffa648f81f12e6c9138976e592463c38a04a09a07",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-07.png": "0c9260172fb6295c3c2291d3f94a2e9bd17926a73ac4c2c105317047aa16453a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-08.png": "df1c836cf4e2a43cca26b18bd8974dd07883ed7d62cb944b6f04c7bccbad6be3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-09.png": "23e4b57990bacff69f5702488fe92394c5ed347f49e3de890f0cfcf9b6d24fce",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-10.png": "1364452750a8bc9d76e01f92330f9c5ad251d03878c0c80a6297e5764d6de364",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-11.png": "c5851d8abbee7aa7d11e98c42a9f4ab3e2035382f20088fbab1bef8df5535c7b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-12.png": "f4c5228f5d181d0c9cf439a9d1064a5d5963eda8c660de21e41914beaa3efb2c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-13.png": "21783091abab7b044d1c0a4b86752b164bd0e8991b6f1f0b84a8f7820320162f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-14.png": "a6cdf0c8be6979f7317d46cbe7ebb18016363c85b3a60b5640f39649db36b091",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-down-15.png": "7fbdcf548bd5e395faf1acd6f2cbd5cf688fe65fa8a13ec399f613fa58a9b8ff",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-00-1.png": "aa124ebd8b2d32c8e23e13a3650b5dad2f0ed7de5589a50a201c2f5d3569e78f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-00-2.png": "5cb79593ee91ca7b000522c029118c19d9ad987404dd537812e49f3ccd1134c1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-00-3.png": "1a15cf9de90a07005c41f763509b66f9a16151227a44b2c779dd236106fc6933",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-00.png": "b88ed7b5c2b3f17295d7a79d60592f90c00cdcc319042991f62c22a2a7212aed",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-01.png": "eed29334c591f6fecc3dd82809720a0c00ebfdad14b4d6a386174fa5e5b5389b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-02.png": "e5e8d2667666a200cda9ddff8ba2caa28f3a6aa250349f50284dd39b820e00f2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-03.png": "0782302e28ad9345e00fa9a942ce6c06a671fe834ad164d5a5e9335745de7a11",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-04.png": "c76e9893773737cf440df3295af54b98f5f27d31626be1c3338440548305a5c3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-05.png": "985099039a3dc7f37bf844dd29cabc721381f7c180d289b97824c9730a0baa62",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-06.png": "4e8ffdeeb2b55353fc6925f7717b422a61b59b110aa8d20517eb298cf37ac6fc",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-07.png": "698e157f68d7682bf990d1b3918b7bd761571f8347ab0db53189c3acdeeeca17",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-08.png": "84bfc1b1475f7a53b8f3f7438605b29f2f1e73d2eb8ce6204a53efd11ca61172",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-09.png": "6d1a2d3226ccdf619f335fa75da1585146103253eb9d254b031c391b360a3fbe",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-10.png": "f239c19c591ef1baf7f6fb675b95e6fe887ba0542dcd2a81f4ff2ac81bfc7462",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-11.png": "fcfe01c8b6caf23d1a65cd83af7cc8e0bb7eed493604c7d8ec8445a89dfb21fb",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-12.png": "835745ffbecb83c66c7e29156e60ba322359eb6e17fbd86409ade7cdc30e62b6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-13.png": "e407edaf815e689a13296606b1bcbcf2df5bd04e46ddf0a469011c871be1825f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-14.png": "8af26ff672676fa402cb8611d66c99be60d0ca48617b3b111eb86f60227f7ad2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-right-15.png": "faf8d7d1c451a6f9a337326d4bf747b96472e095838def7d8030d94a609560a8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-01-1.png": "7e0c2780f6ddf5330aacb518313851634b18f3699212e541ad14519d03c00942",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-01-2.png": "7e9bd60acda01a6c707f6693c444bb2520f8dcd1c73a404f5137260cdd586ee7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-01-3.png": "5d22b5ac5b7796e676b0a9ef9ac4d800cc0753a186f760f756707ac817b05789",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-02-1.png": "269087d0bd7b72651f38df6da5962fa3663f468951535a32b3c4f8387e9e87ba",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-00.png": "fff66c54ff77b6eb9c8d000bd1fe7c85778f395b264df7202ff7404cdfc37621",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-01.png": "c676b2f6986f778624277df657886a5c60ff6433860b308e9eab014649657d76",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-02.png": "5780b5c93129e3f29510b4dd88735c3daa8b42e874c2cd9dda1df3aed1f1074f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-03.png": "102a304a228d8ef18ab90abc12638fcd665ce9e57c24ccaf3f827c1efe730809",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-04.png": "f5fff53ab754db38715bfea287305b6c9f9e17a73ca5006af23361874d33b0d3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-05.png": "9753443b76f270080003d30105e0b0f6b5b581fbf230d2c22c10012ac6feab94",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-06.png": "26e84f161747b58f1893f46ae0e0d89857f8f6e3d66466a48a87103e1c56bc72",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-07.png": "2e7d27b685622d548ba9adfe1167e100247fd8405f6aa337d0f3bb67e161b1e0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-08.png": "1f587615c2b7f1db642bede0dac90600551edd1df6bfd01f6a01b924aac4abcf",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-09.png": "72c827e1251916e6e3a816ce7d17cd5d5d4236a047dfbc0d43dcda1e095b83a8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-10.png": "5317d12f8c733272237cf887bd6aa350fcaf6241e35c7f4ac1dc5c1686b3a992",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-11.png": "d392490d8acdb77b31cf686de9498ac14043c07580ce73d65cecb59a9e728880",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-12.png": "b8a97b307a1c5bdca145d93a04c071de11b1efe8bd0a26e2e1afce6523dd9ece",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-13.png": "3255445fad20286dba2ce2fa139b24443ece3969bf366609a06fc3fd2c4ccf11",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-14.png": "e1472e7a85c9f995e48ecbcde364d09a631bafe62193042e0a4827865a71f1e4",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-up-15.png": "3596d81148f55a79e57c47df082b59f2ea8ca14ebd5f769d5fec3995ef51031f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-02-2.png": "18c885db082a23e8e132e0d1277f0c92e2eef3f78a43c83f8b666e50dbfdba16",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-02-3.png": "c49cc30c1ceb7a40e09157a3cc590c685ced33872a87452fcb3af65c72f277b3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-03-1.png": "318191c2445405413de4ee573f2329e3e9f7ac4d6c8d52181f8b75611fe9e82f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-03-2.png": "288128a13293a5cbc6dbdeee6909ad5f2f1552fbd2abb9a3e30353dd1a9f06df",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-00.png": "7ae315bc7668bdb0edac5bce0deafaf3af7ddc0a99aded10c48085865a733cb1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-01.png": "57a3b684f1e61cec2f179f39a7d01e8cb85bf1b42c778bea17ce3f04d19a0cb8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-02.png": "ceef9fd5fad329c94bbbb02059f86275b70a42970220af63bc7a4bf601b046ea",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-03.png": "220484a1af9785828489ec3c6b301351fbaa4dedb83b02b5e76f5f817042c8c9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-04.png": "ecd445e28ab92a6286096b0a39aba8d8d414eb7d3e7b6715877eca95dc8b3bd9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-05.png": "2864b33c086cc575fdfc61a78406ce0a29069473c599fd0347cd02cbf9e1e36a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-06.png": "57439365b009344319d4b4f538a79ad8c9dcd4997261fc4afb6962ff5cba0afa",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-07.png": "325e4627f8dbdcb54f8eff362e7598255447f52d1c6e23bf3139ba7097060b2f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-08.png": "0fb206959678e94815a7ae9607037a28fb6a63d891b68685b8b5e1908f3ce010",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-09.png": "1c93ff1b0c49e235923b25ab2c6a116ed822da848995712b3f03483efb5b13c0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-10.png": "28495d5047b0d5ffefab856654469e9049b914279dd2488e3dab1186fb477102",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-11.png": "6ab18fcf8adc7b2e65cda316c836e92c709ca9593c4545dc5895480f62fd7415",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-12.png": "a062a6be4143ad3d4fb734d1ba0385f4fb2029d40140395a572134a2397ce17b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-13.png": "6522b5f8a4d8722e77b774697d39dde686bda7628b0ef8e739ec4052edaadc2f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-14.png": "e3479c2be5ce412256f417d7054a1d04727ed4e184de8e22c77b7b2762bc10a7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/walk-left-15.png": "3c9098f46a82eae5898efd8eda8d8447a24a2913efa58c51bdfb91721badd7a9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-03-3.png": "f1baa10a9425c2181cf79c359dd86fa07ff9b2aeac2520fb56f3b2b53457be03",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-04-1.png": "fa41137fae3c8f831f430a40d1d99eca3604708933435200d68106a9e9b6969c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-04-2.png": "3a068953b102a73a1972b67c2f1820339040049921023dbd1a17dee20561d064",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-04-3.png": "76a8f17443d0e66a4c08c32de619b915ceb2848ea6fa03e765866acd6b6b79ce",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-down-0.png": "5cb79593ee91ca7b000522c029118c19d9ad987404dd537812e49f3ccd1134c1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-down-1.png": "1a15cf9de90a07005c41f763509b66f9a16151227a44b2c779dd236106fc6933",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-down-2.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-down-3.png": "5cb79593ee91ca7b000522c029118c19d9ad987404dd537812e49f3ccd1134c1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-down-4.png": "22ebcd646bcdfbc9ee3f93a3a67f2a8e5ecadaf383c0b3db5b3f709d9dfb5788",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-05-1.png": "ee11438e497246aca505410e88f76bc8e0305477cb1258a1fe46e6c269378488",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-05-2.png": "c32e53cdde89f922ff3dfb1f1283afe0ce25eefd8f2f4073f74fab8b08297496",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-05-3.png": "13bef625cc18b496dc416ecd433f1af490a744902690922184729d0ef021882f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-06-1.png": "d312fc15c28d9b96c4c96d664c1c26d10aa791656a28ccfc1336f64e4d485b28",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-06-2.png": "129714331acb70827b7653f571911b0f145c0fabb7e82001103f22d56a8d6a3b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-06-3.png": "f21a7c7557d65a36e7bbb5fea258c984866230d5d5717796b1f0c9ab9f6019ac",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-07-1.png": "339d0e5136789c8ac3888723cf98fed9d509b964587688f701748a6e01b4bc2e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-07-2.png": "679f29e9107166a2589c0ce8d9447624543536c3e64e1c9f7c2ca943721b6fd3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-07-3.png": "c99d9f26dcd1e2d63f0d4c1012324436f92fcce7f37d621fb71a4a5b12ced2fd",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-08-1.png": "a8b909d38be6fec3dec21c50273c577195d0663e7da10db97c3563c931206444",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-08-2.png": "078bc115941f1483c88abb2258faa55ae329691e898761d5f8f3d8d8421e66bf",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-08-3.png": "27de75124e9fe07aa341130094284c8589d5b8983d57a8e347498e3c75588392",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-right-0.png": "23bc46fc789a56cf7d83ba1f091cf74bc76bb628138af0413c0255704a5ce6e9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-right-1.png": "e6a4bcce3792c5d97a5e10a5d7c513c05ffab07f46fec512dac43f11aae4c134",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-right-2.png": "a7dadc97aa2f84a85b7b1a980a723498a7cd16bb10419d4b4e86b17ed9c1cde7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-right-3.png": "23bc46fc789a56cf7d83ba1f091cf74bc76bb628138af0413c0255704a5ce6e9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-right-4.png": "b88ed7b5c2b3f17295d7a79d60592f90c00cdcc319042991f62c22a2a7212aed",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-09-1.png": "0135a4a40cc20b47e77bfd2ab31793e44a4167026b3fc5d70f80e4925c4a0abd",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-09-2.png": "bc72b4f13ab208f99312ceda397d283443700c7709a4db455661ea2dd56bf654",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-09-3.png": "baac3878599caf4bb234e9b2b7d5fd77ed5b5a69a1a1943c87aff48efbbb2a20",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-10-1.png": "59c64190229264184d1f6bf1059d8e95e28502007a54b0ab679cace57296042f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-10-2.png": "7380ec26845dca2ca6dea88fb92a9f8736415386608f2bca1e62b6ff961dde56",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-10-3.png": "9b8a125e55e81924c1ae2b152c5a6a2de08de735dfba2f96fcfa0b9c8d93319d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-11-1.png": "5743c99cf2574355c3c35d7ecd5c9e7df6d9858c3c9ef50827bfa82779b7df66",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-11-2.png": "758f739dddac355a1f7caf73fda1cb1a7b71198975843dbc207b12707a1f19af",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-11-3.png": "2ea71efaecbfc7b1ee910877d9ef899de5d42644a3120477631d7c7e7580e690",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-12-1.png": "abdd50b1ca57fd471f7cc9d2d7c55c380a72dae0ff726ee9863b04b0dd545215",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-12-2.png": "23266304ff8a7d4c4229fe0b6fc59b22e92ed57771281400380ef11653d9e4c0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-12-3.png": "cf32a4b133d82adfffdf7501c4a9f6a4278a762b803629b3d2cf25fabf04fb62",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-up-0.png": "31c304d36a26bce478fe4822b6a0eecb56cf708786ed374ea927431505f14293",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-up-1.png": "0271f32be74ca39a1394ac9f420e9ce9bd4b5e449d8aa5e6a6fec8a9c882f620",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-up-2.png": "597558cd59577005915186c79a8ce0b9cb9701cb742bcb510e8348a56c2fd7f6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-up-3.png": "31c304d36a26bce478fe4822b6a0eecb56cf708786ed374ea927431505f14293",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-up-4.png": "fff66c54ff77b6eb9c8d000bd1fe7c85778f395b264df7202ff7404cdfc37621",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-13-1.png": "e990706baf9e42186afa703725e3fe585ed65b7bce224c73583da1b9b7de875f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-13-2.png": "43a14c91400b9a49d62756ae1a1fb1bc94737ae41a16851fc4764f456fe1f3f2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-13-3.png": "818d4afe1c2207dbcd015a7c654401e46a2ee10390015b231c8828fc33c7db36",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-14-1.png": "256b825b852133cc73d35dc47c0cc1a2c3cbb488389854df2a064d95f7e80d92",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-14-2.png": "c75f0db330f2a9ba6c51d6b857e960701713aea29830816c9661ae2f067f1d69",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-14-3.png": "bdd16acc51f2c99dd2e51dc967f33ed056a51ab486d214b41d5edf35cdcec0b8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-15-1.png": "a3df72c0e45f75186910c462ca8ee18eda7a1b69ea73315c24d600fb375b1322",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-15-2.png": "09dcc00ece4f7fb9500d801116ddbefb5fcd8906c45e6ba6404940fd1798662e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-down-15-3.png": "90f1d7b89eba92993b5d22889e2cfe69f70549539f40fb368e6375c4f39b0ae9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-00-1.png": "9006beb15f8f3bc5bda62d44d612130d4b51d5330f7f5b3a9c7fdcbb00b20f73",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-00-2.png": "23bc46fc789a56cf7d83ba1f091cf74bc76bb628138af0413c0255704a5ce6e9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-00-3.png": "e6a4bcce3792c5d97a5e10a5d7c513c05ffab07f46fec512dac43f11aae4c134",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-left-0.png": "8088186082ddc4fddcdcbde1a616c6b0665c0f735346acb18a08f0c0bf07a7fa",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-left-1.png": "096ec60c119fbd1da5e892eb34ba2cc742256835d18596073eae3b240a61a131",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-left-2.png": "d2cd47985ca79b12e6f67398286215bbcb8fe1c1929ac215707824eee3270bcf",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-left-3.png": "8088186082ddc4fddcdcbde1a616c6b0665c0f735346acb18a08f0c0bf07a7fa",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/bridge-left-4.png": "7ae315bc7668bdb0edac5bce0deafaf3af7ddc0a99aded10c48085865a733cb1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-01-1.png": "0d4b57384a0370b615dfb8c70d04cb68f06ccfefb3ffac5b0d3c72be9a2e5ead",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-01-2.png": "c9408fe3e9c717f8521f248b93a258591c538ba29804c051cecd3ca9f8c2181f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-01-3.png": "580384b0bb4b2f4e09807955c15cab7fec6e421aa571880a6be3446af4cd3b7d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-02-1.png": "dbabd517b02436d07f19d174fa63bdba2df060f3ad77d5be152c727082bdf00b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-02-2.png": "c2245bf21b0cea8e9eef535808ea71d0634884ab606516d17ee004bd0dcb5a05",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-02-3.png": "d3948219a9b3bbc5cd865fce1a2d25215c04fc1935e857bcc0913a221a466f1e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-03-1.png": "f113f6aff36fd2e8ca22e1125b45d93f778b7bdd392c4824465c93a035d0d571",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-03-2.png": "b9396750d44188475e1e8417ac19dceb366f7ccef8010a3528dbf2a89a783fb7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-03-3.png": "001f2c09f981f7fe6c4e5129ecfca0ae3986fc9da916d78ab9c90f5276d1cf94",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-04-1.png": "f70dddd6ba65fece539c2d99c039e45f3f5b7434f244306c4210de175791e49e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-04-2.png": "96bcccbfb0347bf12b1830def845d51d4e61ff07747335e54b55115768cd52f3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-04-3.png": "a43dc1b20a4fe52dde3c85bbd4b1b1c5c28d1e63777ef340d7bdcfe47209c2f7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-down.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-front-right.png": "fc9fdc138ded76ba36fa807bfc24c7db6d1e911659d1388bfa58509cca9929c2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-right.png": "a7dadc97aa2f84a85b7b1a980a723498a7cd16bb10419d4b4e86b17ed9c1cde7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-rear-right.png": "c7601edc8e8bc209fb695fcce661d619367cef3112a599ecc10e60a2ff78af8a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-up.png": "597558cd59577005915186c79a8ce0b9cb9701cb742bcb510e8348a56c2fd7f6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-rear-left.png": "611d73986e8da0c5d1f46acf65edf99a96ae53f67d13b9510b3c343e9c47f29d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-left.png": "d2cd47985ca79b12e6f67398286215bbcb8fe1c1929ac215707824eee3270bcf",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/neutral-front-left.png": "b286e278dda74166e829308092f48090dbd348c22ba51826fb6cbd22bbb1a06e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-05-1.png": "dc6e2e10dd52933efa90ea3102d18a22fab5657b72e933bacbb12a0888c9650f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-05-2.png": "7f38343a9cbf44ebd2f3fd89686ed95700888ee8de86e352e07a77f966a6238f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-05-3.png": "31f778d59cd8244e259ec2e1aebe9535cb0ef77b6e3b63897272f66ac3164374",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-06-1.png": "58849479f922a54206be2c39641d99622fd58aae1a8f811ef9ca078c383f8ca1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-06-2.png": "5440361ed4665fb14a38c1931757bafaeaa8535f4488e002316f40a826112c0f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-06-3.png": "4fd2195565958a93a2dd11b709bb11551ed8343312a5ff1a859d82426e6519a7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-07-1.png": "3efd8bfc5761e30b15957bf00106b207fcc3ba6f9df10ceb6417af16fcee4a74",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-07-2.png": "792e8cb5f6ac60765e0a0a00685c4e4fb742a421e375c7e194ab74abfc73d3c3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-07-3.png": "895cf1c5433d9a66dace3ada460d7acf85fbef81ded9f8bcc3c491ac491c50e3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-08-1.png": "0b9d7a2758aa4946a555907f6546ec1ce94ab84146e4e7e3c623bfbb4922a725",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-08-2.png": "a74d5662df19cf571a1a7b0e1b82053d8b560c625e23350b10c3011dcf6f36fe",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-08-3.png": "8d0f51598b154f6c164b6661324823fc4386a88d92315db19d102299d70226e8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-09-1.png": "fae8658fc040e6f03451ea31dfa2ef8f6ca1041bc0bb51a05c14b4033416619e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-09-2.png": "62b94955bebc55cddbc7c5745b20b9c5f6ebc3886deff9837a1ae72af6880056",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-09-3.png": "3241094338ab73f6076f1972bf03ebc588d006063f5b798fcdc416251fbd0572",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-10-1.png": "2bd0f186c670adbd0e7cfc7ed62facadc0fc072b1f00e3eebc61b923099ec925",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-10-2.png": "58307a64b20bf21fb2515795659a5e88f0d9ef12b2581c21e1244294bdb7a600",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-10-3.png": "2c2ae45943d5f43e32ec4a5ad5a23514cb8af8d24799914da1aba3f118bf3641",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-11-1.png": "7ff06363b023e89917ab69e6abd4f15f98e40b3516dbc50e1e83e929b6b010db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-11-2.png": "936efe7f21037cd957484afd78777b69db35f365075e740d7787a1403f92d17e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-11-3.png": "e8adc37d8b2d3f505fc06355daea802d561523d9def86e1f0e5a06b5d7092c0d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-12-1.png": "0dbfb3bb8423f7e48cea4aacecfe0adc7efe9aa644cf3825f01e178ccc7fd225",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-12-2.png": "2cd676c1758dc1ec144c3a62304f1e06a4525fcb42ad045efa5722c3efd6ffd1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-12-3.png": "258c8314dffe294795d5e83faff3f12b14a3ae13a70c01dcaa96c6b705f6ec91",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-13-1.png": "919264cd4fc2c3254700e82c4776336cf31ed4735c31706f123594559152ca09",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-13-2.png": "fc29e490b474e9e2e73d6e4c2284a2fc6546147392ddee475da4d10df66aa85c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-13-3.png": "a92fa800ec573db1a0f71b61d7c1f61c62984b1771ae47fb02bd7d02b6105443",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-14-1.png": "1d8abd7ce2f9ad7841dde9bd12ea8995ffcef02c549e9d1fea978996b069db07",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-14-2.png": "db95cacbcc24f4f63f45d3fcc659df07d413aa9871715795123240e66e7e7948",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-14-3.png": "29546271006f079e8ac05e13bde89cd5daf8a7206ba645e760a2efa03fec8df8",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-15-1.png": "288224df0802b4cc8ab33bce9ff860fdb4d6ae5b01a0bf2566b5406c7cf4128a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-15-2.png": "40e04e277a2835a84edddd4924f39646ccf87a0419c872fac2d8b9eb33607f4f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-right-15-3.png": "f14a08688c1e06151a775ed476b1c6a1346a795be88a9290d717e9f85206eda0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-00-1.png": "485a050a9f53f257fb443778f5aba8143ed5cb8c55a8703290ccdb7ed48e60ce",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-00-2.png": "31c304d36a26bce478fe4822b6a0eecb56cf708786ed374ea927431505f14293",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-00-3.png": "0271f32be74ca39a1394ac9f420e9ce9bd4b5e449d8aa5e6a6fec8a9c882f620",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-01-1.png": "c582ba6b6d54adfaaa37bfed19f0aaf61e960507ecda26008568ea07899e3a71",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-01-2.png": "83793c14f715f2ad3f003b4b78a6c830faeeb1bad6e0cab9a9812ec32756147f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-01-3.png": "27bc21bc69dd85e36055706f2474f9cfc2366c02f9d5bc7d9b8546f9cab99597",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-02-1.png": "78dc620fb9ff0e26e4fe70a5ce88663b182894666da3feb65a2acf7ae6c30886",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-02-2.png": "59f31f3574e27d05089bbae005ef9a1e44378d5b763f4ff3a85e0575241fd213",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-02-3.png": "70c676f982079c85c6f2a00b04b009f2161a7d28f67418b7ca9fed3c9d64bf82",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-03-1.png": "73d5188b33eca4d4c03ffd972ef6af1a72215bd93a2755bfece3048c9d817a77",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-03-2.png": "c45303e3ca13a16415d1b5e4f5baaa82086ddc7c5b07b89f05f6ba5503e4c149",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-03-3.png": "b3755945eac3421903cce85d647882116b4b7b2def63d65f22fbf32be7302bdb",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-04-1.png": "8db3bc29d9a21a6e50040f45a411f0f8ee04b63713372758b67dd7176cb037ca",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-04-2.png": "720dc0babc41337d3bde050addb9c7b9a7c9c5ee748c49817e9c59633d9d270c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-04-3.png": "7627aed1c689ca537bfe76ec0178e60d531c69bec3a0b792a56c42f76217de19",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-05-1.png": "f968f2bee3a9cd164e2af0bcaaab0b3f9b5195080482f14b2e73ffea7b41bcdd",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-05-2.png": "50b88f0fb9c0b60d82d983407904eba8cf0fc640b786216d4794fe70a7494247",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-05-3.png": "b59258874c7953afa57b41684f3470b051e2e1224c42366aa00111ed6f33fd4e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-06-1.png": "1be153ab87028173174b258eeaf0efddc931d2431b413fa35174bc77bbbc5ebf",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-06-2.png": "a60f3014912d11b132bc1db58150e83a6a58171c8908faeea27673978be8704e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-06-3.png": "179409326b436af30b1d6a43497f1bd6b5ef7079e47557e1da4cfe494f1c0495",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-07-1.png": "ab0495b71be3c48b3c258bf06e108db1ee373b844c308107a8e8a4dcf34facb0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-07-2.png": "7b84152c60a3b2f3639621533f0b34ad66265359c01b1398198a9338d3fa04b7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-07-3.png": "254a46ca6fc0e76d634ef396ea9c85a2f9f5d77d471b2842289d4622437f3494",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-08-1.png": "53a1da153488ae952c15d5a7e629c24d1d0877ea3d6fd1bace641fdf72245f63",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-08-2.png": "7eb8a1bdb9a467dfe7f845b225b9a35025834c8d45b4a744cc4749578630bd64",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-08-3.png": "e9d51dc34b5983fad6b02e275f457c5701de7b7c08abf7c5c8cf319a7c7b91e2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-09-1.png": "5935147a91ae2d6e146be7d099cbf827967f87a6b1b970a4902fc83d795d0a29",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-09-2.png": "a827fb56f84c51f015315f26d32adec4a5cbc3b9f5c0e6fd0be6222274478253",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-09-3.png": "4b3a20e2c3ac24f3fe528730e16ba725f517885db945e1ab3b8d2ef7209ede20",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-10-1.png": "42b21c4b214298d356e7a0e9761afbf4f412e010c29301b92c15bb239d3bf46b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-10-2.png": "f62650bd10a4ea831350221c378e55cf6031fa241d7c63d276bdccf5c5013325",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-10-3.png": "876d0fac9be570018960af05ee40c5e5d7abb078cf4481fd105efc9640f4dff2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-11-1.png": "658c84061534da80da9e6c7e181bcfa0e2ce17ae25bbd9aef558414078d5fdf0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-11-2.png": "58c6d214af553e6c1172ae644608436146b9c208adcd67b979c6b8f05593edf6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-11-3.png": "34f469dbc963ef06f140a19acda14bca19c221e03fce6eee63f3746821c54c9d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-12-1.png": "b2fb8bb15a3926dcb69e53b00bae67fec844d7f9dc2479069184fceee1f48db7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-12-2.png": "9516415dd1cb9f674018fab56d7a7c7df0e0b1c30ad6854c718eb8fe5560f66c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-12-3.png": "9f9e3f35977fc18e63b95f7ffce709749273980131637576f33cb36f7ac2ab15",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-13-1.png": "4309229275af0e9fe7c14a466b64869dcf10826a865f50a785717ea8c3957aa7",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-13-2.png": "926199ab39aae98378ae87cc279f92b4e33fb9aa59e45363392418e17dfff807",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-13-3.png": "e7f99bec0c1a639ec559cd81e081849bccb32bc0df0e2a155b6c30aa71178011",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-14-1.png": "fcba396eb74a6402c6f95ed498b22a14fb02c7f554b9ad4499df58cade961ce2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-14-2.png": "5b8b978fe3fa77cd92df04cb9e8d3677d63eaab6b43d087adf18846c94d736d9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-14-3.png": "d6e41f12edc0dedcf90ad020fbc93545d36241282850956133215694dff3fc14",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-15-1.png": "b26f1038706f05b2c73ac0e4d355897a7c11033ef945d9be3cfc2ff60f82fd2c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-15-2.png": "f4c89e49c0534217823485b371293a68bca5bc3d584a71b09263352c0ba6fdd9",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-up-15-3.png": "0070f8b8c0e5f6fae86e4f984bc22209c629dc8e90d1d0d848affa533b45be10",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-00-1.png": "f15ffd41abe1e6ee18af456de1f6060017cad5c266250054e25dad118107a857",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-00-2.png": "8088186082ddc4fddcdcbde1a616c6b0665c0f735346acb18a08f0c0bf07a7fa",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-00-3.png": "096ec60c119fbd1da5e892eb34ba2cc742256835d18596073eae3b240a61a131",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-01-1.png": "48618e044f702cee4540a945d85dc5944aab02954da59d9ab7054278bd9b9d3d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-01-2.png": "bea31c5aa9315642e2b5835b668d0338653337146291b38af29e9e20b4cab62b",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-01-3.png": "3563268df8befb638db1f7ee73dda718ca79281e21ffc707014135e1928874f5",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-02-1.png": "3039e04ef95af5906d40bc15315ca9ba6f1e0ceb067f38123dddbb9529a21256",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-02-2.png": "61208cf2a36fbc5354997ee72ed8e7f41fa5d352a3dfb997283d1c36b2093943",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-02-3.png": "f705db554666fe6af390594e58be482617e2598385c793af0af2a8ba963f5073",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-03-1.png": "f55cbb962149b1df733e402daca0ddf01fcfc58e8161a150b2cad0cc62c3e270",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-03-2.png": "ec7f4e3d0889fa737e16caff40359445936d9cedf6e5eabeeed0efb98fe543ad",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-03-3.png": "6a2ebad419ace1a50a10be299a174ffe45a32355d7e5c0fd1160f0cc47a42e04",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-04-1.png": "c2b5922417e5994fe9d233290be12e17e45348e0708e94ba0faa4bdb086eff96",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-04-2.png": "6e7503dca096794f0a4efb42dd5d5a889239b8581b5b6419ad94d3c9f4a74911",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-04-3.png": "092d3e2579543b893e64e03724c9d2b3ddf33b84842b7babf39fbf12dad90dab",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-05-1.png": "82472d3e9997973f3d779eda31d11d67a68b14cccff2679c2b4f0fcbe55d862e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-05-2.png": "13261341868ab29579f5699f7ddcbadf670ec7d46a2b9e544d84c24b60847984",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-05-3.png": "def1313eeb62132aabe14bac59e120680d18783c8f399da106a32bdd54f7d219",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-06-1.png": "2d8c09ef6d15dbbdce42d7e5716daaddbf05a6090d8cc627073f9eb37b4e06fe",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-06-2.png": "5dd706c73eb2bb13e103eb8294d32233601f1bfe69ee930fb6705154ba2cd615",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-06-3.png": "65ff19b05523eb91f00aa9016c3948699a532957d9ae1c3c4b5bba061b6f5592",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-07-1.png": "b8506f1dfec059a1a98bb6863e8793a2435796a92c7b755976039d797ca5f663",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-07-2.png": "744e24b1d0ee14ba8bc09a28450a3c83c17cca872b8e6cc1a23bb3c3064d8b22",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-07-3.png": "6a941645531dff9d9689b95e4716e3495847d0facde1ea5a344285aaeb930863",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-08-1.png": "884ff8b6bc16b04ed206179d5afb50100249eab8ec78b3b0b66696ffd696a874",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-08-2.png": "7901d8cd9ad42bad571b39983c4f3d16bb247b6f05b3e6ba2ab7044fd4b0f3c3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-08-3.png": "777c1905af3e6b9d799ab2b1217cab66eb1a3af20d3c735648c6dc14a7445cf1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-09-1.png": "dcc7aa1272f739a64874613b4e2766ab45225da39acf116dc2cbcedef75e4710",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-09-2.png": "8908f0f04b27f4063ff9ad72ec6033b9f013f0cc39e4f22c9fd4c218ae06bf86",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-09-3.png": "4ce5581711b19f4577de634c618f7f0f3c8ea25e8930613f97e91612f17c5841",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-10-1.png": "aa33f8091dedb465e11f13a5c115dac896e5ad4de080d11cd5c24732f8c97d77",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-10-2.png": "15892d982d7bf0fd29ce2de286787e44e13993890216f2bc875753f6b18df768",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-10-3.png": "a3a7ffe98e2dbd94c0f6c903528850054ce6aca5bb7b02640244ad2cf457255f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-11-1.png": "f6d3c7901a93ff1bfb728536dbca94422ac2cd103ec42143f2668aa491c02fad",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-11-2.png": "3d3f26e2034b419bf181f44a8575e29ac474545b50fa6a12a49741a608904470",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-11-3.png": "9722f648ae6a25dca470119585ebd1ba21c89c8ce25fb586bc0d4a07b6d9a3e0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-12-1.png": "8f9964cdd0be08340d6b6b658e02ac83cb62f26b99ba3a81b5f632c77b9357f1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-12-2.png": "42cd2af91a6bf9f8443e9e0ff52454f75efecf0e09127b3bcc3a17ccd2ff3598",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-12-3.png": "a11b9cbf276c7f73ed29c7c568de0c66b1caf87268e00d1ea291d4530b42dc16",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-00.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-01.png": "afc86c37f039b611bfc0e62f1892b7cbda40b75f70812289608f6ffe76ad9b4f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-02.png": "8dcfda385f38e99c82e629f45e3ca269f281228259d7fe72e4ecfd09f0ec2551",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-03.png": "16fd0d3dd35b136660e17978471f34f92dbb8698046213708021c921e521dcd2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-04.png": "4d1e78d191df0f98f8db3ee668515391c7fc7fd246a6d21d88d7972a05d12d1e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-05.png": "16fd0d3dd35b136660e17978471f34f92dbb8698046213708021c921e521dcd2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-06.png": "8dcfda385f38e99c82e629f45e3ca269f281228259d7fe72e4ecfd09f0ec2551",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-07.png": "afc86c37f039b611bfc0e62f1892b7cbda40b75f70812289608f6ffe76ad9b4f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-08.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-09.png": "d9d778c7b55b18a53683f5649923ae72693b49932a96f5fa22f5fb22f3b0faf2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-10.png": "add0c1f2387c3665fb889fd4a6c8fab1cb181a66d5faf1531286d28672611ef2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-11.png": "ae9ab625cecf4f6531a16e2d9eb723a3c349190ec95c4d4d64f7eb1d9128d447",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-12.png": "5f64102e1e4aa4009de1f3cefa5fc21b108c2154fb294918efaf80300fb53ed6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-13.png": "ae9ab625cecf4f6531a16e2d9eb723a3c349190ec95c4d4d64f7eb1d9128d447",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-14.png": "add0c1f2387c3665fb889fd4a6c8fab1cb181a66d5faf1531286d28672611ef2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-idle-15.png": "d9d778c7b55b18a53683f5649923ae72693b49932a96f5fa22f5fb22f3b0faf2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-13-1.png": "435361acacf5aa658a98f6bd16c86e4565a12947950267997857dc7937f02789",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-13-2.png": "af720987eefc41b4e05b38c9d8d0ffde25e6d75f10949eb6c00defd30c028e91",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-13-3.png": "b7ee69988daea3c9a3824bb3176c507bdbcd3cff78c491ea5c16c27bcf8de81d",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-00.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-01.png": "2041a902378300f55c971b56c1f7f8d3804cc030f1f46e3e459c2e8b35658f9a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-02.png": "bf1b8485ccf59ddebc5bb45b5dbb0b680403fb85dbc3de94c4a59f2bd1097532",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-03.png": "fd0946272ff9314f0e03d78f9390d6d7dc2133d004e963ffde22d788537205df",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-04.png": "926bb3338fd2f47610df8dd5763af65148e10bce9a566ddab7c16e946774ba4e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-05.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-06.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-07.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-08.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-09.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-10.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-11.png": "926bb3338fd2f47610df8dd5763af65148e10bce9a566ddab7c16e946774ba4e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-12.png": "fd0946272ff9314f0e03d78f9390d6d7dc2133d004e963ffde22d788537205df",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-13.png": "bf1b8485ccf59ddebc5bb45b5dbb0b680403fb85dbc3de94c4a59f2bd1097532",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-14.png": "2041a902378300f55c971b56c1f7f8d3804cc030f1f46e3e459c2e8b35658f9a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-look-15.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-14-1.png": "2e3aa549ae4af5b5668aa25b03143c1635af9a1be0ab930cb595365b33c14aab",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-14-2.png": "295381baac0433a819299afae0383b193d905f3d5f0851e1cb11fe4ac3a1ea61",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-14-3.png": "f24fcbb605547cd945c4b8374faae858b9255527c5603200ac6560e5a7eac8c3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-15-1.png": "dea1a78ddaa900d535c92aa6b397fed364f7ce7994a335fe253a155dbac88b40",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-00.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-01.png": "b2a02226d4992f23b740a2cbee068b50330ca034730a9338806213bc7957b995",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-02.png": "e61471ebbc4ba2866a3733f96f3b0cdd013d7e8a1fc54c9aefa89607ca810ed1",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-03.png": "765cbd41f2313e03b1c248d89ec9ea4723f5fd0ac27dfcda4546a490320f2831",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-04.png": "588e8f5a876c5f42113a367803eb6ba36ffa33c0b77aff300294aa56aebf4174",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-05.png": "5701bcd6aad9cbccce9abcf66b33244b4f2d0c5a5cb8e4a486ddcb3ffb8bff23",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-06.png": "d2a02b3b85828d0d5554dca916dbb71cacec87814c626edbf1247afd4b3d3ca6",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-07.png": "14a7b2361042f8c6aa99609f345821b7f5a23023350112e798e10fc8bf3249d4",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-08.png": "c24b642f834d0373ef96ccddbe6b60a9cb524830d53035d603d98de4be9c7eb4",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-09.png": "bc1c44463230ebf9e85e57d7ac51634b0705c134a1968678d4cda7ec7e7f1733",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-10.png": "e93049bbc7604bccdf70e48f5622674b67e40b637f01057ea7a97a2449b7e933",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-11.png": "f2bd53dac49b4d14888e80152424ed809944e852e2fa820a6e7618af091eecfe",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-12.png": "beb145d3b90fabd08edc32e20ec0afd52e27bb348ba1f827acca400e76126275",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-13.png": "9611da2b2a6f1100169b4ddda8eb2bee5735a4031cefec38408c075f5f724238",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-14.png": "b24e3f7de48a19182b5f530705c79cddfd0ffc0c2e0004e5048a395d8da60649",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-success-15.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-15-2.png": "67c27f45c35783ab437347fff248d5703d53d57cdf5109939eb6760dbeded85c",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/stop-left-15-3.png": "355e3c76d02a8e0d773b765b57cf908e81dbbb6b7aeb4d7c0a0eb80076e58086",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-00.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-01.png": "2041a902378300f55c971b56c1f7f8d3804cc030f1f46e3e459c2e8b35658f9a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-02.png": "bf1b8485ccf59ddebc5bb45b5dbb0b680403fb85dbc3de94c4a59f2bd1097532",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-03.png": "fd0946272ff9314f0e03d78f9390d6d7dc2133d004e963ffde22d788537205df",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-04.png": "926bb3338fd2f47610df8dd5763af65148e10bce9a566ddab7c16e946774ba4e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-05.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-06.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-07.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-08.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-09.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-10.png": "e6954b30da008c9c5237c9df13440315ee87aad4140da0d7609c05c2318037b2",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-11.png": "926bb3338fd2f47610df8dd5763af65148e10bce9a566ddab7c16e946774ba4e",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-12.png": "fd0946272ff9314f0e03d78f9390d6d7dc2133d004e963ffde22d788537205df",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-13.png": "bf1b8485ccf59ddebc5bb45b5dbb0b680403fb85dbc3de94c4a59f2bd1097532",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-14.png": "2041a902378300f55c971b56c1f7f8d3804cc030f1f46e3e459c2e8b35658f9a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/cells/action-failure-15.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/down.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/front-left.png": "b286e278dda74166e829308092f48090dbd348c22ba51826fb6cbd22bbb1a06e",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/front-right.png": "fc9fdc138ded76ba36fa807bfc24c7db6d1e911659d1388bfa58509cca9929c2",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/left.png": "cbf53056be1636e137fe2978a874f64df9fab1006478f471e2ce1ecc47ffa77b",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/rear-left.png": "611d73986e8da0c5d1f46acf65edf99a96ae53f67d13b9510b3c343e9c47f29d",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/rear-right.png": "c7601edc8e8bc209fb695fcce661d619367cef3112a599ecc10e60a2ff78af8a",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/right.png": "01a7a03ce192ae9f48253bae14e8dfb8fb1ba41f6a05c98456ef8c15af8cb023",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/up.png": "597558cd59577005915186c79a8ce0b9cb9701cb742bcb510e8348a56c2fd7f6",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/cleaned-far-leg-parts-v1.png": "612d42506c24be70df3c6bb1df20938ade1601a7c53321a2380523cb1db9cd07",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-far-case-mask.png": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-far-leg.png": "265bf1c47bb94c236e5f833bbcc9640f8da002f9919c3c7afae816cf628f2418",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-near-case-mask.png": "34d2e616244662880611ebb4dddee4727e4e3f7c3c75f97fdb6c9d9ddb66c625",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-near-leg.png": "80c667f1788d543033829f61a147626912e1ce9c7bfb62056acaa281a7a7cb94",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-planted.png": "d2cd47985ca79b12e6f67398286215bbcb8fe1c1929ac215707824eee3270bcf",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-upper-mask.png": "e163e70ee8b235c5330f58f63acfec9c9e377cff7eaac41547fc16cdf5ef5c5d",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-far-case-mask.png": "b081bce38e816deda27c97709895ebdc14e06ca93f5e6ef8699b481558762a02",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-far-leg.png": "327400df18ebf308166326759b9961af9c19823fd28d2ca12f4836c5279e67ee",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-near-case-mask.png": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-near-leg.png": "871ccfd5209fcd33af6b9e968b9e0f8cb538e1b992e182b303a6797c7b289aa4",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-planted.png": "a7dadc97aa2f84a85b7b1a980a723498a7cd16bb10419d4b4e86b17ed9c1cde7",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-upper-mask.png": "2bb4295fb42ab55b0be76ee4adef1e81db5b0965abd03c1f53212c272b1b8736",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registration.json": "ae860beb592f4287dad4557d417c47cb15e16fe64554e9812ffeaf7b14a199e4",
+    "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/profile-layer-registration.json": "b5f9732e362609356b7276e11bb33e88936fe94c853e29aa87663cfee13851cc",
+    "output/street-redesign/dietmar-din-norm-end-to-end/full-working-v3/body-index.json": "25ba732b4b23db2c05d2540a90dd3dca6e0ea531e9db2b131b19c28556253fd0",
+    "output/street-redesign/dietmar-din-norm-end-to-end/family-mouths-v4/mouths-working.json": "91455fbff16d2b4f42ca67e343fc0d726a539d3f21cadc43bf6b0e3c6cb7811f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/adult-mouth-fit-v6/fit.json": "d2a305927fd0303bacfb195ec15ca813fae87bea524e671b198c62418892b531",
+    "output/street-redesign/dietmar-din-norm-end-to-end/candidate-v4/standing.webp": "2a0b4dbb64bebb06077ba5e1d0a6577f4bdf7404561eef2772b79de764cd7912",
+    "output/street-redesign/dietmar-din-norm-end-to-end/candidate-v4/source-desktop.webp": "74b99945606e2cad194ca52401418b9cc166bb1e1f4c211bb7c85b82c796fde3",
+    "output/street-redesign/dietmar-din-norm-end-to-end/candidate-v4/source-mobile.webp": "b538cbf03fc4b7317094a20d792c861a38ac8322810d2d65ef42785f46e16c0f",
+    "output/street-redesign/dietmar-din-norm-end-to-end/candidate-v4/mouths-v1.json": "678fc1171270ab60b6c8c74ca620644932705f66aaf47cff6a1f5c3c5b52fe0a",
+    "output/street-redesign/dietmar-din-norm-end-to-end/candidate-v4/person.json": "cce3826c04044b9ebd85a4111e98c8b992a61750be4028ba8b53ac949ae50758"
+  },
+  "expectedCycleReport": {
+    "status": "REBUILT_REAL_SOURCE_PHYSICAL_CYCLE",
+    "fittedCycle": 11.65,
+    "familySourceHeight": 400,
+    "authoredHeight": 2.33,
+    "mapWorldUnitsPerGameUnit": 0.02,
+    "stances": [
+      {
+        "heading": "right",
+        "foot": "near",
+        "sourcePoint": [
+          224,
+          461
+        ],
+        "phases": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "actualRgbaAlongSourcePixels": [
+          234.00430004777832,
+          229.00430004777832,
+          224.00430004777832,
+          219.00430004777832,
+          214.00430004777832
+        ],
+        "slope": -40.0,
+        "maximumResidual": 0.0,
+        "sourceHeight2_33Cycle": 11.65
+      },
+      {
+        "heading": "right",
+        "foot": "far",
+        "sourcePoint": [
+          301,
+          462
+        ],
+        "phases": [
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "actualRgbaAlongSourcePixels": [
+          310.9998413957177,
+          305.9998413957177,
+          300.9998413957177,
+          295.9998413957177,
+          290.9998413957177
+        ],
+        "slope": -40.0,
+        "maximumResidual": 0.0,
+        "sourceHeight2_33Cycle": 11.65
+      },
+      {
+        "heading": "left",
+        "foot": "near",
+        "sourcePoint": [
+          287,
+          461
+        ],
+        "phases": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "actualRgbaAlongSourcePixels": [
+          -277.0,
+          -282.0,
+          -287.0,
+          -292.0,
+          -297.0
+        ],
+        "slope": -40.0,
+        "maximumResidual": 0.0,
+        "sourceHeight2_33Cycle": 11.65
+      },
+      {
+        "heading": "left",
+        "foot": "far",
+        "sourcePoint": [
+          208,
+          462
+        ],
+        "phases": [
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "actualRgbaAlongSourcePixels": [
+          -198.00063471913677,
+          -203.00063471913677,
+          -208.00063471913677,
+          -213.00063471913677,
+          -218.00063471913677
+        ],
+        "slope": -40.0,
+        "maximumResidual": 0.0,
+        "sourceHeight2_33Cycle": 11.65
+      }
+    ],
+    "qualification": "Actual complete source foot layer transport only; hidden patches are not promoted to body-visible native/world evidence. Native quantization and independent actual body exposure are separate checks.",
+    "pins": {
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/measure-source-cycle-v2.py": "24e4881026ad1fb960b8894e0971071bc5b4905b8da96f63ed6b446e7dcfcb29",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-motion-v2.py": "56caa6d252aa8f8c0e33da6833fce6fd3f1b33c4710af9208d5a49ddd76f4f57",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/registered/down.png": "35224b5d8f4c3bb85e02d9bb38096b7482f3048748628dba00c1d6d8d45325db",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-near-leg.png": "871ccfd5209fcd33af6b9e968b9e0f8cb538e1b992e182b303a6797c7b289aa4",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/right-far-leg.png": "327400df18ebf308166326759b9961af9c19823fd28d2ca12f4836c5279e67ee",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-near-leg.png": "80c667f1788d543033829f61a147626912e1ce9c7bfb62056acaa281a7a7cb94",
+      "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/profile-leg-repair-v2/left-far-leg.png": "265bf1c47bb94c236e5f833bbcc9640f8da002f9919c3c7afae816cf628f2418"
+    }
+  },
+  "excludedCycleDiagnosticOnly": {
+    "field": "pins['world3d.js']",
+    "originalAuthoredFullModulePin": "7d03d0b0bec404e62902f8bf928c8ad6eb4a7d4213103323199a742bfcad6f13",
+    "validationRule": "Actual raw cycle full world pin must exactly equal raw initialInputs world3d.js; all other cycle fields/pins compare exact"
+  },
+  "person": {
+    "id": "crowd-dietmar-din-norm",
+    "aliases": [
+      "crowd-dietmar-din-norm",
+      "street-dietmar-din-norm"
+    ],
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136,
+    "figureWorldHeight": 2.33,
+    "standing": {
+      "file": "./assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/standing.webp",
+      "sha256": "2a0b4dbb64bebb06077ba5e1d0a6577f4bdf7404561eef2772b79de764cd7912",
+      "width": 128,
+      "height": 160
+    },
+    "standingOnly": false,
+    "grid": [
+      21,
+      20
+    ],
+    "strideDistance": 11.65,
+    "variants": {
+      "desktop": {
+        "file": "./assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/source-desktop.webp",
+        "sha256": "74b99945606e2cad194ca52401418b9cc166bb1e1f4c211bb7c85b82c796fde3",
+        "width": 2016,
+        "height": 2400
+      },
+      "mobile": {
+        "file": "./assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/source-mobile.webp",
+        "sha256": "b538cbf03fc4b7317094a20d792c861a38ac8322810d2d65ef42785f46e16c0f",
+        "width": 1344,
+        "height": 1600
+      }
+    },
+    "clips": {
+      "down": {
+        "offset": 0,
+        "count": 16,
+        "seconds": 0.96
+      },
+      "right": {
+        "offset": 21,
+        "count": 16,
+        "seconds": 0.96
+      },
+      "up": {
+        "offset": 42,
+        "count": 16,
+        "seconds": 0.96
+      },
+      "left": {
+        "offset": 63,
+        "count": 16,
+        "seconds": 0.96
+      },
+      "idle": {
+        "offset": 86,
+        "count": 1,
+        "seconds": 1
+      }
+    },
+    "atlasMotion": {
+      "schemaVersion": 1,
+      "walks": {
+        "down": {
+          "row": 0,
+          "frames": 16,
+          "frame_ms": 60,
+          "loop": true
+        },
+        "right": {
+          "row": 1,
+          "frames": 16,
+          "frame_ms": 60,
+          "loop": true
+        },
+        "up": {
+          "row": 2,
+          "frames": 16,
+          "frame_ms": 60,
+          "loop": true
+        },
+        "left": {
+          "row": 3,
+          "frames": 16,
+          "frame_ms": 60,
+          "loop": true
+        }
+      },
+      "bridges": {
+        "down": {
+          "row": 4,
+          "stop_cols": [
+            0,
+            1,
+            2
+          ],
+          "start_cols": [
+            3,
+            4
+          ],
+          "frame_ms": 70
+        },
+        "right": {
+          "row": 5,
+          "stop_cols": [
+            0,
+            1,
+            2
+          ],
+          "start_cols": [
+            3,
+            4
+          ],
+          "frame_ms": 70
+        },
+        "up": {
+          "row": 6,
+          "stop_cols": [
+            0,
+            1,
+            2
+          ],
+          "start_cols": [
+            3,
+            4
+          ],
+          "frame_ms": 70
+        },
+        "left": {
+          "row": 7,
+          "stop_cols": [
+            0,
+            1,
+            2
+          ],
+          "start_cols": [
+            3,
+            4
+          ],
+          "frame_ms": 70
+        }
+      },
+      "transitions": {
+        "down-to-right": {
+          "frames": [
+            {
+              "row": 4,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 1,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 2,
+              "ms": 85
+            },
+            {
+              "row": 5,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "down-to-up": {
+          "frames": [
+            {
+              "row": 4,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 1,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 2,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 3,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 4,
+              "ms": 85
+            },
+            {
+              "row": 6,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "down-to-left": {
+          "frames": [
+            {
+              "row": 4,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 7,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 6,
+              "ms": 85
+            },
+            {
+              "row": 7,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "right-to-down": {
+          "frames": [
+            {
+              "row": 5,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 1,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 0,
+              "ms": 85
+            },
+            {
+              "row": 4,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "right-to-up": {
+          "frames": [
+            {
+              "row": 5,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 3,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 4,
+              "ms": 85
+            },
+            {
+              "row": 6,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "right-to-left": {
+          "frames": [
+            {
+              "row": 5,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 3,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 4,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 5,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 6,
+              "ms": 85
+            },
+            {
+              "row": 7,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "up-to-down": {
+          "frames": [
+            {
+              "row": 6,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 5,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 6,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 7,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 0,
+              "ms": 85
+            },
+            {
+              "row": 4,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "up-to-right": {
+          "frames": [
+            {
+              "row": 6,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 3,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 2,
+              "ms": 85
+            },
+            {
+              "row": 5,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "up-to-left": {
+          "frames": [
+            {
+              "row": 6,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 5,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 6,
+              "ms": 85
+            },
+            {
+              "row": 7,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "left-to-down": {
+          "frames": [
+            {
+              "row": 7,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 7,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 0,
+              "ms": 85
+            },
+            {
+              "row": 4,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 4,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "left-to-right": {
+          "frames": [
+            {
+              "row": 7,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 7,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 0,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 1,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 2,
+              "ms": 85
+            },
+            {
+              "row": 5,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 5,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        },
+        "left-to-up": {
+          "frames": [
+            {
+              "row": 7,
+              "col": 0,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 1,
+              "ms": 70
+            },
+            {
+              "row": 7,
+              "col": 2,
+              "ms": 70
+            },
+            {
+              "row": 8,
+              "col": 5,
+              "ms": 85
+            },
+            {
+              "row": 8,
+              "col": 4,
+              "ms": 85
+            },
+            {
+              "row": 6,
+              "col": 3,
+              "ms": 70
+            },
+            {
+              "row": 6,
+              "col": 4,
+              "ms": 70
+            }
+          ]
+        }
+      },
+      "settles": {
+        "down": {
+          "0": {
+            "frames": [
+              {
+                "row": 0,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 0,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 0,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 0,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "1": {
+            "frames": [
+              {
+                "row": 0,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 1,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 1,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 1,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "2": {
+            "frames": [
+              {
+                "row": 1,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 1,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 2,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 2,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "3": {
+            "frames": [
+              {
+                "row": 2,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 2,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 2,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 3,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "4": {
+            "frames": [
+              {
+                "row": 3,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 3,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 3,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 3,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "5": {
+            "frames": [
+              {
+                "row": 4,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "6": {
+            "frames": [
+              {
+                "row": 4,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "7": {
+            "frames": [
+              {
+                "row": 4,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "8": {
+            "frames": [
+              {
+                "row": 4,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "9": {
+            "frames": [
+              {
+                "row": 5,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "10": {
+            "frames": [
+              {
+                "row": 5,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "11": {
+            "frames": [
+              {
+                "row": 5,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "12": {
+            "frames": [
+              {
+                "row": 5,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "13": {
+            "frames": [
+              {
+                "row": 6,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "14": {
+            "frames": [
+              {
+                "row": 6,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "15": {
+            "frames": [
+              {
+                "row": 6,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 4,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          }
+        },
+        "right": {
+          "0": {
+            "frames": [
+              {
+                "row": 6,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "1": {
+            "frames": [
+              {
+                "row": 7,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "2": {
+            "frames": [
+              {
+                "row": 7,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "3": {
+            "frames": [
+              {
+                "row": 7,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "4": {
+            "frames": [
+              {
+                "row": 7,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "5": {
+            "frames": [
+              {
+                "row": 8,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "6": {
+            "frames": [
+              {
+                "row": 8,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "7": {
+            "frames": [
+              {
+                "row": 8,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 8,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "8": {
+            "frames": [
+              {
+                "row": 8,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "9": {
+            "frames": [
+              {
+                "row": 9,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "10": {
+            "frames": [
+              {
+                "row": 9,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "11": {
+            "frames": [
+              {
+                "row": 9,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "12": {
+            "frames": [
+              {
+                "row": 9,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "13": {
+            "frames": [
+              {
+                "row": 9,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 9,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "14": {
+            "frames": [
+              {
+                "row": 10,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "15": {
+            "frames": [
+              {
+                "row": 10,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 5,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          }
+        },
+        "up": {
+          "0": {
+            "frames": [
+              {
+                "row": 10,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "1": {
+            "frames": [
+              {
+                "row": 10,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "2": {
+            "frames": [
+              {
+                "row": 10,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 10,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "3": {
+            "frames": [
+              {
+                "row": 11,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "4": {
+            "frames": [
+              {
+                "row": 11,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "5": {
+            "frames": [
+              {
+                "row": 11,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "6": {
+            "frames": [
+              {
+                "row": 11,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "7": {
+            "frames": [
+              {
+                "row": 11,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 11,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "8": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "9": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "10": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "11": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "12": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 12,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "13": {
+            "frames": [
+              {
+                "row": 12,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "14": {
+            "frames": [
+              {
+                "row": 13,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "15": {
+            "frames": [
+              {
+                "row": 13,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 6,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          }
+        },
+        "left": {
+          "0": {
+            "frames": [
+              {
+                "row": 13,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "1": {
+            "frames": [
+              {
+                "row": 13,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "2": {
+            "frames": [
+              {
+                "row": 13,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 13,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "3": {
+            "frames": [
+              {
+                "row": 14,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "4": {
+            "frames": [
+              {
+                "row": 14,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "5": {
+            "frames": [
+              {
+                "row": 14,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "6": {
+            "frames": [
+              {
+                "row": 14,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "7": {
+            "frames": [
+              {
+                "row": 14,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 14,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 0,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "8": {
+            "frames": [
+              {
+                "row": 15,
+                "col": 1,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 2,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 3,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 4,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "9": {
+            "frames": [
+              {
+                "row": 15,
+                "col": 5,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 6,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 7,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 8,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "10": {
+            "frames": [
+              {
+                "row": 15,
+                "col": 9,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 10,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 11,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 12,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "11": {
+            "frames": [
+              {
+                "row": 15,
+                "col": 13,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 14,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 15,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "12": {
+            "frames": [
+              {
+                "row": 15,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 15,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "13": {
+            "frames": [
+              {
+                "row": 16,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 16,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 16,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 16,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "14": {
+            "frames": [
+              {
+                "row": 16,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 17,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 17,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 17,
+                "col": 18,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          },
+          "15": {
+            "frames": [
+              {
+                "row": 17,
+                "col": 19,
+                "ms": 70
+              },
+              {
+                "row": 17,
+                "col": 20,
+                "ms": 70
+              },
+              {
+                "row": 18,
+                "col": 16,
+                "ms": 70
+              },
+              {
+                "row": 18,
+                "col": 17,
+                "ms": 70
+              },
+              {
+                "row": 7,
+                "col": 2,
+                "ms": 70
+              }
+            ]
+          }
+        }
+      },
+      "neutral": {
+        "row": 4,
+        "col": 2
+      },
+      "interactions": {
+        "neutral": {
+          "row": 4,
+          "col": 2
+        },
+        "states": {
+          "idle": {
+            "row": 16,
+            "col": 0,
+            "durations_ms": [
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80
+            ]
+          },
+          "look": {
+            "row": 17,
+            "col": 0,
+            "durations_ms": [
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          "success": {
+            "row": 18,
+            "col": 0,
+            "durations_ms": [
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          "failure": {
+            "row": 19,
+            "col": 0,
+            "durations_ms": [
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          "wait": {
+            "row": 16,
+            "col": 0,
+            "durations_ms": [
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80,
+              80
+            ]
+          }
+        }
+      }
+    },
+    "mouthPaint": {
+      "file": "./assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/mouths-v1.json",
+      "sha256": "678fc1171270ab60b6c8c74ca620644932705f66aaf47cff6a1f5c3c5b52fe0a"
+    },
+    "motionDelivery": {
+      "file": "./assets/characters/residents/crowd-dietmar-din-norm/delivery-v2/delivery/motion-delivery.json",
+      "sha256": "10fa09c6eb5ad0c8765643f005837dc17ab54aa6d9b82a1318c87aedcf3dfcf7"
+    }
+  },
+  "currentCanonicalUsed": false,
+  "generationSeedAllowed": false,
+  "baselineOrigin": {
+    "originalAuthoredRoot": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-soeder-height\\GermanySimulator",
+    "originalAuthoredPrivateStage": "C:\\Users\\cogpsy-vrlab\\.codex\\worktrees\\street-soeder-height\\GermanySimulator\\output\\dietmar-height\\authored-packet-v4"
+  },
+  "privateFileNames": [
+    "delivery/motion-delivery.json",
+    "delivery/movement-desktop.webp",
+    "delivery/movement-mobile.webp",
+    "delivery/reactions-desktop.webp",
+    "delivery/reactions-mobile.webp",
+    "mouths-v1.json",
+    "person.json",
+    "source-desktop.webp",
+    "source-mobile.webp",
+    "standing.webp"
+  ],
+  "generationReportAlreadyComplete": {
+    "file": "output/dietmar-height/clean-raw-v4-r02-generation-complete.json",
+    "sha256": "3e178207a9a6bc605a567b6c177ceaf3b8ee7476a856aa8dc6d75af9945fd29e"
+  },
+  "coverage": {
+    "uniqueBodySourceImages": 348,
+    "registeredViews": 8,
+    "generatedProfileParts": 13,
+    "sourceMetadataFiles": 5,
+    "compiledFiles": 5,
+    "privateDeliveryFiles": 10,
+    "exactFiles": 389,
+    "duplicatePaths": 0,
+    "completeCycleReportOtherThanWorldDiagnosticPinExact": true
+  }
+}

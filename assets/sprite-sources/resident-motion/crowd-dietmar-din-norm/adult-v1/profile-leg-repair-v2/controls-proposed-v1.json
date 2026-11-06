@@ -1,0 +1,150 @@
+{
+  "status": "PROPOSED_FROM_APPROVED_RAW_AND_EXISTING_OWN_GRIDS; NOT_EXECUTED_OR_ADMITTED",
+  "actor": "crowd-dietmar-din-norm",
+  "rawSha256": "ef0a5d1f39ee855d4d53a29aa09762892af1f52bb9b5f0c4ae438a03c246ef79",
+  "sourceAuthority": {
+    "right": "01a7a03ce192ae9f48253bae14e8dfb8fb1ba41f6a05c98456ef8c15af8cb023",
+    "left": "cbf53056be1636e137fe2978a874f64df9fab1006478f471e2ce1ecc47ffa77b"
+  },
+  "uniformScaleBothAxesBothParts": 0.25,
+  "scaleBasis": "Provisional actual own source cuff/ankle-to-sole≈34workingpx versus newraw≈134px; no independent width/height fitting. Must measure/compare afterCPUlease.",
+  "baselineY": 472,
+  "nearRootY": 280,
+  "hipRootY": 286,
+  "upperExactThroughY": 274,
+  "pelvisExactThroughY": 287,
+  "wholeShoeCuffPlateauY": 418,
+  "profiles": {
+    "right": {
+      "partPanel": 0,
+      "rawAnkleX": 440,
+      "targetAnkleX": 247,
+      "farCasePolygon": [
+        [
+          282,
+          302
+        ],
+        [
+          290,
+          304
+        ],
+        [
+          299,
+          311
+        ],
+        [
+          300,
+          365
+        ],
+        [
+          294,
+          373
+        ],
+        [
+          271,
+          372
+        ],
+        [
+          274,
+          354
+        ],
+        [
+          278,
+          331
+        ],
+        [
+          281,
+          313
+        ]
+      ],
+      "nearCasePolygon": null,
+      "drawOrder": [
+        "farLeg",
+        "originalFarLeftBriefcase",
+        "originalNearLeg",
+        "originalPelvis",
+        "originalUpperAndRightRuler"
+      ]
+    },
+    "left": {
+      "partPanel": 1,
+      "rawAnkleX": 1300,
+      "targetAnkleX": 258,
+      "farCasePolygon": null,
+      "nearCasePolygon": [
+        [
+          244,
+          275
+        ],
+        [
+          270,
+          279
+        ],
+        [
+          275,
+          300
+        ],
+        [
+          270,
+          307
+        ],
+        [
+          287,
+          307
+        ],
+        [
+          298,
+          316
+        ],
+        [
+          299,
+          371
+        ],
+        [
+          288,
+          380
+        ],
+        [
+          226,
+          378
+        ],
+        [
+          220,
+          365
+        ],
+        [
+          222,
+          314
+        ],
+        [
+          239,
+          307
+        ],
+        [
+          248,
+          302
+        ],
+        [
+          243,
+          292
+        ]
+      ],
+      "drawOrder": [
+        "farLeg",
+        "originalNearLeg",
+        "originalPelvis",
+        "originalNearLeftCuffHandBriefcase",
+        "originalUpperAndRightRuler"
+      ]
+    }
+  },
+  "pendingMeasurements": [
+    "Exact alpha20 raw components/sole baselines and ankle datums",
+    "Uniform near/far ankle/cuff/shoe proportions at one source density",
+    "Top/root overlap and any visible flat source-root edge, light/dark fullfigure and crops",
+    "Actual original case/hand bounds and near/far occlusion; no grey trouser fragments in prop layer",
+    "Foot/cuff plateau sits above every actual shoe/cuff pixel",
+    "Actual own near/far opaque paint witnesses, independent halfcycle/positivefield/16phases+stops/native endpoints"
+  ],
+  "gates": "No local execution untilrootCPUlease after BPhysics/Camera; no full412 until root and independent preflight"
+}

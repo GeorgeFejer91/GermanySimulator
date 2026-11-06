@@ -438,6 +438,15 @@ rebuild recipe are under
 `assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/`. Her original
 voice profile, selected recordings, texts and40Hz mouth tracks remain unchanged.
 
+Dietmar DIN Norm's mature open-city adviser family uses his original project
+identity and own OpenAI ImageGen directional and complete far-leg paintings.
+His yellow folding ruler stays in his anatomical right hand and the brown
+briefcase in his left. Connected walking, phase-owned stops, four new quiet
+performances and source-bound mouths use the existing sampler and his own
+paint. Prompts, source hashes, controls and raw rebuild recipe are under
+`assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/`.
+His original adviser role, fixed voice, recordings and texts remain unchanged.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

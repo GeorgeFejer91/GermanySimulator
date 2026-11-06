@@ -1,0 +1,28 @@
+{
+  "id": "crowd-dietmar-din-norm",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "crowd-dietmar-din-norm",
+    "street-dietmar-din-norm"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/crowd-dietmar-din-norm-standing.webp",
+    "sha256": "fd483674a70709ea0d77f1979da8e2c9505d8325152df8522049fc6b1ff7208c",
+    "width": 128,
+    "height": 160
+  },
+  "mouthPaint": {
+    "file": "./assets/characters/street/crowd-dietmar-din-norm/mouths-standing-v1.json",
+    "sha256": "0f83eb9f30ed7448fa01ef568a3a0515f3bae584543883f1af4ddfbd84c0a94c"
+  }
+}

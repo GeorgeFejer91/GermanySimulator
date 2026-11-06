@@ -1,0 +1,13 @@
+{
+  "status": "ROOT FR4.8 SOURCE/NATIVE PILOT APPROVED FOR ADOPTION",
+  "personallyViewed": {
+    "output/dietmar-height/fr-mouth-fit-v4-proposal/pilot-01/source-fr-pair-light.png": "d2739d4c826bc50aa4c2fca2bbdbd62ee28d20ff662e6d0678b86020eaf3e032",
+    "output/dietmar-height/fr-mouth-fit-v4-proposal/pilot-01/source-contours-light.png": "42d13a74e4ea7e10a0688fdab99b5c66c246b4ec08d2edab68a32f4ae3f93a9d",
+    "output/dietmar-height/fr-mouth-fit-v4-proposal/pilot-01/desktop-fr-pair-light.png": "66774202f085a6fc1587f54e4329d74d262be5cf9e9149d04333a0b382767ee6",
+    "output/dietmar-height/fr-mouth-fit-v4-proposal/pilot-01/mobile-fr-pair-dark.png": "9849c94993d9188cbe94d45e4e2aa0d17be0148b903e3bee1c1a97868e895b3a",
+    "output/dietmar-height/fr-mouth-fit-v4-proposal/pilot-01/mobile-fr-whole-native-light.png": "c218a1585116e74a137f5ad93628bbb9d2dea9190b36c561ae135f06d5c3254e"
+  },
+  "observations": "Own source cavity joins the fixed closed crease/corners and stays within painted chin. Desktop shows an opening; encoded mobile now shows a small local darkening/opening at the actual lip in the nearest crop. It remains subtle in64x80wholebody and is not claimed as a large cavity. Eyes/nose/neck/closedshape stay unchanged.",
+  "scope": "Adopt only thisFR aperture in successor metadata/fit; preserve7otherheadings includingLEFTv5 and all824body bytes/audits. OriginalweakFR remains held history.",
+  "reportSha256": "fc32f5187c01e9f9c710bde5ab24f24fc321393fc3223c2f97bba61001247500"
+}

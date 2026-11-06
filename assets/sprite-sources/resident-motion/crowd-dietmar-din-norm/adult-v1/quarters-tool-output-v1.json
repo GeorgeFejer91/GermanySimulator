@@ -1,0 +1,6 @@
+{
+  "builtInTool": "image_gen.imagegen",
+  "output_hint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac22-8fac-7cd1-ae51-b88073bffadc as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac22-8fac-7cd1-ae51-b88073bffadc\\exec-b28927ec-e525-4292-924b-abfaef0739f9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "rawImageFile": "raw-quarters-v1.png",
+  "note": "Untouched tool image copied byte-for-byte; data URL omitted from this metadata."
+}

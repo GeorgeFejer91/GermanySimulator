@@ -1,0 +1,18 @@
+{
+  "stage": "quarters-v1",
+  "requestFile": "quarters-request-v1.json",
+  "requestSha256": "ad2cd63a7eeed8c8e0686809313331eccc8d63d8fdd14185768aea374bbf620f",
+  "toolOriginal": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac22-8fac-7cd1-ae51-b88073bffadc\\exec-b28927ec-e525-4292-924b-abfaef0739f9.png",
+  "savedUntouchedRaw": "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/raw-quarters-v1.png",
+  "rawSha256": "31e24f62bb8cd5f689fc53d372a8c9f791d8f11d1a9338abf08a5931b8e31975",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "mode": "RGBA",
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "selection": "PENDING ROOT EIGHT-VIEW SOURCE REVIEW; family/export/game not accepted"
+}

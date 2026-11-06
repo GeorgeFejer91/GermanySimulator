@@ -1,0 +1,19 @@
+{
+  "stage": "cardinals-v1",
+  "requestFile": "cardinals-request-v1.json",
+  "requestSha256": "81cdf5c8f8b4878c1803a852e7f0c154ae43ddbd2966d800d7980835b49d588a",
+  "builtInTool": "image_gen.imagegen",
+  "toolOriginal": "C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac22-8fac-7cd1-ae51-b88073bffadc\\exec-a5274ac5-76c8-4087-a198-25bceaf61229.png",
+  "savedUntouchedRaw": "assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/raw-cardinals-v1.png",
+  "rawSha256": "dc73d3cf711c6cb84909bd58192c835bd14de14808887e970e27eea5087f9211",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "mode": "RGBA",
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "selection": "PENDING ROOT CARDINAL SOURCE REVIEW; no quarters/family/export approval"
+}

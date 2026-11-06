@@ -1,0 +1,319 @@
+{
+  "status": "FR4.8 root-admitted own successor control; LEFTv5 and all seven other headings exact; runtime admission pending",
+  "sourceRegistration": "registration.json",
+  "evidence": "output/dietmar-height/anatomy-v1 five actual head coordinate crops personally viewed",
+  "views": {
+    "down": {
+      "centerPx": [
+        253.8,
+        119.6
+      ],
+      "axesPx": [
+        14,
+        -0.2,
+        0.05,
+        3.1
+      ],
+      "profile": {
+        "crease": [
+          0.13,
+          -0.08,
+          -0.1,
+          -0.03,
+          0.18
+        ],
+        "source_upper": [
+          0.13,
+          -0.08,
+          -0.1,
+          -0.03,
+          0.18
+        ],
+        "source_lower": [
+          0.13,
+          -0.08,
+          -0.1,
+          -0.03,
+          0.18
+        ],
+        "open_upper": [
+          0.13,
+          -0.08,
+          -0.1,
+          -0.03,
+          0.18
+        ],
+        "open_lower": [
+          0.13,
+          0.52,
+          0.84,
+          0.55,
+          0.18
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-right": {
+      "centerPx": [
+        264.8,
+        119.8
+      ],
+      "axesPx": [
+        10,
+        -0.1,
+        0.04,
+        3
+      ],
+      "profile": {
+        "crease": [
+          0.14,
+          -0.05,
+          -0.12,
+          -0.02,
+          0.14
+        ],
+        "source_upper": [
+          0.14,
+          -0.05,
+          -0.12,
+          -0.02,
+          0.14
+        ],
+        "source_lower": [
+          0.14,
+          -0.05,
+          -0.12,
+          -0.02,
+          0.14
+        ],
+        "open_upper": [
+          0.14,
+          -0.05,
+          -0.12,
+          -0.02,
+          0.14
+        ],
+        "open_lower": [
+          0.14,
+          0.8717391304347825,
+          1.48,
+          0.8321739130434781,
+          0.14
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "right": {
+      "centerPx": [
+        280.2,
+        119.7
+      ],
+      "axesPx": [
+        6.5,
+        -0.5,
+        0.15,
+        2.6
+      ],
+      "profile": {
+        "crease": [
+          0.18,
+          0.02,
+          -0.08,
+          -0.03,
+          0.1
+        ],
+        "source_upper": [
+          0.18,
+          0.02,
+          -0.08,
+          -0.03,
+          0.1
+        ],
+        "source_lower": [
+          0.18,
+          0.02,
+          -0.08,
+          -0.03,
+          0.1
+        ],
+        "open_upper": [
+          0.18,
+          0.02,
+          -0.08,
+          -0.03,
+          0.1
+        ],
+        "open_lower": [
+          0.18,
+          0.44,
+          0.76,
+          0.43,
+          0.1
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "left": {
+      "centerPx": [
+        235.4,
+        119.6
+      ],
+      "axesPx": [
+        9.2,
+        0.9470588235294116,
+        -0.15,
+        3.4
+      ],
+      "profile": {
+        "crease": [
+          0.08,
+          -0.04,
+          -0.12,
+          0.02,
+          0.18
+        ],
+        "source_upper": [
+          0.08,
+          -0.04,
+          -0.12,
+          0.02,
+          0.18
+        ],
+        "source_lower": [
+          0.08,
+          -0.04,
+          -0.12,
+          0.02,
+          0.18
+        ],
+        "open_upper": [
+          0.08,
+          -0.04,
+          -0.12,
+          0.02,
+          0.18
+        ],
+        "open_lower": [
+          0.08,
+          0.8266666666666667,
+          1.4094117647058821,
+          0.7677124183006536,
+          0.18
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "front-left": {
+      "centerPx": [
+        243.9,
+        120.2
+      ],
+      "axesPx": [
+        10.7,
+        0.5,
+        -0.1,
+        3
+      ],
+      "profile": {
+        "crease": [
+          0.08,
+          -0.06,
+          -0.14,
+          0.04,
+          0.18
+        ],
+        "source_upper": [
+          0.08,
+          -0.06,
+          -0.14,
+          0.04,
+          0.18
+        ],
+        "source_lower": [
+          0.08,
+          -0.06,
+          -0.14,
+          0.04,
+          0.18
+        ],
+        "open_upper": [
+          0.08,
+          -0.06,
+          -0.14,
+          0.04,
+          0.18
+        ],
+        "open_lower": [
+          0.08,
+          0.49,
+          0.82,
+          0.5,
+          0.18
+        ],
+        "corners": [
+          -0.5,
+          0.5
+        ],
+        "width": [
+          0.02,
+          0.1
+        ],
+        "teeth": 0
+      }
+    },
+    "up": null,
+    "rear-right": null,
+    "rear-left": null
+  },
+  "leftOpeningRationale": "Root personally viewed v5 source pair/contours plus actual desktop/mobile pairs. Adopt only own LEFT fit:9.2px true crease tangent, original centre/normal/rest crease/source cavity/open upper and endpoints,5.2px lower aperture within own painted chin. Mobile has distinguishable local darkening at limited raster, not a large cavity. Earlier delta1/v3/v4 REDs retained.",
+  "pilotAdmission": {
+    "record": "output/dietmar-height/mouth-aperture-fit-v5/pilot-adoption.json",
+    "candidate": "output/dietmar-height/mouth-aperture-fit-v5/diagnostic-01/candidate-lip-fits.json",
+    "scope": "LEFT_ONLY_SOURCE_NATIVE_PILOT; no full-family/runtime acceptance"
+  },
+  "frontRightV6Adoption": {
+    "rootReceipt": "front-right-mouth-v6-adoption.json",
+    "rootReceiptSha256": "7b67ab873a0e4103ce0d0f30a83387a7788a5456965867faf5519dd3c34a164b",
+    "priorControl": "lip-fits.json",
+    "priorControlSha256": "5d54e8af75ac87b7419892de3746ef07b0b5846f481ec52b70ffc60116a13cfe",
+    "changeOnly": "front-right.profile.open_lower interior values, own4.8 source pixel aperture",
+    "sourceChinBounds": [
+      119,
+      130
+    ],
+    "candidateLowerCenterY": 124.24,
+    "mobileLimit": "Distinct local darkening, subtle64x80 raster; no large cavity claim"
+  }
+}
