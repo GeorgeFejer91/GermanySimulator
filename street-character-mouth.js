@@ -1,4 +1,4 @@
-import {mouthPaintGlsl,validateMouthProfile,mouthProfileValues} from './buergeramt-mouth-paint.js?v=20261018-mouth-single-exit';
+import {mouthPaintGlsl,validateMouthProfile,mouthProfileValues} from './buergeramt-mouth-paint.js?v=20261106-horst-lower-domain-v1';
 
 const attachedMaterials=new WeakMap();
 function finiteArray(values,size){

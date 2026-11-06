@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "actorId": "street-horst-hausordnung",
+  "registryId": "crowd-horst-hausordnung",
+  "scope": "city street adviser only; not Bürgeramt Horst Stempelmann",
+  "status": "RAW CANDIDATE; awaiting alpha composites, registration and root eight-view source approval before motion",
+  "producer": "Built-in image_gen__imagegen; transparent_background=true; reference images inspected at native size before request",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "layout": {
+    "columns": 4,
+    "rows": 2,
+    "order": [
+      "down",
+      "right",
+      "up",
+      "left",
+      "down-right",
+      "up-right",
+      "up-left",
+      "down-left"
+    ],
+    "equalCellSlicingApproved": false
+  },
+  "inputs": [
+    {
+      "file": "raw/raw-eight-views-v1.png",
+      "sha256": "e5a0271c946b63a310202dd91b494ecc483e01c15349ed94f4edd3e5e8aa73fc",
+      "bytes": 2198979,
+      "role": "New built-in ImageGen raw8 candidate; unmodified bytes",
+      "originalPath": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac27-119e-75d1-b510-19e4ba8f1fe0/exec-fa503efc-62cf-4377-a612-928f97ca0185.png"
+    },
+    {
+      "file": "raw/reference-mature-front-v1.png",
+      "sha256": "ca5b9bba190fb9c7d25c4e5cf37aeffdb3201fb043532b852ddaa682d18474ff",
+      "bytes": 2198368,
+      "role": "Historical mature front: identity/style/proportion authority, provisional source pass only",
+      "originalPath": "C:/Users/cogpsy-vrlab/.codex/worktrees/street-painted-adults/GermanySimulator/assets/sprite-sources/berlin-street-20261022/crowd-horst-hausordnung-expressionist-standing-v1.png"
+    },
+    {
+      "file": "raw/reference-legacy-props-v1.png",
+      "sha256": "0d39b49ecf609735b344977ead6236377498e25b0e2210aaed06e2a757c29754",
+      "bytes": 1878438,
+      "role": "Old compact family: anatomical prop ownership/identity only; obsolete proportions",
+      "originalPath": "assets/sprite-sources/street-advisers/horst-hausordnung-keys-candidate.png"
+    },
+    {
+      "file": "raw/imagegen-eight-views-prompt-v1.txt",
+      "sha256": "2b6a2d8b88d010121a8e2dc9978f08c40441a77b5e69dc6873f92011f0685763",
+      "bytes": 4356,
+      "role": "Exact requested prompt",
+      "originalPath": "output/horst-height/author-prep/eight-views-prompt-v1.txt"
+    }
+  ],
+  "physicalProps": {
+    "clipboard": "anatomical LEFT hand",
+    "keys": "clipped anatomical RIGHT belt",
+    "rightHand": "empty",
+    "pen": "absent"
+  },
+  "initialVisualObservation": "Viewed actual new raw sheet. Distinct front/right/rear/left and four quarters; coherent older bald/grey-haired moustached/glasses identity, rust waistcoat/cream sleeves/long charcoal trousers/brown whole shoes. Initial prop sides match reference. Alpha/light-dark, exact family scale/registration, full profile whole-leg paint, mouth registration and source/native/gameplay acceptance remain outstanding.",
+  "restrictions": "No current runtime/canonical/voice/controller changes. No profile deformation or full family generation before source whole-leg/whole-shoe gate. No browser/GPU lease currently held."
+}

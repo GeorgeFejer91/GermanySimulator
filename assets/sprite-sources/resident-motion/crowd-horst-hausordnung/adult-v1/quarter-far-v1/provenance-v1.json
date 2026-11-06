@@ -1,0 +1,34 @@
+{
+  "actor": "crowd-horst-hausordnung",
+  "status": "NEW OWN RAW DESIGN ONLY; alpha/density/placement/motion not approved",
+  "toolMode": "Built-in image_gen; no CLI/API fallback",
+  "intent": "Genuine completion of own UP-RIGHT far anatomicalLEFT leg and wholeboot from original own source references",
+  "toolOutput": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac27-119e-75d1-b510-19e4ba8f1fe0/exec-72736d4d-61c9-4abb-8938-6f38bc2dd41d.png",
+  "rawFile": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/quarter-far-v1/raw-up-right-far-leg-v1.png",
+  "rawSha256": "f59ee52cb0b10b79f18da23556daeaa8bd9589e7b286e2742add91f5e2bf45d1",
+  "rawBytes": 716118,
+  "promptFile": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/quarter-far-v1/imagegen-up-right-far-leg-prompt-v1.txt",
+  "promptFileSha256": "a21849f3d942e7618add0204c3573ccb2bb6a1e21851eac0f357a1ef21d10a78",
+  "exactRequestPromptSha256": "2615ed56d8204199bcfea08dcf343085cb1772a39dd453922d10e1243ca8e37a",
+  "requestPromptTrimmedBeforeTool": true,
+  "transparentBackgroundRequested": true,
+  "actualAlphaInspection": "PENDING guarded source inspector; not assumed from tool preview",
+  "references": [
+    {
+      "file": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/quarter-far-v1/reference-up-right-full-native-light.png",
+      "sha256": "5c7d45d3aa4b8d09585a203c8b4dfcb02c092d4b81b0824c5ea016bf8c003281",
+      "role": "Actual own native reference, not edit target"
+    },
+    {
+      "file": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/quarter-far-v1/reference-up-right-lower-native-light.png",
+      "sha256": "cba9a422e8ba9596d67be3f55ae8d0b911c619aa2ea8236c380a0aaaf1b663b1",
+      "role": "Actual own native reference, not edit target"
+    }
+  ],
+  "sourceViewSha256": "161513197756d800f464e2aa4ab579bc0c2ef8244fd0cd04349ec415a633775f",
+  "originalNearFixedBodyFacePropsAndMouthsWritten": false,
+  "registration": "NOT RUN; one uniform measured density pending",
+  "rawGenerationMsApproximate": 34200,
+  "localCPUChildren": 0,
+  "localGPUContexts": 0
+}

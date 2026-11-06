@@ -19,7 +19,7 @@ NAMES=['crease','open_upper','open_lower','source_upper','source_lower']
 
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def validate(p):
- if not all(len(p[n])==5 and all(math.isfinite(v) and abs(v)<=1.5 for v in p[n])for n in NAMES):raise ValueError('Invalid five-point profile')
+ if not all(len(p[n])==5 and all(math.isfinite(v) and -1.5<=v<=(2.9 if n=='open_lower' else 1.5) for v in p[n])for n in NAMES):raise ValueError('Invalid five-point profile')
  if not(p['corners'][0]<0<p['corners'][1] and p['corners'][1]-p['corners'][0]>=.5):raise ValueError('Invalid attached corners')
  if not isinstance(p['width'],list)or len(p['width'])!=2 or not all(math.isfinite(v)for v in p['width'])or not(0<=p['width'][0]<=.2 and 0<=p['width'][1]<=.45):raise ValueError('Invalid horizontal lip style')
  if not math.isfinite(p['teeth'])or not 0<=p['teeth']<=1:raise ValueError('Invalid tooth exposure')

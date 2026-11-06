@@ -783,6 +783,1122 @@ bounded remaining profile pilot; Gartenzaun receives only the semantic-mask
 neutral trial after root actually views all four original prop/root crops.
 Neither private actor is admitted by this Hildegard acceptance.
 
+Hildegard publication and public proof complete: normal hooks/commit/push
+`21d0914486ab834509ec733bd6abafe9eaee9cd2`, Pages42179534689 SUCCESS. All19public
+critical files (5,150,538bytes), including nine own assets (4,039,041bytes), match
+that immutable commit. Root/3d query-hash compatibility and original ordinary
+H1/native14 desktop/portrait selected2.77/13.85 admission pass. Other42expanded
+committed records remain exact to verified89e. Original natural walking exceeds
+20units; all13notice intersections clear under source-derived natural waits.
+Already-clear notices do not establish a fresh expiry. Root actually views both
+accepted pages and four5x crown/braid/stocking/MaryJane crops; complete mature
+body, RIGHTbasket and whole shoes are clear beside the unchanged world.
+
+Retain first portrait fixture FAIL: the original lawful−95player observer let
+the full quad extend to430.27095 beyond390viewport width. Its held page and exact
+as-run helper remain. A fresh portrait-only successor prefers the existing
+lawful−45offset, retains every original assertion and records21natural movement
+units; whole quad now206.7966..359.2103. No actor/controller/pose/frame/UV/clock,
+camera geometry, DOM/style or production changes. Five attempted contexts close:
+four PASS/one retained fixture FAIL; final accepted scope is root/compatibility/
+desktop/portrait. All browsers/servers/helpers closed; GPU released. Evidence:
+`output/hildegard-height/live/`, root actual6image acknowledgement
+`root-viewed-v1.json` and `publication-layered-v2-v1.json`. This followup does not
+increase the20mature-citizen count; whole-cast goal remains active.
+
+Horst source continuation is now160source/320native profile poses, both profiles
+and five strengths, authored13.6305at2.33 with16.2045proportional proposal only.
+The own genuine hidden-cloth trial removes the previous two-hole failure while
+keeping every supported original pixel and neutral unchanged. Author actually
+views57pages covering160source/320native figures; root separately views26pages
+covering all320native figures and32fullstrength source figures/details. All713
+frozen source/helper/frame/report pins pass root recheck. Independent Physics
+source preflight is queued before full412family, mouths or runtime selection.
+Portable owned raw/registration/1008pixel backing closure is planned, not run.
+Evidence: `output/horst-height/profile-motion-pilot-v2/FULL-PILOT-HANDOFF-v2.md`.
+
+Gartenzaun neutral-mask v2 stays held. Seven actual high-alpha foreground flecks
+belong to fixed apron/towel, while55LEFT and74RIGHT sampled trouser/shadow pixels
+were wrongly fixed; these counts are partial semantic diagnosis, not a complete
+replacement mask. A closed0.782s/39.87MiB diagnostic-only child emits coordinate
+grids for three remaining source-edge gaps, preserving all38inputs and allv1/v2
+source/mask/report bytes. No motion, mouth or runtime change. Exact own full
+wellies and FAR0.22655037722724597 registration remain intact. Next action is
+source-traced ownership correction and root review, then a bounded pilot.
+Git: publisherHEAD/origin-main21d0914, no staged paths; this postpublication state
+update and private Horst/Gartenzaun authoring remain local. Primary checkout and
+broken default.git stay untouched.
+
+### Current private source gates — 6 November 2026
+
+Horst independent source/native Physics now PASS on all713unchanged pins:
+160source/320native,14,719,196independent four-neighbour whole-cuff/boot samples
+with zeroRGBAerror, no new alpha21holes/detachment and original fixed/NEAR/
+neutral exact. Actual67view files include all40native light/dark boards and
+source boot/hand/cloth details. One hundred fresh quantized contact samples,
+20source curves and120native correspondence curves explain actual source
+quantization; max sourcepatch/desktop/mobile residuals .036195/.161264/.4px.
+Retain three oracle diagnostic REDs, including LEFT.5near−23.450128 versus
+continuous−23.4 exactly predicted by independent quantizedRGBA. No centroid
+threshold widened or13.6305source clock refitted. All11children closed, maximum
+26.703s/133.36MiB. Evidence: `output/horst-height/review-physics-source-v2/`.
+
+Horst portable Task1 also PASS: raw-only owned v6 construction reproduces all23
+parts/masks,160source PNGs,320native PNGs and160field records exactly, with
+expected images read only after both complete new generations. New34source pins
+are frozen alongside old713; no art change. Four children close .906/22.438/
+22.687/1.906s, peak113.94MiB. Root reads full handoff and accepts equivalence.
+Next authorized scope is own Down/Up fullstrength32source/64native plus16source/
+32native representative reaction prototypes; no412bake, mouth or runtime yet.
+Evidence: `output/horst-height/portable-profile-v6-r01/TASK1-HANDOFF.md`.
+
+Gartenzaun v3 neutral source ownership passes owner22boards and root7actual
+source/native pages. The closed first-two-phase pilot passes4source/8native and
+root7actual pages, with complete original wellies, fixed RIGHTtowel/LEFTempty
+hand,17.875source amplitude/8lift/zero-root310/whole-wellie387. Full-cycle RIGHT
+phase02 then stops at nine genuine alpha21holes: eight previously painted pixels
+lose support beside the fixed towel, one original transparent pixel becomes
+enclosed. Actual inverse source/alpha diagnostic confirms both layers lack the
+required underlap; no boot fault or threshold waiver. Preserve partial2source/
+4native and failed third frame; no clock or full160approval.
+
+Gartenzaun's new genuine hidden navy-cloth raw ecb7d17a…fa32 passes root original
+and native light/dark view, owner alpha/context checks and true transparency.
+No source registration or coverage is inferred. The only authorized next trial
+uniformly registers it from actual own landmarks, clips new paint to original
+NEARalpha0 under named actual fixed occluder/ROI, preserves every supported
+original/FAR/boot/fixed pixel and neutral bytes, and rechecks RIGHTphase0/1/2.
+Twenty-two required empty inverse neighbours and three preserve-only neighbours
+are explicit. Source fields/opacity stay unchanged; no full160until trial/root
+gate. Evidence: `output/gartenzaun-height/near-cloth-backing-v1/` and the held
+`profile-cycle-v1/right-strength100/phase02-hole-diagnostic-01/`.
+
+Root owns newly prepared Klaus-Dieter Knödel source only. Built-in imagegen raw
+cardinals df333f12…8cf20 and quarters-v2 78b9e781…f45f24 preserve stocky mature
+identity, curls/moustache, brown corduroy/green shirt/olive-brown trousers/tan
+boots and ONE blue/two-white-band cloth LEFT, RIGHTempty. Held quarter-v1 has
+an incorrect rear-right head/profile; v2 corrects it and all4new native views
+are freshly inspected. All8views use ONE400/696isotropic registration,512²,
+pivot256/472. Root views both native2048×1024eight-view boards. Honest painted
+heights400–406 remain; no per-view fit or final Söder-height claim. Raw/alpha
+readers and registration close under10s guards; registration3.281s/164.57MiB,
+all22pins exact. Complete own opposing FAR-leg raw d1fad20c…aa0b4 has positive
+root raw/native view and2true-alpha components, zero perimeter paint; it is
+not registered. Next is own actual paired boot landmarks/FAR density and
+semantic leg/hand/LEFTcloth neutral gate. Selected live Knödel remains1.6.
+Sources/prompts/receipts: `assets/sprite-sources/resident-motion/` then
+`crowd-klaus-dieter-knoedel/adult-v1/README.md`; local evidence `output/knoedel-height/`.
+
+Latest source checkpoint: Horst Task2 now has48source/96native, author12boards
+and root12actual boards PASS. Original supported paint,200103wholeboot and97147
+prop samples match; minJacobian .733906. Preserve the first neutral guard RED:
+only10Down/11Up original alpha0 bookkeeping pixels differed (DownRGB0/1;
+Up also has RGB2 at262/331); after strict
+alpha1..255/ownership proof, versioned restore of RGB only where bothalphas0
+makes literal neutral exact. No mask/field/opacity/art change. Frozen210paths
+c155309c…494bf plus old713+34 remain intact. Independent Physics Task2 now PASS:
+fresh48source/96native,946unique pins exact,221936wholeboot/94325prop samples
+zeroRGBAerror, minJacobian .7339061199, no new holes or detached parts. An
+independent max-hidden-RGB1 guard also fails on the actual UpRGB2 pixel; its
+eleven-coordinate proof is retained, without broadening a paint threshold.
+Five children close (fourPASS, one retained oracle RED), max9.484s/123.94MiB.
+Root reads the full review and accepts this source scope. Evidence:
+`output/horst-height/front-back-prototype-v2-r02/TASK2-HANDOFF.md` and root
+`output/horst-height/root-task2-viewed-v1.json` (all48/96actual figures), plus
+`output/horst-height/review-physics-cardinal-reactions-v1/`.
+
+Gartenzaun first uniform cloth fit .1296361852 gives0/22required support and
+stops before backing/motion. Its inferred hip and raw finished-band-to-high-
+Wellington correspondence are unverified; no intrinsic raw-art failure follows.
+Closed read-only crosssections prove actual Near widths49/47/44 versus fit30/
+27/22 and retain actual paint endpoints. A separately reviewed LOCAL MATERIAL
+proposal uses opaque widths48/47/42 versus raw243/227/206, one scalar30985/153014
+and translation121.34386396/237.50131361. It claims no raw600=knee or complete
+leg anatomy and uses no hole markers as fit targets. One fresh technical-v2
+trial passes unchanged22>200support/strict-admission/neutral and phase0/1/2
+gates. It adds1802genuine hidden pixels, preserves all6774supported original
+Near pixels and every Far/fixed/Left/wholeboot pixel. All nine old gaps now
+have alpha248..253; three source/six native poses pass. Root reads full owner
+review and actually views six source/native boards plus admitted backing.
+Child closes4.531s/245.05MiB; all30guard pins exact. Root acknowledgement:
+`output/gartenzaun-height/root-backing-technical-v2-viewed.json`.
+Evidence: `output/gartenzaun-height/near-cloth-backing-v1/` technical and
+registration-anatomy diagnostic handoffs/proposal.
+
+Knödel measured alpha probe closes1.282s/71.27MiB with42source pins exact. Both
+proposed Near toes are actually alpha0/2of25strong pixels, so they remain held.
+The original two profiles also show old upper/rear Far toe/sole paint behind
+the foreground boot:153/154widths are a merged two-foot envelope, not genuine
+Near widths. The measured .3652935437envelope ratio is unselected; actual new
+Far bearing pivots667/1507at711 replace neither source nor transform yet. Next
+is explicit Near/old-Far semantic ownership and true Near-foot measurement,
+preserving old Far residue separately to avoid a third boot. No registration/
+neutral/motion follows that probe. Author owns only this private namespace and
+pauses it while independently reviewing Gartenzaun inter-leg topology. Its
+static semantic-v2 proposal separates foreground Near, preserved original Far
+residue and fixed forebody/owned props. Manual Near widths78/79 and paired
+157/483ratio remain unmeasured/unselected. Root reads the full proposal and
+views the actual boot comparison and both original profile crops. Next is
+bounded ownership raster/real-alpha measurement, before Far registration.
+Evidence: `output/knoedel-height/SEMANTIC-OWNERSHIP-PLAN-v2.md` and
+`output/knoedel-height/probe-real-alpha-v1/MEASUREMENT.md`.
+
+Horst own five lip fits use actual painted creases and three explicit rear
+nulls. First pilot preserves nine source/eighteen native states before RIGHT
+mobile supported-paint RED; Left/Down-left/null checks are NOT RUN. The saved
+RIGHT source changes15pixels and desktop one alpha254pixel, but mobile only
+one alpha23fringe pixel by2RGB; all alpha>=128paint remains unchanged. This is
+weak fringe activity, not a literal byte no-op or approved articulation.
+Diagnostic closes1.688s/110.63MiB with949old/951total pins exact. Root reads
+full diagnostic and actually views source whole-head/mouth, desktop and mobile
+closed/open crops; the opening is on the actual lip below the moustache.
+Read-only pilot-versus-shipped-GLSL audit confirms integer texture-grid versus
+continuous display-fragment sampling and differing colour/filter paths. GLSL
+aperture gain still uses texture pixels; oversampling alone proves nothing.
+Root reads full audit/plan. An unchanged RIGHT-only production shader probe is
+authorized at fixed existing common-ground camera/geometry in desktop,
+portrait and landscape; current fit/alpha/thresholds remain exact. No anatomy
+widening, test-only AA, full412family or runtime change is authorized.
+Evidence: `output/horst-height/mouth-first-pilot-v1/right-mobile-diagnostic-v1/`.
+
+Actual unchanged-shader RIGHT proof is quantitatively active but visually held:
+valid desktop126figure rows/2supported pixels/max7RGB; corrected portrait133/
+3/max1; landscape61/1/max6, both themes. Original alpha/head/closed/inactive/
+bodyprops exact. Root reads full RESULT and views five desktop plus five valid
+mobile actual display/head/mouth files; portrait opening is not convincingly
+distinguishable. Run01 mobile lacked viewport meta and is invalid for intended
+size; preserved sibling run02 asserts390x844/844x390/buffer/ratio1 before cues.
+All5contexts/two browsers/servers close, resources0, old949+shared/native pins
+and run01files exact. No shader/AA/anatomy/threshold change; no runtime admission.
+Evidence: `output/horst-height/mouth-first-pilot-v1/runtime-glsl-proof-v1/RESULT.md`.
+
+Read-only anatomy audit establishes that1.1source-pixel lower opening/normal1.2
+were conservative initial choices, not measured full-opening maxima. Actual
+lower-lip126..127/bright jaw128..129 precedes chin/alpha fall132..135. Root reads
+full audit and approves ONE source-gated RIGHT proposal: physical lower offsets
+0/1.3/2.4/1.2/0 and collar normal1.6, unchanged corners/crease/tangent/upper/
+width/teeth. Dense whole-contour/collar support/protected paint/positive transport
+and actual source view precede any new actual shader trial. This does not approve
+an aperture increase based on native samples. Original fit/REDs remain intact;
+Left/Down-left/null/full412 remain held. Evidence: `right-anatomy-audit-v1/`
+under the same mouth-first-pilot owner; new trial is `right-source-room-v2/`.
+
+Gartenzaun's resumed full-cycle-v2 stops at RIGHT fullstrength phase04 after
+four source/eight native poses. Its two new alpha21enclosed pixels at240/432
+and241/435 lie between complete Wellington shafts; exact independent scalar
+reconstruction matches every saved phase02/04alpha byte. Eighty alpha-only
+predictions find zero cloth-band gaps, while fullstrength04/11/12/13 predict
+2/42/93/18enclosed pixels. Independent80case classification now PASS on all155
+pixels/six components: phase13 splits16+2, all outside both filled individual
+legs, both owner-boundaries touched, fixed/named0, inverseY>=417, zero individual
+Wellington/uppercloth holes. Fresh112500wholeboot RGBA samples have zero error,
+minJacobian .8614863. One child closes6.062s/123.07MiB/all118+32pins exact.
+Root reads full review/predicate and views actual alpha-owner/inverse-perimeter
+boards. Approve a NEW local semantic guard, preserving old global RED; actual
+native components need independent post-composite/filter ownership certificates,
+never resized source-hole exemptions. No full160/320cycle or cadence approval.
+Root reads
+full owner diagnosis and views both exact-point grids. A narrow independent
+semantic review distinguishes valid projected inter-leg background from
+missing paint within a surface; full RGBA/native continuation follows its gate.
+Do not fill negative space or change fields/alpha/clock. Diagnostic closes
+3.781s/100.22MiB, all118+32pins exact; global guard RED remains retained.
+Evidence: `output/gartenzaun-height/profile-cycle-v2/right-strength100/`
+then `phase04-support-diagnostic-01/`.
+Independent evidence: `output/gartenzaun-height/review-interleg-space-v1/`.
+
+Gartenzaun actual successor first fullstrength RIGHT16/32 passes23.829s/184.44MiB:
+source155pixels/six certified interboot components, native Desktop10pixels/three
+components and Mobile6/three, every native filter/owner certificate independently
+recomputed; zero material/uppercloth/wholebootRGBA/root/fixed errors. Owner14
+actual pages; root seven actual fullsource/native/boot/prop pages. LEFT16/32
+also passes24.047s/184.01MiB, source135/six, Desktop8/four, Mobile3/three; owner14
+and root six actual pages. Both zero-strength sections close exact neutral with
+zero holes; source/native exports unchanged. Root authorizes remaining stop
+strengths sequentially, one bounded child/actual14page owner review per terminal,
+firstRED stop; full160/320/clock still unaccepted until complete review. One
+output-only zero-component counting setup error is preserved/corrected; no
+generation/guard/source/RGBA rerun or threshold change. New125freeze includes
+all118old exact inputs;34wrapper pins exact. Sourceclock remains unset.
+Evidence: `output/gartenzaun-height/profile-cycle-v3/`.
+
+Full Gartenzaun profile pilot is now complete:160source/320native, ten bounded
+sections, all140actual source/native light/dark pages personally viewed by
+owner. Root reads full owner review and views29actual pages, including every
+native cell plus both fullstrength source/wholeboot/prop sets. Fresh root1125
+pin verification passes. Freeze038e9a68…690b binds125inputs+1000outputs; source
+certified background290pixels/12components, Desktop18/7 and Mobile9/6. Every
+reduced-strength section has zero new enclosed background. Wholeboot/root/native
+RGBA errors0, fixed exact, individual material/uppercloth holes0. Ten children
+close max25.078s/184.44MiB, no low/abort. Root acknowledgementd74f28e6…435b9
+at `output/gartenzaun-height/root-profile-v3-viewed.json`. Old global REDs stay
+intact; this is source/native profile approval, not a full412 or runtime claim.
+
+Both own stance proofs also pass owner/root source review:40wholeboot layer
+checks,20source recompositions with saved upper context,40native fullRGBA checks
+all exact. Eighty actual five-point witness records and16x129continuous samples
+derive RIGHT−71.5/LEFT+71.5pixels per cycle from the exact frozen4A coefficient.
+Saved wrapped-F64 image association is explicit; unwrapped phase16 reads saved0,
+not a substituted2pi resample. Far heel/toe/rim occlusions are qualified; sole
+remains visible, no invented endpoints. Max quantized native centroid residual
+RightD/M .544218/.504139 and Left .451144/.627571px are diagnostics, not thresholds
+or cadence fits. Own Down400/currentS=.02/authored2.33 proposes20.824375units;
+future2.77 proposes24.756875. Both remain UNINSTALLED, clocknull. Children close
+7.047/7.782s, max178.125MiB, no low/abort. Root reads both owner reviews and
+views all4actual witness boards; freshly verifies1149unique referenced pins.
+Root acknowledgemente5ae3376…874ff7 at `output/gartenzaun-height/root-stance-v1-viewed.json`.
+
+Independent read-only profile/stance Physics is now assigned at
+`output/gartenzaun-height/review-physics-profile-stance-v1/`; first freshRIGHT1
+16source/32native section passes25.313s/144.52MiB/all1155reviewpins exact. The
+remaining sections/contact review are still pending. Own Down/Up+quiet control
+proposals are STATIC ONLY under `output/gartenzaun-height/cardinal-reaction-prep-v1/`:
+concrete apron/hand/towel/backbow/trouser traces, below-hem cloth risk and full
+high-boot rim boundaries. Exact alpha/rasterization/depth/quiet pilot not run;
+depth deliberately null, no borrowed default or clock authority.
+
+Independent review later reaches six actual PASS sections (fullstrength/0/.25
+both profiles),96fresh source/192native. All1155review pins stay exact; new
+RGBA/owner/certificate predicates have no waiver. RIGHT.5 then hits unchanged
+60s startup guard before any case report/stdout/stderr entry; process terminates
+active0, peak37.96MiB/min4663MiBfree/allpins exact. This establishes no .5art
+failure or coverage. Preserve the resource RED. One10s-limited startup diagnostic
+closes4.234s/64.87MiB/all1187pins exact: same imports/module/header readiness
+recover in2.698s, historical cause UNKNOWN. Root authorizes one fresh same60s
+RIGHT.5 retry (`right050-retry01`), followed only on actual PASS by remaining
+sections/independent stance. Any new RED stops; no timeout/memory/oracle/alpha
+widening or source rewrite. Same60s RIGHT.5 retry now passes16source/32native,
+31.906s/142.27MiB/all1199preservation pins exact; actual pages viewed, original
+resource RED intact, cause still UNKNOWN. Seven sections/112source/224native
+are complete; LEFT.5/RIGHT.75/LEFT.75 and independent stance are pending under
+the existing single-lane lease. Evidence remains in the same review namespace.
+
+Knödel's first semantic measurement closes0.781s/47.75MiB/all42masters exact.
+Diagnostic partitions reconstruct every original RGBA and assign each positive
+pixel once; old Far remains separate2443Right/2925Left alpha20pixels. New Near
+toe witnesses281/456 and231/456 pass25/25strong/source-owned, both old failures
+retained. Mask-defined widths81/84 differ from manual78/79; proposed paired
+.3416149068 remains UNSELECTED. Root reads full measured HOLD and actually views
+four isolated/boundary boards; agrees with author8+4views that a thin LEFTblue
+cloth edge and small jacket/hem fragments still belong to fixed source.
+Preserve593Right/441Left positive ambiguity-strip pixels. Next is static v3
+integer-edge refinement, then a separately leased conservation/part/boot check;
+no broad pants block, palette classifier, erosion or deletion. No Far
+registration/neutral/motion. Evidence: `output/knoedel-height/semantic-measurement-v2-r01/`.
+
+Knödel v3 narrow correction conserves every sourceRGBA/positive ownership and
+v2boot414+assignment, all75pins including42masters+27v2artifacts exact. Child
+closes1.031s/69.5MiB;517changed owner pixels are recorded with originalRGBA.
+Root reads full HOLD and views four current part/narrow-grid pages. Thin LEFTblue
+fringe/tiny root fragments remain, and changed handshadow273/291 falls outside
+the first magnified ROI; identity stays unresolved. Preserve all failed/trial
+rasters,81/84widths/.3416149 unselected. Author may use two bounded fresh edge
+diagnostics/candidate passes with explicit slot coordination to locate and
+correct only actual garment/hand edge pixels; every changed point needs actual
+source context. No broad pants masks/palette/morphology or Far registration.
+Evidence: `output/knoedel-height/semantic-measurement-v3-r01/MEASUREMENT.md`;
+next local namespace `output/knoedel-height/semantic-edge-v4-r01/`.
+
+Knödel v4 first read-only edge diagnostic closes1.781s/97.92MiB/all110pins exact.
+Its exact source grids distinguish clear bluecloth/jacket/wrist residue from
+mixed dark boundary paint. Root reads full review and views8actual marked/
+unmarked contexts. Explicit artist choices retain273/291asNear,241/357asoldFar,
+242/359asfixedcloth; RIGHTfour dark root pixels stayNear with a future shared
+upper-zero/forebody transform constraint, NOT RUN. These choices do not assert
+unique material labels can be recovered from mixed antialias pixels. No palette
+or broad488candidate-ROI ownership rule is allowed.
+
+The one manual candidate changes167positive owner pixels (R5/L162), preserves
+every originalRGBA/one-positive-owner and every414+boot byte; all146pins exact,
+child1.547s/62.76MiB/closed. Author20actual views retains SEMANTIC HOLD: separate
+LEFT bluecloth fringe remains inoldFar at inspection239..247/302..330, plus
+hand-edge review at LEFT243..247/280..290 and RIGHT258..274/301..316. These are
+inspection windows, never correction masks. No automatic third child; no Far
+registration/neutral/motion. Whole actual forebody/cloth/hand contour refinement
+is the next Ksource action; manual method remains viable. Source author now
+temporarily performs independent GPhysics; K146/source42/v2/v3 and all failed
+trials remain intact. Evidence: `output/knoedel-height/semantic-edge-v4-r01/`
+and `candidate-01/REVIEW.md`.
+
+Root additionally prepares Waltraud Wartemarke's own mature raw8/Far sources.
+Built-in imagegen cardinals bc4c994b…5fbf8, quarters011525bd…310aa, Farcc4b1848…
+8fa5a retain silver bun/plumcoat/creamjumper/charcoaltrousers/brownlace shoes
+and ONE burgundy/three-tab folder LEFT, RIGHTempty. All true-alpha,4/4/2major
+components, zero alpha20perimeter. Root actually views all8native raw figures,
+both Far parts and both registered2048x1024light/darkboards. One400/763scale
+applies all8 at512²/pivot256472, actual heights398–401; no per-view fit.
+Raw reader1.532s/60.5MiB and registration3.765s/164.57MiB close with all8/9prior
+pins exact. Far is raw-design-only: actual full-leg/boot anatomy and density
+remain unmeasured, no registration or motion. Original voice profile and7files
+are pinned unchanged. Root source acknowledgement086c8dc1…94e2c; live remains
+old1.6. Sources/prompts/built-in mode: `assets/sprite-sources/resident-motion/`
+then `crowd-waltraud-wartemarke/adult-v1/README.md`; evidence
+`output/waltraud-height/`. No fourth author or runtime admission is inferred.
+
+New root `tests/horst-hausordnung-adult.test.mjs` is intentionally RED on the
+current1.6height. It asserts original actor ownership, selected2.77height,
+proportional own stride,16phase walks/stops and own delivery/mouth links. Keep
+it private until complete Horst admission; no workflow change or isolated test
+publication. Evidence: `output/horst-height/pre-admission-height-red-v1.log`.
+
+Horst RIGHT source-room correction passes a dense source gate before expansion:
+5005contour/81081oral-interior samples minAlpha228.4848,251001collar samples,
+206503outside-lip samples minJac1/exact identityguards,62467protected face pixels
+and wholealpha/bodyprops exact. Three source/six native states close1.469s/
+130.05MiB/all1122preservation pins exact. Root actually views source mouth/head
+and native states; mobile CPUcentre-grid still FAIL/HOLD0supported, desktop1/
+max78. This contrary oracle is preserved without claiming supported nativePNG
+change.
+
+Same-production-GLSL corrected RIGHT proof now passes its restrained prototype
+source/material art scope: desktop5supported pixels/max34RGB, portrait4/max13,
+landscape1/max11, unchanged figure126/133/61rows. Root reads full RESULT and
+views five actual display/crop files; author27actual views. Corrected portrait
+lip change is distinguishable and attached below unchanged moustache; no alpha,
+nostril/skin/bodyprop change. All3strict viewport/buffer/ratio1 contexts,
+renderers/resources/browser/server close, old+new pins exact. No AA/shader,
+width/corner/tangent/upper source or body geometry change. Root acknowledgement
+1ac148f9…95e2b4 at `mouth-first-pilot-v1/root-right-source-room-v2-viewed.json`.
+Evidence: `output/horst-height/mouth-first-pilot-v1/runtime-glsl-proof-source-room-v2/`.
+
+Portable owned mouth fits/helperv2 change only approved Rlower/collar; four other
+fits/three rear nulls and oldv1 are exact. Corrected eight-pin PREP receipt keeps
+the first empty path-array setup failure rejected/intact. Sequential fit1.828s/
+102.16MiB, five-view pilot3.563s/126.23MiB, separate postgeneration replay1.062s/
+27.67MiB all close with1257/1257/1258pins exact. Exactly15source/30native and3
+explicit null no-render identity rows; other four native activity gates pass
+(LEFTmobile1/max9, Down-leftmobile1/max2), while Rmobile0 remains separate held
+oracle. All9portableRsource/native states everyRGBA and compiled profile/actual
+float32 registrations reproduce accepted trial exactly; tiny double serialization
+differences are recorded. Full five-view actual source/native art review is
+complete at source scope: author66actual fit/pilot/rear pages, root14new head/
+native pages plus previously viewed exact-replayed Rsource. All30native cells
+actually viewed. Fresh root1389pin check passes; source cavity/alpha/protected
+paint/replay PASS, mobile LEFTsubtle and Down-leftmax2 readability HOLD. Four
+other actually projected production-GLSL views are NOT RUN. Root acknowledgement
+c7898e58…93109 at `output/horst-height/mouth-source-pilot-v2/ROOT-VIEWED-v2.json`.
+Only preparation for those four exact-source/material display probes is now
+authorized; no anatomy/refit/shader/AA change or browser launch without quiet
+lease. No full412/body-mouth propagation/runtime admission. Evidence:
+`output/horst-height/mouth-source-pilot-v2/` and owning `FIVE-SOURCE-MOUTH-PILOT-v2.md`.
+
+The four remaining real-GLSL rest-view harness is PREP ONLY at
+`output/horst-height/mouth-source-pilot-v2/remaining-views-glsl-v1/PLAN.md`:
+Down/Down-right/Left/Down-left x3layouts, twelve sequential contexts, same
+source/profile/material/AA/alpha/camera/plane, strict viewport/buffer1 and full
+closure. Original Right evidence is retained without rerun. No import/compile/
+browser execution yet; source1389fence bound, quiet GPU lease is still required.
+
+That remaining-view probe has now run: twelve sequential real-production-GLSL
+contexts preserve exact buffers, float32 bindings, alpha, protected upper face
+and body/props. All contexts/resources/browser/server close; all1771sealed pins
+are exact. Down is distinguishable in all three layouts. Down-right landscape,
+all three Left layouts and Down-left landscape remain visually HOLD; the other
+seven comparisons establish only their prototype scope. Root reads full RESULT
+and views the six weak closed/open crops. Evidence:
+`output/horst-height/mouth-source-pilot-v2/remaining-views-glsl-v1/`.
+
+The subsequent original-source anatomy audit finds unused genuine lower lip
+support in Down-right/Left/Down-left, rather than a reason to enlarge the upper
+collar. Its1796pins and18actual source views are frozen. A separately authorized
+lower-only physical trial stops at the first Down-right compiler validation:
+the proposed normalized lower curves exceed the symmetric1.5limit. No source
+gate or image renders; Left/Down-left are NOT RUN. The1808pin first-RED seal,
+unchanged controls and closed1.406s/77.36MiB job remain intact. Left cannot fit
+that limit by enlarging its normal while retaining the protected upper row.
+This is a representation failure, not failed source-paint support. Root is
+reviewing the actual shader's asymmetric skin bounds(-1.6,+3) and a possible
+open_lower-only validation correction; no shared code/GLSL/artwork has changed.
+Evidence: `remaining-source-room-audit-v1/`, `remaining-source-room-trial-v1/`
+and `output/horst-height/mouth-validation-domain-v1/` (study pending).
+
+Gartenzaun independent PROFILE Physics now PASS: exactly160source/320native
+unique cases, strict whole-layer/source/post-composite nativeRGBA equality,
+no individual-material/uppercloth holes and all1218pins exact. The independent
+owner personally views76stored pages; root reads full review/verdict. Certified
+interboot background remains290source/18desktop/9mobilepixels. Two resourceREDs
+are retained: startup-only RIGHT.5 and incomplete RIGHT.75. The latter's nine
+non-atomic partial cases are excluded; max-four-phase additive sections cover
+both.75profiles with unchanged oracle/60s/384MiB limits. All19children terminate.
+Independent stance is separately leased, still pending; clock remains null.
+Evidence: `output/gartenzaun-height/review-physics-profile-stance-v1/`.
+
+Knödel v5 complete-context contour candidate changes125owners while preserving
+originalRGBA, all414+boot ownership and every explicit root choice. The child
+closes2.594s/55.125MiB, all1345inputs exact; author views24complete source/parts
+pages. Root reads full review and views both entire hand/cloth light contexts.
+Two clear residues remain: opposite RIGHTwarm hand edge and LEFToldFarblue-grey
+cloth fringe. Candidate stays HOLD; no Far registration/motion. The owner is
+authorized to finish explicit complete-perimeter artist decisions in additive
+v6candidates, retaining failed candidates and strict conservation. Mixed AA
+requires a source-owner decision, not uniquely recoverable material identity.
+Evidence: `output/knoedel-height/whole-prop-contour-v5/candidate-01/`.
+
+Gartenzaun independent STANCE also PASS:16supported heel/toe/rim/sole witnesses,
+80saved records and2064continuous positions,40wholeboot/20source/40native
+replays all strict0RGBAerror. Both feet give71.5sourcepixels/cycle; source/native
+quantization and13source/14per-density hidden Far witness records are qualified.
+Both children close5.562/5.797s, peak155.71MiB, all1262pins exact. Root reads
+the complete independent profile/stance reports, freshly verifies1262pins and
+accepts20.824375 at authored2.33 /24.756875 at future2.77 for a NEW private
+source successor. Runtime clock remains unwritten. Root acknowledgement:
+`output/gartenzaun-height/root-independent-profile-stance-v1-accepted.json`
+(90a10847…3674). The source author now advances own Down/Up semantic/rim and
+projection-derived depth gates, two extrema/cardinal and first conservative
+DownLOOK prototype; no full412 or world claim.
+
+Knödel refined v6 source contour now PASS after all24owner pages and4root
+complete hand/cloth/forebody contexts. Thirty original-positive owner changes
+(Right24/Left6) remove the clear v5fragments, with explicit mixed-AA artist
+boundaries. OriginalRGBA, all414+ownership and root points remain exact; no
+recognizable trouser block is fixed. One child closes2.313s/55.16MiB; no extra
+refinements. Root reads full review and freshly verifies1396input+49candidate
+pin entries, covering1440unique paths because5helpers occur in both maps. All
+duplicate expected hashes agree; root freshly verifies1440unique paths again.
+The earlier root message's1445unique wording is corrected in
+`output/knoedel-height/root-source-contour-v6-pin-cardinality-v1.json`; original
+acknowledgement/seal stays intact. Root acknowledgement `output/knoedel-height/root-source-contour-v6-viewed.json`
+(3fdeebe0…7103); source seal ed26c5d1…ace84. This admits only contours; newFar
+registration is next, initially static source/landmark/density proposal with
+no child until a lease. Original oldFar remains archived separately, and the
+new completeFar must replace it without a third boot. All previous failures
+remain intact. No source motion/clock/runtime/publication follows yet.
+
+Horst lower-domain study is root-reviewed: open_lower alone can use[-1.5,2.9]
+inside existing-1.6/+3coordinate guards; all other curves stay±1.5. This changes
+structural admissibility, not art quality. Positive rational skin spans and
+outside-skin bite derivative are distinct from oral-interior collapse and final
+RGB-AA protection. Two-predicate isolated candidate-copy tests are authorized;
+real compiler/JS/source remain unchanged pending their evidence. Existing shader,
+packing, catalogue profiles and invalid-geometry constraints must stay exact.
+Study/patch/test plan: `output/horst-height/mouth-validation-domain-v1/`.
+
+Isolated Horst domain checks now PASS in two closed bounded children: JavaScript
+0.922s/47.63MiB and Python1.640s/73.93MiB, all1862guard pins exact. All6526current
+profile occurrences (235unique) retain identical packedfloat32; the full GLSL
+and packing function are exact. Five actual old source registrations compile
+identically. The three proposed physical Horst lower curves retain the old
+compiler rejection and pass only the candidate validator; upper/crease/corners/
+normal/axes remain exact. Thirty JS and28Python invalid cases are rejected.
+Representative5profilesx18cues cover1594259outside-skin samples, minimum positive
+derivative .00399351614/minspan .1/coordinate guard error0; oral interior and
+RGB-AA quality are deliberately separate. Root reads the actual checks/reports
+and freshly verifies1861input hashes. Structural acknowledgemente9f12723…05dc5
+is `mouth-validation-domain-v1/ROOT-STRUCTURAL-ACCEPTANCE-v1.json`. This authorizes
+the unchanged-physical-controls dense source trial with the isolated candidate
+compiler; it does not adopt the real shared predicates or artwork.
+
+Gartenzaun own cardinal source measurement closes2.062s/34.90MiB with1276pins
+exact and18whole-source/coordinate boards, no segmentation or motion yet. The
+author is reading actual rims, low towel, apron/bow and collar before disjoint
+neutral controls and projection-derived depth. Knödel's author resumes static
+completeFar/raw/accepted-v6 source inspection and landmark/density proposal;
+no registration child or newFar neutral is admitted yet.
+
+Horst's three lower-only prototypes now pass dense source gates:9source/18native,
+30owner boards and9root boards/all18native cells. Original face/alpha/bodyprops,
+Down/Right and rear-null bindings remain exact; root freshly verifies1946pins
+and records source-art acceptancec18e9712…20d3b in
+`remaining-source-room-trial-v2/ROOT-SOURCE-ART-v2.json`. Its isolated compiler
+does not adopt the real shared predicates. Nine subsequent real-GLSL candidate
+admission cases close cleanly:9contexts, all resources/browser/server closed,
+1951inputs exact and270PNG hashes,81actual owner views. Source/material coherence
+passes, but clear LEFT/Down-left landscape articulation remains HOLD at1:1.
+This is not a broad speech/media/fullfamily PASS. Evidence:
+`output/horst-height/mouth-source-pilot-v2/remaining-source-room-glsl-v2/`.
+
+A two-case Horst resolution diagnostic reuses genuine96x120 originals at the
+same logical2.77plane/camera instead of64x80; it does not enlarge anatomy or
+alter GLSL. The first attempt stops after LEFT rendering on signed-zero metadata
+comparison: live-0 versus JSON-stored+0, with all nonzero controls identical.
+Its30partial captures remain unaccepted. An unrun successor's stale image-path
+record was caught before launch. The additive corrected runner compares actual
+profiles literally to frozen raw JSON, then exactly canonical JSON to persisted
+old profiles; no epsilon or profile mutation. Newrun02 closes2/2contexts in4.49s,
+all2286inputs/60images exact,40actual old/new views. LEFT becomes1pixel/max14
+versus1/max10; Down-left2/max5 versus1/max6. The2.25xRGBA texture cost does not
+resolve landscape articulation, so density0.75 is not selected. All failures and
+unrun versions remain intact. Fencefba13a0e…967e/2354pins and results are under
+`remaining-source-room-resolution-v1/`. Next is one source-anatomy maximum-opening
+assessment for LEFT/Down-left using their actual remaining lower-lip paint;
+normal/upper/corners/width/teeth/AA remain fixed. No new source or render is
+authorized by that static assessment alone.
+
+Knödel's completeFar neutral registration uses one55/161scalar and admitted
+translations on both whole legs. OldFar participation is0; original Near/fixed
+copies stay exact,12actual source patches are25/25alpha200, independent alpha
+composition has0error. Root reads the full source review and views8pages. Its
+inherited sub20haze is retained in r01, then a new prepared successor applies
+the actor's existing post-registration alpha<20 rule:783Right/608Leftpixels
+cleared, everyFarA>=20RGBA exact, no rescale/refit. All original Near/fixed/raw
+files remain exact; final-composite differences through partial alpha are
+honestly measured. Both prepared fullsole bounds end at472. Owner16/root4actual
+new boards and fresh1539unique pins pass; root acknowledgementc2bb8dfd…f6d9b is
+`output/knoedel-height/root-prepared-neutral-v2-accepted.json`. Both children
+close2.093/2.125s, peaks106.10/87.90MiB. Source neutral is accepted; no motion
+plateau or clock yet. The own static field proposesA11.55/lift4.95/zero-upper286
+and material-checked rigid412. A portable raw/coordinate rebuild must pass before
+separate bounded RIGHT/LEFT0/4/8/12 source/native pilots. Genuine missing Near
+paint may not be hidden by a lower root or supplied by a relabelled Far layer.
+
+Knödel's portable-neutral/material child subsequently closes2.546s/99.88MiB,
+all1554input paths exact. Both profiles' ten generated source-part/Far/neutral
+PNGs reproduce the admitted products byte-exact; comparison images are opened
+only after both new generations. New own root/knee/calf/cuff paint probes pass
+25/25alpha200. Actual material/plateau context review remains pending before
+the first moving child; no gait or clock is accepted by this source replay.
+
+Actual Knödel cuff-context review then HOLDS candidate412 before any moving
+child: LEFTFar's upper diagonal bunched cuff crosses above that line (roughly
+registered405..412 in the visible source context, not a newly measured support
+set). Portable equality remains PASS. Preserve both verdicts; source-owned whole
+cuff bounds and a higher rigid plateau must be reviewed before RIGHT/LEFT poses.
+No field was silently changed and no boot/cuff deformation was rendered.
+
+Gartenzaun cardinal neutral01 and first refinement reconstruct exact original
+RGBA but remain semantic HOLD for towel/finger fragments. The final additive
+source refinement transfers203explicit original-positive owners cumulatively;
+Down is unchanged from the first repair and Up's complete low towel is fixed.
+All6041Down/5774Up wholeboot pixels and12rim witnesses retain ownership. The
+tiny mixed dark receiver edge remains an explicit trouser-side artist choice.
+Owner14/root4complete context boards pass. Root reads the complete review and
+freshly verifies1449pin entries/1447unique paths, recordingabf6f172…e46b4 at
+`output/gartenzaun-height/root-cardinal-neutral-v3-accepted.json`. Last child
+closes2.563s/70.09MiB; earlier source failures remain immutable. Next authorized
+work derives own front/rear depth from actual world/camera projection and the
+accepted private source clock, proves the floor/wholeboot convention, then two
+extrema per cardinal and the conservative DownLOOK prototype. No full412,
+runtimeheight/world or publication admission follows from neutral semantics.
+
+The final fixed-face Horst envelope is now source-accepted: LEFT lower distances
+0/2.1/2.95/2/0 end near127.694 within original lip127..128; Down-left0/2.8/3.75/3/0
+ends near118.395 before skin119/chin121+. Normals, upper face, crease, corners,
+width0 and teeth0 remain fixed. A static missing-template-argument PREP-RED is
+preserved; additive repair changes only wrapper preparation. One child closes
+3.031s/145.43MiB,2366inputs exact,6source/12native and20owner boards. Root reads
+full source handoff and views6boards/allstates, freshly checks2415pins and records
+33941ad4…a11ea at `remaining-mouth-extremes-trial-v1/ROOT-SOURCE-ART-v1.json`.
+Source oral/contour alpha remains250+, jaw/chin and beyond-guard paint exact.
+
+The final standard-density six-case GLSL proof closes8.39s/6contexts with all
+resources/browser/server released,2423inputs/180PNGs exact and60actual owner
+views. Desktop/portrait show attached lip darkening; landscape remains L1pixel/
+max13 and Down-left2/max11, with clear1:1 articulation still HOLD. Root reads
+the complete result, views6actual comparisons/headcrops and freshly checks2615
+pins; material-only reviewfad840a4…44c79 is under
+`remaining-mouth-extremes-glsl-v1/ROOT-MATERIAL-REVIEW-v1.json`. No further
+anatomy/density/AA/gain search is justified. Source-family candidate work may
+continue while final actual-game/media acceptability remains open: portable
+five-source fitsv3, own remaining quarter gait controls, changing-pose mouth
+pilots, then full412candidate preparation. Real shared validators, selected
+actor, height and publication are still unchanged. No broad speech PASS follows.
+
+Gartenzaun's first cardinal geometry attempt stops before images because the
+C1 swing cubic exceeds nominal±1. Its exact extrema are±4sqrt(6)/9; the actual
+depth-plus-lift envelope supplies phase-constant source-floor offsets
+Down-14.695706592523203/Up-14.705053715149758 at depthA14.683035714285714.
+Strength0neutral and planted derivative stay exact; there is no clamp or
+amplitude/clock fit. The next attempt finishes geometry but stops on NumPy-boolean
+report serialization, still0images. An additive scalar-only writer preserves
+the motion helper byte-exact. Both REDs remain intact.
+
+Recorded cardinal geometry/floor then PASS (minJacobian .5105379Down/.5229056Up),
+with explicit local-reference NDC residual about6.28e-5, not world-floor proof.
+Down04 source/wholeboots and bothnative cells pass. Down12 stops at one new
+four-connected alpha21 background pixel; only2source/2native exist, noUp/LOOK.
+Read-only diagnosis closes3.406s/95.19MiB/all1496pins exact and views6boards:
+pixel207,336 lies at the exterior hanging-towel/moving-trouser seam, outside
+both individual filled leg materials, fixedcloth intact. Near inverse positive
+neighbours207,356/357 are transparent even in the whole original source; the
+component touches exterior diagonally at206,337. This cannot borrow the profile
+interboot certificate and does not establish a need for new hidden paint.
+An independent read-only source-boundary/predicate review is assigned under
+`output/gartenzaun-height/review-towel-edge-space-v1/`; all artist generation
+stays held until that decision. Source thresholds/fields/paint remain exact.
+
+Knödel's complete cuff review retains portablePASS/material412HOLD. The additive
+own-source proposal protects Nearlowercuff from400 and FarRraw520/FarLraw492,
+with ordinary lowercalf margins explicitly separated from cuff classification.
+Commonrigid394 is only a proposal, unchangedroot286/A11.55/lift4.95/neutral;
+fresh material validation and first moving poses remain pending. Its author
+temporarily performs the independent Gartenzaun seam review; no Knödel moving
+child or hidden-paint change has occurred.
+
+The independent Gartenzaun Down12 review now accepts the strict digital exterior
+seam, with exact saved alpha, intact fixed towel and no missing leg material.
+Root views five actual boards and verifies1978pins; acknowledgement1110c69e…7cdd
+is `output/gartenzaun-height/root-towel-edge-space-v1-accepted.json`. The additive
+local guard then passes Down04/Down12/Up04 and six native cells, stopping on
+Up12 before native generation. Its tiny retained inverse weight0.00632416 meets
+fixed RIGHT towel only through the inactive leg's formal footprint outside its
+constant x<256 source domain. It is not ignored or treated as transparent.
+Independent case2 replays alpha exactly, checks all original paint against that
+domain, zero lateral displacement and all four inactive samples outside it;
+the actual own-domain fixed-apron negative still rejects. Root reads the full
+proposal, views three new boards and verifies2082unique pins, recording7de23790…194d
+at `root-inactive-domain-v2-accepted.json`. Only that inactive-domain branch is
+accepted; active whole-source exterior, fixed/named paint, native topology and
+all material guards remain required. A new four-source/eight-native pilot is
+authorized before the full cardinal cycles; no runtime/world PASS follows.
+
+Knödel's higher394 rigid plateau now passes actual source/material review.
+All owned paint from394 down is rigid, including complete cuffs, with Near
+margin6rows and Far margins13/3rows. Ten portable PNGs reproduce exactly; root
+views four expanded material boards and verifies2024unique pins. Acceptance
+af08016a…b938 is `output/knoedel-height/root-material394-v2-accepted.json`.
+The first RIGHT0/4/8/12 pilot closes8.437s/153.66MiB with four source cells,
+eight exact native lossless cells and all2086input pins intact. Numeric field,
+whole-foot and topology checks pass, but actual source review HOLDS genuine
+Near-trouser underlap behind his fixed empty RIGHT hand. At phase04 target264,315,
+the Near inverse samples opaque hand inside Near's own domain; Far coverage
+cannot prove the missing Near paint. Twenty-one candidates across04/12 are
+preserved. No LEFT/clock/runtime expansion follows; genuine own hidden-cloth
+source creation is authorized, with original positive Near/fixed/boots protected.
+
+Horst's portable rest-mouth v3 now reproduces five physical source entries,
+literal registrations and nonempty packed profiles:30finite float32/120bytes
+each, with actual field layout and known centre-opening slots checked. The
+first empty object-to-array packing claim remains explicitly rejected. The
+corrected separate comparator passes, generation does not read expected
+products, and three rear views stay null. Root reads the full handoff and both
+corrected reports, freshly verifies2653unique pins and records6f8b2aba…a3fd at
+`output/horst-height/portable-mouth-v3/ROOT-PORTABLE-REST-v3.json`. Real shared
+validators are still unchanged; moving-pose and final media acceptance remain open.
+
+Horst's actual quarter-source inspection establishes that UpRight lacks the
+complete Far boot hidden by Near. A genuine whole Far leg is created through
+built-in ImageGen with prompt/references/provenance under own `quarter-far-v1/`;
+raw SHA f59ee52c…45d1 remains untouched. Its one neutral trial uses a single
+93/430scalar and translation100.732558,199.788372, with authored Far sole463 and
+unchanged Near sole472. Root views the raw/references and four actual neutral/
+whole-cuff files. Whole-boot material/density are plausible and original Near/
+fixed predicates pass, but a visible horizontal hip-root ledge around294 HOLDS
+the source join. Numerical execution closes1.281s/49.31MiB/all2728pins exact;
+the2746pin held seal3813132e…e677 and owner HOLD remain under
+`output/horst-height/quarter-far-neutral-v1/`. No gait is generated. Next is
+actual pelvis/coat/oldFar ownership-contour diagnosis with fixed density/placement,
+not another mouth/density search or hidden reuse of the archived old heel.
+
+The subsequent Gartenzaun pilot passes all four source poses, then stops on
+Up12desktop native exterior pixels61,79/80: four source/seven native files exist,
+not eight accepted native cells. Read-only diagnosis reproduces the entire
+decoded96x120 RGBA exactly. An actual outer-edge source alpha33 contributes
+6.1649001, rounds to6 and clears under the unchanged source threshold20; the
+native positive filter weight reads that prepared zero. No fixed/hidden cloth
+or material hole is established. All2114inputs and18diagnostic results are
+sealed in `geometry-extrema-v5/up12-native-diagnostic-v1/`; root views three
+actual native/source/AA-edge boards and reads the handoff. Independent native
+classification remains pending; full cardinal cycles/DownLOOK stay held. The
+coherent remaining actor plan is `output/gartenzaun-height/author-prep/COMPLETE-ACTOR-CONTINUATION-v2.md`.
+
+Knödel's RIGHT art-HOLD is sealed asf3a9e04c…5d0e with2087input/53result paths
+and16actual owner-view files; root reads its full review and views three source/
+hand/native boards. New genuine own hidden-Near raw7c2463d2…bb2f is stored with
+built-in ImageGen request/reference/provenance under `near-hidden-hand-v1/`.
+Root views the actual continuous olive-brown trouser/tan-boot part and verifies
+its SHA. Raw art is approved; mechanical support and uniform registration are
+still pending. Admission must stay inside originalNearalpha0 AND the exact
+fixed empty-RIGHT-hand occluder AND Near's geometric domain; no original
+supported Near/fixed/boot paint or field may change.
+
+Horst's read-only root diagnostic closes1.000s/37.13MiB/all2752inputs exact.
+Root reads the complete contour proposal and views the four original/grid/
+retained/held context boards. One neutral successor is authorized with the
+source-traced curved under-seat ownership boundary, retaining genuine pocket/
+seat/Near/hand/keys, archiving the small old-Far thigh transfer and allowing
+upper new-Far underlap only behind retained support or the named curved release.
+The source master and uniform fit remain fixed. Proposal2527cf5b…3846 and
+boundary4a1153c3…46ac are under `output/horst-height/quarter-root-diagnostic-v1/`.
+This is a trial admission, not an accepted neutral or moving-pose result.
+
+The Horst curved-root successor now PASSES neutral source-art review. The setup
+guard's stale freeze filename stops before rendering; its one additive retry
+corrects only that filename. The actual child closes1.531s/63.58MiB/all2764inputs
+exact. Six owner boards and four root actual fullbody/root/wholeboot views show
+a continuous seat-to-Far-leg join, with259explicit archived old-Far pixels,
+retained original support exact, registered wholeFar exact and zero exposed
+upper root outside its named support. Root reads the full review/report and
+freshly verifies2784unique pins, recording6c9322b5…bc76 at
+`output/horst-height/quarter-far-neutral-v2/ROOT-NEUTRAL-SOURCE-v2.json`.
+Fit/soles remain unchanged; this does not prove moving fields or world height.
+The actual412schema has64cardinal walk slots and eight neutral turn anchors.
+The earlier extra quarter-gait ticket is withdrawn: use this accepted own
+UpRight neutral and the other genuine quarter paintings as turn anchors,
+without adding unshipped quarter walking. Next required source gate is actual
+moving-mouth centre/both-axis transport through the admitted walk/action fields,
+then coherent final412 preparation using portable mouthv3. Rear three remain null;
+rounded/bite material proof still requires an exclusive silent GLSL window.
+
+Independent Gartenzaun native replay now PASSES the narrow existing-clear20
+exterior-AA classification: complete actual96x120 RGBA and whole saved-source
+alpha match exactly; contributing source-layer RGBA is independently rebuilt,
+without claiming a full source-RGBA rerender. Original filled-material weight
+is positive0.186815, explicitly retained. Own-domain fixed-towel and opaque
+boot-interior negatives reject. Root reads the full predicate/review, views
+three fresh native/boundary boards and verifies2221unique paths, recording
+f8d6dc6e…8010 at `output/gartenzaun-height/root-native-edge-hygiene-v1-accepted.json`.
+Root also views all four actual v5source poses. The unchanged-image successor
+is PREP only:2234pins/0e1a9582…8b1b at
+`cardinal-source-pilot-v1/geometry-extrema-v6/frozen-inputs-v6-corrected.json`.
+Its pin-reader setup error is preserved; no artist child launches during Hquiet.
+
+Horst's12posed-mouth source gate PASSES:36inactive/closed/open source states,
+72native states, rear3null and20actual owner boards. The exact owning field
+carries centres, both Jacobian axes and contours; actual face Jacobians are
+identity for these rigid heads, while reaction centres genuinely translate.
+No nonrigid-case claim or native display-articulation PASS follows. Root reads
+the complete handoff/updated412plan, views five actual head/native/body boards
+and verifies2966unique pins, recording8d051d3e…b550 at
+`output/horst-height/moving-mouth-pilot-v1/ROOT-SOURCE-ATTACHMENT-v1.json`.
+The RIGHT-mobile CPU centre-grid zero and landscape clarity qualification remain.
+
+The exclusive silent Hshader window covers16contexts: translatedSU08 and LEFT
+LW08 in all three layouts, then the remaining ten poses in explicit distributed
+layouts. It tests inactive/closed/open/rounded/bite with unchanged material and
+96/64densities. The first launch's local `document` variable shadowing stops
+before renderer/captures; one additive setup retry changes only names/paths.
+Corrected first6 closes7.430s with all2984inputs exact and all browser/renderer/
+server resources released. Material/protection passes; SU08landscape bite has
+zero supported changed pixels and remains an explicit cue-clarity HOLD. Actual
+capture review and remaining ten contexts are pending. G/Ksource children stay
+held throughout the continuing window; full412bake/shared-validator integration,
+actual game/media acceptance and publication remain pending.
+
+Horst's corrected posed material proof now closes all16rendered contexts over
+12poses, with64exact production-GLSL programs, literal signed-zero profiles and
+actual30float32/120byte packing. Five-cue alpha/face/body/prop protection passes;
+owner94actual-file views distinguish the800captures from inspected coverage.
+Three landscape bite cases remain literal zero-supported change; weak bite/
+landscape clarity is qualified, not silently approved. Root reads the complete
+result, views nine original critical mouth/head crops and verifies3826unique
+pins, recording2197aa73…01af at
+`output/horst-height/moving-mouth-glsl-v1/ROOT-POSED-MATERIAL-v1.json`.
+All17created contexts, including the pre-render setup failure, and all browser/
+server/child resources close. The shared validators and runtime stay unchanged.
+
+Root authorizes Horst's full412 source/native/formal/raw-only candidate under
+the updated plan, retaining authored2.33/13.6305 and root-owned later2.77fit.
+The four cardinal source sections pass340semantic slots/276file references in
+36.907/43.891/40.922/47.219s, maximum125.59MiB and all3833inputs intact. Final
+eight neutral turns/64actions are running; full source/native/formal/raw replay
+and actual game/media acceptance remain pending. CPU2 stays his bounded lane;
+CPU1 is serialized between Gartenzaun and Knödel, with no active GPU lease.
+
+Gartenzaun's four-source/eight-native successor passes source/owner art with
+all22boards, six damage negatives and all historical4source/7native bytes exact.
+Root reads the owner review and views three new native/wholeboot boards,
+verifying2291pin entries/2285unique paths (six consistent overlaps), recording
+c1bbe26c…ffc9 at `output/gartenzaun-height/root-cardinal-extrema-v6-accepted.json`.
+Down00..15 then completes16source/32native in two bounded24.282/24.532s sections,
+with20owner boards PASS. Up00 stops on genuine missing active RIGHT-trouser
+paint behind the fixed RIGHT towel: one source/zero native in that section.
+The two alpha-zero pixels are enclosed, and positive inverse weights encounter
+opaque fixed towel within the same leg domain. No exterior/domain/AA exemption
+applies. Preserve this RED; a bounded diagnosis and necessary genuine rear
+hidden-cloth source are authorized before any new Up motion. DownLOOK is unrun.
+
+Knödel's read-only raw-support child closes1.953s/80MiB/all2233inputs exact.
+One alpha20component and six raw/seven original solid support patches pass;
+sub20raw haze remains disclosed and untouched. Exact hand/NearA0/domain admission
+has664pixels; all41positive inverse records/33source points from21oldtargets
+are covered. Root reads the complete support review and fit plan, views three
+actual boot/cloth-anchor boards, and authorizes one qualified authored uniform
+trial81/484 with translation182.704545,205.570248. This lower-context envelope
+includes a small cuff extension and is not exact pure-leather density proof;
+heel/toe/cuff residuals remain explicit. The raw boot never replaces the original
+foot. Only the named hidden-hand cloth may be added, with every old positive
+Near/fixed/boot/field preserved. Registration, actual neutral art and corrected
+RIGHT/LEFT moving gates remain pending; no automatic density refinement.
+
+Horst's source family now fully closes412slots/348references. Turn/actions pass
+18.593s/122.89MiB and finalizer2.219s/62.86MiB. Body indexb35dbc8d…45a1 binds49
+actual author inputs. Independent postgeneration associations pass all412slots
+and64aliases;197references match prior accepted own art literally and151new
+references receive20actual author light/dark source-board views. Root reads
+the complete source handoff, views three new original-detail boards and checks
+4246unique pins, recording8189a2be…ccbf at
+`output/horst-height/full-family-v1/ROOT-FULLSOURCE-v1.json`.
+
+Full mouth-source metadata subsequently passes324visible/88rear-null/8padding
+with actual owning-field/face-support/both-axis checks. A parser-only `else85`
+setup failure is preserved; its additive one-space correction and builtin AST
+preflight leave geometry unchanged. Native compiler intentionally keeps the
+admitted Horst premultRGBa/PillowBICUBIC affine sampler. Its first desktop cell
+stops before atlas export on a generic borrowed alpha1 gutter assertion, while
+Horst's accepted cardinal prototype uses alpha21. No current native product is
+accepted. A read-only old-PNG/edge-alpha/actual alphaTest.08 probe is authorized
+before any guard change/retry; source controls, sampler and all paint stay fixed.
+
+Knödel's hidden-hand neutral is source-art accepted after four root actual
+boards/full review and2283fresh unique pins: acknowledgementa1a14d74…3246 at
+`output/knoedel-height/root-hidden-hand-neutral-v1-accepted.json`. The corrected
+RIGHT four-key pilot then passes4source/8encoded native in10.032s/173.91MiB,
+all2291inputs intact. Every old21target now has genuine ownNear alpha252+,
+all41positive source taps are painted, exact saved F64 inverses/rigid wholeboot
+checks/nativeRGBA pass. Owner10actual-file views/root three new boards show a
+coherent exposed trouser join. Root reads the full review and verifies2342unique
+pins, recording8d07f166…19bc at `root-corrected-right-four-key-v2.json`.
+The separately authorized LEFT gate then stops on genuine own-domain fixed
+hand/cloth occlusion in3.016s/139.57MiB, all2345inputs exact. This is not repaired
+by RIGHT proof. Exact saved finding and necessary genuine own LEFT raw are
+authorized; no mirroring/Far-as-Near, LEFT fit/patch or field change is admitted.
+
+Gartenzaun's genuine rear navy-cloth raw aafdd682…1367 is generated through
+built-in ImageGen with own rear references/prompt/receipt. One read-only child
+closes3.015s/80.78MiB/all2444inputs exact. True alpha and seven actual boards show
+clean cloth: the viewer's broad gray glow is hiddenRGB at alpha0, with no opaque
+background/cutout repair needed. Root reads the mechanical review/static fit,
+views three actual raw/core/own-source-anchor boards and checks2465pin entries/
+2461unique paths (four consistent overlaps). Acknowledgemente7fa2d9d…1659 at
+`output/gartenzaun-height/root-up-cloth-raw-trial-v1.json` admits ONE local-cloth
+uniform neutral trial, not fitted/moving acceptance: s61553/651834 and translation
+237.040202,290.898661 from visible cloth widths/material planes, with residuals
+disclosed and no hidden hip/knee/hem claim. Only originalleg1A0∩namedRIGHTtowel∩
+admitted domain∩declared artist receiver may receive strong genuine cloth.
+All original positive paint/props/wellies/fields/clocks remain fixed. Both failed
+auxiliary diagnostic adapters stay preserved; their unexecuted analysis is not
+claimed as evidence. CPU1 is returned for the one trial; remaining Up/LOOK unrun.
+
+Root accepts Gartenzaun's cloth-neutral source with2484fresh bound paths and
+three actual neutral/material/receiver boards, acknowledgementd2587123…6873.
+Twenty of27eligible cells are painted (18strong/2weak/7empty); no all-phase
+coverage claim. Its rebuilt Up00/04/12 then passes3source/6native, with12owner
+boards/root three actual full/join/mobile views. Old Up00 gaps now contain
+genuine own paintalpha252; all original paint/wellies/fields/clock stay exact.
+Root verifies2543pin entries/2537unique paths and records5d90bdd9…ad3f at
+`output/gartenzaun-height/root-up-backed-preview-v3-accepted.json`. Up00..07
+subsequently passes8source/16native and10owner boards. Up08/09 pass numerically,
+then Up10 stops on a14pixel enclosed gap. Both filled materials are absent and
+all inverse-owner certificates pass; only strict8-exterior fails. Preserve
+3source/4native partial section and2608input pins, without calling this missing
+paint or a complete rear cycle. A bounded actual saved-frame diagnostic and
+independent enclosed-negative-space review are next; no paint/guard edits.
+
+Knödel's LEFT phase00 has seven real missing-Near targets; the strong284,326
+witness samples opaque named LEFTcloth at284,327/328 with both own samples0.
+Four targets have no Far coverage either. The2371pin failure remains intact.
+A genuine own LEFTNear raw05907de2…84b1f is generated through built-in ImageGen
+with three original own references and exact provenance. Root views the raw;
+one read-only child then passes actual alpha/support in2.000s/76.5MiB. All14
+halo/background probes are alpha0; alpha20/200 material is one hole-free component,
+perimeter maximum1. Exact named LEFTcloth/hand∩originalNearA0∩domain admission
+has2423pixels and all13positive old inverse records. Root reads complete review/
+fit plan and views three actual raw/boot/admission boards, authorizing ONE
+qualified uniform trial84/431 with translation167.886311,190.765661. Different
+folds/heel-toe-cuff residuals remain explicit; uncovered/weak regions require
+review, with no fill/refit or original-foot replacement. No LEFT patch/motion
+is accepted yet. Its author will also independently review the GUp10 gap.
+
+Storage temporarily reaches0free bytes on C:, stopping all writers before new
+asset jobs; new zero-byte PREP files are preserved. Root uses reversible NTFS
+compression on existing task-owned text, excluding publisher Git data and all
+artwork. The first batch stops on a native compact error; the per-file followup
+verifies all2038attempted file hashes unchanged (2037compressed, one deep held
+Hildegard-registration JSON reports `Out of memory` and stays unmodified).
+Current Hsource4246/Gtrial2482/KRIGHT2342fences and Hworking-mouthv3/index hashes
+remain exact. No source, evidence or unrelated data is deleted. Available space
+fluctuates from~200MiB to~900MiB; an asynchronous request for roughly5GBfree or
+another generated-file location remains pending. Small jobs resume only with
+fresh estimated-output+200MiB disk admission and continuous reserve monitoring;
+large raw mirrors/browser sessions need a separate capacity decision.
+
+The Hnative gutter correction is accepted after full proposal/two actual boards
+and4278map pins plus fenceSelf=4279bound paths: acknowledgement0e7e8a76…9e6c at
+`native-gutter-diagnostic-v1/ROOT-GUTTER-DOMAIN-v1.json`. Keep all pixels/A1
+diagnostics, require the established alpha21 support gutter≥2 and complete outer
+two texels maxA≤20 under unchanged Linear/alphaTest.08. New desktop encoding
+passes all412cells, and fresh DOWN00 matches the old accepted native everyRGBA
+byte. Mobile412, standing and private metadata also pass. Nine compiled files
+total2,151,812bytes; all824body cells roundtrip losslessly, all gutters stay
+bounded. Owner views36body pages/boot strips and56mouth pages covering648pairs.
+Mobile86RIGHT supported-grid zeros remain explicitly qualified against the
+separate actual16context shader proof; no automatic null/refit/articulation PASS.
+
+Portable mouth workingv3 removes the unused absolute compiler path from its
+admission and input map, retaining contentSHA/official:false; all324frames and
+327source-entry/field records reproduce v2 literally after regeneration.
+SHA7f90be4a…5645 remains stable through compression. Official shared validators
+were unchanged at that native checkpoint; subsequent closure and root adoption
+are recorded below. Native visual scope/weak speech limits remain explicit.
+Horst's final canonical auditor passes all412cells, eight categories and both
+densities. The private packet init/build/bind/check passes with8395exact paths,
+nine runtime assets plus person totaling3,248,804bytes; source height/stride stay
+2.33/13.6305. The raw-only plan admits exactly28initial files/5,296,666bytes:
+four genuine paints, twenty own code/control files, three shared mechanics and
+the private compiler content. Generated parts, cached bodies/mouths, packets and
+expected outputs are excluded. After recording the completed-candidate baseline,
+root admits sequential reconstruction in new ignored `output/hr-raw01` with
+fresh361MiB disk admission, continuous200MiB reserve and existing memory/job
+limits. All22raw generation jobs subsequently close before the first expected
+comparison. That comparison reproduces348source RGBA,412semantic/field records,
+824native body cells,648mouth-density bindings, nine runtime assets and authored
+person literally. Existing648reviewed mouth pairs are inherited by exact
+native/metadata/code identity; no duplicate art rerender. Root freshly verifies
+8888inputs plus their fence before adoption: ROOT-RAW-CLOSURE-v1.json,
+SHA44a086f2…34750. Evidence: `output/horst-height/full-family-v1/`.
+
+Root's proportional2.77/16.2045fit reproduces from the raw mirror using the
+existing shared fitting tool. Selected person c7f204a6…2671b and typed-f64 packet
+1f391fb8…1dcf8 are now integrated locally. Only Horst's expanded registry record
+changes; other42records remain literalexact. Eleven new delivery-v2 files are
+added without overwriting old runtime art. The first root preflight stops on a
+string-versus-Buffer comparison before any asset writes; its preserved additive
+Buffer conversion passes. Exactly two admitted validator predicates now allow
+open_lower[-1.5,2.9], retaining all other curve limits. Actual official bytes
+match reviewed candidates7d3ca1c3…0fc1e/7522dd9c…b330e; GLSL/packing/sampling stay
+unchanged. The dedicated test goes RED1/2→GREEN2/2. Import cache queries advance
+together; ROOT-INTEGRATION-TRANSITION-v1.json SHA10231b94…507e1 records seven
+explicit shared-hash migrations, preserving all historical proof maps.
+
+The corrected publication allowlist v2 contains46own code/control/raw/provenance
+files,9,864,024bytes. Root verifies every entry; only README differs from v1.
+It now explicitly lists24own generation seeds plus three shared mechanics and
+the official compiler, without seeding the comparison baseline. Root preserves
+the first fixture REDs, updates Horst's explicit family/standing-byte total and
+cache expectations, then passes126focused and460street-release checks. Canonical
+Python packet validation passes at selected height/cadence. Actual sparse
+buildLevelPages retains all nine changed-actor assets and17total files byteexact,
+omitting all four untouched raw originals; this is not a whole-site size claim.
+
+Integrated candidate frozen: `output/horst-height/frozen-integrated-v1.json`,
+SHA4bffb0b5…d1eab,537pins/72release paths, base21d0914. The mutable task document
+is explicitly outside runtime review pins. Exactly three original takes cover
+rules1/4/7; rule10 retains genuine caption fallback. Author media and both
+independent reviews now bind this same candidate, as recorded below.
+Physics preflight catches an inherited generic native-sampler fixture before
+any child, preserves it and switches only the test to Horst's admitted
+RGBa/BICUBIC affine. RIGHT40/LEFT40 contact comparisons pass on32unique
+source/native/delivered cells; own geometry and prior713pin points agree.
+Maximum native residuals.161988/.091194pixels remain declared quantization,
+with shared Pillow colour-library dependence and Far occlusion qualifications.
+Both guarded children close at4.906s/194.15–199.74MiB, all537candidate and584review
+pins exact. This is independent source/native evidence, separate from world
+movement. Subsequent independent Physics passes desktop LEFT16/RIGHT16,
+portrait LEFT16, three16.2accepted-root cycle intervals against16.2045selected,
+planted stops/root drift0, four quiet states/all8turns and98obstruction holds.
+Two contexts close, all537candidate pins remain exact. Root reads the full
+report, views both walking captures and freshly checks667paths: acceptance
+ROOT-PHYSICS-ACCEPTED-v1.json SHA395afe89…29491. One-row floor fringe and
+FAR3of5 visibility remain quantified; portrait uses controlled fixed-dt and
+landscape world is unrun. First-audio/warm-mouth scope and next-frame pause
+closure are explicit, with no natural-mission/device/FPS/listening claim.
+
+Author media completes9original recording/layout EOF combinations, three
+genuine rule10caption fallbacks and the held/missing-mouth/missing-recording
+cases. Actual cancellation/player-only distance retirement/reentry pass. The
+first startup fixture RED stopped its own loop too early; a second fixture
+omitted candidateVoiceId and selected synthetic fallback. Both are preserved,
+with corrections matching existing production sequencing/options. Two
+fax-covered portrait captures remain as failures of visibility evidence; real
+fax-dismiss recaptures pass without hiding HTML or altering source. Initial
+matrix totals10contexts,8PASS/2preservedRED, with all537pins exact.
+
+The remaining minified-mouth evidence HOLD prompted two actual same-RAF peak
+witnesses. The first attempt stops on mistaking the loader's revoked blob URL
+for the asset URL, before any pixel assertion. An observer-only exact
+texture/image/original-URL/hash association corrects that fixture, preserving
+the RED. Actual standard64x80 landscape RIGHT supplies98frames/all16slots,
+peak1/nativeEOF, one supported pixel/maxRGBdelta5. Portrait naturally turns
+LEFT:55frames/all16slots, peak1/nativeEOF, four changed/three supported pixels,
+maxRGBdelta34. Same-frame inactive-source counterfactuals are explicitly not
+recorded closed cues. All original-alpha/protected-face/body/UV/GLSL/restoration
+guards pass; no source, gain, density, anatomy or AA changes. Root views actual
+native ordered portrait heads and both peak pairs: restrained attached lip
+darkening is observable in the portrait, while landscape remains very faint.
+Universal clear1:1 minification is unclaimed. A final desktop witness naturally
+uses LEFT:72actual frames/all16slots, peak1/nativeEOF, three supported pixels/
+maxRGBdelta11. No heading is forced and no RIGHT-desktop/portrait inference is
+made. Root accepts the requested mature connected body, height/style and
+source-attached restrained speech, with the tiny landscape effect explicitly
+faint. Supplemental actual sequences/labelled pairs and all partial attempts
+are retained; later portrait soles occluded by a real traffic car are labelled.
+
+Independent Camera's common-ground3 measures Horst/Söder125/124desktop,
+131/131portrait and61/60landscape. Its inherited nonnegative crown-deficit
+assumption stops the helper, without changing source or scale. Own direct
+RGBa/BICUBIC reproduces every native alpha byte: logicalslot86 is source
+row4col2, not physical packed row5col6. Source opaque basis remains400rows;
+desktop signed crown residual−.5 plus sole+.5 are native fringe, mobile0/0.
+Root reads the signed proposal and freshly verifies589paths, accepting the
+existing one-native-row magnitude with source-derived sign/projection and
+four negative classes per layout: ROOT-SIGNED-SAMPLING-ACCEPTED-v2.json,
+SHA070cf6b2…cf874. Predetermined scale-comparison bounds1.7417/2.5451/1.1761
+cover observed+1/0/+1 without fitting GPU differences or changing tolerances.
+Browser/Pillow low-alpha RGB differences and landscape HTML control overlap
+are disclosed; raw-canvas scale evidence is distinct from natural HUD play.
+Fade/restored3 then passes: opaque/restored0person pixels, both actual person
+orders6533qualified alpha samples/zero wrong. All27Camera contexts now pass:
+standing/packet holds and404s, retirement/zero references/new owner, own2.77
+fallback, loaded car/door and loaded/fallback Bundestag, and24actual turn
+anchors across all three layouts. Root reads the complete review, views all
+three native turn boards and freshly verifies its648pins. Broader natural
+building fade transitions and unchanged-world cases retain supplied/NOT RUN
+scope; HTML occlusion remains distinct from raw-canvas geometry. Every browser,
+server and CPU child is closed. Politicians, children and Bürgeramt character
+assets remain protected.
+
+Final Pages game/browser bucket passes74checks; Python producer and canonical
+packet checks pass. The complete focused126/street460/browser74evidence and
+sparse packaging remain bound to537current pins. Comparable cold budgets use
+three contexts per layout and candidate/baseline: all12pass unchanged18MB,
+4Hz-title,1.6MP-buffer and real-input gates on the same Chrome156/IrisXeD3D11.
+Candidate startup16,402,396desktop/16,016,971portrait bytes is7,942bytes above
+immutable21d0914 in each layout; nine input observations are accepted per run.
+Median startup2193.8→2195.2ms desktop and1623.7→1638.9ms portrait is local
+uncompressed seeded lab evidence, not physical-device or general FPS proof.
+Root freshly verifies all537runtime/source pins,648Camera pins and667Physics
+paths and records scoped acceptance in ROOT-REVIEW-ACCEPTANCE-v1.json, with
+ROOT-BUDGET-ACCEPTED-v1.json and original failures preserved. No further artwork,
+gain, sampling, density or shader adjustment is authorized by these results.
+
+Knödel's exact LEFT uniform trial stops before paint additions: the maximum
+2423pixel hand/blue-cloth permission contains2336strong, nine antialiased and
+78empty samples. All13 old inverse witnesses have genuine alpha≥252. Root
+reads the complete review and personally views both plain/marked light/dark
+boundary boards, then freshly verifies2438paths with zero mismatches. The
+empty strip follows the genuine registered leg's outer edge; a maximum
+permission domain does not require material there. Root admits a neutral-only
+trial of all2345prepared A20+ samples, preserving all nine antialiased RGBA,
+leaving78empty and retaining original positive paint, prop, Far/wholeboots and
+fields. No alpha200 clipping, fill or transform refinement. The neutral-only
+trial passes:2345genuine samples, nine AA intact,78empty retained, all13old
+witnesses supported. Its honest composition delta is941pixels/maxRGBA3, wholly
+inside admitted material. Root reads the review and personally views neutral,
+prop/cloth and wholeboot pages, freshly verifies2937paths and accepts neutral
+only: root-left-partial-neutral-v1-accepted.json SHA89fe79d0…40304. Moving texture
+join/old LEFT RED remain open; no new motion/clock/family/runtime approval.
+
+Günther's saved Up10 diagnostic records a closed14pixel background pocket
+bounded by intact fixed towel/apron and one moving leg. All active inverse
+support is original exterior air; no fixed/named material is lost. Independent
+full saved-RGBA/material/inverse replay and four actual negative controls pass.
+Root views four relevant pages and freshly verifies2891paths, accepting only a
+component-generic conserved named towel/apron-plus-one-outer-leg certificate,
+with actual enclosure/exterior8:false retained and no size/coordinate whitelist.
+One source/native pilot regenerates exact Up10source/layers and passes seven
+controls, then stops at desktop native[61,79], an enclosed one-pixel gap. Its
+four positive filter taps are actual prepared source air at y340..341, outside
+the distinct source pocket y325..332; no resized source certificate applies.
+Mobile is ungenerated. SourcePASS/nativeHOLD remains sealed; no further Up/LOOK.
+
+Publication stays21d0914/Pg42179534689SUCCESS until the accepted Horst slice is
+committed and deployed. Gartenzaun/Knödel/Waltraud private work is excluded.
+Public remaining scope includes20short active citizens (Horst locally accepted),
+bothSandales and three adult JWD neighbors; Horst publication will reduce the
+short citizen count to19. Overall cast completion remains unproved.
+
+Latest observed publication/branch state: publisher Git HEAD and fresh remote
+main both21d0914486ab834509ec733bd6abafe9eaee9cd2; no staged files. Thirteen tracked
+paths now contain the coherent local Horst integration/tests/attribution/state;
+new selected Horst delivery/source/test files are accepted for exact72path staging.
+Unrelated untracked authoring stays intact. Primary checkout/default broken Git
+metadata are untouched. Next: final72path index/hash-bound source and ordinary
+text normalization audit, complete diff review, normal commit/push, successful
+Pages and immutable public root/compatibility/own actor admission proof.
+Later: Gnative-gap classification/remaining rear cycle/LOOK; Kcorrected LEFT
+four-key then wider source/stance/clock; Wown semantic/boot gate queued. Overall
+goal remains active; no new runtime release is claimed yet.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature

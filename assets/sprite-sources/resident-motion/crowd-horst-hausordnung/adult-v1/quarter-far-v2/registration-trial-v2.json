@@ -1,0 +1,156 @@
+{
+  "actor": "crowd-horst-hausordnung",
+  "view": "up-right",
+  "status": "Curved under-seat ownership neutral trial only; root source review before motion",
+  "raw": "../quarter-far-v1/raw-up-right-far-leg-v1.png",
+  "rawSha256": "f59ee52cb0b10b79f18da23556daeaa8bd9589e7b286e2742add91f5e2bf45d1",
+  "original": "../registered-v1/up-right.png",
+  "originalSha256": "161513197756d800f464e2aa4ab579bc0c2ef8244fd0cd04349ec415a633775f",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "sourceFigurePixels": 400,
+  "nearestGroundPivot": [
+    256,
+    472
+  ],
+  "densityReference": {
+    "kind": "CompleteNearQuarterBoot versus completeNewFarBoot; oldFarocclusion width is not density",
+    "nearSourceSpanPx": 93,
+    "newRawFullBootSpanPx": 430,
+    "uniformScalarNumerator": 93,
+    "uniformScalarDenominator": 430
+  },
+  "placement": {
+    "rawHeelBackX": 385,
+    "authoredSourceHeelBackX": 184,
+    "rawFullSoleY": 1217,
+    "authoredProjectedFarFullSoleY": 463,
+    "oldObservedHeelSoleMedianY": 463,
+    "oldFarHeelRole": "Placement/lower-bound evidence only; hidden complete sole not observed"
+  },
+  "originalFarVisiblePartition": {
+    "startY": 294,
+    "rightBoundaryYx": [
+      [
+        294,
+        228
+      ],
+      [
+        315,
+        222
+      ],
+      [
+        335,
+        218
+      ],
+      [
+        360,
+        216
+      ],
+      [
+        385,
+        213
+      ],
+      [
+        410,
+        211
+      ],
+      [
+        430,
+        211
+      ],
+      [
+        444,
+        211
+      ],
+      [
+        512,
+        211
+      ]
+    ],
+    "note": "Own source-traced initial seam; actual anatomy/completeNear preservation requires source view, not predicate-only approval"
+  },
+  "replacement": "Only newcompleteFar; archive/remove oldFarfragment. No oldheeloverlay or thirdboot.",
+  "rawUpperRoot": "Underlap only, not measuredhipjoint",
+  "rigOwnership": "Not approved; no movingNear/handmask/field in this neutral trial",
+  "sourceOwnershipV2": {
+    "retainedPelvisLowerEdge": [
+      [
+        190,
+        278
+      ],
+      [
+        196,
+        282
+      ],
+      [
+        203,
+        287
+      ],
+      [
+        210,
+        291
+      ],
+      [
+        216,
+        292
+      ],
+      [
+        222,
+        288
+      ],
+      [
+        227,
+        280
+      ]
+    ],
+    "additiveOldFarPolygon": [
+      [
+        175,
+        278
+      ],
+      [
+        190,
+        278
+      ],
+      [
+        196,
+        282
+      ],
+      [
+        203,
+        287
+      ],
+      [
+        210,
+        291
+      ],
+      [
+        216,
+        292
+      ],
+      [
+        222,
+        288
+      ],
+      [
+        227,
+        280
+      ],
+      [
+        228,
+        294
+      ],
+      [
+        175,
+        294
+      ]
+    ],
+    "pixelRule": "Pixel centres x+.5,y+.5: even-odd interior union exact on-segment border; integer doubled coordinates",
+    "newFarAllowed": "retainedForegroundPositive OR additiveOldFarPolygon OR y>=294",
+    "proposalSha256": "4a1153c3244bc00c53f2f6c83808a09394a31dcdf92cf903d8c80e673fd646ac",
+    "limit": "Authored source-contour trial, not a uniquely measured hidden hip joint"
+  }
+}

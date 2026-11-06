@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "actor": "crowd-horst-hausordnung",
+  "scope": "Limited own Down/Up and reaction source/native prototype; no runtime or family acceptance",
+  "sourceFigurePixels": 400,
+  "authoredWorldHeight": 2.33,
+  "authoredStride": 13.6305,
+  "clockAuthority": "Accepted own profile stance travel46.8 /400 *2.33 /0.02. Front/back source y is projected depth plus swing lift, not another physical cadence measurement.",
+  "groundPivot": [256, 472],
+  "raw": {"file": "raw/raw-eight-views-v1.png", "sha256": "e5a0271c946b63a310202dd91b494ecc483e01c15349ed94f4edd3e5e8aa73fc"},
+  "directions": {
+    "down": {
+      "file": "registered-v1/down.png",
+      "sha256": "69a4edd26a9efefd160db18d79b3642ca00743408215dfab3efc373f18de9bf2",
+      "hipAtBeltY": 258,
+      "rootOverlapY": 294,
+      "fixedCrotchThroughY": 312,
+      "innerLegSeamX": 255,
+      "kneeY": 358,
+      "calfY": 386,
+      "wholeCuffBootRigidFromY": 400,
+      "freeHandPolygon": [[158,280],[192,280],[194,313],[190,325],[178,327],[159,314]],
+      "keysRegion": [190,240,217,294],
+      "clipboardRegion": [269,170,322,250],
+      "witnessSeeds": {
+        "viewer-left": {"toe": [187,464], "visible-heel": [232,461], "cuff": [218,435]},
+        "viewer-right": {"toe": [323,463], "visible-heel": [278,460], "cuff": [291,435]}
+      },
+      "trace": "Own belt258 and crotch below300; narrow inner opening through255 below312; separate complete boots174..240 and269..338. RIGHT free fingers outside viewer-left trousers, LEFT clipboard fixed at chest."
+    },
+    "up": {
+      "file": "registered-v1/up.png",
+      "sha256": "0827e44e319162571c098b07ca946c9f088ca6d50836eaa31950c9a390e69a0a",
+      "hipAtBeltY": 256,
+      "rootOverlapY": 294,
+      "fixedCrotchThroughY": 312,
+      "innerLegSeamX": 258,
+      "kneeY": 359,
+      "calfY": 387,
+      "wholeCuffBootRigidFromY": 400,
+      "freeHandPolygon": [[316,280],[350,280],[352,308],[344,321],[332,326],[322,322],[316,311]],
+      "keysRegion": [294,240,322,294],
+      "clipboardRegion": [180,174,213,252],
+      "witnessSeeds": {
+        "viewer-left": {"outer-toe-edge": [184,458], "visible-heel": [221,466], "cuff": [219,435]},
+        "viewer-right": {"outer-toe-edge": [327,457], "visible-heel": [285,466], "cuff": [289,435]}
+      },
+      "trace": "Own rear belt256/crotch near300, seam258 below312; separate complete boots177..243 and270..334. RIGHT hand outside viewer-right trousers, keys at RIGHT rear belt, LEFT clipboard behind LEFT arm."
+    }
+  },
+  "projection": {
+    "ownMeasuredFrontalBootWidths200": [66,69,66,64],
+    "meanOwnFrontalBootWidth": 66.25,
+    "depthAmplitude": 7.95,
+    "swingLift": 3.3125,
+    "lateralAmplitude": 1.9875,
+    "basis": "Own frontal widths only: projected depth12%, swing5%, lateral3%. Initial source-pose choices, not measured physical ground distance or native centroid fit.",
+    "nearestGroundRegistration": "Opposite complete-leg projected depth fields; subtract the same instantaneous nearest-foot ground depth, keeping nearest ground sole472 before independent swing lift. Fixed upper and root stay original. No per-view runtime scale/clock."
+  },
+  "reactions": {
+    "source": "down",
+    "nodesY": [0,139,161,334,377,400,511],
+    "rigidHeadThroughY": 139,
+    "rigidForebodyAndAllPropsBand": [161,334],
+    "completeBootsRigidAndStationaryFromY": 400,
+    "samples": {"idle": [0,4,12,16], "look": [0,4,8,15], "success": [0,4,8,15], "failure": [0,4,8,15]},
+    "idle": {"headDxDy": [0.35,-0.7], "forebodyDxDy": [0.5,-1.4]},
+    "look": {"headDxDy": [-4.5,-1.5], "forebodyDxDy": [-1.5,-0.3]},
+    "success": {"headDxDy": [1.5,-8.0], "forebodyDxDy": [1.5,-5.5]},
+    "failure": {"headDxDy": [-2.0,5.5], "forebodyDxDy": [-2.0,3.3]},
+    "basis": "Own original DOWN whole body; full head translates rigidly, complete arms/clipboard/RIGHT belt keys/free hand share one constant translation161..334. Blend only neck and trousers toward fixed knee/boot. Idle sample16 is the wrap witness of16frame loop, not a seventeenth atlas cell. No new anatomy or mouth/eye repaint."
+  },
+  "nativeTargets": {
+    "desktop": {"cell": [96,120], "figurePixels": 102, "pivot": [48,112.5]},
+    "mobile": {"cell": [64,80], "figurePixels": 68, "pivot": [32,75]}
+  },
+  "visibilityLimits": "Rear-view outer toe edge and heel are the actual visible own paint; no hidden front-of-toe/sole claim. Prototype source projection does not establish world-floor contact or front/back runtime height."
+}

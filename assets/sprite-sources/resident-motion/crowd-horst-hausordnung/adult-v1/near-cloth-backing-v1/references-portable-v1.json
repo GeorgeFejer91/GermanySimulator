@@ -1,0 +1,24 @@
+{
+  "role": "Exact original ImageGen reference archive; provenance only, never source-generation or expected-frame inputs",
+  "originalReferenceManifest": "references.json",
+  "originalReferenceManifestSha256": "64be6206f5f58a7a497434afe10d5bdcce02d205c639899457f3ede92c340e74",
+  "references": [
+    {
+      "historicalFile": "registered-v1/right.png",
+      "portableFile": "reference-archive-v1/right-source-registered.png",
+      "sha256": "56058442d785550f4f1ce58c2d4d3622abcacf938505127040efad451b11a65e"
+    },
+    {
+      "historicalFile": "profile-layers-v5/right-near-original.png",
+      "portableFile": "reference-archive-v1/right-near-original.png",
+      "sha256": "a0d9f68fcc624098eeffda3f0dc6882409d37aacc06b9d815c9ab9ee831abce2"
+    },
+    {
+      "historicalFile": "profile-layers-v5/right-fixed-hand-keys.png",
+      "portableFile": "reference-archive-v1/right-fixed-hand-keys.png",
+      "sha256": "bc7f3207bda5f4a55f0bf484b4ac316c059161e1ff9f92b4ff6392ac9b144dc0"
+    }
+  ],
+  "wholeHistoricalDraftDirectoryRequired": false,
+  "copiedBytesAltered": false
+}

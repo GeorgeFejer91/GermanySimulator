@@ -1,0 +1,14 @@
+[
+  {
+    "path": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/registered-v1/right.png",
+    "sha256": "56058442d785550f4f1ce58c2d4d3622abcacf938505127040efad451b11a65e"
+  },
+  {
+    "path": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/profile-layers-v5/right-near-original.png",
+    "sha256": "a0d9f68fcc624098eeffda3f0dc6882409d37aacc06b9d815c9ab9ee831abce2"
+  },
+  {
+    "path": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/profile-layers-v5/right-fixed-hand-keys.png",
+    "sha256": "bc7f3207bda5f4a55f0bf484b4ac316c059161e1ff9f92b4ff6392ac9b144dc0"
+  }
+]

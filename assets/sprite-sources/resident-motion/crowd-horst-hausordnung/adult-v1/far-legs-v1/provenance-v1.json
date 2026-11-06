@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "registryId": "crowd-horst-hausordnung",
+  "status": "RAW MISSING-PAINT CANDIDATE; alpha composites, own isotropic placement and root complete-leg source approval outstanding",
+  "producer": "Built-in image_gen__imagegen, transparent_background=true; actual own raw8 and actual registered profile reference viewed before generation",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "files": [
+    {
+      "file": "raw-complete-far-legs-v1.png",
+      "sha256": "6e562cb9a065e0c2b8b4dff88e2133c0e4fa8018f2607f602eac65b1c710997d",
+      "bytes": 1846784,
+      "role": "Unmodified built-in ImageGen missing-paint output",
+      "originalPath": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac27-119e-75d1-b510-19e4ba8f1fe0/exec-095fc8cc-0a2e-45ed-b4c2-a5d8ca631042.png"
+    },
+    {
+      "file": "imagegen-prompt-v1.txt",
+      "sha256": "4abfaa76e804687b87b4bff4a31056077c1900cfdfceb76359ef3131225d6572",
+      "bytes": 3338,
+      "role": "Exact requested prompt",
+      "originalPath": "output/horst-height/author-prep/far-legs-prompt-v1.txt"
+    },
+    {
+      "file": "reference-own-profiles-light.png",
+      "sha256": "5f7961c946955899165a991938f5fc2ca2d4a56fdb725012e1d04a5a470010ba",
+      "bytes": 166939,
+      "role": "Exact own neutral profiles used as second image reference",
+      "originalPath": "output/horst-height/registered-v1/right-left-registered-native-light.png"
+    }
+  ],
+  "referenceRaw8": {
+    "file": "../raw/raw-eight-views-v1.png",
+    "sha256": "e5a0271c946b63a310202dd91b494ecc483e01c15349ed94f4edd3e5e8aa73fc"
+  },
+  "registeredReference": {
+    "rightSha256": "56058442d785550f4f1ce58c2d4d3622abcacf938505127040efad451b11a65e",
+    "leftSha256": "5efb063b3bce399bb752479396998dd60fbb8e1d69e953873083ed7e4e4e40b3"
+  },
+  "semanticParts": [
+    {
+      "panel": "left",
+      "role": "FAR anatomical LEFT leg for RIGHT-facing profile",
+      "shoePoints": "right"
+    },
+    {
+      "panel": "right",
+      "role": "FAR anatomical RIGHT leg for LEFT-facing profile",
+      "shoePoints": "left"
+    }
+  ],
+  "scope": "New real paint for currently hidden anatomy. No extracted leg layer, isotropic placement, neutral reconstruction, visible heel/toe proof, motion, encoded output or world acceptance is implied.",
+  "initialVisualObservation": "Viewed actual generated raw. Two continuous upper-hip/thigh/knee/calf/cuff/whole brown laceup shoe/heel/toe/sole paintings, opposite physical headings, irregular charcoal/rust-grey cloth and brown boot texture from own actor. Part-root-to-boot size must be fitted isotropically using own boot/ankle geometry; no anisotropic matching or automatic hidden-farsole acceptance."
+}

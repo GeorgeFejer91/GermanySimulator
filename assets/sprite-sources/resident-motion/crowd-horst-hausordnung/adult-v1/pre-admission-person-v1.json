@@ -1,0 +1,24 @@
+{
+  "id": "crowd-horst-hausordnung",
+  "standingOnly": true,
+  "cell": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    150
+  ],
+  "figureHeight": 136,
+  "figureWorldHeight": 1.6,
+  "aliases": [
+    "crowd-horst-hausordnung",
+    "street-horst-hausordnung"
+  ],
+  "standing": {
+    "file": "./assets/characters/street/crowd-horst-hausordnung-standing.webp",
+    "sha256": "6122902b7f985027b6c280b0e7a5ae148469d49a0f6667338891b207df25cdac",
+    "width": 128,
+    "height": 160
+  }
+}

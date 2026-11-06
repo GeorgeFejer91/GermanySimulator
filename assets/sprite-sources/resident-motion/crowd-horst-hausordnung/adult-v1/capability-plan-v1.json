@@ -1,0 +1,92 @@
+{
+  "id": "crowd-horst-hausordnung",
+  "status": "Own new complete source family; no prior public motion family",
+  "authoredHeight": 2.33,
+  "authoredStride": 13.6305,
+  "ownSourceField": "cardinal-reaction-controls-v1.json",
+  "durationMechanics": "Established shared16frame quiet names; only timing topology reused, no otheractor anatomy/pixels/fields",
+  "states": {
+    "idle": {
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ]
+    },
+    "look": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ]
+    },
+    "success": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ]
+    },
+    "failure": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ]
+    }
+  },
+  "runtimeWaitAlias": "Exact idle alias required by existing idle-to-wait mapping",
+  "props": "LEFTclipboard,RIGHTbeltkeys,emptyRIGHThand;noBuergeramtHorstchange"
+}

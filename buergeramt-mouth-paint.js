@@ -121,7 +121,7 @@ export function nativeMouthProfile(manifest,id){
 
 export function validateMouthProfile(profile,id){
  const names=['crease','open_upper','open_lower','source_upper','source_lower'];
- const valid=profile&&names.every(name=>Array.isArray(profile[name])&&profile[name].length===5&&profile[name].every(v=>Number.isFinite(v)&&Math.abs(v)<=1.5));
+ const valid=profile&&names.every(name=>Array.isArray(profile[name])&&profile[name].length===5&&profile[name].every(v=>Number.isFinite(v)&&v>=-1.5&&v<=(name==='open_lower'?2.9:1.5)));
  const corners=profile?.corners;
  if(!valid||!Array.isArray(corners)||corners.length!==2||!corners.every(v=>Number.isFinite(v)&&Math.abs(v)<=1.8)||corners[0]>=0||corners[1]<=0||corners[1]-corners[0]<.5||!Array.isArray(profile.width)||profile.width.length!==2||!profile.width.every(Number.isFinite)||profile.width[0]<0||profile.width[0]>.2||profile.width[1]<0||profile.width[1]>.45||!Number.isFinite(profile.teeth)||profile.teeth<0||profile.teeth>1)throw new Error('Unregistered native lip profile: '+id);
  for(let i=0;i<5;i++){

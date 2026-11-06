@@ -1,0 +1,21 @@
+{
+  "status": "RAW_PROPOSAL_ONLY_ROOT_VIEW_PENDING",
+  "mode": "built-in image_gen",
+  "original": "C:/Users/cogpsy-vrlab/.codex/generated_images/01a1ac27-119e-75d1-b510-19e4ba8f1fe0/exec-9d05f8be-acbf-4d24-a959-7d451343ddca.png",
+  "rawCopy": "assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/near-cloth-backing-v1/raw-right-near-cloth-v1.png",
+  "sha256": "e277f0bbcebfbddc90064b428dadec4100b9a96e9f2388e63a199b2caffe1f7a",
+  "originalSha256": "e277f0bbcebfbddc90064b428dadec4100b9a96e9f2388e63a199b2caffe1f7a",
+  "bytes": 323356,
+  "width": 1254,
+  "height": 1254,
+  "prompt": "prompt.txt",
+  "promptSha256": "919db94101ae07f2da3b1b75b59135d9a55a318f4db7d02b04c6e0d6930d30e1",
+  "references": "references.json",
+  "referencesSha256": "64be6206f5f58a7a497434afe10d5bdcce02d205c639899457f3ede92c340e74",
+  "transparentBackgroundRequested": true,
+  "localDecodeCompositeRegisterRender": false,
+  "cpuHeavyChildren": 0,
+  "gpuBrowserContexts": 0,
+  "existingProductionOrPilotWrites": false,
+  "reviewScope": "Viewed raw generated image returned by built-in tool. Trouser material and complete cloth continuity look plausible; exact registration, admissible insertion contour, original-visible pixel identity, alpha and phase1 repair have not been tested."
+}

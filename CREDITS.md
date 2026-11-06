@@ -456,6 +456,15 @@ paint. Prompts, source hashes, controls and raw rebuild recipe are under
 `assets/sprite-sources/resident-motion/crowd-dietmar-din-norm/adult-v1/`.
 His original adviser role, fixed voice, recordings and texts remain unchanged.
 
+Horst Hausordnung's mature street adviser family uses his own OpenAI ImageGen
+directional paintings, complete far-leg sources and hidden trouser cloth.
+His clipboard stays in his anatomical left hand, with keys at his right belt
+and an empty right hand. Connected walking, phase-owned stops, four quiet
+performances and pose-bound mouths retain his original adviser role, fixed
+voice, recordings and texts. Raw prompts, source hashes, controls and recipes
+are under
+`assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/`.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

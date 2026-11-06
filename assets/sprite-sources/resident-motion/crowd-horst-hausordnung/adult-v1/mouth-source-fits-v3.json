@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "actor": "crowd-horst-hausordnung",
+  "status": "Accepted own rest source/material envelopes; fullfamily/game/media and minifiedlandscape clarity pending",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "sourceFigurePixels": 400,
+  "groundPivot": [
+    256,
+    472
+  ],
+  "authoredHeight": 2.33,
+  "authoredStride": 13.6305,
+  "method": "Own v2 physical crease/upper/axes construction retained. Only three root-approved lower envelopes change; actual own lip pad stops before jaw/chin. RIGHT v2 accepted2.4/normal1.6 remains exact; no density/gain/AA change.",
+  "views": {
+    "down": {
+      "source": "registered-v1/down.png",
+      "sha256": "69a4edd26a9efefd160db18d79b3642ca00743408215dfab3efc373f18de9bf2",
+      "centerPx": [
+        252,
+        124.6
+      ],
+      "tangentAxisPx": [
+        10,
+        0
+      ],
+      "normalLengthPx": 1.6,
+      "creaseOffsetsPx": [
+        0,
+        -0.3,
+        -0.4,
+        -0.25,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.05,
+        -0.08,
+        -0.05,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        1.4,
+        2,
+        1.2,
+        0
+      ],
+      "protectedUpperFaceThroughY": 121,
+      "trace": "Own brown pressed lip crease247..257 around124..125, beneath orange upper-lip ridge122 and grey moustache through121. Lower-lip/skin brightens126..128 before chin shadow132. Source is treated as closed lip paint, not a pre-open black cavity. Two-pixel central downward opening stays within that own lower-lip skin room."
+    },
+    "down-right": {
+      "source": "registered-v1/down-right.png",
+      "sha256": "07a14f0bc8753228b1ac64430f1e67301524e09a2ece04bd0608e7b6965576a0",
+      "centerPx": [
+        257.5,
+        116.2
+      ],
+      "tangentAxisPx": [
+        10,
+        0.2
+      ],
+      "normalLengthPx": 1.5,
+      "creaseOffsetsPx": [
+        0,
+        -0.5,
+        -0.7,
+        -0.25,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.08,
+        -0.12,
+        -0.06,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        2.3,
+        3,
+        2,
+        0
+      ],
+      "protectedUpperFaceThroughY": 113,
+      "trace": "Own asymmetric attached quarter crease; approved lower source envelope reaches118.49954 within bright lip/skin before jaw; no further aperture search."
+    },
+    "right": {
+      "source": "registered-v1/right.png",
+      "sha256": "56058442d785550f4f1ce58c2d4d3622abcacf938505127040efad451b11a65e",
+      "centerPx": [
+        283.75,
+        124.5
+      ],
+      "tangentAxisPx": [
+        4.5,
+        -2
+      ],
+      "normalLengthPx": 1.6,
+      "creaseOffsetsPx": [
+        0,
+        0.05,
+        -0.08,
+        -0.05,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.03,
+        -0.08,
+        -0.02,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        1.3,
+        2.4,
+        1.2,
+        0
+      ],
+      "protectedUpperFaceThroughY": 121,
+      "trace": "Own narrow visible profile crease from inner281.5/125.5 toward286/123.5 lip edge. Grey moustache is above121; brown lip folds124..126 precede bright skin127..129. Source alpha declines outside287, so no far corner/extra width is invented. Actual supported edge corner remains attached and aperture tapers to zero there."
+    },
+    "left": {
+      "source": "registered-v1/left.png",
+      "sha256": "5efb063b3bce399bb752479396998dd60fbb8e1d69e953873083ed7e4e4e40b3",
+      "centerPx": [
+        240,
+        124.4
+      ],
+      "tangentAxisPx": [
+        5,
+        0.3
+      ],
+      "normalLengthPx": 1.2,
+      "creaseOffsetsPx": [
+        0,
+        0.25,
+        0.35,
+        0.05,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.05,
+        -0.05,
+        -0.04,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        2.1,
+        2.95,
+        2,
+        0
+      ],
+      "protectedUpperFaceThroughY": 122,
+      "trace": "Own LEFT crease/corners/normal unchanged; final source envelope reaches127.69408 in terminal lowerlip127..128 before jaw130/chin132. Standard native density, no further aperture search."
+    },
+    "down-left": {
+      "source": "registered-v1/down-left.png",
+      "sha256": "acdeba361fb733bae7e85f9933206ebbfee822c1f181f2d899be5b9c91dd2bb6",
+      "centerPx": [
+        237.2,
+        115.3
+      ],
+      "tangentAxisPx": [
+        8.6,
+        0.5
+      ],
+      "normalLengthPx": 1.3,
+      "creaseOffsetsPx": [
+        0,
+        -0.35,
+        -0.65,
+        -0.2,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.05,
+        -0.1,
+        -0.04,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        2.8,
+        3.75,
+        3,
+        0
+      ],
+      "protectedUpperFaceThroughY": 112,
+      "trace": "Own opposite-quarter crease/corners/normal unchanged; final source envelope reaches118.39477 before transition119/chin121..123. Standard native density, no further aperture search."
+    },
+    "up-right": null,
+    "up": null,
+    "up-left": null
+  },
+  "width": [
+    0,
+    0
+  ],
+  "teeth": 0,
+  "nativeTargets": {
+    "desktop": {
+      "cell": [
+        96,
+        120
+      ],
+      "figurePixels": 102,
+      "pivot": [
+        48,
+        112.5
+      ]
+    },
+    "mobile": {
+      "cell": [
+        64,
+        80
+      ],
+      "figurePixels": 68,
+      "pivot": [
+        32,
+        75
+      ]
+    }
+  },
+  "limits": "Five own rest fits/three rear nulls. Source/material correspondence accepted in scoped proofs; landscape1:1 clarity remains qualified for actualgame/media. No full412/change-pose/runtime or nativePNG activity inference.",
+  "compilerRequirement": {
+    "officialIntegrationRequired": "Root-owned Python/JS open_lower-only upper2.9 validation predicates; other bounds/formulas unchanged",
+    "privateCandidateRequiresExplicitPathAndSha": true
+  }
+}

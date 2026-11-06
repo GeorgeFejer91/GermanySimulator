@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "status": "Portable calibrated profile source; independent raw parts equivalence required, no runtime selection",
+  "actor": "crowd-horst-hausordnung",
+  "sourceFigurePixels": 400,
+  "sourceFigureWorldHeight": 2.33,
+  "simulationUnitWorld": 0.02,
+  "groundPivot": [
+    256,
+    472
+  ],
+  "wholeCuffShoePlateauY": 420,
+  "farRegistrationDensity": 0.2838427947598253,
+  "ownBootWidths": [
+    98,
+    97
+  ],
+  "amplitudeChoice": {
+    "horizontal": 11.7,
+    "vertical": 4.875,
+    "basis": "Initial authoring choice12%ofHorst actual mean98/97pxnearbootwidth; lift5%ofsameownmeasure. No amplitude reduction to cover defects and no otheractor geometry/clock copied."
+  },
+  "profiles": {
+    "right": {
+      "hipRoot": 286,
+      "kneeField": 344,
+      "calfField": 388
+    },
+    "left": {
+      "hipRoot": 286,
+      "kneeField": 350,
+      "calfField": 390
+    }
+  },
+  "fieldMethod": "Existing painted_walk.warp_layer; independent complete FAR and original NEAR. Root/hip frozen through286, weights smoothstep ofactualnodefraction to420; constantdx/dy for all420+completecuff/wholeboot paint. Standard planted stance curve .25..75 and smooth Hermite swing, oppositelegphasepi.",
+  "fixedOwnership": "Exact source forebody through286 plus complete original shadedRIGHTforearm/fingers,RIGHTbeltkeys and LEFTclipboard; semantic masks fromapprovedv5controls. No movingownedsourcehand/keypaint.",
+  "sourceControlFile": "profile-leg-controls-v6.json",
+  "sourceControlSha256": "5e48d6e2d578d95d02cdf4a2a4171dc2770ba3d66a520aec2cc870156f996658",
+  "layers": {
+    "right": {
+      "far-complete": {
+        "file": "profile-layers-v6/right-far-complete.png"
+      },
+      "near-original": {
+        "file": "profile-layers-v6/right-near-original.png"
+      },
+      "fixed-foreground": {
+        "file": "profile-layers-v6/right-fixed-foreground.png"
+      },
+      "assembled-neutral": {
+        "file": "profile-layers-v6/right-assembled-neutral.png"
+      }
+    },
+    "left": {
+      "far-complete": {
+        "file": "profile-layers-v6/left-far-complete.png"
+      },
+      "near-original": {
+        "file": "profile-layers-v6/left-near-original.png"
+      },
+      "fixed-foreground": {
+        "file": "profile-layers-v6/left-fixed-foreground.png"
+      },
+      "assembled-neutral": {
+        "file": "profile-layers-v6/left-assembled-neutral.png"
+      }
+    }
+  },
+  "originals": {
+    "right": {
+      "file": "profile-layers-v6/right-source-registered.png"
+    },
+    "left": {
+      "file": "profile-layers-v6/left-source-registered.png"
+    }
+  },
+  "nativeTargets": {
+    "desktop": {
+      "cell": [
+        96,
+        120
+      ],
+      "figurePixels": 102,
+      "pivot": [
+        48,
+        112.5
+      ]
+    },
+    "mobile": {
+      "cell": [
+        64,
+        80
+      ],
+      "figurePixels": 68,
+      "pivot": [
+        32,
+        75
+      ]
+    }
+  },
+  "clockPlan": {
+    "calibratedAuthoredStride": 13.6305,
+    "authoredFullCycleGroundSourcePixels": 46.8,
+    "sourceHeightPixels": 400,
+    "authoredWorldHeight": 2.33,
+    "simulationUnitWorld": 0.02,
+    "scope": "Source-calibrated own profile cadence. No ignored pilot/expected product is a generation dependency; runtime fit remains root-owned."
+  },
+  "partManifest": "profile-layers-v6/parts-manifest.json",
+  "partRecipe": "prepare-profile-layers-v6.py",
+  "partRecipeSha256": "7a6618000354d89bdf66b7c0d4d4b6a68e85efbf34edacccd29274e709e02dfe"
+}
