@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "request": "cardinals-request-v1.json",
+  "rawOriginal": "raw-cardinals-v1.png",
+  "sha256": "ad7640b4c3fcc47e354bed6159414d455a524d62adafb39ee4d9ada1efc5e445",
+  "toolOutputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac20-c534-7740-bdb0-e4b33e952898 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac20-c534-7740-bdb0-e4b33e952898\\exec-8a261115-e3af-450e-b56a-b072d771b9d9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "review": "Personally viewed generated four cardinals and actual light alpha composite. Coherent mature sturdy older body, connected neck/garments/feet, correct LEFT blue book and four genuine rotations. Source-stage cardinal identity/proportion accepted. Numeric6.5head prompt is a desired art guide, not claimed measured: actual stylized older figure around5.8heads still reads adult; no source or runtime scale acceptance follows.",
+  "alpha": "RGBA1536x1024, alpha0..254. Sample background/gaps have alpha0 with brown hidden RGB: this is not a painted backdrop. Clear hiddenRGB/premultiply before resampling via existing source pipeline. No chroma key.",
+  "status": "CARDINALS_SOURCE_PASS; missing quarters/motion/native/game/review/live"
+}

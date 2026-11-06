@@ -1,0 +1,19 @@
+{
+  "actor": "stadt-ute-ruhe",
+  "stage": "Private full-family source staging; not production selection",
+  "rawAuthority": {
+    "raw-cardinals-v1.png": "ad7640b4c3fcc47e354bed6159414d455a524d62adafb39ee4d9ada1efc5e445",
+    "raw-quarters-v1.png": "40f420927287f04371febe6abb4811d4e0c958b98cf18df44ee3303f3df64ed8",
+    "profile-leg-repair-v2/raw-far-leg-parts-v1.png": "315e0d84faf444da6d71fbb52e9086e34b218e92e6093f34c6f2bdadcff854ff"
+  },
+  "identity": "Mature sturdy older woman, silvergrey pixie, olive rectangular glasses, salmon threequarter cardigan, brown patterned collared blouse, olive checked knee skirt, cream wool stockings and brown closedback low loafers.",
+  "physicalPropHand": "LEFT",
+  "prop": "one closed blue paperback",
+  "rightHand": "empty",
+  "registration": "Own400pxfront/sole472,512square; original8 raw/view paintings preserved; additional FAR parts uniform0.18bothaxes/bothparts.",
+  "gait": "Own original NEAR and complete FAR profiles stay separate; independentp/p+.5, rigidwholeloafer plateau435. Exact face/book/hands above365 and own hem365..369 overlay.",
+  "mouths": "Five independently fitted own source creases, rear-three null; carry actual source fields and both axes through each selected pose.",
+  "quiet": "New standard supported quiet4 from existing shared planted_action with Ute neck150/hip272; no prior fullbakedUte preservation claim.",
+  "preflight": "output/ute-height/review-physics-source-v2/VERDICT.json",
+  "terminalCharacterComplete": false
+}

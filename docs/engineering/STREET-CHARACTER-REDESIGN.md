@@ -395,27 +395,44 @@ on160source/320native/10mouth checks with317stable pins. Her bounded full412
 source bake now supplies412cells/348unique images. Exact actual native audits
 pass824body cells and648mouth pairs, with root inspection of34pages covering
 the whole set. Its private own-only348movement/64reaction delivery rebuilds
-and check-reproduces at2.33/11.65; clean raw/formal/finalfit/world gates remain
-open, and original production remains standing-only1.6. Its formal provenance/
+and check-reproduces at2.33/11.65; original production remains standing-only1.6.
+Its formal provenance/
 completeness auditors now pass412frames/eightcategories per density with zero
-errors. A bounded raw-only replay recipe and validation-only authored baseline
-are prepared; no clean Ute rebuild is yet claimed.
+errors. The bounded raw-only recipe, using a validation-only authored baseline,
+passes a fresh18stage replay:29initial raw/code/control/dependency inputs,
+10runtime/person files,412cells and348unique source images reproduce exactly.
+The shared Nodefit gives2.77/13.85 from both original and clean authored packets.
+Source handoff38paths is prepared. Production/world/budget/publication gates
+remain open; both independent world harnesses are prepared but not executed.
 Dietmar's own5.2pxLEFT-mouth proposal is approved for pilot after root views
 actual source/desktop/mobile pairs; its mobile change remains small. All160
 source/320native pilot body and10mouth checks now pass independent review with
 376stable pins. Hidden FARheel limits remain explicit. His full412 bake has
-started in bounded sections; runtime/canonical selection remains held.
+finished412cells/348unique images in bounded sections. A newly inspected DOWN
+diagnostic finds a pre-existing briefcase upper-handle sliver at phases7/8,
+also present in held source. The root-viewed successor grip-mask pilot repairs
+the actual original handle without new paint. A distinctv3family passes412cells/
+348unique images with one substantive source component each. Only68DOWN source
+images change locally;279other-heading/quiet/turn images and all376pilot pins
+remain exact. No component tolerance was weakened. Native/formal/raw/world
+gates stay open.
+Runtime/canonical selection remains unchanged.
 Hildegard's complete FAR parts register uniformly
 at0.20 beside exact original NEAR paint. Held01's under-hem gap is preserved;
 the corrected whole-part LEFT translation closes it. Root views both16phase
 source cycles with rigid whole shoes and actual near/far five-point slopes−40.
-Her64full-strength native cells and10mouth endpoints also pass, with root
-inspection of12actual pages. All-stop/independent/fullfamily/world closure
-remains pending. Her first FARheel
+Her160source/320native cells across all5strengths and10mouth endpoints pass.
+Root inspects16new low-strength pages;12prior fullstrength/feet/mouth pages
+remain byte-exact in the new export. The272pin source/native/resource handoff
+passes independent source/native preflight:160source/320native/10mouths, all272
+pins stable. Maximum whole-job peak264.004MiB and longest18.063s; all7children
+closed. Actual reduced-strength FAR heel occlusion remains explicit. Fullfamily/
+world closure remains pending.
+Her first FARheel
 support was one pixel too low for a complete5×5opaque patch; the unchanged
 paint and failed check remain preserved beside actual inward support points.
 Politicians, children and Bürgeramt characters remain protected.
-Task-only publisher HEAD is27099967; no further release is staged. Continue the
+Task-only publisher HEAD is86c4a7ef; no further release is staged. Continue the
 same owning checklist and sequential publication lane without closing the goal.
 
 ### Günther whole-shoe successor accepted — 6 November 2026
@@ -463,8 +480,93 @@ Evidence: `output/guenther-shoe-repair/` and
 `output/guenther-height/review-camera-v2-street-roster/`. Publish the explicitly
 reviewed40planned paths through the task publisher, then verify immutable
 deployed root/compatibility and actual desktop/portrait Günther admission.
-Ute raw replay, Dietmar's remaining source sections and Hildegard's all-stop
-pilot resume after the public verification lease closes. Whole-cast goal open.
+Continue Ute production integration, Dietmar's handle pilot and Hildegard's
+independent source preflight after the public lease closes. Whole-cast goal open.
+
+Publication: normal pushed commit86c4a7ef4eefe287d90e0b16b706df9a3c4fa330,
+Pages42144719486 SUCCESS. All19public files match immutable committed blobs;
+four silent root/compatibility/original city-guenther-tuev desktop/portrait
+admission cases pass. Root views the actual desktop body/whole boots. The first
+portrait passes full-quad projection/admission but the existing Brandmauer
+region notice covers the body; preserve that capture with its visibility limit.
+A supplemental silent portrait now passes after the existing notice's natural
+hidden state. Root personally views the complete body/whole boots; all12existing
+notice checks show zero visible overlap with its full quad. The bound derives
+from immutable2100/2300ms existing wall-clock notice timers; no timer/clock/DOM
+or actor mutation is used. All5contexts/browser processes are closed. Root
+receipt: `output/guenther-shoe-repair/live/root-viewed.json`.
+Source/native/Physics/Camera/budget acceptance above remains separate from
+postdeployment bank admission. The whole street-cast goal stays active.
+
+### Ute integrated review candidate — 6 November 2026
+
+Only Ute changes among43expanded records versus public86c4a7ef. The selected
+candidate is2.77/13.85, person8f0136fb…c3cad, packet6b51b555…395f8a, backed by
+the exact authored2.33/11.65raw replay above. Source family/native/formal/voice
+gates pass; four new admission/action/hash/voice checks pass. The exact Pages
+street group now passes449checks. Initial old standing-only roster/admission/
+occlusion fixtures and the new mouth-payload Git-conversion REDs remain saved.
+Successor fixtures retain the original1.6Ute only as explicit test input, keep
+strict19actor/43standing hashes and629104encoded standing bytes, and preserve
+all payload bytes with the same local JSON attribute as prior mature families.
+No runtime fallback or acceptance assertion is loosened.
+
+The canonical Python selective packet check passes at actual2.77/13.85. Actual
+sparse packaging retains172runtime/module/sidecar files and omits all3Ute raw
+paintings.61planned release paths include own source closure, exact runtime,
+cache queries, focused tests/CI and credits/task record. All42other records and
+all prior tracked character images remain unchanged. Final independent source-
+selected Physics/Camera, comparable cold budgets and publication remain open.
+Freeze this candidate for the two prepared reviews before any world acceptance.
+
+Horst Hausordnung's eight genuine mature directions pass root raw-design view
+against his archived front: LEFTclipboard, RIGHTbeltkeys and emptyRIGHThand.
+One fixed source density/sole registration and complete own FAR-leg paint are
+next; hidden far anatomy is not inferred from occluded profile paint. No Horst
+runtime selection or local motion bake is authorized before the source gate.
+Evidence: `output/ute-height/`, `output/dietmar-height/`,
+`output/hildegard-height/` and `output/horst-height/`. Whole-cast goal stays open.
+
+Ute final affected-scope acceptance now passes on frozen791pins/61planned paths.
+Physics freshly checks80actual source/native/delivered foot regions across32
+unique cells, with maximum native centroid residual0.3145043px. Original owner,
+native12 and route5212/3488/1126/72 remain intact. Three-layout walking/stops,
+desktop quiet4/eightturns/98obstruction holds and original5.44srecording01
+cold/warm/pause/end/cancel pass. Complete cadence intervals13.8/13.8/14.0 are
+within12/60frame quantization of13.85. Floor probes retain a one-bottom-row
+fringe; hidden FAR endpoints and zero-penetration claims are not invented.
+Only the non-core run-stage.py differs from the prior317source-preflight pins;
+all25body/paint/control core pins stay exact. The other42records and1371prior
+tracked PNG/WebPs remain exact to public86c4a7ef.
+
+Independent Camera passes24contexts:7131correct depth samples/zero wrong,
+opaque walls, standing/packet delay404, texture retirement/reentry, loadedcar/
+door/landmark/fallback,3dcompatibility and all24actualturn captures. Own painted
+height matches Söder124/124desktop and60/60landscape; portrait129/131 follows
+the measured own400source/68nominal/67actual row calculation,2.5389437855px
+bound. All use one fixed family scale. One-time legal route placement/cooldown
+seed and declared settled reversals are QA setup, not natural traversal. Some
+forced page captures retain HUD/foreground occlusion; complete raw canvases and
+actual-route captures establish the body views. Root personally views10final
+world/comparison/turn images and retains the34page full native visual receipt.
+
+Comparable immutable86/candidate cold lab budgets pass unchanged limits:
+baseline16,385,769/16,000,344bytes; candidate16,390,166/16,004,741desktop/portrait,
+9accepted input observations and zero errors per layout. All4changed cache/
+metadata modules and originalstanding are immutable baseline blobs;10newUte
+paths are explicitly absent and denied, with zero attempted baseline requests.
+This SwiftShader lab pair does not imply FPS, physicalAndroid or causal speedup.
+Functional reviews use IrisXe/D3D11. All source jobs, review/budget browsers,
+contexts and servers are closed. PhysicalAndroid, listening, natural mission
+and broader unchanged-world coverage are not inferred.
+
+Both independent reviews are terminal. Final postreview changes are only this
+task record and Ute's source README, preserving every runtime/art/code/test pin.
+Seal those explicit text deltas, stage only61reviewed paths, publish normally
+through the task publisher and verify immutable deployed root/compatibility/
+actual desktop+portrait Ute body/admission. Dnative compilation, Hfullsource
+and Horst whole-FAR-leg source gate continue in the remote CI window. Keep the
+whole street-cast goal active after this one-character release.
 
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 

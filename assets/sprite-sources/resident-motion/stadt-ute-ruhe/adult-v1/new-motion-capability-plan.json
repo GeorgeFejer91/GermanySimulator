@@ -1,0 +1,108 @@
+{
+  "id": "stadt-ute-ruhe",
+  "status": "NEW supported capability for previously standing-only Ute; no claim of old actor-specific baked actions",
+  "preAdmissionPerson": "pre-admission-person.json",
+  "basis": "Existing shared planted_action and accepted21x20 street-family layout; same standard16sample walk,64phase stops/eight headings and four quiet performance vectors. Ute owns her own attachment landmarks and fitted lips.",
+  "actionLandmarks": {
+    "neck_y": 150,
+    "hip_y": 272
+  },
+  "states": {
+    "idle": {
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "sway_pixels": 1.2,
+      "nod_pixels": 1,
+      "lift_pixels": 0
+    },
+    "look": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    },
+    "success": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 2,
+      "nod_pixels": -3,
+      "lift_pixels": 10
+    },
+    "failure": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "sway_pixels": 4,
+      "nod_pixels": 4,
+      "lift_pixels": 0
+    }
+  },
+  "limits": [
+    "Source/preflight approval is not full-family/runtime/world acceptance",
+    "Original voice routes/recordings/texts/simulation remain exact"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "Own registered-pixel source controls, provisional until actual extrema/contact/native review",
+  "source": "registration.json",
+  "waistAndHip": "Measured visible blouse/skirt waist and outer garment drape; concealed hip/knee points are deformation controls, not claims of visible anatomy",
+  "cardinals": {
+    "down": {"waist": 230, "hip": 272, "mid": 256, "centres": [225, 286], "hem": [369, 369], "knee": [399, 399], "ankle": [444, 444], "foot_centres": [224, 290], "step_width": 16, "depth_amplitude": 7, "root_overlap": 2, "stride_curve": "planted", "auto_hand_mask": false},
+    "up": {"waist": 237, "hip": 275, "mid": 256, "centres": [230, 286], "hem": [370, 370], "knee": [400, 400], "ankle": [445, 445], "foot_centres": [225, 289], "step_width": 16, "depth_amplitude": 7, "root_overlap": 2, "stride_curve": "planted", "auto_hand_mask": false}
+  },
+  "profileField": {
+    "right": {"seam": 267, "hem": 368, "ankle": 444},
+    "left": {"seam": 264, "hem": 369, "ankle": 444},
+    "blendWidth": 32,
+    "stepAmplitude": 10,
+    "liftAmplitude": 4,
+    "stance": "Independent p and p+0.5 planted curves; positive-Jacobian inverse, never negate near displacement for far foot"
+  },
+  "protectedHandsAndLeftBook": {
+    "down": [[[177,213],[204,214],[208,253],[209,288],[205,306],[192,310],[180,302],[178,272]],[[304,214],[329,215],[330,270],[328,296],[320,307],[296,309],[293,276],[306,272]]],
+    "up": [[[187,222],[211,222],[214,262],[214,292],[207,302],[188,299],[186,267]],[[303,222],[325,222],[326,272],[323,299],[313,303],[301,292]]],
+    "right": [[[233,219],[257,219],[263,264],[265,295],[258,308],[246,310],[239,299],[235,266]]],
+    "left": [[[251,219],[279,220],[282,271],[282,297],[276,309],[250,311],[244,276],[253,272]]]
+  },
+  "limits": ["No field has been executed", "Actual source shoe witnesses and lip fits still required", "No body/mouth/native/world acceptance"]
+}

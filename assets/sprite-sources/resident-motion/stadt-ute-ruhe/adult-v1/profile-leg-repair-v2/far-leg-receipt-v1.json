@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen",
+  "request": "far-leg-request-v1.json",
+  "rawOriginal": "raw-far-leg-parts-v1.png",
+  "sha256": "315e0d84faf444da6d71fbb52e9086e34b218e92e6093f34c6f2bdadcff854ff",
+  "toolOutputHint": "Generated images are saved to C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac20-c534-7740-bdb0-e4b33e952898 as C:\\Users\\cogpsy-vrlab\\.codex\\generated_images\\01a1ac20-c534-7740-bdb0-e4b33e952898\\exec-8a351438-3efb-4f47-818a-4ab25c43b284.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "observed": "Personally viewed returned two whole cream-stocking knee/calf/ankle/dark-brown low closed-back loafer parts. Correct right-facing farLEFT and left-facing farRIGHT, complete heels/arches/toes/soles, no wholebody/props added. Mature fullness and matte own footwear direction preserved.",
+  "status": "SOURCE_PART_ANATOMY_PROVISIONAL; needs light/dark alpha/source composite, uniform registration/own scale, independent layers, full exposed foot/heel-toe/source/native before fullbake",
+  "limits": [
+    "No leg/shoe width or height stretching",
+    "Preserve original nearleg/upperbody/face/LEFTbluebook pixels",
+    "No hidden foot inferred with xblend",
+    "No native/runtime/height/publication claim"
+  ]
+}

@@ -10,8 +10,8 @@ const playerId = 'spieler-hans-peter-mustermann';
 const sample = [64, 23];
 const scale = 1.5 / 136;
 
-function fixture(id = 'player-default') {
-  registerStreetCharacterManifest(manifest);
+function fixture(id = 'player-default', registry = manifest) {
+  registerStreetCharacterManifest(registry);
   const actor = { id, x: 0, y: 0 };
   const host = new THREE.Group();
   host.position.set(2, 3, -4);
@@ -100,7 +100,10 @@ test('occlusion targets follow displayed sprite matrix with head, torso and feet
 });
 
 test('standing character without approved silhouette anchors yields no occlusion targets', async () => {
-  const f = fixture('city-ute-ruhe');
+  const standing=structuredClone(manifest);
+  standing.characters['stadt-ute-ruhe']=JSON.parse(await readFile(new URL('../assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/pre-admission-person.json',import.meta.url),'utf8'));
+  assert.equal(standing.characters['stadt-ute-ruhe'].standingOnly,true);
+  const f = fixture('city-ute-ruhe',standing);
   try {
     await finish(f);
     assert.equal(f.adapter.inspect().stage, 'standing');

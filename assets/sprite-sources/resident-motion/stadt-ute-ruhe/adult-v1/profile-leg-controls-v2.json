@@ -1,0 +1,30 @@
+{
+  "status": "Own source registration and deformation controls; source/native review required",
+  "uniformScale": 0.18,
+  "scaleBasis": "Own complete registered low loafer is about 74 working pixels; both additional complete shoe silhouettes are 413 raw pixels. One 0.18 density for both axes and both parts preserves shape; no anisotropic fit or measured-span acceptance target.",
+  "fixedForegroundAboveY": 365,
+  "upperOverlapUntilY": 370,
+  "sourceRootY": 370,
+  "wholeShoeTranslationFromY": 435,
+  "nodesY": [0, 340, 369, 402, 435, 511],
+  "stepAmplitude": 10,
+  "liftAmplitude": 4,
+  "profiles": {
+    "right": {
+      "component": [253, 48, 666, 983],
+      "rawAnkleX": 380,
+      "targetAnkleX": 243,
+      "baseline": 472,
+      "nearSide": "greater-x",
+      "nearBoundaryYX": [[369, 230], [385, 226], [405, 229], [428, 234], [438, 233], [444, 229], [450, 228], [460, 228], [472, 228]]
+    },
+    "left": {
+      "component": [866, 48, 1279, 984],
+      "rawAnkleX": 1154,
+      "targetAnkleX": 277,
+      "baseline": 472,
+      "nearSide": "lesser-x",
+      "nearBoundaryYX": [[369, 281], [385, 285], [405, 282], [428, 278], [438, 282], [444, 286], [450, 289], [460, 291], [472, 291]]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "stadt-ute-ruhe",
+  "generation": "Own eight raw directional paintings and complete FAR-leg painting; original NEAR paint and curved hem overlap. Existing shared sampler transports each leg independently at half-cycle separation; whole435+loafer paint translates rigidly.",
+  "rawInputs": {
+    "assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/raw-cardinals-v1.png": "ad7640b4c3fcc47e354bed6159414d455a524d62adafb39ee4d9ada1efc5e445",
+    "assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/raw-quarters-v1.png": "40f420927287f04371febe6abb4811d4e0c958b98cf18df44ee3303f3df64ed8",
+    "assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/profile-leg-repair-v2/raw-far-leg-parts-v1.png": "315e0d84faf444da6d71fbb52e9086e34b218e92e6093f34c6f2bdadcff854ff"
+  },
+  "capabilities": "Full412 family is NEW for old standing-only1.6 actor. Quiet4 uses documented existing shared vectors, ownneck150/hip272. No pre-existing Ute action animation is claimed.",
+  "authored": {
+    "height": 2.33,
+    "stride": 11.65
+  },
+  "selected": {
+    "height": 2.77,
+    "stride": 13.85
+  },
+  "portableRawInputs": 29,
+  "rawReplay": {
+    "runtimePersonFilesExact": 10,
+    "sourceCells": 412,
+    "uniqueSourceImages": 348,
+    "bodyIndexSha256": "a2088ef1f9b308098808b2e1ff690e5c590124a26fd4b519771594df880af75e"
+  },
+  "validationOnly": "validation-baseline-v1.json is read only after generation by finalvalidate; never a generation input.",
+  "scope": "Source/native/formal/raw gates pass; final production Physics/Camera/budget/live acceptance pending."
+}

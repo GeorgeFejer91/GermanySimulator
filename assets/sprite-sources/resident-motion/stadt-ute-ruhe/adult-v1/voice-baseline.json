@@ -1,0 +1,49 @@
+{
+  "id": "stadt-ute-ruhe",
+  "revision": "27099967e2bd6f14a80d1ab70289bd1df69a34d8",
+  "profileId": "cfdd8b4cda6646daa197e0291e146988",
+  "selectedRecordings": [
+    {
+      "file": "./assets/voices/city-dialogue/stadt-ute-ruhe-01.mp3",
+      "source": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+      "sha256": "b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce",
+      "selected": true,
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/city-dialogue/stadt-ute-ruhe-02.mp3",
+      "source": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+      "sha256": "7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446",
+      "selected": true,
+      "mouthHz": 40
+    }
+  ],
+  "recordings": [
+    {
+      "file": "./assets/voices/city-dialogue/stadt-ute-ruhe-01.mp3",
+      "source": "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+      "sha256": "b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce",
+      "selected": true,
+      "mouthHz": 40
+    },
+    {
+      "file": "./assets/voices/city-dialogue/stadt-ute-ruhe-02.mp3",
+      "source": "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt.",
+      "sha256": "7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446",
+      "selected": true,
+      "mouthHz": 40
+    }
+  ],
+  "hashes": {
+    "For-AI/AUDIO-TEXT-LIBRARY.js": "d3de849794d9bb2a35f5678fe40013e719ae61b4ec83887a85068c7cdcb20806",
+    "For-AI/VOICE-CAST.json": "0914723a66ad852e48ca23218529fea5f77eb99b2ecc24043e3604905516d170",
+    "assets/voices/candidate-dialogue/stadt-ute-ruhe-01.mp3": "ddcc1691df8fdf3ab088b38c24798e8544f470e1e9e977b15ba36afa0d87f00f",
+    "assets/voices/candidate-dialogue/stadt-ute-ruhe-02.mp3": "2f07d247545f03dd0d66758616070d1b002752c3a17b38cc15560c61444b5829",
+    "assets/voices/candidate-dialogue/stadt-ute-ruhe-03.mp3": "d11d950e6f34f5d496edd3377aa478b2498476d034dcbbc62caa3751db74f186",
+    "assets/voices/candidate-dialogue/stadt-ute-ruhe-04.mp3": "337345d4446527da0db277ec53b2e2f81ef73c7d880e54ca613f812942907a84",
+    "assets/voices/city-dialogue/stadt-ute-ruhe-01.mp3": "b5b2a84bb2bae2ae8d16227e3e11fafa2abf69a32a5f6a7f87389c5124341dce",
+    "assets/voices/city-dialogue/stadt-ute-ruhe-02.mp3": "7e5d52d3951786d064c5bb4a336facf5cd3a91cfe15de180f2246be72de6b446",
+    "assets/voices/city-dialogue/stadt-ute-ruhe-manifest.json": "58f8c3437cdfb593779ed2d8a27a0fb75474b837f02c910c47d72b7d1532ecb6"
+  },
+  "policy": "No voice, recording, text, catalog or route changes in this art family."
+}

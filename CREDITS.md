@@ -429,6 +429,15 @@ recipes are under `assets/sprite-sources/resident-motion/stadt-hannelore-sparkas
 Speech reuses her two exact selected German recordings and40Hz mouth-energy
 tracks; missing regional recordings retain captions.
 
+Ute Ruhe's mature open-city family uses her archived original project identity,
+own OpenAI ImageGen eight-direction paintings and complete far-leg sources.
+Her closed blue book remains in her anatomical left hand. Connected walking,
+phase-owned stops, four new quiet performances and pose-bound mouths reuse the
+existing sampler and her own paint. Raw prompts, hashes, controls and clean
+rebuild recipe are under
+`assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/`. Her original
+voice profile, selected recordings, texts and40Hz mouth tracks remain unchanged.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

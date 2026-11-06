@@ -25,13 +25,15 @@ test('adult fitting preserves source art and actions while scaling stride and re
 });
 
 test('fitting refuses short source proportions, invalid heights, and stale delivery metadata',()=>{
-  assert.throws(()=>fitAdultStreetHeight(manifest.characters['stadt-ute-ruhe'],null,2.77),/already redesigned adult/);
+  const shortSource=read('assets/sprite-sources/resident-motion/stadt-ute-ruhe/adult-v1/pre-admission-person.json');
+  assert.equal(shortSource.standingOnly,true);assert.equal(shortSource.figureWorldHeight,1.6);
+  assert.throws(()=>fitAdultStreetHeight(shortSource,null,2.77),/already redesigned adult/);
   for(const height of [0,-1,Infinity,NaN])assert.throws(()=>fitAdultStreetHeight(person,packet,height),/target height/);
   assert.throws(()=>fitAdultStreetHeight(person,{...packet,definitionSha256:'0'.repeat(64)},2.77),/original person/);
 });
 
-test('all eighteen redesigned citizens select the reference height with exact delivery bindings',()=>{
-  const ids=['stadt-klaus-dieter-klein','stadt-brigitte-mueller','stadt-wolfgang-schulz','stadt-ursula-neumann','stadt-manfred-din','stadt-irmgard-aktenstapel','stadt-guenther-tuev','stadt-hannelore-sparkasse','crowd-brigitte-bueroklammer','crowd-hildegard-brotzeit','quiz-gisela-becker','quiz-hartmut-keller','quiz-heike-hoffmann','quiz-sabine-krueger','crowd-baerbel-brezel','crowd-irmgard-aktenordner','stadt-karl-heinz-post','stadt-renate-termin'];
+test('all nineteen redesigned citizens select the reference height with exact delivery bindings',()=>{
+  const ids=['stadt-klaus-dieter-klein','stadt-brigitte-mueller','stadt-wolfgang-schulz','stadt-ursula-neumann','stadt-manfred-din','stadt-irmgard-aktenstapel','stadt-guenther-tuev','stadt-hannelore-sparkasse','crowd-brigitte-bueroklammer','crowd-hildegard-brotzeit','quiz-gisela-becker','quiz-hartmut-keller','quiz-heike-hoffmann','quiz-sabine-krueger','stadt-ute-ruhe','crowd-baerbel-brezel','crowd-irmgard-aktenordner','stadt-karl-heinz-post','stadt-renate-termin'];
   assert.deepEqual(Object.entries(manifest.characters).filter(([,p])=>p.standingOnly===false).map(([id])=>id),ids);
   for(const id of ids){
     const p=manifest.characters[id];assert.equal(p.figureWorldHeight,2.77,id);
