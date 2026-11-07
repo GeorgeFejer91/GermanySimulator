@@ -1,0 +1,206 @@
+{
+  "actor": "crowd-waltraud-wartemarke",
+  "adviserId": "street-waltraud-wartemarke",
+  "originalVoiceProfile": "deeeac80eca14f49ae6a8141594d73d2",
+  "rules": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "sourceFigurePixels": 400,
+  "pivot": [
+    256,
+    472
+  ],
+  "fits": {
+    "down": {
+      "cornersPx": [
+        [
+          247.5,
+          127.6
+        ],
+        [
+          264.2,
+          126.75
+        ]
+      ],
+      "normalLengthPx": 1.74,
+      "creaseNormalOffsetsPx": [
+        0,
+        -1.72,
+        -2.13,
+        -1.35,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.11,
+        -0.2,
+        -0.1,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        1.55,
+        2.3,
+        1.5,
+        0
+      ],
+      "protectedUpperFaceThroughY": 123,
+      "protectedJawFromY": 133,
+      "ownEvidence": "Pressed wine-red row125 from approximately x252 to261. The two downturns reach x247/y128 and x264/y127. Bright lower lip at y126 leads into the under-lip shade around y127\u2013129. Full opening ends within this own pad. Nostril shadow y117\u2013120 stays protected."
+    },
+    "front-right": {
+      "cornersPx": [
+        [
+          270.2,
+          125.65
+        ],
+        [
+          282.25,
+          124.1
+        ]
+      ],
+      "normalLengthPx": 1.88,
+      "creaseNormalOffsetsPx": [
+        0,
+        -1.35,
+        -2.45,
+        -2.05,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.08,
+        -0.16,
+        -0.09,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        1.3,
+        2.45,
+        1.85,
+        0
+      ],
+      "protectedUpperFaceThroughY": 121,
+      "protectedJawFromY": 132,
+      "ownEvidence": "Oblique pressed line reaches x274/y123 into wine-red x276\u2013280/y122, then turns down at x281\u2013282/y123\u2013124. Brighter own lower-lip paint at x275\u2013280/y123\u2013124 bounds the aperture. Lip ends ahead of nose shadow and clear of silhouette."
+    },
+    "right": {
+      "cornersPx": [
+        [
+          279.2,
+          128.85
+        ],
+        [
+          284.45,
+          126.15
+        ]
+      ],
+      "normalLengthPx": 1.12,
+      "creaseNormalOffsetsPx": [
+        0,
+        -0.15,
+        -0.35,
+        -0.25,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.04,
+        -0.12,
+        -0.06,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        0.75,
+        1.5,
+        0.8,
+        0
+      ],
+      "protectedUpperFaceThroughY": 123,
+      "protectedJawFromY": 133,
+      "ownEvidence": "Near corner lies by x279\u2013280/y128\u2013129, with the pressed lip rising to x284/y126. The actual lip sample x284,y126 is A247 and the next edge sample x285,y126 is A185. End stays inside the painted lip. Lower limit follows y127\u2013129 and does not round out the silhouette."
+    },
+    "up": null,
+    "rear-right": null,
+    "rear-left": null,
+    "left": {
+      "cornersPx": [
+        [
+          229.5,
+          126.05
+        ],
+        [
+          235.6,
+          128.65
+        ]
+      ],
+      "normalLengthPx": 1.15,
+      "creaseNormalOffsetsPx": [
+        0,
+        -0.48,
+        -0.35,
+        -0.25,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.05,
+        -0.1,
+        -0.06,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        0.75,
+        1.5,
+        0.85,
+        0
+      ],
+      "protectedUpperFaceThroughY": 123,
+      "protectedJawFromY": 133,
+      "ownEvidence": "Visible foremost lip at x229\u2013230/y126 falls into cheek corner x235\u2013236/y129. x229/y126 is A250 while x228/y126 is A71 on the edge. Positive lower bound uses the original bright lip pad around x231\u2013234/y128 and stays off the leading alpha silhouette."
+    },
+    "front-left": {
+      "cornersPx": [
+        [
+          225.6,
+          123.1
+        ],
+        [
+          236.2,
+          124.55
+        ]
+      ],
+      "normalLengthPx": 1.4,
+      "creaseNormalOffsetsPx": [
+        0,
+        -0.58,
+        -0.78,
+        -0.25,
+        0
+      ],
+      "openingUpperOffsetsPx": [
+        0,
+        -0.08,
+        -0.13,
+        -0.08,
+        0
+      ],
+      "openingLowerOffsetsPx": [
+        0,
+        1.25,
+        2,
+        1.5,
+        0
+      ],
+      "protectedUpperFaceThroughY": 120,
+      "protectedJawFromY": 129,
+      "ownEvidence": "Joined crease x225\u2013231/y122\u2013123 and asymmetric dark corner trail into x234\u2013236/y124. Original lower red highlight x226\u2013230/y124 is lip paint. Open limit stops near y125 before the separate chin pad. No observed separable cavity, teeth or far-corner reconstruction."
+    }
+  }
+}

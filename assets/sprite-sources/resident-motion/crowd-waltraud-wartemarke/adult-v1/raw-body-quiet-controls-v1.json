@@ -1,0 +1,158 @@
+{
+  "actor": "crowd-waltraud-wartemarke",
+  "nodesY": [
+    0,
+    145,
+    170,
+    353,
+    414,
+    511
+  ],
+  "sourceFigurePixels": 400,
+  "sourcePivot": [
+    256,
+    472
+  ],
+  "sourceClockForPrep": 15.145,
+  "witnesses": {
+    "head": {
+      "part": "head",
+      "bounds": [
+        216,
+        74,
+        287,
+        139
+      ]
+    },
+    "leftFolderAndThreeTabs": {
+      "part": "upper",
+      "bounds": [
+        275,
+        173,
+        325,
+        272
+      ]
+    },
+    "freeRightHand": {
+      "part": "upper",
+      "bounds": [
+        166,
+        288,
+        199,
+        339
+      ]
+    },
+    "leftShoe": {
+      "part": "feet",
+      "bounds": [
+        266,
+        437,
+        310,
+        473
+      ]
+    },
+    "rightShoe": {
+      "part": "feet",
+      "bounds": [
+        201,
+        437,
+        247,
+        473
+      ]
+    }
+  },
+  "actions": {
+    "idle": {
+      "samples": [
+        0,
+        4,
+        12,
+        16
+      ],
+      "headDxDy": [
+        0,
+        -2
+      ],
+      "forebodyDxDy": [
+        0,
+        -2
+      ],
+      "reading": "Restrained breath and settle."
+    },
+    "look": {
+      "samples": [
+        0,
+        4,
+        8,
+        15
+      ],
+      "headDxDy": [
+        6,
+        0
+      ],
+      "forebodyDxDy": [
+        0,
+        0
+      ],
+      "reading": "Brief orienting glance. Six source pixels is roughly one twelfth of the actual painted head width."
+    },
+    "success": {
+      "samples": [
+        0,
+        4,
+        8,
+        15
+      ],
+      "headDxDy": [
+        2,
+        -6
+      ],
+      "forebodyDxDy": [
+        0,
+        -2
+      ],
+      "reading": "Small affirmative lift in the mature posture."
+    },
+    "failure": {
+      "samples": [
+        0,
+        4,
+        8,
+        15
+      ],
+      "headDxDy": [
+        -2,
+        6
+      ],
+      "forebodyDxDy": [
+        -2,
+        2
+      ],
+      "reading": "Quiet downward set, without a hand or prop gesture."
+    }
+  },
+  "native": {
+    "desktop": {
+      "cell": [
+        96,
+        120
+      ],
+      "figure": 102,
+      "pivot": [
+        48,
+        112.5
+      ]
+    },
+    "mobile": {
+      "cell": [
+        64,
+        80
+      ],
+      "figure": 68,
+      "pivot": [
+        32,
+        75
+      ]
+    }
+  }
+}

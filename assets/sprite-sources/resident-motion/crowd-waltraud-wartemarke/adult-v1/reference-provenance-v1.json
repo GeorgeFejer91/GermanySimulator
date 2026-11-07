@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "actor": "crowd-waltraud-wartemarke",
+  "baseRevision": "026b4d4d2c4dfdd26a675f555fa7b301175282cd",
+  "requests": {
+    "cardinals-request-v1.json": [
+      {
+        "imageIndex": 0,
+        "path": "assets/sprite-sources/street-advisers/waltraud-wartemarke-keys-candidate.png",
+        "sha256": "b1981d2752ef9a74b089764217107f3d7175cfb0a3cedc1d7c9565eb1eb5633c"
+      },
+      {
+        "imageIndex": 1,
+        "path": "assets/sprite-sources/resident-motion/crowd-hildegard-brotzeit/adult-v1/raw-cardinals-v3.png",
+        "sha256": "d2cfe4230be3d95b3923a8f420ce746ed028858f28ed0334c4eaef63c6a835c9"
+      }
+    ],
+    "quarters-request-v1.json": [
+      {
+        "imageIndex": 0,
+        "path": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-cardinals-v1.png",
+        "sha256": "bc4c994b7a09234a08f56455beaef16ccf44392ccd04893fd7a5e71548e5fbf8"
+      },
+      {
+        "imageIndex": 1,
+        "path": "assets/sprite-sources/street-advisers/waltraud-wartemarke-keys-candidate.png",
+        "sha256": "b1981d2752ef9a74b089764217107f3d7175cfb0a3cedc1d7c9565eb1eb5633c"
+      }
+    ],
+    "far-request-v1.json": [
+      {
+        "imageIndex": 0,
+        "path": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-cardinals-v1.png",
+        "sha256": "bc4c994b7a09234a08f56455beaef16ccf44392ccd04893fd7a5e71548e5fbf8"
+      }
+    ]
+  }
+}

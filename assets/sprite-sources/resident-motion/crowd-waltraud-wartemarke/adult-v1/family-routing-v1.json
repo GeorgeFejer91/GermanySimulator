@@ -1,0 +1,6143 @@
+{
+  "status": "PREP_RAW_ACTOR_BODY_PACK_TOPOLOGY_ONLY",
+  "actor": "crowd-waltraud-wartemarke",
+  "shape": {
+    "id": "crowd-waltraud-wartemarke",
+    "aliases": [
+      "crowd-waltraud-wartemarke",
+      "street-waltraud-wartemarke"
+    ],
+    "cell": [
+      128,
+      160
+    ],
+    "pivot": [
+      64,
+      150
+    ],
+    "figureHeight": 136
+  },
+  "grid": [
+    21,
+    20
+  ],
+  "sourceFigure": 400,
+  "sourcePivot": [
+    256,
+    472
+  ],
+  "authoredHeight": 2.33,
+  "authoredStride": 15.145,
+  "order": [
+    "down",
+    "right",
+    "up",
+    "left"
+  ],
+  "turns": [
+    "down",
+    "front-right",
+    "right",
+    "rear-right",
+    "up",
+    "rear-left",
+    "left",
+    "front-left"
+  ],
+  "canonicalActions": [
+    "idle",
+    "look",
+    "success",
+    "failure"
+  ],
+  "standingSourceRole": "neutral-down",
+  "standingLogicalSlot": 168,
+  "paddingSlots": [
+    396,
+    397,
+    398,
+    415,
+    416,
+    417,
+    418,
+    419
+  ],
+  "selectedCells": 412,
+  "uniqueSourceRoles": 328,
+  "bodyKindCounts": {
+    "walk": 64,
+    "stop": 256,
+    "bridge": 20,
+    "turn": 8,
+    "action": 64
+  },
+  "visibleMouthCount": 324,
+  "explicitRearNullCount": 88,
+  "native": {
+    "desktop": {
+      "cell": [
+        96,
+        120
+      ],
+      "figure": 102,
+      "pivot": [
+        48,
+        112.5
+      ]
+    },
+    "mobile": {
+      "cell": [
+        64,
+        80
+      ],
+      "figure": 68,
+      "pivot": [
+        32,
+        75
+      ]
+    },
+    "standing": {
+      "cell": [
+        128,
+        160
+      ],
+      "figure": 136,
+      "pivot": [
+        64,
+        150
+      ]
+    }
+  },
+  "roles": {
+    "walk-down-00": {
+      "relativeSource": "body-v1/down-0/walk-down-00/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-01": {
+      "relativeSource": "body-v1/down-0/walk-down-01/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-02": {
+      "relativeSource": "body-v1/down-0/walk-down-02/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-03": {
+      "relativeSource": "body-v1/down-0/walk-down-03/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-04": {
+      "relativeSource": "body-v1/down-0/walk-down-04/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-05": {
+      "relativeSource": "body-v1/down-0/walk-down-05/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-06": {
+      "relativeSource": "body-v1/down-0/walk-down-06/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-07": {
+      "relativeSource": "body-v1/down-0/walk-down-07/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-00-1": {
+      "relativeSource": "body-v1/down-0/stop-down-00-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-00-2": {
+      "relativeSource": "body-v1/down-0/stop-down-00-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-00-3": {
+      "relativeSource": "body-v1/down-0/stop-down-00-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-01-1": {
+      "relativeSource": "body-v1/down-0/stop-down-01-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-01-2": {
+      "relativeSource": "body-v1/down-0/stop-down-01-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-01-3": {
+      "relativeSource": "body-v1/down-0/stop-down-01-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-02-1": {
+      "relativeSource": "body-v1/down-0/stop-down-02-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-02-2": {
+      "relativeSource": "body-v1/down-0/stop-down-02-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-02-3": {
+      "relativeSource": "body-v1/down-0/stop-down-02-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-03-1": {
+      "relativeSource": "body-v1/down-0/stop-down-03-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-03-2": {
+      "relativeSource": "body-v1/down-0/stop-down-03-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-03-3": {
+      "relativeSource": "body-v1/down-0/stop-down-03-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-04-1": {
+      "relativeSource": "body-v1/down-0/stop-down-04-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-04-2": {
+      "relativeSource": "body-v1/down-0/stop-down-04-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-04-3": {
+      "relativeSource": "body-v1/down-0/stop-down-04-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-05-1": {
+      "relativeSource": "body-v1/down-0/stop-down-05-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-05-2": {
+      "relativeSource": "body-v1/down-0/stop-down-05-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-05-3": {
+      "relativeSource": "body-v1/down-0/stop-down-05-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-06-1": {
+      "relativeSource": "body-v1/down-0/stop-down-06-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-06-2": {
+      "relativeSource": "body-v1/down-0/stop-down-06-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-06-3": {
+      "relativeSource": "body-v1/down-0/stop-down-06-3/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-07-1": {
+      "relativeSource": "body-v1/down-0/stop-down-07-1/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-07-2": {
+      "relativeSource": "body-v1/down-0/stop-down-07-2/source.png",
+      "stage": "down-0"
+    },
+    "stop-down-07-3": {
+      "relativeSource": "body-v1/down-0/stop-down-07-3/source.png",
+      "stage": "down-0"
+    },
+    "walk-down-08": {
+      "relativeSource": "body-v1/down-1/walk-down-08/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-09": {
+      "relativeSource": "body-v1/down-1/walk-down-09/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-10": {
+      "relativeSource": "body-v1/down-1/walk-down-10/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-11": {
+      "relativeSource": "body-v1/down-1/walk-down-11/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-12": {
+      "relativeSource": "body-v1/down-1/walk-down-12/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-13": {
+      "relativeSource": "body-v1/down-1/walk-down-13/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-14": {
+      "relativeSource": "body-v1/down-1/walk-down-14/source.png",
+      "stage": "down-1"
+    },
+    "walk-down-15": {
+      "relativeSource": "body-v1/down-1/walk-down-15/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-08-1": {
+      "relativeSource": "body-v1/down-1/stop-down-08-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-08-2": {
+      "relativeSource": "body-v1/down-1/stop-down-08-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-08-3": {
+      "relativeSource": "body-v1/down-1/stop-down-08-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-09-1": {
+      "relativeSource": "body-v1/down-1/stop-down-09-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-09-2": {
+      "relativeSource": "body-v1/down-1/stop-down-09-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-09-3": {
+      "relativeSource": "body-v1/down-1/stop-down-09-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-10-1": {
+      "relativeSource": "body-v1/down-1/stop-down-10-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-10-2": {
+      "relativeSource": "body-v1/down-1/stop-down-10-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-10-3": {
+      "relativeSource": "body-v1/down-1/stop-down-10-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-11-1": {
+      "relativeSource": "body-v1/down-1/stop-down-11-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-11-2": {
+      "relativeSource": "body-v1/down-1/stop-down-11-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-11-3": {
+      "relativeSource": "body-v1/down-1/stop-down-11-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-12-1": {
+      "relativeSource": "body-v1/down-1/stop-down-12-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-12-2": {
+      "relativeSource": "body-v1/down-1/stop-down-12-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-12-3": {
+      "relativeSource": "body-v1/down-1/stop-down-12-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-13-1": {
+      "relativeSource": "body-v1/down-1/stop-down-13-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-13-2": {
+      "relativeSource": "body-v1/down-1/stop-down-13-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-13-3": {
+      "relativeSource": "body-v1/down-1/stop-down-13-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-14-1": {
+      "relativeSource": "body-v1/down-1/stop-down-14-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-14-2": {
+      "relativeSource": "body-v1/down-1/stop-down-14-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-14-3": {
+      "relativeSource": "body-v1/down-1/stop-down-14-3/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-15-1": {
+      "relativeSource": "body-v1/down-1/stop-down-15-1/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-15-2": {
+      "relativeSource": "body-v1/down-1/stop-down-15-2/source.png",
+      "stage": "down-1"
+    },
+    "stop-down-15-3": {
+      "relativeSource": "body-v1/down-1/stop-down-15-3/source.png",
+      "stage": "down-1"
+    },
+    "walk-right-00": {
+      "relativeSource": "body-v1/right-0/walk-right-00/source.png",
+      "stage": "right-0"
+    },
+    "walk-right-01": {
+      "relativeSource": "body-v1/right-0/walk-right-01/source.png",
+      "stage": "right-0"
+    },
+    "walk-right-02": {
+      "relativeSource": "body-v1/right-0/walk-right-02/source.png",
+      "stage": "right-0"
+    },
+    "walk-right-03": {
+      "relativeSource": "body-v1/right-0/walk-right-03/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-00-2": {
+      "relativeSource": "body-v1/right-0/stop-right-00-2/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-00-3": {
+      "relativeSource": "body-v1/right-0/stop-right-00-3/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-00-1": {
+      "relativeSource": "body-v1/right-0/stop-right-00-1/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-01-1": {
+      "relativeSource": "body-v1/right-0/stop-right-01-1/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-01-2": {
+      "relativeSource": "body-v1/right-0/stop-right-01-2/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-01-3": {
+      "relativeSource": "body-v1/right-0/stop-right-01-3/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-02-1": {
+      "relativeSource": "body-v1/right-0/stop-right-02-1/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-02-2": {
+      "relativeSource": "body-v1/right-0/stop-right-02-2/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-02-3": {
+      "relativeSource": "body-v1/right-0/stop-right-02-3/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-03-1": {
+      "relativeSource": "body-v1/right-0/stop-right-03-1/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-03-2": {
+      "relativeSource": "body-v1/right-0/stop-right-03-2/source.png",
+      "stage": "right-0"
+    },
+    "stop-right-03-3": {
+      "relativeSource": "body-v1/right-0/stop-right-03-3/source.png",
+      "stage": "right-0"
+    },
+    "walk-right-04": {
+      "relativeSource": "body-v1/right-1/walk-right-04/source.png",
+      "stage": "right-1"
+    },
+    "walk-right-05": {
+      "relativeSource": "body-v1/right-1/walk-right-05/source.png",
+      "stage": "right-1"
+    },
+    "walk-right-06": {
+      "relativeSource": "body-v1/right-1/walk-right-06/source.png",
+      "stage": "right-1"
+    },
+    "walk-right-07": {
+      "relativeSource": "body-v1/right-1/walk-right-07/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-04-1": {
+      "relativeSource": "body-v1/right-1/stop-right-04-1/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-04-2": {
+      "relativeSource": "body-v1/right-1/stop-right-04-2/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-04-3": {
+      "relativeSource": "body-v1/right-1/stop-right-04-3/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-05-1": {
+      "relativeSource": "body-v1/right-1/stop-right-05-1/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-05-2": {
+      "relativeSource": "body-v1/right-1/stop-right-05-2/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-05-3": {
+      "relativeSource": "body-v1/right-1/stop-right-05-3/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-06-1": {
+      "relativeSource": "body-v1/right-1/stop-right-06-1/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-06-2": {
+      "relativeSource": "body-v1/right-1/stop-right-06-2/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-06-3": {
+      "relativeSource": "body-v1/right-1/stop-right-06-3/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-07-1": {
+      "relativeSource": "body-v1/right-1/stop-right-07-1/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-07-2": {
+      "relativeSource": "body-v1/right-1/stop-right-07-2/source.png",
+      "stage": "right-1"
+    },
+    "stop-right-07-3": {
+      "relativeSource": "body-v1/right-1/stop-right-07-3/source.png",
+      "stage": "right-1"
+    },
+    "walk-right-08": {
+      "relativeSource": "body-v1/right-2/walk-right-08/source.png",
+      "stage": "right-2"
+    },
+    "walk-right-09": {
+      "relativeSource": "body-v1/right-2/walk-right-09/source.png",
+      "stage": "right-2"
+    },
+    "walk-right-10": {
+      "relativeSource": "body-v1/right-2/walk-right-10/source.png",
+      "stage": "right-2"
+    },
+    "walk-right-11": {
+      "relativeSource": "body-v1/right-2/walk-right-11/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-08-1": {
+      "relativeSource": "body-v1/right-2/stop-right-08-1/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-08-2": {
+      "relativeSource": "body-v1/right-2/stop-right-08-2/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-08-3": {
+      "relativeSource": "body-v1/right-2/stop-right-08-3/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-09-1": {
+      "relativeSource": "body-v1/right-2/stop-right-09-1/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-09-2": {
+      "relativeSource": "body-v1/right-2/stop-right-09-2/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-09-3": {
+      "relativeSource": "body-v1/right-2/stop-right-09-3/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-10-1": {
+      "relativeSource": "body-v1/right-2/stop-right-10-1/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-10-2": {
+      "relativeSource": "body-v1/right-2/stop-right-10-2/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-10-3": {
+      "relativeSource": "body-v1/right-2/stop-right-10-3/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-11-1": {
+      "relativeSource": "body-v1/right-2/stop-right-11-1/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-11-2": {
+      "relativeSource": "body-v1/right-2/stop-right-11-2/source.png",
+      "stage": "right-2"
+    },
+    "stop-right-11-3": {
+      "relativeSource": "body-v1/right-2/stop-right-11-3/source.png",
+      "stage": "right-2"
+    },
+    "walk-right-12": {
+      "relativeSource": "body-v1/right-3/walk-right-12/source.png",
+      "stage": "right-3"
+    },
+    "walk-right-13": {
+      "relativeSource": "body-v1/right-3/walk-right-13/source.png",
+      "stage": "right-3"
+    },
+    "walk-right-14": {
+      "relativeSource": "body-v1/right-3/walk-right-14/source.png",
+      "stage": "right-3"
+    },
+    "walk-right-15": {
+      "relativeSource": "body-v1/right-3/walk-right-15/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-12-1": {
+      "relativeSource": "body-v1/right-3/stop-right-12-1/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-12-2": {
+      "relativeSource": "body-v1/right-3/stop-right-12-2/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-12-3": {
+      "relativeSource": "body-v1/right-3/stop-right-12-3/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-13-1": {
+      "relativeSource": "body-v1/right-3/stop-right-13-1/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-13-2": {
+      "relativeSource": "body-v1/right-3/stop-right-13-2/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-13-3": {
+      "relativeSource": "body-v1/right-3/stop-right-13-3/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-14-1": {
+      "relativeSource": "body-v1/right-3/stop-right-14-1/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-14-2": {
+      "relativeSource": "body-v1/right-3/stop-right-14-2/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-14-3": {
+      "relativeSource": "body-v1/right-3/stop-right-14-3/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-15-1": {
+      "relativeSource": "body-v1/right-3/stop-right-15-1/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-15-2": {
+      "relativeSource": "body-v1/right-3/stop-right-15-2/source.png",
+      "stage": "right-3"
+    },
+    "stop-right-15-3": {
+      "relativeSource": "body-v1/right-3/stop-right-15-3/source.png",
+      "stage": "right-3"
+    },
+    "walk-up-00": {
+      "relativeSource": "body-v1/up-0/walk-up-00/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-01": {
+      "relativeSource": "body-v1/up-0/walk-up-01/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-02": {
+      "relativeSource": "body-v1/up-0/walk-up-02/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-03": {
+      "relativeSource": "body-v1/up-0/walk-up-03/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-04": {
+      "relativeSource": "body-v1/up-0/walk-up-04/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-05": {
+      "relativeSource": "body-v1/up-0/walk-up-05/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-06": {
+      "relativeSource": "body-v1/up-0/walk-up-06/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-07": {
+      "relativeSource": "body-v1/up-0/walk-up-07/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-00-2": {
+      "relativeSource": "body-v1/up-0/stop-up-00-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-00-3": {
+      "relativeSource": "body-v1/up-0/stop-up-00-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-00-1": {
+      "relativeSource": "body-v1/up-0/stop-up-00-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-01-1": {
+      "relativeSource": "body-v1/up-0/stop-up-01-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-01-2": {
+      "relativeSource": "body-v1/up-0/stop-up-01-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-01-3": {
+      "relativeSource": "body-v1/up-0/stop-up-01-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-02-1": {
+      "relativeSource": "body-v1/up-0/stop-up-02-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-02-2": {
+      "relativeSource": "body-v1/up-0/stop-up-02-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-02-3": {
+      "relativeSource": "body-v1/up-0/stop-up-02-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-03-1": {
+      "relativeSource": "body-v1/up-0/stop-up-03-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-03-2": {
+      "relativeSource": "body-v1/up-0/stop-up-03-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-03-3": {
+      "relativeSource": "body-v1/up-0/stop-up-03-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-04-1": {
+      "relativeSource": "body-v1/up-0/stop-up-04-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-04-2": {
+      "relativeSource": "body-v1/up-0/stop-up-04-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-04-3": {
+      "relativeSource": "body-v1/up-0/stop-up-04-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-05-1": {
+      "relativeSource": "body-v1/up-0/stop-up-05-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-05-2": {
+      "relativeSource": "body-v1/up-0/stop-up-05-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-05-3": {
+      "relativeSource": "body-v1/up-0/stop-up-05-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-06-1": {
+      "relativeSource": "body-v1/up-0/stop-up-06-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-06-2": {
+      "relativeSource": "body-v1/up-0/stop-up-06-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-06-3": {
+      "relativeSource": "body-v1/up-0/stop-up-06-3/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-07-1": {
+      "relativeSource": "body-v1/up-0/stop-up-07-1/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-07-2": {
+      "relativeSource": "body-v1/up-0/stop-up-07-2/source.png",
+      "stage": "up-0"
+    },
+    "stop-up-07-3": {
+      "relativeSource": "body-v1/up-0/stop-up-07-3/source.png",
+      "stage": "up-0"
+    },
+    "walk-up-08": {
+      "relativeSource": "body-v1/up-1/walk-up-08/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-09": {
+      "relativeSource": "body-v1/up-1/walk-up-09/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-10": {
+      "relativeSource": "body-v1/up-1/walk-up-10/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-11": {
+      "relativeSource": "body-v1/up-1/walk-up-11/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-12": {
+      "relativeSource": "body-v1/up-1/walk-up-12/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-13": {
+      "relativeSource": "body-v1/up-1/walk-up-13/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-14": {
+      "relativeSource": "body-v1/up-1/walk-up-14/source.png",
+      "stage": "up-1"
+    },
+    "walk-up-15": {
+      "relativeSource": "body-v1/up-1/walk-up-15/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-08-1": {
+      "relativeSource": "body-v1/up-1/stop-up-08-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-08-2": {
+      "relativeSource": "body-v1/up-1/stop-up-08-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-08-3": {
+      "relativeSource": "body-v1/up-1/stop-up-08-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-09-1": {
+      "relativeSource": "body-v1/up-1/stop-up-09-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-09-2": {
+      "relativeSource": "body-v1/up-1/stop-up-09-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-09-3": {
+      "relativeSource": "body-v1/up-1/stop-up-09-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-10-1": {
+      "relativeSource": "body-v1/up-1/stop-up-10-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-10-2": {
+      "relativeSource": "body-v1/up-1/stop-up-10-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-10-3": {
+      "relativeSource": "body-v1/up-1/stop-up-10-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-11-1": {
+      "relativeSource": "body-v1/up-1/stop-up-11-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-11-2": {
+      "relativeSource": "body-v1/up-1/stop-up-11-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-11-3": {
+      "relativeSource": "body-v1/up-1/stop-up-11-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-12-1": {
+      "relativeSource": "body-v1/up-1/stop-up-12-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-12-2": {
+      "relativeSource": "body-v1/up-1/stop-up-12-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-12-3": {
+      "relativeSource": "body-v1/up-1/stop-up-12-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-13-1": {
+      "relativeSource": "body-v1/up-1/stop-up-13-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-13-2": {
+      "relativeSource": "body-v1/up-1/stop-up-13-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-13-3": {
+      "relativeSource": "body-v1/up-1/stop-up-13-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-14-1": {
+      "relativeSource": "body-v1/up-1/stop-up-14-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-14-2": {
+      "relativeSource": "body-v1/up-1/stop-up-14-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-14-3": {
+      "relativeSource": "body-v1/up-1/stop-up-14-3/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-15-1": {
+      "relativeSource": "body-v1/up-1/stop-up-15-1/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-15-2": {
+      "relativeSource": "body-v1/up-1/stop-up-15-2/source.png",
+      "stage": "up-1"
+    },
+    "stop-up-15-3": {
+      "relativeSource": "body-v1/up-1/stop-up-15-3/source.png",
+      "stage": "up-1"
+    },
+    "walk-left-00": {
+      "relativeSource": "body-v1/left-0/walk-left-00/source.png",
+      "stage": "left-0"
+    },
+    "walk-left-01": {
+      "relativeSource": "body-v1/left-0/walk-left-01/source.png",
+      "stage": "left-0"
+    },
+    "walk-left-02": {
+      "relativeSource": "body-v1/left-0/walk-left-02/source.png",
+      "stage": "left-0"
+    },
+    "walk-left-03": {
+      "relativeSource": "body-v1/left-0/walk-left-03/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-00-2": {
+      "relativeSource": "body-v1/left-0/stop-left-00-2/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-00-3": {
+      "relativeSource": "body-v1/left-0/stop-left-00-3/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-00-1": {
+      "relativeSource": "body-v1/left-0/stop-left-00-1/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-01-1": {
+      "relativeSource": "body-v1/left-0/stop-left-01-1/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-01-2": {
+      "relativeSource": "body-v1/left-0/stop-left-01-2/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-01-3": {
+      "relativeSource": "body-v1/left-0/stop-left-01-3/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-02-1": {
+      "relativeSource": "body-v1/left-0/stop-left-02-1/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-02-2": {
+      "relativeSource": "body-v1/left-0/stop-left-02-2/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-02-3": {
+      "relativeSource": "body-v1/left-0/stop-left-02-3/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-03-1": {
+      "relativeSource": "body-v1/left-0/stop-left-03-1/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-03-2": {
+      "relativeSource": "body-v1/left-0/stop-left-03-2/source.png",
+      "stage": "left-0"
+    },
+    "stop-left-03-3": {
+      "relativeSource": "body-v1/left-0/stop-left-03-3/source.png",
+      "stage": "left-0"
+    },
+    "walk-left-04": {
+      "relativeSource": "body-v1/left-1/walk-left-04/source.png",
+      "stage": "left-1"
+    },
+    "walk-left-05": {
+      "relativeSource": "body-v1/left-1/walk-left-05/source.png",
+      "stage": "left-1"
+    },
+    "walk-left-06": {
+      "relativeSource": "body-v1/left-1/walk-left-06/source.png",
+      "stage": "left-1"
+    },
+    "walk-left-07": {
+      "relativeSource": "body-v1/left-1/walk-left-07/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-04-1": {
+      "relativeSource": "body-v1/left-1/stop-left-04-1/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-04-2": {
+      "relativeSource": "body-v1/left-1/stop-left-04-2/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-04-3": {
+      "relativeSource": "body-v1/left-1/stop-left-04-3/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-05-1": {
+      "relativeSource": "body-v1/left-1/stop-left-05-1/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-05-2": {
+      "relativeSource": "body-v1/left-1/stop-left-05-2/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-05-3": {
+      "relativeSource": "body-v1/left-1/stop-left-05-3/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-06-1": {
+      "relativeSource": "body-v1/left-1/stop-left-06-1/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-06-2": {
+      "relativeSource": "body-v1/left-1/stop-left-06-2/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-06-3": {
+      "relativeSource": "body-v1/left-1/stop-left-06-3/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-07-1": {
+      "relativeSource": "body-v1/left-1/stop-left-07-1/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-07-2": {
+      "relativeSource": "body-v1/left-1/stop-left-07-2/source.png",
+      "stage": "left-1"
+    },
+    "stop-left-07-3": {
+      "relativeSource": "body-v1/left-1/stop-left-07-3/source.png",
+      "stage": "left-1"
+    },
+    "walk-left-08": {
+      "relativeSource": "body-v1/left-2/walk-left-08/source.png",
+      "stage": "left-2"
+    },
+    "walk-left-09": {
+      "relativeSource": "body-v1/left-2/walk-left-09/source.png",
+      "stage": "left-2"
+    },
+    "walk-left-10": {
+      "relativeSource": "body-v1/left-2/walk-left-10/source.png",
+      "stage": "left-2"
+    },
+    "walk-left-11": {
+      "relativeSource": "body-v1/left-2/walk-left-11/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-08-1": {
+      "relativeSource": "body-v1/left-2/stop-left-08-1/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-08-2": {
+      "relativeSource": "body-v1/left-2/stop-left-08-2/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-08-3": {
+      "relativeSource": "body-v1/left-2/stop-left-08-3/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-09-1": {
+      "relativeSource": "body-v1/left-2/stop-left-09-1/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-09-2": {
+      "relativeSource": "body-v1/left-2/stop-left-09-2/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-09-3": {
+      "relativeSource": "body-v1/left-2/stop-left-09-3/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-10-1": {
+      "relativeSource": "body-v1/left-2/stop-left-10-1/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-10-2": {
+      "relativeSource": "body-v1/left-2/stop-left-10-2/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-10-3": {
+      "relativeSource": "body-v1/left-2/stop-left-10-3/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-11-1": {
+      "relativeSource": "body-v1/left-2/stop-left-11-1/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-11-2": {
+      "relativeSource": "body-v1/left-2/stop-left-11-2/source.png",
+      "stage": "left-2"
+    },
+    "stop-left-11-3": {
+      "relativeSource": "body-v1/left-2/stop-left-11-3/source.png",
+      "stage": "left-2"
+    },
+    "walk-left-12": {
+      "relativeSource": "body-v1/left-3/walk-left-12/source.png",
+      "stage": "left-3"
+    },
+    "walk-left-13": {
+      "relativeSource": "body-v1/left-3/walk-left-13/source.png",
+      "stage": "left-3"
+    },
+    "walk-left-14": {
+      "relativeSource": "body-v1/left-3/walk-left-14/source.png",
+      "stage": "left-3"
+    },
+    "walk-left-15": {
+      "relativeSource": "body-v1/left-3/walk-left-15/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-12-1": {
+      "relativeSource": "body-v1/left-3/stop-left-12-1/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-12-2": {
+      "relativeSource": "body-v1/left-3/stop-left-12-2/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-12-3": {
+      "relativeSource": "body-v1/left-3/stop-left-12-3/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-13-1": {
+      "relativeSource": "body-v1/left-3/stop-left-13-1/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-13-2": {
+      "relativeSource": "body-v1/left-3/stop-left-13-2/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-13-3": {
+      "relativeSource": "body-v1/left-3/stop-left-13-3/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-14-1": {
+      "relativeSource": "body-v1/left-3/stop-left-14-1/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-14-2": {
+      "relativeSource": "body-v1/left-3/stop-left-14-2/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-14-3": {
+      "relativeSource": "body-v1/left-3/stop-left-14-3/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-15-1": {
+      "relativeSource": "body-v1/left-3/stop-left-15-1/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-15-2": {
+      "relativeSource": "body-v1/left-3/stop-left-15-2/source.png",
+      "stage": "left-3"
+    },
+    "stop-left-15-3": {
+      "relativeSource": "body-v1/left-3/stop-left-15-3/source.png",
+      "stage": "left-3"
+    },
+    "action-idle-00": {
+      "relativeSource": "body-v1/idle/action-idle-00/source.png",
+      "stage": "idle"
+    },
+    "action-idle-01": {
+      "relativeSource": "body-v1/idle/action-idle-01/source.png",
+      "stage": "idle"
+    },
+    "action-idle-02": {
+      "relativeSource": "body-v1/idle/action-idle-02/source.png",
+      "stage": "idle"
+    },
+    "action-idle-03": {
+      "relativeSource": "body-v1/idle/action-idle-03/source.png",
+      "stage": "idle"
+    },
+    "action-idle-04": {
+      "relativeSource": "body-v1/idle/action-idle-04/source.png",
+      "stage": "idle"
+    },
+    "action-idle-05": {
+      "relativeSource": "body-v1/idle/action-idle-05/source.png",
+      "stage": "idle"
+    },
+    "action-idle-06": {
+      "relativeSource": "body-v1/idle/action-idle-06/source.png",
+      "stage": "idle"
+    },
+    "action-idle-07": {
+      "relativeSource": "body-v1/idle/action-idle-07/source.png",
+      "stage": "idle"
+    },
+    "action-idle-08": {
+      "relativeSource": "body-v1/idle/action-idle-08/source.png",
+      "stage": "idle"
+    },
+    "action-idle-09": {
+      "relativeSource": "body-v1/idle/action-idle-09/source.png",
+      "stage": "idle"
+    },
+    "action-idle-10": {
+      "relativeSource": "body-v1/idle/action-idle-10/source.png",
+      "stage": "idle"
+    },
+    "action-idle-11": {
+      "relativeSource": "body-v1/idle/action-idle-11/source.png",
+      "stage": "idle"
+    },
+    "action-idle-12": {
+      "relativeSource": "body-v1/idle/action-idle-12/source.png",
+      "stage": "idle"
+    },
+    "action-idle-13": {
+      "relativeSource": "body-v1/idle/action-idle-13/source.png",
+      "stage": "idle"
+    },
+    "action-idle-14": {
+      "relativeSource": "body-v1/idle/action-idle-14/source.png",
+      "stage": "idle"
+    },
+    "action-idle-15": {
+      "relativeSource": "body-v1/idle/action-idle-15/source.png",
+      "stage": "idle"
+    },
+    "action-look-00": {
+      "relativeSource": "body-v1/look/action-look-00/source.png",
+      "stage": "look"
+    },
+    "action-look-01": {
+      "relativeSource": "body-v1/look/action-look-01/source.png",
+      "stage": "look"
+    },
+    "action-look-02": {
+      "relativeSource": "body-v1/look/action-look-02/source.png",
+      "stage": "look"
+    },
+    "action-look-03": {
+      "relativeSource": "body-v1/look/action-look-03/source.png",
+      "stage": "look"
+    },
+    "action-look-04": {
+      "relativeSource": "body-v1/look/action-look-04/source.png",
+      "stage": "look"
+    },
+    "action-look-05": {
+      "relativeSource": "body-v1/look/action-look-05/source.png",
+      "stage": "look"
+    },
+    "action-look-06": {
+      "relativeSource": "body-v1/look/action-look-06/source.png",
+      "stage": "look"
+    },
+    "action-look-07": {
+      "relativeSource": "body-v1/look/action-look-07/source.png",
+      "stage": "look"
+    },
+    "action-look-08": {
+      "relativeSource": "body-v1/look/action-look-08/source.png",
+      "stage": "look"
+    },
+    "action-look-09": {
+      "relativeSource": "body-v1/look/action-look-09/source.png",
+      "stage": "look"
+    },
+    "action-look-10": {
+      "relativeSource": "body-v1/look/action-look-10/source.png",
+      "stage": "look"
+    },
+    "action-look-11": {
+      "relativeSource": "body-v1/look/action-look-11/source.png",
+      "stage": "look"
+    },
+    "action-look-12": {
+      "relativeSource": "body-v1/look/action-look-12/source.png",
+      "stage": "look"
+    },
+    "action-look-13": {
+      "relativeSource": "body-v1/look/action-look-13/source.png",
+      "stage": "look"
+    },
+    "action-look-14": {
+      "relativeSource": "body-v1/look/action-look-14/source.png",
+      "stage": "look"
+    },
+    "action-look-15": {
+      "relativeSource": "body-v1/look/action-look-15/source.png",
+      "stage": "look"
+    },
+    "action-success-00": {
+      "relativeSource": "body-v1/success/action-success-00/source.png",
+      "stage": "success"
+    },
+    "action-success-01": {
+      "relativeSource": "body-v1/success/action-success-01/source.png",
+      "stage": "success"
+    },
+    "action-success-02": {
+      "relativeSource": "body-v1/success/action-success-02/source.png",
+      "stage": "success"
+    },
+    "action-success-03": {
+      "relativeSource": "body-v1/success/action-success-03/source.png",
+      "stage": "success"
+    },
+    "action-success-04": {
+      "relativeSource": "body-v1/success/action-success-04/source.png",
+      "stage": "success"
+    },
+    "action-success-05": {
+      "relativeSource": "body-v1/success/action-success-05/source.png",
+      "stage": "success"
+    },
+    "action-success-06": {
+      "relativeSource": "body-v1/success/action-success-06/source.png",
+      "stage": "success"
+    },
+    "action-success-07": {
+      "relativeSource": "body-v1/success/action-success-07/source.png",
+      "stage": "success"
+    },
+    "action-success-08": {
+      "relativeSource": "body-v1/success/action-success-08/source.png",
+      "stage": "success"
+    },
+    "action-success-09": {
+      "relativeSource": "body-v1/success/action-success-09/source.png",
+      "stage": "success"
+    },
+    "action-success-10": {
+      "relativeSource": "body-v1/success/action-success-10/source.png",
+      "stage": "success"
+    },
+    "action-success-11": {
+      "relativeSource": "body-v1/success/action-success-11/source.png",
+      "stage": "success"
+    },
+    "action-success-12": {
+      "relativeSource": "body-v1/success/action-success-12/source.png",
+      "stage": "success"
+    },
+    "action-success-13": {
+      "relativeSource": "body-v1/success/action-success-13/source.png",
+      "stage": "success"
+    },
+    "action-success-14": {
+      "relativeSource": "body-v1/success/action-success-14/source.png",
+      "stage": "success"
+    },
+    "action-success-15": {
+      "relativeSource": "body-v1/success/action-success-15/source.png",
+      "stage": "success"
+    },
+    "action-failure-00": {
+      "relativeSource": "body-v1/failure/action-failure-00/source.png",
+      "stage": "failure"
+    },
+    "action-failure-01": {
+      "relativeSource": "body-v1/failure/action-failure-01/source.png",
+      "stage": "failure"
+    },
+    "action-failure-02": {
+      "relativeSource": "body-v1/failure/action-failure-02/source.png",
+      "stage": "failure"
+    },
+    "action-failure-03": {
+      "relativeSource": "body-v1/failure/action-failure-03/source.png",
+      "stage": "failure"
+    },
+    "action-failure-04": {
+      "relativeSource": "body-v1/failure/action-failure-04/source.png",
+      "stage": "failure"
+    },
+    "action-failure-05": {
+      "relativeSource": "body-v1/failure/action-failure-05/source.png",
+      "stage": "failure"
+    },
+    "action-failure-06": {
+      "relativeSource": "body-v1/failure/action-failure-06/source.png",
+      "stage": "failure"
+    },
+    "action-failure-07": {
+      "relativeSource": "body-v1/failure/action-failure-07/source.png",
+      "stage": "failure"
+    },
+    "action-failure-08": {
+      "relativeSource": "body-v1/failure/action-failure-08/source.png",
+      "stage": "failure"
+    },
+    "action-failure-09": {
+      "relativeSource": "body-v1/failure/action-failure-09/source.png",
+      "stage": "failure"
+    },
+    "action-failure-10": {
+      "relativeSource": "body-v1/failure/action-failure-10/source.png",
+      "stage": "failure"
+    },
+    "action-failure-11": {
+      "relativeSource": "body-v1/failure/action-failure-11/source.png",
+      "stage": "failure"
+    },
+    "action-failure-12": {
+      "relativeSource": "body-v1/failure/action-failure-12/source.png",
+      "stage": "failure"
+    },
+    "action-failure-13": {
+      "relativeSource": "body-v1/failure/action-failure-13/source.png",
+      "stage": "failure"
+    },
+    "action-failure-14": {
+      "relativeSource": "body-v1/failure/action-failure-14/source.png",
+      "stage": "failure"
+    },
+    "action-failure-15": {
+      "relativeSource": "body-v1/failure/action-failure-15/source.png",
+      "stage": "failure"
+    },
+    "neutral-down": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-family-neutral-parts-v2/down-neutral.png",
+      "stage": "neutral-parts"
+    },
+    "neutral-front-right": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/registered/front-right.png",
+      "stage": "register"
+    },
+    "neutral-right": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-family-neutral-parts-v2/right-neutral.png",
+      "stage": "neutral-parts"
+    },
+    "neutral-rear-right": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/registered/rear-right.png",
+      "stage": "register"
+    },
+    "neutral-up": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-family-neutral-parts-v2/up-neutral.png",
+      "stage": "neutral-parts"
+    },
+    "neutral-rear-left": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/registered/rear-left.png",
+      "stage": "register"
+    },
+    "neutral-left": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/raw-family-neutral-parts-v2/left-neutral.png",
+      "stage": "neutral-parts"
+    },
+    "neutral-front-left": {
+      "relativeSource": "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/registered/front-left.png",
+      "stage": "register"
+    }
+  },
+  "cells": [
+    {
+      "slot": 0,
+      "row": 0,
+      "col": 0,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-00",
+      "entryPhase": 0
+    },
+    {
+      "slot": 1,
+      "row": 0,
+      "col": 1,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-01",
+      "entryPhase": 1
+    },
+    {
+      "slot": 2,
+      "row": 0,
+      "col": 2,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-02",
+      "entryPhase": 2
+    },
+    {
+      "slot": 3,
+      "row": 0,
+      "col": 3,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-03",
+      "entryPhase": 3
+    },
+    {
+      "slot": 4,
+      "row": 0,
+      "col": 4,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-04",
+      "entryPhase": 4
+    },
+    {
+      "slot": 5,
+      "row": 0,
+      "col": 5,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-05",
+      "entryPhase": 5
+    },
+    {
+      "slot": 6,
+      "row": 0,
+      "col": 6,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-06",
+      "entryPhase": 6
+    },
+    {
+      "slot": 7,
+      "row": 0,
+      "col": 7,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-07",
+      "entryPhase": 7
+    },
+    {
+      "slot": 8,
+      "row": 0,
+      "col": 8,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-08",
+      "entryPhase": 8
+    },
+    {
+      "slot": 9,
+      "row": 0,
+      "col": 9,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-09",
+      "entryPhase": 9
+    },
+    {
+      "slot": 10,
+      "row": 0,
+      "col": 10,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-10",
+      "entryPhase": 10
+    },
+    {
+      "slot": 11,
+      "row": 0,
+      "col": 11,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-11",
+      "entryPhase": 11
+    },
+    {
+      "slot": 12,
+      "row": 0,
+      "col": 12,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-12",
+      "entryPhase": 12
+    },
+    {
+      "slot": 13,
+      "row": 0,
+      "col": 13,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-13",
+      "entryPhase": 13
+    },
+    {
+      "slot": 14,
+      "row": 0,
+      "col": 14,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-14",
+      "entryPhase": 14
+    },
+    {
+      "slot": 15,
+      "row": 0,
+      "col": 15,
+      "kind": "walk",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-15",
+      "entryPhase": 15
+    },
+    {
+      "slot": 16,
+      "row": 0,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-00",
+      "entryPhase": 0,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 17,
+      "row": 0,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-1",
+      "entryPhase": 0,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 18,
+      "row": 0,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-2",
+      "entryPhase": 0,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 19,
+      "row": 0,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-3",
+      "entryPhase": 0,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 20,
+      "row": 0,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-01",
+      "entryPhase": 1,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 21,
+      "row": 1,
+      "col": 0,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-00",
+      "entryPhase": 0
+    },
+    {
+      "slot": 22,
+      "row": 1,
+      "col": 1,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-01",
+      "entryPhase": 1
+    },
+    {
+      "slot": 23,
+      "row": 1,
+      "col": 2,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-02",
+      "entryPhase": 2
+    },
+    {
+      "slot": 24,
+      "row": 1,
+      "col": 3,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-03",
+      "entryPhase": 3
+    },
+    {
+      "slot": 25,
+      "row": 1,
+      "col": 4,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-04",
+      "entryPhase": 4
+    },
+    {
+      "slot": 26,
+      "row": 1,
+      "col": 5,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-05",
+      "entryPhase": 5
+    },
+    {
+      "slot": 27,
+      "row": 1,
+      "col": 6,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-06",
+      "entryPhase": 6
+    },
+    {
+      "slot": 28,
+      "row": 1,
+      "col": 7,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-07",
+      "entryPhase": 7
+    },
+    {
+      "slot": 29,
+      "row": 1,
+      "col": 8,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-08",
+      "entryPhase": 8
+    },
+    {
+      "slot": 30,
+      "row": 1,
+      "col": 9,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-09",
+      "entryPhase": 9
+    },
+    {
+      "slot": 31,
+      "row": 1,
+      "col": 10,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-10",
+      "entryPhase": 10
+    },
+    {
+      "slot": 32,
+      "row": 1,
+      "col": 11,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-11",
+      "entryPhase": 11
+    },
+    {
+      "slot": 33,
+      "row": 1,
+      "col": 12,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-12",
+      "entryPhase": 12
+    },
+    {
+      "slot": 34,
+      "row": 1,
+      "col": 13,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-13",
+      "entryPhase": 13
+    },
+    {
+      "slot": 35,
+      "row": 1,
+      "col": 14,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-14",
+      "entryPhase": 14
+    },
+    {
+      "slot": 36,
+      "row": 1,
+      "col": 15,
+      "kind": "walk",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-15",
+      "entryPhase": 15
+    },
+    {
+      "slot": 37,
+      "row": 1,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-01-1",
+      "entryPhase": 1,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 38,
+      "row": 1,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-01-2",
+      "entryPhase": 1,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 39,
+      "row": 1,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-01-3",
+      "entryPhase": 1,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 40,
+      "row": 1,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-02",
+      "entryPhase": 2,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 41,
+      "row": 1,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-02-1",
+      "entryPhase": 2,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 42,
+      "row": 2,
+      "col": 0,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-00",
+      "entryPhase": 0
+    },
+    {
+      "slot": 43,
+      "row": 2,
+      "col": 1,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-01",
+      "entryPhase": 1
+    },
+    {
+      "slot": 44,
+      "row": 2,
+      "col": 2,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-02",
+      "entryPhase": 2
+    },
+    {
+      "slot": 45,
+      "row": 2,
+      "col": 3,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-03",
+      "entryPhase": 3
+    },
+    {
+      "slot": 46,
+      "row": 2,
+      "col": 4,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-04",
+      "entryPhase": 4
+    },
+    {
+      "slot": 47,
+      "row": 2,
+      "col": 5,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-05",
+      "entryPhase": 5
+    },
+    {
+      "slot": 48,
+      "row": 2,
+      "col": 6,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-06",
+      "entryPhase": 6
+    },
+    {
+      "slot": 49,
+      "row": 2,
+      "col": 7,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-07",
+      "entryPhase": 7
+    },
+    {
+      "slot": 50,
+      "row": 2,
+      "col": 8,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-08",
+      "entryPhase": 8
+    },
+    {
+      "slot": 51,
+      "row": 2,
+      "col": 9,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-09",
+      "entryPhase": 9
+    },
+    {
+      "slot": 52,
+      "row": 2,
+      "col": 10,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-10",
+      "entryPhase": 10
+    },
+    {
+      "slot": 53,
+      "row": 2,
+      "col": 11,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-11",
+      "entryPhase": 11
+    },
+    {
+      "slot": 54,
+      "row": 2,
+      "col": 12,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-12",
+      "entryPhase": 12
+    },
+    {
+      "slot": 55,
+      "row": 2,
+      "col": 13,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-13",
+      "entryPhase": 13
+    },
+    {
+      "slot": 56,
+      "row": 2,
+      "col": 14,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-14",
+      "entryPhase": 14
+    },
+    {
+      "slot": 57,
+      "row": 2,
+      "col": 15,
+      "kind": "walk",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-15",
+      "entryPhase": 15
+    },
+    {
+      "slot": 58,
+      "row": 2,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-02-2",
+      "entryPhase": 2,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 59,
+      "row": 2,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-02-3",
+      "entryPhase": 2,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 60,
+      "row": 2,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-03",
+      "entryPhase": 3,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 61,
+      "row": 2,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-03-1",
+      "entryPhase": 3,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 62,
+      "row": 2,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-03-2",
+      "entryPhase": 3,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 63,
+      "row": 3,
+      "col": 0,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-00",
+      "entryPhase": 0
+    },
+    {
+      "slot": 64,
+      "row": 3,
+      "col": 1,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-01",
+      "entryPhase": 1
+    },
+    {
+      "slot": 65,
+      "row": 3,
+      "col": 2,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-02",
+      "entryPhase": 2
+    },
+    {
+      "slot": 66,
+      "row": 3,
+      "col": 3,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-03",
+      "entryPhase": 3
+    },
+    {
+      "slot": 67,
+      "row": 3,
+      "col": 4,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-04",
+      "entryPhase": 4
+    },
+    {
+      "slot": 68,
+      "row": 3,
+      "col": 5,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-05",
+      "entryPhase": 5
+    },
+    {
+      "slot": 69,
+      "row": 3,
+      "col": 6,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-06",
+      "entryPhase": 6
+    },
+    {
+      "slot": 70,
+      "row": 3,
+      "col": 7,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-07",
+      "entryPhase": 7
+    },
+    {
+      "slot": 71,
+      "row": 3,
+      "col": 8,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-08",
+      "entryPhase": 8
+    },
+    {
+      "slot": 72,
+      "row": 3,
+      "col": 9,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-09",
+      "entryPhase": 9
+    },
+    {
+      "slot": 73,
+      "row": 3,
+      "col": 10,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-10",
+      "entryPhase": 10
+    },
+    {
+      "slot": 74,
+      "row": 3,
+      "col": 11,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-11",
+      "entryPhase": 11
+    },
+    {
+      "slot": 75,
+      "row": 3,
+      "col": 12,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-12",
+      "entryPhase": 12
+    },
+    {
+      "slot": 76,
+      "row": 3,
+      "col": 13,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-13",
+      "entryPhase": 13
+    },
+    {
+      "slot": 77,
+      "row": 3,
+      "col": 14,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-14",
+      "entryPhase": 14
+    },
+    {
+      "slot": 78,
+      "row": 3,
+      "col": 15,
+      "kind": "walk",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-15",
+      "entryPhase": 15
+    },
+    {
+      "slot": 79,
+      "row": 3,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-03-3",
+      "entryPhase": 3,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 80,
+      "row": 3,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-04",
+      "entryPhase": 4,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 81,
+      "row": 3,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-04-1",
+      "entryPhase": 4,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 82,
+      "row": 3,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-04-2",
+      "entryPhase": 4,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 83,
+      "row": 3,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-04-3",
+      "entryPhase": 4,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 84,
+      "row": 4,
+      "col": 0,
+      "kind": "bridge",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 85,
+      "row": 4,
+      "col": 1,
+      "kind": "bridge",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-3",
+      "entryPhase": 0,
+      "strength": 0.25
+    },
+    {
+      "slot": 86,
+      "row": 4,
+      "col": 2,
+      "kind": "bridge",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "neutral-down",
+      "entryPhase": 0,
+      "strength": 0
+    },
+    {
+      "slot": 87,
+      "row": 4,
+      "col": 3,
+      "kind": "bridge",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 88,
+      "row": 4,
+      "col": 4,
+      "kind": "bridge",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-00",
+      "entryPhase": 0,
+      "strength": 1
+    },
+    {
+      "slot": 89,
+      "row": 4,
+      "col": 5,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-05",
+      "entryPhase": 5,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 90,
+      "row": 4,
+      "col": 6,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-05-1",
+      "entryPhase": 5,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 91,
+      "row": 4,
+      "col": 7,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-05-2",
+      "entryPhase": 5,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 92,
+      "row": 4,
+      "col": 8,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-05-3",
+      "entryPhase": 5,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 93,
+      "row": 4,
+      "col": 9,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-06",
+      "entryPhase": 6,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 94,
+      "row": 4,
+      "col": 10,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-06-1",
+      "entryPhase": 6,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 95,
+      "row": 4,
+      "col": 11,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-06-2",
+      "entryPhase": 6,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 96,
+      "row": 4,
+      "col": 12,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-06-3",
+      "entryPhase": 6,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 97,
+      "row": 4,
+      "col": 13,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-07",
+      "entryPhase": 7,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 98,
+      "row": 4,
+      "col": 14,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-07-1",
+      "entryPhase": 7,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 99,
+      "row": 4,
+      "col": 15,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-07-2",
+      "entryPhase": 7,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 100,
+      "row": 4,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-07-3",
+      "entryPhase": 7,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 101,
+      "row": 4,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-08",
+      "entryPhase": 8,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 102,
+      "row": 4,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-08-1",
+      "entryPhase": 8,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 103,
+      "row": 4,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-08-2",
+      "entryPhase": 8,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 104,
+      "row": 4,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-08-3",
+      "entryPhase": 8,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 105,
+      "row": 5,
+      "col": 0,
+      "kind": "bridge",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 106,
+      "row": 5,
+      "col": 1,
+      "kind": "bridge",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-3",
+      "entryPhase": 0,
+      "strength": 0.25
+    },
+    {
+      "slot": 107,
+      "row": 5,
+      "col": 2,
+      "kind": "bridge",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "neutral-right",
+      "entryPhase": 0,
+      "strength": 0
+    },
+    {
+      "slot": 108,
+      "row": 5,
+      "col": 3,
+      "kind": "bridge",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 109,
+      "row": 5,
+      "col": 4,
+      "kind": "bridge",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-00",
+      "entryPhase": 0,
+      "strength": 1
+    },
+    {
+      "slot": 110,
+      "row": 5,
+      "col": 5,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-09",
+      "entryPhase": 9,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 111,
+      "row": 5,
+      "col": 6,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-09-1",
+      "entryPhase": 9,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 112,
+      "row": 5,
+      "col": 7,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-09-2",
+      "entryPhase": 9,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 113,
+      "row": 5,
+      "col": 8,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-09-3",
+      "entryPhase": 9,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 114,
+      "row": 5,
+      "col": 9,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-10",
+      "entryPhase": 10,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 115,
+      "row": 5,
+      "col": 10,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-10-1",
+      "entryPhase": 10,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 116,
+      "row": 5,
+      "col": 11,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-10-2",
+      "entryPhase": 10,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 117,
+      "row": 5,
+      "col": 12,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-10-3",
+      "entryPhase": 10,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 118,
+      "row": 5,
+      "col": 13,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-11",
+      "entryPhase": 11,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 119,
+      "row": 5,
+      "col": 14,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-11-1",
+      "entryPhase": 11,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 120,
+      "row": 5,
+      "col": 15,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-11-2",
+      "entryPhase": 11,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 121,
+      "row": 5,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-11-3",
+      "entryPhase": 11,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 122,
+      "row": 5,
+      "col": 17,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-12",
+      "entryPhase": 12,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 123,
+      "row": 5,
+      "col": 18,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-12-1",
+      "entryPhase": 12,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 124,
+      "row": 5,
+      "col": 19,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-12-2",
+      "entryPhase": 12,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 125,
+      "row": 5,
+      "col": 20,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-12-3",
+      "entryPhase": 12,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 126,
+      "row": 6,
+      "col": 0,
+      "kind": "bridge",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 127,
+      "row": 6,
+      "col": 1,
+      "kind": "bridge",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-3",
+      "entryPhase": 0,
+      "strength": 0.25
+    },
+    {
+      "slot": 128,
+      "row": 6,
+      "col": 2,
+      "kind": "bridge",
+      "view": "up",
+      "mouth": null,
+      "role": "neutral-up",
+      "entryPhase": 0,
+      "strength": 0
+    },
+    {
+      "slot": 129,
+      "row": 6,
+      "col": 3,
+      "kind": "bridge",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 130,
+      "row": 6,
+      "col": 4,
+      "kind": "bridge",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-00",
+      "entryPhase": 0,
+      "strength": 1
+    },
+    {
+      "slot": 131,
+      "row": 6,
+      "col": 5,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-13",
+      "entryPhase": 13,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 132,
+      "row": 6,
+      "col": 6,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-13-1",
+      "entryPhase": 13,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 133,
+      "row": 6,
+      "col": 7,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-13-2",
+      "entryPhase": 13,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 134,
+      "row": 6,
+      "col": 8,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-13-3",
+      "entryPhase": 13,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 135,
+      "row": 6,
+      "col": 9,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-14",
+      "entryPhase": 14,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 136,
+      "row": 6,
+      "col": 10,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-14-1",
+      "entryPhase": 14,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 137,
+      "row": 6,
+      "col": 11,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-14-2",
+      "entryPhase": 14,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 138,
+      "row": 6,
+      "col": 12,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-14-3",
+      "entryPhase": 14,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 139,
+      "row": 6,
+      "col": 13,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "walk-down-15",
+      "entryPhase": 15,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 140,
+      "row": 6,
+      "col": 14,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-15-1",
+      "entryPhase": 15,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 141,
+      "row": 6,
+      "col": 15,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-15-2",
+      "entryPhase": 15,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 142,
+      "row": 6,
+      "col": 16,
+      "kind": "stop",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "stop-down-15-3",
+      "entryPhase": 15,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 143,
+      "row": 6,
+      "col": 17,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-00",
+      "entryPhase": 0,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 144,
+      "row": 6,
+      "col": 18,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-1",
+      "entryPhase": 0,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 145,
+      "row": 6,
+      "col": 19,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-2",
+      "entryPhase": 0,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 146,
+      "row": 6,
+      "col": 20,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-00-3",
+      "entryPhase": 0,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 147,
+      "row": 7,
+      "col": 0,
+      "kind": "bridge",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 148,
+      "row": 7,
+      "col": 1,
+      "kind": "bridge",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-3",
+      "entryPhase": 0,
+      "strength": 0.25
+    },
+    {
+      "slot": 149,
+      "row": 7,
+      "col": 2,
+      "kind": "bridge",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "neutral-left",
+      "entryPhase": 0,
+      "strength": 0
+    },
+    {
+      "slot": 150,
+      "row": 7,
+      "col": 3,
+      "kind": "bridge",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-2",
+      "entryPhase": 0,
+      "strength": 0.5
+    },
+    {
+      "slot": 151,
+      "row": 7,
+      "col": 4,
+      "kind": "bridge",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-00",
+      "entryPhase": 0,
+      "strength": 1
+    },
+    {
+      "slot": 152,
+      "row": 7,
+      "col": 5,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-01",
+      "entryPhase": 1,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 153,
+      "row": 7,
+      "col": 6,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-01-1",
+      "entryPhase": 1,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 154,
+      "row": 7,
+      "col": 7,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-01-2",
+      "entryPhase": 1,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 155,
+      "row": 7,
+      "col": 8,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-01-3",
+      "entryPhase": 1,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 156,
+      "row": 7,
+      "col": 9,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-02",
+      "entryPhase": 2,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 157,
+      "row": 7,
+      "col": 10,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-02-1",
+      "entryPhase": 2,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 158,
+      "row": 7,
+      "col": 11,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-02-2",
+      "entryPhase": 2,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 159,
+      "row": 7,
+      "col": 12,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-02-3",
+      "entryPhase": 2,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 160,
+      "row": 7,
+      "col": 13,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-03",
+      "entryPhase": 3,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 161,
+      "row": 7,
+      "col": 14,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-03-1",
+      "entryPhase": 3,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 162,
+      "row": 7,
+      "col": 15,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-03-2",
+      "entryPhase": 3,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 163,
+      "row": 7,
+      "col": 16,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-03-3",
+      "entryPhase": 3,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 164,
+      "row": 7,
+      "col": 17,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-04",
+      "entryPhase": 4,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 165,
+      "row": 7,
+      "col": 18,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-04-1",
+      "entryPhase": 4,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 166,
+      "row": 7,
+      "col": 19,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-04-2",
+      "entryPhase": 4,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 167,
+      "row": 7,
+      "col": 20,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-04-3",
+      "entryPhase": 4,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 168,
+      "row": 8,
+      "col": 0,
+      "kind": "turn",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "neutral-down",
+      "turnHeading": "down"
+    },
+    {
+      "slot": 169,
+      "row": 8,
+      "col": 1,
+      "kind": "turn",
+      "view": "front-right",
+      "mouth": "own-visible-fit",
+      "role": "neutral-front-right",
+      "turnHeading": "front-right"
+    },
+    {
+      "slot": 170,
+      "row": 8,
+      "col": 2,
+      "kind": "turn",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "neutral-right",
+      "turnHeading": "right"
+    },
+    {
+      "slot": 171,
+      "row": 8,
+      "col": 3,
+      "kind": "turn",
+      "view": "rear-right",
+      "mouth": null,
+      "role": "neutral-rear-right",
+      "turnHeading": "rear-right"
+    },
+    {
+      "slot": 172,
+      "row": 8,
+      "col": 4,
+      "kind": "turn",
+      "view": "up",
+      "mouth": null,
+      "role": "neutral-up",
+      "turnHeading": "up"
+    },
+    {
+      "slot": 173,
+      "row": 8,
+      "col": 5,
+      "kind": "turn",
+      "view": "rear-left",
+      "mouth": null,
+      "role": "neutral-rear-left",
+      "turnHeading": "rear-left"
+    },
+    {
+      "slot": 174,
+      "row": 8,
+      "col": 6,
+      "kind": "turn",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "neutral-left",
+      "turnHeading": "left"
+    },
+    {
+      "slot": 175,
+      "row": 8,
+      "col": 7,
+      "kind": "turn",
+      "view": "front-left",
+      "mouth": "own-visible-fit",
+      "role": "neutral-front-left",
+      "turnHeading": "front-left"
+    },
+    {
+      "slot": 176,
+      "row": 8,
+      "col": 8,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-05",
+      "entryPhase": 5,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 177,
+      "row": 8,
+      "col": 9,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-05-1",
+      "entryPhase": 5,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 178,
+      "row": 8,
+      "col": 10,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-05-2",
+      "entryPhase": 5,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 179,
+      "row": 8,
+      "col": 11,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-05-3",
+      "entryPhase": 5,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 180,
+      "row": 8,
+      "col": 12,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-06",
+      "entryPhase": 6,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 181,
+      "row": 8,
+      "col": 13,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-06-1",
+      "entryPhase": 6,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 182,
+      "row": 8,
+      "col": 14,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-06-2",
+      "entryPhase": 6,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 183,
+      "row": 8,
+      "col": 15,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-06-3",
+      "entryPhase": 6,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 184,
+      "row": 8,
+      "col": 16,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-07",
+      "entryPhase": 7,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 185,
+      "row": 8,
+      "col": 17,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-07-1",
+      "entryPhase": 7,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 186,
+      "row": 8,
+      "col": 18,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-07-2",
+      "entryPhase": 7,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 187,
+      "row": 8,
+      "col": 19,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-07-3",
+      "entryPhase": 7,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 188,
+      "row": 8,
+      "col": 20,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-08",
+      "entryPhase": 8,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 189,
+      "row": 9,
+      "col": 0,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-08-1",
+      "entryPhase": 8,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 190,
+      "row": 9,
+      "col": 1,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-08-2",
+      "entryPhase": 8,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 191,
+      "row": 9,
+      "col": 2,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-08-3",
+      "entryPhase": 8,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 192,
+      "row": 9,
+      "col": 3,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-09",
+      "entryPhase": 9,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 193,
+      "row": 9,
+      "col": 4,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-09-1",
+      "entryPhase": 9,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 194,
+      "row": 9,
+      "col": 5,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-09-2",
+      "entryPhase": 9,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 195,
+      "row": 9,
+      "col": 6,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-09-3",
+      "entryPhase": 9,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 196,
+      "row": 9,
+      "col": 7,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-10",
+      "entryPhase": 10,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 197,
+      "row": 9,
+      "col": 8,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-10-1",
+      "entryPhase": 10,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 198,
+      "row": 9,
+      "col": 9,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-10-2",
+      "entryPhase": 10,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 199,
+      "row": 9,
+      "col": 10,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-10-3",
+      "entryPhase": 10,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 200,
+      "row": 9,
+      "col": 11,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-11",
+      "entryPhase": 11,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 201,
+      "row": 9,
+      "col": 12,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-11-1",
+      "entryPhase": 11,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 202,
+      "row": 9,
+      "col": 13,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-11-2",
+      "entryPhase": 11,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 203,
+      "row": 9,
+      "col": 14,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-11-3",
+      "entryPhase": 11,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 204,
+      "row": 9,
+      "col": 15,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-12",
+      "entryPhase": 12,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 205,
+      "row": 9,
+      "col": 16,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-12-1",
+      "entryPhase": 12,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 206,
+      "row": 9,
+      "col": 17,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-12-2",
+      "entryPhase": 12,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 207,
+      "row": 9,
+      "col": 18,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-12-3",
+      "entryPhase": 12,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 208,
+      "row": 9,
+      "col": 19,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-13",
+      "entryPhase": 13,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 209,
+      "row": 9,
+      "col": 20,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-13-1",
+      "entryPhase": 13,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 210,
+      "row": 10,
+      "col": 0,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-13-2",
+      "entryPhase": 13,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 211,
+      "row": 10,
+      "col": 1,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-13-3",
+      "entryPhase": 13,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 212,
+      "row": 10,
+      "col": 2,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-14",
+      "entryPhase": 14,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 213,
+      "row": 10,
+      "col": 3,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-14-1",
+      "entryPhase": 14,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 214,
+      "row": 10,
+      "col": 4,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-14-2",
+      "entryPhase": 14,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 215,
+      "row": 10,
+      "col": 5,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-14-3",
+      "entryPhase": 14,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 216,
+      "row": 10,
+      "col": 6,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "walk-right-15",
+      "entryPhase": 15,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 217,
+      "row": 10,
+      "col": 7,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-15-1",
+      "entryPhase": 15,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 218,
+      "row": 10,
+      "col": 8,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-15-2",
+      "entryPhase": 15,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 219,
+      "row": 10,
+      "col": 9,
+      "kind": "stop",
+      "view": "right",
+      "mouth": "own-visible-fit",
+      "role": "stop-right-15-3",
+      "entryPhase": 15,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 220,
+      "row": 10,
+      "col": 10,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-00",
+      "entryPhase": 0,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 221,
+      "row": 10,
+      "col": 11,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-1",
+      "entryPhase": 0,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 222,
+      "row": 10,
+      "col": 12,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-2",
+      "entryPhase": 0,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 223,
+      "row": 10,
+      "col": 13,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-00-3",
+      "entryPhase": 0,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 224,
+      "row": 10,
+      "col": 14,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-01",
+      "entryPhase": 1,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 225,
+      "row": 10,
+      "col": 15,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-01-1",
+      "entryPhase": 1,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 226,
+      "row": 10,
+      "col": 16,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-01-2",
+      "entryPhase": 1,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 227,
+      "row": 10,
+      "col": 17,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-01-3",
+      "entryPhase": 1,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 228,
+      "row": 10,
+      "col": 18,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-02",
+      "entryPhase": 2,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 229,
+      "row": 10,
+      "col": 19,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-02-1",
+      "entryPhase": 2,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 230,
+      "row": 10,
+      "col": 20,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-02-2",
+      "entryPhase": 2,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 231,
+      "row": 11,
+      "col": 0,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-02-3",
+      "entryPhase": 2,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 232,
+      "row": 11,
+      "col": 1,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-03",
+      "entryPhase": 3,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 233,
+      "row": 11,
+      "col": 2,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-03-1",
+      "entryPhase": 3,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 234,
+      "row": 11,
+      "col": 3,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-03-2",
+      "entryPhase": 3,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 235,
+      "row": 11,
+      "col": 4,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-03-3",
+      "entryPhase": 3,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 236,
+      "row": 11,
+      "col": 5,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-04",
+      "entryPhase": 4,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 237,
+      "row": 11,
+      "col": 6,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-04-1",
+      "entryPhase": 4,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 238,
+      "row": 11,
+      "col": 7,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-04-2",
+      "entryPhase": 4,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 239,
+      "row": 11,
+      "col": 8,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-04-3",
+      "entryPhase": 4,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 240,
+      "row": 11,
+      "col": 9,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-05",
+      "entryPhase": 5,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 241,
+      "row": 11,
+      "col": 10,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-05-1",
+      "entryPhase": 5,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 242,
+      "row": 11,
+      "col": 11,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-05-2",
+      "entryPhase": 5,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 243,
+      "row": 11,
+      "col": 12,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-05-3",
+      "entryPhase": 5,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 244,
+      "row": 11,
+      "col": 13,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-06",
+      "entryPhase": 6,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 245,
+      "row": 11,
+      "col": 14,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-06-1",
+      "entryPhase": 6,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 246,
+      "row": 11,
+      "col": 15,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-06-2",
+      "entryPhase": 6,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 247,
+      "row": 11,
+      "col": 16,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-06-3",
+      "entryPhase": 6,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 248,
+      "row": 11,
+      "col": 17,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-07",
+      "entryPhase": 7,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 249,
+      "row": 11,
+      "col": 18,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-07-1",
+      "entryPhase": 7,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 250,
+      "row": 11,
+      "col": 19,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-07-2",
+      "entryPhase": 7,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 251,
+      "row": 11,
+      "col": 20,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-07-3",
+      "entryPhase": 7,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 252,
+      "row": 12,
+      "col": 0,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-08",
+      "entryPhase": 8,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 253,
+      "row": 12,
+      "col": 1,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-08-1",
+      "entryPhase": 8,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 254,
+      "row": 12,
+      "col": 2,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-08-2",
+      "entryPhase": 8,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 255,
+      "row": 12,
+      "col": 3,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-08-3",
+      "entryPhase": 8,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 256,
+      "row": 12,
+      "col": 4,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-09",
+      "entryPhase": 9,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 257,
+      "row": 12,
+      "col": 5,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-09-1",
+      "entryPhase": 9,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 258,
+      "row": 12,
+      "col": 6,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-09-2",
+      "entryPhase": 9,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 259,
+      "row": 12,
+      "col": 7,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-09-3",
+      "entryPhase": 9,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 260,
+      "row": 12,
+      "col": 8,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-10",
+      "entryPhase": 10,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 261,
+      "row": 12,
+      "col": 9,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-10-1",
+      "entryPhase": 10,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 262,
+      "row": 12,
+      "col": 10,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-10-2",
+      "entryPhase": 10,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 263,
+      "row": 12,
+      "col": 11,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-10-3",
+      "entryPhase": 10,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 264,
+      "row": 12,
+      "col": 12,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-11",
+      "entryPhase": 11,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 265,
+      "row": 12,
+      "col": 13,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-11-1",
+      "entryPhase": 11,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 266,
+      "row": 12,
+      "col": 14,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-11-2",
+      "entryPhase": 11,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 267,
+      "row": 12,
+      "col": 15,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-11-3",
+      "entryPhase": 11,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 268,
+      "row": 12,
+      "col": 16,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-12",
+      "entryPhase": 12,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 269,
+      "row": 12,
+      "col": 17,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-12-1",
+      "entryPhase": 12,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 270,
+      "row": 12,
+      "col": 18,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-12-2",
+      "entryPhase": 12,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 271,
+      "row": 12,
+      "col": 19,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-12-3",
+      "entryPhase": 12,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 272,
+      "row": 12,
+      "col": 20,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-13",
+      "entryPhase": 13,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 273,
+      "row": 13,
+      "col": 0,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-13-1",
+      "entryPhase": 13,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 274,
+      "row": 13,
+      "col": 1,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-13-2",
+      "entryPhase": 13,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 275,
+      "row": 13,
+      "col": 2,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-13-3",
+      "entryPhase": 13,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 276,
+      "row": 13,
+      "col": 3,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-14",
+      "entryPhase": 14,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 277,
+      "row": 13,
+      "col": 4,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-14-1",
+      "entryPhase": 14,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 278,
+      "row": 13,
+      "col": 5,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-14-2",
+      "entryPhase": 14,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 279,
+      "row": 13,
+      "col": 6,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-14-3",
+      "entryPhase": 14,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 280,
+      "row": 13,
+      "col": 7,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "walk-up-15",
+      "entryPhase": 15,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 281,
+      "row": 13,
+      "col": 8,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-15-1",
+      "entryPhase": 15,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 282,
+      "row": 13,
+      "col": 9,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-15-2",
+      "entryPhase": 15,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 283,
+      "row": 13,
+      "col": 10,
+      "kind": "stop",
+      "view": "up",
+      "mouth": null,
+      "role": "stop-up-15-3",
+      "entryPhase": 15,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 284,
+      "row": 13,
+      "col": 11,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-00",
+      "entryPhase": 0,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 285,
+      "row": 13,
+      "col": 12,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-1",
+      "entryPhase": 0,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 286,
+      "row": 13,
+      "col": 13,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-2",
+      "entryPhase": 0,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 287,
+      "row": 13,
+      "col": 14,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-00-3",
+      "entryPhase": 0,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 288,
+      "row": 13,
+      "col": 15,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-01",
+      "entryPhase": 1,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 289,
+      "row": 13,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-01-1",
+      "entryPhase": 1,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 290,
+      "row": 13,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-01-2",
+      "entryPhase": 1,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 291,
+      "row": 13,
+      "col": 18,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-01-3",
+      "entryPhase": 1,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 292,
+      "row": 13,
+      "col": 19,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-02",
+      "entryPhase": 2,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 293,
+      "row": 13,
+      "col": 20,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-02-1",
+      "entryPhase": 2,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 294,
+      "row": 14,
+      "col": 0,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-02-2",
+      "entryPhase": 2,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 295,
+      "row": 14,
+      "col": 1,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-02-3",
+      "entryPhase": 2,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 296,
+      "row": 14,
+      "col": 2,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-03",
+      "entryPhase": 3,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 297,
+      "row": 14,
+      "col": 3,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-03-1",
+      "entryPhase": 3,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 298,
+      "row": 14,
+      "col": 4,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-03-2",
+      "entryPhase": 3,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 299,
+      "row": 14,
+      "col": 5,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-03-3",
+      "entryPhase": 3,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 300,
+      "row": 14,
+      "col": 6,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-04",
+      "entryPhase": 4,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 301,
+      "row": 14,
+      "col": 7,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-04-1",
+      "entryPhase": 4,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 302,
+      "row": 14,
+      "col": 8,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-04-2",
+      "entryPhase": 4,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 303,
+      "row": 14,
+      "col": 9,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-04-3",
+      "entryPhase": 4,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 304,
+      "row": 14,
+      "col": 10,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-05",
+      "entryPhase": 5,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 305,
+      "row": 14,
+      "col": 11,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-05-1",
+      "entryPhase": 5,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 306,
+      "row": 14,
+      "col": 12,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-05-2",
+      "entryPhase": 5,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 307,
+      "row": 14,
+      "col": 13,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-05-3",
+      "entryPhase": 5,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 308,
+      "row": 14,
+      "col": 14,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-06",
+      "entryPhase": 6,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 309,
+      "row": 14,
+      "col": 15,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-06-1",
+      "entryPhase": 6,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 310,
+      "row": 14,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-06-2",
+      "entryPhase": 6,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 311,
+      "row": 14,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-06-3",
+      "entryPhase": 6,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 312,
+      "row": 14,
+      "col": 18,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-07",
+      "entryPhase": 7,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 313,
+      "row": 14,
+      "col": 19,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-07-1",
+      "entryPhase": 7,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 314,
+      "row": 14,
+      "col": 20,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-07-2",
+      "entryPhase": 7,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 315,
+      "row": 15,
+      "col": 0,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-07-3",
+      "entryPhase": 7,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 316,
+      "row": 15,
+      "col": 1,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-08",
+      "entryPhase": 8,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 317,
+      "row": 15,
+      "col": 2,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-08-1",
+      "entryPhase": 8,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 318,
+      "row": 15,
+      "col": 3,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-08-2",
+      "entryPhase": 8,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 319,
+      "row": 15,
+      "col": 4,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-08-3",
+      "entryPhase": 8,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 320,
+      "row": 15,
+      "col": 5,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-09",
+      "entryPhase": 9,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 321,
+      "row": 15,
+      "col": 6,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-09-1",
+      "entryPhase": 9,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 322,
+      "row": 15,
+      "col": 7,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-09-2",
+      "entryPhase": 9,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 323,
+      "row": 15,
+      "col": 8,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-09-3",
+      "entryPhase": 9,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 324,
+      "row": 15,
+      "col": 9,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-10",
+      "entryPhase": 10,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 325,
+      "row": 15,
+      "col": 10,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-10-1",
+      "entryPhase": 10,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 326,
+      "row": 15,
+      "col": 11,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-10-2",
+      "entryPhase": 10,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 327,
+      "row": 15,
+      "col": 12,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-10-3",
+      "entryPhase": 10,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 328,
+      "row": 15,
+      "col": 13,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-11",
+      "entryPhase": 11,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 329,
+      "row": 15,
+      "col": 14,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-11-1",
+      "entryPhase": 11,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 330,
+      "row": 15,
+      "col": 15,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-11-2",
+      "entryPhase": 11,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 331,
+      "row": 15,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-11-3",
+      "entryPhase": 11,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 332,
+      "row": 15,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-12",
+      "entryPhase": 12,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 333,
+      "row": 15,
+      "col": 18,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-12-1",
+      "entryPhase": 12,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 334,
+      "row": 15,
+      "col": 19,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-12-2",
+      "entryPhase": 12,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 335,
+      "row": 15,
+      "col": 20,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-12-3",
+      "entryPhase": 12,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 336,
+      "row": 16,
+      "col": 0,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-00",
+      "action": "idle",
+      "actionPhase": 0
+    },
+    {
+      "slot": 337,
+      "row": 16,
+      "col": 1,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-01",
+      "action": "idle",
+      "actionPhase": 1
+    },
+    {
+      "slot": 338,
+      "row": 16,
+      "col": 2,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-02",
+      "action": "idle",
+      "actionPhase": 2
+    },
+    {
+      "slot": 339,
+      "row": 16,
+      "col": 3,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-03",
+      "action": "idle",
+      "actionPhase": 3
+    },
+    {
+      "slot": 340,
+      "row": 16,
+      "col": 4,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-04",
+      "action": "idle",
+      "actionPhase": 4
+    },
+    {
+      "slot": 341,
+      "row": 16,
+      "col": 5,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-05",
+      "action": "idle",
+      "actionPhase": 5
+    },
+    {
+      "slot": 342,
+      "row": 16,
+      "col": 6,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-06",
+      "action": "idle",
+      "actionPhase": 6
+    },
+    {
+      "slot": 343,
+      "row": 16,
+      "col": 7,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-07",
+      "action": "idle",
+      "actionPhase": 7
+    },
+    {
+      "slot": 344,
+      "row": 16,
+      "col": 8,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-08",
+      "action": "idle",
+      "actionPhase": 8
+    },
+    {
+      "slot": 345,
+      "row": 16,
+      "col": 9,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-09",
+      "action": "idle",
+      "actionPhase": 9
+    },
+    {
+      "slot": 346,
+      "row": 16,
+      "col": 10,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-10",
+      "action": "idle",
+      "actionPhase": 10
+    },
+    {
+      "slot": 347,
+      "row": 16,
+      "col": 11,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-11",
+      "action": "idle",
+      "actionPhase": 11
+    },
+    {
+      "slot": 348,
+      "row": 16,
+      "col": 12,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-12",
+      "action": "idle",
+      "actionPhase": 12
+    },
+    {
+      "slot": 349,
+      "row": 16,
+      "col": 13,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-13",
+      "action": "idle",
+      "actionPhase": 13
+    },
+    {
+      "slot": 350,
+      "row": 16,
+      "col": 14,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-14",
+      "action": "idle",
+      "actionPhase": 14
+    },
+    {
+      "slot": 351,
+      "row": 16,
+      "col": 15,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-idle-15",
+      "action": "idle",
+      "actionPhase": 15
+    },
+    {
+      "slot": 352,
+      "row": 16,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-13",
+      "entryPhase": 13,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 353,
+      "row": 16,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-13-1",
+      "entryPhase": 13,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 354,
+      "row": 16,
+      "col": 18,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-13-2",
+      "entryPhase": 13,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 355,
+      "row": 16,
+      "col": 19,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-13-3",
+      "entryPhase": 13,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 356,
+      "row": 16,
+      "col": 20,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-14",
+      "entryPhase": 14,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 357,
+      "row": 17,
+      "col": 0,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-00",
+      "action": "look",
+      "actionPhase": 0
+    },
+    {
+      "slot": 358,
+      "row": 17,
+      "col": 1,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-01",
+      "action": "look",
+      "actionPhase": 1
+    },
+    {
+      "slot": 359,
+      "row": 17,
+      "col": 2,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-02",
+      "action": "look",
+      "actionPhase": 2
+    },
+    {
+      "slot": 360,
+      "row": 17,
+      "col": 3,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-03",
+      "action": "look",
+      "actionPhase": 3
+    },
+    {
+      "slot": 361,
+      "row": 17,
+      "col": 4,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-04",
+      "action": "look",
+      "actionPhase": 4
+    },
+    {
+      "slot": 362,
+      "row": 17,
+      "col": 5,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-05",
+      "action": "look",
+      "actionPhase": 5
+    },
+    {
+      "slot": 363,
+      "row": 17,
+      "col": 6,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-06",
+      "action": "look",
+      "actionPhase": 6
+    },
+    {
+      "slot": 364,
+      "row": 17,
+      "col": 7,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-07",
+      "action": "look",
+      "actionPhase": 7
+    },
+    {
+      "slot": 365,
+      "row": 17,
+      "col": 8,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-08",
+      "action": "look",
+      "actionPhase": 8
+    },
+    {
+      "slot": 366,
+      "row": 17,
+      "col": 9,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-09",
+      "action": "look",
+      "actionPhase": 9
+    },
+    {
+      "slot": 367,
+      "row": 17,
+      "col": 10,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-10",
+      "action": "look",
+      "actionPhase": 10
+    },
+    {
+      "slot": 368,
+      "row": 17,
+      "col": 11,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-11",
+      "action": "look",
+      "actionPhase": 11
+    },
+    {
+      "slot": 369,
+      "row": 17,
+      "col": 12,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-12",
+      "action": "look",
+      "actionPhase": 12
+    },
+    {
+      "slot": 370,
+      "row": 17,
+      "col": 13,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-13",
+      "action": "look",
+      "actionPhase": 13
+    },
+    {
+      "slot": 371,
+      "row": 17,
+      "col": 14,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-14",
+      "action": "look",
+      "actionPhase": 14
+    },
+    {
+      "slot": 372,
+      "row": 17,
+      "col": 15,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-look-15",
+      "action": "look",
+      "actionPhase": 15
+    },
+    {
+      "slot": 373,
+      "row": 17,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-14-1",
+      "entryPhase": 14,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 374,
+      "row": 17,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-14-2",
+      "entryPhase": 14,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 375,
+      "row": 17,
+      "col": 18,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-14-3",
+      "entryPhase": 14,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 376,
+      "row": 17,
+      "col": 19,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "walk-left-15",
+      "entryPhase": 15,
+      "stopStage": 0,
+      "strength": 1
+    },
+    {
+      "slot": 377,
+      "row": 17,
+      "col": 20,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-15-1",
+      "entryPhase": 15,
+      "stopStage": 1,
+      "strength": 0.75
+    },
+    {
+      "slot": 378,
+      "row": 18,
+      "col": 0,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-00",
+      "action": "success",
+      "actionPhase": 0
+    },
+    {
+      "slot": 379,
+      "row": 18,
+      "col": 1,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-01",
+      "action": "success",
+      "actionPhase": 1
+    },
+    {
+      "slot": 380,
+      "row": 18,
+      "col": 2,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-02",
+      "action": "success",
+      "actionPhase": 2
+    },
+    {
+      "slot": 381,
+      "row": 18,
+      "col": 3,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-03",
+      "action": "success",
+      "actionPhase": 3
+    },
+    {
+      "slot": 382,
+      "row": 18,
+      "col": 4,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-04",
+      "action": "success",
+      "actionPhase": 4
+    },
+    {
+      "slot": 383,
+      "row": 18,
+      "col": 5,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-05",
+      "action": "success",
+      "actionPhase": 5
+    },
+    {
+      "slot": 384,
+      "row": 18,
+      "col": 6,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-06",
+      "action": "success",
+      "actionPhase": 6
+    },
+    {
+      "slot": 385,
+      "row": 18,
+      "col": 7,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-07",
+      "action": "success",
+      "actionPhase": 7
+    },
+    {
+      "slot": 386,
+      "row": 18,
+      "col": 8,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-08",
+      "action": "success",
+      "actionPhase": 8
+    },
+    {
+      "slot": 387,
+      "row": 18,
+      "col": 9,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-09",
+      "action": "success",
+      "actionPhase": 9
+    },
+    {
+      "slot": 388,
+      "row": 18,
+      "col": 10,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-10",
+      "action": "success",
+      "actionPhase": 10
+    },
+    {
+      "slot": 389,
+      "row": 18,
+      "col": 11,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-11",
+      "action": "success",
+      "actionPhase": 11
+    },
+    {
+      "slot": 390,
+      "row": 18,
+      "col": 12,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-12",
+      "action": "success",
+      "actionPhase": 12
+    },
+    {
+      "slot": 391,
+      "row": 18,
+      "col": 13,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-13",
+      "action": "success",
+      "actionPhase": 13
+    },
+    {
+      "slot": 392,
+      "row": 18,
+      "col": 14,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-14",
+      "action": "success",
+      "actionPhase": 14
+    },
+    {
+      "slot": 393,
+      "row": 18,
+      "col": 15,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-success-15",
+      "action": "success",
+      "actionPhase": 15
+    },
+    {
+      "slot": 394,
+      "row": 18,
+      "col": 16,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-15-2",
+      "entryPhase": 15,
+      "stopStage": 2,
+      "strength": 0.5
+    },
+    {
+      "slot": 395,
+      "row": 18,
+      "col": 17,
+      "kind": "stop",
+      "view": "left",
+      "mouth": "own-visible-fit",
+      "role": "stop-left-15-3",
+      "entryPhase": 15,
+      "stopStage": 3,
+      "strength": 0.25
+    },
+    {
+      "slot": 399,
+      "row": 19,
+      "col": 0,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-00",
+      "action": "failure",
+      "actionPhase": 0
+    },
+    {
+      "slot": 400,
+      "row": 19,
+      "col": 1,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-01",
+      "action": "failure",
+      "actionPhase": 1
+    },
+    {
+      "slot": 401,
+      "row": 19,
+      "col": 2,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-02",
+      "action": "failure",
+      "actionPhase": 2
+    },
+    {
+      "slot": 402,
+      "row": 19,
+      "col": 3,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-03",
+      "action": "failure",
+      "actionPhase": 3
+    },
+    {
+      "slot": 403,
+      "row": 19,
+      "col": 4,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-04",
+      "action": "failure",
+      "actionPhase": 4
+    },
+    {
+      "slot": 404,
+      "row": 19,
+      "col": 5,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-05",
+      "action": "failure",
+      "actionPhase": 5
+    },
+    {
+      "slot": 405,
+      "row": 19,
+      "col": 6,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-06",
+      "action": "failure",
+      "actionPhase": 6
+    },
+    {
+      "slot": 406,
+      "row": 19,
+      "col": 7,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-07",
+      "action": "failure",
+      "actionPhase": 7
+    },
+    {
+      "slot": 407,
+      "row": 19,
+      "col": 8,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-08",
+      "action": "failure",
+      "actionPhase": 8
+    },
+    {
+      "slot": 408,
+      "row": 19,
+      "col": 9,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-09",
+      "action": "failure",
+      "actionPhase": 9
+    },
+    {
+      "slot": 409,
+      "row": 19,
+      "col": 10,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-10",
+      "action": "failure",
+      "actionPhase": 10
+    },
+    {
+      "slot": 410,
+      "row": 19,
+      "col": 11,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-11",
+      "action": "failure",
+      "actionPhase": 11
+    },
+    {
+      "slot": 411,
+      "row": 19,
+      "col": 12,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-12",
+      "action": "failure",
+      "actionPhase": 12
+    },
+    {
+      "slot": 412,
+      "row": 19,
+      "col": 13,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-13",
+      "action": "failure",
+      "actionPhase": 13
+    },
+    {
+      "slot": 413,
+      "row": 19,
+      "col": 14,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-14",
+      "action": "failure",
+      "actionPhase": 14
+    },
+    {
+      "slot": 414,
+      "row": 19,
+      "col": 15,
+      "kind": "action",
+      "view": "down",
+      "mouth": "own-visible-fit",
+      "role": "action-failure-15",
+      "action": "failure",
+      "actionPhase": 15
+    }
+  ]
+}

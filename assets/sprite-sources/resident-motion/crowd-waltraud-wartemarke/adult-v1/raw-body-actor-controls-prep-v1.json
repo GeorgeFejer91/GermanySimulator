@@ -1,0 +1,456 @@
+{
+  "actor": "crowd-waltraud-wartemarke",
+  "rawGenerationNumericalControlsOnly": true,
+  "fields": {
+    "right": {
+      "zeroDisplacementThroughY": 363,
+      "rigidWholeCuffBootFromY": 424,
+      "nearFieldNodesY": [
+        0,
+        353,
+        363,
+        392,
+        414,
+        424,
+        511
+      ],
+      "farFieldNodesY": [
+        0,
+        353,
+        363,
+        389,
+        414,
+        424,
+        511
+      ],
+      "horizontalAmplitude": 13,
+      "swingLift": 5,
+      "phasesOf16": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "nearWitnesses": {
+        "heel": [
+          219,
+          457
+        ],
+        "toe": [
+          293,
+          461
+        ],
+        "lace": [
+          260,
+          453
+        ],
+        "cuff": [
+          253,
+          443
+        ]
+      },
+      "farWitnesses": {
+        "heel": [
+          210,
+          458
+        ],
+        "toe": [
+          287,
+          460
+        ],
+        "lace": [
+          248,
+          450
+        ],
+        "cuff": [
+          235,
+          443
+        ]
+      }
+    },
+    "left": {
+      "zeroDisplacementThroughY": 363,
+      "rigidWholeCuffBootFromY": 424,
+      "nearFieldNodesY": [
+        0,
+        353,
+        363,
+        400,
+        416,
+        424,
+        511
+      ],
+      "farFieldNodesY": [
+        0,
+        353,
+        363,
+        398,
+        416,
+        424,
+        511
+      ],
+      "horizontalAmplitude": 13,
+      "swingLift": 5,
+      "phasesOf16": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "nearWitnesses": {
+        "heel": [
+          295,
+          458
+        ],
+        "toe": [
+          216,
+          462
+        ],
+        "lace": [
+          250,
+          455
+        ],
+        "cuff": [
+          270,
+          443
+        ]
+      },
+      "farWitnesses": {
+        "heel": [
+          299,
+          458
+        ],
+        "toe": [
+          224,
+          459
+        ],
+        "lace": [
+          261,
+          452
+        ],
+        "cuff": [
+          276,
+          444
+        ]
+      },
+      "travelSign": -1
+    },
+    "down": {
+      "sourceFigure": 400,
+      "sourcePivot": [
+        256,
+        472
+      ],
+      "stationaryThroughY": 366,
+      "wholeFootRigidFromY": 424,
+      "clothNodesY": {
+        "screen-left": [
+          0,
+          366,
+          394,
+          416,
+          424,
+          511
+        ],
+        "screen-right": [
+          0,
+          366,
+          396,
+          416,
+          424,
+          511
+        ]
+      },
+      "witnesses": {
+        "screen-left": {
+          "cuff": [
+            225,
+            441
+          ],
+          "lace": [
+            223,
+            452
+          ],
+          "toe": [
+            220,
+            465
+          ]
+        },
+        "screen-right": {
+          "cuff": [
+            284,
+            441
+          ],
+          "lace": [
+            285,
+            453
+          ],
+          "toe": [
+            290,
+            465
+          ]
+        }
+      },
+      "phases": [
+        {
+          "key": 0,
+          "role": "screen-left passing lift",
+          "dy": {
+            "screen-left": -5,
+            "screen-right": 0
+          }
+        },
+        {
+          "key": 4,
+          "role": "screen-left lead",
+          "dy": {
+            "screen-left": 0,
+            "screen-right": -4
+          }
+        },
+        {
+          "key": 8,
+          "role": "screen-right passing lift",
+          "dy": {
+            "screen-left": 0,
+            "screen-right": -5
+          }
+        },
+        {
+          "key": 12,
+          "role": "screen-right lead",
+          "dy": {
+            "screen-left": -4,
+            "screen-right": 0
+          }
+        }
+      ]
+    },
+    "up": {
+      "sourceFigure": 400,
+      "sourcePivot": [
+        256,
+        472
+      ],
+      "stationaryThroughY": 366,
+      "wholeFootRigidFromY": 424,
+      "clothNodesY": {
+        "screen-left": [
+          0,
+          366,
+          392,
+          416,
+          424,
+          511
+        ],
+        "screen-right": [
+          0,
+          366,
+          394,
+          416,
+          424,
+          511
+        ]
+      },
+      "witnesses": {
+        "screen-left": {
+          "cuff": [
+            226,
+            440
+          ],
+          "heelCounter": [
+            229,
+            455
+          ],
+          "soleInterior": [
+            230,
+            468
+          ]
+        },
+        "screen-right": {
+          "cuff": [
+            283,
+            439
+          ],
+          "heelCounter": [
+            281,
+            455
+          ],
+          "soleInterior": [
+            281,
+            468
+          ]
+        }
+      },
+      "phases": [
+        {
+          "key": 0,
+          "role": "screen-right passing lift",
+          "dy": {
+            "screen-left": 0,
+            "screen-right": -5
+          }
+        },
+        {
+          "key": 4,
+          "role": "screen-right lead away",
+          "dy": {
+            "screen-left": 0,
+            "screen-right": -4
+          }
+        },
+        {
+          "key": 8,
+          "role": "screen-left passing lift",
+          "dy": {
+            "screen-left": -5,
+            "screen-right": 0
+          }
+        },
+        {
+          "key": 12,
+          "role": "screen-left lead away",
+          "dy": {
+            "screen-left": -4,
+            "screen-right": 0
+          }
+        }
+      ]
+    },
+    "quiet": {
+      "nodesY": [
+        0,
+        145,
+        170,
+        353,
+        414,
+        511
+      ],
+      "witnesses": {
+        "head": {
+          "part": "head",
+          "bounds": [
+            216,
+            74,
+            287,
+            139
+          ]
+        },
+        "leftFolderAndThreeTabs": {
+          "part": "upper",
+          "bounds": [
+            275,
+            173,
+            325,
+            272
+          ]
+        },
+        "freeRightHand": {
+          "part": "upper",
+          "bounds": [
+            166,
+            288,
+            199,
+            339
+          ]
+        },
+        "leftShoe": {
+          "part": "feet",
+          "bounds": [
+            266,
+            437,
+            310,
+            473
+          ]
+        },
+        "rightShoe": {
+          "part": "feet",
+          "bounds": [
+            201,
+            437,
+            247,
+            473
+          ]
+        }
+      },
+      "actions": {
+        "idle": {
+          "samples": [
+            0,
+            4,
+            12,
+            16
+          ],
+          "headDxDy": [
+            0,
+            -2
+          ],
+          "forebodyDxDy": [
+            0,
+            -2
+          ],
+          "reading": "Restrained breath and settle."
+        },
+        "look": {
+          "samples": [
+            0,
+            4,
+            8,
+            15
+          ],
+          "headDxDy": [
+            6,
+            0
+          ],
+          "forebodyDxDy": [
+            0,
+            0
+          ],
+          "reading": "Brief orienting glance. Six source pixels is roughly one twelfth of the actual painted head width."
+        },
+        "success": {
+          "samples": [
+            0,
+            4,
+            8,
+            15
+          ],
+          "headDxDy": [
+            2,
+            -6
+          ],
+          "forebodyDxDy": [
+            0,
+            -2
+          ],
+          "reading": "Small affirmative lift in the mature posture."
+        },
+        "failure": {
+          "samples": [
+            0,
+            4,
+            8,
+            15
+          ],
+          "headDxDy": [
+            -2,
+            6
+          ],
+          "forebodyDxDy": [
+            -2,
+            2
+          ],
+          "reading": "Quiet downward set, without a hand or prop gesture."
+        }
+      }
+    }
+  },
+  "groundPivot": [
+    256,
+    472
+  ],
+  "sourceFigure": 400,
+  "authoredHeight": 2.33,
+  "authoredStride": 15.145,
+  "noAdmittedFramesOrExpectedFields": true
+}

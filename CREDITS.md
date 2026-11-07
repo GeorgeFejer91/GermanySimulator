@@ -465,6 +465,12 @@ voice, recordings and texts. Raw prompts, source hashes, controls and recipes
 are under
 `assets/sprite-sources/resident-motion/crowd-horst-hausordnung/adult-v1/`.
 
+Waltraud Wartemarke's mature street adviser family uses her own OpenAI ImageGen
+directional paintings and complete profile far legs. She carries a burgundy
+folder with three cream tabs in her anatomical left hand. Her source paintings,
+original prompts, controls and portable rebuild are under
+`assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/`.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

@@ -1,0 +1,21 @@
+{
+  "voiceId": "crowd-waltraud-wartemarke",
+  "adviserId": "street-waltraud-wartemarke",
+  "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+  "ruleIndices": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "filePins": {
+    "assets/voices/street-wisdom/crowd-waltraud-wartemarke-manifest.json": "f055a929598a1834eb156903bcd61c7eaadbca227063d9faf2b45c9874ec1836",
+    "assets/voices/street-wisdom/street-waltraud-wartemarke-rule-04.mp3": "0fa59eda6331c2eaabd26144afb2781c493f17f913d679898c26b1e21929e744",
+    "assets/voices/street-wisdom/street-waltraud-wartemarke-rule-10.mp3": "3732472c88c5a3ea93fb7fc47ca0fc57fb316436e4c0f066e85f840146319a60",
+    "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-01.mp3": "8cbbb9f83c8b00626c95c2c9dd5619c381afdce2fec50a4ce359faaca71e2aa2",
+    "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-02.mp3": "1928cfe7ac3dee7ba4a68fb7305d9cdf83d12c39d892cb423a720c6e323b2607",
+    "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-03.mp3": "b9e1ed73f5333ba683730ac5efac4671ab4498b8a7e089215c6c2d9992a61480",
+    "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-04.mp3": "c5eb8e55588444f9e7709425a7ed8766721e3d258962bbe1cbedbeb2c66e8de0"
+  },
+  "scope": "Preserve existing files/status; no new listening, recording or acceptance"
+}

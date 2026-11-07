@@ -1899,6 +1899,30 @@ Later: Gnative-gap classification/remaining rear cycle/LOOK; Kcorrected LEFT
 four-key then wider source/stance/clock; Wown semantic/boot gate queued. Overall
 goal remains active; no new runtime release is claimed yet.
 
+## Waltraud Wartemarke — Söder-height adult street family
+
+The original city adviser selects her own mature eight-view
+paint, with the burgundy folder in her left hand. The 2.77 m
+fit preserves the measured 52-source-pixel cycle through the
+18.005-unit stride. The city registry updates only this actor.
+
+Independent Camera and Physics reviewed the same 546-pin world.
+Visible spans beside Söder were 124/124, 131/131 and 61/60 pixels
+on desktop, portrait and landscape. The visual cases include
+depth, reentry, standing and packet fallbacks, and all eight
+turns. Physics verified legal displacement, planted stops,
+both side views' encoded contacts, and silent recorded cue
+activation, pause, finish and cancellation on desktop.
+Mobile browser runs used Chromium emulation.
+
+The clean build reproduced the 328 source roles, 412 logical
+poses, both atlas sizes and 324 mouth registrations. The compact
+169,471-byte mouth file preserves its signed F64 values and fits
+the existing 256 KiB loader budget. The official fitter reproduced
+the exact selected person, packet and compact registry. The
+street/city suite passed 461 tests. Rebuild inputs and provenance
+are in `assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/`.
+
 ## Günther TÜV — verified Söder-height candidate, 5 November 2026
 
 Only `stadt-guenther-tuev` changes among the43 registry records. His own mature
