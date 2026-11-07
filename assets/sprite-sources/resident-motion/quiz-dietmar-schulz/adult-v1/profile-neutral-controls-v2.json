@@ -1,0 +1,120 @@
+{
+  "status": "ROOT_SELECTED conservative neutral construction with revised RIGHT foreground cuff ownership; moving scope pending",
+  "stationaryUpperContactBandThroughY": 310,
+  "qualification": "Original coat, head, props and deliberately unmoving upper-trouser/contact region are preserved together. This is not an anatomical hip or coat-only semantic boundary. No motion amplitude, native/clock/world stature selected.",
+  "sourceFigureBasis": 400,
+  "canvas": [
+    512,
+    512
+  ],
+  "groundPivot": [
+    256,
+    472
+  ],
+  "wholepartTransform": "far-legs-v1/wholepart-transform-v2.json",
+  "wholeFarLowerPaintConservedFromY": 420,
+  "headings": {
+    "right": {
+      "registered": "registered-v1/right.png",
+      "oldVisibleRearShoePolygonXY": [
+        [
+          264,
+          432
+        ],
+        [
+          270,
+          432
+        ],
+        [
+          282,
+          433
+        ],
+        [
+          291,
+          435
+        ],
+        [
+          295,
+          440
+        ],
+        [
+          295,
+          446
+        ],
+        [
+          284,
+          446
+        ],
+        [
+          273,
+          443
+        ],
+        [
+          260,
+          441
+        ],
+        [
+          259,
+          439
+        ],
+        [
+          261,
+          437
+        ],
+        [
+          264,
+          434
+        ]
+      ],
+      "originalPositiveOldRearPixels": 269,
+      "contourQualification": "Original draft336 includes67observed foreground cuff pixels, now returned literally to Near by continuous actual material trace. Original v1/v2 trials remain immutable. No hidden Near anatomy completeness claim; motion still separately gated."
+    },
+    "left": {
+      "registered": "registered-v1/left.png",
+      "oldVisibleRearShoePolygonXY": [
+        [
+          249,
+          429
+        ],
+        [
+          239,
+          432
+        ],
+        [
+          226,
+          433
+        ],
+        [
+          218,
+          437
+        ],
+        [
+          215,
+          443
+        ],
+        [
+          216,
+          447
+        ],
+        [
+          231,
+          447
+        ],
+        [
+          244,
+          444
+        ],
+        [
+          255,
+          440
+        ],
+        [
+          256,
+          435
+        ]
+      ],
+      "originalPositiveOldRearPixels": 348
+    }
+  },
+  "sourceRgbaQualification": "Disjoint original partition is allRGBA exact; ordinary alpha-over preserves every original positiveRGBA/fullalpha but drops64R/75L transparentRGB metadata. New Far behind retained original partial-alpha paint changes8139R/7992L composed positiveRGBA, maxchannel deltas reported in trial, while original PART paint is literal and opaque255 remains exact. Do not call final neutral originalRGBA-exact. New Far upper through310 is occluded; unoccluded genuine wholepart retained separately. No raw noise cleanup."
+}

@@ -1899,6 +1899,24 @@ Later: Gnative-gap classification/remaining rear cycle/LOOK; Kcorrected LEFT
 four-key then wider source/stance/clock; Wown semantic/boot gate queued. Overall
 goal remains active; no new runtime release is claimed yet.
 
+## Dr. Dietmar Schulz at Soeder's street height
+
+Dietmar's original citizenship quiz role uses his own mature painted family.
+His standing figure is 2.77 world units tall and his 16-phase walk travels
+16.62 game units per cycle. He retains his original route, question, scoring
+and feedback ownership. The selected delivery includes eight headings, its
+own standing and fallback paint, separate desktop and mobile movement and
+reaction banks, and the painted mouth table.
+
+The quiz uses his glance for work and review, his waiting row during the modal,
+and separate correct and incorrect outcomes before he resumes walking.
+Independent Physics and Camera reviews exercised the original actor.
+The visible figure measured 124/124 pixels against Soeder on desktop,
+130/131 in portrait and 60/61 in landscape under matched camera and ground
+conditions. The one-pixel differences fall within the sampled bound.
+Portrait input was Android emulation. Raw paintings, controls and replay
+provenance are under the Dietmar sprite source directory.
+
 ## Waltraud Wartemarke — Söder-height adult street family
 
 The original city adviser selects her own mature eight-view

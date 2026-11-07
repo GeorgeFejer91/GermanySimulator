@@ -471,6 +471,11 @@ folder with three cream tabs in her anatomical left hand. Her source paintings,
 original prompts, controls and portable rebuild are under
 `assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/`.
 
+Dr. Dietmar Schulz's mature street quiz family uses original OpenAI ImageGen
+directional paintings, complete profile legs and authored instep edits.
+The raw paintings, prompts, controls and rebuild provenance are under
+`assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/`.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

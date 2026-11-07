@@ -1,0 +1,29 @@
+{
+  "status": "OWN_LEFT_FIXED_FULLPART_FIT_FOR_NEUTRAL_TRIAL_ONLY",
+  "raw": "left-near-instep-edit-v1/raw-edited-near-leg-v1.png",
+  "commonScale": 0.40049751243781095,
+  "method": "Entire isolated source part top-to-sole extent establishes one uniform density; own lower22-source-row sole-band centres establish X and common lower boundary establishesY. The edited raw changes requested canvas framing; original requested coordinates are not assumed. These are full-part painting/material registration proxies, not anatomical landmarks. No failed target, inverse tap or coverage score is read.",
+  "directions": {
+    "left": {
+      "rawSemanticCellXYWH": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "translation": [
+        4.888059701492523,
+        101.94029850746267
+      ],
+      "affineOutputToSource": [
+        2.4968944099378882,
+        0,
+        -12.204968944099342,
+        0,
+        2.4968944099378882,
+        -254.53416149068318
+      ]
+    }
+  },
+  "qualification": "Root viewed actual wholepart and complete single shoe fit. Own lower-band width residual3.7065px remains disclosed. Keep original visible shoe/cuff literal; only actual hidden originalNearA0 under retained original opposing-toe positives may receive genuine paint. Old inverse witnesses never fit this transform."
+}

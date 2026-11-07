@@ -1,0 +1,29 @@
+{
+  "status": "FIXED_FULLPART_REGISTRATION_NEAR_EDIT_TRIAL_ONLY",
+  "raw": "near-instep-edit-v1/raw-edited-near-leg-v1.png",
+  "commonIsotropicScale": 0.4014962593516209,
+  "method": "Entire isolated source part top-to-sole extent establishes one uniform density; own lower22-source-row sole-band centres establish X and common lower boundary establishesY. The edited raw changes requested canvas framing; original requested coordinates are not assumed. These are full-part painting/material registration proxies, not anatomical landmarks. No failed target, inverse tap or coverage score is read.",
+  "directions": {
+    "right": {
+      "rawSemanticCellXYWH": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "translation": [
+        4.061097256857863,
+        85.35910224438908
+      ],
+      "affineOutputToSource": [
+        2.4906832298136647,
+        0,
+        -10.114906832298157,
+        0,
+        2.4906832298136647,
+        -212.60248447204984
+      ]
+    }
+  },
+  "qualification": "One own full leg edit. Actual canvas framing changed; full-part painting extent and own lower sole-band establish a fixed proposal before any old failed-point read. No failed target fitted it. Original Near positives are retained by the neutral trial."
+}

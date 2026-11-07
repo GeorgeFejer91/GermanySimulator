@@ -1,0 +1,135 @@
+{
+  "status": "ROOT_SELECTED wholepart transform for next NEUTRAL TRIAL ONLY; ownership/occlusion/gait unapproved",
+  "raw": {
+    "path": "far-legs-v1/raw-complete-profile-legs-v1.png",
+    "sha256": "eb384fa47dbf626acbaf37700b3e1f812ea791ba063b0bafeec4542217ed14b1",
+    "dimensions": [
+      1774,
+      887
+    ]
+  },
+  "commonIsotropicScale": 0.23546926868524293,
+  "canvas": [
+    512,
+    512
+  ],
+  "groundPivot": [
+    256,
+    472
+  ],
+  "sourceFigureBasis": 400,
+  "directions": {
+    "right": {
+      "rawSemanticCellXYWH": [
+        0,
+        0,
+        887,
+        887
+      ],
+      "translation": [
+        136.73481541092445,
+        270.9092445428025
+      ],
+      "affineOutputToSource": [
+        4.246838687628162,
+        0,
+        -580.6907040328093,
+        0,
+        4.246838687628162,
+        -1150.5078605604922
+      ],
+      "observedLowerShoeBand": {
+        "soleY": 472,
+        "band": [
+          0,
+          450,
+          512,
+          472
+        ],
+        "bandOpaqueBounds": [
+          214,
+          450,
+          298,
+          472
+        ],
+        "span": 84,
+        "centreX": 256
+      },
+      "rawLowerShoeBand": {
+        "soleY": 854,
+        "band": [
+          0,
+          800,
+          887,
+          854
+        ],
+        "bandOpaqueBounds": [
+          329,
+          800,
+          684,
+          854
+        ],
+        "span": 355,
+        "centreX": 506.5
+      },
+      "spanResidual": -0.40840961673876564
+    },
+    "left": {
+      "rawSemanticCellXYWH": [
+        887,
+        0,
+        887,
+        887
+      ],
+      "translation": [
+        166.99261643697815,
+        270.9092445428025
+      ],
+      "affineOutputToSource": [
+        4.246838687628162,
+        0,
+        -709.1907040328092,
+        0,
+        4.246838687628162,
+        -1150.5078605604922
+      ],
+      "observedLowerShoeBand": {
+        "soleY": 472,
+        "band": [
+          0,
+          450,
+          512,
+          472
+        ],
+        "bandOpaqueBounds": [
+          215,
+          450,
+          297,
+          472
+        ],
+        "span": 82,
+        "centreX": 256
+      },
+      "rawLowerShoeBand": {
+        "soleY": 854,
+        "band": [
+          0,
+          800,
+          887,
+          854
+        ],
+        "bandOpaqueBounds": [
+          203,
+          800,
+          553,
+          854
+        ],
+        "span": 350,
+        "centreX": 378
+      },
+      "spanResidual": 0.414244039835026
+    }
+  },
+  "method": "One paired isotropic wholeleg transform from actual visible lower-shoe material extents, source450..472/raw800..854. The first last8 proxy produced oversized fullshoes and remains unaccepted. No per-view scaling or foot-only/nonuniform reshaping.",
+  "qualification": "Observed source lower shoe bands are alignment proxies, not separately complete Near ownership/hiddenjoint evidence. Fullraw part alpha is preserved through premultipliedPillowBICUBIC. No accepted body paint/oldrearshoe/hem is erased; current overlap boards intentionally retain oldrearshoe and are NOT accepted neutral."
+}

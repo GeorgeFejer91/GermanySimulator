@@ -1,0 +1,124 @@
+{
+  "actor": "quiz-dietmar-schulz",
+  "sources": [
+    {
+      "file": "raw/raw-eight-views-v1.png",
+      "sha256": "f2c048e65ae72ca98cc7fbde562a532d15ec424e8bd7c39919dcb7a55efb4839",
+      "bytes": 1914767,
+      "purpose": "eight genuine directional views",
+      "generator": "OpenAI ImageGen",
+      "prompt": "raw/imagegen-eight-views-prompt-v1.txt",
+      "promptSha256": "aff058e6aa9b93ca7d40f73b5488e28656d1d09a9e7b4cd8a4915f5337a83236"
+    },
+    {
+      "file": "far-legs-v1/raw-complete-profile-legs-v1.png",
+      "sha256": "eb384fa47dbf626acbaf37700b3e1f812ea791ba063b0bafeec4542217ed14b1",
+      "bytes": 825026,
+      "purpose": "complete own far legs for both profiles",
+      "generator": "OpenAI ImageGen",
+      "prompt": "far-legs-v1/imagegen-prompt-v1.txt",
+      "promptSha256": "723d9bb7aad4b3001a02040c7d2b199a477fc58f2f886085ef4c5416f2c3ac16"
+    },
+    {
+      "file": "near-instep-edit-v1/raw-edited-near-leg-v1.png",
+      "sha256": "8a1d00afa7a90af7008338f8103ad15b268e3bb188cbaf0128965016ce57ad15",
+      "bytes": 190166,
+      "purpose": "right profile hidden instep",
+      "generator": "OpenAI ImageGen",
+      "prompt": "near-instep-edit-v1/PROMPT.txt",
+      "promptSha256": "5b8736f66e6328c9c90b58fdd553ee6c29beaa6d83c0eef56886a185e157047a"
+    },
+    {
+      "file": "left-near-instep-edit-v1/raw-edited-near-leg-v1.png",
+      "sha256": "ed634005143d67c6c6ee1cc2dfc68d2dd809e474405da90a4561badd3fae3630",
+      "bytes": 185471,
+      "purpose": "left profile hidden instep",
+      "generator": "OpenAI ImageGen",
+      "prompt": "left-near-instep-edit-v1/PROMPT.txt",
+      "promptSha256": "6aaff86075e94ee35b6a3cf2cef3ca2424a1edf01318d62a9358eb632324428b"
+    }
+  ],
+  "registration": {
+    "sourceFigureHeight": 400,
+    "canvas": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      472
+    ],
+    "isotropicDensity": [
+      400,
+      468
+    ]
+  },
+  "sourceBuild": {
+    "height": 2.33,
+    "stride": 13.98,
+    "logicalSlots": 412,
+    "visibleMouths": 324
+  },
+  "selected": {
+    "height": 2.77,
+    "stride": 16.62,
+    "definitionSha256": "165f1fc71eb9e9b1ab8bbf072707f0ddcb5aaf786dcaeb069926f4d1f64bea7c"
+  },
+  "viewReplay": {
+    "register": {
+      "proofSha256": "feac3c60c761789b2f62011690ea421ccfa6f92b0ce3d3238b8fe174e6651dca",
+      "products": {
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registration-v1.json": "852053bde0597ebde71908366cdab45c4a17783da49d4f3f3ebdb978aa4a7f14",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/down.png": "08765a20748bf96400fa81ae755f447a1fbefc6f89527a76ab7bdd1d70d86a88",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/right.png": "5e26547cbacd393a467f7d48c2cfbb3b0589ea9e660c12f8fd84eb0c563440d6",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/up.png": "d82913927b6abd380dd87e2d1d318541befb196a34d3e9ea57da92e3348d2dd2",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/left.png": "b8b86e10a7d52940fe83b40fcdf76d1d6ad77d639796964fd707b2b607ef2e9b",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/down-right.png": "2aebc8508ee232a3d00133ca0e5a1fd3eb6b228c823f818204bbf505fa913ebd",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/up-right.png": "b0bb6ebb7359886008e8f7fd8689bd421632f93512ed916bd67815c55c1dd791",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/up-left.png": "d7d596215fd80abf49ecaa7379491c8054cf857c8b78e5d6040a7a312bc156bd",
+        "assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/registered-v1/down-left.png": "2e30827d71466ddfe85ab0bfc22f68728f8a7c71dfb3b3cd2f6148ce074e1f95"
+      }
+    },
+    "neutral": {
+      "proofSha256": "2c1a572d0a8b49d54b312f3aba15c1006f1022f59094e6e72c151208d6ca056b",
+      "products": {
+        "cardinal-neutral-parts-v1/down-fixed.png": "492b774dcb8f5556c5151c4155f06ec6bfd033834205fe3a7916a2fee4b29a76",
+        "cardinal-neutral-parts-v1/down-left.png": "c800910de1c6cd653edf5fe679b129de6acb1ca8d7d09b3173917a5bf954cbbe",
+        "cardinal-neutral-parts-v1/down-neutral.png": "9b4532616c03a7f34078f279a800ae99b7f02b709458d7fbacee9cbfd2efadc2",
+        "cardinal-neutral-parts-v1/down-right.png": "1bc4a1e44bb5701e0a3eefa9c8072696858f33ee2a1ce153d65ed0dfbe15bf7c",
+        "cardinal-neutral-parts-v1/up-fixed.png": "779faae542959dc4a24843773889672fb9bbfda06bdabf34826900af294e7c2a",
+        "cardinal-neutral-parts-v1/up-left.png": "2c924b00851cb4ea159f7dccaf5c5df73b31500db1526e3f1b1d15a9a07c7b5e",
+        "cardinal-neutral-parts-v1/up-neutral.png": "34a109622e31d9145a60fa871f9832f1119fcec9cbd473b5333032e613a213e5",
+        "cardinal-neutral-parts-v1/up-right.png": "88822e31af8df38c211d08664330365957c49c7fabaef2ab05afb98d7a483824",
+        "profile-parts-v1/right-fixed.png": "b9483211f0330f9bb2c79659b67f96a89c246f12d089aaa55c0075d1197dab7e",
+        "profile-parts-v1/right-near.png": "f9e5508218a41bf37bf5f35a6f66104e62c59d5794ac663ff0067a545679b9ba",
+        "profile-parts-v1/right-oldfar.png": "a2ed0f5f4da690266b827dd70a93dc1aac1622a3cc5a782bda80e64a972b59d2",
+        "profile-parts-v1/right-fitted.png": "aeb9062bdbf84ec274148bc16bbcc7165ae3cab4ba1bd5e60e3d812d8d78ccbc",
+        "profile-parts-v1/right-far.png": "18da0f2a25a5c8645f0c2505f29ee9be4b99d1c516c7e15db22e9b43747d9e76",
+        "profile-parts-v1/right-neutral.png": "22957c114e2ec5a51d9bbff96f35176b5621ef2ba0ea0943110aa1e7b0bf2be5",
+        "profile-parts-v1/left-fixed.png": "5de61b54f1e41ac8ab80cc6a719d1d5585912a15763b3f68b0abe5f6602bd355",
+        "profile-parts-v1/left-near.png": "62f13727712ebbee125713f8586957eb905a7ecb9c15cf4dbcd8dd8dabff72fb",
+        "profile-parts-v1/left-oldfar.png": "6c766dd28cb7abb7aebdaa15c52be40f38e2696f43da2ffbd39478514634f1e9",
+        "profile-parts-v1/left-fitted.png": "c383d027a0647fdf7ca3f7662438c14f8a80e5ca978d34551bd471b85477045a",
+        "profile-parts-v1/left-far.png": "76094702fc5d0b3f9189d03642441a4c60eee89a86cb37dd4e4cabbe59dee971",
+        "profile-parts-v1/left-neutral.png": "56a268497315842072efb0c55ff8730286c207538b25a4da99bb20037c12712f"
+      }
+    },
+    "quarters": {
+      "proofSha256": "e79ef74e349b4a23091c2d1c0297be879821be3ffde1b8d8aa388b33887aea4e",
+      "products": {
+        "quarter-height-posture-v1/down-left-posture-source.png": "16bcee9b5fe7ca5a497b2fed035c607bd1a9887fe2ba56092250e244b7841232",
+        "quarter-height-posture-v1/down-right-posture-source.png": "4329b92ac92bc8d698eaa6ed44cf14d9a4622cec21220e7de4f799a4f54a69d6",
+        "quarter-height-posture-v1/up-left-posture-source.png": "02021baf814fc667621f9e451f3ea63dda0e8cc67863ccc8c299e97403a78fb7",
+        "quarter-height-posture-v1/up-right-posture-source.png": "7302c6048938f42dae45739554e7f1b787f7b3473d8d42cdc55b0f7450cd7571"
+      }
+    }
+  },
+  "completeRawAuthoredDeliveryProofSha256": "32412831bdb25e079eac55b64276380040721120a189b5fb06ff7b2c83122697",
+  "buildDependencies": {
+    "assets/sprite-sources/resident-motion/crowd-waltraud-wartemarke/adult-v1/mixed-material-helper-v3-exact-half.py": "c81535a903fee740587ff6df7b3a6ff957fd36729c91750c2437bd1cfcee72dd",
+    "tools/build-street-character-sprites.py": "f767870a304d1b6a99bf0ba8dd02b8d7842efcd97c7ef0f64a633fb3c3ecba9a",
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": "cdb53f4f1291c54a4ac1fbbee7ce7c4acfe5f9069aaa2b4ca21187e73fcc38c8",
+    ".agents/skills/animate-2d-characters/scripts/harmonize_material.py": "15a5ca18a4743284d73afda6ece61b97d31bb548496d1ee7f423798e43cc98ef"
+  }
+}

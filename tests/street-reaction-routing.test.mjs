@@ -1,3 +1,4 @@
+import { expandStreetManifest } from '../street-manifest.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -41,4 +42,20 @@ test('modal quiz/dialogue performers advance planted actions while other actors 
   calls.length=0;f.context.state.quizNpc=null;f.context.state.characterSpeaker=f.actor;f.context.finishStreetSimulationTick(.1);assert.equal(calls.find(c=>c.actor===f.actor).paused,false);
   calls.length=0;f.context.window.GermanyHUD.paused=true;f.context.finishStreetSimulationTick(.1);assert(calls.every(c=>c.paused&&c.speechPaused));
   calls.length=0;f.context.window.GermanyHUD.paused=false;f.context.document.hidden=true;f.context.finishStreetSimulationTick(.1);assert(calls.every(c=>c.paused&&c.speechPaused));
+});
+
+test('Dietmar binds all production quiz reactions to his own painted atlas', () => {
+  const registry = expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json', 'utf8')));
+  const { atlasMotion } = registry.characters['quiz-dietmar-schulz'];
+  const { states } = atlasMotion.interactions;
+  const { events, context, actor } = fixture();
+  for (const requested of [['working', 'waiting'], ['review', 'jumping'], ['review', 'failed']]) {
+    events.length = 0;
+    assert(context.requestCharacterReaction(actor, requested));
+    for (const action of events[0].names) assert(states[action]?.durations_ms.length, action);
+  }
+  assert.deepEqual(states.work, states.look);
+  assert.deepEqual(states.review, states.look);
+  assert.deepEqual(states.wait, states.idle);
+  assert.notEqual(states.success.row, states.failure.row);
 });

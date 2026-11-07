@@ -32,8 +32,8 @@ test('fitting refuses short source proportions, invalid heights, and stale deliv
   assert.throws(()=>fitAdultStreetHeight(person,{...packet,definitionSha256:'0'.repeat(64)},2.77),/original person/);
 });
 
-test('all twenty-two redesigned citizens select the reference height with exact delivery bindings',()=>{
-  const ids=['stadt-klaus-dieter-klein','stadt-brigitte-mueller','stadt-wolfgang-schulz','stadt-ursula-neumann','stadt-manfred-din','stadt-irmgard-aktenstapel','stadt-guenther-tuev','stadt-hannelore-sparkasse','crowd-brigitte-bueroklammer','crowd-dietmar-din-norm','crowd-hildegard-brotzeit','crowd-horst-hausordnung','crowd-waltraud-wartemarke','quiz-gisela-becker','quiz-hartmut-keller','quiz-heike-hoffmann','quiz-sabine-krueger','stadt-ute-ruhe','crowd-baerbel-brezel','crowd-irmgard-aktenordner','stadt-karl-heinz-post','stadt-renate-termin'];
+test('all twenty-three redesigned citizens select the reference height with exact delivery bindings',()=>{
+  const ids=['stadt-klaus-dieter-klein','stadt-brigitte-mueller','stadt-wolfgang-schulz','stadt-ursula-neumann','stadt-manfred-din','stadt-irmgard-aktenstapel','stadt-guenther-tuev','stadt-hannelore-sparkasse','crowd-brigitte-bueroklammer','crowd-dietmar-din-norm','crowd-hildegard-brotzeit','crowd-horst-hausordnung','crowd-waltraud-wartemarke','quiz-dietmar-schulz','quiz-gisela-becker','quiz-hartmut-keller','quiz-heike-hoffmann','quiz-sabine-krueger','stadt-ute-ruhe','crowd-baerbel-brezel','crowd-irmgard-aktenordner','stadt-karl-heinz-post','stadt-renate-termin'];
   assert.deepEqual(Object.entries(manifest.characters).filter(([,p])=>p.standingOnly===false).map(([id])=>id),ids);
   for(const id of ids){
     const p=manifest.characters[id];assert.equal(p.figureWorldHeight,2.77,id);
