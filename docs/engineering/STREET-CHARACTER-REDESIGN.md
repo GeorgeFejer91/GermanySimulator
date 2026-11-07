@@ -1899,6 +1899,21 @@ Later: Gnative-gap classification/remaining rear cycle/LOOK; Kcorrected LEFT
 four-key then wider source/stance/clock; Wown semantic/boot gate queued. Overall
 goal remains active; no new runtime release is claimed yet.
 
+## Günther Gartenzaun at Söder's street height
+
+The ordinary street crowd producer selects Gartenzaun's own mature painted
+family at 2.77 world units. The original route, dialogue, voice ownership,
+apron, right-hand towel and whole Wellingtons are preserved. His 16-phase
+walk uses the fitted 24.756875-unit stride. Separate native movement and
+reaction textures and the registered mouth table follow the original actor.
+
+The matched-distance desktop, portrait and landscape comparisons measured
+native-projected differences of 0.20–0.52 pixels from Söder. Actual desktop
+dialogue played both approved German recordings through the owned mouth.
+The actor stayed planted through the conversation, then completed review
+and resumed the same walk. The original art and source provenance are
+under the Gartenzaun sprite source directory.
+
 ## Dr. Dietmar Schulz at Soeder's street height
 
 Dietmar's original citizenship quiz role uses his own mature painted family.

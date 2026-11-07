@@ -476,6 +476,12 @@ directional paintings, complete profile legs and authored instep edits.
 The raw paintings, prompts, controls and rebuild provenance are under
 `assets/sprite-sources/resident-motion/quiz-dietmar-schulz/adult-v1/`.
 
+Günther Gartenzaun's mature street family uses five original OpenAI ImageGen
+paintings for the directional views and hidden trouser material. His original
+apron, Wellingtons and right-hand towel remain part of the character. The art,
+prompts, registration driver and provenance are under
+`assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/`.
+
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text

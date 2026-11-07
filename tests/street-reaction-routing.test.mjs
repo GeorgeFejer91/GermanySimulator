@@ -59,3 +59,17 @@ test('Dietmar binds all production quiz reactions to his own painted atlas', () 
   assert.deepEqual(states.wait, states.idle);
   assert.notEqual(states.success.row, states.failure.row);
 });
+
+test('Gartenzaun maps street dialogue entry and exit to his own painted poses', () => {
+  const registry = expandStreetManifest(JSON.parse(readFileSync('assets/characters/street/manifest.json', 'utf8')));
+  const { states } = registry.characters['crowd-guenther-gartenzaun'].atlasMotion.interactions;
+  const { events, context, actor } = fixture();
+  for (const requested of [['working', 'waiting'], ['review']]) {
+    events.length = 0;
+    assert(context.requestCharacterReaction(actor, requested));
+    for (const action of events[0].names) assert(states[action]?.durations_ms.length, action);
+  }
+  assert.deepEqual(states.work, states.look);
+  assert.deepEqual(states.wait, states.idle);
+  assert.deepEqual(states.review, states.look);
+});

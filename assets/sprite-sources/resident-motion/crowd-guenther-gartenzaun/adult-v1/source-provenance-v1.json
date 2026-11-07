@@ -1,0 +1,123 @@
+{
+  "actor": "crowd-guenther-gartenzaun",
+  "authority": "Original painted OpenAI ImageGen artwork",
+  "originals": [
+    {
+      "art": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/raw-cardinals-v1.png",
+        "sha256": "a97b5f52d0faf3e565e2ebf5464c31a48cdd64c580861e3deb420a784daf01e7"
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/raw-cardinals-v1-prompt.txt",
+        "sha256": "dae928cc6b39cf8342423566c8c41b3a8f514569818571aeec29b9311ab25e3e"
+      }
+    },
+    {
+      "art": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/raw-quarters-v1.png",
+        "sha256": "105aa58e65774a0df54cb38b2da2fd6b46f08076e54016a97a6f16848ce65679"
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/raw-quarters-v1-prompt.txt",
+        "sha256": "cc9e2453b07fe0d760678f70c5788639e81edac3a280feafdbffdfa83c9f6639"
+      }
+    },
+    {
+      "art": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/profile-leg-source-v1/raw-far-legs-v1.png",
+        "sha256": "37ee064e55cd06a34ac660e9097838b08673ca8a02d0c47714593932ae2ee58e"
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/profile-leg-source-v1/raw-far-legs-v1-prompt.txt",
+        "sha256": "1ba5af85c1afd8e4de64c46fb84521e12eabc374f3672c03be7c4fac6bf6aafa"
+      }
+    },
+    {
+      "art": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/near-cloth-backing-v1/raw-near-cloth-v1.png",
+        "sha256": "ecb7d17a72797908dac38f98104dace0804e65bfd8f4bd2650196f5b5055fa32"
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/near-cloth-backing-v1/raw-near-cloth-v1-prompt.txt",
+        "sha256": "cf7a9e4a4305a2e73f336291ee0477435f97dae3c5b7e893c57aba36de4251e4"
+      }
+    },
+    {
+      "art": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/up-cloth-backing-v1/raw-up-right-cloth-v1.png",
+        "sha256": "aafdd682d4d9a8cd326cdd3080aa834ca43ea39a7be0b4f352b224d39c241367"
+      },
+      "prompt": {
+        "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/up-cloth-backing-v1/raw-up-right-cloth-v1-prompt.txt",
+        "sha256": "09a53fd31f6ec04107829a190a96816ff401c35b6e3cc5fb615ad3f1b164ff67"
+      }
+    }
+  ],
+  "registeredViews": {
+    "down": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/down.png",
+      "sha256": "8d9795116dc2e83195f18f7f56bc066ff029bbf18d79a9bc1be4f2e22166a615"
+    },
+    "front-right": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/front-right.png",
+      "sha256": "c3cd3549bb01ea2a4df89957365a7ef363832d97b150946b7aa9d7ee3ed50159"
+    },
+    "right": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/right.png",
+      "sha256": "451a149d79cbe02c539a19da987846f8e5abcc439d685637901b324c52b323ae"
+    },
+    "rear-right": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/rear-right.png",
+      "sha256": "9230200b6c1863ec146aabe62f89e1c7d33e93ddd32ab5b23b87213110a24856"
+    },
+    "up": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/up.png",
+      "sha256": "807bd755b04e22793575afa73ed940f3d4fc23be75239b08b5c1cfef9dc004c0"
+    },
+    "rear-left": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/rear-left.png",
+      "sha256": "149ad43ed9e967f5c277335d5586abc7a5b26b648a6b6302b25e08744f0edd2a"
+    },
+    "left": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/left.png",
+      "sha256": "4cadefb4d88b06a538a91b61b56e569634d98ae75f8fa6503960cc4c132432f3"
+    },
+    "front-left": {
+      "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/registered/front-left.png",
+      "sha256": "e67ea34e8191182da1867899a1da2c1d31a5b950f3552e81a764428053f63726"
+    }
+  },
+  "registrationDriver": {
+    "path": "assets/sprite-sources/resident-motion/crowd-guenther-gartenzaun/adult-v1/prepare-neutrals-v1.py",
+    "sha256": "132dda307404fa02bd77d3dfb3b4f266b6cb53419d9384476a7b9e7c3d44033e"
+  },
+  "working": {
+    "cell": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      472
+    ],
+    "frontHeight": 400
+  },
+  "authored": {
+    "height": 2.33,
+    "stride": 20.824375
+  },
+  "selected": {
+    "height": 2.77,
+    "stride": 24.756874999999997,
+    "bodySlots": 412,
+    "mouthRegistrations": 324,
+    "packetSha256": "b25371d565190e60c868cb2f5f594561296246e40e2f48d5fdc8479c6bd873bf"
+  },
+  "rawReplaySeals": {
+    "RAW-CARDINAL-GAIT-ACTUAL-v1.json": "09e637717cc06fd6042dd5e2c4c8f63192cc84145115f34376537f0b4c992271",
+    "RAW-DOWN-STOP-ACTUAL-v1.json": "28d426ef3407855bbab9e86121405e100f6e5b895da6672bfffff6df5c4c3956",
+    "RAW-UP-STOP-ACTUAL-v1.json": "cfe247910ed36f9e402f7d4660767ff0461b8b67d87eeea833b5cc5f13cf740e",
+    "RAW-PROFILE-ACTUAL-v1.json": "4e23612391e62dddfaa490d0cc2961709e909487dffdf3aa3c447c594d5d1733",
+    "ACTUAL-v1.json": "0af317ca0d3190049aa639501ba29943a484bb2770fca1170aab5a345ccd752d"
+  }
+}
