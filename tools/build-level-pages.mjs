@@ -1,5 +1,5 @@
 import {readFileSync, writeFileSync, mkdirSync, cpSync, readdirSync, existsSync} from 'node:fs';
-import {resolve, join} from 'node:path';
+import {resolve, join, relative, sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
 import buildingData from '../building-catalogue.js';
@@ -56,7 +56,7 @@ export function geheimPage(template) {
     .replace('</head>', `  <link rel="canonical" href="https://germanysimulator.de/geheim/">\n${metadata}\n</head>`);
 }
 
-export function buildLevelPages(root, output) {
+export function buildLevelPages(root, output, include=()=>true) {
   if (resolve(root)===resolve(output)) throw Error('Build output must be separate from source');
   // These originals are provenance only; game textures live in assets/characters.
   // Other sprite-sources trees remain required by the maintained sprite/office previews.
@@ -64,7 +64,8 @@ export function buildLevelPages(root, output) {
     .map(name=>resolve(root,'assets/sprite-sources',name)));
   mkdirSync(output,{recursive:true});
   for (const entry of readdirSync(root,{withFileTypes:true})) {
-    if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim'].includes(entry.name)) continue;
+    if (entry.name.startsWith('.') || ['output','node_modules','tests','tools','geheim','desktop'].includes(entry.name)) continue;
+    if (!include(entry.name)) continue;
     if (entry.name==='berghain') {
       for (const path of ['model.html','viewer.css','viewer.mjs','navigation.mjs','camera.mjs','walkthrough.mjs','footsteps.mjs','night-lighting.mjs','architectural-lighting.mjs',
         'For-AI/SOURCES.md','For-AI/INTERIOR.md','For-AI/README.md','For-AI/VALIDATION.md','For-AI/KARHARD-MAPPING.md','For-AI/KARHARD-IMAGE-MAP.json','For-AI/AUTHENTICITY-AUDIT.md']) {
@@ -82,7 +83,7 @@ export function buildLevelPages(root, output) {
       continue;
     }
     cpSync(join(root,entry.name),join(output,entry.name),{
-      recursive:true,filter:source=>!offlineSources.has(resolve(source))
+      recursive:true,filter:source=>!offlineSources.has(resolve(source))&&include(relative(root,source).split(sep).join('/'))
     });
   }
   const levels = levelLinks(createRequire(import.meta.url)(resolve(root,'building-catalogue.js')).catalogue);

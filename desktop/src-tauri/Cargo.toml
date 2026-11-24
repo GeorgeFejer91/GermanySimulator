@@ -1,0 +1,17 @@
+[package]
+name = "germany-simulator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.8", features = ["ws"] }
+if-addrs = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+subtle = "2"
+tauri = { version = "2", features = [] }
+tokio = { version = "1", features = ["macros", "net", "sync", "time"] }
+tower-http = { version = "0.6", features = ["fs", "set-header"] }
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }

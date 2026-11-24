@@ -52,10 +52,11 @@ function validMessage(msg,session,lastSeq,sender){
 class AmtLink extends EventTarget{
  constructor(role,invitation){super();this.role=role;this.invitation=invitation;this.sdk=null;this.channel=null;this.peer="";this.seq=0;this.lastSeq=0;this.peers=new Map();this.opening=new Set();this.closed=false;this.viewing=false}
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
- static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",globalThis.document?.baseURI||location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261013-local-name");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
+ static phoneUrl(invitation,englishSubtitles=false,origin){const url=new URL("./buergeramt-phone.html",origin||globalThis.document?.baseURI||location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261013-local-name");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
  static fromHash(){const p=new URLSearchParams(location.hash.slice(1)),room=p.get("room"),secret=p.get("secret"),stream=p.get("stream");if(!room?.startsWith("amt-")||!stream?.startsWith("amt-ticket-")||!/^[a-z0-9]{32}$/.test(secret||""))return null;return{room,secret,stream}}
  async start(){
   if(this.closed)return;
+  if(window.BuergeramtLocalTransport){this.transport=new window.BuergeramtLocalTransport(this);await this.transport.start();return}
   if(typeof VDONinjaSDK!=="function"){
    const load=()=>import('./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js');
    const queue=window.Germany3DBridge?.queueAssetLoad;
@@ -120,7 +121,7 @@ class AmtLink extends EventTarget{
    channel.send(encoded);state.seq=msg.seq;if(this.peer===peer)this.seq=msg.seq;return true;
   }catch{return false}
  }
- close(){this.closed=true;const channels=[...this.peers.values()].map(state=>state.channel),sdk=this.sdk;this.peers.clear();this.opening.clear();this.channel=null;this.sdk=null;this.peer="";this.seq=this.lastSeq=0;for(const channel of channels)try{channel.close()}catch{}try{sdk?.disconnect?.()?.catch?.(()=>{})}catch{}}
+ close(){this.closed=true;this.transport?.close();const channels=[...this.peers.values()].map(state=>state.channel),sdk=this.sdk;this.peers.clear();this.opening.clear();this.channel=null;this.sdk=null;this.peer="";this.seq=this.lastSeq=0;for(const channel of channels)try{channel.close()}catch{}try{sdk?.disconnect?.()?.catch?.(()=>{})}catch{}}
 }
 window.BuergeramtLink=AmtLink;
 })();

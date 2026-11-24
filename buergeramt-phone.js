@@ -244,7 +244,7 @@ document.addEventListener("visibilitychange",()=>{
   if(document.hidden&&slotActive){link.send("phone-hidden");if(atCounter){phoneSilent=true;stopCall();currentCall="";try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}else{endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
   else if(!document.hidden&&!finished&&!closed&&submittedName&&!offlineState){if(atCounter){phoneSilent=false;link.send("phone-visible")}keepAwake()}
 });
-window.addEventListener("offline",()=>{offlineState=true;if(!slotActive||closed||finished)return;if(document.hidden)link.send("phone-hidden");phoneSilent=true;stopCall();currentCall="";if(!atCounter){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close()}});
+window.addEventListener("offline",()=>{if(window.BuergeramtLocalTransport)return;offlineState=true;if(!slotActive||closed||finished)return;if(document.hidden)link.send("phone-hidden");phoneSilent=true;stopCall();currentCall="";if(!atCounter){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close()}});
 window.addEventListener("online",()=>{offlineState=false;if(atCounter&&slotActive&&!closed&&!finished&&!document.hidden){phoneSilent=false;link.send("phone-visible");keepAwake()}});
 window.addEventListener("pagehide",()=>{
  clearTimeout(namePrepTimer);namePrepTimer=null;window.GermanyKripoSpeech?.dispose();

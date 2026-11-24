@@ -5,7 +5,7 @@ function utcAt(anchor,monoMs){return anchor.utcOffsetMs+monoMs}
 function monoAt(anchor,utcMs){return utcMs-anchor.utcOffsetMs}
 function usable(anchor,now=performance.now()){return !!anchor&&Number.isFinite(anchor.utcOffsetMs)&&anchor.uncertaintyMs<=300&&now-anchor.sampledAtMs<300000}
 async function sample({count=3,timeoutMs=1800}={}){
- if(typeof fetch!=="function")return null;
+ if(window.BuergeramtLocalTransport||typeof fetch!=="function")return null;
  let best=null;
  for(let i=0;i<count;i++){
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs),before=performance.now();

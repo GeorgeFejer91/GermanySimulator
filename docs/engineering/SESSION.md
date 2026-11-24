@@ -2868,3 +2868,22 @@ Inga integration advanced to 2c48edd, preserving the Schwabingen cleanup changes
 The final blinds-02 take preserves every spoken word; Whisper splits the nominalization in the exact phrase Ihr Nichtreagieren richtig einordnen. A context-bounded comparator rule admits only that full phrase, with both original strings retained. TDD red reproduced the word boundary; four focused checks pass. Independent technical review PASS/no findings (hashes in output/inga-nominalization-review.json); changed pronouns, negation, verbs, false adverb and standalone joining remain rejected. Selected builder/recognition suite148/148 and full voice consistency/cast27/27 pass after this delta.
 
 Final Inga candidate on 7d969f9: 34/34 selected-profile recordings accepted, zero held; 31 German/English pairs and matching recordings replaced, with three unchanged takes retained. Neighbor coverage 114/114, curator sync/check and complete-pack 32/32 tests pass. The final integrated Node suite passes 2,318/2,318. Silent native-browser fixtures pass all 34 recordings on desktop and Android emulation: exact runtime source/English/voice lookup, HTTP/file hashes, native decoding and completion. The caption fixture checks 1,948 parts across seven configurations; its reviewed source pairs and styles.css remain unchanged. Independent final review passes with no findings; hashes are saved in ignored output/inga-final-review.json. The encoded pack is 2,913,944 bytes / 361.24 seconds (previously 2,344,280 bytes / 290.05 seconds), with a largest clip of 129,644 bytes; existing lazy loading, cache and cancellation ownership remain unchanged. There is no perceptual-listening or physical-Android claim. Physics/camera specialists are omitted because this task changes no world geometry, movement or staging. Final startup smoke passes all four checks. Publication and deployed root, 3d.html and neighbor-route verification follow this validated candidate.
+# Windows offline edition — 2026-11-24
+
+Build from published main `6a235849` in the separate `codex/windows-offline`
+checkout. Windows could not read the original cloud-backed checkout or its Git
+index. Scope covers installer resources, local delivery, the phone transport and
+its lifecycle, and focused verification. The existing office queue, visit and
+phone message validators keep authority over tickets and call outcomes. Physics,
+camera, assets used by gameplay, and the public site’s transport are outside
+the change scope.
+
+The x64 NSIS setup built from the locked dependencies and installed successfully
+into an isolated per-user directory. The installed WebView2 loaded the local
+game and bundled font. The browser smoke test rejected an invalid invitation,
+issued and acknowledged a real office ticket over the LAN interface, invalidated
+that ticket on office restart, and answered a simulated call over loopback. The
+native Bürgeramt menu opened the current invitation in a second WebView2 window.
+The full Node suite passed 2,820 tests. Physical phones, Bluetooth PAN and setup
+on a machine without WebView2 remain untested. Pairing setup and build commands
+are in [desktop/README.md](../../desktop/README.md).

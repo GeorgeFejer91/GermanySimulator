@@ -3,6 +3,9 @@
 .codex-remote-attachments/
 .playwright-cli/
 output/
+/desktop/node_modules/
+/desktop/src-tauri/gen/
+/desktop/src-tauri/target/
 __pycache__/
 assets/sprite-sources/rigs/previews/
 .DS_Store

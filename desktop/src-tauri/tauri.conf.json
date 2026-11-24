@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Germany Simulator",
+  "identifier": "de.germanysimulator.game",
+  "version": "0.1.0",
+  "build": {
+    "beforeBuildCommand": "node stage.mjs",
+    "frontendDist": "../shell"
+  },
+  "app": {
+    "windows": [],
+    "security": { "capabilities": [] }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/icon.ico"],
+    "resources": { "../../output/windows-game/": "game/" },
+    "windows": {
+      "webviewInstallMode": { "type": "offlineInstaller", "silent": true },
+      "nsis": { "installMode": "currentUser", "compression": "zlib" }
+    }
+  }
+}
