@@ -8,6 +8,28 @@ installed local system voice where available.
 
 ## Bürgeramt phone
 
+### Bluetooth with Chrome on Android
+
+1. Open [germanysimulator.de/phone/](https://germanysimulator.de/phone/) in
+   Chrome while online. When the page shows **Offline bereit**, tap
+   **Download App**. The service worker caches the phone UI, recordings and
+   voice model during this first visit.
+2. In Germany Simulator for Windows 0.2.0 or later, enter the Bürgeramt and
+   choose **Bürgeramt → Bluetooth-Telefon koppeln**. Leave fullscreen first
+   if needed.
+3. Open the installed phone app, enter the eight-digit code, tap **Über
+   Bluetooth verbinden**, and choose the PC in Chrome’s device picker.
+   Confirm any Bluetooth pairing prompt on the devices. The code expires
+   after 90 seconds and admits one phone. Leaving the office ends pairing.
+
+The PC needs a Bluetooth Low Energy adapter with peripheral support. You can
+turn off Wi-Fi and mobile data after the initial app download. Bluetooth stays
+enabled on both devices. Chrome for Android is the phone target. Safari and
+Chrome for iOS cannot connect through this Web Bluetooth flow.
+[Chrome Web Bluetooth documentation](https://developer.chrome.com/docs/capabilities/bluetooth).
+
+### Wi-Fi and play on one PC
+
 1. Join the same private Wi-Fi network on the PC and phone, or connect the PC
    to the phone’s Wi-Fi hotspot. Do this before entering the Bürgeramt so the
    game can select the network address for the QR code.

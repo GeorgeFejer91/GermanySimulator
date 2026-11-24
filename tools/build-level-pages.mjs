@@ -3,6 +3,7 @@ import {resolve, join, relative, sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
 import buildingData from '../building-catalogue.js';
+import {buildPhonePwa} from './build-phone-pwa.mjs';
 
 export function levelLinks(buildings=buildingData.catalogue) {
   if(!Array.isArray(buildings))throw new TypeError('Structured building catalogue required');
@@ -96,6 +97,7 @@ export function buildLevelPages(root, output, include=()=>true) {
     }
   }
   writeFileSync(join(output,'level-links.json'),JSON.stringify(levels,null,2)+'\n');
+  if (include('phone') && existsSync(join(output,'phone/index.html'))) buildPhonePwa(output);
   return levels;
 }
 

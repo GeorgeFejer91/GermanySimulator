@@ -1,0 +1,56 @@
+:root {
+  font-family: Arial, sans-serif;
+  color: #191919;
+  background: #f8f7f4;
+  line-height: 1.5;
+}
+
+[hidden] { display: none !important; }
+body { margin: 0; }
+
+#ble-pairing {
+  box-sizing: border-box;
+  max-inline-size: 32rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 5vw, 2.25rem);
+}
+
+header, form { display: grid; gap: .75rem; min-inline-size: 0; }
+header {
+  grid-template-columns: minmax(0, 1fr) fit-content(9rem);
+  align-items: center;
+  border-bottom: 4px solid #d82033;
+  padding-bottom: 1rem;
+}
+
+h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; overflow-wrap: break-word; }
+form { margin-top: 1.5rem; }
+label { font-weight: 700; }
+input, button {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: .5rem .75rem;
+  border: 1px solid #252525;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  overflow-wrap: break-word;
+}
+button { font-weight: 700; }
+#connect-phone { background: #252525; color: #fff; }
+button:disabled { opacity: .6; }
+:focus-visible { outline: 3px solid #b8192c; outline-offset: 3px; }
+#ble-status { border-left: 3px solid #d82033; padding-left: .75rem; }
+
+#amt-phone {
+  display: block;
+  inline-size: 100%;
+  block-size: 100dvh;
+  border: 0;
+  background: #fff;
+}
+
+@media (max-width: 23rem) {
+  header { grid-template-columns: minmax(0, 1fr); }
+}

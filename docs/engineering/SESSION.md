@@ -2887,3 +2887,13 @@ native Bürgeramt menu opened the current invitation in a second WebView2 window
 The full Node suite passed 2,820 tests. Physical phones, Bluetooth PAN and setup
 on a machine without WebView2 remain untested. Pairing setup and build commands
 are in [desktop/README.md](../../desktop/README.md).
+
+## Bluetooth phone app
+
+Windows 0.2.0 adds an opt-in native BLE peripheral for the current office
+visit. An encrypted characteristic accepts a short-lived code before a
+single phone can send the existing ticket and call events. The HTTPS phone
+app caches its UI and audio for later offline launch. The Windows BLE
+advertisement check and the Chrome offline test with an emulated GATT device
+pass on this machine. The physical Android-to-Windows radio path remains
+open for verification.

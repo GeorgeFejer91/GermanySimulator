@@ -62,6 +62,40 @@ pub struct Visit {
 }
 
 impl Visit {
+    pub fn stop_signal(&self) -> watch::Receiver<bool> {
+        self.stop.subscribe()
+    }
+
+    pub fn stream(&self) -> &str {
+        &self.invitation.stream
+    }
+
+    pub fn join_phone(&self) -> Option<(u32, mpsc::Receiver<Value>)> {
+        let peer = self
+            .next_phone
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        let (sender, inbox) = mpsc::channel(QUEUE_DEPTH);
+        self.phones.lock().unwrap().insert(peer, sender);
+        if self.host.try_send(HostEvent::Joined { peer }).is_err() {
+            self.phones.lock().unwrap().remove(&peer);
+            return None;
+        }
+        Some((peer, inbox))
+    }
+
+    pub fn forward_phone(&self, peer: u32, packet: Value) -> bool {
+        !valid_packet(self, &packet)
+            || self
+                .host
+                .try_send(HostEvent::Packet { peer, packet })
+                .is_ok()
+    }
+
+    pub fn leave_phone(&self, peer: u32) {
+        self.phones.lock().unwrap().remove(&peer);
+        let _ = self.host.try_send(HostEvent::Left { peer });
+    }
+
     pub fn phone_link(&self, origin: &str) -> String {
         let Invitation {
             room,
@@ -197,18 +231,13 @@ async fn serve_phone(server: GameServer, mut socket: WebSocket) {
     if !request.is_some_and(|request| visit.invitation.matches(&request)) {
         return;
     }
-    let peer = visit
-        .next_phone
-        .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-    let (sender, mut inbox) = mpsc::channel(QUEUE_DEPTH);
-    visit.phones.lock().unwrap().insert(peer, sender);
-    if visit.host.try_send(HostEvent::Joined { peer }).is_ok()
-        && send_json(&mut socket, &serde_json::json!({"event": "ready"})).await
-    {
+    let Some((peer, mut inbox)) = visit.join_phone() else {
+        return;
+    };
+    if send_json(&mut socket, &serde_json::json!({"event": "ready"})).await {
         relay_phone(&visit, peer, &mut socket, &mut inbox, &mut stop).await;
     }
-    visit.phones.lock().unwrap().remove(&peer);
-    let _ = visit.host.try_send(HostEvent::Left { peer });
+    visit.leave_phone(peer);
 }
 
 async fn relay_phone(
@@ -228,8 +257,7 @@ async fn relay_phone(
             message = socket.recv() => match message {
                 Some(Ok(Message::Text(text))) => {
                     let Ok(packet) = serde_json::from_str(text.as_str()) else { continue };
-                    if valid_packet(visit, &packet)
-                        && visit.host.try_send(HostEvent::Packet { peer, packet }).is_err() { break }
+                    if !visit.forward_phone(peer, packet) { break }
                 }
                 Some(Ok(Message::Pong(_) | Message::Ping(_))) => {}
                 _ => break,
