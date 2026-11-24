@@ -11,16 +11,25 @@ installed local system voice where available.
 ### Bluetooth with Chrome on Android
 
 1. Open [germanysimulator.de/phone/](https://germanysimulator.de/phone/) in
-   Chrome while online. When the page shows **Offline bereit**, tap
-   **Download App**. The service worker caches the phone UI, recordings and
-   voice model during this first visit.
-2. In Germany Simulator for Windows 0.2.0 or later, enter the Bürgeramt and
-   choose **Bürgeramt → Bluetooth-Telefon koppeln**. Leave fullscreen first
-   if needed.
-3. Open the installed phone app, enter the eight-digit code, tap **Über
-   Bluetooth verbinden**, and choose the PC in Chrome’s device picker.
-   Confirm any Bluetooth pairing prompt on the devices. The code expires
-   after 90 seconds and admits one phone. Leaving the office ends pairing.
+   Android Chrome while online. When it shows **Offline bereit**, tap
+   **Download App**. The app caches its interface, recordings and voice model.
+   To update an older installed copy, open it online, then close all copies
+   and reopen it before going offline.
+2. In Windows 0.3.0 or later, select **Jetzt koppeln** when the game starts.
+   On the phone, enter the eight-digit code, tap **Über Bluetooth verbinden**
+   and choose the PC. Confirm the operating system's pairing prompt if shown.
+   The code expires after 90 seconds and admits one phone.
+3. Leave the companion open while you play. When you enter the Bürgeramt,
+   tap **Termin scannen** in the companion. It finds the current visit over
+   Bluetooth and opens the ticket screen, where you enter your name.
+   Tickets, ringing, call controls and playback receipts use that connection.
+   The phone plays its cached speech and sound locally.
+4. On leaving the office, the phone returns to its scanner. Pairing lasts until
+   the game or phone app closes, the connection drops, or you choose
+   **Bürgeramt → Bluetooth-Telefon trennen**. If you skipped startup pairing,
+   choose **Bürgeramt → Bluetooth-Telefon koppeln** at any point.
+
+Windows 0.2.0 supports Bluetooth pairing started from inside the Bürgeramt.
 
 The PC needs a Bluetooth Low Energy adapter with peripheral support. You can
 turn off Wi-Fi and mobile data after the initial app download. Bluetooth stays

@@ -55,7 +55,9 @@
       const socket = this.socket = new WebSocket(url);
       return new Promise((resolve, reject) => {
         const timer = setTimeout(() => socket.close(), 6000);
-        socket.addEventListener("open", () => socket.send(JSON.stringify(invitation)));
+        socket.addEventListener("open", () => socket.send(JSON.stringify(
+          role === "host" && this.link.englishPhone ? { ...invitation, english_phone: true } : invitation
+        )));
         socket.addEventListener("message", ({ data }) => {
           const message = JSON.parse(data);
           if (message.event === "listening") {

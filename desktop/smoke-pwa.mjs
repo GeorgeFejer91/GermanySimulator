@@ -38,11 +38,14 @@ try {
     const serviceId = '419bb104-0dda-460b-84f2-7a5a68dcdbb0';
     const txId = '419bb105-0dda-460b-84f2-7a5a68dcdbb0';
     const rxId = '419bb106-0dda-460b-84f2-7a5a68dcdbb0';
-    const stream = 'amt-ticket-q5l09xzv07ra02ej';
+    let stream = '', activeVisit;
     window.testPackets = [];
+    window.bluetoothConnections = 0;
+    window.appointmentScans = 0;
     Object.defineProperty(navigator, 'bluetooth', {value: {
       async requestDevice({ filters }) {
         if (filters[0].services[0] !== serviceId) throw Error('Wrong BLE service filter');
+        window.bluetoothConnections++;
         const rx = new EventTarget();
         const fakeDevice = new EventTarget();
         const decoder = new TextDecoder();
@@ -68,7 +71,21 @@ try {
             const packet = JSON.parse(pending);
             pending = '';
             if (packet.code) {
-              deliver(packet.code === '61234567' ? { event: 'ready', stream } : { event: 'wrong-code' });
+              if (packet.code === '61234567' && packet.standby === true) deliver({ event: 'paired' });
+              else if (packet.code === '71234567') {
+                stream = 'amt-ticket-q5l09xzv07ra02ej';
+                deliver({ event: 'ready', stream });
+              } else deliver({ event: 'wrong-code' });
+              return;
+            }
+            if (packet.event === 'find-visit') {
+              window.appointmentScans++;
+              if (!activeVisit) deliver({ event:'no-visit' });
+              else {
+                stream = activeVisit.stream;
+                sequence = 0;
+                deliver({ event:'ready', ...activeVisit });
+              }
               return;
             }
             window.testPackets.push(packet);
@@ -79,8 +96,9 @@ try {
               host('call-arm', { id:'grass', round:1 });
             }
             if (packet.type === 'call-ready') host('call', {
-              id:'grass', round:1, line:'Ein Anruf ohne Internet.', ringAtPhoneMs:null, ringAtUtcMs:null, leadMs:650
+              id:'grass', round:packet.round, line:'Ein Anruf ohne Internet.', ringAtPhoneMs:null, ringAtUtcMs:null, leadMs:650
             });
+            if (packet.type === 'decline') host('call-arm', { id:'grass', round:2 });
           }
         };
         const service = { getCharacteristic: async id => {
@@ -92,6 +110,14 @@ try {
           if (uuid !== serviceId) throw Error('Wrong service');
           return service;
         }}), disconnect() {} };
+        window.beginBluetoothVisit = (nextStream, captions) => {
+          activeVisit = { stream:nextStream, captions };
+        };
+        window.endBluetoothVisit = () => {
+          activeVisit = null;
+          deliver({ event:'visit-ended' });
+        };
+        window.oldBluetoothForfeit = session => deliver({ v:3, session, seq:999, type:'forfeit' });
         window.releaseBluetooth = () => deliver({ event:'closed' });
         return fakeDevice;
       }
@@ -99,6 +125,11 @@ try {
   });
   const page = await context.newPage();
   const errors = [];
+  const origin = 'http://127.0.0.1:' + server.address().port;
+  const outside = [];
+  page.on('request', request => {
+    if (request.url().startsWith('http') && new URL(request.url()).origin !== origin) outside.push(request.url());
+  });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/phone/`);
   await page.locator('#install-app:enabled').waitFor({timeout: 90000});
@@ -127,18 +158,73 @@ try {
   await page.locator('#ble-status').filter({ hasText:'stimmt nicht' }).waitFor();
   await page.locator('#pair-code').fill('61234567');
   await page.locator('#connect-phone').click();
+  await page.locator('#ble-status').filter({ hasText:'Bluetooth verbunden' }).waitFor();
+  assert.equal(await page.locator('#amt-phone').isVisible(), false);
+  assert.deepEqual(await page.evaluate(() => testPackets), []);
+  const scan = page.locator('#scan-appointment');
+  await scan.waitFor();
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'scan-appointment');
+  for (const [width, height, zoom] of [[320, 680, 2], [700, 320, 1]]) {
+    await page.setViewportSize({width, height});
+    await page.evaluate(value => { document.documentElement.style.zoom = value; }, zoom);
+    await page.locator('#scan-appointment[data-pretext-fit]:visible').waitFor();
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+  }
+  await page.setViewportSize({width:390, height:844});
+  await page.evaluate(() => { document.documentElement.style.zoom = ''; });
+  await scan.click();
+  await page.locator('#ble-status').filter({ hasText:'Kein Termin gefunden' }).waitFor();
+  assert.equal(await page.locator('#amt-phone').isVisible(), false);
+  const firstVisit = 'amt-ticket-q5l09xzv07ra02ej';
+  const secondVisit = 'amt-ticket-v5l09xzv07ra02ej';
+  await page.evaluate(stream => beginBluetoothVisit(stream, 'en'), firstVisit);
+  assert.equal(await page.locator('#amt-phone').isVisible(), false);
+  await scan.click();
   const phone = page.frameLocator('#amt-phone');
   await phone.locator('#phone-name').fill('Erika Prüfnamen');
   await phone.locator('#phone-submit:not([disabled])').click();
   await phone.locator('#phone-number').filter({ hasText:'A-38' }).waitFor();
   await phone.locator('#phone-call:not([hidden])').waitFor();
+  assert.equal(await phone.locator('#phone-swipe-label').textContent(), 'ANSWER');
+  await phone.locator('#phone-decline-label').click();
+  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'decline' && packet.round === 1));
+  await phone.locator('#phone-call:not([hidden])').waitFor();
   await phone.locator('#phone-swipe-label').click();
-  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'answer'));
+  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'answer' && packet.round === 2));
+  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'police-start'
+    && packet.index === -1 && ['voice', 'recording'].includes(packet.mode)));
+  assert.ok(await page.evaluate(() => testPackets.some(packet => packet.type === 'call-ringing' && packet.round === 2)));
+  await phone.locator('#phone-hangup').click();
+  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'hangup' && packet.round === 2));
+  await page.waitForFunction(() => testPackets.some(packet => packet.type === 'call-ended' && packet.round === 2));
   assert.ok(await page.evaluate(() => testPackets.some(packet => packet.name === 'Erika Prüfnamen')));
+  await page.evaluate(() => endBluetoothVisit());
+  await page.locator('#ble-status').filter({ hasText:'Bluetooth verbunden' }).waitFor();
+  assert.equal(await page.locator('#amt-phone').isVisible(), false);
+  await page.evaluate(stream => beginBluetoothVisit(stream), secondVisit);
+  await scan.click();
+  await phone.locator('#phone-name').fill('Erika Zweiter Besuch');
+  await phone.locator('#phone-submit:not([disabled])').click();
+  await phone.locator('#phone-number').filter({ hasText:'A-38' }).waitFor();
+  await page.evaluate(stream => oldBluetoothForfeit(stream), firstVisit);
+  await phone.locator('#phone-ticket:not([hidden])').waitFor();
+  assert.equal(await page.evaluate(() => bluetoothConnections), 2);
+  assert.equal(await page.evaluate(() => appointmentScans), 3);
+  const registrations = await page.evaluate(() => testPackets.filter(packet => packet.type === 'register')
+    .map(({ session, name, id }) => JSON.stringify([session, name, id])));
+  assert.deepEqual([...new Set(registrations)].map(value => JSON.parse(value).slice(0, 2)),
+    [[firstVisit, 'Erika Prüfnamen'], [secondVisit, 'Erika Zweiter Besuch']]);
+  await page.evaluate(() => releaseBluetooth());
+  await page.locator('#pair-code').waitFor();
+
+  await page.locator('#pair-code').fill('71234567');
+  await page.locator('#connect-phone').click();
+  await phone.locator('#phone-name').waitFor();
   await page.evaluate(() => releaseBluetooth());
   await page.locator('#pair-code').waitFor();
   assert.deepEqual(errors, []);
-  console.log('The offline phone UI rejected a wrong code, received a ticket and answered a call through the GATT fixture.');
+  assert.deepEqual(outside, []);
+  console.log('The offline phone scanned two visits over one emulated GATT connection, played cached speech, and sent decline, answer, hang-up, and call-ended receipts. Legacy pairing also opened the phone UI.');
 } finally {
   await context.close();
   await new Promise(done => server.close(done));

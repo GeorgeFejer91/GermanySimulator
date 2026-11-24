@@ -11,9 +11,9 @@ use std::{
     future::IntoFuture,
     net::{Ipv4Addr, SocketAddr, UdpSocket},
     path::PathBuf,
-    sync::{Arc, Mutex},
+    sync::Arc,
 };
-use tokio::net::TcpListener;
+use tokio::{net::TcpListener, sync::watch};
 use tower_http::services::ServeDir;
 
 use crate::pairing::{host_socket, phone_socket, Visit};
@@ -23,7 +23,7 @@ pub const PORT: u16 = 37582;
 #[derive(Clone)]
 pub struct GameServer {
     pub assets: PathBuf,
-    pub visit: Arc<Mutex<Option<Arc<Visit>>>>,
+    pub visit: watch::Sender<Option<Arc<Visit>>>,
 }
 
 #[derive(Clone)]
@@ -36,7 +36,7 @@ impl GameServer {
     pub fn new(assets: PathBuf) -> Self {
         Self {
             assets,
-            visit: Arc::default(),
+            visit: watch::channel(None).0,
         }
     }
 

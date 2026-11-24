@@ -1,18 +1,17 @@
 use serde_json::{json, Value};
 use std::{
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc,
-    },
+    future::pending,
+    sync::{Arc, Mutex},
     time::Duration,
 };
 use subtle::ConstantTimeEq;
 use tauri::{AppHandle, Manager};
-use tauri_plugin_dialog::DialogExt;
+use tauri_plugin_dialog::{DialogExt, MessageDialogBuilder, MessageDialogButtons};
 use tokio::{
-    sync::mpsc,
+    sync::{mpsc, watch},
     time::{interval, timeout, Instant},
 };
+use windows::Devices::Bluetooth::GenericAttributeProfile::GattSubscribedClient;
 
 use crate::{
     gatt::{Peripheral, WriteChunk},
@@ -23,29 +22,60 @@ use crate::{
 const CODE_LIFETIME: Duration = Duration::from_secs(90);
 const FRAME_LIMIT: usize = 1024;
 
-#[derive(Default)]
-pub struct BluetoothPairing(Arc<AtomicBool>);
+#[derive(Clone, Default)]
+pub struct BluetoothPairing {
+    active: Arc<Mutex<Option<watch::Sender<bool>>>>,
+}
 
-struct PairingLease(Arc<AtomicBool>);
+struct PairingLease(BluetoothPairing);
 
 impl Drop for PairingLease {
     fn drop(&mut self) {
-        self.0.store(false, Ordering::Release);
+        self.0.active.lock().unwrap().take();
+    }
+}
+
+pub fn prompt(app: AppHandle) {
+    message(
+        &app,
+        "Möchten Sie Ihr Bürgeramt-Telefon jetzt per Bluetooth verbinden?",
+    )
+    .buttons(MessageDialogButtons::OkCancelCustom(
+        "Jetzt koppeln".into(),
+        "Später".into(),
+    ))
+    .show(move |accepted| {
+        if accepted {
+            pair(app);
+        }
+    });
+}
+
+pub fn disconnect(app: &AppHandle) {
+    if let Some(cancel) = app
+        .state::<BluetoothPairing>()
+        .active
+        .lock()
+        .unwrap()
+        .as_ref()
+    {
+        cancel.send_replace(true);
     }
 }
 
 pub fn pair(app: AppHandle) {
-    let visit = app.state::<GameServer>().visit.lock().unwrap().clone();
-    let Some(visit) = visit else {
-        show(&app, "Betreten Sie zuerst das Bürgeramt.");
-        return;
-    };
-    let busy = app.state::<BluetoothPairing>().0.clone();
-    if busy.swap(true, Ordering::AcqRel) {
-        show(&app, "Bluetooth ist für diesen Besuch bereits aktiv.");
-        return;
+    let pairing = app.state::<BluetoothPairing>().inner().clone();
+    let (stop, mut cancel) = watch::channel(false);
+    {
+        let mut active = pairing.active.lock().unwrap();
+        if active.is_some() {
+            show(&app, "Bluetooth ist bereits aktiv. Zum Neuverbinden wählen Sie zuerst „Bluetooth-Telefon trennen“.");
+            return;
+        }
+        *active = Some(stop);
     }
-    let lease = PairingLease(busy);
+    let lease = PairingLease(pairing);
+    let server = app.state::<GameServer>().inner().clone();
     tauri::async_runtime::spawn(async move {
         let _lease = lease;
         let mut random = [0; 4];
@@ -55,30 +85,31 @@ pub fn pair(app: AppHandle) {
         }
         let code = format!("{:08}", u32::from_le_bytes(random) % 100_000_000);
         let (writes, mut inbox) = mpsc::channel(32);
-        let radio = match timeout(Duration::from_secs(10), Peripheral::start(writes)).await {
-            Ok(Ok(radio)) => radio,
-            Ok(Err(error)) => {
-                show(&app, error.message());
-                return;
-            }
-            Err(_) => {
-                show(&app, "Der Bluetooth-Adapter antwortet nicht.");
-                return;
+        let radio = tokio::select! {
+            _ = cancel.changed() => return,
+            result = timeout(Duration::from_secs(10), Peripheral::start(writes)) => match result {
+                Ok(Ok(radio)) => radio,
+                Ok(Err(error)) => { show(&app, error.message()); return }
+                Err(_) => { show(&app, "Der Bluetooth-Adapter antwortet nicht."); return }
             }
         };
-        if *visit.stop_signal().borrow() {
-            return;
-        }
-        show(&app, format!("Kopplungscode: {code}\n\nGeben Sie den Code in der Bürgeramt-App ein. Er gilt 90 Sekunden und für ein Telefon.\n\ngermanysimulator.de/phone/"));
-        serve(&radio, &visit, &code, &mut inbox).await;
+        message(&app, format!("Kopplungscode: {code}\n\nÖffnen Sie germanysimulator.de/phone/ in Android Chrome. Geben Sie den Code ein und wählen Sie diesen PC. Der Code gilt 90 Sekunden.\n\nSobald das Telefon verbunden ist, können Sie weiterspielen."))
+            .buttons(MessageDialogButtons::OkCustom("Zum Spiel".into()))
+            .show(|_| {});
+        serve(&radio, &server, &code, &mut inbox, &mut cancel).await;
     });
 }
 
+fn message(app: &AppHandle, text: impl Into<String>) -> MessageDialogBuilder<tauri::Wry> {
+    let dialog = app.dialog().message(text).title("Bürgeramt · Bluetooth");
+    match app.get_webview_window("game") {
+        Some(window) => dialog.parent(&window),
+        None => dialog,
+    }
+}
+
 fn show(app: &AppHandle, text: impl Into<String>) {
-    app.dialog()
-        .message(text)
-        .title("Bürgeramt · Bluetooth")
-        .show(|_| {});
+    message(app, text).show(|_| {});
 }
 
 #[derive(Default)]
@@ -105,22 +136,64 @@ impl Frame {
     }
 }
 
+struct BluetoothVisit {
+    visit: Arc<Visit>,
+    phone: Option<(u32, mpsc::Receiver<Value>)>,
+}
+
+impl BluetoothVisit {
+    fn leave(&mut self) {
+        if let Some((peer, _)) = self.phone.take() {
+            self.visit.leave_phone(peer);
+        }
+    }
+
+    fn receive(&mut self, packet: Value) -> bool {
+        if packet.get("event").and_then(Value::as_str) == Some("leave-visit")
+            && packet.get("stream").and_then(Value::as_str) == Some(self.visit.stream())
+        {
+            self.leave();
+        }
+        if !self.visit.accepts(&packet) {
+            return true;
+        }
+        // A scan comes from the loaded phone page. Joining here avoids sending
+        // timing and tempo messages while the handset is still opening it.
+        if self.phone.is_none() && packet.get("type").and_then(Value::as_str) == Some("scan") {
+            self.phone = self.visit.join_phone();
+        }
+        self.phone
+            .as_ref()
+            .is_none_or(|(peer, _)| self.visit.forward_phone(*peer, packet))
+    }
+}
+
+impl Drop for BluetoothVisit {
+    fn drop(&mut self) {
+        self.leave();
+    }
+}
+
+async fn outgoing(active: &mut Option<BluetoothVisit>) -> Option<Value> {
+    match active.as_mut().and_then(|visit| visit.phone.as_mut()) {
+        Some((_, packets)) => packets.recv().await,
+        None => pending().await,
+    }
+}
+
 async fn serve(
     radio: &Peripheral,
-    visit: &Visit,
+    server: &GameServer,
     code: &str,
     inbox: &mut mpsc::Receiver<WriteChunk>,
+    cancel: &mut watch::Receiver<bool>,
 ) {
-    let mut stop = visit.stop_signal();
-    if *stop.borrow() {
-        return;
-    }
     let deadline = Instant::now() + CODE_LIFETIME;
     let mut frame = Frame::default();
     let mut tries = 0;
-    let (device, client) = loop {
+    let (device, client, persistent) = loop {
         let chunk = tokio::select! {
-            _ = stop.changed() => return,
+            _ = cancel.changed() => return,
             _ = tokio::time::sleep_until(deadline) => return,
             chunk = inbox.recv() => match chunk { Some(chunk) => chunk, None => return },
         };
@@ -135,7 +208,8 @@ async fn serve(
             .and_then(Value::as_str)
             .is_some_and(|attempt| bool::from(attempt.as_bytes().ct_eq(code.as_bytes())))
         {
-            break (frame.device.clone(), client);
+            let persistent = auth.get("standby").and_then(Value::as_bool) == Some(true);
+            break (frame.device.clone(), client, persistent);
         }
         tries += 1;
         let _ = send(radio, &client, &json!({"event": "wrong-code"})).await;
@@ -143,47 +217,78 @@ async fn serve(
             return;
         }
     };
-    let Some((peer, mut outgoing)) = visit.join_phone() else {
+
+    if persistent && !send(radio, &client, &json!({"event": "paired"})).await {
         return;
-    };
-    if send(
-        radio,
-        &client,
-        &json!({"event":"ready", "stream":visit.stream()}),
-    )
-    .await
-    {
-        let mut heartbeat = interval(Duration::from_secs(2));
-        loop {
-            tokio::select! {
-                _ = stop.changed() => break,
-                _ = heartbeat.tick() => {
-                    if radio.client(&device).is_none() { break }
-                },
-                packet = outgoing.recv() => {
-                    let Some(packet) = packet else { break };
-                    if !send(radio, &client, &packet).await { break }
-                },
-                chunk = inbox.recv() => {
-                    let Some(chunk) = chunk else { break };
-                    if chunk.device != device { continue }
-                    if let Some(packet) = frame.read(chunk) {
-                        if packet.get("event").and_then(Value::as_str) == Some("close")
-                            || !visit.forward_phone(peer, packet) { break }
+    }
+    let mut visits = server.visit.subscribe();
+    visits.mark_changed();
+    let mut active: Option<BluetoothVisit> = None;
+    let mut heartbeat = interval(Duration::from_secs(2));
+    loop {
+        tokio::select! {
+            biased;
+            _ = cancel.changed() => break,
+            _ = visits.changed() => {
+                let current = visits.borrow_and_update().clone();
+                if active.as_ref().is_some_and(|attached| {
+                    current.as_ref().is_none_or(|visit| !Arc::ptr_eq(visit, &attached.visit))
+                }) {
+                    active = None;
+                    if !persistent || !send(radio, &client, &json!({"event":"visit-ended"})).await {
+                        break;
                     }
-                },
+                }
+                if !persistent && active.is_none() {
+                    let Some(visit) = current else { break };
+                    if !send(radio, &client, &visit_notice(&visit)).await { break }
+                    active = Some(BluetoothVisit { visit, phone: None });
+                }
+            }
+            _ = heartbeat.tick() => {
+                if radio.client(&device).is_none() { break }
+            }
+            packet = outgoing(&mut active) => {
+                let Some(packet) = packet else { break };
+                if !send(radio, &client, &packet).await { break }
+            }
+            chunk = inbox.recv() => {
+                let Some(chunk) = chunk else { break };
+                if chunk.device != device { continue }
+                let Some(packet) = frame.read(chunk) else { continue };
+                match packet.get("event").and_then(Value::as_str) {
+                    Some("close") => break,
+                    Some("find-visit") if persistent => {
+                        let current = visits.borrow().clone();
+                        if let Some(visit) = current {
+                            if !send(radio, &client, &visit_notice(&visit)).await { break }
+                            if active.as_ref().is_none_or(|attached| !Arc::ptr_eq(&visit, &attached.visit)) {
+                                active = Some(BluetoothVisit { visit, phone: None });
+                            }
+                        } else if !send(radio, &client, &json!({"event":"no-visit"})).await {
+                            break;
+                        }
+                    }
+                    _ => {
+                        if active.as_mut().is_some_and(|visit| !visit.receive(packet)) { break }
+                    }
+                }
             }
         }
     }
-    visit.leave_phone(peer);
+    drop(active);
     let _ = send(radio, &client, &json!({"event":"closed"})).await;
 }
 
-async fn send(
-    radio: &Peripheral,
-    client: &windows::Devices::Bluetooth::GenericAttributeProfile::GattSubscribedClient,
-    message: &Value,
-) -> bool {
+fn visit_notice(visit: &Visit) -> Value {
+    let mut notice = json!({"event":"ready","stream":visit.stream()});
+    if visit.english_phone() {
+        notice["captions"] = json!("en");
+    }
+    notice
+}
+
+async fn send(radio: &Peripheral, client: &GattSubscribedClient, message: &Value) -> bool {
     let Ok(mut bytes) = serde_json::to_vec(message) else {
         return false;
     };
@@ -197,6 +302,57 @@ async fn send(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn each_visit_requires_a_current_scan_and_releases_its_peer() {
+        use crate::pairing::{test_visit, HostEvent};
+        let (first, mut old_host) = test_visit("amt-ticket-q5l09xzv07ra02ej");
+        let (second, mut new_host) = test_visit("amt-ticket-v5l09xzv07ra02ej");
+        let scan = |visit: &Visit| json!({"v":3, "session":visit.stream(), "type":"scan"});
+        let mut link = BluetoothVisit {
+            visit: first.clone(),
+            phone: None,
+        };
+        assert!(link.receive(json!({"v":3, "session":first.stream(), "type":"answer"})));
+        assert!(old_host.try_recv().is_err());
+        assert!(link.receive(scan(&first)));
+        let HostEvent::Joined { peer } = old_host.try_recv().unwrap() else {
+            panic!("scan did not join the visit")
+        };
+        assert!(matches!(
+            old_host.try_recv().unwrap(),
+            HostEvent::Packet { .. }
+        ));
+        assert!(link.receive(json!({"event":"leave-visit","stream":second.stream()})));
+        assert!(old_host.try_recv().is_err());
+        drop(link);
+        assert!(
+            matches!(old_host.try_recv().unwrap(), HostEvent::Left { peer: left } if left == peer)
+        );
+
+        let mut link = BluetoothVisit {
+            visit: second.clone(),
+            phone: None,
+        };
+        assert!(link.receive(scan(&first)));
+        assert!(new_host.try_recv().is_err());
+        assert!(link.receive(scan(&second)));
+        let HostEvent::Joined { peer } = new_host.try_recv().unwrap() else {
+            panic!("scan did not join the new visit")
+        };
+        assert!(matches!(
+            new_host.try_recv().unwrap(),
+            HostEvent::Packet { .. }
+        ));
+        assert!(link.receive(json!({"event":"leave-visit","stream":second.stream()})));
+        assert!(
+            matches!(new_host.try_recv().unwrap(), HostEvent::Left { peer: left } if left == peer)
+        );
+        assert!(link.receive(scan(&second)));
+        assert!(
+            matches!(new_host.try_recv().unwrap(), HostEvent::Joined { peer: next } if next != peer)
+        );
+    }
 
     #[test]
     fn frames_preserve_utf8_and_separate_devices() {

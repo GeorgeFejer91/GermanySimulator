@@ -14,12 +14,13 @@
 <body>
   <main id="ble-pairing">
     <header><h1>Bürgeramt-Telefon</h1><button type="button" id="install-app" disabled>Download App</button></header>
-    <p>Öffnen Sie im Windows-Spiel <strong>Bürgeramt → Bluetooth-Telefon koppeln</strong>.</p>
+    <p id="ble-help">Starten Sie die Kopplung beim Spielstart oder über <strong>Bürgeramt → Bluetooth-Telefon koppeln</strong>.</p>
     <form id="pair-phone">
       <label for="pair-code">Kopplungscode</label>
       <input id="pair-code" required pattern="[0-9]{8}" maxlength="8" inputmode="numeric" autocomplete="off">
       <button id="connect-phone" type="submit" disabled>Über Bluetooth verbinden</button>
     </form>
+    <button type="button" id="scan-appointment" hidden>Termin scannen</button>
     <p id="ble-status" role="status">Offline-Dateien werden geladen …</p>
   </main>
   <iframe id="amt-phone" title="Bürgeramt-Telefon" allow="fullscreen" hidden></iframe>

@@ -28,6 +28,8 @@ struct Invitation {
     room: String,
     stream: String,
     secret: String,
+    #[serde(default)]
+    english_phone: bool,
 }
 
 impl Invitation {
@@ -62,12 +64,31 @@ pub struct Visit {
 }
 
 impl Visit {
-    pub fn stop_signal(&self) -> watch::Receiver<bool> {
-        self.stop.subscribe()
+    fn new(invitation: Invitation) -> (Arc<Self>, mpsc::Receiver<HostEvent>) {
+        let (host, inbox) = mpsc::channel(QUEUE_DEPTH);
+        let visit = Arc::new(Self {
+            invitation,
+            host,
+            phones: Mutex::default(),
+            next_phone: 1.into(),
+            stop: watch::channel(false).0,
+            slots: Semaphore::new(PHONE_LIMIT),
+        });
+        (visit, inbox)
     }
 
     pub fn stream(&self) -> &str {
         &self.invitation.stream
+    }
+
+    pub fn english_phone(&self) -> bool {
+        self.invitation.english_phone
+    }
+
+    pub fn accepts(&self, packet: &Value) -> bool {
+        packet.get("v").and_then(Value::as_u64) == Some(3)
+            && packet.get("session").and_then(Value::as_str) == Some(self.stream())
+            && serde_json::to_vec(packet).is_ok_and(|bytes| bytes.len() <= 1024)
     }
 
     pub fn join_phone(&self) -> Option<(u32, mpsc::Receiver<Value>)> {
@@ -84,7 +105,7 @@ impl Visit {
     }
 
     pub fn forward_phone(&self, peer: u32, packet: Value) -> bool {
-        !valid_packet(self, &packet)
+        !self.accepts(&packet)
             || self
                 .host
                 .try_send(HostEvent::Packet { peer, packet })
@@ -101,14 +122,18 @@ impl Visit {
             room,
             stream,
             secret,
+            english_phone,
         } = &self.invitation;
-        format!("{origin}/buergeramt-phone.html#room={room}&stream={stream}&secret={secret}")
+        let captions = if *english_phone { "&captions=en" } else { "" };
+        format!(
+            "{origin}/buergeramt-phone.html#room={room}&stream={stream}&secret={secret}{captions}"
+        )
     }
 }
 
 #[derive(Serialize)]
 #[serde(tag = "event", rename_all = "kebab-case")]
-enum HostEvent {
+pub(super) enum HostEvent {
     Listening { phone_origin: Option<String> },
     Joined { peer: u32 },
     Left { peer: u32 },
@@ -165,21 +190,15 @@ async fn serve_host(server: GameServer, mut socket: WebSocket) {
     let Some(invitation) = authenticate(&mut socket).await else {
         return;
     };
-    let (host, mut inbox) = mpsc::channel(QUEUE_DEPTH);
-    let visit = Arc::new(Visit {
-        invitation,
-        host,
-        phones: Mutex::default(),
-        next_phone: 1.into(),
-        stop: watch::channel(false).0,
-        slots: Semaphore::new(PHONE_LIMIT),
-    });
-    {
-        let mut active = server.visit.lock().unwrap();
+    let (visit, mut inbox) = Visit::new(invitation);
+    if !server.visit.send_if_modified(|active| {
         if active.is_some() {
-            return;
+            return false;
         }
         *active = Some(visit.clone());
+        true
+    }) {
+        return;
     }
     let lan = server.start_lan().await;
     let phone_origin = lan.as_ref().map(|(address, _)| format!("http://{address}"));
@@ -190,7 +209,7 @@ async fn serve_host(server: GameServer, mut socket: WebSocket) {
     if let Some((_, task)) = lan {
         task.abort();
     }
-    server.visit.lock().unwrap().take();
+    server.visit.send_replace(None);
 }
 
 async fn relay_host(visit: &Visit, socket: &mut WebSocket, inbox: &mut mpsc::Receiver<HostEvent>) {
@@ -200,7 +219,7 @@ async fn relay_host(visit: &Visit, socket: &mut WebSocket, inbox: &mut mpsc::Rec
             message = socket.recv() => match message {
                 Some(Ok(Message::Text(text))) => {
                     let Ok(HostPacket { peer, packet }) = serde_json::from_str(text.as_str()) else { continue };
-                    if !valid_packet(visit, &packet) { continue }
+                    if !visit.accepts(&packet) { continue }
                     let mut phones = visit.phones.lock().unwrap();
                     if phones.get(&peer).is_some_and(|inbox| inbox.try_send(packet).is_err()) {
                         phones.remove(&peer);
@@ -214,7 +233,7 @@ async fn relay_host(visit: &Visit, socket: &mut WebSocket, inbox: &mut mpsc::Rec
 }
 
 async fn serve_phone(server: GameServer, mut socket: WebSocket) {
-    let Some(visit) = server.visit.lock().unwrap().clone() else {
+    let Some(visit) = server.visit.borrow().clone() else {
         return;
     };
     let mut stop = visit.stop.subscribe();
@@ -266,8 +285,12 @@ async fn relay_phone(
     }
 }
 
-fn valid_packet(visit: &Visit, packet: &Value) -> bool {
-    packet.get("v").and_then(Value::as_u64) == Some(3)
-        && packet.get("session").and_then(Value::as_str) == Some(&visit.invitation.stream)
-        && serde_json::to_vec(packet).is_ok_and(|bytes| bytes.len() <= 1024)
+#[cfg(test)]
+pub(super) fn test_visit(stream: &str) -> (Arc<Visit>, mpsc::Receiver<HostEvent>) {
+    Visit::new(Invitation {
+        room: "amt-q5l09xzv07ra02ej".into(),
+        secret: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".into(),
+        stream: stream.into(),
+        english_phone: false,
+    })
 }

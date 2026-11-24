@@ -38,7 +38,8 @@ input, button {
   overflow-wrap: break-word;
 }
 button { font-weight: 700; }
-#connect-phone { background: #252525; color: #fff; }
+#connect-phone, #scan-appointment { background: #252525; color: #fff; }
+#scan-appointment { margin-block-start: 1.5rem; }
 button:disabled { opacity: .6; }
 :focus-visible { outline: 3px solid #b8192c; outline-offset: 3px; }
 #ble-status { border-left: 3px solid #d82033; padding-left: .75rem; }

@@ -2897,3 +2897,27 @@ app caches its UI and audio for later offline launch. The Windows BLE
 advertisement check and the Chrome offline test with an emulated GATT device
 pass on this machine. The physical Android-to-Windows radio path remains
 open for verification.
+
+## Startup Bluetooth linking
+
+Base: published 27324ec. Windows 0.3.0 offers Bluetooth pairing before play.
+The player can skip or use the native menu later. A paired Android companion
+finds the active visit when the player taps **Termin scannen**. A scan outside
+the office issues no ticket. Each visit keeps its own peer, ticket and call
+receipts. Leaving closes the visit while preserving the Bluetooth connection.
+
+- [x] Cached Android-emulated Chrome with its network disabled found two visits
+  over one emulated GATT connection and rejected stale visit messages. The
+  existing phone UI returned ring, decline, answer, hang-up, cached speech
+  onset and call-end receipts. Legacy phone pairing still opened the ticket UI.
+  The scanner reflowed at 320 CSS px and 200% zoom and in landscape.
+- [x] All three native tests passed, including WinRT GATT advertisement on the
+  local Intel Bluetooth adapter after confirming the radio state. The x64
+  installer was built and installed, the native startup popup was observed,
+  and the existing installed Wi-Fi QR and same-PC call smoke passed.
+- [ ] Pair an actual Android handset with the Windows popup, turn off both
+  Internet connections, and verify a scanned ticket and call from that phone.
+
+The phone update ships through the GitHub Pages workflow on main. The Windows
+installer is local to the build machine. This scope changes the companion
+transport and native startup, without world geometry, camera or movement work.

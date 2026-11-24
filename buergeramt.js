@@ -939,6 +939,7 @@ function watchPhoneLink({probe=true}={}){
 function beginLink(){
  const invitation=BuergeramtLink.invitation();
  const owner=attempt,currentLink=new BuergeramtLink("host",invitation);link=currentLink;
+ if(window.BuergeramtLocalTransport)currentLink.englishPhone=!!options.subtitlesOn?.();
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed","success"].includes(stage);
  const showQr=()=>{const url=phonePairingUrl(currentLink);if(!url)return;const code=qrcode(0,"M");code.addData(url);code.make();qrSvg=code.createSvgTag({cellSize:5,margin:4,scalable:true});window.Germany3D?.setAmtQr?.(qrSvg)};

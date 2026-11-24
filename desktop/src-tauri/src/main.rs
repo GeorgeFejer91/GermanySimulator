@@ -36,8 +36,7 @@ fn open_local_phone(app: &AppHandle) -> tauri::Result<()> {
     let server = app.state::<GameServer>();
     let url = server
         .visit
-        .lock()
-        .unwrap()
+        .borrow()
         .as_ref()
         .map(|visit| visit.phone_link(&origin()))
         .unwrap_or_else(|| format!("{}/buergeramt-phone.html", origin()));
@@ -68,6 +67,7 @@ fn main() {
             let phone = SubmenuBuilder::new(app, "Bürgeramt")
                 .text("phone", "Telefon an diesem PC öffnen")
                 .text("bluetooth", "Bluetooth-Telefon koppeln")
+                .text("bluetooth-stop", "Bluetooth-Telefon trennen")
                 .build()?;
             let menu = MenuBuilder::new(app).item(&phone).build()?;
             game_window(app.handle(), "game", &format!("{}/", origin()))
@@ -78,6 +78,9 @@ fn main() {
                 .on_menu_event(|window, event| {
                     if event.id() == "bluetooth" {
                         bluetooth::pair(window.app_handle().clone());
+                    }
+                    if event.id() == "bluetooth-stop" {
+                        bluetooth::disconnect(window.app_handle());
                     }
                     if event.id() == "phone" {
                         if let Err(error) = open_local_phone(window.app_handle()) {
@@ -94,6 +97,9 @@ fn main() {
                         }
                     }
                 });
+            if std::env::var_os("GERMANY_SIMULATOR_SMOKE").is_none() {
+                bluetooth::prompt(app.handle().clone());
+            }
             Ok(())
         })
         .run(tauri::generate_context!())
